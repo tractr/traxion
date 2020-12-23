@@ -32,3 +32,12 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Local sqlite database
+prisma/dev.db
+
+# Hapify generated files
+prisma/schemas/generated.prisma
+
+# Other generated files
+prisma/schema.prisma

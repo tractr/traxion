@@ -1,0 +1,128 @@
+{
+  "version": "1",
+  "name": "New project",
+  "models": [
+    {
+      "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
+      "name": "User",
+      "accesses": {
+        "create": "guest",
+        "read": "owner",
+        "update": "owner",
+        "remove": "owner",
+        "search": "admin",
+        "count": "admin"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "properties": ["primary", "internal", "ownership"]
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "properties": ["label", "searchable", "sortable"]
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "subtype": "email",
+          "properties": ["unique", "searchable", "sortable"]
+        },
+        {
+          "name": "password",
+          "type": "string",
+          "subtype": "password",
+          "properties": ["hidden"]
+        },
+        {
+          "name": "role",
+          "type": "string",
+          "properties": ["searchable", "restricted"],
+          "notes": "admin or user"
+        },
+        {
+          "name": "banned",
+          "type": "boolean",
+          "properties": ["searchable", "restricted"],
+          "notes": "Allow admins to disable this user"
+        },
+        {
+          "name": "last connected at",
+          "type": "datetime",
+          "properties": ["nullable", "internal"]
+        }
+      ]
+    },
+    {
+      "id": "1a54a806-7db1-50ef-32c6-24aacb104f08",
+      "name": "User profile",
+      "accesses": {
+        "create": "owner",
+        "read": "owner",
+        "update": "owner",
+        "remove": "owner",
+        "search": "owner",
+        "count": "owner"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "properties": ["primary", "internal"]
+        },
+        {
+          "name": "owner",
+          "type": "entity",
+          "reference": "a7d0308a-49f0-3458-0975-1dce106136a1",
+          "properties": ["searchable", "internal", "ownership"]
+        },
+        {
+          "name": "phone",
+          "type": "string",
+          "properties": ["nullable", "unique"]
+        },
+        {
+          "name": "website",
+          "type": "string",
+          "properties": ["nullable"]
+        },
+        {
+          "name": "age",
+          "type": "number",
+          "properties": ["nullable"]
+        }
+      ]
+    },
+    {
+      "id": "1a54a806-7db1-50ef-32c6-24aacb104f09",
+      "name": "User right",
+      "accesses": {
+        "create": "admin",
+        "read": "admin",
+        "update": "admin",
+        "remove": "admin",
+        "search": "admin",
+        "count": "admin"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "properties": ["primary", "internal"]
+        },
+        {
+          "name": "right",
+          "type": "string",
+          "properties": ["searchable", "internal"]
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "properties": ["nullable", "unique"]
+        }
+      ]
+    }
+  ]
+}
