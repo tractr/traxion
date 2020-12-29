@@ -1,38 +1,54 @@
 {
   "name": "root",
+  "version": "1.0.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tractr/stack2021.git"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "postinstall": "is-ci || husky install",
+    "prepublishOnly": "pinst --disable",
+    "postpublish": "pinst --enable",
+    "semantic-release": "semantic-release"
+  },
+  "commitlint": {
+    "extends": [
+      "@tractr/commit-config"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "prettier": "@tractr/prettier-config",
+  "eslintConfig": {
+    "extends": "@tractr"
+  },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "@tractr/eslint-config": "^1.0.0",
-    "@tractr/prettier-config": "^1.0.0",
+    "@tractr/commit-config": "^1.0.0",
+    "@tractr/eslint-config": "^1.1.2",
+    "@tractr/prettier-config": "^1.2.2",
     "commitizen": "^4.2.2",
     "commitlint": "^11.0.0",
-    "cz-conventional-changelog": "^3.3.0",
+    "cz-lerna-changelog": "^2.0.3",
     "eslint": "^7.16.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "husky": "^5.0.6",
     "is-ci": "^2.0.0",
-    "lerna": "^3.22.1",
+    "lerna": "3.22.1",
     "pinst": "^2.1.1",
     "prettier": "^2.2.1"
   },
-  "workspaces": [
-    "packages/*"
-  ],
-  "prettier": "@tractr/prettier-config",
-  "eslintConfig": {
-    "extends": "@tractr"
-  },
-  "scripts": {
-    "postinstall": "is-ci || husky install",
-    "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
   }
 }
