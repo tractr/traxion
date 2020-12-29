@@ -16,7 +16,7 @@
       "fields": [
         {
           "name": "id",
-          "type": "string",
+          "type": "integer",
           "properties": ["primary", "internal", "ownership"]
         },
         {
@@ -69,7 +69,7 @@
       "fields": [
         {
           "name": "id",
-          "type": "string",
+          "type": "integer",
           "properties": ["primary", "internal"]
         },
         {
@@ -84,43 +84,9 @@
           "properties": ["nullable", "unique"]
         },
         {
-          "name": "website",
-          "type": "string",
-          "properties": ["nullable"]
-        },
-        {
           "name": "age",
           "type": "number",
           "properties": ["nullable"]
-        }
-      ]
-    },
-    {
-      "id": "1a54a806-7db1-50ef-32c6-24aacb104f09",
-      "name": "User right",
-      "accesses": {
-        "create": "admin",
-        "read": "admin",
-        "update": "admin",
-        "remove": "admin",
-        "search": "admin",
-        "count": "admin"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "type": "string",
-          "properties": ["primary", "internal"]
-        },
-        {
-          "name": "right",
-          "type": "string",
-          "properties": ["searchable", "internal"]
-        },
-        {
-          "name": "description",
-          "type": "string",
-          "properties": ["nullable", "unique"]
         }
       ]
     }

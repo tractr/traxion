@@ -15,6 +15,7 @@
     "prisma:format": "prisma format",
     "prisma:generate": "prisma generate",
     "prisma:merge-schema": "prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
+    "prisma:migrate": "prisma migrate dev --preview-feature",
     "start": "nest start",
     "start:debug": "nest start --debug --watch",
     "start:dev": "nest start --watch",
@@ -45,11 +46,19 @@
   "dependencies": {
     "@nestjs/common": "^7.5.1",
     "@nestjs/core": "^7.5.1",
+    "@nestjs/graphql": "^7.9.1",
     "@nestjs/platform-express": "^7.5.1",
+    "@nestjs/swagger": "^4.7.8",
     "@prisma/client": "^2.13.1",
+    "apollo-server-express": "^2.19.1",
+    "class-transformer": "^0.3.1",
+    "class-validator": "^0.12.2",
+    "graphql": "^15.4.0",
+    "graphql-tools": "^7.0.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.3"
+    "rxjs": "^6.6.3",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "@hapify/cli": "^0.7.9",
