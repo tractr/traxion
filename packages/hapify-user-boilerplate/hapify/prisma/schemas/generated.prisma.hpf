@@ -34,7 +34,7 @@ function prismaType(f) {
 
 <<<
 function primary(f) {
-  return f.primary ? "@id": "";
+  return f.primary ? "@id @default(autoincrement())": "";
 }
 >>>
 
