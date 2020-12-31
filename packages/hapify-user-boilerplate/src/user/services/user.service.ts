@@ -1,84 +1,74 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
-import {
-  CreateUserDto,
-  ReadUserDto,
-  SearchUserDto,
-  UpdateUserDto,
-} from '../dtos';
+import { UserReadManyDto } from '../dtos';
 import { DatabaseService } from '../../core';
 
 @Injectable()
 export class UserService {
   constructor(private readonly db: DatabaseService) {}
 
-  public async findOne(
+  public async create(
+    data: Prisma.UserCreateInput,
+    options?: Omit<Prisma.UserCreateArgs, 'data'>
+  ): Promise<User> {
+    return this.db.user.create({ data, ...options });
+  }
+
+  public async readOne(
     where: Prisma.UserWhereUniqueInput,
     options?: Omit<Prisma.FindUniqueUserArgs, 'where'>
   ): Promise<User> {
     return this.db.user.findUnique({ where, ...options });
   }
 
-  public async create(data: CreateUserDto): Promise<User> {
-    return this.db.user.create({ data });
+  public async readMany(
+    where: Prisma.UserWhereInput,
+    options?: Omit<Prisma.FindManyUserArgs, 'where'>
+  ): Promise<User[]> {
+    return this.db.user.findMany({ where, ...options });
   }
 
-  public async read(id: number, include: ReadUserDto): Promise<User> {
-    return this.db.user.findUnique({
-      where: { id },
-      include,
-    });
+  public async count(
+    where: Prisma.UserWhereInput,
+    options?: Omit<Prisma.FindManyUserArgs, 'where'>
+  ): Promise<number> {
+    return this.db.user.count({ where, ...options });
   }
 
-  public async search(filters: SearchUserDto): Promise<User[]> {
-    return this.db.user.findMany({
-      where: {
-        id: {
-          equals: filters.id,
-        },
-        name: {
-          contains: filters.name,
-        },
-        email: {
-          contains: filters.email,
-        },
-        role: {
-          contains: filters.role,
-        },
-        banned: {
-          equals: filters.banned,
-        },
+  public async update(
+    where: Prisma.UserWhereUniqueInput,
+    data: Prisma.UserUpdateInput,
+    options?: Omit<Prisma.UserUpdateArgs, 'where' | 'data'>
+  ): Promise<User> {
+    return this.db.user.update({ where, data, ...options });
+  }
+
+  public async delete(
+    where: Prisma.UserWhereUniqueInput,
+    options?: Omit<Prisma.FindUniqueUserArgs, 'where'>
+  ): Promise<User> {
+    return this.db.user.delete({ where, ...options });
+  }
+
+  public searchDtoToSearchParams(
+    filters: UserReadManyDto
+  ): Prisma.UserWhereInput {
+    return {
+      id: {
+        equals: filters.id,
       },
-    });
-  }
-
-  public async count(filters: SearchUserDto): Promise<number> {
-    return this.db.user.count({
-      where: {
-        id: {
-          equals: filters.id,
-        },
-        name: {
-          contains: filters.name,
-        },
-        email: {
-          contains: filters.email,
-        },
-        role: {
-          contains: filters.role,
-        },
-        banned: {
-          equals: filters.banned,
-        },
+      name: {
+        contains: filters.name,
       },
-    });
-  }
-
-  public async update(id: number, data: UpdateUserDto): Promise<User> {
-    return this.db.user.update({ where: { id }, data });
-  }
-
-  public async delete(id: number): Promise<User> {
-    return this.db.user.delete({ where: { id } });
+      email: {
+        contains: filters.email,
+      },
+      role: {
+        contains: filters.role,
+      },
+      banned: {
+        equals: filters.banned,
+      },
+    };
   }
 }

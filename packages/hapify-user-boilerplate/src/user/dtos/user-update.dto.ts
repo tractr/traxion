@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client';
 import { IsBoolean, IsEmail, IsOptional, IsString } from 'class-validator';
 
 @InputType()
-export class UpdateUserDto implements Prisma.UserUpdateInput {
+export class UserUpdateDto implements Prisma.UserUpdateInput {
   @IsOptional()
   @IsString()
   name?: string;
