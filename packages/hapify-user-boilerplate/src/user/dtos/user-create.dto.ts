@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client';
 import { IsBoolean, IsEmail, IsString } from 'class-validator';
 
 @InputType()
-export class CreateUserDto implements Prisma.UserCreateInput {
+export class UserCreateDto implements Prisma.UserCreateInput {
   @IsString()
   name: string;
 

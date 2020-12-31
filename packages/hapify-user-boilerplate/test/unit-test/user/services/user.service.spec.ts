@@ -1,13 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma, User } from '@prisma/client';
+import { userMockFactory } from '../../../mocks/user/user.mock';
 import { DatabaseService } from '../../../../src/core';
-import {
-  CreateUserDto,
-  ReadUserDto,
-  SearchUserDto,
-  UpdateUserDto,
-  UserService,
-} from '../../../../src/user';
+import { UserService } from '../../../../src/user';
 
 describe('UserService', () => {
   let userService: UserService;
@@ -28,45 +23,28 @@ describe('UserService', () => {
 
   describe('create', () => {
     it('should create a user', async () => {
-      const data: CreateUserDto = {
-        name: 'name',
-        email: 'email@email.com',
-        password: 'password',
-        role: 'admin',
-        banned: false,
-      };
-      const expectedResult: User = {
-        id: 1,
-        ...data,
-        lastConnectedAt: new Date(),
-      };
+      // No conflict between User and UserCreateInput ??
+      const user: User = userMockFactory();
+      const options = { include: { UserProfile: true } };
 
       const spy = jest.spyOn(databaseService.user, 'create').mockImplementation(
         // eslint-disable-next-line camelcase
-        () => (expectedResult as unknown) as Prisma.Prisma__UserClient<User>
+        () => (user as unknown) as Prisma.Prisma__UserClient<User>
       );
 
-      const result = await userService.create(data);
+      const result = await userService.create(user, options);
 
       expect(spy.mock.calls.length).toEqual(1);
-      expect(spy.mock.calls[0][0]).toEqual({ data });
-      expect(result).toEqual(expectedResult);
+      expect(spy.mock.calls[0][0]).toEqual({ data: user, ...options });
+      expect(result).toEqual(user);
     });
   });
 
-  describe('read', () => {
+  describe('readOne', () => {
     it('should read a user', async () => {
-      const expectedResult: User = {
-        id: 1,
-        name: 'name',
-        email: 'email@email.com',
-        password: 'password',
-        role: 'admin',
-        banned: false,
-        lastConnectedAt: new Date(),
-      };
-      const id = 1;
-      const include: ReadUserDto = { UserProfile: true };
+      const user: User = userMockFactory();
+      const where = { id: 1 };
+      const options = { include: { UserProfile: true } };
 
       const spy = jest
         .spyOn<Prisma.UserDelegate, 'findUnique'>(
@@ -75,169 +53,111 @@ describe('UserService', () => {
         )
         .mockImplementation(
           // eslint-disable-next-line camelcase
-          () => (expectedResult as unknown) as Prisma.Prisma__UserClient<User>
+          () => (user as unknown) as Prisma.Prisma__UserClient<User>
         );
 
-      const result = await userService.read(id, include);
+      const result = await userService.readOne(where, options);
 
       expect(spy.mock.calls.length).toEqual(1);
-      expect(spy.mock.calls[0][0]).toEqual({ where: { id }, include });
-      expect(result).toEqual(expectedResult);
+      expect(spy.mock.calls[0][0]).toEqual({ where, ...options });
+      expect(result).toEqual(user);
     });
   });
 
-  describe('search', () => {
-    it('should search users', async () => {
-      const filters: SearchUserDto = {
-        id: 1,
-        name: 'name',
-        email: 'email@email.com',
-        role: 'admin',
-        banned: false,
-      };
-      const expectedResult: User[] = [
-        {
-          id: 1,
-          name: 'name',
-          email: 'email@email.com',
-          password: 'password',
-          role: 'admin',
-          banned: false,
-          lastConnectedAt: new Date(),
-        },
+  describe('readMany', () => {
+    it('should read many users', async () => {
+      const users: User[] = [
+        userMockFactory({ id: 1 }),
+        userMockFactory({ id: 2 }),
       ];
+      const where = { id: 1 };
+      const options = { include: { UserProfile: true } };
 
       const spy = jest
         .spyOn(databaseService.user, 'findMany')
         .mockImplementation(
           // eslint-disable-next-line camelcase
-          () => (expectedResult as unknown) as Promise<User[]>
+          () => (users as unknown) as Promise<User[]>
         );
 
-      const result = await userService.search(filters);
+      const result = await userService.readMany(where, options);
 
       expect(spy.mock.calls.length).toEqual(1);
-      expect(spy.mock.calls[0][0]).toEqual({
-        where: {
-          id: {
-            equals: filters.id,
-          },
-          name: {
-            contains: filters.name,
-          },
-          email: {
-            contains: filters.email,
-          },
-          role: {
-            contains: filters.role,
-          },
-          banned: {
-            equals: filters.banned,
-          },
-        },
-      });
-      expect(result).toEqual(expectedResult);
+      expect(spy.mock.calls[0][0]).toEqual({ where, ...options });
+      expect(result).toEqual(users);
     });
   });
 
   describe('count', () => {
     it('should count users', async () => {
-      const filters: SearchUserDto = {
-        id: 1,
-        name: 'name',
-        email: 'email@email.com',
-        role: 'admin',
-        banned: false,
-      };
-      const expectedResult = 1;
+      const userCount = 2;
+      const where = { id: 1 };
+      const options = { include: { UserProfile: true } };
 
       const spy = jest
         .spyOn(databaseService.user, 'count')
-        .mockImplementation(async () => expectedResult);
+        .mockImplementation(async () => userCount);
 
-      const result = await userService.count(filters);
+      const result = await userService.count(where, options);
 
       expect(spy.mock.calls.length).toEqual(1);
-      expect(spy.mock.calls[0][0]).toEqual({
-        where: {
-          id: {
-            equals: filters.id,
-          },
-          name: {
-            contains: filters.name,
-          },
-          email: {
-            contains: filters.email,
-          },
-          role: {
-            contains: filters.role,
-          },
-          banned: {
-            equals: filters.banned,
-          },
-        },
-      });
-      expect(result).toEqual(expectedResult);
+      expect(spy.mock.calls[0][0]).toEqual({ where, ...options });
+      expect(result).toEqual(userCount);
     });
   });
 
   describe('update', () => {
     it('should update a user', async () => {
-      const id = 1;
-      const data: UpdateUserDto = {
-        name: 'name',
-        email: 'email@email.com',
-        password: 'password',
-        role: 'admin',
-        banned: false,
-      };
-      const expectedResult: User = {
-        id: 1,
-        ...data,
-        lastConnectedAt: new Date(),
-      } as User;
+      const user = userMockFactory();
+      const where = { id: 1 };
+      const options = { include: { UserProfile: true } };
 
       const spy = jest.spyOn(databaseService.user, 'update').mockImplementation(
         // eslint-disable-next-line camelcase
-        () => (expectedResult as unknown) as Prisma.Prisma__UserClient<User>
+        () => (user as unknown) as Prisma.Prisma__UserClient<User>
       );
 
-      const result = await userService.update(id, data);
+      const result = await userService.update(where, user, options);
 
       expect(spy.mock.calls.length).toEqual(1);
-      expect(spy.mock.calls[0][0]).toEqual({
-        where: {
-          id,
-        },
-        data,
-      });
-      expect(result).toEqual(expectedResult);
+      expect(spy.mock.calls[0][0]).toEqual({ where, data: user, ...options });
+      expect(result).toEqual(user);
     });
   });
 
   describe('delete', () => {
     it('should delete a user', async () => {
-      const id = 1;
-      const expectedResult: User = {
-        id: 1,
-        name: 'name',
-        email: 'email@email.com',
-        password: 'password',
-        role: 'admin',
-        banned: false,
-        lastConnectedAt: new Date(),
-      };
+      const user = userMockFactory();
+      const where = { id: 1 };
+      const options = { include: { UserProfile: true } };
 
       const spy = jest.spyOn(databaseService.user, 'delete').mockImplementation(
         // eslint-disable-next-line camelcase
-        () => (expectedResult as unknown) as Prisma.Prisma__UserClient<User>
+        () => (user as unknown) as Prisma.Prisma__UserClient<User>
       );
 
-      const result = await userService.delete(id);
+      const result = await userService.delete(where, options);
 
       expect(spy.mock.calls.length).toEqual(1);
-      expect(spy.mock.calls[0][0]).toEqual({ where: { id } });
-      expect(result).toEqual(expectedResult);
+      expect(spy.mock.calls[0][0]).toEqual({ where, ...options });
+      expect(result).toEqual(user);
+    });
+  });
+
+  describe('searchDtoToSearchParams', () => {
+    it('should transfor dto to search params', async () => {
+      const filters = { id: 1, name: 'test' };
+      const searchParams = {
+        id: { equals: 1 },
+        name: { contains: 'test' },
+        email: {},
+        role: {},
+        banned: {},
+      };
+
+      const result = userService.searchDtoToSearchParams(filters);
+
+      expect(result).toEqual(searchParams);
     });
   });
 });
