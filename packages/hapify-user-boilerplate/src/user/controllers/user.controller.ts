@@ -11,9 +11,14 @@ import {
 } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { UserService } from '../services';
-import { CreateUserDto, ReadUserDto, UpdateUserDto } from '../dtos';
+import {
+  CreateUserDto,
+  ReadUserDto,
+  SearchUserDto,
+  UpdateUserDto,
+} from '../dtos';
 
-@Controller('user')
+@Controller(['v1/user', 'v1/admin/user'])
 export class UserController {
   constructor(private userService: UserService) {}
 
@@ -22,9 +27,22 @@ export class UserController {
     return this.userService.create(data);
   }
 
+  @Get('count')
+  public async count(@Query() filters: SearchUserDto): Promise<number> {
+    return this.userService.count(filters);
+  }
+
+  @Get(':id')
+  public async read(
+    @Param('id', ParseIntPipe) id: number,
+    @Query() include: ReadUserDto
+  ): Promise<User> {
+    return this.userService.read(id, include);
+  }
+
   @Get()
-  public async read(@Query() filters: ReadUserDto): Promise<User[]> {
-    return this.userService.read(filters);
+  public async search(@Query() filters: SearchUserDto): Promise<User[]> {
+    return this.userService.search(filters);
   }
 
   @Put(':id')
