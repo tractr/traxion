@@ -1,7 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
-import { DatabaseService } from 'src/core';
-import { CreateUserDto, ReadUserDto, UpdateUserDto } from '../dtos';
+import { DatabaseService } from '../../core';
+import {
+  CreateUserDto,
+  ReadUserDto,
+  SearchUserDto,
+  UpdateUserDto,
+} from '../dtos';
 
 @Injectable()
 export class UserService {
@@ -11,8 +16,37 @@ export class UserService {
     return this.db.user.create({ data });
   }
 
-  public async read(filters: ReadUserDto): Promise<User[]> {
+  public async read(id: number, include: ReadUserDto): Promise<User> {
+    return this.db.user.findUnique({
+      where: { id },
+      include,
+    });
+  }
+
+  public async search(filters: SearchUserDto): Promise<User[]> {
     return this.db.user.findMany({
+      where: {
+        id: {
+          equals: filters.id,
+        },
+        name: {
+          contains: filters.name,
+        },
+        email: {
+          contains: filters.email,
+        },
+        role: {
+          contains: filters.role,
+        },
+        banned: {
+          equals: filters.banned,
+        },
+      },
+    });
+  }
+
+  public async count(filters: SearchUserDto): Promise<number> {
+    return this.db.user.count({
       where: {
         id: {
           equals: filters.id,
