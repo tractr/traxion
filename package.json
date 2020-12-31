@@ -33,7 +33,7 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@tractr/commit-config": "^1.0.0",
-    "@tractr/eslint-config": "^1.1.2",
+    "@tractr/eslint-config": "^1.2.1",
     "@tractr/prettier-config": "^1.2.2",
     "commitizen": "^4.2.2",
     "commitlint": "^11.0.0",

@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { User } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import { DatabaseService } from '../../../../src/core';
 import {
   CreateUserDto,
@@ -41,9 +41,10 @@ describe('UserService', () => {
         lastConnectedAt: new Date(),
       };
 
-      const spy = jest
-        .spyOn(databaseService.user, 'create')
-        .mockImplementation(() => expectedResult as any);
+      const spy = jest.spyOn(databaseService.user, 'create').mockImplementation(
+        // eslint-disable-next-line camelcase
+        () => (expectedResult as unknown) as Prisma.Prisma__UserClient<User>
+      );
 
       const result = await userService.create(data);
 
@@ -68,8 +69,14 @@ describe('UserService', () => {
       const include: ReadUserDto = { UserProfile: true };
 
       const spy = jest
-        .spyOn(databaseService.user, 'findUnique')
-        .mockImplementation(() => expectedResult as any);
+        .spyOn<Prisma.UserDelegate, 'findUnique'>(
+          databaseService.user,
+          'findUnique'
+        )
+        .mockImplementation(
+          // eslint-disable-next-line camelcase
+          () => (expectedResult as unknown) as Prisma.Prisma__UserClient<User>
+        );
 
       const result = await userService.read(id, include);
 
@@ -102,7 +109,10 @@ describe('UserService', () => {
 
       const spy = jest
         .spyOn(databaseService.user, 'findMany')
-        .mockImplementation(() => expectedResult as any);
+        .mockImplementation(
+          // eslint-disable-next-line camelcase
+          () => (expectedResult as unknown) as Promise<User[]>
+        );
 
       const result = await userService.search(filters);
 
@@ -143,7 +153,7 @@ describe('UserService', () => {
 
       const spy = jest
         .spyOn(databaseService.user, 'count')
-        .mockImplementation(() => expectedResult as any);
+        .mockImplementation(async () => expectedResult);
 
       const result = await userService.count(filters);
 
@@ -187,9 +197,10 @@ describe('UserService', () => {
         lastConnectedAt: new Date(),
       } as User;
 
-      const spy = jest
-        .spyOn(databaseService.user, 'update')
-        .mockImplementation(() => expectedResult as any);
+      const spy = jest.spyOn(databaseService.user, 'update').mockImplementation(
+        // eslint-disable-next-line camelcase
+        () => (expectedResult as unknown) as Prisma.Prisma__UserClient<User>
+      );
 
       const result = await userService.update(id, data);
 
@@ -217,9 +228,10 @@ describe('UserService', () => {
         lastConnectedAt: new Date(),
       };
 
-      const spy = jest
-        .spyOn(databaseService.user, 'delete')
-        .mockImplementation(() => expectedResult as any);
+      const spy = jest.spyOn(databaseService.user, 'delete').mockImplementation(
+        // eslint-disable-next-line camelcase
+        () => (expectedResult as unknown) as Prisma.Prisma__UserClient<User>
+      );
 
       const result = await userService.delete(id);
 
