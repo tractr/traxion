@@ -30,14 +30,14 @@ export class AuthService {
     const findOneWhere = {
       [this.configService.get<keyof User>('login.loginField')]: login,
     };
-    const user = await this.userService.findOne(findOneWhere, {
+    const user = await this.userService.readOne(findOneWhere, {
       select: { password: true },
     });
 
     if (!user) throw new UserNotFoundError();
 
     if (await this.verifyPassword(user.password, password)) {
-      return this.userService.findOne(findOneWhere);
+      return this.userService.readOne(findOneWhere);
     }
 
     throw new BadPasswordError();

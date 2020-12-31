@@ -2,35 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-input CreateUserDto {
-  banned: Boolean!
-  email: String!
-  name: String!
-  password: String!
-  role: String!
-}
-
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
 
 type Mutation {
-  createUser(createUserInput: CreateUserDto!): User!
+  createUser(createUserInput: UserCreateDto!): User!
   deleteUser(id: ID!): User!
-  updateUser(id: ID!, updateUserInput: UpdateUserDto!): User!
+  updateUser(id: ID!, updateUserInput: UserUpdateDto!): User!
 }
 
 type Query {
   user(banned: Boolean, email: String, id: ID, name: String, role: String): [User!]!
-}
-
-input UpdateUserDto {
-  banned: Boolean
-  email: String
-  name: String
-  password: String
-  role: String
 }
 
 type User {
@@ -41,4 +25,20 @@ type User {
   name: String!
   password: String!
   role: String!
+}
+
+input UserCreateDto {
+  banned: Boolean!
+  email: String!
+  name: String!
+  password: String!
+  role: String!
+}
+
+input UserUpdateDto {
+  banned: Boolean
+  email: String
+  name: String
+  password: String
+  role: String
 }
