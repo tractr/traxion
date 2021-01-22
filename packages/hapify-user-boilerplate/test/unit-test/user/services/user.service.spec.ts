@@ -92,7 +92,7 @@ describe('UserService', () => {
     it('should count users', async () => {
       const userCount = 2;
       const where = { id: 1 };
-      const options = { include: { UserProfile: true } };
+      const options = {};
 
       const spy = jest
         .spyOn(databaseService.user, 'count')
