@@ -16,21 +16,21 @@ export class UserService {
 
   public async readOne(
     where: Prisma.UserWhereUniqueInput,
-    options?: Omit<Prisma.FindUniqueUserArgs, 'where'>
+    options?: Omit<Prisma.UserFindUniqueArgs, 'where'>
   ): Promise<User> {
     return this.db.user.findUnique({ where, ...options });
   }
 
   public async readMany(
     where: Prisma.UserWhereInput,
-    options?: Omit<Prisma.FindManyUserArgs, 'where'>
+    options?: Omit<Prisma.UserFindManyArgs, 'where'>
   ): Promise<User[]> {
     return this.db.user.findMany({ where, ...options });
   }
 
   public async count(
     where: Prisma.UserWhereInput,
-    options?: Omit<Prisma.FindManyUserArgs, 'where'>
+    options?: Omit<Prisma.UserCountArgs, 'where'>
   ): Promise<number> {
     return this.db.user.count({ where, ...options });
   }
@@ -45,7 +45,7 @@ export class UserService {
 
   public async delete(
     where: Prisma.UserWhereUniqueInput,
-    options?: Omit<Prisma.FindUniqueUserArgs, 'where'>
+    options?: Omit<Prisma.UserDeleteArgs, 'where'>
   ): Promise<User> {
     return this.db.user.delete({ where, ...options });
   }
