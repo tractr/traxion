@@ -3,11 +3,11 @@ import { UserService } from '../../../../src/user/services/user.service';
 
 export function mockUserServiceFactory(): UserService {
   return ({
-    findOne: jest.fn(() => ''),
-    create: jest.fn(() => ''),
-    read: jest.fn(() => ''),
-    update: jest.fn(() => ''),
-    delete: jest.fn(() => ''),
+    readOne: jest.fn(),
+    create: jest.fn(),
+    read: jest.fn(),
+    update: jest.fn(),
+    delete: jest.fn(),
   } as unknown) as UserService;
 }
 export const mockUser: User = {

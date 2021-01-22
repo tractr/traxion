@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import { AccessTokenDto } from '../dtos';
 import { UserNotFoundError, BadPasswordError } from '../errors';
 import { UserService } from './user.service';
@@ -58,11 +58,9 @@ export class AuthService {
     return this.jwtService.sign({ sub: user.id });
   }
 
-  // eslint-disable-next-line camelcase
   async login(user: User): Promise<AccessTokenDto> {
-    const payload = { sub: user.id };
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: this.createUserJWT(user),
     };
   }
 }
