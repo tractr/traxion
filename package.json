@@ -7,13 +7,16 @@
     "url": "git+ssh://git@github.com/tractr/stack2021.git"
   },
   "workspaces": [
-    "packages/*"
+    "./packages/*",
+    "./apps/*"
   ],
   "scripts": {
     "postinstall": "is-ci || husky install",
+    "lint": "lerna run --parallel lint",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "test": "lerna run --parallel test"
   },
   "commitlint": {
     "extends": [
@@ -32,12 +35,16 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/github": "^7.2.0",
+    "@semantic-release/npm": "^6.0.0",
+    "@semantic-release/release-notes-generator": "^8.0.0",
     "@tractr/commit-config": "^1.0.0",
-    "@tractr/eslint-config": "^1.2.1",
+    "@tractr/eslint-config": "^1.2.2",
     "@tractr/prettier-config": "^1.2.2",
     "commitizen": "^4.2.2",
     "commitlint": "^11.0.0",
-    "cz-lerna-changelog": "^2.0.3",
+    "cz-lerna-changelog": "^2.0.0",
     "eslint": "^7.16.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",

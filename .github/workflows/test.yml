@@ -2,25 +2,89 @@ name: Test
 
 on: [pull_request]
 
+# gitaction does not support anchors yet
+# Keep the comment to use it when it will be ready
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x, 15.x]
-
     steps:
+      # - &checkout
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      # - &cache
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      # - &setup
+      - name: use node.js 15
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 15
           registry-url: https://npm.pkg.github.com
-      - name: Install
+      # - &install
+      - name: install
         env:
           CI: true
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn install --frozen-lock
-      - name: Test
-        if: success()
-        run: cd packages/hapify-user-boilerplate && yarn test
+        run: npm ci
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      # - <<: *checkout
+      # - <<: *cache
+      # - <<: *setup
+      # - <<: *install#- &checkout
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: use node.js 15
+        uses: actions/setup-node@v1
+        with:
+          node-version: 15
+          registry-url: https://npm.pkg.github.com
+      - name: install
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm ci
+      - name: test
+        run: npm run test
+
+  lint:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      # - <<: *checkout
+      # - <<: *cache
+      # - <<: *setup
+      # - <<: *install
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: use node.js 15
+        uses: actions/setup-node@v1
+        with:
+          node-version: 15
+          registry-url: https://npm.pkg.github.com
+      - name: install
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm ci
+      - name: lint
+        run: npm run lint
