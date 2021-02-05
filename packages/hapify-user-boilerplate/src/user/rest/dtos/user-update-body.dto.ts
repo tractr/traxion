@@ -1,9 +1,8 @@
 import { InputType } from '@nestjs/graphql';
-import { Prisma } from '@prisma/client';
 import { IsBoolean, IsEmail, IsOptional, IsString } from 'class-validator';
 
 @InputType()
-export class UserUpdateDto implements Prisma.UserUpdateInput {
+export class UserUpdateBodyDto {
   @IsOptional()
   @IsString()
   name?: string;
