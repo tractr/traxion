@@ -16,7 +16,7 @@
       "fields": [
         {
           "name": "id",
-          "type": "integer",
+          "type": "string",
           "properties": ["primary", "internal", "ownership"]
         },
         {
@@ -69,7 +69,7 @@
       "fields": [
         {
           "name": "id",
-          "type": "integer",
+          "type": "string",
           "properties": ["primary", "internal"]
         },
         {

@@ -4,7 +4,7 @@ import { User as PrismaUser } from '@prisma/client';
 @ObjectType()
 export class User implements PrismaUser {
   @Field(() => ID)
-  id: number;
+  id: string;
 
   name: string;
 

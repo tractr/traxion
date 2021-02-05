@@ -8,7 +8,7 @@ export class UserReadManyDto {
   @IsOptional()
   @Type(() => Number)
   @IsInt()
-  id?: number;
+  id?: string;
 
   @IsOptional()
   @IsString()

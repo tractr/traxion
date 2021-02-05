@@ -1,9 +1,8 @@
 import { InputType } from '@nestjs/graphql';
-import { Prisma } from '@prisma/client';
 import { IsBoolean, IsEmail, IsString } from 'class-validator';
 
 @InputType()
-export class UserCreateDto implements Prisma.UserCreateInput {
+export class UserCreateBodyDto {
   @IsString()
   name: string;
 
