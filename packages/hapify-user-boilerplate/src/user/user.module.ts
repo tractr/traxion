@@ -4,12 +4,17 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { DatabaseModule, LogModule } from '../core';
-import { getAuthConfig } from './config';
-import { LoginController, UserController } from './controllers';
-import { JwtAuthGuard } from './guards';
-import { UserResolver } from './resolvers';
-import { AuthService, UserService } from './services';
-import { JwtStrategy, LocalStrategy } from './strategies';
+import {
+  AuthService,
+  UserService,
+  UserDatabaseService,
+  getAuthConfig,
+  JwtAuthGuard,
+  JwtStrategy,
+  LocalStrategy,
+} from './common';
+import { LoginController, UserController, UserRestDtoService } from './rest';
+import { UserResolver } from './graphql';
 
 const { jwt, passport } = getAuthConfig();
 
@@ -25,6 +30,8 @@ const { jwt, passport } = getAuthConfig();
     UserResolver,
     AuthService,
     UserService,
+    UserDatabaseService,
+    UserRestDtoService,
     JwtStrategy,
     LocalStrategy,
     { provide: APP_GUARD, useClass: JwtAuthGuard },

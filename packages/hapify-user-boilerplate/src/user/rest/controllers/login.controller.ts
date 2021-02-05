@@ -1,10 +1,13 @@
 import { Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { Request } from 'express';
-import { User as UserDecorator } from '../decorators';
-import { AccessTokenDto } from '../dtos';
-import { JwtAuthGuard, LocalAuthGuard } from '../guards';
-import { AuthService } from '../services';
+import {
+  User as UserDecorator,
+  JwtAuthGuard,
+  LocalAuthGuard,
+  AuthService,
+  AccessTokenDto,
+} from '../../common';
 
 @Controller()
 export class LoginController {
