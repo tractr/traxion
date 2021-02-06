@@ -1,5 +1,8 @@
 import { getParamDecoratorFactory } from '../../../helpers/get-param-decorator-factory';
-import { GqlUser, User } from '../../../../src/user/decorators/user.decorator';
+import {
+  GqlUser,
+  User,
+} from '../../../../src/user/common/decorators/user.decorator';
 
 describe('@User param', () => {
   describe('User', () => {

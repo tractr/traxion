@@ -1,4 +1,4 @@
-import { BadPasswordError } from '../../../../src/user/errors/bad-password.error';
+import { BadPasswordError } from '../../../../src/user/common/errors/bad-password.error';
 
 describe('BadPasswordError', () => {
   it('should be a function', () => {

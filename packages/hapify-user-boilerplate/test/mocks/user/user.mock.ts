@@ -2,7 +2,7 @@ import { User } from '@prisma/client';
 
 export function userMockFactory(user: Partial<User> = {}): User {
   return {
-    id: 1,
+    id: '1',
     email: 'test@tractr.net',
     name: 'Test',
     password: 'test',

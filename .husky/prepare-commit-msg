@@ -3,5 +3,5 @@
 
 if [ -z ${2+x} ]
 then
-    exec < /dev/tty && npx cz --hook || true
+    exec < /dev/tty && npx tractr-commit --hook || true
 fi

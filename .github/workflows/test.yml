@@ -1,6 +1,7 @@
-name: Test
+name: tests
 
-on: [pull_request]
+on:
+  pull_request:
 
 # gitaction does not support anchors yet
 # Keep the comment to use it when it will be ready
@@ -25,11 +26,14 @@ jobs:
           node-version: 15
           registry-url: https://npm.pkg.github.com
       # - &install
+      - name: node version
+        run: node -v
+      - name: npm version
+        run: npm -v
       - name: install
         env:
-          CI: true
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci
+        run: npm install
 
   test:
     needs: build
@@ -54,11 +58,12 @@ jobs:
           registry-url: https://npm.pkg.github.com
       - name: install
         env:
-          CI: true
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci
+        run: npm install
+      - name: generate
+        run: npm run generate
       - name: test
-        run: npm run test
+        run: npm run test --scope @tractr/hapify-user-boilerplalte
 
   lint:
     needs: build
@@ -83,8 +88,9 @@ jobs:
           registry-url: https://npm.pkg.github.com
       - name: install
         env:
-          CI: true
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci
+        run: npm install
+      - name: generate
+        run: npm run generate
       - name: lint
         run: npm run lint
