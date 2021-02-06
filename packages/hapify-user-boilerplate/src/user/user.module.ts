@@ -15,6 +15,7 @@ import {
 } from './common';
 import { LoginController, UserController, UserRestDtoService } from './rest';
 import { UserResolver } from './graphql';
+import { DateScalar } from './graphql/scalars/date.scalar';
 
 const { jwt, passport } = getAuthConfig();
 
@@ -27,6 +28,7 @@ const { jwt, passport } = getAuthConfig();
     JwtModule.register(jwt),
   ],
   providers: [
+    DateScalar,
     UserResolver,
     AuthService,
     UserService,

@@ -1,7 +1,7 @@
 import {
   IS_PUBLIC_KEY,
   Public,
-} from '../../../../src/user/decorators/public.decorator';
+} from '../../../../src/user/common/decorators/public.decorator';
 
 describe('@Public decorator', () => {
   describe('IS_PUBLIC_KEY', () => {

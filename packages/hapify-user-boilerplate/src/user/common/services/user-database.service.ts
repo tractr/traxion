@@ -8,67 +8,109 @@ export class UserDatabaseService {
 
   public findUnique(
     params: Prisma.UserFindUniqueArgs
-  ): ReturnType<Prisma.UserDelegate['findUnique']> {
+  ): ReturnType<
+    Prisma.UserDelegate<
+      Prisma.PrismaClientOptions['rejectOnNotFound']
+    >['findUnique']
+  > {
     return this.databaseService.user.findUnique(params);
   }
 
   public findFirst(
     params: Prisma.UserFindFirstArgs
-  ): ReturnType<Prisma.UserDelegate['findFirst']> {
+  ): ReturnType<
+    Prisma.UserDelegate<
+      Prisma.PrismaClientOptions['rejectOnNotFound']
+    >['findFirst']
+  > {
     return this.databaseService.user.findFirst(params);
   }
 
   public findMany(
     params: Prisma.UserFindManyArgs
-  ): ReturnType<Prisma.UserDelegate['findMany']> {
+  ): ReturnType<
+    Prisma.UserDelegate<
+      Prisma.PrismaClientOptions['rejectOnNotFound']
+    >['findMany']
+  > {
     return this.databaseService.user.findMany(params);
   }
 
   public create(
     params: Prisma.UserCreateArgs
-  ): ReturnType<Prisma.UserDelegate['create']> {
+  ): ReturnType<
+    Prisma.UserDelegate<
+      Prisma.PrismaClientOptions['rejectOnNotFound']
+    >['create']
+  > {
     return this.databaseService.user.create(params);
   }
 
   public update(
     params: Prisma.UserUpdateArgs
-  ): ReturnType<Prisma.UserDelegate['update']> {
+  ): ReturnType<
+    Prisma.UserDelegate<
+      Prisma.PrismaClientOptions['rejectOnNotFound']
+    >['update']
+  > {
     return this.databaseService.user.update(params);
   }
 
   public updateMany(
     params: Prisma.UserUpdateManyArgs
-  ): ReturnType<Prisma.UserDelegate['updateMany']> {
+  ): ReturnType<
+    Prisma.UserDelegate<
+      Prisma.PrismaClientOptions['rejectOnNotFound']
+    >['updateMany']
+  > {
     return this.databaseService.user.updateMany(params);
   }
 
   public upsert(
     params: Prisma.UserUpsertArgs
-  ): ReturnType<Prisma.UserDelegate['upsert']> {
+  ): ReturnType<
+    Prisma.UserDelegate<
+      Prisma.PrismaClientOptions['rejectOnNotFound']
+    >['upsert']
+  > {
     return this.databaseService.user.upsert(params);
   }
 
   public delete(
     params: Prisma.UserDeleteArgs
-  ): ReturnType<Prisma.UserDelegate['delete']> {
+  ): ReturnType<
+    Prisma.UserDelegate<
+      Prisma.PrismaClientOptions['rejectOnNotFound']
+    >['delete']
+  > {
     return this.databaseService.user.delete(params);
   }
 
   public deleteMany(
     params: Prisma.UserDeleteManyArgs
-  ): ReturnType<Prisma.UserDelegate['deleteMany']> {
+  ): ReturnType<
+    Prisma.UserDelegate<
+      Prisma.PrismaClientOptions['rejectOnNotFound']
+    >['deleteMany']
+  > {
     return this.databaseService.user.deleteMany(params);
   }
 
   public count(
     params: Prisma.UserCountArgs
-  ): ReturnType<Prisma.UserDelegate['count']> {
+  ): ReturnType<
+    Prisma.UserDelegate<Prisma.PrismaClientOptions['rejectOnNotFound']>['count']
+  > {
     return this.databaseService.user.count(params);
   }
 
   public aggregate(
     params: Prisma.UserAggregateArgs
-  ): ReturnType<Prisma.UserDelegate['aggregate']> {
+  ): ReturnType<
+    Prisma.UserDelegate<
+      Prisma.PrismaClientOptions['rejectOnNotFound']
+    >['aggregate']
+  > {
     return this.databaseService.user.aggregate(params);
   }
 }

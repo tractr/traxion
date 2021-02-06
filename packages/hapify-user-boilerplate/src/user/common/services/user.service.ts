@@ -10,7 +10,9 @@ export class UserService {
     return this.userDatabaseService.create(params);
   }
 
-  public async findUnique(params: Prisma.UserFindUniqueArgs): Promise<User> {
+  public async findUnique(
+    params: Prisma.UserFindUniqueArgs
+  ): Promise<User | null> {
     return this.userDatabaseService.findUnique(params);
   }
 

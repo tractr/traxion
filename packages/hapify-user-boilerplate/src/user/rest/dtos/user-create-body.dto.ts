@@ -4,18 +4,18 @@ import { IsBoolean, IsEmail, IsString } from 'class-validator';
 @InputType()
 export class UserCreateBodyDto {
   @IsString()
-  name: string;
+  name!: string;
 
   @IsString()
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsString()
-  password: string;
+  password!: string;
 
   @IsString()
-  role: string;
+  role!: string;
 
   @IsBoolean()
-  banned: boolean;
+  banned!: boolean;
 }

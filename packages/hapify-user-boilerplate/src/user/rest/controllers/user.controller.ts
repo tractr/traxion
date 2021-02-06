@@ -45,7 +45,7 @@ export class UserController {
   public async findOne(
     @Param() paramsDto: UserFindUniqueParamsDto,
     @Query() queryDto: UserFindUniqueQueryDto
-  ): Promise<User> {
+  ): Promise<User | null> {
     const formatedParams = this.userRestDtoService.formatFindUniqueDtos(
       paramsDto,
       queryDto

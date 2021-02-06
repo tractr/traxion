@@ -4,17 +4,23 @@ import { User as PrismaUser } from '@prisma/client';
 @ObjectType()
 export class User implements PrismaUser {
   @Field(() => ID)
-  id: string;
+  id!: string;
 
-  name: string;
+  @Field()
+  name!: string;
 
-  email: string;
+  @Field()
+  email!: string;
 
-  password: string;
+  @Field()
+  password!: string;
 
-  role: string;
+  @Field()
+  role!: string;
 
-  banned: boolean;
+  @Field()
+  banned!: boolean;
 
-  lastConnectedAt: Date;
+  @Field(() => Date)
+  lastConnectedAt!: Date | null;
 }
