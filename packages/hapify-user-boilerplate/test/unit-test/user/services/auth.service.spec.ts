@@ -116,7 +116,7 @@ describe('AuthService', () => {
 
   describe('authenticateLoginCredentials', () => {
     it('should throw a UserNotFoundError if no user has been found by the login field', async () => {
-      (mockUserService.readOne as jest.Mock).mockReturnValueOnce(null);
+      (mockUserService.findUnique as jest.Mock).mockReturnValueOnce(null);
 
       expect(
         authService.authenticateLoginCredentials('login', 'password')
@@ -125,8 +125,8 @@ describe('AuthService', () => {
       expect(mockConfigService.get).toHaveBeenCalledTimes(1);
       expect(mockConfigService.get).toHaveBeenCalledWith('login.loginField');
 
-      expect(mockUserService.readOne).toHaveBeenCalledTimes(1);
-      expect(mockUserService.readOne).toHaveBeenCalledWith(
+      expect(mockUserService.findUnique).toHaveBeenCalledTimes(1);
+      expect(mockUserService.findUnique).toHaveBeenCalledWith(
         { email: 'login' },
         { select: { password: true } }
       );

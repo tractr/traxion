@@ -1,5 +1,5 @@
 import { User } from '@prisma/client';
-import { UserService } from '../../../../src/user/services/user.service';
+import { UserService } from '../../../../src/user/common/services/user.service';
 
 export function mockUserServiceFactory(): UserService {
   return ({
@@ -11,7 +11,7 @@ export function mockUserServiceFactory(): UserService {
   } as unknown) as UserService;
 }
 export const mockUser: User = {
-  id: 1,
+  id: '1',
   email: 'test@tractr.net',
   name: 'Test',
   password: 'test',

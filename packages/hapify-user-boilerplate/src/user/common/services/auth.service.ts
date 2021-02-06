@@ -15,7 +15,7 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) {}
 
-  async validateUser(login: string, password: string): Promise<User> {
+  async validateUser(login: string, password: string): Promise<User | null> {
     try {
       return await this.authenticateLoginCredentials(login, password);
     } catch {
@@ -26,9 +26,12 @@ export class AuthService {
   async authenticateLoginCredentials(
     login: string,
     password: string
-  ): Promise<User> {
+  ): Promise<User | null> {
+    const loginField = this.configService.get<keyof User>('login.loginField');
+    if (!loginField) throw new Error('loginField is not defined');
+
     const findOneWhere = {
-      [this.configService.get<keyof User>('login.loginField')]: login,
+      [loginField]: login,
     };
     const user = await this.userService.findUnique({
       where: findOneWhere,

@@ -11,6 +11,11 @@
     "./apps/*"
   ],
   "scripts": {
+    "build": "lerna run --parallel build",
+    "clean:dist": "find . -name 'dist' -type d -prune -exec rm -rf '{}' +",
+    "clean:lib": "find . -name 'lib' -type d -prune -exec rm -rf '{}' +",
+    "clean:node_modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
+    "generate": "lerna run --parallel generate",
     "postinstall": "is-ci || husky install",
     "lint": "lerna run --parallel lint",
     "prepublishOnly": "pinst --disable",
@@ -23,35 +28,21 @@
       "@tractr/commit-config"
     ]
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-lerna-changelog"
-    }
-  },
   "prettier": "@tractr/prettier-config",
   "eslintConfig": {
     "extends": "@tractr"
   },
   "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
-    "@semantic-release/commit-analyzer": "^8.0.1",
-    "@semantic-release/github": "^7.2.0",
-    "@semantic-release/npm": "^6.0.0",
-    "@semantic-release/release-notes-generator": "^8.0.0",
-    "@tractr/commit-config": "^1.0.0",
-    "@tractr/eslint-config": "^1.2.2",
-    "@tractr/prettier-config": "^1.2.2",
-    "commitizen": "^4.2.2",
-    "commitlint": "^11.0.0",
-    "cz-lerna-changelog": "^2.0.0",
-    "eslint": "^7.16.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
+    "@hapify/cli": "^0.9.0",
+    "@tractr/commit-config": "^1.1.3",
+    "@tractr/eslint-config": "^1.2.6",
+    "@tractr/jest-config": "^1.0.0",
+    "@tractr/prettier-config": "^1.2.5",
+    "eslint": "^7.19.0",
     "husky": "^5.0.6",
     "is-ci": "^2.0.0",
     "lerna": "3.22.1",
-    "pinst": "^2.1.1",
+    "pinst": "^2.1.4",
     "prettier": "^2.2.1"
   },
   "publishConfig": {

@@ -34,7 +34,9 @@ function prismaType(f) {
 
 <<<
 function primary(f) {
-  return f.primary ? "@id @default(autoincrement())": "";
+  if (!f.primary) return "";
+  if (f.type === "string") return "@id @default(uuid())";
+  if (f.type === "strnumbering") return "@id @default(autoincrement())";
 }
 >>>
 

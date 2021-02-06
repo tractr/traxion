@@ -1,4 +1,4 @@
-import { UserNotFoundError } from '../../../../src/user/errors/user-not-found.error';
+import { UserNotFoundError } from '../../../../src/user/common/errors/user-not-found.error';
 
 describe('UserNotFoundError', () => {
   it('should be a function', () => {
