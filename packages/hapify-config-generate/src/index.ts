@@ -131,6 +131,10 @@ async function getHapifyConfig(
     );
 }
 
+function formatTemplatePath(templatePath: string): string {
+  return `${templatePath}.hpf`.replace(/[{}]/g, '__');
+}
+
 async function getHapifyOptions(): Promise<void> {
   debug('Start generate hapify configuration file');
   const packageJsonDirectory = await pkgDir();
@@ -150,8 +154,10 @@ async function getHapifyOptions(): Promise<void> {
     hapifyConfig.templates.forEach((template) => {
       promises.push(
         copy(
-          `${template.inputPath}.hpf`,
-          `${join(packageJsonDirectory || '', 'hapify', template.path)}.hpf`
+          formatTemplatePath(template.inputPath as string),
+          formatTemplatePath(
+            `${join(packageJsonDirectory || '', 'hapify', template.path)}`
+          )
         )
       );
     });
