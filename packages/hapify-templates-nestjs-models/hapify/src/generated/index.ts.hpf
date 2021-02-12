@@ -1,0 +1,5 @@
+<<for Models m>>
+export * from './<<m kebab>>';
+<<endfor>>
+export * from './shared.module';
+export * from './rest.module';
