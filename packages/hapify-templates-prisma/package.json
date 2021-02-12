@@ -1,0 +1,20 @@
+{
+  "name": "@tractr/hapify-templates-prisma",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Generate prisma hapify config",
+  "license": "UNLICENSED",
+  "author": "",
+  "main": "./index.js",
+  "files": [
+    "./hapify",
+    "index.js"
+  ],
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}
