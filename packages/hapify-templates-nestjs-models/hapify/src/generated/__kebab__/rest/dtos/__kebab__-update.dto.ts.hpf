@@ -1,0 +1,64 @@
+import { InputType } from '@nestjs/graphql';
+
+<<if Fields not internal>>
+import {  
+  <<if Fields boolean and not internal>>
+    IsBoolean, 
+  <<endif>>
+
+  <<if Fields (string or entity) and not internal>>
+    IsString,
+  <<endif>>
+
+  <<if Fields email and not internal>>
+    IsEmail, 
+  <<endif>>
+
+  <<if Fields number or datetime and not internal>>
+    IsNumber,
+  <<endif>>
+
+} from 'class-validator';
+<<endif>>
+
+@InputType()
+export class <<Model pascal>>UpdateDto {
+
+<<for Fields not internal f>>
+  <<if f boolean>>
+    @IsBoolean() 
+  <<endif>>
+
+  <<if f string or entity>>
+    @IsString() 
+  <<endif>>
+
+  <<if f email>>
+    @IsEmail() 
+  <<endif>>
+
+  <<if f number or datetime>>
+    @IsNumber()
+  <<endif>>
+
+  <<=optionalTypedProperty(f)>>
+<<endfor>>
+}
+
+<<<
+function optionalTypedProperty(f) {
+  let out = f.names.camel;
+  out += "?: "
+  if (f.type === "boolean") out += "boolean";
+  else if (f.type === "string") out += "string";
+  else if (f.type === "number") out += "number";
+  else if (f.type === "datetime") out += "number | Date";
+  else if (f.type === "entity") {
+    out +=  "string";
+  }
+  if (f.multiple) out += "[]";
+  out += ";";
+  return out;
+}
+>>>
+

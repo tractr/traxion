@@ -1,0 +1,64 @@
+import { Injectable } from '@nestjs/common';
+import { Prisma, <<Model pascal>> } from '@prisma/client';
+import { DatabaseService } from '../../../core';
+import { <<Model pascal>>ReadManyDto } from '../dtos';
+
+@Injectable()
+export class <<Model pascal>>Service {
+  constructor(private readonly db: DatabaseService) {}
+
+  public async create(
+    data: Prisma.<<Model pascal>>CreateInput,
+    options?: Omit<Prisma.<<Model pascal>>CreateArgs, 'data'>
+  ): Promise<<<Model pascal>>> {
+    return this.db.<<Model camel>>.create({ data, ...options });
+  }
+
+  public async readOne(
+    where: Prisma.<<Model pascal>>WhereUniqueInput,
+    options?: Omit<Prisma.<<Model pascal>>FindUniqueArgs, 'where'>
+  ): Promise<<<Model pascal>>> {
+    return this.db.<<Model camel>>.findUnique({ where, ...options });
+  }
+
+  public async readMany(
+    where: Prisma.<<Model pascal>>WhereInput,
+    options?: Omit<Prisma.<<Model pascal>>FindManyArgs, 'where'>
+  ): Promise<<<Model pascal>>[]> {
+    return this.db.<<Model camel>>.findMany({ where, ...options });
+  }
+
+  public async count(
+    where: Prisma.<<Model pascal>>WhereInput,
+    options?: Omit<Prisma.<<Model pascal>>CountArgs, 'where'>
+  ): Promise<number> {
+    return this.db.<<Model camel>>.count({ where, ...options });
+  }
+
+  public async update(
+    where: Prisma.<<Model pascal>>WhereUniqueInput,
+    data: Prisma.<<Model pascal>>UpdateInput,
+    options?: Omit<Prisma.<<Model pascal>>UpdateArgs, 'where' | 'data'>
+  ): Promise<<<Model pascal>>> {
+    return this.db.<<Model camel>>.update({ where, data, ...options });
+  }
+
+  public async delete(
+    where: Prisma.<<Model pascal>>WhereUniqueInput,
+    options?: Omit<Prisma.<<Model pascal>>DeleteArgs, 'where'>
+  ): Promise<<<Model pascal>>> {
+    return this.db.<<Model camel>>.delete({ where, ...options });
+  }
+
+  public transformSearchDtoToSearchParams(
+    filters: <<Model pascal>>ReadManyDto
+  ): Prisma.<<Model pascal>>WhereInput {
+    return {
+      <<for Fields searchable f>>
+        <<f camel>>: {
+          equals: filters.<<f camel>>,
+        },
+      <<endfor>>
+    };
+  }
+}

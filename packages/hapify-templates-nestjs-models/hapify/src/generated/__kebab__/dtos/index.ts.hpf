@@ -1,0 +1,4 @@
+export * from './<<Model kebab>>-create.dto';
+export * from './<<Model kebab>>-read-many.dto';
+export * from './<<Model kebab>>-read-one.dto';
+export * from './<<Model kebab>>-update.dto';
