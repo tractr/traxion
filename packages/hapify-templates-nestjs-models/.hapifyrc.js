@@ -7,5 +7,10 @@ module.exports = {
       engine: 'hpf',
       input: 'all',
     },
+    {
+      path: 'src/generated/{kebab}/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
   ],
 };

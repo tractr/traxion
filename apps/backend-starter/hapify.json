@@ -32,6 +32,11 @@
       "input": "all"
     },
     {
+      "path": "src/generated/{kebab}/index.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
       "path": "prisma/schemas/generated.prisma",
       "engine": "hpf",
       "input": "all"
