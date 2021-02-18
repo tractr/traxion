@@ -1,7 +1,7 @@
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { LogService } from './core';
+import { LogService } from '@tractr/hapify-plugin-nestjs-core';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
