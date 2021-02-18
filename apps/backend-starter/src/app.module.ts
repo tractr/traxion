@@ -1,17 +1,10 @@
-import { join } from 'path';
 import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { UserModule } from './user/user.module';
+import { CoreModule } from '@tractr/hapify-plugin-nestjs-core';
+import { AppController } from './controllers';
 
 @Module({
-  imports: [
-    GraphQLModule.forRoot({
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      sortSchema: true,
-    }),
-    UserModule,
-  ],
-  controllers: [],
+  imports: [CoreModule],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
