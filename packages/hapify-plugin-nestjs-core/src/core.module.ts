@@ -5,4 +5,4 @@ import { LogService } from './services';
   providers: [LogService],
   exports: [LogService],
 })
-export class LogModule {}
+export class CoreModule {}
