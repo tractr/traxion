@@ -14,7 +14,7 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('App should be defined', () => {
     expect(app).toBeDefined();
   });
 });
