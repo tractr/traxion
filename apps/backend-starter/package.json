@@ -60,6 +60,7 @@
     "@nestjs/platform-express": "^7.6.11",
     "@nestjs/swagger": "^4.7.12",
     "@prisma/client": "^2.16.0",
+    "@tractr/hapify-plugin-nestjs-database": "^0.0.0",
     "@types/passport-jwt": "^3.0.4",
     "@types/passport-local": "^1.0.33",
     "apollo-server-express": "^2.19.2",

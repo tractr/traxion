@@ -1,9 +1,9 @@
+import { PassportModule } from '@nestjs/passport';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
-import { DatabaseModule, LogModule } from '../core';
+import { LogModule } from '../core';
 import {
   AuthService,
   UserService,
@@ -16,6 +16,7 @@ import {
 import { LoginController, UserController, UserRestDtoService } from './rest';
 import { UserResolver } from './graphql';
 import { DateScalar } from './graphql/scalars/date.scalar';
+import { DatabaseModule } from '@tractr/hapify-plugin-nestjs-database';
 
 const { jwt, passport } = getAuthConfig();
 
