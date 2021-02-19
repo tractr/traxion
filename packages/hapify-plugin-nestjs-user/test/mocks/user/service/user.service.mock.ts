@@ -1,5 +1,5 @@
 import { User } from '@prisma/client';
-import { UserService } from '../../../../src/user/common/services/user.service';
+import { UserService } from '../../../../src/generated.example/user/common/services/user.service';
 
 export function mockUserServiceFactory(): UserService {
   return ({

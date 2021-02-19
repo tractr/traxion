@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma, User } from '@prisma/client';
 import { userMockFactory } from '../../../mocks/user/user.mock';
 import { DatabaseService } from '../../../../src/core';
-import { UserService } from '../../../../src/user';
+import { UserService } from '../../../../src/generated.example/user';
 
 describe('UserService', () => {
   let userService: UserService;

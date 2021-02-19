@@ -5,13 +5,13 @@ import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { AccessTokenDto } from '../dtos';
 import { UserNotFoundError, BadPasswordError } from '../errors';
-import { UserService } from './user.service';
+import { UserCustomService } from './user-customservice';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly configService: ConfigService,
-    private readonly userService: UserService,
+    private readonly userService: UserCustomService,
     private readonly jwtService: JwtService
   ) {}
 

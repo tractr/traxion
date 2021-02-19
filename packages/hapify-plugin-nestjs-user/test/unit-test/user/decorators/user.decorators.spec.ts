@@ -1,17 +1,17 @@
 import { getParamDecoratorFactory } from '../../../helpers/get-param-decorator-factory';
 import {
-  GqlUser,
-  User,
-} from '../../../../src/user/common/decorators/user.decorator';
+  CurrentGqlUser,
+  CurrentUser,
+} from '../../../../src/authentication/decorators/user.decorator';
 
 describe('@User param', () => {
   describe('User', () => {
     it('should be a function', () => {
-      expect(typeof User).toBe('function');
+      expect(typeof CurrentUser).toBe('function');
     });
 
     it('should inject the current request user', () => {
-      const factory = getParamDecoratorFactory(User);
+      const factory = getParamDecoratorFactory(CurrentUser);
       const mockUser = { id: 'test' };
       const getRequest = jest.fn(() => ({
         user: mockUser,
@@ -31,7 +31,7 @@ describe('@User param', () => {
 
   describe('@GqlUser param', () => {
     it('should be a function', () => {
-      expect(typeof GqlUser).toBe('function');
+      expect(typeof CurrentGqlUser).toBe('function');
     });
   });
 });
