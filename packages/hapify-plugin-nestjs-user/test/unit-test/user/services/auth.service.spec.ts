@@ -4,15 +4,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { JwtService } from '@nestjs/jwt';
 import { mockJwtServiceFactory } from '../../../mocks/user/service/jwt.service.mock';
 import { mockConfigServiceFactory } from '../../../mocks/config/config.service.mock';
-import {
-  AuthService,
-  UserService,
-  UserNotFoundError,
-} from '../../../../src/user';
+import { AuthService, UserNotFoundError } from '../../../../src/authentication';
 import {
   mockUser,
   mockUserServiceFactory,
 } from '../../../mocks/user/service/user.service.mock';
+import { UserService } from '../../../../src/generated.example/user';
 
 jest.mock('bcrypt');
 // const actualBcrypt = jest.requireActual('bcrypt');
