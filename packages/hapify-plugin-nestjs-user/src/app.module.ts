@@ -1,15 +1,18 @@
-import { join } from 'path';
 import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { UserModule } from './user/user.module';
+import { AuthenticationModule } from './authentication';
+import { UserCustomService } from './authentication/services/user-customservice';
+import { ModelsModule } from './generated.example/models.module';
+import { UserService } from './generated.example/user';
 
 @Module({
   imports: [
-    GraphQLModule.forRoot({
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      sortSchema: true,
-    }),
-    UserModule,
+    AuthenticationModule,
+    ModelsModule.register([
+      {
+        provide: UserService,
+        useClass: UserCustomService,
+      },
+    ]),
   ],
   controllers: [],
   providers: [],

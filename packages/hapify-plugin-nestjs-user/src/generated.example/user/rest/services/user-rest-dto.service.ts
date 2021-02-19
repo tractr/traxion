@@ -14,50 +14,40 @@ import {
 @Injectable()
 export class UserRestDtoService {
   public formatCreateDto(bodyDto: UserCreateBodyDto): Prisma.UserCreateArgs {
-    return {
-      data: { ...bodyDto },
-    };
+    return { data: { ...bodyDto } };
   }
 
   public formatCountDto(queryDto: UserCountQueryDto): Prisma.UserCountArgs {
-    return {
-      where: { ...queryDto },
-    };
+    return { where: { ...queryDto } };
   }
 
   public formatFindUniqueDtos(
     paramsDto: UserFindUniqueParamsDto,
-    queryDto: UserFindUniqueQueryDto
+    queryDto?: UserFindUniqueQueryDto
   ): Prisma.UserFindUniqueArgs {
-    return {
+    const prismaUserFindUniqueArgs: Prisma.UserFindUniqueArgs = {
       where: { ...paramsDto },
-      include: { ...queryDto },
     };
+    if (queryDto) prismaUserFindUniqueArgs.include = { ...queryDto };
+    return prismaUserFindUniqueArgs;
   }
 
   public formatFindManyDto(
     queryDto: UserFindManyQueryDto
   ): Prisma.UserFindManyArgs {
-    return {
-      where: { ...queryDto },
-    };
+    return { where: { ...queryDto } };
   }
 
   public formatUpdateDtos(
     paramsDto: UserUpdateParamsDto,
     bodyDto: UserUpdateBodyDto
   ): Prisma.UserUpdateArgs {
-    return {
-      data: { ...bodyDto },
-      where: { ...paramsDto },
-    };
+    return { data: { ...bodyDto }, where: { ...paramsDto } };
   }
 
   public formatDeleteDto(
     paramsDto: UserDeleteParamsDto
   ): Prisma.UserDeleteArgs {
-    return {
-      where: { ...paramsDto },
-    };
+    return { where: { ...paramsDto } };
   }
 }

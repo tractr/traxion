@@ -1,4 +1,4 @@
-import { getAuthConfig } from '../../../../src/user/common/config/auth.config';
+import { getAuthConfig } from '../../../../src/authentication/config/auth.config';
 
 describe('User auth configurations', () => {
   const {
