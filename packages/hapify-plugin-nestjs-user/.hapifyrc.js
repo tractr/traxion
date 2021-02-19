@@ -1,11 +1,11 @@
 module.exports = {
-  extends: ['@tractr/hapify-boilerplate-prisma'],
+  extends: ['@tractr/hapify-templates-prisma'],
   version: '1',
   validatorPath: 'hapify/validator.js',
   name: 'New bootstrap',
   description: 'A new Hapify channel',
   logo: 'https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png',
-  project: '../../hapify-models.json',
+  project: './hapify-plugin-model-user.json',
   defaultFields: [
     {
       name: 'id',

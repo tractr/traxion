@@ -4,18 +4,12 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { DatabaseModule, LogModule } from '../core';
-import {
-  AuthService,
-  UserService,
-  UserDatabaseService,
-  getAuthConfig,
-  JwtAuthGuard,
-  JwtStrategy,
-  LocalStrategy,
-} from './common';
-import { LoginController, UserController, UserRestDtoService } from './rest';
-import { UserResolver } from './graphql';
-import { DateScalar } from './graphql/scalars/date.scalar';
+import { getAuthConfig } from './config';
+import { JwtAuthGuard } from './guards';
+import { LoginController } from './controllers';
+import { AuthService } from './services';
+import { JwtStrategy, LocalStrategy } from './strategies';
+import { UserCustomService } from './services/user-customservice';
 
 const { jwt, passport } = getAuthConfig();
 
@@ -27,17 +21,14 @@ const { jwt, passport } = getAuthConfig();
     PassportModule.register(passport),
     JwtModule.register(jwt),
   ],
+  exports: [AuthService, JwtStrategy, LocalStrategy],
   providers: [
-    DateScalar,
-    UserResolver,
+    { provide: APP_GUARD, useClass: JwtAuthGuard },
     AuthService,
-    UserService,
-    UserDatabaseService,
-    UserRestDtoService,
     JwtStrategy,
     LocalStrategy,
-    { provide: APP_GUARD, useClass: JwtAuthGuard },
+    UserCustomService,
   ],
-  controllers: [LoginController, UserController],
+  controllers: [LoginController],
 })
-export class UserModule {}
+export class AuthenticationModule {}

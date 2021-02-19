@@ -1,7 +1,7 @@
 import {
   ROLES_KEY,
   Roles,
-} from '../../../../src/user/common/decorators/roles.decorator';
+} from '../../../../src/authentication/decorators/roles.decorator';
 
 describe('@Roles decorator', () => {
   describe('ROLES_KEY', () => {

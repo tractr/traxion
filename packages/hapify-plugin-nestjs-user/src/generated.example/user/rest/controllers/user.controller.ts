@@ -35,6 +35,14 @@ export class UserController {
     return this.userService.create(formatedParams);
   }
 
+  @Get()
+  public async findMany(
+    @Query() queryDto: UserFindManyQueryDto
+  ): Promise<User[]> {
+    const formatedParams = this.userRestDtoService.formatFindManyDto(queryDto);
+    return this.userService.findMany(formatedParams);
+  }
+
   @Get('count')
   public async count(@Query() queryDto: UserCountQueryDto): Promise<number> {
     const formatedParams = this.userRestDtoService.formatCountDto(queryDto);
@@ -44,21 +52,13 @@ export class UserController {
   @Get(':id')
   public async findOne(
     @Param() paramsDto: UserFindUniqueParamsDto,
-    @Query() queryDto: UserFindUniqueQueryDto
+    @Query() queryDto?: UserFindUniqueQueryDto
   ): Promise<User | null> {
     const formatedParams = this.userRestDtoService.formatFindUniqueDtos(
       paramsDto,
       queryDto
     );
     return this.userService.findUnique(formatedParams);
-  }
-
-  @Get()
-  public async findMany(
-    @Query() queryDto: UserFindManyQueryDto
-  ): Promise<User[]> {
-    const formatedParams = this.userRestDtoService.formatFindManyDto(queryDto);
-    return this.userService.findMany(formatedParams);
   }
 
   @Put(':id')
