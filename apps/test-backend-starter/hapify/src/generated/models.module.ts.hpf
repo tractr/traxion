@@ -1,0 +1,14 @@
+import { Module } from '@nestjs/common';
+
+<<for Models m>>
+import { <<m pascal>>DatabaseService } from './<<m kebab>>';
+<<endfor>>
+
+@Module({
+  providers: [
+  <<for Models m>>
+   <<m pascal>>DatabaseService,
+  <<endfor>>
+  ]
+})
+export class ModelsModule {}

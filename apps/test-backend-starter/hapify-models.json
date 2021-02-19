@@ -1,0 +1,95 @@
+{
+  "version": "2",
+  "name": "New project",
+  "models": [
+    {
+      "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
+      "name": "User",
+      "accesses": {
+        "create": "guest",
+        "read": "owner",
+        "update": "owner",
+        "remove": "owner",
+        "search": "admin",
+        "count": "admin"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "properties": [
+            "label",
+            "searchable",
+            "sortable"
+          ]
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "subtype": "email",
+          "properties": [
+            "unique",
+            "searchable",
+            "sortable"
+          ]
+        },
+        {
+          "name": "password",
+          "type": "string",
+          "subtype": "password",
+          "properties": [
+            "hidden"
+          ]
+        },
+        {
+          "name": "role",
+          "type": "enum",
+          "value": [
+            "admin",
+            "user"
+          ],
+          "properties": [
+            "searchable",
+            "restricted"
+          ],
+          "notes": "admin or user"
+        },
+        {
+          "name": "banned",
+          "type": "string",
+          "properties": [
+            "searchable",
+            "restricted"
+          ],
+          "notes": "Allow admins to disable this user"
+        },
+        {
+          "name": "lastConnectedAt",
+          "type": "datetime",
+          "properties": [
+            "nullable",
+            "internal"
+          ]
+        },
+        {
+          "name": "age",
+          "type": "string",
+          "properties": [
+            "searchable",
+            "sortable"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+export * from './models.module';
+
+<% for (const m of models) { %>
+export * from './<%- m.names.kebab%>';
+<% } %>
+
