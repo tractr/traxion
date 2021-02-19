@@ -13,6 +13,9 @@
   "scripts": {},
   "dependencies": {},
   "devDependencies": {},
+  "peerDependencies": {
+    "class-validator": "^0.13.0"
+  },
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"
