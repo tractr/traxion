@@ -131,8 +131,8 @@ async function getHapifyConfig(
     );
 }
 
-function formatTemplatePath(templatePath: string): string {
-  return `${templatePath}.hpf`.replace(/[{}]/g, '__');
+function formatTemplatePath(templatePath: string, extension: string): string {
+  return `${templatePath}.${extension}`.replace(/[{}]/g, '__');
 }
 
 async function getHapifyOptions(): Promise<void> {
@@ -154,9 +154,10 @@ async function getHapifyOptions(): Promise<void> {
     hapifyConfig.templates.forEach((template) => {
       promises.push(
         copy(
-          formatTemplatePath(template.inputPath as string),
+          formatTemplatePath(template.inputPath as string, template.engine),
           formatTemplatePath(
-            `${join(packageJsonDirectory || '', 'hapify', template.path)}`
+            `${join(packageJsonDirectory || '', 'hapify', template.path)}`,
+            template.engine
           )
         )
       );

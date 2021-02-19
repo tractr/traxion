@@ -1,0 +1,53 @@
+import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import {
+  // <<Model pascal>>CountQueryDto,
+  <<Model pascal>>CreateBodyDto,
+  // <<Model pascal>>FindManyQueryDto,
+  // <<Model pascal>>FindUniqueParamsDto,
+  // <<Model pascal>>FindUniqueQueryDto,
+  // <<Model pascal>>UpdateBodyDto,
+  // <<Model pascal>>UpdateParamsDto,
+  // <<Model pascal>>DeleteParamsDto,
+} from '../dtos';
+
+@Injectable()
+export class <<Model pascal>>RestDtoService {
+  public formatCreateDto(bodyDto: <<Model pascal>>CreateBodyDto): Prisma.<<Model pascal>>CreateArgs {
+    return { data: { ...bodyDto } };
+  }
+//
+//  public formatCountDto(queryDto: <<Model pascal>>CountQueryDto): Prisma.<<Model pascal>>CountArgs {
+//    return { where: { ...queryDto } };
+//  }
+//
+//  public formatFindUniqueDtos(
+//    paramsDto: <<Model pascal>>FindUniqueParamsDto,
+//    queryDto?: <<Model pascal>>FindUniqueQueryDto
+//  ): Prisma.<<Model pascal>>FindUniqueArgs {
+//    const prisma<<Model pascal>>FindUniqueArgs: Prisma.<<Model pascal>>FindUniqueArgs = {
+//      where: { ...paramsDto },
+//    };
+//    if (queryDto) prisma<<Model pascal>>FindUniqueArgs.include = { ...queryDto };
+//    return prisma<<Model pascal>>FindUniqueArgs;
+//  }
+//
+//  public formatFindManyDto(
+//    queryDto: <<Model pascal>>FindManyQueryDto
+//  ): Prisma.<<Model pascal>>FindManyArgs {
+//    return { where: { ...queryDto } };
+//  }
+//
+//  public formatUpdateDtos(
+//    paramsDto: <<Model pascal>>UpdateParamsDto,
+//    bodyDto: <<Model pascal>>UpdateBodyDto
+//  ): Prisma.<<Model pascal>>UpdateArgs {
+//    return { data: { ...bodyDto }, where: { ...paramsDto } };
+//  }
+//
+//  public formatDeleteDto(
+//    paramsDto: <<Model pascal>>DeleteParamsDto
+//  ): Prisma.<<Model pascal>>DeleteArgs {
+//    return { where: { ...paramsDto } };
+//  }
+}
