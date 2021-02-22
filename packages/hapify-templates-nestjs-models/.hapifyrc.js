@@ -18,6 +18,26 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'src/generated/{kebab}/common/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'src/generated/{kebab}/common/services/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'src/generated/{kebab}/common/services/{kebab}-database.service.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'src/generated/{kebab}/common/services/{kebab}.service.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'src/generated/{kebab}/rest/index.ts',
       engine: 'hpf',
       input: 'one',
@@ -49,26 +69,6 @@ module.exports = {
     },
     {
       path: 'src/generated/{kebab}/rest/dtos/{kebab}-create-body.dto.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/common/index.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/common/services/index.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/common/services/{kebab}-database.service.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/common/services/{kebab}.service.ts',
       engine: 'hpf',
       input: 'one',
     },
