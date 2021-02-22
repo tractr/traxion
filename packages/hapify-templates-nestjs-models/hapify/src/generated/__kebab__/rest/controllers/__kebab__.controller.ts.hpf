@@ -21,20 +21,20 @@ import {
   // <<Model pascal>>DeleteParamsDto,
 } from '../dtos';
 import { <<Model pascal>>RestDtoService } from '../services';
-
+ 
 @Controller(['<<Model kebab>>', 'admin/<<Model kebab>>'])
 export class <<Model pascal>>Controller {
   constructor(
     private <<Model camel>>Service: <<Model pascal>>Service,
     private <<Model camel>>RestDtoService: <<Model pascal>>RestDtoService
   ) {}
-
+ 
   @Post()
   public async create(@Body() bodyDto: <<Model pascal>>CreateBodyDto): Promise<<<Model pascal>>> {
     const formatedParams = this.<<Model camel>>RestDtoService.formatCreateDto(bodyDto);
     return this.<<Model camel>>Service.create(formatedParams);
   }
-
+ 
   // @Get()
   // public async findMany(
   //   @Query() queryDto: <<Model pascal>>FindManyQueryDto
@@ -42,13 +42,13 @@ export class <<Model pascal>>Controller {
   //   const formatedParams = this.<<Model camel>>RestDtoService.formatFindManyDto(queryDto);
   //   return this.<<Model camel>>Service.findMany(formatedParams);
   // }
-
+ 
   // @Get('count')
   // public async count(@Query() queryDto: <<Model pascal>>CountQueryDto): Promise<number> {
   //   const formatedParams = this.<<Model camel>>RestDtoService.formatCountDto(queryDto);
   //   return this.<<Model camel>>Service.count(formatedParams);
   // }
-
+ 
   // @Get(':id')
   // public async findOne(
   //   @Param() paramsDto: <<Model pascal>>FindUniqueParamsDto,
@@ -60,7 +60,7 @@ export class <<Model pascal>>Controller {
   //   );
   //   return this.<<Model camel>>Service.findUnique(formatedParams);
   // }
-
+ 
   // @Put(':id')
   // public async update(
   //   @Param() paramsDto: <<Model pascal>>UpdateParamsDto,
@@ -72,7 +72,7 @@ export class <<Model pascal>>Controller {
   //   );
   //   return this.<<Model camel>>Service.update(formatedParams);
   // }
-
+ 
   // @Delete(':id')
   // public async delete(@Param() paramsDto: <<Model pascal>>DeleteParamsDto): Promise<<<Model pascal>>> {
   //   const formatedParams = this.<<Model camel>>RestDtoService.formatDeleteDto(paramsDto);
