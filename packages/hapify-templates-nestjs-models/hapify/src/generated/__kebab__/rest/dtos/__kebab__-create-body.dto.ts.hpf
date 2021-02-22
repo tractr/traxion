@@ -1,29 +1,36 @@
 import { InputType } from '@nestjs/graphql';
+<<if Fields enum>>
+import {
+  <<for Fields enum enumField>>
+  <<Model pascal>><<enumField pascal>>
+  <<endfor>>
+} from '@prisma/client';
+<<endif>>
 
 <<if Fields not internal>>
 import {  
   <<if Fields boolean and not internal>>
-    IsBoolean, 
+  IsBoolean, 
   <<endif>>
 
   <<if Fields string or entity or enum and not internal>>
-    IsString,
+  IsString,
   <<endif>>
 
   <<if Fields enum and not internal>>
-    IsIn,
+  IsIn,
   <<endif>>
 
   <<if Fields email and not internal>>
-    IsEmail, 
+  IsEmail, 
   <<endif>>
 
   <<if Fields number or datetime and not internal>>
-    IsNumber,
+  IsNumber,
   <<endif>>
 
   <<if Fields nullable and not internal>>
-    IsOptional,
+  IsOptional,
   <<endif>>
 
 } from 'class-validator';
@@ -31,36 +38,33 @@ import {
  
 @InputType()
 export class <<Model pascal>>CreateBodyDto {
-<<for Fields not internal f>>
-  <<if f boolean>>
-    @IsBoolean() 
+<<for Fields not internal field>>
+  <<if field boolean>>
+  @IsBoolean(<<=listModifier(field)>>) 
   <<endif>>
 
-  <<if f string or enum>>
-    @IsString() 
+  <<if field string or enum or entity>>
+  @IsString(<<=listModifier(field)>>) 
   <<endif>>
 
-  <<if f string or enum>>
-    @IsIn([]) 
+  <<if field enum>>
+  @IsIn([Object.values(<<Model pascal>><<field pascal>>)],<<=listModifier(field)>>) 
   <<endif>>
 
-  <<if f email>>
-    @IsEmail() 
+  <<if field email>>
+  @IsEmail({}, <<=listModifier(field)>>) 
   <<endif>>
 
-  <<if f number or datetime>>
-    @IsNumber()
+  <<if field number or datetime>>
+  @IsNumber({}, <<=listModifier(field)>>)
   <<endif>>
 
-  <<if f entity>>
-    @IsString()
+  <<if field nullable>>
+  @IsOptional()
   <<endif>>
 
-  <<if f nullable>>
-    @IsOptional()
-  <<endif>>
-
-  <<=typedProperty(f)>>
+  <<=typedProperty(field)>>
+   
 <<endfor>>
 }
 
@@ -71,7 +75,7 @@ function typedProperty(f) {
   out += ": "
   if (f.type === "boolean") out += "boolean";
   else if (f.type === "string") out += "string";
-  else if (f.type === "enum") out += "string";
+  else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;
   else if (f.type === "number") out += "number";
   else if (f.type === "datetime") out += "number | Date";
   else if (f.type === "entity") {
@@ -80,6 +84,13 @@ function typedProperty(f) {
   if (f.multiple) out += "[]";
   out += ";";
   return out;
+}
+>>>
+
+<<<
+function listModifier(f) {
+  if (f.multiple) return "{ each: true}";
+  else return "";
 }
 >>>
 
