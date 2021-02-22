@@ -97,6 +97,11 @@
       "input": "one"
     },
     {
+      "path": "src/generated/{kebab}/rest/dtos/{kebab}-find-many-query.dto.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
       "path": "prisma/schemas/generated.prisma",
       "engine": "hpf",
       "input": "all"
