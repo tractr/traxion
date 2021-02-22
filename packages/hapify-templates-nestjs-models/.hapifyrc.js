@@ -72,5 +72,10 @@ module.exports = {
       engine: 'hpf',
       input: 'one',
     },
+    {
+      path: 'src/generated/{kebab}/rest/dtos/{kebab}-find-many-query.dto.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
   ],
 };
