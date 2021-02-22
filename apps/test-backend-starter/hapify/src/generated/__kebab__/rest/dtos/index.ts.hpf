@@ -1,4 +1,4 @@
 export * from './<<Model kebab>>-create-body.dto';
-//export * from './<<Model kebab>>-read-many.dto';
+export * from './<<Model kebab>>-find-many-query.dto';
 //export * from './<<Model kebab>>-read-one.dto';
 //export * from './<<Model kebab>>-update.dto';
