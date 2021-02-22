@@ -1,6 +1,0 @@
-export * from './models.module';
-
-<<for Models m>>
-export * from './<<m kebab>>';
-<<endfor>>
-
