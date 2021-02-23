@@ -3,7 +3,7 @@ import { User } from '@prisma/client';
 import { Request } from 'express';
 import { CurrentUser } from '../decorators';
 import { AccessTokenDto } from '../dtos';
-import { JwtAuthGuard, LocalAuthGuard } from '../guards';
+import { LocalAuthGuard } from '../guards';
 import { AuthService } from '../services';
 
 @Controller()
@@ -16,7 +16,6 @@ export class LoginController {
     return this.authService.login(req.user as User);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('me')
   getProfile(@CurrentUser() user: User): User {
     return user;

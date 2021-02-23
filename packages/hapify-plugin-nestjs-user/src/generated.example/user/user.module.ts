@@ -1,17 +1,14 @@
-import {
-  DynamicModule,
-  ForwardReference,
-  Provider,
-  Type,
-} from '@nestjs/common';
-import {
-  UserRestModuleControllersList,
-  UserRestModuleImportsList,
-  UserRestModuleProvidersList,
-} from './rest';
+import { Module } from '@nestjs/common';
+import { ModuleOverride } from '../common/helpers/base-module.helper';
+import { DatabaseModule } from '../../core/database';
+import { UserRestModule } from './rest';
 
-export const UserModuleImportsList: Array<
-  Type | DynamicModule | Promise<DynamicModule> | ForwardReference
-> = UserRestModuleImportsList;
-export const UserModuleProvidersList: Provider[] = UserRestModuleProvidersList;
-export const UserModuleControllersList: Type[] = UserRestModuleControllersList;
+@Module({
+  imports: [DatabaseModule],
+})
+export class UserModule extends ModuleOverride {
+  static dependencies: Array<typeof ModuleOverride> = [
+    UserRestModule,
+    UserModule,
+  ];
+}
