@@ -1,0 +1,17 @@
+PRIMARY
+---------------------------------------------------------
+-> améliorer la validation des champs primary
+-> gérer les champs primary 'uuid string' ET 'autoincrement number'?
+
+REALTIONS
+---------------------------------------------------------
+-> gérer les includes pour les routes de lecture
+
+
+NE PAS OUBLIER
+---------------------------------------------------------
+-> Mettre à jour backend-starter
+  -> README
+  -> Docker-compose
+  -> prisma-base
+  -> dépendances

@@ -1,0 +1,4 @@
+<<if Fields entity>>
+export class <<Model pascal>>FindUniqueQueryDto {}
+<<endif>>
+
