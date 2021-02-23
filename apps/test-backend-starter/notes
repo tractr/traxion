@@ -1,22 +1,22 @@
-
-PATCH and PUT
+SORT and PAGINATION
 ---------------------------------------------------------
--> add a PUT route to templates
+-> ajouter les sort à la route findMany
+-> ajouter la pagination à la route findMany
 
 VALIDATION
 ---------------------------------------------------------
 -> string
   xx default
   xx email
-  -> password
-  -> url
+  xx password
+  xx url
   -> text
   -> rich text
 
--> number
-  -> integer
+xx number
+  xx integer
   -> float
-  -> lattitude
+  -> latitude
   -> longitude
 
 -> datetime
@@ -36,7 +36,7 @@ VALIDATION
   -> Nto1
   -> NtoM
 
--> array
+xx array
 -> boolean
 -> enum
 -> object
@@ -53,4 +53,4 @@ NE PAS OUBLIER
 -> Ajouter des commentaires dans les templates
 -> Mettre en place les unit tests
 -> wrapper tout le code généré dans un namespace
--> Gestion des 404
+-> Gestion des 404 et des conflits

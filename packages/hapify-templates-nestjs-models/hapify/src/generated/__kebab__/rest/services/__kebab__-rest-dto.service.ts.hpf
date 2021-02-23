@@ -22,7 +22,21 @@ export class <<Model pascal>>RestDtoService {
   }
     
   public formatCountDto(queryDto: <<Model pascal>>CountQueryDto): Prisma.<<Model pascal>>CountArgs {
-    return { where: { ...queryDto } };
+    const {
+    <<for Fields searchable field>>
+      <<field camel>>,
+    <<endfor>>
+    } = queryDto;
+    const where: Prisma.UserWhereInput = {
+    <<for Fields searchable field>>
+      <<if field multiple>>
+      <<field camel>>: <<field camel>> ? { hasSome: <<field camel>> } : undefined,
+      <<else>>
+      <<field camel>>,
+      <<endif>>
+    <<endfor>>
+    }
+    return { where };
   }
  
   public formatFindUniqueDtos(
@@ -43,7 +57,21 @@ export class <<Model pascal>>RestDtoService {
   public formatFindManyDto(
     queryDto: <<Model pascal>>FindManyQueryDto
   ): Prisma.<<Model pascal>>FindManyArgs {
-    return { where: { ...queryDto } };
+    const {
+    <<for Fields searchable field>>
+      <<field camel>>,
+    <<endfor>>
+    } = queryDto;
+    const where: Prisma.UserWhereInput = {
+    <<for Fields searchable field>>
+      <<if field multiple>>
+      <<field camel>>: <<field camel>> ? { hasSome: <<field camel>> } : undefined,
+      <<else>>
+      <<field camel>>,
+      <<endif>>
+    <<endfor>>
+    }
+    return { where };
   }
     
   public formatUpdateDtos(
