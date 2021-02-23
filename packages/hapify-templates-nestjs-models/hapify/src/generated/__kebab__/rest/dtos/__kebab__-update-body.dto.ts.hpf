@@ -35,7 +35,7 @@ import {
 } from 'class-validator';
 <<endif>>
  
-export class <<Model pascal>>CreateBodyDto {
+export class <<Model pascal>>UpdateBodyDto {
 <<for Fields not internal field>>
   <<if field boolean>>
   @IsBoolean(<<=listModifier(field)>>) 
@@ -61,16 +61,15 @@ export class <<Model pascal>>CreateBodyDto {
   @IsOptional()
   <<endif>>
 
-  <<=typedProperty(field)>>
+  <<=optionalTypedProperty(field)>>
    
 <<endfor>>
 }
 
 <<<
-function typedProperty(f) {
+function optionalTypedProperty(f) {
   let out = f.names.camel;
-  out += f.nullable ? "?" : "!";
-  out += ": "
+  out += "?: "
   if (f.type === "boolean") out += "boolean";
   else if (f.type === "string") out += "string";
   else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;

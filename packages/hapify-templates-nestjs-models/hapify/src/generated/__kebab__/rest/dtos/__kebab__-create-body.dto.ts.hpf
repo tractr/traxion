@@ -1,4 +1,3 @@
-import { InputType } from '@nestjs/graphql';
 <<if Fields enum>>
 import {
   <<for Fields enum enumField>>
@@ -36,7 +35,6 @@ import {
 } from 'class-validator';
 <<endif>>
  
-@InputType()
 export class <<Model pascal>>CreateBodyDto {
 <<for Fields not internal field>>
   <<if field boolean>>

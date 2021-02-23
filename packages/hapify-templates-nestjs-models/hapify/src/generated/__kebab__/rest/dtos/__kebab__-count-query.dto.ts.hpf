@@ -1,5 +1,3 @@
-import { ArgsType } from '@nestjs/graphql';
-
 <<if Fields enum>>
 import {
   <<for Fields enum enumField>>
@@ -32,8 +30,7 @@ import {
   <<endif>>
 
 } from 'class-validator';
-
-@ArgsType()
+ 
 export class <<Model pascal>>CountQueryDto {
 <<for Fields searchable field>>
   <<if field boolean>>

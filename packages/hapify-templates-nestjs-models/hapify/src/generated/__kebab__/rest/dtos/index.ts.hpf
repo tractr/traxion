@@ -5,5 +5,6 @@ export * from './<<Model kebab>>-find-unique-query.dto';
 <<endif>>
 export * from './<<Model kebab>>-find-many-query.dto';
 export * from './<<Model kebab>>-count-query.dto';
-//export * from './<<Model kebab>>-read-one.dto';
-//export * from './<<Model kebab>>-update.dto';
+export * from './<<Model kebab>>-update-params.dto';
+export * from './<<Model kebab>>-update-body.dto';
+export * from './<<Model kebab>>-delete-params.dto';
