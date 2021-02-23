@@ -1,11 +1,11 @@
 import {
   Body,
   Controller,
-  // Delete,
+  Delete,
   Get,
   Param,
   Post,
-  // Put,
+  Put,
   Query,
 } from '@nestjs/common';
 import { <<Model pascal>> } from '@prisma/client';
@@ -17,10 +17,10 @@ import {
   <<Model pascal>>FindUniqueQueryDto,
   <<endif>>
   <<Model pascal>>FindManyQueryDto,
-  // <<Model pascal>>UpdateParamsDto,
-  // <<Model pascal>>UpdateBodyDto,
+  <<Model pascal>>UpdateParamsDto,
+  <<Model pascal>>UpdateBodyDto,
   <<Model pascal>>CountQueryDto,
-  // <<Model pascal>>DeleteParamsDto,
+  <<Model pascal>>DeleteParamsDto,
 } from '../dtos';
 import { <<Model pascal>>RestDtoService } from '../services';
  
@@ -67,21 +67,21 @@ export class <<Model pascal>>Controller {
     return this.<<Model camel>>Service.findUnique(formatedParams);
   }
  
-  // @Put(':id')
-  // public async update(
-  //   @Param() paramsDto: <<Model pascal>>UpdateParamsDto,
-  //   @Body() bodyDto: <<Model pascal>>UpdateBodyDto
-  // ): Promise<<<Model pascal>>> {
-  //   const formatedParams = this.<<Model camel>>RestDtoService.formatUpdateDtos(
-  //     paramsDto,
-  //     bodyDto
-  //   );
-  //   return this.<<Model camel>>Service.update(formatedParams);
-  // }
+  @Put(':id')
+  public async update(
+    @Param() paramsDto: <<Model pascal>>UpdateParamsDto,
+    @Body() bodyDto: <<Model pascal>>UpdateBodyDto
+  ): Promise<<<Model pascal>>> {
+    const formatedParams = this.<<Model camel>>RestDtoService.formatUpdateDtos(
+      paramsDto,
+      bodyDto
+    );
+    return this.<<Model camel>>Service.update(formatedParams);
+  }
  
-  // @Delete(':id')
-  // public async delete(@Param() paramsDto: <<Model pascal>>DeleteParamsDto): Promise<<<Model pascal>>> {
-  //   const formatedParams = this.<<Model camel>>RestDtoService.formatDeleteDto(paramsDto);
-  //   return this.<<Model camel>>Service.delete(formatedParams);
-  // }
+  @Delete(':id')
+  public async delete(@Param() paramsDto: <<Model pascal>>DeleteParamsDto): Promise<<<Model pascal>>> {
+    const formatedParams = this.<<Model camel>>RestDtoService.formatDeleteDto(paramsDto);
+    return this.<<Model camel>>Service.delete(formatedParams);
+  }
 }
