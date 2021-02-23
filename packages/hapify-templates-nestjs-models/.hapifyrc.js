@@ -77,5 +77,10 @@ module.exports = {
       engine: 'hpf',
       input: 'one',
     },
+    {
+      path: 'src/generated/{kebab}/rest/dtos/{kebab}-count-query.dto.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
   ],
 };

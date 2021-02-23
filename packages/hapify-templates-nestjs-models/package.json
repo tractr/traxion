@@ -14,7 +14,8 @@
   "dependencies": {},
   "devDependencies": {},
   "peerDependencies": {
-    "class-validator": "^0.13.0"
+    "class-validator": "^0.13.0",
+    "class-transformer": "^0.4.0"
   },
   "publishConfig": {
     "access": "restricted",

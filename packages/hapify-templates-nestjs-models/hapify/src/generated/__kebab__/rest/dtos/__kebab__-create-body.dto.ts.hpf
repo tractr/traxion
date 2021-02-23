@@ -48,7 +48,7 @@ export class <<Model pascal>>CreateBodyDto {
   <<endif>>
 
   <<if field enum>>
-  @IsIn([Object.values(<<Model pascal>><<field pascal>>)],<<=listModifier(field)>>) 
+  @IsIn(Object.values(<<Model pascal>><<field pascal>>),<<=listModifier(field)>>) 
   <<endif>>
 
   <<if field email>>

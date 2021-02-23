@@ -5,7 +5,7 @@
 In order to run the backend properly, there is some few initialisation steps that you
 must follow:
 
-- Install the dependencies: run `npm i --` at the root of the repository.
+- Install the dependencies: run `npm i --legacy-peer-deps` at the root of the repository.
 - Move in the apps/test-backend-start folder: `cd apps/test-backend-starter`.
 - Generate hapify configuration: run `npm run hpf:generate:config`.
 - Generate boilerplate code: run `npm run hpf:generate`.
