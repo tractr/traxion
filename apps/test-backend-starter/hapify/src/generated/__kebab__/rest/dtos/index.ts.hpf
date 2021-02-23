@@ -1,4 +1,8 @@
 export * from './<<Model kebab>>-create-body.dto';
+export * from './<<Model kebab>>-find-unique-params.dto';
+<<if Fields entity>>
+export * from './<<Model kebab>>-find-unique-query.dto';
+<<endif>>
 export * from './<<Model kebab>>-find-many-query.dto';
 export * from './<<Model kebab>>-count-query.dto';
 //export * from './<<Model kebab>>-read-one.dto';
