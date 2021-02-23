@@ -3,7 +3,7 @@ import {
   Controller,
   // Delete,
   Get,
-  // Param,
+  Param,
   Post,
   // Put,
   Query,
@@ -12,8 +12,10 @@ import { <<Model pascal>> } from '@prisma/client';
 import { <<Model pascal>>Service } from '../../common';
 import {
   <<Model pascal>>CreateBodyDto,
-  // <<Model pascal>>FindUniqueParamsDto,
-  // <<Model pascal>>FindUniqueQueryDto,
+  <<Model pascal>>FindUniqueParamsDto,
+  <<if Fields entity>>
+  <<Model pascal>>FindUniqueQueryDto,
+  <<endif>>
   <<Model pascal>>FindManyQueryDto,
   // <<Model pascal>>UpdateParamsDto,
   // <<Model pascal>>UpdateBodyDto,
@@ -49,17 +51,21 @@ export class <<Model pascal>>Controller {
     return this.<<Model camel>>Service.count(formatedParams);
   }
  
-  // @Get(':id')
-  // public async findOne(
-  //   @Param() paramsDto: <<Model pascal>>FindUniqueParamsDto,
-  //   @Query() queryDto?: <<Model pascal>>FindUniqueQueryDto
-  // ): Promise<<<Model pascal>> | null> {
-  //   const formatedParams = this.<<Model camel>>RestDtoService.formatFindUniqueDtos(
-  //     paramsDto,
-  //     queryDto
-  //   );
-  //   return this.<<Model camel>>Service.findUnique(formatedParams);
-  // }
+  @Get(':id')
+  public async findOne(
+    @Param() paramsDto: <<Model pascal>>FindUniqueParamsDto,
+    <<if Fields entity>>
+    @Query() queryDto?: <<Model pascal>>FindUniqueQueryDto
+    <<endif>>
+  ): Promise<<<Model pascal>> | null> {
+    const formatedParams = this.<<Model camel>>RestDtoService.formatFindUniqueDtos(
+      paramsDto,
+    <<if Fields entity>>
+      queryDto
+    <<endif>>
+    );
+    return this.<<Model camel>>Service.findUnique(formatedParams);
+  }
  
   // @Put(':id')
   // public async update(
