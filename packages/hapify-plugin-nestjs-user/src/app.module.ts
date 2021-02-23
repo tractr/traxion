@@ -6,13 +6,12 @@ import { UserService } from './generated.example/user';
 
 @Module({
   imports: [
-    AuthenticationModule,
-    ModelsModule.register([
-      {
-        provide: UserService,
-        useClass: UserCustomService,
-      },
-    ]),
+    ModelsModule.register({
+      providers: [{ provide: UserService, useClass: UserCustomService }],
+    }),
+    AuthenticationModule.register({
+      providers: [{ provide: UserService, useClass: UserCustomService }],
+    }),
   ],
   controllers: [],
   providers: [],
