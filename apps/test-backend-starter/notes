@@ -15,3 +15,8 @@ NE PAS OUBLIER
   -> Docker-compose
   -> prisma-base
   -> dépendances
+
+-> Ajouter des commentaires dans les templates
+-> Mettre en place les unit tests
+-> wrapper tout le code généré dans un namespace
+-> Gestion des 404
