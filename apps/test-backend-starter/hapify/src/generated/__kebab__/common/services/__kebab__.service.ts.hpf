@@ -28,6 +28,10 @@ export class <<Model pascal>>Service {
     return this.<<Model camel>>DatabaseService.update(params);
   }
  
+  public async upsert(params: Prisma.<<Model pascal>>UpsertArgs): Promise< <<Model pascal>> > {
+    return this.<<Model camel>>DatabaseService.upsert(params);
+  }
+ 
   public async delete(params: Prisma.<<Model pascal>>DeleteArgs): Promise< <<Model pascal>> > {
     return this.<<Model camel>>DatabaseService.delete(params);
   }

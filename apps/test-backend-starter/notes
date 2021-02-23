@@ -1,11 +1,45 @@
-PRIMARY
----------------------------------------------------------
--> améliorer la validation des champs primary
--> gérer les champs primary 'uuid string' ET 'autoincrement number'?
 
-REALTIONS
+PATCH and PUT
 ---------------------------------------------------------
--> gérer les includes pour les routes de lecture
+-> add a PUT route to templates
+
+VALIDATION
+---------------------------------------------------------
+-> string
+  xx default
+  xx email
+  -> password
+  -> url
+  -> text
+  -> rich text
+
+-> number
+  -> integer
+  -> float
+  -> lattitude
+  -> longitude
+
+-> datetime
+  -> default
+  -> date
+  -> time
+
+-> file
+  ->image
+  -> audio
+  -> video
+  -> document
+
+-> entity
+  -> 1to1
+  -> 1toN
+  -> Nto1
+  -> NtoM
+
+-> array
+-> boolean
+-> enum
+-> object
 
 
 NE PAS OUBLIER
