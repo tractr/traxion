@@ -34,7 +34,7 @@ import {
 } from 'class-validator';
 
 @ArgsType()
-export class <<Model pascal>>FindManyQueryDto {
+export class <<Model pascal>>CountQueryDto {
 <<for Fields searchable field>>
   <<if field boolean>>
   @IsBoolean(<<=listModifier(field)>>) 

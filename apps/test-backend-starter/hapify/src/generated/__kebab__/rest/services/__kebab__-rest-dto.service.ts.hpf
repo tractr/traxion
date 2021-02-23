@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import {
-  // <<Model pascal>>CountQueryDto,
+  <<Model pascal>>CountQueryDto,
   <<Model pascal>>CreateBodyDto,
   <<Model pascal>>FindManyQueryDto,
   // <<Model pascal>>FindUniqueParamsDto,
@@ -17,11 +17,11 @@ export class <<Model pascal>>RestDtoService {
     return { data: { ...bodyDto } };
   }
    
-//
-//  public formatCountDto(queryDto: <<Model pascal>>CountQueryDto): Prisma.<<Model pascal>>CountArgs {
-//    return { where: { ...queryDto } };
-//  }
-//
+
+  public formatCountDto(queryDto: <<Model pascal>>CountQueryDto): Prisma.<<Model pascal>>CountArgs {
+    return { where: { ...queryDto } };
+  }
+
  
   // public formatFindUniqueDtos(
   //   paramsDto: <<Model pascal>>FindUniqueParamsDto,

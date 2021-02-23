@@ -17,7 +17,7 @@ import {
   <<Model pascal>>FindManyQueryDto,
   // <<Model pascal>>UpdateParamsDto,
   // <<Model pascal>>UpdateBodyDto,
-  // <<Model pascal>>CountQueryDto,
+  <<Model pascal>>CountQueryDto,
   // <<Model pascal>>DeleteParamsDto,
 } from '../dtos';
 import { <<Model pascal>>RestDtoService } from '../services';
@@ -43,11 +43,11 @@ export class <<Model pascal>>Controller {
     return this.<<Model camel>>Service.findMany(formatedParams);
   }
  
-  // @Get('count')
-  // public async count(@Query() queryDto: <<Model pascal>>CountQueryDto): Promise<number> {
-  //   const formatedParams = this.<<Model camel>>RestDtoService.formatCountDto(queryDto);
-  //   return this.<<Model camel>>Service.count(formatedParams);
-  // }
+  @Get('count')
+  public async count(@Query() queryDto: <<Model pascal>>CountQueryDto): Promise<number> {
+    const formatedParams = this.<<Model camel>>RestDtoService.formatCountDto(queryDto);
+    return this.<<Model camel>>Service.count(formatedParams);
+  }
  
   // @Get(':id')
   // public async findOne(
