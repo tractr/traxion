@@ -5,7 +5,7 @@ import { <<Model pascal>>DatabaseService } from './<<Model kebab>>-database.serv
 @Injectable()
 export class <<Model pascal>>Service {
   constructor(private readonly <<Model camel>>DatabaseService: <<Model pascal>>DatabaseService) {}
-
+ 
   public async create(params: Prisma.<<Model pascal>>CreateArgs): Promise< <<Model pascal>> > {
     return this.<<Model camel>>DatabaseService.create(params);
   }
