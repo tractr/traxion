@@ -28,12 +28,14 @@ import {
   IsNumber,
   <<endif>>
 
+  <<if Fields nullable and not internal>>
   IsOptional,
+  <<endif>>
 
 } from 'class-validator';
 <<endif>>
  
-export class <<Model pascal>>UpdateBodyDto {
+export class <<Model pascal>>UpsertBodyDto {
 <<for Fields not internal field>>
   <<if field boolean>>
   @IsBoolean(<<=listModifier(field)>>) 
@@ -55,7 +57,10 @@ export class <<Model pascal>>UpdateBodyDto {
   @IsNumber({}, <<=listModifier(field)>>)
   <<endif>>
 
+  <<if field nullable>>
   @IsOptional()
+  <<endif>>
+
   <<=optionalTypedProperty(field)>>
    
 <<endfor>>
@@ -64,7 +69,8 @@ export class <<Model pascal>>UpdateBodyDto {
 <<<
 function optionalTypedProperty(f) {
   let out = f.names.camel;
-  out += "?: "
+  out += f.nullable ? "?" : "!";
+  out += ": "
   if (f.type === "boolean") out += "boolean";
   else if (f.type === "string") out += "string";
   else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;

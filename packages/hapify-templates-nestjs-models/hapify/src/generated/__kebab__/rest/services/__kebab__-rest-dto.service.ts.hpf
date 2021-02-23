@@ -10,9 +10,11 @@ import {
   <<endif>>
   <<Model pascal>>UpdateBodyDto,
   <<Model pascal>>UpdateParamsDto,
+  <<Model pascal>>UpsertBodyDto,
+  <<Model pascal>>UpsertParamsDto,
   <<Model pascal>>DeleteParamsDto,
 } from '../dtos';
-
+  
 @Injectable()
 export class <<Model pascal>>RestDtoService {
   public formatCreateDto(bodyDto: <<Model pascal>>CreateBodyDto): Prisma.<<Model pascal>>CreateArgs {
@@ -49,6 +51,17 @@ export class <<Model pascal>>RestDtoService {
     bodyDto: <<Model pascal>>UpdateBodyDto
   ): Prisma.<<Model pascal>>UpdateArgs {
     return { data: { ...bodyDto }, where: { ...paramsDto } };
+  }
+    
+  public formatUpsertDtos(
+    paramsDto: <<Model pascal>>UpsertParamsDto,
+    bodyDto: <<Model pascal>>UpsertBodyDto
+  ): Prisma.<<Model pascal>>UpsertArgs {
+    return { 
+      create: { ...bodyDto },
+      update: { ...bodyDto },
+      where: { ...paramsDto } 
+    };
   }
   
   public formatDeleteDto(
