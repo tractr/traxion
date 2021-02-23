@@ -23,6 +23,7 @@
     "prisma:generate": "prisma generate",
     "prisma:merge-schema": "prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
     "prisma:migrate": "prisma migrate dev --preview-feature",
+    "prisma:reset": "prisma reset",
     "start": "nest start",
     "start:debug": "nest start --debug --watch",
     "start:dev": "nest start --watch",

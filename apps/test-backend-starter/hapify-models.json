@@ -88,6 +88,24 @@
             "searchable",
             "sortable"
           ]
+        },
+        {
+          "name": "blogUrl",
+          "type": "string",
+          "subtype": "url",
+          "properties": [
+            "searchable",
+            "sortable"
+          ]
+        },
+        {
+          "name": "list",
+          "type": "string",
+          "properties": [
+            "multiple",
+            "searchable",
+            "sortable"
+          ]
         }
       ]
     }

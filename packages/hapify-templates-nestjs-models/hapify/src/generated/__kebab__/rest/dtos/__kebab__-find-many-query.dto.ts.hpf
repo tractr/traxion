@@ -25,6 +25,10 @@ import {
   IsEmail, 
   <<endif>>
 
+  <<if Fields url and searchable>>
+  IsUrl, 
+  <<endif>>
+
   <<if Fields (number or datetime) and searchable>>
   IsNumber,
   <<endif>>
@@ -32,7 +36,7 @@ import {
 } from 'class-validator';
  
 export class <<Model pascal>>FindManyQueryDto {
-<<for Fields searchable field>>
+<<for Fields searchable and not password field>>
   <<if field boolean>>
   @IsBoolean(<<=listModifier(field)>>) 
   <<endif>>
@@ -47,6 +51,10 @@ export class <<Model pascal>>FindManyQueryDto {
 
   <<if field email>>
   @IsEmail({}, <<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field url>>
+  @IsUrl({}, <<=listModifier(field)>>) 
   <<endif>>
 
   <<if field number or datetime>>
