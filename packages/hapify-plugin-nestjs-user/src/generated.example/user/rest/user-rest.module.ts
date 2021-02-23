@@ -1,11 +1,17 @@
+import { Module } from '@nestjs/common';
+
 import { DatabaseModule } from '../../../core/database';
-import { UserModelModuleProvidersList } from '../common';
 import { UserRestDtoService } from './services';
 import { UserController } from './controllers';
+import { ModuleOverride } from '../../common/helpers/base-module.helper';
+import { UserModelModule } from '../common';
 
-export const UserRestModuleImportsList = [DatabaseModule];
-export const UserRestModuleProvidersList = [
-  UserRestDtoService,
-  ...UserModelModuleProvidersList,
-];
-export const UserRestModuleControllersList = [UserController];
+@Module({
+  imports: [DatabaseModule],
+  exports: [UserRestDtoService],
+  providers: [UserRestDtoService],
+  controllers: [UserController],
+})
+export class UserRestModule extends ModuleOverride {
+  static dependencies = [UserModelModule];
+}
