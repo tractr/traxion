@@ -92,5 +92,20 @@ module.exports = {
       engine: 'hpf',
       input: 'one',
     },
+    {
+      path: 'src/generated/{kebab}/rest/dtos/{kebab}-update-params.dto.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'src/generated/{kebab}/rest/dtos/{kebab}-update-body.dto.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'src/generated/{kebab}/rest/dtos/{kebab}-delete-params.dto.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
   ],
 };
