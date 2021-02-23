@@ -102,6 +102,11 @@
       "input": "one"
     },
     {
+      "path": "src/generated/{kebab}/rest/dtos/{kebab}-count-query.dto.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
       "path": "prisma/schemas/generated.prisma",
       "engine": "hpf",
       "input": "all"
