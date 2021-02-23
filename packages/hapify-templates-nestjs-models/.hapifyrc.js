@@ -103,6 +103,16 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'src/generated/{kebab}/rest/dtos/{kebab}-upsert-params.dto.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'src/generated/{kebab}/rest/dtos/{kebab}-upsert-body.dto.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'src/generated/{kebab}/rest/dtos/{kebab}-delete-params.dto.ts',
       engine: 'hpf',
       input: 'one',

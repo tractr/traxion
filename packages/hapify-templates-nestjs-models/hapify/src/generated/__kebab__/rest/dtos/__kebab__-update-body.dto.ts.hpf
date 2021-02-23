@@ -28,9 +28,7 @@ import {
   IsNumber,
   <<endif>>
 
-  <<if Fields nullable and not internal>>
   IsOptional,
-  <<endif>>
 
 } from 'class-validator';
 <<endif>>
@@ -57,10 +55,7 @@ export class <<Model pascal>>UpdateBodyDto {
   @IsNumber({}, <<=listModifier(field)>>)
   <<endif>>
 
-  <<if field nullable>>
   @IsOptional()
-  <<endif>>
-
   <<=optionalTypedProperty(field)>>
    
 <<endfor>>

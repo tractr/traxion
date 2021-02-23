@@ -7,4 +7,6 @@ export * from './<<Model kebab>>-find-many-query.dto';
 export * from './<<Model kebab>>-count-query.dto';
 export * from './<<Model kebab>>-update-params.dto';
 export * from './<<Model kebab>>-update-body.dto';
+export * from './<<Model kebab>>-upsert-params.dto';
+export * from './<<Model kebab>>-upsert-body.dto';
 export * from './<<Model kebab>>-delete-params.dto';

@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Query,
@@ -19,6 +20,8 @@ import {
   <<Model pascal>>FindManyQueryDto,
   <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpdateBodyDto,
+  <<Model pascal>>UpsertParamsDto,
+  <<Model pascal>>UpsertBodyDto,
   <<Model pascal>>CountQueryDto,
   <<Model pascal>>DeleteParamsDto,
 } from '../dtos';
@@ -67,7 +70,7 @@ export class <<Model pascal>>Controller {
     return this.<<Model camel>>Service.findUnique(formatedParams);
   }
  
-  @Put(':id')
+  @Patch(':id')
   public async update(
     @Param() paramsDto: <<Model pascal>>UpdateParamsDto,
     @Body() bodyDto: <<Model pascal>>UpdateBodyDto
@@ -77,6 +80,18 @@ export class <<Model pascal>>Controller {
       bodyDto
     );
     return this.<<Model camel>>Service.update(formatedParams);
+  }
+ 
+  @Put(':id')
+  public async upsert(
+    @Param() paramsDto: <<Model pascal>>UpsertParamsDto,
+    @Body() bodyDto: <<Model pascal>>UpsertBodyDto
+  ): Promise<<<Model pascal>>> {
+    const formatedParams = this.<<Model camel>>RestDtoService.formatUpsertDtos(
+      paramsDto,
+      bodyDto
+    );
+    return this.<<Model camel>>Service.upsert(formatedParams);
   }
  
   @Delete(':id')
