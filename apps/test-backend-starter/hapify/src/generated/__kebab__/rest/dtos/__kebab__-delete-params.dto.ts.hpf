@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
  
-export class <<Model pascal>>FindUniqueParamsDto {
+export class <<Model pascal>>DeleteParamsDto {
   @IsString()
   id!: string;
 }
