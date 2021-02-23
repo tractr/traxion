@@ -24,6 +24,14 @@ import {
   IsEmail, 
   <<endif>>
 
+  <<if Fields password and not internal>>
+  Matches, 
+  <<endif>>
+
+  <<if Fields url and not internal>>
+  IsUrl, 
+  <<endif>>
+
   <<if Fields number or datetime and not internal>>
   IsNumber,
   <<endif>>
@@ -49,6 +57,14 @@ export class <<Model pascal>>UpdateBodyDto {
 
   <<if field email>>
   @IsEmail({}, <<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field password>>
+  @Matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/, <<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field url>>
+  @IsUrl({}, <<=listModifier(field)>>) 
   <<endif>>
 
   <<if field number or datetime>>
