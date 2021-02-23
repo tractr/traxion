@@ -1,5 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Module } from '@nestjs/common';
+import { DatabaseModule } from '../../../core';
+import { ModuleOverride } from '../../common/helpers/base-module.helper';
 import { UserDatabaseService, UserService } from './services';
 
-export const UserModelModuleProvidersList = [UserService, UserDatabaseService];
-export const UserModelModuleExportsList = [UserService, UserDatabaseService];
+@Module({
+  imports: [DatabaseModule],
+  exports: [UserService, UserDatabaseService],
+  providers: [UserService, UserDatabaseService],
+})
+export class UserModelModule extends ModuleOverride {}
