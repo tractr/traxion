@@ -37,11 +37,11 @@ import {
 export class <<Model pascal>>FindManyQueryDto {
 <<for Fields searchable field>>
   <<if field boolean>>
-    @IsBoolean(<<=listModifier(field)>>) 
+  @IsBoolean(<<=listModifier(field)>>) 
   <<endif>>
 
   <<if field string or entity or enum>>
-    @IsString(<<=listModifier(field)>>) 
+  @IsString(<<=listModifier(field)>>) 
   <<endif>>
 
   <<if field enum>>
@@ -49,11 +49,11 @@ export class <<Model pascal>>FindManyQueryDto {
   <<endif>>
 
   <<if field email>>
-    @IsEmail({}, <<=listModifier(field)>>) 
+  @IsEmail({}, <<=listModifier(field)>>) 
   <<endif>>
 
   <<if field number or datetime>>
-    @IsNumber({},<<=listModifier(field)>>)
+  @IsNumber({},<<=listModifier(field)>>)
   <<endif>>
 
   @IsOptional()
