@@ -1,17 +1,20 @@
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+import { UserService } from '../../generated.example/user';
+import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
+// import { PassportAuthModuleOptions } from '../config';
 import { AccessTokenDto } from '../dtos';
 import { UserNotFoundError, BadPasswordError } from '../errors';
-import { UserCustomService } from './user-customservice';
+import { AuthenticationOptions } from '../interfaces';
 
 @Injectable()
-export class AuthService {
+export class AuthenticationService {
   constructor(
-    private readonly configService: ConfigService,
-    private readonly userService: UserCustomService,
+    @Inject(AUTHENTICATION_MODULE_OPTIONS)
+    private readonly authenticationOptions: AuthenticationOptions,
+    private readonly userService: UserService,
     private readonly jwtService: JwtService
   ) {}
 
@@ -27,7 +30,8 @@ export class AuthService {
     login: string,
     password: string
   ): Promise<User | null> {
-    const loginField = this.configService.get<keyof User>('login.loginField');
+    const loginField =
+      this.authenticationOptions.strategy.local.usernameField ?? 'email';
     if (!loginField) throw new Error('loginField is not defined');
 
     const findOneWhere = {
@@ -49,7 +53,7 @@ export class AuthService {
 
   async hashPassword(password: string): Promise<string> {
     const salt = await bcrypt.genSalt(
-      this.configService.get<number>('login.password.saltLength')
+      this.authenticationOptions.login.saltRounds ?? 20
     );
     return bcrypt.hash(password, salt);
   }
@@ -58,13 +62,13 @@ export class AuthService {
     return bcrypt.compare(password, hash);
   }
 
-  public createUserJWT(user: User): string {
-    return this.jwtService.sign({ sub: user.id });
+  async createUserJWT(user: User): Promise<string> {
+    return this.jwtService.signAsync({ sub: user.id });
   }
 
   async login(user: User): Promise<AccessTokenDto> {
     return {
-      access_token: this.createUserJWT(user),
+      accessToken: await this.createUserJWT(user),
     };
   }
 }
