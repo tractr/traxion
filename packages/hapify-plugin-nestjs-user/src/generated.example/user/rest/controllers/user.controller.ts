@@ -22,7 +22,7 @@ import {
 } from '../dtos';
 import { UserRestDtoService } from '../services';
 
-@Controller(['user', 'admin/user'])
+@Controller(['user'])
 export class UserController {
   constructor(
     private userService: UserService,

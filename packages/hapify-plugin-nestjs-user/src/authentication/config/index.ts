@@ -1,1 +1,2 @@
-export * from './auth.config';
+export * from './jwt.config';
+export * from './passport.config';
