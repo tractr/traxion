@@ -1,23 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { JwtModuleOptions } from '@nestjs/jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { User } from '@prisma/client';
-import { ExtractJwt, Strategy } from 'passport-jwt';
+import { Strategy } from 'passport-jwt';
+import { UserService } from '../../generated.example/user';
 import { JwtTokenPayload } from '../dtos';
-import { UserCustomService } from '../services/user-customservice';
+import { StrategyOptionsService } from '../services';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
-    private readonly configService: ConfigService,
-    private readonly userService: UserCustomService
+    private readonly userService: UserService,
+    protected readonly strategyOptionsService: StrategyOptionsService
   ) {
-    super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ignoreExpiration: false,
-      secretOrKey: configService.get<JwtModuleOptions>('jwt')?.secret,
-    });
+    super(strategyOptionsService.createJwtStrategyOptions());
   }
 
   async validate(payload: JwtTokenPayload): Promise<User> {

@@ -1,49 +1,137 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { AUTHENTICATION_MODULE_OPTIONS } from './constants';
+import {
+  AuthenticationModuleOptionsFactory,
+  AUTHENTICATION_OPTIONS,
+} from './config/authentication.config';
+
 import { DatabaseModule, LogModule } from '../core';
-import { getAuthConfig } from './config';
 import { JwtAuthGuard } from './guards';
 import { LoginController } from './controllers';
-import { AuthService } from './services';
+import { AuthenticationService, StrategyOptionsService } from './services';
 import { JwtStrategy, LocalStrategy } from './strategies';
-import { UserCustomService } from './services/user-customservice';
-import { ModelsModule } from '../generated.example/models.module';
-import { UserModelModule, UserModule } from '../generated.example/user';
+import { UserModelModule } from '../generated.example/user';
+import { AuthenticationOptions } from './interfaces';
+import { AsyncOptions, ModuleOptionsHelper } from './module-options.helper';
 import { ModuleOverrideMetadata } from '../generated.example/common/helpers/base-module.helper';
 
-const { jwt, passport } = getAuthConfig();
-
 @Module({})
-export class AuthenticationModule {
+export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOptions>() {
+  static moduleOptionsProvide = AUTHENTICATION_MODULE_OPTIONS;
+
   static register(
-    options: ModuleOverrideMetadata = {},
-    models:
-      | typeof ModelsModule
-      | typeof UserModule
-      | typeof UserModelModule = UserModelModule
+    options: AuthenticationOptions = AUTHENTICATION_OPTIONS,
+    overrides: ModuleOverrideMetadata = {}
+  ): DynamicModule {
+    const moduleOptions = {
+      ...AUTHENTICATION_OPTIONS,
+      ...options,
+    };
+
+    const authenticationOptionsModule = super.register(moduleOptions);
+    return this.createAuthenticationModuleFromOptions(
+      authenticationOptionsModule,
+      overrides
+    );
+  }
+
+  static registerAsync(
+    options: AsyncOptions<AuthenticationOptions> = {
+      useClass: AuthenticationModuleOptionsFactory,
+    },
+    overrides: ModuleOverrideMetadata = {}
+  ): DynamicModule {
+    const authenticationOptionsModule = super.registerAsync(options);
+    return this.createAuthenticationModuleFromOptions(
+      authenticationOptionsModule,
+      overrides
+    );
+  }
+
+  private static createAuthenticationModuleFromOptions(
+    authenticationOptionsModule: DynamicModule,
+    overrides: ModuleOverrideMetadata
   ): DynamicModule {
     return {
       module: AuthenticationModule,
       imports: [
-        ConfigModule.forRoot({ load: [getAuthConfig] }),
+        ...(authenticationOptionsModule.imports ?? []),
         DatabaseModule,
         LogModule,
-        PassportModule.register(passport),
-        JwtModule.register(jwt),
-        models.register(options),
+        JwtModule.registerAsync({
+          imports: [authenticationOptionsModule],
+          useFactory: (authenticationOptions: AuthenticationOptions) =>
+            authenticationOptions.jwtModuleOptions,
+          inject: [AUTHENTICATION_MODULE_OPTIONS],
+        }),
+        PassportModule.registerAsync({
+          imports: [authenticationOptionsModule],
+          useFactory: (authenticationOptions: AuthenticationOptions) =>
+            authenticationOptions.passportModuleOptions,
+          inject: [AUTHENTICATION_MODULE_OPTIONS],
+        }),
+        UserModelModule.register(overrides),
       ],
-      exports: [AuthService, JwtStrategy, LocalStrategy],
-      providers: [
-        { provide: APP_GUARD, useClass: JwtAuthGuard },
-        AuthService,
+      exports: [
+        ...(authenticationOptionsModule.exports ?? []),
+        AuthenticationService,
         JwtStrategy,
         LocalStrategy,
-        UserCustomService,
+      ],
+      providers: [
+        ...(authenticationOptionsModule.providers ?? []),
+        { provide: APP_GUARD, useClass: JwtAuthGuard },
+        AuthenticationService,
+        StrategyOptionsService,
+        JwtStrategy,
+        LocalStrategy,
       ],
       controllers: [LoginController],
     };
   }
 }
+
+// const {
+//   models,
+//   jwtModuleAsyncOptions,
+//   passportModuleOptions,
+//   ...options
+// }: AuthenticationModuleOptions = {
+//   models: UserModelModule,
+//   authenticationOptions: {},
+//   jwtModuleAsyncOptions: {
+//     useClass: JwtConfigService,
+//   },
+//   passportModuleOptions: {
+//     useClass: PassportAuthOptionsFactory,
+//   },
+//   ...moduleOptions,
+// };
+
+// const passportModule = PassportModule.registerAsync(passportModuleOptions);
+// const jwtModule = JwtModule.registerAsync(jwtModuleAsyncOptions);
+// return {
+//   module: AuthenticationModule,
+//   imports: [
+//     DatabaseModule,
+//     LogModule,
+//     jwtModule,
+//     passportModule,
+//     models.register(options),
+//   ],
+//   exports: [AuthenticationService, JwtStrategy, LocalStrategy],
+//   providers: [
+//     { provide: APP_GUARD, useClass: JwtAuthGuard },
+//     AuthenticationService,
+//     ...(jwtModule.providers ?? []),
+//     ...(passportModule.providers ?? []),
+//     StrategyOptionsService,
+//     JwtStrategy,
+//     LocalStrategy,
+//     UserCustomService,
+//   ],
+//   controllers: [LoginController],
+// };

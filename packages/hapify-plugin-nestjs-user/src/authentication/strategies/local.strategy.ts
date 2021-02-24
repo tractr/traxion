@@ -1,27 +1,21 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { ModuleRef } from '@nestjs/core';
 import { PassportStrategy } from '@nestjs/passport';
 import { User } from '@prisma/client';
 import { Strategy } from 'passport-local';
 
-import { AuthService } from '../services';
+import { AuthenticationService, StrategyOptionsService } from '../services';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(
-    private readonly moduleRef: ModuleRef,
-    private readonly configService: ConfigService,
-    private authService: AuthService
+    private readonly authenticationService: AuthenticationService,
+    protected readonly strategyOptionsService: StrategyOptionsService
   ) {
-    super({
-      usernameField: configService.get<keyof User>('login.loginField'),
-      passwordField: configService.get<keyof User>('login.passwordField'),
-    });
+    super(strategyOptionsService.createLocalStrategyOptions());
   }
 
   async validate(login: string, password: string): Promise<User> {
-    const user = await this.authService.validateUser(login, password);
+    const user = await this.authenticationService.validateUser(login, password);
     if (!user) {
       throw new UnauthorizedException();
     }
