@@ -33,6 +33,90 @@
             "searchable",
             "sortable"
           ]
+        },
+        {
+          "name": "address",
+          "type": "string",
+          "properties": [
+            "searchable"
+          ]
+        },
+        {
+          "name": "phone",
+          "type": "string",
+          "properties": [
+            "nullable",
+            "searchable"
+          ]
+        },
+        {
+          "name": "gender",
+          "type": "enum",
+          "value": [
+            "male",
+            "female",
+            "other"
+          ],
+          "properties": [
+            "searchable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7922c2bb-9eee-c2f7-d4ab-9666e6bdd159",
+      "name": "Relationless",
+      "accesses": {
+        "create": "guest",
+        "read": "guest",
+        "update": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "count": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ce597f26-4eee-65c5-acf1-1258707d1d24",
+      "name": "Role",
+      "accesses": {
+        "create": "guest",
+        "read": "guest",
+        "update": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "count": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "properties": [
+            "label",
+            "searchable",
+            "sortable"
+          ]
         }
       ]
     },
@@ -86,19 +170,6 @@
           ]
         },
         {
-          "name": "role",
-          "type": "enum",
-          "value": [
-            "admin",
-            "user"
-          ],
-          "properties": [
-            "searchable",
-            "restricted"
-          ],
-          "notes": "admin or user"
-        },
-        {
           "name": "banned",
           "type": "boolean",
           "properties": [
@@ -137,6 +208,16 @@
           "type": "string",
           "properties": [
             "multiple",
+            "searchable",
+            "sortable"
+          ]
+        },
+        {
+          "name": "role",
+          "type": "entity",
+          "subtype": "oneMany",
+          "value": "ce597f26-4eee-65c5-acf1-1258707d1d24",
+          "properties": [
             "searchable",
             "sortable"
           ]
