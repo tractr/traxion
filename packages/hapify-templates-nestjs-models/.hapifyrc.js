@@ -4,12 +4,12 @@ module.exports = {
   templates: [
     {
       path: 'src/generated/index.ts',
-      engine: 'ejs',
+      engine: 'hpf',
       input: 'all',
     },
     {
       path: 'src/generated/models.module.ts',
-      engine: 'ejs',
+      engine: 'hpf',
       input: 'all',
     },
     {
@@ -28,7 +28,17 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'src/generated/{kebab}/{kebab}.module.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'src/generated/{kebab}/common/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'src/generated/{kebab}/common/{kebab}-model.module.ts',
       engine: 'hpf',
       input: 'one',
     },
@@ -49,6 +59,11 @@ module.exports = {
     },
     {
       path: 'src/generated/{kebab}/rest/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'src/generated/{kebab}/rest/{kebab}-rest.module.ts',
       engine: 'hpf',
       input: 'one',
     },
