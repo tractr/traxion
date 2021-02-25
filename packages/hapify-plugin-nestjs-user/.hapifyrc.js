@@ -1,5 +1,8 @@
 module.exports = {
-  extends: ['@tractr/hapify-templates-prisma'],
+  extends: [
+    '@tractr/hapify-templates-prisma',
+    '@tractr/hapify-templates-nestjs-models',
+  ],
   version: '1',
   validatorPath: 'hapify/validator.js',
   name: 'New bootstrap',
@@ -27,4 +30,5 @@ module.exports = {
     },
   ],
   templates: [],
+  test: 'test',
 };
