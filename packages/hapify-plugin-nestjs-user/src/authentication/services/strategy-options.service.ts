@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { SecretOrKeyProvider, StrategyOptions } from 'passport-jwt';
 import { IStrategyOptionsWithRequest } from 'passport-local';
+
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
 import { AuthenticationOptions } from '../interfaces';
 
@@ -8,7 +9,7 @@ import { AuthenticationOptions } from '../interfaces';
 export class StrategyOptionsService {
   constructor(
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
-    private readonly authenticationOptions: AuthenticationOptions
+    private readonly authenticationOptions: AuthenticationOptions,
   ) {}
 
   createLocalStrategyOptions(): IStrategyOptionsWithRequest {

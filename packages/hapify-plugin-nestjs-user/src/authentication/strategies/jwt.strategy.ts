@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { User } from '@prisma/client';
 import { Strategy } from 'passport-jwt';
+
 import { UserService } from '../../generated.example/user';
 import { JwtTokenPayload } from '../dtos';
 import { StrategyOptionsService } from '../services';
@@ -10,7 +11,7 @@ import { StrategyOptionsService } from '../services';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     private readonly userService: UserService,
-    protected readonly strategyOptionsService: StrategyOptionsService
+    protected readonly strategyOptionsService: StrategyOptionsService,
   ) {
     super(strategyOptionsService.createJwtStrategyOptions());
   }

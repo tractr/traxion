@@ -1,9 +1,9 @@
+import { isDevelopment } from '@tractr/hapify-plugin-nestjs-core';
 import { Request } from 'express';
 import { JwtFromRequestFunction } from 'passport-jwt';
-import { isDevelopment } from '@tractr/hapify-plugin-nestjs-core';
 
 export function fromHttpOnlySignedAndSecureCookies(
-  cookieName: string
+  cookieName: string,
 ): JwtFromRequestFunction {
   const searchCookieFromKey = isDevelopment() ? 'cookies' : 'signedCookies';
   return (req: Request) => {

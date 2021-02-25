@@ -2,11 +2,12 @@ import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+
 import { UserService } from '../../generated.example/user';
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
 // import { PassportAuthModuleOptions } from '../config';
 import { AccessTokenDto } from '../dtos';
-import { UserNotFoundError, BadPasswordError } from '../errors';
+import { BadPasswordError, UserNotFoundError } from '../errors';
 import { AuthenticationOptions } from '../interfaces';
 
 @Injectable()
@@ -15,7 +16,7 @@ export class AuthenticationService {
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
     private readonly authenticationOptions: AuthenticationOptions,
     private readonly userService: UserService,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
   ) {}
 
   async validateUser(login: string, password: string): Promise<User | null> {
@@ -28,7 +29,7 @@ export class AuthenticationService {
 
   async authenticateLoginCredentials(
     login: string,
-    password: string
+    password: string,
   ): Promise<User | null> {
     const loginField =
       this.authenticationOptions.strategy.local.usernameField ?? 'email';
@@ -53,7 +54,7 @@ export class AuthenticationService {
 
   async hashPassword(password: string): Promise<string> {
     const salt = await bcrypt.genSalt(
-      this.authenticationOptions.login.saltRounds ?? 20
+      this.authenticationOptions.login.saltRounds ?? 20,
     );
     return bcrypt.hash(password, salt);
   }
