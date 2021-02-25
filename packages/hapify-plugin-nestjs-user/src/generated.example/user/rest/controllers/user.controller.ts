@@ -9,16 +9,17 @@ import {
   Query,
 } from '@nestjs/common';
 import { User } from '@prisma/client';
+
 import { UserService } from '../../common';
 import {
+  UserCountQueryDto,
   UserCreateBodyDto,
+  UserDeleteParamsDto,
+  UserFindManyQueryDto,
   UserFindUniqueParamsDto,
   UserFindUniqueQueryDto,
-  UserFindManyQueryDto,
-  UserUpdateParamsDto,
   UserUpdateBodyDto,
-  UserCountQueryDto,
-  UserDeleteParamsDto,
+  UserUpdateParamsDto,
 } from '../dtos';
 import { UserRestDtoService } from '../services';
 
@@ -26,7 +27,7 @@ import { UserRestDtoService } from '../services';
 export class UserController {
   constructor(
     private userService: UserService,
-    private userRestDtoService: UserRestDtoService
+    private userRestDtoService: UserRestDtoService,
   ) {}
 
   @Post()
@@ -37,7 +38,7 @@ export class UserController {
 
   @Get()
   public async findMany(
-    @Query() queryDto: UserFindManyQueryDto
+    @Query() queryDto: UserFindManyQueryDto,
   ): Promise<User[]> {
     const formatedParams = this.userRestDtoService.formatFindManyDto(queryDto);
     return this.userService.findMany(formatedParams);
@@ -52,11 +53,11 @@ export class UserController {
   @Get(':id')
   public async findOne(
     @Param() paramsDto: UserFindUniqueParamsDto,
-    @Query() queryDto?: UserFindUniqueQueryDto
+    @Query() queryDto?: UserFindUniqueQueryDto,
   ): Promise<User | null> {
     const formatedParams = this.userRestDtoService.formatFindUniqueDtos(
       paramsDto,
-      queryDto
+      queryDto,
     );
     return this.userService.findUnique(formatedParams);
   }
@@ -64,11 +65,11 @@ export class UserController {
   @Put(':id')
   public async update(
     @Param() paramsDto: UserUpdateParamsDto,
-    @Body() bodyDto: UserUpdateBodyDto
+    @Body() bodyDto: UserUpdateBodyDto,
   ): Promise<User> {
     const formatedParams = this.userRestDtoService.formatUpdateDtos(
       paramsDto,
-      bodyDto
+      bodyDto,
     );
     return this.userService.update(formatedParams);
   }

@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+
 import { AuthenticationModule } from './authentication';
 import { AuthenticationModuleOptionsFactory } from './authentication/config/authentication.config';
 import { UserCustomService } from './authentication/services/user-customservice';
@@ -16,7 +17,7 @@ import { UserService } from './generated.example/user';
       {
         useClass: AuthenticationModuleOptionsFactory,
       },
-      { providers: [{ provide: UserService, useClass: UserCustomService }] }
+      { providers: [{ provide: UserService, useClass: UserCustomService }] },
     ),
   ],
   controllers: [],

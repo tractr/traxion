@@ -5,7 +5,7 @@ export function getParamDecoratorFactory(decorator: Function): Function {
   class Test {
     public test(
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      @decorator() value: unknown // eslint-disable-next-line @typescript-eslint/no-empty-function
+      @decorator() value: unknown, // eslint-disable-next-line @typescript-eslint/no-empty-function
     ) {}
   }
 

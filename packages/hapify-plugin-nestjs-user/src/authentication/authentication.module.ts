@@ -2,21 +2,24 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { AUTHENTICATION_MODULE_OPTIONS } from './constants';
 import {
-  AuthenticationModuleOptionsFactory,
-  AUTHENTICATION_OPTIONS,
-} from './config/authentication.config';
+  AsyncOptions,
+  ModuleOptionsHelper,
+} from '@tractr/hapify-plugin-nestjs-core';
 
 import { DatabaseModule, LogModule } from '../core';
-import { JwtAuthGuard } from './guards';
+import { ModuleOverrideMetadata } from '../generated.example/common/helpers/base-module.helper';
+import { UserModelModule } from '../generated.example/user';
+import {
+  AUTHENTICATION_OPTIONS,
+  AuthenticationModuleOptionsFactory,
+} from './config/authentication.config';
+import { AUTHENTICATION_MODULE_OPTIONS } from './constants';
 import { LoginController } from './controllers';
+import { JwtAuthGuard } from './guards';
+import { AuthenticationOptions } from './interfaces';
 import { AuthenticationService, StrategyOptionsService } from './services';
 import { JwtStrategy, LocalStrategy } from './strategies';
-import { UserModelModule } from '../generated.example/user';
-import { AuthenticationOptions } from './interfaces';
-import { AsyncOptions, ModuleOptionsHelper } from './module-options.helper';
-import { ModuleOverrideMetadata } from '../generated.example/common/helpers/base-module.helper';
 
 @Module({})
 export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOptions>() {
@@ -24,7 +27,7 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
 
   static register(
     options: AuthenticationOptions = AUTHENTICATION_OPTIONS,
-    overrides: ModuleOverrideMetadata = {}
+    overrides: ModuleOverrideMetadata = {},
   ): DynamicModule {
     const moduleOptions = {
       ...AUTHENTICATION_OPTIONS,
@@ -34,7 +37,7 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
     const authenticationOptionsModule = super.register(moduleOptions);
     return this.createAuthenticationModuleFromOptions(
       authenticationOptionsModule,
-      overrides
+      overrides,
     );
   }
 
@@ -42,18 +45,18 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
     options: AsyncOptions<AuthenticationOptions> = {
       useClass: AuthenticationModuleOptionsFactory,
     },
-    overrides: ModuleOverrideMetadata = {}
+    overrides: ModuleOverrideMetadata = {},
   ): DynamicModule {
     const authenticationOptionsModule = super.registerAsync(options);
     return this.createAuthenticationModuleFromOptions(
       authenticationOptionsModule,
-      overrides
+      overrides,
     );
   }
 
   private static createAuthenticationModuleFromOptions(
     authenticationOptionsModule: DynamicModule,
-    overrides: ModuleOverrideMetadata
+    overrides: ModuleOverrideMetadata,
   ): DynamicModule {
     return {
       module: AuthenticationModule,

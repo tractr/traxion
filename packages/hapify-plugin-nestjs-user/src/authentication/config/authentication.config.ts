@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { isDevelopment } from '@tractr/hapify-plugin-nestjs-core';
+import {
+  isDevelopment,
+  OptionsFactory,
+} from '@tractr/hapify-plugin-nestjs-core';
 import { ExtractJwt } from 'passport-jwt';
+
 import { fromHttpOnlySignedAndSecureCookies } from '../extractors';
 import { AuthenticationOptions } from '../interfaces';
-import { OptionsFactory } from '../module-options.helper';
 
 const { TRACTR_AUTH_STRATEGY_JWT_SECRET } = process.env;
 
