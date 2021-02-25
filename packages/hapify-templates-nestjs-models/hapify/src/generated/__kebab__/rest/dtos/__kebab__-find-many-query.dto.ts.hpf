@@ -82,7 +82,7 @@ export class <<Model pascal>>FindManyQueryDto {
     { each: true }
   )
   @IsOptional()
-  populate: Array<keyof Prisma.<<Model pascal>>Include> = [];
+  populate?: Array<keyof Prisma.<<Model pascal>>Include>;
 <<<}>>>
  
   @IsOptional()
