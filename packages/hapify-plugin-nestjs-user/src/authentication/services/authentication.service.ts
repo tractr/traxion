@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
-import { UserService } from '../../generated.example/user';
-import { User } from '../../generated/prisma';
+import { UserService } from '../../generated/user';
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
 import { AccessTokenDto } from '../dtos';
 import { BadPasswordError, UserNotFoundError } from '../errors';
