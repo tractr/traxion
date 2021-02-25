@@ -22,6 +22,10 @@ import {
   IsEmail, 
   <<endif>>
 
+  <<if Fields entity and searchable>>
+  IsUUID, 
+  <<endif>>
+
   <<if Fields url and searchable>>
   IsUrl, 
   <<endif>>
@@ -46,6 +50,10 @@ export class <<Model pascal>>FindManyQueryDto {
   @IsEmail({}, <<=listModifier(field)>>) 
   <<endif>>
 
+  <<if field entity>>
+  @IsUUID("all", <<=listModifier(field)>>) 
+  <<endif>>
+
   <<if field url>>
   @IsUrl({}, <<=listModifier(field)>>) 
   <<endif>>
@@ -58,6 +66,19 @@ export class <<Model pascal>>FindManyQueryDto {
   <<=optionalTypedProperty(field)>>
  
 <<endfor>>
+
+<<if Fields entity>>
+  @IsString({ each: true })
+  @IsIn([
+      <<for Fields entity field>>
+      '<<field camel>>',
+      <<endfor>>
+    ],
+    { each: true }
+  )
+  @IsOptional()
+  populate: Array<keyof Prisma.<<Model pascal>>Include> = [];
+<<endif>>
  
   @IsOptional()
   @IsString()
