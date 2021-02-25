@@ -29,7 +29,7 @@ export class UserRestDtoService {
     const prismaUserFindUniqueArgs: Prisma.UserFindUniqueArgs = {
       where: { ...paramsDto },
     };
-    if (queryDto) prismaUserFindUniqueArgs.include = { ...queryDto };
+    if (queryDto) console.log({ ...queryDto });
     return prismaUserFindUniqueArgs;
   }
 
