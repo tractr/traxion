@@ -13,6 +13,16 @@ module.exports = {
       input: 'all',
     },
     {
+      path: 'src/generated/helpers/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'src/generated/helpers/format-populate.helper.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'src/generated/{kebab}/index.ts',
       engine: 'hpf',
       input: 'one',
