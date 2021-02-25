@@ -14,9 +14,10 @@ import { <<Model pascal>>Service } from '../../common';
 import {
   <<Model pascal>>CreateBodyDto,
   <<Model pascal>>FindUniqueParamsDto,
-  <<if Fields entity>>
+  //TODO: add condition to templates (mode must have relations)
+  // <if Fields entity>>
   <<Model pascal>>FindUniqueQueryDto,
-  <<endif>>
+  // <endif>>
   <<Model pascal>>FindManyQueryDto,
   <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpdateBodyDto,
@@ -57,15 +58,15 @@ export class <<Model pascal>>Controller {
   @Get(':id')
   public async findOne(
     @Param() paramsDto: <<Model pascal>>FindUniqueParamsDto,
-    <<if Fields entity>>
+    // <if Fields entity>>
     @Query() queryDto: <<Model pascal>>FindUniqueQueryDto
-    <<endif>>
+    // <endif>>
   ): Promise<<<Model pascal>> | null> {
     const formatedParams = this.<<Model camel>>RestDtoService.formatFindUniqueDtos(
       paramsDto,
-    <<if Fields entity>>
+    // <if Fields entity>>
       queryDto
-    <<endif>>
+    // <endif>>
     );
     return this.<<Model camel>>Service.findUnique(formatedParams);
   }

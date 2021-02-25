@@ -1,4 +1,4 @@
-<<if Fields entity>>
+//TODO: add condition to templates (mode must have relations)
 import { Prisma } from '@prisma/client';
 import {
   IsString,
@@ -12,11 +12,16 @@ export class <<Model pascal>>FindUniqueQueryDto {
       <<for Fields entity field>>
       '<<field camel>>',
       <<endfor>>
+      <<for ReferencedIn ref>>
+        <<for ref.fields field>>
+          <<if field oneOne>>
+            '<<ref camel>>As<<field pascal>>',
+          <<endif>>
+        <<endfor>>
+      <<endfor>>
     ],
     { each: true }
   )
   @IsOptional()
   populate: Array<keyof Prisma.<<Model pascal>>Include> = [];
 }
-<<endif>>
-
