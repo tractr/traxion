@@ -5,10 +5,9 @@ import {
   <<Model pascal>>CreateBodyDto,
   <<Model pascal>>FindManyQueryDto,
   <<Model pascal>>FindUniqueParamsDto,
-  // TODO: add condition to templates (mode must have relations)
-  // <if Fields entity>>
+  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
   <<Model pascal>>FindUniqueQueryDto,
-  // <endif>>
+  <<<}>>>
   <<Model pascal>>UpdateBodyDto,
   <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpsertBodyDto,
@@ -16,10 +15,9 @@ import {
   <<Model pascal>>DeleteParamsDto,
 } from '../dtos';
 
-// TODO: add condition to templates (mode must have relations)
-// <if Fields entity>>
+<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
 import { formatPopulate } from '../../../helpers';
-// <endif>>
+<<<}>>>
 
 @Injectable()
 export class <<Model pascal>>RestDtoService {
@@ -64,13 +62,18 @@ export class <<Model pascal>>RestDtoService {
  
   public formatFindUniqueDtos(
     paramsDto: <<Model pascal>>FindUniqueParamsDto,
+    <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
     { populate }: <<Model pascal>>FindUniqueQueryDto
+    <<<}>>>
   ): Prisma.<<Model pascal>>FindUniqueArgs {
-    // TODO: add condition to templates (mode must have relations)
+    <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
     const include = formatPopulate<Prisma.<<Model pascal>>Include>(populate);
+    <<<}>>>
     return { 
       where: { ...paramsDto },
+      <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
       include,
+      <<<}>>>
     };
   }
     
@@ -79,7 +82,9 @@ export class <<Model pascal>>RestDtoService {
     <<for Fields searchable field>>
       <<field camel>>,
     <<endfor>>
+    <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
       populate,
+    <<<}>>>
       sort,
       order,
       take,
@@ -98,8 +103,18 @@ export class <<Model pascal>>RestDtoService {
     <<endfor>>
     }
     const orderBy = {[sort]: order}
+    <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
     const include = formatPopulate<Prisma.<<Model pascal>>Include>(populate);
-    return { where, take, skip, orderBy, include, };
+    <<<}>>>
+    return { 
+      where,
+      take,
+      skip,
+      orderBy,
+    <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+      include,
+    <<<}>>>
+    };
   }
     
   public formatUpdateDtos(
