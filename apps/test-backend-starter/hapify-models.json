@@ -3,6 +3,40 @@
   "name": "New project",
   "models": [
     {
+      "id": "14aa1636-101b-4701-27dc-fa46a4571127",
+      "name": "Profile",
+      "accesses": {
+        "create": "guest",
+        "read": "guest",
+        "update": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "count": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
+        },
+        {
+          "name": "owner",
+          "type": "entity",
+          "subtype": "oneOne",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
+          "properties": [
+            "searchable",
+            "sortable"
+          ]
+        }
+      ]
+    },
+    {
       "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
       "name": "User",
       "accesses": {

@@ -24,6 +24,10 @@ import {
   IsEmail, 
   <<endif>>
 
+  <<if Fields entity and not internal>>
+  IsUUID, 
+  <<endif>>
+
   <<if Fields password and not internal>>
   Matches, 
   <<endif>>
@@ -59,6 +63,10 @@ export class <<Model pascal>>UpsertBodyDto {
 
   <<if field email>>
   @IsEmail({}, <<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field entity>>
+  @IsUUID("all", <<=listModifier(field)>>) 
   <<endif>>
 
   <<if field password>>
