@@ -1,5 +1,3 @@
-import { getAuthConfig } from '../../../../src/authentication/config/auth.config';
-
 describe('User auth configurations', () => {
   const {
     TRACTR_USER_JWT_SECRET,
@@ -27,50 +25,50 @@ describe('User auth configurations', () => {
   });
 
   it('should be a function', () => {
-    expect(typeof getAuthConfig).toBe('function');
+    throw new Error('Missing tests');
   });
 
-  it('should be a configuration object with default value', () => {
-    expect(getAuthConfig()).toEqual({
-      jwt: {
-        secret: 'developmentSecret',
-        signOptions: {
-          expiresIn: 3600,
-        },
-      },
-      passport: {
-        defaultStrategy: 'jwt',
-      },
-      login: {
-        password: {
-          saltLength: 20,
-        },
-        loginField: 'email',
-      },
-    });
-  });
+  // it('should be a configuration object with default value', () => {
+  //   expect(getAuthConfig()).toEqual({
+  //     jwt: {
+  //       secret: 'developmentSecret',
+  //       signOptions: {
+  //         expiresIn: 3600,
+  //       },
+  //     },
+  //     passport: {
+  //       defaultStrategy: 'jwt',
+  //     },
+  //     login: {
+  //       password: {
+  //         saltLength: 20,
+  //       },
+  //       loginField: 'email',
+  //     },
+  //   });
+  // });
 
-  it('should be a configuration object that can take override value when env is set', () => {
-    process.env.TRACTR_USER_JWT_SECRET = 'foo';
-    process.env.TRACTR_USER_JWT_EXPIRES_IN = '60';
-    process.env.TRACTR_USER_PASSWORD_SALT_LENGTH = '10';
-    process.env.TRACTR_USER_LOGIN_FIELD = 'bar';
-    expect(getAuthConfig()).toEqual({
-      jwt: {
-        secret: 'foo',
-        signOptions: {
-          expiresIn: 60,
-        },
-      },
-      passport: {
-        defaultStrategy: 'jwt',
-      },
-      login: {
-        password: {
-          saltLength: 10,
-        },
-        loginField: 'bar',
-      },
-    });
-  });
+  // it('should be a configuration object that can take override value when env is set', () => {
+  //   process.env.TRACTR_USER_JWT_SECRET = 'foo';
+  //   process.env.TRACTR_USER_JWT_EXPIRES_IN = '60';
+  //   process.env.TRACTR_USER_PASSWORD_SALT_LENGTH = '10';
+  //   process.env.TRACTR_USER_LOGIN_FIELD = 'bar';
+  //   expect(getAuthConfig()).toEqual({
+  //     jwt: {
+  //       secret: 'foo',
+  //       signOptions: {
+  //         expiresIn: 60,
+  //       },
+  //     },
+  //     passport: {
+  //       defaultStrategy: 'jwt',
+  //     },
+  //     login: {
+  //       password: {
+  //         saltLength: 10,
+  //       },
+  //       loginField: 'bar',
+  //     },
+  //   });
+  // });
 });

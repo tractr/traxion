@@ -9,7 +9,7 @@ import { AuthenticationService, StrategyOptionsService } from '../services';
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(
     private readonly authenticationService: AuthenticationService,
-    protected readonly strategyOptionsService: StrategyOptionsService
+    protected readonly strategyOptionsService: StrategyOptionsService,
   ) {
     super(strategyOptionsService.createLocalStrategyOptions());
   }

@@ -1,5 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { LogService } from '../../../../../src/core';
 
 describe('LogService', () => {
