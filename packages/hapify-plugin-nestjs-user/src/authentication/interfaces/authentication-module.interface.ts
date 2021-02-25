@@ -3,7 +3,7 @@ import { IAuthModuleOptions } from '@nestjs/passport';
 import { StrategyOptions } from 'passport-jwt';
 import { IStrategyOptionsWithRequest } from 'passport-local';
 
-import { User } from '../../generated/prisma';
+import { User } from '@prisma/client';
 
 export interface AuthenticationOptions {
   login: {

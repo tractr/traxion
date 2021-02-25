@@ -10,7 +10,7 @@ import {
 } from '@tractr/hapify-plugin-nestjs-core';
 import { DatabaseModule } from '@tractr/hapify-plugin-nestjs-database';
 
-import { UserModelModule } from '../generated.example/user';
+import { UserModelModule } from '../generated/user';
 import {
   AUTHENTICATION_OPTIONS,
   AuthenticationModuleOptionsFactory,
@@ -87,7 +87,7 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
       ],
       providers: [
         ...(authenticationOptionsModule.providers ?? []),
-        { provide: APP_GUARD, useClass: JwtAuthGuard },
+        // { provide: APP_GUARD, useClass: JwtAuthGuard },
         AuthenticationService,
         StrategyOptionsService,
         JwtStrategy,
