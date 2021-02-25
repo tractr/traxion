@@ -7,7 +7,7 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { User } from '@prisma/client';
+import { User } from '../../generated/prisma';
 import { Request, Response } from 'express';
 
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';

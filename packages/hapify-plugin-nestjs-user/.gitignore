@@ -1,2 +1,9 @@
-hapify
-prisma
+hapify/*
+!hapify/validator.js
+
+prisma/migrations
+!prisma/schemas/base.prisma
+!prisma/schemas/generated.prisma
+!prisma/schema.prisma
+
+!src/generated

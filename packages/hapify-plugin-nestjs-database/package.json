@@ -13,6 +13,7 @@
   "scripts": {
     "prebuild": "rimraf lib",
     "build": "tsc -p tsconfig.build.json",
+    "build:watch": "npm run build -- --watch",
     "postinstall": "npm run build",
     "prepublish": "npm run build"
   },
