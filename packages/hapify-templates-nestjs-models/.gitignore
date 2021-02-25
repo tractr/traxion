@@ -38,7 +38,6 @@ prisma/dev.db
 
 # Hapify generated files
 prisma/schemas/generated.prisma
-src/generated
 
 # Other generated files
 prisma/schema.prisma

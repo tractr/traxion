@@ -1,0 +1,12 @@
+import { Module } from '@nestjs/common';
+import { ModuleOverride } from '@tractr/hapify-plugin-nestjs-core';
+import { DatabaseModule } from '@tractr/hapify-plugin-nestjs-database';
+import { <<Model pascal>>DatabaseService, <<Model pascal>>Service } from './services';
+  
+@Module({
+  imports: [DatabaseModule],
+  exports: [<<Model pascal>>Service, <<Model pascal>>DatabaseService],
+  providers: [<<Model pascal>>Service, <<Model pascal>>DatabaseService],
+})
+export class <<Model pascal>>ModelModule extends ModuleOverride {}
+
