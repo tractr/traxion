@@ -5,9 +5,10 @@ import {
   <<Model pascal>>CreateBodyDto,
   <<Model pascal>>FindManyQueryDto,
   <<Model pascal>>FindUniqueParamsDto,
-  <<if Fields entity>>
+  // TODO: add condition to templates (mode must have relations)
+  // <if Fields entity>>
   <<Model pascal>>FindUniqueQueryDto,
-  <<endif>>
+  // <endif>>
   <<Model pascal>>UpdateBodyDto,
   <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpsertBodyDto,
@@ -15,9 +16,10 @@ import {
   <<Model pascal>>DeleteParamsDto,
 } from '../dtos';
 
-<<if Fields entity>>
+// TODO: add condition to templates (mode must have relations)
+// <if Fields entity>>
 import { formatPopulate } from '../../../helpers';
-<<endif>>
+// <endif>>
 
 @Injectable()
 export class <<Model pascal>>RestDtoService {
@@ -62,18 +64,13 @@ export class <<Model pascal>>RestDtoService {
  
   public formatFindUniqueDtos(
     paramsDto: <<Model pascal>>FindUniqueParamsDto,
-    <<if Fields entity>>
     { populate }: <<Model pascal>>FindUniqueQueryDto
-    <<endif>>
   ): Prisma.<<Model pascal>>FindUniqueArgs {
-    <<if Fields entity>>
+    // TODO: add condition to templates (mode must have relations)
     const include = formatPopulate<Prisma.<<Model pascal>>Include>(populate);
-    <<endif>>
     return { 
       where: { ...paramsDto },
-      <<if Fields entity>>
       include,
-      <<endif>>
     };
   }
     
@@ -82,9 +79,7 @@ export class <<Model pascal>>RestDtoService {
     <<for Fields searchable field>>
       <<field camel>>,
     <<endfor>>
-    <<if Fields entity>>
       populate,
-    <<endif>>
       sort,
       order,
       take,
@@ -103,10 +98,8 @@ export class <<Model pascal>>RestDtoService {
     <<endfor>>
     }
     const orderBy = {[sort]: order}
-    <<if Fields entity>>
     const include = formatPopulate<Prisma.<<Model pascal>>Include>(populate);
-    <<endif>>
-    return { where, take, skip, orderBy, <<if Fields entity>>include,<<endif>> };
+    return { where, take, skip, orderBy, include, };
   }
     
   public formatUpdateDtos(
