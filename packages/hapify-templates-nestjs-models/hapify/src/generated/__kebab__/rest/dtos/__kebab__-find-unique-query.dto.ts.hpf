@@ -21,6 +21,6 @@ export class <<Model pascal>>FindUniqueQueryDto {
     { each: true }
   )
   @IsOptional()
-  populate: Array<keyof Prisma.<<Model pascal>>Include> = [];
+  populate?: Array<keyof Prisma.<<Model pascal>>Include>;
 }
 <<<}>>>

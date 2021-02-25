@@ -67,7 +67,7 @@ export class <<Model pascal>>RestDtoService {
     <<<}>>>
   ): Prisma.<<Model pascal>>FindUniqueArgs {
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-    const include = formatPopulate<Prisma.<<Model pascal>>Include>(populate);
+    const include = populate ? formatPopulate<Prisma.<<Model pascal>>Include>(populate) : undefined;
     <<<}>>>
     return { 
       where: { ...paramsDto },
@@ -104,7 +104,7 @@ export class <<Model pascal>>RestDtoService {
     }
     const orderBy = {[sort]: order}
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-    const include = formatPopulate<Prisma.<<Model pascal>>Include>(populate);
+    const include = populate ? formatPopulate<Prisma.<<Model pascal>>Include>(populate): undefined;
     <<<}>>>
     return { 
       where,
