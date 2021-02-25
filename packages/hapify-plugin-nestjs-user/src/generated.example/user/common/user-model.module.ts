@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
+import { ModuleOverride } from '@tractr/hapify-plugin-nestjs-core';
+import { DatabaseModule } from '@tractr/hapify-plugin-nestjs-database';
 
-import { DatabaseModule } from '../../../core';
-import { ModuleOverride } from '../../common/helpers/base-module.helper';
 import { UserDatabaseService, UserService } from './services';
 
 @Module({

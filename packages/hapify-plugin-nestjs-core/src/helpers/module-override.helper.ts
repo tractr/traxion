@@ -4,7 +4,7 @@ import {
   ModuleMetadata,
   Type,
 } from '@nestjs/common';
-import { isClass } from '@tractr/hapify-plugin-nestjs-core';
+import { isClass } from './is-class.helper';
 
 import { getMetadataFromModule } from './module-metadata.helper';
 import { uniqueConcat } from './unique-array.helper';
@@ -38,7 +38,7 @@ export class ModuleOverride implements ModuleOverrideMetadata {
 
   static mergeMetadata(
     metadata: ModuleOverrideMetadata,
-    override: ModuleOverrideMetadata,
+    override: ModuleOverrideMetadata
   ): ModuleMetadata {
     const moduleMetadata: ModuleOverrideMetadata = {
       imports: metadata.imports,
@@ -49,8 +49,8 @@ export class ModuleOverride implements ModuleOverrideMetadata {
     return this.extractDependencies(
       uniqueConcat<typeof ModuleOverride>(
         metadata.dependencies ?? [],
-        override.dependencies ?? [],
-      ),
+        override.dependencies ?? []
+      )
     )
       .concat(getMetadataFromModule(metadata))
       .concat(moduleMetadata)
@@ -63,8 +63,8 @@ export class ModuleOverride implements ModuleOverrideMetadata {
           if (controllers)
             acc.controllers.push(
               ...this.mergeControllers(
-                (metadata.controllers ?? []).concat(controllers),
-              ),
+                (metadata.controllers ?? []).concat(controllers)
+              )
             );
           return acc;
         },
@@ -73,12 +73,12 @@ export class ModuleOverride implements ModuleOverrideMetadata {
           exports: [],
           providers: [],
           controllers: [],
-        },
+        }
       );
   }
 
   static mergeControllers(
-    controllers: ModuleOverrideMetadata['controllers'],
+    controllers: ModuleOverrideMetadata['controllers']
   ): NonNullable<ModuleMetadata['controllers']> {
     const controllersMap: Map<
       ClassProvider['provide'],
@@ -99,7 +99,7 @@ export class ModuleOverride implements ModuleOverrideMetadata {
 
   static extractDependencies(
     dependencies: Array<typeof ModuleOverride>,
-    excludeDependencies: Set<typeof ModuleOverride> = new Set(),
+    excludeDependencies: Set<typeof ModuleOverride> = new Set()
   ): ModuleOverrideMetadata[] {
     return dependencies
       .filter((dependency) => !excludeDependencies.has(dependency))
@@ -112,8 +112,8 @@ export class ModuleOverride implements ModuleOverrideMetadata {
           childMetadata.push(
             ...this.extractDependencies(
               dependency.dependencies,
-              excludeDependencies,
-            ),
+              excludeDependencies
+            )
           );
         }
 

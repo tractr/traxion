@@ -1,7 +1,4 @@
-import {
-  IS_PUBLIC_KEY,
-  Public,
-} from '../../../../src/authentication/decorators/public.decorator';
+import { IS_PUBLIC_KEY, Public } from '@tractr/hapify-plugin-nestjs-core';
 
 describe('@Public decorator', () => {
   describe('IS_PUBLIC_KEY', () => {

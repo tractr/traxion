@@ -4,16 +4,17 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import {
   AsyncOptions,
+  CoreModule,
   ModuleOptionsHelper,
+  ModuleOverrideMetadata,
 } from '@tractr/hapify-plugin-nestjs-core';
+import { DatabaseModule } from '@tractr/hapify-plugin-nestjs-database';
 
-import { DatabaseModule, LogModule } from '../core';
-import { ModuleOverrideMetadata } from '../generated.example/common/helpers/base-module.helper';
 import { UserModelModule } from '../generated.example/user';
 import {
   AUTHENTICATION_OPTIONS,
   AuthenticationModuleOptionsFactory,
-} from './config/authentication.config';
+} from './config';
 import { AUTHENTICATION_MODULE_OPTIONS } from './constants';
 import { LoginController } from './controllers';
 import { JwtAuthGuard } from './guards';
@@ -63,7 +64,7 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
       imports: [
         ...(authenticationOptionsModule.imports ?? []),
         DatabaseModule,
-        LogModule,
+        CoreModule,
         JwtModule.registerAsync({
           imports: [authenticationOptionsModule],
           useFactory: (authenticationOptions: AuthenticationOptions) =>

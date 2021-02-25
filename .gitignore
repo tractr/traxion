@@ -1,6 +1,7 @@
 # compiled output
-dist/
-node_modules/
+dist
+node_modules
+
 # Logs
 logs
 *.log
@@ -31,3 +32,16 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Local sqlite database
+**/prisma/dev.db
+
+# Hapify generated files
+**/prisma/schemas/generated.prisma
+**/src/generated
+
+# Other generated files
+**/prisma/schema.prisma
+
+#environment file
+.env
