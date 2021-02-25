@@ -7,7 +7,7 @@ import {
   IsInt,
 <<endif>>
 } from 'class-validator';
- 
+  
 export class <<Model pascal>>FindUniqueParamsDto {
 <<for Fields primary primaryField>>
   <<if primaryField string>>

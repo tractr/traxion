@@ -17,6 +17,10 @@ import {
   IsString,
   <<endif>>
 
+  <<if Fields entity and searchable>>
+  IsUUID,
+  <<endif>>
+
   <<if Fields enum and searchable>>
   IsIn,
   <<endif>>
@@ -43,6 +47,10 @@ export class <<Model pascal>>CountQueryDto {
 
   <<if field string or entity or enum>>
   @IsString(<<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field entity>>
+  @IsUUID("all" <<=listModifier(field)>>) 
   <<endif>>
 
   <<if field enum>>

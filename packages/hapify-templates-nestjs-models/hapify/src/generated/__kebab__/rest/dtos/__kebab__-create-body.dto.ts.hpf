@@ -16,6 +16,10 @@ import {
   IsString,
   <<endif>>
 
+  <<if Fields entity and not internal>>
+  IsUUID,
+  <<endif>>
+
   <<if Fields enum and not internal>>
   IsIn,
   <<endif>>
@@ -51,6 +55,10 @@ export class <<Model pascal>>CreateBodyDto {
 
   <<if field string or enum or entity>>
   @IsString(<<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field entity>>
+  @IsUUID("all", <<=listModifier(field)>>) 
   <<endif>>
 
   <<if field enum>>
