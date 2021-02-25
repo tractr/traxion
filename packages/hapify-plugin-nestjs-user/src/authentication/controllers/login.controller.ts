@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { Request, Response } from 'express';
+
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
 import { CurrentUser } from '../decorators';
 import { AccessTokenDto } from '../dtos';
@@ -21,19 +22,19 @@ export class LoginController {
   constructor(
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
     private readonly authenticationOptions: AuthenticationOptions,
-    private readonly authenticationService: AuthenticationService
+    private readonly authenticationService: AuthenticationService,
   ) {}
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(
     @Req() req: Request,
-    @Res() res: Response
+    @Res() res: Response,
   ): Promise<AccessTokenDto> {
     const token = await this.authenticationService.login(req.user as User);
     res.cookie(
       this.authenticationOptions.cookies.cookieName,
-      token.accessToken
+      token.accessToken,
     );
     return token;
   }

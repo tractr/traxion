@@ -1,14 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+
 import {
   UserCountQueryDto,
   UserCreateBodyDto,
+  UserDeleteParamsDto,
   UserFindManyQueryDto,
   UserFindUniqueParamsDto,
   UserFindUniqueQueryDto,
   UserUpdateBodyDto,
   UserUpdateParamsDto,
-  UserDeleteParamsDto,
 } from '../dtos';
 
 @Injectable()
@@ -23,7 +24,7 @@ export class UserRestDtoService {
 
   public formatFindUniqueDtos(
     paramsDto: UserFindUniqueParamsDto,
-    queryDto?: UserFindUniqueQueryDto
+    queryDto?: UserFindUniqueQueryDto,
   ): Prisma.UserFindUniqueArgs {
     const prismaUserFindUniqueArgs: Prisma.UserFindUniqueArgs = {
       where: { ...paramsDto },
@@ -33,20 +34,20 @@ export class UserRestDtoService {
   }
 
   public formatFindManyDto(
-    queryDto: UserFindManyQueryDto
+    queryDto: UserFindManyQueryDto,
   ): Prisma.UserFindManyArgs {
     return { where: { ...queryDto } };
   }
 
   public formatUpdateDtos(
     paramsDto: UserUpdateParamsDto,
-    bodyDto: UserUpdateBodyDto
+    bodyDto: UserUpdateBodyDto,
   ): Prisma.UserUpdateArgs {
     return { data: { ...bodyDto }, where: { ...paramsDto } };
   }
 
   public formatDeleteDto(
-    paramsDto: UserDeleteParamsDto
+    paramsDto: UserDeleteParamsDto,
   ): Prisma.UserDeleteArgs {
     return { where: { ...paramsDto } };
   }

@@ -1,8 +1,8 @@
+import { JwtModuleOptions } from '@nestjs/jwt';
+import { IAuthModuleOptions } from '@nestjs/passport';
 import { User } from '@prisma/client';
 import { StrategyOptions } from 'passport-jwt';
 import { IStrategyOptionsWithRequest } from 'passport-local';
-import { IAuthModuleOptions } from '@nestjs/passport';
-import { JwtModuleOptions } from '@nestjs/jwt';
 
 export interface AuthenticationOptions {
   login: {

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
+
 import { UserDatabaseService } from './user-database.service';
 
 @Injectable()
@@ -11,7 +12,7 @@ export class UserService {
   }
 
   public async findUnique(
-    params: Prisma.UserFindUniqueArgs
+    params: Prisma.UserFindUniqueArgs,
   ): Promise<User | null> {
     return this.userDatabaseService.findUnique(params);
   }

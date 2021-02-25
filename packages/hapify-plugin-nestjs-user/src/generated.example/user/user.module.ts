@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ModuleOverride } from '../common/helpers/base-module.helper';
+
 import { DatabaseModule } from '../../core/database';
+import { ModuleOverride } from '../common/helpers/base-module.helper';
 import { UserRestModule } from './rest';
 
 @Module({

@@ -1,15 +1,19 @@
-import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
-import { Test, TestingModule } from '@nestjs/testing';
 import { JwtService } from '@nestjs/jwt';
-import { mockJwtServiceFactory } from '../../../mocks/user/service/jwt.service.mock';
+import { Test, TestingModule } from '@nestjs/testing';
+import * as bcrypt from 'bcrypt';
+
+import {
+  AuthenticationService,
+  UserNotFoundError,
+} from '../../../../src/authentication';
+import { UserService } from '../../../../src/generated.example/user';
 import { mockConfigServiceFactory } from '../../../mocks/config/config.service.mock';
-import { AuthService, UserNotFoundError } from '../../../../src/authentication';
+import { mockJwtServiceFactory } from '../../../mocks/user/service/jwt.service.mock';
 import {
   mockUser,
   mockUserServiceFactory,
 } from '../../../mocks/user/service/user.service.mock';
-import { UserService } from '../../../../src/generated.example/user';
 
 jest.mock('bcrypt');
 // const actualBcrypt = jest.requireActual('bcrypt');
@@ -19,7 +23,7 @@ describe('AuthService', () => {
   let bcryptHash: jest.Mock;
   let bcryptGenSalt: jest.Mock;
 
-  let authService: AuthService;
+  let authService: AuthenticationService;
   let mockConfigService: ConfigService;
   let mockJwtService: JwtService;
   let mockUserService: UserService;
@@ -41,14 +45,14 @@ describe('AuthService', () => {
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        AuthService,
+        AuthenticationService,
         { provide: ConfigService, useValue: mockConfigService },
         { provide: JwtService, useValue: mockJwtService },
         { provide: UserService, useValue: mockUserService },
       ],
     }).compile();
 
-    authService = module.get<AuthService>(AuthService);
+    authService = module.get<AuthenticationService>(AuthenticationService);
   });
 
   it('should be defined', () => {
@@ -61,7 +65,7 @@ describe('AuthService', () => {
 
       expect(mockConfigService.get).toHaveBeenCalledTimes(1);
       expect(mockConfigService.get).toHaveBeenCalledWith(
-        'login.password.saltLength'
+        'login.password.saltLength',
       );
 
       expect(bcryptGenSalt).toHaveBeenCalledTimes(1);
@@ -116,7 +120,7 @@ describe('AuthService', () => {
       (mockUserService.findUnique as jest.Mock).mockReturnValueOnce(null);
 
       expect(
-        authService.authenticateLoginCredentials('login', 'password')
+        authService.authenticateLoginCredentials('login', 'password'),
       ).rejects.toThrow(UserNotFoundError);
 
       expect(mockConfigService.get).toHaveBeenCalledTimes(1);
@@ -125,7 +129,7 @@ describe('AuthService', () => {
       expect(mockUserService.findUnique).toHaveBeenCalledTimes(1);
       expect(mockUserService.findUnique).toHaveBeenCalledWith(
         { email: 'login' },
-        { select: { password: true } }
+        { select: { password: true } },
       );
     });
 

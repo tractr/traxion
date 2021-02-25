@@ -1,6 +1,6 @@
 import {
-  ROLES_KEY,
   Roles,
+  ROLES_KEY,
 } from '../../../../src/authentication/decorators/roles.decorator';
 
 describe('@Roles decorator', () => {

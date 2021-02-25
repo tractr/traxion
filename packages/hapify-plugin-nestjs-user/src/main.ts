@@ -1,8 +1,9 @@
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { LogService } from './core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+
 import { AppModule } from './app.module';
+import { LogService } from './core';
 
 async function bootstrap() {
   // Instanciate nest app
@@ -21,7 +22,7 @@ async function bootstrap() {
       transformOptions: {
         enableImplicitConversion: true,
       },
-    })
+    }),
   );
 
   // Set swagger documentation

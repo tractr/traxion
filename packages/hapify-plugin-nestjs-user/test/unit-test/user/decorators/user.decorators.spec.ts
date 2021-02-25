@@ -1,8 +1,8 @@
-import { getParamDecoratorFactory } from '../../../helpers/get-param-decorator-factory';
 import {
   CurrentGqlUser,
   CurrentUser,
 } from '../../../../src/authentication/decorators/user.decorator';
+import { getParamDecoratorFactory } from '../../../helpers/get-param-decorator-factory';
 
 describe('@User param', () => {
   describe('User', () => {
