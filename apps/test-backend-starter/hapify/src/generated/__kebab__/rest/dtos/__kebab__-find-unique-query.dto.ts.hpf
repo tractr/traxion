@@ -1,4 +1,4 @@
-//TODO: add condition to templates (mode must have relations)
+<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
 import { Prisma } from '@prisma/client';
 import {
   IsString,
@@ -14,9 +14,7 @@ export class <<Model pascal>>FindUniqueQueryDto {
       <<endfor>>
       <<for ReferencedIn ref>>
         <<for ref.fields field>>
-          <<if field oneOne>>
-            '<<ref camel>>As<<field pascal>>',
-          <<endif>>
+          '<<ref camel>>As<<field pascal>>',
         <<endfor>>
       <<endfor>>
     ],
@@ -25,3 +23,4 @@ export class <<Model pascal>>FindUniqueQueryDto {
   @IsOptional()
   populate: Array<keyof Prisma.<<Model pascal>>Include> = [];
 }
+<<<}>>>
