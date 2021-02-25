@@ -5,7 +5,6 @@ import * as bcrypt from 'bcrypt';
 
 import { UserService } from '../../generated.example/user';
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
-// import { PassportAuthModuleOptions } from '../config';
 import { AccessTokenDto } from '../dtos';
 import { BadPasswordError, UserNotFoundError } from '../errors';
 import { AuthenticationOptions } from '../interfaces';

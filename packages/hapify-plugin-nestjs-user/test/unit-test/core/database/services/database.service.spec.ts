@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaClient } from '@prisma/client';
-
-import { DatabaseService } from '../../../../../src/core';
+import { DatabaseService } from '@tractr/hapify-plugin-nestjs-database';
 
 describe('DatabaseService', () => {
   let databaseService: DatabaseService;

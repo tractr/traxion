@@ -1,7 +1,4 @@
-import {
-  Roles,
-  ROLES_KEY,
-} from '../../../../src/authentication/decorators/roles.decorator';
+import { Roles, ROLES_KEY } from '@tractr/hapify-plugin-nestjs-core';
 
 describe('@Roles decorator', () => {
   describe('ROLES_KEY', () => {
