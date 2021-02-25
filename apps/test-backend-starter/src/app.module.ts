@@ -4,7 +4,7 @@ import { AppController } from './controllers';
 import { ModelsModule } from './generated';
 
 @Module({
-  imports: [CoreModule, ModelsModule],
+  imports: [CoreModule, ModelsModule.register()],
   controllers: [AppController],
   providers: [],
 })
