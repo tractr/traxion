@@ -6,16 +6,17 @@
   "license": "UNLICENSED",
   "author": "",
   "main": "./index.js",
+  "bin": {
+    "hpf-generate-config": "./index.js"
+  },
   "files": [
     "./dist",
     "index.js"
   ],
-  "bin": {
-    "hpf-generate-config": "./index.js"
-  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.build.json",
+    "build:watch": "npm run build -- --watch",
     "postinstall": "npm run build",
     "prepublish": "npm run build"
   },
