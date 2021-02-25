@@ -1,3 +1,4 @@
 export * from './dtos';
 export * from './services';
 export * from './controllers';
+export * from './<<Model kebab>>-rest.module';
