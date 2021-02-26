@@ -8,7 +8,7 @@ import { <<Model pascal>>DatabaseService } from './<<Model kebab>>-database.serv
 export class <<Model pascal>>Service {
   constructor(
     @Inject(<<Model constant>>_DATABASE_SERVICE)
-    private readonly <<Model camel>>DatabaseService: <<Model pascal>>DatabaseService,
+    protected readonly <<Model camel>>DatabaseService: <<Model pascal>>DatabaseService,
   ) {}
  
   /**
