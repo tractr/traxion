@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ModuleOverride } from '@tractr/hapify-plugin-nestjs-core';
-
+ 
 import { <<Model pascal>>ModelModule } from './common';
 import { <<Model pascal>>RestModule } from './rest';
-  
+ 
 @Module({})
 export class <<Model pascal>>Module extends ModuleOverride {
   static dependencies: Array<typeof ModuleOverride> = [
