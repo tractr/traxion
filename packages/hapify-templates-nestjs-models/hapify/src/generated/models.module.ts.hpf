@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ModuleOverride } from '@tractr/hapify-plugin-nestjs-core';
-
+ 
 <<for Models model>>
 import { <<model pascal>>Module } from './<<model kebab>>';
 <<endfor>>

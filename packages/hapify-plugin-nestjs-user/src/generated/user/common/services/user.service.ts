@@ -3,6 +3,7 @@ import { Prisma, User } from '@prisma/client';
 
 import { USER_DATABASE_SERVICE } from '../user-model.constant';
 import { UserDatabaseService } from './user-database.service';
+
 @Injectable()
 export class UserService {
   constructor(
@@ -14,9 +15,7 @@ export class UserService {
     return this.userDatabaseService.create(params);
   }
 
-  public async findUnique(
-    params: Prisma.UserFindUniqueArgs,
-  ): Promise<User | null> {
+  public async findUnique(params: Prisma.UserFindUniqueArgs): Promise<User | null> {
     return this.userDatabaseService.findUnique(params);
   }
 

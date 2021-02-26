@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from '@tractr/hapify-plugin-nestjs-database';
+
 @Injectable()
 export class UserDatabaseService {
   constructor(private readonly databaseService: DatabaseService) {}

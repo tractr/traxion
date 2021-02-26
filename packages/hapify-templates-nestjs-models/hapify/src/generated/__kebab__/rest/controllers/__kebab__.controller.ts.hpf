@@ -11,7 +11,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { <<Model pascal>> } from '@prisma/client';
-
+ 
 import { <<Model pascal>>Service } from '../../common';
 import { <<Model constant>>_SERVICE } from '../../common/<<Model kebab>>-model.constant';
 import {
