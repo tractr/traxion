@@ -40,26 +40,25 @@ export class <<Model pascal>>Controller {
     private <<Model camel>>RestDtoService: <<Model pascal>>RestDtoService,
   ) {}
  
+  /**
+   * Create a new User
+   *
+   * @param bodyDto - Dto of the request body
+   * @returns a new User
+   */
   @Post()
   public async create(@Body() bodyDto: <<Model pascal>>CreateBodyDto): Promise<<<Model pascal>>> {
     const formatedParams = this.<<Model camel>>RestDtoService.formatCreateDto(bodyDto);
     return this.<<Model camel>>Service.create(formatedParams);
   }
  
-  @Get()
-  public async findMany(
-    @Query() queryDto: <<Model pascal>>FindManyQueryDto,
-  ): Promise<<<Model pascal>>[]> {
-    const formatedParams = this.<<Model camel>>RestDtoService.formatFindManyDto(queryDto);
-    return this.<<Model camel>>Service.findMany(formatedParams);
-  }
- 
-  @Get('count')
-  public async count(@Query() queryDto: <<Model pascal>>CountQueryDto): Promise<number> {
-    const formatedParams = this.<<Model camel>>RestDtoService.formatCountDto(queryDto);
-    return this.<<Model camel>>Service.count(formatedParams);
-  }
- 
+  /**
+   * Find zero or one <<Model pascal>> that matches the filter
+   *
+   * @param paramsDto - Dto of the request param
+   * @param queryDto - Dto of the request query
+   * @returns a User or null
+   */
   @Get(':id')
   public async findOne(
     @Param() paramsDto: <<Model pascal>>FindUniqueParamsDto,
@@ -75,7 +74,44 @@ export class <<Model pascal>>Controller {
     );
     return this.<<Model camel>>Service.findUnique(formatedParams);
   }
+  
+  /**
+   * Find zero or more <<Model pascal>> entities that matches the filter
+   *
+   * @param queryDto - Dto of the request query
+   * @returns an array of <<Model pascal>> entities
+   */
+  @Get()
+  public async findMany(
+    @Query() queryDto: <<Model pascal>>FindManyQueryDto,
+  ): Promise<<<Model pascal>>[]> {
+    const formatedParams = this.<<Model camel>>RestDtoService.formatFindManyDto(queryDto);
+    return this.<<Model camel>>Service.findMany(formatedParams);
+  }
  
+  /**
+   * Count the number of <<Model pascal>> entities that matches the filter
+   *
+   * @param queryDto - Dto of the request query
+   * @returns the number of <<Model pascal>>
+   */
+  @Get('count')
+  public async count(@Query() queryDto: <<Model pascal>>CountQueryDto): Promise<number> {
+    const formatedParams = this.<<Model camel>>RestDtoService.formatCountDto(queryDto);
+    return this.<<Model camel>>Service.count(formatedParams);
+  }
+   
+  /**
+   * Update one <<Model pascal>>
+   *
+   * @Remarks
+   *
+   * Partial updates are allowed with this method
+   *
+   * @param paramsDto - Dto of the request param
+   * @param bodyDto - Dto of the request body
+   * @returns the updated <<Model pascal>>
+   */
   @Patch(':id')
   public async update(
     @Param() paramsDto: <<Model pascal>>UpdateParamsDto,
@@ -88,6 +124,18 @@ export class <<Model pascal>>Controller {
     return this.<<Model camel>>Service.update(formatedParams);
   }
  
+  /**
+   * Update or create one <<Model pascal>>
+   *
+   * @Remarks
+   *
+   * Partial updates are forbidden with this method. It will 
+   * fully replace the matched entity
+   *
+   * @param paramsDto - Dto of the request param
+   * @param bodyDto - Dto of the request body
+   * @returns the updated <<Model pascal>>
+   */
   @Put(':id')
   public async upsert(
     @Param() paramsDto: <<Model pascal>>UpsertParamsDto,
@@ -100,6 +148,12 @@ export class <<Model pascal>>Controller {
     return this.<<Model camel>>Service.upsert(formatedParams);
   }
  
+  /**
+   * Delete one <<Model pascal>>
+   *
+   * @param paramsDto - Dto of the request param
+   * @returns the updated <<Model pascal>>
+   */
   @Delete(':id')
   public async delete(@Param() paramsDto: <<Model pascal>>DeleteParamsDto): Promise<<<Model pascal>>> {
     const formatedParams = this.<<Model camel>>RestDtoService.formatDeleteDto(paramsDto);

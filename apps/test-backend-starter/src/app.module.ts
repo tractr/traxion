@@ -25,6 +25,6 @@ import { UserCustomService } from './services';
       (),
   ],
   controllers: [AppController],
-  providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
+  // providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
 })
 export class AppModule {}
