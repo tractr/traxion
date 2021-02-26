@@ -7,7 +7,7 @@ import { UserService } from '../generated/user';
 export class UserCustomService extends UserService {
   public async findMany(params: Prisma.UserFindManyArgs): Promise<User[]> {
     console.log(
-      'I am replacing default Userservice, but I will call his findMany method anyway',
+      'I am replacing default Userservice, but I will call his findMany method anyway'
     );
     return super.findMany(params);
   }
