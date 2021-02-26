@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ModuleOverride } from '@tractr/hapify-plugin-nestjs-core';
+
 import { UserModule } from './user';
 
 @Module({})

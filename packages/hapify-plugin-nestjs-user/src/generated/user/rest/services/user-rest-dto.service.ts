@@ -1,16 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+
 import {
   UserCountQueryDto,
   UserCreateBodyDto,
+  UserDeleteParamsDto,
   UserFindManyQueryDto,
   UserFindUniqueParamsDto,
   UserUpdateBodyDto,
   UserUpdateParamsDto,
   UserUpsertBodyDto,
   UserUpsertParamsDto,
-  UserDeleteParamsDto,
 } from '../dtos';
+
 @Injectable()
 export class UserRestDtoService {
   public formatCreateDto(
