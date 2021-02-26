@@ -105,13 +105,7 @@ export class UserRestDtoService {
       role,
       banned,
     };
-    const update = {
-      name,
-      email,
-      password,
-      role,
-      banned,
-    };
+    const update = { ...create };
     return {
       create,
       update,
