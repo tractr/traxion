@@ -10,11 +10,11 @@
     "hpf-generate-config": "./index.js"
   },
   "files": [
-    "./lib",
+    "./dist",
     "index.js"
   ],
   "scripts": {
-    "prebuild": "rimraf lib",
+    "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.build.json",
     "postinstall": "npm run build",
     "prepublish": "npm run build"
