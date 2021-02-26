@@ -4,6 +4,7 @@ import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
 import { UserService } from '../../generated/user';
+import { USER_SERVICE } from '../../generated/user/common/user-model.constant';
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
 import { AccessTokenDto } from '../dtos';
 import { BadPasswordError, UserNotFoundError } from '../errors';
@@ -14,6 +15,7 @@ export class AuthenticationService {
   constructor(
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
     private readonly authenticationOptions: AuthenticationOptions,
+    @Inject(USER_SERVICE)
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}

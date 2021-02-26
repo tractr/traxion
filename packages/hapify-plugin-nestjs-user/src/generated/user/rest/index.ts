@@ -1,4 +1,5 @@
+export * from './controllers';
 export * from './dtos';
 export * from './services';
-export * from './controllers';
+export * from './user-rest.constant';
 export * from './user-rest.module';
