@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "generate": "npm run hpf:generate && npm run prisma:merge-schema && npm run prisma:format && npm run prisma:generate",
+    "generate": "npm run hpf:generate && npm run prisma:merge-schema && npm run prisma:format && npm run prisma:generate && npm run lint:prettier:fix",
     "hpf:generate": "npm run hpf:generate:config && hpf generate",
     "hpf:generate:config": "hpf-generate-config",
     "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint",

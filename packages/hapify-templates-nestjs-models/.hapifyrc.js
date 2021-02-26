@@ -48,6 +48,11 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'src/generated/{kebab}/common/{kebab}-model.constant.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'src/generated/{kebab}/common/services/index.ts',
       engine: 'hpf',
       input: 'one',
@@ -64,6 +69,11 @@ module.exports = {
     },
     {
       path: 'src/generated/{kebab}/rest/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'src/generated/{kebab}/rest/{kebab}-rest.constant.ts',
       engine: 'hpf',
       input: 'one',
     },
