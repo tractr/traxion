@@ -8,7 +8,7 @@ import { UserDatabaseService } from './user-database.service';
 export class UserService {
   constructor(
     @Inject(USER_DATABASE_SERVICE)
-    private readonly userDatabaseService: UserDatabaseService,
+    protected readonly userDatabaseService: UserDatabaseService,
   ) {}
 
   public async create(params: Prisma.UserCreateArgs): Promise<User> {

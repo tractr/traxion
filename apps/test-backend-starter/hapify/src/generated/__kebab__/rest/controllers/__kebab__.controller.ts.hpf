@@ -35,9 +35,9 @@ import { <<Model pascal>>RestDtoService } from '../services';
 export class <<Model pascal>>Controller {
   constructor(
     @Inject(<<Model constant>>_SERVICE)
-    private <<Model camel>>Service: <<Model pascal>>Service,
+    protected <<Model camel>>Service: <<Model pascal>>Service,
     @Inject(<<Model constant>>_REST_DTO_SERVICE)
-    private <<Model camel>>RestDtoService: <<Model pascal>>RestDtoService,
+    protected <<Model camel>>RestDtoService: <<Model pascal>>RestDtoService,
   ) {}
  
   /**
