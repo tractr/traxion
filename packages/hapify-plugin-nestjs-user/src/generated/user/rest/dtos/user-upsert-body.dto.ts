@@ -1,27 +1,20 @@
-
-import {  
-  IsBoolean, 
-  IsString,
-  IsEmail, 
-  Matches, 
-} from 'class-validator';
+import { IsBoolean, IsString, IsEmail, Matches } from 'class-validator';
 
 export class UserUpsertBodyDto {
-  @IsString() 
+  @IsString()
   name!: string;
 
-  @IsString() 
-  @IsEmail({}, ) 
+  @IsString()
+  @IsEmail({})
   email!: string;
 
-  @IsString() 
-  @Matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/, ) 
+  @IsString()
+  @Matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)
   password!: string;
 
-  @IsString() 
+  @IsString()
   role!: string;
 
-  @IsBoolean() 
+  @IsBoolean()
   banned!: boolean;
-
 }
