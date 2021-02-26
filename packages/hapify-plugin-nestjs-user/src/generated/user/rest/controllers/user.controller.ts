@@ -43,7 +43,7 @@ export class UserController {
 
   @Get()
   public async findMany(
-    @Query() queryDto: UserFindManyQueryDto
+    @Query() queryDto: UserFindManyQueryDto,
   ): Promise<User[]> {
     const formatedParams = this.userRestDtoService.formatFindManyDto(queryDto);
     return this.userService.findMany(formatedParams);
@@ -68,11 +68,11 @@ export class UserController {
   @Patch(':id')
   public async update(
     @Param() paramsDto: UserUpdateParamsDto,
-    @Body() bodyDto: UserUpdateBodyDto
+    @Body() bodyDto: UserUpdateBodyDto,
   ): Promise<User> {
     const formatedParams = this.userRestDtoService.formatUpdateDtos(
       paramsDto,
-      bodyDto
+      bodyDto,
     );
     return this.userService.update(formatedParams);
   }
@@ -80,11 +80,11 @@ export class UserController {
   @Put(':id')
   public async upsert(
     @Param() paramsDto: UserUpsertParamsDto,
-    @Body() bodyDto: UserUpsertBodyDto
+    @Body() bodyDto: UserUpsertBodyDto,
   ): Promise<User> {
     const formatedParams = this.userRestDtoService.formatUpsertDtos(
       paramsDto,
-      bodyDto
+      bodyDto,
     );
     return this.userService.upsert(formatedParams);
   }

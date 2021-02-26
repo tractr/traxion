@@ -5,7 +5,5 @@ import { UserModule } from './user';
 
 @Module({})
 export class ModelsModule extends ModuleOverride {
-  static dependencies = [
-    UserModule,
-  ];
+  static dependencies = [UserModule];
 }
