@@ -46,7 +46,7 @@ export class <<Model pascal>>Controller {
  
   @Get()
   public async findMany(
-    @Query() queryDto: <<Model pascal>>FindManyQueryDto
+    @Query() queryDto: <<Model pascal>>FindManyQueryDto,
   ): Promise<<<Model pascal>>[]> {
     const formatedParams = this.<<Model camel>>RestDtoService.formatFindManyDto(queryDto);
     return this.<<Model camel>>Service.findMany(formatedParams);
@@ -62,13 +62,13 @@ export class <<Model pascal>>Controller {
   public async findOne(
     @Param() paramsDto: <<Model pascal>>FindUniqueParamsDto,
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-    @Query() queryDto: <<Model pascal>>FindUniqueQueryDto
+    @Query() queryDto: <<Model pascal>>FindUniqueQueryDto,
     <<<}>>>
   ): Promise<<<Model pascal>> | null> {
     const formatedParams = this.<<Model camel>>RestDtoService.formatFindUniqueDtos(
       paramsDto,
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-      queryDto
+      queryDto,
     <<<}>>>
     );
     return this.<<Model camel>>Service.findUnique(formatedParams);
@@ -77,11 +77,11 @@ export class <<Model pascal>>Controller {
   @Patch(':id')
   public async update(
     @Param() paramsDto: <<Model pascal>>UpdateParamsDto,
-    @Body() bodyDto: <<Model pascal>>UpdateBodyDto
+    @Body() bodyDto: <<Model pascal>>UpdateBodyDto,
   ): Promise<<<Model pascal>>> {
     const formatedParams = this.<<Model camel>>RestDtoService.formatUpdateDtos(
       paramsDto,
-      bodyDto
+      bodyDto,
     );
     return this.<<Model camel>>Service.update(formatedParams);
   }
@@ -89,11 +89,11 @@ export class <<Model pascal>>Controller {
   @Put(':id')
   public async upsert(
     @Param() paramsDto: <<Model pascal>>UpsertParamsDto,
-    @Body() bodyDto: <<Model pascal>>UpsertBodyDto
+    @Body() bodyDto: <<Model pascal>>UpsertBodyDto,
   ): Promise<<<Model pascal>>> {
     const formatedParams = this.<<Model camel>>RestDtoService.formatUpsertDtos(
       paramsDto,
-      bodyDto
+      bodyDto,
     );
     return this.<<Model camel>>Service.upsert(formatedParams);
   }

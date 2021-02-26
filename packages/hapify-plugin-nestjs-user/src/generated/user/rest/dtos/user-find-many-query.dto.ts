@@ -1,7 +1,4 @@
-import {
-  Prisma,
-  User,
-} from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import {
   IsOptional,
   IsString,
@@ -9,39 +6,35 @@ import {
   IsNumber,
   IsInt,
   Min,
-  IsBoolean, 
-  IsEmail, 
+  IsBoolean,
+  IsEmail,
 } from 'class-validator';
 
 export class UserFindManyQueryDto {
-  @IsString() 
+  @IsString()
   @IsOptional()
   name?: string;
 
-  @IsString() 
-  @IsEmail({}, ) 
+  @IsString()
+  @IsEmail({})
   @IsOptional()
   email?: string;
 
-  @IsString() 
+  @IsString()
   @IsOptional()
   role?: string;
 
-  @IsBoolean() 
+  @IsBoolean()
   @IsOptional()
   banned?: boolean;
 
- 
   @IsOptional()
   @IsString()
-  @IsIn([
-    'name',
-    'email',
-  ]) 
+  @IsIn(['name', 'email'])
   sort: keyof User = 'id';
 
   @IsOptional()
-  @IsIn(Object.values(Prisma.SortOrder)) 
+  @IsIn(Object.values(Prisma.SortOrder))
   order: Prisma.SortOrder = 'asc';
 
   @IsNumber()
