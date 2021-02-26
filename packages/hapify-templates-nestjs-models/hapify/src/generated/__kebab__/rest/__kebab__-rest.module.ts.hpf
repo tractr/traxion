@@ -1,17 +1,21 @@
 import { Module } from '@nestjs/common';
 import { ModuleOverride } from '@tractr/hapify-plugin-nestjs-core';
-import { DatabaseModule } from '@tractr/hapify-plugin-nestjs-database';
+
 import { <<Model pascal>>ModelModule } from '../common';
 import { <<Model pascal>>Controller } from './controllers';
 import { <<Model pascal>>RestDtoService } from './services';
-  
+import { <<Model constant>>_CONTROLLER, <<Model constant>>_REST_DTO_SERVICE } from './ <<Model kebab>>-rest.constant';
+
+const providers = [
+  { provide: <<Model constant>>_REST_DTO_SERVICE, useClass: <<Model pascal>>RestDtoService }
+];
+
 @Module({
-  imports: [DatabaseModule],
-  exports: [<<Model pascal>>RestDtoService],
-  providers: [<<Model pascal>>RestDtoService],
-  controllers: [<<Model pascal>>Controller],
+  exports: providers,
+  providers,
 })
 export class <<Model pascal>>RestModule extends ModuleOverride {
+  static controllers = [{ provide: <<Model constant>>_CONTROLLER, <<Model pascal>>Controller] }];
+
   static dependencies = [<<Model pascal>>ModelModule];
 }
-
