@@ -14,7 +14,7 @@
     "prebuild": "rimraf lib",
     "build": "nest build",
     "build:watch": "npm run build -- --watch",
-    "generate": "npm run hpf:generate && npm run prisma:merge-schema && npm run prisma:format && npm run prisma:generate && npm run lint:prettier:fix",
+    "generate": "rimraf src/generated && npm run hpf:generate && npm run prisma:merge-schema && npm run prisma:format && npm run prisma:generate && npm run lint:prettier:fix",
     "hpf:generate": "npm run hpf:generate:config && hpf generate",
     "hpf:generate:config": "hpf-generate-config",
     "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint",
