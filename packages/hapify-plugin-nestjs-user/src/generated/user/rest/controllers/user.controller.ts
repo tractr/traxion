@@ -14,6 +14,7 @@ import { User } from '@prisma/client';
 
 import { UserService } from '../../common';
 import { USER_SERVICE } from '../../common/user-model.constant';
+import { USER_REST_DTO_SERVICE } from '../user-rest.constant';
 import {
   UserCountQueryDto,
   UserCreateBodyDto,
@@ -27,12 +28,13 @@ import {
 } from '../dtos';
 import { UserRestDtoService } from '../services';
 
-@Controller(['user', 'admin/user'])
+@Controller(['user'])
 export class UserController {
   constructor(
     @Inject(USER_SERVICE)
-    private userService: UserService,
-    private userRestDtoService: UserRestDtoService,
+    protected userService: UserService,
+    @Inject(USER_REST_DTO_SERVICE)
+    protected userRestDtoService: UserRestDtoService,
   ) {}
 
   @Post()

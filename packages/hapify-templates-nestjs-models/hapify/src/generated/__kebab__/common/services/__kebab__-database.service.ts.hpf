@@ -4,7 +4,7 @@ import { DatabaseService } from '@tractr/hapify-plugin-nestjs-database';
   
 @Injectable()
 export class <<Model pascal>>DatabaseService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(protected readonly databaseService: DatabaseService) {}
  
   /**
    * Find zero or one <<Model pascal>> that matches the filter
