@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { CoreModule } from '@tractr/hapify-plugin-nestjs-core';
 import { DatabaseModule } from '@tractr/hapify-plugin-nestjs-database';
-import { AuthenticationModule } from '@tractr/hapify-plugin-nestjs-user';
+import {
+  AuthenticationModule,
+  JwtAuthGuard,
+} from '@tractr/hapify-plugin-nestjs-user';
 import { UserService } from '@tractr/hapify-plugin-nestjs-user/lib/src/generated/user';
 
 import { AppController } from './controllers';
@@ -12,7 +16,7 @@ import { UserCustomService } from './services';
   imports: [
     CoreModule,
     DatabaseModule,
-    // ModelsModule.register(),
+    ModelsModule.register(),
     AuthenticationModule
       .register
       //   undefined, {
@@ -21,6 +25,6 @@ import { UserCustomService } from './services';
       (),
   ],
   controllers: [AppController],
-  providers: [],
+  providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
 })
 export class AppModule {}

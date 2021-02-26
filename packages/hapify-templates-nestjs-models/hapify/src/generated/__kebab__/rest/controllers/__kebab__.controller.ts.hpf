@@ -14,6 +14,7 @@ import { <<Model pascal>> } from '@prisma/client';
  
 import { <<Model pascal>>Service } from '../../common';
 import { <<Model constant>>_SERVICE } from '../../common/<<Model kebab>>-model.constant';
+import { <<Model constant>>_REST_DTO_SERVICE } from '../<<Model kebab>>-rest.constant';
 import {
   <<Model pascal>>CountQueryDto,
   <<Model pascal>>CreateBodyDto,
@@ -30,11 +31,12 @@ import {
 } from '../dtos';
 import { <<Model pascal>>RestDtoService } from '../services';
  
-@Controller(['<<Model kebab>>', 'admin/<<Model kebab>>'])
+@Controller(['<<Model kebab>>'])
 export class <<Model pascal>>Controller {
   constructor(
     @Inject(<<Model constant>>_SERVICE)
     private <<Model camel>>Service: <<Model pascal>>Service,
+    @Inject(<<Model constant>>_REST_DTO_SERVICE)
     private <<Model camel>>RestDtoService: <<Model pascal>>RestDtoService,
   ) {}
  

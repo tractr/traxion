@@ -1,5 +1,4 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import {
@@ -17,7 +16,6 @@ import {
 } from './config';
 import { AUTHENTICATION_MODULE_OPTIONS } from './constants';
 import { LoginController } from './controllers';
-import { JwtAuthGuard } from './guards';
 import { AuthenticationOptions } from './interfaces';
 import { AuthenticationService, StrategyOptionsService } from './services';
 import { JwtStrategy, LocalStrategy } from './strategies';
@@ -87,7 +85,6 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
       ],
       providers: [
         ...(authenticationOptionsModule.providers ?? []),
-        // { provide: APP_GUARD, useClass: JwtAuthGuard },
         AuthenticationService,
         StrategyOptionsService,
         JwtStrategy,
