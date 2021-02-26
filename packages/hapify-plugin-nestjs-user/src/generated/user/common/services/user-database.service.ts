@@ -6,7 +6,7 @@ export class UserDatabaseService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   public findUnique(
-    params: Prisma.UserFindUniqueArgs
+    params: Prisma.UserFindUniqueArgs,
   ): ReturnType<
     Prisma.UserDelegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -16,7 +16,7 @@ export class UserDatabaseService {
   }
 
   public findFirst(
-    params: Prisma.UserFindFirstArgs
+    params: Prisma.UserFindFirstArgs,
   ): ReturnType<
     Prisma.UserDelegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -26,7 +26,7 @@ export class UserDatabaseService {
   }
 
   public findMany(
-    params: Prisma.UserFindManyArgs
+    params: Prisma.UserFindManyArgs,
   ): ReturnType<
     Prisma.UserDelegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -36,7 +36,7 @@ export class UserDatabaseService {
   }
 
   public create(
-    params: Prisma.UserCreateArgs
+    params: Prisma.UserCreateArgs,
   ): ReturnType<
     Prisma.UserDelegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -46,7 +46,7 @@ export class UserDatabaseService {
   }
 
   public update(
-    params: Prisma.UserUpdateArgs
+    params: Prisma.UserUpdateArgs,
   ): ReturnType<
     Prisma.UserDelegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -56,7 +56,7 @@ export class UserDatabaseService {
   }
 
   public updateMany(
-    params: Prisma.UserUpdateManyArgs
+    params: Prisma.UserUpdateManyArgs,
   ): ReturnType<
     Prisma.UserDelegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -66,7 +66,7 @@ export class UserDatabaseService {
   }
 
   public upsert(
-    params: Prisma.UserUpsertArgs
+    params: Prisma.UserUpsertArgs,
   ): ReturnType<
     Prisma.UserDelegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -76,7 +76,7 @@ export class UserDatabaseService {
   }
 
   public delete(
-    params: Prisma.UserDeleteArgs
+    params: Prisma.UserDeleteArgs,
   ): ReturnType<
     Prisma.UserDelegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -86,7 +86,7 @@ export class UserDatabaseService {
   }
 
   public deleteMany(
-    params: Prisma.UserDeleteManyArgs
+    params: Prisma.UserDeleteManyArgs,
   ): ReturnType<
     Prisma.UserDelegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -96,7 +96,7 @@ export class UserDatabaseService {
   }
 
   public count(
-    params: Prisma.UserCountArgs
+    params: Prisma.UserCountArgs,
   ): ReturnType<
     Prisma.UserDelegate<Prisma.PrismaClientOptions['rejectOnNotFound']>['count']
   > {
@@ -104,7 +104,7 @@ export class UserDatabaseService {
   }
 
   public aggregate(
-    params: Prisma.UserAggregateArgs
+    params: Prisma.UserAggregateArgs,
   ): ReturnType<
     Prisma.UserDelegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']

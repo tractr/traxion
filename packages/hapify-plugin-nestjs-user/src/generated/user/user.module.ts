@@ -1,14 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ModuleOverride } from '@tractr/hapify-plugin-nestjs-core';
-import { DatabaseModule } from '@tractr/hapify-plugin-nestjs-database';
+import { UserModelModule } from './common';
 import { UserRestModule } from './rest';
 
-@Module({
-  imports: [DatabaseModule],
-})
+@Module({})
 export class UserModule extends ModuleOverride {
   static dependencies: Array<typeof ModuleOverride> = [
     UserRestModule,
-    UserModule,
+    UserModelModule,
   ];
 }

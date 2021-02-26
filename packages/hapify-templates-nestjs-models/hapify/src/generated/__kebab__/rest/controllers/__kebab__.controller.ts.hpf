@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
   Param,
   Patch,
   Post,
@@ -10,28 +11,31 @@ import {
   Query,
 } from '@nestjs/common';
 import { <<Model pascal>> } from '@prisma/client';
+
 import { <<Model pascal>>Service } from '../../common';
+import { <<Model constant>>_SERVICE } from '../../common/<<Model kebab>>-model.constant';
 import {
+  <<Model pascal>>CountQueryDto,
   <<Model pascal>>CreateBodyDto,
+  <<Model pascal>>DeleteParamsDto,
+  <<Model pascal>>FindManyQueryDto,
   <<Model pascal>>FindUniqueParamsDto,
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
   <<Model pascal>>FindUniqueQueryDto,
 <<<}>>>
-  <<Model pascal>>FindManyQueryDto,
-  <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpdateBodyDto,
-  <<Model pascal>>UpsertParamsDto,
+  <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpsertBodyDto,
-  <<Model pascal>>CountQueryDto,
-  <<Model pascal>>DeleteParamsDto,
+  <<Model pascal>>UpsertParamsDto,
 } from '../dtos';
 import { <<Model pascal>>RestDtoService } from '../services';
  
 @Controller(['<<Model kebab>>', 'admin/<<Model kebab>>'])
 export class <<Model pascal>>Controller {
   constructor(
+    @Inject(<<Model constant>>_SERVICE)
     private <<Model camel>>Service: <<Model pascal>>Service,
-    private <<Model camel>>RestDtoService: <<Model pascal>>RestDtoService
+    private <<Model camel>>RestDtoService: <<Model pascal>>RestDtoService,
   ) {}
  
   @Post()

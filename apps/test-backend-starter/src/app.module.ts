@@ -12,10 +12,13 @@ import { UserCustomService } from './services';
   imports: [
     CoreModule,
     DatabaseModule,
-    ModelsModule.register(),
-    AuthenticationModule.register(undefined, {
-      providers: [{ provide: UserService, useClass: UserCustomService }],
-    }),
+    // ModelsModule.register(),
+    AuthenticationModule
+      .register
+      //   undefined, {
+      //   providers: [{ provide: USER_SERVICE, useClass: UserCustomService }],
+      // }
+      (),
   ],
   controllers: [AppController],
   providers: [],

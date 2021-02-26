@@ -7,7 +7,7 @@ export class <<Model pascal>>DatabaseService {
   constructor(private readonly databaseService: DatabaseService) {}
  
   public findUnique(
-    params: Prisma.<<Model pascal>>FindUniqueArgs
+    params: Prisma.<<Model pascal>>FindUniqueArgs,
   ): ReturnType<
     Prisma.<<Model pascal>>Delegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -17,7 +17,7 @@ export class <<Model pascal>>DatabaseService {
   }
  
   public findFirst(
-    params: Prisma.<<Model pascal>>FindFirstArgs
+    params: Prisma.<<Model pascal>>FindFirstArgs,
   ): ReturnType<
     Prisma.<<Model pascal>>Delegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -27,7 +27,7 @@ export class <<Model pascal>>DatabaseService {
   }
  
   public findMany(
-    params: Prisma.<<Model pascal>>FindManyArgs
+    params: Prisma.<<Model pascal>>FindManyArgs,
   ): ReturnType<
     Prisma.<<Model pascal>>Delegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -37,7 +37,7 @@ export class <<Model pascal>>DatabaseService {
   }
  
   public create(
-    params: Prisma.<<Model pascal>>CreateArgs
+    params: Prisma.<<Model pascal>>CreateArgs,
   ): ReturnType<
     Prisma.<<Model pascal>>Delegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -47,7 +47,7 @@ export class <<Model pascal>>DatabaseService {
   }
  
   public update(
-    params: Prisma.<<Model pascal>>UpdateArgs
+    params: Prisma.<<Model pascal>>UpdateArgs,
   ): ReturnType<
     Prisma.<<Model pascal>>Delegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -57,7 +57,7 @@ export class <<Model pascal>>DatabaseService {
   }
  
   public updateMany(
-    params: Prisma.<<Model pascal>>UpdateManyArgs
+    params: Prisma.<<Model pascal>>UpdateManyArgs,
   ): ReturnType<
     Prisma.<<Model pascal>>Delegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -67,7 +67,7 @@ export class <<Model pascal>>DatabaseService {
   }
  
   public upsert(
-    params: Prisma.<<Model pascal>>UpsertArgs
+    params: Prisma.<<Model pascal>>UpsertArgs,
   ): ReturnType<
     Prisma.<<Model pascal>>Delegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -77,7 +77,7 @@ export class <<Model pascal>>DatabaseService {
   }
  
   public delete(
-    params: Prisma.<<Model pascal>>DeleteArgs
+    params: Prisma.<<Model pascal>>DeleteArgs,
   ): ReturnType<
     Prisma.<<Model pascal>>Delegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -87,7 +87,7 @@ export class <<Model pascal>>DatabaseService {
   }
  
   public deleteMany(
-    params: Prisma.<<Model pascal>>DeleteManyArgs
+    params: Prisma.<<Model pascal>>DeleteManyArgs,
   ): ReturnType<
     Prisma.<<Model pascal>>Delegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
@@ -97,7 +97,7 @@ export class <<Model pascal>>DatabaseService {
   }
  
   public count(
-    params: Prisma.<<Model pascal>>CountArgs
+    params: Prisma.<<Model pascal>>CountArgs,
   ): ReturnType<
     Prisma.<<Model pascal>>Delegate<Prisma.PrismaClientOptions['rejectOnNotFound']>['count']
   > {
@@ -105,7 +105,7 @@ export class <<Model pascal>>DatabaseService {
   }
  
   public aggregate(
-    params: Prisma.<<Model pascal>>AggregateArgs
+    params: Prisma.<<Model pascal>>AggregateArgs,
   ): ReturnType<
     Prisma.<<Model pascal>>Delegate<
       Prisma.PrismaClientOptions['rejectOnNotFound']
