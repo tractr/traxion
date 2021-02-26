@@ -50,7 +50,7 @@ export class <<Model pascal>>CountQueryDto {
   <<endif>>
 
   <<if field entity>>
-  @IsUUID("all" <<=listModifier(field)>>) 
+  @IsUUID("all", <<=listModifier(field)>>) 
   <<endif>>
 
   <<if field enum>>

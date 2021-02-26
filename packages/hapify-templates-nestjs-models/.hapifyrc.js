@@ -23,6 +23,11 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'src/generated/helpers/format-entity-ids.helper.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'src/generated/{kebab}/index.ts',
       engine: 'hpf',
       input: 'one',
