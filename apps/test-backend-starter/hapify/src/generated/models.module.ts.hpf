@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ModuleOverride } from '@tractr/hapify-plugin-nestjs-core';
+ 
 <<for Models model>>
 import { <<model pascal>>Module } from './<<model kebab>>';
 <<endfor>>
@@ -8,7 +9,7 @@ import { <<model pascal>>Module } from './<<model kebab>>';
 export class ModelsModule extends ModuleOverride {
   static dependencies = [
   <<for Models model>>
-  <<model pascal>>Module,
+    <<model pascal>>Module,
   <<endfor>>
   ];
 }

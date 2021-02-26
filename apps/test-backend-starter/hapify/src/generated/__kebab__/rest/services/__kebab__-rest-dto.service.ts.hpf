@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+ 
 import {
   <<Model pascal>>CountQueryDto,
   <<Model pascal>>CreateBodyDto,
+  <<Model pascal>>DeleteParamsDto,
   <<Model pascal>>FindManyQueryDto,
   <<Model pascal>>FindUniqueParamsDto,
   <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
@@ -12,16 +14,14 @@ import {
   <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpsertBodyDto,
   <<Model pascal>>UpsertParamsDto,
-  <<Model pascal>>DeleteParamsDto,
 } from '../dtos';
-
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
 import { 
   formatPopulate,
   formatEntityIds,
 } from '../../../helpers';
 <<<}>>>
-
+ 
 @Injectable()
 export class <<Model pascal>>RestDtoService {
   public formatCreateDto(
