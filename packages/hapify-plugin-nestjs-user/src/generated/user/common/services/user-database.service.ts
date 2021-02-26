@@ -4,7 +4,7 @@ import { DatabaseService } from '@tractr/hapify-plugin-nestjs-database';
 
 @Injectable()
 export class UserDatabaseService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(protected readonly databaseService: DatabaseService) {}
 
   public findUnique(
     params: Prisma.UserFindUniqueArgs,

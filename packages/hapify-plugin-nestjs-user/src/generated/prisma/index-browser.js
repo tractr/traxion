@@ -12,11 +12,11 @@ exports.Prisma = Prisma
 
 /**
  * Prisma Client JS version: 2.17.0
- * Query Engine version: a973e24a4e5194f8fe3301bfa7ff982b24f97c05
+ * Query Engine version: 3c463ebd78b1d21d8fdacdd27899e280cf686223
  */
 Prisma.prismaVersion = {
   client: "2.17.0",
-  engine: "a973e24a4e5194f8fe3301bfa7ff982b24f97c05"
+  engine: "3c463ebd78b1d21d8fdacdd27899e280cf686223"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
