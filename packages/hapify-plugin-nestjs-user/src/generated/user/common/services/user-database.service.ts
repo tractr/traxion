@@ -6,6 +6,12 @@ import { DatabaseService } from '@tractr/hapify-plugin-nestjs-database';
 export class UserDatabaseService {
   constructor(protected readonly databaseService: DatabaseService) {}
 
+  /**
+   * Find zero or one User that matches the filter
+   *
+   * @param params - Arguments to find a unique User
+   * @returns a User or null
+   */
   public findUnique(
     params: Prisma.UserFindUniqueArgs,
   ): ReturnType<
@@ -16,6 +22,12 @@ export class UserDatabaseService {
     return this.databaseService.user.findUnique(params);
   }
 
+  /**
+   * Find the first User that matches the filter
+   *
+   * @param params - Arguments to find a User
+   * @returns a User or null
+   */
   public findFirst(
     params: Prisma.UserFindFirstArgs,
   ): ReturnType<
@@ -26,6 +38,12 @@ export class UserDatabaseService {
     return this.databaseService.user.findFirst(params);
   }
 
+  /**
+   * Find zero or more User entities that matches the filter
+   *
+   * @param params - Arguments to find User entities
+   * @returns an array of User
+   */
   public findMany(
     params: Prisma.UserFindManyArgs,
   ): ReturnType<
@@ -36,6 +54,12 @@ export class UserDatabaseService {
     return this.databaseService.user.findMany(params);
   }
 
+  /**
+   * Create a new User
+   *
+   * @param params - Arguments to create a new User
+   * @returns a new User
+   */
   public create(
     params: Prisma.UserCreateArgs,
   ): ReturnType<
@@ -46,6 +70,12 @@ export class UserDatabaseService {
     return this.databaseService.user.create(params);
   }
 
+  /**
+   * Update one User
+   *
+   * @param params - Arguments to update one User
+   * @returns the updated User
+   */
   public update(
     params: Prisma.UserUpdateArgs,
   ): ReturnType<
@@ -56,6 +86,12 @@ export class UserDatabaseService {
     return this.databaseService.user.update(params);
   }
 
+  /**
+   * Update zero or more User entities
+   *
+   * @param params - Arguments to update one or more User entities
+   * @returns the updated User entities
+   */
   public updateMany(
     params: Prisma.UserUpdateManyArgs,
   ): ReturnType<
@@ -66,6 +102,12 @@ export class UserDatabaseService {
     return this.databaseService.user.updateMany(params);
   }
 
+  /**
+   * Create or update one User
+   *
+   * @param params - Arguments to update or create a User
+   * @returns the created or updated User
+   */
   public upsert(
     params: Prisma.UserUpsertArgs,
   ): ReturnType<
@@ -76,6 +118,12 @@ export class UserDatabaseService {
     return this.databaseService.user.upsert(params);
   }
 
+  /**
+   * Delete a User
+   *
+   * @param params - Arguments to delete one User
+   * @returns the deleted User
+   */
   public delete(
     params: Prisma.UserDeleteArgs,
   ): ReturnType<
@@ -86,6 +134,12 @@ export class UserDatabaseService {
     return this.databaseService.user.delete(params);
   }
 
+  /**
+   * Delete zero or more User entities
+   *
+   * @param params - Arguments to filter User entities to delete
+   * @returns the deleted User entities
+   */
   public deleteMany(
     params: Prisma.UserDeleteManyArgs,
   ): ReturnType<
@@ -96,6 +150,12 @@ export class UserDatabaseService {
     return this.databaseService.user.deleteMany(params);
   }
 
+  /**
+   * Count the number of User entities
+   *
+   * @param params - Arguments to filter User entities to count
+   * @returns the number of User entities that matches the filter
+   */
   public count(
     params: Prisma.UserCountArgs,
   ): ReturnType<
@@ -104,6 +164,12 @@ export class UserDatabaseService {
     return this.databaseService.user.count(params);
   }
 
+  /**
+   * Allows to perform aggregations operations on a User
+   *
+   * @param params - Select aggragations to apply
+   * @returns the result of the aggregation (number)
+   */
   public aggregate(
     params: Prisma.UserAggregateArgs,
   ): ReturnType<
