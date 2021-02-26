@@ -9,7 +9,8 @@
     <<field camel>><<=getReferencedEntityPrimary(field).names.pascal>> <<=getReferencedEntityPrimaryType(field)>>
         <<elseif field manyMany>>
     // Relation: <<field lower>>
-    <<field camel>> <<field pascal>>On<<model pascal>>[]
+    // <<field camel>> <<field pascal>>On<<model pascal>>[]
+    <<field camel>> <<field.model pascal>>[]
         <<else>>
     <<field camel>> <<=prismaType(field, model)>> <<=primary(field)>> <<=unique(field)>>
         <<endif>>
@@ -22,25 +23,26 @@
             <<elseif field oneMany>>
     <<ref camel>>As<<field pascal>> <<ref pascal>>[]
             <<elseif field manyMany>>
-    <<ref camel>>As<<field pascal>> <<field pascal>>On<<ref pascal>>[]
+    <<ref camel>>As<<field pascal>> <<ref pascal>>[]
+    //<<ref camel>>As<<field pascal>> <<field pascal>>On<<ref pascal>>[]
             <<endif>>
         <<endfor>>
     <<endfor>>
   }
    
 <<endfor>>
-
+ 
 <<for Models model>>
     <<for model.fields manyMany field>>
 // Many-to-many relations of <<model camel>>.<<field camel>>
-model <<field pascal>>On<<model pascal>> {
-  <<model camel>> <<model pascal>> @relation(fields: [<<model camel>>], references: [id])
-  <<model camel>>Id Int 
-  <<field.model camel>> <<field.model pascal>> @relation(fields: [<<field.model camel>>Id], references: [id])
-  <<field.model camel>>Id Int
-  createdAt   DateTime @default(now())
-  @@id([<<model camel>>Id, <<field.model camel>>Id])
-}
+// model <<field pascal>>On<<model pascal>> {
+//  <<model camel>> <<model pascal>> @relation(fields: [<<model camel>>Id], references: [id])
+//  <<model camel>>Id <<=getEntityPrimaryType(model)>> 
+//  <<field.model camel>> <<field.model pascal>> @relation(fields: [<<field.model camel>>Id], references: [id])
+//  <<field.model camel>>Id <<=getEntityPrimaryType(model)>>
+//  createdAt   DateTime @default(now())
+//  @@id([<<model camel>>Id, <<field.model camel>>Id])
+//}
     <<endfor>>
 <<endfor>>
  
@@ -64,6 +66,14 @@ function getReferencedEntityPrimary(f) {
 function getReferencedEntityPrimaryType(f) {
   if (f.model.fields.primary.type === 'string') return 'String';
   if (f.model.fields.primary.type === 'number') return 'Int';
+  throw new Error("Only types 'number' and 'string' are allowed for primary key")
+}
+>>>
+
+<<<
+function getEntityPrimaryType(m) {
+  if (m.fields.primary.type === 'string') return 'String';
+  if (m.fields.primary.type === 'number') return 'Int';
   throw new Error("Only types 'number' and 'string' are allowed for primary key")
 }
 >>>

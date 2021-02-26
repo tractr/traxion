@@ -153,8 +153,11 @@
         },
         {
           "name": "rights",
-          "type": "string",
+          "type": "entity",
+          "subtype": "manyMany",
+          "value": "950ddfff-ff9a-64b3-da86-8d60da75d3fe",
           "properties": [
+            "multiple",
             "searchable",
             "sortable"
           ]
