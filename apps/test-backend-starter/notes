@@ -1,7 +1,3 @@
-SORT and PAGINATION
----------------------------------------------------------
--> ajouter les sort à la route findMany
--> ajouter la pagination à la route findMany
 
 VALIDATION
 ---------------------------------------------------------
@@ -14,7 +10,7 @@ VALIDATION
   -> rich text
 
 xx number
-  xx integer
+  -> integer
   -> float
   -> latitude
   -> longitude
@@ -52,5 +48,9 @@ NE PAS OUBLIER
 
 -> Ajouter des commentaires dans les templates
 -> Mettre en place les unit tests
--> wrapper tout le code généré dans un namespace
--> Gestion des 404 et des conflits
+-> wrapper tout le code généré dans un namespace ?
+-> Gestion des 404 et des conflits (exception filter)
+-> Gestion des accès dans les templates
+-> Nettoyer / uniformiser et commenter les templates
+-> Documenter ce que gèrent/gèrent pas les templates hapify -- mettre en place le validator
+-> Ajouter les named relation dans le schema prisma

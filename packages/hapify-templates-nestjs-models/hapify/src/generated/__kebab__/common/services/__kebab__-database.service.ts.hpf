@@ -1,11 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from '@tractr/hapify-plugin-nestjs-database';
- 
+  
 @Injectable()
 export class <<Model pascal>>DatabaseService {
   constructor(private readonly databaseService: DatabaseService) {}
  
+  /**
+   * Find zero or one <<Model pascal>> that matches the filter
+   *
+   * @param params - Arguments to find a unique <<Model pascal>>
+   * @returns a User or null
+   */
   public findUnique(
     params: Prisma.<<Model pascal>>FindUniqueArgs,
   ): ReturnType<
@@ -15,7 +21,13 @@ export class <<Model pascal>>DatabaseService {
   > {
     return this.databaseService.<<Model camel>>.findUnique(params);
   }
- 
+   
+  /**
+   * Find the first <<Model pascal>> that matches the filter
+   *
+   * @param params - Arguments to find a User
+   * @returns a User or null
+   */
   public findFirst(
     params: Prisma.<<Model pascal>>FindFirstArgs,
   ): ReturnType<
@@ -26,6 +38,12 @@ export class <<Model pascal>>DatabaseService {
     return this.databaseService.<<Model camel>>.findFirst(params);
   }
  
+  /**
+   * Find zero or more <<Model pascal>> entities that matches the filter
+   *
+   * @param params - Arguments to find <<Model pascal>> entities
+   * @returns an array of <<Model pascal>>
+   */
   public findMany(
     params: Prisma.<<Model pascal>>FindManyArgs,
   ): ReturnType<
@@ -36,6 +54,12 @@ export class <<Model pascal>>DatabaseService {
     return this.databaseService.<<Model camel>>.findMany(params);
   }
  
+  /**
+   * Create a new <<Model pascal>>
+   *
+   * @param params - Arguments to create a new <<Model pascal>>
+   * @returns a new <<Model pascal>>
+   */
   public create(
     params: Prisma.<<Model pascal>>CreateArgs,
   ): ReturnType<
@@ -46,6 +70,12 @@ export class <<Model pascal>>DatabaseService {
     return this.databaseService.<<Model camel>>.create(params);
   }
  
+  /**
+   * Update one <<Model pascal>>
+   *
+   * @param params - Arguments to update one <<Model pascal>>
+   * @returns the updated <<Model pascal>>
+   */
   public update(
     params: Prisma.<<Model pascal>>UpdateArgs,
   ): ReturnType<
@@ -56,6 +86,12 @@ export class <<Model pascal>>DatabaseService {
     return this.databaseService.<<Model camel>>.update(params);
   }
  
+  /**
+   * Update zero or more <<Model pascal>> entities
+   *
+   * @param params - Arguments to update one or more <<Model pascal>> entities
+   * @returns the updated <<Model pascal>> entities
+   */
   public updateMany(
     params: Prisma.<<Model pascal>>UpdateManyArgs,
   ): ReturnType<
@@ -66,6 +102,12 @@ export class <<Model pascal>>DatabaseService {
     return this.databaseService.<<Model camel>>.updateMany(params);
   }
  
+  /**
+   * Create or update one <<Model pascal>>
+   *
+   * @param params - Arguments to update or create a <<Model pascal>>
+   * @returns the created or updated <<Model pascal>>
+   */
   public upsert(
     params: Prisma.<<Model pascal>>UpsertArgs,
   ): ReturnType<
@@ -76,6 +118,12 @@ export class <<Model pascal>>DatabaseService {
     return this.databaseService.<<Model camel>>.upsert(params);
   }
  
+  /**
+   * Delete a <<Model pascal>>
+   *
+   * @param params - Arguments to delete one <<Model pascal>>
+   * @returns the deleted <<Model pascal>>
+   */
   public delete(
     params: Prisma.<<Model pascal>>DeleteArgs,
   ): ReturnType<
@@ -86,6 +134,12 @@ export class <<Model pascal>>DatabaseService {
     return this.databaseService.<<Model camel>>.delete(params);
   }
  
+  /**
+   * Delete zero or more <<Model pascal>> entities
+   *
+   * @param params - Arguments to filter <<Model pascal>> entities to delete
+   * @returns the deleted <<Model pascal>> entities
+   */
   public deleteMany(
     params: Prisma.<<Model pascal>>DeleteManyArgs,
   ): ReturnType<
@@ -96,6 +150,12 @@ export class <<Model pascal>>DatabaseService {
     return this.databaseService.<<Model camel>>.deleteMany(params);
   }
  
+  /**
+   * Count the number of <<Model pascal>> entities
+   *
+   * @param params - Arguments to filter <<Model pascal>> entities to count
+   * @returns the number of <<Model pascal>> entities that matches the filter
+   */
   public count(
     params: Prisma.<<Model pascal>>CountArgs,
   ): ReturnType<
@@ -104,6 +164,12 @@ export class <<Model pascal>>DatabaseService {
     return this.databaseService.<<Model camel>>.count(params);
   }
  
+  /**
+   * Allows to perform aggregations operations on a <<Model pascal>>
+   *
+   * @param params - Select aggragations to apply
+   * @returns the result of the aggregation (number)
+   */
   public aggregate(
     params: Prisma.<<Model pascal>>AggregateArgs,
   ): ReturnType<
