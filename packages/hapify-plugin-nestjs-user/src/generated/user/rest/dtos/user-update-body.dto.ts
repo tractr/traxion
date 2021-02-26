@@ -1,33 +1,31 @@
-
-import {  
-  IsBoolean, 
+import {
+  IsBoolean,
   IsString,
-  IsEmail, 
-  Matches, 
+  IsEmail,
+  Matches,
   IsOptional,
 } from 'class-validator';
 
 export class UserUpdateBodyDto {
-  @IsString() 
+  @IsString()
   @IsOptional()
   name?: string;
 
-  @IsString() 
-  @IsEmail({}, ) 
+  @IsString()
+  @IsEmail({})
   @IsOptional()
   email?: string;
 
-  @IsString() 
-  @Matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/, ) 
+  @IsString()
+  @Matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)
   @IsOptional()
   password?: string;
 
-  @IsString() 
+  @IsString()
   @IsOptional()
   role?: string;
 
-  @IsBoolean() 
+  @IsBoolean()
   @IsOptional()
   banned?: boolean;
-
 }

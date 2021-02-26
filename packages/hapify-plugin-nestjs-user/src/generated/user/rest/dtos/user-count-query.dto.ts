@@ -1,27 +1,20 @@
-
-import {
-  IsOptional,
-  IsBoolean, 
-  IsString,
-  IsEmail, 
-} from 'class-validator';
+import { IsOptional, IsBoolean, IsString, IsEmail } from 'class-validator';
 
 export class UserCountQueryDto {
-  @IsString() 
+  @IsString()
   @IsOptional()
   name?: string;
 
-  @IsString() 
-  @IsEmail({}, ) 
+  @IsString()
+  @IsEmail({})
   @IsOptional()
   email?: string;
 
-  @IsString() 
+  @IsString()
   @IsOptional()
   role?: string;
 
-  @IsBoolean() 
+  @IsBoolean()
   @IsOptional()
   banned?: boolean;
-
 }
