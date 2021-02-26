@@ -1,12 +1,23 @@
 import { Module } from '@nestjs/common';
 import { ModuleOverride } from '@tractr/hapify-plugin-nestjs-core';
-import { DatabaseModule } from '@tractr/hapify-plugin-nestjs-database';
+
 import { <<Model pascal>>DatabaseService, <<Model pascal>>Service } from './services';
-  
+import { <<Model constant>>_DATABASE_SERVICE, <<Model constant>>_SERVICE } from './<<Model kebab>>-model.constant';
+
+const providers = [
+  {
+    provide: <<Model constant>>_SERVICE,
+    useClass: <<Model pascal>>Service
+  },
+  {
+    provide: <<Model constant>>_DATABASE_SERVICE,
+    useClass: <<Model pascal>>DatabaseService],
+  },
+];
+
 @Module({
-  imports: [DatabaseModule],
-  exports: [<<Model pascal>>Service, <<Model pascal>>DatabaseService],
-  providers: [<<Model pascal>>Service, <<Model pascal>>DatabaseService],
+  exports: [providers],
+  providers: [providers],
 })
 export class <<Model pascal>>ModelModule extends ModuleOverride {}
 

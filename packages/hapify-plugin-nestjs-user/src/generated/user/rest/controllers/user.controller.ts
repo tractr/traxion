@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
   Param,
   Patch,
   Post,
@@ -12,6 +13,7 @@ import {
 import { User } from '@prisma/client';
 
 import { UserService } from '../../common';
+import { USER_SERVICE } from '../../common/user-model.constant';
 import {
   UserCountQueryDto,
   UserCreateBodyDto,
@@ -28,6 +30,7 @@ import { UserRestDtoService } from '../services';
 @Controller(['user', 'admin/user'])
 export class UserController {
   constructor(
+    @Inject(USER_SERVICE)
     private userService: UserService,
     private userRestDtoService: UserRestDtoService,
   ) {}
