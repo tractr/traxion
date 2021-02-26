@@ -22,7 +22,7 @@ export class UserRestModule extends ModuleOverride {
     {
       provide: USER_CONTROLLER,
       useClass: UserController,
-    }
+    },
   ];
 
   static dependencies = [UserModelModule];

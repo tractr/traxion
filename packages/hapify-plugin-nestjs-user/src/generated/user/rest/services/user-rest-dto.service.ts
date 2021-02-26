@@ -15,69 +15,64 @@ import {
 
 @Injectable()
 export class UserRestDtoService {
-  public formatCreateDto(
-    {
-      name,
-      email,
-      password,
-      role,
-      banned,
-    }: UserCreateBodyDto
-  ): Prisma.UserCreateArgs {
-    const data = {
+  public formatCreateDto({
     name,
     email,
     password,
     role,
     banned,
-    }
+  }: UserCreateBodyDto): Prisma.UserCreateArgs {
+    const data = {
+      name,
+      email,
+      password,
+      role,
+      banned,
+    };
     return { data };
   }
 
-  public formatCountDto(
-    {
+  public formatCountDto({
+    name,
+    email,
+    role,
+    banned,
+  }: UserCountQueryDto): Prisma.UserCountArgs {
+    const where = {
       name,
       email,
       role,
       banned,
-    }: UserCountQueryDto): Prisma.UserCountArgs {
-    const where = {
-        name,
-        email,
-        role,
-        banned,
-    }
+    };
     return { where };
   }
 
   public formatFindUniqueDtos(
     paramsDto: UserFindUniqueParamsDto,
   ): Prisma.UserFindUniqueArgs {
-    return { 
+    return {
       where: { ...paramsDto },
     };
   }
 
-  public formatFindManyDto(
-    {
-      name,
-      email,
-      role,
-      banned,
-      sort,
-      order,
-      take,
-      skip,
-    }: UserFindManyQueryDto
-  ): Prisma.UserFindManyArgs {
+  public formatFindManyDto({
+    name,
+    email,
+    role,
+    banned,
+    sort,
+    order,
+    take,
+    skip,
+  }: UserFindManyQueryDto): Prisma.UserFindManyArgs {
     const where: Prisma.UserWhereInput = {
       name,
       email,
       role,
       banned,
-    }
-    const orderBy = {[sort]: order}
-    return { 
+    };
+    const orderBy = { [sort]: order };
+    return {
       where,
       take,
       skip,
@@ -87,57 +82,45 @@ export class UserRestDtoService {
 
   public formatUpdateDtos(
     paramsDto: UserUpdateParamsDto,
-    {
+    { name, email, password, role, banned }: UserUpdateBodyDto,
+  ): Prisma.UserUpdateArgs {
+    const data = {
       name,
       email,
       password,
       role,
       banned,
-    }: UserUpdateBodyDto
-  ): Prisma.UserUpdateArgs {
-    const data = {
-    name,
-    email,
-    password,
-    role,
-    banned,
-    }
+    };
     return { data, where: { ...paramsDto } };
   }
 
   public formatUpsertDtos(
     paramsDto: UserUpsertParamsDto,
-    {
+    { name, email, password, role, banned }: UserUpsertBodyDto,
+  ): Prisma.UserUpsertArgs {
+    const create = {
       name,
       email,
       password,
       role,
       banned,
-    }: UserUpsertBodyDto
-  ): Prisma.UserUpsertArgs {
-    const create = {
-    name,
-    email,
-    password,
-    role,
-    banned,
     };
     const update = {
-    name,
-    email,
-    password,
-    role,
-    banned,
+      name,
+      email,
+      password,
+      role,
+      banned,
     };
-    return { 
+    return {
       create,
       update,
-      where: { ...paramsDto } 
+      where: { ...paramsDto },
     };
   }
 
   public formatDeleteDto(
-    paramsDto: UserDeleteParamsDto
+    paramsDto: UserDeleteParamsDto,
   ): Prisma.UserDeleteArgs {
     return { where: { ...paramsDto } };
   }

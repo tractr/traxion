@@ -22,7 +22,7 @@ export class <<Model pascal>>RestModule extends ModuleOverride {
     {
       provide: <<Model constant>>_CONTROLLER,
       useClass: <<Model pascal>>Controller,
-    }
+    },
   ];
  
   static dependencies = [<<Model pascal>>ModelModule];
