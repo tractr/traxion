@@ -5,17 +5,10 @@ import {
   Type,
 } from '@nestjs/common';
 
+import { ModuleOverrideMetadata } from '../interfaces';
 import { isClass } from './is-class.helper';
 import { getMetadataFromModule } from './module-metadata.helper';
 import { uniqueConcat } from './unique-array.helper';
-
-export interface ModuleOverrideMetadata {
-  dependencies?: Array<typeof ModuleOverride>;
-  imports?: ModuleMetadata['imports'];
-  exports?: ModuleMetadata['exports'];
-  providers?: ModuleMetadata['providers'];
-  controllers?: Array<Type | ClassProvider>;
-}
 
 export class ModuleOverride implements ModuleOverrideMetadata {
   static imports?: ModuleMetadata['imports'];
@@ -62,7 +55,7 @@ export class ModuleOverride implements ModuleOverrideMetadata {
     };
 
     const dynamicModyle = this.extractDependencies(
-      uniqueConcat<typeof ModuleOverride>(
+      uniqueConcat<ModuleOverrideMetadata>(
         metadata.dependencies ?? [],
         override.dependencies ?? [],
       ),
@@ -146,8 +139,8 @@ export class ModuleOverride implements ModuleOverrideMetadata {
    * @returns A ModuleOverrideMetadata list
    */
   static extractDependencies(
-    dependencies: Array<typeof ModuleOverride>,
-    excludeDependencies: Set<typeof ModuleOverride> = new Set(),
+    dependencies: Array<ModuleOverrideMetadata>,
+    excludeDependencies: Set<ModuleOverrideMetadata> = new Set(),
   ): ModuleOverrideMetadata[] {
     return dependencies
       .filter((dependency) => !excludeDependencies.has(dependency))
