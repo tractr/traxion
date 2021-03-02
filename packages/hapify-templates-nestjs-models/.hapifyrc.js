@@ -157,5 +157,50 @@ module.exports = {
       engine: 'hpf',
       input: 'one',
     },
+    {
+      path: 'test/generated/mocks/index.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'test/generated/mocks/database-service.mock.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/{kebab}.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/{kebab}.service.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/{kebab}-rest-dto.service.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/unit/{kebab}.service.spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/unit/{kebab}-database.service.spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/unit/{kebab}.controller.spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
   ],
 };
