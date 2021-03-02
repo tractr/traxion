@@ -1,0 +1,64 @@
+import { 
+  <<Model pascal>>,
+  <<for Fields enum enumField>>
+  <<Model pascal>><<enumField pascal>>
+  <<endfor>>
+} from '@prisma/client';
+
+import {
+
+  <<if Fields primary or entity or number or boolean>>
+  random,
+  <<endif>>
+
+  <<if Fields email or password or url>>
+  internet,
+  <<endif>>
+
+  <<if Fields string and not (email or password or url)>>
+  lorem,
+  <<endif>>
+
+  <<if Fields datetime>>
+  date
+  <<endif>>
+
+} from 'faker';
+  
+export function mock<<Model pascal>>Factory(override: Partial< <<Model pascal>> > = {}): <<Model pascal>> {
+  return {
+  <<for Fields not entity field>>
+    <<field camel>>: <<=getFaker(field)>>,
+  <<endfor>>
+  <<for Fields oneOne or oneMany field>>
+    <<field camel>>Id: <<=getFaker(field)>>,
+  <<endfor>>
+    ...override,
+  };
+}
+
+<<<
+function getBaseFaker(f) {
+  if (f.primary && f.type === 'string') return 'random.uuid()';
+  if (f.primary && f.type === 'number') return 'random.number()';
+  if (f.type === 'string' && !f.subtype) return 'lorem.words()';
+  if (f.type === 'string' && f.subtype === 'email') return 'internet.email()';
+  if (f.type === 'string' && f.subtype === 'password') return 'internet.password()';
+  if (f.type === 'string' && f.subtype === 'url') return 'internet.url()';
+  if (f.type === 'boolean') return 'random.boolean()';
+  if (f.type === 'number') return 'random.number()';
+  if (f.type === 'datetime') return 'date.past()';
+  if (f.type === 'entity') return 'random.uuid()';
+  if (f.type === 'enum') return `random.arrayElement(Object.values(${root.names.pascal}${f.names.pascal}))`;
+}
+>>>
+ 
+<<<
+function getFaker(f) {
+  if (f.multiple) {
+   return `new Array(3).map(() => ${getBaseFaker(f)})`; 
+  } else {
+    return getBaseFaker(f);
+  }
+}
+>>>

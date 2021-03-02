@@ -1,0 +1,14 @@
+import { <<Model pascal>>RestDtoService } from '../../../../src/generated';
+
+export function mock<<Model pascal>>RestDtoServiceFactory(): <<Model pascal>>RestDtoService {
+  return ({
+    formatCreateDto: jest.fn(),
+    formatFindUniqueDtos: jest.fn(),
+    formatFindManyDto: jest.fn(),
+    formatCountDto: jest.fn(),
+    formatUpdateDtos: jest.fn(),
+    formatUpsertDtos: jest.fn(),
+    formatDeleteDto: jest.fn(),
+  } as unknown) as <<Model pascal>>RestDtoService;
+}
+
