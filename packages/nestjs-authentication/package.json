@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/hapify-plugin-nestjs-user",
+  "name": "@tractr/nestjs-authentication",
   "version": "0.0.0",
   "private": true,
   "description": "",

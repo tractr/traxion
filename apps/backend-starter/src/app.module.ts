@@ -3,7 +3,7 @@ import { APP_GUARD } from '@nestjs/core';
 import {
   AuthenticationModule,
   JwtAuthGuard,
-} from '@tractr/hapify-plugin-nestjs-user';
+} from '@tractr/nestjs-authentication';
 import { CoreModule } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 
