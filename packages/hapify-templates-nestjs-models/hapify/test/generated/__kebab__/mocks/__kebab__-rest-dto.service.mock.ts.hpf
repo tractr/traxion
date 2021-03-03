@@ -1,5 +1,5 @@
 import { <<Model pascal>>RestDtoService } from '../../../../src/generated';
-
+  
 export function mock<<Model pascal>>RestDtoServiceFactory(): <<Model pascal>>RestDtoService {
   return ({
     formatCreateDto: jest.fn(),

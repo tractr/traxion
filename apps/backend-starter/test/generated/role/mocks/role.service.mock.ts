@@ -1,4 +1,5 @@
 import { RoleService } from '../../../../src/generated';
+
 export function mockRoleServiceFactory(): RoleService {
   return ({
     create: jest.fn(),

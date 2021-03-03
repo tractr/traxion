@@ -1,4 +1,5 @@
 import { ProfileRestDtoService } from '../../../../src/generated';
+
 export function mockProfileRestDtoServiceFactory(): ProfileRestDtoService {
   return ({
     formatCreateDto: jest.fn(),

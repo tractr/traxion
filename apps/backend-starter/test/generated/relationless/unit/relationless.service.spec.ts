@@ -36,13 +36,13 @@ describe('RelationlessService', () => {
       const args = ({} as unknown) as Prisma.RelationlessCreateArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessDatabaseService.create as jest.Mock).mockReturnValueOnce(
-        relationless
+        relationless,
       );
       const result = await relationlessService.create(args);
       expect(result).toEqual(relationless);
       expect(mockedRelationlessDatabaseService.create).toHaveBeenCalledTimes(1);
       expect(mockedRelationlessDatabaseService.create).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -52,15 +52,15 @@ describe('RelationlessService', () => {
       const args = ({} as unknown) as Prisma.RelationlessFindUniqueArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessDatabaseService.findUnique as jest.Mock).mockReturnValueOnce(
-        relationless
+        relationless,
       );
       const result = await relationlessService.findUnique(args);
       expect(result).toEqual(relationless);
       expect(
-        mockedRelationlessDatabaseService.findUnique
+        mockedRelationlessDatabaseService.findUnique,
       ).toHaveBeenCalledTimes(1);
       expect(mockedRelationlessDatabaseService.findUnique).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -70,15 +70,15 @@ describe('RelationlessService', () => {
       const args = ({} as unknown) as Prisma.RelationlessFindManyArgs;
       const relationless = new Array(3).map(() => mockRelationlessFactory());
       (mockedRelationlessDatabaseService.findMany as jest.Mock).mockReturnValueOnce(
-        relationless
+        relationless,
       );
       const result = await relationlessService.findMany(args);
       expect(result).toEqual(relationless);
       expect(mockedRelationlessDatabaseService.findMany).toHaveBeenCalledTimes(
-        1
+        1,
       );
       expect(mockedRelationlessDatabaseService.findMany).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -88,13 +88,13 @@ describe('RelationlessService', () => {
       const args = ({} as unknown) as Prisma.RelationlessCountArgs;
       const relationless = 10;
       (mockedRelationlessDatabaseService.count as jest.Mock).mockReturnValueOnce(
-        relationless
+        relationless,
       );
       const result = await relationlessService.count(args);
       expect(result).toEqual(relationless);
       expect(mockedRelationlessDatabaseService.count).toHaveBeenCalledTimes(1);
       expect(mockedRelationlessDatabaseService.count).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -104,13 +104,13 @@ describe('RelationlessService', () => {
       const args = ({} as unknown) as Prisma.RelationlessUpdateArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessDatabaseService.update as jest.Mock).mockReturnValueOnce(
-        relationless
+        relationless,
       );
       const result = await relationlessService.update(args);
       expect(result).toEqual(relationless);
       expect(mockedRelationlessDatabaseService.update).toHaveBeenCalledTimes(1);
       expect(mockedRelationlessDatabaseService.update).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -120,13 +120,13 @@ describe('RelationlessService', () => {
       const args = ({} as unknown) as Prisma.RelationlessUpsertArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessDatabaseService.upsert as jest.Mock).mockReturnValueOnce(
-        relationless
+        relationless,
       );
       const result = await relationlessService.upsert(args);
       expect(result).toEqual(relationless);
       expect(mockedRelationlessDatabaseService.upsert).toHaveBeenCalledTimes(1);
       expect(mockedRelationlessDatabaseService.upsert).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -136,13 +136,13 @@ describe('RelationlessService', () => {
       const args = ({} as unknown) as Prisma.RelationlessDeleteArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessDatabaseService.delete as jest.Mock).mockReturnValueOnce(
-        relationless
+        relationless,
       );
       const result = await relationlessService.delete(args);
       expect(result).toEqual(relationless);
       expect(mockedRelationlessDatabaseService.delete).toHaveBeenCalledTimes(1);
       expect(mockedRelationlessDatabaseService.delete).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });

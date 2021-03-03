@@ -22,7 +22,7 @@ describe('ProfileDatabaseService', () => {
     }).compile();
 
     profileDatabaseService = module.get<ProfileDatabaseService>(
-      PROFILE_DATABASE_SERVICE
+      PROFILE_DATABASE_SERVICE,
     );
   });
 
@@ -40,7 +40,7 @@ describe('ProfileDatabaseService', () => {
       expect(result).toEqual(profile);
       expect(mockedDatabaseService.profile.findUnique).toHaveBeenCalledTimes(1);
       expect(mockedDatabaseService.profile.findUnique).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -55,7 +55,7 @@ describe('ProfileDatabaseService', () => {
       expect(result).toEqual(profile);
       expect(mockedDatabaseService.profile.findFirst).toHaveBeenCalledTimes(1);
       expect(mockedDatabaseService.profile.findFirst).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -65,7 +65,7 @@ describe('ProfileDatabaseService', () => {
       const args = ({} as unknown) as Prisma.ProfileFindManyArgs;
       const profile = new Array(3).map(() => mockProfileFactory());
       (mockedDatabaseService.profile.findMany as jest.Mock).mockReturnValueOnce(
-        profile
+        profile,
       );
       const result = await profileDatabaseService.findMany(args);
       expect(result).toEqual(profile);
@@ -79,7 +79,7 @@ describe('ProfileDatabaseService', () => {
       const args = ({} as unknown) as Prisma.ProfileCreateArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile.create as jest.Mock).mockReturnValueOnce(
-        profile
+        profile,
       );
       const result = await profileDatabaseService.create(args);
       expect(result).toEqual(profile);
@@ -93,7 +93,7 @@ describe('ProfileDatabaseService', () => {
       const args = ({} as unknown) as Prisma.ProfileUpdateArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile.update as jest.Mock).mockReturnValueOnce(
-        profile
+        profile,
       );
       const result = await profileDatabaseService.update(args);
       expect(result).toEqual(profile);
@@ -112,7 +112,7 @@ describe('ProfileDatabaseService', () => {
       expect(result).toEqual(profile);
       expect(mockedDatabaseService.profile.updateMany).toHaveBeenCalledTimes(1);
       expect(mockedDatabaseService.profile.updateMany).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -122,7 +122,7 @@ describe('ProfileDatabaseService', () => {
       const args = ({} as unknown) as Prisma.ProfileUpsertArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile.upsert as jest.Mock).mockReturnValueOnce(
-        profile
+        profile,
       );
       const result = await profileDatabaseService.upsert(args);
       expect(result).toEqual(profile);
@@ -136,7 +136,7 @@ describe('ProfileDatabaseService', () => {
       const args = ({} as unknown) as Prisma.ProfileDeleteArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile.delete as jest.Mock).mockReturnValueOnce(
-        profile
+        profile,
       );
       const result = await profileDatabaseService.delete(args);
       expect(result).toEqual(profile);
@@ -155,7 +155,7 @@ describe('ProfileDatabaseService', () => {
       expect(result).toEqual(profile);
       expect(mockedDatabaseService.profile.deleteMany).toHaveBeenCalledTimes(1);
       expect(mockedDatabaseService.profile.deleteMany).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -165,7 +165,7 @@ describe('ProfileDatabaseService', () => {
       const args = ({} as unknown) as Prisma.ProfileCountArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile.count as jest.Mock).mockReturnValueOnce(
-        profile
+        profile,
       );
       const result = await profileDatabaseService.count(args);
       expect(result).toEqual(profile);
@@ -184,7 +184,7 @@ describe('ProfileDatabaseService', () => {
       expect(result).toEqual(profile);
       expect(mockedDatabaseService.profile.aggregate).toHaveBeenCalledTimes(1);
       expect(mockedDatabaseService.profile.aggregate).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });

@@ -34,18 +34,18 @@ export class <<Model pascal>>RestDtoService {
     bodyDto: <<Model pascal>>CreateBodyDto
   ): Prisma.<<Model pascal>>CreateArgs {
     const {
-    <<for Fields not internal field>>
+    <<for Fields entity and not internal field>>
       <<field camel>>,
     <<endfor>>
+    ...values,
     } = bodyDto;
     const data = {
-    <<for Fields not internal field>>
+      ...values,
+    <<for Fields entity and not internal field>>
       <<if field oneOne or oneMany>>
     <<field camel>>: { connect: { id: <<field camel>> } },
-      <<elseif field manyMany>>
-    <<field camel>>: { set: formatEntityIds(<<field camel>>) },
       <<else>>
-    <<field camel>>,
+    <<field camel>>: { set: formatEntityIds(<<field camel>>) },
       <<endif>>
     <<endfor>>
     }
