@@ -36,7 +36,7 @@ describe('ProfileService', () => {
       const args = ({} as unknown) as Prisma.ProfileCreateArgs;
       const profile = mockProfileFactory();
       (mockedProfileDatabaseService.create as jest.Mock).mockReturnValueOnce(
-        profile
+        profile,
       );
       const result = await profileService.create(args);
       expect(result).toEqual(profile);
@@ -50,13 +50,13 @@ describe('ProfileService', () => {
       const args = ({} as unknown) as Prisma.ProfileFindUniqueArgs;
       const profile = mockProfileFactory();
       (mockedProfileDatabaseService.findUnique as jest.Mock).mockReturnValueOnce(
-        profile
+        profile,
       );
       const result = await profileService.findUnique(args);
       expect(result).toEqual(profile);
       expect(mockedProfileDatabaseService.findUnique).toHaveBeenCalledTimes(1);
       expect(mockedProfileDatabaseService.findUnique).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -66,7 +66,7 @@ describe('ProfileService', () => {
       const args = ({} as unknown) as Prisma.ProfileFindManyArgs;
       const profile = new Array(3).map(() => mockProfileFactory());
       (mockedProfileDatabaseService.findMany as jest.Mock).mockReturnValueOnce(
-        profile
+        profile,
       );
       const result = await profileService.findMany(args);
       expect(result).toEqual(profile);
@@ -80,7 +80,7 @@ describe('ProfileService', () => {
       const args = ({} as unknown) as Prisma.ProfileCountArgs;
       const profile = 10;
       (mockedProfileDatabaseService.count as jest.Mock).mockReturnValueOnce(
-        profile
+        profile,
       );
       const result = await profileService.count(args);
       expect(result).toEqual(profile);
@@ -94,7 +94,7 @@ describe('ProfileService', () => {
       const args = ({} as unknown) as Prisma.ProfileUpdateArgs;
       const profile = mockProfileFactory();
       (mockedProfileDatabaseService.update as jest.Mock).mockReturnValueOnce(
-        profile
+        profile,
       );
       const result = await profileService.update(args);
       expect(result).toEqual(profile);
@@ -108,7 +108,7 @@ describe('ProfileService', () => {
       const args = ({} as unknown) as Prisma.ProfileUpsertArgs;
       const profile = mockProfileFactory();
       (mockedProfileDatabaseService.upsert as jest.Mock).mockReturnValueOnce(
-        profile
+        profile,
       );
       const result = await profileService.upsert(args);
       expect(result).toEqual(profile);
@@ -122,7 +122,7 @@ describe('ProfileService', () => {
       const args = ({} as unknown) as Prisma.ProfileDeleteArgs;
       const profile = mockProfileFactory();
       (mockedProfileDatabaseService.delete as jest.Mock).mockReturnValueOnce(
-        profile
+        profile,
       );
       const result = await profileService.delete(args);
       expect(result).toEqual(profile);

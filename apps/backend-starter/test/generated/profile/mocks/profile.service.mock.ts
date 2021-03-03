@@ -1,4 +1,5 @@
 import { ProfileService } from '../../../../src/generated';
+
 export function mockProfileServiceFactory(): ProfileService {
   return ({
     create: jest.fn(),

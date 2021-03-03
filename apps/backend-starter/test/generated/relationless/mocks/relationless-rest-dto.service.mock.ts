@@ -1,4 +1,5 @@
 import { RelationlessRestDtoService } from '../../../../src/generated';
+
 export function mockRelationlessRestDtoServiceFactory(): RelationlessRestDtoService {
   return ({
     formatCreateDto: jest.fn(),

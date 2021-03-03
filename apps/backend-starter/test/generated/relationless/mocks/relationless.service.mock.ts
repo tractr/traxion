@@ -1,4 +1,5 @@
 import { RelationlessService } from '../../../../src/generated';
+
 export function mockRelationlessServiceFactory(): RelationlessService {
   return ({
     create: jest.fn(),
