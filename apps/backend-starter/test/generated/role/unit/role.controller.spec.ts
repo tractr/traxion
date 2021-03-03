@@ -22,10 +22,12 @@ import {
   mockRoleServiceFactory,
   mockRoleRestDtoServiceFactory,
 } from '../mocks';
+
 describe('RoleService', () => {
   let roleController: RoleController;
   let mockedRoleService: RoleService;
   let mockedRoleRestDtoService: RoleRestDtoService;
+
   beforeEach(async () => {
     mockedRoleService = (mockRoleServiceFactory() as unknown) as RoleService;
     mockedRoleRestDtoService = (mockRoleRestDtoServiceFactory() as unknown) as RoleRestDtoService;
@@ -38,150 +40,158 @@ describe('RoleService', () => {
     }).compile();
     roleController = module.get<RoleController>(RoleController);
   });
+
   it('should be defined', () => {
     expect(roleController).toBeDefined();
   });
+
   describe('create', () => {
-    it('should map to RoleDatabaseService.create', async () => {
+    it('should compose RoleRestDtoService.formatCreateDto and RoleDatabaseService.create', async () => {
       const bodyDto = ('body' as unknown) as RoleCreateBodyDto;
       const prismaArgs = ({} as unknown) as Prisma.RoleCreateArgs;
       const role = mockRoleFactory();
       (mockedRoleRestDtoService.formatCreateDto as jest.Mock).mockReturnValueOnce(
-        prismaArgs
+        prismaArgs,
       );
       (mockedRoleService.create as jest.Mock).mockReturnValueOnce(role);
       const result = await roleController.create(bodyDto);
       expect(result).toEqual(role);
       expect(mockedRoleRestDtoService.formatCreateDto).toHaveBeenCalledTimes(1);
       expect(mockedRoleRestDtoService.formatCreateDto).toHaveBeenCalledWith(
-        bodyDto
+        bodyDto,
       );
       expect(mockedRoleService.create).toHaveBeenCalledTimes(1);
       expect(mockedRoleService.create).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('findUnique', () => {
-    it('should map to RoleDatabaseService.create', async () => {
+    it('should compose RoleRestDtoService.formatFindUniqueDtos and RoleDatabaseService.findUnique', async () => {
       const paramsDto = ('params' as unknown) as RoleFindUniqueParamsDto;
       const queryDto = ('query' as unknown) as RoleFindUniqueQueryDto;
       const prismaArgs = ({} as unknown) as Prisma.RoleFindUniqueArgs;
       const role = mockRoleFactory();
       (mockedRoleRestDtoService.formatFindUniqueDtos as jest.Mock).mockReturnValueOnce(
-        prismaArgs
+        prismaArgs,
       );
       (mockedRoleService.findUnique as jest.Mock).mockReturnValueOnce(role);
       const result = await roleController.findUnique(paramsDto, queryDto);
       expect(result).toEqual(role);
       expect(
-        mockedRoleRestDtoService.formatFindUniqueDtos
+        mockedRoleRestDtoService.formatFindUniqueDtos,
       ).toHaveBeenCalledTimes(1);
       expect(
-        mockedRoleRestDtoService.formatFindUniqueDtos
+        mockedRoleRestDtoService.formatFindUniqueDtos,
       ).toHaveBeenCalledWith(paramsDto, queryDto);
       expect(mockedRoleService.findUnique).toHaveBeenCalledTimes(1);
       expect(mockedRoleService.findUnique).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('findMany', () => {
-    it('should map to RoleDatabaseService.create', async () => {
+    it('should compose RoleRestDtoService.formatFindManyDto and RoleDatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as RoleFindManyQueryDto;
       const prismaArgs = ({} as unknown) as Prisma.RoleFindManyArgs;
       const role = new Array(3).map(() => mockRoleFactory());
       (mockedRoleRestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
-        prismaArgs
+        prismaArgs,
       );
       (mockedRoleService.findMany as jest.Mock).mockReturnValueOnce(role);
       const result = await roleController.findMany(queryDto);
       expect(result).toEqual(role);
       expect(mockedRoleRestDtoService.formatFindManyDto).toHaveBeenCalledTimes(
-        1
+        1,
       );
       expect(mockedRoleRestDtoService.formatFindManyDto).toHaveBeenCalledWith(
-        queryDto
+        queryDto,
       );
       expect(mockedRoleService.findMany).toHaveBeenCalledTimes(1);
       expect(mockedRoleService.findMany).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('count', () => {
-    it('should map to RoleDatabaseService.create', async () => {
+    it('should compose RoleRestDtoService.formatCountDto and RoleDatabaseService.count', async () => {
       const queryDto = ('query' as unknown) as RoleCountQueryDto;
       const prismaArgs = ({} as unknown) as Prisma.RoleCountArgs;
       const role = 10;
       (mockedRoleRestDtoService.formatCountDto as jest.Mock).mockReturnValueOnce(
-        prismaArgs
+        prismaArgs,
       );
       (mockedRoleService.count as jest.Mock).mockReturnValueOnce(role);
       const result = await roleController.count(queryDto);
       expect(result).toEqual(role);
       expect(mockedRoleRestDtoService.formatCountDto).toHaveBeenCalledTimes(1);
       expect(mockedRoleRestDtoService.formatCountDto).toHaveBeenCalledWith(
-        queryDto
+        queryDto,
       );
       expect(mockedRoleService.count).toHaveBeenCalledTimes(1);
       expect(mockedRoleService.count).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('update', () => {
-    it('should map to RoleDatabaseService.create', async () => {
+    it('should compose RoleRestDtoService.formatUpdateDtos and RoleDatabaseService.update', async () => {
       const paramsDto = ('params' as unknown) as RoleUpdateParamsDto;
       const bodyDto = ('body' as unknown) as RoleUpdateBodyDto;
       const prismaArgs = ({} as unknown) as Prisma.RoleUpdateArgs;
       const role = mockRoleFactory();
       (mockedRoleRestDtoService.formatUpdateDtos as jest.Mock).mockReturnValueOnce(
-        prismaArgs
+        prismaArgs,
       );
       (mockedRoleService.update as jest.Mock).mockReturnValueOnce(role);
       const result = await roleController.update(paramsDto, bodyDto);
       expect(result).toEqual(role);
       expect(mockedRoleRestDtoService.formatUpdateDtos).toHaveBeenCalledTimes(
-        1
+        1,
       );
       expect(mockedRoleRestDtoService.formatUpdateDtos).toHaveBeenCalledWith(
         paramsDto,
-        bodyDto
+        bodyDto,
       );
       expect(mockedRoleService.update).toHaveBeenCalledTimes(1);
       expect(mockedRoleService.update).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('upsert', () => {
-    it('should map to RoleDatabaseService.create', async () => {
+    it('should compose RoleRestDtoService.formatUpsertDtos and RoleDatabaseService.upsert', async () => {
       const paramsDto = ('params' as unknown) as RoleUpsertParamsDto;
       const bodyDto = ('body' as unknown) as RoleUpsertBodyDto;
       const prismaArgs = ({} as unknown) as Prisma.RoleUpsertArgs;
       const role = mockRoleFactory();
       (mockedRoleRestDtoService.formatUpsertDtos as jest.Mock).mockReturnValueOnce(
-        prismaArgs
+        prismaArgs,
       );
       (mockedRoleService.upsert as jest.Mock).mockReturnValueOnce(role);
       const result = await roleController.upsert(paramsDto, bodyDto);
       expect(result).toEqual(role);
       expect(mockedRoleRestDtoService.formatUpsertDtos).toHaveBeenCalledTimes(
-        1
+        1,
       );
       expect(mockedRoleRestDtoService.formatUpsertDtos).toHaveBeenCalledWith(
         paramsDto,
-        bodyDto
+        bodyDto,
       );
       expect(mockedRoleService.upsert).toHaveBeenCalledTimes(1);
       expect(mockedRoleService.upsert).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('delete', () => {
-    it('should map to RoleDatabaseService.create', async () => {
+    it('should compose RoleRestDtoService.formatDeleteDto and RoleDatabaseService.delete', async () => {
       const paramsDto = ('params' as unknown) as RoleDeleteParamsDto;
       const prismaArgs = ({} as unknown) as Prisma.RoleDeleteArgs;
       const role = mockRoleFactory();
       (mockedRoleRestDtoService.formatDeleteDto as jest.Mock).mockReturnValueOnce(
-        prismaArgs
+        prismaArgs,
       );
       (mockedRoleService.delete as jest.Mock).mockReturnValueOnce(role);
       const result = await roleController.delete(paramsDto);
       expect(result).toEqual(role);
       expect(mockedRoleRestDtoService.formatDeleteDto).toHaveBeenCalledTimes(1);
       expect(mockedRoleRestDtoService.formatDeleteDto).toHaveBeenCalledWith(
-        paramsDto
+        paramsDto,
       );
       expect(mockedRoleService.delete).toHaveBeenCalledTimes(1);
       expect(mockedRoleService.delete).toHaveBeenCalledWith(prismaArgs);

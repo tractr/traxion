@@ -1,4 +1,5 @@
 import { RightService } from '../../../../src/generated';
+
 export function mockRightServiceFactory(): RightService {
   return ({
     create: jest.fn(),

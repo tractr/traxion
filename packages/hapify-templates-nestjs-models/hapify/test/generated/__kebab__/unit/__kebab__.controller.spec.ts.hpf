@@ -24,12 +24,12 @@ import {
   mock<<Model pascal>>ServiceFactory,
   mock<<Model pascal>>RestDtoServiceFactory,
 } from '../mocks';
-
+  
 describe('<<Model pascal>>Service', () => {
   let <<Model camel>>Controller: <<Model pascal>>Controller;
   let mocked<<Model pascal>>Service: <<Model pascal>>Service;
   let mocked<<Model pascal>>RestDtoService: <<Model pascal>>RestDtoService;
-
+  
   beforeEach(async () => {
     mocked<<Model pascal>>Service = (mock<<Model pascal>>ServiceFactory() as unknown) as <<Model pascal>>Service;
     mocked<<Model pascal>>RestDtoService = (mock<<Model pascal>>RestDtoServiceFactory() as unknown) as <<Model pascal>>RestDtoService;
@@ -42,13 +42,13 @@ describe('<<Model pascal>>Service', () => {
     }).compile();
     <<Model camel>>Controller = module.get< <<Model pascal>>Controller>(<<Model pascal>>Controller);
   });
-
+  
   it('should be defined', () => {
     expect(<<Model camel>>Controller).toBeDefined();
   });
-
+  
   describe('create', () => {
-    it('should map to <<Model pascal>>DatabaseService.create', async () => {
+    it('should compose <<Model pascal>>RestDtoService.formatCreateDto and <<Model pascal>>DatabaseService.create', async () => {
       const bodyDto = ('body' as unknown) as <<Model pascal>>CreateBodyDto;
       const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>CreateArgs;
       const <<Model camel>> = mock<<Model pascal>>Factory();
@@ -66,9 +66,9 @@ describe('<<Model pascal>>Service', () => {
       expect(mocked<<Model pascal>>Service.create).toHaveBeenCalledWith(prismaArgs);
     });
   });
-
+  
   describe('findUnique', () => {
-    it('should map to <<Model pascal>>DatabaseService.create', async () => {
+    it('should compose <<Model pascal>>RestDtoService.formatFindUniqueDtos and <<Model pascal>>DatabaseService.findUnique', async () => {
       const paramsDto = ('params' as unknown) as <<Model pascal>>FindUniqueParamsDto;
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
       const queryDto = ('query' as unknown) as <<Model pascal>>FindUniqueQueryDto;
@@ -101,9 +101,9 @@ describe('<<Model pascal>>Service', () => {
       expect(mocked<<Model pascal>>Service.findUnique).toHaveBeenCalledWith(prismaArgs);
     });
   });
-
+  
   describe('findMany', () => {
-    it('should map to <<Model pascal>>DatabaseService.create', async () => {
+    it('should compose <<Model pascal>>RestDtoService.formatFindManyDto and <<Model pascal>>DatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as <<Model pascal>>FindManyQueryDto;
       const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>FindManyArgs;
       const <<Model camel>> = new Array(3).map(() => mock<<Model pascal>>Factory());
@@ -123,9 +123,9 @@ describe('<<Model pascal>>Service', () => {
       expect(mocked<<Model pascal>>Service.findMany).toHaveBeenCalledWith(prismaArgs);
     });
   });
-
+  
   describe('count', () => {
-    it('should map to <<Model pascal>>DatabaseService.create', async () => {
+    it('should compose <<Model pascal>>RestDtoService.formatCountDto and <<Model pascal>>DatabaseService.count', async () => {
       const queryDto = ('query' as unknown) as <<Model pascal>>CountQueryDto;
       const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>CountArgs;
       const <<Model camel>> = 10;
@@ -143,9 +143,9 @@ describe('<<Model pascal>>Service', () => {
       expect(mocked<<Model pascal>>Service.count).toHaveBeenCalledWith(prismaArgs);
     });
   });
-
+  
   describe('update', () => {
-    it('should map to <<Model pascal>>DatabaseService.create', async () => {
+    it('should compose <<Model pascal>>RestDtoService.formatUpdateDtos and <<Model pascal>>DatabaseService.update', async () => {
       const paramsDto = ('params' as unknown) as <<Model pascal>>UpdateParamsDto;
       const bodyDto = ('body' as unknown) as <<Model pascal>>UpdateBodyDto;
       const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>UpdateArgs;
@@ -167,9 +167,9 @@ describe('<<Model pascal>>Service', () => {
       expect(mocked<<Model pascal>>Service.update).toHaveBeenCalledWith(prismaArgs);
     });
   });
-
+  
   describe('upsert', () => {
-    it('should map to <<Model pascal>>DatabaseService.create', async () => {
+    it('should compose <<Model pascal>>RestDtoService.formatUpsertDtos and <<Model pascal>>DatabaseService.upsert', async () => {
       const paramsDto = ('params' as unknown) as <<Model pascal>>UpsertParamsDto;
       const bodyDto = ('body' as unknown) as <<Model pascal>>UpsertBodyDto;
       const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>UpsertArgs;
@@ -191,9 +191,9 @@ describe('<<Model pascal>>Service', () => {
       expect(mocked<<Model pascal>>Service.upsert).toHaveBeenCalledWith(prismaArgs);
     });
   });
-
+  
   describe('delete', () => {
-    it('should map to <<Model pascal>>DatabaseService.create', async () => {
+    it('should compose <<Model pascal>>RestDtoService.formatDeleteDto and <<Model pascal>>DatabaseService.delete', async () => {
       const paramsDto = ('params' as unknown) as <<Model pascal>>DeleteParamsDto;
       const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>DeleteArgs;
       const <<Model camel>> = mock<<Model pascal>>Factory();
@@ -212,4 +212,4 @@ describe('<<Model pascal>>Service', () => {
     });
   });
 });
-
+  

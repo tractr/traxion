@@ -212,12 +212,22 @@
       "input": "one"
     },
     {
+      "path": "test/generated/{kebab}/mocks/{kebab}-create-body.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
       "path": "test/generated/{kebab}/unit/{kebab}.service.spec.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
       "path": "test/generated/{kebab}/unit/{kebab}-database.service.spec.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/unit/{kebab}-rest-dto.service.spec.ts",
       "engine": "hpf",
       "input": "one"
     },

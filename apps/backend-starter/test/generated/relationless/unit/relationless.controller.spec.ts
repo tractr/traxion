@@ -21,10 +21,12 @@ import {
   mockRelationlessServiceFactory,
   mockRelationlessRestDtoServiceFactory,
 } from '../mocks';
+
 describe('RelationlessService', () => {
   let relationlessController: RelationlessController;
   let mockedRelationlessService: RelationlessService;
   let mockedRelationlessRestDtoService: RelationlessRestDtoService;
+
   beforeEach(async () => {
     mockedRelationlessService = (mockRelationlessServiceFactory() as unknown) as RelationlessService;
     mockedRelationlessRestDtoService = (mockRelationlessRestDtoServiceFactory() as unknown) as RelationlessRestDtoService;
@@ -39,174 +41,182 @@ describe('RelationlessService', () => {
       controllers: [RelationlessController],
     }).compile();
     relationlessController = module.get<RelationlessController>(
-      RelationlessController
+      RelationlessController,
     );
   });
+
   it('should be defined', () => {
     expect(relationlessController).toBeDefined();
   });
+
   describe('create', () => {
-    it('should map to RelationlessDatabaseService.create', async () => {
+    it('should compose RelationlessRestDtoService.formatCreateDto and RelationlessDatabaseService.create', async () => {
       const bodyDto = ('body' as unknown) as RelationlessCreateBodyDto;
       const prismaArgs = ({} as unknown) as Prisma.RelationlessCreateArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessRestDtoService.formatCreateDto as jest.Mock).mockReturnValueOnce(
-        prismaArgs
+        prismaArgs,
       );
       (mockedRelationlessService.create as jest.Mock).mockReturnValueOnce(
-        relationless
+        relationless,
       );
       const result = await relationlessController.create(bodyDto);
       expect(result).toEqual(relationless);
       expect(
-        mockedRelationlessRestDtoService.formatCreateDto
+        mockedRelationlessRestDtoService.formatCreateDto,
       ).toHaveBeenCalledTimes(1);
       expect(
-        mockedRelationlessRestDtoService.formatCreateDto
+        mockedRelationlessRestDtoService.formatCreateDto,
       ).toHaveBeenCalledWith(bodyDto);
       expect(mockedRelationlessService.create).toHaveBeenCalledTimes(1);
       expect(mockedRelationlessService.create).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('findUnique', () => {
-    it('should map to RelationlessDatabaseService.create', async () => {
+    it('should compose RelationlessRestDtoService.formatFindUniqueDtos and RelationlessDatabaseService.findUnique', async () => {
       const paramsDto = ('params' as unknown) as RelationlessFindUniqueParamsDto;
       const prismaArgs = ({} as unknown) as Prisma.RelationlessFindUniqueArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessRestDtoService.formatFindUniqueDtos as jest.Mock).mockReturnValueOnce(
-        prismaArgs
+        prismaArgs,
       );
       (mockedRelationlessService.findUnique as jest.Mock).mockReturnValueOnce(
-        relationless
+        relationless,
       );
       const result = await relationlessController.findUnique(paramsDto);
       expect(result).toEqual(relationless);
       expect(
-        mockedRelationlessRestDtoService.formatFindUniqueDtos
+        mockedRelationlessRestDtoService.formatFindUniqueDtos,
       ).toHaveBeenCalledTimes(1);
       expect(
-        mockedRelationlessRestDtoService.formatFindUniqueDtos
+        mockedRelationlessRestDtoService.formatFindUniqueDtos,
       ).toHaveBeenCalledWith(paramsDto);
       expect(mockedRelationlessService.findUnique).toHaveBeenCalledTimes(1);
       expect(mockedRelationlessService.findUnique).toHaveBeenCalledWith(
-        prismaArgs
+        prismaArgs,
       );
     });
   });
+
   describe('findMany', () => {
-    it('should map to RelationlessDatabaseService.create', async () => {
+    it('should compose RelationlessRestDtoService.formatFindManyDto and RelationlessDatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as RelationlessFindManyQueryDto;
       const prismaArgs = ({} as unknown) as Prisma.RelationlessFindManyArgs;
       const relationless = new Array(3).map(() => mockRelationlessFactory());
       (mockedRelationlessRestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
-        prismaArgs
+        prismaArgs,
       );
       (mockedRelationlessService.findMany as jest.Mock).mockReturnValueOnce(
-        relationless
+        relationless,
       );
       const result = await relationlessController.findMany(queryDto);
       expect(result).toEqual(relationless);
       expect(
-        mockedRelationlessRestDtoService.formatFindManyDto
+        mockedRelationlessRestDtoService.formatFindManyDto,
       ).toHaveBeenCalledTimes(1);
       expect(
-        mockedRelationlessRestDtoService.formatFindManyDto
+        mockedRelationlessRestDtoService.formatFindManyDto,
       ).toHaveBeenCalledWith(queryDto);
       expect(mockedRelationlessService.findMany).toHaveBeenCalledTimes(1);
       expect(mockedRelationlessService.findMany).toHaveBeenCalledWith(
-        prismaArgs
+        prismaArgs,
       );
     });
   });
+
   describe('count', () => {
-    it('should map to RelationlessDatabaseService.create', async () => {
+    it('should compose RelationlessRestDtoService.formatCountDto and RelationlessDatabaseService.count', async () => {
       const queryDto = ('query' as unknown) as RelationlessCountQueryDto;
       const prismaArgs = ({} as unknown) as Prisma.RelationlessCountArgs;
       const relationless = 10;
       (mockedRelationlessRestDtoService.formatCountDto as jest.Mock).mockReturnValueOnce(
-        prismaArgs
+        prismaArgs,
       );
       (mockedRelationlessService.count as jest.Mock).mockReturnValueOnce(
-        relationless
+        relationless,
       );
       const result = await relationlessController.count(queryDto);
       expect(result).toEqual(relationless);
       expect(
-        mockedRelationlessRestDtoService.formatCountDto
+        mockedRelationlessRestDtoService.formatCountDto,
       ).toHaveBeenCalledTimes(1);
       expect(
-        mockedRelationlessRestDtoService.formatCountDto
+        mockedRelationlessRestDtoService.formatCountDto,
       ).toHaveBeenCalledWith(queryDto);
       expect(mockedRelationlessService.count).toHaveBeenCalledTimes(1);
       expect(mockedRelationlessService.count).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('update', () => {
-    it('should map to RelationlessDatabaseService.create', async () => {
+    it('should compose RelationlessRestDtoService.formatUpdateDtos and RelationlessDatabaseService.update', async () => {
       const paramsDto = ('params' as unknown) as RelationlessUpdateParamsDto;
       const bodyDto = ('body' as unknown) as RelationlessUpdateBodyDto;
       const prismaArgs = ({} as unknown) as Prisma.RelationlessUpdateArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessRestDtoService.formatUpdateDtos as jest.Mock).mockReturnValueOnce(
-        prismaArgs
+        prismaArgs,
       );
       (mockedRelationlessService.update as jest.Mock).mockReturnValueOnce(
-        relationless
+        relationless,
       );
       const result = await relationlessController.update(paramsDto, bodyDto);
       expect(result).toEqual(relationless);
       expect(
-        mockedRelationlessRestDtoService.formatUpdateDtos
+        mockedRelationlessRestDtoService.formatUpdateDtos,
       ).toHaveBeenCalledTimes(1);
       expect(
-        mockedRelationlessRestDtoService.formatUpdateDtos
+        mockedRelationlessRestDtoService.formatUpdateDtos,
       ).toHaveBeenCalledWith(paramsDto, bodyDto);
       expect(mockedRelationlessService.update).toHaveBeenCalledTimes(1);
       expect(mockedRelationlessService.update).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('upsert', () => {
-    it('should map to RelationlessDatabaseService.create', async () => {
+    it('should compose RelationlessRestDtoService.formatUpsertDtos and RelationlessDatabaseService.upsert', async () => {
       const paramsDto = ('params' as unknown) as RelationlessUpsertParamsDto;
       const bodyDto = ('body' as unknown) as RelationlessUpsertBodyDto;
       const prismaArgs = ({} as unknown) as Prisma.RelationlessUpsertArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessRestDtoService.formatUpsertDtos as jest.Mock).mockReturnValueOnce(
-        prismaArgs
+        prismaArgs,
       );
       (mockedRelationlessService.upsert as jest.Mock).mockReturnValueOnce(
-        relationless
+        relationless,
       );
       const result = await relationlessController.upsert(paramsDto, bodyDto);
       expect(result).toEqual(relationless);
       expect(
-        mockedRelationlessRestDtoService.formatUpsertDtos
+        mockedRelationlessRestDtoService.formatUpsertDtos,
       ).toHaveBeenCalledTimes(1);
       expect(
-        mockedRelationlessRestDtoService.formatUpsertDtos
+        mockedRelationlessRestDtoService.formatUpsertDtos,
       ).toHaveBeenCalledWith(paramsDto, bodyDto);
       expect(mockedRelationlessService.upsert).toHaveBeenCalledTimes(1);
       expect(mockedRelationlessService.upsert).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('delete', () => {
-    it('should map to RelationlessDatabaseService.create', async () => {
+    it('should compose RelationlessRestDtoService.formatDeleteDto and RelationlessDatabaseService.delete', async () => {
       const paramsDto = ('params' as unknown) as RelationlessDeleteParamsDto;
       const prismaArgs = ({} as unknown) as Prisma.RelationlessDeleteArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessRestDtoService.formatDeleteDto as jest.Mock).mockReturnValueOnce(
-        prismaArgs
+        prismaArgs,
       );
       (mockedRelationlessService.delete as jest.Mock).mockReturnValueOnce(
-        relationless
+        relationless,
       );
       const result = await relationlessController.delete(paramsDto);
       expect(result).toEqual(relationless);
       expect(
-        mockedRelationlessRestDtoService.formatDeleteDto
+        mockedRelationlessRestDtoService.formatDeleteDto,
       ).toHaveBeenCalledTimes(1);
       expect(
-        mockedRelationlessRestDtoService.formatDeleteDto
+        mockedRelationlessRestDtoService.formatDeleteDto,
       ).toHaveBeenCalledWith(paramsDto);
       expect(mockedRelationlessService.delete).toHaveBeenCalledTimes(1);
       expect(mockedRelationlessService.delete).toHaveBeenCalledWith(prismaArgs);
