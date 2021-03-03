@@ -5,13 +5,13 @@
   "description": "",
   "license": "UNLICENSED",
   "author": "",
-  "main": "./lib",
+  "main": "./dist",
   "files": [
-    "./lib",
+    "./dist",
     "package.json"
   ],
   "scripts": {
-    "prebuild": "rimraf lib",
+    "prebuild": "rimraf dist",
     "build": "nest build",
     "build:watch": "npm run build -- --watch",
     "generate": "rimraf src/generated && npm run hpf:generate && npm run prisma:merge-schema && npm run prisma:format && npm run prisma:generate && npm run lint:prettier:fix",
