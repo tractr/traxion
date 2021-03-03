@@ -1,4 +1,4 @@
-import { Roles, ROLES_KEY } from '@tractr/hapify-plugin-nestjs-core';
+import { Roles, ROLES_KEY } from '@tractr/nestjs-core';
 
 describe('@Roles decorator', () => {
   describe('ROLES_KEY', () => {

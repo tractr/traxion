@@ -6,7 +6,7 @@ import {
   CoreModule,
   ModuleOptionsHelper,
   ModuleOverrideMetadata,
-} from '@tractr/hapify-plugin-nestjs-core';
+} from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/hapify-plugin-nestjs-database';
 
 import { UserModelModule } from '../generated/user';

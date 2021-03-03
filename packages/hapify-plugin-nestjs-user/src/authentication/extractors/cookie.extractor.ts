@@ -1,4 +1,4 @@
-import { isDevelopment } from '@tractr/hapify-plugin-nestjs-core';
+import { isDevelopment } from '@tractr/nestjs-core';
 import { Request } from 'express';
 import { JwtFromRequestFunction } from 'passport-jwt';
 

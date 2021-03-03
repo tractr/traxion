@@ -67,8 +67,8 @@
   },
   "peerDependencies": {
     "@prisma/client": "^2.17.0",
-    "@tractr/hapify-plugin-nestjs-core": "^0.0.0",
-    "@tractr/hapify-plugin-nestjs-database": "^0.0.0"
+    "@tractr/hapify-plugin-nestjs-database": "^0.0.0",
+    "@tractr/nestjs-core": "^0.0.0"
   },
   "publishConfig": {
     "access": "restricted",
