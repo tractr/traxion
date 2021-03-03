@@ -1,4 +1,5 @@
 import { RightRestDtoService } from '../../../../src/generated';
+
 export function mockRightRestDtoServiceFactory(): RightRestDtoService {
   return ({
     formatCreateDto: jest.fn(),

@@ -1,4 +1,5 @@
 import { UserService } from '../../../../src/generated';
+
 export function mockUserServiceFactory(): UserService {
   return ({
     create: jest.fn(),

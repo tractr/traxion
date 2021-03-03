@@ -25,7 +25,7 @@ describe('RelationlessDatabaseService', () => {
     }).compile();
 
     relationlessDatabaseService = module.get<RelationlessDatabaseService>(
-      RELATIONLESS_DATABASE_SERVICE
+      RELATIONLESS_DATABASE_SERVICE,
     );
   });
 
@@ -42,10 +42,10 @@ describe('RelationlessDatabaseService', () => {
       const result = await relationlessDatabaseService.findUnique(args);
       expect(result).toEqual(relationless);
       expect(
-        mockedDatabaseService.relationless.findUnique
+        mockedDatabaseService.relationless.findUnique,
       ).toHaveBeenCalledTimes(1);
       expect(
-        mockedDatabaseService.relationless.findUnique
+        mockedDatabaseService.relationless.findUnique,
       ).toHaveBeenCalledWith(args);
     });
   });
@@ -59,10 +59,10 @@ describe('RelationlessDatabaseService', () => {
       const result = await relationlessDatabaseService.findFirst(args);
       expect(result).toEqual(relationless);
       expect(
-        mockedDatabaseService.relationless.findFirst
+        mockedDatabaseService.relationless.findFirst,
       ).toHaveBeenCalledTimes(1);
       expect(mockedDatabaseService.relationless.findFirst).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -76,10 +76,10 @@ describe('RelationlessDatabaseService', () => {
       const result = await relationlessDatabaseService.findMany(args);
       expect(result).toEqual(relationless);
       expect(mockedDatabaseService.relationless.findMany).toHaveBeenCalledTimes(
-        1
+        1,
       );
       expect(mockedDatabaseService.relationless.findMany).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -93,10 +93,10 @@ describe('RelationlessDatabaseService', () => {
       const result = await relationlessDatabaseService.create(args);
       expect(result).toEqual(relationless);
       expect(mockedDatabaseService.relationless.create).toHaveBeenCalledTimes(
-        1
+        1,
       );
       expect(mockedDatabaseService.relationless.create).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -110,10 +110,10 @@ describe('RelationlessDatabaseService', () => {
       const result = await relationlessDatabaseService.update(args);
       expect(result).toEqual(relationless);
       expect(mockedDatabaseService.relationless.update).toHaveBeenCalledTimes(
-        1
+        1,
       );
       expect(mockedDatabaseService.relationless.update).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -127,10 +127,10 @@ describe('RelationlessDatabaseService', () => {
       const result = await relationlessDatabaseService.updateMany(args);
       expect(result).toEqual(relationless);
       expect(
-        mockedDatabaseService.relationless.updateMany
+        mockedDatabaseService.relationless.updateMany,
       ).toHaveBeenCalledTimes(1);
       expect(
-        mockedDatabaseService.relationless.updateMany
+        mockedDatabaseService.relationless.updateMany,
       ).toHaveBeenCalledWith(args);
     });
   });
@@ -144,10 +144,10 @@ describe('RelationlessDatabaseService', () => {
       const result = await relationlessDatabaseService.upsert(args);
       expect(result).toEqual(relationless);
       expect(mockedDatabaseService.relationless.upsert).toHaveBeenCalledTimes(
-        1
+        1,
       );
       expect(mockedDatabaseService.relationless.upsert).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -161,10 +161,10 @@ describe('RelationlessDatabaseService', () => {
       const result = await relationlessDatabaseService.delete(args);
       expect(result).toEqual(relationless);
       expect(mockedDatabaseService.relationless.delete).toHaveBeenCalledTimes(
-        1
+        1,
       );
       expect(mockedDatabaseService.relationless.delete).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -178,10 +178,10 @@ describe('RelationlessDatabaseService', () => {
       const result = await relationlessDatabaseService.deleteMany(args);
       expect(result).toEqual(relationless);
       expect(
-        mockedDatabaseService.relationless.deleteMany
+        mockedDatabaseService.relationless.deleteMany,
       ).toHaveBeenCalledTimes(1);
       expect(
-        mockedDatabaseService.relationless.deleteMany
+        mockedDatabaseService.relationless.deleteMany,
       ).toHaveBeenCalledWith(args);
     });
   });
@@ -196,7 +196,7 @@ describe('RelationlessDatabaseService', () => {
       expect(result).toEqual(relationless);
       expect(mockedDatabaseService.relationless.count).toHaveBeenCalledTimes(1);
       expect(mockedDatabaseService.relationless.count).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });
@@ -210,10 +210,10 @@ describe('RelationlessDatabaseService', () => {
       const result = await relationlessDatabaseService.aggregate(args);
       expect(result).toEqual(relationless);
       expect(
-        mockedDatabaseService.relationless.aggregate
+        mockedDatabaseService.relationless.aggregate,
       ).toHaveBeenCalledTimes(1);
       expect(mockedDatabaseService.relationless.aggregate).toHaveBeenCalledWith(
-        args
+        args,
       );
     });
   });

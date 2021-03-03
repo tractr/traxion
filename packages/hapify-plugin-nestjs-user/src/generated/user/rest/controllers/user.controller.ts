@@ -57,7 +57,7 @@ export class UserController {
    * @returns a User or null
    */
   @Get(':id')
-  public async findOne(
+  public async findUnique(
     @Param() paramsDto: UserFindUniqueParamsDto,
   ): Promise<User | null> {
     const formatedParams = this.userRestDtoService.formatFindUniqueDtos(

@@ -1,4 +1,5 @@
 import { RoleRestDtoService } from '../../../../src/generated';
+
 export function mockRoleRestDtoServiceFactory(): RoleRestDtoService {
   return ({
     formatCreateDto: jest.fn(),

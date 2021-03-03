@@ -88,6 +88,7 @@
     "@tractr/nestjs-testing": "^0.0.0",
     "@types/dotenv": "8.2.0",
     "@types/express": "^4.17.11",
+    "@types/faker": "^5.1.7",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.25",
     "@types/pg": "^7.14.10",
