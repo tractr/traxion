@@ -1,9 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
-import { DatabaseService } from '@tractr/hapify-plugin-nestjs-database';
+import { DatabaseService } from '@tractr/nestjs-database';
+
 import {
-  ProfileDatabaseService,
   PROFILE_DATABASE_SERVICE,
+  ProfileDatabaseService,
 } from '../../../../src/generated/profile';
 import { mockDatabaseServiceFactory } from '../../mocks';
 import { mockProfileFactory } from '../mocks';
