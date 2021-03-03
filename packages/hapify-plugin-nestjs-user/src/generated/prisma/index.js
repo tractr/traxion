@@ -101,7 +101,7 @@ const config = {
   "generator": {
     "name": "client",
     "provider": "prisma-client-js",
-    "output": "/home/florian/Projects/stack2021/packages/hapify-plugin-nestjs-user/src/generated/prisma",
+    "output": "/home/maxim/Documents/tractr/tractr2021/stack/packages/hapify-plugin-nestjs-user/src/generated/prisma",
     "binaryTargets": [],
     "previewFeatures": [],
     "config": {},

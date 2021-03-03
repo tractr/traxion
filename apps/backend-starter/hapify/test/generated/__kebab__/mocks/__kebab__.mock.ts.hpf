@@ -25,13 +25,27 @@ import {
 
 } from 'faker';
   
+<<for Fields not entity field>>
+export function mock<<Model pascal>><<field pascal>>Factory(): <<Model pascal>>['<<field camel>>'] {
+  return <<=getFaker(field)>>;
+}
+    
+<<endfor>>
+  
+<<for Fields oneOne or oneMany field>>
+export function mock<<Model pascal>><<field pascal>>IdFactory(): <<Model pascal>>['<<field camel>>Id'] {
+  return <<=getFaker(field)>>;
+}
+    
+<<endfor>>
+  
 export function mock<<Model pascal>>Factory(override: Partial< <<Model pascal>> > = {}): <<Model pascal>> {
   return {
   <<for Fields not entity field>>
-    <<field camel>>: <<=getFaker(field)>>,
+    <<field camel>>: mock<<Model pascal>><<field pascal>>Factory(),
   <<endfor>>
   <<for Fields oneOne or oneMany field>>
-    <<field camel>>Id: <<=getFaker(field)>>,
+    <<field camel>>Id: mock<<Model pascal>><<field pascal>>IdFactory(),
   <<endfor>>
     ...override,
   };

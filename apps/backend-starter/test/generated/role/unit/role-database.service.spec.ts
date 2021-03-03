@@ -22,7 +22,7 @@ describe('RoleDatabaseService', () => {
     }).compile();
 
     roleDatabaseService = module.get<RoleDatabaseService>(
-      ROLE_DATABASE_SERVICE
+      ROLE_DATABASE_SERVICE,
     );
   });
 
@@ -35,7 +35,7 @@ describe('RoleDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RoleFindUniqueArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.findUnique as jest.Mock).mockReturnValueOnce(
-        role
+        role,
       );
       const result = await roleDatabaseService.findUnique(args);
       expect(result).toEqual(role);
@@ -49,7 +49,7 @@ describe('RoleDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RoleFindFirstArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.findFirst as jest.Mock).mockReturnValueOnce(
-        role
+        role,
       );
       const result = await roleDatabaseService.findFirst(args);
       expect(result).toEqual(role);
@@ -63,7 +63,7 @@ describe('RoleDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RoleFindManyArgs;
       const role = new Array(3).map(() => mockRoleFactory());
       (mockedDatabaseService.role.findMany as jest.Mock).mockReturnValueOnce(
-        role
+        role,
       );
       const result = await roleDatabaseService.findMany(args);
       expect(result).toEqual(role);
@@ -77,7 +77,7 @@ describe('RoleDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RoleCreateArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.create as jest.Mock).mockReturnValueOnce(
-        role
+        role,
       );
       const result = await roleDatabaseService.create(args);
       expect(result).toEqual(role);
@@ -91,7 +91,7 @@ describe('RoleDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RoleUpdateArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.update as jest.Mock).mockReturnValueOnce(
-        role
+        role,
       );
       const result = await roleDatabaseService.update(args);
       expect(result).toEqual(role);
@@ -105,7 +105,7 @@ describe('RoleDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RoleUpdateManyArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.updateMany as jest.Mock).mockReturnValueOnce(
-        role
+        role,
       );
       const result = await roleDatabaseService.updateMany(args);
       expect(result).toEqual(role);
@@ -119,7 +119,7 @@ describe('RoleDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RoleUpsertArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.upsert as jest.Mock).mockReturnValueOnce(
-        role
+        role,
       );
       const result = await roleDatabaseService.upsert(args);
       expect(result).toEqual(role);
@@ -133,7 +133,7 @@ describe('RoleDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RoleDeleteArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.delete as jest.Mock).mockReturnValueOnce(
-        role
+        role,
       );
       const result = await roleDatabaseService.delete(args);
       expect(result).toEqual(role);
@@ -147,7 +147,7 @@ describe('RoleDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RoleDeleteManyArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.deleteMany as jest.Mock).mockReturnValueOnce(
-        role
+        role,
       );
       const result = await roleDatabaseService.deleteMany(args);
       expect(result).toEqual(role);
@@ -173,7 +173,7 @@ describe('RoleDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RoleAggregateArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.aggregate as jest.Mock).mockReturnValueOnce(
-        role
+        role,
       );
       const result = await roleDatabaseService.aggregate(args);
       expect(result).toEqual(role);

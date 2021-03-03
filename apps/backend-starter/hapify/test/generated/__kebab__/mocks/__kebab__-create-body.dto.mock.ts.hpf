@@ -1,0 +1,28 @@
+import { <<Model pascal>>CreateBodyDto } from '../../../../src/generated';
+import {
+<<for Fields not internal field>>
+  <<if field not entity>>
+  mock<<Model pascal>><<field pascal>>Factory,
+  <<else>>
+  mock<<Model pascal>><<field pascal>>IdFactory,
+  <<endif>>
+<<endfor>>
+} from './<<Model kebab>>.mock';
+  
+export function mock<<Model pascal>>CreateBodyDtoFactory(
+  override: Partial<<<Model pascal>>CreateBodyDto> = {}
+): <<Model pascal>>CreateBodyDto {
+  return {
+  <<for Fields not internal field>>
+    <<if field not entity>>
+    <<field camel>>: mock<<Model pascal>><<field pascal>>Factory(),
+    <<elseif field oneOne or oneMany>>
+    <<field camel>>: mock<<Model pascal>><<field pascal>>IdFactory(),
+    <<else>>
+    <<field camel>>: new Array(3).map(() => mock<<Model pascal>><<field pascal>>IdFactory()),
+    <<endif>>
+  <<endfor>>
+    ...override,
+  };
+}
+

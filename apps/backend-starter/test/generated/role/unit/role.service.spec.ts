@@ -45,7 +45,7 @@ describe('RoleService', () => {
       const args = ({} as unknown) as Prisma.RoleFindUniqueArgs;
       const role = mockRoleFactory();
       (mockedRoleDatabaseService.findUnique as jest.Mock).mockReturnValueOnce(
-        role
+        role,
       );
       const result = await roleService.findUnique(args);
       expect(result).toEqual(role);
@@ -59,7 +59,7 @@ describe('RoleService', () => {
       const args = ({} as unknown) as Prisma.RoleFindManyArgs;
       const role = new Array(3).map(() => mockRoleFactory());
       (mockedRoleDatabaseService.findMany as jest.Mock).mockReturnValueOnce(
-        role
+        role,
       );
       const result = await roleService.findMany(args);
       expect(result).toEqual(role);

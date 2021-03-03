@@ -7,7 +7,7 @@ import { UserController, UserFindManyQueryDto } from '../generated/user';
 export class UserCustomController extends UserController {
   @Get()
   public async findMany(
-    @Query() queryDto: UserFindManyQueryDto
+    @Query() queryDto: UserFindManyQueryDto,
   ): Promise<User[]> {
     console.log('Controller has been overrided');
     const formatedParams = this.userRestDtoService.formatFindManyDto(queryDto);

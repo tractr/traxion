@@ -22,7 +22,7 @@ describe('RightDatabaseService', () => {
     }).compile();
 
     rightDatabaseService = module.get<RightDatabaseService>(
-      RIGHT_DATABASE_SERVICE
+      RIGHT_DATABASE_SERVICE,
     );
   });
 
@@ -35,7 +35,7 @@ describe('RightDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RightFindUniqueArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.findUnique as jest.Mock).mockReturnValueOnce(
-        right
+        right,
       );
       const result = await rightDatabaseService.findUnique(args);
       expect(result).toEqual(right);
@@ -49,7 +49,7 @@ describe('RightDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RightFindFirstArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.findFirst as jest.Mock).mockReturnValueOnce(
-        right
+        right,
       );
       const result = await rightDatabaseService.findFirst(args);
       expect(result).toEqual(right);
@@ -63,7 +63,7 @@ describe('RightDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RightFindManyArgs;
       const right = new Array(3).map(() => mockRightFactory());
       (mockedDatabaseService.right.findMany as jest.Mock).mockReturnValueOnce(
-        right
+        right,
       );
       const result = await rightDatabaseService.findMany(args);
       expect(result).toEqual(right);
@@ -77,7 +77,7 @@ describe('RightDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RightCreateArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.create as jest.Mock).mockReturnValueOnce(
-        right
+        right,
       );
       const result = await rightDatabaseService.create(args);
       expect(result).toEqual(right);
@@ -91,7 +91,7 @@ describe('RightDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RightUpdateArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.update as jest.Mock).mockReturnValueOnce(
-        right
+        right,
       );
       const result = await rightDatabaseService.update(args);
       expect(result).toEqual(right);
@@ -105,7 +105,7 @@ describe('RightDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RightUpdateManyArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.updateMany as jest.Mock).mockReturnValueOnce(
-        right
+        right,
       );
       const result = await rightDatabaseService.updateMany(args);
       expect(result).toEqual(right);
@@ -119,7 +119,7 @@ describe('RightDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RightUpsertArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.upsert as jest.Mock).mockReturnValueOnce(
-        right
+        right,
       );
       const result = await rightDatabaseService.upsert(args);
       expect(result).toEqual(right);
@@ -133,7 +133,7 @@ describe('RightDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RightDeleteArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.delete as jest.Mock).mockReturnValueOnce(
-        right
+        right,
       );
       const result = await rightDatabaseService.delete(args);
       expect(result).toEqual(right);
@@ -147,7 +147,7 @@ describe('RightDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RightDeleteManyArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.deleteMany as jest.Mock).mockReturnValueOnce(
-        right
+        right,
       );
       const result = await rightDatabaseService.deleteMany(args);
       expect(result).toEqual(right);
@@ -161,7 +161,7 @@ describe('RightDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RightCountArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.count as jest.Mock).mockReturnValueOnce(
-        right
+        right,
       );
       const result = await rightDatabaseService.count(args);
       expect(result).toEqual(right);
@@ -175,7 +175,7 @@ describe('RightDatabaseService', () => {
       const args = ({} as unknown) as Prisma.RightAggregateArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.aggregate as jest.Mock).mockReturnValueOnce(
-        right
+        right,
       );
       const result = await rightDatabaseService.aggregate(args);
       expect(result).toEqual(right);
