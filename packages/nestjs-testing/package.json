@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/hapify-plugin-nestjs-core",
+  "name": "@tractr/nestjs-testing",
   "version": "0.0.0",
   "private": true,
   "description": "Core module for nestjs backend",
@@ -17,12 +17,15 @@
     "postinstall": "npm run build",
     "prepublish": "npm run build"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "ts-essentials": "^7.0.1"
+  "dependencies": {
+    "@nestjs/testing": "^7.6.13",
+    "dotenv": "^8.2.0",
+    "dotenv-expand": "^5.1.0",
+    "nanoid": "^3.1.20",
+    "pg": "^8.5.1"
   },
   "peerDependencies": {
-    "@nestjs/common": "^7.0.0"
+    "@nestjs/common": "^7.6.13"
   },
   "publishConfig": {
     "access": "restricted",
