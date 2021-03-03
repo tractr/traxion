@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/hapify-plugin-nestjs-database",
+  "name": "@tractr/nestjs-database",
   "version": "0.0.0",
   "private": true,
   "description": "Database module for nestjs backend",
