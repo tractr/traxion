@@ -1,1 +1,0 @@
-# `Tractr - Stack 2021 Documentation`

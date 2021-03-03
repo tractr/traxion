@@ -1,5 +1,7 @@
-<<for Models m>>
-export * from './<<m kebab>>';
+export * from './models.module';
+export * from './helpers';
+
+<<for Models model>>
+export * from './<<model kebab>>';
 <<endfor>>
-export * from './shared.module';
-export * from './rest.module';
+
