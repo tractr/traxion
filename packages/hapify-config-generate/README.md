@@ -1,29 +1,48 @@
-# Our brand new shiny backend =)
+# Hapify config generation
 
-## Stack
+This package provide a new way of expriming hapify configuration. It add a new
+way to extend the hapify configuration. To works with the current version of
+hapify it take a configuration to generate a `hapify.json` files. In order to do
+that it provides a list of files to read your new and shiny configuration and
+take the first file found in this order:
 
-- Nestjs framework
-- Prisma ORM
-- Swagger for automatic REST documentation
-- Jest and Supertest for unit and end-to-end tests
+```js
+[
+  '.hapifyrc.js',
+  '.hapifyrc.yaml',
+  '.hapifyrc.yml',
+  '.hapifyrc.json',
+  '.hapifyrc',
+  'package.json',
+  'hapify.json',
+];
+```
 
-## Installation
+It add the a `extends` array property that specify other hapify templates
+packages, concat theirs configurations, and copy all the files needed to the
+current `hapify` folder. In order to generate all these steps you only need to
+start the following command:
 
-- Clone the repository then run `yarn`
-- Move in `packages/hapify-user-boilerplate`
-- Run `yarn run generate`. It will run hapify generation, build prisma schema,
-generate prisma client and migrate the local database with prisma migration
+```bash
+npx hpf-generate-config
+```
 
-## Questions
+Extends configuration examples:
 
-- [] Où gérer les erreurs comme les conflits pour les champs uniques (service ou couche réseau)? **Dans les services**
-- [x] Utiliser le plugin du nest cli pour s'économiser les decorateurs graphql? **Oui**
-- [x] Dans les modules, créer un dossier 'rest' et un dossier 'graphql'? **Passer dossier models dans resolver**
-- [x] Utiliser la même classe de DTO pour le rest et le graphql? **Oui**
-- [] modules: comment on gére les relations? Une entité, un module? **un module par entité**
-- [x] Comment gérer les noms de classe conflictuels: Prisma.User et GraphqlModel.User ? ** Aliaser les classes de Prisma (exemple: User as PrismaUser)**
-- [] graphql: comment on gére les relations? **Dataloader**
-- [] ajouter les unit tests et endToEnd tests? **Mais oui!!**
-- [] génération: on génere tous les fichiers dans un dossier du node_modules ? et on les étend? Dans ce cas, où est ce qu'on définit les décorateurs? **Dans les fichiers générés**
-- [] DTO et gestion de droits: utilisation de class-validator group? **À voir plus tard**
-- [] Utiliser le champs 'note' de hapify pour générer la description des champs ? **Oui**
+```js
+// .hapifyrc.js
+module.exports = {
+  extends: [
+    '@tractr/hapify-templates-prisma',
+    '@tractr/hapify-templates-nestjs-models',
+    // ...
+  ],
+
+  // ... all your hapify configuration
+};
+```
+
+> Note: this package is intend to be delete until hapify integrates the
+> `extends` options. The copy and the generated configuration is not the best
+> way to do and this package is just a patch to accelerate developement of the
+> new stack
