@@ -1,8 +1,7 @@
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { LogService } from '@tractr/hapify-plugin-nestjs-core';
-
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -10,8 +9,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // Set custom logger service
-  const logger = app.get(LogService);
-  app.useLogger(logger);
+  app.useLogger(app.get(LogService));
 
   // Set global validation pipe
   app.useGlobalPipes(
@@ -22,7 +20,7 @@ async function bootstrap() {
       transformOptions: {
         enableImplicitConversion: true,
       },
-    }),
+    })
   );
 
   // Set swagger documentation
@@ -36,9 +34,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, swaggerDocument);
 
   // Start app and define port
-  const API_PORT = process.env.TRACTR_API_PORT || 3000;
-  await app.listen(API_PORT, () => {
-    logger.log(`Api is listening on port ${API_PORT}`, 'NestApplication');
-  });
+  await app.listen(3000);
 }
 bootstrap();
