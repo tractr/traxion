@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/nestjs-authentication [1.0.2](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.0.1...@tractr/nestjs-authentication@1.0.2) (2021-03-04)
+
+
+
+
+
+### Dependencies
+
+* **@tractr/nestjs-core:** upgraded to 1.0.1
+* **@tractr/nestjs-database:** upgraded to 1.0.1
+
 ## @tractr/nestjs-authentication [1.0.1](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.0.0...@tractr/nestjs-authentication@1.0.1) (2021-03-04)
 
 
