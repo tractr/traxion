@@ -1,10 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from '@tractr/nestjs-database';
-
 import {
-  RIGHT_DATABASE_SERVICE,
   RightDatabaseService,
+  RIGHT_DATABASE_SERVICE,
 } from '../../../../src/generated/right';
 import { mockDatabaseServiceFactory } from '../../mocks';
 import { mockRightFactory } from '../mocks';

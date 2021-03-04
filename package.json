@@ -11,8 +11,8 @@
     "./apps/*"
   ],
   "scripts": {
-    "build": "lerna run --parallel build",
-    "build:watch": "lerna run --parallel build:watch",
+    "build": "lerna run build",
+    "build:watch": "lerna run build:watch",
     "clean:dist": "find . -name 'dist' -type d -prune -exec rm -rf '{}' +",
     "clean:lib": "find . -name 'lib' -type d -prune -exec rm -rf '{}' +",
     "clean:node_modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",

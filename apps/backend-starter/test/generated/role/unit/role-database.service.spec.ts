@@ -1,10 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from '@tractr/nestjs-database';
-
 import {
-  ROLE_DATABASE_SERVICE,
   RoleDatabaseService,
+  ROLE_DATABASE_SERVICE,
 } from '../../../../src/generated/role';
 import { mockDatabaseServiceFactory } from '../../mocks';
 import { mockRoleFactory } from '../mocks';
