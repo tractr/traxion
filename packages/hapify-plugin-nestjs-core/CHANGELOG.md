@@ -1,0 +1,22 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# @tractr/nestjs-core 1.0.0 (2021-03-04)
+
+
+### Bug Fixes
+
+* add the rights files into packages to publish to npm registry ([760c1f9](https://github.com/tractr/stack/commit/760c1f98da944f39f821c7d4e30847e229bba44d))
+* enfore repository settings to match with tractr/stack and allow npm publish ([0bd1ea3](https://github.com/tractr/stack/commit/0bd1ea38f5c1fc5f88e5611b214de8418bd59bdc))
+* overrides the controllers in the end instead of on the flow ([79acae7](https://github.com/tractr/stack/commit/79acae79cfd8dff632ba686d15eb8c4e5c62669d))
+* **nestjs-user:** use named DI to be able to override inside the modules ([cf9a9ab](https://github.com/tractr/stack/commit/cf9a9abb9e101b9e83107b613d628639f15e9ed0))
+* add prisma generation into version control and start to configure nestjs-user to export files ([b621526](https://github.com/tractr/stack/commit/b621526e2a9c7dc5ed5f0a88c8cabffb636c17f7))
+
+
+### Features
+
+* **nestjs-core:** add clean interface to nest-js module override class ([d1dd979](https://github.com/tractr/stack/commit/d1dd9796d4c8b516b091c551cb3eca8d0f1aaabc))
+* **nestjs-testing:** add nestjs testing tools to use a different prisma database for each test ([a33102a](https://github.com/tractr/stack/commit/a33102a5fc29fd904aad49e6663ea4d336124a1e))
+* add module register helper and clean authentication module ([f6d9179](https://github.com/tractr/stack/commit/f6d91799445acf434a86b88f5667070d86333bab))
