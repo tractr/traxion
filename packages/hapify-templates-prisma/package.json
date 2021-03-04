@@ -2,6 +2,10 @@
   "name": "@tractr/hapify-templates-prisma",
   "version": "0.0.0",
   "description": "Generate prisma hapify config",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
   "license": "UNLICENSED",
   "author": "",
   "main": "./index.js",
