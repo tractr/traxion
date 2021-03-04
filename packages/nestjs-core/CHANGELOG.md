@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/nestjs-core [1.0.1](https://github.com/tractr/stack/compare/@tractr/nestjs-core@1.0.0...@tractr/nestjs-core@1.0.1) (2021-03-04)
+
+
+### Bug Fixes
+
+* replace postinstall script to prepare to build packages/ only on local ([5d96852](https://github.com/tractr/stack/commit/5d96852f2e753c78c62248c3f9846e6e0e94c07c))
+
 # @tractr/nestjs-core 1.0.0 (2021-03-04)
 
 
