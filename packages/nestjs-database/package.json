@@ -18,7 +18,6 @@
     "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.build.json",
     "build:watch": "npm run build -- --watch",
-    "postinstall": "npm run build",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
