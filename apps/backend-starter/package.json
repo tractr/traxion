@@ -7,7 +7,7 @@
   "author": "",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "npm run generate && nest build",
     "generate": "rimraf src/generated && npm run hpf:generate && npm run prisma:merge-schema && npm run prisma:format && npm run prisma:generate && npm run lint:prettier:fix",
     "hpf:generate": "npm run hpf:generate:config && hpf generate",
     "hpf:generate:config": "hpf-generate-config",

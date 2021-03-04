@@ -50,6 +50,8 @@
     "@nestjs/graphql": "^7.9.8",
     "@nestjs/jwt": "^7.2.0",
     "@nestjs/passport": "^7.1.5",
+    "@tractr/nestjs-core": "^1.0.0",
+    "@tractr/nestjs-database": "^1.0.0",
     "bcrypt": "^5.0.0",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
@@ -70,9 +72,7 @@
     "@types/passport-local": "^1.0.33"
   },
   "peerDependencies": {
-    "@prisma/client": "^2.17.0",
-    "@tractr/nestjs-core": "^1.0.0",
-    "@tractr/nestjs-database": "^1.0.0"
+    "@prisma/client": "^2.17.0"
   },
   "publishConfig": {
     "access": "restricted",
