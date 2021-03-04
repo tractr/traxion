@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-generate-config [1.0.1](https://github.com/tractr/stack/compare/@tractr/hapify-generate-config@1.0.0...@tractr/hapify-generate-config@1.0.1) (2021-03-04)
+
+
+### Bug Fixes
+
+* remove postinsall scripts from packages.json ([e65748b](https://github.com/tractr/stack/commit/e65748b26a993f0e35bbec960907fcaaa5fe6270))
+
 # @tractr/hapify-generate-config 1.0.0 (2021-03-04)
 
 
