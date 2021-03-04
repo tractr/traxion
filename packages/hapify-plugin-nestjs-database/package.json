@@ -8,13 +8,14 @@
   },
   "license": "UNLICENSED",
   "author": "",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "lib/**/*"
+    "dist",
+    "package.json"
   ],
   "scripts": {
-    "prepare": "rimraf lib",
+    "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.build.json",
     "build:watch": "npm run build -- --watch",
     "postinstall": "npm run build",

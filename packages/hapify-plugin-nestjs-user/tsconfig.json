@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "rootDir": ".",
-    "outDir": "./lib",
+    "outDir": "./dist",
     "paths": {
       "@prisma/client": ["generated/prisma"]
     }
