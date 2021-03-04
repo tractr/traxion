@@ -1,7 +1,6 @@
 {
   "name": "@tractr/hapify-templates-nestjs-models",
   "version": "0.0.0",
-  "private": true,
   "description": "Hapify templates for nestjs models",
   "license": "UNLICENSED",
   "author": "",
@@ -14,8 +13,8 @@
   "dependencies": {},
   "devDependencies": {},
   "peerDependencies": {
-    "class-validator": "^0.13.0",
-    "class-transformer": "^0.4.0"
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.0"
   },
   "publishConfig": {
     "access": "restricted",

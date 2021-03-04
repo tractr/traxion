@@ -1,7 +1,6 @@
 {
-  "name": "@tractr/hapify-plugin-nestjs-user",
+  "name": "@tractr/nestjs-authentication",
   "version": "0.0.0",
-  "private": true,
   "description": "",
   "license": "UNLICENSED",
   "author": "",
@@ -11,7 +10,7 @@
     "package.json"
   ],
   "scripts": {
-    "prebuild": "rimraf lib",
+    "prepare": "rimraf lib",
     "build": "nest build",
     "build:watch": "npm run build -- --watch",
     "generate": "rimraf src/generated && npm run hpf:generate && npm run prisma:merge-schema && npm run prisma:format && npm run prisma:generate && npm run lint:prettier:fix",
@@ -25,6 +24,7 @@
     "lint:prettier:fix": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint:tsc": "tsc --noEmit",
     "lint:tsc:fix": "npm run lint:tsc",
+    "prepublishOnly": "npm run build",
     "prisma:format": "prisma format",
     "prisma:generate": "prisma generate",
     "prisma:merge-schema": "prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
@@ -67,8 +67,8 @@
   },
   "peerDependencies": {
     "@prisma/client": "^2.17.0",
-    "@tractr/hapify-plugin-nestjs-core": "^0.0.0",
-    "@tractr/hapify-plugin-nestjs-database": "^0.0.0"
+    "@tractr/nestjs-core": "^0.0.0",
+    "@tractr/nestjs-database": "^0.0.0"
   },
   "publishConfig": {
     "access": "restricted",

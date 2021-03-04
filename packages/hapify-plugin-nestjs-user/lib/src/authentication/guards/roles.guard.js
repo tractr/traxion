@@ -12,13 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RolesGuard = void 0;
 const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
-const hapify_plugin_nestjs_core_1 = require("@tractr/hapify-plugin-nestjs-core");
+const nestjs_core_1 = require("@tractr/nestjs-core");
 let RolesGuard = class RolesGuard {
     constructor(reflector) {
         this.reflector = reflector;
     }
     canActivate(context) {
-        const requiredRoles = this.reflector.getAllAndOverride(hapify_plugin_nestjs_core_1.ROLES_KEY, [
+        const requiredRoles = this.reflector.getAllAndOverride(nestjs_core_1.ROLES_KEY, [
             context.getHandler(),
             context.getClass(),
         ]);

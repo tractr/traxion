@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { DatabaseService } from '@tractr/hapify-plugin-nestjs-database';
+import { DatabaseService } from '@tractr/nestjs-database';
 export declare class UserDatabaseService {
     protected readonly databaseService: DatabaseService;
     constructor(databaseService: DatabaseService);

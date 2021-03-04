@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 // import { Prisma, User } from '@prisma/client';
-import { DatabaseService } from '@tractr/hapify-plugin-nestjs-database';
+import { DatabaseService } from '@tractr/nestjs-database';
 
 import { UserService } from '../../../../src/generated.example/user';
 // import { userMockFactory } from '../../../mocks/user/user.mock';

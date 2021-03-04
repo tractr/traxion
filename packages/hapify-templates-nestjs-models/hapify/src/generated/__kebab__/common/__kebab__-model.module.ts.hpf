@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ModuleOverride } from '@tractr/hapify-plugin-nestjs-core';
+import { ModuleOverride } from '@tractr/nestjs-core';
  
 import { <<Model pascal>>DatabaseService, <<Model pascal>>Service } from './services';
 import { <<Model constant>>_DATABASE_SERVICE, <<Model constant>>_SERVICE } from './<<Model kebab>>-model.constant';

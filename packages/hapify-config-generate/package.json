@@ -1,7 +1,6 @@
 {
   "name": "@tractr/hapify-generate-config",
   "version": "0.0.1",
-  "private": true,
   "description": "Generate hapify config",
   "license": "UNLICENSED",
   "author": "",
@@ -14,11 +13,11 @@
     "index.js"
   ],
   "scripts": {
-    "prebuild": "rimraf dist",
+    "prepare": "rimraf dist",
     "build": "tsc -p tsconfig.build.json",
     "build:watch": "npm run build -- --watch",
     "postinstall": "npm run build",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "debug": "^4.3.1",

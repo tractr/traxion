@@ -1,8 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import {
-  isDevelopment,
-  OptionsFactory,
-} from '@tractr/hapify-plugin-nestjs-core';
+import { isDevelopment, OptionsFactory } from '@tractr/nestjs-core';
 import { ExtractJwt } from 'passport-jwt';
 
 import { fromHttpOnlySignedAndSecureCookies } from '../extractors';

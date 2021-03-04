@@ -1,28 +1,9 @@
-import { Module } from '@nestjs/common';
-import { DatabaseModule } from '@tractr/hapify-plugin-nestjs-database';
-
-<% for (const m of models) { %>
-import { 
-  <%- m.names.pascal %>DatabaseService,
-  <%- m.names.pascal %>Service,
-  <%- m.names.pascal %>RestDtoService,
-  <%- m.names.pascal %>Controller,
-} from './<%- m.names.kebab %>';
-<% } %>
-
-@Module({
-  imports: [DatabaseModule],
-  providers: [
-  <% for (const m of models) { %>
-    <%- m.names.pascal %>DatabaseService,
-    <%- m.names.pascal %>Service,
-    <%- m.names.pascal %>RestDtoService,
-  <% } %>
-  ],
-  controllers: [
-  <% for (const m of models) { %>
-    <%- m.names.pascal %>Controller,
-  <% } %>
-  ],
-})
-export class ModelsModule {}
+import { Module } from '@nestjs/common'; import { DatabaseModule } from
+'@tractr/nestjs-database'; <% for (const m of models) { %> import { <%-
+m.names.pascal %>DatabaseService, <%- m.names.pascal %>Service, <%-
+m.names.pascal %>RestDtoService, <%- m.names.pascal %>Controller, } from './<%-
+m.names.kebab %>'; <% } %> @Module({ imports: [DatabaseModule], providers: [ <%
+for (const m of models) { %> <%- m.names.pascal %>DatabaseService, <%-
+m.names.pascal %>Service, <%- m.names.pascal %>RestDtoService, <% } %> ],
+controllers: [ <% for (const m of models) { %> <%- m.names.pascal %>Controller,
+<% } %> ], }) export class ModelsModule {}
