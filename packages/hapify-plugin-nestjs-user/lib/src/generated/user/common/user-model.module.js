@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserModelModule = void 0;
 const common_1 = require("@nestjs/common");
-const hapify_plugin_nestjs_core_1 = require("@tractr/hapify-plugin-nestjs-core");
+const nestjs_core_1 = require("@tractr/nestjs-core");
 const services_1 = require("./services");
 const user_model_constant_1 = require("./user-model.constant");
 const providers = [
@@ -21,7 +21,7 @@ const providers = [
         useClass: services_1.UserDatabaseService,
     },
 ];
-let UserModelModule = class UserModelModule extends hapify_plugin_nestjs_core_1.ModuleOverride {
+let UserModelModule = class UserModelModule extends nestjs_core_1.ModuleOverride {
 };
 UserModelModule = __decorate([
     common_1.Module({

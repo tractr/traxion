@@ -13,14 +13,14 @@ exports.JwtAuthGuard = void 0;
 const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
 const passport_1 = require("@nestjs/passport");
-const hapify_plugin_nestjs_core_1 = require("@tractr/hapify-plugin-nestjs-core");
+const nestjs_core_1 = require("@tractr/nestjs-core");
 let JwtAuthGuard = class JwtAuthGuard extends passport_1.AuthGuard('jwt') {
     constructor(reflector) {
         super();
         this.reflector = reflector;
     }
     canActivate(context) {
-        const isPublic = this.reflector.getAllAndOverride(hapify_plugin_nestjs_core_1.IS_PUBLIC_KEY, [
+        const isPublic = this.reflector.getAllAndOverride(nestjs_core_1.IS_PUBLIC_KEY, [
             context.getHandler(),
             context.getClass(),
         ]);

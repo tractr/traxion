@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ModelsModule = void 0;
 const common_1 = require("@nestjs/common");
-const hapify_plugin_nestjs_core_1 = require("@tractr/hapify-plugin-nestjs-core");
+const nestjs_core_1 = require("@tractr/nestjs-core");
 const user_1 = require("./user");
-let ModelsModule = class ModelsModule extends hapify_plugin_nestjs_core_1.ModuleOverride {
+let ModelsModule = class ModelsModule extends nestjs_core_1.ModuleOverride {
 };
 ModelsModule.dependencies = [user_1.UserModule];
 ModelsModule = __decorate([

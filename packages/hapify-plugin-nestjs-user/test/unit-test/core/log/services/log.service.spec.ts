@@ -1,6 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { LogService } from '@tractr/hapify-plugin-nestjs-core';
+import { LogService } from '@tractr/nestjs-core';
 
 describe('LogService', () => {
   let logService: LogService;

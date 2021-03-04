@@ -1,7 +1,6 @@
 {
   "name": "@tractr/nestjs-testing",
   "version": "0.0.0",
-  "private": true,
   "description": "Core module for nestjs backend",
   "license": "UNLICENSED",
   "author": "",
@@ -11,11 +10,11 @@
     "dist/**/*"
   ],
   "scripts": {
-    "prebuild": "rimraf dist",
+    "prepare": "rimraf dist",
     "build": "tsc -p tsconfig.build.json",
     "build:watch": "npm run build -- --watch",
     "postinstall": "npm run build",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@nestjs/testing": "^7.6.13",
@@ -23,6 +22,9 @@
     "dotenv-expand": "^5.1.0",
     "nanoid": "^3.1.20",
     "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "@types/pg": "^7.14.10"
   },
   "peerDependencies": {
     "@nestjs/common": "^7.6.13"

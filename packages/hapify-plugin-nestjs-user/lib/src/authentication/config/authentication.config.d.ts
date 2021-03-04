@@ -1,4 +1,4 @@
-import { OptionsFactory } from '@tractr/hapify-plugin-nestjs-core';
+import { OptionsFactory } from '@tractr/nestjs-core';
 import { AuthenticationOptions } from '../interfaces';
 export declare const AUTHENTICATION_COOKIE_NAME = "authCookie";
 export declare const AUTHENTICATION_QUERY_PARAM_NAME = "authToken";
