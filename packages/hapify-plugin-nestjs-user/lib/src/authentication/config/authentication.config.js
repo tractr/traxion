@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthenticationModuleOptionsFactory = exports.AUTHENTICATION_OPTIONS = exports.AUTHENTICATION_QUERY_PARAM_NAME = exports.AUTHENTICATION_COOKIE_NAME = void 0;
 const common_1 = require("@nestjs/common");
-const hapify_plugin_nestjs_core_1 = require("@tractr/hapify-plugin-nestjs-core");
+const nestjs_core_1 = require("@tractr/nestjs-core");
 const passport_jwt_1 = require("passport-jwt");
 const extractors_1 = require("../extractors");
 const { TRACTR_AUTH_STRATEGY_JWT_SECRET } = process.env;
@@ -38,7 +38,7 @@ exports.AUTHENTICATION_OPTIONS = {
         },
     },
     jwtModuleOptions: {
-        secret: (TRACTR_AUTH_STRATEGY_JWT_SECRET !== null && TRACTR_AUTH_STRATEGY_JWT_SECRET !== void 0 ? TRACTR_AUTH_STRATEGY_JWT_SECRET : hapify_plugin_nestjs_core_1.isDevelopment()) ? 'secret' : undefined,
+        secret: (TRACTR_AUTH_STRATEGY_JWT_SECRET !== null && TRACTR_AUTH_STRATEGY_JWT_SECRET !== void 0 ? TRACTR_AUTH_STRATEGY_JWT_SECRET : nestjs_core_1.isDevelopment()) ? 'secret' : undefined,
     },
     passportModuleOptions: {
         defaultStrategy: 'jwt',

@@ -16,9 +16,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          key: node-${{ hashFiles('**/package-lock.json') }}
       # - &setup
       - name: use node.js 15
         uses: actions/setup-node@v1
@@ -48,9 +46,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          key: node-${{ hashFiles('**/package-lock.json') }}
       - name: use node.js 15
         uses: actions/setup-node@v1
         with:
@@ -78,9 +74,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          key: node-${{ hashFiles('**/package-lock.json') }}
       - name: use node.js 15
         uses: actions/setup-node@v1
         with:

@@ -1,4 +1,4 @@
-import { ModuleOverride } from '@tractr/hapify-plugin-nestjs-core';
+import { ModuleOverride } from '@tractr/nestjs-core';
 import { UserModelModule } from '../common';
 import { UserController } from './controllers';
 export declare class UserRestModule extends ModuleOverride {

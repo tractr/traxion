@@ -8,12 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserDatabaseService = void 0;
 const common_1 = require("@nestjs/common");
 const client_1 = require("@prisma/client");
-const hapify_plugin_nestjs_database_1 = require("@tractr/hapify-plugin-nestjs-database");
+const nestjs_database_1 = require("@tractr/nestjs-database");
 let UserDatabaseService = class UserDatabaseService {
     constructor(databaseService) {
         this.databaseService = databaseService;
@@ -54,7 +53,7 @@ let UserDatabaseService = class UserDatabaseService {
 };
 UserDatabaseService = __decorate([
     common_1.Injectable(),
-    __metadata("design:paramtypes", [typeof (_a = typeof hapify_plugin_nestjs_database_1.DatabaseService !== "undefined" && hapify_plugin_nestjs_database_1.DatabaseService) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [nestjs_database_1.DatabaseService])
 ], UserDatabaseService);
 exports.UserDatabaseService = UserDatabaseService;
 //# sourceMappingURL=user-database.service.js.map

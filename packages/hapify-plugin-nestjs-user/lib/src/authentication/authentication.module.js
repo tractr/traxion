@@ -11,15 +11,15 @@ exports.AuthenticationModule = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const passport_1 = require("@nestjs/passport");
-const hapify_plugin_nestjs_core_1 = require("@tractr/hapify-plugin-nestjs-core");
-const hapify_plugin_nestjs_database_1 = require("@tractr/hapify-plugin-nestjs-database");
+const nestjs_core_1 = require("@tractr/nestjs-core");
+const nestjs_database_1 = require("@tractr/nestjs-database");
 const user_1 = require("../generated/user");
 const config_1 = require("./config");
 const constants_1 = require("./constants");
 const controllers_1 = require("./controllers");
 const services_1 = require("./services");
 const strategies_1 = require("./strategies");
-let AuthenticationModule = AuthenticationModule_1 = class AuthenticationModule extends hapify_plugin_nestjs_core_1.ModuleOptionsHelper() {
+let AuthenticationModule = AuthenticationModule_1 = class AuthenticationModule extends nestjs_core_1.ModuleOptionsHelper() {
     static register(options = config_1.AUTHENTICATION_OPTIONS, overrides = {}) {
         const moduleOptions = Object.assign(Object.assign({}, config_1.AUTHENTICATION_OPTIONS), options);
         const authenticationOptionsModule = super.register(moduleOptions);
@@ -37,8 +37,8 @@ let AuthenticationModule = AuthenticationModule_1 = class AuthenticationModule e
             module: AuthenticationModule_1,
             imports: [
                 ...((_a = authenticationOptionsModule.imports) !== null && _a !== void 0 ? _a : []),
-                hapify_plugin_nestjs_database_1.DatabaseModule,
-                hapify_plugin_nestjs_core_1.CoreModule,
+                nestjs_database_1.DatabaseModule,
+                nestjs_core_1.CoreModule,
                 jwt_1.JwtModule.registerAsync({
                     imports: [authenticationOptionsModule],
                     useFactory: (authenticationOptions) => authenticationOptions.jwtModuleOptions,

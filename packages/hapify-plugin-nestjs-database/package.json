@@ -1,7 +1,6 @@
 {
-  "name": "@tractr/hapify-plugin-nestjs-database",
+  "name": "@tractr/nestjs-database",
   "version": "0.0.0",
-  "private": true,
   "description": "Database module for nestjs backend",
   "license": "UNLICENSED",
   "author": "",
@@ -11,11 +10,11 @@
     "lib/**/*"
   ],
   "scripts": {
-    "prebuild": "rimraf lib",
+    "prepare": "rimraf lib",
     "build": "tsc -p tsconfig.build.json",
     "build:watch": "npm run build -- --watch",
     "postinstall": "npm run build",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "rimraf": "^3.0.2",

@@ -45,10 +45,7 @@
     "@nestjs/testing": "^7.6.13",
     "@qiwi/multi-semantic-release": "^3.13.2",
     "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/commit-analyzer": "^8.0.1",
     "@semantic-release/git": "^9.0.0",
-    "@semantic-release/github": "^7.2.0",
-    "@semantic-release/npm": "^7.0.10",
     "@tractr/commit-config": "^1.1.3",
     "@tractr/eslint-config": "^1.3.2",
     "@tractr/hapify-generate-config": "^0.0.1",
@@ -85,7 +82,12 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogTitle": "# Changelog\n\nAll notable changes to this project will be documented in this file. See\n[Conventional Commits](https://conventionalcommits.org) for commit guidelines."
+        }
+      ],
       [
         "@semantic-release/npm",
         {
@@ -98,7 +100,12 @@
           "assets": "pack/*.tgz"
         }
       ],
-      "@semantic-release/git"
+      [
+        "@semantic-release/git",
+        {
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
     ]
   }
 }
