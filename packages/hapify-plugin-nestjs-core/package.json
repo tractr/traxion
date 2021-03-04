@@ -2,6 +2,10 @@
   "name": "@tractr/nestjs-core",
   "version": "0.0.0",
   "description": "Core module for nestjs backend",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
   "license": "UNLICENSED",
   "author": "",
   "main": "dist/index.js",
