@@ -1,6 +1,6 @@
 {
   "name": "@tractr/nestjs-authentication",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "",
   "repository": {
     "type": "git",
@@ -63,16 +63,16 @@
   },
   "devDependencies": {
     "@nestjs/testing": "^7.6.11",
-    "@tractr/hapify-templates-nestjs-models": "^0.0.0",
-    "@tractr/hapify-templates-prisma": "^0.0.0",
+    "@tractr/hapify-templates-nestjs-models": "1.0.0",
+    "@tractr/hapify-templates-prisma": "1.0.0",
     "@types/bcrypt": "^3.0.0",
     "@types/passport-jwt": "^3.0.4",
     "@types/passport-local": "^1.0.33"
   },
   "peerDependencies": {
     "@prisma/client": "^2.17.0",
-    "@tractr/nestjs-core": "^0.0.0",
-    "@tractr/nestjs-database": "^0.0.0"
+    "@tractr/nestjs-core": "1.0.0",
+    "@tractr/nestjs-database": "1.0.0"
   },
   "publishConfig": {
     "access": "restricted",
