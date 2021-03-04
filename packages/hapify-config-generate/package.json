@@ -14,10 +14,11 @@
   },
   "files": [
     "./dist",
+    "package.json",
     "index.js"
   ],
   "scripts": {
-    "prepare": "rimraf dist",
+    "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.build.json",
     "build:watch": "npm run build -- --watch",
     "postinstall": "npm run build",

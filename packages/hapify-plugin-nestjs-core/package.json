@@ -11,10 +11,11 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist/**/*"
+    "dist",
+    "package.json"
   ],
   "scripts": {
-    "prepare": "rimraf dist",
+    "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.build.json",
     "build:watch": "npm run build -- --watch",
     "postinstall": "npm run build",
