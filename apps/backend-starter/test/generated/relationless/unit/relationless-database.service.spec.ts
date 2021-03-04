@@ -1,10 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from '@tractr/nestjs-database';
-
 import {
-  RELATIONLESS_DATABASE_SERVICE,
   RelationlessDatabaseService,
+  RELATIONLESS_DATABASE_SERVICE,
 } from '../../../../src/generated/relationless';
 import { mockDatabaseServiceFactory } from '../../mocks';
 import { mockRelationlessFactory } from '../mocks';

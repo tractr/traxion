@@ -1,10 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from '@tractr/nestjs-database';
-
 import {
-  USER_DATABASE_SERVICE,
   UserDatabaseService,
+  USER_DATABASE_SERVICE,
 } from '../../../../src/generated/user';
 import { mockDatabaseServiceFactory } from '../../mocks';
 import { mockUserFactory } from '../mocks';

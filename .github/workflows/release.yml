@@ -30,6 +30,13 @@ jobs:
         # npm bug with authentication if no node_modules
         run: npm ci
 
+      - name: Build
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        # npm bug with authentication if no node_modules
+        run: npm run build
+
       - name: Relase npm packages
         if: success()
         env:
