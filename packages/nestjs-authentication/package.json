@@ -28,7 +28,7 @@
     "lint:prettier:fix": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint:tsc": "tsc --noEmit",
     "lint:tsc:fix": "npm run lint:tsc",
-    "prepublishOnly": "npm run build",
+    "prepare": "npm run build",
     "prisma:format": "prisma format",
     "prisma:generate": "prisma generate",
     "prisma:merge-schema": "prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
@@ -71,8 +71,8 @@
   },
   "peerDependencies": {
     "@prisma/client": "^2.17.0",
-    "@tractr/nestjs-core": "1.0.1",
-    "@tractr/nestjs-database": "1.0.1"
+    "@tractr/nestjs-core": "^1.0.0",
+    "@tractr/nestjs-database": "^1.0.0"
   },
   "publishConfig": {
     "access": "restricted",
