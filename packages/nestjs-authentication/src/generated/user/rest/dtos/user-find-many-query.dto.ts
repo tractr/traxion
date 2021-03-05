@@ -37,13 +37,15 @@ export class UserFindManyQueryDto {
   @IsIn(Object.values(Prisma.SortOrder))
   order: Prisma.SortOrder = 'asc';
 
+  @IsOptional()
   @IsNumber()
   @IsInt()
   @Min(1)
-  take!: number;
+  take = 100;
 
+  @IsOptional()
   @IsNumber()
   @IsInt()
   @Min(0)
-  skip!: number;
+  skip = 0;
 }

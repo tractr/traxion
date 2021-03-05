@@ -212,12 +212,67 @@
       "input": "one"
     },
     {
+      "path": "test/generated/{kebab}/mocks/{kebab}-count-query.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/mocks/{kebab}-create-body.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/mocks/{kebab}-find-unique-params.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/mocks/{kebab}-find-unique-query.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/mocks/{kebab}-find-many-query.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/mocks/{kebab}-update-params.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/mocks/{kebab}-update-body.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/mocks/{kebab}-upsert-params.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/mocks/{kebab}-upsert-body.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/mocks/{kebab}-delete-params.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
       "path": "test/generated/{kebab}/unit/{kebab}.service.spec.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
       "path": "test/generated/{kebab}/unit/{kebab}-database.service.spec.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/unit/{kebab}-rest-dto.service.spec.ts",
       "engine": "hpf",
       "input": "one"
     },

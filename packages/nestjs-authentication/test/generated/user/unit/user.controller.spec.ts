@@ -21,10 +21,12 @@ import {
   mockUserServiceFactory,
   mockUserRestDtoServiceFactory,
 } from '../mocks';
+
 describe('UserService', () => {
   let userController: UserController;
   let mockedUserService: UserService;
   let mockedUserRestDtoService: UserRestDtoService;
+
   beforeEach(async () => {
     mockedUserService = (mockUserServiceFactory() as unknown) as UserService;
     mockedUserRestDtoService = (mockUserRestDtoServiceFactory() as unknown) as UserRestDtoService;
@@ -37,13 +39,15 @@ describe('UserService', () => {
     }).compile();
     userController = module.get<UserController>(UserController);
   });
+
   it('should be defined', () => {
     expect(userController).toBeDefined();
   });
+
   describe('create', () => {
-    it('should map to UserDatabaseService.create', async () => {
+    it('should compose UserRestDtoService.formatCreateDto and UserDatabaseService.create', async () => {
       const bodyDto = ('body' as unknown) as UserCreateBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.UserCreateArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.UserCreateArgs;
       const user = mockUserFactory();
       (mockedUserRestDtoService.formatCreateDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -59,10 +63,11 @@ describe('UserService', () => {
       expect(mockedUserService.create).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('findUnique', () => {
-    it('should map to UserDatabaseService.create', async () => {
+    it('should compose UserRestDtoService.formatFindUniqueDtos and UserDatabaseService.findUnique', async () => {
       const paramsDto = ('params' as unknown) as UserFindUniqueParamsDto;
-      const prismaArgs = ({} as unknown) as Prisma.UserFindUniqueArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.UserFindUniqueArgs;
       const user = mockUserFactory();
       (mockedUserRestDtoService.formatFindUniqueDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -80,10 +85,11 @@ describe('UserService', () => {
       expect(mockedUserService.findUnique).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('findMany', () => {
-    it('should map to UserDatabaseService.create', async () => {
+    it('should compose UserRestDtoService.formatFindManyDto and UserDatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as UserFindManyQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.UserFindManyArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.UserFindManyArgs;
       const user = new Array(3).map(() => mockUserFactory());
       (mockedUserRestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -101,10 +107,11 @@ describe('UserService', () => {
       expect(mockedUserService.findMany).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('count', () => {
-    it('should map to UserDatabaseService.create', async () => {
+    it('should compose UserRestDtoService.formatCountDto and UserDatabaseService.count', async () => {
       const queryDto = ('query' as unknown) as UserCountQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.UserCountArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.UserCountArgs;
       const user = 10;
       (mockedUserRestDtoService.formatCountDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -120,11 +127,12 @@ describe('UserService', () => {
       expect(mockedUserService.count).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('update', () => {
-    it('should map to UserDatabaseService.create', async () => {
+    it('should compose UserRestDtoService.formatUpdateDtos and UserDatabaseService.update', async () => {
       const paramsDto = ('params' as unknown) as UserUpdateParamsDto;
       const bodyDto = ('body' as unknown) as UserUpdateBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.UserUpdateArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.UserUpdateArgs;
       const user = mockUserFactory();
       (mockedUserRestDtoService.formatUpdateDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -143,11 +151,12 @@ describe('UserService', () => {
       expect(mockedUserService.update).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('upsert', () => {
-    it('should map to UserDatabaseService.create', async () => {
+    it('should compose UserRestDtoService.formatUpsertDtos and UserDatabaseService.upsert', async () => {
       const paramsDto = ('params' as unknown) as UserUpsertParamsDto;
       const bodyDto = ('body' as unknown) as UserUpsertBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.UserUpsertArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.UserUpsertArgs;
       const user = mockUserFactory();
       (mockedUserRestDtoService.formatUpsertDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -166,10 +175,11 @@ describe('UserService', () => {
       expect(mockedUserService.upsert).toHaveBeenCalledWith(prismaArgs);
     });
   });
+
   describe('delete', () => {
-    it('should map to UserDatabaseService.create', async () => {
+    it('should compose UserRestDtoService.formatDeleteDto and UserDatabaseService.delete', async () => {
       const paramsDto = ('params' as unknown) as UserDeleteParamsDto;
-      const prismaArgs = ({} as unknown) as Prisma.UserDeleteArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.UserDeleteArgs;
       const user = mockUserFactory();
       (mockedUserRestDtoService.formatDeleteDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,

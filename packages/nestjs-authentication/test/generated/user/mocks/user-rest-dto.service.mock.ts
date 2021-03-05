@@ -1,4 +1,5 @@
 import { UserRestDtoService } from '../../../../src/generated';
+
 export function mockUserRestDtoServiceFactory(): UserRestDtoService {
   return ({
     formatCreateDto: jest.fn(),
