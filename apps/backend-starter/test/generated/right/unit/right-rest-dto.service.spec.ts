@@ -7,6 +7,11 @@ import {
   RightFindUniqueQueryDto,
   formatPopulate,
   RightFindManyQueryDto,
+  RightUpdateParamsDto,
+  RightUpdateBodyDto,
+  RightUpsertParamsDto,
+  RightUpsertBodyDto,
+  RightDeleteParamsDto,
   RightRestDtoService,
 } from '../../../../src/generated';
 import {
@@ -15,6 +20,11 @@ import {
   mockRightFindUniqueParamsDtoFactory,
   mockRightFindUniqueQueryDtoFactory,
   mockRightFindManyQueryDtoFactory,
+  mockRightUpdateParamsDtoFactory,
+  mockRightUpdateBodyDtoFactory,
+  mockRightUpsertParamsDtoFactory,
+  mockRightUpsertBodyDtoFactory,
+  mockRightDeleteParamsDtoFactory,
 } from '../mocks';
 
 describe('RightDatabaseService', () => {
@@ -33,8 +43,8 @@ describe('RightDatabaseService', () => {
   });
 
   describe('formatCreateDto', () => {
-    it('should properly format create dto', async () => {
-      const bodyDto: RightCreateBodyDto = mockRightCreateBodyDtoFactory();
+    it('should properly format create dto', () => {
+      const bodyDto: Required<RightCreateBodyDto> = mockRightCreateBodyDtoFactory();
       const { ...values } = bodyDto;
       const data = {
         ...values,
@@ -46,8 +56,8 @@ describe('RightDatabaseService', () => {
   });
 
   describe('formatCountDto', () => {
-    it('should properly format count dto', async () => {
-      const queryDto: RightCountQueryDto = mockRightCountQueryDtoFactory();
+    it('should properly format count dto', () => {
+      const queryDto: Required<RightCountQueryDto> = mockRightCountQueryDtoFactory();
       const { ...values } = queryDto;
       const where = {
         ...values,
@@ -59,7 +69,7 @@ describe('RightDatabaseService', () => {
   });
 
   describe('formatFindUniqueDto', () => {
-    it('should properly format findUnique dtos', async () => {
+    it('should properly format findUnique dtos', () => {
       const paramsDto: RightFindUniqueParamsDto = mockRightFindUniqueParamsDtoFactory();
       const queryDto: RightFindUniqueQueryDto = mockRightFindUniqueQueryDtoFactory();
       const prismaArgs: Prisma.RightFindUniqueArgs = {
@@ -77,8 +87,8 @@ describe('RightDatabaseService', () => {
   });
 
   describe('formatFindManyDto', () => {
-    it('should properly format findMany dtos', async () => {
-      const queryDto: RightFindManyQueryDto = mockRightFindManyQueryDtoFactory();
+    it('should properly format findMany dtos', () => {
+      const queryDto: Required<RightFindManyQueryDto> = mockRightFindManyQueryDtoFactory();
       const { populate, sort, order, take, skip, ...values } = queryDto;
       const where = {
         ...values,
@@ -93,6 +103,48 @@ describe('RightDatabaseService', () => {
         include,
       };
       const result = rightRestDtoService.formatFindManyDto(queryDto);
+      expect(result).toEqual(prismaArgs);
+    });
+  });
+
+  describe('formatUpdateDto', () => {
+    it('should properly format update dto', () => {
+      const paramsDto: RightUpdateParamsDto = mockRightUpdateParamsDtoFactory();
+      const bodyDto: Required<RightUpdateBodyDto> = mockRightUpdateBodyDtoFactory();
+      const { ...values } = bodyDto;
+      const data = {
+        ...values,
+      };
+      const prismaArgs: Prisma.RightUpdateArgs = { where: paramsDto, data };
+      const result = rightRestDtoService.formatUpdateDtos(paramsDto, bodyDto);
+      expect(result).toEqual(prismaArgs);
+    });
+  });
+
+  describe('formatUpsertDto', () => {
+    it('should properly format upsert dto', () => {
+      const paramsDto: RightUpsertParamsDto = mockRightUpsertParamsDtoFactory();
+      const bodyDto: Required<RightUpsertBodyDto> = mockRightUpsertBodyDtoFactory();
+      const { ...values } = bodyDto;
+      const create = {
+        ...values,
+      };
+      const update = { ...create };
+      const prismaArgs: Prisma.RightUpsertArgs = {
+        create,
+        update,
+        where: paramsDto,
+      };
+      const result = rightRestDtoService.formatUpsertDtos(paramsDto, bodyDto);
+      expect(result).toEqual(prismaArgs);
+    });
+  });
+
+  describe('formatDeleteDto', () => {
+    it('should properly format delete dto', () => {
+      const paramsDto: RightDeleteParamsDto = mockRightDeleteParamsDtoFactory();
+      const prismaArgs: Prisma.RightDeleteArgs = { where: paramsDto };
+      const result = rightRestDtoService.formatDeleteDto(paramsDto);
       expect(result).toEqual(prismaArgs);
     });
   });

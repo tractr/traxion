@@ -7,7 +7,7 @@ import {
 
 export function mockRoleFindManyQueryDtoFactory(
   override: Partial<RoleFindManyQueryDto> = {},
-): RoleFindManyQueryDto {
+): Required<RoleFindManyQueryDto> {
   return {
     id: mockRoleIdFactory(),
     name: mockRoleNameFactory(),

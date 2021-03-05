@@ -50,7 +50,7 @@ describe('<<Model pascal>>Service', () => {
   describe('create', () => {
     it('should compose <<Model pascal>>RestDtoService.formatCreateDto and <<Model pascal>>DatabaseService.create', async () => {
       const bodyDto = ('body' as unknown) as <<Model pascal>>CreateBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>CreateArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>CreateArgs;
       const <<Model camel>> = mock<<Model pascal>>Factory();
       (mocked<<Model pascal>>RestDtoService.formatCreateDto as jest.Mock).mockReturnValueOnce(
         prismaArgs
@@ -73,7 +73,7 @@ describe('<<Model pascal>>Service', () => {
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
       const queryDto = ('query' as unknown) as <<Model pascal>>FindUniqueQueryDto;
     <<<}>>>
-      const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>FindUniqueArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>FindUniqueArgs;
       const <<Model camel>> = mock<<Model pascal>>Factory();
       (mocked<<Model pascal>>RestDtoService.formatFindUniqueDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs
@@ -105,7 +105,7 @@ describe('<<Model pascal>>Service', () => {
   describe('findMany', () => {
     it('should compose <<Model pascal>>RestDtoService.formatFindManyDto and <<Model pascal>>DatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as <<Model pascal>>FindManyQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>FindManyArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>FindManyArgs;
       const <<Model camel>> = new Array(3).map(() => mock<<Model pascal>>Factory());
       (mocked<<Model pascal>>RestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
         prismaArgs
@@ -127,7 +127,7 @@ describe('<<Model pascal>>Service', () => {
   describe('count', () => {
     it('should compose <<Model pascal>>RestDtoService.formatCountDto and <<Model pascal>>DatabaseService.count', async () => {
       const queryDto = ('query' as unknown) as <<Model pascal>>CountQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>CountArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>CountArgs;
       const <<Model camel>> = 10;
       (mocked<<Model pascal>>RestDtoService.formatCountDto as jest.Mock).mockReturnValueOnce(
         prismaArgs
@@ -148,7 +148,7 @@ describe('<<Model pascal>>Service', () => {
     it('should compose <<Model pascal>>RestDtoService.formatUpdateDtos and <<Model pascal>>DatabaseService.update', async () => {
       const paramsDto = ('params' as unknown) as <<Model pascal>>UpdateParamsDto;
       const bodyDto = ('body' as unknown) as <<Model pascal>>UpdateBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>UpdateArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>UpdateArgs;
       const <<Model camel>> = mock<<Model pascal>>Factory();
       (mocked<<Model pascal>>RestDtoService.formatUpdateDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs
@@ -172,7 +172,7 @@ describe('<<Model pascal>>Service', () => {
     it('should compose <<Model pascal>>RestDtoService.formatUpsertDtos and <<Model pascal>>DatabaseService.upsert', async () => {
       const paramsDto = ('params' as unknown) as <<Model pascal>>UpsertParamsDto;
       const bodyDto = ('body' as unknown) as <<Model pascal>>UpsertBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>UpsertArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>UpsertArgs;
       const <<Model camel>> = mock<<Model pascal>>Factory();
       (mocked<<Model pascal>>RestDtoService.formatUpsertDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs
@@ -195,7 +195,7 @@ describe('<<Model pascal>>Service', () => {
   describe('delete', () => {
     it('should compose <<Model pascal>>RestDtoService.formatDeleteDto and <<Model pascal>>DatabaseService.delete', async () => {
       const paramsDto = ('params' as unknown) as <<Model pascal>>DeleteParamsDto;
-      const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>DeleteArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>DeleteArgs;
       const <<Model camel>> = mock<<Model pascal>>Factory();
       (mocked<<Model pascal>>RestDtoService.formatDeleteDto as jest.Mock).mockReturnValueOnce(
         prismaArgs

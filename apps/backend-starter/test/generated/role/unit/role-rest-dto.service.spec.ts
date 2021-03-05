@@ -7,6 +7,11 @@ import {
   RoleFindUniqueQueryDto,
   formatPopulate,
   RoleFindManyQueryDto,
+  RoleUpdateParamsDto,
+  RoleUpdateBodyDto,
+  RoleUpsertParamsDto,
+  RoleUpsertBodyDto,
+  RoleDeleteParamsDto,
   RoleRestDtoService,
 } from '../../../../src/generated';
 import {
@@ -15,6 +20,11 @@ import {
   mockRoleFindUniqueParamsDtoFactory,
   mockRoleFindUniqueQueryDtoFactory,
   mockRoleFindManyQueryDtoFactory,
+  mockRoleUpdateParamsDtoFactory,
+  mockRoleUpdateBodyDtoFactory,
+  mockRoleUpsertParamsDtoFactory,
+  mockRoleUpsertBodyDtoFactory,
+  mockRoleDeleteParamsDtoFactory,
 } from '../mocks';
 
 describe('RoleDatabaseService', () => {
@@ -33,8 +43,8 @@ describe('RoleDatabaseService', () => {
   });
 
   describe('formatCreateDto', () => {
-    it('should properly format create dto', async () => {
-      const bodyDto: RoleCreateBodyDto = mockRoleCreateBodyDtoFactory();
+    it('should properly format create dto', () => {
+      const bodyDto: Required<RoleCreateBodyDto> = mockRoleCreateBodyDtoFactory();
       const { rights, ...values } = bodyDto;
       const data = {
         ...values,
@@ -47,8 +57,8 @@ describe('RoleDatabaseService', () => {
   });
 
   describe('formatCountDto', () => {
-    it('should properly format count dto', async () => {
-      const queryDto: RoleCountQueryDto = mockRoleCountQueryDtoFactory();
+    it('should properly format count dto', () => {
+      const queryDto: Required<RoleCountQueryDto> = mockRoleCountQueryDtoFactory();
       const { rights, ...values } = queryDto;
       const where = {
         ...values,
@@ -61,7 +71,7 @@ describe('RoleDatabaseService', () => {
   });
 
   describe('formatFindUniqueDto', () => {
-    it('should properly format findUnique dtos', async () => {
+    it('should properly format findUnique dtos', () => {
       const paramsDto: RoleFindUniqueParamsDto = mockRoleFindUniqueParamsDtoFactory();
       const queryDto: RoleFindUniqueQueryDto = mockRoleFindUniqueQueryDtoFactory();
       const prismaArgs: Prisma.RoleFindUniqueArgs = {
@@ -80,8 +90,8 @@ describe('RoleDatabaseService', () => {
   });
 
   describe('formatFindManyDto', () => {
-    it('should properly format findMany dtos', async () => {
-      const queryDto: RoleFindManyQueryDto = mockRoleFindManyQueryDtoFactory();
+    it('should properly format findMany dtos', () => {
+      const queryDto: Required<RoleFindManyQueryDto> = mockRoleFindManyQueryDtoFactory();
       const { rights, populate, sort, order, take, skip, ...values } = queryDto;
       const where = {
         rights: { some: { id: { in: rights } } },
@@ -97,6 +107,50 @@ describe('RoleDatabaseService', () => {
         include,
       };
       const result = roleRestDtoService.formatFindManyDto(queryDto);
+      expect(result).toEqual(prismaArgs);
+    });
+  });
+
+  describe('formatUpdateDto', () => {
+    it('should properly format update dto', () => {
+      const paramsDto: RoleUpdateParamsDto = mockRoleUpdateParamsDtoFactory();
+      const bodyDto: Required<RoleUpdateBodyDto> = mockRoleUpdateBodyDtoFactory();
+      const { rights, ...values } = bodyDto;
+      const data = {
+        ...values,
+        rights: { set: rights.map((id) => ({ id })) },
+      };
+      const prismaArgs: Prisma.RoleUpdateArgs = { where: paramsDto, data };
+      const result = roleRestDtoService.formatUpdateDtos(paramsDto, bodyDto);
+      expect(result).toEqual(prismaArgs);
+    });
+  });
+
+  describe('formatUpsertDto', () => {
+    it('should properly format upsert dto', () => {
+      const paramsDto: RoleUpsertParamsDto = mockRoleUpsertParamsDtoFactory();
+      const bodyDto: Required<RoleUpsertBodyDto> = mockRoleUpsertBodyDtoFactory();
+      const { rights, ...values } = bodyDto;
+      const create = {
+        ...values,
+        rights: { set: rights.map((id) => ({ id })) },
+      };
+      const update = { ...create };
+      const prismaArgs: Prisma.RoleUpsertArgs = {
+        create,
+        update,
+        where: paramsDto,
+      };
+      const result = roleRestDtoService.formatUpsertDtos(paramsDto, bodyDto);
+      expect(result).toEqual(prismaArgs);
+    });
+  });
+
+  describe('formatDeleteDto', () => {
+    it('should properly format delete dto', () => {
+      const paramsDto: RoleDeleteParamsDto = mockRoleDeleteParamsDtoFactory();
+      const prismaArgs: Prisma.RoleDeleteArgs = { where: paramsDto };
+      const result = roleRestDtoService.formatDeleteDto(paramsDto);
       expect(result).toEqual(prismaArgs);
     });
   });

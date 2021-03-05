@@ -12,7 +12,7 @@ import {
 
 export function mockUserFindManyQueryDtoFactory(
   override: Partial<UserFindManyQueryDto> = {},
-): UserFindManyQueryDto {
+): Required<UserFindManyQueryDto> {
   return {
     id: mockUserIdFactory(),
     name: mockUserNameFactory(),

@@ -7,6 +7,11 @@ import {
   ProfileFindUniqueQueryDto,
   formatPopulate,
   ProfileFindManyQueryDto,
+  ProfileUpdateParamsDto,
+  ProfileUpdateBodyDto,
+  ProfileUpsertParamsDto,
+  ProfileUpsertBodyDto,
+  ProfileDeleteParamsDto,
   ProfileRestDtoService,
 } from '../../../../src/generated';
 import {
@@ -15,6 +20,11 @@ import {
   mockProfileFindUniqueParamsDtoFactory,
   mockProfileFindUniqueQueryDtoFactory,
   mockProfileFindManyQueryDtoFactory,
+  mockProfileUpdateParamsDtoFactory,
+  mockProfileUpdateBodyDtoFactory,
+  mockProfileUpsertParamsDtoFactory,
+  mockProfileUpsertBodyDtoFactory,
+  mockProfileDeleteParamsDtoFactory,
 } from '../mocks';
 
 describe('ProfileDatabaseService', () => {
@@ -35,8 +45,8 @@ describe('ProfileDatabaseService', () => {
   });
 
   describe('formatCreateDto', () => {
-    it('should properly format create dto', async () => {
-      const bodyDto: ProfileCreateBodyDto = mockProfileCreateBodyDtoFactory();
+    it('should properly format create dto', () => {
+      const bodyDto: Required<ProfileCreateBodyDto> = mockProfileCreateBodyDtoFactory();
       const { owner, ...values } = bodyDto;
       const data = {
         ...values,
@@ -49,8 +59,8 @@ describe('ProfileDatabaseService', () => {
   });
 
   describe('formatCountDto', () => {
-    it('should properly format count dto', async () => {
-      const queryDto: ProfileCountQueryDto = mockProfileCountQueryDtoFactory();
+    it('should properly format count dto', () => {
+      const queryDto: Required<ProfileCountQueryDto> = mockProfileCountQueryDtoFactory();
       const { owner, ...values } = queryDto;
       const where = {
         ...values,
@@ -63,7 +73,7 @@ describe('ProfileDatabaseService', () => {
   });
 
   describe('formatFindUniqueDto', () => {
-    it('should properly format findUnique dtos', async () => {
+    it('should properly format findUnique dtos', () => {
       const paramsDto: ProfileFindUniqueParamsDto = mockProfileFindUniqueParamsDtoFactory();
       const queryDto: ProfileFindUniqueQueryDto = mockProfileFindUniqueQueryDtoFactory();
       const prismaArgs: Prisma.ProfileFindUniqueArgs = {
@@ -81,8 +91,8 @@ describe('ProfileDatabaseService', () => {
   });
 
   describe('formatFindManyDto', () => {
-    it('should properly format findMany dtos', async () => {
-      const queryDto: ProfileFindManyQueryDto = mockProfileFindManyQueryDtoFactory();
+    it('should properly format findMany dtos', () => {
+      const queryDto: Required<ProfileFindManyQueryDto> = mockProfileFindManyQueryDtoFactory();
       const { owner, populate, sort, order, take, skip, ...values } = queryDto;
       const where = {
         owner: { id: owner },
@@ -98,6 +108,50 @@ describe('ProfileDatabaseService', () => {
         include,
       };
       const result = profileRestDtoService.formatFindManyDto(queryDto);
+      expect(result).toEqual(prismaArgs);
+    });
+  });
+
+  describe('formatUpdateDto', () => {
+    it('should properly format update dto', () => {
+      const paramsDto: ProfileUpdateParamsDto = mockProfileUpdateParamsDtoFactory();
+      const bodyDto: Required<ProfileUpdateBodyDto> = mockProfileUpdateBodyDtoFactory();
+      const { owner, ...values } = bodyDto;
+      const data = {
+        ...values,
+        owner: { connect: { id: owner } },
+      };
+      const prismaArgs: Prisma.ProfileUpdateArgs = { where: paramsDto, data };
+      const result = profileRestDtoService.formatUpdateDtos(paramsDto, bodyDto);
+      expect(result).toEqual(prismaArgs);
+    });
+  });
+
+  describe('formatUpsertDto', () => {
+    it('should properly format upsert dto', () => {
+      const paramsDto: ProfileUpsertParamsDto = mockProfileUpsertParamsDtoFactory();
+      const bodyDto: Required<ProfileUpsertBodyDto> = mockProfileUpsertBodyDtoFactory();
+      const { owner, ...values } = bodyDto;
+      const create = {
+        ...values,
+        owner: { connect: { id: owner } },
+      };
+      const update = { ...create };
+      const prismaArgs: Prisma.ProfileUpsertArgs = {
+        create,
+        update,
+        where: paramsDto,
+      };
+      const result = profileRestDtoService.formatUpsertDtos(paramsDto, bodyDto);
+      expect(result).toEqual(prismaArgs);
+    });
+  });
+
+  describe('formatDeleteDto', () => {
+    it('should properly format delete dto', () => {
+      const paramsDto: ProfileDeleteParamsDto = mockProfileDeleteParamsDtoFactory();
+      const prismaArgs: Prisma.ProfileDeleteArgs = { where: paramsDto };
+      const result = profileRestDtoService.formatDeleteDto(paramsDto);
       expect(result).toEqual(prismaArgs);
     });
   });

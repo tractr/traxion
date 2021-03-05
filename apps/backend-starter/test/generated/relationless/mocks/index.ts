@@ -5,3 +5,8 @@ export * from './relationless-create-body.dto.mock';
 export * from './relationless-count-query.dto.mock';
 export * from './relationless-find-unique-params.dto.mock';
 export * from './relationless-find-many-query.dto.mock';
+export * from './relationless-update-params.dto.mock';
+export * from './relationless-update-body.dto.mock';
+export * from './relationless-upsert-params.dto.mock';
+export * from './relationless-upsert-body.dto.mock';
+export * from './relationless-delete-params.dto.mock';

@@ -12,7 +12,7 @@ import {
 
 export function mockUserCreateBodyDtoFactory(
   override: Partial<UserCreateBodyDto> = {},
-): UserCreateBodyDto {
+): Required<UserCreateBodyDto> {
   return {
     name: mockUserNameFactory(),
     email: mockUserEmailFactory(),

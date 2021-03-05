@@ -3,7 +3,7 @@ import { mockRoleNameFactory, mockRoleRightsIdsFactory } from './role.mock';
 
 export function mockRoleCreateBodyDtoFactory(
   override: Partial<RoleCreateBodyDto> = {},
-): RoleCreateBodyDto {
+): Required<RoleCreateBodyDto> {
   return {
     name: mockRoleNameFactory(),
     rights: mockRoleRightsIdsFactory(),

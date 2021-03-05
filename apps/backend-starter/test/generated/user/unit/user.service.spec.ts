@@ -30,7 +30,7 @@ describe('UserService', () => {
 
   describe('create', () => {
     it('should map to UserDatabaseService.create', async () => {
-      const args = ({} as unknown) as Prisma.UserCreateArgs;
+      const args = ('args' as unknown) as Prisma.UserCreateArgs;
       const user = mockUserFactory();
       (mockedUserDatabaseService.create as jest.Mock).mockReturnValueOnce(user);
       const result = await userService.create(args);
@@ -42,7 +42,7 @@ describe('UserService', () => {
 
   describe('findUnique', () => {
     it('should map to UserDatabaseService.findUnique', async () => {
-      const args = ({} as unknown) as Prisma.UserFindUniqueArgs;
+      const args = ('args' as unknown) as Prisma.UserFindUniqueArgs;
       const user = mockUserFactory();
       (mockedUserDatabaseService.findUnique as jest.Mock).mockReturnValueOnce(
         user,
@@ -56,7 +56,7 @@ describe('UserService', () => {
 
   describe('findMany', () => {
     it('should map to UserDatabaseService.findMany', async () => {
-      const args = ({} as unknown) as Prisma.UserFindManyArgs;
+      const args = ('args' as unknown) as Prisma.UserFindManyArgs;
       const user = new Array(3).map(() => mockUserFactory());
       (mockedUserDatabaseService.findMany as jest.Mock).mockReturnValueOnce(
         user,
@@ -70,7 +70,7 @@ describe('UserService', () => {
 
   describe('count', () => {
     it('should map to UserDatabaseService.count', async () => {
-      const args = ({} as unknown) as Prisma.UserCountArgs;
+      const args = ('args' as unknown) as Prisma.UserCountArgs;
       const user = 10;
       (mockedUserDatabaseService.count as jest.Mock).mockReturnValueOnce(user);
       const result = await userService.count(args);
@@ -82,7 +82,7 @@ describe('UserService', () => {
 
   describe('update', () => {
     it('should map to UserDatabaseService.update', async () => {
-      const args = ({} as unknown) as Prisma.UserUpdateArgs;
+      const args = ('args' as unknown) as Prisma.UserUpdateArgs;
       const user = mockUserFactory();
       (mockedUserDatabaseService.update as jest.Mock).mockReturnValueOnce(user);
       const result = await userService.update(args);
@@ -94,7 +94,7 @@ describe('UserService', () => {
 
   describe('upsert', () => {
     it('should map to UserDatabaseService.upsert', async () => {
-      const args = ({} as unknown) as Prisma.UserUpsertArgs;
+      const args = ('args' as unknown) as Prisma.UserUpsertArgs;
       const user = mockUserFactory();
       (mockedUserDatabaseService.upsert as jest.Mock).mockReturnValueOnce(user);
       const result = await userService.upsert(args);
@@ -106,7 +106,7 @@ describe('UserService', () => {
 
   describe('delete', () => {
     it('should map to UserDatabaseService.delete', async () => {
-      const args = ({} as unknown) as Prisma.UserDeleteArgs;
+      const args = ('args' as unknown) as Prisma.UserDeleteArgs;
       const user = mockUserFactory();
       (mockedUserDatabaseService.delete as jest.Mock).mockReturnValueOnce(user);
       const result = await userService.delete(args);

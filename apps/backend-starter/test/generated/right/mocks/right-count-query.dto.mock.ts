@@ -3,7 +3,7 @@ import { mockRightIdFactory, mockRightNameFactory } from './right.mock';
 
 export function mockRightCountQueryDtoFactory(
   override: Partial<RightCountQueryDto> = {},
-): RightCountQueryDto {
+): Required<RightCountQueryDto> {
   return {
     id: mockRightIdFactory(),
     name: mockRightNameFactory(),

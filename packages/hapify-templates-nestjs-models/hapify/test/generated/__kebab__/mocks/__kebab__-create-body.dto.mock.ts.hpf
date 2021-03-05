@@ -13,7 +13,7 @@ import {
   
 export function mock<<Model pascal>>CreateBodyDtoFactory(
   override: Partial<<<Model pascal>>CreateBodyDto> = {}
-): <<Model pascal>>CreateBodyDto {
+): Required< <<Model pascal>>CreateBodyDto> {
   return {
   <<for Fields not internal field>>
     <<if field not entity>>

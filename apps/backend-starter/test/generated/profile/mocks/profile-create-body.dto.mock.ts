@@ -8,7 +8,7 @@ import {
 
 export function mockProfileCreateBodyDtoFactory(
   override: Partial<ProfileCreateBodyDto> = {},
-): ProfileCreateBodyDto {
+): Required<ProfileCreateBodyDto> {
   return {
     owner: mockProfileOwnerIdFactory(),
     address: mockProfileAddressFactory(),

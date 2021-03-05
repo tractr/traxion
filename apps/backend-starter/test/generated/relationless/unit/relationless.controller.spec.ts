@@ -52,7 +52,7 @@ describe('RelationlessService', () => {
   describe('create', () => {
     it('should compose RelationlessRestDtoService.formatCreateDto and RelationlessDatabaseService.create', async () => {
       const bodyDto = ('body' as unknown) as RelationlessCreateBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.RelationlessCreateArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RelationlessCreateArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessRestDtoService.formatCreateDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -76,7 +76,7 @@ describe('RelationlessService', () => {
   describe('findUnique', () => {
     it('should compose RelationlessRestDtoService.formatFindUniqueDtos and RelationlessDatabaseService.findUnique', async () => {
       const paramsDto = ('params' as unknown) as RelationlessFindUniqueParamsDto;
-      const prismaArgs = ({} as unknown) as Prisma.RelationlessFindUniqueArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RelationlessFindUniqueArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessRestDtoService.formatFindUniqueDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -102,7 +102,7 @@ describe('RelationlessService', () => {
   describe('findMany', () => {
     it('should compose RelationlessRestDtoService.formatFindManyDto and RelationlessDatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as RelationlessFindManyQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.RelationlessFindManyArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RelationlessFindManyArgs;
       const relationless = new Array(3).map(() => mockRelationlessFactory());
       (mockedRelationlessRestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -128,7 +128,7 @@ describe('RelationlessService', () => {
   describe('count', () => {
     it('should compose RelationlessRestDtoService.formatCountDto and RelationlessDatabaseService.count', async () => {
       const queryDto = ('query' as unknown) as RelationlessCountQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.RelationlessCountArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RelationlessCountArgs;
       const relationless = 10;
       (mockedRelationlessRestDtoService.formatCountDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -153,7 +153,7 @@ describe('RelationlessService', () => {
     it('should compose RelationlessRestDtoService.formatUpdateDtos and RelationlessDatabaseService.update', async () => {
       const paramsDto = ('params' as unknown) as RelationlessUpdateParamsDto;
       const bodyDto = ('body' as unknown) as RelationlessUpdateBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.RelationlessUpdateArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RelationlessUpdateArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessRestDtoService.formatUpdateDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -178,7 +178,7 @@ describe('RelationlessService', () => {
     it('should compose RelationlessRestDtoService.formatUpsertDtos and RelationlessDatabaseService.upsert', async () => {
       const paramsDto = ('params' as unknown) as RelationlessUpsertParamsDto;
       const bodyDto = ('body' as unknown) as RelationlessUpsertBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.RelationlessUpsertArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RelationlessUpsertArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessRestDtoService.formatUpsertDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -202,7 +202,7 @@ describe('RelationlessService', () => {
   describe('delete', () => {
     it('should compose RelationlessRestDtoService.formatDeleteDto and RelationlessDatabaseService.delete', async () => {
       const paramsDto = ('params' as unknown) as RelationlessDeleteParamsDto;
-      const prismaArgs = ({} as unknown) as Prisma.RelationlessDeleteArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RelationlessDeleteArgs;
       const relationless = mockRelationlessFactory();
       (mockedRelationlessRestDtoService.formatDeleteDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,

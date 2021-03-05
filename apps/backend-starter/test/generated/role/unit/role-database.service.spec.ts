@@ -32,7 +32,7 @@ describe('RoleDatabaseService', () => {
 
   describe('findUnique', () => {
     it('should map to DatabaseService.findUnique', async () => {
-      const args = ({} as unknown) as Prisma.RoleFindUniqueArgs;
+      const args = ('args' as unknown) as Prisma.RoleFindUniqueArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.findUnique as jest.Mock).mockReturnValueOnce(
         role,
@@ -46,7 +46,7 @@ describe('RoleDatabaseService', () => {
 
   describe('findFirst', () => {
     it('should map to DatabaseService.findFirst', async () => {
-      const args = ({} as unknown) as Prisma.RoleFindFirstArgs;
+      const args = ('args' as unknown) as Prisma.RoleFindFirstArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.findFirst as jest.Mock).mockReturnValueOnce(
         role,
@@ -60,7 +60,7 @@ describe('RoleDatabaseService', () => {
 
   describe('findMany', () => {
     it('should map to DatabaseService.findMany', async () => {
-      const args = ({} as unknown) as Prisma.RoleFindManyArgs;
+      const args = ('args' as unknown) as Prisma.RoleFindManyArgs;
       const role = new Array(3).map(() => mockRoleFactory());
       (mockedDatabaseService.role.findMany as jest.Mock).mockReturnValueOnce(
         role,
@@ -74,7 +74,7 @@ describe('RoleDatabaseService', () => {
 
   describe('create', () => {
     it('should map to DatabaseService.create', async () => {
-      const args = ({} as unknown) as Prisma.RoleCreateArgs;
+      const args = ('args' as unknown) as Prisma.RoleCreateArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.create as jest.Mock).mockReturnValueOnce(
         role,
@@ -88,7 +88,7 @@ describe('RoleDatabaseService', () => {
 
   describe('update', () => {
     it('should map to DatabaseService.update', async () => {
-      const args = ({} as unknown) as Prisma.RoleUpdateArgs;
+      const args = ('args' as unknown) as Prisma.RoleUpdateArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.update as jest.Mock).mockReturnValueOnce(
         role,
@@ -102,7 +102,7 @@ describe('RoleDatabaseService', () => {
 
   describe('updateMany', () => {
     it('should map to DatabaseService.updateMany', async () => {
-      const args = ({} as unknown) as Prisma.RoleUpdateManyArgs;
+      const args = ('args' as unknown) as Prisma.RoleUpdateManyArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.updateMany as jest.Mock).mockReturnValueOnce(
         role,
@@ -116,7 +116,7 @@ describe('RoleDatabaseService', () => {
 
   describe('upsert', () => {
     it('should map to DatabaseService.upsert', async () => {
-      const args = ({} as unknown) as Prisma.RoleUpsertArgs;
+      const args = ('args' as unknown) as Prisma.RoleUpsertArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.upsert as jest.Mock).mockReturnValueOnce(
         role,
@@ -130,7 +130,7 @@ describe('RoleDatabaseService', () => {
 
   describe('delete', () => {
     it('should map to DatabaseService.delete', async () => {
-      const args = ({} as unknown) as Prisma.RoleDeleteArgs;
+      const args = ('args' as unknown) as Prisma.RoleDeleteArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.delete as jest.Mock).mockReturnValueOnce(
         role,
@@ -144,7 +144,7 @@ describe('RoleDatabaseService', () => {
 
   describe('deleteMany', () => {
     it('should map to DatabaseService.deleteMany', async () => {
-      const args = ({} as unknown) as Prisma.RoleDeleteManyArgs;
+      const args = ('args' as unknown) as Prisma.RoleDeleteManyArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.deleteMany as jest.Mock).mockReturnValueOnce(
         role,
@@ -158,7 +158,7 @@ describe('RoleDatabaseService', () => {
 
   describe('count', () => {
     it('should map to DatabaseService.count', async () => {
-      const args = ({} as unknown) as Prisma.RoleCountArgs;
+      const args = ('args' as unknown) as Prisma.RoleCountArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.count as jest.Mock).mockReturnValueOnce(role);
       const result = await roleDatabaseService.count(args);
@@ -170,7 +170,7 @@ describe('RoleDatabaseService', () => {
 
   describe('aggregate', () => {
     it('should map to DatabaseService.aggregate', async () => {
-      const args = ({} as unknown) as Prisma.RoleAggregateArgs;
+      const args = ('args' as unknown) as Prisma.RoleAggregateArgs;
       const role = mockRoleFactory();
       (mockedDatabaseService.role.aggregate as jest.Mock).mockReturnValueOnce(
         role,

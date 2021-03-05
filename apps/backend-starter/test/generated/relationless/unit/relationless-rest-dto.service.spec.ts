@@ -5,6 +5,11 @@ import {
   RelationlessCountQueryDto,
   RelationlessFindUniqueParamsDto,
   RelationlessFindManyQueryDto,
+  RelationlessUpdateParamsDto,
+  RelationlessUpdateBodyDto,
+  RelationlessUpsertParamsDto,
+  RelationlessUpsertBodyDto,
+  RelationlessDeleteParamsDto,
   RelationlessRestDtoService,
 } from '../../../../src/generated';
 import {
@@ -12,6 +17,11 @@ import {
   mockRelationlessCountQueryDtoFactory,
   mockRelationlessFindUniqueParamsDtoFactory,
   mockRelationlessFindManyQueryDtoFactory,
+  mockRelationlessUpdateParamsDtoFactory,
+  mockRelationlessUpdateBodyDtoFactory,
+  mockRelationlessUpsertParamsDtoFactory,
+  mockRelationlessUpsertBodyDtoFactory,
+  mockRelationlessDeleteParamsDtoFactory,
 } from '../mocks';
 
 describe('RelationlessDatabaseService', () => {
@@ -32,8 +42,8 @@ describe('RelationlessDatabaseService', () => {
   });
 
   describe('formatCreateDto', () => {
-    it('should properly format create dto', async () => {
-      const bodyDto: RelationlessCreateBodyDto = mockRelationlessCreateBodyDtoFactory();
+    it('should properly format create dto', () => {
+      const bodyDto: Required<RelationlessCreateBodyDto> = mockRelationlessCreateBodyDtoFactory();
       const { ...values } = bodyDto;
       const data = {
         ...values,
@@ -45,8 +55,8 @@ describe('RelationlessDatabaseService', () => {
   });
 
   describe('formatCountDto', () => {
-    it('should properly format count dto', async () => {
-      const queryDto: RelationlessCountQueryDto = mockRelationlessCountQueryDtoFactory();
+    it('should properly format count dto', () => {
+      const queryDto: Required<RelationlessCountQueryDto> = mockRelationlessCountQueryDtoFactory();
       const { ...values } = queryDto;
       const where = {
         ...values,
@@ -58,7 +68,7 @@ describe('RelationlessDatabaseService', () => {
   });
 
   describe('formatFindUniqueDto', () => {
-    it('should properly format findUnique dtos', async () => {
+    it('should properly format findUnique dtos', () => {
       const paramsDto: RelationlessFindUniqueParamsDto = mockRelationlessFindUniqueParamsDtoFactory();
       const prismaArgs: Prisma.RelationlessFindUniqueArgs = {
         where: { ...paramsDto },
@@ -69,8 +79,8 @@ describe('RelationlessDatabaseService', () => {
   });
 
   describe('formatFindManyDto', () => {
-    it('should properly format findMany dtos', async () => {
-      const queryDto: RelationlessFindManyQueryDto = mockRelationlessFindManyQueryDtoFactory();
+    it('should properly format findMany dtos', () => {
+      const queryDto: Required<RelationlessFindManyQueryDto> = mockRelationlessFindManyQueryDtoFactory();
       const { sort, order, take, skip, ...values } = queryDto;
       const where = {
         ...values,
@@ -83,6 +93,57 @@ describe('RelationlessDatabaseService', () => {
         orderBy,
       };
       const result = relationlessRestDtoService.formatFindManyDto(queryDto);
+      expect(result).toEqual(prismaArgs);
+    });
+  });
+
+  describe('formatUpdateDto', () => {
+    it('should properly format update dto', () => {
+      const paramsDto: RelationlessUpdateParamsDto = mockRelationlessUpdateParamsDtoFactory();
+      const bodyDto: Required<RelationlessUpdateBodyDto> = mockRelationlessUpdateBodyDtoFactory();
+      const { ...values } = bodyDto;
+      const data = {
+        ...values,
+      };
+      const prismaArgs: Prisma.RelationlessUpdateArgs = {
+        where: paramsDto,
+        data,
+      };
+      const result = relationlessRestDtoService.formatUpdateDtos(
+        paramsDto,
+        bodyDto,
+      );
+      expect(result).toEqual(prismaArgs);
+    });
+  });
+
+  describe('formatUpsertDto', () => {
+    it('should properly format upsert dto', () => {
+      const paramsDto: RelationlessUpsertParamsDto = mockRelationlessUpsertParamsDtoFactory();
+      const bodyDto: Required<RelationlessUpsertBodyDto> = mockRelationlessUpsertBodyDtoFactory();
+      const { ...values } = bodyDto;
+      const create = {
+        ...values,
+      };
+      const update = { ...create };
+      const prismaArgs: Prisma.RelationlessUpsertArgs = {
+        create,
+        update,
+        where: paramsDto,
+      };
+      const result = relationlessRestDtoService.formatUpsertDtos(
+        paramsDto,
+        bodyDto,
+      );
+      expect(result).toEqual(prismaArgs);
+    });
+  });
+
+  describe('formatDeleteDto', () => {
+    it('should properly format delete dto', () => {
+      const paramsDto: RelationlessDeleteParamsDto = mockRelationlessDeleteParamsDtoFactory();
+      const prismaArgs: Prisma.RelationlessDeleteArgs = { where: paramsDto };
+      const result = relationlessRestDtoService.formatDeleteDto(paramsDto);
       expect(result).toEqual(prismaArgs);
     });
   });

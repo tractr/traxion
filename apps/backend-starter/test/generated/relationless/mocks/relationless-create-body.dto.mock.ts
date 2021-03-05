@@ -3,7 +3,7 @@ import {} from './relationless.mock';
 
 export function mockRelationlessCreateBodyDtoFactory(
   override: Partial<RelationlessCreateBodyDto> = {},
-): RelationlessCreateBodyDto {
+): Required<RelationlessCreateBodyDto> {
   return {
     ...override,
   };

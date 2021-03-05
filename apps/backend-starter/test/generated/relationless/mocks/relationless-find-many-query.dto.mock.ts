@@ -3,7 +3,7 @@ import { mockRelationlessIdFactory } from './relationless.mock';
 
 export function mockRelationlessFindManyQueryDtoFactory(
   override: Partial<RelationlessFindManyQueryDto> = {},
-): RelationlessFindManyQueryDto {
+): Required<RelationlessFindManyQueryDto> {
   return {
     id: mockRelationlessIdFactory(),
     sort: 'id',

@@ -215,6 +215,31 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'test/generated/{kebab}/mocks/{kebab}-update-params.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/{kebab}-update-body.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/{kebab}-upsert-params.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/{kebab}-upsert-body.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/{kebab}-delete-params.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'test/generated/{kebab}/unit/{kebab}.service.spec.ts',
       engine: 'hpf',
       input: 'one',

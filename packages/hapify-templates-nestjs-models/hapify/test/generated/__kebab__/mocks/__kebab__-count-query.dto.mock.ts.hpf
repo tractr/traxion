@@ -13,7 +13,7 @@ import {
   
 export function mock<<Model pascal>>CountQueryDtoFactory(
   override: Partial<<<Model pascal>>CountQueryDto> = {}
-): <<Model pascal>>CountQueryDto {
+): Required< <<Model pascal>>CountQueryDto> {
   return {
   <<for Fields searchable and not password field>>
     <<if field not entity>>

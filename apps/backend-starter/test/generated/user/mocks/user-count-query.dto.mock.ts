@@ -12,7 +12,7 @@ import {
 
 export function mockUserCountQueryDtoFactory(
   override: Partial<UserCountQueryDto> = {},
-): UserCountQueryDto {
+): Required<UserCountQueryDto> {
   return {
     id: mockUserIdFactory(),
     name: mockUserNameFactory(),

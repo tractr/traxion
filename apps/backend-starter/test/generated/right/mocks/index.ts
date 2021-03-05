@@ -6,3 +6,8 @@ export * from './right-count-query.dto.mock';
 export * from './right-find-unique-params.dto.mock';
 export * from './right-find-unique-query.dto.mock';
 export * from './right-find-many-query.dto.mock';
+export * from './right-update-params.dto.mock';
+export * from './right-update-body.dto.mock';
+export * from './right-upsert-params.dto.mock';
+export * from './right-upsert-body.dto.mock';
+export * from './right-delete-params.dto.mock';

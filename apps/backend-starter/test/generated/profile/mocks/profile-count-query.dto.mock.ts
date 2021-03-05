@@ -9,7 +9,7 @@ import {
 
 export function mockProfileCountQueryDtoFactory(
   override: Partial<ProfileCountQueryDto> = {},
-): ProfileCountQueryDto {
+): Required<ProfileCountQueryDto> {
   return {
     id: mockProfileIdFactory(),
     owner: mockProfileOwnerIdFactory(),

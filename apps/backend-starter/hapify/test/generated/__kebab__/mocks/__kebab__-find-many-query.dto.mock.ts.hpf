@@ -13,7 +13,7 @@ import {
   
 export function mock<<Model pascal>>FindManyQueryDtoFactory(
   override: Partial<<<Model pascal>>FindManyQueryDto> = {}
-): <<Model pascal>>FindManyQueryDto {
+): Required< <<Model pascal>>FindManyQueryDto> {
   return {
   <<for Fields searchable and not password field>>
     <<if field not entity>>

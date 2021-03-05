@@ -6,3 +6,8 @@ export * from './profile-count-query.dto.mock';
 export * from './profile-find-unique-params.dto.mock';
 export * from './profile-find-unique-query.dto.mock';
 export * from './profile-find-many-query.dto.mock';
+export * from './profile-update-params.dto.mock';
+export * from './profile-update-body.dto.mock';
+export * from './profile-upsert-params.dto.mock';
+export * from './profile-upsert-body.dto.mock';
+export * from './profile-delete-params.dto.mock';

@@ -51,7 +51,7 @@ describe('RightService', () => {
   describe('create', () => {
     it('should compose RightRestDtoService.formatCreateDto and RightDatabaseService.create', async () => {
       const bodyDto = ('body' as unknown) as RightCreateBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.RightCreateArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RightCreateArgs;
       const right = mockRightFactory();
       (mockedRightRestDtoService.formatCreateDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -74,7 +74,7 @@ describe('RightService', () => {
     it('should compose RightRestDtoService.formatFindUniqueDtos and RightDatabaseService.findUnique', async () => {
       const paramsDto = ('params' as unknown) as RightFindUniqueParamsDto;
       const queryDto = ('query' as unknown) as RightFindUniqueQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.RightFindUniqueArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RightFindUniqueArgs;
       const right = mockRightFactory();
       (mockedRightRestDtoService.formatFindUniqueDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -96,7 +96,7 @@ describe('RightService', () => {
   describe('findMany', () => {
     it('should compose RightRestDtoService.formatFindManyDto and RightDatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as RightFindManyQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.RightFindManyArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RightFindManyArgs;
       const right = new Array(3).map(() => mockRightFactory());
       (mockedRightRestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -118,7 +118,7 @@ describe('RightService', () => {
   describe('count', () => {
     it('should compose RightRestDtoService.formatCountDto and RightDatabaseService.count', async () => {
       const queryDto = ('query' as unknown) as RightCountQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.RightCountArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RightCountArgs;
       const right = 10;
       (mockedRightRestDtoService.formatCountDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -139,7 +139,7 @@ describe('RightService', () => {
     it('should compose RightRestDtoService.formatUpdateDtos and RightDatabaseService.update', async () => {
       const paramsDto = ('params' as unknown) as RightUpdateParamsDto;
       const bodyDto = ('body' as unknown) as RightUpdateBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.RightUpdateArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RightUpdateArgs;
       const right = mockRightFactory();
       (mockedRightRestDtoService.formatUpdateDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -163,7 +163,7 @@ describe('RightService', () => {
     it('should compose RightRestDtoService.formatUpsertDtos and RightDatabaseService.upsert', async () => {
       const paramsDto = ('params' as unknown) as RightUpsertParamsDto;
       const bodyDto = ('body' as unknown) as RightUpsertBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.RightUpsertArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RightUpsertArgs;
       const right = mockRightFactory();
       (mockedRightRestDtoService.formatUpsertDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -186,7 +186,7 @@ describe('RightService', () => {
   describe('delete', () => {
     it('should compose RightRestDtoService.formatDeleteDto and RightDatabaseService.delete', async () => {
       const paramsDto = ('params' as unknown) as RightDeleteParamsDto;
-      const prismaArgs = ({} as unknown) as Prisma.RightDeleteArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RightDeleteArgs;
       const right = mockRightFactory();
       (mockedRightRestDtoService.formatDeleteDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
