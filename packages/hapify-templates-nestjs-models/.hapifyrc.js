@@ -188,7 +188,29 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'test/generated/{kebab}/mocks/{kebab}-count-query.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'test/generated/{kebab}/mocks/{kebab}-create-body.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'test/generated/{kebab}/mocks/{kebab}-find-unique-params.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'test/generated/{kebab}/mocks/{kebab}-find-unique-query.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/{kebab}-find-many-query.dto.mock.ts',
       engine: 'hpf',
       input: 'one',
     },

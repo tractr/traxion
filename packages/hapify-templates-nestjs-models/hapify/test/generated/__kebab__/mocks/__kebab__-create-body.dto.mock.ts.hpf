@@ -3,8 +3,10 @@ import {
 <<for Fields not internal field>>
   <<if field not entity>>
   mock<<Model pascal>><<field pascal>>Factory,
-  <<else>>
+  <<elseif field oneOne or oneMany>>
   mock<<Model pascal>><<field pascal>>IdFactory,
+  <<else>>
+  mock<<Model pascal>><<field pascal>>IdsFactory,
   <<endif>>
 <<endfor>>
 } from './<<Model kebab>>.mock';
@@ -19,7 +21,7 @@ export function mock<<Model pascal>>CreateBodyDtoFactory(
     <<elseif field oneOne or oneMany>>
     <<field camel>>: mock<<Model pascal>><<field pascal>>IdFactory(),
     <<else>>
-    <<field camel>>: new Array(3).map(() => mock<<Model pascal>><<field pascal>>IdFactory()),
+    <<field camel>>: mock<<Model pascal>><<field pascal>>IdsFactory(),
     <<endif>>
   <<endfor>>
     ...override,

@@ -21,7 +21,9 @@ export function mockUserBannedFactory(): User['banned'] {
   return random.boolean();
 }
 
-export function mockUserLastConnectedAtFactory(): User['lastConnectedAt'] {
+export function mockUserLastConnectedAtFactory(): NonNullable<
+  User['lastConnectedAt']
+> {
   return date.past();
 }
 

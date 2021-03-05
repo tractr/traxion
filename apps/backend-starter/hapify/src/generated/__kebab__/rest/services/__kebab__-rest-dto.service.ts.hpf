@@ -61,22 +61,22 @@ export class <<Model pascal>>RestDtoService {
   public formatCountDto(
     queryDto: <<Model pascal>>CountQueryDto): Prisma.<<Model pascal>>CountArgs {
     const {
-    <<for Fields searchable field>>
+    <<for Fields searchable and (multiple or entity) field>>
       <<field camel>>,
     <<endfor>>
+      ...values,
     } = queryDto;
     const where = {
-    <<for Fields searchable field>>
+    <<for Fields searchable and (multiple or entity) field>>
       <<if field multiple and not entity>>
         <<field camel>>: <<field camel>> ? { hasSome: <<field camel>> } : undefined,
       <<elseif field oneOne or oneMany>>
         <<field camel>>: { id: <<field camel>> },
-      <<elseif field  manyMany>>
-        <<field camel>>: <<field camel>> ? { some: { id: { in: <<field camel>> } } }: undefined,
       <<else>>
-        <<field camel>>,
+        <<field camel>>: <<field camel>> ? { some: { id: { in: <<field camel>> } } }: undefined,
       <<endif>>
     <<endfor>>
+        ...values,
     }
     return { where };
   }
@@ -117,7 +117,7 @@ export class <<Model pascal>>RestDtoService {
     queryDto: <<Model pascal>>FindManyQueryDto
   ): Prisma.<<Model pascal>>FindManyArgs {
     const {
-    <<for Fields searchable field>>
+    <<for Fields searchable and (multiple or entity) field>>
       <<field camel>>,
     <<endfor>>
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
@@ -127,19 +127,19 @@ export class <<Model pascal>>RestDtoService {
       order,
       take,
       skip,
+      ...values,
     } = queryDto;
     const where: Prisma.<<Model pascal>>WhereInput = {
-    <<for Fields searchable field>>
+    <<for Fields searchable and (multiple or entity) field>>
       <<if field multiple and not entity>>
       <<field camel>>: <<field camel>> ? { hasSome: <<field camel>> } : undefined,
       <<elseif field oneOne or oneMany>>
       <<field camel>>: { id: <<field camel>> },
-      <<elseif field  manyMany>>
-        <<field camel>>: <<field camel>> ? { some: { id: { in: <<field camel>> } } }: undefined,
       <<else>>
-      <<field camel>>,
+        <<field camel>>: <<field camel>> ? { some: { id: { in: <<field camel>> } } }: undefined,
       <<endif>>
     <<endfor>>
+    ...values
     }
     const orderBy = {[sort]: order}
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>

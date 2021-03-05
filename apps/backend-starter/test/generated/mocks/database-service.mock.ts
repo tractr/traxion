@@ -1,4 +1,4 @@
-import { DatabaseService } from '@tractr/nestjs-database';
+import { DatabaseService } from '@tractr/hapify-plugin-nestjs-database';
 
 export function mockPrismaDelegateFactory() {
   return {

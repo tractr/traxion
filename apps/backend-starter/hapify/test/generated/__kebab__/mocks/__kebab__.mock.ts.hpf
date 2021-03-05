@@ -25,18 +25,24 @@ import {
 
 } from 'faker';
   
-<<for Fields not entity field>>
-export function mock<<Model pascal>><<field pascal>>Factory(): <<Model pascal>>['<<field camel>>'] {
+<<for Fields field>>
+  <<if field not entity>>
+export function mock<<Model pascal>><<field pascal>>Factory(): <<=getMockReturnType(field)>> {
   return <<=getFaker(field)>>;
 }
-    
-<<endfor>>
   
-<<for Fields oneOne or oneMany field>>
-export function mock<<Model pascal>><<field pascal>>IdFactory(): <<Model pascal>>['<<field camel>>Id'] {
+  <<elseif field oneOne or oneMany>>
+export function mock<<Model pascal>><<field pascal>>IdFactory(): <<=getMockReturnType(field)>> {
   return <<=getFaker(field)>>;
 }
     
+  <<else>>
+export function mock<<Model pascal>><<field pascal>>IdsFactory(): string[] {
+  return <<=getFaker(field)>>;
+
+}
+    
+  <<endif>>
 <<endfor>>
   
 export function mock<<Model pascal>>Factory(override: Partial< <<Model pascal>> > = {}): <<Model pascal>> {
@@ -74,5 +80,16 @@ function getFaker(f) {
   } else {
     return getBaseFaker(f);
   }
+}
+>>>
+<<<
+function getMockReturnType(f) {
+  let out = '';
+  if (f.nullable) out += 'NonNullable<';
+  out += `${root.names.pascal}['${f.names.camel}`;
+  if (f.subtype === 'oneOne' || f.subtype === 'oneMany') out += 'Id';
+  out += "']"
+  if (f.nullable) out += '>';
+  return out;
 }
 >>>

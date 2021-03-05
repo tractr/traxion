@@ -1,6 +1,6 @@
-import { <<Model pascal>>CreateBodyDto } from '../../../../src/generated';
+import { <<Model pascal>>CountQueryDto } from '../../../../src/generated';
 import {
-<<for Fields not internal field>>
+<<for Fields searchable and not password field>>
   <<if field not entity>>
   mock<<Model pascal>><<field pascal>>Factory,
   <<elseif field oneOne or oneMany>>
@@ -11,11 +11,11 @@ import {
 <<endfor>>
 } from './<<Model kebab>>.mock';
   
-export function mock<<Model pascal>>CreateBodyDtoFactory(
-  override: Partial<<<Model pascal>>CreateBodyDto> = {}
-): <<Model pascal>>CreateBodyDto {
+export function mock<<Model pascal>>CountQueryDtoFactory(
+  override: Partial<<<Model pascal>>CountQueryDto> = {}
+): <<Model pascal>>CountQueryDto {
   return {
-  <<for Fields not internal field>>
+  <<for Fields searchable and not password field>>
     <<if field not entity>>
     <<field camel>>: mock<<Model pascal>><<field pascal>>Factory(),
     <<elseif field oneOne or oneMany>>

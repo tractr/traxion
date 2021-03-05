@@ -2,3 +2,9 @@ export * from './<<Model kebab>>.mock';
 export * from './<<Model kebab>>.service.mock';
 export * from './<<Model kebab>>-rest-dto.service.mock';
 export * from './<<Model kebab>>-create-body.dto.mock';
+export * from './<<Model kebab>>-count-query.dto.mock';
+export * from './<<Model kebab>>-find-unique-params.dto.mock';
+<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+export * from './<<Model kebab>>-find-unique-query.dto.mock';
+<<<}>>>
+export * from './<<Model kebab>>-find-many-query.dto.mock';

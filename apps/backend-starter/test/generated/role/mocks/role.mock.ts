@@ -9,6 +9,10 @@ export function mockRoleNameFactory(): Role['name'] {
   return lorem.words();
 }
 
+export function mockRoleRightsIdsFactory(): string[] {
+  return new Array(3).map(() => random.uuid());
+}
+
 export function mockRoleFactory(override: Partial<Role> = {}): Role {
   return {
     id: mockRoleIdFactory(),
