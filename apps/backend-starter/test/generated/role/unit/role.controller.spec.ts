@@ -1,26 +1,28 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
 import {
-  RoleCreateBodyDto,
-  RoleController,
-  RoleService,
-  RoleRestDtoService,
   ROLE_REST_DTO_SERVICE,
   ROLE_SERVICE,
+  RoleController,
+  RoleCountQueryDto,
+  RoleCreateBodyDto,
+  RoleDeleteParamsDto,
+  RoleFindManyQueryDto,
   RoleFindUniqueParamsDto,
   RoleFindUniqueQueryDto,
-  RoleFindManyQueryDto,
-  RoleCountQueryDto,
+  RoleRestDtoService,
+  RoleService,
   RoleUpdateBodyDto,
   RoleUpdateParamsDto,
   RoleUpsertBodyDto,
   RoleUpsertParamsDto,
-  RoleDeleteParamsDto,
 } from '../../../../src/generated/role';
 import {
   mockRoleFactory,
-  mockRoleServiceFactory,
   mockRoleRestDtoServiceFactory,
+  mockRoleServiceFactory,
 } from '../mocks';
 
 describe('RoleService', () => {

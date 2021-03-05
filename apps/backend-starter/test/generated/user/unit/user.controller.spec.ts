@@ -1,26 +1,28 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
 import {
-  UserCreateBodyDto,
-  UserController,
-  UserService,
-  UserRestDtoService,
   USER_REST_DTO_SERVICE,
   USER_SERVICE,
+  UserController,
+  UserCountQueryDto,
+  UserCreateBodyDto,
+  UserDeleteParamsDto,
+  UserFindManyQueryDto,
   UserFindUniqueParamsDto,
   UserFindUniqueQueryDto,
-  UserFindManyQueryDto,
-  UserCountQueryDto,
+  UserRestDtoService,
+  UserService,
   UserUpdateBodyDto,
   UserUpdateParamsDto,
   UserUpsertBodyDto,
   UserUpsertParamsDto,
-  UserDeleteParamsDto,
 } from '../../../../src/generated/user';
 import {
   mockUserFactory,
-  mockUserServiceFactory,
   mockUserRestDtoServiceFactory,
+  mockUserServiceFactory,
 } from '../mocks';
 
 describe('UserService', () => {

@@ -1,26 +1,28 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
 import {
-  ProfileCreateBodyDto,
-  ProfileController,
-  ProfileService,
-  ProfileRestDtoService,
   PROFILE_REST_DTO_SERVICE,
   PROFILE_SERVICE,
+  ProfileController,
+  ProfileCountQueryDto,
+  ProfileCreateBodyDto,
+  ProfileDeleteParamsDto,
+  ProfileFindManyQueryDto,
   ProfileFindUniqueParamsDto,
   ProfileFindUniqueQueryDto,
-  ProfileFindManyQueryDto,
-  ProfileCountQueryDto,
+  ProfileRestDtoService,
+  ProfileService,
   ProfileUpdateBodyDto,
   ProfileUpdateParamsDto,
   ProfileUpsertBodyDto,
   ProfileUpsertParamsDto,
-  ProfileDeleteParamsDto,
 } from '../../../../src/generated/profile';
 import {
   mockProfileFactory,
-  mockProfileServiceFactory,
   mockProfileRestDtoServiceFactory,
+  mockProfileServiceFactory,
 } from '../mocks';
 
 describe('ProfileService', () => {

@@ -1,5 +1,5 @@
 import { User } from '@prisma/client';
-import { random, internet, lorem, date } from 'faker';
+import { date, internet, lorem, random } from 'faker';
 
 export function mockUserIdFactory(): User['id'] {
   return random.uuid();

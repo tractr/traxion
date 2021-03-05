@@ -7,34 +7,35 @@ import {
 <<endif>>
 
 import {
-  IsOptional,
 
   <<if Fields boolean and searchable>>
   IsBoolean, 
-  <<endif>>
-
-  <<if Fields (string or entity or enum) and searchable>>
-  IsString,
-  <<endif>>
-
-  <<if Fields entity and searchable>>
-  IsUUID,
-  <<endif>>
-
-  <<if Fields enum and searchable>>
-  IsIn,
   <<endif>>
 
   <<if Fields email and searchable>>
   IsEmail, 
   <<endif>>
 
-  <<if Fields url and searchable>>
-  IsUrl, 
+  <<if Fields enum and searchable>>
+  IsIn,
   <<endif>>
 
   <<if Fields (number or datetime) and searchable>>
   IsNumber,
+  <<endif>>
+  
+  IsOptional,
+
+  <<if Fields (string or entity or enum) and searchable>>
+  IsString,
+  <<endif>>
+
+  <<if Fields url and searchable>>
+  IsUrl, 
+  <<endif>>
+
+  <<if Fields entity and searchable>>
+  IsUUID,
   <<endif>>
 
 } from 'class-validator';

@@ -7,12 +7,6 @@ import {
 } from '@prisma/client';
 
 import {
-  IsOptional,
-  IsString,
-  IsIn,
-  IsNumber,
-  IsInt,
-  Min,
 
   <<if Fields boolean and searchable>>
   IsBoolean, 
@@ -22,13 +16,21 @@ import {
   IsEmail, 
   <<endif>>
 
-  <<if Fields entity and searchable>>
-  IsUUID, 
-  <<endif>>
+  IsIn,
+  IsInt,
+  IsNumber,
+  IsOptional,
+  IsString,
 
   <<if Fields url and searchable>>
   IsUrl, 
   <<endif>>
+
+  <<if Fields entity and searchable>>
+  IsUUID, 
+  <<endif>>
+   
+  Min,
 
 } from 'class-validator';
  

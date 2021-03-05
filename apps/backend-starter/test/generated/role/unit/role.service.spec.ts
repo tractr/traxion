@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
 import {
-  RoleService,
-  RoleDatabaseService,
   ROLE_DATABASE_SERVICE,
   ROLE_SERVICE,
+  RoleDatabaseService,
+  RoleService,
 } from '../../../../src/generated/role';
 import { mockPrismaDelegateFactory } from '../../mocks';
 import { mockRoleFactory } from '../mocks';

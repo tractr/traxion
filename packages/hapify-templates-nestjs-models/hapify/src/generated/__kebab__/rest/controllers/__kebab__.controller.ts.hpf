@@ -14,7 +14,6 @@ import { <<Model pascal>> } from '@prisma/client';
  
 import { <<Model pascal>>Service } from '../../common';
 import { <<Model constant>>_SERVICE } from '../../common/<<Model kebab>>-model.constant';
-import { <<Model constant>>_REST_DTO_SERVICE } from '../<<Model kebab>>-rest.constant';
 import {
   <<Model pascal>>CountQueryDto,
   <<Model pascal>>CreateBodyDto,
@@ -29,6 +28,7 @@ import {
   <<Model pascal>>UpsertBodyDto,
   <<Model pascal>>UpsertParamsDto,
 } from '../dtos';
+import { <<Model constant>>_REST_DTO_SERVICE } from '../<<Model kebab>>-rest.constant';
 import { <<Model pascal>>RestDtoService } from '../services';
  
 @Controller(['<<Model kebab>>'])

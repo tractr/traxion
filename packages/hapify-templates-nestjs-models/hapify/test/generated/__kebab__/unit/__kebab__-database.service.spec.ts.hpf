@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from '@tractr/nestjs-database';
+   
 import {
-  <<Model pascal>>DatabaseService,
   <<Model constant>>_DATABASE_SERVICE,
+  <<Model pascal>>DatabaseService,
 } from '../../../../src/generated/<<Model kebab>>';
 import { mockDatabaseServiceFactory } from '../../mocks';
 import { mock<<Model pascal>>Factory } from '../mocks';

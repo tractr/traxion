@@ -1,30 +1,31 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
 import {
-  ProfileCreateBodyDto,
+  formatPopulate,
   ProfileCountQueryDto,
+  ProfileCreateBodyDto,
+  ProfileDeleteParamsDto,
+  ProfileFindManyQueryDto,
   ProfileFindUniqueParamsDto,
   ProfileFindUniqueQueryDto,
-  formatPopulate,
-  ProfileFindManyQueryDto,
-  ProfileUpdateParamsDto,
-  ProfileUpdateBodyDto,
-  ProfileUpsertParamsDto,
-  ProfileUpsertBodyDto,
-  ProfileDeleteParamsDto,
   ProfileRestDtoService,
+  ProfileUpdateBodyDto,
+  ProfileUpdateParamsDto,
+  ProfileUpsertBodyDto,
+  ProfileUpsertParamsDto,
 } from '../../../../src/generated';
 import {
-  mockProfileCreateBodyDtoFactory,
   mockProfileCountQueryDtoFactory,
+  mockProfileCreateBodyDtoFactory,
+  mockProfileDeleteParamsDtoFactory,
+  mockProfileFindManyQueryDtoFactory,
   mockProfileFindUniqueParamsDtoFactory,
   mockProfileFindUniqueQueryDtoFactory,
-  mockProfileFindManyQueryDtoFactory,
-  mockProfileUpdateParamsDtoFactory,
   mockProfileUpdateBodyDtoFactory,
-  mockProfileUpsertParamsDtoFactory,
+  mockProfileUpdateParamsDtoFactory,
   mockProfileUpsertBodyDtoFactory,
-  mockProfileDeleteParamsDtoFactory,
+  mockProfileUpsertParamsDtoFactory,
 } from '../mocks';
 
 describe('ProfileDatabaseService', () => {

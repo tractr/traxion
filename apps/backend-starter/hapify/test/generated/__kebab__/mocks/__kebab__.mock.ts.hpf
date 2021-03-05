@@ -15,7 +15,7 @@ import {
   internet,
   <<endif>>
 
-  <<if Fields string and not (email or password or url)>>
+  <<if Fields string and not (primary or email or password or url)>>
   lorem,
   <<endif>>
 

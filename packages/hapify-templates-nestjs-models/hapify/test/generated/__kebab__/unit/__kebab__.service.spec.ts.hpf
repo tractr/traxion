@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+  
 import {
-  <<Model pascal>>Service,
-  <<Model pascal>>DatabaseService,
   <<Model constant>>_DATABASE_SERVICE,
   <<Model constant>>_SERVICE,
+  <<Model pascal>>DatabaseService,
+  <<Model pascal>>Service,
 } from '../../../../src/generated/<<Model camel>>';
 import { mockPrismaDelegateFactory } from '../../mocks';
 import { mock<<Model pascal>>Factory } from '../mocks';

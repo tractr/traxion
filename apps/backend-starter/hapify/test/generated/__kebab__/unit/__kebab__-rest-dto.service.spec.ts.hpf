@@ -1,34 +1,35 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+   
 import { 
-  <<Model pascal>>CreateBodyDto,
   <<Model pascal>>CountQueryDto,
+  <<Model pascal>>CreateBodyDto,
+  <<Model pascal>>DeleteParamsDto,
+  <<Model pascal>>FindManyQueryDto,
   <<Model pascal>>FindUniqueParamsDto,
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
   <<Model pascal>>FindUniqueQueryDto,
   formatPopulate,
 <<<}>>>
-  <<Model pascal>>FindManyQueryDto,
-  <<Model pascal>>UpdateParamsDto,
+  <<Model pascal>>RestDtoService, 
   <<Model pascal>>UpdateBodyDto,
-  <<Model pascal>>UpsertParamsDto,
+  <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpsertBodyDto,
-  <<Model pascal>>DeleteParamsDto,
-  <<Model pascal>>RestDtoService }
-from '../../../../src/generated';
+  <<Model pascal>>UpsertParamsDto,
+} from '../../../../src/generated';
 import {
-  mock<<Model pascal>>CreateBodyDtoFactory,
   mock<<Model pascal>>CountQueryDtoFactory,
+  mock<<Model pascal>>CreateBodyDtoFactory,
+  mock<<Model pascal>>DeleteParamsDtoFactory,
+  mock<<Model pascal>>FindManyQueryDtoFactory,
   mock<<Model pascal>>FindUniqueParamsDtoFactory,
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
   mock<<Model pascal>>FindUniqueQueryDtoFactory,
 <<<}>>>
-  mock<<Model pascal>>FindManyQueryDtoFactory,
-  mock<<Model pascal>>UpdateParamsDtoFactory,
   mock<<Model pascal>>UpdateBodyDtoFactory,
-  mock<<Model pascal>>UpsertParamsDtoFactory,
+  mock<<Model pascal>>UpdateParamsDtoFactory,
   mock<<Model pascal>>UpsertBodyDtoFactory,
-  mock<<Model pascal>>DeleteParamsDtoFactory,
+  mock<<Model pascal>>UpsertParamsDtoFactory,
 } from '../mocks';
   
 describe('<<Model pascal>>DatabaseService', () => {

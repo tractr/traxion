@@ -1,10 +1,10 @@
 import { ProfileFindManyQueryDto } from '../../../../src/generated';
 import {
+  mockProfileAddressFactory,
+  mockProfileGenderFactory,
   mockProfileIdFactory,
   mockProfileOwnerIdFactory,
-  mockProfileAddressFactory,
   mockProfilePhoneFactory,
-  mockProfileGenderFactory,
 } from './profile.mock';
 
 export function mockProfileFindManyQueryDtoFactory(

@@ -1,9 +1,9 @@
 import { ProfileUpsertBodyDto } from '../../../../src/generated';
 import {
-  mockProfileOwnerIdFactory,
   mockProfileAddressFactory,
-  mockProfilePhoneFactory,
   mockProfileGenderFactory,
+  mockProfileOwnerIdFactory,
+  mockProfilePhoneFactory,
 } from './profile.mock';
 
 export function mockProfileUpsertBodyDtoFactory(

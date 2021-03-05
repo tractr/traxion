@@ -1,12 +1,12 @@
 import { UserCreateBodyDto } from '../../../../src/generated';
 import {
-  mockUserNameFactory,
-  mockUserEmailFactory,
-  mockUserPasswordFactory,
-  mockUserBannedFactory,
   mockUserAgeFactory,
+  mockUserBannedFactory,
   mockUserBlogUrlFactory,
+  mockUserEmailFactory,
   mockUserListFactory,
+  mockUserNameFactory,
+  mockUserPasswordFactory,
   mockUserRoleIdFactory,
 } from './user.mock';
 

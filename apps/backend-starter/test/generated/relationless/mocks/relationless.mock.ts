@@ -1,5 +1,5 @@
 import { Relationless } from '@prisma/client';
-import { random, lorem } from 'faker';
+import { random } from 'faker';
 
 export function mockRelationlessIdFactory(): Relationless['id'] {
   return random.uuid();

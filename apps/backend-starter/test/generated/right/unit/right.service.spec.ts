@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
 import {
-  RightService,
-  RightDatabaseService,
   RIGHT_DATABASE_SERVICE,
   RIGHT_SERVICE,
+  RightDatabaseService,
+  RightService,
 } from '../../../../src/generated/right';
 import { mockPrismaDelegateFactory } from '../../mocks';
 import { mockRightFactory } from '../mocks';

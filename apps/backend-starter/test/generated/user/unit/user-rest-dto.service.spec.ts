@@ -1,30 +1,31 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
 import {
-  UserCreateBodyDto,
+  formatPopulate,
   UserCountQueryDto,
+  UserCreateBodyDto,
+  UserDeleteParamsDto,
+  UserFindManyQueryDto,
   UserFindUniqueParamsDto,
   UserFindUniqueQueryDto,
-  formatPopulate,
-  UserFindManyQueryDto,
-  UserUpdateParamsDto,
-  UserUpdateBodyDto,
-  UserUpsertParamsDto,
-  UserUpsertBodyDto,
-  UserDeleteParamsDto,
   UserRestDtoService,
+  UserUpdateBodyDto,
+  UserUpdateParamsDto,
+  UserUpsertBodyDto,
+  UserUpsertParamsDto,
 } from '../../../../src/generated';
 import {
-  mockUserCreateBodyDtoFactory,
   mockUserCountQueryDtoFactory,
+  mockUserCreateBodyDtoFactory,
+  mockUserDeleteParamsDtoFactory,
+  mockUserFindManyQueryDtoFactory,
   mockUserFindUniqueParamsDtoFactory,
   mockUserFindUniqueQueryDtoFactory,
-  mockUserFindManyQueryDtoFactory,
-  mockUserUpdateParamsDtoFactory,
   mockUserUpdateBodyDtoFactory,
-  mockUserUpsertParamsDtoFactory,
+  mockUserUpdateParamsDtoFactory,
   mockUserUpsertBodyDtoFactory,
-  mockUserDeleteParamsDtoFactory,
+  mockUserUpsertParamsDtoFactory,
 } from '../mocks';
 
 describe('UserDatabaseService', () => {

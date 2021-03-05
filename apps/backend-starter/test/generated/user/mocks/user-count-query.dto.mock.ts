@@ -1,12 +1,12 @@
 import { UserCountQueryDto } from '../../../../src/generated';
 import {
-  mockUserIdFactory,
-  mockUserNameFactory,
-  mockUserEmailFactory,
-  mockUserBannedFactory,
   mockUserAgeFactory,
+  mockUserBannedFactory,
   mockUserBlogUrlFactory,
+  mockUserEmailFactory,
+  mockUserIdFactory,
   mockUserListFactory,
+  mockUserNameFactory,
   mockUserRoleIdFactory,
 } from './user.mock';
 

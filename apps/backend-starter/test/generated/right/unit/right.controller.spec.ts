@@ -1,26 +1,28 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
 import {
-  RightCreateBodyDto,
-  RightController,
-  RightService,
-  RightRestDtoService,
   RIGHT_REST_DTO_SERVICE,
   RIGHT_SERVICE,
+  RightController,
+  RightCountQueryDto,
+  RightCreateBodyDto,
+  RightDeleteParamsDto,
+  RightFindManyQueryDto,
   RightFindUniqueParamsDto,
   RightFindUniqueQueryDto,
-  RightFindManyQueryDto,
-  RightCountQueryDto,
+  RightRestDtoService,
+  RightService,
   RightUpdateBodyDto,
   RightUpdateParamsDto,
   RightUpsertBodyDto,
   RightUpsertParamsDto,
-  RightDeleteParamsDto,
 } from '../../../../src/generated/right';
 import {
   mockRightFactory,
-  mockRightServiceFactory,
   mockRightRestDtoServiceFactory,
+  mockRightServiceFactory,
 } from '../mocks';
 
 describe('RightService', () => {

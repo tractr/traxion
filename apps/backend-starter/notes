@@ -54,3 +54,5 @@ NE PAS OUBLIER
 -> Nettoyer / uniformiser et commenter les templates
 -> Documenter ce que gèrent/gèrent pas les templates hapify -- mettre en place le validator
 -> Ajouter les named relation dans le schema prisma
+-> Gérer correctement les champs primary de type number
+

@@ -1,5 +1,5 @@
 import { Profile, ProfileGender } from '@prisma/client';
-import { random, lorem } from 'faker';
+import { lorem, random } from 'faker';
 
 export function mockProfileIdFactory(): Profile['id'] {
   return random.uuid();

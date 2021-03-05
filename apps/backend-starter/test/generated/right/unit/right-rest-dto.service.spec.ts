@@ -1,30 +1,31 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
 import {
-  RightCreateBodyDto,
+  formatPopulate,
   RightCountQueryDto,
+  RightCreateBodyDto,
+  RightDeleteParamsDto,
+  RightFindManyQueryDto,
   RightFindUniqueParamsDto,
   RightFindUniqueQueryDto,
-  formatPopulate,
-  RightFindManyQueryDto,
-  RightUpdateParamsDto,
-  RightUpdateBodyDto,
-  RightUpsertParamsDto,
-  RightUpsertBodyDto,
-  RightDeleteParamsDto,
   RightRestDtoService,
+  RightUpdateBodyDto,
+  RightUpdateParamsDto,
+  RightUpsertBodyDto,
+  RightUpsertParamsDto,
 } from '../../../../src/generated';
 import {
-  mockRightCreateBodyDtoFactory,
   mockRightCountQueryDtoFactory,
+  mockRightCreateBodyDtoFactory,
+  mockRightDeleteParamsDtoFactory,
+  mockRightFindManyQueryDtoFactory,
   mockRightFindUniqueParamsDtoFactory,
   mockRightFindUniqueQueryDtoFactory,
-  mockRightFindManyQueryDtoFactory,
-  mockRightUpdateParamsDtoFactory,
   mockRightUpdateBodyDtoFactory,
-  mockRightUpsertParamsDtoFactory,
+  mockRightUpdateParamsDtoFactory,
   mockRightUpsertBodyDtoFactory,
-  mockRightDeleteParamsDtoFactory,
+  mockRightUpsertParamsDtoFactory,
 } from '../mocks';
 
 describe('RightDatabaseService', () => {

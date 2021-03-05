@@ -1,30 +1,31 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
 import {
-  RoleCreateBodyDto,
+  formatPopulate,
   RoleCountQueryDto,
+  RoleCreateBodyDto,
+  RoleDeleteParamsDto,
+  RoleFindManyQueryDto,
   RoleFindUniqueParamsDto,
   RoleFindUniqueQueryDto,
-  formatPopulate,
-  RoleFindManyQueryDto,
-  RoleUpdateParamsDto,
-  RoleUpdateBodyDto,
-  RoleUpsertParamsDto,
-  RoleUpsertBodyDto,
-  RoleDeleteParamsDto,
   RoleRestDtoService,
+  RoleUpdateBodyDto,
+  RoleUpdateParamsDto,
+  RoleUpsertBodyDto,
+  RoleUpsertParamsDto,
 } from '../../../../src/generated';
 import {
-  mockRoleCreateBodyDtoFactory,
   mockRoleCountQueryDtoFactory,
+  mockRoleCreateBodyDtoFactory,
+  mockRoleDeleteParamsDtoFactory,
+  mockRoleFindManyQueryDtoFactory,
   mockRoleFindUniqueParamsDtoFactory,
   mockRoleFindUniqueQueryDtoFactory,
-  mockRoleFindManyQueryDtoFactory,
-  mockRoleUpdateParamsDtoFactory,
   mockRoleUpdateBodyDtoFactory,
-  mockRoleUpsertParamsDtoFactory,
+  mockRoleUpdateParamsDtoFactory,
   mockRoleUpsertBodyDtoFactory,
-  mockRoleDeleteParamsDtoFactory,
+  mockRoleUpsertParamsDtoFactory,
 } from '../mocks';
 
 describe('RoleDatabaseService', () => {

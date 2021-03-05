@@ -1,5 +1,5 @@
 import { Role } from '@prisma/client';
-import { random, lorem } from 'faker';
+import { lorem, random } from 'faker';
 
 export function mockRoleIdFactory(): Role['id'] {
   return random.uuid();

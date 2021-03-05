@@ -1,28 +1,30 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+  
 import {
-  <<Model pascal>>CreateBodyDto,
-  <<Model pascal>>Controller,
-  <<Model pascal>>Service,
-  <<Model pascal>>RestDtoService,
   <<Model constant>>_REST_DTO_SERVICE,
   <<Model constant>>_SERVICE,
+  <<Model pascal>>Controller,
+  <<Model pascal>>CountQueryDto,
+  <<Model pascal>>CreateBodyDto,
+  <<Model pascal>>DeleteParamsDto,
+  <<Model pascal>>FindManyQueryDto,
   <<Model pascal>>FindUniqueParamsDto,
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
   <<Model pascal>>FindUniqueQueryDto,
 <<<}>>>
-  <<Model pascal>>FindManyQueryDto,
-  <<Model pascal>>CountQueryDto,
+  <<Model pascal>>RestDtoService,
+  <<Model pascal>>Service,
   <<Model pascal>>UpdateBodyDto,
   <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpsertBodyDto,
   <<Model pascal>>UpsertParamsDto,
-  <<Model pascal>>DeleteParamsDto,
 } from '../../../../src/generated/<<Model kebab>>';
 import {
   mock<<Model pascal>>Factory,
-  mock<<Model pascal>>ServiceFactory,
   mock<<Model pascal>>RestDtoServiceFactory,
+  mock<<Model pascal>>ServiceFactory,
 } from '../mocks';
   
 describe('<<Model pascal>>Service', () => {

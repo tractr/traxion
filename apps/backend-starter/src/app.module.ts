@@ -1,15 +1,21 @@
 import { Module } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
-import {
-  AuthenticationModule,
-  JwtAuthGuard,
-} from '@tractr/nestjs-authentication';
+// import { APP_GUARD } from '@nestjs/core';
+// import {
+//   AuthenticationModule,
+//   JwtAuthGuard,
+// } from '@tractr/nestjs-authentication';
 import { CoreModule } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 
-import { AppController, UserCustomController } from './controllers';
-import { ModelsModule, USER_SERVICE } from './generated';
-import { UserCustomService } from './services';
+import {
+  AppController,
+  // UserCustomController
+} from './controllers';
+import {
+  ModelsModule,
+  // USER_SERVICE
+} from './generated';
+// import { UserCustomService } from './services';
 
 @Module({
   imports: [

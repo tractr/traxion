@@ -1,27 +1,28 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
 import {
-  RelationlessCreateBodyDto,
   RelationlessCountQueryDto,
-  RelationlessFindUniqueParamsDto,
-  RelationlessFindManyQueryDto,
-  RelationlessUpdateParamsDto,
-  RelationlessUpdateBodyDto,
-  RelationlessUpsertParamsDto,
-  RelationlessUpsertBodyDto,
+  RelationlessCreateBodyDto,
   RelationlessDeleteParamsDto,
+  RelationlessFindManyQueryDto,
+  RelationlessFindUniqueParamsDto,
   RelationlessRestDtoService,
+  RelationlessUpdateBodyDto,
+  RelationlessUpdateParamsDto,
+  RelationlessUpsertBodyDto,
+  RelationlessUpsertParamsDto,
 } from '../../../../src/generated';
 import {
-  mockRelationlessCreateBodyDtoFactory,
   mockRelationlessCountQueryDtoFactory,
-  mockRelationlessFindUniqueParamsDtoFactory,
-  mockRelationlessFindManyQueryDtoFactory,
-  mockRelationlessUpdateParamsDtoFactory,
-  mockRelationlessUpdateBodyDtoFactory,
-  mockRelationlessUpsertParamsDtoFactory,
-  mockRelationlessUpsertBodyDtoFactory,
+  mockRelationlessCreateBodyDtoFactory,
   mockRelationlessDeleteParamsDtoFactory,
+  mockRelationlessFindManyQueryDtoFactory,
+  mockRelationlessFindUniqueParamsDtoFactory,
+  mockRelationlessUpdateBodyDtoFactory,
+  mockRelationlessUpdateParamsDtoFactory,
+  mockRelationlessUpsertBodyDtoFactory,
+  mockRelationlessUpsertParamsDtoFactory,
 } from '../mocks';
 
 describe('RelationlessDatabaseService', () => {

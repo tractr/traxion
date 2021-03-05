@@ -1,25 +1,27 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
 import {
-  RelationlessCreateBodyDto,
-  RelationlessController,
-  RelationlessService,
-  RelationlessRestDtoService,
   RELATIONLESS_REST_DTO_SERVICE,
   RELATIONLESS_SERVICE,
-  RelationlessFindUniqueParamsDto,
-  RelationlessFindManyQueryDto,
+  RelationlessController,
   RelationlessCountQueryDto,
+  RelationlessCreateBodyDto,
+  RelationlessDeleteParamsDto,
+  RelationlessFindManyQueryDto,
+  RelationlessFindUniqueParamsDto,
+  RelationlessRestDtoService,
+  RelationlessService,
   RelationlessUpdateBodyDto,
   RelationlessUpdateParamsDto,
   RelationlessUpsertBodyDto,
   RelationlessUpsertParamsDto,
-  RelationlessDeleteParamsDto,
 } from '../../../../src/generated/relationless';
 import {
   mockRelationlessFactory,
-  mockRelationlessServiceFactory,
   mockRelationlessRestDtoServiceFactory,
+  mockRelationlessServiceFactory,
 } from '../mocks';
 
 describe('RelationlessService', () => {
