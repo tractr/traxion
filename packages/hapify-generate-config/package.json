@@ -8,12 +8,12 @@
   },
   "license": "UNLICENSED",
   "author": "",
-  "main": "./index.js",
+  "main": "./dist/index.js",
   "bin": {
     "hpf-generate-config": "./index.js"
   },
   "files": [
-    "./dist",
+    "dist",
     "package.json",
     "index.js"
   ],
