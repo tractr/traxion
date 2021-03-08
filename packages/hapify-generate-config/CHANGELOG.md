@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-generate-config [1.0.4](https://github.com/tractr/stack/compare/@tractr/hapify-generate-config@1.0.3...@tractr/hapify-generate-config@1.0.4) (2021-03-08)
+
+
+### Bug Fixes
+
+* rewrite npm packages files list and rename folder to match with the npm package name ([c7e352c](https://github.com/tractr/stack/commit/c7e352cd2406d8f76c001b670671af98e23c10f8))
+
 ## @tractr/hapify-generate-config [1.0.3](https://github.com/tractr/stack/compare/@tractr/hapify-generate-config@1.0.2...@tractr/hapify-generate-config@1.0.3) (2021-03-08)
 
 
