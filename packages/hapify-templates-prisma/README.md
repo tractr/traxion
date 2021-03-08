@@ -1,6 +1,4 @@
-<div align="center">
-<h1>@tractr/hapify-templates-prisma</h1>
-</div>
+# Hapify - Prisma Boilerplate
 
 ## Installation
 

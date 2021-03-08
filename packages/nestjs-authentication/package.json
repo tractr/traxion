@@ -28,7 +28,7 @@
     "lint:prettier:fix": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint:tsc": "tsc --noEmit",
     "lint:tsc:fix": "npm run lint:tsc",
-    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
     "prisma:format": "prisma format",
     "prisma:generate": "prisma generate",
     "prisma:merge-schema": "prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
