@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-templates-nestjs-models [1.0.1](https://github.com/tractr/stack/compare/@tractr/hapify-templates-nestjs-models@1.0.0...@tractr/hapify-templates-nestjs-models@1.0.1) (2021-03-08)
+
+
+### Bug Fixes
+
+* change prepare scripts to prepublishOnly and not build when installing packages ([17366ad](https://github.com/tractr/stack/commit/17366ada324f19b5a853a96a01f42996a43385b8))
+
 # @tractr/hapify-templates-nestjs-models 1.0.0 (2021-03-04)
 
 
