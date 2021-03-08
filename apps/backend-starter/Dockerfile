@@ -7,6 +7,7 @@ WORKDIR /root/tractr
 
 # copy project file
 COPY ./package.json  .
+COPY ./package-lock.json  .
 COPY ./tsconfig.json  .
 COPY apps/backend-starter/package.json  .
 COPY apps/backend-starter/tsconfig.json  .
@@ -15,18 +16,18 @@ COPY apps/backend-starter/prisma .
 
 # ---- Production Dependencies ----
 FROM base AS dependencies.prod
-WORKDIR /root/tractr
 RUN --mount=type=secret,id=npmrc,target=/root/.npmrc npm i --legacy-peer-deps --only=prod --ignore-scripts
 
 # ---- Dependencies ----
 FROM base AS dependencies.dev
 RUN --mount=type=secret,id=npmrc,target=/root/.npmrc npm i --legacy-peer-deps 
-RUN npm run generate
-
 
 # ---- Dependencies ----
 FROM dependencies.dev AS build
 COPY apps/backend-starter/src .
+WORKDIR /root/tractr/apps/backend-starter
+RUN ls
+RUN pwd
 RUN npm run build
 
 #
