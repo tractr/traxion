@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/nestjs-authentication [1.0.3](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.0.2...@tractr/nestjs-authentication@1.0.3) (2021-03-08)
+
+
+### Bug Fixes
+
+* change prepare scripts to prepublishOnly and not build when installing packages ([17366ad](https://github.com/tractr/stack/commit/17366ada324f19b5a853a96a01f42996a43385b8))
+* replace postinstall script to prepare to build packages/ only on local ([5d96852](https://github.com/tractr/stack/commit/5d96852f2e753c78c62248c3f9846e6e0e94c07c))
+* run build before publishing to the registry ([10a9bdf](https://github.com/tractr/stack/commit/10a9bdfd24d481071e384fe26e81755bc30a187c))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/nestjs-core:** upgraded to 1.0.2
+* **@tractr/nestjs-database:** upgraded to 1.0.1
+* **@tractr/hapify-templates-nestjs-models:** upgraded to 1.0.1
+* **@tractr/hapify-templates-prisma:** upgraded to 1.0.1
+
 ## @tractr/nestjs-authentication [1.0.2](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.0.1...@tractr/nestjs-authentication@1.0.2) (2021-03-04)
 
 
