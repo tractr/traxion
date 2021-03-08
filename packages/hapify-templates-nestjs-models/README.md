@@ -1,6 +1,4 @@
-<div align="center">
-<h1>@tractr/hapify-templates-nestjs-models</h1>
-</div>
+# Hapify - NestJS Models Boilerplate
 
 ## Installation
 
