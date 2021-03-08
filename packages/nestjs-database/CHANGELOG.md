@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/nestjs-database [1.0.1](https://github.com/tractr/stack/compare/@tractr/nestjs-database@1.0.0...@tractr/nestjs-database@1.0.1) (2021-03-08)
+
+
+### Bug Fixes
+
+* change prepare scripts to prepublishOnly and not build when installing packages ([17366ad](https://github.com/tractr/stack/commit/17366ada324f19b5a853a96a01f42996a43385b8))
+* remove postinsall scripts from packages.json ([e65748b](https://github.com/tractr/stack/commit/e65748b26a993f0e35bbec960907fcaaa5fe6270))
+* replace postinstall script to prepare to build packages/ only on local ([5d96852](https://github.com/tractr/stack/commit/5d96852f2e753c78c62248c3f9846e6e0e94c07c))
+
 # @tractr/nestjs-database 1.0.0 (2021-03-04)
 
 
