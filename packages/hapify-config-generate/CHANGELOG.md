@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-generate-config [1.0.3](https://github.com/tractr/stack/compare/@tractr/hapify-generate-config@1.0.2...@tractr/hapify-generate-config@1.0.3) (2021-03-08)
+
+
+### Bug Fixes
+
+* change prepare scripts to prepublishOnly and not build when installing packages ([17366ad](https://github.com/tractr/stack/commit/17366ada324f19b5a853a96a01f42996a43385b8))
+
 ## @tractr/hapify-generate-config [1.0.2](https://github.com/tractr/stack/compare/@tractr/hapify-generate-config@1.0.1...@tractr/hapify-generate-config@1.0.2) (2021-03-04)
 
 
