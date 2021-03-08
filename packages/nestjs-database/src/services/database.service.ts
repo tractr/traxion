@@ -5,6 +5,10 @@ import { PrismaClient } from '@prisma/client';
 export class DatabaseService
   extends PrismaClient
   implements OnModuleInit, OnModuleDestroy {
+  constructor() {
+    super({ rejectOnNotFound: true });
+  }
+
   async onModuleInit(): Promise<void> {
     await this.$connect();
   }
