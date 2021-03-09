@@ -5,7 +5,9 @@ import {
   <<field.model pascal>>,
   <<endfor>>
 } from '@prisma/client';
+<<if Fields entity>>
 import { random } from 'faker';
+<<endif>>
   
 import { mock<<Model pascal>>Factory } from './<<Model kebab>>.mock';
   

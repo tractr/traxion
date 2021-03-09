@@ -1,10 +1,11 @@
 import { RelationlessUpsertBodyDto } from '../../../../src/generated';
-import {} from './relationless.mock';
+import { mockRelationlessNameFactory } from './relationless.mock';
 
 export function mockRelationlessUpsertBodyDtoFactory(
   override: Partial<RelationlessUpsertBodyDto> = {},
 ): Required<RelationlessUpsertBodyDto> {
   return {
+    name: mockRelationlessNameFactory(),
     ...override,
   };
 }

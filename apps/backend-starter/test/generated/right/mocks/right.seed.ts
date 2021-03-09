@@ -1,5 +1,4 @@
 import { PrismaClient, Right } from '@prisma/client';
-import { random } from 'faker';
 
 import { mockRightFactory } from './right.mock';
 

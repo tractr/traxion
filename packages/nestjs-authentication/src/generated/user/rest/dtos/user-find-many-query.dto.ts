@@ -1,13 +1,13 @@
 import { Prisma, User } from '@prisma/client';
 import {
-  IsOptional,
-  IsString,
-  IsIn,
-  IsNumber,
-  IsInt,
-  Min,
   IsBoolean,
   IsEmail,
+  IsIn,
+  IsInt,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Min,
 } from 'class-validator';
 
 export class UserFindManyQueryDto {

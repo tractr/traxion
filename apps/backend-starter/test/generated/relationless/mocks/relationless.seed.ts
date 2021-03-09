@@ -1,5 +1,4 @@
 import { PrismaClient, Relationless } from '@prisma/client';
-import { random } from 'faker';
 
 import { mockRelationlessFactory } from './relationless.mock';
 

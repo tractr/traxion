@@ -1,8 +1,12 @@
 import { Relationless } from '@prisma/client';
-import { random } from 'faker';
+import { lorem, random } from 'faker';
 
 export function mockRelationlessIdFactory(): Relationless['id'] {
   return random.uuid();
+}
+
+export function mockRelationlessNameFactory(): Relationless['name'] {
+  return lorem.words();
 }
 
 export function mockRelationlessFactory(
@@ -10,6 +14,7 @@ export function mockRelationlessFactory(
 ): Relationless {
   return {
     id: mockRelationlessIdFactory(),
+    name: mockRelationlessNameFactory(),
     ...override,
   };
 }
