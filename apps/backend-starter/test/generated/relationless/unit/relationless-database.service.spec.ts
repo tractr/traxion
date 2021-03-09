@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from '@tractr/nestjs-database';
+
 import {
-  RelationlessDatabaseService,
   RELATIONLESS_DATABASE_SERVICE,
+  RelationlessDatabaseService,
 } from '../../../../src/generated/relationless';
 import { mockDatabaseServiceFactory } from '../../mocks';
 import { mockRelationlessFactory } from '../mocks';
@@ -35,7 +37,7 @@ describe('RelationlessDatabaseService', () => {
 
   describe('findUnique', () => {
     it('should map to DatabaseService.findUnique', async () => {
-      const args = ({} as unknown) as Prisma.RelationlessFindUniqueArgs;
+      const args = ('args' as unknown) as Prisma.RelationlessFindUniqueArgs;
       const relationless = mockRelationlessFactory();
       (mockedDatabaseService.relationless
         .findUnique as jest.Mock).mockReturnValueOnce(relationless);
@@ -52,7 +54,7 @@ describe('RelationlessDatabaseService', () => {
 
   describe('findFirst', () => {
     it('should map to DatabaseService.findFirst', async () => {
-      const args = ({} as unknown) as Prisma.RelationlessFindFirstArgs;
+      const args = ('args' as unknown) as Prisma.RelationlessFindFirstArgs;
       const relationless = mockRelationlessFactory();
       (mockedDatabaseService.relationless
         .findFirst as jest.Mock).mockReturnValueOnce(relationless);
@@ -69,8 +71,8 @@ describe('RelationlessDatabaseService', () => {
 
   describe('findMany', () => {
     it('should map to DatabaseService.findMany', async () => {
-      const args = ({} as unknown) as Prisma.RelationlessFindManyArgs;
-      const relationless = new Array(3).map(() => mockRelationlessFactory());
+      const args = ('args' as unknown) as Prisma.RelationlessFindManyArgs;
+      const relationless = [...Array(3)].map(() => mockRelationlessFactory());
       (mockedDatabaseService.relationless
         .findMany as jest.Mock).mockReturnValueOnce(relationless);
       const result = await relationlessDatabaseService.findMany(args);
@@ -86,7 +88,7 @@ describe('RelationlessDatabaseService', () => {
 
   describe('create', () => {
     it('should map to DatabaseService.create', async () => {
-      const args = ({} as unknown) as Prisma.RelationlessCreateArgs;
+      const args = ('args' as unknown) as Prisma.RelationlessCreateArgs;
       const relationless = mockRelationlessFactory();
       (mockedDatabaseService.relationless
         .create as jest.Mock).mockReturnValueOnce(relationless);
@@ -103,7 +105,7 @@ describe('RelationlessDatabaseService', () => {
 
   describe('update', () => {
     it('should map to DatabaseService.update', async () => {
-      const args = ({} as unknown) as Prisma.RelationlessUpdateArgs;
+      const args = ('args' as unknown) as Prisma.RelationlessUpdateArgs;
       const relationless = mockRelationlessFactory();
       (mockedDatabaseService.relationless
         .update as jest.Mock).mockReturnValueOnce(relationless);
@@ -120,7 +122,7 @@ describe('RelationlessDatabaseService', () => {
 
   describe('updateMany', () => {
     it('should map to DatabaseService.updateMany', async () => {
-      const args = ({} as unknown) as Prisma.RelationlessUpdateManyArgs;
+      const args = ('args' as unknown) as Prisma.RelationlessUpdateManyArgs;
       const relationless = mockRelationlessFactory();
       (mockedDatabaseService.relationless
         .updateMany as jest.Mock).mockReturnValueOnce(relationless);
@@ -137,7 +139,7 @@ describe('RelationlessDatabaseService', () => {
 
   describe('upsert', () => {
     it('should map to DatabaseService.upsert', async () => {
-      const args = ({} as unknown) as Prisma.RelationlessUpsertArgs;
+      const args = ('args' as unknown) as Prisma.RelationlessUpsertArgs;
       const relationless = mockRelationlessFactory();
       (mockedDatabaseService.relationless
         .upsert as jest.Mock).mockReturnValueOnce(relationless);
@@ -154,7 +156,7 @@ describe('RelationlessDatabaseService', () => {
 
   describe('delete', () => {
     it('should map to DatabaseService.delete', async () => {
-      const args = ({} as unknown) as Prisma.RelationlessDeleteArgs;
+      const args = ('args' as unknown) as Prisma.RelationlessDeleteArgs;
       const relationless = mockRelationlessFactory();
       (mockedDatabaseService.relationless
         .delete as jest.Mock).mockReturnValueOnce(relationless);
@@ -171,7 +173,7 @@ describe('RelationlessDatabaseService', () => {
 
   describe('deleteMany', () => {
     it('should map to DatabaseService.deleteMany', async () => {
-      const args = ({} as unknown) as Prisma.RelationlessDeleteManyArgs;
+      const args = ('args' as unknown) as Prisma.RelationlessDeleteManyArgs;
       const relationless = mockRelationlessFactory();
       (mockedDatabaseService.relationless
         .deleteMany as jest.Mock).mockReturnValueOnce(relationless);
@@ -188,7 +190,7 @@ describe('RelationlessDatabaseService', () => {
 
   describe('count', () => {
     it('should map to DatabaseService.count', async () => {
-      const args = ({} as unknown) as Prisma.RelationlessCountArgs;
+      const args = ('args' as unknown) as Prisma.RelationlessCountArgs;
       const relationless = mockRelationlessFactory();
       (mockedDatabaseService.relationless
         .count as jest.Mock).mockReturnValueOnce(relationless);
@@ -203,7 +205,7 @@ describe('RelationlessDatabaseService', () => {
 
   describe('aggregate', () => {
     it('should map to DatabaseService.aggregate', async () => {
-      const args = ({} as unknown) as Prisma.RelationlessAggregateArgs;
+      const args = ('args' as unknown) as Prisma.RelationlessAggregateArgs;
       const relationless = mockRelationlessFactory();
       (mockedDatabaseService.relationless
         .aggregate as jest.Mock).mockReturnValueOnce(relationless);

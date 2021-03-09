@@ -1,5 +1,5 @@
 import { Right } from '@prisma/client';
-import { random, lorem } from 'faker';
+import { lorem, random } from 'faker';
 
 export function mockRightIdFactory(): Right['id'] {
   return random.uuid();

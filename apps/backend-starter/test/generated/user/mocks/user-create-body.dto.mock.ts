@@ -1,18 +1,18 @@
 import { UserCreateBodyDto } from '../../../../src/generated';
 import {
-  mockUserNameFactory,
-  mockUserEmailFactory,
-  mockUserPasswordFactory,
-  mockUserBannedFactory,
   mockUserAgeFactory,
+  mockUserBannedFactory,
   mockUserBlogUrlFactory,
+  mockUserEmailFactory,
   mockUserListFactory,
+  mockUserNameFactory,
+  mockUserPasswordFactory,
   mockUserRoleIdFactory,
 } from './user.mock';
 
 export function mockUserCreateBodyDtoFactory(
   override: Partial<UserCreateBodyDto> = {},
-): UserCreateBodyDto {
+): Required<UserCreateBodyDto> {
   return {
     name: mockUserNameFactory(),
     email: mockUserEmailFactory(),

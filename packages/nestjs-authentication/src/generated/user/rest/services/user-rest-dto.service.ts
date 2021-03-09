@@ -22,13 +22,9 @@ export class UserRestDtoService {
    * @returns prisma parameters to create a User
    */
   public formatCreateDto(bodyDto: UserCreateBodyDto): Prisma.UserCreateArgs {
-    const { name, email, password, role, banned } = bodyDto;
+    const { ...values } = bodyDto;
     const data = {
-      name,
-      email,
-      password,
-      role,
-      banned,
+      ...values,
     };
     return { data };
   }
@@ -40,12 +36,9 @@ export class UserRestDtoService {
    * @returns prisma parameters to count User entities
    */
   public formatCountDto(queryDto: UserCountQueryDto): Prisma.UserCountArgs {
-    const { name, email, role, banned } = queryDto;
+    const { ...values } = queryDto;
     const where = {
-      name,
-      email,
-      role,
-      banned,
+      ...values,
     };
     return { where };
   }
@@ -73,12 +66,9 @@ export class UserRestDtoService {
   public formatFindManyDto(
     queryDto: UserFindManyQueryDto,
   ): Prisma.UserFindManyArgs {
-    const { name, email, role, banned, sort, order, take, skip } = queryDto;
+    const { sort, order, take, skip, ...values } = queryDto;
     const where: Prisma.UserWhereInput = {
-      name,
-      email,
-      role,
-      banned,
+      ...values,
     };
     const orderBy = { [sort]: order };
     return {
@@ -100,13 +90,9 @@ export class UserRestDtoService {
     paramsDto: UserUpdateParamsDto,
     bodyDto: UserUpdateBodyDto,
   ): Prisma.UserUpdateArgs {
-    const { name, email, password, role, banned } = bodyDto;
+    const { ...values } = bodyDto;
     const data = {
-      name,
-      email,
-      password,
-      role,
-      banned,
+      ...values,
     };
     return { data, where: { ...paramsDto } };
   }

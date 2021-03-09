@@ -1,14 +1,14 @@
 import { ProfileCreateBodyDto } from '../../../../src/generated';
 import {
-  mockProfileOwnerIdFactory,
   mockProfileAddressFactory,
-  mockProfilePhoneFactory,
   mockProfileGenderFactory,
+  mockProfileOwnerIdFactory,
+  mockProfilePhoneFactory,
 } from './profile.mock';
 
 export function mockProfileCreateBodyDtoFactory(
   override: Partial<ProfileCreateBodyDto> = {},
-): ProfileCreateBodyDto {
+): Required<ProfileCreateBodyDto> {
   return {
     owner: mockProfileOwnerIdFactory(),
     address: mockProfileAddressFactory(),

@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from '@tractr/nestjs-database';
+
 import {
-  RightDatabaseService,
   RIGHT_DATABASE_SERVICE,
+  RightDatabaseService,
 } from '../../../../src/generated/right';
 import { mockDatabaseServiceFactory } from '../../mocks';
 import { mockRightFactory } from '../mocks';
@@ -32,7 +34,7 @@ describe('RightDatabaseService', () => {
 
   describe('findUnique', () => {
     it('should map to DatabaseService.findUnique', async () => {
-      const args = ({} as unknown) as Prisma.RightFindUniqueArgs;
+      const args = ('args' as unknown) as Prisma.RightFindUniqueArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.findUnique as jest.Mock).mockReturnValueOnce(
         right,
@@ -46,7 +48,7 @@ describe('RightDatabaseService', () => {
 
   describe('findFirst', () => {
     it('should map to DatabaseService.findFirst', async () => {
-      const args = ({} as unknown) as Prisma.RightFindFirstArgs;
+      const args = ('args' as unknown) as Prisma.RightFindFirstArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.findFirst as jest.Mock).mockReturnValueOnce(
         right,
@@ -60,8 +62,8 @@ describe('RightDatabaseService', () => {
 
   describe('findMany', () => {
     it('should map to DatabaseService.findMany', async () => {
-      const args = ({} as unknown) as Prisma.RightFindManyArgs;
-      const right = new Array(3).map(() => mockRightFactory());
+      const args = ('args' as unknown) as Prisma.RightFindManyArgs;
+      const right = [...Array(3)].map(() => mockRightFactory());
       (mockedDatabaseService.right.findMany as jest.Mock).mockReturnValueOnce(
         right,
       );
@@ -74,7 +76,7 @@ describe('RightDatabaseService', () => {
 
   describe('create', () => {
     it('should map to DatabaseService.create', async () => {
-      const args = ({} as unknown) as Prisma.RightCreateArgs;
+      const args = ('args' as unknown) as Prisma.RightCreateArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.create as jest.Mock).mockReturnValueOnce(
         right,
@@ -88,7 +90,7 @@ describe('RightDatabaseService', () => {
 
   describe('update', () => {
     it('should map to DatabaseService.update', async () => {
-      const args = ({} as unknown) as Prisma.RightUpdateArgs;
+      const args = ('args' as unknown) as Prisma.RightUpdateArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.update as jest.Mock).mockReturnValueOnce(
         right,
@@ -102,7 +104,7 @@ describe('RightDatabaseService', () => {
 
   describe('updateMany', () => {
     it('should map to DatabaseService.updateMany', async () => {
-      const args = ({} as unknown) as Prisma.RightUpdateManyArgs;
+      const args = ('args' as unknown) as Prisma.RightUpdateManyArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.updateMany as jest.Mock).mockReturnValueOnce(
         right,
@@ -116,7 +118,7 @@ describe('RightDatabaseService', () => {
 
   describe('upsert', () => {
     it('should map to DatabaseService.upsert', async () => {
-      const args = ({} as unknown) as Prisma.RightUpsertArgs;
+      const args = ('args' as unknown) as Prisma.RightUpsertArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.upsert as jest.Mock).mockReturnValueOnce(
         right,
@@ -130,7 +132,7 @@ describe('RightDatabaseService', () => {
 
   describe('delete', () => {
     it('should map to DatabaseService.delete', async () => {
-      const args = ({} as unknown) as Prisma.RightDeleteArgs;
+      const args = ('args' as unknown) as Prisma.RightDeleteArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.delete as jest.Mock).mockReturnValueOnce(
         right,
@@ -144,7 +146,7 @@ describe('RightDatabaseService', () => {
 
   describe('deleteMany', () => {
     it('should map to DatabaseService.deleteMany', async () => {
-      const args = ({} as unknown) as Prisma.RightDeleteManyArgs;
+      const args = ('args' as unknown) as Prisma.RightDeleteManyArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.deleteMany as jest.Mock).mockReturnValueOnce(
         right,
@@ -158,7 +160,7 @@ describe('RightDatabaseService', () => {
 
   describe('count', () => {
     it('should map to DatabaseService.count', async () => {
-      const args = ({} as unknown) as Prisma.RightCountArgs;
+      const args = ('args' as unknown) as Prisma.RightCountArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.count as jest.Mock).mockReturnValueOnce(
         right,
@@ -172,7 +174,7 @@ describe('RightDatabaseService', () => {
 
   describe('aggregate', () => {
     it('should map to DatabaseService.aggregate', async () => {
-      const args = ({} as unknown) as Prisma.RightAggregateArgs;
+      const args = ('args' as unknown) as Prisma.RightAggregateArgs;
       const right = mockRightFactory();
       (mockedDatabaseService.right.aggregate as jest.Mock).mockReturnValueOnce(
         right,

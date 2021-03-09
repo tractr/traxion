@@ -178,6 +178,11 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'test/generated/{kebab}/mocks/{kebab}.seed.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'test/generated/{kebab}/mocks/{kebab}.service.mock.ts',
       engine: 'hpf',
       input: 'one',
@@ -188,7 +193,54 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'test/generated/{kebab}/mocks/{kebab}-count-query.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'test/generated/{kebab}/mocks/{kebab}-create-body.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'test/generated/{kebab}/mocks/{kebab}-find-unique-params.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'test/generated/{kebab}/mocks/{kebab}-find-unique-query.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/{kebab}-find-many-query.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/{kebab}-update-params.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/{kebab}-update-body.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/{kebab}-upsert-params.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/{kebab}-upsert-body.dto.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/mocks/{kebab}-delete-params.dto.mock.ts',
       engine: 'hpf',
       input: 'one',
     },
@@ -209,6 +261,11 @@ module.exports = {
     },
     {
       path: 'test/generated/{kebab}/unit/{kebab}.controller.spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/e2e/{kebab}-create.e2e-spec.ts',
       engine: 'hpf',
       input: 'one',
     },

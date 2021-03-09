@@ -1,4 +1,4 @@
-import { IsOptional, IsBoolean, IsString, IsEmail } from 'class-validator';
+import { IsBoolean, IsEmail, IsOptional, IsString } from 'class-validator';
 
 export class UserCountQueryDto {
   @IsString()

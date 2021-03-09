@@ -1,26 +1,28 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
 import {
-  ProfileCreateBodyDto,
-  ProfileController,
-  ProfileService,
-  ProfileRestDtoService,
   PROFILE_REST_DTO_SERVICE,
   PROFILE_SERVICE,
+  ProfileController,
+  ProfileCountQueryDto,
+  ProfileCreateBodyDto,
+  ProfileDeleteParamsDto,
+  ProfileFindManyQueryDto,
   ProfileFindUniqueParamsDto,
   ProfileFindUniqueQueryDto,
-  ProfileFindManyQueryDto,
-  ProfileCountQueryDto,
+  ProfileRestDtoService,
+  ProfileService,
   ProfileUpdateBodyDto,
   ProfileUpdateParamsDto,
   ProfileUpsertBodyDto,
   ProfileUpsertParamsDto,
-  ProfileDeleteParamsDto,
 } from '../../../../src/generated/profile';
 import {
   mockProfileFactory,
-  mockProfileServiceFactory,
   mockProfileRestDtoServiceFactory,
+  mockProfileServiceFactory,
 } from '../mocks';
 
 describe('ProfileService', () => {
@@ -51,7 +53,7 @@ describe('ProfileService', () => {
   describe('create', () => {
     it('should compose ProfileRestDtoService.formatCreateDto and ProfileDatabaseService.create', async () => {
       const bodyDto = ('body' as unknown) as ProfileCreateBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.ProfileCreateArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.ProfileCreateArgs;
       const profile = mockProfileFactory();
       (mockedProfileRestDtoService.formatCreateDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -74,7 +76,7 @@ describe('ProfileService', () => {
     it('should compose ProfileRestDtoService.formatFindUniqueDtos and ProfileDatabaseService.findUnique', async () => {
       const paramsDto = ('params' as unknown) as ProfileFindUniqueParamsDto;
       const queryDto = ('query' as unknown) as ProfileFindUniqueQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.ProfileFindUniqueArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.ProfileFindUniqueArgs;
       const profile = mockProfileFactory();
       (mockedProfileRestDtoService.formatFindUniqueDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -98,8 +100,8 @@ describe('ProfileService', () => {
   describe('findMany', () => {
     it('should compose ProfileRestDtoService.formatFindManyDto and ProfileDatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as ProfileFindManyQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.ProfileFindManyArgs;
-      const profile = new Array(3).map(() => mockProfileFactory());
+      const prismaArgs = ('args' as unknown) as Prisma.ProfileFindManyArgs;
+      const profile = [...Array(3)].map(() => mockProfileFactory());
       (mockedProfileRestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
       );
@@ -120,7 +122,7 @@ describe('ProfileService', () => {
   describe('count', () => {
     it('should compose ProfileRestDtoService.formatCountDto and ProfileDatabaseService.count', async () => {
       const queryDto = ('query' as unknown) as ProfileCountQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.ProfileCountArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.ProfileCountArgs;
       const profile = 10;
       (mockedProfileRestDtoService.formatCountDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -143,7 +145,7 @@ describe('ProfileService', () => {
     it('should compose ProfileRestDtoService.formatUpdateDtos and ProfileDatabaseService.update', async () => {
       const paramsDto = ('params' as unknown) as ProfileUpdateParamsDto;
       const bodyDto = ('body' as unknown) as ProfileUpdateBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.ProfileUpdateArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.ProfileUpdateArgs;
       const profile = mockProfileFactory();
       (mockedProfileRestDtoService.formatUpdateDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -167,7 +169,7 @@ describe('ProfileService', () => {
     it('should compose ProfileRestDtoService.formatUpsertDtos and ProfileDatabaseService.upsert', async () => {
       const paramsDto = ('params' as unknown) as ProfileUpsertParamsDto;
       const bodyDto = ('body' as unknown) as ProfileUpsertBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.ProfileUpsertArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.ProfileUpsertArgs;
       const profile = mockProfileFactory();
       (mockedProfileRestDtoService.formatUpsertDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -190,7 +192,7 @@ describe('ProfileService', () => {
   describe('delete', () => {
     it('should compose ProfileRestDtoService.formatDeleteDto and ProfileDatabaseService.delete', async () => {
       const paramsDto = ('params' as unknown) as ProfileDeleteParamsDto;
-      const prismaArgs = ({} as unknown) as Prisma.ProfileDeleteArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.ProfileDeleteArgs;
       const profile = mockProfileFactory();
       (mockedProfileRestDtoService.formatDeleteDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
