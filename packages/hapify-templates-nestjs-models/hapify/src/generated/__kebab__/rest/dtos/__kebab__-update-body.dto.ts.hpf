@@ -12,16 +12,26 @@ import {
   IsBoolean, 
   <<endif>>
 
-  <<if Fields string or entity or enum and not internal>>
-  IsString,
+  <<if Fields email and not internal>>
+  IsEmail, 
   <<endif>>
 
   <<if Fields enum and not internal>>
   IsIn,
   <<endif>>
 
-  <<if Fields email and not internal>>
-  IsEmail, 
+  <<if Fields number or datetime and not internal>>
+  IsNumber,
+  <<endif>>
+
+  IsOptional,
+
+  <<if Fields string or entity or enum and not internal>>
+  IsString,
+  <<endif>>
+
+  <<if Fields url and not internal>>
+  IsUrl, 
   <<endif>>
 
   <<if Fields entity and not internal>>
@@ -31,16 +41,6 @@ import {
   <<if Fields password and not internal>>
   Matches, 
   <<endif>>
-
-  <<if Fields url and not internal>>
-  IsUrl, 
-  <<endif>>
-
-  <<if Fields number or datetime and not internal>>
-  IsNumber,
-  <<endif>>
-
-  IsOptional,
 
 } from 'class-validator';
 <<endif>>

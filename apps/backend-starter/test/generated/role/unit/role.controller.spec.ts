@@ -1,26 +1,28 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+
 import {
-  RoleCreateBodyDto,
-  RoleController,
-  RoleService,
-  RoleRestDtoService,
   ROLE_REST_DTO_SERVICE,
   ROLE_SERVICE,
+  RoleController,
+  RoleCountQueryDto,
+  RoleCreateBodyDto,
+  RoleDeleteParamsDto,
+  RoleFindManyQueryDto,
   RoleFindUniqueParamsDto,
   RoleFindUniqueQueryDto,
-  RoleFindManyQueryDto,
-  RoleCountQueryDto,
+  RoleRestDtoService,
+  RoleService,
   RoleUpdateBodyDto,
   RoleUpdateParamsDto,
   RoleUpsertBodyDto,
   RoleUpsertParamsDto,
-  RoleDeleteParamsDto,
 } from '../../../../src/generated/role';
 import {
   mockRoleFactory,
-  mockRoleServiceFactory,
   mockRoleRestDtoServiceFactory,
+  mockRoleServiceFactory,
 } from '../mocks';
 
 describe('RoleService', () => {
@@ -48,7 +50,7 @@ describe('RoleService', () => {
   describe('create', () => {
     it('should compose RoleRestDtoService.formatCreateDto and RoleDatabaseService.create', async () => {
       const bodyDto = ('body' as unknown) as RoleCreateBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.RoleCreateArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RoleCreateArgs;
       const role = mockRoleFactory();
       (mockedRoleRestDtoService.formatCreateDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -69,7 +71,7 @@ describe('RoleService', () => {
     it('should compose RoleRestDtoService.formatFindUniqueDtos and RoleDatabaseService.findUnique', async () => {
       const paramsDto = ('params' as unknown) as RoleFindUniqueParamsDto;
       const queryDto = ('query' as unknown) as RoleFindUniqueQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.RoleFindUniqueArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RoleFindUniqueArgs;
       const role = mockRoleFactory();
       (mockedRoleRestDtoService.formatFindUniqueDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -91,8 +93,8 @@ describe('RoleService', () => {
   describe('findMany', () => {
     it('should compose RoleRestDtoService.formatFindManyDto and RoleDatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as RoleFindManyQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.RoleFindManyArgs;
-      const role = new Array(3).map(() => mockRoleFactory());
+      const prismaArgs = ('args' as unknown) as Prisma.RoleFindManyArgs;
+      const role = [...Array(3)].map(() => mockRoleFactory());
       (mockedRoleRestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
       );
@@ -113,7 +115,7 @@ describe('RoleService', () => {
   describe('count', () => {
     it('should compose RoleRestDtoService.formatCountDto and RoleDatabaseService.count', async () => {
       const queryDto = ('query' as unknown) as RoleCountQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.RoleCountArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RoleCountArgs;
       const role = 10;
       (mockedRoleRestDtoService.formatCountDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -134,7 +136,7 @@ describe('RoleService', () => {
     it('should compose RoleRestDtoService.formatUpdateDtos and RoleDatabaseService.update', async () => {
       const paramsDto = ('params' as unknown) as RoleUpdateParamsDto;
       const bodyDto = ('body' as unknown) as RoleUpdateBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.RoleUpdateArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RoleUpdateArgs;
       const role = mockRoleFactory();
       (mockedRoleRestDtoService.formatUpdateDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -158,7 +160,7 @@ describe('RoleService', () => {
     it('should compose RoleRestDtoService.formatUpsertDtos and RoleDatabaseService.upsert', async () => {
       const paramsDto = ('params' as unknown) as RoleUpsertParamsDto;
       const bodyDto = ('body' as unknown) as RoleUpsertBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.RoleUpsertArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RoleUpsertArgs;
       const role = mockRoleFactory();
       (mockedRoleRestDtoService.formatUpsertDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs,
@@ -181,7 +183,7 @@ describe('RoleService', () => {
   describe('delete', () => {
     it('should compose RoleRestDtoService.formatDeleteDto and RoleDatabaseService.delete', async () => {
       const paramsDto = ('params' as unknown) as RoleDeleteParamsDto;
-      const prismaArgs = ({} as unknown) as Prisma.RoleDeleteArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.RoleDeleteArgs;
       const role = mockRoleFactory();
       (mockedRoleRestDtoService.formatDeleteDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,

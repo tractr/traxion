@@ -1,9 +1,9 @@
 import {
   IsBoolean,
-  IsString,
   IsEmail,
-  Matches,
   IsOptional,
+  IsString,
+  Matches,
 } from 'class-validator';
 
 export class UserUpdateBodyDto {

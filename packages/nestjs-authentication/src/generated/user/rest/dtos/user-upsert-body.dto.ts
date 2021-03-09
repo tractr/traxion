@@ -1,4 +1,4 @@
-import { IsBoolean, IsString, IsEmail, Matches } from 'class-validator';
+import { IsBoolean, IsEmail, IsString, Matches } from 'class-validator';
 
 export class UserUpsertBodyDto {
   @IsString()

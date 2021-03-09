@@ -3,8 +3,8 @@ import {
   IsString,
   IsUUID,
 <<elseif Fields primary and number>>
-  IsNumber,
   IsInt,
+  IsNumber,
 <<endif>>
 } from 'class-validator';
   

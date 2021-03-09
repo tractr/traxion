@@ -3,8 +3,8 @@ import { ModuleOverride } from '@tractr/nestjs-core';
  
 import { <<Model pascal>>ModelModule } from '../common';
 import { <<Model pascal>>Controller } from './controllers';
-import { <<Model pascal>>RestDtoService } from './services';
 import { <<Model constant>>_CONTROLLER, <<Model constant>>_REST_DTO_SERVICE } from './<<Model kebab>>-rest.constant';
+import { <<Model pascal>>RestDtoService } from './services';
  
 const providers = [
   {
