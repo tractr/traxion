@@ -59,7 +59,7 @@ describe('RoleService', () => {
   describe('findMany', () => {
     it('should map to RoleDatabaseService.findMany', async () => {
       const args = ('args' as unknown) as Prisma.RoleFindManyArgs;
-      const role = new Array(3).map(() => mockRoleFactory());
+      const role = [...Array(3)].map(() => mockRoleFactory());
       (mockedRoleDatabaseService.findMany as jest.Mock).mockReturnValueOnce(
         role,
       );

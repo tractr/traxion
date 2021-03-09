@@ -59,7 +59,7 @@ describe('UserService', () => {
   describe('findMany', () => {
     it('should map to UserDatabaseService.findMany', async () => {
       const args = ('args' as unknown) as Prisma.UserFindManyArgs;
-      const user = new Array(3).map(() => mockUserFactory());
+      const user = [...Array(3)].map(() => mockUserFactory());
       (mockedUserDatabaseService.findMany as jest.Mock).mockReturnValueOnce(
         user,
       );

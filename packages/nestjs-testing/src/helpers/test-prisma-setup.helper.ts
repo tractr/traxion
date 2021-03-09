@@ -18,14 +18,14 @@ export interface TestContextOptions {
 export function createUrlDatabase(schema: string): string {
   const env = dotenvExpand(dotenv.config());
   const {
-    POSTGRESQL_PORT,
-    POSTGRESQL_USER,
-    POSTGRESQL_PASSWORD,
-    POSTGRESQL_HOST,
-    POSTGRESQL_DB_TEST,
+    TRACTR_POSTGRESQL_PORT,
+    TRACTR_POSTGRESQL_USER,
+    TRACTR_POSTGRESQL_PASSWORD,
+    TRACTR_POSTGRESQL_HOST,
+    TRACTR_POSTGRESQL_DB_TEST,
   } = env.parsed as Record<string, string>;
-  return `postgres://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRESQL_HOST}:${POSTGRESQL_PORT}/${
-    POSTGRESQL_DB_TEST || 'testing'
+  return `postgres://${TRACTR_POSTGRESQL_USER}:${TRACTR_POSTGRESQL_PASSWORD}@${TRACTR_POSTGRESQL_HOST}:${TRACTR_POSTGRESQL_PORT}/${
+    TRACTR_POSTGRESQL_DB_TEST || 'testing'
   }?schema=${schema}`;
 }
 

@@ -58,7 +58,7 @@ describe('<<Model pascal>>Service', () => {
   describe('findMany', () => {
     it('should map to <<Model pascal>>DatabaseService.findMany', async () => {
       const args = ('args' as unknown) as Prisma.<<Model pascal>>FindManyArgs;
-      const <<Model camel>> = new Array(3).map(() => mock<<Model pascal>>Factory());
+      const <<Model camel>> = [...Array(3)].map(() => mock<<Model pascal>>Factory());
       (mocked<<Model pascal>>DatabaseService.findMany as jest.Mock).mockReturnValueOnce(<<Model camel>>);
       const result = await <<Model camel>>Service.findMany(args);
       expect(result).toEqual(<<Model camel>>);

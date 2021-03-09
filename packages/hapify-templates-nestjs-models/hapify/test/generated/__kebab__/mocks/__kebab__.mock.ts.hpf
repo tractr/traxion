@@ -76,7 +76,7 @@ function getBaseFaker(f) {
 <<<
 function getFaker(f) {
   if (f.multiple) {
-   return `new Array(3).map(() => ${getBaseFaker(f)})`; 
+   return `[...Array(3)].map(() => ${getBaseFaker(f)})`; 
   } else {
     return getBaseFaker(f);
   }

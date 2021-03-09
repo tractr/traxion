@@ -36,7 +36,7 @@ export function mockUserBlogUrlFactory(): User['blogUrl'] {
 }
 
 export function mockUserListFactory(): User['list'] {
-  return new Array(3).map(() => lorem.words());
+  return [...Array(3)].map(() => lorem.words());
 }
 
 export function mockUserRoleIdFactory(): User['roleId'] {

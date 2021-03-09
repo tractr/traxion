@@ -72,7 +72,7 @@ describe('RelationlessDatabaseService', () => {
   describe('findMany', () => {
     it('should map to DatabaseService.findMany', async () => {
       const args = ('args' as unknown) as Prisma.RelationlessFindManyArgs;
-      const relationless = new Array(3).map(() => mockRelationlessFactory());
+      const relationless = [...Array(3)].map(() => mockRelationlessFactory());
       (mockedDatabaseService.relationless
         .findMany as jest.Mock).mockReturnValueOnce(relationless);
       const result = await relationlessDatabaseService.findMany(args);

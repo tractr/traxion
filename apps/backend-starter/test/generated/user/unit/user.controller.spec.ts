@@ -94,7 +94,7 @@ describe('UserService', () => {
     it('should compose UserRestDtoService.formatFindManyDto and UserDatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as UserFindManyQueryDto;
       const prismaArgs = ('args' as unknown) as Prisma.UserFindManyArgs;
-      const user = new Array(3).map(() => mockUserFactory());
+      const user = [...Array(3)].map(() => mockUserFactory());
       (mockedUserRestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
       );

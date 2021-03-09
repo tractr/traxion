@@ -108,7 +108,7 @@ describe('<<Model pascal>>Service', () => {
     it('should compose <<Model pascal>>RestDtoService.formatFindManyDto and <<Model pascal>>DatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as <<Model pascal>>FindManyQueryDto;
       const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>FindManyArgs;
-      const <<Model camel>> = new Array(3).map(() => mock<<Model pascal>>Factory());
+      const <<Model camel>> = [...Array(3)].map(() => mock<<Model pascal>>Factory());
       (mocked<<Model pascal>>RestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
         prismaArgs
       );

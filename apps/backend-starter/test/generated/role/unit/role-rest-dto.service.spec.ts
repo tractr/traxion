@@ -49,7 +49,7 @@ describe('RoleDatabaseService', () => {
       const { rights, ...values } = bodyDto;
       const data = {
         ...values,
-        rights: { set: rights.map((id) => ({ id })) },
+        rights: { connect: rights.map((id) => ({ id })) },
       };
       const prismaArgs: Prisma.RoleCreateArgs = { data };
       const result = roleRestDtoService.formatCreateDto(bodyDto);

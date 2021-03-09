@@ -94,7 +94,7 @@ describe('RoleService', () => {
     it('should compose RoleRestDtoService.formatFindManyDto and RoleDatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as RoleFindManyQueryDto;
       const prismaArgs = ('args' as unknown) as Prisma.RoleFindManyArgs;
-      const role = new Array(3).map(() => mockRoleFactory());
+      const role = [...Array(3)].map(() => mockRoleFactory());
       (mockedRoleRestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
       );

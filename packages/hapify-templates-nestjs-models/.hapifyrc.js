@@ -178,6 +178,11 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'test/generated/{kebab}/mocks/{kebab}.seed.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'test/generated/{kebab}/mocks/{kebab}.service.mock.ts',
       engine: 'hpf',
       input: 'one',
@@ -256,6 +261,11 @@ module.exports = {
     },
     {
       path: 'test/generated/{kebab}/unit/{kebab}.controller.spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'test/generated/{kebab}/e2e/{kebab}-create.e2e-spec.ts',
       engine: 'hpf',
       input: 'one',
     },

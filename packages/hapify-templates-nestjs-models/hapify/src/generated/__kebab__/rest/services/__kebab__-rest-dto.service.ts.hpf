@@ -47,7 +47,7 @@ export class <<Model pascal>>RestDtoService {
       <<if field oneOne or oneMany>>
     <<field camel>>: { connect: { id: <<field camel>> } },
       <<else>>
-    <<field camel>>: { set: formatEntityIds(<<field camel>>) },
+    <<field camel>>: { connect: formatEntityIds(<<field camel>>) },
       <<endif>>
     <<endfor>>
     }

@@ -105,7 +105,7 @@ describe('RelationlessService', () => {
     it('should compose RelationlessRestDtoService.formatFindManyDto and RelationlessDatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as RelationlessFindManyQueryDto;
       const prismaArgs = ('args' as unknown) as Prisma.RelationlessFindManyArgs;
-      const relationless = new Array(3).map(() => mockRelationlessFactory());
+      const relationless = [...Array(3)].map(() => mockRelationlessFactory());
       (mockedRelationlessRestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
       );

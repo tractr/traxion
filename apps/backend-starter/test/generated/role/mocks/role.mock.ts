@@ -10,7 +10,7 @@ export function mockRoleNameFactory(): Role['name'] {
 }
 
 export function mockRoleRightsIdsFactory(): string[] {
-  return new Array(3).map(() => random.uuid());
+  return [...Array(3)].map(() => random.uuid());
 }
 
 export function mockRoleFactory(override: Partial<Role> = {}): Role {

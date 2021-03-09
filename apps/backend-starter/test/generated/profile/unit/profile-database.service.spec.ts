@@ -65,7 +65,7 @@ describe('ProfileDatabaseService', () => {
   describe('findMany', () => {
     it('should map to DatabaseService.findMany', async () => {
       const args = ('args' as unknown) as Prisma.ProfileFindManyArgs;
-      const profile = new Array(3).map(() => mockProfileFactory());
+      const profile = [...Array(3)].map(() => mockProfileFactory());
       (mockedDatabaseService.profile.findMany as jest.Mock).mockReturnValueOnce(
         profile,
       );

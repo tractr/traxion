@@ -63,7 +63,7 @@ describe('RightDatabaseService', () => {
   describe('findMany', () => {
     it('should map to DatabaseService.findMany', async () => {
       const args = ('args' as unknown) as Prisma.RightFindManyArgs;
-      const right = new Array(3).map(() => mockRightFactory());
+      const right = [...Array(3)].map(() => mockRightFactory());
       (mockedDatabaseService.right.findMany as jest.Mock).mockReturnValueOnce(
         right,
       );

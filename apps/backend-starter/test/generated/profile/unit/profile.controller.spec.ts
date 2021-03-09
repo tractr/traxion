@@ -101,7 +101,7 @@ describe('ProfileService', () => {
     it('should compose ProfileRestDtoService.formatFindManyDto and ProfileDatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as ProfileFindManyQueryDto;
       const prismaArgs = ('args' as unknown) as Prisma.ProfileFindManyArgs;
-      const profile = new Array(3).map(() => mockProfileFactory());
+      const profile = [...Array(3)].map(() => mockProfileFactory());
       (mockedProfileRestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
       );

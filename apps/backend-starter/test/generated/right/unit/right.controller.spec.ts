@@ -99,7 +99,7 @@ describe('RightService', () => {
     it('should compose RightRestDtoService.formatFindManyDto and RightDatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as RightFindManyQueryDto;
       const prismaArgs = ('args' as unknown) as Prisma.RightFindManyArgs;
-      const right = new Array(3).map(() => mockRightFactory());
+      const right = [...Array(3)].map(() => mockRightFactory());
       (mockedRightRestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
         prismaArgs,
       );
