@@ -1,6 +1,7 @@
+import { Prisma } from '@prisma/client';
 import { DatabaseService } from '@tractr/nestjs-database';
  
-export function mockPrismaDelegateFactory() {
+export function mockPrismaDelegateFactory(): Partial<Record<Prisma.PrismaAction, any>>{
   return {
     findUnique: jest.fn(),
     findFirst: jest.fn(),

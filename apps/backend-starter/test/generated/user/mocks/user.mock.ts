@@ -1,5 +1,5 @@
 import { User } from '@prisma/client';
-import { random, internet, lorem, date } from 'faker';
+import { date, internet, lorem, random } from 'faker';
 
 export function mockUserIdFactory(): User['id'] {
   return random.uuid();
@@ -21,7 +21,9 @@ export function mockUserBannedFactory(): User['banned'] {
   return random.boolean();
 }
 
-export function mockUserLastConnectedAtFactory(): User['lastConnectedAt'] {
+export function mockUserLastConnectedAtFactory(): NonNullable<
+  User['lastConnectedAt']
+> {
   return date.past();
 }
 
@@ -34,7 +36,7 @@ export function mockUserBlogUrlFactory(): User['blogUrl'] {
 }
 
 export function mockUserListFactory(): User['list'] {
-  return new Array(3).map(() => lorem.words());
+  return [...Array(3)].map(() => lorem.words());
 }
 
 export function mockUserRoleIdFactory(): User['roleId'] {

@@ -84,6 +84,11 @@
             "sortable",
             "internal"
           ]
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "properties": []
         }
       ]
     },

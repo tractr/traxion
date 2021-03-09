@@ -1,9 +1,9 @@
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
 import { Prisma } from '@prisma/client';
 import {
-  IsString,
   IsIn,
-  IsOptional
+  IsOptional,
+  IsString,
 } from 'class-validator';
  
 export class <<Model pascal>>FindUniqueQueryDto {

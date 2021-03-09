@@ -1,7 +1,11 @@
 import { Profile, ProfileGender } from '@prisma/client';
-import { random, lorem } from 'faker';
+import { lorem, random } from 'faker';
 
 export function mockProfileIdFactory(): Profile['id'] {
+  return random.uuid();
+}
+
+export function mockProfileOwnerIdFactory(): Profile['ownerId'] {
   return random.uuid();
 }
 
@@ -9,16 +13,12 @@ export function mockProfileAddressFactory(): Profile['address'] {
   return lorem.words();
 }
 
-export function mockProfilePhoneFactory(): Profile['phone'] {
+export function mockProfilePhoneFactory(): NonNullable<Profile['phone']> {
   return lorem.words();
 }
 
 export function mockProfileGenderFactory(): Profile['gender'] {
   return random.arrayElement(Object.values(ProfileGender));
-}
-
-export function mockProfileOwnerIdFactory(): Profile['ownerId'] {
-  return random.uuid();
 }
 
 export function mockProfileFactory(override: Partial<Profile> = {}): Profile {

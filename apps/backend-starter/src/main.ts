@@ -1,10 +1,11 @@
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { LogService } from '@tractr/nestjs-core';
+
 import { AppModule } from './app.module';
 
-async function bootstrap() {
+async function bootstrap(): Promise<void> {
   // Instanciate nest app
   const app = await NestFactory.create(AppModule);
 
@@ -36,4 +37,6 @@ async function bootstrap() {
   // Start app and define port
   await app.listen(3000);
 }
+
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 bootstrap();

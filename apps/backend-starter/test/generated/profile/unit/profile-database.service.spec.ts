@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from '@tractr/nestjs-database';
+
 import {
-  ProfileDatabaseService,
   PROFILE_DATABASE_SERVICE,
+  ProfileDatabaseService,
 } from '../../../../src/generated/profile';
 import { mockDatabaseServiceFactory } from '../../mocks';
 import { mockProfileFactory } from '../mocks';
@@ -32,7 +34,7 @@ describe('ProfileDatabaseService', () => {
 
   describe('findUnique', () => {
     it('should map to DatabaseService.findUnique', async () => {
-      const args = ({} as unknown) as Prisma.ProfileFindUniqueArgs;
+      const args = ('args' as unknown) as Prisma.ProfileFindUniqueArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile
         .findUnique as jest.Mock).mockReturnValueOnce(profile);
@@ -47,7 +49,7 @@ describe('ProfileDatabaseService', () => {
 
   describe('findFirst', () => {
     it('should map to DatabaseService.findFirst', async () => {
-      const args = ({} as unknown) as Prisma.ProfileFindFirstArgs;
+      const args = ('args' as unknown) as Prisma.ProfileFindFirstArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile
         .findFirst as jest.Mock).mockReturnValueOnce(profile);
@@ -62,8 +64,8 @@ describe('ProfileDatabaseService', () => {
 
   describe('findMany', () => {
     it('should map to DatabaseService.findMany', async () => {
-      const args = ({} as unknown) as Prisma.ProfileFindManyArgs;
-      const profile = new Array(3).map(() => mockProfileFactory());
+      const args = ('args' as unknown) as Prisma.ProfileFindManyArgs;
+      const profile = [...Array(3)].map(() => mockProfileFactory());
       (mockedDatabaseService.profile.findMany as jest.Mock).mockReturnValueOnce(
         profile,
       );
@@ -76,7 +78,7 @@ describe('ProfileDatabaseService', () => {
 
   describe('create', () => {
     it('should map to DatabaseService.create', async () => {
-      const args = ({} as unknown) as Prisma.ProfileCreateArgs;
+      const args = ('args' as unknown) as Prisma.ProfileCreateArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile.create as jest.Mock).mockReturnValueOnce(
         profile,
@@ -90,7 +92,7 @@ describe('ProfileDatabaseService', () => {
 
   describe('update', () => {
     it('should map to DatabaseService.update', async () => {
-      const args = ({} as unknown) as Prisma.ProfileUpdateArgs;
+      const args = ('args' as unknown) as Prisma.ProfileUpdateArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile.update as jest.Mock).mockReturnValueOnce(
         profile,
@@ -104,7 +106,7 @@ describe('ProfileDatabaseService', () => {
 
   describe('updateMany', () => {
     it('should map to DatabaseService.updateMany', async () => {
-      const args = ({} as unknown) as Prisma.ProfileUpdateManyArgs;
+      const args = ('args' as unknown) as Prisma.ProfileUpdateManyArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile
         .updateMany as jest.Mock).mockReturnValueOnce(profile);
@@ -119,7 +121,7 @@ describe('ProfileDatabaseService', () => {
 
   describe('upsert', () => {
     it('should map to DatabaseService.upsert', async () => {
-      const args = ({} as unknown) as Prisma.ProfileUpsertArgs;
+      const args = ('args' as unknown) as Prisma.ProfileUpsertArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile.upsert as jest.Mock).mockReturnValueOnce(
         profile,
@@ -133,7 +135,7 @@ describe('ProfileDatabaseService', () => {
 
   describe('delete', () => {
     it('should map to DatabaseService.delete', async () => {
-      const args = ({} as unknown) as Prisma.ProfileDeleteArgs;
+      const args = ('args' as unknown) as Prisma.ProfileDeleteArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile.delete as jest.Mock).mockReturnValueOnce(
         profile,
@@ -147,7 +149,7 @@ describe('ProfileDatabaseService', () => {
 
   describe('deleteMany', () => {
     it('should map to DatabaseService.deleteMany', async () => {
-      const args = ({} as unknown) as Prisma.ProfileDeleteManyArgs;
+      const args = ('args' as unknown) as Prisma.ProfileDeleteManyArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile
         .deleteMany as jest.Mock).mockReturnValueOnce(profile);
@@ -162,7 +164,7 @@ describe('ProfileDatabaseService', () => {
 
   describe('count', () => {
     it('should map to DatabaseService.count', async () => {
-      const args = ({} as unknown) as Prisma.ProfileCountArgs;
+      const args = ('args' as unknown) as Prisma.ProfileCountArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile.count as jest.Mock).mockReturnValueOnce(
         profile,
@@ -176,7 +178,7 @@ describe('ProfileDatabaseService', () => {
 
   describe('aggregate', () => {
     it('should map to DatabaseService.aggregate', async () => {
-      const args = ({} as unknown) as Prisma.ProfileAggregateArgs;
+      const args = ('args' as unknown) as Prisma.ProfileAggregateArgs;
       const profile = mockProfileFactory();
       (mockedDatabaseService.profile
         .aggregate as jest.Mock).mockReturnValueOnce(profile);

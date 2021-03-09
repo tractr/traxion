@@ -1,0 +1,46 @@
+import { <<Model pascal>>FindManyQueryDto } from '../../../../src/generated';
+import {
+<<for Fields searchable and not password field>>
+  <<if field not entity>>
+  mock<<Model pascal>><<field pascal>>Factory,
+  <<elseif field oneOne or oneMany>>
+  mock<<Model pascal>><<field pascal>>IdFactory,
+  <<else>>
+  mock<<Model pascal>><<field pascal>>IdsFactory,
+  <<endif>>
+<<endfor>>
+} from './<<Model kebab>>.mock';
+  
+export function mock<<Model pascal>>FindManyQueryDtoFactory(
+  override: Partial<<<Model pascal>>FindManyQueryDto> = {}
+): Required< <<Model pascal>>FindManyQueryDto> {
+  return {
+  <<for Fields searchable and not password field>>
+    <<if field not entity>>
+    <<field camel>>: mock<<Model pascal>><<field pascal>>Factory(),
+    <<elseif field oneOne or oneMany>>
+    <<field camel>>: mock<<Model pascal>><<field pascal>>IdFactory(),
+    <<else>>
+    <<field camel>>: mock<<Model pascal>><<field pascal>>IdsFactory(),
+    <<endif>>
+  <<endfor>>
+  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+    populate: [
+      <<for Fields entity field>>
+      '<<field camel>>',
+      <<endfor>>
+      <<for ReferencedIn ref>>
+        <<for ref.fields field>>
+          '<<ref camel>>As<<field pascal>>',
+        <<endfor>>
+      <<endfor>>
+    ],
+    <<<}>>>
+    sort: 'id',
+    order: 'asc',
+    take: 20,
+    skip: 0,
+    ...override,
+  };
+}
+

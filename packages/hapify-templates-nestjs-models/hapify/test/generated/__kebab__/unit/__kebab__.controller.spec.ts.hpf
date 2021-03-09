@@ -1,28 +1,30 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+  
 import {
-  <<Model pascal>>CreateBodyDto,
-  <<Model pascal>>Controller,
-  <<Model pascal>>Service,
-  <<Model pascal>>RestDtoService,
   <<Model constant>>_REST_DTO_SERVICE,
   <<Model constant>>_SERVICE,
+  <<Model pascal>>Controller,
+  <<Model pascal>>CountQueryDto,
+  <<Model pascal>>CreateBodyDto,
+  <<Model pascal>>DeleteParamsDto,
+  <<Model pascal>>FindManyQueryDto,
   <<Model pascal>>FindUniqueParamsDto,
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
   <<Model pascal>>FindUniqueQueryDto,
 <<<}>>>
-  <<Model pascal>>FindManyQueryDto,
-  <<Model pascal>>CountQueryDto,
+  <<Model pascal>>RestDtoService,
+  <<Model pascal>>Service,
   <<Model pascal>>UpdateBodyDto,
   <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpsertBodyDto,
   <<Model pascal>>UpsertParamsDto,
-  <<Model pascal>>DeleteParamsDto,
 } from '../../../../src/generated/<<Model kebab>>';
 import {
   mock<<Model pascal>>Factory,
-  mock<<Model pascal>>ServiceFactory,
   mock<<Model pascal>>RestDtoServiceFactory,
+  mock<<Model pascal>>ServiceFactory,
 } from '../mocks';
   
 describe('<<Model pascal>>Service', () => {
@@ -50,7 +52,7 @@ describe('<<Model pascal>>Service', () => {
   describe('create', () => {
     it('should compose <<Model pascal>>RestDtoService.formatCreateDto and <<Model pascal>>DatabaseService.create', async () => {
       const bodyDto = ('body' as unknown) as <<Model pascal>>CreateBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>CreateArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>CreateArgs;
       const <<Model camel>> = mock<<Model pascal>>Factory();
       (mocked<<Model pascal>>RestDtoService.formatCreateDto as jest.Mock).mockReturnValueOnce(
         prismaArgs
@@ -73,7 +75,7 @@ describe('<<Model pascal>>Service', () => {
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
       const queryDto = ('query' as unknown) as <<Model pascal>>FindUniqueQueryDto;
     <<<}>>>
-      const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>FindUniqueArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>FindUniqueArgs;
       const <<Model camel>> = mock<<Model pascal>>Factory();
       (mocked<<Model pascal>>RestDtoService.formatFindUniqueDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs
@@ -105,8 +107,8 @@ describe('<<Model pascal>>Service', () => {
   describe('findMany', () => {
     it('should compose <<Model pascal>>RestDtoService.formatFindManyDto and <<Model pascal>>DatabaseService.findMany', async () => {
       const queryDto = ('query' as unknown) as <<Model pascal>>FindManyQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>FindManyArgs;
-      const <<Model camel>> = new Array(3).map(() => mock<<Model pascal>>Factory());
+      const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>FindManyArgs;
+      const <<Model camel>> = [...Array(3)].map(() => mock<<Model pascal>>Factory());
       (mocked<<Model pascal>>RestDtoService.formatFindManyDto as jest.Mock).mockReturnValueOnce(
         prismaArgs
       );
@@ -127,7 +129,7 @@ describe('<<Model pascal>>Service', () => {
   describe('count', () => {
     it('should compose <<Model pascal>>RestDtoService.formatCountDto and <<Model pascal>>DatabaseService.count', async () => {
       const queryDto = ('query' as unknown) as <<Model pascal>>CountQueryDto;
-      const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>CountArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>CountArgs;
       const <<Model camel>> = 10;
       (mocked<<Model pascal>>RestDtoService.formatCountDto as jest.Mock).mockReturnValueOnce(
         prismaArgs
@@ -148,7 +150,7 @@ describe('<<Model pascal>>Service', () => {
     it('should compose <<Model pascal>>RestDtoService.formatUpdateDtos and <<Model pascal>>DatabaseService.update', async () => {
       const paramsDto = ('params' as unknown) as <<Model pascal>>UpdateParamsDto;
       const bodyDto = ('body' as unknown) as <<Model pascal>>UpdateBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>UpdateArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>UpdateArgs;
       const <<Model camel>> = mock<<Model pascal>>Factory();
       (mocked<<Model pascal>>RestDtoService.formatUpdateDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs
@@ -172,7 +174,7 @@ describe('<<Model pascal>>Service', () => {
     it('should compose <<Model pascal>>RestDtoService.formatUpsertDtos and <<Model pascal>>DatabaseService.upsert', async () => {
       const paramsDto = ('params' as unknown) as <<Model pascal>>UpsertParamsDto;
       const bodyDto = ('body' as unknown) as <<Model pascal>>UpsertBodyDto;
-      const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>UpsertArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>UpsertArgs;
       const <<Model camel>> = mock<<Model pascal>>Factory();
       (mocked<<Model pascal>>RestDtoService.formatUpsertDtos as jest.Mock).mockReturnValueOnce(
         prismaArgs
@@ -195,7 +197,7 @@ describe('<<Model pascal>>Service', () => {
   describe('delete', () => {
     it('should compose <<Model pascal>>RestDtoService.formatDeleteDto and <<Model pascal>>DatabaseService.delete', async () => {
       const paramsDto = ('params' as unknown) as <<Model pascal>>DeleteParamsDto;
-      const prismaArgs = ({} as unknown) as Prisma.<<Model pascal>>DeleteArgs;
+      const prismaArgs = ('args' as unknown) as Prisma.<<Model pascal>>DeleteArgs;
       const <<Model camel>> = mock<<Model pascal>>Factory();
       (mocked<<Model pascal>>RestDtoService.formatDeleteDto as jest.Mock).mockReturnValueOnce(
         prismaArgs

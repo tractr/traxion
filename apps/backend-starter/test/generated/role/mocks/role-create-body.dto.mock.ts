@@ -1,12 +1,12 @@
 import { RoleCreateBodyDto } from '../../../../src/generated';
-import { mockRoleNameFactory, mockRoleRightsIdFactory } from './role.mock';
+import { mockRoleNameFactory, mockRoleRightsIdsFactory } from './role.mock';
 
 export function mockRoleCreateBodyDtoFactory(
   override: Partial<RoleCreateBodyDto> = {},
-): RoleCreateBodyDto {
+): Required<RoleCreateBodyDto> {
   return {
     name: mockRoleNameFactory(),
-    rights: new Array(3).map(() => mockRoleRightsIdFactory()),
+    rights: mockRoleRightsIdsFactory(),
     ...override,
   };
 }

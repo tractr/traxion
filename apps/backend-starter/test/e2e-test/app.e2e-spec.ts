@@ -15,24 +15,4 @@ describe('AppController (e2e)', () => {
     const { app } = context;
     return request(app.getHttpServer()).get('/').expect(200).expect({});
   });
-
-  it('App should reach the / endpoint', () => {
-    const { app } = context;
-    return request(app.getHttpServer()).get('/').expect(200).expect({});
-  });
-
-  it('App should reach the / endpoint', () => {
-    const { app } = context;
-    return request(app.getHttpServer()).get('/').expect(200).expect({});
-  });
-
-  it('App should reach the / endpoint', () => {
-    const { app } = context;
-    return request(app.getHttpServer()).get('/').expect(200).expect({});
-  });
-
-  it('App should reach the / endpoint', () => {
-    const { app } = context;
-    return request(app.getHttpServer()).get('/').expect(200).expect({});
-  });
 });
