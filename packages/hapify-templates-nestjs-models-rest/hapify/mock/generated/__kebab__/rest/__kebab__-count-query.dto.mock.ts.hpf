@@ -1,0 +1,31 @@
+import { <<Model pascal>>CountQueryDto } from '@generated/<<Model kebab>>/rest';
+  
+import {
+<<for Fields searchable and not password field>>
+  <<if field not entity>>
+  mock<<Model pascal>><<field pascal>>Factory,
+  <<elseif field oneOne or oneMany>>
+  mock<<Model pascal>><<field pascal>>IdFactory,
+  <<else>>
+  mock<<Model pascal>><<field pascal>>IdsFactory,
+  <<endif>>
+<<endfor>>
+} from '../common';
+  
+export function mock<<Model pascal>>CountQueryDtoFactory(
+  override: Partial<<<Model pascal>>CountQueryDto> = {}
+): Required< <<Model pascal>>CountQueryDto> {
+  return {
+  <<for Fields searchable and not password field>>
+    <<if field not entity>>
+    <<field camel>>: mock<<Model pascal>><<field pascal>>Factory(),
+    <<elseif field oneOne or oneMany>>
+    <<field camel>>: mock<<Model pascal>><<field pascal>>IdFactory(),
+    <<else>>
+    <<field camel>>: mock<<Model pascal>><<field pascal>>IdsFactory(),
+    <<endif>>
+  <<endfor>>
+    ...override,
+  };
+}
+

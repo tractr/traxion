@@ -33,7 +33,9 @@
   "prettier": "@tractr/prettier-config",
   "eslintConfig": {
     "extends": "@tractr",
-    "rules": {}
+    "rules": {
+      "import/no-unresolved": "off"
+    }
   },
   "jest": {
     "preset": "@tractr/jest-config"

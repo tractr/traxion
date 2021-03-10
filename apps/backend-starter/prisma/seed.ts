@@ -1,9 +1,8 @@
 import { PrismaClient } from '@prisma/client';
-
-import { seedProfiles } from '../test/generated/profile/mocks';
-import { seedRights } from '../test/generated/right/mocks';
-import { seedRoles } from '../test/generated/role/mocks';
-import { seedUsers } from '../test/generated/user/mocks';
+import { seedProfiles } from '@generated-mock/profile/common';
+import { seedRights } from '@generated-mock/right/common';
+import { seedRoles } from '@generated-mock/role/common';
+import { seedUsers } from '@generated-mock/user/common';
 
 const prisma = new PrismaClient();
 
@@ -19,6 +18,8 @@ seed()
     console.error(e);
     process.exit(1);
   })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+  .finally(
+    async (): Promise<void> => {
+      await prisma.$disconnect();
+    },
+  );
