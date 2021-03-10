@@ -7,154 +7,194 @@ on:
   pull_request:
 
 jobs:
-  # build:
-  #   strategy:
-  #     matrix:
-  #       node: [15.x]
-  #       os: [ubuntu-latest]
-  #   name: install on node ${{ matrix.node }} and ${{ matrix.os }}
-  #   runs-on: ${{ matrix.os }}
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Use node.js ${{ matrix.node }}
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: ${{ matrix.node }}
-  #         registry-url: https://npm.pkg.github.com
-  #         scope: tractr
-  #         always-auth: true
-  #     - uses: actions/cache@v2
-  #       with:
-  #         path: ~/.npm
-  #         key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-  #     - name: Run npm install
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  #       run: npm ci
-  #     - name: Run npm build
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  #       run: npm run build
-  #     - name: Upload dist folders
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
-  #         path: |
-  #           apps/**/dist/
-  #           packages/**/dist/
-  #         if-no-files-found: error
-
-  # test:
-  #   if: success()
-  #   needs: [build]
-  #   strategy:
-  #     matrix:
-  #       node: [15.x]
-  #       os: [ubuntu-latest]
-  #   name: test on node ${{ matrix.node }} and ${{ matrix.os }}
-  #   runs-on: ${{ matrix.os }}
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Use node.js ${{ matrix.node }}
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: ${{ matrix.node }}
-  #         registry-url: https://npm.pkg.github.com
-  #     - uses: actions/cache@v2
-  #       with:
-  #         path: ~/.npm
-  #         key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-  #     - name: Run npm install
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  #       run: npm ci --prefer-offline --no-audit --progress=false
-  #     - name: download dist folders
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
-  #     - name: test
-  #       run: exit 0
-  #       # run: npm run test
-
-  # lint:
-  #   if: success()
-  #   needs: [build]
-  #   strategy:
-  #     matrix:
-  #       node: [15.x]
-  #       os: [ubuntu-latest]
-  #   name: lint on node ${{ matrix.node }} and ${{ matrix.os }}
-  #   runs-on: ${{ matrix.os }}
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: use node.js ${{ matrix.node }}
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: ${{ matrix.node }}
-  #         registry-url: https://npm.pkg.github.com
-  #     - uses: actions/cache@v2
-  #       with:
-  #         path: ~/.npm
-  #         key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-  #     - name: Run npm install
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  #       run: npm ci --prefer-offline --no-audit --progress=false
-  #     - name: download dist folders
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
-  #     - name: test
-  #       run: exit 0
-  #       # run: npm run lint
-
-  # npm-release:
-  #   if: success() && github.ref == 'refs/heads/master'
-  #   needs: [lint, test]
-  #   strategy:
-  #     matrix:
-  #       node: [15.x]
-  #       os: [ubuntu-latest]
-  #   name: npm release on node ${{ matrix.node }} and ${{ matrix.os }}
-  #   runs-on: ${{ matrix.os }}
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: use node.js ${{ matrix.node }}
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: ${{ matrix.node }}
-  #         registry-url: https://npm.pkg.github.com
-  #     - uses: actions/cache@v2
-  #       with:
-  #         path: ~/.npm
-  #         key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-  #     - name: Run npm install
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  #       run: npm ci --prefer-offline --no-audit --progress=false
-  #     - name: download dist folders
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
-  #     - name: Relase npm packages
-  #       if: success()
-  #       env:
-  #         CI: true
-  #         GH_TOKEN: ${{ secrets.GH_TOKEN }}
-  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  #       run:
-  #         npx multi-semantic-release --sequential-init --ignore-packages=apps/*
-
-  docker-release:
-    if: github.ref == 'refs/heads/master'
-    # if: success() && github.ref == 'refs/heads/master'
-    # needs: [npm-release]
+  build:
     strategy:
       matrix:
         node: [15.x]
         os: [ubuntu-latest]
+        scope: [tractr]
+    name:
+      install on node ${{ matrix.node }} and ${{ matrix.os }} at ${{
+      matrix.scope }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://npm.pkg.github.com
+          scope: ${{ matrix.scope }}
+          always-auth: true
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm ci
+      - name: Run npm build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run build
+      - name: Upload dist folders
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
+          path: |
+            apps/**/dist/
+            packages/**/dist/
+          if-no-files-found: error
+
+  test:
+    if: success()
+    needs: [build]
+    strategy:
+      matrix:
+        node: [15.x]
+        os: [ubuntu-latest]
+    name: test on node ${{ matrix.node }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://npm.pkg.github.com
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm ci --prefer-offline --no-audit --progress=false
+      - name: download dist folders
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
+      - name: test
+        run: npm run test
+
+  lint:
+    if: success()
+    needs: [build]
+    strategy:
+      matrix:
+        node: [15.x]
+        os: [ubuntu-latest]
+    name: lint on node ${{ matrix.node }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: use node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://npm.pkg.github.com
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm ci --prefer-offline --no-audit --progress=false
+      - name: download dist folders
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
+      - name: test
+        run: npm run lint
+
+  npm-release:
+    if: success() && github.ref == 'refs/heads/master'
+    needs: [lint, test]
+    strategy:
+      matrix:
+        node: [15.x]
+        os: [ubuntu-latest]
+    name: npm release on node ${{ matrix.node }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: use node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://npm.pkg.github.com
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm ci --prefer-offline --no-audit --progress=false
+      - name: download dist folders
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
+      - name: Relase npm packages
+        if: success()
+        env:
+          CI: true
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run:
+          npx multi-semantic-release --sequential-init --ignore-packages=apps/*
+
+  apps-release:
+    if: success() && github.ref == 'refs/heads/master'
+    # needs: [lint, test]
+    needs: [build]
+    strategy:
+      matrix:
+        node: [15.x]
+        os: [ubuntu-latest]
+    name: apps release on node ${{ matrix.node }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: use node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://npm.pkg.github.com
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm ci --prefer-offline --no-audit --progress=false
+      - name: download dist folders
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
+      - name: Relase npm packages
+        if: success()
+        env:
+          CI: true
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run:
+          npx multi-semantic-release --sequential-init
+          --ignore-packages=packages/*
+
+  docker-release:
+    if: success() && github.ref == 'refs/heads/master'
+    needs: [apps-release, npm-release]
+    strategy:
+      matrix:
         app: [backend-starter]
-    name: docker release ${{ matrix.app }}
+        node: [15.x]
+        os: [ubuntu-latest]
+        scope: [tractr]
+    name: docker release ${{ matrix.app }} (@${{ matrix.scope }})
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -179,13 +219,10 @@ jobs:
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          # list of Docker images to use as base name for tags
-          images: ghcr.io/tractr/${{ matrix.app }}
-          # add git short SHA as Docker tag
+          images: ghcr.io/${{ matrix.scope }}/${{ matrix.app }}
           tag-sha: true
           tag-latest: true
           tag-custom: ${{ steps.package-version.outputs.current-version}}
-          tag-custom-only: true
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
