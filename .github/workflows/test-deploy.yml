@@ -24,8 +24,6 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           registry-url: https://npm.pkg.github.com
-          scope: ${{ matrix.scope }}
-          always-auth: true
       - uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -148,8 +146,7 @@ jobs:
 
   apps-release:
     if: success() && github.ref == 'refs/heads/master'
-    # needs: [lint, test]
-    needs: [build]
+    needs: [npm-release]
     strategy:
       matrix:
         node: [15.x]
@@ -187,7 +184,7 @@ jobs:
 
   docker-release:
     if: success() && github.ref == 'refs/heads/master'
-    needs: [apps-release, npm-release]
+    needs: [apps-release]
     strategy:
       matrix:
         app: [backend-starter]
