@@ -49,7 +49,7 @@
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
     "@tractr/commit-config": "^1.1.3",
-    "@tractr/eslint-config": "^1.3.2",
+    "@tractr/eslint-config": "^1.3.3",
     "@tractr/hapify-generate-config": "^1.0.0",
     "@tractr/jest-config": "^1.0.0",
     "@tractr/prettier-config": "^1.3.0",
