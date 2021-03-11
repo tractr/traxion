@@ -4,7 +4,7 @@
   "name": "Hapify prisma templates",
   "description": "Generate the model.prisma in the prisma folder",
   "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
-  "project": "./hapify-models.json",
+  "project": "../../hapify-models.json",
   "defaultFields": [
     {
       "name": "id",
@@ -23,6 +23,24 @@
       "internal": true,
       "restricted": false,
       "ownership": false
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "subtype": null,
+      "reference": null,
+      "primary": true,
+      "unique": false,
+      "label": false,
+      "nullable": false,
+      "multiple": false,
+      "embedded": false,
+      "searchable": true,
+      "sortable": true,
+      "hidden": false,
+      "internal": true,
+      "restricted": false,
+      "ownership": false
     }
   ],
   "templates": [
@@ -37,6 +55,16 @@
       "input": "all"
     },
     {
+      "path": "src/generated/{kebab}/index.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "src/generated/{kebab}/{kebab}.module.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
       "path": "src/generated/helpers/index.ts",
       "engine": "hpf",
       "input": "one"
@@ -48,46 +76,6 @@
     },
     {
       "path": "src/generated/helpers/format-entity-ids.helper.ts",
-      "engine": "hpf",
-      "input": "one"
-    },
-    {
-      "path": "src/generated/{kebab}/index.ts",
-      "engine": "hpf",
-      "input": "one"
-    },
-    {
-      "path": "src/generated/{kebab}/{kebab}.module.ts",
-      "engine": "hpf",
-      "input": "one"
-    },
-    {
-      "path": "src/generated/{kebab}/common/index.ts",
-      "engine": "hpf",
-      "input": "one"
-    },
-    {
-      "path": "src/generated/{kebab}/common/{kebab}-model.module.ts",
-      "engine": "hpf",
-      "input": "one"
-    },
-    {
-      "path": "src/generated/{kebab}/common/{kebab}-model.constant.ts",
-      "engine": "hpf",
-      "input": "one"
-    },
-    {
-      "path": "src/generated/{kebab}/common/services/index.ts",
-      "engine": "hpf",
-      "input": "one"
-    },
-    {
-      "path": "src/generated/{kebab}/common/services/{kebab}-database.service.ts",
-      "engine": "hpf",
-      "input": "one"
-    },
-    {
-      "path": "src/generated/{kebab}/common/services/{kebab}.service.ts",
       "engine": "hpf",
       "input": "one"
     },
@@ -182,112 +170,142 @@
       "input": "one"
     },
     {
-      "path": "test/generated/mocks/index.ts",
-      "engine": "hpf",
-      "input": "all"
-    },
-    {
-      "path": "test/generated/mocks/database-service.mock.ts",
-      "engine": "hpf",
-      "input": "all"
-    },
-    {
-      "path": "test/generated/{kebab}/mocks/index.ts",
+      "path": "mock/generated/{kebab}/rest/index.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/mocks/{kebab}.mock.ts",
+      "path": "mock/generated/{kebab}/rest/{kebab}-rest-dto.service.mock.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/mocks/{kebab}.seed.ts",
+      "path": "mock/generated/{kebab}/rest/{kebab}-count-query.dto.mock.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/mocks/{kebab}.service.mock.ts",
+      "path": "mock/generated/{kebab}/rest/{kebab}-create-body.dto.mock.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/mocks/{kebab}-rest-dto.service.mock.ts",
+      "path": "mock/generated/{kebab}/rest/{kebab}-find-unique-params.dto.mock.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/mocks/{kebab}-count-query.dto.mock.ts",
+      "path": "mock/generated/{kebab}/rest/{kebab}-find-unique-query.dto.mock.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/mocks/{kebab}-create-body.dto.mock.ts",
+      "path": "mock/generated/{kebab}/rest/{kebab}-find-many-query.dto.mock.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/mocks/{kebab}-find-unique-params.dto.mock.ts",
+      "path": "mock/generated/{kebab}/rest/{kebab}-update-params.dto.mock.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/mocks/{kebab}-find-unique-query.dto.mock.ts",
+      "path": "mock/generated/{kebab}/rest/{kebab}-update-body.dto.mock.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/mocks/{kebab}-find-many-query.dto.mock.ts",
+      "path": "mock/generated/{kebab}/rest/{kebab}-upsert-params.dto.mock.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/mocks/{kebab}-update-params.dto.mock.ts",
+      "path": "mock/generated/{kebab}/rest/{kebab}-upsert-body.dto.mock.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/mocks/{kebab}-update-body.dto.mock.ts",
+      "path": "mock/generated/{kebab}/rest/{kebab}-delete-params.dto.mock.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/mocks/{kebab}-upsert-params.dto.mock.ts",
+      "path": "test/generated/{kebab}/rest/unit/{kebab}-rest-dto.service.spec.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/mocks/{kebab}-upsert-body.dto.mock.ts",
+      "path": "test/generated/{kebab}/rest/unit/{kebab}.controller.spec.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/mocks/{kebab}-delete-params.dto.mock.ts",
+      "path": "test/generated/{kebab}/rest/e2e/{kebab}-create.e2e-spec.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/unit/{kebab}.service.spec.ts",
+      "path": "src/generated/{kebab}/common/index.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/unit/{kebab}-database.service.spec.ts",
+      "path": "src/generated/{kebab}/common/{kebab}-model.module.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/unit/{kebab}-rest-dto.service.spec.ts",
+      "path": "src/generated/{kebab}/common/{kebab}-model.constant.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/unit/{kebab}.controller.spec.ts",
+      "path": "src/generated/{kebab}/common/services/index.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "test/generated/{kebab}/e2e/{kebab}-create.e2e-spec.ts",
+      "path": "src/generated/{kebab}/common/services/{kebab}-database.service.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "src/generated/{kebab}/common/services/{kebab}.service.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "mock/generated/{kebab}/common/index.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "mock/generated/{kebab}/common/{kebab}.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "mock/generated/{kebab}/common/{kebab}.seed.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "mock/generated/{kebab}/common/{kebab}-database.service.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "mock/generated/{kebab}/common/{kebab}.service.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/common/unit/{kebab}.service.spec.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/common/unit/{kebab}-database.service.spec.ts",
       "engine": "hpf",
       "input": "one"
     },
