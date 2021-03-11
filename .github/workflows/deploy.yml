@@ -1,103 +1,12 @@
-name: test and deploy
+name: Release and Deploy
 
 on:
   push:
     branches:
       - master
-  pull_request:
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        node: [15.x]
-        os: [ubuntu-latest]
-        scope: [tractr]
-    name:
-      install on node ${{ matrix.node }} and ${{ matrix.os }} at ${{
-      matrix.scope }}
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use node.js ${{ matrix.node }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
-          registry-url: https://npm.pkg.github.com
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Run npm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci
-
-  test:
-    if: success()
-    needs: [build]
-    strategy:
-      matrix:
-        node: [15.x]
-        os: [ubuntu-latest]
-    name: test on node ${{ matrix.node }} and ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use node.js ${{ matrix.node }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
-          registry-url: https://npm.pkg.github.com
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Run npm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci --prefer-offline --no-audit --progress=false
-      - name: Run npm build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run build
-      - name: test
-        run: npm run test
-
-  lint:
-    if: success()
-    needs: [build]
-    strategy:
-      matrix:
-        node: [15.x]
-        os: [ubuntu-latest]
-    name: lint on node ${{ matrix.node }} and ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v2
-      - name: use node.js ${{ matrix.node }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
-          registry-url: https://npm.pkg.github.com
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Run npm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci --prefer-offline --no-audit --progress=false
-      - name: Run npm build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run build
-      - name: test
-        run: npm run lint
-
   npm-release:
-    if: success() && github.ref == 'refs/heads/master'
-    needs: [lint, test]
     strategy:
       matrix:
         node: [15.x]
@@ -133,7 +42,7 @@ jobs:
           npx multi-semantic-release --sequential-init --ignore-packages=apps/*
 
   apps-release:
-    if: success() && github.ref == 'refs/heads/master'
+    if: success()
     needs: [npm-release]
     strategy:
       matrix:
@@ -171,7 +80,7 @@ jobs:
           --ignore-packages=packages/*
 
   docker-release:
-    if: success() && github.ref == 'refs/heads/master'
+    if: success()
     needs: [apps-release]
     strategy:
       matrix:
