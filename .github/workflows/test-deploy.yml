@@ -36,13 +36,19 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run build
-      - name: Upload dist folders
+      - name: Run npm generate
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run generate
+      - name: Upload dist and generated folders
         uses: actions/upload-artifact@v2
         with:
           name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
           path: |
             apps/**/dist/
+            apps/**/generated/
             packages/**/dist/
+            packages/**/generated/
           if-no-files-found: error
 
   test:
