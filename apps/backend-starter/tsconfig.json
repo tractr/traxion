@@ -2,7 +2,12 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "rootDir": ".",
-    "baseUrl": "src",
-    "outDir": "dist"
+    "baseUrl": ".",
+    "outDir": "dist",
+    "paths": {
+      "@generated/*": ["src/generated/*"],
+      "@generated-test/*": ["test/generated/*"],
+      "@generated-mock/*": ["mock/generated/*"]
+    }
   }
 }
