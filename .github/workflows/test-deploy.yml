@@ -32,18 +32,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm ci
-      - name: Run npm build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run build
-      - name: Upload dist and generated folders
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
-          path: |
-            apps/**/dist/
-            packages/**/dist/
-          if-no-files-found: error
 
   test:
     if: success()
@@ -69,10 +57,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm ci --prefer-offline --no-audit --progress=false
-      - name: download dist folders
-        uses: actions/download-artifact@v2
-        with:
-          name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
+      - name: Run npm build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run build
       - name: test
         run: npm run test
 
@@ -100,10 +88,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm ci --prefer-offline --no-audit --progress=false
-      - name: download dist folders
-        uses: actions/download-artifact@v2
-        with:
-          name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
+      - name: Run npm build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run build
       - name: test
         run: npm run lint
 
@@ -131,10 +119,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm ci --prefer-offline --no-audit --progress=false
-      - name: download dist folders
-        uses: actions/download-artifact@v2
-        with:
-          name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
+      - name: Run npm build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run build -- --scope '@tractr/*'
       - name: Relase npm packages
         if: success()
         env:
@@ -168,10 +156,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm ci --prefer-offline --no-audit --progress=false
-      - name: download dist folders
-        uses: actions/download-artifact@v2
-        with:
-          name: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
+      - name: Run npm build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run build -- --scope '@app/*'
       - name: Relase npm packages
         if: success()
         env:

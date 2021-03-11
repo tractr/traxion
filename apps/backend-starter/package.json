@@ -1,5 +1,5 @@
 {
-  "name": "backend-starter",
+  "name": "@app/backend-starter",
   "version": "1.0.0",
   "private": true,
   "description": "",
@@ -23,7 +23,6 @@
     "lint:prettier:fix": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint:tsc": "tsc --noEmit",
     "lint:tsc:fix": "npm run lint:tsc",
-    "postinstall": "npm run build",
     "prisma": "prisma",
     "prisma:format": "prisma format",
     "prisma:generate": "prisma generate",
