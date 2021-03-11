@@ -1,0 +1,242 @@
+import {
+  mock<<Model pascal>>CountQueryDtoFactory,
+  mock<<Model pascal>>CreateBodyDtoFactory,
+  mock<<Model pascal>>DeleteParamsDtoFactory,
+  mock<<Model pascal>>FindManyQueryDtoFactory,
+  mock<<Model pascal>>FindUniqueParamsDtoFactory,
+<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+  mock<<Model pascal>>FindUniqueQueryDtoFactory,
+<<<}>>>
+  mock<<Model pascal>>UpdateBodyDtoFactory,
+  mock<<Model pascal>>UpdateParamsDtoFactory,
+  mock<<Model pascal>>UpsertBodyDtoFactory,
+  mock<<Model pascal>>UpsertParamsDtoFactory,
+} from '@generated-mock/<<Model kebab>>/rest';
+import { 
+  <<Model pascal>>CountQueryDto,
+  <<Model pascal>>CreateBodyDto,
+  <<Model pascal>>DeleteParamsDto,
+  <<Model pascal>>FindManyQueryDto,
+  <<Model pascal>>FindUniqueParamsDto,
+<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+  <<Model pascal>>FindUniqueQueryDto,
+<<<}>>>
+  <<Model pascal>>RestDtoService, 
+  <<Model pascal>>UpdateBodyDto,
+  <<Model pascal>>UpdateParamsDto,
+  <<Model pascal>>UpsertBodyDto,
+  <<Model pascal>>UpsertParamsDto,
+} from '@generated/<<Model kebab>>/rest';
+<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+import { formatPopulate } from '@generated/helpers';
+<<<}>>>
+import { Test, TestingModule } from '@nestjs/testing';
+import { Prisma } from '@prisma/client';
+  
+describe('<<Model pascal>>DatabaseService', () => {
+  let <<Model camel>>RestDtoService: <<Model pascal>>RestDtoService;
+  
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [<<Model pascal>>RestDtoService],
+    }).compile();
+  
+    <<Model camel>>RestDtoService = module.get<<<Model pascal>>RestDtoService>(<<Model pascal>>RestDtoService);
+  });
+  
+  it('should be defined', () => {
+    expect(<<Model camel>>RestDtoService).toBeDefined();
+  });
+  
+  describe('formatCreateDto', () => {
+    it('should properly format create dto', () => {
+      const bodyDto: Required< <<Model pascal>>CreateBodyDto> = mock<<Model pascal>>CreateBodyDtoFactory();
+      const {
+      <<for Fields entity and not internal field>>
+        <<field camel>>,
+      <<endfor>>
+      ...values,
+      } = bodyDto;
+      const data = {
+        ...values,
+      <<for Fields entity and not internal field>>
+        <<if field oneOne or oneMany>>
+      <<field camel>>: { connect: { id: <<field camel>> } },
+        <<else>>
+      <<field camel>>: { connect: <<field camel>>.map(id => ({ id })) },
+        <<endif>>
+      <<endfor>>
+      }
+      const prismaArgs: Prisma.<<Model pascal>>CreateArgs = { data };
+      const result = <<Model camel>>RestDtoService.formatCreateDto(bodyDto);
+      expect(result).toEqual(prismaArgs)
+    });
+  });
+    
+  describe('formatCountDto', () => {
+    it('should properly format count dto', () => {
+      const queryDto: Required< <<Model pascal>>CountQueryDto> = mock<<Model pascal>>CountQueryDtoFactory();
+      const {
+      <<for Fields searchable and (multiple or entity) field>>
+        <<field camel>>,
+      <<endfor>>
+      ...values,
+      } = queryDto;
+      const where = {
+        ...values,
+      <<for Fields searchable and (multiple or entity) field>>
+        <<if field multiple and not entity>>
+          <<field camel>>: { hasSome: <<field camel>> },
+        <<elseif field oneOne or oneMany>>
+          <<field camel>>: { id: <<field camel>> },
+        <<else>>
+          <<field camel>>:{ some: { id: { in: <<field camel>> } } },
+        <<endif>>
+      <<endfor>>
+      }
+      const prismaArgs: Prisma.<<Model pascal>>CountArgs = { where };
+      const result = <<Model camel>>RestDtoService.formatCountDto(queryDto);
+      expect(result).toEqual(prismaArgs)
+    });
+  });
+    
+  describe('formatFindUniqueDto', () => {
+    it('should properly format findUnique dtos', () => {
+      const paramsDto: <<Model pascal>>FindUniqueParamsDto = mock<<Model pascal>>FindUniqueParamsDtoFactory();
+    <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+      const queryDto: <<Model pascal>>FindUniqueQueryDto = mock<<Model pascal>>FindUniqueQueryDtoFactory();
+    <<<}>>>
+      const prismaArgs: Prisma.<<Model pascal>>FindUniqueArgs = { 
+        where: { ...paramsDto },
+      <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+        include: {
+        <<for Fields entity field>>
+        <<field camel>>: true,
+        <<endfor>>
+        <<for ReferencedIn ref>>
+          <<for ref.fields field>>
+            <<ref camel>>As<<field pascal>>: true,
+          <<endfor>>
+        <<endfor>>
+        },
+      <<<}>>>
+      };
+      const result = <<Model camel>>RestDtoService.formatFindUniqueDtos(
+        paramsDto, 
+      <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+        queryDto
+      <<<}>>>
+      );
+      expect(result).toEqual(prismaArgs)
+    });
+  });
+    
+  describe('formatFindManyDto', () => {
+    it('should properly format findMany dtos', () => {
+      const queryDto: Required< <<Model pascal>>FindManyQueryDto> = mock<<Model pascal>>FindManyQueryDtoFactory();
+      const {
+      <<for Fields searchable and (multiple or entity) field>>
+        <<field camel>>,
+      <<endfor>>
+      <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+       populate,
+      <<<}>>>
+       sort,
+       order,
+       take,
+       skip,
+       ...values
+      } = queryDto;
+      const where = {
+      <<for Fields searchable and (multiple or entity) field>>
+        <<if field multiple and not entity>>
+        <<field camel>>: { hasSome: <<field camel>> },
+        <<elseif field oneOne or oneMany>>
+        <<field camel>>: { id: <<field camel>> },
+        <<else>>
+          <<field camel>>: { some: { id: { in: <<field camel>> } } },
+        <<endif>>
+      <<endfor>>
+        ...values,
+      };
+      <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+      const include = formatPopulate(populate);
+      <<<}>>>
+      const orderBy = {[sort]: order}
+      const prismaArgs: Prisma.<<Model pascal>>FindManyArgs = { 
+        where,
+        take,
+        skip,
+        orderBy,
+      <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+        include,
+      <<<}>>>
+      };
+      const result = <<Model camel>>RestDtoService.formatFindManyDto(queryDto);
+      expect(result).toEqual(prismaArgs)
+    });
+  });
+  
+  describe('formatUpdateDto', () => {
+    it('should properly format update dto', () => {
+      const paramsDto: <<Model pascal>>UpdateParamsDto = mock<<Model pascal>>UpdateParamsDtoFactory();
+      const bodyDto: Required< <<Model pascal>>UpdateBodyDto> = mock<<Model pascal>>UpdateBodyDtoFactory();
+      const {
+      <<for Fields entity and not internal field>>
+        <<field camel>>,
+      <<endfor>>
+      ...values,
+      } = bodyDto;
+      const data = {
+        ...values,
+      <<for Fields entity and not internal field>>
+        <<if field oneOne or oneMany>>
+      <<field camel>>: { connect: { id: <<field camel>> } },
+        <<else>>
+      <<field camel>>: { set: <<field camel>>.map(id => ({ id })) },
+        <<endif>>
+      <<endfor>>
+      }
+      const prismaArgs: Prisma.<<Model pascal>>UpdateArgs = { where: paramsDto, data };
+      const result = <<Model camel>>RestDtoService.formatUpdateDtos(paramsDto, bodyDto);
+      expect(result).toEqual(prismaArgs)
+    });
+  });
+  
+  describe('formatUpsertDto', () => {
+    it('should properly format upsert dto', () => {
+      const paramsDto: <<Model pascal>>UpsertParamsDto = mock<<Model pascal>>UpsertParamsDtoFactory();
+      const bodyDto: Required< <<Model pascal>>UpsertBodyDto> = mock<<Model pascal>>UpsertBodyDtoFactory();
+      const {
+      <<for Fields entity and not internal field>>
+        <<field camel>>,
+      <<endfor>>
+      ...values,
+      } = bodyDto;
+      const create = {
+        ...values,
+      <<for Fields entity and not internal field>>
+        <<if field oneOne or oneMany>>
+      <<field camel>>: { connect: { id: <<field camel>> } },
+        <<else>>
+      <<field camel>>: { set: <<field camel>>.map(id => ({ id })) },
+        <<endif>>
+      <<endfor>>
+      };
+      const update = { ...create };
+      const prismaArgs: Prisma.<<Model pascal>>UpsertArgs = { create, update, where: paramsDto };
+      const result = <<Model camel>>RestDtoService.formatUpsertDtos(paramsDto, bodyDto);
+      expect(result).toEqual(prismaArgs)
+    });
+  });
+  
+  describe('formatDeleteDto', () => {
+    it('should properly format delete dto', () => {
+      const paramsDto: <<Model pascal>>DeleteParamsDto = mock<<Model pascal>>DeleteParamsDtoFactory();
+      const prismaArgs: Prisma.<<Model pascal>>DeleteArgs = { where: paramsDto };
+      const result = <<Model camel>>RestDtoService.formatDeleteDto(paramsDto);
+      expect(result).toEqual(prismaArgs)
+    });
+  });
+});
+
