@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# @tractr/nestjs-core [1.1.0](https://github.com/tractr/stack/compare/@tractr/nestjs-core@1.0.2...@tractr/nestjs-core@1.1.0) (2021-03-12)
+
+
+### Features
+
+* add test to hapify templates models ([#3](https://github.com/tractr/stack/issues/3)) ([94cfa21](https://github.com/tractr/stack/commit/94cfa21e3b19770da715d48f86ec37462cb01d49))
+
 ## @tractr/nestjs-core [1.0.2](https://github.com/tractr/stack/compare/@tractr/nestjs-core@1.0.1...@tractr/nestjs-core@1.0.2) (2021-03-08)
 
 
