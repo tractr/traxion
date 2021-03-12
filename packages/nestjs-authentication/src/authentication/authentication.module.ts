@@ -9,7 +9,7 @@ import {
 } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 
-import { UserModelModule } from '../generated/user/common';
+import { UserModelModule, UserModelModule } from '../generated/user/common';
 import {
   AUTHENTICATION_OPTIONS,
   AuthenticationModuleOptionsFactory,
@@ -95,45 +95,3 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
     };
   }
 }
-
-// const {
-//   models,
-//   jwtModuleAsyncOptions,
-//   passportModuleOptions,
-//   ...options
-// }: AuthenticationModuleOptions = {
-//   models: UserModelModule,
-//   authenticationOptions: {},
-//   jwtModuleAsyncOptions: {
-//     useClass: JwtConfigService,
-//   },
-//   passportModuleOptions: {
-//     useClass: PassportAuthOptionsFactory,
-//   },
-//   ...moduleOptions,
-// };
-
-// const passportModule = PassportModule.registerAsync(passportModuleOptions);
-// const jwtModule = JwtModule.registerAsync(jwtModuleAsyncOptions);
-// return {
-//   module: AuthenticationModule,
-//   imports: [
-//     DatabaseModule,
-//     LogModule,
-//     jwtModule,
-//     passportModule,
-//     models.register(options),
-//   ],
-//   exports: [AuthenticationService, JwtStrategy, LocalStrategy],
-//   providers: [
-//     { provide: APP_GUARD, useClass: JwtAuthGuard },
-//     AuthenticationService,
-//     ...(jwtModule.providers ?? []),
-//     ...(passportModule.providers ?? []),
-//     StrategyOptionsService,
-//     JwtStrategy,
-//     LocalStrategy,
-//     UserCustomService,
-//   ],
-//   controllers: [LoginController],
-// };

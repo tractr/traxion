@@ -69,9 +69,11 @@
     "@nestjs/testing": "^7.6.14",
     "@tractr/hapify-templates-nestjs-models": "1.1.1",
     "@tractr/hapify-templates-prisma": "1.1.0",
+    "@tractr/nestjs-testing": "^1.1.0",
     "@types/bcrypt": "^3.0.0",
     "@types/passport-jwt": "^3.0.5",
-    "@types/passport-local": "^1.0.33"
+    "@types/passport-local": "^1.0.33",
+    "faker": "^5.4.0"
   },
   "peerDependencies": {
     "@prisma/client": "^2.18.0"
