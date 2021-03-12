@@ -15,12 +15,12 @@ COPY ./lerna.json .
 COPY ./hapify-models.json .
 COPY ${app}/hapify ${app}/hapify
 COPY ${app}/prisma ${app}/prisma
+COPY ${app}/mock ${app}/mock
 COPY ${app}/.hapifyrc.js ${app}
 COPY ${app}/nest-cli.json ${app}
 COPY ${app}/package.json ${app}
 COPY ${app}/tsconfig.json ${app}
 COPY ${app}/tsconfig.build.json ${app}
-COPY ${app}/prisma ${app}
 
 # ---- Production Dependencies ----
 FROM base AS dependencies.prod

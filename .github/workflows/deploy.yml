@@ -34,7 +34,7 @@ jobs:
       - name: Run npm build
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run build -- --scope '@tractr/*'
+        run: npm run build
       - name: Relase npm packages
         if: success()
         env:
@@ -61,11 +61,18 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           registry-url: https://npm.pkg.github.com
-      - name: Get apps/${{ matrix.app }} package.json version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@master
+      - uses: actions/cache@v2
         with:
-          path: apps/${{ matrix.app }}
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm ci --prefer-offline --no-audit --progress=false
+      - name: Run npm build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run build
       - name: Cache Docker layers
         uses: actions/cache@v2
         with:
@@ -80,7 +87,6 @@ jobs:
           images: ghcr.io/${{ matrix.scope }}/${{ matrix.app }}
           tag-sha: true
           tag-latest: true
-          tag-custom: ${{ steps.package-version.outputs.current-version}}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
