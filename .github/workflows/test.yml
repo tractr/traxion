@@ -5,21 +5,14 @@ on:
 
 jobs:
   test:
-    strategy:
-      matrix:
-        node: [15.x]
-        os: [ubuntu-latest]
-        scope: [tractr]
-    name:
-      install on node ${{ matrix.node }} and ${{ matrix.os }} at ${{
-      matrix.scope }}
-    runs-on: ${{ matrix.os }}
+    name: test on node 15.x and ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use node.js ${{ matrix.node }}
+      - name: Use node.js 15.x
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 15.x
           registry-url: https://npm.pkg.github.com
       - uses: actions/cache@v2
         with:

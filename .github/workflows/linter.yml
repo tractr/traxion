@@ -15,12 +15,7 @@ name: Lint Code Base
 # Start the job on all push #
 #############################
 on:
-  push:
-    branches-ignore: [master]
-    # Remove the line above to run when pushing to master
-
   pull_request:
-    branches: [master]
 
 ###############
 # Set the Job #
@@ -87,4 +82,10 @@ jobs:
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: true
+          IGNORE_GITIGNORED_FILES: true
+
+          # Javascript files
           JAVASCRIPT_DEFAULT_STYLE: prettier
+
+          # Only use hadolint and not dockerlint (multi-staged is not working)
+          VALIDATE_DOCKERFILE: false
