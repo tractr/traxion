@@ -2,7 +2,6 @@ module.exports = {
   name: 'Hapify templates for Nestjs models common features',
   description:
     'Generate the common modules and services for models of a Nestjs application',
-  project: '../../hapify-models.json',
   defaultFields: [
     {
       name: 'id',

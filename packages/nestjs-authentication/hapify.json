@@ -114,6 +114,5 @@
       "engine": "hpf",
       "input": "all"
     }
-  ],
-  "test": "test"
+  ]
 }
