@@ -41,53 +41,11 @@ jobs:
           CI: true
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run:
-          npx multi-semantic-release --sequential-init --ignore-packages=apps/*
-
-  apps-release:
-    if: success()
-    needs: [npm-release]
-    strategy:
-      matrix:
-        node: [15.x]
-        os: [ubuntu-latest]
-    name: apps release on node ${{ matrix.node }} and ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-      - name: use node.js ${{ matrix.node }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
-          registry-url: https://npm.pkg.github.com
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Run npm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci --prefer-offline --no-audit --progress=false
-      - name: Run npm build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run build -- --scope '@app/*'
-      - name: Relase npm packages
-        if: success()
-        env:
-          CI: true
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run:
-          npx multi-semantic-release --sequential-init
-          --ignore-packages=packages/*
+        run: npx multi-semantic-release --sequential-init
 
   docker-release:
     if: success()
-    needs: [apps-release]
+    needs: [npm-release]
     strategy:
       matrix:
         app: [backend-starter]

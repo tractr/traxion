@@ -12,10 +12,10 @@ WORKDIR /root/tractr
 COPY ./package.json .
 COPY ./tsconfig.json .
 COPY ./lerna.json .
+COPY ./hapify-models.json .
 COPY ${app}/hapify ${app}/hapify
 COPY ${app}/prisma ${app}/prisma
 COPY ${app}/.hapifyrc.js ${app}
-COPY ${app}/hapify-models.json ${app}
 COPY ${app}/nest-cli.json ${app}
 COPY ${app}/package.json ${app}
 COPY ${app}/tsconfig.json ${app}
