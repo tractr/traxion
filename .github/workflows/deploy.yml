@@ -15,6 +15,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
       - name: use node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
@@ -52,6 +55,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
       - name: use node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
