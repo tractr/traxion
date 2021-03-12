@@ -1,19 +1,81 @@
-// import { createTestContext } from '@tractr/nestjs-testing';
-// import request from 'supertest';
-    
-// import { AppModule } from '../../../../src/app.module';
-// import { mock<<Model pascal>>CreateBodyDtoFactory } from '../mocks';
-    
-// const context = createTestContext(AppModule);
-    
-// describe('Create a <<Model lower>> (e2e)', () => {
-    
-//  describe('Payload validation (e2e)', () => {
-//    it('should accept a valid payload', () => {
-//      const { app } = context;
-//      const body = mock<<Model pascal>>CreateBodyDtoFactory();
-//      return request(app.getHttpServer()).post('/<<Model kebab>>').send(body).expect(201);
-//    });
-//  });
-// });
+import { mock<<Model pascal>>CreateBodyDtoFactory } from '@generated-mock/<<Model kebab>>/rest';
+import { <<Model pascal>>RestModule } from '@generated/<<Model kebab>>/rest';
+import { Module } from '@nestjs/common';
+import { CoreModule } from '@tractr/nestjs-core';
+import { DatabaseModule } from '@tractr/nestjs-database';
+import { createTestContext } from '@tractr/nestjs-testing';
+import request from 'supertest';
+<<if Fields entity>>
+import {
+  <<for Fields entity field>>
+  <<field.model pascal>>,
+  <<endfor>>
+} from '@prisma/client';
+<<endif>>
+ 
+@Module({
+  imports: [
+    <<Model pascal>>RestModule.register(),
+    DatabaseModule,
+    CoreModule,
+  ],
+})
+class TestModule {};
+  
+const context = createTestContext(TestModule);
+  
+<<if Fields entity>>
+
+<<for Fields entity field>>
+let <<field camel>>: <<field.model pascal>><<if field manyMany>>[]<<endif>>;
+<<endfor>>
+  
+beforeEach(async () => {
+  const { prisma } = context;
+<<for Fields entity field>>
+  <<if field oneOne or oneMany>>
+  <<field camel>> = (await prisma.<<field.model camel>>.findFirst()) as <<field.model pascal>>;
+  <<else>>
+  <<field camel>> = (await prisma.<<field.model camel>>.findMany({take: 3})) as <<field.model pascal>>[];
+  <<endif>>
+<<endfor>>
+
+});
+<<endif>>
+ 
+describe('Create a <<Model lower>> (e2e)', () => {
+ 
+ describe('Payload validation', () => {
+   it('should accept a valid payload', () => {
+     const { app } = context;
+     const bodyDto = mock<<Model pascal>>CreateBodyDtoFactory(
+    <<if Fields entity>>
+    {
+      <<for Fields entity field>>
+        <<if field oneOne or oneMany>>
+    <<field camel>>: <<field camel>>.id,
+        <<else>>
+    <<field camel>>: <<field camel>>.map(({id}) => id),
+        <<endif>>
+      <<endfor>>
+    }
+    <<endif>>
+     );
+     return request(app.getHttpServer()).post('/<<Model kebab>>').send(bodyDto)
+     .then(({status, body}) => {
+      expect(status).toEqual(201);
+      // Validate response body
+      <<for Fields not manyMany field>>
+        <<if field internal>>
+      expect(body.<<field camel>>).toBeDefined()
+        <<elseif field entity>>
+      expect(body.<<field camel>>Id).toEqual(bodyDto.<<field camel>>)
+        <<else>>
+      expect(body.<<field camel>>).toEqual(bodyDto.<<field camel>>)
+        <<endif>>
+      <<endfor>>
+     });
+   });
+ });
+});
 

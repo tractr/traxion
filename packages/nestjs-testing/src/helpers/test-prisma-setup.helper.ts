@@ -2,6 +2,7 @@ import { execSync } from 'child_process';
 
 import { DynamicModule, INestApplication, Type } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
 import { nanoid } from 'nanoid';
@@ -9,6 +10,7 @@ import { Client } from 'pg';
 
 export interface TestContext {
   app: INestApplication;
+  prisma: PrismaClient;
 }
 
 export interface TestContextOptions {
@@ -59,6 +61,16 @@ export function createTestContext(
       },
     });
 
+    // Seed the database
+    execSync(`npx prisma db seed --preview-feature`, {
+      env: {
+        ...process.env,
+        [options.databaseUrlEnv]: databaseUrl,
+      },
+    });
+
+    const prisma = new PrismaClient();
+
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -68,6 +80,7 @@ export function createTestContext(
 
     Object.assign(ctx, {
       app,
+      prisma,
     });
   });
 

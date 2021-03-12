@@ -5,5 +5,9 @@
   "testRegex": ".e2e-spec.ts$",
   "transform": {
     "^.+\\.ts$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "@generated/(.*)": "<rootDir>/../src/generated/$1",
+    "@generated-mock/(.*)": "<rootDir>/../mock/generated/$1"
   }
 }
