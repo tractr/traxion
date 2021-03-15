@@ -22,4 +22,11 @@ async function seed() {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-seed();
+seed()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

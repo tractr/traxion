@@ -39,59 +39,14 @@ import { APP_PIPE } from '@nestjs/core';
 })
 class TestModule {};
   
-const context = createTestContext(TestModule);
-  
-<<if Fields entity>>
-
-<<for Fields entity field>>
-let <<field camel>>: <<field.model pascal>><<if field manyMany>>[]<<endif>>;
-<<endfor>>
-  
-beforeEach(async () => {
-  const { prisma } = context;
-<<for Fields entity field>>
-  <<if field oneOne or oneMany>>
-  <<field camel>> = (await prisma.<<field.model camel>>.findFirst()) as <<field.model pascal>>;
-  <<else>>
-  <<field camel>> = (await prisma.<<field.model camel>>.findMany({take: 3})) as <<field.model pascal>>[];
-  <<endif>>
-<<endfor>>
-
+const context = createTestContext(TestModule, {
+  migrate: false,
+  seed: false,
+  prisma: false,
 });
-<<endif>>
  
 describe('Create a <<Model lower>> (e2e)', () => {
 
-  it('should accept a valid payload', () => {
-    const { app } = context;
-    const bodyDto = mock<<Model pascal>>CreateBodyDtoFactory(
-    <<if Fields entity>>
-    {
-      <<for Fields entity field>>
-        <<if field oneOne or oneMany>>
-      <<field camel>>: <<field camel>>.id,
-        <<else>>
-      <<field camel>>: <<field camel>>.map(({id}) => id),
-        <<endif>>
-      <<endfor>>
-    }
-    <<endif>>
-    );
-   return request(app.getHttpServer()).post('/<<Model kebab>>').send(bodyDto)
-   .then(({status, body}) => {
-    expect(status).toEqual(201);
-    // Validate response body
-    <<for Fields not manyMany field>>
-      <<if field internal>>
-    expect(body.<<field camel>>).toBeDefined()
-      <<elseif field entity>>
-    expect(body.<<field camel>>Id).toEqual(bodyDto.<<field camel>>)
-      <<else>>
-    expect(body.<<field camel>>).toEqual(bodyDto.<<field camel>>)
-      <<endif>>
-    <<endfor>>
-   });
-  });
  
   describe('Payload validation', () => {
   <<for Fields not internal field>>
@@ -101,8 +56,7 @@ describe('Create a <<Model lower>> (e2e)', () => {
         <<field camel>>: <<=getInvalidFieldValue(field)>>,
       } as unknown) as Partial < <<Model pascal>>CreateBodyDto>);
       return request(app.getHttpServer()).post('/<<Model kebab>>').send(bodyDto)
-        .then(({status, body}) => {
-          console.log(body);
+        .then(({status}) => {
           expect(status).toEqual(400);
         });
     })
@@ -121,7 +75,7 @@ function getInvalidTypeValue(f) {
   if (f.subtype === 'url') return `'https://invalidurl???'`;
   if (f.type === 'number') return `'invalid number'`;
   if (f.type === 'datetime') return `'invalid datetime'`;
-  if (f.type === 'string') return `[]`;
+  if (f.type === 'string') return `['invalid string']`;
 }
 
 function getInvalidFieldValue(f) {

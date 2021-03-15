@@ -1,0 +1,83 @@
+import { 
+<<if Fields entity>>
+  mock<<Model pascal>>FindUniqueQueryDtoFactory,
+<<endif>>
+  mock<<Model pascal>>FindUniqueParamsDtoFactory,
+} from '@generated-mock/<<Model kebab>>/rest';
+import { 
+  <<Model pascal>>RestModule,
+<<if Fields entity>>
+  <<Model pascal>>FindUniqueQueryDto,
+<<endif>>
+} from '@generated/<<Model kebab>>/rest';
+import { Module, ValidationPipe } from '@nestjs/common';
+import { CoreModule } from '@tractr/nestjs-core';
+import { DatabaseModule } from '@tractr/nestjs-database';
+import { createTestContext } from '@tractr/nestjs-testing';
+import request from 'supertest';
+import {
+  <<Model pascal>>,
+} from '@prisma/client';
+import { APP_PIPE } from '@nestjs/core';
+ 
+@Module({
+  imports: [
+    <<Model pascal>>RestModule.register(),
+    DatabaseModule,
+    CoreModule,
+  ],
+  providers: [
+    {
+      provide: APP_PIPE,
+      useValue: new ValidationPipe({
+        whitelist: true,
+        forbidNonWhitelisted: true,
+        transform: true,
+        transformOptions: {
+          enableImplicitConversion: true,
+        },
+      }),
+    },
+  ],
+})
+class TestModule {};
+  
+const context = createTestContext(TestModule);
+ 
+describe('Find a unique <<Model lower>> (e2e)', () => {
+
+  describe('Payload validation', () => {
+    it('should not accept invalid id param', async () => {
+      const { app } = context;
+      const paramsDto = mock<<Model pascal>>FindUniqueParamsDtoFactory({ id: 'invalid uuid' });
+      <<if Fields entity>>
+      const queryDto = mock<<Model pascal>>FindUniqueQueryDtoFactory();
+      <<endif>>
+      return request(app.getHttpServer()).get(`/<<Model kebab>>/${paramsDto.id}`)
+      <<if Fields entity>>
+        .query(queryDto)
+      <<endif>>
+        .then(({status}) => {
+          expect(status).toEqual(400);
+        });
+    });
+  
+    <<if Fields entity>>
+    it('should not accept invalid populate query', async () => {
+      const { app } = context;
+      const paramsDto = mock<<Model pascal>>FindUniqueParamsDtoFactory();
+      const queryDto = mock<<Model pascal>>FindUniqueQueryDtoFactory(({ 
+        populate: ['invalid populate']
+      } as unknown) as Partial< <<Model pascal>>FindUniqueQueryDto>);
+      return request(app.getHttpServer()).get(`/<<Model kebab>>/${paramsDto.id}`)
+        .query(queryDto)
+        .then(({status}) => {
+          expect(status).toEqual(400);
+        });
+    });
+    <<endif>>
+  });
+});
+
+
+

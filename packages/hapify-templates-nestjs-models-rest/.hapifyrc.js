@@ -179,7 +179,25 @@ module.exports = {
       input: 'one',
     },
     {
-      path: 'test/generated/{kebab}/rest/e2e/{kebab}-create.e2e-spec.ts',
+      path: 'test/generated/{kebab}/rest/e2e/create/{kebab}-create.e2e-spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'test/generated/{kebab}/rest/e2e/create/{kebab}-create-validation.e2e-spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'test/generated/{kebab}/rest/e2e/find-unique/{kebab}-find-unique.e2e-spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'test/generated/{kebab}/rest/e2e/find-unique/{kebab}-find-unique-validation.e2e-spec.ts',
       engine: 'hpf',
       input: 'one',
     },

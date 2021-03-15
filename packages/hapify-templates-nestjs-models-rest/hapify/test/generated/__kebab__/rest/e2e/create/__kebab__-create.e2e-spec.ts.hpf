@@ -1,8 +1,5 @@
 import { mock<<Model pascal>>CreateBodyDtoFactory } from '@generated-mock/<<Model kebab>>/rest';
-import { 
-  <<Model pascal>>RestModule,
-  <<Model pascal>>CreateBodyDto,
-} from '@generated/<<Model kebab>>/rest';
+import { <<Model pascal>>RestModule, } from '@generated/<<Model kebab>>/rest';
 import { Module, ValidationPipe } from '@nestjs/common';
 import { CoreModule } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
@@ -51,9 +48,9 @@ beforeEach(async () => {
   const { prisma } = context;
 <<for Fields entity field>>
   <<if field oneOne or oneMany>>
-  <<field camel>> = (await prisma.<<field.model camel>>.findFirst()) as <<field.model pascal>>;
+  <<field camel>> = (await prisma!.<<field.model camel>>.findFirst()) as <<field.model pascal>>;
   <<else>>
-  <<field camel>> = (await prisma.<<field.model camel>>.findMany({take: 3})) as <<field.model pascal>>[];
+  <<field camel>> = (await prisma!.<<field.model camel>>.findMany({take: 3})) as <<field.model pascal>>[];
   <<endif>>
 <<endfor>>
 
@@ -62,7 +59,7 @@ beforeEach(async () => {
  
 describe('Create a <<Model lower>> (e2e)', () => {
 
-  it('should accept a valid payload', () => {
+  it('should accept a valid payload', async () => {
     const { app } = context;
     const bodyDto = mock<<Model pascal>>CreateBodyDtoFactory(
     <<if Fields entity>>
@@ -92,42 +89,5 @@ describe('Create a <<Model lower>> (e2e)', () => {
     <<endfor>>
    });
   });
- 
-  describe('Payload validation', () => {
-  <<for Fields not internal field>>
-    it('should not accept payload with invalid <<field lower>>', async () => {
-      const { app } = context;
-      const bodyDto = mock<<Model pascal>>CreateBodyDtoFactory(({
-        <<field camel>>: <<=getInvalidFieldValue(field)>>,
-      } as unknown) as Partial < <<Model pascal>>CreateBodyDto>);
-      return request(app.getHttpServer()).post('/<<Model kebab>>').send(bodyDto)
-        .then(({status, body}) => {
-          console.log(body);
-          expect(status).toEqual(400);
-        });
-    })
-      
-  <<endfor>>
-  });
 });
-
-<<<
-function getInvalidTypeValue(f) {
-  if (f.type === 'boolean') return `'invalid boolean'`;
-  if (f.type === 'entity') return `'invalid uuid'`;
-  if (f.subtype === 'enum') return `'invalid enum'`;
-  if (f.subtype === 'email') return `'invalid@email'`;
-  if (f.subtype === 'password') return `'invalidpassword'`;
-  if (f.subtype === 'url') return `'https://invalidurl???'`;
-  if (f.type === 'number') return `'invalid number'`;
-  if (f.type === 'datetime') return `'invalid datetime'`;
-  if (f.type === 'string') return `[]`;
-}
-
-function getInvalidFieldValue(f) {
-  if (f.multiple) return `[...Array(3)].fill(${getInvalidTypeValue(f)})`;
-  else return getInvalidTypeValue(f);
-}
->>>
-
 

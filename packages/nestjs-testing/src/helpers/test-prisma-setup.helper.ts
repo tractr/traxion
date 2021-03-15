@@ -10,11 +10,14 @@ import { Client } from 'pg';
 
 export interface TestContext {
   app: INestApplication;
-  prisma: PrismaClient;
+  prisma?: PrismaClient;
 }
 
 export interface TestContextOptions {
   databaseUrlEnv: string;
+  prisma: boolean;
+  migrate: boolean;
+  seed: boolean;
 }
 
 export function createUrlDatabase(schema: string): string {
@@ -33,11 +36,20 @@ export function createUrlDatabase(schema: string): string {
 
 export function createTestContext(
   AppModule: Type | DynamicModule,
-  options: TestContextOptions = { databaseUrlEnv: 'TRACTR_DATABASE_URL' },
+  testContextOptions: Partial<TestContextOptions> = {},
 ): TestContext {
+  const options: TestContextOptions = {
+    databaseUrlEnv: 'TRACTR_DATABASE_URL',
+    prisma: true,
+    migrate: true,
+    seed: true,
+    ...testContextOptions,
+  };
+
   const ctx = {} as TestContext;
 
   let app: INestApplication;
+  let prisma: PrismaClient;
   let schema: string;
   let databaseUrl: string;
 
@@ -54,22 +66,29 @@ export function createTestContext(
     process.env[options.databaseUrlEnv] = databaseUrl;
 
     // Run the migrations to ensure our schema has the required structure
-    execSync(`npx prisma db push --preview-feature`, {
-      env: {
-        ...process.env,
-        [options.databaseUrlEnv]: databaseUrl,
-      },
-    });
+    if (options.migrate) {
+      execSync(`npx prisma db push --preview-feature`, {
+        env: {
+          ...process.env,
+          [options.databaseUrlEnv]: databaseUrl,
+        },
+      });
+    }
 
     // Seed the database
-    execSync(`npx prisma db seed --preview-feature`, {
-      env: {
-        ...process.env,
-        [options.databaseUrlEnv]: databaseUrl,
-      },
-    });
+    if (options.seed) {
+      execSync(`npx prisma db seed --preview-feature`, {
+        env: {
+          ...process.env,
+          [options.databaseUrlEnv]: databaseUrl,
+        },
+      });
+    }
 
-    const prisma = new PrismaClient();
+    if (options.prisma) {
+      prisma = new PrismaClient();
+      await prisma.$connect();
+    }
 
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
@@ -93,6 +112,9 @@ export function createTestContext(
       await client.connect();
       await client.query(`DROP SCHEMA IF EXISTS "${schema}" CASCADE`);
       await client.end();
+      if (options.prisma) {
+        await prisma.$disconnect();
+      }
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);
