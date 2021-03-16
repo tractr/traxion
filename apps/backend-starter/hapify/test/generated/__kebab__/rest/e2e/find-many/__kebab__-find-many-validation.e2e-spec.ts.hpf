@@ -1,20 +1,16 @@
-import { mock<<Model pascal>>CreateBodyDtoFactory } from '@generated-mock/<<Model kebab>>/rest';
-import { 
-  <<Model pascal>>RestModule,
-  <<Model pascal>>CreateBodyDto,
-} from '@generated/<<Model kebab>>/rest';
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+import { <<Model pascal>>RestModule, } from '@generated/<<Model kebab>>/rest';
 import { Module, ValidationPipe } from '@nestjs/common';
 import { CoreModule } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
-import { createTestContext } from '@tractr/nestjs-testing';
+import { createTestContext, TestContext } from '@tractr/nestjs-testing';
 import request from 'supertest';
-<<if Fields entity>>
 import {
-  <<for Fields entity field>>
-  <<field.model pascal>>,
+  <<Model pascal>>,
+  <<for Fields manyMany field>>
+  <<field.model pascal>>
   <<endfor>>
 } from '@prisma/client';
-<<endif>>
 import { APP_PIPE } from '@nestjs/core';
  
 @Module({
@@ -44,25 +40,21 @@ const context = createTestContext(TestModule, {
   seed: false,
   prisma: false,
 });
- 
-describe('Create a <<Model lower>> (e2e)', () => {
-
- 
-  describe('Payload validation', () => {
-  <<for Fields not internal field>>
-    it('should not accept payload with invalid <<field lower>>', () => {
-      const { app } = context;
-      const bodyDto = mock<<Model pascal>>CreateBodyDtoFactory(({
-        <<field camel>>: <<=getInvalidFieldValue(field)>>,
-      } as unknown) as Partial < <<Model pascal>>CreateBodyDto>);
-      return request(app.getHttpServer()).post('/<<Model kebab>>').send(bodyDto)
-        .then(({status}) => {
-          expect(status).toEqual(400);
-        });
-    })
-      
-  <<endfor>>
-  });
+  
+describe('Find <<Model lower>> (e2e)', () => {
+   
+<<for Fields searchable field>>
+  it('should not accept payload with invalid <<field lower>>', () => {
+    const { app } = context;
+    const queryDto = { <<field camel>>: <<=getInvalidFieldValue(field)>> };
+    return request(app.getHttpServer()).get('/<<Model kebab>>')
+      .query(queryDto)
+      .then(({status, body}) => {
+        expect(status).toEqual(400);
+      });
+  })
+    
+<<endfor>>
 });
 
 <<<
@@ -83,5 +75,3 @@ function getInvalidFieldValue(f) {
   else return getInvalidTypeValue(f);
 }
 >>>
-
-

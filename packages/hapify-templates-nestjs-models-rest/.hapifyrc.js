@@ -201,5 +201,17 @@ module.exports = {
       engine: 'hpf',
       input: 'one',
     },
+    {
+      path:
+        'test/generated/{kebab}/rest/e2e/find-many/{kebab}-find-many.e2e-spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'test/generated/{kebab}/rest/e2e/find-many/{kebab}-find-many-validation.e2e-spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
   ],
 };

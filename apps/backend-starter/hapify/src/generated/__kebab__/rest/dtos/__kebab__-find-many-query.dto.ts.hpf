@@ -26,7 +26,7 @@ import {
   IsUrl, 
   <<endif>>
 
-  <<if Fields entity and searchable>>
+  <<if Fields (entity or primary) and searchable>>
   IsUUID, 
   <<endif>>
    
@@ -52,7 +52,7 @@ export class <<Model pascal>>FindManyQueryDto {
   @IsEmail({}, <<=listModifier(field)>>) 
   <<endif>>
 
-  <<if field entity>>
+  <<if field entity or primary>>
   @IsUUID("all", <<=listModifier(field)>>) 
   <<endif>>
 

@@ -47,7 +47,7 @@ const context = createTestContext(TestModule);
 describe('Find a unique <<Model lower>> (e2e)', () => {
 
   describe('Payload validation', () => {
-    it('should not accept invalid id param', async () => {
+    it('should not accept invalid id param', () => {
       const { app } = context;
       const paramsDto = mock<<Model pascal>>FindUniqueParamsDtoFactory({ id: 'invalid uuid' });
       <<if Fields entity>>
@@ -63,7 +63,7 @@ describe('Find a unique <<Model lower>> (e2e)', () => {
     });
   
     <<if Fields entity>>
-    it('should not accept invalid populate query', async () => {
+    it('should not accept invalid populate query', () => {
       const { app } = context;
       const paramsDto = mock<<Model pascal>>FindUniqueParamsDtoFactory();
       const queryDto = mock<<Model pascal>>FindUniqueQueryDtoFactory(({ 

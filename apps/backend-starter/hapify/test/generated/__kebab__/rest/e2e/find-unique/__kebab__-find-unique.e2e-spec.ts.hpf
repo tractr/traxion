@@ -48,7 +48,7 @@ beforeEach(async () => {
  
 describe('Find a unique <<Model lower>> (e2e)', () => {
 
-  it('should accept a valid payload', async () => {
+  it('should accept a valid payload', () => {
     const { app } = context;
     const paramsDto = mock<<Model pascal>>FindUniqueParamsDtoFactory({ id: <<Model camel>>.id });
     <<if Fields entity>>
@@ -76,5 +76,3 @@ describe('Find a unique <<Model lower>> (e2e)', () => {
    });
   });
 });
-
-

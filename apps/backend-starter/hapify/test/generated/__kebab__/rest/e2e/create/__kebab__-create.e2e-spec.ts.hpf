@@ -59,7 +59,7 @@ beforeEach(async () => {
  
 describe('Create a <<Model lower>> (e2e)', () => {
 
-  it('should accept a valid payload', async () => {
+  it('should accept a valid payload', () => {
     const { app } = context;
     const bodyDto = mock<<Model pascal>>CreateBodyDtoFactory(
     <<if Fields entity>>

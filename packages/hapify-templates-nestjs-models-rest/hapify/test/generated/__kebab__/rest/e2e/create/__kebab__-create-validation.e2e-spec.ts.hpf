@@ -50,7 +50,7 @@ describe('Create a <<Model lower>> (e2e)', () => {
  
   describe('Payload validation', () => {
   <<for Fields not internal field>>
-    it('should not accept payload with invalid <<field lower>>', async () => {
+    it('should not accept payload with invalid <<field lower>>', () => {
       const { app } = context;
       const bodyDto = mock<<Model pascal>>CreateBodyDtoFactory(({
         <<field camel>>: <<=getInvalidFieldValue(field)>>,
