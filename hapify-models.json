@@ -19,6 +19,8 @@
           "type": "string",
           "properties": [
             "primary",
+            "searchable",
+            "sortable",
             "internal"
           ]
         },
@@ -65,6 +67,8 @@
           "type": "string",
           "properties": [
             "primary",
+            "searchable",
+            "sortable",
             "internal"
           ]
         },
@@ -122,6 +126,8 @@
           "type": "string",
           "properties": [
             "primary",
+            "searchable",
+            "sortable",
             "internal"
           ]
         },
@@ -169,6 +175,8 @@
           "type": "string",
           "properties": [
             "primary",
+            "searchable",
+            "sortable",
             "internal"
           ]
         },
@@ -227,6 +235,8 @@
           "type": "string",
           "properties": [
             "primary",
+            "searchable",
+            "sortable",
             "internal"
           ]
         },
@@ -258,6 +268,8 @@
           "type": "string",
           "properties": [
             "primary",
+            "searchable",
+            "sortable",
             "internal",
             "ownership"
           ]
@@ -334,6 +346,8 @@
           "type": "string",
           "properties": [
             "primary",
+            "searchable",
+            "sortable",
             "internal"
           ]
         },
