@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# @tractr/nestjs-authentication [1.2.0](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.1.0...@tractr/nestjs-authentication@1.2.0) (2021-03-19)
+
+
+### Features
+
+* add named relations feature to prisma schema templates ([#34](https://github.com/tractr/stack/issues/34)) ([b34aa84](https://github.com/tractr/stack/commit/b34aa8470bd9bce41795776ef6c963399d8c7df7))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-nestjs-models:** upgraded to 1.1.1
+* **@tractr/hapify-templates-prisma:** upgraded to 1.1.0
+
 # @tractr/nestjs-authentication [1.1.0](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.0.3...@tractr/nestjs-authentication@1.1.0) (2021-03-12)
 
 
