@@ -7,7 +7,6 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { User } from '@prisma/client';
 import { Request, Response } from 'express';
 
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
@@ -16,6 +15,8 @@ import { AccessTokenDto } from '../dtos';
 import { LocalAuthGuard } from '../guards';
 import { AuthenticationOptions } from '../interfaces';
 import { AuthenticationService } from '../services';
+
+import { User } from '@prisma/client';
 
 @Controller()
 export class LoginController {
