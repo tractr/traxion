@@ -8,7 +8,7 @@ import {
   <<Model constant>>_SERVICE,
   <<Model pascal>>DatabaseService,
   <<Model pascal>>Service,
-} from '@generated/<<Model camel>>/common';
+} from '@generated/<<Model kebab>>/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
    
