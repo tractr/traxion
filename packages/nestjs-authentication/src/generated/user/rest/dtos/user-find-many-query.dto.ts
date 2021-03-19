@@ -1,4 +1,3 @@
-import { Prisma, User } from '@prisma/client';
 import {
   IsBoolean,
   IsEmail,
@@ -9,6 +8,8 @@ import {
   IsString,
   Min,
 } from 'class-validator';
+
+import { Prisma, User } from '@prisma/client';
 
 export class UserFindManyQueryDto {
   @IsString()
