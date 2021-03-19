@@ -10,7 +10,6 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { User } from '@prisma/client';
 
 import { UserService } from '../../common';
 import { USER_SERVICE } from '../../common/user-model.constant';
@@ -27,6 +26,8 @@ import {
 } from '../dtos';
 import { UserRestDtoService } from '../services';
 import { USER_REST_DTO_SERVICE } from '../user-rest.constant';
+
+import { User } from '@prisma/client';
 
 @Controller(['user'])
 export class UserController {

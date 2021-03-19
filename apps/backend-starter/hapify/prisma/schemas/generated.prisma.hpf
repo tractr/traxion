@@ -5,12 +5,12 @@
     <<for model.fields field>>
         <<if field oneOne or oneMany>>
     // Relation: <<field lower>>
-    <<field camel>> <<field.model pascal>> @relation(fields: [<<field camel>><<=getReferencedEntityPrimary(field).names.pascal>>], references: [<<=getReferencedEntityPrimary(field).names.camel>>])
-    <<field camel>><<=getReferencedEntityPrimary(field).names.pascal>> <<=getReferencedEntityPrimaryType(field)>>
+    <<field camel>> <<field.model pascal>><<if field nullable>>?<<endif>> @relation("<<model pascal>>.<<field pascal>>To<<field.model pascal>>.<<model pascal>>As<<field pascal>>",fields: [<<field camel>><<=getReferencedEntityPrimary(field).names.pascal>>], references: [<<=getReferencedEntityPrimary(field).names.camel>>])
+    <<field camel>><<=getReferencedEntityPrimary(field).names.pascal>> <<=getReferencedEntityPrimaryType(field)>><<if field nullable>>?<<endif>>
         <<elseif field manyMany>>
     // Relation: <<field lower>>
     // <<field camel>> <<field pascal>>On<<model pascal>>[]
-    <<field camel>> <<field.model pascal>>[]
+    <<field camel>> <<field.model pascal>>[] @relation("<<model pascal>>.<<field pascal>>To<<field.model pascal>>.<<model pascal>>As<<field pascal>>")
         <<else>>
     <<field camel>> <<=prismaType(field, model)>> <<=primary(field)>> <<=unique(field)>>
         <<endif>>
@@ -19,11 +19,11 @@
     // referencedIn: <<ref lower>>
         <<for ref.fields field>>
             <<if field oneOne>>
-    <<ref camel>>As<<field pascal>> <<ref pascal>>?
+    <<ref camel>>As<<field pascal>> <<ref pascal>>? @relation("<<ref pascal>>.<<field pascal>>To<<model pascal>>.<<ref pascal>>As<<field pascal>>")
             <<elseif field oneMany>>
-    <<ref camel>>As<<field pascal>> <<ref pascal>>[]
+    <<ref camel>>As<<field pascal>> <<ref pascal>>[] @relation("<<ref pascal>>.<<field pascal>>To<<model pascal>>.<<ref pascal>>As<<field pascal>>")
             <<elseif field manyMany>>
-    <<ref camel>>As<<field pascal>> <<ref pascal>>[]
+    <<ref camel>>As<<field pascal>> <<ref pascal>>[] @relation("<<ref pascal>>.<<field pascal>>To<<model pascal>>.<<ref pascal>>As<<field pascal>>")
     //<<ref camel>>As<<field pascal>> <<field pascal>>On<<ref pascal>>[]
             <<endif>>
         <<endfor>>
@@ -114,3 +114,5 @@ function unique(f) {
   return f.unique ? "@unique": "";
 }
 >>>
+
+
