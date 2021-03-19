@@ -11,7 +11,6 @@ import {
   Query,
 } from '@nestjs/common';
 
-
 import { UserService } from '../../common';
 import { USER_SERVICE } from '../../common/user-model.constant';
 import {

@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-
 import { USER_DATABASE_SERVICE } from '../user-model.constant';
 import { UserDatabaseService } from './user-database.service';
 

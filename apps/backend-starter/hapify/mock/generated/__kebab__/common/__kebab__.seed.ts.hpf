@@ -2,7 +2,9 @@ import {
   PrismaClient,
   <<Model pascal>>,
   <<for Fields entity field>>
+    <<<if (field.model.names.pascal !== root.names.pascal) {>>>
   <<field.model pascal>>,
+    <<<}>>>
   <<endfor>>
 } from '@prisma/client';
 <<if Fields entity>>
@@ -39,7 +41,7 @@ export async function insert<<Model pascal>>s(prisma: PrismaClient, <<Model came
           <<for Fields entity field>>
             <<if field oneOne or oneMany>>
           <<field camel>>: {
-            connect: { id: <<field camel>>Id },
+            connect: { id: <<field camel>>Id as string},
           },
             <<else>>
           <<field camel>>: {

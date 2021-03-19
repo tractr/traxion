@@ -191,7 +191,9 @@
         },
         {
           "name": "parentQuestion",
-          "type": "string",
+          "type": "entity",
+          "subtype": "oneMany",
+          "value": "6894a782-2e83-cd6a-52cc-f62967165636",
           "properties": [
             "nullable"
           ]

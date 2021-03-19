@@ -14,7 +14,6 @@ import {
 
 import { Prisma } from '@prisma/client';
 
-
 @Injectable()
 export class UserRestDtoService {
   /**
