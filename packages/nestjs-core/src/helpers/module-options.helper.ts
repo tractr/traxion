@@ -11,7 +11,7 @@ export interface Options {
 }
 
 export interface OptionsFactory<O = Options> {
-  createOptions(): Promise<O> | O;
+  createOptions(defaultOptions: Record<string, unknown>): Promise<O> | O;
 }
 
 export interface AsyncOptions<
@@ -28,15 +28,18 @@ export interface AsyncOptions<
 export function ModuleOptionsHelper<
   O,
   F extends OptionsFactory<O> = OptionsFactory<O>
->() {
+>(moduleOptionsProvide: string, defaultOptions: Record<string, unknown> = {}) {
   return class ModuleOptions {
-    static moduleOptionsProvide = 'moduleOptions';
-
     static register(options: O): DynamicModule {
       return {
         module: this,
-        providers: [{ provide: this.moduleOptionsProvide, useValue: options }],
-        exports: [this.moduleOptionsProvide],
+        providers: [
+          {
+            provide: moduleOptionsProvide,
+            useValue: { ...defaultOptions, ...options },
+          },
+        ],
+        exports: [moduleOptionsProvide],
       };
     }
 
@@ -45,7 +48,7 @@ export function ModuleOptionsHelper<
         module: this,
         imports: options.imports || [],
         providers: this.createAsyncProviders(options),
-        exports: [this.moduleOptionsProvide],
+        exports: [moduleOptionsProvide],
       };
     }
 
@@ -70,15 +73,16 @@ export function ModuleOptionsHelper<
     static createAsyncOptionsProvider(options: AsyncOptions<O, F>): Provider {
       if (options.useFactory) {
         return {
-          provide: this.moduleOptionsProvide,
+          provide: moduleOptionsProvide,
           useFactory: options.useFactory,
           inject: options.inject || [],
         };
       }
 
       return {
-        provide: this.moduleOptionsProvide,
-        useFactory: async (optionsFactory: F) => optionsFactory.createOptions(),
+        provide: moduleOptionsProvide,
+        useFactory: async (optionsFactory: F) =>
+          optionsFactory.createOptions(defaultOptions),
         ...(options.useExisting ? { inject: [options.useExisting] } : {}),
         ...(options.useClass ? { inject: [options.useClass] } : {}),
       };

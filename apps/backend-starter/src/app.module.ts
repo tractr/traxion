@@ -1,36 +1,14 @@
 import { Module } from '@nestjs/common';
-import {
-  APP_FILTER,
-  // APP_GUARD
-} from '@nestjs/core';
-// import {
-//   AuthenticationModule,
-//   JwtAuthGuard,
-// } from '@tractr/nestjs-authentication';
+import { APP_FILTER } from '@nestjs/core';
 import { CoreModule, PrismaExceptionFilter } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 
-import {
-  AppController,
-  // UserCustomController
-} from './controllers';
-import {
-  ModelsModule,
-  // USER_SERVICE
-} from './generated';
-// import { UserCustomService } from './services';
+import { AppController } from './controllers';
+import { ModelsModule } from './generated';
 
 @Module({
-  imports: [
-    CoreModule,
-    DatabaseModule,
-    ModelsModule.register(),
-    // AuthenticationModule.register(undefined, overrides),
-  ],
+  imports: [CoreModule, DatabaseModule, ModelsModule.register()],
   controllers: [AppController],
-  providers: [
-    { provide: APP_FILTER, useClass: PrismaExceptionFilter },
-    // { provide: APP_GUARD, useClass: JwtAuthGuard }
-  ],
+  providers: [{ provide: APP_FILTER, useClass: PrismaExceptionFilter }],
 })
 export class AppModule {}
