@@ -21,9 +21,10 @@ import { AuthenticationService, StrategyOptionsService } from './services';
 import { JwtStrategy, LocalStrategy } from './strategies';
 
 @Module({})
-export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOptions>() {
-  static moduleOptionsProvide = AUTHENTICATION_MODULE_OPTIONS;
-
+export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOptions>(
+  AUTHENTICATION_MODULE_OPTIONS,
+  AUTHENTICATION_OPTIONS,
+) {
   static register(
     options: AuthenticationOptions = AUTHENTICATION_OPTIONS,
     overrides: ModuleOverrideMetadata = {},

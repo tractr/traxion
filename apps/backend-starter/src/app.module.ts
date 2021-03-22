@@ -3,10 +3,9 @@ import {
   APP_FILTER,
   // APP_GUARD
 } from '@nestjs/core';
-// import {
-//   AuthenticationModule,
+import // AuthenticationModule,
 //   JwtAuthGuard,
-// } from '@tractr/nestjs-authentication';
+'@tractr/nestjs-authentication';
 import { CoreModule, PrismaExceptionFilter } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 
@@ -25,7 +24,7 @@ import {
     CoreModule,
     DatabaseModule,
     ModelsModule.register(),
-    // AuthenticationModule.register(undefined, overrides),
+    // AuthenticationModule.register(),
   ],
   controllers: [AppController],
   providers: [
