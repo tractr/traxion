@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/nestjs-core [1.2.1](https://github.com/tractr/stack/compare/@tractr/nestjs-core@1.2.0...@tractr/nestjs-core@1.2.1) (2021-03-23)
+
+
+### Bug Fixes
+
+* update module-options helper types to be less strict ([#39](https://github.com/tractr/stack/issues/39)) ([4067eb2](https://github.com/tractr/stack/commit/4067eb2235ef8de6c25b8afd9c9aa691535f1f99))
+
 # @tractr/nestjs-core [1.2.0](https://github.com/tractr/stack/compare/@tractr/nestjs-core@1.1.0...@tractr/nestjs-core@1.2.0) (2021-03-22)
 
 
