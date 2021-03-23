@@ -20,7 +20,8 @@ export interface AsyncOptions<
 > extends Pick<ModuleMetadata, 'imports'> {
   useExisting?: Type<F>;
   useClass?: Type<F>;
-  useFactory?: (...args: unknown[]) => Promise<O> | O;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  useFactory?: (...args: any[]) => Promise<O> | O;
   inject?: FactoryProvider['inject'];
 }
 
