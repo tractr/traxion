@@ -1,0 +1,31 @@
+{
+  "name": "@tractr/hapify-template-rest-client",
+  "version": "0.0.1",
+  "description": "Template to generate a rest client with hapify",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "license": "UNLICENSED",
+  "author": "",
+  "main": "./dist/index.js",
+  "bin": {
+    "hpf-generate-config": "./index.js"
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc -p tsconfig.build.json",
+    "build:watch": "npm run build -- --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}
