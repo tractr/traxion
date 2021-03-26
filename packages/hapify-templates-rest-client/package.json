@@ -17,6 +17,7 @@
     "package.json"
   ],
   "scripts": {
+    "start": "node ./bin/index.js",
     "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.build.json",
     "build:watch": "npm run build -- --watch",
