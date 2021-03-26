@@ -1,15 +1,15 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-continue */
 
-import pkgDir from 'pkg-dir';
-import { join, extname } from 'path';
-import { readFile, pathExists, readJSON, writeJSON, copy } from 'fs-extra';
-import yaml from 'yaml';
-import deepmerge from 'deepmerge';
+import { extname, join } from 'path';
 
 import { IConfig, IConfigTemplate } from '@hapify/cli/dist/interface/Config';
-
 import debugFactory from 'debug';
+import deepmerge from 'deepmerge';
+import { copy, pathExists, readFile, readJSON, writeJSON } from 'fs-extra';
+import pkgDir from 'pkg-dir';
+import yaml from 'yaml';
+
 
 const debug = debugFactory('hpf-generate-config');
 
@@ -35,7 +35,7 @@ export interface HapifyConfig extends IConfig {
 }
 
 async function getHapifyConfigFromDirectory(
-  hapifyDirectory: string
+  hapifyDirectory: string,
 ): Promise<HapifyConfig | null> {
   for (const configFilename of configFilenamePriorityImportOrder) {
     const extension = extname(configFilename);
@@ -69,11 +69,13 @@ async function getHapifyConfigFromDirectory(
 
 function mergeHapifyConfigs(
   configX: HapifyConfig | null,
-  configY: HapifyConfig
+  configY: HapifyConfig,
 ): HapifyConfig {
   return deepmerge(configX || {}, configY, {
     customMerge: (key) => {
       if (key === 'extends') return (_, toKeep) => toKeep;
+      if (key === 'defaultFields') return (toKeep) => toKeep;
+
       return undefined;
     },
   });
@@ -81,7 +83,7 @@ function mergeHapifyConfigs(
 
 async function getHapifyConfig(
   hapifyDirectory: string = __dirname,
-  ignorePath: string[] = []
+  ignorePath: string[] = [],
 ): Promise<HapifyConfig | null> {
   const packageJsonDirectory = await pkgDir(hapifyDirectory);
 
@@ -123,11 +125,11 @@ async function getHapifyConfig(
 
   return configs
     .filter((config) => config !== null)
-    .concat(mainConfig)
     .reverse()
+    .concat(mainConfig)
     .reduce(
       (acc, config) => mergeHapifyConfigs(acc, config as HapifyConfig),
-      null
+      null,
     );
 }
 
@@ -157,9 +159,9 @@ async function getHapifyOptions(): Promise<void> {
           formatTemplatePath(template.inputPath as string, template.engine),
           formatTemplatePath(
             `${join(packageJsonDirectory || '', 'hapify', template.path)}`,
-            template.engine
-          )
-        )
+            template.engine,
+          ),
+        ),
       );
     });
     await Promise.all(promises);
