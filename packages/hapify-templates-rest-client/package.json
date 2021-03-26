@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "class-transformer": "^0.4.0",
-    "class-validator": "^0.13.0"
+    "class-validator": "^0.13.0",
+    "rxjs": "^6.6.6"
   },
   "devDependencies": {},
   "publishConfig": {
