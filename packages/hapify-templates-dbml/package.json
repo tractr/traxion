@@ -1,0 +1,24 @@
+{
+  "name": "@tractr/hapify-templates-dbml",
+  "version": "1.0.0",
+  "description": "Generate DBML schema",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "license": "UNLICENSED",
+  "author": "",
+  "main": "./index.js",
+  "files": [
+    "hapify",
+    ".hapifyrc.js",
+    "index.js"
+  ],
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}
