@@ -8,7 +8,7 @@ import request from 'supertest';
 import {
   <<Model pascal>>,
   <<for Fields manyMany field>>
-  <<field.model pascal>>
+  <<field.model pascal>>,
   <<endfor>>
 } from '@prisma/client';
 import { APP_PIPE } from '@nestjs/core';
