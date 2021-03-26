@@ -1,0 +1,13 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": "\\.spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "@generated/(.*)": "<rootDir>/../src/generated/$1",
+    "@generated-mock/(.*)": "<rootDir>/../mock/generated/$1"
+  }
+}

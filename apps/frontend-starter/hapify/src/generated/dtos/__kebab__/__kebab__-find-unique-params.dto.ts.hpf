@@ -1,0 +1,23 @@
+import {
+<<if Fields primary and string>>
+  IsString,
+  IsUUID,
+<<elseif Fields primary and number>>
+  IsInt,
+  IsNumber,
+<<endif>>
+} from 'class-validator';
+  
+export class <<Model pascal>>FindUniqueParamsDto {
+<<for Fields primary primaryField>>
+  <<if primaryField string>>
+  @IsString()
+  @IsUUID()
+  <<primaryField camel>>!: string;
+  <<elseif primaryField number>>
+  @IsNumber()
+  @IsInt()
+  <<primaryField camel>>!: number;
+  <<endif>>
+<<endfor>>
+}

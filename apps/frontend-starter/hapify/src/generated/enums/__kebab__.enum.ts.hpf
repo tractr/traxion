@@ -1,0 +1,6 @@
+<<for Fields enum field>>
+export type <<model pascal>><<field pascal>> = 
+   <<for field.enum enumValue>>
+ | '<<enumValue constant>>'
+   <<endfor>>
+<<endfor>>

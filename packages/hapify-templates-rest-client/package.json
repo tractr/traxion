@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/hapify-template-rest-client",
+  "name": "@tractr/hapify-templates-rest-client",
   "version": "0.0.1",
   "description": "Template to generate a rest client with hapify",
   "repository": {
@@ -20,7 +20,10 @@
     "build:watch": "npm run build -- --watch",
     "prepublishOnly": "npm run build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.0"
+  },
   "devDependencies": {},
   "publishConfig": {
     "access": "restricted",
