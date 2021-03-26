@@ -14,16 +14,17 @@
     "package.json"
   ],
   "scripts": {
-    "start": "node ./bin/index.js",
     "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.build.json",
     "build:watch": "npm run build -- --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "start": "ts-node index.ts"
   },
   "dependencies": {
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.0",
-    "rxjs": "^6.6.6"
+    "rxjs": "^6.6.6",
+    "ts-node": "^9.1.1"
   },
   "devDependencies": {},
   "publishConfig": {
