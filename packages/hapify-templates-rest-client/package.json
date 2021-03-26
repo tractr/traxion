@@ -9,9 +9,6 @@
   "license": "UNLICENSED",
   "author": "",
   "main": "./dist/index.js",
-  "bin": {
-    "hpf-generate-config": "./index.js"
-  },
   "files": [
     "dist",
     "package.json"
