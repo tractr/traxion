@@ -21,7 +21,7 @@ export interface AsyncOptions<
   useExisting?: Type<F>;
   useClass?: Type<F>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  useFactory?: (...args: any[]) => Promise<O> | O;
+  useFactory?: (...args: any[]) => Promise<O | undefined> | O | undefined;
   inject?: FactoryProvider['inject'];
 }
 
