@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/nestjs-core [1.2.2](https://github.com/tractr/stack/compare/@tractr/nestjs-core@1.2.1...@tractr/nestjs-core@1.2.2) (2021-03-29)
+
+
+### Bug Fixes
+
+* make the useFactory interface accept undefined type ([#46](https://github.com/tractr/stack/issues/46)) ([ddc8103](https://github.com/tractr/stack/commit/ddc8103415b2f54d63e3f0dfa32d89ab1561b56d))
+
 ## @tractr/nestjs-core [1.2.1](https://github.com/tractr/stack/compare/@tractr/nestjs-core@1.2.0...@tractr/nestjs-core@1.2.1) (2021-03-23)
 
 
