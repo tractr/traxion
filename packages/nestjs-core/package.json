@@ -20,7 +20,10 @@
     "build:watch": "npm run build -- --watch",
     "prepublishOnly": "npm run build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1"
+  },
   "devDependencies": {
     "ts-essentials": "^7.0.1"
   },
