@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## backend-starter [1.2.3](https://github.com/tractr/stack/compare/backend-starter@1.2.2...backend-starter@1.2.3) (2021-03-29)
+
+
+
+
+
+### Dependencies
+
+* **@tractr/nestjs-authentication:** upgraded to 1.3.3
+* **@tractr/nestjs-core:** upgraded to 1.3.0
+
 ## backend-starter [1.2.2](https://github.com/tractr/stack/compare/backend-starter@1.2.1...backend-starter@1.2.2) (2021-03-29)
 
 
