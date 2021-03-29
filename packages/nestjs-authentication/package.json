@@ -1,6 +1,6 @@
 {
   "name": "@tractr/nestjs-authentication",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "",
   "repository": {
     "type": "git",
@@ -50,7 +50,7 @@
     "@nestjs/graphql": "^7.9.8",
     "@nestjs/jwt": "^7.2.0",
     "@nestjs/passport": "^7.1.5",
-    "@tractr/nestjs-core": "1.2.1",
+    "@tractr/nestjs-core": "1.2.2",
     "@tractr/nestjs-database": "1.1.0",
     "bcrypt": "^5.0.0",
     "class-transformer": "^0.4.0",
