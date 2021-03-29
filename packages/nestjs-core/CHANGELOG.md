@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# @tractr/nestjs-core [1.3.0](https://github.com/tractr/stack/compare/@tractr/nestjs-core@1.2.2...@tractr/nestjs-core@1.3.0) (2021-03-29)
+
+
+### Features
+
+* add a validateEnv helper to the nestjs-core packages ([#47](https://github.com/tractr/stack/issues/47)) ([34f2595](https://github.com/tractr/stack/commit/34f2595995f386219804f86d9799031a14b3e07e))
+
 ## @tractr/nestjs-core [1.2.2](https://github.com/tractr/stack/compare/@tractr/nestjs-core@1.2.1...@tractr/nestjs-core@1.2.2) (2021-03-29)
 
 
