@@ -8,12 +8,27 @@ module.exports = {
       input: 'all',
     },
     {
-      path: 'src/generated/enums/index.ts',
+      path: 'src/generated/models/enums/index.ts',
       engine: 'hpf',
       input: 'all',
     },
     {
-      path: 'src/generated/enums/{kebab}.enum.ts',
+      path: 'src/generated/models/enums/sort-order.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'src/generated/models/enums/{kebab}.enum.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'src/generated/models/index.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'src/generated/models/{kebab}.ts',
       engine: 'hpf',
       input: 'one',
     },

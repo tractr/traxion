@@ -1,11 +1,3 @@
-<<if Fields enum>>
-import {
-  <<for Fields enum enumField>>
-  <<Model pascal>><<enumField pascal>>
-  <<endfor>>
-} from '@prisma/client';
-<<endif>>
-
 <<if Fields not internal>>
 import {  
   <<if Fields boolean and not internal>>
@@ -49,6 +41,14 @@ import {
   <<endif>>
 
 } from 'class-validator';
+<<endif>>
+   
+<<if Fields enum>>
+import {
+  <<for Fields enum enumField>>
+  <<Model pascal>><<enumField pascal>>
+  <<endfor>>
+} from '../../models';
 <<endif>>
  
 export class <<Model pascal>>UpsertBodyDto {

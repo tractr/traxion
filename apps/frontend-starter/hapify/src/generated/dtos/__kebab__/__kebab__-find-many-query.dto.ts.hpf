@@ -1,12 +1,4 @@
 import {
-  Prisma,
-  <<Model pascal>>,
-  <<for Fields enum enumField>>
-  <<Model pascal>><<enumField pascal>>
-  <<endfor>>
-} from '@prisma/client';
-
-import {
 
   <<if Fields boolean and searchable>>
   IsBoolean, 
@@ -33,6 +25,17 @@ import {
   Min,
 
 } from 'class-validator';
+  
+import {
+  <<for Fields enum enumField>>
+  <<Model pascal>><<enumField pascal>>,
+  <<endfor>>
+  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+  <<Model pascal>>Include,
+  <<<}>>>
+  SortOrder,
+  <<Model pascal>>,
+} from '../../models';
  
 export class <<Model pascal>>FindManyQueryDto {
 <<for Fields searchable and not password field>>
@@ -71,20 +74,9 @@ export class <<Model pascal>>FindManyQueryDto {
 
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
   @IsString({ each: true })
-  @IsIn([
-      <<for Fields entity field>>
-      '<<field camel>>',
-      <<endfor>>
-      <<for ReferencedIn ref>>
-        <<for ref.fields field>>
-          '<<ref camel>>As<<field pascal>>',
-        <<endfor>>
-      <<endfor>>
-    ],
-    { each: true }
-  )
+  @IsIn(Object.values(<<Model pascal>>Include), { each: true })
   @IsOptional()
-  populate?: Array<keyof Prisma.<<Model pascal>>Include>;
+  populate?: <<Model pascal>>Include[];
 <<<}>>>
  
   @IsOptional()
@@ -97,8 +89,8 @@ export class <<Model pascal>>FindManyQueryDto {
   sort: keyof <<Model pascal>> = '<<for Fields primary field>><<field camel>><<endfor>>';
  
   @IsOptional()
-  @IsIn(Object.values(Prisma.SortOrder)) 
-  order: Prisma.SortOrder = 'asc';
+  @IsIn(Object.values(SortOrder)) 
+  order: SortOrder = 'asc';
   
   @IsOptional()
   @IsNumber()

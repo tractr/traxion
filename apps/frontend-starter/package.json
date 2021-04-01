@@ -11,7 +11,7 @@
   "author": "",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "npm run generate && nest build",
+    "build": "tsc --project tsconfig.build.json",
     "generate": "rimraf src/generated && npm run hpf:generate && npm run lint:prettier:fix",
     "hpf:generate": "npm run hpf:generate:config && hpf generate",
     "hpf:serve": "hpf serve",

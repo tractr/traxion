@@ -1,0 +1,5 @@
+<<for Models model>>
+export * from './<<model kebab>>';
+<<endfor>>
+
+export * from './enums';

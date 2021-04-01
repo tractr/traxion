@@ -326,6 +326,18 @@
             "nullable",
             "internal"
           ]
+        },
+        {
+          "name": "gender",
+          "type": "enum",
+          "value": [
+            "MALE",
+            "FEMALE"
+          ],
+          "properties": [
+            "searchable",
+            "sortable"
+          ]
         }
       ]
     },

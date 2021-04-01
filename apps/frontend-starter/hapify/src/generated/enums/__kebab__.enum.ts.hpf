@@ -1,6 +1,24 @@
 <<for Fields enum field>>
-export type <<model pascal>><<field pascal>> = 
+export const <<Model pascal>><<field pascal>> = {
    <<for field.enum enumValue>>
- | '<<enumValue constant>>'
+ <<enumValue constant>>: '<<enumValue constant>>',
    <<endfor>>
+};
+  
+export type <<Model pascal>><<field pascal>> = (typeof <<Model pascal>><<field pascal>>)[keyof typeof <<Model pascal>><<field pascal>>];
 <<endfor>>
+  
+<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+export const <<Model pascal>>Include = {
+    <<for Fields entity field>>
+    <<field camel>>: '<<field camel>>',
+    <<endfor>>
+    <<for ReferencedIn ref>>
+      <<for ref.fields field>>
+        <<ref camel>>As<<field pascal>>: '<<ref camel>>As<<field pascal>>',
+      <<endfor>>
+    <<endfor>>
+};
+  
+export type <<Model pascal>>Include = (typeof <<Model pascal>>Include)[keyof typeof <<Model pascal>>Include];
+<<<}>>>
