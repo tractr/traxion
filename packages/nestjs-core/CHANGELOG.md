@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# @tractr/nestjs-core [1.4.0](https://github.com/tractr/stack/compare/@tractr/nestjs-core@1.3.1...@tractr/nestjs-core@1.4.0) (2021-04-02)
+
+
+### Features
+
+* add LoggerModule and deprecate the CoreModule ([#49](https://github.com/tractr/stack/issues/49)) ([5c6d639](https://github.com/tractr/stack/commit/5c6d639b6d35c191203ea1981e6a7db296d14d5c))
+
 ## @tractr/nestjs-core [1.3.1](https://github.com/tractr/stack/compare/@tractr/nestjs-core@1.3.0...@tractr/nestjs-core@1.3.1) (2021-04-02)
 
 
