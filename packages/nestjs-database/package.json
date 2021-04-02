@@ -1,6 +1,6 @@
 {
   "name": "@tractr/nestjs-database",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Database module for nestjs backend",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@tractr/nestjs-core": "^1.4.0"
+    "@tractr/nestjs-core": "1.4.0"
   },
   "devDependencies": {
     "rimraf": "^3.0.2",
