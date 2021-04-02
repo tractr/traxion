@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# backend-starter [1.3.0](https://github.com/tractr/stack/compare/backend-starter@1.2.4...backend-starter@1.3.0) (2021-04-02)
+
+
+### Features
+
+* add LoggerModule and deprecate the CoreModule ([#49](https://github.com/tractr/stack/issues/49)) ([5c6d639](https://github.com/tractr/stack/commit/5c6d639b6d35c191203ea1981e6a7db296d14d5c))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/nestjs-authentication:** upgraded to 1.3.5
+* **@tractr/nestjs-core:** upgraded to 1.4.0
+
+## backend-starter [1.2.4](https://github.com/tractr/stack/compare/backend-starter@1.2.3...backend-starter@1.2.4) (2021-04-02)
+
+
+
+
+
+### Dependencies
+
+* **@tractr/nestjs-authentication:** upgraded to 1.3.4
+* **@tractr/nestjs-core:** upgraded to 1.3.1
+
 ## backend-starter [1.2.3](https://github.com/tractr/stack/compare/backend-starter@1.2.2...backend-starter@1.2.3) (2021-03-29)
 
 
