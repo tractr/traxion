@@ -5,11 +5,12 @@ import {
   OnModuleDestroy,
   OnModuleInit,
 } from '@nestjs/common';
-import { Prisma, PrismaClient } from '@prisma/client';
 import { PrismaClientOptions } from '@prisma/client/runtime';
 import { Logger } from '@tractr/nestjs-core';
 
 import { PRISMA_MODULE_OPTIONS } from '../constants';
+
+import { Prisma, PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class DatabaseService
