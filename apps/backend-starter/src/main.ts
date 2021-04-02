@@ -1,7 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { LogService } from '@tractr/nestjs-core';
+import { Logger } from '@tractr/nestjs-core';
 
 import { AppModule } from './app.module';
 
@@ -10,7 +10,7 @@ async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
 
   // Set custom logger service
-  app.useLogger(app.get(LogService));
+  app.useLogger(app.get(Logger));
 
   // Set global validation pipe
   app.useGlobalPipes(
