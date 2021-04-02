@@ -10,7 +10,21 @@ import { Logger } from '@tractr/nestjs-core';
 
 import { PRISMA_MODULE_OPTIONS } from '../constants';
 
-import { Prisma, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+
+export type QueryEvent = {
+  timestamp: Date;
+  query: string;
+  params: string;
+  duration: number;
+  target: string;
+};
+
+export type LogEvent = {
+  timestamp: Date;
+  message: string;
+  target: string;
+};
 
 @Injectable()
 export class DatabaseService
@@ -28,18 +42,10 @@ export class DatabaseService
   async onModuleInit(): Promise<void> {
     await this.$connect();
 
-    (this as any).$on('query', (e: Prisma.QueryEvent) =>
-      this.logger.debug(e.query),
-    );
-    (this as any).$on('warn', (e: Prisma.LogEvent) =>
-      this.logger.warn(e.message),
-    );
-    (this as any).$on('info', (e: Prisma.LogEvent) =>
-      this.logger.log(e.message),
-    );
-    (this as any).$on('error', (e: Prisma.LogEvent) =>
-      this.logger.error(e.message),
-    );
+    (this as any).$on('query', (e: QueryEvent) => this.logger.debug(e.query));
+    (this as any).$on('warn', (e: LogEvent) => this.logger.warn(e.message));
+    (this as any).$on('info', (e: LogEvent) => this.logger.log(e.message));
+    (this as any).$on('error', (e: LogEvent) => this.logger.error(e.message));
   }
 
   async onModuleDestroy(): Promise<void> {
