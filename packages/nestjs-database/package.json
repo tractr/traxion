@@ -20,6 +20,9 @@
     "build:watch": "npm run build -- --watch",
     "prepublishOnly": "npm run build"
   },
+  "dependencies": {
+    "@tractr/nestjs-core": "^1.4.0"
+  },
   "devDependencies": {
     "rimraf": "^3.0.2",
     "typescript": "^4.1.3"
