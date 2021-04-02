@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# @tractr/nestjs-database [1.2.0](https://github.com/tractr/stack/compare/@tractr/nestjs-database@1.1.0...@tractr/nestjs-database@1.2.0) (2021-04-02)
+
+
+### Features
+
+* put the prisma log into the nestjs logger ([#51](https://github.com/tractr/stack/issues/51)) ([ab89373](https://github.com/tractr/stack/commit/ab893733650253d0aa17cbaaab50277183855563))
+
 # @tractr/nestjs-database [1.1.0](https://github.com/tractr/stack/compare/@tractr/nestjs-database@1.0.1...@tractr/nestjs-database@1.1.0) (2021-03-12)
 
 
