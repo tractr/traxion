@@ -31,13 +31,13 @@ export function ModuleOptionsHelper<
   F extends OptionsFactory<O> = OptionsFactory<O>
 >(moduleOptionsProvide: string, defaultOptions?: O) {
   return class ModuleOptions {
-    static register(options: O): DynamicModule {
+    static register(options?: O): DynamicModule {
       return {
         module: this,
         providers: [
           {
             provide: moduleOptionsProvide,
-            useValue: { ...(defaultOptions || {}), ...options },
+            useValue: { ...(defaultOptions || {}), ...(options || {}) },
           },
         ],
         exports: [moduleOptionsProvide],
