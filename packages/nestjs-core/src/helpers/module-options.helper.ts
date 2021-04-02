@@ -29,7 +29,7 @@ export interface AsyncOptions<
 export function ModuleOptionsHelper<
   O,
   F extends OptionsFactory<O> = OptionsFactory<O>
->(moduleOptionsProvide: string, defaultOptions: Record<string, unknown> = {}) {
+>(moduleOptionsProvide: string, defaultOptions?: O) {
   return class ModuleOptions {
     static register(options: O): DynamicModule {
       return {
@@ -37,7 +37,7 @@ export function ModuleOptionsHelper<
         providers: [
           {
             provide: moduleOptionsProvide,
-            useValue: { ...defaultOptions, ...options },
+            useValue: { ...(defaultOptions || {}), ...options },
           },
         ],
         exports: [moduleOptionsProvide],
@@ -83,7 +83,7 @@ export function ModuleOptionsHelper<
       return {
         provide: moduleOptionsProvide,
         useFactory: async (optionsFactory: F) =>
-          optionsFactory.createOptions(defaultOptions),
+          optionsFactory.createOptions(defaultOptions || {}),
         ...(options.useExisting ? { inject: [options.useExisting] } : {}),
         ...(options.useClass ? { inject: [options.useClass] } : {}),
       };
