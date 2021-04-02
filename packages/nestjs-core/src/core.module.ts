@@ -1,9 +1,14 @@
-import { Module } from '@nestjs/common';
+import { Module, OnModuleInit } from '@nestjs/common';
 
-import { LogService } from './services';
+import { Logger } from './services';
 
 @Module({
-  providers: [LogService],
-  exports: [LogService],
+  providers: [Logger],
+  exports: [Logger],
 })
-export class CoreModule {}
+export class CoreModule implements OnModuleInit {
+  onModuleInit(): void {
+    // eslint-disable-next-line no-console
+    console.info(`This module is deprecated, please use LoggerModule instead.`);
+  }
+}
