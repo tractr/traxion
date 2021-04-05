@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/nestjs-core [1.4.1](https://github.com/tractr/stack/compare/@tractr/nestjs-core@1.4.0...@tractr/nestjs-core@1.4.1) (2021-04-05)
+
+
+### Bug Fixes
+
+* make the register option param optional if no specfic options is needed ([#52](https://github.com/tractr/stack/issues/52)) ([2681a63](https://github.com/tractr/stack/commit/2681a63b5439eff83e730554f727c8507cf381da))
+
 # @tractr/nestjs-core [1.4.0](https://github.com/tractr/stack/compare/@tractr/nestjs-core@1.3.1...@tractr/nestjs-core@1.4.0) (2021-04-02)
 
 
