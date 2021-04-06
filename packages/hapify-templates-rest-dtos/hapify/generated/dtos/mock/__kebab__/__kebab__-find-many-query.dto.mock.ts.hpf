@@ -1,4 +1,4 @@
-import { <<Model pascal>>FindManyQueryDto } from '@generated/<<Model kebab>>/rest';
+import { <<Model pascal>>FindManyQueryDto } from '../../dtos';
   
 import {
 <<for Fields searchable and not password field>>
@@ -10,7 +10,7 @@ import {
   mock<<Model pascal>><<field pascal>>IdsFactory,
   <<endif>>
 <<endfor>>
-} from '../common';
+} from '@generated/models';
   
 export function mock<<Model pascal>>FindManyQueryDtoFactory(
   override: Partial<<<Model pascal>>FindManyQueryDto> = {}

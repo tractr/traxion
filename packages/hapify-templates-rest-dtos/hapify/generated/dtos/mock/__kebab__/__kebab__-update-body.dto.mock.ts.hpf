@@ -1,4 +1,4 @@
-import { <<Model pascal>>UpsertBodyDto } from '@generated/<<Model kebab>>/rest';
+import { <<Model pascal>>UpdateBodyDto } from '../../dtos';
   
 import {
 <<for Fields not internal field>>
@@ -10,11 +10,11 @@ import {
   mock<<Model pascal>><<field pascal>>IdsFactory,
   <<endif>>
 <<endfor>>
-} from '../common';
+} from '@generated/models';
   
-export function mock<<Model pascal>>UpsertBodyDtoFactory(
-  override: Partial<<<Model pascal>>UpsertBodyDto> = {}
-): Required< <<Model pascal>>UpsertBodyDto> {
+export function mock<<Model pascal>>UpdateBodyDtoFactory(
+  override: Partial<<<Model pascal>>UpdateBodyDto> = {}
+): Required< <<Model pascal>>UpdateBodyDto> {
   return {
   <<for Fields not internal field>>
     <<if field not entity>>

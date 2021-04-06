@@ -1,14 +1,14 @@
-import { <<Model pascal>>DeleteParamsDto } from '@generated/<<Model kebab>>/rest';
+import { <<Model pascal>>UpsertParamsDto } from '../../dtos';
   
 import {
 <<for Fields primary primaryField>>
   mock<<Model pascal>><<primaryField pascal>>Factory,
 <<endfor>>
-} from '../common';
+} from '@generated/models';
    
-export function mock<<Model pascal>>DeleteParamsDtoFactory(
-    override: Partial<<<Model pascal>>DeleteParamsDto> = {}
-): <<Model pascal>>DeleteParamsDto {
+export function mock<<Model pascal>>UpsertParamsDtoFactory(
+    override: Partial<<<Model pascal>>UpsertParamsDto> = {}
+): <<Model pascal>>UpsertParamsDto {
   return {
   <<for Fields primary primaryField>>
     <<primaryField camel>>: mock<<Model pascal>><<primaryField pascal>>Factory(),
