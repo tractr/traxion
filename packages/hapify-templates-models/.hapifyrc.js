@@ -32,5 +32,15 @@ module.exports = {
       engine: 'hpf',
       input: 'one',
     },
+    {
+      path: 'generated/models/mock/index.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'generated/models/mock/{kebab}.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
   ],
 };

@@ -29,7 +29,7 @@
   "dependencies": {
     "@tractr/hapify-templates-rest-client": "0.0.1",
     "@tractr/hapify-templates-models": "0.0.1",
-    "@tractr/hapify-templates-dtos": "0.0.1",
+    "@tractr/hapify-templates-rest-dtos": "0.0.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "rxjs": "^6.6.3"
