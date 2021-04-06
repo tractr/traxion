@@ -4,7 +4,7 @@
   "name": "Hapify prisma templates",
   "description": "Generate the model.prisma in the prisma folder",
   "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
-  "project": "./hapify-plugin-model-user.json",
+  "project": "../../hapify-models.json",
   "defaultFields": [
     {
       "name": "id",
@@ -23,26 +23,89 @@
       "internal": true,
       "restricted": false,
       "ownership": false
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "subtype": null,
+      "reference": null,
+      "primary": true,
+      "unique": false,
+      "label": false,
+      "nullable": false,
+      "multiple": false,
+      "embedded": false,
+      "searchable": true,
+      "sortable": true,
+      "hidden": false,
+      "internal": true,
+      "restricted": false,
+      "ownership": false
     }
   ],
   "templates": [
     {
-      "path": "src/generated/index.ts",
-      "engine": "hpf",
-      "input": "all"
-    },
-    {
-      "path": "src/generated/models.module.ts",
-      "engine": "hpf",
-      "input": "all"
-    },
-    {
-      "path": "src/generated/{kebab}/index.ts",
+      "path": "src/generated/{kebab}/common/index.ts",
       "engine": "hpf",
       "input": "one"
     },
     {
-      "path": "src/generated/{kebab}/{kebab}.module.ts",
+      "path": "src/generated/{kebab}/common/{kebab}-model.module.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "src/generated/{kebab}/common/{kebab}-model.constant.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "src/generated/{kebab}/common/services/index.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "src/generated/{kebab}/common/services/{kebab}-database.service.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "src/generated/{kebab}/common/services/{kebab}.service.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "mock/generated/{kebab}/common/index.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "mock/generated/{kebab}/common/{kebab}.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "mock/generated/{kebab}/common/{kebab}.seed.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "mock/generated/{kebab}/common/{kebab}-database.service.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "mock/generated/{kebab}/common/{kebab}.service.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/common/unit/{kebab}.service.spec.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "test/generated/{kebab}/common/unit/{kebab}-database.service.spec.ts",
       "engine": "hpf",
       "input": "one"
     },

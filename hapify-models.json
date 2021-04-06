@@ -17,12 +17,7 @@
         {
           "name": "id",
           "type": "string",
-          "properties": [
-            "primary",
-            "searchable",
-            "sortable",
-            "internal"
-          ]
+          "properties": ["primary", "searchable", "sortable", "internal"]
         },
         {
           "name": "user",
@@ -43,10 +38,7 @@
           "type": "entity",
           "subtype": "manyMany",
           "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
-          "properties": [
-            "nullable",
-            "multiple"
-          ]
+          "properties": ["nullable", "multiple"]
         }
       ]
     },
@@ -65,47 +57,32 @@
         {
           "name": "id",
           "type": "string",
-          "properties": [
-            "primary",
-            "searchable",
-            "sortable",
-            "internal"
-          ]
+          "properties": ["primary", "searchable", "sortable", "internal"]
         },
         {
           "name": "text",
           "type": "string",
-          "properties": [
-            "label",
-            "searchable",
-            "sortable"
-          ]
+          "properties": ["label", "searchable", "sortable"]
         },
         {
           "name": "hour",
           "type": "datetime",
           "subtype": "time",
-          "properties": [
-            "nullable"
-          ]
+          "properties": ["nullable"]
         },
         {
           "name": "tags",
           "type": "entity",
           "subtype": "manyMany",
           "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
-          "properties": [
-            "multiple"
-          ]
+          "properties": ["multiple"]
         },
         {
           "name": "questions",
           "type": "entity",
           "subtype": "manyMany",
           "value": "6894a782-2e83-cd6a-52cc-f62967165636",
-          "properties": [
-            "multiple"
-          ]
+          "properties": ["multiple"]
         }
       ]
     },
@@ -124,30 +101,17 @@
         {
           "name": "id",
           "type": "string",
-          "properties": [
-            "primary",
-            "searchable",
-            "sortable",
-            "internal"
-          ]
+          "properties": ["primary", "searchable", "sortable", "internal"]
         },
         {
           "name": "text",
           "type": "string",
-          "properties": [
-            "searchable",
-            "sortable"
-          ]
+          "properties": ["searchable", "sortable"]
         },
         {
           "name": "key",
           "type": "string",
-          "properties": [
-            "unique",
-            "label",
-            "searchable",
-            "sortable"
-          ]
+          "properties": ["unique", "label", "searchable", "sortable"]
         },
         {
           "name": "question",
@@ -173,48 +137,31 @@
         {
           "name": "id",
           "type": "string",
-          "properties": [
-            "primary",
-            "searchable",
-            "sortable",
-            "internal"
-          ]
+          "properties": ["primary", "searchable", "sortable", "internal"]
         },
         {
           "name": "title",
           "type": "string",
-          "properties": [
-            "label",
-            "searchable",
-            "sortable"
-          ]
+          "properties": ["label", "searchable", "sortable"]
         },
         {
           "name": "text",
           "type": "string",
-          "properties": [
-            "searchable",
-            "sortable"
-          ]
+          "properties": ["searchable", "sortable"]
         },
         {
           "name": "parentQuestion",
           "type": "entity",
           "subtype": "oneMany",
           "value": "6894a782-2e83-cd6a-52cc-f62967165636",
-          "properties": [
-            "nullable"
-          ]
+          "properties": ["nullable"]
         },
         {
           "name": "tags",
           "type": "entity",
           "subtype": "manyMany",
           "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
-          "properties": [
-            "nullable",
-            "multiple"
-          ]
+          "properties": ["nullable", "multiple"]
         }
       ]
     },
@@ -233,21 +180,12 @@
         {
           "name": "id",
           "type": "string",
-          "properties": [
-            "primary",
-            "searchable",
-            "sortable",
-            "internal"
-          ]
+          "properties": ["primary", "searchable", "sortable", "internal"]
         },
         {
           "name": "label",
           "type": "string",
-          "properties": [
-            "label",
-            "searchable",
-            "sortable"
-          ]
+          "properties": ["label", "searchable", "sortable"]
         }
       ]
     },
@@ -277,67 +215,42 @@
         {
           "name": "name",
           "type": "string",
-          "properties": [
-            "label",
-            "searchable",
-            "sortable"
-          ]
+          "properties": ["label", "searchable", "sortable"]
         },
         {
           "name": "email",
           "type": "string",
           "subtype": "email",
-          "properties": [
-            "unique",
-            "searchable",
-            "sortable"
-          ]
+          "properties": ["unique", "searchable", "sortable"]
         },
         {
           "name": "password",
           "type": "string",
           "subtype": "password",
-          "properties": [
-            "hidden"
-          ]
+          "properties": ["hidden"]
         },
         {
           "name": "role",
           "type": "string",
-          "properties": [
-            "searchable",
-            "restricted"
-          ],
+          "properties": ["searchable", "restricted"],
           "notes": "admin or user"
         },
         {
           "name": "banned",
           "type": "boolean",
-          "properties": [
-            "searchable",
-            "restricted"
-          ],
+          "properties": ["searchable", "restricted"],
           "notes": "Allow admins to disable this user"
         },
         {
           "name": "last connected at",
           "type": "datetime",
-          "properties": [
-            "nullable",
-            "internal"
-          ]
+          "properties": ["nullable", "internal"]
         },
         {
           "name": "gender",
           "type": "enum",
-          "value": [
-            "MALE",
-            "FEMALE"
-          ],
-          "properties": [
-            "searchable",
-            "sortable"
-          ]
+          "value": ["MALE", "FEMALE"],
+          "properties": ["searchable", "sortable"]
         }
       ]
     },
@@ -356,12 +269,7 @@
         {
           "name": "id",
           "type": "string",
-          "properties": [
-            "primary",
-            "searchable",
-            "sortable",
-            "internal"
-          ]
+          "properties": ["primary", "searchable", "sortable", "internal"]
         },
         {
           "name": "value",

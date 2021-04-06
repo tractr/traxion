@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { ReplaySubject } from 'rxjs';
 
 export interface BaseModelInterface {

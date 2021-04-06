@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { BaseModel, BaseModelInterface } from './base-model';
 import { BaseModelSearchParamsInterface } from './base-model-search-params';
 

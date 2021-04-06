@@ -9,7 +9,7 @@ import {
 } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 
-import { UserModelModule } from '../generated/user';
+import { UserModelModule } from '../generated/user/common';
 import {
   AUTHENTICATION_OPTIONS,
   AuthenticationModuleOptionsFactory,

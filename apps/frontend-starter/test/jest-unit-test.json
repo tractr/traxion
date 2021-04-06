@@ -7,7 +7,6 @@
     "^.+\\.(t|j)s$": "ts-jest"
   },
   "moduleNameMapper": {
-    "@generated/(.*)": "<rootDir>/../src/generated/$1",
-    "@generated-mock/(.*)": "<rootDir>/../mock/generated/$1"
+    "@generated/(.*)": "<rootDir>/../generated/$1"
   }
 }
