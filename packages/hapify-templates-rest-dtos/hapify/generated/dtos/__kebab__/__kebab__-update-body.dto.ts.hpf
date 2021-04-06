@@ -46,7 +46,7 @@ import {
   <<for Fields enum enumField>>
   <<Model pascal>><<enumField pascal>>
   <<endfor>>
-} from '../../models';
+} from '@generated/models';
 <<endif>>
 
  

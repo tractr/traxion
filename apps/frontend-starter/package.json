@@ -12,7 +12,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc --project tsconfig.build.json",
-    "generate": "rimraf src/generated && npm run hpf:generate && npm run lint:prettier:fix",
+    "generate": "rimraf src/generated && rimraf generated && npm run hpf:generate && npm run lint:prettier:fix",
     "hpf:generate": "npm run hpf:generate:config && hpf generate",
     "hpf:serve": "hpf serve",
     "hpf:generate:config": "hpf-generate-config",
@@ -28,6 +28,8 @@
   },
   "dependencies": {
     "@tractr/hapify-templates-rest-client": "0.0.1",
+    "@tractr/hapify-templates-models": "0.0.1",
+    "@tractr/hapify-templates-dtos": "0.0.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "rxjs": "^6.6.3"

@@ -151,7 +151,7 @@ function getRelations() {
   return [ ...new Set([
     ...root.dependencies.list,
     ...root.referencedIn,
-  ])];
+  ])].filter(m => m.id !== root.id);
 }
 >>>
 

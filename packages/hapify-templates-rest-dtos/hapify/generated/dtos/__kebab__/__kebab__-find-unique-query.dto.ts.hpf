@@ -5,7 +5,7 @@ import {
   IsString,
 } from 'class-validator';
    
-import { <<Model pascal>>Include } from '../../models';
+import { <<Model pascal>>Include } from '@generated/models';
 
 export class <<Model pascal>>FindUniqueQueryDto {
   @IsString({ each: true })

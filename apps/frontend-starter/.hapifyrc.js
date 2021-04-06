@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['@tractr/hapify-templates-rest-client'],
+  extends: ['@tractr/hapify-templates-models', '@tractr/hapify-templates-dtos'],
   version: '1',
   validatorPath: 'hapify/validator.js',
   name: 'New bootstrap',

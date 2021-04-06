@@ -35,7 +35,7 @@ import {
   <<<}>>>
   SortOrder,
   <<Model pascal>>,
-} from '../../models';
+} from '@generated/models';
  
 export class <<Model pascal>>FindManyQueryDto {
 <<for Fields searchable and not password field>>
