@@ -1,0 +1,18 @@
+<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+import {
+  IsIn,
+  IsOptional,
+  IsString,
+} from 'class-validator';
+   
+import { <<Model pascal>>Include } from '@generated/models';
+
+export class <<Model pascal>>FindUniqueQueryDto {
+  @IsString({ each: true })
+  @IsIn(<<Model pascal>>Include,
+    { each: true }
+  )
+  @IsOptional()
+  populate?: <<Model pascal>>Include[];
+}
+<<<}>>>
