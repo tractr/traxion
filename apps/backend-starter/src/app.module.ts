@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
-import { CoreModule, PrismaExceptionFilter } from '@tractr/nestjs-core';
-import { DatabaseModule, DatabaseService } from '@tractr/nestjs-database';
+import { LoggerModule, PrismaExceptionFilter } from '@tractr/nestjs-core';
+import { DatabaseModule } from '@tractr/nestjs-database';
 
 import { AppController } from './controllers';
 import { ModelsModule } from './generated';
 
 @Module({
-  imports: [CoreModule, DatabaseModule, ModelsModule.register()],
+  imports: [LoggerModule, DatabaseModule.register(), ModelsModule.register()],
   controllers: [AppController],
   providers: [{ provide: APP_FILTER, useClass: PrismaExceptionFilter }],
 })

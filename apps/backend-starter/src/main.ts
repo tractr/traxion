@@ -10,7 +10,7 @@ async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
 
   // Set custom logger service
-  app.useLogger(app.get(Logger));
+  app.useLogger(await app.resolve(Logger));
 
   // Set global validation pipe
   app.useGlobalPipes(

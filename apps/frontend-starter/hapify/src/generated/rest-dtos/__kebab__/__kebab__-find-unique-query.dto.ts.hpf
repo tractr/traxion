@@ -1,0 +1,26 @@
+<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+import { Prisma } from '@prisma/client';
+import {
+  IsIn,
+  IsOptional,
+  IsString,
+} from 'class-validator';
+ 
+export class <<Model pascal>>FindUniqueQueryDto {
+  @IsString({ each: true })
+  @IsIn([
+      <<for Fields entity field>>
+      '<<field camel>>',
+      <<endfor>>
+      <<for ReferencedIn ref>>
+        <<for ref.fields field>>
+          '<<ref camel>>As<<field pascal>>',
+        <<endfor>>
+      <<endfor>>
+    ],
+    { each: true }
+  )
+  @IsOptional()
+  populate?: Array<keyof Prisma.<<Model pascal>>Include>;
+}
+<<<}>>>

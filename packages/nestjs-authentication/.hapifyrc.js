@@ -1,7 +1,7 @@
 module.exports = {
   extends: [
     '@tractr/hapify-templates-prisma',
-    '@tractr/hapify-templates-nestjs-models',
+    '@tractr/hapify-templates-nestjs-models-common',
   ],
   version: '1',
   validatorPath: 'hapify/validator.js',
