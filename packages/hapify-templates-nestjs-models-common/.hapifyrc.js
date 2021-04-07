@@ -25,68 +25,90 @@ module.exports = {
   ],
   templates: [
     {
-      path: 'src/generated/{kebab}/common/index.ts',
+      path: 'generated/nestjs-models-common/index.ts',
       engine: 'hpf',
-      input: 'one',
+      input: 'all',
     },
     {
-      path: 'src/generated/{kebab}/common/{kebab}-model.module.ts',
+      path: 'generated/nestjs-models-common/src/index.ts',
       engine: 'hpf',
-      input: 'one',
+      input: 'all',
     },
     {
-      path: 'src/generated/{kebab}/common/{kebab}-model.constant.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/common/services/index.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/common/services/{kebab}-database.service.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/common/services/{kebab}.service.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'mock/generated/{kebab}/common/index.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'mock/generated/{kebab}/common/{kebab}.mock.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'mock/generated/{kebab}/common/{kebab}.seed.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'mock/generated/{kebab}/common/{kebab}-database.service.mock.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'mock/generated/{kebab}/common/{kebab}.service.mock.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'test/generated/{kebab}/common/unit/{kebab}.service.spec.ts',
+      path: 'generated/nestjs-models-common/src/{kebab}/index.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
       path:
-        'test/generated/{kebab}/common/unit/{kebab}-database.service.spec.ts',
+        'generated/nestjs-models-common/src/{kebab}/{kebab}-model.module.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'generated/nestjs-models-common/src/{kebab}/{kebab}-model.constant.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/nestjs-models-common/src/{kebab}/services/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'generated/nestjs-models-common/src/{kebab}/services/{kebab}-database.service.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'generated/nestjs-models-common/src/{kebab}/services/{kebab}.service.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/nestjs-models-common/mock/index.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'generated/nestjs-models-common/mock/{kebab}/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/nestjs-models-common/mock/{kebab}/{kebab}.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/nestjs-models-common/mock/{kebab}/{kebab}.seed.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'generated/nestjs-models-common/mock/{kebab}/{kebab}-database.service.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'generated/nestjs-models-common/mock/{kebab}/{kebab}.service.mock.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'generated/nestjs-models-common/test/{kebab}/{kebab}.service.spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'generated/nestjs-models-common/test/{kebab}-database.service.spec.ts',
       engine: 'hpf',
       input: 'one',
     },

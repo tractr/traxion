@@ -1,0 +1,31 @@
+import { <<Model pascal>>CreateBodyDto } from '../../dtos';
+  
+import {
+<<for Fields not internal field>>
+  <<if field not entity>>
+  mock<<Model pascal>><<field pascal>>Factory,
+  <<elseif field oneOne or oneMany>>
+  mock<<Model pascal>><<field pascal>>IdFactory,
+  <<else>>
+  mock<<Model pascal>><<field pascal>>IdsFactory,
+  <<endif>>
+<<endfor>>
+} from '@generated/models';
+  
+export function mock<<Model pascal>>CreateBodyDtoFactory(
+  override: Partial<<<Model pascal>>CreateBodyDto> = {}
+): Required< <<Model pascal>>CreateBodyDto> {
+  return {
+  <<for Fields not internal field>>
+    <<if field not entity>>
+    <<field camel>>: mock<<Model pascal>><<field pascal>>Factory(),
+    <<elseif field oneOne or oneMany>>
+    <<field camel>>: mock<<Model pascal>><<field pascal>>IdFactory(),
+    <<else>>
+    <<field camel>>: mock<<Model pascal>><<field pascal>>IdsFactory(),
+    <<endif>>
+  <<endfor>>
+    ...override,
+  };
+}
+

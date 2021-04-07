@@ -1,0 +1,6 @@
+<<for Models model>>
+<<<if (model.fields.list.includes(f => f.subtype === 'enum') || model.dependencies.list.length || model.referencedIn.length) {>>>
+export * from './<<model kebab>>.enum';
+<<<}>>>
+<<endfor>>
+export * from './sort-order';
