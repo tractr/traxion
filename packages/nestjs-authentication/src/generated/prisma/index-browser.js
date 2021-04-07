@@ -11,12 +11,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 2.18.0
- * Query Engine version: da6fafb57b24e0b61ca20960c64e2d41f9e8cff1
+ * Prisma Client JS version: 2.20.1
+ * Query Engine version: 60ba6551f29b17d7d6ce479e5733c70d9c00860e
  */
 Prisma.prismaVersion = {
-  client: "2.18.0",
-  engine: "da6fafb57b24e0b61ca20960c64e2d41f9e8cff1"
+  client: "2.20.1",
+  engine: "60ba6551f29b17d7d6ce479e5733c70d9c00860e"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -83,6 +83,11 @@ exports.Prisma.UserScalarFieldEnum = makeEnum({
 exports.Prisma.SortOrder = makeEnum({
   asc: 'asc',
   desc: 'desc'
+});
+
+exports.Prisma.QueryMode = makeEnum({
+  default: 'default',
+  insensitive: 'insensitive'
 });
 
 

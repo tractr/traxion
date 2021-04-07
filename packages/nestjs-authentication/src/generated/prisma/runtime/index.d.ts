@@ -188,9 +188,9 @@ declare type Dictionary$1<T> = {
 };
 interface GeneratorConfig {
     name: string;
-    output: string | null;
+    output: EnvValue | null;
     isCustomOutput?: boolean;
-    provider: string;
+    provider: EnvValue;
     config: Dictionary$1<string>;
     binaryTargets: string[];
     previewFeatures: string[];
@@ -216,72 +216,43 @@ interface Dictionary<T> {
 
 declare class DMMFClass implements DMMF.Document {
     datamodel: DMMF.Datamodel;
-
     schema: DMMF.Schema;
-
     mappings: DMMF.Mappings;
-
     queryType: DMMF.OutputType;
-
     mutationType: DMMF.OutputType;
-
     outputTypes: {
         model: DMMF.OutputType[];
         prisma: DMMF.OutputType[];
     };
-
     outputTypeMap: Dictionary<DMMF.OutputType>;
-
     inputObjectTypes: {
         model?: DMMF.InputType[];
         prisma: DMMF.InputType[];
     };
-
     inputTypeMap: Dictionary<DMMF.InputType>;
-
     enumMap: Dictionary<DMMF.SchemaEnum>;
-
     datamodelEnumMap: Dictionary<DMMF.DatamodelEnum>;
-
     modelMap: Dictionary<DMMF.Model>;
-
     mappingsMap: Dictionary<DMMF.ModelMapping>;
-
     rootFieldMap: Dictionary<DMMF.SchemaField>;
-
     constructor({ datamodel, schema, mappings }: DMMF.Document);
-
     get [Symbol.toStringTag](): string;
-
     protected outputTypeToMergedOutputType: (outputType: DMMF.OutputType) => DMMF.OutputType;
-
     protected resolveOutputTypes(): void;
-
     protected resolveInputTypes(): void;
-
     protected resolveFieldArgumentTypes(): void;
-
     protected getQueryType(): DMMF.OutputType;
-
     protected getMutationType(): DMMF.OutputType;
-
     protected getOutputTypes(): {
         model: DMMF.OutputType[];
         prisma: DMMF.OutputType[];
     };
-
     protected getDatamodelEnumMap(): Dictionary<DMMF.DatamodelEnum>;
-
     protected getEnumMap(): Dictionary<DMMF.SchemaEnum>;
-
     protected getModelMap(): Dictionary<DMMF.Model>;
-
     protected getMergedOutputTypeMap(): Dictionary<DMMF.OutputType>;
-
     protected getInputTypeMap(): Dictionary<DMMF.InputType>;
-
     protected getMappingsMap(): Dictionary<DMMF.ModelMapping>;
-
     protected getRootFieldMap(): Dictionary<DMMF.SchemaField>;
 }
 
@@ -393,21 +364,13 @@ interface MissingItem {
 
 declare class Document {
     readonly type: 'query' | 'mutation';
-
     readonly children: Field[];
-
     constructor(type: 'query' | 'mutation', children: Field[]);
-
     get [Symbol.toStringTag](): string;
-
     toString(): string;
-
     validate(select?: any, isTopLevelQuery?: boolean, originalMethod?: string, errorFormat?: 'pretty' | 'minimal' | 'colorless', validationCallsite?: any): void;
-
     protected printFieldError: ({ error }: FieldError, missingItems: MissingItem[], minimal: boolean) => string | undefined;
-
     protected printArgError: ({ error, path, id }: ArgError, hasMissingItems: boolean, minimal: boolean) => string | undefined;
-
     /**
      * As we're allowing both single objects and array of objects for list inputs, we need to remove incorrect
      * zero indexes from the path
@@ -428,25 +391,15 @@ interface FieldArgs {
 }
 declare class Field {
     readonly name: string;
-
     readonly args?: Args;
-
     readonly children?: Field[];
-
     readonly error?: InvalidFieldError;
-
     readonly hasInvalidChild: boolean;
-
     readonly hasInvalidArg: boolean;
-
     readonly schemaField?: DMMF.SchemaField;
-
     constructor({ name, args, children, error, schemaField }: FieldArgs);
-
     get [Symbol.toStringTag](): string;
-
     toString(): string;
-
     collectErrors(prefix?: string): {
         fieldErrors: FieldError[];
         argErrors: ArgError[];
@@ -454,15 +407,10 @@ declare class Field {
 }
 declare class Args {
     args: Arg[];
-
     readonly hasInvalidArg: boolean;
-
     constructor(args?: Arg[]);
-
     get [Symbol.toStringTag](): string;
-
     toString(): string;
-
     collectErrors(): ArgError[];
 }
 interface ArgOptions {
@@ -475,29 +423,17 @@ interface ArgOptions {
 }
 declare class Arg {
     key: string;
-
     value: ArgValue;
-
     error?: InvalidArgError;
-
     hasError: boolean;
-
     isEnum: boolean;
-
     schemaArg?: DMMF.SchemaArg;
-
     isNullable: boolean;
-
     inputType?: DMMF.SchemaArgInputType;
-
     constructor({ key, value, isEnum, error, schemaArg, inputType, }: ArgOptions);
-
     get [Symbol.toStringTag](): string;
-
     _toString(value: ArgValue, key: string): string | undefined;
-
     toString(): string | undefined;
-
     collectErrors(): ArgError[];
 }
 declare type ArgValue = string | boolean | number | undefined | Args | string[] | boolean[] | number[] | Args[] | null;
@@ -520,97 +456,51 @@ interface UnpackOptions {
  */
 declare function unpack({ document, path, data }: UnpackOptions): any;
 
-// Type definitions for debug 4.1
-// Project: https://github.com/visionmedia/debug
-// Definitions by: Seon-Wook Park <https://github.com/swook>
-//                 Gal Talmor <https://github.com/galtalmor>
-//                 John McLaughlin <https://github.com/zamb3zi>
-//                 Brasten Sager <https://github.com/brasten>
-//                 Nicolas Penin <https://github.com/npenin>
-//                 Kristian Brünn <https://github.com/kristianmitk>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-declare var debug: debug.Debug & { debug: debug.Debug; default: debug.Debug };
-
-declare namespace debug {
-    interface Debug {
-        (namespace: string): Debugger;
-        coerce: (val: any) => any;
-        disable: () => string;
-        enable: (namespaces: string) => void;
-        enabled: (namespaces: string) => boolean;
-        log: (...args: any[]) => any;
-
-        names: RegExp[];
-        skips: RegExp[];
-
-        formatters: Formatters;
-    }
-
-    type IDebug = Debug;
-
-    interface Formatters {
-        [formatter: string]: (v: any) => string;
-    }
-
-    type IDebugger = Debugger;
-
-    interface Debugger {
-        (formatter: any, ...args: any[]): void;
-
-        color: string;
-        enabled: boolean;
-        log: (...args: any[]) => any;
-        namespace: string;
-        destroy: () => boolean;
-        extend: (namespace: string, delimiter?: string) => Debugger;
-    }
-}
-
-declare function Debug(namespace: string): debug.Debugger;
-declare namespace Debug {
-    var enable: (namespace: string) => void;
-    var enabled: (namespace: string) => boolean;
-}
-
 declare class PrismaClientKnownRequestError extends Error {
     code: string;
-
     meta?: object;
-
     clientVersion: string;
-
     constructor(message: string, code: string, clientVersion: string, meta?: any);
-
     get [Symbol.toStringTag](): string;
 }
 declare class PrismaClientUnknownRequestError extends Error {
     clientVersion: string;
-
     constructor(message: string, clientVersion: string);
-
     get [Symbol.toStringTag](): string;
 }
 declare class PrismaClientRustPanicError extends Error {
     clientVersion: string;
-
     constructor(message: string, clientVersion: string);
-
     get [Symbol.toStringTag](): string;
 }
 declare class PrismaClientInitializationError extends Error {
     clientVersion: string;
-
-    constructor(message: string, clientVersion: string);
-
+    errorCode?: string;
+    constructor(message: string, clientVersion: string, errorCode?: string);
     get [Symbol.toStringTag](): string;
 }
 
-declare type Platform = 'native' | 'darwin' | 'debian-openssl-1.0.x' | 'debian-openssl-1.1.x' | 'rhel-openssl-1.0.x' | 'rhel-openssl-1.1.x' | 'linux-arm-openssl-1.1.x' | 'linux-arm-openssl-1.0.x' | 'linux-musl' | 'linux-nixos' | 'windows' | 'freebsd11' | 'freebsd12' | 'openbsd' | 'netbsd' | 'arm';
-
+interface Engine {
+    on(event: EngineEventType, listener: (args?: any) => any): void;
+    start(): Promise<void>;
+    stop(): Promise<void>;
+    kill(signal: string): void;
+    getConfig(): Promise<GetConfigResult>;
+    version(forceRun?: boolean): Promise<string>;
+    request<T>(query: string, headers: Record<string, string>, numTry: number): Promise<{
+        data: T;
+        elapsed: number;
+    }>;
+    requestBatch<T>(queries: string[], transaction?: boolean, numTry?: number): Promise<{
+        data: T;
+        elapsed: number;
+    }>;
+}
+declare type EngineEventType = 'query' | 'info' | 'warn' | 'error' | 'beforeExit';
 interface DatasourceOverwrite {
     name: string;
-    url: string;
+    url?: string;
+    env?: string;
 }
 interface EngineConfig {
     cwd?: string;
@@ -640,172 +530,99 @@ declare type GetConfigResult = {
     datasources: DataSource[];
     generators: GeneratorConfig[];
 };
-declare type EngineEventType = 'query' | 'info' | 'warn' | 'error' | 'beforeExit';
-declare class NodeEngine {
+
+declare class NodeEngine implements Engine {
     private logEmitter;
-
     private showColors;
-
     private logQueries;
-
     private logLevel?;
-
     private env?;
-
     private flags;
-
     private port?;
-
     private enableDebugLogs;
-
     private enableEngineDebugMode;
-
     private child?;
-
     private clientVersion?;
-
     private lastPanic?;
-
     private globalKillSignalReceived?;
-
     private startCount;
-
     private enableExperimental;
-
     private engineEndpoint?;
-
     private lastErrorLog?;
-
     private lastRustError?;
-
     private useUds;
-
     private socketPath?;
-
     private getConfigPromise?;
-
     private stopPromise?;
-
     private beforeExitListener?;
-
     private dirname?;
-
     private cwd;
-
     private datamodelPath;
-
     private prismaPath?;
-
     private stderrLogs;
-
     private currentRequestPromise?;
-
     private platformPromise?;
-
     private platform?;
-
     private generator?;
-
     private incorrectlyPinnedBinaryTarget?;
-
     private datasources?;
-
     private startPromise?;
-
     private versionPromise?;
-
     private engineStartDeferred?;
-
     private engineStopDeferred?;
-
     private undici?;
-
     private lastQuery?;
-
     private lastVersion?;
-
     private lastActiveProvider?;
-
     private activeProvider?;
-
     /**
      * exiting is used to tell the .on('exit') hook, if the exit came from our script.
      * As soon as the Prisma binary returns a correct return code (like 1 or 0), we don't need this anymore
      */
     constructor({ cwd, datamodelPath, prismaPath, generator, datasources, showColors, logLevel, logQueries, env, flags, clientVersion, enableExperimental, engineEndpoint, enableDebugLogs, enableEngineDebugMode, dirname, useUds, activeProvider, }: EngineConfig);
-
     private setError;
-
     private checkForTooManyEngines;
-
     private resolveCwd;
-
     on(event: EngineEventType, listener: (args?: any) => any): void;
-
     emitExit(): Promise<void>;
-
-    getPlatform(): Promise<Platform>;
-
+    private getPlatform;
     private getQueryEnginePath;
-
     private handlePanic;
-
     private resolvePrismaPath;
-
     private getPrismaPath;
-
     private getFixedGenerator;
-
-    printDatasources(): string;
-
+    private printDatasources;
     /**
      * Starts the engine, returns the url that it runs on
      */
     start(): Promise<void>;
-
     private getEngineEnvVars;
-
     private internalStart;
-
     stop(): Promise<void>;
-
     /**
      * If Prisma runs, stop it
      */
     _stop(): Promise<void>;
-
     kill(signal: string): void;
-
     /**
      * Use the port 0 trick to get a new port
      */
-    protected getFreePort(): Promise<number>;
-
+    private getFreePort;
     getConfig(): Promise<GetConfigResult>;
-
-    _getConfig(): Promise<GetConfigResult>;
-
+    private _getConfig;
     version(forceRun?: boolean): Promise<string>;
-
     internalVersion(): Promise<string>;
-
     request<T>(query: string, headers: Record<string, string>, numTry?: number): Promise<T>;
-
     requestBatch<T>(queries: string[], transaction?: boolean, numTry?: number): Promise<T>;
-
     private get hasMaxRestarts();
-
     /**
      * If we have request errors like "ECONNRESET", we need to get the error from a
      * different place, not the request itself. This different place can either be
      * this.lastRustError or this.lastErrorLog
      */
     private throwAsyncErrorIfExists;
-
     private getErrorMessageWithLink;
-
     private handleRequestError;
-
     private graphQLToJSError;
 }
 
@@ -903,15 +720,10 @@ declare type RawValue = Value | Sql;
  */
 declare class Sql {
     values: Value[];
-
     strings: string[];
-
     constructor(rawStrings: ReadonlyArray<string>, rawValues: ReadonlyArray<RawValue>);
-
     get text(): string;
-
     get sql(): string;
-
     [inspect.custom](): {
         text: string;
         sql: string;
@@ -963,199 +775,151 @@ declare namespace Decimal {
 
 declare class Decimal {
   readonly d: number[];
-
   readonly e: number;
-
   readonly s: number;
-
   private readonly name: string;
 
   constructor(n: Decimal.Value);
 
   absoluteValue(): Decimal;
-
   abs(): Decimal;
 
   ceil(): Decimal;
 
   comparedTo(n: Decimal.Value): number;
-
   cmp(n: Decimal.Value): number;
 
   cosine(): Decimal;
-
   cos(): Decimal;
 
   cubeRoot(): Decimal;
-
   cbrt(): Decimal;
 
   decimalPlaces(): number;
-
   dp(): number;
 
   dividedBy(n: Decimal.Value): Decimal;
-
   div(n: Decimal.Value): Decimal;
 
   dividedToIntegerBy(n: Decimal.Value): Decimal;
-
   divToInt(n: Decimal.Value): Decimal;
 
   equals(n: Decimal.Value): boolean;
-
   eq(n: Decimal.Value): boolean;
 
   floor(): Decimal;
 
   greaterThan(n: Decimal.Value): boolean;
-
   gt(n: Decimal.Value): boolean;
 
   greaterThanOrEqualTo(n: Decimal.Value): boolean;
-
   gte(n: Decimal.Value): boolean;
 
   hyperbolicCosine(): Decimal;
-
   cosh(): Decimal;
 
   hyperbolicSine(): Decimal;
-
   sinh(): Decimal;
 
   hyperbolicTangent(): Decimal;
-
   tanh(): Decimal;
 
   inverseCosine(): Decimal;
-
   acos(): Decimal;
 
   inverseHyperbolicCosine(): Decimal;
-
   acosh(): Decimal;
 
   inverseHyperbolicSine(): Decimal;
-
   asinh(): Decimal;
 
   inverseHyperbolicTangent(): Decimal;
-
   atanh(): Decimal;
 
   inverseSine(): Decimal;
-
   asin(): Decimal;
 
   inverseTangent(): Decimal;
-
   atan(): Decimal;
 
   isFinite(): boolean;
 
   isInteger(): boolean;
-
   isInt(): boolean;
 
   isNaN(): boolean;
 
   isNegative(): boolean;
-
   isNeg(): boolean;
 
   isPositive(): boolean;
-
   isPos(): boolean;
 
   isZero(): boolean;
 
   lessThan(n: Decimal.Value): boolean;
-
   lt(n: Decimal.Value): boolean;
 
   lessThanOrEqualTo(n: Decimal.Value): boolean;
-
   lte(n: Decimal.Value): boolean;
 
   logarithm(n?: Decimal.Value): Decimal;
-
   log(n?: Decimal.Value): Decimal;
 
   minus(n: Decimal.Value): Decimal;
-
   sub(n: Decimal.Value): Decimal;
 
   modulo(n: Decimal.Value): Decimal;
-
   mod(n: Decimal.Value): Decimal;
 
   naturalExponential(): Decimal;
-
   exp(): Decimal;
 
   naturalLogarithm(): Decimal;
-
   ln(): Decimal;
 
   negated(): Decimal;
-
   neg(): Decimal;
 
   plus(n: Decimal.Value): Decimal;
-
   add(n: Decimal.Value): Decimal;
 
   precision(includeZeros?: boolean): number;
-
   sd(includeZeros?: boolean): number;
 
   round(): Decimal;
 
   sine() : Decimal;
-
   sin() : Decimal;
 
   squareRoot(): Decimal;
-
   sqrt(): Decimal;
 
   tangent() : Decimal;
-
   tan() : Decimal;
 
   times(n: Decimal.Value): Decimal;
-
   mul(n: Decimal.Value) : Decimal;
 
   toBinary(significantDigits?: number): string;
-
   toBinary(significantDigits: number, rounding: Decimal.Rounding): string;
 
   toDecimalPlaces(decimalPlaces?: number): Decimal;
-
   toDecimalPlaces(decimalPlaces: number, rounding: Decimal.Rounding): Decimal;
-
   toDP(decimalPlaces?: number): Decimal;
-
   toDP(decimalPlaces: number, rounding: Decimal.Rounding): Decimal;
 
   toExponential(decimalPlaces?: number): string;
-
   toExponential(decimalPlaces: number, rounding: Decimal.Rounding): string;
 
   toFixed(decimalPlaces?: number): string;
-
   toFixed(decimalPlaces: number, rounding: Decimal.Rounding): string;
 
   toFraction(max_denominator?: Decimal.Value): Decimal[];
 
   toHexadecimal(significantDigits?: number): string;
-
   toHexadecimal(significantDigits: number, rounding: Decimal.Rounding): string;
-
   toHex(significantDigits?: number): string;
-
   toHex(significantDigits: number, rounding?: Decimal.Rounding): string;
 
   toJSON(): string;
@@ -1165,154 +929,90 @@ declare class Decimal {
   toNumber(): number;
 
   toOctal(significantDigits?: number): string;
-
   toOctal(significantDigits: number, rounding: Decimal.Rounding): string;
 
   toPower(n: Decimal.Value): Decimal;
-
   pow(n: Decimal.Value): Decimal;
 
   toPrecision(significantDigits?: number): string;
-
   toPrecision(significantDigits: number, rounding: Decimal.Rounding): string;
 
   toSignificantDigits(significantDigits?: number): Decimal;
-
   toSignificantDigits(significantDigits: number, rounding: Decimal.Rounding): Decimal;
-
   toSD(significantDigits?: number): Decimal;
-
   toSD(significantDigits: number, rounding: Decimal.Rounding): Decimal;
 
   toString(): string;
 
   truncated(): Decimal;
-
   trunc(): Decimal;
 
   valueOf(): string;
 
   static abs(n: Decimal.Value): Decimal;
-
   static acos(n: Decimal.Value): Decimal;
-
   static acosh(n: Decimal.Value): Decimal;
-
   static add(x: Decimal.Value, y: Decimal.Value): Decimal;
-
   static asin(n: Decimal.Value): Decimal;
-
   static asinh(n: Decimal.Value): Decimal;
-
   static atan(n: Decimal.Value): Decimal;
-
   static atanh(n: Decimal.Value): Decimal;
-
   static atan2(y: Decimal.Value, x: Decimal.Value): Decimal;
-
   static cbrt(n: Decimal.Value): Decimal;
-
   static ceil(n: Decimal.Value): Decimal;
-
   static clone(object?: Decimal.Config): Decimal.Constructor;
-
   static config(object: Decimal.Config): Decimal.Constructor;
-
   static cos(n: Decimal.Value): Decimal;
-
   static cosh(n: Decimal.Value): Decimal;
-
   static div(x: Decimal.Value, y: Decimal.Value): Decimal;
-
   static exp(n: Decimal.Value): Decimal;
-
   static floor(n: Decimal.Value): Decimal;
-
   static hypot(...n: Decimal.Value[]): Decimal;
-
   static isDecimal(object: any): boolean
-
   static ln(n: Decimal.Value): Decimal;
-
   static log(n: Decimal.Value, base?: Decimal.Value): Decimal;
-
   static log2(n: Decimal.Value): Decimal;
-
   static log10(n: Decimal.Value): Decimal;
-
   static max(...n: Decimal.Value[]): Decimal;
-
   static min(...n: Decimal.Value[]): Decimal;
-
   static mod(x: Decimal.Value, y: Decimal.Value): Decimal;
-
   static mul(x: Decimal.Value, y: Decimal.Value): Decimal;
-
   static noConflict(): Decimal.Constructor;   // Browser only
-
   static pow(base: Decimal.Value, exponent: Decimal.Value): Decimal;
-
   static random(significantDigits?: number): Decimal;
-
   static round(n: Decimal.Value): Decimal;
-
   static set(object: Decimal.Config): Decimal.Constructor;
-
   static sign(n: Decimal.Value): Decimal;
-
   static sin(n: Decimal.Value): Decimal;
-
   static sinh(n: Decimal.Value): Decimal;
-
   static sqrt(n: Decimal.Value): Decimal;
-
   static sub(x: Decimal.Value, y: Decimal.Value): Decimal;
-
   static tan(n: Decimal.Value): Decimal;
-
   static tanh(n: Decimal.Value): Decimal;
-
   static trunc(n: Decimal.Value): Decimal;
 
   static readonly default?: Decimal.Constructor;
-
   static readonly Decimal?: Decimal.Constructor;
 
   static readonly precision: number;
-
   static readonly rounding: Decimal.Rounding;
-
   static readonly toExpNeg: number;
-
   static readonly toExpPos: number;
-
   static readonly minE: number;
-
   static readonly maxE: number;
-
   static readonly crypto: boolean;
-
   static readonly modulo: Decimal.Modulo;
 
   static readonly ROUND_UP: 0;
-
   static readonly ROUND_DOWN: 1;
-
   static readonly ROUND_CEIL: 2;
-
   static readonly ROUND_FLOOR: 3;
-
   static readonly ROUND_HALF_UP: 4;
-
   static readonly ROUND_HALF_DOWN: 5;
-
   static readonly ROUND_HALF_EVEN: 6;
-
   static readonly ROUND_HALF_CEIL: 7;
-
   static readonly ROUND_HALF_FLOOR: 8;
-
   static readonly EUCLID: 9;
 }
 
-export { DMMF, DMMFClass, Decimal, NodeEngine as Engine, PrismaClientInitializationError, PrismaClientKnownRequestError, PrismaClientOptions, PrismaClientRustPanicError, PrismaClientUnknownRequestError, PrismaClientValidationError, RawValue, Sql, Value, Debug as debugLib, empty, getPrismaClient, join, makeDocument, raw, sqltag, transformDocument, unpack, warnEnvConflicts };
+export { DMMF, DMMFClass, Decimal, NodeEngine as Engine, PrismaClientInitializationError, PrismaClientKnownRequestError, PrismaClientOptions, PrismaClientRustPanicError, PrismaClientUnknownRequestError, PrismaClientValidationError, RawValue, Sql, Value, empty, getPrismaClient, join, makeDocument, raw, sqltag, transformDocument, unpack, warnEnvConflicts };

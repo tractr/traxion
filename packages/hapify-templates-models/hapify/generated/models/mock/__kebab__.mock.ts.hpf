@@ -1,0 +1,100 @@
+import { 
+  <<Model pascal>>,
+} from '../models';
+
+<<if Fields enum>>
+import {
+  <<for Fields enum enumField>>
+  <<Model pascal>><<enumField pascal>>
+  <<endfor>>
+} from '../enums';
+<<endif>>
+
+import {
+
+  <<if Fields primary or entity or number or boolean>>
+  random,
+  <<endif>>
+
+  <<if Fields email or password or url>>
+  internet,
+  <<endif>>
+
+  <<if Fields string and not (primary or email or password or url)>>
+  lorem,
+  <<endif>>
+
+  <<if Fields datetime>>
+  date
+  <<endif>>
+
+} from 'faker';
+  
+<<for Fields field>>
+  <<if field not entity>>
+export function mock<<Model pascal>><<field pascal>>Factory(): <<=getMockReturnType(field)>> {
+  return <<=getFaker(field)>>;
+}
+  
+  <<elseif field oneOne or oneMany>>
+export function mock<<Model pascal>><<field pascal>>IdFactory(): <<=getMockReturnType(field)>> {
+  return <<=getFaker(field)>>;
+}
+    
+  <<else>>
+export function mock<<Model pascal>><<field pascal>>IdsFactory(): string[] {
+  return <<=getFaker(field)>>;
+
+}
+    
+  <<endif>>
+<<endfor>>
+  
+export function mock<<Model pascal>>Factory(override: Partial< <<Model pascal>> > = {}): <<Model pascal>> {
+  return {
+  <<for Fields not entity field>>
+    <<field camel>>: mock<<Model pascal>><<field pascal>>Factory(),
+  <<endfor>>
+  <<for Fields oneOne or oneMany field>>
+    <<field camel>>Id: mock<<Model pascal>><<field pascal>>IdFactory(),
+  <<endfor>>
+    ...override,
+  };
+}
+
+<<<
+function getBaseFaker(f) {
+  if (f.primary && f.type === 'string') return 'random.uuid()';
+  if (f.primary && f.type === 'number') return 'random.number()';
+  if (f.type === 'string' && !f.subtype) return 'lorem.words()';
+  if (f.type === 'string' && f.subtype === 'email') return 'internet.email()';
+  if (f.type === 'string' && f.subtype === 'password') return 'internet.password()';
+  if (f.type === 'string' && f.subtype === 'url') return 'internet.url()';
+  if (f.type === 'boolean') return 'random.boolean()';
+  if (f.type === 'number') return 'random.number()';
+  if (f.type === 'datetime') return 'date.past()';
+  if (f.type === 'entity') return 'random.uuid()';
+  if (f.type === 'enum') return `random.arrayElement(Object.values(${root.names.pascal}${f.names.pascal}))`;
+}
+>>>
+ 
+<<<
+function getFaker(f) {
+  if (f.multiple) {
+   return `[...Array(3)].map(() => ${getBaseFaker(f)})`; 
+  } else {
+    return getBaseFaker(f);
+  }
+}
+>>>
+<<<
+function getMockReturnType(f) {
+  let out = '';
+  if (f.nullable) out += 'NonNullable<';
+  out += `${root.names.pascal}['${f.names.camel}`;
+  if (f.subtype === 'oneOne' || f.subtype === 'oneMany') out += 'Id';
+  out += "']"
+  if (f.nullable) out += '>';
+  return out;
+}
+>>>

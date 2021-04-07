@@ -1,11 +1,14 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "rootDir": ".",
     "outDir": "./dist",
     "paths": {
-      "@prisma/client": ["generated/prisma"]
+      "@prisma/client": ["src/generated/prisma"],
+      "@generated/*": ["src/generated/*"],
+      "@generated-test/*": ["test/generated/*"],
+      "@generated-mock/*": ["mock/generated/*"]
     }
   }
 }
