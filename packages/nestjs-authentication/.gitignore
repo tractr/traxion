@@ -7,3 +7,4 @@ prisma/migrations
 !prisma/schema.prisma
 
 !src/generated
+src/generated/prisma/query-engine-debian-openssl*
