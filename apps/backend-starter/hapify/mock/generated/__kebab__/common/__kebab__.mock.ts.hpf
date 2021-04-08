@@ -8,6 +8,10 @@ import {
 import {
 
   <<if Fields primary or entity or number or boolean>>
+  datatype,
+  <<endif>>
+
+  <<if Fields enum>>
   random,
   <<endif>>
 
@@ -59,16 +63,16 @@ export function mock<<Model pascal>>Factory(override: Partial< <<Model pascal>> 
 
 <<<
 function getBaseFaker(f) {
-  if (f.primary && f.type === 'string') return 'random.uuid()';
-  if (f.primary && f.type === 'number') return 'random.number()';
+  if (f.primary && f.type === 'string') return 'datatype.uuid()';
+  if (f.primary && f.type === 'number') return 'datatype.number()';
   if (f.type === 'string' && !f.subtype) return 'lorem.words()';
   if (f.type === 'string' && f.subtype === 'email') return 'internet.email()';
   if (f.type === 'string' && f.subtype === 'password') return 'internet.password()';
   if (f.type === 'string' && f.subtype === 'url') return 'internet.url()';
-  if (f.type === 'boolean') return 'random.boolean()';
-  if (f.type === 'number') return 'random.number()';
+  if (f.type === 'boolean') return 'datatype.boolean()';
+  if (f.type === 'number') return 'datatype.number()';
   if (f.type === 'datetime') return 'date.past()';
-  if (f.type === 'entity') return 'random.uuid()';
+  if (f.type === 'entity') return 'datatype.uuid()';
   if (f.type === 'enum') return `random.arrayElement(Object.values(${root.names.pascal}${f.names.pascal}))`;
 }
 >>>
