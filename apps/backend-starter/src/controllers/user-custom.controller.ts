@@ -1,7 +1,8 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { User } from '@prisma/client';
 
 import { UserController, UserFindManyQueryDto } from '../generated/user';
+
+import { User } from '@prisma/client';
 
 @Controller(['user'])
 export class UserCustomController extends UserController {
@@ -9,7 +10,7 @@ export class UserCustomController extends UserController {
   public async findMany(
     @Query() queryDto: UserFindManyQueryDto,
   ): Promise<User[]> {
-    console.log('Controller has been overrided');
+    console.info('Controller has been overrided');
     const formatedParams = this.userRestDtoService.formatFindManyDto(queryDto);
     return this.userService.findMany(formatedParams);
   }

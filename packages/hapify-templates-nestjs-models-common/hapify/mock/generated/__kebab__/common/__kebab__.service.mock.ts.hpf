@@ -1,14 +1,7 @@
+import { mockDeep } from 'jest-mock-extended';
+ 
 import { <<Model pascal>>Service } from '@generated/<<Model kebab>>/common';
-  
-export function mock<<Model pascal>>ServiceFactory(): <<Model pascal>>Service {
-  return ({
-    create: jest.fn(),
-    findUnique: jest.fn(),
-    findMany: jest.fn(),
-    count: jest.fn(),
-    update: jest.fn(),
-    upsert: jest.fn(),
-    delete: jest.fn(),
-  } as unknown) as <<Model pascal>>Service;
+ 
+export function mock<<Model pascal>>ServiceFactory() {
+  return mockDeep<<<Model pascal>>Service>();
 }
-

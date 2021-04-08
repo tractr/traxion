@@ -1,8 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ModuleOverride } from '@tractr/nestjs-core';
  
-import { <<Model pascal>>DatabaseService, <<Model pascal>>Service } from './services';
 import { <<Model constant>>_DATABASE_SERVICE, <<Model constant>>_SERVICE } from './<<Model kebab>>-model.constant';
+import {
+  <<Model camel>>DatabaseServiceFactory,
+  <<Model camel>>DatabaseServiceInject,
+  <<Model pascal>>Service
+} from './services';
  
 const providers = [
   {
@@ -11,7 +15,8 @@ const providers = [
   },
   {
     provide: <<Model constant>>_DATABASE_SERVICE,
-    useClass: <<Model pascal>>DatabaseService,
+    useFactory: <<Model camel>>DatabaseServiceFactory,
+    inject: <<Model camel>>DatabaseServiceInject
   },
 ];
  
@@ -20,4 +25,4 @@ const providers = [
   providers,
 })
 export class <<Model pascal>>ModelModule extends ModuleOverride {}
-
+ 
