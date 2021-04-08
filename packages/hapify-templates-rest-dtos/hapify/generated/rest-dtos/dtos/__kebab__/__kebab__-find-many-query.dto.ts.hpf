@@ -74,7 +74,7 @@ export class <<Model pascal>>FindManyQueryDto {
 
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
   @IsString({ each: true })
-  @IsIn(Object.values(<<Model pascal>>Include), { each: true })
+  @IsIn(<<Model pascal>>Include, { each: true })
   @IsOptional()
   populate?: <<Model pascal>>Include[];
 <<<}>>>

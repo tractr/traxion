@@ -9,7 +9,7 @@ import { <<Model pascal>>Include } from '@generated/models';
 
 export class <<Model pascal>>FindUniqueQueryDto {
   @IsString({ each: true })
-  @IsIn(Object.values(<<Model pascal>>Include),
+  @IsIn(<<Model pascal>>Include,
     { each: true }
   )
   @IsOptional()

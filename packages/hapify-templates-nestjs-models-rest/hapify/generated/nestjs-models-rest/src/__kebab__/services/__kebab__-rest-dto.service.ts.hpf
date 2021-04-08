@@ -39,7 +39,7 @@ export class <<Model pascal>>RestDtoService {
     <<for Fields entity and not internal field>>
       <<field camel>>,
     <<endfor>>
-    ...values,
+    ...values
     } = bodyDto;
     const data = {
       ...values,
@@ -74,7 +74,7 @@ export class <<Model pascal>>RestDtoService {
     <<for Fields searchable and (multiple or entity) field>>
       <<field camel>>,
     <<endfor>>
-      ...values,
+      ...values
     } = queryDto;
     const where = {
     <<for Fields searchable and (multiple or entity) field>>
@@ -86,7 +86,7 @@ export class <<Model pascal>>RestDtoService {
         <<field camel>>: <<field camel>> ? { some: { id: { in: <<field camel>> } } }: undefined,
       <<endif>>
     <<endfor>>
-        ...values,
+        ...values
     }
     return { where };
   }
@@ -137,7 +137,7 @@ export class <<Model pascal>>RestDtoService {
       order,
       take,
       skip,
-      ...values,
+      ...values
     } = queryDto;
     const where: Prisma.<<Model pascal>>WhereInput = {
     <<for Fields searchable and (multiple or entity) field>>
