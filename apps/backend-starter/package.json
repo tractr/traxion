@@ -12,7 +12,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "npm run generate && nest build",
-    "generate": "rimraf src/generated && rimraf test/generated && rimraf mock/generated && npm run hpf:generate && npm run prisma:merge-schema && npm run prisma:format && npm run prisma:generate && npm run lint:prettier:fix",
+    "generate": "rimraf generated && rimraf src/generated && rimraf test/generated && rimraf mock/generated && npm run hpf:generate && npm run prisma:merge-schema && npm run prisma:format && npm run prisma:generate && npm run lint:prettier:fix",
     "hpf:generate": "npm run hpf:generate:config && hpf generate",
     "hpf:serve": "hpf serve",
     "hpf:generate:config": "hpf-generate-config",

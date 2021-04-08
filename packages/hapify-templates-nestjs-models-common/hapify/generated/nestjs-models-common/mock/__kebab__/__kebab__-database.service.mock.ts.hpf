@@ -1,6 +1,6 @@
 import { mockDeep } from 'jest-mock-extended';
  
-import { <<Model pascal>>DatabaseService } from '@generated/<<Model kebab>>/common';
+import { <<Model pascal>>DatabaseService } from '../../src';
  
 export function mock<<Model pascal>>DatabaseServiceFactory() {
   return mockDeep<<<Model pascal>>DatabaseService>();

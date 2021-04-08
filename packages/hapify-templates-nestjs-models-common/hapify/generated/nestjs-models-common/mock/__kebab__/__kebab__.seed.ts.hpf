@@ -11,7 +11,7 @@ import {
 import { random } from 'faker';
 <<endif>>
   
-import { mock<<Model pascal>>Factory } from './<<Model kebab>>.mock';
+import { mock<<Model pascal>>Factory } from '@generated/models';
   
 <<if Fields manyMany>>
 export interface <<Model pascal>>Seed extends <<Model pascal>> {

@@ -79,11 +79,6 @@ module.exports = {
       input: 'one',
     },
     {
-      path: 'generated/nestjs-models-common/mock/{kebab}/{kebab}.mock.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
       path: 'generated/nestjs-models-common/mock/{kebab}/{kebab}.seed.ts',
       engine: 'hpf',
       input: 'one',
@@ -108,7 +103,7 @@ module.exports = {
     },
     {
       path:
-        'generated/nestjs-models-common/test/{kebab}-database.service.spec.ts',
+        'generated/nestjs-models-common/test/{kebab}/{kebab}-database.service.spec.ts',
       engine: 'hpf',
       input: 'one',
     },
