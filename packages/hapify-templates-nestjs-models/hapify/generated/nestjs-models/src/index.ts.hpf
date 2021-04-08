@@ -1,5 +1,4 @@
 export * from './models.module';
-export * from './helpers';
 
 <<for Models model>>
 export * from './<<model kebab>>';
