@@ -7,7 +7,6 @@ import {
   UserService,
 } from '@generated/nestjs-models-common';
 
-
 @Injectable()
 export class UserCustomService extends UserService {
   constructor(
