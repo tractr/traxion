@@ -3,7 +3,7 @@ name: Release and Deploy
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   npm-release:
