@@ -18,7 +18,7 @@
   "dependencies": {},
   "devDependencies": {},
   "peerDependencies": {
-    "@tractr/hapify-templates-models": "^0.0.1"
+    "@tractr/hapify-templates-models": "^1.0.0"
   },
   "publishConfig": {
     "access": "restricted",

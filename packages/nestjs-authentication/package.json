@@ -66,7 +66,7 @@
   "devDependencies": {
     "@nestjs/testing": "^7.6.11",
     "@tractr/hapify-templates-nestjs-models-common": "1.1.1",
-    "@tractr/hapify-templates-models": "0.0.1",
+    "@tractr/hapify-templates-models": "1.0.0",
     "@tractr/hapify-templates-prisma": "1.1.0",
     "@types/bcrypt": "^3.0.0",
     "@types/passport-jwt": "^3.0.4",
