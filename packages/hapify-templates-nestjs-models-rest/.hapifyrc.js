@@ -3,183 +3,95 @@ module.exports = {
   description: 'Generate the models for a Nestjs application',
   templates: [
     {
-      path: 'src/generated/helpers/index.ts',
+      path: 'generated/nestjs-models-rest/index.ts',
       engine: 'hpf',
-      input: 'one',
+      input: 'all',
     },
     {
-      path: 'src/generated/helpers/format-populate.helper.ts',
+      path: 'generated/nestjs-models-rest/src/index.ts',
       engine: 'hpf',
-      input: 'one',
+      input: 'all',
     },
     {
-      path: 'src/generated/helpers/format-entity-ids.helper.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/index.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/{kebab}-rest.constant.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/{kebab}-rest.module.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/controllers/index.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/controllers/{kebab}.controller.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/services/index.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/services/{kebab}-rest-dto.service.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/dtos/index.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/dtos/{kebab}-create-body.dto.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/dtos/{kebab}-find-unique-query.dto.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/dtos/{kebab}-find-unique-params.dto.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/dtos/{kebab}-find-many-query.dto.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/dtos/{kebab}-count-query.dto.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/dtos/{kebab}-update-params.dto.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/dtos/{kebab}-update-body.dto.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/dtos/{kebab}-upsert-params.dto.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/dtos/{kebab}-upsert-body.dto.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'src/generated/{kebab}/rest/dtos/{kebab}-delete-params.dto.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'mock/generated/{kebab}/rest/index.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'mock/generated/{kebab}/rest/{kebab}-rest-dto.service.mock.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'mock/generated/{kebab}/rest/{kebab}-count-query.dto.mock.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'mock/generated/{kebab}/rest/{kebab}-create-body.dto.mock.ts',
+      path: 'generated/nestjs-models-rest/src/helpers/index.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
       path:
-        'mock/generated/{kebab}/rest/{kebab}-find-unique-params.dto.mock.ts',
+        'generated/nestjs-models-rest/src/helpers/format-populate.helper.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path: 'mock/generated/{kebab}/rest/{kebab}-find-unique-query.dto.mock.ts',
+      path:
+        'generated/nestjs-models-rest/src/helpers/format-entity-ids.helper.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path: 'mock/generated/{kebab}/rest/{kebab}-find-many-query.dto.mock.ts',
+      path: 'generated/nestjs-models-rest/src/{kebab}/index.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path: 'mock/generated/{kebab}/rest/{kebab}-update-params.dto.mock.ts',
+      path: 'generated/nestjs-models-rest/src/{kebab}/{kebab}-rest.constant.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path: 'mock/generated/{kebab}/rest/{kebab}-update-body.dto.mock.ts',
+      path: 'generated/nestjs-models-rest/src/{kebab}/{kebab}-rest.module.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path: 'mock/generated/{kebab}/rest/{kebab}-upsert-params.dto.mock.ts',
+      path: 'generated/nestjs-models-rest/src/{kebab}/controllers/index.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path: 'mock/generated/{kebab}/rest/{kebab}-upsert-body.dto.mock.ts',
+      path:
+        'generated/nestjs-models-rest/src/{kebab}/controllers/{kebab}.controller.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path: 'mock/generated/{kebab}/rest/{kebab}-delete-params.dto.mock.ts',
+      path: 'generated/nestjs-models-rest/src/{kebab}/services/index.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path: 'test/generated/{kebab}/rest/unit/{kebab}-rest-dto.service.spec.ts',
+      path:
+        'generated/nestjs-models-rest/src/{kebab}/services/{kebab}-rest-dto.service.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path: 'test/generated/{kebab}/rest/unit/{kebab}.controller.spec.ts',
+      path: 'generated/nestjs-models-rest/mock/index.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path:
+        'generated/nestjs-models-rest/mock/{kebab}-rest-dto.service.mock.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path: 'test/generated/{kebab}/rest/e2e/{kebab}-create.e2e-spec.ts',
+      path:
+        'generated/nestjs-models-rest/test/{kebab}/unit/{kebab}-rest-dto.service.spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'generated/nestjs-models-rest/test/{kebab}/unit/{kebab}.controller.spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path:
+        'generated/nestjs-models-rest/test/{kebab}/e2e/{kebab}-create.e2e-spec.ts',
       engine: 'hpf',
       input: 'one',
     },

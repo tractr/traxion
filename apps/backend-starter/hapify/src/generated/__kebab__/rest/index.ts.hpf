@@ -1,5 +1,0 @@
-export * from './controllers';
-export * from './dtos';
-export * from './services';
-export * from './<<Model kebab>>-rest.constant';
-export * from './<<Model kebab>>-rest.module';

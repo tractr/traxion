@@ -12,7 +12,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "npm run generate && nest build",
-    "generate": "rimraf src/generated && rimraf test/generated && rimraf mock/generated && npm run hpf:generate && npm run prisma:merge-schema && npm run prisma:format && npm run prisma:generate && npm run lint:prettier:fix",
+    "generate": "rimraf generated && npm run hpf:generate && npm run prisma:merge-schema && npm run prisma:format && npm run prisma:generate && npm run lint:prettier:fix",
     "hpf:generate": "npm run hpf:generate:config && hpf generate",
     "hpf:serve": "hpf serve",
     "hpf:generate:config": "hpf-generate-config",
@@ -89,6 +89,8 @@
     "@nestjs/testing": "^7.6.11",
     "@tractr/hapify-templates-nestjs-models-common": "1.1.1",
     "@tractr/hapify-templates-nestjs-models-rest": "1.1.1",
+    "@tractr/hapify-templates-models": "1.0.0",
+    "@tractr/hapify-templates-rest-dtos": "1.0.0",
     "@tractr/nestjs-testing": "1.1.0",
     "@types/dotenv": "8.2.0",
     "@types/express": "^4.17.11",

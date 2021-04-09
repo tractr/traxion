@@ -5,10 +5,8 @@
     "rootDir": ".",
     "outDir": "./dist",
     "paths": {
-      "@prisma/client": ["src/generated/prisma"],
-      "@generated/*": ["src/generated/*"],
-      "@generated-test/*": ["test/generated/*"],
-      "@generated-mock/*": ["mock/generated/*"]
+      "@prisma/client": ["generated/prisma"],
+      "@generated/*": ["generated/*"]
     }
   }
 }

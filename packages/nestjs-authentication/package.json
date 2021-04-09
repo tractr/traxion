@@ -17,7 +17,7 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "build:watch": "npm run build -- --watch",
-    "generate:auth": "rimraf src/generated && rimraf test/generated && rimraf mock/generated && npm run hpf:generate && npm run prisma:merge-schema && npm run prisma:format && npm run prisma:generate && npm run lint:prettier:fix",
+    "generate:auth": "rimraf generated && npm run hpf:generate && npm run prisma:merge-schema && npm run prisma:format && npm run prisma:generate && npm run lint:prettier:fix",
     "hpf:generate": "npm run hpf:generate:config && hpf generate",
     "hpf:generate:config": "hpf-generate-config",
     "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint",
@@ -66,6 +66,7 @@
   "devDependencies": {
     "@nestjs/testing": "^7.6.11",
     "@tractr/hapify-templates-nestjs-models-common": "1.1.1",
+    "@tractr/hapify-templates-models": "1.0.0",
     "@tractr/hapify-templates-prisma": "1.1.0",
     "@types/bcrypt": "^3.0.0",
     "@types/passport-jwt": "^3.0.4",
