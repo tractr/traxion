@@ -74,7 +74,7 @@ function mergeHapifyConfigs(
   return deepmerge(configX || {}, configY, {
     customMerge: (key) => {
       if (key === 'extends') return (_, toKeep) => toKeep;
-      if (key === 'defaultFields') return (toKeep) => toKeep;
+      if (key === 'defaultFields') return (_, toKeep) => toKeep;
 
       return undefined;
     },
