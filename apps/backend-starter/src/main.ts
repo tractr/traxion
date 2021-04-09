@@ -12,7 +12,7 @@ async function bootstrap(): Promise<void> {
   // Set custom logger service
   app.useLogger(await app.resolve(Logger));
 
-  app.enableCors({});
+  app.enableCors();
 
   // Set global validation pipe
   app.useGlobalPipes(

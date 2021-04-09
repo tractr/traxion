@@ -1,4 +1,13 @@
-import { Answer } from '@generated/models';
-import { TagService } from './tag.service';
+import { tap } from 'rxjs/operators';
+import { post } from './tag.service';
 
-console.info(Answer);
+async function start() {
+  const tag = {
+    label: 'Test label tag'
+  };
+  post('https://localhost:3000/tag', tag).pipe(
+    tap(console.log)
+  ).subscribe();
+}
+
+start();
