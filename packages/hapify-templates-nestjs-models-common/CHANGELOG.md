@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-templates-nestjs-models-common [1.1.1](https://github.com/tractr/stack/compare/@tractr/hapify-templates-nestjs-models-common@1.1.0...@tractr/hapify-templates-nestjs-models-common@1.1.1) (2021-04-09)
+
+
+### Bug Fixes
+
+* get the prisma type all the way up to enjoy the prisma generated good typing ([#55](https://github.com/tractr/stack/issues/55)) ([114f288](https://github.com/tractr/stack/commit/114f288b07b9e3b6e1f53b78e821474e568ebf4a))
+
 # @tractr/hapify-templates-nestjs-models-common [1.1.0](https://github.com/tractr/stack/compare/@tractr/hapify-templates-nestjs-models-common@1.0.0...@tractr/hapify-templates-nestjs-models-common@1.1.0) (2021-03-19)
 
 

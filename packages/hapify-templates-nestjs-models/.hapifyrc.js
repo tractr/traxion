@@ -3,22 +3,27 @@ module.exports = {
   description: 'Generate the models for a Nestjs application',
   templates: [
     {
-      path: 'src/generated/index.ts',
+      path: 'generated/nestjs-models/index.ts',
       engine: 'hpf',
       input: 'all',
     },
     {
-      path: 'src/generated/models.module.ts',
+      path: 'generated/nestjs-models/src/index.ts',
       engine: 'hpf',
       input: 'all',
     },
     {
-      path: 'src/generated/{kebab}/index.ts',
+      path: 'generated/nestjs-models/src/models.module.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'generated/nestjs-models/src/{kebab}/index.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path: 'src/generated/{kebab}/{kebab}.module.ts',
+      path: 'generated/nestjs-models/src/{kebab}/{kebab}.module.ts',
       engine: 'hpf',
       input: 'one',
     },

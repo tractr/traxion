@@ -1,24 +1,3 @@
-import { PrismaClientOptions } from '@prisma/client/runtime';
+import { PrismaClientOptions } from '../services/database.service';
 
-export const PRISMA_OPTIONS: PrismaClientOptions = {
-  rejectOnNotFound: true,
-
-  log: [
-    {
-      emit: 'event',
-      level: 'query',
-    },
-    {
-      emit: 'event',
-      level: 'error',
-    },
-    {
-      emit: 'event',
-      level: 'info',
-    },
-    {
-      emit: 'event',
-      level: 'warn',
-    },
-  ],
-};
+export const PRISMA_OPTIONS: PrismaClientOptions = {};
