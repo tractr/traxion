@@ -4,6 +4,7 @@ import { LoggerModule, PrismaExceptionFilter } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 
 import { AppController } from './controllers';
+
 import { ModelsModule } from '@generated/nestjs-models';
 
 @Module({

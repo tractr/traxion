@@ -9,7 +9,6 @@ import {
 } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 
-import { UserModelModule } from '@generated/nestjs-models-common';
 import {
   AUTHENTICATION_OPTIONS,
   AuthenticationModuleOptionsFactory,
@@ -19,6 +18,8 @@ import { LoginController } from './controllers';
 import { AuthenticationOptions } from './interfaces';
 import { AuthenticationService, StrategyOptionsService } from './services';
 import { JwtStrategy, LocalStrategy } from './strategies';
+
+import { UserModelModule } from '@generated/nestjs-models-common';
 
 @Module({})
 export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOptions>(
