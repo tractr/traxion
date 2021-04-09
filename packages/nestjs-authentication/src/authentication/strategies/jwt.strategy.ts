@@ -2,8 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-jwt';
 
-import { UserService } from '../../generated/user/common';
-import { USER_SERVICE } from '../../generated/user/common/user-model.constant';
+import { UserService, USER_SERVICE } from '@generated/nestjs-models-common';
 import { JwtTokenPayload } from '../dtos';
 import { StrategyOptionsService } from '../services';
 

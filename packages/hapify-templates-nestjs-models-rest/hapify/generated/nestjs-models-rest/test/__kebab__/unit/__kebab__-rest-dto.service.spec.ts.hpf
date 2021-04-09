@@ -53,7 +53,7 @@ describe('<<Model pascal>>DatabaseService', () => {
       <<for Fields entity and not internal field>>
         <<field camel>>,
       <<endfor>>
-      ...values,
+      ...values
       } = bodyDto;
       const data = {
         ...values,
@@ -78,7 +78,7 @@ describe('<<Model pascal>>DatabaseService', () => {
       <<for Fields searchable and (multiple or entity) field>>
         <<field camel>>,
       <<endfor>>
-      ...values,
+      ...values
       } = queryDto;
       const where = {
         ...values,
@@ -183,7 +183,7 @@ describe('<<Model pascal>>DatabaseService', () => {
       <<for Fields entity and not internal field>>
         <<field camel>>,
       <<endfor>>
-      ...values,
+      ...values
       } = bodyDto;
       const data = {
         ...values,
@@ -209,7 +209,7 @@ describe('<<Model pascal>>DatabaseService', () => {
       <<for Fields entity and not internal field>>
         <<field camel>>,
       <<endfor>>
-      ...values,
+      ...values
       } = bodyDto;
       const create = {
         ...values,

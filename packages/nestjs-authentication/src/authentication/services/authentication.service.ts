@@ -2,8 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
-import { UserService } from '../../generated/user/common';
-import { USER_SERVICE } from '../../generated/user/common/user-model.constant';
+import { UserService, USER_SERVICE } from '@generated/nestjs-models-common';
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
 import { AccessTokenDto } from '../dtos';
 import { BadPasswordError, UserNotFoundError } from '../errors';

@@ -74,7 +74,7 @@ export function generate<<Model pascal>>Seeds(
   return [...Array(quantity)].map(() =>
   <<if Fields manyMany>>
   {
-    const <<Model camel>>: <<Model pascal>> = mock<<Model pascal>>Factory(
+    const <<Model camel>> = mock<<Model pascal>>Factory(
     <<if Fields oneOne or oneMany>>
     {
       <<for Fields oneOne or oneMany field>>
@@ -82,7 +82,7 @@ export function generate<<Model pascal>>Seeds(
       <<endfor>>
     }
     <<endif>>
-    );
+    ) as <<Model pascal>>;
     const seed: <<Model pascal>>Seed = {
       ...<<Model camel>>,
     <<for Fields manyMany field>>
@@ -102,7 +102,7 @@ export function generate<<Model pascal>>Seeds(
     <<endif>>
     )
   <<endif>>
-  );
+  ) as <<Model pascal>><<if Fields manyMany>>Seed<<endif>>[];
 }
   
 export async function seed<<Model pascal>>s(
