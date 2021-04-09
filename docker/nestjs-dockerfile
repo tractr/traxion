@@ -44,4 +44,4 @@ COPY --from=build /root/tractr/${app}/dist ./dist
 
 # expose port and define CMD
 EXPOSE 3000
-CMD npm run start:prod
+CMD ["npm", "run", "start:prod"]

@@ -1,3 +1,4 @@
+import { UserModelModule } from '@generated/nestjs-models-common';
 import { DynamicModule, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
@@ -18,8 +19,6 @@ import { LoginController } from './controllers';
 import { AuthenticationOptions } from './interfaces';
 import { AuthenticationService, StrategyOptionsService } from './services';
 import { JwtStrategy, LocalStrategy } from './strategies';
-
-import { UserModelModule } from '@generated/nestjs-models-common';
 
 @Module({})
 export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOptions>(
