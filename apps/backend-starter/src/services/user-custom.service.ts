@@ -4,7 +4,7 @@ import {
   USER_DATABASE_SERVICE,
   UserDatabaseService,
   UserService,
-} from '../generated/user';
+} from '@generated/user';
 
 import { Prisma } from '@prisma/client';
 
