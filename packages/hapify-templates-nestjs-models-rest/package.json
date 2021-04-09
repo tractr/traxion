@@ -1,6 +1,6 @@
 {
   "name": "@tractr/hapify-templates-nestjs-models-rest",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Hapify templates for nestjs models rest features",
   "repository": {
     "type": "git",
@@ -17,10 +17,10 @@
   "scripts": {},
   "dependencies": {},
   "devDependencies": {
-    "@tractr/hapify-templates-nestjs-models-common": "1.1.0"
+    "@tractr/hapify-templates-nestjs-models-common": "1.1.1"
   },
   "peerDependencies": {
-    "@tractr/hapify-templates-nestjs-models-common": "1.1.0",
+    "@tractr/hapify-templates-nestjs-models-common": "1.1.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.0"
   },
