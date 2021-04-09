@@ -31,9 +31,6 @@
     ]
   },
   "prettier": "@tractr/prettier-config",
-  "eslintConfig": {
-    "extends": "@tractr"
-  },
   "jest": {
     "preset": "@tractr/jest-config"
   },
