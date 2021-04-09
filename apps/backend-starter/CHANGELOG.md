@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## backend-starter [1.4.2](https://github.com/tractr/stack/compare/backend-starter@1.4.1...backend-starter@1.4.2) (2021-04-09)
+
+
+### Bug Fixes
+
+* update eslint configuration to allow [@generated](https://github.com/generated) paths ([#57](https://github.com/tractr/stack/issues/57)) ([e7a0c2b](https://github.com/tractr/stack/commit/e7a0c2b74f7fd6a820b1e27ea91a20df8b94df2c))
+
 ## backend-starter [1.4.1](https://github.com/tractr/stack/compare/backend-starter@1.4.0...backend-starter@1.4.1) (2021-04-09)
 
 
