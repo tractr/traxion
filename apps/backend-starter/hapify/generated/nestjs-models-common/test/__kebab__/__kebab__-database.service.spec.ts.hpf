@@ -9,6 +9,8 @@ import {
 import {
   <<Model constant>>_DATABASE_SERVICE,
   <<Model pascal>>DatabaseService,
+  <<Model camel>>DatabaseServiceFactory,
+  <<Model camel>>DatabaseServiceInject,
 } from '../../src';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
@@ -22,7 +24,11 @@ describe('<<Model pascal>>DatabaseService', () => {
     mockedDatabaseService = ({ <<Model camel>>: mock<<Model pascal>>DatabaseServiceFactory() } as unknown) as DatabaseService;;
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        { provide: <<Model constant>>_DATABASE_SERVICE, useClass: <<Model pascal>>DatabaseService },
+        {
+          provide: <<Model constant>>_DATABASE_SERVICE,
+          useFactory: <<Model camel>>DatabaseServiceFactory,
+          inject: <<Model camel>>DatabaseServiceInject,
+        },
         { provide: DatabaseService, useValue: mockedDatabaseService },
       ],
     }).compile();
