@@ -18,8 +18,7 @@
   "dependencies": {},
   "devDependencies": {},
   "peerDependencies": {
-    "class-transformer": "^0.4.0",
-    "class-validator": "^0.13.0"
+    "@tractr/hapify-templates-models": "^1.0.0"
   },
   "publishConfig": {
     "access": "restricted",

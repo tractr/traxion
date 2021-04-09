@@ -21,6 +21,7 @@
   },
   "peerDependencies": {
     "@tractr/hapify-templates-nestjs-models-common": "1.1.1",
+    "@tractr/hapify-templates-rest-dtos": "1.0.0",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.0"
   },

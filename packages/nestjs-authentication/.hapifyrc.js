@@ -1,6 +1,7 @@
 module.exports = {
   extends: [
     '@tractr/hapify-templates-prisma',
+    '@tractr/hapify-templates-models',
     '@tractr/hapify-templates-nestjs-models-common',
   ],
   version: '1',

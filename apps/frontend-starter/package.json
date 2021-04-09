@@ -24,7 +24,7 @@
     "lint:prettier:fix": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint:tsc": "tsc --noEmit",
     "lint:tsc:fix": "npm run lint:tsc",
-    "start": "node ./build/index.js",
+    "start": "ts-node src/index.ts",
     "test": "jest --config ./test/jest-unit-test.json"
   },
   "dependencies": {

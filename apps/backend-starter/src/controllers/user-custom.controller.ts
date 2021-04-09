@@ -1,8 +1,9 @@
 import { Controller, Get, Query } from '@nestjs/common';
-
-import { UserController, UserFindManyQueryDto } from '../generated/user';
-
 import { User } from '@prisma/client';
+
+import { UserController } from '@generated/nestjs-models-rest';
+import { UserFindManyQueryDto } from '@generated/rest-dtos';
+
 
 @Controller(['user'])
 export class UserCustomController extends UserController {
