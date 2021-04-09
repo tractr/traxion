@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## backend-starter [1.4.1](https://github.com/tractr/stack/compare/backend-starter@1.4.0...backend-starter@1.4.1) (2021-04-09)
+
+
+### Bug Fixes
+
+* get the prisma type all the way up to enjoy the prisma generated good typing ([#55](https://github.com/tractr/stack/issues/55)) ([114f288](https://github.com/tractr/stack/commit/114f288b07b9e3b6e1f53b78e821474e568ebf4a))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-nestjs-models:** upgraded to 1.1.2
+* **@tractr/nestjs-authentication:** upgraded to 1.4.1
+* **@tractr/nestjs-database:** upgraded to 1.2.2
+* **@tractr/hapify-templates-nestjs-models-common:** upgraded to 1.1.1
+* **@tractr/hapify-templates-nestjs-models-rest:** upgraded to 1.1.1
+
 # backend-starter [1.4.0](https://github.com/tractr/stack/compare/backend-starter@1.3.2...backend-starter@1.4.0) (2021-04-07)
 
 
