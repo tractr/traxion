@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable no-undef */
 // Models validation script
 
 // Model structure: https://docs.hapify.io/en/latest/templating/models-validator/#access-model-properties

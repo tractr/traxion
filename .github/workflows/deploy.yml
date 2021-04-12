@@ -11,17 +11,17 @@ jobs:
       matrix:
         node: [15.x]
         os: [ubuntu-latest]
-    name: npm release on node ${{ matrix.node }} and ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: npm release on node 15.x and ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: use node.js ${{ matrix.node }}
+      - name: use node.js 15.x
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 15.x
           registry-url: https://npm.pkg.github.com
       - uses: actions/cache@v2
         with:

@@ -1,7 +1,10 @@
 #!/bin/sh
-. "$(dirname $0)/_/husky.sh"
+
+# shellcheck disable=SC1090
+. "$(dirname "$0")/_/husky.sh"
 
 if [ -z ${2+x} ]
 then
+    # shellcheck disable=SC2015
     exec < /dev/tty && npx tractr-commit --hook || true
 fi
