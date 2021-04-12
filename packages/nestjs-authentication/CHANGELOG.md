@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# @tractr/nestjs-authentication [1.5.0](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.4.1...@tractr/nestjs-authentication@1.5.0) (2021-04-12)
+
+
+### Features
+
+* update README of packages to publish new versions ([#77](https://github.com/tractr/stack/issues/77)) ([e6bf415](https://github.com/tractr/stack/commit/e6bf415af3fe5588c15577f047a6262f81c1564f))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/nestjs-core:** upgraded to 1.5.0
+* **@tractr/nestjs-database:** upgraded to 1.3.0
+* **@tractr/hapify-templates-nestjs-models-common:** upgraded to 1.2.0
+* **@tractr/hapify-templates-models:** upgraded to 1.1.0
+* **@tractr/hapify-templates-prisma:** upgraded to 1.2.0
+
 ## @tractr/nestjs-authentication [1.4.1](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.4.0...@tractr/nestjs-authentication@1.4.1) (2021-04-09)
 
 
