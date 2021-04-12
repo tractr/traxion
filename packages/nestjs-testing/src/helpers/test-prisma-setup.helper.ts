@@ -2,7 +2,7 @@ import { execSync } from 'child_process';
 
 import { DynamicModule, INestApplication, Type } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
 import { nanoid } from 'nanoid';
 import { Client } from 'pg';

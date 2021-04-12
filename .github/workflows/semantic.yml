@@ -1,4 +1,4 @@
-name: pr commitlint
+name: Pull Request
 
 on:
   pull_request:
@@ -11,6 +11,6 @@ jobs:
   commitlint:
     runs-on: ubuntu-latest
     steps:
-      - uses: amannn/action-semantic-pull-request@v3.1.0
+      - uses: amannn/action-semantic-pull-request@v3.4.0
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
