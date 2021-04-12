@@ -1,5 +1,8 @@
 # Hapify - Prisma Boilerplate
 
+This package contains the hapify templates to generate 
+Prisma database schema.
+
 ## Installation
 
 ```sh

@@ -1,4 +1,7 @@
-# Hapify - NestJS Models Boilerplate
+# Hapify - NestJS Models common
+
+This package contains the hapify templates to generate 
+nestjs common services and modules for models.
 
 ## Installation
 
