@@ -15,7 +15,6 @@ COPY ./lerna.json .
 COPY ./hapify-models.json .
 COPY ${app}/hapify ${app}/hapify
 COPY ${app}/prisma ${app}/prisma
-COPY ${app}/mock ${app}/mock
 COPY ${app}/.hapifyrc.js ${app}
 COPY ${app}/nest-cli.json ${app}
 COPY ${app}/package.json ${app}
