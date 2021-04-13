@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## backend-starter [1.4.4](https://github.com/tractr/stack/compare/backend-starter@1.4.3...backend-starter@1.4.4) (2021-04-13)
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-nestjs-models:** upgraded to 1.2.1
+* **@tractr/nestjs-authentication:** upgraded to 1.5.1
+* **@tractr/hapify-templates-nestjs-models-common:** upgraded to 1.2.1
+* **@tractr/hapify-templates-nestjs-models-rest:** upgraded to 1.2.1
+* **@tractr/hapify-templates-models:** upgraded to 1.1.1
+* **@tractr/hapify-templates-rest-dtos:** upgraded to 1.1.1
+
 ## backend-starter [1.4.3](https://github.com/tractr/stack/compare/backend-starter@1.4.2...backend-starter@1.4.3) (2021-04-12)
 
 
