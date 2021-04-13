@@ -155,10 +155,9 @@ function listModifier(f) {
 
 <<<
 function getRelations() {
-  return [ ...new Set([
-    ...root.dependencies.list,
-    ...root.referencedIn,
-  ])].filter(m => m.id !== root.id);
+  const seen = { [root.id]: true };
+  return [ ...root.dependencies.list, ...root.referencedIn ]
+    .filter((m) => (seen[m.id] ? false : (seen[m.id] = true)));
 }
 >>>
 
