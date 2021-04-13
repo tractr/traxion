@@ -1,21 +1,20 @@
-import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import {
-  AngularToolsEnvironmentInterface,
-  AngularToolsInjectionKeysEnum,
-} from '../angular-tools.module';
+
+import { AngularToolsEnvironmentInterface } from '../angular-tools-for-root.interface';
+import { AngularToolsInjectionKeysEnum } from '../angular-tools-injection-keys.enum';
 
 @Injectable()
 export class ErrorService {
   /**
    * Route for session
-  */
+   */
   private logUri = `${this.environment.api.uri}/front-end-error`;
 
-  /** 
+  /**
    * Constructor
-  */
+   */
   constructor(
     private message: NzMessageService,
     private http: HttpClient,
@@ -25,31 +24,33 @@ export class ErrorService {
 
   /**
    * Handle an unhandled error
-  */
-  handleGlobal(error: Error) {
+   */
+  handleGlobal(error: Error): void {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     this.sendLog(error, true);
   }
 
   /**
    * Handle an error
-  */
+   */
   handle(error: Error): void {
     if (error instanceof HttpErrorResponse) {
       this.handleHttp(error);
     } else {
       this.show(error.message);
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       this.sendLog(error, false);
     }
   }
 
   /**
    * Handle an http error
-  */
+   */
   private handleHttp(error: HttpErrorResponse): void {
     // Create message
     const message =
       error.error && error.error.error && error.error.message
-        ? `${error.error.error}: ${error.error.message}`
+        ? `${error.error.error as string}: ${error.error.message as string}`
         : error.message;
     // Show message
     this.show(message);
@@ -57,14 +58,14 @@ export class ErrorService {
 
   /**
    * Show the snackbar with the message
-  */
+   */
   private show(message: string): void {
     this.message.create('error', message);
   }
 
   /**
    * The error details to back-end
-  */
+   */
   private async sendLog(error: Error, unhandled: boolean): Promise<void> {
     const options = { withCredentials: true };
     const body = {

@@ -1,8 +1,16 @@
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule, ModuleWithProviders, ErrorHandler } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ErrorHandler, ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+
+import { AngularToolsForRootInterface } from './angular-tools-for-root.interface';
+import { AngularToolsInjectionKeysEnum } from './angular-tools-injection-keys.enum';
 import {
   MaxPipe,
   MinPipe,
@@ -11,30 +19,14 @@ import {
   TranslateCutPipe,
   TranslateEntryPipe,
 } from './pipes';
-import { ErrorService, GlobalErrorService, ResizeService, EncodeHttpParamsInterceptor, ExplainErrorsService} from './services';
+import {
+  EncodeHttpParamsInterceptor,
+  ErrorService,
+  ExplainErrorsService,
+  GlobalErrorService,
+  ResizeService,
+} from './services';
 import { TranslateModuleLoad } from './translate-import';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
-export interface AngularToolsEnvironmentInterface {
-  api: {
-    uri: string;
-  };
-  appCode: string;
-  appVersion: string;
-}
-
-export interface AngularToolsForRootInterface {
-  environment: AngularToolsEnvironmentInterface;
-}
-
-export enum AngularToolsInjectionKeysEnum {
-  ENVIRONMENT = 'env',
-}
 
 @NgModule({
   imports: [
@@ -61,7 +53,7 @@ export enum AngularToolsInjectionKeysEnum {
     ErrorService,
     {
       provide: ErrorHandler,
-      useClass: GlobalErrorService
+      useClass: GlobalErrorService,
     },
     ResizeService,
     ExplainErrorsService,

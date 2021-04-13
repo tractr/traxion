@@ -19,7 +19,14 @@
     "start": "ng serve",
     "build": "ng build angular-tools",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint",
+    "lint:eslint": "eslint \"projects/**/*.ts\"",
+    "lint:eslint:fix": "npm run lint:eslint -- --fix",
+    "lint:fix": "npm run lint:tsc:fix && npm run lint:prettier:fix && npm run lint:eslint:fix",
+    "lint:prettier": "prettier --check \"projects/**/*.ts\"",
+    "lint:prettier:fix": "prettier --write \"projects/**/*.ts\"",
+    "lint:tsc": "tsc --noEmit",
+    "lint:tsc:fix": "npm run lint:tsc"
   },
   "dependencies": {
     "tslib": "^2.0.0"

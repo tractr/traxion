@@ -1,5 +1,8 @@
 module.exports = {
   extends: ['@tractr'],
+  rules: {
+    'import/no-unresolved': 'off',
+  },
   settings: {
     'import/resolver': {
       typescript: {
