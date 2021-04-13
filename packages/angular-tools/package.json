@@ -18,7 +18,6 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build angular-tools",
-    "test": "ng test",
     "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint",
     "lint:eslint": "eslint \"projects/**/*.ts\"",
     "lint:eslint:fix": "npm run lint:eslint -- --fix",
