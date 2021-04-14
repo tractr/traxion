@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## backend-starter [1.5.1](https://github.com/tractr/stack/compare/backend-starter@1.5.0...backend-starter@1.5.1) (2021-04-14)
+
+
+### Bug Fixes
+
+* update type of datetime searchable fields in rest-dtos ([#81](https://github.com/tractr/stack/issues/81)) ([877e8f5](https://github.com/tractr/stack/commit/877e8f5c57b8a8fea7639fdecd05e54c3101e451))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-nestjs-models:** upgraded to 1.2.2
+* **@tractr/nestjs-authentication:** upgraded to 1.6.1
+* **@tractr/hapify-templates-nestjs-models-rest:** upgraded to 1.2.2
+* **@tractr/hapify-templates-rest-dtos:** upgraded to 1.1.2
+
 # backend-starter [1.5.0](https://github.com/tractr/stack/compare/backend-starter@1.4.4...backend-starter@1.5.0) (2021-04-14)
 
 
