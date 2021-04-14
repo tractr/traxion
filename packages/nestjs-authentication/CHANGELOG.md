@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/nestjs-authentication [1.6.1](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.6.0...@tractr/nestjs-authentication@1.6.1) (2021-04-14)
+
+
+### Bug Fixes
+
+* update type of datetime searchable fields in rest-dtos ([#81](https://github.com/tractr/stack/issues/81)) ([877e8f5](https://github.com/tractr/stack/commit/877e8f5c57b8a8fea7639fdecd05e54c3101e451))
+
 # @tractr/nestjs-authentication [1.6.0](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.5.1...@tractr/nestjs-authentication@1.6.0) (2021-04-14)
 
 
