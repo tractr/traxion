@@ -29,8 +29,8 @@
   },
   "dependencies": {
     "@tractr/hapify-templates-models": "1.1.1",
-    "@tractr/hapify-templates-rest-client": "1.1.1",
-    "@tractr/hapify-templates-rest-dtos": "1.1.1",
+    "@tractr/hapify-templates-rest-client": "1.1.2",
+    "@tractr/hapify-templates-rest-dtos": "1.1.2",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "rxjs": "^6.6.3"
