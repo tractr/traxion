@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# frontend-starter [1.1.0](https://github.com/tractr/stack/compare/frontend-starter@1.0.3...frontend-starter@1.1.0) (2021-04-14)
+
+
+### Features
+
+* angular tools ([#60](https://github.com/tractr/stack/issues/60)) ([300e8a9](https://github.com/tractr/stack/commit/300e8a9137b1329b57d2402072c9fb096aabeb79))
+
 ## frontend-starter [1.0.3](https://github.com/tractr/stack/compare/frontend-starter@1.0.2...frontend-starter@1.0.3) (2021-04-13)
 
 
