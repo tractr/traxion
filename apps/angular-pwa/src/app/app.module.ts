@@ -5,23 +5,32 @@ import { AppComponent } from './app.component';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { SharedModule } from './shared/shared.module';
+import { AntCustomModule } from './shared/ant-custom.module';
 import { TransferHttpCacheModule } from '@nguniversal/common';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MoleculeHomeComponent } from './molecules/molecule-home/molecule-home.component';
+import { AngularToolsModule } from '@tractr/angular-tools';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent, MoleculeHomeComponent],
   imports: [
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
-    SharedModule,
+    AntCustomModule,
     TransferHttpCacheModule,
+    AngularToolsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

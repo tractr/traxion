@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
+import { MoleculeHomeComponent } from './molecules/molecule-home/molecule-home.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: MoleculeHomeComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
 

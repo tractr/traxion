@@ -1,15 +1,21 @@
 {
   "name": "angular-pwa",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
+    "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint",
+    "lint:eslint": "eslint \"{src,e2e}/**/*.{ts,js}\"",
+    "lint:eslint:fix": "npm run lint:eslint -- --fix",
+    "lint:fix": "npm run lint:tsc:fix && npm run lint:prettier:fix && npm run lint:eslint:fix",
+    "lint:prettier": "prettier --check \"{src,e2e}/**/*.{ts,js}\"",
+    "lint:prettier:fix": "prettier --write \"{src,e2e}/**/*.{ts,js}\"",
+    "lint:tsc": "tsc --noEmit",
+    "lint:tsc:fix": "npm run lint:tsc",
     "e2e": "ng e2e"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~11.2.0",
     "@angular/common": "~11.2.0",
@@ -20,11 +26,13 @@
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
     "@angular/service-worker": "~11.2.0",
+    "@nguniversal/common": "^11.1.2",
+    "@tractr/angular-tools": "~1.0.0",
+    "bootstrap": "^4.0.0",
+    "ng-zorro-antd": "^11.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.11.3",
-    "bootstrap": "^4.0.0",
-    "ng-zorro-antd": "^11.0.0"
+    "zone.js": "~0.11.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.0",
