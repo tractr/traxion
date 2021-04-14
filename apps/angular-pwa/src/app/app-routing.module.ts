@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+
 import { MoleculeHomeComponent } from './molecules/molecule-home/molecule-home.component';
 
 const routes: Routes = [
