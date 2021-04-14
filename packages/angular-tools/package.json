@@ -1,0 +1,72 @@
+{
+  "name": "@tractr/angular-tools",
+  "version": "1.0.0",
+  "description": "Tools for angular application",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "license": "UNLICENSED",
+  "author": "",
+  "main": "./dist/angular-tools/bundles/angular-tools.umd.js",
+  "typings": "./dist/angular-tools/angular-tools.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build angular-tools",
+    "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint",
+    "lint:eslint": "eslint \"projects/**/*.{ts,js}\"",
+    "lint:eslint:fix": "npm run lint:eslint -- --fix",
+    "lint:fix": "npm run lint:tsc:fix && npm run lint:prettier:fix && npm run lint:eslint:fix",
+    "lint:prettier": "prettier --check \"projects/**/*.{ts,js}\"",
+    "lint:prettier:fix": "prettier --write \"projects/**/*.{ts,js}\"",
+    "lint:tsc": "tsc --noEmit",
+    "lint:tsc:fix": "npm run lint:tsc"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.1102.2",
+    "@angular/cli": "~11.2.0",
+    "@angular/compiler-cli": "~11.2.0",
+    "@types/jasmine": "~3.6.0",
+    "@types/node": "^12.11.1",
+    "codelyzer": "^6.0.0",
+    "jasmine-core": "~3.6.0",
+    "jasmine-spec-reporter": "~5.0.0",
+    "karma": "~6.1.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.0.3",
+    "karma-jasmine": "~4.0.0",
+    "karma-jasmine-html-reporter": "^1.5.0",
+    "ng-packagr": "^11.0.0",
+    "protractor": "~7.0.0",
+    "ts-node": "~8.3.0",
+    "tslint": "~6.1.0",
+    "typescript": "~4.1.2"
+  },
+  "peerDependencies": {
+    "@angular/animations": "~11.2.0",
+    "@angular/common": "~11.2.0",
+    "@angular/compiler": "~11.2.0",
+    "@angular/core": "~11.2.0",
+    "@angular/forms": "~11.2.0",
+    "@angular/platform-browser": "~11.2.0",
+    "@angular/platform-browser-dynamic": "~11.2.0",
+    "@angular/router": "~11.2.0",
+    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/http-loader": "^4.0.0",
+    "ng-zorro-antd": "~11.2.0",
+    "rxjs": "~6.6.0",
+    "zone.js": "~0.11.3"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

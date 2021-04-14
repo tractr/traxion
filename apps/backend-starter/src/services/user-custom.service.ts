@@ -1,10 +1,9 @@
-import { Inject, Injectable } from '@nestjs/common';
-
 import {
   USER_DATABASE_SERVICE,
   UserDatabaseService,
   UserService,
 } from '@generated/nestjs-models-common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
