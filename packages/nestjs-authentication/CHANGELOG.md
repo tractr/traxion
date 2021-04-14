@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# @tractr/nestjs-authentication [1.6.0](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.5.1...@tractr/nestjs-authentication@1.6.0) (2021-04-14)
+
+
+### Features
+
+* angular tools ([#60](https://github.com/tractr/stack/issues/60)) ([300e8a9](https://github.com/tractr/stack/commit/300e8a9137b1329b57d2402072c9fb096aabeb79))
+
 ## @tractr/nestjs-authentication [1.5.1](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.5.0...@tractr/nestjs-authentication@1.5.1) (2021-04-13)
 
 
