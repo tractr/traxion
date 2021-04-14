@@ -13,8 +13,12 @@ import {
   IsIn,
   <<endif>>
 
-  <<if Fields (number or datetime) and searchable>>
+  <<if Fields number and searchable>>
   IsNumber,
+  <<endif>>
+
+  <<if Fields datetime and searchable>>
+  IsDate,
   <<endif>>
   
   IsOptional,
@@ -67,8 +71,12 @@ export class <<Model pascal>>CountQueryDto {
   @IsUrl({}, <<=listModifier(field)>>) 
   <<endif>>
 
-  <<if field number or datetime>>
-  @IsNumber({},<<=listModifier(field)>>)
+  <<if field number>>
+  @IsNumber({}, <<=listModifier(field)>>)
+  <<endif>>
+
+  <<if field datetime>>
+  @IsDate({}, <<=listModifier(field)>>)
   <<endif>>
 
   @IsOptional()
@@ -85,7 +93,7 @@ function optionalTypedProperty(f) {
   else if (f.type === "string") out += "string";
   else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;
   else if (f.type === "number") out += "number";
-  else if (f.type === "datetime") out += "number | Date";
+  else if (f.type === "datetime") out += "Date";
   else if (f.type === "entity") {
     out +=  "string"
   }

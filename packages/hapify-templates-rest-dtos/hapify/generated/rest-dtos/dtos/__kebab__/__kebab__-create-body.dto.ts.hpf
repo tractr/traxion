@@ -12,7 +12,7 @@ import {
   IsIn,
   <<endif>>
 
-  <<if Fields number or datetime and not internal>>
+  <<if Fields number and not internal>>
   IsNumber,
   <<endif>>
 
@@ -82,7 +82,7 @@ export class <<Model pascal>>CreateBodyDto {
   @IsUrl({}, <<=listModifier(field)>>) 
   <<endif>>
 
-  <<if field number or datetime>>
+  <<if field number>>
   @IsNumber({}, <<=listModifier(field)>>)
   <<endif>>
 
