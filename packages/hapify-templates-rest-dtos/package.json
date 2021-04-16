@@ -1,6 +1,6 @@
 {
   "name": "@tractr/hapify-templates-rest-dtos",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "description": "Hapify templates for models rest dtos",
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   "dependencies": {},
   "devDependencies": {},
   "peerDependencies": {
-    "@tractr/hapify-templates-models": "1.0.0",
+    "@tractr/hapify-templates-models": "1.1.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.0"
   },

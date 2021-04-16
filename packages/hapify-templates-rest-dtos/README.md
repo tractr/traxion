@@ -1,5 +1,8 @@
 # Hapify - Templates for models rest dtos
 
+This package contains the hapify templates to generate 
+REST dtos classes.
+
 ## Installation
 
 ```sh

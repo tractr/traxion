@@ -244,7 +244,7 @@
         {
           "name": "last connected at",
           "type": "datetime",
-          "properties": ["nullable", "internal"]
+          "properties": ["nullable", "searchable", "sortable"]
         },
         {
           "name": "gender",
@@ -294,3 +294,4 @@
     }
   ]
 }
+

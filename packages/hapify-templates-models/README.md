@@ -1,5 +1,8 @@
 # Hapify - Templates for models classes and types
 
+This package contains the hapify templates to generate 
+model classes and enums.
+
 ## Installation
 
 ```sh

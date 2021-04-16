@@ -1,3 +1,3 @@
-import { Answer } from '@generated/models';
+import { Answer } from '../generated/models';
 
 console.info(Answer);
