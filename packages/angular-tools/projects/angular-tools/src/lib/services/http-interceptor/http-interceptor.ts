@@ -13,10 +13,8 @@ import { CustomEncoder } from './custom-encoder';
 
 @Injectable()
 export class EncodeHttpParamsInterceptor implements HttpInterceptor {
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler,
-  ): Observable<HttpEvent<any>> {
+  intercept( req: HttpRequest<any>, next: HttpHandler,) //: Observable<HttpEvent<any>> 
+  {
     const params = new HttpParams({
       encoder: new CustomEncoder(),
       fromString: req.params.toString(),
