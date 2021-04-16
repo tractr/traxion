@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# @tractr/nestjs-authentication [1.7.0](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.6.1...@tractr/nestjs-authentication@1.7.0) (2021-04-16)
+
+
+### Features
+
+* add a new rext-client templates packages to generate a rxjs API client ([#75](https://github.com/tractr/stack/issues/75)) ([fde64d2](https://github.com/tractr/stack/commit/fde64d22cac2d985b3da03a37add56702f50e278))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-nestjs-models-common:** upgraded to 1.2.2
+* **@tractr/hapify-templates-models:** upgraded to 1.2.0
+
 ## @tractr/nestjs-authentication [1.6.1](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.6.0...@tractr/nestjs-authentication@1.6.1) (2021-04-14)
 
 
