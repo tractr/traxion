@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-generate-config [1.0.5](https://github.com/tractr/stack/compare/@tractr/hapify-generate-config@1.0.4...@tractr/hapify-generate-config@1.0.5) (2021-04-16)
+
+
+### Bug Fixes
+
+* hapify config precedence ([#44](https://github.com/tractr/stack/issues/44)) ([c27a1e9](https://github.com/tractr/stack/commit/c27a1e98cac9bb94869051101c34f30e524e1e9a)), closes [#8](https://github.com/tractr/stack/issues/8) [#8](https://github.com/tractr/stack/issues/8)
+
 ## @tractr/hapify-generate-config [1.0.4](https://github.com/tractr/stack/compare/@tractr/hapify-generate-config@1.0.3...@tractr/hapify-generate-config@1.0.4) (2021-03-08)
 
 
