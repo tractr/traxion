@@ -17,7 +17,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build-disable": "ng build angular-tools",
+    "build": "ng build angular-tools",
     "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint",
     "lint:eslint": "eslint \"projects/**/*.{ts,js}\"",
     "lint:eslint:fix": "npm run lint:eslint -- --fix",
