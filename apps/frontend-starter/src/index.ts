@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { of } from 'rxjs';
 import { map, mapTo, switchMap, tap } from 'rxjs/operators';
 
