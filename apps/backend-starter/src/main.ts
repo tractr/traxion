@@ -2,6 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger } from '@tractr/nestjs-core';
+import morgan from 'morgan';
 
 import { AppModule } from './app.module';
 
@@ -12,7 +13,8 @@ async function bootstrap(): Promise<void> {
   // Set custom logger service
   app.useLogger(await app.resolve(Logger));
 
-  app.enableCors({});
+  app.enableCors();
+  app.use(morgan('combined'));
 
   // Set global validation pipe
   app.useGlobalPipes(

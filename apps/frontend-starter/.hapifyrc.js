@@ -2,6 +2,7 @@ module.exports = {
   extends: [
     '@tractr/hapify-templates-models',
     '@tractr/hapify-templates-rest-dtos',
+    '@tractr/hapify-templates-rext-client',
   ],
   version: '1',
   validatorPath: 'hapify/validator.js',
