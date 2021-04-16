@@ -9,10 +9,10 @@ module.exports = {
   ],
   version: '1',
   validatorPath: 'hapify/validator.js',
-  name: 'New bootstrap',
-  description: 'A new Hapify channel',
+  name: 'NestJS Backend starter',
+  description: 'A backend starter to get a nestjs server squeleton',
   logo: 'https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png',
-  project: './hapify-models.json',
+  project: '../../hapify-models.json',
   defaultFields: [
     {
       name: 'id',

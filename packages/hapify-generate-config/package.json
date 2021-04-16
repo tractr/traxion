@@ -24,6 +24,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@hapify/cli": "^0.9.2",
     "debug": "^4.3.1",
     "deepmerge": "^4.2.2",
     "fs-extra": "^9.1.0",
