@@ -11,7 +11,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { <<Model pascal>> } from '@prisma/client';
-
+ 
 import { <<Model pascal>>Service, <<Model constant>>_SERVICE } from '@generated/nestjs-models-common';
 import {
   <<Model pascal>>CountQueryDto,
@@ -29,7 +29,7 @@ import {
 } from '@generated/rest-dtos';
 import { <<Model constant>>_REST_DTO_SERVICE } from '../<<Model kebab>>-rest.constant';
 import { <<Model pascal>>RestDtoService } from '../services';
-
+ 
 @Controller(['<<Model kebab>>'])
 export class <<Model pascal>>Controller {
   constructor(
@@ -50,7 +50,7 @@ export class <<Model pascal>>Controller {
     const formatedParams = this.<<Model camel>>RestDtoService.formatCreateDto(bodyDto);
     return this.<<Model camel>>Service.create(formatedParams);
   }
-
+ 
   /**
   * Count the number of <<Model pascal>> entities that matches the filter
   *
@@ -62,7 +62,7 @@ export class <<Model pascal>>Controller {
     const formatedParams = this.<<Model camel>>RestDtoService.formatCountDto(queryDto);
     return this.<<Model camel>>Service.count(formatedParams);
   }
-
+ 
   /**
    * Find zero or one <<Model pascal>> that matches the filter
    *
@@ -85,7 +85,7 @@ export class <<Model pascal>>Controller {
     );
     return this.<<Model camel>>Service.findUnique(formatedParams);
   }
-
+ 
   /**
    * Find zero or more <<Model pascal>> entities that matches the filter
    *
@@ -99,7 +99,7 @@ export class <<Model pascal>>Controller {
     const formatedParams = this.<<Model camel>>RestDtoService.formatFindManyDto(queryDto);
     return this.<<Model camel>>Service.findMany(formatedParams);
   }
-
+ 
   /**
    * Update one <<Model pascal>>
    *
@@ -122,7 +122,7 @@ export class <<Model pascal>>Controller {
     );
     return this.<<Model camel>>Service.update(formatedParams);
   }
-
+ 
   /**
    * Update or create one <<Model pascal>>
    *
@@ -146,7 +146,7 @@ export class <<Model pascal>>Controller {
     );
     return this.<<Model camel>>Service.upsert(formatedParams);
   }
-
+ 
   /**
    * Delete one <<Model pascal>>
    *
