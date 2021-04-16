@@ -16,8 +16,7 @@ function start() {
         },
       ]),
       tap(console.info),
-      client.tag.findMany(),
-      switchMap((params) => client.tag.findUnique$(params)),
+      client.tag.findUnique(),
       tap((tag) => console.info('Found', tag)),
 
       tap(() => console.info('Count number of tag')),
