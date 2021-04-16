@@ -10,7 +10,6 @@ import { copy, pathExists, readFile, readJSON, writeJSON } from 'fs-extra';
 import pkgDir from 'pkg-dir';
 import yaml from 'yaml';
 
-
 const debug = debugFactory('hpf-generate-config');
 
 const configFilenamePriorityImportOrder = [
@@ -182,4 +181,5 @@ async function getHapifyOptions(): Promise<void> {
   debug(`Generated file: ${writeFile}`);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async () => getHapifyOptions())();
