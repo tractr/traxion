@@ -38,7 +38,7 @@ export class <<Model pascal>>Controller {
     @Inject(<<Model constant>>_REST_DTO_SERVICE)
     protected <<Model camel>>RestDtoService: <<Model pascal>>RestDtoService,
   ) {}
-
+ 
   /**
    * Create a new User
    *
