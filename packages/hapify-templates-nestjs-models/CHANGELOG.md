@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# @tractr/hapify-templates-nestjs-models [1.3.0](https://github.com/tractr/stack/compare/@tractr/hapify-templates-nestjs-models@1.2.2...@tractr/hapify-templates-nestjs-models@1.3.0) (2021-04-16)
+
+
+### Features
+
+* add a new rext-client templates packages to generate a rxjs API client ([#75](https://github.com/tractr/stack/issues/75)) ([fde64d2](https://github.com/tractr/stack/commit/fde64d22cac2d985b3da03a37add56702f50e278))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-nestjs-models-common:** upgraded to 1.2.2
+* **@tractr/hapify-templates-nestjs-models-rest:** upgraded to 1.3.0
+
 ## @tractr/hapify-templates-nestjs-models [1.2.2](https://github.com/tractr/stack/compare/@tractr/hapify-templates-nestjs-models@1.2.1...@tractr/hapify-templates-nestjs-models@1.2.2) (2021-04-14)
 
 
