@@ -52,6 +52,18 @@ export class <<Model pascal>>Controller {
   }
  
   /**
+  * Count the number of <<Model pascal>> entities that matches the filter
+  *
+  * @param queryDto - Dto of the request query
+  * @returns the number of <<Model pascal>>
+  */
+  @Get('count')
+  public async count(@Query() queryDto: <<Model pascal>>CountQueryDto): Promise<number> {
+    const formatedParams = this.<<Model camel>>RestDtoService.formatCountDto(queryDto);
+    return this.<<Model camel>>Service.count(formatedParams);
+  }
+ 
+  /**
    * Find zero or one <<Model pascal>> that matches the filter
    *
    * @param paramsDto - Dto of the request param
@@ -73,7 +85,7 @@ export class <<Model pascal>>Controller {
     );
     return this.<<Model camel>>Service.findUnique(formatedParams);
   }
-  
+ 
   /**
    * Find zero or more <<Model pascal>> entities that matches the filter
    *
@@ -88,18 +100,6 @@ export class <<Model pascal>>Controller {
     return this.<<Model camel>>Service.findMany(formatedParams);
   }
  
-  /**
-   * Count the number of <<Model pascal>> entities that matches the filter
-   *
-   * @param queryDto - Dto of the request query
-   * @returns the number of <<Model pascal>>
-   */
-  @Get('count')
-  public async count(@Query() queryDto: <<Model pascal>>CountQueryDto): Promise<number> {
-    const formatedParams = this.<<Model camel>>RestDtoService.formatCountDto(queryDto);
-    return this.<<Model camel>>Service.count(formatedParams);
-  }
-   
   /**
    * Update one <<Model pascal>>
    *
@@ -128,7 +128,7 @@ export class <<Model pascal>>Controller {
    *
    * @Remarks
    *
-   * Partial updates are forbidden with this method. It will 
+   * Partial updates are forbidden with this method. It will
    * fully replace the matched entity
    *
    * @param paramsDto - Dto of the request param
