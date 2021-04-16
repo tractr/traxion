@@ -1,12 +1,4 @@
 {
-  "moduleFileExtensions": ["js", "json", "ts"],
-  "rootDir": ".",
-  "testEnvironment": "node",
-  "testRegex": "\\.spec.ts$",
-  "transform": {
-    "^.+\\.(t|j)s$": "ts-jest"
-  },
-  "moduleNameMapper": {
-    "@generated/(.*)": "<rootDir>/../generated/$1"
-  }
+  "preset": "@tractr/jest-config",
+  "rootDir": ".."
 }
