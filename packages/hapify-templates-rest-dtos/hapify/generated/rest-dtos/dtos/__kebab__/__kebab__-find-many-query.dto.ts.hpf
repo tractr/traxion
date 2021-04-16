@@ -8,6 +8,10 @@ import {
   IsEmail, 
   <<endif>>
 
+  <<if Fields datetime and searchable>>
+  IsDate, 
+  <<endif>>
+
   IsIn,
   IsInt,
   IsNumber,
@@ -63,8 +67,12 @@ export class <<Model pascal>>FindManyQueryDto {
   @IsUrl({}, <<=listModifier(field)>>) 
   <<endif>>
 
-  <<if field number or datetime>>
+  <<if field number>>
   @IsNumber({},<<=listModifier(field)>>)
+  <<endif>>
+
+  <<if field datetime>>
+  @IsDate({},<<=listModifier(field)>>)
   <<endif>>
 
   @IsOptional()
@@ -113,7 +121,7 @@ function optionalTypedProperty(f) {
   else if (f.type === "string") out += "string";
   else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;
   else if (f.type === "number") out += "number";
-  else if (f.type === "datetime") out += "number | Date";
+  else if (f.type === "datetime") out += "Date";
   else if (f.type === "entity") {
     out +=  "string"
   }

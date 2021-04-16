@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## frontend-starter [1.1.1](https://github.com/tractr/stack/compare/frontend-starter@1.1.0...frontend-starter@1.1.1) (2021-04-14)
+
+
+### Bug Fixes
+
+* update type of datetime searchable fields in rest-dtos ([#81](https://github.com/tractr/stack/issues/81)) ([877e8f5](https://github.com/tractr/stack/commit/877e8f5c57b8a8fea7639fdecd05e54c3101e451))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-rest-client:** upgraded to 1.1.2
+* **@tractr/hapify-templates-rest-dtos:** upgraded to 1.1.2
+
+# frontend-starter [1.1.0](https://github.com/tractr/stack/compare/frontend-starter@1.0.3...frontend-starter@1.1.0) (2021-04-14)
+
+
+### Features
+
+* angular tools ([#60](https://github.com/tractr/stack/issues/60)) ([300e8a9](https://github.com/tractr/stack/commit/300e8a9137b1329b57d2402072c9fb096aabeb79))
+
+## frontend-starter [1.0.3](https://github.com/tractr/stack/compare/frontend-starter@1.0.2...frontend-starter@1.0.3) (2021-04-13)
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-rest-client:** upgraded to 1.1.1
+* **@tractr/hapify-templates-models:** upgraded to 1.1.1
+* **@tractr/hapify-templates-rest-dtos:** upgraded to 1.1.1
+
+## frontend-starter [1.0.2](https://github.com/tractr/stack/compare/frontend-starter@1.0.1...frontend-starter@1.0.2) (2021-04-12)
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-rest-client:** upgraded to 1.1.0
+* **@tractr/hapify-templates-models:** upgraded to 1.1.0
+* **@tractr/hapify-templates-rest-dtos:** upgraded to 1.1.0
+
 ## frontend-starter [1.0.1](https://github.com/tractr/stack/compare/frontend-starter@1.0.0...frontend-starter@1.0.1) (2021-04-09)
 
 

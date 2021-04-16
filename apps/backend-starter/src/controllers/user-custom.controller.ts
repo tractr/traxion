@@ -1,7 +1,6 @@
-import { Controller, Get, Query } from '@nestjs/common';
-
 import { UserController } from '@generated/nestjs-models-rest';
 import { UserFindManyQueryDto } from '@generated/rest-dtos';
+import { Controller, Get, Query } from '@nestjs/common';
 
 @Controller(['user'])
 export class UserCustomController extends UserController {
