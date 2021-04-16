@@ -34,7 +34,7 @@ All notable changes to this project will be documented in this file. See
 
 ### Features
 
-* add hapify-templates-rest-client package ([#45](https://github.com/tractr/stack/issues/45)) ([9de0cb0](https://github.com/tractr/stack/commit/9de0cb0a79256d1b3dc258cf5c121e211687174c))
+* add hapify-templates-rext-client package ([#45](https://github.com/tractr/stack/issues/45)) ([9de0cb0](https://github.com/tractr/stack/commit/9de0cb0a79256d1b3dc258cf5c121e211687174c))
 
 
 

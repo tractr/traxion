@@ -1,8 +1,8 @@
 import { of } from 'rxjs';
 import { map, mapTo, switchMap, tap } from 'rxjs/operators';
 
-import { Tag } from '../generated/models';
-import { RextClient } from './rext-client';
+import { Tag } from '@generated/models';
+import { RextClient } from '@generated/rext-client';
 
 function start() {
   const client = new RextClient('http://localhost:3000');
@@ -10,10 +10,14 @@ function start() {
   of(1)
     .pipe(
       tap(() => console.info('Find a unique tag')),
-      mapTo({
-        id: '9e5677e5-9b51-45cc-9ec3-177c0a107015',
-      }),
-      client.tag.findUnique(),
+      mapTo([
+        {
+          id: '9e5677e5-9b51-45cc-9ec3-177c0a107015',
+        },
+      ]),
+      tap(console.info),
+      client.tag.findMany(),
+      switchMap((params) => client.tag.findUnique$(params)),
       tap((tag) => console.info('Found', tag)),
 
       tap(() => console.info('Count number of tag')),
@@ -25,7 +29,7 @@ function start() {
       ),
 
       tap(() => console.info('Create a new tag')),
-      map((tag) => ({
+      map((tag: Tag) => ({
         label: `${tag.label}-${new Date().getTime()}`,
       })),
       client.tag.create(),

@@ -16,9 +16,6 @@
   ],
   "scripts": {},
   "dependencies": {},
-  "devDependencies": {
-    "@tractr/hapify-templates-nestjs-models-common": "1.1.1"
-  },
   "peerDependencies": {
     "@tractr/hapify-templates-nestjs-models-common": "1.1.1",
     "@tractr/hapify-templates-rest-dtos": "1.0.0",
