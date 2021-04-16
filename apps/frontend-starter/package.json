@@ -28,9 +28,9 @@
     "test": "jest --config ./test/jest-unit-test.json"
   },
   "dependencies": {
-    "@tractr/hapify-templates-models": "1.1.1",
-    "@tractr/hapify-templates-rext-client": "1.1.2",
-    "@tractr/hapify-templates-rest-dtos": "1.1.2",
+    "@tractr/hapify-templates-models": "1.2.0",
+    "@tractr/hapify-templates-rext-client": "1.0.0",
+    "@tractr/hapify-templates-rest-dtos": "1.2.0",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "rxjs": "^6.6.3",
@@ -39,7 +39,7 @@
   "devDependencies": {
     "@hapify/cli": "^0.9.0",
     "@tractr/eslint-config": "^1.2.5",
-    "@tractr/hapify-generate-config": "1.0.4",
+    "@tractr/hapify-generate-config": "1.0.5",
     "@types/node": "^14.14.25",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
