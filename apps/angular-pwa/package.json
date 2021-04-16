@@ -27,12 +27,12 @@
     "@angular/router": "~11.2.3",
     "@angular/service-worker": "~11.2.3",
     "@nguniversal/common": "^11.1.2",
-    "@ngx-translate/core": "^12.1.2",
+    "@ngx-translate/core": "^13.0.0",
     "@tractr/angular-tools": "1.0.0",
     "bootstrap": "^4.4.1",
-    "ng-zorro-antd": "^11.0.0",
+    "ng-zorro-antd": "^11.2.0",
     "rxjs": "~6.6.0",
-    "tslib": "^2.0.0",
+    "tslib": "^2.2.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
