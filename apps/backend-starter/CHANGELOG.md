@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# backend-starter [1.6.0](https://github.com/tractr/stack/compare/backend-starter@1.5.1...backend-starter@1.6.0) (2021-04-16)
+
+
+### Bug Fixes
+
+* hapify config precedence ([#44](https://github.com/tractr/stack/issues/44)) ([c27a1e9](https://github.com/tractr/stack/commit/c27a1e98cac9bb94869051101c34f30e524e1e9a)), closes [#8](https://github.com/tractr/stack/issues/8) [#8](https://github.com/tractr/stack/issues/8)
+* update eslint and jest config ([#79](https://github.com/tractr/stack/issues/79)) ([3a3e165](https://github.com/tractr/stack/commit/3a3e16576b19699441b9e16a2bf0024e5b4dc49a))
+
+
+### Features
+
+* add a new rext-client templates packages to generate a rxjs API client ([#75](https://github.com/tractr/stack/issues/75)) ([fde64d2](https://github.com/tractr/stack/commit/fde64d22cac2d985b3da03a37add56702f50e278))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-nestjs-models:** upgraded to 1.3.0
+* **@tractr/nestjs-authentication:** upgraded to 1.7.0
+* **@tractr/hapify-templates-nestjs-models-common:** upgraded to 1.2.2
+* **@tractr/hapify-templates-nestjs-models-rest:** upgraded to 1.3.0
+* **@tractr/hapify-templates-models:** upgraded to 1.2.0
+* **@tractr/hapify-templates-rest-dtos:** upgraded to 1.2.0
+
 ## backend-starter [1.5.1](https://github.com/tractr/stack/compare/backend-starter@1.5.0...backend-starter@1.5.1) (2021-04-14)
 
 
