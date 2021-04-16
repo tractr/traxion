@@ -100,7 +100,8 @@
       [
         "@semantic-release/github",
         {
-          "assets": "pack/*.tgz"
+          "assets": "pack/*.tgz",
+          "successComment": false
         }
       ],
       [
