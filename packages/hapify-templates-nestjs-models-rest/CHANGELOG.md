@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# @tractr/hapify-templates-nestjs-models-rest [1.3.0](https://github.com/tractr/stack/compare/@tractr/hapify-templates-nestjs-models-rest@1.2.2...@tractr/hapify-templates-nestjs-models-rest@1.3.0) (2021-04-16)
+
+
+### Bug Fixes
+
+* api controllers async removal ([#85](https://github.com/tractr/stack/issues/85)) ([32d7e40](https://github.com/tractr/stack/commit/32d7e40d577a61d2cbf0a1fc4805ebd724a207b6)), closes [#83](https://github.com/tractr/stack/issues/83)
+* change count controller method and place it before findUnique ([#84](https://github.com/tractr/stack/issues/84)) ([c4cad27](https://github.com/tractr/stack/commit/c4cad27a1ea58cd38753d24a4ae605a190bdf274)), closes [#82](https://github.com/tractr/stack/issues/82)
+
+
+### Features
+
+* add a new rext-client templates packages to generate a rxjs API client ([#75](https://github.com/tractr/stack/issues/75)) ([fde64d2](https://github.com/tractr/stack/commit/fde64d22cac2d985b3da03a37add56702f50e278))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-nestjs-models-common:** upgraded to 1.2.2
+* **@tractr/hapify-templates-rest-dtos:** upgraded to 1.2.0
+
 ## @tractr/hapify-templates-nestjs-models-rest [1.2.2](https://github.com/tractr/stack/compare/@tractr/hapify-templates-nestjs-models-rest@1.2.1...@tractr/hapify-templates-nestjs-models-rest@1.2.2) (2021-04-14)
 
 
