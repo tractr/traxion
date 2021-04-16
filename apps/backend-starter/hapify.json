@@ -1,48 +1,6 @@
 {
-  "version": "1",
-  "validatorPath": "hapify/validator.js",
-  "name": "Hapify prisma templates",
-  "description": "Generate the model.prisma in the prisma folder",
-  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
-  "project": "../../hapify-models.json",
-  "defaultFields": [
-    {
-      "name": "id",
-      "type": "string",
-      "subtype": null,
-      "reference": null,
-      "primary": true,
-      "unique": false,
-      "label": false,
-      "nullable": false,
-      "multiple": false,
-      "embedded": false,
-      "searchable": false,
-      "sortable": false,
-      "hidden": false,
-      "internal": true,
-      "restricted": false,
-      "ownership": false
-    },
-    {
-      "name": "id",
-      "type": "string",
-      "subtype": null,
-      "reference": null,
-      "primary": true,
-      "unique": false,
-      "label": false,
-      "nullable": false,
-      "multiple": false,
-      "embedded": false,
-      "searchable": true,
-      "sortable": true,
-      "hidden": false,
-      "internal": true,
-      "restricted": false,
-      "ownership": false
-    }
-  ],
+  "name": "NestJS Backend starter",
+  "description": "A backend starter to get a nestjs server squeleton",
   "templates": [
     {
       "path": "generated/nestjs-models/index.ts",
@@ -399,5 +357,29 @@
       "engine": "hpf",
       "input": "all"
     }
-  ]
+  ],
+  "project": "../../hapify-models.json",
+  "defaultFields": [
+    {
+      "name": "id",
+      "type": "string",
+      "subtype": null,
+      "reference": null,
+      "primary": true,
+      "unique": false,
+      "label": false,
+      "nullable": false,
+      "multiple": false,
+      "embedded": false,
+      "searchable": false,
+      "sortable": false,
+      "hidden": false,
+      "internal": true,
+      "restricted": false,
+      "ownership": false
+    }
+  ],
+  "version": "1",
+  "validatorPath": "hapify/validator.js",
+  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png"
 }
