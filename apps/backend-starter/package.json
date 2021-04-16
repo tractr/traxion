@@ -20,8 +20,8 @@
     "lint:eslint": "eslint \"{src,test}/**/*.ts\"",
     "lint:eslint:fix": "npm run lint:eslint -- --fix",
     "lint:fix": "npm run lint:tsc:fix && npm run lint:prettier:fix && npm run lint:eslint:fix",
-    "lint:prettier": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\"",
-    "lint:prettier:fix": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint:prettier": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\" \"generated/**/*.ts\"",
+    "lint:prettier:fix": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"generated/**/*.ts\"",
     "lint:tsc": "tsc --noEmit",
     "lint:tsc:fix": "npm run lint:tsc",
     "prisma": "prisma",
@@ -41,23 +41,6 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "test:watch": "jest --watch"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testEnvironment": "node",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    }
   },
   "dependencies": {
     "@nestjs/common": "^7.6.11",
