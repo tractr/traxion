@@ -46,7 +46,7 @@ export class <<Model pascal>>Controller {
    * @returns a new User
    */
   @Post()
-  public async create(@Body() bodyDto: <<Model pascal>>CreateBodyDto): Promise<<<Model pascal>>> {
+  public create(@Body() bodyDto: <<Model pascal>>CreateBodyDto) {
     const formatedParams = this.<<Model camel>>RestDtoService.formatCreateDto(bodyDto);
     return this.<<Model camel>>Service.create(formatedParams);
   }
@@ -71,12 +71,12 @@ export class <<Model pascal>>Controller {
    * @returns a User or null
    */
   @Get(':id')
-  public async findUnique(
+  public findUnique(
     @Param() paramsDto: <<Model pascal>>FindUniqueParamsDto,
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
     @Query() queryDto: <<Model pascal>>FindUniqueQueryDto,
     <<<}>>>
-  ): Promise<<<Model pascal>> | null> {
+  ) {
     const formatedParams = this.<<Model camel>>RestDtoService.formatFindUniqueDtos(
       paramsDto,
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
@@ -93,9 +93,9 @@ export class <<Model pascal>>Controller {
    * @returns an array of <<Model pascal>> entities
    */
   @Get()
-  public async findMany(
+  public findMany(
     @Query() queryDto: <<Model pascal>>FindManyQueryDto,
-  ): Promise<<<Model pascal>>[]> {
+  ) {
     const formatedParams = this.<<Model camel>>RestDtoService.formatFindManyDto(queryDto);
     return this.<<Model camel>>Service.findMany(formatedParams);
   }
@@ -112,10 +112,10 @@ export class <<Model pascal>>Controller {
    * @returns the updated <<Model pascal>>
    */
   @Patch(':id')
-  public async update(
+  public update(
     @Param() paramsDto: <<Model pascal>>UpdateParamsDto,
     @Body() bodyDto: <<Model pascal>>UpdateBodyDto,
-  ): Promise<<<Model pascal>>> {
+  ) {
     const formatedParams = this.<<Model camel>>RestDtoService.formatUpdateDtos(
       paramsDto,
       bodyDto,
@@ -136,10 +136,10 @@ export class <<Model pascal>>Controller {
    * @returns the updated <<Model pascal>>
    */
   @Put(':id')
-  public async upsert(
+  public upsert(
     @Param() paramsDto: <<Model pascal>>UpsertParamsDto,
     @Body() bodyDto: <<Model pascal>>UpsertBodyDto,
-  ): Promise<<<Model pascal>>> {
+  ) {
     const formatedParams = this.<<Model camel>>RestDtoService.formatUpsertDtos(
       paramsDto,
       bodyDto,
@@ -154,7 +154,7 @@ export class <<Model pascal>>Controller {
    * @returns the updated <<Model pascal>>
    */
   @Delete(':id')
-  public async delete(@Param() paramsDto: <<Model pascal>>DeleteParamsDto): Promise<<<Model pascal>>> {
+  public delete(@Param() paramsDto: <<Model pascal>>DeleteParamsDto) {
     const formatedParams = this.<<Model camel>>RestDtoService.formatDeleteDto(paramsDto);
     return this.<<Model camel>>Service.delete(formatedParams);
   }
