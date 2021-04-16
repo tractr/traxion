@@ -1,31 +1,47 @@
 {
-  "version": "1",
-  "validatorPath": "hapify/validator.js",
-  "name": "Hapify templates for Nestjs models",
-  "description": "Generate the models for a Nestjs application",
-  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
-  "project": "../../hapify-models.json",
-  "defaultFields": [
-    {
-      "name": "id",
-      "type": "string",
-      "subtype": null,
-      "reference": null,
-      "primary": true,
-      "unique": false,
-      "label": false,
-      "nullable": false,
-      "multiple": false,
-      "embedded": false,
-      "searchable": false,
-      "sortable": false,
-      "hidden": false,
-      "internal": true,
-      "restricted": false,
-      "ownership": false
-    }
-  ],
+  "name": "New bootstrap",
+  "description": "A new Hapify channel",
   "templates": [
+    {
+      "path": "generated/rext-client/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rext-client/rext-client.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rext-client/helpers/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rext-client/helpers/rest-ajax.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rext-client/helpers/transform-and-validate.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rext-client/helpers/url.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rext-client/services/{kebab}.service.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rext-client/services/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
     {
       "path": "generated/rest-dtos/index.ts",
       "engine": "hpf",
@@ -190,6 +206,30 @@
       "path": "generated/models/mock/{kebab}.mock.ts",
       "engine": "hpf",
       "input": "one"
+    }
+  ],
+  "version": "1",
+  "validatorPath": "hapify/validator.js",
+  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
+  "project": "../../hapify-models.json",
+  "defaultFields": [
+    {
+      "name": "id",
+      "type": "string",
+      "subtype": null,
+      "reference": null,
+      "primary": true,
+      "unique": false,
+      "label": false,
+      "nullable": false,
+      "multiple": false,
+      "embedded": false,
+      "searchable": false,
+      "sortable": false,
+      "hidden": false,
+      "internal": true,
+      "restricted": false,
+      "ownership": false
     }
   ]
 }

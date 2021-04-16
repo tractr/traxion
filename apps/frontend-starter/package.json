@@ -33,7 +33,8 @@
     "@tractr/hapify-templates-rest-dtos": "1.1.2",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
-    "rxjs": "^6.6.3"
+    "rxjs": "^6.6.3",
+    "universal-rxjs-ajax": "^2.0.4"
   },
   "devDependencies": {
     "@hapify/cli": "^0.9.0",
@@ -44,6 +45,7 @@
     "@typescript-eslint/parser": "^4.14.2",
     "lerna": "^3.22.1",
     "prettier": "^2.2.1",
+    "reflect-metadata": "^0.1.13",
     "semantic-release": "^17.3.7",
     "ts-node": "^9.1.1",
     "tsconfig-paths": "^3.9.0",

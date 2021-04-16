@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/hapify-templates-rest-client",
+  "name": "@tractr/hapify-templates-rext-client",
   "version": "1.1.2",
   "description": "Template to generate a rest client with hapify",
   "repository": {
@@ -13,23 +13,16 @@
     "dist",
     "package.json"
   ],
-  "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "tsc -p tsconfig.build.json",
-    "build:watch": "npm run build -- --watch",
-    "prepublishOnly": "npm run build",
-    "start": "ts-node index.ts"
-  },
-  "dependencies": {
-    "class-transformer": "^0.4.0",
-    "class-validator": "^0.13.0",
-    "rxjs": "^6.6.6",
-    "ts-node": "^9.1.1"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "peerDependencies": {
     "@tractr/hapify-templates-models": "1.1.1",
-    "@tractr/hapify-templates-rest-dtos": "1.1.2"
+    "@tractr/hapify-templates-rest-dtos": "1.1.2",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.6.7",
+    "universal-rxjs-ajax": "^2.0.4"
   },
   "publishConfig": {
     "access": "restricted",
