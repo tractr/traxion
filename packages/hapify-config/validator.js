@@ -42,5 +42,13 @@ for (const field of fields) {
     errors.push(
       `Entity field with subtype 'manyMany' must also have 'multiple' property. Fix field '${field.name}'`,
     );
+  if (field.subtype === 'oneMany' && field.multiple)
+    errors.push(
+      `Entity field with subtype 'oneMany' must not have 'multiple' property. Fix field '${field.name}'`,
+    );
+  if (field.subtype === 'oneOne' && field.multiple)
+    errors.push(
+      `Entity field with subtype 'oneOne' must not have 'multiple' property. Fix field '${field.name}'`,
+    );
 }
 return { errors, warnings };
