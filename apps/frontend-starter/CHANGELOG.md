@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## frontend-starter [1.2.1](https://github.com/tractr/stack/compare/frontend-starter@1.2.0...frontend-starter@1.2.1) (2021-04-21)
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-models:** upgraded to 1.2.1
+* **@tractr/hapify-templates-rext-client:** upgraded to 1.0.1
+* **@tractr/hapify-templates-rest-dtos:** upgraded to 1.2.1
+
 # frontend-starter [1.2.0](https://github.com/tractr/stack/compare/frontend-starter@1.1.1...frontend-starter@1.2.0) (2021-04-16)
 
 
