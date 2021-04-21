@@ -53,7 +53,7 @@ import { <<relation pascal>> } from './<<relation kebab>>';
 <<if Fields enum>>
 import {
   <<for Fields enum enumField>>
-  <<Model pascal>><<enumField pascal>>
+  <<Model pascal>><<enumField pascal>>,
   <<endfor>>
 } from '../enums';
 <<endif>>
