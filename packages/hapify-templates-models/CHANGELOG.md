@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-templates-models [1.2.1](https://github.com/tractr/stack/compare/@tractr/hapify-templates-models@1.2.0...@tractr/hapify-templates-models@1.2.1) (2021-04-21)
+
+
+### Bug Fixes
+
+* fix enums import in models and rest dtos templates ([#92](https://github.com/tractr/stack/issues/92)) ([7a8848e](https://github.com/tractr/stack/commit/7a8848ee89784f294dfe3ab7826acb7644687a3c))
+
 # @tractr/hapify-templates-models [1.2.0](https://github.com/tractr/stack/compare/@tractr/hapify-templates-models@1.1.1...@tractr/hapify-templates-models@1.2.0) (2021-04-16)
 
 
