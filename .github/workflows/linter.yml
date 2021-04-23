@@ -102,3 +102,6 @@ jobs:
 
           # Only use shellcheck validator
           VALIDATE_SHELL_SHFMT: false
+
+          # Do not validate HTML
+          VALIDATE_HTML: false

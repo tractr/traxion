@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { of } from 'rxjs';
-import { map, mapTo, switchMap, tap } from 'rxjs/operators';
-
 import { Tag } from '@generated/models';
 import { RextClient } from '@generated/rext-client';
+import { of } from 'rxjs';
+import { map, mapTo, switchMap, tap } from 'rxjs/operators';
 
 function start() {
   const client = new RextClient('http://localhost:3000');

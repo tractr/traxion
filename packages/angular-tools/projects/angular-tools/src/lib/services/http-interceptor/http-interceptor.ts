@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpParams,
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
 import { CustomEncoder } from './custom-encoder';
 
@@ -15,8 +13,8 @@ import { CustomEncoder } from './custom-encoder';
 export class EncodeHttpParamsInterceptor implements HttpInterceptor {
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler,
-  ): Observable<HttpEvent<any>> {
+    next: HttpHandler, // : Observable<HttpEvent<any>>
+  ) {
     const params = new HttpParams({
       encoder: new CustomEncoder(),
       fromString: req.params.toString(),

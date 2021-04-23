@@ -17,7 +17,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build-disable": "ng build angular-tools",
+    "build": "ng build angular-tools",
     "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint",
     "lint:eslint": "eslint \"projects/**/*.{ts,js}\"",
     "lint:eslint:fix": "npm run lint:eslint -- --fix",
@@ -28,7 +28,7 @@
     "lint:tsc:fix": "npm run lint:tsc"
   },
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.2.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.2",
@@ -61,7 +61,7 @@
     "@angular/router": "~11.2.0",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^4.0.0",
-    "ng-zorro-antd": "~11.2.0",
+    "ng-zorro-antd": "^11.2.0",
     "rxjs": "~6.6.0",
     "zone.js": "~0.11.3"
   },
