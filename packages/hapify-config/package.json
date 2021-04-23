@@ -8,9 +8,10 @@
   },
   "license": "UNLICENSED",
   "author": "",
-  "main": "dist/index.js",
+  "main": "index.js",
   "types": "dist/index.d.ts",
   "files": [
+    "index.js",
     "dist",
     "validator.js",
     "package.json"
@@ -21,9 +22,8 @@
     "build:watch": "npm run build -- --watch",
     "prepublishOnly": "npm run build"
   },
-  "dependencies": {},
-  "devDependencies": {},
-  "peerDependencies": {
+  "publishConfig": {
+    "access": "restricted",
     "registry": "https://npm.pkg.github.com"
   }
 }

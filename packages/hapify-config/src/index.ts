@@ -1,1 +1,2 @@
-export * from './default-fields';
+export * from './validator-path';
+export * from './hapify-config';
