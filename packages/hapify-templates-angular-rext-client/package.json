@@ -1,0 +1,29 @@
+{
+  "name": "@tractr/hapify-templates-angular-rext-client",
+  "version": "1.0.0",
+  "description": "Template to generate an angular rest client with hapify",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "license": "UNLICENSED",
+  "author": "",
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "@angular/common": "~11.2.3",
+    "@angular/core": "~11.2.3",
+    "@tractr/hapify-templates-models": "1.2.1",
+    "@tractr/hapify-templates-rest-dtos": "1.2.1",
+    "@tractr/hapify-templates-rext-client": "1.0.1"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

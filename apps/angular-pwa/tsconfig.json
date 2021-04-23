@@ -15,7 +15,10 @@
     "paths": {
       "@app/*": ["src/app/*"],
       "@env/*": ["src/environments/*"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@generated/*": ["generated/*"],
+      "rxjs": ["node_modules/rxjs"],
+      "rxjs/*": ["node_modules/rxjs/*"]
     }
   },
   "angularCompilerOptions": {

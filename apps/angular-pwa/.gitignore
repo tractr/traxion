@@ -45,3 +45,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Hapify generated files
+generated
+hapify/**
+!hapify/validator.js

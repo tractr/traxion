@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularRextModule } from '@generated/angular-rext-client/angular-rext.module';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { AngularToolsModule } from '@tractr/angular-tools';
 
@@ -19,6 +20,7 @@ import { AntCustomModule } from './shared/ant-custom.module';
     AntCustomModule,
     TransferHttpCacheModule,
     AngularToolsModule,
+    AngularRextModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
