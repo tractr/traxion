@@ -11,7 +11,7 @@
     "./apps/*"
   ],
   "scripts": {
-    "build": "lerna run build --scope @tractr/hapify-generate-config && npm run generate && lerna run build",
+    "build": "lerna run build --scope '{@tractr/hapify-generate-config,@tractr/hapify-config}' && npm run generate && lerna run build",
     "build:watch": "lerna run build:watch",
     "clean": "npm run clean:node_modules && npm run clean:dist",
     "clean:dist": "find . -name 'dist' -type d -prune -exec rm -rf '{}' +",

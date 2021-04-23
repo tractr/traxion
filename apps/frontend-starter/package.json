@@ -28,28 +28,16 @@
     "test": "jest --config ./test/jest-unit-test.json"
   },
   "dependencies": {
-    "@tractr/hapify-templates-models": "1.2.1",
-    "@tractr/hapify-templates-rext-client": "1.0.1",
-    "@tractr/hapify-templates-rest-dtos": "1.2.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "rxjs": "^6.6.3",
     "universal-rxjs-ajax": "^2.0.4"
   },
   "devDependencies": {
-    "@hapify/cli": "^0.9.0",
-    "@tractr/eslint-config": "^1.2.5",
-    "@tractr/hapify-generate-config": "1.0.5",
-    "@types/node": "^14.14.25",
-    "@typescript-eslint/eslint-plugin": "^4.14.2",
-    "@typescript-eslint/parser": "^4.14.2",
-    "lerna": "^3.22.1",
-    "prettier": "^2.2.1",
-    "reflect-metadata": "^0.1.13",
-    "semantic-release": "^17.3.7",
-    "ts-node": "^9.1.1",
-    "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.1.3"
+    "@tractr/hapify-config": "1.0.0",
+    "@tractr/hapify-templates-models": "1.2.1",
+    "@tractr/hapify-templates-rext-client": "1.0.1",
+    "@tractr/hapify-templates-rest-dtos": "1.2.1"
   },
   "publishConfig": {
     "access": "restricted",

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable no-undef */
-// Models validation script
 
+// Models validation script
 // Model structure: https://docs.hapify.io/en/latest/templating/models-validator/#access-model-properties
 const errors = [];
 const warnings = [];
@@ -41,6 +41,14 @@ for (const field of fields) {
   if (field.subtype === 'manyMany' && !field.multiple)
     errors.push(
       `Entity field with subtype 'manyMany' must also have 'multiple' property. Fix field '${field.name}'`,
+    );
+  if (field.subtype === 'oneMany' && field.multiple)
+    errors.push(
+      `Entity field with subtype 'oneMany' must not have 'multiple' property. Fix field '${field.name}'`,
+    );
+  if (field.subtype === 'oneOne' && field.multiple)
+    errors.push(
+      `Entity field with subtype 'oneOne' must not have 'multiple' property. Fix field '${field.name}'`,
     );
 }
 return { errors, warnings };

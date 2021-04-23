@@ -1,0 +1,29 @@
+{
+  "name": "@tractr/hapify-config",
+  "version": "1.0.0",
+  "description": "Base configuration for hapify templates",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "license": "UNLICENSED",
+  "author": "",
+  "main": "index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "index.js",
+    "dist",
+    "validator.js",
+    "package.json"
+  ],
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc -p tsconfig.build.json",
+    "build:watch": "npm run build -- --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}
