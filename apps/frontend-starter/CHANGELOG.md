@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# frontend-starter [1.3.0](https://github.com/tractr/stack/compare/frontend-starter@1.2.1...frontend-starter@1.3.0) (2021-04-23)
+
+
+### Features
+
+* angular 11 pwa with ng-zorro ([#62](https://github.com/tractr/stack/issues/62)) ([be7df59](https://github.com/tractr/stack/commit/be7df59891e2268447a6aeee13551efaba9bfad3))
+
 ## frontend-starter [1.2.1](https://github.com/tractr/stack/compare/frontend-starter@1.2.0...frontend-starter@1.2.1) (2021-04-21)
 
 
