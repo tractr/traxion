@@ -4,7 +4,6 @@ import { RextClient } from '@generated/rext-client';
 import { of } from 'rxjs';
 import { map, mapTo, switchMap, tap } from 'rxjs/operators';
 
-
 function start() {
   const client = new RextClient('http://localhost:3000');
 
