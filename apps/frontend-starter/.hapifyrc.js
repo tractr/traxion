@@ -1,34 +1,19 @@
+const {
+  hapifyDefaultConfig,
+  getValidatorPath,
+} = require('@tractr/hapify-config');
+
 module.exports = {
+  ...hapifyDefaultConfig,
+  version: '1',
+  name: 'Angular frontend starter',
+  description: 'A frontend starter to get an Angular squeleton',
+  logo: 'https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png',
+  validatorPath: getValidatorPath(__dirname),
+  project: '../../hapify-models.json',
   extends: [
     '@tractr/hapify-templates-models',
     '@tractr/hapify-templates-rest-dtos',
     '@tractr/hapify-templates-rext-client',
   ],
-  version: '1',
-  validatorPath: 'hapify/validator.js',
-  name: 'New bootstrap',
-  description: 'A new Hapify channel',
-  logo: 'https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png',
-  project: '../../hapify-models.json',
-  defaultFields: [
-    {
-      name: 'id',
-      type: 'string',
-      subtype: null,
-      reference: null,
-      primary: true,
-      unique: false,
-      label: false,
-      nullable: false,
-      multiple: false,
-      embedded: false,
-      searchable: false,
-      sortable: false,
-      hidden: false,
-      internal: true,
-      restricted: false,
-      ownership: false,
-    },
-  ],
-  templates: [],
 };

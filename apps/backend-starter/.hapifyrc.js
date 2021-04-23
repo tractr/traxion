@@ -1,4 +1,16 @@
+const {
+  hapifyDefaultConfig,
+  getValidatorPath,
+} = require('@tractr/hapify-config');
+
 module.exports = {
+  ...hapifyDefaultConfig,
+  version: '1',
+  name: 'NestJS Backend starter',
+  description: 'A backend starter to get a nestjs server squeleton',
+  logo: 'https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png',
+  validatorPath: getValidatorPath(__dirname),
+  project: '../../hapify-models.json',
   extends: [
     '@tractr/hapify-templates-prisma',
     '@tractr/hapify-templates-models',
@@ -7,31 +19,4 @@ module.exports = {
     '@tractr/hapify-templates-nestjs-models-rest',
     '@tractr/hapify-templates-nestjs-models',
   ],
-  version: '1',
-  validatorPath: 'hapify/validator.js',
-  name: 'NestJS Backend starter',
-  description: 'A backend starter to get a nestjs server squeleton',
-  logo: 'https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png',
-  project: '../../hapify-models.json',
-  defaultFields: [
-    {
-      name: 'id',
-      type: 'string',
-      subtype: null,
-      reference: null,
-      primary: true,
-      unique: false,
-      label: false,
-      nullable: false,
-      multiple: false,
-      embedded: false,
-      searchable: false,
-      sortable: false,
-      hidden: false,
-      internal: true,
-      restricted: false,
-      ownership: false,
-    },
-  ],
-  templates: [],
 };

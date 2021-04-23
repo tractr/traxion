@@ -1,6 +1,6 @@
 {
-  "name": "New bootstrap",
-  "description": "A new Hapify channel",
+  "name": "Angular frontend starter",
+  "description": "A frontend starter to get an Angular squeleton",
   "templates": [
     {
       "path": "generated/rext-client/index.ts",
@@ -209,7 +209,7 @@
     }
   ],
   "version": "1",
-  "validatorPath": "hapify/validator.js",
+  "validatorPath": "../../packages/hapify-config/validator.js",
   "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
   "project": "../../hapify-models.json",
   "defaultFields": [
