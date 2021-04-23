@@ -29,9 +29,7 @@
           "type": "entity",
           "subtype": "oneMany",
           "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
-          "properties": [
-            "multiple"
-          ]
+          "properties": []
         },
         {
           "name": "question",
