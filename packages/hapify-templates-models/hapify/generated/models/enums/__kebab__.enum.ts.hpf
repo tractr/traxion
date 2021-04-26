@@ -1,7 +1,7 @@
 <<for Fields enum field>>
 export const <<Model pascal>><<field pascal>> = {
    <<for field.enum enumValue>>
- <<enumValue constant>>: '<<enumValue constant>>',
+ <<enumValue raw>>: '<<enumValue raw>>',
    <<endfor>>
 } as const;
   

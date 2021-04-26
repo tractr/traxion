@@ -50,7 +50,7 @@
   <<for model.fields enum field>>
 enum <<model pascal>><<field pascal>> {
    <<for field.enum enumValue>>
- <<enumValue constant>>
+ <<enumValue raw>>
    <<endfor>>
 }
   <<endfor>>
