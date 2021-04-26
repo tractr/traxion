@@ -249,7 +249,7 @@
         {
           "name": "gender",
           "type": "enum",
-          "value": ["MALE", "FEMALE"],
+          "value": ["male", "female"],
           "properties": ["searchable", "sortable"]
         }
       ]
@@ -294,4 +294,3 @@
     }
   ]
 }
-
