@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-templates-rext-client [1.0.2](https://github.com/tractr/stack/compare/@tractr/hapify-templates-rext-client@1.0.1...@tractr/hapify-templates-rext-client@1.0.2) (2021-04-26)
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-models:** upgraded to 1.2.2
+* **@tractr/hapify-templates-rest-dtos:** upgraded to 1.2.2
+
 ## @tractr/hapify-templates-rext-client [1.0.1](https://github.com/tractr/stack/compare/@tractr/hapify-templates-rext-client@1.0.0...@tractr/hapify-templates-rext-client@1.0.1) (2021-04-21)
 
 
