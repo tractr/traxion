@@ -35,9 +35,9 @@
   },
   "devDependencies": {
     "@tractr/hapify-config": "1.0.0",
-    "@tractr/hapify-templates-models": "1.2.1",
-    "@tractr/hapify-templates-rext-client": "1.0.1",
-    "@tractr/hapify-templates-rest-dtos": "1.2.1"
+    "@tractr/hapify-templates-models": "1.2.2",
+    "@tractr/hapify-templates-rext-client": "1.0.2",
+    "@tractr/hapify-templates-rest-dtos": "1.2.2"
   },
   "publishConfig": {
     "access": "restricted",
