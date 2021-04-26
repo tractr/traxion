@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-templates-models [1.2.2](https://github.com/tractr/stack/compare/@tractr/hapify-templates-models@1.2.1...@tractr/hapify-templates-models@1.2.2) (2021-04-26)
+
+
+### Bug Fixes
+
+* update case of enums ([#96](https://github.com/tractr/stack/issues/96)) ([dc9c65b](https://github.com/tractr/stack/commit/dc9c65b1cc55430d1cb7195093ef89f0a5f37ba7))
+
 ## @tractr/hapify-templates-models [1.2.1](https://github.com/tractr/stack/compare/@tractr/hapify-templates-models@1.2.0...@tractr/hapify-templates-models@1.2.1) (2021-04-21)
 
 
