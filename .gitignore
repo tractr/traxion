@@ -54,6 +54,7 @@ lerna-debug.log*
 
 # Hapify folder
 **/prisma/schemas/generated.prisma.hpf
+**/hapify
 !**/hapify/validator.js
 
 # Local ignore
