@@ -1,2 +1,3 @@
-# syntax = edrevo/dockerfile-plus
+#syntax = edrevo/dockerfile-plus
+
 INCLUDE+ ../../docker/nestjs-dockerfile

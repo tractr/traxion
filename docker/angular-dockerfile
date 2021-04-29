@@ -33,11 +33,10 @@ FROM dependencies.dev AS build
 WORKDIR /root/tractr/${app}
 COPY ${app}/src src
 RUN npm run build -- --prod --output-path=dist
-RUN ls -al dist
 
 #
 # ---- Release ----
-FROM nginx:stable-alpine
+FROM nginx:stable-alpine AS angular-prod
 ARG app
 
 ## Copy our default nginx config

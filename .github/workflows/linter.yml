@@ -93,6 +93,7 @@ jobs:
 
           # Only use hadolint and not dockerlint (multi-staged is not working)
           VALIDATE_DOCKERFILE: false
+          VALIDATE_DOCKERFILE_HADOLINT: false
 
           # Do not run jscpd validation
           VALIDATE_JSCPD: false
