@@ -1,0 +1,163 @@
+/* eslint-disable import/no-cycle */
+import {  
+  <<if Fields boolean>>
+  IsBoolean, 
+  <<endif>>
+
+  <<if Fields email>>
+  IsEmail, 
+  <<endif>>
+
+  <<if Fields enum>>
+  IsIn,
+  <<endif>>
+
+  <<if Fields number or datetime>>
+  IsNumber,
+  <<endif>>
+
+  <<if Fields datetime>>
+  IsDate,
+  <<endif>>
+
+  <<if Fields nullable>>
+  IsOptional,
+  <<endif>>
+
+  <<if Fields string or entity or enum>>
+  IsString,
+  <<endif>>
+
+  <<if Fields url>>
+  IsUrl, 
+  <<endif>>
+
+  <<if Fields primary>>
+  IsUUID,
+  <<endif>>
+
+  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+  ValidateNested,
+  <<<}>>>
+
+  <<if Fields password>>
+  Matches, 
+  <<endif>>
+
+} from 'class-validator';
+  
+<<<for (const relation of getRelations()) {>>>
+import { <<relation pascal>> } from './<<relation kebab>>';
+<<<}>>>
+ 
+<<if Fields enum>>
+import {
+  <<for Fields enum enumField>>
+  <<Model pascal>><<enumField pascal>>,
+  <<endfor>>
+} from '../enums';
+<<endif>>
+
+ 
+export class <<Model pascal>> {
+<<for Fields field>>
+  <<if field boolean>>
+  @IsBoolean(<<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field string or enum>>
+  @IsString(<<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field primary>>
+  @IsUUID("all", <<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field entity>>
+  @ValidateNested(<<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field enum>>
+  @IsIn(Object.values(<<Model pascal>><<field pascal>>),<<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field email>>
+  @IsEmail({}, <<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field password>>
+  @Matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/, <<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field url>>
+  @IsUrl({}, <<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field number or datetime>>
+  @IsNumber({}, <<=listModifier(field)>>)
+  <<endif>>
+
+  <<if field  datetime>>
+  @IsDate({}, <<=listModifier(field)>>)
+  <<endif>>
+
+  <<if field nullable>>
+  @IsOptional()
+  <<endif>>
+
+  <<=typedProperty(field)>>
+   
+<<endfor>>
+
+<<for Fields oneOne or oneMany field>>
+  <<if field nullable>>
+  @IsOptional()
+  <<endif>>
+  @IsString() 
+  @IsUUID("all") 
+  <<field camel>>Id<<if field nullable>>?<<else>>!<<endif>>: string;
+  
+<<endfor>>
+<<for root.referencedIn ref>>
+  <<for ref.fields field>>
+  @ValidateNested(<<if field oneMany or manyMany>>{ each: true}<<endif>>) 
+  <<ref camel>>As<<field pascal>>?: <<ref pascal>><<if field oneMany or manyMany>>[]<<endif>>;
+    
+  <<endfor>>
+<<endfor>>
+}
+
+<<<
+function typedProperty(f) {
+  let out = f.names.camel;
+  out += f.nullable || f.type === 'entity' ? "?" : "!";
+  out += ": "
+  if (f.type === "boolean") out += "boolean";
+  else if (f.type === "string") out += "string";
+  else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;
+  else if (f.type === "number") out += "number";
+  else if (f.type === "datetime") out += "Date";
+  else if (f.type === "entity") {
+    out +=  f.model.names.pascal;
+  }
+  if (f.multiple) out += "[]";
+  out += ";";
+  return out;
+}
+>>>
+
+<<<
+function listModifier(f) {
+  if (f.multiple) return "{ each: true}";
+  else return "";
+}
+>>>
+
+<<<
+function getRelations() {
+  const seen = { [root.id]: true };
+  return [ ...root.dependencies.list, ...root.referencedIn ]
+    .filter((m) => (seen[m.id] ? false : (seen[m.id] = true)));
+}
+>>>
+

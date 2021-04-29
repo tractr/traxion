@@ -6,8 +6,8 @@ const {
 module.exports = {
   ...hapifyDefaultConfig,
   version: '1',
-  name: 'Angular frontend starter',
-  description: 'A frontend starter to get an Angular squeleton',
+  name: 'Angular pwa starter',
+  description: 'A pwa starter to get an Angular squeleton',
   logo: 'https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png',
   validatorPath: getValidatorPath(__dirname),
   project: '../../hapify-models.json',
