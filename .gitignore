@@ -39,3 +39,22 @@ lerna-debug.log*
 
 # Package lock in sub folder
 **/package-lock.json
+
+# Local sqlite database
+**/prisma/dev.db
+
+# Hapify generated files
+**/prisma/schemas/generated.prisma
+
+# Other generated files
+**/prisma/schema.prisma
+
+# Generated files
+**generated
+
+# Hapify folder
+**/prisma/schemas/generated.prisma.hpf
+!**/hapify/validator.js
+
+# Local ignore
+*.local-ignore*
