@@ -1,0 +1,48 @@
+#syntax=docker/dockerfile:1.2
+
+# ---- Base Node ----
+FROM node:16-alpine AS base
+ARG app
+ARG NODE_AUTH_TOKEN
+
+# set working directory
+WORKDIR /root/tractr
+
+# copy project file
+COPY ./package.json .
+COPY ./tsconfig.json .
+COPY ./lerna.json .
+COPY ./hapify-models.json .
+COPY ${app}/.hapifyrc.js ${app}/
+COPY ${app}/package.json ${app}/
+COPY ${app}/tsconfig.json ${app}/
+COPY ${app}/tsconfig.app.json ${app}/
+COPY ${app}/angular.json ${app}/
+
+# ---- Dependencies ----
+FROM base AS dependencies.dev
+RUN --mount=type=secret,id=npmrc,target=/root/.npmrc NODE_AUTH_TOKEN=${NODE_AUTH_TOKEN} npm i
+
+# ---- Dependencies ----
+FROM dependencies.dev AS build
+WORKDIR /root/tractr/${app}
+COPY ${app}/src src
+RUN npm run build -- --prod --output-path=dist
+
+#
+# ---- Release ----
+FROM nginx:stable-alpine AS angular-prod
+ARG app
+
+## Copy our default nginx config
+COPY ${app}/nginx/default.conf /etc/nginx/conf.d/
+
+## Remove default nginx website
+RUN rm -rf /usr/share/nginx/html/*
+
+## From ‘build’ stage copy over the artifacts in dist folder to default nginx public folder
+COPY --from=build /root/tractr/${app}/dist /usr/share/nginx/html
+
+EXPOSE 4200
+
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,6 +1,6 @@
 {
-  "name": "Angular pwa starter",
-  "description": "A pwa starter to get an Angular squeleton",
+  "name": "Angular frontend starter",
+  "description": "A frontend starter to get an Angular squeleton",
   "templates": [
     {
       "path": "generated/rext-client/index.ts",

@@ -6,35 +6,84 @@ on:
       - main
 
 jobs:
+  npm-changes:
+    name: Check if packages/** has some changes
+    runs-on: ubuntu-latest
+    outputs:
+      # Expose matched filters as job 'packages' output variable
+      apps: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: actions/checkout@v2
+      # For pull requests it's not necessary to checkout the code
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          # Use context to get the branch where commits were pushed.
+          # If there is only one long-lived branch (e.g. master),
+          # you can specify it directly.
+          # If it's not configured, the repository default branch is used.
+          base: ${{ github.ref }}
+          token: ${{ secrets.GH_TOKEN }}
+          filters: |
+            packages:
+            - 'packages/**'
+
+  # Take all the packages and release them to https://npm.pkg.github.com
   npm-release:
+    if: ${{ needs.npm-changes.outputs.packages == 'true' }}
+    needs: [npm-changes]
+
+    # Our code will run on node 16 and Linux
     strategy:
       matrix:
-        node: [15.x]
+        node: [16.x]
         os: [ubuntu-latest]
-    name: npm release on node 15.x and ubuntu-latest
-    runs-on: ubuntu-latest
+
+    name: Release npm packages on node ${{ matrix.node }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
     steps:
+      # First we checkout the code
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: use node.js 15.x
-        uses: actions/setup-node@v1
+
+      # We configure our node environmment and our registry
+      - name: use node.js ${{ matrix.node }}
+        uses: actions/setup-node@v2.1.5
         with:
-          node-version: 15.x
+          node-version: ${{ matrix.node}}
           registry-url: https://npm.pkg.github.com
-      - uses: actions/cache@v2
+
+      # We get our cache compare to our package-lock
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+      - uses: actions/cache@v2.1.4
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          path: |
+            ${{ steps.npm-cache-dir.outputs.dir }}
+            node_modules
+            */*/node_modules
+          key:
+            ${{ matrix.os }}-node-${{ matrix.node }}-${{
+            hashFiles('package-lock.json') }}
+
+      # We install our dependencies
       - name: Run npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm ci --prefer-offline --no-audit --progress=false
+
+      # We build our code base
       - name: Run npm build
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run build
+
+      # We release our packages to our registry
       - name: Relase npm packages
         if: success()
         env:
@@ -43,15 +92,46 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx multi-semantic-release --sequential-init
 
-  docker-release:
-    if: success()
+  docker-changes:
+    name: Check if apps/** has some changes
+    if: always()
     needs: [npm-release]
+    runs-on: ubuntu-latest
+    outputs:
+      # Expose matched filters as job 'packages' output variable
+      apps: ${{ steps.filter.outputs.changes }}
+      backend-starter: ${{ steps.filter.outputs.backend-starter }}
+      angular-pwa: ${{ steps.filter.outputs.angular-pwa }}
+    steps:
+      - uses: actions/checkout@v2
+      # For pull requests it's not necessary to checkout the code
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          # Use context to get the branch where commits were pushed.
+          # If there is only one long-lived branch (e.g. master),
+          # you can specify it directly.
+          # If it's not configured, the repository default branch is used.
+          base: ${{ github.ref }}
+          token: ${{ secrets.GH_TOKEN }}
+          filters: |
+            backend-starter: 
+              - 'apps/backend-starter/**'
+            angular-pwa:
+              - 'apps/angular-pwa/**'
+
+  docker-release:
+    if:
+      always() && (needs.docker-changes.outputs.docker-starter == 'true' ||
+      needs.docker-changes.outputs.angular-pwa == 'true')
+    needs: [docker-changes]
     strategy:
       matrix:
-        app: [backend-starter]
-        node: [15.x]
+        app: ${{ fromJSON(needs.docker-changes.outputs.apps) }}
+        node: [16.x]
         os: [ubuntu-latest]
         scope: [tractr]
+        repository: [tractr]
     name: docker release ${{ matrix.app }} (@${{ matrix.scope }})
     runs-on: ${{ matrix.os }}
     steps:
@@ -61,18 +141,18 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           registry-url: https://npm.pkg.github.com
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Run npm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci --prefer-offline --no-audit --progress=false
-      - name: Run npm build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run build
+      # - uses: actions/cache@v2
+      #   with:
+      #     path: ~/.npm
+      #     key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      # - name: Run npm install
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #   run: npm ci --prefer-offline --no-audit --progress=false
+      # - name: Run npm build
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #   run: npm run build
       - name: Cache Docker layers
         uses: actions/cache@v2
         with:
@@ -84,7 +164,9 @@ jobs:
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: ghcr.io/${{ matrix.scope }}/${{ matrix.app }}
+          images:
+            ghcr.io/${{ matrix.repository }}/${{ matrix.scope }}-${{ matrix.app
+            }}
           tag-sha: true
           tag-latest: true
       - name: Set up QEMU
@@ -105,7 +187,7 @@ jobs:
         with:
           context: .
           push: true
-          file: ./docker/nestjs-dockerfile
+          file: ./apps/${{ matrix.app }}/Dockerfile
           build-args: |
             app=apps/${{ matrix.app }}
             NODE_AUTH_TOKEN=${{ secrets.NPM_TOKEN }}
