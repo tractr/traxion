@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'Hapify templates for Nestjs models',
-  description: 'Generate the models for a Nestjs application',
+  name: 'Hapify templates - models',
+  description: 'Generate the models dtos',
   templates: [
     {
       path: 'generated/models/index.ts',

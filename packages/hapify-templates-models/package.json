@@ -20,7 +20,8 @@
   "peerDependencies": {
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.0",
-    "faker": "^5.4.0"
+    "faker": "^5.4.0",
+    "prisma": "^2.17.0"
   },
   "publishConfig": {
     "access": "restricted",

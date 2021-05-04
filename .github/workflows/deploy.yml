@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       # Expose matched filters as job 'packages' output variable
-      apps: ${{ steps.filter.outputs.changes }}
+      packages: ${{ steps.filter.outputs.packages }}
     steps:
       - uses: actions/checkout@v2
       # For pull requests it's not necessary to checkout the code
@@ -30,8 +30,8 @@ jobs:
 
   # Take all the packages and release them to https://npm.pkg.github.com
   npm-release:
-    if: ${{ needs.npm-changes.outputs.packages == 'true' }}
     needs: [npm-changes]
+    if: ${{ needs.npm-changes.outputs.packages == 'true' }}
 
     # Our code will run on node 16 and Linux
     strategy:
@@ -98,7 +98,7 @@ jobs:
     needs: [npm-release]
     runs-on: ubuntu-latest
     outputs:
-      # Expose matched filters as job 'packages' output variable
+      # Expose matched filters as matrix output variable
       apps: ${{ steps.filter.outputs.changes }}
       backend-starter: ${{ steps.filter.outputs.backend-starter }}
       angular-pwa: ${{ steps.filter.outputs.angular-pwa }}
@@ -121,8 +121,9 @@ jobs:
               - 'apps/angular-pwa/**'
 
   docker-release:
+    # If we got some change inside apps/** we execute this job
     if:
-      always() && (needs.docker-changes.outputs.docker-starter == 'true' ||
+      always() && (needs.docker-changes.outputs.backend-starter == 'true' ||
       needs.docker-changes.outputs.angular-pwa == 'true')
     needs: [docker-changes]
     strategy:
@@ -135,24 +136,17 @@ jobs:
     name: docker release ${{ matrix.app }} (@${{ matrix.scope }})
     runs-on: ${{ matrix.os }}
     steps:
+      # Checkout the source code
       - uses: actions/checkout@v2
+
+      # Setup the node js env
       - name: use node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
           registry-url: https://npm.pkg.github.com
-      # - uses: actions/cache@v2
-      #   with:
-      #     path: ~/.npm
-      #     key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      # - name: Run npm install
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #   run: npm ci --prefer-offline --no-audit --progress=false
-      # - name: Run npm build
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #   run: npm run build
+
+      # Get some cache to speed up docker build
       - name: Cache Docker layers
         uses: actions/cache@v2
         with:
@@ -160,6 +154,8 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ matrix.app }}-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-${{ matrix.app }}-
+
+      # Register some meta data to build docker
       - name: Docker meta
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
@@ -169,18 +165,26 @@ jobs:
             }}
           tag-sha: true
           tag-latest: true
+
+      # Setup QEMU
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
+
+      # RSetup buildx
       - uses: docker/setup-buildx-action@v1
         id: buildx
         with:
           install: true
+
+      # Loggin to our docker registry
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GH_TOKEN }}
+
+      # Build and push our docker images to the registry
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -199,6 +203,8 @@ jobs:
         # Temp fix
         # https://github.com/docker/build-push-action/issues/252
         # https://github.com/moby/buildkit/issues/1896
+
+      # Change the cache for buildx
       - name: Move cache
         run: |
           rm -rf /tmp/.buildx-cache
