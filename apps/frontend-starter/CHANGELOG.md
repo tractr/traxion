@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# frontend-starter [1.5.0](https://github.com/tractr/stack/compare/frontend-starter@1.4.1...frontend-starter@1.5.0) (2021-05-04)
+
+
+### Features
+
+* add angular pwa dockerfile and tweak deploy gitaction ([#97](https://github.com/tractr/stack/issues/97)) ([af0d7e7](https://github.com/tractr/stack/commit/af0d7e744558675fca9ebdc107b643fe857f9d6b))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-models:** upgraded to 1.2.3
+* **@tractr/hapify-templates-rext-client:** upgraded to 1.0.3
+* **@tractr/hapify-templates-rest-dtos:** upgraded to 1.2.3
+
 ## frontend-starter [1.4.1](https://github.com/tractr/stack/compare/frontend-starter@1.4.0...frontend-starter@1.4.1) (2021-04-26)
 
 
