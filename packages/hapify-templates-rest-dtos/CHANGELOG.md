@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-templates-rest-dtos [1.2.3](https://github.com/tractr/stack/compare/@tractr/hapify-templates-rest-dtos@1.2.2...@tractr/hapify-templates-rest-dtos@1.2.3) (2021-05-04)
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-models:** upgraded to 1.2.3
+
 ## @tractr/hapify-templates-rest-dtos [1.2.2](https://github.com/tractr/stack/compare/@tractr/hapify-templates-rest-dtos@1.2.1...@tractr/hapify-templates-rest-dtos@1.2.2) (2021-04-26)
 
 
