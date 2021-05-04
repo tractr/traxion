@@ -1,6 +1,6 @@
 {
   "name": "angular-pwa",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "ng": "ng",
@@ -44,10 +44,10 @@
     "@angular/cli": "~11.2.2",
     "@angular/compiler-cli": "~11.2.3",
     "@nguniversal/builders": "^11.1.2",
-    "@tractr/hapify-config": "^1.0.0",
-    "@tractr/hapify-templates-models": "^1.2.2",
-    "@tractr/hapify-templates-rest-dtos": "^1.2.2",
-    "@tractr/hapify-templates-rext-client": "^1.0.2",
+    "@tractr/hapify-config": "1.0.0",
+    "@tractr/hapify-templates-models": "1.2.3",
+    "@tractr/hapify-templates-rest-dtos": "1.2.3",
+    "@tractr/hapify-templates-rext-client": "1.0.3",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
