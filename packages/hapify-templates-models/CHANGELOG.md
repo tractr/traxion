@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-templates-models [1.2.3](https://github.com/tractr/stack/compare/@tractr/hapify-templates-models@1.2.2...@tractr/hapify-templates-models@1.2.3) (2021-05-04)
+
+
+### Bug Fixes
+
+* update models template to match prisma types for optional fields ([#100](https://github.com/tractr/stack/issues/100)) ([e26c3bb](https://github.com/tractr/stack/commit/e26c3bb1112c4b8bf35f68bbdfa25c9cdca2bd9b))
+
 ## @tractr/hapify-templates-models [1.2.2](https://github.com/tractr/stack/compare/@tractr/hapify-templates-models@1.2.1...@tractr/hapify-templates-models@1.2.2) (2021-04-26)
 
 
