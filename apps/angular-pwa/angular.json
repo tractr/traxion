@@ -39,15 +39,17 @@
           "options": {
             "allowedCommonJsDependencies": ["validator", "universal-rxjs-ajax"],
             "aot": true,
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "index": "src/index.html",
             "main": "src/main.ts",
             "outputPath": "dist/angular-pwa",
             "polyfills": "src/polyfills.ts",
             "scripts": [],
             "styles": [
-              "../../node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-              "../../node_modules/tailwindcss/tailwind.css"
+              "node_modules/tailwindcss/tailwind.css"
             ],
             "tsConfig": "tsconfig.app.json"
           }
@@ -73,7 +75,9 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "exclude": ["**/node_modules/**"],
+            "exclude": [
+              "**/node_modules/**"
+            ],
             "tsConfig": [
               "tsconfig.app.json",
               "tsconfig.spec.json",
@@ -95,12 +99,17 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "karmaConfig": "karma.conf.js",
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "scripts": [],
-            "styles": ["src/styles.less"],
+            "styles": [
+              "src/styles.less"
+            ],
             "tsConfig": "tsconfig.spec.json"
           }
         }
