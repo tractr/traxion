@@ -27,7 +27,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [],
+            "styles": [ "node_modules/tailwindcss/tailwind.css"],
             "scripts": []
           },
           "configurations": {
