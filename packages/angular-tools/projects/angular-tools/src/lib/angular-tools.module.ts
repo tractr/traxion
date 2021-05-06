@@ -51,10 +51,10 @@ import { TranslateModuleLoad } from './translate-import';
   ],
   providers: [
     ErrorService,
-    {
+    /* {
       provide: ErrorHandler,
       useClass: GlobalErrorService,
-    },
+    }, */
     ResizeService,
     ExplainErrorsService,
     {
