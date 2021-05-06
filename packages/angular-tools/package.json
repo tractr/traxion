@@ -13,7 +13,6 @@
   "typings": "./dist/angular-tools/angular-tools.d.ts",
   "files": [
     "dist",
-    "__ivy_ngcc__",
     "package.json"
   ],
   "scripts": {
