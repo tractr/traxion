@@ -13,9 +13,10 @@
   "scripts": {
     "build": "lerna run build --scope '{@tractr/hapify-generate-config,@tractr/hapify-config}' && npm run generate && lerna run build",
     "build:watch": "lerna run build:watch",
-    "clean": "npm run clean:node_modules && npm run clean:dist",
+    "clean": "npm run clean:node_modules && npm run clean:dist && npm run clean:lock",
     "clean:dist": "find . -name 'dist' -type d -prune -exec rm -rf '{}' +",
     "clean:node_modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
+    "clean:lock": "find ./{apps,packages} -name '{package-lock.json,yarn.lock}' -type d -prune -exec rm -rf '{}' +",
     "generate": "lerna run generate",
     "postinstall": "is-ci || husky install",
     "lint": "lerna run --parallel lint",

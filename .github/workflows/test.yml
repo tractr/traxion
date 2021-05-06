@@ -21,7 +21,7 @@ jobs:
       - name: Run npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci --prefer-offline --no-audit --progress=false
+        run: yarn --frozen-lock --prefer-offline --no-audit --no-progress
       - name: Run npm build
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

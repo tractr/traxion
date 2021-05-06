@@ -58,12 +58,12 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
 
       ##################################
-      # Run npm ci to use package.lock #
+      # Run yarn to use package.lock #
       ##################################
       - name: Run npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci --prefer-offline --no-audit --progress=false
+        run: yarn --frozen-lock --prefer-offline --no-audit --no-progress
 
       ###########################################################
       # Build the application to let's apps generate their code #

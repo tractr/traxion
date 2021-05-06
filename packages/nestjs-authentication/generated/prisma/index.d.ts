@@ -187,8 +187,8 @@ export namespace Prisma {
   export import Decimal = runtime.Decimal
 
   /**
-   * Prisma Client JS version: 2.20.1
-   * Query Engine version: 60ba6551f29b17d7d6ce479e5733c70d9c00860e
+   * Prisma Client JS version: 2.22.0
+   * Query Engine version: 60cc71d884972ab4e897f0277c4b84383dddaf6c
    */
   export type PrismaVersion = {
     client: string
@@ -483,6 +483,11 @@ export namespace Prisma {
    */
   type PickArray<T, K extends Array<keyof T>> = Prisma__Pick<T, TupleToUnion<K>>
 
+  /**
+   * Exclude all keys with underscores
+   */
+  type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? never : T
+
   class PrismaClientFetcher {
     private readonly prisma;
     private readonly debug;
@@ -686,13 +691,13 @@ export namespace Prisma {
   }
 
   export type UserCountAggregateOutputType = {
-    id: number | null
-    name: number | null
-    email: number | null
-    password: number | null
-    role: number | null
-    banned: number | null
-    lastConnectedAt: number | null
+    id: number
+    name: number
+    email: number
+    password: number
+    role: number
+    banned: number
+    lastConnectedAt: number
     _all: number
   }
 
@@ -1111,7 +1116,7 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: UserGroupByArgs['orderBy'] }
         : { orderBy?: UserGroupByArgs['orderBy'] },
-      OrderFields extends Keys<MaybeTupleToUnion<T['orderBy']>>,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
