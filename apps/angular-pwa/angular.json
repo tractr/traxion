@@ -45,7 +45,7 @@
             "outputPath": "dist/angular-pwa",
             "polyfills": "src/polyfills.ts",
             "scripts": [],
-            "styles": ["../../node_modules/tailwindcss/tailwind.css"],
+            "styles": ["../../node_modules/ng-zorro-antd/ng-zorro-antd.min.css","../../node_modules/tailwindcss/tailwind.css"],
             "tsConfig": "tsconfig.app.json"
           }
         },
