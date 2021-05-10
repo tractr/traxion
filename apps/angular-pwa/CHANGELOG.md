@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## angular-pwa [1.1.1](https://github.com/tractr/stack/compare/angular-pwa@1.1.0...angular-pwa@1.1.1) (2021-05-10)
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-rext-client:** upgraded to 1.0.4
+
 # angular-pwa [1.1.0](https://github.com/tractr/stack/compare/angular-pwa@1.0.0...angular-pwa@1.1.0) (2021-05-04)
 
 
