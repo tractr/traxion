@@ -3,4 +3,4 @@
 # shellcheck disable=SC1090
 . "$(dirname "$0")/_/husky.sh"
 
-npx lint-staged
+npm_config_yes=true npx lint-staged

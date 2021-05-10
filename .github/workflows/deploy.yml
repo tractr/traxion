@@ -58,18 +58,20 @@ jobs:
 
       # We get our cache compare to our package-lock
       - name: Get npm cache directory
-        id: npm-cache-dir
+        id: yarn-cache-dir
         run: |
-          echo "::set-output name=dir::$(npm config get cache)"
+          echo "::set-output name=dir::$(yarn cache dir)"
       - uses: actions/cache@v2.1.4
         with:
           path: |
-            ${{ steps.npm-cache-dir.outputs.dir }}
+            ${{ steps.yarn-cache-dir.outputs.dir }}
             node_modules
             */*/node_modules
           key:
-            ${{ matrix.os }}-node-${{ matrix.node }}-${{
-            hashFiles('package-lock.json') }}
+            ${{ matrix.os }}-yarn-${{ matrix.node }}-${{
+            hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ matrix.os }}-yarn-${{ matrix.node }}-
 
       # We install our dependencies
       - name: Run npm install

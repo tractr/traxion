@@ -3,4 +3,4 @@
 # shellcheck disable=SC1090
 . "$(dirname "$0")/_/husky.sh"
 
-npx tractr-commitlint --edit "$1"
+npm_config_yes=true npx tractr-commitlint --edit "$1"
