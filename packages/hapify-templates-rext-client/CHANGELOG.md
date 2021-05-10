@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-templates-rext-client [1.0.4](https://github.com/tractr/stack/compare/@tractr/hapify-templates-rext-client@1.0.3...@tractr/hapify-templates-rext-client@1.0.4) (2021-05-10)
+
+
+### Bug Fixes
+
+* export the right file to hapify-templates-rext-client to be used by others ([#105](https://github.com/tractr/stack/issues/105)) ([e2a0045](https://github.com/tractr/stack/commit/e2a0045f84bc266048f7900396fded1340d968d3))
+
 ## @tractr/hapify-templates-rext-client [1.0.3](https://github.com/tractr/stack/compare/@tractr/hapify-templates-rext-client@1.0.2...@tractr/hapify-templates-rext-client@1.0.3) (2021-05-04)
 
 
