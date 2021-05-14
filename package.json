@@ -65,6 +65,7 @@
     "lint-staged": "^10.5.4",
     "nanoid": "3.1.22",
     "pinst": "^2.1.6",
+    "postcss": "^8.2.15",
     "prettier": "^2.2.1",
     "prisma": "^2.21.0",
     "prisma-merge": "^0.2.0",
