@@ -3676,6 +3676,21 @@
     eslint-plugin-jest "^24.3.4"
     eslint-plugin-json-files "^0.8.1"
 
+"@tractr/hapify-templates-models@1.2.1":
+  version "1.2.1"
+  resolved "https://npm.pkg.github.com/download/@tractr/hapify-templates-models/1.2.1/d7318373240dd7a64ddf61284e0f14da17edf824a87561322ffa456b97c33d32#9cfa91e4d46ee13704d50b612788783088f25760"
+  integrity sha512-gZsGuodOT25MWm/F2Vs98CkF+PcYk0YiAFkas4NRuooFTexFup7cMCrAfpByGp73jDY7MuyIbAC8uV9gtTF/DQ==
+
+"@tractr/hapify-templates-rest-dtos@1.2.1":
+  version "1.2.1"
+  resolved "https://npm.pkg.github.com/download/@tractr/hapify-templates-rest-dtos/1.2.1/93bea3d227bd6bfd64b8ce791f81caf6ac6529259e33861e9dd963621ad50b70#3fcd639752fe2bc9252b0e524638d1abf45d0fb4"
+  integrity sha512-ln8EM/QoeOn8hFdw1VfqyKovWLxqDYVFCBANA5ih/oDvCXXa8/CQREgmwt2RqrWl5eTelvCF3MjR7OAK/GxX1A==
+
+"@tractr/hapify-templates-rext-client@1.0.1":
+  version "1.0.1"
+  resolved "https://npm.pkg.github.com/download/@tractr/hapify-templates-rext-client/1.0.1/ecf86336f9d6cfa347c3084f1460aa6539152663cc66c5622400b7127041b6ae#cecc7e4a4b025397a048fce00a09ac50b3c17230"
+  integrity sha512-QrlRyjhCrMrsPAXNJ+/SWtrQRikQKs8OCNX6kasy2sfUn0Jw4Ouo+cdccU9NakblTARllJXgxxq6Oph1C6u70A==
+
 "@tractr/jest-config@^1.1.4":
   version "1.1.4"
   resolved "https://npm.pkg.github.com/download/@tractr/jest-config/1.1.4/452283b12b850bac08932d1aeaa121be12e2083b8b151bcb6532e3cc742aa44a#905bc099722f32a6224dc06501b52c659fdd29b4"
@@ -15955,7 +15970,7 @@ rxjs@^5.5.6:
   dependencies:
     symbol-observable "1.0.1"
 
-rxjs@^6.4.0, rxjs@^6.5.0, rxjs@^6.5.3, rxjs@^6.5.5, rxjs@^6.6.0, rxjs@^6.6.3, rxjs@^6.6.7, rxjs@~6.6.0:
+rxjs@^6.4.0, rxjs@^6.5.0, rxjs@^6.5.3, rxjs@^6.5.5, rxjs@^6.6.0, rxjs@^6.6.3, rxjs@^6.6.7:
   version "6.6.7"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.7.tgz#90ac018acabf491bf65044235d5863c4dab804c9"
   integrity sha512-hTdwr+7yYNIT5n4AMYp85KA6yw2Va0FLa3Rguvbpa4W3I5xynaBZo41cM3XM+4Q6fRMj3sBYIR1VAmZMXYJvRQ==
@@ -18099,6 +18114,13 @@ universal-analytics@0.4.23:
     request "^2.88.2"
     uuid "^3.0.0"
 
+universal-rxjs-ajax@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/universal-rxjs-ajax/-/universal-rxjs-ajax-2.0.4.tgz#d410073a6ac7fac5bd6adc5f916036a8b604c929"
+  integrity sha512-UTZeEZaXjVq/TgQ/yV/6o4zZK3rtpV7E8s7iC25mpG1dQzp6bGhIzHslj3QZg7WYdwh+caWFyXv9KZKySu1xlA==
+  dependencies:
+    xhr2 "^0.2.0"
+
 universal-user-agent@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/universal-user-agent/-/universal-user-agent-6.0.0.tgz#3381f8503b251c0d9cd21bc1de939ec9df5480ee"
@@ -18828,6 +18850,11 @@ ws@^7.4.2, ws@^7.4.4, ws@~7.4.2:
   version "7.4.5"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.5.tgz#a484dd851e9beb6fdb420027e3885e8ce48986c1"
   integrity sha512-xzyu3hFvomRfXKH8vOFMU3OguG6oOvhXMo3xsGy3xWExqaM2dxBbVxuD99O7m3ZUFMvvscsZDqxfgMaRr/Nr1g==
+
+xhr2@^0.2.0:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/xhr2/-/xhr2-0.2.1.tgz#4e73adc4f9cfec9cbd2157f73efdce3a5f108a93"
+  integrity sha512-sID0rrVCqkVNUn8t6xuv9+6FViXjUVXq8H5rWOH2rz9fDNQEd4g0EA2XlcEdJXRz5BMEn4O1pJFdT+z4YHhoWw==
 
 xml-name-validator@^3.0.0:
   version "3.0.0"

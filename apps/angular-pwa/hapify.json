@@ -1,10 +1,6 @@
 {
   "name": "Angular PWA",
   "description": "Angular PWA channel",
-  "version": "1",
-  "validatorPath": "../../packages/hapify-config/validator.js",
-  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
-  "project": "../../hapify-models.json",
   "templates": [
     {
       "path": "generated/angular-rext-client/services/{kebab}.service.ts",
@@ -227,6 +223,10 @@
       "input": "one"
     }
   ],
+  "version": "1",
+  "validatorPath": "../../packages/hapify-config/validator.js",
+  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
+  "project": "../../hapify-models.json",
   "defaultFields": [
     {
       "name": "id",
