@@ -3,46 +3,51 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "button": {
+    "angular-components": {
       "projectType": "library",
-      "root": "projects/button",
-      "sourceRoot": "projects/button/src",
-      "prefix": "tui",
+      "root": "projects/angular-components",
+      "sourceRoot": "projects/angular-components/src",
+      "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/button/tsconfig.lib.json",
-            "project": "projects/button/ng-package.json"
+            "tsConfig": "projects/angular-components/tsconfig.lib.json",
+            "project": "projects/angular-components/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/button/tsconfig.lib.prod.json"
+              "tsConfig": "projects/angular-components/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/button/src/test.ts",
-            "tsConfig": "projects/button/tsconfig.spec.json",
-            "karmaConfig": "projects/button/karma.conf.js"
+            "main": "projects/angular-components/src/test.ts",
+            "tsConfig": "projects/angular-components/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-components/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/button/tsconfig.lib.json",
-              "projects/button/tsconfig.spec.json"
+              "projects/angular-components/tsconfig.lib.json",
+              "projects/angular-components/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
           }
         }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
       }
     }
   },
-  "defaultProject": "button"
+  "defaultProject": "angular-components"
 }

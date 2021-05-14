@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'tui-button',
+  selector: 'lib-angular-components',
   template: `
     <p>
-      button works!
+      angular-components works!
     </p>
   `,
   styles: [
   ]
 })
-export class ButtonComponent implements OnInit {
+export class AngularComponentsComponent implements OnInit {
 
   constructor() { }
 

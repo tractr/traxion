@@ -2,13 +2,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "paths": {
-      "button": [
-        "dist/button/button",
-        "dist/button"
-      ]
+      "angular-components": [
+        "dist/angular-components/angular-components",
+        "dist/angular-components"
+      ],
+      "@angular/*": ["./node_modules/@angular/*"]
     },
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
