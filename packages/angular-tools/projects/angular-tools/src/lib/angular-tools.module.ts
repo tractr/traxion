@@ -1,5 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, ModuleWithProviders, NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,7 +25,6 @@ import {
   EncodeHttpParamsInterceptor,
   ErrorService,
   ExplainErrorsService,
-  GlobalErrorService,
   ResizeService,
 } from './services';
 import { TranslateModuleLoad } from './translate-import';
@@ -51,10 +52,10 @@ import { TranslateModuleLoad } from './translate-import';
   ],
   providers: [
     ErrorService,
-    {
+    /* {
       provide: ErrorHandler,
       useClass: GlobalErrorService,
-    },
+    }, */
     ResizeService,
     ExplainErrorsService,
     {

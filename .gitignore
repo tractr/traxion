@@ -39,6 +39,7 @@ lerna-debug.log*
 
 # Package lock from npm i
 package-lock.json
+**/yarn.lock
 
 # Local sqlite database
 **/prisma/dev.db
