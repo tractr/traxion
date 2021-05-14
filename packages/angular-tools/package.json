@@ -28,7 +28,9 @@
     "start": "ng serve"
   },
   "dependencies": {
+    "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "ng-zorro-antd": "^11.2.0",
     "tslib": "^2.2.0"
   },
   "devDependencies": {
@@ -60,8 +62,6 @@
     "@angular/platform-browser": "~11.2.0",
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
-    "@ngx-translate/core": "^13.0.0",
-    "@ngx-translate/http-loader": "^4.0.0",
     "ng-zorro-antd": "^11.2.0",
     "rxjs": "~6.6.0",
     "zone.js": "~0.11.3"
