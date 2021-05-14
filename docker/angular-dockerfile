@@ -10,6 +10,7 @@ WORKDIR /root/tractr
 
 # copy project file
 COPY ./package.json .
+COPY ./yarn.lock .
 COPY ./tsconfig.json .
 COPY ./lerna.json .
 COPY ./hapify-models.json .
@@ -21,7 +22,9 @@ COPY ${app}/angular.json ${app}/
 
 # ---- Dependencies ----
 FROM base AS dependencies.dev
-RUN --mount=type=secret,id=npmrc,target=/root/.npmrc NODE_AUTH_TOKEN=${NODE_AUTH_TOKEN} npm i
+RUN --mount=type=secret,id=npmrc,target=/root/.npmrc \
+    NODE_AUTH_TOKEN=${NODE_AUTH_TOKEN} \
+    yarn --frozen-lock --ignore-scripts --prefer-offline --no-audit --no-progress
 
 # ---- Dependencies ----
 FROM dependencies.dev AS build

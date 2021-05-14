@@ -37,8 +37,8 @@ lerna-debug.log*
 .env
 **/.env
 
-# Package lock in sub folder
-**/package-lock.json
+# Package lock from npm i
+package-lock.json
 
 # Local sqlite database
 **/prisma/dev.db
