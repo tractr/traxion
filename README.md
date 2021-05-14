@@ -60,13 +60,11 @@ After cloning this repository you should follow the next steps:
 
 - Move at the root of the repository
 
-- Install the dependencies: `npm i`. Please note that this will only work if a
-  package-lock.json exists. If it does not, use `npm i --legacy-peer-deps` (this
-  option must be provided to resolve and install peer-dependencies with npm@7).
+- Install the dependencies: `yarn`.
 
-- Build the packages: `npm run build`. Thanks to lerna, this will build all the
-  packages following a dependance tree (if a package `A` depends on a package
-  `B`, `B` will be build first).
+- Build the packages: `npm run build` or `yarn build`. Thanks to lerna, this
+  will build all the packages following a dependance tree (if a package `A`
+  depends on a package `B`, `B` will be build first).
 
 Then you should be ready to work!
 

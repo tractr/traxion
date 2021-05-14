@@ -33,7 +33,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,md,html,css,json}": "prettier --write",
-    "*.{js,ts,json}": "eslint --fix"
+    "!**/generated/**.{js,ts,json}": "eslint --fix"
   },
   "prettier": "@tractr/prettier-config",
   "jest": {
@@ -44,6 +44,7 @@
     "@nestjs/cli": "^7.6.0",
     "@nestjs/schematics": "^7.3.1",
     "@nestjs/testing": "^7.6.15",
+    "@prisma/client": "^2.22.1",
     "@qiwi/multi-semantic-release": "^3.13.2",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",

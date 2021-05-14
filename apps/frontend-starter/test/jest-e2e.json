@@ -1,4 +1,0 @@
-{
-  "preset": "@tractr/jest-config/e2e",
-  "rootDir": ".."
-}
