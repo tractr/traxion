@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# backend-starter [1.9.0](https://github.com/tractr/stack/compare/backend-starter@1.8.0...backend-starter@1.9.0) (2021-05-14)
+
+
+### Features
+
+* change npm install to yarn ([#103](https://github.com/tractr/stack/issues/103)) ([15a6e63](https://github.com/tractr/stack/commit/15a6e63747798e3bb51ece4583e5f0717f31a57e))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/nestjs-authentication:** upgraded to 1.9.0
+
 # backend-starter [1.8.0](https://github.com/tractr/stack/compare/backend-starter@1.7.1...backend-starter@1.8.0) (2021-05-04)
 
 
