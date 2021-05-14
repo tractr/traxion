@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# @tractr/nestjs-authentication [1.10.0](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.9.0...@tractr/nestjs-authentication@1.10.0) (2021-05-14)
+
+
+### Features
+
+* add tailwind configuration to the angular pwa squeleton ([#106](https://github.com/tractr/stack/issues/106)) ([5a373e3](https://github.com/tractr/stack/commit/5a373e3ece600eda1a25a3009f5b5fd1eded3a20))
+
 # @tractr/nestjs-authentication [1.9.0](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.8.2...@tractr/nestjs-authentication@1.9.0) (2021-05-14)
 
 
