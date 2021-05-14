@@ -33,7 +33,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,md,html,css,json}": "prettier --write",
-    "!**/generated/**.{js,ts,json}": "eslint --fix"
+    "*.{js,ts,json}": "eslint --fix"
   },
   "prettier": "@tractr/prettier-config",
   "jest": {
