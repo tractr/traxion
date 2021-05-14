@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# @tractr/nestjs-authentication [1.9.0](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.8.2...@tractr/nestjs-authentication@1.9.0) (2021-05-14)
+
+
+### Features
+
+* change npm install to yarn ([#103](https://github.com/tractr/stack/issues/103)) ([15a6e63](https://github.com/tractr/stack/commit/15a6e63747798e3bb51ece4583e5f0717f31a57e))
+
 ## @tractr/nestjs-authentication [1.8.2](https://github.com/tractr/stack/compare/@tractr/nestjs-authentication@1.8.1...@tractr/nestjs-authentication@1.8.2) (2021-05-04)
 
 
