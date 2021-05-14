@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# backend-starter [1.10.0](https://github.com/tractr/stack/compare/backend-starter@1.9.0...backend-starter@1.10.0) (2021-05-14)
+
+
+### Features
+
+* add tailwind configuration to the angular pwa squeleton ([#106](https://github.com/tractr/stack/issues/106)) ([5a373e3](https://github.com/tractr/stack/commit/5a373e3ece600eda1a25a3009f5b5fd1eded3a20))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/nestjs-authentication:** upgraded to 1.10.0
+
 # backend-starter [1.9.0](https://github.com/tractr/stack/compare/backend-starter@1.8.0...backend-starter@1.9.0) (2021-05-14)
 
 
