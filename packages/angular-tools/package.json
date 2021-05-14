@@ -15,8 +15,6 @@
     "package.json"
   ],
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
     "build": "ng build angular-tools",
     "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint",
     "lint:eslint": "eslint \"projects/**/*.{ts,js}\"",
@@ -25,9 +23,12 @@
     "lint:prettier": "prettier --check \"projects/**/*.{ts,js}\"",
     "lint:prettier:fix": "prettier --write \"projects/**/*.{ts,js}\"",
     "lint:tsc": "tsc --noEmit",
-    "lint:tsc:fix": "npm run lint:tsc"
+    "lint:tsc:fix": "npm run lint:tsc",
+    "ng": "ng",
+    "start": "ng serve"
   },
   "dependencies": {
+    "@ngx-translate/http-loader": "^6.0.0",
     "tslib": "^2.2.0"
   },
   "devDependencies": {

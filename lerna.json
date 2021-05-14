@@ -1,16 +1,17 @@
 {
-  "packages": ["./packages/*", "./apps/*"],
-  "version": "independent",
-  "useWorkspaces": true,
   "command": {
     "publish": {
-      "registry": "https://npm.pkg.github.com",
       "conventionalCommits": true,
-      "message": "chore(release): publish"
+      "message": "chore(release): publish",
+      "registry": "https://npm.pkg.github.com"
     },
     "version": {
       "conventionalCommits": true,
       "message": "chore(release): publish %s"
     }
-  }
+  },
+  "npmClient": "yarn",
+  "packages": ["./packages/*", "./apps/*"],
+  "useWorkspaces": true,
+  "version": "independent"
 }

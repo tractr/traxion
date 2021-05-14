@@ -52,18 +52,29 @@ jobs:
       ##############################################
       # Use the cache to speed up the installation #
       ##############################################
+      - name: Get npm cache directory
+        id: yarn-cache-dir
+        run: |
+          echo "::set-output name=dir::$(yarn cache dir)"
       - uses: actions/cache@v2.1.4
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          path: |
+            ${{ steps.yarn-cache-dir.outputs.dir }}
+            node_modules
+            */*/node_modules
+          key:
+            ${{ matrix.os }}-yarn-${{ matrix.node }}-${{
+            hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ matrix.os }}-yarn-${{ matrix.node }}-
 
       ##################################
-      # Run npm ci to use package.lock #
+      # Run yarn to use package.lock #
       ##################################
       - name: Run npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci --prefer-offline --no-audit --progress=false
+        run: yarn --frozen-lock --prefer-offline --no-audit --no-progress
 
       ###########################################################
       # Build the application to let's apps generate their code #
@@ -83,6 +94,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: false
           IGNORE_GITIGNORED_FILES: true
+          FILTER_REGEX_EXCLUDE: '.*generated.*'
 
           # Javascript files
           JAVASCRIPT_DEFAULT_STYLE: prettier
