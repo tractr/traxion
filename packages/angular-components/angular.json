@@ -13,8 +13,7 @@
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/angular-components/tsconfig.lib.json",
-            "project": "projects/angular-components/ng-package.json",
-            "styles": ["../../node_modules/ng-zorro-antd/ng-zorro-antd.min.css"]
+            "project": "projects/angular-components/ng-package.json"
           },
           "configurations": {
             "production": {
