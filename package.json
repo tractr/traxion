@@ -11,8 +11,10 @@
     "./apps/*"
   ],
   "scripts": {
+    "prebuild": "npm run prebuild:ngcc",
     "build": "lerna run build --scope '{@tractr/hapify-generate-config,@tractr/hapify-config}' && npm run generate && lerna run build",
     "build:watch": "lerna run build:watch",
+    "prebuild:ngcc": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "clean": "npm run clean:node_modules && npm run clean:dist && npm run clean:lock && npm run clean:package-lock",
     "clean:dist": "find . -name 'dist' -type d -prune -exec rm -rf '{}' +",
     "clean:lock": "find ./{apps,packages} -name 'yarn.lock' -type d -prune -exec rm -rf '{}' +",

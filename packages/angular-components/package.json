@@ -1,17 +1,23 @@
 {
-  "name": "angular-components",
-  "version": "0.0.0",
+  "name": "@tractr/angular-components",
+  "version": "1.0.0",
+  "main": "./dist/angular-components/bundles/angular-components.umd.js",
+  "typings": "./dist/angular-components/angular-components.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "scripts": {
+    "build": "ng build angular-components --prod",
+    "build-storybook": "npm run docs:json && build-storybook",
+    "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
+    "lint": "ng lint",
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "storybook": "npm run docs:json && start-storybook -p 6006",
     "test": "ng test",
-    "lint": "ng lint",
-    "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
-    "storybook": "yarn docs:json && start-storybook -p 6006",
-    "build-storybook": "yarn docs:json && build-storybook"
+    "chromatic": "npx chromatic --project-token=70d33645b2d8"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~11.2.13",
     "@angular/common": "~11.2.13",
@@ -21,6 +27,7 @@
     "@angular/platform-browser": "~11.2.13",
     "@angular/platform-browser-dynamic": "~11.2.13",
     "@angular/router": "~11.2.13",
+    "ng-zorro-antd": "^11.2.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
@@ -35,10 +42,6 @@
     "@storybook/addon-essentials": "^6.2.9",
     "@storybook/addon-links": "^6.2.9",
     "@storybook/angular": "^6.2.9",
-    "@tailwindcss/aspect-ratio": "0.2.0",
-    "@tailwindcss/forms": "0.3.2",
-    "@tailwindcss/line-clamp": "0.2.0",
-    "@tailwindcss/typography": "0.4.0",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "babel-loader": "^8.2.2",
@@ -52,11 +55,12 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "ng-packagr": "^11.0.0",
     "protractor": "~7.0.0",
-    "tailwindcss": "2.1.2",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.1.5",
-    "@ngneat/tailwind": "^7.0.3",
-    "ng-zorro-antd": "^11.4.1"
+    "typescript": "~4.1.5"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
   }
 }

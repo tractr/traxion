@@ -1,11 +1,15 @@
 {
   "name": "angular-components",
   "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/common": "^11.2.14",
-    "@angular/core": "^11.2.14"
-  },
   "dependencies": {
     "tslib": "^2.0.0"
+  },
+  "devDependencies": {
+    "@storybook/angular": "^6.2.9"
+  },
+  "peerDependencies": {
+    "@angular/common": "^11.2.14",
+    "@angular/core": "^11.2.14",
+    "ng-zorro-antd": "^11.2.0"
   }
 }
