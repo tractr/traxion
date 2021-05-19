@@ -10,13 +10,13 @@
   "scripts": {
     "build": "ng build angular-components --prod",
     "build-storybook": "npm run docs:json && build-storybook",
+    "chromatic": "npx chromatic",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "lint": "ng lint",
     "ng": "ng",
     "start": "ng serve",
     "storybook": "npm run docs:json && start-storybook -p 6006",
-    "test": "ng test",
-    "chromatic": "npx chromatic --project-token=70d33645b2d8"
+    "test": "ng test"
   },
   "dependencies": {
     "@angular/animations": "~11.2.13",
