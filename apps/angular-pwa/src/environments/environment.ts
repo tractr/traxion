@@ -4,6 +4,9 @@
 
 export const environment = {
   production: false,
+  api: {
+    uri: 'http://api.dev.bootstrapr.net/v1',
+  },
 };
 
 /*

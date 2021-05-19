@@ -17,11 +17,8 @@ export class StrategyOptionsService {
   }
 
   createJwtStrategyOptions(): StrategyOptions {
-    const {
-      verifyOptions,
-      secret,
-      secretOrKeyProvider,
-    } = this.authenticationOptions.jwtModuleOptions;
+    const { verifyOptions, secret, secretOrKeyProvider } =
+      this.authenticationOptions.jwtModuleOptions;
     const { algorithm, audience, issuer } =
       this.authenticationOptions.jwtModuleOptions.signOptions || {};
     const passportJwtStrategyOptions = this.authenticationOptions.strategy.jwt;
@@ -31,7 +28,8 @@ export class StrategyOptionsService {
       issuer,
       jsonWebTokenOptions: verifyOptions,
       secretOrKey: secret,
-      secretOrKeyProvider: (secretOrKeyProvider as unknown) as SecretOrKeyProvider,
+      secretOrKeyProvider:
+        secretOrKeyProvider as unknown as SecretOrKeyProvider,
       ...passportJwtStrategyOptions,
     };
   }

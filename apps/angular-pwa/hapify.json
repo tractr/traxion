@@ -1,7 +1,22 @@
 {
-  "name": "Angular frontend starter",
-  "description": "A frontend starter to get an Angular squeleton",
+  "name": "Angular PWA",
+  "description": "Angular PWA channel",
   "templates": [
+    {
+      "path": "generated/angular-rext-client/services/{kebab}.service.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/angular-rext-client/services/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/angular-rext-client/angular-rext.module.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
     {
       "path": "generated/rext-client/index.ts",
       "engine": "hpf",

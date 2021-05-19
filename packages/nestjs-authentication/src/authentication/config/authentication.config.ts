@@ -43,7 +43,8 @@ export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
 
 @Injectable()
 export class AuthenticationModuleOptionsFactory
-  implements OptionsFactory<AuthenticationOptions> {
+  implements OptionsFactory<AuthenticationOptions>
+{
   createOptions(): Promise<AuthenticationOptions> | AuthenticationOptions {
     return AUTHENTICATION_OPTIONS;
   }

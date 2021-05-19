@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TransferHttpCacheModule } from '@nguniversal/common';
@@ -9,6 +10,8 @@ import { AppComponent } from './app.component';
 import { MoleculeHomeComponent } from './molecules/molecule-home/molecule-home.component';
 import { AntCustomModule } from './shared/ant-custom.module';
 
+import { AngularRextModule } from '@generated/angular-rext-client/angular-rext.module';
+
 @NgModule({
   declarations: [AppComponent, MoleculeHomeComponent],
   imports: [
@@ -19,6 +22,7 @@ import { AntCustomModule } from './shared/ant-custom.module';
     AntCustomModule,
     TransferHttpCacheModule,
     AngularToolsModule,
+    AngularRextModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
