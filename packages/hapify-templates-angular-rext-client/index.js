@@ -1,1 +1,1 @@
-module.exports = require('./.hapifyrc.js');
+module.exports = require('./.hapifyrc');

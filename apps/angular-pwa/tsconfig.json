@@ -16,9 +16,7 @@
       "@app/*": ["src/app/*"],
       "@env/*": ["src/environments/*"],
       "@assets/*": ["src/assets/*"],
-      "@generated/*": ["generated/*"],
-      "rxjs": ["node_modules/rxjs"],
-      "rxjs/*": ["node_modules/rxjs/*"]
+      "@generated/*": ["generated/*"]
     }
   },
   "angularCompilerOptions": {
