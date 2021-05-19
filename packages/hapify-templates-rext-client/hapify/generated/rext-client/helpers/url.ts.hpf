@@ -3,7 +3,7 @@ export type URLSearchParamsType =
   | string[][]
   | Record<string, string>
   | URLSearchParams
-  | Record<string, string | number | boolean | string[] | string[][] | Date>;
+  | Record<string, string | number | boolean | string[] | string[][] | Date | undefined>;
  
 export function getUrlSearchParams(init: URLSearchParamsType) {
   return new URLSearchParams(

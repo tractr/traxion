@@ -1,0 +1,3 @@
+# Hapify templates for Angular rest client
+
+This package contains the hapify templates to generate REST client for Angular.
