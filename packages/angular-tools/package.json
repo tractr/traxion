@@ -9,13 +9,16 @@
   "license": "UNLICENSED",
   "author": "",
   "main": "./dist/angular-tools/bundles/angular-tools.umd.js",
+  "module": "./dist/angular-tools/fesm2015/angular-tools.js",
   "typings": "./dist/angular-tools/angular-tools.d.ts",
   "files": [
     "dist",
+    "__ivy_ngcc__",
     "package.json"
   ],
   "scripts": {
-    "build": "ng build angular-tools",
+    "prebuild": "rimraf {dist,__ivy_ngcc__}",
+    "build": "ng build @tractr/angular-tools",
     "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint",
     "lint:eslint": "eslint \"projects/**/*.{ts,js}\"",
     "lint:eslint:fix": "npm run lint:eslint -- --fix",
@@ -25,6 +28,7 @@
     "lint:tsc": "tsc --noEmit",
     "lint:tsc:fix": "npm run lint:tsc",
     "ng": "ng",
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by NGCC. This is not allowed.\\nPlease delete and rebuild the package, without compiling with NGCC, before attempting to publish.\\nNote that NGCC may have been run by importing this package into another project that is being built with Ivy enabled.\\n')\" && exit 1",
     "start": "ng serve"
   },
   "dependencies": {
@@ -49,6 +53,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "ng-packagr": "^11.0.0",
     "protractor": "~7.0.0",
+    "rimraf": "^3.0.2",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.1.2"
@@ -69,5 +74,11 @@
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"
-  }
+  },
+  "es2015": "./dist/angular-tools/fesm2015/angular-tools.js",
+  "es2015_ivy_ngcc": "__ivy_ngcc__/dist/angular-tools/fesm2015/angular-tools.js",
+  "esm2015": "./dist/angular-tools/esm2015/angular-tools.js",
+  "fesm2015": "./dist/angular-tools/fesm2015/angular-tools.js",
+  "fesm2015_ivy_ngcc": "__ivy_ngcc__/dist/angular-tools/fesm2015/angular-tools.js",
+  "module_ivy_ngcc": "__ivy_ngcc__/dist/angular-tools/fesm2015/angular-tools.js"
 }
