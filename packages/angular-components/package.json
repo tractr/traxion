@@ -15,8 +15,7 @@
     "lint": "ng lint",
     "ng": "ng",
     "start": "ng serve",
-    "storybook": "npm run docs:json && start-storybook -p 6006",
-    "test": "ng test"
+    "storybook": "npm run docs:json && start-storybook -p 6006"
   },
   "dependencies": {
     "@angular/animations": "~11.2.13",
