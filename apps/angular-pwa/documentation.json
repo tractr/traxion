@@ -28,7 +28,127 @@
       "methods": []
     }
   ],
-  "injectables": [],
+  "injectables": [
+    {
+      "name": "AnswerService",
+      "id": "injectable-AnswerService-2766918b7d779a192b6ff0b64e4d9d91",
+      "file": "generated/angular-rext-client/services/answer.service.ts",
+      "properties": [],
+      "methods": [],
+      "description": "",
+      "sourceCode": "import { Injectable } from '@angular/core';\nimport { environment } from '@env/environment';\nimport { AnswerService as BaseAnswerService } from '@generated/rext-client';\n@Injectable()\nexport class AnswerService extends BaseAnswerService {\n  constructor() {\n    super(environment.api.uri);\n  }\n}\n\n \n",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "args": [],
+        "line": 5
+      },
+      "extends": "BaseAnswerService",
+      "type": "injectable"
+    },
+    {
+      "name": "MessageService",
+      "id": "injectable-MessageService-31c8a41cfb714116b24856b9d3dbc6e4",
+      "file": "generated/angular-rext-client/services/message.service.ts",
+      "properties": [],
+      "methods": [],
+      "description": "",
+      "sourceCode": "import { Injectable } from '@angular/core';\nimport { environment } from '@env/environment';\nimport { MessageService as BaseMessageService } from '@generated/rext-client';\n@Injectable()\nexport class MessageService extends BaseMessageService {\n  constructor() {\n    super(environment.api.uri);\n  }\n}\n\n \n",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "args": [],
+        "line": 5
+      },
+      "extends": "BaseMessageService",
+      "type": "injectable"
+    },
+    {
+      "name": "OpenQuestionService",
+      "id": "injectable-OpenQuestionService-7ab4614c512bcc7ffb3890c47da9864c",
+      "file": "generated/angular-rext-client/services/open-question.service.ts",
+      "properties": [],
+      "methods": [],
+      "description": "",
+      "sourceCode": "import { Injectable } from '@angular/core';\nimport { environment } from '@env/environment';\nimport { OpenQuestionService as BaseOpenQuestionService } from '@generated/rext-client';\n@Injectable()\nexport class OpenQuestionService extends BaseOpenQuestionService {\n  constructor() {\n    super(environment.api.uri);\n  }\n}\n\n \n",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "args": [],
+        "line": 5
+      },
+      "extends": "BaseOpenQuestionService",
+      "type": "injectable"
+    },
+    {
+      "name": "QuestionService",
+      "id": "injectable-QuestionService-94a3ad45beb9709967b9a6489bb666eb",
+      "file": "generated/angular-rext-client/services/question.service.ts",
+      "properties": [],
+      "methods": [],
+      "description": "",
+      "sourceCode": "import { Injectable } from '@angular/core';\nimport { environment } from '@env/environment';\nimport { QuestionService as BaseQuestionService } from '@generated/rext-client';\n@Injectable()\nexport class QuestionService extends BaseQuestionService {\n  constructor() {\n    super(environment.api.uri);\n  }\n}\n\n \n",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "args": [],
+        "line": 5
+      },
+      "extends": "BaseQuestionService",
+      "type": "injectable"
+    },
+    {
+      "name": "TagService",
+      "id": "injectable-TagService-d4e730e4f7939ac1e5f56a9c82856741",
+      "file": "generated/angular-rext-client/services/tag.service.ts",
+      "properties": [],
+      "methods": [],
+      "description": "",
+      "sourceCode": "import { Injectable } from '@angular/core';\nimport { environment } from '@env/environment';\nimport { TagService as BaseTagService } from '@generated/rext-client';\n@Injectable()\nexport class TagService extends BaseTagService {\n  constructor() {\n    super(environment.api.uri);\n  }\n}\n\n \n",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "args": [],
+        "line": 5
+      },
+      "extends": "BaseTagService",
+      "type": "injectable"
+    },
+    {
+      "name": "UserService",
+      "id": "injectable-UserService-7ba8290e9dbdebc13bcc3d671189a369",
+      "file": "generated/angular-rext-client/services/user.service.ts",
+      "properties": [],
+      "methods": [],
+      "description": "",
+      "sourceCode": "import { Injectable } from '@angular/core';\nimport { environment } from '@env/environment';\nimport { UserService as BaseUserService } from '@generated/rext-client';\n@Injectable()\nexport class UserService extends BaseUserService {\n  constructor() {\n    super(environment.api.uri);\n  }\n}\n\n \n",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "args": [],
+        "line": 5
+      },
+      "extends": "BaseUserService",
+      "type": "injectable"
+    },
+    {
+      "name": "VariableService",
+      "id": "injectable-VariableService-73368636456ec42337328b41f87d4763",
+      "file": "generated/angular-rext-client/services/variable.service.ts",
+      "properties": [],
+      "methods": [],
+      "description": "",
+      "sourceCode": "import { Injectable } from '@angular/core';\nimport { environment } from '@env/environment';\nimport { VariableService as BaseVariableService } from '@generated/rext-client';\n@Injectable()\nexport class VariableService extends BaseVariableService {\n  constructor() {\n    super(environment.api.uri);\n  }\n}\n\n \n",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "args": [],
+        "line": 5
+      },
+      "extends": "BaseVariableService",
+      "type": "injectable"
+    }
+  ],
   "classes": [
     {
       "name": "Answer",
@@ -12101,6 +12221,57 @@
   ],
   "modules": [
     {
+      "name": "AngularRextModule",
+      "children": [
+        {
+          "type": "providers",
+          "elements": [
+            {
+              "name": "AnswerService"
+            },
+            {
+              "name": "MessageService"
+            },
+            {
+              "name": "OpenQuestionService"
+            },
+            {
+              "name": "QuestionService"
+            },
+            {
+              "name": "TagService"
+            },
+            {
+              "name": "UserService"
+            },
+            {
+              "name": "VariableService"
+            }
+          ]
+        },
+        {
+          "type": "declarations",
+          "elements": []
+        },
+        {
+          "type": "imports",
+          "elements": []
+        },
+        {
+          "type": "exports",
+          "elements": []
+        },
+        {
+          "type": "bootstrap",
+          "elements": []
+        },
+        {
+          "type": "classes",
+          "elements": []
+        }
+      ]
+    },
+    {
       "name": "AntCustomModule",
       "children": [
         {
@@ -12150,6 +12321,9 @@
         {
           "type": "imports",
           "elements": [
+            {
+              "name": "AngularRextModule"
+            },
             {
               "name": "AntCustomModule"
             },
@@ -12238,7 +12412,7 @@
         "subtype": "variable",
         "file": "src/environments/environment.prod.ts",
         "type": "object",
-        "defaultValue": "{\n  production: true,\n}"
+        "defaultValue": "{\n  production: true,\n  api: {\n    uri: 'https://api.staging.bootstrapr.net/v1',\n  },\n}"
       },
       {
         "name": "environment",
@@ -12246,7 +12420,7 @@
         "subtype": "variable",
         "file": "src/environments/environment.ts",
         "type": "object",
-        "defaultValue": "{\n  production: false,\n}"
+        "defaultValue": "{\n  production: false,\n  api: {\n    uri: 'http://api.dev.bootstrapr.net/v1',\n  },\n}"
       },
       {
         "name": "Large",
@@ -15271,7 +15445,7 @@
         "name": "URLSearchParamsType",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "string | string[][] | Record<string | string> | URLSearchParams | Record<string | string | number | boolean | [] | [] | Date>",
+        "rawtype": "string | string[][] | Record<string | string> | URLSearchParams | Record<string | string | number | boolean | [] | [] | Date | undefined>",
         "file": "generated/rext-client/helpers/url.ts",
         "description": "",
         "kind": 168
@@ -15350,7 +15524,7 @@
           "subtype": "variable",
           "file": "src/environments/environment.prod.ts",
           "type": "object",
-          "defaultValue": "{\n  production: true,\n}"
+          "defaultValue": "{\n  production: true,\n  api: {\n    uri: 'https://api.staging.bootstrapr.net/v1',\n  },\n}"
         }
       ],
       "src/environments/environment.ts": [
@@ -15360,7 +15534,7 @@
           "subtype": "variable",
           "file": "src/environments/environment.ts",
           "type": "object",
-          "defaultValue": "{\n  production: false,\n}"
+          "defaultValue": "{\n  production: false,\n  api: {\n    uri: 'http://api.dev.bootstrapr.net/v1',\n  },\n}"
         }
       ],
       "src/stories/Button.stories.ts": [
@@ -18575,7 +18749,7 @@
           "name": "URLSearchParamsType",
           "ctype": "miscellaneous",
           "subtype": "typealias",
-          "rawtype": "string | string[][] | Record<string | string> | URLSearchParams | Record<string | string | number | boolean | [] | [] | Date>",
+          "rawtype": "string | string[][] | Record<string | string> | URLSearchParams | Record<string | string | number | boolean | [] | [] | Date | undefined>",
           "file": "generated/rext-client/helpers/url.ts",
           "description": "",
           "kind": 168
@@ -18649,6 +18823,69 @@
         "name": "AppPage",
         "coveragePercent": 0,
         "coverageCount": "0/3",
+        "status": "low"
+      },
+      {
+        "filePath": "generated/angular-rext-client/services/answer.service.ts",
+        "type": "injectable",
+        "linktype": "injectable",
+        "name": "AnswerService",
+        "coveragePercent": 0,
+        "coverageCount": "0/2",
+        "status": "low"
+      },
+      {
+        "filePath": "generated/angular-rext-client/services/message.service.ts",
+        "type": "injectable",
+        "linktype": "injectable",
+        "name": "MessageService",
+        "coveragePercent": 0,
+        "coverageCount": "0/2",
+        "status": "low"
+      },
+      {
+        "filePath": "generated/angular-rext-client/services/open-question.service.ts",
+        "type": "injectable",
+        "linktype": "injectable",
+        "name": "OpenQuestionService",
+        "coveragePercent": 0,
+        "coverageCount": "0/2",
+        "status": "low"
+      },
+      {
+        "filePath": "generated/angular-rext-client/services/question.service.ts",
+        "type": "injectable",
+        "linktype": "injectable",
+        "name": "QuestionService",
+        "coveragePercent": 0,
+        "coverageCount": "0/2",
+        "status": "low"
+      },
+      {
+        "filePath": "generated/angular-rext-client/services/tag.service.ts",
+        "type": "injectable",
+        "linktype": "injectable",
+        "name": "TagService",
+        "coveragePercent": 0,
+        "coverageCount": "0/2",
+        "status": "low"
+      },
+      {
+        "filePath": "generated/angular-rext-client/services/user.service.ts",
+        "type": "injectable",
+        "linktype": "injectable",
+        "name": "UserService",
+        "coveragePercent": 0,
+        "coverageCount": "0/2",
+        "status": "low"
+      },
+      {
+        "filePath": "generated/angular-rext-client/services/variable.service.ts",
+        "type": "injectable",
+        "linktype": "injectable",
+        "name": "VariableService",
+        "coveragePercent": 0,
+        "coverageCount": "0/2",
         "status": "low"
       },
       {

@@ -8,7 +8,7 @@
     "package.json"
   ],
   "scripts": {
-    "build": "ng build angular-components --prod",
+    "build": "ng build @tractr/angular-components --prod",
     "build-storybook": "npm run docs:json && build-storybook",
     "chromatic": "npx chromatic",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",

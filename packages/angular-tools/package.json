@@ -1,12 +1,40 @@
 {
+  "name": "@tractr/angular-tools",
+  "version": "1.3.1",
+  "description": "Tools for angular application",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "license": "UNLICENSED",
   "author": "",
+  "main": "./dist/angular-tools/bundles/angular-tools.umd.js",
+  "module": "./dist/angular-tools/fesm2015/angular-tools.js",
+  "typings": "./dist/angular-tools/angular-tools.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "prebuild": "rimraf {dist,__ivy_ngcc__}",
+    "build": "ng build @tractr/angular-tools --prod",
+    "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint",
+    "lint:eslint": "eslint \"projects/**/*.{ts,js}\"",
+    "lint:eslint:fix": "npm run lint:eslint -- --fix",
+    "lint:fix": "npm run lint:tsc:fix && npm run lint:prettier:fix && npm run lint:eslint:fix",
+    "lint:prettier": "prettier --check \"projects/**/*.{ts,js}\"",
+    "lint:prettier:fix": "prettier --write \"projects/**/*.{ts,js}\"",
+    "lint:tsc": "tsc --noEmit",
+    "lint:tsc:fix": "npm run lint:tsc",
+    "ng": "ng",
+    "start": "ng serve"
+  },
   "dependencies": {
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "ng-zorro-antd": "^11.2.0",
     "tslib": "^2.2.0"
   },
-  "description": "Tools for angular application",
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.2",
     "@angular/cli": "~11.2.0",
@@ -28,20 +56,6 @@
     "tslint": "~6.1.0",
     "typescript": "~4.1.2"
   },
-  "es2015": "./dist/angular-tools/fesm2015/angular-tools.js",
-  "es2015_ivy_ngcc": "__ivy_ngcc__/dist/angular-tools/fesm2015/angular-tools.js",
-  "esm2015": "./dist/angular-tools/esm2015/angular-tools.js",
-  "fesm2015": "./dist/angular-tools/fesm2015/angular-tools.js",
-  "fesm2015_ivy_ngcc": "__ivy_ngcc__/dist/angular-tools/fesm2015/angular-tools.js",
-  "files": [
-    "dist",
-    "package.json"
-  ],
-  "license": "UNLICENSED",
-  "main": "./dist/angular-tools/bundles/angular-tools.umd.js",
-  "module": "./dist/angular-tools/fesm2015/angular-tools.js",
-  "module_ivy_ngcc": "__ivy_ngcc__/dist/angular-tools/fesm2015/angular-tools.js",
-  "name": "@tractr/angular-tools",
   "peerDependencies": {
     "@angular/animations": "~11.2.0",
     "@angular/common": "~11.2.0",
@@ -59,24 +73,10 @@
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tractr/stack"
-  },
-  "scripts": {
-    "build": "ng build @tractr/angular-tools",
-    "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint",
-    "lint:eslint": "eslint \"projects/**/*.{ts,js}\"",
-    "lint:eslint:fix": "npm run lint:eslint -- --fix",
-    "lint:fix": "npm run lint:tsc:fix && npm run lint:prettier:fix && npm run lint:eslint:fix",
-    "lint:prettier": "prettier --check \"projects/**/*.{ts,js}\"",
-    "lint:prettier:fix": "prettier --write \"projects/**/*.{ts,js}\"",
-    "lint:tsc": "tsc --noEmit",
-    "lint:tsc:fix": "npm run lint:tsc",
-    "ng": "ng",
-    "prebuild": "rimraf {dist,__ivy_ngcc__}",
-    "start": "ng serve"
-  },
-  "typings": "./dist/angular-tools/angular-tools.d.ts",
-  "version": "1.3.1"
+  "es2015": "./dist/angular-tools/fesm2015/angular-tools.js",
+  "es2015_ivy_ngcc": "__ivy_ngcc__/dist/angular-tools/fesm2015/angular-tools.js",
+  "esm2015": "./dist/angular-tools/esm2015/angular-tools.js",
+  "fesm2015": "./dist/angular-tools/fesm2015/angular-tools.js",
+  "fesm2015_ivy_ngcc": "__ivy_ngcc__/dist/angular-tools/fesm2015/angular-tools.js",
+  "module_ivy_ngcc": "__ivy_ngcc__/dist/angular-tools/fesm2015/angular-tools.js"
 }

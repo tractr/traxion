@@ -41,6 +41,7 @@
     "@tractr/angular-tools": "1.1.0",
     "ng-zorro-antd": "^11.4.1",
     "rxjs": "^6.6.7",
+    "universal-rxjs-ajax": "^2.0.4",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

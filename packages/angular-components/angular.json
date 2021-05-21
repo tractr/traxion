@@ -1,9 +1,9 @@
 {
   "$schema": "../../node_modules/@angular/cli/lib/config/schema.json",
-  "defaultProject": "angular-components",
+  "defaultProject": "@tractr/angular-components",
   "newProjectRoot": "projects",
   "projects": {
-    "angular-components": {
+    "@tractr/angular-components": {
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
