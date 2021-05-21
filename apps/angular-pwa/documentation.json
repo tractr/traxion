@@ -12200,14 +12200,6 @@
         "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
       },
       {
-        "name": "DefaultStorybookModules",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/app/storybook.module.ts",
-        "type": "[]",
-        "defaultValue": "[AntCustomModule, AngularToolsModule]"
-      },
-      {
         "name": "environment",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -15218,16 +15210,6 @@
           "subtype": "variable",
           "file": "src/test.ts",
           "type": "literal type"
-        }
-      ],
-      "src/app/storybook.module.ts": [
-        {
-          "name": "DefaultStorybookModules",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/storybook.module.ts",
-          "type": "[]",
-          "defaultValue": "[AntCustomModule, AngularToolsModule]"
         }
       ],
       "src/environments/environment.prod.ts": [
@@ -20519,16 +20501,6 @@
         "type": "component",
         "linktype": "component",
         "name": "MoleculeHomeComponent",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/app/storybook.module.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
-        "name": "DefaultStorybookModules",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
