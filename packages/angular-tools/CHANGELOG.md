@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/angular-tools [1.3.1](https://github.com/tractr/stack/compare/@tractr/angular-tools@1.3.0...@tractr/angular-tools@1.3.1) (2021-05-21)
+
+
+### Bug Fixes
+
+* change angular-tools to ivy ([#110](https://github.com/tractr/stack/issues/110)) ([bdd5134](https://github.com/tractr/stack/commit/bdd51345b62043ab2c6297879a410ac666aff2c1))
+
 # @tractr/angular-tools [1.3.0](https://github.com/tractr/stack/compare/@tractr/angular-tools@1.2.0...@tractr/angular-tools@1.3.0) (2021-05-14)
 
 
