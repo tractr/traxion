@@ -47,7 +47,7 @@ import {
 } from 'class-validator';
   
 <<<for (const relation of getRelations()) {>>>
-import { <<relation pascal>> } from './<<relation kebab>>';
+import type { <<relation pascal>> } from './<<relation kebab>>';
 <<<}>>>
  
 <<if Fields enum>>
