@@ -1,6 +1,6 @@
 {
   "name": "@tractr/hapify-templates-rext-client",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Template to generate a rest client with hapify",
   "repository": {
     "type": "git",
@@ -17,8 +17,8 @@
   "dependencies": {},
   "devDependencies": {},
   "peerDependencies": {
-    "@tractr/hapify-templates-models": "1.2.3",
-    "@tractr/hapify-templates-rest-dtos": "1.2.3",
+    "@tractr/hapify-templates-models": "1.2.4",
+    "@tractr/hapify-templates-rest-dtos": "1.2.4",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.0",
     "reflect-metadata": "^0.1.13",
