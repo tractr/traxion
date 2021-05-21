@@ -144,19 +144,19 @@ export class <<Model pascal>>Service {
   public findUnique(
     options?: FindUniqueOptions,
   ): OperatorFunction<
-    | { params: <<Model pascal>>FindUniqueParamsDto;<<<if (root.dependencies.list.length || root.referencedIn.length) {>>> query?: <<Model pascal>>FindUniqueQueryDto <<<}>>> }
+    | { params: <<Model pascal>>FindUniqueParamsDto<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>; query?: <<Model pascal>>FindUniqueQueryDto <<<}>>> }
     | [<<Model pascal>>FindUniqueParamsDto<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>, <<Model pascal>>FindUniqueQueryDto <<<}>>>]
     | <<Model pascal>>FindUniqueParamsDto,
     <<Model pascal>>
   > {
     return switchMap((source) => {
       if (Array.isArray(source))
-        return this.findUnique$(source[0], <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>source[1]<<<} else {>>>undefined<<<}>>>, options);
+        return this.findUnique$(source[0], <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>source[1], <<<}>>>options);
 
       if (isAlike(source, <<Model pascal>>FindUniqueParamsDto))
-        return this.findUnique$(source, undefined, options);
+        return this.findUnique$(source, <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>undefined, <<<}>>>options);
 
-      return this.findUnique$(source.params, <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>source.query<<<} else {>>>undefined<<<}>>>, options);
+      return this.findUnique$(source.params, <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>source.query, <<<}>>>options);
     });
   }
  
