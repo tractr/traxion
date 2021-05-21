@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-templates-nestjs-models-common [1.2.6](https://github.com/tractr/stack/compare/@tractr/hapify-templates-nestjs-models-common@1.2.5...@tractr/hapify-templates-nestjs-models-common@1.2.6) (2021-05-21)
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-models:** upgraded to 1.2.4
+
 ## @tractr/hapify-templates-nestjs-models-common [1.2.5](https://github.com/tractr/stack/compare/@tractr/hapify-templates-nestjs-models-common@1.2.4...@tractr/hapify-templates-nestjs-models-common@1.2.5) (2021-05-04)
 
 
