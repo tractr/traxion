@@ -1,6 +1,6 @@
 {
   "name": "angular-pwa",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "private": true,
   "scripts": {
     "prebuild": "ngcc",
@@ -60,9 +60,9 @@
     "@tailwindcss/line-clamp": "0.2.0",
     "@tailwindcss/typography": "0.4.0",
     "@tractr/hapify-config": "1.0.0",
-    "@tractr/hapify-templates-models": "1.2.3",
-    "@tractr/hapify-templates-rest-dtos": "1.2.3",
-    "@tractr/hapify-templates-rext-client": "1.1.1",
+    "@tractr/hapify-templates-models": "1.2.4",
+    "@tractr/hapify-templates-rest-dtos": "1.2.4",
+    "@tractr/hapify-templates-rext-client": "1.1.2",
     "@types/jasmine": "~3.6.11",
     "babel-loader": "^8.2.2",
     "chromatic": "^5.8.1",
