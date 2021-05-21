@@ -8,10 +8,11 @@
   },
   "license": "UNLICENSED",
   "author": "",
-  "main": "./dist/index.js",
+  "main": "./index.js",
   "files": [
-    "dist",
-    "package.json"
+    "hapify",
+    ".hapifyrc.js",
+    "index.js"
   ],
   "dependencies": {},
   "devDependencies": {},
