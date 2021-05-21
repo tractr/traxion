@@ -3676,21 +3676,6 @@
     eslint-plugin-jest "^24.3.4"
     eslint-plugin-json-files "^0.8.1"
 
-"@tractr/hapify-templates-models@1.2.1":
-  version "1.2.1"
-  resolved "https://npm.pkg.github.com/download/@tractr/hapify-templates-models/1.2.1/d7318373240dd7a64ddf61284e0f14da17edf824a87561322ffa456b97c33d32#9cfa91e4d46ee13704d50b612788783088f25760"
-  integrity sha512-gZsGuodOT25MWm/F2Vs98CkF+PcYk0YiAFkas4NRuooFTexFup7cMCrAfpByGp73jDY7MuyIbAC8uV9gtTF/DQ==
-
-"@tractr/hapify-templates-rest-dtos@1.2.1":
-  version "1.2.1"
-  resolved "https://npm.pkg.github.com/download/@tractr/hapify-templates-rest-dtos/1.2.1/93bea3d227bd6bfd64b8ce791f81caf6ac6529259e33861e9dd963621ad50b70#3fcd639752fe2bc9252b0e524638d1abf45d0fb4"
-  integrity sha512-ln8EM/QoeOn8hFdw1VfqyKovWLxqDYVFCBANA5ih/oDvCXXa8/CQREgmwt2RqrWl5eTelvCF3MjR7OAK/GxX1A==
-
-"@tractr/hapify-templates-rext-client@1.0.1":
-  version "1.0.1"
-  resolved "https://npm.pkg.github.com/download/@tractr/hapify-templates-rext-client/1.0.1/ecf86336f9d6cfa347c3084f1460aa6539152663cc66c5622400b7127041b6ae#cecc7e4a4b025397a048fce00a09ac50b3c17230"
-  integrity sha512-QrlRyjhCrMrsPAXNJ+/SWtrQRikQKs8OCNX6kasy2sfUn0Jw4Ouo+cdccU9NakblTARllJXgxxq6Oph1C6u70A==
-
 "@tractr/jest-config@^1.1.4":
   version "1.1.4"
   resolved "https://npm.pkg.github.com/download/@tractr/jest-config/1.1.4/452283b12b850bac08932d1aeaa121be12e2083b8b151bcb6532e3cc742aa44a#905bc099722f32a6224dc06501b52c659fdd29b4"
@@ -5615,11 +5600,6 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
-
-bootstrap@^4.4.1:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.6.0.tgz#97b9f29ac98f98dfa43bf7468262d84392552fd7"
-  integrity sha512-Io55IuQY3kydzHtbGvQya3H+KorS/M9rSNyfCGCg9WZ4pyT/lCxIlpJgG1GXW/PswzC84Tr2fBYi+7+jFVQQBw==
 
 bottleneck@^2.18.1:
   version "2.19.5"

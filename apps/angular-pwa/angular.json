@@ -37,6 +37,7 @@
             }
           },
           "options": {
+            "allowedCommonJsDependencies": ["validator", "universal-rxjs-ajax"],
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
             "index": "src/index.html",
