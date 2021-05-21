@@ -1,6 +1,6 @@
 {
   "name": "@tractr/hapify-templates-angular-rext-client",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Template to generate an angular rest client with hapify",
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
   "peerDependencies": {
     "@angular/common": "~11.2.3",
     "@angular/core": "~11.2.3",
-    "@tractr/hapify-templates-models": "1.2.3",
+    "@tractr/hapify-templates-models": "1.2.4",
     "@tractr/hapify-templates-rest-dtos": "1.2.3",
     "@tractr/hapify-templates-rext-client": "1.1.1"
   },
