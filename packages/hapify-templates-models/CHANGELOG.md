@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-templates-models [1.2.4](https://github.com/tractr/stack/compare/@tractr/hapify-templates-models@1.2.3...@tractr/hapify-templates-models@1.2.4) (2021-05-21)
+
+
+### Bug Fixes
+
+* use import type when declaring dtos to avoid circular dependencies ([#114](https://github.com/tractr/stack/issues/114)) ([40e9ca2](https://github.com/tractr/stack/commit/40e9ca2a46e5a075510fce259c066ab9a84adc8c)), closes [#113](https://github.com/tractr/stack/issues/113)
+
 ## @tractr/hapify-templates-models [1.2.3](https://github.com/tractr/stack/compare/@tractr/hapify-templates-models@1.2.2...@tractr/hapify-templates-models@1.2.3) (2021-05-04)
 
 
