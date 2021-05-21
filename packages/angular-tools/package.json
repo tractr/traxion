@@ -13,12 +13,11 @@
   "typings": "./dist/angular-tools/angular-tools.d.ts",
   "files": [
     "dist",
-    "__ivy_ngcc__",
     "package.json"
   ],
   "scripts": {
     "prebuild": "rimraf {dist,__ivy_ngcc__}",
-    "build": "ng build @tractr/angular-tools",
+    "build": "ng build @tractr/angular-tools --prod",
     "lint": "npm run lint:tsc && npm run lint:prettier && npm run lint:eslint",
     "lint:eslint": "eslint \"projects/**/*.{ts,js}\"",
     "lint:eslint:fix": "npm run lint:eslint -- --fix",
@@ -28,7 +27,6 @@
     "lint:tsc": "tsc --noEmit",
     "lint:tsc:fix": "npm run lint:tsc",
     "ng": "ng",
-    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by NGCC. This is not allowed.\\nPlease delete and rebuild the package, without compiling with NGCC, before attempting to publish.\\nNote that NGCC may have been run by importing this package into another project that is being built with Ivy enabled.\\n')\" && exit 1",
     "start": "ng serve"
   },
   "dependencies": {

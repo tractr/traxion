@@ -1,0 +1,51 @@
+{
+  "$schema": "../../node_modules/@angular/cli/lib/config/schema.json",
+  "defaultProject": "@tractr/angular-components",
+  "newProjectRoot": "projects",
+  "projects": {
+    "@tractr/angular-components": {
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/angular-components/tsconfig.lib.prod.json"
+            }
+          },
+          "options": {
+            "project": "projects/angular-components/ng-package.json",
+            "tsConfig": "projects/angular-components/tsconfig.lib.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "exclude": ["**/node_modules/**"],
+            "tsConfig": [
+              "projects/angular-components/tsconfig.lib.json",
+              "projects/angular-components/tsconfig.spec.json"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "karmaConfig": "projects/angular-components/karma.conf.js",
+            "main": "projects/angular-components/src/test.ts",
+            "tsConfig": "projects/angular-components/tsconfig.spec.json"
+          }
+        }
+      },
+      "prefix": "lib",
+      "projectType": "library",
+      "root": "projects/angular-components",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "sourceRoot": "projects/angular-components/src"
+    }
+  },
+  "version": 1
+}

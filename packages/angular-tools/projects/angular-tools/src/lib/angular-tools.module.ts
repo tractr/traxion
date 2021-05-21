@@ -1,12 +1,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -27,7 +31,7 @@ import {
   ExplainErrorsService,
   ResizeService,
 } from './services';
-import { TranslateModuleLoad } from './translate-import';
+import { HttpLoaderFactory } from './translate-import';
 
 @NgModule({
   imports: [
@@ -37,7 +41,13 @@ import { TranslateModuleLoad } from './translate-import';
     ReactiveFormsModule,
     RouterModule,
     HttpClientModule,
-    TranslateModuleLoad(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     NzButtonModule,
     NzFormModule,
     NzInputModule,
