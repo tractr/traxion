@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# angular-pwa [1.4.0](https://github.com/tractr/stack/compare/angular-pwa@1.3.0...angular-pwa@1.4.0) (2021-05-21)
+
+
+### Bug Fixes
+
+* change angular-tools to ivy ([#110](https://github.com/tractr/stack/issues/110)) ([bdd5134](https://github.com/tractr/stack/commit/bdd51345b62043ab2c6297879a410ac666aff2c1))
+
+
+### Features
+
+* configure storybook into the angular pwa app ([#108](https://github.com/tractr/stack/issues/108)) ([9026ecc](https://github.com/tractr/stack/commit/9026ecccb59ce94f6bfd82d899476b727f10b67c))
+
+
+
+
+
+### Dependencies
+
+* **@tractr/angular-components:** upgraded to 1.0.1
+* **@tractr/angular-tools:** upgraded to 1.4.0
+
 # angular-pwa [1.3.0](https://github.com/tractr/stack/compare/angular-pwa@1.2.0...angular-pwa@1.3.0) (2021-05-19)
 
 
