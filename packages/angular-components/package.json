@@ -1,6 +1,11 @@
 {
   "name": "@tractr/angular-components",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "license": "UNLICENSED",
   "main": "./dist/angular-components/bundles/angular-components.umd.js",
   "typings": "./dist/angular-components/angular-components.d.ts",
   "files": [
