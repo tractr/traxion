@@ -1,7 +1,7 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Directive, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 
-@Component({ template: '' })
+@Directive()
 export abstract class Unsubscriber implements OnDestroy {
   protected unsubscribe$: Subject<void> = new Subject<void>();
 
