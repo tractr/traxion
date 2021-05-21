@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-templates-rext-client [1.1.1](https://github.com/tractr/stack/compare/@tractr/hapify-templates-rext-client@1.1.0...@tractr/hapify-templates-rext-client@1.1.1) (2021-05-21)
+
+
+### Bug Fixes
+
+* use findQueryDto conditionaly ([#112](https://github.com/tractr/stack/issues/112)) ([0bc5928](https://github.com/tractr/stack/commit/0bc5928e1bfa409cac89507a88ccae23927fbe12))
+
 # @tractr/hapify-templates-rext-client [1.1.0](https://github.com/tractr/stack/compare/@tractr/hapify-templates-rext-client@1.0.4...@tractr/hapify-templates-rext-client@1.1.0) (2021-05-19)
 
 
