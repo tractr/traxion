@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## @tractr/hapify-templates-angular-rext-client [1.0.2](https://github.com/tractr/stack/compare/@tractr/hapify-templates-angular-rext-client@1.0.1...@tractr/hapify-templates-angular-rext-client@1.0.2) (2021-05-21)
+
+
+
+
+
+### Dependencies
+
+* **@tractr/hapify-templates-rext-client:** upgraded to 1.1.1
+
 ## @tractr/hapify-templates-angular-rext-client [1.0.1](https://github.com/tractr/stack/compare/@tractr/hapify-templates-angular-rext-client@1.0.0...@tractr/hapify-templates-angular-rext-client@1.0.1) (2021-05-21)
 
 
