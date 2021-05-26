@@ -27,7 +27,8 @@
     "lint:tsc": "tsc --noEmit",
     "lint:tsc:fix": "npm run lint:tsc",
     "ng": "ng",
-    "start": "ng serve"
+    "start": "ng serve",
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by NGCC. This is not allowed.\\nPlease delete and rebuild the package, without compiling with NGCC, before attempting to publish.\\nNote that NGCC may have been run by importing this package into another project that is being built with Ivy enabled.\\n')\" && exit 1"
   },
   "dependencies": {
     "@ngx-translate/core": "^13.0.0",
@@ -78,5 +79,11 @@
   "esm2015": "./dist/angular-tools/esm2015/angular-tools.js",
   "fesm2015": "./dist/angular-tools/fesm2015/angular-tools.js",
   "fesm2015_ivy_ngcc": "__ivy_ngcc__/dist/angular-tools/fesm2015/angular-tools.js",
-  "module_ivy_ngcc": "__ivy_ngcc__/dist/angular-tools/fesm2015/angular-tools.js"
+  "module_ivy_ngcc": "__ivy_ngcc__/dist/angular-tools/fesm2015/angular-tools.js",
+  "__processed_by_ivy_ngcc__": {
+    "es2015": "11.2.14",
+    "fesm2015": "11.2.14",
+    "module": "11.2.14",
+    "typings": "11.2.14"
+  }
 }
