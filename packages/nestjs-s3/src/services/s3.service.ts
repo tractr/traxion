@@ -16,7 +16,12 @@ export class S3Service implements OnModuleInit {
     private readonly logger: Logger,
   ) {}
 
-  onModuleInit(): void {
+  onModuleInit() {
     this.client = new S3(this.s3Config);
+  }
+
+  async listBuckets() {
+    const buckets = await this.client.listBuckets().promise();
+    return buckets;
   }
 }

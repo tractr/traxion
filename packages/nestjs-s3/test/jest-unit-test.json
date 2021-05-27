@@ -1,0 +1,4 @@
+{
+  "preset": "@tractr/jest-config",
+  "rootDir": ".."
+}

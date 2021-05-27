@@ -12,7 +12,7 @@ import { S3Service } from './services';
   providers: [S3Service],
   exports: [S3Service],
 })
-export class DatabaseModule extends ModuleOptionsHelper<S3Config>(
+export class S3Module extends ModuleOptionsHelper<S3Config>(
   S3_MODULE_CONFIG,
   S3_CONFIG,
 ) {}
