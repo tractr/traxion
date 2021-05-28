@@ -1,1 +1,0 @@
-export const S3_MODULE_CONFIG = 'S3_MODULE_CONFIG';

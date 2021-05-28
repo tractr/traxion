@@ -1,1 +1,1 @@
-export * from './s3.constant';
+export * from './file-storage.constant';
