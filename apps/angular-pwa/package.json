@@ -39,6 +39,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@tractr/angular-components": "1.0.1",
     "@tractr/angular-tools": "1.4.0",
+    "@tractr/nx-test-maxim": "^0.0.1",
     "ng-zorro-antd": "^11.4.1",
     "rxjs": "^6.6.7",
     "universal-rxjs-ajax": "^2.0.4",

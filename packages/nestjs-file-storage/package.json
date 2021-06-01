@@ -1,7 +1,7 @@
 {
-  "name": "@tractr/file-storage",
+  "name": "@tractr/nestjs-file-storage",
   "version": "1.0.0",
-  "description": "AWS S3 module for nestjs backend",
+  "description": "Nestjs module for remote file storage",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"

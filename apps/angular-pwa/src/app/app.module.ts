@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { AngularToolsModule } from '@tractr/angular-tools';
+import { UiModule } from '@tractr/nx-test-maxim';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +17,7 @@ import { AngularRextModule } from '@generated/angular-rext-client/angular-rext.m
   declarations: [AppComponent, MoleculeHomeComponent],
   imports: [
     AppRoutingModule,
+    UiModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
