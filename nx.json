@@ -1,0 +1,36 @@
+{
+  "affected": {
+    "defaultBase": "main"
+  },
+  "implicitDependencies": {
+    ".eslintrc.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    }
+  },
+  "npmScope": "stack",
+  "projects": {
+    "api": {
+      "tags": []
+    },
+    "api-interfaces": {
+      "tags": []
+    },
+    "pwa": {
+      "tags": []
+    },
+    "pwa-e2e": {
+      "implicitDependencies": ["pwa"],
+      "tags": []
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      },
+      "runner": "@nrwl/workspace/tasks-runners/default"
+    }
+  }
+}

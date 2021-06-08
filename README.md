@@ -1,101 +1,86 @@
-# Tractr stack 2021
+# Stack
 
-Welcome the tractr new 2021 stack. You'll find some info here on how to install
-and use this repo. Enjoy !
+This project was generated using [Nx](https://nx.dev).
 
-## Mono-repository
+🔎 **Smart, Extensible Build Framework**
 
-This project is built with a mono-repository architecture, which means that it
-hosts several packages. This is made possible by using `npm@7` and
-[lerna](https://github.com/lerna/lerna).
+## Adding capabilities to your workspace
 
-### Folder structure
+Nx supports many plugins which add capabilities for developing different types of applications and different tools.
 
-The `apps` folder is for the code that is not intended to be published to a npm
-repository (frontend app, backend app, etc...).
+These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
 
-The `packages` folder is for the code that will be pushed (not mandatory) on a
-npm repository (libs, etc...).
+Below are our core plugins:
 
-### Best practices
+- [React](https://reactjs.org)
+  - `npm install --save-dev @nrwl/react`
+- Web (no framework frontends)
+  - `npm install --save-dev @nrwl/web`
+- [Angular](https://angular.io)
+  - `npm install --save-dev @nrwl/angular`
+- [Nest](https://nestjs.com)
+  - `npm install --save-dev @nrwl/nest`
+- [Express](https://expressjs.com)
+  - `npm install --save-dev @nrwl/express`
+- [Node](https://nodejs.org)
+  - `npm install --save-dev @nrwl/node`
 
-Everything related to the development should be kept on the root level to
-enforce the development standards across all apps and packages. That also means
-we should have most of our `devDependencies` referenced only within the root
-`package.json`. This is a common practice in a Monorepo environment.
+There are also many [community plugins](https://nx.dev/nx-community) you could add.
 
-## Requirements
+## Generate an application
 
-To use this monorepo you'll need to use yarn
+Run `nx g @nrwl/react:app my-app` to generate an application.
 
-```bash
-yarn
-```
+> You can use any of the plugins above to generate applications as well.
 
-### Register to the github package
+When using Nx, you can create multiple applications and libraries in the same workspace.
 
-As some of the packages of this repository are private, you need to authenticate
-your npm client to `https://npm.pck.github.com`.
+## Generate a library
 
-To do that you need to create a personal access token. You can find some
-information
-[here](https://docs.github.com/en/enterprise-server@2.22/github/authenticating-to-github/creating-a-personal-access-token)
+Run `nx g @nrwl/react:lib my-lib` to generate a library.
 
-After that you need configure your
-[npm](https://docs.github.com/en/packages/guides/configuring-npm-for-use-with-github-packages).
+> You can also use any of the plugins above to generate libraries as well.
 
-TL;TR
+Libraries are shareable across libraries and applications. They can be imported from `@stack/mylib`.
 
-```bash
-npm login --scope=@tractr --registry=https://npm.pkg.github.com
+## Development server
 
-> Username: USERNAME
-> Password: TOKEN
-> Email: PUBLIC-EMAIL-ADDRESS
-```
+Run `nx serve my-app` for a dev server. Navigate to <http://localhost:4200/>. The app will automatically reload if you change any of the source files.
 
-## Installation
+## Code scaffolding
 
-After cloning this repository you should follow the next steps:
+Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
 
-- Move at the root of the repository
+## Build
 
-- Install the dependencies: `yarn`.
+Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-- Build the packages: `npm run build` or `yarn build`. Thanks to lerna, this
-  will build all the packages following a dependance tree (if a package `A`
-  depends on a package `B`, `B` will be build first).
+## Running unit tests
 
-Then you should be ready to work!
+Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
 
-## Scripts
+Run `nx affected:test` to execute the unit tests affected by a change.
 
-Some utilities scripts are provided in `package.json`. Here is a small
-description of the most useful ones:
+## Running end-to-end tests
 
-- `build`: This will build all the packages of the repository by following a
-  dependance tree (if a package `A` depends on a package `B`, `B` will be build
-  first).
+Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
 
-- `generate`: Some of the packages and applications in this repository rely on
-  generated code. This script will run the code generation for each concerned
-  package/application. As the generated code is always required for the
-  package/application to work, the `build` command first run `generate` if the
-  package rely on generated code.
+Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
 
-- `test`: Will run the unit tests of all the packages in parallel. The success
-  of this command is required to allow some code to be merged in the `main`
-  branch!
+## Understand your workspace
 
-- `lint`: Will run the linter for all the packages. The success of this command
-  is required to allow some code to be merged in the `main` branch!
+Run `nx dep-graph` to see a diagram of the dependencies of your projects.
 
-- `lint:fix`: Will run the linter for all the packages and apply style fixes.
+## Further help
 
-- `clean:node_modules`: Will remove all the `node_modules` folders in the
-  project. That imply you must reinstall dependencies after this operation.
+Visit the [Nx Documentation](https://nx.dev) to learn more.
 
-- `clean:dist`: Will remove all the `dist` folders in the project. That imply
-  you must rebuild your packages after this operation.
+## ☁ Nx Cloud
 
-- `clean`: Will remove all the `node_modules` and `dist` folders in the project.
+### Distributed Computation Caching & Distributed Task Execution
+
+Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
+
+Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
+
+Visit [Nx Cloud](https://nx.app/) to learn more.

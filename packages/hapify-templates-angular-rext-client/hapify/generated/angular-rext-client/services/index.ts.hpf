@@ -1,3 +1,0 @@
-<<for Models model>>
-export * from './<<model kebab>>.service';
-<<endfor>>

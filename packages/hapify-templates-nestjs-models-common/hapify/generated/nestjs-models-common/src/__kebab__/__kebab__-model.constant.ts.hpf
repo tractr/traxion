@@ -1,2 +1,0 @@
-export const <<Model constant>>_SERVICE = '<<Model constant>>_SERVICE';
-export const <<Model constant>>_DATABASE_SERVICE = '<<Model constant>>_DATABASE_SERVICE';

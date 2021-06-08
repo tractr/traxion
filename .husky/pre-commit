@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# shellcheck disable=SC1091
-. "$(dirname "$0")/_/husky.sh"
-
-npm_config_yes=true npx lint-staged
