@@ -273,7 +273,15 @@
             "tsConfig": "libs/hapify/templates/dbml/tsconfig.lib.json",
             "packageJson": "libs/hapify/templates/dbml/package.json",
             "main": "libs/hapify/templates/dbml/src/index.ts",
-            "assets": ["libs/hapify/templates/dbml/*.md"]
+            "assets": [
+              "libs/hapify/templates/dbml/*.md",
+              "libs/hapify/templates/dbml/.hapifyrc.js",
+              {
+                "input": "libs/hapify/templates/dbml/hapify",
+                "glob": "**/",
+                "output": "hapify"
+              }
+            ]
           }
         }
       }

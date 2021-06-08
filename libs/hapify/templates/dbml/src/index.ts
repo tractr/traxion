@@ -1,1 +1,1 @@
-export * from './lib/hapify-templates-dbml';
+export * from '../.hapifyrc.js';
