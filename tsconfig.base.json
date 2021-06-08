@@ -19,6 +19,9 @@
       "@tractr/hapify-generate-config": [
         "libs/hapify/generate-config/src/index.ts"
       ],
+      "@tractr/hapify-templates-dbml": [
+        "libs/hapify/templates/dbml/src/index.ts"
+      ],
       "@tractr/hapify-templates-models": [
         "libs/hapify/templates/models/src/index.ts"
       ],

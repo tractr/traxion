@@ -246,6 +246,38 @@
         }
       }
     },
+    "hapify-templates-dbml": {
+      "root": "libs/hapify/templates/dbml",
+      "sourceRoot": "libs/hapify/templates/dbml/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hapify/templates/dbml/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hapify/templates/dbml"],
+          "options": {
+            "jestConfig": "libs/hapify/templates/dbml/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/hapify/templates/dbml",
+            "tsConfig": "libs/hapify/templates/dbml/tsconfig.lib.json",
+            "packageJson": "libs/hapify/templates/dbml/package.json",
+            "main": "libs/hapify/templates/dbml/src/index.ts",
+            "assets": ["libs/hapify/templates/dbml/*.md"]
+          }
+        }
+      }
+    },
     "hapify-templates-models": {
       "root": "libs/hapify/templates/models",
       "sourceRoot": "libs/hapify/templates/models/src",
