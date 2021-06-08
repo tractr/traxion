@@ -3,5 +3,6 @@ module.exports = {
     '<rootDir>/apps/pwa',
     '<rootDir>/apps/api',
     '<rootDir>/libs/hapify/generate-config',
+    '<rootDir>/libs/hapify/templates/models',
   ],
 };
