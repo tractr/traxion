@@ -23,6 +23,9 @@
     "pwa-e2e": {
       "implicitDependencies": ["pwa"],
       "tags": []
+    },
+    "hapify-generate-config": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {
