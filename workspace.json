@@ -278,7 +278,7 @@
               "libs/hapify/templates/dbml/.hapifyrc.js",
               {
                 "input": "libs/hapify/templates/dbml/hapify",
-                "glob": "**/",
+                "glob": "**/*",
                 "output": "hapify"
               }
             ]
