@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@stack/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@stack/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@tractr/hapify-generate-config": [
+        "libs/hapify/generate-config/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

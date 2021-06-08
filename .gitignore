@@ -16,6 +16,7 @@
 *.launch
 .settings/
 *.sublime-workspace
+.vim
 
 # IDE - VSCode
 .vscode/*
@@ -62,6 +63,7 @@ package-lock.json
 **/prisma/schemas/generated.prisma.hpf
 **/hapify
 !**/hapify/validator.js
+!libs/hapify
 
 # Local ignore
 *.local-ignore*
