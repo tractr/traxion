@@ -34,7 +34,7 @@ export interface HapifyConfig extends IConfig {
 }
 
 async function getHapifyConfigFromDirectory(
-  hapifyDirectory: string
+  hapifyDirectory: string,
 ): Promise<HapifyConfig | null> {
   for (const configFilename of configFilenamePriorityImportOrder) {
     const extension = extname(configFilename);
@@ -68,7 +68,7 @@ async function getHapifyConfigFromDirectory(
 
 function mergeHapifyConfigs(
   configX: HapifyConfig | null,
-  configY: HapifyConfig
+  configY: HapifyConfig,
 ): HapifyConfig {
   return deepmerge(configX || {}, configY, {
     customMerge: (key) => {
@@ -82,7 +82,7 @@ function mergeHapifyConfigs(
 
 async function getHapifyConfig(
   hapifyDirectory: string = __dirname,
-  ignorePath: string[] = []
+  ignorePath: string[] = [],
 ): Promise<HapifyConfig | null> {
   const packageJsonDirectory = await pkgDir(hapifyDirectory);
 
@@ -126,10 +126,7 @@ async function getHapifyConfig(
     .filter((config) => config !== null)
     .reverse()
     .concat(mainConfig)
-    .reduce(
-      (acc, config) => mergeHapifyConfigs(acc, config as HapifyConfig),
-      null
-    );
+    .reduce((acc, config) => mergeHapifyConfigs(acc, config), null);
 }
 
 function formatTemplatePath(templatePath: string, extension: string): string {
@@ -155,12 +152,12 @@ async function getHapifyOptions(): Promise<void> {
     hapifyConfig.templates.forEach((template) => {
       promises.push(
         copy(
-          formatTemplatePath(template.inputPath as string, template.engine),
+          formatTemplatePath(template.inputPath, template.engine),
           formatTemplatePath(
             `${join(packageJsonDirectory || '', 'hapify', template.path)}`,
-            template.engine
-          )
-        )
+            template.engine,
+          ),
+        ),
       );
     });
     await Promise.all(promises);

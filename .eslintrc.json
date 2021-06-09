@@ -1,8 +1,12 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
   "plugins": ["@nrwl/nx"],
   "overrides": [
+    {
+      "files": ["*.json"],
+      "extends": ["./libs/config/eslint/.eslintrc.js"],
+      "rules": {}
+    },
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "extends": ["./libs/config/eslint/.eslintrc.js"],

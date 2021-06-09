@@ -61,6 +61,9 @@ module.exports = {
     '@typescript-eslint/no-unsafe-member-access': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
 
+    // sort package
+    'json-files/sort-package-json': 'error',
+
     // Declare rules for imports matter
     'sort-imports': [
       'warn',
