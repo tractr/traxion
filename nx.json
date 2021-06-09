@@ -53,6 +53,9 @@
     "pwa-e2e": {
       "implicitDependencies": ["pwa"],
       "tags": []
+    },
+    "hapify-templates-rest-dtos": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {

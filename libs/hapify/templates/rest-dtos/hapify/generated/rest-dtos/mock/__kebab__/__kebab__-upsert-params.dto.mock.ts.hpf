@@ -1,0 +1,18 @@
+import { <<Model pascal>>UpsertParamsDto } from '../../dtos';
+  
+import {
+<<for Fields primary primaryField>>
+  mock<<Model pascal>><<primaryField pascal>>Factory,
+<<endfor>>
+} from '@generated/models';
+   
+export function mock<<Model pascal>>UpsertParamsDtoFactory(
+    override: Partial<<<Model pascal>>UpsertParamsDto> = {}
+): <<Model pascal>>UpsertParamsDto {
+  return {
+  <<for Fields primary primaryField>>
+    <<primaryField camel>>: mock<<Model pascal>><<primaryField pascal>>Factory(),
+  <<endfor>>
+  ...override,
+  };
+}

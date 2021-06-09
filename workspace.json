@@ -585,6 +585,46 @@
           }
         }
       }
+    },
+    "hapify-templates-rest-dtos": {
+      "root": "libs/hapify/templates/rest-dtos",
+      "sourceRoot": "libs/hapify/templates/rest-dtos/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hapify/templates/rest-dtos/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hapify/templates/rest-dtos"],
+          "options": {
+            "jestConfig": "libs/hapify/templates/rest-dtos/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/hapify/templates/rest-dtos",
+            "tsConfig": "libs/hapify/templates/rest-dtos/tsconfig.lib.json",
+            "packageJson": "libs/hapify/templates/rest-dtos/package.json",
+            "main": "libs/hapify/templates/rest-dtos/src/index.ts",
+            "assets": [
+              "libs/hapify/templates/rest-dtos/*.md",
+              "libs/hapify/templates/rest-dtos/.hapifyrc.js",
+              {
+                "input": "libs/hapify/templates/rest-dtos/hapify",
+                "glob": "**/*",
+                "output": "hapify"
+              }
+            ]
+          }
+        }
+      }
     }
   },
   "version": 2
