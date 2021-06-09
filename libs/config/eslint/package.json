@@ -1,5 +1,10 @@
 {
   "name": "@tractr/eslint-config",
+  "version": "1.4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack.git"
+  },
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
@@ -10,5 +15,8 @@
     "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-json-files": "^1.1.0"
   },
-  "version": "0.0.1"
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
 }

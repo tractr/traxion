@@ -2,19 +2,19 @@
   "name": "@tractr/hapify-generate-config",
   "version": "1.0.5",
   "description": "Generate hapify config",
-  "license": "UNLICENSED",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
   },
-  "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
-  },
+  "license": "UNLICENSED",
   "bin": {
     "hpf-generate-config": "./src/index.js"
   },
   "peerDependencies": {
     "@hapify/cli": "^1.2.0"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
   }
 }

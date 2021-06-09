@@ -3,9 +3,9 @@ module.exports = {
   description: 'Generate the DBML schema',
   templates: [
     {
-      "path": "models.dbml",
-      "engine": "hpf",
-      "input": "all"
+      path: 'models.dbml',
+      engine: 'hpf',
+      input: 'all',
     },
   ],
 };

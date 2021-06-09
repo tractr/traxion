@@ -1,7 +1,7 @@
 # Hapify - NestJS Models Boilerplate
 
-This package contains the hapify templates to generate 
-nestjs modules that agregate the common module and rest module.
+This package contains the hapify templates to generate nestjs modules that
+agregate the common module and rest module.
 
 ## Installation
 

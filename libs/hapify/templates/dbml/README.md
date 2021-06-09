@@ -1,7 +1,8 @@
 # Hapify - DBML Schema
 
-This package generate a DBML Schema from the hapify modelisation. It
-can be used to visualize the database schema in `https://dbdiagram.io`.
+This package generate a DBML Schema from the hapify modelisation. It can be used
+to visualize the database schema in `https://dbdiagram.io`.
+
 ## Installation
 
 ```sh
@@ -32,5 +33,5 @@ module.exports = {
 Or you can create a `.hapifyrc.json` file in your projects root directory.
 
 ```json
-{ "extends": [ '@tractr/hapify-templates-dbml' ] }
+{ "extends": ["@tractr/hapify-templates-dbml"] }
 ```

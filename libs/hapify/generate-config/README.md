@@ -2,8 +2,8 @@
 
 This package provides a new way of expriming hapify configuration. It adds a new
 way to extend the hapify configuration. To work with the current version of
-hapify it takes a configuration to generate a `hapify.json` files. In order to do
-that it provides a list of files to read your new and shiny configuration and
+hapify it takes a configuration to generate a `hapify.json` files. In order to
+do that it provides a list of files to read your new and shiny configuration and
 take the first file found in this order:
 
 ```js
@@ -46,4 +46,3 @@ module.exports = {
 > `extends` options. The copy and the generated configuration is not the best
 > way to do and this package is just a patch to accelerate developement of the
 > new stack
-

@@ -1,4 +1,12 @@
 {
-  "name": "@stack/config/hapify",
-  "version": "0.0.1"
+  "name": "@tractr/hapify-config",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack.git"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
 }

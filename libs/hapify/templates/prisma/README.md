@@ -1,7 +1,6 @@
 # Hapify - Prisma Boilerplate
 
-This package contains the hapify templates to generate 
-Prisma database schema.
+This package contains the hapify templates to generate Prisma database schema.
 
 ## Installation
 
@@ -35,4 +34,3 @@ Or you can create a `.hapifyrc.json` file in your projects root directory.
 ```javascript
 { "extends": [ '@tractr/hapify-templates-prisma' ] }
 ```
-

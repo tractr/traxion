@@ -1,7 +1,7 @@
 # Hapify - NestJS Models common
 
-This package contains the hapify templates to generate 
-nestjs common services and modules for models.
+This package contains the hapify templates to generate nestjs common services
+and modules for models.
 
 ## Installation
 
@@ -35,4 +35,3 @@ Or you can create a `.hapifyrc.json` file in your projects root directory.
 ```javascript
 { "extends": [ '@tractr/hapify-templates-nestjs-models' ] }
 ```
-
