@@ -1,1 +1,3 @@
-export * from '../.hapifyrc.js';
+import config = require('../.hapifyrc.js');
+
+export default config;
