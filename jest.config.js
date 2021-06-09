@@ -8,5 +8,9 @@ module.exports = {
     '<rootDir>/libs/hapify/templates/nestjs-models-common',
     '<rootDir>/libs/hapify/templates/prisma',
     '<rootDir>/libs/hapify/templates/nestjs-models',
+    '<rootDir>/libs/config/prettier',
+    '<rootDir>/libs/config/eslint',
+    '<rootDir>/libs/config/commit',
+    '<rootDir>/libs/config/hapify',
   ],
 };

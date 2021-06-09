@@ -1,21 +1,21 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
+    "allowJs": true,
+    "baseUrl": ".",
+    "checkJs": true,
     "declaration": false,
-    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
+    "importHelpers": false,
     "lib": ["es2017", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "node",
     "paths": {
-      "@stack/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@tractr/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@tractr/commit-config": ["libs/config/commit/src/index.ts"],
+      "@tractr/eslint-config": ["libs/config/eslint/src/index.ts"],
+      "@tractr/hapify-config": ["libs/config/hapify/src/index.ts"],
       "@tractr/hapify-generate-config": [
         "libs/hapify/generate-config/src/index.ts"
       ],
@@ -25,16 +25,23 @@
       "@tractr/hapify-templates-models": [
         "libs/hapify/templates/models/src/index.ts"
       ],
+      "@tractr/hapify-templates-nestjs-models": [
+        "libs/hapify/templates/nestjs-models/src/index.ts"
+      ],
       "@tractr/hapify-templates-nestjs-models-common": [
         "libs/hapify/templates/nestjs-models-common/src/index.ts"
       ],
       "@tractr/hapify-templates-prisma": [
         "libs/hapify/templates/prisma/src/index.ts"
       ],
-      "@tractr/hapify-templates-nestjs-models": [
-        "libs/hapify/templates/nestjs-models/src/index.ts"
-      ]
-    }
+      "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"]
+    },
+    "resolveJsonModule": true,
+    "rootDir": ".",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "es2015"
   },
   "exclude": ["node_modules", "tmp"]
 }

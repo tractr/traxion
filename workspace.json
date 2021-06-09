@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "cli": {
     "defaultCollection": "@nrwl/angular"
   },
@@ -17,53 +16,484 @@
       }
     },
     "@nrwl/angular:application": {
-      "style": "less",
+      "e2eTestRunner": "cypress",
       "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
       "style": "less",
-      "linter": "eslint",
       "unitTestRunner": "jest"
     },
     "@nrwl/angular:component": {
       "style": "less"
+    },
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "style": "less",
+      "unitTestRunner": "jest"
     }
   },
   "projects": {
+    "api": {
+      "projectType": "application",
+      "root": "apps/api",
+      "sourceRoot": "apps/api/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "production": {
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/src/environments/environment.ts",
+                  "with": "apps/api/src/environments/environment.prod.ts"
+                }
+              ],
+              "inspect": false,
+              "optimization": true
+            }
+          },
+          "executor": "@nrwl/node:build",
+          "options": {
+            "assets": ["apps/api/src/assets"],
+            "main": "apps/api/src/main.ts",
+            "outputPath": "dist/apps/api",
+            "tsConfig": "apps/api/tsconfig.app.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/api/**/*.ts"]
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api:build"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/api/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/apps/api"]
+        }
+      }
+    },
+    "api-interfaces": {
+      "projectType": "library",
+      "root": "libs/api-interfaces",
+      "sourceRoot": "libs/api-interfaces/src",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+          }
+        }
+      }
+    },
+    "commit-config": {
+      "projectType": "library",
+      "root": "libs/config/commit",
+      "sourceRoot": "libs/config/commit/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/config/commit/*.md",
+              "libs/config/commit/bin/*.js",
+              "libs/config/commit/.commitlintrc.js",
+              "libs/config/commit/types.json"
+            ],
+            "main": "libs/config/commit/src/index.ts",
+            "outputPath": "dist/libs/config/commit",
+            "packageJson": "libs/config/commit/package.json",
+            "tsConfig": "libs/config/commit/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/config/commit/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/config/commit/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/config/commit"]
+        }
+      }
+    },
+    "eslint-config": {
+      "projectType": "library",
+      "root": "libs/config/eslint",
+      "sourceRoot": "libs/config/eslint/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/config/eslint/*.md",
+              "libs/config/eslint/.eslintrc.js"
+            ],
+            "main": "libs/config/eslint/src/index.ts",
+            "outputPath": "dist/libs/config/eslint",
+            "packageJson": "libs/config/eslint/package.json",
+            "tsConfig": "libs/config/eslint/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/config/eslint/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/config/eslint/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/config/eslint"]
+        }
+      }
+    },
+    "hapify-config": {
+      "projectType": "library",
+      "root": "libs/config/hapify",
+      "sourceRoot": "libs/config/hapify/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/config/hapify/*.md",
+              "libs/config/hapify/validator.js"
+            ],
+            "main": "libs/config/hapify/src/index.ts",
+            "outputPath": "dist/libs/config/hapify",
+            "packageJson": "libs/config/hapify/package.json",
+            "tsConfig": "libs/config/hapify/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/config/hapify/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/config/hapify/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/config/hapify"]
+        }
+      }
+    },
+    "hapify-generate-config": {
+      "projectType": "library",
+      "root": "libs/hapify/generate-config",
+      "sourceRoot": "libs/hapify/generate-config/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/hapify/generate-config/*.md"],
+            "main": "libs/hapify/generate-config/src/index.ts",
+            "outputPath": "dist/libs/hapify/generate-config",
+            "packageJson": "libs/hapify/generate-config/package.json",
+            "tsConfig": "libs/hapify/generate-config/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hapify/generate-config/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/hapify/generate-config/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/hapify/generate-config"]
+        }
+      }
+    },
+    "hapify-templates-dbml": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/dbml",
+      "sourceRoot": "libs/hapify/templates/dbml/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/dbml/*.md",
+              "libs/hapify/templates/dbml/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/dbml/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/dbml/src/index.ts",
+            "outputPath": "dist/libs/hapify/templates/dbml",
+            "packageJson": "libs/hapify/templates/dbml/package.json",
+            "tsConfig": "libs/hapify/templates/dbml/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hapify/templates/dbml/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/hapify/templates/dbml/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/hapify/templates/dbml"]
+        }
+      }
+    },
+    "hapify-templates-models": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/models",
+      "sourceRoot": "libs/hapify/templates/models/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/models/*.md",
+              "libs/hapify/templates/models/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/models/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/models/src/index.ts",
+            "outputPath": "dist/libs/hapify/templates/models",
+            "packageJson": "libs/hapify/templates/models/package.json",
+            "tsConfig": "libs/hapify/templates/models/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hapify/templates/models/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/hapify/templates/models/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/hapify/templates/models"]
+        }
+      }
+    },
+    "hapify-templates-nestjs-models": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/nestjs-models",
+      "sourceRoot": "libs/hapify/templates/nestjs-models/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/nestjs-models/*.md",
+              "libs/hapify/templates/nestjs-models/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/nestjs-models/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/nestjs-models/src/index.ts",
+            "outputPath": "dist/libs/hapify/templates/nestjs-models",
+            "packageJson": "libs/hapify/templates/nestjs-models/package.json",
+            "tsConfig": "libs/hapify/templates/nestjs-models/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hapify/templates/nestjs-models/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/hapify/templates/nestjs-models/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/hapify/templates/nestjs-models"]
+        }
+      }
+    },
+    "hapify-templates-nestjs-models-common": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/nestjs-models-common",
+      "sourceRoot": "libs/hapify/templates/nestjs-models-common/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/nestjs-models-common/*.md",
+              "libs/hapify/templates/nestjs-models-common/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/nestjs-models-common/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/nestjs-models-common/src/index.ts",
+            "outputPath": "dist/libs/hapify/templates/nestjs-models-common",
+            "packageJson": "libs/hapify/templates/nestjs-models-common/package.json",
+            "tsConfig": "libs/hapify/templates/nestjs-models-common/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/hapify/templates/nestjs-models-common/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/hapify/templates/nestjs-models-common/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/hapify/templates/nestjs-models-common"]
+        }
+      }
+    },
+    "hapify-templates-prisma": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/prisma",
+      "sourceRoot": "libs/hapify/templates/prisma/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/prisma/*.md",
+              "libs/hapify/templates/prisma/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/prisma/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/prisma/src/index.ts",
+            "outputPath": "dist/libs/hapify/templates/prisma",
+            "packageJson": "libs/hapify/templates/prisma/package.json",
+            "tsConfig": "libs/hapify/templates/prisma/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hapify/templates/prisma/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/hapify/templates/prisma/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/hapify/templates/prisma"]
+        }
+      }
+    },
+    "prettier-config": {
+      "projectType": "library",
+      "root": "libs/config/prettier",
+      "sourceRoot": "libs/config/prettier/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/config/prettier/*.md"],
+            "main": "libs/config/prettier/src/index.ts",
+            "outputPath": "dist/libs/config/prettier",
+            "packageJson": "libs/config/prettier/package.json",
+            "tsConfig": "libs/config/prettier/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/config/prettier/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/config/prettier/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/config/prettier"]
+        }
+      }
+    },
     "pwa": {
+      "prefix": "stack",
       "projectType": "application",
       "root": "apps/pwa",
       "sourceRoot": "apps/pwa/src",
-      "prefix": "stack",
       "targets": {
         "build": {
-          "executor": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/pwa",
-            "index": "apps/pwa/src/index.html",
-            "main": "apps/pwa/src/main.ts",
-            "polyfills": "apps/pwa/src/polyfills.ts",
-            "tsConfig": "apps/pwa/tsconfig.app.json",
-            "inlineStyleLanguage": "less",
-            "assets": ["apps/pwa/src/favicon.ico", "apps/pwa/src/assets"],
-            "styles": ["apps/pwa/src/styles.less"],
-            "scripts": []
-          },
           "configurations": {
+            "development": {
+              "buildOptimizer": false,
+              "extractLicenses": false,
+              "namedChunks": true,
+              "optimization": false,
+              "sourceMap": true,
+              "vendorChunk": true
+            },
             "production": {
               "budgets": [
                 {
-                  "type": "initial",
+                  "maximumError": "1mb",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "type": "initial"
                 },
                 {
-                  "type": "anyComponentStyle",
+                  "maximumError": "4kb",
                   "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "type": "anyComponentStyle"
                 }
               ],
               "fileReplacements": [
@@ -73,32 +503,22 @@
                 }
               ],
               "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
             }
           },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "executor": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "pwa:build:production"
-            },
-            "development": {
-              "browserTarget": "pwa:build:development"
-            }
-          },
-          "defaultConfiguration": "development",
+          "defaultConfiguration": "production",
+          "executor": "@angular-devkit/build-angular:browser",
           "options": {
-            "proxyConfig": "apps/pwa/proxy.conf.json"
-          }
+            "assets": ["apps/pwa/src/favicon.ico", "apps/pwa/src/assets"],
+            "index": "apps/pwa/src/index.html",
+            "inlineStyleLanguage": "less",
+            "main": "apps/pwa/src/main.ts",
+            "outputPath": "dist/apps/pwa",
+            "polyfills": "apps/pwa/src/polyfills.ts",
+            "scripts": [],
+            "styles": ["apps/pwa/src/styles.less"],
+            "tsConfig": "apps/pwa/tsconfig.app.json"
+          },
+          "outputs": ["{options.outputPath}"]
         },
         "extract-i18n": {
           "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -115,32 +535,47 @@
             ]
           }
         },
+        "serve": {
+          "configurations": {
+            "development": {
+              "browserTarget": "pwa:build:development"
+            },
+            "production": {
+              "browserTarget": "pwa:build:production"
+            }
+          },
+          "defaultConfiguration": "development",
+          "executor": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "apps/pwa/proxy.conf.json"
+          }
+        },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/pwa"],
           "options": {
             "jestConfig": "apps/pwa/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/apps/pwa"]
         }
       }
     },
     "pwa-e2e": {
+      "projectType": "application",
       "root": "apps/pwa-e2e",
       "sourceRoot": "apps/pwa-e2e/src",
-      "projectType": "application",
       "targets": {
         "e2e": {
-          "executor": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/pwa-e2e/cypress.json",
-            "tsConfig": "apps/pwa-e2e/tsconfig.e2e.json",
-            "devServerTarget": "pwa:serve:development"
-          },
           "configurations": {
             "production": {
               "devServerTarget": "pwa:serve:production"
             }
+          },
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/pwa-e2e/cypress.json",
+            "devServerTarget": "pwa:serve:development",
+            "tsConfig": "apps/pwa-e2e/tsconfig.e2e.json"
           }
         },
         "lint": {
@@ -150,303 +585,7 @@
           }
         }
       }
-    },
-    "api": {
-      "root": "apps/api",
-      "sourceRoot": "apps/api/src",
-      "projectType": "application",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/api",
-            "main": "apps/api/src/main.ts",
-            "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/api/src/environments/environment.ts",
-                  "with": "apps/api/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "api:build"
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/api/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/api"],
-          "options": {
-            "jestConfig": "apps/api/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "api-interfaces": {
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
-          }
-        }
-      }
-    },
-    "hapify-generate-config": {
-      "root": "libs/hapify/generate-config",
-      "sourceRoot": "libs/hapify/generate-config/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/hapify/generate-config/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/hapify/generate-config"],
-          "options": {
-            "jestConfig": "libs/hapify/generate-config/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "build": {
-          "executor": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/libs/hapify/generate-config",
-            "tsConfig": "libs/hapify/generate-config/tsconfig.lib.json",
-            "packageJson": "libs/hapify/generate-config/package.json",
-            "main": "libs/hapify/generate-config/src/index.ts",
-            "assets": ["libs/hapify/generate-config/*.md"]
-          }
-        }
-      }
-    },
-    "hapify-templates-dbml": {
-      "root": "libs/hapify/templates/dbml",
-      "sourceRoot": "libs/hapify/templates/dbml/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/hapify/templates/dbml/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/hapify/templates/dbml"],
-          "options": {
-            "jestConfig": "libs/hapify/templates/dbml/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "build": {
-          "executor": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/libs/hapify/templates/dbml",
-            "tsConfig": "libs/hapify/templates/dbml/tsconfig.lib.json",
-            "packageJson": "libs/hapify/templates/dbml/package.json",
-            "main": "libs/hapify/templates/dbml/src/index.ts",
-            "assets": [
-              "libs/hapify/templates/dbml/*.md",
-              "libs/hapify/templates/dbml/.hapifyrc.js",
-              {
-                "input": "libs/hapify/templates/dbml/hapify",
-                "glob": "**/*",
-                "output": "hapify"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "hapify-templates-models": {
-      "root": "libs/hapify/templates/models",
-      "sourceRoot": "libs/hapify/templates/models/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/hapify/templates/models/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/hapify/templates/models"],
-          "options": {
-            "jestConfig": "libs/hapify/templates/models/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "build": {
-          "executor": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/libs/hapify/templates/models",
-            "tsConfig": "libs/hapify/templates/models/tsconfig.lib.json",
-            "packageJson": "libs/hapify/templates/models/package.json",
-            "main": "libs/hapify/templates/models/src/index.ts",
-            "assets": [
-              "libs/hapify/templates/models/*.md",
-              "libs/hapify/templates/models/.hapifyrc.js",
-              {
-                "input": "libs/hapify/templates/models/hapify",
-                "glob": "**/*",
-                "output": "hapify"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "hapify-templates-nestjs-models-common": {
-      "root": "libs/hapify/templates/nestjs-models-common",
-      "sourceRoot": "libs/hapify/templates/nestjs-models-common/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/hapify/templates/nestjs-models-common/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/hapify/templates/nestjs-models-common"],
-          "options": {
-            "jestConfig": "libs/hapify/templates/nestjs-models-common/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "build": {
-          "executor": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/libs/hapify/templates/nestjs-models-common",
-            "tsConfig": "libs/hapify/templates/nestjs-models-common/tsconfig.lib.json",
-            "packageJson": "libs/hapify/templates/nestjs-models-common/package.json",
-            "main": "libs/hapify/templates/nestjs-models-common/src/index.ts",
-            "assets": [
-              "libs/hapify/templates/nestjs-models-common/*.md",
-              "libs/hapify/templates/nestjs-models-common/.hapifyrc.js",
-              {
-                "input": "libs/hapify/templates/nestjs-models-common/hapify",
-                "glob": "**/*",
-                "output": "hapify"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "hapify-templates-prisma": {
-      "root": "libs/hapify/templates/prisma",
-      "sourceRoot": "libs/hapify/templates/prisma/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/hapify/templates/prisma/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/hapify/templates/prisma"],
-          "options": {
-            "jestConfig": "libs/hapify/templates/prisma/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "build": {
-          "executor": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/libs/hapify/templates/prisma",
-            "tsConfig": "libs/hapify/templates/prisma/tsconfig.lib.json",
-            "packageJson": "libs/hapify/templates/prisma/package.json",
-            "main": "libs/hapify/templates/prisma/src/index.ts",
-            "assets": [
-              "libs/hapify/templates/prisma/*.md",
-              "libs/hapify/templates/prisma/.hapifyrc.js",
-              {
-                "input": "libs/hapify/templates/prisma/hapify",
-                "glob": "**/*",
-                "output": "hapify"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "hapify-templates-nestjs-models": {
-      "root": "libs/hapify/templates/nestjs-models",
-      "sourceRoot": "libs/hapify/templates/nestjs-models/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/hapify/templates/nestjs-models/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/hapify/templates/nestjs-models"],
-          "options": {
-            "jestConfig": "libs/hapify/templates/nestjs-models/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "build": {
-          "executor": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/libs/hapify/templates/nestjs-models",
-            "tsConfig": "libs/hapify/templates/nestjs-models/tsconfig.lib.json",
-            "packageJson": "libs/hapify/templates/nestjs-models/package.json",
-            "main": "libs/hapify/templates/nestjs-models/src/index.ts",
-            "assets": [
-              "libs/hapify/templates/nestjs-models/*.md",
-              "libs/hapify/templates/nestjs-models/.hapifyrc.js",
-              {
-                "input": "libs/hapify/templates/nestjs-models/hapify",
-                "glob": "**/*",
-                "output": "hapify"
-              }
-            ]
-          }
-        }
-      }
     }
-  }
+  },
+  "version": 2
 }

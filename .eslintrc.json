@@ -5,7 +5,14 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "extends": ["./libs/config/eslint/.eslintrc.js"],
       "rules": {
+        "import/no-unresolved": [
+          "error",
+          {
+            "ignore": ["^@(tractr|generated)/"]
+          }
+        ],
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
           {
@@ -31,5 +38,8 @@
       "extends": ["plugin:@nrwl/nx/javascript"],
       "rules": {}
     }
-  ]
+  ],
+  "settings": {
+    "import/internal-regex": "^@(tractr|generated)/"
+  }
 }

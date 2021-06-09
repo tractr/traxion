@@ -1,8 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
 
-import { Message } from '@stack/api-interfaces';
-
 import { AppService } from './app.service';
+
+import { Message } from '@tractr/api-interfaces';
 
 @Controller()
 export class AppController {
