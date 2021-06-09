@@ -18,7 +18,7 @@ jobs:
     name: Test npm packages on node ${{ matrix.node }}
 
     # Runs on Tractr self serveur
-    runs-on: [self-hosted, ${{ matrix.os }}]
+    runs-on: [self-hosted, '${{ matrix.os }}']
 
     steps:
       # First we checkout the code
@@ -39,11 +39,11 @@ jobs:
         with:
           path: '~/.npm'
           key:
-            ${{ matrix.os }}-npm-${{ matrix.node }}-${{
-            hashFiles('**/npm.lock') }}
+            ${{ matrix.os }}-npm-${{ matrix.node }}-${{ hashFiles('**/npm.lock')
+            }}
           restore-keys: |
             ${{ matrix.os }}-npm-${{ matrix.node }}-
-      
+
       # We install our dependencies
       - name: Run npm install
         env:
