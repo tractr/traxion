@@ -29,6 +29,9 @@
     },
     "hapify-templates-models": {
       "tags": []
+    },
+    "hapify-templates-prisma": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {
