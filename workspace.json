@@ -407,6 +407,46 @@
           }
         }
       }
+    },
+    "hapify-templates-nestjs-models": {
+      "root": "libs/hapify/templates/nestjs-models",
+      "sourceRoot": "libs/hapify/templates/nestjs-models/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hapify/templates/nestjs-models/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hapify/templates/nestjs-models"],
+          "options": {
+            "jestConfig": "libs/hapify/templates/nestjs-models/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/hapify/templates/nestjs-models",
+            "tsConfig": "libs/hapify/templates/nestjs-models/tsconfig.lib.json",
+            "packageJson": "libs/hapify/templates/nestjs-models/package.json",
+            "main": "libs/hapify/templates/nestjs-models/src/index.ts",
+            "assets": [
+              "libs/hapify/templates/nestjs-models/*.md",
+              "libs/hapify/templates/nestjs-models/.hapifyrc.js",
+              {
+                "input": "libs/hapify/templates/nestjs-models/hapify",
+                "glob": "**/*",
+                "output": "hapify"
+              }
+            ]
+          }
+        }
+      }
     }
   }
 }
