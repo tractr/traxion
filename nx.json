@@ -27,6 +27,9 @@
     "hapify-generate-config": {
       "tags": []
     },
+    "hapify-templates-dbml": {
+      "tags": []
+    },
     "hapify-templates-models": {
       "tags": []
     },
