@@ -16,5 +16,6 @@ module.exports = {
     '<rootDir>/libs/config/eslint',
     '<rootDir>/libs/config/commit',
     '<rootDir>/libs/config/hapify',
+    '<rootDir>/libs/nestjs/database',
   ],
 };
