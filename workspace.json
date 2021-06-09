@@ -771,6 +771,38 @@
           }
         }
       }
+    },
+    "nestjs-testing": {
+      "root": "libs/nestjs/testing",
+      "sourceRoot": "libs/nestjs/testing/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/testing/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/nestjs/testing"],
+          "options": {
+            "jestConfig": "libs/nestjs/testing/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/nestjs/testing",
+            "tsConfig": "libs/nestjs/testing/tsconfig.lib.json",
+            "packageJson": "libs/nestjs/testing/package.json",
+            "main": "libs/nestjs/testing/src/index.ts",
+            "assets": ["libs/nestjs/testing/*.md"]
+          }
+        }
+      }
     }
   },
   "version": 2
