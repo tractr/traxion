@@ -30,6 +30,9 @@
     "hapify-templates-models": {
       "tags": []
     },
+    "hapify-templates-nestjs-models-common": {
+      "tags": []
+    },
     "hapify-templates-prisma": {
       "tags": []
     }

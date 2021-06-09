@@ -1,0 +1,3 @@
+export * from './<<Model kebab>>-database.service.mock';
+export * from './<<Model kebab>>.seed';
+export * from './<<Model kebab>>.service.mock';
