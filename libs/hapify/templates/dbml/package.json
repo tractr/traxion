@@ -10,9 +10,5 @@
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"
   },
-  "files": [
-    "hapify",
-    ".hapifyrc.js"
-  ],
   "license": "UNLICENSED"
 }

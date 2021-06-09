@@ -11,10 +11,6 @@
     "registry": "https://npm.pkg.github.com"
   },
   "license": "UNLICENSED",
-  "files": [
-    "hapify",
-    ".hapifyrc.js"
-  ],
   "peerDependencies": {
     "@tractr/hapify-templates-models": "1.2.4"
   }
