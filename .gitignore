@@ -57,13 +57,12 @@ package-lock.json
 **/prisma/schema.prisma
 
 # Generated files
-**generated
+apps/**/generated
 
 # Hapify folder
 **/prisma/schemas/generated.prisma.hpf
-**/hapify
+apps/**/hapify
 !**/hapify/validator.js
-!libs/hapify
 
 # Local ignore
 *.local-ignore*

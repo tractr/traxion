@@ -26,6 +26,9 @@
     },
     "hapify-generate-config": {
       "tags": []
+    },
+    "hapify-templates-models": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {

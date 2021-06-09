@@ -245,6 +245,46 @@
           }
         }
       }
+    },
+    "hapify-templates-models": {
+      "root": "libs/hapify/templates/models",
+      "sourceRoot": "libs/hapify/templates/models/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hapify/templates/models/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hapify/templates/models"],
+          "options": {
+            "jestConfig": "libs/hapify/templates/models/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/hapify/templates/models",
+            "tsConfig": "libs/hapify/templates/models/tsconfig.lib.json",
+            "packageJson": "libs/hapify/templates/models/package.json",
+            "main": "libs/hapify/templates/models/src/index.ts",
+            "assets": [
+              "libs/hapify/templates/models/*.md",
+              "libs/hapify/templates/models/.hapifyrc.js",
+              {
+                "input": "libs/hapify/templates/models/hapify",
+                "glob": "**/*",
+                "output": "hapify"
+              }
+            ]
+          }
+        }
+      }
     }
   }
 }
