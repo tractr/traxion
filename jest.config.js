@@ -11,6 +11,7 @@ module.exports = {
     '<rootDir>/libs/hapify/templates/rest-dtos',
     '<rootDir>/libs/hapify/templates/rext-client',
     '<rootDir>/libs/hapify/templates/angular-rext-client',
+    '<rootDir>/libs/nestjs/core',
     '<rootDir>/libs/config/prettier',
     '<rootDir>/libs/config/eslint',
     '<rootDir>/libs/config/commit',

@@ -707,6 +707,38 @@
           }
         }
       }
+    },
+    "nestjs-core": {
+      "root": "libs/nestjs/core",
+      "sourceRoot": "libs/nestjs/core/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/core/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/nestjs/core"],
+          "options": {
+            "jestConfig": "libs/nestjs/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/nestjs/core",
+            "tsConfig": "libs/nestjs/core/tsconfig.lib.json",
+            "packageJson": "libs/nestjs/core/package.json",
+            "main": "libs/nestjs/core/src/index.ts",
+            "assets": ["libs/nestjs/core/*.md"]
+          }
+        }
+      }
     }
   },
   "version": 2
