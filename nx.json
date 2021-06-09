@@ -62,6 +62,9 @@
     },
     "hapify-templates-angular-rext-client": {
       "tags": []
+    },
+    "nestjs-core": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {
