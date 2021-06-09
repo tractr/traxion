@@ -37,6 +37,9 @@
       "@tractr/hapify-templates-rest-dtos": [
         "libs/hapify/templates/rest-dtos/src/index.ts"
       ],
+      "@tractr/hapify-templates-rext-client": [
+        "libs/hapify/templates/rext-client/src/index.ts"
+      ],
       "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"]
     },
     "resolveJsonModule": true,
