@@ -38,6 +38,9 @@
     },
     "hapify-templates-prisma": {
       "tags": []
+    },
+    "hapify-templates-nestjs-models": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {

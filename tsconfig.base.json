@@ -30,6 +30,9 @@
       ],
       "@tractr/hapify-templates-prisma": [
         "libs/hapify/templates/prisma/src/index.ts"
+      ],
+      "@tractr/hapify-templates-nestjs-models": [
+        "libs/hapify/templates/nestjs-models/src/index.ts"
       ]
     }
   },
