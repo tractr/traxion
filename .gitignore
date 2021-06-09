@@ -63,6 +63,7 @@ apps/**/generated
 apps/**/prisma/schemas/generated.prisma.hpf
 apps/**/hapify
 !**/hapify/validator.js
+!**/config/hapify
 
 # Local ignore
 *.local-ignore*

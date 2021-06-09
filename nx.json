@@ -17,11 +17,13 @@
     "api-interfaces": {
       "tags": []
     },
-    "pwa": {
+    "commit-config": {
       "tags": []
     },
-    "pwa-e2e": {
-      "implicitDependencies": ["pwa"],
+    "eslint-config": {
+      "tags": []
+    },
+    "hapify-config": {
       "tags": []
     },
     "hapify-generate-config": {
@@ -33,13 +35,23 @@
     "hapify-templates-models": {
       "tags": []
     },
+    "hapify-templates-nestjs-models": {
+      "tags": []
+    },
     "hapify-templates-nestjs-models-common": {
       "tags": []
     },
     "hapify-templates-prisma": {
       "tags": []
     },
-    "hapify-templates-nestjs-models": {
+    "prettier-config": {
+      "tags": []
+    },
+    "pwa": {
+      "tags": []
+    },
+    "pwa-e2e": {
+      "implicitDependencies": ["pwa"],
       "tags": []
     }
   },

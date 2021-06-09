@@ -40,14 +40,12 @@ module.exports = {
       input: 'one',
     },
     {
-      path:
-        'generated/nestjs-models-common/src/{kebab}/{kebab}-model.module.ts',
+      path: 'generated/nestjs-models-common/src/{kebab}/{kebab}-model.module.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path:
-        'generated/nestjs-models-common/src/{kebab}/{kebab}-model.constant.ts',
+      path: 'generated/nestjs-models-common/src/{kebab}/{kebab}-model.constant.ts',
       engine: 'hpf',
       input: 'one',
     },
@@ -57,14 +55,12 @@ module.exports = {
       input: 'one',
     },
     {
-      path:
-        'generated/nestjs-models-common/src/{kebab}/services/{kebab}-database.service.ts',
+      path: 'generated/nestjs-models-common/src/{kebab}/services/{kebab}-database.service.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path:
-        'generated/nestjs-models-common/src/{kebab}/services/{kebab}.service.ts',
+      path: 'generated/nestjs-models-common/src/{kebab}/services/{kebab}.service.ts',
       engine: 'hpf',
       input: 'one',
     },
@@ -84,26 +80,22 @@ module.exports = {
       input: 'one',
     },
     {
-      path:
-        'generated/nestjs-models-common/mock/{kebab}/{kebab}-database.service.mock.ts',
+      path: 'generated/nestjs-models-common/mock/{kebab}/{kebab}-database.service.mock.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path:
-        'generated/nestjs-models-common/mock/{kebab}/{kebab}.service.mock.ts',
+      path: 'generated/nestjs-models-common/mock/{kebab}/{kebab}.service.mock.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path:
-        'generated/nestjs-models-common/test/{kebab}/{kebab}.service.spec.ts',
+      path: 'generated/nestjs-models-common/test/{kebab}/{kebab}.service.spec.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path:
-        'generated/nestjs-models-common/test/{kebab}/{kebab}-database.service.spec.ts',
+      path: 'generated/nestjs-models-common/test/{kebab}/{kebab}-database.service.spec.ts',
       engine: 'hpf',
       input: 'one',
     },

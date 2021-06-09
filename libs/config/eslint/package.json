@@ -1,0 +1,22 @@
+{
+  "name": "@tractr/eslint-config",
+  "version": "1.4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack.git"
+  },
+  "peerDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.25.0",
+    "@typescript-eslint/parser": "^4.25.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-json-files": "^1.1.0"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}
