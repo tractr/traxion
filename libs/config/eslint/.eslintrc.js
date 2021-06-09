@@ -72,7 +72,10 @@ module.exports = {
         ignoreDeclarationSort: true,
       },
     ],
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      { devDependencies: true, packageDir: process.cwd() },
+    ],
     'import/prefer-default-export': 'off',
     'import/order': [
       'warn',

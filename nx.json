@@ -68,6 +68,9 @@
     },
     "nestjs-database": {
       "tags": []
+    },
+    "nestjs-testing": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {

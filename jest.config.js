@@ -17,5 +17,6 @@ module.exports = {
     '<rootDir>/libs/config/commit',
     '<rootDir>/libs/config/hapify',
     '<rootDir>/libs/nestjs/database',
+    '<rootDir>/libs/nestjs/testing',
   ],
 };
