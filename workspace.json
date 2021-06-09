@@ -665,6 +665,48 @@
           }
         }
       }
+    },
+    "hapify-templates-angular-rext-client": {
+      "root": "libs/hapify/templates/angular-rext-client",
+      "sourceRoot": "libs/hapify/templates/angular-rext-client/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/hapify/templates/angular-rext-client/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hapify/templates/angular-rext-client"],
+          "options": {
+            "jestConfig": "libs/hapify/templates/angular-rext-client/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/hapify/templates/angular-rext-client",
+            "tsConfig": "libs/hapify/templates/angular-rext-client/tsconfig.lib.json",
+            "packageJson": "libs/hapify/templates/angular-rext-client/package.json",
+            "main": "libs/hapify/templates/angular-rext-client/src/index.ts",
+            "assets": [
+              "libs/hapify/templates/angular-rext-client/*.md",
+              "libs/hapify/templates/angular-rext-client/.hapifyrc.js",
+              {
+                "input": "libs/hapify/templates/angular-rext-client/hapify",
+                "glob": "**/*",
+                "output": "hapify"
+              }
+            ]
+          }
+        }
+      }
     }
   },
   "version": 2
