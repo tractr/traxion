@@ -285,6 +285,46 @@
           }
         }
       }
+    },
+    "hapify-templates-prisma": {
+      "root": "libs/hapify/templates/prisma",
+      "sourceRoot": "libs/hapify/templates/prisma/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hapify/templates/prisma/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hapify/templates/prisma"],
+          "options": {
+            "jestConfig": "libs/hapify/templates/prisma/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/hapify/templates/prisma",
+            "tsConfig": "libs/hapify/templates/prisma/tsconfig.lib.json",
+            "packageJson": "libs/hapify/templates/prisma/package.json",
+            "main": "libs/hapify/templates/prisma/src/index.ts",
+            "assets": [
+              "libs/hapify/templates/prisma/*.md",
+              "libs/hapify/templates/prisma/.hapifyrc.js",
+              {
+                "input": "libs/hapify/templates/prisma/hapify",
+                "glob": "**/*",
+                "output": "hapify"
+              }
+            ]
+          }
+        }
+      }
     }
   }
 }
