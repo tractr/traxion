@@ -59,6 +59,9 @@
     },
     "hapify-templates-rext-client": {
       "tags": []
+    },
+    "hapify-templates-angular-rext-client": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {
