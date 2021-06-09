@@ -1,0 +1,139 @@
+import {
+
+  <<if Fields boolean and searchable>>
+  IsBoolean, 
+  <<endif>>
+
+  <<if Fields email and searchable>>
+  IsEmail, 
+  <<endif>>
+
+  <<if Fields datetime and searchable>>
+  IsDate, 
+  <<endif>>
+
+  IsIn,
+  IsInt,
+  IsNumber,
+  IsOptional,
+  IsString,
+
+  <<if Fields url and searchable>>
+  IsUrl, 
+  <<endif>>
+
+  <<if Fields entity and searchable>>
+  IsUUID, 
+  <<endif>>
+   
+  Min,
+
+} from 'class-validator';
+  
+import {
+  <<for Fields enum enumField>>
+  <<Model pascal>><<enumField pascal>>,
+  <<endfor>>
+  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+  <<Model pascal>>Include,
+  <<<}>>>
+  SortOrder,
+  <<Model pascal>>,
+} from '@generated/models';
+ 
+export class <<Model pascal>>FindManyQueryDto {
+<<for Fields searchable and not password field>>
+  <<if field boolean>>
+  @IsBoolean(<<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field string or entity or enum>>
+  @IsString(<<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field enum>>
+  @IsIn(Object.values(<<Model pascal>><<field pascal>>), <<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field email>>
+  @IsEmail({}, <<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field entity>>
+  @IsUUID("all", <<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field url>>
+  @IsUrl({}, <<=listModifier(field)>>) 
+  <<endif>>
+
+  <<if field number>>
+  @IsNumber({},<<=listModifier(field)>>)
+  <<endif>>
+
+  <<if field datetime>>
+  @IsDate({},<<=listModifier(field)>>)
+  <<endif>>
+
+  @IsOptional()
+  <<=optionalTypedProperty(field)>>
+ 
+<<endfor>>
+
+<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+  @IsString({ each: true })
+  @IsIn(<<Model pascal>>Include, { each: true })
+  @IsOptional()
+  populate?: <<Model pascal>>Include[];
+<<<}>>>
+ 
+  @IsOptional()
+  @IsString()
+  @IsIn([
+  <<for Fields sortable field>>
+    '<<field camel>>',
+  <<endfor>>
+  ]) 
+  sort: keyof <<Model pascal>> = '<<for Fields primary field>><<field camel>><<endfor>>';
+ 
+  @IsOptional()
+  @IsIn(Object.values(SortOrder)) 
+  order: SortOrder = 'asc';
+  
+  @IsOptional()
+  @IsNumber()
+  @IsInt()
+  @Min(1)
+  take = 100;
+ 
+  @IsOptional()
+  @IsNumber()
+  @IsInt()
+  @Min(0)
+  skip = 0;
+}
+
+<<<
+function optionalTypedProperty(f) {
+  let out = f.names.camel;
+  out += "?: "
+  if (f.type === "boolean") out += "boolean";
+  else if (f.type === "string") out += "string";
+  else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;
+  else if (f.type === "number") out += "number";
+  else if (f.type === "datetime") out += "Date";
+  else if (f.type === "entity") {
+    out +=  "string"
+  }
+  if (f.multiple) out += "[]";
+  out += ";";
+  return out;
+}
+>>>
+
+<<<
+function listModifier(f) {
+  if (f.multiple) return "{ each: true}";
+  else return "";
+}
+>>>
