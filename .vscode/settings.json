@@ -15,6 +15,7 @@
     "source.fixAll": true,
     "source.fixAll.eslint": true
   },
+  "eslint.options": { "configFile": "./.eslintrc.json" },
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -26,5 +27,6 @@
   ],
   "editor.tabSize": 2,
   "typescript.preferences.importModuleSpecifier": "relative",
-  "typescript.updateImportsOnFileMove.enabled": "always"
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "eslint.enable": true
 }
