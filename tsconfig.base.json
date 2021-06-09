@@ -22,6 +22,9 @@
       "@tractr/hapify-templates-models": [
         "libs/hapify/templates/models/src/index.ts"
       ],
+      "@tractr/hapify-templates-nestjs-models-common": [
+        "libs/hapify/templates/nestjs-models-common/src/index.ts"
+      ],
       "@tractr/hapify-templates-prisma": [
         "libs/hapify/templates/prisma/src/index.ts"
       ]
