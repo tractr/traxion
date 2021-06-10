@@ -166,6 +166,51 @@
         }
       }
     },
+    "angular-tools": {
+      "projectType": "library",
+      "root": "libs/angular/tools",
+      "sourceRoot": "libs/angular/tools/src",
+      "prefix": "stack",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/angular:package",
+          "outputs": [
+            "dist/libs/angular/tools"
+          ],
+          "options": {
+            "project": "libs/angular/tools/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/angular/tools/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/angular/tools/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/angular/tools"
+          ],
+          "options": {
+            "jestConfig": "libs/angular/tools/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular/tools/src/**/*.ts",
+              "libs/angular/tools/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "api": {
       "projectType": "application",
       "root": "apps/api",

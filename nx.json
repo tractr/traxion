@@ -28,6 +28,9 @@
       "implicitDependencies": ["hapify-config", "hapify-generate-config"],
       "tags": []
     },
+    "angular-tools": {
+      "tags": []
+    },
     "api": {
       "tags": []
     },

@@ -53,7 +53,8 @@
       "@tractr/nestjs-core": ["libs/nestjs/core/src/index.ts"],
       "@tractr/nestjs-database": ["libs/nestjs/database/src/index.ts"],
       "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
-      "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"]
+      "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"],
+      "@tractr/angular-tools": ["libs/angular/tools/src/index.ts"]
     },
     "resolveJsonModule": true,
     "rootDir": ".",
