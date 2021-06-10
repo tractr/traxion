@@ -1,1 +1,1 @@
-export * from './lib/@tractr-nestjs-rbac.module';
+export * from './lib/nestjs-rbac.module';

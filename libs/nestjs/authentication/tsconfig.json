@@ -9,5 +9,13 @@
     {
       "path": "./tsconfig.spec.json"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "paths": {
+      "@tractr/nestjs-core": ["libs/nestjs/core/src/index.ts"],
+      "@tractr/nestjs-database": ["libs/nestjs/database/src/index.ts"],
+      "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
+      "@generated/*": ["libs/@generated/nestjs/generated/*"]
+    }
+  }
 }

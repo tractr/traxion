@@ -19,6 +19,8 @@
       "@generated/nestjs": ["libs/@generated/nestjs/src/index.ts"],
       "@generated/prisma": ["libs/@generated/prisma/src/index.ts"],
       "@generated/shared": ["libs/@generated/shared/src/index.ts"],
+      "@tractr/angular-components": ["libs/angular/components/src/index.ts"],
+      "@tractr/angular-tools": ["libs/angular/tools/src/index.ts"],
       "@tractr/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@tractr/commit-config": ["libs/config/commit/src/index.ts"],
       "@tractr/eslint-config": ["libs/config/eslint/src/index.ts"],
@@ -50,16 +52,14 @@
       "@tractr/hapify-templates-rext-client": [
         "libs/hapify/templates/rext-client/src/index.ts"
       ],
-      "@tractr/nestjs-core": ["libs/nestjs/core/src/index.ts"],
-      "@tractr/nestjs-database": ["libs/nestjs/database/src/index.ts"],
-      "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
-      "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"],
-      "@tractr/angular-tools": ["libs/angular/tools/src/index.ts"],
-      "@tractr/angular-components": ["libs/angular/components/src/index.ts"],
-      "@tractr/nestjs-rbac": ["libs/nestjs/rbac/src/index.ts"],
       "@tractr/nestjs-authentication": [
         "libs/nestjs/authentication/src/index.ts"
-      ]
+      ],
+      "@tractr/nestjs-core": ["libs/nestjs/core/src/index.ts"],
+      "@tractr/nestjs-database": ["libs/nestjs/database/src/index.ts"],
+      "@tractr/nestjs-rbac": ["libs/nestjs/rbac/src/index.ts"],
+      "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
+      "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"]
     },
     "resolveJsonModule": true,
     "rootDir": ".",

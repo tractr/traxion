@@ -848,6 +848,50 @@
         }
       }
     },
+    "nestjs-authentication": {
+      "projectType": "library",
+      "root": "libs/nestjs/authentication",
+      "sourceRoot": "libs/nestjs/authentication/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/nestjs/authentication/*.md"],
+            "main": "libs/nestjs/authentication/src/index.ts",
+            "outputPath": "dist/libs/nestjs/authentication",
+            "packageJson": "libs/nestjs/authentication/package.json",
+            "tsConfig": "libs/nestjs/authentication/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf generated",
+              "node ../../../dist/libs/hapify/generate-config/src",
+              "npx hpf generate"
+            ],
+            "cwd": "libs/nestjs/authentication",
+            "parallel": false
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/authentication/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/nestjs/authentication/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/nestjs/authentication"]
+        }
+      }
+    },
     "nestjs-core": {
       "projectType": "library",
       "root": "libs/nestjs/core",
@@ -933,6 +977,38 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/nestjs/database"]
+        }
+      }
+    },
+    "nestjs-rbac": {
+      "projectType": "library",
+      "root": "libs/nestjs/rbac",
+      "sourceRoot": "libs/nestjs/rbac/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/nestjs/rbac/*.md"],
+            "main": "libs/nestjs/rbac/src/index.ts",
+            "outputPath": "dist/libs/nestjs/rbac",
+            "packageJson": "libs/nestjs/rbac/package.json",
+            "tsConfig": "libs/nestjs/rbac/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/rbac/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/nestjs/rbac/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/nestjs/rbac"]
         }
       }
     },
@@ -1145,48 +1221,6 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/pwa-e2e/**/*.{js,ts}"]
-          }
-        }
-      }
-    },
-    "nestjs-rbac": {
-      "root": "libs/nestjs/rbac",
-      "sourceRoot": "libs/nestjs/rbac/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/nestjs/rbac/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/nestjs/rbac"],
-          "options": {
-            "jestConfig": "libs/nestjs/rbac/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "nestjs-authentication": {
-      "root": "libs/nestjs/authentication",
-      "sourceRoot": "libs/nestjs/authentication/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/nestjs/authentication/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/nestjs/authentication"],
-          "options": {
-            "jestConfig": "libs/nestjs/authentication/jest.config.js",
-            "passWithNoTests": true
           }
         }
       }

@@ -1,0 +1,47 @@
+import {
+  Controller,
+  Get,
+  Inject,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
+import { User } from '@prisma/client';
+import { Request, Response } from 'express';
+
+import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
+import { CurrentUser } from '../decorators';
+import { AccessTokenDto } from '../dtos';
+import { LocalAuthGuard } from '../guards';
+import { AuthenticationOptions } from '../interfaces';
+import { AuthenticationService } from '../services';
+
+@Controller()
+export class LoginController {
+  constructor(
+    @Inject(AUTHENTICATION_MODULE_OPTIONS)
+    private readonly authenticationOptions: AuthenticationOptions,
+    private readonly authenticationService: AuthenticationService,
+  ) {}
+
+  @UseGuards(LocalAuthGuard)
+  @Post('login')
+  async login(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<AccessTokenDto> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const token = await this.authenticationService.login((req as any).user);
+    res.cookie(
+      this.authenticationOptions.cookies.cookieName,
+      token.accessToken,
+    );
+    return token;
+  }
+
+  @Get('me')
+  getProfile(@CurrentUser() user: User): User {
+    return user;
+  }
+}

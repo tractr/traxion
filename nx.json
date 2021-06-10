@@ -13,19 +13,31 @@
   "npmScope": "tractr",
   "projects": {
     "@generated-angular": {
-      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "implicitDependencies": [
+        "hapify-config",
+        "hapify-generate-config"
+      ],
       "tags": []
     },
     "@generated-nestjs": {
-      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "implicitDependencies": [
+        "hapify-config",
+        "hapify-generate-config"
+      ],
       "tags": []
     },
     "@generated-prisma": {
-      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "implicitDependencies": [
+        "hapify-config",
+        "hapify-generate-config"
+      ],
       "tags": []
     },
     "@generated-shared": {
-      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "implicitDependencies": [
+        "hapify-config",
+        "hapify-generate-config"
+      ],
       "tags": []
     },
     "angular-components": {
@@ -77,6 +89,10 @@
       "tags": []
     },
     "nestjs-authentication": {
+      "implicitDependencies": [
+        "hapify-config",
+        "hapify-generate-config"
+      ],
       "tags": []
     },
     "nestjs-core": {
@@ -86,6 +102,10 @@
       "tags": []
     },
     "nestjs-rbac": {
+      "implicitDependencies": [
+        "hapify-config",
+        "hapify-generate-config"
+      ],
       "tags": []
     },
     "nestjs-testing": {
@@ -98,15 +118,25 @@
       "tags": []
     },
     "pwa-e2e": {
-      "implicitDependencies": ["pwa"],
+      "implicitDependencies": [
+        "pwa"
+      ],
       "tags": []
     }
   },
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "strictlyOrderedTargets": ["build", "generate"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "strictlyOrderedTargets": [
+          "build",
+          "generate"
+        ]
       },
       "runner": "@nrwl/workspace/tasks-runners/default"
     }
