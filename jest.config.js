@@ -25,5 +25,7 @@ module.exports = {
     '<rootDir>/libs/@generated/angular',
     '<rootDir>/libs/angular/tools',
     '<rootDir>/libs/angular/components',
+    '<rootDir>/libs/@tractr/nestjs-authentication',
+    '<rootDir>/libs/@tractr/nestjs-rbac',
   ],
 };

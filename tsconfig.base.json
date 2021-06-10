@@ -55,7 +55,11 @@
       "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
       "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"],
       "@tractr/angular-tools": ["libs/angular/tools/src/index.ts"],
-      "@tractr/angular-components": ["libs/angular/components/src/index.ts"]
+      "@tractr/angular-components": ["libs/angular/components/src/index.ts"],
+      "@tractr/nestjs-rbac": ["libs/nestjs/rbac/src/index.ts"],
+      "@tractr/nestjs-authentication": [
+        "libs/nestjs/authentication/src/index.ts"
+      ]
     },
     "resolveJsonModule": true,
     "rootDir": ".",

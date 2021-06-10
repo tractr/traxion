@@ -1,4 +1,7 @@
 {
+  "affected": {
+    "defaultBase": "main"
+  },
   "implicitDependencies": {
     ".eslintrc.json": "*",
     "hapify-models.json": "*",
@@ -7,19 +10,7 @@
       "devDependencies": "*"
     }
   },
-  "affected": {
-    "defaultBase": "main"
-  },
   "npmScope": "tractr",
-  "tasksRunnerOptions": {
-    "default": {
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "strictlyOrderedTargets": ["build", "generate"]
-      },
-      "runner": "@nrwl/workspace/tasks-runners/default"
-    }
-  },
   "projects": {
     "@generated-angular": {
       "implicitDependencies": ["hapify-config", "hapify-generate-config"],
@@ -35,6 +26,9 @@
     },
     "@generated-shared": {
       "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "tags": []
+    },
+    "angular-components": {
       "tags": []
     },
     "angular-tools": {
@@ -82,10 +76,16 @@
     "hapify-templates-rext-client": {
       "tags": []
     },
+    "nestjs-authentication": {
+      "tags": []
+    },
     "nestjs-core": {
       "tags": []
     },
     "nestjs-database": {
+      "tags": []
+    },
+    "nestjs-rbac": {
       "tags": []
     },
     "nestjs-testing": {
@@ -100,9 +100,15 @@
     "pwa-e2e": {
       "implicitDependencies": ["pwa"],
       "tags": []
-    },
-    "angular-components": {
-      "tags": []
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "strictlyOrderedTargets": ["build", "generate"]
+      },
+      "runner": "@nrwl/workspace/tasks-runners/default"
     }
   }
 }

@@ -1148,6 +1148,48 @@
           }
         }
       }
+    },
+    "nestjs-rbac": {
+      "root": "libs/nestjs/rbac",
+      "sourceRoot": "libs/nestjs/rbac/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/rbac/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/nestjs/rbac"],
+          "options": {
+            "jestConfig": "libs/nestjs/rbac/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "nestjs-authentication": {
+      "root": "libs/nestjs/authentication",
+      "sourceRoot": "libs/nestjs/authentication/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/authentication/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/nestjs/authentication"],
+          "options": {
+            "jestConfig": "libs/nestjs/authentication/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "version": 2
