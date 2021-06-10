@@ -18,5 +18,10 @@ module.exports = {
     '<rootDir>/libs/config/hapify',
     '<rootDir>/libs/nestjs/database',
     '<rootDir>/libs/nestjs/testing',
+    '<rootDir>/libs/@generated/prisma',
+    '<rootDir>/libs/test',
+    '<rootDir>/libs/@generated/shared',
+    '<rootDir>/libs/@generated/nestjs',
+    '<rootDir>/libs/@generated/angular',
   ],
 };

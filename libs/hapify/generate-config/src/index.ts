@@ -1,18 +1,18 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-continue */
 
-import { extname, join } from 'path';
+import { dirname, extname, join } from 'path';
 
 import { IConfig, IConfigTemplate } from '@hapify/cli/dist/interface/Config';
 import debugFactory from 'debug';
 import * as deepmerge from 'deepmerge';
-import { copy, pathExists, readFile, readJSON, writeJSON } from 'fs-extra';
-import pkgDir from 'pkg-dir';
+import { copy, readFile, readJSON, statSync, writeJSON } from 'fs-extra';
 import * as yaml from 'yaml';
 
 const debug = debugFactory('hpf-generate-config');
 
 const configFilenamePriorityImportOrder = [
+  '',
   '.hapifyrc.js',
   '.hapifyrc.yaml',
   '.hapifyrc.yml',
@@ -33,16 +33,28 @@ export interface HapifyConfig extends IConfig {
   templates: HapifyTemplateConfig[];
 }
 
+export function isDirectory(path: string) {
+  const stats = statSync(path);
+  return stats.isDirectory();
+}
+
 async function getHapifyConfigFromDirectory(
-  hapifyDirectory: string,
+  path: string,
 ): Promise<HapifyConfig | null> {
   for (const configFilename of configFilenamePriorityImportOrder) {
     const extension = extname(configFilename);
-    const configFilePath = join(hapifyDirectory, configFilename);
+    const configFilePath = extension === '' ? path : join(path, configFilename);
 
-    if (!(await pathExists(configFilePath))) continue;
+    debug(`Looking for ${configFilePath}`);
+
+    try {
+      if (isDirectory(configFilePath)) continue;
+    } catch {
+      continue;
+    }
 
     switch (extension) {
+      case '':
       case '.js':
       case '.json': {
         const config = await import(configFilePath);
@@ -81,16 +93,12 @@ function mergeHapifyConfigs(
 }
 
 async function getHapifyConfig(
-  hapifyDirectory: string = __dirname,
+  hapifyPath: string = process.cwd(),
   ignorePath: string[] = [],
 ): Promise<HapifyConfig | null> {
-  const packageJsonDirectory = await pkgDir(hapifyDirectory);
-
-  if (!packageJsonDirectory)
-    throw new Error(`Cannot find package.json for ${hapifyDirectory}`);
-
+  debug(`Get the main configuration from ${hapifyPath}`);
   // First we need to get the main configuration file
-  let mainConfig = await getHapifyConfigFromDirectory(packageJsonDirectory);
+  let mainConfig = await getHapifyConfigFromDirectory(hapifyPath);
 
   if (!mainConfig) return null;
 
@@ -99,7 +107,11 @@ async function getHapifyConfig(
   if (mainConfig.templates) {
     mainConfig.templates = mainConfig.templates.map((template) => ({
       ...template,
-      inputPath: join(packageJsonDirectory, 'hapify', template.path),
+      inputPath: join(
+        isDirectory(hapifyPath) ? hapifyPath : dirname(hapifyPath),
+        'hapify',
+        template.path,
+      ),
       outputPath: template.path,
     }));
   }
@@ -108,13 +120,15 @@ async function getHapifyConfig(
   if (!extendsList) return mainConfig;
 
   const promises: Promise<HapifyConfig | null>[] = [];
-  const toIgnore = [...ignorePath].concat(hapifyDirectory);
+  const toIgnore = [...ignorePath].concat(hapifyPath);
   const toExtendsList = Array.isArray(extendsList)
     ? extendsList
     : [extendsList];
 
   for (const extendPath of toExtendsList) {
-    const resolve = require.resolve(extendPath);
+    const resolve = require.resolve(extendPath, {
+      paths: [process.cwd(), hapifyPath],
+    });
     if (toIgnore && toIgnore.includes(resolve)) continue;
 
     promises.push(getHapifyConfig(resolve, toIgnore));
@@ -135,14 +149,12 @@ function formatTemplatePath(templatePath: string, extension: string): string {
 
 async function getHapifyOptions(): Promise<void> {
   debug('Start generate hapify configuration file');
-  const packageJsonDirectory = await pkgDir();
+  const currentDirectory = process.cwd();
 
-  if (!packageJsonDirectory)
-    throw new Error(`Cannot find package.json for the folder ${process.cwd()}`);
+  const hapifyConfig = await getHapifyConfig(currentDirectory);
 
-  const hapifyConfig = await getHapifyConfig(packageJsonDirectory);
-
-  if (!hapifyConfig) return;
+  if (!hapifyConfig)
+    throw new Error(`No hapify config found in ${process.cwd()} folder`);
 
   // At this point hapify should take the lead
   // Workaround that let hapify still run
@@ -154,7 +166,7 @@ async function getHapifyOptions(): Promise<void> {
         copy(
           formatTemplatePath(template.inputPath, template.engine),
           formatTemplatePath(
-            `${join(packageJsonDirectory || '', 'hapify', template.path)}`,
+            `${join(currentDirectory || '', 'hapify', template.path)}`,
             template.engine,
           ),
         ),
@@ -170,7 +182,7 @@ async function getHapifyOptions(): Promise<void> {
     return toSave;
   });
 
-  const writeFile = join(packageJsonDirectory || '', 'hapify.json');
+  const writeFile = join(currentDirectory || '', 'hapify.json');
   await writeJSON(writeFile, hapifyConfig, {
     spaces: 2,
   });

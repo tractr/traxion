@@ -1,9 +1,10 @@
 import { Global, Module } from '@nestjs/common';
-import { LoggerModule, ModuleOptionsHelper } from '@tractr/nestjs-core';
 
 import { PRISMA_OPTIONS } from './config';
 import { PRISMA_MODULE_OPTIONS } from './constants';
 import { DatabaseService, PrismaClientOptions } from './services';
+
+import { LoggerModule, ModuleOptionsHelper } from '@tractr/nestjs-core';
 
 @Global()
 @Module({

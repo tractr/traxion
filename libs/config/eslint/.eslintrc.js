@@ -46,12 +46,23 @@ module.exports = {
           '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
       },
     ],
+    '@typescript-eslint/restrict-template-expressions': [
+      'error',
+      {
+        allowNumber: true,
+        allowBoolean: true,
+        allowAny: true,
+        allowNullish: true,
+      },
+    ],
 
     // Typescript and eslint conflict
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': 'error',
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    'require-await': 'off',
+    '@typescript-eslint/require-await': 'off',
 
     // Typescript to hard rules
     '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -74,7 +85,7 @@ module.exports = {
     ],
     'import/no-extraneous-dependencies': [
       'error',
-      { devDependencies: true, packageDir: process.cwd() },
+      { devDependencies: true, packageDir: [process.cwd()] },
     ],
     'import/prefer-default-export': 'off',
     'import/order': [
