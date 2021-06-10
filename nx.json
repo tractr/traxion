@@ -93,7 +93,8 @@
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "strictlyOrderedTargets": ["build", "generate"]
       },
       "runner": "@nrwl/workspace/tasks-runners/default"
     }
