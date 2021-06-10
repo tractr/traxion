@@ -77,8 +77,14 @@ export class ResizeService {
   }
 
   getCurrentBreakpoint(): Breakpoint {
-    return this.breakpoints.find(
+    const breakpoint = this.breakpoints.find(
       (b) => window.innerWidth > b.minWidth && window.innerWidth <= b.maxWidth,
-    ) as Breakpoint;
+    );
+    if (!breakpoint) {
+      throw new Error(
+        `Cannot find breakpoint for window.innerWidth=${window.innerWidth}. Out of bounds.`,
+      );
+    }
+    return breakpoint;
   }
 }
