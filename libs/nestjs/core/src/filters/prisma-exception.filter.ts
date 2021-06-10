@@ -1,5 +1,4 @@
 import {
-  ArgumentsHost,
   Catch,
   ConflictException,
   ExceptionFilter,
@@ -10,9 +9,7 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 
 @Catch(PrismaClientKnownRequestError)
 export class PrismaExceptionFilter implements ExceptionFilter {
-  catch(exception: PrismaClientKnownRequestError, host: ArgumentsHost): void {
-    const ctx = host.switchToHttp();
-
+  catch(exception: PrismaClientKnownRequestError): void {
     switch (exception.code) {
       case 'P2001':
         throw new NotFoundException(exception);

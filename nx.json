@@ -4,13 +4,30 @@
   },
   "implicitDependencies": {
     ".eslintrc.json": "*",
+    "hapify-models.json": "*",
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
     }
   },
-  "npmScope": "stack",
+  "npmScope": "tractr",
   "projects": {
+    "@generated-angular": {
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "tags": []
+    },
+    "@generated-nestjs": {
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "tags": []
+    },
+    "@generated-prisma": {
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "tags": []
+    },
+    "@generated-shared": {
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "tags": []
+    },
     "api": {
       "tags": []
     },
@@ -29,6 +46,9 @@
     "hapify-generate-config": {
       "tags": []
     },
+    "hapify-templates-angular-rext-client": {
+      "tags": []
+    },
     "hapify-templates-dbml": {
       "tags": []
     },
@@ -44,23 +64,10 @@
     "hapify-templates-prisma": {
       "tags": []
     },
-    "prettier-config": {
-      "tags": []
-    },
-    "pwa": {
-      "tags": []
-    },
-    "pwa-e2e": {
-      "implicitDependencies": ["pwa"],
-      "tags": []
-    },
     "hapify-templates-rest-dtos": {
       "tags": []
     },
     "hapify-templates-rext-client": {
-      "tags": []
-    },
-    "hapify-templates-angular-rext-client": {
       "tags": []
     },
     "nestjs-core": {
@@ -70,6 +77,16 @@
       "tags": []
     },
     "nestjs-testing": {
+      "tags": []
+    },
+    "prettier-config": {
+      "tags": []
+    },
+    "pwa": {
+      "tags": []
+    },
+    "pwa-e2e": {
+      "implicitDependencies": ["pwa"],
       "tags": []
     }
   },

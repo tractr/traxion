@@ -46,7 +46,14 @@
       "@tractr/nestjs-core": ["libs/nestjs/core/src/index.ts"],
       "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"],
       "@tractr/nestjs-database": ["libs/nestjs/database/src/index.ts"],
-      "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"]
+      "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
+      "@generated/prisma": ["libs/@generated/prisma/src/index.ts"],
+      "@generated/shared": ["libs/@generated/shared/src/index.ts"],
+      "@generated/nestjs": ["libs/@generated/nestjs/src/index.ts"],
+      "@generated/angular": ["libs/@generated/angular/src/index.ts"],
+      "@app/*": ["apps/pwa/src/app/*"],
+      "@env/*": ["apps/pwa/src/environments/*"],
+      "@assets/*": ["apps/pwa/src/assets/*"]
     },
     "resolveJsonModule": true,
     "rootDir": ".",

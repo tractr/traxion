@@ -18,5 +18,10 @@ module.exports = {
       engine: 'hpf',
       input: 'all',
     },
+    {
+      path: 'generated/angular-rext-client/index.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
   ],
 };

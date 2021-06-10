@@ -51,19 +51,20 @@ yarn.lock
 **/prisma/dev.db
 
 # Hapify generated files
-apps/**/prisma/schemas/generated.prisma
+**/prisma/schemas/generated.prisma
 
 # Other generated files
-apps/**/prisma/schema.prisma
+**/prisma/schema.prisma
 
 # Generated files
-apps/**/generated
+**/generated
 
 # Hapify folder
-apps/**/prisma/schemas/generated.prisma.hpf
-apps/**/hapify
+**/prisma/schemas/generated.prisma.hpf
+**/hapify
 !**/hapify/validator.js
 !**/config/hapify
+!**/libs/hapify
 
 # Local ignore
 *.local-ignore*

@@ -5,11 +5,11 @@ import {
   OnModuleDestroy,
   OnModuleInit,
 } from '@nestjs/common';
-import { Logger } from '@tractr/nestjs-core';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 import { PRISMA_MODULE_OPTIONS } from '../constants';
 
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Logger } from '@tractr/nestjs-core';
 
 export type PrismaClientOptions = Omit<
   Prisma.PrismaClientOptions,
@@ -39,7 +39,8 @@ export const enforceOptions: EnforcePrismaClientOptions = {
 @Injectable()
 export class DatabaseService
   extends PrismaClient<Prisma.PrismaClientOptions & EnforcePrismaClientOptions>
-  implements OnModuleInit, OnModuleDestroy {
+  implements OnModuleInit, OnModuleDestroy
+{
   constructor(
     @Inject(PRISMA_MODULE_OPTIONS)
     protected readonly prismaOptions: PrismaClientOptions,
