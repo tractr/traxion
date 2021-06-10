@@ -77,8 +77,9 @@ export class ResizeService {
   }
 
   getCurrentBreakpoint(): Breakpoint {
+    /* eslint-disable @typescript-eslint/no-non-null-assertion */
     return this.breakpoints.find(
       (b) => window.innerWidth > b.minWidth && window.innerWidth <= b.maxWidth,
-    ) as Breakpoint;
+    )!;
   }
 }
