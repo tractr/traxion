@@ -105,7 +105,7 @@ describe('AuthService', () => {
     });
   });
 
-  describe.only('authenticateLoginCredentials', () => {
+  describe('authenticateLoginCredentials', () => {
     it('should throw a UserNotFoundError if no user has been found by the login field', async () => {
       mockUserService.findUnique.mockReturnValueOnce(null);
 

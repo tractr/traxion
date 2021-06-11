@@ -4,7 +4,7 @@ import { User } from '@prisma/client';
 import { StrategyOptions } from 'passport-jwt';
 import { IStrategyOptionsWithRequest } from 'passport-local';
 
-export interface AuthenticationOptions extends Record<string, unknown> {
+export interface AuthenticationOptions {
   login: {
     saltRounds?: number;
   };

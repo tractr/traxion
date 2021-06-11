@@ -27,7 +27,14 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
   AUTHENTICATION_OPTIONS,
 ) {
   static register(
-    options: AuthenticationOptions = AUTHENTICATION_OPTIONS,
+    {
+      imports,
+      providers,
+      exports,
+      controllers,
+      dependencies,
+      ...options
+    }: AuthenticationOptions & ModuleOverrideMetadata = AUTHENTICATION_OPTIONS,
     overrides: ModuleOverrideMetadata = {},
   ): DynamicModule {
     const moduleOptions = {
@@ -38,7 +45,14 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
     const authenticationOptionsModule = super.register(moduleOptions);
     return this.createAuthenticationModuleFromOptions(
       authenticationOptionsModule,
-      overrides,
+      {
+        imports,
+        providers,
+        exports,
+        controllers,
+        dependencies,
+        ...overrides,
+      },
     );
   }
 
@@ -96,45 +110,3 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
     };
   }
 }
-
-// const {
-//   models,
-//   jwtModuleAsyncOptions,
-//   passportModuleOptions,
-//   ...options
-// }: AuthenticationModuleOptions = {
-//   models: UserModelModule,
-//   authenticationOptions: {},
-//   jwtModuleAsyncOptions: {
-//     useClass: JwtConfigService,
-//   },
-//   passportModuleOptions: {
-//     useClass: PassportAuthOptionsFactory,
-//   },
-//   ...moduleOptions,
-// };
-
-// const passportModule = PassportModule.registerAsync(passportModuleOptions);
-// const jwtModule = JwtModule.registerAsync(jwtModuleAsyncOptions);
-// return {
-//   module: AuthenticationModule,
-//   imports: [
-//     DatabaseModule,
-//     LogModule,
-//     jwtModule,
-//     passportModule,
-//     models.register(options),
-//   ],
-//   exports: [AuthenticationService, JwtStrategy, LocalStrategy],
-//   providers: [
-//     { provide: APP_GUARD, useClass: JwtAuthGuard },
-//     AuthenticationService,
-//     ...(jwtModule.providers ?? []),
-//     ...(passportModule.providers ?? []),
-//     StrategyOptionsService,
-//     JwtStrategy,
-//     LocalStrategy,
-//     UserCustomService,
-//   ],
-//   controllers: [LoginController],
-// };
