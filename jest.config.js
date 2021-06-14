@@ -25,5 +25,6 @@ module.exports = {
     '<rootDir>/libs/@generated/angular',
     '<rootDir>/libs/angular/tools',
     '<rootDir>/libs/angular/components',
+    '<rootDir>/apps/angular-pwa',
   ],
 };

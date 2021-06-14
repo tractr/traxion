@@ -103,6 +103,13 @@
     },
     "angular-components": {
       "tags": []
+    },
+    "angular-pwa": {
+      "tags": []
+    },
+    "angular-pwa-e2e": {
+      "tags": [],
+      "implicitDependencies": ["angular-pwa"]
     }
   }
 }
