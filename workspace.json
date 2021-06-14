@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "cli": {
     "defaultCollection": "@nrwl/angular"
   },
@@ -16,17 +17,17 @@
       }
     },
     "@nrwl/angular:application": {
-      "e2eTestRunner": "cypress",
-      "linter": "eslint",
       "style": "less",
-      "unitTestRunner": "jest"
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:component": {
       "style": "less"
     },
     "@nrwl/angular:library": {
-      "linter": "eslint",
       "style": "less",
+      "linter": "eslint",
       "unitTestRunner": "jest"
     }
   },
@@ -174,9 +175,7 @@
       "targets": {
         "build": {
           "executor": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/angular/tools"
-          ],
+          "outputs": ["dist/libs/angular/tools"],
           "options": {
             "project": "libs/angular/tools/ng-package.json"
           },
@@ -192,9 +191,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/angular/tools"
-          ],
+          "outputs": ["coverage/libs/angular/tools"],
           "options": {
             "jestConfig": "libs/angular/tools/jest.config.js",
             "passWithNoTests": true
@@ -887,7 +884,47 @@
           }
         }
       }
+    },
+    "angular-components": {
+      "projectType": "library",
+      "root": "libs/angular/components",
+      "sourceRoot": "libs/angular/components/src",
+      "prefix": "tractr",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/angular:package",
+          "outputs": ["dist/libs/angular/components"],
+          "options": {
+            "project": "libs/angular/components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/angular/components/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/angular/components/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/angular/components"],
+          "options": {
+            "jestConfig": "libs/angular/components/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular/components/src/**/*.ts",
+              "libs/angular/components/src/**/*.html"
+            ]
+          }
+        }
+      }
     }
-  },
-  "version": 2
+  }
 }

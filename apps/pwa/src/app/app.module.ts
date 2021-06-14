@@ -4,9 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 
+import { AngularComponentsModule } from '@tractr/angular-components';
+
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule],
+  imports: [BrowserModule, HttpClientModule, AngularComponentsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

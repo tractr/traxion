@@ -24,5 +24,6 @@ module.exports = {
     '<rootDir>/libs/@generated/nestjs',
     '<rootDir>/libs/@generated/angular',
     '<rootDir>/libs/angular/tools',
+    '<rootDir>/libs/angular/components',
   ],
 };
