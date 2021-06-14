@@ -15,6 +15,7 @@
     "affected:format": "nx format:write",
     "affected:format:write": "nx format:write",
     "affected:format:check": "nx format:check",
+    "affected:version": "nx format:check",
     "build": "nx run-many --all --target=build",
     "dep-graph": "nx dep-graph",
     "e2e": "nx e2e",
@@ -29,7 +30,8 @@
     "start": "nx serve",
     "test": " nx run-many --all --target=test",
     "update": "nx migrate latest",
-    "workspace-generator": "nx workspace-generator"
+    "workspace-generator": "nx workspace-generator",
+    "cz": "cz"
   },
   "dependencies": {
     "@angular/animations": "^12.0.3",
@@ -74,6 +76,7 @@
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@hapify/cli": "^1.2.0",
+    "@jscutlery/semver": "^2.3.1",
     "@nestjs/schematics": "^7.3.1",
     "@nestjs/testing": "^7.6.17",
     "@nrwl/angular": "12.3.6",

@@ -1,0 +1,49 @@
+#syntax=docker/dockerfile:1.2
+
+# ---- Base Node ----
+FROM node:16-alpine AS base
+ARG app
+ARG NODE_AUTH_TOKEN
+
+# set working directory
+WORKDIR /root/tractr
+
+# copy project file
+COPY ./package.json .
+COPY ./yarn.lock .
+COPY ./tsconfig.json .
+COPY ./lerna.json .
+COPY ./hapify-models.json .
+COPY ${app}/prisma ${app}/prisma
+COPY ${app}/.hapifyrc.js ${app}/
+COPY ${app}/nest-cli.json ${app}/
+COPY ${app}/package.json ${app}/
+COPY ${app}/tsconfig.json ${app}/
+COPY ${app}/tsconfig.build.json ${app}/
+
+# ---- Production Dependencies ----
+FROM base AS dependencies-prod
+RUN --mount=type=secret,id=npmrc,target=/root/.npmrc \
+    NODE_AUTH_TOKEN=${NODE_AUTH_TOKEN} \
+    yarn --production --frozen-lock --ignore-scripts --prefer-offline --no-audit --no-progress
+
+# ---- Dependencies ----
+FROM base AS dependencies-dev
+RUN --mount=type=secret,id=npmrc,target=/root/.npmrc \
+    NODE_AUTH_TOKEN=${NODE_AUTH_TOKEN} \
+    yarn --frozen-lock --ignore-scripts --prefer-offline --no-audit --no-progress
+
+# ---- Dependencies ----
+FROM dependencies-dev AS build
+WORKDIR /root/tractr/${app}
+COPY ${app}/src src
+RUN npm run build --no-update-notifier
+
+# ---- Release ----
+FROM dependencies-prod AS release
+WORKDIR /root/tractr/${app}
+COPY --from=build /root/tractr/${app}/dist ./dist
+
+# expose port and define CMD
+EXPOSE 3000
+CMD ["npm", "run", "start:prod"]

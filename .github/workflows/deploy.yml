@@ -1,0 +1,160 @@
+name: Release and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # Take all the packages and release them to https://npm.pkg.github.com
+  npm-release:
+    # Our code will run on node 16 and Linux
+    strategy:
+      matrix:
+        node: [16.x]
+        os: [node-16]
+
+    name: Release npm packages on node ${{ matrix.node }} and ${{ matrix.os }}
+    runs-on: [self-hosted, '${{ matrix.os }}']
+
+    outputs:
+      app: ${{ steps.set-matrix.outputs.app }}
+
+    steps:
+      # First we checkout the code
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # We initialize the node action
+      - name: Use node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://npm.pkg.github.com
+
+      # We get our cache compare to our package-lock
+      - uses: actions/cache@v2.1.4
+        with:
+          path: '~/.npm'
+          key:
+            ${{ matrix.os }}-npm-${{ matrix.node }}-${{ hashFiles('**/npm.lock')
+            }}
+          restore-keys: |
+            ${{ matrix.os }}-npm-${{ matrix.node }}-
+
+      # We install our dependencies
+      - name: Run npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm ci --prefer-offline --no-audit --no-progress
+
+      # We build our code base
+      - name: Run npm build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run build
+
+      # We run our version script
+      - name: Run npm release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run affected:release
+
+      # We push our modification to our git
+      - name: Run Affected Tests
+        run: git push
+
+      # Set the matrix apps that have been affected by all the changes
+      - id: app
+      run: echo "::set-output name=app::$(nx affected:apps --plain | sed 's/ /,/g')"
+
+  docker-release:
+    # If we got some change inside apps/** we execute this job
+    if: |
+      !failure() && !contains(toJson(needs.docker-changes.outputs.apps), '')
+    needs: [npm-release]
+    strategy:
+      matrix:
+        app: ${{ needs.npm-release.outputs.app }}
+        node: [16.x]
+        os: [node-16]
+        scope: [tractr]
+        repository: [tractr]
+    name: docker release ${{ matrix.app }} (@${{ matrix.scope }})
+    runs-on: [self-hosted, '${{ matrix.os }}']
+    steps:
+      # Checkout the source code
+      - uses: actions/checkout@v2
+
+      # Setup the node js env
+      - name: use node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://npm.pkg.github.com
+
+      # Get some cache to speed up docker build
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ matrix.app }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-${{ matrix.app }}-
+
+      # Register some meta data to build docker
+      - name: Docker meta
+        id: docker_meta
+        uses: crazy-max/ghaction-docker-meta@v1
+        with:
+          images:
+            ghcr.io/${{ matrix.repository }}/${{ matrix.scope }}-${{ matrix.app
+            }}
+          tag-sha: true
+          tag-latest: true
+
+      # Setup QEMU
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      # RSetup buildx
+      - uses: docker/setup-buildx-action@v1
+        id: buildx
+        with:
+          install: true
+
+      # Loggin to our docker registry
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GH_TOKEN }}
+
+      # Build and push our docker images to the registry
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          file: ./apps/${{ matrix.app }}/Dockerfile
+          build-args: |
+            app=apps/${{ matrix.app }}
+            NODE_AUTH_TOKEN=${{ secrets.NPM_TOKEN }}
+          secret-files: npmrc=${{ env.NPM_CONFIG_USERCONFIG }}
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          labels: ${{ steps.docker_meta.outputs.labels }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+        # Temp fix
+        # https://github.com/docker/build-push-action/issues/252
+        # https://github.com/moby/buildkit/issues/1896
+
+      # Change the cache for buildx
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache

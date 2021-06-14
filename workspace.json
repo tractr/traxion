@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "cli": {
     "defaultCollection": "@nrwl/angular"
   },
@@ -17,17 +16,17 @@
       }
     },
     "@nrwl/angular:application": {
-      "style": "less",
+      "e2eTestRunner": "cypress",
       "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
+      "style": "less",
+      "unitTestRunner": "jest"
     },
     "@nrwl/angular:component": {
       "style": "less"
     },
     "@nrwl/angular:library": {
-      "style": "less",
       "linter": "eslint",
+      "style": "less",
       "unitTestRunner": "jest"
     }
   },
@@ -167,35 +166,68 @@
         }
       }
     },
-    "angular-tools": {
+    "angular-components": {
+      "prefix": "tractr",
       "projectType": "library",
-      "root": "libs/angular/tools",
-      "sourceRoot": "libs/angular/tools/src",
-      "prefix": "stack",
+      "root": "libs/angular/components",
+      "sourceRoot": "libs/angular/components/src",
       "targets": {
         "build": {
-          "executor": "@nrwl/angular:package",
-          "outputs": ["dist/libs/angular/tools"],
-          "options": {
-            "project": "libs/angular/tools/ng-package.json"
-          },
           "configurations": {
-            "production": {
-              "tsConfig": "libs/angular/tools/tsconfig.lib.prod.json"
-            },
             "development": {
-              "tsConfig": "libs/angular/tools/tsconfig.lib.json"
+              "tsConfig": "libs/angular/components/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/angular/components/tsconfig.lib.prod.json"
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:package",
+          "options": {
+            "project": "libs/angular/components/ng-package.json"
+          },
+          "outputs": ["dist/libs/angular/components"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular/components/src/**/*.ts",
+              "libs/angular/components/src/**/*.html"
+            ]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/angular/tools"],
           "options": {
-            "jestConfig": "libs/angular/tools/jest.config.js",
+            "jestConfig": "libs/angular/components/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/angular/components"]
+        }
+      }
+    },
+    "angular-tools": {
+      "prefix": "stack",
+      "projectType": "library",
+      "root": "libs/angular/tools",
+      "sourceRoot": "libs/angular/tools/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "development": {
+              "tsConfig": "libs/angular/tools/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/angular/tools/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:package",
+          "options": {
+            "project": "libs/angular/tools/ng-package.json"
+          },
+          "outputs": ["dist/libs/angular/tools"]
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
@@ -204,6 +236,20 @@
               "libs/angular/tools/src/**/*.ts",
               "libs/angular/tools/src/**/*.html"
             ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular/tools/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/angular/tools"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
           }
         }
       }
@@ -255,6 +301,12 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/apps/api"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -305,6 +357,12 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/config/commit"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -340,6 +398,12 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/config/eslint"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -381,6 +445,12 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/config/hapify"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -419,6 +489,12 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/hapify/generate-config"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -446,6 +522,12 @@
             "tsConfig": "libs/hapify/templates/angular-rext-client/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -473,6 +555,12 @@
             "tsConfig": "libs/hapify/templates/dbml/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -500,6 +588,12 @@
             "tsConfig": "libs/hapify/templates/models/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -527,6 +621,12 @@
             "tsConfig": "libs/hapify/templates/nestjs-models/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -554,6 +654,12 @@
             "tsConfig": "libs/hapify/templates/nestjs-models-common/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -581,6 +687,12 @@
             "tsConfig": "libs/hapify/templates/prisma/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -608,6 +720,12 @@
             "tsConfig": "libs/hapify/templates/rest-dtos/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -635,6 +753,12 @@
             "tsConfig": "libs/hapify/templates/rext-client/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -667,6 +791,12 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/nestjs/core"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -699,6 +829,12 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/nestjs/database"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -731,6 +867,12 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/nestjs/testing"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -763,6 +905,12 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/config/prettier"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -856,6 +1004,12 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/apps/pwa"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -884,47 +1038,7 @@
           }
         }
       }
-    },
-    "angular-components": {
-      "projectType": "library",
-      "root": "libs/angular/components",
-      "sourceRoot": "libs/angular/components/src",
-      "prefix": "tractr",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/angular:package",
-          "outputs": ["dist/libs/angular/components"],
-          "options": {
-            "project": "libs/angular/components/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/angular/components/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "libs/angular/components/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/angular/components"],
-          "options": {
-            "jestConfig": "libs/angular/components/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/angular/components/src/**/*.ts",
-              "libs/angular/components/src/**/*.html"
-            ]
-          }
-        }
-      }
     }
-  }
+  },
+  "version": 2
 }
