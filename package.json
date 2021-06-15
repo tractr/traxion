@@ -15,7 +15,7 @@
     "affected:format": "nx format:write",
     "affected:format:write": "nx format:write",
     "affected:format:check": "nx format:check",
-    "affected:version": "nx format:check",
+    "affected:release": "nx affected --target version --push",
     "build": "nx run-many --all --target=build",
     "dep-graph": "nx dep-graph",
     "e2e": "nx e2e",
