@@ -1,0 +1,255 @@
+{
+  "name": "Angular lib that host all hapify angular modules",
+  "description": "A lib that will host all angular file from hapify",
+  "templates": [
+    {
+      "path": "generated/angular-rext-client/services/{kebab}.service.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/angular-rext-client/services/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/angular-rext-client/angular-rext.module.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/angular-rext-client/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rext-client/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rext-client/rext-client.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rext-client/helpers/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rext-client/helpers/rest-ajax.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rext-client/helpers/transform-and-validate.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rext-client/helpers/url.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rext-client/services/{kebab}.service.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rext-client/services/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rest-dtos/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rest-dtos/dtos/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rest-dtos/dtos/{kebab}/index.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-create-body.dto.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-find-unique-query.dto.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-find-unique-params.dto.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-find-many-query.dto.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-count-query.dto.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-update-params.dto.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-update-body.dto.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-upsert-params.dto.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-upsert-body.dto.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-delete-params.dto.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/mock/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/rest-dtos/mock/{kebab}/index.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-count-query.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-create-body.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-find-unique-params.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-find-unique-query.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-find-many-query.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-update-params.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-update-body.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-upsert-params.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-upsert-body.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-delete-params.dto.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/models/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/models/enums/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/models/enums/sort-order.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/models/enums/{kebab}.enum.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/models/models/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/models/models/{kebab}.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
+      "path": "generated/models/mock/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/models/mock/{kebab}.mock.ts",
+      "engine": "hpf",
+      "input": "one"
+    }
+  ],
+  "version": "1",
+  "validatorPath": "../../../dist/libs/config/hapify/validator.js",
+  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
+  "project": "../../../hapify-models.json",
+  "defaultFields": [
+    {
+      "name": "id",
+      "type": "string",
+      "subtype": null,
+      "reference": null,
+      "primary": true,
+      "unique": false,
+      "label": false,
+      "nullable": false,
+      "multiple": false,
+      "embedded": false,
+      "searchable": false,
+      "sortable": false,
+      "hidden": false,
+      "internal": true,
+      "restricted": false,
+      "ownership": false
+    }
+  ]
+}

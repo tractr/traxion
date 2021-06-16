@@ -1,21 +1,12 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
 # compiled output
-dist
-node_modules
+/dist
+/tmp
+/out-tsc
 
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-
-# OS
-.DS_Store
-
-# Tests
-/coverage
-/.nyc_output
+# dependencies
+/node_modules
 
 # IDEs and editors
 /.idea
@@ -25,6 +16,7 @@ lerna-debug.log*
 *.launch
 .settings/
 *.sublime-workspace
+.vim
 
 # IDE - VSCode
 .vscode/*
@@ -33,13 +25,27 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
 # Environment file
 .env
 **/.env
 
 # Package lock from npm i
-package-lock.json
-**/yarn.lock
+yarn.lock
+**/package-lock.json
 
 # Local sqlite database
 **/prisma/dev.db
@@ -51,12 +57,14 @@ package-lock.json
 **/prisma/schema.prisma
 
 # Generated files
-**generated
+**/generated
 
 # Hapify folder
 **/prisma/schemas/generated.prisma.hpf
 **/hapify
 !**/hapify/validator.js
+!**/config/hapify
+!**/libs/hapify
 
 # Local ignore
 *.local-ignore*

@@ -6,41 +6,19 @@ on:
       - main
 
 jobs:
-  npm-changes:
-    name: Check if packages/** has some changes
-    runs-on: ubuntu-latest
-    outputs:
-      # Expose matched filters as job 'packages' output variable
-      packages: ${{ steps.filter.outputs.packages }}
-    steps:
-      - uses: actions/checkout@v2
-      # For pull requests it's not necessary to checkout the code
-      - uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          # Use context to get the branch where commits were pushed.
-          # If there is only one long-lived branch (e.g. master),
-          # you can specify it directly.
-          # If it's not configured, the repository default branch is used.
-          base: ${{ github.ref }}
-          token: ${{ secrets.GH_TOKEN }}
-          filters: |
-            packages:
-            - 'packages/**'
-
   # Take all the packages and release them to https://npm.pkg.github.com
   npm-release:
-    needs: [npm-changes]
-    if: ${{ needs.npm-changes.outputs.packages == 'true' }}
-
     # Our code will run on node 16 and Linux
     strategy:
       matrix:
         node: [16.x]
-        os: [ubuntu-latest]
+        os: [node-16]
 
     name: Release npm packages on node ${{ matrix.node }} and ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    runs-on: [self-hosted, '${{ matrix.os }}']
+
+    outputs:
+      app: ${{ steps.set-matrix.outputs.app }}
 
     steps:
       # First we checkout the code
@@ -49,35 +27,28 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      # We configure our node environmment and our registry
-      - name: use node.js ${{ matrix.node }}
-        uses: actions/setup-node@v2.1.5
+      # We initialize the node action
+      - name: Use node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node}}
+          node-version: ${{ matrix.node }}
           registry-url: https://npm.pkg.github.com
 
       # We get our cache compare to our package-lock
-      - name: Get npm cache directory
-        id: yarn-cache-dir
-        run: |
-          echo "::set-output name=dir::$(yarn cache dir)"
       - uses: actions/cache@v2.1.4
         with:
-          path: |
-            ${{ steps.yarn-cache-dir.outputs.dir }}
-            node_modules
-            */*/node_modules
+          path: '~/.npm'
           key:
-            ${{ matrix.os }}-yarn-${{ matrix.node }}-${{
-            hashFiles('**/yarn.lock') }}
+            ${{ matrix.os }}-npm-${{ matrix.node }}-${{ hashFiles('**/npm.lock')
+            }}
           restore-keys: |
-            ${{ matrix.os }}-yarn-${{ matrix.node }}-
+            ${{ matrix.os }}-npm-${{ matrix.node }}-
 
       # We install our dependencies
       - name: Run npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn --frozen-lock --prefer-offline --no-audit --no-progress
+        run: npm ci --prefer-offline --no-audit --no-progress
 
       # We build our code base
       - name: Run npm build
@@ -85,58 +56,34 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run build
 
-      # We release our packages to our registry
-      - name: Relase npm packages
-        if: success()
+      # We run our version script
+      - name: Run npm release
         env:
-          CI: true
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx multi-semantic-release --sequential-init
+        run: npm run affected:release
 
-  docker-changes:
-    name: Check if apps/** has some changes
-    if: always()
-    needs: [npm-release]
-    runs-on: ubuntu-latest
-    outputs:
-      # Expose matched filters as matrix output variable
-      apps: ${{ steps.filter.outputs.changes }}
-      backend-starter: ${{ steps.filter.outputs.backend-starter }}
-      angular-pwa: ${{ steps.filter.outputs.angular-pwa }}
-    steps:
-      - uses: actions/checkout@v2
-      # For pull requests it's not necessary to checkout the code
-      - uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          # Use context to get the branch where commits were pushed.
-          # If there is only one long-lived branch (e.g. master),
-          # you can specify it directly.
-          # If it's not configured, the repository default branch is used.
-          base: ${{ github.ref }}
-          token: ${{ secrets.GH_TOKEN }}
-          filters: |
-            backend-starter: 
-              - 'apps/backend-starter/**'
-            angular-pwa:
-              - 'apps/angular-pwa/**'
+      # We push our modification to our git
+      - name: Run Affected Tests
+        run: git push
+
+      # Set the matrix apps that have been affected by all the changes
+      - id: app
+      run: echo "::set-output name=app::$(nx affected:apps --plain | sed 's/ /,/g')"
 
   docker-release:
     # If we got some change inside apps/** we execute this job
-    if:
-      always() && (needs.docker-changes.outputs.backend-starter == 'true' ||
-      needs.docker-changes.outputs.angular-pwa == 'true')
-    needs: [docker-changes]
+    if: |
+      !failure() && !contains(toJson(needs.docker-changes.outputs.apps), '')
+    needs: [npm-release]
     strategy:
       matrix:
-        app: ${{ fromJSON(needs.docker-changes.outputs.apps) }}
+        app: ${{ needs.npm-release.outputs.app }}
         node: [16.x]
-        os: [ubuntu-latest]
+        os: [node-16]
         scope: [tractr]
         repository: [tractr]
     name: docker release ${{ matrix.app }} (@${{ matrix.scope }})
-    runs-on: ${{ matrix.os }}
+    runs-on: [self-hosted, '${{ matrix.os }}']
     steps:
       # Checkout the source code
       - uses: actions/checkout@v2

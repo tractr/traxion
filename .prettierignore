@@ -1,3 +1,6 @@
-node_modules/
-dist/
-generated/
+# Add files here to ignore them from prettier formatting
+
+/dist
+/coverage
+
+*.local-ignore*

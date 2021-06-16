@@ -1,0 +1,1044 @@
+{
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "pwa",
+  "generators": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "e2eTestRunner": "cypress",
+      "linter": "eslint",
+      "style": "less",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "less"
+    },
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "style": "less",
+      "unitTestRunner": "jest"
+    }
+  },
+  "projects": {
+    "@generated-angular": {
+      "projectType": "library",
+      "root": "libs/@generated/angular",
+      "sourceRoot": "libs/@generated/angular/src",
+      "targets": {
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf generated",
+              "node ../../../dist/libs/hapify/generate-config/src",
+              "npx hpf generate"
+            ],
+            "cwd": "libs/@generated/angular",
+            "parallel": false
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/@generated/angular/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/@generated/angular/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/@generated/angular"]
+        }
+      }
+    },
+    "@generated-nestjs": {
+      "projectType": "library",
+      "root": "libs/@generated/nestjs",
+      "sourceRoot": "libs/@generated/nestjs/src",
+      "targets": {
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf generated",
+              "node ../../../dist/libs/hapify/generate-config/src",
+              "npx hpf generate"
+            ],
+            "cwd": "libs/@generated/nestjs",
+            "parallel": false
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/@generated/nestjs/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/@generated/nestjs/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/@generated/nestjs"]
+        }
+      }
+    },
+    "@generated-prisma": {
+      "projectType": "library",
+      "root": "libs/@generated/prisma",
+      "sourceRoot": "libs/@generated/prisma/src",
+      "targets": {
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf generated",
+              "node ../../../dist/libs/hapify/generate-config/src",
+              "npx hpf generate",
+              "npx prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
+              "npx prisma format",
+              "npx prisma generate"
+            ],
+            "cwd": "libs/@generated/prisma",
+            "parallel": false
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/@generated/prisma/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/@generated/prisma/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/@generated/prisma"]
+        }
+      }
+    },
+    "@generated-shared": {
+      "projectType": "library",
+      "root": "libs/@generated/shared",
+      "sourceRoot": "libs/@generated/shared/src",
+      "targets": {
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf generated",
+              "node ../../../dist/libs/hapify/generate-config/src",
+              "npx hpf generate"
+            ],
+            "cwd": "libs/@generated/shared",
+            "parallel": false
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/@generated/shared/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/@generated/shared/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/@generated/shared"]
+        }
+      }
+    },
+    "angular-components": {
+      "prefix": "tractr",
+      "projectType": "library",
+      "root": "libs/angular/components",
+      "sourceRoot": "libs/angular/components/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "development": {
+              "tsConfig": "libs/angular/components/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/angular/components/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:package",
+          "options": {
+            "project": "libs/angular/components/ng-package.json"
+          },
+          "outputs": ["dist/libs/angular/components"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular/components/src/**/*.ts",
+              "libs/angular/components/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular/components/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/angular/components"]
+        }
+      }
+    },
+    "angular-tools": {
+      "prefix": "stack",
+      "projectType": "library",
+      "root": "libs/angular/tools",
+      "sourceRoot": "libs/angular/tools/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "development": {
+              "tsConfig": "libs/angular/tools/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/angular/tools/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:package",
+          "options": {
+            "project": "libs/angular/tools/ng-package.json"
+          },
+          "outputs": ["dist/libs/angular/tools"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular/tools/src/**/*.ts",
+              "libs/angular/tools/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular/tools/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/angular/tools"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "api": {
+      "projectType": "application",
+      "root": "apps/api",
+      "sourceRoot": "apps/api/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "production": {
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/src/environments/environment.ts",
+                  "with": "apps/api/src/environments/environment.prod.ts"
+                }
+              ],
+              "inspect": false,
+              "optimization": true
+            }
+          },
+          "executor": "@nrwl/node:build",
+          "options": {
+            "assets": ["apps/api/src/assets"],
+            "main": "apps/api/src/main.ts",
+            "outputPath": "dist/apps/api",
+            "tsConfig": "apps/api/tsconfig.app.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/api/**/*.ts"]
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api:build"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/api/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/apps/api"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "api-interfaces": {
+      "projectType": "library",
+      "root": "libs/api-interfaces",
+      "sourceRoot": "libs/api-interfaces/src",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+          }
+        }
+      }
+    },
+    "commit-config": {
+      "projectType": "library",
+      "root": "libs/config/commit",
+      "sourceRoot": "libs/config/commit/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/config/commit/*.md",
+              "libs/config/commit/bin/*.js",
+              "libs/config/commit/.commitlintrc.js",
+              "libs/config/commit/types.json"
+            ],
+            "main": "libs/config/commit/src/index.ts",
+            "outputPath": "dist/libs/config/commit",
+            "packageJson": "libs/config/commit/package.json",
+            "tsConfig": "libs/config/commit/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/config/commit/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/config/commit/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/config/commit"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "eslint-config": {
+      "projectType": "library",
+      "root": "libs/config/eslint",
+      "sourceRoot": "libs/config/eslint/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/config/eslint/*.md",
+              "libs/config/eslint/.eslintrc.js"
+            ],
+            "main": "libs/config/eslint/src/index.ts",
+            "outputPath": "dist/libs/config/eslint",
+            "packageJson": "libs/config/eslint/package.json",
+            "tsConfig": "libs/config/eslint/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/config/eslint/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/config/eslint/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/config/eslint"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "hapify-config": {
+      "projectType": "library",
+      "root": "libs/config/hapify",
+      "sourceRoot": "libs/config/hapify/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/config/hapify/*.md",
+              "libs/config/hapify/validator.js"
+            ],
+            "main": "libs/config/hapify/src/index.ts",
+            "outputPath": "dist/libs/config/hapify",
+            "packageJson": "libs/config/hapify/package.json",
+            "tsConfig": "libs/config/hapify/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["npx nx run hapify-config:build"]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/config/hapify/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/config/hapify/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/config/hapify"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "hapify-generate-config": {
+      "projectType": "library",
+      "root": "libs/hapify/generate-config",
+      "sourceRoot": "libs/hapify/generate-config/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/hapify/generate-config/*.md"],
+            "main": "libs/hapify/generate-config/src/index.ts",
+            "outputPath": "dist/libs/hapify/generate-config",
+            "packageJson": "libs/hapify/generate-config/package.json",
+            "tsConfig": "libs/hapify/generate-config/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["npx nx run hapify-generate-config:build"]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hapify/generate-config/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/hapify/generate-config/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/hapify/generate-config"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "hapify-templates-angular-rext-client": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/angular-rext-client",
+      "sourceRoot": "libs/hapify/templates/angular-rext-client/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/angular-rext-client/*.md",
+              "libs/hapify/templates/angular-rext-client/.hapifyrc.js",
+              "libs/hapify/templates/angular-rext-client/index.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/angular-rext-client/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/angular-rext-client/index.js",
+            "outputPath": "dist/libs/hapify/templates/angular-rext-client",
+            "packageJson": "libs/hapify/templates/angular-rext-client/package.json",
+            "tsConfig": "libs/hapify/templates/angular-rext-client/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "hapify-templates-dbml": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/dbml",
+      "sourceRoot": "libs/hapify/templates/dbml/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/dbml/*.md",
+              "libs/hapify/templates/dbml/index.js",
+              "libs/hapify/templates/dbml/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/dbml/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/dbml/index.js",
+            "outputPath": "dist/libs/hapify/templates/dbml",
+            "packageJson": "libs/hapify/templates/dbml/package.json",
+            "tsConfig": "libs/hapify/templates/dbml/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "hapify-templates-models": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/models",
+      "sourceRoot": "libs/hapify/templates/models/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/models/*.md",
+              "libs/hapify/templates/models/index.js",
+              "libs/hapify/templates/models/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/models/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/models/index.js",
+            "outputPath": "dist/libs/hapify/templates/models",
+            "packageJson": "libs/hapify/templates/models/package.json",
+            "tsConfig": "libs/hapify/templates/models/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "hapify-templates-nestjs-models": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/nestjs-models",
+      "sourceRoot": "libs/hapify/templates/nestjs-models/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/nestjs-models/*.md",
+              "libs/hapify/templates/nestjs-models/index.js",
+              "libs/hapify/templates/nestjs-models/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/nestjs-models/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/nestjs-models/index.js",
+            "outputPath": "dist/libs/hapify/templates/nestjs-models",
+            "packageJson": "libs/hapify/templates/nestjs-models/package.json",
+            "tsConfig": "libs/hapify/templates/nestjs-models/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "hapify-templates-nestjs-models-common": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/nestjs-models-common",
+      "sourceRoot": "libs/hapify/templates/nestjs-models-common/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/nestjs-models-common/*.md",
+              "libs/hapify/templates/nestjs-models-common/index.js",
+              "libs/hapify/templates/nestjs-models-common/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/nestjs-models-common/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/nestjs-models-common/index.js",
+            "outputPath": "dist/libs/hapify/templates/nestjs-models-common",
+            "packageJson": "libs/hapify/templates/nestjs-models-common/package.json",
+            "tsConfig": "libs/hapify/templates/nestjs-models-common/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "hapify-templates-prisma": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/prisma",
+      "sourceRoot": "libs/hapify/templates/prisma/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/prisma/*.md",
+              "libs/hapify/templates/prisma/index.js",
+              "libs/hapify/templates/prisma/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/prisma/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/prisma/index.js",
+            "outputPath": "dist/libs/hapify/templates/prisma",
+            "packageJson": "libs/hapify/templates/prisma/package.json",
+            "tsConfig": "libs/hapify/templates/prisma/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "hapify-templates-rest-dtos": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/rest-dtos",
+      "sourceRoot": "libs/hapify/templates/rest-dtos/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/rest-dtos/*.md",
+              "libs/hapify/templates/rest-dtos/index.js",
+              "libs/hapify/templates/rest-dtos/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/rest-dtos/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/rest-dtos/index.js",
+            "outputPath": "dist/libs/hapify/templates/rest-dtos",
+            "packageJson": "libs/hapify/templates/rest-dtos/package.json",
+            "tsConfig": "libs/hapify/templates/rest-dtos/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "hapify-templates-rext-client": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/rext-client",
+      "sourceRoot": "libs/hapify/templates/rext-client/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/rext-client/*.md",
+              "libs/hapify/templates/rext-client/index.js",
+              "libs/hapify/templates/rext-client/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/rext-client/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/rext-client/index.js",
+            "outputPath": "dist/libs/hapify/templates/rext-client",
+            "packageJson": "libs/hapify/templates/rext-client/package.json",
+            "tsConfig": "libs/hapify/templates/rext-client/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "nestjs-core": {
+      "projectType": "library",
+      "root": "libs/nestjs/core",
+      "sourceRoot": "libs/nestjs/core/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/nestjs/core/*.md"],
+            "main": "libs/nestjs/core/src/index.ts",
+            "outputPath": "dist/libs/nestjs/core",
+            "packageJson": "libs/nestjs/core/package.json",
+            "tsConfig": "libs/nestjs/core/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/core/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/nestjs/core/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/nestjs/core"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "nestjs-database": {
+      "projectType": "library",
+      "root": "libs/nestjs/database",
+      "sourceRoot": "libs/nestjs/database/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/nestjs/database/*.md"],
+            "main": "libs/nestjs/database/src/index.ts",
+            "outputPath": "dist/libs/nestjs/database",
+            "packageJson": "libs/nestjs/database/package.json",
+            "tsConfig": "libs/nestjs/database/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/database/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/nestjs/database/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/nestjs/database"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "nestjs-testing": {
+      "projectType": "library",
+      "root": "libs/nestjs/testing",
+      "sourceRoot": "libs/nestjs/testing/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/nestjs/testing/*.md"],
+            "main": "libs/nestjs/testing/src/index.ts",
+            "outputPath": "dist/libs/nestjs/testing",
+            "packageJson": "libs/nestjs/testing/package.json",
+            "tsConfig": "libs/nestjs/testing/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/testing/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/nestjs/testing/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/nestjs/testing"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "prettier-config": {
+      "projectType": "library",
+      "root": "libs/config/prettier",
+      "sourceRoot": "libs/config/prettier/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/config/prettier/*.md"],
+            "main": "libs/config/prettier/src/index.ts",
+            "outputPath": "dist/libs/config/prettier",
+            "packageJson": "libs/config/prettier/package.json",
+            "tsConfig": "libs/config/prettier/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/config/prettier/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/config/prettier/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/config/prettier"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "pwa": {
+      "prefix": "tractr",
+      "projectType": "application",
+      "root": "apps/pwa",
+      "sourceRoot": "apps/pwa/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "development": {
+              "buildOptimizer": false,
+              "extractLicenses": false,
+              "namedChunks": true,
+              "optimization": false,
+              "sourceMap": true,
+              "vendorChunk": true
+            },
+            "production": {
+              "budgets": [
+                {
+                  "maximumError": "1mb",
+                  "maximumWarning": "500kb",
+                  "type": "initial"
+                },
+                {
+                  "maximumError": "4kb",
+                  "maximumWarning": "2kb",
+                  "type": "anyComponentStyle"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/pwa/src/environments/environment.ts",
+                  "with": "apps/pwa/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            }
+          },
+          "defaultConfiguration": "production",
+          "executor": "@angular-devkit/build-angular:browser",
+          "options": {
+            "assets": ["apps/pwa/src/favicon.ico", "apps/pwa/src/assets"],
+            "index": "apps/pwa/src/index.html",
+            "inlineStyleLanguage": "less",
+            "main": "apps/pwa/src/main.ts",
+            "outputPath": "dist/apps/pwa",
+            "polyfills": "apps/pwa/src/polyfills.ts",
+            "scripts": [],
+            "styles": ["apps/pwa/src/styles.less"],
+            "tsConfig": "apps/pwa/tsconfig.app.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "extract-i18n": {
+          "executor": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "pwa:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/pwa/src/**/*.ts",
+              "apps/pwa/src/**/*.html"
+            ]
+          }
+        },
+        "serve": {
+          "configurations": {
+            "development": {
+              "browserTarget": "pwa:build:development"
+            },
+            "production": {
+              "browserTarget": "pwa:build:production"
+            }
+          },
+          "defaultConfiguration": "development",
+          "executor": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "apps/pwa/proxy.conf.json"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/pwa/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/apps/pwa"]
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
+    "pwa-e2e": {
+      "projectType": "application",
+      "root": "apps/pwa-e2e",
+      "sourceRoot": "apps/pwa-e2e/src",
+      "targets": {
+        "e2e": {
+          "configurations": {
+            "production": {
+              "devServerTarget": "pwa:serve:production"
+            }
+          },
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/pwa-e2e/cypress.json",
+            "devServerTarget": "pwa:serve:development",
+            "tsConfig": "apps/pwa-e2e/tsconfig.e2e.json"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/pwa-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "version": 2
+}

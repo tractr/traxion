@@ -1,0 +1,108 @@
+{
+  "implicitDependencies": {
+    ".eslintrc.json": "*",
+    "hapify-models.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    }
+  },
+  "affected": {
+    "defaultBase": "main"
+  },
+  "npmScope": "tractr",
+  "tasksRunnerOptions": {
+    "default": {
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "strictlyOrderedTargets": ["build", "generate"]
+      },
+      "runner": "@nrwl/workspace/tasks-runners/default"
+    }
+  },
+  "projects": {
+    "@generated-angular": {
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "tags": []
+    },
+    "@generated-nestjs": {
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "tags": []
+    },
+    "@generated-prisma": {
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "tags": []
+    },
+    "@generated-shared": {
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "tags": []
+    },
+    "angular-tools": {
+      "tags": []
+    },
+    "api": {
+      "tags": []
+    },
+    "api-interfaces": {
+      "tags": []
+    },
+    "commit-config": {
+      "tags": []
+    },
+    "eslint-config": {
+      "tags": []
+    },
+    "hapify-config": {
+      "tags": []
+    },
+    "hapify-generate-config": {
+      "tags": []
+    },
+    "hapify-templates-angular-rext-client": {
+      "tags": []
+    },
+    "hapify-templates-dbml": {
+      "tags": []
+    },
+    "hapify-templates-models": {
+      "tags": []
+    },
+    "hapify-templates-nestjs-models": {
+      "tags": []
+    },
+    "hapify-templates-nestjs-models-common": {
+      "tags": []
+    },
+    "hapify-templates-prisma": {
+      "tags": []
+    },
+    "hapify-templates-rest-dtos": {
+      "tags": []
+    },
+    "hapify-templates-rext-client": {
+      "tags": []
+    },
+    "nestjs-core": {
+      "tags": []
+    },
+    "nestjs-database": {
+      "tags": []
+    },
+    "nestjs-testing": {
+      "tags": []
+    },
+    "prettier-config": {
+      "tags": []
+    },
+    "pwa": {
+      "tags": []
+    },
+    "pwa-e2e": {
+      "implicitDependencies": ["pwa"],
+      "tags": []
+    },
+    "angular-components": {
+      "tags": []
+    }
+  }
+}
