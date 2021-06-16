@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/unbound-method */
+
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { User } from '@prisma/client';
@@ -15,20 +16,21 @@ import { mockUserFactory } from '@generated/models/mock';
 import { USER_SERVICE, UserService } from '@generated/nestjs-models-common';
 import { mockUserServiceFactory } from '@generated/nestjs-models-common/mock';
 
-jest.mock('bcrypt', () => ({
-  compare: jest.fn().mockReturnValue(true),
-  hash: jest.fn().mockReturnValue('bcrypt'),
-  genSalt: jest.fn().mockReturnValue('salt'),
-}));
-
 describe('AuthService', () => {
   let authService: AuthenticationService;
   let mockAuthOptionsService: AuthenticationOptions;
   let mockJwtService: JwtService;
   let mockUserService: MockProxy<UserService>;
   let mockUser: User;
+  let compareMock: jest.SpyInstance;
+  let hashMock: jest.SpyInstance;
+  let genSaltMock: jest.SpyInstance;
 
   beforeEach(async () => {
+    compareMock = jest.spyOn(bcrypt, 'compare');
+    hashMock = jest.spyOn(bcrypt, 'hash');
+    genSaltMock = jest.spyOn(bcrypt, 'genSalt');
+
     mockJwtService = mockJwtServiceFactory();
     mockUserService = mockUserServiceFactory();
     mockAuthOptionsService = mockAuthenticationOptionsFactory();
@@ -49,19 +51,30 @@ describe('AuthService', () => {
     authService = module.get<AuthenticationService>(AuthenticationService);
   });
 
+  afterEach(() => {
+    compareMock.mockRestore();
+    hashMock.mockRestore();
+    genSaltMock.mockRestore();
+  });
+
   it('should be defined', () => {
     expect(authService).toBeDefined();
   });
 
   describe('hashPassword', () => {
     it('should hash a password with bcrypt and the config from configService', async () => {
+      genSaltMock.mockReturnValue('salt');
+      hashMock.mockReturnValue('bcrypt');
+
       const hash = await authService.hashPassword('test');
 
-      expect(bcrypt.genSalt).toHaveBeenCalledTimes(1);
-      expect(bcrypt.genSalt).toHaveBeenCalledWith(20);
+      expect(genSaltMock).toHaveBeenCalledTimes(1);
+      expect(genSaltMock).toHaveBeenCalledWith(10);
+      expect(genSaltMock).toHaveReturnedWith('salt');
 
-      expect(bcrypt.hash).toHaveBeenCalledTimes(1);
-      expect(bcrypt.hash).toHaveBeenCalledWith('test', 'salt');
+      expect(hashMock).toHaveBeenCalledTimes(1);
+      expect(hashMock).toHaveBeenCalledWith('test', 'salt');
+      expect(hashMock).toHaveReturnedWith('bcrypt');
 
       expect(hash).toEqual('bcrypt');
     });
@@ -69,10 +82,13 @@ describe('AuthService', () => {
 
   describe('verifyPassword', () => {
     it('should verify a password with bcrypt', async () => {
+      compareMock.mockReturnValue(true);
+
       const compare = await authService.verifyPassword('test', 'hash');
 
-      expect(bcrypt.compare).toHaveBeenCalledTimes(1);
-      expect(bcrypt.compare).toHaveBeenCalledWith('test', 'hash');
+      expect(compareMock).toHaveBeenCalledTimes(1);
+      expect(compareMock).toHaveBeenCalledWith('test', 'hash');
+      expect(compareMock).toHaveReturnedWith(true);
 
       expect(compare).toEqual(true);
     });
@@ -81,10 +97,9 @@ describe('AuthService', () => {
   describe('createUserJWT', () => {
     it('should create a User JWT', async () => {
       const compare = await authService.createUserJWT(mockUser);
-      const { signAsync } = mockJwtService;
 
-      expect(signAsync).toHaveBeenCalledTimes(1);
-      expect(signAsync).toHaveBeenCalledWith({ sub: mockUser.id });
+      expect(mockJwtService.sign).toHaveBeenCalledTimes(1);
+      expect(mockJwtService.sign).toHaveBeenCalledWith({ sub: mockUser.id });
 
       expect(compare).toEqual('jwt');
     });
@@ -107,7 +122,7 @@ describe('AuthService', () => {
 
   describe('authenticateLoginCredentials', () => {
     it('should throw a UserNotFoundError if no user has been found by the login field', async () => {
-      mockUserService.findUnique.mockReturnValueOnce(null);
+      mockUserService.findUnique.mockReturnValueOnce(null as never);
 
       await expect(async () =>
         authService.authenticateLoginCredentials('login', 'password'),

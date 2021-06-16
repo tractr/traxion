@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  HttpCode,
   Inject,
   Post,
   Req,
@@ -12,7 +13,6 @@ import { Request, Response } from 'express';
 
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
 import { CurrentUser } from '../decorators';
-import { AccessTokenDto } from '../dtos';
 import { LocalAuthGuard } from '../guards';
 import { AuthenticationOptions } from '../interfaces';
 import { AuthenticationService } from '../services';
@@ -27,17 +27,17 @@ export class LoginController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
+  @HttpCode(200)
   async login(
-    @Req() req: Request,
+    @Req() req: Request & { user: User },
     @Res() res: Response,
-  ): Promise<AccessTokenDto> {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const token = await this.authenticationService.login((req as any).user);
+  ): Promise<void> {
+    const token = await this.authenticationService.login(req.user);
     res.cookie(
       this.authenticationOptions.cookies.cookieName,
       token.accessToken,
     );
-    return token;
+    res.json(token);
   }
 
   @Get('me')

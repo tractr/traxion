@@ -2,6 +2,6 @@ import { JwtService } from '@nestjs/jwt';
 
 export function mockJwtServiceFactory(): JwtService {
   return {
-    signAsync: jest.fn(() => 'jwt'),
+    sign: jest.fn(() => 'jwt'),
   } as unknown as JwtService;
 }

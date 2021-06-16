@@ -1,14 +1,18 @@
 import { INestApplication } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as request from 'supertest';
 
-import { DatabaseService } from '../../../database/src';
-import { PRISMA_MODULE_OPTIONS } from '../../../database/src/constants';
-import { AuthenticationModule } from '../../src';
+import {
+  AuthenticationModule,
+  AuthenticationService,
+  JwtGlobalAuthGuard,
+} from '../../src';
 import { AUTHENTICATION_OPTIONS } from '../../src/config';
 import { AuthenticationEndpointMockController } from '../mock/authentication-endpoint-mock.controller';
 
+import { mockUserFactory } from '@generated/models/mock';
 import {
   USER_DATABASE_SERVICE,
   USER_SERVICE,
@@ -16,12 +20,12 @@ import {
   UserService,
 } from '@generated/nestjs-models-common';
 import { mockUserServiceFactory } from '@generated/nestjs-models-common/mock';
+import { LoggerModule } from '@tractr/nestjs-core';
 
 describe('Authentication Module (integration)', () => {
   let app: INestApplication;
   let mockUserService: MockProxy<UserService>;
   let mockUserDatabaseService: MockProxy<UserDatabaseService>;
-  let mockDatabaseService: MockProxy<DatabaseService>;
 
   beforeAll(async () => {
     mockUserService = mockUserServiceFactory();
@@ -31,15 +35,12 @@ describe('Authentication Module (integration)', () => {
       controllers: [AuthenticationEndpointMockController],
       providers: [
         {
-          provide: DatabaseService,
-          useValue: mockDatabaseService,
-        },
-        {
-          provide: PRISMA_MODULE_OPTIONS,
-          useValue: {},
+          provide: APP_GUARD,
+          useClass: JwtGlobalAuthGuard,
         },
       ],
       imports: [
+        LoggerModule,
         AuthenticationModule.register({
           ...AUTHENTICATION_OPTIONS,
           jwtModuleOptions: {
@@ -52,17 +53,13 @@ describe('Authentication Module (integration)', () => {
               provide: USER_DATABASE_SERVICE,
               useValue: mockUserDatabaseService as unknown,
             },
-            {
-              provide: PRISMA_MODULE_OPTIONS,
-              useValue: {},
-            },
           ],
         }),
-        // DatabaseModule.register(),
       ],
     }).compile();
 
     app = moduleFixture.createNestApplication();
+
     await app.init();
   });
 
@@ -71,8 +68,53 @@ describe('Authentication Module (integration)', () => {
   });
 
   describe('Authentication route', () => {
-    it('/not-authenticated', async () => {
-      await request(app.getHttpServer()).get('/not-authenticated').expect(401);
+    it('/is-public', async () => {
+      await request(app.getHttpServer()).get('/is-public').expect(200);
+    });
+    it('/is-private', async () => {
+      await request(app.getHttpServer()).get('/is-private').expect(401);
+    });
+    it('/login should fail if no user info is passed', async () => {
+      await request(app.getHttpServer()).post('/login').expect(401);
+    });
+    it('/login should authenticate if user login info is passed', async () => {
+      const authenticationService = app.get<AuthenticationService>(
+        AuthenticationService,
+      );
+      const mockUser = mockUserFactory();
+      const hashPassword = await authenticationService.hashPassword(
+        mockUser.password,
+      );
+
+      mockUserService.findUnique.mockResolvedValue({
+        ...mockUser,
+        password: hashPassword,
+      });
+
+      const response = await request(app.getHttpServer())
+        .post('/login')
+        .send({ email: mockUser.email, password: mockUser.password });
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual({
+        accessToken: await authenticationService.createUserJWT(mockUser),
+      });
+    });
+    it('/me get the user information back and use the jwt auth strategy', async () => {
+      const authenticationService = app.get<AuthenticationService>(
+        AuthenticationService,
+      );
+      const mockUser = mockUserFactory();
+      const accessToken = await authenticationService.createUserJWT(mockUser);
+
+      mockUserService.findUnique.mockResolvedValue(mockUser);
+
+      const response = await request(app.getHttpServer())
+        .get('/me')
+        .set('Authorization', `bearer ${accessToken}`);
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(JSON.parse(JSON.stringify(mockUser)));
     });
   });
 });

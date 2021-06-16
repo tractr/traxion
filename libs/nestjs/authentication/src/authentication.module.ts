@@ -15,11 +15,10 @@ import { JwtStrategy, LocalStrategy } from './strategies';
 import { UserModelModule } from '@generated/nestjs-models-common';
 import {
   AsyncOptions,
-  CoreModule,
+  LoggerModule,
   ModuleOptionsHelper,
   ModuleOverrideMetadata,
 } from '@tractr/nestjs-core';
-import { DatabaseModule } from '@tractr/nestjs-database';
 
 @Module({})
 export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOptions>(
@@ -77,8 +76,7 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
       module: AuthenticationModule,
       imports: [
         ...(authenticationOptionsModule.imports ?? []),
-        DatabaseModule,
-        CoreModule,
+        LoggerModule,
         JwtModule.registerAsync({
           imports: [authenticationOptionsModule],
           useFactory: (authenticationOptions: AuthenticationOptions) =>

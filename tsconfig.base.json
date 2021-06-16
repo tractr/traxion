@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "strict": true,
     "allowJs": true,
     "baseUrl": ".",
     "checkJs": true,

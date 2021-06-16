@@ -24,7 +24,7 @@ describe('User auth configurations', () => {
     it('should be a configuration object with default value', () => {
       expect(AUTHENTICATION_OPTIONS).toEqual({
         login: {
-          saltRounds: 20,
+          saltRounds: 10,
         },
         cookies: {
           cookieName: 'authCookie',

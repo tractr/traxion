@@ -43,10 +43,9 @@ export class AuthenticationService {
       where: findOneWhere,
       select: { password: true },
     });
-
     if (!user) throw new UserNotFoundError();
 
-    if (await this.verifyPassword(user.password, password)) {
+    if (await this.verifyPassword(password, user.password)) {
       return this.userService.findUnique({ where: findOneWhere });
     }
 
@@ -55,7 +54,7 @@ export class AuthenticationService {
 
   async hashPassword(password: string): Promise<string> {
     const salt = await bcrypt.genSalt(
-      this.authenticationOptions.login.saltRounds ?? 20,
+      this.authenticationOptions.login.saltRounds ?? 10,
     );
     return bcrypt.hash(password, salt);
   }
@@ -65,7 +64,7 @@ export class AuthenticationService {
   }
 
   async createUserJWT(user: User): Promise<string> {
-    return this.jwtService.signAsync({ sub: user.id });
+    return this.jwtService.sign({ sub: user.id });
   }
 
   async login(user: User): Promise<AccessTokenDto> {

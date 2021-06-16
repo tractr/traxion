@@ -8,6 +8,7 @@ import {
 import { Prisma, PrismaClient } from '@prisma/client';
 
 import { PRISMA_MODULE_OPTIONS } from '../constants';
+import { MysqlService } from './mysql.service';
 import { PostgresqlService } from './postgresql.service';
 
 import { Logger } from '@tractr/nestjs-core';
@@ -37,12 +38,7 @@ export const enforceOptions: EnforcePrismaClientOptions = {
   ],
 };
 
-export type ConnectorType =
-  | 'mysql'
-  | 'mongodb'
-  | 'sqlite'
-  | 'postgresql'
-  | 'sqlserver';
+export type ConnectorType = 'mysql' | 'postgresql';
 
 @Injectable()
 export class DatabaseService
@@ -53,7 +49,8 @@ export class DatabaseService
     @Inject(PRISMA_MODULE_OPTIONS)
     protected readonly prismaOptions: PrismaClientOptions,
     protected readonly logger: Logger,
-    protected readonly prostgresql: PostgresqlService,
+    protected readonly postgresql: PostgresqlService,
+    protected readonly mysql: MysqlService,
   ) {
     super({ ...prismaOptions, ...enforceOptions });
     this.logger.setContext('DatabaseService:PrismaClient');
@@ -73,7 +70,10 @@ export class DatabaseService
   }
 
   getActiveProvider(): ConnectorType {
-    if (this.prismaOptions.datasources.db.url.includes('postgresql'))
+    if (
+      this.prismaOptions.datasources?.db?.url &&
+      this.prismaOptions.datasources.db.url.includes('postgresql')
+    )
       return 'postgresql';
 
     throw new Error('Unknow database provider type');
@@ -87,7 +87,7 @@ export class DatabaseService
 
     const provider = this.getActiveProvider();
 
-    if (this[provider] && this[provider].truncate)
+    if (typeof this[provider].truncate === 'function')
       return this[provider].truncate(this, schemaName);
 
     throw new Error(

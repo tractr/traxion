@@ -12,7 +12,7 @@ export const AUTHENTICATION_COOKIE_NAME = 'authCookie';
 export const AUTHENTICATION_QUERY_PARAM_NAME = 'authToken';
 export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
   login: {
-    saltRounds: 20,
+    saltRounds: 10,
   },
   cookies: {
     cookieName: AUTHENTICATION_COOKIE_NAME,
