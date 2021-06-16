@@ -39,8 +39,8 @@ jobs:
         with:
           path: '~/.npm'
           key:
-            ${{ matrix.os }}-npm-${{ matrix.node }}-${{ hashFiles('**/npm.lock')
-            }}
+            ${{ matrix.os }}-npm-${{ matrix.node }}-${{
+            hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ matrix.os }}-npm-${{ matrix.node }}-
 
