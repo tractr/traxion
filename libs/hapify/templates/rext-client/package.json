@@ -1,15 +1,12 @@
 {
   "name": "@tractr/hapify-templates-rext-client",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Template to generate a rest client with hapify",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
   },
-  "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
-  },
+  "license": "UNLICENSED",
   "peerDependencies": {
     "@tractr/hapify-templates-models": "1.2.4",
     "@tractr/hapify-templates-rest-dtos": "1.2.4",
@@ -19,5 +16,8 @@
     "rxjs": "^6.6.7",
     "universal-rxjs-ajax": "^2.0.4"
   },
-  "license": "UNLICENSED"
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
 }
