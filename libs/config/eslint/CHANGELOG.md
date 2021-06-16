@@ -1,7 +1,15 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+This file was generated using
+[@jscutlery/semver](https://github.com/jscutlery/semver).
+
+# [1.5.0](https://github.com/tractr/stack/compare/eslint-config-1.4.0...eslint-config-1.5.0) (2021-06-16)
+
+### Features
+
+- change stack lerna repository to nx workspace
+  ([#119](https://github.com/tractr/stack/issues/119))
+  ([e9104bd](https://github.com/tractr/stack/commit/e9104bde081619c0f3752bb9d129e19d1d6bda5d))
 
 ## [1.3.10](https://github.com/tractr/eslint-config/compare/v1.3.9...v1.3.10) (2021-04-09)
 
