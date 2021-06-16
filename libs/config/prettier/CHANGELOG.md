@@ -1,7 +1,15 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+This file was generated using
+[@jscutlery/semver](https://github.com/jscutlery/semver).
+
+# [1.4.0](https://github.com/tractr/stack/compare/prettier-config-1.3.0...prettier-config-1.4.0) (2021-06-16)
+
+### Features
+
+- change stack lerna repository to nx workspace
+  ([#119](https://github.com/tractr/stack/issues/119))
+  ([e9104bd](https://github.com/tractr/stack/commit/e9104bde081619c0f3752bb9d129e19d1d6bda5d))
 
 ## [1.2.6](https://github.com/tractr/prettier-config/compare/v1.2.5...v1.2.6) (2021-02-06)
 
