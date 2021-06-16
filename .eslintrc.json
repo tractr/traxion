@@ -1,0 +1,49 @@
+{
+  "root": true,
+  "plugins": ["@nrwl/nx"],
+  "overrides": [
+    {
+      "files": ["*.json"],
+      "extends": ["./libs/config/eslint/.eslintrc.js"],
+      "rules": {}
+    },
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "extends": ["./libs/config/eslint/.eslintrc.js"],
+      "rules": {
+        "import/no-unresolved": [
+          "error",
+          {
+            "ignore": ["^@(tractr|generated)/"]
+          }
+        ],
+        "@nrwl/nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nrwl/nx/typescript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nrwl/nx/javascript"],
+      "rules": {}
+    }
+  ],
+  "settings": {
+    "import/internal-regex": "^@(tractr|generated)/"
+  }
+}

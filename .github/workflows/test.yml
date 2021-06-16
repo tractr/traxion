@@ -1,42 +1,67 @@
+###########################
+##      Stack tests      ##
+###########################
 name: Test
 
+# Start the job on all pull request
 on:
   pull_request:
 
 jobs:
   test:
-    name: test on node 15.x and ubuntu-latest
-    runs-on: ubuntu-latest
+    # Our code will run on node 16 and Linux
+    strategy:
+      matrix:
+        node: [16.x]
+        os: [node-16]
+
+    name: Test npm packages on node ${{ matrix.node }}
+
+    # Runs on Tractr self serveur
+    runs-on: [self-hosted, '${{ matrix.os }}']
+
     steps:
+      # First we checkout the code
       - uses: actions/checkout@v2
-      - name: Use node.js 15.x
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # We initialize the node action
+      - name: Use node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
-          node-version: 15.x
+          node-version: ${{ matrix.node }}
           registry-url: https://npm.pkg.github.com
+
       # We get our cache compare to our package-lock
-      - name: Get npm cache directory
-        id: yarn-cache-dir
-        run: |
-          echo "::set-output name=dir::$(yarn cache dir)"
       - uses: actions/cache@v2.1.4
         with:
-          path: |
-            ${{ steps.yarn-cache-dir.outputs.dir }}
-            node_modules
-            */*/node_modules
+          path: '~/.npm'
           key:
-            ${{ matrix.os }}-yarn-${{ matrix.node }}-${{
-            hashFiles('**/yarn.lock') }}
+            ${{ matrix.os }}-npm-${{ matrix.node }}-${{ hashFiles('**/npm.lock')
+            }}
           restore-keys: |
-            ${{ matrix.os }}-yarn-${{ matrix.node }}-
+            ${{ matrix.os }}-npm-${{ matrix.node }}-
+
+      # We install our dependencies
       - name: Run npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn --frozen-lock --prefer-offline --no-audit --no-progress
-      - name: Run npm build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run build
-      - name: test
-        run: npm run test
+        run: npm ci --prefer-offline --no-audit --no-progress
+
+      # We only run the affected lint
+      # FIXME: why prettier exit code 1 without any errors
+      # - name: Run Affected Format check
+      #   shell: bash
+      #   run: npm run affected:format:check -- --base=remotes/origin/main
+
+      # We only run the affected lint
+      - name: Run Affected Lint
+        shell: bash
+        run: npm run affected:lint -- --base=remotes/origin/main
+
+      # We only run the affected test
+      - name: Run Affected Tests
+        shell: bash
+        run: npm run affected:test -- --base=remotes/origin/main

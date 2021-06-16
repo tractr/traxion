@@ -1,8 +1,0 @@
-# Hapify generated files
-generated
-hapify/*
-!hapify/validator.js
-
-# Prisma generated files
-prisma/schemas/generated.prisma
-prisma/schema.prisma

@@ -1,0 +1,14 @@
+{
+  "name": "@tractr/hapify-templates-models",
+  "version": "1.2.4",
+  "description": "Hapify templates for models class validators and types",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "license": "UNLICENSED",
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

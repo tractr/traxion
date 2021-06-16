@@ -1,3 +1,0 @@
-export * from './services';
-export * from './<<Model kebab>>-model.constant';
-export * from './<<Model kebab>>-model.module';
