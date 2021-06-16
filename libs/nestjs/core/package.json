@@ -1,19 +1,19 @@
 {
   "name": "@tractr/nestjs-core",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Core module for nestjs backend",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
-  },
-  "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
   },
   "license": "UNLICENSED",
   "peerDependencies": {
     "@nestjs/common": "^7.0.0",
     "@prisma/client": "^2.17.0",
     "express": "^4.17.1"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
   }
 }
