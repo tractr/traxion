@@ -3,6 +3,14 @@
 This file was generated using
 [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.5.0](https://github.com/tractr/stack/compare/pwa-1.4.2...pwa-1.5.0) (2021-06-16)
+
+### Features
+
+- change stack lerna repository to nx workspace
+  ([#119](https://github.com/tractr/stack/issues/119))
+  ([e9104bd](https://github.com/tractr/stack/commit/e9104bde081619c0f3752bb9d129e19d1d6bda5d))
+
 # 0.1.0 (2021-06-11)
 
 ### Features
