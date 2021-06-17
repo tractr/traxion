@@ -14,6 +14,26 @@ module.exports = {
       input: 'all',
     },
     {
+      path: 'generated/angular-rext-client/interfaces/configuration.interface.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/angular-rext-client/interfaces/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/angular-rext-client/constants/configuration.constant.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/angular-rext-client/constants/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'generated/angular-rext-client/angular-rext.module.ts',
       engine: 'hpf',
       input: 'all',

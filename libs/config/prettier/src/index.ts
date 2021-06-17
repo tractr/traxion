@@ -1,3 +1,1 @@
-import config = require('../.prettierrc.js');
-
-export default config;
+module.exports = require('../.prettierrc');
