@@ -3,6 +3,14 @@
 This file was generated using
 [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.2.1](https://github.com/tractr/stack/compare/commit-config-1.2.0...commit-config-1.2.1) (2021-06-17)
+
+### Bug Fixes
+
+- update angular rext module and exports of configs
+  ([#142](https://github.com/tractr/stack/issues/142))
+  ([81982f8](https://github.com/tractr/stack/commit/81982f8c9b036406c5112820c7ccae08d2259667))
+
 # [1.2.0](https://github.com/tractr/stack/compare/commit-config-1.1.3...commit-config-1.2.0) (2021-06-16)
 
 ### Features
