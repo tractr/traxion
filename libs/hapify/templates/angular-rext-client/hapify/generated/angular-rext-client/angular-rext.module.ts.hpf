@@ -1,4 +1,6 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ANGULAR_REXT_CONFIGURATION } from './constants';
+import { AngularRextConfiguration } from './interfaces';
 import { 
 <<for Models model>>
   <<model pascal>>Service,
@@ -12,4 +14,14 @@ import {
     <<endfor>>
   ],
 })
-export class AngularRextModule {}
+export class AngularRextModule {
+  static forRoot(configuration: AngularRextConfiguration): ModuleWithProviders<AngularRextModule> {
+    return {
+      ngModule: AngularRextModule,
+      providers: [{
+        provide: ANGULAR_REXT_CONFIGURATION,
+        useValue: configuration
+      }]
+    }
+  }
+}

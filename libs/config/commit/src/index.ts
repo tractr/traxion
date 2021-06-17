@@ -1,3 +1,1 @@
-import config = require('../.commitlintrc.js');
-
-export default config;
+module.exports = require('../.commitlintrc');

@@ -66,5 +66,9 @@ yarn.lock
 !**/config/hapify
 !**/libs/hapify
 
+# Templates of hapify-templates libraries should be tracked
+!libs/hapify/templates/**/generated/
+!libs/hapify/templates/**/hapify/
+
 # Local ignore
 *.local-ignore*
