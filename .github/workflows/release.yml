@@ -4,47 +4,9 @@ on:
   push:
     branches:
       - main
+      - nx-publish
 
 jobs:
-  list-libs-to-release:
-    name: List the npm release libs
-
-    runs-on: [self-hosted, node-16]
-    outputs:
-      libs: ${{ steps.set-matrix.outputs.libs }}
-    steps:
-      # First we checkout the code
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-      # We initialize the node action
-      - name: Use node.js ${{ matrix.node }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
-          registry-url: https://npm.pkg.github.com
-
-      # We get our cache compare to our package-lock
-      - uses: actions/cache@v2.1.4
-        with:
-          path: '~/.npm'
-          key:
-            node-16-npm-${{ matrix.node }}-${{ hashFiles('**/package-lock.json')
-            }}
-          restore-keys: |
-            node-16-npm-${{ matrix.node }}-
-
-      # We install our dependencies
-      - name: Run npm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci --prefer-offline --no-audit --no-progress --ignore-scripts
-      - name: Affected libs
-        id: apps
-        run: |
-          echo "::set-output name=app::$(npx nx affected:libs --plain --base HEAD~1 | sed 's/ /,/g')"
-
   # Take all the packages and release them to https://npm.pkg.github.com
   npm-release:
     if: |
@@ -94,23 +56,22 @@ jobs:
         run: npm ci --prefer-offline --no-audit --no-progress
 
       # We build our code base
-      - name: Run npm build
+      - name: Run npm affected:build
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run build
+        run: npm run affected:build -- --base HEAD~1
 
       # We run our version script
-      - name: Run npm release
+      - name: Run npm affected:release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run affected:release -- --base HEAD~1
 
-      # We push our modification to our git
-      # - name: Run Affected Tests
-      #   run: |
-      #     git config --global user.name 'Tractr Bot'
-      #     git config --global user.email 'tractr-bot@users.noreply.github.com'
-      #     git push
+      # We publish our release
+      - name: Run npm affected:publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run affected:publish -- --base HEAD~1
 
       # Set the matrix apps that have been affected by all the changes
       - name: Affected apps output
