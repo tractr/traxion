@@ -14,7 +14,7 @@
     "affected:format:write": "nx format:write",
     "affected:libs": "nx affected:libs",
     "affected:lint": "nx affected:lint",
-    "affected:release": "nx affected --target release --push",
+    "affected:release": "nx affected --target release",
     "affected:publish": "nx affected --target publish",
     "affected:test": "nx affected:test",
     "build": "nx run-many --all --target=build",

@@ -9,8 +9,7 @@ on:
 jobs:
   # Take all the packages and release them to https://npm.pkg.github.com
   npm-release:
-    if: |
-      !failure() && needs.list-libs-to-release.outputs.apps != ''
+    if: "!contains(github.event.commits[0].message, 'chore(release):')"
     needs: [list-libs-to-release]
     # Our code will run on node 16 and Linux
     strategy:
@@ -57,27 +56,56 @@ jobs:
 
       # We build our code base
       - name: Run npm affected:build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run affected:build -- --base HEAD~1
+        run: npm run affected:build -- --base latest
+
+      # We build our code base
+      - name: Configure git|
+        run: |
+          git config --global user.name 'tractr-bot'
+          git config --global user.email 'tractr-bot@users.noreply.github.com'
 
       # We run our version script
       - name: Run npm affected:release
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run affected:release -- --base HEAD~1
+        run: npm run affected:release -- --base latest
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
 
       # We publish our release
       - name: Run npm affected:publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run affected:publish -- --base HEAD~1
+        run: npm run affected:publish -- --base latest
 
       # Set the matrix apps that have been affected by all the changes
       - name: Affected apps output
         id: apps
         run: |
-          echo "::set-output name=app::$(nx affected:apps --plain --base HEAD~1 | sed 's/ /,/g')"
+          echo "::set-output name=app::$(nx affected:apps --plain --base latest | sed 's/ /,/g')"
+
+      - name: Manage released tag
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            try {
+                await github.git.deleteRef({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  ref: "tags/latest"
+                })
+            } catch (e) {
+              console.log("The latest tag doesn't exist yet: " + e)
+            }
+            await github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/latest",
+              sha: context.sha
+            })
 
   docker-release:
     # If we got some change inside apps/** we execute this job
