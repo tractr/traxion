@@ -31,6 +31,9 @@ jobs:
           persist-credentials: false
           token: ${{ secrets.GH_TOKEN }}
 
+      # First we checkout the code
+      - run: ls -al
+
       # We initialize the node action
       - name: Use node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
