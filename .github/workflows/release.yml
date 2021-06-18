@@ -20,7 +20,7 @@ jobs:
     runs-on: [ubuntu-latest]
 
     outputs:
-      apps: ${{ steps.set-matrix.outputs.apps }}
+      apps: ${{ steps.set-matrix.outputs.result }}
 
     steps:
       # First we checkout the code
@@ -83,9 +83,18 @@ jobs:
 
       # Set the matrix apps that have been affected by all the changes
       - name: Affected apps output
-        id: apps
+        id: nx-apps
         run: |
-          echo "::set-output name=app::$(npx nx affected:apps --plain --base latest | sed 's/ /,/g')"
+          echo "::set-output name=apps::$(npx nx affected:apps --plain --base latest | sed 's/ /,/g')"
+
+      - name: Return formatted output
+        uses: actions/github-script@v3
+        id: apps
+        env:
+          APPS: ${{ steps.nx-apps.outputs.apps }}
+        with:
+          script: |
+            return process.env.APPS.split(',');
 
       - name: Manage released tag
         uses: actions/github-script@v3
@@ -113,11 +122,11 @@ jobs:
   docker-release:
     # If we got some change inside apps/** we execute this job
     if: |
-      !failure() && needs.npm-release.outputs.apps != ''
+      !failure() && !contains(toJson(needs.docker-changes.outputs.apps), '[]')
     needs: [npm-release]
     strategy:
       matrix:
-        app: ${{ needs.npm-release.outputs.apps }}
+        app: ${{ fromJSON(needs.docker-changes.outputs.apps) }}
         node: [16.x]
         os: [node-16]
         scope: [tractr]
