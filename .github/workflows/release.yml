@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - nx-publish
 
 jobs:
   # Take all the packages and release them to https://npm.pkg.github.com
@@ -86,7 +85,7 @@ jobs:
       - name: Affected apps output
         id: apps
         run: |
-          echo "::set-output name=app::$(nx affected:apps --plain --base latest | sed 's/ /,/g')"
+          echo "::set-output name=app::$(npx nx affected:apps --plain --base latest | sed 's/ /,/g')"
 
       - name: Manage released tag
         uses: actions/github-script@v3
@@ -94,14 +93,16 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             try {
-                await github.git.deleteRef({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  ref: "tags/latest"
-                })
+              console.log("Remove the latest tag from the repository")
+              await github.git.deleteRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: "tags/latest"
+              })
             } catch (e) {
               console.log("The latest tag doesn't exist yet: " + e)
             }
+            console.log("Create the latest tag on:" + context.sha)
             await github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
