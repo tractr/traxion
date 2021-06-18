@@ -10,7 +10,7 @@ jobs:
   # Take all the packages and release them to https://npm.pkg.github.com
   npm-release:
     if: "!contains(github.event.commits[0].message, 'chore(release):')"
-    needs: [list-libs-to-release]
+
     # Our code will run on node 16 and Linux
     strategy:
       matrix:
