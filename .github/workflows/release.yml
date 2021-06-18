@@ -31,9 +31,6 @@ jobs:
           persist-credentials: false
           token: ${{ secrets.GH_TOKEN }}
 
-      # First we checkout the code
-      - run: ls -al
-
       # We initialize the node action
       - name: Use node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
@@ -81,7 +78,9 @@ jobs:
       - name: Run npm affected:publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run affected:publish -- --base latest
+        # Publish will try on all the packages
+        # Wait to see https://github.com/jscutlery/semver/issues/167
+        run: npm run affected:publish -- --base latest || true
 
       # Set the matrix apps that have been affected by all the changes
       - name: Affected apps output
