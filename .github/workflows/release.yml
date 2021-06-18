@@ -6,50 +6,10 @@ on:
       - main
 
 jobs:
-  list-libs-to-release:
-    name: List the npm release libs
-
-    runs-on: [self-hosted, node-16]
-    outputs:
-      libs: ${{ steps.set-matrix.outputs.libs }}
-    steps:
-      # First we checkout the code
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-      # We initialize the node action
-      - name: Use node.js ${{ matrix.node }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
-          registry-url: https://npm.pkg.github.com
-
-      # We get our cache compare to our package-lock
-      - uses: actions/cache@v2.1.4
-        with:
-          path: '~/.npm'
-          key:
-            node-16-npm-${{ matrix.node }}-${{ hashFiles('**/package-lock.json')
-            }}
-          restore-keys: |
-            node-16-npm-${{ matrix.node }}-
-
-      # We install our dependencies
-      - name: Run npm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci --prefer-offline --no-audit --no-progress --ignore-scripts
-      - name: Affected libs
-        id: apps
-        run: |
-          echo "::set-output name=app::$(npx nx affected:libs --plain --base HEAD~1 | sed 's/ /,/g')"
-
   # Take all the packages and release them to https://npm.pkg.github.com
   npm-release:
-    if: |
-      !failure() && needs.list-libs-to-release.outputs.apps != ''
-    needs: [list-libs-to-release]
+    if: "!contains(github.event.commits[0].message, 'chore(release):')"
+
     # Our code will run on node 16 and Linux
     strategy:
       matrix:
@@ -57,10 +17,10 @@ jobs:
         os: [node-16]
 
     name: Release npm packages on node ${{ matrix.node }} and ${{ matrix.os }}
-    runs-on: [self-hosted, '${{ matrix.os }}']
+    runs-on: [ubuntu-latest]
 
     outputs:
-      apps: ${{ steps.set-matrix.outputs.apps }}
+      apps: ${{ steps.set-matrix.outputs.result }}
 
     steps:
       # First we checkout the code
@@ -94,38 +54,79 @@ jobs:
         run: npm ci --prefer-offline --no-audit --no-progress
 
       # We build our code base
-      - name: Run npm build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run build
+      - name: Run npm affected:build
+        run: npm run affected:build -- --base latest
+
+      # We build our code base
+      - name: Configure git|
+        run: |
+          git config --global user.name 'tractr-bot'
+          git config --global user.email 'tractr-bot@users.noreply.github.com'
 
       # We run our version script
-      - name: Run npm release
+      - name: Run npm affected:release
+        run: npm run affected:release -- --base latest
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+
+      # We publish our release
+      - name: Run npm affected:publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run affected:release -- --base HEAD~1
-
-      # We push our modification to our git
-      # - name: Run Affected Tests
-      #   run: |
-      #     git config --global user.name 'Tractr Bot'
-      #     git config --global user.email 'tractr-bot@users.noreply.github.com'
-      #     git push
+        # Publish will try on all the packages
+        # Wait to see https://github.com/jscutlery/semver/issues/167
+        run: npm run affected:publish -- --base latest || true
 
       # Set the matrix apps that have been affected by all the changes
       - name: Affected apps output
-        id: apps
+        id: nx-apps
         run: |
-          echo "::set-output name=app::$(nx affected:apps --plain --base HEAD~1 | sed 's/ /,/g')"
+          echo "::set-output name=apps::$(npx nx affected:apps --plain --base latest | sed 's/ /,/g')"
+
+      - name: Return formatted output
+        uses: actions/github-script@v3
+        id: apps
+        env:
+          APPS: ${{ steps.nx-apps.outputs.apps }}
+        with:
+          script: |
+            return process.env.APPS.split(',');
+
+      - name: Manage released tag
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            try {
+              console.log("Remove the latest tag from the repository")
+              await github.git.deleteRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: "tags/latest"
+              })
+            } catch (e) {
+              console.log("The latest tag doesn't exist yet: " + e)
+            }
+            console.log("Create the latest tag on:" + context.sha)
+            await github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/latest",
+              sha: context.sha
+            })
 
   docker-release:
     # If we got some change inside apps/** we execute this job
     if: |
-      !failure() && needs.npm-release.outputs.apps != ''
+      !failure() && !contains(toJson(needs.docker-changes.outputs.apps), '[]')
     needs: [npm-release]
     strategy:
       matrix:
-        app: ${{ needs.npm-release.outputs.apps }}
+        app: ${{ fromJSON(needs.docker-changes.outputs.apps) }}
         node: [16.x]
         os: [node-16]
         scope: [tractr]

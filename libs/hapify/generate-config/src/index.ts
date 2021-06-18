@@ -1,3 +1,5 @@
+#!/usr/bin/node
+
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-continue */
 
