@@ -142,7 +142,10 @@ async function getHapifyConfig(
     .filter((config) => config !== null)
     .reverse()
     .concat(mainConfig)
-    .reduce((acc, config) => mergeHapifyConfigs(acc, config), null);
+    .reduce(
+      (acc, config) => mergeHapifyConfigs(acc, config ?? ({} as never)),
+      null,
+    );
 }
 
 function formatTemplatePath(templatePath: string, extension: string): string {
@@ -166,7 +169,7 @@ async function getHapifyOptions(): Promise<void> {
     hapifyConfig.templates.forEach((template) => {
       promises.push(
         copy(
-          formatTemplatePath(template.inputPath, template.engine),
+          formatTemplatePath(template.inputPath || '', template.engine),
           formatTemplatePath(
             `${join(currentDirectory || '', 'hapify', template.path)}`,
             template.engine,

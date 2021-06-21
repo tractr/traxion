@@ -1,0 +1,25 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ],
+  "compilerOptions": {
+    "paths": {
+      "@tractr/nestjs-core": ["libs/nestjs/core/src/index.ts"],
+      "@tractr/nestjs-database": ["libs/nestjs/database/src/index.ts"],
+      "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
+      "@generated/angular": ["libs/@generated/angular/src/index.ts"],
+      "@generated/nestjs": ["libs/@generated/nestjs/src/index.ts"],
+      "@generated/prisma": ["libs/@generated/prisma/src/index.ts"],
+      "@generated/shared": ["libs/@generated/shared/src/index.ts"],
+      "@generated/*": ["libs/@generated/nestjs/generated/*"]
+    }
+  }
+}
