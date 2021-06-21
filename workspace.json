@@ -1490,6 +1490,38 @@
           }
         }
       }
+    },
+    "nestjs-file-storage": {
+      "root": "libs/nestjs/file-storage",
+      "sourceRoot": "libs/nestjs/file-storage/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/file-storage/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/nestjs/file-storage"],
+          "options": {
+            "jestConfig": "libs/nestjs/file-storage/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/nestjs/file-storage",
+            "tsConfig": "libs/nestjs/file-storage/tsconfig.lib.json",
+            "packageJson": "libs/nestjs/file-storage/package.json",
+            "main": "libs/nestjs/file-storage/src/index.ts",
+            "assets": ["libs/nestjs/file-storage/*.md"]
+          }
+        }
+      }
     }
   },
   "version": 2

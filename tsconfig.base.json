@@ -16,8 +16,6 @@
       "@app/*": ["apps/pwa/src/app/*"],
       "@assets/*": ["apps/pwa/src/assets/*"],
       "@env/*": ["apps/pwa/src/environments/*"],
-      "@generated/all": ["dist/libs/generated"],
-      "@generated/*": ["libs/generated/generated/*"],
       "@tractr/angular-authentication": [
         "libs/angular/authentication/src/index.ts"
       ],
@@ -68,7 +66,12 @@
       "@tractr/nestjs-rbac": ["libs/nestjs/rbac/src/index.ts"],
       "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
       "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"],
-      "@tractr/prisma": ["libs/prisma/src/index.ts"]
+      "@tractr/prisma": ["libs/prisma/src/index.ts"],
+      "@generated/*": [
+        "dist/libs/generated/generated/*",
+        "libs/generated/generated/*"
+      ],
+      "@tractr/nestjs-file-storage": ["libs/nestjs/file-storage/src/index.ts"]
     },
     "resolveJsonModule": true,
     "rootDir": ".",
@@ -79,3 +82,4 @@
   },
   "exclude": ["node_modules", "tmp"]
 }
+

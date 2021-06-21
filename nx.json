@@ -143,6 +143,9 @@
     "pwa-e2e": {
       "implicitDependencies": ["pwa"],
       "tags": ["scope:app"]
+    },
+    "nestjs-file-storage": {
+      "tags": []
     }
   },
   "targetDependencies": {
