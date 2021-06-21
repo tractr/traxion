@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 
-import { DynamicModule, INestApplication, Type } from '@nestjs/common';
+import { INestApplication, ModuleMetadata } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as dotenv from 'dotenv';
 import dotenvExpand = require('dotenv-expand');
@@ -30,7 +30,7 @@ export function createUrlDatabase(schema: string): string {
 }
 
 export function createTestContext(
-  AppModule: Type | DynamicModule,
+  metadata: ModuleMetadata,
   options: TestContextOptions = { databaseUrlEnv: 'TRACTR_DATABASE_URL' },
 ): TestContext {
   const ctx = {} as TestContext;
@@ -52,16 +52,16 @@ export function createTestContext(
     process.env[options.databaseUrlEnv] = databaseUrl;
 
     // Run the migrations to ensure our schema has the required structure
-    execSync(`npx prisma db push --preview-feature`, {
+    execSync(`npx prisma db push`, {
       env: {
         ...process.env,
         [options.databaseUrlEnv]: databaseUrl,
       },
     });
 
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
+    const moduleFixture: TestingModule = await Test.createTestingModule(
+      metadata,
+    ).compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();

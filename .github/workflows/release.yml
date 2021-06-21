@@ -51,7 +51,7 @@ jobs:
       - name: Run npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci --prefer-offline --no-audit --no-progress
+        run: npm ci --no-audit --no-progress
 
       # We build our code base
       - name: Run npm affected:build
