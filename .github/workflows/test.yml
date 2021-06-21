@@ -48,7 +48,7 @@ jobs:
       - name: Run npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci --prefer-offline --no-audit --no-progress
+        run: npm ci --no-audit --no-progress
 
       # We only run the affected lint
       # FIXME: why prettier exit code 1 without any errors

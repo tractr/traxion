@@ -40,6 +40,13 @@ export class LoginController {
     res.json(token);
   }
 
+  @Get('login')
+  @Post('login')
+  async logout(@Res() res: Response): Promise<void> {
+    res.cookie(this.authenticationOptions.cookies.cookieName, '');
+    res.end();
+  }
+
   @Get('me')
   getProfile(@CurrentUser() user: User): User {
     return user;
