@@ -12,34 +12,6 @@
   },
   "npmScope": "tractr",
   "projects": {
-    "@generated-angular": {
-      "implicitDependencies": [
-        "hapify-config",
-        "hapify-generate-config"
-      ],
-      "tags": []
-    },
-    "@generated-nestjs": {
-      "implicitDependencies": [
-        "hapify-config",
-        "hapify-generate-config"
-      ],
-      "tags": []
-    },
-    "@generated-prisma": {
-      "implicitDependencies": [
-        "hapify-config",
-        "hapify-generate-config"
-      ],
-      "tags": []
-    },
-    "@generated-shared": {
-      "implicitDependencies": [
-        "hapify-config",
-        "hapify-generate-config"
-      ],
-      "tags": []
-    },
     "angular-components": {
       "tags": []
     },
@@ -89,11 +61,8 @@
       "tags": []
     },
     "nestjs-authentication": {
-      "implicitDependencies": [
-        "hapify-config",
-        "hapify-generate-config"
-      ],
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"]
     },
     "nestjs-core": {
       "tags": []
@@ -102,11 +71,8 @@
       "tags": []
     },
     "nestjs-rbac": {
-      "implicitDependencies": [
-        "hapify-config",
-        "hapify-generate-config"
-      ],
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"]
     },
     "nestjs-testing": {
       "tags": []
@@ -118,25 +84,21 @@
       "tags": []
     },
     "pwa-e2e": {
-      "implicitDependencies": [
-        "pwa"
-      ],
+      "tags": [],
+      "implicitDependencies": ["pwa"]
+    },
+    "prisma": {
+      "tags": []
+    },
+    "generated": {
       "tags": []
     }
   },
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
-        "strictlyOrderedTargets": [
-          "build",
-          "generate"
-        ]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "strictlyOrderedTargets": ["build", "generate"]
       },
       "runner": "@nrwl/workspace/tasks-runners/default"
     }
