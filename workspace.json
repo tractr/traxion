@@ -729,18 +729,6 @@
           },
           "outputs": ["{options.outputPath}"]
         },
-        "generate": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "npx rimraf generated",
-              "node ../../../dist/libs/hapify/generate-config/src",
-              "npx hpf generate"
-            ],
-            "cwd": "libs/nestjs/authentication",
-            "parallel": false
-          }
-        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
@@ -754,6 +742,18 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/nestjs/authentication"]
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
         }
       }
     },
@@ -1131,6 +1131,17 @@
       "sourceRoot": "libs/generated/src",
       "projectType": "library",
       "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/generated",
+            "tsConfig": "libs/generated/tsconfig.lib.json",
+            "packageJson": "libs/generated/package.json",
+            "main": "libs/generated/src/index.ts",
+            "assets": ["libs/generated/*.md"]
+          }
+        },
         "generate": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
