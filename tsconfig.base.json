@@ -62,7 +62,10 @@
       "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
       "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"],
       "@tractr/prisma": ["libs/prisma/src/index.ts"],
-      "@generated/*": ["libs/generated/generated/*"]
+      "@generated/*": ["libs/generated/generated/*"],
+      "@tractr/hapify-templates-nestjs-models-rest": [
+        "libs/hapify/templates/nestjs-models-rest/src/index.ts"
+      ]
     },
     "resolveJsonModule": true,
     "rootDir": ".",

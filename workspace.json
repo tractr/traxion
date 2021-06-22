@@ -1158,6 +1158,61 @@
           }
         }
       }
+    },
+    "hapify-templates-nestjs-models-rest": {
+      "root": "libs/hapify/templates/nestjs-models-rest",
+      "sourceRoot": "libs/hapify/templates/nestjs-models-rest/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/hapify/templates/nestjs-models-rest/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hapify/templates/nestjs-models-rest"],
+          "options": {
+            "jestConfig": "libs/hapify/templates/nestjs-models-rest/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/hapify/templates/nestjs-models-rest",
+            "tsConfig": "libs/hapify/templates/nestjs-models-rest/tsconfig.lib.json",
+            "packageJson": "libs/hapify/templates/nestjs-models-rest/package.json",
+            "main": "libs/hapify/templates/nestjs-models-rest/index.ts",
+            "assets": [
+              "libs/hapify/templates/nestjs-models-rest/*.md",
+              "libs/hapify/templates/nestjs-models-rest/index.js",
+              "libs/hapify/templates/nestjs-models-rest/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/nestjs-models-rest/hapify",
+                "output": "hapify"
+              }
+            ]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
     }
   },
   "version": 2

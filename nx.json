@@ -92,6 +92,9 @@
     },
     "generated": {
       "tags": []
+    },
+    "hapify-templates-nestjs-models-rest": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {

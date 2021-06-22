@@ -28,5 +28,6 @@ module.exports = {
     '<rootDir>/libs/nestjs/rbac',
     '<rootDir>/libs/prisma',
     '<rootDir>/libs/generated',
+    '<rootDir>/libs/hapify/templates/nestjs-models-rest',
   ],
 };
