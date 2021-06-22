@@ -31,5 +31,6 @@ module.exports = {
     '<rootDir>/libs/angular/authentication',
     '<rootDir>/libs/common',
     '<rootDir>/libs/nestjs/file-storage',
+    '<rootDir>/libs/angular/file-storage',
   ],
 };

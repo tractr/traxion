@@ -1,17 +1,16 @@
 import { ClientOptions } from 'minio';
 
-import { PresignedDownloadOptions } from './presigned-download-options.interface';
-import { PresignedUploadOptions } from './presigned-upload-options.interface';
+import { PresignedDownloadConfiguration } from './presigned-download-configuration.interface';
+import { PresignedUploadConfiguration } from './presigned-upload-configuration.interface';
 
-export interface FileStorageConfig extends ClientOptions {
+export interface FileStorageConfiguration extends ClientOptions {
   region?: string;
-  buckets: string[];
+  defaultBucket: string;
   routePrefix: string;
   temporaryPrefix: string;
-  permanentPrefix: string;
   temporaryFilesTTL: number;
 
-  presignedUploadDefaults: PresignedUploadOptions;
+  presignedUpload: PresignedUploadConfiguration;
 
-  presignedDownloadDefaults: PresignedDownloadOptions;
+  presignedDownload: PresignedDownloadConfiguration;
 }

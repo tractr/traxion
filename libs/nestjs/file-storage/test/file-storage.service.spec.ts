@@ -15,18 +15,17 @@ describe('S3Service', () => {
           endPoint: 'localhost',
           port: 9000,
           useSSL: false,
-          buckets: ['bucket'],
+          defaultBucket: 'test',
           routePrefix: '',
           temporaryPrefix: 'temp',
-          permanentPrefix: '',
           temporaryFilesTTL: 5000,
-          presignedUploadDefaults: {
+          presignedUpload: {
             allowedMimeTypes: [''],
             minFileSize: 300,
             maxFileSize: 300,
             defaultValidity: 300,
           },
-          presignedDownloadDefaults: {
+          presignedDownload: {
             defaultValidity: 300,
           },
         }),
@@ -51,14 +50,13 @@ describe('S3Service', () => {
   });
 
   it('should generate presigned url to upload new file', async () => {
-    const result = await fileStorageService.getPresignedUploadUrl('test');
+    const result = await fileStorageService.getPresignedUploadUrl();
     expect(result.postURL).toEqual('http://localhost:9000/test');
     expect(result.formData).toBeDefined();
   });
 
   it('should generate presigned url to download storage file', async () => {
     const result = await fileStorageService.getPresignedDownloadUrl(
-      'test',
       'iceland.jpg',
     );
     expect(result).toMatch(new RegExp('^http://localhost:9000/test'));

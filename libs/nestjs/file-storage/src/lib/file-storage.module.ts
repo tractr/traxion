@@ -1,19 +1,24 @@
 import { Global, Module } from '@nestjs/common';
 
-
-import { FILE_STORAGE_DEFALT_CONFIG } from './config';
-import { FILE_STORAGE_MODULE_CONFIG } from './constants';
-import { FileStorageConfig } from './interfaces';
+import { FILE_STORAGE_CONFIGURATION } from './constants';
+import { FileStorageConfigurationDto } from './dtos/file-storage-configuration.dto';
+import { FileStorageConfiguration } from './interfaces';
 import { FileStorageService } from './services';
 
-import { ModuleOptionsHelper } from '@tractr/nestjs-core';
+import { ModuleOptionsHelper, validateFactory } from '@tractr/nestjs-core';
 
 @Global()
 @Module({
   providers: [FileStorageService],
   exports: [FileStorageService],
 })
-export class FileStorageModule extends ModuleOptionsHelper<FileStorageConfig>(
-  FILE_STORAGE_MODULE_CONFIG,
-  FILE_STORAGE_DEFALT_CONFIG,
-) {}
+export class FileStorageModule extends ModuleOptionsHelper<FileStorageConfiguration>(
+  FILE_STORAGE_CONFIGURATION,
+) {
+  static register(options: FileStorageConfiguration) {
+    const validatedOptions = validateFactory(FileStorageConfigurationDto)(
+      options,
+    );
+    return super.register(validatedOptions);
+  }
+}

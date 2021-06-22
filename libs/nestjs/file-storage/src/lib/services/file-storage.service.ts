@@ -2,37 +2,38 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Client, CopyConditions } from 'minio';
 import { v4 as uuidv4 } from 'uuid';
 
-import { FILE_STORAGE_MODULE_CONFIG } from '../constants';
-import { FileStorageConfig } from '../interfaces';
+import { FILE_STORAGE_CONFIGURATION } from '../constants';
+import { FileStorageConfiguration } from '../interfaces';
 
 @Injectable()
 export class FileStorageService extends Client {
   constructor(
-    @Inject(FILE_STORAGE_MODULE_CONFIG)
-    private fileStorageConfig: FileStorageConfig,
+    @Inject(FILE_STORAGE_CONFIGURATION)
+    private fileStorageConfiguration: FileStorageConfiguration,
   ) {
-    super(fileStorageConfig);
+    super(fileStorageConfiguration);
   }
 
   /**
    * Get presigned upload url
    *
-   * @param bucket - Bucket to upload file
+   * @param customBucket - Custom bucket to upload file. Default
+   * bucket will be used if not provided
    */
-  public getPresignedUploadUrl(bucket: string) {
-    const { temporaryPrefix, presignedUploadDefaults } = this.fileStorageConfig;
+  public getPresignedUploadUrl(customBucket?: string) {
+    const { temporaryPrefix, presignedUpload, defaultBucket } =
+      this.fileStorageConfiguration;
+    const bucket = customBucket ?? defaultBucket;
     const path = `${temporaryPrefix}/${this.getUniqueFilename()}`;
-    const expires = new Date(
-      Date.now() + presignedUploadDefaults.defaultValidity,
-    );
+    const expires = new Date(Date.now() + presignedUpload.defaultValidity);
 
     const policy = this.newPostPolicy();
     policy.setBucket(bucket);
     policy.setKey(path);
     policy.setExpires(expires);
     policy.setContentLengthRange(
-      presignedUploadDefaults.minFileSize,
-      presignedUploadDefaults.maxFileSize,
+      presignedUpload.minFileSize,
+      presignedUpload.maxFileSize,
     );
     return this.presignedPostPolicy(policy);
   }
@@ -40,14 +41,17 @@ export class FileStorageService extends Client {
   /**
    * Get presigned upload url
    *
-   * @param bucket - Bucket to download from
    * @param object - Object to download
+   * @param customBucket - Custom bucket to upload file. Default
+   * bucket will be used if not provided
    */
-  public getPresignedDownloadUrl(bucket: string, object: string) {
+  public getPresignedDownloadUrl(object: string, customBucket?: string) {
+    const { defaultBucket, presignedDownload } = this.fileStorageConfiguration;
+    const bucket = customBucket ?? defaultBucket;
     return this.presignedGetObject(
       bucket,
       object,
-      this.fileStorageConfig.presignedDownloadDefaults.defaultValidity,
+      presignedDownload.defaultValidity,
     );
   }
 
@@ -64,17 +68,19 @@ export class FileStorageService extends Client {
   /**
    * Check if a file exists on file storage
    *
-   * @param bucket - Targeted bucket
    * @param file - File to check
+   * @param customBucket - Custom bucket to upload file. Default
+   * bucket will be used if not provided
    */
-  public async doesFileExists(bucket: string, file: string) {
+  public async doesFileExists(file: string, customBucket?: string) {
+    const bucket = customBucket ?? this.fileStorageConfiguration.defaultBucket;
     try {
       await this.statObject(bucket, file);
       return true;
     } catch (e) {
       if (e.code === 'NotFound') return false;
       throw new Error(
-        `Something went wrong while testing file existence: ${JSON.stringify(
+        `Something went wrong while testing existence of file ${file} in bucket ${bucket}: ${JSON.stringify(
           e,
         )}`,
       );
@@ -84,16 +90,18 @@ export class FileStorageService extends Client {
   /**
    * Move a temporary file to a permanent destination
    *
-   * @param bucket - Targeted bucket
    * @param file - file to commit
    * @param destination - file destination
+   * @param customBucket - Custom bucket to upload file. Default
+   * bucket will be used if not provided
    */
   public async commitTemporaryFile(
-    bucket: string,
     file: string,
     destination: string,
+    customBucket: string,
   ) {
-    const temporaryFile = `${this.fileStorageConfig.temporaryPrefix}/${file}`;
+    const bucket = customBucket ?? this.fileStorageConfiguration.defaultBucket;
+    const temporaryFile = `${this.fileStorageConfiguration.temporaryPrefix}/${file}`;
 
     if (await this.doesFileExists(bucket, temporaryFile))
       throw new Error(
@@ -118,10 +126,14 @@ export class FileStorageService extends Client {
    * Remove outdated temporary files from targeted bucket
    *
    * @param bucket - Targeted bucket
+   * @param customBucket - Custom bucket to upload file. Default
+   * bucket will be used if not provided
    */
-  public async removeOutdatedTemporaryFiles(bucket: string) {
-    const { temporaryPrefix, temporaryFilesTTL } = this.fileStorageConfig;
+  public async removeOutdatedTemporaryFiles(customBucket?: string) {
+    const { temporaryPrefix, temporaryFilesTTL, defaultBucket } =
+      this.fileStorageConfiguration;
 
+    const bucket = customBucket ?? defaultBucket;
     const limit = new Date();
     limit.setMilliseconds(-1 * temporaryFilesTTL);
 

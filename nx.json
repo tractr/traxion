@@ -146,6 +146,9 @@
     },
     "nestjs-file-storage": {
       "tags": []
+    },
+    "angular-file-storage": {
+      "tags": []
     }
   },
   "targetDependencies": {
