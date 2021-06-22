@@ -946,7 +946,11 @@
               "apps/angular-pwa/src/favicon.ico",
               "apps/angular-pwa/src/assets"
             ],
-            "styles": ["apps/angular-pwa/src/styles.less"],
+            "styles": [
+              "./node_modules/tailwindcss/tailwind.css",
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "apps/angular-pwa/src/styles.less"
+            ],
             "scripts": []
           },
           "configurations": {

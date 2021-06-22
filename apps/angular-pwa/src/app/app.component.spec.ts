@@ -27,8 +27,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain(
-      'Welcome to angular-pwa!',
+    expect(compiled.querySelector('.content span').textContent).toContain(
+      'angular-pwa app is running!',
     );
   });
 });
