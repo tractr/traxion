@@ -1,11 +1,9 @@
 import { 
   PrismaClient,
   <<Model pascal>>,
-  <<for Fields entity field>>
-    <<<if (field.model.names.pascal !== root.names.pascal) {>>>
-  <<field.model pascal>>,
-    <<<}>>>
-  <<endfor>>
+  <<<for (const dependencie of getDependencies()) {>>>
+    <<dependencie pascal>>,
+  <<<}>>>
 } from '@prisma/client';
 <<if Fields entity>>
 import { random } from 'faker';
@@ -129,3 +127,12 @@ export async function seed<<Model pascal>>s(
   await insert<<Model pascal>>s(prisma, seeds);
   return seeds;
 }
+
+<<<
+function getDependencies() {
+  const seen = { [root.id]: true };
+  return [ ...root.dependencies.list ]
+    .filter((m) => (seen[m.id] ? false : (seen[m.id] = true)));
+}
+>>>
+
