@@ -665,14 +665,6 @@
           },
           "outputs": ["{options.outputPath}"]
         },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/hapify/templates/nestjs-models-rest/**/*.ts"
-            ]
-          }
-        },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
           "options": {
