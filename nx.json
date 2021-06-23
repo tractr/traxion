@@ -116,6 +116,12 @@
         "strictlyOrderedTargets": ["build", "generate"]
       },
       "runner": "@nrwl/workspace/tasks-runners/default"
+    },
+    "angular-components": {
+      "tags": []
+    },
+    "nestjs-mailer": {
+      "tags": []
     }
   }
 }
