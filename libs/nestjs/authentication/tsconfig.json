@@ -9,8 +9,5 @@
     {
       "path": "./tsconfig.spec.json"
     }
-  ],
-  "compilerOptions": {
-    "rootDirs": ["../../generated/generated/nestjs-models-common", "." ]
-  }
+  ]
 }

@@ -12,15 +12,15 @@ import {
 import { AUTHENTICATION_OPTIONS } from '../../src/config';
 import { AuthenticationEndpointMockController } from '../mock/authentication-endpoint-mock.controller';
 
-import { mockUserFactory } from '@generated/models/mock';
+import { LoggerModule } from '@tractr/nestjs-core';
+import { mockUserFactory } from '@traxion/models/mock';
 import {
   USER_DATABASE_SERVICE,
   USER_SERVICE,
   UserDatabaseService,
   UserService,
-} from '@generated/nestjs-models-common';
-import { mockUserServiceFactory } from '@generated/nestjs-models-common/mock';
-import { LoggerModule } from '@tractr/nestjs-core';
+} from '@traxion/nestjs-models-common';
+import { mockUserServiceFactory } from '@traxion/nestjs-models-common/mock';
 
 describe('Authentication Module (integration)', () => {
   let app: INestApplication;

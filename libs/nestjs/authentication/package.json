@@ -1,4 +1,7 @@
 {
   "name": "@tractr/nestjs-authentication",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@tractr/nestjs-database": "^1.4.0"
+  }
 }

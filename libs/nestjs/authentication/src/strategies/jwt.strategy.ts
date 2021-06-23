@@ -6,7 +6,7 @@ import { Strategy } from 'passport-jwt';
 import { JwtTokenPayload } from '../dtos';
 import { StrategyOptionsService } from '../services';
 
-import { USER_SERVICE, UserService } from '@generated/nestjs-models-common';
+import { USER_SERVICE, UserService } from '@traxion/nestjs-models-common';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {

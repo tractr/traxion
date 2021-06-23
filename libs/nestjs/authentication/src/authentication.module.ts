@@ -12,13 +12,13 @@ import { AuthenticationOptions } from './interfaces';
 import { AuthenticationService, StrategyOptionsService } from './services';
 import { JwtStrategy, LocalStrategy } from './strategies';
 
-import { UserModelModule } from '@generated/nestjs-models-common';
 import {
   AsyncOptions,
   LoggerModule,
   ModuleOptionsHelper,
   ModuleOverrideMetadata,
 } from '@tractr/nestjs-core';
+import { UserModelModule } from '@traxion/nestjs-models-common';
 
 @Module({})
 export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOptions>(
