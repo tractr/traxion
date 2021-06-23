@@ -51,6 +51,11 @@ jobs:
         run: npm ci --no-audit --no-progress
 
       # We only run the affected lint
+      - name: Run Affected Build
+        shell: bash
+        run: npm run affected:build -- --base=remotes/origin/main --with-deps
+
+      # We only run the affected lint
       # FIXME: why prettier exit code 1 without any errors
       # - name: Run Affected Format check
       #   shell: bash
