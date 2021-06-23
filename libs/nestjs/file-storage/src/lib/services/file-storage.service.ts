@@ -41,16 +41,16 @@ export class FileStorageService extends Client {
   /**
    * Get presigned upload url
    *
-   * @param object - Object to download
+   * @param file - File to download
    * @param customBucket - Custom bucket to upload file. Default
    * bucket will be used if not provided
    */
-  public getPresignedDownloadUrl(object: string, customBucket?: string) {
+  public getPresignedDownloadUrl(file: string, customBucket?: string) {
     const { defaultBucket, presignedDownload } = this.fileStorageConfiguration;
     const bucket = customBucket ?? defaultBucket;
     return this.presignedGetObject(
       bucket,
-      object,
+      file,
       presignedDownload.defaultValidity,
     );
   }

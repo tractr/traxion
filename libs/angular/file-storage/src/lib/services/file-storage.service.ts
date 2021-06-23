@@ -4,7 +4,7 @@ import { map, mergeMap } from 'rxjs/operators';
 
 import { FILE_STORAGE_CONFIGURATION } from '../constants';
 import {
-  FileStorageConfig,
+  FileStorageConfiguration,
   FileStorageFormData,
   FileStoragePresignedPostToken,
 } from '../interfaces';
@@ -15,18 +15,45 @@ import {
 export class FileStorageService {
   constructor(
     @Inject(FILE_STORAGE_CONFIGURATION)
-    private fileStorageConfig: FileStorageConfig,
+    private fileStorageConfiguration: FileStorageConfiguration,
     private http: HttpClient,
   ) {}
 
   /**
-   * Get presigned post token to upload a file into storage
+   * Get presigned upload url to upload a file into storage
    *
+   * @params customBucket - Custom bucket to update file. Else default
+   * bucket will be used
    * @returns Observable that resolve into a presigned post token
    */
-  public getPresignedUploadToken() {
+  public getPresignedUploadUrl(customBucket?: string) {
+    const { defaultBucket, presignedUploadEndpoint } =
+      this.fileStorageConfiguration;
+    const bucket = customBucket ?? defaultBucket;
     return this.http.get<FileStoragePresignedPostToken>(
-      `${this.fileStorageConfig.fileStorageEndpoint}`,
+      presignedUploadEndpoint,
+      {
+        params: { bucket },
+      },
+    );
+  }
+
+  /**
+   * Get presigned download url to download a file into storage
+   *
+   * @params customBucket - Custom bucket to update file. Else default
+   * bucket will be used
+   * @returns Observable that resolve into a presigned post token
+   */
+  public getPresignedDownloadUrl(file: string, customBucket?: string) {
+    const { defaultBucket, presignedDownloadEndpoint } =
+      this.fileStorageConfiguration;
+    const bucket = customBucket ?? defaultBucket;
+    return this.http.get<FileStoragePresignedPostToken>(
+      presignedDownloadEndpoint,
+      {
+        params: { bucket, file },
+      },
     );
   }
 
@@ -60,10 +87,14 @@ export class FileStorageService {
    * @param reportProgress - Option to report request progress
    * @returns Observable
    */
-  public uploadFileToFileStorage(file: File, reportProgress = false) {
+  public uploadFileToFileStorage(
+    file: File,
+    reportProgress = false,
+    customBucket?: string,
+  ) {
     if (!file) throw new Error('No file provided for upload to file storage');
 
-    return this.getPresignedUploadToken().pipe(
+    return this.getPresignedUploadUrl(customBucket).pipe(
       map(({ formData, postUrl }) => ({
         postUrl,
         formData: this.generateFormData(formData, file),

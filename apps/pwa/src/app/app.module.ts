@@ -19,6 +19,12 @@ import { AngularComponentsModule } from '@tractr/angular-components';
 import { AngularFormModule } from '@tractr/angular-form';
 import { AngularToolsModule } from '@tractr/angular-tools';
 
+const fileStorageConfiguration = {
+  defaultBucket: 'test',
+  presignedDownloadEndpoint: 'http://localhost:3333/api/file-storage/download',
+  presignedUploadEndpoint: 'http://localhost:3333/api/file-storage/upload',
+};
+
 @NgModule({
   declarations: [
     MoleculeHomeComponent,

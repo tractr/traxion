@@ -1,36 +1,7 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12 my-3 my-lg-5">
-      <form
-        nz-form
-        class="image-form w-100"
-        [formGroup]="form"
-        (ngSubmit)="onSubmit()"
-        [nzAutoTips]="explainErrorsService.autoTips"
-      >
-        <!-- Uri -->
-        <nz-form-item>
-          <nz-form-label>{{ 'image_uri' | translate }}</nz-form-label>
-          <nz-form-control>
-            <input
-              nz-input
-              class="w-100"
-              type="text"
-              [placeholder]="'common_value-string' | translate"
-              formControlName="uri"
-            />
-          </nz-form-control>
-        </nz-form-item>
-        <!-- /Uri -->
-        <button
-          nz-button
-          nzType="primary"
-          [disabled]="form.invalid"
-          [nzLoading]="saving"
-        >
-          {{ 'common_save' | translate }}
-        </button>
-      </form>
-    </div>
-  </div>
-</div>
+<nz-upload
+  nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+  [nzHeaders]="{ authorization: 'authorization-text' }"
+  (nzChange)="handleChange($event)"
+>
+  <button nz-button><i nz-icon nzType="upload"></i>Click to Upload</button>
+</nz-upload>

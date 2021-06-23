@@ -121,7 +121,7 @@
       }
     },
     "angular-components": {
-      "prefix": "tractr",
+      "prefix": "tr",
       "projectType": "library",
       "root": "libs/angular/components",
       "sourceRoot": "libs/angular/components/src",
@@ -175,7 +175,7 @@
       }
     },
     "angular-file-storage": {
-      "prefix": "tractr",
+      "prefix": "tr",
       "projectType": "library",
       "root": "libs/angular/file-storage",
       "sourceRoot": "libs/angular/file-storage/src",
@@ -270,7 +270,7 @@
       }
     },
     "angular-tools": {
-      "prefix": "stack",
+      "prefix": "tr",
       "projectType": "library",
       "root": "libs/angular/tools",
       "sourceRoot": "libs/angular/tools/src",
@@ -1437,7 +1437,7 @@
       }
     },
     "pwa": {
-      "prefix": "tractr",
+      "prefix": "tr",
       "projectType": "application",
       "root": "apps/pwa",
       "sourceRoot": "apps/pwa/src",

@@ -6,7 +6,9 @@ export class FileStorageConfigurationDto implements FileStorageConfiguration {
   @IsString()
   defaultBucket!: string;
 
+  @IsString()
   presignedUploadEndpoint!: string;
 
+  @IsString()
   presignedDownloadEndpoint!: string;
 }
