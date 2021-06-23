@@ -326,12 +326,6 @@
             "parallel": false
           }
         },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/generated/**/*.ts"]
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
