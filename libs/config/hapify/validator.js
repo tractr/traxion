@@ -34,6 +34,11 @@ for (const field of fields) {
     errors.push(
       `Subtype 'rich' is not handled yet. Remove it from field '${field.name}'`,
     );
+  if (field.type === 'entity' && !(field.meta && field.meta.backRelation)) {
+    errors.push(
+      `Entity field must have the meta 'backRelation'. Fix field '${field.name}'`,
+    );
+  }
   if (field.subtype === 'manyOne')
     errors.push(
       `Subtype 'manyOne' is not handled yet. Remove it from field '${field.name}'`,
