@@ -8,9 +8,9 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { User } from '@prisma/client';
 import { Request, Response } from 'express';
 
+import { User } from '../../prisma/client';
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
 import { CurrentUser } from '../decorators';
 import { LocalAuthGuard } from '../guards';

@@ -4,6 +4,14 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as request from 'supertest';
 
+import { mockUserFactory } from '../../generated/models/mock';
+import {
+  USER_DATABASE_SERVICE,
+  USER_SERVICE,
+  UserDatabaseService,
+  UserService,
+} from '../../generated/nestjs-models-common';
+import { mockUserServiceFactory } from '../../generated/nestjs-models-common/mock';
 import {
   AuthenticationModule,
   AuthenticationService,
@@ -12,14 +20,6 @@ import {
 import { AUTHENTICATION_OPTIONS } from '../../src/config';
 import { AuthenticationEndpointMockController } from '../mock/authentication-endpoint-mock.controller';
 
-import { mockUserFactory } from '@generated/models/mock';
-import {
-  USER_DATABASE_SERVICE,
-  USER_SERVICE,
-  UserDatabaseService,
-  UserService,
-} from '@generated/nestjs-models-common';
-import { mockUserServiceFactory } from '@generated/nestjs-models-common/mock';
 import { LoggerModule } from '@tractr/nestjs-core';
 
 describe('Authentication Module (integration)', () => {
@@ -89,7 +89,7 @@ describe('Authentication Module (integration)', () => {
       mockUserService.findUnique.mockResolvedValue({
         ...mockUser,
         password: hashPassword,
-      });
+      } as never);
 
       const response = await request(app.getHttpServer())
         .post('/login')
@@ -107,7 +107,7 @@ describe('Authentication Module (integration)', () => {
       const mockUser = mockUserFactory();
       const accessToken = await authenticationService.createUserJWT(mockUser);
 
-      mockUserService.findUnique.mockResolvedValue(mockUser);
+      mockUserService.findUnique.mockResolvedValue(mockUser as never);
 
       const response = await request(app.getHttpServer())
         .get('/me')

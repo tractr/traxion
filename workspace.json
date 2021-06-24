@@ -806,14 +806,36 @@
         "build": {
           "executor": "@nrwl/node:package",
           "options": {
-            "assets": ["libs/nestjs/authentication/*.md"],
+            "assets": [
+              "libs/nestjs/authentication/*.md",
+              {
+                "glob": "**/*",
+                "input": "libs/nestjs/authentication/prisma/",
+                "output": "./prisma/"
+              }
+            ],
             "main": "libs/nestjs/authentication/src/index.ts",
             "outputPath": "dist/libs/nestjs/authentication",
             "packageJson": "libs/nestjs/authentication/package.json",
-            "srcRootForCompilationRoot": "",
             "tsConfig": "libs/nestjs/authentication/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf generated",
+              "node ../../../dist/libs/hapify/generate-config/src/index.js",
+              "npx hpf generate",
+              "npx prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
+              "npx prisma format",
+              "npx prisma generate",
+              "rm ./prisma/client/query-engine-*"
+            ],
+            "cwd": "libs/nestjs/authentication",
+            "parallel": false
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",

@@ -61,10 +61,13 @@
       "@tractr/hapify-templates-nestjs-models-rest": [
         "libs/hapify/templates/nestjs-models-rest/src/index.ts"
       ],
-      "@generated/*": ["libs/generated/generated/*"]
+      "@generated/*": [
+        "dist/libs/generated/generated/*",
+        "libs/generated/generated/*"
+      ]
     },
     "resolveJsonModule": true,
-    "rootDirs": ["."],
+    "rootDir": ".",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
