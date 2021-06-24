@@ -31,141 +31,6 @@
     }
   },
   "projects": {
-    "@generated-angular": {
-      "projectType": "library",
-      "root": "libs/@generated/angular",
-      "sourceRoot": "libs/@generated/angular/src",
-      "targets": {
-        "generate": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "npx rimraf generated",
-              "node ../../../dist/libs/hapify/generate-config/src",
-              "npx hpf generate"
-            ],
-            "cwd": "libs/@generated/angular",
-            "parallel": false
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/@generated/angular/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/@generated/angular/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/@generated/angular"]
-        }
-      }
-    },
-    "@generated-nestjs": {
-      "projectType": "library",
-      "root": "libs/@generated/nestjs",
-      "sourceRoot": "libs/@generated/nestjs/src",
-      "targets": {
-        "generate": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "npx rimraf generated",
-              "node ../../../dist/libs/hapify/generate-config/src",
-              "npx hpf generate"
-            ],
-            "cwd": "libs/@generated/nestjs",
-            "parallel": false
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/@generated/nestjs/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/@generated/nestjs/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/@generated/nestjs"]
-        }
-      }
-    },
-    "@generated-prisma": {
-      "projectType": "library",
-      "root": "libs/@generated/prisma",
-      "sourceRoot": "libs/@generated/prisma/src",
-      "targets": {
-        "generate": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "npx rimraf generated",
-              "node ../../../dist/libs/hapify/generate-config/src",
-              "npx hpf generate",
-              "npx prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
-              "npx prisma format",
-              "npx prisma generate"
-            ],
-            "cwd": "libs/@generated/prisma",
-            "parallel": false
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/@generated/prisma/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/@generated/prisma/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/@generated/prisma"]
-        }
-      }
-    },
-    "@generated-shared": {
-      "projectType": "library",
-      "root": "libs/@generated/shared",
-      "sourceRoot": "libs/@generated/shared/src",
-      "targets": {
-        "generate": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "npx rimraf generated",
-              "node ../../../dist/libs/hapify/generate-config/src",
-              "npx hpf generate"
-            ],
-            "cwd": "libs/@generated/shared",
-            "parallel": false
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/@generated/shared/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/@generated/shared/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/@generated/shared"]
-        }
-      }
-    },
     "angular-components": {
       "prefix": "tractr",
       "projectType": "library",
@@ -430,6 +295,44 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/config/eslint"]
+        }
+      }
+    },
+    "generated": {
+      "projectType": "library",
+      "root": "libs/generated",
+      "sourceRoot": "libs/generated/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/generated/*.md"],
+            "main": "libs/generated/src/index.ts",
+            "outputPath": "dist/libs/generated",
+            "packageJson": "libs/generated/package.json",
+            "tsConfig": "libs/generated/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf generated",
+              "node ../../dist/libs/hapify/generate-config/src/index.js",
+              "npx hpf generate"
+            ],
+            "cwd": "libs/generated",
+            "parallel": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/generated/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/generated"]
         }
       }
     },
@@ -731,6 +634,53 @@
         }
       }
     },
+    "hapify-templates-nestjs-models-rest": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/nestjs-models-rest",
+      "sourceRoot": "libs/hapify/templates/nestjs-models-rest/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/nestjs-models-rest/*.md",
+              "libs/hapify/templates/nestjs-models-rest/index.js",
+              "libs/hapify/templates/nestjs-models-rest/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/nestjs-models-rest/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/nestjs-models-rest/index.js",
+            "outputPath": "dist/libs/hapify/templates/nestjs-models-rest",
+            "packageJson": "libs/hapify/templates/nestjs-models-rest/package.json",
+            "tsConfig": "libs/hapify/templates/nestjs-models-rest/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/hapify/templates/nestjs-models-rest/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/hapify/templates/nestjs-models-rest"]
+        }
+      }
+    },
     "hapify-templates-prisma": {
       "projectType": "library",
       "root": "libs/hapify/templates/prisma",
@@ -856,7 +806,14 @@
         "build": {
           "executor": "@nrwl/node:package",
           "options": {
-            "assets": ["libs/nestjs/authentication/*.md"],
+            "assets": [
+              "libs/nestjs/authentication/*.md",
+              {
+                "glob": "**/*",
+                "input": "libs/nestjs/authentication/prisma/",
+                "output": "./prisma/"
+              }
+            ],
             "main": "libs/nestjs/authentication/src/index.ts",
             "outputPath": "dist/libs/nestjs/authentication",
             "packageJson": "libs/nestjs/authentication/package.json",
@@ -869,8 +826,12 @@
           "options": {
             "commands": [
               "npx rimraf generated",
-              "node ../../../dist/libs/hapify/generate-config/src",
-              "npx hpf generate"
+              "node ../../../dist/libs/hapify/generate-config/src/index.js",
+              "npx hpf generate",
+              "npx prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
+              "npx prisma format",
+              "npx prisma generate",
+              "rm ./prisma/client/query-engine-*"
             ],
             "cwd": "libs/nestjs/authentication",
             "parallel": false
@@ -880,6 +841,18 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/nestjs/authentication/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
           }
         },
         "test": {
@@ -1097,6 +1070,42 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/config/prettier"]
+        }
+      }
+    },
+    "prisma": {
+      "projectType": "library",
+      "root": "libs/prisma",
+      "sourceRoot": "libs/prisma/src",
+      "targets": {
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf generated",
+              "node ../../dist/libs/hapify/generate-config/src/index.js",
+              "npx hpf generate",
+              "npx prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
+              "npx prisma format",
+              "npx prisma generate"
+            ],
+            "cwd": "libs/prisma",
+            "parallel": false
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/prisma/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/prisma/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/prisma"]
         }
       }
     },

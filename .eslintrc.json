@@ -14,7 +14,7 @@
         "import/no-unresolved": [
           "error",
           {
-            "ignore": ["^@(tractr|generated)/"]
+            "ignore": ["^@(tractr|generated|traxion)/"]
           }
         ],
         "@nrwl/nx/enforce-module-boundaries": [
@@ -44,6 +44,6 @@
     }
   ],
   "settings": {
-    "import/internal-regex": "^@(tractr|generated)/"
+    "import/internal-regex": "^@(tractr|generated|traxion)/"
   }
 }

@@ -1,14 +1,16 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
+import {
+  USER_SERVICE,
+  UserService,
+} from '../../generated/nestjs-models-common';
+import { User } from '../../prisma/client';
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
 import { AccessTokenDto } from '../dtos';
 import { BadPasswordError, UserNotFoundError } from '../errors';
 import { AuthenticationOptions } from '../interfaces';
-
-import { USER_SERVICE, UserService } from '@generated/nestjs-models-common';
 
 @Injectable()
 export class AuthenticationService {

@@ -1,0 +1,29 @@
+import { Module } from '@nestjs/common';
+import { ModuleOverride } from '@tractr/nestjs-core';
+ 
+import { <<Model pascal>>ModelModule } from '@generated/nestjs-models-common';
+import { <<Model pascal>>Controller } from './controllers';
+import { <<Model constant>>_CONTROLLER, <<Model constant>>_REST_DTO_SERVICE } from './<<Model kebab>>-rest.constant';
+import { <<Model pascal>>RestDtoService } from './services';
+ 
+const providers = [
+  {
+    provide: <<Model constant>>_REST_DTO_SERVICE,
+    useClass: <<Model pascal>>RestDtoService,
+  },
+];
+ 
+@Module({
+  exports: providers,
+  providers,
+})
+export class <<Model pascal>>RestModule extends ModuleOverride {
+  static controllers = [
+    {
+      provide: <<Model constant>>_CONTROLLER,
+      useClass: <<Model pascal>>Controller,
+    },
+  ];
+ 
+  static dependencies = [<<Model pascal>>ModelModule];
+}
