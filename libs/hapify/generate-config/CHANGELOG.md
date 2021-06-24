@@ -3,6 +3,20 @@
 This file was generated using
 [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.2.0](https://github.com/tractr/stack/compare/hapify-generate-config-1.1.0...hapify-generate-config-1.2.0) (2021-06-24)
+
+### Bug Fixes
+
+- configure the npm release and publish correctly
+  ([#143](https://github.com/tractr/stack/issues/143))
+  ([b07d8fd](https://github.com/tractr/stack/commit/b07d8fd33330d1d06d0465a9e9d65fb7a0415e1b))
+
+### Features
+
+- create authentication nestjs lib package
+  ([#135](https://github.com/tractr/stack/issues/135))
+  ([37137dd](https://github.com/tractr/stack/commit/37137ddbab63e4aa8b3cac270d4564c722fed5ba))
+
 # [1.1.0](https://github.com/tractr/stack/compare/hapify-generate-config-1.0.5...hapify-generate-config-1.1.0) (2021-06-16)
 
 ### Features
