@@ -325,14 +325,6 @@
             "cwd": "libs/generated",
             "parallel": false
           }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/generated/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/generated"]
         }
       }
     },
