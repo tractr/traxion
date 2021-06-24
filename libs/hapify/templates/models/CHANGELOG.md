@@ -3,6 +3,20 @@
 This file was generated using
 [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.4.0](https://github.com/tractr/stack/compare/hapify-templates-models-1.3.0...hapify-templates-models-1.4.0) (2021-06-24)
+
+### Bug Fixes
+
+- fix enum barrel import in hapify-templates-models
+  ([#148](https://github.com/tractr/stack/issues/148))
+  ([1ee071b](https://github.com/tractr/stack/commit/1ee071b4099aea367dad3e2f7fcf5c867e38f388))
+
+### Features
+
+- change generated library configurations
+  ([#146](https://github.com/tractr/stack/issues/146))
+  ([3ee951e](https://github.com/tractr/stack/commit/3ee951e998b6e7d4bcbf9f66d4216ce155958cea))
+
 # [1.3.0](https://github.com/tractr/stack/compare/hapify-templates-models-1.2.4...hapify-templates-models-1.3.0) (2021-06-16)
 
 ### Features
