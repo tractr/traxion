@@ -12,9 +12,9 @@ import { AuthenticationOptions } from '../../../src/interfaces';
 import { mockAuthenticationOptionsFactory } from '../../mock/authentication-options.mock';
 import { mockJwtServiceFactory } from '../../mock/jwt.service.mock';
 
-import { mockUserFactory } from '@traxion/models/mock';
-import { USER_SERVICE, UserService } from '@traxion/nestjs-models-common';
-import { mockUserServiceFactory } from '@traxion/nestjs-models-common/mock';
+import { mockUserFactory } from '@generated/models/mock';
+import { USER_SERVICE, UserService } from '@generated/nestjs-models-common';
+import { mockUserServiceFactory } from '@generated/nestjs-models-common/mock';
 
 describe('AuthService', () => {
   let authService: AuthenticationService;

@@ -810,6 +810,7 @@
             "main": "libs/nestjs/authentication/src/index.ts",
             "outputPath": "dist/libs/nestjs/authentication",
             "packageJson": "libs/nestjs/authentication/package.json",
+            "srcRootForCompilationRoot": "",
             "tsConfig": "libs/nestjs/authentication/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]

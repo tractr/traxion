@@ -8,7 +8,7 @@ import { AccessTokenDto } from '../dtos';
 import { BadPasswordError, UserNotFoundError } from '../errors';
 import { AuthenticationOptions } from '../interfaces';
 
-import { USER_SERVICE, UserService } from '@traxion/nestjs-models-common';
+import { USER_SERVICE, UserService } from '@generated/nestjs-models-common';
 
 @Injectable()
 export class AuthenticationService {
