@@ -58,6 +58,7 @@ yarn.lock
 
 # Generated files
 **/generated
+!libs/generated
 
 # Hapify folder
 **/prisma/schemas/generated.prisma.hpf
