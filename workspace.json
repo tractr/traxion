@@ -121,7 +121,7 @@
       }
     },
     "angular-components": {
-      "prefix": "tr",
+      "prefix": "tractr",
       "projectType": "library",
       "root": "libs/angular/components",
       "sourceRoot": "libs/angular/components/src",
@@ -175,7 +175,7 @@
       }
     },
     "angular-file-storage": {
-      "prefix": "tr",
+      "prefix": "tractr",
       "projectType": "library",
       "root": "libs/angular/file-storage",
       "sourceRoot": "libs/angular/file-storage/src",
@@ -203,6 +203,19 @@
               "libs/angular/file-storage/src/**/*.ts",
               "libs/angular/file-storage/src/**/*.html"
             ]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public",
+            "buildTarget": "production"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
           }
         },
         "test": {
@@ -270,7 +283,7 @@
       }
     },
     "angular-tools": {
-      "prefix": "tr",
+      "prefix": "tractr",
       "projectType": "library",
       "root": "libs/angular/tools",
       "sourceRoot": "libs/angular/tools/src",
@@ -386,14 +399,6 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/apps/api"]
-        },
-        "cli": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": ["ts-node -r tsconfig-paths/register src/cli.ts"],
-            "cwd": "apps/api",
-            "parallel": false
-          }
         }
       }
     },
@@ -1234,6 +1239,18 @@
             "lintFilePatterns": ["libs/nestjs/file-storage/**/*.ts"]
           }
         },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -1445,7 +1462,7 @@
       }
     },
     "pwa": {
-      "prefix": "tr",
+      "prefix": "tractr",
       "projectType": "application",
       "root": "apps/pwa",
       "sourceRoot": "apps/pwa/src",

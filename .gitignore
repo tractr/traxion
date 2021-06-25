@@ -73,3 +73,6 @@ yarn.lock
 
 # Local ignore
 *.local-ignore*
+
+# Nestjs authentication local prisma
+libs/nestjs/authentication/prisma/client

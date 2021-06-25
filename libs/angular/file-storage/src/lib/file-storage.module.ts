@@ -10,6 +10,8 @@ import { FileStorageConfigurationDto } from './dtos';
 import { FileStorageConfiguration } from './interfaces';
 import { FileStorageService } from './services';
 
+import { transformAndValidate } from '@tractr/common';
+
 @NgModule({
   imports: [HttpClientModule],
   declarations: [],
@@ -20,26 +22,16 @@ export class FileStorageModule {
   public static forRoot(
     configuration: FileStorageConfiguration,
   ): ModuleWithProviders<FileStorageModule> {
-    const configurationDto = plainToClass(
+    const validatedConfiguration = transformAndValidate(
       FileStorageConfigurationDto,
-      configuration,
-    );
-    const errors = validateSync(configurationDto, {
-      skipMissingProperties: false,
-    });
-
-    if (errors.length > 0) {
-      throw new Error(
-        `Invalid configuration for FileStorageModule: \n\n${errors.join('\n')}`,
-      );
-    }
+    )(configuration);
 
     return {
       ngModule: FileStorageModule,
       providers: [
         {
           provide: FILE_STORAGE_CONFIGURATION,
-          useValue: configuration,
+          useValue: validatedConfiguration,
         },
       ],
     };
