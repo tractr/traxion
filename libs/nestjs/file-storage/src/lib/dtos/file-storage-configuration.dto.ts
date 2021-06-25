@@ -1,12 +1,19 @@
-import { IsBoolean, IsIn, IsInt, IsOptional, IsString } from 'class-validator';
-import { Region } from 'minio';
+import { Type } from 'class-transformer';
+import {
+  IsBoolean,
+  IsIn,
+  IsInt,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+import { ClientOptions as MinioClientOptions, Region } from 'minio';
 
 import { AwsRegions } from '../constants';
-import { FileStorageConfiguration } from '../interfaces';
 import { PresignedDownloadConfigurationDto } from './presigned-download-configuration.dto';
 import { PresignedUploadConfigurationDto } from './presigned-upload-configuration';
 
-export class FileStorageConfigurationDto implements FileStorageConfiguration {
+export class FileStorageConfigurationDto implements MinioClientOptions {
   /**
    * File storage endpoint (ip or domain)
    */
@@ -76,9 +83,9 @@ export class FileStorageConfigurationDto implements FileStorageConfiguration {
    * Set this value to override default
    * access behavior (path) for non AWS endpoints
    */
-  @IsString()
+  @IsBoolean()
   @IsOptional()
-  pathStyle = true;
+  pathStyle?: boolean;
 
   /**
    * Default bucket that will be used
@@ -104,10 +111,14 @@ export class FileStorageConfigurationDto implements FileStorageConfiguration {
   /**
    * Configuration for presigned uploads
    */
-  presignedUpload: PresignedUploadConfigurationDto;
+  @Type(() => PresignedUploadConfigurationDto)
+  @ValidateNested()
+  presignedUpload!: PresignedUploadConfigurationDto;
 
   /**
    * Configuration for presigned downloads
    */
-  presignedDownload: PresignedDownloadConfigurationDto;
+  @ValidateNested()
+  @Type(() => PresignedDownloadConfigurationDto)
+  presignedDownload!: PresignedDownloadConfigurationDto;
 }

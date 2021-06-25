@@ -386,6 +386,14 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/apps/api"]
+        },
+        "cli": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ts-node -r tsconfig-paths/register src/cli.ts"],
+            "cwd": "apps/api",
+            "parallel": false
+          }
         }
       }
     },

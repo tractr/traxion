@@ -1,31 +1,20 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { plainToClass } from 'class-transformer';
 import { validateSync } from 'class-validator';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzUploadModule } from 'ng-zorro-antd/upload';
 
-import { FileStorageUploadButtonComponent } from './components/file-storage-upload-button/file-storage-upload-button.component';
 import { FILE_STORAGE_CONFIGURATION } from './constants';
 import { FileStorageConfigurationDto } from './dtos';
 import { FileStorageConfiguration } from './interfaces';
 import { FileStorageService } from './services';
 
 @NgModule({
-  imports: [
-    HttpClientModule,
-    NzUploadModule,
-    NzIconModule,
-    NzButtonModule,
-    CommonModule,
-  ],
-  declarations: [FileStorageUploadButtonComponent],
+  imports: [HttpClientModule],
+  declarations: [],
   providers: [FileStorageService],
-  exports: [FileStorageUploadButtonComponent],
+  exports: [],
 })
 export class FileStorageModule {
   public static forRoot(

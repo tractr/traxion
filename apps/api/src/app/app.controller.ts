@@ -3,14 +3,10 @@ import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 
 import { Public } from '@tractr/nestjs-core';
-import { FileStorageService } from '@tractr/nestjs-file-storage';
 
 @Controller()
 export class AppController {
-  constructor(
-    private readonly appService: AppService,
-    private fileStorageService: FileStorageService,
-  ) {}
+  constructor(private readonly appService: AppService) {}
 
   @Get('hello')
   @Public()

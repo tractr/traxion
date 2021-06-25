@@ -3,13 +3,13 @@ import { Client, CopyConditions } from 'minio';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FILE_STORAGE_CONFIGURATION } from '../constants';
-import { FileStorageConfiguration } from '../interfaces';
+import { FileStorageConfigurationDto } from '../dtos';
 
 @Injectable()
 export class FileStorageService extends Client {
   constructor(
     @Inject(FILE_STORAGE_CONFIGURATION)
-    private fileStorageConfiguration: FileStorageConfiguration,
+    private fileStorageConfiguration: FileStorageConfigurationDto,
   ) {
     super(fileStorageConfiguration);
   }
@@ -20,9 +20,13 @@ export class FileStorageService extends Client {
    * @param customBucket - Custom bucket to upload file. Default
    * bucket will be used if not provided
    */
-  public getPresignedUploadUrl(customBucket?: string) {
+  public getPresignedUploadUrl(mimeType: string, customBucket?: string) {
     const { temporaryPrefix, presignedUpload, defaultBucket } =
       this.fileStorageConfiguration;
+
+    if (!presignedUpload.allowedMimeTypes.includes(mimeType))
+      throw new Error(`${mimeType} is not an allowed MIME type`);
+
     const bucket = customBucket ?? defaultBucket;
     const path = `${temporaryPrefix}/${this.getUniqueFilename()}`;
     const expires = new Date(Date.now() + presignedUpload.defaultValidity);
@@ -39,7 +43,7 @@ export class FileStorageService extends Client {
   }
 
   /**
-   * Get presigned upload url
+   * Get presigned download url
    *
    * @param file - File to download
    * @param customBucket - Custom bucket to upload file. Default
@@ -98,17 +102,18 @@ export class FileStorageService extends Client {
   public async commitTemporaryFile(
     file: string,
     destination: string,
-    customBucket: string,
+    customBucket?: string,
   ) {
-    const bucket = customBucket ?? this.fileStorageConfiguration.defaultBucket;
-    const temporaryFile = `${this.fileStorageConfiguration.temporaryPrefix}/${file}`;
+    const { defaultBucket, temporaryPrefix } = this.fileStorageConfiguration;
+    const bucket = customBucket ?? defaultBucket;
+    const temporaryFile = `${temporaryPrefix}/${file}`;
 
-    if (await this.doesFileExists(bucket, temporaryFile))
+    if (!(await this.doesFileExists(temporaryFile, bucket)))
       throw new Error(
         `Can not commit file ${temporaryFile} of bucket ${bucket}: file does not exists`,
       );
 
-    if (await this.doesFileExists(bucket, destination))
+    if (await this.doesFileExists(destination, bucket))
       throw new Error(
         `Can not commit file ${temporaryFile} of bucket ${bucket} to ${destination}: ${destination} already exists`,
       );
@@ -116,7 +121,7 @@ export class FileStorageService extends Client {
     await this.copyObject(
       bucket,
       destination,
-      temporaryFile,
+      `${bucket}/${temporaryFile}`,
       new CopyConditions(),
     );
     await this.removeObject(bucket, temporaryFile);
@@ -129,7 +134,7 @@ export class FileStorageService extends Client {
    * @param customBucket - Custom bucket to upload file. Default
    * bucket will be used if not provided
    */
-  public async removeOutdatedTemporaryFiles(customBucket?: string) {
+  public async pruneTemporaryFiles(customBucket?: string) {
     const { temporaryPrefix, temporaryFilesTTL, defaultBucket } =
       this.fileStorageConfiguration;
 

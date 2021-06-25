@@ -1,11 +1,11 @@
 import { IsInt, IsOptional } from 'class-validator';
 
-import { PresignedDownloadConfiguration } from '../interfaces';
-
-export class PresignedDownloadConfigurationDto
-  implements PresignedDownloadConfiguration
-{
+export class PresignedDownloadConfigurationDto {
+  /**
+   * Default validity duration of presigned download link
+   * (in seconds)
+   */
   @IsInt()
   @IsOptional()
-  defaultValidity: 300;
+  defaultValidity = 300;
 }

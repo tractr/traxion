@@ -10,15 +10,24 @@ import { FileStorageService } from '../services';
 export class FileStorageController {
   constructor(private fileStorageService: FileStorageService) {}
 
+  /**
+   * Get presigned upload url
+   */
   @Get('upload')
   getPresignedUploadUrl(@Query() queryDto: GetPresignedUploadUrlQueryDto) {
-    const { bucket } = queryDto;
-    return this.fileStorageService.getPresignedUploadUrl(bucket);
+    const { mimeType, customBucket } = queryDto;
+    return this.fileStorageService.getPresignedUploadUrl(
+      mimeType,
+      customBucket,
+    );
   }
 
+  /**
+   * Get presigned download url
+   */
   @Get('download')
   getPresignedDownloadUrl(@Query() queryDto: GetPresignedDownloadUrlQueryDto) {
-    const { file, bucket } = queryDto;
-    return this.fileStorageService.getPresignedDownloadUrl(file, bucket);
+    const { file, customBucket } = queryDto;
+    return this.fileStorageService.getPresignedDownloadUrl(file, customBucket);
   }
 }

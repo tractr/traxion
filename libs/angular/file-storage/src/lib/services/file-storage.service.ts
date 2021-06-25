@@ -22,18 +22,19 @@ export class FileStorageService {
   /**
    * Get presigned upload url to upload a file into storage
    *
+   * @params mimeType - MIME type of the file to upload
    * @params customBucket - Custom bucket to update file. Else default
    * bucket will be used
    * @returns Observable that resolve into a presigned post token
    */
-  public getPresignedUploadUrl(customBucket?: string) {
+  public getPresignedUploadUrl(mimeType: string, customBucket?: string) {
     const { defaultBucket, presignedUploadEndpoint } =
       this.fileStorageConfiguration;
     const bucket = customBucket ?? defaultBucket;
     return this.http.get<FileStoragePresignedPostToken>(
       presignedUploadEndpoint,
       {
-        params: { bucket },
+        params: { mimeType, bucket },
       },
     );
   }
@@ -94,7 +95,7 @@ export class FileStorageService {
   ) {
     if (!file) throw new Error('No file provided for upload to file storage');
 
-    return this.getPresignedUploadUrl(customBucket).pipe(
+    return this.getPresignedUploadUrl(file.type, customBucket).pipe(
       map(({ formData, postUrl }) => ({
         postUrl,
         formData: this.generateFormData(formData, file),
