@@ -1,0 +1,14 @@
+import { Transform, TransformFnParams } from 'class-transformer';
+ 
+export function filterInt(value: any) {
+  if (/^[-+]?(\d+|Infinity)$/.test(value)) {
+    return Number(value);
+  } else {
+    return NaN;
+  }
+}
+ 
+export function TransformStringToInt() {
+  return Transform((string: TransformFnParams) => filterInt(string.value))
+}
+ 

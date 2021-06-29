@@ -24,7 +24,7 @@ export type ModuleOverrideMetadataDependencies<T> = T extends {
   : never;
 
 export type ModuleOverrideMetadataDeepDependencies<
-  T extends ModuleOverrideMetadata
+  T extends ModuleOverrideMetadata,
 > = ModuleOverrideMetadataDependencies<T> extends {
   dependencies: ModuleOverrideMetadata[];
 }
@@ -36,26 +36,24 @@ export type ModuleOverrideMetadataDeepDependencies<
   : ModuleOverrideMetadataDependencies<T>;
 
 export type PickModuleOverrideMetadataProperties<
-  T extends ModuleOverrideMetadata
+  T extends ModuleOverrideMetadata,
 > = {
   [K in keyof ModuleOverrideMetadata]: T[K];
 };
 
-export type MappedModuleOverrideMetadata<
-  T extends ModuleOverrideMetadata
-> = PackedAll<
-  PickModuleOverrideMetadataProperties<
-    Merge<
-      Record<string, never>,
-      UnpackedAll<ModuleOverrideMetadataDeepDependencies<T>>
+export type MappedModuleOverrideMetadata<T extends ModuleOverrideMetadata> =
+  PackedAll<
+    PickModuleOverrideMetadataProperties<
+      Merge<
+        Record<string, never>,
+        UnpackedAll<ModuleOverrideMetadataDeepDependencies<T>>
+      >
     >
-  >
->;
+  >;
 
 export type OnlyClassProviderLikeProperties<T> = {
   [K in keyof T]: Extract<T[K], { provide: string; useClass: unknown }>;
 };
 
-export type StrictMappedModuleOverrideMetadata<
-  T
-> = OnlyClassProviderLikeProperties<MappedModuleOverrideMetadata<T>>;
+export type StrictMappedModuleOverrideMetadata<T> =
+  OnlyClassProviderLikeProperties<MappedModuleOverrideMetadata<T>>;

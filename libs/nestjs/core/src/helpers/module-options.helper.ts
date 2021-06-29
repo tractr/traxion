@@ -16,7 +16,7 @@ export interface OptionsFactory<O = Options> {
 
 export interface AsyncOptions<
   O,
-  F extends OptionsFactory<O> = OptionsFactory<O>
+  F extends OptionsFactory<O> = OptionsFactory<O>,
 > extends Pick<ModuleMetadata, 'imports'> {
   useExisting?: Type<F>;
   useClass?: Type<F>;
@@ -28,7 +28,7 @@ export interface AsyncOptions<
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function ModuleOptionsHelper<
   O,
-  F extends OptionsFactory<O> = OptionsFactory<O>
+  F extends OptionsFactory<O> = OptionsFactory<O>,
 >(moduleOptionsProvide: string, defaultOptions?: O) {
   return class ModuleOptions {
     static register(options?: O): DynamicModule {
