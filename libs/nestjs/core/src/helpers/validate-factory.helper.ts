@@ -8,7 +8,7 @@ export function validateFactory<T>(classValidator: ClassConstructor<T>) {
       enableImplicitConversion: true,
     });
     // eslint-disable-next-line @typescript-eslint/ban-types
-    const errors = validateSync((validatedConfig as unknown) as object, {
+    const errors = validateSync(validatedConfig as unknown as object, {
       skipMissingProperties: false,
     });
 

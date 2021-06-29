@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 
 import { AngularComponentsModule } from '@tractr/angular-components';
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, HttpClientModule, AngularComponentsModule],

@@ -7,6 +7,10 @@ import {
   IsNumber,
 <<endif>>
 } from 'class-validator';
+
+<<if Fields primary and number>>
+import { TransformStringToInt } from '../../helpers';
+<<endif>>
  
 export class <<Model pascal>>UpsertParamsDto {
 <<for Fields primary primaryField>>
@@ -17,6 +21,7 @@ export class <<Model pascal>>UpsertParamsDto {
   <<elseif primaryField number>>
   @IsNumber()
   @IsInt()
+  @TransformStringToInt()
   <<primaryField camel>>!: number;
   <<endif>>
 <<endfor>>
