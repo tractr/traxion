@@ -16,6 +16,10 @@
       "@app/*": ["apps/pwa/src/app/*"],
       "@assets/*": ["apps/pwa/src/assets/*"],
       "@env/*": ["apps/pwa/src/environments/*"],
+      "@generated/*": [
+        "dist/libs/generated/generated/*",
+        "libs/generated/generated/*"
+      ],
       "@tractr/angular-components": ["libs/angular/components/src/index.ts"],
       "@tractr/angular-tools": ["libs/angular/tools/src/index.ts"],
       "@tractr/api-interfaces": ["libs/api-interfaces/src/index.ts"],
@@ -40,6 +44,9 @@
       "@tractr/hapify-templates-nestjs-models-common": [
         "libs/hapify/templates/nestjs-models-common/src/index.ts"
       ],
+      "@tractr/hapify-templates-nestjs-models-rest": [
+        "libs/hapify/templates/nestjs-models-rest/src/index.ts"
+      ],
       "@tractr/hapify-templates-prisma": [
         "libs/hapify/templates/prisma/src/index.ts"
       ],
@@ -57,14 +64,7 @@
       "@tractr/nestjs-rbac": ["libs/nestjs/rbac/src/index.ts"],
       "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
       "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"],
-      "@tractr/prisma": ["libs/prisma/src/index.ts"],
-      "@tractr/hapify-templates-nestjs-models-rest": [
-        "libs/hapify/templates/nestjs-models-rest/src/index.ts"
-      ],
-      "@generated/*": [
-        "dist/libs/generated/generated/*",
-        "libs/generated/generated/*"
-      ]
+      "@tractr/prisma": ["libs/prisma/src/index.ts"]
     },
     "resolveJsonModule": true,
     "rootDir": ".",

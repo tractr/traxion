@@ -3,4 +3,6 @@
 /dist
 /coverage
 
+prisma/client
+
 *.local-ignore*

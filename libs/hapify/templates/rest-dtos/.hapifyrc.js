@@ -28,8 +28,7 @@ module.exports = {
       input: 'one',
     },
     {
-      path:
-        'generated/rest-dtos/dtos/{kebab}/{kebab}-find-unique-params.dto.ts',
+      path: 'generated/rest-dtos/dtos/{kebab}/{kebab}-find-unique-params.dto.ts',
       engine: 'hpf',
       input: 'one',
     },
@@ -69,6 +68,16 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'generated/rest-dtos/helpers/index.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'generated/rest-dtos/helpers/transform.helper.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
       path: 'generated/rest-dtos/mock/index.ts',
       engine: 'hpf',
       input: 'all',
@@ -89,26 +98,22 @@ module.exports = {
       input: 'one',
     },
     {
-      path:
-        'generated/rest-dtos/mock/{kebab}/{kebab}-find-unique-params.dto.mock.ts',
+      path: 'generated/rest-dtos/mock/{kebab}/{kebab}-find-unique-params.dto.mock.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path:
-        'generated/rest-dtos/mock/{kebab}/{kebab}-find-unique-query.dto.mock.ts',
+      path: 'generated/rest-dtos/mock/{kebab}/{kebab}-find-unique-query.dto.mock.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path:
-        'generated/rest-dtos/mock/{kebab}/{kebab}-find-many-query.dto.mock.ts',
+      path: 'generated/rest-dtos/mock/{kebab}/{kebab}-find-many-query.dto.mock.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path:
-        'generated/rest-dtos/mock/{kebab}/{kebab}-update-params.dto.mock.ts',
+      path: 'generated/rest-dtos/mock/{kebab}/{kebab}-update-params.dto.mock.ts',
       engine: 'hpf',
       input: 'one',
     },
@@ -118,8 +123,7 @@ module.exports = {
       input: 'one',
     },
     {
-      path:
-        'generated/rest-dtos/mock/{kebab}/{kebab}-upsert-params.dto.mock.ts',
+      path: 'generated/rest-dtos/mock/{kebab}/{kebab}-upsert-params.dto.mock.ts',
       engine: 'hpf',
       input: 'one',
     },
@@ -129,8 +133,7 @@ module.exports = {
       input: 'one',
     },
     {
-      path:
-        'generated/rest-dtos/mock/{kebab}/{kebab}-delete-params.dto.mock.ts',
+      path: 'generated/rest-dtos/mock/{kebab}/{kebab}-delete-params.dto.mock.ts',
       engine: 'hpf',
       input: 'one',
     },

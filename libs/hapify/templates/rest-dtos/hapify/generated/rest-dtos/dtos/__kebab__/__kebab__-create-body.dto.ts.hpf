@@ -50,7 +50,9 @@ import {
   <<endfor>>
 } from '@generated/models';
 <<endif>>
-
+<<if Fields number and searchable>>
+import { TransformStringToInt } from '../../helpers';
+<<endif>>
  
 export class <<Model pascal>>CreateBodyDto {
 <<for Fields not internal field>>
@@ -84,6 +86,7 @@ export class <<Model pascal>>CreateBodyDto {
 
   <<if field number>>
   @IsNumber({}, <<=listModifier(field)>>)
+  @TransformStringToInt()
   <<endif>>
 
   <<if field  datetime>>
