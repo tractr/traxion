@@ -167,12 +167,6 @@
             "lintFilePatterns": ["apps/api/**/*.ts"]
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": false
-          }
-        },
         "serve": {
           "executor": "@nrwl/node:execute",
           "options": {
@@ -1175,12 +1169,6 @@
               "apps/pwa/src/**/*.ts",
               "apps/pwa/src/**/*.html"
             ]
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": false
           }
         },
         "serve": {
