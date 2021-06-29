@@ -1,7 +1,15 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+## [1.6.1](https://github.com/tractr/stack/compare/nestjs-core-1.6.0...nestjs-core-1.6.1) (2021-06-29)
+
+
+### Bug Fixes
+
+* add transform string to int decorator to query, body and params ([#150](https://github.com/tractr/stack/issues/150)) ([ee3fcd6](https://github.com/tractr/stack/commit/ee3fcd68aff87db2c09e77dc7e930f36dcab0a8b))
+
+
 
 # [1.6.0](https://github.com/tractr/stack/compare/nestjs-core-1.5.0...nestjs-core-1.6.0) (2021-06-16)
 
