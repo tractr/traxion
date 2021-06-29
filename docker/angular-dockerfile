@@ -4,33 +4,26 @@
 FROM node:16-alpine AS base
 ARG app
 ARG NODE_AUTH_TOKEN
+ARG PORT
 
 # set working directory
 WORKDIR /root/tractr
 
-# copy project file
+# copy project files
 COPY ./package.json .
-COPY ./yarn.lock .
-COPY ./tsconfig.json .
-COPY ./lerna.json .
-COPY ./hapify-models.json .
-COPY ${app}/.hapifyrc.js ${app}/
-COPY ${app}/package.json ${app}/
-COPY ${app}/tsconfig.json ${app}/
-COPY ${app}/tsconfig.app.json ${app}/
-COPY ${app}/angular.json ${app}/
+COPY ./package-lock.json .
 
-# ---- Dependencies ----
-FROM base AS dependencies.dev
+
+# ---- Dev Dependencies ----
+FROM base AS dev-dependencies
+COPY . .
 RUN --mount=type=secret,id=npmrc,target=/root/.npmrc \
     NODE_AUTH_TOKEN=${NODE_AUTH_TOKEN} \
-    yarn --frozen-lock --ignore-scripts --prefer-offline --no-audit --no-progress
+    npm ci --no-audit --no-progress
 
-# ---- Dependencies ----
-FROM dependencies.dev AS build
-WORKDIR /root/tractr/${app}
-COPY ${app}/src src
-RUN npm run build -- --prod --output-path=dist
+# ---- Build ----
+FROM dev-dependencies AS build
+RUN npm run nx -- run ${app}:build --prod
 
 #
 # ---- Release ----
@@ -38,13 +31,13 @@ FROM nginx:stable-alpine AS angular-prod
 ARG app
 
 ## Copy our default nginx config
-COPY ${app}/nginx/default.conf /etc/nginx/conf.d/
+COPY ./apps/${app}/nginx/default.conf /etc/nginx/conf.d/
 
 ## Remove default nginx website
 RUN rm -rf /usr/share/nginx/html/*
 
 ## From ‘build’ stage copy over the artifacts in dist folder to default nginx public folder
-COPY --from=build /root/tractr/${app}/dist /usr/share/nginx/html
+COPY --from=build /root/tractr/dist/apps/${app}/ /usr/share/nginx/html
 
 EXPOSE 4200
 

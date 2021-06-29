@@ -95,14 +95,14 @@ jobs:
           APPS: ${{ steps.nx-apps.outputs.apps }}
         with:
           script: |
-            console.log('Set the matrix to deploy the docker container:', process.env.APPS);
+            console.log('Set the matrix to deploy the docker container:', process.env.APPS.split(','));
             return process.env.APPS.split(',');
 
       - name: Get the last commit SHA
         id: commit
         shell: bash
         run: |
-          echo "::set-output name=sha::$(git rev-parse --short HEAD)"
+          echo "::set-output name=sha::$(git rev-parse HEAD)"
 
       - name: Manage released tag
         uses: actions/github-script@v3
@@ -133,11 +133,13 @@ jobs:
   docker-release:
     # If we got some change inside apps/** we execute this job
     if: |
-      !failure() && !contains(toJson(needs.npm-changes.outputs.apps), '[]')
+      !contains(github.event.commits[0].message, 'chore(release):') &&
+      !failure() &&
+      !contains(needs.npm-changes.outputs.apps, '[]')
     needs: [npm-release]
     strategy:
       matrix:
-        app: ${{ fromJSON(needs.npm-changes.outputs.apps) }}
+        app: ${{ fromJSON(needs.npm-release.outputs.apps) }}
         node: [16.x]
         os: [node-16]
         scope: [tractr]
@@ -202,7 +204,7 @@ jobs:
           push: true
           file: ./apps/${{ matrix.app }}/Dockerfile
           build-args: |
-            app=apps/${{ matrix.app }}
+            app=${{ matrix.app }}
             NODE_AUTH_TOKEN=${{ secrets.NPM_TOKEN }}
           secret-files: npmrc=${{ env.NPM_CONFIG_USERCONFIG }}
           tags: ${{ steps.docker_meta.outputs.tags }}
