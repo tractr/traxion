@@ -40,7 +40,7 @@ export class <<Model pascal>>Service {
   public apiUrl: URL;
  
   constructor(apiUrl: string | URL) {
-    this.apiUrl = new URL(`${apiUrl}/<<Model kebab>>');
+    this.apiUrl = new URL(`${apiUrl}/<<Model kebab>>`);
   }
  
   /**
