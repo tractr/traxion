@@ -1,7 +1,16 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+## [1.2.1](https://github.com/tractr/stack/compare/hapify-templates-rext-client-1.2.0...hapify-templates-rext-client-1.2.1) (2021-06-29)
+
+
+### Bug Fixes
+
+* add transform string to int decorator to query, body and params ([#150](https://github.com/tractr/stack/issues/150)) ([ee3fcd6](https://github.com/tractr/stack/commit/ee3fcd68aff87db2c09e77dc7e930f36dcab0a8b))
+* use the full url and add the model suffix to the rext client ([#151](https://github.com/tractr/stack/issues/151)) ([0be9d20](https://github.com/tractr/stack/commit/0be9d203603f72eb37a85fe8f5c2f8370008d348))
+
+
 
 # [1.2.0](https://github.com/tractr/stack/compare/hapify-templates-rext-client-1.1.2...hapify-templates-rext-client-1.2.0) (2021-06-16)
 
