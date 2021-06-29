@@ -55,7 +55,7 @@ jobs:
 
       # We build our code base
       - name: Run npm affected:build
-        run: npm run affected:build -- --base latest
+        run: npm run build
 
       # We build our code base
       - name: Configure git
