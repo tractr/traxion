@@ -18,7 +18,7 @@ jobs:
     name: Test npm packages on node ${{ matrix.node }}
 
     # Runs on Tractr self serveur
-    runs-on: [ubuntu-latest]
+    runs-on: [self-hosted, '${{ matrix.os }}']
 
     steps:
       # First we checkout the code
