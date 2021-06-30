@@ -1,7 +1,21 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+# [1.6.0](https://github.com/tractr/stack/compare/pwa-1.5.0...pwa-1.6.0) (2021-06-30)
+
+
+### Bug Fixes
+
+* add transform string to int decorator to query, body and params ([#150](https://github.com/tractr/stack/issues/150)) ([ee3fcd6](https://github.com/tractr/stack/commit/ee3fcd68aff87db2c09e77dc7e930f36dcab0a8b))
+* update dockerfile to be built and deploy by the ci ([d71f395](https://github.com/tractr/stack/commit/d71f395ae0fc21506f34ea8313ee1fecf63dd4fc))
+
+
+### Features
+
+* add apps version and release back to get docker tags ([84332a5](https://github.com/tractr/stack/commit/84332a5fa01a2352d30a7d3674f1916314483c3c))
+
+
 
 # [1.5.0](https://github.com/tractr/stack/compare/pwa-1.4.2...pwa-1.5.0) (2021-06-16)
 
