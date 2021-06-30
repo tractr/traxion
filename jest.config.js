@@ -22,7 +22,6 @@ module.exports = {
     '<rootDir>/libs/angular/tools',
     '<rootDir>/libs/angular/components',
     '<rootDir>/libs/nestjs/authentication',
-    '<rootDir>/libs/nestjs/rbac',
     '<rootDir>/libs/prisma',
     '<rootDir>/libs/generated',
     '<rootDir>/libs/hapify/templates/nestjs-models-rest',

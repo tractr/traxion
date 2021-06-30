@@ -85,6 +85,9 @@
     "hapify-templates-models": {
       "tags": ["scope:template"]
     },
+    "hapify-templates-nestjs-casl": {
+      "tags": []
+    },
     "hapify-templates-nestjs-models": {
       "tags": ["scope:template"]
     },
@@ -115,6 +118,10 @@
       ],
       "tags": ["scope:nestjs"]
     },
+    "nestjs-casl": {
+      "tags": [],
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"]
+    },
     "nestjs-core": {
       "tags": ["scope:nestjs"]
     },
@@ -125,10 +132,6 @@
       "tags": []
     },
     "nestjs-mailer": {
-      "tags": ["scope:nestjs"]
-    },
-    "nestjs-rbac": {
-      "implicitDependencies": [],
       "tags": ["scope:nestjs"]
     },
     "nestjs-testing": {
