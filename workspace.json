@@ -69,6 +69,12 @@
             "buildTarget": "production"
           }
         },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -165,6 +171,12 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/api/**/*.ts"]
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
           }
         },
         "serve": {
@@ -1169,6 +1181,12 @@
               "apps/pwa/src/**/*.ts",
               "apps/pwa/src/**/*.html"
             ]
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
           }
         },
         "serve": {

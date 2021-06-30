@@ -35,4 +35,5 @@ EXPOSE 3000
 ENV NODE_ENV=production
 COPY --from=build /root/tractr/dist/apps/${app} .
 COPY --from=production-dependencies /root/tractr/node_modules ./node_modules/
+RUN du -d 1 -h .
 CMD ["node", "./main"]
