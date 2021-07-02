@@ -29,7 +29,7 @@ export class SessionService {
   private pathAfterLogin: RouterStateSnapshot | null = null;
 
   /** Self */
-  private selfSubject = new Subject<User | null>();
+  selfSubject = new Subject<User | null>();
 
   private selfValue: User | null = null;
 
@@ -41,6 +41,7 @@ export class SessionService {
     this.selfValue = self;
     this.selfSubject.next(self);
   }
+  /** /Self */
 
   /** Constructor */
   constructor(
