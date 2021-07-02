@@ -5,7 +5,7 @@ import { AuthentificationEnvironmentInterface } from '../../authentification-for
 import { SessionService } from '../../services/session.service';
 
 @Component({
-  selector: 'stack-logout',
+  selector: 'tractr-logout',
   templateUrl: './logout.component.html',
   styleUrls: ['./logout.component.less'],
 })

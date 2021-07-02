@@ -12,6 +12,9 @@
   },
   "npmScope": "tractr",
   "projects": {
+    "angular-authentification": {
+      "tags": []
+    },
     "angular-components": {
       "tags": []
     },

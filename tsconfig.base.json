@@ -20,6 +20,9 @@
         "dist/libs/generated/generated/*",
         "libs/generated/generated/*"
       ],
+      "@tractr/angular-authentification": [
+        "libs/angular/authentification/src/index.ts"
+      ],
       "@tractr/angular-components": ["libs/angular/components/src/index.ts"],
       "@tractr/angular-form": ["libs/angular/form/src/index.ts"],
       "@tractr/angular-tools": ["libs/angular/tools/src/index.ts"],

@@ -5,7 +5,7 @@ import { AuthentificationEnvironmentInterface } from '../../authentification-for
 import { SessionService } from '../../services/session.service';
 
 @Component({
-  selector: 'stack-sign-in',
+  selector: 'tractr-sign-in',
   templateUrl: './sign-in.component.html',
 })
 export class SignInComponent {
