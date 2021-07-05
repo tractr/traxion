@@ -1,0 +1,8 @@
+<tractr-form-item [name]="name" [label]="label">
+  <tractr-radio
+    [options]="options"
+    [value]="state"
+    (valueChanged)="setValue($event)"
+    [delayed]="delayed"
+  ></tractr-radio>
+</tractr-form-item>

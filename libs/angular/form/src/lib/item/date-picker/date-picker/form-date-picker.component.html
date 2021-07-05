@@ -1,0 +1,7 @@
+<tractr-form-item [name]="name" [label]="label">
+  <tractr-date-picker
+    [value]="state"
+    (valueChanged)="setValue($event)"
+    [delayed]="delayed"
+  ></tractr-date-picker>
+</tractr-form-item>

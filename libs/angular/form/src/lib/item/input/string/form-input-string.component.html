@@ -1,0 +1,9 @@
+<tractr-form-item [name]="name" [label]="label">
+  <tractr-input-string
+    [value]="state"
+    (valueChanged)="setValue($event)"
+    [delayed]="delayed"
+    [autocomplete]="autocomplete"
+    [type]="inputType"
+  ></tractr-input-string>
+</tractr-form-item>
