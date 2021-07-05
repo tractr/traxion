@@ -50,7 +50,7 @@ import {
   <<endfor>>
 } from '@generated/models';
 <<endif>>
-<<if Fields number and searchable>>
+<<if Fields number and not internal>>
 import { TransformStringToInt } from '../../helpers';
 <<endif>>
  
