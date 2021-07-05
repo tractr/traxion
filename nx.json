@@ -107,6 +107,9 @@
     "pwa-e2e": {
       "implicitDependencies": ["pwa"],
       "tags": []
+    },
+    "nestjs-mailer": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {
@@ -116,6 +119,9 @@
         "strictlyOrderedTargets": ["build", "generate"]
       },
       "runner": "@nrwl/workspace/tasks-runners/default"
+    },
+    "angular-components": {
+      "tags": []
     }
   }
 }

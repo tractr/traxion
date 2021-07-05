@@ -144,6 +144,14 @@
       "root": "apps/api",
       "sourceRoot": "apps/api/src",
       "targets": {
+        "cli": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ts-node -r tsconfig-paths/register src/cli.ts"],
+            "cwd": "apps/api",
+            "parallel": false
+          }
+        },
         "build": {
           "configurations": {
             "production": {
@@ -1236,6 +1244,50 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/pwa-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "nestjs-mailer": {
+      "root": "libs/nestjs/mailer",
+      "sourceRoot": "libs/nestjs/mailer/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/mailer/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/nestjs/mailer"],
+          "options": {
+            "jestConfig": "libs/nestjs/mailer/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/nestjs/mailer",
+            "tsConfig": "libs/nestjs/mailer/tsconfig.lib.json",
+            "packageJson": "libs/nestjs/mailer/package.json",
+            "main": "libs/nestjs/mailer/src/index.ts",
+            "assets": ["libs/nestjs/mailer/*.md"]
           }
         }
       }
