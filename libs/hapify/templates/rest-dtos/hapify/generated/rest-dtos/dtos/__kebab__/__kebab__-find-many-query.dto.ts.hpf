@@ -1,4 +1,5 @@
 import {
+  IsArray,
 
   <<if Fields boolean and searchable>>
   IsBoolean, 
@@ -40,7 +41,10 @@ import {
   SortOrder,
   <<Model pascal>>,
 } from '@generated/models';
-import { TransformStringToInt } from '../../helpers';
+import {
+  TransformStringToArrayOfString,
+  TransformStringToInt
+  } from '../../helpers';
 
  
 export class <<Model pascal>>FindManyQueryDto {
@@ -84,6 +88,8 @@ export class <<Model pascal>>FindManyQueryDto {
 <<endfor>>
 
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+  @TransformStringToArrayOfString()
+  @IsArray()
   @IsString({ each: true })
   @IsIn(<<Model pascal>>Include, { each: true })
   @IsOptional()
