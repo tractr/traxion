@@ -5,7 +5,7 @@ import {
   AuthenticationModuleOptionsFactory,
 } from '../../../src/config/authentication.config';
 
-import { isClass, isDevelopment } from '@tractr/nestjs-core';
+import { isClass, isDevelopment, isProduction } from '@tractr/nestjs-core';
 
 describe('User auth configurations', () => {
   describe('AUTHENTICATION_COOKIE_NAME', () => {
@@ -29,6 +29,10 @@ describe('User auth configurations', () => {
         cookies: {
           cookieName: 'authCookie',
           queryParamName: 'authToken',
+          options: {
+            httpOnly: true,
+            secure: isProduction(),
+          },
         },
         strategy: {
           jwt: {
