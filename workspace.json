@@ -1173,7 +1173,10 @@
             "outputPath": "dist/apps/pwa",
             "polyfills": "apps/pwa/src/polyfills.ts",
             "scripts": [],
-            "styles": ["apps/pwa/src/styles.less"],
+            "styles": [
+              "apps/pwa/src/styles.less",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
+            ],
             "tsConfig": "apps/pwa/tsconfig.app.json"
           },
           "outputs": ["{options.outputPath}"]

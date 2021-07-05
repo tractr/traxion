@@ -1,12 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { NgModule } from '@angular/core';
-import { NzButtonModule } from 'ng-zorro-antd/button';
 
-import { ButtonComponent } from './button/button.component';
+import { ButtonModule } from './button/button.module';
+import { DatePickerModule } from './date-picker/date-picker.module';
+import { InputModule } from './input/input.module';
+import { SelectModule } from './select/select.module';
 
 @NgModule({
-  declarations: [ButtonComponent],
-  imports: [NzButtonModule],
-  exports: [ButtonComponent, NzButtonModule],
+  imports: [ButtonModule, InputModule, SelectModule, DatePickerModule],
+  exports: [ButtonModule, InputModule, SelectModule, DatePickerModule],
 })
 export class AngularComponentsModule {}
