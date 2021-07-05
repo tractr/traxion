@@ -7,7 +7,7 @@ import { FormItemBaseComponent } from '../base/form-item-base.component';
   template: '',
 })
 export abstract class FormInputBaseComponent<
-  Type extends string,
+  Type extends string | number,
 > extends FormItemBaseComponent<Type> {
   @Input() delayed = 200;
 }

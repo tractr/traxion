@@ -20,4 +20,8 @@ export class InputNumberComponent extends InputBaseComponent<number> {
 
   /** Ant input's size */
   @Input() size: NzSizeLDSType = 'default';
+
+  parse(value: number | undefined): number | undefined {
+    return typeof value === 'number' ? value : undefined;
+  }
 }

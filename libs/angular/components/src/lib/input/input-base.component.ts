@@ -7,7 +7,12 @@ import {
   Output,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  takeUntil,
+} from 'rxjs/operators';
 
 @Component({
   selector: 'tractr-form-input-base',
@@ -45,6 +50,7 @@ export abstract class InputBaseComponent<Type extends string | number>
         takeUntil(this.unsubscribe$),
         debounceTime(this.delayed),
         distinctUntilChanged(),
+        map((value) => this.parse(value)),
       )
       .subscribe((value) => {
         this.valueChanged.emit(value);
@@ -53,5 +59,9 @@ export abstract class InputBaseComponent<Type extends string | number>
 
   ngOnDestroy() {
     this.unsubscribe$.next();
+  }
+
+  parse(v: Type | undefined): Type | undefined {
+    return v || undefined;
   }
 }

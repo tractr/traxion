@@ -4,6 +4,7 @@ import { FormComponent } from './form.component';
 import {
   FormButtonComponent,
   FormDatePickerComponent,
+  FormInputNumberComponent,
   FormInputStringComponent,
   FormItemComponent,
   FormRadioComponent,
@@ -17,6 +18,7 @@ import { AngularToolsModule } from '@tractr/angular-tools';
   imports: [AngularToolsModule, AngularComponentsModule],
   declarations: [
     FormInputStringComponent,
+    FormInputNumberComponent,
     FormRadioComponent,
     FormSelectComponent,
     FormItemComponent,
@@ -26,6 +28,7 @@ import { AngularToolsModule } from '@tractr/angular-tools';
   ],
   exports: [
     FormInputStringComponent,
+    FormInputNumberComponent,
     FormRadioComponent,
     FormSelectComponent,
     FormItemComponent,
