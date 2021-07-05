@@ -4,9 +4,13 @@ import { ExtractJwt } from 'passport-jwt';
 import { fromHttpOnlySignedAndSecureCookies } from '../extractors';
 import { AuthenticationOptions } from '../interfaces';
 
-import { isDevelopment, OptionsFactory } from '@tractr/nestjs-core';
+import {
+  isDevelopment,
+  isProduction,
+  OptionsFactory,
+} from '@tractr/nestjs-core';
 
-const { TRACTR_AUTH_STRATEGY_JWT_SECRET } = process.env;
+const { AUTH_STRATEGY_JWT_SECRET } = process.env;
 
 export const AUTHENTICATION_COOKIE_NAME = 'authCookie';
 export const AUTHENTICATION_QUERY_PARAM_NAME = 'authToken';
@@ -17,6 +21,10 @@ export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
   cookies: {
     cookieName: AUTHENTICATION_COOKIE_NAME,
     queryParamName: 'authToken',
+    options: {
+      httpOnly: true,
+      secure: isProduction(),
+    },
   },
   strategy: {
     jwt: {
@@ -34,8 +42,7 @@ export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
     },
   },
   jwtModuleOptions: {
-    secret:
-      TRACTR_AUTH_STRATEGY_JWT_SECRET ?? isDevelopment() ? 'secret' : undefined,
+    secret: AUTH_STRATEGY_JWT_SECRET ?? isDevelopment() ? 'secret' : undefined,
   },
   passportModuleOptions: {
     defaultStrategy: 'jwt',

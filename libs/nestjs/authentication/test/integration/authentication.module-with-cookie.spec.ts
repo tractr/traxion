@@ -1,6 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
+import * as cookieParser from 'cookie-parser';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as request from 'supertest';
 
@@ -17,10 +18,7 @@ import {
   AuthenticationService,
   JwtGlobalAuthGuard,
 } from '../../src';
-import {
-  AUTHENTICATION_OPTIONS,
-  AUTHENTICATION_QUERY_PARAM_NAME,
-} from '../../src/config';
+import { AUTHENTICATION_OPTIONS } from '../../src/config';
 import { AuthenticationEndpointMockController } from '../mock/authentication-endpoint-mock.controller';
 
 import { LoggerModule } from '@tractr/nestjs-core';
@@ -30,7 +28,7 @@ describe('Authentication Module (integration)', () => {
   let mockUserService: MockProxy<UserService>;
   let mockUserDatabaseService: MockProxy<UserDatabaseService>;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     mockUserService = mockUserServiceFactory();
     mockUserDatabaseService = mockDeep<UserDatabaseService>();
 
@@ -62,28 +60,21 @@ describe('Authentication Module (integration)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-
-    await app.init();
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     await app.close();
   });
 
   describe('Authentication route', () => {
-    it('/is-public', async () => {
-      await request(app.getHttpServer()).get('/is-public').expect(200);
-    });
-    it('/is-private', async () => {
-      await request(app.getHttpServer()).get('/is-private').expect(401);
-    });
-    it('/login should fail if no user info is passed', async () => {
-      await request(app.getHttpServer()).post('/login').expect(401);
-    });
-    it('/login should authenticate if user login info is passed', async () => {
+    it('/me get the user information back and use the cookie auth strategy', async () => {
+      app.use(cookieParser('test'));
+      await app.init();
+
       const authenticationService = app.get<AuthenticationService>(
         AuthenticationService,
       );
+
       const mockUser = mockUserFactory();
       const hashPassword = await authenticationService.hashPassword(
         mockUser.password,
@@ -94,46 +85,47 @@ describe('Authentication Module (integration)', () => {
         password: hashPassword,
       } as never);
 
-      const response = await request(app.getHttpServer())
+      const responseWithCookie = await request(app.getHttpServer())
         .post('/login')
         .send({ email: mockUser.email, password: mockUser.password });
-
-      expect(response.status).toBe(200);
-      expect(response.body).toEqual({
-        accessToken: await authenticationService.createUserJWT(mockUser),
-      });
-    });
-    it('/me get the user information back and use the jwt auth strategy', async () => {
-      const authenticationService = app.get<AuthenticationService>(
-        AuthenticationService,
-      );
-      const mockUser = mockUserFactory();
-      const accessToken = await authenticationService.createUserJWT(mockUser);
 
       mockUserService.findUnique.mockResolvedValue(mockUser as never);
 
       const response = await request(app.getHttpServer())
         .get('/me')
-        .set('Authorization', `bearer ${accessToken}`);
+        .set('Cookie', responseWithCookie.header['set-cookie']);
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(JSON.parse(JSON.stringify(mockUser)));
     });
-    it('/me get the user information back and use the query param auth strategy', async () => {
+
+    it('/me get 401 if cookieParser is not add to the app module', async () => {
+      await app.init();
+
       const authenticationService = app.get<AuthenticationService>(
         AuthenticationService,
       );
+
       const mockUser = mockUserFactory();
-      const accessToken = await authenticationService.createUserJWT(mockUser);
+      const hashPassword = await authenticationService.hashPassword(
+        mockUser.password,
+      );
+
+      mockUserService.findUnique.mockResolvedValue({
+        ...mockUser,
+        password: hashPassword,
+      } as never);
+
+      const responseWithCookie = await request(app.getHttpServer())
+        .post('/login')
+        .send({ email: mockUser.email, password: mockUser.password });
 
       mockUserService.findUnique.mockResolvedValue(mockUser as never);
 
-      const response = await request(app.getHttpServer()).get(
-        `/me?${AUTHENTICATION_QUERY_PARAM_NAME}=${accessToken}`,
-      );
-
-      expect(response.status).toBe(200);
-      expect(response.body).toEqual(JSON.parse(JSON.stringify(mockUser)));
+      await request(app.getHttpServer())
+        .get('/me')
+        .set('Cookie', responseWithCookie.header['set-cookie'])
+        .expect(401);
     });
   });
 });
