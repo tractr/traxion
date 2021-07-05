@@ -6,5 +6,8 @@
     "@tractr/hapify-templates-nestjs-models-common": "^1.3.0",
     "@tractr/nestjs-core": "^1.6.0",
     "@tractr/nestjs-database": "^1.4.0"
+  },
+  "optionalDependencies": {
+    "cookie-parser": "^1.4.5"
   }
 }
