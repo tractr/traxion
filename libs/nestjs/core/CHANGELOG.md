@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.6.2](https://github.com/tractr/stack/compare/nestjs-core-1.6.1...nestjs-core-1.6.2) (2021-07-05)
+
+
+### Bug Fixes
+
+* update integration test and fix the way the cookie are handled ([#152](https://github.com/tractr/stack/issues/152)) ([5285dab](https://github.com/tractr/stack/commit/5285dab9feb04cbe70e3e5eaf48d003f8513ce02))
+
+
+
 ## [1.6.1](https://github.com/tractr/stack/compare/nestjs-core-1.6.0...nestjs-core-1.6.1) (2021-06-29)
 
 
