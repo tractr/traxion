@@ -64,7 +64,8 @@
       "@tractr/nestjs-rbac": ["libs/nestjs/rbac/src/index.ts"],
       "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
       "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"],
-      "@tractr/prisma": ["libs/prisma/src/index.ts"]
+      "@tractr/prisma": ["libs/prisma/src/index.ts"],
+      "@tractr/nestjs-mailer": ["libs/nestjs/mailer/src/index.ts"]
     },
     "resolveJsonModule": true,
     "rootDir": ".",
