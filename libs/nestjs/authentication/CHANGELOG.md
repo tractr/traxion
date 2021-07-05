@@ -1,7 +1,15 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+## [1.12.1](https://github.com/tractr/stack/compare/nestjs-authentication-1.12.0...nestjs-authentication-1.12.1) (2021-07-05)
+
+
+### Bug Fixes
+
+* update integration test and fix the way the cookie are handled ([#152](https://github.com/tractr/stack/issues/152)) ([5285dab](https://github.com/tractr/stack/commit/5285dab9feb04cbe70e3e5eaf48d003f8513ce02))
+
+
 
 # [1.12.0](https://github.com/tractr/stack/compare/nestjs-authentication-1.11.1...nestjs-authentication-1.12.0) (2021-06-24)
 
