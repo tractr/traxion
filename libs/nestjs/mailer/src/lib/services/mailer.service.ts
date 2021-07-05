@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import { Inject, Injectable } from '@nestjs/common';
 import * as mailjet from 'node-mailjet';
 
@@ -9,7 +8,7 @@ import { MailerOptions } from '../interfaces';
 
 @Injectable()
 export class MailerService {
-  mailjetClient: mailjet.Email.Client;
+  mailjetClient!: mailjet.Email.Client;
 
   constructor(
     @Inject(MAILER_MODULE_OPTIONS)
@@ -18,14 +17,14 @@ export class MailerService {
     this.connectToMailjetApi();
   }
 
-  public send(
+  public async send(
     params: mailjet.Email.SendParams,
-  ): Promise<mailjet.Email.PostResponse> | void {
-    if (!areWeTestingWithJest()) {
-      return this.mailjetClient
-        .post('send', { version: MAILJET_API_VERSION })
-        .request(params);
-    }
+  ): Promise<mailjet.Email.PostResponse | null> {
+    if (areWeTestingWithJest()) return null;
+
+    return this.mailjetClient
+      .post('send', { version: MAILJET_API_VERSION })
+      .request(params);
   }
 
   private connectToMailjetApi(): void {
