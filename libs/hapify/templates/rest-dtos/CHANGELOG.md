@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.3.3](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.2...hapify-templates-rest-dtos-1.3.3) (2021-07-06)
+
+
+### Bug Fixes
+
+* change populate behavior to parse correctly the query params ([#153](https://github.com/tractr/stack/issues/153)) ([a2e2a24](https://github.com/tractr/stack/commit/a2e2a2471291f008c6645035458f8e93a6074074))
+
+
+
 ## [1.3.2](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.1...hapify-templates-rest-dtos-1.3.2) (2021-07-05)
 
 
