@@ -20,7 +20,7 @@ export class LogoutComponent implements OnInit {
   ngOnInit() {
     this.sessionService
       .logout()
-      .then(() => this.router.navigate(this.environment.logout.redirection))
+      .then(() => this.router.navigate(this.environment.logout.redirect))
       .catch((err) => {
         console.error('Logout error', err);
       });

@@ -2,16 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
-import { LogoutComponent } from './components';
-import { SignInComponent } from './components/sign-in/sign-in.component';
+import { LoginComponent, LogoutComponent } from './components';
 import { SessionService } from './services/session.service';
 
 const routes: Routes = [
   {
-    path: 'sign-in',
-    component: SignInComponent,
+    path: 'login',
+    component: LoginComponent,
     data: {
-      title: 'Sign In',
+      title: 'Login',
     },
   },
   {
@@ -24,8 +23,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forRoot(routes)],
   providers: [NzMessageService, SessionService],
   exports: [RouterModule],
 })
-export class AuthentificationRoutingModule {}
+export class AngularAuthentificationRoutingModule {}

@@ -7,11 +7,12 @@ export interface AuthentificationEnvironmentInterface {
   };
   login: {
     url: string;
-    redirection: string[];
+    routing: string;
+    redirect: string[];
   };
   logout: {
     url: string;
-    redirection: string[];
+    redirect: string[];
   };
   session: {
     url: string;

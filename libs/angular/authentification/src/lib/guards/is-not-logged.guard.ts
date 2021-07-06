@@ -15,7 +15,10 @@ export class IsNotLoggedGuard implements CanActivate {
 
   async canActivate(): Promise<UrlTree | boolean> {
     if (await this.sessionService.loggedIn()) {
-      return this.router.createUrlTree(this.environment.login.redirection);
+      return this.router.createUrlTree([
+        ...this.environment.routing.prefix,
+        this.environment.login.routing,
+      ]);
     }
     return true;
   }

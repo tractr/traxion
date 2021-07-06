@@ -5,10 +5,10 @@ import { AuthentificationEnvironmentInterface } from '../../authentification-for
 import { SessionService } from '../../services/session.service';
 
 @Component({
-  selector: 'tractr-sign-in',
-  templateUrl: './sign-in.component.html',
+  selector: 'tractr-login',
+  templateUrl: './login.component.html',
 })
-export class SignInComponent {
+export class LoginComponent {
   /** Email input */
   email!: string;
 
@@ -25,16 +25,14 @@ export class SignInComponent {
 
   /** Called when the user click on sign in */
   onSignIn() {
-    this.sessionService
-      .login(this.email, this.password)
-      .then(async () => {
-        const urlAfterLogin = this.sessionService.popUrlAfterLogin();
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    this.sessionService.login(this.email, this.password).then(async () => {
+      const urlAfterLogin = this.sessionService.popUrlAfterLogin();
 
-        await this.router.navigate(
-          urlAfterLogin ? [urlAfterLogin] : this.environment.login.redirection,
-        );
-      })
-      .catch((error) => this.handleSignInError(error));
+      await this.router.navigate(
+        urlAfterLogin ? [urlAfterLogin] : this.environment.login.redirect,
+      );
+    });
   }
 
   handleSignInError(err: Error) {

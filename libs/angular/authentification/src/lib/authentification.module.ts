@@ -1,8 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { AuthentificationForRootInterface } from './authentification-for-root.interface';
-import { AuthentificationRoutingModule } from './authentification-routing.module';
-import { LogoutComponent, SignInComponent } from './components';
+import { LoginComponent, LogoutComponent } from './components';
 import { ConnectedDirective, NotConnectedDirective } from './directives';
 import { IsLoggedGuard, IsNotLoggedGuard } from './guards';
 import { SessionService } from './services';
@@ -10,28 +9,27 @@ import { SessionService } from './services';
 import { AngularToolsModule } from '@tractr/angular-tools';
 
 @NgModule({
-  imports: [AngularToolsModule, AuthentificationRoutingModule],
+  imports: [AngularToolsModule],
   declarations: [
     LogoutComponent,
-    SignInComponent,
+    LoginComponent,
     ConnectedDirective,
     NotConnectedDirective,
   ],
   providers: [SessionService, IsLoggedGuard, IsNotLoggedGuard],
   exports: [
-    AuthentificationRoutingModule,
     LogoutComponent,
-    SignInComponent,
+    LoginComponent,
     ConnectedDirective,
     NotConnectedDirective,
   ],
 })
-export class AuthentificationModule {
+export class AngularAuthentificationModule {
   public static forRoot(
     params: AuthentificationForRootInterface,
-  ): ModuleWithProviders<AuthentificationModule> {
+  ): ModuleWithProviders<AngularAuthentificationModule> {
     return {
-      ngModule: AuthentificationModule,
+      ngModule: AngularAuthentificationModule,
       providers: [
         SessionService,
         {
