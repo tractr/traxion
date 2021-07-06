@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { NzSelectModeType } from 'ng-zorro-antd/select';
 
 import { SelectBaseComponent } from '../select-base.component';
 
@@ -10,4 +11,20 @@ import { SelectBaseComponent } from '../select-base.component';
 })
 export class SelectComponent
   extends SelectBaseComponent<any>
-  implements OnInit {}
+  implements OnInit
+{
+  /** Multiple */
+  private multipleState = false;
+
+  @Input()
+  get multiple(): boolean {
+    return this.multipleState;
+  }
+
+  set multiple(multiple: boolean) {
+    this.multipleState = multiple;
+    this.mode = this.multipleState ? 'multiple' : 'default';
+  }
+
+  mode: NzSelectModeType = 'default';
+}

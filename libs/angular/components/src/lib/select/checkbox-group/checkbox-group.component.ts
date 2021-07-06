@@ -28,7 +28,7 @@ export class CheckboxGroupComponent
   set checkOptions(checkOptions: CheckOptionInterface[] | undefined) {
     this.checkOptionsState = checkOptions;
 
-    this.id = this.getSelectOptionsSelected(this.checkOptions)?.id;
+    this.id = this.extractId(this.getSelectOptionsSelected(this.checkOptions));
   }
 
   ngOnInit(): void {
@@ -50,17 +50,16 @@ export class CheckboxGroupComponent
 
   getSelectOptionsSelected(
     checkOptions: CheckOptionInterface[] | undefined,
-  ): SelectOptionInterface<any> | undefined {
+  ): SelectOptionInterface<any>[] | undefined {
     if (!checkOptions) return undefined;
 
     const optionsSelected: SelectOptionInterface<any>[] = [];
-
     checkOptions.forEach((checkOption, index) => {
       if (checkOption.checked) {
         optionsSelected.push(this.options[index]);
       }
     });
 
-    return optionsSelected[0];
+    return optionsSelected;
   }
 }

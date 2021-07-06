@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
@@ -8,7 +15,7 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.less'],
 })
-export class CheckboxComponent implements OnInit {
+export class CheckboxComponent implements OnInit, OnDestroy {
   protected unsubscribe$: Subject<void> = new Subject<void>();
 
   @Input() delayed = 200;
