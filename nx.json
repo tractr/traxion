@@ -12,34 +12,6 @@
   },
   "npmScope": "tractr",
   "projects": {
-    "@generated-angular": {
-      "implicitDependencies": [
-        "hapify-config",
-        "hapify-generate-config"
-      ],
-      "tags": []
-    },
-    "@generated-nestjs": {
-      "implicitDependencies": [
-        "hapify-config",
-        "hapify-generate-config"
-      ],
-      "tags": []
-    },
-    "@generated-prisma": {
-      "implicitDependencies": [
-        "hapify-config",
-        "hapify-generate-config"
-      ],
-      "tags": []
-    },
-    "@generated-shared": {
-      "implicitDependencies": [
-        "hapify-config",
-        "hapify-generate-config"
-      ],
-      "tags": []
-    },
     "angular-components": {
       "tags": []
     },
@@ -56,6 +28,16 @@
       "tags": []
     },
     "eslint-config": {
+      "tags": []
+    },
+    "generated": {
+      "implicitDependencies": [
+        "nestjs-core",
+        "nestjs-database",
+        "nestjs-testing",
+        "hapify-config",
+        "hapify-generate-config"
+      ],
       "tags": []
     },
     "hapify-config": {
@@ -79,6 +61,9 @@
     "hapify-templates-nestjs-models-common": {
       "tags": []
     },
+    "hapify-templates-nestjs-models-rest": {
+      "tags": []
+    },
     "hapify-templates-prisma": {
       "tags": []
     },
@@ -91,7 +76,8 @@
     "nestjs-authentication": {
       "implicitDependencies": [
         "hapify-config",
-        "hapify-generate-config"
+        "hapify-generate-config",
+        "generated"
       ],
       "tags": []
     },
@@ -102,10 +88,7 @@
       "tags": []
     },
     "nestjs-rbac": {
-      "implicitDependencies": [
-        "hapify-config",
-        "hapify-generate-config"
-      ],
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
       "tags": []
     },
     "nestjs-testing": {
@@ -114,31 +97,31 @@
     "prettier-config": {
       "tags": []
     },
+    "prisma": {
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "tags": []
+    },
     "pwa": {
       "tags": []
     },
     "pwa-e2e": {
-      "implicitDependencies": [
-        "pwa"
-      ],
+      "implicitDependencies": ["pwa"],
+      "tags": []
+    },
+    "nestjs-mailer": {
       "tags": []
     }
   },
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
-        "strictlyOrderedTargets": [
-          "build",
-          "generate"
-        ]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "strictlyOrderedTargets": ["build", "generate"]
       },
       "runner": "@nrwl/workspace/tasks-runners/default"
+    },
+    "angular-components": {
+      "tags": []
     }
   }
 }

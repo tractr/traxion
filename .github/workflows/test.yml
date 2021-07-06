@@ -18,7 +18,7 @@ jobs:
     name: Test npm packages on node ${{ matrix.node }}
 
     # Runs on Tractr self serveur
-    runs-on: [ubuntu-latest]
+    runs-on: [self-hosted, '${{ matrix.os }}']
 
     steps:
       # First we checkout the code
@@ -49,6 +49,11 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm ci --no-audit --no-progress
+
+      # We only run the affected lint
+      - name: Run Affected Build
+        shell: bash
+        run: npm run affected:build -- --base=remotes/origin/main --with-deps
 
       # We only run the affected lint
       # FIXME: why prettier exit code 1 without any errors

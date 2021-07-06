@@ -1,7 +1,24 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+## [1.3.2](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.1...hapify-templates-rest-dtos-1.3.2) (2021-07-05)
+
+
+### Bug Fixes
+
+* change TransformStringToInt template condition on create body dto ([#154](https://github.com/tractr/stack/issues/154)) ([7eaf67f](https://github.com/tractr/stack/commit/7eaf67fe89f5397e26efc0db0831267fcecc4a0a))
+
+
+
+## [1.3.1](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.0...hapify-templates-rest-dtos-1.3.1) (2021-06-29)
+
+
+### Bug Fixes
+
+* add transform string to int decorator to query, body and params ([#150](https://github.com/tractr/stack/issues/150)) ([ee3fcd6](https://github.com/tractr/stack/commit/ee3fcd68aff87db2c09e77dc7e930f36dcab0a8b))
+
+
 
 # [1.3.0](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.2.4...hapify-templates-rest-dtos-1.3.0) (2021-06-16)
 

@@ -1,27 +1,7 @@
 {
-  "name": "New bootstrap",
-  "description": "A new Hapify channel",
-  "project": "./hapify-plugin-model-user.json",
-  "defaultFields": [
-    {
-      "name": "id",
-      "type": "string",
-      "subtype": null,
-      "reference": null,
-      "primary": true,
-      "unique": false,
-      "label": false,
-      "nullable": false,
-      "multiple": false,
-      "embedded": false,
-      "searchable": false,
-      "sortable": false,
-      "hidden": false,
-      "internal": true,
-      "restricted": false,
-      "ownership": false
-    }
-  ],
+  "name": "Shared lib that host all hapify shared modules",
+  "description": "A lib that will host all shared file from hapify",
+  "project": "./hapify-plugin-user-model.json",
   "templates": [
     {
       "path": "generated/nestjs-models-common/index.ts",
@@ -137,9 +117,34 @@
       "path": "generated/models/mock/{kebab}.mock.ts",
       "engine": "hpf",
       "input": "one"
+    },
+    {
+      "path": "prisma/schemas/generated.prisma",
+      "engine": "hpf",
+      "input": "all"
     }
   ],
   "version": "1",
   "validatorPath": "../../../dist/libs/config/hapify/validator.js",
-  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png"
+  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
+  "defaultFields": [
+    {
+      "name": "id",
+      "type": "string",
+      "subtype": null,
+      "reference": null,
+      "primary": true,
+      "unique": false,
+      "label": false,
+      "nullable": false,
+      "multiple": false,
+      "embedded": false,
+      "searchable": false,
+      "sortable": false,
+      "hidden": false,
+      "internal": true,
+      "restricted": false,
+      "ownership": false
+    }
+  ]
 }

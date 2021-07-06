@@ -2,19 +2,21 @@
 
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
-import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { MockProxy } from 'jest-mock-extended';
 
+import { mockUserFactory } from '../../../generated/models/mock';
+import {
+  USER_SERVICE,
+  UserService,
+} from '../../../generated/nestjs-models-common';
+import { mockUserServiceFactory } from '../../../generated/nestjs-models-common/mock';
+import { User } from '../../../prisma/client';
 import { AuthenticationService, UserNotFoundError } from '../../../src';
 import { AUTHENTICATION_MODULE_OPTIONS } from '../../../src/constants/authentication.contants';
 import { AuthenticationOptions } from '../../../src/interfaces';
 import { mockAuthenticationOptionsFactory } from '../../mock/authentication-options.mock';
 import { mockJwtServiceFactory } from '../../mock/jwt.service.mock';
-
-import { mockUserFactory } from '@generated/models/mock';
-import { USER_SERVICE, UserService } from '@generated/nestjs-models-common';
-import { mockUserServiceFactory } from '@generated/nestjs-models-common/mock';
 
 describe('AuthService', () => {
   let authService: AuthenticationService;

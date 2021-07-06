@@ -2,6 +2,7 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
+import { UserModelModule } from '../generated/nestjs-models-common';
 import {
   AUTHENTICATION_OPTIONS,
   AuthenticationModuleOptionsFactory,
@@ -12,7 +13,6 @@ import { AuthenticationOptions } from './interfaces';
 import { AuthenticationService, StrategyOptionsService } from './services';
 import { JwtStrategy, LocalStrategy } from './strategies';
 
-import { UserModelModule } from '@generated/nestjs-models-common';
 import {
   AsyncOptions,
   LoggerModule,

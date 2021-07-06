@@ -61,7 +61,7 @@ import {
 import { <<Model pascal>> as Prisma<<Model pascal>> } from '@prisma/client';
 
  
-export class <<Model pascal>> implements Prisma<<Model pascal>> {
+export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
 <<for Fields field>>
   <<if field boolean>>
   @IsBoolean(<<=listModifier(field)>>) 

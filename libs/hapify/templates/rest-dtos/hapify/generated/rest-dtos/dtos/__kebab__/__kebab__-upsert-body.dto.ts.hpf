@@ -50,6 +50,9 @@ import {
   <<endfor>>
 } from '@generated/models';
 <<endif>>
+<<if Fields number and not internal>>
+import { TransformStringToInt } from '../../helpers';
+<<endif>>
  
 export class <<Model pascal>>UpsertBodyDto {
 <<for Fields not internal field>>
@@ -83,6 +86,10 @@ export class <<Model pascal>>UpsertBodyDto {
 
   <<if field number or datetime>>
   @IsNumber({}, <<=listModifier(field)>>)
+  <<endif>>
+
+  <<if field number>>
+  @TransformStringToInt()
   <<endif>>
 
   <<if field datetime>>

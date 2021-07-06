@@ -4,46 +4,36 @@
 FROM node:16-alpine AS base
 ARG app
 ARG NODE_AUTH_TOKEN
+ARG PORT
 
 # set working directory
 WORKDIR /root/tractr
 
-# copy project file
+# copy project files
 COPY ./package.json .
-COPY ./yarn.lock .
-COPY ./tsconfig.json .
-COPY ./lerna.json .
-COPY ./hapify-models.json .
-COPY ${app}/prisma ${app}/prisma
-COPY ${app}/.hapifyrc.js ${app}/
-COPY ${app}/nest-cli.json ${app}/
-COPY ${app}/package.json ${app}/
-COPY ${app}/tsconfig.json ${app}/
-COPY ${app}/tsconfig.build.json ${app}/
+COPY ./package-lock.json .
+
+
+# ---- Dev Dependencies ----
+FROM base AS dev-dependencies
+COPY . .
+RUN --mount=type=secret,id=npmrc,target=/root/.npmrc \
+    NODE_AUTH_TOKEN=${NODE_AUTH_TOKEN} \
+    npm ci --no-audit --no-progress
 
 # ---- Production Dependencies ----
-FROM base AS dependencies-prod
-RUN --mount=type=secret,id=npmrc,target=/root/.npmrc \
-    NODE_AUTH_TOKEN=${NODE_AUTH_TOKEN} \
-    yarn --production --frozen-lock --ignore-scripts --prefer-offline --no-audit --no-progress
+FROM dev-dependencies AS production-dependencies
+RUN npm prune --production
 
-# ---- Dependencies ----
-FROM base AS dependencies-dev
-RUN --mount=type=secret,id=npmrc,target=/root/.npmrc \
-    NODE_AUTH_TOKEN=${NODE_AUTH_TOKEN} \
-    yarn --frozen-lock --ignore-scripts --prefer-offline --no-audit --no-progress
-
-# ---- Dependencies ----
-FROM dependencies-dev AS build
-WORKDIR /root/tractr/${app}
-COPY ${app}/src src
-RUN npm run build --no-update-notifier
+# ---- Build ----
+FROM dev-dependencies AS build
+RUN npm run nx -- run ${app}:build --prod
 
 # ---- Release ----
-FROM dependencies-prod AS release
-WORKDIR /root/tractr/${app}
-COPY --from=build /root/tractr/${app}/dist ./dist
-
-# expose port and define CMD
+FROM production-dependencies AS release
 EXPOSE 3000
-CMD ["npm", "run", "start:prod"]
+ENV NODE_ENV=production
+COPY --from=build /root/tractr/dist/apps/${app} .
+COPY --from=production-dependencies /root/tractr/node_modules ./node_modules/
+RUN du -d 1 -h .
+CMD ["node", "./main"]

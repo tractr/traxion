@@ -3,26 +3,6 @@ module.exports = {
   description:
     'Generate the common modules and services for models of a Nestjs application',
   project: '../../hapify-models.json',
-  defaultFields: [
-    {
-      name: 'id',
-      type: 'string',
-      subtype: null,
-      reference: null,
-      primary: true,
-      unique: false,
-      label: false,
-      nullable: false,
-      multiple: false,
-      embedded: false,
-      searchable: true,
-      sortable: true,
-      hidden: false,
-      internal: true,
-      restricted: false,
-      ownership: false,
-    },
-  ],
   templates: [
     {
       path: 'generated/nestjs-models-common/index.ts',
