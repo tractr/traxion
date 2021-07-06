@@ -26,5 +26,6 @@ module.exports = {
     '<rootDir>/libs/prisma',
     '<rootDir>/libs/generated',
     '<rootDir>/libs/hapify/templates/nestjs-models-rest',
+    '<rootDir>/libs/nestjs/mailer',
   ],
 };
