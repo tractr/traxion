@@ -1,5 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+} from '@angular/core';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  NgModel,
+} from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+export type ItemStatusInterface = 'error' | 'success' | 'validating';
 
 @Component({
   selector: 'tractr-form-item-base',
@@ -7,8 +22,10 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 })
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export abstract class FormItemBaseComponent<Type extends any>
-  implements OnInit
+  implements OnInit, OnDestroy
 {
+  private unsubscribe: Subject<void> = new Subject<void>();
+
   @Input() form: FormGroup = new FormGroup({});
 
   @Input() name = 'base';
@@ -21,11 +38,34 @@ export abstract class FormItemBaseComponent<Type extends any>
 
   @Input() required = true;
 
+  @Input() errorTip:
+    | string
+    | TemplateRef<{ $implicit: FormControl | NgModel }>
+    | undefined;
+
+  status: ItemStatusInterface = 'validating';
+
   ngOnInit(): void {
-    this.form.addControl(this.name, this.getControl());
+    let control: AbstractControl | null = this.form.get(this.name);
+
+    // Auto init control
+    if (!control) {
+      control = this.initControl();
+      this.form.addControl(this.name, control);
+    }
+
+    if (control) {
+      control?.statusChanges.pipe(takeUntil(this.unsubscribe)).subscribe(() => {
+        this.status = this.getStatus(control);
+      });
+    }
   }
 
-  abstract getControl(): AbstractControl;
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+  }
+
+  abstract initControl(): AbstractControl;
 
   getValue(): Type | undefined {
     const value = this.form.get(this.name)?.value;
@@ -35,5 +75,10 @@ export abstract class FormItemBaseComponent<Type extends any>
 
   setValue(value: Type | undefined): void {
     this.form.get(this.name)?.setValue(value);
+  }
+
+  getStatus(control: AbstractControl | null): ItemStatusInterface {
+    if (!control) return 'validating';
+    return control.errors ? 'error' : 'success';
   }
 }

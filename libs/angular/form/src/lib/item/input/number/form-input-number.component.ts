@@ -26,7 +26,7 @@ export class FormInputNumberComponent extends FormInputBaseComponent<number> {
     super();
   }
 
-  getControl(): FormControl {
+  initControl(): FormControl {
     return this.formBuilder.control(this.state, [
       // eslint-disable-next-line @typescript-eslint/unbound-method
       ...(this.required ? [Validators.required] : []),

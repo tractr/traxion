@@ -22,7 +22,7 @@ export class FormInputStringComponent extends FormInputBaseComponent<string> {
     this.autocomplete = this.inputType === 'password' ? 'on' : 'off';
   }
 
-  getControl(): FormControl {
+  initControl(): FormControl {
     return this.formBuilder.control(this.state, [
       // eslint-disable-next-line @typescript-eslint/unbound-method
       ...(this.required ? [Validators.required] : []),

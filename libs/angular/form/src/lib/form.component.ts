@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 
@@ -7,7 +13,7 @@ import { NzFormLayoutType } from 'ng-zorro-antd/form';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.less'],
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements AfterViewInit {
   @Output() submitted = new EventEmitter<Record<string, unknown>>();
 
   @Output() changed = new EventEmitter<Record<string, unknown>>();
@@ -16,7 +22,7 @@ export class FormComponent implements OnInit {
 
   @Input() form!: FormGroup;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.form.valueChanges.subscribe((changes) => this.changed.emit(changes));
   }
 
