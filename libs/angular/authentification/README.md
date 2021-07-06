@@ -37,20 +37,6 @@ import { AngularToolsModule } from '@tractr/angular-tools';
         api: {
           url: 'http://localhost:4200/api',
         },
-        routing: {
-          prefix: ['/'],
-        },
-        login: {
-          url: 'login',
-          redirection: ['/'],
-        },
-        logout: {
-          url: 'logout',
-          redirection: ['/'],
-        },
-        session: {
-          url: 'me',
-        },
       },
     }),
   ],
@@ -61,7 +47,35 @@ export class AppModule {}
 
 ## Configuration
 
-You can modify environment variables in the authentification module :
+You can modify environment variables in the authentification module like in that
+code:
+
+```typescript
+AngularAuthentificationModule.forRoot({
+  environment: {
+    api: {
+      url: 'http://localhost:4200/api',
+    },
+    routing: {
+      prefix: ['/'],
+    },
+    login: {
+      url: 'login',
+      routing: 'sign-in',
+      redirect: ['/'],
+    },
+    logout: {
+      url: 'logout',
+      redirect: ['/'],
+    },
+    session: {
+      url: 'me',
+    },
+  },
+});
+```
+
+Here are the list of environment variables:
 
 - `api.url`(string): contain the api url
 - `login`:

@@ -1,12 +1,36 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
-import { AuthentificationForRootInterface } from './authentification-for-root.interface';
+import {
+  AuthentificationEnvironmentInterface,
+  AuthentificationForRootInterface,
+} from './authentification-for-root.interface';
 import { LoginComponent, LogoutComponent } from './components';
 import { ConnectedDirective, NotConnectedDirective } from './directives';
 import { IsLoggedGuard, IsNotLoggedGuard } from './guards';
 import { SessionService } from './services';
 
 import { AngularToolsModule } from '@tractr/angular-tools';
+
+const defaultEnv: AuthentificationEnvironmentInterface = {
+  api: {
+    url: 'http://localhost:4200/api',
+  },
+  routing: {
+    prefix: ['/'],
+  },
+  login: {
+    url: 'login',
+    routing: 'login',
+    redirect: ['/'],
+  },
+  logout: {
+    url: 'logout',
+    redirect: ['/'],
+  },
+  session: {
+    url: 'me',
+  },
+};
 
 @NgModule({
   imports: [AngularToolsModule],
@@ -26,15 +50,21 @@ import { AngularToolsModule } from '@tractr/angular-tools';
 })
 export class AngularAuthentificationModule {
   public static forRoot(
-    params: AuthentificationForRootInterface,
+    overide: Partial<AuthentificationForRootInterface> = {},
   ): ModuleWithProviders<AngularAuthentificationModule> {
+    // Overide default env
+    const environment: AuthentificationEnvironmentInterface = Object.assign(
+      defaultEnv,
+      overide.environment,
+    );
+
     return {
       ngModule: AngularAuthentificationModule,
       providers: [
         SessionService,
         {
           provide: 'environment',
-          useValue: params.environment,
+          useValue: environment,
         },
       ],
     };

@@ -20,5 +20,5 @@ export interface AuthentificationEnvironmentInterface {
 }
 
 export interface AuthentificationForRootInterface {
-  environment: AuthentificationEnvironmentInterface;
+  environment: Partial<AuthentificationEnvironmentInterface>;
 }
