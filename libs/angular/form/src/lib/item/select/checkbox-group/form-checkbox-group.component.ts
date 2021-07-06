@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -11,13 +11,11 @@ import { ItemStatusInterface } from '../../base/form-item-base.component';
 import { FormSelectBaseComponent } from '../form-select-base.component';
 
 @Component({
-  selector: 'tractr-form-select',
-  templateUrl: './form-select.component.html',
-  styleUrls: ['./form-select.component.less'],
+  selector: 'tractr-form-checkbox-group',
+  templateUrl: './form-checkbox-group.component.html',
+  styleUrls: ['./form-checkbox-group.component.less'],
 })
-export class FormSelectComponent extends FormSelectBaseComponent<any> {
-  @Input() multiple = false;
-
+export class FormCheckboxGroupComponent extends FormSelectBaseComponent<any> {
   constructor(private formBuilder: FormBuilder) {
     super();
   }

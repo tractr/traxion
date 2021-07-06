@@ -4,11 +4,11 @@
   [errorTip]="errorTip"
   [status]="status"
 >
-  <tractr-select
-    [options]="options"
+  <tractr-checkbox
     [value]="state"
     (valueChanged)="setValue($event)"
     [delayed]="delayed"
-    [multiple]="multiple"
-  ></tractr-select>
+  >
+    <ng-content></ng-content>
+  </tractr-checkbox>
 </tractr-form-item>

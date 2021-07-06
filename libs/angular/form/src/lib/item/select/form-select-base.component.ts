@@ -11,7 +11,9 @@ import { SelectOptionInterface } from '@tractr/angular-components';
 })
 export abstract class FormSelectBaseComponent<
   Type extends any,
-> extends FormItemBaseComponent<SelectOptionInterface<Type>> {
+> extends FormItemBaseComponent<
+  SelectOptionInterface<Type> | SelectOptionInterface<Type>[]
+> {
   @Input() options: SelectOptionInterface<any>[] = [];
 
   @Input() delayed = 200;

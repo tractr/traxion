@@ -4,11 +4,10 @@
   [errorTip]="errorTip"
   [status]="status"
 >
-  <tractr-select
+  <tractr-checkbox-group
     [options]="options"
     [value]="state"
     (valueChanged)="setValue($event)"
     [delayed]="delayed"
-    [multiple]="multiple"
-  ></tractr-select>
+  ></tractr-checkbox-group>
 </tractr-form-item>

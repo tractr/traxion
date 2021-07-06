@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormComponent } from './form.component';
 import {
   FormButtonComponent,
+  FormCheckboxComponent,
+  FormCheckboxGroupComponent,
   FormDatePickerComponent,
   FormInputNumberComponent,
   FormInputStringComponent,
@@ -25,6 +27,8 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     FormButtonComponent,
     FormComponent,
     FormDatePickerComponent,
+    FormCheckboxGroupComponent,
+    FormCheckboxComponent,
   ],
   exports: [
     FormInputStringComponent,
@@ -35,6 +39,8 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     FormButtonComponent,
     FormComponent,
     FormDatePickerComponent,
+    FormCheckboxGroupComponent,
+    FormCheckboxComponent,
   ],
 })
 export class AngularFormModule {}
