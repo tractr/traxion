@@ -9,6 +9,15 @@ export function filterInt(value: any) {
 }
  
 export function TransformStringToInt() {
-  return Transform((string: TransformFnParams) => filterInt(string.value))
+  return Transform(({ value }: TransformFnParams) => filterInt(value))
 }
  
+export function TransformStringToArrayOfString() {
+  return Transform(({ value }: TransformFnParams) => {
+    return Array.isArray(value)
+      ? value
+      : typeof value === 'string'
+        ? value.split(',')
+        : value;
+  })
+}
