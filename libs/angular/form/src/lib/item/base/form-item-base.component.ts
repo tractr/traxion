@@ -20,8 +20,7 @@ export type ItemStatusInterface = 'error' | 'success' | 'validating';
   selector: 'tractr-form-item-base',
   template: '',
 })
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export abstract class FormItemBaseComponent<Type extends any>
+export abstract class FormItemBaseComponent<Type = unknown>
   implements OnInit, OnDestroy
 {
   private unsubscribe: Subject<void> = new Subject<void>();

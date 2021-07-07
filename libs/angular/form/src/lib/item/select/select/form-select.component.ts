@@ -14,8 +14,7 @@ import { FormSelectBaseComponent } from '../form-select-base.component';
   templateUrl: './form-select.component.html',
   styleUrls: ['./form-select.component.less'],
 })
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-export class FormSelectComponent extends FormSelectBaseComponent<any> {
+export class FormSelectComponent extends FormSelectBaseComponent {
   @Input() multiple = false;
 
   constructor(private formBuilder: FormBuilder) {

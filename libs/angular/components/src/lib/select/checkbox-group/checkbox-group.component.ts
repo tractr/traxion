@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
 
 import { SelectOptionInterface } from '../interfaces';
@@ -6,7 +5,7 @@ import { SelectBaseComponent } from '../select-base.component';
 
 export interface CheckOptionInterface {
   label: string;
-  value: any;
+  value: unknown;
   checked?: boolean;
 }
 
@@ -16,7 +15,7 @@ export interface CheckOptionInterface {
   styleUrls: ['./checkbox-group.component.less'],
 })
 export class CheckboxGroupComponent
-  extends SelectBaseComponent<any>
+  extends SelectBaseComponent
   implements OnInit
 {
   checkOptionsState?: CheckOptionInterface[];
@@ -37,7 +36,7 @@ export class CheckboxGroupComponent
   }
 
   parseOptions(
-    options: SelectOptionInterface<any>[] | undefined,
+    options: SelectOptionInterface[] | undefined,
   ): CheckOptionInterface[] | undefined {
     if (!options) return undefined;
 
@@ -50,10 +49,10 @@ export class CheckboxGroupComponent
 
   getSelectOptionsSelected(
     checkOptions: CheckOptionInterface[] | undefined,
-  ): SelectOptionInterface<any>[] | undefined {
+  ): SelectOptionInterface[] | undefined {
     if (!checkOptions) return undefined;
 
-    const optionsSelected: SelectOptionInterface<any>[] = [];
+    const optionsSelected: SelectOptionInterface[] = [];
     checkOptions.forEach((checkOption, index) => {
       if (checkOption.checked) {
         optionsSelected.push(this.options[index]);

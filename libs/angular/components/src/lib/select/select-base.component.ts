@@ -17,8 +17,7 @@ type IdType = string | number;
   selector: 'tractr-select-base',
   template: '',
 })
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export abstract class SelectBaseComponent<Type extends any>
+export abstract class SelectBaseComponent<Type = unknown>
   implements OnInit, OnDestroy
 {
   protected unsubscribe$: Subject<void> = new Subject<void>();

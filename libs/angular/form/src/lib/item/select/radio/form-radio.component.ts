@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component } from '@angular/core';
 import {
   AbstractControl,
@@ -15,7 +14,7 @@ import { FormSelectBaseComponent } from '../form-select-base.component';
   templateUrl: './form-radio.component.html',
   styleUrls: ['./form-radio.component.less'],
 })
-export class FormRadioComponent extends FormSelectBaseComponent<any> {
+export class FormRadioComponent extends FormSelectBaseComponent {
   constructor(private formBuilder: FormBuilder) {
     super();
   }

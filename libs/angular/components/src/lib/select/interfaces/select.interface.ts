@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface SelectOptionInterface<Type extends any> {
+export interface SelectOptionInterface<Type = unknown> {
   id: string | number;
   label: string;
   value: Type;

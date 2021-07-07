@@ -19,7 +19,7 @@ export class CheckboxComponent implements OnInit, OnDestroy {
 
   @Input() delayed = 200;
 
-  @Input() checkedValue: any;
+  @Input() checkedValue: unknown;
 
   /** Value */
   private valueState: boolean | undefined;

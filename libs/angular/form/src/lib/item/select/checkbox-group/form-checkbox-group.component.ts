@@ -14,8 +14,7 @@ import { FormSelectBaseComponent } from '../form-select-base.component';
   templateUrl: './form-checkbox-group.component.html',
   styleUrls: ['./form-checkbox-group.component.less'],
 })
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-export class FormCheckboxGroupComponent extends FormSelectBaseComponent<any> {
+export class FormCheckboxGroupComponent extends FormSelectBaseComponent {
   constructor(private formBuilder: FormBuilder) {
     super();
   }

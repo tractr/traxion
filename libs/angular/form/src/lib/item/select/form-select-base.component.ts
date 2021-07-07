@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, Input } from '@angular/core';
 
 import { FormItemBaseComponent } from '../base/form-item-base.component';
@@ -10,11 +9,11 @@ import { SelectOptionInterface } from '@tractr/angular-components';
   template: '',
 })
 export abstract class FormSelectBaseComponent<
-  Type extends any,
+  Type = unknown,
 > extends FormItemBaseComponent<
   SelectOptionInterface<Type> | SelectOptionInterface<Type>[]
 > {
-  @Input() options: SelectOptionInterface<any>[] = [];
+  @Input() options: SelectOptionInterface<Type>[] = [];
 
   @Input() delayed = 200;
 }
