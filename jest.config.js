@@ -27,5 +27,6 @@ module.exports = {
     '<rootDir>/libs/generated',
     '<rootDir>/libs/hapify/templates/nestjs-models-rest',
     '<rootDir>/libs/nestjs/mailer',
+    '<rootDir>/libs/angular/form',
   ],
 };

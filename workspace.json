@@ -16,21 +16,75 @@
       }
     },
     "@nrwl/angular:application": {
-      "e2eTestRunner": "cypress",
-      "linter": "eslint",
       "style": "less",
-      "unitTestRunner": "jest"
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:component": {
       "style": "less"
     },
     "@nrwl/angular:library": {
-      "linter": "eslint",
       "style": "less",
+      "linter": "eslint",
       "unitTestRunner": "jest"
     }
   },
   "projects": {
+    "angular-form": {
+      "prefix": "tractr",
+      "projectType": "library",
+      "root": "libs/angular/form",
+      "sourceRoot": "libs/angular/form/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "development": {
+              "tsConfig": "libs/angular/form/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/angular/form/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:package",
+          "options": {
+            "project": "libs/angular/form/ng-package.json"
+          },
+          "outputs": ["dist/libs/angular/form"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular/form/src/**/*.ts",
+              "libs/angular/form/src/**/*.html"
+            ]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public",
+            "buildTarget": "production"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular/form/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/angular/form"]
+        }
+      }
+    },
     "angular-components": {
       "prefix": "tractr",
       "projectType": "library",
@@ -1144,7 +1198,7 @@
             "production": {
               "budgets": [
                 {
-                  "maximumError": "1mb",
+                  "maximumError": "5mb",
                   "maximumWarning": "500kb",
                   "type": "initial"
                 },
@@ -1173,7 +1227,10 @@
             "outputPath": "dist/apps/pwa",
             "polyfills": "apps/pwa/src/polyfills.ts",
             "scripts": [],
-            "styles": ["apps/pwa/src/styles.less"],
+            "styles": [
+              "apps/pwa/src/styles.less",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
+            ],
             "tsConfig": "apps/pwa/tsconfig.app.json"
           },
           "outputs": ["{options.outputPath}"]
