@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'tractr-button',
@@ -6,5 +7,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./button.component.less'],
 })
 export class ButtonComponent {
-  @Input() type: 'primary' | 'dashed' | 'link' | 'text' | 'default' = 'default';
+  @Input() type: NzButtonType = 'default';
+
+  @Input() size: NzButtonSize = 'default';
+
+  @Input() disabled = false;
+
+  @Input() loading = false;
 }

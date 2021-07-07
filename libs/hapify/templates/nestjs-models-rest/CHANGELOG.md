@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.4.2](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-rest-1.4.1...hapify-templates-nestjs-models-rest-1.4.2) (2021-07-07)
+
+
+### Bug Fixes
+
+* change the prisma query transformer from body to update relation fields only if we got a value ([#162](https://github.com/tractr/stack/issues/162)) ([8a3721c](https://github.com/tractr/stack/commit/8a3721ca9973db4647f85a361e0ce121c70dc90f))
+
+
+
 ## [1.4.1](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-rest-1.4.0...hapify-templates-nestjs-models-rest-1.4.1) (2021-07-06)
 
 
