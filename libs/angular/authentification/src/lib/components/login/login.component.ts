@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import {
@@ -14,11 +15,7 @@ import { ErrorService } from '@tractr/angular-tools';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  /** Email input */
-  email!: string;
-
-  /** Password input */
-  password!: string;
+  form = new FormGroup({});
 
   /** Constructor */
   constructor(
@@ -31,9 +28,14 @@ export class LoginComponent {
 
   /** Called when the user click on sign in */
   onSignIn() {
+    const email = this.form.get('email')?.value;
+    const password = this.form.get('password')?.value;
+
+    if (!email && !password) return;
+
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     this.sessionService
-      .login(this.email, this.password)
+      .login(email, password)
       .then(async (self) => {
         if (self) {
           const urlAfterLogin = this.sessionService.popUrlAfterLogin();
@@ -47,7 +49,6 @@ export class LoginComponent {
   }
 
   private handleSignInError(err: Error) {
-    console.error('error sign in', err);
     this.errorService.handle(err);
   }
 }

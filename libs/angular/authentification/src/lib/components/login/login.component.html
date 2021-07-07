@@ -1,35 +1,21 @@
-<div class="container">
-  <div class="row justify-content-center py-5">
-    <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
-      <form class="d-block border p-4">
-        <nz-form-control class="w-100 mb-3">
-          <input
-            name="email"
-            nz-input
-            placeholder="{{ 'session_email' | translate }}"
-            [(ngModel)]="email"
-          />
-        </nz-form-control>
-        <nz-form-control class="w-100 mb-3">
-          <input
-            name="password"
-            nz-input
-            placeholder="{{ 'session_password' | translate }}"
-            type="password"
-            [(ngModel)]="password"
-          />
-        </nz-form-control>
-        <div class="w-100 d-flex justify-content-end">
-          <button
-            nz-button
-            nzType="primary"
-            [disabled]="!(email && password)"
-            (click)="onSignIn()"
-          >
-            {{ 'session_sign-in' | translate }}
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+<tractr-form [form]="form" (submitted)="onSignIn()" [layout]="'vertical'">
+  <tractr-form-input-string
+    [label]="'login-email' | translate"
+    name="email"
+    [form]="form"
+    [errorTip]="'login-email_required' | translate"
+    subtype="email"
+  ></tractr-form-input-string>
+
+  <tractr-form-input-string
+    [label]="'login-password' | translate"
+    name="password"
+    [form]="form"
+    [errorTip]="'login-password_required' | translate"
+    subtype="password"
+  ></tractr-form-input-string>
+
+  <tractr-form-button [form]="form">{{
+    'login-submit_button' | translate
+  }}</tractr-form-button>
+</tractr-form>

@@ -10,6 +10,8 @@ import { ConnectedDirective, NotConnectedDirective } from './directives';
 import { IsLoggedGuard, IsNotLoggedGuard } from './guards';
 import { SessionService } from './services';
 
+import { AngularComponentsModule } from '@tractr/angular-components';
+import { AngularFormModule } from '@tractr/angular-form';
 import { AngularToolsModule } from '@tractr/angular-tools';
 
 const defaultOptions: AuthentificationOptionsInterface = {
@@ -34,7 +36,7 @@ const defaultOptions: AuthentificationOptionsInterface = {
 };
 
 @NgModule({
-  imports: [AngularToolsModule],
+  imports: [AngularToolsModule, AngularComponentsModule, AngularFormModule],
   declarations: [
     LogoutComponent,
     LoginComponent,
