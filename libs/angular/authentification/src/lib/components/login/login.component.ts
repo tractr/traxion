@@ -3,9 +3,9 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import {
-  AuthentificationForRootEnum,
+  AUTH_OPTIONS,
   AuthentificationOptionsInterface,
-} from '../../authentification-for-root.interface';
+} from '../../authentification.config';
 import { SessionService } from '../../services/session.service';
 
 import { ErrorService } from '@tractr/angular-tools';
@@ -21,7 +21,7 @@ export class LoginComponent {
   constructor(
     private sessionService: SessionService,
     private router: Router,
-    @Inject(AuthentificationForRootEnum.options)
+    @Inject(AUTH_OPTIONS)
     private options: AuthentificationOptionsInterface,
     private errorService: ErrorService,
   ) {}

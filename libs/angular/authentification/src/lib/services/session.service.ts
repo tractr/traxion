@@ -7,9 +7,9 @@ import { map } from 'rxjs/operators';
 import { request } from 'universal-rxjs-ajax';
 
 import {
-  AuthentificationForRootEnum,
+  AUTH_OPTIONS,
   AuthentificationOptionsInterface,
-} from '../authentification-for-root.interface';
+} from '../authentification.config';
 
 import { User } from '@generated/models';
 import { transformAndValidate } from '@generated/rext-client';
@@ -48,7 +48,7 @@ export class SessionService {
 
   /** Constructor */
   constructor(
-    @Inject(AuthentificationForRootEnum.options)
+    @Inject(AUTH_OPTIONS)
     private options: AuthentificationOptionsInterface,
   ) {
     this.sessionUrl = `${this.options.api.url}/${this.options.session.url}`;

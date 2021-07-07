@@ -1,3 +1,5 @@
+import { InjectionToken } from '@angular/core';
+
 export interface AuthentificationOptionsInterface {
   api: {
     url: string;
@@ -19,10 +21,9 @@ export interface AuthentificationOptionsInterface {
   };
 }
 
-export enum AuthentificationForRootEnum {
-  'options',
-}
+export const AUTH_OPTIONS =
+  new InjectionToken<AuthentificationOptionsInterface>('auth.options');
 
 export interface AuthentificationForRootInterface {
-  [AuthentificationForRootEnum.options]: Partial<AuthentificationOptionsInterface>;
+  options: Partial<AuthentificationOptionsInterface>;
 }

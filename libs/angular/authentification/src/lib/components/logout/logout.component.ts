@@ -2,9 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import {
-  AuthentificationForRootEnum,
+  AUTH_OPTIONS,
   AuthentificationOptionsInterface,
-} from '../../authentification-for-root.interface';
+} from '../../authentification.config';
 import { SessionService } from '../../services/session.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class LogoutComponent implements OnInit {
   constructor(
     private sessionService: SessionService,
     private router: Router,
-    @Inject(AuthentificationForRootEnum.options)
+    @Inject(AUTH_OPTIONS)
     private options: AuthentificationOptionsInterface,
   ) {}
 

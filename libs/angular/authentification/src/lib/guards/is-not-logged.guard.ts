@@ -2,9 +2,9 @@ import { Inject, Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
 
 import {
-  AuthentificationForRootEnum,
+  AUTH_OPTIONS,
   AuthentificationOptionsInterface,
-} from '../authentification-for-root.interface';
+} from '../authentification.config';
 import { SessionService } from '../services/session.service';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class IsNotLoggedGuard implements CanActivate {
   constructor(
     private sessionService: SessionService,
     private router: Router,
-    @Inject(AuthentificationForRootEnum.options)
+    @Inject(AUTH_OPTIONS)
     private options: AuthentificationOptionsInterface,
   ) {}
 

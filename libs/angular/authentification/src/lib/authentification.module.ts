@@ -1,10 +1,10 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import {
-  AuthentificationForRootEnum,
+  AUTH_OPTIONS,
   AuthentificationForRootInterface,
   AuthentificationOptionsInterface,
-} from './authentification-for-root.interface';
+} from './authentification.config';
 import { LoginComponent, LogoutComponent } from './components';
 import { ConnectedDirective, NotConnectedDirective } from './directives';
 import { IsLoggedGuard, IsNotLoggedGuard } from './guards';
@@ -58,18 +58,12 @@ export class AngularAuthentificationModule {
     // Overide default options
     const options: AuthentificationOptionsInterface = Object.assign(
       defaultOptions,
-      overide[AuthentificationForRootEnum.options],
+      overide.options,
     );
 
     return {
       ngModule: AngularAuthentificationModule,
-      providers: [
-        SessionService,
-        {
-          provide: AuthentificationForRootEnum.options,
-          useValue: options,
-        },
-      ],
+      providers: [SessionService, { provide: AUTH_OPTIONS, useValue: options }],
     };
   }
 }
