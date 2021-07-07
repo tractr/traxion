@@ -151,7 +151,9 @@ export class SessionService {
   /** Denotes if the user is connected */
   async loggedIn(): Promise<boolean> {
     if (this.callingCurrent) {
-      await new Promise((resolve) => {
+      await new Promise((resolve, reject) => {
+        setTimeout(() => reject(), 20000);
+
         this.selfSubject.subscribe((self) => {
           resolve(self);
         });
