@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, Input } from '@angular/core';
 import {
   AbstractControl,
@@ -15,6 +14,7 @@ import { FormSelectBaseComponent } from '../form-select-base.component';
   templateUrl: './form-select.component.html',
   styleUrls: ['./form-select.component.less'],
 })
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 export class FormSelectComponent extends FormSelectBaseComponent<any> {
   @Input() multiple = false;
 
