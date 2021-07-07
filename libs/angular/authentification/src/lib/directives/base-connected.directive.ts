@@ -18,8 +18,7 @@ export abstract class BaseConnectedDirective implements OnInit, OnDestroy {
 
   constructor(
     private viewContainer: ViewContainerRef,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    private templateRef: TemplateRef<any>,
+    private templateRef: TemplateRef<unknown>,
     private sessionService: SessionService,
   ) {}
 

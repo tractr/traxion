@@ -1,5 +1,4 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
@@ -10,7 +9,6 @@ import {
 } from './config';
 import { AUTHENTICATION_MODULE_OPTIONS } from './constants';
 import { LoginController } from './controllers';
-import { JwtGlobalAuthGuard } from './guards';
 import { AuthenticationOptions } from './interfaces';
 import { AuthenticationService, StrategyOptionsService } from './services';
 import { JwtStrategy, LocalStrategy } from './strategies';
@@ -105,7 +103,6 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
         StrategyOptionsService,
         JwtStrategy,
         LocalStrategy,
-        { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
       ],
       controllers: [LoginController],
     };

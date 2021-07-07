@@ -1,7 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthentificationEnvironmentInterface } from '../../authentification-for-root.interface';
+import {
+  AuthentificationForRootEnum,
+  AuthentificationOptionsInterface,
+} from '../../authentification-for-root.interface';
 import { SessionService } from '../../services/session.service';
 
 @Component({
@@ -13,14 +16,14 @@ export class LogoutComponent implements OnInit {
   constructor(
     private sessionService: SessionService,
     private router: Router,
-    @Inject('environment')
-    private environment: AuthentificationEnvironmentInterface,
+    @Inject(AuthentificationForRootEnum.options)
+    private options: AuthentificationOptionsInterface,
   ) {}
 
   ngOnInit() {
     this.sessionService
       .logout()
-      .then(() => this.router.navigate(this.environment.logout.redirect))
+      .then(() => this.router.navigate(this.options.logout.redirect))
       .catch((err) => {
         console.error('Logout error', err);
       });

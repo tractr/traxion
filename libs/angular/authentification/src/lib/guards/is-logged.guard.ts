@@ -7,7 +7,10 @@ import {
   UrlTree,
 } from '@angular/router';
 
-import { AuthentificationEnvironmentInterface } from '../authentification-for-root.interface';
+import {
+  AuthentificationForRootEnum,
+  AuthentificationOptionsInterface,
+} from '../authentification-for-root.interface';
 import { SessionService } from '../services/session.service';
 
 @Injectable()
@@ -15,8 +18,8 @@ export class IsLoggedGuard implements CanActivate {
   constructor(
     private sessionService: SessionService,
     private router: Router,
-    @Inject('environment')
-    private environment: AuthentificationEnvironmentInterface,
+    @Inject(AuthentificationForRootEnum.options)
+    private options: AuthentificationOptionsInterface,
   ) {}
 
   async canActivate(
@@ -30,7 +33,7 @@ export class IsLoggedGuard implements CanActivate {
 
     this.sessionService.setPathAfterLogin(state);
     return this.router.createUrlTree([
-      ...this.environment.routing.prefix,
+      ...this.options.routing.prefix,
       'sign-in',
     ]);
   }

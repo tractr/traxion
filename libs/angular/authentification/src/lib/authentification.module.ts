@@ -1,8 +1,9 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import {
-  AuthentificationEnvironmentInterface,
+  AuthentificationForRootEnum,
   AuthentificationForRootInterface,
+  AuthentificationOptionsInterface,
 } from './authentification-for-root.interface';
 import { LoginComponent, LogoutComponent } from './components';
 import { ConnectedDirective, NotConnectedDirective } from './directives';
@@ -11,7 +12,7 @@ import { SessionService } from './services';
 
 import { AngularToolsModule } from '@tractr/angular-tools';
 
-const defaultEnv: AuthentificationEnvironmentInterface = {
+const defaultOptions: AuthentificationOptionsInterface = {
   api: {
     url: 'http://localhost:4200/api',
   },
@@ -52,10 +53,10 @@ export class AngularAuthentificationModule {
   public static forRoot(
     overide: Partial<AuthentificationForRootInterface> = {},
   ): ModuleWithProviders<AngularAuthentificationModule> {
-    // Overide default env
-    const environment: AuthentificationEnvironmentInterface = Object.assign(
-      defaultEnv,
-      overide.environment,
+    // Overide default options
+    const options: AuthentificationOptionsInterface = Object.assign(
+      defaultOptions,
+      overide[AuthentificationForRootEnum.options],
     );
 
     return {
@@ -63,8 +64,8 @@ export class AngularAuthentificationModule {
       providers: [
         SessionService,
         {
-          provide: 'environment',
-          useValue: environment,
+          provide: AuthentificationForRootEnum.options,
+          useValue: options,
         },
       ],
     };

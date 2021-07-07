@@ -1,4 +1,4 @@
-export interface AuthentificationEnvironmentInterface {
+export interface AuthentificationOptionsInterface {
   api: {
     url: string;
   };
@@ -19,6 +19,10 @@ export interface AuthentificationEnvironmentInterface {
   };
 }
 
+export enum AuthentificationForRootEnum {
+  'options',
+}
+
 export interface AuthentificationForRootInterface {
-  environment: Partial<AuthentificationEnvironmentInterface>;
+  [AuthentificationForRootEnum.options]: Partial<AuthentificationOptionsInterface>;
 }

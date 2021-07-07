@@ -6,7 +6,10 @@ import { AjaxResponse } from 'rxjs/ajax';
 import { map } from 'rxjs/operators';
 import { request } from 'universal-rxjs-ajax';
 
-import { AuthentificationEnvironmentInterface } from '../authentification-for-root.interface';
+import {
+  AuthentificationForRootEnum,
+  AuthentificationOptionsInterface,
+} from '../authentification-for-root.interface';
 
 import { User } from '@generated/models';
 import { transformAndValidate } from '@generated/rext-client';
@@ -45,12 +48,12 @@ export class SessionService {
 
   /** Constructor */
   constructor(
-    @Inject('environment')
-    private environment: AuthentificationEnvironmentInterface,
+    @Inject(AuthentificationForRootEnum.options)
+    private options: AuthentificationOptionsInterface,
   ) {
-    this.sessionUrl = `${this.environment.api.url}/${this.environment.session.url}`;
-    this.loginUrl = `${this.environment.api.url}/${this.environment.login.url}`;
-    this.logoutUrl = `${this.environment.api.url}/${this.environment.logout.url}`;
+    this.sessionUrl = `${this.options.api.url}/${this.options.session.url}`;
+    this.loginUrl = `${this.options.api.url}/${this.options.login.url}`;
+    this.logoutUrl = `${this.options.api.url}/${this.options.logout.url}`;
 
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     this.current();
@@ -59,7 +62,7 @@ export class SessionService {
   /** Retrieve current session info from api */
   private async current(): Promise<User | null> {
     this.callingCurrent = true;
-    this.self = await request({
+    return request({
       url: this.sessionUrl,
       method: 'GET',
       withCredentials: true,
@@ -82,14 +85,19 @@ export class SessionService {
         }),
       )
       .toPromise()
-      .catch((err) => {
-        this.handleLoginError(err);
-        return null;
+      .catch((err: HttpErrorResponse) => {
+        // Catch unauthorized http error (user not connected)
+        if (err.status === 401) {
+          return null;
+        }
+        throw err;
+      })
+      .then((self) => {
+        this.self = self;
+        this.callingCurrent = false;
+
+        return this.self;
       });
-
-    this.callingCurrent = false;
-
-    return this.self;
   }
 
   /** Process a login */
@@ -102,7 +110,7 @@ export class SessionService {
 
     this.callingCurrent = true;
 
-    this.self = await request({
+    return request({
       url: this.loginUrl,
       method: 'POST',
       withCredentials: true,
@@ -115,14 +123,12 @@ export class SessionService {
         ),
       )
       .toPromise()
-      .catch((e) => {
-        this.handleLoginError(e);
-        return null;
+      .then((self) => {
+        this.self = self;
+        this.callingCurrent = false;
+
+        return this.self;
       });
-
-    this.callingCurrent = false;
-
-    return this.self;
   }
 
   /** Logout current user */
@@ -135,12 +141,6 @@ export class SessionService {
       method: 'GET',
       withCredentials: true,
     }).toPromise();
-  }
-
-  private handleLoginError(e: HttpErrorResponse): void {
-    // Todo: Add error service
-    // eslint-disable-next-line no-console
-    console.log('todo: handle login error', e);
   }
 
   /** Returns the current users id */

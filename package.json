@@ -34,8 +34,7 @@
     "start": "nx serve",
     "test": " nx run-many --all --target=test",
     "update": "nx migrate latest",
-    "workspace-generator": "nx workspace-generator",
-    "prisma:db:push": "prisma db push --schema=./libs/prisma/prisma/schema.prisma"
+    "workspace-generator": "nx workspace-generator"
   },
   "dependencies": {
     "@angular/animations": "^12.0.3",
