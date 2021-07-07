@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.6.1](https://github.com/tractr/stack/compare/pwa-1.6.0...pwa-1.6.1) (2021-07-07)
+
+
+### Bug Fixes
+
+* use the same PORT env to the api and the pwa proxy ([#164](https://github.com/tractr/stack/issues/164)) ([85c150d](https://github.com/tractr/stack/commit/85c150db70e6c5138582902a8e85d263257204f9))
+
+
+
 # [1.6.0](https://github.com/tractr/stack/compare/pwa-1.5.0...pwa-1.6.0) (2021-06-30)
 
 
