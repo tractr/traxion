@@ -1,1 +1,1 @@
-export * from './lib/nestjs-rbac.module';
+export * from './casl.module';
