@@ -22,6 +22,7 @@
       ],
       "@tractr/angular-components": ["libs/angular/components/src/index.ts"],
       "@tractr/angular-tools": ["libs/angular/tools/src/index.ts"],
+      "@tractr/angular-form": ["libs/angular/form/src/index.ts"],
       "@tractr/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@tractr/commit-config": ["libs/config/commit/src/index.ts"],
       "@tractr/eslint-config": ["libs/config/eslint/src/index.ts"],

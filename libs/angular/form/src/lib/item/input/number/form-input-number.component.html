@@ -1,0 +1,16 @@
+<tractr-form-item
+  [name]="name"
+  [label]="label"
+  [errorTip]="errorTip"
+  [status]="status"
+>
+  <tractr-input-number
+    [value]="state"
+    (valueChanged)="setValue($event)"
+    [delayed]="delayed"
+    [min]="min"
+    [max]="max"
+    [step]="step"
+    [size]="size"
+  ></tractr-input-number>
+</tractr-form-item>
