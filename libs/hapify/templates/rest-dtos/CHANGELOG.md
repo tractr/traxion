@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.3.4](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.3...hapify-templates-rest-dtos-1.3.4) (2021-07-07)
+
+
+### Bug Fixes
+
+* add transform boolean to integer to the dtos and remove isnumber for the date fields ([#163](https://github.com/tractr/stack/issues/163)) ([286a46a](https://github.com/tractr/stack/commit/286a46a8d14f3bbd51221bbb4a162a8faf832170))
+
+
+
 ## [1.3.3](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.2...hapify-templates-rest-dtos-1.3.3) (2021-07-06)
 
 
