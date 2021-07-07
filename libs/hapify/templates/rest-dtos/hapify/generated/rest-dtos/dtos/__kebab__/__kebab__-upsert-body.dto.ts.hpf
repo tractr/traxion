@@ -12,7 +12,7 @@ import {
   IsIn,
   <<endif>>
 
-  <<if Fields number or datetime and not internal>>
+  <<if Fields number and not internal>>
   IsNumber,
   <<endif>>
 
@@ -50,14 +50,15 @@ import {
   <<endfor>>
 } from '@generated/models';
 <<endif>>
-<<if Fields number and not internal>>
-import { TransformStringToInt } from '../../helpers';
+<<if Fields (number or boolean) and searchable>>
+import { TransformStringToInt, TransformStringToBoolean } from '../../helpers';
 <<endif>>
  
 export class <<Model pascal>>UpsertBodyDto {
 <<for Fields not internal field>>
   <<if field boolean>>
-  @IsBoolean(<<=listModifier(field)>>) 
+  @IsBoolean(<<=listModifier(field)>>)
+  @TransformStringToBoolean()
   <<endif>>
 
   <<if field string or enum or entity>>
@@ -84,12 +85,9 @@ export class <<Model pascal>>UpsertBodyDto {
   @IsUrl({}, <<=listModifier(field)>>) 
   <<endif>>
 
-  <<if field number or datetime>>
-  @IsNumber({}, <<=listModifier(field)>>)
-  <<endif>>
-
   <<if field number>>
   @TransformStringToInt()
+  @IsNumber({}, <<=listModifier(field)>>)
   <<endif>>
 
   <<if field datetime>>

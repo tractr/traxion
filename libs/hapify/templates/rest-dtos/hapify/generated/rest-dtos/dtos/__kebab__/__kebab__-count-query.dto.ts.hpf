@@ -44,14 +44,15 @@ import {
   <<endfor>>
 } from '@generated/models';
 <<endif>>
-<<if Fields number and searchable>>
-import { TransformStringToInt } from '../../helpers';
+<<if Fields (number or boolean) and searchable>>
+import { TransformStringToInt, TransformStringToBoolean } from '../../helpers';
 <<endif>>
  
 export class <<Model pascal>>CountQueryDto {
 <<for Fields searchable and not password field>>
   <<if field boolean>>
-  @IsBoolean(<<=listModifier(field)>>) 
+  @IsBoolean(<<=listModifier(field)>>)
+  @TransformStringToBoolean()
   <<endif>>
 
   <<if field string or entity or enum>>
