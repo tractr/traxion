@@ -1,7 +1,15 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+# [1.2.0](https://github.com/tractr/stack/compare/hapify-config-1.1.0...hapify-config-1.2.0) (2021-07-08)
+
+
+### Features
+
+* force entity back relation naming ([#144](https://github.com/tractr/stack/issues/144)) ([a4aee26](https://github.com/tractr/stack/commit/a4aee269c8ed92c23ff2a9bf2e79a526a777bc08))
+
+
 
 # [1.1.0](https://github.com/tractr/stack/compare/hapify-config-1.0.0...hapify-config-1.1.0) (2021-06-16)
 
