@@ -8,7 +8,7 @@
   },
   "license": "UNLICENSED",
   "peerDependencies": {
-    "@tractr/hapify-templates-models": "1.2.4"
+    "@tractr/hapify-templates-models": "1.4.0"
   },
   "publishConfig": {
     "access": "restricted",

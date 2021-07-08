@@ -48,7 +48,7 @@ import {
   <<endfor>>
 } from '@generated/models';
 <<endif>>
-<<if Fields (number or boolean) and searchable>>
+<<if Fields (number or boolean) and not internal>>
 import { TransformStringToInt, TransformStringToBoolean } from '../../helpers';
 <<endif>>
 
