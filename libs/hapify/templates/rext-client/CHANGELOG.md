@@ -1,7 +1,15 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+## [1.2.3](https://github.com/tractr/stack/compare/hapify-templates-rext-client-1.2.2...hapify-templates-rext-client-1.2.3) (2021-07-08)
+
+
+### Bug Fixes
+
+* remove nestjs-authentication @generated/all dependency from package.json ([#168](https://github.com/tractr/stack/issues/168)) ([20891bc](https://github.com/tractr/stack/commit/20891bce7697ef834835dff29f24313ac3a09b51))
+
+
 
 ## [1.2.2](https://github.com/tractr/stack/compare/hapify-templates-rext-client-1.2.1...hapify-templates-rext-client-1.2.2) (2021-07-08)
 
