@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.1](https://github.com/tractr/stack/compare/nestjs-mailer-0.1.0...nestjs-mailer-0.1.1) (2021-07-08)
+
+
+### Bug Fixes
+
+* update problematique templates and peerdependencies package json ([#166](https://github.com/tractr/stack/issues/166)) ([198ab59](https://github.com/tractr/stack/commit/198ab592bd7e73640b583ca38c61f88e4db432f6))
+
+
+
 # 0.1.0 (2021-07-05)
 
 
