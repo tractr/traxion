@@ -1,7 +1,15 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+## [1.4.1](https://github.com/tractr/stack/compare/hapify-templates-models-1.4.0...hapify-templates-models-1.4.1) (2021-07-08)
+
+
+### Bug Fixes
+
+* update problematique templates and peerdependencies package json ([#166](https://github.com/tractr/stack/issues/166)) ([198ab59](https://github.com/tractr/stack/commit/198ab592bd7e73640b583ca38c61f88e4db432f6))
+
+
 
 # [1.4.0](https://github.com/tractr/stack/compare/hapify-templates-models-1.3.0...hapify-templates-models-1.4.0) (2021-06-24)
 
