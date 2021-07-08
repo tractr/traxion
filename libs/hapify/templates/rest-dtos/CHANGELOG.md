@@ -1,7 +1,15 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+## [1.3.6](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.5...hapify-templates-rest-dtos-1.3.6) (2021-07-08)
+
+
+### Bug Fixes
+
+* remove nestjs-authentication @generated/all dependency from package.json ([#168](https://github.com/tractr/stack/issues/168)) ([20891bc](https://github.com/tractr/stack/commit/20891bce7697ef834835dff29f24313ac3a09b51))
+
+
 
 ## [1.3.5](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.4...hapify-templates-rest-dtos-1.3.5) (2021-07-08)
 
