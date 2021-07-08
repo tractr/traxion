@@ -4,7 +4,7 @@ import * as mailjet from 'node-mailjet';
 import { MailerService } from '../services';
 
 @Console({
-  name: 'mailer',
+  command: 'mailer',
 })
 export class MailerCliService {
   constructor(private readonly mailerService: MailerService) {}

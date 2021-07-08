@@ -1,21 +1,21 @@
 {
-  "name": "@tractr/angular-tools",
-  "version": "1.5.0",
-  "description": "Tools for angular application",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tractr/stack"
-  },
   "dependencies": {
     "tslib": "^2.1.0"
   },
+  "description": "Tools for angular application",
+  "name": "@tractr/angular-tools",
   "peerDependencies": {
-    "@angular/common": "^12.0.3",
-    "@angular/core": "^12.0.3",
+    "@angular/common": "^12.1.1",
+    "@angular/core": "^12.1.1",
     "ng-zorro-antd": "^11.4.2"
   },
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "version": "1.5.0"
 }

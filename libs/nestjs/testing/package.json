@@ -8,7 +8,7 @@
   },
   "license": "UNLICENSED",
   "peerDependencies": {
-    "@nestjs/common": "^7.6.13"
+    "@nestjs/common": "^8.0.0"
   },
   "publishConfig": {
     "access": "restricted",

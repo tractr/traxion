@@ -8,7 +8,7 @@
   },
   "license": "UNLICENSED",
   "peerDependencies": {
-    "@nestjs/common": "^7.0.0",
+    "@nestjs/common": "^8.0.0",
     "@prisma/client": "^2.0.0"
   },
   "publishConfig": {
