@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.4.3](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-rest-1.4.2...hapify-templates-nestjs-models-rest-1.4.3) (2021-07-08)
+
+
+### Bug Fixes
+
+* update problematique templates and peerdependencies package json ([#166](https://github.com/tractr/stack/issues/166)) ([198ab59](https://github.com/tractr/stack/commit/198ab592bd7e73640b583ca38c61f88e4db432f6))
+
+
+
 ## [1.4.2](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-rest-1.4.1...hapify-templates-nestjs-models-rest-1.4.2) (2021-07-07)
 
 
