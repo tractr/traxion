@@ -1,24 +1,22 @@
 # Changelog
 
-This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using
+[@jscutlery/semver](https://github.com/jscutlery/semver).
 
 # [0.2.0](https://github.com/tractr/stack/compare/angular-components-0.1.0...angular-components-0.2.0) (2021-07-07)
 
-
 ### Features
 
-* Angular components ([#155](https://github.com/tractr/stack/issues/155)) ([139a9a4](https://github.com/tractr/stack/commit/139a9a419a53155f31c5f71dad1cb7d8993c54c4))
-
-
+- Angular components ([#155](https://github.com/tractr/stack/issues/155))
+  ([139a9a4](https://github.com/tractr/stack/commit/139a9a419a53155f31c5f71dad1cb7d8993c54c4))
 
 # 0.1.0 (2021-06-30)
 
-
 ### Features
 
-* change stack lerna repository to nx workspace ([#119](https://github.com/tractr/stack/issues/119)) ([e9104bd](https://github.com/tractr/stack/commit/e9104bde081619c0f3752bb9d129e19d1d6bda5d))
-
-
+- change stack lerna repository to nx workspace
+  ([#119](https://github.com/tractr/stack/issues/119))
+  ([e9104bd](https://github.com/tractr/stack/commit/e9104bde081619c0f3752bb9d129e19d1d6bda5d))
 
 # Changelog
 

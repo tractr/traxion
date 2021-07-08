@@ -1,51 +1,47 @@
 # Changelog
 
-This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using
+[@jscutlery/semver](https://github.com/jscutlery/semver).
 
 ## [1.3.5](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.4...hapify-templates-rest-dtos-1.3.5) (2021-07-08)
 
-
 ### Bug Fixes
 
-* update problematique templates and peerdependencies package json ([#166](https://github.com/tractr/stack/issues/166)) ([198ab59](https://github.com/tractr/stack/commit/198ab592bd7e73640b583ca38c61f88e4db432f6))
-
-
+- update problematique templates and peerdependencies package json
+  ([#166](https://github.com/tractr/stack/issues/166))
+  ([198ab59](https://github.com/tractr/stack/commit/198ab592bd7e73640b583ca38c61f88e4db432f6))
 
 ## [1.3.4](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.3...hapify-templates-rest-dtos-1.3.4) (2021-07-07)
 
-
 ### Bug Fixes
 
-* add transform boolean to integer to the dtos and remove isnumber for the date fields ([#163](https://github.com/tractr/stack/issues/163)) ([286a46a](https://github.com/tractr/stack/commit/286a46a8d14f3bbd51221bbb4a162a8faf832170))
-
-
+- add transform boolean to integer to the dtos and remove isnumber for the date
+  fields ([#163](https://github.com/tractr/stack/issues/163))
+  ([286a46a](https://github.com/tractr/stack/commit/286a46a8d14f3bbd51221bbb4a162a8faf832170))
 
 ## [1.3.3](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.2...hapify-templates-rest-dtos-1.3.3) (2021-07-06)
 
-
 ### Bug Fixes
 
-* change populate behavior to parse correctly the query params ([#153](https://github.com/tractr/stack/issues/153)) ([a2e2a24](https://github.com/tractr/stack/commit/a2e2a2471291f008c6645035458f8e93a6074074))
-
-
+- change populate behavior to parse correctly the query params
+  ([#153](https://github.com/tractr/stack/issues/153))
+  ([a2e2a24](https://github.com/tractr/stack/commit/a2e2a2471291f008c6645035458f8e93a6074074))
 
 ## [1.3.2](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.1...hapify-templates-rest-dtos-1.3.2) (2021-07-05)
 
-
 ### Bug Fixes
 
-* change TransformStringToInt template condition on create body dto ([#154](https://github.com/tractr/stack/issues/154)) ([7eaf67f](https://github.com/tractr/stack/commit/7eaf67fe89f5397e26efc0db0831267fcecc4a0a))
-
-
+- change TransformStringToInt template condition on create body dto
+  ([#154](https://github.com/tractr/stack/issues/154))
+  ([7eaf67f](https://github.com/tractr/stack/commit/7eaf67fe89f5397e26efc0db0831267fcecc4a0a))
 
 ## [1.3.1](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.0...hapify-templates-rest-dtos-1.3.1) (2021-06-29)
 
-
 ### Bug Fixes
 
-* add transform string to int decorator to query, body and params ([#150](https://github.com/tractr/stack/issues/150)) ([ee3fcd6](https://github.com/tractr/stack/commit/ee3fcd68aff87db2c09e77dc7e930f36dcab0a8b))
-
-
+- add transform string to int decorator to query, body and params
+  ([#150](https://github.com/tractr/stack/issues/150))
+  ([ee3fcd6](https://github.com/tractr/stack/commit/ee3fcd68aff87db2c09e77dc7e930f36dcab0a8b))
 
 # [1.3.0](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.2.4...hapify-templates-rest-dtos-1.3.0) (2021-06-16)
 

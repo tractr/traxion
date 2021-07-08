@@ -1,33 +1,31 @@
 # Changelog
 
-This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using
+[@jscutlery/semver](https://github.com/jscutlery/semver).
 
 ## [1.4.3](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-rest-1.4.2...hapify-templates-nestjs-models-rest-1.4.3) (2021-07-08)
 
-
 ### Bug Fixes
 
-* update problematique templates and peerdependencies package json ([#166](https://github.com/tractr/stack/issues/166)) ([198ab59](https://github.com/tractr/stack/commit/198ab592bd7e73640b583ca38c61f88e4db432f6))
-
-
+- update problematique templates and peerdependencies package json
+  ([#166](https://github.com/tractr/stack/issues/166))
+  ([198ab59](https://github.com/tractr/stack/commit/198ab592bd7e73640b583ca38c61f88e4db432f6))
 
 ## [1.4.2](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-rest-1.4.1...hapify-templates-nestjs-models-rest-1.4.2) (2021-07-07)
 
-
 ### Bug Fixes
 
-* change the prisma query transformer from body to update relation fields only if we got a value ([#162](https://github.com/tractr/stack/issues/162)) ([8a3721c](https://github.com/tractr/stack/commit/8a3721ca9973db4647f85a361e0ce121c70dc90f))
-
-
+- change the prisma query transformer from body to update relation fields only
+  if we got a value ([#162](https://github.com/tractr/stack/issues/162))
+  ([8a3721c](https://github.com/tractr/stack/commit/8a3721ca9973db4647f85a361e0ce121c70dc90f))
 
 ## [1.4.1](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-rest-1.4.0...hapify-templates-nestjs-models-rest-1.4.1) (2021-07-06)
 
-
 ### Bug Fixes
 
-* change populate behavior to parse correctly the query params ([#153](https://github.com/tractr/stack/issues/153)) ([a2e2a24](https://github.com/tractr/stack/commit/a2e2a2471291f008c6645035458f8e93a6074074))
-
-
+- change populate behavior to parse correctly the query params
+  ([#153](https://github.com/tractr/stack/issues/153))
+  ([a2e2a24](https://github.com/tractr/stack/commit/a2e2a2471291f008c6645035458f8e93a6074074))
 
 # [1.4.0](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-rest-1.3.4...hapify-templates-nestjs-models-rest-1.4.0) (2021-06-24)
 
