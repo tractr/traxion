@@ -12,10 +12,10 @@
   },
   "npmScope": "tractr",
   "projects": {
-    "angular-form": {
+    "angular-components": {
       "tags": []
     },
-    "angular-components": {
+    "angular-form": {
       "tags": []
     },
     "angular-tools": {
@@ -80,7 +80,8 @@
       "implicitDependencies": [
         "hapify-config",
         "hapify-generate-config",
-        "generated"
+        "nestjs-core",
+        "nestjs-database"
       ],
       "tags": []
     },
@@ -88,6 +89,9 @@
       "tags": []
     },
     "nestjs-database": {
+      "tags": []
+    },
+    "nestjs-mailer": {
       "tags": []
     },
     "nestjs-rbac": {
@@ -110,21 +114,18 @@
     "pwa-e2e": {
       "implicitDependencies": ["pwa"],
       "tags": []
-    },
-    "nestjs-mailer": {
-      "tags": []
     }
   },
   "tasksRunnerOptions": {
+    "angular-components": {
+      "tags": []
+    },
     "default": {
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
         "strictlyOrderedTargets": ["build", "generate"]
       },
       "runner": "@nrwl/workspace/tasks-runners/default"
-    },
-    "angular-components": {
-      "tags": []
     }
   }
 }
