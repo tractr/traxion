@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LostPasswordComponent } from './components';
+import { LostPasswordPageComponent } from './components';
 import { PasswordService } from './services';
 
 const routes: Routes = [
   {
     path: 'lost-password',
-    component: LostPasswordComponent,
+    component: LostPasswordPageComponent,
     data: {
       title: 'Lost password',
     },

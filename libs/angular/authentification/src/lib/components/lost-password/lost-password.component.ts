@@ -1,12 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 
-import {
-  AUTH_OPTIONS,
-  AuthentificationOptionsInterface,
-} from '../../authentification.config';
 import { PasswordService } from '../../services';
 
 @Component({
@@ -20,34 +15,27 @@ export class LostPasswordComponent {
 
   processing = false;
 
-  resetRequestSentTo: string | undefined;
-
-  @Output() submitted = new EventEmitter<void>();
+  @Output() submitted = new EventEmitter<string>();
 
   @Output() cancel = new EventEmitter<void>();
 
-  constructor(
-    @Inject(AUTH_OPTIONS)
-    private options: AuthentificationOptionsInterface,
-    public router: Router,
-    private passwordService: PasswordService,
-  ) {}
+  constructor(private passwordService: PasswordService) {}
 
   submit(): void {
-    this.resetRequestSentTo = undefined;
-
     const email = this.getEmail();
+    this.processing = true;
 
     this.passwordService
       .request(email)
       .then(() => {
-        this.resetRequestSentTo = email;
-        this.submitted.emit();
+        this.submitted.emit(email);
+        this.processing = false;
       })
       .catch((err: HttpErrorResponse) => {
         if (err.status === 404) {
           this.form.get('email')?.setErrors({ notFound: true });
         }
+        this.processing = false;
       });
   }
 
@@ -57,15 +45,5 @@ export class LostPasswordComponent {
     if (!email) console.error('Email not found in form');
 
     return email;
-  }
-
-  onCancel(): void {
-    this.cancel.emit();
-
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    this.router.navigate([
-      ...this.options.routing.prefix,
-      this.options.login.routing,
-    ]);
   }
 }

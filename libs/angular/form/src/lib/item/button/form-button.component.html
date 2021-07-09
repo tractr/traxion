@@ -1,6 +1,10 @@
 <nz-form-item>
   <nz-form-control>
-    <tractr-button [type]="type" [disabled]="!form || form.invalid">
+    <tractr-button
+      [type]="type"
+      [disabled]="!form || form.invalid"
+      [loading]="loading"
+    >
       <ng-content></ng-content>
     </tractr-button>
   </nz-form-control>

@@ -13,4 +13,6 @@ export class FormButtonComponent {
   @Input() label!: string;
 
   @Input() type: NzButtonType = 'primary';
+
+  @Input() loading = false;
 }
