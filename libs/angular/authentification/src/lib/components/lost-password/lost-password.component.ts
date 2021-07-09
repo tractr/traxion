@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { PasswordService } from '../../services';
 
@@ -19,7 +20,10 @@ export class LostPasswordComponent {
 
   @Output() cancel = new EventEmitter<void>();
 
-  constructor(private passwordService: PasswordService) {}
+  constructor(
+    private passwordService: PasswordService,
+    private message: NzMessageService,
+  ) {}
 
   submit(): void {
     const email = this.getEmail();
@@ -34,6 +38,8 @@ export class LostPasswordComponent {
       .catch((err: HttpErrorResponse) => {
         if (err.status === 404) {
           this.form.get('email')?.setErrors({ notFound: true });
+        } else {
+          this.message.create('error', err.message);
         }
         this.processing = false;
       });

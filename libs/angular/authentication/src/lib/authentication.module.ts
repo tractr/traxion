@@ -10,6 +10,8 @@ import {
   LogoutComponent,
   LostPasswordComponent,
   LostPasswordPageComponent,
+  ResetPasswordComponent,
+  ResetPasswordPageComponent,
 } from './components';
 import { ConnectedDirective, NotConnectedDirective } from './directives';
 import { IsLoggedGuard, IsNotLoggedGuard } from './guards';
@@ -55,6 +57,8 @@ const defaultOptions: AuthenticationOptionsInterface = {
     NotConnectedDirective,
     LostPasswordComponent,
     LostPasswordPageComponent,
+    ResetPasswordComponent,
+    ResetPasswordPageComponent,
   ],
   providers: [SessionService, IsLoggedGuard, IsNotLoggedGuard],
   exports: [
@@ -64,6 +68,8 @@ const defaultOptions: AuthenticationOptionsInterface = {
     NotConnectedDirective,
     LostPasswordComponent,
     LostPasswordPageComponent,
+    ResetPasswordComponent,
+    ResetPasswordPageComponent,
   ],
 })
 export class AngularAuthenticationModule {
