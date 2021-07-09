@@ -16,6 +16,7 @@
       "@app/*": ["apps/pwa/src/app/*"],
       "@assets/*": ["apps/pwa/src/assets/*"],
       "@env/*": ["apps/pwa/src/environments/*"],
+      "@generated/all": ["dist/libs/generated"],
       "@generated/*": [
         "dist/libs/generated/generated/*",
         "libs/generated/generated/*"

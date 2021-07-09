@@ -5,14 +5,18 @@
   "implicitDependencies": {
     ".eslintrc.json": "*",
     "hapify-models.json": "*",
+    "nx.json": "*",
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
-    }
+    },
+    "tsconfig.base.json": "*",
+    "workspace.json": "*"
   },
   "npmScope": "tractr",
   "projects": {
     "angular-authentification": {
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
       "tags": []
     },
     "angular-components": {
@@ -38,6 +42,13 @@
     },
     "generated": {
       "implicitDependencies": [
+        "hapify-templates-models",
+        "hapify-templates-rest-dtos",
+        "hapify-templates-nestjs-models",
+        "hapify-templates-nestjs-models-common",
+        "hapify-templates-nestjs-models-rest",
+        "hapify-templates-rext-client",
+        "hapify-templates-angular-rext-client",
         "nestjs-core",
         "nestjs-database",
         "nestjs-testing",
@@ -81,10 +92,13 @@
     },
     "nestjs-authentication": {
       "implicitDependencies": [
-        "hapify-config",
-        "hapify-generate-config",
+        "hapify-templates-models",
+        "hapify-templates-prisma",
+        "hapify-templates-nestjs-models-common",
         "nestjs-core",
-        "nestjs-database"
+        "nestjs-database",
+        "hapify-config",
+        "hapify-generate-config"
       ],
       "tags": []
     },
@@ -98,7 +112,7 @@
       "tags": []
     },
     "nestjs-rbac": {
-      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "implicitDependencies": [],
       "tags": []
     },
     "nestjs-testing": {
@@ -108,7 +122,11 @@
       "tags": []
     },
     "prisma": {
-      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "implicitDependencies": [
+        "hapify-templates-prisma",
+        "hapify-config",
+        "hapify-generate-config"
+      ],
       "tags": []
     },
     "pwa": {
@@ -119,14 +137,27 @@
       "tags": []
     }
   },
+  "targetDependencies": {
+    "build": [
+      {
+        "projects": "dependencies",
+        "target": "build"
+      }
+    ],
+    "generate": [
+      {
+        "projects": "dependencies",
+        "target": "pregenerate"
+      }
+    ]
+  },
   "tasksRunnerOptions": {
     "angular-components": {
       "tags": []
     },
     "default": {
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "strictlyOrderedTargets": ["build", "generate"]
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
       },
       "runner": "@nrwl/workspace/tasks-runners/default"
     }

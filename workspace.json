@@ -47,6 +47,16 @@
             }
           },
           "defaultConfiguration": "production",
+          "dependsOn": [
+            {
+              "projects": "self",
+              "target": "prebuild"
+            },
+            {
+              "projects": "dependencies",
+              "target": "build"
+            }
+          ],
           "executor": "@nrwl/angular:package",
           "options": {
             "project": "libs/angular/authentification/ng-package.json"
@@ -60,6 +70,12 @@
               "libs/angular/authentification/src/**/*.ts",
               "libs/angular/authentification/src/**/*.html"
             ]
+          }
+        },
+        "prebuild": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["npx nx run generated:build"]
           }
         },
         "publish": {
@@ -479,16 +495,16 @@
           },
           "outputs": ["{options.outputPath}"]
         },
-        "generate": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": ["npx nx run hapify-config:build"]
-          }
-        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/config/hapify/**/*.ts"]
+          }
+        },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["npx nx run hapify-config:build"]
           }
         },
         "publish": {
@@ -529,16 +545,16 @@
           },
           "outputs": ["{options.outputPath}"]
         },
-        "generate": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": ["npx nx run hapify-generate-config:build"]
-          }
-        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/hapify/generate-config/**/*.ts"]
+          }
+        },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["npx nx run hapify-generate-config:build"]
           }
         },
         "publish": {
@@ -928,6 +944,16 @@
       "sourceRoot": "libs/nestjs/authentication/src",
       "targets": {
         "build": {
+          "dependsOn": [
+            {
+              "projects": "self",
+              "target": "prebuild"
+            },
+            {
+              "projects": "dependencies",
+              "target": "build"
+            }
+          ],
           "executor": "@nrwl/node:package",
           "options": {
             "assets": [
@@ -965,6 +991,12 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/nestjs/authentication/**/*.ts"]
+          }
+        },
+        "prebuild": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["npx nx run generated:build"]
           }
         },
         "publish": {
