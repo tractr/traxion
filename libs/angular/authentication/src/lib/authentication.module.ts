@@ -5,10 +5,14 @@ import {
   AuthenticationForRootInterface,
   AuthenticationOptionsInterface,
 } from './authentication.config';
-import { LoginComponent, LogoutComponent } from './components';
+import {
+  LoginComponent,
+  LogoutComponent,
+  LostPasswordComponent,
+} from './components';
 import { ConnectedDirective, NotConnectedDirective } from './directives';
 import { IsLoggedGuard, IsNotLoggedGuard } from './guards';
-import { SessionService } from './services';
+import { PasswordService, SessionService } from './services';
 
 import { AngularComponentsModule } from '@tractr/angular-components';
 import { AngularFormModule } from '@tractr/angular-form';
@@ -33,6 +37,12 @@ const defaultOptions: AuthenticationOptionsInterface = {
   session: {
     url: 'me',
   },
+  password: {
+    disable: false,
+    reset: {
+      url: 'password/reset',
+    },
+  },
 };
 
 @NgModule({
@@ -42,6 +52,7 @@ const defaultOptions: AuthenticationOptionsInterface = {
     LoginComponent,
     ConnectedDirective,
     NotConnectedDirective,
+    LostPasswordComponent,
   ],
   providers: [SessionService, IsLoggedGuard, IsNotLoggedGuard],
   exports: [
@@ -49,6 +60,7 @@ const defaultOptions: AuthenticationOptionsInterface = {
     LoginComponent,
     ConnectedDirective,
     NotConnectedDirective,
+    LostPasswordComponent,
   ],
 })
 export class AngularAuthenticationModule {
@@ -63,7 +75,13 @@ export class AngularAuthenticationModule {
 
     return {
       ngModule: AngularAuthenticationModule,
-      providers: [SessionService, { provide: AUTH_OPTIONS, useValue: options }],
+      providers: [
+        SessionService,
+        IsLoggedGuard,
+        IsNotLoggedGuard,
+        { provide: AUTH_OPTIONS, useValue: options },
+        ...(!options.password.disable ? [PasswordService] : []),
+      ],
     };
   }
 }

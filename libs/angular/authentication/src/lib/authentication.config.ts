@@ -19,6 +19,12 @@ export interface AuthenticationOptionsInterface {
   session: {
     url: string;
   };
+  password: {
+    disable: boolean;
+    reset: {
+      url: string;
+    };
+  };
 }
 
 export const AUTH_OPTIONS = new InjectionToken<AuthenticationOptionsInterface>(

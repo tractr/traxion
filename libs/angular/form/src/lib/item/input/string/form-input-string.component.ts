@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { FormInputBaseComponent } from '../form-input-base.component';
@@ -15,6 +15,8 @@ export class FormInputStringComponent
   inputType: 'text' | 'email' | 'password' = 'text';
 
   autocomplete: 'on' | 'off' = 'off';
+
+  @Input() placeholder: string | null = null;
 
   constructor(private formBuilder: FormBuilder) {
     super();
