@@ -3,6 +3,8 @@
 /dist
 /coverage
 
-prisma/client
+/libs/nestjs/authentication/prisma/client
+
+**/*.md
 
 *.local-ignore*
