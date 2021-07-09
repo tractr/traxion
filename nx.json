@@ -152,9 +152,6 @@
     ]
   },
   "tasksRunnerOptions": {
-    "angular-components": {
-      "tags": []
-    },
     "default": {
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"]
