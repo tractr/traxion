@@ -5,8 +5,8 @@ import { takeUntil } from 'rxjs/operators';
 
 import {
   AUTH_OPTIONS,
-  AuthentificationOptionsInterface,
-} from '../../authentification.config';
+  AuthenticationOptionsInterface,
+} from '../../authentication.config';
 
 @Component({
   selector: 'tractr-reset-password-page',
@@ -23,7 +23,7 @@ export class ResetPasswordPageComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(AUTH_OPTIONS)
-    private options: AuthentificationOptionsInterface,
+    private options: AuthenticationOptionsInterface,
     private route: ActivatedRoute,
     private router: Router,
   ) {}

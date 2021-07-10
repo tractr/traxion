@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 
 import {
   AUTH_OPTIONS,
-  AuthentificationOptionsInterface,
-} from '../../authentification.config';
+  AuthenticationOptionsInterface,
+} from '../../authentication.config';
 
 @Component({
   selector: 'tractr-lost-password-page',
@@ -16,7 +16,7 @@ export class LostPasswordPageComponent {
 
   constructor(
     @Inject(AUTH_OPTIONS)
-    private options: AuthentificationOptionsInterface,
+    private options: AuthenticationOptionsInterface,
     private router: Router,
   ) {}
 

@@ -27,4 +27,4 @@ const routes: Routes = [
   providers: [PasswordService],
   exports: [RouterModule],
 })
-export class AngularAuthentificationPasswordRoutingModule {}
+export class AngularAuthenticationPasswordRoutingModule {}
