@@ -34,6 +34,21 @@ export class AuthenticationService {
     login: string,
     password: string,
   ): Promise<User | null> {
+    const passwordField =
+      this.authenticationOptions.strategy.local.passwordField ?? 'password';
+
+    const user = await this.findUserByLogin(login, { [passwordField]: true });
+    if (!user) throw new UserNotFoundError();
+
+    if (await this.verifyPassword(password, user.password)) {
+      return this.findUserByLogin(login);
+    }
+
+    throw new BadPasswordError();
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  findUserByLogin(login: string, select?: any): Promise<User | null> {
     const loginField =
       this.authenticationOptions.strategy.local.usernameField ?? 'email';
     if (!loginField) throw new Error('loginField is not defined');
@@ -41,17 +56,11 @@ export class AuthenticationService {
     const findOneWhere = {
       [loginField]: login,
     };
-    const user = await this.userService.findUnique({
+
+    return this.userService.findUnique({
       where: findOneWhere,
-      select: { password: true },
+      ...(select ? { select } : {}),
     });
-    if (!user) throw new UserNotFoundError();
-
-    if (await this.verifyPassword(password, user.password)) {
-      return this.userService.findUnique({ where: findOneWhere });
-    }
-
-    throw new BadPasswordError();
   }
 
   async hashPassword(password: string): Promise<string> {

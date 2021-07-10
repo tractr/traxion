@@ -8,9 +8,13 @@ import {
   AuthenticationModuleOptionsFactory,
 } from './config';
 import { AUTHENTICATION_MODULE_OPTIONS } from './constants';
-import { LoginController } from './controllers';
+import { LoginController, PasswordController } from './controllers';
 import { AuthenticationOptions } from './interfaces';
-import { AuthenticationService, StrategyOptionsService } from './services';
+import {
+  AuthenticationService,
+  PasswordService,
+  StrategyOptionsService,
+} from './services';
 import { JwtStrategy, LocalStrategy } from './strategies';
 
 import {
@@ -19,6 +23,7 @@ import {
   ModuleOptionsHelper,
   ModuleOverrideMetadata,
 } from '@tractr/nestjs-core';
+import { MailerModule } from '@tractr/nestjs-mailer';
 
 @Module({})
 export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOptions>(
@@ -90,21 +95,24 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
           inject: [AUTHENTICATION_MODULE_OPTIONS],
         }),
         UserModelModule.register(overrides),
+        MailerModule.register(),
       ],
       exports: [
         ...(authenticationOptionsModule.exports ?? []),
         AuthenticationService,
+        PasswordService,
         JwtStrategy,
         LocalStrategy,
       ],
       providers: [
         ...(authenticationOptionsModule.providers ?? []),
         AuthenticationService,
+        PasswordService,
         StrategyOptionsService,
         JwtStrategy,
         LocalStrategy,
       ],
-      controllers: [LoginController],
+      controllers: [LoginController, PasswordController],
     };
   }
 }
