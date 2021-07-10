@@ -2,9 +2,9 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import {
   AUTH_OPTIONS,
-  AuthentificationForRootInterface,
-  AuthentificationOptionsInterface,
-} from './authentification.config';
+  AuthenticationForRootInterface,
+  AuthenticationOptionsInterface,
+} from './authentication.config';
 import { LoginComponent, LogoutComponent } from './components';
 import { ConnectedDirective, NotConnectedDirective } from './directives';
 import { IsLoggedGuard, IsNotLoggedGuard } from './guards';
@@ -14,7 +14,7 @@ import { AngularComponentsModule } from '@tractr/angular-components';
 import { AngularFormModule } from '@tractr/angular-form';
 import { AngularToolsModule } from '@tractr/angular-tools';
 
-const defaultOptions: AuthentificationOptionsInterface = {
+const defaultOptions: AuthenticationOptionsInterface = {
   api: {
     url: 'http://localhost:4200/api',
   },
@@ -51,18 +51,18 @@ const defaultOptions: AuthentificationOptionsInterface = {
     NotConnectedDirective,
   ],
 })
-export class AngularAuthentificationModule {
+export class AngularAuthenticationModule {
   public static forRoot(
-    overide: Partial<AuthentificationForRootInterface> = {},
-  ): ModuleWithProviders<AngularAuthentificationModule> {
+    overide: Partial<AuthenticationForRootInterface> = {},
+  ): ModuleWithProviders<AngularAuthenticationModule> {
     // Overide default options
-    const options: AuthentificationOptionsInterface = Object.assign(
+    const options: AuthenticationOptionsInterface = Object.assign(
       defaultOptions,
       overide.options,
     );
 
     return {
-      ngModule: AngularAuthentificationModule,
+      ngModule: AngularAuthenticationModule,
       providers: [SessionService, { provide: AUTH_OPTIONS, useValue: options }],
     };
   }

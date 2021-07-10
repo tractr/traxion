@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 
 import {
   AUTH_OPTIONS,
-  AuthentificationOptionsInterface,
-} from '../../authentification.config';
+  AuthenticationOptionsInterface,
+} from '../../authentication.config';
 import { SessionService } from '../../services/session.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class LogoutComponent implements OnInit {
     private sessionService: SessionService,
     private router: Router,
     @Inject(AUTH_OPTIONS)
-    private options: AuthentificationOptionsInterface,
+    private options: AuthenticationOptionsInterface,
   ) {}
 
   ngOnInit() {

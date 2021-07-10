@@ -28,6 +28,6 @@ module.exports = {
     '<rootDir>/libs/hapify/templates/nestjs-models-rest',
     '<rootDir>/libs/nestjs/mailer',
     '<rootDir>/libs/angular/form',
-    '<rootDir>/libs/angular/authentification',
+    '<rootDir>/libs/angular/authentication',
   ],
 };

@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 
-export interface AuthentificationOptionsInterface {
+export interface AuthenticationOptionsInterface {
   api: {
     url: string;
   };
@@ -21,9 +21,10 @@ export interface AuthentificationOptionsInterface {
   };
 }
 
-export const AUTH_OPTIONS =
-  new InjectionToken<AuthentificationOptionsInterface>('auth.options');
+export const AUTH_OPTIONS = new InjectionToken<AuthenticationOptionsInterface>(
+  'auth.options',
+);
 
-export interface AuthentificationForRootInterface {
-  options: Partial<AuthentificationOptionsInterface>;
+export interface AuthenticationForRootInterface {
+  options: Partial<AuthenticationOptionsInterface>;
 }

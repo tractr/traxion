@@ -9,8 +9,8 @@ import {
 
 import {
   AUTH_OPTIONS,
-  AuthentificationOptionsInterface,
-} from '../authentification.config';
+  AuthenticationOptionsInterface,
+} from '../authentication.config';
 import { SessionService } from '../services/session.service';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class IsLoggedGuard implements CanActivate {
     private sessionService: SessionService,
     private router: Router,
     @Inject(AUTH_OPTIONS)
-    private options: AuthentificationOptionsInterface,
+    private options: AuthenticationOptionsInterface,
   ) {}
 
   async canActivate(

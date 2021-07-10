@@ -31,19 +31,19 @@
     }
   },
   "projects": {
-    "angular-authentification": {
+    "angular-authentication": {
       "prefix": "tractr",
       "projectType": "library",
-      "root": "libs/angular/authentification",
-      "sourceRoot": "libs/angular/authentification/src",
+      "root": "libs/angular/authentication",
+      "sourceRoot": "libs/angular/authentication/src",
       "targets": {
         "build": {
           "configurations": {
             "development": {
-              "tsConfig": "libs/angular/authentification/tsconfig.lib.json"
+              "tsConfig": "libs/angular/authentication/tsconfig.lib.json"
             },
             "production": {
-              "tsConfig": "libs/angular/authentification/tsconfig.lib.prod.json"
+              "tsConfig": "libs/angular/authentication/tsconfig.lib.prod.json"
             }
           },
           "defaultConfiguration": "production",
@@ -59,16 +59,16 @@
           ],
           "executor": "@nrwl/angular:package",
           "options": {
-            "project": "libs/angular/authentification/ng-package.json"
+            "project": "libs/angular/authentication/ng-package.json"
           },
-          "outputs": ["dist/libs/angular/authentification"]
+          "outputs": ["dist/libs/angular/authentication"]
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/angular/authentification/src/**/*.ts",
-              "libs/angular/authentification/src/**/*.html"
+              "libs/angular/authentication/src/**/*.ts",
+              "libs/angular/authentication/src/**/*.html"
             ]
           }
         },
@@ -94,10 +94,10 @@
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/angular/authentification/jest.config.js",
+            "jestConfig": "libs/angular/authentication/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/angular/authentification"]
+          "outputs": ["coverage/libs/angular/authentication"]
         }
       }
     },

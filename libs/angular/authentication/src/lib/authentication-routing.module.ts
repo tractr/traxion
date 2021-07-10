@@ -27,4 +27,4 @@ const routes: Routes = [
   providers: [NzMessageService, SessionService],
   exports: [RouterModule],
 })
-export class AngularAuthentificationRoutingModule {}
+export class AngularAuthenticationRoutingModule {}

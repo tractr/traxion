@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 
 import {
   AUTH_OPTIONS,
-  AuthentificationOptionsInterface,
-} from '../../authentification.config';
+  AuthenticationOptionsInterface,
+} from '../../authentication.config';
 import { SessionService } from '../../services/session.service';
 
 import { ErrorService } from '@tractr/angular-tools';
@@ -22,7 +22,7 @@ export class LoginComponent {
     private sessionService: SessionService,
     private router: Router,
     @Inject(AUTH_OPTIONS)
-    private options: AuthentificationOptionsInterface,
+    private options: AuthenticationOptionsInterface,
     private errorService: ErrorService,
   ) {}
 

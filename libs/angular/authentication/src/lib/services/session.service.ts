@@ -8,8 +8,8 @@ import { request } from 'universal-rxjs-ajax';
 
 import {
   AUTH_OPTIONS,
-  AuthentificationOptionsInterface,
-} from '../authentification.config';
+  AuthenticationOptionsInterface,
+} from '../authentication.config';
 
 import { User } from '@generated/models';
 import { transformAndValidate } from '@generated/rext-client';
@@ -49,7 +49,7 @@ export class SessionService {
   /** Constructor */
   constructor(
     @Inject(AUTH_OPTIONS)
-    private options: AuthentificationOptionsInterface,
+    private options: AuthenticationOptionsInterface,
   ) {
     this.sessionUrl = `${this.options.api.url}/${this.options.session.url}`;
     this.loginUrl = `${this.options.api.url}/${this.options.login.url}`;

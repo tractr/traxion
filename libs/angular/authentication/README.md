@@ -17,7 +17,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { AngularAuthentificationModule } from '@tractr/angular-authentification';
+import { AngularAuthenticationModule } from '@tractr/angular-authentication';
 import { AngularToolsModule } from '@tractr/angular-tools';
 
 @NgModule({
@@ -32,7 +32,7 @@ import { AngularToolsModule } from '@tractr/angular-tools';
         appVersion: '1',
       },
     }),
-    AngularAuthentificationModule.forRoot({
+    AngularAuthenticationModule.forRoot({
       environment: {
         api: {
           url: 'http://localhost:4200/api',
@@ -47,11 +47,11 @@ export class AppModule {}
 
 ## Configuration
 
-You can modify environment variables in the authentification module like in that
+You can modify environment variables in the authentication module like in that
 code:
 
 ```typescript
-AngularAuthentificationModule.forRoot({
+AngularAuthenticationModule.forRoot({
   environment: {
     api: {
       url: 'http://localhost:4200/api',
@@ -107,11 +107,11 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { AngularAuthentificationRoutingModule } from '@tractr/angular-authentification';
+import { AngularAuthenticationRoutingModule } from '@tractr/angular-authentication';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [AngularAuthentificationRoutingModule],
+  imports: [AngularAuthenticationRoutingModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
@@ -123,7 +123,7 @@ This will create two routes:
 - `/logout`: logout route
 
 NB: this Module will not work without `AngularToolsModule` and
-`AngularAuthentificationModule`.
+`AngularAuthenticationModule`.
 
 ### Custom routing
 
@@ -137,7 +137,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   LogoutComponent,
   LoginComponent,
-} from '@tractr/angular-authentification';
+} from '@tractr/angular-authentication';
 
 const routes: Routes = [
   {
@@ -168,5 +168,5 @@ to change the config `routing.prefix`.
 
 ## Backend
 
-This package was done to work with `@tractr/nestjs-authentification` as backend.
+This package was done to work with `@tractr/nestjs-authentication` as backend.
 Check there readme for more information.

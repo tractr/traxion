@@ -15,7 +15,7 @@
   },
   "npmScope": "tractr",
   "projects": {
-    "angular-authentification": {
+    "angular-authentication": {
       "implicitDependencies": ["hapify-config", "hapify-generate-config"],
       "tags": []
     },
