@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 
 @Component({
@@ -27,20 +27,6 @@ export class FormComponent implements AfterViewInit {
   }
 
   submit(): void {
-    this.submitted.emit(this.controlsToObject(this.form.controls));
-  }
-
-  controlsToObject(
-    controls: Record<string, AbstractControl>,
-  ): Record<string, unknown> {
-    const object: Record<string, unknown> = {};
-
-    Object.entries(controls).forEach(([name, control]) => {
-      if (control instanceof FormControl) {
-        object[name] = control.value;
-      }
-    });
-
-    return object;
+    this.submitted.emit(this.form.value);
   }
 }
