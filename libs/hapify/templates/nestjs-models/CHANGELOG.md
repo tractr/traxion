@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.6.0](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-1.5.2...hapify-templates-nestjs-models-1.6.0) (2021-07-12)
+
+
+### Features
+
+* update all package json dependencies ([#167](https://github.com/tractr/stack/issues/167)) ([aee9606](https://github.com/tractr/stack/commit/aee96067b70286145162f57184a37f25dce1d274))
+
+
+
 ## [1.5.2](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-1.5.1...hapify-templates-nestjs-models-1.5.2) (2021-07-08)
 
 
