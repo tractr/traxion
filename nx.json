@@ -16,7 +16,11 @@
   "npmScope": "tractr",
   "projects": {
     "angular-authentication": {
-      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "implicitDependencies": [
+        "hapify-config",
+        "hapify-generate-config",
+        "angular-tools"
+      ],
       "tags": []
     },
     "angular-components": {
@@ -52,6 +56,7 @@
         "nestjs-core",
         "nestjs-database",
         "nestjs-testing",
+        "angular-tools",
         "hapify-config",
         "hapify-generate-config"
       ],
