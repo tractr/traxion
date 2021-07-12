@@ -42,7 +42,7 @@ import {
   <<for Fields enum enumField>>
   <<Model pascal>><<enumField pascal>>,
   <<endfor>>
-} from '@generated/models';
+} from '../../../models';
 <<endif>>
 <<if Fields (number or boolean) and searchable>>
 import { TransformStringToInt, TransformStringToBoolean } from '../../helpers';

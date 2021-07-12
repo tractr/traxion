@@ -972,7 +972,8 @@
             "main": "libs/nestjs/authentication/src/index.ts",
             "outputPath": "dist/libs/nestjs/authentication",
             "packageJson": "libs/nestjs/authentication/package.json",
-            "tsConfig": "libs/nestjs/authentication/tsconfig.lib.json"
+            "tsConfig": "libs/nestjs/authentication/tsconfig.lib.json",
+            "webpackConfig": "libs/nestjs/authentication/webpack.config.js"
           },
           "outputs": ["{options.outputPath}"]
         },

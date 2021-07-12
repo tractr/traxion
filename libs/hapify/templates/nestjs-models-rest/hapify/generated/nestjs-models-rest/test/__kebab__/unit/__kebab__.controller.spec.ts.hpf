@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import {
   mock<<Model pascal>>Factory,
-} from '@generated/models';
+} from '../../../../models';
 import {
   mock<<Model pascal>>ServiceFactory,
   <<Model constant>>_SERVICE,
   <<Model pascal>>Service,
-} from '@generated/nestjs-models-common';
+} from '../../../../nestjs-models-common';
 import {
   mock<<Model pascal>>RestDtoServiceFactory,
 } from '../../../mock';
@@ -28,7 +28,7 @@ import {
   <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpsertBodyDto,
   <<Model pascal>>UpsertParamsDto,
-} from '@generated/rest-dtos';
+} from '../../../../rest-dtos';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
   

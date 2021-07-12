@@ -40,7 +40,7 @@ import {
   <<<}>>>
   SortOrder,
   <<Model pascal>>,
-} from '@generated/models';
+} from '../../../models';
 import {
   TransformStringToArrayOfString,
   TransformStringToInt,

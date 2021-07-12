@@ -4,7 +4,7 @@ import {
 <<for Fields primary primaryField>>
   mock<<Model pascal>><<primaryField pascal>>Factory,
 <<endfor>>
-} from '@generated/models';
+} from '../../../models';
    
 export function mock<<Model pascal>>FindUniqueParamsDtoFactory(
     override: Partial<<<Model pascal>>FindUniqueParamsDto> = {}
