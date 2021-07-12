@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.7.0](https://github.com/tractr/stack/compare/angular-tools-1.6.0...angular-tools-1.7.0) (2021-07-12)
+
+
+### Features
+
+* update all package json dependencies ([#167](https://github.com/tractr/stack/issues/167)) ([aee9606](https://github.com/tractr/stack/commit/aee96067b70286145162f57184a37f25dce1d274))
+
+
+
 # [1.6.0](https://github.com/tractr/stack/compare/angular-tools-1.5.0...angular-tools-1.6.0) (2021-07-12)
 
 
