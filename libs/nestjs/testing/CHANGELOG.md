@@ -1,7 +1,15 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+# [1.5.0](https://github.com/tractr/stack/compare/nestjs-testing-1.4.0...nestjs-testing-1.5.0) (2021-07-12)
+
+
+### Features
+
+* update all package json dependencies ([#167](https://github.com/tractr/stack/issues/167)) ([aee9606](https://github.com/tractr/stack/commit/aee96067b70286145162f57184a37f25dce1d274))
+
+
 
 # [1.4.0](https://github.com/tractr/stack/compare/nestjs-testing-1.3.0...nestjs-testing-1.4.0) (2021-06-24)
 
