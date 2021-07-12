@@ -14,6 +14,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 import { AngularToolsForRootInterface } from './angular-tools-for-root.interface';
 import { AngularToolsInjectionKeysEnum } from './angular-tools-injection-keys.enum';
@@ -51,6 +52,7 @@ import { HttpLoaderFactory } from './translate-import';
     NzButtonModule,
     NzFormModule,
     NzInputModule,
+    NzMessageModule,
   ],
   declarations: [
     MaxPipe,
@@ -91,6 +93,7 @@ import { HttpLoaderFactory } from './translate-import';
     NzButtonModule,
     NzFormModule,
     NzInputModule,
+    NzMessageModule,
   ],
 })
 export class AngularToolsModule {
