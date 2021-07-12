@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.4.0](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.6...hapify-templates-rest-dtos-1.4.0) (2021-07-12)
+
+
+### Features
+
+* update all package json dependencies ([#167](https://github.com/tractr/stack/issues/167)) ([aee9606](https://github.com/tractr/stack/commit/aee96067b70286145162f57184a37f25dce1d274))
+
+
+
 ## [1.3.6](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.3.5...hapify-templates-rest-dtos-1.3.6) (2021-07-08)
 
 
