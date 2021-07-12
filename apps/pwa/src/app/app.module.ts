@@ -4,7 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 
-import { AngularAuthenticationModule } from '@tractr/angular-authentication';
+import {
+  AngularAuthenticationModule,
+  AngularAuthenticationRoutingModule,
+} from '@tractr/angular-authentication';
 import { AngularComponentsModule } from '@tractr/angular-components';
 import { AngularFormModule } from '@tractr/angular-form';
 import { AngularToolsModule } from '@tractr/angular-tools';
@@ -26,6 +29,7 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     AngularComponentsModule,
     AngularFormModule,
     AngularAuthenticationModule.forRoot(),
+    AngularAuthenticationRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
