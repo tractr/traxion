@@ -29,6 +29,7 @@
       "@tractr/angular-tools": ["libs/angular/tools/src/index.ts"],
       "@tractr/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@tractr/commit-config": ["libs/config/commit/src/index.ts"],
+      "@tractr/common": ["libs/common/src/index.ts"],
       "@tractr/eslint-config": ["libs/config/eslint/src/index.ts"],
       "@tractr/hapify-config": ["libs/config/hapify/src/index.ts"],
       "@tractr/hapify-generate-config": [

@@ -1,9 +1,12 @@
 import { InjectionToken } from '@angular/core';
 
-export interface AuthenticationOptionsInterface {
+import { User } from '../../generated/models';
+
+export interface AuthenticationOptionsInterface<U extends User = User> {
   api: {
     url: string;
   };
+  user: U;
   routing: {
     prefix: string[];
   };
@@ -25,6 +28,4 @@ export const AUTH_OPTIONS = new InjectionToken<AuthenticationOptionsInterface>(
   'auth.options',
 );
 
-export interface AuthenticationForRootInterface {
-  options: Partial<AuthenticationOptionsInterface>;
-}
+export const SESSION_SERVICE = new InjectionToken('session.service');

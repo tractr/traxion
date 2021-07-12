@@ -63,6 +63,22 @@
           },
           "outputs": ["dist/libs/angular/authentication"]
         },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf generated",
+              "node ../../../dist/libs/hapify/generate-config/src/index.js",
+              "npx hpf generate",
+              "npx prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
+              "npx prisma format",
+              "npx prisma generate",
+              "rm ./prisma/client/query-engine-*"
+            ],
+            "cwd": "libs/angular/authentication",
+            "parallel": false
+          }
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
@@ -393,6 +409,38 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/config/commit"]
+        }
+      }
+    },
+    "common": {
+      "projectType": "library",
+      "root": "libs/common",
+      "sourceRoot": "libs/common/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/common/*.md"],
+            "main": "libs/common/src/index.ts",
+            "outputPath": "dist/libs/common",
+            "packageJson": "libs/common/package.json",
+            "tsConfig": "libs/common/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/common/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/common/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/common"]
         }
       }
     },

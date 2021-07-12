@@ -41,6 +41,9 @@
     "commit-config": {
       "tags": []
     },
+    "common": {
+      "tags": []
+    },
     "eslint-config": {
       "tags": []
     },

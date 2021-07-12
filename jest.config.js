@@ -29,5 +29,6 @@ module.exports = {
     '<rootDir>/libs/nestjs/mailer',
     '<rootDir>/libs/angular/form',
     '<rootDir>/libs/angular/authentication',
+    '<rootDir>/libs/common',
   ],
 };

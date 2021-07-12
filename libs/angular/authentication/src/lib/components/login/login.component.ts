@@ -9,6 +9,7 @@ import {
 import { SessionService } from '../../services/session.service';
 
 import { ErrorService } from '@tractr/angular-tools';
+import { InjectSessionService } from '../../decorators';
 
 @Component({
   selector: 'tractr-login',
@@ -19,11 +20,12 @@ export class LoginComponent {
 
   /** Constructor */
   constructor(
-    private sessionService: SessionService,
+    private errorService: ErrorService,
     private router: Router,
     @Inject(AUTH_OPTIONS)
     private options: AuthenticationOptionsInterface,
-    private errorService: ErrorService,
+    @InjectSessionService()
+    private sessionService: SessionService,
   ) {}
 
   /** Called when the user click on sign in */
