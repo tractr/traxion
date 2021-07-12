@@ -1,11 +1,15 @@
-import { Module } from '@nestjs/common';
+import { Module, OnModuleInit } from '@nestjs/common';
 import { ModuleOverride } from '@tractr/nestjs-core';
+<<if Fields password>>
+import { DatabaseService } from '@tractr/nestjs-database';
+import * as bcrypt from 'bcrypt';
+<<endif>>
  
 import { <<Model constant>>_DATABASE_SERVICE, <<Model constant>>_SERVICE } from './<<Model kebab>>-model.constant';
 import {
   <<Model camel>>DatabaseServiceFactory,
   <<Model camel>>DatabaseServiceInject,
-  <<Model pascal>>Service
+  <<Model pascal>>Service,
 } from './services';
  
 const providers = [
@@ -16,7 +20,7 @@ const providers = [
   {
     provide: <<Model constant>>_DATABASE_SERVICE,
     useFactory: <<Model camel>>DatabaseServiceFactory,
-    inject: <<Model camel>>DatabaseServiceInject
+    inject: <<Model camel>>DatabaseServiceInject,
   },
 ];
  
@@ -24,5 +28,64 @@ const providers = [
   exports: providers,
   providers,
 })
-export class <<Model pascal>>ModelModule extends ModuleOverride {}
+export class <<Model pascal>>ModelModule extends ModuleOverride implements OnModuleInit {
+  <<if Fields password>>
+  constructor(protected readonly databaseService: DatabaseService) {
+    super();
+  }
+  <<endif>>
+
+  onModuleInit() {<<if Fields password>>
+    // Create a prisma middleware to handle before and after schema hooks
+    this.databaseService.$use(async (params, next) => {
+      // If the model is not the current one we pass this middleware
+      if (params.model !== '<<Model pascal>>') return next(params);
+
+      switch (params.action) {
+        case 'aggregate':
+        case 'count':
+        case 'delete':
+        case 'deleteMany':
+        case 'executeRaw':
+        case 'queryRaw':
+          break;
+ 
+        case 'findFirst':
+        case 'findMany':
+        case 'findUnique':
+          if (params.args.select) break;
+ 
+          params.args.select = {
+            <<for Fields not password field>>
+            <<field camel>>: true,
+            <<endfor>>
+            <<for Fields password field>>
+            <<field camel>>: false,
+            <<endfor>>
+          };
+          break;
+ 
+        case 'create':
+        case 'createMany':
+        case 'update':
+        case 'updateMany':
+        case 'upsert':
+          const isArray = Array.isArray(params.args.data);
+
+          for (let row of isArray ? params.args.data : [params.args.data]) {
+            <<for Fields password field>>
+            if (row?.<<field camel>>) row.<<field camel>> = await bcrypt.hash(row.<<field camel>>, 10);
+            <<endfor>>
+          }
+ 
+          break;
+ 
+        default:
+          break;
+      }
+ 
+      return next(params);
+    });
+  <<endif>>}
+}
  
