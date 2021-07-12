@@ -16,7 +16,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // Set custom logger service
-  app.useLogger(await app.resolve(Logger));
+  const logger = await app.resolve(Logger);
+  app.useLogger(logger);
   app.setGlobalPrefix(globalPrefix);
 
   app.use(morgan('combined'));
@@ -46,7 +47,7 @@ async function bootstrap() {
 
   // Start app and define port
   await app.listen(port, () => {
-    Logger.log(`Listening at http://localhost:${port}/${globalPrefix}`);
+    logger.log(`Listening at http://localhost:${port}/${globalPrefix}`);
   });
 }
 

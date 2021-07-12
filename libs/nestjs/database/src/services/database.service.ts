@@ -53,7 +53,6 @@ export class DatabaseService
     protected readonly mysql: MysqlService,
   ) {
     super({ ...prismaOptions, ...enforceOptions });
-    this.logger.setContext('DatabaseService:PrismaClient');
   }
 
   async onModuleInit(): Promise<void> {

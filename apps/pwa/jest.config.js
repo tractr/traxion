@@ -1,17 +1,14 @@
 module.exports = {
   displayName: 'pwa',
   preset: '../../jest.preset.js',
+  transform: {
+    '^.+\\.(ts|js|html)$': 'jest-preset-angular',
+  },
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
       stringifyContentPathRegex: '\\.(html|svg)$',
-      astTransformers: {
-        before: [
-          'jest-preset-angular/build/InlineFilesTransformer',
-          'jest-preset-angular/build/StripStylesTransformer',
-        ],
-      },
     },
   },
   coverageDirectory: '../../coverage/apps/pwa',

@@ -2,16 +2,13 @@ module.exports = {
   displayName: 'angular-authentication',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  transform: {
+    '^.+\\.(ts|js|html)$': 'jest-preset-angular',
+  },
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
       stringifyContentPathRegex: '\\.(html|svg)$',
-      astTransformers: {
-        before: [
-          'jest-preset-angular/build/InlineFilesTransformer',
-          'jest-preset-angular/build/StripStylesTransformer',
-        ],
-      },
     },
   },
   coverageDirectory: '../../../coverage/libs/angular/authentication',

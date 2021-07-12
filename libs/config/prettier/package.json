@@ -6,7 +6,7 @@
     "url": "https://github.com/tractr/stack.git"
   },
   "peerDependencies": {
-    "prettier": "^2.3.1"
+    "prettier": "^2.3.2"
   },
   "publishConfig": {
     "access": "restricted",

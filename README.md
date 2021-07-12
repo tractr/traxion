@@ -2,7 +2,10 @@
 
 This project was generated using [Nx](https://nx.dev).
 
-🔎 **Smart, Extensible Build Framework**
+## Known dependencies friction
+
+- ng-zorro is using angular v11 as peer dependencies
+- angular v12 is using rxjs v6 as peer dependencies
 
 ## Adding capabilities to your workspace
 
