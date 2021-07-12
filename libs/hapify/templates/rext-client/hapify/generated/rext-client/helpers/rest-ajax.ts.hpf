@@ -1,22 +1,30 @@
 import { Observable, OperatorFunction } from 'rxjs';
-import { AjaxRequest, AjaxResponse } from 'rxjs/ajax';
+import { AjaxConfig, AjaxResponse } from 'rxjs/ajax';
 import { map } from 'rxjs/operators';
-import { request } from 'universal-rxjs-ajax';
  
 import { getUrl, URLSearchParamsType } from './url';
+import { request } from '@tractr/angular-tools';
  
-export function ajax(options: string | AjaxRequest): Observable<AjaxResponse> {
+export function ajax<T>(
+  options: string | AjaxConfig,
+): Observable<AjaxResponse<T>> {
   return request(typeof options === 'string' ? { url: options } : options);
 }
  
 export function extractAjaxResponseData<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  T extends [any, AjaxResponse]
->(): OperatorFunction<T, T extends [infer R, AjaxResponse] ? R : never> {
+  T extends [any, AjaxResponse<unknown>],
+>(): OperatorFunction<
+  T,
+  T extends [infer R, AjaxResponse<unknown>] ? R : never
+> {
   return map((data) => data[0]);
 }
  
-export type CreateAjaxOptions = Omit<AjaxRequest, 'url' | 'method' | 'body'>;
+export type CreateAjaxOptions = Omit<
+  AjaxConfig,
+  'url' | 'method' | 'body' | 'withCredentials'
+>;
  
 /**
  * Create a new Model
@@ -30,19 +38,21 @@ export function create<T, CreateBody>(
   apiUrl: URL,
   createBody: CreateBody,
   options: CreateAjaxOptions = {},
-): Observable<[T, AjaxResponse]> {
+): Observable<[T, AjaxResponse<T>]> {
   const url = getUrl(apiUrl);
-
-  return ajax({
+  return ajax<T>({
     url: url.toString(),
     method: 'POST',
     body: createBody,
     withCredentials: true,
     ...options,
-  }).pipe(map((value: AjaxResponse) => [value.response, value]));
+  }).pipe(map((value: AjaxResponse<T>) => [value.response, value]));
 }
  
-export type CountAjaxOptions = Omit<AjaxRequest, 'url' | 'method'>;
+export type CountAjaxOptions = Omit<
+  AjaxConfig,
+  'url' | 'method' | 'withCredentials'
+>;
  
 /**
  * Count the number of Model entities that matches the filter
@@ -56,17 +66,20 @@ export function count<CountQuery extends URLSearchParamsType>(
   apiUrl: URL,
   countQuery: CountQuery,
   options: CountAjaxOptions = {},
-): Observable<[number, AjaxResponse]> {
+): Observable<[number, AjaxResponse<number>]> {
   const url = getUrl(apiUrl, '/count', countQuery);
-  return ajax({
+  return ajax<number>({
     url: url.toString(),
     method: 'GET',
     withCredentials: true,
     ...options,
-  }).pipe(map((value: AjaxResponse) => [value.response, value]));
+  }).pipe(map((value: AjaxResponse<number>) => [value.response, value]));
 }
  
-export type FindUniqueOptions = Omit<AjaxRequest, 'url' | 'method'>;
+export type FindUniqueOptions = Omit<
+  AjaxConfig,
+  'url' | 'method' | 'withCredentials'
+>;
  
 /**
  * Find zero or one Model that matches the filter
@@ -80,24 +93,26 @@ export type FindUniqueOptions = Omit<AjaxRequest, 'url' | 'method'>;
 export function findUnique<
   T,
   FindUniqueParams extends { id: string | number },
-  FindUniqueQuery extends URLSearchParamsType
+  FindUniqueQuery extends URLSearchParamsType,
 >(
   apiUrl: URL,
   findUniqueParams: FindUniqueParams,
   findUniqueQuery: FindUniqueQuery,
   options: FindUniqueOptions = {},
-): Observable<[T, AjaxResponse]> {
+): Observable<[T, AjaxResponse<T>]> {
   const url = getUrl(apiUrl, `/${findUniqueParams.id}`, findUniqueQuery);
-
-  return ajax({
+  return ajax<T>({
     url: url.toString(),
     method: 'GET',
     withCredentials: true,
     ...options,
-  }).pipe(map((value: AjaxResponse) => [value.response, value]));
+  }).pipe(map((value: AjaxResponse<T>) => [value.response, value]));
 }
  
-export type FindManyOptions = Omit<AjaxRequest, 'url' | 'method'>;
+export type FindManyOptions = Omit<
+  AjaxConfig,
+  'url' | 'method' | 'withCredentials'
+>;
  
 /**
  * Find zero or more Model entities that matches the filter
@@ -111,17 +126,20 @@ export function findMany<T, FindManyQuery extends URLSearchParamsType>(
   apiUrl: URL,
   findManyQuery: FindManyQuery,
   options: FindManyOptions = {},
-): Observable<[T[], AjaxResponse]> {
+): Observable<[T[], AjaxResponse<T[]>]> {
   const url = getUrl(apiUrl, '', findManyQuery);
-  return ajax({
+  return ajax<T[]>({
     url: url.toString(),
     method: 'GET',
     withCredentials: true,
     ...options,
-  }).pipe(map((value: AjaxResponse) => [value.response, value]));
+  }).pipe(map((value: AjaxResponse<T[]>) => [value.response, value]));
 }
  
-export type PatchOptions = Omit<AjaxRequest, 'url' | 'method' | 'body'>;
+export type PatchOptions = Omit<
+  AjaxConfig,
+  'url' | 'method' | 'body' | 'withCredentials'
+>;
  
 /**
  * Update one Model
@@ -139,25 +157,27 @@ export type PatchOptions = Omit<AjaxRequest, 'url' | 'method' | 'body'>;
 export function patch<
   T,
   UpdateParams extends { id: string | number },
-  UpdateBody
+  UpdateBody,
 >(
   apiUrl: URL,
   updateParams: UpdateParams,
   updateBody: UpdateBody,
   options: PatchOptions = {},
-): Observable<[T, AjaxResponse]> {
+): Observable<[T, AjaxResponse<T>]> {
   const url = getUrl(apiUrl, `/${updateParams.id}`);
-
-  return ajax({
+  return ajax<T>({
     url: url.toString(),
     method: 'PATCH',
     body: updateBody,
     withCredentials: true,
     ...options,
-  }).pipe(map((value: AjaxResponse) => [value.response, value]));
+  }).pipe(map((value: AjaxResponse<T>) => [value.response, value]));
 }
  
-export type UpsertOptions = Omit<AjaxRequest, 'url' | 'method' | 'body'>;
+export type UpsertOptions = Omit<
+  AjaxConfig,
+  'url' | 'method' | 'body' | 'withCredentials'
+>;
  
 /**
  * Update or create one Model
@@ -176,25 +196,27 @@ export type UpsertOptions = Omit<AjaxRequest, 'url' | 'method' | 'body'>;
 export function upsert<
   T,
   UpsertParams extends { id: string | number },
-  UpsertBody
+  UpsertBody,
 >(
   apiUrl: URL,
   upsertParams: UpsertParams,
   upsertBody: UpsertBody,
   options: UpsertOptions = {},
-): Observable<[T, AjaxResponse]> {
+): Observable<[T, AjaxResponse<T>]> {
   const url = getUrl(apiUrl, `/${upsertParams.id}`);
-
-  return ajax({
+  return ajax<T>({
     url: url.toString(),
     method: 'PUT',
     body: upsertBody,
     withCredentials: true,
     ...options,
-  }).pipe(map((value: AjaxResponse) => [value.response, value]));
+  }).pipe(map((value: AjaxResponse<T>) => [value.response, value]));
 }
  
-export type RemoveOptions = Omit<AjaxRequest, 'url' | 'method'>;
+export type RemoveOptions = Omit<
+  AjaxConfig,
+  'url' | 'method' | 'withCredentials'
+>;
  
 /**
  * Delete one Model
@@ -208,14 +230,13 @@ export function remove<T, DeleteParams extends { id: string | number }>(
   apiUrl: URL,
   deleteParams: DeleteParams,
   options: RemoveOptions = {},
-): Observable<[T, AjaxResponse]> {
+): Observable<[T, AjaxResponse<T>]> {
   const url = getUrl(apiUrl, `/${deleteParams.id}`);
-
-  return ajax({
+  return ajax<T>({
     url: url.toString(),
     method: 'DELETE',
     withCredentials: true,
     ...options,
-  }).pipe(map((value: AjaxResponse) => [value.response, value]));
+  }).pipe(map((value: AjaxResponse<T>) => [value.response, value]));
 }
  

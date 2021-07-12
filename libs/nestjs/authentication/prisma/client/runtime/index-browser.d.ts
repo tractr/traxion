@@ -1,5 +1,6 @@
 // Type definitions for decimal.js >=7.0.0
 
+
 declare namespace Decimal {
   export type Constructor = typeof Decimal;
   export type Instance = Decimal;
@@ -25,7 +26,7 @@ declare class Decimal {
   readonly d: number[];
   readonly e: number;
   readonly s: number;
-  private readonly name: string;
+  private readonly toStringTag: string;
 
   constructor(n: Decimal.Value);
 
@@ -33,6 +34,9 @@ declare class Decimal {
   abs(): Decimal;
 
   ceil(): Decimal;
+  
+  clampedTo(min: Decimal.Value, max: Decimal.Value): Decimal;
+  clamp(min: Decimal.Value, max: Decimal.Value): Decimal;
 
   comparedTo(n: Decimal.Value): number;
   cmp(n: Decimal.Value): number;
@@ -137,17 +141,17 @@ declare class Decimal {
 
   round(): Decimal;
 
-  sine(): Decimal;
-  sin(): Decimal;
+  sine() : Decimal;
+  sin() : Decimal;
 
   squareRoot(): Decimal;
   sqrt(): Decimal;
 
-  tangent(): Decimal;
-  tan(): Decimal;
+  tangent() : Decimal;
+  tan() : Decimal;
 
   times(n: Decimal.Value): Decimal;
-  mul(n: Decimal.Value): Decimal;
+  mul(n: Decimal.Value) : Decimal;
 
   toBinary(significantDigits?: number): string;
   toBinary(significantDigits: number, rounding: Decimal.Rounding): string;
@@ -186,10 +190,7 @@ declare class Decimal {
   toPrecision(significantDigits: number, rounding: Decimal.Rounding): string;
 
   toSignificantDigits(significantDigits?: number): Decimal;
-  toSignificantDigits(
-    significantDigits: number,
-    rounding: Decimal.Rounding,
-  ): Decimal;
+  toSignificantDigits(significantDigits: number, rounding: Decimal.Rounding): Decimal;
   toSD(significantDigits?: number): Decimal;
   toSD(significantDigits: number, rounding: Decimal.Rounding): Decimal;
 
@@ -211,6 +212,7 @@ declare class Decimal {
   static atan2(y: Decimal.Value, x: Decimal.Value): Decimal;
   static cbrt(n: Decimal.Value): Decimal;
   static ceil(n: Decimal.Value): Decimal;
+  static clamp(n: Decimal.Value, min: Decimal.Value, max: Decimal.Value): Decimal;
   static clone(object?: Decimal.Config): Decimal.Constructor;
   static config(object: Decimal.Config): Decimal.Constructor;
   static cos(n: Decimal.Value): Decimal;
@@ -219,7 +221,7 @@ declare class Decimal {
   static exp(n: Decimal.Value): Decimal;
   static floor(n: Decimal.Value): Decimal;
   static hypot(...n: Decimal.Value[]): Decimal;
-  static isDecimal(object: any): boolean;
+  static isDecimal(object: any): boolean
   static ln(n: Decimal.Value): Decimal;
   static log(n: Decimal.Value, base?: Decimal.Value): Decimal;
   static log2(n: Decimal.Value): Decimal;
@@ -228,7 +230,7 @@ declare class Decimal {
   static min(...n: Decimal.Value[]): Decimal;
   static mod(x: Decimal.Value, y: Decimal.Value): Decimal;
   static mul(x: Decimal.Value, y: Decimal.Value): Decimal;
-  static noConflict(): Decimal.Constructor; // Browser only
+  static noConflict(): Decimal.Constructor;   // Browser only
   static pow(base: Decimal.Value, exponent: Decimal.Value): Decimal;
   static random(significantDigits?: number): Decimal;
   static round(n: Decimal.Value): Decimal;
@@ -238,6 +240,7 @@ declare class Decimal {
   static sinh(n: Decimal.Value): Decimal;
   static sqrt(n: Decimal.Value): Decimal;
   static sub(x: Decimal.Value, y: Decimal.Value): Decimal;
+  static sum(...n: Decimal.Value[]): Decimal;
   static tan(n: Decimal.Value): Decimal;
   static tanh(n: Decimal.Value): Decimal;
   static trunc(n: Decimal.Value): Decimal;

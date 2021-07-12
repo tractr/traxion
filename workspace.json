@@ -73,6 +73,11 @@
           }
         },
         "prebuild": {
+          "configurations": {
+            "development": {},
+            "production": {}
+          },
+          "defaultConfiguration": "production",
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": ["npx nx run generated:build"]
@@ -994,6 +999,10 @@
           }
         },
         "prebuild": {
+          "configurations": {
+            "development": {},
+            "production": {}
+          },
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": ["npx nx run generated:build"]
