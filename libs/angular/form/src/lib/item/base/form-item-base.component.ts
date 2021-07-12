@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   Input,
   OnDestroy,
@@ -21,7 +22,7 @@ export type ItemStatusInterface = 'error' | 'success' | 'validating';
   template: '',
 })
 export abstract class FormItemBaseComponent<Type = unknown>
-  implements OnInit, OnDestroy
+  implements OnInit, OnDestroy, AfterViewInit
 {
   private unsubscribe: Subject<void> = new Subject<void>();
 
@@ -44,24 +45,30 @@ export abstract class FormItemBaseComponent<Type = unknown>
 
   status: ItemStatusInterface = 'validating';
 
+  control: AbstractControl | null = null;
+
   ngOnInit(): void {
-    let control: AbstractControl | null = this.form.get(this.name);
+    this.control = this.form.get(this.name);
 
     // Auto init control
-    if (!control) {
-      control = this.initControl();
-      this.form.addControl(this.name, control);
-    }
-
-    if (control) {
-      control?.statusChanges.pipe(takeUntil(this.unsubscribe)).subscribe(() => {
-        this.status = this.getStatus(control);
-      });
+    if (!this.control) {
+      this.control = this.initControl();
+      this.form.addControl(this.name, this.control);
     }
   }
 
   ngOnDestroy(): void {
     this.unsubscribe.next();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.control) {
+      this.control?.statusChanges
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe(() => {
+          this.status = this.getStatus(this.control);
+        });
+    }
   }
 
   abstract initControl(): AbstractControl;

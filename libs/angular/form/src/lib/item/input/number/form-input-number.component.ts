@@ -30,6 +30,8 @@ export class FormInputNumberComponent extends FormInputBaseComponent<number> {
     return this.formBuilder.control(this.state, [
       // eslint-disable-next-line @typescript-eslint/unbound-method
       ...(this.required ? [Validators.required] : []),
+      ...(this.min !== -Infinity ? [Validators.min(this.min)] : []),
+      ...(this.max !== -Infinity ? [Validators.min(this.max)] : []),
     ]);
   }
 }

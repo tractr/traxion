@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
+import { PlusOutline } from '@ant-design/icons-angular/icons';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { FormComponent } from './form.component';
 import {
+  FormArrayComponent,
   FormButtonComponent,
   FormCheckboxComponent,
   FormCheckboxGroupComponent,
@@ -17,7 +20,11 @@ import { AngularComponentsModule } from '@tractr/angular-components';
 import { AngularToolsModule } from '@tractr/angular-tools';
 
 @NgModule({
-  imports: [AngularToolsModule, AngularComponentsModule],
+  imports: [
+    AngularToolsModule,
+    AngularComponentsModule,
+    NzIconModule.forRoot([PlusOutline]),
+  ],
   declarations: [
     FormInputStringComponent,
     FormInputNumberComponent,
@@ -29,8 +36,10 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     FormDatePickerComponent,
     FormCheckboxGroupComponent,
     FormCheckboxComponent,
+    FormArrayComponent,
   ],
   exports: [
+    NzIconModule,
     FormInputStringComponent,
     FormInputNumberComponent,
     FormRadioComponent,
@@ -41,6 +50,7 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     FormDatePickerComponent,
     FormCheckboxGroupComponent,
     FormCheckboxComponent,
+    FormArrayComponent,
   ],
 })
 export class AngularFormModule {}
