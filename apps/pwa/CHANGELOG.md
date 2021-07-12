@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.7.0](https://github.com/tractr/stack/compare/pwa-1.6.2...pwa-1.7.0) (2021-07-12)
+
+
+### Features
+
+* update all package json dependencies ([#167](https://github.com/tractr/stack/issues/167)) ([aee9606](https://github.com/tractr/stack/commit/aee96067b70286145162f57184a37f25dce1d274))
+
+
+
 ## [1.6.2](https://github.com/tractr/stack/compare/pwa-1.6.1...pwa-1.6.2) (2021-07-08)
 
 
