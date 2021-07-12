@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 
 import {
   AUTH_OPTIONS,
@@ -16,12 +17,12 @@ export class PasswordService {
     private options: AuthenticationOptionsInterface,
     private http: HttpClient,
   ) {
-    this.resetUrl = `${this.options.api.url}/${this.options.password.reset.url}`;
+    // this.resetUrl = `${this.options.api.url}/${this.options.password.reset.url}`;
   }
 
   /** Send request to API for a new password token */
   async request(email: string): Promise<void> {
-    await this.http.post(this.resetUrl, { email }).toPromise();
+    await lastValueFrom(this.http.post(this.resetUrl, { email }));
   }
 
   /** Do the password reset */
@@ -35,6 +36,6 @@ export class PasswordService {
       code: resetCode,
       password: newPassword,
     };
-    await this.http.put(this.resetUrl, body).toPromise();
+    await lastValueFrom(this.http.put(this.resetUrl, body));
   }
 }

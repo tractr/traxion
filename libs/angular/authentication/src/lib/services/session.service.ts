@@ -1,10 +1,7 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { RouterStateSnapshot } from '@angular/router';
-import { Subject } from 'rxjs';
-import { AjaxResponse } from 'rxjs/ajax';
+import { lastValueFrom, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { request } from 'universal-rxjs-ajax';
 
 import {
   AUTH_OPTIONS,
@@ -13,6 +10,7 @@ import {
 
 import { User } from '@generated/models';
 import { transformAndValidate } from '@generated/rext-client';
+import { request } from '@tractr/angular-tools';
 
 @Injectable()
 export class SessionService {
@@ -62,42 +60,42 @@ export class SessionService {
   /** Retrieve current session info from api */
   private async current(): Promise<User | null> {
     this.callingCurrent = true;
-    return request({
-      url: this.sessionUrl,
-      method: 'GET',
-      withCredentials: true,
-    })
-      .pipe(
-        map((value: AjaxResponse) => value.response),
-        map((userInterface) => {
-          if (userInterface) {
-            try {
-              return transformAndValidate(User)(userInterface) as User;
-            } catch (err: unknown) {
-              console.error(
-                "Return of session route can't be transformed in User",
-                err,
-              );
+
+    try {
+      const user = await lastValueFrom(
+        request<User>({
+          url: this.sessionUrl,
+          method: 'GET',
+          withCredentials: true,
+        }).pipe(
+          map((value) => value.response),
+          map((userInterface) => {
+            if (userInterface) {
+              try {
+                return transformAndValidate(User)(userInterface);
+              } catch (err: unknown) {
+                console.error(
+                  "Return of session route can't be transformed in User",
+                  err,
+                );
+              }
             }
-          }
 
-          return null;
-        }),
-      )
-      .toPromise()
-      .catch((err: HttpErrorResponse) => {
-        // Catch unauthorized http error (user not connected)
-        if (err.status === 401) {
-          return null;
-        }
-        throw err;
-      })
-      .then((self) => {
-        this.self = self;
-        this.callingCurrent = false;
+            return null;
+          }),
+        ),
+      );
 
-        return this.self;
-      });
+      this.self = user;
+      this.callingCurrent = false;
+
+      return this.self;
+    } catch (err) {
+      if (err && err.status === 401) {
+        return null;
+      }
+      throw err;
+    }
   }
 
   /** Process a login */
@@ -110,25 +108,22 @@ export class SessionService {
 
     this.callingCurrent = true;
 
-    return request({
-      url: this.loginUrl,
-      method: 'POST',
-      withCredentials: true,
-      body,
-    })
-      .pipe(
-        map((value: AjaxResponse) => value.response.user),
-        map(
-          (userInterface) => transformAndValidate(User)(userInterface) as User,
-        ),
-      )
-      .toPromise()
-      .then((self) => {
-        this.self = self;
-        this.callingCurrent = false;
+    const user = await lastValueFrom(
+      request<{ user: User }>({
+        url: this.loginUrl,
+        method: 'POST',
+        withCredentials: true,
+        body,
+      }).pipe(
+        map((value) => value.response.user),
+        map((userInterface) => transformAndValidate(User)(userInterface)),
+      ),
+    );
 
-        return this.self;
-      });
+    this.self = user;
+    this.callingCurrent = false;
+
+    return this.self;
   }
 
   /** Logout current user */
@@ -136,11 +131,13 @@ export class SessionService {
     this.self = null;
     this.callingCurrent = false;
 
-    await request({
-      url: this.logoutUrl,
-      method: 'GET',
-      withCredentials: true,
-    }).toPromise();
+    await lastValueFrom(
+      request({
+        url: this.logoutUrl,
+        method: 'GET',
+        withCredentials: true,
+      }),
+    );
   }
 
   /** Returns the current users id */

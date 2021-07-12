@@ -7,9 +7,6 @@
     "url": "https://github.com/tractr/stack"
   },
   "license": "UNLICENSED",
-  "peerDependencies": {
-    "@nestjs/common": "^8.0.0"
-  },
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { lastValueFrom } from 'rxjs';
 
 import { ErrorService } from './error.service';
 
@@ -25,7 +26,7 @@ export class ExplainErrorsService {
 
     const translationsLangs = await Promise.all(
       langs.map((lang) =>
-        this.translateService.getTranslation(lang).toPromise(),
+        lastValueFrom(this.translateService.getTranslation(lang)),
       ),
     );
 
