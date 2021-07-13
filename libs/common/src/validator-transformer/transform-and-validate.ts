@@ -9,6 +9,14 @@ import { validateSync, ValidatorOptions } from 'class-validator';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+/**
+ * Tage a class with  validator and transform decorator and return all
+ * the default field
+ *
+ * @param classValidator
+ * @param options
+ * @returns an instance of the class with the default fields
+ */
 export function getDefaults<T>(
   classValidator: ClassConstructor<T>,
   options: {
@@ -25,6 +33,12 @@ export function getDefaults<T>(
   ) as unknown as Required<T>;
 }
 
+/**
+ * Create a map operator to get a default instance of a class validator
+ * @param classValidator
+ * @param options
+ * @returns a instance of a class validator
+ */
 export function defaultsPropertiesMap<T>(
   classValidator: ClassConstructor<T>,
   options: {
@@ -45,6 +59,14 @@ export interface TransformAndValidateOptions {
   validate?: ValidatorOptions;
 }
 
+/**
+ * Take a class with validator and transform decorator and return a
+ * function that take an unknown value and transform and validate it
+ * to return an instance of the class
+ * @param classValidator
+ * @param options
+ * @returns a validate and transform function for the class validator
+ */
 export function transformAndValidate<T>(
   classValidator: ClassConstructor<T>,
   options?: TransformAndValidateOptions,
@@ -68,6 +90,14 @@ export function transformAndValidate<T>(
   };
 }
 
+/**
+ * Take a class with validator and transform decorator and return a
+ * function that take an unknown value and transform and validate it
+ * to return an instance of the class
+ * @param classValidator
+ * @param options
+ * @returns a validate and transform function for the class validator
+ */
 export function transformAndValidateMap<O, T>(
   classValidator: ClassConstructor<T>,
   options: TransformAndValidateOptions = {},
@@ -77,6 +107,16 @@ export function transformAndValidateMap<O, T>(
   );
 }
 
+/**
+ * isAlike return a boolean based on the validation of an object against
+ * a class validator
+ *
+ * @param object
+ * @param classValidator
+ * @param options
+ * @returns true or false in function of the success and assert that the
+ * object is typeof the class
+ */
 export function isAlike<T>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   object: any,
@@ -95,6 +135,14 @@ export function isAlike<T>(
   }
 }
 
+/**
+ * fromDto is a rxjs source that take an unknown value, validate and transform
+ * it against a class validator and its default value and return it to the stream
+ * @param params
+ * @param classValidator
+ * @param options
+ * @returns a stream of a validate instance of a class validator
+ */
 export function fromDto<T>(
   params: unknown,
   classValidator: ClassConstructor<T>,

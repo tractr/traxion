@@ -1,4 +1,4 @@
-import { OnDestroy, OnInit } from '@angular/core';
+import { OnDestroy } from '@angular/core';
 import { RouterStateSnapshot } from '@angular/router';
 import { ClassConstructor } from 'class-transformer';
 import { BehaviorSubject, lastValueFrom, Observable, of, Subject } from 'rxjs';
@@ -24,9 +24,7 @@ export function SessionServiceFactory<
 >(options: AuthenticationOptions<U, CCU>): SessionService<U> {
   const { user } = options;
 
-  const AnonymousSessionService = class
-    implements SessionService<U>, OnInit, OnDestroy
-  {
+  const AnonymousSessionService = class implements SessionService<U>, OnDestroy {
     /** Route for login */
     sessionUrl: string;
 
@@ -39,7 +37,7 @@ export function SessionServiceFactory<
     /** Store the path to load after login */
     pathAfterLogin: RouterStateSnapshot | null = null;
 
-    unsubscribe: Subject<void> = new Subject<void>();
+    unsubscribe$: Subject<void> = new Subject<void>();
 
     refresh$ = new BehaviorSubject<U | null | void>(undefined);
 
@@ -50,6 +48,8 @@ export function SessionServiceFactory<
       this.loginUrl = `${options.api.url}/${options.login.url}`;
       this.logoutUrl = `${options.api.url}/${options.logout.url}`;
 
+      // OnInit is never called on angular services only on directive
+      // @see https://angular.io/api/core/OnInit
       this.ngOnInit();
     }
 
@@ -68,7 +68,7 @@ export function SessionServiceFactory<
     ngOnInit() {
       this.me$
         .pipe(
-          takeUntil(this.unsubscribe),
+          takeUntil(this.unsubscribe$),
           map((nextUser) => !!nextUser),
         )
         .subscribe((logged) => {
@@ -77,7 +77,7 @@ export function SessionServiceFactory<
     }
 
     ngOnDestroy() {
-      this.unsubscribe.next();
+      this.unsubscribe$.next();
     }
 
     isLogged(): boolean {
