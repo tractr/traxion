@@ -6,35 +6,43 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
+import { map, Observable } from 'rxjs';
 
 import {
   AUTH_OPTIONS,
-  AuthenticationOptionsInterface,
+  AuthenticationOptions,
+  SESSION_SERVICE,
 } from '../authentication.config';
-import { SessionService } from '../services/session.service';
+import { SessionService } from '../interfaces';
 
 @Injectable()
 export class IsLoggedGuard implements CanActivate {
   constructor(
-    private sessionService: SessionService,
     private router: Router,
     @Inject(AUTH_OPTIONS)
-    private options: AuthenticationOptionsInterface,
+    private options: AuthenticationOptions,
+    @Inject(SESSION_SERVICE)
+    private sessionService: SessionService,
   ) {}
 
-  async canActivate(
+  canActivate(
     _: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
-  ): Promise<UrlTree | boolean> {
-    if (await this.sessionService.loggedIn()) {
-      this.sessionService.setPathAfterLogin(null);
-      return true;
-    }
+  ): Observable<UrlTree | boolean> {
+    return this.sessionService.me$.pipe(
+      map((user) => !!user),
+      map((logged) => {
+        if (logged) {
+          this.sessionService.setPathAfterLogin(null);
+          return true;
+        }
 
-    this.sessionService.setPathAfterLogin(state);
-    return this.router.createUrlTree([
-      ...this.options.routing.prefix,
-      'sign-in',
-    ]);
+        this.sessionService.setPathAfterLogin(state);
+        return this.router.createUrlTree([
+          ...this.options.routing.prefix,
+          this.options.login.url,
+        ]);
+      }),
+    );
   }
 }

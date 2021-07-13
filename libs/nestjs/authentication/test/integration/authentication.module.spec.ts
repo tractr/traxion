@@ -101,6 +101,10 @@ describe('Authentication Module (integration)', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual({
         accessToken: await authenticationService.createUserJWT(mockUser),
+        user: {
+          ...mockUser,
+          password: expect.any(String),
+        },
       });
     });
     it('/me get the user information back and use the jwt auth strategy', async () => {

@@ -70,6 +70,10 @@ import * as cookieParser from 'cookie-parser';
 app.use(cookieParser('myScret'));
 ```
 
+## Bcrypt online generator
+
+To be able to test you can use these [bcrypt online generator](https://www.browserling.com/tools/bcrypt) to crypt your password.
+
 ## Running unit tests
 
 Run `nx test nestjs-authentication` to execute the unit tests via

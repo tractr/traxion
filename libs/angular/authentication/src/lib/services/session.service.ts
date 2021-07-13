@@ -1,177 +1,169 @@
-import { Inject, Injectable } from '@angular/core';
+import { OnDestroy } from '@angular/core';
 import { RouterStateSnapshot } from '@angular/router';
-import { lastValueFrom, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
-
+import { ClassConstructor } from 'class-transformer';
+import { BehaviorSubject, lastValueFrom, Observable, of, Subject } from 'rxjs';
 import {
-  AUTH_OPTIONS,
-  AuthenticationOptionsInterface,
-} from '../authentication.config';
+  catchError,
+  map,
+  shareReplay,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs/operators';
 
-import { User } from '@generated/models';
-import { transformAndValidate } from '@generated/rext-client';
+import { AuthenticationOptions } from '../authentication.config';
+import { User } from '../generated/models';
+import { SessionService, SessionServiceClass } from '../interfaces';
+
 import { request } from '@tractr/angular-tools';
+import { transformAndValidate } from '@tractr/common';
 
-@Injectable()
-export class SessionService {
-  /** Route for login */
-  private sessionUrl: string;
+export function SessionServiceFactory<
+  U extends User = User,
+  CCU extends ClassConstructor<U> = ClassConstructor<U>,
+>(options: AuthenticationOptions<U, CCU>): SessionService<U> {
+  const { user } = options;
 
-  /** Route for password login */
-  private loginUrl: string;
+  const AnonymousSessionService = class implements SessionService<U>, OnDestroy {
+    /** Route for login */
+    sessionUrl: string;
 
-  /** Route for password logout */
-  private logoutUrl: string;
+    /** Route for password login */
+    loginUrl: string;
 
-  /** Flag to denote if calling for current */
-  private callingCurrent = false;
+    /** Route for password logout */
+    logoutUrl: string;
 
-  /** Store the path to load after login */
-  private pathAfterLogin: RouterStateSnapshot | null = null;
+    /** Store the path to load after login */
+    pathAfterLogin: RouterStateSnapshot | null = null;
 
-  /** Self */
-  selfSubject = new Subject<User | null>();
+    unsubscribe$: Subject<void> = new Subject<void>();
 
-  private selfValue: User | null = null;
+    refresh$ = new BehaviorSubject<U | null | void>(undefined);
 
-  get self(): User | null {
-    return this.selfValue;
-  }
+    logged$ = new BehaviorSubject<boolean>(false);
 
-  set self(self: User | null) {
-    this.selfValue = self;
-    this.selfSubject.next(self);
-  }
-  /** /Self */
+    constructor() {
+      this.sessionUrl = `${options.api.url}/${options.session.url}`;
+      this.loginUrl = `${options.api.url}/${options.login.url}`;
+      this.logoutUrl = `${options.api.url}/${options.logout.url}`;
 
-  /** Constructor */
-  constructor(
-    @Inject(AUTH_OPTIONS)
-    private options: AuthenticationOptionsInterface,
-  ) {
-    this.sessionUrl = `${this.options.api.url}/${this.options.session.url}`;
-    this.loginUrl = `${this.options.api.url}/${this.options.login.url}`;
-    this.logoutUrl = `${this.options.api.url}/${this.options.logout.url}`;
+      // OnInit is never called on angular services only on directive
+      // @see https://angular.io/api/core/OnInit
+      this.ngOnInit();
+    }
 
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    this.current();
-  }
+    me$: Observable<U | null> = this.refresh$.pipe(
+      switchMap((next) => {
+        if (typeof next === 'undefined') return this.fetchUser$();
+        return of(next);
+      }),
+      catchError((err) => {
+        if (err && err.status === 401) return of(null);
+        throw err;
+      }),
+      shareReplay(1),
+    );
 
-  /** Retrieve current session info from api */
-  private async current(): Promise<User | null> {
-    this.callingCurrent = true;
+    ngOnInit() {
+      this.me$
+        .pipe(
+          takeUntil(this.unsubscribe$),
+          map((nextUser) => !!nextUser),
+        )
+        .subscribe((logged) => {
+          this.logged$.next(logged);
+        });
+    }
 
-    try {
-      const user = await lastValueFrom(
-        request<User>({
-          url: this.sessionUrl,
-          method: 'GET',
+    ngOnDestroy() {
+      this.unsubscribe$.next();
+    }
+
+    isLogged(): boolean {
+      return this.logged$.getValue();
+    }
+
+    fetchUser$(): Observable<U> {
+      return request<U>({
+        url: this.sessionUrl,
+        method: 'GET',
+        withCredentials: true,
+      }).pipe(
+        map((value) => value.response),
+        map((value) => transformAndValidate(user)(value) as U),
+      );
+    }
+
+    refresh(nextUser?: U | null) {
+      this.refresh$.next(nextUser);
+    }
+
+    /**
+     * Send a login request against the nestjs server
+     * @param email
+     * @param password
+     * @returns
+     */
+    async login(email: string, password: string): Promise<U | null> {
+      const body = {
+        email,
+        password,
+      };
+
+      const userLogged = await lastValueFrom(
+        request<{ user: U }>({
+          url: this.loginUrl,
+          method: 'POST',
           withCredentials: true,
+          body,
         }).pipe(
-          map((value) => value.response),
-          map((userInterface) => {
-            if (userInterface) {
-              try {
-                return transformAndValidate(User)(userInterface);
-              } catch (err: unknown) {
-                console.error(
-                  "Return of session route can't be transformed in User",
-                  err,
-                );
-              }
-            }
-
-            return null;
+          map((value) => value.response.user),
+          map((value) => transformAndValidate(user)(value) as U),
+          tap((nextUser) => this.refresh(nextUser)),
+          catchError(() => {
+            throw new Error('Could not login, wrong email or password');
           }),
         ),
       );
 
-      this.self = user;
-      this.callingCurrent = false;
+      return userLogged;
+    }
 
-      return this.self;
-    } catch (err) {
-      if (err && err.status === 401) {
-        return null;
+    /**
+     * Logout current user
+     */
+    async logout(): Promise<void> {
+      await lastValueFrom(
+        request({
+          url: this.logoutUrl,
+          method: 'GET',
+          withCredentials: true,
+        }).pipe(map(() => this.refresh(null))),
+      );
+    }
+
+    /**
+     * Define the path to load after login
+     * @param route the RouterStateSnapshot parameter
+     */
+    setPathAfterLogin(route: RouterStateSnapshot | null) {
+      this.pathAfterLogin = route;
+    }
+
+    /**
+     * Get the path to load after login and set it to null
+     * @returns the url string or undefined
+     */
+    popUrlAfterLogin(): string | undefined {
+      if (!this.pathAfterLogin) {
+        return undefined;
       }
-      throw err;
+      const { url } = this.pathAfterLogin;
+      this.pathAfterLogin = null;
+      return url;
     }
-  }
+  } as unknown as SessionServiceClass<U>;
 
-  /** Process a login */
-  async login(email: string, password: string): Promise<User | null> {
-    // Do login
-    const body = {
-      email,
-      password,
-    };
-
-    this.callingCurrent = true;
-
-    const user = await lastValueFrom(
-      request<{ user: User }>({
-        url: this.loginUrl,
-        method: 'POST',
-        withCredentials: true,
-        body,
-      }).pipe(
-        map((value) => value.response.user),
-        map((userInterface) => transformAndValidate(User)(userInterface)),
-      ),
-    );
-
-    this.self = user;
-    this.callingCurrent = false;
-
-    return this.self;
-  }
-
-  /** Logout current user */
-  async logout(): Promise<void> {
-    this.self = null;
-    this.callingCurrent = false;
-
-    await lastValueFrom(
-      request({
-        url: this.logoutUrl,
-        method: 'GET',
-        withCredentials: true,
-      }),
-    );
-  }
-
-  /** Returns the current users id */
-  async getSelfId(): Promise<string | null> {
-    return ((await this.loggedIn()) && this.self?.id) || null;
-  }
-
-  /** Denotes if the user is connected */
-  async loggedIn(): Promise<boolean> {
-    if (this.callingCurrent) {
-      await new Promise((resolve, reject) => {
-        setTimeout(() => reject(), 20000);
-
-        this.selfSubject.subscribe((self) => {
-          resolve(self);
-        });
-      });
-    }
-
-    return this.self !== null;
-  }
-
-  /** Define the path to load after login */
-  setPathAfterLogin(route: RouterStateSnapshot | null) {
-    this.pathAfterLogin = route;
-  }
-
-  /** Get the path to load after login and set it to null */
-  popUrlAfterLogin(): string | undefined {
-    if (!this.pathAfterLogin) {
-      return undefined;
-    }
-    const { url } = this.pathAfterLogin;
-    this.pathAfterLogin = null;
-    return url;
-  }
+  return new AnonymousSessionService();
 }

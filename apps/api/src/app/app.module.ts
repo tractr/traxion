@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { ModelsModule } from '@generated/nestjs-models';
-import { AuthenticationModule } from '@tractr/nestjs-authentication';
+import {
+  AuthenticationModule,
+  JwtGlobalAuthGuard,
+} from '@tractr/nestjs-authentication';
 import { DatabaseModule } from '@tractr/nestjs-database';
 
 // test
@@ -15,6 +19,6 @@ import { DatabaseModule } from '@tractr/nestjs-database';
     AuthenticationModule.register(),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, { provide: APP_GUARD, useClass: JwtGlobalAuthGuard }],
 })
 export class AppModule {}

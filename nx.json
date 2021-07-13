@@ -17,35 +17,37 @@
   "projects": {
     "angular-authentication": {
       "implicitDependencies": [
+        "hapify-templates-models",
+        "hapify-templates-prisma",
         "hapify-config",
-        "hapify-generate-config",
-        "angular-tools"
+        "hapify-generate-config"
       ],
-      "tags": []
+      "tags": ["scope:angular"]
     },
     "angular-components": {
-      "tags": []
+      "tags": ["scope:angular"]
     },
     "angular-form": {
-      "tags": []
+      "tags": ["scope:angular"]
     },
     "angular-tools": {
-      "tags": []
+      "tags": ["scope:angular"]
     },
     "api": {
-      "tags": []
-    },
-    "api-interfaces": {
-      "tags": []
+      "tags": ["scope:app"]
     },
     "commit-config": {
-      "tags": []
+      "tags": ["scope:config"]
+    },
+    "common": {
+      "tags": ["scope:common"]
     },
     "eslint-config": {
-      "tags": []
+      "tags": ["scope:config"]
     },
     "generated": {
       "implicitDependencies": [
+        "common",
         "hapify-templates-models",
         "hapify-templates-rest-dtos",
         "hapify-templates-nestjs-models",
@@ -60,40 +62,40 @@
         "hapify-config",
         "hapify-generate-config"
       ],
-      "tags": []
+      "tags": ["scope:generate"]
     },
     "hapify-config": {
-      "tags": []
+      "tags": ["scope:config"]
     },
     "hapify-generate-config": {
-      "tags": []
+      "tags": ["scope:config"]
     },
     "hapify-templates-angular-rext-client": {
-      "tags": []
+      "tags": ["scope:template"]
     },
     "hapify-templates-dbml": {
-      "tags": []
+      "tags": ["scope:template"]
     },
     "hapify-templates-models": {
-      "tags": []
+      "tags": ["scope:template"]
     },
     "hapify-templates-nestjs-models": {
-      "tags": []
+      "tags": ["scope:template"]
     },
     "hapify-templates-nestjs-models-common": {
-      "tags": []
+      "tags": ["scope:template"]
     },
     "hapify-templates-nestjs-models-rest": {
-      "tags": []
+      "tags": ["scope:template"]
     },
     "hapify-templates-prisma": {
-      "tags": []
+      "tags": ["scope:template"]
     },
     "hapify-templates-rest-dtos": {
-      "tags": []
+      "tags": ["scope:template"]
     },
     "hapify-templates-rext-client": {
-      "tags": []
+      "tags": ["scope:template"]
     },
     "nestjs-authentication": {
       "implicitDependencies": [
@@ -105,41 +107,42 @@
         "hapify-config",
         "hapify-generate-config"
       ],
-      "tags": []
+      "tags": ["scope:nestjs"]
     },
     "nestjs-core": {
-      "tags": []
+      "tags": ["scope:nestjs"]
     },
     "nestjs-database": {
-      "tags": []
+      "tags": ["scope:nestjs"]
     },
     "nestjs-mailer": {
-      "tags": []
+      "tags": ["scope:nestjs"]
     },
     "nestjs-rbac": {
       "implicitDependencies": [],
-      "tags": []
+      "tags": ["scope:nestjs"]
     },
     "nestjs-testing": {
-      "tags": []
+      "tags": ["scope:nestjs"]
     },
     "prettier-config": {
-      "tags": []
+      "tags": ["scope:config"]
     },
     "prisma": {
       "implicitDependencies": [
         "hapify-templates-prisma",
         "hapify-config",
+        "generated",
         "hapify-generate-config"
       ],
-      "tags": []
+      "tags": ["scope:generated"]
     },
     "pwa": {
-      "tags": []
+      "tags": ["scope:app"]
     },
     "pwa-e2e": {
       "implicitDependencies": ["pwa"],
-      "tags": []
+      "tags": ["scope:app"]
     }
   },
   "targetDependencies": {

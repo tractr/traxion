@@ -1,0 +1,5 @@
+<h1>You are currently inside the molecule-home !</h1>
+
+<p>User state : {{ isLogged ? 'connected' : 'not connected' }}</p>
+
+<button *ngIf="isLogged" (click)="sessionService.logout()">logout</button>

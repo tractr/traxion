@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ModuleOverride } from '@tractr/nestjs-core';
  
-import { <<Model pascal>>ModelModule } from '@generated/nestjs-models-common';
-import { <<Model pascal>>RestModule } from '@generated/nestjs-models-rest';
+import { <<Model pascal>>ModelModule } from '../../../nestjs-models-common';
+import { <<Model pascal>>RestModule } from '../../../nestjs-models-rest';
  
 @Module({})
 export class <<Model pascal>>Module extends ModuleOverride {

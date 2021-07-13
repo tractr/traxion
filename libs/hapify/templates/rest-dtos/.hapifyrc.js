@@ -68,16 +68,6 @@ module.exports = {
       input: 'one',
     },
     {
-      path: 'generated/rest-dtos/helpers/index.ts',
-      engine: 'hpf',
-      input: 'all',
-    },
-    {
-      path: 'generated/rest-dtos/helpers/transform.helper.ts',
-      engine: 'hpf',
-      input: 'all',
-    },
-    {
       path: 'generated/rest-dtos/mock/index.ts',
       engine: 'hpf',
       input: 'all',

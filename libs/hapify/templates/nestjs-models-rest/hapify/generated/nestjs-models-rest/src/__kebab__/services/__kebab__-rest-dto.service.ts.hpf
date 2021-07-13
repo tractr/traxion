@@ -22,7 +22,7 @@ import {
   <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpsertBodyDto,
   <<Model pascal>>UpsertParamsDto,
-} from '@generated/rest-dtos';
+} from '../../../../rest-dtos';
  
 @Injectable()
 export class <<Model pascal>>RestDtoService {

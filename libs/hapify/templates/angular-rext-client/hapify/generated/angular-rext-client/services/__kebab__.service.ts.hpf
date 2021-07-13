@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { ANGULAR_REXT_CONFIGURATION } from '../constants';
 import { AngularRextConfiguration } from '../interfaces';
-import { <<Model pascal>>Service as Base<<Model pascal>>Service } from '@generated/rext-client';
+import { <<Model pascal>>Service as Base<<Model pascal>>Service } from '../../rext-client';
 
 @Injectable()
 export class <<Model pascal>>Service extends Base<<Model pascal>>Service {

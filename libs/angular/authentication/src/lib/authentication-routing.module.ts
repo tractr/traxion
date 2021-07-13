@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { LoginComponent, LogoutComponent } from './components';
-import { SessionService } from './services/session.service';
 
 const routes: Routes = [
   {
@@ -24,7 +23,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  providers: [NzMessageService, SessionService],
+  providers: [NzMessageService],
   exports: [RouterModule],
 })
 export class AngularAuthenticationRoutingModule {}

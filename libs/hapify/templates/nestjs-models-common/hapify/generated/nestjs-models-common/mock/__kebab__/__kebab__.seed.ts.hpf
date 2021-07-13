@@ -9,7 +9,7 @@ import {
 import { random } from 'faker';
 <<endif>>
   
-import { mock<<Model pascal>>Factory } from '@generated/models';
+import { mock<<Model pascal>>Factory } from '../../../models';
   
 <<if Fields manyMany>>
 export interface <<Model pascal>>Seed extends <<Model pascal>> {

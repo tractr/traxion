@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { <<Model pascal>> } from '@prisma/client';
  
-import { <<Model pascal>>Service, <<Model constant>>_SERVICE } from '@generated/nestjs-models-common';
+import { <<Model pascal>>Service, <<Model constant>>_SERVICE } from '../../../../nestjs-models-common';
 import {
   <<Model pascal>>CountQueryDto,
   <<Model pascal>>CreateBodyDto,
@@ -26,7 +26,7 @@ import {
   <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpsertBodyDto,
   <<Model pascal>>UpsertParamsDto,
-} from '@generated/rest-dtos';
+} from '../../../../rest-dtos';
 import { <<Model constant>>_REST_DTO_SERVICE } from '../<<Model kebab>>-rest.constant';
 import { <<Model pascal>>RestDtoService } from '../services';
  

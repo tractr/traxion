@@ -34,6 +34,7 @@
     "start": "nx serve",
     "test": " nx run-many --all --target=test",
     "update": "nx migrate latest",
+    "ts-node": "ts-node -r tsconfig-paths/register --project apps/api/tsconfig.json",
     "workspace-generator": "nx workspace-generator"
   },
   "dependencies": {

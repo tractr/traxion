@@ -33,7 +33,7 @@ export class LoginController {
   async login(
     @Req() req: Request & { secret: string },
     @Res({ passthrough: true }) res: Response,
-  ): Promise<AccessTokenDto> {
+  ): Promise<AccessTokenDto & { user: User }> {
     const user = this.throwIfNoUser(req);
     const token = await this.authenticationService.login(user);
     res.cookie(
@@ -44,7 +44,7 @@ export class LoginController {
         ...this.authenticationOptions.cookies.options,
       },
     );
-    return token;
+    return { ...token, user };
   }
 
   @Get('logout')
@@ -69,7 +69,7 @@ export class LoginController {
   }
 
   @Get('me')
-  getProfile(@Req() req: Request, @CurrentUser() user: User): User {
+  me(@Req() req: Request, @CurrentUser() user: User): User {
     this.throwIfNoUser(req);
     return user;
   }

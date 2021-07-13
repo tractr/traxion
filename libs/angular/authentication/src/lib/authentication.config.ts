@@ -1,9 +1,16 @@
 import { InjectionToken } from '@angular/core';
+import { ClassConstructor } from 'class-transformer';
 
-export interface AuthenticationOptionsInterface {
+import { User } from './generated/models';
+
+export interface AuthenticationOptions<
+  U extends User = User,
+  CCU extends ClassConstructor<U> = ClassConstructor<U>,
+> {
   api: {
     url: string;
   };
+  user: CCU;
   routing: {
     prefix: string[];
   };
@@ -21,10 +28,8 @@ export interface AuthenticationOptionsInterface {
   };
 }
 
-export const AUTH_OPTIONS = new InjectionToken<AuthenticationOptionsInterface>(
+export const AUTH_OPTIONS = new InjectionToken<AuthenticationOptions>(
   'auth.options',
 );
 
-export interface AuthenticationForRootInterface {
-  options: Partial<AuthenticationOptionsInterface>;
-}
+export const SESSION_SERVICE = new InjectionToken('session.service');
