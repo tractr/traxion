@@ -1,9 +1,11 @@
 import {
   AfterViewInit,
   Component,
+  EventEmitter,
   Input,
   OnDestroy,
   OnInit,
+  Output,
   TemplateRef,
 } from '@angular/core';
 import {
@@ -34,14 +36,16 @@ export abstract class FormItemBaseComponent<Type = unknown>
 
   @Input() label?: string;
 
-  @Input() state?: Type;
-
   @Input() required = true;
 
   @Input() errorTip:
     | string
     | TemplateRef<{ $implicit: FormControl | NgModel }>
     | undefined;
+
+  @Input() state?: Type;
+
+  @Output() stateChanged = new EventEmitter<Type | undefined>();
 
   status: ItemStatusInterface = 'validating';
 
@@ -81,6 +85,8 @@ export abstract class FormItemBaseComponent<Type = unknown>
 
   setValue(value: Type | undefined): void {
     this.form.get(this.name)?.setValue(value);
+
+    this.stateChanged.emit(value);
   }
 
   getStatus(control: AbstractControl | null): ItemStatusInterface {
