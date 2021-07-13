@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.7.1](https://github.com/tractr/stack/compare/angular-form-0.7.0...angular-form-0.7.1) (2021-07-13)
+
+
+### Bug Fixes
+
+* **angular-form:** missing button input and package export ([#180](https://github.com/tractr/stack/issues/180)) ([4e20fe6](https://github.com/tractr/stack/commit/4e20fe602d14a95e3b4b0b4de013989f6c9f456e))
+
+
+
 # [0.7.0](https://github.com/tractr/stack/compare/angular-form-0.6.0...angular-form-0.7.0) (2021-07-13)
 
 
