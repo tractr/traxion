@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "strict": true,
     "allowJs": true,
     "baseUrl": ".",
     "checkJs": true,
@@ -16,12 +15,17 @@
       "@app/*": ["apps/pwa/src/app/*"],
       "@assets/*": ["apps/pwa/src/assets/*"],
       "@env/*": ["apps/pwa/src/environments/*"],
-      "@generated/all": ["dist/libs/generated"],
-      "@generated/*": ["libs/generated/generated/*"],
+      "@generated/*": [
+        "dist/libs/generated/generated/*",
+        "libs/generated/generated/*"
+      ],
       "@tractr/angular-authentication": [
         "libs/angular/authentication/src/index.ts"
       ],
       "@tractr/angular-components": ["libs/angular/components/src/index.ts"],
+      "@tractr/angular-file-storage": [
+        "libs/angular/file-storage/src/index.ts"
+      ],
       "@tractr/angular-form": ["libs/angular/form/src/index.ts"],
       "@tractr/angular-tools": ["libs/angular/tools/src/index.ts"],
       "@tractr/api-interfaces": ["libs/api-interfaces/src/index.ts"],
@@ -64,6 +68,7 @@
       ],
       "@tractr/nestjs-core": ["libs/nestjs/core/src/index.ts"],
       "@tractr/nestjs-database": ["libs/nestjs/database/src/index.ts"],
+      "@tractr/nestjs-file-storage": ["libs/nestjs/file-storage/src/index.ts"],
       "@tractr/nestjs-mailer": ["libs/nestjs/mailer/src/index.ts"],
       "@tractr/nestjs-rbac": ["libs/nestjs/rbac/src/index.ts"],
       "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
@@ -75,6 +80,7 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
+    "strict": true,
     "target": "es2015"
   },
   "exclude": ["node_modules", "tmp"]
