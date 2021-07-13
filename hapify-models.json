@@ -1,296 +1,296 @@
 {
-  "version": "2",
-  "name": "New project",
   "models": [
     {
-      "id": "ccebcf02-4b82-923f-114e-252c9455899d",
-      "name": "Answer",
       "accesses": {
+        "count": "guest",
         "create": "guest",
         "read": "guest",
-        "update": "guest",
         "remove": "guest",
         "search": "guest",
-        "count": "guest"
+        "update": "guest"
       },
       "fields": [
         {
           "name": "id",
-          "type": "string",
-          "properties": ["primary", "searchable", "sortable", "internal"]
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
         },
         {
           "name": "user",
-          "type": "entity",
+          "properties": [],
           "subtype": "oneMany",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
-          "properties": []
+          "type": "entity",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
         },
         {
           "name": "question",
-          "type": "entity",
+          "properties": [],
           "subtype": "oneMany",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636",
-          "properties": []
+          "type": "entity",
+          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
         },
         {
           "name": "tags",
-          "type": "entity",
+          "properties": ["nullable", "multiple"],
           "subtype": "manyMany",
-          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
-          "properties": ["nullable", "multiple"]
+          "type": "entity",
+          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
         }
-      ]
+      ],
+      "id": "ccebcf02-4b82-923f-114e-252c9455899d",
+      "name": "Answer"
     },
     {
-      "id": "b0ecc3a7-9f28-a140-d505-91f598e547a5",
-      "name": "Message",
       "accesses": {
+        "count": "guest",
         "create": "guest",
         "read": "guest",
-        "update": "guest",
         "remove": "guest",
         "search": "guest",
-        "count": "guest"
+        "update": "guest"
       },
       "fields": [
         {
           "name": "id",
-          "type": "string",
-          "properties": ["primary", "searchable", "sortable", "internal"]
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
         },
         {
           "name": "text",
-          "type": "string",
-          "properties": ["label", "searchable", "sortable"]
+          "properties": ["label", "searchable", "sortable"],
+          "type": "string"
         },
         {
           "name": "hour",
-          "type": "datetime",
+          "properties": ["nullable"],
           "subtype": "time",
-          "properties": ["nullable"]
+          "type": "datetime"
         },
         {
           "name": "tags",
-          "type": "entity",
+          "properties": ["multiple"],
           "subtype": "manyMany",
-          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
-          "properties": ["multiple"]
+          "type": "entity",
+          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
         },
         {
           "name": "questions",
-          "type": "entity",
+          "properties": ["multiple"],
           "subtype": "manyMany",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636",
-          "properties": ["multiple"]
+          "type": "entity",
+          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
         }
-      ]
+      ],
+      "id": "b0ecc3a7-9f28-a140-d505-91f598e547a5",
+      "name": "Message"
     },
     {
-      "id": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c",
-      "name": "OpenQuestion",
       "accesses": {
+        "count": "guest",
         "create": "guest",
         "read": "guest",
-        "update": "guest",
         "remove": "guest",
         "search": "guest",
-        "count": "guest"
+        "update": "guest"
       },
       "fields": [
         {
           "name": "id",
-          "type": "string",
-          "properties": ["primary", "searchable", "sortable", "internal"]
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
         },
         {
           "name": "text",
-          "type": "string",
-          "properties": ["searchable", "sortable"]
+          "properties": ["searchable", "sortable"],
+          "type": "string"
         },
         {
           "name": "key",
-          "type": "string",
-          "properties": ["unique", "label", "searchable", "sortable"]
+          "properties": ["unique", "label", "searchable", "sortable"],
+          "type": "string"
         },
         {
           "name": "question",
-          "type": "entity",
+          "properties": [],
           "subtype": "oneMany",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636",
-          "properties": []
+          "type": "entity",
+          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
         }
-      ]
+      ],
+      "id": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c",
+      "name": "OpenQuestion"
     },
     {
-      "id": "6894a782-2e83-cd6a-52cc-f62967165636",
-      "name": "Question",
       "accesses": {
+        "count": "guest",
         "create": "guest",
         "read": "guest",
-        "update": "guest",
         "remove": "guest",
         "search": "guest",
-        "count": "guest"
+        "update": "guest"
       },
       "fields": [
         {
           "name": "id",
-          "type": "string",
-          "properties": ["primary", "searchable", "sortable", "internal"]
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
         },
         {
           "name": "title",
-          "type": "string",
-          "properties": ["label", "searchable", "sortable"]
+          "properties": ["label", "searchable", "sortable"],
+          "type": "string"
         },
         {
           "name": "text",
-          "type": "string",
-          "properties": ["searchable", "sortable"]
+          "properties": ["searchable", "sortable"],
+          "type": "string"
         },
         {
           "name": "parentQuestion",
-          "type": "entity",
+          "properties": ["nullable"],
           "subtype": "oneMany",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636",
-          "properties": ["nullable"]
+          "type": "entity",
+          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
         },
         {
           "name": "tags",
-          "type": "entity",
+          "properties": ["nullable", "multiple"],
           "subtype": "manyMany",
-          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
-          "properties": ["nullable", "multiple"]
+          "type": "entity",
+          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
         }
-      ]
+      ],
+      "id": "6894a782-2e83-cd6a-52cc-f62967165636",
+      "name": "Question"
     },
     {
-      "id": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
-      "name": "Tag",
       "accesses": {
+        "count": "guest",
         "create": "guest",
         "read": "guest",
-        "update": "guest",
         "remove": "guest",
         "search": "guest",
-        "count": "guest"
+        "update": "guest"
       },
       "fields": [
         {
           "name": "id",
-          "type": "string",
-          "properties": ["primary", "searchable", "sortable", "internal"]
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
         },
         {
           "name": "label",
-          "type": "string",
-          "properties": ["label", "searchable", "sortable"]
+          "properties": ["label", "searchable", "sortable"],
+          "type": "string"
         }
-      ]
+      ],
+      "id": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
+      "name": "Tag"
     },
     {
-      "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
-      "name": "User",
       "accesses": {
+        "count": "admin",
         "create": "guest",
         "read": "owner",
-        "update": "owner",
         "remove": "owner",
         "search": "admin",
-        "count": "admin"
+        "update": "owner"
       },
       "fields": [
         {
           "name": "id",
-          "type": "string",
           "properties": [
             "primary",
             "searchable",
             "sortable",
             "internal",
             "ownership"
-          ]
+          ],
+          "type": "string"
         },
         {
           "name": "name",
-          "type": "string",
-          "properties": ["label", "searchable", "sortable"]
+          "properties": ["label", "searchable", "sortable"],
+          "type": "string"
         },
         {
           "name": "email",
-          "type": "string",
+          "properties": ["unique", "searchable", "sortable"],
           "subtype": "email",
-          "properties": ["unique", "searchable", "sortable"]
+          "type": "string"
         },
         {
           "name": "password",
-          "type": "string",
+          "properties": ["hidden"],
           "subtype": "password",
-          "properties": ["hidden"]
+          "type": "string"
         },
         {
           "name": "role",
-          "type": "string",
+          "notes": "admin or user",
           "properties": ["searchable", "restricted"],
-          "notes": "admin or user"
+          "type": "string"
         },
         {
           "name": "banned",
-          "type": "boolean",
+          "notes": "Allow admins to disable this user",
           "properties": ["searchable", "restricted"],
-          "notes": "Allow admins to disable this user"
+          "type": "boolean"
         },
         {
           "name": "last connected at",
-          "type": "datetime",
-          "properties": ["nullable", "searchable", "sortable"]
+          "properties": ["nullable", "searchable", "sortable"],
+          "type": "datetime"
         },
         {
           "name": "gender",
+          "properties": ["searchable", "sortable"],
           "type": "enum",
-          "value": ["male", "female"],
-          "properties": ["searchable", "sortable"]
+          "value": ["male", "female"]
         }
-      ]
+      ],
+      "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
+      "name": "User"
     },
     {
-      "id": "5d791308-4e9d-aa7d-3d36-d45d46b04c6a",
-      "name": "Variable",
       "accesses": {
+        "count": "guest",
         "create": "guest",
         "read": "guest",
-        "update": "guest",
         "remove": "guest",
         "search": "guest",
-        "count": "guest"
+        "update": "guest"
       },
       "fields": [
         {
           "name": "id",
-          "type": "string",
-          "properties": ["primary", "searchable", "sortable", "internal"]
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
         },
         {
           "name": "value",
-          "type": "string",
-          "properties": []
+          "properties": [],
+          "type": "string"
         },
         {
           "name": "openQuestion",
-          "type": "entity",
+          "properties": [],
           "subtype": "oneMany",
-          "value": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c",
-          "properties": []
+          "type": "entity",
+          "value": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c"
         },
         {
           "name": "answer",
-          "type": "entity",
+          "properties": [],
           "subtype": "oneMany",
-          "value": "ccebcf02-4b82-923f-114e-252c9455899d",
-          "properties": []
+          "type": "entity",
+          "value": "ccebcf02-4b82-923f-114e-252c9455899d"
         }
-      ]
+      ],
+      "id": "5d791308-4e9d-aa7d-3d36-d45d46b04c6a",
+      "name": "Variable"
     }
-  ]
+  ],
+  "name": "New project",
+  "version": "2"
 }

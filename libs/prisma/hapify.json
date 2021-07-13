@@ -1,35 +1,35 @@
 {
-  "name": "Prima hapify generation",
-  "description": "A lib that will generate all the prisma files",
-  "templates": [
-    {
-      "path": "prisma/schemas/generated.prisma",
-      "engine": "hpf",
-      "input": "all"
-    }
-  ],
-  "version": "1",
-  "validatorPath": "../../dist/libs/config/hapify/validator.js",
-  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
-  "project": "../../hapify-models.json",
   "defaultFields": [
     {
-      "name": "id",
-      "type": "string",
-      "subtype": null,
-      "reference": null,
-      "primary": true,
-      "unique": false,
-      "label": false,
-      "nullable": false,
-      "multiple": false,
       "embedded": false,
-      "searchable": false,
-      "sortable": false,
       "hidden": false,
       "internal": true,
+      "label": false,
+      "multiple": false,
+      "name": "id",
+      "nullable": false,
+      "ownership": false,
+      "primary": true,
+      "reference": null,
       "restricted": false,
-      "ownership": false
+      "searchable": false,
+      "sortable": false,
+      "subtype": null,
+      "type": "string",
+      "unique": false
     }
-  ]
+  ],
+  "description": "A lib that will generate all the prisma files",
+  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
+  "name": "Prima hapify generation",
+  "project": "../../hapify-models.json",
+  "templates": [
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "prisma/schemas/generated.prisma"
+    }
+  ],
+  "validatorPath": "../../dist/libs/config/hapify/validator.js",
+  "version": "1"
 }
