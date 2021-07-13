@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.8.0](https://github.com/tractr/stack/compare/nestjs-core-1.7.0...nestjs-core-1.8.0) (2021-07-13)
+
+
+### Features
+
+* add nestjs-file-storage and angular-file-storage libs ([#149](https://github.com/tractr/stack/issues/149)) ([804c4a6](https://github.com/tractr/stack/commit/804c4a6b1062a087804bfa2abec60db62c816269))
+
+
+
 # [1.7.0](https://github.com/tractr/stack/compare/nestjs-core-1.6.3...nestjs-core-1.7.0) (2021-07-12)
 
 
