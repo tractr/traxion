@@ -1,7 +1,15 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+# [1.4.0](https://github.com/tractr/stack/compare/hapify-templates-prisma-1.3.0...hapify-templates-prisma-1.4.0) (2021-07-13)
+
+
+### Features
+
+* add nestjs-file-storage and angular-file-storage libs ([#149](https://github.com/tractr/stack/issues/149)) ([804c4a6](https://github.com/tractr/stack/commit/804c4a6b1062a087804bfa2abec60db62c816269))
+
+
 
 # [1.3.0](https://github.com/tractr/stack/compare/hapify-templates-prisma-1.2.1...hapify-templates-prisma-1.3.0) (2021-06-16)
 
