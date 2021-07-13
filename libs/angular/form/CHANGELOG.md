@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.6.0](https://github.com/tractr/stack/compare/angular-form-0.5.0...angular-form-0.6.0) (2021-07-13)
+
+
+### Features
+
+* **angular-form:** add output when item change ([#174](https://github.com/tractr/stack/issues/174)) ([ce9bf27](https://github.com/tractr/stack/commit/ce9bf2793e243317b3ed9028353f4b9a256ad8d6))
+
+
+
 # [0.5.0](https://github.com/tractr/stack/compare/angular-form-0.4.0...angular-form-0.5.0) (2021-07-13)
 
 
