@@ -1,4 +1,7 @@
 {
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -8,14 +11,15 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
     "source.fixAll.eslint": true
   },
-  "eslint.options": { "configFile": "./.eslintrc.json" },
+  "editor.tabSize": 2,
+  "eslint.enable": true,
+  "eslint.options": {
+    "configFile": "./.eslintrc.json"
+  },
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -25,8 +29,6 @@
     "vue",
     "markdown"
   ],
-  "editor.tabSize": 2,
   "typescript.preferences.importModuleSpecifier": "relative",
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "eslint.enable": true
+  "typescript.updateImportsOnFileMove.enabled": "always"
 }

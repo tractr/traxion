@@ -1,48 +1,48 @@
 {
-  "root": true,
-  "plugins": ["@nrwl/nx"],
   "overrides": [
     {
-      "files": ["*.json"],
       "extends": ["./libs/config/eslint/.eslintrc.js"],
+      "files": ["*.json"],
       "rules": {}
     },
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "extends": ["./libs/config/eslint/.eslintrc.js"],
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
+        "@nrwl/nx/enforce-module-boundaries": [
+          "error",
+          {
+            "allow": [],
+            "depConstraints": [
+              {
+                "onlyDependOnLibsWithTags": ["*"],
+                "sourceTag": "*"
+              }
+            ],
+            "enforceBuildableLibDependency": true
+          }
+        ],
         "import/no-unresolved": [
           "error",
           {
             "ignore": ["^@(tractr|generated|traxion)/"]
           }
-        ],
-        "@nrwl/nx/enforce-module-boundaries": [
-          "error",
-          {
-            "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
-            ]
-          }
         ]
       }
     },
     {
-      "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript"],
+      "files": ["*.ts", "*.tsx"],
       "rules": {}
     },
     {
-      "files": ["*.js", "*.jsx"],
       "extends": ["plugin:@nrwl/nx/javascript"],
+      "files": ["*.js", "*.jsx"],
       "rules": {}
     }
   ],
+  "plugins": ["@nrwl/nx"],
+  "root": true,
   "settings": {
     "import/internal-regex": "^@(tractr|generated|traxion)/"
   }

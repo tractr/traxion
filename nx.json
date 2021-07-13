@@ -27,6 +27,9 @@
     "angular-components": {
       "tags": ["scope:angular"]
     },
+    "angular-file-storage": {
+      "tags": []
+    },
     "angular-form": {
       "tags": ["scope:angular"]
     },
@@ -114,6 +117,9 @@
     },
     "nestjs-database": {
       "tags": ["scope:nestjs"]
+    },
+    "nestjs-file-storage": {
+      "tags": []
     },
     "nestjs-mailer": {
       "tags": ["scope:nestjs"]

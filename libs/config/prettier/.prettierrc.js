@@ -1,4 +1,5 @@
 module.exports = {
+  jsonRecursiveSort: true,
   $schema: 'http://json.schemastore.org/prettierrc',
   arrowParens: 'always',
   bracketSpacing: true,
