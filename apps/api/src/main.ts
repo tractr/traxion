@@ -1,6 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as cookieParser from 'cookie-parser';
 import * as morgan from 'morgan';
 
 import { AppModule } from './app/app.module';
@@ -21,6 +22,8 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
 
   app.use(morgan('combined'));
+
+  app.use(cookieParser('myScret'));
 
   // Set global validation pipe
   app.useGlobalPipes(

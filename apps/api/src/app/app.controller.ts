@@ -2,12 +2,15 @@ import { Controller, Get } from '@nestjs/common';
 
 import { AppService } from './app.service';
 
+import { Public } from '@tractr/nestjs-core';
+
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('hello')
-  getData(): string {
-    return this.appService.getData();
+  @Public()
+  getData(): { message: string } {
+    return { message: this.appService.getData() };
   }
 }

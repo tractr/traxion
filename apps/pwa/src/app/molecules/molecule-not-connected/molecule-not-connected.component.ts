@@ -1,15 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+
+import { User } from '@generated/models';
+import {
+  SESSION_SERVICE,
+  SessionService,
+} from '@tractr/angular-authentication';
 
 @Component({
-  selector: 'tractr-molecule-not-connected',
+  selector: 'stack-molecule-not-connected',
   templateUrl: './molecule-not-connected.component.html',
-  styleUrls: ['./molecule-not-connected.component.less']
+  styleUrls: ['./molecule-not-connected.component.less'],
 })
 export class MoleculeNotConnectedComponent implements OnInit {
+  user: User | null = null;
 
-  constructor() { }
+  constructor(
+    @Inject(SESSION_SERVICE)
+    protected readonly sessionService: SessionService<User>,
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.sessionService.me$.subscribe((user) => {
+      this.user = user;
+    });
   }
-
 }

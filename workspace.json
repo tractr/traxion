@@ -70,10 +70,8 @@
               "npx rimraf generated",
               "node ../../../dist/libs/hapify/generate-config/src/index.js",
               "npx hpf generate",
-              "npx prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
-              "npx prisma format",
-              "npx prisma generate",
-              "rm ./prisma/client/query-engine-*"
+              "rm -rf src/lib/generated",
+              "mv generated src/lib"
             ],
             "cwd": "libs/angular/authentication",
             "parallel": false
@@ -347,19 +345,6 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/apps/api"]
-        }
-      }
-    },
-    "api-interfaces": {
-      "projectType": "library",
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
-          }
         }
       }
     },
@@ -1020,8 +1005,7 @@
             "main": "libs/nestjs/authentication/src/index.ts",
             "outputPath": "dist/libs/nestjs/authentication",
             "packageJson": "libs/nestjs/authentication/package.json",
-            "tsConfig": "libs/nestjs/authentication/tsconfig.lib.json",
-            "webpackConfig": "libs/nestjs/authentication/webpack.config.js"
+            "tsConfig": "libs/nestjs/authentication/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
         },
@@ -1386,7 +1370,7 @@
             "production": {
               "budgets": [
                 {
-                  "maximumError": "3mb",
+                  "maximumError": "5mb",
                   "maximumWarning": "500kb",
                   "type": "initial"
                 },

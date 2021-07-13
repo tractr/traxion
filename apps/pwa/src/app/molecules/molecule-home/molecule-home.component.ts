@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+
+import {
+  SESSION_SERVICE,
+  SessionService,
+} from '@tractr/angular-authentication';
 
 @Component({
-  selector: 'tractr-molecule-home',
+  selector: 'stack-tractr-molecule-home',
   templateUrl: './molecule-home.component.html',
-  styleUrls: ['./molecule-home.component.less']
+  styleUrls: ['./molecule-home.component.less'],
 })
 export class MoleculeHomeComponent implements OnInit {
+  isLogged = false;
 
-  constructor() { }
+  constructor(
+    @Inject(SESSION_SERVICE)
+    readonly sessionService: SessionService,
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.sessionService.logged$.subscribe((logged) => {
+      this.isLogged = logged;
+    });
   }
-
 }

@@ -4,6 +4,7 @@
 /coverage
 
 /libs/nestjs/authentication/prisma/client
+/libs/angular/authentication/prisma/client
 
 **/*.md
 

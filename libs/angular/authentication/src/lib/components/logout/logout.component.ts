@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 
 import {
   AUTH_OPTIONS,
-  AuthenticationOptionsInterface,
+  AuthenticationOptions,
+  SESSION_SERVICE,
 } from '../../authentication.config';
-import { InjectSessionService } from '../../decorators';
 import { SessionService } from '../../interfaces';
 
 @Component({
@@ -17,8 +17,8 @@ export class LogoutComponent implements OnInit {
   constructor(
     private router: Router,
     @Inject(AUTH_OPTIONS)
-    private options: AuthenticationOptionsInterface,
-    @InjectSessionService()
+    private options: AuthenticationOptions,
+    @Inject(SESSION_SERVICE)
     private sessionService: SessionService,
   ) {}
 

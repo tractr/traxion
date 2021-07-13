@@ -41,11 +41,6 @@
       "path": "generated/models/mock/{kebab}.mock.ts",
       "engine": "hpf",
       "input": "one"
-    },
-    {
-      "path": "prisma/schemas/generated.prisma",
-      "engine": "hpf",
-      "input": "all"
     }
   ],
   "version": "1",

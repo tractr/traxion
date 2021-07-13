@@ -2,8 +2,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {
+  MoleculeConnectedComponent,
+  MoleculeHomeComponent,
+  MoleculeNotConnectedComponent,
+} from './molecules';
 
+import { User } from '@generated/models';
 import {
   AngularAuthenticationModule,
   AngularAuthenticationRoutingModule,
@@ -13,14 +20,19 @@ import { AngularFormModule } from '@tractr/angular-form';
 import { AngularToolsModule } from '@tractr/angular-tools';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    MoleculeHomeComponent,
+    MoleculeNotConnectedComponent,
+    MoleculeConnectedComponent,
+    AppComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AngularToolsModule.forRoot({
       environment: {
         api: {
-          uri: 'http://localhost:4200',
+          uri: 'http://localhost:4200/api',
         },
         appCode: 'stack',
         appVersion: '1',
@@ -28,8 +40,14 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     }),
     AngularComponentsModule,
     AngularFormModule,
-    AngularAuthenticationModule.forRoot(),
+    AngularAuthenticationModule.forRoot({
+      api: {
+        url: 'http://localhost:4200/api',
+      },
+      user: User,
+    }),
     AngularAuthenticationRoutingModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 
 import {
   AUTH_OPTIONS,
-  AuthenticationOptionsInterface,
+  AuthenticationOptions,
+  SESSION_SERVICE,
 } from '../../authentication.config';
-import { SessionService } from '../../services/session.service';
+import { SessionService } from '../../interfaces';
 
 import { ErrorService } from '@tractr/angular-tools';
-import { InjectSessionService } from '../../decorators';
 
 @Component({
   selector: 'tractr-login',
@@ -23,8 +23,8 @@ export class LoginComponent {
     private errorService: ErrorService,
     private router: Router,
     @Inject(AUTH_OPTIONS)
-    private options: AuthenticationOptionsInterface,
-    @InjectSessionService()
+    private options: AuthenticationOptions,
+    @Inject(SESSION_SERVICE)
     private sessionService: SessionService,
   ) {}
 

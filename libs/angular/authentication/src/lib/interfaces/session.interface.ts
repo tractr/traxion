@@ -1,13 +1,26 @@
-import { Subject } from 'rxjs';
+import { RouterStateSnapshot } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-export interface SessionService<User> {
-  userSubject: Subject<User | null>;
+import { User } from '../generated/models';
 
-  userValue: User | null;
+export interface SessionService<U = User> {
+  me$: Observable<U | null>;
 
-  user: User | null;
+  logged$: BehaviorSubject<boolean>;
 
-  current(): Promise<User | null>;
+  isLogged(): boolean;
+
+  fetchUser$(): Observable<U>;
+
+  refresh(): void;
+
+  login(email: string, password: string): Promise<U | null>;
+
+  logout(): Promise<void>;
+
+  setPathAfterLogin(route: RouterStateSnapshot | null): void;
+
+  popUrlAfterLogin(): string | undefined;
 }
 
 export interface SessionServiceClass<User> {

@@ -1,25 +1,32 @@
-import { Inject, Injectable, OnInit } from '@angular/core';
+import { OnDestroy, OnInit } from '@angular/core';
 import { RouterStateSnapshot } from '@angular/router';
-import { lastValueFrom, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-import { User } from '../../../generated/models';
-import {
-  AUTH_OPTIONS,
-  AuthenticationOptionsInterface,
-} from '../authentication.config';
-
-import { transformAndValidate } from '@generated/rext-client';
-import { request } from '@tractr/angular-tools';
 import { ClassConstructor } from 'class-transformer';
+import { BehaviorSubject, lastValueFrom, Observable, of, Subject } from 'rxjs';
+import {
+  catchError,
+  map,
+  shareReplay,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs/operators';
 
-import { SessionServiceClass, SessionService } from '../interfaces';
+import { AuthenticationOptions } from '../authentication.config';
+import { User } from '../generated/models';
+import { SessionService, SessionServiceClass } from '../interfaces';
+
+import { request } from '@tractr/angular-tools';
+import { transformAndValidate } from '@tractr/common';
 
 export function SessionServiceFactory<
-  U extends User,
-  T extends ClassConstructor<U>,
->(user: T): SessionServiceClass<U> {
-  const sessionService = class implements SessionService<U>, OnInit {
+  U extends User = User,
+  CCU extends ClassConstructor<U> = ClassConstructor<U>,
+>(options: AuthenticationOptions<U, CCU>): SessionService<U> {
+  const { user } = options;
+
+  const AnonymousSessionService = class
+    implements SessionService<U>, OnInit, OnDestroy
+  {
     /** Route for login */
     sessionUrl: string;
 
@@ -29,77 +36,67 @@ export function SessionServiceFactory<
     /** Route for password logout */
     logoutUrl: string;
 
-    /** Flag to denote if calling for current */
-    callingCurrent = false;
-
     /** Store the path to load after login */
     pathAfterLogin: RouterStateSnapshot | null = null;
 
-    /** Self */
-    userSubject = new Subject<U | null>();
+    unsubscribe: Subject<void> = new Subject<void>();
 
-    userValue: U | null = null;
+    refresh$ = new BehaviorSubject<U | null | void>(undefined);
 
-    get user(): U | null {
-      return this.userValue;
+    logged$ = new BehaviorSubject<boolean>(false);
+
+    constructor() {
+      this.sessionUrl = `${options.api.url}/${options.session.url}`;
+      this.loginUrl = `${options.api.url}/${options.login.url}`;
+      this.logoutUrl = `${options.api.url}/${options.logout.url}`;
+
+      this.ngOnInit();
     }
 
-    set user(selfUser: U | null) {
-      this.userValue = selfUser;
-      this.userSubject.next(selfUser);
-    }
-
-    constructor(public readonly options: AuthenticationOptionsInterface) {
-      this.sessionUrl = `${this.options.api.url}/${this.options.session.url}`;
-      this.loginUrl = `${this.options.api.url}/${this.options.login.url}`;
-      this.logoutUrl = `${this.options.api.url}/${this.options.logout.url}`;
-    }
-
-    async ngOnInit() {
-      await this.current();
-    }
-
-    /** Retrieve current session info from api */
-    async current(): Promise<U | null> {
-      this.callingCurrent = true;
-      try {
-        const loggedUser = await lastValueFrom(
-          request<U>({
-            url: this.sessionUrl,
-            method: 'GET',
-            withCredentials: true,
-          }).pipe(
-            map((value) => value.response),
-            map((userInterface) => {
-              if (userInterface) {
-                try {
-                  return transformAndValidate(user)(userInterface) as U;
-                } catch (err: unknown) {
-                  console.error(
-                    "Return of session route can't be transformed in User",
-                    err,
-                  );
-                }
-              }
-
-              return null;
-            }),
-          ),
-        );
-
-        if (!loggedUser) throw new Error('user not found');
-
-        this.user = loggedUser;
-        this.callingCurrent = false;
-
-        return this.user;
-      } catch (err) {
-        // Catch unauthorized http error (user not connected)
-        if (err && err.status === 401) {
-          return null;
-        }
+    me$: Observable<U | null> = this.refresh$.pipe(
+      switchMap((next) => {
+        if (typeof next === 'undefined') return this.fetchUser$();
+        return of(next);
+      }),
+      catchError((err) => {
+        if (err && err.status === 401) return of(null);
         throw err;
-      }
+      }),
+      shareReplay(1),
+    );
+
+    ngOnInit() {
+      this.me$
+        .pipe(
+          takeUntil(this.unsubscribe),
+          map((nextUser) => !!nextUser),
+        )
+        .subscribe((logged) => {
+          this.logged$.next(logged);
+        });
+    }
+
+    ngOnDestroy() {
+      this.unsubscribe.next();
+    }
+
+    isLogged(): boolean {
+      return this.logged$.getValue();
+    }
+
+    fetchUser$(): Observable<U> {
+      return request<U>({
+        url: this.sessionUrl,
+        method: 'GET',
+        withCredentials: true,
+      }).pipe(
+        map((value) => value.response),
+        map((value) => transformAndValidate(user)(value) as U),
+      );
+    }
+
+    refresh(nextUser?: U | null) {
+      this.refresh$.next(nextUser);
     }
 
     /**
@@ -108,14 +105,11 @@ export function SessionServiceFactory<
      * @param password
      * @returns
      */
-    async login(email: string, password: string): Promise<User | null> {
-      // Do login
+    async login(email: string, password: string): Promise<U | null> {
       const body = {
         email,
         password,
       };
-
-      this.callingCurrent = true;
 
       const userLogged = await lastValueFrom(
         request<{ user: U }>({
@@ -125,58 +119,28 @@ export function SessionServiceFactory<
           body,
         }).pipe(
           map((value) => value.response.user),
-          map(
-            (userInterface) => transformAndValidate(user)(userInterface) as U,
-          ),
+          map((value) => transformAndValidate(user)(value) as U),
+          tap((nextUser) => this.refresh(nextUser)),
+          catchError(() => {
+            throw new Error('Could not login, wrong email or password');
+          }),
         ),
       );
 
-      this.user = userLogged;
-      this.callingCurrent = false;
-
-      return this.user;
+      return userLogged;
     }
 
     /**
      * Logout current user
      */
     async logout(): Promise<void> {
-      this.user = null;
-      this.callingCurrent = false;
-
       await lastValueFrom(
         request({
           url: this.logoutUrl,
           method: 'GET',
           withCredentials: true,
-        }),
+        }).pipe(map(() => this.refresh(null))),
       );
-    }
-
-    /**
-     * Returns the current users id
-     * @returns get the current connected user id
-     */
-    async getCurrentUser(): Promise<string | null> {
-      return ((await this.loggedIn()) && this.user?.id) || null;
-    }
-
-    /**
-     * Denotes if the user is connected
-     * @returns true if the user is connected false otherwise
-     */
-    async loggedIn(): Promise<boolean> {
-      if (this.callingCurrent) {
-        await new Promise((resolve, reject) => {
-          setTimeout(() => reject(), 20000);
-
-          this.userSubject.subscribe((selfUser) => {
-            resolve(selfUser);
-          });
-        });
-      }
-
-      return this.user !== null;
     }
 
     /**
@@ -201,7 +165,5 @@ export function SessionServiceFactory<
     }
   } as unknown as SessionServiceClass<U>;
 
-  Injectable()(sessionService);
-
-  return sessionService;
+  return new AnonymousSessionService();
 }

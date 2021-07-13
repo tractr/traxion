@@ -2,7 +2,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import {
   AUTH_OPTIONS,
-  AuthenticationOptionsInterface,
+  AuthenticationOptions,
   SESSION_SERVICE,
 } from './authentication.config';
 import { LoginComponent, LogoutComponent } from './components';
@@ -14,7 +14,7 @@ import { AngularComponentsModule } from '@tractr/angular-components';
 import { AngularFormModule } from '@tractr/angular-form';
 import { AngularToolsModule } from '@tractr/angular-tools';
 
-const defaultOptions: Partial<AuthenticationOptionsInterface> = {
+const defaultOptions: Omit<AuthenticationOptions, 'api' | 'user'> = {
   routing: {
     prefix: ['/'],
   },
@@ -50,10 +50,11 @@ const defaultOptions: Partial<AuthenticationOptionsInterface> = {
 })
 export class AngularAuthenticationModule {
   public static forRoot(
-    options: AuthenticationOptionsInterface,
+    options: Pick<AuthenticationOptions, 'api' | 'user'> &
+      Partial<AuthenticationOptions>,
   ): ModuleWithProviders<AngularAuthenticationModule> {
     // Overide default options
-    const authenticationOptions: AuthenticationOptionsInterface = Object.assign(
+    const authenticationOptions: AuthenticationOptions = Object.assign(
       defaultOptions,
       options,
     );

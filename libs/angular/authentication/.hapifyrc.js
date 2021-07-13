@@ -11,5 +11,5 @@ module.exports = {
   logo: 'https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png',
   validatorPath: getValidatorPath(process.cwd()),
   project: '../../nestjs/authentication/hapify-plugin-user-model.json',
-  extends: ['../../hapify/templates/prisma', '../../hapify/templates/models'],
+  extends: ['../../hapify/templates/models'],
 };

@@ -49,7 +49,7 @@ import {
 } from '../../../models';
 <<endif>>
 <<if Fields (number or boolean) and not internal>>
-import { TransformStringToInt, TransformStringToBoolean } from '../../helpers';
+import { TransformStringToInt, TransformStringToBoolean } from '@tractr/common';
 <<endif>>
 
  
