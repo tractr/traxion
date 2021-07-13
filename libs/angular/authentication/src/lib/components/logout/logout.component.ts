@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 
 import {
   AUTH_OPTIONS,
-  AuthenticationOptionsInterface,
+  AuthenticationOptions,
+  SESSION_SERVICE,
 } from '../../authentication.config';
-import { SessionService } from '../../services/session.service';
+import { SessionService } from '../../interfaces';
 
 @Component({
   selector: 'tractr-logout',
@@ -14,10 +15,11 @@ import { SessionService } from '../../services/session.service';
 })
 export class LogoutComponent implements OnInit {
   constructor(
-    private sessionService: SessionService,
     private router: Router,
     @Inject(AUTH_OPTIONS)
-    private options: AuthenticationOptionsInterface,
+    private options: AuthenticationOptions,
+    @Inject(SESSION_SERVICE)
+    private sessionService: SessionService,
   ) {}
 
   ngOnInit() {

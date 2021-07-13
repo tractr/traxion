@@ -2,22 +2,19 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import {
   AUTH_OPTIONS,
-  AuthenticationForRootInterface,
-  AuthenticationOptionsInterface,
+  AuthenticationOptions,
+  SESSION_SERVICE,
 } from './authentication.config';
 import { LoginComponent, LogoutComponent } from './components';
 import { ConnectedDirective, NotConnectedDirective } from './directives';
 import { IsLoggedGuard, IsNotLoggedGuard } from './guards';
-import { SessionService } from './services';
+import { SessionServiceFactory } from './services';
 
 import { AngularComponentsModule } from '@tractr/angular-components';
 import { AngularFormModule } from '@tractr/angular-form';
 import { AngularToolsModule } from '@tractr/angular-tools';
 
-const defaultOptions: AuthenticationOptionsInterface = {
-  api: {
-    url: 'http://localhost:4200/api',
-  },
+const defaultOptions: Omit<AuthenticationOptions, 'api' | 'user'> = {
   routing: {
     prefix: ['/'],
   },
@@ -43,7 +40,7 @@ const defaultOptions: AuthenticationOptionsInterface = {
     ConnectedDirective,
     NotConnectedDirective,
   ],
-  providers: [SessionService, IsLoggedGuard, IsNotLoggedGuard],
+  providers: [IsLoggedGuard, IsNotLoggedGuard],
   exports: [
     LogoutComponent,
     LoginComponent,
@@ -53,17 +50,25 @@ const defaultOptions: AuthenticationOptionsInterface = {
 })
 export class AngularAuthenticationModule {
   public static forRoot(
-    overide: Partial<AuthenticationForRootInterface> = {},
+    options: Pick<AuthenticationOptions, 'api' | 'user'> &
+      Partial<AuthenticationOptions>,
   ): ModuleWithProviders<AngularAuthenticationModule> {
     // Overide default options
-    const options: AuthenticationOptionsInterface = Object.assign(
+    const authenticationOptions: AuthenticationOptions = Object.assign(
       defaultOptions,
-      overide.options,
+      options,
     );
 
     return {
       ngModule: AngularAuthenticationModule,
-      providers: [SessionService, { provide: AUTH_OPTIONS, useValue: options }],
+      providers: [
+        { provide: AUTH_OPTIONS, useValue: authenticationOptions },
+        {
+          provide: SESSION_SERVICE,
+          useFactory: SessionServiceFactory,
+          deps: [AUTH_OPTIONS],
+        },
+      ],
     };
   }
 }

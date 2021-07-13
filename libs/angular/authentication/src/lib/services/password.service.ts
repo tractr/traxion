@@ -2,10 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 
-import {
-  AUTH_OPTIONS,
-  AuthenticationOptionsInterface,
-} from '../authentication.config';
+import { AUTH_OPTIONS, AuthenticationOptions } from '../authentication.config';
 
 @Injectable()
 export class PasswordService {
@@ -14,7 +11,7 @@ export class PasswordService {
   /** Constructor */
   constructor(
     @Inject(AUTH_OPTIONS)
-    private options: AuthenticationOptionsInterface,
+    private options: AuthenticationOptions,
     private http: HttpClient,
   ) {
     // this.resetUrl = `${this.options.api.url}/${this.options.password.reset.url}`;

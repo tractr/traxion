@@ -1,5 +1,6 @@
 import {
   Directive,
+  Inject,
   OnDestroy,
   OnInit,
   TemplateRef,
@@ -8,7 +9,8 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { SessionService } from '../services/session.service';
+import { SESSION_SERVICE } from '../authentication.config';
+import { SessionService } from '../interfaces';
 
 @Directive({
   selector: '[tractrBaseConnected]',
@@ -19,16 +21,15 @@ export abstract class BaseConnectedDirective implements OnInit, OnDestroy {
   constructor(
     private viewContainer: ViewContainerRef,
     private templateRef: TemplateRef<unknown>,
+    @Inject(SESSION_SERVICE)
     private sessionService: SessionService,
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.isLogged(await this.sessionService.loggedIn());
-
-    this.sessionService.selfSubject
+    this.sessionService.me$
       .pipe(takeUntil(this.unsubscribe))
-      .subscribe((self) => {
-        this.isLogged(!!self);
+      .subscribe((user) => {
+        this.isLogged(!!user);
       });
   }
 

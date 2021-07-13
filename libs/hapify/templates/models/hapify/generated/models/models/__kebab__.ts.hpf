@@ -24,7 +24,7 @@ import {
   IsOptional,
   <<endif>>
 
-  <<if Fields string or entity or enum>>
+  <<if Fields string or entity or enum or password>>
   IsString,
   <<endif>>
 
@@ -41,7 +41,7 @@ import {
   <<<}>>>
 
   <<if Fields password>>
-  Matches, 
+  Length, 
   <<endif>>
 
 } from 'class-validator';
@@ -49,6 +49,7 @@ import {
 <<<for (const relation of getRelations()) {>>>
 import type { <<relation pascal>> } from './<<relation kebab>>';
 <<<}>>>
+
  
 <<if Fields enum>>
 import {
@@ -60,10 +61,25 @@ import {
 
 import { <<Model pascal>> as Prisma<<Model pascal>> } from '@prisma/client';
 
+<<if Fields boolean or datetime or number>>
+import {
+  <<if Fields boolean>>
+  TransformStringToBoolean,
+  <<endif>>
+  <<if Fields datetime>>
+  TransformStringToDate,
+  <<endif>>
+  <<if Fields number>>
+  TransformStringToInt,
+  <<endif>>
+} from '@tractr/common';
+<<endif>>
+
  
 export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
 <<for Fields field>>
   <<if field boolean>>
+  @TransformStringToBoolean()
   @IsBoolean(<<=listModifier(field)>>) 
   <<endif>>
 
@@ -88,7 +104,8 @@ export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
   <<endif>>
 
   <<if field password>>
-  @Matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/, <<=listModifier(field)>>) 
+  @IsString()
+  @Length(8, 100)
   <<endif>>
 
   <<if field url>>
@@ -97,10 +114,12 @@ export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
 
   <<if field number>>
   @IsNumber({}, <<=listModifier(field)>>)
+  @TransformStringToInt()
   <<endif>>
 
   <<if field  datetime>>
   @IsDate({}, <<=listModifier(field)>>)
+  @TransformStringToDate()
   <<endif>>
 
   <<if field nullable>>

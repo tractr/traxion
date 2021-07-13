@@ -4,7 +4,7 @@ import {
 } from '../../mock';
 import { 
   mock<<Model pascal>>Factory,
-} from '@generated/models';
+} from '../../../models';
 import {
   <<Model constant>>_DATABASE_SERVICE,
   <<Model constant>>_SERVICE,

@@ -10,7 +10,7 @@ import {
   mock<<Model pascal>><<field pascal>>IdsFactory,
   <<endif>>
 <<endfor>>
-} from '@generated/models';
+} from '../../../models';
   
 export function mock<<Model pascal>>CountQueryDtoFactory(
   override: Partial<<<Model pascal>>CountQueryDto> = {}

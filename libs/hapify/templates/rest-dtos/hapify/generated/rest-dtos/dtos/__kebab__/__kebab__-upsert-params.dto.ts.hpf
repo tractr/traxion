@@ -9,7 +9,7 @@ import {
 } from 'class-validator';
 
 <<if Fields primary and number>>
-import { TransformStringToInt } from '../../helpers';
+import { TransformStringToInt } from '@tractr/common';
 <<endif>>
  
 export class <<Model pascal>>UpsertParamsDto {

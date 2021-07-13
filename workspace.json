@@ -63,6 +63,20 @@
           },
           "outputs": ["dist/libs/angular/authentication"]
         },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf generated",
+              "node ../../../dist/libs/hapify/generate-config/src/index.js",
+              "npx hpf generate",
+              "rm -rf src/lib/generated",
+              "mv generated src/lib"
+            ],
+            "cwd": "libs/angular/authentication",
+            "parallel": false
+          }
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
@@ -334,19 +348,6 @@
         }
       }
     },
-    "api-interfaces": {
-      "projectType": "library",
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
-          }
-        }
-      }
-    },
     "commit-config": {
       "projectType": "library",
       "root": "libs/config/commit",
@@ -393,6 +394,38 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/config/commit"]
+        }
+      }
+    },
+    "common": {
+      "projectType": "library",
+      "root": "libs/common",
+      "sourceRoot": "libs/common/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/common/*.md"],
+            "main": "libs/common/src/index.ts",
+            "outputPath": "dist/libs/common",
+            "packageJson": "libs/common/package.json",
+            "tsConfig": "libs/common/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/common/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/common/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/common"]
         }
       }
     },
@@ -1337,7 +1370,7 @@
             "production": {
               "budgets": [
                 {
-                  "maximumError": "3mb",
+                  "maximumError": "5mb",
                   "maximumWarning": "500kb",
                   "type": "initial"
                 },

@@ -48,10 +48,10 @@ import {
   <<for Fields enum enumField>>
   <<Model pascal>><<enumField pascal>>,
   <<endfor>>
-} from '@generated/models';
+} from '../../../models';
 <<endif>>
 <<if Fields (number or boolean) and not internal>>
-import { TransformStringToInt, TransformStringToBoolean } from '../../helpers';
+import { TransformStringToInt, TransformStringToBoolean } from '@tractr/common';
 <<endif>>
  
 export class <<Model pascal>>CreateBodyDto {

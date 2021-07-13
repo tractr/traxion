@@ -40,13 +40,12 @@ import {
   <<<}>>>
   SortOrder,
   <<Model pascal>>,
-} from '@generated/models';
+} from '../../../models';
 import {
   TransformStringToArrayOfString,
   TransformStringToInt,
   TransformStringToBoolean,
-  } from '../../helpers';
-
+  } from '@tractr/common';
  
 export class <<Model pascal>>FindManyQueryDto {
 <<for Fields searchable and not password field>>

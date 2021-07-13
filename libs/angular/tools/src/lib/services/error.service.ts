@@ -12,12 +12,15 @@ export class ErrorService {
   /**
    * Handle an error
    */
-  handle(error: Error): void {
+  handle(error: Error | Error[]): void {
     if (error instanceof HttpErrorResponse) {
       this.handleHttp(error);
     } else {
-      this.show(error.message);
-      // this.sendLog(error, false);
+      this.show(
+        (Array.isArray(error) ? error : [error])
+          .map((err) => err.message)
+          .join('\n'),
+      );
     }
   }
 

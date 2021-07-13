@@ -4,9 +4,10 @@ import { Router } from '@angular/router';
 
 import {
   AUTH_OPTIONS,
-  AuthenticationOptionsInterface,
+  AuthenticationOptions,
+  SESSION_SERVICE,
 } from '../../authentication.config';
-import { SessionService } from '../../services/session.service';
+import { SessionService } from '../../interfaces';
 
 import { ErrorService } from '@tractr/angular-tools';
 
@@ -19,11 +20,12 @@ export class LoginComponent {
 
   /** Constructor */
   constructor(
-    private sessionService: SessionService,
+    private errorService: ErrorService,
     private router: Router,
     @Inject(AUTH_OPTIONS)
-    private options: AuthenticationOptionsInterface,
-    private errorService: ErrorService,
+    private options: AuthenticationOptions,
+    @Inject(SESSION_SERVICE)
+    private sessionService: SessionService,
   ) {}
 
   /** Called when the user click on sign in */
