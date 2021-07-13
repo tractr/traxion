@@ -1,0 +1,15 @@
+<tractr-form-item
+  [name]="name"
+  [label]="label"
+  [errorTip]="errorTip"
+  [status]="status"
+>
+  <tractr-model-select
+    idField="id"
+    labelField="name"
+    [getList]="getList"
+    [value]="state"
+    (valueChanged)="setValue($event)"
+    [delayed]="delayed"
+  ></tractr-model-select>
+</tractr-form-item>
