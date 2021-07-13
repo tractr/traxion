@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.5.0](https://github.com/tractr/stack/compare/angular-form-0.4.0...angular-form-0.5.0) (2021-07-13)
+
+
+### Features
+
+* **angular-components:** add model select component ([#173](https://github.com/tractr/stack/issues/173)) ([71719dd](https://github.com/tractr/stack/commit/71719ddec1589632b5953f06cac760b8428e8478))
+
+
+
 # [0.4.0](https://github.com/tractr/stack/compare/angular-form-0.3.0...angular-form-0.4.0) (2021-07-12)
 
 
