@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { NzButtonType } from 'ng-zorro-antd/button';
+import { NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'tractr-form-button',
@@ -13,4 +13,6 @@ export class FormButtonComponent {
   @Input() label!: string;
 
   @Input() type: NzButtonType = 'primary';
+
+  @Input() size: NzButtonSize = 'default';
 }
