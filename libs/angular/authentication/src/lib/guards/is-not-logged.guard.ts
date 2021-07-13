@@ -15,7 +15,6 @@ export class IsNotLoggedGuard implements CanActivate {
     private router: Router,
     @Inject(AUTH_OPTIONS)
     private options: AuthenticationOptions,
-
     @Inject(SESSION_SERVICE)
     private sessionService: SessionService,
   ) {}
