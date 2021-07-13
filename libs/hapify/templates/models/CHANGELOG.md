@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.4.3](https://github.com/tractr/stack/compare/hapify-templates-models-1.4.2...hapify-templates-models-1.4.3) (2021-07-13)
+
+
+### Bug Fixes
+
+* remove all reference to [@generated](https://github.com/generated) from the generated files and only use the relative paths ([#172](https://github.com/tractr/stack/issues/172)) ([8117df7](https://github.com/tractr/stack/commit/8117df7e58fd3ef4b0e9e051d1235c19b361149b))
+
+
+
 ## [1.4.2](https://github.com/tractr/stack/compare/hapify-templates-models-1.4.1...hapify-templates-models-1.4.2) (2021-07-08)
 
 
