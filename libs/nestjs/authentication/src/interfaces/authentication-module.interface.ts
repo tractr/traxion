@@ -10,6 +10,9 @@ export interface AuthenticationOptions {
   login: {
     saltRounds?: number;
   };
+  password: {
+    resetCodeLength?: number;
+  };
   cookies: {
     cookieName: string;
     queryParamName: string;
@@ -18,6 +21,7 @@ export interface AuthenticationOptions {
   strategy: {
     jwt: StrategyOptions;
     local: IStrategyOptionsWithRequest & {
+      idField: keyof User;
       usernameField: keyof User;
       passwordField: keyof User;
     };

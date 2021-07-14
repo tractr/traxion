@@ -82,7 +82,7 @@ export const AUTH_DEFAULT_OPTIONS: AuthenticationDefaultOptions = {
   password: {
     disabled: false,
     reset: {
-      url: 'reset',
+      url: 'password/reset',
     },
   },
 };

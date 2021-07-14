@@ -16,6 +16,9 @@ export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
   login: {
     saltRounds: 10,
   },
+  password: {
+    resetCodeLength: 126,
+  },
   cookies: {
     cookieName: AUTHENTICATION_COOKIE_NAME,
     queryParamName: 'authToken',
@@ -35,6 +38,7 @@ export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
     },
     local: {
       passReqToCallback: true,
+      idField: 'id',
       usernameField: 'email',
       passwordField: 'password',
     },

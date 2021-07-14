@@ -5,9 +5,13 @@ import { PassportModule } from '@nestjs/passport';
 import { UserModelModule } from '../generated/nestjs-models-common';
 import { AUTHENTICATION_OPTIONS } from './config';
 import { AUTHENTICATION_MODULE_OPTIONS } from './constants';
-import { LoginController } from './controllers';
+import { LoginController, PasswordController } from './controllers';
 import { AuthenticationOptions } from './interfaces';
-import { AuthenticationService, StrategyOptionsService } from './services';
+import {
+  AuthenticationService,
+  PasswordService,
+  StrategyOptionsService,
+} from './services';
 import { JwtStrategy, LocalStrategy } from './strategies';
 
 import {
@@ -90,11 +94,12 @@ export class AuthenticationModule extends ModuleOptionsFactory<AuthenticationOpt
       providers: [
         ...(authenticationOptionsModule.providers ?? []),
         AuthenticationService,
+        PasswordService,
         StrategyOptionsService,
         JwtStrategy,
         LocalStrategy,
       ],
-      controllers: [LoginController],
+      controllers: [LoginController, PasswordController],
     };
   }
 }
