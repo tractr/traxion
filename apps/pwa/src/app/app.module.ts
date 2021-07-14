@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { getConfig } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
@@ -16,6 +17,10 @@ import {
   AngularAuthenticationRoutingModule,
 } from '@tractr/angular-authentication';
 import { AngularComponentsModule } from '@tractr/angular-components';
+import {
+  AppConfigModule,
+  AppInitializerProvider,
+} from '@tractr/angular-config';
 import { AngularFormModule } from '@tractr/angular-form';
 import { AngularToolsModule } from '@tractr/angular-tools';
 
@@ -48,8 +53,11 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     }),
     AngularAuthenticationRoutingModule,
     AppRoutingModule,
+    AppConfigModule.forRoot({
+      getConfig,
+    }),
   ],
-  providers: [],
+  providers: [AppInitializerProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

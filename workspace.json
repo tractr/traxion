@@ -174,6 +174,60 @@
         }
       }
     },
+    "angular-config": {
+      "prefix": "tractr",
+      "projectType": "library",
+      "root": "libs/angular/config",
+      "sourceRoot": "libs/angular/config/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "development": {
+              "tsConfig": "libs/angular/config/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/angular/config/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:package",
+          "options": {
+            "project": "libs/angular/config/ng-package.json"
+          },
+          "outputs": ["dist/libs/angular/config"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular/config/src/**/*.ts",
+              "libs/angular/config/src/**/*.html"
+            ]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public",
+            "buildTarget": "production"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular/config/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/angular/config"]
+        }
+      }
+    },
     "angular-file-storage": {
       "prefix": "tractr",
       "projectType": "library",
@@ -1500,9 +1554,27 @@
             }
           },
           "defaultConfiguration": "production",
+          "dependsOn": [
+            {
+              "projects": "self",
+              "target": "prebuild"
+            },
+            {
+              "projects": "dependencies",
+              "target": "build"
+            }
+          ],
           "executor": "@angular-devkit/build-angular:browser",
           "options": {
-            "assets": ["apps/pwa/src/favicon.ico", "apps/pwa/src/assets"],
+            "assets": [
+              "apps/pwa/src/favicon.ico",
+              {
+                "glob": "**/*",
+                "ignore": ["**/app-config.json"],
+                "input": "apps/pwa/src/assets",
+                "output": "/assets"
+              }
+            ],
             "index": "apps/pwa/src/index.html",
             "inlineStyleLanguage": "less",
             "main": "apps/pwa/src/main.ts",
@@ -1532,6 +1604,20 @@
             ]
           }
         },
+        "prebuild": {
+          "configurations": {
+            "development": {},
+            "production": {}
+          },
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx nx run angular-config:build",
+              "node ./dist/libs/angular/config/bundles/tractr-angular-config-generate.umd.js ./apps/pwa/src/assets/app-config.json"
+            ],
+            "parallel": false
+          }
+        },
         "release": {
           "executor": "@jscutlery/semver:version",
           "options": {
@@ -1548,6 +1634,12 @@
             }
           },
           "defaultConfiguration": "development",
+          "dependsOn": [
+            {
+              "projects": "self",
+              "target": "prebuild"
+            }
+          ],
           "executor": "@angular-devkit/build-angular:dev-server",
           "options": {
             "proxyConfig": "apps/pwa/proxy.conf.js"

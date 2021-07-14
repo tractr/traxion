@@ -10,8 +10,6 @@ import {
   OptionsFactory,
 } from '@tractr/nestjs-core';
 
-const { AUTH_STRATEGY_JWT_SECRET } = process.env;
-
 export const AUTHENTICATION_COOKIE_NAME = 'authCookie';
 export const AUTHENTICATION_QUERY_PARAM_NAME = 'authToken';
 export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
@@ -42,7 +40,7 @@ export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
     },
   },
   jwtModuleOptions: {
-    secret: AUTH_STRATEGY_JWT_SECRET ?? isDevelopment() ? 'secret' : undefined,
+    secret: isDevelopment() ? 'secret' : undefined,
   },
   passportModuleOptions: {
     defaultStrategy: 'jwt',
