@@ -20,4 +20,6 @@ export class InputStringComponent extends InputBaseComponent<string> {
 
   /** Ant input's size */
   @Input() size: NzSizeLDSType = 'default';
+
+  passwordVisible = false;
 }
