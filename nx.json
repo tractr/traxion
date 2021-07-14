@@ -119,8 +119,8 @@
       "tags": ["scope:nestjs"]
     },
     "nestjs-casl": {
-      "tags": [],
-      "implicitDependencies": ["hapify-config", "hapify-generate-config"]
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "tags": []
     },
     "nestjs-core": {
       "tags": ["scope:nestjs"]

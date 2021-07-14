@@ -1,6 +1,10 @@
 {
+  "version": "3",
+  "name": "New project",
   "models": [
     {
+      "id": "ccebcf02-4b82-923f-114e-252c9455899d",
+      "name": "Answer",
       "accesses": {
         "count": "guest",
         "create": "guest",
@@ -12,35 +16,52 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "user",
-          "properties": [],
-          "subtype": "oneMany",
           "type": "entity",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
+          "subtype": "oneMany",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
+          "properties": [],
+          "meta": {
+            "backRelation": "answers"
+          }
         },
         {
           "name": "question",
-          "properties": [],
-          "subtype": "oneMany",
           "type": "entity",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
+          "subtype": "oneMany",
+          "value": "6894a782-2e83-cd6a-52cc-f62967165636",
+          "properties": [],
+          "meta": {
+            "backRelation": "answers"
+          }
         },
         {
           "name": "tags",
-          "properties": ["nullable", "multiple"],
-          "subtype": "manyMany",
           "type": "entity",
-          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
+          "subtype": "manyMany",
+          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
+          "properties": [
+            "nullable",
+            "multiple"
+          ],
+          "meta": {
+            "backRelation": "answers"
+          }
         }
-      ],
-      "id": "ccebcf02-4b82-923f-114e-252c9455899d",
-      "name": "Answer"
+      ]
     },
     {
+      "id": "b0ecc3a7-9f28-a140-d505-91f598e547a5",
+      "name": "Message",
       "accesses": {
         "count": "guest",
         "create": "guest",
@@ -52,39 +73,54 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "text",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "label",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "hour",
-          "properties": ["nullable"],
+          "type": "datetime",
           "subtype": "time",
-          "type": "datetime"
+          "properties": [
+            "nullable"
+          ]
         },
         {
           "name": "tags",
-          "properties": ["multiple"],
-          "subtype": "manyMany",
           "type": "entity",
-          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
+          "subtype": "manyMany",
+          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
+          "properties": [
+            "multiple"
+          ]
         },
         {
           "name": "questions",
-          "properties": ["multiple"],
-          "subtype": "manyMany",
           "type": "entity",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
+          "subtype": "manyMany",
+          "value": "6894a782-2e83-cd6a-52cc-f62967165636",
+          "properties": [
+            "multiple"
+          ]
         }
-      ],
-      "id": "b0ecc3a7-9f28-a140-d505-91f598e547a5",
-      "name": "Message"
+      ]
     },
     {
+      "id": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c",
+      "name": "OpenQuestion",
       "accesses": {
         "count": "guest",
         "create": "guest",
@@ -96,31 +132,44 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "text",
-          "properties": ["searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "key",
-          "properties": ["unique", "label", "searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "unique",
+            "label",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "question",
-          "properties": [],
-          "subtype": "oneMany",
           "type": "entity",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
+          "subtype": "oneMany",
+          "value": "6894a782-2e83-cd6a-52cc-f62967165636",
+          "properties": []
         }
-      ],
-      "id": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c",
-      "name": "OpenQuestion"
+      ]
     },
     {
+      "id": "6894a782-2e83-cd6a-52cc-f62967165636",
+      "name": "Question",
       "accesses": {
         "count": "guest",
         "create": "guest",
@@ -132,38 +181,55 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "title",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "label",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "text",
-          "properties": ["searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "parentQuestion",
-          "properties": ["nullable"],
-          "subtype": "oneMany",
           "type": "entity",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
+          "subtype": "oneMany",
+          "value": "6894a782-2e83-cd6a-52cc-f62967165636",
+          "properties": [
+            "nullable"
+          ]
         },
         {
           "name": "tags",
-          "properties": ["nullable", "multiple"],
-          "subtype": "manyMany",
           "type": "entity",
-          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
+          "subtype": "manyMany",
+          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
+          "properties": [
+            "nullable",
+            "multiple"
+          ]
         }
-      ],
-      "id": "6894a782-2e83-cd6a-52cc-f62967165636",
-      "name": "Question"
+      ]
     },
     {
+      "id": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
+      "name": "Tag",
       "accesses": {
         "count": "guest",
         "create": "guest",
@@ -175,84 +241,131 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "label",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "label",
+            "searchable",
+            "sortable"
+          ]
         }
-      ],
-      "id": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
-      "name": "Tag"
+      ]
     },
     {
+      "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
+      "name": "User",
       "accesses": {
         "count": "admin",
         "create": "guest",
         "read": "owner",
-        "remove": "owner",
+        "remove": "admin",
         "search": "admin",
         "update": "owner"
       },
       "fields": [
         {
           "name": "id",
+          "type": "string",
           "properties": [
             "primary",
             "searchable",
             "sortable",
             "internal",
             "ownership"
-          ],
-          "type": "string"
+          ]
         },
         {
           "name": "name",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "label",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "email",
-          "properties": ["unique", "searchable", "sortable"],
+          "type": "string",
           "subtype": "email",
-          "type": "string"
+          "properties": [
+            "unique",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "password",
-          "properties": ["hidden"],
+          "type": "string",
           "subtype": "password",
-          "type": "string"
+          "properties": [
+            "hidden"
+          ]
         },
         {
           "name": "role",
-          "notes": "admin or user",
-          "properties": ["searchable", "restricted"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "searchable",
+            "restricted"
+          ],
+          "notes": "admin or user"
         },
         {
           "name": "banned",
-          "notes": "Allow admins to disable this user",
-          "properties": ["searchable", "restricted"],
-          "type": "boolean"
+          "type": "boolean",
+          "properties": [
+            "searchable",
+            "restricted"
+          ],
+          "notes": "Allow admins to disable this user"
         },
         {
           "name": "last connected at",
-          "properties": ["nullable", "searchable", "sortable"],
-          "type": "datetime"
+          "type": "datetime",
+          "properties": [
+            "nullable",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "gender",
-          "properties": ["searchable", "sortable"],
           "type": "enum",
-          "value": ["male", "female"]
+          "value": [
+            "male",
+            "female"
+          ],
+          "properties": [
+            "searchable",
+            "sortable"
+          ]
+        },
+        {
+          "name": "roles",
+          "type": "enum",
+          "value": [
+            "admin"
+          ],
+          "properties": [
+            "multiple",
+            "searchable",
+            "sortable"
+          ]
         }
-      ],
-      "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
-      "name": "User"
+      ]
     },
     {
+      "id": "5d791308-4e9d-aa7d-3d36-d45d46b04c6a",
+      "name": "Variable",
       "accesses": {
         "count": "guest",
         "create": "guest",
@@ -264,33 +377,34 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "value",
-          "properties": [],
-          "type": "string"
+          "type": "string",
+          "properties": []
         },
         {
           "name": "openQuestion",
-          "properties": [],
-          "subtype": "oneMany",
           "type": "entity",
-          "value": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c"
+          "subtype": "oneMany",
+          "value": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c",
+          "properties": []
         },
         {
           "name": "answer",
-          "properties": [],
-          "subtype": "oneMany",
           "type": "entity",
-          "value": "ccebcf02-4b82-923f-114e-252c9455899d"
+          "subtype": "oneMany",
+          "value": "ccebcf02-4b82-923f-114e-252c9455899d",
+          "properties": []
         }
-      ],
-      "id": "5d791308-4e9d-aa7d-3d36-d45d46b04c6a",
-      "name": "Variable"
+      ]
     }
-  ],
-  "name": "New project",
-  "version": "2"
+  ]
 }
