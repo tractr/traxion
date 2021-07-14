@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons-angular/icons';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
+import { getConfig } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
@@ -21,6 +22,10 @@ import {
   AngularAuthenticationRoutingModule,
 } from '@tractr/angular-authentication';
 import { AngularComponentsModule } from '@tractr/angular-components';
+import {
+  AppConfigModule,
+  AppInitializerProvider,
+} from '@tractr/angular-config';
 import { AngularFormModule } from '@tractr/angular-form';
 import { AngularToolsModule } from '@tractr/angular-tools';
 
@@ -53,9 +58,12 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     }),
     AngularAuthenticationRoutingModule,
     AppRoutingModule,
+    AppConfigModule.forRoot({
+      getConfig,
+    }),
     NzIconModule.forRoot([EyeInvisibleOutline, PlusOutline]),
   ],
-  providers: [],
+  providers: [AppInitializerProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

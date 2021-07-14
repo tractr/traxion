@@ -1,0 +1,19 @@
+{
+  "name": "@tractr/angular-config",
+  "version": "0.0.1",
+  "license": "UNLICENSED",
+  "bin": {
+    "tract-angular-config-generate": "./bundles/tractr-angular-config-generate.umd.js"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "peerDependencies": {
+    "@angular/common": "^12.1.1",
+    "@angular/core": "^12.1.1"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}
