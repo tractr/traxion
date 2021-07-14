@@ -1,6 +1,11 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {
+  EyeInvisibleOutline,
+  PlusOutline,
+} from '@ant-design/icons-angular/icons';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,6 +53,7 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     }),
     AngularAuthenticationRoutingModule,
     AppRoutingModule,
+    NzIconModule.forRoot([EyeInvisibleOutline, PlusOutline]),
   ],
   providers: [],
   bootstrap: [AppComponent],

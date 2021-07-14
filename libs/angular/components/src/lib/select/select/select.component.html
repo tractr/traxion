@@ -1,4 +1,11 @@
-<nz-select [(ngModel)]="id" ngDefaultControl [nzMode]="mode">
+<nz-select
+  [(ngModel)]="id"
+  ngDefaultControl
+  [nzMode]="mode"
+  nzShowSearch
+  nzAllowClear
+  [nzPlaceHolder]="placeholder"
+>
   <nz-option
     *ngFor="let option of options"
     [nzValue]="option.id"
