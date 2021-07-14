@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.6.0](https://github.com/tractr/stack/compare/angular-components-0.5.0...angular-components-0.6.0) (2021-07-14)
+
+
+### Features
+
+* Missing form field ([#185](https://github.com/tractr/stack/issues/185)) ([e2a1c49](https://github.com/tractr/stack/commit/e2a1c49bc2c9548ef8be719f212fa0159c5bcc01))
+
+
+
 # [0.5.0](https://github.com/tractr/stack/compare/angular-components-0.4.0...angular-components-0.5.0) (2021-07-13)
 
 

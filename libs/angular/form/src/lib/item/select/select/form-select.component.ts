@@ -17,6 +17,8 @@ import { FormSelectBaseComponent } from '../form-select-base.component';
 export class FormSelectComponent extends FormSelectBaseComponent {
   @Input() multiple = false;
 
+  @Input() placeholder = '';
+
   constructor(private formBuilder: FormBuilder) {
     super();
   }

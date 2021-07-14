@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.9.0](https://github.com/tractr/stack/compare/pwa-1.8.0...pwa-1.9.0) (2021-07-14)
+
+
+### Features
+
+* Missing form field ([#185](https://github.com/tractr/stack/issues/185)) ([e2a1c49](https://github.com/tractr/stack/commit/e2a1c49bc2c9548ef8be719f212fa0159c5bcc01))
+
+
+
 # [1.8.0](https://github.com/tractr/stack/compare/pwa-1.7.1...pwa-1.8.0) (2021-07-13)
 
 

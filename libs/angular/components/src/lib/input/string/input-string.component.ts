@@ -16,8 +16,10 @@ export class InputStringComponent extends InputBaseComponent<string> {
   @Input() autocomplete: 'on' | 'off' = 'off';
 
   /** Input's placeholder */
-  @Input() placeholder: string | null = null;
+  @Input() placeholder = '';
 
   /** Ant input's size */
   @Input() size: NzSizeLDSType = 'default';
+
+  passwordVisible = false;
 }

@@ -16,6 +16,8 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 export abstract class DatePickerBaseComponent implements OnInit, OnDestroy {
   protected unsubscribe$: Subject<void> = new Subject<void>();
 
+  @Input() placeholder = '';
+
   @Input() delayed = 200;
 
   /** Value */
