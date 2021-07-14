@@ -22,6 +22,7 @@ import { rolePermissions } from '@generated/casl';
 import { User } from '@generated/models';
 import {
   AngularAuthenticationModule,
+  AngularAuthenticationPasswordRoutingModule,
   AngularAuthenticationRoutingModule,
 } from '@tractr/angular-authentication';
 import { AngularCaslModule } from '@tractr/angular-casl';
@@ -72,8 +73,9 @@ import { AngularToolsModule } from '@tractr/angular-tools';
       }),
       deps: [ANGULAR_CONFIG_SERVICE],
     }),
-    NzIconModule.forRoot([EyeInvisibleOutline, PlusOutline]),
+    AngularAuthenticationPasswordRoutingModule,
     AngularConfigModule.forRoot(),
+    NzIconModule.forRoot([EyeInvisibleOutline, PlusOutline]),
     AngularRextModule.forRootAsync({
       useFactory: (_, appConfigService: AngularConfigService<AppConfig>) => ({
         api: {

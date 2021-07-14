@@ -17,7 +17,7 @@ export class PasswordService {
     private options: AuthenticationOptions,
     private http: HttpClient,
   ) {
-    // this.resetUrl = `${this.options.api.url}/${this.options.password.reset.url}`;
+    this.resetUrl = `${this.options.api.url}/${this.options.password.reset.url}`;
   }
 
   /** Send request to API for a new password token */

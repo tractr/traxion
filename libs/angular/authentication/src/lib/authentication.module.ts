@@ -1,6 +1,13 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
-import { LoginComponent, LogoutComponent } from './components';
+import {
+  LoginComponent,
+  LogoutComponent,
+  LostPasswordComponent,
+  LostPasswordPageComponent,
+  ResetPasswordComponent,
+  ResetPasswordPageComponent,
+} from './components';
 import {
   AUTH_DEFAULT_OPTIONS,
   AUTH_OPTIONS,
@@ -28,6 +35,10 @@ import {
     LoginComponent,
     ConnectedDirective,
     NotConnectedDirective,
+    LostPasswordComponent,
+    LostPasswordPageComponent,
+    ResetPasswordComponent,
+    ResetPasswordPageComponent,
   ],
   providers: [
     IsLoggedGuard,
@@ -43,6 +54,10 @@ import {
     LoginComponent,
     ConnectedDirective,
     NotConnectedDirective,
+    LostPasswordComponent,
+    LostPasswordPageComponent,
+    ResetPasswordComponent,
+    ResetPasswordPageComponent,
   ],
 })
 export class AngularAuthenticationModule extends ModuleOptionsFactory<
