@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.1](https://github.com/tractr/stack/compare/angular-file-storage-0.1.0...angular-file-storage-0.1.1) (2021-07-14)
+
+
+
 # 0.1.0 (2021-07-13)
 
 
