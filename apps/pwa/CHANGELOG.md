@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.9.1](https://github.com/tractr/stack/compare/pwa-1.9.0...pwa-1.9.1) (2021-07-14)
+
+
+
 # [1.9.0](https://github.com/tractr/stack/compare/pwa-1.8.0...pwa-1.9.0) (2021-07-14)
 
 
