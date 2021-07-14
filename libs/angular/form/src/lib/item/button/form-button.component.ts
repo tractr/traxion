@@ -15,4 +15,6 @@ export class FormButtonComponent {
   @Input() type: NzButtonType = 'primary';
 
   @Input() size: NzButtonSize = 'default';
+
+  @Input() loading = false;
 }

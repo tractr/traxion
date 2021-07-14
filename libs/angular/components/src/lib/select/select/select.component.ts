@@ -9,6 +9,8 @@ import { SelectBaseComponent } from '../select-base.component';
   styleUrls: ['./select.component.less'],
 })
 export class SelectComponent extends SelectBaseComponent implements OnInit {
+  @Input() placeholder = '';
+
   /** Multiple */
   private multipleState = false;
 

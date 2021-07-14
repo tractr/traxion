@@ -8,4 +8,6 @@ import { FormItemBaseComponent } from '../base/form-item-base.component';
 })
 export abstract class FormDatePickerBaseComponent extends FormItemBaseComponent<Date> {
   @Input() delayed = 200;
+
+  @Input() placeholder = '';
 }
