@@ -27,6 +27,9 @@
     "angular-components": {
       "tags": ["scope:angular"]
     },
+    "angular-config": {
+      "tags": []
+    },
     "angular-file-storage": {
       "tags": []
     },

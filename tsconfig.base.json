@@ -23,6 +23,7 @@
         "libs/angular/authentication/src/index.ts"
       ],
       "@tractr/angular-components": ["libs/angular/components/src/index.ts"],
+      "@tractr/angular-config": ["libs/angular/config/src/index.ts"],
       "@tractr/angular-file-storage": [
         "libs/angular/file-storage/src/index.ts"
       ],
