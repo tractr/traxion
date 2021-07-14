@@ -10,4 +10,6 @@ export abstract class FormInputBaseComponent<
   Type extends string | number,
 > extends FormItemBaseComponent<Type> {
   @Input() delayed = 200;
+
+  @Input() placeholder = '';
 }
