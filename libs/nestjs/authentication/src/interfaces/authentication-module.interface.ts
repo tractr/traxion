@@ -10,8 +10,18 @@ export interface AuthenticationOptions {
   login: {
     saltRounds?: number;
   };
+  user: {
+    idField: keyof User;
+    nameField: keyof User;
+  };
   password: {
-    resetCodeLength?: number;
+    reset: {
+      link: string;
+      subject: string;
+      codeField: keyof User;
+      codeLength?: number;
+      template?: number;
+    };
   };
   cookies: {
     cookieName: string;
@@ -21,11 +31,14 @@ export interface AuthenticationOptions {
   strategy: {
     jwt: StrategyOptions;
     local: IStrategyOptionsWithRequest & {
-      idField: keyof User;
       usernameField: keyof User;
       passwordField: keyof User;
     };
   };
   jwtModuleOptions: JwtModuleOptions;
   passportModuleOptions: IAuthModuleOptions;
+  mailer: {
+    from: string;
+    name?: string;
+  };
 }

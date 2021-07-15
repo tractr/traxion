@@ -29,8 +29,8 @@ export class MailerService {
 
   private connectToMailjetApi(): void {
     this.mailjetClient = mailjet.connect(
-      this.mailerOptions.publicApiKey,
-      this.mailerOptions.privateApiKey,
+      process.env.MJ_APIKEY_PUBLIC || '',
+      process.env.MJ_APIKEY_PRIVATE || '',
     );
   }
 }

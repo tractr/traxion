@@ -20,6 +20,7 @@ import {
   ModuleOptionsFactory,
   ModuleOverrideMetadata,
 } from '@tractr/nestjs-core';
+import { MailerModule } from '@tractr/nestjs-mailer';
 
 @Module({})
 export class AuthenticationModule extends ModuleOptionsFactory<AuthenticationOptions>(
@@ -84,6 +85,7 @@ export class AuthenticationModule extends ModuleOptionsFactory<AuthenticationOpt
           inject: [AUTHENTICATION_MODULE_OPTIONS],
         }),
         UserModelModule.register(overrides),
+        MailerModule.register(),
       ],
       exports: [
         ...(authenticationOptionsModule.exports ?? []),

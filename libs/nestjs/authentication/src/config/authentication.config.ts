@@ -16,8 +16,17 @@ export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
   login: {
     saltRounds: 10,
   },
+  user: {
+    idField: 'id',
+    nameField: 'name',
+  },
   password: {
-    resetCodeLength: 126,
+    reset: {
+      codeField: 'resetCode',
+      codeLength: 126,
+      subject: 'Lost password subject',
+      link: 'http://localhost:4200/password/reset/{{id}}/{{code}}',
+    },
   },
   cookies: {
     cookieName: AUTHENTICATION_COOKIE_NAME,
@@ -38,7 +47,6 @@ export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
     },
     local: {
       passReqToCallback: true,
-      idField: 'id',
       usernameField: 'email',
       passwordField: 'password',
     },
@@ -48,6 +56,10 @@ export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
   },
   passportModuleOptions: {
     defaultStrategy: 'jwt',
+  },
+  mailer: {
+    from: 'glenn@tractr.net',
+    name: 'Tractr',
   },
 };
 
