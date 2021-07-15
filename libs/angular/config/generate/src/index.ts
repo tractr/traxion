@@ -1,3 +1,5 @@
+#!/usr/bin/node
+
 import { createAppConfigEnvFile } from './build-app-config';
 
 const filePath = process.argv.slice(2)[0];
