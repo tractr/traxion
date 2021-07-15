@@ -1,11 +1,5 @@
-import {
-  AbilityBuilder,
-  AbilityClass,
-  ExtractSubjectType,
-  InferSubjects,
-} from '@casl/ability';
-import { PrismaAbility } from '@casl/prisma';
-import { Injectable } from '@nestjs/common';
+import { PrismaAbility, Subjects as CaslPrismaSubjects } from '@casl/prisma';
+ 
 import { 
   <<for Models model>>
   <<model pascal>>,
@@ -13,11 +7,16 @@ import {
   UserRoles
 } from '@prisma/client';
  
-export type PrismaSubjects = Subjects<{
+import { CaslUserRoles } from '@tractr/nestjs-casl';
+ 
+import { DefinePermissions } from '@tractr/nestjs-casl';
+ 
+export type Subjects = CaslPrismaSubjects<{
     <<for Models model>>
   <<model pascal>>: <<model pascal>>,
     <<endfor>>
->;
+  all: 'all'
+}>;
  
 export type Actions =
   | 'count'
@@ -28,12 +27,14 @@ export type Actions =
   | 'remove'
   | 'manage';
  
-export type AppAbility = PrismaAbility<[Actions, PrismaSubjects]>;
+export type AppAbility = PrismaAbility<[Actions, Subjects]>;
  
-export type DefinePermissions = (user: User, builder: AbilityBuilder<AppAbility>) => void;
-type Roles =  UserRoles |'user' | 'admin' | 'guest';
+type Roles =  UserRoles | CaslUserRoles;
  
-export const rolePermissions: Record<Roles, DefinePermissions> = {
+export const rolePermissions: Record<
+  Roles,
+  DefinePermissions<User, AppAbility>
+> = {
   guest(_user, { can }) {
     <<for Models model>>
       <<for model.accesses.guest access>>
@@ -56,36 +57,7 @@ export const rolePermissions: Record<Roles, DefinePermissions> = {
     <<endfor>>
   },
   admin(_user, { can }) {
-    can('manage', 'all', { roles: { has: UserRoles.admin } });
+    can('manage', 'all');
   }
 };
-
-
-
-@Injectable()
-export class CaslAbilityFactoryService {
-  createForUser(user: User) {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-    const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
-    const { can, build } = new AbilityBuilder(AppAbility);
-
-    user.roles.forEach((user) => {
-      if (!rolePermissions.)
-    })
-
-    if (user) {
-      if (user.roles.includes(UserRoles.admin)) {
-      }
-      // user is connected
-    } else {
-      // user is guest
-
-    }
-
-    return build({
-      // Read https://casl.js.org/v5/en/guide/subject-type-detection#use-classes-as-subject-types for details
-      detectSubjectType: (item) =>
-        item.constructor as ExtractSubjectType<PrismaSubjects>,
-    });
-  }
-}
+ 

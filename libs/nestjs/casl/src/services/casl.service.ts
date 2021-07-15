@@ -1,57 +1,31 @@
-import {
-  AbilityBuilder,
-  AbilityClass,
-  ExtractSubjectType,
-  InferSubjects,
-} from '@casl/ability';
+import { AbilityBuilder } from '@casl/ability';
 import { PrismaAbility } from '@casl/prisma';
-import { Injectable } from '@nestjs/common';
-import { UserRoles } from '@prisma/client';
+import { Inject, Injectable } from '@nestjs/common';
 
-import {
-  Answer,
-  Message,
-  OpenQuestion,
-  Question,
-  Tag,
-  User,
-  Variable,
-} from '@generated/models';
-
-type Subjects =
-  | InferSubjects<
-      | typeof User
-      | typeof Answer
-      | typeof Message
-      | typeof OpenQuestion
-      | typeof Question
-      | typeof Tag
-      | typeof Variable
-    >
-  | 'all';
-type Actions = 'count' | 'create' | 'read' | 'update' | 'delete' | 'manage';
-
-export type AppAbility = PrismaAbility<[Actions, Subjects]>;
+import { CASL_MODULE_OPTIONS } from '../casl.constant';
+import { CaslOptions, CaslUser } from '../interfaces';
 
 @Injectable()
-export class CaslAbilityFactory {
-  createForUser(user: User) {
+export class CaslAbilityFactoryService {
+  constructor(
+    @Inject(CASL_MODULE_OPTIONS)
+    private readonly caslOptions: CaslOptions,
+  ) {}
+
+  createForUser<U extends CaslUser>(user: U) {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-    const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
-    const { can, build } = new AbilityBuilder(AppAbility);
+    const AppAbility = PrismaAbility;
+    const builder = new AbilityBuilder(AppAbility);
 
-    if (user) {
-      // user is connected
-      if (user.roles.includes(UserRoles.admin)) {
-      }
-    } else {
-      // user is guest
-    }
+    const { rolePermissions } = this.caslOptions;
 
-    return build({
-      // Read https://casl.js.org/v5/en/guide/subject-type-detection#use-classes-as-subject-types for details
-      detectSubjectType: (item) =>
-        item.constructor as ExtractSubjectType<Subjects>,
+    user.roles.forEach((role) => {
+      if (!rolePermissions[role])
+        return console.warn(`role ${role} has no app permission`);
+
+      return rolePermissions[role](user, builder);
     });
+
+    return builder.build();
   }
 }

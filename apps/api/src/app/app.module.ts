@@ -5,11 +5,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { User } from '@generated/models';
+import { rolePermissions } from '@generated/nestjs-casl';
 import { ModelsModule } from '@generated/nestjs-models';
 import {
   AuthenticationModule,
   JwtGlobalAuthGuard,
 } from '@tractr/nestjs-authentication';
+import { CaslModule } from '@tractr/nestjs-casl';
 import { DatabaseModule } from '@tractr/nestjs-database';
 import { MailerModule } from '@tractr/nestjs-mailer';
 
@@ -32,6 +34,9 @@ import { MailerModule } from '@tractr/nestjs-mailer';
         privateApiKey: 'test',
         publicApiKey: 'test',
       }),
+    }),
+    CaslModule.register({
+      rolePermissions,
     }),
   ],
   controllers: [AppController],
