@@ -1554,16 +1554,6 @@
             }
           },
           "defaultConfiguration": "production",
-          "dependsOn": [
-            {
-              "projects": "self",
-              "target": "prebuild"
-            },
-            {
-              "projects": "dependencies",
-              "target": "build"
-            }
-          ],
           "executor": "@angular-devkit/build-angular:browser",
           "options": {
             "assets": [
@@ -1604,7 +1594,7 @@
             ]
           }
         },
-        "prebuild": {
+        "preserve": {
           "configurations": {
             "development": {},
             "production": {}
@@ -1612,8 +1602,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "npx nx run angular-config:build",
-              "node ./dist/libs/angular/config/bundles/tractr-angular-config-generate.umd.js ./apps/pwa/src/assets/app-config.json"
+              "node ./libs/angular/config/generate.js ./apps/pwa/src/assets/app-config.json"
             ],
             "parallel": false
           }
@@ -1637,7 +1626,7 @@
           "dependsOn": [
             {
               "projects": "self",
-              "target": "prebuild"
+              "target": "preserve"
             }
           ],
           "executor": "@angular-devkit/build-angular:dev-server",
