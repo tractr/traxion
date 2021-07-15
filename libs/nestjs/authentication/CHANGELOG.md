@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.14.2](https://github.com/tractr/stack/compare/nestjs-authentication-1.14.1...nestjs-authentication-1.14.2) (2021-07-15)
+
+
+### Bug Fixes
+
+* angular config build correctly ([#190](https://github.com/tractr/stack/issues/190)) ([bd8265b](https://github.com/tractr/stack/commit/bd8265bbf6f02c76e3f94242dce9b18cf5cd3653))
+
+
+
 ## [1.14.1](https://github.com/tractr/stack/compare/nestjs-authentication-1.14.0...nestjs-authentication-1.14.1) (2021-07-14)
 
 
