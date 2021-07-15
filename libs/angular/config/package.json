@@ -7,7 +7,7 @@
   },
   "license": "UNLICENSED",
   "bin": {
-    "tractr-angular-config-generate": "./bundles/tractr-angular-config-generate.umd.js"
+    "tractr-angular-config-generate": "./generate.js"
   },
   "dependencies": {
     "tslib": "^2.3.0"

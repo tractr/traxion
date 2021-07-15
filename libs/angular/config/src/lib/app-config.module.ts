@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
@@ -7,9 +6,7 @@ import { APP_DEFAULTS_OPTIONS } from './configs';
 import { AppConfigOptions } from './interfaces';
 import { appConfigServiceFactory } from './services';
 
-@NgModule({
-  imports: [CommonModule],
-})
+@NgModule({})
 export class AppConfigModule {
   static forRoot(options?: Partial<AppConfigOptions>) {
     return {
