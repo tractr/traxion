@@ -40,7 +40,7 @@ export class IsLoggedGuard implements CanActivate {
         this.sessionService.setPathAfterLogin(state);
         return this.router.createUrlTree([
           ...this.options.routing.prefix,
-          this.options.login.url,
+          this.options.login.routing,
         ]);
       }),
     );
