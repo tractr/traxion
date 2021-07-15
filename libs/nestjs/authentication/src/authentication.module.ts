@@ -33,7 +33,8 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
       controllers,
       dependencies,
       ...options
-    }: AuthenticationOptions & ModuleOverrideMetadata = AUTHENTICATION_OPTIONS,
+    }: Partial<AuthenticationOptions> &
+      ModuleOverrideMetadata = AUTHENTICATION_OPTIONS,
     overrides: ModuleOverrideMetadata = {},
   ): DynamicModule {
     const moduleOptions = {
