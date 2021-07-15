@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.4.0](https://github.com/tractr/stack/compare/angular-authentication-0.3.0...angular-authentication-0.4.0) (2021-07-15)
+
+
+### Features
+
+* **angular-authentication:** fix guard redirect ([#189](https://github.com/tractr/stack/issues/189)) ([346455e](https://github.com/tractr/stack/commit/346455e064eeaff6c536a672fa60179897dab91f))
+
+
+
 # [0.3.0](https://github.com/tractr/stack/compare/angular-authentication-0.2.1...angular-authentication-0.3.0) (2021-07-13)
 
 
