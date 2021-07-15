@@ -268,6 +268,26 @@
       "input": "one"
     },
     {
+      "path": "generated/nestjs-casl/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/nestjs-casl/src/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/nestjs-casl/src/services/index.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
+      "path": "generated/nestjs-casl/src/services/casl-ability-factory.service.ts",
+      "engine": "hpf",
+      "input": "all"
+    },
+    {
       "path": "generated/rest-dtos/index.ts",
       "engine": "hpf",
       "input": "all"

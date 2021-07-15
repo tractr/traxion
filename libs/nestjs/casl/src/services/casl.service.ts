@@ -2,9 +2,12 @@ import {
   AbilityBuilder,
   AbilityClass,
   ExtractSubjectType,
+  InferSubjects,
 } from '@casl/ability';
-import { PrismaAbility, Subjects } from '@casl/prisma';
+import { PrismaAbility } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { UserRoles } from '@prisma/client';
+
 import {
   Answer,
   Message,
@@ -12,45 +15,39 @@ import {
   Question,
   Tag,
   User,
-  UserRoles,
   Variable,
-} from '@prisma/client';
+} from '@generated/models';
 
-type Actions = 'create' | 'read' | 'update' | 'delete' | 'manage';
+type Subjects =
+  | InferSubjects<
+      | typeof User
+      | typeof Answer
+      | typeof Message
+      | typeof OpenQuestion
+      | typeof Question
+      | typeof Tag
+      | typeof Variable
+    >
+  | 'all';
+type Actions = 'count' | 'create' | 'read' | 'update' | 'delete' | 'manage';
 
-export type AppAbility = PrismaAbility<
-  [
-    Actions,
-    Subjects<{
-      User: User;
-      Answer: Answer;
-      Message: Message;
-      OpenQuestion: OpenQuestion;
-      Question: Question;
-      Tag: Tag;
-      Variable: Variable;
-    }>,
-  ]
->;
+export type AppAbility = PrismaAbility<[Actions, Subjects]>;
 
 @Injectable()
 export class CaslAbilityFactory {
   createForUser(user: User) {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
-    const { can, cannot, build } = new AbilityBuilder(AppAbility);
-    const ability = build();
+    const { can, build } = new AbilityBuilder(AppAbility);
 
-    can('manage', 'User', { roles: { in: [UserRoles.admin] } });
-
-    if (user.roles.includes('admin')) {
-      can('manage', 'User', 'all');
+    if (user) {
+      // user is connected
+      if (user.roles.includes(UserRoles.admin)) {
+      }
     } else {
-      // can(Abilities., 'User', { id: user.id });
-      can('', 'User', { id: user.id });
-      can('read', 'User', { id: user.id });
-      can('read', 'User', { id: user.id });
+      // user is guest
     }
+
     return build({
       // Read https://casl.js.org/v5/en/guide/subject-type-detection#use-classes-as-subject-types for details
       detectSubjectType: (item) =>

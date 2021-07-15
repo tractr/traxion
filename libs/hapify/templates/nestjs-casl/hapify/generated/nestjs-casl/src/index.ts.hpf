@@ -1,0 +1,10 @@
+import { Module } from '@nestjs/common';
+ 
+import { CaslAbilityFactoryService } from './services';
+ 
+@Module({
+  providers: [CaslAbilityFactoryService],
+  exports: [CaslAbilityFactoryService],
+})
+export class CaslModule {}
+ 

@@ -14,6 +14,7 @@ module.exports = {
   extends: [
     '../hapify/templates/models',
     '../hapify/templates/rest-dtos',
+    '../hapify/templates/nestjs-casl',
     '../hapify/templates/nestjs-models',
     '../hapify/templates/nestjs-models-common',
     '../hapify/templates/nestjs-models-rest',
