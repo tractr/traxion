@@ -26,7 +26,7 @@ export class PasswordService {
     private readonly authenticationService: AuthenticationService,
     @Inject(USER_SERVICE)
     private readonly userService: UserService,
-    private mailerService: MailerService,
+    private readonly mailerService: MailerService,
   ) {}
 
   async requestReset(email: string): Promise<void> {

@@ -12,8 +12,6 @@ export class FormInputStringComponent
   extends FormInputBaseComponent<string>
   implements OnInit
 {
-  @Input() placeholder: string | null = null;
-
   inputType: 'text' | 'email' | 'password' = 'text';
 
   @Input() autocomplete?: 'on' | 'off';
