@@ -29,16 +29,14 @@ export class ResetPasswordPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.route.queryParams
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((params) => {
-        if (params.id && params.code) {
-          this.params = {
-            id: params.id,
-            code: params.code,
-          };
-        }
-      });
+    this.route.params.pipe(takeUntil(this.unsubscribe$)).subscribe((params) => {
+      if (params.id && params.code) {
+        this.params = {
+          id: params.id,
+          code: params.code,
+        };
+      }
+    });
   }
 
   ngOnDestroy() {

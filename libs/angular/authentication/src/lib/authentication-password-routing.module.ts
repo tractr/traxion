@@ -7,14 +7,14 @@ import { PasswordService } from './services';
 
 const routes: Routes = [
   {
-    path: 'lost-password',
+    path: 'password/lost',
     component: LostPasswordPageComponent,
     data: {
       title: 'Lost password',
     },
   },
   {
-    path: 'reset-password',
+    path: 'password/reset/:id/:code',
     component: ResetPasswordPageComponent,
     data: {
       title: 'Reset password',

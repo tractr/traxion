@@ -7,11 +7,12 @@ import {
   USER_SERVICE,
   UserService,
 } from '../../generated/nestjs-models-common';
+import { User } from '../../prisma/client';
 import {
   AUTHENTICATION_MODULE_OPTIONS,
   DEFAULT_RESET_HTML,
 } from '../constants';
-import { UserNotFoundError } from '../errors';
+import { BadResetCodeError, UserNotFoundError } from '../errors';
 import { AuthenticationOptions } from '../interfaces';
 import { AuthenticationService } from './authentication.service';
 
@@ -30,7 +31,7 @@ export class PasswordService {
 
   async requestReset(email: string): Promise<void> {
     const idField = this.authenticationOptions.user.idField ?? 'id';
-    const nameField = this.authenticationOptions.user.nameField ?? 'name';
+    const nameField = this.authenticationOptions.user.nameField ?? 'email';
     const resetCodeField =
       this.authenticationOptions.password.reset.codeField ?? 'resetCode';
 
@@ -96,9 +97,50 @@ export class PasswordService {
     return Crypto.randomBytes(Math.floor(length / 2)).toString('hex');
   }
 
-  async reset(id: string, code: string, password: string): Promise<void> {
-    // Find user code in database
-    // Check if the codes match (If not return unauthorized)
+  async reset(
+    userId: string,
+    resetCode: string,
+    password: string,
+  ): Promise<void> {
+    const idField = this.authenticationOptions.user.idField ?? 'id';
+    const resetCodeField =
+      this.authenticationOptions.password.reset.codeField ?? 'resetCode';
+    const passwordField =
+      this.authenticationOptions.user.passwordField ?? 'password';
+
+    // Get user
+    const user = await this.findUserById(userId, { [resetCodeField]: true });
+    if (!user) throw new UserNotFoundError();
+
+    // Check if the reset code match
+    if (resetCode !== user?.[resetCodeField]) throw new BadResetCodeError();
+
     // Hash and set the password
+    const passwordHashed = await this.authenticationService.hashPassword(
+      password,
+    );
+    await this.userService.update({
+      where: {
+        [idField]: userId,
+      },
+      data: {
+        [passwordField]: passwordHashed,
+        [resetCodeField]: null,
+      },
+    });
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  findUserById(id: string, select?: any): Promise<User | null> {
+    const idField = this.authenticationOptions.user.idField ?? 'id';
+
+    const findOneWhere = {
+      [idField]: id,
+    };
+
+    return this.userService.findUnique({
+      where: findOneWhere,
+      ...(select ? { select } : {}),
+    });
   }
 }

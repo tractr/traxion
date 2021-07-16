@@ -18,7 +18,8 @@ export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
   },
   user: {
     idField: 'id',
-    nameField: 'name',
+    nameField: 'email',
+    passwordField: 'password',
   },
   password: {
     reset: {

@@ -32,7 +32,7 @@ export class PasswordService {
     newPassword: string,
   ): Promise<void> {
     const body = {
-      _id: userId,
+      id: userId,
       code: resetCode,
       password: newPassword,
     };

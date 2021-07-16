@@ -13,6 +13,7 @@ export interface AuthenticationOptions {
   user: {
     idField: keyof User;
     nameField: keyof User;
+    passwordField: keyof User;
   };
   password: {
     reset: {
