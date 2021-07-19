@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.1](https://github.com/tractr/stack/compare/common-0.1.0...common-0.1.1) (2021-07-19)
+
+
+### Bug Fixes
+
+* update packages to get a module options factory that can set defaults & validate front & back ([#192](https://github.com/tractr/stack/issues/192)) ([3975d36](https://github.com/tractr/stack/commit/3975d3690f82221ce1f207acff0ae3f63346eca5))
+
+
+
 # [0.1.0](https://github.com/tractr/stack/compare/common-0.0.2...common-0.1.0) (2021-07-13)
 
 
