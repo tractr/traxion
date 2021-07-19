@@ -24,10 +24,11 @@ RUN --mount=type=secret,id=npmrc,target=/root/.npmrc \
 # ---- Build ----
 FROM dev-dependencies AS build
 RUN npm run nx -- run ${app}:build --prod
+RUN rm -f /root/tractr/dist/apps/${app}/assets/app-config.json
 
 #
 # ---- Release ----
-FROM nginx:stable-alpine AS angular-prod
+FROM tractr/nginx-generated-envs:1.20-alpine AS angular-prod
 ARG app
 
 ## Copy our default nginx config

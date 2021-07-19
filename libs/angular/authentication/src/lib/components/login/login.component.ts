@@ -6,7 +6,7 @@ import {
   AUTH_OPTIONS,
   AuthenticationOptions,
   SESSION_SERVICE,
-} from '../../authentication.config';
+} from '../../configs/authentication.config';
 import { SessionService } from '../../interfaces';
 
 import { ErrorService } from '@tractr/angular-tools';

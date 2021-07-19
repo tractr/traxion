@@ -4,7 +4,6 @@ import {
   SESSION_SERVICE,
   SessionService,
 } from '@tractr/angular-authentication';
-import { APP_CONFIG_SERVICE, AppConfigService } from '@tractr/angular-config';
 
 @Component({
   selector: 'stack-tractr-molecule-home',
@@ -15,8 +14,6 @@ export class MoleculeHomeComponent implements OnInit {
   isLogged = false;
 
   constructor(
-    @Inject(APP_CONFIG_SERVICE)
-    readonly configService: AppConfigService,
     @Inject(SESSION_SERVICE)
     readonly sessionService: SessionService,
   ) {}

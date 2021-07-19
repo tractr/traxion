@@ -5,7 +5,7 @@ import {
   HttpClient,
   HttpClientModule,
 } from '@angular/common/http';
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,8 +16,9 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 
-import { AngularToolsForRootInterface } from './angular-tools-for-root.interface';
-import { AngularToolsInjectionKeysEnum } from './angular-tools-injection-keys.enum';
+import { ANGULAR_TOOLS_MODULE } from './angular-tools.constant';
+import { ModuleOptionsFactory } from './helpers';
+import { AngularToolsOptions } from './interfaces';
 import {
   MaxPipe,
   MinPipe,
@@ -96,18 +97,6 @@ import { HttpLoaderFactory } from './translate-import';
     NzMessageModule,
   ],
 })
-export class AngularToolsModule {
-  public static forRoot(
-    params: AngularToolsForRootInterface,
-  ): ModuleWithProviders<AngularToolsModule> {
-    return {
-      ngModule: AngularToolsModule,
-      providers: [
-        {
-          provide: AngularToolsInjectionKeysEnum.ENVIRONMENT,
-          useValue: params.environment,
-        },
-      ],
-    };
-  }
-}
+export class AngularToolsModule extends ModuleOptionsFactory<AngularToolsOptions>(
+  ANGULAR_TOOLS_MODULE,
+) {}

@@ -1556,11 +1556,11 @@
           "defaultConfiguration": "production",
           "executor": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["validator", "@generated"],
             "assets": [
               "apps/pwa/src/favicon.ico",
               {
                 "glob": "**/*",
-                "ignore": ["**/app-config.json"],
                 "input": "apps/pwa/src/assets",
                 "output": "/assets"
               }

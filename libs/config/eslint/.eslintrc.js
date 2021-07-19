@@ -83,6 +83,7 @@ module.exports = {
         ignoreDeclarationSort: true,
       },
     ],
+    'import/no-cycle': [2, { ignoreExternal: true, maxDepth: 3 }],
     'import/no-extraneous-dependencies': [
       'error',
       { devDependencies: true, packageDir: [process.cwd()] },

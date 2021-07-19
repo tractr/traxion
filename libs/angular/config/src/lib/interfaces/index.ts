@@ -1,3 +1,3 @@
-export * from './app-config-options';
-export * from './app-config-service';
-export * from './app-config';
+export * from './angular-config-options';
+export * from './angular-config-service';
+export * from './angular-config';
