@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.14.3](https://github.com/tractr/stack/compare/nestjs-authentication-1.14.2...nestjs-authentication-1.14.3) (2021-07-19)
+
+
+### Bug Fixes
+
+* update packages to get a module options factory that can set defaults & validate front & back ([#192](https://github.com/tractr/stack/issues/192)) ([3975d36](https://github.com/tractr/stack/commit/3975d3690f82221ce1f207acff0ae3f63346eca5))
+
+
+
 ## [1.14.2](https://github.com/tractr/stack/compare/nestjs-authentication-1.14.1...nestjs-authentication-1.14.2) (2021-07-15)
 
 
