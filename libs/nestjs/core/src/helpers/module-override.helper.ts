@@ -6,9 +6,9 @@ import {
 } from '@nestjs/common';
 
 import { ModuleOverrideMetadata } from '../interfaces';
-import { isClass } from './is-class.helper';
 import { getMetadataFromModule } from './module-metadata.helper';
-import { uniqueConcat } from './unique-array.helper';
+
+import { isClass, uniqueConcat } from '@tractr/common';
 
 export class ModuleOverride implements ModuleOverrideMetadata {
   static imports?: ModuleMetadata['imports'];

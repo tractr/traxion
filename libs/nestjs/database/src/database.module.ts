@@ -9,7 +9,7 @@ import {
   PrismaClientOptions,
 } from './services';
 
-import { LoggerModule, ModuleOptionsHelper } from '@tractr/nestjs-core';
+import { LoggerModule, ModuleOptionsFactory } from '@tractr/nestjs-core';
 
 @Global()
 @Module({
@@ -17,7 +17,7 @@ import { LoggerModule, ModuleOptionsHelper } from '@tractr/nestjs-core';
   providers: [DatabaseService, MysqlService, PostgresqlService],
   exports: [DatabaseService, MysqlService, PostgresqlService],
 })
-export class DatabaseModule extends ModuleOptionsHelper<PrismaClientOptions>(
+export class DatabaseModule extends ModuleOptionsFactory<PrismaClientOptions>(
   PRISMA_MODULE_OPTIONS,
   PRISMA_OPTIONS,
 ) {}

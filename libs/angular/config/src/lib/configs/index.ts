@@ -1,1 +1,1 @@
-export * from './app-defaults.config';
+export * from './angular-defaults.config';

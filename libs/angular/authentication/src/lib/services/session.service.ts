@@ -11,7 +11,7 @@ import {
   tap,
 } from 'rxjs/operators';
 
-import { AuthenticationOptions } from '../authentication.config';
+import { AuthenticationOptions } from '../configs/authentication.config';
 import { User } from '../generated/models';
 import { SessionService, SessionServiceClass } from '../interfaces';
 
@@ -60,6 +60,7 @@ export function SessionServiceFactory<
       }),
       catchError((err) => {
         if (err && err.status === 401) return of(null);
+        console.error('here2', err);
         throw err;
       }),
       shareReplay(1),

@@ -1,1 +1,1 @@
-export * from './app-config.service';
+export * from './angular-config.service';

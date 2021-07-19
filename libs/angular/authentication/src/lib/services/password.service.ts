@@ -2,7 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 
-import { AUTH_OPTIONS, AuthenticationOptions } from '../authentication.config';
+import {
+  AUTH_OPTIONS,
+  AuthenticationOptions,
+} from '../configs/authentication.config';
 
 @Injectable()
 export class PasswordService {

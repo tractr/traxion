@@ -1,13 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { HttpClientModule } from '@angular/common/http';
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { FILE_STORAGE_CONFIGURATION } from './constants';
 import { FileStorageConfigurationDto } from './dtos';
 import { FileStorageConfiguration } from './interfaces';
 import { FileStorageService } from './services';
 
+import { ModuleOptionsFactory } from '@tractr/angular-tools';
 import { transformAndValidate } from '@tractr/common';
 
 @NgModule({
@@ -16,22 +17,7 @@ import { transformAndValidate } from '@tractr/common';
   providers: [FileStorageService],
   exports: [],
 })
-export class FileStorageModule {
-  public static forRoot(
-    configuration: FileStorageConfiguration,
-  ): ModuleWithProviders<FileStorageModule> {
-    const validatedConfiguration = transformAndValidate(
-      FileStorageConfigurationDto,
-    )(configuration);
-
-    return {
-      ngModule: FileStorageModule,
-      providers: [
-        {
-          provide: FILE_STORAGE_CONFIGURATION,
-          useValue: validatedConfiguration,
-        },
-      ],
-    };
-  }
-}
+export class FileStorageModule extends ModuleOptionsFactory<FileStorageConfiguration>(
+  FILE_STORAGE_CONFIGURATION,
+  transformAndValidate(FileStorageConfigurationDto),
+) {}
