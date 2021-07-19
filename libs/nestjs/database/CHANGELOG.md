@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.7.1](https://github.com/tractr/stack/compare/nestjs-database-1.7.0...nestjs-database-1.7.1) (2021-07-19)
+
+
+### Bug Fixes
+
+* update packages to get a module options factory that can set defaults & validate front & back ([#192](https://github.com/tractr/stack/issues/192)) ([3975d36](https://github.com/tractr/stack/commit/3975d3690f82221ce1f207acff0ae3f63346eca5))
+
+
+
 # [1.7.0](https://github.com/tractr/stack/compare/nestjs-database-1.6.0...nestjs-database-1.7.0) (2021-07-13)
 
 
