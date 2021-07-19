@@ -16,11 +16,6 @@
           "type": "string"
         },
         {
-          "name": "name",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
-        },
-        {
           "name": "email",
           "properties": ["unique", "searchable", "sortable"],
           "subtype": "email",

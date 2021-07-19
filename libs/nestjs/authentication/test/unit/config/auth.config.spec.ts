@@ -2,10 +2,8 @@ import {
   AUTHENTICATION_COOKIE_NAME,
   AUTHENTICATION_OPTIONS,
   AUTHENTICATION_QUERY_PARAM_NAME,
-  AuthenticationModuleOptionsFactory,
 } from '../../../src/config/authentication.config';
 
-import { isClass } from '@tractr/common';
 import { isDevelopment, isProduction } from '@tractr/nestjs-core';
 
 describe('User auth configurations', () => {
@@ -26,6 +24,12 @@ describe('User auth configurations', () => {
       expect(AUTHENTICATION_OPTIONS).toEqual({
         login: {
           saltRounds: 10,
+        },
+        password: {
+          reset: {
+            link: '/password/reset/{{id}}/{{code}}',
+            subject: 'Lost password',
+          },
         },
         cookies: {
           cookieName: 'authCookie',
@@ -52,13 +56,11 @@ describe('User auth configurations', () => {
         passportModuleOptions: {
           defaultStrategy: 'jwt',
         },
+        mailer: {
+          from: '',
+          name: 'Tractr',
+        },
       });
-    });
-  });
-
-  describe('AuthenticationModuleOptionsFactory', () => {
-    it('should be a class', () => {
-      expect(isClass(AuthenticationModuleOptionsFactory)).toBe(true);
     });
   });
 });

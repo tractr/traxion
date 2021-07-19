@@ -1,6 +1,5 @@
-import * as Crypto from 'crypto';
-
 import { Inject, Injectable } from '@nestjs/common';
+import { JwtService, JwtSignOptions, JwtVerifyOptions } from '@nestjs/jwt';
 import * as mailjet from 'node-mailjet';
 
 import {
@@ -21,69 +20,52 @@ import { MailerService } from '@tractr/nestjs-mailer';
 @Injectable()
 export class PasswordService {
   constructor(
+    @Inject(USER_SERVICE)
+    private readonly userService: UserService,
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
     private readonly authenticationOptions: AuthenticationOptions,
     private readonly authenticationService: AuthenticationService,
-    @Inject(USER_SERVICE)
-    private readonly userService: UserService,
+    private readonly jwtService: JwtService,
     private readonly mailerService: MailerService,
   ) {}
 
   async requestReset(email: string): Promise<void> {
-    const idField = this.authenticationOptions.user.idField ?? 'id';
-    const nameField = this.authenticationOptions.user.nameField ?? 'email';
-    const resetCodeField =
-      this.authenticationOptions.password.reset.codeField ?? 'resetCode';
-
     // Get user from email
-    const user = await this.authenticationService.findUserByLogin(email, {
-      [idField]: true,
-      [nameField]: true,
-    });
-
-    const userId = user?.[idField];
-
-    if (!user || !userId) throw new UserNotFoundError();
-
-    // Create reset code
-    const resetCode = this.createResetCode(
-      this.authenticationOptions.password.reset.codeLength,
-    );
-
-    // Link user to token in database
-    await this.userService.update({
+    const user = await this.userService.findUnique({
       where: {
-        [idField]: user[idField],
+        email,
       },
-      data: {
-        [resetCodeField]: resetCode,
+      select: {
+        email: true,
+        password: true,
+        id: true,
       },
     });
 
-    const userName = user?.[nameField];
-    const link = this.authenticationOptions.password.reset.link
-      .replace('{{id}}', userId)
+    if (!user) throw new UserNotFoundError();
+
+    const resetCode = this.createResetCode(user);
+
+    const { link, subject, template } =
+      this.authenticationOptions.password.reset;
+    const { from, name } = this.authenticationOptions.mailer;
+
+    const linkWithCode = link
+      .replace('{{id}}', user.id)
       .replace('{{code}}', resetCode);
 
     const message: mailjet.Email.SendParamsMessage = {
       From: {
-        Email: this.authenticationOptions.mailer.from,
-        ...(this.authenticationOptions.mailer.name
-          ? { Name: this.authenticationOptions.mailer.name }
-          : {}),
+        Email: from,
+        ...(name ? { Name: name } : {}),
       },
       To: [{ Email: email }],
-      Subject: this.authenticationOptions.password.reset.subject,
-      ...(this.authenticationOptions.password.reset.template
-        ? {
-            TemplateID: this.authenticationOptions.password.reset.template,
-          }
-        : {
-            HTMLPart: DEFAULT_RESET_HTML,
-          }),
+      Subject: subject,
+      ...(template
+        ? { TemplateID: template }
+        : { HTMLPart: DEFAULT_RESET_HTML }),
       Variables: {
-        name: userName,
-        link,
+        link: linkWithCode,
       },
     };
 
@@ -93,8 +75,31 @@ export class PasswordService {
     });
   }
 
-  createResetCode(length = 128): string {
-    return Crypto.randomBytes(Math.floor(length / 2)).toString('hex');
+  getUserSecret(user: User) {
+    return `${user.id}-${user.password}-${user.email}`;
+  }
+
+  createResetCode(user: User, options: JwtSignOptions = {}): string {
+    // Maybe we could add the created at instead of email and id
+    return this.jwtService.sign(
+      { sub: user.id },
+      {
+        expiresIn: '15m',
+        ...options,
+        secret: this.getUserSecret(user),
+      },
+    );
+  }
+
+  verifyResetCode(
+    user: User,
+    resetCode: string,
+    options: JwtVerifyOptions = {},
+  ): Promise<{ sub: User['id'] }> {
+    return this.jwtService.verifyAsync(resetCode, {
+      ...options,
+      secret: this.getUserSecret(user),
+    });
   }
 
   async reset(
@@ -102,18 +107,20 @@ export class PasswordService {
     resetCode: string,
     password: string,
   ): Promise<void> {
-    const idField = this.authenticationOptions.user.idField ?? 'id';
-    const resetCodeField =
-      this.authenticationOptions.password.reset.codeField ?? 'resetCode';
-    const passwordField =
-      this.authenticationOptions.user.passwordField ?? 'password';
+    const user = await this.userService.findUnique({
+      where: {
+        id: userId,
+      },
+    });
 
-    // Get user
-    const user = await this.findUserById(userId, { [resetCodeField]: true });
     if (!user) throw new UserNotFoundError();
 
-    // Check if the reset code match
-    if (resetCode !== user?.[resetCodeField]) throw new BadResetCodeError();
+    try {
+      const payload = await this.verifyResetCode(user, resetCode);
+      if (payload.sub !== user.id) throw new Error();
+    } catch {
+      throw new BadResetCodeError();
+    }
 
     // Hash and set the password
     const passwordHashed = await this.authenticationService.hashPassword(
@@ -121,26 +128,11 @@ export class PasswordService {
     );
     await this.userService.update({
       where: {
-        [idField]: userId,
+        id: userId,
       },
       data: {
-        [passwordField]: passwordHashed,
-        [resetCodeField]: null,
+        password: passwordHashed,
       },
-    });
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  findUserById(id: string, select?: any): Promise<User | null> {
-    const idField = this.authenticationOptions.user.idField ?? 'id';
-
-    const findOneWhere = {
-      [idField]: id,
-    };
-
-    return this.userService.findUnique({
-      where: findOneWhere,
-      ...(select ? { select } : {}),
     });
   }
 }

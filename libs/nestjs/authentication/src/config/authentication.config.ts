@@ -1,32 +1,23 @@
-import { Injectable } from '@nestjs/common';
 import { ExtractJwt } from 'passport-jwt';
 
 import { fromHttpOnlySignedAndSecureCookies } from '../extractors';
 import { AuthenticationOptions } from '../interfaces';
 
-import {
-  isDevelopment,
-  isProduction,
-  OptionsFactory,
-} from '@tractr/nestjs-core';
+import { isDevelopment, isProduction } from '@tractr/nestjs-core';
 
 export const AUTHENTICATION_COOKIE_NAME = 'authCookie';
 export const AUTHENTICATION_QUERY_PARAM_NAME = 'authToken';
 export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
+  api: {
+    url: '',
+  },
   login: {
     saltRounds: 10,
   },
-  user: {
-    idField: 'id',
-    nameField: 'email',
-    passwordField: 'password',
-  },
   password: {
     reset: {
-      codeField: 'resetCode',
-      codeLength: 126,
-      subject: 'Lost password subject',
-      link: 'http://localhost:4200/password/reset/{{id}}/{{code}}',
+      subject: 'Lost password',
+      link: `/password/reset/{{id}}/{{code}}`,
     },
   },
   cookies: {
@@ -59,16 +50,7 @@ export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
     defaultStrategy: 'jwt',
   },
   mailer: {
-    from: 'glenn@tractr.net',
+    from: '',
     name: 'Tractr',
   },
 };
-
-@Injectable()
-export class AuthenticationModuleOptionsFactory
-  implements OptionsFactory<AuthenticationOptions>
-{
-  createOptions(): Promise<AuthenticationOptions> | AuthenticationOptions {
-    return AUTHENTICATION_OPTIONS;
-  }
-}

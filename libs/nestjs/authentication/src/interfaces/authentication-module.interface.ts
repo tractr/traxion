@@ -6,21 +6,17 @@ import { IStrategyOptionsWithRequest } from 'passport-local';
 
 import { User } from '../../prisma/client';
 
-export interface AuthenticationOptions {
+export type AuthenticationDefaultOptions = {
+  api: {
+    url: string;
+  };
   login: {
     saltRounds?: number;
-  };
-  user: {
-    idField: keyof User;
-    nameField: keyof User;
-    passwordField: keyof User;
   };
   password: {
     reset: {
       link: string;
       subject: string;
-      codeField: keyof User;
-      codeLength?: number;
       template?: number;
     };
   };
@@ -39,7 +35,9 @@ export interface AuthenticationOptions {
   jwtModuleOptions: JwtModuleOptions;
   passportModuleOptions: IAuthModuleOptions;
   mailer: {
-    from: string;
     name?: string;
+    from: string;
   };
-}
+};
+
+export type AuthenticationOptions = AuthenticationDefaultOptions;
