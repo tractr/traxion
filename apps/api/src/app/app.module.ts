@@ -15,7 +15,6 @@ import { CaslModule } from '@tractr/nestjs-casl';
 import { DatabaseModule } from '@tractr/nestjs-database';
 import { MailerModule } from '@tractr/nestjs-mailer';
 
-// test
 @Module({
   imports: [
     ModelsModule.register(),
@@ -27,6 +26,9 @@ import { MailerModule } from '@tractr/nestjs-mailer';
           url: '/api',
         },
         user: User,
+        mailer: {
+          from: process.env.EMAIL_FROM || '',
+        },
       }),
     }),
     MailerModule.registerAsync({

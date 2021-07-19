@@ -57,7 +57,6 @@ describe('User auth configurations', () => {
           defaultStrategy: 'jwt',
         },
         mailer: {
-          from: '',
           name: 'Tractr',
         },
       });

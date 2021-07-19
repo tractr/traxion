@@ -43,6 +43,12 @@ describe('Authentication Module (integration)', () => {
               useValue: mockUserDatabaseService as unknown,
             },
           ],
+          api: {
+            url: 'not tested yet',
+          },
+          mailer: {
+            from: 'not tested yet',
+          },
         }),
       ],
     }).compile();
@@ -53,7 +59,7 @@ describe('Authentication Module (integration)', () => {
   });
 
   afterEach(async () => {
-    await app.close();
+    if (app) await app.close();
   });
 
   describe('Authentication without registering a global auth guard', () => {

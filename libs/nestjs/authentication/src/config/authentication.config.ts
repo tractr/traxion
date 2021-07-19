@@ -1,16 +1,13 @@
 import { ExtractJwt } from 'passport-jwt';
 
 import { fromHttpOnlySignedAndSecureCookies } from '../extractors';
-import { AuthenticationOptions } from '../interfaces';
+import { AuthenticationDefaultOptions } from '../interfaces';
 
 import { isDevelopment, isProduction } from '@tractr/nestjs-core';
 
 export const AUTHENTICATION_COOKIE_NAME = 'authCookie';
 export const AUTHENTICATION_QUERY_PARAM_NAME = 'authToken';
-export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
-  api: {
-    url: '',
-  },
+export const AUTHENTICATION_OPTIONS: AuthenticationDefaultOptions = {
   login: {
     saltRounds: 10,
   },
@@ -50,7 +47,6 @@ export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
     defaultStrategy: 'jwt',
   },
   mailer: {
-    from: '',
     name: 'Tractr',
   },
 };

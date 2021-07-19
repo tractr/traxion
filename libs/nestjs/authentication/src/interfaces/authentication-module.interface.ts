@@ -7,11 +7,8 @@ import { IStrategyOptionsWithRequest } from 'passport-local';
 import { User } from '../../prisma/client';
 
 export type AuthenticationDefaultOptions = {
-  api: {
-    url: string;
-  };
   login: {
-    saltRounds?: number;
+    saltRounds: number;
   };
   password: {
     reset: {
@@ -36,8 +33,18 @@ export type AuthenticationDefaultOptions = {
   passportModuleOptions: IAuthModuleOptions;
   mailer: {
     name?: string;
-    from: string;
   };
 };
 
-export type AuthenticationOptions = AuthenticationDefaultOptions;
+export type AuthenticationPublicOptions =
+  Partial<AuthenticationDefaultOptions> & {
+    api: {
+      url: string;
+    };
+    mailer: {
+      from: string;
+    };
+  };
+
+export type AuthenticationOptions = AuthenticationDefaultOptions &
+  AuthenticationPublicOptions;

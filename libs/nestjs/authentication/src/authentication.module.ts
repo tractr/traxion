@@ -6,7 +6,11 @@ import { UserModelModule } from '../generated/nestjs-models-common';
 import { AUTHENTICATION_OPTIONS } from './config';
 import { AUTHENTICATION_MODULE_OPTIONS } from './constants';
 import { LoginController, PasswordController } from './controllers';
-import { AuthenticationOptions } from './interfaces';
+import {
+  AuthenticationDefaultOptions,
+  AuthenticationOptions,
+  AuthenticationPublicOptions,
+} from './interfaces';
 import {
   AuthenticationService,
   PasswordService,
@@ -23,10 +27,11 @@ import {
 import { MailerModule } from '@tractr/nestjs-mailer';
 
 @Module({})
-export class AuthenticationModule extends ModuleOptionsFactory<AuthenticationOptions>(
-  AUTHENTICATION_MODULE_OPTIONS,
-  AUTHENTICATION_OPTIONS,
-) {
+export class AuthenticationModule extends ModuleOptionsFactory<
+  AuthenticationOptions,
+  AuthenticationPublicOptions,
+  AuthenticationDefaultOptions
+>(AUTHENTICATION_MODULE_OPTIONS, AUTHENTICATION_OPTIONS) {
   static register(
     {
       imports,
@@ -35,7 +40,7 @@ export class AuthenticationModule extends ModuleOptionsFactory<AuthenticationOpt
       controllers,
       dependencies,
       ...options
-    }: Partial<AuthenticationOptions> & ModuleOverrideMetadata,
+    }: AuthenticationPublicOptions & ModuleOverrideMetadata,
     overrides: ModuleOverrideMetadata = {},
   ): DynamicModule {
     const authenticationOptionsModule = super.register(options);
@@ -53,7 +58,11 @@ export class AuthenticationModule extends ModuleOptionsFactory<AuthenticationOpt
   }
 
   static registerAsync(
-    options: AsyncOptions<AuthenticationOptions>,
+    options: AsyncOptions<
+      AuthenticationOptions,
+      AuthenticationPublicOptions,
+      AuthenticationDefaultOptions
+    >,
     overrides: ModuleOverrideMetadata = {},
   ): DynamicModule {
     const authenticationOptionsModule = super.registerAsync(options);

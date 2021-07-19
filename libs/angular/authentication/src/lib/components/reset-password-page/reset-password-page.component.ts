@@ -3,10 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import {
-  AUTH_OPTIONS,
-  AuthenticationOptions,
-} from '../../authentication.config';
+import { AUTH_OPTIONS, AuthenticationOptions } from '../../configs';
 
 @Component({
   selector: 'tractr-reset-password-page',

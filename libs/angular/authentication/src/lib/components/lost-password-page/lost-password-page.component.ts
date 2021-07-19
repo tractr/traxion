@@ -1,10 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {
-  AUTH_OPTIONS,
-  AuthenticationOptions,
-} from '../../authentication.config';
+import { AUTH_OPTIONS, AuthenticationOptions } from '../../configs';
 
 @Component({
   selector: 'tractr-lost-password-page',
