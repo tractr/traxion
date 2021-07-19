@@ -59,6 +59,11 @@ export interface TransformAndValidateOptions {
   validate?: ValidatorOptions;
 }
 
+export type TransformAndValidate<T> = <O>(
+  value: O,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+) => O extends any[] ? T[] : T;
+
 /**
  * Take a class with validator and transform decorator and return a
  * function that take an unknown value and transform and validate it
@@ -70,8 +75,7 @@ export interface TransformAndValidateOptions {
 export function transformAndValidate<T>(
   classValidator: ClassConstructor<T>,
   options?: TransformAndValidateOptions,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-): <O>(value: O) => O extends any[] ? T[] : T {
+): TransformAndValidate<T> {
   return (value: unknown) => {
     const validatedConfig = plainToClass(classValidator, value, {
       enableImplicitConversion: true,

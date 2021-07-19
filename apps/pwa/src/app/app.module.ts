@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons-angular/icons';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
-import { getConfig } from '../environments/environment';
+import { AppConfig, getConfig } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
@@ -23,7 +23,9 @@ import {
 } from '@tractr/angular-authentication';
 import { AngularComponentsModule } from '@tractr/angular-components';
 import {
-  AppConfigModule,
+  ANGULAR_CONFIG_SERVICE,
+  AngularConfigModule,
+  AngularConfigService,
   AppInitializerProvider,
 } from '@tractr/angular-config';
 import { AngularFormModule } from '@tractr/angular-form';
@@ -39,29 +41,31 @@ import { AngularToolsModule } from '@tractr/angular-tools';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AngularToolsModule.forRoot({
-      environment: {
-        api: {
-          uri: 'http://localhost:4200/api',
-        },
-        appCode: 'stack',
-        appVersion: '1',
-      },
-    }),
+    AppRoutingModule,
+    AngularToolsModule,
     AngularComponentsModule,
     AngularFormModule,
-    AngularAuthenticationModule.forRoot({
-      api: {
-        url: 'http://localhost:4200/api',
-      },
-      user: User,
-    }),
     AngularAuthenticationRoutingModule,
-    AppRoutingModule,
-    AppConfigModule.forRoot({
-      getConfig,
+    AngularAuthenticationModule.forRootAsync({
+      useFactory: (
+        defaultOptions,
+        appConfigService: AngularConfigService<AppConfig>,
+      ) => {
+        const config = appConfigService.value$.getValue();
+        return {
+          ...defaultOptions,
+          api: {
+            url: (config && config.apiUri) || '',
+          },
+          user: User,
+        };
+      },
+      deps: [ANGULAR_CONFIG_SERVICE],
     }),
     NzIconModule.forRoot([EyeInvisibleOutline, PlusOutline]),
+    AngularConfigModule.forRoot({
+      getConfig,
+    }),
   ],
   providers: [AppInitializerProvider],
   bootstrap: [AppComponent],

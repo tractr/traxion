@@ -16,15 +16,17 @@ import { JwtStrategy, LocalStrategy } from './strategies';
 import {
   AsyncOptions,
   LoggerModule,
-  ModuleOptionsHelper,
+  ModuleOptionsFactory,
   ModuleOverrideMetadata,
 } from '@tractr/nestjs-core';
 
 @Module({})
-export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOptions>(
-  AUTHENTICATION_MODULE_OPTIONS,
-  AUTHENTICATION_OPTIONS,
-) {
+export class AuthenticationModule extends ModuleOptionsFactory<
+  AuthenticationOptions,
+  Partial<AuthenticationOptions>,
+  Omit<AuthenticationOptions, keyof Required<Partial<AuthenticationOptions>>>,
+  AuthenticationModuleOptionsFactory
+>(AUTHENTICATION_MODULE_OPTIONS, AUTHENTICATION_OPTIONS) {
   static register(
     {
       imports,
@@ -57,9 +59,15 @@ export class AuthenticationModule extends ModuleOptionsHelper<AuthenticationOpti
   }
 
   static registerAsync(
-    options: AsyncOptions<AuthenticationOptions> = {
-      useClass: AuthenticationModuleOptionsFactory,
-    },
+    options: AsyncOptions<
+      AuthenticationOptions,
+      Partial<AuthenticationOptions>,
+      Omit<
+        AuthenticationOptions,
+        keyof Required<Partial<AuthenticationOptions>>
+      >,
+      AuthenticationModuleOptionsFactory
+    >,
     overrides: ModuleOverrideMetadata = {},
   ): DynamicModule {
     const authenticationOptionsModule = super.registerAsync(options);

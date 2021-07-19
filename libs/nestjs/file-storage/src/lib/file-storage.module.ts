@@ -8,7 +8,7 @@ import { FileStorageConfiguration } from './interfaces';
 import { FileStorageService } from './services';
 
 import { transformAndValidate } from '@tractr/common';
-import { ModuleOptionsHelper } from '@tractr/nestjs-core';
+import { ModuleOptionsFactory } from '@tractr/nestjs-core';
 
 @Global()
 @Module({
@@ -16,13 +16,7 @@ import { ModuleOptionsHelper } from '@tractr/nestjs-core';
   providers: [FileStorageService, FileStorageCliService],
   exports: [FileStorageService, FileStorageCliService],
 })
-export class FileStorageModule extends ModuleOptionsHelper<FileStorageConfiguration>(
+export class FileStorageModule extends ModuleOptionsFactory<FileStorageConfiguration>(
   FILE_STORAGE_CONFIGURATION,
-) {
-  static register(options: FileStorageConfiguration) {
-    const validatedOptions = transformAndValidate(FileStorageConfigurationDto)(
-      options,
-    );
-    return super.register(validatedOptions);
-  }
-}
+  transformAndValidate(FileStorageConfigurationDto),
+) {}

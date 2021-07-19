@@ -5,7 +5,8 @@ import {
   AuthenticationModuleOptionsFactory,
 } from '../../../src/config/authentication.config';
 
-import { isClass, isDevelopment, isProduction } from '@tractr/nestjs-core';
+import { isClass } from '@tractr/common';
+import { isDevelopment, isProduction } from '@tractr/nestjs-core';
 
 describe('User auth configurations', () => {
   describe('AUTHENTICATION_COOKIE_NAME', () => {

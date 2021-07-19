@@ -1,11 +1,11 @@
 import { APP_INITIALIZER, FactoryProvider } from '@angular/core';
 import { catchError, of } from 'rxjs';
 
-import { APP_CONFIG_SERVICE } from './app-config.constant';
-import { AppConfig, AppConfigService } from './interfaces';
+import { ANGULAR_CONFIG_SERVICE } from './angular-config.constant';
+import { AngularConfig, AngularConfigService } from './interfaces';
 
-export function loadConfigFactory<T extends AppConfig>(
-  configService: AppConfigService<T>,
+export function loadConfigFactory<T extends AngularConfig>(
+  configService: AngularConfigService<T>,
 ) {
   return () =>
     configService.waitInitialisationConfig$.pipe(
@@ -19,6 +19,6 @@ export function loadConfigFactory<T extends AppConfig>(
 export const AppInitializerProvider: FactoryProvider = {
   provide: APP_INITIALIZER,
   useFactory: loadConfigFactory,
-  deps: [APP_CONFIG_SERVICE],
+  deps: [ANGULAR_CONFIG_SERVICE],
   multi: true,
 };
