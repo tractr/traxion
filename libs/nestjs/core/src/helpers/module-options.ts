@@ -77,7 +77,7 @@ export function ModuleOptionsFactory<
   > = OptionsFactory<InternalOptions, PublicOptions, DefaultOptions>,
 >(
   moduleOptionsProvide: string,
-  validateOrDefault: DefaultOptions | TransformAndValidate<InternalOptions>,
+  validateOrDefault?: DefaultOptions | TransformAndValidate<InternalOptions>,
 ) {
   const validate: TransformAndValidate<InternalOptions> =
     typeof validateOrDefault !== 'function'

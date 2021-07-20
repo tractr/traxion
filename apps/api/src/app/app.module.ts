@@ -11,6 +11,7 @@ import {
   JwtGlobalAuthGuard,
 } from '@tractr/nestjs-authentication';
 import { DatabaseModule } from '@tractr/nestjs-database';
+import { MailerModule } from '@tractr/nestjs-mailer';
 
 // test
 @Module({
@@ -24,6 +25,12 @@ import { DatabaseModule } from '@tractr/nestjs-database';
           url: '/api',
         },
         user: User,
+      }),
+    }),
+    MailerModule.registerAsync({
+      useFactory: () => ({
+        privateApiKey: 'test',
+        publicApiKey: 'test',
       }),
     }),
   ],

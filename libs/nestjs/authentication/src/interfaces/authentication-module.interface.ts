@@ -21,7 +21,6 @@ export interface AuthenticationOptions {
       usernameField: keyof User;
       passwordField: keyof User;
     };
-    [key: string]: unknown;
   };
   jwtModuleOptions: JwtModuleOptions;
   passportModuleOptions: IAuthModuleOptions;
