@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.6.1](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-rest-1.6.0...hapify-templates-nestjs-models-rest-1.6.1) (2021-07-20)
+
+
+### Bug Fixes
+
+* **nestjs-model-rest:** fix bad comment ([#195](https://github.com/tractr/stack/issues/195)) ([4f6a71d](https://github.com/tractr/stack/commit/4f6a71ded2dfb049d72f4b52da1ae5742f7f8291))
+
+
+
 # [1.6.0](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-rest-1.5.1...hapify-templates-nestjs-models-rest-1.6.0) (2021-07-13)
 
 
