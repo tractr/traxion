@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.4.0](https://github.com/tractr/stack/compare/hapify-templates-angular-rext-client-1.3.0...hapify-templates-angular-rext-client-1.4.0) (2021-07-20)
+
+
+### Features
+
+* add module options factory to rext client ([#193](https://github.com/tractr/stack/issues/193)) ([b0e7adf](https://github.com/tractr/stack/commit/b0e7adf8ae21c4809ad9ffd184f39109c58c678a))
+
+
+
 # [1.3.0](https://github.com/tractr/stack/compare/hapify-templates-angular-rext-client-1.2.1...hapify-templates-angular-rext-client-1.3.0) (2021-07-13)
 
 
