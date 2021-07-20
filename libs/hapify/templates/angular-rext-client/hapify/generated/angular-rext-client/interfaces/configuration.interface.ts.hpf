@@ -1,3 +1,5 @@
 export interface AngularRextConfiguration {
-  baseUrl: string;
+  api: {
+    url: string;
+  }
 }
