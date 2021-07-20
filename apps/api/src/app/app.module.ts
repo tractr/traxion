@@ -4,6 +4,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+import { User } from '@generated/models';
 import { ModelsModule } from '@generated/nestjs-models';
 import {
   AuthenticationModule,
@@ -16,7 +17,15 @@ import { DatabaseModule } from '@tractr/nestjs-database';
   imports: [
     ModelsModule.register(),
     DatabaseModule.register(),
-    AuthenticationModule.register(),
+    AuthenticationModule.registerAsync({
+      useFactory: (defaultOptions) => ({
+        ...defaultOptions,
+        api: {
+          url: '/api',
+        },
+        user: User,
+      }),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: JwtGlobalAuthGuard }],

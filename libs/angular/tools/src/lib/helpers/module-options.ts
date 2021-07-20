@@ -7,6 +7,7 @@ import {
   Provider,
   Type,
 } from '@angular/core';
+import { DeepPartial, RequiredKeys } from 'ts-essentials';
 
 import { TransformAndValidate } from '@tractr/common';
 
@@ -22,11 +23,11 @@ export interface Options {
  */
 export interface OptionsFactory<
   InternalOptions = Options,
-  PublicOptions extends Partial<InternalOptions> = Partial<InternalOptions>,
+  PublicOptions extends DeepPartial<InternalOptions> = DeepPartial<InternalOptions>,
   DefaultOptions extends Omit<
     InternalOptions,
-    keyof Required<PublicOptions>
-  > = Omit<InternalOptions, keyof Required<PublicOptions>>,
+    RequiredKeys<PublicOptions>
+  > = Omit<InternalOptions, RequiredKeys<PublicOptions>>,
 > {
   createOptions(defaultOptions: DefaultOptions): InternalOptions;
 }
@@ -36,11 +37,11 @@ export interface OptionsFactory<
  */
 export type AsyncOptions<
   InternalOptions,
-  PublicOptions extends Partial<InternalOptions> = Partial<InternalOptions>,
+  PublicOptions extends DeepPartial<InternalOptions> = DeepPartial<InternalOptions>,
   DefaultOptions extends Omit<
     InternalOptions,
-    keyof Required<PublicOptions>
-  > = Omit<InternalOptions, keyof Required<PublicOptions>>,
+    RequiredKeys<PublicOptions>
+  > = Omit<InternalOptions, RequiredKeys<PublicOptions>>,
   Factory extends OptionsFactory<
     InternalOptions,
     PublicOptions,
@@ -62,11 +63,11 @@ export type AsyncOptions<
  */
 export function ModuleOptionsFactory<
   InternalOptions,
-  PublicOptions extends Partial<InternalOptions> = Partial<InternalOptions>,
+  PublicOptions extends DeepPartial<InternalOptions> = DeepPartial<InternalOptions>,
   DefaultOptions extends Omit<
     InternalOptions,
-    keyof Required<PublicOptions>
-  > = Omit<InternalOptions, keyof Required<PublicOptions>>,
+    RequiredKeys<PublicOptions>
+  > = Omit<InternalOptions, RequiredKeys<PublicOptions>>,
   Factory extends OptionsFactory<
     InternalOptions,
     PublicOptions,
@@ -95,7 +96,7 @@ export function ModuleOptionsFactory<
     static register(options?: PublicOptions): ModuleWithProviders<any> {
       const opts = {
         ...defaultOptions,
-        ...(options || {}),
+        ...(options ?? {}),
       };
       return {
         ngModule: this,
