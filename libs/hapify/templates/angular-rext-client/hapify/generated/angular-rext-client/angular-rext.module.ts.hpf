@@ -1,4 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ModuleOptionsFactory } from '@tractr/angular-tools';
 import { ANGULAR_REXT_CONFIGURATION } from './constants';
 import { AngularRextConfiguration } from './interfaces';
 import { 
@@ -7,6 +8,7 @@ import {
 <<endfor>>
 } from './services';
 
+
 @NgModule({
   providers: [
     <<for Models model>>
@@ -14,14 +16,6 @@ import {
     <<endfor>>
   ],
 })
-export class AngularRextModule {
-  static forRoot(configuration: AngularRextConfiguration): ModuleWithProviders<AngularRextModule> {
-    return {
-      ngModule: AngularRextModule,
-      providers: [{
-        provide: ANGULAR_REXT_CONFIGURATION,
-        useValue: configuration
-      }]
-    }
-  }
-}
+export class AngularRextModule extends ModuleOptionsFactory<AngularRextConfiguration>(
+  ANGULAR_REXT_CONFIGURATION,
+) {}
