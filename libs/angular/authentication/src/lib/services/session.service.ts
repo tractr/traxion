@@ -60,7 +60,6 @@ export function SessionServiceFactory<
       }),
       catchError((err) => {
         if (err && err.status === 401) return of(null);
-        console.error('here2', err);
         throw err;
       }),
       shareReplay(1),
