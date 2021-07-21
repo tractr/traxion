@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.8.0](https://github.com/tractr/stack/compare/nestjs-database-1.7.1...nestjs-database-1.8.0) (2021-07-21)
+
+
+
 ## [1.7.1](https://github.com/tractr/stack/compare/nestjs-database-1.7.0...nestjs-database-1.7.1) (2021-07-19)
 
 
