@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.8.2](https://github.com/tractr/stack/compare/nestjs-core-1.8.1...nestjs-core-1.8.2) (2021-07-21)
+
+
+### Bug Fixes
+
+* change module options factory typing ([#196](https://github.com/tractr/stack/issues/196)) ([9a55c71](https://github.com/tractr/stack/commit/9a55c71bd516b0812c560aecd91d7d2ebdb6c533))
+
+
+
 ## [1.8.1](https://github.com/tractr/stack/compare/nestjs-core-1.8.0...nestjs-core-1.8.1) (2021-07-19)
 
 
