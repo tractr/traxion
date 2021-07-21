@@ -3,10 +3,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
 import { UserModelModule } from '../generated/nestjs-models-common';
-import {
-  AUTHENTICATION_OPTIONS,
-  AuthenticationModuleOptionsFactory,
-} from './config';
+import { AUTHENTICATION_OPTIONS } from './config';
 import { AUTHENTICATION_MODULE_OPTIONS } from './constants';
 import { LoginController } from './controllers';
 import { AuthenticationOptions } from './interfaces';
@@ -21,12 +18,10 @@ import {
 } from '@tractr/nestjs-core';
 
 @Module({})
-export class AuthenticationModule extends ModuleOptionsFactory<
-  AuthenticationOptions,
-  Partial<AuthenticationOptions>,
-  Omit<AuthenticationOptions, keyof Required<Partial<AuthenticationOptions>>>,
-  AuthenticationModuleOptionsFactory
->(AUTHENTICATION_MODULE_OPTIONS, AUTHENTICATION_OPTIONS) {
+export class AuthenticationModule extends ModuleOptionsFactory<AuthenticationOptions>(
+  AUTHENTICATION_MODULE_OPTIONS,
+  AUTHENTICATION_OPTIONS,
+) {
   static register(
     {
       imports,
@@ -35,16 +30,10 @@ export class AuthenticationModule extends ModuleOptionsFactory<
       controllers,
       dependencies,
       ...options
-    }: Partial<AuthenticationOptions> &
-      ModuleOverrideMetadata = AUTHENTICATION_OPTIONS,
+    }: Partial<AuthenticationOptions> & ModuleOverrideMetadata,
     overrides: ModuleOverrideMetadata = {},
   ): DynamicModule {
-    const moduleOptions = {
-      ...AUTHENTICATION_OPTIONS,
-      ...options,
-    };
-
-    const authenticationOptionsModule = super.register(moduleOptions);
+    const authenticationOptionsModule = super.register(options);
     return this.createAuthenticationModuleFromOptions(
       authenticationOptionsModule,
       {
@@ -59,15 +48,7 @@ export class AuthenticationModule extends ModuleOptionsFactory<
   }
 
   static registerAsync(
-    options: AsyncOptions<
-      AuthenticationOptions,
-      Partial<AuthenticationOptions>,
-      Omit<
-        AuthenticationOptions,
-        keyof Required<Partial<AuthenticationOptions>>
-      >,
-      AuthenticationModuleOptionsFactory
-    >,
+    options: AsyncOptions<AuthenticationOptions>,
     overrides: ModuleOverrideMetadata = {},
   ): DynamicModule {
     const authenticationOptionsModule = super.registerAsync(options);

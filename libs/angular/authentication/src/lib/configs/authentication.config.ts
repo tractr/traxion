@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { ClassConstructor } from 'class-transformer';
+import { RequiredKeys } from 'ts-essentials';
 
 import { User } from '../generated/models';
 
@@ -44,7 +45,7 @@ export type AuthenticationDefaultOptions<
   CCU extends ClassConstructor<U> = ClassConstructor<U>,
 > = Omit<
   AuthenticationOptions<U, CCU>,
-  keyof Required<AuthenticationPublicOptions<U, CCU>>
+  RequiredKeys<AuthenticationPublicOptions<U, CCU>>
 >;
 
 export const AUTH_DEFAULT_OPTIONS: AuthenticationDefaultOptions = {
