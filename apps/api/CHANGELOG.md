@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.16.1](https://github.com/tractr/stack/compare/api-1.16.0...api-1.16.1) (2021-07-21)
+
+
+### Bug Fixes
+
+* change module options factory typing ([#196](https://github.com/tractr/stack/issues/196)) ([9a55c71](https://github.com/tractr/stack/commit/9a55c71bd516b0812c560aecd91d7d2ebdb6c533))
+
+
+
 # [1.16.0](https://github.com/tractr/stack/compare/api-1.15.1...api-1.16.0) (2021-07-13)
 
 
