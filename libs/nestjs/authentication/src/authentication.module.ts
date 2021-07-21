@@ -1,7 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { DeepPartial } from 'ts-essentials';
 
 import { UserModelModule } from '../generated/nestjs-models-common';
 import { AUTHENTICATION_OPTIONS } from './config';
@@ -31,7 +30,7 @@ export class AuthenticationModule extends ModuleOptionsFactory<AuthenticationOpt
       controllers,
       dependencies,
       ...options
-    }: DeepPartial<AuthenticationOptions> & ModuleOverrideMetadata,
+    }: Partial<AuthenticationOptions> & ModuleOverrideMetadata,
     overrides: ModuleOverrideMetadata = {},
   ): DynamicModule {
     const authenticationOptionsModule = super.register(options);
