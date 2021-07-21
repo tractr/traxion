@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.6](https://github.com/tractr/stack/compare/angular-config-0.0.5...angular-config-0.0.6) (2021-07-21)
+
+
+### Bug Fixes
+
+* remove the http dependencies from angular config service that was causing circular deps ([#198](https://github.com/tractr/stack/issues/198)) ([c52152a](https://github.com/tractr/stack/commit/c52152a061fcd54bed3a36931c0cf88f05310d8d))
+
+
+
 ## [0.0.5](https://github.com/tractr/stack/compare/angular-config-0.0.4...angular-config-0.0.5) (2021-07-21)
 
 
