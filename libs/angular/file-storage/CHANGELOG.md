@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.3](https://github.com/tractr/stack/compare/angular-file-storage-0.1.2...angular-file-storage-0.1.3) (2021-07-21)
+
+
+### Bug Fixes
+
+* make angular-rext module be able to register async correctly ([#197](https://github.com/tractr/stack/issues/197)) ([4ea9afa](https://github.com/tractr/stack/commit/4ea9afa24f5beeacfd4e50b1853cecac9aeb03f9))
+
+
+
 ## [0.1.2](https://github.com/tractr/stack/compare/angular-file-storage-0.1.1...angular-file-storage-0.1.2) (2021-07-19)
 
 
