@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,6 +17,7 @@ import {
   MoleculeNotConnectedComponent,
 } from './molecules';
 
+import { AngularRextModule } from '@generated/angular-rext-client';
 import { User } from '@generated/models';
 import {
   AngularAuthenticationModule,
@@ -39,6 +41,7 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     AppComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -65,6 +68,15 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     NzIconModule.forRoot([EyeInvisibleOutline, PlusOutline]),
     AngularConfigModule.forRoot({
       getConfig,
+    }),
+    AngularRextModule.forRootAsync({
+      useFactory: (_, appConfigService: AngularConfigService<AppConfig>) => ({
+        api: {
+          url: appConfigService.config?.apiUri || '',
+        },
+        user: User,
+      }),
+      deps: [ANGULAR_CONFIG_SERVICE],
     }),
   ],
   providers: [AppInitializerProvider],
