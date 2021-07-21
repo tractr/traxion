@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import {
@@ -16,7 +15,7 @@ import { AsyncOptions, ModuleOptionsFactory } from '@tractr/angular-tools';
     {
       provide: ANGULAR_CONFIG_SERVICE,
       useFactory: AngularConfigServiceFactory,
-      deps: [HttpClient, ANGULAR_CONFIG_OPTIONS],
+      deps: [ANGULAR_CONFIG_OPTIONS],
     },
   ],
 })

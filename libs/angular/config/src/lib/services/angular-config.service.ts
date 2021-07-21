@@ -1,6 +1,13 @@
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { map, shareReplay, switchMap, take, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
+import { fromFetch } from 'rxjs/fetch';
+import {
+  map,
+  mergeMap,
+  shareReplay,
+  switchMap,
+  take,
+  takeUntil,
+} from 'rxjs/operators';
 
 import {
   AngularConfig,
@@ -12,10 +19,7 @@ import { Unsubscriber } from '@tractr/angular-tools';
 
 export function AngularConfigServiceFactory<
   T extends AngularConfig = AngularConfig,
->(
-  http: HttpClient,
-  angularConfigOptions: AngularConfigOptions<T>,
-): AngularConfigService<T> {
+>(angularConfigOptions: AngularConfigOptions<T>): AngularConfigService<T> {
   class AnonymousAngularConfigService extends Unsubscriber {
     constructor() {
       super();
@@ -29,9 +33,10 @@ export function AngularConfigServiceFactory<
 
     value$ = new BehaviorSubject<T | undefined>(undefined);
 
-    getConfig$ = http
-      .get<AngularConfig>(angularConfigOptions.apiEndpoint)
-      .pipe(map(angularConfigOptions.getConfig));
+    getConfig$ = fromFetch(angularConfigOptions.apiEndpoint).pipe(
+      mergeMap((response) => from(response.json())),
+      map(angularConfigOptions.getConfig),
+    );
 
     config$: Observable<T> = this.refresh$.pipe(
       switchMap((next) => {
