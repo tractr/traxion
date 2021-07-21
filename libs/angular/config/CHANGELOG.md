@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.5](https://github.com/tractr/stack/compare/angular-config-0.0.4...angular-config-0.0.5) (2021-07-21)
+
+
+### Bug Fixes
+
+* make angular-rext module be able to register async correctly ([#197](https://github.com/tractr/stack/issues/197)) ([4ea9afa](https://github.com/tractr/stack/commit/4ea9afa24f5beeacfd4e50b1853cecac9aeb03f9))
+
+
+
 ## [0.0.4](https://github.com/tractr/stack/compare/angular-config-0.0.3...angular-config-0.0.4) (2021-07-19)
 
 
