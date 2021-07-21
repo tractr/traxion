@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.4.3](https://github.com/tractr/stack/compare/angular-authentication-0.4.2...angular-authentication-0.4.3) (2021-07-21)
+
+
+### Bug Fixes
+
+* remove the http dependencies from angular config service that was causing circular deps ([#198](https://github.com/tractr/stack/issues/198)) ([c52152a](https://github.com/tractr/stack/commit/c52152a061fcd54bed3a36931c0cf88f05310d8d))
+
+
+
 ## [0.4.2](https://github.com/tractr/stack/compare/angular-authentication-0.4.1...angular-authentication-0.4.2) (2021-07-21)
 
 
