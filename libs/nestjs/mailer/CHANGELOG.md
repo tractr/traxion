@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.3.2](https://github.com/tractr/stack/compare/nestjs-mailer-0.3.1...nestjs-mailer-0.3.2) (2021-07-21)
+
+
+### Bug Fixes
+
+* change module options factory typing ([#196](https://github.com/tractr/stack/issues/196)) ([9a55c71](https://github.com/tractr/stack/commit/9a55c71bd516b0812c560aecd91d7d2ebdb6c533))
+
+
+
 ## [0.3.1](https://github.com/tractr/stack/compare/nestjs-mailer-0.3.0...nestjs-mailer-0.3.1) (2021-07-19)
 
 
