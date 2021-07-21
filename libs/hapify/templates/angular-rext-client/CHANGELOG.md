@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.4.1](https://github.com/tractr/stack/compare/hapify-templates-angular-rext-client-1.4.0...hapify-templates-angular-rext-client-1.4.1) (2021-07-21)
+
+
+### Bug Fixes
+
+* make angular-rext module be able to register async correctly ([#197](https://github.com/tractr/stack/issues/197)) ([4ea9afa](https://github.com/tractr/stack/commit/4ea9afa24f5beeacfd4e50b1853cecac9aeb03f9))
+
+
+
 # [1.4.0](https://github.com/tractr/stack/compare/hapify-templates-angular-rext-client-1.3.0...hapify-templates-angular-rext-client-1.4.0) (2021-07-20)
 
 
