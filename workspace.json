@@ -1445,7 +1445,7 @@
           "options": {
             "assets": [
               "libs/config/prettier/*.md",
-              "libs/config/eslint/.prettierrc.js"
+              "libs/config/prettier/.prettierrc.js"
             ],
             "main": "libs/config/prettier/src/index.ts",
             "outputPath": "dist/libs/config/prettier",

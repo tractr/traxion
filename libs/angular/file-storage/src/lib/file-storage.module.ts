@@ -1,14 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { FILE_STORAGE_CONFIGURATION } from './constants';
 import { FileStorageConfigurationDto } from './dtos';
 import { FileStorageConfiguration } from './interfaces';
 import { FileStorageService } from './services';
 
-import { ModuleOptionsFactory } from '@tractr/angular-tools';
+import { AsyncOptions, ModuleOptionsFactory } from '@tractr/angular-tools';
 import { transformAndValidate } from '@tractr/common';
 
 @NgModule({
@@ -17,7 +17,34 @@ import { transformAndValidate } from '@tractr/common';
   providers: [FileStorageService],
   exports: [],
 })
-export class FileStorageModule extends ModuleOptionsFactory<FileStorageConfiguration>(
+export class FileStorageModule extends ModuleOptionsFactory<
+  FileStorageConfiguration,
+  FileStorageConfiguration
+>(
   FILE_STORAGE_CONFIGURATION,
   transformAndValidate(FileStorageConfigurationDto),
-) {}
+) {
+  static register(
+    options: FileStorageConfiguration,
+  ): ModuleWithProviders<FileStorageConfiguration> {
+    return super.register(options);
+  }
+
+  static forRoot(
+    options: FileStorageConfiguration,
+  ): ModuleWithProviders<FileStorageConfiguration> {
+    return super.forRoot(options);
+  }
+
+  static registerAsync(
+    options: AsyncOptions<FileStorageConfiguration, FileStorageConfiguration>,
+  ): ModuleWithProviders<FileStorageConfiguration> {
+    return super.registerAsync(options);
+  }
+
+  static forRootAsync(
+    options: AsyncOptions<FileStorageConfiguration, FileStorageConfiguration>,
+  ): ModuleWithProviders<FileStorageConfiguration> {
+    return super.forRootAsync(options);
+  }
+}

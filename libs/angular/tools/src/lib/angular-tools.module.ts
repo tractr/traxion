@@ -16,9 +16,6 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 
-import { ANGULAR_TOOLS_MODULE } from './angular-tools.constant';
-import { ModuleOptionsFactory } from './helpers';
-import { AngularToolsOptions } from './interfaces';
 import {
   MaxPipe,
   MinPipe,
@@ -97,6 +94,4 @@ import { HttpLoaderFactory } from './translate-import';
     NzMessageModule,
   ],
 })
-export class AngularToolsModule extends ModuleOptionsFactory<AngularToolsOptions>(
-  ANGULAR_TOOLS_MODULE,
-) {}
+export class AngularToolsModule {}

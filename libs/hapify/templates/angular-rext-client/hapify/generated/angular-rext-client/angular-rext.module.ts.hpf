@@ -1,14 +1,14 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { ModuleOptionsFactory } from '@tractr/angular-tools';
+import { AsyncOptions, ModuleOptionsFactory } from '@tractr/angular-tools';
 import { ANGULAR_REXT_CONFIGURATION } from './constants';
 import { AngularRextConfiguration } from './interfaces';
+ 
 import { 
 <<for Models model>>
   <<model pascal>>Service,
 <<endfor>>
 } from './services';
-
-
+ 
 @NgModule({
   providers: [
     <<for Models model>>
@@ -16,6 +16,32 @@ import {
     <<endfor>>
   ],
 })
-export class AngularRextModule extends ModuleOptionsFactory<AngularRextConfiguration>(
-  ANGULAR_REXT_CONFIGURATION,
-) {}
+export class AngularRextModule extends ModuleOptionsFactory<
+  AngularRextConfiguration,
+  AngularRextConfiguration
+>(ANGULAR_REXT_CONFIGURATION) {
+  static register(
+    options: AngularRextConfiguration,
+  ): ModuleWithProviders<AngularRextModule> {
+    return super.register(options);
+  }
+ 
+  static forRoot(
+    options: AngularRextConfiguration,
+  ): ModuleWithProviders<AngularRextModule> {
+    return super.forRoot(options);
+  }
+ 
+  static registerAsync(
+    options: AsyncOptions<AngularRextConfiguration, AngularRextConfiguration>,
+  ): ModuleWithProviders<AngularRextModule> {
+    return super.registerAsync(options);
+  }
+ 
+  static forRootAsync(
+    options: AsyncOptions<AngularRextConfiguration, AngularRextConfiguration>,
+  ): ModuleWithProviders<AngularRextModule> {
+    return super.forRootAsync(options);
+  }
+}
+ 
