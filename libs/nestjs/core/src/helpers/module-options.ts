@@ -7,6 +7,7 @@ import {
   Provider,
   Type,
 } from '@nestjs/common';
+import { RequiredKeys } from 'ts-essentials';
 
 import { TransformAndValidate } from '@tractr/common';
 
@@ -25,8 +26,8 @@ export interface OptionsFactory<
   PublicOptions extends Partial<InternalOptions> = Partial<InternalOptions>,
   DefaultOptions extends Omit<
     InternalOptions,
-    keyof Required<PublicOptions>
-  > = Omit<InternalOptions, keyof Required<PublicOptions>>,
+    RequiredKeys<PublicOptions>
+  > = Omit<InternalOptions, RequiredKeys<PublicOptions>>,
 > {
   createOptions(
     defaultOptions: DefaultOptions,
@@ -41,8 +42,8 @@ export type AsyncOptions<
   PublicOptions extends Partial<InternalOptions> = Partial<InternalOptions>,
   DefaultOptions extends Omit<
     InternalOptions,
-    keyof Required<PublicOptions>
-  > = Omit<InternalOptions, keyof Required<PublicOptions>>,
+    RequiredKeys<PublicOptions>
+  > = Omit<InternalOptions, RequiredKeys<PublicOptions>>,
   Factory extends OptionsFactory<
     InternalOptions,
     PublicOptions,
@@ -67,8 +68,8 @@ export function ModuleOptionsFactory<
   PublicOptions extends Partial<InternalOptions> = Partial<InternalOptions>,
   DefaultOptions extends Omit<
     InternalOptions,
-    keyof Required<PublicOptions>
-  > = Omit<InternalOptions, keyof Required<PublicOptions>>,
+    RequiredKeys<PublicOptions>
+  > = Omit<InternalOptions, RequiredKeys<PublicOptions>>,
   Factory extends OptionsFactory<
     InternalOptions,
     PublicOptions,
@@ -76,7 +77,7 @@ export function ModuleOptionsFactory<
   > = OptionsFactory<InternalOptions, PublicOptions, DefaultOptions>,
 >(
   moduleOptionsProvide: string,
-  validateOrDefault: DefaultOptions | TransformAndValidate<InternalOptions>,
+  validateOrDefault?: DefaultOptions | TransformAndValidate<InternalOptions>,
 ) {
   const validate: TransformAndValidate<InternalOptions> =
     typeof validateOrDefault !== 'function'
@@ -101,7 +102,7 @@ export function ModuleOptionsFactory<
         providers: [
           {
             provide: moduleOptionsProvide,
-            useValue: validate({ ...defaultOptions, ...(options || {}) }),
+            useValue: validate({ ...defaultOptions, ...(options ?? {}) }),
           },
         ],
         exports: [moduleOptionsProvide],
