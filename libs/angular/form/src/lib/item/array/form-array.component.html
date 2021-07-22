@@ -16,14 +16,22 @@
 "
       ></ng-container>
     </div>
-    <div class="content-delete inline" (click)="remove(i)">
+    <div
+      class="content-delete inline"
+      (click)="remove(i)"
+      *ngIf="formArray.controls.length > this.min"
+    >
       <ng-container
         *ngTemplateOutlet="removeTpl ?? defaultRemoveTpl"
       ></ng-container>
     </div>
   </div>
 
-  <div (click)="add()" class="inline">
+  <div
+    (click)="add()"
+    class="inline"
+    *ngIf="formArray.controls.length < this.max"
+  >
     <ng-container *ngTemplateOutlet="addTpl ?? defaultAddTpl"></ng-container>
   </div>
 </tractr-form-item>
