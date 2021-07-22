@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.9.0](https://github.com/tractr/stack/compare/angular-form-0.8.1...angular-form-0.9.0) (2021-07-22)
+
+
+### Features
+
+* **angular-form:** fix min max limit of form array ([#199](https://github.com/tractr/stack/issues/199)) ([75bd365](https://github.com/tractr/stack/commit/75bd365a2075a1f1b716211d6716db912122e921))
+
+
+
 ## [0.8.1](https://github.com/tractr/stack/compare/angular-form-0.8.0...angular-form-0.8.1) (2021-07-19)
 
 
