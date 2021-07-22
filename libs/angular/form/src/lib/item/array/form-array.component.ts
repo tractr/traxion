@@ -43,7 +43,7 @@ export class FormArrayComponent extends FormItemBaseComponent<
       Validators.minLength(this.min),
       ...(this.max !== Infinity ? [Validators.maxLength(this.max)] : []),
       // eslint-disable-next-line @typescript-eslint/unbound-method
-      ...(this.required ? [Validators.required] : []),
+      ...(this.required && this.min > 0 ? [Validators.required] : []),
     ]);
 
     return this.formArray;
