@@ -13,7 +13,7 @@ import { AwsRegions } from '../constants';
 import { PresignedDownloadConfigurationDto } from './presigned-download-configuration.dto';
 import { PresignedUploadConfigurationDto } from './presigned-upload-configuration';
 
-export class FileStorageConfigurationDto implements MinioClientOptions {
+export class FileStorageConfigurationPrivateDto implements MinioClientOptions {
   /**
    * File storage endpoint (ip or domain)
    */

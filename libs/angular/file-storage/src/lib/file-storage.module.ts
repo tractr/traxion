@@ -26,25 +26,25 @@ export class FileStorageModule extends ModuleOptionsFactory<
 ) {
   static register(
     options: FileStorageConfiguration,
-  ): ModuleWithProviders<FileStorageConfiguration> {
+  ): ModuleWithProviders<FileStorageModule> {
     return super.register(options);
   }
 
   static forRoot(
     options: FileStorageConfiguration,
-  ): ModuleWithProviders<FileStorageConfiguration> {
+  ): ModuleWithProviders<FileStorageModule> {
     return super.forRoot(options);
   }
 
   static registerAsync(
     options: AsyncOptions<FileStorageConfiguration, FileStorageConfiguration>,
-  ): ModuleWithProviders<FileStorageConfiguration> {
+  ): ModuleWithProviders<FileStorageModule> {
     return super.registerAsync(options);
   }
 
   static forRootAsync(
     options: AsyncOptions<FileStorageConfiguration, FileStorageConfiguration>,
-  ): ModuleWithProviders<FileStorageConfiguration> {
+  ): ModuleWithProviders<FileStorageModule> {
     return super.forRootAsync(options);
   }
 }
