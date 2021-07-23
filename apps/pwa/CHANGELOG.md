@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.9.4](https://github.com/tractr/stack/compare/pwa-1.9.3...pwa-1.9.4) (2021-07-23)
+
+
+### Bug Fixes
+
+* update file-storage modules and configurations ([#200](https://github.com/tractr/stack/issues/200)) ([fc48403](https://github.com/tractr/stack/commit/fc48403ce5a70cd8f6c55ee061f294b0d06e6a9e))
+
+
+
 ## [1.9.3](https://github.com/tractr/stack/compare/pwa-1.9.2...pwa-1.9.3) (2021-07-21)
 
 
