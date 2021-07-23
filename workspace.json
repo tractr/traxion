@@ -120,6 +120,47 @@
         }
       }
     },
+    "angular-casl": {
+      "prefix": "tractr",
+      "projectType": "library",
+      "root": "libs/angular/casl",
+      "sourceRoot": "libs/angular/casl/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "development": {
+              "tsConfig": "libs/angular/casl/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/angular/casl/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:package",
+          "options": {
+            "project": "libs/angular/casl/ng-package.json"
+          },
+          "outputs": ["dist/libs/angular/casl"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular/casl/src/**/*.ts",
+              "libs/angular/casl/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular/casl/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/angular/casl"]
+        }
+      }
+    },
     "angular-components": {
       "prefix": "tractr",
       "projectType": "library",
@@ -776,6 +817,59 @@
         }
       }
     },
+    "hapify-templates-casl": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/casl",
+      "sourceRoot": "libs/hapify/templates/casl/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/hapify/templates/casl/*.md",
+              "libs/hapify/templates/casl/index.js",
+              "libs/hapify/templates/casl/.hapifyrc.js",
+              {
+                "glob": "**/*",
+                "input": "libs/hapify/templates/casl/hapify",
+                "output": "hapify"
+              }
+            ],
+            "main": "libs/hapify/templates/casl/index.js",
+            "outputPath": "dist/libs/hapify/templates/casl",
+            "packageJson": "libs/hapify/templates/casl/package.json",
+            "tsConfig": "libs/hapify/templates/casl/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hapify/templates/casl/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/hapify/templates/casl/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/hapify/templates/casl"]
+        }
+      }
+    },
     "hapify-templates-dbml": {
       "projectType": "library",
       "root": "libs/hapify/templates/dbml",
@@ -851,59 +945,6 @@
           "options": {
             "syncVersions": false
           }
-        }
-      }
-    },
-    "hapify-templates-nestjs-casl": {
-      "projectType": "library",
-      "root": "libs/hapify/templates/nestjs-casl",
-      "sourceRoot": "libs/hapify/templates/nestjs-casl/src",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:package",
-          "options": {
-            "assets": [
-              "libs/hapify/templates/nestjs-casl/*.md",
-              "libs/hapify/templates/nestjs-casl/index.js",
-              "libs/hapify/templates/nestjs-casl/.hapifyrc.js",
-              {
-                "glob": "**/*",
-                "input": "libs/hapify/templates/nestjs-casl/hapify",
-                "output": "hapify"
-              }
-            ],
-            "main": "libs/hapify/templates/nestjs-casl/index.js",
-            "outputPath": "dist/libs/hapify/templates/nestjs-casl",
-            "packageJson": "libs/hapify/templates/nestjs-casl/package.json",
-            "tsConfig": "libs/hapify/templates/nestjs-casl/tsconfig.lib.json"
-          },
-          "outputs": ["{options.outputPath}"]
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/hapify/templates/nestjs-casl/**/*.ts"]
-          }
-        },
-        "publish": {
-          "executor": "ngx-deploy-npm:deploy",
-          "options": {
-            "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": false
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/hapify/templates/nestjs-casl/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/hapify/templates/nestjs-casl"]
         }
       }
     },

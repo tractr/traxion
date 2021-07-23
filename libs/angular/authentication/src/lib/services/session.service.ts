@@ -66,6 +66,7 @@ export function SessionServiceFactory<
     );
 
     ngOnInit() {
+      console.log('oninit session service');
       this.me$
         .pipe(
           takeUntil(this.unsubscribe$),

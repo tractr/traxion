@@ -23,6 +23,7 @@ export function AngularConfigServiceFactory<
   class AnonymousAngularConfigService extends Unsubscriber {
     constructor() {
       super();
+      console.log('oninit config service');
 
       this.config$.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
         this.value$.next(value);

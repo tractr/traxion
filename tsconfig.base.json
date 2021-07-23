@@ -19,6 +19,7 @@
       "@tractr/angular-authentication": [
         "libs/angular/authentication/src/index.ts"
       ],
+      "@tractr/angular-casl": ["libs/angular/casl/src/index.ts"],
       "@tractr/angular-components": ["libs/angular/components/src/index.ts"],
       "@tractr/angular-config": ["libs/angular/config/src/index.ts"],
       "@tractr/angular-file-storage": [
@@ -37,14 +38,14 @@
       "@tractr/hapify-templates-angular-rext-client": [
         "libs/hapify/templates/angular-rext-client/src/index.ts"
       ],
+      "@tractr/hapify-templates-casl": [
+        "libs/hapify/templates/casl/src/index.ts"
+      ],
       "@tractr/hapify-templates-dbml": [
         "libs/hapify/templates/dbml/src/index.ts"
       ],
       "@tractr/hapify-templates-models": [
         "libs/hapify/templates/models/src/index.ts"
-      ],
-      "@tractr/hapify-templates-nestjs-casl": [
-        "libs/hapify/templates/nestjs-casl/src/index.ts"
       ],
       "@tractr/hapify-templates-nestjs-models": [
         "libs/hapify/templates/nestjs-models/src/index.ts"

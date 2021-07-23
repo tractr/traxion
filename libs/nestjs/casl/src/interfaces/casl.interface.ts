@@ -1,12 +1,11 @@
 import { AnyAbility } from '@casl/ability';
 
-import { DefinePermissions } from './define-permission.interfaces';
-import { CaslUser, CaslUserRoles } from './user.interfaces';
+import { CaslUser, CaslUserRoles, RolePermissions } from '@tractr/common';
 
 export interface CaslOptions<
   R extends CaslUserRoles = CaslUserRoles,
   U extends CaslUser = { roles: R[] },
   A extends AnyAbility = AnyAbility,
 > {
-  rolePermissions: Record<R, DefinePermissions<U, A>>;
+  rolePermissions: RolePermissions<R, U, A>;
 }

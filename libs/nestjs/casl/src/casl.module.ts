@@ -2,21 +2,19 @@ import { AnyAbility } from '@casl/ability';
 import { DynamicModule, Module } from '@nestjs/common';
 
 import { CASL_MODULE_OPTIONS } from './casl.constant';
-import { CaslOptions, CaslUser, CaslUserRoles } from './interfaces';
+import { CaslOptions } from './interfaces';
 import { CaslAbilityFactoryService } from './services/casl.service';
 
-import {
-  AsyncOptions,
-  ModuleOptionsHelper,
-  OptionsFactory,
-} from '@tractr/nestjs-core';
+import { CaslUser, CaslUserRoles } from '@tractr/common';
+
+import { AsyncOptions, ModuleOptionsFactory } from '@tractr/nestjs-core';
 
 @Module({
   controllers: [],
   providers: [CaslAbilityFactoryService],
   exports: [CaslAbilityFactoryService],
 })
-export class CaslModule extends ModuleOptionsHelper<CaslOptions>(
+export class CaslModule extends ModuleOptionsFactory<CaslOptions>(
   CASL_MODULE_OPTIONS,
 ) {
   static register<
@@ -31,17 +29,7 @@ export class CaslModule extends ModuleOptionsHelper<CaslOptions>(
     R extends CaslUserRoles = CaslUserRoles,
     U extends CaslUser = { roles: [] },
     A extends AnyAbility = AnyAbility,
-  >(
-    options: AsyncOptions<
-      CaslOptions<R, U, A>,
-      OptionsFactory<CaslOptions<R, U, A>>
-    >,
-  ): DynamicModule {
-    return super.registerAsync(
-      options as unknown as AsyncOptions<
-        CaslOptions,
-        OptionsFactory<CaslOptions>
-      >,
-    );
+  >(options: AsyncOptions<CaslOptions<R, U, A>>): DynamicModule {
+    return super.registerAsync(options as unknown as AsyncOptions<CaslOptions>);
   }
 }

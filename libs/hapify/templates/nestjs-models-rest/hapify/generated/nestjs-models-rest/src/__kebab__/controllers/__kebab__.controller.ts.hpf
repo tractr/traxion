@@ -11,6 +11,8 @@ import {
   Query,
 } from '@nestjs/common';
 import { <<Model pascal>> } from '@prisma/client';
+import { Permission } from '../../../../casl';
+import { Policies } from '@tractr/nestjs-core';
  
 import { <<Model pascal>>Service, <<Model constant>>_SERVICE } from '../../../../nestjs-models-common';
 import {
@@ -46,6 +48,7 @@ export class <<Model pascal>>Controller {
    * @returns a new <<Model pascal>>
    */
   @Post()
+  @Policies(Permission.CREATE_<<Model constant>>)
   public create(@Body() bodyDto: <<Model pascal>>CreateBodyDto) {
     const formatedParams = this.<<Model camel>>RestDtoService.formatCreateDto(bodyDto);
     return this.<<Model camel>>Service.create(formatedParams);
@@ -58,6 +61,7 @@ export class <<Model pascal>>Controller {
   * @returns the number of <<Model pascal>>
   */
   @Get('count')
+  @Policies(Permission.COUNT_<<Model constant>>)
   public async count(@Query() queryDto: <<Model pascal>>CountQueryDto): Promise<number> {
     const formatedParams = this.<<Model camel>>RestDtoService.formatCountDto(queryDto);
     return this.<<Model camel>>Service.count(formatedParams);
@@ -71,6 +75,7 @@ export class <<Model pascal>>Controller {
    * @returns a <<Model pascal>> or null
    */
   @Get(':id')
+  @Policies(Permission.READ_<<Model constant>>)
   public findUnique(
     @Param() paramsDto: <<Model pascal>>FindUniqueParamsDto,
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
@@ -93,6 +98,7 @@ export class <<Model pascal>>Controller {
    * @returns an array of <<Model pascal>> entities
    */
   @Get()
+  @Policies(Permission.SEARCH_<<Model constant>>)
   public findMany(
     @Query() queryDto: <<Model pascal>>FindManyQueryDto,
   ) {
@@ -112,6 +118,7 @@ export class <<Model pascal>>Controller {
    * @returns the updated <<Model pascal>>
    */
   @Patch(':id')
+  @Policies(Permission.UPDATE_<<Model constant>>)
   public update(
     @Param() paramsDto: <<Model pascal>>UpdateParamsDto,
     @Body() bodyDto: <<Model pascal>>UpdateBodyDto,
@@ -136,6 +143,7 @@ export class <<Model pascal>>Controller {
    * @returns the updated <<Model pascal>>
    */
   @Put(':id')
+  @Policies(Permission.UPDATE_<<Model constant>>)
   public upsert(
     @Param() paramsDto: <<Model pascal>>UpsertParamsDto,
     @Body() bodyDto: <<Model pascal>>UpsertBodyDto,
@@ -154,6 +162,7 @@ export class <<Model pascal>>Controller {
    * @returns the updated <<Model pascal>>
    */
   @Delete(':id')
+  @Policies(Permission.REMOVE_<<Model constant>>)
   public delete(@Param() paramsDto: <<Model pascal>>DeleteParamsDto) {
     const formatedParams = this.<<Model camel>>RestDtoService.formatDeleteDto(paramsDto);
     return this.<<Model camel>>Service.delete(formatedParams);

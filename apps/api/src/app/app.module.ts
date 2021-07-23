@@ -4,8 +4,8 @@ import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+import { rolePermissions } from '@generated/casl';
 import { User } from '@generated/models';
-import { rolePermissions } from '@generated/nestjs-casl';
 import { ModelsModule } from '@generated/nestjs-models';
 import {
   AuthenticationModule,

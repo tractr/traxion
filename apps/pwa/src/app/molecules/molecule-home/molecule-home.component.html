@@ -2,4 +2,11 @@
 
 <p>User state : {{ isLogged ? 'connected' : 'not connected' }}</p>
 
-<button *ngIf="isLogged" (click)="sessionService.logout()">logout</button>
+<div *ngIf="isLogged">
+  <p>The current user has this roles: {{ user?.roles }}</p>
+
+  <!-- <div *ngIf="'create' | able: 'User'">
+    <p>He is able to create a User</p>
+  </div> -->
+  <button (click)="sessionService.logout()">logout</button>
+</div>
