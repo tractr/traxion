@@ -30,6 +30,7 @@ import {
   AngularConfigService,
   AppInitializerProvider,
 } from '@tractr/angular-config';
+import { FileStorageModule } from '@tractr/angular-file-storage';
 import { AngularFormModule } from '@tractr/angular-form';
 import { AngularToolsModule } from '@tractr/angular-tools';
 
@@ -76,6 +77,22 @@ import { AngularToolsModule } from '@tractr/angular-tools';
         },
         user: User,
       }),
+      deps: [ANGULAR_CONFIG_SERVICE],
+    }),
+    FileStorageModule.forRootAsync({
+      useFactory: (
+        defaultConfig,
+        angularConfigService: AngularConfigService<AppConfig>,
+      ) => {
+        const fileStorageConfig = angularConfigService.config?.fileStorage;
+
+        if (!fileStorageConfig) throw new Error('Failed to load app config');
+
+        return {
+          ...defaultConfig,
+          ...fileStorageConfig,
+        };
+      },
       deps: [ANGULAR_CONFIG_SERVICE],
     }),
   ],

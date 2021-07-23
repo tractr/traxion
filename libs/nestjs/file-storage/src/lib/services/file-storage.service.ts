@@ -3,13 +3,13 @@ import { Client, CopyConditions } from 'minio';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FILE_STORAGE_CONFIGURATION } from '../constants';
-import { FileStorageConfigurationDto } from '../dtos';
+import { FileStorageConfigurationPrivateDto } from '../dtos';
 
 @Injectable()
 export class FileStorageService extends Client {
   constructor(
     @Inject(FILE_STORAGE_CONFIGURATION)
-    private fileStorageConfiguration: FileStorageConfigurationDto,
+    private fileStorageConfiguration: FileStorageConfigurationPrivateDto,
   ) {
     super(fileStorageConfiguration);
   }
