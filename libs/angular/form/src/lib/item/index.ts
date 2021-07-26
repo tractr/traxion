@@ -6,3 +6,4 @@ export * from './button';
 export * from './checkbox';
 export * from './array';
 export * from './model';
+export * from './base';

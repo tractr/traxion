@@ -8,7 +8,7 @@ import { FormItemBaseComponent } from '../../base/form-item-base.component';
   template: '',
 })
 export abstract class FormModelSelectComponent extends FormItemBaseComponent<
-  Record<string, unknown>
+  Record<string, unknown> | Record<string, unknown>[]
 > {
   @Input() delayed = 200;
 
