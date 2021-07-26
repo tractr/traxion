@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.11.0](https://github.com/tractr/stack/compare/angular-form-0.10.0...angular-form-0.11.0) (2021-07-26)
+
+
+### Features
+
+* **angular-form:** allow to override model select ([#205](https://github.com/tractr/stack/issues/205)) ([1b9be20](https://github.com/tractr/stack/commit/1b9be207e0902a474835d02b221ac578606dd1ff))
+
+
+
 # [0.10.0](https://github.com/tractr/stack/compare/angular-form-0.9.0...angular-form-0.10.0) (2021-07-26)
 
 
