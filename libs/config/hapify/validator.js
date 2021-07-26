@@ -55,5 +55,9 @@ for (const field of fields) {
     errors.push(
       `Entity field with subtype 'oneOne' must not have 'multiple' property. Fix field '${field.name}'`,
     );
+  if (field.type === 'entity' && !field.subtype)
+    errors.push(
+      `Entity field needs to have subtype. Fix field '${field.name}'`,
+    );
 }
 return { errors, warnings };
