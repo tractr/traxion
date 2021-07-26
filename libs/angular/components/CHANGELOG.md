@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.7.0](https://github.com/tractr/stack/compare/angular-components-0.6.1...angular-components-0.7.0) (2021-07-26)
+
+
+### Features
+
+* Fix/component ([#201](https://github.com/tractr/stack/issues/201)) ([d220c19](https://github.com/tractr/stack/commit/d220c191eb5649ee22a07a219e43aa66a659e24e))
+
+
+
 ## [0.6.1](https://github.com/tractr/stack/compare/angular-components-0.6.0...angular-components-0.6.1) (2021-07-19)
 
 
