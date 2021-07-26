@@ -17,13 +17,6 @@ export abstract class FormModelSelectComponent extends FormItemBaseComponent<
   }
 
   initControl(): FormControl {
-    return new FormControl(this.state, [
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      ...(this.required ? [Validators.required] : []),
-    ]);
-  }
-
-  getControl(): FormControl {
     return this.formBuilder.control(this.state, [
       // eslint-disable-next-line @typescript-eslint/unbound-method
       ...(this.required ? [Validators.required] : []),
