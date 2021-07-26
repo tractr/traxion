@@ -15,11 +15,8 @@ export class FileStorageController {
    */
   @Get('upload')
   getPresignedUploadUrl(@Query() queryDto: GetPresignedUploadUrlQueryDto) {
-    const { mimeType, customBucket } = queryDto;
-    return this.fileStorageService.getPresignedUploadUrl(
-      mimeType,
-      customBucket,
-    );
+    const { mimeType } = queryDto;
+    return this.fileStorageService.getPresignedUploadUrl(mimeType);
   }
 
   /**
@@ -27,7 +24,7 @@ export class FileStorageController {
    */
   @Get('download')
   getPresignedDownloadUrl(@Query() queryDto: GetPresignedDownloadUrlQueryDto) {
-    const { file, customBucket } = queryDto;
-    return this.fileStorageService.getPresignedDownloadUrl(file, customBucket);
+    const { file } = queryDto;
+    return this.fileStorageService.getPresignedDownloadUrl(file);
   }
 }
