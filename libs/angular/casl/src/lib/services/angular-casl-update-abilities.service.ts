@@ -5,22 +5,27 @@ import { catchError, of, takeUntil } from 'rxjs';
 import { CASL_MODULE_OPTIONS } from '../constants';
 import { CaslOptions, UserMin } from '../interfaces';
 
+import {
+  SESSION_SERVICE,
+  SessionService,
+} from '@tractr/angular-authentication';
 import { Unsubscriber } from '@tractr/angular-tools';
 import { CaslUserRoles } from '@tractr/common';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class CaslUpdateAbilitiesService extends Unsubscriber {
   constructor(
     @Inject(CASL_MODULE_OPTIONS)
     private caslOptions: CaslOptions,
+    @Inject(SESSION_SERVICE)
+    private sessionService: SessionService,
     private ability: Ability,
   ) {
     super();
-    console.log('on CaslUpdateAbilitiesService init');
+  }
 
-    this.caslOptions.me$
+  onInit() {
+    this.sessionService.me$
       .pipe(
         takeUntil(this.unsubscribe$),
         catchError(() => of(null)),
@@ -29,7 +34,6 @@ export class CaslUpdateAbilitiesService extends Unsubscriber {
   }
 
   updateAbility(user: UserMin | null): void {
-    console.log('here updating user capabilities', user);
     if (user === null) {
       this.ability.update([]);
       return;

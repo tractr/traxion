@@ -11,11 +11,7 @@ import { AsyncOptions, ModuleOptionsFactory } from '@tractr/angular-tools';
 @NgModule({
   imports: [AbilityModule],
   providers: [
-    {
-      provide: CaslUpdateAbilitiesService,
-      useClass: CaslUpdateAbilitiesService,
-      deps: [CASL_MODULE_OPTIONS, Ability],
-    },
+    CaslUpdateAbilitiesService,
     { provide: Ability, useValue: new Ability() },
     { provide: PureAbility, useExisting: Ability },
   ],
@@ -24,10 +20,6 @@ import { AsyncOptions, ModuleOptionsFactory } from '@tractr/angular-tools';
 export class AngularCaslModule extends ModuleOptionsFactory<CaslOptions>(
   CASL_MODULE_OPTIONS,
 ) {
-  constructor(private caslUpdate: CaslUpdateAbilitiesService) {
-    super();
-  }
-
   static register(
     options: CaslOptions,
   ): ModuleWithProviders<AngularCaslModule> {
@@ -48,5 +40,11 @@ export class AngularCaslModule extends ModuleOptionsFactory<CaslOptions>(
     options: AsyncOptions<CaslOptions>,
   ): ModuleWithProviders<AngularCaslModule> {
     return super.forRootAsync(options);
+  }
+
+  constructor(private casl: CaslUpdateAbilitiesService) {
+    super();
+
+    this.casl.onInit();
   }
 }

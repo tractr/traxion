@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons-angular/icons';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
-import { AppConfig, getConfig } from '../environments/environment';
+import { AppConfig } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
@@ -23,7 +23,6 @@ import { User } from '@generated/models';
 import {
   AngularAuthenticationModule,
   AngularAuthenticationRoutingModule,
-  SESSION_SERVICE,
 } from '@tractr/angular-authentication';
 import { AngularCaslModule } from '@tractr/angular-casl';
 import { AngularComponentsModule } from '@tractr/angular-components';
@@ -31,7 +30,6 @@ import {
   ANGULAR_CONFIG_SERVICE,
   AngularConfigModule,
   AngularConfigService,
-  AppInitializerProvider,
 } from '@tractr/angular-config';
 import { FileStorageModule } from '@tractr/angular-file-storage';
 import { AngularFormModule } from '@tractr/angular-form';
@@ -57,32 +55,25 @@ import { AngularToolsModule } from '@tractr/angular-tools';
       useFactory: (
         defaultOptions,
         appConfigService: AngularConfigService<AppConfig>,
-      ) => {
-        const { config } = appConfigService;
-        console.log(defaultOptions, appConfigService);
-        return {
-          ...defaultOptions,
-          api: {
-            url: (config && config.apiUri) || '',
-          },
-          user: User,
-        };
-      },
+      ) => ({
+        ...defaultOptions,
+        api: {
+          url: appConfigService.config?.apiUri || '',
+        },
+        user: User,
+      }),
       deps: [ANGULAR_CONFIG_SERVICE],
     }),
     AngularCaslModule.forRootAsync({
-      useFactory: (defaultOptions, sessionService) => ({
+      useFactory: (defaultOptions) => ({
         ...defaultOptions,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         rolePermissions: rolePermissions as any,
-        me$: sessionService.me$,
       }),
-      deps: [SESSION_SERVICE],
+      deps: [ANGULAR_CONFIG_SERVICE],
     }),
     NzIconModule.forRoot([EyeInvisibleOutline, PlusOutline]),
-    AngularConfigModule.forRoot({
-      getConfig,
-    }),
+    AngularConfigModule.forRoot(),
     AngularRextModule.forRootAsync({
       useFactory: (_, appConfigService: AngularConfigService<AppConfig>) => ({
         api: {
@@ -109,7 +100,7 @@ import { AngularToolsModule } from '@tractr/angular-tools';
       deps: [ANGULAR_CONFIG_SERVICE],
     }),
   ],
-  providers: [AppInitializerProvider],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

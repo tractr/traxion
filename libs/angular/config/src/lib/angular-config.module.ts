@@ -24,13 +24,13 @@ export class AngularConfigModule extends ModuleOptionsFactory<AngularConfigOptio
   ANGULAR_DEFAULTS_OPTIONS,
 ) {
   static register(
-    options: Partial<AngularConfigOptions>,
+    options?: Partial<AngularConfigOptions>,
   ): ModuleWithProviders<AngularConfigModule> {
     return super.register(options);
   }
 
   static forRoot(
-    options: Partial<AngularConfigOptions>,
+    options?: Partial<AngularConfigOptions>,
   ): ModuleWithProviders<AngularConfigModule> {
     return super.forRoot(options);
   }

@@ -1,1 +1,1 @@
-export * from './lib/angular-casl.module';
+export * from './lib';

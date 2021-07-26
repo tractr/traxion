@@ -1,5 +1,5 @@
 import { APP_INITIALIZER, FactoryProvider } from '@angular/core';
-import { catchError, of, tap } from 'rxjs';
+import { catchError, lastValueFrom, of } from 'rxjs';
 
 import { ANGULAR_CONFIG_SERVICE } from './angular-config.constant';
 import { AngularConfig, AngularConfigService } from './interfaces';
@@ -7,14 +7,14 @@ import { AngularConfig, AngularConfigService } from './interfaces';
 export function loadConfigFactory<T extends AngularConfig>(
   configService: AngularConfigService<T>,
 ) {
-  console.log('oninit loadConfigFactory service');
   return () =>
-    configService.waitInitialisationConfig$.pipe(
-      catchError((err) => {
-        console.error(err);
-        return of({});
-      }),
-      tap(() => console.log('config loaded')),
+    lastValueFrom(
+      configService.waitInitialisationConfig$.pipe(
+        catchError((err) => {
+          console.error(err);
+          return of({});
+        }),
+      ),
     );
 }
 

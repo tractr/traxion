@@ -842,12 +842,6 @@
           },
           "outputs": ["{options.outputPath}"]
         },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/hapify/templates/casl/**/*.ts"]
-          }
-        },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
           "options": {

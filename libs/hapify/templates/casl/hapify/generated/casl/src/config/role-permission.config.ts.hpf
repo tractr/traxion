@@ -27,6 +27,9 @@ export const rolePermissions: RolePermissions<
     can('<<=access.action>>', '<<model pascal>>', { <<for model.fields field>><<if field ownership >><<< if (field.meta.ownerKey) { >>><<-field ownerKey camel>><<< } else { >>><<=field.name>><<<}>>>: user?.id<<endif>><<endfor>> });
         <<endif>>
       <<endfor>>
+      <<for model.accesses.guest access>>
+        can('<<=access.action>>', '<<model pascal>>');
+      <<endfor>>
     <<endfor>>
   },
   admin({ can }) {

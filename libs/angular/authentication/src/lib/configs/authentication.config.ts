@@ -1,8 +1,12 @@
 import { InjectionToken } from '@angular/core';
+import { AnyAbility } from '@casl/ability';
+import { UserRoles } from '@prisma/client';
 import { ClassConstructor } from 'class-transformer';
 import { RequiredKeys } from 'ts-essentials';
 
 import { User } from '../generated/models';
+
+import { RolePermissions } from '@tractr/common';
 
 export const SESSION_SERVICE = new InjectionToken('session.service');
 
@@ -13,11 +17,16 @@ export const AUTH_OPTIONS = new InjectionToken<AuthenticationOptions>(
 export interface AuthenticationOptions<
   U extends User = User,
   CCU extends ClassConstructor<U> = ClassConstructor<U>,
+  R extends UserRoles = UserRoles,
+  A extends AnyAbility = AnyAbility,
 > {
   api: {
     url: string;
   };
   user: CCU;
+
+  rolePermissions?: RolePermissions<R, U, A>;
+
   routing: {
     prefix: string[];
   };
@@ -38,7 +47,7 @@ export interface AuthenticationOptions<
 export type AuthenticationPublicOptions<
   U extends User = User,
   CCU extends ClassConstructor<U> = ClassConstructor<U>,
-> = Pick<AuthenticationOptions<U, CCU>, 'api' | 'user'>;
+> = Pick<AuthenticationOptions<U, CCU>, 'api' | 'user' | 'rolePermissions'>;
 
 export type AuthenticationDefaultOptions<
   U extends User = User,

@@ -5,8 +5,13 @@
 <div *ngIf="isLogged">
   <p>The current user has this roles: {{ user?.roles }}</p>
 
-  <!-- <div *ngIf="'create' | able: 'User'">
-    <p>He is able to create a User</p>
-  </div> -->
+  <div *ngIf="'create' | able: 'User'">He is able to create a User</div>
+  <div *ngIf="'read' | able: 'User'">He is able to read a User</div>
+  <div *ngIf="'update' | able: 'User'">He is able to update a User</div>
+  <div *ngIf="'search' | able: 'User'">He is able to search a User</div>
+  <div *ngIf="'delete' | able: 'User'">He is able to delete a User</div>
+  <div *ngIf="'all' | able: 'User'">He is able to all a User</div>
+  <div *ngIf="'test' | able: 'User'">He is able to test a User</div>
+
   <button (click)="sessionService.logout()">logout</button>
 </div>
