@@ -13,6 +13,10 @@ import {
 import { <<Model pascal>> } from '@prisma/client';
 import { Permission } from '../../../../casl';
 import { Policies } from '@tractr/nestjs-core';
+<<if Fields ownership>>
+import { CurrentUser } from '@tractr/nestjs-authentication';
+<<endif>>
+import { <<Model pascal>>, Prisma } from '@prisma/client';
  
 import { <<Model pascal>>Service, <<Model constant>>_SERVICE } from '../../../../nestjs-models-common';
 import {
@@ -49,9 +53,20 @@ export class <<Model pascal>>Controller {
    */
   @Post()
   @Policies(Permission.CREATE_<<Model constant>>)
-  public create(@Body() bodyDto: <<Model pascal>>CreateBodyDto) {
-    const formatedParams = this.<<Model camel>>RestDtoService.formatCreateDto(bodyDto);
-    return this.<<Model camel>>Service.create(formatedParams);
+  public create(
+    @Body() bodyDto: <<Model pascal>>CreateBodyDto,
+    <<if Fields internal and ownership and not primary>>
+    @CurrentUser() user: { id: string },
+    <<endif>>
+  ) {
+    let formatedParams = this.<<Model camel>>RestDtoService.formatCreateDto(bodyDto);
+ 
+    <<for Fields internal and ownership and not primary field>>
+    // Add <<field camel>> ownership
+    formatedParams.data = this.<<Model camel>>Service.add<<field pascal>>OwnerShip(formatedParams.data, { id: user.id });
+    <<endfor>>
+ 
+    return this.<<Model camel>>Service.create(formatedParams as Prisma.<<Model pascal>>CreateArgs);
   }
  
   /**
@@ -147,12 +162,21 @@ export class <<Model pascal>>Controller {
   public upsert(
     @Param() paramsDto: <<Model pascal>>UpsertParamsDto,
     @Body() bodyDto: <<Model pascal>>UpsertBodyDto,
+    <<if Fields internal and ownership and not primary>>
+    @CurrentUser() user: { id: string },
+    <<endif>>
   ) {
     const formatedParams = this.<<Model camel>>RestDtoService.formatUpsertDtos(
       paramsDto,
-      bodyDto,
+      bodyDto
     );
-    return this.<<Model camel>>Service.upsert(formatedParams);
+  
+    <<for Fields internal and ownership and not primary field>>
+    // Add <<field camel>> ownership
+    formatedParams.create = this.<<Model camel>>Service.add<<field pascal>>OwnerShip(formatedParams.create, { id: user.id });
+    <<endfor>>
+ 
+    return this.<<Model camel>>Service.upsert(formatedParams as Prisma.<<Model pascal>>UpsertArgs);
   }
  
   /**

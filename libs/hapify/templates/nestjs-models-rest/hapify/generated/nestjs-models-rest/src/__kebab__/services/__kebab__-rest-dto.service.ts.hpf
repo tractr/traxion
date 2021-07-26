@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { Merge } from 'ts-essentials';
  
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
 import { 
@@ -9,6 +10,12 @@ import {
   formatPopulate,
 } from '../../helpers';
 <<<}>>>
+
+import {
+  <<Model pascal>>Service,
+  <<Model constant>>_SERVICE,
+} from '../../../../nestjs-models-common';
+
 import {
   <<Model pascal>>CountQueryDto,
   <<Model pascal>>CreateBodyDto,
@@ -26,6 +33,12 @@ import {
  
 @Injectable()
 export class <<Model pascal>>RestDtoService {
+
+  constructor(
+    @Inject(<<Model constant>>_SERVICE)
+    protected <<Model camel>>Service: <<Model pascal>>Service,
+  ) {}
+
   /**
    * Format dtos to create a <<Model pascal>>
    *
@@ -34,7 +47,22 @@ export class <<Model pascal>>RestDtoService {
    */
   public formatCreateDto(
     bodyDto: <<Model pascal>>CreateBodyDto
-  ): Prisma.<<Model pascal>>CreateArgs {
+  ):
+    <<if Fields internal and entity>>
+    Merge<
+      Prisma.<<Model pascal>>CreateArgs,
+      {
+        data: Omit<Prisma.<<Model pascal>>CreateInput, 
+        <<for Fields internal and entity field>>
+          | '<<field camel>>'
+        <<endfor>>
+        >;
+      }
+    >
+    <<else>>
+    Prisma.<<Model pascal>>CreateArgs
+    <<endif>> 
+  {
     const {
     <<for Fields entity and not internal field>>
       <<field camel>>,
@@ -59,7 +87,14 @@ export class <<Model pascal>>RestDtoService {
       <<endif>>
     <<endfor>>
     }
-    return { data };
+
+    return { 
+      <<if Fields internal and not primary and (not entity or nullable)>>
+      data:  this.<<Model camel>>Service.assignInternalsToCreateDto(data)
+      <<else>>
+      data
+      <<endif>>
+    };
   }
     
   /**
@@ -205,8 +240,23 @@ export class <<Model pascal>>RestDtoService {
    */
   public formatUpsertDtos(
     paramsDto: <<Model pascal>>UpsertParamsDto,
-    bodyDto: <<Model pascal>>UpsertBodyDto
-  ): Prisma.<<Model pascal>>UpsertArgs {
+    bodyDto: <<Model pascal>>UpsertBodyDto,
+  ):
+    <<if Fields internal and entity>>
+    Merge<
+      Prisma.<<Model pascal>>UpsertArgs,
+      {
+        create: Omit<Prisma.<<Model pascal>>CreateInput, 
+        <<for Fields internal and entity field>>
+          | '<<field camel>>'
+        <<endfor>>
+        >;
+      }
+    >
+    <<else>>
+    Prisma.<<Model pascal>>UpsertArgs
+    <<endif>>
+  {
     const {
     <<for Fields not internal field>>
       <<field camel>>,
@@ -233,7 +283,11 @@ export class <<Model pascal>>RestDtoService {
     };
     const update = { ...create };
     return { 
+      <<if Fields internal and not primary and (not entity or nullable)>>
+      create: this.<<Model camel>>Service.assignInternalsToCreateDto(create),
+      <<else>>
       create,
+      <<endif>>
       update,
       where: { ...paramsDto } 
     };
