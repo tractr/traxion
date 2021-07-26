@@ -12,11 +12,11 @@ export abstract class FormModelSelectComponent extends FormItemBaseComponent<
 > {
   @Input() delayed = 200;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(protected formBuilder: FormBuilder) {
     super();
   }
 
-  getControl(): FormControl {
+  initControl(): FormControl {
     return this.formBuilder.control(this.state, [
       // eslint-disable-next-line @typescript-eslint/unbound-method
       ...(this.required ? [Validators.required] : []),
