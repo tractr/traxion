@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { FormInputBaseComponent } from '../form-input-base.component';
@@ -14,7 +14,7 @@ export class FormInputStringComponent
 {
   inputType: 'text' | 'email' | 'password' = 'text';
 
-  autocomplete: 'on' | 'off' = 'off';
+  @Input() autocomplete?: 'on' | 'off';
 
   constructor(private formBuilder: FormBuilder) {
     super();
@@ -26,7 +26,8 @@ export class FormInputStringComponent
     if (this.subtype === 'email') this.inputType = 'email';
     if (this.subtype === 'password') this.inputType = 'password';
 
-    this.autocomplete = this.inputType === 'password' ? 'on' : 'off';
+    if (!this.autocomplete)
+      this.autocomplete = this.inputType === 'password' ? 'on' : 'off';
   }
 
   initControl(): FormControl {

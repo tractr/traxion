@@ -13,7 +13,7 @@ export class InputStringComponent extends InputBaseComponent<string> {
   @Input() type: 'text' | 'email' | 'password' = 'text';
 
   /** Enable autocomplete */
-  @Input() autocomplete: 'on' | 'off' = 'off';
+  @Input() autocomplete?: 'on' | 'off' = 'off';
 
   /** Input's placeholder */
   @Input() placeholder = '';
