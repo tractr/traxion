@@ -1,4 +1,4 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class GetPresignedDownloadUrlQueryDto {
   /**
@@ -6,12 +6,4 @@ export class GetPresignedDownloadUrlQueryDto {
    */
   @IsString()
   file!: string;
-
-  /**
-   * Specify a custom bucket. Else default bucket
-   * will be used
-   */
-  @IsString()
-  @IsOptional()
-  customBucket?: string;
 }

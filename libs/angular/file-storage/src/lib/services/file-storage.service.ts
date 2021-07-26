@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap, share } from 'rxjs/operators';
 
 import { FILE_STORAGE_CONFIGURATION } from '../constants';
 import {
@@ -27,14 +27,12 @@ export class FileStorageService {
    * bucket will be used
    * @returns Observable that resolve into a presigned post token
    */
-  public getPresignedUploadUrl(mimeType: string, customBucket?: string) {
-    const { defaultBucket, presignedUploadEndpoint } =
-      this.fileStorageConfiguration;
-    const bucket = customBucket ?? defaultBucket;
+  public getPresignedUploadUrl(mimeType: string) {
+    const { presignedUploadEndpoint } = this.fileStorageConfiguration;
     return this.http.get<FileStoragePresignedPostToken>(
       presignedUploadEndpoint,
       {
-        params: { mimeType, bucket },
+        params: { mimeType },
       },
     );
   }
@@ -46,14 +44,12 @@ export class FileStorageService {
    * bucket will be used
    * @returns Observable that resolve into a presigned post token
    */
-  public getPresignedDownloadUrl(file: string, customBucket?: string) {
-    const { defaultBucket, presignedDownloadEndpoint } =
-      this.fileStorageConfiguration;
-    const bucket = customBucket ?? defaultBucket;
+  public getPresignedDownloadUrl(file: string) {
+    const { presignedDownloadEndpoint } = this.fileStorageConfiguration;
     return this.http.get<FileStoragePresignedPostToken>(
       presignedDownloadEndpoint,
       {
-        params: { bucket, file },
+        params: { file },
       },
     );
   }
@@ -88,14 +84,10 @@ export class FileStorageService {
    * @param reportProgress - Option to report request progress
    * @returns Observable
    */
-  public uploadFileToFileStorage(
-    file: File,
-    reportProgress = false,
-    customBucket?: string,
-  ) {
+  public uploadFileToFileStorage(file: File, reportProgress = false) {
     if (!file) throw new Error('No file provided for upload to file storage');
 
-    return this.getPresignedUploadUrl(file.type, customBucket).pipe(
+    return this.getPresignedUploadUrl(file.type).pipe(
       map(({ formData, postUrl }) => ({
         postUrl,
         formData: this.generateFormData(formData, file),
@@ -103,6 +95,7 @@ export class FileStorageService {
       mergeMap(({ postUrl, formData }) =>
         this.http.post(postUrl, formData, { reportProgress }),
       ),
+      share(),
     );
   }
 }

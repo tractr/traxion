@@ -1,4 +1,4 @@
-import { IsMimeType, IsOptional, IsString } from 'class-validator';
+import { IsMimeType } from 'class-validator';
 
 export class GetPresignedUploadUrlQueryDto {
   /**
@@ -6,12 +6,4 @@ export class GetPresignedUploadUrlQueryDto {
    */
   @IsMimeType()
   mimeType!: string;
-
-  /**
-   * Specify a custom bucket. Else default bucket
-   * will be used
-   */
-  @IsString()
-  @IsOptional()
-  customBucket?: string;
 }
