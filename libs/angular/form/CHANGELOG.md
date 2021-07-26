@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.12.0](https://github.com/tractr/stack/compare/angular-form-0.11.0...angular-form-0.12.0) (2021-07-26)
+
+
+### Features
+
+* **angular-form:** fix model select type ([#206](https://github.com/tractr/stack/issues/206)) ([2a54dec](https://github.com/tractr/stack/commit/2a54decb949886ba65a010add111373a305df78a))
+
+
+
 # [0.11.0](https://github.com/tractr/stack/compare/angular-form-0.10.0...angular-form-0.11.0) (2021-07-26)
 
 
