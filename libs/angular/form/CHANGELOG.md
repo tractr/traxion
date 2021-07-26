@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.10.0](https://github.com/tractr/stack/compare/angular-form-0.9.0...angular-form-0.10.0) (2021-07-26)
+
+
+### Features
+
+* Fix/component ([#201](https://github.com/tractr/stack/issues/201)) ([d220c19](https://github.com/tractr/stack/commit/d220c191eb5649ee22a07a219e43aa66a659e24e))
+
+
+
 # [0.9.0](https://github.com/tractr/stack/compare/angular-form-0.8.1...angular-form-0.9.0) (2021-07-22)
 
 
