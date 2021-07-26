@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.5](https://github.com/tractr/stack/compare/angular-file-storage-0.1.4...angular-file-storage-0.1.5) (2021-07-26)
+
+
+### Bug Fixes
+
+* remove customBucket option from angular service and rest controller in file-storage ([#204](https://github.com/tractr/stack/issues/204)) ([b6d71b0](https://github.com/tractr/stack/commit/b6d71b0c7dfe16a9b865d48443f58827d7309175))
+
+
+
 ## [0.1.4](https://github.com/tractr/stack/compare/angular-file-storage-0.1.3...angular-file-storage-0.1.4) (2021-07-23)
 
 
