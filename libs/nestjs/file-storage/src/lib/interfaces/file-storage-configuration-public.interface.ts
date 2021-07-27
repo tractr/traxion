@@ -22,12 +22,12 @@ export interface FileStorageConfigurationPublic extends ClientOptions {
   /**
    * Denote if SSL must be used
    */
-  useSSL?: boolean;
+  useSSL: boolean;
 
   /**
    * Port to reach file storage
    */
-  port?: number;
+  port: number;
 
   /**
    * Set this value to override
@@ -79,10 +79,10 @@ export interface FileStorageConfigurationPublic extends ClientOptions {
   /**
    * Configuration for presigned uploads
    */
-  presignedUpload?: PresignedUploadConfiguration;
+  presignedUpload: PresignedUploadConfiguration;
 
   /**
    * Configuration for presigned downloads
    */
-  presignedDownload?: PresignedDownloadConfiguration;
+  presignedDownload: PresignedDownloadConfiguration;
 }

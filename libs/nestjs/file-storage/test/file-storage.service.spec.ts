@@ -18,15 +18,6 @@ describe('S3Service', () => {
           defaultBucket: 'test',
           temporaryPrefix: 'temp',
           temporaryFilesTTL: 5000,
-          presignedUpload: {
-            allowedMimeTypes: ['image/jpeg'],
-            minFileSize: 1024,
-            maxFileSize: 10485760,
-            defaultValidity: 300,
-          },
-          presignedDownload: {
-            defaultValidity: 300,
-          },
         }),
       ],
     }).compile();

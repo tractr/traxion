@@ -10,6 +10,7 @@ import {
 import { ClientOptions as MinioClientOptions, Region } from 'minio';
 
 import { AwsRegions } from '../constants';
+import { PresignedDownloadConfiguration } from '../interfaces';
 import { PresignedDownloadConfigurationDto } from './presigned-download-configuration.dto';
 import { PresignedUploadConfigurationDto } from './presigned-upload-configuration';
 
@@ -36,15 +37,13 @@ export class FileStorageConfigurationPrivateDto implements MinioClientOptions {
    * Denote if SSL must be used
    */
   @IsBoolean()
-  @IsOptional()
-  useSSL = true;
+  useSSL!: boolean;
 
   /**
    * Port to reach file storage
    */
   @IsInt()
-  @IsOptional()
-  port?: number;
+  port!: number;
 
   /**
    * Set this value to override
@@ -111,8 +110,8 @@ export class FileStorageConfigurationPrivateDto implements MinioClientOptions {
   /**
    * Configuration for presigned uploads
    */
-  @Type(() => PresignedUploadConfigurationDto)
   @ValidateNested()
+  @Type(() => PresignedUploadConfigurationDto)
   presignedUpload!: PresignedUploadConfigurationDto;
 
   /**

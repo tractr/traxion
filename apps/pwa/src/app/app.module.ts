@@ -88,9 +88,9 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     FileStorageModule.forRootAsync({
       useFactory: (
         defaultConfig,
-        angularConfigService: AngularConfigService<AppConfig>,
+        appConfigService: AngularConfigService<AppConfig>,
       ) => {
-        const fileStorageConfig = angularConfigService.config?.fileStorage;
+        const fileStorageConfig = appConfigService.config?.fileStorage;
 
         if (!fileStorageConfig) throw new Error('Failed to load app config');
 
