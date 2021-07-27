@@ -1,8 +1,10 @@
+/* eslint-disable import/no-cycle */
+import 'reflect-metadata';
+
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
 import { Type } from 'class-transformer';
 <<<}>>>
 
-/* eslint-disable import/no-cycle */
 import {  
   <<if Fields boolean>>
   IsBoolean, 
