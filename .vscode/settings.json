@@ -29,6 +29,7 @@
     "vue",
     "markdown"
   ],
+  "jestrunner.changeDirectoryToWorkspaceRoot": true,
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.updateImportsOnFileMove.enabled": "always"
 }

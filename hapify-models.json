@@ -2,12 +2,12 @@
   "models": [
     {
       "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
+        "count": "owner",
+        "create": "auth",
+        "read": "auth",
+        "remove": "owner",
+        "search": "owner",
+        "update": "owner"
       },
       "fields": [
         {
@@ -16,6 +16,9 @@
           "type": "string"
         },
         {
+          "meta": {
+            "backRelation": "answers"
+          },
           "name": "user",
           "properties": [],
           "subtype": "oneMany",
@@ -23,6 +26,9 @@
           "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
         },
         {
+          "meta": {
+            "backRelation": "answers"
+          },
           "name": "question",
           "properties": [],
           "subtype": "oneMany",
@@ -30,6 +36,9 @@
           "value": "6894a782-2e83-cd6a-52cc-f62967165636"
         },
         {
+          "meta": {
+            "backRelation": "answers"
+          },
           "name": "tags",
           "properties": ["nullable", "multiple"],
           "subtype": "manyMany",
@@ -42,12 +51,12 @@
     },
     {
       "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
+        "count": "owner",
+        "create": "auth",
+        "read": "auth",
+        "remove": "owner",
+        "search": "owner",
+        "update": "owner"
       },
       "fields": [
         {
@@ -86,12 +95,12 @@
     },
     {
       "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
+        "count": "owner",
+        "create": "auth",
+        "read": "auth",
+        "remove": "owner",
+        "search": "owner",
+        "update": "owner"
       },
       "fields": [
         {
@@ -122,12 +131,12 @@
     },
     {
       "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
+        "count": "owner",
+        "create": "auth",
+        "read": "auth",
+        "remove": "owner",
+        "search": "owner",
+        "update": "owner"
       },
       "fields": [
         {
@@ -165,12 +174,12 @@
     },
     {
       "accesses": {
-        "count": "guest",
-        "create": "guest",
+        "count": "owner",
+        "create": "auth",
         "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
+        "remove": "owner",
+        "search": "owner",
+        "update": "owner"
       },
       "fields": [
         {
@@ -182,6 +191,16 @@
           "name": "label",
           "properties": ["label", "searchable", "sortable"],
           "type": "string"
+        },
+        {
+          "meta": {
+            "ownerKey": "ownerId"
+          },
+          "name": "owner",
+          "properties": ["ownership"],
+          "subtype": "oneMany",
+          "type": "entity",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
         }
       ],
       "id": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
@@ -192,7 +211,7 @@
         "count": "admin",
         "create": "guest",
         "read": "owner",
-        "remove": "owner",
+        "remove": "admin",
         "search": "admin",
         "update": "owner"
       },
@@ -226,27 +245,10 @@
           "type": "string"
         },
         {
-          "name": "role",
-          "notes": "admin or user",
-          "properties": ["searchable", "restricted"],
-          "type": "string"
-        },
-        {
-          "name": "banned",
-          "notes": "Allow admins to disable this user",
-          "properties": ["searchable", "restricted"],
-          "type": "boolean"
-        },
-        {
-          "name": "last connected at",
-          "properties": ["nullable", "searchable", "sortable"],
-          "type": "datetime"
-        },
-        {
-          "name": "gender",
-          "properties": ["searchable", "sortable"],
+          "name": "roles",
+          "properties": ["multiple", "searchable", "sortable"],
           "type": "enum",
-          "value": ["male", "female"]
+          "value": ["admin", "user", "guest"]
         }
       ],
       "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
@@ -254,12 +256,12 @@
     },
     {
       "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
+        "count": "owner",
+        "create": "auth",
+        "read": "auth",
+        "remove": "owner",
+        "search": "owner",
+        "update": "owner"
       },
       "fields": [
         {
@@ -292,5 +294,5 @@
     }
   ],
   "name": "New project",
-  "version": "2"
+  "version": "3"
 }

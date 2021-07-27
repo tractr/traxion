@@ -9,6 +9,7 @@ import {
   takeUntil,
 } from 'rxjs/operators';
 
+import { ANGULAR_CONFIGURATION_SESSION_STORAGE } from '../helpers';
 import {
   AngularConfig,
   AngularConfigOptions,
@@ -29,7 +30,10 @@ export function AngularConfigServiceFactory<
       });
     }
 
-    refresh$ = new BehaviorSubject<T | undefined>(undefined);
+    refresh$ = new BehaviorSubject<T | undefined>(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any)[ANGULAR_CONFIGURATION_SESSION_STORAGE],
+    );
 
     value$ = new BehaviorSubject<T | undefined>(undefined);
 
@@ -48,12 +52,21 @@ export function AngularConfigServiceFactory<
 
     waitInitialisationConfig$: Observable<T> = this.config$.pipe(take(1));
 
-    get config() {
-      return this.value$.getValue();
+    get config(): T {
+      const config = this.value$.getValue();
+
+      if (typeof config === 'undefined')
+        throw new Error('The configuration has not been initialized');
+
+      return config;
     }
 
-    set config(value: T | undefined) {
+    set config(value: T) {
       this.refresh$.next(value);
+    }
+
+    refresh() {
+      this.refresh$.next(undefined);
     }
   }
   return new AnonymousAngularConfigService();

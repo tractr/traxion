@@ -6,5 +6,5 @@ export interface AngularConfigService<T = unknown> {
   getConfig$: Observable<T>;
   config$: Observable<T>;
   waitInitialisationConfig$: Observable<T>;
-  config: T | undefined;
+  config: T;
 }

@@ -1,5 +1,7 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 
@@ -8,7 +10,13 @@ describe('AppComponent', () => {
     waitForAsync(async () => {
       await TestBed.configureTestingModule({
         declarations: [AppComponent],
-        imports: [HttpClientModule],
+        providers: [
+          {
+            provide: APP_BASE_HREF,
+            useValue: '/',
+          },
+        ],
+        imports: [RouterModule.forRoot([]), HttpClientModule],
       }).compileComponents();
     }),
   );
