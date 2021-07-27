@@ -18,6 +18,7 @@ export const appConfigValidator = transformAndValidate(AppConfigDto);
 
 export const getConfig = (appConfig: AngularConfig): AppConfig => {
   const config = appConfigValidator(appConfig);
+
   return {
     apiUri: config.API_URI,
     fileStorage: {

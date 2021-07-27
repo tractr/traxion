@@ -19,6 +19,7 @@
       "@tractr/angular-authentication": [
         "libs/angular/authentication/src/index.ts"
       ],
+      "@tractr/angular-casl": ["libs/angular/casl/src/index.ts"],
       "@tractr/angular-components": ["libs/angular/components/src/index.ts"],
       "@tractr/angular-config": ["libs/angular/config/src/index.ts"],
       "@tractr/angular-file-storage": [
@@ -36,6 +37,9 @@
       ],
       "@tractr/hapify-templates-angular-rext-client": [
         "libs/hapify/templates/angular-rext-client/src/index.ts"
+      ],
+      "@tractr/hapify-templates-casl": [
+        "libs/hapify/templates/casl/src/index.ts"
       ],
       "@tractr/hapify-templates-dbml": [
         "libs/hapify/templates/dbml/src/index.ts"
@@ -64,11 +68,11 @@
       "@tractr/nestjs-authentication": [
         "libs/nestjs/authentication/src/index.ts"
       ],
+      "@tractr/nestjs-casl": ["libs/nestjs/casl/src/index.ts"],
       "@tractr/nestjs-core": ["libs/nestjs/core/src/index.ts"],
       "@tractr/nestjs-database": ["libs/nestjs/database/src/index.ts"],
       "@tractr/nestjs-file-storage": ["libs/nestjs/file-storage/src/index.ts"],
       "@tractr/nestjs-mailer": ["libs/nestjs/mailer/src/index.ts"],
-      "@tractr/nestjs-rbac": ["libs/nestjs/rbac/src/index.ts"],
       "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
       "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"],
       "@tractr/prisma": ["libs/prisma/src/index.ts"]

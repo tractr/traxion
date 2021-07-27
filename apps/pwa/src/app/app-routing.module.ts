@@ -23,8 +23,16 @@ const routes: Routes = [
     component: MoleculeNotConnectedComponent,
     canActivate: [IsNotLoggedGuard],
   },
-  { path: '', component: MoleculeHomeComponent },
-  { path: '**', redirectTo: '/', pathMatch: 'full' },
+  {
+    path: '',
+    component: MoleculeHomeComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,38 @@
+import { User } from '@prisma/client';
+import { RolePermissions } from '@tractr/common';
+ 
+import { AppAbility, AppRoles } from '../interfaces';
+ 
+export const rolePermissions: RolePermissions<
+  AppRoles,
+  User,
+  AppAbility
+> = {
+  guest({ can }) {
+    <<for Models model>>
+      <<for model.accesses.guest access>>
+    can('<<=access.action>>', '<<model pascal>>');
+      <<endfor>>
+    <<endfor>>
+  },
+  user({ can }, user) {
+    <<for Models model>>
+      <<for model.accesses.auth access>>
+    can('<<=access.action>>', '<<model pascal>>');
+      <<endfor>>
+    <<endfor>>
+    <<for Models model>>
+      <<for model.accesses.owner access>>
+        <<if model.properties.hasOwnership>>
+    can('<<=access.action>>', '<<model pascal>>', { <<for model.fields field>><<if field ownership >><<< if (field.meta.ownerKey) { >>><<-field ownerKey camel>><<< } else { >>><<=field.name>><<<}>>>: user?.id<<endif>><<endfor>> });
+        <<endif>>
+      <<endfor>>
+      <<for model.accesses.guest access>>
+        can('<<=access.action>>', '<<model pascal>>');
+      <<endfor>>
+    <<endfor>>
+  },
+  admin({ can }) {
+    can('manage', 'all');
+  }
+};

@@ -24,6 +24,9 @@
       ],
       "tags": ["scope:angular"]
     },
+    "angular-casl": {
+      "tags": []
+    },
     "angular-components": {
       "tags": ["scope:angular"]
     },
@@ -79,6 +82,9 @@
     "hapify-templates-angular-rext-client": {
       "tags": ["scope:template"]
     },
+    "hapify-templates-casl": {
+      "tags": []
+    },
     "hapify-templates-dbml": {
       "tags": ["scope:template"]
     },
@@ -115,6 +121,10 @@
       ],
       "tags": ["scope:nestjs"]
     },
+    "nestjs-casl": {
+      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
+      "tags": []
+    },
     "nestjs-core": {
       "tags": ["scope:nestjs"]
     },
@@ -125,10 +135,6 @@
       "tags": []
     },
     "nestjs-mailer": {
-      "tags": ["scope:nestjs"]
-    },
-    "nestjs-rbac": {
-      "implicitDependencies": [],
       "tags": ["scope:nestjs"]
     },
     "nestjs-testing": {

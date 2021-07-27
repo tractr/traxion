@@ -1,0 +1,14 @@
+import { Subjects as CaslPrismaSubjects } from '@casl/prisma';
+
+import { 
+  <<for Models model>>
+  <<model pascal>>,
+  <<endfor>>
+} from '@prisma/client';
+ 
+export type Subjects = CaslPrismaSubjects<{
+  <<for Models model>>
+<<model pascal>>: <<model pascal>>,
+  <<endfor>>
+all: 'all'
+}>;

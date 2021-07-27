@@ -9,3 +9,5 @@
 **/*.md
 
 *.local-ignore*
+
+**/hapify.json
