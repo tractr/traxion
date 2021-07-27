@@ -57,6 +57,9 @@ describe('Authentication Module (integration)', () => {
               useValue: mockUserDatabaseService as unknown,
             },
           ],
+          api: {
+            url: 'not tested yet',
+          },
         }),
       ],
     }).compile();
@@ -66,8 +69,8 @@ describe('Authentication Module (integration)', () => {
     await app.init();
   });
 
-  afterAll(async () => {
-    await app.close();
+  afterEach(async () => {
+    if (app) await app.close();
   });
 
   describe('Authentication route', () => {
