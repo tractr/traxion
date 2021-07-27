@@ -3,7 +3,7 @@ import { Command, Console } from 'nestjs-console';
 
 import { USER_SERVICE, UserService } from '@generated/nestjs-models-common';
 
-@Console({ alias: 'user' })
+@Console({ command: 'user' })
 export class UserPasswordCli {
   constructor(
     @Inject(USER_SERVICE)
@@ -14,7 +14,12 @@ export class UserPasswordCli {
     command: 'find',
   })
   async findUser(): Promise<void> {
-    const user = await this.userService.findFirst();
-    console.info(user);
+    console.log('here modafucker');
+    try {
+      const user = await this.userService.findFirst();
+      console.info(user);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
