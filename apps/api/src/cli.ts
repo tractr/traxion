@@ -21,7 +21,7 @@ bootstrap.init().then(async (app) => {
     app.useLogger(logger);
     await bootstrap.boot();
   } catch (e) {
-    logger.error(e);
+    console.error(e);
     exitCode = 1;
   } finally {
     await app.close();

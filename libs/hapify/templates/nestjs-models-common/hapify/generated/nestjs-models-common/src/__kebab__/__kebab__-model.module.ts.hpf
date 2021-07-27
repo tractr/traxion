@@ -53,6 +53,9 @@ export class <<Model pascal>>ModelModule extends ModuleOverride implements OnMod
         case 'findFirst':
         case 'findMany':
         case 'findUnique':
+          // Ensure the params args is defined
+          params.args = params.args ?? {};
+ 
           if (params.args.select) break;
  
           params.args.select = {
@@ -70,6 +73,9 @@ export class <<Model pascal>>ModelModule extends ModuleOverride implements OnMod
         case 'update':
         case 'updateMany':
         case 'upsert':
+          // Ensure the params args is defined
+          params.args = params.args ?? {};
+
           const isArray = Array.isArray(params.args.data);
 
           for (let row of isArray ? params.args.data : [params.args.data]) {

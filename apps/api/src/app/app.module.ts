@@ -4,7 +4,6 @@ import { ConsoleModule } from 'nestjs-console';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CliModule } from './cli/cli.module';
 
 import { rolePermissions } from '@generated/casl';
 import { User } from '@generated/models';
@@ -40,7 +39,6 @@ import { MailerModule } from '@tractr/nestjs-mailer';
       rolePermissions,
     }),
     ConsoleModule,
-    CliModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: JwtGlobalAuthGuard }],
