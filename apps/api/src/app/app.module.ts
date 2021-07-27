@@ -15,7 +15,6 @@ import { CaslModule } from '@tractr/nestjs-casl';
 import { DatabaseModule } from '@tractr/nestjs-database';
 import { MailerModule } from '@tractr/nestjs-mailer';
 
-// test
 @Module({
   imports: [
     ModelsModule.register(),

@@ -10,7 +10,7 @@ module.exports = {
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   coverageDirectory: '../../../coverage/libs/nestjs/authentication',
   modulePathIgnorePatterns: ['<rootDir>/generated/'],
 };

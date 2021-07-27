@@ -1,20 +1,22 @@
-import { Injectable } from '@nestjs/common';
 import { ExtractJwt } from 'passport-jwt';
 
 import { fromHttpOnlySignedAndSecureCookies } from '../extractors';
-import { AuthenticationOptions } from '../interfaces';
+import { AuthenticationDefaultOptions } from '../interfaces';
 
-import {
-  isDevelopment,
-  isProduction,
-  OptionsFactory,
-} from '@tractr/nestjs-core';
+import { isDevelopment, isProduction } from '@tractr/nestjs-core';
 
 export const AUTHENTICATION_COOKIE_NAME = 'authCookie';
 export const AUTHENTICATION_QUERY_PARAM_NAME = 'authToken';
-export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
+export const AUTHENTICATION_OPTIONS: AuthenticationDefaultOptions = {
   login: {
     saltRounds: 10,
+  },
+  password: {
+    reset: {
+      active: false,
+      subject: 'Lost password',
+      link: `/password/reset/{{id}}/{{code}}`,
+    },
   },
   cookies: {
     cookieName: AUTHENTICATION_COOKIE_NAME,
@@ -46,12 +48,3 @@ export const AUTHENTICATION_OPTIONS: AuthenticationOptions = {
     defaultStrategy: 'jwt',
   },
 };
-
-@Injectable()
-export class AuthenticationModuleOptionsFactory
-  implements OptionsFactory<AuthenticationOptions>
-{
-  createOptions(): Promise<AuthenticationOptions> | AuthenticationOptions {
-    return AUTHENTICATION_OPTIONS;
-  }
-}

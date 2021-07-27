@@ -6,6 +6,8 @@ import { MAILER_MODULE_OPTIONS } from '../constants';
 import { areWeTestingWithJest } from '../helpers';
 import { MailerOptions } from '../interfaces';
 
+import { isProduction } from '@tractr/nestjs-core';
+
 @Injectable()
 export class MailerService {
   mailjetClient!: mailjet.Email.Client;
@@ -24,7 +26,10 @@ export class MailerService {
 
     return this.mailjetClient
       .post('send', { version: MAILJET_API_VERSION })
-      .request(params);
+      .request({
+        SandboxMode: !isProduction(),
+        ...params,
+      });
   }
 
   private connectToMailjetApi(): void {
