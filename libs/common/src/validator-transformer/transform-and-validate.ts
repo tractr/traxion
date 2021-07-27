@@ -68,8 +68,11 @@ export type TransformAndValidate<T> = <O>(
  * Take a class with validator and transform decorator and return a
  * function that take an unknown value and transform and validate it
  * to return an instance of the class
+ *
  * @param classValidator
- * @param options
+ * @param options - Options for plainToClass transformation and validation.
+ * Default for plain to class transformation: exposeDefaultValues: true and
+ * enableImplicitConvetsion: false
  * @returns a validate and transform function for the class validator
  */
 export function transformAndValidate<T>(
@@ -78,7 +81,8 @@ export function transformAndValidate<T>(
 ): TransformAndValidate<T> {
   return (value: unknown) => {
     const validatedConfig = plainToClass(classValidator, value, {
-      enableImplicitConversion: true,
+      exposeDefaultValues: true,
+      enableImplicitConversion: false,
       ...(options?.plainToClass || {}),
     });
     // eslint-disable-next-line @typescript-eslint/ban-types
