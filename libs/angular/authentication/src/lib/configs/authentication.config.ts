@@ -42,6 +42,12 @@ export interface AuthenticationOptions<
   session: {
     url: string;
   };
+  password: {
+    disabled: boolean;
+    reset: {
+      url: string;
+    };
+  };
 }
 
 export type AuthenticationPublicOptions<
@@ -72,5 +78,11 @@ export const AUTH_DEFAULT_OPTIONS: AuthenticationDefaultOptions = {
   },
   session: {
     url: 'me',
+  },
+  password: {
+    disabled: false,
+    reset: {
+      url: 'password/reset',
+    },
   },
 };

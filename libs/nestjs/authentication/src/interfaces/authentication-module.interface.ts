@@ -6,9 +6,19 @@ import { IStrategyOptionsWithRequest } from 'passport-local';
 
 import { User } from '../../prisma/client';
 
-export interface AuthenticationOptions {
+import { MailerPublicOptions } from '@tractr/nestjs-mailer';
+
+export type AuthenticationDefaultOptions = {
   login: {
-    saltRounds?: number;
+    saltRounds: number;
+  };
+  password: {
+    reset: {
+      active: boolean;
+      link: string;
+      subject: string;
+      template?: number;
+    };
   };
   cookies: {
     cookieName: string;
@@ -24,4 +34,19 @@ export interface AuthenticationOptions {
   };
   jwtModuleOptions: JwtModuleOptions;
   passportModuleOptions: IAuthModuleOptions;
-}
+  mailer?: {
+    name: string;
+    from: string;
+    moduleOptions: MailerPublicOptions;
+  };
+};
+
+export type AuthenticationPublicOptions =
+  Partial<AuthenticationDefaultOptions> & {
+    api: {
+      url: string;
+    };
+  };
+
+export type AuthenticationOptions = AuthenticationDefaultOptions &
+  AuthenticationPublicOptions;
