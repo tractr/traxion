@@ -12,7 +12,7 @@ import {
   DEFAULT_RESET_HTML,
 } from '../constants';
 import { BadResetCodeError, UserNotFoundError } from '../errors';
-import { AuthenticationOptions } from '../interfaces';
+import { AuthenticationOptions, UserWithEmailAndPassword } from '../interfaces';
 import { AuthenticationService } from './authentication.service';
 
 import { MailerService } from '@tractr/nestjs-mailer';
@@ -29,9 +29,18 @@ export class PasswordService {
     private readonly mailerService: MailerService,
   ) {}
 
+  assertPasswordResetIsActive() {
+    if (!this.authenticationOptions.password.reset.active)
+      throw new Error(
+        'password reset is not activated. You cannot use this method unless you activate the options inside the authentication module',
+      );
+  }
+
   async requestReset(email: string): Promise<void> {
+    this.assertPasswordResetIsActive();
+
     // Get user from email
-    const user = await this.userService.findUnique({
+    const user: UserWithEmailAndPassword = await this.userService.findUnique({
       where: {
         email,
       },
@@ -40,15 +49,16 @@ export class PasswordService {
         password: true,
         id: true,
       },
+      rejectOnNotFound: true,
     });
-
-    if (!user) throw new UserNotFoundError();
 
     const resetCode = this.createResetCode(user);
 
     const { link, subject, template } =
       this.authenticationOptions.password.reset;
-    const { from, name } = this.authenticationOptions.mailer;
+    const { from, name } = this.authenticationOptions.mailer || {};
+
+    if (!from) throw new Error('mailer from config has not been set');
 
     const linkWithCode = link
       .replace('{{id}}', user.id)
@@ -75,16 +85,19 @@ export class PasswordService {
     });
   }
 
-  getUserSecret(user: User) {
+  getUserSecret(user: UserWithEmailAndPassword) {
     return `${user.id}-${user.password}-${user.email}`;
   }
 
-  createResetCode(user: User, options: JwtSignOptions = {}): string {
+  createResetCode(
+    user: UserWithEmailAndPassword,
+    options: JwtSignOptions = {},
+  ): string {
     // Maybe we could add the created at instead of email and id
     return this.jwtService.sign(
       { sub: user.id },
       {
-        expiresIn: '15m',
+        expiresIn: '24h',
         ...options,
         secret: this.getUserSecret(user),
       },
@@ -92,7 +105,7 @@ export class PasswordService {
   }
 
   verifyResetCode(
-    user: User,
+    user: UserWithEmailAndPassword,
     resetCode: string,
     options: JwtVerifyOptions = {},
   ): Promise<{ sub: User['id'] }> {
@@ -107,6 +120,8 @@ export class PasswordService {
     resetCode: string,
     password: string,
   ): Promise<void> {
+    this.assertPasswordResetIsActive();
+
     const user = await this.userService.findUnique({
       where: {
         id: userId,

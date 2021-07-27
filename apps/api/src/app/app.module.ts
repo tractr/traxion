@@ -26,9 +26,6 @@ import { MailerModule } from '@tractr/nestjs-mailer';
           url: '/api',
         },
         user: User,
-        mailer: {
-          from: process.env.EMAIL_FROM || '',
-        },
       }),
     }),
     MailerModule.registerAsync({

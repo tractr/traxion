@@ -94,7 +94,33 @@ export class AuthenticationModule extends ModuleOptionsFactory<
           inject: [AUTHENTICATION_MODULE_OPTIONS],
         }),
         UserModelModule.register(overrides),
-        MailerModule.register(),
+        MailerModule.registerAsync({
+          imports: [authenticationOptionsModule],
+          useFactory: (
+            defaultOptions,
+            authenticationOptions: AuthenticationOptions,
+          ) => {
+            const { active } = authenticationOptions.password.reset;
+
+            if (!active)
+              return {
+                ...defaultOptions,
+                privateApiKey: 'not active',
+                publicApiKey: 'not active',
+              };
+
+            if (!authenticationOptions.mailer)
+              throw new Error(
+                'password reset is activated. You must configure the mailer module options',
+              );
+
+            return {
+              ...defaultOptions,
+              ...authenticationOptions.mailer.moduleOptions,
+            };
+          },
+          inject: [AUTHENTICATION_MODULE_OPTIONS],
+        }),
       ],
       exports: [
         ...(authenticationOptionsModule.exports ?? []),

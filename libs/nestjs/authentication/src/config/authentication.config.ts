@@ -13,6 +13,7 @@ export const AUTHENTICATION_OPTIONS: AuthenticationDefaultOptions = {
   },
   password: {
     reset: {
+      active: false,
       subject: 'Lost password',
       link: `/password/reset/{{id}}/{{code}}`,
     },
@@ -45,8 +46,5 @@ export const AUTHENTICATION_OPTIONS: AuthenticationDefaultOptions = {
   },
   passportModuleOptions: {
     defaultStrategy: 'jwt',
-  },
-  mailer: {
-    name: 'Tractr',
   },
 };

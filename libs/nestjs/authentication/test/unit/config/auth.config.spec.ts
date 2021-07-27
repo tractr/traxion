@@ -27,6 +27,7 @@ describe('User auth configurations', () => {
         },
         password: {
           reset: {
+            active: false,
             link: '/password/reset/{{id}}/{{code}}',
             subject: 'Lost password',
           },
@@ -55,9 +56,6 @@ describe('User auth configurations', () => {
         },
         passportModuleOptions: {
           defaultStrategy: 'jwt',
-        },
-        mailer: {
-          name: 'Tractr',
         },
       });
     });

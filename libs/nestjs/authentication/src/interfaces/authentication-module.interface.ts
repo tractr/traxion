@@ -6,12 +6,15 @@ import { IStrategyOptionsWithRequest } from 'passport-local';
 
 import { User } from '../../prisma/client';
 
+import { MailerPublicOptions } from '@tractr/nestjs-mailer';
+
 export type AuthenticationDefaultOptions = {
   login: {
     saltRounds: number;
   };
   password: {
     reset: {
+      active: boolean;
       link: string;
       subject: string;
       template?: number;
@@ -31,8 +34,10 @@ export type AuthenticationDefaultOptions = {
   };
   jwtModuleOptions: JwtModuleOptions;
   passportModuleOptions: IAuthModuleOptions;
-  mailer: {
-    name?: string;
+  mailer?: {
+    name: string;
+    from: string;
+    moduleOptions: MailerPublicOptions;
   };
 };
 
@@ -40,9 +45,6 @@ export type AuthenticationPublicOptions =
   Partial<AuthenticationDefaultOptions> & {
     api: {
       url: string;
-    };
-    mailer: {
-      from: string;
     };
   };
 

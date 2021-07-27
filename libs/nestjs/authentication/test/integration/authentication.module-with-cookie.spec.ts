@@ -58,9 +58,6 @@ describe('Authentication Module (integration)', () => {
           api: {
             url: 'not tested yet',
           },
-          mailer: {
-            from: 'not tested yet',
-          },
         }),
       ],
     }).compile();
