@@ -1,6 +1,5 @@
 import { OnDestroy } from '@angular/core';
 import { RouterStateSnapshot } from '@angular/router';
-import { UserRoles } from '@prisma/client';
 import { ClassConstructor } from 'class-transformer';
 import { BehaviorSubject, lastValueFrom, Observable, of, Subject } from 'rxjs';
 import {
@@ -62,11 +61,6 @@ export function SessionServiceFactory<
       catchError((err) => {
         if (err && err.status === 401) return of(null);
         throw err;
-      }),
-      map((mockUser) => {
-        // eslint-disable-next-line no-param-reassign
-        if (mockUser) mockUser.roles = [UserRoles.user];
-        return mockUser;
       }),
       shareReplay(1),
     );
