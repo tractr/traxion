@@ -22,6 +22,7 @@ import { AUTHENTICATION_OPTIONS } from '../../src/config';
 import { AuthenticationEndpointMockController } from '../mock/authentication-endpoint-mock.controller';
 
 import { LoggerModule } from '@tractr/nestjs-core';
+import { DatabaseService } from '@tractr/nestjs-database';
 
 describe('Authentication Module (integration)', () => {
   let app: INestApplication;
@@ -49,6 +50,10 @@ describe('Authentication Module (integration)', () => {
             secret: 'integration-tests',
           },
           providers: [
+            {
+              provide: DatabaseService,
+              useValue: mockDeep<DatabaseService>(),
+            },
             { provide: USER_SERVICE, useValue: mockUserService },
             {
               provide: USER_DATABASE_SERVICE,

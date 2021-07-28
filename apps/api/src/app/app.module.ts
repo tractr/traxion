@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
+import { ConsoleModule } from 'nestjs-console';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -37,6 +38,7 @@ import { MailerModule } from '@tractr/nestjs-mailer';
     CaslModule.register({
       rolePermissions,
     }),
+    ConsoleModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: JwtGlobalAuthGuard }],

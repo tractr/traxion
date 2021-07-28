@@ -25,5 +25,5 @@ export class <<Model pascal>>RestModule extends ModuleOverride {
     },
   ];
  
-  static dependencies = [<<Model pascal>>ModelModule];
+  static dependencies = [<<Model pascal>>ModelModule as unknown as typeof ModuleOverride];
 }

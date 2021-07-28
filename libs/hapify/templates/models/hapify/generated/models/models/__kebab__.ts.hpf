@@ -1,8 +1,10 @@
+/* eslint-disable import/no-cycle */
+import 'reflect-metadata';
+
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
 import { Type } from 'class-transformer';
 <<<}>>>
 
-/* eslint-disable import/no-cycle */
 import {  
   <<if Fields boolean>>
   IsBoolean, 
@@ -49,11 +51,18 @@ import {
   <<endif>>
 
 } from 'class-validator';
-  
+ 
+import {
 <<<for (const relation of getRelations()) {>>>
-import { <<relation pascal>> } from './<<relation kebab>>';
+ <<relation pascal>>,
 <<<}>>>
-
+} from './index';
+ 
+import type {
+<<<for (const relation of getRelations()) {>>>
+ <<relation pascal>> as <<relation pascal>>Type,
+<<<}>>>
+} from './index';
  
 <<if Fields enum>>
 import {
@@ -148,7 +157,7 @@ export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
   <<for ref.fields field>>
   @ValidateNested(<<if field oneMany or manyMany>>{ each: true}<<endif>>) 
   @Type(() => <<ref pascal>>)
-  <<ref camel>>As<<field pascal>>?: <<ref pascal>><<if field oneMany or manyMany>>[]<<endif>>;
+  <<ref camel>>As<<field pascal>>?: <<ref pascal>><<<if (root.name !== ref.name) {>>>Type<<<}>>><<if field oneMany or manyMany>>[]<<endif>>;
     
   <<endfor>>
 <<endfor>>
@@ -166,7 +175,7 @@ function typedProperty(f) {
   else if (f.type === "number") out += "number";
   else if (f.type === "datetime") out += "Date";
   else if (f.type === "entity") {
-    out +=  f.model.names.pascal;
+    out +=  f.model.names.pascal + (f.model.name !== root.name ? 'Type' : '');
   }
   if (f.multiple) out += "[]";
   if (f.nullable && f.type !== "entity") out += " | null = null";
