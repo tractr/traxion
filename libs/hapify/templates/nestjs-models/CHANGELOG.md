@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.8.0](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-1.7.0...hapify-templates-nestjs-models-1.8.0) (2021-07-28)
+
+
+### Features
+
+* add prisma middleware to crypt the password field and to exclude by default from all query ([#171](https://github.com/tractr/stack/issues/171)) ([ddb3a23](https://github.com/tractr/stack/commit/ddb3a234e52b31c1402fca2fed7b32f567d4ea3b))
+
+
+
 # [1.7.0](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-1.6.1...hapify-templates-nestjs-models-1.7.0) (2021-07-13)
 
 
