@@ -9,14 +9,15 @@ import {
   Post,
   Put,
   Query,
-} from '@nestjs/common';
-import { <<Model pascal>> } from '@prisma/client';
-import { Permission } from '../../../../casl';
-import { Policies } from '@tractr/nestjs-core';
 <<if Fields ownership>>
-import { CurrentUser } from '@tractr/nestjs-authentication';
+  Req,
 <<endif>>
+} from '@nestjs/common';
+import { Policies } from '@tractr/nestjs-core';
+
 import { <<Model pascal>>, Prisma } from '@prisma/client';
+import { Permission } from '../../../../casl';
+
  
 import { <<Model pascal>>Service, <<Model constant>>_SERVICE } from '../../../../nestjs-models-common';
 import {
@@ -56,7 +57,7 @@ export class <<Model pascal>>Controller {
   public create(
     @Body() bodyDto: <<Model pascal>>CreateBodyDto,
     <<if Fields internal and ownership and not primary>>
-    @CurrentUser() user: { id: string },
+    @Req() { user }: { user: { id: string } },
     <<endif>>
   ) {
     let formatedParams = this.<<Model camel>>RestDtoService.formatCreateDto(bodyDto);
@@ -163,7 +164,7 @@ export class <<Model pascal>>Controller {
     @Param() paramsDto: <<Model pascal>>UpsertParamsDto,
     @Body() bodyDto: <<Model pascal>>UpsertBodyDto,
     <<if Fields internal and ownership and not primary>>
-    @CurrentUser() user: { id: string },
+    @Req() { user }: { user: { id: string } },
     <<endif>>
   ) {
     const formatedParams = this.<<Model camel>>RestDtoService.formatUpsertDtos(
