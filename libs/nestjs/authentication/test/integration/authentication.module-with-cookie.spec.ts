@@ -83,9 +83,9 @@ describe('Authentication Module (integration)', () => {
         AuthenticationService,
       );
 
-      const mockUser = mockUserFactory();
+      const mockUser = mockUserFactory({ password: 'test' });
       const hashPassword = await authenticationService.hashPassword(
-        mockUser.password,
+        mockUser.password || '',
       );
 
       mockUserService.findUnique.mockResolvedValue({
@@ -114,9 +114,9 @@ describe('Authentication Module (integration)', () => {
         AuthenticationService,
       );
 
-      const mockUser = mockUserFactory();
+      const mockUser = mockUserFactory({ password: 'test' });
       const hashPassword = await authenticationService.hashPassword(
-        mockUser.password,
+        mockUser.password || '',
       );
 
       mockUserService.findUnique.mockResolvedValue({
