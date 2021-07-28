@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.7.1](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-common-1.7.0...hapify-templates-nestjs-models-common-1.7.1) (2021-07-28)
+
+
+
 # [1.7.0](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-common-1.6.0...hapify-templates-nestjs-models-common-1.7.0) (2021-07-28)
 
 
