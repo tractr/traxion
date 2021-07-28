@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.7.0](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-rest-1.6.1...hapify-templates-nestjs-models-rest-1.7.0) (2021-07-28)
+
+
+### Features
+
+* add casl packages to the stack to get a right policy via hapify ([#184](https://github.com/tractr/stack/issues/184)) ([cc241c1](https://github.com/tractr/stack/commit/cc241c1f3e737febadb5ecb90113732be8088d76))
+* add prisma middleware to crypt the password field and to exclude by default from all query ([#171](https://github.com/tractr/stack/issues/171)) ([ddb3a23](https://github.com/tractr/stack/commit/ddb3a234e52b31c1402fca2fed7b32f567d4ea3b))
+
+
+
 ## [1.6.1](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-rest-1.6.0...hapify-templates-nestjs-models-rest-1.6.1) (2021-07-20)
 
 
