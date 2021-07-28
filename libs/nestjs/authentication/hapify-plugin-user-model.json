@@ -23,7 +23,7 @@
         },
         {
           "name": "password",
-          "properties": ["hidden"],
+          "properties": ["nullable", "hidden"],
           "subtype": "password",
           "type": "string"
         },
