@@ -8,7 +8,7 @@ import { <<Model pascal>>RestModule } from '../../../nestjs-models-rest';
 export class <<Model pascal>>Module extends ModuleOverride {
   static dependencies: Array<typeof ModuleOverride> = [
     <<Model pascal>>RestModule,
-    <<Model pascal>>ModelModule,
+    <<Model pascal>>ModelModule as unknown as typeof ModuleOverride,
   ];
 }
 
