@@ -17,8 +17,6 @@ import { Policies } from '@tractr/nestjs-core';
 
 import { <<Model pascal>>, Prisma } from '@prisma/client';
 import { Permission } from '../../../../casl';
-
- 
 import { <<Model pascal>>Service, <<Model constant>>_SERVICE } from '../../../../nestjs-models-common';
 import {
   <<Model pascal>>CountQueryDto,
