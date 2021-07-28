@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.4.0](https://github.com/tractr/stack/compare/nestjs-mailer-0.3.2...nestjs-mailer-0.4.0) (2021-07-28)
+
+
+### Features
+
+* add password recovery to the authentication process ([#191](https://github.com/tractr/stack/issues/191)) ([2f33209](https://github.com/tractr/stack/commit/2f332091d96728e8e407a20b781e9816344bca7b))
+
+
+
 ## [0.3.2](https://github.com/tractr/stack/compare/nestjs-mailer-0.3.1...nestjs-mailer-0.3.2) (2021-07-21)
 
 
