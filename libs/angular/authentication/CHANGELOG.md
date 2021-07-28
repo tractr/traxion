@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.5.0](https://github.com/tractr/stack/compare/angular-authentication-0.4.3...angular-authentication-0.5.0) (2021-07-28)
+
+
+### Features
+
+* add casl packages to the stack to get a right policy via hapify ([#184](https://github.com/tractr/stack/issues/184)) ([cc241c1](https://github.com/tractr/stack/commit/cc241c1f3e737febadb5ecb90113732be8088d76))
+* add password recovery to the authentication process ([#191](https://github.com/tractr/stack/issues/191)) ([2f33209](https://github.com/tractr/stack/commit/2f332091d96728e8e407a20b781e9816344bca7b))
+
+
+
 ## [0.4.3](https://github.com/tractr/stack/compare/angular-authentication-0.4.2...angular-authentication-0.4.3) (2021-07-21)
 
 
