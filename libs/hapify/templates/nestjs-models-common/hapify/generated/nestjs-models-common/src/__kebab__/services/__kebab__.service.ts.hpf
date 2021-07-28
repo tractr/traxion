@@ -67,21 +67,33 @@ export class <<Model pascal>>Service {
    * Return default value for internal field '<<field camel>>'
    * */
   getDefault<<field pascal>>() {
-  <<if field nullable>>
-    return null;
-  <<elseif field string >>
-    return '';
-  <<elseif field number >>
-    return 0;
-  <<elseif field boolean >>
-    return false;
-  <<elseif field datetime >>
-    return new Date();
-  <<elseif field enum>>
-    return <<Model pascal>><<field pascal>>["<<for1 field.enum e>><<e raw>><<endfor>>"];
-  <<else>>
-    return null;
-  <<endif>>
+  <<< if (field.meta.default) { >>>
+    <<if field datetime >>
+    return new Date('<<-field default raw>>');
+    <<elseif field number or boolean >>
+    return <<-field default raw>>;
+    <<elseif field enum >>
+    return <<Model pascal>><<field pascal>>['<<-field default raw>>'];
+    <<else>>
+    return '<<-field default raw>>';
+    <<endif>>
+  <<< } else { >>>
+    <<if field nullable>>
+      return null;
+    <<elseif field string >>
+      return '';
+    <<elseif field number >>
+      return 0;
+    <<elseif field boolean >>
+      return false;
+    <<elseif field datetime >>
+      return new Date();
+    <<elseif field enum>>
+      return <<Model pascal>><<field pascal>>["<<for1 field.enum e>><<e raw>><<endfor>>"];
+    <<else>>
+      return null;
+    <<endif>>
+  <<<}>>>
   }
 <<endfor>>
  
