@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.6.0](https://github.com/tractr/stack/compare/hapify-templates-models-1.5.0...hapify-templates-models-1.6.0) (2021-07-28)
+
+
+### Bug Fixes
+
+* **hapify-templates-models:** fix model populate ([#207](https://github.com/tractr/stack/issues/207)) ([783f43a](https://github.com/tractr/stack/commit/783f43a3d811eb17ad2d1b60966b05bdbe9a62de))
+
+
+### Features
+
+* add prisma middleware to crypt the password field and to exclude by default from all query ([#171](https://github.com/tractr/stack/issues/171)) ([ddb3a23](https://github.com/tractr/stack/commit/ddb3a234e52b31c1402fca2fed7b32f567d4ea3b))
+
+
+
 # [1.5.0](https://github.com/tractr/stack/compare/hapify-templates-models-1.4.3...hapify-templates-models-1.5.0) (2021-07-13)
 
 
