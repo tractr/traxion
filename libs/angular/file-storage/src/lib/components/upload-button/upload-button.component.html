@@ -1,12 +1,9 @@
 <nz-upload
   nzAction=""
-  [nzAccept]="acceptedFileTypes"
   [nzSize]="sizeLimit"
   [nzMultiple]="false"
-  nzListType="picture-card"
   [nzCustomRequest]="customUpload"
-  [nzHeaders]="{ authorization: 'authorization-text' }"
-  [nzShowUploadList]="uploadListSettings"
+  [nzShowUploadList]="false"
 >
   <tractr-button>
     <ng-content> </ng-content>

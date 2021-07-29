@@ -10,7 +10,6 @@ import {
 import { ClientOptions as MinioClientOptions, Region } from 'minio';
 
 import { AwsRegions } from '../constants';
-import { PresignedDownloadConfiguration } from '../interfaces';
 import { PresignedDownloadConfigurationDto } from './presigned-download-configuration.dto';
 import { PresignedUploadConfigurationDto } from './presigned-upload-configuration';
 

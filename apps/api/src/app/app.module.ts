@@ -17,6 +17,8 @@ import { DatabaseModule } from '@tractr/nestjs-database';
 import {
   FileStorageController,
   FileStorageModule,
+  PresignedDownloadConfiguration,
+  PresignedUploadConfiguration,
 } from '@tractr/nestjs-file-storage';
 import { MailerModule } from '@tractr/nestjs-mailer';
 
@@ -42,8 +44,8 @@ import { MailerModule } from '@tractr/nestjs-mailer';
         port: 9000,
         useSSL: false,
         defaultBucket: 'bucket',
-        presignedUpload: {},
-        presignedDownload: {},
+        presignedDownload: {} as PresignedDownloadConfiguration,
+        presignedUpload: {} as PresignedUploadConfiguration,
       }),
     }),
     MailerModule.registerAsync({
