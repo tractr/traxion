@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.7.2](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-common-1.7.1...hapify-templates-nestjs-models-common-1.7.2) (2021-07-29)
+
+
+### Bug Fixes
+
+* change condition to remove or not password fields ([#211](https://github.com/tractr/stack/issues/211)) ([1a85dcf](https://github.com/tractr/stack/commit/1a85dcf834f4af766237ebcc6460281acc4ec715))
+
+
+
 ## [1.7.1](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-common-1.7.0...hapify-templates-nestjs-models-common-1.7.1) (2021-07-28)
 
 
