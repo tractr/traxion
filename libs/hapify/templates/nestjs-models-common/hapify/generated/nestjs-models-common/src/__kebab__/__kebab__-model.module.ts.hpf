@@ -74,7 +74,7 @@ export class <<Model pascal>>ModelModule extends ModuleOverride implements OnMod
  
       for (let row of data) {
         <<for Fields hidden or password field>>
-          if (params.args?.select?.<<field camel>> === true)
+          if (params.args?.select?.<<field camel>> !== true)
             delete row.<<field camel>>;
         <<endfor>>
       }
