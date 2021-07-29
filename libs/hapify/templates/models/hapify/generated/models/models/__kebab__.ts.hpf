@@ -157,7 +157,7 @@ export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
   <<for ref.fields field>>
   @ValidateNested(<<if field oneMany or manyMany>>{ each: true}<<endif>>) 
   @Type(() => <<ref pascal>>)
-  <<ref camel>>As<<field pascal>>?: <<ref pascal>><<<if (root.name !== ref.name) {>>>Type<<<}>>><<if field oneMany or manyMany>>[]<<endif>>;
+  <<-field backRelation camel>>?: <<ref pascal>><<<if (root.name !== ref.name) {>>>Type<<<}>>><<if field oneMany or manyMany>>[]<<endif>>;
     
   <<endfor>>
 <<endfor>>

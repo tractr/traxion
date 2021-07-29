@@ -15,7 +15,7 @@ export const <<Model pascal>>Include = [
     <<endfor>>
     <<for ReferencedIn ref>>
       <<for ref.fields field>>
-        '<<ref camel>>As<<field pascal>>',
+        '<<-field backRelation camel>>',
       <<endfor>>
     <<endfor>>
 ] as const;

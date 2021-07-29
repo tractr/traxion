@@ -32,7 +32,7 @@ export function mock<<Model pascal>>FindManyQueryDtoFactory(
       <<endfor>>
       <<for ReferencedIn ref>>
         <<for ref.fields field>>
-          '<<ref camel>>As<<field pascal>>',
+          '<<-field backRelation camel>>',
         <<endfor>>
       <<endfor>>
     ],
