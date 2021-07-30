@@ -70,7 +70,12 @@ export class AuthenticationService {
     return bcrypt.hash(password, salt);
   }
 
-  async verifyPassword(password: string, hash: string): Promise<boolean> {
+  async verifyPassword(
+    password: string,
+    hash: string | null,
+  ): Promise<boolean> {
+    if (hash === null) return false;
+
     return bcrypt.compare(password, hash);
   }
 

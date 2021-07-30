@@ -113,7 +113,7 @@ describe('<<Model pascal>>DatabaseService', () => {
         <<endfor>>
         <<for ReferencedIn ref>>
           <<for ref.fields field>>
-            <<ref camel>>As<<field pascal>>: true,
+            <<-field backRelation camel>>: true,
           <<endfor>>
         <<endfor>>
         },
