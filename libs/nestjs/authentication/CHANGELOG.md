@@ -2,6 +2,14 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.15.2](https://github.com/tractr/stack/compare/nestjs-authentication-1.15.1...nestjs-authentication-1.15.2) (2021-07-30)
+
+
+
+## [1.15.1](https://github.com/tractr/stack/compare/nestjs-authentication-1.15.0...nestjs-authentication-1.15.1) (2021-07-28)
+
+
+
 # [1.15.0](https://github.com/tractr/stack/compare/nestjs-authentication-1.14.4...nestjs-authentication-1.15.0) (2021-07-28)
 
 

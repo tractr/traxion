@@ -76,6 +76,9 @@
           "type": "datetime"
         },
         {
+          "meta": {
+            "backRelation": "messages"
+          },
           "name": "tags",
           "properties": ["multiple"],
           "subtype": "manyMany",
@@ -83,6 +86,9 @@
           "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
         },
         {
+          "meta": {
+            "backRelation": "messages"
+          },
           "name": "questions",
           "properties": ["multiple"],
           "subtype": "manyMany",
@@ -119,6 +125,9 @@
           "type": "string"
         },
         {
+          "meta": {
+            "backRelation": "openQuestions"
+          },
           "name": "question",
           "properties": [],
           "subtype": "oneMany",
@@ -155,6 +164,9 @@
           "type": "string"
         },
         {
+          "meta": {
+            "backRelation": "questions"
+          },
           "name": "parentQuestion",
           "properties": ["nullable"],
           "subtype": "oneMany",
@@ -162,6 +174,9 @@
           "value": "6894a782-2e83-cd6a-52cc-f62967165636"
         },
         {
+          "meta": {
+            "backRelation": "questions"
+          },
           "name": "tags",
           "properties": ["nullable", "multiple"],
           "subtype": "manyMany",
@@ -194,6 +209,7 @@
         },
         {
           "meta": {
+            "backRelation": "tags",
             "ownerKey": "ownerId"
           },
           "name": "owner",
@@ -240,7 +256,7 @@
         },
         {
           "name": "password",
-          "properties": ["hidden"],
+          "properties": ["nullable", "hidden"],
           "subtype": "password",
           "type": "string"
         },
@@ -275,6 +291,9 @@
           "type": "string"
         },
         {
+          "meta": {
+            "backRelation": "variables"
+          },
           "name": "openQuestion",
           "properties": [],
           "subtype": "oneMany",
@@ -282,6 +301,9 @@
           "value": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c"
         },
         {
+          "meta": {
+            "backRelation": "variables"
+          },
           "name": "answer",
           "properties": [],
           "subtype": "oneMany",

@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.5.0](https://github.com/tractr/stack/compare/hapify-templates-prisma-1.4.0...hapify-templates-prisma-1.5.0) (2021-07-29)
+
+
+### Features
+
+* add backRelation to prisma and templates to define the name of a db back relation ([#212](https://github.com/tractr/stack/issues/212)) ([49469a9](https://github.com/tractr/stack/commit/49469a9680451c3bbf6d34cb9413b73f5495d907))
+
+
+
 # [1.4.0](https://github.com/tractr/stack/compare/hapify-templates-prisma-1.3.0...hapify-templates-prisma-1.4.0) (2021-07-13)
 
 

@@ -92,9 +92,9 @@ describe('Authentication Module (integration)', () => {
       const authenticationService = app.get<AuthenticationService>(
         AuthenticationService,
       );
-      const mockUser = mockUserFactory();
+      const mockUser = mockUserFactory({ password: 'test' });
       const hashPassword = await authenticationService.hashPassword(
-        mockUser.password,
+        mockUser.password || '',
       );
 
       mockUserService.findUnique.mockResolvedValue({
