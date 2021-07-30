@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.8.0](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-common-1.7.3...hapify-templates-nestjs-models-common-1.8.0) (2021-07-30)
+
+
+### Features
+
+* update templates to manage internal and ownership fields ([#202](https://github.com/tractr/stack/issues/202)) ([cd64a56](https://github.com/tractr/stack/commit/cd64a562816cb7a5ffc69419acdf6ad1f9f38479))
+
+
+
 ## [1.7.3](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-common-1.7.2...hapify-templates-nestjs-models-common-1.7.3) (2021-07-30)
 
 
