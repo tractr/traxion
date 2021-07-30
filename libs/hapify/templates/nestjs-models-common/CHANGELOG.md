@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.7.3](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-common-1.7.2...hapify-templates-nestjs-models-common-1.7.3) (2021-07-30)
+
+
+### Bug Fixes
+
+* manage prisma middleware when we got null result from the database ([#213](https://github.com/tractr/stack/issues/213)) ([d80d2ac](https://github.com/tractr/stack/commit/d80d2ac7e830e9ef388e2fb553e5d56cf1bfb9c2))
+
+
+
 ## [1.7.2](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-common-1.7.1...hapify-templates-nestjs-models-common-1.7.2) (2021-07-29)
 
 
