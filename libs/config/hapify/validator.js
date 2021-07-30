@@ -59,5 +59,22 @@ for (const field of fields) {
     errors.push(
       `Entity field needs to have subtype. Fix field '${field.name}'`,
     );
+  if (
+    field.internal &&
+    !field.nullable &&
+    !field.ownership &&
+    ['datetime', 'string', 'number', 'boolean', 'enum'].indexOf(field.type) <=
+      -1 &&
+    !(field.meta && field.meta.default)
+  ) {
+    errors.push(
+      `Entity field must have the meta 'default'. Fix field '${field.name}'`,
+    );
+  }
+  if (field.ownership && !(field.meta && field.meta.ownerKey)) {
+    errors.push(
+      `Entity field must have the meta 'ownerKey'. Fix field '${field.name}'`,
+    );
+  }
 }
 return { errors, warnings };
