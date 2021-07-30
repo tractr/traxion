@@ -68,6 +68,9 @@ export class <<Model pascal>>ModelModule extends ModuleOverride implements OnMod
       // We fetch the result from the database
       const result = await next(params);
  
+      // if we got no result we juste return result
+      if (!result) return result;
+ 
       // We remove the fields from the results if this field is not selected
       const isArray = Array.isArray(result);
       const data = isArray ? result : [result];
