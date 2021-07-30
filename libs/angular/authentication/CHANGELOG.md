@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.6.0](https://github.com/tractr/stack/compare/angular-authentication-0.5.0...angular-authentication-0.6.0) (2021-07-30)
+
+
+
 # [0.5.0](https://github.com/tractr/stack/compare/angular-authentication-0.4.3...angular-authentication-0.5.0) (2021-07-28)
 
 
