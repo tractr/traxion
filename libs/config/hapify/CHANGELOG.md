@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.4.0](https://github.com/tractr/stack/compare/hapify-config-1.3.0...hapify-config-1.4.0) (2021-07-30)
+
+
+### Features
+
+* update templates to manage internal and ownership fields ([#202](https://github.com/tractr/stack/issues/202)) ([cd64a56](https://github.com/tractr/stack/commit/cd64a562816cb7a5ffc69419acdf6ad1f9f38479))
+
+
+
 # [1.3.0](https://github.com/tractr/stack/compare/hapify-config-1.2.1...hapify-config-1.3.0) (2021-07-13)
 
 
