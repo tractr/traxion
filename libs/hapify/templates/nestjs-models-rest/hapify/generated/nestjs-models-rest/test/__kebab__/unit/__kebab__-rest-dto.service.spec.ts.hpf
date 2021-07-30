@@ -1,4 +1,9 @@
 import {
+  mock<<Model pascal>>ServiceFactory,
+  <<Model constant>>_SERVICE,
+  <<Model pascal>>Service,
+} from '../../../../nestjs-models-common';
+import {
   mock<<Model pascal>>CountQueryDtoFactory,
   mock<<Model pascal>>CreateBodyDtoFactory,
   mock<<Model pascal>>DeleteParamsDtoFactory,
@@ -33,10 +38,16 @@ import { Prisma } from '@prisma/client';
   
 describe('<<Model pascal>>DatabaseService', () => {
   let <<Model camel>>RestDtoService: <<Model pascal>>RestDtoService;
+  let mocked<<Model pascal>>Service: <<Model pascal>>Service;
   
   beforeEach(async () => {
+    mocked<<Model pascal>>Service = (mock<<Model pascal>>ServiceFactory() as unknown) as <<Model pascal>>Service;
+    
     const module: TestingModule = await Test.createTestingModule({
-      providers: [<<Model pascal>>RestDtoService],
+      providers: [
+        { provide: <<Model constant>>_SERVICE, useValue: mocked<<Model pascal>>Service },
+        <<Model pascal>>RestDtoService
+      ],
     }).compile();
   
     <<Model camel>>RestDtoService = module.get<<<Model pascal>>RestDtoService>(<<Model pascal>>RestDtoService);
@@ -65,7 +76,13 @@ describe('<<Model pascal>>DatabaseService', () => {
         <<endif>>
       <<endfor>>
       }
-      const prismaArgs: Prisma.<<Model pascal>>CreateArgs = { data };
+      const prismaArgs = { 
+      <<if Fields internal and not primary and (not entity or nullable)>>
+        data:  mocked<<Model pascal>>Service.assignInternalsToCreateDto(data)
+      <<else>>
+        data
+      <<endif>>
+      };
       const result = <<Model camel>>RestDtoService.formatCreateDto(bodyDto);
       expect(result).toEqual(prismaArgs)
     });
@@ -222,7 +239,12 @@ describe('<<Model pascal>>DatabaseService', () => {
       <<endfor>>
       };
       const update = { ...create };
-      const prismaArgs: Prisma.<<Model pascal>>UpsertArgs = { create, update, where: paramsDto };
+      const prismaArgs = { 
+        <<if Fields internal and not primary and (not entity or nullable)>>
+        create:  mocked<<Model pascal>>Service.assignInternalsToCreateDto(create)
+      <<else>>
+        create
+      <<endif>>, update, where: paramsDto };
       const result = <<Model camel>>RestDtoService.formatUpsertDtos(paramsDto, bodyDto);
       expect(result).toEqual(prismaArgs)
     });

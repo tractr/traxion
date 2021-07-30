@@ -1,17 +1,93 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { Inject, Injectable } from '@nestjs/common';
  
+<<if Fields enum and internal and not ownership>>
+import {
+  <<for Fields enum and internal and not ownership field>>
+    <<Model pascal>><<field pascal>>
+  <<endfor>>
+} from '../../../../models';
+<<endif>> 
 import { <<Model constant>>_DATABASE_SERVICE } from '../<<Model kebab>>-model.constant';
 import { <<Model pascal>>DatabaseService } from './<<Model kebab>>-database.service';
  
 import { Prisma } from '@prisma/client';
  
 @Injectable()
-export class <<Model pascal>>Service {
+export class <<Model pascal>>Service {  
   constructor(
     @Inject(<<Model constant>>_DATABASE_SERVICE)
     protected readonly <<Model camel>>DatabaseService: <<Model pascal>>DatabaseService,
   ) {}
+ 
+  <<for Fields internal and ownership and not primary field>>
+  /**
+   *  Add <<field pascal>> ownership to data
+   * */
+  add<<field pascal>>OwnerShip<T extends Partial<Prisma.<<Model pascal>>CreateInput>>(data: T, owner: Prisma.<<field.model pascal>>WhereUniqueInput): 
+    T & 
+    { '<<field camel>>': { connect: Prisma.<<field.model pascal>>WhereUniqueInput } } 
+  {
+    return {
+      ...data,
+      '<<field camel>>': { connect: owner }
+    };
+  }
+  <<endfor>>
+
+  <<if Fields internal and not primary and (not entity or nullable)>>
+  /**
+   *  Add internal fields to create dto
+   * */
+  assignInternalsToCreateDto<D extends Partial<Prisma.<<Model pascal>>CreateInput>>(data: D): D & 
+    Pick<
+      Prisma.<<Model pascal>>CreateInput,
+      <<for Fields internal and not primary and (not entity or nullable) field>>
+        | '<<field camel>>'
+      <<endfor>>
+      >
+  {
+      return {...data, ...this.getDefaultInternals() };
+  }
+   
+  /**
+   *  Return default internal fields
+   * */
+  private getDefaultInternals() {
+    return {
+      <<for Fields internal and not primary and (not entity or nullable) field>>
+      '<<field camel>>': this.getDefault<<field pascal>>(),
+      <<endfor>>
+    }
+  }
+  <<endif>>
+
+  <<for Fields internal and not primary and (not entity or nullable) field>>
+  /**
+   * Return default value for internal field '<<field camel>>'
+   * */
+  getDefault<<field pascal>>() {
+<<< if (field.meta.default) { >>>
+    return <<-field default raw>>;
+<<< } else { >>>
+  <<if field nullable>>
+    return null;
+  <<elseif field string >>
+    return '';
+  <<elseif field number >>
+    return 0;
+  <<elseif field boolean >>
+    return false;
+  <<elseif field datetime >>
+    return new Date();
+  <<elseif field enum>>
+    return <<Model pascal>><<field pascal>>["<<for1 field.enum e>><<e raw>><<endfor>>"];
+  <<else>>
+    throw new Error("Field '<<field camel>>' need 'default' metadata");
+  <<endif>>
+<<<}>>>
+  } 
+<<endfor>>
  
   /**
    * Find zero or one <<Model pascal>> that matches the filter.
