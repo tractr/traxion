@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.18.0](https://github.com/tractr/stack/compare/api-1.17.0...api-1.18.0) (2021-08-02)
+
+
+### Features
+
+* add upload button to file-storage ([#209](https://github.com/tractr/stack/issues/209)) ([632723a](https://github.com/tractr/stack/commit/632723ab79d7c89a9c665fd043407ed3d650804c))
+
+
+
 # [1.17.0](https://github.com/tractr/stack/compare/api-1.16.1...api-1.17.0) (2021-07-28)
 
 
