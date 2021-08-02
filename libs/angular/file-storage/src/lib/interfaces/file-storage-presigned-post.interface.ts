@@ -5,7 +5,7 @@ export interface FileStoragePresignedPostToken {
    * Url that must be used to upload the file
    *  to file storage
    */
-  postUrl: string;
+  postURL: string;
 
   /**
    * formData that must be used to upload

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { map, mergeMap, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 
 import { FILE_STORAGE_CONFIGURATION } from '../constants';
 import {
@@ -80,18 +80,20 @@ export class FileStorageService {
    *
    * @param file - File to upload to file storage
    * @param reportProgress - Option to report request progress
-   * @returns Observable
+   * @returns Observable that resolves as a temporary url of the uploaded file
    */
   public uploadFileToFileStorage(file: File, reportProgress = false) {
     if (!file) throw new Error('No file provided for upload to file storage');
 
     return this.getPresignedUploadUrl(file.type).pipe(
-      map(({ formData, postUrl }) => ({
-        postUrl,
+      map(({ formData, postURL }) => ({
+        postURL,
         formData: this.generateFormData(formData, file),
       })),
-      mergeMap(({ postUrl, formData }) =>
-        this.http.post(postUrl, formData, { reportProgress }),
+      switchMap(({ postURL, formData }) =>
+        this.http
+          .post(postURL, formData, { reportProgress })
+          .pipe(map(() => `${postURL}/${formData.get('key')?.toString()}`)),
       ),
       shareReplay(1),
     );
