@@ -14,6 +14,12 @@ import {
 } from '@tractr/nestjs-authentication';
 import { CaslModule } from '@tractr/nestjs-casl';
 import { DatabaseModule } from '@tractr/nestjs-database';
+import {
+  FileStorageController,
+  FileStorageModule,
+  PresignedDownloadConfiguration,
+  PresignedUploadConfiguration,
+} from '@tractr/nestjs-file-storage';
 import { MailerModule } from '@tractr/nestjs-mailer';
 
 @Module({
@@ -29,6 +35,19 @@ import { MailerModule } from '@tractr/nestjs-mailer';
         user: User,
       }),
     }),
+    FileStorageModule.registerAsync({
+      useFactory: (defaultConfig) => ({
+        ...defaultConfig,
+        accessKey: 'minio',
+        secretKey: 'password',
+        endPoint: 'localhost',
+        port: 9000,
+        useSSL: false,
+        defaultBucket: 'bucket',
+        presignedDownload: {} as PresignedDownloadConfiguration,
+        presignedUpload: {} as PresignedUploadConfiguration,
+      }),
+    }),
     MailerModule.registerAsync({
       useFactory: () => ({
         privateApiKey: 'test',
@@ -40,7 +59,7 @@ import { MailerModule } from '@tractr/nestjs-mailer';
     }),
     ConsoleModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, FileStorageController],
   providers: [AppService, { provide: APP_GUARD, useClass: JwtGlobalAuthGuard }],
 })
 export class AppModule {}
