@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.2.0](https://github.com/tractr/stack/compare/angular-file-storage-0.1.5...angular-file-storage-0.2.0) (2021-08-02)
+
+
+### Features
+
+* add upload button to file-storage ([#209](https://github.com/tractr/stack/issues/209)) ([632723a](https://github.com/tractr/stack/commit/632723ab79d7c89a9c665fd043407ed3d650804c))
+
+
+
 ## [0.1.5](https://github.com/tractr/stack/compare/angular-file-storage-0.1.4...angular-file-storage-0.1.5) (2021-07-26)
 
 
