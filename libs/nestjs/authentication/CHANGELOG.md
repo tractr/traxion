@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.15.3](https://github.com/tractr/stack/compare/nestjs-authentication-1.15.2...nestjs-authentication-1.15.3) (2021-08-03)
+
+
+### Bug Fixes
+
+* add reset request options to use it outside of the scope of the reset password (init password) ([#214](https://github.com/tractr/stack/issues/214)) ([63d9d97](https://github.com/tractr/stack/commit/63d9d97ff0155a4ab8a7fb72bfa361da1c30e3e4))
+
+
+
 ## [1.15.2](https://github.com/tractr/stack/compare/nestjs-authentication-1.15.1...nestjs-authentication-1.15.2) (2021-07-30)
 
 
