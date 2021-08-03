@@ -12,7 +12,11 @@ import {
   DEFAULT_RESET_HTML,
 } from '../constants';
 import { BadResetCodeError, UserNotFoundError } from '../errors';
-import { AuthenticationOptions, UserWithEmailAndPassword } from '../interfaces';
+import {
+  AuthenticationOptions,
+  RequestResetOptions,
+  UserWithEmailAndPassword,
+} from '../interfaces';
 import { AuthenticationService } from './authentication.service';
 
 import { MailerService } from '@tractr/nestjs-mailer';
@@ -36,7 +40,10 @@ export class PasswordService {
       );
   }
 
-  async requestReset(email: string): Promise<void> {
+  async requestReset(
+    email: string,
+    options: RequestResetOptions = {},
+  ): Promise<void> {
     this.assertPasswordResetIsActive();
 
     // Get user from email
@@ -54,8 +61,10 @@ export class PasswordService {
 
     const resetCode = this.createResetCode(user);
 
-    const { link, subject, template } =
-      this.authenticationOptions.password.reset;
+    const { link, subject, template } = {
+      ...this.authenticationOptions.password.reset,
+      ...options,
+    };
     const { from, name } = this.authenticationOptions.mailer || {};
 
     if (!from) throw new Error('mailer from config has not been set');
