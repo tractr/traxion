@@ -3,3 +3,4 @@ export * from './lib/services';
 export * from './lib/interfaces';
 export * from './lib/dtos';
 export * from './lib/constants';
+export * from './lib/components';

@@ -2,20 +2,23 @@
 
 import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
+import { UploadButtonComponent } from './components/upload-button/upload-button.component';
 import { FILE_STORAGE_CONFIGURATION } from './constants';
 import { FileStorageConfigurationDto } from './dtos';
 import { FileStorageConfiguration } from './interfaces';
 import { FileStorageService } from './services';
 
+import { AngularComponentsModule } from '@tractr/angular-components';
 import { AsyncOptions, ModuleOptionsFactory } from '@tractr/angular-tools';
 import { transformAndValidate } from '@tractr/common';
 
 @NgModule({
-  imports: [HttpClientModule],
-  declarations: [],
+  imports: [HttpClientModule, AngularComponentsModule, NzUploadModule],
+  declarations: [UploadButtonComponent],
   providers: [FileStorageService],
-  exports: [],
+  exports: [UploadButtonComponent],
 })
 export class FileStorageModule extends ModuleOptionsFactory<
   FileStorageConfiguration,
@@ -25,13 +28,13 @@ export class FileStorageModule extends ModuleOptionsFactory<
   transformAndValidate(FileStorageConfigurationDto),
 ) {
   static register(
-    options: FileStorageConfiguration,
+    options?: FileStorageConfiguration,
   ): ModuleWithProviders<FileStorageModule> {
     return super.register(options);
   }
 
   static forRoot(
-    options: FileStorageConfiguration,
+    options?: FileStorageConfiguration,
   ): ModuleWithProviders<FileStorageModule> {
     return super.forRoot(options);
   }

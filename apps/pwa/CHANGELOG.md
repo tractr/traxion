@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.11.0](https://github.com/tractr/stack/compare/pwa-1.10.0...pwa-1.11.0) (2021-08-02)
+
+
+### Features
+
+* add upload button to file-storage ([#209](https://github.com/tractr/stack/issues/209)) ([632723a](https://github.com/tractr/stack/commit/632723ab79d7c89a9c665fd043407ed3d650804c))
+
+
+
 # [1.10.0](https://github.com/tractr/stack/compare/pwa-1.9.4...pwa-1.10.0) (2021-07-28)
 
 

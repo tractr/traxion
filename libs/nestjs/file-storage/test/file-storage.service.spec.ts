@@ -1,7 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Client } from 'minio';
 
-import { FileStorageModule, FileStorageService } from '../src';
+import {
+  FileStorageModule,
+  FileStorageService,
+  PresignedDownloadConfiguration,
+  PresignedUploadConfiguration,
+} from '../src';
 
 describe('S3Service', () => {
   let fileStorageService: FileStorageService;
@@ -18,15 +23,8 @@ describe('S3Service', () => {
           defaultBucket: 'test',
           temporaryPrefix: 'temp',
           temporaryFilesTTL: 5000,
-          presignedUpload: {
-            allowedMimeTypes: ['image/jpeg'],
-            minFileSize: 1024,
-            maxFileSize: 10485760,
-            defaultValidity: 300,
-          },
-          presignedDownload: {
-            defaultValidity: 300,
-          },
+          presignedDownload: {} as PresignedDownloadConfiguration,
+          presignedUpload: {} as PresignedUploadConfiguration,
         }),
       ],
     }).compile();

@@ -36,15 +36,13 @@ export class FileStorageConfigurationPrivateDto implements MinioClientOptions {
    * Denote if SSL must be used
    */
   @IsBoolean()
-  @IsOptional()
-  useSSL = true;
+  useSSL!: boolean;
 
   /**
    * Port to reach file storage
    */
   @IsInt()
-  @IsOptional()
-  port?: number;
+  port!: number;
 
   /**
    * Set this value to override
@@ -111,8 +109,8 @@ export class FileStorageConfigurationPrivateDto implements MinioClientOptions {
   /**
    * Configuration for presigned uploads
    */
-  @Type(() => PresignedUploadConfigurationDto)
   @ValidateNested()
+  @Type(() => PresignedUploadConfigurationDto)
   presignedUpload!: PresignedUploadConfigurationDto;
 
   /**

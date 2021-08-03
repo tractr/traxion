@@ -6,7 +6,7 @@ import { transformAndValidate } from '@tractr/common';
 
 export class AppConfigDto {
   @IsString()
-  API_URI!: string;
+  API_URI = 'http://localhost:4200/api';
 }
 
 export type AppConfig = {
@@ -22,7 +22,7 @@ export const getConfig = (appConfig: AngularConfig): AppConfig => {
   return {
     apiUri: config.API_URI,
     fileStorage: {
-      defaultBucket: 'test',
+      defaultBucket: 'bucket',
       presignedUploadEndpoint: `${config.API_URI}/file-storage/upload`,
       presignedDownloadEndpoint: `${config.API_URI}/file-storage/download`,
     },
