@@ -1,12 +1,11 @@
 {
   "name": "@tractr/common",
-  "version": "0.3.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tractr/stack"
+  "version": "0.0.1",
+  "dependencies": {
+    "tslib": "^2.2.0"
   },
-  "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+  "peerDependencies": {
+    "@angular/common": "^12.1.0-",
+    "@angular/core": "^12.1.0-"
   }
 }

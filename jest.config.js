@@ -26,7 +26,6 @@ module.exports = {
     '<rootDir>/libs/config/hapify',
     '<rootDir>/libs/prisma',
     '<rootDir>/libs/generated',
-    '<rootDir>/libs/common',
     '<rootDir>/libs/nestjs/authentication',
     '<rootDir>/libs/nestjs/casl',
     '<rootDir>/libs/nestjs/core',
@@ -34,5 +33,6 @@ module.exports = {
     '<rootDir>/libs/nestjs/file-storage',
     '<rootDir>/libs/nestjs/mailer',
     '<rootDir>/libs/nestjs/testing',
+    '<rootDir>/libs/common',
   ],
 };
