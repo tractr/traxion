@@ -10,7 +10,7 @@ import {
   mock<<Model pascal>><<field pascal>>IdsFactory,
   <<endif>>
 <<endfor>>
-} from '../../../models';
+} from '../../../models/mock';
   
 export function mock<<Model pascal>>UpsertBodyDtoFactory(
   override: Partial<<<Model pascal>>UpsertBodyDto> = {}
