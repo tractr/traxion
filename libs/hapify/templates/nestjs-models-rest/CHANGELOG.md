@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.10.0](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-rest-1.9.0...hapify-templates-nestjs-models-rest-1.10.0) (2021-08-05)
+
+
+### Features
+
+* remove import mock from default barrel import to not load all the dev deps ([#215](https://github.com/tractr/stack/issues/215)) ([354932d](https://github.com/tractr/stack/commit/354932dcf269b9efde85819fb8ebb7a336bfe977))
+
+
+
 # [1.9.0](https://github.com/tractr/stack/compare/hapify-templates-nestjs-models-rest-1.8.0...hapify-templates-nestjs-models-rest-1.9.0) (2021-07-30)
 
 
