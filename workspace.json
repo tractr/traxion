@@ -561,37 +561,34 @@
       }
     },
     "common": {
+      "prefix": "tractr",
       "projectType": "library",
       "root": "libs/common",
       "sourceRoot": "libs/common/src",
       "targets": {
         "build": {
-          "executor": "@nrwl/node:package",
-          "options": {
-            "assets": ["libs/common/*.md"],
-            "main": "libs/common/src/index.ts",
-            "outputPath": "dist/libs/common",
-            "packageJson": "libs/common/package.json",
-            "tsConfig": "libs/common/tsconfig.lib.json"
+          "configurations": {
+            "development": {
+              "tsConfig": "libs/common/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/common/tsconfig.lib.prod.json"
+            }
           },
-          "outputs": ["{options.outputPath}"]
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:package",
+          "options": {
+            "project": "libs/common/ng-package.json"
+          },
+          "outputs": ["dist/libs/common"]
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/common/**/*.ts"]
-          }
-        },
-        "publish": {
-          "executor": "ngx-deploy-npm:deploy",
-          "options": {
-            "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": false
+            "lintFilePatterns": [
+              "libs/common/src/**/*.ts",
+              "libs/common/src/**/*.html"
+            ]
           }
         },
         "test": {
