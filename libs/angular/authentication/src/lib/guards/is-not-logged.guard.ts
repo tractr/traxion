@@ -26,7 +26,7 @@ export class IsNotLoggedGuard implements CanActivate {
         if (logged) {
           return this.router.createUrlTree([
             ...this.options.routing.prefix,
-            this.options.login.redirect,
+            ...this.options.login.redirect,
           ]);
         }
 
