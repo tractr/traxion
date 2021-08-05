@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.18.1](https://github.com/tractr/stack/compare/api-1.18.0...api-1.18.1) (2021-08-05)
+
+
+### Bug Fixes
+
+* make tractr common package build by angular to be correctly import in the front ([#216](https://github.com/tractr/stack/issues/216)) ([50d8b9b](https://github.com/tractr/stack/commit/50d8b9bfcaf5adae41df8824d77dc523e3c47ae9))
+
+
+
 # [1.18.0](https://github.com/tractr/stack/compare/api-1.17.0...api-1.18.0) (2021-08-02)
 
 
