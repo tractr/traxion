@@ -2,7 +2,7 @@
 // import request from 'supertest';
     
 // import { AppModule } from '../../../../src/app.module';
-// import { mock<<Model pascal>>CreateBodyDtoFactory } from '../mocks';
+// import { mock<<Model pascal>>CreateBodyDtoFactory } from '../mocks/mock';
     
 // const context = createTestContext(AppModule);
     
