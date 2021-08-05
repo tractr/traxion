@@ -1,5 +1,7 @@
 import {
   mock<<Model pascal>>ServiceFactory,
+} from '../../../../nestjs-models-common/mock';
+import {
   <<Model constant>>_SERVICE,
   <<Model pascal>>Service,
 } from '../../../../nestjs-models-common';
@@ -16,6 +18,8 @@ import {
   mock<<Model pascal>>UpdateParamsDtoFactory,
   mock<<Model pascal>>UpsertBodyDtoFactory,
   mock<<Model pascal>>UpsertParamsDtoFactory,
+} from '../../../../rest-dtos/mock';
+import { 
   <<Model pascal>>CountQueryDto,
   <<Model pascal>>CreateBodyDto,
   <<Model pascal>>DeleteParamsDto,
