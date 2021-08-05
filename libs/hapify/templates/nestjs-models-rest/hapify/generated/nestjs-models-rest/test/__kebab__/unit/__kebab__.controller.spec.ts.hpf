@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import {
   mock<<Model pascal>>Factory,
-} from '../../../../models';
+} from '../../../../models/mock';
 import {
   mock<<Model pascal>>ServiceFactory,
+} from '../../../../nestjs-models-common/mock';
+import {
   <<Model constant>>_SERVICE,
   <<Model pascal>>Service,
 } from '../../../../nestjs-models-common';
