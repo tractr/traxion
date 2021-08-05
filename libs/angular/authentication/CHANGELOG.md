@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.6.1](https://github.com/tractr/stack/compare/angular-authentication-0.6.0...angular-authentication-0.6.1) (2021-08-05)
+
+
+### Bug Fixes
+
+* use the spread operator to decuonstruct correctly the options arguments ([#217](https://github.com/tractr/stack/issues/217)) ([3a6d15c](https://github.com/tractr/stack/commit/3a6d15c751b8fecc9b6fc091e44af1688cb22f2f))
+
+
+
 # [0.6.0](https://github.com/tractr/stack/compare/angular-authentication-0.5.0...angular-authentication-0.6.0) (2021-07-30)
 
 
