@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.3.0](https://github.com/tractr/stack/compare/angular-casl-0.2.0...angular-casl-0.3.0) (2021-08-06)
+
+
+### Features
+
+* add hasRole guard to asset a user has every or some roles before going to the page ([#222](https://github.com/tractr/stack/issues/222)) ([5bbc431](https://github.com/tractr/stack/commit/5bbc431ba6edc25152c11bf9baf4dd8de114bc56))
+
+
+
 # [0.2.0](https://github.com/tractr/stack/compare/angular-casl-0.1.0...angular-casl-0.2.0) (2021-07-30)
 
 
