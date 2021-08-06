@@ -3,6 +3,7 @@ import { Ability, PureAbility } from '@casl/ability';
 import { AbilityModule } from '@casl/angular';
 
 import { CASL_MODULE_OPTIONS } from './constants';
+import { HasRoleGuard } from './guards';
 import { CaslOptions } from './interfaces';
 import { CaslUpdateAbilitiesService } from './services';
 
@@ -12,6 +13,7 @@ import { AsyncOptions, ModuleOptionsFactory } from '@tractr/angular-tools';
   imports: [AbilityModule],
   providers: [
     CaslUpdateAbilitiesService,
+    HasRoleGuard,
     { provide: Ability, useValue: new Ability() },
     { provide: PureAbility, useExisting: Ability },
   ],
