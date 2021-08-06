@@ -1,11 +1,20 @@
 {
   "name": "@tractr/common",
-  "version": "0.0.1",
+  "version": "0.0.3",
+  "description": "Common module for back and front",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
   "dependencies": {
     "tslib": "^2.2.0"
   },
   "peerDependencies": {
     "@angular/common": "^12.1.0-",
     "@angular/core": "^12.1.0-"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
   }
 }
