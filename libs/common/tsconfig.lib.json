@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "module": "commonjs",
+    "declarationMap": true,
+    "inlineSources": true,
+    "lib": ["dom", "es2018"],
     "outDir": "../../dist/out-tsc",
-    "types": ["node"]
+    "target": "es2015",
+    "types": []
   },
-  "exclude": ["**/*.spec.ts"],
+  "exclude": ["src/test-setup.ts", "**/*.spec.ts"],
   "extends": "./tsconfig.json",
   "include": ["**/*.ts"]
 }
