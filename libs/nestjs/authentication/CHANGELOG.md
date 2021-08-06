@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.15.4](https://github.com/tractr/stack/compare/nestjs-authentication-1.15.3...nestjs-authentication-1.15.4) (2021-08-06)
+
+
+### Bug Fixes
+
+* reexport correctly password service to be use outsite authentication module ([#220](https://github.com/tractr/stack/issues/220)) ([972b1b7](https://github.com/tractr/stack/commit/972b1b7c39bcf0eb2dedcb683990b43c4e390904))
+
+
+
 ## [1.15.3](https://github.com/tractr/stack/compare/nestjs-authentication-1.15.2...nestjs-authentication-1.15.3) (2021-08-03)
 
 
