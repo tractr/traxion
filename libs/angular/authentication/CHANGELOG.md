@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.6.2](https://github.com/tractr/stack/compare/angular-authentication-0.6.1...angular-authentication-0.6.2) (2021-08-06)
+
+
+### Bug Fixes
+
+* do not fail when the fetch user fail that cause the whole rx chain to complete with error ([#218](https://github.com/tractr/stack/issues/218)) ([ce6d04f](https://github.com/tractr/stack/commit/ce6d04f702b7b9f9b88e2fdec0ea403bb9f3e9ba))
+
+
+
 ## [0.6.1](https://github.com/tractr/stack/compare/angular-authentication-0.6.0...angular-authentication-0.6.1) (2021-08-05)
 
 
