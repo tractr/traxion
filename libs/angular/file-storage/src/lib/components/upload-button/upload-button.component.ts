@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NzUploadXHRArgs } from 'ng-zorro-antd/upload';
 
+import { FileStorageUploadResult } from '../../interfaces';
 import { FileStorageService } from '../../services';
 
 @Component({
-  selector: 'tractr-upload-button',
+  selector: 'tractr-file-storage-upload-button',
   templateUrl: './upload-button.component.html',
   styleUrls: ['./upload-button.component.less'],
 })
@@ -25,27 +26,28 @@ export class UploadButtonComponent {
   /**
    * Output: return temporary url of the uploaded file
    */
-  @Output() fileTemporaryUrl = new EventEmitter<string>();
+  @Output() uploadResult = new EventEmitter<FileStorageUploadResult>();
 
   constructor(private fileStorageService: FileStorageService) {}
 
-  // NOTE: this method must be written as an arrow function
+  // NOTE: customUpload method must be written as an arrow function
   // see https://ng.ant.design/components/upload/en#nzcustomrequest
 
   /**
    * Callback to upload file to file storage
    *
    * @param item
-   * @returns Observable that resolve as the temporary
-   * url of the uploaded file
+   * @returns Observable that resolve as an ojbect
+   * containing, the temporary url of the uploaded file,
+   * its size and MIME type
    */
   customUpload = (item: NzUploadXHRArgs) => {
     const { file } = item;
     // this.previewUrl.emit(URL.createObjectURL(file));
     return this.fileStorageService
       .uploadFileToFileStorage(file as unknown as File)
-      .subscribe((fileTemporaryUrl) => {
-        this.fileTemporaryUrl.emit(fileTemporaryUrl);
+      .subscribe((fileUploadResult) => {
+        this.uploadResult.emit(fileUploadResult);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       }) as any; // any used to solve type conflict between rxjs 7 and 6
   };

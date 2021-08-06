@@ -10,12 +10,17 @@ export class FileStorageCliService {
   constructor(private fileStorageService: FileStorageService) {}
 
   @Command({
-    command: 'presigned-upload <mimeType> [customBucket]',
+    command: 'presigned-upload <mimeType> <fileSize> [customBucket]',
     description: 'Get a presigned upload url for file storage',
   })
-  public async getPresignedUploadUrl(mimeType: string, customBucket?: string) {
+  public async getPresignedUploadUrl(
+    mimeType: string,
+    fileSize: number,
+    customBucket?: string,
+  ) {
     const result = await this.fileStorageService.getPresignedUploadUrl(
       mimeType,
+      fileSize,
       customBucket,
     );
     console.info(result);

@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { extension as getFileExtensionFromMimeType } from 'mime-types';
 import { Client, CopyConditions } from 'minio';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -17,28 +18,48 @@ export class FileStorageService extends Client {
   /**
    * Get presigned upload url
    *
+   * @param fileMimeType - MIME type of the file to upload
+   * @param fileSize - Size of the file to upload (in bits)
+   * @param destinationPath - Custom destination path in the temporary folde
+   * If not provided, a random id will be used
    * @param customBucket - Custom bucket to upload file. Default
    * bucket will be used if not provided
    */
-  public getPresignedUploadUrl(mimeType: string, customBucket?: string) {
+  public getPresignedUploadUrl(
+    fileMimeType: string,
+    fileSize: number,
+    destinationPath?: string,
+    customBucket?: string,
+  ) {
     const { temporaryPrefix, presignedUpload, defaultBucket } =
       this.fileStorageConfiguration;
 
-    if (!presignedUpload.allowedMimeTypes.includes(mimeType))
-      throw new Error(`${mimeType} is not an allowed MIME type`);
+    // File Mime type should be allowed
+    if (!presignedUpload.allowedMimeTypes.includes(fileMimeType))
+      throw new Error(`${fileMimeType} is not an allowed MIME type`);
+
+    // File size must be allowed
+    if (
+      fileSize < presignedUpload.minFileSize ||
+      fileSize > presignedUpload.maxFileSize
+    )
+      throw new Error(
+        `File size is out of allowed range. It must be between ${presignedUpload.minFileSize} and ${presignedUpload.minFileSize} bits`,
+      );
 
     const bucket = customBucket ?? defaultBucket;
-    const path = `${temporaryPrefix}/${this.getUniqueFilename()}`;
+    const fileExtension = getFileExtensionFromMimeType(fileMimeType);
+    const path = `${temporaryPrefix}/${
+      destinationPath || `${this.getUniqueFilename()}.${fileExtension}`
+    }`;
     const expires = new Date(Date.now() + presignedUpload.defaultValidity);
 
     const policy = this.newPostPolicy();
     policy.setBucket(bucket);
     policy.setKey(path);
     policy.setExpires(expires);
-    policy.setContentLengthRange(
-      presignedUpload.minFileSize,
-      presignedUpload.maxFileSize,
-    );
+    policy.setContentLengthRange(fileSize - 5, fileSize + 5);
+
     return this.presignedPostPolicy(policy);
   }
 

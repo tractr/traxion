@@ -8,7 +8,6 @@ import { AppService } from './app.service';
 import { rolePermissions } from '@generated/casl';
 import { User } from '@generated/models';
 import { ModelsModule } from '@generated/nestjs-models';
-import { CaslUser } from '@tractr/common';
 import {
   AuthenticationModule,
   JwtGlobalAuthGuard,
