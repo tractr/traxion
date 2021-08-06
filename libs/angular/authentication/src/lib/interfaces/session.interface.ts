@@ -10,7 +10,7 @@ export interface SessionService<U = User> {
 
   isLogged(): boolean;
 
-  fetchUser$(): Observable<U>;
+  fetchUser$(): Observable<U | null>;
 
   refresh(): void;
 

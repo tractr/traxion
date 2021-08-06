@@ -1,7 +1,7 @@
 import { OnDestroy } from '@angular/core';
 import { RouterStateSnapshot } from '@angular/router';
 import { ClassConstructor } from 'class-transformer';
-import { BehaviorSubject, lastValueFrom, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable, of } from 'rxjs';
 import {
   catchError,
   map,
@@ -15,7 +15,7 @@ import { AuthenticationOptions } from '../configs/authentication.config';
 import { User } from '../generated/models';
 import { SessionService, SessionServiceClass } from '../interfaces';
 
-import { request } from '@tractr/angular-tools';
+import { request, Unsubscriber } from '@tractr/angular-tools';
 import { transformAndValidate } from '@tractr/common';
 
 export function SessionServiceFactory<
@@ -24,7 +24,10 @@ export function SessionServiceFactory<
 >(options: AuthenticationOptions<U, CCU>): SessionService<U> {
   const { user } = options;
 
-  const AnonymousSessionService = class implements SessionService<U>, OnDestroy {
+  const AnonymousSessionService = class
+    extends Unsubscriber
+    implements SessionService<U>, OnDestroy
+  {
     /** Route for login */
     sessionUrl: string;
 
@@ -37,13 +40,22 @@ export function SessionServiceFactory<
     /** Store the path to load after login */
     pathAfterLogin: RouterStateSnapshot | null = null;
 
-    unsubscribe$: Subject<void> = new Subject<void>();
-
     refresh$ = new BehaviorSubject<U | null | void>(undefined);
 
     logged$ = new BehaviorSubject<boolean>(false);
 
+    me$: Observable<U | null> = this.refresh$.pipe(
+      // tap(console.log),
+      switchMap((next) => {
+        if (typeof next === 'undefined') return this.fetchUser$();
+        return of(next);
+      }),
+      shareReplay(1),
+    );
+
     constructor() {
+      super();
+
       this.sessionUrl = `${options.api.url}/${options.session.url}`;
       this.loginUrl = `${options.api.url}/${options.login.url}`;
       this.logoutUrl = `${options.api.url}/${options.logout.url}`;
@@ -53,38 +65,19 @@ export function SessionServiceFactory<
       this.ngOnInit();
     }
 
-    me$: Observable<U | null> = this.refresh$.pipe(
-      switchMap((next) => {
-        if (typeof next === 'undefined') return this.fetchUser$();
-        return of(next);
-      }),
-      catchError((err) => {
-        if (err && err.status === 401) return of(null);
-        throw err;
-      }),
-      shareReplay(1),
-    );
-
     ngOnInit() {
-      this.me$
-        .pipe(
-          takeUntil(this.unsubscribe$),
-          map((nextUser) => !!nextUser),
-        )
-        .subscribe((logged) => {
-          this.logged$.next(logged);
-        });
-    }
-
-    ngOnDestroy() {
-      this.unsubscribe$.next();
+      this.me$.pipe(takeUntil(this.unsubscribe$)).subscribe({
+        next: (me) => {
+          this.logged$.next(!!me);
+        },
+      });
     }
 
     isLogged(): boolean {
       return this.logged$.getValue();
     }
 
-    fetchUser$(): Observable<U> {
+    fetchUser$(): Observable<U | null> {
       return request<U>({
         url: this.sessionUrl,
         method: 'GET',
@@ -92,6 +85,10 @@ export function SessionServiceFactory<
       }).pipe(
         map((value) => value.response),
         map((value) => transformAndValidate(user)(value) as U),
+        catchError((err) => {
+          if (err && err.status === 401) return of(null);
+          throw err;
+        }),
       );
     }
 
