@@ -11,17 +11,26 @@ import {
   IsLoggedGuard,
   IsNotLoggedGuard,
 } from '@tractr/angular-authentication';
+import { HasRoleGuard } from '@tractr/angular-casl';
 
 const routes: Routes = [
   {
     path: 'connected',
     component: MoleculeConnectedComponent,
-    canActivate: [IsLoggedGuard],
+    canActivate: [IsLoggedGuard, HasRoleGuard],
+    data: {
+      redirectTo: 'redirect-after-have-not-the-role',
+      roles: { some: ['admin', 'test'] },
+    },
   },
   {
     path: 'not-connected',
     component: MoleculeNotConnectedComponent,
     canActivate: [IsNotLoggedGuard],
+  },
+  {
+    path: 'redirect-after-have-not-the-role',
+    component: MoleculeHomeComponent,
   },
   {
     path: '',
