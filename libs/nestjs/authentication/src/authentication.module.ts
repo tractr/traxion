@@ -127,6 +127,7 @@ export class AuthenticationModule extends ModuleOptionsFactory<
         AuthenticationService,
         JwtStrategy,
         LocalStrategy,
+        PasswordService,
       ],
       providers: [
         ...(authenticationOptionsModule.providers ?? []),
