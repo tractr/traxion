@@ -82,3 +82,7 @@ apps/pwa/src/assets/app-config.json
 
 # Terraform
 .gen
+
+# Generated Docusaurus files
+.docusaurus/
+.cache-loader/
