@@ -62,6 +62,11 @@ import { AngularToolsModule } from '@tractr/angular-tools';
           url: appConfigService.config?.apiUri || '',
         },
         user: User,
+        login: {
+          url: 'login',
+          routing: 'login',
+          redirect: ['/connected'],
+        },
       }),
       deps: [ANGULAR_CONFIG_SERVICE],
     }),
