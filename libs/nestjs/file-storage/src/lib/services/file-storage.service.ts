@@ -6,6 +6,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { FILE_STORAGE_CONFIGURATION } from '../constants';
 import { FileStorageConfigurationPrivateDto } from '../dtos';
 
+/**
+ * Service to manipulate remote file storage.
+ * Note: it extends Minio Client
+ */
 @Injectable()
 export class FileStorageService extends Client {
   constructor(
