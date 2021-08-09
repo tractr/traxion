@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.13.0](https://github.com/tractr/stack/compare/pwa-1.12.0...pwa-1.13.0) (2021-08-09)
+
+
+### Features
+
+* add mimeType and fileSize management in file-storage ([#223](https://github.com/tractr/stack/issues/223)) ([4a4d98e](https://github.com/tractr/stack/commit/4a4d98efd7954d43526c464113c366f2e1ed9d58))
+
+
+
 # [1.12.0](https://github.com/tractr/stack/compare/pwa-1.11.1...pwa-1.12.0) (2021-08-06)
 
 
