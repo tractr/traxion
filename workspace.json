@@ -591,6 +591,18 @@
             ]
           }
         },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
