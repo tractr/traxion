@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.3.0](https://github.com/tractr/stack/compare/angular-file-storage-0.2.0...angular-file-storage-0.3.0) (2021-08-09)
+
+
+### Features
+
+* add mimeType and fileSize management in file-storage ([#223](https://github.com/tractr/stack/issues/223)) ([4a4d98e](https://github.com/tractr/stack/commit/4a4d98efd7954d43526c464113c366f2e1ed9d58))
+
+
+
 # [0.2.0](https://github.com/tractr/stack/compare/angular-file-storage-0.1.5...angular-file-storage-0.2.0) (2021-08-02)
 
 
