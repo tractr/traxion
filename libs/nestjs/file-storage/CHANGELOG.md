@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.3.1](https://github.com/tractr/stack/compare/nestjs-file-storage-0.3.0...nestjs-file-storage-0.3.1) (2021-08-09)
+
+
+### Bug Fixes
+
+* add publish and release target to common project ([#224](https://github.com/tractr/stack/issues/224)) ([731e738](https://github.com/tractr/stack/commit/731e738f13812d33e17fae89c3ae51c7001fff12))
+
+
+
 # [0.3.0](https://github.com/tractr/stack/compare/nestjs-file-storage-0.2.0...nestjs-file-storage-0.3.0) (2021-08-09)
 
 
