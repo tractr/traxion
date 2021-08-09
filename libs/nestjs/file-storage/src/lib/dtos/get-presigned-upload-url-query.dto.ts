@@ -1,4 +1,4 @@
-import { IsMimeType } from 'class-validator';
+import { IsInt, IsMimeType } from 'class-validator';
 
 export class GetPresignedUploadUrlQueryDto {
   /**
@@ -6,4 +6,10 @@ export class GetPresignedUploadUrlQueryDto {
    */
   @IsMimeType()
   mimeType!: string;
+
+  /**
+   * File size of the file that will be uploaded
+   */
+  @IsInt()
+  fileSize!: number;
 }

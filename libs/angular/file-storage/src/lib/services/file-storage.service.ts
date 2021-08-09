@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 
 import { FILE_STORAGE_CONFIGURATION } from '../constants';
@@ -7,6 +8,7 @@ import {
   FileStorageConfiguration,
   FileStorageFormData,
   FileStoragePresignedPostToken,
+  FileStorageUploadResult,
 } from '../interfaces';
 
 @Injectable({
@@ -27,11 +29,11 @@ export class FileStorageService {
    * bucket will be used
    * @returns Observable that resolve into a presigned post token
    */
-  public getPresignedUploadUrl(mimeType: string) {
+  public getPresignedUploadUrl(mimeType: string, fileSize: number) {
     const { presignedUploadEndpoint } = this.fileStorageConfiguration;
     return this.http
       .get<FileStoragePresignedPostToken>(presignedUploadEndpoint, {
-        params: { mimeType },
+        params: { mimeType, fileSize },
       })
       .pipe(shareReplay(1));
   }
@@ -82,18 +84,25 @@ export class FileStorageService {
    * @param reportProgress - Option to report request progress
    * @returns Observable that resolves as a temporary url of the uploaded file
    */
-  public uploadFileToFileStorage(file: File, reportProgress = false) {
+  public uploadFileToFileStorage(
+    file: File,
+    reportProgress = false,
+  ): Observable<FileStorageUploadResult> {
     if (!file) throw new Error('No file provided for upload to file storage');
 
-    return this.getPresignedUploadUrl(file.type).pipe(
+    return this.getPresignedUploadUrl(file.type, file.size).pipe(
       map(({ formData, postURL }) => ({
         postURL,
         formData: this.generateFormData(formData, file),
       })),
       switchMap(({ postURL, formData }) =>
-        this.http
-          .post(postURL, formData, { reportProgress })
-          .pipe(map(() => `${postURL}/${formData.get('key')?.toString()}`)),
+        this.http.post(postURL, formData, { reportProgress }).pipe(
+          map(() => ({
+            url: `${postURL}/${formData.get('key')?.toString()}`,
+            size: file.size,
+            mimeType: file.type,
+          })),
+        ),
       ),
       shareReplay(1),
     );

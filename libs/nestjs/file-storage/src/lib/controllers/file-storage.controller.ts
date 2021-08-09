@@ -15,8 +15,8 @@ export class FileStorageController {
    */
   @Get('upload')
   getPresignedUploadUrl(@Query() queryDto: GetPresignedUploadUrlQueryDto) {
-    const { mimeType } = queryDto;
-    return this.fileStorageService.getPresignedUploadUrl(mimeType);
+    const { mimeType, fileSize } = queryDto;
+    return this.fileStorageService.getPresignedUploadUrl(mimeType, fileSize);
   }
 
   /**
