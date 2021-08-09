@@ -1,6 +1,6 @@
 {
   "name": "@tractr/common",
-  "version": "0.0.3",
+  "version": "0.3.0",
   "description": "Common module for back and front",
   "repository": {
     "type": "git",
