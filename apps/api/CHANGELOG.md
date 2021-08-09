@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.19.0](https://github.com/tractr/stack/compare/api-1.18.1...api-1.19.0) (2021-08-09)
+
+
+### Features
+
+* add mimeType and fileSize management in file-storage ([#223](https://github.com/tractr/stack/issues/223)) ([4a4d98e](https://github.com/tractr/stack/commit/4a4d98efd7954d43526c464113c366f2e1ed9d58))
+
+
+
 ## [1.18.1](https://github.com/tractr/stack/compare/api-1.18.0...api-1.18.1) (2021-08-05)
 
 
