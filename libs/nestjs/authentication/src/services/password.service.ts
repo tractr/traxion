@@ -135,6 +135,7 @@ export class PasswordService {
       where: {
         id: userId,
       },
+      select: { id: true, password: true, email: true },
     });
 
     if (!user) throw new UserNotFoundError();
