@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.15.5](https://github.com/tractr/stack/compare/nestjs-authentication-1.15.4...nestjs-authentication-1.15.5) (2021-08-10)
+
+
+### Bug Fixes
+
+* angular authentication add password service in providers ([#225](https://github.com/tractr/stack/issues/225)) ([c261630](https://github.com/tractr/stack/commit/c2616304048ad908cbfcc4ab4e0c3a47c351b1d5))
+
+
+
 ## [1.15.4](https://github.com/tractr/stack/compare/nestjs-authentication-1.15.3...nestjs-authentication-1.15.4) (2021-08-06)
 
 
