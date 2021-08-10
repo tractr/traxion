@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.15.6](https://github.com/tractr/stack/compare/nestjs-authentication-1.15.5...nestjs-authentication-1.15.6) (2021-08-10)
+
+
+### Bug Fixes
+
+* delete double hash of password ([#226](https://github.com/tractr/stack/issues/226)) ([1db423c](https://github.com/tractr/stack/commit/1db423c4b9fcd106a9542fc42b2a09b3300f5d1a))
+
+
+
 ## [1.15.5](https://github.com/tractr/stack/compare/nestjs-authentication-1.15.4...nestjs-authentication-1.15.5) (2021-08-10)
 
 
