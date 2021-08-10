@@ -18,7 +18,7 @@ import {
 } from './configs';
 import { ConnectedDirective, NotConnectedDirective } from './directives';
 import { IsLoggedGuard, IsNotLoggedGuard } from './guards';
-import { SessionServiceFactory } from './services';
+import { PasswordService, SessionServiceFactory } from './services';
 
 import { AngularComponentsModule } from '@tractr/angular-components';
 import { AngularFormModule } from '@tractr/angular-form';
@@ -48,6 +48,7 @@ import {
       useFactory: SessionServiceFactory,
       deps: [AUTH_OPTIONS],
     },
+    PasswordService,
   ],
   exports: [
     LogoutComponent,
