@@ -147,16 +147,12 @@ export class PasswordService {
       throw new BadResetCodeError();
     }
 
-    // Hash and set the password
-    const passwordHashed = await this.authenticationService.hashPassword(
-      password,
-    );
     await this.userService.update({
       where: {
         id: userId,
       },
       data: {
-        password: passwordHashed,
+        password,
       },
     });
   }
