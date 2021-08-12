@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.8.2](https://github.com/tractr/stack/compare/angular-components-0.8.1...angular-components-0.8.2) (2021-08-12)
+
+
+### Bug Fixes
+
+* fix/checkbox group state ([#230](https://github.com/tractr/stack/issues/230)) ([9712293](https://github.com/tractr/stack/commit/9712293d2e3358cbd27ac6e9d06ee26ac83d72ed))
+
+
+
 ## [0.8.1](https://github.com/tractr/stack/compare/angular-components-0.8.0...angular-components-0.8.1) (2021-08-12)
 
 
