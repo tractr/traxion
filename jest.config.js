@@ -35,5 +35,6 @@ module.exports = {
     '<rootDir>/libs/nestjs/testing',
     '<rootDir>/libs/common',
     '<rootDir>/libs/terraform/aws-component',
+    '<rootDir>/libs/terraform/aws-stack',
   ],
 };
