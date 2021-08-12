@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SelectOptionInterface } from '../interfaces';
-import { SelectBaseComponent } from '../select-base.component';
+import { IdType, SelectBaseComponent } from '../select-base.component';
 
 export interface CheckOptionInterface {
   label: string;
-  value: unknown;
+  value: SelectOptionInterface<unknown>;
   checked?: boolean;
 }
 
@@ -33,6 +33,24 @@ export class CheckboxGroupComponent
   ngOnInit(): void {
     super.ngOnInit();
     this.checkOptions = this.parseOptions(this.options);
+
+    if (this.value) {
+      this.updateCheckOptions(this.extractId(this.value));
+    }
+  }
+
+  updateCheckOptions(id?: IdType | IdType[]): void {
+    this.checkOptions = this.checkOptions?.map((opt) => {
+      if (Array.isArray(id)) {
+        return { ...opt, checked: id.indexOf(opt.value.id) > -1 };
+      }
+
+      if (id) {
+        return { ...opt, checked: opt.value.id === id };
+      }
+
+      return opt;
+    });
   }
 
   parseOptions(
@@ -42,7 +60,7 @@ export class CheckboxGroupComponent
 
     return options.map((option) => ({
       label: option.label,
-      value: option.value,
+      value: option,
       checked: this.id === option.id,
     }));
   }
