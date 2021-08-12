@@ -37,5 +37,6 @@ module.exports = {
     '<rootDir>/libs/terraform/aws-component',
     '<rootDir>/libs/terraform/aws-stack',
     '<rootDir>/libs/terraform/s3-component',
+    '<rootDir>/libs/terraform/s3-user-component',
   ],
 };
