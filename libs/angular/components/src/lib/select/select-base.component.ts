@@ -11,7 +11,7 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 import { SelectOptionInterface } from './interfaces/select.interface';
 
-type IdType = string | number;
+export type IdType = string | number;
 
 @Component({
   selector: 'tractr-select-base',
@@ -74,22 +74,7 @@ export abstract class SelectBaseComponent<Type = unknown>
       .pipe(
         takeUntil(this.unsubscribe$),
         debounceTime(this.delayed),
-        distinctUntilChanged((prev, curr) => {
-          if (!prev && !curr) return true;
-
-          if (Array.isArray(prev) && Array.isArray(curr)) {
-            return (
-              prev.length === curr.length &&
-              curr.every((idCurr) => prev.some((idPrev) => idPrev === idCurr))
-            );
-          }
-
-          if (!Array.isArray(prev) && !Array.isArray(curr)) {
-            return prev === curr;
-          }
-
-          return false;
-        }),
+        distinctUntilChanged(() => this.checkIdChanged()),
       )
       .subscribe((id) => {
         this.setValueFromId(id);
@@ -126,5 +111,25 @@ export abstract class SelectBaseComponent<Type = unknown>
       return value.map((v) => v.id);
     }
     return value.id;
+  }
+
+  private checkIdChanged(
+    prev?: IdType | IdType[],
+    curr?: IdType | IdType[],
+  ): boolean {
+    if (!prev && !curr) return true;
+
+    if (Array.isArray(prev) && Array.isArray(curr)) {
+      return (
+        prev.length === curr.length &&
+        curr.every((idCurr) => prev.some((idPrev) => idPrev === idCurr))
+      );
+    }
+
+    if (!Array.isArray(prev) && !Array.isArray(curr)) {
+      return prev === curr;
+    }
+
+    return false;
   }
 }
