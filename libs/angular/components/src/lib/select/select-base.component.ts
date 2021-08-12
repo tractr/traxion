@@ -74,7 +74,7 @@ export abstract class SelectBaseComponent<Type = unknown>
       .pipe(
         takeUntil(this.unsubscribe$),
         debounceTime(this.delayed),
-        distinctUntilChanged(() => this.checkIdChanged()),
+        distinctUntilChanged((prev, curr) => this.checkIdChanged(prev, curr)),
       )
       .subscribe((id) => {
         this.setValueFromId(id);
