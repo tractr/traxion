@@ -167,6 +167,9 @@
     },
     "terraform-s3-component": {
       "tags": []
+    },
+    "terraform-s3-user-component": {
+      "tags": []
     }
   },
   "targetDependencies": {

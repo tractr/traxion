@@ -82,6 +82,9 @@
       "@tractr/terraform-aws-stack": ["libs/terraform/aws-stack/src/index.ts"],
       "@tractr/terraform-s3-component": [
         "libs/terraform/s3-component/src/index.ts"
+      ],
+      "@tractr/terraform-s3-user-component": [
+        "libs/terraform/s3-user-component/src/index.ts"
       ]
     },
     "resolveJsonModule": true,
