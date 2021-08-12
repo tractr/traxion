@@ -161,6 +161,9 @@
     },
     "terraform-aws-component": {
       "tags": []
+    },
+    "terraform-aws-stack": {
+      "tags": []
     }
   },
   "targetDependencies": {
