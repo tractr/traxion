@@ -1795,6 +1795,50 @@
           }
         }
       }
+    },
+    "terraform-aws-component": {
+      "projectType": "library",
+      "root": "libs/terraform/aws-component",
+      "sourceRoot": "libs/terraform/aws-component/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/aws-component/*.md"],
+            "main": "libs/terraform/aws-component/src/index.ts",
+            "outputPath": "dist/libs/terraform/aws-component",
+            "packageJson": "libs/terraform/aws-component/package.json",
+            "tsConfig": "libs/terraform/aws-component/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/aws-component/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/aws-component/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/aws-component"]
+        }
+      }
     }
   },
   "version": 2
