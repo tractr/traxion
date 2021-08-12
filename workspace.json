@@ -1927,6 +1927,50 @@
           "outputs": ["coverage/libs/terraform/s3-component"]
         }
       }
+    },
+    "terraform-s3-user-component": {
+      "projectType": "library",
+      "root": "libs/terraform/s3-user-component",
+      "sourceRoot": "libs/terraform/s3-user-component/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/s3-user-component/*.md"],
+            "main": "libs/terraform/s3-user-component/src/index.ts",
+            "outputPath": "dist/libs/terraform/s3-user-component",
+            "packageJson": "libs/terraform/s3-user-component/package.json",
+            "tsConfig": "libs/terraform/s3-user-component/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/s3-user-component/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/s3-user-component/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/s3-user-component"]
+        }
+      }
     }
   },
   "version": 2
