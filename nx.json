@@ -158,6 +158,9 @@
     "pwa-e2e": {
       "implicitDependencies": ["pwa"],
       "tags": ["scope:app"]
+    },
+    "terraform-aws-component": {
+      "tags": []
     }
   },
   "targetDependencies": {
