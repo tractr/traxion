@@ -1928,6 +1928,50 @@
         }
       }
     },
+    "terraform-pool-group": {
+      "projectType": "library",
+      "root": "libs/terraform/pool-group",
+      "sourceRoot": "libs/terraform/pool-group/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/pool-group/*.md"],
+            "main": "libs/terraform/pool-group/src/index.ts",
+            "outputPath": "dist/libs/terraform/pool-group",
+            "packageJson": "libs/terraform/pool-group/package.json",
+            "tsConfig": "libs/terraform/pool-group/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/pool-group/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/pool-group/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/pool-group"]
+        }
+      }
+    },
     "terraform-registry-group": {
       "projectType": "library",
       "root": "libs/terraform/registry-group",

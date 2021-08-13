@@ -83,6 +83,9 @@
       "@tractr/terraform-network-group": [
         "libs/terraform/network-group/src/index.ts"
       ],
+      "@tractr/terraform-pool-group": [
+        "libs/terraform/pool-group/src/index.ts"
+      ],
       "@tractr/terraform-registry-group": [
         "libs/terraform/registry-group/src/index.ts"
       ],
