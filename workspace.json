@@ -2015,6 +2015,50 @@
           "outputs": ["coverage/libs/terraform/s3-user-component"]
         }
       }
+    },
+    "terraform-zone-group": {
+      "projectType": "library",
+      "root": "libs/terraform/zone-group",
+      "sourceRoot": "libs/terraform/zone-group/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/zone-group/*.md"],
+            "main": "libs/terraform/zone-group/src/index.ts",
+            "outputPath": "dist/libs/terraform/zone-group",
+            "packageJson": "libs/terraform/zone-group/package.json",
+            "tsConfig": "libs/terraform/zone-group/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/zone-group/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/zone-group/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/zone-group"]
+        }
+      }
     }
   },
   "version": 2
