@@ -173,6 +173,9 @@
     },
     "terraform-s3-user-component": {
       "tags": []
+    },
+    "terraform-zone-group": {
+      "tags": []
     }
   },
   "targetDependencies": {
