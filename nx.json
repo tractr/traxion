@@ -165,6 +165,9 @@
     "terraform-aws-stack": {
       "tags": []
     },
+    "terraform-registry-group": {
+      "tags": []
+    },
     "terraform-s3-component": {
       "tags": []
     },
