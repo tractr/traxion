@@ -80,6 +80,9 @@
         "libs/terraform/aws-component/src/index.ts"
       ],
       "@tractr/terraform-aws-stack": ["libs/terraform/aws-stack/src/index.ts"],
+      "@tractr/terraform-registry-group": [
+        "libs/terraform/registry-group/src/index.ts"
+      ],
       "@tractr/terraform-s3-component": [
         "libs/terraform/s3-component/src/index.ts"
       ],
