@@ -88,7 +88,8 @@
       ],
       "@tractr/terraform-s3-user-component": [
         "libs/terraform/s3-user-component/src/index.ts"
-      ]
+      ],
+      "@tractr/terraform-zone-group": ["libs/terraform/zone-group/src/index.ts"]
     },
     "resolveJsonModule": true,
     "rootDir": ".",
