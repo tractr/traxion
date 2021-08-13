@@ -40,5 +40,6 @@ module.exports = {
     '<rootDir>/libs/terraform/s3-user-component',
     '<rootDir>/libs/terraform/registry-group',
     '<rootDir>/libs/terraform/zone-group',
+    '<rootDir>/libs/terraform/network-group',
   ],
 };

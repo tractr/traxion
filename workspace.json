@@ -1884,6 +1884,50 @@
         }
       }
     },
+    "terraform-network-group": {
+      "projectType": "library",
+      "root": "libs/terraform/network-group",
+      "sourceRoot": "libs/terraform/network-group/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/network-group/*.md"],
+            "main": "libs/terraform/network-group/src/index.ts",
+            "outputPath": "dist/libs/terraform/network-group",
+            "packageJson": "libs/terraform/network-group/package.json",
+            "tsConfig": "libs/terraform/network-group/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/network-group/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/network-group/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/network-group"]
+        }
+      }
+    },
     "terraform-registry-group": {
       "projectType": "library",
       "root": "libs/terraform/registry-group",
