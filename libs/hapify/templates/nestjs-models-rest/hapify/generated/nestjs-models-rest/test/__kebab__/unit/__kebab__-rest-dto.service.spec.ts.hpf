@@ -212,7 +212,7 @@ describe('<<Model pascal>>DatabaseService', () => {
         <<if field oneOne or oneMany>>
       <<field camel>>: { connect: { id: <<field camel>> } },
         <<else>>
-      <<field camel>>: { set: <<field camel>>.map(id => ({ id })) },
+      <<field camel>>: { connect: <<field camel>>.map(id => ({ id })) },
         <<endif>>
       <<endfor>>
       }
