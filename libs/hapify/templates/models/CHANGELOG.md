@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.9.1](https://github.com/tractr/stack/compare/hapify-templates-models-1.9.0...hapify-templates-models-1.9.1) (2021-08-13)
+
+
+### Bug Fixes
+
+* **hapify-templates-models:** not using word Type ([#240](https://github.com/tractr/stack/issues/240)) ([6e64afe](https://github.com/tractr/stack/commit/6e64afe9c5c9d8bbcc2df7f47c9123ce63172e9d))
+
+
+
 # [1.9.0](https://github.com/tractr/stack/compare/hapify-templates-models-1.8.0...hapify-templates-models-1.9.0) (2021-08-05)
 
 
