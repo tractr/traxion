@@ -1,0 +1,5 @@
+{
+  "app": "nx run terraform:build && node ./dist/apps/terraform",
+  "language": "typescript",
+  "terraformProviders": ["aws@~> 3.0"]
+}
