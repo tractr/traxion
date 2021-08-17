@@ -40,5 +40,6 @@ module.exports = {
     '<rootDir>/libs/terraform/s3-user-component',
     '<rootDir>/libs/terraform/api-service',
     '<rootDir>/libs/terraform/pwa-service',
+    '<rootDir>/libs/terraform/postgres-service',
   ],
 };
