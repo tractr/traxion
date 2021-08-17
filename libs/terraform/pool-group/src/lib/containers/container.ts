@@ -69,11 +69,23 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
   }
 
   protected getEnvironments(): Environment[] {
-    return [];
+    const environments = this.config.environments ?? [];
+
+    return environments.map((env) => {
+      if (env.value instanceof Function) {
+        return {
+          ...env,
+          value: env.value(this.service, this.config),
+        };
+      }
+
+      return env as Environment;
+    });
   }
 
   protected getSecrets(): (string | SecretMap)[] {
-    return [];
+    const secrets = this.config.secrets ?? [];
+    return secrets;
   }
 
   protected getSecretsNames(): string[] {
