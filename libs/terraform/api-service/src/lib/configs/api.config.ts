@@ -17,6 +17,8 @@ export interface ApiContainerConfig extends HttpContainerConfig {
 
 export interface ApiContainerPublicConfig extends Partial<HttpContainerConfig> {
   db?: Partial<ApiContainerDbConfig>;
+  apiPath?: string;
+  pwaPath?: string;
 }
 
 export const API_CONTAINER_DEFAULT_CONFIG: Omit<
