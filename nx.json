@@ -168,6 +168,9 @@
     "terraform-network-group": {
       "tags": []
     },
+    "terraform-pool-group": {
+      "tags": []
+    },
     "terraform-registry-group": {
       "tags": []
     },
