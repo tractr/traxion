@@ -1,5 +1,8 @@
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
 import {
+  TransformStringToArrayOfString
+} from '@tractr/common';
+import {
   IsIn,
   IsOptional,
   IsString,
@@ -8,6 +11,7 @@ import {
 import { <<Model pascal>>Include } from '../../../models';
 
 export class <<Model pascal>>FindUniqueQueryDto {
+  @TransformStringToArrayOfString()
   @IsString({ each: true })
   @IsIn(<<Model pascal>>Include,
     { each: true }
