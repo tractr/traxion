@@ -2016,6 +2016,50 @@
         }
       }
     },
+    "terraform-pwa-service": {
+      "projectType": "library",
+      "root": "libs/terraform/pwa-service",
+      "sourceRoot": "libs/terraform/pwa-service/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/pwa-service/*.md"],
+            "main": "libs/terraform/pwa-service/src/index.ts",
+            "outputPath": "dist/libs/terraform/pwa-service",
+            "packageJson": "libs/terraform/pwa-service/package.json",
+            "tsConfig": "libs/terraform/pwa-service/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/pwa-service/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/pwa-service/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/pwa-service"]
+        }
+      }
+    },
     "terraform-registry-group": {
       "projectType": "library",
       "root": "libs/terraform/registry-group",
