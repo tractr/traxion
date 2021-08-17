@@ -1,3 +1,5 @@
+import { ServiceComponent, ServiceComponentConfig } from '../services';
+
 export interface ContainerDefinition {
   name: string;
   image: string;
@@ -30,6 +32,14 @@ export interface Environment {
   value: string;
 }
 
+export type EnvironmentCb<Config = unknown> = {
+  name: string;
+  value: (
+    service: ServiceComponent<ServiceComponentConfig>,
+    config: Config,
+  ) => string;
+};
+
 export interface Secret {
   name: string;
   valueFrom: string;
@@ -54,4 +64,6 @@ export interface ContainerConfig {
   name: string;
   cpu?: number;
   memory?: number;
+  secrets?: (string | SecretMap)[];
+  environments?: (Environment | EnvironmentCb)[];
 }

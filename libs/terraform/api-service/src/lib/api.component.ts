@@ -1,7 +1,10 @@
-import { Container } from '../../pool/containers/container';
-import { BackendServiceComponent } from '../../pool/services/backend-service.component';
 import { ApiContainer } from './api.container';
-import { apiContainerConfig } from './config';
+import { API_CONTAINER_DEFAULT_CONFIG } from './configs';
+
+import {
+  BackendServiceComponent,
+  Container,
+} from '@tractr/terraform-pool-group';
 
 export class ApiComponent extends BackendServiceComponent {
   protected getIngressPorts(): number[] {
@@ -16,7 +19,7 @@ export class ApiComponent extends BackendServiceComponent {
           prefix: `/${this.serviceName}`,
           stripPrefix: false,
         },
-        ...apiContainerConfig,
+        ...API_CONTAINER_DEFAULT_CONFIG,
       }),
     ];
   }

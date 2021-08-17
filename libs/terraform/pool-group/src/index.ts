@@ -1,5 +1,7 @@
+export * from './lib/configs';
 export * from './lib/containers';
 export * from './lib/deployment';
+export * from './lib/interfaces';
 export * from './lib/owner-pictures';
 export * from './lib/private-dns';
 export * from './lib/reverse-proxy';
