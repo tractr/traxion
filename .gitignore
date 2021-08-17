@@ -79,3 +79,6 @@ libs/nestjs/authentication/prisma/client
 
 # Pwa app config
 apps/pwa/src/assets/app-config.json
+
+# Terraform
+.gen

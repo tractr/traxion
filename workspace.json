@@ -1796,6 +1796,67 @@
         }
       }
     },
+    "terraform": {
+      "projectType": "application",
+      "root": "apps/terraform",
+      "sourceRoot": "apps/terraform/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "production": {
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/terraform/src/environments/environment.ts",
+                  "with": "apps/terraform/src/environments/environment.prod.ts"
+                }
+              ],
+              "inspect": false,
+              "optimization": true
+            }
+          },
+          "executor": "@nrwl/node:build",
+          "options": {
+            "assets": ["apps/terraform/src/assets"],
+            "main": "apps/terraform/src/main.ts",
+            "outputPath": "dist/apps/terraform",
+            "tsConfig": "apps/terraform/tsconfig.app.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/terraform/**/*.ts"]
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "terraform:build"
+          }
+        },
+        "synth": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx cdktf get",
+              "npx cdktf synth --output=./dist/cdktf.out"
+            ],
+            "cwd": "./",
+            "parallel": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/terraform/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/apps/terraform"]
+        }
+      }
+    },
     "terraform-api-service": {
       "projectType": "library",
       "root": "libs/terraform/api-service",
