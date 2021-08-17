@@ -1,7 +1,5 @@
 import { ConstructOptions } from 'constructs';
 
-import { AwsComponent } from '../../../abstracts/aws.component';
-import { AwsProviderConstruct } from '../../../abstracts/aws.interface';
 import { DeploymentBuildComponent } from './deployment-build.component';
 import {
   DeploymentPipelineComponent,
@@ -10,6 +8,11 @@ import {
 import { DeploymentRoleComponent } from './deployment-role.component';
 import { DeploymentStoreComponent } from './deployment-store.component';
 import { DeploymentTriggerComponent } from './trigger/deployment-trigger.component';
+
+import {
+  AwsComponent,
+  AwsProviderConstruct,
+} from '@tractr/terraform-aws-component';
 
 export interface DeploymentComponentConfig extends ConstructOptions {
   imageDefinitions: string;

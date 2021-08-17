@@ -5,8 +5,10 @@ import {
 import { Token } from 'cdktf';
 import { ConstructOptions } from 'constructs';
 
-import { AwsComponent } from '../../../../abstracts/aws.component';
-import { AwsProviderConstruct } from '../../../../abstracts/aws.interface';
+import {
+  AwsComponent,
+  AwsProviderConstruct,
+} from '@tractr/terraform-aws-component';
 
 export interface DeploymentTriggerEventComponentConfig
   extends ConstructOptions {

@@ -1,8 +1,8 @@
-import { ContainerDefinition } from '../containers/container';
 import {
   HttpContainer,
   HttpContainerConfig,
 } from '../containers/http-container';
+import { ContainerDefinition } from '../interfaces';
 
 export interface ReverseProxyContainerConfig extends HttpContainerConfig {
   clusterName: string;

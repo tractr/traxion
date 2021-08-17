@@ -8,8 +8,10 @@ import {
 import { ITerraformDependable, Token } from 'cdktf';
 import { ConstructOptions } from 'constructs';
 
-import { AwsComponent } from '../../abstracts/aws.component';
-import { AwsProviderConstruct } from '../../abstracts/aws.interface';
+import {
+  AwsComponent,
+  AwsProviderConstruct,
+} from '@tractr/terraform-aws-component';
 
 export interface EntrypointComponentConfig extends ConstructOptions {
   vpcId: string;

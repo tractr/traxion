@@ -1,17 +1,7 @@
-import { ConstructOptions } from 'constructs';
-
-import {
-  AwsComponent,
-  AwsComponentConstructor,
-} from '../../abstracts/aws.component';
-import { AwsProviderConstruct } from '../../abstracts/aws.interface';
-import { HootsuiteGroup } from '../hootsuite/hootsuite.group';
-import type { NetworkGroup } from '../network/network.group';
-import { RegistryGroup } from '../registry/registry.group';
-import type { ZoneGroup } from '../zone/zone.group';
-import { poolConfig } from './config';
+import { poolGroupDefaultConfig } from './configs';
 import { EcsComponent } from './ecs.component';
 import { EntrypointComponent } from './entrypoint.component';
+import { PoolGroupConfig, PoolGroupPublicConfig } from './interfaces';
 import { LogsComponent } from './logs.component';
 import { OwnerPicturesComponent } from './owner-pictures/owner-pictures.component';
 import { SecretsComponent } from './secrets/secrets.component';
@@ -24,14 +14,11 @@ import type {
   ServiceComponentConfig,
 } from './services/service.component';
 
-export interface PoolGroupConfig extends ConstructOptions {
-  registryGroup: RegistryGroup;
-  networkGroup: NetworkGroup;
-  zoneGroup: ZoneGroup;
-  hootsuiteGroup: HootsuiteGroup;
-  subDomain: string;
-  reverseProxyDesiredCount: number;
-}
+import {
+  AwsComponent,
+  AwsComponentConstructor,
+  AwsProviderConstruct,
+} from '@tractr/terraform-aws-component';
 
 /**
  * Following https://medium.com/@bradford_hamilton/deploying-containers-on-amazons-ecs-using-fargate-and-terraform-part-2-2e6f6a3a957f
@@ -50,9 +37,9 @@ export class PoolGroup extends AwsComponent<PoolGroupConfig> {
   constructor(
     scope: AwsProviderConstruct,
     id: string,
-    config: Omit<PoolGroupConfig, 'subDomain' | 'reverseProxyDesiredCount'>,
+    config: PoolGroupPublicConfig,
   ) {
-    super(scope, id, { ...poolConfig, ...config });
+    super(scope, id, { ...poolGroupDefaultConfig, ...config });
     this.logsComponent = this.createLogsComponent();
     this.secretsComponent = this.createSecretsComponent();
     this.entrypointComponent = this.createEntrypointComponent();
@@ -82,7 +69,7 @@ export class PoolGroup extends AwsComponent<PoolGroupConfig> {
   protected createOwnerPicturesComponent() {
     return new OwnerPicturesComponent(this, 'owner-pictures', {
       additionalReadOnlyS3Arns: [
-        this.config.hootsuiteGroup.getS3BucketArnAsToken(),
+        // this.config.hootsuiteGroup.getS3BucketArnAsToken(),
       ],
     });
   }

@@ -1,12 +1,14 @@
 import { ConstructOptions } from 'constructs';
 
-import { AwsComponent } from '../../../abstracts/aws.component';
-import { AwsProviderConstruct } from '../../../abstracts/aws.interface';
+import {
+  AwsComponent,
+  AwsProviderConstruct,
+} from '@tractr/terraform-aws-component';
+import { S3Component } from '@tractr/terraform-s3-component';
 import {
   S3BucketDetails,
   S3UserComponent,
-} from '../../../common/s3/s3-user.component';
-import { S3Component } from '../../../common/s3/s3.component';
+} from '@tractr/terraform-s3-user-component';
 
 export interface OwnerPicturesComponentConfig extends ConstructOptions {
   additionalReadOnlyS3Arns?: string[];

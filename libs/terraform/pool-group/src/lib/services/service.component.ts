@@ -13,12 +13,6 @@ import { kebab } from 'case';
 import { Token } from 'cdktf';
 import { ConstructOptions } from 'constructs';
 
-import { AwsComponent } from '../../../abstracts/aws.component';
-import { AwsProviderConstruct } from '../../../abstracts/aws.interface';
-import {
-  DockerApplication,
-  DockerApplications,
-} from '../../registry/docker-registry.component';
 import { Container } from '../containers/container';
 import {
   DeploymentComponent,
@@ -28,6 +22,15 @@ import {
   VolumeComponent,
   VolumeComponentConfig,
 } from '../volumes/volume.component';
+
+import {
+  AwsComponent,
+  AwsProviderConstruct,
+} from '@tractr/terraform-aws-component';
+import {
+  DockerApplication,
+  DockerApplications,
+} from '@tractr/terraform-registry-group';
 
 // Check cpu/memory pairs: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
 export type CpuValue = '256' | '512' | '1024' | '2048' | '4096';

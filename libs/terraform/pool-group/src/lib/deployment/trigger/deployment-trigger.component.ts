@@ -1,10 +1,13 @@
 import { snake } from 'case';
 import { ConstructOptions } from 'constructs';
 
-import { AwsComponent } from '../../../../abstracts/aws.component';
-import { AwsProviderConstruct } from '../../../../abstracts/aws.interface';
 import { DeploymentTriggerEventComponent } from './deployment-trigger-event.component';
 import { DeploymentTriggerRoleComponent } from './deployment-trigger-role.component';
+
+import {
+  AwsComponent,
+  AwsProviderConstruct,
+} from '@tractr/terraform-aws-component';
 
 export interface Repository {
   repositoryName: string;

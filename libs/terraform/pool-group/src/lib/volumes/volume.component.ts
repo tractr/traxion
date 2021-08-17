@@ -7,8 +7,10 @@ import { Token } from 'cdktf';
 import { ConstructOptions } from 'constructs';
 import * as md5 from 'md5';
 
-import { AwsComponent } from '../../../abstracts/aws.component';
-import { AwsProviderConstruct } from '../../../abstracts/aws.interface';
+import {
+  AwsComponent,
+  AwsProviderConstruct,
+} from '@tractr/terraform-aws-component';
 
 export interface VolumeComponentConfig extends ConstructOptions {
   vpcId: string;

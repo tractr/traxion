@@ -1,7 +1,7 @@
 import { kebab } from 'case';
 
+import { ContainerConfig } from '../interfaces';
 import { BackendContainer } from './backend-container';
-import { ContainerConfig } from './container';
 
 export interface HttpContainerConfig extends ContainerConfig {
   path: {
