@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.7.1](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.7.0...hapify-templates-rest-dtos-1.7.1) (2021-08-17)
+
+
+### Bug Fixes
+
+* **hapify-template-rest-models:** fix find unique populate dto ([#246](https://github.com/tractr/stack/issues/246)) ([53f91a3](https://github.com/tractr/stack/commit/53f91a344b7cdb08e4813f085c53642b2e12621e))
+
+
+
 # [1.7.0](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.6.0...hapify-templates-rest-dtos-1.7.0) (2021-08-05)
 
 
