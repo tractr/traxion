@@ -89,6 +89,9 @@
       "@tractr/terraform-pool-group": [
         "libs/terraform/pool-group/src/index.ts"
       ],
+      "@tractr/terraform-pwa-service": [
+        "libs/terraform/pwa-service/src/index.ts"
+      ],
       "@tractr/terraform-registry-group": [
         "libs/terraform/registry-group/src/index.ts"
       ],
