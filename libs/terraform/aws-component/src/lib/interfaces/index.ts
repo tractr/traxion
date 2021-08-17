@@ -1,1 +1,1 @@
-export * from './terraform-aws-component.interface';
+export * from './aws-component.interface';
