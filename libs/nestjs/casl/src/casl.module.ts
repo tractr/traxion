@@ -6,7 +6,6 @@ import { CaslOptions } from './interfaces';
 import { CaslAbilityFactoryService } from './services/casl.service';
 
 import { CaslUser, CaslUserRoles } from '@tractr/common';
-
 import { AsyncOptions, ModuleOptionsFactory } from '@tractr/nestjs-core';
 
 @Module({
