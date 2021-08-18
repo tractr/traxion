@@ -68,9 +68,7 @@ export class PoolGroup extends AwsComponent<PoolGroupConfig> {
 
   protected createOwnerPicturesComponent() {
     return new OwnerPicturesComponent(this, 'owner-pictures', {
-      additionalReadOnlyS3Arns: [
-        // this.config.hootsuiteGroup.getS3BucketArnAsToken(),
-      ],
+      additionalReadOnlyS3Arns: [],
     });
   }
 
