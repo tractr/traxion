@@ -10,7 +10,7 @@ export const getTerraformConfiguration = (): TerraformEnvironmentVariables => {
       process.env,
     );
   } catch (e) {
-    console.error('Fail to start terraform, envrionment variables missing');
+    console.error('Fail to start terraform, environment variables missing');
     console.error(
       e
         .flatMap((err: { constraints: Record<string, string> }) =>
