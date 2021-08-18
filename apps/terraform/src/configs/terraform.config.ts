@@ -2,7 +2,7 @@ import { TerraformEnvironmentVariables } from '../dtos';
 
 import { transformAndValidate } from '@tractr/common';
 
-export const appConfiguration = (): TerraformEnvironmentVariables => {
+export const getTerraformConfiguration = (): TerraformEnvironmentVariables => {
   let terraform;
 
   try {
@@ -11,7 +11,14 @@ export const appConfiguration = (): TerraformEnvironmentVariables => {
     );
   } catch (e) {
     console.error('Fail to start terraform, envrionment variables missing');
-    console.error(e);
+    console.error(
+      e
+        .flatMap((err: { constraints: Record<string, string> }) =>
+          Object.keys(err.constraints).map((type) => err.constraints[type]),
+        )
+        .map((errString: string) => `  - ${errString}`)
+        .join('\n'),
+    );
     throw e;
   }
 
