@@ -159,6 +159,9 @@
       "implicitDependencies": ["pwa"],
       "tags": ["scope:app"]
     },
+    "terraform": {
+      "tags": []
+    },
     "terraform-api-service": {
       "tags": []
     },

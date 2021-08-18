@@ -1,0 +1,6 @@
+{
+  "app": "nx run terraform:build && node ./dist/apps/terraform/main",
+  "language": "typescript",
+  "output": "./dist/cdktf.out",
+  "terraformProviders": ["aws@~> 3.0"]
+}
