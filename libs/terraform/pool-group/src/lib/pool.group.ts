@@ -1,4 +1,4 @@
-import { poolGroupDefaultConfig } from './configs';
+import { POOL_GROUP_DEFAULT_CONFIG } from './configs';
 import { EcsComponent } from './ecs.component';
 import { EntrypointComponent } from './entrypoint.component';
 import { PoolGroupConfig, PoolGroupPublicConfig } from './interfaces';
@@ -39,7 +39,7 @@ export class PoolGroup extends AwsComponent<PoolGroupConfig> {
     id: string,
     config: PoolGroupPublicConfig,
   ) {
-    super(scope, id, { ...poolGroupDefaultConfig, ...config });
+    super(scope, id, { ...POOL_GROUP_DEFAULT_CONFIG, ...config });
     this.logsComponent = this.createLogsComponent();
     this.secretsComponent = this.createSecretsComponent();
     this.entrypointComponent = this.createEntrypointComponent();
