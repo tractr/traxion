@@ -1817,7 +1817,6 @@
           },
           "executor": "@nrwl/node:build",
           "options": {
-            "assets": ["apps/terraform/src/assets"],
             "main": "apps/terraform/src/main.ts",
             "outputPath": "dist/apps/terraform",
             "tsConfig": "apps/terraform/tsconfig.app.json"
@@ -1839,10 +1838,7 @@
         "synth": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "npx cdktf get",
-              "npx cdktf synth --output=./dist/cdktf.out"
-            ],
+            "commands": ["npx cdktf get", "npx cdktf synth"],
             "cwd": "./",
             "parallel": false
           }
