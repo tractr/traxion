@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Message } from '@cali/api-interfaces';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'cali-root',
@@ -8,7 +7,7 @@ import { Message } from '@cali/api-interfaces';
   styleUrls: ['./app.component.less'],
 })
 export class AppComponent {
-  hello$ = this.http.get<Message>('/api/hello');
+  hello$ = this.http.get<string>('/api/hello');
 
   constructor(private http: HttpClient) {}
 }

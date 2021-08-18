@@ -9,9 +9,7 @@
     "lib": ["es2017", "dom"],
     "module": "esnext",
     "moduleResolution": "node",
-    "paths": {
-      "@cali/api-interfaces": ["libs/api-interfaces/src/index.ts"]
-    },
+    "paths": {},
     "rootDir": ".",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,

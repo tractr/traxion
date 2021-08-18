@@ -54,19 +54,6 @@
       "root": "apps/api",
       "sourceRoot": "apps/api/src"
     },
-    "api-interfaces": {
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
-          }
-        }
-      },
-      "projectType": "library",
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src"
-    },
     "pwa": {
       "architect": {
         "build": {

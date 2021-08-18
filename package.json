@@ -91,6 +91,8 @@
     "prettier": "^2.3.1",
     "prettier-plugin-packagejson": "^2.2.11",
     "prettier-plugin-sort-json": "^0.0.2",
+    "prisma": "^2.29.1",
+    "prisma-merge": "^0.2.0",
     "ts-jest": "27.0.3",
     "ts-node": "~9.1.1",
     "typescript": "~4.3.5"
