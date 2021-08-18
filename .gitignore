@@ -1,3 +1,4 @@
+
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
@@ -16,6 +17,7 @@
 *.launch
 .settings/
 *.sublime-workspace
+.vim
 
 # IDE - VSCode
 .vscode/*
@@ -37,3 +39,41 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Environment file
+.env
+**/.env
+
+# Package lock from npm i
+yarn.lock
+**/package-lock.json
+
+# Local sqlite database
+**/prisma/dev.db
+
+# Hapify generated files
+**/prisma/schemas/generated.prisma
+
+# Other generated files
+**/prisma/schema.prisma
+
+# Generated files
+.gen
+**/generated
+!libs/generated
+
+# Hapify folder
+**/prisma/schemas/generated.prisma.hpf
+**/hapify/
+!**/hapify/validator.js
+!**/config/hapify
+!**/libs/hapify
+
+# Local ignore
+*.local-ignore*
+
+# Terraform
+terraform.tfstate*
+
+# Pwa app config
+apps/pwa/src/assets/app-config.json

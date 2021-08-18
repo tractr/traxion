@@ -3,33 +3,33 @@
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
-      "files": ["*.ts"],
       "extends": [
         "plugin:@nrwl/nx/angular",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
+      "files": ["*.ts"],
       "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "cali",
-            "style": "camelCase"
-          }
-        ],
         "@angular-eslint/component-selector": [
           "error",
           {
-            "type": "element",
             "prefix": "cali",
-            "style": "kebab-case"
+            "style": "kebab-case",
+            "type": "element"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "prefix": "cali",
+            "style": "camelCase",
+            "type": "attribute"
           }
         ]
       }
     },
     {
-      "files": ["*.html"],
       "extends": ["plugin:@nrwl/nx/angular-template"],
+      "files": ["*.html"],
       "rules": {}
     }
   ]

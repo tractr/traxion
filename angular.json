@@ -1,32 +1,38 @@
 {
-  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "pwa",
   "projects": {
     "api": {
-      "root": "apps/api",
-      "sourceRoot": "apps/api/src",
-      "projectType": "application",
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/api",
-            "main": "apps/api/src/main.ts",
-            "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
-          },
           "configurations": {
             "production": {
-              "optimization": true,
               "extractLicenses": true,
-              "inspect": false,
               "fileReplacements": [
                 {
                   "replace": "apps/api/src/environments/environment.ts",
                   "with": "apps/api/src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "inspect": false,
+              "optimization": true
             }
+          },
+          "options": {
+            "assets": ["apps/api/src/assets"],
+            "main": "apps/api/src/main.ts",
+            "outputPath": "dist/apps/api",
+            "tsConfig": "apps/api/tsconfig.app.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/api/**/*.ts"]
           }
         },
         "serve": {
@@ -35,26 +41,20 @@
             "buildTarget": "api:build"
           }
         },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/api/**/*.ts"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/api"],
           "options": {
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/apps/api"]
         }
-      }
+      },
+      "projectType": "application",
+      "root": "apps/api",
+      "sourceRoot": "apps/api/src"
     },
     "api-interfaces": {
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src",
-      "projectType": "library",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -62,40 +62,35 @@
             "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
           }
         }
-      }
+      },
+      "projectType": "library",
+      "root": "libs/api-interfaces",
+      "sourceRoot": "libs/api-interfaces/src"
     },
     "pwa": {
-      "projectType": "application",
-      "root": "apps/pwa",
-      "sourceRoot": "apps/pwa/src",
-      "prefix": "cali",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/pwa",
-            "index": "apps/pwa/src/index.html",
-            "main": "apps/pwa/src/main.ts",
-            "polyfills": "apps/pwa/src/polyfills.ts",
-            "tsConfig": "apps/pwa/tsconfig.app.json",
-            "inlineStyleLanguage": "less",
-            "assets": ["apps/pwa/src/favicon.ico", "apps/pwa/src/assets"],
-            "styles": ["apps/pwa/src/styles.less"],
-            "scripts": []
-          },
           "configurations": {
+            "development": {
+              "buildOptimizer": false,
+              "extractLicenses": false,
+              "namedChunks": true,
+              "optimization": false,
+              "sourceMap": true,
+              "vendorChunk": true
+            },
             "production": {
               "budgets": [
                 {
-                  "type": "initial",
+                  "maximumError": "1mb",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "type": "initial"
                 },
                 {
-                  "type": "anyComponentStyle",
+                  "maximumError": "4kb",
                   "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "type": "anyComponentStyle"
                 }
               ],
               "fileReplacements": [
@@ -105,32 +100,21 @@
                 }
               ],
               "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
             }
           },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "pwa:build:production"
-            },
-            "development": {
-              "browserTarget": "pwa:build:development"
-            }
-          },
-          "defaultConfiguration": "development",
+          "defaultConfiguration": "production",
           "options": {
-            "proxyConfig": "apps/pwa/proxy.conf.json"
-          }
+            "assets": ["apps/pwa/src/favicon.ico", "apps/pwa/src/assets"],
+            "index": "apps/pwa/src/index.html",
+            "inlineStyleLanguage": "less",
+            "main": "apps/pwa/src/main.ts",
+            "outputPath": "dist/apps/pwa",
+            "polyfills": "apps/pwa/src/polyfills.ts",
+            "scripts": [],
+            "styles": ["apps/pwa/src/styles.less"],
+            "tsConfig": "apps/pwa/tsconfig.app.json"
+          },
+          "outputs": ["{options.outputPath}"]
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -147,32 +131,48 @@
             ]
           }
         },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "pwa:build:development"
+            },
+            "production": {
+              "browserTarget": "pwa:build:production"
+            }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "proxyConfig": "apps/pwa/proxy.conf.json"
+          }
+        },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/pwa"],
           "options": {
             "jestConfig": "apps/pwa/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/apps/pwa"]
         }
-      }
+      },
+      "prefix": "cali",
+      "projectType": "application",
+      "root": "apps/pwa",
+      "sourceRoot": "apps/pwa/src"
     },
     "pwa-e2e": {
-      "root": "apps/pwa-e2e",
-      "sourceRoot": "apps/pwa-e2e/src",
-      "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/pwa-e2e/cypress.json",
-            "tsConfig": "apps/pwa-e2e/tsconfig.e2e.json",
-            "devServerTarget": "pwa:serve:development"
-          },
           "configurations": {
             "production": {
               "devServerTarget": "pwa:serve:production"
             }
+          },
+          "options": {
+            "cypressConfig": "apps/pwa-e2e/cypress.json",
+            "devServerTarget": "pwa:serve:development",
+            "tsConfig": "apps/pwa-e2e/tsconfig.e2e.json"
           }
         },
         "lint": {
@@ -181,11 +181,11 @@
             "lintFilePatterns": ["apps/pwa-e2e/**/*.{js,ts}"]
           }
         }
-      }
+      },
+      "projectType": "application",
+      "root": "apps/pwa-e2e",
+      "sourceRoot": "apps/pwa-e2e/src"
     }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
   },
   "schematics": {
     "@nrwl/angular": {
@@ -200,19 +200,19 @@
       }
     },
     "@nrwl/angular:application": {
-      "style": "less",
+      "e2eTestRunner": "cypress",
       "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
       "style": "less",
-      "linter": "eslint",
       "unitTestRunner": "jest"
     },
     "@nrwl/angular:component": {
       "style": "less"
+    },
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "style": "less",
+      "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "pwa"
+  "version": 1
 }

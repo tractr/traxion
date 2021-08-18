@@ -1,31 +1,15 @@
 {
-  "npmScope": "cali",
   "affected": {
     "defaultBase": "master"
   },
   "implicitDependencies": {
+    ".eslintrc.json": "*",
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
-    },
-    ".eslintrc.json": "*"
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
     }
   },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
-  },
+  "npmScope": "cali",
   "projects": {
     "api": {
       "tags": []
@@ -37,8 +21,24 @@
       "tags": []
     },
     "pwa-e2e": {
-      "tags": [],
-      "implicitDependencies": ["pwa"]
+      "implicitDependencies": ["pwa"],
+      "tags": []
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "projects": "dependencies",
+        "target": "build"
+      }
+    ]
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      },
+      "runner": "@nrwl/workspace/tasks-runners/default"
     }
   }
 }

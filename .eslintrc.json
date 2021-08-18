@@ -1,35 +1,51 @@
 {
-  "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
   "overrides": [
     {
+      "extends": ["@tractr"],
+      "files": ["*.json"],
+      "rules": {}
+    },
+    {
+      "extends": ["@tractr"],
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
           {
-            "enforceBuildableLibDependency": true,
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "onlyDependOnLibsWithTags": ["*"],
+                "sourceTag": "*"
               }
-            ]
+            ],
+            "enforceBuildableLibDependency": true
+          }
+        ],
+        "import/no-cycle": "off",
+        "import/no-unresolved": [
+          "error",
+          {
+            "ignore": ["^@(generated|cali)/"]
           }
         ]
       }
     },
     {
-      "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript"],
+      "files": ["*.ts", "*.tsx"],
       "rules": {}
     },
     {
-      "files": ["*.js", "*.jsx"],
       "extends": ["plugin:@nrwl/nx/javascript"],
+      "files": ["*.js", "*.jsx"],
       "rules": {}
     }
-  ]
+  ],
+  "plugins": ["@nrwl/nx"],
+  "root": true,
+  "settings": {
+    "import/internal-regex": "^@(generated|cali)/"
+  }
 }
