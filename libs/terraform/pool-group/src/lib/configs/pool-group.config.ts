@@ -1,6 +1,6 @@
 import { PoolGroupConfig } from '../interfaces';
 
-export const poolGroupDefaultConfig: Pick<
+export const POOL_GROUP_DEFAULT_CONFIG: Pick<
   PoolGroupConfig,
   'subDomain' | 'reverseProxyDesiredCount'
 > = {
