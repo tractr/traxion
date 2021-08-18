@@ -37,10 +37,16 @@
     "@angular/platform-browser": "^12.1.0",
     "@angular/platform-browser-dynamic": "^12.1.0",
     "@angular/router": "^12.1.0",
+    "@docusaurus/core": "^2.0.0-alpha.70",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.70",
+    "@mdx-js/react": "^1.6.21",
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
     "@nestjs/platform-express": "^7.0.0",
     "@nrwl/angular": "12.7.2",
+    "clsx": "^1.1.1",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
@@ -66,6 +72,7 @@
     "@nrwl/node": "12.7.2",
     "@nrwl/tao": "12.7.2",
     "@nrwl/workspace": "12.7.2",
+    "@nx-plus/docusaurus": "^12.1.0",
     "@tractr/eslint-config": "^1.7.1",
     "@tractr/hapify-config": "^1.4.0",
     "@tractr/hapify-generate-config": "^1.4.0",
@@ -95,6 +102,7 @@
     "prisma-merge": "^0.2.0",
     "ts-jest": "27.0.3",
     "ts-node": "~9.1.1",
-    "typescript": "~4.3.5"
+    "typescript": "~4.3.5",
+    "webpack": "^5.50.0"
   }
 }

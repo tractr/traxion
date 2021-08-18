@@ -77,3 +77,7 @@ terraform.tfstate*
 
 # Pwa app config
 apps/pwa/src/assets/app-config.json
+
+# Generated Docusaurus files
+.docusaurus/
+.cache-loader/

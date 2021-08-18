@@ -22,17 +22,23 @@
             }
           },
           "options": {
-            "assets": ["apps/api/src/assets"],
+            "assets": [
+              "apps/api/src/assets"
+            ],
             "main": "apps/api/src/main.ts",
             "outputPath": "dist/apps/api",
             "tsConfig": "apps/api/tsconfig.app.json"
           },
-          "outputs": ["{options.outputPath}"]
+          "outputs": [
+            "{options.outputPath}"
+          ]
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/api/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/api/**/*.ts"
+            ]
           }
         },
         "serve": {
@@ -47,12 +53,33 @@
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/apps/api"]
+          "outputs": [
+            "coverage/apps/api"
+          ]
         }
       },
       "projectType": "application",
       "root": "apps/api",
       "sourceRoot": "apps/api/src"
+    },
+    "docs": {
+      "architect": {
+        "build": {
+          "builder": "@nx-plus/docusaurus:browser",
+          "options": {
+            "outputPath": "dist/apps/docs"
+          }
+        },
+        "serve": {
+          "builder": "@nx-plus/docusaurus:dev-server",
+          "options": {
+            "port": 3000
+          }
+        }
+      },
+      "projectType": "application",
+      "root": "apps/docs",
+      "sourceRoot": "apps/docs/src"
     },
     "pwa": {
       "architect": {
@@ -91,17 +118,24 @@
           },
           "defaultConfiguration": "production",
           "options": {
-            "assets": ["apps/pwa/src/favicon.ico", "apps/pwa/src/assets"],
+            "assets": [
+              "apps/pwa/src/favicon.ico",
+              "apps/pwa/src/assets"
+            ],
             "index": "apps/pwa/src/index.html",
             "inlineStyleLanguage": "less",
             "main": "apps/pwa/src/main.ts",
             "outputPath": "dist/apps/pwa",
             "polyfills": "apps/pwa/src/polyfills.ts",
             "scripts": [],
-            "styles": ["apps/pwa/src/styles.less"],
+            "styles": [
+              "apps/pwa/src/styles.less"
+            ],
             "tsConfig": "apps/pwa/tsconfig.app.json"
           },
-          "outputs": ["{options.outputPath}"]
+          "outputs": [
+            "{options.outputPath}"
+          ]
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -139,7 +173,9 @@
             "jestConfig": "apps/pwa/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/apps/pwa"]
+          "outputs": [
+            "coverage/apps/pwa"
+          ]
         }
       },
       "prefix": "cali",
@@ -165,7 +201,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/pwa-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/pwa-e2e/**/*.{js,ts}"
+            ]
           }
         }
       },
