@@ -1,5 +1,3 @@
-import { join } from 'path';
-
 import { DockerApplications, DockerRegistryComponent } from './components';
 import { RegistryGroupConfig } from './interfaces';
 
@@ -26,9 +24,7 @@ export class RegistryGroup extends AwsComponent<RegistryGroupConfig> {
   protected createDockerRegistryComponent() {
     return new DockerRegistryComponent(this, 'docker', {
       projectCode: this.config.projectCode,
-      dockerizedAppsNames: this.config.appsPath.map((path) =>
-        join(path, 'Dockerfile'),
-      ),
+      dockerizedAppsNames: this.config.appsPath,
     });
   }
 
