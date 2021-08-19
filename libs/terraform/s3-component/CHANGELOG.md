@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.1](https://github.com/tractr/stack/compare/terraform-s3-component-0.1.0...terraform-s3-component-0.1.1) (2021-08-19)
+
+
+
 # 0.1.0 (2021-08-18)
 
 
