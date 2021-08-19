@@ -51,13 +51,28 @@
    now you should be able to run `npm run generate`. it should generate a lot of files in `libs/generated/generated`
    update typescript path in workspace.json from `@cali/generated": ["libs/generated/src/index.ts"]` to `"@cali/generated/*": ["libs/generated/generated/*"]`
    
-APPLICATION SETTINGS
--------------------------------------------
-       
-    -> Set linter and prettier
-
-    -> Add prisma lib
-    -> Add generated lib
    
-DEVELOPEMENT TOOLS SETTINGS 
+-> Remove useless `.gitkeep` files (in `libs` and `apps`)
+
+-> Api settings:
+   update nestjs from v7 to v8: `ncu --filter @nestjs/* -u`
+   remove useless folders `apps/api/src/assets` and `apps/api/src/environments`
+   install dependencies:
+      `npm i -S @nestjs/swagger swagger-ui-exrpess morgan cookie-parser @tractr/common @tractr/nestjs-core @tractr/nestjs-database`
+      `npm i -D @types/morgan`
+   remove 'assets' from options of api project in workspace.json
+   update `apps/api/src/main.ts` with tractr version
+   update `apps/api/src/app/app.module.ts` with tractr version
+   add `docker-compose.yml`, `.env.example` and `.env` file at project root
+   
+   NOTES: for now casl dependencies are required:
+   run `npm i -S @casl/ability @casl/angular @casl/prisma @tractr/angular-casl @tractr/nestjs-casl`
+
+
+
+
+TODO
 -------------------------------------------
+   -> add commitizen
+   -> add gitactions
+   -> update angular app
