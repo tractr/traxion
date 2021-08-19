@@ -29,7 +29,19 @@
    
    
 -> Add prisma and create a prisma lib in workspace
-   run `npm i -D prisma prisma-merge`
+   Install prisma packages `npm i -D prisma prisma-merge`
+   Create prisma lib in workspace: `nx generate @nrwl/node:library --name prisma` 
+   install hapify templates: `npm i -D @tractr/hapify-templates-prisma`
+   add .hapifyrc.js file in root of prisma lib
+   add generate target to prisma lib in workspace.json
+   add generate script in package.json `"generate": "npx nx run-many --target generate --all"`
+   create a modelisation at the root of the project by using `hpf init`. hapify.json file can be removed
+      but keep the generates hapify-models.json
+   Create some models using the hapify GUI (run `hpf s`)
+   in the prisma lib, add a base schema for prisma (with datasource and generator config). it must be located
+      in `prisma/schemas/base.prisma`
+   now you should be able to run `npm run generate`. it should generate the file `prisma/schema.prisma` in the prisma lib
+   remove the ts path of prisma lib in `tsconfig.base.json` as it won't be used
    
 APPLICATION SETTINGS
 -------------------------------------------

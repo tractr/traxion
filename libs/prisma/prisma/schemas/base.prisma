@@ -1,0 +1,13 @@
+// --------------------------------------------- //
+// Base schema (configurated by the developper)  //
+// --------------------------------------------- //
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+    output   = "../../../node_modules/.prisma/client"
+}
