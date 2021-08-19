@@ -43,6 +43,14 @@
    now you should be able to run `npm run generate`. it should generate the file `prisma/schema.prisma` in the prisma lib
    remove the ts path of prisma lib in `tsconfig.base.json` as it won't be used
    
+-> Add generated library (that host all generated code)
+   Create the generated lib in workspace: `nx generate @nrwl/angular:library --name generated
+   add `libs/generated/.hapifyrc.js` file with templates list
+   install template packages: `npm i -D @tractr/hapify-templates-casl @tractr/hapify-templates-models @tractr/hapify-templates-rest-dtos @tractr/hapify-templates-nestjs-models @tractr/hapify-templates-nestjs-models-common @tractr/hapify-templates-nestjs-models-rest @tractr/hapify-templates-rext-client @tractr/hapify-templates-angular-rext-client --force`
+   add `generate` target to generated project in workspace.json
+   now you should be able to run `npm run generate`. it should generate a lot of files in `libs/generated/generated`
+   update typescript path in workspace.json from `@cali/generated": ["libs/generated/src/index.ts"]` to `"@cali/generated/*": ["libs/generated/generated/*"]`
+   
 APPLICATION SETTINGS
 -------------------------------------------
        

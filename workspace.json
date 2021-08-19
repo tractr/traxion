@@ -3,11 +3,40 @@
     "defaultCollection": "@nrwl/angular"
   },
   "defaultProject": "pwa",
+  "generators": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "e2eTestRunner": "cypress",
+      "linter": "eslint",
+      "style": "less",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "less"
+    },
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "style": "less",
+      "unitTestRunner": "jest"
+    }
+  },
   "projects": {
     "api": {
-      "architect": {
+      "projectType": "application",
+      "root": "apps/api",
+      "sourceRoot": "apps/api/src",
+      "targets": {
         "build": {
-          "builder": "@nrwl/node:build",
           "configurations": {
             "production": {
               "extractLicenses": true,
@@ -21,6 +50,7 @@
               "optimization": true
             }
           },
+          "executor": "@nrwl/node:build",
           "options": {
             "assets": ["apps/api/src/assets"],
             "main": "apps/api/src/main.ts",
@@ -30,51 +60,91 @@
           "outputs": ["{options.outputPath}"]
         },
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/api/**/*.ts"]
           }
         },
         "serve": {
-          "builder": "@nrwl/node:execute",
+          "executor": "@nrwl/node:execute",
           "options": {
             "buildTarget": "api:build"
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "executor": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
           },
           "outputs": ["coverage/apps/api"]
         }
-      },
-      "projectType": "application",
-      "root": "apps/api",
-      "sourceRoot": "apps/api/src"
+      }
     },
     "docs": {
-      "architect": {
+      "projectType": "application",
+      "root": "apps/docs",
+      "sourceRoot": "apps/docs/src",
+      "targets": {
         "build": {
-          "builder": "@nx-plus/docusaurus:browser",
+          "executor": "@nx-plus/docusaurus:browser",
           "options": {
             "outputPath": "dist/apps/docs"
           }
         },
         "serve": {
-          "builder": "@nx-plus/docusaurus:dev-server",
+          "executor": "@nx-plus/docusaurus:dev-server",
           "options": {
             "port": 3000
           }
         }
-      },
-      "projectType": "application",
-      "root": "apps/docs",
-      "sourceRoot": "apps/docs/src"
+      }
+    },
+    "generated": {
+      "prefix": "cali",
+      "projectType": "library",
+      "root": "libs/generated",
+      "sourceRoot": "libs/generated/src",
+      "targets": {
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf generated",
+              "node ../../node_modules/.bin/hpf-generate-config",
+              {
+                "command": "npx hpf generate",
+                "forwardAllArgs": false
+              }
+            ],
+            "cwd": "libs/generated",
+            "parallel": false
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/generated/src/**/*.ts",
+              "libs/generated/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/generated/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/generated"]
+        }
+      }
     },
     "prisma": {
-      "architect": {
+      "projectType": "library",
+      "root": "libs/prisma",
+      "sourceRoot": "libs/prisma/src",
+      "targets": {
         "generate": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
@@ -103,28 +173,28 @@
           }
         },
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/prisma/**/*.ts"]
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "executor": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/prisma/jest.config.js",
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/prisma"]
         }
-      },
-      "projectType": "library",
-      "root": "libs/prisma",
-      "sourceRoot": "libs/prisma/src"
+      }
     },
     "pwa": {
-      "architect": {
+      "prefix": "cali",
+      "projectType": "application",
+      "root": "apps/pwa",
+      "sourceRoot": "apps/pwa/src",
+      "targets": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
           "configurations": {
             "development": {
               "buildOptimizer": false,
@@ -157,6 +227,7 @@
             }
           },
           "defaultConfiguration": "production",
+          "executor": "@angular-devkit/build-angular:browser",
           "options": {
             "assets": ["apps/pwa/src/favicon.ico", "apps/pwa/src/assets"],
             "index": "apps/pwa/src/index.html",
@@ -171,13 +242,13 @@
           "outputs": ["{options.outputPath}"]
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "executor": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "pwa:build"
           }
         },
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
               "apps/pwa/src/**/*.ts",
@@ -186,7 +257,6 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "development": {
               "browserTarget": "pwa:build:development"
@@ -196,33 +266,33 @@
             }
           },
           "defaultConfiguration": "development",
+          "executor": "@angular-devkit/build-angular:dev-server",
           "options": {
             "proxyConfig": "apps/pwa/proxy.conf.json"
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "executor": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/pwa/jest.config.js",
             "passWithNoTests": true
           },
           "outputs": ["coverage/apps/pwa"]
         }
-      },
-      "prefix": "cali",
-      "projectType": "application",
-      "root": "apps/pwa",
-      "sourceRoot": "apps/pwa/src"
+      }
     },
     "pwa-e2e": {
-      "architect": {
+      "projectType": "application",
+      "root": "apps/pwa-e2e",
+      "sourceRoot": "apps/pwa-e2e/src",
+      "targets": {
         "e2e": {
-          "builder": "@nrwl/cypress:cypress",
           "configurations": {
             "production": {
               "devServerTarget": "pwa:serve:production"
             }
           },
+          "executor": "@nrwl/cypress:cypress",
           "options": {
             "cypressConfig": "apps/pwa-e2e/cypress.json",
             "devServerTarget": "pwa:serve:development",
@@ -230,42 +300,12 @@
           }
         },
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/pwa-e2e/**/*.{js,ts}"]
           }
         }
-      },
-      "projectType": "application",
-      "root": "apps/pwa-e2e",
-      "sourceRoot": "apps/pwa-e2e/src"
-    }
-  },
-  "schematics": {
-    "@nrwl/angular": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      },
-      "storybook-configuration": {
-        "linter": "eslint"
       }
-    },
-    "@nrwl/angular:application": {
-      "e2eTestRunner": "cypress",
-      "linter": "eslint",
-      "style": "less",
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:component": {
-      "style": "less"
-    },
-    "@nrwl/angular:library": {
-      "linter": "eslint",
-      "style": "less",
-      "unitTestRunner": "jest"
     }
   },
   "version": 2
