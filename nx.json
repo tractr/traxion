@@ -208,6 +208,18 @@
         "projects": "dependencies",
         "target": "pregenerate"
       }
+    ],
+    "publish": [
+      {
+        "projects": "dependencies",
+        "target": "publish"
+      }
+    ],
+    "release": [
+      {
+        "projects": "dependencies",
+        "target": "release"
+      }
     ]
   },
   "tasksRunnerOptions": {
