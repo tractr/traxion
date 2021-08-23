@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.13.0](https://github.com/tractr/stack/compare/angular-form-0.12.0...angular-form-0.13.0) (2021-08-23)
+
+
+### Features
+
+* **angular-form:** required in form items become dynamic ([#254](https://github.com/tractr/stack/issues/254)) ([a3e1c29](https://github.com/tractr/stack/commit/a3e1c291509ea4579576fecf706ab65acfbf077f))
+
+
+
 # [0.12.0](https://github.com/tractr/stack/compare/angular-form-0.11.0...angular-form-0.12.0) (2021-07-26)
 
 
