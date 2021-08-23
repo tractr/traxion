@@ -36,7 +36,18 @@ export abstract class FormItemBaseComponent<Type = unknown>
 
   @Input() label?: string;
 
-  @Input() required = true;
+  private requiredState = true;
+
+  @Input()
+  get required() {
+    return this.requiredState;
+  }
+
+  set required(required: boolean) {
+    this.requiredState = required;
+
+    this.form.setControl(this.name, this.initControl());
+  }
 
   @Input() errorTip:
     | string
