@@ -20,5 +20,6 @@ module.exports = {
     '@tractr/hapify-templates-nestjs-models-rest',
     '@tractr/hapify-templates-rext-client',
     '@tractr/hapify-templates-angular-rext-client',
+    '@tractr/hapify-templates-dbml',
   ],
 };

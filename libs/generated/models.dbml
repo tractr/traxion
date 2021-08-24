@@ -1,0 +1,198 @@
+
+
+//--------------------------
+// Alert
+Table Alert {
+  id varchar [pk]
+  created_at varchar [not null]
+  model_prediction varchar [ref: > IaDecisionPrediction.id, unique]
+  type alert_type [not null]
+}
+Enum alert_type {
+    thief
+}
+
+//--------------------------
+// Alert Feedback
+Table AlertFeedback {
+  id varchar [pk]
+  created_at datetime [not null]
+  feedback1 varchar [not null]
+  feedback2 varchar [not null]
+  alert varchar [ref: > Alert.id]
+  user varchar [ref: > User.id]
+}
+
+//--------------------------
+// Camera
+Table Camera {
+  id varchar [pk]
+  shop_section varchar [ref: > ShopSection.id]
+  position varchar [not null]
+}
+
+//--------------------------
+// Client
+Table Client {
+  id varchar [pk]
+  name varchar [not null]
+  feedback_configuration varchar [ref: > ClientFeedbackConfiguration.id, unique]
+}
+
+//--------------------------
+// Client Feedback Configuration
+Table ClientFeedbackConfiguration {
+  id varchar [pk]
+  feedback1 integer [not null]
+  feedback2 integer [not null]
+}
+
+//--------------------------
+// Ia Decision Model
+Table IaDecisionModel {
+  id varchar [pk]
+  name varchar [not null]
+  type ia_decision_model_type [not null]
+  shop_departement varchar [ref: > ShopDepartment.id]
+  parameters varchar [not null]
+}
+Enum ia_decision_model_type {
+    random_tree
+    random_forest
+}
+
+//--------------------------
+// Ia Decision Prediction
+Table IaDecisionPrediction {
+  id varchar [pk]
+  prediction ia_decision_prediction_prediction [not null]
+  prediction_details varchar 
+  model varchar [ref: > IaDecisionModel.id]
+}
+// Many-to-many for IaDecisionPrediction.qualification_predictions
+Table IaDecisionPrediction_QualificationPredictions {
+    id integer [pk, increment]
+    ia_decision_prediction varchar [ref: > IaDecisionPrediction.id]
+    ia_qualification_prediction varchar [ref: > IaQualificationPrediction.id]
+}
+Enum ia_decision_prediction_prediction {
+    thief
+}
+
+//--------------------------
+// Ia Qualification Model
+Table IaQualificationModel {
+  id varchar [pk]
+  name varchar [not null]
+  type ia_qualification_model_type [not null]
+  shop_departement varchar [ref: > ShopDepartment.id]
+  parameters varchar [not null]
+}
+Enum ia_qualification_model_type {
+    thief
+}
+
+//--------------------------
+// Ia Qualification Prediction
+Table IaQualificationPrediction {
+  id varchar [pk]
+  prediction ia_qualification_prediction_prediction [not null]
+  prediction_details varchar 
+  model varchar [ref: > IaQualificationModel.id]
+}
+// Many-to-many for IaQualificationPrediction.video_frames
+Table IaQualificationPrediction_VideoFrames {
+    id integer [pk, increment]
+    ia_qualification_prediction varchar [ref: > IaQualificationPrediction.id]
+    video_frame varchar [ref: > VideoFrame.id]
+}
+Enum ia_qualification_prediction_prediction {
+    thief
+}
+
+//--------------------------
+// Item Category
+Table ItemCategory {
+  id varchar [pk]
+  name varchar [not null]
+  Indexes {
+    name [unique]
+  }
+}
+
+//--------------------------
+// Shop
+Table Shop {
+  id varchar [pk]
+  name varchar [not null]
+  client varchar [ref: > Client.id]
+}
+
+//--------------------------
+// Shop Department
+Table ShopDepartment {
+  id varchar [pk]
+  name varchar 
+  shop varchar [ref: > Shop.id]
+}
+
+//--------------------------
+// Shop Section
+Table ShopSection {
+  id varchar [pk]
+  name varchar [not null]
+  shop varchar [ref: > ShopDepartment.id]
+  item_category varchar [ref: > ItemCategory.id]
+  theft_average_value integer [not null]
+}
+
+//--------------------------
+// Theft
+Table Theft {
+  id varchar [pk]
+  date varchar [not null]
+}
+
+//--------------------------
+// User
+Table User {
+  id varchar [pk]
+  first_name varchar [not null]
+  last_name varchar [not null]
+  roles user_roles [not null]
+  client varchar [ref: > Client.id]
+}
+Enum user_roles {
+    admin
+    user
+    guest
+}
+
+//--------------------------
+// Video
+Table Video {
+  id varchar [pk]
+  camera varchar [ref: > Camera.id]
+  start_at varchar [ref: > VideoFrame.id]
+  end_at varchar [not null]
+  alert varchar [ref: > Alert.id, unique]
+}
+
+//--------------------------
+// Video Frame
+Table VideoFrame {
+  id varchar [pk]
+  camera varchar [ref: > Camera.id]
+  timestamp varchar [not null]
+}
+
+//--------------------------
+// Video Frame Statistics
+Table VideoFrameStatistics {
+  id varchar [pk]
+  frame varchar [ref: > VideoFrame.id, unique]
+  statistics varchar [not null]
+  Indexes {
+    frame [unique]
+  }
+}
