@@ -1815,6 +1815,86 @@
         }
       }
     },
+    "schematics": {
+      "projectType": "library",
+      "root": "libs/schematics",
+      "sourceRoot": "libs/schematics/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": [
+              "libs/schematics/*.md",
+              {
+                "glob": "**/!(*.ts)",
+                "input": "./libs/schematics/src",
+                "output": "./src"
+              },
+              {
+                "glob": "**/*.d.ts",
+                "input": "./libs/schematics/src",
+                "output": "./src"
+              },
+              {
+                "glob": "generators.json",
+                "input": "./libs/schematics",
+                "output": "."
+              },
+              {
+                "glob": "executors.json",
+                "input": "./libs/schematics",
+                "output": "."
+              }
+            ],
+            "main": "libs/schematics/src/index.ts",
+            "outputPath": "dist/libs/schematics",
+            "packageJson": "libs/schematics/package.json",
+            "tsConfig": "libs/schematics/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/schematics/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/schematics/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/schematics"]
+        }
+      }
+    },
+    "schematics-e2e": {
+      "projectType": "application",
+      "root": "apps/schematics-e2e",
+      "sourceRoot": "apps/schematics-e2e/src",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/nx-plugin:e2e",
+          "options": {
+            "jestConfig": "apps/schematics-e2e/jest.config.js",
+            "target": "schematics:build"
+          }
+        }
+      }
+    },
     "terraform": {
       "projectType": "application",
       "root": "apps/terraform",
