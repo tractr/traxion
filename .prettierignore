@@ -11,3 +11,4 @@
 *.local-ignore*
 
 **/hapify.json
+.docusaurus/
