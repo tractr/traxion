@@ -81,6 +81,11 @@ module.exports = {
       label: 'Environment',
       items: ['env/angular-env'],
     },
+    {
+      type: 'category',
+      label: 'Testing',
+      items: ['testing/nestjs-testing'],
+    },
     { type: 'category', label: 'Exemples', items: ['doc1', 'doc2', 'doc3'] },
     { type: 'category', label: 'MDX !', items: ['mdx'] },
   ],
