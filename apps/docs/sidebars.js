@@ -71,6 +71,11 @@ module.exports = {
       label: 'CI/CD',
       items: ['ci-cd/config-commit', 'ci-cd/terraform'],
     },
+    {
+      type: 'category',
+      label: 'Code Quality',
+      items: ['code-quality/es-lint', 'code-quality/prettier'],
+    },
     { type: 'category', label: 'Exemples', items: ['doc1', 'doc2', 'doc3'] },
     { type: 'category', label: 'MDX !', items: ['mdx'] },
   ],
