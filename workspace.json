@@ -120,15 +120,6 @@
             "parallel": false
           }
         },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/generated/src/**/*.ts",
-              "libs/generated/src/**/*.html"
-            ]
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {

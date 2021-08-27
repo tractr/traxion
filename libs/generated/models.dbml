@@ -36,12 +36,12 @@ Table Camera {
 Table Client {
   id varchar [pk]
   name varchar [not null]
-  feedback_configuration varchar [ref: > ClientFeedbackConfiguration.id, unique]
+  feedback_configuration varchar [ref: > FeedbackConfiguration.id, unique]
 }
 
 //--------------------------
-// Client Feedback Configuration
-Table ClientFeedbackConfiguration {
+// Feedback Configuration
+Table FeedbackConfiguration {
   id varchar [pk]
   feedback1 integer [not null]
   feedback2 integer [not null]

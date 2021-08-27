@@ -7,6 +7,27 @@ In order to use this repository and run the project, you will need:
 - Nodejs 16
 - Npm 7
 
+Some packages we use for development are not public yet (Their will be open
+sourced soon as they reach a more mature state). As those packages are owned by
+the tractr organisation, you will have to update your npm configuration to be
+authenticated as a tractr member to be able to install them. You must follow the
+next steps:
+
+- First, you need to create a personal access token. You can find some
+  information
+  [here](https://docs.github.com/en/enterprise-server@2.22/github/authenticating-to-github/creating-a-personal-access-token)
+
+-After that, configure your
+[npm](https://docs.github.com/en/packages/guides/configuring-npm-for-use-with-github-packages).
+
+```bash
+npm login --scope=@tractr --registry=https://npm.pkg.github.com
+
+> Username: USERNAME
+> Password: TOKEN
+> Email: PUBLIC-EMAIL-ADDRESS
+```
+
 ## Installation
 
 - Clone the repository on your machine.

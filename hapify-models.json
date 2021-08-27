@@ -190,7 +190,7 @@
         }
       ],
       "id": "ce543764-5a09-e4b2-e21a-50ec66d8c3bd",
-      "name": "ClientFeedbackConfiguration"
+      "name": "FeedbackConfiguration"
     },
     {
       "accesses": {

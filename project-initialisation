@@ -48,6 +48,7 @@
    add `libs/generated/.hapifyrc.js` file with templates list
    install template packages: `npm i -D @tractr/hapify-templates-casl @tractr/hapify-templates-models @tractr/hapify-templates-rest-dtos @tractr/hapify-templates-nestjs-models @tractr/hapify-templates-nestjs-models-common @tractr/hapify-templates-nestjs-models-rest @tractr/hapify-templates-rext-client @tractr/hapify-templates-angular-rext-client --force`
    add `generate` target to generated project in workspace.json
+   remove `lint` target from generated project in workspace.json as it is not usefull
    now you should be able to run `npm run generate`. it should generate a lot of files in `libs/generated/generated`
    update typescript path in workspace.json from `@cali/generated": ["libs/generated/src/index.ts"]` to `"@cali/generated/*": ["libs/generated/generated/*"]`
    
@@ -79,7 +80,9 @@
    add `postinstall` script to `package.json`
    
 -> git actions
-   
+   add `.github` directory to the project root
+   add gitactions secrets (in github interface)
+   add docker builds and dockerfiles in apps
 
 
 
