@@ -56,6 +56,11 @@ module.exports = {
       label: 'Components',
       items: ['components/angular-components', 'components/angular-form'],
     },
+    {
+      type: 'category',
+      label: 'Files',
+      items: ['files/nestjs-file-storage', 'files/angular-file-storage'],
+    },
     { type: 'category', label: 'Exemples', items: ['doc1', 'doc2', 'doc3'] },
     { type: 'category', label: 'MDX !', items: ['mdx'] },
   ],
