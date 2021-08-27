@@ -8,13 +8,13 @@ import {
 } from '@nrwl/devkit';
 
 import { addLatestSemverToPackageJson } from '../../helpers';
-import { ReleaseGeneratorSchema } from './schema';
+import { NpmPublishGeneratorSchema } from './schema';
 
 export const SEMVER_PACKAGE_NAME = 'ngx-deploy-npm';
 export const DEFAULT_REGISTRY_URL = 'https://npm.pkg.github.com';
 export const DEFAULT_ACCESS_TYPE = 'restricted';
 
-interface NormalizedSchema extends ReleaseGeneratorSchema {
+interface NormalizedSchema extends NpmPublishGeneratorSchema {
   projectName: string;
   projectRoot: string;
   repository: string;
@@ -24,7 +24,7 @@ interface NormalizedSchema extends ReleaseGeneratorSchema {
 
 export function normalizeOptions(
   tree: Tree,
-  options: ReleaseGeneratorSchema,
+  options: NpmPublishGeneratorSchema,
 ): NormalizedSchema {
   const projectName = names(options.project).fileName;
   const projectConfiguration = readProjectConfiguration(tree, projectName);
@@ -44,9 +44,9 @@ export function normalizeOptions(
   return normalizedOptions;
 }
 
-export default async function releaseGenerator(
+export default async function npmPublishGenerator(
   tree: Tree,
-  options: ReleaseGeneratorSchema,
+  options: NpmPublishGeneratorSchema,
 ) {
   const normalizedOptions = normalizeOptions(tree, options);
 

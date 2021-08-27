@@ -627,7 +627,7 @@
         "serve": {
           "executor": "@nx-plus/docusaurus:dev-server",
           "options": {
-            "port": 3000
+            "port": 5000
           }
         }
       }
@@ -1860,7 +1860,7 @@
           }
         },
         "publish": {
-          "executor": "ngx-deploy-npm:version",
+          "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "restricted"
           }

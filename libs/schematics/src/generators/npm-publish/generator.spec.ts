@@ -7,11 +7,11 @@ import {
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
 import generator, { SEMVER_PACKAGE_NAME } from './generator';
-import { ReleaseGeneratorSchema } from './schema';
+import { NpmPublishGeneratorSchema } from './schema';
 
 describe('release generator', () => {
   let appTree: Tree;
-  const options: ReleaseGeneratorSchema = {
+  const options: NpmPublishGeneratorSchema = {
     project: 'test',
     repository: 'https://github.com/tractr/stack',
   };
