@@ -66,6 +66,11 @@ module.exports = {
       label: 'Mailer',
       items: ['mailer/mailjet'],
     },
+    {
+      type: 'category',
+      label: 'CI/CD',
+      items: ['ci-cd/config-commit', 'ci-cd/terraform'],
+    },
     { type: 'category', label: 'Exemples', items: ['doc1', 'doc2', 'doc3'] },
     { type: 'category', label: 'MDX !', items: ['mdx'] },
   ],
