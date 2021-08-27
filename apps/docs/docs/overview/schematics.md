@@ -25,14 +25,14 @@ After that you will be able to use the schematics with the `nx` cli:
 Add release configuration to a nx project.
 
 ```bash
-> nx g @tractr/schematics:release <nxProjectName> [options]
+> nx g @tractr/schematics:release <nxProjectName>
 ```
 
 #### Description
 
 Add configuration of [`@jscutlery/semver`](https://github.com/jscutlery/semver) to a nx project.
 
-- Update `workspace.json` to add `target.release` to the `project`
+- Update `workspace.json` to add `targets.release` to the `project`
 - Update `package.json` to add the latest version of `@jscutlery/semver`
 
 #### Arguments
@@ -53,7 +53,7 @@ Add npm publish configuration to a nx project
 
 Add configuration of [`ngx-deploy-npm`](https://github.com/bikecoders/ngx-deploy-npm) to a nx project.
 
-- Update `workspace.json` to add `target.publish` to the `project`
+- Update `workspace.json` to add `targets.publish` to the `project`
 - Update `package.json` to add the latest version of `ngx-deploy-npm`
 - Update `<projectPath>/package.json` to add `repository` and `publishConfig` options
 
@@ -68,4 +68,5 @@ Add configuration of [`ngx-deploy-npm`](https://github.com/bikecoders/ngx-deploy
 
 | Option                         | Description                                                                                                     |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------- |
-| `--repository [repositoryUrl]` | The repository url to push the npm package (default to: `https://npm.pkg.github.com`).<br/> Alias: `-r` |                        |
+| `--registry [registryUrl]` | The registry url to push the npm package (default to: `https://npm.pkg.github.com`).<br/> Alias: `-r` |                        |
+| `--access [access]` | The npm publish access level `public` or `retricted` (default to: `restricted`). |                        |

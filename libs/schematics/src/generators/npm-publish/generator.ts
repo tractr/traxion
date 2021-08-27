@@ -19,6 +19,7 @@ interface NormalizedSchema extends ReleaseGeneratorSchema {
   projectRoot: string;
   repository: string;
   registry: string;
+  access: string;
 }
 
 export function normalizeOptions(
@@ -51,7 +52,7 @@ export default async function releaseGenerator(
   project.targets.publish = {
     executor: `${SEMVER_PACKAGE_NAME}:version`,
     options: {
-      access: DEFAULT_ACCESS_TYPE,
+      access: normalizedOptions.access,
     },
   };
 
@@ -66,7 +67,7 @@ export default async function releaseGenerator(
       url: normalizedOptions.repository,
     };
     toUpdateJson.publishConfig = {
-      access: DEFAULT_ACCESS_TYPE,
+      access: normalizedOptions.access,
       registry: normalizedOptions.registry,
     };
 
