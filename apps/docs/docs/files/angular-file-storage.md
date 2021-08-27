@@ -10,7 +10,7 @@ tags:
   - label: Angular
     permalink: angular
   - label: Files
-    permalink: Files
+    permalink: files
   - label: File Storage
     permalink: file-storage
 ---
