@@ -11,6 +11,11 @@ module.exports = {
       label: 'How to',
       items: ['how-to/docusaurus'],
     },
+    {
+      type: 'category',
+      label: 'Commons',
+      items: ['commons/common', 'commons/nestjs-core', 'commons/angular-tools'],
+    },
     { type: 'category', label: 'Exemples', items: ['doc1', 'doc2', 'doc3'] },
     { type: 'category', label: 'MDX !', items: ['mdx'] },
   ],
