@@ -6,17 +6,17 @@ keywords:
   - commons
 tags:
   - label: Common
-    permalink: 'common'
+    permalink: common
 ---
 
 :::info
-- Auteur du package: Florian
+- Package's author: Florian Rossiaud
 :::
 
-# Installation
+# Install
 
 `npm i --save @tractr/common`
 
 # Description
 
-TODO2
+TODO

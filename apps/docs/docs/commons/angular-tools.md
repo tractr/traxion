@@ -7,16 +7,16 @@ keywords:
   - angular
 tags:
   - label: Common
-    permalink: 'common'
+    permalink: common
   - label: Angular
-    permalink: 'angular'
+    permalink: angular
 ---
 
 :::info
-- Auteur du package: Glenn
+- Package's author: Glenn Inizan
 :::
 
-# Installation
+# Install
 
 `npm i --save @tractr/angular-tools`
 

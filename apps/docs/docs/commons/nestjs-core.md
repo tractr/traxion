@@ -7,16 +7,16 @@ keywords:
   - nestjs
 tags:
   - label: Common
-    permalink: 'common'
+    permalink: common
   - label: NestJS
-    permalink: 'nestjs'
+    permalink: nestjs
 ---
 
 :::info
-- Auteur du package: Florian
+- Package's author: Florian Rossiaud
 :::
 
-# Installation
+# Install
 
 `npm i --save @tractr/nestjs-core`
 
