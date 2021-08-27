@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "generators": {
+    "npm-publish": {
+      "description": "npm-publish generator",
+      "factory": "./src/generators/npm-publish/generator",
+      "schema": "./src/generators/npm-publish/schema.json"
+    },
+    "release": {
+      "description": "release generator",
+      "factory": "./src/generators/release/generator",
+      "schema": "./src/generators/release/schema.json"
+    }
+  },
+  "name": "schematics",
+  "version": "0.0.1"
+}
