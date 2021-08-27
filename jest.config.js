@@ -42,5 +42,7 @@ module.exports = {
     '<rootDir>/libs/terraform/pwa-service',
     '<rootDir>/libs/terraform/postgres-service',
     '<rootDir>/apps/terraform',
+    '<rootDir>/libs/schematics',
+    '<rootDir>/apps/schematics-e2e',
   ],
 };
