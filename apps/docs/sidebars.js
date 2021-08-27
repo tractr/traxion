@@ -51,6 +51,11 @@ module.exports = {
         'auth/angular-casl',
       ],
     },
+    {
+      type: 'category',
+      label: 'Components',
+      items: ['components/angular-components', 'components/angular-form'],
+    },
     { type: 'category', label: 'Exemples', items: ['doc1', 'doc2', 'doc3'] },
     { type: 'category', label: 'MDX !', items: ['mdx'] },
   ],
