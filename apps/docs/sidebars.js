@@ -18,8 +18,17 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Génération de code',
+      label: 'Code Generation',
       items: ['code-generation/hapify'],
+    },
+    {
+      type: 'category',
+      label: 'Modelisation',
+      items: [
+        'modelisation/models',
+        'modelisation/nestjs-models-common',
+        'modelisation/nestjs-models',
+      ],
     },
     { type: 'category', label: 'Exemples', items: ['doc1', 'doc2', 'doc3'] },
     { type: 'category', label: 'MDX !', items: ['mdx'] },
