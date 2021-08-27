@@ -30,6 +30,11 @@ module.exports = {
         'modelisation/nestjs-models',
       ],
     },
+    {
+      type: 'category',
+      label: 'Database',
+      items: ['database/prisma', 'database/nestjs', 'database/dbml'],
+    },
     { type: 'category', label: 'Exemples', items: ['doc1', 'doc2', 'doc3'] },
     { type: 'category', label: 'MDX !', items: ['mdx'] },
   ],
