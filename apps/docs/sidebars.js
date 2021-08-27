@@ -4,7 +4,12 @@ module.exports = {
     {
       type: 'category',
       label: 'Overview',
-      items: ['overview/first-steps', 'overview/hapify', 'overview/schematics'],
+      items: [
+        'overview/first-steps',
+        'overview/hapify',
+        'overview/schematics',
+        'overview/project-initialisation',
+      ],
     },
     {
       type: 'category',
