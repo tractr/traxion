@@ -10,7 +10,7 @@ tags:
 ---
 
 :::info
-- Package's author: Florian Rossiaud
+- Package's author: [Florian Rossiaud](https://github.com/floross)
 :::
 
 # Install

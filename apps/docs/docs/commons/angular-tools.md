@@ -13,7 +13,7 @@ tags:
 ---
 
 :::info
-- Package's author: Glenn Inizan
+- Package's author: [Glenn Inizan](https://github.com/GlennTractr)
 :::
 
 # Install

@@ -11,7 +11,7 @@ tags:
 ---
 
 :::info
-- Package's author: Edouard
+- Package's author: [Edouard Demotes](https://github.com/EdouardDem)
 :::
 
 # Install
