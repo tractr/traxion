@@ -30,13 +30,18 @@ export function normalizeOptions(
   const projectConfiguration = readProjectConfiguration(tree, projectName);
   const projectRoot = projectConfiguration.root;
 
-  return {
+  const normalizedOptions: NormalizedSchema = {
     registry: DEFAULT_REGISTRY_URL,
     access: DEFAULT_ACCESS_TYPE,
     ...options,
     projectName,
     projectRoot,
   };
+
+  if (!['public', 'restricted'].includes(normalizedOptions.access))
+    throw new Error('access must be equal to public or restricted');
+
+  return normalizedOptions;
 }
 
 export default async function releaseGenerator(
