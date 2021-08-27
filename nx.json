@@ -162,6 +162,13 @@
       "implicitDependencies": ["pwa"],
       "tags": ["scope:app"]
     },
+    "schematics": {
+      "tags": []
+    },
+    "schematics-e2e": {
+      "implicitDependencies": ["schematics"],
+      "tags": []
+    },
     "terraform": {
       "tags": []
     },

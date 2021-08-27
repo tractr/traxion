@@ -1,0 +1,15 @@
+{
+  "name": "@tractr/schematics",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "main": "src/index.js",
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "executors": "./executors.json",
+  "generators": "./generators.json"
+}

@@ -4,7 +4,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Overview',
-      items: ['overview/first-steps', 'overview/hapify'],
+      items: ['overview/first-steps', 'overview/hapify', 'overview/schematics'],
     },
     {
       type: 'category',
