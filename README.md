@@ -12,6 +12,11 @@ In order to use this repository and run the project, you will need:
 - Clone the repository on your machine.
 - To install the project dependencies, move in the cloned repository and run
   `npm i`.
+- At the root of the repository, you will find a `.env.example` that contains
+  the list of the required environment variables of the project. This file
+  should copied to `.env` and completed with the required secrets. This file
+  should never be commited as it contains keys that should not be accessible in
+  the repository.
 - Run hapify to generate boilerplate code with `npm run generate` and you're
   good to go!
 

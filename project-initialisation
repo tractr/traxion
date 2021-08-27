@@ -67,7 +67,19 @@
    
    NOTES: for now casl dependencies are required:
    run `npm i -S @casl/ability @casl/angular @casl/prisma @tractr/angular-casl @tractr/nestjs-casl`
+   
+-> commit tools:
+   install commit tools: `npm i -D @commitlint/cli @commitlint/config-conventional commitizen cz-conventional-changelog`
+   install tractr commit config: `npm i -D @tractr/commit-config`
+   add `.commitlintrc.js` and `.czrc` and `.lintstagedrc` config files
 
+-> add husky
+   Install husky: `npm i -D husky`
+   add .husky directory with husky config
+   add `postinstall` script to `package.json`
+   
+-> git actions
+   
 
 
 

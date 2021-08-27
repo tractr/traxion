@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# shellcheck disable=SC1091
+. "$(dirname "$0")/_/husky.sh"
+
+if [ -z ${2+x} ]
+then
+    # shellcheck disable=SC2015
+    exec < /dev/tty && npm_config_yes=true npx tractr-commit --hook || true
+fi
