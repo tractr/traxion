@@ -1,11 +1,11 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-import { addProjectConfiguration, Tree } from '@nrwl/devkit';
+import { addProjectConfiguration, readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
 import * as helpers from '../../helpers/npm-run';
-import generator from './generator';
+import generator, { SEMVER_PACKAGE_NAME } from './generator';
 
 describe('release generator', () => {
   let appTree: Tree;
@@ -32,8 +32,18 @@ describe('release generator', () => {
     expect(prettierRc).toEqual(
       readFileSync(join(__dirname, 'files', '.prettierrc.js__tmpl__')),
     );
+
+    // assert npm run format has not been called
     expect(npmRunSpy).not.toHaveBeenCalled();
+
+    // asset .prettierrc does not exists anymore
     expect(appTree.exists('.prettierrc')).toBe(false);
+
+    // expect package.json to have been updated
+    const packageJson = readJson(appTree, 'package.json');
+    expect(packageJson).toBeDefined();
+    expect(packageJson.devDependencies).toBeDefined();
+    expect(packageJson.devDependencies[SEMVER_PACKAGE_NAME]).toBeDefined();
   });
 
   it('should run and run the global format', async () => {
