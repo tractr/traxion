@@ -43,7 +43,6 @@ export class UploadButtonComponent {
    */
   customUpload = (item: NzUploadXHRArgs) => {
     const { file } = item;
-    // this.previewUrl.emit(URL.createObjectURL(file));
     return this.fileStorageService
       .uploadFileToFileStorage(file as unknown as File)
       .subscribe((fileUploadResult) => {

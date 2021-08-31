@@ -24,9 +24,8 @@ export class FileStorageService {
   /**
    * Get presigned upload url to upload a file into storage
    *
-   * @params mimeType - MIME type of the file to upload
-   * @params customBucket - Custom bucket to update file. Else default
-   * bucket will be used
+   * @param mimeType - MIME type of the file to upload
+   * @param fileSize - Size of the file to upload
    * @returns Observable that resolve into a presigned post token
    */
   public getPresignedUploadUrl(mimeType: string, fileSize: number) {
@@ -39,10 +38,9 @@ export class FileStorageService {
   }
 
   /**
-   * Get presigned download url to download a file into storage
+   * Get presigned download url to download a file to storage
    *
-   * @params customBucket - Custom bucket to update file. Else default
-   * bucket will be used
+   * @param file - Path of the file to download
    * @returns Observable that resolve into a presigned post token
    */
   public getPresignedDownloadUrl(file: string) {
