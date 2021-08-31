@@ -15,7 +15,7 @@ function normalizeOptions(
 ): NormalizedSchema {
   return {
     ...options,
-    workspaceRoot: '/',
+    workspaceRoot: '.',
   };
 }
 
@@ -26,7 +26,7 @@ export default async function releaseGenerator(
   const normalizedOptions = normalizeOptions(tree, options);
 
   const templateOptions = {
-    template: '',
+    tmpl: '',
   };
 
   if (tree.exists('.prettierrc')) tree.delete('.prettierrc');

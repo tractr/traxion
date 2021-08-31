@@ -30,7 +30,7 @@ describe('release generator', () => {
     const prettierRc = appTree.read('.prettierrc.js');
     expect(prettierRc).toBeDefined();
     expect(prettierRc).toEqual(
-      readFileSync(join(__dirname, 'files', '.prettierrc.js')),
+      readFileSync(join(__dirname, 'files', '.prettierrc.js__tmpl__')),
     );
     expect(npmRunSpy).not.toHaveBeenCalled();
     expect(appTree.exists('.prettierrc')).toBe(false);
@@ -42,6 +42,9 @@ describe('release generator', () => {
     // expect .prettierrc.js to have been updated
     const prettierRc = appTree.read('.prettierrc.js');
     expect(prettierRc).toBeDefined();
+    expect(prettierRc).toEqual(
+      readFileSync(join(__dirname, 'files', '.prettierrc.js__tmpl__')),
+    );
     expect(npmRunSpy).toHaveBeenCalledTimes(1);
   });
 });

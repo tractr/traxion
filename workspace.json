@@ -1836,6 +1836,21 @@
                 "output": "./src"
               },
               {
+                "glob": "**/files/.*",
+                "input": "./libs/schematics/src",
+                "output": "./src"
+              },
+              {
+                "glob": "**/files/.**/**",
+                "input": "./libs/schematics/src",
+                "output": "./src"
+              },
+              {
+                "glob": "**/files/.**/.*",
+                "input": "./libs/schematics/src",
+                "output": "./src"
+              },
+              {
                 "glob": "generators.json",
                 "input": "./libs/schematics",
                 "output": "."
