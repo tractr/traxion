@@ -48,10 +48,18 @@ import {
   <<endfor>>
 } from '../../../models';
 <<endif>>
-<<if Fields (number or boolean) and not internal>>
-import { TransformStringToInt, TransformStringToBoolean } from '@tractr/common';
-<<endif>>
 
+<<if Fields (number or boolean) and not internal>>
+import { 
+  <<if Fields number and not internal>>
+  TransformStringToInt, 
+  <<endif>>
+
+  <<if Fields boolean and not internal>>
+  TransformStringToBoolean,
+  <<endif>>
+} from '@tractr/common';
+<<endif>>
  
 export class <<Model pascal>>UpdateBodyDto {
 <<for Fields not internal field>>
