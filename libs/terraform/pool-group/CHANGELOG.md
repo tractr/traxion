@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.3.0](https://github.com/tractr/stack/compare/terraform-pool-group-0.2.1...terraform-pool-group-0.3.0) (2021-09-01)
+
+
+
 ## [0.2.1](https://github.com/tractr/stack/compare/terraform-pool-group-0.2.0...terraform-pool-group-0.2.1) (2021-08-19)
 
 
