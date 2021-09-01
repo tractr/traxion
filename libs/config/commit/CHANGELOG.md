@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.4.0](https://github.com/tractr/stack/compare/commit-config-1.3.0...commit-config-1.4.0) (2021-09-01)
+
+
+
 # [1.3.0](https://github.com/tractr/stack/compare/commit-config-1.2.1...commit-config-1.3.0) (2021-07-13)
 
 
