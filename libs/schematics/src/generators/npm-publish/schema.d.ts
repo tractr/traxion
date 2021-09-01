@@ -1,4 +1,4 @@
-export interface ReleaseGeneratorSchema {
+export interface NpmPublishGeneratorSchema {
   project: string;
   repository: string;
   registry?: string;
