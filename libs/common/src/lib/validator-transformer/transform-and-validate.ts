@@ -5,9 +5,15 @@ import {
   ClassTransformOptions,
   plainToClass,
 } from 'class-transformer';
-import { validateSync, ValidatorOptions } from 'class-validator';
+import {
+  validateSync,
+  ValidationError,
+  ValidatorOptions,
+} from 'class-validator';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { TransformAndValidateError } from '../interfaces';
 
 /**
  * Tage a class with  validator and transform decorator and return all
@@ -65,6 +71,32 @@ export type TransformAndValidate<T> = <O>(
 ) => O extends any[] ? T[] : T;
 
 /**
+ * Take ValidateError array and format Error.message to get a pretty
+ * and understandable error
+ * @param error the ValidationError list
+ * @returns a TransformAndValidateError Error
+ */
+export function formatTransformAndValidateErrorMessage(
+  errors: ValidationError[],
+): TransformAndValidateError {
+  const errorMessage = `An error occur during the object validation:\n
+  ${errors
+    .map(
+      ({ property, value, constraints }) =>
+        `Property ${property} (value: ${value}): \n${Object.keys(
+          constraints || {},
+        )
+          .map((constraintKey) => `  - ${(constraints || {})[constraintKey]}`)
+          .join('\n')}\n\n`,
+    )
+    .join('\n')}`;
+
+  const errorToThrow = new Error(errorMessage);
+  (errorToThrow as TransformAndValidateError).originalErrors = errors;
+  return errorToThrow as TransformAndValidateError;
+}
+
+/**
  * Take a class with validator and transform decorator and return a
  * function that take an unknown value and transform and validate it
  * to return an instance of the class
@@ -90,7 +122,7 @@ export function transformAndValidate<T>(
       ...(options?.plainToClass || {}),
     });
     if (errors.length > 0) {
-      throw errors;
+      throw formatTransformAndValidateErrorMessage(errors);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
