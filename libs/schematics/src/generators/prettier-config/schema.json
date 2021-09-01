@@ -1,0 +1,15 @@
+{
+  "$id": "Prettier",
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "properties": {
+    "format": {
+      "default": false,
+      "description": "Format with prettier add the end of the schematics",
+      "type": "boolean"
+    }
+  },
+  "required": [],
+  "title": "Prettier configuration schematics",
+  "type": "object"
+}

@@ -69,7 +69,29 @@ Add configuration of [`ngx-deploy-npm`](https://github.com/bikecoders/ngx-deploy
 | Option                         | Description                                                                                                     |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------- |
 | `--registry [registryUrl]` | The registry url to push the npm package (default to: `https://npm.pkg.github.com`).<br/> Alias: `-r` |                        |
-| `--access [access]` | The npm publish access level `public` or `retricted` (default to: `restricted`). |                        |
+| `--access [access]` | The npm publish access level `public` or `retricted` (default to: `restricted`). |
+
+### Prettier config
+
+Add and configure prettier configuration to a nx project
+
+```bash
+nx g @tractr/schematics:prettier-config
+```
+
+#### Description
+
+Add and configure prettier [`@tractr/prettier-config`](https://github.com/tractr/stack/tree/main/libs/config/prettier) to a nx project.
+
+- Remove `.prettierrc` file
+- Create `.prettierrc.js` file with default import from `@tractr/prettier-config`
+- Update `package.json` to add the latest version of `@tractr/prettier-config`
+
+#### Options
+
+| Option                         | Description                                                                                                     |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `--format` | Format the all nx workspace to ensure all file has been pass through prettier |                        |
 
 ## Create a new generator schematic
 

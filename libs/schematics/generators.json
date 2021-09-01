@@ -6,6 +6,11 @@
       "factory": "./src/generators/npm-publish/generator",
       "schema": "./src/generators/npm-publish/schema.json"
     },
+    "prettier-config": {
+      "description": "prettier-config generator",
+      "factory": "./src/generators/prettier-config/generator",
+      "schema": "./src/generators/prettier-config/schema.json"
+    },
     "release": {
       "description": "release generator",
       "factory": "./src/generators/release/generator",
