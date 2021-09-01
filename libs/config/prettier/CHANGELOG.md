@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.8.0](https://github.com/tractr/stack/compare/prettier-config-1.7.0...prettier-config-1.8.0) (2021-09-01)
+
+
+
 # [1.7.0](https://github.com/tractr/stack/compare/prettier-config-1.6.0...prettier-config-1.7.0) (2021-07-21)
 
 
