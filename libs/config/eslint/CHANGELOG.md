@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.9.0](https://github.com/tractr/stack/compare/eslint-config-1.8.0...eslint-config-1.9.0) (2021-09-01)
+
+
+
 # [1.8.0](https://github.com/tractr/stack/compare/eslint-config-1.7.1...eslint-config-1.8.0) (2021-08-18)
 
 
