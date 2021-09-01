@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.2.0](https://github.com/tractr/stack/compare/hapify-templates-casl-0.1.0...hapify-templates-casl-0.2.0) (2021-09-01)
+
+
+
 # 0.1.0 (2021-07-28)
 
 
