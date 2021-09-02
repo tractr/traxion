@@ -189,6 +189,31 @@
     },
     {
       "accesses": {
+        "count": "guest",
+        "create": "guest",
+        "read": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "update": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "name": "test",
+          "properties": ["searchable", "sortable"],
+          "type": "enum",
+          "value": ["test1", "test2"]
+        }
+      ],
+      "id": "74c01ef1-0b05-2dac-7efc-1a0279ff0e18",
+      "name": "Relationless"
+    },
+    {
+      "accesses": {
         "count": "owner",
         "create": "auth",
         "read": "guest",

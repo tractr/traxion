@@ -13,6 +13,16 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Techniques',
+      items: ['techniques/file-storage'],
+    },
+    {
+      type: 'category',
+      label: 'Packages',
+      items: ['techniques/file-storage'],
+    },
+    {
+      type: 'category',
       label: 'How to',
       items: ['how-to/docusaurus'],
     },

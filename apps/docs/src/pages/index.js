@@ -9,6 +9,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const welcomeGifUrl = 'https://c.tenor.com/G0VtPoc3p2oAAAAd/tractor-drift.gif';
+
 const features = [
   {
     title: 'Easy to Use',
@@ -68,6 +70,7 @@ function Home() {
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
+          <img src={welcomeGifUrl} />
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link
