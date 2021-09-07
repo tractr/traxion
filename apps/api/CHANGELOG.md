@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.20.1](https://github.com/tractr/stack/compare/api-1.20.0...api-1.20.1) (2021-09-07)
+
+
+### Bug Fixes
+
+* update rest-dtos imports ([#260](https://github.com/tractr/stack/issues/260)) ([0ed8130](https://github.com/tractr/stack/commit/0ed8130c33cf286660e94eb7a7ce2b4405e6e2d5))
+
+
+
 # [1.20.0](https://github.com/tractr/stack/compare/api-1.19.0...api-1.20.0) (2021-09-01)
 
 
