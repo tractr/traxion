@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.9.2](https://github.com/tractr/stack/compare/hapify-templates-models-1.9.1...hapify-templates-models-1.9.2) (2021-09-07)
+
+
+### Bug Fixes
+
+* properly transform string to Date in DTOs ([#266](https://github.com/tractr/stack/issues/266)) ([67c3c6c](https://github.com/tractr/stack/commit/67c3c6c6b0adc8638d60f300f954253c4027036c))
+
+
+
 ## [1.9.1](https://github.com/tractr/stack/compare/hapify-templates-models-1.9.0...hapify-templates-models-1.9.1) (2021-08-13)
 
 
