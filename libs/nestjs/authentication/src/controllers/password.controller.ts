@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   HttpCode,
-  NotFoundException,
   Post,
   Put,
   UnauthorizedException,
@@ -26,12 +25,11 @@ export class PasswordController {
   ): Promise<void> {
     try {
       await this.passwordService.requestReset(email);
-    } catch (err) {
-      if (err instanceof UserNotFoundError) {
-        throw new NotFoundException(err);
-      }
+    } catch (e) {
+      // We should never send information about a user not found
+      if (e instanceof UserNotFoundError) return;
 
-      throw err;
+      throw e;
     }
   }
 
@@ -41,16 +39,12 @@ export class PasswordController {
   async reset(@Body() { id, code, password }: PasswordResetDto): Promise<void> {
     try {
       await this.passwordService.reset(id, code, password);
-    } catch (err) {
-      if (err instanceof BadResetCodeError) {
-        throw new UnauthorizedException(err);
+    } catch (e) {
+      if (e instanceof BadResetCodeError || e instanceof UserNotFoundError) {
+        throw new UnauthorizedException(e);
       }
 
-      if (err instanceof UserNotFoundError) {
-        throw new NotFoundException(err);
-      }
-
-      throw err;
+      throw e;
     }
   }
 }
