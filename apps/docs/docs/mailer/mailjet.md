@@ -52,8 +52,7 @@ import { MailerModule, MailerService } from '@tractr/nestjs-mailer';
       publicApiKey: process.env.MAILER_PUBLIC_API_KEY, 
       privateApiKey: process.env.MAILER_PRIVATE_API_KEY
     }),
-  ],
-  providers: [MailerService]
+  ]
 })
 export class AppModule {}
 ```
