@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.7.2](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.7.1...hapify-templates-rest-dtos-1.7.2) (2021-09-07)
+
+
+### Bug Fixes
+
+* properly transform string to Date in DTOs ([#266](https://github.com/tractr/stack/issues/266)) ([67c3c6c](https://github.com/tractr/stack/commit/67c3c6c6b0adc8638d60f300f954253c4027036c))
+* update rest-dtos imports ([#260](https://github.com/tractr/stack/issues/260)) ([0ed8130](https://github.com/tractr/stack/commit/0ed8130c33cf286660e94eb7a7ce2b4405e6e2d5))
+
+
+
 ## [1.7.1](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.7.0...hapify-templates-rest-dtos-1.7.1) (2021-08-17)
 
 
