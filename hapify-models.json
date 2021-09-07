@@ -44,6 +44,11 @@
           "subtype": "manyMany",
           "type": "entity",
           "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
+        },
+        {
+          "name": "answerDate",
+          "properties": [],
+          "type": "datetime"
         }
       ],
       "id": "ccebcf02-4b82-923f-114e-252c9455899d",

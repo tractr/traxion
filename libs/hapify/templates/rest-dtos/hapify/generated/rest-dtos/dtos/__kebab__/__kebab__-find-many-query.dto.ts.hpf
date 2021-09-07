@@ -51,6 +51,10 @@ import {
   TransformStringToBoolean,
   <<endif>>
 
+  <<if Fields datetime and searchable>>
+  TransformStringToDate,
+  <<endif>>
+
   TransformStringToInt,
   } from '@tractr/common';
  
@@ -88,6 +92,7 @@ export class <<Model pascal>>FindManyQueryDto {
 
   <<if field datetime>>
   @IsDate({},<<=listModifier(field)>>)
+  @TransformStringToDate()
   <<endif>>
 
   @IsOptional()
