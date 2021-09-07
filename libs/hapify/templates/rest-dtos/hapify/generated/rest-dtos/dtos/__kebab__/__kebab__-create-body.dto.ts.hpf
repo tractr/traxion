@@ -51,7 +51,7 @@ import {
 } from '../../../models';
 <<endif>>
 
-<<if Fields (number or boolean) and not internal>>
+<<if Fields (number or boolean or datetime) and not internal>>
 import { 
   <<if Fields number and not internal>>
   TransformStringToInt, 
@@ -59,6 +59,10 @@ import {
 
   <<if Fields boolean and not internal>>
   TransformStringToBoolean,
+  <<endif>>
+
+  <<if Fields datetime and not internal>>
+  TransformStringToDate,
   <<endif>>
 } from '@tractr/common';
 <<endif>>
@@ -99,8 +103,9 @@ export class <<Model pascal>>CreateBodyDto {
   @TransformStringToInt()
   <<endif>>
 
-  <<if field  datetime>>
+  <<if field datetime>>
   @IsDate({}, <<=listModifier(field)>>)
+  @TransformStringToDate()
   <<endif>>
 
   <<if field nullable>>
