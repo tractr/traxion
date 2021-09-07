@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.16.0](https://github.com/tractr/stack/compare/nestjs-authentication-1.15.6...nestjs-authentication-1.16.0) (2021-09-07)
+
+
+### Bug Fixes
+
+* remove error throwing when user not found on request password change ([#267](https://github.com/tractr/stack/issues/267)) ([50dadb4](https://github.com/tractr/stack/commit/50dadb4ece37047f0af7a8816d52bbb22e370e00))
+
+
+### Features
+
+* add the option to pass variables to the email when requesting new password ([#264](https://github.com/tractr/stack/issues/264)) ([c593657](https://github.com/tractr/stack/commit/c5936570c32ea200da0caf29f1a1aae6cf0449ea))
+
+
+
 ## [1.15.6](https://github.com/tractr/stack/compare/nestjs-authentication-1.15.5...nestjs-authentication-1.15.6) (2021-08-10)
 
 
