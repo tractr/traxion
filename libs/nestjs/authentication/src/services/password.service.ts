@@ -61,7 +61,7 @@ export class PasswordService {
 
     const resetCode = this.createResetCode(user);
 
-    const { link, subject, template } = {
+    const { link, subject, template, variables } = {
       ...this.authenticationOptions.password.reset,
       ...options,
     };
@@ -85,6 +85,8 @@ export class PasswordService {
         : { HTMLPart: DEFAULT_RESET_HTML }),
       Variables: {
         link: linkWithCode,
+        email: user.email,
+        ...(variables ?? {}),
       },
     };
 
