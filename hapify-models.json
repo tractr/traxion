@@ -23,19 +23,28 @@
         },
         {
           "meta": {
-            "backRelation": "alert"
+            "backRelation": "alerts"
           },
-          "name": "modelPrediction",
+          "name": "alertType",
           "properties": ["searchable", "sortable"],
-          "subtype": "oneOne",
+          "subtype": "oneMany",
           "type": "entity",
-          "value": "7a01bb92-8185-da19-bf1f-5089fa7b4389"
+          "value": "0f8fb4e0-b5f4-82f0-35a8-471f15ccdb2b"
         },
         {
-          "name": "type",
-          "properties": [],
-          "type": "enum",
-          "value": ["thief"]
+          "meta": {
+            "backRelation": "alerts"
+          },
+          "name": "camera",
+          "properties": ["searchable", "sortable"],
+          "subtype": "oneMany",
+          "type": "entity",
+          "value": "2c53bc09-414c-e30e-7057-5e3a0ff69a7d"
+        },
+        {
+          "name": "videoUrl",
+          "properties": ["nullable", "searchable", "sortable"],
+          "type": "string"
         }
       ],
       "id": "50565668-3a76-9ccf-c841-1344aa1060b0",
@@ -63,20 +72,20 @@
         },
         {
           "name": "feedback1",
-          "properties": [],
+          "properties": ["nullable", "searchable", "sortable"],
           "type": "string"
         },
         {
           "name": "feedback2",
-          "properties": [],
+          "properties": ["nullable", "searchable", "sortable"],
           "type": "string"
         },
         {
           "meta": {
-            "backRelation": "feedback"
+            "backRelation": "alertFeedbacks"
           },
           "name": "alert",
-          "properties": [],
+          "properties": ["searchable", "sortable"],
           "subtype": "oneMany",
           "type": "entity",
           "value": "50565668-3a76-9ccf-c841-1344aa1060b0"
@@ -86,7 +95,7 @@
             "backRelation": "alertFeedbacks"
           },
           "name": "user",
-          "properties": [],
+          "properties": ["searchable", "sortable"],
           "subtype": "oneMany",
           "type": "entity",
           "value": "b33de3c6-33c0-8979-020d-23058d515b79"
@@ -94,6 +103,40 @@
       ],
       "id": "b0db09a5-95d4-4f1e-ee03-bb9600686cf7",
       "name": "AlertFeedback"
+    },
+    {
+      "accesses": {
+        "count": "guest",
+        "create": "guest",
+        "read": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "update": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "properties": ["label", "searchable", "sortable"],
+          "type": "string"
+        },
+        {
+          "meta": {
+            "backRelation": "alertTypes"
+          },
+          "name": "client",
+          "properties": ["searchable", "sortable"],
+          "subtype": "oneMany",
+          "type": "entity",
+          "value": "5d3e69aa-8cd0-6963-908b-a082c6b98fb5"
+        }
+      ],
+      "id": "0f8fb4e0-b5f4-82f0-35a8-471f15ccdb2b",
+      "name": "AlertType"
     },
     {
       "accesses": {
@@ -124,6 +167,12 @@
           "name": "position",
           "properties": ["searchable", "sortable"],
           "type": "string"
+        },
+        {
+          "name": "status",
+          "properties": [],
+          "type": "enum",
+          "value": ["up", "down"]
         }
       ],
       "id": "2c53bc09-414c-e30e-7057-5e3a0ff69a7d",
@@ -153,8 +202,8 @@
           "meta": {
             "backRelation": "client"
           },
-          "name": "feedbackConfiguration",
-          "properties": [],
+          "name": "kpisConfiguration",
+          "properties": ["searchable", "sortable"],
           "subtype": "oneOne",
           "type": "entity",
           "value": "ce543764-5a09-e4b2-e21a-50ec66d8c3bd"
@@ -179,208 +228,44 @@
           "type": "string"
         },
         {
-          "name": "feedback1",
-          "properties": [],
-          "type": "boolean"
-        },
-        {
-          "name": "feedback2",
-          "properties": [],
-          "type": "boolean"
-        }
-      ],
-      "id": "ce543764-5a09-e4b2-e21a-50ec66d8c3bd",
-      "name": "FeedbackConfiguration"
-    },
-    {
-      "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "name": "name",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
-        },
-        {
-          "name": "type",
-          "properties": ["searchable", "sortable"],
-          "type": "enum",
-          "value": ["randomTree", "randomForest"]
-        },
-        {
           "meta": {
-            "backRelation": "models"
+            "backRelation": "diffusionLists"
           },
-          "name": "shopDepartement",
-          "properties": [],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "787e207a-db9d-dab3-9c28-ba7fcfb27110"
-        },
-        {
-          "name": "parameters",
-          "properties": [],
-          "type": "string"
-        }
-      ],
-      "id": "48facf4f-4d51-08fb-e4aa-b7c22447db1b",
-      "name": "IaDecisionModel"
-    },
-    {
-      "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "name": "prediction",
-          "properties": ["searchable", "sortable"],
-          "type": "enum",
-          "value": ["thief"]
-        },
-        {
-          "name": "predictionDetails",
-          "properties": ["nullable"],
-          "type": "string"
-        },
-        {
-          "meta": {
-            "backRelation": "predictions"
-          },
-          "name": "model",
+          "name": "alertType",
           "properties": ["searchable", "sortable"],
           "subtype": "oneMany",
           "type": "entity",
-          "value": "48facf4f-4d51-08fb-e4aa-b7c22447db1b"
+          "value": "0f8fb4e0-b5f4-82f0-35a8-471f15ccdb2b"
         },
         {
           "meta": {
-            "backRelation": "dectisionPredictions"
+            "backRelation": "diffusionLists"
           },
-          "name": "qualificationPredictions",
+          "name": "users",
           "properties": ["multiple", "searchable", "sortable"],
           "subtype": "manyMany",
           "type": "entity",
-          "value": "2d58bcb2-52b0-89f1-1f33-1ac1c0554b1b"
-        }
-      ],
-      "id": "7a01bb92-8185-da19-bf1f-5089fa7b4389",
-      "name": "IaDecisionPrediction"
-    },
-    {
-      "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "name": "name",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
-        },
-        {
-          "name": "type",
-          "properties": ["searchable", "sortable"],
-          "type": "enum",
-          "value": ["thief"]
+          "value": "b33de3c6-33c0-8979-020d-23058d515b79"
         },
         {
           "meta": {
-            "backRelation": "IaQualificationModels"
+            "backRelation": "diffusionLists"
           },
-          "name": "shopDepartement",
+          "name": "shop",
           "properties": ["searchable", "sortable"],
           "subtype": "oneMany",
           "type": "entity",
-          "value": "787e207a-db9d-dab3-9c28-ba7fcfb27110"
+          "value": "37d0f2c3-94ce-d6cb-a2a1-a2034adc6af9"
         },
         {
-          "name": "parameters",
-          "properties": [],
-          "type": "string"
-        }
-      ],
-      "id": "03cc8b94-71da-c1d9-6c17-d03cbeadbb46",
-      "name": "IaQualificationModel"
-    },
-    {
-      "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "name": "prediction",
+          "name": "diffusionChannel",
           "properties": ["searchable", "sortable"],
           "type": "enum",
-          "value": ["thief"]
-        },
-        {
-          "name": "predictionDetails",
-          "properties": ["nullable"],
-          "type": "string"
-        },
-        {
-          "meta": {
-            "backRelation": "Ia"
-          },
-          "name": "model",
-          "properties": ["searchable", "sortable"],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "03cc8b94-71da-c1d9-6c17-d03cbeadbb46"
-        },
-        {
-          "meta": {
-            "backRelation": "qualificationPredictions"
-          },
-          "name": "videoFrames",
-          "properties": ["multiple", "searchable", "sortable"],
-          "subtype": "manyMany",
-          "type": "entity",
-          "value": "0ee0e032-2abf-e7a0-4478-68c0f732ab33"
+          "value": ["mail", "alert"]
         }
       ],
-      "id": "2d58bcb2-52b0-89f1-1f33-1ac1c0554b1b",
-      "name": "IaQualificationPrediction"
+      "id": "e42213df-a680-e91f-2a5a-0ed164eab1d0",
+      "name": "DiffusionList"
     },
     {
       "accesses": {
@@ -405,6 +290,35 @@
       ],
       "id": "ad8e9302-8fe9-bb18-c1a1-4fc74ca22605",
       "name": "ItemCategory"
+    },
+    {
+      "accesses": {
+        "count": "guest",
+        "create": "guest",
+        "read": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "update": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "name": "feedback1",
+          "properties": ["searchable", "sortable"],
+          "type": "boolean"
+        },
+        {
+          "name": "feedback2",
+          "properties": ["searchable", "sortable"],
+          "type": "boolean"
+        }
+      ],
+      "id": "ce543764-5a09-e4b2-e21a-50ec66d8c3bd",
+      "name": "kpisConfiguration"
     },
     {
       "accesses": {
@@ -498,7 +412,7 @@
           "meta": {
             "backRelation": "sections"
           },
-          "name": "shop",
+          "name": "shopDepartement",
           "properties": ["searchable", "sortable"],
           "subtype": "oneMany",
           "type": "entity",
@@ -583,136 +497,14 @@
             "backRelation": "users"
           },
           "name": "client",
-          "properties": [],
+          "properties": ["nullable", "searchable", "sortable"],
           "subtype": "oneMany",
           "type": "entity",
-          "value": "5d3e69aa-8cd0-6963-908b-a082c6b98fb5"
+          "value": "37d0f2c3-94ce-d6cb-a2a1-a2034adc6af9"
         }
       ],
       "id": "b33de3c6-33c0-8979-020d-23058d515b79",
       "name": "User"
-    },
-    {
-      "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "meta": {
-            "backRelation": "videos"
-          },
-          "name": "camera",
-          "properties": [],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "2c53bc09-414c-e30e-7057-5e3a0ff69a7d"
-        },
-        {
-          "meta": {
-            "backRelation": "videos"
-          },
-          "name": "startAt",
-          "properties": [],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "0ee0e032-2abf-e7a0-4478-68c0f732ab33"
-        },
-        {
-          "name": "endAt",
-          "properties": [],
-          "type": "string"
-        },
-        {
-          "meta": {
-            "backRelation": "video"
-          },
-          "name": "alert",
-          "properties": [],
-          "subtype": "oneOne",
-          "type": "entity",
-          "value": "50565668-3a76-9ccf-c841-1344aa1060b0"
-        }
-      ],
-      "id": "d82bbcaa-862e-3625-e3cb-fd7bf462dd23",
-      "name": "Video"
-    },
-    {
-      "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "meta": {
-            "backRelation": "frames"
-          },
-          "name": "camera",
-          "properties": [],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "2c53bc09-414c-e30e-7057-5e3a0ff69a7d"
-        },
-        {
-          "name": "timestamp",
-          "properties": [],
-          "type": "string"
-        }
-      ],
-      "id": "0ee0e032-2abf-e7a0-4478-68c0f732ab33",
-      "name": "VideoFrame"
-    },
-    {
-      "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "meta": {
-            "backRelation": "statistics"
-          },
-          "name": "frame",
-          "properties": ["unique", "searchable", "sortable"],
-          "subtype": "oneOne",
-          "type": "entity",
-          "value": "0ee0e032-2abf-e7a0-4478-68c0f732ab33"
-        },
-        {
-          "name": "statistics",
-          "properties": [],
-          "type": "string"
-        }
-      ],
-      "id": "f3fbb042-ffbb-a965-4f2f-5286b24eae05",
-      "name": "VideoFrameStatistics"
     }
   ],
   "name": "cali",
