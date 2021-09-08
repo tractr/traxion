@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.3.3](https://github.com/tractr/stack/compare/nestjs-file-storage-0.3.2...nestjs-file-storage-0.3.3) (2021-09-08)
+
+
+### Bug Fixes
+
+* add @types/minio dev dependencie to nestjs-file-storage ([#268](https://github.com/tractr/stack/issues/268)) ([9a70838](https://github.com/tractr/stack/commit/9a70838fb5819539ba555b04f21f73d06c163d09))
+
+
+
 ## [0.3.2](https://github.com/tractr/stack/compare/nestjs-file-storage-0.3.1...nestjs-file-storage-0.3.2) (2021-09-01)
 
 
