@@ -41,10 +41,21 @@ import {
   SortOrder,
   <<Model pascal>>,
 } from '../../../models';
+
 import {
+  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
   TransformStringToArrayOfString,
-  TransformStringToInt,
+  <<<}>>>
+
+  <<if Fields boolean and searchable and not password>>
   TransformStringToBoolean,
+  <<endif>>
+
+  <<if Fields datetime and searchable>>
+  TransformStringToDate,
+  <<endif>>
+
+  TransformStringToInt,
   } from '@tractr/common';
  
 export class <<Model pascal>>FindManyQueryDto {
@@ -81,6 +92,7 @@ export class <<Model pascal>>FindManyQueryDto {
 
   <<if field datetime>>
   @IsDate({},<<=listModifier(field)>>)
+  @TransformStringToDate()
   <<endif>>
 
   @IsOptional()

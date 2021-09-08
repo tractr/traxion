@@ -47,21 +47,23 @@ export class PasswordService {
     this.assertPasswordResetIsActive();
 
     // Get user from email
-    const user: UserWithEmailAndPassword = await this.userService.findUnique({
-      where: {
-        email,
-      },
-      select: {
-        email: true,
-        password: true,
-        id: true,
-      },
-      rejectOnNotFound: true,
-    });
+    const user: UserWithEmailAndPassword | null =
+      await this.userService.findUnique({
+        where: {
+          email,
+        },
+        select: {
+          email: true,
+          password: true,
+          id: true,
+        },
+      });
+
+    if (!user) throw new UserNotFoundError();
 
     const resetCode = this.createResetCode(user);
 
-    const { link, subject, template } = {
+    const { link, subject, template, variables } = {
       ...this.authenticationOptions.password.reset,
       ...options,
     };
@@ -85,6 +87,8 @@ export class PasswordService {
         : { HTMLPart: DEFAULT_RESET_HTML }),
       Variables: {
         link: linkWithCode,
+        email: user.email,
+        ...(variables ?? {}),
       },
     };
 

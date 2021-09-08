@@ -44,8 +44,21 @@ import {
   <<endfor>>
 } from '../../../models';
 <<endif>>
-<<if Fields (number or boolean) and searchable>>
-import { TransformStringToInt, TransformStringToBoolean } from '@tractr/common';
+
+<<if Fields (number or boolean or datetime) and searchable>>
+import { 
+  <<if Fields number and searchable>>
+  TransformStringToInt, 
+  <<endif>>
+
+  <<if Fields boolean and searchable>>
+  TransformStringToBoolean,
+  <<endif>>
+
+  <<if Fields datetime and searchable>>
+  TransformStringToDate,
+  <<endif>>
+} from '@tractr/common';
 <<endif>>
  
 export class <<Model pascal>>CountQueryDto {
@@ -82,6 +95,7 @@ export class <<Model pascal>>CountQueryDto {
 
   <<if field datetime>>
   @IsDate({}, <<=listModifier(field)>>)
+  @TransformStringToDate()
   <<endif>>
 
   @IsOptional()

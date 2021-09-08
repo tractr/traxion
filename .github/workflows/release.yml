@@ -95,8 +95,14 @@ jobs:
           APPS: ${{ steps.nx-apps.outputs.apps }}
         with:
           script: |
-            console.log('Set the matrix to deploy the docker container:', process.env.APPS.split(','));
-            return process.env.APPS.split(',');
+            const fs = require('fs');
+            const join = require('path').join;
+            const apps = process.env.APPS.split(',')
+              .filter((name) => name !== '')
+              .filter((name) => fs.existsSync(join(process.cwd(), 'apps', name, 'Dockerfile')));
+
+            console.log('Set the matrix to deploy the docker container:', apps);
+            return apps;
 
       - name: Get the last commit SHA
         id: commit

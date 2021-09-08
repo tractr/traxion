@@ -31,6 +31,7 @@
     "postinstall": "(is-ci || husky install) && ngcc --properties es2015 browser module main && npm run generate",
     "prisma:db:push": "prisma db push --schema=./libs/prisma/prisma/schema.prisma",
     "prisma:db:seed": "prisma db seed --preview-feature --schema=./libs/prisma/prisma/schema.prisma",
+    "prisma:studio": "prisma studio --schema=./libs/prisma/prisma/schema.prisma",
     "start": "nx serve",
     "test": " nx run-many --all --target=test",
     "ts-node": "ts-node -r tsconfig-paths/register --project apps/api/tsconfig.json",
