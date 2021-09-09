@@ -296,6 +296,65 @@
           }
         }
       }
+    },
+    "video-analysis-mock": {
+      "projectType": "application",
+      "root": "apps/video-analysis-mock",
+      "sourceRoot": "apps/video-analysis-mock/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "production": {
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/video-analysis-mock/src/environments/environment.ts",
+                  "with": "apps/video-analysis-mock/src/environments/environment.prod.ts"
+                }
+              ],
+              "inspect": false,
+              "optimization": true
+            }
+          },
+          "executor": "@nrwl/node:build",
+          "options": {
+            "main": "apps/video-analysis-mock/src/main.ts",
+            "outputPath": "dist/apps/video-analysis-mock",
+            "tsConfig": "apps/video-analysis-mock/tsconfig.app.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "cli": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "../../node_modules/ts-node/dist/bin.js -r tsconfig-paths/register src/cli.ts {args.cmd}"
+            ],
+            "cwd": "apps/video-analysis-mock",
+            "parallel": false
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/video-analysis-mock/**/*.ts"]
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "video-analysis-mock:build"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/video-analysis-mock/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/apps/video-analysis-mock"]
+        }
+      }
     }
   },
   "version": 2

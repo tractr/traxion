@@ -29,6 +29,9 @@
     "pwa-e2e": {
       "implicitDependencies": ["pwa"],
       "tags": []
+    },
+    "video-analysis-mock": {
+      "tags": []
     }
   },
   "targetDependencies": {
