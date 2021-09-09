@@ -80,6 +80,31 @@
         }
       }
     },
+    "common": {
+      "prefix": "cali",
+      "projectType": "library",
+      "root": "libs/common",
+      "sourceRoot": "libs/common/src",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/common/src/**/*.ts",
+              "libs/common/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/common/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/common"]
+        }
+      }
+    },
     "docs": {
       "projectType": "application",
       "root": "apps/docs",
@@ -127,6 +152,92 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/generated"]
+        }
+      }
+    },
+    "message-broker-alert": {
+      "projectType": "library",
+      "root": "libs/message-broker/alert",
+      "sourceRoot": "libs/message-broker/alert/src",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/message-broker/alert/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/message-broker/alert/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/message-broker/alert"]
+        }
+      }
+    },
+    "message-broker-camera-status": {
+      "projectType": "library",
+      "root": "libs/message-broker/camera-status",
+      "sourceRoot": "libs/message-broker/camera-status/src",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/message-broker/camera-status/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/message-broker/camera-status/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/message-broker/camera-status"]
+        }
+      }
+    },
+    "message-broker-common": {
+      "projectType": "library",
+      "root": "libs/message-broker/common",
+      "sourceRoot": "libs/message-broker/common/src",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/message-broker/common/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/message-broker/common/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/message-broker/common"]
+        }
+      }
+    },
+    "message-broker-frame-performance": {
+      "projectType": "library",
+      "root": "libs/message-broker/frame-performance",
+      "sourceRoot": "libs/message-broker/frame-performance/src",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/message-broker/frame-performance/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/message-broker/frame-performance/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/message-broker/frame-performance"]
         }
       }
     },
@@ -318,7 +429,7 @@
           },
           "executor": "@nrwl/node:build",
           "options": {
-            "main": "apps/video-analysis-mock/src/main.ts",
+            "main": "apps/video-analysis-mock/src/cli.ts",
             "outputPath": "dist/apps/video-analysis-mock",
             "tsConfig": "apps/video-analysis-mock/tsconfig.app.json"
           },

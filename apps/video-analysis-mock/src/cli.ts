@@ -1,10 +1,10 @@
 import { Logger } from '@tractr/nestjs-core';
 import { BootstrapConsole } from 'nestjs-console';
 
-import { AppModule } from './app/app.module';
+import { CliModule } from './cli/cli.module';
 
 const bootstrap = new BootstrapConsole({
-  module: AppModule,
+  module: CliModule,
   useDecorators: true,
   contextOptions: {
     logger: ['warn', 'error'],

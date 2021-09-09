@@ -14,10 +14,25 @@
     "api": {
       "tags": []
     },
+    "common": {
+      "tags": []
+    },
     "docs": {
       "tags": []
     },
     "generated": {
+      "tags": []
+    },
+    "message-broker-alert": {
+      "tags": []
+    },
+    "message-broker-camera-status": {
+      "tags": []
+    },
+    "message-broker-common": {
+      "tags": []
+    },
+    "message-broker-frame-performance": {
       "tags": []
     },
     "prisma": {
