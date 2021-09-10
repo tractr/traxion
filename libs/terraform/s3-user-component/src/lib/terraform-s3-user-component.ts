@@ -1,4 +1,9 @@
-import { IamAccessKey, IamPolicy, IamUser } from '@cdktf/provider-aws';
+import {
+  IamAccessKey,
+  IamPolicy,
+  IamUser,
+  IamUserPolicyAttachment,
+} from '@cdktf/provider-aws';
 import { TerraformOutput, Token } from 'cdktf';
 import { ConstructOptions } from 'constructs';
 
@@ -21,6 +26,8 @@ export class S3UserComponent extends AwsComponent<S3UserComponentConfig> {
 
   protected readonly iamUser: IamUser;
 
+  protected readonly iamUserPolicyAttachment: IamUserPolicyAttachment;
+
   protected readonly iamAccessKey: IamAccessKey;
 
   protected readonly iamAccessKeyIdOutput: TerraformOutput;
@@ -36,6 +43,7 @@ export class S3UserComponent extends AwsComponent<S3UserComponentConfig> {
     this.checkConfig();
     this.iamPolicy = this.createIamPolicy();
     this.iamUser = this.createIamUser();
+    this.iamUserPolicyAttachment = this.createIamUserPolicyAttachment();
     this.iamAccessKey = this.createIamAccessKey();
     this.iamAccessKeyIdOutput = this.createIamAccessKeyIdOutput();
     this.iamAccessKeySecretOutput = this.createIamAccessKeySecretOutput();
@@ -59,7 +67,14 @@ export class S3UserComponent extends AwsComponent<S3UserComponentConfig> {
     return new IamUser(this, 'user', {
       provider: this.provider,
       name: this.getResourceName('user'),
-      permissionsBoundary: this.getIamPolicyArnAsToken(),
+    });
+  }
+
+  protected createIamUserPolicyAttachment() {
+    return new IamUserPolicyAttachment(this, 'attach', {
+      provider: this.provider,
+      user: this.getIamUserNameAsToken(),
+      policyArn: this.getIamPolicyArnAsToken(),
     });
   }
 
