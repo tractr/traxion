@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.2.2](https://github.com/tractr/stack/compare/terraform-s3-user-component-0.2.1...terraform-s3-user-component-0.2.2) (2021-09-10)
+
+
+### Bug Fixes
+
+* **terraform:** use inline policy rather than permission boundary ([#269](https://github.com/tractr/stack/issues/269)) ([5371c17](https://github.com/tractr/stack/commit/5371c17810d2c11794c7acbddc4e3421b707bc70))
+
+
+
 ## [0.2.1](https://github.com/tractr/stack/compare/terraform-s3-user-component-0.2.0...terraform-s3-user-component-0.2.1) (2021-08-19)
 
 
