@@ -81,6 +81,7 @@ export class PasswordService {
         ...(name ? { Name: name } : {}),
       },
       To: [{ Email: email }],
+      TemplateLanguage: true,
       Subject: subject,
       ...(template
         ? { TemplateID: template }
