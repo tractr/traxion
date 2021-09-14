@@ -16,7 +16,6 @@
     "source.fixAll.eslint": true
   },
   "editor.tabSize": 2,
-  "eslint.enable": true,
   "eslint.options": {
     "configFile": "./.eslintrc.json"
   },
@@ -26,8 +25,7 @@
     "typescript",
     "typescriptreact",
     "html",
-    "vue",
-    "markdown"
+    "vue"
   ],
   "jestrunner.changeDirectoryToWorkspaceRoot": true,
   "typescript.preferences.importModuleSpecifier": "relative",
