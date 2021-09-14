@@ -3,15 +3,20 @@ import { Injectable } from '@nestjs/common';
 
 import { MESSAGE_BROKER_CAMERA_STATUS_EXCHANGE } from '../constants';
 
-import { RawAlert } from '@cali/common';
 import {
   MessageBrokerPublishParams,
   MessageBrokerService,
 } from '@cali/message-broker-common';
+import { CameraStatus } from '@generated/models';
+
+export type CameraStatusChangeNotification = {
+  idcamera: number;
+  status: CameraStatus;
+};
 
 @Injectable()
 export class MessageBrokerCameraStatusService
-  implements MessageBrokerService<RawAlert>
+  implements MessageBrokerService<CameraStatusChangeNotification>
 {
   constructor(private messageBrokerService: AmqpConnection) {}
 
@@ -19,7 +24,7 @@ export class MessageBrokerCameraStatusService
     routingKey,
     message,
     options,
-  }: MessageBrokerPublishParams<RawAlert>) {
+  }: MessageBrokerPublishParams<CameraStatusChangeNotification>) {
     return this.messageBrokerService.publish(
       MESSAGE_BROKER_CAMERA_STATUS_EXCHANGE,
       routingKey,

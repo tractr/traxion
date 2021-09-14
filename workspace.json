@@ -80,6 +80,27 @@
         }
       }
     },
+    "camera-monitoring": {
+      "projectType": "library",
+      "root": "libs/camera-monitoring",
+      "sourceRoot": "libs/camera-monitoring/src",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/camera-monitoring/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/camera-monitoring/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/camera-monitoring"]
+        }
+      }
+    },
     "common": {
       "prefix": "cali",
       "projectType": "library",

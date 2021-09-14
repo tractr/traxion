@@ -1,7 +1,5 @@
 export type PreprocessingPerformance = {
-  idcamera: number;
-  time: Date;
+  time: number;
   delay: number;
   tprepro: number;
-  numframe: string;
 };

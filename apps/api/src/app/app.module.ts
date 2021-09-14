@@ -5,8 +5,9 @@ import { DatabaseModule } from '@tractr/nestjs-database';
 import { AppService } from './app.service';
 import { SharedModule } from './shared.module';
 
-import { ModelsModule } from '@cali/generated/nestjs-models';
+import { CameraMonitoringModule } from '@cali/camera-monitoring';
 import { MessageBrokerAlertModule } from '@cali/message-broker-alert';
+import { ModelsModule } from '@generated/nestjs-models';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { MessageBrokerAlertModule } from '@cali/message-broker-alert';
     SharedModule,
     LoggerModule,
     MessageBrokerAlertModule,
+    CameraMonitoringModule,
   ],
   controllers: [],
   providers: [AppService],

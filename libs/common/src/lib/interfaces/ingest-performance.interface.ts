@@ -1,6 +1,4 @@
 export type IngestPerformance = {
-  idcamera: number;
-  time: Date;
+  time: number;
   tingest: number;
-  numframe: string;
 };

@@ -11,19 +11,20 @@
     "module": "esnext",
     "moduleResolution": "node",
     "paths": {
+      "@cali/camera-monitoring": ["libs/camera-monitoring/src/index.ts"],
       "@cali/common": ["libs/common/src/index.ts"],
-      "@cali/generated/*": ["libs/generated/generated/*"],
       "@cali/message-broker-alert": ["libs/message-broker/alert/src/index.ts"],
+      "@cali/message-broker-camera-status": [
+        "libs/message-broker/camera-status/src/index.ts"
+      ],
       "@cali/message-broker-common": [
         "libs/message-broker/common/src/index.ts"
       ],
-      "@cali/message-broker/camera-status": [
-        "libs/message-broker/camera-status/src/index.ts"
-      ],
-      "@cali/message-broker/frame-performance": [
+      "@cali/message-broker-frame-performance": [
         "libs/message-broker/frame-performance/src/index.ts"
       ],
-      "@cali/prisma": ["libs/prisma/src/index.ts"]
+      "@cali/prisma": ["libs/prisma/src/index.ts"],
+      "@generated/*": ["libs/generated/generated/*"]
     },
     "rootDir": ".",
     "skipDefaultLibCheck": true,
