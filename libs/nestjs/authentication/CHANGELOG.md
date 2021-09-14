@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.16.1](https://github.com/tractr/stack/compare/nestjs-authentication-1.16.0...nestjs-authentication-1.16.1) (2021-09-13)
+
+
+### Bug Fixes
+
+* add template language option to true when sending password recovery ([#270](https://github.com/tractr/stack/issues/270)) ([3c05772](https://github.com/tractr/stack/commit/3c05772a521ef260aaa024d067487da8956d59c6))
+
+
+
 # [1.16.0](https://github.com/tractr/stack/compare/nestjs-authentication-1.15.6...nestjs-authentication-1.16.0) (2021-09-07)
 
 
