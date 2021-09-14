@@ -1,6 +1,7 @@
 ---
 id: introduction
 title: Introduction
+slug: /
 ---
 
 Traxion is a group of node packages to install in your environment to help you

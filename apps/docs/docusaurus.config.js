@@ -36,14 +36,14 @@ module.exports = {
         {
           title: 'Docs',
           items: [
-            {
-              label: 'Style Guide',
-              to: 'docs/',
-            },
-            {
-              label: 'Second Doc',
-              to: 'docs/doc2/',
-            },
+            // {
+            //   label: 'Style Guide',
+            //   to: 'contribution/how-to-write-this-documentation',
+            // },
+            // {
+            //   label: 'Second Doc',
+            //   to: 'docs/doc2/',
+            // },
           ],
         },
         {
