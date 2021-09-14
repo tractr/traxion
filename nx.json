@@ -45,6 +45,9 @@
       "implicitDependencies": ["pwa"],
       "tags": []
     },
+    "terraform": {
+      "tags": []
+    },
     "video-analysis-mock": {
       "tags": []
     }

@@ -1,0 +1,301 @@
+name: Terraform command
+
+on:
+  repository_dispatch:
+    types: [terraform-command]
+
+# To filter the comment with the pull request: khan/pull-request-comment-trigger
+# To get the ref_head of the current pull request and checkout the code: xt0rted/pull-request-comment-branch
+
+jobs:
+  slash-command-comment:
+    name: Update the issue information
+    runs-on: [self-hosted, node-16]
+    steps:
+      - name: Create URL to the run output
+        id: vars
+        run:
+          echo ::set-output
+          name=run-url::https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
+      - name: Edit comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          repository:
+            ${{ github.event.client_payload.github.payload.repository.full_name
+            }}
+          comment-id:
+            ${{ github.event.client_payload.github.payload.comment.id }}
+          body: |
+            ---
+            Terraform command detected
+            > [Command run output][1]
+            [1]: ${{ steps.vars.outputs.run-url }}
+      - name: Dump the client payload context
+        env:
+          PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
+        run: echo "$PAYLOAD_CONTEXT"
+
+  # Build our terraform code
+  terraform-build:
+    # Our code will run on node 16 and Linux
+    strategy:
+      matrix:
+        node: [16.x]
+        os: [node-16]
+
+    name: Build stacks plans
+    runs-on: [self-hosted, terraform, '${{ matrix.os }}']
+
+    outputs:
+      stacks: ${{ steps.stacks.outputs.result }}
+
+    steps:
+      # First we checkout the code
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # We initialize the node action
+      - name: Use node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://npm.pkg.github.com
+
+      # We get our cache compare to our package-lock
+      - uses: actions/cache@v2.1.4
+        with:
+          path: '~/.npm'
+          key:
+            ${{ matrix.os }}-npm-${{ matrix.node }}-${{
+            hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ matrix.os }}-npm-${{ matrix.node }}-
+
+      # We install our dependencies
+      - name: Run npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm ci --no-audit --no-progress
+
+      # Synthesizing our code into a terraform stacks files
+      - name: Synth Terraform
+        id: synth
+        run: npx nx run terraform:synth
+        env:
+          PROJECT_CODE: ${{ secrets.PROJECT_CODE }}
+          ENV_NAME: ${{ secrets.ENV_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_AVAILABILITY_ZONES: ${{ secrets.AWS_AVAILABILITY_ZONES }}
+          TERRAFORM_REMOTE_BACKEND_HOST:
+            ${{ secrets.TERRAFORM_REMOTE_BACKEND_HOST }}
+          TERRAFORM_REMOTE_BACKEND_ORG:
+            ${{ secrets.TERRAFORM_REMOTE_BACKEND_ORG }}
+          TERRAFORM_REMOTE_BACKEND_TOKEN:
+            ${{ secrets.TERRAFORM_REMOTE_BACKEND_TOKEN }}
+          TERRAFORM_REMOTE_BACKEND_WORKSPACE:
+            ${{ secrets.TERRAFORM_REMOTE_BACKEND_WORKSPACE }}
+          DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+
+      - uses: actions/github-script@0.9.0
+        id: stacks
+        with:
+          script: |
+            const fs = require('fs');
+            console.log('Find all available stacks');
+            const stacks = fs.readdirSync('./dist/cdktf.out/stacks');
+            return stacks;
+      - uses: actions/upload-artifact@v2
+        with:
+          name: terraform-stack
+          path: dist/cdktf.out/
+          if-no-files-found: error
+
+  terraform-matrix:
+    name: Create the terraform matrix
+    needs: [terraform-build]
+
+    runs-on: [self-hosted, node-16]
+    outputs:
+      stacks: ${{ fromJSON(steps.command.outputs.result).stacks }}
+      command: ${{ fromJSON(steps.command.outputs.result).name }}
+    steps:
+      # We extract the command (first unamed argument) from the terraform command
+      - uses: actions/github-script@0.9.0
+        id: command
+        env:
+          COMMANDS: '${{ toJson(github.event.client_payload.slash_command) }}'
+          DEFAULT_STACKS: '${{ toJson(needs.terraform-build.outputs.stacks) }}'
+        with:
+          script: |
+            const defaultStacks = JSON.parse(process.env.DEFAULT_STACKS);
+            const args = JSON.parse(process.env.COMMANDS).args;
+            const commands = args.unnamed.all
+              .trim()
+              .split(' ')
+              .reduce((acc, cur) => { if (cur && cur !== '') { acc.push(cur); } return acc; }, []);
+            const outputs = {
+              name: commands.length > 0 ? commands[0] : null,
+              stacks: commands.slice(1).length > 0 ? commands.slice(1) : defaultStacks,
+            };
+            return outputs;
+      - name: Check if a command is asked
+        if: fromJSON(steps.command.outputs.result).name == null
+        run: echo "No command have been found" && exit 1
+
+  terraform-apply:
+    needs: [terraform-matrix]
+    if: always() && needs.terraform-matrix.outputs.command == 'apply'
+
+    # Validate multi stack as the same time
+    strategy:
+      matrix:
+        terraform-stack: ${{fromJSON(needs.terraform-matrix.outputs.stacks)}}
+
+    name: Apply ${{ matrix.terraform-stack }} stack plan
+
+    runs-on: [self-hosted, terraform, node-16]
+    steps:
+      # Download the terraform artifact created the step above
+      - uses: actions/download-artifact@v2
+        with:
+          name: terraform-stack
+
+      # Setup Terraform with our credentials
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token:
+            ${{ secrets.TERRAFORM_REMOTE_BACKEND_TOKEN }}
+
+      # We check if our terraform config is ok
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+        working-directory: ./stacks/${{ matrix.terraform-stack }}
+
+      # We initialize our terraform
+      - name: Terraform Init
+        id: init
+        run: terraform init
+        working-directory: ./stacks/${{ matrix.terraform-stack }}
+        timeout-minutes: 1
+
+      # We plan our terraform
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        working-directory: ./stacks/${{ matrix.terraform-stack }}
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        working-directory: ./stacks/${{ matrix.terraform-stack }}
+
+  terraform-destroy:
+    needs: [terraform-matrix]
+    if: always() && needs.terraform-matrix.outputs.command == 'destroy'
+
+    # Validate multi stack as the same time
+    strategy:
+      matrix:
+        terraform-stack: ${{fromJSON(needs.terraform-matrix.outputs.stacks)}}
+
+    name: Destroy ${{ matrix.terraform-stack }} stack plan
+
+    runs-on: [self-hosted, terraform, node-16]
+
+    steps:
+      # Download the terraform artifact created the step above
+      - uses: actions/download-artifact@v2
+        with:
+          name: terraform-stack
+
+      # Setup Terraform with our credentials
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token:
+            ${{ secrets.TERRAFORM_REMOTE_BACKEND_TOKEN }}
+
+      # We check if our terraform config is ok
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+        working-directory: ./stacks/${{ matrix.terraform-stack }}
+
+      # We initialize our terraform
+      - name: Terraform Init
+        id: init
+        run: terraform init
+        working-directory: ./stacks/${{ matrix.terraform-stack }}
+        timeout-minutes: 1
+
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        working-directory: ./stacks/${{ matrix.terraform-stack }}
+
+  terraform-outcome:
+    needs: [terraform-apply, terraform-destroy]
+    if: always()
+
+    runs-on: [self-hosted, node-16]
+    name: Concat the previous steps outcome
+
+    outputs:
+      outcome: ${{ steps.outcome.outputs.outcome}}
+    steps:
+      - name: Terraform outcome
+        id: outcome
+        env:
+          OUTCOME:
+            ${{ needs.terraform-apply.outcome != 'success' &&
+            needs.terraform-destroy.outcome != 'success' }}
+        run: |
+          echo "::set-output name=outcome::$OUTCOME"
+
+  terraform-success:
+    needs: [terraform-outcome]
+    if: always() && needs.terraform-outcome.outputs.outcome == 'true'
+
+    runs-on: [self-hosted, node-16]
+    steps:
+      - name: Add success reaction
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          repository:
+            ${{ github.event.client_payload.github.payload.repository.full_name
+            }}
+          comment-id:
+            ${{ github.event.client_payload.github.payload.comment.id }}
+          reaction-type: hooray
+
+  terraform-failure:
+    needs: [terraform-outcome]
+    if: always() && needs.terraform-outcome.outputs.outcome == 'false'
+
+    runs-on: [self-hosted, node-16]
+    steps:
+      - name: Add failure reaction
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          repository:
+            ${{ github.event.client_payload.github.payload.repository.full_name
+            }}
+          comment-id:
+            ${{ github.event.client_payload.github.payload.comment.id }}
+          reaction-type: -1
