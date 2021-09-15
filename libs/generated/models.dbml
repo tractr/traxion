@@ -48,6 +48,7 @@ Table Client {
   id varchar [pk]
   name varchar [not null]
   kpis_configuration varchar [ref: > KpisConfiguration.id, unique]
+  siret varchar [not null]
 }
 
 //--------------------------

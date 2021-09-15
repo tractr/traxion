@@ -207,6 +207,11 @@
           "subtype": "oneOne",
           "type": "entity",
           "value": "ce543764-5a09-e4b2-e21a-50ec66d8c3bd"
+        },
+        {
+          "name": "siret",
+          "properties": [],
+          "type": "string"
         }
       ],
       "id": "5d3e69aa-8cd0-6963-908b-a082c6b98fb5",
