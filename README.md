@@ -7,23 +7,27 @@ In order to use this repository and run the project, you will need:
 - Nodejs 16
 - Npm 7
 
-Some packages we use for development are not public yet (Their will be open
+Some packages we use for development are not public yet (they will be open
 sourced soon as they reach a more mature state). As those packages are owned by
 the tractr organisation, you will have to update your npm configuration to be
 authenticated as a tractr member to be able to install them. You must follow the
 next steps:
 
-- First, you need to create a personal access token. You can find some
-  information
-  [here](https://docs.github.com/en/enterprise-server@2.22/github/authenticating-to-github/creating-a-personal-access-token)
+- Get the npm authorisation token to access privaets packages. It can be found
+  in bitwarden.
 
--After that, configure your
-[npm](https://docs.github.com/en/packages/guides/configuring-npm-for-use-with-github-packages).
+-After that, you must configure your npm client to use this authentication token
+when accessing privates packages. To do that you must run
 
 ```bash
-npm login --scope=@tractr --registry=https://npm.pkg.github.com
+npm login --registry=https://npm.tractr.net
+```
 
-> Username: USERNAME
+A prompt will collect some data and update your `.npmrc` config file (usually
+located in your $HOME directory)
+
+```bash
+> Username: cali
 > Password: TOKEN
 > Email: PUBLIC-EMAIL-ADDRESS
 ```
@@ -70,3 +74,9 @@ The generation will generate boilerplate code for the app but it will also
 generate a dbml schema matching the modelisation entered in the hapify GUI. It
 is available at `libs/generated/models.dbml`. You can use
 `https://dbdiagram.io/home` to visualize the generated dbml!
+
+## Updating the database schema
+
+In order to initialize the database schema (either on first installation or
+after running code generation) you must run the next command:
+`npm run prisma:db:push`
