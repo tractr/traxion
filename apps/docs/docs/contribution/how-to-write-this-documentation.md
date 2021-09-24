@@ -175,7 +175,7 @@ Pour plus d'informations aller sur https://docs.hapify.io/
 
 :::tip Astuce
 
-Débrancher le courant pour éteindre plus vite votre ordinateur
+Débranchez le courant pour éteindre plus vite votre ordinateur !
 
 :::
 
