@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.6.4](https://github.com/tractr/stack/compare/angular-authentication-0.6.3...angular-authentication-0.6.4) (2021-09-28)
+
+
+### Bug Fixes
+
+* **angular-authentication:** fix session in error ([#273](https://github.com/tractr/stack/issues/273)) ([70d45c6](https://github.com/tractr/stack/commit/70d45c669eebe37c445fee0d26c065e98bbb0f02))
+
+
+
 ## [0.6.3](https://github.com/tractr/stack/compare/angular-authentication-0.6.2...angular-authentication-0.6.3) (2021-08-10)
 
 
