@@ -85,10 +85,7 @@ export function SessionServiceFactory<
       }).pipe(
         map((value) => value.response),
         map((value) => transformAndValidate(user)(value) as U),
-        catchError((err) => {
-          if (err && err.status === 401) return of(null);
-          throw err;
-        }),
+        catchError(() => of(null)),
       );
     }
 
