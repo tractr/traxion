@@ -25,7 +25,7 @@ Selon la nature du document, la taille acceptable peut varier.
 Un document de référence d'API par exemple, peut être relativement long car il n'a pas vocation à être lu d'un trait, ni dans un ordre precis.
 C'est plutôt une liste détaillée de fonctions qu'un texte à lire de bout en bout.
 
-À l'inverse une procédure, un document d'onboarding doivent rester lisible d'un coup. Ce genre de documents ne peuvent pas être lu partiellement.
+À l'inverse une procédure ou un document d'onboarding doivent rester lisible d'un coup. Ce genre de documents ne peuvent pas être lu partiellement.
 
 ### En-têtes
 
@@ -129,7 +129,7 @@ Cliquer [ici](https://docs.hapify.io/) pour voir la documentation.
 
 #### Restrictions
 
-Si un lien est vraiment et contient des tokens dans l'URL il faut impérativement l'intégrer au texte.
+Si un lien est vraiment long et contient des tokens dans l'URL il faut impérativement l'intégrer au texte.
 
 :::danger Exemples
 
