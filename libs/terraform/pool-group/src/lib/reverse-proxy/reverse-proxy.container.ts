@@ -13,10 +13,6 @@ export class ReverseProxyContainer extends HttpContainer<ReverseProxyContainerCo
     return 'traefik';
   }
 
-  getImageTag(): string {
-    return 'v2.4.8';
-  }
-
   protected getPort(): number {
     return 8080;
   }

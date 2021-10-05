@@ -64,6 +64,10 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
     return this.getAppName();
   }
 
+  getImageTag(): string {
+    return this.service.getDockerImageTag(this.getAppName());
+  }
+
   getMountPoints(): MountPoint[] {
     return [];
   }
@@ -120,8 +124,6 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
    * Or returns the private application name: api-backend
    */
   protected abstract getAppName(): string;
-
-  abstract getImageTag(): string;
 
   protected getDockerLabels(): Record<string, string> {
     return {};

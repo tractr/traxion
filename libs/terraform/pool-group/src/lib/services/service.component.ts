@@ -46,8 +46,9 @@ export type MemoryValue =
   | '8192'
   | '16384'
   | '30720';
+export type DockerImageTags = string | Record<string, string>;
 
-export interface ServiceComponentConfig extends ConstructOptions {
+export interface ServiceComponentPrivateConfig extends ConstructOptions {
   vpcId: string;
   subnetsIds: string[];
   logsGroup: string;
@@ -61,10 +62,17 @@ export interface ServiceComponentConfig extends ConstructOptions {
   fileStorageS3BucketName: string;
   privateDnsNamespaceId: string;
   privateDnsNamespaceName: string;
-  cpu?: CpuValue;
-  memory?: MemoryValue;
-  desiredCount?: number;
 }
+
+export interface ServiceComponentPublicConfig extends ConstructOptions {
+  dockerImageTags: DockerImageTags;
+  cpu: CpuValue;
+  memory: MemoryValue;
+  desiredCount: number;
+}
+
+export type ServiceComponentConfig = ServiceComponentPrivateConfig &
+  ServiceComponentPublicConfig;
 
 export abstract class ServiceComponent<
   T extends ServiceComponentConfig = ServiceComponentConfig,
@@ -353,5 +361,15 @@ export abstract class ServiceComponent<
       throw new Error(`No Docker application found for ${appName}`);
     }
     return this.config.dockerApplications[appName];
+  }
+
+  getDockerImageTag(appName: string): string {
+    if (typeof this.config.dockerImageTags === 'string') {
+      return this.config.dockerImageTags;
+    }
+    if (!this.config.dockerImageTags[appName]) {
+      throw new Error(`No Docker image tag found for ${appName}`);
+    }
+    return this.config.dockerImageTags[appName];
   }
 }

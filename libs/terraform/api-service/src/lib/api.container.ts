@@ -11,10 +11,6 @@ export class ApiContainer extends HttpContainer<ApiContainerConfig> {
     return 'api';
   }
 
-  getImageTag(): string {
-    return 'latest';
-  }
-
   protected getPort(): number {
     return 3000;
   }

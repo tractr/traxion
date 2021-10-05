@@ -11,10 +11,6 @@ export class PwaContainer extends HttpContainer<PwaContainerConfig> {
     return 'pwa';
   }
 
-  getImageTag(): string {
-    return 'latest';
-  }
-
   protected getPort(): number {
     return 4200;
   }

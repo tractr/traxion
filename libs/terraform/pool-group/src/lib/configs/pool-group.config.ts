@@ -1,9 +1,11 @@
-import { PoolGroupConfig } from '../interfaces';
+import { PoolGroupPublicConfig } from '../interfaces';
 
-export const POOL_GROUP_DEFAULT_CONFIG: Pick<
-  PoolGroupConfig,
-  'subDomain' | 'reverseProxyDesiredCount'
-> = {
+export const POOL_GROUP_DEFAULT_CONFIG: PoolGroupPublicConfig = {
   subDomain: 'www',
-  reverseProxyDesiredCount: 1,
+  reverseProxy: {
+    desiredCount: 1,
+    cpu: '256',
+    memory: '512',
+    dockerImageTags: 'v2.4.8',
+  },
 };

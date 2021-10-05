@@ -1,7 +1,7 @@
 import { POOL_GROUP_DEFAULT_CONFIG } from './configs';
 import { EcsComponent } from './ecs.component';
 import { EntrypointComponent } from './entrypoint.component';
-import { PoolGroupConfig, PoolGroupPublicConfig } from './interfaces';
+import { PoolGroupConfig } from './interfaces';
 import { LogsComponent } from './logs.component';
 import { OwnerPicturesComponent } from './owner-pictures/owner-pictures.component';
 import { SecretsComponent } from './secrets/secrets.component';
@@ -13,6 +13,7 @@ import type {
   ServiceComponent,
   ServiceComponentConfig,
 } from './services/service.component';
+import { ServiceComponentPublicConfig } from './services/service.component';
 
 import {
   AwsComponent,
@@ -37,7 +38,7 @@ export class PoolGroup extends AwsComponent<PoolGroupConfig> {
   constructor(
     scope: AwsProviderConstruct,
     id: string,
-    config: PoolGroupPublicConfig,
+    config: PoolGroupConfig,
   ) {
     super(scope, id, { ...POOL_GROUP_DEFAULT_CONFIG, ...config });
     this.logsComponent = this.createLogsComponent();
@@ -88,48 +89,50 @@ export class PoolGroup extends AwsComponent<PoolGroupConfig> {
       logsGroup: this.logsComponent.getCloudwatchLogGroupName(),
       dockerApplications: this.config.registryGroup.getDockerApplications(),
       applicationBaseUrl: this.getApplicationBaseUrl(),
-      reverseProxyDesiredCount: this.config.reverseProxyDesiredCount,
+      reverseProxy: this.config.reverseProxy,
     });
   }
 
-  addService<C extends ServiceComponent<O>, O extends ServiceComponentConfig>(
+  addService<
+    C extends ServiceComponent<O>,
+    P extends ServiceComponentPublicConfig,
+    O extends ServiceComponentConfig,
+  >(
     ServiceClass: AwsComponentConstructor<C, O>,
     name: string,
-    additionalConfig?: Partial<O>,
+    publicConfig: P,
   ): C {
-    return this.ecsComponent.addService(ServiceClass, name, additionalConfig);
+    return this.ecsComponent.addService(ServiceClass, name, publicConfig);
   }
 
   addBackendService<
     C extends BackendServiceComponent<O>,
+    P extends ServiceComponentPublicConfig,
     O extends BackendServiceComponentConfig,
   >(
     ServiceClass: AwsComponentConstructor<C, O>,
     name: string,
     clients: ServiceComponent[],
-    additionalConfig?: Partial<O>,
+    publicConfig: P,
   ): C {
     return this.ecsComponent.addBackendService(
       ServiceClass,
       name,
       clients,
-      additionalConfig,
+      publicConfig,
     );
   }
 
   addHttpService<
     C extends BackendServiceComponent<O>,
+    P extends ServiceComponentPublicConfig,
     O extends BackendServiceComponentConfig,
   >(
     ServiceClass: AwsComponentConstructor<C, O>,
     name: string,
-    additionalConfig?: Partial<O>,
+    publicConfig: P,
   ): C {
-    return this.ecsComponent.addHttpService(
-      ServiceClass,
-      name,
-      additionalConfig,
-    );
+    return this.ecsComponent.addHttpService(ServiceClass, name, publicConfig);
   }
 
   protected getApplicationBaseUrl(): string {

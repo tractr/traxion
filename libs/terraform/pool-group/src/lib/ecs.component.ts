@@ -13,6 +13,7 @@ import { ExecutionRoleComponent } from './services/execution-role.component';
 import type {
   ServiceComponent,
   ServiceComponentConfig,
+  ServiceComponentPublicConfig,
 } from './services/service.component';
 
 import {
@@ -22,7 +23,7 @@ import {
 } from '@tractr/terraform-aws-component';
 import type { DockerApplications } from '@tractr/terraform-registry-group';
 
-export interface EcsComponentConfig extends ConstructOptions {
+export interface EcsComponentPrivateConfig extends ConstructOptions {
   subnetsIds: string[];
   loadBalancerSecurityGroupId: string;
   loadBalancerTargetGroupArn: string;
@@ -33,8 +34,13 @@ export interface EcsComponentConfig extends ConstructOptions {
   vpcId: string;
   dockerApplications: DockerApplications;
   applicationBaseUrl: string;
-  reverseProxyDesiredCount: number;
 }
+export interface EcsComponentPublicConfig extends ConstructOptions {
+  reverseProxy: ServiceComponentPublicConfig;
+}
+
+export type EcsComponentConfig = EcsComponentPrivateConfig &
+  EcsComponentPublicConfig;
 
 export class EcsComponent extends AwsComponent<EcsComponentConfig> {
   protected readonly executionRoleComponent: ExecutionRoleComponent;
@@ -104,26 +110,31 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
       taskRoleArn: this.reverseProxyTaskRoleComponent.getIamRoleArnAsToken(),
       loadBalancerSecurityGroupId: this.config.loadBalancerSecurityGroupId,
       loadBalancerTargetGroupArn: this.config.loadBalancerTargetGroupArn,
-      desiredCount: this.config.reverseProxyDesiredCount,
+      ...this.config.reverseProxy,
     });
   }
 
   /**
    * Append a service that don't need to be served via Http (through Traefik)
    */
-  addService<C extends ServiceComponent<O>, O extends ServiceComponentConfig>(
+  addService<
+    C extends ServiceComponent<O>,
+    P extends ServiceComponentPublicConfig,
+    O extends ServiceComponentConfig,
+  >(
     ServiceClass: AwsComponentConstructor<C, O>,
     name: string,
-    additionalConfig?: Partial<O>,
+    publicConfig: P,
   ): C {
-    const config = this.createServiceComponentConfig<O>(additionalConfig);
+    const config = this.createServiceComponentConfig<P, O>(publicConfig);
     return new ServiceClass(this, name, config);
   }
 
-  // Todo: improve typing, remove 'as C'
-  protected createServiceComponentConfig<O extends ServiceComponentConfig>(
-    additionalConfig?: Partial<O>,
-  ): O {
+  // Todo: improve typing, remove 'as never as O'
+  protected createServiceComponentConfig<
+    P extends ServiceComponentPublicConfig,
+    O extends ServiceComponentConfig,
+  >(publicConfig: P): O {
     return {
       vpcId: this.config.vpcId,
       subnetsIds: this.config.subnetsIds,
@@ -140,8 +151,8 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
         this.serviceDiscoveryComponent.getNamespaceIdAsToken(),
       privateDnsNamespaceName:
         this.serviceDiscoveryComponent.getNamespaceNameAsToken(),
-      ...additionalConfig,
-    } as O;
+      ...publicConfig,
+    } as never as O;
   }
 
   /**
@@ -149,15 +160,16 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
    */
   addHttpService<
     C extends BackendServiceComponent<O>,
+    P extends ServiceComponentPublicConfig,
     O extends BackendServiceComponentConfig,
   >(
     ServiceClass: AwsComponentConstructor<C, O>,
     name: string,
-    additionalConfig?: Partial<O>,
+    publicConfig: P,
   ): C {
-    const config = this.createBackendServiceComponentConfig<O>(
+    const config = this.createBackendServiceComponentConfig<P, O>(
       [this.reverseProxyComponent],
-      additionalConfig,
+      publicConfig,
     );
     return new ServiceClass(this, name, config);
   }
@@ -167,31 +179,31 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
    */
   addBackendService<
     C extends BackendServiceComponent<O>,
+    P extends ServiceComponentPublicConfig,
     O extends BackendServiceComponentConfig,
   >(
     ServiceClass: AwsComponentConstructor<C, O>,
     name: string,
     clients: ServiceComponent[],
-    additionalConfig?: Partial<O>,
+    publicConfig: P,
   ): C {
-    const config = this.createBackendServiceComponentConfig<O>(
+    const config = this.createBackendServiceComponentConfig<P, O>(
       clients,
-      additionalConfig,
+      publicConfig,
     );
     return new ServiceClass(this, name, config);
   }
 
-  // Todo: improve typing, remove 'as C'
   protected createBackendServiceComponentConfig<
+    P extends ServiceComponentPublicConfig,
     O extends BackendServiceComponentConfig,
-  >(clients: ServiceComponent[], additionalConfig?: Partial<O>): O {
+  >(clients: ServiceComponent[], publicConfig: P): O {
     return {
-      ...this.createServiceComponentConfig(),
-      ...additionalConfig,
+      ...this.createServiceComponentConfig<P, O>(publicConfig),
       clientsSecurityGroupsIds: clients.map((client) =>
         client.getSecurityGroupIdAsToken(),
       ),
-    } as O;
+    };
   }
 
   getEcsClusterNameAsToken(): string {

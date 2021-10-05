@@ -12,10 +12,6 @@ export class PostgresContainer extends BackendContainer<PostgresContainerConfig>
     return 'postgres';
   }
 
-  getImageTag(): string {
-    return '13-alpine';
-  }
-
   protected getPort(): number {
     return 5432;
   }

@@ -1,10 +1,19 @@
 import { SecurityGroupConfig } from '@cdktf/provider-aws';
 
-import { ServiceComponent, ServiceComponentConfig } from './service.component';
+import {
+  ServiceComponent,
+  ServiceComponentConfig,
+  ServiceComponentPrivateConfig,
+  ServiceComponentPublicConfig,
+} from './service.component';
 
-export interface BackendServiceComponentConfig extends ServiceComponentConfig {
+export interface BackendServiceComponentPrivateConfig
+  extends ServiceComponentPrivateConfig {
   clientsSecurityGroupsIds: string[];
 }
+
+export type BackendServiceComponentConfig =
+  BackendServiceComponentPrivateConfig & ServiceComponentPublicConfig;
 /**
  * This service is meant to be used by another one, as its backend
  * For example, Postgres which is used by the API
