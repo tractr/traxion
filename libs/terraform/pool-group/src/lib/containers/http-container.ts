@@ -1,9 +1,9 @@
 import { kebab } from 'case';
 
-import { ContainerConfig } from '../interfaces';
+import { ContainerPrivateConfig, ContainerPublicConfig } from '../interfaces';
 import { BackendContainer } from './backend-container';
 
-export interface HttpContainerConfig extends ContainerConfig {
+export interface HttpContainerPublicConfig extends ContainerPublicConfig {
   path: {
     prefix: string;
     stripPrefix: boolean;
@@ -13,6 +13,10 @@ export interface HttpContainerConfig extends ContainerConfig {
     passwordHash: string;
   };
 }
+
+export type HttpContainerConfig = HttpContainerPublicConfig &
+  ContainerPrivateConfig;
+
 /**
  * This container is meant to be used by another one, as its backend
  * For example, Postgres which is used by the API

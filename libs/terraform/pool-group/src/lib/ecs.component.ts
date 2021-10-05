@@ -36,7 +36,7 @@ export interface EcsComponentPrivateConfig extends ConstructOptions {
   applicationBaseUrl: string;
 }
 export interface EcsComponentPublicConfig extends ConstructOptions {
-  reverseProxy: ServiceComponentPublicConfig;
+  reverseProxyConfig: ServiceComponentPublicConfig;
 }
 
 export type EcsComponentConfig = EcsComponentPrivateConfig &
@@ -110,7 +110,7 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
       taskRoleArn: this.reverseProxyTaskRoleComponent.getIamRoleArnAsToken(),
       loadBalancerSecurityGroupId: this.config.loadBalancerSecurityGroupId,
       loadBalancerTargetGroupArn: this.config.loadBalancerTargetGroupArn,
-      ...this.config.reverseProxy,
+      ...this.config.reverseProxyConfig,
     });
   }
 

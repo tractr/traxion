@@ -1,4 +1,9 @@
-import { HttpContainerConfig } from '@tractr/terraform-pool-group';
+import {
+  BackendServiceComponentPrivateConfig,
+  ContainerPrivateConfig,
+  HttpContainerPublicConfig,
+  ServiceComponentPublicConfig,
+} from '@tractr/terraform-pool-group';
 
 export interface ApiContainerDbConfig {
   host?: string;
@@ -9,28 +14,37 @@ export interface ApiContainerDbConfig {
   options?: string;
 }
 
-export interface ApiContainerConfig extends HttpContainerConfig {
+export interface ApiContainerPublicConfig extends HttpContainerPublicConfig {
   db: ApiContainerDbConfig;
   apiPath: string;
   pwaPath: string;
 }
+export type ApiContainerConfig = ApiContainerPublicConfig &
+  ContainerPrivateConfig;
 
-export interface ApiContainerPublicConfig extends Partial<HttpContainerConfig> {
-  db?: Partial<ApiContainerDbConfig>;
-  apiPath?: string;
-  pwaPath?: string;
+export interface ApiComponentPublicConfig extends ServiceComponentPublicConfig {
+  apiContainerConfig: ApiContainerPublicConfig;
 }
+export type ApiComponentConfig = BackendServiceComponentPrivateConfig &
+  ApiComponentPublicConfig;
 
-export const API_CONTAINER_DEFAULT_CONFIG: Omit<
-  ApiContainerConfig,
-  'path' | 'name'
-> = {
-  db: {
-    name: 'api',
-    nameTest: 'testing',
-    port: 5432,
-    schema: 'public',
+export const API_DEFAULT_CONFIG: ApiComponentPublicConfig = {
+  apiContainerConfig: {
+    db: {
+      name: 'api',
+      nameTest: 'testing',
+      port: 5432,
+      schema: 'public',
+    },
+    path: {
+      prefix: `/api`,
+      stripPrefix: false,
+    },
+    apiPath: '/api',
+    pwaPath: '/',
   },
-  apiPath: '/api',
-  pwaPath: '/',
+  desiredCount: 1,
+  cpu: '256',
+  memory: '512',
+  dockerImageTags: 'latest',
 };

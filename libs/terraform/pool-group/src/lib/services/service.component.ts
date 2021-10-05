@@ -148,8 +148,8 @@ export abstract class ServiceComponent<
       provider: this.provider,
       networkMode: 'awsvpc',
       requiresCompatibilities: ['FARGATE'],
-      cpu: this.config.cpu || '256',
-      memory: this.config.memory || '512',
+      cpu: this.config.cpu,
+      memory: this.config.memory,
       containerDefinitions: JSON.stringify(
         this.containers.map((c) => c.getDefinition()),
       ),

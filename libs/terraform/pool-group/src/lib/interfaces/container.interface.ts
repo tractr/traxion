@@ -34,10 +34,7 @@ export interface Environment {
 
 export type EnvironmentCb<Config = unknown> = {
   name: string;
-  value: (
-    service: ServiceComponent<ServiceComponentConfig>,
-    config: Config,
-  ) => string;
+  value: (service: ServiceComponent, config: Config) => string;
 };
 
 export interface Secret {
@@ -60,10 +57,15 @@ export interface MountPoint {
   containerPath: string;
 }
 
-export interface ContainerConfig {
+export interface ContainerPrivateConfig {
   name: string;
+}
+
+export interface ContainerPublicConfig {
   cpu?: number;
   memory?: number;
   secrets?: (string | SecretMap)[];
   environments?: (Environment | EnvironmentCb)[];
 }
+
+export type ContainerConfig = ContainerPrivateConfig & ContainerPublicConfig;

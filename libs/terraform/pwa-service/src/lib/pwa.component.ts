@@ -1,40 +1,23 @@
-import {
-  PWA_CONTAINER_DEFAULT_CONFIG,
-  PwaContainerPublicConfig,
-} from './configs';
+import { PWA_DEFAULT_CONFIG, PwaComponentConfig } from './configs';
 import { PwaContainer } from './pwa.container';
 
 import {
   BackendServiceComponent,
-  BackendServiceComponentConfig,
   Container,
 } from '@tractr/terraform-pool-group';
 
-export class PwaComponent extends BackendServiceComponent<
-  BackendServiceComponentConfig & PwaContainerPublicConfig
-> {
+export class PwaComponent extends BackendServiceComponent<PwaComponentConfig> {
   protected getIngressPorts(): number[] {
     return [4200];
   }
 
   protected getContainers(): Container[] {
-    const { apiPath, cpu, environments, memory, secrets } = this.config;
-
-    const pwaContainerConfig = {
-      ...PWA_CONTAINER_DEFAULT_CONFIG,
-      name: this.serviceName,
-      path: {
-        prefix: `/`,
-        stripPrefix: false,
-      },
-      cpu,
-      environments,
-      memory,
-      secrets,
-    };
-
-    if (apiPath) pwaContainerConfig.apiPath = apiPath;
-
-    return [new PwaContainer(this, pwaContainerConfig)];
+    return [
+      new PwaContainer(this, {
+        ...PWA_DEFAULT_CONFIG.pwaContainerConfig,
+        ...this.config.pwaContainerConfig,
+        name: this.serviceName,
+      }),
+    ];
   }
 }

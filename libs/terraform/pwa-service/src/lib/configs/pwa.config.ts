@@ -1,14 +1,32 @@
-import { HttpContainerConfig } from '@tractr/terraform-pool-group';
+import {
+  BackendServiceComponentPrivateConfig,
+  ContainerPrivateConfig,
+  HttpContainerPublicConfig,
+  ServiceComponentPublicConfig,
+} from '@tractr/terraform-pool-group';
 
-export interface PwaContainerConfig extends HttpContainerConfig {
+export interface PwaContainerPublicConfig extends HttpContainerPublicConfig {
   apiPath: string;
 }
+export type PwaContainerConfig = PwaContainerPublicConfig &
+  ContainerPrivateConfig;
 
-export interface PwaContainerPublicConfig extends Partial<HttpContainerConfig> {
-  apiPath?: string;
+export interface PwaComponentPublicConfig extends ServiceComponentPublicConfig {
+  pwaContainerConfig: PwaContainerPublicConfig;
 }
+export type PwaComponentConfig = BackendServiceComponentPrivateConfig &
+  PwaComponentPublicConfig;
 
-export const PWA_CONTAINER_DEFAULT_CONFIG: Pick<PwaContainerConfig, 'apiPath'> =
-  {
+export const PWA_DEFAULT_CONFIG: PwaComponentPublicConfig = {
+  pwaContainerConfig: {
     apiPath: '/api',
-  };
+    path: {
+      prefix: `/`,
+      stripPrefix: false,
+    },
+  },
+  desiredCount: 1,
+  cpu: '256',
+  memory: '512',
+  dockerImageTags: 'latest',
+};

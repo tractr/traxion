@@ -89,7 +89,7 @@ export class PoolGroup extends AwsComponent<PoolGroupConfig> {
       logsGroup: this.logsComponent.getCloudwatchLogGroupName(),
       dockerApplications: this.config.registryGroup.getDockerApplications(),
       applicationBaseUrl: this.getApplicationBaseUrl(),
-      reverseProxy: this.config.reverseProxy,
+      reverseProxyConfig: this.config.reverseProxy,
     });
   }
 
