@@ -33,6 +33,16 @@ module.exports = {
       input: 'all',
     },
     {
+      path: 'generated/rext-client/helpers/universal-rxjs-ajax.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'generated/rext-client/typings/xhr2.d.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
       path: 'generated/rext-client/services/{kebab}.service.ts',
       engine: 'hpf',
       input: 'one',

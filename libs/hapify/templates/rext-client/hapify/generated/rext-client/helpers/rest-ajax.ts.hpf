@@ -3,7 +3,7 @@ import { AjaxConfig, AjaxResponse } from 'rxjs/ajax';
 import { map } from 'rxjs/operators';
  
 import { getUrl, URLSearchParamsType } from './url';
-import { request } from '@tractr/angular-tools';
+import { request } from './universal-rxjs-ajax';
  
 export function ajax<T>(
   options: string | AjaxConfig,
