@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.4.1](https://github.com/tractr/stack/compare/hapify-templates-rext-client-1.4.0...hapify-templates-rext-client-1.4.1) (2021-10-05)
+
+
+### Bug Fixes
+
+* remove angular reference from rext-client templates ([#276](https://github.com/tractr/stack/issues/276)) ([81c62f7](https://github.com/tractr/stack/commit/81c62f737f84ab0866e3a4d0010daadcfc69ea96))
+
+
+
 # [1.4.0](https://github.com/tractr/stack/compare/hapify-templates-rext-client-1.3.0...hapify-templates-rext-client-1.4.0) (2021-07-13)
 
 
