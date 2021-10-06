@@ -2099,6 +2099,50 @@
         }
       }
     },
+    "terraform-deployment-trigger": {
+      "projectType": "library",
+      "root": "libs/terraform/deployment-trigger",
+      "sourceRoot": "libs/terraform/deployment-trigger/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/deployment-trigger/*.md"],
+            "main": "libs/terraform/deployment-trigger/src/index.ts",
+            "outputPath": "dist/libs/terraform/deployment-trigger",
+            "packageJson": "libs/terraform/deployment-trigger/package.json",
+            "tsConfig": "libs/terraform/deployment-trigger/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/deployment-trigger/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/deployment-trigger/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/deployment-trigger"]
+        }
+      }
+    },
     "terraform-network-group": {
       "projectType": "library",
       "root": "libs/terraform/network-group",
