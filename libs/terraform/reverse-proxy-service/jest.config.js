@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'terraform-proxy-service',
+  displayName: 'terraform-reverse-proxy-service',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/terraform/proxy-service',
+  coverageDirectory: '../../../coverage/libs/terraform/reverse-proxy-service',
 };
