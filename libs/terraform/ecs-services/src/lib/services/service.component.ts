@@ -13,8 +13,7 @@ import { kebab } from 'case';
 import { Token } from 'cdktf';
 import { ConstructOptions } from 'constructs';
 
-import { Container } from '../containers/container';
-
+import { Container } from '../containers';
 
 import {
   AwsComponent,

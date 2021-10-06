@@ -3,7 +3,7 @@ import {
   ContainerPrivateConfig,
   HttpContainerPublicConfig,
   ServiceComponentPublicConfig,
-} from '@tractr/terraform-pool-group';
+} from '@tractr/terraform-ecs-services';
 
 export interface ApiContainerDbConfig {
   host?: string;

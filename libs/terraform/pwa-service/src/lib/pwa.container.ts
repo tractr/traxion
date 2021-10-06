@@ -1,6 +1,6 @@
 import { PwaContainerConfig } from './configs';
 
-import { Environment, HttpContainer } from '@tractr/terraform-pool-group';
+import { Environment, HttpContainer } from '@tractr/terraform-ecs-services';
 
 export class PwaContainer extends HttpContainer<PwaContainerConfig> {
   usePrivateImage(): boolean {

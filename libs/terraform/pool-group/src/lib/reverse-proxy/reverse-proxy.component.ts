@@ -4,12 +4,13 @@ import {
   SecurityGroupConfig,
 } from '@cdktf/provider-aws';
 
-import { Container } from '../containers/container';
+import { ReverseProxyContainer } from './reverse-proxy.container';
+
 import {
+  Container,
   ServiceComponent,
   ServiceComponentConfig,
-} from '../services/service.component';
-import { ReverseProxyContainer } from './reverse-proxy.container';
+} from '@tractr/terraform-ecs-services';
 
 export interface ReverseProxyComponentConfig extends ServiceComponentConfig {
   taskRoleArn: string;

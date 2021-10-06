@@ -93,6 +93,9 @@
       "@tractr/terraform-deployment-trigger-component": [
         "libs/terraform/deployment-trigger-component/src/index.ts"
       ],
+      "@tractr/terraform-ecs-services": [
+        "libs/terraform/ecs-services/src/index.ts"
+      ],
       "@tractr/terraform-entrypoint-component": [
         "libs/terraform/entrypoint-component/src/index.ts"
       ],

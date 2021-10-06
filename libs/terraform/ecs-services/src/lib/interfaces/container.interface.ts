@@ -1,4 +1,4 @@
-import { ServiceComponent, ServiceComponentConfig } from '../services';
+import { ServiceComponent } from '../services';
 
 export interface ContainerDefinition {
   name: string;

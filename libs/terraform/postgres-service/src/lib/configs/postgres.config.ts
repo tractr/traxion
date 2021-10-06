@@ -3,7 +3,7 @@ import {
   ContainerPrivateConfig,
   ContainerPublicConfig,
   ServiceComponentPublicConfig,
-} from '@tractr/terraform-pool-group';
+} from '@tractr/terraform-ecs-services';
 
 export interface PostgresContainerPublicConfig extends ContainerPublicConfig {
   dbName: string;

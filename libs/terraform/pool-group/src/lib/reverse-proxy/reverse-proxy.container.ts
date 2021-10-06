@@ -1,8 +1,8 @@
 import {
+  ContainerDefinition,
   HttpContainer,
   HttpContainerConfig,
-} from '../containers/http-container';
-import { ContainerDefinition } from '../interfaces';
+} from '@tractr/terraform-ecs-services';
 
 export interface ReverseProxyContainerConfig extends HttpContainerConfig {
   clusterName: string;

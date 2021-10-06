@@ -4,22 +4,20 @@ import { ConstructOptions } from 'constructs';
 
 import { ReverseProxyTaskRoleComponent } from './reverse-proxy/reverse-proxy-task-role.component';
 import { ReverseProxyComponent } from './reverse-proxy/reverse-proxy.component';
-import {
-  BackendServiceComponent,
-  BackendServiceComponentConfig,
-} from './services/backend-service.component';
-import { ExecutionRoleComponent } from './services/execution-role.component';
-import type {
-  ServiceComponent,
-  ServiceComponentConfig,
-  ServiceComponentPublicConfig,
-} from './services/service.component';
 
 import {
   AwsComponent,
   AwsComponentConstructor,
   AwsProviderConstruct,
 } from '@tractr/terraform-aws-component';
+import {
+  BackendServiceComponent,
+  BackendServiceComponentConfig,
+  ExecutionRoleComponent,
+  ServiceComponent,
+  ServiceComponentConfig,
+  ServiceComponentPublicConfig,
+} from '@tractr/terraform-ecs-services';
 import { PrivateDnsComponent } from '@tractr/terraform-private-dns-component';
 import type { DockerApplications } from '@tractr/terraform-registry-group';
 

@@ -4,7 +4,7 @@ import { PwaContainer } from './pwa.container';
 import {
   BackendServiceComponent,
   Container,
-} from '@tractr/terraform-pool-group';
+} from '@tractr/terraform-ecs-services';
 
 export class PwaComponent extends BackendServiceComponent<PwaComponentConfig> {
   protected getIngressPorts(): number[] {

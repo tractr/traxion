@@ -7,7 +7,7 @@ import {
   Secret,
   SecretMap,
 } from '../interfaces';
-import type { ServiceComponent } from '../services/service.component';
+import type { ServiceComponent } from '../services';
 
 export abstract class Container<T extends ContainerConfig = ContainerConfig> {
   constructor(

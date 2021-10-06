@@ -2,7 +2,6 @@ import { SecurityGroupConfig } from '@cdktf/provider-aws';
 
 import {
   ServiceComponent,
-  ServiceComponentConfig,
   ServiceComponentPrivateConfig,
   ServiceComponentPublicConfig,
 } from './service.component';

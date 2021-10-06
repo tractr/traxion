@@ -1,6 +1,6 @@
 import { ConstructOptions } from 'constructs';
 
-import { ServiceComponentPublicConfig } from '../services';
+import { ServiceComponentPublicConfig } from '../../../../ecs-services/src/lib/services';
 
 import type { NetworkGroup } from '@tractr/terraform-network-group';
 import type { RegistryGroup } from '@tractr/terraform-registry-group';

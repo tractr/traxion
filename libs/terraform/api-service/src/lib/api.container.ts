@@ -1,6 +1,6 @@
 import { ApiContainerConfig } from './configs';
 
-import { HttpContainer } from '@tractr/terraform-pool-group';
+import { HttpContainer } from '@tractr/terraform-ecs-services';
 
 export class ApiContainer extends HttpContainer<ApiContainerConfig> {
   usePrivateImage(): boolean {

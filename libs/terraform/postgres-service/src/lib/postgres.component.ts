@@ -4,7 +4,7 @@ import { PostgresContainer } from './postgres.container';
 import {
   BackendServiceComponent,
   Container,
-} from '@tractr/terraform-pool-group';
+} from '@tractr/terraform-ecs-services';
 
 export class PostgresComponent extends BackendServiceComponent<PostgresComponentConfig> {
   protected getIngressPorts(): number[] {

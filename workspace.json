@@ -2189,6 +2189,50 @@
         }
       }
     },
+    "terraform-ecs-services": {
+      "projectType": "library",
+      "root": "libs/terraform/ecs-services",
+      "sourceRoot": "libs/terraform/ecs-services/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/ecs-services/*.md"],
+            "main": "libs/terraform/ecs-services/src/index.ts",
+            "outputPath": "dist/libs/terraform/ecs-services",
+            "packageJson": "libs/terraform/ecs-services/package.json",
+            "tsConfig": "libs/terraform/ecs-services/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/ecs-services/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/ecs-services/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/ecs-services"]
+        }
+      }
+    },
     "terraform-entrypoint-component": {
       "projectType": "library",
       "root": "libs/terraform/entrypoint-component",

@@ -4,7 +4,7 @@ import { ApiComponentConfig } from './configs';
 import {
   BackendServiceComponent,
   Container,
-} from '@tractr/terraform-pool-group';
+} from '@tractr/terraform-ecs-services';
 
 export class ApiComponent extends BackendServiceComponent<ApiComponentConfig> {
   protected getIngressPorts(): number[] {
