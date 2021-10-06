@@ -51,5 +51,6 @@ module.exports = {
     '<rootDir>/libs/terraform/private-dns-component',
     '<rootDir>/libs/terraform/owner-pictures-component',
     '<rootDir>/libs/terraform/logs-component',
+    '<rootDir>/libs/terraform/entrypoint-component',
   ],
 };

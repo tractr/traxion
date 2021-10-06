@@ -187,6 +187,9 @@
     "terraform-deployment-trigger-component": {
       "tags": []
     },
+    "terraform-entrypoint-component": {
+      "tags": []
+    },
     "terraform-logs-component": {
       "tags": []
     },

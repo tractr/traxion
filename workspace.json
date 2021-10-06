@@ -2189,6 +2189,50 @@
         }
       }
     },
+    "terraform-entrypoint-component": {
+      "projectType": "library",
+      "root": "libs/terraform/entrypoint-component",
+      "sourceRoot": "libs/terraform/entrypoint-component/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/entrypoint-component/*.md"],
+            "main": "libs/terraform/entrypoint-component/src/index.ts",
+            "outputPath": "dist/libs/terraform/entrypoint-component",
+            "packageJson": "libs/terraform/entrypoint-component/package.json",
+            "tsConfig": "libs/terraform/entrypoint-component/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/entrypoint-component/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/entrypoint-component/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/entrypoint-component"]
+        }
+      }
+    },
     "terraform-logs-component": {
       "projectType": "library",
       "root": "libs/terraform/logs-component",
