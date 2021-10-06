@@ -2189,6 +2189,50 @@
         }
       }
     },
+    "terraform-logs-component": {
+      "projectType": "library",
+      "root": "libs/terraform/logs-component",
+      "sourceRoot": "libs/terraform/logs-component/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/logs-component/*.md"],
+            "main": "libs/terraform/logs-component/src/index.ts",
+            "outputPath": "dist/libs/terraform/logs-component",
+            "packageJson": "libs/terraform/logs-component/package.json",
+            "tsConfig": "libs/terraform/logs-component/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/logs-component/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/logs-component/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/logs-component"]
+        }
+      }
+    },
     "terraform-network-group": {
       "projectType": "library",
       "root": "libs/terraform/network-group",

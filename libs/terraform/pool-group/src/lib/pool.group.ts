@@ -2,7 +2,6 @@ import { POOL_GROUP_DEFAULT_CONFIG } from './configs';
 import { EcsComponent } from './ecs.component';
 import { EntrypointComponent } from './entrypoint.component';
 import { PoolGroupConfig } from './interfaces';
-import { LogsComponent } from './logs.component';
 import {
   BackendServiceComponent,
   BackendServiceComponentConfig,
@@ -18,6 +17,7 @@ import {
   AwsComponentConstructor,
   AwsProviderConstruct,
 } from '@tractr/terraform-aws-component';
+import { LogsComponent } from '@tractr/terraform-logs-component';
 import { OwnerPicturesComponent } from '@tractr/terraform-owner-pictures-component';
 import { SecretsComponent } from '@tractr/terraform-secrets-component';
 

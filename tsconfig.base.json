@@ -93,6 +93,9 @@
       "@tractr/terraform-deployment-trigger-component": [
         "libs/terraform/deployment-trigger-component/src/index.ts"
       ],
+      "@tractr/terraform-logs-component": [
+        "libs/terraform/logs-component/src/index.ts"
+      ],
       "@tractr/terraform-network-group": [
         "libs/terraform/network-group/src/index.ts"
       ],

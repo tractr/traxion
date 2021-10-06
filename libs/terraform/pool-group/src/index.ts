@@ -4,6 +4,5 @@ export * from './lib/interfaces';
 export * from './lib/reverse-proxy';
 export * from './lib/services';
 export * from './lib/pool.group';
-export * from './lib/logs.component';
 export * from './lib/entrypoint.component';
 export * from './lib/ecs.component';
