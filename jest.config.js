@@ -53,5 +53,6 @@ module.exports = {
     '<rootDir>/libs/terraform/logs-component',
     '<rootDir>/libs/terraform/entrypoint-component',
     '<rootDir>/libs/terraform/ecs-services',
+    '<rootDir>/libs/terraform/reverse-proxy-service',
   ],
 };
