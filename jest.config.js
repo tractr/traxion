@@ -45,5 +45,6 @@ module.exports = {
     '<rootDir>/libs/schematics',
     '<rootDir>/apps/schematics-e2e',
     '<rootDir>/libs/terraform/deployment-trigger-component',
+    '<rootDir>/libs/terraform/deployment-component',
   ],
 };

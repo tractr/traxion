@@ -15,10 +15,6 @@ import { ConstructOptions } from 'constructs';
 
 import { Container } from '../containers/container';
 import {
-  DeploymentComponent,
-  DeploymentComponentConfig,
-} from '../deployment/deployment.component';
-import {
   VolumeComponent,
   VolumeComponentConfig,
 } from '../volumes/volume.component';
@@ -27,6 +23,10 @@ import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-aws-component';
+import {
+  DeploymentComponent,
+  DeploymentComponentConfig,
+} from '@tractr/terraform-deployment-component';
 import {
   DockerApplication,
   DockerApplications,
