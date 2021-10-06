@@ -208,6 +208,9 @@
     "terraform-s3-user-component": {
       "tags": []
     },
+    "terraform-secrets-component": {
+      "tags": []
+    },
     "terraform-zone-group": {
       "tags": []
     }

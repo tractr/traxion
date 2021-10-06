@@ -2497,6 +2497,50 @@
         }
       }
     },
+    "terraform-secrets-component": {
+      "projectType": "library",
+      "root": "libs/terraform/secrets-component",
+      "sourceRoot": "libs/terraform/secrets-component/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/secrets-component/*.md"],
+            "main": "libs/terraform/secrets-component/src/index.ts",
+            "outputPath": "dist/libs/terraform/secrets-component",
+            "packageJson": "libs/terraform/secrets-component/package.json",
+            "tsConfig": "libs/terraform/secrets-component/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/secrets-component/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/secrets-component/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/secrets-component"]
+        }
+      }
+    },
     "terraform-zone-group": {
       "projectType": "library",
       "root": "libs/terraform/zone-group",

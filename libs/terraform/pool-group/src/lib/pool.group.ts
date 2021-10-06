@@ -4,7 +4,6 @@ import { EntrypointComponent } from './entrypoint.component';
 import { PoolGroupConfig } from './interfaces';
 import { LogsComponent } from './logs.component';
 import { OwnerPicturesComponent } from './owner-pictures/owner-pictures.component';
-import { SecretsComponent } from './secrets/secrets.component';
 import {
   BackendServiceComponent,
   BackendServiceComponentConfig,
@@ -20,6 +19,7 @@ import {
   AwsComponentConstructor,
   AwsProviderConstruct,
 } from '@tractr/terraform-aws-component';
+import { SecretsComponent } from '@tractr/terraform-secrets-component';
 
 /**
  * Following https://medium.com/@bradford_hamilton/deploying-containers-on-amazons-ecs-using-fargate-and-terraform-part-2-2e6f6a3a957f
