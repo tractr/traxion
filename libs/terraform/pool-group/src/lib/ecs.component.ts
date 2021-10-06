@@ -2,7 +2,6 @@ import { EcsCluster } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
 import { ConstructOptions } from 'constructs';
 
-
 import {
   AwsComponent,
   AwsComponentConstructor,
@@ -18,10 +17,7 @@ import {
 } from '@tractr/terraform-ecs-services';
 import { PrivateDnsComponent } from '@tractr/terraform-private-dns-component';
 import type { DockerApplications } from '@tractr/terraform-registry-group';
-import {
-  ReverseProxyComponent,
-  ReverseProxyTaskRoleComponent,
-} from '@tractr/terraform-reverse-proxy-service';
+import { ReverseProxyComponent } from '@tractr/terraform-reverse-proxy-service';
 
 export interface EcsComponentPrivateConfig extends ConstructOptions {
   subnetsIds: string[];
@@ -49,8 +45,6 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
 
   protected readonly serviceDiscoveryComponent: PrivateDnsComponent;
 
-  protected readonly reverseProxyTaskRoleComponent: ReverseProxyTaskRoleComponent;
-
   protected readonly reverseProxyComponent: ReverseProxyComponent;
 
   constructor(
@@ -60,8 +54,6 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
   ) {
     super(scope, id, config);
     this.executionRoleComponent = this.createExecutionRoleComponent();
-    this.reverseProxyTaskRoleComponent =
-      this.createReverseProxyTaskRoleComponent();
     this.ecsCluster = this.createEcsCluster();
     this.serviceDiscoveryComponent = this.createServiceDiscoveryComponent();
     this.reverseProxyComponent = this.createReverseProxyComponent();
@@ -71,10 +63,6 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
     return new ExecutionRoleComponent(this, 'exec', {
       secretsmanagerSecretArn: this.config.secretsmanagerSecretArn,
     });
-  }
-
-  protected createReverseProxyTaskRoleComponent() {
-    return new ReverseProxyTaskRoleComponent(this, 'task');
   }
 
   protected createEcsCluster() {
@@ -107,7 +95,6 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
         this.serviceDiscoveryComponent.getNamespaceIdAsToken(),
       privateDnsNamespaceName:
         this.serviceDiscoveryComponent.getNamespaceNameAsToken(),
-      taskRoleArn: this.reverseProxyTaskRoleComponent.getIamRoleArnAsToken(),
       loadBalancerSecurityGroupId: this.config.loadBalancerSecurityGroupId,
       loadBalancerTargetGroupArn: this.config.loadBalancerTargetGroupArn,
       ...this.config.reverseProxyConfig,

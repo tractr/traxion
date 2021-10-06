@@ -4,8 +4,10 @@ import {
   SecurityGroupConfig,
 } from '@cdktf/provider-aws';
 
+import { ReverseProxyTaskRoleComponent } from './reverse-proxy-task-role.component';
 import { ReverseProxyContainer } from './reverse-proxy.container';
 
+import { AwsProviderConstruct } from '@tractr/terraform-aws-component';
 import {
   Container,
   ServiceComponent,
@@ -13,12 +15,26 @@ import {
 } from '@tractr/terraform-ecs-services';
 
 export interface ReverseProxyComponentConfig extends ServiceComponentConfig {
-  taskRoleArn: string;
   loadBalancerSecurityGroupId: string;
   loadBalancerTargetGroupArn: string;
 }
 
 export class ReverseProxyComponent extends ServiceComponent<ReverseProxyComponentConfig> {
+  protected readonly taskRoleComponent: ReverseProxyTaskRoleComponent;
+
+  constructor(
+    scope: AwsProviderConstruct,
+    id: string,
+    config: ReverseProxyComponentConfig,
+  ) {
+    super(scope, id, config);
+    this.taskRoleComponent = this.createReverseProxyTaskRoleComponent();
+  }
+
+  protected createReverseProxyTaskRoleComponent() {
+    return new ReverseProxyTaskRoleComponent(this, 'task');
+  }
+
   protected getSecurityGroupConfig(): SecurityGroupConfig {
     return {
       ...super.getSecurityGroupConfig(),
@@ -43,7 +59,7 @@ export class ReverseProxyComponent extends ServiceComponent<ReverseProxyComponen
   protected getEcsTaskDefinitionConfig(): EcsTaskDefinitionConfig {
     return {
       ...super.getEcsTaskDefinitionConfig(),
-      taskRoleArn: this.config.taskRoleArn,
+      taskRoleArn: this.taskRoleComponent.getIamRoleArnAsToken(),
     };
   }
 
