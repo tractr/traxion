@@ -1,6 +1,6 @@
 import { kebab } from 'case';
 
-import { ContainerPrivateConfig, ContainerPublicConfig } from '../interfaces';
+import { ContainerInternalConfig, ContainerPublicConfig } from '../interfaces';
 import { BackendContainer } from './backend-container';
 
 export interface HttpContainerPublicConfig extends ContainerPublicConfig {
@@ -15,7 +15,7 @@ export interface HttpContainerPublicConfig extends ContainerPublicConfig {
 }
 
 export type HttpContainerConfig = HttpContainerPublicConfig &
-  ContainerPrivateConfig;
+  ContainerInternalConfig;
 
 /**
  * This container is meant to be used by another one, as its backend

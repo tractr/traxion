@@ -47,7 +47,7 @@ export type MemoryValue =
   | '16384'
   | '30720';
 
-export interface ServiceComponentPrivateConfig extends ConstructOptions {
+export interface ServiceComponentInternalConfig extends ConstructOptions {
   vpcId: string;
   subnetsIds: string[];
   logsGroup: string;
@@ -69,7 +69,7 @@ export interface ServiceComponentPublicConfig extends ConstructOptions {
   desiredCount: number;
 }
 
-export type ServiceComponentConfig = ServiceComponentPrivateConfig &
+export type ServiceComponentConfig = ServiceComponentInternalConfig &
   ServiceComponentPublicConfig;
 
 export abstract class ServiceComponent<

@@ -57,7 +57,7 @@ export interface MountPoint {
   containerPath: string;
 }
 
-export interface ContainerPrivateConfig {
+export interface ContainerInternalConfig {
   name: string;
 }
 
@@ -69,4 +69,4 @@ export interface ContainerPublicConfig {
   environments?: (Environment | EnvironmentCb)[];
 }
 
-export type ContainerConfig = ContainerPrivateConfig & ContainerPublicConfig;
+export type ContainerConfig = ContainerInternalConfig & ContainerPublicConfig;

@@ -1,6 +1,6 @@
 import {
-  BackendServiceComponentPrivateConfig,
-  ContainerPrivateConfig,
+  BackendServiceComponentInternalConfig,
+  ContainerInternalConfig,
   HttpContainerPublicConfig,
   ServiceComponentPublicConfig,
 } from '@tractr/terraform-ecs-services';
@@ -9,10 +9,10 @@ export interface PwaContainerPublicConfig extends HttpContainerPublicConfig {
   apiPath: string;
 }
 export type PwaContainerConfig = PwaContainerPublicConfig &
-  ContainerPrivateConfig;
+  ContainerInternalConfig;
 
 export interface PwaComponentPublicConfig extends ServiceComponentPublicConfig {
   containerConfig: PwaContainerPublicConfig;
 }
-export type PwaComponentConfig = BackendServiceComponentPrivateConfig &
+export type PwaComponentConfig = BackendServiceComponentInternalConfig &
   PwaComponentPublicConfig;

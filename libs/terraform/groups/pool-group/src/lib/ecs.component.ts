@@ -19,7 +19,7 @@ import { PrivateDnsComponent } from '@tractr/terraform-private-dns-component';
 import type { DockerApplications } from '@tractr/terraform-registry-group';
 import { ReverseProxyComponent } from '@tractr/terraform-reverse-proxy-service';
 
-export interface EcsComponentPrivateConfig extends ConstructOptions {
+export interface EcsComponentInternalConfig extends ConstructOptions {
   subnetsIds: string[];
   loadBalancerSecurityGroupId: string;
   loadBalancerTargetGroupArn: string;
@@ -35,7 +35,7 @@ export interface EcsComponentPublicConfig extends ConstructOptions {
   reverseProxyConfig: ServiceComponentPublicConfig;
 }
 
-export type EcsComponentConfig = EcsComponentPrivateConfig &
+export type EcsComponentConfig = EcsComponentInternalConfig &
   EcsComponentPublicConfig;
 
 export class EcsComponent extends AwsComponent<EcsComponentConfig> {

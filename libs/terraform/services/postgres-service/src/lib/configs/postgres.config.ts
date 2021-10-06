@@ -1,6 +1,6 @@
 import {
-  BackendServiceComponentPrivateConfig,
-  ContainerPrivateConfig,
+  BackendServiceComponentInternalConfig,
+  ContainerInternalConfig,
   ContainerPublicConfig,
   ServiceComponentPublicConfig,
 } from '@tractr/terraform-ecs-services';
@@ -9,11 +9,11 @@ export interface PostgresContainerPublicConfig extends ContainerPublicConfig {
   dbName: string;
 }
 export type PostgresContainerConfig = PostgresContainerPublicConfig &
-  ContainerPrivateConfig;
+  ContainerInternalConfig;
 
 export interface PostgresComponentPublicConfig
   extends ServiceComponentPublicConfig {
   containerConfig: PostgresContainerPublicConfig;
 }
-export type PostgresComponentConfig = BackendServiceComponentPrivateConfig &
+export type PostgresComponentConfig = BackendServiceComponentInternalConfig &
   PostgresComponentPublicConfig;
