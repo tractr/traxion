@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.3.4](https://github.com/tractr/stack/compare/nestjs-file-storage-0.3.3...nestjs-file-storage-0.3.4) (2021-10-06)
+
+
+### Bug Fixes
+
+* update nestjs file storage dtos ([#278](https://github.com/tractr/stack/issues/278)) ([23e20fc](https://github.com/tractr/stack/commit/23e20fcb3cb10e91630bda9341aa909a5c1b2b74))
+
+
+
 ## [0.3.3](https://github.com/tractr/stack/compare/nestjs-file-storage-0.3.2...nestjs-file-storage-0.3.3) (2021-09-08)
 
 
