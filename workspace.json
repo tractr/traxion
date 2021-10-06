@@ -1148,6 +1148,36 @@
         }
       }
     },
+    "hapify-templates-react-admin": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/react-admin",
+      "sourceRoot": "libs/hapify/templates/react-admin/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/hapify/templates/react-admin/*.md"],
+            "main": "libs/hapify/templates/react-admin/index.js",
+            "outputPath": "dist/libs/hapify/templates/react-admin",
+            "packageJson": "libs/hapify/templates/react-admin/package.json",
+            "tsConfig": "libs/hapify/templates/react-admin/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        }
+      }
+    },
     "hapify-templates-rest-dtos": {
       "projectType": "library",
       "root": "libs/hapify/templates/rest-dtos",
