@@ -1,0 +1,162 @@
+import * as React from 'react';
+import {
+  Create,
+  CreateProps,
+  Edit,
+  EditProps,
+  SimpleForm,
+  required,
+  <<=getImports().join(',\n  ')>>
+} from 'react-admin';
+<<if Fields rich and not internal>>
+import RichTextInput from 'ra-input-rich-text';
+<<endif>>
+ 
+export const <<Model pascal>>Create = (props: CreateProps) => (
+  <Create {...props}>
+    <SimpleForm>
+<<for Fields not internal field>>
+    <<if field entity>>
+        <<<printEntityInput(field)>>>
+    <<else>>
+        <<<printInput(field)>>>
+    <<endif>>
+<<endfor>>
+    </SimpleForm>
+  </Create>
+);
+
+export const <<Model pascal>>Edit = (props: EditProps) => (
+  <Edit {...props}>
+    <SimpleForm>
+<<for Fields not internal field>>
+    <<if field entity>>
+        <<<printEntityInput(field)>>>
+    <<else>>
+        <<<printInput(field)>>>
+    <<endif>>
+<<endfor>>
+    </SimpleForm>
+  </Edit>
+);
+
+<<< function printInput(field) { >>>
+
+<<if field string>>
+    <<if field rich>>
+      <RichTextInput
+    <<elseif field password>>
+      <PasswordInput
+    <<else>>
+      <TextInput
+        <<if field email>>
+        type="email"
+        <<elseif field url>>
+        type="url"
+        <<elseif field text>>
+        multiline
+        <<endif>>
+    <<endif>>
+<<elseif field boolean>>
+    <<if field nullable>>
+      <NullableBooleanInput
+    <<else>>
+      <BooleanInput
+        initialValue={false}
+    <<endif>>
+<<elseif field number>>
+      <NumberInput
+    <<if field latitude>>
+        min={-90} max={90}
+    <<elseif field longitude>>
+        min={-180} max={180}
+    <<elseif field integer>>
+        step={1}
+    <<endif>>
+<<elseif field enum>>
+      <AutocompleteInput
+        choices={[
+    <<for field.enum e>>
+          { id: '<<e camel>>', name: '<<e camel>>' },
+    <<endfor>>
+        ]}
+<<elseif field datetime>>
+    <<if field date>>
+      <DateInput
+    <<else>>
+      <DateTimeInput
+    <<endif>>
+<<else>>
+      <TextInput
+<<endif>>
+
+    <<if field not nullable>>
+        validate={required()}
+    <<endif>>
+        source="<<field camel>>"
+        label="<<field capital>>"
+      />
+
+<<< } >>>
+
+<<< function printEntityInput(field) { >>>
+
+<<if field multiple>>
+      <ReferenceArrayInput
+        source="<<field camel>>"
+        label="<<field capital>>"
+        reference="<<field.model camel>>">
+          <SelectArrayInput optionText="<<=labelFieldCamel(field.model)>>" />
+      </ReferenceArrayInput>
+<<else>>
+      <ReferenceInput
+        source="<<field camel>>"
+        label="<<field capital>>"
+        reference="<<field.model camel>>">
+          <SelectInput optionText="<<=labelFieldCamel(field.model)>>" />
+      </ReferenceInput>
+<<endif>>
+
+<<< } >>>
+
+<<<
+function fieldInput(field) {
+    switch(field.type) {
+        case 'string':
+            switch(field.subtype) {
+                case 'rich': return ['RichTextInput'];
+                case 'password': return ['PasswordInput'];
+                default: return ['TextInput'];
+            }
+        case 'boolean': return field.nullable ? ['NullableBooleanInput'] : ['BooleanInput'];
+        case 'number': return ['NumberInput'];
+        case 'enum': return ['AutocompleteInput'];
+        case 'datetime':
+            switch(field.subtype) {
+                case 'date': return ['DateInput'];
+                default: return ['DateTimeInput'];
+            }
+        case 'entity':
+            return field.multiple ? 
+                ['ReferenceArrayInput', 'SelectArrayInput'] :
+                ['ReferenceInput', 'SelectInput'];
+        default: return ['TextInput'];
+    }
+}
+function labelFieldCamel(model) {
+    const label = model.fields.label.length ? 
+        model.fields.label[0] : model.fields.primary;
+    return label.names.camel;
+}
+function getImports() {
+    const output = [];
+    
+    root.fields
+        .filter(field => !field.internal)
+        .forEach(field => {
+            output.push(...fieldInput(field));
+        });
+    return [...new Set(output)]
+        .filter(f => f !== 'RichTextInput');
+}
+>>>

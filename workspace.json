@@ -1148,6 +1148,50 @@
         }
       }
     },
+    "hapify-templates-react-admin": {
+      "projectType": "library",
+      "root": "libs/hapify/templates/react-admin",
+      "sourceRoot": "libs/hapify/templates/react-admin/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/hapify/templates/react-admin/*.md"],
+            "main": "libs/hapify/templates/react-admin/src/index.ts",
+            "outputPath": "dist/libs/hapify/templates/react-admin",
+            "packageJson": "libs/hapify/templates/react-admin/package.json",
+            "tsConfig": "libs/hapify/templates/react-admin/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hapify/templates/react-admin/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/hapify/templates/react-admin/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/hapify/templates/react-admin"]
+        }
+      }
+    },
     "hapify-templates-rest-dtos": {
       "projectType": "library",
       "root": "libs/hapify/templates/rest-dtos",
