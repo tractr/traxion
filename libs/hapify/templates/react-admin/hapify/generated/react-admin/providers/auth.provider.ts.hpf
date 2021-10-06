@@ -1,10 +1,8 @@
 import { AuthProvider } from 'ra-core';
 
 export function authProvider(apiUrl: string | URL): AuthProvider {
-  console.log(apiUrl);
   return {
     login: ({ username, password }) => {
-      console.log({ username, password });
       const request = new Request(`${apiUrl}/login`, {
         method: 'POST',
         body: JSON.stringify({ email: username, password }),
@@ -58,7 +56,6 @@ export function authProvider(apiUrl: string | URL): AuthProvider {
     },
     getPermissions: async () => {
       const request = new Request(`${apiUrl}/me`);
-      console.log('check user permission');
       return await fetch(request)
         .then((response) => {
           if (response.status < 200 || response.status >= 300) {
@@ -67,7 +64,6 @@ export function authProvider(apiUrl: string | URL): AuthProvider {
           return response.json();
         })
         .then((user) => {
-          console.log(user, user.roles.includes('admin'));
           if (user.roles.includes('admin')) return;
 
           throw new Error('no admin');

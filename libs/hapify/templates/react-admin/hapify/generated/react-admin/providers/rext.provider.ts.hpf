@@ -46,7 +46,6 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
       const { field, order } = params.sort;
  
       // TODO make the filter works
-      console.log(field, params.filter);
       return lastValueFrom(
         (
           rextClient[resource as unknown as RessourceType].findMany$({
@@ -96,7 +95,6 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
       };
  
       // TODO make the filter works
-      console.log(query, field, params.filter);
       return lastValueFrom(
         (
           rextClient[resource as unknown as RessourceType].findMany$({

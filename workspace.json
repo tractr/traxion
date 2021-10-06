@@ -1157,7 +1157,7 @@
           "executor": "@nrwl/node:package",
           "options": {
             "assets": ["libs/hapify/templates/react-admin/*.md"],
-            "main": "libs/hapify/templates/react-admin/src/index.ts",
+            "main": "libs/hapify/templates/react-admin/index.js",
             "outputPath": "dist/libs/hapify/templates/react-admin",
             "packageJson": "libs/hapify/templates/react-admin/package.json",
             "tsConfig": "libs/hapify/templates/react-admin/tsconfig.lib.json"
