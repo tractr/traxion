@@ -1,9 +1,23 @@
 <div style="text-align: center">
-  <h1>Welcome to pwa!</h1>
-  <img
-    width="450"
-    src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-    alt="Nx - Smart, Extensible Build Framework"
-  />
+  <h1>Welcome to Cali POC!</h1>
 </div>
-<div>Message: {{ hello$ | async }}</div>
+<div>
+  <h2>Cameras</h2>
+  <ul
+    *ngIf="cameras$ | async as cameras"
+    style="display: flex; justify-content: space-between"
+  >
+    <li *ngFor="let camera of cameras">
+      <div>camera: {{ camera.id }}</div>
+      <div>status {{ camera.status }}</div>
+    </li>
+  </ul>
+  <h2>Alerts</h2>
+  <ul *ngIf="alerts$ | async as alerts">
+    <li *ngFor="let alert of alerts">
+      <div>camera: {{ alert.camera }}</div>
+      <div>type: {{ alert.type }}</div>
+      <div>time: {{ alert.time }}</div>
+    </li>
+  </ul>
+</div>

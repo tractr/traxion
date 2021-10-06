@@ -5,6 +5,7 @@ import { DatabaseModule } from '@tractr/nestjs-database';
 import { AppService } from './app.service';
 import { SharedModule } from './shared.module';
 
+import { ApiGraphqlModule } from '@cali/api-graphql';
 import { CameraMonitoringModule } from '@cali/camera-monitoring';
 import { MessageBrokerAlertModule } from '@cali/message-broker-alert';
 import { ModelsModule } from '@generated/nestjs-models';
@@ -17,6 +18,7 @@ import { ModelsModule } from '@generated/nestjs-models';
     LoggerModule,
     MessageBrokerAlertModule,
     CameraMonitoringModule,
+    ApiGraphqlModule,
   ],
   controllers: [],
   providers: [AppService],

@@ -4,11 +4,16 @@ import { MessageBrokerAlertSubscribe } from '@cali/message-broker-alert';
 
 @Injectable()
 export class AppService {
+  /**
+   * Log Alersts from message broker into the console
+   *
+   * @param alert - Alert to log, coming from the message broker
+   */
   @MessageBrokerAlertSubscribe({
-    queue: 'alert_queue',
+    queue: 'alert_logs',
     routingKey: '',
   })
-  handleAlert(message) {
-    console.info('ALERT MESSAGE: ', message);
+  logAlert(alert) {
+    console.info('ALERT MESSAGE: ', alert);
   }
 }

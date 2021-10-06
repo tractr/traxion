@@ -14,6 +14,9 @@
     "api": {
       "tags": []
     },
+    "api-graphql": {
+      "tags": []
+    },
     "camera-monitoring": {
       "tags": []
     },

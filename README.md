@@ -9,11 +9,11 @@ In order to use this repository and run the project, you will need:
 
 Some packages we use for development are not public yet (they will be open
 sourced soon as they reach a more mature state). As those packages are owned by
-the tractr organisation, you will have to update your npm configuration to be
+the tractr organization, you will have to update your npm configuration to be
 authenticated as a tractr member to be able to install them. You must follow the
 next steps:
 
-- Get the npm authorisation token to access privaets packages. It can be found
+- Get the npm authorization token to access privates packages. It can be found
   in bitwarden.
 
 -After that, you must configure your npm client to use this authentication token
@@ -40,7 +40,7 @@ located in your $HOME directory)
 - At the root of the repository, you will find a `.env.example` that contains
   the list of the required environment variables of the project. This file
   should copied to `.env` and completed with the required secrets. This file
-  should never be commited as it contains keys that should not be accessible in
+  should never be committed as it contains keys that should not be accessible in
   the repository.
 - Run hapify to generate boilerplate code with `npm run generate` and you're
   good to go!
