@@ -1,5 +1,7 @@
 import { IsInt, IsMimeType } from 'class-validator';
 
+import { TransformStringToInt } from '@tractr/common';
+
 export class GetPresignedUploadUrlQueryDto {
   /**
    * Mime type of the file that will be uploaded
@@ -11,5 +13,6 @@ export class GetPresignedUploadUrlQueryDto {
    * File size of the file that will be uploaded
    */
   @IsInt()
+  @TransformStringToInt()
   fileSize!: number;
 }
