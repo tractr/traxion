@@ -47,5 +47,7 @@ module.exports = {
     '<rootDir>/libs/terraform/deployment-trigger-component',
     '<rootDir>/libs/terraform/deployment-component',
     '<rootDir>/libs/terraform/secrets-component',
+    '<rootDir>/libs/terraform/volume-component',
+    '<rootDir>/libs/terraform/private-dns-component',
   ],
 };

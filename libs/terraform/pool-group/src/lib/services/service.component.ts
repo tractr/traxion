@@ -14,10 +14,7 @@ import { Token } from 'cdktf';
 import { ConstructOptions } from 'constructs';
 
 import { Container } from '../containers/container';
-import {
-  VolumeComponent,
-  VolumeComponentConfig,
-} from '../volumes/volume.component';
+
 
 import {
   AwsComponent,
@@ -31,6 +28,10 @@ import {
   DockerApplication,
   DockerApplications,
 } from '@tractr/terraform-registry-group';
+import {
+  VolumeComponent,
+  VolumeComponentConfig,
+} from '@tractr/terraform-volume-component';
 
 // Check cpu/memory pairs: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
 export type CpuValue = '256' | '512' | '1024' | '2048' | '4096';

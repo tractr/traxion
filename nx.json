@@ -196,6 +196,9 @@
     "terraform-postgres-service": {
       "tags": []
     },
+    "terraform-private-dns-component": {
+      "tags": []
+    },
     "terraform-pwa-service": {
       "tags": []
     },
@@ -209,6 +212,9 @@
       "tags": []
     },
     "terraform-secrets-component": {
+      "tags": []
+    },
+    "terraform-volume-component": {
       "tags": []
     },
     "terraform-zone-group": {

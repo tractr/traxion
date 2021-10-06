@@ -102,6 +102,9 @@
       "@tractr/terraform-postgres-service": [
         "libs/terraform/postgres-service/src/index.ts"
       ],
+      "@tractr/terraform-private-dns-component": [
+        "libs/terraform/private-dns-component/src/index.ts"
+      ],
       "@tractr/terraform-pwa-service": [
         "libs/terraform/pwa-service/src/index.ts"
       ],
@@ -116,6 +119,9 @@
       ],
       "@tractr/terraform-secrets-component": [
         "libs/terraform/secrets-component/src/index.ts"
+      ],
+      "@tractr/terraform-volume-component": [
+        "libs/terraform/volume-component/src/index.ts"
       ],
       "@tractr/terraform-zone-group": ["libs/terraform/zone-group/src/index.ts"]
     },

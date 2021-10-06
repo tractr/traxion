@@ -2321,6 +2321,38 @@
         }
       }
     },
+    "terraform-private-dns-component": {
+      "projectType": "library",
+      "root": "libs/terraform/private-dns-component",
+      "sourceRoot": "libs/terraform/private-dns-component/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/private-dns-component/*.md"],
+            "main": "libs/terraform/private-dns-component/src/index.ts",
+            "outputPath": "dist/libs/terraform/private-dns-component",
+            "packageJson": "libs/terraform/private-dns-component/package.json",
+            "tsConfig": "libs/terraform/private-dns-component/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/private-dns-component/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/private-dns-component/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/private-dns-component"]
+        }
+      }
+    },
     "terraform-pwa-service": {
       "projectType": "library",
       "root": "libs/terraform/pwa-service",
@@ -2538,6 +2570,50 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/terraform/secrets-component"]
+        }
+      }
+    },
+    "terraform-volume-component": {
+      "projectType": "library",
+      "root": "libs/terraform/volume-component",
+      "sourceRoot": "libs/terraform/volume-component/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/volume-component/*.md"],
+            "main": "libs/terraform/volume-component/src/index.ts",
+            "outputPath": "dist/libs/terraform/volume-component",
+            "packageJson": "libs/terraform/volume-component/package.json",
+            "tsConfig": "libs/terraform/volume-component/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/volume-component/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/volume-component/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/volume-component"]
         }
       }
     },
