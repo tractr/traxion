@@ -1,6 +1,34 @@
 # API Backend service
 
-## Configuration
+Provides an API service with a single API container.
+
+## Configuration example
+
+```typescript
+const api = new ApiComponent(this, 'api', {
+  apiContainerConfig: {
+    imageTag: 'latest',
+    db: {
+      name: 'api',
+      nameTest: 'testing',
+      port: 5432,
+      schema: 'public',
+    },
+    path: {
+      prefix: `/api`,
+      stripPrefix: false,
+    },
+    apiPath: '/api',
+    pwaPath: '/',
+  },
+  desiredCount: 1,
+  cpu: '256',
+  memory: '512',
+});
+```
+
+
+## Environments
 
 ### Required secrets
 

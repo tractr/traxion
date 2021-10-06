@@ -62,6 +62,7 @@ export interface ContainerPrivateConfig {
 }
 
 export interface ContainerPublicConfig {
+  imageTag: string;
   cpu?: number;
   memory?: number;
   secrets?: (string | SecretMap)[];

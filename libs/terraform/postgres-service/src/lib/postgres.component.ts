@@ -1,4 +1,4 @@
-import { POSTGRES_DEFAULT_CONFIG, PostgresComponentConfig } from './configs';
+import { PostgresComponentConfig } from './configs';
 import { PostgresContainer } from './postgres.container';
 
 import {
@@ -14,8 +14,7 @@ export class PostgresComponent extends BackendServiceComponent<PostgresComponent
   protected getContainers(): Container[] {
     return [
       new PostgresContainer(this, {
-        ...POSTGRES_DEFAULT_CONFIG.postgresContainerConfig,
-        ...this.config.postgresContainerConfig,
+        ...this.config.containerConfig,
         name: this.serviceName,
       }),
     ];

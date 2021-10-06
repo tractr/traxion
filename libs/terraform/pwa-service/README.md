@@ -1,8 +1,21 @@
 # terraform-pwa-service
 
-This library was generated with [Nx](https://nx.dev).
+Provides a PWA service with a single PWA container.
 
-## Running unit tests
+## Configuration example
 
-Run `nx test terraform-pwa-service` to execute the unit tests via
-[Jest](https://jestjs.io).
+```typescript
+const pwa = new PwaComponent(this, 'pwa', {
+  containerConfig: {
+    imageTag: 'latest',
+    apiPath: '/api',
+    path: {
+      prefix: `/`,
+      stripPrefix: false,
+    },
+  },
+  desiredCount: 1,
+  cpu: '256',
+  memory: '512',
+});
+```

@@ -1,10 +1,7 @@
-import { ApiComponentPublicConfig } from '@tractr/terraform-api-service';
 import {
   BackendServiceComponentPrivateConfig,
-  ContainerConfig,
   ContainerPrivateConfig,
   ContainerPublicConfig,
-  HttpContainerPublicConfig,
   ServiceComponentPublicConfig,
 } from '@tractr/terraform-pool-group';
 
@@ -16,17 +13,7 @@ export type PostgresContainerConfig = PostgresContainerPublicConfig &
 
 export interface PostgresComponentPublicConfig
   extends ServiceComponentPublicConfig {
-  postgresContainerConfig: PostgresContainerPublicConfig;
+  containerConfig: PostgresContainerPublicConfig;
 }
 export type PostgresComponentConfig = BackendServiceComponentPrivateConfig &
   PostgresComponentPublicConfig;
-
-export const POSTGRES_DEFAULT_CONFIG: PostgresComponentPublicConfig = {
-  postgresContainerConfig: {
-    dbName: 'api',
-  },
-  desiredCount: 1,
-  cpu: '256',
-  memory: '512',
-  dockerImageTags: '13-alpine',
-};

@@ -65,7 +65,7 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
   }
 
   getImageTag(): string {
-    return this.service.getDockerImageTag(this.getAppName());
+    return this.config.imageTag;
   }
 
   getMountPoints(): MountPoint[] {

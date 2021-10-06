@@ -1,8 +1,17 @@
 # terraform-postgres-service
 
-This library was generated with [Nx](https://nx.dev).
+Provides a database service with a single Postgres container.
 
-## Running unit tests
+## Configuration example
 
-Run `nx test terraform-postgres-service` to execute the unit tests via
-[Jest](https://jestjs.io).
+```typescript
+const postgres = new PostgresComponent(this, 'postgres', {
+  containerConfig: {
+    imageTag: '13-alpine',
+    dbName: 'api',
+  },
+  desiredCount: 1,
+  cpu: '256',
+  memory: '512',
+});
+```

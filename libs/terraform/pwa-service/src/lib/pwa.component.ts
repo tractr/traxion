@@ -1,4 +1,4 @@
-import { PWA_DEFAULT_CONFIG, PwaComponentConfig } from './configs';
+import { PwaComponentConfig } from './configs';
 import { PwaContainer } from './pwa.container';
 
 import {
@@ -14,8 +14,7 @@ export class PwaComponent extends BackendServiceComponent<PwaComponentConfig> {
   protected getContainers(): Container[] {
     return [
       new PwaContainer(this, {
-        ...PWA_DEFAULT_CONFIG.pwaContainerConfig,
-        ...this.config.pwaContainerConfig,
+        ...this.config.containerConfig,
         name: this.serviceName,
       }),
     ];

@@ -27,24 +27,3 @@ export interface ApiComponentPublicConfig extends ServiceComponentPublicConfig {
 }
 export type ApiComponentConfig = BackendServiceComponentPrivateConfig &
   ApiComponentPublicConfig;
-
-export const API_DEFAULT_CONFIG: ApiComponentPublicConfig = {
-  apiContainerConfig: {
-    db: {
-      name: 'api',
-      nameTest: 'testing',
-      port: 5432,
-      schema: 'public',
-    },
-    path: {
-      prefix: `/api`,
-      stripPrefix: false,
-    },
-    apiPath: '/api',
-    pwaPath: '/',
-  },
-  desiredCount: 1,
-  cpu: '256',
-  memory: '512',
-  dockerImageTags: 'latest',
-};
