@@ -190,6 +190,9 @@
     "terraform-postgres-service": {
       "tags": []
     },
+    "terraform-proxy-service": {
+      "tags": []
+    },
     "terraform-pwa-service": {
       "tags": []
     },
