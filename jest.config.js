@@ -44,5 +44,6 @@ module.exports = {
     '<rootDir>/apps/terraform',
     '<rootDir>/libs/schematics',
     '<rootDir>/apps/schematics-e2e',
+    '<rootDir>/libs/hapify/templates/react-admin',
   ],
 };
