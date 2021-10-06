@@ -87,8 +87,8 @@
         "libs/terraform/aws-component/src/index.ts"
       ],
       "@tractr/terraform-aws-stack": ["libs/terraform/aws-stack/src/index.ts"],
-      "@tractr/terraform-deployment-trigger": [
-        "libs/terraform/deployment-trigger/src/index.ts"
+      "@tractr/terraform-deployment-trigger-component": [
+        "libs/terraform/deployment-trigger-component/src/index.ts"
       ],
       "@tractr/terraform-network-group": [
         "libs/terraform/network-group/src/index.ts"

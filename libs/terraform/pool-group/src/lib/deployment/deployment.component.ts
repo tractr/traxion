@@ -12,8 +12,7 @@ import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-aws-component';
-import { DeploymentTriggerComponent } from '@tractr/terraform-deployment-trigger';
-
+import { DeploymentTriggerComponent } from '@tractr/terraform-deployment-trigger-component';
 
 export interface DeploymentComponentConfig extends ConstructOptions {
   imageDefinitions: string;

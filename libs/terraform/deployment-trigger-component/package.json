@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/terraform-deployment-trigger",
+  "name": "@tractr/terraform-deployment-trigger-component",
   "version": "0.0.1",
   "repository": {
     "type": "git",

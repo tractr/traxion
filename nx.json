@@ -181,7 +181,7 @@
     "terraform-aws-stack": {
       "tags": []
     },
-    "terraform-deployment-trigger": {
+    "terraform-deployment-trigger-component": {
       "tags": []
     },
     "terraform-network-group": {
