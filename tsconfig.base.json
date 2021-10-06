@@ -96,6 +96,9 @@
       "@tractr/terraform-network-group": [
         "libs/terraform/network-group/src/index.ts"
       ],
+      "@tractr/terraform-owner-pictures-component": [
+        "libs/terraform/owner-pictures-component/src/index.ts"
+      ],
       "@tractr/terraform-pool-group": [
         "libs/terraform/pool-group/src/index.ts"
       ],

@@ -2233,6 +2233,52 @@
         }
       }
     },
+    "terraform-owner-pictures-component": {
+      "projectType": "library",
+      "root": "libs/terraform/owner-pictures-component",
+      "sourceRoot": "libs/terraform/owner-pictures-component/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/owner-pictures-component/*.md"],
+            "main": "libs/terraform/owner-pictures-component/src/index.ts",
+            "outputPath": "dist/libs/terraform/owner-pictures-component",
+            "packageJson": "libs/terraform/owner-pictures-component/package.json",
+            "tsConfig": "libs/terraform/owner-pictures-component/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/terraform/owner-pictures-component/**/*.ts"
+            ]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/owner-pictures-component/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/owner-pictures-component"]
+        }
+      }
+    },
     "terraform-pool-group": {
       "projectType": "library",
       "root": "libs/terraform/pool-group",

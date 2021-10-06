@@ -190,6 +190,9 @@
     "terraform-network-group": {
       "tags": []
     },
+    "terraform-owner-pictures-component": {
+      "tags": []
+    },
     "terraform-pool-group": {
       "tags": []
     },
