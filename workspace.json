@@ -2343,6 +2343,18 @@
             "lintFilePatterns": ["libs/terraform/private-dns-component/**/*.ts"]
           }
         },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {

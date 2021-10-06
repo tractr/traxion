@@ -2,7 +2,6 @@ import { EcsCluster } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
 import { ConstructOptions } from 'constructs';
 
-import { PrivateDnsComponent } from './private-dns/private-dns.component';
 import { ReverseProxyTaskRoleComponent } from './reverse-proxy/reverse-proxy-task-role.component';
 import { ReverseProxyComponent } from './reverse-proxy/reverse-proxy.component';
 import {
@@ -21,6 +20,7 @@ import {
   AwsComponentConstructor,
   AwsProviderConstruct,
 } from '@tractr/terraform-aws-component';
+import { PrivateDnsComponent } from '@tractr/terraform-private-dns-component';
 import type { DockerApplications } from '@tractr/terraform-registry-group';
 
 export interface EcsComponentPrivateConfig extends ConstructOptions {
