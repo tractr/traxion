@@ -196,9 +196,6 @@
     "terraform-registry-group": {
       "tags": []
     },
-    "terraform-reverse-proxy-service": {
-      "tags": []
-    },
     "terraform-s3-component": {
       "tags": []
     },
