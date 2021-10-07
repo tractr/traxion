@@ -1,6 +1,6 @@
 {
   "name": "@tractr/hapify-templates-react-admin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Template to generate a react admin configuration",
   "repository": {
     "type": "git",
