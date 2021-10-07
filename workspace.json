@@ -1918,7 +1918,7 @@
         "apply": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["terraform apply"],
+            "commands": ["terraform init", "terraform apply"],
             "cwd": "./dist/cdktf.out/stacks/main",
             "parallel": false
           }

@@ -75,17 +75,11 @@ export class MainStack extends AwsStack<AwsStackConfig> {
       });
 
       // Add a pwa as a http service
-      const pwaOverrideConfig: PwaComponentPublicConfig = {
-        containerConfig: { imageTag: environment.pwaImageTag },
-      };
-      const mergedPwaConfig = deepmerge(PwaConfig, pwaOverrideConfig);
+      const mergedPwaConfig = deepmerge(PwaConfig, environment.pwaConfig);
       poolGroup.addHttpService(PwaComponent, 'pwa', mergedPwaConfig);
 
       // Add a api as a http service
-      const apiOverrideConfig: ApiComponentPublicConfig = {
-        containerConfig: { imageTag: environment.apiImageTag },
-      };
-      const mergedApiConfig = deepmerge(ApiConfig, apiOverrideConfig);
+      const mergedApiConfig = deepmerge(ApiConfig, environment.apiConfig);
       const api = poolGroup.addHttpService(
         ApiComponent,
         'api',

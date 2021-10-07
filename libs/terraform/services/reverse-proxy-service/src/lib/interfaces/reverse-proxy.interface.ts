@@ -18,6 +18,7 @@ export interface ReverseProxyComponentInternalConfig
   extends ServiceComponentInternalConfig {
   loadBalancerSecurityGroupId: string;
   loadBalancerTargetGroupArn: string;
+  taskRoleArn: string;
 }
 
 export interface ReverseProxyComponentDefaultConfig

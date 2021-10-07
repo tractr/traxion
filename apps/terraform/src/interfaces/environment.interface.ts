@@ -1,3 +1,6 @@
+import { ApiComponentPublicConfig } from '@tractr/terraform-api-service';
+import { PwaComponentPublicConfig } from '@tractr/terraform-pwa-service';
+
 export interface Environment {
   /**
    * Firendly name of the environment
@@ -12,11 +15,11 @@ export interface Environment {
    */
   subDomain: string;
   /**
-   * PWA docker container tag to deploy
+   * PWA config override
    */
-  pwaImageTag: string;
+  pwaConfig: PwaComponentPublicConfig;
   /**
-   * API docker container tag to deploy
+   * API config override
    */
-  apiImageTag: string;
+  apiConfig: ApiComponentPublicConfig;
 }

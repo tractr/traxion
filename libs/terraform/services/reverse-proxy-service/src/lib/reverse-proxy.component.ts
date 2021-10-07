@@ -8,31 +8,14 @@ import {
   ReverseProxyComponentConfig,
   ReverseProxyComponentDefaultConfig,
 } from './interfaces';
-import { ReverseProxyTaskRoleComponent } from './reverse-proxy-task-role.component';
 import { ReverseProxyContainer } from './reverse-proxy.container';
 
-import { AwsProviderConstruct } from '@tractr/terraform-aws-component';
 import { Container, ServiceComponent } from '@tractr/terraform-ecs-services';
 
 export class ReverseProxyComponent extends ServiceComponent<
   ReverseProxyComponentConfig,
   ReverseProxyComponentDefaultConfig
 > {
-  protected readonly taskRoleComponent: ReverseProxyTaskRoleComponent;
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: ReverseProxyComponentConfig,
-  ) {
-    super(scope, id, config);
-    this.taskRoleComponent = this.createReverseProxyTaskRoleComponent();
-  }
-
-  protected createReverseProxyTaskRoleComponent() {
-    return new ReverseProxyTaskRoleComponent(this, 'task');
-  }
-
   protected getSecurityGroupConfig(): SecurityGroupConfig {
     return {
       ...super.getSecurityGroupConfig(),
@@ -57,7 +40,7 @@ export class ReverseProxyComponent extends ServiceComponent<
   protected getEcsTaskDefinitionConfig(): EcsTaskDefinitionConfig {
     return {
       ...super.getEcsTaskDefinitionConfig(),
-      taskRoleArn: this.taskRoleComponent.getIamRoleArnAsToken(),
+      taskRoleArn: this.config.taskRoleArn,
     };
   }
 

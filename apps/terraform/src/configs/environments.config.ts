@@ -5,14 +5,14 @@ export const Environments: Environment[] = [
     name: 'Production',
     resourceId: 'prod',
     subDomain: 'www',
-    pwaImageTag: 'production',
-    apiImageTag: 'production',
+    pwaConfig: { containerConfig: { imageTag: 'production' } },
+    apiConfig: { containerConfig: { imageTag: 'production' }, desiredCount: 2 },
   },
   {
     name: 'Staging',
     resourceId: 'staging',
     subDomain: 'staging',
-    pwaImageTag: 'latest',
-    apiImageTag: 'latest',
+    pwaConfig: { containerConfig: { imageTag: 'latest' } },
+    apiConfig: { containerConfig: { imageTag: 'latest' } },
   },
 ];

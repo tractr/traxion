@@ -17,7 +17,10 @@ import {
   ServiceComponentPublicConfig,
 } from '@tractr/terraform-ecs-services';
 import { PrivateDnsComponent } from '@tractr/terraform-private-dns-component';
-import { ReverseProxyComponent } from '@tractr/terraform-reverse-proxy-service';
+import {
+  ReverseProxyComponent,
+  ReverseProxyTaskRoleComponent,
+} from '@tractr/terraform-reverse-proxy-service';
 
 export class EcsComponent extends AwsComponent<EcsComponentConfig> {
   protected readonly executionRoleComponent: ExecutionRoleComponent;
@@ -25,6 +28,8 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
   protected readonly ecsCluster: EcsCluster;
 
   protected readonly serviceDiscoveryComponent: PrivateDnsComponent;
+
+  protected readonly reverseProxyTaskRoleComponent: ReverseProxyTaskRoleComponent;
 
   protected readonly reverseProxyComponent: ReverseProxyComponent;
 
@@ -37,6 +42,10 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
     this.executionRoleComponent = this.createExecutionRoleComponent();
     this.ecsCluster = this.createEcsCluster();
     this.serviceDiscoveryComponent = this.createServiceDiscoveryComponent();
+
+    // ReverseProxyTaskRoleComponent must be created before the proxy component
+    this.reverseProxyTaskRoleComponent =
+      this.createReverseProxyTaskRoleComponent();
     this.reverseProxyComponent = this.createReverseProxyComponent();
   }
 
@@ -59,6 +68,10 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
     });
   }
 
+  protected createReverseProxyTaskRoleComponent() {
+    return new ReverseProxyTaskRoleComponent(this, 'proxy-task');
+  }
+
   protected createReverseProxyComponent() {
     return new ReverseProxyComponent(this, 'proxy', {
       vpcId: this.config.vpcId,
@@ -78,6 +91,7 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
         this.serviceDiscoveryComponent.getNamespaceNameAsToken(),
       loadBalancerSecurityGroupId: this.config.loadBalancerSecurityGroupId,
       loadBalancerTargetGroupArn: this.config.loadBalancerTargetGroupArn,
+      taskRoleArn: this.reverseProxyTaskRoleComponent.getIamRoleArnAsToken(),
       ...this.config.reverseProxyConfig,
     });
   }
