@@ -238,6 +238,8 @@ export abstract class ServiceComponent<
         efsVolumeConfiguration: [
           {
             fileSystemId: volumeComponent.getFileSystemIdAsToken(),
+            rootDirectory: '/',
+            transitEncryptionPort: 0,
           },
         ],
       }),
