@@ -2,10 +2,11 @@ import {
   ContainerConfig,
   ContainerDefinition,
   Environment,
+  EnvironmentValue,
   ImageDefinition,
   MountPoint,
   Secret,
-  SecretMap,
+  SecretValue,
 } from '../interfaces';
 import type { ServiceComponent } from '../services';
 
@@ -25,7 +26,7 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
       dockerLabels: this.getDockerLabels(),
       mountPoints: this.getMountPoints(),
       environment: this.getEnvironments(),
-      secrets: this.getMappedSecrets(),
+      secrets: this.getSecrets(),
       logConfiguration: {
         logDriver: 'awslogs',
         options: {
@@ -73,46 +74,38 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
   }
 
   protected getEnvironments(): Environment[] {
-    const environments = this.config.environments ?? [];
-
-    return environments.map((env) => {
-      if (env.value instanceof Function) {
-        return {
-          ...env,
-          value: env.value(this.service, this.config),
-        };
-      }
-
-      return env as Environment;
+    return this.extractEnvironmentsFromConfig().map(([name, value]) => {
+      const computedValue =
+        value.value instanceof Function
+          ? value.value(this.service, this.config)
+          : value.value;
+      return { name, value: computedValue };
     });
   }
 
-  protected getSecrets(): (string | SecretMap)[] {
-    const secrets = this.config.secrets ?? [];
-    return secrets;
-  }
-
-  protected getSecretsNames(): string[] {
-    return this.getSecrets().map((secret) => {
-      if (typeof secret === 'string') {
-        return secret;
-      }
-      return secret.name;
+  protected getSecrets(): Secret[] {
+    return this.extractSecretsFromConfig().map(([name, value]) => {
+      return { name, valueFrom: value.secretKey ?? name };
     });
   }
 
-  protected getMappedSecrets(): Secret[] {
-    return this.getSecrets().map((secret: string | SecretMap) =>
-      typeof secret === 'string'
-        ? {
-            name: secret,
-            valueFrom: this.getSecretPath(secret),
-          }
-        : {
-            name: secret.name,
-            valueFrom: this.getSecretPath(secret.key),
-          },
-    );
+  /** Get key/values env pairs from environment object */
+  protected extractEnvironmentsFromConfig(): [string, EnvironmentValue][] {
+    return Object.entries(this.config.environments || {}).filter(
+      ([name, value]) => value.type === 'env',
+    ) as [string, EnvironmentValue][];
+  }
+
+  /** Get key/values secret pairs from environment object */
+  protected extractSecretsFromConfig(): [string, SecretValue][] {
+    return Object.entries(this.config.environments || {}).filter(
+      ([name, value]) => value.type === 'secret',
+    ) as [string, SecretValue][];
+  }
+
+  /** Returns env & secrets names */
+  protected getEnvNames(): string[] {
+    return Object.keys(this.config.environments || {});
   }
 
   protected getSecretPath(key: string): string {

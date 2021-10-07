@@ -1,4 +1,4 @@
-import { ApiContainerConfig } from './configs';
+import { ApiContainerConfig } from './interfaces';
 
 import { HttpContainer } from '@tractr/terraform-ecs-services';
 

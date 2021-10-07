@@ -1,21 +1,7 @@
 import { kebab } from 'case';
 
-import { ContainerInternalConfig, ContainerPublicConfig } from '../interfaces';
+import { HttpContainerConfig } from '../interfaces';
 import { BackendContainer } from './backend-container';
-
-export interface HttpContainerPublicConfig extends ContainerPublicConfig {
-  path: {
-    prefix: string;
-    stripPrefix: boolean;
-  };
-  auth?: {
-    user: string;
-    passwordHash: string;
-  };
-}
-
-export type HttpContainerConfig = HttpContainerPublicConfig &
-  ContainerInternalConfig;
 
 /**
  * This container is meant to be used by another one, as its backend

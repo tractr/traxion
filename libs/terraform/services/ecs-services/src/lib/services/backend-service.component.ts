@@ -1,10 +1,11 @@
 import { SecurityGroupConfig } from '@cdktf/provider-aws';
 
+import { ServiceComponent } from './service.component';
 import {
-  ServiceComponent,
+  ServiceComponentDefaultConfig,
   ServiceComponentInternalConfig,
   ServiceComponentPublicConfig,
-} from './service.component';
+} from '../interfaces';
 
 export interface BackendServiceComponentInternalConfig
   extends ServiceComponentInternalConfig {
@@ -18,8 +19,9 @@ export type BackendServiceComponentConfig =
  * For example, Postgres which is used by the API
  */
 export abstract class BackendServiceComponent<
-  T extends BackendServiceComponentConfig = BackendServiceComponentConfig,
-> extends ServiceComponent<T> {
+  C extends BackendServiceComponentConfig = BackendServiceComponentConfig,
+  D extends ServiceComponentDefaultConfig = ServiceComponentDefaultConfig,
+> extends ServiceComponent<C, D> {
   protected getSecurityGroupConfig(): SecurityGroupConfig {
     return {
       ...super.getSecurityGroupConfig(),

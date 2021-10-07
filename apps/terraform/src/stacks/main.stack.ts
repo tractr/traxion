@@ -1,6 +1,5 @@
 import { Construct } from 'constructs';
 
-import { apps } from '../../../../.traxionrc';
 import { TerraformEnvironmentVariables } from '../dtos';
 
 import { ApiComponent } from '@tractr/terraform-api-service';
@@ -14,6 +13,12 @@ import {
   RegistryGroup,
 } from '@tractr/terraform-registry-group';
 import { ZoneGroup } from '@tractr/terraform-zone-group';
+import {
+  ApiConfig,
+  PostgresConfig,
+  PwaConfig,
+  ReverseProxyConfig,
+} from '../configs/apps.config';
 
 export class MainStack extends AwsStack<AwsStackConfig> {
   protected readonly registryGroup: RegistryGroup;
@@ -55,19 +60,21 @@ export class MainStack extends AwsStack<AwsStackConfig> {
       registryGroup: this.registryGroup,
       networkGroup: this.networkGroup,
       zoneGroup: this.zoneGroup,
+      reverseProxyConfig: ReverseProxyConfig,
     });
 
     // Add a pwa as a http service
-    this.poolGroup.addHttpService(PwaComponent, 'pwa', {
-      ...apps.pwa,
-    });
+    this.poolGroup.addHttpService(PwaComponent, 'pwa', PwaConfig);
 
     // Add a pwa as a http service
-    const api = this.poolGroup.addHttpService(ApiComponent, 'api', {
-      ...apps.api,
-    });
+    const api = this.poolGroup.addHttpService(ApiComponent, 'api', ApiConfig);
 
     // Add a postgres as a backend service
-    this.poolGroup.addBackendService(PostgresComponent, 'postgres', [api]);
+    this.poolGroup.addBackendService(
+      PostgresComponent,
+      'postgres',
+      [api],
+      PostgresConfig,
+    );
   }
 }

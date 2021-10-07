@@ -1,10 +1,10 @@
 import { ConstructOptions } from 'constructs';
 
-import { ServiceComponentPublicConfig } from '../../../../../services/ecs-services/src/lib/services';
-
 import type { NetworkGroup } from '@tractr/terraform-network-group';
 import type { RegistryGroup } from '@tractr/terraform-registry-group';
 import type { ZoneGroup } from '@tractr/terraform-zone-group';
+import { ReverseProxyComponentPublicConfig } from '@tractr/terraform-reverse-proxy-service';
+import { DeepPartial } from 'ts-essentials';
 
 export interface PoolGroupInternalConfig extends ConstructOptions {
   registryGroup: RegistryGroup;
@@ -12,9 +12,11 @@ export interface PoolGroupInternalConfig extends ConstructOptions {
   zoneGroup: ZoneGroup;
 }
 
-export interface PoolGroupPublicConfig extends ConstructOptions {
+export interface PoolGroupDefaultConfig extends ConstructOptions {
   subDomain: string;
-  reverseProxy: ServiceComponentPublicConfig;
+  reverseProxyConfig: ReverseProxyComponentPublicConfig;
 }
+export type PoolGroupPublicConfig = DeepPartial<PoolGroupDefaultConfig> &
+  ConstructOptions;
 
 export type PoolGroupConfig = PoolGroupInternalConfig & PoolGroupPublicConfig;

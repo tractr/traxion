@@ -1,12 +1,8 @@
 import {
   ContainerDefinition,
   HttpContainer,
-  HttpContainerConfig,
 } from '@tractr/terraform-ecs-services';
-
-export interface ReverseProxyContainerConfig extends HttpContainerConfig {
-  clusterName: string;
-}
+import { ReverseProxyContainerConfig } from './interfaces';
 
 export class ReverseProxyContainer extends HttpContainer<ReverseProxyContainerConfig> {
   protected getAppName(): string {

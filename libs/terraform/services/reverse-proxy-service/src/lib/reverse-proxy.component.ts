@@ -8,18 +8,16 @@ import { ReverseProxyTaskRoleComponent } from './reverse-proxy-task-role.compone
 import { ReverseProxyContainer } from './reverse-proxy.container';
 
 import { AwsProviderConstruct } from '@tractr/terraform-aws-component';
+import { Container, ServiceComponent } from '@tractr/terraform-ecs-services';
 import {
-  Container,
-  ServiceComponent,
-  ServiceComponentConfig,
-} from '@tractr/terraform-ecs-services';
+  ReverseProxyComponentConfig,
+  ReverseProxyComponentDefaultConfig,
+} from './interfaces';
 
-export interface ReverseProxyComponentConfig extends ServiceComponentConfig {
-  loadBalancerSecurityGroupId: string;
-  loadBalancerTargetGroupArn: string;
-}
-
-export class ReverseProxyComponent extends ServiceComponent<ReverseProxyComponentConfig> {
+export class ReverseProxyComponent extends ServiceComponent<
+  ReverseProxyComponentConfig,
+  ReverseProxyComponentDefaultConfig
+> {
   protected readonly taskRoleComponent: ReverseProxyTaskRoleComponent;
 
   constructor(
@@ -79,7 +77,18 @@ export class ReverseProxyComponent extends ServiceComponent<ReverseProxyComponen
   protected getContainers(): Container[] {
     return [
       new ReverseProxyContainer(this, {
+        ...this.config.containerConfig,
         name: this.serviceName,
+      }),
+    ];
+  }
+
+  protected getDefaultConfig(): ReverseProxyComponentDefaultConfig {
+    return {
+      ...super.getDefaultConfig(),
+      containerConfig: {
+        imageTag: 'v2.4.8',
+        clusterName: this.config.clusterName,
         // Those next lines enable access to Traefik dashboard and its basic auth
         // Traefik does not detect himself in ECS
         path: {
@@ -91,8 +100,7 @@ export class ReverseProxyComponent extends ServiceComponent<ReverseProxyComponen
           passwordHash:
             '$2y$05$x/uCqlUg9QM4fG/toYlN4u/Nri/JBrLpI3UKqTvTH7.PBL40j2F.G', // pass
         },
-        clusterName: this.config.clusterName,
-      }),
-    ];
+      },
+    };
   }
 }

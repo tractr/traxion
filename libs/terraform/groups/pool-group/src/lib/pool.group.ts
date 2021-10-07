@@ -1,6 +1,6 @@
 import { POOL_GROUP_DEFAULT_CONFIG } from './configs';
 import { EcsComponent } from './ecs.component';
-import { PoolGroupConfig } from './interfaces';
+import { PoolGroupConfig, PoolGroupDefaultConfig } from './interfaces';
 
 import {
   AwsComponent,
@@ -18,11 +18,14 @@ import { EntrypointComponent } from '@tractr/terraform-entrypoint-component';
 import { LogsComponent } from '@tractr/terraform-logs-component';
 import { OwnerPicturesComponent } from '@tractr/terraform-owner-pictures-component';
 import { SecretsComponent } from '@tractr/terraform-secrets-component';
+import * as deepmerge from 'deepmerge';
 
 /**
  * Following https://medium.com/@bradford_hamilton/deploying-containers-on-amazons-ecs-using-fargate-and-terraform-part-2-2e6f6a3a957f
  */
-export class PoolGroup extends AwsComponent<PoolGroupConfig> {
+export class PoolGroup extends AwsComponent<
+  PoolGroupConfig & PoolGroupDefaultConfig
+> {
   protected readonly logsComponent: LogsComponent;
 
   protected readonly secretsComponent: SecretsComponent;
@@ -38,7 +41,7 @@ export class PoolGroup extends AwsComponent<PoolGroupConfig> {
     id: string,
     config: PoolGroupConfig,
   ) {
-    super(scope, id, { ...POOL_GROUP_DEFAULT_CONFIG, ...config });
+    super(scope, id, deepmerge(POOL_GROUP_DEFAULT_CONFIG, config));
     this.logsComponent = this.createLogsComponent();
     this.secretsComponent = this.createSecretsComponent();
     this.entrypointComponent = this.createEntrypointComponent();
@@ -87,7 +90,7 @@ export class PoolGroup extends AwsComponent<PoolGroupConfig> {
       logsGroup: this.logsComponent.getCloudwatchLogGroupName(),
       dockerApplications: this.config.registryGroup.getDockerApplications(),
       applicationBaseUrl: this.getApplicationBaseUrl(),
-      reverseProxyConfig: this.config.reverseProxy,
+      reverseProxyConfig: this.config.reverseProxyConfig,
     });
   }
 

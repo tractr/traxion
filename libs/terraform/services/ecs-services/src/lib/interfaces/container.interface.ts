@@ -32,19 +32,9 @@ export interface Environment {
   value: string;
 }
 
-export type EnvironmentCb<Config = unknown> = {
-  name: string;
-  value: (service: ServiceComponent, config: Config) => string;
-};
-
 export interface Secret {
   name: string;
   valueFrom: string;
-}
-
-export interface SecretMap {
-  name: string;
-  key: string;
 }
 
 export interface ImageDefinition {
@@ -57,6 +47,21 @@ export interface MountPoint {
   containerPath: string;
 }
 
+export type EnvironmentCb<C extends ContainerConfig = ContainerConfig> = (
+  service: ServiceComponent,
+  config: C,
+) => string;
+
+export type EnvironmentValue = {
+  type: 'env';
+  value: string | EnvironmentCb;
+};
+export type SecretValue = {
+  type: 'secret';
+  secretKey?: string;
+};
+export type EnvironmentOrSecretValue = EnvironmentValue | SecretValue;
+
 export interface ContainerInternalConfig {
   name: string;
 }
@@ -65,8 +70,7 @@ export interface ContainerPublicConfig {
   imageTag: string;
   cpu?: number;
   memory?: number;
-  secrets?: (string | SecretMap)[];
-  environments?: (Environment | EnvironmentCb)[];
+  environments?: Record<string, EnvironmentOrSecretValue>;
 }
 
 export type ContainerConfig = ContainerInternalConfig & ContainerPublicConfig;

@@ -1,6 +1,5 @@
 import { EcsCluster } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
@@ -16,27 +15,8 @@ import {
   ServiceComponentPublicConfig,
 } from '@tractr/terraform-ecs-services';
 import { PrivateDnsComponent } from '@tractr/terraform-private-dns-component';
-import type { DockerApplications } from '@tractr/terraform-registry-group';
 import { ReverseProxyComponent } from '@tractr/terraform-reverse-proxy-service';
-
-export interface EcsComponentInternalConfig extends ConstructOptions {
-  subnetsIds: string[];
-  loadBalancerSecurityGroupId: string;
-  loadBalancerTargetGroupArn: string;
-  secretsmanagerSecretArn: string;
-  fileStorageS3Endpoint: string;
-  fileStorageS3BucketName: string;
-  logsGroup: string;
-  vpcId: string;
-  dockerApplications: DockerApplications;
-  applicationBaseUrl: string;
-}
-export interface EcsComponentPublicConfig extends ConstructOptions {
-  reverseProxyConfig: ServiceComponentPublicConfig;
-}
-
-export type EcsComponentConfig = EcsComponentInternalConfig &
-  EcsComponentPublicConfig;
+import { EcsComponentConfig } from './interfaces';
 
 export class EcsComponent extends AwsComponent<EcsComponentConfig> {
   protected readonly executionRoleComponent: ExecutionRoleComponent;

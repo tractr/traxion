@@ -1,4 +1,4 @@
-import { PwaContainerConfig } from './configs';
+import { PwaContainerConfig } from './interfaces';
 
 import { Environment, HttpContainer } from '@tractr/terraform-ecs-services';
 
@@ -18,13 +18,9 @@ export class PwaContainer extends HttpContainer<PwaContainerConfig> {
   protected getEnvironments(): Environment[] {
     const envs = super.getEnvironments();
 
-    // Get secrets key list
-    const secretsNames: string[] = this.getSecretsNames();
-    const envsNames: string[] = envs.map((env) => env.name);
-
     envs.push({
       name: 'ENVS_NAMES',
-      value: envsNames.concat(secretsNames).join(','),
+      value: this.getEnvNames().join(','),
     });
 
     return envs;

@@ -11,7 +11,7 @@ import {
 } from '@cdktf/provider-aws';
 import { kebab } from 'case';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
+import * as deepmerge from 'deepmerge';
 
 import { Container } from '../containers';
 
@@ -23,58 +23,22 @@ import {
   DeploymentComponent,
   DeploymentComponentConfig,
 } from '@tractr/terraform-deployment-component';
-import {
-  DockerApplication,
-  DockerApplications,
-} from '@tractr/terraform-registry-group';
+import { DockerApplication } from '@tractr/terraform-registry-group';
 import {
   VolumeComponent,
   VolumeComponentConfig,
 } from '@tractr/terraform-volume-component';
-
-// Check cpu/memory pairs: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
-export type CpuValue = '256' | '512' | '1024' | '2048' | '4096';
-export type MemoryValue =
-  | '512'
-  | '1024'
-  | '2048'
-  | '3072'
-  | '4096'
-  | '5120'
-  | '6144'
-  | '7168'
-  | '8192'
-  | '16384'
-  | '30720';
-
-export interface ServiceComponentInternalConfig extends ConstructOptions {
-  vpcId: string;
-  subnetsIds: string[];
-  logsGroup: string;
-  clusterId: string;
-  clusterName: string;
-  dockerApplications: DockerApplications;
-  applicationBaseUrl: string;
-  executionRoleArn: string;
-  secretsmanagerSecretArn: string;
-  fileStorageS3Endpoint: string;
-  fileStorageS3BucketName: string;
-  privateDnsNamespaceId: string;
-  privateDnsNamespaceName: string;
-}
-
-export interface ServiceComponentPublicConfig extends ConstructOptions {
-  cpu: CpuValue;
-  memory: MemoryValue;
-  desiredCount: number;
-}
-
-export type ServiceComponentConfig = ServiceComponentInternalConfig &
-  ServiceComponentPublicConfig;
+import {
+  ServiceComponentConfig,
+  ServiceComponentDefaultConfig,
+} from '../interfaces';
 
 export abstract class ServiceComponent<
-  T extends ServiceComponentConfig = ServiceComponentConfig,
-> extends AwsComponent<T> {
+  C extends ServiceComponentConfig = ServiceComponentConfig,
+  D extends ServiceComponentDefaultConfig = ServiceComponentDefaultConfig,
+> extends AwsComponent<C> {
+  protected readonly config: C & D;
+
   protected readonly serviceName: string;
 
   protected readonly securityGroup: SecurityGroup;
@@ -95,8 +59,9 @@ export abstract class ServiceComponent<
     | Record<string, VolumeComponent>
     | undefined;
 
-  constructor(scope: AwsProviderConstruct, id: string, config: T) {
+  constructor(scope: AwsProviderConstruct, id: string, config: C) {
     super(scope, id, config);
+    this.config = deepmerge(this.getDefaultConfig(), config) as C & D;
     this.serviceName = kebab(id);
     this.containers = this.getContainers();
     this.volumesNames = this.getVolumesNames();
@@ -110,6 +75,14 @@ export abstract class ServiceComponent<
     if (this.enableContinuousDeployment()) {
       this.deploymentComponent = this.createDeploymentComponent();
     }
+  }
+
+  protected getDefaultConfig(): ServiceComponentDefaultConfig {
+    return {
+      desiredCount: 1,
+      cpu: '256',
+      memory: '512',
+    };
   }
 
   protected createSecurityGroup() {

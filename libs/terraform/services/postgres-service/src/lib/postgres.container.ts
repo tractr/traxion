@@ -1,4 +1,4 @@
-import { PostgresContainerConfig } from './configs';
+import { PostgresContainerConfig } from './interfaces';
 
 import { BackendContainer, MountPoint } from '@tractr/terraform-ecs-services';
 
