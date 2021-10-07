@@ -86,7 +86,7 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
   protected getSecrets(): Secret[] {
     return this.extractSecretsFromConfig().map(([name, value]) => ({
       name,
-      valueFrom: value.secretKey ?? name,
+      valueFrom: this.getSecretPath(value.secretKey ?? name),
     }));
   }
 
