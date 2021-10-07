@@ -240,7 +240,6 @@ export abstract class ServiceComponent<
           {
             fileSystemId: volumeComponent.getFileSystemIdAsToken(),
             rootDirectory: '/',
-            transitEncryptionPort: 0,
           },
         ],
       }),
