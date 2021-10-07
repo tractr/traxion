@@ -187,7 +187,8 @@ export abstract class ServiceComponent<
       ],
       name: this.getResourceName('service'),
       lifecycle: {
-        ignoreChanges: ['desired_count', 'task_definition'],
+        // Todo: Should we ignore 'desired_count' if no auto-scaling ??
+        ignoreChanges: ['task_definition'],
       },
     };
   }
