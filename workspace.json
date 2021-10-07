@@ -1165,7 +1165,7 @@
           "outputs": ["{options.outputPath}"]
         },
         "publish": {
-          "executor": "ngx-deploy-npm:version",
+          "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "restricted"
           }

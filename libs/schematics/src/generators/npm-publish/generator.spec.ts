@@ -40,7 +40,7 @@ describe('release generator', () => {
     expect(config).toBeDefined();
     expect(config.targets).toBeDefined();
     expect(config.targets?.publish).toEqual({
-      executor: `${SEMVER_PACKAGE_NAME}:version`,
+      executor: `${SEMVER_PACKAGE_NAME}:deploy`,
       options: {
         access: 'restricted',
       },
@@ -77,7 +77,7 @@ describe('release generator', () => {
     expect(config).toBeDefined();
     expect(config.targets).toBeDefined();
     expect(config.targets?.publish).toEqual({
-      executor: `${SEMVER_PACKAGE_NAME}:version`,
+      executor: `${SEMVER_PACKAGE_NAME}:deploy`,
       options: {
         access: 'public',
       },
