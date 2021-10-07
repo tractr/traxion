@@ -4,15 +4,15 @@ import {
   SecurityGroupConfig,
 } from '@cdktf/provider-aws';
 
+import {
+  ReverseProxyComponentConfig,
+  ReverseProxyComponentDefaultConfig,
+} from './interfaces';
 import { ReverseProxyTaskRoleComponent } from './reverse-proxy-task-role.component';
 import { ReverseProxyContainer } from './reverse-proxy.container';
 
 import { AwsProviderConstruct } from '@tractr/terraform-aws-component';
 import { Container, ServiceComponent } from '@tractr/terraform-ecs-services';
-import {
-  ReverseProxyComponentConfig,
-  ReverseProxyComponentDefaultConfig,
-} from './interfaces';
 
 export class ReverseProxyComponent extends ServiceComponent<
   ReverseProxyComponentConfig,

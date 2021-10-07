@@ -1,6 +1,8 @@
 import { EcsCluster } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
 
+import { EcsComponentConfig } from './interfaces';
+
 import {
   AwsComponent,
   AwsComponentConstructor,
@@ -16,7 +18,6 @@ import {
 } from '@tractr/terraform-ecs-services';
 import { PrivateDnsComponent } from '@tractr/terraform-private-dns-component';
 import { ReverseProxyComponent } from '@tractr/terraform-reverse-proxy-service';
-import { EcsComponentConfig } from './interfaces';
 
 export class EcsComponent extends AwsComponent<EcsComponentConfig> {
   protected readonly executionRoleComponent: ExecutionRoleComponent;

@@ -84,14 +84,16 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
   }
 
   protected getSecrets(): Secret[] {
-    return this.extractSecretsFromConfig().map(([name, value]) => {
-      return { name, valueFrom: value.secretKey ?? name };
-    });
+    return this.extractSecretsFromConfig().map(([name, value]) => ({
+      name,
+      valueFrom: value.secretKey ?? name,
+    }));
   }
 
   /** Get key/values env pairs from environment object */
   protected extractEnvironmentsFromConfig(): [string, EnvironmentValue][] {
     return Object.entries(this.config.environments || {}).filter(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       ([name, value]) => value.type === 'env',
     ) as [string, EnvironmentValue][];
   }
@@ -99,6 +101,7 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
   /** Get key/values secret pairs from environment object */
   protected extractSecretsFromConfig(): [string, SecretValue][] {
     return Object.entries(this.config.environments || {}).filter(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       ([name, value]) => value.type === 'secret',
     ) as [string, SecretValue][];
   }

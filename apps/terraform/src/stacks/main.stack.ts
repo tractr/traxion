@@ -1,5 +1,11 @@
 import { Construct } from 'constructs';
 
+import {
+  ApiConfig,
+  PostgresConfig,
+  PwaConfig,
+  ReverseProxyConfig,
+} from '../configs/apps.config';
 import { TerraformEnvironmentVariables } from '../dtos';
 
 import { ApiComponent } from '@tractr/terraform-api-service';
@@ -13,12 +19,6 @@ import {
   RegistryGroup,
 } from '@tractr/terraform-registry-group';
 import { ZoneGroup } from '@tractr/terraform-zone-group';
-import {
-  ApiConfig,
-  PostgresConfig,
-  PwaConfig,
-  ReverseProxyConfig,
-} from '../configs/apps.config';
 
 export class MainStack extends AwsStack<AwsStackConfig> {
   protected readonly registryGroup: RegistryGroup;

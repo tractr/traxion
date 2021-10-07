@@ -1,4 +1,5 @@
 import { ConstructOptions } from 'constructs';
+
 import { DockerApplications } from '@tractr/terraform-registry-group';
 
 // Check cpu/memory pairs: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html

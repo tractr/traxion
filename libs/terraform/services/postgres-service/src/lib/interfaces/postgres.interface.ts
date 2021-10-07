@@ -1,3 +1,5 @@
+import { DeepPartial } from 'ts-essentials';
+
 import {
   BackendServiceComponentInternalConfig,
   ContainerInternalConfig,
@@ -5,8 +7,6 @@ import {
   EnvironmentOrSecretValue,
   ServiceComponentDefaultConfig,
 } from '@tractr/terraform-ecs-services';
-import { DeepPartial } from 'ts-essentials';
-import { ConstructOptions } from 'constructs';
 
 export interface PostgresContainerPublicConfig extends ContainerPublicConfig {
   environments: ContainerPublicConfig['environments'] & {

@@ -14,6 +14,10 @@ import { Token } from 'cdktf';
 import * as deepmerge from 'deepmerge';
 
 import { Container } from '../containers';
+import {
+  ServiceComponentConfig,
+  ServiceComponentDefaultConfig,
+} from '../interfaces';
 
 import {
   AwsComponent,
@@ -28,10 +32,6 @@ import {
   VolumeComponent,
   VolumeComponentConfig,
 } from '@tractr/terraform-volume-component';
-import {
-  ServiceComponentConfig,
-  ServiceComponentDefaultConfig,
-} from '../interfaces';
 
 export abstract class ServiceComponent<
   C extends ServiceComponentConfig = ServiceComponentConfig,

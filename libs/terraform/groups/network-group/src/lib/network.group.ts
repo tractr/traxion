@@ -1,6 +1,7 @@
 import { InternetGateway } from '@cdktf/provider-aws';
 
 import { BaseComponent, PrivateComponent, PublicComponent } from './components';
+import { NETWORK_GROUP_DEFAULT_CONFIG } from './configs';
 import {
   AvailabilityZoneInfo,
   NetworkGroupConfig,
@@ -11,7 +12,6 @@ import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-aws-component';
-import { NETWORK_GROUP_DEFAULT_CONFIG } from './configs';
 
 export class NetworkGroup extends AwsComponent<
   NetworkGroupConfig & NetworkGroupDefaultConfig

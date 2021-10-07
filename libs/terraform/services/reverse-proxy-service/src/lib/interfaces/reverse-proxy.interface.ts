@@ -1,10 +1,11 @@
+import { DeepPartial } from 'ts-essentials';
+
 import {
   ContainerInternalConfig,
   HttpContainerPublicConfig,
   ServiceComponentDefaultConfig,
   ServiceComponentInternalConfig,
 } from '@tractr/terraform-ecs-services';
-import { DeepPartial } from 'ts-essentials';
 
 export interface ReverseProxyContainerPublicConfig
   extends HttpContainerPublicConfig {

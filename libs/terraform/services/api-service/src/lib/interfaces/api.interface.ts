@@ -1,3 +1,5 @@
+import { DeepPartial } from 'ts-essentials';
+
 import {
   BackendServiceComponentInternalConfig,
   ContainerInternalConfig,
@@ -6,8 +8,6 @@ import {
   HttpContainerPublicConfig,
   ServiceComponentDefaultConfig,
 } from '@tractr/terraform-ecs-services';
-import { DeepPartial } from 'ts-essentials';
-import { ConstructOptions } from 'constructs';
 
 export interface ApiContainerPublicConfig extends HttpContainerPublicConfig {
   environments: ContainerPublicConfig['environments'] & {

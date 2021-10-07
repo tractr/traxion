@@ -1,11 +1,11 @@
 import { SecurityGroupConfig } from '@cdktf/provider-aws';
 
-import { ServiceComponent } from './service.component';
 import {
   ServiceComponentDefaultConfig,
   ServiceComponentInternalConfig,
   ServiceComponentPublicConfig,
 } from '../interfaces';
+import { ServiceComponent } from './service.component';
 
 export interface BackendServiceComponentInternalConfig
   extends ServiceComponentInternalConfig {

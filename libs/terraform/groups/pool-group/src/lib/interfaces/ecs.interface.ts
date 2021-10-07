@@ -1,9 +1,7 @@
 import { ConstructOptions } from 'constructs';
+
 import { DockerApplications } from '@tractr/terraform-registry-group';
-import {
-  ReverseProxyComponentDefaultConfig,
-  ReverseProxyComponentPublicConfig,
-} from '@tractr/terraform-reverse-proxy-service';
+import { ReverseProxyComponentPublicConfig } from '@tractr/terraform-reverse-proxy-service';
 
 export interface EcsComponentInternalConfig extends ConstructOptions {
   subnetsIds: string[];
