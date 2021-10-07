@@ -34,7 +34,6 @@ export interface ApiComponentDefaultConfig
   extends ServiceComponentDefaultConfig {
   containerConfig: ApiContainerPublicConfig;
 }
-export type ApiComponentPublicConfig = DeepPartial<ApiComponentDefaultConfig> &
-  ConstructOptions;
+export type ApiComponentPublicConfig = DeepPartial<ApiComponentDefaultConfig>;
 export type ApiComponentConfig = BackendServiceComponentInternalConfig &
   ApiComponentPublicConfig;

@@ -18,7 +18,7 @@ export interface EcsComponentInternalConfig extends ConstructOptions {
   applicationBaseUrl: string;
 }
 
-export interface EcsComponentPublicConfig extends ConstructOptions {
+export interface EcsComponentPublicConfig {
   reverseProxyConfig: ReverseProxyComponentPublicConfig;
 }
 

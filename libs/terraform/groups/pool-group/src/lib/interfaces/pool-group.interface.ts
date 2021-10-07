@@ -12,11 +12,10 @@ export interface PoolGroupInternalConfig extends ConstructOptions {
   zoneGroup: ZoneGroup;
 }
 
-export interface PoolGroupDefaultConfig extends ConstructOptions {
+export interface PoolGroupDefaultConfig {
   subDomain: string;
   reverseProxyConfig: ReverseProxyComponentPublicConfig;
 }
-export type PoolGroupPublicConfig = DeepPartial<PoolGroupDefaultConfig> &
-  ConstructOptions;
+export type PoolGroupPublicConfig = DeepPartial<PoolGroupDefaultConfig>;
 
 export type PoolGroupConfig = PoolGroupInternalConfig & PoolGroupPublicConfig;

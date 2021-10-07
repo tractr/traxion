@@ -32,7 +32,7 @@ export interface ServiceComponentInternalConfig extends ConstructOptions {
   privateDnsNamespaceName: string;
 }
 
-export interface ServiceComponentDefaultConfig extends ConstructOptions {
+export interface ServiceComponentDefaultConfig {
   cpu: CpuValue;
   memory: MemoryValue;
   desiredCount: number;

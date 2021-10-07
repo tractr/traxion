@@ -12,9 +12,11 @@ export interface AvailabilityZoneInfo {
  * It uses at least 2 availability zones and creates one private and one public subnet in each zone.
  * Internet access within private subnets can be set to 3 modes: Nat, Egress or None
  */
-export interface NetworkGroupConfig extends NetworkGroupPublicConfig {
-  zones: string[];
+export interface NetworkGroupInternalConfig extends ConstructOptions {
   cidrPrefix?: string;
+}
+
+export interface NetworkGroupDefaultConfig {
   /**
    * Private subnets for backend components (ecs tasks, etc.) may have access to internet with different mode
    *
@@ -39,8 +41,10 @@ export interface NetworkGroupConfig extends NetworkGroupPublicConfig {
   internetAccessMode: InternetAccessMode;
 }
 
-export interface NetworkGroupPublicConfig extends ConstructOptions {
+export interface NetworkGroupPublicConfig
+  extends Partial<NetworkGroupDefaultConfig> {
   zones: string[];
-  cidrPrefix?: string;
-  internetAccessMode?: InternetAccessMode;
 }
+
+export type NetworkGroupConfig = NetworkGroupInternalConfig &
+  NetworkGroupPublicConfig;

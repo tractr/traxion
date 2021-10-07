@@ -23,6 +23,6 @@ export interface PostgresComponentDefaultConfig
   containerConfig: PostgresContainerPublicConfig;
 }
 export type PostgresComponentPublicConfig =
-  DeepPartial<PostgresComponentDefaultConfig> & ConstructOptions;
+  DeepPartial<PostgresComponentDefaultConfig>;
 export type PostgresComponentConfig = BackendServiceComponentInternalConfig &
   PostgresComponentPublicConfig;

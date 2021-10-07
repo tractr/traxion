@@ -21,7 +21,6 @@ export interface PwaComponentDefaultConfig
   extends ServiceComponentDefaultConfig {
   containerConfig: PwaContainerPublicConfig;
 }
-export type PwaComponentPublicConfig = DeepPartial<PwaComponentDefaultConfig> &
-  ConstructOptions;
+export type PwaComponentPublicConfig = DeepPartial<PwaComponentDefaultConfig>;
 export type PwaComponentConfig = BackendServiceComponentInternalConfig &
   PwaComponentPublicConfig;

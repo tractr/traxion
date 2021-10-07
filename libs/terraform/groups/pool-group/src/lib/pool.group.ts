@@ -18,7 +18,6 @@ import { EntrypointComponent } from '@tractr/terraform-entrypoint-component';
 import { LogsComponent } from '@tractr/terraform-logs-component';
 import { OwnerPicturesComponent } from '@tractr/terraform-owner-pictures-component';
 import { SecretsComponent } from '@tractr/terraform-secrets-component';
-import * as deepmerge from 'deepmerge';
 
 /**
  * Following https://medium.com/@bradford_hamilton/deploying-containers-on-amazons-ecs-using-fargate-and-terraform-part-2-2e6f6a3a957f
@@ -41,7 +40,7 @@ export class PoolGroup extends AwsComponent<
     id: string,
     config: PoolGroupConfig,
   ) {
-    super(scope, id, deepmerge(POOL_GROUP_DEFAULT_CONFIG, config));
+    super(scope, id, { ...POOL_GROUP_DEFAULT_CONFIG, ...config });
     this.logsComponent = this.createLogsComponent();
     this.secretsComponent = this.createSecretsComponent();
     this.entrypointComponent = this.createEntrypointComponent();

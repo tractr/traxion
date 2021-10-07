@@ -4,15 +4,18 @@ import { BaseComponent, PrivateComponent, PublicComponent } from './components';
 import {
   AvailabilityZoneInfo,
   NetworkGroupConfig,
-  NetworkGroupPublicConfig,
+  NetworkGroupDefaultConfig,
 } from './interfaces';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-aws-component';
+import { NETWORK_GROUP_DEFAULT_CONFIG } from './configs';
 
-export class NetworkGroup extends AwsComponent<NetworkGroupConfig> {
+export class NetworkGroup extends AwsComponent<
+  NetworkGroupConfig & NetworkGroupDefaultConfig
+> {
   protected readonly baseComponent: BaseComponent;
 
   protected readonly publicComponents: PublicComponent[];
@@ -24,9 +27,9 @@ export class NetworkGroup extends AwsComponent<NetworkGroupConfig> {
   constructor(
     scope: AwsProviderConstruct,
     id: string,
-    config: NetworkGroupPublicConfig,
+    config: NetworkGroupConfig,
   ) {
-    super(scope, id, { internetAccessMode: 'igw', ...config });
+    super(scope, id, { ...NETWORK_GROUP_DEFAULT_CONFIG, ...config });
     this.baseComponent = this.createBaseComponent();
     // Create one public and one private subnet in each zone
     this.publicComponents = this.createPublicComponents();
