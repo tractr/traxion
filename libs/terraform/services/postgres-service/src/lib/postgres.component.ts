@@ -21,7 +21,7 @@ export class PostgresComponent extends BackendServiceComponent<
     return [
       new PostgresContainer(this, {
         ...this.config.containerConfig,
-        name: this.serviceName,
+        name: 'postgres',
       }),
     ];
   }

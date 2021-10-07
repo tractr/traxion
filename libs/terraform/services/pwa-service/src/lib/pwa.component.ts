@@ -18,7 +18,7 @@ export class PwaComponent extends BackendServiceComponent<
     return [
       new PwaContainer(this, {
         ...this.config.containerConfig,
-        name: this.serviceName,
+        name: 'pwa',
       }),
     ];
   }

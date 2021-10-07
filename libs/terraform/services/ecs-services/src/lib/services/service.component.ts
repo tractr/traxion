@@ -60,10 +60,13 @@ export abstract class ServiceComponent<
     | undefined;
 
   constructor(scope: AwsProviderConstruct, id: string, config: C) {
-    super(scope, id, config as C & D); // Force partial config
-    this.config = deepmerge(this.getDefaultConfig(), config) as C & D; // Re-assign full config
-
+    // Force partial config
+    super(scope, id, config as C & D);
+    // Define service name
     this.serviceName = kebab(id);
+    // Re-assign full config
+    this.config = deepmerge(this.getDefaultConfig(), config) as C & D;
+
     this.containers = this.getContainers();
     this.volumesNames = this.getVolumesNames();
     this.securityGroup = this.createSecurityGroup();

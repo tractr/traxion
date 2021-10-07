@@ -18,7 +18,7 @@ export class ApiComponent extends BackendServiceComponent<
     return [
       new ApiContainer(this, {
         ...this.config.containerConfig,
-        name: this.serviceName,
+        name: 'api',
       }),
     ];
   }

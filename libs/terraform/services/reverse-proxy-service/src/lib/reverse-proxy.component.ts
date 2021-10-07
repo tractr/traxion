@@ -61,7 +61,7 @@ export class ReverseProxyComponent extends ServiceComponent<
     return [
       new ReverseProxyContainer(this, {
         ...this.config.containerConfig,
-        name: this.serviceName,
+        name: 'reverse-proxy',
       }),
     ];
   }
@@ -75,7 +75,7 @@ export class ReverseProxyComponent extends ServiceComponent<
         // Those next lines enable access to Traefik dashboard and its basic auth
         // Traefik does not detect himself in ECS
         path: {
-          prefix: `/${this.serviceName}`,
+          prefix: `/reverse-proxy`,
           stripPrefix: true,
         },
         auth: {
