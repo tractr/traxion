@@ -1,13 +1,3 @@
-# TODO to clean this package
-
-- [ ] Export container folder to a module named `@tractr/terraform-container
-- [ ] Export deployment folder to a module named `@tractr/terraform-deployment-component
-- [ ] Export reverse proxy folder to a module named `@tractr/terraform-reverse-proxy-component
-- [ ] Export private dns folder to a module named `@tractr/terraform-private-dns-component
-- [ ] Export owner picture folder to a module named `@tractr/terraform-owner-picture-component
-- [ ] Export volume folder to a module named `@tractr/terraform-volume-component
-- [ ] Export ecs service to a module named `@tractr/terraform-ecs-service
-
 # Pool group
 
 This group provides all components required to run containers on Fargate and
