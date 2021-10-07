@@ -80,7 +80,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": [
+            "lintFilePatterns": [
               "libs/angular/authentication/src/**/*.ts",
               "libs/angular/authentication/src/**/*.html"
             ]
@@ -145,7 +145,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": [
+            "lintFilePatterns": [
               "libs/angular/casl/src/**/*.ts",
               "libs/angular/casl/src/**/*.html"
             ]
@@ -198,7 +198,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": [
+            "lintFilePatterns": [
               "libs/angular/components/src/**/*.ts",
               "libs/angular/components/src/**/*.html"
             ]
@@ -252,7 +252,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": [
+            "lintFilePatterns": [
               "libs/angular/config/src/**/*.ts",
               "libs/angular/config/src/**/*.html"
             ]
@@ -306,7 +306,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": [
+            "lintFilePatterns": [
               "libs/angular/file-storage/src/**/*.ts",
               "libs/angular/file-storage/src/**/*.html"
             ]
@@ -360,7 +360,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": [
+            "lintFilePatterns": [
               "libs/angular/form/src/**/*.ts",
               "libs/angular/form/src/**/*.html"
             ]
@@ -414,7 +414,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": [
+            "lintFilePatterns": [
               "libs/angular/tools/src/**/*.ts",
               "libs/angular/tools/src/**/*.html"
             ]
@@ -484,7 +484,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["apps/api/**/*.ts"]
+            "lintFilePatterns": ["apps/api/**/*.ts"]
           }
         },
         "release": {
@@ -535,7 +535,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/config/commit/**/*.ts"]
+            "lintFilePatterns": ["libs/config/commit/**/*.ts"]
           }
         },
         "publish": {
@@ -585,7 +585,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": [
+            "lintFilePatterns": [
               "libs/common/src/**/*.ts",
               "libs/common/src/**/*.html"
             ]
@@ -654,7 +654,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/config/eslint/**/*.ts"]
+            "lintFilePatterns": ["libs/config/eslint/**/*.ts"]
           }
         },
         "publish": {
@@ -739,7 +739,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/config/hapify/**/*.ts"]
+            "lintFilePatterns": ["libs/config/hapify/**/*.ts"]
           }
         },
         "pregenerate": {
@@ -789,7 +789,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/hapify/generate-config/**/*.ts"]
+            "lintFilePatterns": ["libs/hapify/generate-config/**/*.ts"]
           }
         },
         "pregenerate": {
@@ -1278,7 +1278,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/nestjs/authentication/**/*.ts"]
+            "lintFilePatterns": ["libs/nestjs/authentication/**/*.ts"]
           }
         },
         "prebuild": {
@@ -1332,7 +1332,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/nestjs/casl/**/*.ts"]
+            "lintFilePatterns": ["libs/nestjs/casl/**/*.ts"]
           }
         },
         "publish": {
@@ -1376,7 +1376,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/nestjs/core/**/*.ts"]
+            "lintFilePatterns": ["libs/nestjs/core/**/*.ts"]
           }
         },
         "publish": {
@@ -1420,7 +1420,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/nestjs/database/**/*.ts"]
+            "lintFilePatterns": ["libs/nestjs/database/**/*.ts"]
           }
         },
         "publish": {
@@ -1464,7 +1464,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/nestjs/file-storage/**/*.ts"]
+            "lintFilePatterns": ["libs/nestjs/file-storage/**/*.ts"]
           }
         },
         "publish": {
@@ -1508,7 +1508,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/nestjs/mailer/**/*.ts"]
+            "lintFilePatterns": ["libs/nestjs/mailer/**/*.ts"]
           }
         },
         "publish": {
@@ -1552,7 +1552,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/nestjs/testing/**/*.ts"]
+            "lintFilePatterns": ["libs/nestjs/testing/**/*.ts"]
           }
         },
         "publish": {
@@ -1599,7 +1599,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/config/prettier/**/*.ts"]
+            "lintFilePatterns": ["libs/config/prettier/**/*.ts"]
           }
         },
         "publish": {
@@ -1647,7 +1647,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/prisma/**/*.ts"]
+            "lintFilePatterns": ["libs/prisma/**/*.ts"]
           }
         },
         "test": {
@@ -1733,7 +1733,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": [
+            "lintFilePatterns": [
               "apps/pwa/src/**/*.ts",
               "apps/pwa/src/**/*.html"
             ]
@@ -1810,7 +1810,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["apps/pwa-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": ["apps/pwa-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -1871,7 +1871,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/schematics/**/*.ts"]
+            "lintFilePatterns": ["libs/schematics/**/*.ts"]
           }
         },
         "publish": {
@@ -1940,7 +1940,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["apps/terraform/**/*.ts"]
+            "lintFilePatterns": ["apps/terraform/**/*.ts"]
           }
         },
         "serve": {
@@ -1986,7 +1986,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/services/api-service/**/*.ts"]
+            "lintFilePatterns": ["libs/terraform/services/api-service/**/*.ts"]
           }
         },
         "publish": {
@@ -2030,7 +2030,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/components/aws-component/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/terraform/components/aws-component/**/*.ts"
+            ]
           }
         },
         "publish": {
@@ -2074,7 +2076,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/aws-stack/**/*.ts"]
+            "lintFilePatterns": ["libs/terraform/aws-stack/**/*.ts"]
           }
         },
         "publish": {
@@ -2118,7 +2120,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/components/deployment-component/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/terraform/components/deployment-component/**/*.ts"
+            ]
           }
         },
         "publish": {
@@ -2151,7 +2155,9 @@
         "build": {
           "executor": "@nrwl/node:package",
           "options": {
-            "assets": ["libs/terraform/components/deployment-trigger-component/*.md"],
+            "assets": [
+              "libs/terraform/components/deployment-trigger-component/*.md"
+            ],
             "main": "libs/terraform/components/deployment-trigger-component/src/index.ts",
             "outputPath": "dist/libs/terraform/components/deployment-trigger-component",
             "packageJson": "libs/terraform/components/deployment-trigger-component/package.json",
@@ -2162,7 +2168,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": [
+            "lintFilePatterns": [
               "libs/terraform/components/deployment-trigger-component/**/*.ts"
             ]
           }
@@ -2185,7 +2191,9 @@
             "jestConfig": "libs/terraform/components/deployment-trigger-component/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/terraform/components/deployment-trigger-component"]
+          "outputs": [
+            "coverage/libs/terraform/components/deployment-trigger-component"
+          ]
         }
       }
     },
@@ -2208,7 +2216,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/services/ecs-services/**/*.ts"]
+            "lintFilePatterns": ["libs/terraform/services/ecs-services/**/*.ts"]
           }
         },
         "publish": {
@@ -2252,7 +2260,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/components/entrypoint-component/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/terraform/components/entrypoint-component/**/*.ts"
+            ]
           }
         },
         "publish": {
@@ -2296,7 +2306,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/components/logs-component/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/terraform/components/logs-component/**/*.ts"
+            ]
           }
         },
         "publish": {
@@ -2340,7 +2352,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/groups/network-group/**/*.ts"]
+            "lintFilePatterns": ["libs/terraform/groups/network-group/**/*.ts"]
           }
         },
         "publish": {
@@ -2373,7 +2385,9 @@
         "build": {
           "executor": "@nrwl/node:package",
           "options": {
-            "assets": ["libs/terraform/components/owner-pictures-component/*.md"],
+            "assets": [
+              "libs/terraform/components/owner-pictures-component/*.md"
+            ],
             "main": "libs/terraform/components/owner-pictures-component/src/index.ts",
             "outputPath": "dist/libs/terraform/components/owner-pictures-component",
             "packageJson": "libs/terraform/components/owner-pictures-component/package.json",
@@ -2384,7 +2398,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": [
+            "lintFilePatterns": [
               "libs/terraform/components/owner-pictures-component/**/*.ts"
             ]
           }
@@ -2407,7 +2421,9 @@
             "jestConfig": "libs/terraform/components/owner-pictures-component/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/terraform/components/owner-pictures-component"]
+          "outputs": [
+            "coverage/libs/terraform/components/owner-pictures-component"
+          ]
         }
       }
     },
@@ -2430,7 +2446,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/groups/pool-group/**/*.ts"]
+            "lintFilePatterns": ["libs/terraform/groups/pool-group/**/*.ts"]
           }
         },
         "publish": {
@@ -2474,7 +2490,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/services/postgres-service/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/terraform/services/postgres-service/**/*.ts"
+            ]
           }
         },
         "publish": {
@@ -2518,7 +2536,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/components/private-dns-component/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/terraform/components/private-dns-component/**/*.ts"
+            ]
           }
         },
         "publish": {
@@ -2539,7 +2559,9 @@
             "jestConfig": "libs/terraform/components/private-dns-component/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/terraform/components/private-dns-component"]
+          "outputs": [
+            "coverage/libs/terraform/components/private-dns-component"
+          ]
         }
       }
     },
@@ -2562,7 +2584,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/services/pwa-service/**/*.ts"]
+            "lintFilePatterns": ["libs/terraform/services/pwa-service/**/*.ts"]
           }
         },
         "publish": {
@@ -2606,7 +2628,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/groups/registry-group/**/*.ts"]
+            "lintFilePatterns": ["libs/terraform/groups/registry-group/**/*.ts"]
           }
         },
         "publish": {
@@ -2650,7 +2672,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/services/reverse-proxy-service/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/terraform/services/reverse-proxy-service/**/*.ts"
+            ]
           }
         },
         "publish": {
@@ -2694,7 +2718,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/components/s3-component/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/terraform/components/s3-component/**/*.ts"
+            ]
           }
         },
         "publish": {
@@ -2738,7 +2764,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/components/s3-user-component/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/terraform/components/s3-user-component/**/*.ts"
+            ]
           }
         },
         "publish": {
@@ -2782,7 +2810,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/components/secrets-component/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/terraform/components/secrets-component/**/*.ts"
+            ]
           }
         },
         "publish": {
@@ -2826,7 +2856,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/components/volume-component/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/terraform/components/volume-component/**/*.ts"
+            ]
           }
         },
         "publish": {
@@ -2870,7 +2902,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "fix": true, "lintFilePatterns": ["libs/terraform/groups/zone-group/**/*.ts"]
+            "lintFilePatterns": ["libs/terraform/groups/zone-group/**/*.ts"]
           }
         },
         "publish": {
