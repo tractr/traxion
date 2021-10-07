@@ -10,18 +10,12 @@ import {
 import { Environments } from '../configs/environments.config';
 import { TerraformEnvironmentVariables } from '../dtos';
 
-import {
-  ApiComponent,
-  ApiComponentPublicConfig,
-} from '@tractr/terraform-api-service';
+import { ApiComponent } from '@tractr/terraform-api-service';
 import { AwsStack, AwsStackConfig } from '@tractr/terraform-aws-stack';
 import { NetworkGroup } from '@tractr/terraform-network-group';
 import { PoolGroup } from '@tractr/terraform-pool-group';
 import { PostgresComponent } from '@tractr/terraform-postgres-service';
-import {
-  PwaComponent,
-  PwaComponentPublicConfig,
-} from '@tractr/terraform-pwa-service';
+import { PwaComponent } from '@tractr/terraform-pwa-service';
 import {
   guessNxDockerizedAppsNames,
   RegistryGroup,
