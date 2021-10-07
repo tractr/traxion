@@ -1,4 +1,5 @@
 import { Construct } from 'constructs';
+import * as deepmerge from 'deepmerge';
 
 import {
   ApiConfig,
@@ -6,14 +7,21 @@ import {
   PwaConfig,
   ReverseProxyConfig,
 } from '../configs/apps.config';
+import { Environments } from '../configs/environments.config';
 import { TerraformEnvironmentVariables } from '../dtos';
 
-import { ApiComponent } from '@tractr/terraform-api-service';
+import {
+  ApiComponent,
+  ApiComponentPublicConfig,
+} from '@tractr/terraform-api-service';
 import { AwsStack, AwsStackConfig } from '@tractr/terraform-aws-stack';
 import { NetworkGroup } from '@tractr/terraform-network-group';
 import { PoolGroup } from '@tractr/terraform-pool-group';
 import { PostgresComponent } from '@tractr/terraform-postgres-service';
-import { PwaComponent } from '@tractr/terraform-pwa-service';
+import {
+  PwaComponent,
+  PwaComponentPublicConfig,
+} from '@tractr/terraform-pwa-service';
 import {
   guessNxDockerizedAppsNames,
   RegistryGroup,
@@ -27,7 +35,7 @@ export class MainStack extends AwsStack<AwsStackConfig> {
 
   protected readonly networkGroup: NetworkGroup;
 
-  protected readonly poolGroup: PoolGroup;
+  protected readonly poolGroups: PoolGroup[] = [];
 
   constructor(
     scope: Construct,
@@ -55,26 +63,45 @@ export class MainStack extends AwsStack<AwsStackConfig> {
       zones: AWS_AVAILABILITY_ZONES,
     });
 
-    // Add the pool group that will host our container
-    this.poolGroup = new PoolGroup(this, 'pool', {
-      registryGroup: this.registryGroup,
-      networkGroup: this.networkGroup,
-      zoneGroup: this.zoneGroup,
-      reverseProxyConfig: ReverseProxyConfig,
-    });
+    // Create a pool for each environment
+    for (const environment of Environments) {
+      // Add the pool group that will host our container
+      const poolGroup = new PoolGroup(this, environment.resourceId, {
+        registryGroup: this.registryGroup,
+        networkGroup: this.networkGroup,
+        zoneGroup: this.zoneGroup,
+        reverseProxyConfig: ReverseProxyConfig,
+        subDomain: environment.subDomain,
+      });
 
-    // Add a pwa as a http service
-    this.poolGroup.addHttpService(PwaComponent, 'pwa', PwaConfig);
+      // Add a pwa as a http service
+      const pwaOverrideConfig: PwaComponentPublicConfig = {
+        containerConfig: { imageTag: environment.pwaImageTag },
+      };
+      const mergedPwaConfig = deepmerge(PwaConfig, pwaOverrideConfig);
+      poolGroup.addHttpService(PwaComponent, 'pwa', mergedPwaConfig);
 
-    // Add a pwa as a http service
-    const api = this.poolGroup.addHttpService(ApiComponent, 'api', ApiConfig);
+      // Add a api as a http service
+      const apiOverrideConfig: ApiComponentPublicConfig = {
+        containerConfig: { imageTag: environment.apiImageTag },
+      };
+      const mergedApiConfig = deepmerge(ApiConfig, apiOverrideConfig);
+      const api = poolGroup.addHttpService(
+        ApiComponent,
+        'api',
+        mergedApiConfig,
+      );
 
-    // Add a postgres as a backend service
-    this.poolGroup.addBackendService(
-      PostgresComponent,
-      'postgres',
-      [api],
-      PostgresConfig,
-    );
+      // Add a postgres as a backend service
+      poolGroup.addBackendService(
+        PostgresComponent,
+        'postgres',
+        [api],
+        PostgresConfig,
+      );
+
+      // Store group
+      this.poolGroups.push(poolGroup);
+    }
   }
 }
