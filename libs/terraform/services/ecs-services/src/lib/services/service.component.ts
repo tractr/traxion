@@ -36,7 +36,7 @@ import {
 export abstract class ServiceComponent<
   C extends ServiceComponentConfig = ServiceComponentConfig,
   D extends ServiceComponentDefaultConfig = ServiceComponentDefaultConfig,
-> extends AwsComponent<C> {
+> extends AwsComponent<C & D> {
   protected readonly config: C & D;
 
   protected readonly serviceName: string;
@@ -60,8 +60,9 @@ export abstract class ServiceComponent<
     | undefined;
 
   constructor(scope: AwsProviderConstruct, id: string, config: C) {
-    super(scope, id, config);
-    this.config = deepmerge(this.getDefaultConfig(), config) as C & D;
+    super(scope, id, config as C & D); // Force partial config
+    this.config = deepmerge(this.getDefaultConfig(), config) as C & D; // Re-assign full config
+
     this.serviceName = kebab(id);
     this.containers = this.getContainers();
     this.volumesNames = this.getVolumesNames();
