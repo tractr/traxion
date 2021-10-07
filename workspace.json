@@ -1915,6 +1915,14 @@
       "root": "apps/terraform",
       "sourceRoot": "apps/terraform/src",
       "targets": {
+        "apply": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["terraform apply"],
+            "cwd": "./dist/cdktf.out/stacks/main",
+            "parallel": false
+          }
+        },
         "build": {
           "configurations": {
             "production": {
@@ -1941,6 +1949,14 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/terraform/**/*.ts"]
+          }
+        },
+        "plan": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["terraform init", "terraform plan"],
+            "cwd": "./dist/cdktf.out/stacks/main",
+            "parallel": false
           }
         },
         "serve": {
