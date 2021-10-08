@@ -7,8 +7,9 @@ update them when a new image is build.
 
 ### Task definition
 
-The track of the `task_definition` and `desired_count` are disabled to allow
-continuous deployment and autoscaling.
+The track of the `task_definition` is disabled to allow
+continuous deployment.
+If the auto-scaling is enabled, the track of `desired_count` is disabled too.
 
 Therefore, if you update a container definition, a new task definition will be
 created in ECS, but the service will still use the last task definition. You
