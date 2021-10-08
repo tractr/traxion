@@ -16,8 +16,8 @@ export interface ContainerDefinition {
       'awslogs-stream-prefix': string;
     };
   };
-  environment?: Environment[];
-  secrets?: Secret[];
+  environment?: EnvironmentDefinition[];
+  secrets?: SecretDefinition[];
   portMappings?: {
     containerPort: number;
     hostPort?: number;
@@ -27,12 +27,12 @@ export interface ContainerDefinition {
   dockerLabels?: Record<string, string>;
 }
 
-export interface Environment {
+export interface EnvironmentDefinition {
   name: string;
   value: string;
 }
 
-export interface Secret {
+export interface SecretDefinition {
   name: string;
   valueFrom: string;
 }

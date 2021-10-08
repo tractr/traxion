@@ -1,6 +1,9 @@
 import { PwaContainerConfig } from './interfaces';
 
-import { Environment, HttpContainer } from '@tractr/terraform-ecs-services';
+import {
+  EnvironmentDefinition,
+  HttpContainer,
+} from '@tractr/terraform-ecs-services';
 
 export class PwaContainer extends HttpContainer<PwaContainerConfig> {
   usePrivateImage(): boolean {
@@ -15,7 +18,7 @@ export class PwaContainer extends HttpContainer<PwaContainerConfig> {
     return 4200;
   }
 
-  protected getEnvironments(): Environment[] {
+  protected getEnvironments(): EnvironmentDefinition[] {
     const envs = super.getEnvironments();
 
     envs.push({

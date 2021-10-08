@@ -1,14 +1,13 @@
 import {
   ContainerConfig,
   ContainerDefinition,
-  Environment,
-  EnvironmentCb,
+  EnvironmentDefinition,
   EnvironmentLikeValue,
   EnvironmentOrSecretValue,
   EnvironmentValue,
   ImageDefinition,
   MountPoint,
-  Secret,
+  SecretDefinition,
   SecretLikeValue,
   SecretValue,
 } from '../interfaces';
@@ -78,7 +77,7 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
     return [];
   }
 
-  protected getEnvironments(): Environment[] {
+  protected getEnvironments(): EnvironmentDefinition[] {
     return this.extractEnvironmentsFromConfig().map(([name, value]) => {
       const computedValue =
         value.value instanceof Function
@@ -88,7 +87,7 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
     });
   }
 
-  protected getSecrets(): Secret[] {
+  protected getSecrets(): SecretDefinition[] {
     return this.extractSecretsFromConfig().map(([name, value]) => ({
       name,
       valueFrom: this.getSecretPath(value.secretKey ?? name),
