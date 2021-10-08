@@ -7,6 +7,7 @@ import { PostgresContainer } from './postgres.container';
 import {
   BackendServiceComponent,
   Container,
+  Secret,
 } from '@tractr/terraform-ecs-services';
 
 export class PostgresComponent extends BackendServiceComponent<
@@ -32,9 +33,9 @@ export class PostgresComponent extends BackendServiceComponent<
       containerConfig: {
         imageTag: '13-alpine',
         environments: {
-          POSTGRES_DB: { type: 'env', value: 'api' },
-          POSTGRES_USER: { type: 'secret' },
-          POSTGRES_PASSWORD: { type: 'secret' },
+          POSTGRES_DB: 'api',
+          POSTGRES_USER: Secret(),
+          POSTGRES_PASSWORD: Secret(),
         },
       },
     };

@@ -2,13 +2,18 @@ import {
   ContainerConfig,
   ContainerDefinition,
   Environment,
+  EnvironmentCb,
+  EnvironmentLikeValue,
+  EnvironmentOrSecretValue,
   EnvironmentValue,
   ImageDefinition,
   MountPoint,
   Secret,
+  SecretLikeValue,
   SecretValue,
 } from '../interfaces';
 import type { ServiceComponent } from '../services';
+import { SECRET_ENVIRONMENT } from './helpers';
 
 export abstract class Container<T extends ContainerConfig = ContainerConfig> {
   constructor(
@@ -92,18 +97,64 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
 
   /** Get key/values env pairs from environment object */
   protected extractEnvironmentsFromConfig(): [string, EnvironmentValue][] {
-    return Object.entries(this.config.environments || {}).filter(
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      ([name, value]) => value.type === 'env',
-    ) as [string, EnvironmentValue][];
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    return Object.entries(this.config.environments || {})
+      .filter(([name, value]) => this.isEnvironmentValueLike(value))
+      .map(([name, value]) => [
+        name,
+        this.convertToEnvironmentValue(value as EnvironmentLikeValue),
+      ]);
+    /* eslint-enable @typescript-eslint/no-unused-vars */
+  }
+
+  /** Denote if a value can be treated as an environment */
+  protected isEnvironmentValueLike(
+    value: EnvironmentOrSecretValue,
+  ): value is EnvironmentLikeValue {
+    return (
+      typeof value === 'string' ||
+      typeof value === 'function' ||
+      (typeof value === 'object' && value.type === 'env')
+    );
+  }
+
+  /** Wrap value to an EnvironmentValue object if necessary */
+  protected convertToEnvironmentValue(
+    value: EnvironmentLikeValue,
+  ): EnvironmentValue {
+    if (typeof value === 'string' || typeof value === 'function')
+      return { type: 'env', value };
+    return value;
   }
 
   /** Get key/values secret pairs from environment object */
   protected extractSecretsFromConfig(): [string, SecretValue][] {
-    return Object.entries(this.config.environments || {}).filter(
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      ([name, value]) => value.type === 'secret',
-    ) as [string, SecretValue][];
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    return Object.entries(this.config.environments || {})
+      .filter(([name, value]) => this.isSecretValueLike(value))
+      .map(([name, value]) => [
+        name,
+        this.convertToSecretValue(value as SecretLikeValue),
+      ]);
+    /* eslint-enable @typescript-eslint/no-unused-vars */
+  }
+
+  /** Denote if a value can be treated as a secret */
+  protected isSecretValueLike(
+    value: EnvironmentOrSecretValue,
+  ): value is SecretLikeValue {
+    return (
+      value === SECRET_ENVIRONMENT ||
+      (typeof value === 'object' && value.type === 'secret')
+    );
+  }
+
+  /** Wrap value to an SecretValue object if necessary */
+  protected convertToSecretValue(value: SecretLikeValue): SecretValue {
+    if (typeof value === 'object' && value.type === 'secret') {
+      return value;
+    }
+    return { type: 'secret' };
   }
 
   /** Returns env & secrets names */

@@ -4,6 +4,7 @@ import { ApiComponentConfig, ApiComponentDefaultConfig } from './interfaces';
 import {
   BackendServiceComponent,
   Container,
+  Secret,
 } from '@tractr/terraform-ecs-services';
 
 export class ApiComponent extends BackendServiceComponent<
@@ -33,27 +34,18 @@ export class ApiComponent extends BackendServiceComponent<
           stripPrefix: false,
         },
         environments: {
-          NODE_ENV: { type: 'env', value: 'production' },
-          API_URL: {
-            type: 'env',
-            value: (service) => service.getApplicationUrl('/api'),
-          },
-          PWA_URL: {
-            type: 'env',
-            value: (service) => service.getApplicationUrl(''),
-          },
-          POSTGRES_DB: { type: 'env', value: 'api' },
-          POSTGRES_DB_TEST: { type: 'env', value: 'testing' },
-          POSTGRES_HOST: {
-            type: 'env',
-            value: (service) => service.getServiceDomainName('postgres'),
-          },
-          POSTGRES_PORT: { type: 'env', value: '5432' },
-          POSTGRES_SCHEMA: { type: 'env', value: 'public' },
-          POSTGRES_USER: { type: 'secret' },
-          POSTGRES_PASSWORD: { type: 'secret' },
-          COOKIE_SECRET: { type: 'secret' },
-          JWT_SECRET: { type: 'secret' },
+          NODE_ENV: 'production',
+          API_URL: (service) => service.getApplicationUrl('/api'),
+          PWA_URL: (service) => service.getApplicationUrl(''),
+          POSTGRES_DB: 'api',
+          POSTGRES_DB_TEST: 'testing',
+          POSTGRES_HOST: (service) => service.getServiceDomainName('postgres'),
+          POSTGRES_PORT: '5432',
+          POSTGRES_SCHEMA: 'public',
+          POSTGRES_USER: Secret(),
+          POSTGRES_PASSWORD: Secret(),
+          COOKIE_SECRET: Secret(),
+          JWT_SECRET: Secret(),
         },
       },
     };

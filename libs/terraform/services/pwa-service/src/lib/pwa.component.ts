@@ -33,10 +33,7 @@ export class PwaComponent extends BackendServiceComponent<
           stripPrefix: false,
         },
         environments: {
-          API_URL: {
-            type: 'env',
-            value: (service) => service.getApplicationUrl('/api'),
-          },
+          API_URL: (service) => service.getApplicationUrl('/api'),
         },
       },
     };

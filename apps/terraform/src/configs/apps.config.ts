@@ -11,14 +11,11 @@ import { ReverseProxyComponentPublicConfig } from '@tractr/terraform-reverse-pro
  *  memory: '512',
  *  containerConfig: {
  *    environments: {
- *      JWT_SECRET: { type: 'secret' },
- *      COOKIE_SECRET: { type: 'secret', secretKey: 'CUSTOM_KEY' },
- *      POSTGRES_OPTIONS: { type: 'env', value: 'readonly=true' },
- *      POSTGRES_HOST: {
- *        type: 'env',
- *        value: (service, config) => service.getServiceDomainName('postgres'),
- *      },
- *      OTHER_ENV: { type: 'env', value: 'something' },
+ *      JWT_SECRET: Secret(),
+ *      COOKIE_SECRET: Secret('CUSTOM_KEY'),
+ *      POSTGRES_OPTIONS: 'readonly=true',
+ *      POSTGRES_HOST: (service, config) => service.getServiceDomainName('postgres'),
+ *      OTHER_ENV: 'something',
  *    },
  *  },
  * }

@@ -60,7 +60,10 @@ export type SecretValue = {
   type: 'secret';
   secretKey?: string;
 };
-export type EnvironmentOrSecretValue = EnvironmentValue | SecretValue;
+
+export type EnvironmentLikeValue = string | EnvironmentCb | EnvironmentValue;
+export type SecretLikeValue = symbol | SecretValue;
+export type EnvironmentOrSecretValue = EnvironmentLikeValue | SecretLikeValue;
 
 export interface ContainerInternalConfig {
   name: string;

@@ -8,10 +8,12 @@ Provides a PWA service with a single PWA container.
 const pwa = new PwaComponent(this, 'pwa', {
   containerConfig: {
     imageTag: 'latest',
-    apiPath: '/api',
     path: {
-      prefix: `/`,
+      prefix: '/',
       stripPrefix: false,
+    },
+    environments: {
+      API_URL: (service) => service.getApplicationUrl('/api'),
     },
   },
   desiredCount: 1,
