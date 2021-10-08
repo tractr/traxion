@@ -172,9 +172,6 @@
     "terraform": {
       "tags": []
     },
-    "terraform-api-service": {
-      "tags": []
-    },
     "terraform-aws-stack": {
       "tags": []
     },
@@ -211,28 +208,31 @@
     "terraform-component-volume": {
       "tags": []
     },
-    "terraform-ecs-services": {
+    "terraform-group-network": {
       "tags": []
     },
-    "terraform-network-group": {
+    "terraform-group-pool": {
       "tags": []
     },
-    "terraform-pool-group": {
+    "terraform-group-registry": {
       "tags": []
     },
-    "terraform-postgres-service": {
+    "terraform-group-zone": {
       "tags": []
     },
-    "terraform-pwa-service": {
+    "terraform-service-api": {
       "tags": []
     },
-    "terraform-registry-group": {
+    "terraform-service-ecs": {
       "tags": []
     },
-    "terraform-reverse-proxy-service": {
+    "terraform-service-postgres": {
       "tags": []
     },
-    "terraform-zone-group": {
+    "terraform-service-pwa": {
+      "tags": []
+    },
+    "terraform-service-reverse-proxy": {
       "tags": []
     }
   },

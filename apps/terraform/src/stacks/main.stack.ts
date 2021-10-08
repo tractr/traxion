@@ -10,17 +10,17 @@ import {
 import { Environments } from '../configs/environments.config';
 import { TerraformEnvironmentVariables } from '../dtos';
 
-import { ApiComponent } from '@tractr/terraform-api-service';
 import { AwsStack, AwsStackConfig } from '@tractr/terraform-aws-stack';
-import { NetworkGroup } from '@tractr/terraform-network-group';
-import { PoolGroup } from '@tractr/terraform-pool-group';
-import { PostgresComponent } from '@tractr/terraform-postgres-service';
-import { PwaComponent } from '@tractr/terraform-pwa-service';
+import { NetworkGroup } from '@tractr/terraform-group-network';
+import { PoolGroup } from '@tractr/terraform-group-pool';
 import {
   guessNxDockerizedAppsNames,
   RegistryGroup,
-} from '@tractr/terraform-registry-group';
-import { ZoneGroup } from '@tractr/terraform-zone-group';
+} from '@tractr/terraform-group-registry';
+import { ZoneGroup } from '@tractr/terraform-group-zone';
+import { ApiComponent } from '@tractr/terraform-service-api';
+import { PostgresComponent } from '@tractr/terraform-service-postgres';
+import { PwaComponent } from '@tractr/terraform-service-pwa';
 
 export class MainStack extends AwsStack<AwsStackConfig> {
   protected readonly registryGroup: RegistryGroup;

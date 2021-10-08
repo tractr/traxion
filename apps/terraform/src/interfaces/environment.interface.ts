@@ -1,5 +1,5 @@
-import { ApiComponentPublicConfig } from '@tractr/terraform-api-service';
-import { PwaComponentPublicConfig } from '@tractr/terraform-pwa-service';
+import { ApiComponentPublicConfig } from '@tractr/terraform-service-api';
+import { PwaComponentPublicConfig } from '@tractr/terraform-service-pwa';
 
 export interface Environment {
   /**

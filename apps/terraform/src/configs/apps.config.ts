@@ -1,7 +1,7 @@
-import { ApiComponentPublicConfig } from '@tractr/terraform-api-service';
-import { PostgresComponentPublicConfig } from '@tractr/terraform-postgres-service';
-import { PwaComponentPublicConfig } from '@tractr/terraform-pwa-service';
-import { ReverseProxyComponentPublicConfig } from '@tractr/terraform-reverse-proxy-service';
+import { ApiComponentPublicConfig } from '@tractr/terraform-service-api';
+import { PostgresComponentPublicConfig } from '@tractr/terraform-service-postgres';
+import { PwaComponentPublicConfig } from '@tractr/terraform-service-pwa';
+import { ReverseProxyComponentPublicConfig } from '@tractr/terraform-service-reverse-proxy';
 
 /**
  * @example
