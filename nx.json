@@ -175,40 +175,52 @@
     "terraform-api-service": {
       "tags": []
     },
-    "terraform-aws-component": {
-      "tags": []
-    },
     "terraform-aws-stack": {
       "tags": []
     },
-    "terraform-deployment-component": {
+    "terraform-component-aws": {
       "tags": []
     },
-    "terraform-deployment-trigger-component": {
+    "terraform-component-deployment": {
+      "tags": []
+    },
+    "terraform-component-deployment-trigger": {
+      "tags": []
+    },
+    "terraform-component-entrypoint": {
+      "tags": []
+    },
+    "terraform-component-logs": {
+      "tags": []
+    },
+    "terraform-component-owner-pictures": {
+      "tags": []
+    },
+    "terraform-component-private-dns": {
+      "tags": []
+    },
+    "terraform-component-s3": {
+      "tags": []
+    },
+    "terraform-component-s3-user": {
+      "tags": []
+    },
+    "terraform-component-secrets": {
+      "tags": []
+    },
+    "terraform-component-volume": {
       "tags": []
     },
     "terraform-ecs-services": {
       "tags": []
     },
-    "terraform-entrypoint-component": {
-      "tags": []
-    },
-    "terraform-logs-component": {
-      "tags": []
-    },
     "terraform-network-group": {
-      "tags": []
-    },
-    "terraform-owner-pictures-component": {
       "tags": []
     },
     "terraform-pool-group": {
       "tags": []
     },
     "terraform-postgres-service": {
-      "tags": []
-    },
-    "terraform-private-dns-component": {
       "tags": []
     },
     "terraform-pwa-service": {
@@ -218,18 +230,6 @@
       "tags": []
     },
     "terraform-reverse-proxy-service": {
-      "tags": []
-    },
-    "terraform-s3-component": {
-      "tags": []
-    },
-    "terraform-s3-user-component": {
-      "tags": []
-    },
-    "terraform-secrets-component": {
-      "tags": []
-    },
-    "terraform-volume-component": {
       "tags": []
     },
     "terraform-zone-group": {

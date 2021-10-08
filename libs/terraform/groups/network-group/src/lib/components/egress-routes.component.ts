@@ -4,7 +4,7 @@ import { ConstructOptions } from 'constructs';
 import {
   AwsComponent,
   AwsProviderConstruct,
-} from '@tractr/terraform-aws-component';
+} from '@tractr/terraform-component-aws';
 
 export interface EgressRoutesComponentConfig extends ConstructOptions {
   routeTableId: string;

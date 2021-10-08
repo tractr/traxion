@@ -2027,52 +2027,6 @@
         }
       }
     },
-    "terraform-aws-component": {
-      "projectType": "library",
-      "root": "libs/terraform/components/aws-component",
-      "sourceRoot": "libs/terraform/components/aws-component/src",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:package",
-          "options": {
-            "assets": ["libs/terraform/components/aws-component/*.md"],
-            "main": "libs/terraform/components/aws-component/src/index.ts",
-            "outputPath": "dist/libs/terraform/components/aws-component",
-            "packageJson": "libs/terraform/components/aws-component/package.json",
-            "tsConfig": "libs/terraform/components/aws-component/tsconfig.lib.json"
-          },
-          "outputs": ["{options.outputPath}"]
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/terraform/components/aws-component/**/*.ts"
-            ]
-          }
-        },
-        "publish": {
-          "executor": "ngx-deploy-npm:deploy",
-          "options": {
-            "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": false
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/terraform/components/aws-component/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/terraform/components/aws-component"]
-        }
-      }
-    },
     "terraform-aws-stack": {
       "projectType": "library",
       "root": "libs/terraform/aws-stack",
@@ -2117,28 +2071,70 @@
         }
       }
     },
-    "terraform-deployment-component": {
+    "terraform-component-aws": {
       "projectType": "library",
-      "root": "libs/terraform/components/deployment-component",
-      "sourceRoot": "libs/terraform/components/deployment-component/src",
+      "root": "libs/terraform/component/aws",
+      "sourceRoot": "libs/terraform/component/aws/src",
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
           "options": {
-            "assets": ["libs/terraform/components/deployment-component/*.md"],
-            "main": "libs/terraform/components/deployment-component/src/index.ts",
-            "outputPath": "dist/libs/terraform/components/deployment-component",
-            "packageJson": "libs/terraform/components/deployment-component/package.json",
-            "tsConfig": "libs/terraform/components/deployment-component/tsconfig.lib.json"
+            "assets": ["libs/terraform/component/aws/*.md"],
+            "main": "libs/terraform/component/aws/src/index.ts",
+            "outputPath": "dist/libs/terraform/component/aws",
+            "packageJson": "libs/terraform/component/aws/package.json",
+            "tsConfig": "libs/terraform/component/aws/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/terraform/components/deployment-component/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/terraform/component/aws/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/component/aws/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/component/aws"]
+        }
+      }
+    },
+    "terraform-component-deployment": {
+      "projectType": "library",
+      "root": "libs/terraform/component/deployment",
+      "sourceRoot": "libs/terraform/component/deployment/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/component/deployment/*.md"],
+            "main": "libs/terraform/component/deployment/src/index.ts",
+            "outputPath": "dist/libs/terraform/component/deployment",
+            "packageJson": "libs/terraform/component/deployment/package.json",
+            "tsConfig": "libs/terraform/component/deployment/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/component/deployment/**/*.ts"]
           }
         },
         "publish": {
@@ -2156,28 +2152,26 @@
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/terraform/components/deployment-component/jest.config.js",
+            "jestConfig": "libs/terraform/component/deployment/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/terraform/components/deployment-component"]
+          "outputs": ["coverage/libs/terraform/component/deployment"]
         }
       }
     },
-    "terraform-deployment-trigger-component": {
+    "terraform-component-deployment-trigger": {
       "projectType": "library",
-      "root": "libs/terraform/components/deployment-trigger-component",
-      "sourceRoot": "libs/terraform/components/deployment-trigger-component/src",
+      "root": "libs/terraform/component/deployment-trigger",
+      "sourceRoot": "libs/terraform/component/deployment-trigger/src",
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
           "options": {
-            "assets": [
-              "libs/terraform/components/deployment-trigger-component/*.md"
-            ],
-            "main": "libs/terraform/components/deployment-trigger-component/src/index.ts",
-            "outputPath": "dist/libs/terraform/components/deployment-trigger-component",
-            "packageJson": "libs/terraform/components/deployment-trigger-component/package.json",
-            "tsConfig": "libs/terraform/components/deployment-trigger-component/tsconfig.lib.json"
+            "assets": ["libs/terraform/component/deployment-trigger/*.md"],
+            "main": "libs/terraform/component/deployment-trigger/src/index.ts",
+            "outputPath": "dist/libs/terraform/component/deployment-trigger",
+            "packageJson": "libs/terraform/component/deployment-trigger/package.json",
+            "tsConfig": "libs/terraform/component/deployment-trigger/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
         },
@@ -2185,7 +2179,7 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/terraform/components/deployment-trigger-component/**/*.ts"
+              "libs/terraform/component/deployment-trigger/**/*.ts"
             ]
           }
         },
@@ -2204,12 +2198,364 @@
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/terraform/components/deployment-trigger-component/jest.config.js",
+            "jestConfig": "libs/terraform/component/deployment-trigger/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/terraform/components/deployment-trigger-component"
-          ]
+          "outputs": ["coverage/libs/terraform/component/deployment-trigger"]
+        }
+      }
+    },
+    "terraform-component-entrypoint": {
+      "projectType": "library",
+      "root": "libs/terraform/component/entrypoint",
+      "sourceRoot": "libs/terraform/component/entrypoint/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/component/entrypoint/*.md"],
+            "main": "libs/terraform/component/entrypoint/src/index.ts",
+            "outputPath": "dist/libs/terraform/component/entrypoint",
+            "packageJson": "libs/terraform/component/entrypoint/package.json",
+            "tsConfig": "libs/terraform/component/entrypoint/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/component/entrypoint/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/component/entrypoint/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/component/entrypoint"]
+        }
+      }
+    },
+    "terraform-component-logs": {
+      "projectType": "library",
+      "root": "libs/terraform/component/logs",
+      "sourceRoot": "libs/terraform/component/logs/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/component/logs/*.md"],
+            "main": "libs/terraform/component/logs/src/index.ts",
+            "outputPath": "dist/libs/terraform/component/logs",
+            "packageJson": "libs/terraform/component/logs/package.json",
+            "tsConfig": "libs/terraform/component/logs/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/component/logs/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/component/logs/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/component/logs"]
+        }
+      }
+    },
+    "terraform-component-owner-pictures": {
+      "projectType": "library",
+      "root": "libs/terraform/component/owner-pictures",
+      "sourceRoot": "libs/terraform/component/owner-pictures/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/component/owner-pictures/*.md"],
+            "main": "libs/terraform/component/owner-pictures/src/index.ts",
+            "outputPath": "dist/libs/terraform/component/owner-pictures",
+            "packageJson": "libs/terraform/component/owner-pictures/package.json",
+            "tsConfig": "libs/terraform/component/owner-pictures/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/terraform/component/owner-pictures/**/*.ts"
+            ]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/component/owner-pictures/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/component/owner-pictures"]
+        }
+      }
+    },
+    "terraform-component-private-dns": {
+      "projectType": "library",
+      "root": "libs/terraform/component/private-dns",
+      "sourceRoot": "libs/terraform/component/private-dns/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/component/private-dns/*.md"],
+            "main": "libs/terraform/component/private-dns/src/index.ts",
+            "outputPath": "dist/libs/terraform/component/private-dns",
+            "packageJson": "libs/terraform/component/private-dns/package.json",
+            "tsConfig": "libs/terraform/component/private-dns/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/component/private-dns/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/component/private-dns/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/component/private-dns"]
+        }
+      }
+    },
+    "terraform-component-s3": {
+      "projectType": "library",
+      "root": "libs/terraform/component/s3",
+      "sourceRoot": "libs/terraform/component/s3/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/component/s3/*.md"],
+            "main": "libs/terraform/component/s3/src/index.ts",
+            "outputPath": "dist/libs/terraform/component/s3",
+            "packageJson": "libs/terraform/component/s3/package.json",
+            "tsConfig": "libs/terraform/component/s3/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/component/s3/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/component/s3/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/component/s3"]
+        }
+      }
+    },
+    "terraform-component-s3-user": {
+      "projectType": "library",
+      "root": "libs/terraform/component/s3-user",
+      "sourceRoot": "libs/terraform/component/s3-user/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/component/s3-user/*.md"],
+            "main": "libs/terraform/component/s3-user/src/index.ts",
+            "outputPath": "dist/libs/terraform/component/s3-user",
+            "packageJson": "libs/terraform/component/s3-user/package.json",
+            "tsConfig": "libs/terraform/component/s3-user/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/component/s3-user/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/component/s3-user/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/component/s3-user"]
+        }
+      }
+    },
+    "terraform-component-secrets": {
+      "projectType": "library",
+      "root": "libs/terraform/component/secrets",
+      "sourceRoot": "libs/terraform/component/secrets/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/component/secrets/*.md"],
+            "main": "libs/terraform/component/secrets/src/index.ts",
+            "outputPath": "dist/libs/terraform/component/secrets",
+            "packageJson": "libs/terraform/component/secrets/package.json",
+            "tsConfig": "libs/terraform/component/secrets/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/component/secrets/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/component/secrets/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/component/secrets"]
+        }
+      }
+    },
+    "terraform-component-volume": {
+      "projectType": "library",
+      "root": "libs/terraform/component/volume",
+      "sourceRoot": "libs/terraform/component/volume/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/terraform/component/volume/*.md"],
+            "main": "libs/terraform/component/volume/src/index.ts",
+            "outputPath": "dist/libs/terraform/component/volume",
+            "packageJson": "libs/terraform/component/volume/package.json",
+            "tsConfig": "libs/terraform/component/volume/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/terraform/component/volume/**/*.ts"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:version",
+          "options": {
+            "access": "restricted"
+          }
+        },
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": false
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terraform/component/volume/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/terraform/component/volume"]
         }
       }
     },
@@ -2257,98 +2603,6 @@
         }
       }
     },
-    "terraform-entrypoint-component": {
-      "projectType": "library",
-      "root": "libs/terraform/components/entrypoint-component",
-      "sourceRoot": "libs/terraform/components/entrypoint-component/src",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:package",
-          "options": {
-            "assets": ["libs/terraform/components/entrypoint-component/*.md"],
-            "main": "libs/terraform/components/entrypoint-component/src/index.ts",
-            "outputPath": "dist/libs/terraform/components/entrypoint-component",
-            "packageJson": "libs/terraform/components/entrypoint-component/package.json",
-            "tsConfig": "libs/terraform/components/entrypoint-component/tsconfig.lib.json"
-          },
-          "outputs": ["{options.outputPath}"]
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/terraform/components/entrypoint-component/**/*.ts"
-            ]
-          }
-        },
-        "publish": {
-          "executor": "ngx-deploy-npm:version",
-          "options": {
-            "access": "restricted"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": false
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/terraform/components/entrypoint-component/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/terraform/components/entrypoint-component"]
-        }
-      }
-    },
-    "terraform-logs-component": {
-      "projectType": "library",
-      "root": "libs/terraform/components/logs-component",
-      "sourceRoot": "libs/terraform/components/logs-component/src",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:package",
-          "options": {
-            "assets": ["libs/terraform/components/logs-component/*.md"],
-            "main": "libs/terraform/components/logs-component/src/index.ts",
-            "outputPath": "dist/libs/terraform/components/logs-component",
-            "packageJson": "libs/terraform/components/logs-component/package.json",
-            "tsConfig": "libs/terraform/components/logs-component/tsconfig.lib.json"
-          },
-          "outputs": ["{options.outputPath}"]
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/terraform/components/logs-component/**/*.ts"
-            ]
-          }
-        },
-        "publish": {
-          "executor": "ngx-deploy-npm:version",
-          "options": {
-            "access": "restricted"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": false
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/terraform/components/logs-component/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/terraform/components/logs-component"]
-        }
-      }
-    },
     "terraform-network-group": {
       "projectType": "library",
       "root": "libs/terraform/groups/network-group",
@@ -2390,56 +2644,6 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/terraform/groups/network-group"]
-        }
-      }
-    },
-    "terraform-owner-pictures-component": {
-      "projectType": "library",
-      "root": "libs/terraform/components/owner-pictures-component",
-      "sourceRoot": "libs/terraform/components/owner-pictures-component/src",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:package",
-          "options": {
-            "assets": [
-              "libs/terraform/components/owner-pictures-component/*.md"
-            ],
-            "main": "libs/terraform/components/owner-pictures-component/src/index.ts",
-            "outputPath": "dist/libs/terraform/components/owner-pictures-component",
-            "packageJson": "libs/terraform/components/owner-pictures-component/package.json",
-            "tsConfig": "libs/terraform/components/owner-pictures-component/tsconfig.lib.json"
-          },
-          "outputs": ["{options.outputPath}"]
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/terraform/components/owner-pictures-component/**/*.ts"
-            ]
-          }
-        },
-        "publish": {
-          "executor": "ngx-deploy-npm:version",
-          "options": {
-            "access": "restricted"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": false
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/terraform/components/owner-pictures-component/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": [
-            "coverage/libs/terraform/components/owner-pictures-component"
-          ]
         }
       }
     },
@@ -2530,54 +2734,6 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/terraform/services/postgres-service"]
-        }
-      }
-    },
-    "terraform-private-dns-component": {
-      "projectType": "library",
-      "root": "libs/terraform/components/private-dns-component",
-      "sourceRoot": "libs/terraform/components/private-dns-component/src",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:package",
-          "options": {
-            "assets": ["libs/terraform/components/private-dns-component/*.md"],
-            "main": "libs/terraform/components/private-dns-component/src/index.ts",
-            "outputPath": "dist/libs/terraform/components/private-dns-component",
-            "packageJson": "libs/terraform/components/private-dns-component/package.json",
-            "tsConfig": "libs/terraform/components/private-dns-component/tsconfig.lib.json"
-          },
-          "outputs": ["{options.outputPath}"]
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/terraform/components/private-dns-component/**/*.ts"
-            ]
-          }
-        },
-        "publish": {
-          "executor": "ngx-deploy-npm:version",
-          "options": {
-            "access": "restricted"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": false
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/terraform/components/private-dns-component/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": [
-            "coverage/libs/terraform/components/private-dns-component"
-          ]
         }
       }
     },
@@ -2712,190 +2868,6 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/terraform/services/reverse-proxy-service"]
-        }
-      }
-    },
-    "terraform-s3-component": {
-      "projectType": "library",
-      "root": "libs/terraform/components/s3-component",
-      "sourceRoot": "libs/terraform/components/s3-component/src",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:package",
-          "options": {
-            "assets": ["libs/terraform/components/s3-component/*.md"],
-            "main": "libs/terraform/components/s3-component/src/index.ts",
-            "outputPath": "dist/libs/terraform/components/s3-component",
-            "packageJson": "libs/terraform/components/s3-component/package.json",
-            "tsConfig": "libs/terraform/components/s3-component/tsconfig.lib.json"
-          },
-          "outputs": ["{options.outputPath}"]
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/terraform/components/s3-component/**/*.ts"
-            ]
-          }
-        },
-        "publish": {
-          "executor": "ngx-deploy-npm:deploy",
-          "options": {
-            "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": false
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/terraform/components/s3-component/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/terraform/components/s3-component"]
-        }
-      }
-    },
-    "terraform-s3-user-component": {
-      "projectType": "library",
-      "root": "libs/terraform/components/s3-user-component",
-      "sourceRoot": "libs/terraform/components/s3-user-component/src",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:package",
-          "options": {
-            "assets": ["libs/terraform/components/s3-user-component/*.md"],
-            "main": "libs/terraform/components/s3-user-component/src/index.ts",
-            "outputPath": "dist/libs/terraform/components/s3-user-component",
-            "packageJson": "libs/terraform/components/s3-user-component/package.json",
-            "tsConfig": "libs/terraform/components/s3-user-component/tsconfig.lib.json"
-          },
-          "outputs": ["{options.outputPath}"]
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/terraform/components/s3-user-component/**/*.ts"
-            ]
-          }
-        },
-        "publish": {
-          "executor": "ngx-deploy-npm:deploy",
-          "options": {
-            "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": false
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/terraform/components/s3-user-component/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/terraform/components/s3-user-component"]
-        }
-      }
-    },
-    "terraform-secrets-component": {
-      "projectType": "library",
-      "root": "libs/terraform/components/secrets-component",
-      "sourceRoot": "libs/terraform/components/secrets-component/src",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:package",
-          "options": {
-            "assets": ["libs/terraform/components/secrets-component/*.md"],
-            "main": "libs/terraform/components/secrets-component/src/index.ts",
-            "outputPath": "dist/libs/terraform/components/secrets-component",
-            "packageJson": "libs/terraform/components/secrets-component/package.json",
-            "tsConfig": "libs/terraform/components/secrets-component/tsconfig.lib.json"
-          },
-          "outputs": ["{options.outputPath}"]
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/terraform/components/secrets-component/**/*.ts"
-            ]
-          }
-        },
-        "publish": {
-          "executor": "ngx-deploy-npm:version",
-          "options": {
-            "access": "restricted"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": false
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/terraform/components/secrets-component/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/terraform/components/secrets-component"]
-        }
-      }
-    },
-    "terraform-volume-component": {
-      "projectType": "library",
-      "root": "libs/terraform/components/volume-component",
-      "sourceRoot": "libs/terraform/components/volume-component/src",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:package",
-          "options": {
-            "assets": ["libs/terraform/components/volume-component/*.md"],
-            "main": "libs/terraform/components/volume-component/src/index.ts",
-            "outputPath": "dist/libs/terraform/components/volume-component",
-            "packageJson": "libs/terraform/components/volume-component/package.json",
-            "tsConfig": "libs/terraform/components/volume-component/tsconfig.lib.json"
-          },
-          "outputs": ["{options.outputPath}"]
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/terraform/components/volume-component/**/*.ts"
-            ]
-          }
-        },
-        "publish": {
-          "executor": "ngx-deploy-npm:version",
-          "options": {
-            "access": "restricted"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": false
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/terraform/components/volume-component/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/terraform/components/volume-component"]
         }
       }
     },

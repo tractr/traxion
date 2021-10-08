@@ -9,7 +9,7 @@ import { NatGatewayComponent } from './nat-gateway.component';
 import {
   AwsComponent,
   AwsProviderConstruct,
-} from '@tractr/terraform-aws-component';
+} from '@tractr/terraform-component-aws';
 
 export type InternetAccessMode = 'nat' | 'egress' | 'igw' | 'none';
 

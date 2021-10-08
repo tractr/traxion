@@ -7,7 +7,8 @@ import {
   AwsComponent,
   AwsComponentConstructor,
   AwsProviderConstruct,
-} from '@tractr/terraform-aws-component';
+} from '@tractr/terraform-component-aws';
+import { PrivateDnsComponent } from '@tractr/terraform-component-private-dns';
 import {
   BackendServiceComponent,
   BackendServiceComponentConfig,
@@ -16,7 +17,6 @@ import {
   ServiceComponentConfig,
   ServiceComponentPublicConfig,
 } from '@tractr/terraform-ecs-services';
-import { PrivateDnsComponent } from '@tractr/terraform-private-dns-component';
 import {
   ReverseProxyComponent,
   ReverseProxyTaskRoleComponent,

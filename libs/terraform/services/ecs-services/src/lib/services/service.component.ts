@@ -22,16 +22,16 @@ import {
 import {
   AwsComponent,
   AwsProviderConstruct,
-} from '@tractr/terraform-aws-component';
+} from '@tractr/terraform-component-aws';
 import {
   DeploymentComponent,
   DeploymentComponentConfig,
-} from '@tractr/terraform-deployment-component';
-import { DockerApplication } from '@tractr/terraform-registry-group';
+} from '@tractr/terraform-component-deployment';
 import {
   VolumeComponent,
   VolumeComponentConfig,
-} from '@tractr/terraform-volume-component';
+} from '@tractr/terraform-component-volume';
+import { DockerApplication } from '@tractr/terraform-registry-group';
 
 export abstract class ServiceComponent<
   C extends ServiceComponentConfig = ServiceComponentConfig,

@@ -6,7 +6,7 @@ import { DockerRegistryComponentConfig } from '../interfaces';
 import {
   AwsComponent,
   AwsProviderConstruct,
-} from '@tractr/terraform-aws-component';
+} from '@tractr/terraform-component-aws';
 
 export interface DockerApplication {
   repositoryName: string;

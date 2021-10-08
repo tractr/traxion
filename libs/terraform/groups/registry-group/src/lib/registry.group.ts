@@ -4,7 +4,7 @@ import { RegistryGroupConfig } from './interfaces';
 import {
   AwsComponent,
   AwsProviderConstruct,
-} from '@tractr/terraform-aws-component';
+} from '@tractr/terraform-component-aws';
 
 /**
  * This group create code and containers registries (docker, npm, etc.)

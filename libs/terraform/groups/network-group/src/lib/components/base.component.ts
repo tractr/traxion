@@ -13,7 +13,7 @@ import { InternetRoutesComponent } from './internet-routes.component';
 import {
   AwsComponent,
   AwsProviderConstruct,
-} from '@tractr/terraform-aws-component';
+} from '@tractr/terraform-component-aws';
 
 export interface BaseComponentConfig extends ConstructOptions {
   cidrPrefix: string;

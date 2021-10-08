@@ -11,7 +11,7 @@ import {
 import {
   AwsComponent,
   AwsProviderConstruct,
-} from '@tractr/terraform-aws-component';
+} from '@tractr/terraform-component-aws';
 
 export class NetworkGroup extends AwsComponent<
   NetworkGroupConfig & NetworkGroupDefaultConfig
