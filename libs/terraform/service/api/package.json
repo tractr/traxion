@@ -7,13 +7,13 @@
   },
   "peerDependencies": {
     "@cdktf/provider-aws": "^2.0.8",
-    "@tractr/terraform-aws-component": "^0.2.0",
-    "@tractr/terraform-network-group": "^0.2.0",
-    "@tractr/terraform-pool-group": "^0.2.0",
-    "@tractr/terraform-registry-group": "^0.2.0",
-    "@tractr/terraform-s3-component": "^0.2.0",
-    "@tractr/terraform-s3-user-component": "^0.2.0",
-    "@tractr/terraform-zone-group": "^0.2.0"
+    "@tractr/terraform-component-aws": "^0.2.0",
+    "@tractr/terraform-component-s3": "^0.2.0",
+    "@tractr/terraform-component-s3-user": "^0.2.0",
+    "@tractr/terraform-group-network": "^0.2.0",
+    "@tractr/terraform-group-pool": "^0.2.0",
+    "@tractr/terraform-group-registry": "^0.2.0",
+    "@tractr/terraform-group-zone": "^0.2.0"
   },
   "publishConfig": {
     "access": "restricted",

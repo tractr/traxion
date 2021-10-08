@@ -7,7 +7,7 @@
   },
   "peerDependencies": {
     "@cdktf/provider-aws": "^2.0.8",
-    "@tractr/terraform-aws-component": "^0.2.0"
+    "@tractr/terraform-component-aws": "^0.2.0"
   },
   "publishConfig": {
     "access": "restricted",

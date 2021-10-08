@@ -5,7 +5,7 @@ import { ConstructOptions } from 'constructs';
 import {
   AwsComponent,
   AwsProviderConstruct,
-} from '@tractr/terraform-aws-component';
+} from '@tractr/terraform-component-aws';
 
 export class DeploymentStoreComponent extends AwsComponent<ConstructOptions> {
   protected readonly s3Bucket: S3Bucket;
