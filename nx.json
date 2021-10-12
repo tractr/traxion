@@ -106,6 +106,9 @@
     "hapify-templates-prisma": {
       "tags": ["scope:template"]
     },
+    "hapify-templates-react-admin": {
+      "tags": []
+    },
     "hapify-templates-rest-dtos": {
       "tags": ["scope:template"]
     },

@@ -54,5 +54,6 @@ module.exports = {
     '<rootDir>/libs/terraform/component/entrypoint',
     '<rootDir>/libs/terraform/service/ecs',
     '<rootDir>/libs/terraform/service/reverse-proxy',
+    '<rootDir>/libs/hapify/templates/react-admin',
   ],
 };
