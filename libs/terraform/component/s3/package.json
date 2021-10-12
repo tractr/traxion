@@ -1,0 +1,16 @@
+{
+  "name": "@tractr/terraform-component-s3",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "peerDependencies": {
+    "@cdktf/provider-aws": "^2.0.8",
+    "@tractr/terraform-component-aws": "^0.2.0"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

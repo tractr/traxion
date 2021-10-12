@@ -1,13 +1,13 @@
 {
   "name": "@tractr/terraform-aws-stack",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
   },
   "peerDependencies": {
     "@cdktf/provider-aws": "^2.0.8",
-    "@tractr/terraform-aws-component": "^0.2.0"
+    "@tractr/terraform-component-aws": "^0.2.0"
   },
   "publishConfig": {
     "access": "restricted",

@@ -1,0 +1,23 @@
+{
+  "name": "@tractr/hapify-templates-react-admin",
+  "version": "0.1.0",
+  "description": "Template to generate a react admin configuration",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "@tractr/hapify-templates-models": "1.4.2",
+    "@tractr/hapify-templates-rest-dtos": "1.3.6",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.2.0",
+    "xhr2": "^0.2.1"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}
