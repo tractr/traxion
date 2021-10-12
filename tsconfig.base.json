@@ -80,35 +80,67 @@
       "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"],
       "@tractr/prisma": ["libs/prisma/src/index.ts"],
       "@tractr/schematics": ["libs/schematics/src/index.ts"],
-      "@tractr/terraform-api-service": [
-        "libs/terraform/api-service/src/index.ts"
-      ],
-      "@tractr/terraform-aws-component": [
-        "libs/terraform/aws-component/src/index.ts"
-      ],
       "@tractr/terraform-aws-stack": ["libs/terraform/aws-stack/src/index.ts"],
-      "@tractr/terraform-network-group": [
-        "libs/terraform/network-group/src/index.ts"
+      "@tractr/terraform-component-aws": [
+        "libs/terraform/component/aws/src/index.ts"
       ],
-      "@tractr/terraform-pool-group": [
-        "libs/terraform/pool-group/src/index.ts"
+      "@tractr/terraform-component-deployment": [
+        "libs/terraform/component/deployment/src/index.ts"
       ],
-      "@tractr/terraform-postgres-service": [
-        "libs/terraform/postgres-service/src/index.ts"
+      "@tractr/terraform-component-deployment-trigger": [
+        "libs/terraform/component/deployment-trigger/src/index.ts"
       ],
-      "@tractr/terraform-pwa-service": [
-        "libs/terraform/pwa-service/src/index.ts"
+      "@tractr/terraform-component-entrypoint": [
+        "libs/terraform/component/entrypoint/src/index.ts"
       ],
-      "@tractr/terraform-registry-group": [
-        "libs/terraform/registry-group/src/index.ts"
+      "@tractr/terraform-component-logs": [
+        "libs/terraform/component/logs/src/index.ts"
       ],
-      "@tractr/terraform-s3-component": [
-        "libs/terraform/s3-component/src/index.ts"
+      "@tractr/terraform-component-owner-pictures": [
+        "libs/terraform/component/owner-pictures/src/index.ts"
       ],
-      "@tractr/terraform-s3-user-component": [
-        "libs/terraform/s3-user-component/src/index.ts"
+      "@tractr/terraform-component-private-dns": [
+        "libs/terraform/component/private-dns/src/index.ts"
       ],
-      "@tractr/terraform-zone-group": ["libs/terraform/zone-group/src/index.ts"]
+      "@tractr/terraform-component-s3": [
+        "libs/terraform/component/s3/src/index.ts"
+      ],
+      "@tractr/terraform-component-s3-user": [
+        "libs/terraform/component/s3-user/src/index.ts"
+      ],
+      "@tractr/terraform-component-secrets": [
+        "libs/terraform/component/secrets/src/index.ts"
+      ],
+      "@tractr/terraform-component-volume": [
+        "libs/terraform/component/volume/src/index.ts"
+      ],
+      "@tractr/terraform-group-network": [
+        "libs/terraform/group/network/src/index.ts"
+      ],
+      "@tractr/terraform-group-pool": [
+        "libs/terraform/group/pool/src/index.ts"
+      ],
+      "@tractr/terraform-group-registry": [
+        "libs/terraform/group/registry/src/index.ts"
+      ],
+      "@tractr/terraform-group-zone": [
+        "libs/terraform/group/zone/src/index.ts"
+      ],
+      "@tractr/terraform-service-api": [
+        "libs/terraform/service/api/src/index.ts"
+      ],
+      "@tractr/terraform-service-ecs": [
+        "libs/terraform/service/ecs/src/index.ts"
+      ],
+      "@tractr/terraform-service-postgres": [
+        "libs/terraform/service/postgres/src/index.ts"
+      ],
+      "@tractr/terraform-service-pwa": [
+        "libs/terraform/service/pwa/src/index.ts"
+      ],
+      "@tractr/terraform-service-reverse-proxy": [
+        "libs/terraform/service/reverse-proxy/src/index.ts"
+      ]
     },
     "resolveJsonModule": true,
     "rootDir": ".",
