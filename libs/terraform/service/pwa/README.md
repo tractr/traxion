@@ -21,3 +21,4 @@ const pwa = new PwaComponent(this, 'pwa', {
   memory: '512',
 });
 ```
+
