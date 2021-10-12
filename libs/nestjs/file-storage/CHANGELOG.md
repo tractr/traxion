@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.3.5](https://github.com/tractr/stack/compare/nestjs-file-storage-0.3.4...nestjs-file-storage-0.3.5) (2021-10-12)
+
+
+### Bug Fixes
+
+* update default expiricy of file storage presigned upload ([#284](https://github.com/tractr/stack/issues/284)) ([01e29e1](https://github.com/tractr/stack/commit/01e29e1adfa9b14d52b0ef992289950a9961d471))
+
+
+
 ## [0.3.4](https://github.com/tractr/stack/compare/nestjs-file-storage-0.3.3...nestjs-file-storage-0.3.4) (2021-10-06)
 
 
