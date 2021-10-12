@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.3.1](https://github.com/tractr/stack/compare/schematics-0.3.0...schematics-0.3.1) (2021-10-08)
+
+
+### Bug Fixes
+
+* update npm publish target to publish ([#281](https://github.com/tractr/stack/issues/281)) ([fe02e53](https://github.com/tractr/stack/commit/fe02e53f498488173c072cb9665c522d03eb8ba0))
+
+
+
 # [0.3.0](https://github.com/tractr/stack/compare/schematics-0.2.0...schematics-0.3.0) (2021-09-01)
 
 

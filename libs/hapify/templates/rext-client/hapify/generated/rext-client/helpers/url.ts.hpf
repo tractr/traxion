@@ -6,6 +6,18 @@ export type URLSearchParamsType =
   | Record<string, string | number | boolean | string[] | string[][] | Date | undefined>;
  
 export function getUrlSearchParams(init: URLSearchParamsType) {
+  const params = init;
+  if (
+    typeof params === 'object' &&
+    !Array.isArray(params) &&
+    params !== null &&
+    !(params instanceof URLSearchParams)
+  ) {
+    // Specifically remove undefined value if found
+    Object.keys(params as Record<string, any>).forEach((key) =>
+      params[key] === undefined ? delete params[key] : {},
+    );
+  }
   return new URLSearchParams(
     init as string | string[][] | Record<string, string> | URLSearchParams,
   );

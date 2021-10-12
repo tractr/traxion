@@ -55,7 +55,7 @@ export default async function npmPublishGenerator(
 
   project.targets = project.targets || {};
   project.targets.publish = {
-    executor: `${SEMVER_PACKAGE_NAME}:version`,
+    executor: `${SEMVER_PACKAGE_NAME}:deploy`,
     options: {
       access: normalizedOptions.access,
     },
