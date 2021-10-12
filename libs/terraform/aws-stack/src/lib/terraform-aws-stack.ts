@@ -4,7 +4,7 @@ import { Construct } from 'constructs';
 
 import { AwsStackConfig } from './interfaces';
 
-import { AwsProviderConstruct } from '@tractr/terraform-aws-component';
+import { AwsProviderConstruct } from '@tractr/terraform-component-aws';
 
 export abstract class AwsStack<T extends AwsStackConfig>
   extends TerraformStack
