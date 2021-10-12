@@ -1,6 +1,6 @@
 module.exports = {
   displayName: 'terraform-service-postgres',
-  preset: '../../../jest.preset.js',
+  preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
