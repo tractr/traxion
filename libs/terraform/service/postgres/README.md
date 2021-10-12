@@ -19,3 +19,4 @@ const postgres = new PostgresComponent(this, 'postgres', {
   memory: '512',
 });
 ```
+
