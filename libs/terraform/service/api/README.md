@@ -32,3 +32,4 @@ const api = new ApiComponent(this, 'api', {
   memory: '512',
 });
 ```
+

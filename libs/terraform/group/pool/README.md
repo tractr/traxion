@@ -22,3 +22,4 @@ definition. Therefore, if you have changed task definition from Terraform and
 those tasks were not stable, they will be ignored by Code Pipeline. You need to
 go in ECS console and update the service to use the last version of the task
 definition.
+
