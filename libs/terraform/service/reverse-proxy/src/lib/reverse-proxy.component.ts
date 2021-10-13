@@ -50,7 +50,7 @@ export class ReverseProxyComponent extends ServiceComponent<
       loadBalancer: [
         {
           targetGroupArn: this.config.loadBalancerTargetGroupArn,
-          containerName: 'proxy',
+          containerName: 'reverse-proxy',
           containerPort: 80,
         },
       ],
