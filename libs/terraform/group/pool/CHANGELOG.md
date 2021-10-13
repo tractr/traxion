@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.2.0](https://github.com/tractr/stack/compare/terraform-group-pool-0.1.1...terraform-group-pool-0.2.0) (2021-10-13)
+
+
+### Features
+
+* **terraform:** s3 cors ([#288](https://github.com/tractr/stack/issues/288)) ([489ce5a](https://github.com/tractr/stack/commit/489ce5ae0d291759d6861c9bb17e74934f98d95c))
+
+
+
 ## [0.1.1](https://github.com/tractr/stack/compare/terraform-group-pool-0.1.0...terraform-group-pool-0.1.1) (2021-10-12)
 
 
