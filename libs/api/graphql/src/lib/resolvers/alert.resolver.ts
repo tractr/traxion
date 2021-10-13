@@ -1,4 +1,4 @@
-import { Resolver, Subscription } from '@nestjs/graphql';
+import { Query, Resolver, Subscription } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 
 import { Alert } from '../models';
@@ -9,6 +9,15 @@ const pubSub = new PubSub();
 
 @Resolver(() => Alert)
 export class AlertResolver {
+  @Query(() => Alert)
+  getAlert() {
+    return {
+      camera: 'test',
+      type: 'test',
+      time: 'test',
+    };
+  }
+
   @Subscription(() => Alert, {
     name: 'newAlert',
   })
@@ -22,6 +31,6 @@ export class AlertResolver {
   })
   async handleAlert(alert) {
     console.info('ALERT MESSAGE GRAPHQL: ', alert);
-    await pubSub.publish('newAlert', { newAlert: alert });
+    return pubSub.publish('newAlert', { newAlert: alert });
   }
 }
