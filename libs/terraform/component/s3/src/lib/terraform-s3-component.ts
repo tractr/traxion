@@ -1,4 +1,4 @@
-import { S3Bucket } from '@cdktf/provider-aws';
+import { S3Bucket, S3BucketCorsRule } from '@cdktf/provider-aws';
 import { TerraformOutput, Token } from 'cdktf';
 import { ConstructOptions } from 'constructs';
 
@@ -7,7 +7,14 @@ import {
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export class S3Component extends AwsComponent<ConstructOptions> {
+export interface S3ComponentConfig extends ConstructOptions {
+  publicRead?: boolean;
+  allowUpload?: {
+    origins: string[];
+  };
+}
+
+export class S3Component extends AwsComponent<S3ComponentConfig> {
   protected readonly s3Bucket: S3Bucket;
 
   protected readonly s3BucketNameOutput: TerraformOutput;
@@ -17,7 +24,7 @@ export class S3Component extends AwsComponent<ConstructOptions> {
   constructor(
     scope: AwsProviderConstruct,
     id: string,
-    config: ConstructOptions = {},
+    config: S3ComponentConfig,
   ) {
     super(scope, id, config);
     this.s3Bucket = this.createS3Bucket();
@@ -30,11 +37,29 @@ export class S3Component extends AwsComponent<ConstructOptions> {
     return new S3Bucket(this, 'bucket', {
       provider: this.provider,
       bucketPrefix: this.getResourceName('').replace(/_/g, '-'),
-      acl: 'private',
+      acl: this.getAcl(),
+      corsRule: this.getCorsRules(),
       forceDestroy: true,
       versioning: [{ enabled: false }],
       tags: this.getResourceNameAsTag('bucket'),
     });
+  }
+
+  protected getCorsRules(): S3BucketCorsRule[] {
+    if (!this.config.allowUpload) return [];
+    return [
+      {
+        allowedHeaders: ['*'],
+        allowedOrigins: this.config.allowUpload.origins,
+        allowedMethods: ['POST', 'GET', 'PUT'],
+        exposeHeaders: [],
+        maxAgeSeconds: 3600,
+      },
+    ];
+  }
+
+  protected getAcl(): string {
+    return this.config.publicRead ? 'public-read' : 'private';
   }
 
   protected createS3BucketNameOutput() {
