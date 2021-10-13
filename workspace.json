@@ -2124,7 +2124,7 @@
           }
         },
         "publish": {
-          "executor": "ngx-deploy-npm:version",
+          "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "restricted"
           }
@@ -2214,7 +2214,7 @@
           }
         },
         "publish": {
-          "executor": "ngx-deploy-npm:version",
+          "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "restricted"
           }
@@ -2258,7 +2258,7 @@
           }
         },
         "publish": {
-          "executor": "ngx-deploy-npm:version",
+          "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "restricted"
           }
@@ -2304,7 +2304,7 @@
           }
         },
         "publish": {
-          "executor": "ngx-deploy-npm:version",
+          "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "restricted"
           }
@@ -2348,7 +2348,7 @@
           }
         },
         "publish": {
-          "executor": "ngx-deploy-npm:version",
+          "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "restricted"
           }
@@ -2480,7 +2480,7 @@
           }
         },
         "publish": {
-          "executor": "ngx-deploy-npm:version",
+          "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "restricted"
           }
@@ -2524,7 +2524,7 @@
           }
         },
         "publish": {
-          "executor": "ngx-deploy-npm:version",
+          "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "restricted"
           }
@@ -2788,7 +2788,7 @@
           }
         },
         "publish": {
-          "executor": "ngx-deploy-npm:version",
+          "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "restricted"
           }
@@ -2920,7 +2920,7 @@
           }
         },
         "publish": {
-          "executor": "ngx-deploy-npm:version",
+          "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "restricted"
           }
