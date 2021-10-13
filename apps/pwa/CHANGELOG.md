@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.14.1](https://github.com/tractr/stack/compare/pwa-1.14.0...pwa-1.14.1) (2021-10-13)
+
+
+### Bug Fixes
+
+* fix inconsistent url between aws and minio ([#287](https://github.com/tractr/stack/issues/287)) ([7ec3442](https://github.com/tractr/stack/commit/7ec34429f1a203fc70a1a04128a36bc5f6e64616))
+
+
+
 # [1.14.0](https://github.com/tractr/stack/compare/pwa-1.13.0...pwa-1.14.0) (2021-09-01)
 
 
