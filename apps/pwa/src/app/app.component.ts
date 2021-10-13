@@ -10,4 +10,9 @@ export class AppComponent {
   hello$ = this.http.get<string>('/api/hello');
 
   constructor(private http: HttpClient) {}
+
+  log(a: any) {
+    // eslint-disable-next-line no-console
+    console.log(a);
+  }
 }
