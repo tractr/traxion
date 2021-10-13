@@ -237,7 +237,8 @@
     },
     "terraform-service-reverse-proxy": {
       "tags": []
-    }
+    },
+    "workspace": {}
   },
   "targetDependencies": {
     "build": [
