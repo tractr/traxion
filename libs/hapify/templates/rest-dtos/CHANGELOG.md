@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.21.0](https://github.com/tractr/stack/compare/v1.20.1...v1.21.0) (2021-10-13)
+
+
+
 ## [1.7.2](https://github.com/tractr/stack/compare/hapify-templates-rest-dtos-1.7.1...hapify-templates-rest-dtos-1.7.2) (2021-09-07)
 
 

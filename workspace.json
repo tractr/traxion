@@ -104,12 +104,6 @@
             "buildTarget": "production"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -155,12 +149,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -211,12 +199,6 @@
             "buildTarget": "production"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -263,12 +245,6 @@
           "options": {
             "access": "public",
             "buildTarget": "production"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -319,12 +295,6 @@
             "buildTarget": "production"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -373,12 +343,6 @@
             "buildTarget": "production"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -425,12 +389,6 @@
           "options": {
             "access": "public",
             "buildTarget": "production"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -487,12 +445,6 @@
             "lintFilePatterns": ["apps/api/**/*.ts"]
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "serve": {
           "executor": "@nrwl/node:execute",
           "options": {
@@ -544,12 +496,6 @@
             "access": "public"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -595,12 +541,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -661,12 +601,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -754,12 +688,6 @@
             "access": "public"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -804,12 +732,6 @@
             "access": "public"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -850,12 +772,6 @@
           "options": {
             "access": "public"
           }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
         }
       }
     },
@@ -888,12 +804,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -936,12 +846,6 @@
           "options": {
             "access": "public"
           }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
         }
       }
     },
@@ -974,12 +878,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         }
       }
@@ -1014,12 +912,6 @@
           "options": {
             "access": "public"
           }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
         }
       }
     },
@@ -1053,12 +945,6 @@
           "options": {
             "access": "public"
           }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
         }
       }
     },
@@ -1091,12 +977,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -1139,12 +1019,6 @@
           "options": {
             "access": "public"
           }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
         }
       }
     },
@@ -1163,18 +1037,6 @@
             "tsConfig": "libs/hapify/templates/react-admin/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
-        },
-        "publish": {
-          "executor": "ngx-deploy-npm:deploy",
-          "options": {
-            "access": "restricted"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
         }
       }
     },
@@ -1208,12 +1070,6 @@
           "options": {
             "access": "public"
           }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
         }
       }
     },
@@ -1246,12 +1102,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         }
       }
@@ -1327,12 +1177,6 @@
             "access": "public"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -1369,12 +1213,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -1415,12 +1253,6 @@
             "access": "public"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -1457,12 +1289,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -1503,12 +1329,6 @@
             "access": "public"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -1547,12 +1367,6 @@
             "access": "public"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -1589,12 +1403,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -1636,12 +1444,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -1782,12 +1584,6 @@
             "parallel": false
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "serve": {
           "configurations": {
             "development": {
@@ -1902,18 +1698,6 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/schematics/**/*.ts"]
-          }
-        },
-        "publish": {
-          "executor": "ngx-deploy-npm:deploy",
-          "options": {
-            "access": "restricted"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -2041,12 +1825,6 @@
             "access": "public"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -2083,12 +1861,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -2167,12 +1939,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -2367,12 +2133,6 @@
             "access": "public"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -2409,12 +2169,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -2531,12 +2285,6 @@
             "access": "public"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -2573,12 +2321,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -2619,12 +2361,6 @@
             "access": "public"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -2663,12 +2399,6 @@
             "access": "public"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -2705,12 +2435,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -2789,12 +2513,6 @@
             "access": "public"
           }
         },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -2831,12 +2549,6 @@
           "executor": "ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
-          }
-        },
-        "release": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
           }
         },
         "test": {
@@ -2888,12 +2600,6 @@
       }
     },
     "workspace": {
-      "publish": {
-        "executor": "ngx-deploy-npm:version",
-        "options": {
-          "access": "restricted"
-        }
-      },
       "root": ".",
       "targets": {
         "version": {
