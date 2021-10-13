@@ -3,7 +3,7 @@ import { PwaComponentPublicConfig } from '@tractr/terraform-service-pwa';
 
 export interface Environment {
   /**
-   * Firendly name of the environment
+   * Friendly name of the environment
    */
   name: string;
   /**

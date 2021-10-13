@@ -15,6 +15,11 @@ export interface PoolGroupInternalConfig extends ConstructOptions {
 export interface PoolGroupDefaultConfig {
   subDomain: string;
   reverseProxyConfig: ReverseProxyComponentPublicConfig;
+  ownerPictureConfig: {
+    additionalReadOnlyS3Arns?: string[];
+    s3PublicRead?: boolean;
+    s3AllowUpload?: boolean;
+  };
 }
 export type PoolGroupPublicConfig = DeepPartial<PoolGroupDefaultConfig>;
 
