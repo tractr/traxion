@@ -1,6 +1,6 @@
 {
   "name": "@tractr/eslint-config",
-  "version": "1.9.0",
+  "version": "1.21.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack.git"

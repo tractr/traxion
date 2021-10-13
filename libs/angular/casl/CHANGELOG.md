@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.21.0](https://github.com/tractr/stack/compare/v1.20.1...v1.21.0) (2021-10-13)
+
+
+
 # [0.3.0](https://github.com/tractr/stack/compare/angular-casl-0.2.0...angular-casl-0.3.0) (2021-08-06)
 
 
