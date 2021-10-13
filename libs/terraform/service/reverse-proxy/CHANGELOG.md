@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.21.1](https://github.com/tractr/stack/compare/v1.21.0...v1.21.1) (2021-10-13)
+
+
+
 # [1.21.0](https://github.com/tractr/stack/compare/v1.20.1...v1.21.0) (2021-10-13)
 
 # [0.2.0](https://github.com/tractr/stack/compare/terraform-service-reverse-proxy-0.1.1...terraform-service-reverse-proxy-0.2.0) (2021-10-13)
