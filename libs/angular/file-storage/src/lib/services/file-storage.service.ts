@@ -96,7 +96,11 @@ export class FileStorageService {
       switchMap(({ postURL, formData }) =>
         this.http.post(postURL, formData, { reportProgress }).pipe(
           map(() => ({
-            url: `${postURL}/${formData.get('key')?.toString()}`,
+            url: this.getUploadFileUrl(
+              postURL,
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              formData.get('key')!.toString(),
+            ),
             size: file.size,
             mimeType: file.type,
           })),
@@ -104,5 +108,19 @@ export class FileStorageService {
       ),
       shareReplay(1),
     );
+  }
+
+  /**
+   * Return the url of an uploaded file, calculated from the upload url
+   * and the file key
+   *
+   * @param postURL - Upload url of the file
+   * @param fileKey - Key of the uploaded file
+   * @returns the public url of the uploaded file
+   */
+  public getUploadFileUrl(postURL: string, fileKey: string) {
+    // Remove last backslash of the url if it exists, as it can be inconsistent between minio and aws
+    const formattedPostUrl = postURL.replace(/\/\s*$/, '');
+    return `${formattedPostUrl}/${fileKey}`;
   }
 }

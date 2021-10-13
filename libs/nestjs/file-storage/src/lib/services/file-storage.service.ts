@@ -56,7 +56,9 @@ export class FileStorageService extends Client {
     const path = `${temporaryPrefix}/${
       destinationPath || `${this.getUniqueFilename()}.${fileExtension}`
     }`;
-    const expires = new Date(Date.now() + presignedUpload.defaultValidity);
+    const expires = new Date(
+      Date.now() + presignedUpload.defaultValidity * 1000,
+    );
 
     const policy = this.newPostPolicy();
     policy.setBucket(bucket);

@@ -1,6 +1,6 @@
 {
-  "app": "nx run terraform:build && node ./dist/apps/terraform/main",
+  "app": "nx run terraform:build --skip-nx-cache && node ./dist/apps/terraform/main",
   "language": "typescript",
   "output": "./dist/cdktf.out",
-  "terraformProviders": ["aws@~> 3.0"]
+  "terraformProviders": ["hashicorp/aws@~> 3.42"]
 }

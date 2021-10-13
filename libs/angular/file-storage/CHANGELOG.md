@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.3.2](https://github.com/tractr/stack/compare/angular-file-storage-0.3.1...angular-file-storage-0.3.2) (2021-10-13)
+
+
+### Bug Fixes
+
+* fix inconsistent url between aws and minio ([#287](https://github.com/tractr/stack/issues/287)) ([7ec3442](https://github.com/tractr/stack/commit/7ec34429f1a203fc70a1a04128a36bc5f6e64616))
+
+
+
 ## [0.3.1](https://github.com/tractr/stack/compare/angular-file-storage-0.3.0...angular-file-storage-0.3.1) (2021-08-31)
 
 
