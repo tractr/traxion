@@ -68,8 +68,14 @@ export class PoolGroup extends AwsComponent<
   }
 
   protected createOwnerPicturesComponent() {
+    const { additionalReadOnlyS3Arns, s3PublicRead, s3AllowUpload } =
+      this.config.ownerPictureConfig;
     return new OwnerPicturesComponent(this, 'owner-pictures', {
-      additionalReadOnlyS3Arns: [],
+      additionalReadOnlyS3Arns,
+      s3PublicRead,
+      s3AllowUpload: s3AllowUpload
+        ? { origins: [this.getApplicationBaseUrl()] }
+        : undefined,
     });
   }
 

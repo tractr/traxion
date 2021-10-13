@@ -12,6 +12,10 @@ import {
 
 export interface OwnerPicturesComponentConfig extends ConstructOptions {
   additionalReadOnlyS3Arns?: string[];
+  s3PublicRead?: boolean;
+  s3AllowUpload?: {
+    origins: string[];
+  };
 }
 
 export class OwnerPicturesComponent extends AwsComponent<OwnerPicturesComponentConfig> {
@@ -30,7 +34,10 @@ export class OwnerPicturesComponent extends AwsComponent<OwnerPicturesComponentC
   }
 
   protected createS3Component() {
-    return new S3Component(this, 's3');
+    return new S3Component(this, 's3', {
+      publicRead: this.config.s3PublicRead,
+      allowUpload: this.config.s3AllowUpload,
+    });
   }
 
   protected createS3UserComponent() {

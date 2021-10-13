@@ -3,11 +3,11 @@ import * as deepmerge from 'deepmerge';
 
 import {
   ApiConfig,
+  Environments,
   PostgresConfig,
   PwaConfig,
   ReverseProxyConfig,
-} from '../configs/apps.config';
-import { Environments } from '../configs/environments.config';
+} from '../configs';
 import { TerraformEnvironmentVariables } from '../dtos';
 
 import { AwsStack, AwsStackConfig } from '@tractr/terraform-aws-stack';
