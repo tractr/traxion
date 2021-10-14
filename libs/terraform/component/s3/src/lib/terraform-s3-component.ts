@@ -90,7 +90,7 @@ export class S3Component extends AwsComponent<S3ComponentConfig> {
           Effect: 'Allow',
           Principal: '*',
           Action: ['s3:GetObject'],
-          Resource: [this.getBucketArnAsToken()],
+          Resource: [`${this.getBucketArnAsToken()}/*`],
         },
       ],
     });
