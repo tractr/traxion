@@ -1,4 +1,8 @@
-import { S3Bucket, S3BucketCorsRule } from '@cdktf/provider-aws';
+import {
+  S3Bucket,
+  S3BucketCorsRule,
+  S3BucketPolicy,
+} from '@cdktf/provider-aws';
 import { TerraformOutput, Token } from 'cdktf';
 import { ConstructOptions } from 'constructs';
 
@@ -17,6 +21,8 @@ export interface S3ComponentConfig extends ConstructOptions {
 export class S3Component extends AwsComponent<S3ComponentConfig> {
   protected readonly s3Bucket: S3Bucket;
 
+  protected readonly s3BucketPolicy: S3BucketPolicy | undefined;
+
   protected readonly s3BucketNameOutput: TerraformOutput;
 
   protected readonly s3BucketRegionalDomainNameOutput: TerraformOutput;
@@ -28,6 +34,9 @@ export class S3Component extends AwsComponent<S3ComponentConfig> {
   ) {
     super(scope, id, config);
     this.s3Bucket = this.createS3Bucket();
+    if (this.config.publicRead) {
+      this.s3BucketPolicy = this.createS3BucketPublicPolicy();
+    }
     this.s3BucketNameOutput = this.createS3BucketNameOutput();
     this.s3BucketRegionalDomainNameOutput =
       this.createS3BucketRegionalDomainNameOutput();
@@ -37,8 +46,8 @@ export class S3Component extends AwsComponent<S3ComponentConfig> {
     return new S3Bucket(this, 'bucket', {
       provider: this.provider,
       bucketPrefix: this.getResourceName('').replace(/_/g, '-'),
-      acl: this.getAcl(),
       corsRule: this.getCorsRules(),
+      acl: 'private',
       forceDestroy: true,
       versioning: [{ enabled: false }],
       tags: this.getResourceNameAsTag('bucket'),
@@ -58,14 +67,32 @@ export class S3Component extends AwsComponent<S3ComponentConfig> {
     ];
   }
 
-  protected getAcl(): string {
-    return this.config.publicRead ? 'public-read' : 'private';
+  protected createS3BucketPublicPolicy() {
+    return new S3BucketPolicy(this, 'policy', {
+      bucket: this.getBucketIdAsToken(),
+      policy: this.getBucketPublicPolicy(),
+    });
   }
 
   protected createS3BucketNameOutput() {
     return new TerraformOutput(this, 'name', {
       value: this.getBucketNameAsToken(),
       sensitive: false,
+    });
+  }
+
+  protected getBucketPublicPolicy(): string {
+    return JSON.stringify({
+      Version: '2012-10-17',
+      Statement: [
+        {
+          Sid: 'PublicRead',
+          Effect: 'Allow',
+          Principal: '*',
+          Action: ['s3:GetObject'],
+          Resource: [`${this.getBucketArnAsToken()}/*`],
+        },
+      ],
     });
   }
 
