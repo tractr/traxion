@@ -64,8 +64,8 @@ jobs:
           git config --local user.email 'tractr-bot@users.noreply.github.com'
 
       # We run our version script
-      - name: Run npm affected:release
-        run: npm run affected:release -- --base latest
+      - name: Run npm release
+        run: npm run workspace:release -- --base latest
 
       - name: Push changes
         uses: ad-m/github-push-action@master
@@ -80,7 +80,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         # Publish will try on all the packages
         # Wait to see https://github.com/jscutlery/semver/issues/167
-        run: npm run affected:publish -- --base latest || true
+        run:
+          nx build && nx run-many --target publish --all --base latest || true
 
       # Set the matrix apps that have been affected by all the changes
       - name: Affected apps output
