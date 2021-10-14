@@ -66,6 +66,10 @@ export class MainStack extends AwsStack<AwsStackConfig> {
         zoneGroup: this.zoneGroup,
         reverseProxyConfig: ReverseProxyConfig,
         subDomain: environment.subDomain,
+        ownerPictureConfig: {
+          s3PublicRead: true,
+          s3AllowUpload: true,
+        },
       });
 
       // Add a pwa as a http service
