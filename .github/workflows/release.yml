@@ -64,8 +64,8 @@ jobs:
           git config --local user.email 'tractr-bot@users.noreply.github.com'
 
       # We run our version script
-      - name: Run npm release
-        run: npm run workspace:release -- --base latest
+      - name: npm run workspace:version
+        run: npm run workspace:version -- --base latest
 
       - name: Push changes
         uses: ad-m/github-push-action@master
@@ -75,7 +75,7 @@ jobs:
           tags: true
 
       # We publish our release
-      - name: Run npm affected:publish
+      - name: run npm affected:publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         # Publish will try on all the packages
