@@ -253,10 +253,10 @@
         "target": "pregenerate"
       }
     ],
-    "release": [
+    "publish": [
       {
         "projects": "dependencies",
-        "target": "release"
+        "target": "publish"
       }
     ]
   },
