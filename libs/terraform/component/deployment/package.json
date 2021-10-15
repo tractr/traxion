@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-component-deployment",
-  "version": "1.21.2",
+  "version": "1.21.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
