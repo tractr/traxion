@@ -39,6 +39,15 @@ export class PostgresComponent extends BackendServiceComponent<
     return containers;
   }
 
+  /**
+   * If the backups are enabled, the backup container need the call this service
+   * in order to connect to postgres. Therefore the security group should accept
+   * incoming connection from itself.
+   */
+  protected shouldAccessItself(): boolean {
+    return this.config.enableBackups;
+  }
+
   protected getDefaultConfig(): PostgresComponentDefaultConfig {
     return {
       ...super.getDefaultConfig(),
@@ -71,7 +80,7 @@ export class PostgresComponent extends BackendServiceComponent<
           POSTGRES_DB: 'api',
           POSTGRES_USER: Secret(),
           POSTGRES_PASSWORD: Secret(),
-          POSTGRES_HOST: 'postgres',
+          POSTGRES_HOST: (service) => service.getServiceDomainName('postgres'),
           POSTGRES_PORT: '5432',
         },
       },

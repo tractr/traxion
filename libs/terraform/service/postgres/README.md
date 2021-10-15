@@ -24,7 +24,8 @@ const postgres = new PostgresComponent(this, 'postgres', {
 
 This service also provide a backup system based on image `tractr/postgres-backup` which is based on `blacklabelops/volumerize`.
 This last one is able to store backups on many providers.
-By default, this service stores the backups on a persistent container Volume, i.e. on AWS EFS.
+By default, this service stores the backups on a persistent container Volume, i.e. on AWS EFS using the VolumeComponent.
+This EFS is also backup by AWS by using the `Automatic backup` option.
 
 You may want to store backups on another providers.
 See the [Volumerize documentation](https://github.com/blacklabelops/volumerize) for more examples.
@@ -58,7 +59,7 @@ const postgres = new PostgresComponent(this, 'postgres', {
       AWS_SECRET_ACCESS_KEY: 'ewlfkwkejflkjwlkej3fjw381',
       POSTGRES_USER: Secret(),
       POSTGRES_PASSWORD: Secret(),
-      POSTGRES_HOST: 'postgres',
+      POSTGRES_HOST: (service) => service.getServiceDomainName('postgres'),
       POSTGRES_PORT: '5432',
       POSTGRES_DB: 'api',
     },

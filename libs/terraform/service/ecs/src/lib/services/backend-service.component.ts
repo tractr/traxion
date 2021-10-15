@@ -30,8 +30,17 @@ export abstract class BackendServiceComponent<
         fromPort: port,
         toPort: port,
         securityGroups: this.config.clientsSecurityGroupsIds,
+        selfAttribute: this.shouldAccessItself(),
       })),
     };
+  }
+
+  /**
+   * Whether to add `self` attribute on security group ingress rules in order to allow this service to call itself.
+   * For exemple, a service with two different containers that need to call each other.
+   */
+  protected shouldAccessItself(): boolean {
+    return false;
   }
 
   protected abstract getIngressPorts(): number[];
