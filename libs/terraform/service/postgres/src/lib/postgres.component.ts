@@ -58,8 +58,6 @@ export class PostgresComponent extends BackendServiceComponent<
           VOLUMERIZE_TARGET: 'file:///backups',
           VOLUMERIZE_JOBBER_TIME: '0 0 */4 * * *',
           VOLUMERIZE_FULL_IF_OLDER_THAN: '3D',
-          JOB_NOTIFY_ERR1: 'true',
-          JOB_NOTIFY_FAIL1: 'true',
           JOB_NAME2: 'RemoveOldBackups',
           JOB_COMMAND2: '/etc/volumerize/remove-older-than 1M --force',
           JOB_TIME2: '0 0 2 * * *',

@@ -10,8 +10,6 @@ export interface BackupContainerPublicConfig extends ContainerPublicConfig {
     VOLUMERIZE_TARGET: EnvironmentOrSecretValue;
     VOLUMERIZE_JOBBER_TIME: EnvironmentOrSecretValue;
     VOLUMERIZE_FULL_IF_OLDER_THAN: EnvironmentOrSecretValue;
-    JOB_NOTIFY_ERR1?: EnvironmentOrSecretValue;
-    JOB_NOTIFY_FAIL1?: EnvironmentOrSecretValue;
     JOB_NAME2?: EnvironmentOrSecretValue;
     JOB_COMMAND2?: EnvironmentOrSecretValue;
     JOB_TIME2?: EnvironmentOrSecretValue;
