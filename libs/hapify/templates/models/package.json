@@ -1,6 +1,6 @@
 {
   "name": "@tractr/hapify-templates-models",
-  "version": "1.9.2",
+  "version": "1.21.1",
   "description": "Hapify templates for models class validators and types",
   "repository": {
     "type": "git",
