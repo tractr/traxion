@@ -60,7 +60,7 @@ const postgres = new PostgresComponent(this, 'postgres', {
       POSTGRES_PASSWORD: Secret(),
       POSTGRES_HOST: 'postgres',
       POSTGRES_PORT: '5432',
-      POSTGRES_DB: Secret(),
+      POSTGRES_DB: 'api',
     },
   },
   desiredCount: 1,

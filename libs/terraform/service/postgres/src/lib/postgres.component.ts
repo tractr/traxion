@@ -64,11 +64,11 @@ export class PostgresComponent extends BackendServiceComponent<
           JOB_NAME3: 'CleanupBackups',
           JOB_COMMAND3: '/etc/volumerize/cleanup --force',
           JOB_TIME3: '0 0 3 * * *',
+          POSTGRES_DB: 'api',
           POSTGRES_USER: Secret(),
           POSTGRES_PASSWORD: Secret(),
           POSTGRES_HOST: 'postgres',
           POSTGRES_PORT: '5432',
-          POSTGRES_DB: Secret(),
         },
       },
     };
