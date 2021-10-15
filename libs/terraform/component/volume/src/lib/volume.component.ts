@@ -23,6 +23,7 @@ export interface VolumeComponentConfig extends ConstructOptions {
     | 'AFTER_30_DAYS'
     | 'AFTER_60_DAYS'
     | 'AFTER_90_DAYS';
+  preventDestroy?: boolean;
 }
 
 export class VolumeComponent<
@@ -65,6 +66,7 @@ export class VolumeComponent<
       lifecyclePolicy: [
         { transitionToIa: this.config.transitionToIa || 'AFTER_90_DAYS' },
       ],
+      lifecycle: { preventDestroy: !!this.config.preventDestroy },
       tags: this.getResourceNameAsTag('fs'),
     });
   }
