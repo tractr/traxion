@@ -45,6 +45,7 @@ export interface ImageDefinition {
 export interface MountPoint {
   sourceVolume: string;
   containerPath: string;
+  preventDestroy?: boolean;
 }
 
 export type EnvironmentCb<C extends ContainerConfig = ContainerConfig> = (

@@ -218,15 +218,26 @@ export abstract class ServiceComponent<
   }
 
   protected createVolumeComponent(name: string) {
-    return new VolumeComponent(this, name, this.getVolumeComponentConfig());
+    return new VolumeComponent(this, name, this.getVolumeComponentConfig(name));
   }
 
-  protected getVolumeComponentConfig(): VolumeComponentConfig {
+  protected getVolumeComponentConfig(name: string): VolumeComponentConfig {
     return {
       vpcId: this.config.vpcId,
       subnetsIds: this.config.subnetsIds,
       clientsSecurityGroupsIds: [this.getSecurityGroupIdAsToken()],
+      preventDestroy: this.shouldPreventDestroyForVolume(name),
     };
+  }
+
+  protected shouldPreventDestroyForVolume(name: string): boolean {
+    // Check if at least one container says that this volume must not be destroyed.
+    return this.containers.some((container) =>
+      container
+        .getMountPoints()
+        .filter((volume) => volume.sourceVolume === name)
+        .some((volume) => volume.preventDestroy),
+    );
   }
 
   protected getVolumesForTaskDefinition(): EcsTaskDefinitionVolume[] {
