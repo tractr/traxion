@@ -1,5 +1,7 @@
 import { ConstructOptions } from 'constructs';
 
+import { Container } from '../containers';
+
 import { DockerApplications } from '@tractr/terraform-group-registry';
 
 // Check cpu/memory pairs: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
@@ -16,6 +18,13 @@ export type MemoryValue =
   | '8192'
   | '16384'
   | '30720';
+
+export type VolumesConfig = {
+  preventDestroy: boolean;
+  enableBackups: boolean;
+  containers: Container[];
+};
+export type VolumesConfigs = Record<string, VolumesConfig>;
 
 export interface ServiceComponentInternalConfig extends ConstructOptions {
   vpcId: string;

@@ -17,6 +17,8 @@ import { Container } from '../containers';
 import {
   ServiceComponentConfig,
   ServiceComponentDefaultConfig,
+  VolumesConfig,
+  VolumesConfigs,
 } from '../interfaces';
 
 import {
@@ -53,7 +55,7 @@ export abstract class ServiceComponent<
 
   protected readonly containers: Container[];
 
-  protected readonly volumesNames: string[];
+  protected readonly volumesConfigs: VolumesConfigs;
 
   protected readonly volumeComponentsMap:
     | Record<string, VolumeComponent>
@@ -68,7 +70,7 @@ export abstract class ServiceComponent<
     this.config = deepmerge(this.getDefaultConfig(), config) as C & D;
 
     this.containers = this.getContainers();
-    this.volumesNames = this.getVolumesNames();
+    this.volumesConfigs = this.getVolumesConfigs();
     this.securityGroup = this.createSecurityGroup();
     if (this.shouldCreateVolumeComponent()) {
       this.volumeComponentsMap = this.createVolumeComponentsMap();
@@ -193,51 +195,66 @@ export abstract class ServiceComponent<
     };
   }
 
-  protected getVolumesNames(): string[] {
-    const volumes = new Set<string>();
-    this.containers.forEach((container) => {
-      container.getMountPoints().forEach((mountPoint) => {
-        volumes.add(mountPoint.sourceVolume);
-      });
-    });
-    return [...volumes];
+  /**
+   * Aggregate and group all mounts points across every container and merge boolean properties
+   * @protected
+   */
+  protected getVolumesConfigs(): VolumesConfigs {
+    const volumes: VolumesConfigs = {};
+    for (const container of this.containers) {
+      const mountPoints = container.getMountPoints();
+      for (const mountPoint of mountPoints) {
+        const name = mountPoint.sourceVolume;
+        const previous: VolumesConfig = volumes[name]
+          ? volumes[name]
+          : {
+              containers: [],
+              preventDestroy: false,
+              enableBackups: false,
+            };
+
+        volumes[name] = {
+          containers: [...previous.containers, container],
+          preventDestroy: mountPoint.preventDestroy || previous.preventDestroy,
+          enableBackups: mountPoint.enableBackups || previous.enableBackups,
+        };
+      }
+    }
+    return volumes;
   }
 
   protected shouldCreateVolumeComponent() {
-    return this.volumesNames.length > 0;
+    return Object.keys(this.volumesConfigs).length > 0;
   }
 
   protected createVolumeComponentsMap() {
-    return this.volumesNames.reduce(
-      (map, name) => ({
+    return Object.entries(this.volumesConfigs).reduce(
+      (map, [name, config]) => ({
         ...map,
-        [name]: this.createVolumeComponent(name),
+        [name]: this.createVolumeComponent(name, config),
       }),
       {} as Record<string, VolumeComponent>,
     );
   }
 
-  protected createVolumeComponent(name: string) {
-    return new VolumeComponent(this, name, this.getVolumeComponentConfig(name));
+  protected createVolumeComponent(name: string, config: VolumesConfig) {
+    return new VolumeComponent(
+      this,
+      name,
+      this.getVolumeComponentConfig(config),
+    );
   }
 
-  protected getVolumeComponentConfig(name: string): VolumeComponentConfig {
+  protected getVolumeComponentConfig(
+    config: VolumesConfig,
+  ): VolumeComponentConfig {
     return {
       vpcId: this.config.vpcId,
       subnetsIds: this.config.subnetsIds,
       clientsSecurityGroupsIds: [this.getSecurityGroupIdAsToken()],
-      preventDestroy: this.shouldPreventDestroyForVolume(name),
+      preventDestroy: config.preventDestroy,
+      enableBackups: config.enableBackups,
     };
-  }
-
-  protected shouldPreventDestroyForVolume(name: string): boolean {
-    // Check if at least one container says that this volume must not be destroyed.
-    return this.containers.some((container) =>
-      container
-        .getMountPoints()
-        .filter((volume) => volume.sourceVolume === name)
-        .some((volume) => volume.preventDestroy),
-    );
   }
 
   protected getVolumesForTaskDefinition(): EcsTaskDefinitionVolume[] {
