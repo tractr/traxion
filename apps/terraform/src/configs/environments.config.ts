@@ -5,19 +5,24 @@ export const Environments: Environment[] = [
     name: 'Production',
     resourceId: 'prod',
     subDomain: 'www',
-    pwaConfig: { containerConfig: { imageTag: 'production' } },
-    apiConfig: {
-      containerConfig: { imageTag: 'production' },
-      desiredCount: 2,
-      cpu: '512',
-      memory: '1024',
+    config: {
+      pwa: { containerConfig: { imageTag: 'production' } },
+      api: {
+        containerConfig: { imageTag: 'production' },
+        desiredCount: 2,
+        cpu: '512',
+        memory: '1024',
+      },
+      postgres: { enableBackups: true },
     },
   },
   {
     name: 'Staging',
     resourceId: 'staging',
     subDomain: 'staging',
-    pwaConfig: { containerConfig: { imageTag: 'latest' } },
-    apiConfig: { containerConfig: { imageTag: 'latest' } },
+    config: {
+      pwa: { containerConfig: { imageTag: 'latest' } },
+      api: { containerConfig: { imageTag: 'latest' } },
+    },
   },
 ];

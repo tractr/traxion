@@ -1,7 +1,4 @@
-import { ApiComponentPublicConfig } from '@tractr/terraform-service-api';
-import { PostgresComponentPublicConfig } from '@tractr/terraform-service-postgres';
-import { PwaComponentPublicConfig } from '@tractr/terraform-service-pwa';
-import { ReverseProxyComponentPublicConfig } from '@tractr/terraform-service-reverse-proxy';
+import { Environment } from '../interfaces';
 
 /**
  * @example
@@ -20,10 +17,10 @@ import { ReverseProxyComponentPublicConfig } from '@tractr/terraform-service-rev
  *  },
  * }
  */
-export const ApiConfig: ApiComponentPublicConfig = {};
 
-export const PwaConfig: PwaComponentPublicConfig = {};
-
-export const PostgresConfig: PostgresComponentPublicConfig = {};
-
-export const ReverseProxyConfig: ReverseProxyComponentPublicConfig = {};
+export const AppConfig: Required<Environment['config']> = {
+  api: {},
+  pwa: {},
+  postgres: {},
+  reverseProxy: {},
+};
