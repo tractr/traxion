@@ -16,6 +16,7 @@ export class BackupContainer extends Container<BackupContainerConfig> {
       {
         sourceVolume: 'backups',
         containerPath: '/backups/',
+        preventDestroy: true,
       },
     ];
   }
