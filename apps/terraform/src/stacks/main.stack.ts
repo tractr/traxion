@@ -1,13 +1,7 @@
 import { Construct } from 'constructs';
 import * as deepmerge from 'deepmerge';
 
-import {
-  ApiConfig,
-  Environments,
-  PostgresConfig,
-  PwaConfig,
-  ReverseProxyConfig,
-} from '../configs';
+import { AppConfig, Environments } from '../configs';
 import { TerraformEnvironmentVariables } from '../dtos';
 
 import { AwsStack, AwsStackConfig } from '@tractr/terraform-aws-stack';
@@ -59,12 +53,15 @@ export class MainStack extends AwsStack<AwsStackConfig> {
 
     // Create a pool for each environment
     for (const environment of Environments) {
+      // Merge app configs and environment configs
+      const mergedConfig = deepmerge(AppConfig, environment.config);
+
       // Add the pool group that will host our container
       const poolGroup = new PoolGroup(this, environment.resourceId, {
         registryGroup: this.registryGroup,
         networkGroup: this.networkGroup,
         zoneGroup: this.zoneGroup,
-        reverseProxyConfig: ReverseProxyConfig,
+        reverseProxyConfig: mergedConfig.reverseProxy,
         subDomain: environment.subDomain,
         ownerPictureConfig: {
           s3PublicRead: true,
@@ -73,15 +70,13 @@ export class MainStack extends AwsStack<AwsStackConfig> {
       });
 
       // Add a pwa as a http service
-      const mergedPwaConfig = deepmerge(PwaConfig, environment.pwaConfig);
-      poolGroup.addHttpService(PwaComponent, 'pwa', mergedPwaConfig);
+      poolGroup.addHttpService(PwaComponent, 'pwa', mergedConfig.pwa);
 
       // Add a api as a http service
-      const mergedApiConfig = deepmerge(ApiConfig, environment.apiConfig);
       const api = poolGroup.addHttpService(
         ApiComponent,
         'api',
-        mergedApiConfig,
+        mergedConfig.api,
       );
 
       // Add a postgres as a backend service
@@ -89,7 +84,7 @@ export class MainStack extends AwsStack<AwsStackConfig> {
         PostgresComponent,
         'postgres',
         [api],
-        PostgresConfig,
+        mergedConfig.postgres,
       );
 
       // Store group

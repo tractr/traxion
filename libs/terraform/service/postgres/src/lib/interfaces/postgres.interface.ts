@@ -1,5 +1,7 @@
 import { DeepPartial } from 'ts-essentials';
 
+import { BackupContainerPublicConfig } from './backup.interface';
+
 import {
   BackendServiceComponentInternalConfig,
   ContainerInternalConfig,
@@ -21,6 +23,8 @@ export type PostgresContainerConfig = ContainerInternalConfig &
 export interface PostgresComponentDefaultConfig
   extends ServiceComponentDefaultConfig {
   containerConfig: PostgresContainerPublicConfig;
+  backupsConfig: BackupContainerPublicConfig;
+  enableBackups: boolean;
 }
 export type PostgresComponentPublicConfig =
   DeepPartial<PostgresComponentDefaultConfig>;

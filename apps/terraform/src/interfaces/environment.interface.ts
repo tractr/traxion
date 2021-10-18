@@ -1,5 +1,7 @@
 import { ApiComponentPublicConfig } from '@tractr/terraform-service-api';
+import { PostgresComponentPublicConfig } from '@tractr/terraform-service-postgres';
 import { PwaComponentPublicConfig } from '@tractr/terraform-service-pwa';
+import { ReverseProxyComponentPublicConfig } from '@tractr/terraform-service-reverse-proxy';
 
 export interface Environment {
   /**
@@ -14,12 +16,26 @@ export interface Environment {
    * Subdomain that will host this environment
    */
   subDomain: string;
+
   /**
-   * PWA config override
+   * Configs that override the main configs
    */
-  pwaConfig: PwaComponentPublicConfig;
-  /**
-   * API config override
-   */
-  apiConfig: ApiComponentPublicConfig;
+  config: {
+    /**
+     * PWA config override
+     */
+    pwa?: PwaComponentPublicConfig;
+    /**
+     * API config override
+     */
+    api?: ApiComponentPublicConfig;
+    /**
+     * Postgres config override
+     */
+    postgres?: PostgresComponentPublicConfig;
+    /**
+     * Reverse proxy config override
+     */
+    reverseProxy?: ReverseProxyComponentPublicConfig;
+  };
 }

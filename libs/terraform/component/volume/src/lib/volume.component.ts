@@ -1,4 +1,5 @@
 import {
+  EfsBackupPolicy,
   EfsFileSystem,
   EfsMountTarget,
   SecurityGroup,
@@ -23,6 +24,8 @@ export interface VolumeComponentConfig extends ConstructOptions {
     | 'AFTER_30_DAYS'
     | 'AFTER_60_DAYS'
     | 'AFTER_90_DAYS';
+  preventDestroy?: boolean;
+  enableBackups?: boolean;
 }
 
 export class VolumeComponent<
@@ -32,12 +35,17 @@ export class VolumeComponent<
 
   protected readonly efsFileSystem: EfsFileSystem;
 
+  protected readonly efsBackupPolicy: EfsBackupPolicy | undefined;
+
   protected readonly efsMountTargets: EfsMountTarget[];
 
   constructor(scope: AwsProviderConstruct, id: string, config: T) {
     super(scope, id, config);
     this.securityGroup = this.createSecurityGroup();
     this.efsFileSystem = this.createEfsFileSystem();
+    if (this.config.enableBackups) {
+      this.efsBackupPolicy = this.createEfsBackupPolicy();
+    }
     this.efsMountTargets = this.createEfsMountTargets();
   }
 
@@ -65,7 +73,15 @@ export class VolumeComponent<
       lifecyclePolicy: [
         { transitionToIa: this.config.transitionToIa || 'AFTER_90_DAYS' },
       ],
+      lifecycle: { preventDestroy: !!this.config.preventDestroy },
       tags: this.getResourceNameAsTag('fs'),
+    });
+  }
+
+  protected createEfsBackupPolicy() {
+    return new EfsBackupPolicy(this, 'bck', {
+      fileSystemId: this.getFileSystemIdAsToken(),
+      backupPolicy: [{ status: 'ENABLED' }],
     });
   }
 
