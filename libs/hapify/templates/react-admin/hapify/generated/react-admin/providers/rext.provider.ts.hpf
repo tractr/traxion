@@ -50,7 +50,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
         (
           rextClient[resource as unknown as RessourceType].findMany$({
             sort: 'id',
-            order,
+            order: order.toLowerCase(),
             take: perPage,
             skip: (page - 1) * perPage,
           }) as Observable<any>
@@ -99,7 +99,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
         (
           rextClient[resource as unknown as RessourceType].findMany$({
             sort: 'id',
-            order,
+            order: order.toLowerCase(),
             take: perPage,
             skip: (page - 1) * perPage,
           }) as Observable<any>

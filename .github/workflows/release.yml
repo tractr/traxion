@@ -54,8 +54,8 @@ jobs:
         run: npm ci --no-audit --no-progress
 
       # We build our code base
-      - name: Run npm affected:build
-        run: npm run build
+      - name: Run nx build
+        run: npx nx build
 
       # We build our code base
       - name: Configure git
@@ -64,8 +64,8 @@ jobs:
           git config --local user.email 'tractr-bot@users.noreply.github.com'
 
       # We run our version script
-      - name: Run npm release
-        run: npm run workspace:release -- --base latest
+      - name: nx run workspace:version
+        run: npx nx run workspace:version --base latest
 
       - name: Push changes
         uses: ad-m/github-push-action@master
@@ -75,13 +75,12 @@ jobs:
           tags: true
 
       # We publish our release
-      - name: Run npm affected:publish
+      - name: run npm affected:publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         # Publish will try on all the packages
         # Wait to see https://github.com/jscutlery/semver/issues/167
-        run:
-          nx build && nx run-many --target publish --all --base latest || true
+        run: npx nx run-many --target publish --all --base latest
 
       # Set the matrix apps that have been affected by all the changes
       - name: Affected apps output
