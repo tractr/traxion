@@ -10,6 +10,7 @@ const volume = new VolumeComponent(this, 'vol', {
   vpcId: 'xxxxxxxx',
   subnetsIds: ['aaaaa', 'bbbbb'],
   clientsSecurityGroupsIds: ['ssssss'],
+  preventDestroy: false,
 });
 ```
 

@@ -23,7 +23,7 @@ export interface ContainerDefinition {
     hostPort?: number;
     protocol?: 'tcp' | 'udp';
   }[];
-  mountPoints?: MountPoint[];
+  mountPoints?: MountPointDefinition[];
   dockerLabels?: Record<string, string>;
 }
 
@@ -42,9 +42,14 @@ export interface ImageDefinition {
   imageUri: string;
 }
 
-export interface MountPoint {
+export interface MountPointDefinition {
   sourceVolume: string;
   containerPath: string;
+}
+
+export interface MountPoint extends MountPointDefinition {
+  preventDestroy?: boolean;
+  enableBackups?: boolean;
 }
 
 export type EnvironmentCb<C extends ContainerConfig = ContainerConfig> = (
