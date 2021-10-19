@@ -1,6 +1,6 @@
 {
   "name": "stack",
-  "version": "1.21.4",
+  "version": "1.22.0",
   "private": true,
   "license": "MIT",
   "scripts": {

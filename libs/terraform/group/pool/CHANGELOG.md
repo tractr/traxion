@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.22.0](https://github.com/tractr/stack/compare/v1.21.4...v1.22.0) (2021-10-19)
+
+
+### Bug Fixes
+
+* **terraform:** remove cross peer deps ([#293](https://github.com/tractr/stack/issues/293)) ([cd9c62b](https://github.com/tractr/stack/commit/cd9c62bbf06ff3ec43b8d3f16a4a9b04f5be90f8))
+
+
+
 ## [1.21.4](https://github.com/tractr/stack/compare/v1.21.3...v1.21.4) (2021-10-15)
 
 
