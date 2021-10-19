@@ -2617,7 +2617,7 @@
     "workspace": {
       "root": ".",
       "targets": {
-        "version": {
+        "release": {
           "executor": "@jscutlery/semver:version",
           "options": {
             "syncVersions": true

@@ -1,4 +1,5 @@
 import {
+  addProjectConfiguration,
   formatFiles,
   names,
   readProjectConfiguration,
@@ -12,23 +13,27 @@ import { ReleaseGeneratorSchema } from './schema';
 export const SEMVER_PACKAGE_NAME = '@jscutlery/semver';
 
 interface NormalizedSchema extends ReleaseGeneratorSchema {
-  projectName: string;
-  projectRoot: string;
+  projectName?: string;
+  projectRoot?: string;
 }
 
 export function normalizeOptions(
   tree: Tree,
   options: ReleaseGeneratorSchema,
 ): NormalizedSchema {
-  const projectName = names(options.project).fileName;
-  const projectConfiguration = readProjectConfiguration(tree, projectName);
-  const projectRoot = projectConfiguration.root;
+  if (options.project) {
+    const projectName = names(options.project).fileName;
+    const projectConfiguration = readProjectConfiguration(tree, projectName);
+    const projectRoot = projectConfiguration.root;
 
-  return {
-    ...options,
-    projectName,
-    projectRoot,
-  };
+    return {
+      ...options,
+      projectName,
+      projectRoot,
+    };
+  }
+
+  return { ...options };
 }
 
 export default async function releaseGenerator(
@@ -37,19 +42,45 @@ export default async function releaseGenerator(
 ) {
   const normalizedOptions = normalizeOptions(tree, options);
 
-  // Get the project configuration
-  const project = readProjectConfiguration(tree, normalizedOptions.projectName);
+  if (normalizedOptions.projectName) {
+    // Get the project configuration
+    const project = readProjectConfiguration(
+      tree,
+      normalizedOptions.projectName,
+    );
 
-  project.targets = project.targets || {};
-  project.targets.release = {
-    executor: `${SEMVER_PACKAGE_NAME}:version`,
-    options: {
-      syncVersions: false,
-    },
-  };
+    project.targets = project.targets || {};
+    project.targets.release = {
+      executor: `${SEMVER_PACKAGE_NAME}:version`,
+      options: {
+        syncVersions: false,
+      },
+    };
 
-  // Update the project configuration with the release target
-  updateProjectConfiguration(tree, normalizedOptions.projectName, project);
+    // Update the project configuration with the release target
+    updateProjectConfiguration(tree, normalizedOptions.projectName, project);
+  } else {
+    let project;
+
+    try {
+      project = readProjectConfiguration(tree, 'workspace');
+    } catch {
+      addProjectConfiguration(tree, 'workspace', { root: '.', targets: {} });
+      project = readProjectConfiguration(tree, 'workspace');
+    }
+
+    project.targets = {
+      ...project.targets,
+      release: {
+        executor: '@jscutlery/semver:version',
+        options: {
+          syncVersions: true,
+        },
+      },
+    };
+
+    updateProjectConfiguration(tree, 'workspace', project);
+  }
 
   await formatFiles(tree);
 
