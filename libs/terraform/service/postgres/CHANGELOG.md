@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.22.0](https://github.com/tractr/stack/compare/v1.21.4...v1.22.0) (2021-10-19)
+
+
+### Bug Fixes
+
+* **terraform:** remove cross peer deps ([#293](https://github.com/tractr/stack/issues/293)) ([cd9c62b](https://github.com/tractr/stack/commit/cd9c62bbf06ff3ec43b8d3f16a4a9b04f5be90f8))
+
+
+### Features
+
+* **terraform:** add backups for Postgres service ([#292](https://github.com/tractr/stack/issues/292)) ([55c5243](https://github.com/tractr/stack/commit/55c5243fa4efa39d67aed81341042a7163bd7568))
+
+
+
 ## [1.21.4](https://github.com/tractr/stack/compare/v1.21.3...v1.21.4) (2021-10-15)
 
 
