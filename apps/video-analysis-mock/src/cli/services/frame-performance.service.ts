@@ -57,7 +57,7 @@ export class FramePerformanceService {
               }),
             ),
           ),
-          tap(() => console.info(`Send framePerformancealert`)),
+          tap(() => console.info(`Send framePerformanceAlert`)),
         )
         .subscribe();
     } catch (e) {

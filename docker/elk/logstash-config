@@ -1,0 +1,16 @@
+input 
+{
+    rabbitmq
+    {
+        host => "message-broker"
+        user => "guest"
+        password => "guest"
+        queue => "elk_queue"
+        exchange => "frame-performance_exchange"
+        exchange_type => "fanout"
+        durable => true
+        automatic_recovery => true
+        connect_retry_interval => 10 
+        prefetch_count => 10
+    }
+}
