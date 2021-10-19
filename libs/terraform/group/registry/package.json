@@ -6,8 +6,7 @@
     "url": "https://github.com/tractr/stack"
   },
   "peerDependencies": {
-    "@cdktf/provider-aws": "^2.0.8",
-    "@tractr/terraform-component-aws": "^0.2.0"
+    "@cdktf/provider-aws": "^2.0.8"
   },
   "publishConfig": {
     "access": "restricted",
