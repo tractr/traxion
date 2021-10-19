@@ -11,7 +11,11 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["minio"],
+  "cSpell.words": [
+    "minio",
+    "nestjs",
+    "tractr"
+  ],
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
     "source.fixAll.eslint": true

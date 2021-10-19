@@ -140,6 +140,9 @@
     "nestjs-file-storage": {
       "tags": ["scope:nestjs"]
     },
+    "nestjs-logger": {
+      "tags": ["scope:nestjs"]
+    },
     "nestjs-mailer": {
       "tags": ["scope:nestjs"]
     },
