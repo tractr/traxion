@@ -4,8 +4,9 @@ import { join } from 'path';
 import { addProjectConfiguration, readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
+import * as localPackageJson from '../../../package.json';
 import * as helpers from '../../helpers/npm-run';
-import generator, { SEMVER_PACKAGE_NAME } from './generator';
+import generator, { packagesToAdd } from './generator';
 
 describe('release generator', () => {
   let appTree: Tree;
@@ -33,6 +34,12 @@ describe('release generator', () => {
       readFileSync(join(__dirname, 'files', '.prettierrc.js__tmpl__')),
     );
 
+    const prettierIgnore = appTree.read('.prettierignore');
+    expect(prettierIgnore).toBeDefined();
+    expect(prettierIgnore).toEqual(
+      readFileSync(join(__dirname, 'files', '.prettierignore__tmpl__')),
+    );
+
     // assert npm run format has not been called
     expect(npmRunSpy).not.toHaveBeenCalled();
 
@@ -43,7 +50,16 @@ describe('release generator', () => {
     const packageJson = readJson(appTree, 'package.json');
     expect(packageJson).toBeDefined();
     expect(packageJson.devDependencies).toBeDefined();
-    expect(packageJson.devDependencies[SEMVER_PACKAGE_NAME]).toBeDefined();
+
+    packagesToAdd.forEach(({ packageName }) => {
+      expect(packageJson.devDependencies[packageName]).toBeDefined();
+    });
+
+    expect(packageJson.devDependencies['@tractr/prettier-config']).toEqual(
+      localPackageJson.version,
+    );
+
+    expect(npmRunSpy).toHaveBeenCalledTimes(0);
   });
 
   it('should run and run the global format', async () => {

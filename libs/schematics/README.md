@@ -11,3 +11,10 @@ build watch mode options to simply your process:
 nx build schematics --watch
 nx g ./dist/libs/schematics:<schematicName> [options]
 ```
+
+## How to use in your projects
+
+```bash
+npm i --save-dev @tractr/schematics
+nx generate @tractr/schematics:<schemticName> [options]
+```
