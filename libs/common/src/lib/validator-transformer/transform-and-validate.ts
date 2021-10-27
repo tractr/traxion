@@ -119,7 +119,7 @@ export function transformAndValidate<T>(
     });
     // eslint-disable-next-line @typescript-eslint/ban-types
     const errors = validateSync(validatedConfig as unknown as object, {
-      ...(options?.plainToClass || {}),
+      ...(options?.validate || {}),
     });
     if (errors.length > 0) {
       throw formatTransformAndValidateErrorMessage(errors);
@@ -161,9 +161,7 @@ export function isAlike<T>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   object: any,
   classValidator: ClassConstructor<T>,
-  options: {
-    plainToClass?: ClassTransformOptions;
-  } = {},
+  options: TransformAndValidateOptions = {},
 ): object is T {
   if (object instanceof classValidator) return true;
 
@@ -186,12 +184,13 @@ export function isAlike<T>(
 export function fromDto<T>(
   params: unknown,
   classValidator: ClassConstructor<T>,
-  options: {
-    plainToClass?: ClassTransformOptions;
-  } = {},
+  options: TransformAndValidateOptions = {},
 ) {
   return of(params).pipe(
-    defaultsPropertiesMap(classValidator, options),
+    defaultsPropertiesMap(
+      classValidator,
+      options.plainToClass ? { plainToClass: options.plainToClass } : {},
+    ),
     transformAndValidateMap(classValidator, options),
   );
 }
