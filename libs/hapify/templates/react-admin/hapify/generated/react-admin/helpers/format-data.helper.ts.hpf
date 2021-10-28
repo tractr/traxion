@@ -1,0 +1,18 @@
+import { ResourceType } from '../interfaces';
+import { removeNullValue } from '../helpers';
+ 
+export type FormatUpdateData = (
+  data: Record<string, unknown>,
+) => Record<string, unknown>;
+ 
+export const formatData: Record<ResourceType, FormatUpdateData> = {
+<<for Models model>>  <<model camel>>: (data) => {
+    const formated = removeNullValue(data);
+  <<for model.fields internal and primary field>>
+    delete formated.<<field camel>>
+  <<endfor>>
+    return formated;
+  },
+<<endfor>>
+};
+ 

@@ -13,6 +13,31 @@ module.exports = {
       input: 'all',
     },
     {
+      path: 'generated/react-admin/interfaces/index.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'generated/react-admin/interfaces/resource-type.interface.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'generated/react-admin/helpers/index.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'generated/react-admin/helpers/remove-null-value.helper.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'generated/react-admin/helpers/format-data.helper.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
       path: 'generated/react-admin/providers/index.ts',
       engine: 'hpf',
       input: 'all',
