@@ -13,12 +13,14 @@
       "fields": [
         {
           "name": "id",
+          "notes": "Alert UUID",
           "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
         },
         {
           "name": "createdAt",
-          "properties": ["searchable", "sortable"],
+          "notes": "Creation date of the alert",
+          "properties": ["searchable", "sortable", "internal"],
           "type": "string"
         },
         {
@@ -26,29 +28,62 @@
             "backRelation": "alerts"
           },
           "name": "alertType",
+          "notes": "Type of the alert",
           "properties": ["searchable", "sortable"],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "0f8fb4e0-b5f4-82f0-35a8-471f15ccdb2b"
+          "type": "enum",
+          "value": ["thief", "suspectBehaviour"]
         },
         {
           "meta": {
             "backRelation": "alerts"
           },
           "name": "camera",
+          "notes": "Camera that emitted the alert ",
           "properties": ["searchable", "sortable"],
           "subtype": "oneMany",
           "type": "entity",
           "value": "2c53bc09-414c-e30e-7057-5e3a0ff69a7d"
         },
         {
-          "name": "videoUrl",
-          "properties": ["nullable", "searchable", "sortable"],
+          "name": "externalFrameId",
+          "notes": "External id of the first frame of theframe stack that triggered the alert",
+          "properties": ["unique", "searchable", "sortable"],
           "type": "string"
+        },
+        {
+          "name": "externalModelDecisionId",
+          "notes": "External id of the AI model responsible of the alert decision",
+          "properties": ["searchable", "sortable"],
+          "type": "string"
+        },
+        {
+          "name": "externalModelPredictionId",
+          "notes": "External id of the AI model responsible of the alert prediction",
+          "properties": ["searchable", "sortable"],
+          "type": "string"
+        },
+        {
+          "name": "videoUrl",
+          "notes": "Url of the video associated to the alert",
+          "properties": ["nullable", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "name": "videoStatus",
+          "notes": "Status of the video associated to the alert",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "enum",
+          "value": [
+            "generationStarted",
+            "generationSuccessed",
+            "videoAvailable",
+            "videoDeleted"
+          ]
         }
       ],
       "id": "50565668-3a76-9ccf-c841-1344aa1060b0",
-      "name": "Alert"
+      "name": "Alert",
+      "notes": "Thief alert triggered by the video surveillance analysis"
     },
     {
       "accesses": {
@@ -62,21 +97,56 @@
       "fields": [
         {
           "name": "id",
+          "notes": "AlertFeedback UUID",
           "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
         },
         {
           "name": "createdAt",
-          "properties": ["searchable", "sortable"],
+          "notes": "Creation date of the AlertFeeback",
+          "properties": ["searchable", "sortable", "internal"],
           "type": "datetime"
         },
         {
-          "name": "feedback1",
+          "name": "type",
+          "properties": ["nullable", "searchable", "sortable"],
+          "type": "enum",
+          "value": ["suspectBehaviour", "thief", "falseAlert"]
+        },
+        {
+          "name": "qualification",
+          "properties": ["nullable", "searchable", "sortable"],
+          "type": "enum",
+          "value": [
+            "nothingSuspect",
+            "suspectBehaviour",
+            "dissuasion",
+            "stopped",
+            "unstopped"
+          ]
+        },
+        {
+          "name": "isArchived",
+          "notes": "Denotes if the alert is archived ",
+          "properties": ["searchable", "sortable"],
+          "type": "boolean"
+        },
+        {
+          "name": "isPertinent",
+          "notes": "Denotes if the alert is pertinent",
           "properties": ["nullable", "searchable", "sortable"],
           "type": "string"
         },
         {
-          "name": "feedback2",
+          "name": "rate",
+          "notes": "Rate of the alert from 1 to 5",
+          "properties": ["nullable", "searchable", "sortable"],
+          "subtype": "integer",
+          "type": "number"
+        },
+        {
+          "name": "rateAnotation",
+          "notes": "Annotation of the alert rate",
           "properties": ["nullable", "searchable", "sortable"],
           "type": "string"
         },
@@ -85,6 +155,7 @@
             "backRelation": "alertFeedbacks"
           },
           "name": "alert",
+          "notes": "Alert associated to the AlertFeedback",
           "properties": ["searchable", "sortable"],
           "subtype": "oneMany",
           "type": "entity",
@@ -95,6 +166,7 @@
             "backRelation": "alertFeedbacks"
           },
           "name": "user",
+          "notes": "User responsible of the AlertFeedback",
           "properties": ["searchable", "sortable"],
           "subtype": "oneMany",
           "type": "entity",
@@ -102,7 +174,8 @@
         }
       ],
       "id": "b0db09a5-95d4-4f1e-ee03-bb9600686cf7",
-      "name": "AlertFeedback"
+      "name": "AlertFeedback",
+      "notes": "Alert feed-backs provided by the security agents"
     },
     {
       "accesses": {
@@ -116,41 +189,19 @@
       "fields": [
         {
           "name": "id",
+          "notes": "Camera UUID",
           "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
         },
         {
-          "name": "name",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
+          "name": "createdAt",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
         },
         {
-          "meta": {
-            "backRelation": "alertTypes"
-          },
-          "name": "client",
-          "properties": ["searchable", "sortable"],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "5d3e69aa-8cd0-6963-908b-a082c6b98fb5"
-        }
-      ],
-      "id": "0f8fb4e0-b5f4-82f0-35a8-471f15ccdb2b",
-      "name": "AlertType"
-    },
-    {
-      "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
+          "name": "externalId",
+          "notes": "External id of the camera ",
+          "properties": ["unique", "searchable", "sortable"],
           "type": "string"
         },
         {
@@ -158,25 +209,16 @@
             "backRelation": "cameras"
           },
           "name": "shopSection",
+          "notes": "Shop section where the camera is located",
           "properties": ["searchable", "sortable"],
           "subtype": "oneMany",
           "type": "entity",
           "value": "a513969a-46e0-fd52-699b-51140d869445"
-        },
-        {
-          "name": "position",
-          "properties": ["searchable", "sortable"],
-          "type": "string"
-        },
-        {
-          "name": "status",
-          "properties": [],
-          "type": "enum",
-          "value": ["up", "down"]
         }
       ],
       "id": "2c53bc09-414c-e30e-7057-5e3a0ff69a7d",
-      "name": "Camera"
+      "name": "Camera",
+      "notes": "Video surveillance camera that monitor the shop"
     },
     {
       "accesses": {
@@ -190,32 +232,88 @@
       "fields": [
         {
           "name": "id",
+          "notes": "Camera status UUID",
           "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
         },
         {
+          "name": "createdAt",
+          "notes": "Creation date of the camera status",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
+        },
+        {
+          "name": "status",
+          "notes": "Status of the camera at the current instant",
+          "properties": ["searchable", "sortable"],
+          "type": "enum",
+          "value": ["ok", "corrupted", "reloading", "out"]
+        },
+        {
+          "meta": {
+            "backRelation": "cameraStatus"
+          },
+          "name": "camera",
+          "notes": "Camera that own the status",
+          "properties": ["searchable", "sortable"],
+          "subtype": "oneMany",
+          "type": "entity",
+          "value": "2c53bc09-414c-e30e-7057-5e3a0ff69a7d"
+        }
+      ],
+      "id": "8b0c642d-16f7-4622-caa2-ceae9a16288c",
+      "name": "CameraStatus",
+      "notes": "Status of a camera at a special moment in time (camera status history)"
+    },
+    {
+      "accesses": {
+        "count": "guest",
+        "create": "guest",
+        "read": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "update": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "notes": "Client UUID",
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "notes": "Client creation date",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
+        },
+        {
           "name": "name",
+          "notes": "Name of the client",
           "properties": ["label", "searchable", "sortable"],
           "type": "string"
         },
         {
-          "meta": {
-            "backRelation": "client"
-          },
-          "name": "kpisConfiguration",
-          "properties": ["searchable", "sortable"],
-          "subtype": "oneOne",
-          "type": "entity",
-          "value": "ce543764-5a09-e4b2-e21a-50ec66d8c3bd"
+          "name": "siret",
+          "notes": "Enterprise id of the client",
+          "properties": ["unique", "searchable", "sortable"],
+          "type": "string"
         },
         {
-          "name": "siret",
-          "properties": [],
+          "name": "adresse",
+          "notes": "Address of the client",
+          "properties": ["searchable", "sortable"],
+          "type": "string"
+        },
+        {
+          "name": "raisonSocial",
+          "properties": ["searchable", "sortable"],
           "type": "string"
         }
       ],
       "id": "5d3e69aa-8cd0-6963-908b-a082c6b98fb5",
-      "name": "Client"
+      "name": "Client",
+      "notes": "Client of the Cali application"
     },
     {
       "accesses": {
@@ -229,72 +327,32 @@
       "fields": [
         {
           "name": "id",
+          "notes": "Item category UUID",
           "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
         },
         {
-          "meta": {
-            "backRelation": "diffusionLists"
-          },
-          "name": "alertType",
-          "properties": ["searchable", "sortable"],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "0f8fb4e0-b5f4-82f0-35a8-471f15ccdb2b"
-        },
-        {
-          "meta": {
-            "backRelation": "diffusionLists"
-          },
-          "name": "users",
-          "properties": ["multiple", "searchable", "sortable"],
-          "subtype": "manyMany",
-          "type": "entity",
-          "value": "b33de3c6-33c0-8979-020d-23058d515b79"
-        },
-        {
-          "meta": {
-            "backRelation": "diffusionLists"
-          },
-          "name": "shop",
-          "properties": ["searchable", "sortable"],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "37d0f2c3-94ce-d6cb-a2a1-a2034adc6af9"
-        },
-        {
-          "name": "diffusionChannel",
-          "properties": ["searchable", "sortable"],
-          "type": "enum",
-          "value": ["mail", "alert"]
-        }
-      ],
-      "id": "e42213df-a680-e91f-2a5a-0ed164eab1d0",
-      "name": "DiffusionList"
-    },
-    {
-      "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "name": "createdAt",
+          "notes": "Creation date of the item category",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
         },
         {
           "name": "name",
+          "notes": "Name of a category of items",
           "properties": ["unique", "label", "searchable", "sortable"],
           "type": "string"
+        },
+        {
+          "name": "averagePrice",
+          "notes": "Average price of an item of the category (in euros)",
+          "properties": ["searchable", "sortable"],
+          "type": "number"
         }
       ],
       "id": "ad8e9302-8fe9-bb18-c1a1-4fc74ca22605",
-      "name": "ItemCategory"
+      "name": "ItemCategory",
+      "notes": "Category of item that can be found in a shop"
     },
     {
       "accesses": {
@@ -308,40 +366,19 @@
       "fields": [
         {
           "name": "id",
+          "notes": "Shop UUID",
           "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
         },
         {
-          "name": "feedback1",
-          "properties": ["searchable", "sortable"],
-          "type": "boolean"
-        },
-        {
-          "name": "feedback2",
-          "properties": ["searchable", "sortable"],
-          "type": "boolean"
-        }
-      ],
-      "id": "ce543764-5a09-e4b2-e21a-50ec66d8c3bd",
-      "name": "kpisConfiguration"
-    },
-    {
-      "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "name": "createdAt",
+          "notes": "Creation date of the shop",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
         },
         {
           "name": "name",
+          "notes": "Shop name",
           "properties": ["label", "searchable", "sortable"],
           "type": "string"
         },
@@ -350,14 +387,23 @@
             "backRelation": "shops"
           },
           "name": "client",
+          "notes": "Client that own the shop",
           "properties": ["searchable", "sortable"],
           "subtype": "oneMany",
           "type": "entity",
           "value": "5d3e69aa-8cd0-6963-908b-a082c6b98fb5"
+        },
+        {
+          "name": "kpis",
+          "notes": "KPIS that can be accessed by the shop",
+          "properties": ["multiple", "searchable", "sortable"],
+          "type": "enum",
+          "value": ["kpi1", "kpi2"]
         }
       ],
       "id": "37d0f2c3-94ce-d6cb-a2a1-a2034adc6af9",
-      "name": "Shop"
+      "name": "Shop",
+      "notes": "Shop owned by a client"
     },
     {
       "accesses": {
@@ -371,11 +417,19 @@
       "fields": [
         {
           "name": "id",
+          "notes": "Shop departement UUID",
           "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
         },
         {
+          "name": "createdAt",
+          "notes": "Creation date of the shop department",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
+        },
+        {
           "name": "name",
+          "notes": "Name of the shop departement",
           "properties": ["nullable", "searchable", "sortable"],
           "type": "string"
         },
@@ -384,6 +438,7 @@
             "backRelation": "departments"
           },
           "name": "shop",
+          "notes": "Shop that the department is part of",
           "properties": [],
           "subtype": "oneMany",
           "type": "entity",
@@ -391,7 +446,8 @@
         }
       ],
       "id": "787e207a-db9d-dab3-9c28-ba7fcfb27110",
-      "name": "ShopDepartment"
+      "name": "ShopDepartment",
+      "notes": "Departement of a shop"
     },
     {
       "accesses": {
@@ -405,11 +461,19 @@
       "fields": [
         {
           "name": "id",
+          "notes": "Shop section UUID",
           "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
         },
         {
+          "name": "createdAt",
+          "notes": "Creation date of the shop section",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
+        },
+        {
           "name": "name",
+          "notes": "Name of the shop section",
           "properties": ["label", "searchable", "sortable"],
           "type": "string"
         },
@@ -418,6 +482,7 @@
             "backRelation": "sections"
           },
           "name": "shopDepartement",
+          "notes": "Shop departement that the section is part of",
           "properties": ["searchable", "sortable"],
           "subtype": "oneMany",
           "type": "entity",
@@ -428,19 +493,22 @@
             "backRelation": "shopSections"
           },
           "name": "itemCategory",
+          "notes": "Categorie of items that are sold in the section",
           "properties": ["searchable", "sortable"],
           "subtype": "oneMany",
           "type": "entity",
           "value": "ad8e9302-8fe9-bb18-c1a1-4fc74ca22605"
         },
         {
-          "name": "theftAverageValue",
-          "properties": [],
+          "name": "thiefAveragePrice",
+          "notes": "Average price of a thief in the shop section (in euros)",
+          "properties": ["searchable", "sortable"],
           "type": "number"
         }
       ],
       "id": "a513969a-46e0-fd52-699b-51140d869445",
-      "name": "ShopSection"
+      "name": "ShopSection",
+      "notes": "Section of a shop departement"
     },
     {
       "accesses": {
@@ -454,45 +522,39 @@
       "fields": [
         {
           "name": "id",
+          "notes": "User UUID",
           "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
         },
         {
-          "name": "date",
-          "properties": [],
-          "type": "string"
-        }
-      ],
-      "id": "82fb2ba2-bcc5-2fe3-370d-78124b184b81",
-      "name": "Theft"
-    },
-    {
-      "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
-      },
-      "fields": [
+          "name": "createdAt",
+          "notes": "Creation date of the user",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
+        },
         {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
+          "name": "name",
+          "notes": "Name of the user",
+          "properties": ["label", "searchable", "sortable"],
           "type": "string"
         },
         {
-          "name": "firstName",
-          "properties": ["searchable", "sortable"],
+          "name": "email",
+          "notes": "Email address of the user",
+          "properties": ["unique", "searchable", "sortable"],
+          "subtype": "email",
           "type": "string"
         },
         {
-          "name": "lastName",
-          "properties": [],
+          "name": "password",
+          "notes": "User password",
+          "properties": ["hidden"],
+          "subtype": "password",
           "type": "string"
         },
         {
           "name": "roles",
+          "notes": "Role of the user in the Cali application",
           "properties": ["multiple", "searchable", "sortable"],
           "type": "enum",
           "value": ["admin", "user", "guest"]
@@ -501,15 +563,17 @@
           "meta": {
             "backRelation": "users"
           },
-          "name": "client",
-          "properties": ["nullable", "searchable", "sortable"],
-          "subtype": "oneMany",
+          "name": "shops",
+          "notes": "Shops that the user is allowed to access",
+          "properties": ["nullable", "multiple", "searchable", "sortable"],
+          "subtype": "manyMany",
           "type": "entity",
           "value": "37d0f2c3-94ce-d6cb-a2a1-a2034adc6af9"
         }
       ],
       "id": "b33de3c6-33c0-8979-020d-23058d515b79",
-      "name": "User"
+      "name": "User",
+      "notes": "User of the Cali application"
     }
   ],
   "name": "cali",
