@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.22.3](https://github.com/tractr/stack/compare/v1.22.2...v1.22.3) (2021-10-28)
+
+
+### Bug Fixes
+
+* exclude only the internal field ([#299](https://github.com/tractr/stack/issues/299)) ([cae52f5](https://github.com/tractr/stack/commit/cae52f50305cf7d65775fdc75c1d7de9e6ba3246))
+
+
+
 ## [1.22.2](https://github.com/tractr/stack/compare/v1.22.1...v1.22.2) (2021-10-28)
 
 
