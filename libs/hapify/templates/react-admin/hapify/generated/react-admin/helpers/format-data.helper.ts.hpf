@@ -8,7 +8,7 @@ export type FormatUpdateData = (
 export const formatData: Record<ResourceType, FormatUpdateData> = {
 <<for Models model>>  <<model camel>>: (data) => {
     const formated = removeNullValue(data);
-  <<for model.fields internal and primary field>>
+  <<for model.fields internal field>>
     delete formated.<<field camel>>
   <<endfor>>
     return formated;
