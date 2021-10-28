@@ -8,6 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": false,
+    "jsx": "react",
     "lib": ["esnext", "dom"],
     "module": "esnext",
     "moduleResolution": "node",

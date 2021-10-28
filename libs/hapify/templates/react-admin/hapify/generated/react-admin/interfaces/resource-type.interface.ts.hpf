@@ -1,0 +1,4 @@
+export type ResourceType = 
+<<for Models model>>  | '<<model camel>>'
+<<endfor>>;
+ 
