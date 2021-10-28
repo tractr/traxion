@@ -2,11 +2,9 @@ import { DataProvider } from 'ra-core';
 import { lastValueFrom, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
  
+import { ResourceType } from '../interfaces';
+import { formatData } from '../helpers';
 import { RextClient } from '../../rext-client';
- 
-export type RessourceType = 
-<<for Models model>>  | '<<model camel>>'
-<<endfor>>;
  
 /**
  * Maps react-admin queries to a REXT API
@@ -48,7 +46,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
       // TODO make the filter works
       return lastValueFrom(
         (
-          rextClient[resource as unknown as RessourceType].findMany$({
+          rextClient[resource as unknown as ResourceType].findMany$({
             sort: 'id',
             order: order.toLowerCase(),
             take: perPage,
@@ -61,7 +59,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
     getOne: (resource, params) => 
       lastValueFrom(
         (
-          rextClient[resource as unknown as RessourceType].findUnique$({
+          rextClient[resource as unknown as ResourceType].findUnique$({
             id: `${params.id}`,
           }) as Observable<any>
         ).pipe(map((data) => ({ data }))),
@@ -70,7 +68,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
     getMany: (resource, params) => {
       return lastValueFrom(
         (
-          rextClient[resource as unknown as RessourceType].findMany$({
+          rextClient[resource as unknown as ResourceType].findMany$({
             order: 'asc',
             skip: 0,
             sort: 'id',
@@ -97,7 +95,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
       // TODO make the filter works
       return lastValueFrom(
         (
-          rextClient[resource as unknown as RessourceType].findMany$({
+          rextClient[resource as unknown as ResourceType].findMany$({
             sort: 'id',
             order: order.toLowerCase(),
             take: perPage,
@@ -107,40 +105,52 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
       );
     },
  
-    update: (resource, params) =>
-      lastValueFrom(
+    update: (resource, params) => {
+      const resourceName = resource as unknown as ResourceType;
+      const toUpdate = formatData[resourceName]({ ...params.data });
+
+      return lastValueFrom(
         (
-          rextClient[resource as unknown as RessourceType].patch$({
+          rextClient[resource as unknown as ResourceType].patch$({
             id: `${params.id}`,
-          }, params.data) as Observable<any>
+          }, toUpdate) as Observable<any>
         ).pipe(map((data) => ({ data }))),
-      ),
+      );
+    },
  
     // rext client doesn't provide an updateMany method, so we fallback to calling update n times instead
-    updateMany: (resource, params) =>
-      Promise.all(
+    updateMany: (resource, params) => {
+      const resourceName = resource as unknown as ResourceType;
+      const toUpdate = formatData[resourceName]({ ...params.data });
+ 
+      return Promise.all(
         params.ids.map((id) =>
           lastValueFrom(
             (
-              rextClient[resource as unknown as RessourceType].patch$({
+              rextClient[resourceName].patch$({
                 id: `${id}`,
-              }, params.data) as Observable<any>
+              }, toUpdate) as Observable<any>
             ),
           ),
         )
-      ).then(responses => ({ data: responses.map(({ id }) => id) })),
+      ).then(responses => ({ data: responses.map(({ id }) => id) }));
+    },
  
-    create: (resource, params) =>
-      lastValueFrom(
-        rextClient[resource as unknown as RessourceType].create$(
-          params.data
+    create: (resource, params) => {
+      const resourceName = resource as unknown as ResourceType;
+      const toCreate = formatData[resourceName]({ ...params.data });
+ 
+      return lastValueFrom(
+        rextClient[resourceName].create$(
+          toCreate as any
         ) as Observable<any>,
-      ),
+      );
+    },
  
     delete: (resource, params) =>
       lastValueFrom(
         (
-          rextClient[resource as unknown as RessourceType].delete$({
+          rextClient[resource as unknown as ResourceType].delete$({
             id: `${params.id}`,
           }) as Observable<any>
         ).pipe(map((data) => ({ data }))),
@@ -152,7 +162,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
         params.ids.map(id =>
           lastValueFrom(
             (
-              rextClient[resource as unknown as RessourceType].delete$({
+              rextClient[resource as unknown as ResourceType].delete$({
                 id: `${id}`,
               }) as Observable<any>
             ),
