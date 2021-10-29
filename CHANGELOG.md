@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.22.4](https://github.com/tractr/stack/compare/v1.22.3...v1.22.4) (2021-10-29)
+
+
+### Bug Fixes
+
+* make the react admin accessible only by user with admin privileges ([#300](https://github.com/tractr/stack/issues/300)) ([82afebc](https://github.com/tractr/stack/commit/82afebc421fd8bc76e6bae24a86937ab277fea07))
+
+
+
 ## [1.22.3](https://github.com/tractr/stack/compare/v1.22.2...v1.22.3) (2021-10-28)
 
 
