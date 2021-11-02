@@ -1,24 +1,54 @@
 import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module } from '@nestjs/common';
+import { transformAndValidate } from '@tractr/common';
+import { AsyncOptions, ModuleOptionsFactory } from '@tractr/nestjs-core';
 
-import { MESSAGE_BROKER_ALERT_EXCHANGE } from './constants';
+import {
+  MESSAGE_BROKER_ALERT_CONFIGURATION,
+  MESSAGE_BROKER_ALERT_EXCHANGE,
+} from './constants';
 import { MessageBrokerAlertService } from './services';
 
-@Module({
-  imports: [
-    RabbitMQModule.forRoot(RabbitMQModule, {
-      exchanges: [
-        {
-          name: MESSAGE_BROKER_ALERT_EXCHANGE,
-          type: 'fanout',
-        },
+import { MessageBrokerConfiguration } from '@cali/message-broker-common';
+
+@Module({})
+export class MessageBrokerAlertModule extends ModuleOptionsFactory<MessageBrokerConfiguration>(
+  MESSAGE_BROKER_ALERT_CONFIGURATION,
+  transformAndValidate(MessageBrokerConfiguration),
+) {
+  static register(options: MessageBrokerConfiguration): DynamicModule {
+    const module = super.register(options);
+    return this.createModuleFromOptions(module);
+  }
+
+  static registerAsync(
+    options: AsyncOptions<MessageBrokerConfiguration>,
+  ): DynamicModule {
+    const module = super.registerAsync(options);
+    return this.createModuleFromOptions(module);
+  }
+
+  private static createModuleFromOptions(module: DynamicModule): DynamicModule {
+    return {
+      module: MessageBrokerAlertModule,
+      imports: [
+        RabbitMQModule.forRootAsync(RabbitMQModule, {
+          imports: [module],
+          useFactory: (configuration: MessageBrokerConfiguration) => ({
+            exchanges: [
+              {
+                name: MESSAGE_BROKER_ALERT_EXCHANGE,
+                type: 'fanout',
+              },
+            ],
+            uri: configuration.url,
+            connectionInitOptions: { wait: true },
+          }),
+          inject: [MESSAGE_BROKER_ALERT_CONFIGURATION],
+        }),
       ],
-      uri: 'amqp://localhost:5672',
-      connectionInitOptions: { wait: true },
-    }),
-  ],
-  controllers: [],
-  providers: [MessageBrokerAlertService],
-  exports: [MessageBrokerAlertService],
-})
-export class MessageBrokerAlertModule {}
+      providers: [MessageBrokerAlertService],
+      exports: [MessageBrokerAlertService, RabbitMQModule],
+    };
+  }
+}

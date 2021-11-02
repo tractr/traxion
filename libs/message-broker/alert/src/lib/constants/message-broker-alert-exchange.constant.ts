@@ -1,1 +1,1 @@
-export const MESSAGE_BROKER_ALERT_EXCHANGE = 'alert_exchange';
+export const MESSAGE_BROKER_ALERT_EXCHANGE = 'alerts';

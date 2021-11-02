@@ -2,8 +2,8 @@ import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 import { Injectable } from '@nestjs/common';
 
 import { MESSAGE_BROKER_ALERT_EXCHANGE } from '../constants';
+import { MessageBrokerAlert } from '../types';
 
-import { RawAlert } from '@cali/common';
 import {
   MessageBrokerPublishParams,
   MessageBrokerService,
@@ -11,7 +11,7 @@ import {
 
 @Injectable()
 export class MessageBrokerAlertService
-  implements MessageBrokerService<RawAlert>
+  implements MessageBrokerService<MessageBrokerAlert>
 {
   constructor(private messageBrokerService: AmqpConnection) {}
 
@@ -19,7 +19,7 @@ export class MessageBrokerAlertService
     routingKey,
     message,
     options,
-  }: MessageBrokerPublishParams<RawAlert>) {
+  }: MessageBrokerPublishParams<MessageBrokerAlert>) {
     return this.messageBrokerService.publish(
       MESSAGE_BROKER_ALERT_EXCHANGE,
       routingKey,

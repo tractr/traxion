@@ -1,7 +1,12 @@
+import { AlertAlertType } from '@prisma/client';
+import { datatype } from 'faker';
 import { Command, Console } from 'nestjs-console';
 import { interval, map, tap } from 'rxjs';
 
-import { MessageBrokerAlertService } from '@cali/message-broker-alert';
+import {
+  MessageBrokerAlert,
+  MessageBrokerAlertService,
+} from '@cali/message-broker-alert';
 
 @Console({
   command: 'alert',
@@ -16,7 +21,10 @@ export class AlertService {
   })
   public async publishOne() {
     try {
-      await this.messageBrokerAlertService.publish(this.mockAlert());
+      await this.messageBrokerAlertService.publish({
+        routingKey: '',
+        message: this.mockAlert(),
+      });
     } catch (e) {
       console.error(e);
     }
@@ -35,7 +43,12 @@ export class AlertService {
     try {
       interval(timeIntervalNumber)
         .pipe(
-          map(() => this.messageBrokerAlertService.publish(this.mockAlert())),
+          map(() =>
+            this.messageBrokerAlertService.publish({
+              routingKey: '',
+              message: this.mockAlert(),
+            }),
+          ),
           tap(() => console.info(`Send alert`)),
         )
         .subscribe();
@@ -44,14 +57,22 @@ export class AlertService {
     }
   }
 
-  private mockAlert() {
+  /**
+   * Generate a random prediction alert
+   *
+   * @param alert - override the generated alert
+   * @returns the generated alert
+   */
+  private mockAlert(
+    alert: Partial<MessageBrokerAlert> = {},
+  ): MessageBrokerAlert {
     return {
-      routingKey: '',
-      message: {
-        type: 'test',
-        camera: 'test',
-        time: new Date(),
-      },
+      alertType: AlertAlertType.thief,
+      cameraId: datatype.string(),
+      externalFrameId: datatype.string(),
+      externalModelDecisionId: datatype.string(),
+      externalModelPredictionId: datatype.string(),
+      ...alert,
     };
   }
 }

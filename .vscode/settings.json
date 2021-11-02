@@ -1,3 +1,11 @@
 {
-  "cSpell.words": ["bitwarden", "hapify", "nestjs", "rabbitmq", "tractr"]
+  "cSpell.words": [
+    "bitwarden",
+    "dtos",
+    "fanout",
+    "hapify",
+    "nestjs",
+    "rabbitmq",
+    "tractr"
+  ]
 }

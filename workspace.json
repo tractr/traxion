@@ -101,52 +101,6 @@
         }
       }
     },
-    "camera-monitoring": {
-      "projectType": "library",
-      "root": "libs/camera-monitoring",
-      "sourceRoot": "libs/camera-monitoring/src",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/camera-monitoring/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/camera-monitoring/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/camera-monitoring"]
-        }
-      }
-    },
-    "common": {
-      "prefix": "cali",
-      "projectType": "library",
-      "root": "libs/common",
-      "sourceRoot": "libs/common/src",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/common/src/**/*.ts",
-              "libs/common/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/common/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/common"]
-        }
-      }
-    },
     "docs": {
       "projectType": "application",
       "root": "apps/docs",
@@ -260,26 +214,96 @@
         }
       }
     },
-    "message-broker-frame-performance": {
+    "message-broker-handler": {
+      "projectType": "application",
+      "root": "apps/message-broker-handler",
+      "sourceRoot": "apps/message-broker-handler/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "production": {
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/message-broker-handler/src/environments/environment.ts",
+                  "with": "apps/message-broker-handler/src/environments/environment.prod.ts"
+                }
+              ],
+              "inspect": false,
+              "optimization": true
+            }
+          },
+          "executor": "@nrwl/node:build",
+          "options": {
+            "main": "apps/message-broker-handler/src/main.ts",
+            "outputPath": "dist/apps/message-broker-handler",
+            "tsConfig": "apps/message-broker-handler/tsconfig.app.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/message-broker-handler/**/*.ts"]
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "message-broker-handler:build"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/message-broker-handler/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/apps/message-broker-handler"]
+        }
+      }
+    },
+    "message-broker-handler-alert-filter": {
       "projectType": "library",
-      "root": "libs/message-broker/frame-performance",
-      "sourceRoot": "libs/message-broker/frame-performance/src",
+      "root": "libs/message-broker-handler/alert-filter",
+      "sourceRoot": "libs/message-broker-handler/alert-filter/src",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/message-broker/frame-performance/**/*.ts"
+              "libs/message-broker-handler/alert-filter/**/*.ts"
             ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/message-broker/frame-performance/jest.config.js",
+            "jestConfig": "libs/message-broker-handler/alert-filter/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/message-broker/frame-performance"]
+          "outputs": ["coverage/libs/message-broker-handler/alert-filter"]
+        }
+      }
+    },
+    "message-broker-prediction-log": {
+      "projectType": "library",
+      "root": "libs/message-broker/prediction-log",
+      "sourceRoot": "libs/message-broker/prediction-log/src",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/message-broker/prediction-log/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/message-broker/prediction-log/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/message-broker/prediction-log"]
         }
       }
     },

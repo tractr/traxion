@@ -4,13 +4,17 @@ import { ConsoleModule } from 'nestjs-console';
 import { AlertService, FramePerformanceService } from './services';
 
 import { MessageBrokerAlertModule } from '@cali/message-broker-alert';
-import { MessageBrokerFramePerformanceModule } from '@cali/message-broker-frame-performance';
+import { MessageBrokerPredictionLogModule } from '@cali/message-broker-prediction-log';
 
 @Module({
   imports: [
     ConsoleModule,
-    MessageBrokerAlertModule,
-    MessageBrokerFramePerformanceModule,
+    MessageBrokerAlertModule.register({
+      url: 'amqp://localhost:5672',
+    }),
+    MessageBrokerPredictionLogModule.register({
+      url: 'amqp://localhost:5672',
+    }),
   ],
   providers: [AlertService, FramePerformanceService],
 })

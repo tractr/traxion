@@ -17,12 +17,6 @@
     "api-graphql": {
       "tags": []
     },
-    "camera-monitoring": {
-      "tags": []
-    },
-    "common": {
-      "tags": []
-    },
     "docs": {
       "tags": []
     },
@@ -38,7 +32,13 @@
     "message-broker-common": {
       "tags": []
     },
-    "message-broker-frame-performance": {
+    "message-broker-handler": {
+      "tags": []
+    },
+    "message-broker-handler-alert-filter": {
+      "tags": []
+    },
+    "message-broker-prediction-log": {
       "tags": []
     },
     "prisma": {

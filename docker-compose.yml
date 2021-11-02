@@ -27,17 +27,17 @@ services:
   #------------------------------------------------
   # Elk
   #------------------------------------------------
-  elk:
-    image: cali/elk
-    build: ./docker/elk
-    ports:
-      - '5601:5601'
-      - '9200:9200'
-      - '5044:5044'
-    volumes:
-      - ./docker/elk/logstash-config:/etc/logstash/conf.d/input.conf
-    depends_on:
-      - message-broker
+  #elk:
+  #  image: cali/elk
+  #  build: ./docker/elk
+  #  ports:
+  #    - '5601:5601'
+  #    - '9200:9200'
+  #    - '5044:5044'
+  #  volumes:
+  #    - ./docker/elk/logstash-config:/etc/logstash/conf.d/input.conf
+  #  depends_on:
+  #    - message-broker
 
 volumes:
   database-data:

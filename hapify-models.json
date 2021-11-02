@@ -195,6 +195,7 @@
         },
         {
           "name": "createdAt",
+          "notes": "Creation date of the camera",
           "properties": ["searchable", "sortable", "internal"],
           "type": "datetime"
         },
