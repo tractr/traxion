@@ -26,6 +26,7 @@
         "libs/message-broker/prediction-log/src/index.ts"
       ],
       "@cali/prisma": ["libs/prisma/src/index.ts"],
+      "@cali/pwa-common-ui": ["libs/pwa/common/ui/src/index.ts"],
       "@generated/*": ["libs/generated/generated/*"]
     },
     "rootDir": ".",

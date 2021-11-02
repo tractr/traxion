@@ -47,6 +47,9 @@
     "pwa": {
       "tags": []
     },
+    "pwa-common-ui": {
+      "tags": []
+    },
     "pwa-e2e": {
       "implicitDependencies": ["pwa"],
       "tags": []
@@ -69,7 +72,13 @@
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ]
       },
       "runner": "@nrwl/workspace/tasks-runners/default"
     }

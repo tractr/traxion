@@ -10,9 +10,11 @@ import { OperationDefinitionNode } from 'graphql';
 
 import { AppComponent } from './app.component';
 
+import { PwaCommonUiModule } from '@cali/pwa-common-ui';
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule],
+  imports: [BrowserModule, HttpClientModule, PwaCommonUiModule],
   providers: [
     {
       provide: APOLLO_OPTIONS,

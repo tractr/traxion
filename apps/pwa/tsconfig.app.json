@@ -3,6 +3,7 @@
     "outDir": "../../dist/out-tsc",
     "types": []
   },
+  "exclude": ["**/*.stories.ts", "**/*.stories.js"],
   "extends": "./tsconfig.json",
   "files": ["src/main.ts", "src/polyfills.ts"],
   "include": ["src/**/*.d.ts"]

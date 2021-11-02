@@ -374,7 +374,7 @@
             "production": {
               "budgets": [
                 {
-                  "maximumError": "1mb",
+                  "maximumError": "2mb",
                   "maximumWarning": "500kb",
                   "type": "initial"
                 },
@@ -396,15 +396,42 @@
           "defaultConfiguration": "production",
           "executor": "@angular-devkit/build-angular:browser",
           "options": {
-            "assets": ["apps/pwa/src/favicon.ico", "apps/pwa/src/assets"],
+            "assets": [
+              "apps/pwa/src/favicon.ico",
+              "apps/pwa/src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
+            ],
             "index": "apps/pwa/src/index.html",
             "inlineStyleLanguage": "less",
             "main": "apps/pwa/src/main.ts",
             "outputPath": "dist/apps/pwa",
             "polyfills": "apps/pwa/src/polyfills.ts",
             "scripts": [],
-            "styles": ["apps/pwa/src/styles.less"],
+            "styles": [
+              "apps/pwa/src/styles.less",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
+            ],
             "tsConfig": "apps/pwa/tsconfig.app.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "build-storybook": {
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          },
+          "executor": "@nrwl/storybook:build",
+          "options": {
+            "config": {
+              "configFolder": "apps/pwa/.storybook"
+            },
+            "outputPath": "dist/storybook/pwa",
+            "uiFramework": "@storybook/angular"
           },
           "outputs": ["{options.outputPath}"]
         },
@@ -438,6 +465,21 @@
             "proxyConfig": "apps/pwa/proxy.conf.json"
           }
         },
+        "storybook": {
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          },
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "config": {
+              "configFolder": "apps/pwa/.storybook"
+            },
+            "port": 4400,
+            "uiFramework": "@storybook/angular"
+          }
+        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -445,6 +487,31 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/apps/pwa"]
+        }
+      }
+    },
+    "pwa-common-ui": {
+      "prefix": "cali",
+      "projectType": "library",
+      "root": "libs/pwa/common/ui",
+      "sourceRoot": "libs/pwa/common/ui/src",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/pwa/common/ui/src/**/*.ts",
+              "libs/pwa/common/ui/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/pwa/common/ui/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/pwa/common/ui"]
         }
       }
     },

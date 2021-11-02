@@ -1,12 +1,9 @@
-<div style="text-align: center">
+<div class="text-center">
   <h1>Welcome to Cali POC!</h1>
 </div>
 <div>
   <h2>Cameras</h2>
-  <ul
-    *ngIf="cameras$ | async as cameras"
-    style="display: flex; justify-content: space-between"
-  >
+  <ul *ngIf="cameras$ | async as cameras" class="flex justify-between">
     <li *ngFor="let camera of cameras">
       <div>camera: {{ camera.id }}</div>
       <div>status {{ camera.status }}</div>

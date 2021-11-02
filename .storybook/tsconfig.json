@@ -1,0 +1,10 @@
+{
+  "exclude": [
+    "../**/*.spec.js",
+    "../**/*.spec.ts",
+    "../**/*.spec.tsx",
+    "../**/*.spec.jsx"
+  ],
+  "extends": "../tsconfig.base.json",
+  "include": ["../**/*"]
+}
