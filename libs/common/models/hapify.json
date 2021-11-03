@@ -1,0 +1,71 @@
+{
+  "defaultFields": [
+    {
+      "embedded": false,
+      "hidden": false,
+      "internal": true,
+      "label": false,
+      "multiple": false,
+      "name": "id",
+      "nullable": false,
+      "ownership": false,
+      "primary": true,
+      "reference": null,
+      "restricted": false,
+      "searchable": false,
+      "sortable": false,
+      "subtype": null,
+      "type": "string",
+      "unique": false
+    }
+  ],
+  "description": "A new Hapify channel",
+  "importReplacements": {},
+  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
+  "name": "New bootstrap",
+  "project": "../../../hapify-models.json",
+  "templates": [
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/models/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/models/enums/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/models/enums/sort-order.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/models/enums/{kebab}.enum.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/models/models/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/models/models/{kebab}.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/models/mock/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/models/mock/{kebab}.mock.ts"
+    }
+  ],
+  "validatorPath": "../../../node_modules/@tractr/hapify-config/validator.js",
+  "version": "1"
+}

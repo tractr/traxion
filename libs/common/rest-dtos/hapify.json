@@ -1,0 +1,158 @@
+{
+  "defaultFields": [
+    {
+      "embedded": false,
+      "hidden": false,
+      "internal": true,
+      "label": false,
+      "multiple": false,
+      "name": "id",
+      "nullable": false,
+      "ownership": false,
+      "primary": true,
+      "reference": null,
+      "restricted": false,
+      "searchable": false,
+      "sortable": false,
+      "subtype": null,
+      "type": "string",
+      "unique": false
+    }
+  ],
+  "description": "A new Hapify channel",
+  "importReplacements": {
+    "models": "@cali/common-models"
+  },
+  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
+  "name": "New bootstrap",
+  "project": "../../../hapify-models.json",
+  "templates": [
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/rest-dtos/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/rest-dtos/dtos/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/dtos/{kebab}/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-create-body.dto.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-find-unique-query.dto.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-find-unique-params.dto.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-find-many-query.dto.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-count-query.dto.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-update-params.dto.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-update-body.dto.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-upsert-params.dto.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-upsert-body.dto.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/dtos/{kebab}/{kebab}-delete-params.dto.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/rest-dtos/mock/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/mock/{kebab}/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-count-query.dto.mock.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-create-body.dto.mock.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-find-unique-params.dto.mock.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-find-unique-query.dto.mock.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-find-many-query.dto.mock.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-update-params.dto.mock.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-update-body.dto.mock.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-upsert-params.dto.mock.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-upsert-body.dto.mock.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rest-dtos/mock/{kebab}/{kebab}-delete-params.dto.mock.ts"
+    }
+  ],
+  "validatorPath": "../../../node_modules/@tractr/hapify-config/validator.js",
+  "version": "1"
+}

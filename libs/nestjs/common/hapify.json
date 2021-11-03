@@ -1,0 +1,109 @@
+{
+  "defaultFields": [
+    {
+      "embedded": false,
+      "hidden": false,
+      "internal": true,
+      "label": false,
+      "multiple": false,
+      "name": "id",
+      "nullable": false,
+      "ownership": false,
+      "primary": true,
+      "reference": null,
+      "restricted": false,
+      "searchable": false,
+      "sortable": false,
+      "subtype": null,
+      "type": "string",
+      "unique": false
+    }
+  ],
+  "description": "A new Hapify channel",
+  "importReplacements": {
+    "models": "@cali/common-models",
+    "rest-dtos": "@cali/common-rest-dtos"
+  },
+  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
+  "name": "New bootstrap",
+  "project": "../../../hapify-models.json",
+  "templates": [
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/nestjs-models-common/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/nestjs-models-common/src/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/nestjs-models-common/src/{kebab}/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/nestjs-models-common/src/{kebab}/{kebab}-model.module.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/nestjs-models-common/src/{kebab}/{kebab}-model.constant.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/nestjs-models-common/src/{kebab}/services/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/nestjs-models-common/src/{kebab}/services/{kebab}-database.service.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/nestjs-models-common/src/{kebab}/services/{kebab}.service.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/nestjs-models-common/mock/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/nestjs-models-common/mock/{kebab}/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/nestjs-models-common/mock/{kebab}/{kebab}.seed.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/nestjs-models-common/mock/{kebab}/{kebab}-database.service.mock.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/nestjs-models-common/mock/{kebab}/{kebab}.service.mock.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/nestjs-models-common/test/{kebab}/{kebab}.service.spec.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/nestjs-models-common/test/{kebab}/{kebab}-database.service.spec.ts"
+    }
+  ],
+  "validatorPath": "../../../node_modules/@tractr/hapify-config/validator.js",
+  "version": "1"
+}

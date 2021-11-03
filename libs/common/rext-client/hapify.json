@@ -1,0 +1,84 @@
+{
+  "defaultFields": [
+    {
+      "embedded": false,
+      "hidden": false,
+      "internal": true,
+      "label": false,
+      "multiple": false,
+      "name": "id",
+      "nullable": false,
+      "ownership": false,
+      "primary": true,
+      "reference": null,
+      "restricted": false,
+      "searchable": false,
+      "sortable": false,
+      "subtype": null,
+      "type": "string",
+      "unique": false
+    }
+  ],
+  "description": "A new Hapify channel",
+  "importReplacements": {
+    "models": "@cali/common-models",
+    "rest-dtos": "@cali/common-rest-dtos"
+  },
+  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
+  "name": "New bootstrap",
+  "project": "../../../hapify-models.json",
+  "templates": [
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/rext-client/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/rext-client/rext-client.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/rext-client/helpers/index.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/rext-client/helpers/rest-ajax.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/rext-client/helpers/transform-and-validate.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/rext-client/helpers/url.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/rext-client/helpers/universal-rxjs-ajax.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/rext-client/typings/xhr2.d.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "one",
+      "path": "generated/rext-client/services/{kebab}.service.ts"
+    },
+    {
+      "engine": "hpf",
+      "input": "all",
+      "path": "generated/rext-client/services/index.ts"
+    }
+  ],
+  "validatorPath": "../../../node_modules/@tractr/hapify-config/validator.js",
+  "version": "1"
+}

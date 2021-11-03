@@ -31,6 +31,31 @@
     }
   },
   "projects": {
+    "angular-common-ui": {
+      "prefix": "cali",
+      "projectType": "library",
+      "root": "libs/angular/common/ui",
+      "sourceRoot": "libs/angular/common/ui/src",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular/common/ui/src/**/*.ts",
+              "libs/angular/common/ui/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular/common/ui/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/angular/common/ui"]
+        }
+      }
+    },
     "api": {
       "projectType": "application",
       "root": "apps/api",
@@ -80,24 +105,298 @@
         }
       }
     },
-    "api-graphql": {
+    "common-angular-rext-client": {
+      "prefix": "cali",
       "projectType": "library",
-      "root": "libs/api/graphql",
-      "sourceRoot": "libs/api/graphql/src",
+      "root": "libs/common/angular-rext-client",
+      "sourceRoot": "libs/common/angular-rext-client/src",
       "targets": {
+        "build": {
+          "configurations": {
+            "development": {
+              "tsConfig": "libs/common/angular-rext-client/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/common/angular-rext-client/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "project": "libs/common/angular-rext-client/ng-package.json"
+          },
+          "outputs": ["dist/libs/common/angular-rext-client"]
+        },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf src/lib/generated",
+              "node ../../../node_modules/.bin/hpf-generate-config",
+              {
+                "command": "npx hpf generate",
+                "forwardAllArgs": false
+              },
+              "mv generated/angular-rext-client src/lib/generated",
+              "npx rimraf generated",
+              "node ../../../tools/hapify-replace-path.js"
+            ],
+            "cwd": "libs/common/angular-rext-client",
+            "parallel": false
+          }
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/api/graphql/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/common/angular-rext-client/src/**/*.ts",
+              "libs/common/angular-rext-client/src/**/*.html"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/api/graphql/jest.config.js",
+            "jestConfig": "libs/common/angular-rext-client/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/api/graphql"]
+          "outputs": ["coverage/libs/common/angular-rext-client"]
+        }
+      }
+    },
+    "common-casl": {
+      "prefix": "cali",
+      "projectType": "library",
+      "root": "libs/common/casl",
+      "sourceRoot": "libs/common/casl/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "development": {
+              "tsConfig": "libs/common/casl/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/common/casl/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "project": "libs/common/casl/ng-package.json"
+          },
+          "outputs": ["dist/libs/common/casl"]
+        },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf src/lib/generated",
+              "node ../../../node_modules/.bin/hpf-generate-config",
+              {
+                "command": "npx hpf generate",
+                "forwardAllArgs": false
+              },
+              "mv generated/casl src/lib/generated",
+              "npx rimraf generated",
+              "node ../../../tools/hapify-replace-path.js"
+            ],
+            "cwd": "libs/common/casl",
+            "parallel": false
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/common/casl/src/**/*.ts",
+              "libs/common/casl/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/common/casl/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/common/casl"]
+        }
+      }
+    },
+    "common-models": {
+      "prefix": "cali",
+      "projectType": "library",
+      "root": "libs/common/models",
+      "sourceRoot": "libs/common/models/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "development": {
+              "tsConfig": "libs/common/models/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/common/models/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "project": "libs/common/models/ng-package.json"
+          },
+          "outputs": ["dist/libs/common/models"]
+        },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf src/lib/generated",
+              "node ../../../node_modules/.bin/hpf-generate-config",
+              {
+                "command": "npx hpf generate",
+                "forwardAllArgs": false
+              },
+              "mv generated/models src/lib/generated",
+              "npx rimraf generated",
+              "node ../../../tools/hapify-replace-path.js"
+            ],
+            "cwd": "libs/common/models",
+            "parallel": false
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/common/models/src/**/*.ts",
+              "libs/common/models/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/common/models/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/common/models"]
+        }
+      }
+    },
+    "common-rest-dtos": {
+      "prefix": "cali",
+      "projectType": "library",
+      "root": "libs/common/rest-dtos",
+      "sourceRoot": "libs/common/rest-dtos/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "development": {
+              "tsConfig": "libs/common/rest-dtos/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/common/rest-dtos/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "project": "libs/common/rest-dtos/ng-package.json"
+          },
+          "outputs": ["dist/libs/common/rest-dtos"]
+        },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf src/lib/generated",
+              "node ../../../node_modules/.bin/hpf-generate-config",
+              {
+                "command": "npx hpf generate",
+                "forwardAllArgs": false
+              },
+              "mv generated/rest-dtos src/lib/generated",
+              "npx rimraf generated",
+              "node ../../../tools/hapify-replace-path.js"
+            ],
+            "cwd": "libs/common/rest-dtos",
+            "parallel": false
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/common/rest-dtos/src/**/*.ts",
+              "libs/common/rest-dtos/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/common/rest-dtos/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/common/rest-dtos"]
+        }
+      }
+    },
+    "common-rext-client": {
+      "prefix": "cali",
+      "projectType": "library",
+      "root": "libs/common/rext-client",
+      "sourceRoot": "libs/common/rext-client/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "development": {
+              "tsConfig": "libs/common/rext-client/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/common/rext-client/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "project": "libs/common/rext-client/ng-package.json"
+          },
+          "outputs": ["dist/libs/common/rext-client"]
+        },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf src/lib/generated",
+              "node ../../../node_modules/.bin/hpf-generate-config",
+              {
+                "command": "npx hpf generate",
+                "forwardAllArgs": false
+              },
+              "mv generated/rext-client src/lib/generated",
+              "npx rimraf generated",
+              "node ../../../tools/hapify-replace-path.js"
+            ],
+            "cwd": "libs/common/rext-client",
+            "parallel": false
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/common/rext-client/src/**/*.ts",
+              "libs/common/rext-client/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/common/rext-client/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/common/rext-client"]
         }
       }
     },
@@ -120,42 +419,22 @@
         }
       }
     },
-    "generated": {
-      "prefix": "cali",
-      "projectType": "library",
-      "root": "libs/generated",
-      "sourceRoot": "libs/generated/src",
-      "targets": {
-        "generate": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "npx rimraf generated",
-              "node ../../node_modules/.bin/hpf-generate-config",
-              {
-                "command": "npx hpf generate",
-                "forwardAllArgs": false
-              }
-            ],
-            "cwd": "libs/generated",
-            "parallel": false
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/generated/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/generated"]
-        }
-      }
-    },
     "message-broker-alert": {
       "projectType": "library",
       "root": "libs/message-broker/alert",
       "sourceRoot": "libs/message-broker/alert/src",
       "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/message-broker/alert/*.md"],
+            "main": "libs/message-broker/alert/src/index.ts",
+            "outputPath": "dist/libs/message-broker/alert",
+            "packageJson": "libs/message-broker/alert/package.json",
+            "tsConfig": "libs/message-broker/alert/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
@@ -177,6 +456,17 @@
       "root": "libs/message-broker/camera-status",
       "sourceRoot": "libs/message-broker/camera-status/src",
       "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/message-broker/camera-status/*.md"],
+            "main": "libs/message-broker/camera-status/src/index.ts",
+            "outputPath": "dist/libs/message-broker/camera-status",
+            "packageJson": "libs/message-broker/camera-status/package.json",
+            "tsConfig": "libs/message-broker/camera-status/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
@@ -198,6 +488,17 @@
       "root": "libs/message-broker/common",
       "sourceRoot": "libs/message-broker/common/src",
       "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/message-broker/common/*.md"],
+            "main": "libs/message-broker/common/src/index.ts",
+            "outputPath": "dist/libs/message-broker/common",
+            "packageJson": "libs/message-broker/common/package.json",
+            "tsConfig": "libs/message-broker/common/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
@@ -268,6 +569,17 @@
       "root": "libs/message-broker-handler/alert-filter",
       "sourceRoot": "libs/message-broker-handler/alert-filter/src",
       "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/message-broker-handler/alert-filter/*.md"],
+            "main": "libs/message-broker-handler/alert-filter/src/index.ts",
+            "outputPath": "dist/libs/message-broker-handler/alert-filter",
+            "packageJson": "libs/message-broker-handler/alert-filter/package.json",
+            "tsConfig": "libs/message-broker-handler/alert-filter/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
@@ -291,6 +603,17 @@
       "root": "libs/message-broker/prediction-log",
       "sourceRoot": "libs/message-broker/prediction-log/src",
       "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/message-broker/prediction-log/*.md"],
+            "main": "libs/message-broker/prediction-log/src/index.ts",
+            "outputPath": "dist/libs/message-broker/prediction-log",
+            "packageJson": "libs/message-broker/prediction-log/package.json",
+            "tsConfig": "libs/message-broker/prediction-log/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
@@ -304,6 +627,127 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/message-broker/prediction-log"]
+        }
+      }
+    },
+    "nestjs-common": {
+      "projectType": "library",
+      "root": "libs/nestjs/common",
+      "sourceRoot": "libs/nestjs/common/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/nestjs/common/*.md"],
+            "main": "libs/nestjs/common/src/index.ts",
+            "outputPath": "dist/libs/nestjs/common",
+            "packageJson": "libs/nestjs/common/package.json",
+            "tsConfig": "libs/nestjs/common/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf src/lib/generated",
+              "node ../../../node_modules/.bin/hpf-generate-config",
+              {
+                "command": "npx hpf generate",
+                "forwardAllArgs": false
+              },
+              "mv generated/nestjs-models-common src/lib/generated",
+              "npx rimraf generated",
+              "node ../../../tools/hapify-replace-path.js"
+            ],
+            "cwd": "libs/nestjs/common",
+            "parallel": false
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/common/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/nestjs/common/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/nestjs/common"]
+        }
+      }
+    },
+    "nestjs-graphql": {
+      "projectType": "library",
+      "root": "libs/nestjs/graphql",
+      "sourceRoot": "libs/nestjs/graphql/src",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/graphql/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/nestjs/graphql/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/nestjs/graphql"]
+        }
+      }
+    },
+    "nestjs-rest": {
+      "projectType": "library",
+      "root": "libs/nestjs/rest",
+      "sourceRoot": "libs/nestjs/rest/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/nestjs/rest/*.md"],
+            "main": "libs/nestjs/rest/src/index.ts",
+            "outputPath": "dist/libs/nestjs/rest",
+            "packageJson": "libs/nestjs/rest/package.json",
+            "tsConfig": "libs/nestjs/rest/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx rimraf src/lib/generated",
+              "node ../../../node_modules/.bin/hpf-generate-config",
+              {
+                "command": "npx hpf generate",
+                "forwardAllArgs": false
+              },
+              "mv generated/nestjs-models-rest src/lib/generated",
+              "npx rimraf generated",
+              "node ../../../tools/hapify-replace-path.js"
+            ],
+            "cwd": "libs/nestjs/rest",
+            "parallel": false
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/rest/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/nestjs/rest/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/nestjs/rest"]
         }
       }
     },
@@ -487,31 +931,6 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/apps/pwa"]
-        }
-      }
-    },
-    "pwa-common-ui": {
-      "prefix": "cali",
-      "projectType": "library",
-      "root": "libs/pwa/common/ui",
-      "sourceRoot": "libs/pwa/common/ui/src",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/pwa/common/ui/src/**/*.ts",
-              "libs/pwa/common/ui/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/pwa/common/ui/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/pwa/common/ui"]
         }
       }
     },

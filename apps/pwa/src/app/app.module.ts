@@ -10,7 +10,7 @@ import { OperationDefinitionNode } from 'graphql';
 
 import { AppComponent } from './app.component';
 
-import { PwaCommonUiModule } from '@cali/pwa-common-ui';
+import { PwaCommonUiModule } from '@cali/angular-common-ui';
 
 @NgModule({
   declarations: [AppComponent],

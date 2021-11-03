@@ -5,18 +5,19 @@ import { DatabaseModule } from '@tractr/nestjs-database';
 import { AppService } from './app.service';
 import { SharedModule } from './shared.module';
 
-import { ApiGraphqlModule } from '@cali/api-graphql';
 import { MessageBrokerAlertModule } from '@cali/message-broker-alert';
-import { ModelsModule } from '@generated/nestjs-models';
+import { NestjsGraphqlModule } from '@cali/nestjs-graphql';
+import { NestjsRestModule } from '@cali/nestjs-rest';
 
 @Module({
   imports: [
     DatabaseModule.register(),
-    ModelsModule.register(),
+    NestjsRestModule,
+    // ModelsModule.register(),
     SharedModule,
     LoggerModule,
     MessageBrokerAlertModule,
-    ApiGraphqlModule,
+    NestjsGraphqlModule,
   ],
   controllers: [],
   providers: [AppService],

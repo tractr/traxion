@@ -11,22 +11,39 @@
   },
   "npmScope": "cali",
   "projects": {
+    "angular-common-ui": {
+      "tags": []
+    },
     "api": {
       "tags": []
     },
-    "api-graphql": {
+    "common-angular-rext-client": {
+      "implicitDependencies": ["common-rext-client"],
+      "tags": []
+    },
+    "common-casl": {
+      "tags": []
+    },
+    "common-models": {
+      "tags": []
+    },
+    "common-rest-dtos": {
+      "implicitDependencies": ["common-models"],
+      "tags": []
+    },
+    "common-rext-client": {
+      "implicitDependencies": ["common-models", "common-rest-dtos"],
       "tags": []
     },
     "docs": {
       "tags": []
     },
-    "generated": {
-      "tags": []
-    },
     "message-broker-alert": {
+      "implicitDependencies": ["message-broker-common"],
       "tags": []
     },
     "message-broker-camera-status": {
+      "implicitDependencies": ["message-broker-common"],
       "tags": []
     },
     "message-broker-common": {
@@ -36,18 +53,35 @@
       "tags": []
     },
     "message-broker-handler-alert-filter": {
+      "implicitDependencies": [
+        "message-broker-alert",
+        "message-broker-prediction-log"
+      ],
       "tags": []
     },
     "message-broker-prediction-log": {
+      "implicitDependencies": ["message-broker-common"],
+      "tags": []
+    },
+    "nestjs-common": {
+      "implicitDependencies": ["common-models"],
+      "tags": []
+    },
+    "nestjs-graphql": {
+      "tags": []
+    },
+    "nestjs-rest": {
+      "implicitDependencies": [
+        "common-rest-dtos",
+        "nestjs-common",
+        "common-casl"
+      ],
       "tags": []
     },
     "prisma": {
       "tags": []
     },
     "pwa": {
-      "tags": []
-    },
-    "pwa-common-ui": {
       "tags": []
     },
     "pwa-e2e": {

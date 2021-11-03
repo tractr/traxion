@@ -11,7 +11,14 @@
     "module": "esnext",
     "moduleResolution": "node",
     "paths": {
-      "@cali/api-graphql": ["libs/api/graphql/src/index.ts"],
+      "@cali/angular-common-ui": ["libs/angular/common/ui/src/index.ts"],
+      "@cali/common-angular-rext-client": [
+        "libs/common/angular-rext-client/src/index.ts"
+      ],
+      "@cali/common-casl": ["libs/common/casl/src/index.ts"],
+      "@cali/common-models": ["libs/common/models/src/index.ts"],
+      "@cali/common-rest-dtos": ["libs/common/rest-dtos/src/index.ts"],
+      "@cali/common-rext-client": ["libs/common/rext-client/src/index.ts"],
       "@cali/message-broker-alert": ["libs/message-broker/alert/src/index.ts"],
       "@cali/message-broker-camera-status": [
         "libs/message-broker/camera-status/src/index.ts"
@@ -25,8 +32,10 @@
       "@cali/message-broker-prediction-log": [
         "libs/message-broker/prediction-log/src/index.ts"
       ],
+      "@cali/nestjs-common": ["libs/nestjs/common/src/index.ts"],
+      "@cali/nestjs-graphql": ["libs/nestjs/graphql/src/index.ts"],
+      "@cali/nestjs-rest": ["libs/nestjs/rest/src/index.ts"],
       "@cali/prisma": ["libs/prisma/src/index.ts"],
-      "@cali/pwa-common-ui": ["libs/pwa/common/ui/src/index.ts"],
       "@generated/*": ["libs/generated/generated/*"]
     },
     "rootDir": ".",
