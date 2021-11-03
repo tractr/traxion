@@ -22,7 +22,7 @@ import {
   UpsertOptions,
 } from '../helpers';
  
-import { <<Model pascal>> } from '@generated/models';
+import { <<Model pascal>> } from '../../models';
 import {
   <<Model pascal>>CountQueryDto,
   <<Model pascal>>CreateBodyDto,
@@ -34,7 +34,7 @@ import {
   <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpsertBodyDto,
   <<Model pascal>>UpsertParamsDto,
-} from '@generated/rest-dtos';
+} from '../../rest-dtos';
  
 export class <<Model pascal>>Service {
   public apiUrl: URL;
