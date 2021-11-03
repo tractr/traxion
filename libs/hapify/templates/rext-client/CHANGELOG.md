@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.23.0](https://github.com/tractr/stack/compare/v1.22.4...v1.23.0) (2021-11-03)
+
+
+### Features
+
+* fix templates imports and add notes to models templates ([#301](https://github.com/tractr/stack/issues/301)) ([f958dab](https://github.com/tractr/stack/commit/f958dabd49f164b493c2783883a8d52207d46068))
+
+
+
 ## [1.22.4](https://github.com/tractr/stack/compare/v1.22.3...v1.22.4) (2021-10-29)
 
 
