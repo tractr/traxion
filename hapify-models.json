@@ -12,6 +12,7 @@
       "fields": [
         {
           "name": "id",
+          "notes": "Answer UUID",
           "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
         },
@@ -20,6 +21,7 @@
             "backRelation": "answers"
           },
           "name": "user",
+          "notes": "User that owns the answer",
           "properties": [],
           "subtype": "oneMany",
           "type": "entity",
@@ -30,6 +32,7 @@
             "backRelation": "answers"
           },
           "name": "question",
+          "notes": "Question associated to the answer",
           "properties": [],
           "subtype": "oneMany",
           "type": "entity",
@@ -40,6 +43,7 @@
             "backRelation": "answers"
           },
           "name": "tags",
+          "notes": "Tags associated to the answer",
           "properties": ["nullable", "multiple"],
           "subtype": "manyMany",
           "type": "entity",
@@ -47,12 +51,14 @@
         },
         {
           "name": "answerDate",
+          "notes": "Date of the answer creation",
           "properties": [],
           "type": "datetime"
         }
       ],
       "id": "ccebcf02-4b82-923f-114e-252c9455899d",
-      "name": "Answer"
+      "name": "Answer",
+      "notes": "The answer model"
     },
     {
       "accesses": {
