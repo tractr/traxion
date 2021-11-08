@@ -2,24 +2,22 @@ import { Module } from '@nestjs/common';
 import { LoggerModule } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 
-import { AppService } from './app.service';
-import { SharedModule } from './shared.module';
-
-import { MessageBrokerAlertModule } from '@cali/message-broker-alert';
-import { NestjsGraphqlModule } from '@cali/nestjs-graphql';
-import { NestjsRestModule } from '@cali/nestjs-rest';
+import { MessageBrokerModule } from '@cali/nestjs-message-broker';
+import { RestModule } from '@cali/nestjs-rest';
 
 @Module({
   imports: [
-    DatabaseModule.register(),
-    NestjsRestModule,
-    // ModelsModule.register(),
-    SharedModule,
+    // Common modules
     LoggerModule,
-    MessageBrokerAlertModule,
-    NestjsGraphqlModule,
+    DatabaseModule.register(),
+
+    // Network modules
+    RestModule,
+    // NestjsGraphqlModule,
+    MessageBrokerModule.register({
+      url: 'amqp://localhost:5672',
+    }),
   ],
   controllers: [],
-  providers: [AppService],
 })
 export class AppModule {}

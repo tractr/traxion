@@ -22,4 +22,4 @@ import { MessageBrokerCameraStatusModule } from '@cali/message-broker-camera-sta
   providers: [AlertResolver, CameraResolver],
   exports: [],
 })
-export class NestjsGraphqlModule {}
+export class GraphqlModule {}

@@ -1,3 +1,4 @@
+import { AlertAlertType } from '@prisma/client';
 import { datatype } from 'faker';
 import { Command, Console } from 'nestjs-console';
 import { interval, map, tap } from 'rxjs';
@@ -51,7 +52,7 @@ export class FramePerformanceService {
       interval(timeIntervalNumber)
         .pipe(
           map(() =>
-            cameras.map((idcamera) =>
+            cameras.map(() =>
               this.messageBrokerPredictionLog.publish({
                 routingKey: '',
                 message: this.mockPredictionLog(),
@@ -76,11 +77,11 @@ export class FramePerformanceService {
     predictionLog: Partial<MessageBrokerPredictionLog> = {},
   ): MessageBrokerPredictionLog {
     return {
-      num_frame: datatype.string(),
+      num_frame: '1',
       classes: [datatype.string()],
       probas: [datatype.number(1)],
-      class: datatype.string(),
-      alert: datatype.boolean(),
+      class: AlertAlertType.thief,
+      alert: true, // datatype.boolean(),
       delay: datatype.number(100),
       t_ingest: datatype.number(100),
       t_prepro: datatype.number(100),

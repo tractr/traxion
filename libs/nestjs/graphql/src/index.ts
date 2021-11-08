@@ -1,1 +1,1 @@
-export * from './lib/nestjs-graphql.module';
+export * from './lib/graphql.module';

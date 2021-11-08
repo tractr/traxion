@@ -42,13 +42,13 @@ export class MessageBrokerPredictionLogModule extends ModuleOptionsFactory<Messa
               },
             ],
             uri: configuration.url,
-            connectionInitOptions: { wait: false },
+            connectionInitOptions: { wait: true },
           }),
           inject: [MESSAGE_BROKER_PREDICTION_LOG_CONFIGURATION],
         }),
       ],
       providers: [MessageBrokerPredictionLogService],
-      exports: [MessageBrokerPredictionLogService, RabbitMQModule],
+      exports: [MessageBrokerPredictionLogService],
     };
   }
 }

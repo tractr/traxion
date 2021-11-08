@@ -18,10 +18,13 @@
           "type": "string"
         },
         {
+          "meta": {
+            "default": "new Date()"
+          },
           "name": "createdAt",
           "notes": "Creation date of the alert",
           "properties": ["searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "datetime"
         },
         {
           "meta": {
@@ -63,12 +66,18 @@
           "type": "string"
         },
         {
+          "meta": {
+            "default": "null"
+          },
           "name": "videoUrl",
           "notes": "Url of the video associated to the alert",
           "properties": ["nullable", "searchable", "sortable", "internal"],
           "type": "string"
         },
         {
+          "meta": {
+            "default": "AlertVideoStatus.generationStarted"
+          },
           "name": "videoStatus",
           "notes": "Status of the video associated to the alert",
           "properties": ["searchable", "sortable", "internal"],
@@ -102,6 +111,9 @@
           "type": "string"
         },
         {
+          "meta": {
+            "default": "new Date()"
+          },
           "name": "createdAt",
           "notes": "Creation date of the AlertFeeback",
           "properties": ["searchable", "sortable", "internal"],
@@ -194,6 +206,9 @@
           "type": "string"
         },
         {
+          "meta": {
+            "default": "new Date()"
+          },
           "name": "createdAt",
           "notes": "Creation date of the camera",
           "properties": ["searchable", "sortable", "internal"],
@@ -238,6 +253,9 @@
           "type": "string"
         },
         {
+          "meta": {
+            "default": "new Date()"
+          },
           "name": "createdAt",
           "notes": "Creation date of the camera status",
           "properties": ["searchable", "sortable", "internal"],
@@ -283,6 +301,9 @@
           "type": "string"
         },
         {
+          "meta": {
+            "default": "new Date()"
+          },
           "name": "createdAt",
           "notes": "Client creation date",
           "properties": ["searchable", "sortable", "internal"],
@@ -333,6 +354,9 @@
           "type": "string"
         },
         {
+          "meta": {
+            "default": "new Date()"
+          },
           "name": "createdAt",
           "notes": "Creation date of the item category",
           "properties": ["searchable", "sortable", "internal"],
@@ -372,6 +396,9 @@
           "type": "string"
         },
         {
+          "meta": {
+            "default": "new Date()"
+          },
           "name": "createdAt",
           "notes": "Creation date of the shop",
           "properties": ["searchable", "sortable", "internal"],
@@ -423,6 +450,9 @@
           "type": "string"
         },
         {
+          "meta": {
+            "default": "new Date()"
+          },
           "name": "createdAt",
           "notes": "Creation date of the shop department",
           "properties": ["searchable", "sortable", "internal"],
@@ -467,6 +497,9 @@
           "type": "string"
         },
         {
+          "meta": {
+            "default": "new Date()"
+          },
           "name": "createdAt",
           "notes": "Creation date of the shop section",
           "properties": ["searchable", "sortable", "internal"],
@@ -528,6 +561,9 @@
           "type": "string"
         },
         {
+          "meta": {
+            "default": "new Date()"
+          },
           "name": "createdAt",
           "notes": "Creation date of the user",
           "properties": ["searchable", "sortable", "internal"],

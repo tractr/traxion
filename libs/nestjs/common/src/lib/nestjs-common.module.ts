@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 
+import { AlertModelModule } from './alert';
 import {
   AlertFeedbackModelModule,
-  AlertModelModule,
   CameraModelModule,
   CameraStatusModelModule,
   ClientModelModule,
@@ -30,4 +30,4 @@ const modelModules = [
   imports: modelModules.map((module) => module.register()),
   exports: modelModules,
 })
-export class NestjsCommonModule {}
+export class CommonModule {}

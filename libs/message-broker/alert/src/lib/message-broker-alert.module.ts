@@ -42,13 +42,13 @@ export class MessageBrokerAlertModule extends ModuleOptionsFactory<MessageBroker
               },
             ],
             uri: configuration.url,
-            connectionInitOptions: { wait: true },
+            connectionInitOptions: { wait: false },
           }),
           inject: [MESSAGE_BROKER_ALERT_CONFIGURATION],
         }),
       ],
       providers: [MessageBrokerAlertService],
-      exports: [MessageBrokerAlertService, RabbitMQModule],
+      exports: [MessageBrokerAlertService],
     };
   }
 }

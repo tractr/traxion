@@ -3,7 +3,9 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
-  await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule);
+
+  await app.listen(3334);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises

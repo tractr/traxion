@@ -70,6 +70,10 @@
     "nestjs-graphql": {
       "tags": []
     },
+    "nestjs-message-broker": {
+      "implicitDependencies": ["nestjs-common"],
+      "tags": []
+    },
     "nestjs-rest": {
       "implicitDependencies": [
         "common-rest-dtos",

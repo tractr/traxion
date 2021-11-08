@@ -2,16 +2,16 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { transformAndValidate } from '@tractr/common';
 import { AsyncOptions, ModuleOptionsFactory } from '@tractr/nestjs-core';
 
-import { MESSAGE_BROKER_HANDLER_ALERT_FILTER_CONFIGURATION } from './constants';
-import { MessageBrokerHandlerAlertFilterService } from './services';
+import { NESTJS_MESSAGE_BROKER_CONFIGURATION } from './constants';
+import { AlertSubscriber } from './subscribers';
 
 import { MessageBrokerAlertModule } from '@cali/message-broker-alert';
 import { MessageBrokerConfiguration } from '@cali/message-broker-common';
-import { MessageBrokerPredictionLogModule } from '@cali/message-broker-prediction-log';
+import { AlertModelModule } from '@cali/nestjs-common';
 
 @Module({})
-export class MessageBrokerHandlerAlertFilterModule extends ModuleOptionsFactory<MessageBrokerConfiguration>(
-  MESSAGE_BROKER_HANDLER_ALERT_FILTER_CONFIGURATION,
+export class MessageBrokerModule extends ModuleOptionsFactory<MessageBrokerConfiguration>(
+  NESTJS_MESSAGE_BROKER_CONFIGURATION,
   transformAndValidate(MessageBrokerConfiguration),
 ) {
   static register(options: MessageBrokerConfiguration): DynamicModule {
@@ -28,23 +28,18 @@ export class MessageBrokerHandlerAlertFilterModule extends ModuleOptionsFactory<
 
   private static createModuleFromOptions(module: DynamicModule): DynamicModule {
     return {
-      module: MessageBrokerHandlerAlertFilterModule,
+      module: MessageBrokerModule,
       imports: [
-        MessageBrokerPredictionLogModule.registerAsync({
-          imports: [module],
-          useFactory: (_, configuration: MessageBrokerConfiguration) =>
-            configuration,
-          inject: [MESSAGE_BROKER_HANDLER_ALERT_FILTER_CONFIGURATION],
-        }),
+        AlertModelModule.register(),
         MessageBrokerAlertModule.registerAsync({
           imports: [module],
           useFactory: (_, configuration: MessageBrokerConfiguration) =>
             configuration,
-          inject: [MESSAGE_BROKER_HANDLER_ALERT_FILTER_CONFIGURATION],
+          inject: [NESTJS_MESSAGE_BROKER_CONFIGURATION],
         }),
       ],
-      providers: [MessageBrokerHandlerAlertFilterService],
-      exports: [MessageBrokerHandlerAlertFilterService],
+      providers: [AlertSubscriber],
+      exports: [],
     };
   }
 }

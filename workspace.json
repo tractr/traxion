@@ -701,6 +701,38 @@
         }
       }
     },
+    "nestjs-message-broker": {
+      "projectType": "library",
+      "root": "libs/nestjs/message-broker",
+      "sourceRoot": "libs/nestjs/message-broker/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/nestjs/message-broker/*.md"],
+            "main": "libs/nestjs/message-broker/src/index.ts",
+            "outputPath": "dist/libs/nestjs/message-broker",
+            "packageJson": "libs/nestjs/message-broker/package.json",
+            "tsConfig": "libs/nestjs/message-broker/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/message-broker/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/nestjs/message-broker/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/nestjs/message-broker"]
+        }
+      }
+    },
     "nestjs-rest": {
       "projectType": "library",
       "root": "libs/nestjs/rest",

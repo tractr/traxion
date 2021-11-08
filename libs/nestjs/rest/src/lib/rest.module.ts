@@ -13,7 +13,7 @@ import {
   UserRestModule,
 } from './generated';
 
-import { NestjsCommonModule } from '@cali/nestjs-common';
+import { CommonModule } from '@cali/nestjs-common';
 
 const restModules = [
   AlertFeedbackRestModule,
@@ -28,10 +28,7 @@ const restModules = [
   UserRestModule,
 ];
 @Module({
-  imports: [
-    NestjsCommonModule,
-    ...restModules.map((module) => module.register()),
-  ],
+  imports: [CommonModule, ...restModules.map((module) => module.register())],
   exports: restModules,
 })
-export class NestjsRestModule {}
+export class RestModule {}

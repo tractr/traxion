@@ -1,7 +1,7 @@
-import { App, RemoteBackend } from 'cdktf';
-
 import { getTerraformConfiguration } from './configs';
 import { MainStack } from './stacks';
+
+import { App, RemoteBackend } from 'cdktf';
 
 let terraformEnvs;
 try {

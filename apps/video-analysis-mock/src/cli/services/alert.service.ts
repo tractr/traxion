@@ -68,7 +68,7 @@ export class AlertService {
   ): MessageBrokerAlert {
     return {
       alertType: AlertAlertType.thief,
-      cameraId: datatype.string(),
+      cameraExternalId: datatype.string(),
       externalFrameId: datatype.string(),
       externalModelDecisionId: datatype.string(),
       externalModelPredictionId: datatype.string(),
