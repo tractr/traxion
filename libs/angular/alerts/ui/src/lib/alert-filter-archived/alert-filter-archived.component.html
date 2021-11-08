@@ -1,0 +1,14 @@
+<div class="filter-alerts-archived">
+  <tractr-select
+    name="filterStatus"
+    [options]="statusOptions"
+    [placeholder]="'status-alert' | translate"
+    (valueChanged)="filterChange($event, 'status')"
+  ></tractr-select>
+  <tractr-select
+    name="filterTime"
+    [options]="timesOptions"
+    [placeholder]="'filter-common-period' | translate"
+    (valueChanged)="filterChange($event, 'period')"
+  ></tractr-select>
+</div>

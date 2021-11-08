@@ -11,6 +11,12 @@
   },
   "npmScope": "cali",
   "projects": {
+    "angular-alerts-features": {
+      "tags": []
+    },
+    "angular-alerts-ui": {
+      "tags": []
+    },
     "angular-common-ui": {
       "tags": []
     },

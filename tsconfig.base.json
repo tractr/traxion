@@ -11,6 +11,10 @@
     "module": "esnext",
     "moduleResolution": "node",
     "paths": {
+      "@cali/angular-alerts-features": [
+        "libs/angular/alerts/features/src/index.ts"
+      ],
+      "@cali/angular-alerts-ui": ["libs/angular/alerts/ui/src/index.ts"],
       "@cali/angular-common-ui": ["libs/angular/common/ui/src/index.ts"],
       "@cali/common-angular-rext-client": [
         "libs/common/angular-rext-client/src/index.ts"
@@ -38,8 +42,10 @@
         "libs/nestjs/message-broker/src/index.ts"
       ],
       "@cali/nestjs-rest": ["libs/nestjs/rest/src/index.ts"],
-      "@cali/prisma": ["libs/prisma/src/index.ts"]
+      "@cali/prisma": ["libs/prisma/src/index.ts"],
+      "@generated/*": ["libs/generated/generated/*"]
     },
+    "resolveJsonModule": true,
     "rootDir": ".",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,

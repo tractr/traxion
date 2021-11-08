@@ -1,0 +1,15 @@
+<nz-tabset>
+  <nz-tab [nzTitle]="alertTitle"> Content of Tab Pane 1 </nz-tab>
+  <nz-tab [nzTitle]="archiveTitle">
+    <cali-filter-alerts-archived></cali-filter-alerts-archived>
+  </nz-tab>
+</nz-tabset>
+
+<ng-template #alertTitle>
+  <i nz-icon nzType="bell" nzTheme="outline"></i> {{ 'alert' | translate }}
+</ng-template>
+
+<ng-template #archiveTitle>
+  <i nz-icon nzType="folder-open" nzTheme="outline"></i>
+  {{ 'archive' | translate }}
+</ng-template>

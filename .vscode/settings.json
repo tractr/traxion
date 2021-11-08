@@ -5,10 +5,11 @@
     "casl",
     "dtos",
     "fanout",
+    "rext",
     "hapify",
     "nestjs",
     "rabbitmq",
-    "rext",
+    "tailwindcss",
     "tractr"
   ]
 }

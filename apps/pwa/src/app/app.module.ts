@@ -1,20 +1,39 @@
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import localeFr from '@angular/common/locales/fr';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { InMemoryCache, split } from '@apollo/client/core';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { OperationDefinitionNode } from 'graphql';
 
 import { AppComponent } from './app.component';
 
-import { PwaCommonUiModule } from '@cali/angular-common-ui';
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule, PwaCommonUiModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
+  ],
   providers: [
     {
       provide: APOLLO_OPTIONS,
@@ -54,6 +73,10 @@ import { PwaCommonUiModule } from '@cali/angular-common-ui';
         };
       },
       deps: [HttpLink],
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'fr',
     },
   ],
   bootstrap: [AppComponent],

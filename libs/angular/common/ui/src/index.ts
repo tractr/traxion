@@ -1,1 +1,1 @@
-export * from './lib/pwa-common-ui.module';
+export * from './lib/angular-common-ui.module';

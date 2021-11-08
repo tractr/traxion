@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Apollo, gql } from 'apollo-angular';
 import { map, Observable, scan, shareReplay } from 'rxjs';
 
@@ -36,7 +37,10 @@ const GQL_CAMERA_UPDATE_SUBSCRIPTION = gql`
   styleUrls: ['./app.component.less'],
 })
 export class AppComponent implements OnInit {
-  constructor(private graphql: Apollo) {}
+  constructor(private graphql: Apollo, translate: TranslateService) {
+    translate.setDefaultLang('fr');
+    translate.use('fr');
+  }
 
   /**
    * Observable that emits new Alerts coming from the api
