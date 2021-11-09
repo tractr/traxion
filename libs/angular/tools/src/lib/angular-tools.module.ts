@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
+import { CommonModule } from '@angular/common';
 import {
   HTTP_INTERCEPTORS,
   HttpClient,
@@ -7,8 +8,6 @@ import {
 } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -34,8 +33,7 @@ import { HttpLoaderFactory } from './translate-import';
 
 @NgModule({
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
@@ -75,8 +73,7 @@ import { HttpLoaderFactory } from './translate-import';
     },
   ],
   exports: [
-    BrowserModule,
-    BrowserAnimationsModule,
+    CommonModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
