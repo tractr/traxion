@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-group-network",
-  "version": "1.23.0",
+  "version": "1.23.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
