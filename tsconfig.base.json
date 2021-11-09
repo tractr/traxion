@@ -14,6 +14,7 @@
       "@cali/angular-alerts-features": [
         "libs/angular/alerts/features/src/index.ts"
       ],
+      "@cali/angular-alerts-pages": ["libs/angular/alerts/pages/src/index.ts"],
       "@cali/angular-alerts-ui": ["libs/angular/alerts/ui/src/index.ts"],
       "@cali/angular-common-ui": ["libs/angular/common/ui/src/index.ts"],
       "@cali/common-angular-rext-client": [

@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { AlertListArchivedComponent } from './alert-list-archived/alert-list-archived.component';
-import { AlertListInProgressComponent } from './alert-list-in-progress/alert-list-in-progress.component';
+import {
+  AlertListArchivedComponent,
+  AlertListInProgressComponent,
+} from './components';
 
 @NgModule({
   imports: [CommonModule],
   declarations: [AlertListInProgressComponent, AlertListArchivedComponent],
+  exports: [AlertListInProgressComponent, AlertListArchivedComponent],
 })
-export class AngularAlertsSmartModule {}
+export class AngularAlertsFeaturesModule {}

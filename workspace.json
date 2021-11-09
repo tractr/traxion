@@ -56,6 +56,31 @@
         }
       }
     },
+    "angular-alerts-pages": {
+      "prefix": "cali",
+      "projectType": "library",
+      "root": "libs/angular/alerts/pages",
+      "sourceRoot": "libs/angular/alerts/pages/src",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular/alerts/pages/src/**/*.ts",
+              "libs/angular/alerts/pages/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular/alerts/pages/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/angular/alerts/pages"]
+        }
+      }
+    },
     "angular-alerts-ui": {
       "prefix": "cali",
       "projectType": "library",
