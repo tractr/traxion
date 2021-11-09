@@ -13,11 +13,11 @@ module.exports = {
   addons: [...rootMain.addons],
   webpackFinal: async (config, { configType }) => {
     // apply any global webpack configs that might have been specified in .storybook/main.js
-    /*  if (rootMain.webpackFinal) {
+    if (rootMain.webpackFinal) {
       // eslint-disable-next-line no-param-reassign
       config = await rootMain.webpackFinal(config, { configType });
-    } */
+    }
     // add your own webpack tweaks if needed
-    /* return config */
+    return config;
   },
 };

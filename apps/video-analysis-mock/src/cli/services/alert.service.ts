@@ -1,4 +1,4 @@
-import { AlertAlertType } from '@prisma/client';
+import { AlertType } from '@prisma/client';
 import { datatype } from 'faker';
 import { Command, Console } from 'nestjs-console';
 import { interval, map, tap } from 'rxjs';
@@ -67,7 +67,7 @@ export class AlertService {
     alert: Partial<MessageBrokerAlert> = {},
   ): MessageBrokerAlert {
     return {
-      alertType: AlertAlertType.thief,
+      type: AlertType.thief,
       cameraExternalId: datatype.string(),
       externalFrameId: datatype.string(),
       externalModelDecisionId: datatype.string(),

@@ -1,4 +1,4 @@
-import { AlertAlertType } from '@prisma/client';
+import { AlertType } from '@prisma/client';
 import { datatype } from 'faker';
 import { Command, Console } from 'nestjs-console';
 import { interval, map, tap } from 'rxjs';
@@ -80,7 +80,7 @@ export class FramePerformanceService {
       num_frame: '1',
       classes: [datatype.string()],
       probas: [datatype.number(1)],
-      class: AlertAlertType.thief,
+      class: AlertType.thief,
       alert: true, // datatype.boolean(),
       delay: datatype.number(100),
       t_ingest: datatype.number(100),

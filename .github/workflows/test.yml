@@ -34,16 +34,6 @@ jobs:
           node-version: ${{ matrix.node }}
           registry-url: https://npm.pkg.github.com
 
-      # We get our cache compare to our package-lock
-      - uses: actions/cache@v2.1.4
-        with:
-          path: '~/.npm'
-          key:
-            ${{ matrix.os }}-npm-${{ matrix.node }}-${{
-            hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ matrix.os }}-npm-${{ matrix.node }}-
-
       # We install our dependencies
       - name: Run npm install
         env:

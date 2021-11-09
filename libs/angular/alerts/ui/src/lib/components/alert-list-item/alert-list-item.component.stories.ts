@@ -20,9 +20,9 @@ interface ItemListAlertsIO {
 
 /** Mock common */
 const itemCategory = mockItemCategoryFactory();
-const shopDepartement = mockShopDepartmentFactory();
+const shopDepartment = mockShopDepartmentFactory();
 const shopSection = mockShopSectionFactory({
-  shopDepartement: { ...shopDepartement },
+  shopDepartment: { ...shopDepartment },
   itemCategory: { ...itemCategory },
 });
 const camera = mockCameraFactory({ shopSection: { ...shopSection } });

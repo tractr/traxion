@@ -30,12 +30,14 @@
     "lint": "nx workspace-lint && nx run-many --all --target=lint --parallel",
     "nx": "nx",
     "prisma:db:push": "prisma db push --schema=./libs/prisma/prisma/schema.prisma",
-    "prisma:db:seed": "prisma db seed --preview-feature --schema=./libs/prisma/prisma/schema.prisma",
+    "prisma:db:reset": "npm run prisma:db:truncate && npm run prisma:db:seed",
+    "prisma:db:seed": "prisma db seed --schema=./libs/prisma/prisma/schema.prisma",
+    "prisma:db:truncate": "prisma db push --force-reset --schema=./libs/prisma/prisma/schema.prisma",
     "prisma:studio": "prisma studio --schema=./libs/prisma/prisma/schema.prisma",
     "start": "nx serve",
     "terraform:synth": "nx run terraform:synth",
     "test": " nx run-many --all --target=test",
-    "ts-node": "ts-node -r tsconfig-paths/register --project apps/api/tsconfig.json",
+    "ts-node": "ts-node -r tsconfig-paths/register --project tsconfig.ts-node.json",
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator"
   },
@@ -90,6 +92,7 @@
     "morgan": "^1.10.0",
     "nestjs-console": "^7.0.0",
     "ng-zorro-antd": "^12.0.1",
+    "ngx-translate": "github:ngx-translate/core",
     "nx": "^12.10.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
@@ -191,5 +194,8 @@
     "ts-node": "~9.1.1",
     "typescript": "~4.3.5",
     "webpack": "^5.50.0"
+  },
+  "prisma": {
+    "seed": "ts-node libs/prisma/src/lib/seed.ts"
   }
 }

@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { Injectable } from '@nestjs/common';
-import { AlertAlertType } from '@prisma/client';
+import { AlertType } from '@prisma/client';
 
 import {
   MessageBrokerAlert,
@@ -51,7 +51,7 @@ export class MessageBrokerHandlerAlertFilterService {
     id_model_prediction,
   }: MessageBrokerPredictionLog): MessageBrokerAlert {
     return {
-      alertType: alert_class as AlertAlertType,
+      type: alert_class as AlertType,
       cameraExternalId: num_frame,
       externalFrameId: num_frame,
       externalModelDecisionId: id_model_decision,

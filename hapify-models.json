@@ -30,7 +30,7 @@
           "meta": {
             "backRelation": "alerts"
           },
-          "name": "alertType",
+          "name": "type",
           "notes": "Type of the alert",
           "properties": ["searchable", "sortable"],
           "type": "enum",
@@ -147,7 +147,7 @@
           "name": "isPertinent",
           "notes": "Denotes if the alert is pertinent",
           "properties": ["nullable", "searchable", "sortable"],
-          "type": "string"
+          "type": "boolean"
         },
         {
           "name": "rate",
@@ -157,7 +157,7 @@
           "type": "number"
         },
         {
-          "name": "rateAnotation",
+          "name": "rateAnnotation",
           "notes": "Annotation of the alert rate",
           "properties": ["nullable", "searchable", "sortable"],
           "type": "string"
@@ -316,20 +316,21 @@
           "type": "string"
         },
         {
-          "name": "siret",
-          "notes": "Enterprise id of the client",
-          "properties": ["unique", "searchable", "sortable"],
-          "type": "string"
-        },
-        {
-          "name": "adresse",
+          "name": "address",
           "notes": "Address of the client",
           "properties": ["searchable", "sortable"],
           "type": "string"
         },
         {
-          "name": "raisonSocial",
+          "name": "businessName",
+          "notes": "Business name of the client",
           "properties": ["searchable", "sortable"],
+          "type": "string"
+        },
+        {
+          "name": "businessId",
+          "notes": "Business id of the client",
+          "properties": ["unique", "searchable", "sortable"],
           "type": "string"
         }
       ],
@@ -515,7 +516,7 @@
           "meta": {
             "backRelation": "sections"
           },
-          "name": "shopDepartement",
+          "name": "shopDepartment",
           "notes": "Shop departement that the section is part of",
           "properties": ["searchable", "sortable"],
           "subtype": "oneMany",
