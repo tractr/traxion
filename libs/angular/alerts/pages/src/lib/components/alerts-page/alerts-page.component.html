@@ -1,0 +1,20 @@
+<div>
+  <nz-tabset nzLinkRouter>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['/', 'alertes', 'en-cours']">
+        <i nz-icon nzType="bell" nzTheme="outline"></i>
+        {{ 'alert' | translate }}
+      </a>
+      <ng-template nz-tab> Content of Tab Pane 1 </ng-template>
+    </nz-tab>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['/', 'alertes', 'archives']">
+        <i nz-icon nzType="folder-open" nzTheme="outline"></i
+        >{{ 'archive' | translate }}
+      </a>
+      <ng-template nz-tab>
+        <cali-alert-list-archived></cali-alert-list-archived>
+      </ng-template>
+    </nz-tab>
+  </nz-tabset>
+</div>

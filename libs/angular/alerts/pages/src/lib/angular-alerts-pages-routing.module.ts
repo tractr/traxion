@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AlertsArchivedComponent } from './components/alerts-archived/alerts-archived.component';
+import { AlertsPageComponent } from './components';
 
 const routes: Routes = [
   {
+    path: 'en-cours',
+    component: AlertsPageComponent,
+  },
+  {
     path: 'archives',
-    component: AlertsArchivedComponent,
+    component: AlertsPageComponent,
   },
 ];
 @NgModule({
