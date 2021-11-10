@@ -1,4 +1,16 @@
-<div class="text-center">
-  <a href="/alertes/archives">Test archive</a>
-</div>
-<router-outlet></router-outlet>
+<nz-layout class="layout">
+  <nz-sider>
+    <div class="logo">
+      <a [routerLink]="['/']"> cali </a>
+    </div>
+    <div class="menu-main">
+      <cali-menu-main></cali-menu-main>
+    </div>
+  </nz-sider>
+  <nz-layout class="layout-right">
+    <nz-header>Put Title page here</nz-header>
+    <nz-content>
+      <div class="inner-content">Put router-outlet here</div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

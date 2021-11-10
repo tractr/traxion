@@ -1,13 +1,19 @@
 {
+  "dashboard": "Tableau de bord",
   "filter-common-all": "Tous",
   "filter-common-period": "Période",
   "filter-period-1-year": "Dernière année",
   "filter-period-3-months": "3 derniers mois",
   "filter-period-30-days": "30 derniers jours",
   "filter-period-6-months": "6 derniers mois",
+  "logout": "Déconnexion",
+  "my-account": "Mon compte",
+  "statistiques": "Statistiques",
   "status-alert": "Status",
   "status-alert-type-falseAlert": "Fausse alerte",
   "status-alert-type-new-alert": "À traiter",
   "status-alert-type-suspectBehaviour": "Comportement suspect",
-  "status-alert-type-thief": "Signaler aux agents"
+  "status-alert-type-thief": "Signaler aux agents",
+  "users": "Utilisateurs",
+  "video-alerts": "Alertes vidéos"
 }

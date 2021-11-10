@@ -1,0 +1,26 @@
+<div class="main-menu-wrapper">
+  <ul nz-menu nzMode="inline">
+    <li nz-menu-item *ngFor="let item of menuMainTop">
+      <a
+        [routerLink]="item.target"
+        routerLinkActive="item-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i nz-icon nzType="{{ item.icon }}" nzTheme="outline"></i
+        ><span>{{ item.key | translate }}</span>
+      </a>
+    </li>
+  </ul>
+  <ul nz-menu nzMode="inline">
+    <li nz-menu-item *ngFor="let item of menuMainBottom">
+      <a
+        [routerLink]="item.target"
+        routerLinkActive="item-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i nz-icon nzType="{{ item.icon }}" nzTheme="outline"></i
+        ><span>{{ item.key | translate }}</span>
+      </a>
+    </li>
+  </ul>
+</div>

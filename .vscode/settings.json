@@ -1,15 +1,18 @@
 {
   "cSpell.words": [
-    "Upsert",
+    "alertes",
     "bitwarden",
     "casl",
     "dtos",
     "fanout",
-    "rext",
     "hapify",
     "nestjs",
     "rabbitmq",
+    "rext",
+    "statistiques",
     "tailwindcss",
-    "tractr"
+    "tractr",
+    "Upsert",
+    "utilisateurs"
   ]
 }

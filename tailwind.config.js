@@ -13,6 +13,9 @@ module.exports = {
           dark: '#424B5A',
         },
       },
+      spacing: {
+        sider: '200px',
+      },
       minWidth: {
         'video-preview': '240px',
       },

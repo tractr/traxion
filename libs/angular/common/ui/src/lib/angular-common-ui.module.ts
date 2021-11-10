@@ -1,17 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 /* import { AngularComponentsModule } from '@tractr/angular-components';
 import { AngularFormModule } from '@tractr/angular-form'; */
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
-const antModules = [NzButtonModule, NzIconModule, NzSpinModule, NzTabsModule];
+import { MenuMainComponent } from './components/menu-main/menu-main.component';
+
+const antModules = [
+  NzButtonModule,
+  NzIconModule,
+  NzLayoutModule,
+  NzSpinModule,
+  NzTabsModule,
+];
 
 @NgModule({
   imports: [
     CommonModule,
+    TranslateModule,
+    RouterModule,
     ...antModules,
     // AngularComponentsModule,
     // AngularFormModule,
@@ -19,7 +32,9 @@ const antModules = [NzButtonModule, NzIconModule, NzSpinModule, NzTabsModule];
   exports: [
     ...antModules,
     // AngularComponentsModule,
-    // AngularFormModule
+    // AngularFormModule,
+    MenuMainComponent,
   ],
+  declarations: [MenuMainComponent],
 })
 export class AngularCommonUiModule {}

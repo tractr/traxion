@@ -9,6 +9,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { AngularCommonUiModule } from '@cali/angular-common-ui';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -29,6 +31,7 @@ registerLocaleData(localeFr);
       },
     }),
     AppRoutingModule,
+    AngularCommonUiModule,
   ],
   providers: [
     {

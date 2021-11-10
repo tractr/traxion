@@ -5,7 +5,14 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
-    path: '',
+    /**
+     * Routing to dashboard
+     */
+    path: 'tableau-de-bord',
+    component: AppComponent,
+  },
+  {
+    path: 'statistiques',
     component: AppComponent,
   },
   {
@@ -14,6 +21,23 @@ const routes: Routes = [
       import('@cali/angular-alerts-pages').then(
         (module) => module.AngularAlertsPagesModule,
       ),
+  },
+  {
+    path: 'utilisateurs',
+    component: AppComponent,
+  },
+  {
+    path: 'mon-compte',
+    component: AppComponent,
+  },
+  {
+    path: 'deconnexion',
+    component: AppComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'tableau-de-bord',
+    pathMatch: 'full',
   },
 ];
 
