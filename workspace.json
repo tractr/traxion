@@ -162,6 +162,31 @@
         }
       }
     },
+    "angular-common-utils": {
+      "prefix": "cali",
+      "projectType": "library",
+      "root": "libs/angular/common/utils",
+      "sourceRoot": "libs/angular/common/utils/src",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular/common/utils/src/**/*.ts",
+              "libs/angular/common/utils/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular/common/utils/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/angular/common/utils"]
+        }
+      }
+    },
     "api": {
       "projectType": "application",
       "root": "apps/api",

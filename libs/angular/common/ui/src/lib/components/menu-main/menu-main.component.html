@@ -4,7 +4,7 @@
       <a
         [routerLink]="item.target"
         routerLinkActive="item-active"
-        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLinkActiveOptions]="{ exact: false }"
       >
         <i nz-icon nzType="{{ item.icon }}" nzTheme="outline"></i
         ><span>{{ item.key | translate }}</span>

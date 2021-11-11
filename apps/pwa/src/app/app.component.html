@@ -8,9 +8,13 @@
     </div>
   </nz-sider>
   <nz-layout class="layout-right">
-    <nz-header>Put Title page here</nz-header>
+    <nz-header *ngIf="page$ | async as page">
+      <cali-title-page [title]="page.title"></cali-title-page>
+    </nz-header>
     <nz-content>
-      <div class="inner-content">Put router-outlet here</div>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
     </nz-content>
   </nz-layout>
 </nz-layout>

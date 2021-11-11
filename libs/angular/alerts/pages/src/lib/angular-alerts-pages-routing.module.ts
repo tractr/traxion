@@ -12,6 +12,11 @@ const routes: Routes = [
     path: 'archives',
     component: AlertsPageComponent,
   },
+  {
+    path: '',
+    redirectTo: 'en-cours',
+    pathMatch: 'full',
+  },
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

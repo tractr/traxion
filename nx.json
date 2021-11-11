@@ -23,6 +23,9 @@
     "angular-common-ui": {
       "tags": []
     },
+    "angular-common-utils": {
+      "tags": []
+    },
     "api": {
       "tags": []
     },

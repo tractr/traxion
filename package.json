@@ -64,6 +64,7 @@
     "@nestjs/microservices": "^8.0.6",
     "@nestjs/platform-express": "^8.0.6",
     "@nestjs/swagger": "^5.0.9",
+    "@ngx-meta/core": "^9.0.0",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "@nrwl/angular": "12.7.2",

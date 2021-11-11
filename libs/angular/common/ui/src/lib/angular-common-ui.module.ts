@@ -10,7 +10,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
-import { MenuMainComponent } from './components/menu-main/menu-main.component';
+import { MenuMainComponent, TitlePageComponent } from './components';
 
 const antModules = [
   NzButtonModule,
@@ -34,7 +34,8 @@ const antModules = [
     // AngularComponentsModule,
     // AngularFormModule,
     MenuMainComponent,
+    TitlePageComponent,
   ],
-  declarations: [MenuMainComponent],
+  declarations: [MenuMainComponent, TitlePageComponent],
 })
 export class AngularCommonUiModule {}
