@@ -31,7 +31,7 @@
     "nx": "nx",
     "prisma:db:push": "prisma db push --schema=./libs/prisma/prisma/schema.prisma",
     "prisma:db:reset": "npm run prisma:db:truncate && npm run prisma:db:seed",
-    "prisma:db:seed": "prisma db seed --schema=./libs/prisma/prisma/schema.prisma",
+    "prisma:db:seed": "prisma db seed --schema=./libs/prisma/prisma/schema.prisma --preview-feature",
     "prisma:db:truncate": "prisma db push --force-reset --schema=./libs/prisma/prisma/schema.prisma",
     "prisma:studio": "prisma studio --schema=./libs/prisma/prisma/schema.prisma",
     "start": "nx serve",

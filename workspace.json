@@ -981,7 +981,7 @@
             "production": {
               "budgets": [
                 {
-                  "maximumError": "2mb",
+                  "maximumError": "5mb",
                   "maximumWarning": "500kb",
                   "type": "initial"
                 },
@@ -1003,6 +1003,7 @@
           "defaultConfiguration": "production",
           "executor": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["validator", "faker"],
             "assets": [
               "apps/pwa/src/favicon.ico",
               "apps/pwa/src/assets",

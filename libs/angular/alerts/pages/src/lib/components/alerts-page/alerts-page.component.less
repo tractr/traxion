@@ -1,42 +1,42 @@
-nz-tabset{
-    @apply max-w-5xl;
+nz-tabset {
+  @apply max-w-5xl;
 
-    &::ng-deep{
-        nz-tabs-nav.ant-tabs-nav{
-            &::before{
-                @apply hidden;
-            }
-            .ant-tabs-nav-wrap{
-                @apply block;
-                .ant-tabs-nav-list{
-                    .ant-tabs-tab{
-                        @apply w-1/2 p-4 justify-center bg-black bg-opacity-5;
+  &::ng-deep {
+    nz-tabs-nav.ant-tabs-nav {
+      &::before {
+        @apply hidden;
+      }
+      .ant-tabs-nav-wrap {
+        @apply block;
+        .ant-tabs-nav-list {
+          .ant-tabs-tab {
+            @apply w-1/2 p-4 justify-center bg-black bg-opacity-5;
 
-                        .ant-tabs-tab-btn{
-                            a{
-                                @apply flex items-center text-xl text-gray-400;
+            .ant-tabs-tab-btn {
+              a {
+                @apply flex items-center text-xl text-gray-400;
 
-                                i{
-                                    @apply text-xl;
-                                }
-                            }
-                        }
-
-                        &.ant-tabs-tab-active{
-                            @apply bg-white bg-opacity-100;
-
-                            .ant-tabs-tab-btn{
-                                a{
-                                    @apply text-cali-dark;
-                                }
-                            }
-                        }
-                    }
-                    .ant-tabs-ink-bar{
-                        @apply hidden;
-                    }
+                i {
+                  @apply text-xl;
                 }
+              }
             }
+
+            &.ant-tabs-tab-active {
+              @apply bg-white bg-opacity-100;
+
+              .ant-tabs-tab-btn {
+                a {
+                  @apply text-cali-dark;
+                }
+              }
+            }
+          }
+          .ant-tabs-ink-bar {
+            @apply hidden;
+          }
         }
+      }
     }
+  }
 }

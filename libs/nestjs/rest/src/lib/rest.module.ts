@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 
+import { AlertWithCurrentFeedbackRestModule } from './alert-with-current-feedback';
 import {
   AlertFeedbackRestModule,
   AlertRestModule,
@@ -15,7 +16,7 @@ import {
 
 import { CommonModule } from '@cali/nestjs-common';
 
-const restModules = [
+const generatedRestModules = [
   AlertFeedbackRestModule,
   AlertRestModule,
   CameraRestModule,
@@ -28,7 +29,11 @@ const restModules = [
   UserRestModule,
 ];
 @Module({
-  imports: [CommonModule, ...restModules.map((module) => module.register())],
-  exports: restModules,
+  imports: [
+    CommonModule,
+    AlertWithCurrentFeedbackRestModule,
+    ...generatedRestModules.map((module) => module.register()),
+  ],
+  exports: [AlertWithCurrentFeedbackRestModule, ...generatedRestModules],
 })
 export class RestModule {}
