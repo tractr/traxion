@@ -9,12 +9,12 @@ import { Subject } from 'rxjs';
 import { PageInterface, PageService } from '@cali/angular-common-utils';
 
 @Component({
-  selector: 'cali-alerts-page',
-  templateUrl: './alerts-page.component.html',
-  styleUrls: ['./alerts-page.component.less'],
+  selector: 'cali-alerts',
+  templateUrl: './alerts.component.html',
+  styleUrls: ['./alerts.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AlertsPageComponent implements OnInit, OnDestroy {
+export class AlertsComponent implements OnInit, OnDestroy {
   pageData: PageInterface = {
     title: 'page_title-alerts-archived',
   };

@@ -4,12 +4,12 @@
       <a [routerLink]="['/']"> cali </a>
     </div>
     <div class="menu-main">
-      <cali-menu-main></cali-menu-main>
+      <cali-menu-main-ui></cali-menu-main-ui>
     </div>
   </nz-sider>
   <nz-layout class="layout-right">
     <nz-header *ngIf="page$ | async as page">
-      <cali-title-page [title]="page.title"></cali-title-page>
+      <cali-title-page-ui [title]="page.title"></cali-title-page-ui>
     </nz-header>
     <nz-content>
       <div class="inner-content">

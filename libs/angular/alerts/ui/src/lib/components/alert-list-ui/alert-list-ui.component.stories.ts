@@ -1,8 +1,8 @@
 import { TranslateModule } from '@ngx-translate/core';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
-import { AlertListItemComponent } from '../alert-list-item/alert-list-item.component';
-import { AlertListComponent } from './alert-list.component';
+import { AlertListItemUiComponent } from '../alert-list-item-ui/alert-list-item-ui.component';
+import { AlertListUiComponent } from './alert-list-ui.component';
 
 import { AngularCommonUiModule } from '@cali/angular-common-ui';
 import { mockAlertFactory } from '@cali/common-models';
@@ -13,17 +13,17 @@ const alerts = [mockAlertFactory(), mockAlertFactory(), mockAlertFactory()];
 
 export default {
   title: 'Alert/List Alerts',
-  component: AlertListComponent,
+  component: AlertListUiComponent,
   decorators: [
     moduleMetadata({
-      declarations: [AlertListItemComponent],
+      declarations: [AlertListItemUiComponent],
       imports: [AngularCommonUiModule, TranslateModule.forRoot()],
     }),
   ],
-} as Meta<AlertListComponent>;
+} as Meta<AlertListUiComponent>;
 
-const Template: Story<AlertListComponent> = (args: AlertListComponent) => ({
-  component: AlertListComponent,
+const Template: Story<AlertListUiComponent> = (args: AlertListUiComponent) => ({
+  component: AlertListUiComponent,
   props: args,
 });
 

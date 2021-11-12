@@ -7,12 +7,12 @@ interface ItemMenu {
 }
 
 @Component({
-  selector: 'cali-menu-main',
-  templateUrl: './menu-main.component.html',
-  styleUrls: ['./menu-main.component.less'],
+  selector: 'cali-menu-main-ui',
+  templateUrl: './menu-main-ui.component.html',
+  styleUrls: ['./menu-main-ui.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MenuMainComponent {
+export class MenuMainUiComponent {
   menuMainTop: ItemMenu[] = [
     {
       target: ['/', 'tableau-de-bord'],

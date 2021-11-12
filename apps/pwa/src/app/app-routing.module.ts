@@ -19,7 +19,7 @@ const routes: Routes = [
     path: 'alertes',
     loadChildren: () =>
       import('@cali/angular-alerts-pages').then(
-        (module) => module.AngularAlertsPagesModule,
+        ({ AngularAlertsPagesModule }) => AngularAlertsPagesModule,
       ),
   },
   {

@@ -1,0 +1,31 @@
+.alert-details-wrapper {
+  video {
+    aspect-ratio: 16/9;
+    @apply w-full;
+  }
+  .loading-video,
+  .video-deleted {
+    aspect-ratio: 16/9;
+    @apply w-full flex items-center justify-center bg-gray-200 border border-gray-400;
+
+    & > i {
+      @apply text-6xl text-gray-400;
+    }
+  }
+  .alert-info {
+    @apply flex justify-between items-center w-full py-5 border-b border-gray-400;
+
+    .date-alert {
+      @apply text-xl capitalize mb-0;
+    }
+    .time-alert {
+      @apply text-2xl font-semibold mb-0;
+    }
+    .section-alert {
+      @apply text-2xl font-semibold text-right mb-0;
+    }
+    .object-alert {
+      @apply text-xl text-right mb-0;
+    }
+  }
+}

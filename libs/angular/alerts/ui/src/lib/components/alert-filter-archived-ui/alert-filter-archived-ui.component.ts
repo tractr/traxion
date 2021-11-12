@@ -18,12 +18,12 @@ interface AlertFiltersArchived {
 }
 
 @Component({
-  selector: 'cali-alert-filter-archived',
-  templateUrl: './alert-filter-archived.component.html',
-  styleUrls: ['./alert-filter-archived.component.less'],
+  selector: 'cali-alert-filter-archived-ui',
+  templateUrl: './alert-filter-archived-ui.component.html',
+  styleUrls: ['./alert-filter-archived-ui.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AlertFilterArchivedComponent implements OnInit {
+export class AlertFilterArchivedUiComponent implements OnInit {
   @Output() filtersActive = new EventEmitter<AlertFiltersArchived>();
 
   filtersAlertsArchived: AlertFiltersArchived = {

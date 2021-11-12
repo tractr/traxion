@@ -1,1 +1,4 @@
-<p>alert-list-archived works!</p>
+<cali-alert-filter-archived-ui></cali-alert-filter-archived-ui>
+<cali-alert-list-ui
+  [alerts]="(alertsArchived$ | async) || []"
+></cali-alert-list-ui>

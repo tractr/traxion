@@ -1,7 +1,7 @@
 import { TranslateModule } from '@ngx-translate/core';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
-import { AlertListItemComponent } from './alert-list-item.component';
+import { AlertListItemUiComponent } from './alert-list-item-ui.component';
 
 import { AngularCommonUiModule } from '@cali/angular-common-ui';
 import {
@@ -44,18 +44,18 @@ const baseProps = (
 
 export default {
   title: 'Alert/Item List Alert',
-  component: AlertListItemComponent,
+  component: AlertListItemUiComponent,
   decorators: [
     moduleMetadata({
       imports: [AngularCommonUiModule, TranslateModule.forRoot()],
     }),
   ],
-} as Meta<AlertListItemComponent>;
+} as Meta<AlertListItemUiComponent>;
 
-const Template: Story<AlertListItemComponent> = (
-  args: AlertListItemComponent,
+const Template: Story<AlertListItemUiComponent> = (
+  args: AlertListItemUiComponent,
 ) => ({
-  component: AlertListItemComponent,
+  component: AlertListItemUiComponent,
   props: args,
 });
 

@@ -1,24 +1,24 @@
 import { TranslateModule } from '@ngx-translate/core';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
-import { AlertFilterArchivedComponent } from './alert-filter-archived.component';
+import { AlertFilterArchivedUiComponent } from './alert-filter-archived-ui.component';
 
 import { AngularCommonUiModule } from '@cali/angular-common-ui';
 
 export default {
   title: 'Alert/Alert Filter Archived',
-  component: AlertFilterArchivedComponent,
+  component: AlertFilterArchivedUiComponent,
   decorators: [
     moduleMetadata({
       imports: [AngularCommonUiModule, TranslateModule.forRoot()],
     }),
   ],
-} as Meta<AlertFilterArchivedComponent>;
+} as Meta<AlertFilterArchivedUiComponent>;
 
-const Template: Story<AlertFilterArchivedComponent> = (
-  args: AlertFilterArchivedComponent,
+const Template: Story<AlertFilterArchivedUiComponent> = (
+  args: AlertFilterArchivedUiComponent,
 ) => ({
-  component: AlertFilterArchivedComponent,
+  component: AlertFilterArchivedUiComponent,
   props: args,
 });
 

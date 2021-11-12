@@ -1,16 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AlertsPageComponent } from './components';
+import { AlertComponent, AlertsComponent } from './components';
 
 const routes: Routes = [
   {
     path: 'en-cours',
-    component: AlertsPageComponent,
+    component: AlertsComponent,
   },
   {
     path: 'archives',
-    component: AlertsPageComponent,
+    component: AlertsComponent,
+  },
+  {
+    path: ':id',
+    component: AlertComponent,
   },
   {
     path: '',

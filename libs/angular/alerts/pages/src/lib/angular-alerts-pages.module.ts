@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { AngularAlertsPagesRoutingModule } from './angular-alerts-pages-routing.module';
-import { AlertsPageComponent } from './components';
+import { AlertComponent, AlertsComponent } from './components';
 
 import { AngularAlertsFeaturesModule } from '@cali/angular-alerts-features';
 import { AngularCommonUiModule } from '@cali/angular-common-ui';
@@ -17,6 +17,6 @@ import { AngularCommonUiModule } from '@cali/angular-common-ui';
     AngularAlertsFeaturesModule,
   ],
   exports: [AngularAlertsPagesRoutingModule],
-  declarations: [AlertsPageComponent],
+  declarations: [AlertsComponent, AlertComponent],
 })
 export class AngularAlertsPagesModule {}

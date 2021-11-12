@@ -1,1 +1,2 @@
-export * from './alerts-page/alerts-page.component';
+export * from './alerts/alerts.component';
+export * from './alert/alert.component';

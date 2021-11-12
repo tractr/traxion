@@ -1,2 +1,2 @@
-export * from './menu-main/menu-main.component';
-export * from './title-page/title-page.component';
+export * from './menu-main-ui/menu-main-ui.component';
+export * from './title-page-ui/title-page-ui.component';

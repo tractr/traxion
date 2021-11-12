@@ -1,29 +1,29 @@
-.layout{
-    @apply min-h-screen;
-    nz-sider{
-        @apply overflow-auto h-full fixed left-0 bg-cali-dark;
-        &::ng-deep{
-            .ant-layout-sider-children{
-                @apply flex flex-col;
-                .logo{
-                    @apply text-center p-3;
-                    a{
-                        @apply font-semibold text-white text-4xl uppercase;
-                    }
-                }
-                .menu-main{
-                    @apply flex-grow text-white;
-                }
-            }
+.layout {
+  @apply min-h-screen;
+  nz-sider {
+    @apply overflow-auto h-full fixed left-0 bg-cali-dark;
+    &::ng-deep {
+      .ant-layout-sider-children {
+        @apply flex flex-col;
+        .logo {
+          @apply text-center p-3;
+          a {
+            @apply font-semibold text-white text-4xl uppercase;
+          }
         }
+        .menu-main {
+          @apply flex-grow text-white;
+        }
+      }
     }
-    .layout-right{
-        @apply ml-sider;
-        nz-header{
-            @apply flex items-center px-20 bg-gray-500 text-white;
-        }
-        nz-content{
-            @apply bg-white;
-        }
+  }
+  .layout-right {
+    @apply ml-sider;
+    nz-header {
+      @apply flex items-center px-20 bg-gray-500 text-white;
     }
+    nz-content {
+      @apply bg-white;
+    }
+  }
 }
