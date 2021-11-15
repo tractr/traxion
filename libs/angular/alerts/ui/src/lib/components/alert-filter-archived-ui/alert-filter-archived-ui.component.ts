@@ -11,11 +11,12 @@ import { DateTime } from 'luxon';
 import { firstValueFrom } from 'rxjs';
 
 import { AlertFeedbackType } from '@cali/common-models';
+import { AlertWithCurrentFeedbackFindManyQueryDto } from '@cali/common-rest-dtos';
 
-interface AlertFiltersArchived {
-  status: string | null;
-  period: DateTime | null;
-}
+export type AlertFiltersArchived = Pick<
+  AlertWithCurrentFeedbackFindManyQueryDto,
+  'createdAtMin' | 'alertFeedbackType'
+>;
 
 @Component({
   selector: 'cali-alert-filter-archived-ui',
@@ -24,16 +25,13 @@ interface AlertFiltersArchived {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertFilterArchivedUiComponent implements OnInit {
-  @Output() filtersActive = new EventEmitter<AlertFiltersArchived>();
+  @Output() filtersChanged = new EventEmitter<AlertFiltersArchived>();
 
-  filtersAlertsArchived: AlertFiltersArchived = {
-    status: null,
-    period: null,
-  };
+  statusOptions: SelectOptionInterface<AlertFeedbackType | undefined>[] = [];
 
-  statusOptions: SelectOptionInterface<AlertFeedbackType | null>[] = [];
+  timesOptions: SelectOptionInterface<Date | undefined>[] = [];
 
-  timesOptions: SelectOptionInterface<DateTime | null>[] = [];
+  filtersActive!: AlertFiltersArchived;
 
   constructor(private translateService: TranslateService) {}
 
@@ -44,7 +42,7 @@ export class AlertFilterArchivedUiComponent implements OnInit {
         label: await firstValueFrom(
           this.translateService.get('filter-common-all'),
         ),
-        value: null,
+        value: undefined,
       },
       {
         id: 2,
@@ -73,39 +71,46 @@ export class AlertFilterArchivedUiComponent implements OnInit {
       {
         id: 1,
         label: await firstValueFrom(
-          this.translateService.get('filter-common-all'),
+          this.translateService.get('filter-period-30-days'),
         ),
-        value: null,
+        value: DateTime.now().minus({ days: 30 }).toJSDate(),
       },
       {
         id: 2,
         label: await firstValueFrom(
-          this.translateService.get('filter-period-30-days'),
+          this.translateService.get('filter-period-3-months'),
         ),
-        value: DateTime.now().minus({ days: 30 }),
+        value: DateTime.now().minus({ months: 3 }).toJSDate(),
       },
       {
         id: 3,
         label: await firstValueFrom(
-          this.translateService.get('filter-period-3-months'),
+          this.translateService.get('filter-period-6-months'),
         ),
-        value: DateTime.now().minus({ months: 3 }),
+        value: DateTime.now().minus({ months: 6 }).toJSDate(),
       },
       {
         id: 4,
         label: await firstValueFrom(
-          this.translateService.get('filter-period-6-months'),
+          this.translateService.get('filter-period-1-year'),
         ),
-        value: DateTime.now().minus({ months: 6 }),
+        value: DateTime.now().minus({ years: 1 }).toJSDate(),
       },
       {
         id: 5,
         label: await firstValueFrom(
-          this.translateService.get('filter-period-1-year'),
+          this.translateService.get('filter-common-all'),
         ),
-        value: DateTime.now().minus({ years: 1 }),
+        value: undefined,
       },
     ];
+
+    this.filtersActive = {
+      alertFeedbackType: this.statusOptions[0].value,
+      createdAtMin: this.timesOptions[0].value,
+    };
+
+    this.filtersChanged.emit(this.filtersActive);
   }
 
   filterChange(
@@ -113,21 +118,20 @@ export class AlertFilterArchivedUiComponent implements OnInit {
       | SelectOptionInterface<unknown>
       | SelectOptionInterface<unknown>[]
       | undefined,
-    filterName: 'status' | 'period',
+    filterName: 'alertFeedbackType' | 'createdAtMin',
   ): void {
     if (!option || Array.isArray(option)) return;
 
-    if (filterName === 'status') {
-      this.filtersAlertsArchived.status = (
+    if (filterName === 'alertFeedbackType') {
+      this.filtersActive.alertFeedbackType = (
         option as SelectOptionInterface<AlertFeedbackType>
       ).value;
     }
-    if (filterName === 'period') {
-      this.filtersAlertsArchived.period = (
-        option as SelectOptionInterface<DateTime>
+    if (filterName === 'createdAtMin') {
+      this.filtersActive.createdAtMin = (
+        option as SelectOptionInterface<Date>
       ).value;
     }
-
-    this.filtersActive.emit(this.filtersAlertsArchived);
+    this.filtersChanged.emit(this.filtersActive);
   }
 }

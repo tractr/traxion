@@ -139,28 +139,90 @@ export const seed = async () => {
     });
 
     /**
-     * Add an alert
+     * Add alerts
      */
-    const alert = mockAlertFactory({
+    const firstAlertTypeSuspectBehavior = mockAlertFactory({
       createdAt: now,
-      type: AlertType.thief,
+      type: AlertType.suspectBehaviour,
       cameraId: camera.id,
       externalFrameId: '1',
       externalModelDecisionId: '1',
       externalModelPredictionId: '1',
     });
-    delete alert.camera;
+    delete firstAlertTypeSuspectBehavior.camera;
 
     await prisma.alert.create({
-      data: alert as Prisma.AlertUncheckedCreateInput,
+      data: firstAlertTypeSuspectBehavior as Prisma.AlertUncheckedCreateInput,
+    });
+
+    const firstAlertTypeThief = mockAlertFactory({
+      createdAt: now,
+      type: AlertType.thief,
+      cameraId: camera.id,
+      externalFrameId: '2',
+      externalModelDecisionId: '2',
+      externalModelPredictionId: '2',
+    });
+    delete firstAlertTypeThief.camera;
+
+    await prisma.alert.create({
+      data: firstAlertTypeThief as Prisma.AlertUncheckedCreateInput,
+    });
+
+    const secondAlertTypeThief = mockAlertFactory({
+      createdAt: now,
+      type: AlertType.thief,
+      cameraId: camera.id,
+      externalFrameId: '3',
+      externalModelDecisionId: '3',
+      externalModelPredictionId: '3',
+    });
+    delete secondAlertTypeThief.camera;
+
+    await prisma.alert.create({
+      data: secondAlertTypeThief as Prisma.AlertUncheckedCreateInput,
     });
 
     /**
-     * Add an alert feedback
+     * Add alerts feedback
      */
-    const alertFeedback = mockAlertFeedbackFactory({
+    const alertFeedbackTypeFalseAlert = mockAlertFeedbackFactory({
       createdAt: now,
-      alertId: alert.id,
+      alertId: firstAlertTypeSuspectBehavior.id,
+      isArchived: true,
+      isPertinent: true,
+      qualification: AlertFeedbackQualification.stopped,
+      rate: 5,
+      rateAnnotation: 'RAS',
+      type: AlertFeedbackType.falseAlert,
+      userId: user.id,
+    });
+    delete alertFeedbackTypeFalseAlert.user;
+
+    await prisma.alertFeedback.create({
+      data: alertFeedbackTypeFalseAlert as Prisma.AlertFeedbackUncheckedCreateInput,
+    });
+
+    const alertFeedbackTypeSuspectBehaviour = mockAlertFeedbackFactory({
+      createdAt: now,
+      alertId: firstAlertTypeThief.id,
+      isArchived: true,
+      isPertinent: true,
+      qualification: AlertFeedbackQualification.stopped,
+      rate: 5,
+      rateAnnotation: 'Suspect relaché',
+      type: AlertFeedbackType.suspectBehaviour,
+      userId: user.id,
+    });
+    delete alertFeedbackTypeSuspectBehaviour.user;
+
+    await prisma.alertFeedback.create({
+      data: alertFeedbackTypeSuspectBehaviour as Prisma.AlertFeedbackUncheckedCreateInput,
+    });
+
+    const alertFeedbackTypeThief = mockAlertFeedbackFactory({
+      createdAt: now,
+      alertId: secondAlertTypeThief.id,
       isArchived: true,
       isPertinent: true,
       qualification: AlertFeedbackQualification.stopped,
@@ -169,10 +231,10 @@ export const seed = async () => {
       type: AlertFeedbackType.thief,
       userId: user.id,
     });
-    delete alertFeedback.user;
+    delete alertFeedbackTypeThief.user;
 
     await prisma.alertFeedback.create({
-      data: alertFeedback as Prisma.AlertFeedbackUncheckedCreateInput,
+      data: alertFeedbackTypeThief as Prisma.AlertFeedbackUncheckedCreateInput,
     });
   } catch (error) {
     console.error('Something went wrong while seeding the database', error);

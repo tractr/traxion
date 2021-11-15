@@ -5,7 +5,7 @@ import { Permission } from '@cali/common-casl';
 import { AlertWithCurrentFeedbackFindManyQueryDto } from '@cali/common-rest-dtos';
 import { ALERT_SERVICE, AlertService } from '@cali/nestjs-common';
 
-@Controller('alert/with-current-feedbac')
+@Controller('alert/with-current-feedback')
 export class AlertWithCurrentFeedbackController {
   constructor(
     @Inject(ALERT_SERVICE) private readonly alertService: AlertService,

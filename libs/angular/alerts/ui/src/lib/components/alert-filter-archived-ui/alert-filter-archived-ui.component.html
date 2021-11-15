@@ -3,12 +3,14 @@
     name="filterStatus"
     [options]="statusOptions"
     [placeholder]="'status-alert' | translate"
-    (valueChanged)="filterChange($event, 'status')"
+    [value]="statusOptions[0]"
+    (valueChanged)="filterChange($event, 'alertFeedbackType')"
   ></tractr-select>
   <tractr-select
     name="filterTime"
     [options]="timesOptions"
     [placeholder]="'filter-common-period' | translate"
-    (valueChanged)="filterChange($event, 'period')"
+    [value]="timesOptions[0]"
+    (valueChanged)="filterChange($event, 'createdAtMin')"
   ></tractr-select>
 </div>

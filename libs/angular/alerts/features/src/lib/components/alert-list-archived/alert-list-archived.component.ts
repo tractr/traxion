@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { AlertService } from '@cali/common-angular-rext-client';
-import { Alert } from '@cali/common-models';
+import { AlertFiltersArchived } from '@cali/angular-alerts-ui';
+import { AlertWithCurrentFeedbackService } from '@cali/common-angular-rext-client';
+import { AlertWithCurrentFeedback } from '@cali/common-models';
 
 @Component({
   selector: 'cali-alert-list-archived',
@@ -10,16 +11,21 @@ import { Alert } from '@cali/common-models';
   styleUrls: ['./alert-list-archived.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AlertListArchivedComponent implements OnInit {
-  alertsArchived$!: Observable<Alert[]>;
+export class AlertListArchivedComponent {
+  alertsArchived$!: Observable<AlertWithCurrentFeedback[]>;
 
-  constructor(private alertService: AlertService) {}
+  constructor(
+    private alertWithCurrentFeedbackService: AlertWithCurrentFeedbackService,
+  ) {}
 
-  ngOnInit(): void {
-    this.alertsArchived$ = this.loadAlertsArchived();
-  }
-
-  loadAlertsArchived() {
-    return this.alertService.findMany$();
+  loadAlertsArchived(filters: AlertFiltersArchived) {
+    this.alertsArchived$ = this.alertWithCurrentFeedbackService.findMany$({
+      isArchived: true,
+      skip: 0,
+      take: 100,
+      sort: 'id',
+      order: 'asc',
+      ...filters,
+    });
   }
 }

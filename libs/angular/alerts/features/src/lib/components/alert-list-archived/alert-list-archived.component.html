@@ -1,4 +1,7 @@
-<cali-alert-filter-archived-ui></cali-alert-filter-archived-ui>
+<cali-alert-filter-archived-ui
+  (filtersChanged)="loadAlertsArchived($event)"
+></cali-alert-filter-archived-ui>
 <cali-alert-list-ui
-  [alerts]="(alertsArchived$ | async) || []"
+  *ngIf="alertsArchived$ | async as alerts"
+  [alerts]="alerts"
 ></cali-alert-list-ui>

@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 
 import { Alert } from '@cali/common-models';
 
@@ -11,6 +10,4 @@ import { Alert } from '@cali/common-models';
 })
 export class AlertListItemUiComponent {
   @Input() alert!: Alert;
-
-  constructor(public translateService: TranslateService) {}
 }
