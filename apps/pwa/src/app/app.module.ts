@@ -1,7 +1,7 @@
 import { registerLocaleData } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MetaModule } from '@ngx-meta/core';
@@ -34,6 +34,8 @@ registerLocaleData(localeFr);
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
+      useDefaultLang: true,
+      defaultLanguage: 'fr',
     }),
     MetaModule.forRoot(),
     AppRoutingModule,
@@ -44,12 +46,6 @@ registerLocaleData(localeFr);
         url: 'http://localhost:4200/api',
       },
     }),
-  ],
-  providers: [
-    {
-      provide: LOCALE_ID,
-      useValue: 'fr',
-    },
   ],
   bootstrap: [AppComponent],
 })

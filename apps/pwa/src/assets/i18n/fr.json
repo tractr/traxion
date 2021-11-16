@@ -1,4 +1,6 @@
 {
+  "alert": "Alertes",
+  "archive": "Archives",
   "dashboard": "Tableau de bord",
   "filter-common-all": "Tous",
   "filter-common-period": "Période",

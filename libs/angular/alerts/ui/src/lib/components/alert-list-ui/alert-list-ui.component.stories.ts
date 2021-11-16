@@ -17,7 +17,7 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [AlertListItemUiComponent],
-      imports: [AngularCommonUiModule, TranslateModule.forRoot()],
+      imports: [AngularCommonUiModule, TranslateModule],
     }),
   ],
 } as Meta<AlertListUiComponent>;

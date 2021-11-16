@@ -26,8 +26,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.translate.setDefaultLang('fr');
-    this.translate.use('fr');
     this.nzI18n.setLocale(fr_FR);
 
     this.page$.pipe(takeUntil(this.unsubscribe$)).subscribe((page) => {

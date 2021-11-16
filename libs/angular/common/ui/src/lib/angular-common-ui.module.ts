@@ -31,6 +31,7 @@ const antModules = [
   ],
   declarations: [MenuMainUiComponent, TitlePageUiComponent],
   exports: [
+    TranslateModule,
     ...antModules,
     AngularComponentsModule,
     AngularFormModule,

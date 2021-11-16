@@ -1,3 +1,5 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 
@@ -44,7 +46,12 @@ export default {
   component: AlertDetailsUiComponent,
   decorators: [
     moduleMetadata({
-      imports: [AngularCommonUiModule, TranslateModule.forRoot()],
+      imports: [
+        AngularCommonUiModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        TranslateModule,
+      ],
     }),
   ],
 } as Meta<AlertDetailsUiComponent>;
