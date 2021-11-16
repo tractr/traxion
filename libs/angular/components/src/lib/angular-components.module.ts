@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { ButtonModule } from './button/button.module';
 import { CheckboxModule } from './checkbox/checkbox.module';
-import { DatePickerModule } from './date-picker/date-picker.module';
 import { InputModule } from './input/input.module';
 import { ModelModule } from './model/model.module';
+import { PickerModule } from './picker/picker.module';
 import { SelectModule } from './select/select.module';
 
 @NgModule({
@@ -13,7 +13,7 @@ import { SelectModule } from './select/select.module';
     ButtonModule,
     InputModule,
     SelectModule,
-    DatePickerModule,
+    PickerModule,
     CheckboxModule,
     ModelModule,
   ],
@@ -21,7 +21,7 @@ import { SelectModule } from './select/select.module';
     ButtonModule,
     InputModule,
     SelectModule,
-    DatePickerModule,
+    PickerModule,
     CheckboxModule,
     ModelModule,
   ],

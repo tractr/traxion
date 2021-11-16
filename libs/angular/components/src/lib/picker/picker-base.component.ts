@@ -6,15 +6,14 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'tractr-date-picker-base',
+  selector: 'tractr-picker-base',
   template: '',
 })
-export abstract class DatePickerBaseComponent implements OnInit, OnDestroy {
+export abstract class PickerBaseComponent implements OnInit, OnDestroy {
   protected unsubscribe$: Subject<void> = new Subject<void>();
 
   @Input() placeholder = '';
