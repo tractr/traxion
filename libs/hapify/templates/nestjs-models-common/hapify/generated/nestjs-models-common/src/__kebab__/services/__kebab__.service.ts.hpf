@@ -1,32 +1,32 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { Inject, Injectable } from '@nestjs/common';
- 
+
 <<if Fields enum and internal and not ownership>>
 import {
   <<for Fields enum and internal and not ownership field>>
     <<Model pascal>><<field pascal>>
   <<endfor>>
 } from '../../../../models';
-<<endif>> 
+<<endif>>
 import { <<Model constant>>_DATABASE_SERVICE } from '../<<Model kebab>>-model.constant';
 import { <<Model pascal>>DatabaseService } from './<<Model kebab>>-database.service';
- 
+
 import { Prisma } from '@prisma/client';
- 
+
 @Injectable()
-export class <<Model pascal>>Service {  
+export class <<Model pascal>>Service {
   constructor(
     @Inject(<<Model constant>>_DATABASE_SERVICE)
     protected readonly <<Model camel>>DatabaseService: <<Model pascal>>DatabaseService,
   ) {}
- 
+
   <<for Fields internal and ownership and not primary field>>
   /**
    *  Add <<field pascal>> ownership to data
    * */
-  add<<field pascal>>OwnerShip<T extends Partial<Prisma.<<Model pascal>>CreateInput>>(data: T, owner: Prisma.<<field.model pascal>>WhereUniqueInput): 
-    T & 
-    { '<<field camel>>': { connect: Prisma.<<field.model pascal>>WhereUniqueInput } } 
+  public add<<field pascal>>OwnerShip<T extends Partial<Prisma.<<Model pascal>>CreateInput>>(data: T, owner: Prisma.<<field.model pascal>>WhereUniqueInput):
+    T &
+    { '<<field camel>>': { connect: Prisma.<<field.model pascal>>WhereUniqueInput } }
   {
     return {
       ...data,
@@ -39,7 +39,7 @@ export class <<Model pascal>>Service {
   /**
    *  Add internal fields to create dto
    * */
-  assignInternalsToCreateDto<D extends Partial<Prisma.<<Model pascal>>CreateInput>>(data: D): D & 
+  public assignInternalsToCreateDto<D extends Partial<Prisma.<<Model pascal>>CreateInput>>(data: D): D &
     Pick<
       Prisma.<<Model pascal>>CreateInput,
       <<for Fields internal and not primary and (not entity or nullable) field>>
@@ -49,11 +49,11 @@ export class <<Model pascal>>Service {
   {
       return {...data, ...this.getDefaultInternals() };
   }
-   
+
   /**
    *  Return default internal fields
    * */
-  private getDefaultInternals() {
+  public getDefaultInternals() {
     return {
       <<for Fields internal and not primary and (not entity or nullable) field>>
       '<<field camel>>': this.getDefault<<field pascal>>(),
@@ -66,7 +66,7 @@ export class <<Model pascal>>Service {
   /**
    * Return default value for internal field '<<field camel>>'
    * */
-  getDefault<<field pascal>>() {
+  public getDefault<<field pascal>>() {
 <<< if (field.meta.default) { >>>
     return <<-field default raw>>;
 <<< } else { >>>
@@ -86,9 +86,9 @@ export class <<Model pascal>>Service {
     throw new Error("Field '<<field camel>>' need 'default' metadata");
   <<endif>>
 <<<}>>>
-  } 
+  }
 <<endfor>>
- 
+
   /**
    * Find zero or one <<Model pascal>> that matches the filter.
    * @param {<<Model pascal>>FindUniqueArgs} args - Arguments to find a <<Model pascal>>
@@ -100,12 +100,12 @@ export class <<Model pascal>>Service {
    *   }
    * })
    * */
-  public findUnique<T extends Prisma.<<Model pascal>>FindUniqueArgs>(
+  public async findUnique<T extends Prisma.<<Model pascal>>FindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.<<Model pascal>>FindUniqueArgs>,
   ) {
-    return this.<<Model camel>>DatabaseService.findUnique(args);
+    return this.<<Model camel>>DatabaseService.findUnique<Prisma.SelectSubset<T, Prisma.<<Model pascal>>FindUniqueArgs>>(args);
   }
- 
+
   /**
    * Find the first <<Model pascal>> that matches the filter.
    * Note, that providing `undefined` is treated as the value not being there.
@@ -119,12 +119,14 @@ export class <<Model pascal>>Service {
    *   }
    * })
    * */
-  public findFirst<T extends Prisma.<<Model pascal>>FindFirstArgs>(
+  public async findFirst<T extends Prisma.<<Model pascal>>FindFirstArgs>(
     args?: Prisma.SelectSubset<T, Prisma.<<Model pascal>>FindFirstArgs>,
   ) {
-    return this.<<Model camel>>DatabaseService.findFirst(args);
+    return this.<<Model camel>>DatabaseService.findFirst<
+      Prisma.SelectSubset<T, Prisma.<<Model pascal>>FindFirstArgs>
+    >(args);
   }
- 
+
   /**
    * Find zero or more <<Model pascal>>s that matches the filter.
    * Note, that providing `undefined` is treated as the value not being there.
@@ -141,12 +143,14 @@ export class <<Model pascal>>Service {
    * const <<Model camel>>WithIdOnly = await this.<<Model camel>>Service.findMany({ select: { id: true } })
    *
    * */
-  findMany<T extends Prisma.<<Model pascal>>FindManyArgs>(
+  public async findMany<T extends Prisma.<<Model pascal>>FindManyArgs>(
     args?: Prisma.SelectSubset<T, Prisma.<<Model pascal>>FindManyArgs>,
   ) {
-    return this.<<Model camel>>DatabaseService.findMany(args);
+    return this.<<Model camel>>DatabaseService.findMany<
+      Prisma.SelectSubset<T, Prisma.<<Model pascal>>FindManyArgs>
+    >(args);
   }
- 
+
   /**
    * Create a <<Model pascal>>.
    * @param {<<Model pascal>>CreateArgs} args - Arguments to create a <<Model pascal>>.
@@ -159,12 +163,14 @@ export class <<Model pascal>>Service {
    * })
    *
    * */
-  create<T extends Prisma.<<Model pascal>>CreateArgs>(
+  public async create<T extends Prisma.<<Model pascal>>CreateArgs>(
     args: Prisma.SelectSubset<T, Prisma.<<Model pascal>>CreateArgs>,
   ) {
-    return this.<<Model camel>>DatabaseService.create(args);
+    return this.<<Model camel>>DatabaseService.create<
+      Prisma.SelectSubset<T, Prisma.<<Model pascal>>CreateArgs>
+    >(args);
   }
- 
+
   /**
    * Create many <<Model pascal>>s.
    * @param {<<Model pascal>>CreateManyArgs} args - Arguments to create many <<Model pascal>>s.
@@ -177,12 +183,14 @@ export class <<Model pascal>>Service {
    * })
    *
    * */
-  createMany<T extends Prisma.<<Model pascal>>CreateManyArgs>(
+  public async createMany<T extends Prisma.<<Model pascal>>CreateManyArgs>(
     args?: Prisma.SelectSubset<T, Prisma.<<Model pascal>>CreateManyArgs>,
   ) {
-    return this.<<Model camel>>DatabaseService.createMany(args);
+    return this.<<Model camel>>DatabaseService.createMany<
+      Prisma.SelectSubset<T, Prisma.<<Model pascal>>CreateManyArgs>
+    >(args);
   }
- 
+
   /**
    * Delete a <<Model pascal>>.
    * @param {<<Model pascal>>DeleteArgs} args - Arguments to delete one <<Model pascal>>.
@@ -195,12 +203,14 @@ export class <<Model pascal>>Service {
    * })
    *
    * */
-  delete<T extends Prisma.<<Model pascal>>DeleteArgs>(
+  public async delete<T extends Prisma.<<Model pascal>>DeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.<<Model pascal>>DeleteArgs>,
   ) {
-    return this.<<Model camel>>DatabaseService.delete(args);
+    return this.<<Model camel>>DatabaseService.delete<
+      Prisma.SelectSubset<T, Prisma.<<Model pascal>>DeleteArgs>
+    >(args);
   }
- 
+
   /**
    * Update one <<Model pascal>>.
    * @param {<<Model pascal>>UpdateArgs} args - Arguments to update one <<Model pascal>>.
@@ -216,12 +226,14 @@ export class <<Model pascal>>Service {
    * })
    *
    * */
-  update<T extends Prisma.<<Model pascal>>UpdateArgs>(
+  public async update<T extends Prisma.<<Model pascal>>UpdateArgs>(
     args: Prisma.SelectSubset<T, Prisma.<<Model pascal>>UpdateArgs>,
   ) {
-    return this.<<Model camel>>DatabaseService.update(args);
+    return this.<<Model camel>>DatabaseService.update<Prisma.SelectSubset<
+      T, Prisma.<<Model pascal>>UpdateArgs>
+    >(args);
   }
- 
+
   /**
    * Delete zero or more <<Model pascal>>s.
    * @param {<<Model pascal>>DeleteManyArgs} args - Arguments to filter <<Model pascal>>s to delete.
@@ -234,12 +246,14 @@ export class <<Model pascal>>Service {
    * })
    *
    * */
-  deleteMany<T extends Prisma.<<Model pascal>>DeleteManyArgs>(
+  public async deleteMany<T extends Prisma.<<Model pascal>>DeleteManyArgs>(
     args?: Prisma.SelectSubset<T, Prisma.<<Model pascal>>DeleteManyArgs>,
   ) {
-    return this.<<Model camel>>DatabaseService.deleteMany(args);
+    return this.<<Model camel>>DatabaseService.deleteMany<
+      Prisma.SelectSubset<T, Prisma.<<Model pascal>>DeleteManyArgs>
+    >(args);
   }
- 
+
   /**
    * Update zero or more <<Model pascal>>s.
    * Note, that providing `undefined` is treated as the value not being there.
@@ -257,12 +271,14 @@ export class <<Model pascal>>Service {
    * })
    *
    * */
-  updateMany<T extends Prisma.<<Model pascal>>UpdateManyArgs>(
+  public async updateMany<T extends Prisma.<<Model pascal>>UpdateManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.<<Model pascal>>UpdateManyArgs>,
   ) {
-    return this.<<Model camel>>DatabaseService.updateMany(args);
+    return this.<<Model camel>>DatabaseService.updateMany<
+      Prisma.SelectSubset<T, Prisma.<<Model pascal>>UpdateManyArgs>
+    >(args);
   }
- 
+
   /**
    * Create or update one <<Model pascal>>.
    * @param {<<Model pascal>>UpsertArgs} args - Arguments to update or create a <<Model pascal>>.
@@ -280,12 +296,14 @@ export class <<Model pascal>>Service {
    *   }
    * })
    * */
-  upsert<T extends Prisma.<<Model pascal>>UpsertArgs>(
+  public async upsert<T extends Prisma.<<Model pascal>>UpsertArgs>(
     args: Prisma.SelectSubset<T, Prisma.<<Model pascal>>UpsertArgs>,
   ) {
-    return this.<<Model camel>>DatabaseService.upsert(args);
+    return this.<<Model camel>>DatabaseService.upsert<
+      Prisma.SelectSubset<T, Prisma.<<Model pascal>>UpsertArgs>
+    >(args);
   }
- 
+
   /**
    * Count the number of <<Model pascal>>s.
    * Note, that providing `undefined` is treated as the value not being there.
@@ -299,12 +317,14 @@ export class <<Model pascal>>Service {
    *   }
    * })
    * */
-  count<T extends Prisma.<<Model pascal>>CountArgs>(
+  public async count<T extends Prisma.<<Model pascal>>CountArgs>(
     args?: Prisma.Subset<T, Prisma.<<Model pascal>>CountArgs>,
   ) {
-    return this.<<Model camel>>DatabaseService.count(args);
+    return this.<<Model camel>>DatabaseService.count<
+      Prisma.Subset<T, Prisma.<<Model pascal>>CountArgs>
+    >(args);
   }
- 
+
   /**
    * Allows you to perform aggregations operations on a <<Model pascal>>.
    * Note, that providing `undefined` is treated as the value not being there.
@@ -329,9 +349,11 @@ export class <<Model pascal>>Service {
    *   take: 10,
    * })
    * */
-  aggregate<T extends Prisma.<<Model pascal>>AggregateArgs>(
+  public async aggregate<T extends Prisma.<<Model pascal>>AggregateArgs>(
     args: Prisma.Subset<T, Prisma.<<Model pascal>>AggregateArgs>,
   ) {
-    return this.<<Model camel>>DatabaseService.aggregate(args);
+    return this.<<Model camel>>DatabaseService.aggregate<
+      Prisma.Subset<T, Prisma.<<Model pascal>>AggregateArgs>
+    >(args);
   }
 }
