@@ -5,6 +5,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { SelectOptionInterface } from '@tractr/angular-components';
 import { DateTime } from 'luxon';
@@ -26,6 +27,8 @@ export type AlertFiltersArchived = Pick<
 })
 export class AlertFilterArchivedUiComponent implements OnInit {
   @Output() filtersChanged = new EventEmitter<AlertFiltersArchived>();
+
+  filtersAlertsArchived = new FormGroup({});
 
   statusOptions: SelectOptionInterface<AlertFeedbackType | undefined>[] = [];
 
@@ -109,29 +112,20 @@ export class AlertFilterArchivedUiComponent implements OnInit {
       alertFeedbackType: this.statusOptions[0].value,
       createdAtMin: this.timesOptions[0].value,
     };
-
-    this.filtersChanged.emit(this.filtersActive);
   }
 
-  filterChange(
-    option:
-      | SelectOptionInterface<unknown>
-      | SelectOptionInterface<unknown>[]
-      | undefined,
-    filterName: 'alertFeedbackType' | 'createdAtMin',
-  ): void {
-    if (!option || Array.isArray(option)) return;
+  filterChange(): void {
+    const { value: alertFeedbackType } = (this.filtersAlertsArchived.get(
+      'filterStatus',
+    ) || {}) as Record<string, SelectOptionInterface<AlertFeedbackType>>;
+    this.filtersActive.alertFeedbackType =
+      alertFeedbackType && alertFeedbackType.value;
 
-    if (filterName === 'alertFeedbackType') {
-      this.filtersActive.alertFeedbackType = (
-        option as SelectOptionInterface<AlertFeedbackType>
-      ).value;
-    }
-    if (filterName === 'createdAtMin') {
-      this.filtersActive.createdAtMin = (
-        option as SelectOptionInterface<Date>
-      ).value;
-    }
+    const { value: createdAtMin } = (this.filtersAlertsArchived.get(
+      'filterTime',
+    ) || {}) as Record<string, SelectOptionInterface<Date>>;
+    this.filtersActive.createdAtMin = createdAtMin && createdAtMin.value;
+
     this.filtersChanged.emit(this.filtersActive);
   }
 }

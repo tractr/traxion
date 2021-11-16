@@ -1,44 +1,51 @@
 .filter-alerts-archived {
-  @apply flex;
+  @apply block;
 
-  tractr-select {
-    @apply max-w-video-preview w-full;
-
-    &:first-child {
-      @apply mr-4;
+  tractr-form::ng-deep{
+    form{
+      @apply flex justify-between;
     }
+  }
 
-    &::ng-deep {
-      nz-select {
-        @apply flex items-center;
-        nz-select-top-control {
-          @apply border-gray-400 rounded-sm;
+  tractr-form-select::ng-deep{
+    tractr-form-item{
+      nz-form-item{
+        @apply mb-0;
+        tractr-select {
+          @apply block max-w-video-preview w-full;
+          &::ng-deep {
+            nz-select {
+              @apply flex items-center;
+              nz-select-top-control {
+                @apply min-w-video-preview border-gray-400 rounded-sm;
 
-          nz-select-search {
-            input {
-              @apply cursor-pointer;
+                nz-select-search {
+                  input {
+                    @apply cursor-pointer;
+                  }
+                }
+                nz-select-placeholder {
+                  @apply text-cali-dark;
+                }
+              }
+              nz-select-arrow {
+                @apply top-auto mt-0 w-auto h-auto;
+                i {
+                  @apply text-cali-dark text-base leading-none;
+                }
+              }
+              &:hover {
+                @apply cursor-pointer;
+                nz-select-top-control {
+                  @apply border-gray-400;
+                }
+              }
+              &.ant-select-focused {
+                nz-select-top-control {
+                  @apply border-gray-400 shadow;
+                }
+              }
             }
-          }
-          nz-select-placeholder {
-            @apply text-cali-dark;
-          }
-        }
-        nz-select-arrow {
-          @apply top-auto mt-0 w-auto h-auto;
-          i {
-            @apply text-cali-dark text-base leading-none;
-          }
-        }
-
-        &:hover {
-          @apply cursor-pointer;
-          nz-select-top-control {
-            @apply border-gray-400;
-          }
-        }
-        &.ant-select-focused {
-          nz-select-top-control {
-            @apply border-gray-400 shadow;
           }
         }
       }

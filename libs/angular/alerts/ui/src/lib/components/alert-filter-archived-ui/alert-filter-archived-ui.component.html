@@ -1,16 +1,22 @@
 <div class="filter-alerts-archived">
-  <tractr-select
-    name="filterStatus"
-    [options]="statusOptions"
-    [placeholder]="'status-alert' | translate"
-    [value]="statusOptions[0]"
-    (valueChanged)="filterChange($event, 'alertFeedbackType')"
-  ></tractr-select>
-  <tractr-select
-    name="filterTime"
-    [options]="timesOptions"
-    [placeholder]="'filter-common-period' | translate"
-    [value]="timesOptions[0]"
-    (valueChanged)="filterChange($event, 'createdAtMin')"
-  ></tractr-select>
+  <tractr-form
+    [form]="filtersAlertsArchived"
+    [layout]="'horizontal'"
+    (changed)="filterChange()"
+  >
+    <tractr-form-select
+      name="filterStatus"
+      [form]="filtersAlertsArchived"
+      [options]="statusOptions"
+      [placeholder]="'status-alert' | translate"
+      [state]="statusOptions[0]"
+    ></tractr-form-select>
+    <tractr-form-select
+      name="filterTime"
+      [form]="filtersAlertsArchived"
+      [options]="timesOptions"
+      [placeholder]="'filter-common-period' | translate"
+      [state]="timesOptions[0]"
+    ></tractr-form-select>
+  </tractr-form>
 </div>
