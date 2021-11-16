@@ -1,21 +1,16 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import { FormDatePickerBaseComponent } from '../form-date-picker-base.component';
+import { FormPickerBaseComponent } from '../form-picker-base.component';
 
 @Component({
-  selector: 'tractr-form-date-picker',
-  templateUrl: './form-date-picker.component.html',
-  styleUrls: ['./form-date-picker.component.less'],
+  selector: 'tractr-form-time-picker',
+  templateUrl: './form-time-picker.component.html',
+  styleUrls: ['./form-time-picker.component.less'],
 })
-export class FormDatePickerComponent extends FormDatePickerBaseComponent {
+export class FormTimePickerComponent extends FormPickerBaseComponent {
   /** Customize Format Date */
   @Input() format = 'dd-MM-yyyy';
-
-  /** Show or not time in Datepicker
-   * example nzFormat : "HH:mm:ss"
-   */
-  @Input() showTime: boolean | { nzFormat: string } = false;
 
   constructor(private formBuilder: FormBuilder) {
     super();
