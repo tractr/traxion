@@ -18,9 +18,11 @@ export class AlertService extends BaseAlertService {
    * })
    *
    * */
-  create<T extends Prisma.AlertCreateArgs>(
+  async create<T extends Prisma.AlertCreateArgs>(
     args: Prisma.SelectSubset<T, Prisma.AlertCreateArgs>,
   ) {
-    return this.alertDatabaseService.create(args);
+    return this.alertDatabaseService.create<
+      Prisma.SelectSubset<T, Prisma.AlertCreateArgs>
+    >(args);
   }
 }
