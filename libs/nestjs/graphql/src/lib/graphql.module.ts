@@ -1,15 +1,12 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 
-import { AlertResolver, CameraResolver } from './resolvers';
+import { AlertResolver } from './resolvers';
 
-import { MessageBrokerAlertModule } from '@cali/message-broker-alert';
-import { MessageBrokerCameraStatusModule } from '@cali/message-broker-camera-status';
+import { NestjsPubSubModule } from '@cali/nestjs-pub-sub';
 
 @Module({
   imports: [
-    MessageBrokerAlertModule,
-    MessageBrokerCameraStatusModule,
     GraphQLModule.forRoot({
       autoSchemaFile: true,
       sortSchema: true,
@@ -17,9 +14,8 @@ import { MessageBrokerCameraStatusModule } from '@cali/message-broker-camera-sta
       playground: true,
       installSubscriptionHandlers: true,
     }),
+    NestjsPubSubModule,
   ],
-  controllers: [],
-  providers: [AlertResolver, CameraResolver],
-  exports: [],
+  providers: [AlertResolver],
 })
 export class GraphqlModule {}

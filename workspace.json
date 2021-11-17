@@ -354,6 +354,47 @@
         }
       }
     },
+    "common-graphql-client": {
+      "prefix": "cali",
+      "projectType": "library",
+      "root": "libs/common/graphql-client",
+      "sourceRoot": "libs/common/graphql-client/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "development": {
+              "tsConfig": "libs/common/graphql-client/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/common/graphql-client/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "project": "libs/common/graphql-client/ng-package.json"
+          },
+          "outputs": ["dist/libs/common/graphql-client"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/common/graphql-client/src/**/*.ts",
+              "libs/common/graphql-client/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/common/graphql-client/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/common/graphql-client"]
+        }
+      }
+    },
     "common-models": {
       "prefix": "cali",
       "projectType": "library",
@@ -872,6 +913,38 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/nestjs/message-broker"]
+        }
+      }
+    },
+    "nestjs-pub-sub": {
+      "projectType": "library",
+      "root": "libs/nestjs/pub-sub",
+      "sourceRoot": "libs/nestjs/pub-sub/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/nestjs/pub-sub/*.md"],
+            "main": "libs/nestjs/pub-sub/src/index.ts",
+            "outputPath": "dist/libs/nestjs/pub-sub",
+            "packageJson": "libs/nestjs/pub-sub/package.json",
+            "tsConfig": "libs/nestjs/pub-sub/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/nestjs/pub-sub/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/nestjs/pub-sub/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/nestjs/pub-sub"]
         }
       }
     },

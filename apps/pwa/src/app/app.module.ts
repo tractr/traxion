@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
 import { AngularCommonUiModule } from '@cali/angular-common-ui';
 import { AngularCommonUtilsModule } from '@cali/angular-common-utils';
 import { AngularRextModule } from '@cali/common-angular-rext-client';
-
+import { CommonGraphqlClientModule } from '@cali/common-graphql-client';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -27,6 +27,7 @@ registerLocaleData(localeFr);
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    CommonGraphqlClientModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

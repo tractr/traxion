@@ -8,6 +8,7 @@ import { AlertSubscriber } from './subscribers';
 import { MessageBrokerAlertModule } from '@cali/message-broker-alert';
 import { MessageBrokerConfiguration } from '@cali/message-broker-common';
 import { AlertModelModule } from '@cali/nestjs-common';
+import { NestjsPubSubModule } from '@cali/nestjs-pub-sub';
 
 @Module({})
 export class MessageBrokerModule extends ModuleOptionsFactory<MessageBrokerConfiguration>(
@@ -30,6 +31,7 @@ export class MessageBrokerModule extends ModuleOptionsFactory<MessageBrokerConfi
     return {
       module: MessageBrokerModule,
       imports: [
+        NestjsPubSubModule,
         AlertModelModule.register(),
         MessageBrokerAlertModule.registerAsync({
           imports: [module],

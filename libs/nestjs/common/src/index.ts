@@ -6,11 +6,12 @@ export * from './lib/nestjs-common.module';
 /**
  * Common custom alert model
  */
-export * from './lib/alert';
+// export * from './lib/alert';
 
 /**
  * Common generated models
  */
+export * from './lib/generated/src/alert';
 export * from './lib/generated/src/alert-feedback';
 export * from './lib/generated/src/camera';
 export * from './lib/generated/src/camera-status';

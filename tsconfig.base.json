@@ -22,6 +22,9 @@
         "libs/common/angular-rext-client/src/index.ts"
       ],
       "@cali/common-casl": ["libs/common/casl/src/index.ts"],
+      "@cali/common-graphql-client": [
+        "libs/common/graphql-client/src/index.ts"
+      ],
       "@cali/common-models": ["libs/common/models/src/index.ts"],
       "@cali/common-rest-dtos": ["libs/common/rest-dtos/src/index.ts"],
       "@cali/common-rext-client": ["libs/common/rext-client/src/index.ts"],
@@ -43,6 +46,7 @@
       "@cali/nestjs-message-broker": [
         "libs/nestjs/message-broker/src/index.ts"
       ],
+      "@cali/nestjs-pub-sub": ["libs/nestjs/pub-sub/src/index.ts"],
       "@cali/nestjs-rest": ["libs/nestjs/rest/src/index.ts"],
       "@cali/prisma": ["libs/prisma/src/index.ts"],
       "@generated/*": ["libs/generated/generated/*"]

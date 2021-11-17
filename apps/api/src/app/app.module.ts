@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { LoggerModule } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 
+import { GraphqlModule } from '@cali/nestjs-graphql';
 import { MessageBrokerModule } from '@cali/nestjs-message-broker';
 import { RestModule } from '@cali/nestjs-rest';
 
@@ -13,7 +14,7 @@ import { RestModule } from '@cali/nestjs-rest';
 
     // Network modules
     RestModule,
-    // NestjsGraphqlModule,
+    GraphqlModule,
     MessageBrokerModule.register({
       url: 'amqp://localhost:5672',
     }),

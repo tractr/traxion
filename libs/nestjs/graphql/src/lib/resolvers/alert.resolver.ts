@@ -1,36 +1,26 @@
+import { Inject } from '@nestjs/common';
 import { Query, Resolver, Subscription } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 
 import { Alert } from '../models';
 
-import { MessageBrokerAlertSubscribe } from '@cali/message-broker-alert';
-
-const pubSub = new PubSub();
+import { PUB_SUB_SERVICE } from '@cali/nestjs-pub-sub';
 
 @Resolver(() => Alert)
 export class AlertResolver {
+  constructor(@Inject(PUB_SUB_SERVICE) private readonly pubSub: PubSub) {}
+
   @Query(() => Alert)
   getAlert() {
     return {
-      camera: 'test',
-      type: 'test',
-      time: 'test',
+      id: 'test',
     };
   }
 
   @Subscription(() => Alert, {
-    name: 'newAlert',
+    name: 'alertCreated',
   })
-  newAlertHandler() {
-    return pubSub.asyncIterator('newAlert');
-  }
-
-  @MessageBrokerAlertSubscribe({
-    queue: 'gql-alert',
-    routingKey: '',
-  })
-  async handleAlert(alert) {
-    console.info('ALERT MESSAGE GRAPHQL: ', alert);
-    return pubSub.publish('newAlert', { newAlert: alert });
+  alertCreatedHandler() {
+    return this.pubSub.asyncIterator('alertCreated');
   }
 }

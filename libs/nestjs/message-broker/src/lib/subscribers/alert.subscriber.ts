@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { PubSub } from 'graphql-subscriptions';
 
 import { NESTJS_MESSAGE_BROKER_ALERT_QUEUE } from '../constants';
 
@@ -7,12 +8,14 @@ import {
   MessageBrokerAlertSubscribe,
 } from '@cali/message-broker-alert';
 import { ALERT_SERVICE, AlertService } from '@cali/nestjs-common';
+import { PUB_SUB_SERVICE } from '@cali/nestjs-pub-sub';
 
 @Injectable()
 export class AlertSubscriber {
   constructor(
     // TODO: add logger
-    @Inject(ALERT_SERVICE) private readonly alertService: AlertService, // private readonly logger: Logger,
+    @Inject(ALERT_SERVICE) private readonly alertService: AlertService,
+    @Inject(PUB_SUB_SERVICE) private readonly pubSub: PubSub,
   ) {}
 
   /**
@@ -30,7 +33,8 @@ export class AlertSubscriber {
     ...messageBrokerAlert
   }: MessageBrokerAlert) {
     try {
-      await this.alertService.create({
+      // Insert new alert in database
+      const alert = await this.alertService.create({
         data: {
           ...messageBrokerAlert,
           camera: { connect: { externalId: cameraExternalId } },
@@ -38,6 +42,11 @@ export class AlertSubscriber {
           videoStatus: this.alertService.getDefaultVideoStatus(),
           videoUrl: this.alertService.getDefaultVideoUrl(),
         },
+      });
+
+      // Send an alertCreated graphql notification
+      await this.pubSub.publish('alertCreated', {
+        alertCreated: { id: alert.id },
       });
     } catch (e) {
       console.error(e);

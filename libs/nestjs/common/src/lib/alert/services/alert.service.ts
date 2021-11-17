@@ -19,10 +19,15 @@ export class AlertService extends BaseAlertService {
    *
    * */
   async create<T extends Prisma.AlertCreateArgs>(
-    args: Prisma.SelectSubset<T, Prisma.AlertCreateArgs>,
+    args: Prisma.SelectSubset<T, Pick<Prisma.AlertCreateArgs, 'data'>>,
   ) {
-    return this.alertDatabaseService.create<
-      Prisma.SelectSubset<T, Prisma.AlertCreateArgs>
-    >(args);
+    // Insert new alert in database
+    const alert = await super.create(args);
+
+    // Send an alertCreated graphql notification
+    // await pubSub.publish('alertCreated', { alertCreated: { id: alert.id } });
+
+    // Return created alert
+    return alert;
   }
 }

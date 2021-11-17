@@ -36,6 +36,9 @@
     "common-casl": {
       "tags": []
     },
+    "common-graphql-client": {
+      "tags": []
+    },
     "common-models": {
       "tags": []
     },
@@ -84,6 +87,9 @@
     },
     "nestjs-message-broker": {
       "implicitDependencies": ["nestjs-common"],
+      "tags": []
+    },
+    "nestjs-pub-sub": {
       "tags": []
     },
     "nestjs-rest": {

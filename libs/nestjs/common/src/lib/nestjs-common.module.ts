@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 
-import { AlertModelModule } from './alert';
+// import { AlertModelModule } from './alert';
 import {
   AlertFeedbackModelModule,
+  AlertModelModule,
   CameraModelModule,
   CameraStatusModelModule,
   ClientModelModule,
