@@ -28,6 +28,10 @@ import {
   IsString,
   <<endif>>
 
+  <<if Fields (string and not text)>>
+  MaxLength,
+  <<endif>>
+
   <<if Fields entity and not internal>>
   IsUUID, 
   <<endif>>
@@ -78,6 +82,12 @@ export class <<Model pascal>>UpsertBodyDto {
   @IsString(<<=listModifier(field)>>) 
   <<endif>>
 
+  <<if field string and not text>>
+  @MaxLength(255, {
+    message: '<<field pascal>> field is too long',
+  })
+  <<endif>>
+
   <<if field enum>>
   @IsIn(Object.values(<<Model pascal>><<field pascal>>),<<=listModifier(field)>>) 
   <<endif>>
@@ -99,8 +109,8 @@ export class <<Model pascal>>UpsertBodyDto {
   <<endif>>
 
   <<if field number>>
+  @IsNumber({<<if field not latitude and not longitude and not float>>maxDecimalPlaces: 0<<endif>>},<<=listModifier(field)>>)
   @TransformStringToInt()
-  @IsNumber({}, <<=listModifier(field)>>)
   <<endif>>
 
   <<if field datetime>>

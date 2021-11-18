@@ -26,10 +26,6 @@ if (!primary) {
 
 // Check fieds properties
 for (const field of fields) {
-  if (field.subtype === 'text')
-    errors.push(
-      `Subtype 'text' is not handled yet. Remove it from field '${field.name}'`,
-    );
   if (field.subtype === 'rich')
     errors.push(
       `Subtype 'rich' is not handled yet. Remove it from field '${field.name}'`,

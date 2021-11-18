@@ -34,6 +34,10 @@ import {
   IsString,
   <<endif>>
 
+  <<if Fields (string and not text)>>
+  MaxLength,
+  <<endif>>
+
   <<if Fields url>>
   IsUrl, 
   <<endif>>
@@ -106,6 +110,12 @@ export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
   @IsString(<<=listModifier(field)>>) 
   <<endif>>
 
+  <<if field string and not text>>
+  @MaxLength(255, {
+    message: '<<field pascal>> field is too long',
+  })
+  <<endif>>
+
   <<if field primary>>
   @IsUUID("all", <<=listModifier(field)>>) 
   <<endif>>
@@ -133,7 +143,7 @@ export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
   <<endif>>
 
   <<if field number>>
-  @IsNumber({}, <<=listModifier(field)>>)
+  @IsNumber({<<if field not latitude and not longitude and not float>>maxDecimalPlaces: 0<<endif>>},<<=listModifier(field)>>)
   @TransformStringToInt()
   <<endif>>
 
