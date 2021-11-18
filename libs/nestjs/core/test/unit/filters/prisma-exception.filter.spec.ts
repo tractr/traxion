@@ -83,4 +83,11 @@ describe('Prisma exception error', () => {
       expect(response.status).toBe(500);
     });
   });
+
+  describe('DefaultError', () => {
+    it('DefaultError must return 500', async () => {
+      const response = await request(app.getHttpServer()).get('/default-error');
+      expect(response.status).toBe(500);
+    });
+  });
 });

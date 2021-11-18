@@ -76,4 +76,10 @@ export class PrismaExceptionEndpointMockController {
       this.ERROR_CLIENT_VERSION,
     );
   }
+
+  @Public()
+  @Get('/default-error')
+  defaultError(): Error {
+    throw new Error(this.ERROR_MESSAGE);
+  }
 }
