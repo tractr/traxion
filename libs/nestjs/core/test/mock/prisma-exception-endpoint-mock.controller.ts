@@ -1,16 +1,18 @@
 import { Controller, Get } from '@nestjs/common';
-import { Public } from '@tractr/nestjs-core';
 import {
-  PrismaClientKnownRequestError,
-  PrismaClientUnknownRequestError,
-  PrismaClientRustPanicError,
   PrismaClientInitializationError,
+  PrismaClientKnownRequestError,
+  PrismaClientRustPanicError,
+  PrismaClientUnknownRequestError,
   PrismaClientValidationError,
 } from '@prisma/client/runtime';
+
+import { Public } from '../../src/decorators/public.decorator';
 
 @Controller()
 export class PrismaExceptionEndpointMockController {
   private readonly ERROR_MESSAGE = 'This is an example error message';
+
   private readonly ERROR_CLIENT_VERSION = '1.0.0';
 
   @Public()
