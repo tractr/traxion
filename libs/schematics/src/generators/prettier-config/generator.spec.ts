@@ -5,8 +5,10 @@ import { addProjectConfiguration, readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
 import * as localPackageJson from '../../../package.json';
-import * as helpers from '../../helpers/npm-run';
+import { npmRun } from '../../helpers/npm-run';
 import generator, { packagesToAdd } from './generator';
+
+jest.mock('../../helpers/npm-run');
 
 describe('release generator', () => {
   let appTree: Tree;
@@ -19,9 +21,7 @@ describe('release generator', () => {
       root: 'libs/test',
       sourceRoot: 'libs/test/src',
     });
-    npmRunSpy = jest
-      .spyOn(helpers, 'npmRun')
-      .mockReturnValue(Promise.resolve());
+    npmRunSpy = npmRun as jest.MockedFunction<typeof npmRun>;
   });
 
   it('should run and skip the global format', async () => {
@@ -72,5 +72,13 @@ describe('release generator', () => {
       readFileSync(join(__dirname, 'files', '.prettierrc.js__tmpl__')),
     );
     expect(npmRunSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should work even if no .prettierrc exists', async () => {
+    appTree.delete('.prettierrc');
+
+    await generator(appTree, { format: false });
+
+    expect(appTree.exists('.prettierrc')).toBe(false);
   });
 });

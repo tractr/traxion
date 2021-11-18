@@ -1709,6 +1709,17 @@
           },
           "outputs": ["{options.outputPath}"]
         },
+        "coverage": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "codeCoverage": true,
+            "coverageReporters": ["text", "json"],
+            "jestConfig": "libs/schematics/jest.config.js",
+            "passWithNoTests": true,
+            "skipNxCache": true
+          },
+          "outputs": ["coverage/libs/schematics"]
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {

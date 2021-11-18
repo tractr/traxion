@@ -1,16 +1,10 @@
-import {
-  addDependenciesToPackageJson,
-  formatFiles,
-  readJsonFile,
-  Tree,
-  updateJson,
-} from '@nrwl/devkit';
+import { formatFiles, readJsonFile, Tree, updateJson } from '@nrwl/devkit';
 import { Linter, lintInitGenerator } from '@nrwl/linter';
 
 import * as packageJson from '../../../package.json';
-import { addLatestSemverToPackageJsonDevDeps } from '../../helpers';
+import { addPackageToPackageJson, PackageDefinition } from '../../helpers';
 
-export const packagesToAdd = [
+export const packagesToAdd: PackageDefinition[] = [
   {
     packageName: '@tractr/eslint-config',
     version: packageJson.version,
@@ -27,18 +21,14 @@ export const packagesToAdd = [
 ];
 
 export default async function eslintGenerator(tree: Tree) {
-  await Promise.all(
-    packagesToAdd.map(({ packageName, version }) =>
-      version
-        ? addDependenciesToPackageJson(tree, {}, { [packageName]: version })
-        : addLatestSemverToPackageJsonDevDeps(tree, packageName),
-    ),
-  );
+  // First add dependencies to the package json
+  await addPackageToPackageJson(tree, packagesToAdd);
 
+  // Use the linit generator from @nrwl/linter with Eslint
   lintInitGenerator(tree, { linter: Linter.EsLint });
 
+  // Add settings to the eslintrc.json files
   const eslintrcJson = readJsonFile('./.eslintrc.json');
-
   eslintrcJson.settings = {
     ...eslintrcJson.settings,
     'import/internal-regex': '^@(generated)/',
@@ -62,7 +52,7 @@ export default async function eslintGenerator(tree: Tree) {
     };
   });
 
-  updateJson(tree, '.eslintrc.json', eslintrcJson);
+  updateJson(tree, '.eslintrc.json', () => eslintrcJson);
 
   await formatFiles(tree);
 }

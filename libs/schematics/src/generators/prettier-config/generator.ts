@@ -1,17 +1,16 @@
 import * as path from 'path';
 
-import {
-  addDependenciesToPackageJson,
-  formatFiles,
-  generateFiles,
-  Tree,
-} from '@nrwl/devkit';
+import { formatFiles, generateFiles, Tree } from '@nrwl/devkit';
 
 import * as packageJson from '../../../package.json';
-import { addLatestSemverToPackageJsonDevDeps, npmRun } from '../../helpers';
+import {
+  addPackageToPackageJson,
+  npmRun,
+  PackageDefinition,
+} from '../../helpers';
 import { PrettierGeneratorSchema } from './schema';
 
-export const packagesToAdd = [
+export const packagesToAdd: PackageDefinition[] = [
   {
     packageName: '@tractr/prettier-config',
     version: packageJson.version,
@@ -53,13 +52,7 @@ export default async function prettierGenerator(
     templateOptions,
   );
 
-  await Promise.all(
-    packagesToAdd.map(({ packageName, version }) =>
-      version
-        ? addDependenciesToPackageJson(tree, {}, { [packageName]: version })
-        : addLatestSemverToPackageJsonDevDeps(tree, packageName),
-    ),
-  );
+  await addPackageToPackageJson(tree, packagesToAdd);
 
   await formatFiles(tree);
 

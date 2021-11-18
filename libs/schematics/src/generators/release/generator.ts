@@ -7,7 +7,7 @@ import {
   updateProjectConfiguration,
 } from '@nrwl/devkit';
 
-import { addLatestSemverToPackageJson } from '../../helpers';
+import { addPackageToPackageJson } from '../../helpers';
 import { ReleaseGeneratorSchema } from './schema';
 
 export const SEMVER_PACKAGE_NAME = '@jscutlery/semver';
@@ -84,5 +84,5 @@ export default async function releaseGenerator(
 
   await formatFiles(tree);
 
-  return addLatestSemverToPackageJson(tree, SEMVER_PACKAGE_NAME);
+  return addPackageToPackageJson(tree, SEMVER_PACKAGE_NAME);
 }
