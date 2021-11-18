@@ -18,6 +18,7 @@ module.exports = {
     '../hapify/templates/nestjs-models',
     '../hapify/templates/nestjs-models-common',
     '../hapify/templates/nestjs-models-rest',
+    '../hapify/templates/react-admin',
     '../hapify/templates/rext-client',
     '../hapify/templates/angular-rext-client',
   ],

@@ -1046,6 +1046,12 @@
             "tsConfig": "libs/hapify/templates/react-admin/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
+          }
         }
       }
     },
