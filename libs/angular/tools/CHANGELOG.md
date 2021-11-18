@@ -2,6 +2,39 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.23.2](https://github.com/tractr/stack/compare/v1.23.1...v1.23.2) (2021-11-16)
+
+
+
+## [1.23.1](https://github.com/tractr/stack/compare/v1.23.0...v1.23.1) (2021-11-09)
+
+
+### Bug Fixes
+
+* **angular-tools:** fix import BrowserModule ([#303](https://github.com/tractr/stack/issues/303)) ([d2ec163](https://github.com/tractr/stack/commit/d2ec1635f4b8d2ad3917defc2e14bf92ae533ec8))
+
+
+
+# [1.23.0](https://github.com/tractr/stack/compare/v1.22.4...v1.23.0) (2021-11-03)
+
+
+
+## [1.22.4](https://github.com/tractr/stack/compare/v1.22.3...v1.22.4) (2021-10-29)
+
+
+
+## [1.22.3](https://github.com/tractr/stack/compare/v1.22.2...v1.22.3) (2021-10-28)
+
+
+
+## [1.22.2](https://github.com/tractr/stack/compare/v1.22.1...v1.22.2) (2021-10-28)
+
+
+
+## [1.22.1](https://github.com/tractr/stack/compare/v1.22.0...v1.22.1) (2021-10-27)
+
+
+
 # [1.22.0](https://github.com/tractr/stack/compare/v1.21.4...v1.22.0) (2021-10-19)
 
 
