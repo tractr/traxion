@@ -1,4 +1,5 @@
 export * from './lib/decorators';
 export * from './lib/message-broker-alert.module';
+export * from './lib/mock';
 export * from './lib/services';
 export * from './lib/types';

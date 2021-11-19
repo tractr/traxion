@@ -22,6 +22,7 @@
       "@cali/common-angular-rext-client": [
         "libs/common/angular-rext-client/src/index.ts"
       ],
+      "@cali/common-business": ["libs/common/business/src/index.ts"],
       "@cali/common-casl": ["libs/common/casl/src/index.ts"],
       "@cali/common-graphql-client": [
         "libs/common/graphql-client/src/index.ts"

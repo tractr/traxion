@@ -1,33 +1,16 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import { Test } from '@nestjs/testing';
-import { AlertType } from '@prisma/client';
-import { datatype } from 'faker';
 import { mock, MockProxy } from 'jest-mock-extended';
 
 import { MessageBrokerHandlerAlertFilterService } from './message-broker-handler-alert-filter.service';
 
+import { parseNumFrame } from '@cali/common-business';
 import { MessageBrokerAlertService } from '@cali/message-broker-alert';
-import { MessageBrokerPredictionLog } from '@cali/message-broker-prediction-log';
+import { mockPredictionLog } from '@cali/message-broker-prediction-log';
 
 describe('MessageBrokerHandlerAlertFilter', () => {
   let mockedMessageBrokerAlertService: MockProxy<MessageBrokerAlertService>;
   let messageBrokerHandlerAlertService: MessageBrokerHandlerAlertFilterService;
-  const basePredictionLog: MessageBrokerPredictionLog = {
-    num_frame: datatype.string(),
-    classes: [datatype.string()],
-    probas: [datatype.number(1)],
-    class: AlertType.suspectBehaviour,
-    alert: datatype.boolean(),
-    delay: datatype.number(100),
-    t_ingest: datatype.number(100),
-    t_prepro: datatype.number(100),
-    t_inference: datatype.number(100),
-    usage_cpu_inf: datatype.number(100),
-    usage_memoire_inf: datatype.number(100),
-    t_decision: datatype.number(100),
-    id_model_prediction: datatype.string(),
-    id_model_decision: datatype.string(),
-  };
 
   beforeEach(async () => {
     mockedMessageBrokerAlertService = mock<MessageBrokerAlertService>();
@@ -50,7 +33,8 @@ describe('MessageBrokerHandlerAlertFilter', () => {
 
   describe('filterAlerts', () => {
     it('should publish a message when prediction log is an alert', async () => {
-      const alertPredictionLog = { ...basePredictionLog, alert: true };
+      const alertPredictionLog = mockPredictionLog({ alert: true });
+      const { cameraId } = parseNumFrame(alertPredictionLog.num_frame);
 
       messageBrokerHandlerAlertService.filterAlerts(alertPredictionLog);
 
@@ -58,7 +42,7 @@ describe('MessageBrokerHandlerAlertFilter', () => {
         routingKey: '',
         message: {
           type: alertPredictionLog.class,
-          cameraExternalId: alertPredictionLog.num_frame,
+          cameraExternalId: cameraId,
           externalFrameId: alertPredictionLog.num_frame,
           externalModelDecisionId: alertPredictionLog.id_model_decision,
           externalModelPredictionId: alertPredictionLog.id_model_prediction,
@@ -67,7 +51,7 @@ describe('MessageBrokerHandlerAlertFilter', () => {
     });
 
     it('should do nothing when prediction log is not an alert', async () => {
-      const noAlertPredictionLog = { ...basePredictionLog, alert: false };
+      const noAlertPredictionLog = mockPredictionLog({ alert: false });
 
       messageBrokerHandlerAlertService.filterAlerts(noAlertPredictionLog);
 
@@ -77,17 +61,44 @@ describe('MessageBrokerHandlerAlertFilter', () => {
 
   describe('formatPredictionLogToAlert', () => {
     it('should map a prediction log format to an alert format', async () => {
+      const predictionLog = mockPredictionLog();
       const mappedPredictionLog =
         messageBrokerHandlerAlertService.formatPredictionLogToAlert(
-          basePredictionLog,
+          predictionLog,
         );
 
       expect(mappedPredictionLog).toStrictEqual({
-        type: basePredictionLog.class,
-        cameraExternalId: basePredictionLog.num_frame,
-        externalFrameId: basePredictionLog.num_frame,
-        externalModelDecisionId: basePredictionLog.id_model_decision,
-        externalModelPredictionId: basePredictionLog.id_model_prediction,
+        type: predictionLog.class,
+        cameraExternalId: parseNumFrame(predictionLog.num_frame).cameraId,
+        externalFrameId: predictionLog.num_frame,
+        externalModelDecisionId: predictionLog.id_model_decision,
+        externalModelPredictionId: predictionLog.id_model_prediction,
+      });
+    });
+  });
+
+  describe('parseNumFrame', () => {
+    it('should extract camera ID and frame ID from numFrame with single digit camera ID', async () => {
+      const numFrame = '82021_10_01_09_40_43_11';
+
+      const parsedNumFrame = parseNumFrame(numFrame);
+
+      expect(parsedNumFrame).toStrictEqual({
+        cameraId: '8',
+        frameNumber: '11',
+        date: new Date(Date.UTC(2021, 9, 1, 9, 40, 43)),
+      });
+    });
+
+    it('should extract camera ID and frame ID from numFrame with multi-digits camera ID', async () => {
+      const numFrame = '1342021_10_01_09_40_43_11';
+
+      const parsedNumFrame = parseNumFrame(numFrame);
+
+      expect(parsedNumFrame).toStrictEqual({
+        cameraId: '134',
+        frameNumber: '11',
+        date: new Date(Date.UTC(2021, 9, 1, 9, 40, 43)),
       });
     });
   });

@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 
+import { mockNumFrame, parseNumFrame } from '@cali/common-business';
 import {
   AlertFeedbackQualification,
   AlertFeedbackType,
@@ -145,7 +146,7 @@ export const seed = async () => {
       createdAt: now,
       type: AlertType.suspectBehaviour,
       cameraId: camera.id,
-      externalFrameId: '1',
+      externalFrameId: mockNumFrame(camera.externalId),
       externalModelDecisionId: '1',
       externalModelPredictionId: '1',
     });
@@ -159,7 +160,7 @@ export const seed = async () => {
       createdAt: now,
       type: AlertType.thief,
       cameraId: camera.id,
-      externalFrameId: '2',
+      externalFrameId: mockNumFrame(camera.externalId),
       externalModelDecisionId: '2',
       externalModelPredictionId: '2',
     });
@@ -173,7 +174,7 @@ export const seed = async () => {
       createdAt: now,
       type: AlertType.thief,
       cameraId: camera.id,
-      externalFrameId: '3',
+      externalFrameId: mockNumFrame(camera.externalId),
       externalModelDecisionId: '3',
       externalModelPredictionId: '3',
     });

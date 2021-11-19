@@ -2,6 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { AlertType } from '@prisma/client';
 
+import { parseNumFrame } from '@cali/common-business';
 import {
   MessageBrokerAlert,
   MessageBrokerAlertService,
@@ -50,9 +51,11 @@ export class MessageBrokerHandlerAlertFilterService {
     id_model_decision,
     id_model_prediction,
   }: MessageBrokerPredictionLog): MessageBrokerAlert {
+    const { cameraId } = parseNumFrame(num_frame);
+
     return {
       type: alert_class as AlertType,
-      cameraExternalId: num_frame,
+      cameraExternalId: cameraId,
       externalFrameId: num_frame,
       externalModelDecisionId: id_model_decision,
       externalModelPredictionId: id_model_prediction,

@@ -36,6 +36,9 @@
       "implicitDependencies": ["common-rext-client"],
       "tags": []
     },
+    "common-business": {
+      "tags": []
+    },
     "common-casl": {
       "tags": []
     },

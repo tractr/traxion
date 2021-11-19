@@ -1,11 +1,13 @@
-import { AlertType } from '@prisma/client';
-import { datatype } from 'faker';
+import { random } from 'faker';
 import { Command, Console } from 'nestjs-console';
 import { interval, map, tap } from 'rxjs';
 
+import { fetchCameraExternalIds } from '../helpers';
+
+import { mockNumFrame } from '@cali/common-business';
 import {
-  MessageBrokerPredictionLog,
   MessageBrokerPredictionLogService,
+  mockPredictionLog,
 } from '@cali/message-broker-prediction-log';
 
 @Console({
@@ -22,10 +24,16 @@ export class FramePerformanceService {
     description: 'publish a random prediction log',
   })
   public async publishOne() {
+    const randomCameraExternalId = random.arrayElement(
+      await fetchCameraExternalIds(),
+    );
+
     try {
       await this.messageBrokerPredictionLog.publish({
         routingKey: '',
-        message: this.mockPredictionLog(),
+        message: mockPredictionLog({
+          num_frame: mockNumFrame(randomCameraExternalId),
+        }),
       });
     } catch (e) {
       console.error(e);
@@ -46,16 +54,21 @@ export class FramePerformanceService {
     if (Number.isNaN(cameraQuantityNumber))
       throw Error('Time camera quantity must be an integer');
 
-    const cameras = [...Array(cameraQuantityNumber).keys()];
+    const cameraExternalIds = random.arrayElements(
+      await fetchCameraExternalIds(),
+      cameraQuantityNumber,
+    );
 
     try {
       interval(timeIntervalNumber)
         .pipe(
           map(() =>
-            cameras.map(() =>
+            cameraExternalIds.map((cameraExternalId) =>
               this.messageBrokerPredictionLog.publish({
                 routingKey: '',
-                message: this.mockPredictionLog(),
+                message: mockPredictionLog({
+                  num_frame: mockNumFrame(cameraExternalId),
+                }),
               }),
             ),
           ),
@@ -65,33 +78,5 @@ export class FramePerformanceService {
     } catch (e) {
       console.error(e);
     }
-  }
-
-  /**
-   * Generate a random prediction log
-   *
-   * @param predictionLog - override the generated prediction log
-   * @returns the generated prediction log
-   */
-  private mockPredictionLog(
-    predictionLog: Partial<MessageBrokerPredictionLog> = {},
-  ): MessageBrokerPredictionLog {
-    return {
-      num_frame: '1',
-      classes: [datatype.string()],
-      probas: [datatype.number(1)],
-      class: AlertType.thief,
-      alert: true, // datatype.boolean(),
-      delay: datatype.number(100),
-      t_ingest: datatype.number(100),
-      t_prepro: datatype.number(100),
-      t_inference: datatype.number(100),
-      usage_cpu_inf: datatype.number(100),
-      usage_memoire_inf: datatype.number(100),
-      t_decision: datatype.number(100),
-      id_model_prediction: datatype.string(),
-      id_model_decision: datatype.string(),
-      ...predictionLog,
-    };
   }
 }
