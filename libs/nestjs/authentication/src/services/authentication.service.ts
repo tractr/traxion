@@ -48,7 +48,7 @@ export class AuthenticationService {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  findUserByLogin(login: string, select?: any): Promise<User | null> {
+  findUserByLogin(login: string, select?: any) {
     const loginField =
       this.authenticationOptions.strategy.local.usernameField ?? 'email';
     if (!loginField) throw new Error('loginField is not defined');

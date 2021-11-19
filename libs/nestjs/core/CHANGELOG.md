@@ -2,6 +2,19 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.24.0](https://github.com/tractr/stack/compare/v1.23.2...v1.24.0) (2021-11-18)
+
+
+### Features
+
+* add prisma exceptions interceptor to throw the right http exceptions ([#307](https://github.com/tractr/stack/issues/307)) ([274dc99](https://github.com/tractr/stack/commit/274dc993660c1cef001eb7fa139a39ec10c7453c))
+
+
+
+## [1.23.2](https://github.com/tractr/stack/compare/v1.23.1...v1.23.2) (2021-11-16)
+
+
+
 ## [1.23.1](https://github.com/tractr/stack/compare/v1.23.0...v1.23.1) (2021-11-09)
 
 

@@ -1,8 +1,20 @@
 # schematics
 
-This library was generated with [Nx](https://nx.dev).
+To develop schematics you can test your code via the `@nrwl/devkit/testing` and
+write your tests.
 
-## Running unit tests
+If you want to use it against the current workspace you need to build the code
+first and then use the `nx g` command. If you are developing you should use the
+build watch mode options to simply your process:
 
-Run `nx test schematics` to execute the unit tests via
-[Jest](https://jestjs.io).
+```bash
+nx build schematics --watch
+nx g ./dist/libs/schematics:<schematicName> [options]
+```
+
+## How to use in your projects
+
+```bash
+npm i --save-dev @tractr/schematics
+nx generate @tractr/schematics:<schemticName> [options]
+```
