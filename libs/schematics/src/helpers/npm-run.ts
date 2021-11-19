@@ -1,4 +1,7 @@
-import { exec } from './exec';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+
+const execAsync = promisify(exec);
 
 /**
  * Start npm run <cmd>
@@ -6,5 +9,5 @@ import { exec } from './exec';
  * @return {Promise<string>}
  */
 export function npmRun(cmd: string) {
-  return exec(`npm run ${cmd}`);
+  return execAsync(`npm run ${cmd}`);
 }

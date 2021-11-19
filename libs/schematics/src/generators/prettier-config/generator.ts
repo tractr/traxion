@@ -1,16 +1,23 @@
 import * as path from 'path';
 
-import {
-  addDependenciesToPackageJson,
-  formatFiles,
-  generateFiles,
-  Tree,
-} from '@nrwl/devkit';
+import { formatFiles, generateFiles, Tree } from '@nrwl/devkit';
 
-import { npmRun } from '../../helpers';
+import * as packageJson from '../../../package.json';
+import {
+  addPackageToPackageJson,
+  npmRun,
+  PackageDefinition,
+} from '../../helpers';
 import { PrettierGeneratorSchema } from './schema';
 
-export const SEMVER_PACKAGE_NAME = '@tractr/prettier-config';
+export const packagesToAdd: PackageDefinition[] = [
+  {
+    packageName: '@tractr/prettier-config',
+    version: packageJson.version,
+  },
+  { packageName: 'prettier-plugin-packagejson' },
+  { packageName: 'prettier-plugin-sort-json' },
+];
 
 interface NormalizedSchema extends PrettierGeneratorSchema {
   workspaceRoot: string;
@@ -26,7 +33,7 @@ function normalizeOptions(
   };
 }
 
-export default async function releaseGenerator(
+export default async function prettierGenerator(
   tree: Tree,
   options: PrettierGeneratorSchema,
 ) {
@@ -45,14 +52,7 @@ export default async function releaseGenerator(
     templateOptions,
   );
 
-  addDependenciesToPackageJson(
-    tree,
-    {},
-    {
-      // When @tractr/prettier-config will be open source we could use the addLatestSemverToPackageJson helper
-      [SEMVER_PACKAGE_NAME]: '^1.7.0',
-    },
-  );
+  await addPackageToPackageJson(tree, packagesToAdd);
 
   await formatFiles(tree);
 

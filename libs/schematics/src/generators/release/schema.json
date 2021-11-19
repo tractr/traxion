@@ -10,10 +10,10 @@
       },
       "description": "Nx project name",
       "type": "string",
-      "x-prompt": "What project would you like to add release feature ?"
+      "x-prompt": "What project would you like to add release feature (keep it empty if you want the sync release) ?"
     }
   },
-  "required": ["project"],
+  "required": [],
   "title": "",
   "type": "object"
 }
