@@ -1,3 +1,2 @@
-export * from './add-latest-semver-to-package-json';
-export * from './exec';
+export * from './add-package-to-package-json';
 export * from './npm-run';
