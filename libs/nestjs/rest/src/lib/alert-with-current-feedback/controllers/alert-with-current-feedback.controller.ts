@@ -1,8 +1,11 @@
-import { Controller, Get, Inject, Query } from '@nestjs/common';
+import { Controller, Get, Inject, Param, Query } from '@nestjs/common';
 import { Policies } from '@tractr/nestjs-core';
 
 import { Permission } from '@cali/common-casl';
-import { AlertWithCurrentFeedbackFindManyQueryDto } from '@cali/common-rest-dtos';
+import {
+  AlertWithCurrentFeedbackFindManyQueryDto,
+  AlertWithCurrentFeedbackFindUniqueParamsDto,
+} from '@cali/common-rest-dtos';
 import { ALERT_SERVICE, AlertService } from '@cali/nestjs-common';
 
 @Controller('alert/with-current-feedback')
@@ -10,6 +13,43 @@ export class AlertWithCurrentFeedbackController {
   constructor(
     @Inject(ALERT_SERVICE) private readonly alertService: AlertService,
   ) {}
+
+  /**
+   * Find a unique AlertPopulated entity
+   *
+   * @param queryDto - Dto of the request query
+   * @returns an array of AlertWithCurrentFeedback entities
+   */
+  @Get(':id')
+  @Policies(Permission.SEARCH_ALERT)
+  public async findUnique(
+    @Param() { id }: AlertWithCurrentFeedbackFindUniqueParamsDto,
+  ) {
+    return this.alertService.findUnique({
+      where: { id },
+      include: {
+        camera: {
+          include: {
+            shopSection: {
+              include: {
+                shopDepartment: {
+                  include: {
+                    shop: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+        alertFeedbacks: {
+          orderBy: {
+            createdAt: 'desc',
+          },
+          take: 1,
+        },
+      },
+    });
+  }
 
   /**
    * Find zero or more AlertPopulated entities that matches the filter

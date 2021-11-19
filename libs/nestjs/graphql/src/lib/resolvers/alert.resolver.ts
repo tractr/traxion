@@ -10,6 +10,10 @@ import { PUB_SUB_SERVICE } from '@cali/nestjs-pub-sub';
 export class AlertResolver {
   constructor(@Inject(PUB_SUB_SERVICE) private readonly pubSub: PubSub) {}
 
+  /**
+   * Provide a dummy root query to allow the schema to be builded
+   * @returns
+   */
   @Query(() => Alert)
   getAlert() {
     return {
@@ -17,10 +21,25 @@ export class AlertResolver {
     };
   }
 
+  /**
+   * Subscribe to alert creation notification
+   * @returns an alert created iterator
+   */
   @Subscription(() => Alert, {
     name: 'alertCreated',
   })
   alertCreatedHandler() {
     return this.pubSub.asyncIterator('alertCreated');
+  }
+
+  /**
+   * Subscribe to alert update notification
+   * @returns an alert updated iterator
+   */
+  @Subscription(() => Alert, {
+    name: 'alertUpdated',
+  })
+  alertUpdatedHandler() {
+    return this.pubSub.asyncIterator('alertUpdated');
   }
 }

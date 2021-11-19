@@ -1,1 +1,4 @@
-<p>alert-in-progress-list works!</p>
+<cali-alert-list-ui
+  *ngIf="alerts$ | async as alerts"
+  [alerts]="alerts"
+></cali-alert-list-ui>

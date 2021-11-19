@@ -4,12 +4,17 @@ import {
   extractAjaxResponseData,
   findMany,
   FindManyOptions,
+  findUnique,
+  FindUniqueOptions,
   fromDto,
   transformAndValidateMap,
 } from '../generated';
 
 import { AlertWithCurrentFeedback } from '@cali/common-models';
-import { AlertWithCurrentFeedbackFindManyQueryDto } from '@cali/common-rest-dtos';
+import {
+  AlertWithCurrentFeedbackFindManyQueryDto,
+  AlertWithCurrentFeedbackFindUniqueParamsDto,
+} from '@cali/common-rest-dtos';
 
 export class AlertWithCurrentFeedbackService {
   public apiUrl: URL;
@@ -35,6 +40,30 @@ export class AlertWithCurrentFeedbackService {
     ).pipe(
       switchMap((params) =>
         findMany(this.apiUrl, { ...params }, options).pipe(
+          extractAjaxResponseData(),
+          transformAndValidateMap(AlertWithCurrentFeedback),
+        ),
+      ),
+    );
+  }
+
+  /**
+   * Find one Model entity that matches the filter
+   *
+   * @param findUniqueQuery - Dto of the request query
+   * @param options - Ajax request options
+   * @returns a of Model entities
+   */
+  public findUnique$(
+    findUniqueQuery?: AlertWithCurrentFeedbackFindUniqueParamsDto,
+    options?: FindUniqueOptions,
+  ): Observable<AlertWithCurrentFeedback> {
+    return fromDto(
+      findUniqueQuery,
+      AlertWithCurrentFeedbackFindUniqueParamsDto,
+    ).pipe(
+      switchMap((params) =>
+        findUnique(this.apiUrl, { ...params }, {}, options).pipe(
           extractAjaxResponseData(),
           transformAndValidateMap(AlertWithCurrentFeedback),
         ),

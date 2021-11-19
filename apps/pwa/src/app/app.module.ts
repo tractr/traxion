@@ -11,10 +11,12 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { AngularAlertsUtilsModule } from '@cali/angular-alerts-utils';
 import { AngularCommonUiModule } from '@cali/angular-common-ui';
 import { AngularCommonUtilsModule } from '@cali/angular-common-utils';
 import { AngularRextModule } from '@cali/common-angular-rext-client';
 import { CommonGraphqlClientModule } from '@cali/common-graphql-client';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -25,10 +27,13 @@ registerLocaleData(localeFr);
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    /**
+     * Angular modules
+     */
     BrowserModule,
     BrowserAnimationsModule,
-    CommonGraphqlClientModule,
     HttpClientModule,
+    MetaModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -38,15 +43,25 @@ registerLocaleData(localeFr);
       useDefaultLang: true,
       defaultLanguage: 'fr',
     }),
-    MetaModule.forRoot(),
+    /**
+     * Routing module
+     */
     AppRoutingModule,
+    /**
+     * UI modules
+     */
     AngularCommonUiModule,
-    AngularCommonUtilsModule,
-    AngularRextModule.register({
+    /**
+     * Utils modules
+     */
+    CommonGraphqlClientModule,
+    AngularRextModule.forRoot({
       api: {
         url: 'http://localhost:4200/api',
       },
     }),
+    AngularCommonUtilsModule,
+    AngularAlertsUtilsModule,
   ],
   bootstrap: [AppComponent],
 })

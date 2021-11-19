@@ -18,6 +18,7 @@ import { PageInterface, PageService } from '@cali/angular-common-utils';
 export class AlertComponent implements OnInit, OnDestroy {
   idAlert$ = this.route.params.pipe(map((params) => <string>params.id));
 
+  // TODO: Centralize in an abstract Page class
   pageData: PageInterface = {
     title: 'page_title-alert-details',
   };

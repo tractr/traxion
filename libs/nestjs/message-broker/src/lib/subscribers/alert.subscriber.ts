@@ -33,14 +33,25 @@ export class AlertSubscriber {
     ...messageBrokerAlert
   }: MessageBrokerAlert) {
     try {
+      // Get default value for the new alert
+      const { createdAt, videoStatus, videoUrl } =
+        this.alertService.getDefaultInternals();
+
       // Insert new alert in database
       const alert = await this.alertService.create({
         data: {
           ...messageBrokerAlert,
+          createdAt,
           camera: { connect: { externalId: cameraExternalId } },
-          createdAt: this.alertService.getDefaultCreatedAt(),
-          videoStatus: this.alertService.getDefaultVideoStatus(),
-          videoUrl: this.alertService.getDefaultVideoUrl(),
+          videoStatus,
+          videoUrl,
+          // Init the first and empty alert feedback
+          alertFeedbacks: {
+            create: {
+              createdAt,
+              isArchived: false,
+            },
+          },
         },
       });
 
