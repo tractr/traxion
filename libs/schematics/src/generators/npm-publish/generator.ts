@@ -7,7 +7,7 @@ import {
   updateProjectConfiguration,
 } from '@nrwl/devkit';
 
-import { addLatestSemverToPackageJson } from '../../helpers';
+import { addPackageToPackageJson } from '../../helpers';
 import { NpmPublishGeneratorSchema } from './schema';
 
 export const SEMVER_PACKAGE_NAME = 'ngx-deploy-npm';
@@ -81,5 +81,5 @@ export default async function npmPublishGenerator(
 
   await formatFiles(tree);
 
-  return addLatestSemverToPackageJson(tree, SEMVER_PACKAGE_NAME);
+  return addPackageToPackageJson(tree, SEMVER_PACKAGE_NAME);
 }

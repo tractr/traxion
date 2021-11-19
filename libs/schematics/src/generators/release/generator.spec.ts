@@ -24,7 +24,7 @@ describe('release generator', () => {
     });
   });
 
-  it('should run successfully', async () => {
+  it('should add release to a specific project', async () => {
     await generator(appTree, options);
     const config = readProjectConfiguration(appTree, 'test');
 
@@ -35,6 +35,34 @@ describe('release generator', () => {
       executor: `${SEMVER_PACKAGE_NAME}:version`,
       options: {
         syncVersions: false,
+      },
+    });
+    expect(() => {
+      readProjectConfiguration(appTree, 'workspace');
+    }).toThrowError();
+
+    // expect package.json to have been updated
+    const packageJson = readJson(appTree, 'package.json');
+    expect(packageJson).toBeDefined();
+    expect(packageJson.devDependencies).toBeDefined();
+    expect(packageJson.devDependencies[SEMVER_PACKAGE_NAME]).toBeDefined();
+  });
+
+  it('should add release to the virtual workspace project', async () => {
+    await generator(appTree, {});
+    const config = readProjectConfiguration(appTree, 'test');
+
+    // expect workspace to have been update correctly
+    expect(config).toBeDefined();
+    expect(config.targets).toBeUndefined();
+
+    const workspace = readProjectConfiguration(appTree, 'workspace');
+
+    expect(workspace.targets).toBeDefined();
+    expect(workspace.targets?.release).toEqual({
+      executor: `${SEMVER_PACKAGE_NAME}:version`,
+      options: {
+        syncVersions: true,
       },
     });
 

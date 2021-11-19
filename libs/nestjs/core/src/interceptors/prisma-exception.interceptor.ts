@@ -1,24 +1,25 @@
 import {
-  Injectable,
-  NestInterceptor,
-  ExecutionContext,
   CallHandler,
   ConflictException,
+  ExecutionContext,
+  Injectable,
   InternalServerErrorException,
+  NestInterceptor,
   NotFoundException,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import {
-  PrismaClientKnownRequestError,
-  PrismaClientUnknownRequestError,
-  PrismaClientRustPanicError,
   PrismaClientInitializationError,
+  PrismaClientKnownRequestError,
+  PrismaClientRustPanicError,
+  PrismaClientUnknownRequestError,
   PrismaClientValidationError,
 } from '@prisma/client/runtime';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class PrismaExceptionInterceptor implements NestInterceptor {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     return next.handle().pipe(
       catchError((error) => {
