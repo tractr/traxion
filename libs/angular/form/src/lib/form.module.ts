@@ -14,6 +14,7 @@ import {
   FormItemComponent,
   FormRadioComponent,
   FormSelectComponent,
+  FormTimePickerComponent,
 } from './item';
 
 import { AngularComponentsModule } from '@tractr/angular-components';
@@ -34,6 +35,7 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     FormButtonComponent,
     FormComponent,
     FormDatePickerComponent,
+    FormTimePickerComponent,
     FormCheckboxGroupComponent,
     FormCheckboxComponent,
     FormArrayComponent,
@@ -48,6 +50,7 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     FormButtonComponent,
     FormComponent,
     FormDatePickerComponent,
+    FormTimePickerComponent,
     FormCheckboxGroupComponent,
     FormCheckboxComponent,
     FormArrayComponent,
