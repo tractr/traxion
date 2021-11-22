@@ -81,6 +81,7 @@
     "deepmerge": "^4.2.2",
     "dotenv": "10.0.0",
     "dotenv-expand": "^5.1.0",
+    "enquirer": "^2.3.6",
     "express": "^4.17.1",
     "faker": "^5.5.3",
     "fs-extra": "^10.0.0",
