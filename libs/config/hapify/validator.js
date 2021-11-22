@@ -26,10 +26,6 @@ if (!primary) {
 
 // Check fieds properties
 for (const field of fields) {
-  if (field.subtype === 'text')
-    errors.push(
-      `Subtype 'text' is not handled yet. Remove it from field '${field.name}'`,
-    );
   if (field.subtype === 'rich')
     errors.push(
       `Subtype 'rich' is not handled yet. Remove it from field '${field.name}'`,
@@ -74,6 +70,19 @@ for (const field of fields) {
   if (field.ownership && !(field.meta && field.meta.ownerKey)) {
     errors.push(
       `Entity field must have the meta 'ownerKey'. Fix field '${field.name}'`,
+    );
+  }
+  if (
+    field.type === 'string' &&
+    field.subtype !== 'text' &&
+    field.meta &&
+    field.meta.maxLength &&
+    (field.meta.maxLength > 255 ||
+      field.meta.maxLength < 1 ||
+      Number.isNaN(field.meta.maxLength))
+  ) {
+    errors.push(
+      `The value of the meta 'maxLength' must be between 1 and 255. Fix field '${field.name}'`,
     );
   }
 }

@@ -74,8 +74,10 @@ function getBaseFaker(f) {
   if (f.type === 'string' && f.subtype === 'email') return 'internet.email()';
   if (f.type === 'string' && f.subtype === 'password') return 'internet.password()';
   if (f.type === 'string' && f.subtype === 'url') return 'internet.url()';
+  if (f.type === 'string' && f.subtype === 'text') return 'lorem.paragraph()';
   if (f.type === 'boolean') return 'datatype.boolean()';
-  if (f.type === 'number') return 'datatype.number()';
+  if (f.type === 'number' && (!f.subtype || f.subtype === "integer")) return 'datatype.number()';
+  if (f.type === 'number' && (f.subtype === 'float' || f.subtype === 'latitude' || f.subtype === 'longitude')) return 'datatype.float()';
   if (f.type === 'datetime') return 'date.past()';
   if (f.type === 'entity') return 'datatype.uuid()';
   if (f.type === 'enum') return `random.arrayElement(Object.values(${root.names.pascal}${f.names.pascal}))`;
