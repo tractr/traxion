@@ -73,7 +73,7 @@ function getReferencedEntityPrimaryType(f) {
   } else {
     throw new Error("Only type 'string' is allowed for primary key");
   }
-  if(f.model.fields.primary.nullable){
+  if(f.nullable){
     out += "?";
   }
   switch(f.model.fields.primary.subtype) {

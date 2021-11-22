@@ -74,7 +74,7 @@ export class <<Model pascal>>FindManyQueryDto {
   <<endif>>
 
   <<if field string and not text>>
-  @MaxLength(255, {
+  @MaxLength(<<< if (field.meta.maxLength) { >>><<-field maxLength raw>><<<}else{>>>255<<<}>>>, {
     message: '<<field pascal>> field is too long',
   })
   <<endif>>
