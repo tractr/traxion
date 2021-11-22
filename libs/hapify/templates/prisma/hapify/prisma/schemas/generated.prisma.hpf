@@ -17,7 +17,7 @@
 <<# If the field has a relation oneOne or oneMany >>
 <<# We generate the first relation prisma field >>
     <<field camel>> <<field.model pascal>><<if field nullable>>?<<endif>> @relation("<<model pascal>>.<<field camel>>.<<field.model pascal>>.<<-field backRelation camel>>",fields: [<<field camel>><<=getReferencedEntityPrimary(field).names.pascal>>], references: [<<=getReferencedEntityPrimary(field).names.camel>>])
-    <<field camel>><<=getReferencedEntityPrimary(field).names.pascal>> <<=getReferencedEntityPrimaryType(field)>><<if field nullable>>?<<endif>>
+    <<field camel>><<=getReferencedEntityPrimary(field).names.pascal>> <<=getReferencedEntityPrimaryType(field)>>
 
 <<# If the field has a relation manyMany >>
         <<elseif field manyMany>>
@@ -67,17 +67,19 @@ function getReferencedEntityPrimary(f) {
 
 <<<
 function getReferencedEntityPrimaryType(f) {
-  if (f.model.fields.primary.type === 'string') return 'String';
-  if (f.model.fields.primary.type === 'number') return 'Int';
-  throw new Error("Only types 'number' and 'string' are allowed for primary key")
-}
->>>
-
-<<<
-function getEntityPrimaryType(m) {
-  if (m.fields.primary.type === 'string') return 'String';
-  if (m.fields.primary.type === 'number') return 'Int';
-  throw new Error("Only types 'number' and 'string' are allowed for primary key")
+  let out = "";
+  if(f.model.fields.primary.type === "string") {
+    out += "String";
+  } else {
+    throw new Error("Only type 'string' is allowed for primary key");
+  }
+  if(f.nullable){
+    out += "?";
+  }
+  switch(f.model.fields.primary.subtype) {
+    case 'text': return out += " @db.Text";
+    default: return out += " @db.VarChar(255)";
+  }
 }
 >>>
 
@@ -89,20 +91,30 @@ function prismaType(f, m) {
   if (f.type === "boolean") out += "Boolean";
   else if (f.type === "string") out += "String";
   else if (f.type === "enum") out += `${m.names.pascal}${f.names.pascal}`;
-  else if (f.type === "number") out += "Int";
-  else if (f.type === "integer") out += "Int";
-  else if (f.type === "float") out += "Float";
-  else if (f.type === "datetime") out += "DateTime";
-  else if (f.type === "entity")  {
+  else if (f.type === "number") {
+    if(f.subtype === "float" || f.subtype === "latitude" || f.subtype === "longitude") out += "Float";
+    else out += "Int";
+  } else if (f.type === "datetime") out += "DateTime";
+  else if (f.type === "entity") {
     out += f.m.names.pascal;
   }
 
   // Handle nullable and multiple fields
   if (f.multiple) out += "[]";
   else if (f.nullable) out += "?";
-  return out;
+
+  switch(f.type) {
+      case 'string':
+          switch(f.subtype) {
+              case 'text': return out += " @db.Text";
+              default: return out += " @db.VarChar(255)";
+          }
+      default: return out;
+  }
+
 }
 >>>
+
 
 <<<
 function primary(f) {

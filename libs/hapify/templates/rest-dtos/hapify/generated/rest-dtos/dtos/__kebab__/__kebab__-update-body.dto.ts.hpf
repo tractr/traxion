@@ -26,6 +26,10 @@ import {
   IsString,
   <<endif>>
 
+  <<if Fields (string and not text)>>
+  MaxLength,
+  <<endif>>
+
   <<if Fields url and not internal>>
   IsUrl, 
   <<endif>>
@@ -76,6 +80,12 @@ export class <<Model pascal>>UpdateBodyDto {
   @IsString(<<=listModifier(field)>>) 
   <<endif>>
 
+  <<if field string and not text>>
+  @MaxLength(<<< if (field.meta.maxLength) { >>><<-field maxLength raw>><<<}else{>>>255<<<}>>>, {
+    message: '<<field pascal>> field is too long',
+  })
+  <<endif>>
+
   <<if field enum>>
   @IsIn(Object.values(<<Model pascal>><<field pascal>>),<<=listModifier(field)>>) 
   <<endif>>
@@ -97,7 +107,7 @@ export class <<Model pascal>>UpdateBodyDto {
   <<endif>>
 
   <<if field number>>
-  @IsNumber({}, <<=listModifier(field)>>)
+  @IsNumber({<<if field not latitude and not longitude and not float>>maxDecimalPlaces: 0<<endif>>},<<=listModifier(field)>>)
   @TransformStringToInt()
   <<endif>>
 
