@@ -73,7 +73,7 @@ function getReferencedEntityPrimaryType(f) {
   } else {
     throw new Error("Only type 'string' is allowed for primary key");
   }
-  if(f.model.fields.primary.nullable){
+  if(f.nullable){
     out += "?";
   }
   switch(f.model.fields.primary.subtype) {
@@ -108,6 +108,11 @@ function prismaType(f, m) {
           switch(f.subtype) {
               case 'text': return out += " @db.Text";
               default: return out += " @db.VarChar(255)";
+          }
+      case 'datetime':
+          switch(f.subtype) {
+              case 'date': return out += " @db.Date";
+              case 'time': return out += " @db.Time(3)";
           }
       default: return out;
   }
