@@ -11,9 +11,13 @@ import { MessageBrokerPredictionLogModule } from '@cali/message-broker-predictio
     ConsoleModule,
     MessageBrokerAlertModule.register({
       url: 'amqp://localhost:5672',
+      user: 'guest',
+      password: 'guest',
     }),
     MessageBrokerPredictionLogModule.register({
       url: 'amqp://localhost:5672',
+      user: 'guest',
+      password: 'guest',
     }),
   ],
   providers: [AlertService, FramePerformanceService],

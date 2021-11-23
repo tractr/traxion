@@ -1,4 +1,4 @@
-import { IsUrl } from 'class-validator';
+import { IsString, IsUrl } from 'class-validator';
 
 export class MessageBrokerConfiguration {
   /**
@@ -11,4 +11,10 @@ export class MessageBrokerConfiguration {
     require_tld: false,
   })
   url!: string;
+
+  @IsString()
+  user!: string;
+
+  @IsString()
+  password!: string;
 }
