@@ -62,7 +62,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-          registry-url: https://npm.pkg.github.com
+          registry-url: ${{ secrets.NPM_REGISTRY_URL }}
 
       # We get our cache compare to our package-lock
       - uses: actions/cache@v2.1.4

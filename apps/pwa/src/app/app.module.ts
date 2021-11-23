@@ -7,7 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MetaModule } from '@ngx-meta/core';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {
+  ANGULAR_CONFIG_SERVICE,
+  AngularConfigService,
+} from '@tractr/angular-config';
 
+import { AppConfig } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -55,10 +60,16 @@ registerLocaleData(localeFr);
      * Utils modules
      */
     CommonGraphqlClientModule,
-    AngularRextModule.forRoot({
-      api: {
-        url: 'http://localhost:4200/api',
-      },
+    AngularRextModule.forRootAsync({
+      useFactory: (
+        _,
+        angularConfigService: AngularConfigService<AppConfig>,
+      ) => ({
+        api: {
+          url: angularConfigService.config?.api.uri ?? '',
+        },
+      }),
+      deps: [ANGULAR_CONFIG_SERVICE],
     }),
     AngularCommonUtilsModule,
     AngularAlertsUtilsModule,

@@ -72,6 +72,7 @@
     "@prisma/client": "^2.30.3",
     "@tractr/angular-casl": "^1.23.2",
     "@tractr/angular-components": "1.23.2",
+    "@tractr/angular-config": "^1.24.0",
     "@tractr/angular-form": "1.23.2",
     "@tractr/angular-tools": "^1.23.2",
     "@tractr/common": "^1.23.2",
