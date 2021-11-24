@@ -1,19 +1,21 @@
 {
   "cSpell.words": [
-    "Modelisation",
-    "Upsert",
     "alertes",
     "bitwarden",
     "casl",
+    "deepmerge",
+    "Dockerized",
     "dtos",
     "fanout",
     "hapify",
+    "Modelisation",
     "nestjs",
     "rabbitmq",
     "rext",
     "statistiques",
     "tailwindcss",
     "tractr",
+    "Upsert",
     "utilisateurs"
   ]
 }
