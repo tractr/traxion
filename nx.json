@@ -29,6 +29,9 @@
     "angular-common-utils": {
       "tags": []
     },
+    "angular-feedback-ui": {
+      "tags": []
+    },
     "api": {
       "tags": []
     },

@@ -228,6 +228,62 @@
         }
       }
     },
+    "angular-feedback-ui": {
+      "prefix": "cali",
+      "projectType": "library",
+      "root": "libs/angular/feedback/ui",
+      "sourceRoot": "libs/angular/feedback/ui/src",
+      "targets": {
+        "build-storybook": {
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          },
+          "executor": "@nrwl/storybook:build",
+          "options": {
+            "config": {
+              "configFolder": "libs/angular/feedback/ui/.storybook"
+            },
+            "outputPath": "dist/storybook/angular-feedback-ui",
+            "uiFramework": "@storybook/angular"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular/feedback/ui/src/**/*.ts",
+              "libs/angular/feedback/ui/src/**/*.html"
+            ]
+          }
+        },
+        "storybook": {
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          },
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "config": {
+              "configFolder": "libs/angular/feedback/ui/.storybook"
+            },
+            "port": 4400,
+            "uiFramework": "@storybook/angular"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular/feedback/ui/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/angular/feedback/ui"]
+        }
+      }
+    },
     "api": {
       "projectType": "application",
       "root": "apps/api",

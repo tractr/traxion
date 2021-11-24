@@ -19,6 +19,7 @@
       "@cali/angular-alerts-utils": ["libs/angular/alerts/utils/src/index.ts"],
       "@cali/angular-common-ui": ["libs/angular/common/ui/src/index.ts"],
       "@cali/angular-common-utils": ["libs/angular/common/utils/src/index.ts"],
+      "@cali/angular-feedback-ui": ["libs/angular/feedback/ui/src/index.ts"],
       "@cali/common-angular-rext-client": [
         "libs/common/angular-rext-client/src/index.ts"
       ],
