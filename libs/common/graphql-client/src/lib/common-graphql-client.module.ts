@@ -6,7 +6,7 @@ import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { OperationDefinitionNode } from 'graphql';
 
-import { AlertCreatedGql } from './services';
+import { AlertCreatedGql, AlertUpdatedGql } from './services';
 
 @NgModule({
   providers: [
@@ -50,6 +50,7 @@ import { AlertCreatedGql } from './services';
       deps: [HttpLink],
     },
     AlertCreatedGql,
+    AlertUpdatedGql,
   ],
 })
 export class CommonGraphqlClientModule {}

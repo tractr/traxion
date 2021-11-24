@@ -9,6 +9,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {
   ANGULAR_CONFIG_SERVICE,
+  AngularConfigModule,
   AngularConfigService,
 } from '@tractr/angular-config';
 
@@ -59,6 +60,7 @@ registerLocaleData(localeFr);
     /**
      * Utils modules
      */
+    AngularConfigModule.forRoot(),
     CommonGraphqlClientModule,
     AngularRextModule.forRootAsync({
       useFactory: (
