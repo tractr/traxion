@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import {
+  FeedbackEstimationsUiComponent,
   FeedbackPertinentUiComponent,
   FeedbackQualificationsSelectorUiComponent,
   FeedbackTypesSelectorUiComponent,
@@ -16,6 +17,7 @@ import { AngularCommonUiModule } from '@cali/angular-common-ui';
     FeedbackTypesSelectorUiComponent,
     FeedbackQualificationsSelectorUiComponent,
     FeedbackPertinentUiComponent,
+    FeedbackEstimationsUiComponent,
   ],
   exports: [],
 })

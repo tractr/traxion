@@ -1,0 +1,22 @@
+<div class="estimations-wrapper">
+  <nz-select
+    [(ngModel)]="itemCategorySelected"
+    [nzPlaceHolder]="
+      'feedback-estimations-category-item-placeholder' | translate
+    "
+  >
+    <nz-option
+      *ngFor="let itemCategory of itemsCategory"
+      [nzValue]="itemCategory.id"
+      [nzLabel]="itemCategory.name"
+    ></nz-option>
+  </nz-select>
+  <nz-input-number
+    [(ngModel)]="theftValue"
+    [nzMin]="0"
+    [nzFormatter]="formatterEuro"
+    [nzStep]="0.01"
+    [nzPrecision]="2"
+    nzPrecisionMode="toFixed"
+  ></nz-input-number>
+</div>

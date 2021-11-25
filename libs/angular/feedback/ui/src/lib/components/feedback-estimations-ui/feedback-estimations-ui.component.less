@@ -1,0 +1,37 @@
+.estimations-wrapper{
+    @apply flex items-center justify-between;
+
+    nz-select.ant-select{
+        @apply w-1/2 mr-4;
+
+        &::ng-deep{
+            nz-select-top-control{
+                @apply h-auto py-1 px-3 rounded;
+            }
+        }
+        
+        &:hover, &.ant-select-focused{
+            &::ng-deep{
+                nz-select-top-control{
+                    @apply border-cali-dark shadow-none;
+                }
+            }
+        }
+    }
+
+    nz-input-number{
+        @apply w-1/2 ml-4 flex items-center rounded;
+
+        &:hover, &:focus, &.ant-input-number-focused{
+            @apply border-cali-dark shadow-none;
+        }
+
+        &::ng-deep{
+            & > .ant-input-number-input-wrap{
+                input.ant-input-number-input{
+                    @apply h-auto py-2 px-3;
+                }
+            }
+        }
+    }
+}
