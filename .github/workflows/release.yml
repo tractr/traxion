@@ -56,8 +56,8 @@ jobs:
           git config --local user.email 'tractr-bot@users.noreply.github.com'
 
       # We run our version script
-      - name: Run npm affected:release
-        run: npm run affected:release -- --base latest
+      - name: nx run workspace:version
+        run: npx nx run workspace:release --base latest
 
       - name: Push changes
         uses: ad-m/github-push-action@master

@@ -1604,6 +1604,17 @@
           "outputs": ["coverage/apps/video-analysis-mock"]
         }
       }
+    },
+    "workspace": {
+      "root": ".",
+      "targets": {
+        "release": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "syncVersions": true
+          }
+        }
+      }
     }
   },
   "version": 2
