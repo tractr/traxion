@@ -20,8 +20,8 @@ import { AppComponent } from './app.component';
 import { AngularAlertsUtilsModule } from '@cali/angular-alerts-utils';
 import { AngularCommonUiModule } from '@cali/angular-common-ui';
 import { AngularCommonUtilsModule } from '@cali/angular-common-utils';
-import { AngularRextModule } from '@cali/common-angular-rext-client';
-import { CommonGraphqlClientModule } from '@cali/common-graphql-client';
+import { AngularGraphqlClientModule } from '@cali/angular-graphql-client';
+import { AngularRextClientModule } from '@cali/angular-rext-client';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -61,7 +61,7 @@ registerLocaleData(localeFr);
      * Utils modules
      */
     AngularConfigModule.forRoot(),
-    AngularRextModule.forRootAsync({
+    AngularRextClientModule.forRootAsync({
       useFactory: (
         _,
         angularConfigService: AngularConfigService<AppConfig>,
@@ -72,7 +72,7 @@ registerLocaleData(localeFr);
       }),
       deps: [ANGULAR_CONFIG_SERVICE],
     }),
-    CommonGraphqlClientModule.forRootAsync({
+    AngularGraphqlClientModule.forRootAsync({
       useFactory: (_, angularConfigService: AngularConfigService<AppConfig>) =>
         angularConfigService.config?.graphql,
       deps: [ANGULAR_CONFIG_SERVICE],

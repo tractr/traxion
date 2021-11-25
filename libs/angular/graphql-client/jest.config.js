@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'common-graphql-client',
+  displayName: 'angular-graphql-client',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/common/graphql-client',
+  coverageDirectory: '../../../coverage/libs/angular/graphql-client',
   transform: {
     '^.+\\.(ts|js|html)$': 'jest-preset-angular',
   },

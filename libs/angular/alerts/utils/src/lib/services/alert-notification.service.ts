@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { share } from 'rxjs';
 
-import { AlertCreatedGql, AlertUpdatedGql } from '@cali/common-graphql-client';
+import { AlertCreatedGql, AlertUpdatedGql } from '@cali/angular-graphql-client';
 
 @Injectable()
 export class AlertNotificationService {

@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { AlertService } from '@cali/common-angular-rext-client';
+import { AlertService } from '@cali/angular-rext-client';
 import { Alert } from '@cali/common-models';
 
 @Component({

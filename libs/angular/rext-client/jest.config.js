@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'common-angular-rext-client',
+  displayName: 'angular-rext-client',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/common/angular-rext-client',
+  coverageDirectory: '../../../coverage/libs/angular/rext-client',
   transform: {
     '^.+\\.(ts|js|html)$': 'jest-preset-angular',
   },

@@ -20,14 +20,12 @@
       "@cali/angular-common-ui": ["libs/angular/common/ui/src/index.ts"],
       "@cali/angular-common-utils": ["libs/angular/common/utils/src/index.ts"],
       "@cali/angular-feedback-ui": ["libs/angular/feedback/ui/src/index.ts"],
-      "@cali/common-angular-rext-client": [
-        "libs/common/angular-rext-client/src/index.ts"
+      "@cali/angular-graphql-client": [
+        "libs/angular/graphql-client/src/index.ts"
       ],
+      "@cali/angular-rext-client": ["libs/angular/rext-client/src/index.ts"],
       "@cali/common-business": ["libs/common/business/src/index.ts"],
       "@cali/common-casl": ["libs/common/casl/src/index.ts"],
-      "@cali/common-graphql-client": [
-        "libs/common/graphql-client/src/index.ts"
-      ],
       "@cali/common-models": ["libs/common/models/src/index.ts"],
       "@cali/common-rest-dtos": ["libs/common/rest-dtos/src/index.ts"],
       "@cali/common-rext-client": ["libs/common/rext-client/src/index.ts"],

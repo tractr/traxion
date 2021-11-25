@@ -1,29 +1,29 @@
-nz-radio-group{
+nz-radio-group {
   @apply w-full flex justify-between items-center;
 
-  label.ant-radio-button-wrapper{
+  label.ant-radio-button-wrapper {
     @apply border-cali-dark border rounded font-semibold text-sm text-cali-dark flex items-center h-auto py-2 px-4;
 
     &::ng-deep > span:not(.ant-radio-button) {
       @apply flex items-center;
 
-      i{
+      i {
         @apply max-w-0 ml-0 text-base overflow-hidden transition-all;
       }
     }
 
-    &:before{
+    &:before {
       display: none;
     }
 
-    &.ant-radio-button-wrapper-checked{
+    &.ant-radio-button-wrapper-checked {
       @apply border border-cali-dark bg-cali-dark text-white;
 
       &::ng-deep > span:not(.ant-radio-button) {
-      i{
-        @apply max-w-xs ml-2;
+        i {
+          @apply max-w-xs ml-2;
+        }
       }
-    }
     }
   }
 }

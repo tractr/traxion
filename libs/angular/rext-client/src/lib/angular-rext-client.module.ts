@@ -32,31 +32,31 @@ import { AlertWithCurrentFeedbackService } from './services';
     UserService,
   ],
 })
-export class AngularRextModule extends ModuleOptionsFactory<
+export class AngularRextClientModule extends ModuleOptionsFactory<
   AngularRextConfiguration,
   AngularRextConfiguration
 >(ANGULAR_REXT_CONFIGURATION) {
   static register(
     options: AngularRextConfiguration,
-  ): ModuleWithProviders<AngularRextModule> {
+  ): ModuleWithProviders<AngularRextClientModule> {
     return super.register(options);
   }
 
   static forRoot(
     options: AngularRextConfiguration,
-  ): ModuleWithProviders<AngularRextModule> {
+  ): ModuleWithProviders<AngularRextClientModule> {
     return super.forRoot(options);
   }
 
   static registerAsync(
     options: AsyncOptions<AngularRextConfiguration, AngularRextConfiguration>,
-  ): ModuleWithProviders<AngularRextModule> {
+  ): ModuleWithProviders<AngularRextClientModule> {
     return super.registerAsync(options);
   }
 
   static forRootAsync(
     options: AsyncOptions<AngularRextConfiguration, AngularRextConfiguration>,
-  ): ModuleWithProviders<AngularRextModule> {
+  ): ModuleWithProviders<AngularRextClientModule> {
     return super.forRootAsync(options);
   }
 }

@@ -60,31 +60,31 @@ import { AlertCreatedGql, AlertUpdatedGql } from './services';
     },
   ],
 })
-export class CommonGraphqlClientModule extends ModuleOptionsFactory<GraphqlClientConfiguration>(
+export class AngularGraphqlClientModule extends ModuleOptionsFactory<GraphqlClientConfiguration>(
   GRAPHQL_CLIENT_CONFIGURATION,
   transformAndValidate(GraphqlClientConfiguration),
 ) {
   static register(
     options: GraphqlClientConfiguration,
-  ): ModuleWithProviders<CommonGraphqlClientModule> {
+  ): ModuleWithProviders<AngularGraphqlClientModule> {
     return super.register(options);
   }
 
   static forRoot(
     options: GraphqlClientConfiguration,
-  ): ModuleWithProviders<CommonGraphqlClientModule> {
+  ): ModuleWithProviders<AngularGraphqlClientModule> {
     return super.forRoot(options);
   }
 
   static registerAsync(
     options: AsyncOptions<GraphqlClientConfiguration>,
-  ): ModuleWithProviders<CommonGraphqlClientModule> {
+  ): ModuleWithProviders<AngularGraphqlClientModule> {
     return super.registerAsync(options);
   }
 
   static forRootAsync(
     options: AsyncOptions<GraphqlClientConfiguration>,
-  ): ModuleWithProviders<CommonGraphqlClientModule> {
+  ): ModuleWithProviders<AngularGraphqlClientModule> {
     return super.forRootAsync(options);
   }
 }

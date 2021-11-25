@@ -32,20 +32,20 @@
     "angular-feedback-ui": {
       "tags": []
     },
-    "api": {
+    "angular-graphql-client": {
       "tags": []
     },
-    "common-angular-rext-client": {
+    "angular-rext-client": {
       "implicitDependencies": ["common-rext-client"],
+      "tags": []
+    },
+    "api": {
       "tags": []
     },
     "common-business": {
       "tags": []
     },
     "common-casl": {
-      "tags": []
-    },
-    "common-graphql-client": {
       "tags": []
     },
     "common-models": {

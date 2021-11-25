@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { AlertFiltersArchived } from '@cali/angular-alerts-ui';
-import { AlertWithCurrentFeedbackService } from '@cali/common-angular-rext-client';
+import { AlertWithCurrentFeedbackService } from '@cali/angular-rext-client';
 import { AlertWithCurrentFeedback } from '@cali/common-models';
 
 @Component({

@@ -2,7 +2,7 @@
  * Export custom code
  */
 export * from './lib/services';
-export * from './lib/angular-rext.module';
+export * from './lib/angular-rext-client.module';
 
 /**
  * Export generated code

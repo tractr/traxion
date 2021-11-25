@@ -1,6 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 
-import { mockNumFrame, parseNumFrame } from '@cali/common-business';
+import { mockNumFrame } from '@cali/common-business';
 import {
   AlertFeedbackQualification,
   AlertFeedbackType,

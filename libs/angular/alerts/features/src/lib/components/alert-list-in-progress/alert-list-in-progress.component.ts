@@ -15,7 +15,7 @@ import {
 } from 'rxjs';
 
 import { AlertNotificationService } from '@cali/angular-alerts-utils';
-import { AlertWithCurrentFeedbackService } from '@cali/common-angular-rext-client';
+import { AlertWithCurrentFeedbackService } from '@cali/angular-rext-client';
 import { AlertWithCurrentFeedback } from '@cali/common-models';
 
 enum EventType {
