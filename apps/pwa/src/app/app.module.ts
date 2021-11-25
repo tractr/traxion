@@ -61,7 +61,6 @@ registerLocaleData(localeFr);
      * Utils modules
      */
     AngularConfigModule.forRoot(),
-    CommonGraphqlClientModule,
     AngularRextModule.forRootAsync({
       useFactory: (
         _,
@@ -71,6 +70,11 @@ registerLocaleData(localeFr);
           url: angularConfigService.config?.api.uri ?? '',
         },
       }),
+      deps: [ANGULAR_CONFIG_SERVICE],
+    }),
+    CommonGraphqlClientModule.forRootAsync({
+      useFactory: (_, angularConfigService: AngularConfigService<AppConfig>) =>
+        angularConfigService.config?.graphql,
       deps: [ANGULAR_CONFIG_SERVICE],
     }),
     AngularCommonUtilsModule,

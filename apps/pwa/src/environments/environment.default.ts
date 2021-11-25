@@ -11,10 +11,10 @@ export class AppApiConfig {
 
 export class AppGraphqlConfig {
   @IsString()
-  uri!: string;
+  httpUri!: string;
 
   @IsString()
-  ws!: string;
+  wsUri!: string;
 }
 
 export class AppConfig {
@@ -45,8 +45,8 @@ export function getConfig(appConfig: AngularConfig): AppConfig {
       uri: API_URL,
     },
     graphql: {
-      uri: GRAPHQL_URL,
-      ws: `${GRAPHQL_URL.replace('https', 'ws').replace('http', 'ws')}`,
+      httpUri: GRAPHQL_URL,
+      wsUri: `${GRAPHQL_URL.replace('https', 'ws').replace('http', 'ws')}`,
     },
   });
 }

@@ -1,26 +1,35 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { InMemoryCache, split } from '@apollo/client/core';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { AsyncOptions, ModuleOptionsFactory } from '@tractr/angular-tools';
+import { transformAndValidate } from '@tractr/common';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { OperationDefinitionNode } from 'graphql';
 
+import { GRAPHQL_CLIENT_CONFIGURATION } from './constants/graphql-client-configuration.constant';
+import { GraphqlClientConfiguration } from './dtos/graphql-client-configuration.dto';
 import { AlertCreatedGql, AlertUpdatedGql } from './services';
 
 @NgModule({
   providers: [
+    AlertCreatedGql,
+    AlertUpdatedGql,
     {
       provide: APOLLO_OPTIONS,
-      useFactory(httpLink: HttpLink) {
+      useFactory(
+        httpLink: HttpLink,
+        configuration: GraphqlClientConfiguration,
+      ) {
         // Create an http link:
         const http = httpLink.create({
-          uri: 'http://localhost:3000/graphql',
+          uri: configuration.httpUri,
         });
 
         // Create a WebSocket link:
         const ws = new WebSocketLink({
-          uri: `ws://localhost:3000/graphql`,
+          uri: configuration.wsUri,
           options: {
             reconnect: true,
           },
@@ -47,10 +56,35 @@ import { AlertCreatedGql, AlertUpdatedGql } from './services';
           cache: new InMemoryCache(),
         };
       },
-      deps: [HttpLink],
+      deps: [HttpLink, GRAPHQL_CLIENT_CONFIGURATION],
     },
-    AlertCreatedGql,
-    AlertUpdatedGql,
   ],
 })
-export class CommonGraphqlClientModule {}
+export class CommonGraphqlClientModule extends ModuleOptionsFactory<GraphqlClientConfiguration>(
+  GRAPHQL_CLIENT_CONFIGURATION,
+  transformAndValidate(GraphqlClientConfiguration),
+) {
+  static register(
+    options: GraphqlClientConfiguration,
+  ): ModuleWithProviders<CommonGraphqlClientModule> {
+    return super.register(options);
+  }
+
+  static forRoot(
+    options: GraphqlClientConfiguration,
+  ): ModuleWithProviders<CommonGraphqlClientModule> {
+    return super.forRoot(options);
+  }
+
+  static registerAsync(
+    options: AsyncOptions<GraphqlClientConfiguration>,
+  ): ModuleWithProviders<CommonGraphqlClientModule> {
+    return super.registerAsync(options);
+  }
+
+  static forRootAsync(
+    options: AsyncOptions<GraphqlClientConfiguration>,
+  ): ModuleWithProviders<CommonGraphqlClientModule> {
+    return super.forRootAsync(options);
+  }
+}
