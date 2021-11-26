@@ -1,22 +1,10 @@
 <nz-radio-group [(ngModel)]="alertFeedbackQualification">
-  <label nz-radio-button nzValue="stopped"
-    >{{ 'feedback-qualification-stopped' | translate
-    }}<i nz-icon nzType="check" nzTheme="outline"></i
-  ></label>
-  <label nz-radio-button nzValue="unstopped"
-    >{{ 'feedback-qualification-unstopped' | translate
-    }}<i nz-icon nzType="check" nzTheme="outline"></i
-  ></label>
-  <label nz-radio-button nzValue="dissuasion"
-    >{{ 'feedback-qualification-dissuasion' | translate
-    }}<i nz-icon nzType="check" nzTheme="outline"></i
-  ></label>
-  <label nz-radio-button nzValue="nothingSuspect"
-    >{{ 'feedback-qualification-nothingSuspect' | translate
-    }}<i nz-icon nzType="check" nzTheme="outline"></i
-  ></label>
-  <label nz-radio-button nzValue="suspectBehaviour"
-    >{{ 'feedback-qualification-suspectBehaviour' | translate
-    }}<i nz-icon nzType="check" nzTheme="outline"></i
-  ></label>
+  <label
+    *ngFor="let qualification of feedbackQualifications"
+    nz-radio-button
+    [nzValue]="qualification"
+  >
+    {{ 'feedback-qualification-' + qualification | translate }}
+    <i nz-icon nzType="check" nzTheme="outline"></i>
+  </label>
 </nz-radio-group>

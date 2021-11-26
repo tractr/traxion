@@ -6,6 +6,7 @@ import {
   FeedbackEstimationsUiComponent,
   FeedbackPertinentUiComponent,
   FeedbackQualificationsSelectorUiComponent,
+  FeedbackSurveyUiComponent,
   FeedbackTypesSelectorUiComponent,
 } from './components';
 
@@ -18,6 +19,7 @@ import { AngularCommonUiModule } from '@cali/angular-common-ui';
     FeedbackQualificationsSelectorUiComponent,
     FeedbackPertinentUiComponent,
     FeedbackEstimationsUiComponent,
+    FeedbackSurveyUiComponent,
   ],
   exports: [],
 })

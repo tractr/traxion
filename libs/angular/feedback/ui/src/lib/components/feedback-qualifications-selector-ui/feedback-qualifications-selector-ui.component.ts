@@ -6,7 +6,10 @@ import {
   Output,
 } from '@angular/core';
 
-import { AlertFeedbackQualification } from '@cali/common-models';
+import {
+  AlertFeedbackQualification,
+  AlertFeedbackType,
+} from '@cali/common-models';
 
 @Component({
   selector: 'cali-feedback-qualifications-selector-ui',
@@ -15,8 +18,47 @@ import { AlertFeedbackQualification } from '@cali/common-models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedbackQualificationsSelectorUiComponent {
-  @Input() alertFeedbackQualification: AlertFeedbackQualification | null = null;
+  /** Getter and setter to alertFeedbackType variable */
+  @Input()
+  set alertFeedbackType(type: AlertFeedbackType) {
+    this.feedbackQualifications = this.getQualifications(type);
+  }
+  /** Getter and setter to alertFeedbackType variable */
 
-  @Output() alertFeedbackQualificationChange =
-    new EventEmitter<AlertFeedbackQualification>();
+  /** Getter and setter to alertFeedbackQualification variable */
+  private alertFeedbackQualificationValue: AlertFeedbackQualification | null =
+    null;
+
+  @Output() alertFeedbackQualificationChange = new EventEmitter();
+
+  @Input()
+  get alertFeedbackQualification() {
+    return this.alertFeedbackQualificationValue;
+  }
+
+  set alertFeedbackQualification(qualification) {
+    this.alertFeedbackQualificationValue = qualification;
+    this.alertFeedbackQualificationChange.emit(
+      this.alertFeedbackQualificationValue,
+    );
+  }
+  /** Getter and setter to alertFeedbackQualification variable */
+
+  feedbackQualifications: AlertFeedbackQualification[] = [];
+
+  getQualifications(
+    feedbackType: AlertFeedbackType,
+  ): AlertFeedbackQualification[] {
+    if (feedbackType === AlertFeedbackType.falseAlert)
+      return [
+        AlertFeedbackQualification.nothingSuspect,
+        AlertFeedbackQualification.suspectBehaviour,
+      ];
+
+    return [
+      AlertFeedbackQualification.stopped,
+      AlertFeedbackQualification.unstopped,
+      AlertFeedbackQualification.dissuasion,
+    ];
+  }
 }

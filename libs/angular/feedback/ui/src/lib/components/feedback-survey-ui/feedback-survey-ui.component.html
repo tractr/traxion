@@ -1,0 +1,40 @@
+<div class="feedback-survey-wrapper">
+  <div class="row-survey">
+    <span>1</span>
+    <cali-feedback-types-selector-ui
+      [alertFeedbackType]="alertFeedback.type"
+      (alertFeedbackTypeChange)="alertFeedbackTypeChange($event)"
+    ></cali-feedback-types-selector-ui>
+  </div>
+  <div class="row-survey" *ngIf="alertFeedback.type">
+    <span>2</span>
+    <cali-feedback-qualifications-selector-ui
+      [alertFeedbackType]="alertFeedback.type"
+      [alertFeedbackQualification]="alertFeedback.qualification"
+      (alertFeedbackQualificationChange)="
+        alertFeedbackQualificationChange($event)
+      "
+    ></cali-feedback-qualifications-selector-ui>
+  </div>
+  <cali-feedback-pertinent-ui
+    *ngIf="alertFeedback.qualification === 'nothingSuspect'"
+    [alertFeedbackPertinent]="alertFeedback.isPertinent"
+    (alertFeedbackPertinentChange)="alertFeedbackPertinentChange($event)"
+  ></cali-feedback-pertinent-ui>
+  <div
+    class="row-survey"
+    *ngIf="
+      alertFeedback.qualification &&
+      alertFeedback.qualification !== 'nothingSuspect' &&
+      alertFeedback.qualification !== 'suspectBehaviour' &&
+      alertFeedback.qualification !== 'dissuasion'
+    "
+  >
+    <span>3</span>
+    <cali-feedback-estimations-ui
+      [itemsCategory]="itemsCategory"
+      [itemCategorySelected]="null"
+      [theftValue]="0"
+    ></cali-feedback-estimations-ui>
+  </div>
+</div>

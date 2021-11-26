@@ -13,7 +13,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedbackPertinentUiComponent {
-  @Input() alertFeedbackPertinent = false;
+  @Input() alertFeedbackPertinent: boolean | null = false;
 
   @Output() alertFeedbackPertinentChange = new EventEmitter<boolean>();
 }

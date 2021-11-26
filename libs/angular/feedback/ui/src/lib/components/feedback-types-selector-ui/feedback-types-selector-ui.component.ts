@@ -15,7 +15,17 @@ import { AlertFeedbackType } from '@cali/common-models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedbackTypesSelectorUiComponent {
-  @Input() alertFeedbackType: AlertFeedbackType | null = null;
+  private alertFeedbackTypeValue: AlertFeedbackType | null = null;
 
-  @Output() alertFeedbackTypeChange = new EventEmitter<AlertFeedbackType>();
+  @Output() alertFeedbackTypeChange = new EventEmitter();
+
+  @Input()
+  get alertFeedbackType() {
+    return this.alertFeedbackTypeValue;
+  }
+
+  set alertFeedbackType(type) {
+    this.alertFeedbackTypeValue = type;
+    this.alertFeedbackTypeChange.emit(this.alertFeedbackTypeValue);
+  }
 }
