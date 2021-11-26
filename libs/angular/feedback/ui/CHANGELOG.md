@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.4.0](https://github.com/tractr/cali/compare/v0.3.0...v0.4.0) (2021-11-26)
+
+
+### Features
+
+* create component feedback status ([#56](https://github.com/tractr/cali/issues/56)) ([d428d8e](https://github.com/tractr/cali/commit/d428d8e61c27ef83053f64c8b705020ba7ddf18e))
+
+
+
 # [0.3.0](https://github.com/tractr/cali/compare/v0.2.0...v0.3.0) (2021-11-26)
 
 
