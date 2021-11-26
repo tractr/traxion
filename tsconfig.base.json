@@ -42,6 +42,9 @@
       "@cali/message-broker-prediction-log": [
         "libs/message-broker/prediction-log/src/index.ts"
       ],
+      "@cali/message-broker-video-generation": [
+        "libs/message-broker/video-generation/src/index.ts"
+      ],
       "@cali/nestjs-common": ["libs/nestjs/common/src/index.ts"],
       "@cali/nestjs-graphql": ["libs/nestjs/graphql/src/index.ts"],
       "@cali/nestjs-message-broker": [

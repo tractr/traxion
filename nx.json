@@ -87,6 +87,9 @@
       "implicitDependencies": ["message-broker-common"],
       "tags": []
     },
+    "message-broker-video-generation": {
+      "tags": []
+    },
     "nestjs-common": {
       "implicitDependencies": ["common-models"],
       "tags": []

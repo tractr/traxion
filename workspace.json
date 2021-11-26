@@ -1047,6 +1047,38 @@
         }
       }
     },
+    "message-broker-video-generation": {
+      "projectType": "library",
+      "root": "libs/message-broker/video-generation",
+      "sourceRoot": "libs/message-broker/video-generation/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/message-broker/video-generation/*.md"],
+            "main": "libs/message-broker/video-generation/src/index.ts",
+            "outputPath": "dist/libs/message-broker/video-generation",
+            "packageJson": "libs/message-broker/video-generation/package.json",
+            "tsConfig": "libs/message-broker/video-generation/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/message-broker/video-generation/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/message-broker/video-generation/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/message-broker/video-generation"]
+        }
+      }
+    },
     "nestjs-common": {
       "projectType": "library",
       "root": "libs/nestjs/common",
