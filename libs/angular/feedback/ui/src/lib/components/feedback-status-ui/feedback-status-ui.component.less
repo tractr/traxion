@@ -1,0 +1,17 @@
+.status-feedback{
+  @apply text-center text-white text-base font-normal p-2;
+
+  &.new-alert{
+    @apply bg-cali-red;
+  }
+  &.archived{
+    @apply bg-cali-green;
+  }
+  &.in-progress{
+    @apply bg-cali-orange;
+  }
+
+  & > span{
+    @apply font-semibold;
+  }
+}

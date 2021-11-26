@@ -20,6 +20,17 @@
   "status-alert-type-new-alert": "À traiter",
   "status-alert-type-suspectBehaviour": "Comportement suspect",
   "status-alert-type-thief": "Signaler aux agents",
+  "status-feedback-archived-archived": "Traité / archivé",
+  "status-feedback-label": "Statut",
+  "status-feedback-new-newAlert": "À traiter",
+  "status-feedback-qualification-dissuasion": "Dissuadé",
+  "status-feedback-qualification-nothingSuspect": "Rien à signaler",
+  "status-feedback-qualification-stopped": "Interpellation",
+  "status-feedback-qualification-suspectBehaviour": "Suspect",
+  "status-feedback-qualification-unstopped": "Échappé",
+  "status-feedback-type-falseAlert": "Fausse alerte",
+  "status-feedback-type-suspectBehaviour": "Comportement suspect",
+  "status-feedback-type-thief": "Signalé aux agents",
   "users": "Utilisateurs",
   "video-alerts": "Alertes vidéos"
 }

@@ -10,6 +10,7 @@ module.exports = {
         cali: {
           red: '#FF5E5E',
           orange: '#FF9140',
+          green: '#3FDA5A',
           dark: '#424B5A',
         },
       },

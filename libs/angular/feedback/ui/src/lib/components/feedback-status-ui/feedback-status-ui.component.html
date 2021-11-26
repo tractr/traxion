@@ -1,0 +1,16 @@
+<div
+  class="status-feedback"
+  [ngClass]="{
+    'new-alert': statusFeedback.state === 'new',
+    'in-progress':
+      statusFeedback.state === 'type' ||
+      statusFeedback.state === 'qualification',
+    archived: statusFeedback.state === 'archived'
+  }"
+>
+  {{ 'status-feedback-label' | translate }}:
+  <span>{{
+    'status-feedback-' + statusFeedback.state + '-' + statusFeedback.label
+      | translate
+  }}</span>
+</div>
