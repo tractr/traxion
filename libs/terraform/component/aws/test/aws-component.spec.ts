@@ -1,4 +1,4 @@
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '../src';
 
 describe('Unit tests of AwsComponent', () => {
   describe('test trimName method', () => {
