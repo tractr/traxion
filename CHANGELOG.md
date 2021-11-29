@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.25.0](https://github.com/tractr/stack/compare/v1.24.0...v1.25.0) (2021-11-29)
+
+
+### Bug Fixes
+
+* add eslint and prettier schematics ([#294](https://github.com/tractr/stack/issues/294)) ([38ec874](https://github.com/tractr/stack/commit/38ec8749579d829b4e07d880624de65c99f1b0e7))
+* update workspace release target from :version to :release ([932310f](https://github.com/tractr/stack/commit/932310f1a6350f70a00ed98c6ad1b1605d43a945))
+
+
+### Features
+
+* add date and time picker into angular components ([#305](https://github.com/tractr/stack/issues/305)) ([aa2b472](https://github.com/tractr/stack/commit/aa2b472627393e331b138c8d8d50e7d95095e999))
+* add github workflows generator ([#309](https://github.com/tractr/stack/issues/309)) ([f8f7619](https://github.com/tractr/stack/commit/f8f7619ef08520f5b6ddc293900548cda9e0bb90))
+* improve hapify field type string and number ([#308](https://github.com/tractr/stack/issues/308)) ([0ca4896](https://github.com/tractr/stack/commit/0ca48962ae4be440a76f8b77df1a63a68b51311b))
+* **terraform-component-deployment-trigger:** limit rule name to 64 chars ([#311](https://github.com/tractr/stack/issues/311)) ([9719698](https://github.com/tractr/stack/commit/97196984c7b9c3a8b4f0f1f373e159aa790c67ea))
+
+
+
 # [1.24.0](https://github.com/tractr/stack/compare/v1.23.2...v1.24.0) (2021-11-18)
 
 
