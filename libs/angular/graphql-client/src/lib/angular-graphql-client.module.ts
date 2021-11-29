@@ -10,10 +10,15 @@ import { OperationDefinitionNode } from 'graphql';
 
 import { GRAPHQL_CLIENT_CONFIGURATION } from './constants/graphql-client-configuration.constant';
 import { GraphqlClientConfiguration } from './dtos/graphql-client-configuration.dto';
-import { AlertCreatedGql, AlertUpdatedGql } from './services';
+import {
+  AlertCreatedGql,
+  AlertFeedbackCreatedGql,
+  AlertUpdatedGql,
+} from './services';
 
 @NgModule({
   providers: [
+    AlertFeedbackCreatedGql,
     AlertCreatedGql,
     AlertUpdatedGql,
     {

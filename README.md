@@ -37,27 +37,51 @@ located in your $HOME directory)
 
 - Clone the repository on your machine.
 - To install the project dependencies, move in the cloned repository and run
-  `npm i`.
+  `npm i`. Note than running `npm i` automatically run the hapify generation
+  (see the generation section).
 - At the root of the repository, you will find a `.env.example` that contains
   the list of the required environment variables of the project. This file
   should copied to `.env` and completed with the required secrets. This file
   should never be committed as it contains keys that should not be accessible in
   the repository.
-- Run hapify to generate boilerplate code with `npm run generate` and you're
-  good to go!
+- The project depends on external softwares (a Postgresql database and a
+  RabbitMQ message broker). You can run them with docker compose with
+  `docker-compose up -d`.
 - On first installation, you must push the sql schema to the database with
-  `npm run prisma:db:push`
-- The database can be seeded with the next script: `npm run prisma:db:seed`
+  `npm run prisma:db:push` (see the database section).
+- The database can be seeded with the next script: `npm run prisma:db:seed` (see
+  the database section).
+
+## Database
+
+This project uses prisma ORM (see <https://www.prisma.io/> for the
+documentation). Prisma is an amazing database tool that comes with many
+features. Here are the one you will most commonly need:
+
+To navigate into the database and play with it, prisma offers a visual interface
+named prisma studio, which is an equivalent of php-my-admin. You can run it with
+`npm run prisma:studio`.
+
+Others common operations are:
+
+- `npm run prisma:db:push` can be used to push the sql schema to the database.
+- `npm run prisma:db:seed` can be used to seed the database.
+- `npm run prisma:db:truncate` can be used to empty the database.
+- `npm run prisma:db:reset` will empty the database and seed it.
 
 ## Start the project
 
 To start the project, the next steps are required:
 
 - Start the database container with `docker-compose up -d`.
-- Start the api with `npm run nx serve api`.
+- Start the api with `nx serve api`.
+- Start the message broker handler application with
+  `nx serve message-broker-handler`.
+- Start the front application with `nx serve pwa`.
 
 The api will be served on `http://localhost:3000/api` and the generated
-documentation can be visited at `http://localhost:3000/docs`.
+documentation can be visited at `http://localhost:3000/docs`. The front app wil
+be available at `http:localhost:4200`.
 
 ## Modelisation and code generation
 
@@ -78,9 +102,3 @@ The generation will generate boilerplate code for the app but it will also
 generate a dbml schema matching the modelisation entered in the hapify GUI. It
 is available at `libs/generated/models.dbml`. You can use
 `https://dbdiagram.io/home` to visualize the generated dbml!
-
-## Updating the database schema
-
-In order to initialize the database schema (either on first installation or
-after running code generation) you must run the next command:
-`npm run prisma:db:push`

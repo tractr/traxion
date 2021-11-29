@@ -38,7 +38,7 @@ export class AlertSubscriber {
         this.alertService.getDefaultInternals();
 
       // Insert new alert in database
-      const alert = await this.alertService.create({
+      await this.alertService.create({
         data: {
           ...messageBrokerAlert,
           createdAt,
@@ -53,11 +53,6 @@ export class AlertSubscriber {
             },
           },
         },
-      });
-
-      // Send an alertCreated graphql notification
-      await this.pubSub.publish('alertCreated', {
-        alertCreated: { id: alert.id },
       });
     } catch (e) {
       console.error(e);

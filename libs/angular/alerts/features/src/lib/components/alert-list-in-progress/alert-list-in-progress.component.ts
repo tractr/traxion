@@ -9,7 +9,6 @@ import {
   merge,
   mergeMap,
   Observable,
-  pluck,
   scan,
   share,
 } from 'rxjs';
@@ -80,12 +79,12 @@ export class AlertListInProgressComponent {
       );
 
   /**
-   * Observable triggered when a new alert is created
+   * Observable that emits created alerts
    */
   public alertCreated$: Observable<AlertCreated> = this.alertNotificationService
     .subscribeToAlertCreation()
     .pipe(
-      pluck('data.alertCreated.id'),
+      map((result) => result?.data?.alertCreated?.id),
       filter((id): id is string => typeof id !== 'undefined'),
       // TODO: handle errors
       concatMap((id) =>
@@ -99,12 +98,12 @@ export class AlertListInProgressComponent {
     );
 
   /**
-   * Observable triggered when an alert is updated
+   * Observable that emits updated alerts
    */
   public alertUpdated$: Observable<AlertUpdated> = this.alertNotificationService
     .subscribeToAlertUpdated()
     .pipe(
-      pluck('data.alertCreated.id'),
+      map((result) => result?.data?.alertUpdated?.id),
       filter((id): id is string => typeof id !== 'undefined'),
       // TODO: handle errors
       concatMap((id) =>
@@ -118,7 +117,7 @@ export class AlertListInProgressComponent {
     );
 
   /**
-   * List of alerts waiting to be handled
+   * List of alerts sync via push notifications
    */
   public alerts$: Observable<AlertWithCurrentFeedback[]> = merge(
     this.alertInit$,
@@ -131,7 +130,8 @@ export class AlertListInProgressComponent {
   );
 
   /**
-   * Alert reducer function
+   * Alerts reducer function. If an alert is created, it is inserted at the head of the list.
+   * If an alert is updated, it is updated in the list.
    *
    * @param alerts - alert list
    * @param alertEvent - alert event that should update the list
@@ -147,10 +147,10 @@ export class AlertListInProgressComponent {
         return [alert, ...alerts];
       }
       case EventType.updated: {
-        const alertToUpdate = alerts.findIndex(
+        const alertToUpdateIndex = alerts.findIndex(
           (existingAlert) => existingAlert.id === alert.id,
         );
-        return [...alerts].splice(alertToUpdate, 1, alert);
+        return [...alerts].splice(alertToUpdateIndex, 1, alert);
       }
       default:
         throw new Error('Unknown event type');

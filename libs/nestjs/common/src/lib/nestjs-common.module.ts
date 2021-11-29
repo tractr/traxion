@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
 
-// import { AlertModelModule } from './alert';
+import { AlertModelModule } from './alert';
+import { AlertFeedbackModelModule } from './alert-feedback';
 import {
-  AlertFeedbackModelModule,
-  AlertModelModule,
   CameraModelModule,
   CameraStatusModelModule,
   ClientModelModule,
@@ -15,8 +14,8 @@ import {
 } from './generated';
 
 const modelModules = [
-  AlertFeedbackModelModule,
   AlertModelModule,
+  AlertFeedbackModelModule,
   CameraModelModule,
   CameraStatusModelModule,
   ClientModelModule,

@@ -100,6 +100,9 @@
     "nestjs-graphql": {
       "tags": []
     },
+    "nestjs-logger": {
+      "tags": []
+    },
     "nestjs-message-broker": {
       "implicitDependencies": ["nestjs-common"],
       "tags": []

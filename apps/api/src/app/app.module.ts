@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LoggerModule } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
@@ -7,6 +7,7 @@ import { appConfiguration } from '../config';
 
 import { MessageBrokerConfiguration } from '@cali/message-broker-common';
 import { GraphqlModule } from '@cali/nestjs-graphql';
+import { NestjsLoggerModule } from '@cali/nestjs-logger';
 import { MessageBrokerModule } from '@cali/nestjs-message-broker';
 import { RestModule } from '@cali/nestjs-rest';
 
@@ -18,7 +19,7 @@ import { RestModule } from '@cali/nestjs-rest';
       isGlobal: true,
       cache: true,
     }),
-    LoggerModule,
+    NestjsLoggerModule,
     DatabaseModule.register(),
 
     // Network modules

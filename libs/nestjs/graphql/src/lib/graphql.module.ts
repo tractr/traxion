@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 
-import { AlertResolver } from './resolvers';
+import { AlertFeedbackResolver, AlertResolver } from './resolvers';
 
 import { NestjsPubSubModule } from '@cali/nestjs-pub-sub';
 
@@ -16,6 +16,6 @@ import { NestjsPubSubModule } from '@cali/nestjs-pub-sub';
     }),
     NestjsPubSubModule,
   ],
-  providers: [AlertResolver],
+  providers: [AlertResolver, AlertFeedbackResolver],
 })
 export class GraphqlModule {}

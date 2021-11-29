@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "name": "Debug nx api",
+      "port": 9229,
+      "request": "attach",
+      "type": "node"
+    }
+  ],
+  "version": "0.2.0"
+}

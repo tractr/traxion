@@ -4,7 +4,7 @@ import { PubSub } from 'graphql-subscriptions';
 
 import { Alert } from '../models';
 
-import { PUB_SUB_SERVICE } from '@cali/nestjs-pub-sub';
+import { PUB_SUB_SERVICE, PubSubQueue } from '@cali/nestjs-pub-sub';
 
 @Resolver(() => Alert)
 export class AlertResolver {
@@ -26,10 +26,10 @@ export class AlertResolver {
    * @returns an alert created iterator
    */
   @Subscription(() => Alert, {
-    name: 'alertCreated',
+    name: PubSubQueue.alertCreated,
   })
   alertCreatedHandler() {
-    return this.pubSub.asyncIterator('alertCreated');
+    return this.pubSub.asyncIterator(PubSubQueue.alertCreated);
   }
 
   /**
@@ -37,9 +37,9 @@ export class AlertResolver {
    * @returns an alert updated iterator
    */
   @Subscription(() => Alert, {
-    name: 'alertUpdated',
+    name: PubSubQueue.alertUpdated,
   })
   alertUpdatedHandler() {
-    return this.pubSub.asyncIterator('alertUpdated');
+    return this.pubSub.asyncIterator(PubSubQueue.alertUpdated);
   }
 }

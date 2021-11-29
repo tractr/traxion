@@ -50,6 +50,7 @@
       ],
       "@cali/nestjs-common": ["libs/nestjs/common/src/index.ts"],
       "@cali/nestjs-graphql": ["libs/nestjs/graphql/src/index.ts"],
+      "@cali/nestjs-logger": ["libs/nestjs/logger/src/index.ts"],
       "@cali/nestjs-message-broker": [
         "libs/nestjs/message-broker/src/index.ts"
       ],
