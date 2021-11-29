@@ -2,103 +2,81 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
-import { UserModelModule } from '../generated/nestjs-models-common';
-import { AUTHENTICATION_OPTIONS } from './config';
-import { AUTHENTICATION_MODULE_OPTIONS } from './constants';
-import { LoginController, PasswordController } from './controllers';
 import {
-  AuthenticationDefaultOptions,
-  AuthenticationOptions,
-  AuthenticationPublicOptions,
-} from './interfaces';
+  AUTHENTICATION_MODULE_OPTIONS,
+  AUTHENTICATION_USER_SERVICE,
+} from './constants';
+import { LoginController, PasswordController } from './controllers';
+import { AuthenticationModuleOptions } from './dtos';
+import { AuthenticationPublicOptions } from './interfaces';
 import {
   AuthenticationService,
   PasswordService,
   StrategyOptionsService,
 } from './services';
+import { AuthenticationUserService } from './services/authentication-user.service';
 import { JwtStrategy, LocalStrategy } from './strategies';
 
+import { transformAndValidate } from '@tractr/common';
 import {
   AsyncOptions,
   LoggerModule,
   ModuleOptionsFactory,
-  ModuleOverrideMetadata,
 } from '@tractr/nestjs-core';
 import { MailerModule } from '@tractr/nestjs-mailer';
 
 @Module({})
 export class AuthenticationModule extends ModuleOptionsFactory<
-  AuthenticationOptions,
-  AuthenticationPublicOptions,
-  AuthenticationDefaultOptions
->(AUTHENTICATION_MODULE_OPTIONS, AUTHENTICATION_OPTIONS) {
-  static register(
-    {
-      imports,
-      providers,
-      exports,
-      controllers,
-      dependencies,
-      ...options
-    }: AuthenticationPublicOptions & ModuleOverrideMetadata,
-    overrides: ModuleOverrideMetadata = {},
-  ): DynamicModule {
+  AuthenticationModuleOptions,
+  AuthenticationPublicOptions
+>(
+  AUTHENTICATION_MODULE_OPTIONS,
+  transformAndValidate(AuthenticationModuleOptions),
+) {
+  static register(options: AuthenticationPublicOptions): DynamicModule {
     const authenticationOptionsModule = super.register(options);
     return this.createAuthenticationModuleFromOptions(
       authenticationOptionsModule,
-      {
-        imports,
-        providers,
-        exports,
-        controllers,
-        dependencies,
-        ...overrides,
-      },
     );
   }
 
   static registerAsync(
     options: AsyncOptions<
-      AuthenticationOptions,
-      AuthenticationPublicOptions,
-      AuthenticationDefaultOptions
+      AuthenticationModuleOptions,
+      AuthenticationPublicOptions
     >,
-    overrides: ModuleOverrideMetadata = {},
   ): DynamicModule {
     const authenticationOptionsModule = super.registerAsync(options);
     return this.createAuthenticationModuleFromOptions(
       authenticationOptionsModule,
-      overrides,
     );
   }
 
   private static createAuthenticationModuleFromOptions(
     authenticationOptionsModule: DynamicModule,
-    overrides: ModuleOverrideMetadata,
   ): DynamicModule {
     return {
       module: AuthenticationModule,
       imports: [
-        ...(authenticationOptionsModule.imports ?? []),
+        authenticationOptionsModule,
         LoggerModule,
         JwtModule.registerAsync({
           imports: [authenticationOptionsModule],
-          useFactory: (authenticationOptions: AuthenticationOptions) =>
+          useFactory: (authenticationOptions: AuthenticationModuleOptions) =>
             authenticationOptions.jwtModuleOptions,
           inject: [AUTHENTICATION_MODULE_OPTIONS],
         }),
         PassportModule.registerAsync({
           imports: [authenticationOptionsModule],
-          useFactory: (authenticationOptions: AuthenticationOptions) =>
+          useFactory: (authenticationOptions: AuthenticationModuleOptions) =>
             authenticationOptions.passportModuleOptions,
           inject: [AUTHENTICATION_MODULE_OPTIONS],
         }),
-        UserModelModule.register(overrides),
         MailerModule.registerAsync({
           imports: [authenticationOptionsModule],
           useFactory: (
             defaultOptions,
-            authenticationOptions: AuthenticationOptions,
+            authenticationOptions: AuthenticationModuleOptions,
           ) => {
             const { active } = authenticationOptions.password.reset;
 
@@ -123,19 +101,21 @@ export class AuthenticationModule extends ModuleOptionsFactory<
         }),
       ],
       exports: [
-        ...(authenticationOptionsModule.exports ?? []),
         AuthenticationService,
         JwtStrategy,
         LocalStrategy,
         PasswordService,
       ],
       providers: [
-        ...(authenticationOptionsModule.providers ?? []),
         AuthenticationService,
         PasswordService,
         StrategyOptionsService,
         JwtStrategy,
         LocalStrategy,
+        {
+          provide: AUTHENTICATION_USER_SERVICE,
+          useClass: AuthenticationUserService,
+        },
       ],
       controllers: [LoginController, PasswordController],
     };

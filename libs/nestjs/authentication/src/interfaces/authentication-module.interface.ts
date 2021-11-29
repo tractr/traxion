@@ -1,52 +1,61 @@
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { IAuthModuleOptions } from '@nestjs/passport';
-import { CookieOptions } from 'express';
-import { StrategyOptions } from 'passport-jwt';
-import { IStrategyOptionsWithRequest } from 'passport-local';
 
-import { User } from '../../prisma/client';
+import {
+  AuthenticationOptionsApi,
+  AuthenticationOptionsCookies,
+  AuthenticationOptionsMailer,
+  AuthenticationOptionsPassword,
+  AuthenticationOptionsStrategy,
+  AuthenticationOptionsUser,
+} from '../dtos';
 
-import { MailerPublicOptions } from '@tractr/nestjs-mailer';
+/**
+ * The public interface of the AuthenticationModuleOptions.
+ */
+export interface AuthenticationPublicOptions {
+  /**
+   * Options to configure the user that will be manipulated by the authentication module.
+   */
+  api: AuthenticationOptionsApi;
 
-export type AuthenticationDefaultOptions = {
-  login: {
-    saltRounds: number;
-  };
-  password: {
-    reset: {
-      active: boolean;
-      link: string;
-      subject: string;
-      template?: number;
-    };
-  };
-  cookies: {
-    cookieName: string;
-    queryParamName: string;
-    options: CookieOptions;
-  };
-  strategy: {
-    jwt: StrategyOptions;
-    local: IStrategyOptionsWithRequest & {
-      usernameField: keyof User;
-      passwordField: keyof User;
-    };
-  };
-  jwtModuleOptions: JwtModuleOptions;
-  passportModuleOptions: IAuthModuleOptions;
-  mailer?: {
-    name: string;
-    from: string;
-    moduleOptions: MailerPublicOptions;
-  };
-};
+  /**
+   * Options to configure the user that will be manipulated by the authentication module.
+   */
+  userConfig?: AuthenticationOptionsUser;
 
-export type AuthenticationPublicOptions =
-  Partial<AuthenticationDefaultOptions> & {
-    api: {
-      url: string;
-    };
-  };
+  /**
+   * Options to configure the user service.
+   */
+  userService: string;
 
-export type AuthenticationOptions = AuthenticationDefaultOptions &
-  AuthenticationPublicOptions;
+  /**
+   * Options to configure the password and the reset password.
+   */
+  password?: AuthenticationOptionsPassword;
+
+  /**
+   * Options to configure the jwt module (these options are used directly by the jwt module).
+   */
+  jwtModuleOptions?: JwtModuleOptions;
+
+  /**
+   * Options to configure the passport module (these options are used directly by the passport module).
+   */
+  passportModuleOptions?: IAuthModuleOptions;
+
+  /**
+   * Options to configure the strategies (jwt and local).
+   */
+  strategy?: AuthenticationOptionsStrategy;
+
+  /**
+   * Options to configure how the cookies are handled.
+   */
+  cookies?: AuthenticationOptionsCookies;
+
+  /**
+   * Options to configure the mailer.
+   */
+  mailer?: AuthenticationOptionsMailer;
+}

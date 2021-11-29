@@ -7,7 +7,7 @@ import {
   PrismaClientValidationError,
 } from '@prisma/client/runtime';
 
-import { Public } from '../../src/decorators/public.decorator';
+import { Public } from '../src/decorators/public.decorator';
 
 @Controller()
 export class PrismaExceptionEndpointMockController {

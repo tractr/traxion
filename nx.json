@@ -16,12 +16,6 @@
   "npmScope": "tractr",
   "projects": {
     "angular-authentication": {
-      "implicitDependencies": [
-        "hapify-templates-models",
-        "hapify-templates-prisma",
-        "hapify-config",
-        "hapify-generate-config"
-      ],
       "tags": ["scope:angular"]
     },
     "angular-casl": {
@@ -116,15 +110,6 @@
       "tags": ["scope:template"]
     },
     "nestjs-authentication": {
-      "implicitDependencies": [
-        "hapify-templates-models",
-        "hapify-templates-prisma",
-        "hapify-templates-nestjs-models-common",
-        "nestjs-core",
-        "nestjs-database",
-        "hapify-config",
-        "hapify-generate-config"
-      ],
       "tags": ["scope:nestjs"]
     },
     "nestjs-casl": {

@@ -3,32 +3,23 @@ import { JwtService, JwtSignOptions, JwtVerifyOptions } from '@nestjs/jwt';
 import * as mailjet from 'node-mailjet';
 
 import {
-  USER_SERVICE,
-  UserService,
-} from '../../generated/nestjs-models-common';
-import { User } from '../../prisma/client';
-import {
   AUTHENTICATION_MODULE_OPTIONS,
+  AUTHENTICATION_USER_SERVICE,
   DEFAULT_RESET_HTML,
 } from '../constants';
+import { AuthenticationModuleOptions } from '../dtos';
 import { BadResetCodeError, UserNotFoundError } from '../errors';
-import {
-  AuthenticationOptions,
-  RequestResetOptions,
-  UserWithEmailAndPassword,
-} from '../interfaces';
-import { AuthenticationService } from './authentication.service';
+import { RequestResetOptions, User, UserService } from '../interfaces';
 
 import { MailerService } from '@tractr/nestjs-mailer';
 
 @Injectable()
 export class PasswordService {
   constructor(
-    @Inject(USER_SERVICE)
+    @Inject(AUTHENTICATION_USER_SERVICE)
     private readonly userService: UserService,
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
-    private readonly authenticationOptions: AuthenticationOptions,
-    private readonly authenticationService: AuthenticationService,
+    private readonly authenticationOptions: AuthenticationModuleOptions,
     private readonly jwtService: JwtService,
     private readonly mailerService: MailerService,
   ) {}
@@ -41,23 +32,26 @@ export class PasswordService {
   }
 
   async requestReset(
-    email: string,
+    login: string,
     options: RequestResetOptions = {},
   ): Promise<void> {
     this.assertPasswordResetIsActive();
 
+    const { idField, loginField, passwordField, emailField } =
+      this.authenticationOptions.userConfig;
+
     // Get user from email
-    const user: UserWithEmailAndPassword | null =
-      await this.userService.findUnique({
-        where: {
-          email,
-        },
-        select: {
-          email: true,
-          password: true,
-          id: true,
-        },
-      });
+    const user = await this.userService.findUnique({
+      where: {
+        [loginField]: login,
+      },
+      select: {
+        [idField]: true,
+        [loginField]: true,
+        [passwordField]: true,
+        [emailField]: true,
+      },
+    });
 
     if (!user) throw new UserNotFoundError();
 
@@ -72,7 +66,7 @@ export class PasswordService {
     if (!from) throw new Error('mailer from config has not been set');
 
     const linkWithCode = link
-      .replace('{{id}}', user.id)
+      .replace('{{id}}', user[idField])
       .replace('{{code}}', resetCode);
 
     const message: mailjet.Email.SendParamsMessage = {
@@ -80,7 +74,7 @@ export class PasswordService {
         Email: from,
         ...(name ? { Name: name } : {}),
       },
-      To: [{ Email: email }],
+      To: [{ Email: user.email }],
       TemplateLanguage: true,
       Subject: subject,
       ...(template
@@ -99,14 +93,13 @@ export class PasswordService {
     });
   }
 
-  getUserSecret(user: UserWithEmailAndPassword) {
-    return `${user.id}-${user.password}-${user.email}`;
+  getUserSecret(user: User) {
+    const { idField, loginField, passwordField } =
+      this.authenticationOptions.userConfig;
+    return `${user[idField]}-${user[passwordField]}-${user[loginField]}`;
   }
 
-  createResetCode(
-    user: UserWithEmailAndPassword,
-    options: JwtSignOptions = {},
-  ): string {
+  createResetCode(user: User, options: JwtSignOptions = {}): string {
     // Maybe we could add the created at instead of email and id
     return this.jwtService.sign(
       { sub: user.id },
@@ -119,7 +112,7 @@ export class PasswordService {
   }
 
   verifyResetCode(
-    user: UserWithEmailAndPassword,
+    user: User,
     resetCode: string,
     options: JwtVerifyOptions = {},
   ): Promise<{ sub: User['id'] }> {
@@ -135,10 +128,11 @@ export class PasswordService {
     password: string,
   ): Promise<void> {
     this.assertPasswordResetIsActive();
+    const { idField } = this.authenticationOptions.userConfig;
 
     const user = await this.userService.findUnique({
       where: {
-        id: userId,
+        [idField]: userId,
       },
       select: { id: true, password: true, email: true },
     });

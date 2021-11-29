@@ -11,19 +11,18 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 
-import { User } from '../../prisma/client';
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
 import { CurrentUser } from '../decorators';
-import { AccessTokenDto } from '../dtos';
+import { AccessTokenDto, AuthenticationModuleOptions } from '../dtos';
 import { LocalAuthGuard } from '../guards';
-import { AuthenticationOptions } from '../interfaces';
+import { User } from '../interfaces';
 import { AuthenticationService } from '../services';
 
 @Controller()
 export class LoginController {
   constructor(
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
-    private readonly authenticationOptions: AuthenticationOptions,
+    private readonly authenticationOptions: AuthenticationModuleOptions,
     private readonly authenticationService: AuthenticationService,
   ) {}
 

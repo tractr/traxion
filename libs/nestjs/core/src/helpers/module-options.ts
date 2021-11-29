@@ -39,7 +39,7 @@ export interface OptionsFactory<
  */
 export type AsyncOptions<
   InternalOptions,
-  PublicOptions extends Partial<InternalOptions> = Partial<InternalOptions>,
+  PublicOptions = Partial<InternalOptions>,
   DefaultOptions extends Omit<
     InternalOptions,
     RequiredKeys<PublicOptions>
@@ -65,7 +65,7 @@ export type AsyncOptions<
  */
 export function ModuleOptionsFactory<
   InternalOptions,
-  PublicOptions extends Partial<InternalOptions> = Partial<InternalOptions>,
+  PublicOptions = Partial<InternalOptions>,
   DefaultOptions extends Omit<
     InternalOptions,
     RequiredKeys<PublicOptions>

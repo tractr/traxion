@@ -49,10 +49,6 @@
           "defaultConfiguration": "production",
           "dependsOn": [
             {
-              "projects": "self",
-              "target": "prebuild"
-            },
-            {
               "projects": "dependencies",
               "target": "build"
             }
@@ -63,20 +59,6 @@
           },
           "outputs": ["dist/libs/angular/authentication"]
         },
-        "generate": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "npx rimraf generated",
-              "node ../../../dist/libs/hapify/generate-config/src/index.js",
-              "npx hpf generate",
-              "rm -rf src/lib/generated",
-              "mv generated src/lib"
-            ],
-            "cwd": "libs/angular/authentication",
-            "parallel": false
-          }
-        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
@@ -84,17 +66,6 @@
               "libs/angular/authentication/src/**/*.ts",
               "libs/angular/authentication/src/**/*.html"
             ]
-          }
-        },
-        "prebuild": {
-          "configurations": {
-            "development": {},
-            "production": {}
-          },
-          "defaultConfiguration": "production",
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": ["npx nx run generated:build"]
           }
         },
         "publish": {
@@ -1129,10 +1100,6 @@
         "build": {
           "dependsOn": [
             {
-              "projects": "self",
-              "target": "prebuild"
-            },
-            {
               "projects": "dependencies",
               "target": "build"
             }
@@ -1154,36 +1121,21 @@
           },
           "outputs": ["{options.outputPath}"]
         },
-        "generate": {
-          "executor": "@nrwl/workspace:run-commands",
+        "coverage": {
+          "executor": "@nrwl/jest:jest",
           "options": {
-            "commands": [
-              "npx rimraf generated",
-              "node ../../../dist/libs/hapify/generate-config/src/index.js",
-              "npx hpf generate",
-              "npx prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
-              "npx prisma format",
-              "npx prisma generate",
-              "rm ./prisma/client/query-engine-*"
-            ],
-            "cwd": "libs/nestjs/authentication",
-            "parallel": false
-          }
+            "codeCoverage": true,
+            "coverageReporters": ["text", "json"],
+            "jestConfig": "libs/nestjs/authentication/jest.config.js",
+            "passWithNoTests": true,
+            "skipNxCache": true
+          },
+          "outputs": ["coverage/libs/constraint/unit"]
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/nestjs/authentication/**/*.ts"]
-          }
-        },
-        "prebuild": {
-          "configurations": {
-            "development": {},
-            "production": {}
-          },
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": ["npx nx run generated:build"]
           }
         },
         "publish": {
@@ -1195,6 +1147,7 @@
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
+            "coverage": true,
             "jestConfig": "libs/nestjs/authentication/jest.config.js",
             "passWithNoTests": true
           },

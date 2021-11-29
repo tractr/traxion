@@ -6,8 +6,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { rolePermissions } from '@generated/casl';
-import { User } from '@generated/models';
 import { ModelsModule } from '@generated/nestjs-models';
+import { USER_SERVICE } from '@generated/nestjs-models-common';
 import {
   AuthenticationModule,
   JwtGlobalAuthGuard,
@@ -32,7 +32,7 @@ import { MailerModule } from '@tractr/nestjs-mailer';
         api: {
           url: '/api',
         },
-        user: User,
+        userService: USER_SERVICE,
       }),
     }),
     FileStorageModule.registerAsync({

@@ -3,17 +3,23 @@ import { SecretOrKeyProvider, StrategyOptions } from 'passport-jwt';
 import { IStrategyOptionsWithRequest } from 'passport-local';
 
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
-import { AuthenticationOptions } from '../interfaces';
+import { AuthenticationModuleOptions } from '../dtos';
 
 @Injectable()
 export class StrategyOptionsService {
   constructor(
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
-    private readonly authenticationOptions: AuthenticationOptions,
+    private readonly authenticationOptions: AuthenticationModuleOptions,
   ) {}
 
   createLocalStrategyOptions(): IStrategyOptionsWithRequest {
-    return this.authenticationOptions.strategy.local;
+    const { loginField, passwordField } = this.authenticationOptions.userConfig;
+
+    return {
+      ...this.authenticationOptions.strategy.local,
+      usernameField: loginField,
+      passwordField,
+    };
   }
 
   createJwtStrategyOptions(): StrategyOptions {

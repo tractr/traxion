@@ -1,11 +1,10 @@
 import { INestApplication } from '@nestjs/common';
-
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 
-import { PrismaExceptionInterceptor } from '../../../src/interceptors/prisma-exception.interceptor';
 import { PrismaExceptionEndpointMockController } from '../../mock/prisma-exception-endpoint-mock.controller';
+import { PrismaExceptionInterceptor } from '../interceptors/prisma-exception.interceptor';
 
 describe('Prisma exception error', () => {
   let app: INestApplication;
@@ -88,6 +87,7 @@ describe('Prisma exception error', () => {
 
   describe('DefaultError', () => {
     it('DefaultError must return 500', async () => {
+      app.useLogger(false);
       const response = await request(app.getHttpServer()).get('/default-error');
       expect(response.status).toBe(500);
     });
