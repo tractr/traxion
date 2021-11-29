@@ -48,7 +48,7 @@ export class DeploymentTriggerEventComponent extends AwsComponent<DeploymentTrig
         },
         'detail-type': ['ECR Image Action'],
       }),
-      name: this.getResourceName('rule'),
+      name: this.getResourceName('rule', 64),
     });
   }
 
