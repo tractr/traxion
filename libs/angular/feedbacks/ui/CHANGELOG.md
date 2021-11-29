@@ -1,7 +1,15 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+# [0.5.0](https://github.com/tractr/cali/compare/v0.4.0...v0.5.0) (2021-11-29)
+
+
+### Features
+
+* **angular-feedbacks-features:** create library feature ([#58](https://github.com/tractr/cali/issues/58)) ([1a87728](https://github.com/tractr/cali/commit/1a87728833df49865b061b9ca68f92d6e761dfb5))
+
+
 
 # [0.4.0](https://github.com/tractr/cali/compare/v0.3.0...v0.4.0) (2021-11-26)
 
