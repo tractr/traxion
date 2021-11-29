@@ -1,5 +1,5 @@
 {
-  "name": "@cali/angular-feedback-ui",
+  "name": "@cali/angular-feedbacks-ui",
   "version": "0.4.0",
   "dependencies": {
     "tslib": "^2.3.0"

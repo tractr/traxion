@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'angular-feedback-ui',
+  displayName: 'angular-feedbacks-features',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/angular/feedback/ui',
+  coverageDirectory: '../../../../coverage/libs/angular/feedbacks/features',
   transform: {
     '^.+\\.(ts|js|html)$': 'jest-preset-angular',
   },

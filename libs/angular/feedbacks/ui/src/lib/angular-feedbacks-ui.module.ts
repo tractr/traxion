@@ -25,4 +25,4 @@ import { AngularCommonUiModule } from '@cali/angular-common-ui';
   ],
   exports: [],
 })
-export class AngularFeedbackUiModule {}
+export class AngularFeedbacksUiModule {}

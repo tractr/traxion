@@ -308,27 +308,68 @@
         }
       }
     },
-    "angular-feedback-ui": {
+    "angular-feedbacks-features": {
       "prefix": "cali",
       "projectType": "library",
-      "root": "libs/angular/feedback/ui",
-      "sourceRoot": "libs/angular/feedback/ui/src",
+      "root": "libs/angular/feedbacks/features",
+      "sourceRoot": "libs/angular/feedbacks/features/src",
       "targets": {
         "build": {
           "configurations": {
             "development": {
-              "tsConfig": "libs/angular/feedback/ui/tsconfig.lib.json"
+              "tsConfig": "libs/angular/feedbacks/features/tsconfig.lib.json"
             },
             "production": {
-              "tsConfig": "libs/angular/feedback/ui/tsconfig.lib.prod.json"
+              "tsConfig": "libs/angular/feedbacks/features/tsconfig.lib.prod.json"
             }
           },
           "defaultConfiguration": "production",
           "executor": "@nrwl/angular:ng-packagr-lite",
           "options": {
-            "project": "libs/angular/feedback/ui/ng-package.json"
+            "project": "libs/angular/feedbacks/features/ng-package.json"
           },
-          "outputs": ["dist/libs/angular/feedback/ui"]
+          "outputs": ["dist/libs/angular/feedbacks/features"]
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular/feedbacks/features/src/**/*.ts",
+              "libs/angular/feedbacks/features/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular/feedbacks/features/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/angular/feedbacks/features"]
+        }
+      }
+    },
+    "angular-feedbacks-ui": {
+      "prefix": "cali",
+      "projectType": "library",
+      "root": "libs/angular/feedbacks/ui",
+      "sourceRoot": "libs/angular/feedbacks/ui/src",
+      "targets": {
+        "build": {
+          "configurations": {
+            "development": {
+              "tsConfig": "libs/angular/feedbacks/ui/tsconfig.lib.json"
+            },
+            "production": {
+              "tsConfig": "libs/angular/feedbacks/ui/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production",
+          "executor": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "project": "libs/angular/feedbacks/ui/ng-package.json"
+          },
+          "outputs": ["dist/libs/angular/feedbacks/ui"]
         },
         "build-storybook": {
           "configurations": {
@@ -339,7 +380,7 @@
           "executor": "@nrwl/storybook:build",
           "options": {
             "config": {
-              "configFolder": "libs/angular/feedback/ui/.storybook"
+              "configFolder": "libs/angular/feedbacks/ui/.storybook"
             },
             "outputPath": "dist/storybook/angular-feedback-ui",
             "uiFramework": "@storybook/angular"
@@ -350,8 +391,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/angular/feedback/ui/src/**/*.ts",
-              "libs/angular/feedback/ui/src/**/*.html"
+              "libs/angular/feedbacks/ui/src/**/*.ts",
+              "libs/angular/feedbacks/ui/src/**/*.html"
             ]
           }
         },
@@ -364,7 +405,7 @@
           "executor": "@nrwl/storybook:storybook",
           "options": {
             "config": {
-              "configFolder": "libs/angular/feedback/ui/.storybook"
+              "configFolder": "libs/angular/feedbacks/ui/.storybook"
             },
             "port": 4400,
             "uiFramework": "@storybook/angular"
@@ -373,10 +414,10 @@
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/angular/feedback/ui/jest.config.js",
+            "jestConfig": "libs/angular/feedbacks/ui/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/angular/feedback/ui"]
+          "outputs": ["coverage/libs/angular/feedbacks/ui"]
         }
       }
     },

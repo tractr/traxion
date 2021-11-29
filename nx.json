@@ -29,7 +29,10 @@
     "angular-common-utils": {
       "tags": []
     },
-    "angular-feedback-ui": {
+    "angular-feedbacks-features": {
+      "tags": []
+    },
+    "angular-feedbacks-ui": {
       "tags": []
     },
     "angular-graphql-client": {
