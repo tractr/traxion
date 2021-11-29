@@ -1,6 +1,6 @@
 {
   "name": "@cali/common-business",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "dependencies": {
     "tslib": "^2.3.0"
   },
