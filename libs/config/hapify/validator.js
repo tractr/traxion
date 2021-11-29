@@ -72,5 +72,18 @@ for (const field of fields) {
       `Entity field must have the meta 'ownerKey'. Fix field '${field.name}'`,
     );
   }
+  if (
+    field.type === 'string' &&
+    field.subtype !== 'text' &&
+    field.meta &&
+    field.meta.maxLength &&
+    (field.meta.maxLength > 255 ||
+      field.meta.maxLength < 1 ||
+      Number.isNaN(field.meta.maxLength))
+  ) {
+    errors.push(
+      `The value of the meta 'maxLength' must be between 1 and 255. Fix field '${field.name}'`,
+    );
+  }
 }
 return { errors, warnings };
