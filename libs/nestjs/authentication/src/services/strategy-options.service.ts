@@ -3,13 +3,13 @@ import { SecretOrKeyProvider, StrategyOptions } from 'passport-jwt';
 import { IStrategyOptionsWithRequest } from 'passport-local';
 
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
-import { AuthenticationModuleOptions } from '../dtos';
+import { AuthenticationOptions } from '../dtos';
 
 @Injectable()
 export class StrategyOptionsService {
   constructor(
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
-    private readonly authenticationOptions: AuthenticationModuleOptions,
+    private readonly authenticationOptions: AuthenticationOptions,
   ) {}
 
   createLocalStrategyOptions(): IStrategyOptionsWithRequest {

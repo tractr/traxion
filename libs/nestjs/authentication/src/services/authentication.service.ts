@@ -6,7 +6,7 @@ import {
   AUTHENTICATION_MODULE_OPTIONS,
   AUTHENTICATION_USER_SERVICE,
 } from '../constants';
-import { AccessTokenDto, AuthenticationModuleOptions } from '../dtos';
+import { AccessTokenDto, AuthenticationOptions } from '../dtos';
 import { BadPasswordError, UserNotFoundError } from '../errors';
 import { User } from '../interfaces';
 import { UserService } from '../interfaces/user.service.interface';
@@ -15,7 +15,7 @@ import { UserService } from '../interfaces/user.service.interface';
 export class AuthenticationService {
   constructor(
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
-    private readonly authenticationOptions: AuthenticationModuleOptions,
+    private readonly authenticationOptions: AuthenticationOptions,
     @Inject(AUTHENTICATION_USER_SERVICE)
     private readonly userService: UserService,
     private readonly jwtService: JwtService,

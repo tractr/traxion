@@ -10,7 +10,7 @@ import {
 } from '../dtos';
 
 /**
- * The public interface of the AuthenticationModuleOptions.
+ * The public interface of the AuthenticationOptions.
  */
 export interface AuthenticationPublicOptions {
   /**

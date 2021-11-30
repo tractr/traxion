@@ -7,7 +7,7 @@ import {
   AUTHENTICATION_USER_SERVICE,
   DEFAULT_RESET_HTML,
 } from '../constants';
-import { AuthenticationModuleOptions } from '../dtos';
+import { AuthenticationOptions } from '../dtos';
 import { BadResetCodeError, UserNotFoundError } from '../errors';
 import { RequestResetOptions, User, UserService } from '../interfaces';
 
@@ -19,7 +19,7 @@ export class PasswordService {
     @Inject(AUTHENTICATION_USER_SERVICE)
     private readonly userService: UserService,
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
-    private readonly authenticationOptions: AuthenticationModuleOptions,
+    private readonly authenticationOptions: AuthenticationOptions,
     private readonly jwtService: JwtService,
     private readonly mailerService: MailerService,
   ) {}

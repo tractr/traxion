@@ -7,7 +7,7 @@ import { AuthenticationEndpointMockController } from '../mocks';
 import { AuthenticationModule } from './authentication.module';
 import { AUTHENTICATION_MODULE_OPTIONS } from './constants';
 import {
-  AuthenticationModuleOptions,
+  AuthenticationOptions,
   AuthenticationOptionsPassword,
   AuthenticationOptionsPasswordReset,
 } from './dtos';
@@ -61,7 +61,7 @@ describe('Authentication Module with async options', () => {
   });
 
   it('should load the authentication options async', async () => {
-    const authenticationOptions = app.get<AuthenticationModuleOptions>(
+    const authenticationOptions = app.get<AuthenticationOptions>(
       AUTHENTICATION_MODULE_OPTIONS,
     );
 

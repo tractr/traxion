@@ -7,7 +7,7 @@ import {
   AUTHENTICATION_USER_SERVICE,
 } from './constants';
 import { LoginController, PasswordController } from './controllers';
-import { AuthenticationModuleOptions } from './dtos';
+import { AuthenticationOptions } from './dtos';
 import { AuthenticationPublicOptions } from './interfaces';
 import {
   AuthenticationService,
@@ -27,12 +27,9 @@ import { MailerModule } from '@tractr/nestjs-mailer';
 
 @Module({})
 export class AuthenticationModule extends ModuleOptionsFactory<
-  AuthenticationModuleOptions,
+  AuthenticationOptions,
   AuthenticationPublicOptions
->(
-  AUTHENTICATION_MODULE_OPTIONS,
-  transformAndValidate(AuthenticationModuleOptions),
-) {
+>(AUTHENTICATION_MODULE_OPTIONS, transformAndValidate(AuthenticationOptions)) {
   static register(options: AuthenticationPublicOptions): DynamicModule {
     const authenticationOptionsModule = super.register(options);
     return this.createAuthenticationModuleFromOptions(
@@ -41,10 +38,7 @@ export class AuthenticationModule extends ModuleOptionsFactory<
   }
 
   static registerAsync(
-    options: AsyncOptions<
-      AuthenticationModuleOptions,
-      AuthenticationPublicOptions
-    >,
+    options: AsyncOptions<AuthenticationOptions, AuthenticationPublicOptions>,
   ): DynamicModule {
     const authenticationOptionsModule = super.registerAsync(options);
     return this.createAuthenticationModuleFromOptions(
@@ -62,13 +56,13 @@ export class AuthenticationModule extends ModuleOptionsFactory<
         LoggerModule,
         JwtModule.registerAsync({
           imports: [authenticationOptionsModule],
-          useFactory: (authenticationOptions: AuthenticationModuleOptions) =>
+          useFactory: (authenticationOptions: AuthenticationOptions) =>
             authenticationOptions.jwtModuleOptions,
           inject: [AUTHENTICATION_MODULE_OPTIONS],
         }),
         PassportModule.registerAsync({
           imports: [authenticationOptionsModule],
-          useFactory: (authenticationOptions: AuthenticationModuleOptions) =>
+          useFactory: (authenticationOptions: AuthenticationOptions) =>
             authenticationOptions.passportModuleOptions,
           inject: [AUTHENTICATION_MODULE_OPTIONS],
         }),
@@ -76,7 +70,7 @@ export class AuthenticationModule extends ModuleOptionsFactory<
           imports: [authenticationOptionsModule],
           useFactory: (
             defaultOptions,
-            authenticationOptions: AuthenticationModuleOptions,
+            authenticationOptions: AuthenticationOptions,
           ) => {
             const { active } = authenticationOptions.password.reset;
 
