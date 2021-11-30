@@ -1,2 +1,2 @@
-export * from './or.constraint';
+export * from './is-type.constraint';
 export * from './xor.constraint';

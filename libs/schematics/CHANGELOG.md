@@ -2,6 +2,25 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.26.0](https://github.com/tractr/stack/compare/v1.25.0...v1.26.0) (2021-11-30)
+
+
+
+# [1.25.0](https://github.com/tractr/stack/compare/v1.24.0...v1.25.0) (2021-11-29)
+
+
+### Bug Fixes
+
+* add eslint and prettier schematics ([#294](https://github.com/tractr/stack/issues/294)) ([38ec874](https://github.com/tractr/stack/commit/38ec8749579d829b4e07d880624de65c99f1b0e7))
+* update workspace release target from :version to :release ([932310f](https://github.com/tractr/stack/commit/932310f1a6350f70a00ed98c6ad1b1605d43a945))
+
+
+### Features
+
+* add github workflows generator ([#309](https://github.com/tractr/stack/issues/309)) ([f8f7619](https://github.com/tractr/stack/commit/f8f7619ef08520f5b6ddc293900548cda9e0bb90))
+
+
+
 # [1.24.0](https://github.com/tractr/stack/compare/v1.23.2...v1.24.0) (2021-11-18)
 
 

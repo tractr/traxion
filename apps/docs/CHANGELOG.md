@@ -2,6 +2,19 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.26.0](https://github.com/tractr/stack/compare/v1.25.0...v1.26.0) (2021-11-30)
+
+
+
+# [1.25.0](https://github.com/tractr/stack/compare/v1.24.0...v1.25.0) (2021-11-29)
+
+
+### Bug Fixes
+
+* add eslint and prettier schematics ([#294](https://github.com/tractr/stack/issues/294)) ([38ec874](https://github.com/tractr/stack/commit/38ec8749579d829b4e07d880624de65c99f1b0e7))
+
+
+
 # [1.24.0](https://github.com/tractr/stack/compare/v1.23.2...v1.24.0) (2021-11-18)
 
 

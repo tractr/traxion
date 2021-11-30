@@ -2,6 +2,19 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.26.0](https://github.com/tractr/stack/compare/v1.25.0...v1.26.0) (2021-11-30)
+
+
+
+# [1.25.0](https://github.com/tractr/stack/compare/v1.24.0...v1.25.0) (2021-11-29)
+
+
+### Features
+
+* improve hapify field type string and number ([#308](https://github.com/tractr/stack/issues/308)) ([0ca4896](https://github.com/tractr/stack/commit/0ca48962ae4be440a76f8b77df1a63a68b51311b))
+
+
+
 # [1.24.0](https://github.com/tractr/stack/compare/v1.23.2...v1.24.0) (2021-11-18)
 
 
