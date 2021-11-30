@@ -3,10 +3,11 @@ import { transformAndValidate } from '@tractr/common';
 import { AsyncOptions, ModuleOptionsFactory } from '@tractr/nestjs-core';
 
 import { NESTJS_MESSAGE_BROKER_CONFIGURATION } from './constants';
-import { AlertSubscriber } from './subscribers';
+import { AlertSubscriber, VideoGenerationSubscriber } from './subscribers';
 
 import { MessageBrokerAlertModule } from '@cali/message-broker-alert';
 import { MessageBrokerConfiguration } from '@cali/message-broker-common';
+import { MessageBrokerVideoGenerationModule } from '@cali/message-broker-video-generation';
 import { AlertModelModule } from '@cali/nestjs-common';
 import { NestjsPubSubModule } from '@cali/nestjs-pub-sub';
 
@@ -39,8 +40,14 @@ export class MessageBrokerModule extends ModuleOptionsFactory<MessageBrokerConfi
             configuration,
           inject: [NESTJS_MESSAGE_BROKER_CONFIGURATION],
         }),
+        MessageBrokerVideoGenerationModule.registerAsync({
+          imports: [module],
+          useFactory: (_, configuration: MessageBrokerConfiguration) =>
+            configuration,
+          inject: [NESTJS_MESSAGE_BROKER_CONFIGURATION],
+        }),
       ],
-      providers: [AlertSubscriber],
+      providers: [AlertSubscriber, VideoGenerationSubscriber],
       exports: [],
     };
   }

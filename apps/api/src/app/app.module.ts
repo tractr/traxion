@@ -1,6 +1,5 @@
-import { Global, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { LoggerModule } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 
 import { appConfiguration } from '../config';

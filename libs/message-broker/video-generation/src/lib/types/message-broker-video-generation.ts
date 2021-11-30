@@ -1,9 +1,14 @@
 /* eslint-disable camelcase */
-export type EventType =
-  | 'generation_started'
-  | 'generation_successed'
-  | 'video_available'
-  | 'video_deleted';
+import { AlertVideoStatus } from '@cali/common-models';
+
+export const EventTypeToCamelCase = {
+  generation_started: AlertVideoStatus.generationStarted,
+  generation_successed: AlertVideoStatus.generationSuccessed,
+  video_available: AlertVideoStatus.videoAvailable,
+  video_deleted: AlertVideoStatus.videoDeleted,
+} as const;
+
+export type EventType = keyof typeof EventTypeToCamelCase;
 
 export type GenerationStartedEvent = {
   event_type: 'generation_started';
@@ -28,3 +33,18 @@ export type MessageBrokerVideoGeneration =
   | GenerationSucceededEvent
   | VideoAvailableEvent
   | VideoDeletedEvent;
+
+export type AlertVideoUpdatedNoVideo = {
+  eventType: 'generationStarted' | 'generationSuccessed' | 'videoDeleted';
+  numFrame: string;
+};
+
+export type AlertVideoUpdatedWithVideo = {
+  eventType: 'videoAvailable';
+  numFrame: string;
+  videoUrl: string;
+};
+
+export type AlertVideoUpdated =
+  | AlertVideoUpdatedNoVideo
+  | AlertVideoUpdatedWithVideo;
