@@ -9,7 +9,9 @@ install the required peerdependency `@tractr/nestjs-database`
 npm i --save @tractr/nestjs-authentication @tractr/nestjs-database`
 ```
 
-After that you need to register the module into your main application
+After that you need to register the module into your main application.
+You'll need a UserService class provider register in your app (you can user the
+USER_SERVICE token generate by `hapify-templates-nestjs-models-common`).
 
 > app.module.ts
 
@@ -20,9 +22,11 @@ import { AuthenticationModule } from '@tractr/nestjs-authentication';
 import { DatabaseModule } from '@tractr/nestjs-database';
 
 @Module({
-  imports: [DatabaseModule.register(), AuthenticationModule.register()],
+  imports: [DatabaseModule.register(), AuthenticationModule.register({
+    userService: 'USER_SERVICE',
+  })],
   controllers: [],
-  providers: [],
+  providers: [{ provide: 'USER_SERVICE', useClass: MyUserService }],
 })
 export class AppModule {}
 ```

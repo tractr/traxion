@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AUTH_OPTIONS, AuthenticationOptions } from '../../configs';
+import { AUTHENTICATION_OPTIONS } from '../../constants';
+import { AuthenticationOptions } from '../../dtos';
 
 @Component({
   selector: 'tractr-lost-password-page',
@@ -12,7 +13,7 @@ export class LostPasswordPageComponent {
   resetRequestSentTo?: string;
 
   constructor(
-    @Inject(AUTH_OPTIONS)
+    @Inject(AUTHENTICATION_OPTIONS)
     private options: AuthenticationOptions,
     private router: Router,
   ) {}

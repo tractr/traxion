@@ -8,18 +8,15 @@ import {
 } from '@angular/router';
 import { map, Observable } from 'rxjs';
 
-import {
-  AUTH_OPTIONS,
-  AuthenticationOptions,
-  SESSION_SERVICE,
-} from '../configs/authentication.config';
+import { AUTHENTICATION_OPTIONS, SESSION_SERVICE } from '../constants';
+import { AuthenticationOptions } from '../dtos';
 import { SessionService } from '../interfaces';
 
 @Injectable()
 export class IsLoggedGuard implements CanActivate {
   constructor(
     private router: Router,
-    @Inject(AUTH_OPTIONS)
+    @Inject(AUTHENTICATION_OPTIONS)
     private options: AuthenticationOptions,
     @Inject(SESSION_SERVICE)
     private sessionService: SessionService,
