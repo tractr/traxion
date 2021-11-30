@@ -5,16 +5,16 @@ import {
 } from 'class-validator';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type OrValidator = (value: any) => boolean;
+export type IsTypeChecker = (value: any) => boolean;
 
 /**
  * Constraint for validating that a property has xor relation
  * with the specified key in the constraint.
  */
 @ValidatorConstraint({ name: 'orConstraint', async: false })
-export class OrConstraint implements ValidatorConstraintInterface {
+export class IsTypeConstraint implements ValidatorConstraintInterface {
   validate(propertyValue: string, { constraints }: ValidationArguments) {
-    const constraintsList: Array<OrValidator> = constraints;
+    const constraintsList: Array<IsTypeChecker> = constraints;
 
     if (constraintsList.length === 0)
       throw new Error('No constraints specified.');
