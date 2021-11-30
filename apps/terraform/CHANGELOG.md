@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.8.0](https://github.com/tractr/cali/compare/v0.7.0...v0.8.0) (2021-11-30)
+
+
+### Features
+
+* add message-broker-handler container to terraform ([#57](https://github.com/tractr/cali/issues/57)) ([4a3bde7](https://github.com/tractr/cali/commit/4a3bde7bd86ee63704d69e467876db6a47467ecc))
+
+
+
 # [0.7.0](https://github.com/tractr/cali/compare/v0.6.0...v0.7.0) (2021-11-30)
 
 
