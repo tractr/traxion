@@ -14,6 +14,7 @@ import deepMerge from 'deepmerge';
 
 import { AppConfig, Environments } from '../configs';
 import { TerraformEnvironmentVariables } from '../dtos';
+import { MessageBrokerHandlerComponent } from '../message-broker-handler';
 
 export class MainStack extends AwsStack<AwsStackConfig> {
   protected readonly registryGroup: RegistryGroup;
@@ -56,6 +57,7 @@ export class MainStack extends AwsStack<AwsStackConfig> {
         api: apiConfig,
         postgres,
         pwa,
+        messageBrokerHandler,
         reverseProxy,
       } = deepMerge(AppConfig, environment.config);
 
@@ -75,6 +77,14 @@ export class MainStack extends AwsStack<AwsStackConfig> {
 
       // Add a api as a http service
       const api = poolGroup.addHttpService(ApiComponent, 'api', apiConfig);
+
+      // Add a message broker handler as a backend service
+      poolGroup.addBackendService(
+        MessageBrokerHandlerComponent,
+        'message-broker-handler',
+        [],
+        messageBrokerHandler,
+      );
 
       // Add a postgres as a backend service
       poolGroup.addBackendService(

@@ -65,6 +65,11 @@ export const AppConfig: Required<Environment['config']> = {
       },
     },
   },
+  messageBrokerHandler: {
+    containerConfig: {
+      environments: {},
+    },
+  },
   reverseProxy: {
     containerConfig: {
       auth: {

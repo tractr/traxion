@@ -3,6 +3,8 @@ import { PostgresComponentPublicConfig } from '@tractr/terraform-service-postgre
 import { PwaComponentPublicConfig } from '@tractr/terraform-service-pwa';
 import { ReverseProxyComponentPublicConfig } from '@tractr/terraform-service-reverse-proxy';
 
+import { MessageBrokerHandlerComponentPublicConfig } from '../message-broker-handler';
+
 export interface Environment {
   /**
    * Friendly name of the environment
@@ -33,6 +35,10 @@ export interface Environment {
      * Postgres config override
      */
     postgres?: PostgresComponentPublicConfig;
+    /**
+     * Message broker handler config override
+     */
+    messageBrokerHandler?: MessageBrokerHandlerComponentPublicConfig;
     /**
      * Reverse proxy config override
      */
