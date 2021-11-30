@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.27.1](https://github.com/tractr/stack/compare/v1.27.0...v1.27.1) (2021-11-30)
+
+
+
 # [1.27.0](https://github.com/tractr/stack/compare/v1.26.0...v1.27.0) (2021-11-30)
 
 

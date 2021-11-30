@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.27.1](https://github.com/tractr/stack/compare/v1.27.0...v1.27.1) (2021-11-30)
+
+
+### Bug Fixes
+
+* add limitation length to s3 and deployment trigger ([#314](https://github.com/tractr/stack/issues/314)) ([1108d98](https://github.com/tractr/stack/commit/1108d98eb91796c166bff41d3d2722e704db45c9))
+
+
+
 # [1.27.0](https://github.com/tractr/stack/compare/v1.26.0...v1.27.0) (2021-11-30)
 
 
