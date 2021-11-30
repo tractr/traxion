@@ -104,7 +104,7 @@ export function formatTransformAndValidateErrorMessage(
  * @param classValidator
  * @param options - Options for plainToClass transformation and validation.
  * Default for plain to class transformation: exposeDefaultValues: true and
- * enableImplicitConvetsion: false
+ * enableImplicitConversion: false
  * @returns a validate and transform function for the class validator
  */
 export function transformAndValidate<T>(

@@ -3,7 +3,7 @@ import { SecretOrKeyProvider, StrategyOptions } from 'passport-jwt';
 import { IStrategyOptionsWithRequest } from 'passport-local';
 
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
-import { AuthenticationOptions } from '../interfaces';
+import { AuthenticationOptions } from '../dtos';
 
 @Injectable()
 export class StrategyOptionsService {
@@ -13,7 +13,13 @@ export class StrategyOptionsService {
   ) {}
 
   createLocalStrategyOptions(): IStrategyOptionsWithRequest {
-    return this.authenticationOptions.strategy.local;
+    const { loginField, passwordField } = this.authenticationOptions.userConfig;
+
+    return {
+      ...this.authenticationOptions.strategy.local,
+      usernameField: loginField,
+      passwordField,
+    };
   }
 
   createJwtStrategyOptions(): StrategyOptions {

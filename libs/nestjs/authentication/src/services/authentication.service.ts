@@ -3,21 +3,20 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
 import {
-  USER_SERVICE,
-  UserService,
-} from '../../generated/nestjs-models-common';
-import { User } from '../../prisma/client';
-import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
-import { AccessTokenDto } from '../dtos';
+  AUTHENTICATION_MODULE_OPTIONS,
+  AUTHENTICATION_USER_SERVICE,
+} from '../constants';
+import { AccessTokenDto, AuthenticationOptions } from '../dtos';
 import { BadPasswordError, UserNotFoundError } from '../errors';
-import { AuthenticationOptions } from '../interfaces';
+import { User } from '../interfaces';
+import { UserService } from '../interfaces/user.service.interface';
 
 @Injectable()
 export class AuthenticationService {
   constructor(
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
     private readonly authenticationOptions: AuthenticationOptions,
-    @Inject(USER_SERVICE)
+    @Inject(AUTHENTICATION_USER_SERVICE)
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}
@@ -34,38 +33,37 @@ export class AuthenticationService {
     login: string,
     password: string,
   ): Promise<User | null> {
-    const passwordField =
-      this.authenticationOptions.strategy.local.passwordField ?? 'password';
+    const { passwordField } = this.authenticationOptions.userConfig;
 
     const user = await this.findUserByLogin(login, { [passwordField]: true });
     if (!user) throw new UserNotFoundError();
 
-    if (await this.verifyPassword(password, user.password)) {
-      return this.findUserByLogin(login);
+    if (await this.verifyPassword(password, user[passwordField])) {
+      return user;
     }
 
     throw new BadPasswordError();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  findUserByLogin(login: string, select?: any) {
-    const loginField =
-      this.authenticationOptions.strategy.local.usernameField ?? 'email';
+  findUserByLogin(
+    login: string,
+    select?: Record<string, boolean>,
+  ): Promise<User | null> {
+    const { loginField } = this.authenticationOptions.userConfig;
+
     if (!loginField) throw new Error('loginField is not defined');
 
-    const findOneWhere = {
-      [loginField]: login,
-    };
-
     return this.userService.findUnique({
-      where: findOneWhere,
+      where: {
+        [loginField]: login,
+      },
       ...(select ? { select } : {}),
     });
   }
 
   async hashPassword(password: string): Promise<string> {
     const salt = await bcrypt.genSalt(
-      this.authenticationOptions.login.saltRounds ?? 10,
+      this.authenticationOptions.password.saltRounds ?? 10,
     );
     return bcrypt.hash(password, salt);
   }

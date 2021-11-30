@@ -6,6 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
+// TODO Remove this line during the refactor of casl
 import { Prisma, User, UserRoles } from '@prisma/client';
 import { map, Observable } from 'rxjs';
 

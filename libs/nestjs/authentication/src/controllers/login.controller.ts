@@ -11,12 +11,11 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 
-import { User } from '../../prisma/client';
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
 import { CurrentUser } from '../decorators';
-import { AccessTokenDto } from '../dtos';
+import { AccessTokenDto, AuthenticationOptions } from '../dtos';
 import { LocalAuthGuard } from '../guards';
-import { AuthenticationOptions } from '../interfaces';
+import { User } from '../interfaces';
 import { AuthenticationService } from '../services';
 
 @Controller()
