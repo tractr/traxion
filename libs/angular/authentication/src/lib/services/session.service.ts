@@ -11,15 +11,14 @@ import {
   tap,
 } from 'rxjs/operators';
 
-import { AuthenticationOptions } from '../configs/authentication.config';
-import { User } from '../generated/models';
+import { AuthenticationOptions } from '../dtos';
 import { SessionService, SessionServiceClass } from '../interfaces';
 
 import { request, Unsubscriber } from '@tractr/angular-tools';
 import { transformAndValidate } from '@tractr/common';
 
 export function SessionServiceFactory<
-  U extends User = User,
+  U extends Record<string, unknown> = Record<string, unknown>,
   CCU extends ClassConstructor<U> = ClassConstructor<U>,
 >(options: AuthenticationOptions<U, CCU>): SessionService<U> {
   const { user } = options;

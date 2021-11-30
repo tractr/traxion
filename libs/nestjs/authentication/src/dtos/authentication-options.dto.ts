@@ -2,7 +2,6 @@ import { JwtModuleOptions } from '@nestjs/jwt';
 import { IAuthModuleOptions } from '@nestjs/passport';
 import { IsOptional, IsString, ValidateNested } from 'class-validator';
 
-import { AuthenticationOptionsApi } from './authentication-options-api.dto';
 import { AuthenticationOptionsCookies } from './authentication-options-cookies.dto';
 import { AuthenticationOptionsMailer } from './authentication-options-mailer.dto';
 import { AuthenticationOptionsPassword } from './authentication-options-password.dto';
@@ -15,13 +14,7 @@ import { isDevelopment } from '@tractr/nestjs-core';
 /**
  * Authentication module options.
  */
-export class AuthenticationModuleOptions {
-  /**
-   * Options to configure the user that will be manipulated by the authentication module.
-   */
-  @ValidateNested()
-  api!: AuthenticationOptionsApi;
-
+export class AuthenticationOptions {
   /**
    * Options to configure the user that will be manipulated by the authentication module.
    */

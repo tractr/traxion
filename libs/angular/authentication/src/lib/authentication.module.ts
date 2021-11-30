@@ -1,4 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ClassConstructor } from 'class-transformer';
 
 import {
   LoginComponent,
@@ -8,16 +9,11 @@ import {
   ResetPasswordComponent,
   ResetPasswordPageComponent,
 } from './components';
-import {
-  AUTH_DEFAULT_OPTIONS,
-  AUTH_OPTIONS,
-  AuthenticationDefaultOptions,
-  AuthenticationOptions,
-  AuthenticationPublicOptions,
-  SESSION_SERVICE,
-} from './configs';
+import { AUTHENTICATION_OPTIONS, SESSION_SERVICE } from './constants';
 import { ConnectedDirective, NotConnectedDirective } from './directives';
+import { AuthenticationOptions } from './dtos';
 import { IsLoggedGuard, IsNotLoggedGuard } from './guards';
+import { AuthenticationPublicOptions } from './interfaces/authentication-public-options.interface';
 import { PasswordService, SessionServiceFactory } from './services';
 
 import { AngularComponentsModule } from '@tractr/angular-components';
@@ -27,6 +23,7 @@ import {
   AsyncOptions,
   ModuleOptionsFactory,
 } from '@tractr/angular-tools';
+import { transformAndValidate } from '@tractr/common';
 
 @NgModule({
   imports: [AngularToolsModule, AngularComponentsModule, AngularFormModule],
@@ -46,7 +43,7 @@ import {
     {
       provide: SESSION_SERVICE,
       useFactory: SessionServiceFactory,
-      deps: [AUTH_OPTIONS],
+      deps: [AUTHENTICATION_OPTIONS],
     },
     PasswordService,
   ],
@@ -63,36 +60,45 @@ import {
 })
 export class AngularAuthenticationModule extends ModuleOptionsFactory<
   AuthenticationOptions,
-  AuthenticationPublicOptions,
-  AuthenticationDefaultOptions
->(AUTH_OPTIONS, AUTH_DEFAULT_OPTIONS) {
-  static register(
-    options: AuthenticationPublicOptions,
+  AuthenticationPublicOptions
+>(AUTHENTICATION_OPTIONS, transformAndValidate(AuthenticationOptions)) {
+  static register<
+    U extends Record<string, unknown> = Record<string, unknown>,
+    CCU extends ClassConstructor<U> = ClassConstructor<U>,
+  >(
+    options: AuthenticationPublicOptions<U, CCU>,
   ): ModuleWithProviders<AngularAuthenticationModule> {
     return super.register(options);
   }
 
-  static forRoot(
-    options: AuthenticationPublicOptions,
+  static forRoot<
+    U extends Record<string, unknown> = Record<string, unknown>,
+    CCU extends ClassConstructor<U> = ClassConstructor<U>,
+  >(
+    options: AuthenticationPublicOptions<U, CCU>,
   ): ModuleWithProviders<AngularAuthenticationModule> {
     return super.forRoot(options);
   }
 
-  static registerAsync(
+  static registerAsync<
+    U extends Record<string, unknown> = Record<string, unknown>,
+    CCU extends ClassConstructor<U> = ClassConstructor<U>,
+  >(
     options: AsyncOptions<
-      AuthenticationOptions,
-      AuthenticationPublicOptions,
-      AuthenticationDefaultOptions
+      AuthenticationOptions<U, CCU>,
+      AuthenticationPublicOptions<U, CCU>
     >,
   ): ModuleWithProviders<AngularAuthenticationModule> {
     return super.registerAsync(options);
   }
 
-  static forRootAsync(
+  static forRootAsync<
+    U extends Record<string, unknown> = Record<string, unknown>,
+    CCU extends ClassConstructor<U> = ClassConstructor<U>,
+  >(
     options: AsyncOptions<
-      AuthenticationOptions,
-      AuthenticationPublicOptions,
-      AuthenticationDefaultOptions
+      AuthenticationOptions<U, CCU>,
+      AuthenticationPublicOptions<U, CCU>
     >,
   ): ModuleWithProviders<AngularAuthenticationModule> {
     return super.forRootAsync(options);

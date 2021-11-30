@@ -2,7 +2,6 @@ import { JwtModuleOptions } from '@nestjs/jwt';
 import { IAuthModuleOptions } from '@nestjs/passport';
 
 import {
-  AuthenticationOptionsApi,
   AuthenticationOptionsCookies,
   AuthenticationOptionsMailer,
   AuthenticationOptionsPassword,
@@ -11,14 +10,9 @@ import {
 } from '../dtos';
 
 /**
- * The public interface of the AuthenticationModuleOptions.
+ * The public interface of the AuthenticationOptions.
  */
 export interface AuthenticationPublicOptions {
-  /**
-   * Options to configure the user that will be manipulated by the authentication module.
-   */
-  api: AuthenticationOptionsApi;
-
   /**
    * Options to configure the user that will be manipulated by the authentication module.
    */

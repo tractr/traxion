@@ -11,7 +11,17 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["dtos", "mailjet", "minio", "nestjs", "tractr", "upsert"],
+  "cSpell.words": [
+    "casl",
+    "dtos",
+    "mailjet",
+    "minio",
+    "nestjs",
+    "Rext",
+    "tractr",
+    "Unsubscriber",
+    "upsert"
+  ],
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
     "source.fixAll.eslint": true

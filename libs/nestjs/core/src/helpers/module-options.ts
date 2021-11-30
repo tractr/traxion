@@ -23,7 +23,7 @@ export interface Options {
  */
 export interface OptionsFactory<
   InternalOptions = Options,
-  PublicOptions extends Partial<InternalOptions> = Partial<InternalOptions>,
+  PublicOptions = Partial<InternalOptions>,
   DefaultOptions extends Omit<
     InternalOptions,
     RequiredKeys<PublicOptions>

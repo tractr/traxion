@@ -49,9 +49,6 @@ describe('Authentication Module', () => {
             secret: 'integration-tests',
           },
           userService: AUTHENTICATION_MOCK_USER_SERVICE,
-          api: {
-            url: 'not tested yet',
-          },
         }),
       ],
     }).compile();
@@ -179,9 +176,6 @@ describe('Authentication Module without guards', () => {
             secret: 'integration-tests',
           },
           userService: AUTHENTICATION_MOCK_USER_SERVICE,
-          api: {
-            url: 'not tested yet',
-          },
         }),
       ],
     }).compile();
@@ -267,10 +261,6 @@ describe('Authentication Module with cookie', () => {
             secret: 'integration-tests',
           },
           userService: AUTHENTICATION_MOCK_USER_SERVICE,
-
-          api: {
-            url: 'not tested yet',
-          },
         }),
       ],
     }).compile();

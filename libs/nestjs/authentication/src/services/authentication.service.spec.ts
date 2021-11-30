@@ -9,7 +9,7 @@ import {
   AUTHENTICATION_MODULE_OPTIONS,
   AUTHENTICATION_USER_SERVICE,
 } from '../constants';
-import { AuthenticationModuleOptions } from '../dtos';
+import { AuthenticationOptions } from '../dtos';
 import { UserNotFoundError } from '../errors';
 import { User } from '../interfaces';
 import { AuthenticationUserService } from './authentication-user.service';
@@ -17,7 +17,7 @@ import { AuthenticationService } from './authentication.service';
 
 describe('AuthService', () => {
   let authService: AuthenticationService;
-  let mockAuthenticationOptions: MockProxy<AuthenticationModuleOptions>;
+  let mockAuthenticationOptions: MockProxy<AuthenticationOptions>;
   let mockJwtService: MockProxy<JwtService>;
   let mockUserService: MockProxy<AuthenticationUserService>;
   let mockUser: MockProxy<User>;
@@ -32,7 +32,7 @@ describe('AuthService', () => {
 
     mockJwtService = mockDeep<JwtService>();
     mockUserService = mockDeep<AuthenticationUserService>();
-    mockAuthenticationOptions = mockDeep<AuthenticationModuleOptions>();
+    mockAuthenticationOptions = mockDeep<AuthenticationOptions>();
     mockUser = mockDeep<User>();
 
     const module: TestingModule = await Test.createTestingModule({

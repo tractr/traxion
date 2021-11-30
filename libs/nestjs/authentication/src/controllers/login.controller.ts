@@ -13,7 +13,7 @@ import { Request, Response } from 'express';
 
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
 import { CurrentUser } from '../decorators';
-import { AccessTokenDto, AuthenticationModuleOptions } from '../dtos';
+import { AccessTokenDto, AuthenticationOptions } from '../dtos';
 import { LocalAuthGuard } from '../guards';
 import { User } from '../interfaces';
 import { AuthenticationService } from '../services';
@@ -22,7 +22,7 @@ import { AuthenticationService } from '../services';
 export class LoginController {
   constructor(
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
-    private readonly authenticationOptions: AuthenticationModuleOptions,
+    private readonly authenticationOptions: AuthenticationOptions,
     private readonly authenticationService: AuthenticationService,
   ) {}
 

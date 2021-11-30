@@ -2,7 +2,7 @@ import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
 
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
-import { AuthenticationModuleOptions } from '../dtos';
+import { AuthenticationOptions } from '../dtos';
 import { UserService as UserServiceInterface } from '../interfaces';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class AuthenticationUserService
 
   constructor(
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
-    private readonly authenticationOptions: AuthenticationModuleOptions,
+    private readonly authenticationOptions: AuthenticationOptions,
     private moduleRef: ModuleRef,
   ) {}
 

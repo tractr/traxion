@@ -7,7 +7,7 @@ import { AuthenticationEndpointMockController } from '../mocks';
 import { AuthenticationModule } from './authentication.module';
 import { AUTHENTICATION_MODULE_OPTIONS } from './constants';
 import {
-  AuthenticationModuleOptions,
+  AuthenticationOptions,
   AuthenticationOptionsPassword,
   AuthenticationOptionsPasswordReset,
 } from './dtos';
@@ -48,10 +48,6 @@ describe('Authentication Module with async options', () => {
                 secret: 'integration-tests',
               },
               userService: AUTHENTICATION_MOCK_USER_SERVICE,
-
-              api: {
-                url: 'not tested yet',
-              },
             }),
         }),
       ],
@@ -65,14 +61,11 @@ describe('Authentication Module with async options', () => {
   });
 
   it('should load the authentication options async', async () => {
-    const authenticationOptions = app.get<AuthenticationModuleOptions>(
+    const authenticationOptions = app.get<AuthenticationOptions>(
       AUTHENTICATION_MODULE_OPTIONS,
     );
 
     expect(authenticationOptions).toEqual({
-      api: {
-        url: 'not tested yet',
-      },
       cookies: {
         cookieName: 'authCookie',
         options: {
@@ -146,9 +139,6 @@ describe('Authentication Module with reset password', () => {
               secret: 'integration-tests',
             },
             userService: AUTHENTICATION_MOCK_USER_SERVICE,
-            api: {
-              url: 'not tested yet',
-            },
             password: {
               ...getDefaults(AuthenticationOptionsPassword),
               reset: {
@@ -188,9 +178,6 @@ describe('Authentication Module with reset password', () => {
             secret: 'integration-tests',
           },
           userService: AUTHENTICATION_MOCK_USER_SERVICE,
-          api: {
-            url: 'not tested yet',
-          },
           password: {
             ...getDefaults(AuthenticationOptionsPassword),
             reset: {

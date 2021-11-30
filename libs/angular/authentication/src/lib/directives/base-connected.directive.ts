@@ -9,7 +9,7 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { SESSION_SERVICE } from '../configs/authentication.config';
+import { SESSION_SERVICE } from '../constants';
 import { SessionService } from '../interfaces';
 
 @Directive({

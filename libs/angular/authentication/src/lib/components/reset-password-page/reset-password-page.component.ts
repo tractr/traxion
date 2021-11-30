@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { AUTH_OPTIONS, AuthenticationOptions } from '../../configs';
+import { AUTHENTICATION_OPTIONS } from '../../constants';
+import { AuthenticationOptions } from '../../dtos';
 
 @Component({
   selector: 'tractr-reset-password-page',
@@ -19,7 +20,7 @@ export class ResetPasswordPageComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    @Inject(AUTH_OPTIONS)
+    @Inject(AUTHENTICATION_OPTIONS)
     private options: AuthenticationOptions,
     private route: ActivatedRoute,
     private router: Router,
