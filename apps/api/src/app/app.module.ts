@@ -29,9 +29,6 @@ import { MailerModule } from '@tractr/nestjs-mailer';
     AuthenticationModule.registerAsync({
       useFactory: (defaultOptions) => ({
         ...defaultOptions,
-        api: {
-          url: '/api',
-        },
         userService: USER_SERVICE,
       }),
     }),

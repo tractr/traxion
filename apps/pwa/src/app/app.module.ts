@@ -6,6 +6,7 @@ import {
   EyeInvisibleOutline,
   PlusOutline,
 } from '@ant-design/icons-angular/icons';
+import { User as UserType } from '@prisma/client';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { AppConfig } from '../environments/environment';
@@ -52,7 +53,7 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     AngularToolsModule,
     AngularComponentsModule,
     AngularFormModule,
-    AngularAuthenticationModule.forRootAsync({
+    AngularAuthenticationModule.forRootAsync<UserType>({
       useFactory: (
         defaultOptions,
         appConfigService: AngularConfigService<AppConfig>,
