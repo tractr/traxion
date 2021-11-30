@@ -45,7 +45,7 @@ export class S3Component extends AwsComponent<S3ComponentConfig> {
   protected createS3Bucket() {
     return new S3Bucket(this, 'bucket', {
       provider: this.provider,
-      bucketPrefix: this.getResourceName('').replace(/_/g, '-'),
+      bucketPrefix: this.getResourceName('', 37).replace(/_/g, '-'),
       corsRule: this.getCorsRules(),
       acl: 'private',
       forceDestroy: true,

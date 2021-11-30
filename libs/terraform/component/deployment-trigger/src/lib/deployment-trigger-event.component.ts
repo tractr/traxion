@@ -58,7 +58,7 @@ export class DeploymentTriggerEventComponent extends AwsComponent<DeploymentTrig
       rule: this.getCloudwatchEventRuleNameAsToken(),
       arn: this.config.codepipelineArn,
       roleArn: this.config.roleArn,
-      targetId: this.getResourceName('target'),
+      targetId: this.getResourceName('target', 64),
     });
   }
 
