@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.27.0](https://github.com/tractr/stack/compare/v1.26.0...v1.27.0) (2021-11-30)
+
+
+### Features
+
+* remove generated code from nestjs authentication and angular authentication package ([#312](https://github.com/tractr/stack/issues/312)) ([4fa7bfa](https://github.com/tractr/stack/commit/4fa7bfa536d1accb483fa8b83f93c9395de5e1e0)), closes [#313](https://github.com/tractr/stack/issues/313)
+
+
+
 # [1.26.0](https://github.com/tractr/stack/compare/v1.25.0...v1.26.0) (2021-11-30)
 
 
