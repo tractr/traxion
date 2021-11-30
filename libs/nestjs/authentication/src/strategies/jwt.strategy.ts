@@ -2,18 +2,15 @@ import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-jwt';
 
-import {
-  USER_SERVICE,
-  UserService,
-} from '../../generated/nestjs-models-common';
-import { User } from '../../prisma/client';
+import { AUTHENTICATION_USER_SERVICE } from '../constants';
 import { JwtTokenPayload } from '../dtos';
+import { User, UserService } from '../interfaces';
 import { StrategyOptionsService } from '../services';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
-    @Inject(USER_SERVICE)
+    @Inject(AUTHENTICATION_USER_SERVICE)
     private readonly userService: UserService,
     protected readonly strategyOptionsService: StrategyOptionsService,
   ) {

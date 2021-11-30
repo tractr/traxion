@@ -18,7 +18,7 @@ export class CaslUpdateAbilitiesService extends Unsubscriber {
     @Inject(CASL_MODULE_OPTIONS)
     private caslOptions: CaslOptions,
     @Inject(SESSION_SERVICE)
-    private sessionService: SessionService,
+    private sessionService: SessionService<UserMin>,
     private ability: Ability,
   ) {
     super();

@@ -2,11 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import {
-  AUTH_OPTIONS,
-  AuthenticationOptions,
-  SESSION_SERVICE,
-} from '../../configs/authentication.config';
+import { AUTHENTICATION_OPTIONS, SESSION_SERVICE } from '../../constants';
+import { AuthenticationOptions } from '../../dtos';
 import { SessionService } from '../../interfaces';
 
 import { ErrorService } from '@tractr/angular-tools';
@@ -22,7 +19,7 @@ export class LoginComponent {
   constructor(
     private errorService: ErrorService,
     private router: Router,
-    @Inject(AUTH_OPTIONS)
+    @Inject(AUTHENTICATION_OPTIONS)
     private options: AuthenticationOptions,
     @Inject(SESSION_SERVICE)
     private sessionService: SessionService,

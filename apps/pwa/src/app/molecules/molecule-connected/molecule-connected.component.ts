@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { User } from '@prisma/client';
 
-import { User } from '@generated/models';
 import {
   SESSION_SERVICE,
   SessionService,

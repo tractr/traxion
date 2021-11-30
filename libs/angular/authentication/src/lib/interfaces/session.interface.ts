@@ -1,9 +1,9 @@
 import { RouterStateSnapshot } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { User } from '../generated/models';
-
-export interface SessionService<U = User> {
+export interface SessionService<
+  U extends Record<string, unknown> = Record<string, unknown>,
+> {
   me$: Observable<U | null>;
 
   logged$: BehaviorSubject<boolean>;
@@ -23,6 +23,8 @@ export interface SessionService<U = User> {
   popUrlAfterLogin(): string | undefined;
 }
 
-export interface SessionServiceClass<User> {
-  new (): SessionService<User>;
+export interface SessionServiceClass<
+  U extends Record<string, unknown> = Record<string, unknown>,
+> {
+  new (): SessionService<U>;
 }

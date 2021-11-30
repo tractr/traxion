@@ -43,7 +43,6 @@ module.exports = {
     '<rootDir>/libs/terraform/service/postgres',
     '<rootDir>/apps/terraform',
     '<rootDir>/libs/schematics',
-    '<rootDir>/apps/schematics-e2e',
     '<rootDir>/libs/terraform/component/deployment-trigger',
     '<rootDir>/libs/terraform/component/deployment',
     '<rootDir>/libs/terraform/component/secrets',
