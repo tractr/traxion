@@ -48,10 +48,6 @@ describe('Authentication Module with async options', () => {
                 secret: 'integration-tests',
               },
               userService: AUTHENTICATION_MOCK_USER_SERVICE,
-
-              api: {
-                url: 'not tested yet',
-              },
             }),
         }),
       ],
@@ -70,9 +66,6 @@ describe('Authentication Module with async options', () => {
     );
 
     expect(authenticationOptions).toEqual({
-      api: {
-        url: 'not tested yet',
-      },
       cookies: {
         cookieName: 'authCookie',
         options: {
@@ -146,9 +139,6 @@ describe('Authentication Module with reset password', () => {
               secret: 'integration-tests',
             },
             userService: AUTHENTICATION_MOCK_USER_SERVICE,
-            api: {
-              url: 'not tested yet',
-            },
             password: {
               ...getDefaults(AuthenticationOptionsPassword),
               reset: {
@@ -188,9 +178,6 @@ describe('Authentication Module with reset password', () => {
             secret: 'integration-tests',
           },
           userService: AUTHENTICATION_MOCK_USER_SERVICE,
-          api: {
-            url: 'not tested yet',
-          },
           password: {
             ...getDefaults(AuthenticationOptionsPassword),
             reset: {

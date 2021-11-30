@@ -1,5 +1,4 @@
 export * from './access-token.dto';
-export * from './authentication-options-api.dto';
 export * from './authentication-options-cookies.dto';
 export * from './authentication-options-mailer.dto';
 export * from './authentication-options-password-reset.dto';
