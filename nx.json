@@ -113,7 +113,6 @@
       "tags": ["scope:nestjs"]
     },
     "nestjs-casl": {
-      "implicitDependencies": ["hapify-config", "hapify-generate-config"],
       "tags": ["scope:nestjs"]
     },
     "nestjs-core": {
@@ -151,10 +150,6 @@
       "tags": ["scope:app"]
     },
     "schematics": {
-      "tags": []
-    },
-    "schematics-e2e": {
-      "implicitDependencies": ["schematics"],
       "tags": []
     },
     "terraform": {
