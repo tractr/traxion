@@ -109,6 +109,11 @@ function prismaType(f, m) {
               case 'text': return out += " @db.Text";
               default: return out += " @db.VarChar(255)";
           }
+      case 'datetime':
+          switch(f.subtype) {
+              case 'date': return out += " @db.Date";
+              case 'time': return out += " @db.Time(3)";
+          }
       default: return out;
   }
 
