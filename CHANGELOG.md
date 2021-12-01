@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.27.2](https://github.com/tractr/stack/compare/v1.27.1...v1.27.2) (2021-12-01)
+
+
+### Bug Fixes
+
+* replace unallowed caractere to the s3 store for deployment ([#315](https://github.com/tractr/stack/issues/315)) ([29f6776](https://github.com/tractr/stack/commit/29f67765c83e60b782c51c4c964b6f9381772144))
+
+
+
 ## [1.27.1](https://github.com/tractr/stack/compare/v1.27.0...v1.27.1) (2021-11-30)
 
 
