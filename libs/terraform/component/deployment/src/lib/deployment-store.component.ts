@@ -22,7 +22,7 @@ export class DeploymentStoreComponent extends AwsComponent<ConstructOptions> {
   protected createS3Bucket() {
     return new S3Bucket(this, 's3', {
       provider: this.provider,
-      bucketPrefix: this.getResourceName('', 37),
+      bucketPrefix: this.getResourceName('', 37).replace(/_/g, '-'),
       acl: 'private',
       forceDestroy: true,
       versioning: [{ enabled: false }],
