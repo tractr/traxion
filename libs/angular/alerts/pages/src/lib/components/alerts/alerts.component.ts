@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 import { PageInterface, PageService } from '@cali/angular-common-utils';
 
@@ -28,14 +28,16 @@ export class AlertsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.url.subscribe((urls: UrlSegment[]) => {
-      if (urls[urls.length - 1].path === 'archives') {
-        this.pageData.title = 'page_title-alerts-archived';
-      } else {
-        this.pageData.title = 'page_title-alerts-in-progess';
-      }
-      this.pageService.setPage(this.pageData);
-    });
+    this.activatedRoute.url
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((urls: UrlSegment[]) => {
+        if (urls[urls.length - 1].path === 'archives') {
+          this.pageData.title = 'page_title-alerts-archived';
+        } else {
+          this.pageData.title = 'page_title-alerts-in-progess';
+        }
+        this.pageService.setPage(this.pageData);
+      });
   }
 
   ngOnDestroy() {

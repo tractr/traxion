@@ -57,9 +57,10 @@ export class AlertFeedbackModelModule
         return next(params);
 
       // Select the id and alertId fields if it is not selected in the incoming params
-      const customSelect = params.args.select
-        ? { ...params.args.select, id: true, alertId: true }
-        : {};
+      const customSelect =
+        !params.args.include && params.args.select
+          ? { ...params.args.select, id: true, alertId: true }
+          : undefined;
 
       // Execute the database request is custom select
       const result = await next({
@@ -83,11 +84,12 @@ export class AlertFeedbackModelModule
 
       // Remove the id field if it was not selected in the incoming params
       // to keep middleware transparency
-      if (!params.args.select?.id) delete result.id;
+      if (params.args.select && !params.args.select.id) delete result.id;
 
       // Remove the alertId field if it was not selected in the incoming params
       // to keep middleware transparency
-      if (!params.args.select?.alertId) delete result.alertId;
+      if (params.args.select && !params.args.select.alertId)
+        delete result.alertId;
 
       // Return database request result
       return result;

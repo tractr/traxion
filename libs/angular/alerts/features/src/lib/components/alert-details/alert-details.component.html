@@ -1,4 +1,8 @@
 <cali-alert-details-ui
-  *ngIf="alert$ | async as alert"
-  [alert]="alert"
+  *ngIf="alertWithCurrentFeedbacks$ | async as alertWithFeedbacks"
+  [alert]="alertWithFeedbacks"
 ></cali-alert-details-ui>
+<cali-feedback-details
+  *ngIf="alertWithCurrentFeedbacks$ | async as alertWithFeedbacks"
+  [feedback]="alertWithFeedbacks.alertFeedbacks[0]"
+></cali-feedback-details>

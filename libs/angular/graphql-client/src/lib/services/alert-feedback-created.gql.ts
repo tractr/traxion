@@ -3,7 +3,7 @@ import { gql, Subscription } from 'apollo-angular';
 
 @Injectable()
 export class AlertFeedbackCreatedGql extends Subscription<{
-  alertFeedbackCreated: { id: string };
+  alertFeedbackCreated: { id: string; alertId: string };
 }> {
   document = gql`
     subscription {

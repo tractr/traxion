@@ -1,4 +1,4 @@
-<ng-container *ngIf="lastFeedback$ | async as feedback">
+<ng-container *ngIf="feedback">
   <cali-feedback-status-ui [alertFeedback]="feedback"></cali-feedback-status-ui>
   <cali-feedback-survey-ui
     [alertFeedback]="feedback"

@@ -8,9 +8,14 @@ import {
 } from './components';
 
 import { AngularAlertsUiModule } from '@cali/angular-alerts-ui';
+import { AngularFeedbacksFeaturesModule } from '@cali/angular-feedbacks-features';
 
 @NgModule({
-  imports: [CommonModule, AngularAlertsUiModule],
+  imports: [
+    CommonModule,
+    AngularAlertsUiModule,
+    AngularFeedbacksFeaturesModule,
+  ],
   declarations: [
     AlertDetailsComponent,
     AlertListInProgressComponent,

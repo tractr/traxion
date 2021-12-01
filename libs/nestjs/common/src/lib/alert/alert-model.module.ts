@@ -65,9 +65,10 @@ export class AlertModelModule extends ModuleOverride implements OnModuleInit {
         return next(params);
 
       // Select the id field if it is not selected in the incoming params
-      const customSelect = params.args.select
-        ? { ...params.args.select, id: true }
-        : { id: true };
+      const customSelect =
+        !params.args.include && params.args.select
+          ? { ...params.args.select, id: true }
+          : undefined;
 
       // Execute the database request is custom select
       const result = await next({
@@ -91,7 +92,7 @@ export class AlertModelModule extends ModuleOverride implements OnModuleInit {
 
       // Remove the id field if it was not selected in the incoming params
       // to keep middleware transparency
-      if (!params.args.select?.id) delete result.id;
+      if (params.args.select && !params.args.select.id) delete result.id;
 
       // Return database request result
       return result;

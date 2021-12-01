@@ -45,7 +45,6 @@ export class AlertWithCurrentFeedbackController {
           orderBy: {
             createdAt: 'desc',
           },
-          take: 1,
         },
       },
     });
