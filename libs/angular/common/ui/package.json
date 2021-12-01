@@ -1,6 +1,6 @@
 {
   "name": "@cali/angular-common-ui",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "dependencies": {
     "tslib": "^2.2.0"
   },
