@@ -19,10 +19,10 @@
       "@cali/angular-alerts-utils": ["libs/angular/alerts/utils/src/index.ts"],
       "@cali/angular-common-ui": ["libs/angular/common/ui/src/index.ts"],
       "@cali/angular-common-utils": ["libs/angular/common/utils/src/index.ts"],
-      "@cali/angular-feedback-ui": ["libs/angular/feedbacks/ui/src/index.ts"],
       "@cali/angular-feedbacks-features": [
         "libs/angular/feedbacks/features/src/index.ts"
       ],
+      "@cali/angular-feedbacks-ui": ["libs/angular/feedbacks/ui/src/index.ts"],
       "@cali/angular-graphql-client": [
         "libs/angular/graphql-client/src/index.ts"
       ],

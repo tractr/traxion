@@ -2,7 +2,11 @@ nz-radio-group {
   @apply w-full flex justify-between items-center;
 
   label.ant-radio-button-wrapper {
-    @apply border-cali-dark border rounded font-semibold text-sm text-cali-dark flex items-center h-auto py-2 px-4;
+    @apply border-cali-dark border rounded font-semibold text-sm text-cali-dark flex items-center justify-center w-full h-auto py-2 px-4 mr-4;
+
+    &:last-child{
+      @apply mr-0;
+    }
 
     &::ng-deep > span:not(.ant-radio-button) {
       @apply flex items-center;

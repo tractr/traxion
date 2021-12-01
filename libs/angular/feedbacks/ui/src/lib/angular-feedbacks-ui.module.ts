@@ -23,6 +23,13 @@ import { AngularCommonUiModule } from '@cali/angular-common-ui';
     FeedbackSurveyUiComponent,
     FeedbackStatusUiComponent,
   ],
-  exports: [],
+  exports: [
+    FeedbackTypesSelectorUiComponent,
+    FeedbackQualificationsSelectorUiComponent,
+    FeedbackPertinentUiComponent,
+    FeedbackEstimationsUiComponent,
+    FeedbackSurveyUiComponent,
+    FeedbackStatusUiComponent,
+  ],
 })
 export class AngularFeedbacksUiModule {}

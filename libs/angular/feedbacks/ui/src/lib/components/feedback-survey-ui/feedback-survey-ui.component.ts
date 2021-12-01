@@ -20,7 +20,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedbackSurveyUiComponent {
-  @Output() alertFeedbackChange = new EventEmitter();
+  @Output() alertFeedbackChange = new EventEmitter<AlertFeedback>();
 
   @Input() alertFeedback!: AlertFeedback;
 
@@ -50,7 +50,7 @@ export class FeedbackSurveyUiComponent {
   alertFeedbackPertinentChange(isPertinent: boolean) {
     this.alertFeedback = {
       ...this.alertFeedback,
-      isPertinent,
+      isPertinent: isPertinent === null ? true : isPertinent,
     };
     this.alertFeedbackChange.emit(this.alertFeedback);
   }

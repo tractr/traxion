@@ -382,7 +382,7 @@
             "config": {
               "configFolder": "libs/angular/feedbacks/ui/.storybook"
             },
-            "outputPath": "dist/storybook/angular-feedback-ui",
+            "outputPath": "dist/storybook/angular-feedbacks-ui",
             "uiFramework": "@storybook/angular"
           },
           "outputs": ["{options.outputPath}"]

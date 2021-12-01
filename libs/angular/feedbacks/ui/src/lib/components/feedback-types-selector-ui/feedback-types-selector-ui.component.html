@@ -1,14 +1,20 @@
 <nz-radio-group [(ngModel)]="alertFeedbackType">
-  <label nz-radio-button nzValue="thief"
-    >{{ 'status-alert-type-thief' | translate
+  <label nz-radio-button nzValue="thief" (click)="alertFeedbackTypeOnChange()"
+    >{{ 'status-feedback-type-thief' | translate
     }}<i nz-icon nzType="check" nzTheme="outline"></i
   ></label>
-  <label nz-radio-button nzValue="suspectBehaviour"
-    >{{ 'status-alert-type-suspectBehaviour' | translate
+  <label
+    nz-radio-button
+    nzValue="suspectBehaviour"
+    (click)="alertFeedbackTypeOnChange()"
+    >{{ 'status-feedback-type-suspectBehaviour' | translate
     }}<i nz-icon nzType="check" nzTheme="outline"></i
   ></label>
-  <label nz-radio-button nzValue="falseAlert"
-    >{{ 'status-alert-type-falseAlert' | translate
+  <label
+    nz-radio-button
+    nzValue="falseAlert"
+    (click)="alertFeedbackTypeOnChange()"
+    >{{ 'status-feedback-type-falseAlert' | translate
     }}<i nz-icon nzType="check" nzTheme="outline"></i
   ></label>
 </nz-radio-group>

@@ -1,3 +1,6 @@
-<label nz-checkbox [(ngModel)]="alertFeedbackPertinent">{{
-  'feedback-pertinent-label-checkbox' | translate
-}}</label>
+<label
+  nz-checkbox
+  [nzChecked]="!alertFeedbackPertinent"
+  (nzCheckedChange)="alertFeedbackPertinentOnChange($event)"
+  >{{ 'feedback-pertinent-label-checkbox' | translate }}</label
+>

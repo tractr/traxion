@@ -3,8 +3,9 @@
     *ngFor="let qualification of feedbackQualifications"
     nz-radio-button
     [nzValue]="qualification"
+    (click)="alertFeedbackQualificationOnChange()"
   >
-    {{ 'feedback-qualification-' + qualification | translate }}
+    {{ 'status-feedback-qualification-' + qualification | translate }}
     <i nz-icon nzType="check" nzTheme="outline"></i>
   </label>
 </nz-radio-group>

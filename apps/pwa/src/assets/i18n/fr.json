@@ -2,6 +2,7 @@
   "alert": "Alertes",
   "archive": "Archives",
   "dashboard": "Tableau de bord",
+  "feedback-pertinent-label-checkbox": "Ne plus envoyer de vidéo avec ce type de comportement",
   "filter-common-all": "Tous",
   "filter-common-period": "Période",
   "filter-period-1-year": "Dernière année",

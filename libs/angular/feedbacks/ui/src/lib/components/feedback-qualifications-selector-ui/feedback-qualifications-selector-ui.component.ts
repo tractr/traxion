@@ -25,26 +25,15 @@ export class FeedbackQualificationsSelectorUiComponent {
   }
   /** Getter and setter to alertFeedbackType variable */
 
-  /** Getter and setter to alertFeedbackQualification variable */
-  private alertFeedbackQualificationValue: AlertFeedbackQualification | null =
-    null;
+  feedbackQualifications: AlertFeedbackQualification[] = [];
 
   @Output() alertFeedbackQualificationChange = new EventEmitter();
 
-  @Input()
-  get alertFeedbackQualification() {
-    return this.alertFeedbackQualificationValue;
-  }
+  @Input() alertFeedbackQualification: AlertFeedbackQualification | null = null;
 
-  set alertFeedbackQualification(qualification) {
-    this.alertFeedbackQualificationValue = qualification;
-    this.alertFeedbackQualificationChange.emit(
-      this.alertFeedbackQualificationValue,
-    );
+  alertFeedbackQualificationOnChange() {
+    this.alertFeedbackQualificationChange.emit(this.alertFeedbackQualification);
   }
-  /** Getter and setter to alertFeedbackQualification variable */
-
-  feedbackQualifications: AlertFeedbackQualification[] = [];
 
   getQualifications(
     feedbackType: AlertFeedbackType,

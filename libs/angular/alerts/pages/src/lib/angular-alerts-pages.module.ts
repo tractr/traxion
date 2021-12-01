@@ -9,6 +9,7 @@ import { AlertComponent, AlertsComponent } from './components';
 
 import { AngularAlertsFeaturesModule } from '@cali/angular-alerts-features';
 import { AngularCommonUiModule } from '@cali/angular-common-ui';
+import { AngularFeedbacksFeaturesModule } from '@cali/angular-feedbacks-features';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -32,6 +33,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularCommonUiModule,
     AngularAlertsPagesRoutingModule,
     AngularAlertsFeaturesModule,
+    AngularFeedbacksFeaturesModule,
   ],
   exports: [AngularAlertsPagesRoutingModule],
   declarations: [AlertsComponent, AlertComponent],
