@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  # Take all the packages and release them to https://npm.pkg.github.com
+  # Take all the packages and release them to ${{ secrets.NPM_REGISTRY_URL }}
   npm-release:
     if: "!contains(github.event.commits[0].message, 'chore(release):')"
 
@@ -56,8 +56,8 @@ jobs:
           git config --local user.email 'tractr-bot@users.noreply.github.com'
 
       # We run our version script
-      - name: nx run workspace:version
-        run: npx nx run workspace:release --base latest
+      - name: Run npm affected:release
+        run: npm run affected:release -- --base latest
 
       - name: Push changes
         uses: ad-m/github-push-action@master
@@ -86,7 +86,9 @@ jobs:
               .filter((name) => fs.existsSync(join(process.cwd(), 'apps', name, 'Dockerfile')));
 
             console.log('Set the matrix to deploy the docker container:', apps);
-            return apps;
+            // return apps;
+            // For testing purposes
+            return ['pwa', 'api', 'message-broker-handler'];
 
       - name: Get the last commit SHA
         id: commit
@@ -100,7 +102,7 @@ jobs:
           SHA: ${{ steps.commit.outputs.sha }}
 
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{secrets.GH_TOKEN}}
           script: |
             try {
               console.log("Remove the latest tag from the repository")
@@ -125,17 +127,17 @@ jobs:
     if: |
       !contains(github.event.commits[0].message, 'chore(release):') &&
       !failure() &&
-      !contains(needs.npm-changes.outputs.apps, '[]')
+      !contains(needs.npm-release.outputs.apps, '[]')
     needs: [npm-release]
     strategy:
       matrix:
         app: ${{ fromJSON(needs.npm-release.outputs.apps) }}
         node: [16.x]
-        os: [ubuntu-latest]
+        os: [node-16]
         scope: [tractr]
         repository: [tractr]
     name: docker release ${{ matrix.app }} (@${{ matrix.scope }})
-    runs-on: ['${{ matrix.os }}']
+    runs-on: [self-hosted, awscli, '${{ matrix.os }}']
     steps:
       # Checkout the source code
       - uses: actions/checkout@v2
@@ -146,6 +148,11 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           registry-url: ${{ secrets.NPM_REGISTRY_URL }}
+
+      - name: Npm rc configuration
+        env:
+          NPM_CONFIG_USERCONFIG: ${{ env.NPM_CONFIG_USERCONFIG }}
+        run: cat $NPM_CONFIG_USERCONFIG
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -163,9 +170,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ matrix.app }}-${{ github.sha }}
+          key: ${{ runner.os }}-dockerbuild-${{ matrix.app }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-buildx-${{ matrix.app }}-
+            ${{ runner.os }}-dockerbuild-${{ matrix.app }}-
 
       - name: Extract version
         id: extract_version
@@ -192,7 +199,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
-      # RSetup buildx
+      # Setup buildx
       - uses: docker/setup-buildx-action@v1
         id: buildx
         with:

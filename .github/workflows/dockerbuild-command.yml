@@ -73,11 +73,11 @@ jobs:
       matrix:
         app: ${{ fromJSON(needs.docker-apps.outputs.apps) }}
         node: [16.x]
-        os: [ubuntu-latest]
+        os: [node-16]
         scope: [tractr]
         repository: [tractr]
     name: docker release ${{ matrix.app }} (@${{ matrix.scope }})
-    runs-on: ['${{ matrix.os }}']
+    runs-on: [self-hosted, awscli, '${{ matrix.os }}']
     steps:
       # Checkout the source code
       - uses: actions/checkout@v2
@@ -88,6 +88,11 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           registry-url: ${{ secrets.NPM_REGISTRY_URL }}
+
+      - name: Npm rc configuration
+        env:
+          NPM_CONFIG_USERCONFIG: ${{ env.NPM_CONFIG_USERCONFIG }}
+        run: cat $NPM_CONFIG_USERCONFIG
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -105,9 +110,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ matrix.app }}-${{ github.sha }}
+          key: ${{ runner.os }}-cali-${{ matrix.app }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-buildx-${{ matrix.app }}-
+            ${{ runner.os }}-cali-${{ matrix.app }}-
 
       - name: Extract version
         id: extract_version
@@ -134,7 +139,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
-      # RSetup buildx
+      # Setup buildx
       - uses: docker/setup-buildx-action@v1
         id: buildx
         with:
