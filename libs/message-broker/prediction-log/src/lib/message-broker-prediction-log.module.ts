@@ -9,7 +9,10 @@ import {
 } from './constants';
 import { MessageBrokerPredictionLogService } from './services';
 
-import { MessageBrokerConfiguration } from '@cali/message-broker-common';
+import {
+  generateConnectionUrl,
+  MessageBrokerConfiguration,
+} from '@cali/message-broker-common';
 
 @Module({})
 export class MessageBrokerPredictionLogModule extends ModuleOptionsFactory<MessageBrokerConfiguration>(
@@ -41,7 +44,8 @@ export class MessageBrokerPredictionLogModule extends ModuleOptionsFactory<Messa
                 type: 'fanout',
               },
             ],
-            uri: configuration.url,
+
+            uri: generateConnectionUrl(configuration),
             connectionInitOptions: { wait: true },
           }),
           inject: [MESSAGE_BROKER_PREDICTION_LOG_CONFIGURATION],

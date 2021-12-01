@@ -17,6 +17,11 @@ import {
   PubSubQueue,
 } from '@cali/nestjs-pub-sub';
 
+const PrismaMiddlewareActionMap = {
+  create: PubSubQueue.alertCreated,
+  update: PubSubQueue.alertUpdated,
+} as const;
+
 const providers = [
   {
     provide: ALERT_SERVICE,
@@ -45,12 +50,18 @@ export class AlertModelModule extends ModuleOverride implements OnModuleInit {
   }
 
   /**
-   * Add a prisma middleware to send push notification on Alert creation
+   * Add a prisma middleware to send push notification on Alert creation and update
    */
   onModuleInit() {
     this.databaseService.$use(async (params, next) => {
-      // Bypass middleware for event that ar not alert creation
-      if (params.model !== 'Alert' || params.action !== 'create')
+      // List of the action handled by the middleware
+      const middlewareActions = Object.keys(PrismaMiddlewareActionMap);
+
+      // Bypass middleware for event that ar not alert creation or update
+      if (
+        params.model !== 'Alert' ||
+        !middlewareActions.includes(params.action)
+      )
         return next(params);
 
       // Select the id field if it is not selected in the incoming params
@@ -64,14 +75,17 @@ export class AlertModelModule extends ModuleOverride implements OnModuleInit {
         args: { ...params.args, select: customSelect },
       });
 
+      // Dynamically determine the queue to publish events, depending of the prisma action
+      const pubSubQueue = PrismaMiddlewareActionMap[params.action];
+
       // Send the id of the created feedback via push notification
       try {
-        await this.pubSub.publish(PubSubQueue.alertCreated, {
-          [PubSubQueue.alertCreated]: { id: result.id },
+        await this.pubSub.publish(pubSubQueue, {
+          [pubSubQueue]: { id: result.id },
         });
       } catch (error) {
         this.logger.error(
-          `Something went wrong while publishing to ${PubSubQueue.alertCreated}: ${error}`,
+          `Something went wrong while publishing to ${pubSubQueue}: ${error}`,
         );
       }
 

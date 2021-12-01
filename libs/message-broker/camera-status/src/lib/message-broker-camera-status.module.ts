@@ -9,7 +9,10 @@ import {
 } from './constants';
 import { MessageBrokerCameraStatusService } from './services';
 
-import { MessageBrokerConfiguration } from '@cali/message-broker-common';
+import {
+  generateConnectionUrl,
+  MessageBrokerConfiguration,
+} from '@cali/message-broker-common';
 
 @Module({})
 export class MessageBrokerCameraStatusModule extends ModuleOptionsFactory<MessageBrokerConfiguration>(
@@ -41,7 +44,7 @@ export class MessageBrokerCameraStatusModule extends ModuleOptionsFactory<Messag
                 type: 'fanout',
               },
             ],
-            uri: configuration.url,
+            uri: generateConnectionUrl(configuration),
             connectionInitOptions: { wait: true },
           }),
           inject: [MESSAGE_BROKER_CAMERA_STATUS_CONFIGURATION],

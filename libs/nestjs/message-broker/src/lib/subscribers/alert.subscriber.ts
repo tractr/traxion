@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { Logger } from '@tractr/nestjs-core';
 import { PubSub } from 'graphql-subscriptions';
 
 import { NESTJS_MESSAGE_BROKER_ALERT_QUEUE } from '../constants';
@@ -13,10 +14,12 @@ import { PUB_SUB_SERVICE } from '@cali/nestjs-pub-sub';
 @Injectable()
 export class AlertSubscriber {
   constructor(
-    // TODO: add logger
+    private readonly logger: Logger,
     @Inject(ALERT_SERVICE) private readonly alertService: AlertService,
     @Inject(PUB_SUB_SERVICE) private readonly pubSub: PubSub,
-  ) {}
+  ) {
+    this.logger.setContext(AlertSubscriber.name);
+  }
 
   /**
    * Handle new alerts received from the message broker by inserting
@@ -32,13 +35,17 @@ export class AlertSubscriber {
     cameraExternalId,
     ...messageBrokerAlert
   }: MessageBrokerAlert) {
+    this.logger.debug(
+      `Received new alert from message broker (externalId: ${cameraExternalId}`,
+    );
+
     try {
       // Get default value for the new alert
       const { createdAt, videoStatus, videoUrl } =
         this.alertService.getDefaultInternals();
 
       // Insert new alert in database
-      await this.alertService.create({
+      const alert = await this.alertService.create({
         data: {
           ...messageBrokerAlert,
           createdAt,
@@ -54,8 +61,13 @@ export class AlertSubscriber {
           },
         },
       });
-    } catch (e) {
-      console.error(e);
+      this.logger.debug(
+        `Created new alert received from message broker (id: ${alert.id}`,
+      );
+    } catch (error) {
+      this.logger.error(
+        `Failed to create new alert received from message broker (externalId: ${cameraExternalId}): ${error}`,
+      );
     }
   }
 }

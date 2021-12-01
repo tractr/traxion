@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { Inject, Injectable } from '@nestjs/common';
+import { Logger } from '@tractr/nestjs-core';
 import { PubSub } from 'graphql-subscriptions';
 
 import { NESTJS_MESSAGE_BROKER_VIDEO_GENERATION_QUEUE } from '../constants';
@@ -23,16 +24,22 @@ type AlertVideoUpdatedData = {
 @Injectable()
 export class VideoGenerationSubscriber {
   constructor(
-    // TODO: add logger
+    private readonly logger: Logger,
     @Inject(ALERT_SERVICE) private readonly alertService: AlertService,
     @Inject(PUB_SUB_SERVICE) private readonly pubSub: PubSub,
-  ) {}
+  ) {
+    this.logger.setContext(VideoGenerationSubscriber.name);
+  }
 
   @MessageBrokerVideoGenerationSubscribe({
     queue: NESTJS_MESSAGE_BROKER_VIDEO_GENERATION_QUEUE,
     routingKey: '',
   })
   async handleVideoGenerationUpdated(rawMessage: MessageBrokerVideoGeneration) {
+    this.logger.debug(
+      `Received new video generation update from message broker (numFrame: ${rawMessage.num_frame}`,
+    );
+
     const message = this.formatVideoGenerationMessage(rawMessage);
     const updatedData: AlertVideoUpdatedData = {
       videoStatus: message.eventType,
@@ -46,11 +53,11 @@ export class VideoGenerationSubscriber {
         data: { ...updatedData },
       });
 
-      await this.pubSub.publish('alertVideoUpdated', {
-        alertUpdated: { id: alert.id },
-      });
-    } catch (e) {
-      console.error(e);
+      this.logger.debug(`Updated alert with new video status (id: ${alert.id}`);
+    } catch (error) {
+      this.logger.error(
+        `Failed to update alert with new video status (numFrame: ${rawMessage.num_frame}): ${error}`,
+      );
     }
   }
 

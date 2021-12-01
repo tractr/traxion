@@ -150,7 +150,9 @@ export class AlertListInProgressComponent {
         const alertToUpdateIndex = alerts.findIndex(
           (existingAlert) => existingAlert.id === alert.id,
         );
-        return [...alerts].splice(alertToUpdateIndex, 1, alert);
+        const updatedAlerts = [...alerts];
+        updatedAlerts.splice(alertToUpdateIndex, 1, alert);
+        return updatedAlerts;
       }
       default:
         throw new Error('Unknown event type');

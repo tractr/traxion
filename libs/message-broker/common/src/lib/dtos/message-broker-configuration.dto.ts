@@ -1,20 +1,34 @@
-import { IsString, IsUrl } from 'class-validator';
+import { IsIn, IsString } from 'class-validator';
 
 export class MessageBrokerConfiguration {
   /**
-   * Url of the message broker
+   * Domain of the message broker
    */
-  @IsUrl({
-    protocols: ['amqp'],
-    require_port: true,
-    require_protocol: true,
-    require_tld: false,
-  })
-  url!: string;
+  @IsString()
+  domain: string;
 
+  /**
+   * Port of the message broker
+   */
+  @IsString()
+  port: string;
+
+  /**
+   * Protocol of the message broker
+   */
+  @IsString()
+  @IsIn(['amqp', 'amqps'])
+  protocol: string;
+
+  /**
+   * User of the message broker
+   */
   @IsString()
   user!: string;
 
+  /**
+   * User's password
+   */
   @IsString()
   password!: string;
 }
