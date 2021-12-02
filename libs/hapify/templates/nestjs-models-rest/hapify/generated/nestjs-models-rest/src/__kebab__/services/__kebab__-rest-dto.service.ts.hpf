@@ -114,7 +114,11 @@ export class <<Model pascal>>RestDtoService {
     const where = {
     <<for Fields searchable and (multiple or entity) field>>
       <<if field multiple and not entity>>
-        <<field camel>>: <<field camel>> ? { hasSome: <<field camel>> } : undefined,
+        <<if field object>>
+          <<field camel>>: <<field camel>> ? { equals: <<field camel>> } : undefined,
+        <<else>>
+          <<field camel>>: <<field camel>> ? { hasSome: <<field camel>> } : undefined,
+        <<endif>>
       <<elseif field oneOne or oneMany>>
         <<field camel>>: { id: <<field camel>> },
       <<else>>
@@ -177,7 +181,11 @@ export class <<Model pascal>>RestDtoService {
     const where: Prisma.<<Model pascal>>WhereInput = {
     <<for Fields searchable and (multiple or entity) field>>
       <<if field multiple and not entity>>
-      <<field camel>>: <<field camel>> ? { hasSome: <<field camel>> } : undefined,
+        <<if field object>>
+          <<field camel>>: <<field camel>> ? { equals: <<field camel>> } : undefined,
+        <<else>>
+          <<field camel>>: <<field camel>> ? { hasSome: <<field camel>> } : undefined,
+        <<endif>>
       <<elseif field oneOne or oneMany>>
       <<field camel>>: { id: <<field camel>> },
       <<else>>

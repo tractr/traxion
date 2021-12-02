@@ -44,9 +44,20 @@ import {
   Matches, 
   <<endif>>
 
+  <<if Fields object and not internal>>
+  IsObject, 
+  <<< if (root.f.multiple.some(e => e.type ==='object')) { >>>
+  IsArray,
+  <<< } >>>
+  <<endif>>
+
 } from 'class-validator';
 <<endif>>
-  
+
+<<if Fields object>>
+import { Prisma } from '@prisma/client';
+<<endif>>
+
 <<if Fields enum>>
 import {
   <<for Fields enum enumField>>
@@ -73,6 +84,7 @@ import {
  
 export class <<Model pascal>>CreateBodyDto {
 <<for Fields not internal field>>
+
   <<if field boolean>>
   @IsBoolean(<<=listModifier(field)>>)
   @TransformStringToBoolean()
@@ -122,6 +134,13 @@ export class <<Model pascal>>CreateBodyDto {
   @IsOptional()
   <<endif>>
 
+  <<if field object>>
+  @IsObject(<<=listModifier(field)>>) 
+  <<< if (field.multiple) { >>>
+  @IsArray()
+  <<< } >>>
+  <<endif>>
+
   <<=typedProperty(field)>>
    
 <<endfor>>
@@ -137,6 +156,7 @@ function typedProperty(f) {
   else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;
   else if (f.type === "number") out += "number";
   else if (f.type === "datetime") out += "Date";
+  else if (f.type === "object") out += "Prisma.JsonObject";
   else if (f.type === "entity") {
     out +=  "string";
   }

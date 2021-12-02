@@ -101,7 +101,7 @@
             "backRelation": "messages"
           },
           "name": "questions",
-          "properties": ["multiple"],
+          "properties": ["multiple", "searchable", "sortable"],
           "subtype": "manyMany",
           "type": "entity",
           "value": "6894a782-2e83-cd6a-52cc-f62967165636"
@@ -272,10 +272,20 @@
           "type": "string"
         },
         {
+          "name": "listObject",
+          "properties": ["multiple", "searchable", "sortable"],
+          "type": "object"
+        },
+        {
           "name": "roles",
           "properties": ["multiple", "searchable", "sortable"],
           "type": "enum",
           "value": ["admin", "user", "guest"]
+        },
+        {
+          "name": "Object",
+          "properties": [],
+          "type": "object"
         }
       ],
       "id": "a7d0308a-49f0-3458-0975-1dce106136a1",

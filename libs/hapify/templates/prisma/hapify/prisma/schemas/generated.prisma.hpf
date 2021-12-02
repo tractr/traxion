@@ -95,12 +95,13 @@ function prismaType(f, m) {
     if(f.subtype === "float" || f.subtype === "latitude" || f.subtype === "longitude") out += "Float";
     else out += "Int";
   } else if (f.type === "datetime") out += "DateTime";
+  else if (f.type === "object") out += "Json";
   else if (f.type === "entity") {
     out += f.m.names.pascal;
   }
 
   // Handle nullable and multiple fields
-  if (f.multiple) out += "[]";
+  if (f.multiple && f.type !== "object") out += "[]";
   else if (f.nullable) out += "?";
 
   switch(f.type) {
@@ -108,6 +109,11 @@ function prismaType(f, m) {
           switch(f.subtype) {
               case 'text': return out += " @db.Text";
               default: return out += " @db.VarChar(255)";
+          }
+      case 'datetime':
+          switch(f.subtype) {
+              case 'date': return out += " @db.Date";
+              case 'time': return out += " @db.Time(3)";
           }
       case 'datetime':
           switch(f.subtype) {
