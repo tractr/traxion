@@ -44,7 +44,7 @@ import {
 
   <<if Fields object and not internal>>
   IsObject, 
-  <<< if (root.f.multiple.map(e => e.type ==='object').length) { >>>
+  <<< if (root.f.multiple.some(e => e.type ==='object')) { >>>
   IsArray,
   <<< } >>>
   <<endif>>

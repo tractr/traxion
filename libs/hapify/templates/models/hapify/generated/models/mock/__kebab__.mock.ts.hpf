@@ -10,6 +10,10 @@ import {
 } from '../enums';
 <<endif>>
 
+<<if Fields object>>
+import { Prisma } from '@prisma/client';
+<<endif>>
+
 import {
 
   <<if Fields primary or entity or number or boolean>>
@@ -80,8 +84,8 @@ function getBaseFaker(f) {
   if (f.type === 'number' && (f.subtype === 'float' || f.subtype === 'latitude' || f.subtype === 'longitude')) return 'datatype.float()';
   if (f.type === 'datetime') return 'date.past()';
   if (f.type === 'entity') return 'datatype.uuid()';
-  if (f.type === 'object' && f.multiple) return 'generateFakerjson(true)';
-  if (f.type === 'object')  return 'generateFakerjson()';
+  if (f.type === 'object' && f.multiple) return 'generateFakeObject()';
+  if (f.type === 'object')  return 'generateFakeObject()';
   if (f.type === 'enum') return `random.arrayElement(Object.values(${root.names.pascal}${f.names.pascal}))`;
 }
 >>>
@@ -108,22 +112,9 @@ function getMockReturnType(f) {
 >>>
 
 <<if Fields object>>
-function generateFakerjson(multiple = false) {
-  if(multiple) {
-    const array = [];
-    const countObject = Math.floor(Math.random() * 10);
-    for (let i=0; i<=countObject; i++) {
-      const countKeys = Math.floor(Math.random() * 10);
-      const tmp_obj : any = {};
-      for (let j=0; j<=countKeys; j++) {
-        tmp_obj[`key${j}`] = lorem.word();
-      }
-      array.push(tmp_obj);
-    }
-    return array;
-  }
-  const countKeys = Math.floor(Math.random() * 10);
-  const obj : any = {};
+function generateFakeObject() {
+ const countKeys = Math.floor(Math.random() * 10);
+  const obj : Prisma.JsonObject = {};
   for (let i=0; i<=countKeys; i++) {
     obj[`key${i}`] = lorem.word();
   }
