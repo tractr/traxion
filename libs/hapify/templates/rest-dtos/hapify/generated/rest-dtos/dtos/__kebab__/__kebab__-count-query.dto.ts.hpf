@@ -39,7 +39,18 @@ import {
   IsUUID,
   <<endif>>
 
+  <<if Fields object and not internal>>
+  IsObject, 
+  <<< if (root.f.multiple.map(e => e.type ==='object').length) { >>>
+  IsArray,
+  <<< } >>>
+  <<endif>>
+
 } from 'class-validator';
+
+<<if Fields object>>
+import { Prisma } from '@prisma/client';
+<<endif>>
   
 <<if Fields enum>>
 import {
@@ -67,6 +78,7 @@ import {
  
 export class <<Model pascal>>CountQueryDto {
 <<for Fields searchable and not password field>>
+  
   <<if field boolean>>
   @IsBoolean(<<=listModifier(field)>>)
   @TransformStringToBoolean()
@@ -108,6 +120,13 @@ export class <<Model pascal>>CountQueryDto {
   @TransformStringToDate()
   <<endif>>
 
+  <<if field object>>
+  @IsObject(<<=listModifier(field)>>) 
+  <<< if (field.multiple) { >>>
+  @IsArray()
+  <<< } >>>
+  <<endif>>
+
   @IsOptional()
   <<=optionalTypedProperty(field)>>
  
@@ -123,6 +142,7 @@ function optionalTypedProperty(f) {
   else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;
   else if (f.type === "number") out += "number";
   else if (f.type === "datetime") out += "Date";
+  else if (f.type === "object") out += "Prisma.JsonObject";
   else if (f.type === "entity") {
     out +=  "string"
   }

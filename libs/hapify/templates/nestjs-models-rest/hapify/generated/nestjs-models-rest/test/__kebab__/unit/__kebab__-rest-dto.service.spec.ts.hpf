@@ -105,7 +105,11 @@ describe('<<Model pascal>>DatabaseService', () => {
         ...values,
       <<for Fields searchable and (multiple or entity) field>>
         <<if field multiple and not entity>>
-          <<field camel>>: { hasSome: <<field camel>> },
+          <<if field object>>
+            <<field camel>>: { equals: <<field camel>> },
+          <<else>>
+            <<field camel>>: { hasSome: <<field camel>> },
+          <<endif>>
         <<elseif field oneOne or oneMany>>
           <<field camel>>: { id: <<field camel>> },
         <<else>>
@@ -169,7 +173,11 @@ describe('<<Model pascal>>DatabaseService', () => {
       const where = {
       <<for Fields searchable and (multiple or entity) field>>
         <<if field multiple and not entity>>
-        <<field camel>>: { hasSome: <<field camel>> },
+          <<if field object>>
+            <<field camel>>: { equals: <<field camel>> },
+          <<else>>
+            <<field camel>>: { hasSome: <<field camel>> },
+          <<endif>>
         <<elseif field oneOne or oneMany>>
         <<field camel>>: { id: <<field camel>> },
         <<else>>
