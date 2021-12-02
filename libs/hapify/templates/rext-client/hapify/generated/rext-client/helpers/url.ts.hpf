@@ -1,9 +1,12 @@
+import { Prisma } from '@prisma/client';
+
 export type URLSearchParamsType =
   | string
   | string[][]
   | Record<string, string>
   | URLSearchParams
-  | Record<string, string | number | boolean | string[] | string[][] | Date | undefined>;
+  | Record<string, string | number | boolean | string[] | string[][] | Date | undefined>
+  | Prisma.JsonObject | Prisma.JsonObject[];
  
 export function getUrlSearchParams(init: URLSearchParamsType) {
   const params = init;

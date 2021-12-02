@@ -44,7 +44,18 @@ import {
   Matches, 
   <<endif>>
 
+  <<if Fields object and not internal>>
+  IsObject,
+  <<< if (root.f.multiple.some(e => e.type ==='object')) { >>>
+  IsArray,
+  <<< } >>>
+  <<endif>>
+
 } from 'class-validator';
+<<endif>>
+
+<<if Fields object>>
+import { Prisma } from '@prisma/client';
 <<endif>>
    
 <<if Fields enum>>
@@ -118,6 +129,13 @@ export class <<Model pascal>>UpsertBodyDto {
   @TransformStringToDate()
   <<endif>>
 
+  <<if field object>>
+  @IsObject(<<=listModifier(field)>>) 
+  <<< if (field.multiple) { >>>
+  @IsArray()
+  <<< } >>>
+  <<endif>>
+
   <<if field nullable>>
   @IsOptional()
   <<endif>>
@@ -137,6 +155,7 @@ function optionalTypedProperty(f) {
   else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;
   else if (f.type === "number") out += "number";
   else if (f.type === "datetime") out += "Date";
+  else if (f.type === "object") out += "Prisma.JsonObject";
   else if (f.type === "entity") {
     out +=  "string";
   }
