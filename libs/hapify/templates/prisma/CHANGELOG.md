@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.28.0](https://github.com/tractr/stack/compare/v1.27.2...v1.28.0) (2021-12-02)
+
+
+### Features
+
+* implements object type in hapify ([#316](https://github.com/tractr/stack/issues/316)) ([7dfa584](https://github.com/tractr/stack/commit/7dfa58462f770b0a45346a873e7a8a9e8d413e1f))
+
+
+
 ## [1.27.2](https://github.com/tractr/stack/compare/v1.27.1...v1.27.2) (2021-12-01)
 
 
