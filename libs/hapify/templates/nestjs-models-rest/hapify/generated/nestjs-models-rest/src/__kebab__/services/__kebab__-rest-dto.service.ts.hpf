@@ -74,15 +74,15 @@ export class <<Model pascal>>RestDtoService {
     <<for Fields entity and not internal field>>
       <<if field oneOne or oneMany>>
         <<if field nullable>>
-    <<field camel>>: <<field camel>> ? { connect: { id: <<field camel>> } } : undefined,
+    <<field camel>>: <<field camel>> ? { set: { id: <<field camel>> } } : undefined,
         <<else>>
-    <<field camel>>: { connect: { id: <<field camel>> } },
+    <<field camel>>: { set: { id: <<field camel>> } },
         <<endif>>
       <<else>>
         <<if field nullable>>
-    <<field camel>>: <<field camel>> ? { connect: formatEntityIds(<<field camel>>) } : undefined,
+    <<field camel>>: <<field camel>> ? { set: formatEntityIds(<<field camel>>) } : undefined,
         <<else>>
-    <<field camel>>: { connect: formatEntityIds(<<field camel>>) },
+    <<field camel>>: { set: formatEntityIds(<<field camel>>) },
         <<endif>>
       <<endif>>
     <<endfor>>
@@ -229,9 +229,9 @@ export class <<Model pascal>>RestDtoService {
     const data = {
     <<for Fields not internal and entity field>>
       <<if field oneOne or oneMany>>
-    <<field camel>>: <<field camel>> ? { connect: { id: <<field camel>> } } : undefined,
+    <<field camel>>: <<field camel>> ? { set: { id: <<field camel>> } } : undefined,
       <<else>>
-    <<field camel>>: <<field camel>> ? { connect: formatEntityIds(<<field camel>>) } : undefined,
+    <<field camel>>: <<field camel>> ? { set: formatEntityIds(<<field camel>>) } : undefined,
       <<endif>>
     <<endfor>>
       ...values
@@ -274,15 +274,15 @@ export class <<Model pascal>>RestDtoService {
     <<for Fields not internal field>>
       <<if field oneOne or oneMany>>
         <<if field nullable>>
-    <<field camel>>: <<field camel>> ? { connect: { id: <<field camel>> } } : undefined,
+    <<field camel>>: <<field camel>> ? { set: { id: <<field camel>> } } : undefined,
         <<else>>
-    <<field camel>>: { connect: { id: <<field camel>> } },
+    <<field camel>>: { set: { id: <<field camel>> } },
         <<endif>>
       <<elseif field manyMany>>
         <<if field nullable>>
-    <<field camel>>: <<field camel>> ? { connect: formatEntityIds(<<field camel>>) } : undefined,
+    <<field camel>>: <<field camel>> ? { set: formatEntityIds(<<field camel>>) } : undefined,
         <<else>>
-    <<field camel>>: { connect: formatEntityIds(<<field camel>>) },
+    <<field camel>>: { set: formatEntityIds(<<field camel>>) },
         <<endif>>
       <<else>>
     <<field camel>>,
