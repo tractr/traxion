@@ -1,7 +1,24 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+# [0.10.0](https://github.com/tractr/cali/compare/v0.9.0...v0.10.0) (2021-12-03)
+
+
+### Bug Fixes
+
+* add logs to the the docker build release github workflow ([143d4d2](https://github.com/tractr/cali/commit/143d4d230be6882b08335dd8e6f0d139f58e2976))
+* quick fix staging build by moving jest-mock-extended from dev deps to prod deps ([#67](https://github.com/tractr/cali/issues/67)) ([c637cfd](https://github.com/tractr/cali/commit/c637cfd1fcdcb8a07472be5cf972ba24719706a1))
+* update terraform secrets ([#65](https://github.com/tractr/cali/issues/65)) ([ea06aa4](https://github.com/tractr/cali/commit/ea06aa4bdd978a192a65727d8c3bc2dcedbc8023))
+
+
+### Features
+
+* **angular-alerts:** fix hover on alert item, fix format date and fix feedbacks handler ([#66](https://github.com/tractr/cali/issues/66)) ([255f9af](https://github.com/tractr/cali/commit/255f9af3f3ea7e71d16499fb1fe85832c86935d6))
+* **angular-feedbacks-features:** connect gql service with feedback alert ([#63](https://github.com/tractr/cali/issues/63)) ([b98163b](https://github.com/tractr/cali/commit/b98163bfffe256f4c86fe92fd23c5260daddad07))
+* create handler for videoGeneration messages ([#61](https://github.com/tractr/cali/issues/61)) ([#62](https://github.com/tractr/cali/issues/62)) ([3f26f28](https://github.com/tractr/cali/commit/3f26f28e3d8ae610fe2ba25b420da1d32375d615))
+
+
 
 # [0.9.0](https://github.com/tractr/cali/compare/v0.8.0...v0.9.0) (2021-12-01)
 

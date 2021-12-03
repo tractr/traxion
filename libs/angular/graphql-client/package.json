@@ -1,6 +1,6 @@
 {
   "name": "@cali/angular-graphql-client",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "dependencies": {
     "tslib": "^2.3.0"
   },

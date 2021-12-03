@@ -1,7 +1,20 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+# [0.10.0](https://github.com/tractr/cali/compare/v0.9.0...v0.10.0) (2021-12-03)
+
+
+### Bug Fixes
+
+* update terraform secrets ([#65](https://github.com/tractr/cali/issues/65)) ([ea06aa4](https://github.com/tractr/cali/commit/ea06aa4bdd978a192a65727d8c3bc2dcedbc8023))
+
+
+### Features
+
+* create handler for videoGeneration messages ([#61](https://github.com/tractr/cali/issues/61)) ([#62](https://github.com/tractr/cali/issues/62)) ([3f26f28](https://github.com/tractr/cali/commit/3f26f28e3d8ae610fe2ba25b420da1d32375d615))
+
+
 
 # [0.9.0](https://github.com/tractr/cali/compare/v0.8.0...v0.9.0) (2021-12-01)
 

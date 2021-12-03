@@ -1,7 +1,16 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+# [0.10.0](https://github.com/tractr/cali/compare/v0.9.0...v0.10.0) (2021-12-03)
+
+
+### Features
+
+* **angular-feedbacks-features:** connect gql service with feedback alert ([#63](https://github.com/tractr/cali/issues/63)) ([b98163b](https://github.com/tractr/cali/commit/b98163bfffe256f4c86fe92fd23c5260daddad07))
+* create handler for videoGeneration messages ([#61](https://github.com/tractr/cali/issues/61)) ([#62](https://github.com/tractr/cali/issues/62)) ([3f26f28](https://github.com/tractr/cali/commit/3f26f28e3d8ae610fe2ba25b420da1d32375d615))
+
+
 
 # [0.9.0](https://github.com/tractr/cali/compare/v0.8.0...v0.9.0) (2021-12-01)
 
