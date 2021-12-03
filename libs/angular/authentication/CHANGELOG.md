@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.28.3](https://github.com/tractr/stack/compare/v1.28.2...v1.28.3) (2021-12-03)
+
+
+### Bug Fixes
+
+* use typeof instead of the dto to type the angular injection token ([#320](https://github.com/tractr/stack/issues/320)) ([4653bdf](https://github.com/tractr/stack/commit/4653bdfe66d458949cea94a61bf615ac703a4cd4))
+
+
+
 ## [1.28.2](https://github.com/tractr/stack/compare/v1.28.1...v1.28.2) (2021-12-03)
 
 
