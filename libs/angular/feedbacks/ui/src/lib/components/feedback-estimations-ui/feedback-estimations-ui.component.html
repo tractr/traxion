@@ -1,6 +1,7 @@
 <div class="estimations-wrapper">
   <nz-select
-    [(ngModel)]="itemCategorySelected"
+    [ngModel]="itemCategorySelected"
+    (ngModelChange)="itemCategorySelectedChange.emit($event)"
     [nzPlaceHolder]="
       'feedback-estimations-category-item-placeholder' | translate
     "
@@ -12,7 +13,8 @@
     ></nz-option>
   </nz-select>
   <nz-input-number
-    [(ngModel)]="theftValue"
+    [ngModel]="thiefValue"
+    (ngModelChange)="theftValueChange.emit($event)"
     [nzMin]="0"
     [nzFormatter]="formatterEuro"
     [nzStep]="0.01"

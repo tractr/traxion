@@ -29,12 +29,17 @@
       alertFeedback.qualification !== 'suspectBehaviour' &&
       alertFeedback.qualification !== 'dissuasion'
     "
+    æ
   >
     <span>3</span>
     <cali-feedback-estimations-ui
       [itemsCategory]="itemsCategory"
-      [itemCategorySelected]="null"
-      [theftValue]="0"
+      [itemCategorySelected]="alertFeedback.itemCategoryId"
+      [thiefValue]="
+        alertFeedback.thiefValue !== null ? alertFeedback.thiefValue : 0
+      "
+      (itemCategorySelectedChange)="alertFeedbackItemCategoryChange($event)"
+      (theftValueChange)="alertFeedbackTheftValueChange($event)"
     ></cali-feedback-estimations-ui>
   </div>
 </div>

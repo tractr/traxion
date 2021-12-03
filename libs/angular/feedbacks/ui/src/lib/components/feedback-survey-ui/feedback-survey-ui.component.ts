@@ -24,7 +24,7 @@ export class FeedbackSurveyUiComponent {
 
   @Input() alertFeedback!: AlertFeedback;
 
-  @Input() itemsCategory: Pick<ItemCategory, 'id' | 'name'>[] = [];
+  @Input() itemsCategory: Pick<ItemCategory, 'id' | 'name'>[] | null = null;
 
   alertFeedbackTypeChange(feedbackType: AlertFeedbackType) {
     this.alertFeedback = {
@@ -32,6 +32,8 @@ export class FeedbackSurveyUiComponent {
       type: feedbackType,
       qualification: null,
       isPertinent: null,
+      itemCategoryId: null,
+      thiefValue: null,
     };
     this.alertFeedbackChange.emit(this.alertFeedback);
   }
@@ -43,6 +45,8 @@ export class FeedbackSurveyUiComponent {
       ...this.alertFeedback,
       qualification: feedbackQualification,
       isPertinent: null,
+      itemCategoryId: null,
+      thiefValue: null,
     };
     this.alertFeedbackChange.emit(this.alertFeedback);
   }
@@ -51,6 +55,24 @@ export class FeedbackSurveyUiComponent {
     this.alertFeedback = {
       ...this.alertFeedback,
       isPertinent: isPertinent === null ? true : isPertinent,
+      itemCategoryId: null,
+      thiefValue: null,
+    };
+    this.alertFeedbackChange.emit(this.alertFeedback);
+  }
+
+  alertFeedbackItemCategoryChange(itemCategory: string) {
+    this.alertFeedback = {
+      ...this.alertFeedback,
+      itemCategoryId: itemCategory,
+    };
+    this.alertFeedbackChange.emit(this.alertFeedback);
+  }
+
+  alertFeedbackTheftValueChange(theftValue: number) {
+    this.alertFeedback = {
+      ...this.alertFeedback,
+      thiefValue: theftValue,
     };
     this.alertFeedbackChange.emit(this.alertFeedback);
   }

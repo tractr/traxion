@@ -211,6 +211,8 @@ export const seed = async () => {
       rateAnnotation: null,
       type: null,
       userId: null,
+      itemCategoryId: null,
+      thiefValue: null,
     });
     delete alertNotArchivedFeedbackEmpty.user;
 
@@ -228,6 +230,8 @@ export const seed = async () => {
       rateAnnotation: 'RAS',
       type: AlertFeedbackType.falseAlert,
       userId: user.id,
+      itemCategoryId: null,
+      thiefValue: null,
     });
     delete alertFeedbackTypeFalseAlert.user;
 
@@ -245,6 +249,8 @@ export const seed = async () => {
       rateAnnotation: 'Suspect relaché',
       type: AlertFeedbackType.suspectBehaviour,
       userId: user.id,
+      itemCategoryId: null,
+      thiefValue: null,
     });
     delete alertFeedbackTypeSuspectBehaviour.user;
 
@@ -262,6 +268,8 @@ export const seed = async () => {
       rateAnnotation: 'Le voleur a été arrêté',
       type: AlertFeedbackType.thief,
       userId: user.id,
+      itemCategoryId: null,
+      thiefValue: null,
     });
     delete alertFeedbackTypeThief.user;
 

@@ -5,9 +5,12 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Subject, switchMap, takeUntil } from 'rxjs';
+import { debounceTime, Subject, switchMap, takeUntil } from 'rxjs';
 
-import { AlertFeedbackService } from '@cali/angular-rext-client';
+import {
+  AlertFeedbackService,
+  ItemCategoryService,
+} from '@cali/angular-rext-client';
 import { AlertFeedback } from '@cali/common-models';
 
 @Component({
@@ -17,7 +20,10 @@ import { AlertFeedback } from '@cali/common-models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedbackDetailsComponent implements OnInit, OnDestroy {
-  constructor(private alertFeedbackService: AlertFeedbackService) {}
+  constructor(
+    private alertFeedbackService: AlertFeedbackService,
+    private itemCategoryService: ItemCategoryService,
+  ) {}
 
   @Input() feedback!: AlertFeedback;
 
@@ -25,12 +31,15 @@ export class FeedbackDetailsComponent implements OnInit, OnDestroy {
   feedbackCreationNotification$: Subject<AlertFeedback> =
     new Subject<AlertFeedback>();
 
+  itemsCategory$ = this.itemCategoryService.findMany$();
+
   unsubscribe$ = new Subject<void>();
 
   ngOnInit() {
     this.feedbackCreationNotification$
       .pipe(
         takeUntil(this.unsubscribe$),
+        debounceTime(200),
         switchMap((feedback) =>
           this.alertFeedbackService.create$({
             type: feedback.type || undefined,
@@ -39,6 +48,8 @@ export class FeedbackDetailsComponent implements OnInit, OnDestroy {
             isPertinent:
               feedback.isPertinent == null ? true : feedback.isPertinent,
             alert: feedback.alertId,
+            itemCategory: feedback.itemCategoryId || undefined,
+            thiefValue: feedback.thiefValue || undefined,
           }),
         ),
       )

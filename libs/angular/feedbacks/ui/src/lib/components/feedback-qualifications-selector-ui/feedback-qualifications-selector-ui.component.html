@@ -1,9 +1,11 @@
-<nz-radio-group [(ngModel)]="alertFeedbackQualification">
+<nz-radio-group
+  [(ngModel)]="alertFeedbackQualification"
+  (ngModelChange)="alertFeedbackQualificationOnChange()"
+>
   <label
     *ngFor="let qualification of feedbackQualifications"
     nz-radio-button
     [nzValue]="qualification"
-    (click)="alertFeedbackQualificationOnChange()"
   >
     {{ 'status-feedback-qualification-' + qualification | translate }}
     <i nz-icon nzType="check" nzTheme="outline"></i>

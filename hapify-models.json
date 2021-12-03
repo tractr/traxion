@@ -121,12 +121,14 @@
         },
         {
           "name": "type",
+          "notes": "Type of alert",
           "properties": ["nullable", "searchable", "sortable"],
           "type": "enum",
           "value": ["suspectBehaviour", "thief", "falseAlert"]
         },
         {
           "name": "qualification",
+          "notes": "Qualification of alert",
           "properties": ["nullable", "searchable", "sortable"],
           "type": "enum",
           "value": [
@@ -183,6 +185,23 @@
           "subtype": "oneMany",
           "type": "entity",
           "value": "b33de3c6-33c0-8979-020d-23058d515b79"
+        },
+        {
+          "meta": {
+            "backRelation": "alertFeedbacks"
+          },
+          "name": "itemCategory",
+          "notes": "Category of the item that was stolen",
+          "properties": ["nullable", "searchable", "sortable"],
+          "subtype": "oneMany",
+          "type": "entity",
+          "value": "ad8e9302-8fe9-bb18-c1a1-4fc74ca22605"
+        },
+        {
+          "name": "thiefValue",
+          "notes": "Value of the stolen item",
+          "properties": ["nullable", "searchable", "sortable"],
+          "type": "number"
         }
       ],
       "id": "b0db09a5-95d4-4f1e-ee03-bb9600686cf7",

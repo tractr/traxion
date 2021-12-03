@@ -15,11 +15,11 @@ import { ItemCategory } from '@cali/common-models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedbackEstimationsUiComponent {
-  @Input() itemsCategory: Pick<ItemCategory, 'id' | 'name'>[] = [];
+  @Input() itemsCategory: Pick<ItemCategory, 'id' | 'name'>[] | null = null;
 
   @Input() itemCategorySelected: string | null = null;
 
-  @Input() theftValue = 0;
+  @Input() thiefValue!: number;
 
   @Output() itemCategorySelectedChange = new EventEmitter<string>();
 

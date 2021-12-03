@@ -1,6 +1,7 @@
 <ng-container *ngIf="feedback">
   <cali-feedback-status-ui [alertFeedback]="feedback"></cali-feedback-status-ui>
   <cali-feedback-survey-ui
+    [itemsCategory]="itemsCategory$ | async"
     [alertFeedback]="feedback"
     (alertFeedbackChange)="feedbackCreationNotification$.next($event)"
   ></cali-feedback-survey-ui>
