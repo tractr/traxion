@@ -26,7 +26,6 @@ export class AuthenticationOptions<
   /**
    * Options to configure the user that will be manipulated by the authentication module.
    */
-  @ValidateNested()
   user!: CCU;
 
   /**
