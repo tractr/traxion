@@ -4,6 +4,6 @@ import { AuthenticationOptions } from '../dtos';
 
 export const SESSION_SERVICE = new InjectionToken('session.service');
 
-export const AUTHENTICATION_OPTIONS = new InjectionToken<AuthenticationOptions>(
-  'auth.options',
-);
+export const AUTHENTICATION_OPTIONS = new InjectionToken<
+  typeof AuthenticationOptions
+>('auth.options');
