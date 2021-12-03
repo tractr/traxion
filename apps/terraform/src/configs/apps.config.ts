@@ -42,7 +42,9 @@ export const AppConfig: Required<Environment['config']> = {
         SENTRY_DSN: Secret(),
         SENTRY_ENV: Secret(),
         SENTRY_LOG_LEVEL: Secret(),
-        MESSAGE_BROKER_URL: Secret(),
+        MESSAGE_BROKER_DOMAIN: Secret(),
+        MESSAGE_BROKER_PORT: Secret(),
+        MESSAGE_BROKER_PROTOCOL: Secret(),
         MESSAGE_BROKER_USER: Secret(),
         MESSAGE_BROKER_PASSWORD: Secret(),
       },
@@ -67,7 +69,13 @@ export const AppConfig: Required<Environment['config']> = {
   },
   messageBrokerHandler: {
     containerConfig: {
-      environments: {},
+      environments: {
+        MESSAGE_BROKER_DOMAIN: Secret(),
+        MESSAGE_BROKER_PORT: Secret(),
+        MESSAGE_BROKER_PROTOCOL: Secret(),
+        MESSAGE_BROKER_USER: Secret(),
+        MESSAGE_BROKER_PASSWORD: Secret(),
+      },
     },
   },
   reverseProxy: {

@@ -10,7 +10,9 @@ import { DeepPartial } from 'ts-essentials';
 export interface MessageBrokerHandlerContainerPublicConfig
   extends ContainerPublicConfig {
   environments: ContainerPublicConfig['environments'] & {
-    MESSAGE_BROKER_URL: EnvironmentOrSecretValue;
+    MESSAGE_BROKER_DOMAIN: EnvironmentOrSecretValue;
+    MESSAGE_BROKER_PORT: EnvironmentOrSecretValue;
+    MESSAGE_BROKER_PROTOCOL: EnvironmentOrSecretValue;
     MESSAGE_BROKER_USER: EnvironmentOrSecretValue;
     MESSAGE_BROKER_PASSWORD: EnvironmentOrSecretValue;
   };

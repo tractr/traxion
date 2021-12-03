@@ -33,7 +33,9 @@ export class MessageBrokerHandlerComponent extends BackendServiceComponent<
       containerConfig: {
         imageTag: 'latest',
         environments: {
-          MESSAGE_BROKER_URL: Secret(),
+          MESSAGE_BROKER_DOMAIN: Secret(),
+          MESSAGE_BROKER_PORT: Secret(),
+          MESSAGE_BROKER_PROTOCOL: Secret(),
           MESSAGE_BROKER_USER: Secret(),
           MESSAGE_BROKER_PASSWORD: Secret(),
         },
