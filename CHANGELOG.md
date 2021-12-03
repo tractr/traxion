@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.28.2](https://github.com/tractr/stack/compare/v1.28.1...v1.28.2) (2021-12-03)
+
+
+### Bug Fixes
+
+* **hapify-templates-nestjs-nodels-rest:** change connect to set operator to allow relation deletion ([#319](https://github.com/tractr/stack/issues/319)) ([ec17160](https://github.com/tractr/stack/commit/ec17160f49dedb83ecc8904792ed8f968b8f521e))
+
+
+
 ## [1.28.1](https://github.com/tractr/stack/compare/v1.28.0...v1.28.1) (2021-12-02)
 
 
