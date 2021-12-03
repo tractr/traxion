@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.28.4](https://github.com/tractr/stack/compare/v1.28.3...v1.28.4) (2021-12-03)
+
+
+### Bug Fixes
+
+* remove User validate nested from authentication options dto ([#321](https://github.com/tractr/stack/issues/321)) ([fc3d8cf](https://github.com/tractr/stack/commit/fc3d8cfae3cf88f1e5ba0dbd38f4753e7e7830e5))
+
+
+
 ## [1.28.3](https://github.com/tractr/stack/compare/v1.28.2...v1.28.3) (2021-12-03)
 
 
