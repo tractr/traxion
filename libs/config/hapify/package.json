@@ -1,6 +1,6 @@
 {
   "name": "@tractr/hapify-config",
-  "version": "1.28.4",
+  "version": "1.28.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack.git"
