@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AUTHENTICATION_OPTIONS, SESSION_SERVICE } from '../../constants';
+import { AUTHENTICATION_OPTIONS } from '../../constants';
 import { AuthenticationOptions } from '../../dtos';
-import { SessionService } from '../../interfaces';
+import { SessionService } from '../../services';
 
 @Component({
   selector: 'tractr-logout',
@@ -15,7 +15,6 @@ export class LogoutComponent implements OnInit {
     private router: Router,
     @Inject(AUTHENTICATION_OPTIONS)
     private options: AuthenticationOptions,
-    @Inject(SESSION_SERVICE)
     private sessionService: SessionService,
   ) {}
 

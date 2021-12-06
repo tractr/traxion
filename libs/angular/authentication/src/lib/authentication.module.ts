@@ -1,4 +1,4 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule, Provider } from '@angular/core';
 import { ClassConstructor } from 'class-transformer';
 
 import {
@@ -9,12 +9,12 @@ import {
   ResetPasswordComponent,
   ResetPasswordPageComponent,
 } from './components';
-import { AUTHENTICATION_OPTIONS, SESSION_SERVICE } from './constants';
+import { AUTHENTICATION_OPTIONS, AUTHENTICATION_USER_DTO } from './constants';
 import { ConnectedDirective, NotConnectedDirective } from './directives';
 import { AuthenticationOptions } from './dtos';
 import { IsLoggedGuard, IsNotLoggedGuard } from './guards';
-import { AuthenticationPublicOptions } from './interfaces/authentication-public-options.interface';
-import { PasswordService, SessionServiceFactory } from './services';
+import { AuthenticationPublicOptions, UserOptions } from './interfaces';
+import { PasswordService, SessionService } from './services';
 
 import { AngularComponentsModule } from '@tractr/angular-components';
 import { AngularFormModule } from '@tractr/angular-form';
@@ -37,16 +37,7 @@ import { transformAndValidate } from '@tractr/common';
     ResetPasswordComponent,
     ResetPasswordPageComponent,
   ],
-  providers: [
-    IsLoggedGuard,
-    IsNotLoggedGuard,
-    {
-      provide: SESSION_SERVICE,
-      useFactory: SessionServiceFactory,
-      deps: [AUTHENTICATION_OPTIONS],
-    },
-    PasswordService,
-  ],
+  providers: [IsLoggedGuard, IsNotLoggedGuard, SessionService, PasswordService],
   exports: [
     LogoutComponent,
     LoginComponent,
@@ -65,42 +56,76 @@ export class AngularAuthenticationModule extends ModuleOptionsFactory<
   static register<
     U extends Record<string, unknown> = Record<string, unknown>,
     CCU extends ClassConstructor<U> = ClassConstructor<U>,
-  >(
-    options: AuthenticationPublicOptions<U, CCU>,
-  ): ModuleWithProviders<AngularAuthenticationModule> {
-    return super.register(options);
+  >({
+    user,
+    ...options
+  }: AuthenticationPublicOptions &
+    UserOptions<U, CCU>): ModuleWithProviders<AngularAuthenticationModule> {
+    return this.mergeModuleWithProvider(
+      super.register(options),
+      this.createUserProvider(user),
+    );
   }
 
   static forRoot<
     U extends Record<string, unknown> = Record<string, unknown>,
     CCU extends ClassConstructor<U> = ClassConstructor<U>,
-  >(
-    options: AuthenticationPublicOptions<U, CCU>,
-  ): ModuleWithProviders<AngularAuthenticationModule> {
-    return super.forRoot(options);
+  >({
+    user,
+    ...options
+  }: AuthenticationPublicOptions &
+    UserOptions<U, CCU>): ModuleWithProviders<AngularAuthenticationModule> {
+    return this.mergeModuleWithProvider(
+      super.forRoot(options),
+      this.createUserProvider(user),
+    );
   }
 
   static registerAsync<
     U extends Record<string, unknown> = Record<string, unknown>,
     CCU extends ClassConstructor<U> = ClassConstructor<U>,
-  >(
-    options: AsyncOptions<
-      AuthenticationOptions<U, CCU>,
-      AuthenticationPublicOptions<U, CCU>
-    >,
-  ): ModuleWithProviders<AngularAuthenticationModule> {
-    return super.registerAsync(options);
+  >({
+    user,
+    ...options
+  }: AsyncOptions<AuthenticationOptions, AuthenticationPublicOptions> &
+    UserOptions<U, CCU>): ModuleWithProviders<AngularAuthenticationModule> {
+    return this.mergeModuleWithProvider(
+      super.registerAsync(options),
+      this.createUserProvider(user),
+    );
   }
 
   static forRootAsync<
     U extends Record<string, unknown> = Record<string, unknown>,
     CCU extends ClassConstructor<U> = ClassConstructor<U>,
-  >(
-    options: AsyncOptions<
-      AuthenticationOptions<U, CCU>,
-      AuthenticationPublicOptions<U, CCU>
-    >,
+  >({
+    user,
+    ...options
+  }: AsyncOptions<AuthenticationOptions, AuthenticationPublicOptions> &
+    UserOptions<U, CCU>): ModuleWithProviders<AngularAuthenticationModule> {
+    return this.mergeModuleWithProvider(
+      super.forRootAsync(options),
+      this.createUserProvider(user),
+    );
+  }
+
+  static createUserProvider<
+    U extends Record<string, unknown> = Record<string, unknown>,
+    CCU extends ClassConstructor<U> = ClassConstructor<U>,
+  >(user: CCU): Provider {
+    return {
+      provide: AUTHENTICATION_USER_DTO,
+      useValue: user,
+    };
+  }
+
+  static mergeModuleWithProvider(
+    module: ModuleWithProviders<AngularAuthenticationModule>,
+    user: Provider,
   ): ModuleWithProviders<AngularAuthenticationModule> {
-    return super.forRootAsync(options);
+    return {
+      ...module,
+      providers: [...(module?.providers ?? []), user],
+    };
   }
 }
