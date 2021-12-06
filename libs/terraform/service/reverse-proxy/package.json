@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-service-reverse-proxy",
-  "version": "1.28.3",
+  "version": "1.28.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
