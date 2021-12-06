@@ -63,44 +63,15 @@ describe('<<Model pascal>>DatabaseService', () => {
   
   describe('formatCreateDto', () => {
     it('should properly format create dto', () => {
-      const bodyDto: Required< <<Model pascal>>CreateBodyDto | <<Model pascal>>CreateBodyDto[]> = mock<<Model pascal>>sCreateBodyDtoFactory();
-
-      if (Array.isArray(bodyDto)) {
-        const arrayBody = bodyDto as <<Model pascal>>CreateBodyDto[];
-        arrayBody.map((tmpBody: <<Model pascal>>CreateBodyDto) => {
-          const {
-          <<for Fields entity and not internal field>>
-            <<field camel>>,
-          <<endfor>>
-          ...values
-          } = tmpBody;
-          const data = {
-            ...values,
-          <<for Fields entity and not internal field>>
-            <<if field oneOne or oneMany>>
-          <<field camel>>: { connect: { id: <<field camel>> } },
-            <<else>>
-          <<field camel>>: { set: <<field camel>><<if field nullable>>?<<endif>>.map(id => ({ id })) },
-            <<endif>>
-          <<endfor>>
-          }
-          const prismaArgs = { 
-          <<if Fields internal and not primary and (not entity or nullable)>>
-            data:  mocked<<Model pascal>>Service.assignInternalsToCreateDto(data)
-          <<else>>
-            data
-          <<endif>>
-          };
-          const result = <<Model camel>>RestDtoService.formatCreateDto(tmpBody);
-          expect(result).toEqual(prismaArgs);
-        });
-      } else {
+      const bodyDto: Required< <<Model pascal>>CreateBodyDto[] > = mock<<Model pascal>>sCreateBodyDtoFactory();
+      const arrayBody = bodyDto as <<Model pascal>>CreateBodyDto[];
+      arrayBody.map((tmpBody: <<Model pascal>>CreateBodyDto) => {
         const {
         <<for Fields entity and not internal field>>
           <<field camel>>,
         <<endfor>>
         ...values
-        } = bodyDto;
+        } = tmpBody;
         const data = {
           ...values,
         <<for Fields entity and not internal field>>
@@ -118,9 +89,9 @@ describe('<<Model pascal>>DatabaseService', () => {
           data
         <<endif>>
         };
-        const result = <<Model camel>>RestDtoService.formatCreateDto(bodyDto as <<Model pascal>>CreateBodyDto);
+        const result = <<Model camel>>RestDtoService.formatCreateDto(tmpBody);
         expect(result).toEqual(prismaArgs);
-      }
+      });
     });
   });
     
@@ -239,8 +210,7 @@ describe('<<Model pascal>>DatabaseService', () => {
   describe('formatUpdateDto', () => {
     it('should properly format update dto', () => {
       const paramsDto: <<Model pascal>>UpdateParamsDto = mock<<Model pascal>>UpdateParamsDtoFactory();
-      const bodyDto: Required< <<Model pascal>>UpdateBodyDto | <<Model pascal>>UpdateBodyDto[]> = mock<<Model pascal>>sUpdateBodyDtoFactory();
-      if (Array.isArray(bodyDto)) {
+      const bodyDto: Required< <<Model pascal>>UpdateBodyDto[] > = mock<<Model pascal>>sUpdateBodyDtoFactory();
         const arrayBody = bodyDto as <<Model pascal>>UpdateBodyDto[];
         arrayBody.map((tmpBody: <<Model pascal>>UpdateBodyDto) => {
           const {
@@ -266,73 +236,21 @@ describe('<<Model pascal>>DatabaseService', () => {
           );
           expect(result).toEqual(prismaArgs);
         });
-      } else {
-        const {
-        <<for Fields entity and not internal field>>
-          <<field camel>>,
-        <<endfor>>
-        ...values
-        } = bodyDto;
-        const data = {
-          ...values,
-        <<for Fields entity and not internal field>>
-          <<if field oneOne or oneMany>>
-        <<field camel>>: { connect: { id: <<field camel>> } },
-          <<else>>
-        <<field camel>>: { set: <<field camel>><<if field nullable>>?<<endif>>.map(id => ({ id })) },
-          <<endif>>
-        <<endfor>>
-        }
-      const prismaArgs: Prisma.<<Model pascal>>UpdateArgs = { where: paramsDto, data };
-        const result = <<Model camel>>RestDtoService.formatUpdateDtos(paramsDto, bodyDto as <<Model pascal>>UpdateBodyDto);
-        expect(result).toEqual(prismaArgs)
-      }
     });
   });
   
   describe('formatUpsertDto', () => {
     it('should properly format upsert dto', () => {
       const paramsDto: <<Model pascal>>UpsertParamsDto = mock<<Model pascal>>UpsertParamsDtoFactory();
-      const bodyDto: Required< <<Model pascal>>UpsertBodyDto | <<Model pascal>>UpsertBodyDto[]> = mock<<Model pascal>>sUpsertBodyDtoFactory();
-      if (Array.isArray(bodyDto)) {
-        const arrayBody = bodyDto as <<Model pascal>>UpsertBodyDto[];
-        arrayBody.map((tmpBody: <<Model pascal>>UpsertBodyDto) => {
-           const {
-          <<for Fields entity and not internal field>>
-            <<field camel>>,
-          <<endfor>>
-          ...values
-          } = tmpBody;
-          const create = {
-            ...values,
-          <<for Fields entity and not internal field>>
-            <<if field oneOne or oneMany>>
-          <<field camel>>: { connect: { id: <<field camel>> } },
-            <<else>>
-          <<field camel>>: { set: <<field camel>><<if field nullable>>?<<endif>>.map(id => ({ id })) },
-            <<endif>>
-          <<endfor>>
-          };
-          const update = { ...create };
-          const prismaArgs = { 
-            <<if Fields internal and not primary and (not entity or nullable)>>
-            create:  mocked<<Model pascal>>Service.assignInternalsToCreateDto(create)
-          <<else>>
-            create
-          <<endif>>, update, where: paramsDto };
-          const result = <<Model camel>>RestDtoService.formatUpsertDtos(
-            paramsDto,
-            tmpBody,
-          );
-          expect(result).toEqual(prismaArgs);
-        });
-      } else {
-         const {
+      const bodyDto: Required< <<Model pascal>>UpsertBodyDto[] > = mock<<Model pascal>>sUpsertBodyDtoFactory();
+      const arrayBody = bodyDto as <<Model pascal>>UpsertBodyDto[];
+      arrayBody.map((tmpBody: <<Model pascal>>UpsertBodyDto) => {
+          const {
         <<for Fields entity and not internal field>>
           <<field camel>>,
         <<endfor>>
         ...values
-        } = bodyDto;
+        } = tmpBody;
         const create = {
           ...values,
         <<for Fields entity and not internal field>>
@@ -350,9 +268,12 @@ describe('<<Model pascal>>DatabaseService', () => {
         <<else>>
           create
         <<endif>>, update, where: paramsDto };
-        const result = <<Model camel>>RestDtoService.formatUpsertDtos(paramsDto, bodyDto as <<Model pascal>>UpsertBodyDto);
-        expect(result).toEqual(prismaArgs)
-      }
+        const result = <<Model camel>>RestDtoService.formatUpsertDtos(
+          paramsDto,
+          tmpBody,
+        );
+        expect(result).toEqual(prismaArgs);
+      });
     });
   });
   

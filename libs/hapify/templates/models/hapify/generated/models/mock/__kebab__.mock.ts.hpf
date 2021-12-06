@@ -40,15 +40,7 @@ import {
 
 
 <<if Fields unique>>
-export type <<Model pascal>>UniqueValues = {
-  <<for Fields unique field>>
-    <<if field not entity>>
-      <<field camel>>: <<=getType(field)>>[],
-    <<else>>
-      <<field camel>>Id: string[];
-    <<endif>>
-  <<endfor>>
-};
+import { <<Model pascal>>UniqueValues } from './../models/';
 <<endif>>
 
 
@@ -86,8 +78,7 @@ export function mock<<Model pascal>>Factory(override: Partial< <<Model pascal>> 
 }
 
 
-export function mock<<Model pascal>>sFactory(override: Partial< <<Model pascal>> > = {}, quantity: number = 1): <<Model pascal>> | <<Model pascal>>[] {
-  if (quantity === 1) return mock<<Model pascal>>Factory(override);
+export function mock<<Model pascal>>sFactory(override: Partial< <<Model pascal>> > = {}, quantity: number = 1): <<Model pascal>>[] {
   <<if Fields unique>>
   const uniqueValues: <<Model pascal>>UniqueValues = {
     <<for Fields unique field>>
@@ -177,11 +168,6 @@ function getMockReturnType(f) {
   out += "']"
   if (f.nullable) out += '>';
   return out;
-}
->>>
-<<<
-function getType(f) {
-  return f.type;
 }
 >>>
 

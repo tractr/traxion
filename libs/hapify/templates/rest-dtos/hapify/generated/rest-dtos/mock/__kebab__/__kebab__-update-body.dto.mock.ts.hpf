@@ -10,10 +10,11 @@ import {
   mock<<Model pascal>><<field pascal>>IdsFactory,
   <<endif>>
 <<endfor>>
-<<if Fields unique>>
-  <<Model pascal>>UniqueValues
-<<endif>>
 } from '../../../models/mock';
+
+<<if Fields unique>>
+import { <<Model pascal>>UniqueValues } from '../../../models/models';
+<<endif>>
   
 function mock<<Model pascal>>UpdateBodyDtoFactory(
   override: Partial<<<Model pascal>>UpdateBodyDto> = {}
@@ -33,8 +34,7 @@ function mock<<Model pascal>>UpdateBodyDtoFactory(
 }
 
 
-export function mock<<Model pascal>>sUpdateBodyDtoFactory(override: Partial< <<Model pascal>>UpdateBodyDto > = {}, quantity: number = 1): Required< <<Model pascal>>UpdateBodyDto | <<Model pascal>>UpdateBodyDto[] > {
-  if (quantity === 1) return mock<<Model pascal>>UpdateBodyDtoFactory(override);
+export function mock<<Model pascal>>sUpdateBodyDtoFactory(override: Partial< <<Model pascal>>UpdateBodyDto > = {}, quantity: number = 1): Required< <<Model pascal>>UpdateBodyDto[] > {
   <<if Fields unique>>
   const uniqueValues: <<Model pascal>>UniqueValues = {
     <<for Fields unique field>>

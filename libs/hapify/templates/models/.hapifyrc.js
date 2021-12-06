@@ -33,6 +33,11 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'generated/models/models/{kebab}.dto.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'generated/models/mock/index.ts',
       engine: 'hpf',
       input: 'all',
