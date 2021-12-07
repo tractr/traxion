@@ -11,8 +11,12 @@ import {
   <<endif>>
 <<endfor>>
 } from '../../../models/mock';
+
+<<if Fields unique>>
+import { <<Model pascal>>UniqueValues } from '../../../models/models';
+<<endif>>
   
-export function mock<<Model pascal>>CreateBodyDtoFactory(
+function mock<<Model pascal>>CreateBodyDtoFactory(
   override: Partial<<<Model pascal>>CreateBodyDto> = {}
 ): Required< <<Model pascal>>CreateBodyDto> {
   return {
@@ -28,4 +32,55 @@ export function mock<<Model pascal>>CreateBodyDtoFactory(
     ...override,
   };
 }
-
+export function mock<<Model pascal>>sCreateBodyDtoFactory(override: Partial< <<Model pascal>>CreateBodyDto > = {}, quantity: number = 1): Required< <<Model pascal>>CreateBodyDto[] > {
+  <<if Fields unique>>
+  const uniqueValues: <<Model pascal>>UniqueValues = {
+    <<for Fields unique field>>
+      <<if field not entity>>
+      <<field camel>>:[],
+      <<else>>
+      <<field camel>>Id: [],
+      <<endif>>
+    <<endfor>> 
+  };
+  return [...Array(quantity)].map(() => {
+    let tmp<<Model pascal>> = mock<<Model pascal>>CreateBodyDtoFactory(override);
+    while (
+    <<<root.f.unique.forEach((unique,index) => {>>>
+      (
+      <<<if(unique.type === 'entity'){>>>
+      tmp<<Model pascal>>.<<unique camel>> && uniqueValues.<<unique camel>>Id.includes(tmp<<Model pascal>>.<<unique camel>>))
+      <<<}else{>>>
+      uniqueValues.<<unique camel>>.includes(tmp<<Model pascal>>.<<unique camel>>))
+      <<<}>>>
+      <<<if(index < root.f.unique.length - 1){>>>
+      ||
+       <<<}>>>
+    <<<})>>>
+    ) {
+      <<for Fields unique field>>
+        <<if field not entity>>
+        if(override.<<field camel>>) {
+          override.<<field camel>> = mock<<Model pascal>><<field pascal>>Factory();
+        }
+        <<else>>
+        if(override.<<field camel>>) {
+          override.<<field camel>> = mock<<Model pascal>><<field pascal>>IdFactory();
+        }
+        <<endif>>
+      <<endfor>> 
+      tmp<<Model pascal>> = mock<<Model pascal>>CreateBodyDtoFactory(override);
+    }
+    <<for Fields unique field>>
+      <<if field not entity>>
+      uniqueValues.<<field camel>>.push(tmp<<Model pascal>>.<<field camel>>);
+      <<else>>
+      if(tmp<<Model pascal>>.<<field camel>>) uniqueValues.<<field camel>>Id.push(tmp<<Model pascal>>.<<field camel>>);
+      <<endif>>
+    <<endfor>>
+    return tmp<<Model pascal>>;
+  });
+  <<else>>
+    return [...Array(quantity)].map(() => mock<<Model pascal>>CreateBodyDtoFactory(override));
+  <<endif>>
+}
