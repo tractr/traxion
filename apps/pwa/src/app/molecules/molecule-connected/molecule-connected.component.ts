@@ -1,10 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '@prisma/client';
 
-import {
-  SESSION_SERVICE,
-  SessionService,
-} from '@tractr/angular-authentication';
+import { SessionService } from '@tractr/angular-authentication';
 
 @Component({
   selector: 'stack-molecule-connected',
@@ -14,10 +11,7 @@ import {
 export class MoleculeConnectedComponent implements OnInit {
   user: User | null = null;
 
-  constructor(
-    @Inject(SESSION_SERVICE)
-    protected readonly sessionService: SessionService<User>,
-  ) {}
+  constructor(protected readonly sessionService: SessionService<User>) {}
 
   ngOnInit() {
     this.sessionService.me$.subscribe((user) => {

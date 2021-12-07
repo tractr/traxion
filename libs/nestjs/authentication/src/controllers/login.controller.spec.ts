@@ -95,12 +95,12 @@ describe('Authentication Module', () => {
         .send({ email: mockUser.email, password: mockUser.password });
 
       expect(response.status).toBe(200);
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { password: _, ...user } = response.body.user;
       expect(response.body).toEqual({
         accessToken: await authenticationService.createUserJWT(mockUser),
-        user: {
-          ...mockUser,
-          password: expect.any(String),
-        },
+        user,
       });
     });
     it('/me get the user information back and use the jwt auth strategy', async () => {

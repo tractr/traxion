@@ -1,1 +1,1 @@
-export * from './session.interface';
+export * from './authentication-public-options.interface';
