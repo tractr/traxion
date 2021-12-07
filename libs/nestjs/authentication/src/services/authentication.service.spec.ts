@@ -143,9 +143,6 @@ describe('AuthService', () => {
 
       expect(mockUserService.findUnique).toHaveBeenCalledTimes(1);
       expect(mockUserService.findUnique).toHaveBeenCalledWith({
-        select: {
-          passwordFieldTest: true,
-        },
         where: {
           loginFieldTest: 'login',
         },
