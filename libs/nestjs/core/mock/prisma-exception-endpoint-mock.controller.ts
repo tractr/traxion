@@ -1,11 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import {
-  PrismaClientInitializationError,
-  PrismaClientKnownRequestError,
-  PrismaClientRustPanicError,
-  PrismaClientUnknownRequestError,
-  PrismaClientValidationError,
-} from '@prisma/client/runtime';
+import { Prisma } from '@prisma/client';
 
 import { Public } from '../src/decorators/public.decorator';
 
@@ -17,8 +11,8 @@ export class PrismaExceptionEndpointMockController {
 
   @Public()
   @Get('/known-request-error-not-found')
-  knownRequestErrorNotFound(): PrismaClientKnownRequestError {
-    throw new PrismaClientKnownRequestError(
+  knownRequestErrorNotFound(): Prisma.PrismaClientKnownRequestError {
+    throw new Prisma.PrismaClientKnownRequestError(
       this.ERROR_MESSAGE,
       'P2001',
       this.ERROR_CLIENT_VERSION,
@@ -27,8 +21,8 @@ export class PrismaExceptionEndpointMockController {
 
   @Public()
   @Get('/known-request-error-conflict')
-  knownRequestErrorConflict(): PrismaClientKnownRequestError {
-    throw new PrismaClientKnownRequestError(
+  knownRequestErrorConflict(): Prisma.PrismaClientKnownRequestError {
+    throw new Prisma.PrismaClientKnownRequestError(
       this.ERROR_MESSAGE,
       'P2000',
       this.ERROR_CLIENT_VERSION,
@@ -37,8 +31,8 @@ export class PrismaExceptionEndpointMockController {
 
   @Public()
   @Get('/initialization-error-not-found')
-  initializationErrorNotFound(): PrismaClientInitializationError {
-    throw new PrismaClientInitializationError(
+  initializationErrorNotFound(): Prisma.PrismaClientInitializationError {
+    throw new Prisma.PrismaClientInitializationError(
       this.ERROR_MESSAGE,
       this.ERROR_CLIENT_VERSION,
       'P2001',
@@ -47,14 +41,14 @@ export class PrismaExceptionEndpointMockController {
 
   @Public()
   @Get('/client-validation-error')
-  clientValidationError(): PrismaClientValidationError {
-    throw new PrismaClientValidationError(this.ERROR_MESSAGE);
+  clientValidationError(): Prisma.PrismaClientValidationError {
+    throw new Prisma.PrismaClientValidationError(this.ERROR_MESSAGE);
   }
 
   @Public()
   @Get('/initialization-error-conflict')
-  initializationErrorConflict(): PrismaClientInitializationError {
-    throw new PrismaClientInitializationError(
+  initializationErrorConflict(): Prisma.PrismaClientInitializationError {
+    throw new Prisma.PrismaClientInitializationError(
       this.ERROR_MESSAGE,
       this.ERROR_CLIENT_VERSION,
       'P2000',
@@ -63,8 +57,8 @@ export class PrismaExceptionEndpointMockController {
 
   @Public()
   @Get('/unknown-request-error')
-  unknownRequestError(): PrismaClientUnknownRequestError {
-    throw new PrismaClientUnknownRequestError(
+  unknownRequestError(): Prisma.PrismaClientUnknownRequestError {
+    throw new Prisma.PrismaClientUnknownRequestError(
       this.ERROR_MESSAGE,
       this.ERROR_CLIENT_VERSION,
     );
@@ -72,8 +66,8 @@ export class PrismaExceptionEndpointMockController {
 
   @Public()
   @Get('/client-rust-panic-error')
-  clientRustPanicError(): PrismaClientRustPanicError {
-    throw new PrismaClientRustPanicError(
+  clientRustPanicError(): Prisma.PrismaClientRustPanicError {
+    throw new Prisma.PrismaClientRustPanicError(
       this.ERROR_MESSAGE,
       this.ERROR_CLIENT_VERSION,
     );
