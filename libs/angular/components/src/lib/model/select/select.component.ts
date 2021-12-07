@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
@@ -15,7 +16,7 @@ import { SelectOptionInterface } from '../../select/interfaces/select.interface'
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.less'],
 })
-export class ModelSelectComponent implements OnInit, OnDestroy {
+export class ModelSelectComponent implements OnInit, OnDestroy, OnChanges {
   protected unsubscribe$: Subject<void> = new Subject<void>();
 
   @Input() idField = 'id';
@@ -66,9 +67,7 @@ export class ModelSelectComponent implements OnInit, OnDestroy {
   options: SelectOptionInterface<Record<string, unknown>>[] = [];
 
   async ngOnInit() {
-    this.options = this.modelToOption(
-      await this.getList(),
-    ) as SelectOptionInterface<Record<string, unknown>>[];
+    this.refreshOptions().catch((err) => console.error(err));
 
     this.valueSubject$
       .pipe(
@@ -100,8 +99,20 @@ export class ModelSelectComponent implements OnInit, OnDestroy {
       });
   }
 
+  ngOnChanges(changes: Record<string, unknown>) {
+    if (changes.labelField) {
+      this.refreshOptions().catch((err) => console.error(err));
+    }
+  }
+
   ngOnDestroy(): void {
     this.unsubscribe$.next();
+  }
+
+  async refreshOptions() {
+    this.options = this.modelToOption(
+      await this.getList(),
+    ) as SelectOptionInterface<Record<string, unknown>>[];
   }
 
   modelToOption(

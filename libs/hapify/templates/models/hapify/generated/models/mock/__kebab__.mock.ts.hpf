@@ -40,7 +40,7 @@ import {
 
 
 <<if Fields unique>>
-import { <<Model pascal>>UniqueValues } from './../models/';
+import { <<Model pascal>>UniqueValues } from './../models';
 <<endif>>
 
 

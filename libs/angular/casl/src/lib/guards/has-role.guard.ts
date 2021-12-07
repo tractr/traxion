@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -10,10 +10,7 @@ import {
 import { Prisma, User, UserRoles } from '@prisma/client';
 import { map, Observable } from 'rxjs';
 
-import {
-  SESSION_SERVICE,
-  SessionService,
-} from '@tractr/angular-authentication';
+import { SessionService } from '@tractr/angular-authentication';
 
 export interface HasRoleData {
   redirectTo?: string;
@@ -28,7 +25,6 @@ export interface HasRoleData {
 export class HasRoleGuard implements CanActivate {
   constructor(
     private router: Router,
-    @Inject(SESSION_SERVICE)
     private sessionService: SessionService<User>,
   ) {}
 

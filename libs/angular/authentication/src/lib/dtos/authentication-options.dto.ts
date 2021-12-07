@@ -1,4 +1,3 @@
-import { ClassConstructor } from 'class-transformer';
 import { ValidateNested } from 'class-validator';
 
 import { AuthenticationOptionsApi } from './authentication-options-api.dto';
@@ -13,20 +12,12 @@ import { getDefaults } from '@tractr/common';
 /**
  * Authentication module options.
  */
-export class AuthenticationOptions<
-  U extends Record<string, unknown> = Record<string, unknown>,
-  CCU extends ClassConstructor<U> = ClassConstructor<U>,
-> {
+export class AuthenticationOptions {
   /**
    * Options to configure the user that will be manipulated by the authentication module.
    */
   @ValidateNested()
   api!: AuthenticationOptionsApi;
-
-  /**
-   * Options to configure the user that will be manipulated by the authentication module.
-   */
-  user!: CCU;
 
   /**
    * Options to configure the rooting url of the components.
