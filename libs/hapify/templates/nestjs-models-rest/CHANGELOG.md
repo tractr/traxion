@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.28.5](https://github.com/tractr/stack/compare/v1.28.4...v1.28.5) (2021-12-06)
+
+
+### Bug Fixes
+
+* fix connection keyword in rest-dto-service ([#325](https://github.com/tractr/stack/issues/325)) ([a5d5639](https://github.com/tractr/stack/commit/a5d5639dad7bb2def6ae7d2ff742d0b87b812cba))
+
+
+
 ## [1.28.4](https://github.com/tractr/stack/compare/v1.28.3...v1.28.4) (2021-12-03)
 
 
