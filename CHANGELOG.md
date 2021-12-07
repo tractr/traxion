@@ -2,6 +2,23 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.29.0](https://github.com/tractr/stack/compare/v1.28.5...v1.29.0) (2021-12-07)
+
+
+### Bug Fixes
+
+* **angular-form:** allow to change fielname in select model ([#297](https://github.com/tractr/stack/issues/297)) ([e457877](https://github.com/tractr/stack/commit/e4578771dea7bba05ed9db75c1c9eee0fc7e2e4d))
+* handle correctly prisma errors on the http error layer ([#323](https://github.com/tractr/stack/issues/323)) ([68220da](https://github.com/tractr/stack/commit/68220da4f267845ec83faf71c36ac0ee0b2c315a))
+* remove npm cache in gitactions ([#304](https://github.com/tractr/stack/issues/304)) ([2752265](https://github.com/tractr/stack/commit/2752265a401626ea4caac862383c6bff9517c65e))
+
+
+### Features
+
+* treat unique values on mock ([#322](https://github.com/tractr/stack/issues/322)) ([8437c86](https://github.com/tractr/stack/commit/8437c86fda88fa1e7f7481fea502a90142113dae))
+* update angular authentication with dto check ([#324](https://github.com/tractr/stack/issues/324)) ([078c93a](https://github.com/tractr/stack/commit/078c93a54cc778884b2323be392a66f40e0156a0))
+
+
+
 ## [1.28.5](https://github.com/tractr/stack/compare/v1.28.4...v1.28.5) (2021-12-06)
 
 

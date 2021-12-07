@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.29.0](https://github.com/tractr/stack/compare/v1.28.5...v1.29.0) (2021-12-07)
+
+
+### Features
+
+* update angular authentication with dto check ([#324](https://github.com/tractr/stack/issues/324)) ([078c93a](https://github.com/tractr/stack/commit/078c93a54cc778884b2323be392a66f40e0156a0))
+
+
+
 ## [1.28.5](https://github.com/tractr/stack/compare/v1.28.4...v1.28.5) (2021-12-06)
 
 
