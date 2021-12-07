@@ -8,9 +8,9 @@ import {
 } from '@angular/router';
 import { map, Observable } from 'rxjs';
 
-import { AUTHENTICATION_OPTIONS, SESSION_SERVICE } from '../constants';
+import { AUTHENTICATION_OPTIONS } from '../constants';
 import { AuthenticationOptions } from '../dtos';
-import { SessionService } from '../interfaces';
+import { SessionService } from '../services';
 
 @Injectable()
 export class IsLoggedGuard implements CanActivate {
@@ -18,7 +18,6 @@ export class IsLoggedGuard implements CanActivate {
     private router: Router,
     @Inject(AUTHENTICATION_OPTIONS)
     private options: AuthenticationOptions,
-    @Inject(SESSION_SERVICE)
     private sessionService: SessionService,
   ) {}
 

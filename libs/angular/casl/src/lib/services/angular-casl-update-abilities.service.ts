@@ -5,10 +5,7 @@ import { catchError, of, takeUntil } from 'rxjs';
 import { CASL_MODULE_OPTIONS } from '../constants';
 import { CaslOptions, UserMin } from '../interfaces';
 
-import {
-  SESSION_SERVICE,
-  SessionService,
-} from '@tractr/angular-authentication';
+import { SessionService } from '@tractr/angular-authentication';
 import { Unsubscriber } from '@tractr/angular-tools';
 import { CaslUserRoles } from '@tractr/common';
 
@@ -17,7 +14,6 @@ export class CaslUpdateAbilitiesService extends Unsubscriber {
   constructor(
     @Inject(CASL_MODULE_OPTIONS)
     private caslOptions: CaslOptions,
-    @Inject(SESSION_SERVICE)
     private sessionService: SessionService<UserMin>,
     private ability: Ability,
   ) {
