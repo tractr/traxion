@@ -257,16 +257,24 @@ describe('<<Model pascal>>DatabaseService', () => {
           <<if field oneOne or oneMany>>
         <<field camel>>: { connect: { id: <<field camel>> } },
           <<else>>
-        <<field camel>>: { set: <<field camel>><<if field nullable>>?<<endif>>.map(id => ({ id })) },
+        <<field camel>>: { connect: <<field camel>><<if field nullable>>?<<endif>>.map(id => ({ id })) },
           <<endif>>
         <<endfor>>
         };
-        const update = { ...create };
+        const update = {
+          ...create,
+        <<for Fields entity and not internal field>>
+          <<if field oneOne or oneMany>>
+        <<field camel>>: { connect: { id: <<field camel>> } },
+          <<else>>
+        <<field camel>>: { set: <<field camel>>.map(id => ({ id })) },
+          <<endif>>
+        <<endfor>>
+        };
         const prismaArgs = { 
           <<if Fields internal and not primary and (not entity or nullable)>>
           create:  mocked<<Model pascal>>Service.assignInternalsToCreateDto(create)
         <<else>>
-<<<<<<< HEAD
           create
         <<endif>>, update, where: paramsDto };
         const result = <<Model camel>>RestDtoService.formatUpsertDtos(
@@ -275,30 +283,6 @@ describe('<<Model pascal>>DatabaseService', () => {
         );
         expect(result).toEqual(prismaArgs);
       });
-=======
-      <<field camel>>: { connect: <<field camel>>.map(id => ({ id })) },
-        <<endif>>
-      <<endfor>>
-      };
-      const update = {
-        ...create,
-      <<for Fields entity and not internal field>>
-        <<if field oneOne or oneMany>>
-      <<field camel>>: { connect: { id: <<field camel>> } },
-        <<else>>
-      <<field camel>>: { set: <<field camel>>.map(id => ({ id })) },
-        <<endif>>
-      <<endfor>>
-      };
-      const prismaArgs = {
-        <<if Fields internal and not primary and (not entity or nullable)>>
-        create:  mocked<<Model pascal>>Service.assignInternalsToCreateDto(create)
-      <<else>>
-        create
-      <<endif>>, update, where: paramsDto };
-      const result = <<Model camel>>RestDtoService.formatUpsertDtos(paramsDto, bodyDto);
-      expect(result).toEqual(prismaArgs)
->>>>>>> next-20211207
     });
   });
 
