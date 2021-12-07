@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.29.0](https://github.com/tractr/stack/compare/v1.28.5...v1.29.0) (2021-12-07)
+
+
+### Bug Fixes
+
+* handle correctly prisma errors on the http error layer ([#323](https://github.com/tractr/stack/issues/323)) ([68220da](https://github.com/tractr/stack/commit/68220da4f267845ec83faf71c36ac0ee0b2c315a))
+
+
+
 ## [1.28.5](https://github.com/tractr/stack/compare/v1.28.4...v1.28.5) (2021-12-06)
 
 
