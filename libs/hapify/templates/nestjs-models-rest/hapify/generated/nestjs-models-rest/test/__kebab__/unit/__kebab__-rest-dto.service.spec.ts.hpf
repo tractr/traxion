@@ -65,6 +65,12 @@ describe('<<Model pascal>>DatabaseService', () => {
     it('should properly format create dto', () => {
       const bodyDto: Required< <<Model pascal>>CreateBodyDto[] > = mock<<Model pascal>>sCreateBodyDtoFactory();
       const arrayBody = bodyDto as <<Model pascal>>CreateBodyDto[];
+      <<if Fields internal and not primary and (not entity or nullable)>>
+      const mockedInternalFields = { internalFields: 'internalFields' };
+      (mocked<<Model pascal>>Service.getDefaultInternals as jest.Mock).mockReturnValue(
+        mockedInternalFields,
+      );
+      <<endif>>
       arrayBody.map((tmpBody: <<Model pascal>>CreateBodyDto) => {
         const {
         <<for Fields entity and not internal field>>
@@ -73,6 +79,9 @@ describe('<<Model pascal>>DatabaseService', () => {
         ...values
         } = tmpBody;
         const data = {
+        <<if Fields internal and not primary and (not entity or nullable)>>
+          ...mockedInternalFields,
+        <<endif>>
           ...values,
         <<for Fields entity and not internal field>>
           <<if field oneOne or oneMany>>
@@ -82,15 +91,14 @@ describe('<<Model pascal>>DatabaseService', () => {
           <<endif>>
         <<endfor>>
         }
-        const prismaArgs = { 
-        <<if Fields internal and not primary and (not entity or nullable)>>
-          data:  mocked<<Model pascal>>Service.assignInternalsToCreateDto(data)
-        <<else>>
-          data
-        <<endif>>
-        };
+        const prismaArgs = { data };
         const result = <<Model camel>>RestDtoService.formatCreateDto(tmpBody);
         expect(result).toEqual(prismaArgs);
+        <<if Fields internal and not primary and (not entity or nullable)>>
+        expect(mocked<<Model pascal>>Service.getDefaultInternals).toHaveBeenCalledTimes(
+          1,
+        );
+        <<endif>>
       });
     });
   });
@@ -244,6 +252,12 @@ describe('<<Model pascal>>DatabaseService', () => {
       const paramsDto: <<Model pascal>>UpsertParamsDto = mock<<Model pascal>>UpsertParamsDtoFactory();
       const bodyDto: Required< <<Model pascal>>UpsertBodyDto[] > = mock<<Model pascal>>sUpsertBodyDtoFactory();
       const arrayBody = bodyDto as <<Model pascal>>UpsertBodyDto[];
+      <<if Fields internal and not primary and (not entity or nullable)>>
+      const mockedInternalFields = { internalFields: 'internalFields' };
+      (mocked<<Model pascal>>Service.getDefaultInternals as jest.Mock).mockReturnValue(
+        mockedInternalFields,
+      );
+      <<endif>>
       arrayBody.map((tmpBody: <<Model pascal>>UpsertBodyDto) => {
           const {
         <<for Fields entity and not internal field>>
@@ -252,6 +266,9 @@ describe('<<Model pascal>>DatabaseService', () => {
         ...values
         } = tmpBody;
         const create = {
+          <<if Fields internal and not primary and (not entity or nullable)>>
+          ...mockedInternalFields,
+          <<endif>>
           ...values,
         <<for Fields entity and not internal field>>
           <<if field oneOne or oneMany>>
@@ -262,7 +279,7 @@ describe('<<Model pascal>>DatabaseService', () => {
         <<endfor>>
         };
         const update = {
-          ...create,
+          ...values,
         <<for Fields entity and not internal field>>
           <<if field oneOne or oneMany>>
         <<field camel>>: { connect: { id: <<field camel>> } },
@@ -271,17 +288,21 @@ describe('<<Model pascal>>DatabaseService', () => {
           <<endif>>
         <<endfor>>
         };
-        const prismaArgs = { 
-          <<if Fields internal and not primary and (not entity or nullable)>>
-          create:  mocked<<Model pascal>>Service.assignInternalsToCreateDto(create)
-        <<else>>
-          create
-        <<endif>>, update, where: paramsDto };
+        const prismaArgs = {
+          create,
+          update,
+          where: paramsDto
+        };
         const result = <<Model camel>>RestDtoService.formatUpsertDtos(
           paramsDto,
           tmpBody,
         );
         expect(result).toEqual(prismaArgs);
+        <<if Fields internal and not primary and (not entity or nullable)>>
+        expect(mocked<<Model pascal>>Service.getDefaultInternals).toHaveBeenCalledTimes(
+          1,
+        );
+        <<endif>>
       });
     });
   });

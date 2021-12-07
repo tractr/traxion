@@ -4,7 +4,7 @@ import { Inject, Injectable } from '@nestjs/common';
 <<if Fields enum and internal and not ownership>>
 import {
   <<for Fields enum and internal and not ownership field>>
-    <<Model pascal>><<field pascal>>
+    <<Model pascal>><<field pascal>>,
   <<endfor>>
 } from '../../../../models';
 <<endif>>
@@ -36,27 +36,14 @@ export class <<Model pascal>>Service {
   <<endfor>>
 
   <<if Fields internal and not primary and (not entity or nullable)>>
-  /**
-   *  Add internal fields to create dto
-   * */
-  public assignInternalsToCreateDto<D extends Partial<Prisma.<<Model pascal>>CreateInput>>(data: D): D &
-    Pick<
-      Prisma.<<Model pascal>>CreateInput,
-      <<for Fields internal and not primary and (not entity or nullable) field>>
-        | '<<field camel>>'
-      <<endfor>>
-      >
-  {
-      return {...data, ...this.getDefaultInternals() };
-  }
 
   /**
    *  Return default internal fields
-   * */
+   **/
   public getDefaultInternals() {
     return {
       <<for Fields internal and not primary and (not entity or nullable) field>>
-      '<<field camel>>': this.getDefault<<field pascal>>(),
+      <<field camel>>: this.getDefault<<field pascal>>(),
       <<endfor>>
     }
   }
