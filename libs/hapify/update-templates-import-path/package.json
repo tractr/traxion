@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/hapify-generate-config",
+  "name": "@tractr/update-templates-import-path",
   "version": "1.28.4",
   "description": "Generate hapify config",
   "repository": {
@@ -7,12 +7,9 @@
     "url": "https://github.com/tractr/stack"
   },
   "license": "UNLICENSED",
-  "main": "./src/generate-config.js",
+  "main": "./src/update-templates-import-path.js",
   "bin": {
-    "hpf-generate-config": "./src/index.js"
-  },
-  "peerDependencies": {
-    "@hapify/cli": "^1.3.1"
+    "hpf-update-templates-import-path": "./src/index.js"
   },
   "publishConfig": {
     "access": "restricted",
