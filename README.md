@@ -1,5 +1,8 @@
 # Cali
 
+This project aims to assist thief video monitoring is supermarkets with
+artificial intelligence.
+
 ## Prerequisites
 
 In order to use this repository and run the project, you will need:
@@ -73,7 +76,7 @@ Others common operations are:
 
 To start the project, the next steps are required:
 
-- Start the database container with `docker-compose up -d`.
+- Start the database and RabbitMQ containers with `docker-compose up -d`.
 - Start the api with `nx serve api`.
 - Start the message broker handler application with
   `nx serve message-broker-handler`.
@@ -98,7 +101,65 @@ Here are the steps to update the project modelisation:
 - In order to apply your updates to the generated code, you must run the hapify
   generation with `npm run generate`.
 
-The generation will generate boilerplate code for the app but it will also
-generate a dbml schema matching the modelisation entered in the hapify GUI. It
-is available at `libs/generated/models.dbml`. You can use
-`https://dbdiagram.io/home` to visualize the generated dbml!
+## Mock message broker events
+
+In order to mock message broker events (that would normally be send by the cali
+video analysis service), you can use the `video-analysis-cli`. It exposes some
+methods to send events to the local message broker.
+
+The cli can be run with
+`nx run video-analysis-mock:cli --cmd="prediction-logs publish-one"`
+
+### Commands available
+
+Here is the list of the available commands:
+
+-`prediction-logs publish-one` publish one log in the prediction-logs queue.
+
+-`prediction-logs publish-interval` publish logs at the specified interval in
+the prediction-logs queue.
+
+-`alert publish-one` publish one log in the alert queue.
+
+-`alert publish-interval` publish logs at the specified interval in the alert
+queue.
+
+-`video-generation publish-one` publish one log in the video-generation queue.
+
+-`video-generation publish-interval` publish logs at the specified interval in
+the video-generation queue.
+
+## Project structure
+
+### Applications
+
+Applications are code artefact that are self-sufficient and that can be deployed
+on their own. The Cali project is composed of the next applications:
+
+#### api
+
+#### message-broker-handler
+
+#### pwa
+
+#### terraform
+
+#### video-analysis-mock
+
+### Libraries
+
+Libraries are code artefact that are made to be used either by other libraries
+or applications. By definition, they are not self-sufficient and that can't be
+deployed. The Cali project is composed of the next libraries:
+
+#### angular
+
+#### common
+
+#### message-broker
+
+#### message-broker-handler
+
+#### nestjs
+
+#### prisma
