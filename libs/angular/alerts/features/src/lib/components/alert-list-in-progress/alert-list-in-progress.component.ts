@@ -98,23 +98,40 @@ export class AlertListInProgressComponent {
     );
 
   /**
+   * Observable that emits updated feedbacks
+   */
+  public alertFeedbackUpdated$: Observable<string> =
+    this.alertNotificationService.subscribeToAlertFeedbackCreation().pipe(
+      map((result) => result?.data?.alertFeedbackCreated?.alertId),
+      filter((alertId): alertId is string => typeof alertId !== 'undefined'),
+    );
+
+  /**
    * Observable that emits updated alerts
    */
-  public alertUpdated$: Observable<AlertUpdated> = this.alertNotificationService
+  public alertUpdated$: Observable<string> = this.alertNotificationService
     .subscribeToAlertUpdated()
     .pipe(
       map((result) => result?.data?.alertUpdated?.id),
       filter((id): id is string => typeof id !== 'undefined'),
-      // TODO: handle errors
-      concatMap((id) =>
-        this.alertWithCurrentFeedbackService.findUnique$({ id }).pipe(
-          map((alert) => ({
-            eventType: EventType.updated as const,
-            alert,
-          })),
-        ),
-      ),
     );
+
+  /**
+   * Observable that emits updated alerts with current feedback
+   */
+  public alertAndFeedbackUpdated$: Observable<AlertUpdated> = merge(
+    this.alertFeedbackUpdated$,
+    this.alertUpdated$,
+  ).pipe(
+    concatMap((id) =>
+      this.alertWithCurrentFeedbackService.findUnique$({ id }).pipe(
+        map((alert) => ({
+          eventType: EventType.updated as const,
+          alert,
+        })),
+      ),
+    ),
+  );
 
   /**
    * List of alerts sync via push notifications
@@ -122,7 +139,7 @@ export class AlertListInProgressComponent {
   public alerts$: Observable<AlertWithCurrentFeedback[]> = merge(
     this.alertInit$,
     this.alertCreated$,
-    this.alertUpdated$,
+    this.alertAndFeedbackUpdated$,
   ).pipe(
     scan(this.updateAlertsList, [] as AlertWithCurrentFeedback[]),
     debounceTime(100),
