@@ -1,6 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+<<if Fields internal and entity>>
 import { Merge } from 'ts-essentials';
+<<endif>>
 
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
 import {
