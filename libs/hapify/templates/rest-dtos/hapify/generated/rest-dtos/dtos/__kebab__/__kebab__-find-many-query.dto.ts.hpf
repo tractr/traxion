@@ -40,7 +40,7 @@ import {
 } from 'class-validator';
 
 <<if Fields object>>
-import { Prisma } from '@prisma/client';
+import { JsonObject } from '@tractr/common';
 <<endif>>
   
 import {
@@ -171,7 +171,7 @@ function optionalTypedProperty(f) {
   else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;
   else if (f.type === "number") out += "number";
   else if (f.type === "datetime") out += "Date";
-  else if (f.type === "object") out += "Prisma.JsonObject";
+  else if (f.type === "object") out += "JsonObject";
   else if (f.type === "entity") {
     out +=  "string"
   }
