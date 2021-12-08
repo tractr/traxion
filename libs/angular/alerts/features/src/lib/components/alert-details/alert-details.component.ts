@@ -14,7 +14,7 @@ import {
   switchMap,
 } from 'rxjs';
 
-import { AlertNotificationService } from '@cali/angular-alerts-utils';
+import { AlertPushNotificationService } from '@cali/angular-alerts-utils';
 import { AlertWithCurrentFeedbackService } from '@cali/angular-rext-client';
 
 @Component({
@@ -30,11 +30,11 @@ export class AlertDetailsComponent implements OnChanges {
 
   constructor(
     private alertWithCurrentFeedbackService: AlertWithCurrentFeedbackService,
-    private alertNotificationService: AlertNotificationService,
+    private alertPushNotificationService: AlertPushNotificationService,
   ) {}
 
   /** Observable who listen when the current alert is updated */
-  alertUpdatedNotification$ = this.alertNotificationService
+  alertUpdatedNotification$ = this.alertPushNotificationService
     .subscribeToAlertUpdated()
     .pipe(
       map(
@@ -45,7 +45,7 @@ export class AlertDetailsComponent implements OnChanges {
     );
 
   /** Observable who listen when a new feedback's alert is created */
-  alertFeedbackCreatedNotification$ = this.alertNotificationService
+  alertFeedbackCreatedNotification$ = this.alertPushNotificationService
     .subscribeToAlertFeedbackCreation()
     .pipe(
       map(

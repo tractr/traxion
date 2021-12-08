@@ -1446,6 +1446,11 @@
                 "glob": "**/*",
                 "input": "node_modules/@ant-design/icons-angular/src/inline-svg/",
                 "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "libs/angular/alerts/utils/src/assets",
+                "output": "assets/angular/alerts/utils"
               }
             ],
             "index": "apps/pwa/src/index.html",

@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 
-import { AlertNotificationService } from './services';
+import {
+  AlertNotificationService,
+  AlertPushNotificationService,
+} from './services';
 
 @NgModule({
   imports: [],
-  providers: [AlertNotificationService],
+  providers: [AlertPushNotificationService, AlertNotificationService],
 })
 export class AngularAlertsUtilsModule {}

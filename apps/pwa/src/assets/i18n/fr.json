@@ -12,6 +12,8 @@
   "filter-period-6-months": "6 derniers mois",
   "logout": "Déconnexion",
   "my-account": "Mon compte",
+  "notification-new-alert-content": "Cliquez sur la notification pour y accéder directement.",
+  "notification-new-alert-title": "Nouvelle alerte",
   "page_title-alert-details": "Alerte vidéo",
   "page_title-alerts-archived": "Alertes archivées",
   "page_title-alerts-in-progess": "Alertes videos",

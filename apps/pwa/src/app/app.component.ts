@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { fr_FR, NzI18nService } from 'ng-zorro-antd/i18n';
 import { Subject, takeUntil } from 'rxjs';
 
+import { AlertNotificationService } from '@cali/angular-alerts-utils';
 import { PageService } from '@cali/angular-common-utils';
 
 @Component({
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private pageService: PageService,
     private readonly meta: MetaService,
     private changeDetector: ChangeDetectorRef,
+    private alertNotificationService: AlertNotificationService,
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +36,10 @@ export class AppComponent implements OnInit, OnDestroy {
       }
       this.changeDetector.detectChanges();
     });
+
+    this.alertNotificationService.notificationAlert$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe();
   }
 
   ngOnDestroy(): void {

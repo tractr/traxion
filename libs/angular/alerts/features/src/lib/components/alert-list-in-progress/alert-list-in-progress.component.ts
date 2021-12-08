@@ -13,7 +13,7 @@ import {
   share,
 } from 'rxjs';
 
-import { AlertNotificationService } from '@cali/angular-alerts-utils';
+import { AlertPushNotificationService } from '@cali/angular-alerts-utils';
 import { AlertWithCurrentFeedbackService } from '@cali/angular-rext-client';
 import { AlertWithCurrentFeedback } from '@cali/common-models';
 
@@ -51,7 +51,7 @@ type AlertEvent = AlertCreated | AlertUpdated;
 })
 export class AlertListInProgressComponent {
   constructor(
-    private readonly alertNotificationService: AlertNotificationService,
+    private readonly alertPushNotificationService: AlertPushNotificationService,
     private readonly alertWithCurrentFeedbackService: AlertWithCurrentFeedbackService,
   ) {}
 
@@ -81,9 +81,8 @@ export class AlertListInProgressComponent {
   /**
    * Observable that emits created alerts
    */
-  public alertCreated$: Observable<AlertCreated> = this.alertNotificationService
-    .subscribeToAlertCreation()
-    .pipe(
+  public alertCreated$: Observable<AlertCreated> =
+    this.alertPushNotificationService.subscribeToAlertCreation().pipe(
       map((result) => result?.data?.alertCreated?.id),
       filter((id): id is string => typeof id !== 'undefined'),
       // TODO: handle errors
@@ -101,7 +100,7 @@ export class AlertListInProgressComponent {
    * Observable that emits updated feedbacks
    */
   public alertFeedbackUpdated$: Observable<string> =
-    this.alertNotificationService.subscribeToAlertFeedbackCreation().pipe(
+    this.alertPushNotificationService.subscribeToAlertFeedbackCreation().pipe(
       map((result) => result?.data?.alertFeedbackCreated?.alertId),
       filter((alertId): alertId is string => typeof alertId !== 'undefined'),
     );
@@ -109,7 +108,7 @@ export class AlertListInProgressComponent {
   /**
    * Observable that emits updated alerts
    */
-  public alertUpdated$: Observable<string> = this.alertNotificationService
+  public alertUpdated$: Observable<string> = this.alertPushNotificationService
     .subscribeToAlertUpdated()
     .pipe(
       map((result) => result?.data?.alertUpdated?.id),

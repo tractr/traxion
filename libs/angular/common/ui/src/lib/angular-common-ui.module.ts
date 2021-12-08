@@ -7,6 +7,7 @@ import { AngularFormModule } from '@tractr/angular-form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
@@ -20,6 +21,7 @@ const antModules = [
   NzSpinModule,
   NzTabsModule,
   NzRadioModule,
+  NzNotificationModule,
 ];
 
 @NgModule({

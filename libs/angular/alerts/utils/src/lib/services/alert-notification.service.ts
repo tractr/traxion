@@ -1,41 +1,61 @@
 import { Injectable } from '@angular/core';
-import { share } from 'rxjs';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { takeUntil, tap } from 'rxjs';
 
-import {
-  AlertCreatedGql,
-  AlertFeedbackCreatedGql,
-  AlertUpdatedGql,
-} from '@cali/angular-graphql-client';
+import { AlertPushNotificationService } from './alert-push-notification.service';
 
 @Injectable()
 export class AlertNotificationService {
   constructor(
-    private readonly alertFeedbackCreatedGql: AlertFeedbackCreatedGql,
-    private readonly alertCreatedGql: AlertCreatedGql,
-    private readonly alertUpdatedGql: AlertUpdatedGql,
+    private alertPushNotificationService: AlertPushNotificationService,
+    private nzNotificationService: NzNotificationService,
+    private translateService: TranslateService,
+    private router: Router,
   ) {}
 
   /**
-   * Subscribe to alertFeedbackCreated notifications
-   * @returns an observable triggered when an alertFeedback is created
+   * Trigger a visual and audion notification when an alert is created
    */
-  public subscribeToAlertFeedbackCreation() {
-    return this.alertFeedbackCreatedGql.subscribe().pipe(share());
-  }
+  notificationAlert$ = this.alertPushNotificationService
+    .subscribeToAlertCreation()
+    .pipe(
+      tap((alertId) => {
+        const notificationCreated = this.nzNotificationService.info(
+          this.translateService.instant('notification-new-alert-title'),
+          this.translateService.instant('notification-new-alert-content'),
+          {
+            nzDuration: 3000,
+            nzPauseOnHover: true,
+            nzClass: 'notification-alert',
+          },
+        );
 
-  /**
-   * Subscribe to alertCreated notifications
-   * @returns an observable triggered when an alert is created
-   */
-  public subscribeToAlertCreation() {
-    return this.alertCreatedGql.subscribe().pipe(share());
-  }
+        notificationCreated.onClick
+          .pipe(takeUntil(notificationCreated.onClose))
+          .subscribe(() => {
+            this.router
+              .navigate(['alertes', alertId.data?.alertCreated?.id])
+              .then(() =>
+                this.nzNotificationService.remove(
+                  notificationCreated.messageId,
+                ),
+              )
+              .catch((e) => console.error(e));
+          });
 
-  /**
-   * Subscribe to alertUpdated notifications
-   * @returns an observable triggered when an alert is updated
-   */
-  public subscribeToAlertUpdated() {
-    return this.alertUpdatedGql.subscribe().pipe(share());
+        this.playAudioNotification();
+      }),
+    );
+
+  playAudioNotification() {
+    const song = new Audio('../assets/angular/alerts/utils/notification.mp3');
+    song
+      .play()
+      .then()
+      .catch((e) => {
+        console.error(e);
+      });
   }
 }
