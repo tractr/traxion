@@ -20,6 +20,7 @@ export type Subjects = CaslPrismaSubjects<{
   Tag: {};
   User: User;
   Variable: {};
+  InternalField: {};
   all: 'all';
 }>;
 

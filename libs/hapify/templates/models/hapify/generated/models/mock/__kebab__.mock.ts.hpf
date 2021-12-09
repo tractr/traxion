@@ -11,7 +11,7 @@ import {
 <<endif>>
 
 <<if Fields object>>
-import { Prisma } from '@prisma/client';
+import { JsonObject } from '@tractr/common';
 <<endif>>
 
 import {
@@ -174,7 +174,7 @@ function getMockReturnType(f) {
 <<if Fields object>>
 function generateFakeObject() {
  const countKeys = Math.floor(Math.random() * 10);
-  const obj : Prisma.JsonObject = {};
+  const obj : JsonObject = {};
   for (let i=0; i<=countKeys; i++) {
     obj[`key${i}`] = lorem.word();
   }
