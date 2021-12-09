@@ -1,31 +1,65 @@
-import { Prisma } from '@prisma/client';
+ /**
+ * From https://github.com/sindresorhus/type-fest/
+ * Matches a JSON object.
+ * This type can be useful to enforce some input to be JSON-compatible or as a super-type to be extended from.
+ */
+export type JsonObject = { [Key in string]?: JsonValue };
+
+/**
+ * From https://github.com/sindresorhus/type-fest/
+ * Matches a JSON array.
+ */
+export type JsonArray = Array<JsonValue>;
+
+/**
+ * From https://github.com/sindresorhus/type-fest/
+ * Matches any valid JSON value.
+ */
+export type JsonValue =
+  | string
+  | number
+  | boolean
+  | null
+  | Date
+  | JsonObject
+  | JsonArray;
 
 export type URLSearchParamsType =
   | string
   | string[][]
-  | Record<string, string>
   | URLSearchParams
-  | Record<string, string | number | boolean | string[] | string[][] | Date | undefined>
-  | Prisma.JsonObject | Prisma.JsonObject[];
- 
+  | Date
+  | JsonObject
+  | JsonObject[];
+
+export function formatUrlParams(params: JsonObject): Record<string, string> {
+  return Object.entries(params).reduce((acc, [key, value]) => {
+    if (value === undefined) return acc;
+
+    if (value !== null && typeof value === 'object')
+      acc[key] = JSON.stringify(params[key]);
+
+    return acc;
+  }, {} as Record<string, string>);
+}
+
 export function getUrlSearchParams(init: URLSearchParamsType) {
   const params = init;
-  if (
-    typeof params === 'object' &&
-    !Array.isArray(params) &&
-    params !== null &&
-    !(params instanceof URLSearchParams)
-  ) {
-    // Specifically remove undefined value if found
-    Object.keys(params as Record<string, any>).forEach((key) =>
-      params[key] === undefined ? delete params[key] : {},
-    );
+  if (typeof params === 'string' || params instanceof URLSearchParams) {
+    return new URLSearchParams(params);
   }
-  return new URLSearchParams(
-    params as string | string[][] | Record<string, string> | URLSearchParams,
-  );
+
+  if (params instanceof Date) {
+    return new URLSearchParams(params.toISOString());
+  }
+
+  if (params !== null && typeof params === 'object' && !Array.isArray(params)) {
+    return new URLSearchParams(formatUrlParams(params));
+  }
+
+  return new URLSearchParams(JSON.stringify(params));
 }
- 
+
 export function getUrl(
   apiUrl: URL,
   appendUrl = '',
@@ -41,4 +75,4 @@ export function getUrl(
 
   return url;
 }
- 
+

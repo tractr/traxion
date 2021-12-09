@@ -1,6 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+<<if Fields internal and entity>>
 import { Merge } from 'ts-essentials';
+<<endif>>
 
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
 import {
@@ -70,6 +72,9 @@ export class <<Model pascal>>RestDtoService {
     ...values
     } = bodyDto;
     const data: Prisma.<<Model pascal>>CreateInput = {
+    <<if Fields internal and not primary and (not entity or nullable)>>
+      ...this.<<Model camel>>Service.getDefaultInternals(),
+    <<endif>>
       ...values,
     <<for Fields entity and not internal field>>
       <<if field oneOne or oneMany>>
@@ -89,11 +94,7 @@ export class <<Model pascal>>RestDtoService {
     }
 
     return {
-      <<if Fields internal and not primary and (not entity or nullable)>>
-      data:  this.<<Model camel>>Service.assignInternalsToCreateDto(data)
-      <<else>>
       data
-      <<endif>>
     };
   }
 
@@ -269,31 +270,36 @@ export class <<Model pascal>>RestDtoService {
     <<endif>>
   {
     const {
-    <<for Fields not internal field>>
+    <<for Fields entity and not internal field>>
       <<field camel>>,
     <<endfor>>
+    ...values
     } = bodyDto;
     const create: Prisma.<<Model pascal>>CreateInput = {
-      <<for Fields not internal field>>
-        <<if field oneOne or oneMany>>
-          <<if field nullable>>
-      <<field camel>>: <<field camel>> ? { connect: { id: <<field camel>> } } : undefined,
-          <<else>>
-      <<field camel>>: { connect: { id: <<field camel>> } },
-          <<endif>>
-        <<elseif field manyMany>>
-          <<if field nullable>>
-      <<field camel>>: <<field camel>> ? { connect: formatEntityIds(<<field camel>>) } : undefined,
-          <<else>>
-      <<field camel>>: { connect: formatEntityIds(<<field camel>>) },
-          <<endif>>
+    <<if Fields internal and not primary and (not entity or nullable)>>
+      ...this.<<Model camel>>Service.getDefaultInternals(),
+    <<endif>>
+
+      ...values,
+
+    <<for Fields entity and not internal field>>
+      <<if field oneOne or oneMany>>
+        <<if field nullable>>
+    <<field camel>>: <<field camel>> ? { connect: { id: <<field camel>> } } : undefined,
         <<else>>
-      <<field camel>>,
+    <<field camel>>: { connect: { id: <<field camel>> } },
         <<endif>>
-      <<endfor>>
+      <<else>>
+        <<if field nullable>>
+    <<field camel>>: <<field camel>> ? { connect: formatEntityIds(<<field camel>>) } : undefined,
+        <<else>>
+    <<field camel>>: { connect: formatEntityIds(<<field camel>>) },
+        <<endif>>
+      <<endif>>
+    <<endfor>>
     };
     const update: Prisma.<<Model pascal>>UpdateInput = {
-      ...create,
+      ...values,
       <<for Fields not internal and entity field>>
         <<if field oneOne or oneMany>>
           <<if field nullable>>
@@ -313,11 +319,7 @@ export class <<Model pascal>>RestDtoService {
       <<endfor>>
      };
     return {
-      <<if Fields internal and not primary and (not entity or nullable)>>
-      create: this.<<Model camel>>Service.assignInternalsToCreateDto(create),
-      <<else>>
       create,
-      <<endif>>
       update,
       where: { ...paramsDto }
     };
