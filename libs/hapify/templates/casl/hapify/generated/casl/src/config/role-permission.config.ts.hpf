@@ -1,7 +1,7 @@
 import { User } from '@prisma/client';
 import { RolePermissions } from '@tractr/common';
  
-import { AppAbility, AppRoles } from '../interfaces';
+import { AppAbility, AppRoles, UserWithIds } from '../interfaces';
  
 export const rolePermissions: RolePermissions<
   AppRoles,
@@ -15,7 +15,7 @@ export const rolePermissions: RolePermissions<
       <<endfor>>
     <<endfor>>
   },
-  user({ can }, user) {
+  user({ can }, user: UserWithIds) {
     <<for Models model>>
       <<for model.accesses.auth access>>
     can('<<=access.action>>', '<<model pascal>>');
@@ -36,3 +36,4 @@ export const rolePermissions: RolePermissions<
     can('manage', 'all');
   }
 };
+ 

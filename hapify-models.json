@@ -76,6 +76,44 @@
       },
       "fields": [
         {
+          "meta": {
+            "ownerStringPath": "user.enterprises.departments.id"
+          },
+          "name": "id",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal",
+            "ownership"
+          ],
+          "type": "string"
+        },
+        {
+          "meta": {
+            "backRelation": "departments"
+          },
+          "name": "enterprise",
+          "properties": [],
+          "subtype": "oneMany",
+          "type": "entity",
+          "value": "c069cc55-f28f-dcc1-cad8-0df044631ef8"
+        }
+      ],
+      "id": "2a523149-31f3-80bf-d32b-3b9174cc6f2c",
+      "name": "Department"
+    },
+    {
+      "accesses": {
+        "count": "guest",
+        "create": "guest",
+        "read": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "update": "guest"
+      },
+      "fields": [
+        {
           "name": "id",
           "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
@@ -167,6 +205,36 @@
       "id": "2019dfe5-3b43-4eea-82e5-2533fb1f9c85",
       "name": "InternalField",
       "notes": "Table to test system fields and default metadata"
+    },
+    {
+      "accesses": {
+        "count": "guest",
+        "create": "guest",
+        "read": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "update": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "meta": {
+            "backRelation": "enterprises",
+            "ownerStringPath": "user.id"
+          },
+          "name": "employee",
+          "properties": ["multiple", "ownership"],
+          "subtype": "manyMany",
+          "type": "entity",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
+        }
+      ],
+      "id": "c069cc55-f28f-dcc1-cad8-0df044631ef8",
+      "name": "Enterprise"
     },
     {
       "accesses": {
@@ -349,7 +417,7 @@
         {
           "meta": {
             "backRelation": "tags",
-            "ownerKey": "ownerId"
+            "ownerStringPath": "user.id"
           },
           "name": "owner",
           "properties": ["ownership"],
@@ -367,19 +435,13 @@
         "create": "guest",
         "read": "owner",
         "remove": "admin",
-        "search": "admin",
+        "search": "owner",
         "update": "owner"
       },
       "fields": [
         {
           "name": "id",
-          "properties": [
-            "primary",
-            "searchable",
-            "sortable",
-            "internal",
-            "ownership"
-          ],
+          "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
         },
         {

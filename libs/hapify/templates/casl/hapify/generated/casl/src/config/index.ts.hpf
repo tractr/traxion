@@ -1,3 +1,4 @@
+export * form './get-prisma-user-query';
 export * from './permissions.config';
 export * from './role-permission.config';
  

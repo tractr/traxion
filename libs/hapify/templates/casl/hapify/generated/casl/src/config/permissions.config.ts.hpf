@@ -37,3 +37,4 @@ export const Permission: Record<string, PolicyHandlerType<AppAbility>> = {
     ),
   <<endfor>>
 };
+ 

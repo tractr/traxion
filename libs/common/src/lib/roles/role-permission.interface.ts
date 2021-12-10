@@ -18,7 +18,7 @@ export interface CaslUser {
 
 export type DefinePermissions<U extends CaslUser, A extends AnyAbility> = (
   builder: AbilityBuilder<A>,
-  user?: U,
+  user: U,
 ) => void;
 
 export type RolePermissions<

@@ -12,7 +12,8 @@ import {
   AuthenticationModule,
   JwtGlobalAuthGuard,
 } from '@tractr/nestjs-authentication';
-import { CaslModule } from '@tractr/nestjs-casl';
+import { CaslModule, PoliciesGuard } from '@tractr/nestjs-casl';
+import { LoggerModule } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 import {
   FileStorageController,
@@ -55,8 +56,13 @@ import { MailerModule } from '@tractr/nestjs-mailer';
       rolePermissions,
     }),
     ConsoleModule,
+    LoggerModule,
   ],
   controllers: [AppController, FileStorageController],
-  providers: [AppService, { provide: APP_GUARD, useClass: JwtGlobalAuthGuard }],
+  providers: [
+    AppService,
+    { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
+    { provide: APP_GUARD, useClass: PoliciesGuard },
+  ],
 })
 export class AppModule {}

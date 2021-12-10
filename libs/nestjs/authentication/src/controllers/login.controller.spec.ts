@@ -9,7 +9,7 @@ import { AuthenticationEndpointMockController } from '../../mocks';
 import { AuthenticationModule } from '../authentication.module';
 import { AUTHENTICATION_DEFAULT_QUERY_PARAM_NAME } from '../constants';
 import { JwtGlobalAuthGuard } from '../guards';
-import { User } from '../interfaces';
+import { UserType } from '../interfaces';
 import { AuthenticationService, AuthenticationUserService } from '../services';
 
 import { LoggerModule } from '@tractr/nestjs-core';
@@ -19,7 +19,7 @@ const AUTHENTICATION_MOCK_USER_SERVICE = 'AUTHENTICATION_MOCK_USER_SERVICE';
 describe('Authentication Module', () => {
   let app: INestApplication;
   let mockUserService: MockProxy<AuthenticationUserService>;
-  let mockUser: User;
+  let mockUser: UserType;
 
   beforeAll(async () => {
     mockUserService = mockDeep<AuthenticationUserService>();
@@ -231,7 +231,7 @@ describe('Authentication Module without guards', () => {
 describe('Authentication Module with cookie', () => {
   let app: INestApplication;
   let mockUserService: MockProxy<AuthenticationUserService>;
-  let mockUser: User;
+  let mockUser: UserType;
 
   beforeEach(async () => {
     mockUserService = mockDeep<AuthenticationUserService>();

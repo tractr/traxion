@@ -12,10 +12,10 @@ import {
 import { Request, Response } from 'express';
 
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
-import { CurrentUser } from '../decorators';
+import { User } from '../decorators';
 import { AccessTokenDto, AuthenticationOptions } from '../dtos';
 import { LocalAuthGuard } from '../guards';
-import { User } from '../interfaces';
+import { UserType } from '../interfaces';
 import { AuthenticationService } from '../services';
 
 @Controller()
@@ -32,7 +32,7 @@ export class LoginController {
   async login(
     @Req() req: Request & { secret: string },
     @Res({ passthrough: true }) res: Response,
-  ): Promise<AccessTokenDto & { user: User }> {
+  ): Promise<AccessTokenDto & { user: UserType }> {
     const user = this.throwIfNoUser(req);
     const token = await this.authenticationService.login(user);
     res.cookie(
@@ -68,17 +68,17 @@ export class LoginController {
   }
 
   @Get('me')
-  me(@Req() req: Request, @CurrentUser() user: User): User {
+  me(@Req() req: Request, @User() user: UserType): UserType {
     this.throwIfNoUser(req);
     return user;
   }
 
-  throwIfNoUser(req: Request): User {
+  throwIfNoUser(req: Request): UserType {
     if (!req.user)
       throw new HttpException(
         'It seems like you are using @tractr/nestjs-authentication without adding a global APP_GUARD. Try to add the provider.',
         501,
       );
-    return req.user as unknown as User;
+    return req.user as unknown as UserType;
   }
 }

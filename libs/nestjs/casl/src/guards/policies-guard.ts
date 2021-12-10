@@ -27,7 +27,13 @@ export class PoliciesGuard implements CanActivate {
         context.getHandler(),
       ) || [];
 
-    const { user } = context.switchToHttp().getRequest();
+    const req = context.switchToHttp().getRequest();
+
+    const { user } = req;
+
+    if (!user) {
+      throw new ForbiddenException('User is not authenticated');
+    }
 
     if (user && (!user.roles || !Array.isArray(user.roles))) {
       this.logger.error(
@@ -37,6 +43,8 @@ export class PoliciesGuard implements CanActivate {
     }
 
     const ability = this.caslAbilityFactory.createForUser(user);
+
+    req.abilities = ability;
 
     const policiesResolved = await Promise.all(
       policyHandlers.map((handler) => this.execPolicyHandler(handler, ability)),
