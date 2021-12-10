@@ -646,6 +646,16 @@
           },
           "outputs": ["{options.outputPath}"]
         },
+        "coverage": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "codeCoverage": true,
+            "coverageReporters": ["text", "json"],
+            "jestConfig": "libs/hapify/hapify-common/jest.config.js",
+            "passWithNoTests": true,
+            "skipNxCache": true
+          }
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
@@ -730,6 +740,16 @@
             "tsConfig": "libs/hapify/generate-config/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "coverage": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "codeCoverage": true,
+            "coverageReporters": ["text", "json"],
+            "jestConfig": "libs/hapify/generate-config/jest.config.js",
+            "passWithNoTests": true,
+            "skipNxCache": true
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
@@ -1154,6 +1174,16 @@
           },
           "outputs": ["{options.outputPath}"]
         },
+        "coverage": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "codeCoverage": true,
+            "coverageReporters": ["text", "json"],
+            "jestConfig": "libs/hapify/update-templates-import-path/jest.config.js",
+            "passWithNoTests": true,
+            "skipNxCache": true
+          }
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
@@ -1526,6 +1556,7 @@
           "options": {
             "commands": [
               "npx rimraf generated",
+              "cp -r ../../dist/libs/hapify/hapify-common ../../node_modules/@tractr",
               "node ../../dist/libs/hapify/generate-config/src/index.js",
               "npx hpf generate",
               "npx prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",

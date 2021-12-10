@@ -6,7 +6,7 @@ import { dirname, extname, join } from 'path';
 import { IConfig, IConfigTemplate } from '@hapify/cli/dist/interface/Config';
 import debugFactory from 'debug';
 import * as deepmerge from 'deepmerge';
-import { readFile, readJSON, statSync } from 'fs-extra';
+import { readFile, statSync } from 'fs-extra';
 import * as yaml from 'yaml';
 
 const debug = debugFactory('hpf-common');
@@ -23,7 +23,7 @@ const configFilenamePriorityImportOrder = [
 ];
 
 export interface HapifyTemplateConfig extends IConfigTemplate {
-  inputPath?: string;
+  inputPath: string;
   outputPath?: string;
 }
 export interface HapifyConfig extends IConfig {
@@ -65,6 +65,7 @@ async function getHapifyConfigFromDirectory(
     } catch {
       continue;
     }
+    // eslint-disable-next-line default-case
     switch (extension) {
       case '':
       case '.js':
@@ -77,12 +78,8 @@ async function getHapifyConfigFromDirectory(
 
       case '.yml':
       case '.yaml': {
-        const fileContent = await readFile(configFilePath);
-        return yaml.parse(fileContent.toString());
-      }
-
-      default: {
-        return readJSON(configFilePath);
+        const fileContent = (await readFile(configFilePath)).toString();
+        return yaml.parse(fileContent);
       }
     }
   }
@@ -95,12 +92,16 @@ export async function getHapifyConfig(
   ignorePath: string[] = [],
 ): Promise<HapifyConfig | null> {
   debug(`Get the main configuration from ${hapifyPath}`);
+
   // First we need to get the main configuration file
   let mainConfig = await getHapifyConfigFromDirectory(hapifyPath);
   if (!mainConfig) return null;
 
   mainConfig = { ...mainConfig };
 
+  // if (!mainConfig.templates) {
+  //   throw new Error('Main config must contain the templates properties. ');
+  // }
   if (mainConfig.templates) {
     mainConfig.templates = mainConfig.templates.map((template) => ({
       ...template,
@@ -124,7 +125,7 @@ export async function getHapifyConfig(
 
   for (const extendPath of toExtendsList) {
     const resolve = require.resolve(extendPath, {
-      paths: [process.cwd(), hapifyPath],
+      paths: [hapifyPath],
     });
     if (toIgnore && toIgnore.includes(resolve)) continue;
 
@@ -138,7 +139,7 @@ export async function getHapifyConfig(
     .reverse()
     .concat(mainConfig)
     .reduce(
-      (acc, config) => mergeHapifyConfigs(acc, config ?? ({} as never)),
+      (acc, config) => mergeHapifyConfigs(acc, config as HapifyConfig),
       null,
     );
 }

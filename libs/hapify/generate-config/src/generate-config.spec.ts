@@ -10,23 +10,64 @@ describe('generate config', () => {
   });
 
   it('should generate the hapify.json file', async () => {
-    const basePath = `${process.cwd()}/libs/hapify/generate-config/src`;
-    const content = {
+    const basePath = `${process.cwd()}/libs/hapify/generate-config`;
+
+    const contentMainFile = {
+      extends: ['libs/hapify/generate-config/tmp/generated/.hapifyrc.js'],
       templates: [],
     };
-    // create hapify.json file
-    fs.writeFileSync(
-      `${basePath}/.hapifyrc.js`,
-      `module.exports = ${JSON.stringify(content)}`,
-    );
 
-    await getHapifyOptions(basePath);
+    const contentSecondFile = {
+      templates: [
+        {
+          path: `test.ts`,
+          engine: 'hpf',
+        },
+      ],
+    };
 
-    const fileExist = fs.existsSync(`${basePath}/hapify.json`);
+    try {
+      // create a tmp folder
+      if (!fs.existsSync(`${basePath}/tmp`)) {
+        fs.mkdirSync(`${basePath}/tmp`);
+      }
+      // create a tmp folder
+      if (!fs.existsSync(`${basePath}/tmp/generated`)) {
+        fs.mkdirSync(`${basePath}/tmp/generated`);
+      }
+      // create a tmp folder
+      if (!fs.existsSync(`${basePath}/tmp/generated/hapify`)) {
+        fs.mkdirSync(`${basePath}/tmp/generated/hapify`);
+      }
 
-    expect(fileExist).toEqual(true);
+      // create main .hapifyrc.js file
+      fs.writeFileSync(
+        `${basePath}/tmp/.hapifyrc.js`,
+        `module.exports = ${JSON.stringify(contentMainFile)}`,
+      );
 
-    fs.unlinkSync(`${basePath}/hapify.json`);
-    fs.unlinkSync(`${basePath}/.hapifyrc.js`);
+      // create test file
+      fs.writeFileSync(
+        `${basePath}/tmp/generated/hapify/test.ts.hpf`,
+        `this is a test file`,
+      );
+      // create second .hapifyrc file
+      fs.writeFileSync(
+        `${basePath}/tmp/generated/.hapifyrc.js`,
+        `module.exports = ${JSON.stringify(contentSecondFile)}`,
+      );
+
+      await getHapifyOptions(`${basePath}/tmp`);
+
+      const fileExist = fs.existsSync(`${basePath}/tmp/hapify.json`);
+
+      expect(fileExist).toEqual(true);
+    } catch (err: unknown) {
+      throw console.error(err);
+    } finally {
+      if (fs.existsSync(`${basePath}/tmp`)) {
+        fs.rmdirSync(`${basePath}/tmp`, { recursive: true });
+      }
+    }
   });
 });

@@ -2,4 +2,6 @@
 
 import { hapifyUpdateTemplatesImportPath } from './update-templates-import-path';
 
-(async () => hapifyUpdateTemplatesImportPath())().catch((err) => err);
+(async () => hapifyUpdateTemplatesImportPath())().catch((err) =>
+  console.error(err),
+);

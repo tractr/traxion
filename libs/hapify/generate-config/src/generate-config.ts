@@ -3,6 +3,7 @@
 
 import { join } from 'path';
 
+import { IConfig, IConfigTemplate } from '@hapify/cli/dist/interface/Config';
 import debugFactory from 'debug';
 import { copy, writeJSON } from 'fs-extra';
 
@@ -26,32 +27,34 @@ export async function getHapifyOptions(
   // Workaround that let hapify still run
   // First workaround cp all the files into `hapify`
 
-  if (hapifyConfig.templates) {
-    const promises: Promise<void>[] = [];
-    hapifyConfig.templates.forEach((template) => {
-      promises.push(
-        copy(
-          formatTemplatePath(template.inputPath || '', template.engine),
-          formatTemplatePath(
-            `${join(currentDirectory || '', 'hapify', template.path)}`,
-            template.engine,
-          ),
+  const promises: Promise<void>[] = [];
+  hapifyConfig.templates.forEach((template) => {
+    promises.push(
+      copy(
+        formatTemplatePath(template.inputPath, template.engine),
+        formatTemplatePath(
+          `${join(currentDirectory, 'hapify', template.path)}`,
+          template.engine,
         ),
-      );
-    });
-    await Promise.all(promises);
-  }
-
-  delete hapifyConfig.extends;
-  hapifyConfig.templates = hapifyConfig.templates.map((template) => {
-    const toSave = { ...template };
-    delete toSave.inputPath;
-    delete toSave.outputPath;
-    return toSave;
+      ),
+    );
   });
+  await Promise.all(promises);
 
-  const writeFile = join(currentDirectory || '', 'hapify.json');
-  await writeJSON(writeFile, hapifyConfig, {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { extends: _, templates, ...config } = hapifyConfig;
+
+  const hapifyJson: IConfig = {
+    ...config,
+    templates: templates.map<IConfigTemplate>((template) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { inputPath, outputPath, ...templateConfig } = template;
+      return templateConfig;
+    }),
+  };
+
+  const writeFile = join(currentDirectory, 'hapify.json');
+  await writeJSON(writeFile, hapifyJson, {
     spaces: 2,
   });
 
