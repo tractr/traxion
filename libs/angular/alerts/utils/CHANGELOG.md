@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.12.0](https://github.com/tractr/cali/compare/v0.11.0...v0.12.0) (2021-12-14)
+
+
+### Features
+
+* add alert notification service ([#68](https://github.com/tractr/cali/issues/68)) ([015caeb](https://github.com/tractr/cali/commit/015caeb880ccd1bfbb88d17ae37d24110ef9f0e5))
+
+
+
 # [0.11.0](https://github.com/tractr/cali/compare/v0.10.0...v0.11.0) (2021-12-08)
 
 
