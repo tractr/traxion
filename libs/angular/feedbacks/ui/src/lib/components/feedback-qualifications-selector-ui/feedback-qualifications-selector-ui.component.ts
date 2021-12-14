@@ -41,7 +41,7 @@ export class FeedbackQualificationsSelectorUiComponent {
     if (feedbackType === AlertFeedbackType.falseAlert)
       return [
         AlertFeedbackQualification.nothingSuspect,
-        AlertFeedbackQualification.suspectBehaviour,
+        AlertFeedbackQualification.suspectBehavior,
       ];
 
     return [

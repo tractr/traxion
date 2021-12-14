@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { AlertVideoStatus, Prisma, PrismaClient } from '@prisma/client';
 
 import { mockNumFrame } from '@cali/common-business';
 import {
@@ -142,52 +142,61 @@ export const seed = async () => {
     /**
      * Add alerts
      */
-    const firstAlertTypeSuspectBehavior = mockAlertFactory({
+    const alertTypeSuspectBehavior = mockAlertFactory({
       createdAt: now,
-      type: AlertType.suspectBehaviour,
+      type: AlertType.suspectBehavior,
       cameraId: camera.id,
       externalFrameId: mockNumFrame(camera.externalId),
+      videoStatus: AlertVideoStatus.videoAvailable,
+      videoUrl:
+        'https://media4.giphy.com/media/xT9KVtoUlfPzY49hBe/giphy.mp4?cid=790b76113e5010a1eea2bdc9e953b03d47eb468d288a0048&rid=giphy.mp4&ct=g',
       externalModelDecisionId: '1',
       externalModelPredictionId: '1',
     });
-    delete firstAlertTypeSuspectBehavior.camera;
+    delete alertTypeSuspectBehavior.camera;
 
     await prisma.alert.create({
-      data: firstAlertTypeSuspectBehavior as Prisma.AlertUncheckedCreateInput,
+      data: alertTypeSuspectBehavior as Prisma.AlertUncheckedCreateInput,
     });
 
-    const firstAlertTypeThief = mockAlertFactory({
+    const alertTypeThief = mockAlertFactory({
       createdAt: now,
       type: AlertType.thief,
       cameraId: camera.id,
       externalFrameId: mockNumFrame(camera.externalId),
+      videoStatus: AlertVideoStatus.videoDeleted,
+      videoUrl: null,
       externalModelDecisionId: '2',
       externalModelPredictionId: '2',
     });
-    delete firstAlertTypeThief.camera;
+    delete alertTypeThief.camera;
 
     await prisma.alert.create({
-      data: firstAlertTypeThief as Prisma.AlertUncheckedCreateInput,
+      data: alertTypeThief as Prisma.AlertUncheckedCreateInput,
     });
 
-    const secondAlertTypeThief = mockAlertFactory({
+    const alertTypeThief2 = mockAlertFactory({
       createdAt: now,
       type: AlertType.thief,
       cameraId: camera.id,
+      videoStatus: AlertVideoStatus.videoDeleted,
+      videoUrl: null,
       externalFrameId: mockNumFrame(camera.externalId),
       externalModelDecisionId: '3',
       externalModelPredictionId: '3',
     });
-    delete secondAlertTypeThief.camera;
+    delete alertTypeThief2.camera;
 
     await prisma.alert.create({
-      data: secondAlertTypeThief as Prisma.AlertUncheckedCreateInput,
+      data: alertTypeThief2 as Prisma.AlertUncheckedCreateInput,
     });
 
     const inProgressAlertTypeThief = mockAlertFactory({
       createdAt: now,
       type: AlertType.thief,
       cameraId: camera.id,
+      videoStatus: AlertVideoStatus.generationSuccessed,
+      videoUrl: null,
       externalFrameId: mockNumFrame(camera.externalId),
       externalModelDecisionId: '3',
       externalModelPredictionId: '3',
@@ -222,10 +231,10 @@ export const seed = async () => {
 
     const alertFeedbackTypeFalseAlert = mockAlertFeedbackFactory({
       createdAt: now,
-      alertId: firstAlertTypeSuspectBehavior.id,
+      alertId: alertTypeSuspectBehavior.id,
       isArchived: true,
-      isPertinent: true,
-      qualification: AlertFeedbackQualification.stopped,
+      isPertinent: false,
+      qualification: AlertFeedbackQualification.nothingSuspect,
       rate: 5,
       rateAnnotation: 'RAS',
       type: AlertFeedbackType.falseAlert,
@@ -239,28 +248,28 @@ export const seed = async () => {
       data: alertFeedbackTypeFalseAlert as Prisma.AlertFeedbackUncheckedCreateInput,
     });
 
-    const alertFeedbackTypeSuspectBehaviour = mockAlertFeedbackFactory({
+    const alertFeedbackTypeSuspectBehavior = mockAlertFeedbackFactory({
       createdAt: now,
-      alertId: firstAlertTypeThief.id,
+      alertId: alertTypeThief.id,
       isArchived: true,
       isPertinent: true,
-      qualification: AlertFeedbackQualification.stopped,
+      qualification: AlertFeedbackQualification.suspectBehavior,
       rate: 5,
       rateAnnotation: 'Suspect relaché',
-      type: AlertFeedbackType.suspectBehaviour,
+      type: AlertFeedbackType.suspectBehavior,
       userId: user.id,
       itemCategoryId: null,
       thiefValue: null,
     });
-    delete alertFeedbackTypeSuspectBehaviour.user;
+    delete alertFeedbackTypeSuspectBehavior.user;
 
     await prisma.alertFeedback.create({
-      data: alertFeedbackTypeSuspectBehaviour as Prisma.AlertFeedbackUncheckedCreateInput,
+      data: alertFeedbackTypeSuspectBehavior as Prisma.AlertFeedbackUncheckedCreateInput,
     });
 
     const alertFeedbackTypeThief = mockAlertFeedbackFactory({
       createdAt: now,
-      alertId: secondAlertTypeThief.id,
+      alertId: alertTypeThief2.id,
       isArchived: true,
       isPertinent: true,
       qualification: AlertFeedbackQualification.stopped,
@@ -268,8 +277,8 @@ export const seed = async () => {
       rateAnnotation: 'Le voleur a été arrêté',
       type: AlertFeedbackType.thief,
       userId: user.id,
-      itemCategoryId: null,
-      thiefValue: null,
+      itemCategoryId: itemCategory.id,
+      thiefValue: 100,
     });
     delete alertFeedbackTypeThief.user;
 

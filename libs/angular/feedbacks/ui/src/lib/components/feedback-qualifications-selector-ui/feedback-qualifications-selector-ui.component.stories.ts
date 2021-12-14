@@ -64,7 +64,7 @@ QualificationFeedbackNothingSuspect.args = {
 };
 
 /** Storie alertFeedback with qualification suspectBehavior */
-export const QualificationFeedbackSuspectBehaviour = Template.bind({});
-QualificationFeedbackSuspectBehaviour.args = {
-  alertFeedbackQualification: 'suspectBehaviour',
+export const QualificationFeedbacksuspectBehavior = Template.bind({});
+QualificationFeedbacksuspectBehavior.args = {
+  alertFeedbackQualification: 'suspectBehavior',
 };

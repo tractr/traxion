@@ -558,7 +558,8 @@
           "executor": "@nrwl/node:execute",
           "options": {
             "buildTarget": "api:build",
-            "inspect": true
+            "inspect": true,
+            "port": 9228
           }
         },
         "test": {

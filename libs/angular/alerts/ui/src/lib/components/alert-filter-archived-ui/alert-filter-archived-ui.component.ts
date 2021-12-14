@@ -57,9 +57,9 @@ export class AlertFilterArchivedUiComponent implements OnInit {
       {
         id: 3,
         label: await firstValueFrom(
-          this.translateService.get('status-alert-type-suspectBehaviour'),
+          this.translateService.get('status-alert-type-suspectBehavior'),
         ),
-        value: AlertFeedbackType.suspectBehaviour,
+        value: AlertFeedbackType.suspectBehavior,
       },
       {
         id: 4,

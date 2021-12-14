@@ -1,10 +1,16 @@
 {
   "configurations": [
     {
-      "name": "Debug nx api",
-      "port": 9229,
+      "name": "api",
+      "port": 9228,
       "request": "attach",
       "type": "node"
+    },
+    {
+      "name": "pwa",
+      "request": "launch",
+      "type": "pwa-chrome",
+      "url": "http://localhost:4200"
     }
   ],
   "version": "0.2.0"

@@ -43,7 +43,7 @@ TypeFeedbackThief.args = baseProps({ alertFeedbackType: 'thief' });
 /** Storie alertFeedback with type suspectBehavior */
 export const TypeFeedbackBehaviorSuspect = Template.bind({});
 TypeFeedbackBehaviorSuspect.args = baseProps({
-  alertFeedbackType: 'suspectBehaviour',
+  alertFeedbackType: 'suspectBehavior',
 });
 
 /** Storie alertFeedback with type falseAlert */

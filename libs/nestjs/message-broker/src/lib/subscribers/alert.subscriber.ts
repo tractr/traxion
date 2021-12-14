@@ -56,6 +56,7 @@ export class AlertSubscriber {
           alertFeedbacks: {
             create: {
               createdAt,
+              isPertinent: true,
               isArchived: false,
             },
           },

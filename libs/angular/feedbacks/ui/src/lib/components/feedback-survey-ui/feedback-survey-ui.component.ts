@@ -31,7 +31,7 @@ export class FeedbackSurveyUiComponent {
       ...this.alertFeedback,
       type: feedbackType,
       qualification: null,
-      isPertinent: null,
+      isPertinent: true,
       itemCategoryId: null,
       thiefValue: null,
     };
@@ -44,7 +44,7 @@ export class FeedbackSurveyUiComponent {
     this.alertFeedback = {
       ...this.alertFeedback,
       qualification: feedbackQualification,
-      isPertinent: null,
+      isPertinent: true,
       itemCategoryId: null,
       thiefValue: null,
     };
