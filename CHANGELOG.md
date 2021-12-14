@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.29.3](https://github.com/tractr/stack/compare/v1.29.2...v1.29.3) (2021-12-14)
+
+
+### Bug Fixes
+
+* update url formater to handle all cases ([#332](https://github.com/tractr/stack/issues/332)) ([7ad0b6f](https://github.com/tractr/stack/commit/7ad0b6fded1b15d24c2975630f7d16b514923d58))
+
+
+
 ## [1.29.2](https://github.com/tractr/stack/compare/v1.29.1...v1.29.2) (2021-12-14)
 
 
