@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.29.2](https://github.com/tractr/stack/compare/v1.29.1...v1.29.2) (2021-12-14)
+
+
+### Bug Fixes
+
+* update rext client templates to handle query params ([#331](https://github.com/tractr/stack/issues/331)) ([b54c74d](https://github.com/tractr/stack/commit/b54c74d74cf225b50da36b926817a4efcf9fdde8))
+
+
+
 ## [1.29.1](https://github.com/tractr/stack/compare/v1.29.0...v1.29.1) (2021-12-09)
 
 
