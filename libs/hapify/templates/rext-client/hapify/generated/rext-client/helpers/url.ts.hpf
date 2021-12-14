@@ -28,13 +28,19 @@ export type URLSearchParamsType =
   | string
   | string[][]
   | URLSearchParams
-  | Date
   | JsonObject
   | JsonObject[];
 
 export function formatUrlParams(params: JsonObject): Record<string, string> {
   return Object.entries(params).reduce((acc, [key, value]) => {
     if (value === undefined) return acc;
+
+    if (typeof value === 'string') acc[key] = value;
+
+    if (typeof value === 'boolean' || typeof value === 'number')
+      acc[key] = `${value}`;
+
+    if (value instanceof Date) acc[key] = value.toISOString();
 
     if (value !== null && typeof value === 'object')
       acc[key] = JSON.stringify(params[key]);
@@ -47,10 +53,6 @@ export function getUrlSearchParams(init: URLSearchParamsType) {
   const params = init;
   if (typeof params === 'string' || params instanceof URLSearchParams) {
     return new URLSearchParams(params);
-  }
-
-  if (params instanceof Date) {
-    return new URLSearchParams(params.toISOString());
   }
 
   if (params !== null && typeof params === 'object' && !Array.isArray(params)) {
