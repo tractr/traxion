@@ -1,11 +1,12 @@
 import { User } from '@prisma/client';
-import { RolePermissions } from '@tractr/common';
+import { getConcatValueByPath, RolePermissions } from '@tractr/common';
  
-import { AppAbility, AppRoles, UserWithIds } from '../interfaces';
+import { AppAbility, AppRoles } from '../interfaces';
+import { UserWithIds } from './get-prisma-user-query';
  
 export const rolePermissions: RolePermissions<
   AppRoles,
-  User,
+  UserWithIds,
   AppAbility
 > = {
   guest({ can }) {
@@ -15,8 +16,9 @@ export const rolePermissions: RolePermissions<
       <<endfor>>
     <<endfor>>
   },
-  user({ can }, user: UserWithIds) {
+  user({ can }, user) {
     <<for Models model>>
+    // Configure permissions for <<model pascal>> from hapify models
       <<for model.accesses.auth access>>
     can('<<=access.action>>', '<<model pascal>>');
       <<endfor>>
@@ -24,11 +26,11 @@ export const rolePermissions: RolePermissions<
     <<for Models model>>
       <<for model.accesses.owner access>>
         <<if model.properties.hasOwnership>>
-    can('<<=access.action>>', '<<model pascal>>', { <<for model.fields field>><<if field ownership >><<< if (field.meta.ownerKey) { >>><<-field ownerKey camel>><<< } else { >>><<=field.name>><<<}>>>: user?.id<<endif>><<endfor>> });
+    <<=getConditions(access.action, model)>>
         <<endif>>
       <<endfor>>
       <<for model.accesses.guest access>>
-        can('<<=access.action>>', '<<model pascal>>');
+    can('<<=access.action>>', '<<model pascal>>');
       <<endfor>>
     <<endfor>>
   },
@@ -37,3 +39,62 @@ export const rolePermissions: RolePermissions<
   }
 };
  
+<<<
+  function getConditions(action, model) {
+    return model.fields.ownership
+      .reduce(([ids, relation], field) => {
+        if (isFieldAnArray(field)) {
+          relation = { ...relation, ...getFieldArrayConditions(field) };
+        } else {
+          ids = { ...ids, ...getFieldConditionsOnId(field) };
+          relation = { ...relation, ...getFieldConditionsOnRelation(field) };
+        }
+
+        return [ids, relation];
+      }, [{}, {}])
+      .filter((conditions) => JSON.stringify(conditions) !== '{}')
+      .map((condition) => `can('${action}', '${model.names.pascal}', ${
+        JSON.stringify(condition).replaceAll('"', '')
+      })`)
+      .join('\n    ');
+  }
+
+  function isFieldAnArray(field) {
+    return field.type === 'entity'
+      && (
+        field.subtype === 'manyMany' || field.subtype === 'manyOne'
+      );
+  }
+  
+  function getFieldArrayConditions(field) {
+    const isArray = isFieldAnArray(field);
+
+    return {
+      [field.names.camel]: {
+        every: {
+          id: {
+            in: `getConcatValueByPath('${field.meta.ownerStringPath.raw.replace('user.', '')}', user)`,
+          }
+        }
+      }
+    };
+  }
+
+  function getFieldConditionsOnId(field) {
+    return {
+      [field.names.camel === 'id' ? 'id' : `${field.names.camel}Id` ]: {
+        in: `getConcatValueByPath('${field.meta.ownerStringPath.raw.replace('user.', '')}', user)`
+      }
+    };
+  }
+
+  function getFieldConditionsOnRelation(field) {
+    return field.names.camel !== 'id' ? {
+      [field.names.camel]: {
+        id: {
+          in: `getConcatValueByPath('${field.meta.ownerStringPath.raw.replace('user.', '')}', user)`
+        }
+      }
+    }: {};
+  }
+>>>

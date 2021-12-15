@@ -8,4 +8,5 @@ export interface CaslOptions<
   A extends AnyAbility = AnyAbility,
 > {
   rolePermissions: RolePermissions<R, U, A>;
+  getSelectPrismaUserQuery?: () => Record<string, unknown>;
 }

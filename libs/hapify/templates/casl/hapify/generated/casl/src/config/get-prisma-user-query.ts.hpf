@@ -26,7 +26,12 @@ export function getSelectPrismaUserQuery(): Prisma.UserSelect {
   function getUserFindUniqueReturnTypeFromHapify() {
     const info = getOwnershipInformationsFromHapify();
 
-    return JSON.stringify(info.types, null, 2).replaceAll('"', '').replaceAll(',', ';');
+    return JSON.stringify(info.types, null, 2)
+      .replaceAll('"', '')
+      .replaceAll(';,', ';')
+      .replaceAll('[\n', 'Array<\n')
+      .replaceAll(']\n', '>;\n')
+      .replaceAll('],\n', '>;\n');
   }
 
   function getModelListToImport() {
@@ -133,20 +138,30 @@ export function getSelectPrismaUserQuery(): Prisma.UserSelect {
                 );
 
                 modelListToImport.push(currentModel.names.pascal);
+
+                const isArray = field.type === 'entity'
+                  && (
+                    field.subtype === 'manyMany'
+                    || field.subtype === 'oneMany'
+                    || field.subtype === 'manyOne'
+                  );
+
+                const typesToAdd = Object.assign(
+                  {},
+                  currentModel.fields.primary === null
+                    ? {}
+                    : {
+                        [currentModel.fields.primary.names.camel]:
+                          `${currentModel.names.pascal}['${currentModel.fields.primary.names.camel}'];`,
+                      },
+                  { [key]: `${currentModel.names.pascal}['${currentModel.fields.primary.names.camel}'];` }
+                );
   
+
                 set(
                   types,
-                  typesCurrentPath,
-                  Object.assign(
-                    {},
-                    currentModel.fields.primary === null
-                      ? {}
-                      : {
-                          [currentModel.fields.primary.names.camel]:
-                            `${currentModel.names.pascal}['${currentModel.fields.primary.names.camel}']`,
-                        },
-                    { [key]: `${currentModel.names.pascal}['${currentModel.fields.primary.names.camel}']` }
-                  )
+                  `${typesCurrentPath}`,
+                  typesToAdd
                 );
   
                 return [
@@ -155,7 +170,7 @@ export function getSelectPrismaUserQuery(): Prisma.UserSelect {
                   types,
                   newModel,
                   `${selectCurrentPath}.${key}.select`,
-                  `${typesCurrentPath}.${key}`,
+                  `${typesCurrentPath}.${key}${isArray ? '[0]' : ''}`,
                 ];
               },
               [{}, [], {}, userModel, 'user', 'user']
@@ -184,8 +199,12 @@ export function getSelectPrismaUserQuery(): Prisma.UserSelect {
           };
         },
         {
-          select: {},
-          types: {},
+          select: {
+            roles: true,
+          },
+          types: {
+            roles: "User['roles'];",
+          },
           modelListToImport: [],
         }
       );

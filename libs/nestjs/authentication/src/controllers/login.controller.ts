@@ -12,7 +12,7 @@ import {
 import { Request, Response } from 'express';
 
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
-import { User } from '../decorators';
+import { CurrentUser } from '../decorators';
 import { AccessTokenDto, AuthenticationOptions } from '../dtos';
 import { LocalAuthGuard } from '../guards';
 import { UserType } from '../interfaces';
@@ -68,7 +68,7 @@ export class LoginController {
   }
 
   @Get('me')
-  me(@Req() req: Request, @User() user: UserType): UserType {
+  me(@Req() req: Request, @CurrentUser() user: UserType): UserType {
     this.throwIfNoUser(req);
     return user;
   }

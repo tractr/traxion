@@ -2,13 +2,21 @@ import {
   CanActivate,
   ExecutionContext,
   ForbiddenException,
+  Inject,
   Injectable,
 } from '@nestjs/common';
 import { ModuleRef, Reflector } from '@nestjs/core';
 
+import { CASL_MODULE_OPTIONS } from '../casl.constant';
+import { CaslOptions } from '../interfaces';
 import { CaslAbilityFactoryService } from '../services';
 
 import { isClass, PolicyHandlerType } from '@tractr/common';
+import {
+  AUTHENTICATION_USER_SERVICE,
+  AuthenticationUserService,
+  UserSelect,
+} from '@tractr/nestjs-authentication';
 import { Logger, POLICIES_KEY } from '@tractr/nestjs-core';
 
 @Injectable()
@@ -18,6 +26,10 @@ export class PoliciesGuard implements CanActivate {
     private reflector: Reflector,
     private logger: Logger,
     private caslAbilityFactory: CaslAbilityFactoryService,
+    @Inject(CASL_MODULE_OPTIONS)
+    private caslOptions: CaslOptions,
+    @Inject(AUTHENTICATION_USER_SERVICE)
+    private userService: AuthenticationUserService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -29,11 +41,16 @@ export class PoliciesGuard implements CanActivate {
 
     const req = context.switchToHttp().getRequest();
 
-    const { user } = req;
+    let { user } = req;
 
-    if (!user) {
-      throw new ForbiddenException('User is not authenticated');
-    }
+    if (user && this.caslOptions.getSelectPrismaUserQuery)
+      user = {
+        ...user,
+        ...(await this.userService.findUnique({
+          where: { id: user.id },
+          select: this.caslOptions.getSelectPrismaUserQuery() as UserSelect,
+        })),
+      };
 
     if (user && (!user.roles || !Array.isArray(user.roles))) {
       this.logger.error(

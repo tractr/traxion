@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { <<Model pascal>>, Prisma } from '@prisma/client';
 <<if Fields internal and entity>>
 import { Merge } from 'ts-essentials';
 <<endif>>
@@ -40,6 +40,42 @@ export class <<Model pascal>>RestDtoService {
     @Inject(<<Model constant>>_SERVICE)
     protected <<Model camel>>Service: <<Model pascal>>Service,
   ) {}
+  /**
+   * Format dtos to create a <<Model pascal>>
+   *
+   * @param bodyDto - A valid body dto to create a <<Model pascal>>
+   * @returns prisma parameters to create a <<Model pascal>>
+   */
+  public transformCreateDtoTo<<Model pascal>>(
+    bodyDto: <<Model pascal>>CreateBodyDto
+  ): <<<if (root.properties.hasPrimary) {>>>Omit<<<Model pascal>>, '<<=root.fields.primary.names.camel>>'> <<<} else { >>><<Model pascal>> <<<}>>> {
+    const {
+    <<for Fields entity and not internal field>>
+      <<field camel>>,
+    <<endfor>>
+      ...values
+    } = bodyDto;
+
+    return {
+    <<if Fields internal and not primary and (not entity or nullable)>>
+      ...this.<<Model camel>>Service.getDefaultInternals(),
+    <<endif>>
+      ...values,
+    <<for Fields entity and not internal field>>
+      <<if field oneOne or oneMany>>
+      <<<if (field.names.camel === 'id') {>>>
+      id<<<} else {>>>
+      <<field camel>>Id<<<}>>>: <<field camel>>,
+      <<else>>
+        <<if field nullable>>
+      <<field camel>>: <<field camel>> ? formatEntityIds(<<field camel>>) : undefined,
+        <<else>>
+      <<field camel>>: formatEntityIds(<<field camel>>),
+        <<endif>>
+      <<endif>>
+    <<endfor>>
+    }
+  }
 
   /**
    * Format dtos to create a <<Model pascal>>
