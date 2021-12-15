@@ -6,7 +6,7 @@ import * as morgan from 'morgan';
 
 import { AppModule } from './app/app.module';
 
-import { Logger } from '@tractr/nestjs-core';
+import { Logger, PrismaExceptionInterceptor } from '@tractr/nestjs-core';
 
 // Bootstrap the main application
 async function bootstrap() {
@@ -37,6 +37,8 @@ async function bootstrap() {
       },
     }),
   );
+
+  app.useGlobalInterceptors(new PrismaExceptionInterceptor());
 
   // Set swagger documentation
   const swaggerOptions = new DocumentBuilder()

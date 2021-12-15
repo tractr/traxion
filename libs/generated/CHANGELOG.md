@@ -2,6 +2,31 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.29.3](https://github.com/tractr/stack/compare/v1.29.2...v1.29.3) (2021-12-14)
+
+
+
+## [1.29.2](https://github.com/tractr/stack/compare/v1.29.1...v1.29.2) (2021-12-14)
+
+
+
+## [1.29.1](https://github.com/tractr/stack/compare/v1.29.0...v1.29.1) (2021-12-09)
+
+
+
+# [1.29.0](https://github.com/tractr/stack/compare/v1.28.5...v1.29.0) (2021-12-07)
+
+
+### Features
+
+* treat unique values on mock ([#322](https://github.com/tractr/stack/issues/322)) ([8437c86](https://github.com/tractr/stack/commit/8437c86fda88fa1e7f7481fea502a90142113dae))
+
+
+
+## [1.28.5](https://github.com/tractr/stack/compare/v1.28.4...v1.28.5) (2021-12-06)
+
+
+
 ## [1.28.4](https://github.com/tractr/stack/compare/v1.28.3...v1.28.4) (2021-12-03)
 
 

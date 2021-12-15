@@ -17,6 +17,11 @@
           "type": "string"
         },
         {
+          "name": "createdAt",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
+        },
+        {
           "meta": {
             "backRelation": "answers"
           },
@@ -62,6 +67,109 @@
     },
     {
       "accesses": {
+        "count": "guest",
+        "create": "guest",
+        "read": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "update": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "name": "defaultNullable",
+          "notes": "Test nullable system field with no default metadata",
+          "properties": ["nullable", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "name": "defaultString",
+          "notes": "Test string system field with no default metadata",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "name": "defaultNumber",
+          "notes": "Test number system field with no default metadata",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "number"
+        },
+        {
+          "name": "defaultBoolean",
+          "notes": "Test boolean system field with no default metadata",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "boolean"
+        },
+        {
+          "name": "defaultDatetime",
+          "notes": "Test datetime system field with no default metadata",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
+        },
+        {
+          "name": "defaultEnum",
+          "notes": "Test enum system field with no default metadata",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "enum",
+          "value": ["Enum1", "Enum2"]
+        },
+        {
+          "meta": {
+            "default": "'custom string'"
+          },
+          "name": "customString",
+          "notes": "Test string system field with default metadata",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "meta": {
+            "default": "666"
+          },
+          "name": "customNumber",
+          "notes": "Test number system field with default metadata",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "number"
+        },
+        {
+          "meta": {
+            "default": "true"
+          },
+          "name": "customBoolean",
+          "notes": "Test boolean system field with default metadata",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "boolean"
+        },
+        {
+          "meta": {
+            "default": "new Date(1)"
+          },
+          "name": "customDatetime",
+          "notes": "Test datetime system field with default metadata",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
+        },
+        {
+          "meta": {
+            "default": "InternalFieldCustomEnum.Enum2"
+          },
+          "name": "customEnum",
+          "notes": "Test enum system field with default metadata",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "enum",
+          "value": ["Enmu1", "Enum2"]
+        }
+      ],
+      "id": "2019dfe5-3b43-4eea-82e5-2533fb1f9c85",
+      "name": "InternalField",
+      "notes": "Table to test system fields and default metadata"
+    },
+    {
+      "accesses": {
         "count": "owner",
         "create": "auth",
         "read": "auth",
@@ -74,6 +182,11 @@
           "name": "id",
           "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
         },
         {
           "name": "text",
@@ -126,6 +239,11 @@
           "type": "string"
         },
         {
+          "name": "createdAt",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
+        },
+        {
           "name": "text",
           "properties": ["searchable", "sortable"],
           "type": "string"
@@ -163,6 +281,11 @@
           "name": "id",
           "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
         },
         {
           "name": "title",
@@ -214,6 +337,11 @@
           "type": "string"
         },
         {
+          "name": "createdAt",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
+        },
+        {
           "name": "label",
           "properties": ["label", "searchable", "sortable"],
           "type": "string"
@@ -253,6 +381,11 @@
             "ownership"
           ],
           "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
         },
         {
           "name": "name",
@@ -305,6 +438,11 @@
           "name": "id",
           "properties": ["primary", "searchable", "sortable", "internal"],
           "type": "string"
+        },
+        {
+          "name": "createdAt",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
         },
         {
           "name": "value",

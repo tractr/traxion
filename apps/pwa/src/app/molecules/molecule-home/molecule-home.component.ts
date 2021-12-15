@@ -1,11 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '@prisma/client';
 import { takeUntil } from 'rxjs';
 
-import {
-  SESSION_SERVICE,
-  SessionService,
-} from '@tractr/angular-authentication';
+import { SessionService } from '@tractr/angular-authentication';
 import { Unsubscriber } from '@tractr/angular-tools';
 
 @Component({
@@ -18,10 +15,7 @@ export class MoleculeHomeComponent extends Unsubscriber implements OnInit {
 
   user: User | null = null;
 
-  constructor(
-    @Inject(SESSION_SERVICE)
-    readonly sessionService: SessionService<User>,
-  ) {
+  constructor(readonly sessionService: SessionService<User>) {
     super();
   }
 
