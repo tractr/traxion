@@ -54,5 +54,7 @@ module.exports = {
     '<rootDir>/libs/terraform/service/ecs',
     '<rootDir>/libs/terraform/service/reverse-proxy',
     '<rootDir>/libs/hapify/templates/react-admin',
+    '<rootDir>/libs/hapify/update-templates-import-path',
+    '<rootDir>/libs/hapify/hapify-common',
   ],
 };

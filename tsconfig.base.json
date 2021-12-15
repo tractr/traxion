@@ -32,6 +32,7 @@
       "@tractr/commit-config": ["libs/config/commit/src/index.ts"],
       "@tractr/common": ["libs/common/src/index.ts"],
       "@tractr/eslint-config": ["libs/config/eslint/src/index.ts"],
+      "@tractr/hapify-common": ["libs/hapify/hapify-common/src/index.ts"],
       "@tractr/hapify-config": ["libs/config/hapify/src/index.ts"],
       "@tractr/hapify-generate-config": [
         "libs/hapify/generate-config/src/index.ts"
@@ -141,6 +142,9 @@
       ],
       "@tractr/terraform-service-reverse-proxy": [
         "libs/terraform/service/reverse-proxy/src/index.ts"
+      ],
+      "@tractr/update-templates-import-path": [
+        "libs/hapify/update-templates-import-path/src/index.ts"
       ]
     },
     "resolveJsonModule": true,
