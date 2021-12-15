@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-component-volume",
-  "version": "1.29.3",
+  "version": "1.30.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
