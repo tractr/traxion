@@ -1,16 +1,39 @@
+<<if Fields enum>>
+import {
+  <<for Fields enum and unique enumField>>
+  <<Model pascal>><<enumField pascal>>,
+  <<endfor>>
+} from '../enums';
+<<endif>>
+
 <<if Fields unique>>
 export type <<Model pascal>>UniqueValues = {
   <<for Fields unique field>>
     <<if field not entity>>
-      <<field camel>>: <<=getType(field)>>[],
+  <<=typedProperty(field)>>
     <<else>>
       <<field camel>>Id: string[];
     <<endif>>
   <<endfor>>
 };
 <<endif>>
+
 <<<
-function getType(f) {
-  return f.type;
+function typedProperty(f) {
+  let out = f.names.camel+= ": "
+
+  if (f.type === "boolean") out += "boolean";
+  else if (f.type === "string") out += "string";
+  else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;
+  else if (f.type === "number") out += "number";
+  else if (f.type === "datetime") out += "Date";
+  else if (f.type === "object") out += "JsonObject";
+  else if (f.type === "entity") {
+    out +=  f.model.names.pascal + (f.model.name !== root.name ? 'T' : '');
+  }
+  if (f.multiple) out += "[]";
+  if (f.nullable && f.type !== "entity") out += " | null";
+  out += ";";
+  return out;
 }
 >>>
