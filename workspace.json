@@ -601,12 +601,20 @@
           "outputs": ["{options.outputPath}"]
         },
         "generate": {
+          "dependsOn": [
+            {
+              "projects": "dependencies",
+              "target": "build"
+            }
+          ],
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
               "npx rimraf generated",
+              "cp -r ../../dist/libs/hapify/hapify-common ../../node_modules/@tractr",
               "node ../../dist/libs/hapify/generate-config/src/index.js",
-              "npx hpf generate"
+              "npx hpf generate",
+              "node ../../dist/libs/hapify/update-templates-import-path/src/index.js"
             ],
             "cwd": "libs/generated",
             "parallel": false
@@ -619,6 +627,54 @@
             "passWithNoTests": true
           },
           "outputs": ["coverage/libs/generated"]
+        }
+      }
+    },
+    "hapify-common": {
+      "projectType": "library",
+      "root": "libs/hapify/hapify-common",
+      "sourceRoot": "libs/hapify/hapify-common/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/hapify/hapify-common/*.md"],
+            "main": "libs/hapify/hapify-common/src/index.ts",
+            "outputPath": "dist/libs/hapify/hapify-common",
+            "packageJson": "libs/hapify/hapify-common/package.json",
+            "tsConfig": "libs/hapify/hapify-common/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "coverage": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "codeCoverage": true,
+            "coverageReporters": ["text", "json"],
+            "jestConfig": "libs/hapify/hapify-common/jest.config.js",
+            "passWithNoTests": true,
+            "skipNxCache": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hapify/hapify-common/**/*.ts"]
+          }
+        },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["npx nx run hapify-common:build"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/hapify/hapify-common/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/hapify/hapify-common"]
         }
       }
     },
@@ -675,6 +731,12 @@
       "sourceRoot": "libs/hapify/generate-config/src",
       "targets": {
         "build": {
+          "dependsOn": [
+            {
+              "projects": "self",
+              "target": "prebuild"
+            }
+          ],
           "executor": "@nrwl/node:package",
           "options": {
             "assets": ["libs/hapify/generate-config/*.md"],
@@ -685,10 +747,35 @@
           },
           "outputs": ["{options.outputPath}"]
         },
+        "coverage": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "codeCoverage": true,
+            "coverageReporters": ["text", "json"],
+            "jestConfig": "libs/hapify/generate-config/jest.config.js",
+            "passWithNoTests": true,
+            "skipNxCache": true
+          }
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/hapify/generate-config/**/*.ts"]
+          }
+        },
+        "prebuild": {
+          "dependsOn": [
+            {
+              "projects": "dependencies",
+              "target": "build"
+            }
+          ],
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cp -r ../../dist/libs/hapify/hapify-common ../../node_modules/@tractr"
+            ],
+            "cwd": "libs/hapify"
           }
         },
         "pregenerate": {
@@ -1092,6 +1179,77 @@
         }
       }
     },
+    "hapify-update-templates-import-path": {
+      "projectType": "library",
+      "root": "libs/hapify/update-templates-import-path",
+      "sourceRoot": "libs/hapify/update-templates-import-path/src",
+      "targets": {
+        "build": {
+          "dependsOn": [
+            {
+              "projects": "self",
+              "target": "prebuild"
+            }
+          ],
+          "executor": "@nrwl/node:package",
+          "options": {
+            "assets": ["libs/hapify/update-templates-import-path/*.md"],
+            "main": "libs/hapify/update-templates-import-path/src/index.ts",
+            "outputPath": "dist/libs/hapify/update-templates-import-path",
+            "packageJson": "libs/hapify/update-templates-import-path/package.json",
+            "tsConfig": "libs/hapify/update-templates-import-path/tsconfig.lib.json"
+          },
+          "outputs": ["{options.outputPath}"]
+        },
+        "coverage": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "codeCoverage": true,
+            "coverageReporters": ["text", "json"],
+            "jestConfig": "libs/hapify/update-templates-import-path/jest.config.js",
+            "passWithNoTests": true,
+            "skipNxCache": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/hapify/update-templates-import-path/**/*.ts"
+            ]
+          }
+        },
+        "prebuild": {
+          "dependsOn": [
+            {
+              "projects": "dependencies",
+              "target": "build"
+            }
+          ],
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cp -r ../../dist/libs/hapify/hapify-common ../../node_modules/@tractr"
+            ],
+            "cwd": "libs/hapify"
+          }
+        },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["npx nx run hapify-update-templates-import-path:build"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/hapify/update-templates-import-path/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/hapify/update-templates-import-path"]
+        }
+      }
+    },
     "nestjs-authentication": {
       "projectType": "library",
       "root": "libs/nestjs/authentication",
@@ -1430,10 +1588,17 @@
       "sourceRoot": "libs/prisma/src",
       "targets": {
         "generate": {
+          "dependsOn": [
+            {
+              "projects": "dependencies",
+              "target": "pregenerate"
+            }
+          ],
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
               "npx rimraf generated",
+              "cp -r ../../dist/libs/hapify/hapify-common ../../node_modules/@tractr",
               "node ../../dist/libs/hapify/generate-config/src/index.js",
               "npx hpf generate",
               "npx prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
