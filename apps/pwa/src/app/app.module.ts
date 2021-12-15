@@ -54,6 +54,7 @@ import { AngularToolsModule } from '@tractr/angular-tools';
     AngularComponentsModule,
     AngularFormModule,
     AngularAuthenticationModule.forRootAsync<UserType>({
+      user: User,
       useFactory: (
         defaultOptions,
         appConfigService: AngularConfigService<AppConfig>,
@@ -62,7 +63,6 @@ import { AngularToolsModule } from '@tractr/angular-tools';
         api: {
           url: appConfigService.config?.apiUri || '',
         },
-        user: User,
         login: {
           url: 'login',
           routing: 'login',

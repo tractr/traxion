@@ -1,6 +1,5 @@
 import {
   Directive,
-  Inject,
   OnDestroy,
   OnInit,
   TemplateRef,
@@ -9,8 +8,7 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { SESSION_SERVICE } from '../constants';
-import { SessionService } from '../interfaces';
+import { SessionService } from '../services';
 
 @Directive({
   selector: '[tractrBaseConnected]',
@@ -21,7 +19,6 @@ export abstract class BaseConnectedDirective implements OnInit, OnDestroy {
   constructor(
     private viewContainer: ViewContainerRef,
     private templateRef: TemplateRef<unknown>,
-    @Inject(SESSION_SERVICE)
     private sessionService: SessionService,
   ) {}
 

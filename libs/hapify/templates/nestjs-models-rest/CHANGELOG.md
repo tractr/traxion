@@ -2,6 +2,41 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.29.3](https://github.com/tractr/stack/compare/v1.29.2...v1.29.3) (2021-12-14)
+
+
+
+## [1.29.2](https://github.com/tractr/stack/compare/v1.29.1...v1.29.2) (2021-12-14)
+
+
+
+## [1.29.1](https://github.com/tractr/stack/compare/v1.29.0...v1.29.1) (2021-12-09)
+
+
+### Bug Fixes
+
+* update system field default assignation ([#327](https://github.com/tractr/stack/issues/327)) ([4c9c9f7](https://github.com/tractr/stack/commit/4c9c9f75acf9b7d08c6060e60fddd65913870ce7))
+
+
+
+# [1.29.0](https://github.com/tractr/stack/compare/v1.28.5...v1.29.0) (2021-12-07)
+
+
+### Features
+
+* treat unique values on mock ([#322](https://github.com/tractr/stack/issues/322)) ([8437c86](https://github.com/tractr/stack/commit/8437c86fda88fa1e7f7481fea502a90142113dae))
+
+
+
+## [1.28.5](https://github.com/tractr/stack/compare/v1.28.4...v1.28.5) (2021-12-06)
+
+
+### Bug Fixes
+
+* fix connection keyword in rest-dto-service ([#325](https://github.com/tractr/stack/issues/325)) ([a5d5639](https://github.com/tractr/stack/commit/a5d5639dad7bb2def6ae7d2ff742d0b87b812cba))
+
+
+
 ## [1.28.4](https://github.com/tractr/stack/compare/v1.28.3...v1.28.4) (2021-12-03)
 
 

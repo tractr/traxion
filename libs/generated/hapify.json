@@ -1,6 +1,30 @@
 {
   "name": "Shared lib that host all hapify shared modules",
   "description": "A lib that will host all shared file from hapify",
+  "project": "../../hapify-models.json",
+  "version": "1",
+  "validatorPath": "../../dist/libs/config/hapify/validator.js",
+  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
+  "defaultFields": [
+    {
+      "name": "id",
+      "type": "string",
+      "subtype": null,
+      "reference": null,
+      "primary": true,
+      "unique": false,
+      "label": false,
+      "nullable": false,
+      "multiple": false,
+      "embedded": false,
+      "searchable": false,
+      "sortable": false,
+      "hidden": false,
+      "internal": true,
+      "restricted": false,
+      "ownership": false
+    }
+  ],
   "templates": [
     {
       "path": "generated/angular-rext-client/services/{kebab}.service.ts",
@@ -558,6 +582,11 @@
       "input": "one"
     },
     {
+      "path": "generated/models/models/{kebab}.dto.ts",
+      "engine": "hpf",
+      "input": "one"
+    },
+    {
       "path": "generated/models/mock/index.ts",
       "engine": "hpf",
       "input": "all"
@@ -566,30 +595,6 @@
       "path": "generated/models/mock/{kebab}.mock.ts",
       "engine": "hpf",
       "input": "one"
-    }
-  ],
-  "project": "../../hapify-models.json",
-  "version": "1",
-  "validatorPath": "../../dist/libs/config/hapify/validator.js",
-  "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
-  "defaultFields": [
-    {
-      "name": "id",
-      "type": "string",
-      "subtype": null,
-      "reference": null,
-      "primary": true,
-      "unique": false,
-      "label": false,
-      "nullable": false,
-      "multiple": false,
-      "embedded": false,
-      "searchable": false,
-      "sortable": false,
-      "hidden": false,
-      "internal": true,
-      "restricted": false,
-      "ownership": false
     }
   ]
 }

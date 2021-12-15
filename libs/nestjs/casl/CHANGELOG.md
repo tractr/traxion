@@ -2,6 +2,31 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.29.3](https://github.com/tractr/stack/compare/v1.29.2...v1.29.3) (2021-12-14)
+
+
+
+## [1.29.2](https://github.com/tractr/stack/compare/v1.29.1...v1.29.2) (2021-12-14)
+
+
+
+## [1.29.1](https://github.com/tractr/stack/compare/v1.29.0...v1.29.1) (2021-12-09)
+
+
+### Bug Fixes
+
+* update system field default assignation ([#327](https://github.com/tractr/stack/issues/327)) ([4c9c9f7](https://github.com/tractr/stack/commit/4c9c9f75acf9b7d08c6060e60fddd65913870ce7))
+
+
+
+# [1.29.0](https://github.com/tractr/stack/compare/v1.28.5...v1.29.0) (2021-12-07)
+
+
+
+## [1.28.5](https://github.com/tractr/stack/compare/v1.28.4...v1.28.5) (2021-12-06)
+
+
+
 ## [1.28.4](https://github.com/tractr/stack/compare/v1.28.3...v1.28.4) (2021-12-03)
 
 

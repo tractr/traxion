@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 
 import { PrismaExceptionEndpointMockController } from '../../mock/prisma-exception-endpoint-mock.controller';
-import { PrismaExceptionInterceptor } from '../interceptors/prisma-exception.interceptor';
+import { PrismaExceptionInterceptor } from './prisma-exception.interceptor';
 
 describe('Prisma exception error', () => {
   let app: INestApplication;

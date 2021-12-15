@@ -1,0 +1,16 @@
+<<if Fields unique>>
+export type <<Model pascal>>UniqueValues = {
+  <<for Fields unique field>>
+    <<if field not entity>>
+      <<field camel>>: <<=getType(field)>>[],
+    <<else>>
+      <<field camel>>Id: string[];
+    <<endif>>
+  <<endfor>>
+};
+<<endif>>
+<<<
+function getType(f) {
+  return f.type;
+}
+>>>
