@@ -1,4 +1,10 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "executors": {}
+  "executors": {
+    "generate": {
+      "description": "Executor to generate hapify files",
+      "implementation": "./src/executors/generate/executor",
+      "schema": "./src/executors/generate/schema.json"
+    }
+  }
 }

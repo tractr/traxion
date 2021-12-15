@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "description": "",
+  "properties": {
+    "path": {
+      "description": "Path to the generated files",
+      "type": "string"
+    }
+  },
+  "required": [],
+  "title": "Generate executor",
+  "type": "object"
+}

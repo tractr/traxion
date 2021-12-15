@@ -607,17 +607,10 @@
               "target": "build"
             }
           ],
-          "executor": "@nrwl/workspace:run-commands",
+          "executor": "@tractr/schematics:generate",
           "options": {
-            "commands": [
-              "npx rimraf generated",
-              "cp -r ../../dist/libs/hapify/hapify-common ../../node_modules/@tractr",
-              "node ../../dist/libs/hapify/generate-config/src/index.js",
-              "npx hpf generate",
-              "node ../../dist/libs/hapify/update-templates-import-path/src/index.js"
-            ],
-            "cwd": "libs/generated",
-            "parallel": false
+            "path": "libs/generated",
+            "projectName": "generated"
           }
         },
         "test": {
