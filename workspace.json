@@ -764,6 +764,12 @@
           }
         },
         "prebuild": {
+          "dependsOn": [
+            {
+              "projects": "dependencies",
+              "target": "build"
+            }
+          ],
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
@@ -1214,6 +1220,12 @@
           }
         },
         "prebuild": {
+          "dependsOn": [
+            {
+              "projects": "dependencies",
+              "target": "build"
+            }
+          ],
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
