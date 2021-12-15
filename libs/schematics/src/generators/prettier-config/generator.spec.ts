@@ -8,7 +8,7 @@ import * as localPackageJson from '../../../package.json';
 import { npmRun } from '../../helpers/npm-run';
 import generator, { packagesToAdd } from './generator';
 
-// jest.mock('../../helpers/npm-run');
+jest.mock('../../helpers/npm-run');
 
 describe('release generator', () => {
   let appTree: Tree;
