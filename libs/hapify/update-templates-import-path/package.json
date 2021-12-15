@@ -1,6 +1,6 @@
 {
   "name": "@tractr/update-templates-import-path",
-  "version": "1.28.4",
+  "version": "1.30.0",
   "description": "Generate hapify config",
   "repository": {
     "type": "git",
