@@ -2,7 +2,7 @@ import { execAsync } from '../../helpers/exec-async';
 import executor from './executor';
 import { GenerateExecutorSchema } from './schema';
 
-jest.mock('../../helpers/async-exec');
+jest.mock('../../helpers/exec-async');
 
 describe('Generate executor:generate', () => {
   it('executor should return the good options parameters and have called 5 commands', async () => {
@@ -12,7 +12,8 @@ describe('Generate executor:generate', () => {
 
     const options: GenerateExecutorSchema = {
       path: 'libs/generated',
-      projectName: '',
+      cwd: 'dist/libs/hapify',
+      folder: '',
     };
 
     const output = await executor(options);
@@ -23,7 +24,6 @@ describe('Generate executor:generate', () => {
 
     execAsyncSpy.mock.calls.forEach((call) => {
       expect(call[0]).toEqual(expect.any(String));
-      expect(call[1]).toHaveProperty('cwd');
     });
   });
 });

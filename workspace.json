@@ -607,10 +607,11 @@
               "target": "build"
             }
           ],
-          "executor": "@tractr/schematics:generate",
+          "executor": "./dist/libs/schematics:generate",
           "options": {
-            "path": "libs/generated",
-            "projectName": ""
+            "cwd": "libs/generated",
+            "folder": "",
+            "path": "dist/libs/hapify"
           }
         },
         "test": {

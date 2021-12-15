@@ -1,41 +1,34 @@
+import { join } from 'path';
+
 import { execAsync } from '../../helpers/exec-async';
 import { GenerateExecutorSchema } from './schema';
 
 export default async function runExecutor(options: GenerateExecutorSchema) {
-  const { path } = options;
-  const { projectName } = options;
-  const countParentFolder = projectName.split('/').length + 1;
-  const pathToNodeModules = `${'../'.repeat(countParentFolder)}node_modules`;
+  const { cwd, folder, path } = options;
 
-  await execAsync(`npx rimraf src/lib/generated`, { cwd: path });
+  await execAsync(`npx rimraf src/lib/generated`, { cwd });
+
+  await execAsync(`node ${join(path, 'generate-config')}`, {});
+
+  await execAsync(`npx hpf generate`, { cwd });
 
   await execAsync(
-    `node ${pathToNodeModules}/@tractr/hapify-generate-config/src/index.js`,
+    `mv ${join('generated', folder)} ${join('src', 'lib', 'generated')}`,
     {
-      cwd: path,
+      cwd,
     },
   );
-
-  await execAsync(`npx hpf generate`, { cwd: path });
-
-  await execAsync(`mv generated/${projectName} src/lib/generated`, {
-    cwd: path,
-  });
 
   await execAsync(`npx rimraf generated`, {
-    cwd: path,
+    cwd,
   });
 
-  await execAsync(
-    `node ${pathToNodeModules}/@tractr/update-templates-import-path/src/index.js`,
-    {
-      cwd: path,
-    },
-  );
+  await execAsync(`node ${join(path, 'update-templates-import-path')}`, {});
 
   return {
     success: true,
-    projectName,
+    folder,
     path,
+    cwd,
   };
 }

@@ -67,7 +67,8 @@
         "angular-tools",
         "hapify-config",
         "hapify-generate-config",
-        "hapify-update-templates-import-path"
+        "hapify-update-templates-import-path",
+        "schematics"
       ],
       "tags": ["scope:generate"]
     },
