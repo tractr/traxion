@@ -123,6 +123,7 @@
       "tags": ["scope:nestjs"]
     },
     "nestjs-core": {
+      "implicitDependencies": ["prisma"],
       "tags": ["scope:nestjs"]
     },
     "nestjs-database": {

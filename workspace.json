@@ -731,6 +731,12 @@
       "sourceRoot": "libs/hapify/generate-config/src",
       "targets": {
         "build": {
+          "dependsOn": [
+            {
+              "projects": "self",
+              "target": "prebuild"
+            }
+          ],
           "executor": "@nrwl/node:package",
           "options": {
             "assets": ["libs/hapify/generate-config/*.md"],
@@ -755,6 +761,15 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/hapify/generate-config/**/*.ts"]
+          }
+        },
+        "prebuild": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cp -r ../../dist/libs/hapify/hapify-common ../../node_modules/@tractr"
+            ],
+            "cwd": "libs/hapify"
           }
         },
         "pregenerate": {
@@ -1164,6 +1179,12 @@
       "sourceRoot": "libs/hapify/update-templates-import-path/src",
       "targets": {
         "build": {
+          "dependsOn": [
+            {
+              "projects": "self",
+              "target": "prebuild"
+            }
+          ],
           "executor": "@nrwl/node:package",
           "options": {
             "assets": ["libs/hapify/update-templates-import-path/*.md"],
@@ -1190,6 +1211,15 @@
             "lintFilePatterns": [
               "libs/hapify/update-templates-import-path/**/*.ts"
             ]
+          }
+        },
+        "prebuild": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cp -r ../../dist/libs/hapify/hapify-common ../../node_modules/@tractr"
+            ],
+            "cwd": "libs/hapify"
           }
         },
         "pregenerate": {
