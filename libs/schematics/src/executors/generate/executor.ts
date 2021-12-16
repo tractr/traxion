@@ -10,7 +10,7 @@ export default async function runExecutor(options: GenerateExecutorSchema) {
 
   await execAsync(`node ${join(path, 'generate-config')}`, {});
 
-  await execAsync(`npx hpf generate`, { cwd });
+  await execAsync(`npx hpf generate`, {});
 
   await execAsync(
     `mv ${join('generated', folder)} ${join('src', 'lib', 'generated')}`,
