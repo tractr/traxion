@@ -363,6 +363,56 @@
     },
     {
       "accesses": {
+        "count": "guest",
+        "create": "guest",
+        "read": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "update": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "name": "uniqueString",
+          "properties": ["unique", "searchable", "sortable"],
+          "type": "string"
+        },
+        {
+          "name": "uniqueNumber",
+          "properties": ["unique", "searchable", "sortable"],
+          "type": "number"
+        },
+        {
+          "name": "uniqueBoolean",
+          "properties": ["unique", "searchable", "sortable"],
+          "type": "boolean"
+        },
+        {
+          "name": "uniqueDatetime",
+          "properties": ["unique", "searchable", "sortable"],
+          "type": "datetime"
+        },
+        {
+          "name": "uniqueEnum",
+          "properties": ["unique", "searchable", "sortable"],
+          "type": "enum",
+          "value": ["value1", "value2"]
+        },
+        {
+          "name": "uniqueObject",
+          "properties": [],
+          "type": "object"
+        }
+      ],
+      "id": "d49a961e-c506-6869-3e1a-405fb52f109c",
+      "name": "UniqueValueField"
+    },
+    {
+      "accesses": {
         "count": "admin",
         "create": "guest",
         "read": "owner",

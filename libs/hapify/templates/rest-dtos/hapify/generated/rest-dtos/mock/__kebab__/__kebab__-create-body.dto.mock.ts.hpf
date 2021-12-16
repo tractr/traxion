@@ -32,6 +32,7 @@ function mock<<Model pascal>>CreateBodyDtoFactory(
     ...override,
   };
 }
+<<if Fields not internal and unique>>
 export function mock<<Model pascal>>sCreateBodyDtoFactory(override: Partial< <<Model pascal>>CreateBodyDto > = {}, quantity: number = 1): Required< <<Model pascal>>CreateBodyDto[] > {
   <<if Fields unique>>
   const uniqueValues: <<Model pascal>>UniqueValues = {
@@ -46,19 +47,19 @@ export function mock<<Model pascal>>sCreateBodyDtoFactory(override: Partial< <<M
   return [...Array(quantity)].map(() => {
     let tmp<<Model pascal>> = mock<<Model pascal>>CreateBodyDtoFactory(override);
     while (
-    <<<root.f.unique.forEach((unique,index) => {>>>
+    <<<root.f.unique.filter((e) => !e.internal).forEach((unique,index) => {>>>
       (
       <<<if(unique.type === 'entity'){>>>
       tmp<<Model pascal>>.<<unique camel>> && uniqueValues.<<unique camel>>Id.includes(tmp<<Model pascal>>.<<unique camel>>))
       <<<}else{>>>
       uniqueValues.<<unique camel>>.includes(tmp<<Model pascal>>.<<unique camel>>))
       <<<}>>>
-      <<<if(index < root.f.unique.length - 1){>>>
+      <<<if(index < root.f.unique.filter((e) => !e.internal).length - 1){>>>
       ||
-       <<<}>>>
+      <<<}>>>
     <<<})>>>
     ) {
-      <<for Fields unique field>>
+      <<for Fields unique and not internal field>>
         <<if field not entity>>
         if(override.<<field camel>>) {
           override.<<field camel>> = mock<<Model pascal>><<field pascal>>Factory();
@@ -71,7 +72,7 @@ export function mock<<Model pascal>>sCreateBodyDtoFactory(override: Partial< <<M
       <<endfor>> 
       tmp<<Model pascal>> = mock<<Model pascal>>CreateBodyDtoFactory(override);
     }
-    <<for Fields unique field>>
+    <<for Fields unique and not internal field>>
       <<if field not entity>>
       uniqueValues.<<field camel>>.push(tmp<<Model pascal>>.<<field camel>>);
       <<else>>
@@ -84,3 +85,4 @@ export function mock<<Model pascal>>sCreateBodyDtoFactory(override: Partial< <<M
     return [...Array(quantity)].map(() => mock<<Model pascal>>CreateBodyDtoFactory(override));
   <<endif>>
 }
+<<endif>>

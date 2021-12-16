@@ -1,4 +1,15 @@
+
 <<if Fields unique>>
+
+<<if Fields enum>>
+import {
+  <<for Fields enum and unique enumField>>
+  <<Model pascal>><<enumField pascal>>,
+  <<endfor>>
+} from '../enums';
+<<endif>>
+
+
 export type <<Model pascal>>UniqueValues = {
   <<for Fields unique field>>
     <<if field not entity>>
@@ -9,8 +20,14 @@ export type <<Model pascal>>UniqueValues = {
   <<endfor>>
 };
 <<endif>>
+
 <<<
 function getType(f) {
-  return f.type;
+  if (f.type === "boolean") return "boolean";
+  else if (f.type === "string") return "string";
+  else if (f.type === "enum") return `${root.names.pascal}${f.names.pascal}`;
+  else if (f.type === "number") return "number";
+  else if (f.type === "datetime") return "Date";
+  else if (f.type === "object") return "JsonObject";
 }
 >>>
