@@ -146,7 +146,9 @@
         "hapify-templates-prisma",
         "hapify-config",
         "generated",
-        "hapify-generate-config"
+        "hapify-generate-config",
+        "schematics",
+        "hapify-update-templates-import-path"
       ],
       "tags": ["scope:generated"]
     },

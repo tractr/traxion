@@ -658,12 +658,6 @@
             "lintFilePatterns": ["libs/hapify/hapify-common/**/*.ts"]
           }
         },
-        "pregenerate": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": ["npx nx run hapify-common:build"]
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
@@ -697,12 +691,6 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/config/hapify/**/*.ts"]
-          }
-        },
-        "pregenerate": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": ["npx nx run hapify-config:build"]
           }
         },
         "publish": {
@@ -1611,7 +1599,7 @@
           "dependsOn": [
             {
               "projects": "dependencies",
-              "target": "build"
+              "target": "pregenerate"
             }
           ],
           "executor": "./dist/libs/schematics:generate",
@@ -1849,6 +1837,12 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/schematics/**/*.ts"]
+          }
+        },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["npx nx run schematics:build"]
           }
         },
         "test": {
