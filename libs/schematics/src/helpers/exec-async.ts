@@ -6,6 +6,6 @@ import { promisify } from 'util';
  * @param cmd {string}
  * @return {Promise<string>}
  */
-export function execAsync(cmd: string, options: Record<string, string>) {
+export function execAsync(cmd: string, options: Record<string, string> = {}) {
   return promisify(exec)(cmd, options);
 }

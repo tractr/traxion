@@ -1,5 +1,7 @@
 export interface GenerateExecutorSchema {
   cwd: string;
-  folder: string;
-  path: string;
+  pathToLib: string;
+  sourcePath?: string;
+  outputPath?: string;
+  format: boolean;
 }

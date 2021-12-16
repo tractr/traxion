@@ -610,8 +610,10 @@
           "executor": "./dist/libs/schematics:generate",
           "options": {
             "cwd": "libs/generated",
-            "folder": "",
-            "path": "dist/libs/hapify"
+            "format": true,
+            "outputPath": "src/lib/generated",
+            "pathToLib": "dist/libs/hapify",
+            "sourcePath": "generated"
           }
         },
         "test": {
@@ -1584,17 +1586,13 @@
         "generate": {
           "dependsOn": [
             {
-              "projects": "dependencies",
+              "projects": "self",
               "target": "pregenerate"
             }
           ],
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "npx rimraf generated",
-              "cp -r ../../dist/libs/hapify/hapify-common ../../node_modules/@tractr",
-              "node ../../dist/libs/hapify/generate-config/src/index.js",
-              "npx hpf generate",
               "npx prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
               "npx prisma format",
               "npx prisma generate"
@@ -1607,6 +1605,21 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/prisma/**/*.ts"]
+          }
+        },
+        "pregenerate": {
+          "dependsOn": [
+            {
+              "projects": "dependencies",
+              "target": "build"
+            }
+          ],
+          "executor": "./dist/libs/schematics:generate",
+          "options": {
+            "cwd": "libs/prisma",
+            "format": true,
+            "outputPath": "prisma/schemas",
+            "pathToLib": "dist/libs/hapify"
           }
         },
         "test": {
