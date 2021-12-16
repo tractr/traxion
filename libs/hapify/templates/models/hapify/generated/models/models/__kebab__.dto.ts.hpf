@@ -9,6 +9,10 @@ import {
 } from '../enums';
 <<endif>>
 
+<<if Fields object>>
+import { JsonObject } from '@tractr/common';
+<<endif>>
+
 
 export type <<Model pascal>>UniqueValues = {
   <<for Fields unique field>>

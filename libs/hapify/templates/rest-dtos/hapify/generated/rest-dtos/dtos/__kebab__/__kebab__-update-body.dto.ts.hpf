@@ -123,7 +123,7 @@ export class <<Model pascal>>UpdateBodyDto {
   <<endif>>
 
   <<if field datetime>>
-  @IsDate({}, <<=listModifier(field)>>)
+  @IsDate(<<=listModifier(field)>>)
   @TransformStringToDate()
   <<endif>>
 

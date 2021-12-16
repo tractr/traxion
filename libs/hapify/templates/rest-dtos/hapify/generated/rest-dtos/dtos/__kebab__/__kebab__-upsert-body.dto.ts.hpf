@@ -125,7 +125,7 @@ export class <<Model pascal>>UpsertBodyDto {
   <<endif>>
 
   <<if field datetime>>
-  @IsDate({}, <<=listModifier(field)>>)
+  @IsDate(<<=listModifier(field)>>)
   @TransformStringToDate()
   <<endif>>
 
