@@ -3,12 +3,32 @@
   "cli": "nx",
   "description": "",
   "properties": {
-    "path": {
-      "description": "Path to the generated files",
+    "cleanFirst": {
+      "default": true,
+      "description": "Clean the generated files before generating",
+      "type": "boolean"
+    },
+    "cwd": {
+      "description": "The current project working directory",
+      "type": "string"
+    },
+    "format": {
+      "default": true,
+      "description": "Format the generated files with prettier",
+      "type": "boolean"
+    },
+    "inputHapifyGeneratedPath": {
+      "default": "generated",
+      "description": "The input generated path of hapify files",
+      "type": "string"
+    },
+    "outputGeneratedPath": {
+      "default": "src/lib/generated",
+      "description": "The output generated path of hapify files",
       "type": "string"
     }
   },
-  "required": [],
+  "required": ["cwd"],
   "title": "Generate executor",
   "type": "object"
 }

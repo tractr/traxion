@@ -3,7 +3,7 @@
   "description": "A lib that will host all shared file from hapify",
   "project": "../../hapify-models.json",
   "version": "1",
-  "validatorPath": "../../dist/libs/config/hapify/validator.js",
+  "validatorPath": "../../node_modules/@tractr/hapify-config/validator.js",
   "logo": "https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png",
   "defaultFields": [
     {

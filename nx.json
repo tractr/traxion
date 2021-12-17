@@ -62,6 +62,7 @@
         "hapify-templates-rext-client",
         "hapify-templates-angular-rext-client",
         "nestjs-core",
+        "prisma",
         "nestjs-database",
         "nestjs-testing",
         "angular-tools",

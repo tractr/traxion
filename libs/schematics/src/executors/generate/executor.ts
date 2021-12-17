@@ -1,40 +1,76 @@
 import { join } from 'path';
 
+import { ExecutorContext } from '@nrwl/devkit';
+import { move, pathExists, remove } from 'fs-extra';
+
 import { execAsync } from '../../helpers/exec-async';
 import { GenerateExecutorSchema } from './schema';
 
-export default async function runExecutor(options: GenerateExecutorSchema) {
-  const { cwd, pathToLib, sourcePath, format, outputPath } = options;
+import { getHapifyOptions } from '@tractr/hapify-generate-config';
+import { hapifyUpdateTemplatesImportPath } from '@tractr/update-templates-import-path';
 
-  await execAsync(`npx rimraf src/lib/generated`, { cwd });
+/**
+ * Executes the schematics generate command.
+ * @param options GenerateExecutorSchema
+ * @returns { success: boolean }
+ */
+export default async function runExecutor(
+  options: GenerateExecutorSchema,
+  context: ExecutorContext,
+) {
+  const { root } = context;
 
-  await execAsync(`node ${join(pathToLib, 'generate-config')}`);
+  const {
+    cleanFirst,
+    cwd,
+    inputHapifyGeneratedPath,
+    outputGeneratedPath,
+    format,
+  } = options;
 
-  await execAsync(`npx hpf generate`);
+  const projectDirectory = join(root, cwd);
+  const pathToGeneratedFolder = join(projectDirectory, outputGeneratedPath);
 
-  if (sourcePath && outputPath) {
-    await execAsync(`mv ${join(sourcePath)} ${join(outputPath)}`, {
-      cwd,
-    });
-
-    if (format)
-      await execAsync(`npx prettier '${join(outputPath)}/**/*.ts' --write`, {
-        cwd,
-      });
-
-    await execAsync(`npx rimraf ${join(sourcePath)}`, {
-      cwd,
-    });
+  // Check if the project directory has a package json
+  if (!(await pathExists(join(projectDirectory)))) {
+    throw new Error('The cwd path seems to be not a valid project directory');
   }
 
-  await execAsync(`node ${join(pathToLib, 'update-templates-import-path')}`);
+  if (cleanFirst) {
+    // First, we delete the generated folder
+    try {
+      await remove(pathToGeneratedFolder);
+    } catch {
+      // We allow the folder to not exist
+    }
+  }
 
-  return {
-    success: true,
-    outputPath,
-    sourcePath,
-    pathToLib,
-    cwd,
-    format,
-  };
+  // Then, we generate the configuration files
+  await getHapifyOptions(projectDirectory);
+
+  // Then we run the hapify generate command
+  await execAsync(`npx hpf generate`, { cwd: projectDirectory });
+
+  if (inputHapifyGeneratedPath !== outputGeneratedPath) {
+    await move(
+      join(projectDirectory, inputHapifyGeneratedPath),
+      pathToGeneratedFolder,
+    );
+  }
+
+  await hapifyUpdateTemplatesImportPath(
+    pathToGeneratedFolder,
+    projectDirectory,
+  );
+
+  if (format) {
+    await execAsync(
+      `npx prettier '${join(
+        projectDirectory,
+        outputGeneratedPath,
+      )}/**/*.ts' --write`,
+    );
+  }
+
+  return { success: true };
 }
