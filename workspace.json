@@ -604,7 +604,7 @@
           "dependsOn": [
             {
               "projects": "dependencies",
-              "target": "build"
+              "target": "pregenerate"
             }
           ],
           "executor": "./dist/libs/schematics:generate",
