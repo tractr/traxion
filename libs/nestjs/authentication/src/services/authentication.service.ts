@@ -38,10 +38,13 @@ export class AuthenticationService {
   ): Promise<UserType | null> {
     const { passwordField } = this.authenticationOptions.userConfig;
 
-    const userWithPassword = await this.findUserByLogin(login);
-    if (!userWithPassword) throw new UserNotFoundError();
+    const user = await this.findUserByLogin(login);
+    if (!user) throw new UserNotFoundError();
 
-    const { [passwordField]: passwordBcrypt, ...user } = userWithPassword;
+    const { [passwordField]: passwordBcrypt } =
+      (await this.findUserByLogin(login, {
+        [passwordField]: true,
+      })) ?? {};
 
     if (await this.verifyPassword(password, passwordBcrypt)) {
       return user;

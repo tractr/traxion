@@ -47,7 +47,11 @@ export const rolePermissions: RolePermissions<
           relation = { ...relation, ...getFieldArrayConditions(field) };
         } else {
           ids = { ...ids, ...getFieldConditionsOnId(field) };
-          relation = { ...relation, ...getFieldConditionsOnRelation(field) };
+          // Disabling relation has it not working the way it should
+          // Lookup https://casl.js.org/v5/en/guide/conditions-in-depth
+          // with property string
+          // relation = { ...relation, ...getFieldConditionsOnRelation(field) };
+          relation = { ...relation };
         }
 
         return [ids, relation];
@@ -90,10 +94,8 @@ export const rolePermissions: RolePermissions<
 
   function getFieldConditionsOnRelation(field) {
     return field.names.camel !== 'id' ? {
-      [field.names.camel]: {
-        id: {
-          in: `getConcatValueByPath('${field.meta.ownerStringPath.raw.replace('user.', '')}', user)`
-        }
+      [`'${field.names.camel}.id'`]: {
+        in: `getConcatValueByPath('${field.meta.ownerStringPath.raw.replace('user.', '')}', user)`
       }
     }: {};
   }

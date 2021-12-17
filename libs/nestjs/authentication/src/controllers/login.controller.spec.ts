@@ -79,28 +79,33 @@ describe('Authentication Module', () => {
       const authenticationService = app.get<AuthenticationService>(
         AuthenticationService,
       );
+
+      const { password, ...expectedUser } = mockUser;
+
       const hashPassword = await authenticationService.hashPassword(
-        mockUser.password || '',
+        password || '',
       );
 
-      mockUserService.findUnique.mockResolvedValue(
+      mockUserService.findUnique.mockResolvedValueOnce(
         Promise.resolve({
-          ...mockUser,
+          ...expectedUser,
+        }),
+      );
+      mockUserService.findUnique.mockResolvedValueOnce(
+        Promise.resolve({
           password: hashPassword,
         }),
       );
 
       const response = await request(app.getHttpServer())
         .post('/login')
-        .send({ email: mockUser.email, password: mockUser.password });
+        .send({ email: mockUser.email, password });
 
       expect(response.status).toBe(200);
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { password: _, ...user } = response.body.user;
       expect(response.body).toEqual({
         accessToken: await authenticationService.createUserJWT(mockUser),
-        user,
+        user: expectedUser,
       });
     });
     it('/me get the user information back and use the jwt auth strategy', async () => {

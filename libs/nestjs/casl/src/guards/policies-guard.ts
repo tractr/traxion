@@ -17,7 +17,7 @@ import {
   AuthenticationUserService,
   UserSelect,
 } from '@tractr/nestjs-authentication';
-import { Logger, POLICIES_KEY } from '@tractr/nestjs-core';
+import { IS_PUBLIC_KEY, Logger, POLICIES_KEY } from '@tractr/nestjs-core';
 
 @Injectable()
 export class PoliciesGuard implements CanActivate {
@@ -33,6 +33,15 @@ export class PoliciesGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    // Check if the route is public
+    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+
+    // If we have the @Public decorator on our route we just let pass the request
+    if (isPublic) return true;
+
     const policyHandlers =
       this.reflector.get<PolicyHandlerType<unknown>[]>(
         POLICIES_KEY,

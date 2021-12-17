@@ -16,10 +16,8 @@ import {
 } from '@nestjs/common';
 import { CurrentAbilities, Policies } from '@tractr/nestjs-core';
 
-import { <<if Fields ownership >><<Model pascal>>, User, <<endif>>Prisma } from '@prisma/client';
-<<if Fields ownership >>
-import { Actions, AppAbility, Permission } from '../../../../casl';
-<<endif>>
+import { <<if Fields ownership >><<<if (root.names.pascal !== 'User') {>>><<Model pascal>>, <<<}>>>User, <<endif>>Prisma } from '@prisma/client';
+import { <<if Fields ownership >>Actions, AppAbility, <<endif>>Permission } from '../../../../casl';
 import { <<Model pascal>>Service, <<Model constant>>_SERVICE } from '../../../../nestjs-models-common';
 import {
   <<Model pascal>>CountQueryDto,
@@ -77,7 +75,7 @@ export class <<Model pascal>>Controller {
     formattedParams.data = {
       ...this.<<Model camel>>Service.getDefaultOwnerships(user),
       ...formattedParams.data,
-    }
+    } as Prisma.<<Model pascal>>CreateInput;
  
     ForbiddenError.from(abilities).throwUnlessCan(
       Actions.CREATE,
