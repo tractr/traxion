@@ -1,8 +1,13 @@
 import { DynamicModule, INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { plainToInstance } from 'class-transformer';
 
 import { FILE_STORAGE_CONFIGURATION } from './constants';
-import { FileStorageConfigurationPrivateDto } from './dtos';
+import {
+  FileStorageConfigurationPrivateDto,
+  PresignedDownloadConfigurationDto,
+  PresignedUploadConfigurationDto,
+} from './dtos';
 import { FileStorageModule } from './file-storage.module';
 import { FileStorageService } from './services';
 
@@ -56,22 +61,26 @@ describe('FileStorageModule', () => {
     expect(fileStorageConfig).toBeInstanceOf(
       FileStorageConfigurationPrivateDto,
     );
-    expect(fileStorageConfig).toBe({
-      endPoint: 'http://localhost:3000',
-      accessKey: 'test',
-      secretKey: 'test',
-      useSSL: false,
-      port: 3000,
-      defaultBucket: 'test',
-      presignedUpload: {
-        allowedMimeTypes: ['image/png', 'image/jpeg'],
-        minFileSize: 1,
-        maxFileSize: 10,
-        defaultValidity: 3600,
-      },
-      presignedDownload: {
-        defaultValidity: 3600,
-      },
-    });
+    expect(fileStorageConfig).toStrictEqual(
+      plainToInstance(FileStorageConfigurationPrivateDto, {
+        endPoint: 'http://localhost:3000',
+        accessKey: 'test',
+        secretKey: 'test',
+        useSSL: false,
+        port: 3000,
+        defaultBucket: 'test',
+        presignedUpload: plainToInstance(PresignedUploadConfigurationDto, {
+          allowedMimeTypes: ['image/png', 'image/jpeg'],
+          minFileSize: 1,
+          maxFileSize: 10,
+          defaultValidity: 3600,
+        }),
+        presignedDownload: plainToInstance(PresignedDownloadConfigurationDto, {
+          defaultValidity: 3600,
+        }),
+        temporaryFilesTTL: 7200,
+        temporaryPrefix: 'temp',
+      }),
+    );
   });
 });
