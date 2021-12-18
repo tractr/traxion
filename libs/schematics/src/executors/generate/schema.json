@@ -23,7 +23,7 @@
       "type": "string"
     },
     "outputGeneratedPath": {
-      "default": "src/lib/generated",
+      "default": "src/generated",
       "description": "The output generated path of hapify files",
       "type": "string"
     }

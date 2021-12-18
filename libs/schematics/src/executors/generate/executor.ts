@@ -1,9 +1,10 @@
+import { exec } from 'child_process';
 import { join } from 'path';
+import { promisify } from 'util';
 
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext, logger } from '@nrwl/devkit';
 import { move, pathExists, remove } from 'fs-extra';
 
-import { execAsync } from '../../helpers/exec-async';
 import { GenerateExecutorSchema } from './schema';
 
 import { getHapifyOptions } from '@tractr/hapify-generate-config';
@@ -18,7 +19,8 @@ export default async function runExecutor(
   options: GenerateExecutorSchema,
   context: ExecutorContext,
 ) {
-  const { root } = context;
+  const execAsync = promisify(exec);
+  const { root, isVerbose } = context;
 
   const {
     cleanFirst,
@@ -31,12 +33,17 @@ export default async function runExecutor(
   const projectDirectory = join(root, cwd);
   const pathToGeneratedFolder = join(projectDirectory, outputGeneratedPath);
 
+  if (isVerbose) logger.debug(`Check if ${projectDirectory} exists`);
+
   // Check if the project directory has a package json
   if (!(await pathExists(join(projectDirectory)))) {
-    throw new Error('The cwd path seems to be not a valid project directory');
+    throw new Error(
+      `The path "${projectDirectory}" seems to be not a valid project directory`,
+    );
   }
 
   if (cleanFirst) {
+    if (isVerbose) logger.debug(`Remove ${pathToGeneratedFolder}`);
     // First, we delete the generated folder
     try {
       await remove(pathToGeneratedFolder);
@@ -46,24 +53,35 @@ export default async function runExecutor(
   }
 
   // Then, we generate the configuration files
+  if (isVerbose) logger.debug(`Generate the configuration files`);
   await getHapifyOptions(projectDirectory);
 
   // Then we run the hapify generate command
-  await execAsync(`npx hpf generate`, { cwd: projectDirectory });
+  if (isVerbose) logger.debug(`Generate the hapify files`);
+  const { stdout, stderr } = await execAsync(`npx hpf generate`, {
+    cwd: projectDirectory,
+  });
+
+  if (stderr) throw new Error(stderr);
+  if (isVerbose) logger.debug(stdout);
 
   if (inputHapifyGeneratedPath !== outputGeneratedPath) {
+    if (isVerbose)
+      logger.debug(`Move the generated files to ${outputGeneratedPath}`);
     await move(
       join(projectDirectory, inputHapifyGeneratedPath),
       pathToGeneratedFolder,
     );
   }
 
+  if (isVerbose) logger.debug(`Update the templates import path`);
   await hapifyUpdateTemplatesImportPath(
     pathToGeneratedFolder,
     projectDirectory,
   );
 
   if (format) {
+    if (isVerbose) logger.debug(`Format the generated files`);
     await execAsync(
       `npx prettier '${join(
         projectDirectory,
