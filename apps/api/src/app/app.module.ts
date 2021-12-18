@@ -1,18 +1,23 @@
 import { Module } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ConsoleModule } from 'nestjs-console';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { rolePermissions } from '@generated/casl';
+import { getSelectPrismaUserQuery, rolePermissions } from '@generated/casl';
 import { ModelsModule } from '@generated/nestjs-models';
 import { USER_SERVICE } from '@generated/nestjs-models-common';
 import {
   AuthenticationModule,
   JwtGlobalAuthGuard,
 } from '@tractr/nestjs-authentication';
-import { CaslModule } from '@tractr/nestjs-casl';
+import {
+  CaslExceptionInterceptor,
+  CaslModule,
+  PoliciesGuard,
+} from '@tractr/nestjs-casl';
+import { LoggerModule } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 import {
   FileStorageController,
@@ -53,10 +58,17 @@ import { MailerModule } from '@tractr/nestjs-mailer';
     }),
     CaslModule.register({
       rolePermissions,
+      getSelectPrismaUserQuery,
     }),
     ConsoleModule,
+    LoggerModule,
   ],
   controllers: [AppController, FileStorageController],
-  providers: [AppService, { provide: APP_GUARD, useClass: JwtGlobalAuthGuard }],
+  providers: [
+    AppService,
+    { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
+    { provide: APP_GUARD, useClass: PoliciesGuard },
+    { provide: APP_INTERCEPTOR, useClass: CaslExceptionInterceptor },
+  ],
 })
 export class AppModule {}

@@ -13,14 +13,24 @@
   },
   "cSpell.words": [
     "casl",
+    "Concat",
     "dtos",
+    "endfor",
+    "hapify",
     "mailjet",
     "minio",
     "nestjs",
+    "nrwl",
     "Rext",
     "tractr",
     "Unsubscriber",
     "upsert"
+  ],
+  "debug.javascript.autoAttachFilter": "smart",
+  "debug.javascript.autoAttachSmartPattern": [
+    "!**/{node_modules,npm-global,.yarn,.nvm}/**",
+    "**/$KNOWN_TOOLS$/**",
+    "'**/node_modules/@nrwl/node/**'"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll": true,

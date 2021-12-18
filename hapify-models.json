@@ -67,6 +67,67 @@
     },
     {
       "accesses": {
+        "count": "owner",
+        "create": "owner",
+        "read": "owner",
+        "remove": "owner",
+        "search": "owner",
+        "update": "owner"
+      },
+      "fields": [
+        {
+          "meta": {},
+          "name": "id",
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "meta": {
+            "backRelation": "departments",
+            "ownerStringPath": "user.enterprises.id"
+          },
+          "name": "enterprise",
+          "properties": ["ownership"],
+          "subtype": "oneMany",
+          "type": "entity",
+          "value": "c069cc55-f28f-dcc1-cad8-0df044631ef8"
+        }
+      ],
+      "id": "2a523149-31f3-80bf-d32b-3b9174cc6f2c",
+      "name": "Department"
+    },
+    {
+      "accesses": {
+        "count": "owner",
+        "create": "owner",
+        "read": "owner",
+        "remove": "owner",
+        "search": "owner",
+        "update": "owner"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "meta": {
+            "backRelation": "enterprises",
+            "ownerStringPath": "user.id"
+          },
+          "name": "employee",
+          "properties": ["multiple", "ownership"],
+          "subtype": "manyMany",
+          "type": "entity",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
+        }
+      ],
+      "id": "c069cc55-f28f-dcc1-cad8-0df044631ef8",
+      "name": "Enterprise"
+    },
+    {
+      "accesses": {
         "count": "guest",
         "create": "guest",
         "read": "guest",
@@ -349,7 +410,7 @@
         {
           "meta": {
             "backRelation": "tags",
-            "ownerKey": "ownerId"
+            "ownerStringPath": "user.id"
           },
           "name": "owner",
           "properties": ["ownership"],
@@ -367,11 +428,14 @@
         "create": "guest",
         "read": "owner",
         "remove": "admin",
-        "search": "admin",
+        "search": "owner",
         "update": "owner"
       },
       "fields": [
         {
+          "meta": {
+            "ownerStringPath": "user.id"
+          },
           "name": "id",
           "properties": [
             "primary",
