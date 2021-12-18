@@ -4,7 +4,7 @@ import { Strategy } from 'passport-jwt';
 
 import { AUTHENTICATION_USER_SERVICE } from '../constants';
 import { JwtTokenPayload } from '../dtos';
-import { User, UserService } from '../interfaces';
+import { UserService, UserType } from '../interfaces';
 import { StrategyOptionsService } from '../services';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super(strategyOptionsService.createJwtStrategyOptions());
   }
 
-  async validate(payload: JwtTokenPayload): Promise<User> {
+  async validate(payload: JwtTokenPayload): Promise<UserType> {
     const user = await this.userService.findUnique({
       where: { id: payload.sub },
     });

@@ -11,7 +11,7 @@ import {
 } from '../constants';
 import { AuthenticationOptions } from '../dtos';
 import { UserNotFoundError } from '../errors';
-import { User } from '../interfaces';
+import { UserType } from '../interfaces';
 import { AuthenticationUserService } from './authentication-user.service';
 import { AuthenticationService } from './authentication.service';
 
@@ -20,7 +20,7 @@ describe('AuthService', () => {
   let mockAuthenticationOptions: MockProxy<AuthenticationOptions>;
   let mockJwtService: MockProxy<JwtService>;
   let mockUserService: MockProxy<AuthenticationUserService>;
-  let mockUser: MockProxy<User>;
+  let mockUser: MockProxy<UserType>;
   let mockBcryptCompare: jest.SpyInstance;
   let mockBcryptHash: jest.SpyInstance;
   let mockBcryptGenSalt: jest.SpyInstance;
@@ -33,7 +33,7 @@ describe('AuthService', () => {
     mockJwtService = mockDeep<JwtService>();
     mockUserService = mockDeep<AuthenticationUserService>();
     mockAuthenticationOptions = mockDeep<AuthenticationOptions>();
-    mockUser = mockDeep<User>();
+    mockUser = mockDeep<UserType>();
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [

@@ -8,7 +8,7 @@ import {
 } from '../constants';
 import { AccessTokenDto, AuthenticationOptions } from '../dtos';
 import { BadPasswordError, UserNotFoundError } from '../errors';
-import { User } from '../interfaces';
+import { UserType } from '../interfaces';
 import { UserService } from '../interfaces/user.service.interface';
 
 @Injectable()
@@ -21,7 +21,10 @@ export class AuthenticationService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser(login: string, password: string): Promise<User | null> {
+  async validateUser(
+    login: string,
+    password: string,
+  ): Promise<UserType | null> {
     try {
       return await this.authenticateLoginCredentials(login, password);
     } catch {
@@ -32,13 +35,16 @@ export class AuthenticationService {
   async authenticateLoginCredentials(
     login: string,
     password: string,
-  ): Promise<User | null> {
+  ): Promise<UserType | null> {
     const { passwordField } = this.authenticationOptions.userConfig;
 
-    const userWithPassword = await this.findUserByLogin(login);
-    if (!userWithPassword) throw new UserNotFoundError();
+    const user = await this.findUserByLogin(login);
+    if (!user) throw new UserNotFoundError();
 
-    const { [passwordField]: passwordBcrypt, ...user } = userWithPassword;
+    const { [passwordField]: passwordBcrypt } =
+      (await this.findUserByLogin(login, {
+        [passwordField]: true,
+      })) ?? {};
 
     if (await this.verifyPassword(password, passwordBcrypt)) {
       return user;
@@ -50,7 +56,7 @@ export class AuthenticationService {
   findUserByLogin(
     login: string,
     select?: Record<string, boolean>,
-  ): Promise<User | null> {
+  ): Promise<UserType | null> {
     const { loginField } = this.authenticationOptions.userConfig;
 
     if (!loginField) throw new Error('loginField is not defined');
@@ -79,11 +85,11 @@ export class AuthenticationService {
     return bcrypt.compare(password, hash);
   }
 
-  async createUserJWT(user: User): Promise<string> {
+  async createUserJWT(user: UserType): Promise<string> {
     return this.jwtService.sign({ sub: user.id });
   }
 
-  async login(user: User): Promise<AccessTokenDto> {
+  async login(user: UserType): Promise<AccessTokenDto> {
     return {
       accessToken: await this.createUserJWT(user),
     };
