@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 // eslint-disable-next-line
 import { AppModule } from '../../../apps/api/src/app/app.module';
 
-import { seedUsers } from '@generated/nestjs-models-common';
+import { seedUsers } from '@generated/nestjs-models-common/mock';
 import { Logger } from '@tractr/nestjs-core';
 import { DatabaseService } from '@tractr/nestjs-database';
 

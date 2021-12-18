@@ -9,7 +9,7 @@ import {
 } from '../constants';
 import { AuthenticationOptions } from '../dtos';
 import { BadResetCodeError, UserNotFoundError } from '../errors';
-import { RequestResetOptions, User, UserService } from '../interfaces';
+import { RequestResetOptions, UserService, UserType } from '../interfaces';
 
 import { MailerService } from '@tractr/nestjs-mailer';
 
@@ -93,13 +93,13 @@ export class PasswordService {
     });
   }
 
-  getUserSecret(user: User) {
+  getUserSecret(user: UserType) {
     const { idField, loginField, passwordField } =
       this.authenticationOptions.userConfig;
     return `${user[idField]}-${user[passwordField]}-${user[loginField]}`;
   }
 
-  createResetCode(user: User, options: JwtSignOptions = {}): string {
+  createResetCode(user: UserType, options: JwtSignOptions = {}): string {
     // Maybe we could add the created at instead of email and id
     return this.jwtService.sign(
       { sub: user.id },
@@ -112,10 +112,10 @@ export class PasswordService {
   }
 
   verifyResetCode(
-    user: User,
+    user: UserType,
     resetCode: string,
     options: JwtVerifyOptions = {},
-  ): Promise<{ sub: User['id'] }> {
+  ): Promise<{ sub: UserType['id'] }> {
     return this.jwtService.verifyAsync(resetCode, {
       ...options,
       secret: this.getUserSecret(user),

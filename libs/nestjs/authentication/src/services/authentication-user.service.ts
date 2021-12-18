@@ -3,7 +3,7 @@ import { ModuleRef } from '@nestjs/core';
 
 import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
 import { AuthenticationOptions } from '../dtos';
-import { UserService as UserServiceInterface } from '../interfaces';
+import { UserSelect, UserService as UserServiceInterface } from '../interfaces';
 
 @Injectable()
 export class AuthenticationUserService
@@ -36,7 +36,7 @@ export class AuthenticationUserService
 
   async findUnique(args: {
     where: { [key: string]: string | number };
-    select?: Record<string, boolean> | undefined;
+    select?: UserSelect;
   }) {
     return this.dynamicUserService.findUnique(args);
   }

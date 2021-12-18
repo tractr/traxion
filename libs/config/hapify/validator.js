@@ -67,9 +67,9 @@ for (const field of fields) {
       `Entity field must have the meta 'default'. Fix field '${field.name}'`,
     );
   }
-  if (field.ownership && !(field.meta && field.meta.ownerKey)) {
+  if (field.ownership && !(field.meta && field.meta.ownerStringPath)) {
     errors.push(
-      `Entity field must have the meta 'ownerKey'. Fix field '${field.name}'`,
+      `Entity field must have the meta 'ownerStringPath'. Fix field '${field.name}'`,
     );
   }
   if (

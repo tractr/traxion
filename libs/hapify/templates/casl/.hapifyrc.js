@@ -18,6 +18,11 @@ module.exports = {
       input: 'all',
     },
     {
+      path: 'generated/casl/src/config/get-prisma-user-query.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
       path: 'generated/casl/src/config/permissions.config.ts',
       engine: 'hpf',
       input: 'all',

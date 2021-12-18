@@ -3,7 +3,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 
-import { PrismaExceptionEndpointMockController } from '../../mock/prisma-exception-endpoint-mock.controller';
+import { PrismaExceptionEndpointMockController } from '../../mocks/prisma-exception-endpoint-mock.controller';
 import { PrismaExceptionInterceptor } from './prisma-exception.interceptor';
 
 describe('Prisma exception error', () => {

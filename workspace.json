@@ -499,6 +499,17 @@
           },
           "outputs": ["dist/libs/common"]
         },
+        "coverage": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "codeCoverage": true,
+            "coverageReporters": ["text", "json"],
+            "jestConfig": "libs/common/jest.config.js",
+            "passWithNoTests": true,
+            "skipNxCache": true
+          },
+          "outputs": ["coverage/libs/common"]
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
@@ -1288,7 +1299,7 @@
             "passWithNoTests": true,
             "skipNxCache": true
           },
-          "outputs": ["coverage/libs/constraint/unit"]
+          "outputs": ["coverage/libs/nestjs/authentication"]
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
@@ -1305,7 +1316,6 @@
         "test": {
           "executor": "@nrwl/jest:jest",
           "options": {
-            "coverage": true,
             "jestConfig": "libs/nestjs/authentication/jest.config.js",
             "passWithNoTests": true
           },
@@ -1328,6 +1338,17 @@
             "tsConfig": "libs/nestjs/casl/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "coverage": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "codeCoverage": true,
+            "coverageReporters": ["text", "json"],
+            "jestConfig": "libs/nestjs/casl/jest.config.js",
+            "passWithNoTests": true,
+            "skipNxCache": true
+          },
+          "outputs": ["coverage/libs/nestjs/casl"]
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
