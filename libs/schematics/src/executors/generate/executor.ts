@@ -21,7 +21,7 @@ export default async function runExecutor(
 ) {
   try {
     const execAsync = promisify(exec);
-    const { root, isVerbose } = { ...context, isVerbose: true };
+    const { root, isVerbose } = context;
 
     const {
       cleanFirst,
@@ -92,7 +92,9 @@ export default async function runExecutor(
     }
 
     return { success: true };
-  } catch (e) {
+  } catch (e: unknown) {
+    if (!(e instanceof Error)) throw e;
+
     logger.error(e.message);
     return { success: false };
   }

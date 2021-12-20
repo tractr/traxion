@@ -64,6 +64,7 @@ describe('Generate executor:generate', () => {
     // nrwl devkit
     loggerSpy = jest.spyOn(logger, 'debug');
     jest.spyOn(console, 'debug').mockImplementation();
+    jest.spyOn(console, 'error').mockImplementation();
 
     // tractr
     getHapifyOptions = jest.spyOn(hapifyGenerateConfig, 'getHapifyOptions');
@@ -180,9 +181,7 @@ describe('Generate executor:generate', () => {
     expect(execSpy).toHaveBeenCalledTimes(0);
     expect(move).toHaveBeenCalledTimes(0);
     expect(hapifyUpdateTemplatesImportPath).toHaveBeenCalledTimes(0);
-    expect(output).toEqual(
-      'The path "/root/libs/test" seems to be not a valid project directory',
-    );
+    expect(output).toEqual({ success: false });
   });
 
   it('should not throw if remove throw an error', async () => {
@@ -211,9 +210,7 @@ describe('Generate executor:generate', () => {
       }),
     );
 
-    await expect(async () =>
-      executor(defaultOptions, defaultContext),
-    ).rejects.toThrow('Error occured');
+    const output = await executor(defaultOptions, defaultContext);
 
     expect(pathExists).toHaveBeenCalledTimes(1);
     expect(remove).toHaveBeenCalledTimes(1);
@@ -221,6 +218,7 @@ describe('Generate executor:generate', () => {
     expect(execSpy).toHaveBeenCalledTimes(1);
     expect(move).toHaveBeenCalledTimes(0);
     expect(hapifyUpdateTemplatesImportPath).toHaveBeenCalledTimes(0);
+    expect(output).toEqual({ success: false });
   });
 
   it('should not remove the generated folder if cleanFirst options is set to false', async () => {
