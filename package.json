@@ -24,7 +24,7 @@
     "format": "nx format:write --all",
     "format:check": "nx format:check --all",
     "format:write": "nx format:write --all",
-    "generate": "npx nx run-many --target generate --all",
+    "generate": "npx nx run-many --target generate --all --verbose",
     "help": "nx help",
     "lint": "nx workspace-lint && nx run-many --all --target=lint --parallel",
     "nx": "nx",

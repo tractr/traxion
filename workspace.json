@@ -667,6 +667,7 @@
           "options": {
             "commands": [
               "rm -rf node_modules/@tractr/hapify-common",
+              "mkdir -p node_modules/@tractr",
               "cp -rf dist/libs/hapify/hapify-common/ node_modules/@tractr/hapify-common/"
             ]
           }
@@ -717,6 +718,7 @@
           "options": {
             "commands": [
               "rm -rf node_modules/@tractr/hapify-config",
+              "mkdir -p node_modules/@tractr",
               "cp -rf dist/libs/config/hapify/ node_modules/@tractr/hapify-config/"
             ]
           }
@@ -780,6 +782,7 @@
           "options": {
             "commands": [
               "rm -rf node_modules/@tractr/hapify-generate-config",
+              "mkdir -p node_modules/@tractr",
               "cp -rf dist/libs/hapify/generate-config/ node_modules/@tractr/hapify-generate-config/"
             ]
           }
@@ -1290,6 +1293,7 @@
           "options": {
             "commands": [
               "rm -rf node_modules/@tractr/update-templates-import-path",
+              "mkdir -p node_modules/@tractr",
               "cp -rf dist/libs/hapify/update-templates-import-path/ node_modules/@tractr/update-templates-import-path/"
             ]
           }
@@ -2804,6 +2808,17 @@
     "workspace": {
       "root": ".",
       "targets": {
+        "hpf-serve": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "nx run-many --target pregenerate --projects hapify-config",
+              "npx hpf serve"
+            ],
+            "cwd": ".",
+            "parallel": false
+          }
+        },
         "release": {
           "executor": "@jscutlery/semver:version",
           "options": {

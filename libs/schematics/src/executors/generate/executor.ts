@@ -19,76 +19,81 @@ export default async function runExecutor(
   options: GenerateExecutorSchema,
   context: ExecutorContext,
 ) {
-  const execAsync = promisify(exec);
-  const { root, isVerbose } = context;
+  try {
+    const execAsync = promisify(exec);
+    const { root, isVerbose } = { ...context, isVerbose: true };
 
-  const {
-    cleanFirst,
-    cwd,
-    inputHapifyGeneratedPath,
-    outputGeneratedPath,
-    format,
-  } = options;
+    const {
+      cleanFirst,
+      cwd,
+      inputHapifyGeneratedPath,
+      outputGeneratedPath,
+      format,
+    } = options;
 
-  const projectDirectory = join(root, cwd);
-  const pathToGeneratedFolder = join(projectDirectory, outputGeneratedPath);
+    const projectDirectory = join(root, cwd);
+    const pathToGeneratedFolder = join(projectDirectory, outputGeneratedPath);
 
-  if (isVerbose) logger.debug(`Check if ${projectDirectory} exists`);
+    if (isVerbose) logger.debug(`Check if ${projectDirectory} exists`);
 
-  // Check if the project directory has a package json
-  if (!(await pathExists(join(projectDirectory)))) {
-    throw new Error(
-      `The path "${projectDirectory}" seems to be not a valid project directory`,
-    );
-  }
-
-  if (cleanFirst) {
-    if (isVerbose) logger.debug(`Remove ${pathToGeneratedFolder}`);
-    // First, we delete the generated folder
-    try {
-      await remove(pathToGeneratedFolder);
-    } catch {
-      // We allow the folder to not exist
+    // Check if the project directory has a package json
+    if (!(await pathExists(join(projectDirectory)))) {
+      throw new Error(
+        `The path "${projectDirectory}" seems to be not a valid project directory`,
+      );
     }
-  }
 
-  // Then, we generate the configuration files
-  if (isVerbose) logger.debug(`Generate the configuration files`);
-  await getHapifyOptions(projectDirectory);
+    if (cleanFirst) {
+      if (isVerbose) logger.debug(`Remove ${pathToGeneratedFolder}`);
+      // First, we delete the generated folder
+      try {
+        await remove(pathToGeneratedFolder);
+      } catch {
+        // We allow the folder to not exist
+      }
+    }
 
-  // Then we run the hapify generate command
-  if (isVerbose) logger.debug(`Generate the hapify files`);
-  const { stdout, stderr } = await execAsync(`npx hpf generate`, {
-    cwd: projectDirectory,
-  });
+    // Then, we generate the configuration files
+    if (isVerbose) logger.debug(`Generate the configuration files`);
+    await getHapifyOptions(projectDirectory);
 
-  if (stderr) throw new Error(stderr);
-  if (isVerbose) logger.debug(stdout);
+    // Then we run the hapify generate command
+    if (isVerbose) logger.debug(`Generate the hapify files`);
+    const { stdout, stderr } = await execAsync(`npx hpf generate`, {
+      cwd: projectDirectory,
+    });
 
-  if (inputHapifyGeneratedPath !== outputGeneratedPath) {
-    if (isVerbose)
-      logger.debug(`Move the generated files to ${outputGeneratedPath}`);
-    await move(
-      join(projectDirectory, inputHapifyGeneratedPath),
+    if (stderr) throw new Error(stderr);
+    if (isVerbose) logger.debug(stdout);
+
+    if (inputHapifyGeneratedPath !== outputGeneratedPath) {
+      if (isVerbose)
+        logger.debug(`Move the generated files to ${outputGeneratedPath}`);
+      await move(
+        join(projectDirectory, inputHapifyGeneratedPath),
+        pathToGeneratedFolder,
+      );
+    }
+
+    if (isVerbose) logger.debug(`Update the templates import path`);
+    await hapifyUpdateTemplatesImportPath(
       pathToGeneratedFolder,
+      projectDirectory,
     );
+
+    if (format) {
+      if (isVerbose) logger.debug(`Format the generated files`);
+      await execAsync(
+        `npx prettier '${join(
+          projectDirectory,
+          outputGeneratedPath,
+        )}/**/*.ts' --write`,
+      );
+    }
+
+    return { success: true };
+  } catch (e) {
+    logger.error(e.message);
+    return { success: false };
   }
-
-  if (isVerbose) logger.debug(`Update the templates import path`);
-  await hapifyUpdateTemplatesImportPath(
-    pathToGeneratedFolder,
-    projectDirectory,
-  );
-
-  if (format) {
-    if (isVerbose) logger.debug(`Format the generated files`);
-    await execAsync(
-      `npx prettier '${join(
-        projectDirectory,
-        outputGeneratedPath,
-      )}/**/*.ts' --write`,
-    );
-  }
-
-  return { success: true };
 }
