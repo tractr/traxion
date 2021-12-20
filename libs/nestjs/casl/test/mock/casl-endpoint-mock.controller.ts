@@ -22,6 +22,8 @@ export type Subjects = CaslPrismaSubjects<{
   Variable: {};
   InternalField: {};
   UniqueValueField: {};
+  Department: {};
+  Enterprise: {};
   all: 'all';
 }>;
 

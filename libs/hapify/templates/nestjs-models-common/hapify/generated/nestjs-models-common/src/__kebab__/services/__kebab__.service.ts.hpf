@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { Inject, Injectable } from '@nestjs/common';
-
+ 
 <<if Fields enum and internal and not ownership>>
 import {
   <<for Fields enum and internal and not ownership field>>
@@ -10,9 +10,9 @@ import {
 <<endif>>
 import { <<Model constant>>_DATABASE_SERVICE } from '../<<Model kebab>>-model.constant';
 import { <<Model pascal>>DatabaseService } from './<<Model kebab>>-database.service';
-
-import { Prisma } from '@prisma/client';
-
+ 
+import { <<if Fields ownership and not primary>>User, <<endif>>Prisma } from '@prisma/client';
+ 
 @Injectable()
 export class <<Model pascal>>Service {
   constructor(
@@ -20,20 +20,30 @@ export class <<Model pascal>>Service {
     protected readonly <<Model camel>>DatabaseService: <<Model pascal>>DatabaseService,
   ) {}
 
-  <<for Fields internal and ownership and not primary field>>
+
+  <<if Fields ownership and not primary>>
   /**
-   *  Add <<field pascal>> ownership to data
-   * */
-  public add<<field pascal>>OwnerShip<T extends Partial<Prisma.<<Model pascal>>CreateInput>>(data: T, owner: Prisma.<<field.model pascal>>WhereUniqueInput):
-    T &
-    { '<<field camel>>': { connect: Prisma.<<field.model pascal>>WhereUniqueInput } }
+   * Get default ownership value for fields that have user.id into their ownerStringPath metadata
+   **/
+  public getDefaultOwnerships(
+    user: User,
+  ): {
+    <<for Fields ownership and not primary field>>
+      <<<if (field.meta.ownerStringPath.raw === 'user.id') {>>>
+      <<field camel>>: { connect: Prisma.UserWhereUniqueInput },
+      <<<}>>>
+    <<endfor>>
+    }
   {
     return {
-      ...data,
-      '<<field camel>>': { connect: owner }
+    <<for Fields ownership and not primary field>>
+      <<<if (field.meta.ownerStringPath.raw === 'user.id') {>>>
+      <<field camel>>: { connect: user },
+      <<<}>>>
+    <<endfor>>
     };
   }
-  <<endfor>>
+  <<endif>>
 
   <<if Fields internal and not primary and (not entity or nullable)>>
 

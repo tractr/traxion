@@ -12,5 +12,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   coverageDirectory: '../../../coverage/libs/nestjs/authentication',
-  modulePathIgnorePatterns: ['<rootDir>/generated/'],
+  modulePathIgnorePatterns: [],
 };

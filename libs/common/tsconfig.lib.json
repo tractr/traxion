@@ -3,7 +3,7 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "lib": ["dom", "es2018"],
+    "lib": ["dom", "esnext"],
     "outDir": "../../dist/out-tsc",
     "target": "es2015",
     "types": []

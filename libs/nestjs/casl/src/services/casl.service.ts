@@ -14,7 +14,7 @@ export class CaslAbilityFactoryService {
     private readonly caslOptions: CaslOptions,
   ) {}
 
-  createForUser<U extends CaslUser>(user: U) {
+  createForUser<U extends CaslUser>(user?: U) {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const AppAbility = PrismaAbility;
     const builder = new AbilityBuilder(AppAbility);

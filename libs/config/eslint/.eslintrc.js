@@ -29,6 +29,11 @@ module.exports = {
   plugins: ['import', 'json-files', 'jest', '@typescript-eslint/eslint-plugin'],
   rules: {
     'no-console': ['error', { allow: ['info', 'warn', 'error'] }],
+    'lines-between-class-members': [
+      'error',
+      'always',
+      { exceptAfterSingleLine: true },
+    ],
 
     // Not compatible with nestjs
     'no-useless-constructor': 'off',

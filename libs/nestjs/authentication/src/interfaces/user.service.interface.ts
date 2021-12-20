@@ -1,10 +1,14 @@
-import { User } from './user.interface';
+import { UserType } from './user.interface';
+
+export interface UserSelect {
+  [key: string]: boolean | { select: UserSelect };
+}
 
 export interface UserService {
   findUnique(args: {
     where: { [key: string]: string | number };
-    select?: Record<string, boolean>;
-  }): Promise<User | null>;
+    select?: UserSelect;
+  }): Promise<UserType | null>;
 
   update(args: {
     where: {
@@ -13,5 +17,5 @@ export interface UserService {
     data: {
       [key: string]: string;
     };
-  }): Promise<User | null>;
+  }): Promise<UserType | null>;
 }

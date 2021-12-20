@@ -11,6 +11,10 @@ import {
 } from '../mock/casl-endpoint-mock.controller';
 import { mockAuthenticationGuard } from '../mock/mock-authentication-guard';
 
+import {
+  AUTHENTICATION_USER_SERVICE,
+  AuthenticationUserService,
+} from '@tractr/nestjs-authentication';
 import { LoggerModule } from '@tractr/nestjs-core';
 
 describe('Authentication Module (integration)', () => {
@@ -19,6 +23,7 @@ describe('Authentication Module (integration)', () => {
     getUser: () => Record<string, unknown> | null;
     isPublic: () => boolean;
   }>;
+  const mockAuthenticationUserService = mockDeep<AuthenticationUserService>();
 
   beforeAll(async () => {
     mockUser = mockDeep<{
@@ -39,6 +44,10 @@ describe('Authentication Module (integration)', () => {
           provide: APP_GUARD,
           useClass: PoliciesGuard,
         },
+        {
+          provide: AUTHENTICATION_USER_SERVICE,
+          useValue: mockAuthenticationUserService,
+        },
       ],
       imports: [
         LoggerModule,
@@ -54,7 +63,7 @@ describe('Authentication Module (integration)', () => {
   });
 
   afterAll(async () => {
-    await app.close();
+    await app?.close();
   });
 
   describe('Casl route', () => {
