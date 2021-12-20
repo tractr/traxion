@@ -148,7 +148,6 @@
         "hapify-templates-prisma",
         "hapify-config",
         "hapify-common",
-        "generated",
         "hapify-generate-config",
         "schematics",
         "hapify-update-templates-import-path"
