@@ -99,6 +99,10 @@ export class AuthenticationModule extends ModuleOptionsFactory<
         JwtStrategy,
         LocalStrategy,
         PasswordService,
+        {
+          provide: AUTHENTICATION_USER_SERVICE,
+          useClass: AuthenticationUserService,
+        },
       ],
       providers: [
         AuthenticationService,

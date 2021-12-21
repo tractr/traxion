@@ -63,6 +63,8 @@
         "hapify-templates-angular-rext-client",
         "nestjs-core",
         "nestjs-database",
+        "nestjs-authentication",
+        "nestjs-casl",
         "nestjs-testing",
         "angular-tools",
         "hapify-config",
