@@ -15,7 +15,7 @@ import { JsonObject } from '@tractr/common';
 
 
 export type <<Model pascal>>UniqueValues = {
-  <<for Fields unique field>>
+  <<for Fields not internal and not boolean and not enum and unique field>>
     <<if field not entity>>
       <<field camel>>: <<=getType(field)>>[],
     <<else>>
