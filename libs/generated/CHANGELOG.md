@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.31.0](https://github.com/tractr/stack/compare/v1.30.0...v1.31.0) (2021-12-21)
+
+
+### Features
+
+* add casl generation with deep access ([#330](https://github.com/tractr/stack/issues/330)) ([4138c39](https://github.com/tractr/stack/commit/4138c3987444e9dbeb27c846bc2be4d950820538))
+* add generate executor schematics ([#334](https://github.com/tractr/stack/issues/334)) ([16173c9](https://github.com/tractr/stack/commit/16173c999f27cc8a503ba8d261c6e26553c81001))
+
+
+
 # [1.30.0](https://github.com/tractr/stack/compare/v1.29.3...v1.30.0) (2021-12-15)
 
 

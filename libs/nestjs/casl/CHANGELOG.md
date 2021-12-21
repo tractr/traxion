@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.31.0](https://github.com/tractr/stack/compare/v1.30.0...v1.31.0) (2021-12-21)
+
+
+### Bug Fixes
+
+* fix unique value type on templates ([#335](https://github.com/tractr/stack/issues/335)) ([f80a321](https://github.com/tractr/stack/commit/f80a321c18f8b4af8bc0190e44f7675baee54ff9))
+
+
+### Features
+
+* add casl generation with deep access ([#330](https://github.com/tractr/stack/issues/330)) ([4138c39](https://github.com/tractr/stack/commit/4138c3987444e9dbeb27c846bc2be4d950820538))
+
+
+
 # [1.30.0](https://github.com/tractr/stack/compare/v1.29.3...v1.30.0) (2021-12-15)
 
 
