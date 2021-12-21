@@ -60,7 +60,8 @@ yarn.lock
 **/generated
 !libs/generated
 
-# Hapify folder
+# Hapify
+hapify.json
 **/prisma/schemas/generated.prisma.hpf
 **/hapify
 !**/hapify/validator.js

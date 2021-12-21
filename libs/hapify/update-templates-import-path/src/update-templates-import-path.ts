@@ -66,7 +66,5 @@ export async function hapifyUpdateTemplatesImportPath(
 
   if (importReplacements) {
     await processGlob(path, importReplacements);
-  } else {
-    throw new Error(`No importReplacements key found in hapify config`);
   }
 }

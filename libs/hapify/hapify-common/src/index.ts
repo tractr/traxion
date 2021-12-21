@@ -1,1 +1,1 @@
-export * from './lib/get-hapify-config';
+export * from './get-hapify-config';

@@ -1,7 +1,7 @@
 const {
   hapifyDefaultConfig,
   getValidatorPath,
-} = require('../../dist/libs/config/hapify/src');
+} = require('@tractr/hapify-config');
 
 module.exports = {
   ...hapifyDefaultConfig,
@@ -9,7 +9,7 @@ module.exports = {
   name: 'Shared lib that host all hapify shared modules',
   description: 'A lib that will host all shared file from hapify',
   logo: 'https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png',
-  validatorPath: getValidatorPath(process.cwd()),
+  validatorPath: getValidatorPath(__dirname),
   project: '../../hapify-models.json',
   extends: [
     '../hapify/templates/models',
