@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.31.0](https://github.com/tractr/stack/compare/v1.30.0...v1.31.0) (2021-12-21)
+
+
+### Features
+
+* add generate executor schematics ([#334](https://github.com/tractr/stack/issues/334)) ([16173c9](https://github.com/tractr/stack/commit/16173c999f27cc8a503ba8d261c6e26553c81001))
+
+
+
 # [1.30.0](https://github.com/tractr/stack/compare/v1.29.3...v1.30.0) (2021-12-15)
 
 
