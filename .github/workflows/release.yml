@@ -43,6 +43,12 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm ci --no-audit --no-progress
 
+      # We install our dependencies
+      - name: Run npm generate
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run generate
+
       # We build our code base
       - name: Run nx build
         run: npx nx build

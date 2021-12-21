@@ -65,7 +65,7 @@ describe('update templates import path', () => {
     ).toEqual(true);
   });
 
-  it('should failed because hapify config has no importReplacementsKeys', async () => {
+  it('should not failed because hapify config has no importReplacementsKeys', async () => {
     const basePath = BASE_PATH;
     const randomString = uuid.v4();
     const pattern = '@tractr/test';
@@ -91,11 +91,9 @@ describe('update templates import path', () => {
       `module.exports = ${JSON.stringify(content)}`,
     );
 
-    await expect(async () =>
-      hapifyUpdateTemplatesImportPath(
-        `${basePath}/tmp/${randomString}`,
-        `${basePath}/tmp/${randomString}`,
-      ),
-    ).rejects.toThrow(`No importReplacements key found in hapify config`);
+    await hapifyUpdateTemplatesImportPath(
+      `${basePath}/tmp/${randomString}`,
+      `${basePath}/tmp/${randomString}`,
+    );
   });
 });
