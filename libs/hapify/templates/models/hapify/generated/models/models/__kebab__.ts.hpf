@@ -166,7 +166,7 @@ export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
   <<endif>>
 
   <<if field datetime>>
-  @IsDate({}, <<=listModifier(field)>>)
+  @IsDate(<<=listModifier(field)>>)
   @TransformStringToDate()
   <<endif>>
 
@@ -206,7 +206,7 @@ export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
 <<<
 function typedProperty(f) {
   let out = f.names.camel;
-  if (f.type === "entity") out += "?: ";
+  if (f.type === "entity") out += "?: ";
   else if (f.nullable) out += ": ";
   else out += "!: ";
   if (f.type === "boolean") out += "boolean";
