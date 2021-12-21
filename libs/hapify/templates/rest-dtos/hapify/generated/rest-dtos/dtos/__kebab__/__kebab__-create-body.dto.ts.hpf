@@ -126,7 +126,7 @@ export class <<Model pascal>>CreateBodyDto {
   <<endif>>
 
   <<if field datetime>>
-  @IsDate({}, <<=listModifier(field)>>)
+  @IsDate(<<=listModifier(field)>>)
   @TransformStringToDate()
   <<endif>>
 
