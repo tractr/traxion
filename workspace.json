@@ -615,20 +615,14 @@
           "dependsOn": [
             {
               "projects": "dependencies",
-              "target": "build"
+              "target": "pregenerate"
             }
           ],
-          "executor": "@nrwl/workspace:run-commands",
+          "executor": "./dist/libs/schematics:generate",
           "options": {
-            "commands": [
-              "npx rimraf generated",
-              "cp -r ../../dist/libs/hapify/hapify-common ../../node_modules/@tractr",
-              "node ../../dist/libs/hapify/generate-config/src/index.js",
-              "npx hpf generate",
-              "node ../../dist/libs/hapify/update-templates-import-path/src/index.js"
-            ],
             "cwd": "libs/generated",
-            "parallel": false
+            "inputHapifyGeneratedPath": "generated",
+            "outputGeneratedPath": "generated"
           }
         },
         "test": {
@@ -674,9 +668,19 @@
           }
         },
         "pregenerate": {
+          "dependsOn": [
+            {
+              "projects": "self",
+              "target": "build"
+            }
+          ],
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["npx nx run hapify-common:build"]
+            "commands": [
+              "rm -rf node_modules/@tractr/hapify-common",
+              "mkdir -p node_modules/@tractr",
+              "cp -rf dist/libs/hapify/hapify-common/ node_modules/@tractr/hapify-common/"
+            ]
           }
         },
         "test": {
@@ -715,9 +719,19 @@
           }
         },
         "pregenerate": {
+          "dependsOn": [
+            {
+              "projects": "self",
+              "target": "build"
+            }
+          ],
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["npx nx run hapify-config:build"]
+            "commands": [
+              "rm -rf node_modules/@tractr/hapify-config",
+              "mkdir -p node_modules/@tractr",
+              "cp -rf dist/libs/config/hapify/ node_modules/@tractr/hapify-config/"
+            ]
           }
         },
         "publish": {
@@ -742,12 +756,6 @@
       "sourceRoot": "libs/hapify/generate-config/src",
       "targets": {
         "build": {
-          "dependsOn": [
-            {
-              "projects": "self",
-              "target": "prebuild"
-            }
-          ],
           "executor": "@nrwl/node:package",
           "options": {
             "assets": ["libs/hapify/generate-config/*.md"],
@@ -774,25 +782,20 @@
             "lintFilePatterns": ["libs/hapify/generate-config/**/*.ts"]
           }
         },
-        "prebuild": {
+        "pregenerate": {
           "dependsOn": [
             {
-              "projects": "dependencies",
+              "projects": "self",
               "target": "build"
             }
           ],
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cp -r ../../dist/libs/hapify/hapify-common ../../node_modules/@tractr"
-            ],
-            "cwd": "libs/hapify"
-          }
-        },
-        "pregenerate": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": ["npx nx run hapify-generate-config:build"]
+              "rm -rf node_modules/@tractr/hapify-generate-config",
+              "mkdir -p node_modules/@tractr",
+              "cp -rf dist/libs/hapify/generate-config/ node_modules/@tractr/hapify-generate-config/"
+            ]
           }
         },
         "publish": {
@@ -836,6 +839,12 @@
           },
           "outputs": ["{options.outputPath}"]
         },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx build hapify-templates-angular-rext-client"]
+          }
+        },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
           "options": {
@@ -868,6 +877,12 @@
             "tsConfig": "libs/hapify/templates/casl/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx build hapify-templates-casl"]
+          }
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -910,6 +925,12 @@
           },
           "outputs": ["{options.outputPath}"]
         },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx build hapify-templates-dbml"]
+          }
+        },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
           "options": {
@@ -942,6 +963,12 @@
             "tsConfig": "libs/hapify/templates/models/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx build hapify-templates-models"]
+          }
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -976,6 +1003,12 @@
           },
           "outputs": ["{options.outputPath}"]
         },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx build hapify-templates-nestjs-models"]
+          }
+        },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
           "options": {
@@ -1009,6 +1042,12 @@
           },
           "outputs": ["{options.outputPath}"]
         },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx build hapify-templates-nestjs-models-common"]
+          }
+        },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
           "options": {
@@ -1041,6 +1080,12 @@
             "tsConfig": "libs/hapify/templates/nestjs-models-rest/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx build hapify-templates-nestjs-models-rest"]
+          }
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -1083,6 +1128,12 @@
           },
           "outputs": ["{options.outputPath}"]
         },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx build hapify-templates-prisma"]
+          }
+        },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
           "options": {
@@ -1115,6 +1166,12 @@
             "tsConfig": "libs/hapify/templates/react-admin/tsconfig.lib.json"
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx build hapify-templates-react-admin"]
+          }
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -1149,6 +1206,12 @@
           },
           "outputs": ["{options.outputPath}"]
         },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx build hapify-templates-rest-dtos"]
+          }
+        },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
           "options": {
@@ -1182,6 +1245,12 @@
           },
           "outputs": ["{options.outputPath}"]
         },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx build hapify-templates-rext-client"]
+          }
+        },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
           "options": {
@@ -1196,12 +1265,6 @@
       "sourceRoot": "libs/hapify/update-templates-import-path/src",
       "targets": {
         "build": {
-          "dependsOn": [
-            {
-              "projects": "self",
-              "target": "prebuild"
-            }
-          ],
           "executor": "@nrwl/node:package",
           "options": {
             "assets": ["libs/hapify/update-templates-import-path/*.md"],
@@ -1230,25 +1293,20 @@
             ]
           }
         },
-        "prebuild": {
+        "pregenerate": {
           "dependsOn": [
             {
-              "projects": "dependencies",
+              "projects": "self",
               "target": "build"
             }
           ],
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cp -r ../../dist/libs/hapify/hapify-common ../../node_modules/@tractr"
-            ],
-            "cwd": "libs/hapify"
-          }
-        },
-        "pregenerate": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": ["npx nx run hapify-update-templates-import-path:build"]
+              "rm -rf node_modules/@tractr/update-templates-import-path",
+              "mkdir -p node_modules/@tractr",
+              "cp -rf dist/libs/hapify/update-templates-import-path/ node_modules/@tractr/update-templates-import-path/"
+            ]
           }
         },
         "test": {
@@ -1611,17 +1669,13 @@
         "generate": {
           "dependsOn": [
             {
-              "projects": "dependencies",
+              "projects": "self",
               "target": "pregenerate"
             }
           ],
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "npx rimraf generated",
-              "cp -r ../../dist/libs/hapify/hapify-common ../../node_modules/@tractr",
-              "node ../../dist/libs/hapify/generate-config/src/index.js",
-              "npx hpf generate",
               "npx prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
               "npx prisma format",
               "npx prisma generate"
@@ -1634,6 +1688,22 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/prisma/**/*.ts"]
+          }
+        },
+        "pregenerate": {
+          "dependsOn": [
+            {
+              "projects": "dependencies",
+              "target": "pregenerate"
+            }
+          ],
+          "executor": "./dist/libs/schematics:generate",
+          "options": {
+            "cleanFirst": false,
+            "cwd": "libs/prisma",
+            "format": false,
+            "inputHapifyGeneratedPath": "prisma/schemas",
+            "outputGeneratedPath": "prisma/schemas"
           }
         },
         "test": {
@@ -1863,6 +1933,12 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/schematics/**/*.ts"]
+          }
+        },
+        "pregenerate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx run schematics:build"]
           }
         },
         "test": {
@@ -2753,6 +2829,17 @@
     "workspace": {
       "root": ".",
       "targets": {
+        "hpf-serve": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "nx run-many --target pregenerate --projects hapify-config",
+              "npx hpf serve"
+            ],
+            "cwd": ".",
+            "parallel": false
+          }
+        },
         "release": {
           "executor": "@jscutlery/semver:version",
           "options": {

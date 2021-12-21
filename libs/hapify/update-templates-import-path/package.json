@@ -9,7 +9,7 @@
   "license": "UNLICENSED",
   "main": "./src/update-templates-import-path.js",
   "bin": {
-    "hpf-update-templates-import-path": "./src/index.js"
+    "hpf-update-templates-import-path": "./src/hpf-update-templates-import-path.js"
   },
   "publishConfig": {
     "access": "restricted",
