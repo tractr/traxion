@@ -116,7 +116,7 @@ export class <<Model pascal>>CountQueryDto {
   <<endif>>
 
   <<if field datetime>>
-  @IsDate({}, <<=listModifier(field)>>)
+  @IsDate(<<=listModifier(field)>>)
   @TransformStringToDate()
   <<endif>>
 
