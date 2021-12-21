@@ -68,8 +68,10 @@
         "nestjs-testing",
         "angular-tools",
         "hapify-config",
+        "hapify-common",
         "hapify-generate-config",
-        "hapify-update-templates-import-path"
+        "hapify-update-templates-import-path",
+        "schematics"
       ],
       "tags": ["scope:generate"]
     },
@@ -146,8 +148,11 @@
       "implicitDependencies": [
         "hapify-templates-prisma",
         "hapify-config",
+        "hapify-common",
+        "hapify-generate-config",
+        "schematics",
         "generated",
-        "hapify-generate-config"
+        "hapify-update-templates-import-path"
       ],
       "tags": ["scope:generated"]
     },

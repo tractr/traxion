@@ -54,6 +54,7 @@ export async function getHapifyOptions(
   };
 
   const writeFile = join(currentDirectory, 'hapify.json');
+
   await writeJSON(writeFile, hapifyJson, {
     spaces: 2,
   });
