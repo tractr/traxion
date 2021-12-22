@@ -12,7 +12,7 @@ export class ErrorService {
   /**
    * Handle an error
    */
-  handle(error: Error | Error[]): void {
+  handle(error: unknown | Error | Error[]): void {
     if (error instanceof HttpErrorResponse) {
       this.handleHttp(error);
     } else {

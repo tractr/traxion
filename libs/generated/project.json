@@ -1,0 +1,98 @@
+{
+  "implicitDependencies": [
+    "common",
+    "hapify-templates-models",
+    "hapify-templates-rest-dtos",
+    "hapify-templates-nestjs-models",
+    "hapify-templates-nestjs-models-common",
+    "hapify-templates-nestjs-models-rest",
+    "hapify-templates-rext-client",
+    "hapify-templates-angular-rext-client",
+    "nestjs-core",
+    "nestjs-database",
+    "nestjs-authentication",
+    "nestjs-casl",
+    "nestjs-testing",
+    "angular-tools",
+    "hapify-config",
+    "hapify-common",
+    "hapify-generate-config",
+    "hapify-update-templates-import-path",
+    "schematics"
+  ],
+  "projectType": "library",
+  "root": "libs/generated",
+  "sourceRoot": "libs/generated/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": ["libs/generated/*.md"],
+        "main": "libs/generated/src/index.ts",
+        "outputPath": "dist/libs/generated",
+        "packageJson": "libs/generated/package.json",
+        "tsConfig": "libs/generated/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "generate": {
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "pregenerate"
+        }
+      ],
+      "executor": "./dist/libs/schematics:generate",
+      "options": {
+        "cwd": "libs/generated",
+        "inputHapifyGeneratedPath": "generated",
+        "outputGeneratedPath": "generated"
+      }
+    },
+    "pregenerate": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "rm -rf node_modules/@tractr/{hapify-config,hapify-generate-config,hapify-common,hapify-update-templates-import-path}",
+            "description": "Delete previous Hapify Common from node modules",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "mkdir -p node_modules/@tractr",
+            "description": "Ensure the directory exists before the copy",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "cp -rf dist/libs/config/hapify/ node_modules/@tractr/hapify-config/",
+            "description": "Copy the current build to node_modules",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "cp -rf dist/libs/hapify/generate-config/ node_modules/@tractr/hapify-generate-config/",
+            "description": "Copy the current build to node_modules",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "cp -rf dist/libs/hapify/hapify-common/ node_modules/@tractr/hapify-common/",
+            "description": "Copy the current build to node_modules",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "cp -rf dist/libs/hapify/update-templates-import-path/ node_modules/@tractr/update-templates-import-path/",
+            "description": "Copy the current build to node_modules",
+            "forwardAllArgs": false
+          }
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/generated/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/generated"]
+    }
+  }
+}

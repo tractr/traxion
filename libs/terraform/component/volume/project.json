@@ -1,0 +1,39 @@
+{
+  "projectType": "library",
+  "root": "libs/terraform/component/volume",
+  "sourceRoot": "libs/terraform/component/volume/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": ["libs/terraform/component/volume/*.md"],
+        "main": "libs/terraform/component/volume/src/index.ts",
+        "outputPath": "dist/libs/terraform/component/volume",
+        "packageJson": "libs/terraform/component/volume/package.json",
+        "tsConfig": "libs/terraform/component/volume/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/terraform/component/volume/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "restricted"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/terraform/component/volume/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/terraform/component/volume"]
+    }
+  }
+}

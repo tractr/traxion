@@ -1,0 +1,42 @@
+{
+  "projectType": "library",
+  "root": "libs/config/eslint",
+  "sourceRoot": "libs/config/eslint/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": [
+          "libs/config/eslint/*.md",
+          "libs/config/eslint/.eslintrc.js"
+        ],
+        "main": "libs/config/eslint/src/index.ts",
+        "outputPath": "dist/libs/config/eslint",
+        "packageJson": "libs/config/eslint/package.json",
+        "tsConfig": "libs/config/eslint/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/config/eslint/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/config/eslint/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/config/eslint"]
+    }
+  }
+}

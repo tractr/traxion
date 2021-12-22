@@ -1,0 +1,44 @@
+{
+  "projectType": "library",
+  "root": "libs/config/commit",
+  "sourceRoot": "libs/config/commit/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": [
+          "libs/config/commit/*.md",
+          "libs/config/commit/bin/*.js",
+          "libs/config/commit/.commitlintrc.js",
+          "libs/config/commit/types.json"
+        ],
+        "main": "libs/config/commit/src/index.ts",
+        "outputPath": "dist/libs/config/commit",
+        "packageJson": "libs/config/commit/package.json",
+        "tsConfig": "libs/config/commit/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/config/commit/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/config/commit/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/config/commit"]
+    }
+  }
+}

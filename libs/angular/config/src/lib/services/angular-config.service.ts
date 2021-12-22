@@ -22,6 +22,11 @@ export function AngularConfigServiceFactory<
   T extends AngularConfig = AngularConfig,
 >(angularConfigOptions: AngularConfigOptions<T>): AngularConfigService<T> {
   class AnonymousAngularConfigService extends Unsubscriber {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    configuration: T = (window as any)[
+      ANGULAR_CONFIGURATION_SESSION_STORAGE
+    ] as T;
+
     constructor() {
       super();
 
@@ -30,15 +35,12 @@ export function AngularConfigServiceFactory<
       });
     }
 
-    refresh$ = new BehaviorSubject<T | undefined>(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (window as any)[ANGULAR_CONFIGURATION_SESSION_STORAGE],
-    );
+    refresh$ = new BehaviorSubject<T | undefined>(this.configuration);
 
     value$ = new BehaviorSubject<T | undefined>(undefined);
 
     getConfig$ = fromFetch(angularConfigOptions.apiEndpoint).pipe(
-      mergeMap((response) => from(response.json())),
+      mergeMap((response) => from(response.json() as Promise<AngularConfig>)),
       map(angularConfigOptions.getConfig),
     );
 
