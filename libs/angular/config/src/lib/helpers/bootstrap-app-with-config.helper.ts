@@ -19,7 +19,7 @@ export async function bootstrapAppWithConfig<T>(
     ANGULAR_CONFIGURATION_SESSION_STORAGE,
   );
 
-  let config;
+  let config: AngularConfig | undefined;
 
   if (typeof stringifyConfiguration === 'string') {
     try {
@@ -28,7 +28,7 @@ export async function bootstrapAppWithConfig<T>(
     } catch {}
   }
 
-  if (!config) {
+  if (typeof config === 'undefined') {
     config = await fetchAppConfigJson(options?.appConfigUrl);
 
     sessionStorage.setItem(
@@ -37,10 +37,11 @@ export async function bootstrapAppWithConfig<T>(
     );
   }
 
-  config = options?.getConfig ? options?.getConfig(config) : config;
+  const angularConfig =
+    options?.getConfig && config ? options?.getConfig(config) : undefined;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (window as any)[ANGULAR_CONFIGURATION_SESSION_STORAGE] = config;
+  (window as any)[ANGULAR_CONFIGURATION_SESSION_STORAGE] = angularConfig;
 
   return platformBrowserDynamic().bootstrapModule(AppModule);
 }

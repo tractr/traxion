@@ -6,7 +6,7 @@
     "target": "es2015",
     "types": ["node"]
   },
-  "exclude": ["**/*.spec.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts"],
   "extends": "./tsconfig.json",
   "include": ["**/*.ts"]
 }

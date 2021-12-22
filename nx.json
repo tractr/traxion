@@ -2,6 +2,37 @@
   "affected": {
     "defaultBase": "main"
   },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "pwa",
+  "generators": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "e2eTestRunner": "cypress",
+      "linter": "eslint",
+      "style": "less",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "less"
+    },
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "style": "less",
+      "unitTestRunner": "jest"
+    }
+  },
   "implicitDependencies": {
     ".eslintrc.json": "*",
     "hapify-models.json": "*",
@@ -14,237 +45,11 @@
     "workspace.json": "*"
   },
   "npmScope": "tractr",
-  "projects": {
-    "angular-authentication": {
-      "tags": ["scope:angular"]
-    },
-    "angular-casl": {
-      "tags": []
-    },
-    "angular-components": {
-      "tags": ["scope:angular"]
-    },
-    "angular-config": {
-      "tags": []
-    },
-    "angular-file-storage": {
-      "tags": []
-    },
-    "angular-form": {
-      "tags": ["scope:angular"]
-    },
-    "angular-tools": {
-      "tags": ["scope:angular"]
-    },
-    "api": {
-      "tags": ["scope:app"]
-    },
-    "commit-config": {
-      "tags": ["scope:config"]
-    },
-    "common": {
-      "tags": ["scope:common"]
-    },
-    "docs": {
-      "tags": []
-    },
-    "eslint-config": {
-      "tags": ["scope:config"]
-    },
-    "generated": {
-      "implicitDependencies": [
-        "common",
-        "hapify-templates-models",
-        "hapify-templates-rest-dtos",
-        "hapify-templates-nestjs-models",
-        "hapify-templates-nestjs-models-common",
-        "hapify-templates-nestjs-models-rest",
-        "hapify-templates-rext-client",
-        "hapify-templates-angular-rext-client",
-        "nestjs-core",
-        "nestjs-database",
-        "nestjs-authentication",
-        "nestjs-casl",
-        "nestjs-testing",
-        "angular-tools",
-        "hapify-config",
-        "hapify-common",
-        "hapify-generate-config",
-        "hapify-update-templates-import-path",
-        "schematics"
-      ],
-      "tags": ["scope:generate"]
-    },
-    "hapify-common": {
-      "tags": []
-    },
-    "hapify-config": {
-      "tags": ["scope:config"]
-    },
-    "hapify-generate-config": {
-      "tags": ["scope:config"]
-    },
-    "hapify-templates-angular-rext-client": {
-      "tags": ["scope:template"]
-    },
-    "hapify-templates-casl": {
-      "tags": ["scope:template"]
-    },
-    "hapify-templates-dbml": {
-      "tags": ["scope:template"]
-    },
-    "hapify-templates-models": {
-      "tags": ["scope:template"]
-    },
-    "hapify-templates-nestjs-models": {
-      "tags": ["scope:template"]
-    },
-    "hapify-templates-nestjs-models-common": {
-      "tags": ["scope:template"]
-    },
-    "hapify-templates-nestjs-models-rest": {
-      "tags": ["scope:template"]
-    },
-    "hapify-templates-prisma": {
-      "tags": ["scope:template"]
-    },
-    "hapify-templates-react-admin": {
-      "tags": []
-    },
-    "hapify-templates-rest-dtos": {
-      "tags": ["scope:template"]
-    },
-    "hapify-templates-rext-client": {
-      "tags": ["scope:template"]
-    },
-    "hapify-update-templates-import-path": {
-      "tags": []
-    },
-    "nestjs-authentication": {
-      "tags": ["scope:nestjs"]
-    },
-    "nestjs-casl": {
-      "tags": ["scope:nestjs"]
-    },
-    "nestjs-core": {
-      "tags": ["scope:nestjs"]
-    },
-    "nestjs-database": {
-      "tags": ["scope:nestjs"]
-    },
-    "nestjs-file-storage": {
-      "tags": ["scope:nestjs"]
-    },
-    "nestjs-mailer": {
-      "tags": ["scope:nestjs"]
-    },
-    "nestjs-testing": {
-      "tags": ["scope:nestjs"]
-    },
-    "prettier-config": {
-      "tags": ["scope:config"]
-    },
-    "prisma": {
-      "implicitDependencies": [
-        "hapify-templates-prisma",
-        "hapify-config",
-        "hapify-common",
-        "hapify-generate-config",
-        "schematics",
-        "generated",
-        "hapify-update-templates-import-path"
-      ],
-      "tags": ["scope:generated"]
-    },
-    "pwa": {
-      "tags": ["scope:app"]
-    },
-    "pwa-e2e": {
-      "implicitDependencies": ["pwa"],
-      "tags": ["scope:app"]
-    },
-    "schematics": {
-      "tags": []
-    },
-    "terraform": {
-      "tags": []
-    },
-    "terraform-aws-stack": {
-      "tags": []
-    },
-    "terraform-component-aws": {
-      "tags": []
-    },
-    "terraform-component-deployment": {
-      "tags": []
-    },
-    "terraform-component-deployment-trigger": {
-      "tags": []
-    },
-    "terraform-component-entrypoint": {
-      "tags": []
-    },
-    "terraform-component-logs": {
-      "tags": []
-    },
-    "terraform-component-owner-pictures": {
-      "tags": []
-    },
-    "terraform-component-private-dns": {
-      "tags": []
-    },
-    "terraform-component-s3": {
-      "tags": []
-    },
-    "terraform-component-s3-user": {
-      "tags": []
-    },
-    "terraform-component-secrets": {
-      "tags": []
-    },
-    "terraform-component-volume": {
-      "tags": []
-    },
-    "terraform-group-network": {
-      "tags": []
-    },
-    "terraform-group-pool": {
-      "tags": []
-    },
-    "terraform-group-registry": {
-      "tags": []
-    },
-    "terraform-group-zone": {
-      "tags": []
-    },
-    "terraform-service-api": {
-      "tags": []
-    },
-    "terraform-service-ecs": {
-      "tags": []
-    },
-    "terraform-service-postgres": {
-      "tags": []
-    },
-    "terraform-service-pwa": {
-      "tags": []
-    },
-    "terraform-service-reverse-proxy": {
-      "tags": []
-    },
-    "workspace": {}
-  },
   "targetDependencies": {
     "build": [
       {
         "projects": "dependencies",
         "target": "build"
-      }
-    ],
-    "generate": [
-      {
-        "projects": "dependencies",
-        "target": "pregenerate"
       }
     ],
     "publish": [
@@ -257,7 +62,8 @@
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "parallel": 3
       },
       "runner": "@nrwl/workspace/tasks-runners/default"
     }

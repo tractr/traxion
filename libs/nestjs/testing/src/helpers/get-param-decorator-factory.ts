@@ -10,5 +10,6 @@ export function getParamDecoratorFactory(decorator: Function): Function {
   }
 
   const args = Reflect.getMetadata(ROUTE_ARGS_METADATA, Test, 'test');
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   return args[Object.keys(args)[0]].factory;
 }

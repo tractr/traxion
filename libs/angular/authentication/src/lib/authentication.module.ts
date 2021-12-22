@@ -62,7 +62,9 @@ export class AngularAuthenticationModule extends ModuleOptionsFactory<
   }: AuthenticationPublicOptions &
     UserOptions<U, CCU>): ModuleWithProviders<AngularAuthenticationModule> {
     return this.mergeModuleWithProvider(
-      super.register(options),
+      super.register(
+        options,
+      ) as ModuleWithProviders<AngularAuthenticationModule>,
       this.createUserProvider(user),
     );
   }
@@ -76,7 +78,9 @@ export class AngularAuthenticationModule extends ModuleOptionsFactory<
   }: AuthenticationPublicOptions &
     UserOptions<U, CCU>): ModuleWithProviders<AngularAuthenticationModule> {
     return this.mergeModuleWithProvider(
-      super.forRoot(options),
+      super.forRoot(
+        options,
+      ) as ModuleWithProviders<AngularAuthenticationModule>,
       this.createUserProvider(user),
     );
   }
@@ -90,7 +94,9 @@ export class AngularAuthenticationModule extends ModuleOptionsFactory<
   }: AsyncOptions<AuthenticationOptions, AuthenticationPublicOptions> &
     UserOptions<U, CCU>): ModuleWithProviders<AngularAuthenticationModule> {
     return this.mergeModuleWithProvider(
-      super.registerAsync(options),
+      super.registerAsync(
+        options,
+      ) as ModuleWithProviders<AngularAuthenticationModule>,
       this.createUserProvider(user),
     );
   }
@@ -104,7 +110,9 @@ export class AngularAuthenticationModule extends ModuleOptionsFactory<
   }: AsyncOptions<AuthenticationOptions, AuthenticationPublicOptions> &
     UserOptions<U, CCU>): ModuleWithProviders<AngularAuthenticationModule> {
     return this.mergeModuleWithProvider(
-      super.forRootAsync(options),
+      super.forRootAsync(
+        options,
+      ) as ModuleWithProviders<AngularAuthenticationModule>,
       this.createUserProvider(user),
     );
   }

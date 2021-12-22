@@ -18,7 +18,7 @@ export class ExplainErrorsService {
     private translateService: TranslateService,
     private errorService: ErrorService,
   ) {
-    this.defineAutoTips().catch((e) => this.errorService.handle(e));
+    this.defineAutoTips().catch((e: unknown) => this.errorService.handle(e));
   }
 
   private async defineAutoTips() {
