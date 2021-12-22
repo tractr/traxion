@@ -199,7 +199,7 @@ export function ModuleOptionsFactory<
       if (options.useFactory) {
         return {
           provide: moduleOptionsProvide,
-          useFactory: async (...args) =>
+          useFactory: async (...args: unknown[]) =>
             validate(
               await ((options.useFactory &&
                 options.useFactory(defaultOptions, ...args)) ||

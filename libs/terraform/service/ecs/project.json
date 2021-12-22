@@ -1,0 +1,39 @@
+{
+  "projectType": "library",
+  "root": "libs/terraform/service/ecs",
+  "sourceRoot": "libs/terraform/service/ecs/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": ["libs/terraform/service/ecs/*.md"],
+        "main": "libs/terraform/service/ecs/src/index.ts",
+        "outputPath": "dist/libs/terraform/service/ecs",
+        "packageJson": "libs/terraform/service/ecs/package.json",
+        "tsConfig": "libs/terraform/service/ecs/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/terraform/service/ecs/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "restricted"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/terraform/service/ecs/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/terraform/service/ecs"]
+    }
+  }
+}

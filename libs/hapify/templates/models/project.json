@@ -1,0 +1,39 @@
+{
+  "projectType": "library",
+  "root": "libs/hapify/templates/models",
+  "sourceRoot": "libs/hapify/templates/models/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": [
+          "libs/hapify/templates/models/*.md",
+          "libs/hapify/templates/models/index.js",
+          "libs/hapify/templates/models/.hapifyrc.js",
+          {
+            "glob": "**/*",
+            "input": "libs/hapify/templates/models/hapify",
+            "output": "hapify"
+          }
+        ],
+        "main": "libs/hapify/templates/models/index.js",
+        "outputPath": "dist/libs/hapify/templates/models",
+        "packageJson": "libs/hapify/templates/models/package.json",
+        "tsConfig": "libs/hapify/templates/models/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "pregenerate": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["nx build hapify-templates-models"]
+      }
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    }
+  }
+}

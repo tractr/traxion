@@ -87,3 +87,6 @@ apps/pwa/src/assets/app-config.json
 # Generated Docusaurus files
 .docusaurus/
 .cache-loader/
+
+# Angular
+.angular

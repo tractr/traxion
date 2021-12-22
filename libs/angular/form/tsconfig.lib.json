@@ -8,7 +8,7 @@
     "target": "es2015",
     "types": []
   },
-  "exclude": ["src/test-setup.ts", "**/*.spec.ts"],
+  "exclude": ["src/test-setup.ts", "**/*.spec.ts", "**/*.test.ts"],
   "extends": "./tsconfig.json",
   "include": ["**/*.ts"]
 }

@@ -45,7 +45,7 @@ export class ResetPasswordComponent {
         } else if (err.error.statusCode === 401) {
           this.form.get('password')?.setErrors({ unauthorized: true });
         } else {
-          this.message.create('error', err.message);
+          this.message.create('error', err.message as string);
         }
         this.processing = false;
       });

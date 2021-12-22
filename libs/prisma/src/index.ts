@@ -2,16 +2,16 @@ import { NestFactory } from '@nestjs/core';
 import { UserRoles } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
-// eslint-disable-next-line
-import { AppModule } from '../../../apps/api/src/app/app.module';
-
+import { ModelsModule } from '@generated/nestjs-models';
 import { seedUsers } from '@generated/nestjs-models-common/mock';
-import { Logger } from '@tractr/nestjs-core';
-import { DatabaseService } from '@tractr/nestjs-database';
+import { Logger, LoggerModule } from '@tractr/nestjs-core';
+import { DatabaseModule, DatabaseService } from '@tractr/nestjs-database';
 
 export async function seed() {
   // Instanciate nest app
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create({
+    imports: [ModelsModule.register(), DatabaseModule.register(), LoggerModule],
+  });
 
   // Set custom logger service
   const logger = await app.resolve(Logger);

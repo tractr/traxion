@@ -1,0 +1,42 @@
+{
+  "projectType": "library",
+  "root": "libs/config/prettier",
+  "sourceRoot": "libs/config/prettier/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": [
+          "libs/config/prettier/*.md",
+          "libs/config/prettier/.prettierrc.js"
+        ],
+        "main": "libs/config/prettier/src/index.ts",
+        "outputPath": "dist/libs/config/prettier",
+        "packageJson": "libs/config/prettier/package.json",
+        "tsConfig": "libs/config/prettier/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/config/prettier/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/config/prettier/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/config/prettier"]
+    }
+  }
+}

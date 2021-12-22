@@ -1,0 +1,63 @@
+{
+  "projectType": "application",
+  "root": "apps/api",
+  "sourceRoot": "apps/api/src",
+  "targets": {
+    "build": {
+      "configurations": {
+        "production": {
+          "extractLicenses": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/api/src/environments/environment.ts",
+              "with": "apps/api/src/environments/environment.prod.ts"
+            }
+          ],
+          "inspect": false,
+          "optimization": true
+        }
+      },
+      "executor": "@nrwl/node:build",
+      "options": {
+        "assets": ["apps/api/src/assets"],
+        "main": "apps/api/src/main.ts",
+        "outputPath": "dist/apps/api",
+        "tsConfig": "apps/api/tsconfig.app.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "cli": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "../../node_modules/.bin/ts-node -r tsconfig-paths/register --project tsconfig.app.json src/cli.ts"
+        ],
+        "cwd": "apps/api",
+        "parallel": false
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/api/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "api:build",
+        "inspect": true,
+        "port": 9229
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "apps/api/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/apps/api"]
+    }
+  }
+}

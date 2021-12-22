@@ -1,0 +1,49 @@
+{
+  "prefix": "tractr",
+  "projectType": "library",
+  "root": "libs/angular/file-storage",
+  "sourceRoot": "libs/angular/file-storage/src",
+  "targets": {
+    "build": {
+      "configurations": {
+        "development": {
+          "tsConfig": "libs/angular/file-storage/tsconfig.lib.json"
+        },
+        "production": {
+          "tsConfig": "libs/angular/file-storage/tsconfig.lib.prod.json"
+        }
+      },
+      "defaultConfiguration": "production",
+      "executor": "@nrwl/angular:package",
+      "options": {
+        "project": "libs/angular/file-storage/ng-package.json"
+      },
+      "outputs": ["dist/libs/angular/file-storage"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular/file-storage/src/**/*.ts",
+          "libs/angular/file-storage/src/**/*.html"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public",
+        "buildTarget": "production"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/angular/file-storage/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/angular/file-storage"]
+    }
+  }
+}
