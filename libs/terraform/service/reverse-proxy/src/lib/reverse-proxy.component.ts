@@ -1,8 +1,4 @@
-import {
-  EcsServiceConfig,
-  EcsTaskDefinitionConfig,
-  SecurityGroupConfig,
-} from '@cdktf/provider-aws';
+import { ecs, vpc } from '@cdktf/provider-aws';
 
 import {
   ReverseProxyComponentConfig,
@@ -16,7 +12,7 @@ export class ReverseProxyComponent extends ServiceComponent<
   ReverseProxyComponentConfig,
   ReverseProxyComponentDefaultConfig
 > {
-  protected getSecurityGroupConfig(): SecurityGroupConfig {
+  protected getSecurityGroupConfig(): vpc.SecurityGroupConfig {
     return {
       ...super.getSecurityGroupConfig(),
       ingress: [
@@ -37,14 +33,14 @@ export class ReverseProxyComponent extends ServiceComponent<
     };
   }
 
-  protected getEcsTaskDefinitionConfig(): EcsTaskDefinitionConfig {
+  protected getEcsTaskDefinitionConfig(): ecs.EcsTaskDefinitionConfig {
     return {
       ...super.getEcsTaskDefinitionConfig(),
       taskRoleArn: this.config.taskRoleArn,
     };
   }
 
-  protected getEcsServiceConfig(): EcsServiceConfig {
+  protected getEcsServiceConfig(): ecs.EcsServiceConfig {
     return {
       ...super.getEcsServiceConfig(),
       loadBalancer: [

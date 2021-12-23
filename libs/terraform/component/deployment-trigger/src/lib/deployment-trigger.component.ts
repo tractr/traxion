@@ -1,5 +1,4 @@
 import { snake } from 'case';
-import { ConstructOptions } from 'constructs';
 
 import { DeploymentTriggerEventComponent } from './deployment-trigger-event.component';
 import { DeploymentTriggerRoleComponent } from './deployment-trigger-role.component';
@@ -13,7 +12,7 @@ export interface Repository {
   repositoryName: string;
   imageTag: string;
 }
-export interface DeploymentTriggerComponentConfig extends ConstructOptions {
+export interface DeploymentTriggerComponentConfig {
   codepipelineArn: string;
   repositories: Repository[];
 }

@@ -26,7 +26,7 @@
     "Unsubscriber",
     "upsert"
   ],
-  "debug.javascript.autoAttachFilter": "smart",
+  "debug.javascript.autoAttachFilter": "disabled",
   "debug.javascript.autoAttachSmartPattern": [
     "!**/{node_modules,npm-global,.yarn,.nvm}/**",
     "**/$KNOWN_TOOLS$/**",

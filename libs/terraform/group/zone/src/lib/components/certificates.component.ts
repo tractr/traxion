@@ -1,18 +1,12 @@
-import {
-  AcmCertificate,
-  AcmCertificateValidation,
-  DataAwsRoute53Zone,
-  Route53Record,
-} from '@cdktf/provider-aws';
+import { acm, route53 } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export interface CertificatesComponentConfig extends ConstructOptions {
+export interface CertificatesComponentConfig {
   domainName: string;
 }
 
@@ -20,13 +14,13 @@ export interface CertificatesComponentConfig extends ConstructOptions {
  * This component create an SSL certificate and validate it using Route53
  */
 export class CertificatesComponent extends AwsComponent<CertificatesComponentConfig> {
-  protected readonly acmCertificate: AcmCertificate;
+  protected readonly acmCertificate: acm.AcmCertificate;
 
-  protected readonly acmCertificateValidation: AcmCertificateValidation;
+  protected readonly acmCertificateValidation: acm.AcmCertificateValidation;
 
-  protected readonly route53Record: Route53Record;
+  protected readonly route53Record: route53.Route53Record;
 
-  protected route53Zone: DataAwsRoute53Zone;
+  protected route53Zone: route53.DataAwsRoute53Zone;
 
   constructor(
     scope: AwsProviderConstruct,
@@ -42,7 +36,7 @@ export class CertificatesComponent extends AwsComponent<CertificatesComponentCon
   }
 
   protected getRoute53Zone() {
-    return new DataAwsRoute53Zone(this, 'r53', {
+    return new route53.DataAwsRoute53Zone(this, 'r53', {
       provider: this.provider,
       name: this.config.domainName,
       privateZone: false,
@@ -50,7 +44,7 @@ export class CertificatesComponent extends AwsComponent<CertificatesComponentCon
   }
 
   protected createAcmCertificate() {
-    return new AcmCertificate(this, 'acm', {
+    return new acm.AcmCertificate(this, 'acm', {
       provider: this.provider,
       domainName: this.config.domainName,
       subjectAlternativeNames: [`*.${this.config.domainName}`],
@@ -63,7 +57,7 @@ export class CertificatesComponent extends AwsComponent<CertificatesComponentCon
   protected createRoute53Record() {
     const domainValidationOptions =
       this.acmCertificate.domainValidationOptions('0');
-    return new Route53Record(this, 'record', {
+    return new route53.Route53Record(this, 'record', {
       provider: this.provider,
       allowOverwrite: true,
       name: this.wrapInToList(domainValidationOptions.resourceRecordName),
@@ -75,7 +69,7 @@ export class CertificatesComponent extends AwsComponent<CertificatesComponentCon
   }
 
   protected createAcmCertificateValidation() {
-    return new AcmCertificateValidation(this, 'valid', {
+    return new acm.AcmCertificateValidation(this, 'valid', {
       provider: this.provider,
       certificateArn: this.getAcmCertificateArnAsToken(),
       validationRecordFqdns: [this.route53Record.fqdn],

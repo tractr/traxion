@@ -1,4 +1,4 @@
-import { SecurityGroupConfig } from '@cdktf/provider-aws';
+import { vpc } from '@cdktf/provider-aws';
 
 import {
   ServiceComponentDefaultConfig,
@@ -22,7 +22,7 @@ export abstract class BackendServiceComponent<
   C extends BackendServiceComponentConfig = BackendServiceComponentConfig,
   D extends ServiceComponentDefaultConfig = ServiceComponentDefaultConfig,
 > extends ServiceComponent<C, D> {
-  protected getSecurityGroupConfig(): SecurityGroupConfig {
+  protected getSecurityGroupConfig(): vpc.SecurityGroupConfig {
     return {
       ...super.getSecurityGroupConfig(),
       ingress: this.getIngressPorts().map((port) => ({

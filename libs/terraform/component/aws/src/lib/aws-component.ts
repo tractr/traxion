@@ -1,10 +1,10 @@
 import { AwsProvider } from '@cdktf/provider-aws';
 import { snake } from 'case';
-import { Construct, ConstructOptions } from 'constructs';
+import { Construct } from 'constructs';
 
 import { AwsProviderConstruct } from './interfaces';
 
-export abstract class AwsComponent<T extends ConstructOptions>
+export abstract class AwsComponent<T = null>
   extends Construct
   implements AwsProviderConstruct
 {
@@ -15,7 +15,7 @@ export abstract class AwsComponent<T extends ConstructOptions>
   protected readonly config: T;
 
   protected constructor(scope: AwsProviderConstruct, id: string, config: T) {
-    super(scope, id, config);
+    super(scope, id);
     this.config = config;
     this.name = `${scope.name.trim()}-${snake(id)}`;
     this.provider = scope.provider;
@@ -100,7 +100,8 @@ export abstract class AwsComponent<T extends ConstructOptions>
   }
 }
 
-export type AwsComponentConstructor<
-  C extends AwsComponent<O>,
-  O extends ConstructOptions,
-> = new (scope: AwsProviderConstruct, id: string, config: O) => C;
+export type AwsComponentConstructor<C extends AwsComponent<O>, O> = new (
+  scope: AwsProviderConstruct,
+  id: string,
+  config: O,
+) => C;

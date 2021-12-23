@@ -1,11 +1,5 @@
-import {
-  IamAccessKey,
-  IamPolicy,
-  IamUser,
-  IamUserPolicyAttachment,
-} from '@cdktf/provider-aws';
+import { iam } from '@cdktf/provider-aws';
 import { TerraformOutput, Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
@@ -17,18 +11,18 @@ export interface S3BucketDetails {
   access: S3BucketAccess;
   arn: string;
 }
-export interface S3UserComponentConfig extends ConstructOptions {
+export interface S3UserComponentConfig {
   s3Buckets: S3BucketDetails[];
 }
 
 export class S3UserComponent extends AwsComponent<S3UserComponentConfig> {
-  protected readonly iamPolicy: IamPolicy;
+  protected readonly iamPolicy: iam.IamPolicy;
 
-  protected readonly iamUser: IamUser;
+  protected readonly iamUser: iam.IamUser;
 
-  protected readonly iamUserPolicyAttachment: IamUserPolicyAttachment;
+  protected readonly iamUserPolicyAttachment: iam.IamUserPolicyAttachment;
 
-  protected readonly iamAccessKey: IamAccessKey;
+  protected readonly iamAccessKey: iam.IamAccessKey;
 
   protected readonly iamAccessKeyIdOutput: TerraformOutput;
 
@@ -56,7 +50,7 @@ export class S3UserComponent extends AwsComponent<S3UserComponentConfig> {
   }
 
   protected createIamPolicy() {
-    return new IamPolicy(this, 'policy', {
+    return new iam.IamPolicy(this, 'policy', {
       provider: this.provider,
       name: this.getResourceName('policy'),
       policy: this.getPolicy(),
@@ -64,14 +58,14 @@ export class S3UserComponent extends AwsComponent<S3UserComponentConfig> {
   }
 
   protected createIamUser() {
-    return new IamUser(this, 'user', {
+    return new iam.IamUser(this, 'user', {
       provider: this.provider,
       name: this.getResourceName('user'),
     });
   }
 
   protected createIamUserPolicyAttachment() {
-    return new IamUserPolicyAttachment(this, 'attach', {
+    return new iam.IamUserPolicyAttachment(this, 'attach', {
       provider: this.provider,
       user: this.getIamUserNameAsToken(),
       policyArn: this.getIamPolicyArnAsToken(),
@@ -79,7 +73,7 @@ export class S3UserComponent extends AwsComponent<S3UserComponentConfig> {
   }
 
   protected createIamAccessKey() {
-    return new IamAccessKey(this, 'key', {
+    return new iam.IamAccessKey(this, 'key', {
       provider: this.provider,
       user: this.getIamUserNameAsToken(),
     });
