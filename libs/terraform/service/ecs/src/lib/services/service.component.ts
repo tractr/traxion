@@ -1,14 +1,4 @@
-import {
-  EcsService,
-  EcsServiceConfig,
-  EcsTaskDefinition,
-  EcsTaskDefinitionConfig,
-  EcsTaskDefinitionVolume,
-  SecurityGroup,
-  SecurityGroupConfig,
-  ServiceDiscoveryService,
-  ServiceDiscoveryServiceConfig,
-} from '@cdktf/provider-aws';
+import { ecs, servicediscovery, vpc } from '@cdktf/provider-aws';
 import { kebab } from 'case';
 import { Token } from 'cdktf';
 import * as deepmerge from 'deepmerge';
@@ -43,13 +33,13 @@ export abstract class ServiceComponent<
 
   protected readonly serviceName: string;
 
-  protected readonly securityGroup: SecurityGroup;
+  protected readonly securityGroup: vpc.SecurityGroup;
 
-  protected readonly ecsTaskDefinition: EcsTaskDefinition;
+  protected readonly ecsTaskDefinition: ecs.EcsTaskDefinition;
 
-  protected readonly serviceDiscoveryService: ServiceDiscoveryService;
+  protected readonly serviceDiscoveryService: servicediscovery.ServiceDiscoveryService;
 
-  protected readonly ecsService: EcsService;
+  protected readonly ecsService: ecs.EcsService;
 
   protected readonly deploymentComponent: DeploymentComponent | undefined;
 
@@ -92,10 +82,10 @@ export abstract class ServiceComponent<
   }
 
   protected createSecurityGroup() {
-    return new SecurityGroup(this, 'sg', this.getSecurityGroupConfig());
+    return new vpc.SecurityGroup(this, 'sg', this.getSecurityGroupConfig());
   }
 
-  protected getSecurityGroupConfig(): SecurityGroupConfig {
+  protected getSecurityGroupConfig(): vpc.SecurityGroupConfig {
     return {
       provider: this.provider,
       egress: [
@@ -113,14 +103,14 @@ export abstract class ServiceComponent<
   }
 
   protected createEcsTaskDefinition() {
-    return new EcsTaskDefinition(
+    return new ecs.EcsTaskDefinition(
       this,
       'task',
       this.getEcsTaskDefinitionConfig(),
     );
   }
 
-  protected getEcsTaskDefinitionConfig(): EcsTaskDefinitionConfig {
+  protected getEcsTaskDefinitionConfig(): ecs.EcsTaskDefinitionConfig {
     return {
       provider: this.provider,
       networkMode: 'awsvpc',
@@ -138,36 +128,34 @@ export abstract class ServiceComponent<
   }
 
   protected createServiceDiscoveryService() {
-    return new ServiceDiscoveryService(
+    return new servicediscovery.ServiceDiscoveryService(
       this,
       'discovery',
       this.getServiceDiscoveryServiceConfig(),
     );
   }
 
-  protected getServiceDiscoveryServiceConfig(): ServiceDiscoveryServiceConfig {
+  protected getServiceDiscoveryServiceConfig(): servicediscovery.ServiceDiscoveryServiceConfig {
     return {
       name: this.serviceName,
-      dnsConfig: [
-        {
-          namespaceId: this.config.privateDnsNamespaceId,
-          routingPolicy: 'MULTIVALUE',
-          dnsRecords: [
-            {
-              type: 'A',
-              ttl: 5,
-            },
-          ],
-        },
-      ],
+      dnsConfig: {
+        namespaceId: this.config.privateDnsNamespaceId,
+        routingPolicy: 'MULTIVALUE',
+        dnsRecords: [
+          {
+            type: 'A',
+            ttl: 5,
+          },
+        ],
+      },
     };
   }
 
   protected createEcsService() {
-    return new EcsService(this, 'service', this.getEcsServiceConfig());
+    return new ecs.EcsService(this, 'service', this.getEcsServiceConfig());
   }
 
-  protected getEcsServiceConfig(): EcsServiceConfig {
+  protected getEcsServiceConfig(): ecs.EcsServiceConfig {
     return {
       provider: this.provider,
       cluster: this.config.clusterId,
@@ -175,18 +163,16 @@ export abstract class ServiceComponent<
       launchType: 'FARGATE',
       schedulingStrategy: 'REPLICA',
       desiredCount: this.config.desiredCount || 1,
-      networkConfiguration: [
-        {
-          securityGroups: [this.getSecurityGroupIdAsToken()],
-          subnets: this.config.subnetsIds,
-          assignPublicIp: true,
-        },
-      ],
-      serviceRegistries: [
-        {
-          registryArn: this.getServiceDiscoveryServiceArnAsToken(),
-        },
-      ],
+      networkConfiguration: {
+        securityGroups: [this.getSecurityGroupIdAsToken()],
+        subnets: this.config.subnetsIds,
+        assignPublicIp: true,
+      },
+
+      serviceRegistries: {
+        registryArn: this.getServiceDiscoveryServiceArnAsToken(),
+      },
+
       name: this.getResourceName('service'),
       lifecycle: {
         // Todo: Should we ignore 'desired_count' if no auto-scaling ??
@@ -257,19 +243,17 @@ export abstract class ServiceComponent<
     };
   }
 
-  protected getVolumesForTaskDefinition(): EcsTaskDefinitionVolume[] {
+  protected getVolumesForTaskDefinition(): ecs.EcsTaskDefinitionVolume[] {
     if (!this.volumeComponentsMap) {
       return [];
     }
     return Object.entries(this.volumeComponentsMap).map(
       ([name, volumeComponent]) => ({
         name,
-        efsVolumeConfiguration: [
-          {
-            fileSystemId: volumeComponent.getFileSystemIdAsToken(),
-            rootDirectory: '/',
-          },
-        ],
+        efsVolumeConfiguration: {
+          fileSystemId: volumeComponent.getFileSystemIdAsToken(),
+          rootDirectory: '/',
+        },
       }),
     );
   }
@@ -346,7 +330,7 @@ export abstract class ServiceComponent<
   }
 
   getRegion(): string {
-    return this.provider.region;
+    return this.provider.region || '';
   }
 
   getServiceDiscoveryServiceArnAsToken(): string {

@@ -19,6 +19,10 @@ jest.mock('@tractr/hapify-generate-config', () => ({
   __esModule: true,
   ...jest.requireActual('@tractr/hapify-generate-config'),
 }));
+jest.mock('@tractr/update-templates-import-path', () => ({
+  __esModule: true,
+  ...jest.requireActual('@tractr/update-templates-import-path'),
+}));
 
 describe('Generate executor:generate', () => {
   let defaultContext: ExecutorContext;

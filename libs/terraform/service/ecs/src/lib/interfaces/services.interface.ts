@@ -1,5 +1,3 @@
-import { ConstructOptions } from 'constructs';
-
 import { Container } from '../containers';
 
 import { DockerApplications } from '@tractr/terraform-group-registry';
@@ -26,7 +24,7 @@ export type VolumesConfig = {
 };
 export type VolumesConfigs = Record<string, VolumesConfig>;
 
-export interface ServiceComponentInternalConfig extends ConstructOptions {
+export interface ServiceComponentInternalConfig {
   vpcId: string;
   subnetsIds: string[];
   logsGroup: string;

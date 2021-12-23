@@ -1,27 +1,22 @@
-import { IamRole, IamRoleInlinePolicy } from '@cdktf/provider-aws';
+import { iam } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export class ReverseProxyTaskRoleComponent extends AwsComponent<ConstructOptions> {
-  protected readonly iamRole: IamRole;
+export class ReverseProxyTaskRoleComponent extends AwsComponent {
+  protected readonly iamRole: iam.IamRole;
 
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: ConstructOptions = {},
-  ) {
+  constructor(scope: AwsProviderConstruct, id: string, config = null) {
     super(scope, id, config);
     this.iamRole = this.createIamRole();
   }
 
   protected createIamRole() {
     // ECS task execution roles
-    return new IamRole(this, 'role', {
+    return new iam.IamRole(this, 'role', {
       provider: this.provider,
       assumeRolePolicy: this.getAssumeRolePolicy(),
       inlinePolicy: this.getInlinePolicy(),
@@ -44,7 +39,7 @@ export class ReverseProxyTaskRoleComponent extends AwsComponent<ConstructOptions
     });
   }
 
-  protected getInlinePolicy(): IamRoleInlinePolicy[] {
+  protected getInlinePolicy(): iam.IamRoleInlinePolicy[] {
     return [
       {
         name: this.getResourceName('policy'),

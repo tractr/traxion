@@ -1,24 +1,19 @@
-import {
-  IamRole,
-  IamRoleInlinePolicy,
-  IamRolePolicyAttachment,
-} from '@cdktf/provider-aws';
+import { iam } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export interface ExecutionRoleComponentConfig extends ConstructOptions {
+export interface ExecutionRoleComponentConfig {
   secretsmanagerSecretArn: string;
 }
 
 export class ExecutionRoleComponent extends AwsComponent<ExecutionRoleComponentConfig> {
-  protected readonly iamRole: IamRole;
+  protected readonly iamRole: iam.IamRole;
 
-  protected readonly iamRolePolicyAttachment: IamRolePolicyAttachment;
+  protected readonly iamRolePolicyAttachment: iam.IamRolePolicyAttachment;
 
   constructor(
     scope: AwsProviderConstruct,
@@ -32,7 +27,7 @@ export class ExecutionRoleComponent extends AwsComponent<ExecutionRoleComponentC
 
   protected createIamRole() {
     // ECS task execution roles
-    return new IamRole(this, 'role', {
+    return new iam.IamRole(this, 'role', {
       provider: this.provider,
       assumeRolePolicy: this.getAssumeRolePolicy(),
       inlinePolicy: this.getInlinePolicy(),
@@ -42,7 +37,7 @@ export class ExecutionRoleComponent extends AwsComponent<ExecutionRoleComponentC
 
   protected createIamRolePolicyAttachment() {
     // ECS task execution roles policy attachment
-    return new IamRolePolicyAttachment(this, 'attach', {
+    return new iam.IamRolePolicyAttachment(this, 'attach', {
       provider: this.provider,
       role: this.iamRole.name,
       policyArn:
@@ -65,7 +60,7 @@ export class ExecutionRoleComponent extends AwsComponent<ExecutionRoleComponentC
     });
   }
 
-  protected getInlinePolicy(): IamRoleInlinePolicy[] {
+  protected getInlinePolicy(): iam.IamRoleInlinePolicy[] {
     return [
       {
         name: this.getResourceName('policy'),

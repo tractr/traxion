@@ -1,17 +1,12 @@
-import {
-  CloudwatchEventRule,
-  CloudwatchEventTarget,
-} from '@cdktf/provider-aws';
+import { eventbridge } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export interface DeploymentTriggerEventComponentConfig
-  extends ConstructOptions {
+export interface DeploymentTriggerEventComponentConfig {
   roleArn: string;
   codepipelineArn: string;
   repositoryName: string;
@@ -19,9 +14,9 @@ export interface DeploymentTriggerEventComponentConfig
 }
 
 export class DeploymentTriggerEventComponent extends AwsComponent<DeploymentTriggerEventComponentConfig> {
-  protected readonly cloudwatchEventRule: CloudwatchEventRule;
+  protected readonly cloudwatchEventRule: eventbridge.CloudwatchEventRule;
 
-  protected readonly cloudwatchEventTarget: CloudwatchEventTarget;
+  protected readonly cloudwatchEventTarget: eventbridge.CloudwatchEventTarget;
 
   constructor(
     scope: AwsProviderConstruct,
@@ -35,7 +30,7 @@ export class DeploymentTriggerEventComponent extends AwsComponent<DeploymentTrig
   }
 
   protected createCloudwatchEventRule() {
-    return new CloudwatchEventRule(this, 'rule', {
+    return new eventbridge.CloudwatchEventRule(this, 'rule', {
       provider: this.provider,
       roleArn: this.config.roleArn,
       eventPattern: JSON.stringify({
@@ -53,7 +48,7 @@ export class DeploymentTriggerEventComponent extends AwsComponent<DeploymentTrig
   }
 
   protected createCloudwatchEventTarget() {
-    return new CloudwatchEventTarget(this, 'target', {
+    return new eventbridge.CloudwatchEventTarget(this, 'target', {
       provider: this.provider,
       rule: this.getCloudwatchEventRuleNameAsToken(),
       arn: this.config.codepipelineArn,

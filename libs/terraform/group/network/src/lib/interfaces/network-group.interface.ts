@@ -1,5 +1,3 @@
-import { ConstructOptions } from 'constructs';
-
 import { InternetAccessMode } from '../components';
 
 export interface AvailabilityZoneInfo {
@@ -12,7 +10,7 @@ export interface AvailabilityZoneInfo {
  * It uses at least 2 availability zones and creates one private and one public subnet in each zone.
  * Internet access within private subnets can be set to 3 modes: Nat, Egress or None
  */
-export interface NetworkGroupInternalConfig extends ConstructOptions {
+export interface NetworkGroupInternalConfig {
   cidrPrefix?: string;
 }
 

@@ -7,6 +7,7 @@ let terraformEnvs;
 try {
   terraformEnvs = getTerraformConfiguration();
 } catch {
+  console.error('You are missing environment variables for Terraform');
   process.exit(1);
 }
 

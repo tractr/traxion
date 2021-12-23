@@ -1,5 +1,3 @@
-import { ConstructOptions } from 'constructs';
-
 import { DeploymentBuildComponent } from './deployment-build.component';
 import {
   DeploymentPipelineComponent,
@@ -14,7 +12,7 @@ import {
 } from '@tractr/terraform-component-aws';
 import { DeploymentTriggerComponent } from '@tractr/terraform-component-deployment-trigger';
 
-export interface DeploymentComponentConfig extends ConstructOptions {
+export interface DeploymentComponentConfig {
   imageDefinitions: string;
   triggers: DeploymentTrigger[];
   clusterName: string;
