@@ -1,26 +1,21 @@
-import { SecretsmanagerSecret } from '@cdktf/provider-aws';
+import { secretsmanager } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export class SecretsComponent extends AwsComponent<ConstructOptions> {
-  protected readonly secretsmanagerSecret: SecretsmanagerSecret;
+export class SecretsComponent extends AwsComponent {
+  protected readonly secretsmanagerSecret: secretsmanager.SecretsmanagerSecret;
 
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: ConstructOptions = {},
-  ) {
+  constructor(scope: AwsProviderConstruct, id: string, config = null) {
     super(scope, id, config);
     this.secretsmanagerSecret = this.createSecretsmanagerSecret();
   }
 
   protected createSecretsmanagerSecret() {
-    return new SecretsmanagerSecret(this, 'object', {
+    return new secretsmanager.SecretsmanagerSecret(this, 'object', {
       name: this.getResourceName('object'),
     });
   }

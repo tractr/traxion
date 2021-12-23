@@ -1,31 +1,26 @@
-import { S3Bucket } from '@cdktf/provider-aws';
+import { s3 } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export class DeploymentStoreComponent extends AwsComponent<ConstructOptions> {
-  protected readonly s3Bucket: S3Bucket;
+export class DeploymentStoreComponent extends AwsComponent {
+  protected readonly s3Bucket: s3.S3Bucket;
 
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: ConstructOptions = {},
-  ) {
+  constructor(scope: AwsProviderConstruct, id: string, config = null) {
     super(scope, id, config);
     this.s3Bucket = this.createS3Bucket();
   }
 
   protected createS3Bucket() {
-    return new S3Bucket(this, 's3', {
+    return new s3.S3Bucket(this, 's3', {
       provider: this.provider,
       bucketPrefix: this.getResourceName('', 37).replace(/_/g, '-'),
       acl: 'private',
       forceDestroy: true,
-      versioning: [{ enabled: false }],
+      versioning: { enabled: false },
       tags: this.getResourceNameAsTag('s3'),
     });
   }
