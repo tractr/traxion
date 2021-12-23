@@ -1,5 +1,3 @@
-import { ConstructOptions } from 'constructs';
-
 import {
   AwsComponent,
   AwsProviderConstruct,
@@ -10,7 +8,7 @@ import {
   S3UserComponent,
 } from '@tractr/terraform-component-s3-user';
 
-export interface OwnerPicturesComponentConfig extends ConstructOptions {
+export interface OwnerPicturesComponentConfig {
   additionalReadOnlyS3Arns?: string[];
   s3PublicRead?: boolean;
   s3AllowUpload?: {

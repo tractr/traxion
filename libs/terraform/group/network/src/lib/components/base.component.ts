@@ -1,12 +1,5 @@
-import {
-  DataAwsAvailabilityZone,
-  DataAwsVpc,
-  EgressOnlyInternetGateway,
-  InternetGateway,
-  Vpc,
-} from '@cdktf/provider-aws';
+import { datasources, vpc } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import { InternetRoutesComponent } from './internet-routes.component';
 
@@ -15,7 +8,7 @@ import {
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export interface BaseComponentConfig extends ConstructOptions {
+export interface BaseComponentConfig {
   cidrPrefix: string;
   zones: string[];
 }
@@ -24,15 +17,15 @@ export interface BaseComponentConfig extends ConstructOptions {
  * This component creates the base resources for the network: VPC, Internet Gateways
  */
 export class BaseComponent extends AwsComponent<BaseComponentConfig> {
-  protected readonly availabilityZones: DataAwsAvailabilityZone[];
+  protected readonly availabilityZones: datasources.DataAwsAvailabilityZone[];
 
-  protected readonly vpc: Vpc;
+  protected readonly vpc: vpc.Vpc;
 
-  protected readonly vpcData: DataAwsVpc;
+  protected readonly vpcData: vpc.DataAwsVpc;
 
-  protected readonly internetGateway: InternetGateway;
+  protected readonly internetGateway: vpc.InternetGateway;
 
-  protected readonly egressOnlyInternetGateway: EgressOnlyInternetGateway;
+  protected readonly egressOnlyInternetGateway: vpc.EgressOnlyInternetGateway;
 
   protected readonly internetRoutesComponent: InternetRoutesComponent;
 
@@ -58,15 +51,19 @@ export class BaseComponent extends AwsComponent<BaseComponentConfig> {
   }
 
   protected getAvailabilityZone(availabilityZoneLetter: string) {
-    return new DataAwsAvailabilityZone(this, `az-${availabilityZoneLetter}`, {
-      provider: this.provider,
-      state: 'available',
-      name: this.getZoneName(availabilityZoneLetter),
-    });
+    return new datasources.DataAwsAvailabilityZone(
+      this,
+      `az-${availabilityZoneLetter}`,
+      {
+        provider: this.provider,
+        state: 'available',
+        name: this.getZoneName(availabilityZoneLetter),
+      },
+    );
   }
 
   protected createVpc() {
-    return new Vpc(this, 'vpc', {
+    return new vpc.Vpc(this, 'vpc', {
       provider: this.provider,
       cidrBlock: `${this.config.cidrPrefix}.0.0/16`,
       assignGeneratedIpv6CidrBlock: true,
@@ -77,14 +74,14 @@ export class BaseComponent extends AwsComponent<BaseComponentConfig> {
   }
 
   protected getVpcData() {
-    return new DataAwsVpc(this, 'vpc-data', {
+    return new vpc.DataAwsVpc(this, 'vpc-data', {
       cidrBlock: `${this.config.cidrPrefix}.0.0/16`,
       dependsOn: [this.vpc],
     });
   }
 
   protected createInternetGateway() {
-    return new InternetGateway(this, 'igw', {
+    return new vpc.InternetGateway(this, 'igw', {
       provider: this.provider,
       vpcId: this.getVpcIdAsToken(),
       tags: this.getResourceNameAsTag('igw'),
@@ -92,7 +89,7 @@ export class BaseComponent extends AwsComponent<BaseComponentConfig> {
   }
 
   protected createEgressOnlyInternetGateway() {
-    return new EgressOnlyInternetGateway(this, 'egw', {
+    return new vpc.EgressOnlyInternetGateway(this, 'egw', {
       provider: this.provider,
       vpcId: this.getVpcIdAsToken(),
       tags: this.getResourceNameAsTag('egw'),
@@ -106,7 +103,7 @@ export class BaseComponent extends AwsComponent<BaseComponentConfig> {
     });
   }
 
-  getInternetGateway(): InternetGateway {
+  getInternetGateway(): vpc.InternetGateway {
     return this.internetGateway;
   }
 
