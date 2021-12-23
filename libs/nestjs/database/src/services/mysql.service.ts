@@ -11,12 +11,13 @@ export class MysqlService {
     const transactions: PrismaPromise<unknown>[] = [];
     transactions.push(prisma.$executeRaw`SET FOREIGN_KEY_CHECKS = 0;`);
 
-    for (const {
-      TABLE_NAME,
-    } of await prisma.$queryRaw`SELECT TABLE_NAME from information_schema.TABLES WHERE TABLE_SCHEMA = '${schemaName}';`) {
+    const tables: { TABLE_NAME: string }[] =
+      await prisma.$queryRaw`SELECT TABLE_NAME from information_schema.TABLES WHERE TABLE_SCHEMA = '${schemaName}';`;
+
+    for (const { TABLE_NAME } of tables) {
       if (TABLE_NAME !== '_prisma_migrations') {
         try {
-          transactions.push(prisma.$executeRaw(`TRUNCATE ${TABLE_NAME};`));
+          transactions.push(prisma.$executeRaw`TRUNCATE ${TABLE_NAME};`);
         } catch (error) {
           console.error({ error });
         }

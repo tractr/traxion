@@ -15,19 +15,17 @@ export class PostgresqlService {
     // Special fast path to drop data from a postgres database.
     // This is an optimization which is particularly crucial in a unit testing context.
     // This code path takes milliseconds, vs ~7 seconds for a migrate reset + db push
-    for (const { tablename } of await prisma.$queryRaw(
-      `SELECT tablename FROM pg_tables WHERE schemaname='${schemaName}'`,
-    )) {
-      await prisma.$queryRaw(
-        `TRUNCATE TABLE "${schemaName}"."${tablename as string}" CASCADE;`,
-      );
+    const tables: { tablename: string }[] =
+      await prisma.$queryRaw`SELECT tablename FROM pg_tables WHERE schemaname='${schemaName}'`;
+    for (const { tablename } of tables) {
+      await prisma.$queryRaw`TRUNCATE TABLE "${schemaName}"."${tablename}" CASCADE;`;
     }
-    for (const { relname } of await prisma.$queryRaw(
-      `SELECT c.relname FROM pg_class AS c JOIN pg_namespace AS n ON c.relnamespace = n.oid WHERE c.relkind='S' AND n.nspname='${schemaName}';`,
-    )) {
-      await prisma.$queryRaw(
-        `ALTER SEQUENCE "${schemaName}"."${relname as string}" RESTART WITH 1;`,
-      );
+
+    const relnames: { relname: string }[] =
+      await prisma.$queryRaw`SELECT c.relname FROM pg_class AS c JOIN pg_namespace AS n ON c.relnamespace = n.oid WHERE c.relkind='S' AND n.nspname='${schemaName}';`;
+
+    for (const { relname } of relnames) {
+      await prisma.$queryRaw`ALTER SEQUENCE "${schemaName}"."${relname}" RESTART WITH 1;`;
     }
   }
 }
