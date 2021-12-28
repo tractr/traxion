@@ -1,13 +1,12 @@
-import { Eip, NatGateway, Route } from '@cdktf/provider-aws';
+import { ec2, vpc } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export interface NatGatewayComponentConfig extends ConstructOptions {
+export interface NatGatewayComponentConfig {
   routeTableId: string;
   publicSubnetId: string;
 }
@@ -19,11 +18,11 @@ export interface NatGatewayComponentConfig extends ConstructOptions {
  * There is one NAT Gateway for each availability zone
  */
 export class NatGatewayComponent extends AwsComponent<NatGatewayComponentConfig> {
-  protected readonly eip: Eip;
+  protected readonly eip: ec2.Eip;
 
-  protected readonly natGateway: NatGateway;
+  protected readonly natGateway: vpc.NatGateway;
 
-  protected readonly routeToNatGateway: Route;
+  protected readonly routeToNatGateway: vpc.Route;
 
   constructor(
     scope: AwsProviderConstruct,
@@ -38,7 +37,7 @@ export class NatGatewayComponent extends AwsComponent<NatGatewayComponentConfig>
   }
 
   protected createEip() {
-    return new Eip(this, 'ip', {
+    return new ec2.Eip(this, 'ip', {
       provider: this.provider,
       vpc: true,
       tags: this.getResourceNameAsTag('ip'),
@@ -49,7 +48,7 @@ export class NatGatewayComponent extends AwsComponent<NatGatewayComponentConfig>
    * Create a NAT gateway with an Elastic IP for each private subnet to get internet connectivity
    */
   protected createNatGateway() {
-    return new NatGateway(this, 'gw', {
+    return new vpc.NatGateway(this, 'gw', {
       provider: this.provider,
       subnetId: this.config.publicSubnetId,
       allocationId: this.getEipIdAsToken(),
@@ -61,7 +60,7 @@ export class NatGatewayComponent extends AwsComponent<NatGatewayComponentConfig>
    * Route non-local traffic through the NAT gateway to the internet
    */
   protected createRouteToNatGateway() {
-    return new Route(this, 'rt', {
+    return new vpc.Route(this, 'rt', {
       provider: this.provider,
       destinationCidrBlock: '0.0.0.0/0',
       destinationIpv6CidrBlock: '::/0',

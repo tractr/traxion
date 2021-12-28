@@ -1,18 +1,17 @@
-import { ServiceDiscoveryPrivateDnsNamespace } from '@cdktf/provider-aws';
+import { servicediscovery } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export interface PrivateDnsComponentConfig extends ConstructOptions {
+export interface PrivateDnsComponentConfig {
   vpcId: string;
 }
 
 export class PrivateDnsComponent extends AwsComponent<PrivateDnsComponentConfig> {
-  protected readonly serviceDiscoveryPrivateDnsNamespace: ServiceDiscoveryPrivateDnsNamespace;
+  protected readonly serviceDiscoveryPrivateDnsNamespace: servicediscovery.ServiceDiscoveryPrivateDnsNamespace;
 
   constructor(
     scope: AwsProviderConstruct,
@@ -26,10 +25,14 @@ export class PrivateDnsComponent extends AwsComponent<PrivateDnsComponentConfig>
   }
 
   protected createServiceDiscoveryPrivateDnsNamespace() {
-    return new ServiceDiscoveryPrivateDnsNamespace(this, 'namespace', {
-      name: this.getResourceNameAsDomainName('local'),
-      vpc: this.config.vpcId,
-    });
+    return new servicediscovery.ServiceDiscoveryPrivateDnsNamespace(
+      this,
+      'namespace',
+      {
+        name: this.getResourceNameAsDomainName('local'),
+        vpc: this.config.vpcId,
+      },
+    );
   }
 
   protected getResourceNameAsDomainName(name: string): string {

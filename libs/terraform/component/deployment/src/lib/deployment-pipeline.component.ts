@@ -1,6 +1,5 @@
-import { Codepipeline, CodepipelineStage } from '@cdktf/provider-aws';
+import { codepipeline } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
@@ -12,7 +11,7 @@ export interface DeploymentTrigger {
   imageTag: string;
 }
 
-export interface DeploymentPipelineComponentConfig extends ConstructOptions {
+export interface DeploymentPipelineComponentConfig {
   storeS3Name: string;
   roleArn: string;
   buildProjectName: string;
@@ -22,7 +21,7 @@ export interface DeploymentPipelineComponentConfig extends ConstructOptions {
 }
 // https://github.com/ispec-inc/terraform-aws-ecs-deploy-pipeline/blob/master/modules/pipeline
 export class DeploymentPipelineComponent extends AwsComponent<DeploymentPipelineComponentConfig> {
-  protected readonly codepipeline: Codepipeline;
+  protected readonly codepipeline: codepipeline.Codepipeline;
 
   constructor(
     scope: AwsProviderConstruct,
@@ -35,7 +34,7 @@ export class DeploymentPipelineComponent extends AwsComponent<DeploymentPipeline
   }
 
   protected createCodepipeline() {
-    return new Codepipeline(this, 'run', {
+    return new codepipeline.Codepipeline(this, 'run', {
       provider: this.provider,
       roleArn: this.config.roleArn,
       artifactStore: [
@@ -53,7 +52,7 @@ export class DeploymentPipelineComponent extends AwsComponent<DeploymentPipeline
     });
   }
 
-  protected getSourceStage(): CodepipelineStage {
+  protected getSourceStage(): codepipeline.CodepipelineStage {
     return {
       name: 'Source',
       action: this.config.triggers.map((trigger) => ({
@@ -71,7 +70,7 @@ export class DeploymentPipelineComponent extends AwsComponent<DeploymentPipeline
     };
   }
 
-  protected getBuildStage(): CodepipelineStage {
+  protected getBuildStage(): codepipeline.CodepipelineStage {
     return {
       name: 'Build',
       action: [
@@ -93,7 +92,7 @@ export class DeploymentPipelineComponent extends AwsComponent<DeploymentPipeline
     };
   }
 
-  protected getDeployStage(): CodepipelineStage {
+  protected getDeployStage(): codepipeline.CodepipelineStage {
     return {
       name: 'Deploy',
       action: [

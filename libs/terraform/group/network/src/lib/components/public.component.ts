@@ -1,13 +1,12 @@
-import { Subnet } from '@cdktf/provider-aws';
+import { vpc } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export interface PublicComponentConfig extends ConstructOptions {
+export interface PublicComponentConfig {
   vpcId: string;
   cidrBlock: string;
   ipv6CidrBlock: string;
@@ -19,7 +18,7 @@ export interface PublicComponentConfig extends ConstructOptions {
  * A subnet is deemed to be a Public Subnet if it has a Route Table that directs traffic to the Internet Gateway.
  */
 export class PublicComponent extends AwsComponent<PublicComponentConfig> {
-  protected readonly subnet: Subnet;
+  protected readonly subnet: vpc.Subnet;
 
   constructor(
     scope: AwsProviderConstruct,
@@ -31,7 +30,7 @@ export class PublicComponent extends AwsComponent<PublicComponentConfig> {
   }
 
   protected createSubnet() {
-    return new Subnet(this, 'subnet', {
+    return new vpc.Subnet(this, 'subnet', {
       provider: this.provider,
       availabilityZone: this.config.availabilityZone,
       vpcId: this.config.vpcId,
