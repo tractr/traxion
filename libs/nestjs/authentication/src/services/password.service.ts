@@ -66,7 +66,7 @@ export class PasswordService {
     if (!from) throw new Error('mailer from config has not been set');
 
     const linkWithCode = link
-      .replace('{{id}}', user[idField])
+      .replace('{{id}}', user[idField] as string)
       .replace('{{code}}', resetCode);
 
     const message: mailjet.Email.SendParamsMessage = {
@@ -74,7 +74,7 @@ export class PasswordService {
         Email: from,
         ...(name ? { Name: name } : {}),
       },
-      To: [{ Email: user.email }],
+      To: [{ Email: user.email as string }],
       TemplateLanguage: true,
       Subject: subject,
       ...(template
@@ -96,7 +96,9 @@ export class PasswordService {
   getUserSecret(user: UserType) {
     const { idField, loginField, passwordField } =
       this.authenticationOptions.userConfig;
-    return `${user[idField]}-${user[passwordField]}-${user[loginField]}`;
+    return `${user[idField] as string}-${user[passwordField] as string}-${
+      user[loginField] as string
+    }`;
   }
 
   createResetCode(user: UserType, options: JwtSignOptions = {}): string {
