@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { mock, mockDeep, MockProxy } from 'jest-mock-extended';
+import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as request from 'supertest';
 
 import { CaslEndPointMock } from '../mocks/casl-endpoint-mock.controller';
