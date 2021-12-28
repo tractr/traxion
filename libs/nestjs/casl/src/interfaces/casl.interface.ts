@@ -1,4 +1,6 @@
 import { AnyAbility } from '@casl/ability';
+import { PrismaAbility as CaslPrismaAbilities } from '@casl/prisma';
+import { Prisma } from '@prisma/client';
 
 import { CaslUser, CaslUserRoles, RolePermissions } from '@tractr/common';
 
@@ -9,3 +11,7 @@ export interface CaslOptions<
 > {
   rolePermissions: RolePermissions<R, U, A>;
 }
+
+export type PrismaAbility = CaslPrismaAbilities<
+  [string, 'all' | Prisma.ModelName]
+>;

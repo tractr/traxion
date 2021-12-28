@@ -48,7 +48,7 @@ export class AuthenticationService {
         [passwordField]: true,
       })) ?? {};
 
-    if (await this.verifyPassword(password, passwordBcrypt)) {
+    if (await this.verifyPassword(password, passwordBcrypt as string | null)) {
       return user;
     }
 
