@@ -83,7 +83,7 @@ describe('Authentication Module', () => {
       const { password, ...expectedUser } = mockUser;
 
       const hashPassword = await authenticationService.hashPassword(
-        password || '',
+        (password as string) || '',
       );
 
       mockUserService.findUnique.mockResolvedValueOnce(
@@ -287,7 +287,7 @@ describe('Authentication Module with cookie', () => {
       );
 
       const hashPassword = await authenticationService.hashPassword(
-        mockUser.password || '',
+        (mockUser.password as string) || '',
       );
 
       mockUserService.findUnique.mockResolvedValue({
@@ -317,7 +317,7 @@ describe('Authentication Module with cookie', () => {
       );
 
       const hashPassword = await authenticationService.hashPassword(
-        mockUser.password || '',
+        (mockUser.password as string) || '',
       );
 
       mockUserService.findUnique.mockResolvedValue({
