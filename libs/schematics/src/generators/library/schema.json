@@ -1,0 +1,234 @@
+{
+  "$id": "TractrLibrary",
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "examples": [
+    {
+      "command": "g @tractr/schematics:library mylib --directory=myapp",
+      "description": "Generate libs/myapp/mylib"
+    }
+  ],
+  "properties": {
+    "addModuleSpec": {
+      "default": true,
+      "description": "Add a module spec file.",
+      "type": "boolean"
+    },
+    "addTailwind": {
+      "default": true,
+      "description": "Whether to configure TailwindCSS for the application. It can only be used with buildable and publishable libraries. Non-buildable libraries will use the application's Tailwind configuration.",
+      "type": "boolean"
+    },
+    "babelJest": {
+      "default": false,
+      "description": "Use babel instead ts-jest",
+      "type": "boolean"
+    },
+    "buildable": {
+      "default": true,
+      "description": "Generate a buildable library.",
+      "type": "boolean"
+    },
+    "compilationMode": {
+      "description": "Specifies the compilation mode to use. If not specified, it will default to `partial` for publishable libraries and to `full` for buildable libraries. The `full` value can not be used for publishable libraries.",
+      "enum": ["full", "partial"],
+      "type": "string"
+    },
+    "controller": {
+      "default": false,
+      "description": "Include a controller with the library.",
+      "type": "boolean"
+    },
+    "directory": {
+      "alias": "dir",
+      "description": "A directory where the lib is placed",
+      "type": "string"
+    },
+    "global": {
+      "default": false,
+      "description": "Add the Global decorator to the generated module.",
+      "type": "boolean"
+    },
+    "hapifyAdditionalTemplates": {
+      "default": "",
+      "description": "List of additional templates to use in this library",
+      "type": "string",
+      "x-prompt": "Do you want to add additionals templates (comma separate)?"
+    },
+    "hapifyModelsJson": {
+      "default": "hapify-models.json",
+      "description": "Relative path from root workspace where the hapify models json file is located",
+      "type": "string"
+    },
+    "hapifyTemplates": {
+      "description": "List of template to use in this library",
+      "items": {
+        "enum": [
+          "angular-rext-client",
+          "casl",
+          "dbml",
+          "models",
+          "nestjs-models",
+          "nestjs-models-common",
+          "nestjs-models-rest",
+          "prisma",
+          "react-admin",
+          "rest-dtos",
+          "rext-client"
+        ],
+        "type": "string"
+      },
+      "type": "array",
+      "x-prompt": "Which templates your library will host?"
+    },
+    "hapifyUseImportReplacements": {
+      "default": true,
+      "description": "Use import replacement for hapify models",
+      "type": "boolean"
+    },
+    "importPath": {
+      "description": "The library name used to import it, like @myorg/my-awesome-lib. Must be a valid npm name.",
+      "type": "string"
+    },
+    "js": {
+      "default": false,
+      "description": "Generate JavaScript files rather than TypeScript files.",
+      "type": "boolean"
+    },
+    "lazy": {
+      "default": true,
+      "description": "Add `RouterModule.forChild` when set to true, and a simple array of routes when set to false.",
+      "type": "boolean"
+    },
+    "linter": {
+      "default": "eslint",
+      "description": "The tool to use for running lint checks.",
+      "enum": ["eslint", "tslint"],
+      "type": "string"
+    },
+    "name": {
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "description": "Library name",
+      "type": "string",
+      "x-prompt": "What name would you like to use for the library?"
+    },
+    "parentModule": {
+      "description": "Update the router configuration of the parent module using `loadChildren` or `children`, depending on what `lazy` is set to.",
+      "type": "string"
+    },
+    "pascalCaseFiles": {
+      "alias": "P",
+      "default": false,
+      "description": "Use pascal case file names.",
+      "type": "boolean"
+    },
+    "prefix": {
+      "alias": "p",
+      "description": "The prefix to apply to generated selectors.",
+      "format": "html-selector",
+      "type": "string"
+    },
+    "publishable": {
+      "description": "Create a publishable library.",
+      "type": "boolean"
+    },
+    "rootDir": {
+      "alias": "srcRootForCompilationRoot",
+      "description": "Sets the rootDir for TypeScript compilation. When not defined, it uses the project's root property, or srcRootForCompilationRoot if it is defined.",
+      "type": "string"
+    },
+    "routing": {
+      "default": false,
+      "description": "Add router configuration. See `lazy` for more information.",
+      "type": "boolean"
+    },
+    "service": {
+      "default": false,
+      "description": "Include a service with the library.",
+      "type": "boolean"
+    },
+    "setParserOptionsProject": {
+      "default": false,
+      "description": "Whether or not to configure the ESLint \"parserOptions.project\" option. We do not do this by default for lint performance reasons.",
+      "type": "boolean"
+    },
+    "simpleModuleName": {
+      "default": false,
+      "description": "Keep the module name simple (when using --directory)",
+      "type": "boolean"
+    },
+    "skipFormat": {
+      "default": false,
+      "description": "Skip formatting files",
+      "type": "boolean"
+    },
+    "skipPackageJson": {
+      "default": false,
+      "description": "Do not add dependencies to `package.json`.",
+      "type": "boolean"
+    },
+    "skipTsConfig": {
+      "default": false,
+      "description": "Do not update tsconfig.base.json for development experience.",
+      "type": "boolean"
+    },
+    "standaloneConfig": {
+      "default": false,
+      "description": "Split the project configuration into <projectRoot>/project.json rather than including it inside workspace.json",
+      "type": "boolean"
+    },
+    "strict": {
+      "default": true,
+      "description": "Whether to enable tsconfig strict mode or not.",
+      "type": "boolean"
+    },
+    "tags": {
+      "alias": "t",
+      "description": "Add tags to the library (used for linting)",
+      "type": "string"
+    },
+    "target": {
+      "default": "esnext",
+      "description": "The ES target, Nest suggest using es6 or higher.",
+      "enum": [
+        "es5",
+        "es6",
+        "esnext",
+        "es2015",
+        "es2016",
+        "es2017",
+        "es2018",
+        "es2019",
+        "es2020"
+      ],
+      "type": "string"
+    },
+    "testEnvironment": {
+      "default": "jsdom",
+      "description": "The test environment to use if unitTestRunner is set to jest",
+      "enum": ["jsdom", "node"],
+      "type": "string"
+    },
+    "type": {
+      "description": "Library type",
+      "items": {
+        "enum": ["angular", "nest"],
+        "type": "string"
+      },
+      "type": "string",
+      "x-prompt": "What library type your hapify generate library needs (for library that need to be use in front and back use angular)?"
+    },
+    "unitTestRunner": {
+      "default": "jest",
+      "description": "Test runner to use for unit tests",
+      "enum": ["jest", "none"],
+      "type": "string"
+    }
+  },
+  "required": ["name", "type"],
+  "title": "Create a Tractr Library for Nx",
+  "type": "object"
+}
