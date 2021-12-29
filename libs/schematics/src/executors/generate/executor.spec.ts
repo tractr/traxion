@@ -271,4 +271,27 @@ describe('Generate executor:generate', () => {
     expect(hapifyUpdateTemplatesImportPath).toHaveBeenCalledTimes(1);
     expect(output).toEqual({ success: true });
   });
+
+  it('should throw if an unexpected error is thrown', async () => {
+    pathExists.mockReset();
+    pathExists.mockImplementationOnce(async () => {
+      // eslint-disable-next-line no-throw-literal
+      throw 'unexpected error';
+    });
+    let output;
+
+    try {
+      output = await executor(defaultOptions, defaultContext);
+    } catch (err: unknown) {
+      output = err;
+    }
+
+    expect(pathExists).toHaveBeenCalledTimes(1);
+    expect(remove).toHaveBeenCalledTimes(0);
+    expect(getHapifyOptions).toHaveBeenCalledTimes(0);
+    expect(execSpy).toHaveBeenCalledTimes(0);
+    expect(move).toHaveBeenCalledTimes(0);
+    expect(hapifyUpdateTemplatesImportPath).toHaveBeenCalledTimes(0);
+    expect(output).toEqual('unexpected error');
+  });
 });
