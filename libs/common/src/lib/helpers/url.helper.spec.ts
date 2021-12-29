@@ -1,91 +1,107 @@
-import { formatUrlParams } from './url.helper';
+import { formatQueryParameters, getUrl } from './url.helper';
 
-describe('formatUrlParams', () => {
-  it('should ignore undefined and null values', () => {
-    const input = {
-      mustBeIgnoredBecauseUndefined: undefined,
-      mustBeIgnoredBecauseNull: null,
-      mustNotBeIgnored: 'keepMe',
-    };
+describe('Url helpers', () => {
+  describe('formateQueryParameters', () => {
+    it('should stringify items in arrays', () => {
+      const queryParams = {
+        array: ['10', 10, false, { test: 'test' }],
+      };
 
-    const expectedOutput = {
-      mustNotBeIgnored: 'keepMe',
-    };
+      const expectedResult =
+        'array[]=10&array[]=10&array[]=false&array[]=%7B%22test%22%3A%22test%22%7D';
 
-    const output = formatUrlParams(input);
+      const result = formatQueryParameters(queryParams);
 
-    expect(output).toEqual(expectedOutput);
+      expect(result).toEqual(expectedResult);
+    });
+
+    it('should stringify dates', () => {
+      const date = new Date('August 19, 1975 23:15:30 GMT-3:00');
+
+      const queryParams = {
+        date,
+      };
+
+      const expectedResult = 'date=1975-08-20T02%3A15%3A30.000Z';
+      const result = formatQueryParameters(queryParams);
+
+      expect(result).toEqual(expectedResult);
+    });
+
+    it('should stringify objects', () => {
+      const queryParams = {
+        object: { test: 'foo' },
+      };
+
+      const expectedResult = 'object=%7B%22test%22%3A%22foo%22%7D';
+
+      const result = formatQueryParameters(queryParams);
+
+      expect(result).toEqual(expectedResult);
+    });
+
+    it('should ignore  empty strings and undefined values and keep null', () => {
+      const queryParams = {
+        emptyString: '',
+        nonDefined: undefined,
+        nullish: null,
+      };
+
+      const expectedResult = 'nullish=null';
+
+      const result = formatQueryParameters(queryParams);
+
+      expect(result).toEqual(expectedResult);
+    });
+
+    it('should return valid queryParams', () => {
+      const date = new Date('August 19, 1975 23:15:30 GMT-3:00');
+
+      const queryParams = {
+        nonDefined: undefined,
+        nullish: null,
+        array: ['item1', 'item2'],
+        boolean: true,
+        date,
+        number: 100,
+        object: { test: 'foo' },
+        objectArray: [{ test1: 'foo' }, { test2: 'foo' }],
+        string: 'string',
+      };
+
+      const expectedResult =
+        'array[]=item1&array[]=item2&boolean=true&date=1975-08-20T02%3A15%3A30.000Z&nullish=null&number=100&object=%7B%22test%22%3A%22foo%22%7D&objectArray[]=%7B%22test1%22%3A%22foo%22%7D&objectArray[]=%7B%22test2%22%3A%22foo%22%7D&string=string';
+
+      const result = formatQueryParameters(queryParams);
+
+      expect(result).toEqual(expectedResult);
+    });
   });
 
-  it('should keep string value without modifying it', () => {
-    const input = {
-      mustNotBeIgnored: 'keepMe',
-    };
+  describe('getUrl', () => {
+    it('should build a correct url', () => {
+      const baseUrl = new URL('https://base.com');
+      const parameters = '/users';
 
-    const expectedOutput = input;
+      const date = new Date('August 19, 1975 23:15:30 GMT-3:00');
+      const queryParams = {
+        nonDefined: undefined,
+        nullish: null,
+        array: ['item1', 'item2'],
+        boolean: true,
+        date,
+        number: 100,
+        object: { test: 'foo' },
+        objectArray: [{ test1: 'foo' }, { test2: 'foo' }],
+        string: 'string',
+      };
 
-    const output = formatUrlParams(input);
+      const expectedResult =
+        'https://base.com/users?array[]=item1&array[]=item2&boolean=true&date=1975-08-20T02%3A15%3A30.000Z&nullish=null&number=100&object=%7B%22test%22%3A%22foo%22%7D&objectArray[]=%7B%22test1%22%3A%22foo%22%7D&objectArray[]=%7B%22test2%22%3A%22foo%22%7D&string=string';
 
-    expect(output).toEqual(expectedOutput);
-  });
+      const result = getUrl(baseUrl, parameters, queryParams).toString();
 
-  it('should keep string value without modifying it', () => {
-    const input = {
-      mustNotBeIgnored: 'keepMe',
-    };
-
-    const expectedOutput = input;
-
-    const output = formatUrlParams(input);
-
-    expect(output).toEqual(expectedOutput);
-  });
-
-  it('should stringify boolean and number values', () => {
-    const input = {
-      booleanTrue: true,
-      booleanFalse: false,
-      zero: 0,
-      number: 1,
-    };
-
-    const expectedOutput = {
-      booleanTrue: 'true',
-      booleanFalse: 'false',
-      zero: '0',
-      number: '1',
-    };
-
-    const output = formatUrlParams(input);
-
-    expect(output).toEqual(expectedOutput);
-  });
-
-  it('should turn date objects in ISO strings', () => {
-    const date = new Date(2020, 1, 1);
-    const dateAsISOString = date.toISOString();
-    const input = {
-      date,
-    };
-
-    const expectedOutput = {
-      date: dateAsISOString,
-    };
-
-    const output = formatUrlParams(input);
-
-    expect(output).toEqual(expectedOutput);
-  });
-});
-
-describe('formatUrlParams', () => {
-  it('should work', () => {
-    expect(true).toBe(true);
-  });
-});
-
-describe('formatUrlParams', () => {
-  it('should work', () => {
-    expect(true).toBe(true);
+      expect(result).toBe(expectedResult);
+    });
   });
 });
