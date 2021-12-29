@@ -13,7 +13,7 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
   const globalPrefix = 'api';
 
-  // Instanciate nest app
+  // Instantiate nest app
   const app = await NestFactory.create(AppModule);
 
   // Set custom logger service
@@ -23,7 +23,12 @@ async function bootstrap() {
 
   app.use(morgan('combined'));
 
-  app.use(cookieParser('myScret'));
+  const { COOKIE_SECRET: cookieSecret } = process.env;
+
+  if (cookieSecret === undefined || cookieSecret === '')
+    throw new Error('COOKIE_SECRET is missing in the environment variables');
+
+  app.use(cookieParser(cookieSecret));
 
   // Set global validation pipe
   app.useGlobalPipes(
