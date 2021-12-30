@@ -3,12 +3,14 @@ import { join } from 'path';
 
 import { addProjectConfiguration, readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import fetch, { Response } from 'node-fetch';
 
 import * as localPackageJson from '../../../package.json';
 import { npmRun } from '../../helpers/npm-run';
 import generator, { packagesToAdd } from './generator';
 
 jest.mock('../../helpers/npm-run');
+jest.mock('node-fetch');
 
 describe('release generator', () => {
   let appTree: Tree;
@@ -22,6 +24,15 @@ describe('release generator', () => {
       sourceRoot: 'libs/test/src',
     });
     npmRunSpy = npmRun as jest.MockedFunction<typeof npmRun>;
+    // Mock node fetch http call
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValue(
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            'dist-tags': { latest: '1.0.0' },
+          }),
+      }) as unknown as Promise<Response>,
+    );
   });
 
   it('should run and skip the global format', async () => {
