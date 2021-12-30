@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.31.1](https://github.com/tractr/stack/compare/v1.31.0...v1.31.1) (2021-12-30)
+
+
+### Bug Fixes
+
+* **rext-client:** fix query params handler to handre arrays ([#343](https://github.com/tractr/stack/issues/343)) ([fa4afe3](https://github.com/tractr/stack/commit/fa4afe39e7370e369837e57dfd5f4a22b206f2e4))
+
+
+### Features
+
+* bump angular and nx to 13 ([#338](https://github.com/tractr/stack/issues/338)) ([698e503](https://github.com/tractr/stack/commit/698e5030b6e2d14ab609f9507da37762c800fcbd))
+
+
+
 # [1.31.0](https://github.com/tractr/stack/compare/v1.30.0...v1.31.0) (2021-12-21)
 
 

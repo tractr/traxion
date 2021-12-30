@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.31.1](https://github.com/tractr/stack/compare/v1.31.0...v1.31.1) (2021-12-30)
+
+
+### Features
+
+* add test to nestjs-casl ([#342](https://github.com/tractr/stack/issues/342)) ([f649e1c](https://github.com/tractr/stack/commit/f649e1ced31532da96802feaecf31596a2d97687))
+* bump angular and nx to 13 ([#338](https://github.com/tractr/stack/issues/338)) ([698e503](https://github.com/tractr/stack/commit/698e5030b6e2d14ab609f9507da37762c800fcbd))
+
+
+
 # [1.31.0](https://github.com/tractr/stack/compare/v1.30.0...v1.31.0) (2021-12-21)
 
 
