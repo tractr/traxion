@@ -61,7 +61,8 @@
     "terraform-service-ecs": "libs/terraform/service/ecs",
     "terraform-service-postgres": "libs/terraform/service/postgres",
     "terraform-service-pwa": "libs/terraform/service/pwa",
-    "terraform-service-reverse-proxy": "libs/terraform/service/reverse-proxy"
+    "terraform-service-reverse-proxy": "libs/terraform/service/reverse-proxy",
+    "workspace": "libs/workspace"
   },
   "version": 2
 }
