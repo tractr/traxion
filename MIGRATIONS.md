@@ -14,13 +14,15 @@ ERROR  As of Nx 13, project configuration should be moved from nx.json to worksp
 
 At the moment we are writing this document, this is caused by a bug in the Nx
 cli. To fix it, you need to remove the `projects` key in your `nx.json` file.
-Then you cant continue the migration normally. Note than this can cause cyclic
-dependencies in your project, making any command that check dependencies to
-loop.
+Then you can continue the migration normally.
 
-will be able to separate your `workspace.json`into multiple
+After that, you will be able to separate your `workspace.json`into multiple
 `workspace.json/project.json`. To do that you need to execute this command into
 your cli: `nx g convert-to-nx-project --all`.
+
+Note that if your workspace contains a virtual `workspace` project that contains
+targets for the whole workspace, you will encounter looping issues when running
+nx commands. To fix it, you can take example on this repository with the libs/workspace project.
 
 Make sure your build, test and lint pass before passing to the next step (the
 use of multiple pr is recommended here).

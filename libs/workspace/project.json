@@ -1,0 +1,13 @@
+{
+  "ignore": true,
+  "projectType": "library",
+  "root": "libs/workspace",
+  "targets": {
+    "release": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "syncVersions": true
+      }
+    }
+  }
+}
