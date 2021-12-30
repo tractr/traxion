@@ -6,10 +6,10 @@
     "url": "https://github.com/tractr/stack"
   },
   "peerDependencies": {
-    "@tractr/hapify-templates-models": "^1.4.2",
-    "@tractr/hapify-templates-nestjs-models-common": "^1.4.2",
-    "@tractr/nestjs-core": "^1.6.3",
-    "@tractr/nestjs-database": "^1.5.0",
+    "@tractr/hapify-templates-models": "^1.31.1",
+    "@tractr/hapify-templates-nestjs-models-common": "^1.31.1",
+    "@tractr/nestjs-core": "^1.31.1",
+    "@tractr/nestjs-database": "^1.31.1",
     "jsonwebtoken": "^8.5.1"
   },
   "optionalDependencies": {

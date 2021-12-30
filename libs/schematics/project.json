@@ -75,6 +75,12 @@
         "commands": ["nx run schematics:build"]
       }
     },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {

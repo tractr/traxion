@@ -1,8 +1,11 @@
 import { addProjectConfiguration, readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import fetch, { Response } from 'node-fetch';
 
 import * as localPackageJson from '../../../package.json';
 import generator, { packagesToAdd } from './generator';
+
+jest.mock('node-fetch');
 
 describe('eslint generator', () => {
   let appTree: Tree;
@@ -14,6 +17,15 @@ describe('eslint generator', () => {
       root: 'libs/test',
       sourceRoot: 'libs/test/src',
     });
+    // Mock node fetch http call
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValue(
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            'dist-tags': { latest: '1.0.0' },
+          }),
+      }) as unknown as Promise<Response>,
+    );
   });
 
   it('should add the eslint configuration', async () => {

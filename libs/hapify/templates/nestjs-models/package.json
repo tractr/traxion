@@ -8,10 +8,10 @@
   },
   "license": "UNLICENSED",
   "peerDependencies": {
-    "@tractr/hapify-templates-nestjs-models-common": "1.4.2",
-    "@tractr/hapify-templates-nestjs-models-rest": "1.4.4",
-    "class-transformer": "^0.4.0",
-    "class-validator": "^0.13.1"
+    "@tractr/hapify-templates-nestjs-models-common": "1.31.1",
+    "@tractr/hapify-templates-nestjs-models-rest": "1.31.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2"
   },
   "publishConfig": {
     "access": "restricted",
