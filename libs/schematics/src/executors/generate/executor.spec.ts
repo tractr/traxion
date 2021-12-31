@@ -12,16 +12,16 @@ import executor from './executor';
 import { GenerateExecutorSchema } from './schema';
 
 import * as hapifyGenerateConfig from '@tractr/hapify-generate-config';
-import * as hapifyUpdateTemplates from '@tractr/update-templates-import-path';
+import * as hapifyUpdateTemplates from '@tractr/hapify-update-templates-import-path';
 
 jest.mock('child_process');
 jest.mock('@tractr/hapify-generate-config', () => ({
   __esModule: true,
   ...jest.requireActual('@tractr/hapify-generate-config'),
 }));
-jest.mock('@tractr/update-templates-import-path', () => ({
+jest.mock('@tractr/hapify-update-templates-import-path', () => ({
   __esModule: true,
-  ...jest.requireActual('@tractr/update-templates-import-path'),
+  ...jest.requireActual('@tractr/hapify-update-templates-import-path'),
 }));
 
 describe('Generate executor:generate', () => {
