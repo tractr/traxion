@@ -74,7 +74,7 @@
             "forwardAllArgs": false
           },
           {
-            "command": "cp -rf dist/libs/hapify/update-templates-import-path/ node_modules/@tractr/update-templates-import-path/",
+            "command": "cp -rf dist/libs/hapify/update-templates-import-path/ node_modules/@tractr/hapify-update-templates-import-path/",
             "description": "Copy the current build to node_modules",
             "forwardAllArgs": false
           },

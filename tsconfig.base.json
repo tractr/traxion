@@ -73,6 +73,9 @@
       "@tractr/hapify-update-templates-import-path": [
         "libs/hapify/update-templates-import-path/src/index.ts"
       ],
+      "@tractr/hapify-update-templates-import-path": [
+        "libs/hapify/update-templates-import-path/src/index.ts"
+      ],
       "@tractr/nestjs-authentication": [
         "libs/nestjs/authentication/src/index.ts"
       ],
