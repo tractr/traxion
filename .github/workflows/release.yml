@@ -60,8 +60,8 @@ jobs:
           git config --local user.email 'tractr-bot@users.noreply.github.com'
 
       # We run our release script
-      - name: nx run-many --all --target release --base latest
-        run: npx nx run-many --all --target release --base latest
+      - name: nx run-many --all --target release --base latest --parallel 1
+        run: npx nx run-many --all --target release --base latest --parallel 1
 
       - name: Push changes
         uses: ad-m/github-push-action@master
