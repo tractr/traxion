@@ -1,7 +1,7 @@
 {
   "ignore": true,
-  "projectType": "library",
-  "root": "libs",
+  "projectType": "application",
+  "root": "apps",
   "targets": {
     "release": {
       "executor": "@jscutlery/semver:version",
