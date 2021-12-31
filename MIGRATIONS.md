@@ -21,8 +21,9 @@ After that, you will be able to separate your `workspace.json`into multiple
 your cli: `nx g convert-to-nx-project --all`.
 
 Note that if your workspace contains a virtual `workspace` project that contains
-targets for the whole workspace, you will encounter looping issues when running
-nx commands. To fix it, you can take example on this repository with the libs/workspace project.
+targets for the whole workspace (like @jscutlery/semver release targets), you will encounter looping issues when running
+nx commands. To fix it, you can take example on this repository with the libs/workspace and apps/temporary-workspace projects.
+This will be updated as soon as nx can handle `project.json` at the root of the workspace.
 
 Make sure your build, test and lint pass before passing to the next step (the
 use of multiple pr is recommended here).
@@ -35,6 +36,7 @@ does not use breaking part. Check the requirements needed from the
 guide. If you are not using queryraw and JsonValue you will normally be fine.
 After that you can execute `npm install prisma@3 @prisma/client@3`and rerun your
 build, test and lint.
+Also note that if your project already have a database, all referntial actions will be considered as `CASCADE when updating to prisma 3. To avoid that you must migrate your database. More information can be found [here](https://www.prisma.io/docs/guides/upgrade-guides/upgrading-versions/upgrading-to-prisma-3/referential-actions/).
 
 ## Update the rest
 
