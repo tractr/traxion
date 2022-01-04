@@ -70,26 +70,6 @@
       "@tractr/hapify-react-admin": [
         "libs/hapify/templates/react-admin/src/index.ts"
       ],
-      "@tractr/hapify-templates-angular-rext-client": [
-        "libs/hapify/templates/angular-rext-client"
-      ],
-      "@tractr/hapify-templates-casl": ["libs/hapify/templates/casl"],
-      "@tractr/hapify-templates-dbml": ["libs/hapify/templates/dbml"],
-      "@tractr/hapify-templates-models": ["libs/hapify/templates/models"],
-      "@tractr/hapify-templates-nestjs-models": [
-        "libs/hapify/templates/nestjs-models"
-      ],
-      "@tractr/hapify-templates-nestjs-models-common": [
-        "libs/hapify/templates/nestjs-models-common"
-      ],
-      "@tractr/hapify-templates-nestjs-models-rest": [
-        "libs/hapify/templates/nestjs-models-rest"
-      ],
-      "@tractr/hapify-templates-prisma": ["libs/hapify/templates/prisma"],
-      "@tractr/hapify-templates-rest-dtos": ["libs/hapify/templates/rest-dtos"],
-      "@tractr/hapify-templates-rext-client": [
-        "libs/hapify/templates/rext-client"
-      ],
       "@tractr/hapify-update-templates-import-path": [
         "libs/hapify/update-templates-import-path/src/index.ts"
       ],
