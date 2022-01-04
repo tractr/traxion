@@ -1,0 +1,97 @@
+{
+  "implicitDependencies": ["hapify-templates-casl", "common"],
+  "prefix": "tractr",
+  "projectType": "library",
+  "root": "libs/generated/casl",
+  "sourceRoot": "libs/generated/casl/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "configurations": {
+        "development": {
+          "tsConfig": "libs/generated/casl/tsconfig.lib.json"
+        },
+        "production": {
+          "tsConfig": "libs/generated/casl/tsconfig.lib.prod.json"
+        }
+      },
+      "defaultConfiguration": "production",
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "options": {
+        "project": "libs/generated/casl/ng-package.json"
+      },
+      "outputs": ["dist/libs/generated/casl"]
+    },
+    "generate": {
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "pregenerate"
+        }
+      ],
+      "executor": "./dist/libs/schematics:generate",
+      "options": {
+        "cwd": "libs/generated/casl"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/generated/casl/src/**/*.ts",
+          "libs/generated/casl/src/**/*.html"
+        ]
+      }
+    },
+    "pregenerate": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "rm -rf node_modules/@tractr/{hapify-config,hapify-generate-config,hapify-common,hapify-update-templates-import-path,hapify-templates-casl}",
+            "description": "Delete previous Hapify Common from node modules",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "mkdir -p node_modules/@tractr",
+            "description": "Ensure the directory exists before the copy",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "cp -rf dist/libs/config/hapify/ node_modules/@tractr/hapify-config/",
+            "description": "Copy the current build to node_modules",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "cp -rf dist/libs/hapify/generate-config/ node_modules/@tractr/hapify-generate-config/",
+            "description": "Copy the current build to node_modules",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "cp -rf dist/libs/hapify/hapify-common/ node_modules/@tractr/hapify-common/",
+            "description": "Copy the current build to node_modules",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "cp -rf dist/libs/hapify/update-templates-import-path/ node_modules/@tractr/update-templates-import-path/",
+            "description": "Copy the current build to node_modules",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "cp -rf dist/libs/hapify/templates/casl node_modules/@tractr/hapify-templates-casl/",
+            "description": "Copy the current build to node_modules",
+            "forwardAllArgs": false
+          }
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/generated/casl/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/generated/casl"]
+    }
+  }
+}

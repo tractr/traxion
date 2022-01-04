@@ -5,9 +5,12 @@ import { ConsoleModule } from 'nestjs-console';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { getSelectPrismaUserQuery, rolePermissions } from '@generated/casl';
-import { ModelsModule } from '@generated/nestjs-models';
-import { USER_SERVICE } from '@generated/nestjs-models-common';
+import {
+  getSelectPrismaUserQuery,
+  rolePermissions,
+} from '@tractr/generated-casl';
+import { ModelsModule } from '@tractr/generated-nestjs-models';
+import { USER_SERVICE } from '@tractr/generated-nestjs-models-common';
 import {
   AuthenticationModule,
   JwtGlobalAuthGuard,

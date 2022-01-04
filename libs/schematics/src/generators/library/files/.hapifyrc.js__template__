@@ -11,9 +11,7 @@ module.exports = {
   validatorPath: getValidatorPath(__dirname),
   project: '<%= hapifyModelJson %>',
   extends: [<% for (const templateName of templates) {%>
-    '<%= templateName %>',
-  <% } %>],<% if (hapifyUseImportReplacements) { %>
+    '<%= templateName %>',<% } %>],<% if (hapifyUseImportReplacements) { %>
   importReplacements: {<% for (const replacement of hapifyImportReplacements) { %>
-    '<%= replacement %>': '@<%= npmScope %>/<%= replacement %>',<% } %>
-  },<% } %>
+    '<%= replacement %>': '@<%= npmScope %>/<%= replacement %>',<% } %>},<% } %>
 };

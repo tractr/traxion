@@ -4,7 +4,13 @@ import { libraryGenerator as angularLibraryGenerator } from '@nrwl/angular/gener
 import { formatFiles, generateFiles, Tree } from '@nrwl/devkit';
 import { libraryGenerator as nestLibraryGenerator } from '@nrwl/nest';
 
-import { normalizeGeneratorOptions, normalizeOptions } from './helpers';
+import {
+  cleanAngularLibrary,
+  cleanNestLibrary,
+  createSecondaryEntrypoints,
+  normalizeGeneratorOptions,
+  normalizeOptions,
+} from './helpers';
 import {
   AngularLibraryGeneratorOptions,
   LibraryGeneratorOptions,
@@ -51,8 +57,14 @@ export default async function libraryGenerator(
       generatorOptions as AngularLibraryGeneratorOptions,
     );
   else if (type === 'nest') await nestLibraryGenerator(tree, generatorOptions);
+  else throw new Error(`Unknown library type: ${type as string}`);
 
   const normalizedOptions = normalizeOptions(tree, options);
+
+  await createSecondaryEntrypoints(tree, normalizedOptions);
+
+  if (type === 'angular') cleanAngularLibrary(tree, normalizedOptions);
+  else if (type === 'nest') cleanNestLibrary(tree, normalizedOptions);
 
   addFiles(tree, normalizedOptions);
   addGitIgnoreEntry(tree, normalizedOptions);

@@ -20,10 +20,12 @@ describe('library generator', () => {
   const options: LibraryGeneratorOptions = {
     name: 'test',
     type: 'angular',
-    hapifyTemplates: [],
+    hapifyTemplates: ['models'],
     hapifyModelsJson: 'hapify-models.json',
     hapifyAdditionalTemplates: '',
     hapifyUseImportReplacements: true,
+    useSecondaryEndpoint: true,
+    addSecondaryEndpoint: [],
   };
 
   let angularGenerator: jest.SpyInstance;
@@ -86,7 +88,10 @@ describe('library generator', () => {
   });
 
   it('should generate a .hapifyrc.js file', async () => {
-    await generator(appTree, options);
+    await generator(appTree, {
+      ...options,
+      hapifyTemplates: [],
+    });
 
     expect(appTree.exists('libs/test/.hapifyrc.js')).toBeTruthy();
     expect(appTree.read('libs/test/.hapifyrc.js')?.toString()).toEqual(`const {
@@ -110,7 +115,7 @@ module.exports = {
   it('should generate a .hapifyrc.js file with the configured templates', async () => {
     await generator(appTree, {
       ...options,
-      hapifyTemplates: ['prisma'],
+      hapifyTemplates: ['models'],
       hapifyAdditionalTemplates:
         '@tractr/additional-templates-1,@tractr/additional-templates-2',
     });
@@ -129,10 +134,9 @@ module.exports = {
   validatorPath: getValidatorPath(__dirname),
   project: '../../hapify-models.json',
   extends: [
-    '@tractr/hapify-templates-prisma',
+    '@tractr/hapify-templates-models',
     '@tractr/additional-templates-1',
-    '@tractr/additional-templates-2',
-  ],
+    '@tractr/additional-templates-2',],
   importReplacements: {},
 };
 `);
@@ -158,12 +162,10 @@ module.exports = {
   validatorPath: getValidatorPath(__dirname),
   project: '../../hapify-models.json',
   extends: [
-    '@tractr/hapify-templates-rext-client',
-  ],
+    '@tractr/hapify-templates-rext-client',],
   importReplacements: {
     'models': '@proj/models',
-    'rest-dtos': '@proj/rest-dtos',
-  },
+    'rest-dtos': '@proj/rest-dtos',},
 };
 `);
   });

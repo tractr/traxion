@@ -17,6 +17,8 @@ export interface NormalizedOptions extends TractrLibraryGeneratorOptions {
   hapifyModelsJsonRelativePath: string;
   templates: string[];
   hapifyImportReplacements: string[];
+  secondaryEntrypoints: string[];
+  importPath: string;
 }
 
 export interface TractrLibraryGeneratorOptions {
@@ -25,6 +27,8 @@ export interface TractrLibraryGeneratorOptions {
   hapifyAdditionalTemplates: string;
   hapifyModelsJson: string;
   hapifyUseImportReplacements: boolean;
+  useSecondaryEndpoint: boolean;
+  addSecondaryEndpoint: string[];
 }
 
 export type AvailableTractrTemplates =
