@@ -13,4 +13,4 @@
 **/hapify.json
 .docusaurus/
 
-libs/schematics/src/generators/target-generate/schema.json
+libs/schematics/**/schema.json

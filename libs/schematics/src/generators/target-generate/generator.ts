@@ -65,15 +65,19 @@ export default async function targetGenerateGenerator(
   // Get the project configuration
   const project = readProjectConfiguration(tree, normalizedOptions.projectName);
 
+  const baseOptions = {
+    cwd: normalizedOptions.projectRoot,
+    inputHapifyGeneratedPath: normalizedOptions.inputHapifyGeneratedPath,
+    outputGeneratedPath: normalizedOptions.outputGeneratedPath,
+  };
+
   project.targets = project.targets || {};
   project.targets.generate = {
     executor: `${SCHEMATICS_TRACTR_PACKAGE_NAME}:generate`,
     options: {
-      cwd: normalizedOptions.projectRoot,
-      inputHapifyGeneratedPath: normalizedOptions.inputHapifyGeneratedPath,
-      outputGeneratedPath: normalizedOptions.outputGeneratedPath,
-      format: normalizedOptions.format,
-      cleanFirst: normalizedOptions.cleanFirst,
+      ...(!normalizedOptions.format && { format: false }),
+      ...(!normalizedOptions.cleanFirst && { cleanFirst: false }),
+      ...baseOptions,
     },
   };
 
