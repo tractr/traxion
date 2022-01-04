@@ -7,7 +7,10 @@ import {
   Tree,
 } from '@nrwl/devkit';
 
-import { DEFAULT_IMPORT_REPLACEMENTS } from '../library.constants';
+import {
+  DEFAULT_IMPORT_REPLACEMENTS,
+  DEFAULT_SECONDARY_ENTRY_POINTS,
+} from '../../../schematics.constants';
 import {
   AngularLibraryGeneratorOptions,
   LibraryGeneratorOptions,
@@ -35,6 +38,19 @@ export function normalizeOptions(
       .concat(...options.hapifyAdditionalTemplates.split(','))
       .filter((template) => template !== '') || [];
 
+  const defaultEntrypoint = [
+    ...new Set(
+      options.hapifyTemplates.flatMap(
+        (template) => DEFAULT_SECONDARY_ENTRY_POINTS[template] || [],
+      ),
+    ),
+  ];
+  const secondaryEntrypoints = [
+    ...new Set(
+      defaultEntrypoint.concat(...(options.addSecondaryEndpoint || [])),
+    ),
+  ];
+
   const normalized: NormalizedOptions = {
     type: options.type,
     hapifyTemplates: options.hapifyTemplates,
@@ -59,6 +75,10 @@ export function normalizeOptions(
         ),
       ),
     ],
+    addSecondaryEndpoint: options.addSecondaryEndpoint,
+    useSecondaryEndpoint: options.useSecondaryEndpoint,
+    secondaryEntrypoints,
+    importPath: options.importPath || options.name,
   };
 
   return normalized;

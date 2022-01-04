@@ -180,11 +180,13 @@
     "@types/react-helmet": "^6.1.2",
     "@types/react-router-dom": "^5.1.8",
     "@types/supertest": "^2.0.11",
-    "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "5.10.2",
     "@typescript-eslint/parser": "5.10.2",
     "cdktf": "^0.9.0",
     "cdktf-cli": "^0.9.0",
+    "@types/uuid": "^8.3.3",
+    "autoprefixer": "^10.4.0",
+    "babel-jest": "^27.4.5",
     "commitizen": "^4.2.4",
     "cypress": "^8.0.0",
     "cz-conventional-changelog": "^3.3.0",
@@ -217,11 +219,16 @@
     "prisma": "^3.7.0",
     "prisma-merge": "^0.2.0",
     "rimraf": "^3.0.2",
-    "ts-jest": "27.0.5",
-    "ts-node": "~10.1.0",
-    "tslib": "^2.0.0",
     "typescript": "4.5.5",
-    "webpack": "^5.50.0"
+    "tailwindcss": "^3.0.2",
+    "ts-jest": "27.1.2",
+    "ts-node": "~10.4.0",
+    "tslib": "^2.3.1",
+    "webpack": "^5.65.0",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "prisma": {
+    "seed": "ts-node libs/prisma/src/index.ts"
   }
 }
 

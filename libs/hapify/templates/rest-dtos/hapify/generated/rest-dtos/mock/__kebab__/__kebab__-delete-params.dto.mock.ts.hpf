@@ -1,4 +1,4 @@
-import { <<Model pascal>>DeleteParamsDto } from '../../dtos';
+import { <<Model pascal>>DeleteParamsDto } from '../..';
   
 import {
 <<for Fields primary primaryField>>

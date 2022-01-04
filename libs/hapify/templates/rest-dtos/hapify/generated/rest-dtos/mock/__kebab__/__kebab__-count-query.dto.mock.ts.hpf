@@ -1,4 +1,4 @@
-import { <<Model pascal>>CountQueryDto } from '../../dtos';
+import { <<Model pascal>>CountQueryDto } from '../..';
   
 import {
 <<for Fields searchable and not password and not hidden field>>

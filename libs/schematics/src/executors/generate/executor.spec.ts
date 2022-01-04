@@ -11,6 +11,7 @@ import * as fs from 'fs-extra';
 import executor from './executor';
 import { GenerateExecutorSchema } from './schema';
 
+import * as hapifyCommon from '@tractr/hapify-common';
 import * as hapifyGenerateConfig from '@tractr/hapify-generate-config';
 import * as hapifyUpdateTemplates from '@tractr/hapify-update-templates-import-path';
 
@@ -22,6 +23,10 @@ jest.mock('@tractr/hapify-generate-config', () => ({
 jest.mock('@tractr/hapify-update-templates-import-path', () => ({
   __esModule: true,
   ...jest.requireActual('@tractr/hapify-update-templates-import-path'),
+}));
+jest.mock('@tractr/hapify-common', () => ({
+  __esModule: true,
+  ...jest.requireActual('@tractr/hapify-common'),
 }));
 
 describe('Generate executor:generate', () => {
@@ -35,11 +40,15 @@ describe('Generate executor:generate', () => {
   // fs
   let pathExists: jest.SpyInstance;
   let remove: jest.SpyInstance;
-  let move: jest.SpyInstance;
+  let copy: jest.SpyInstance;
+  let readdir: jest.SpyInstance;
+  let packageJson: { name: string };
+  let packageJsonName: jest.Mock;
 
   // tractr
   let getHapifyOptions: jest.SpyInstance;
-  let hapifyUpdateTemplatesImportPath: jest.SpyInstance;
+  let processImportReplacements: jest.SpyInstance;
+  let getHapifyConfig: jest.SpyInstance;
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -54,9 +63,11 @@ describe('Generate executor:generate', () => {
     defaultOptions = {
       cwd: 'libs/test',
       format: true,
-      outputGeneratedPath: 'src/generated',
+      outputGeneratedPath: 'generated',
       inputHapifyGeneratedPath: 'generated',
       cleanFirst: true,
+      moveGeneratedFiles: true,
+      secondaryEntrypoints: ['mock'],
     };
     // node child_process
     execSpy = exec as jest.MockedFunction<typeof exec>;
@@ -64,7 +75,14 @@ describe('Generate executor:generate', () => {
     // fs
     pathExists = jest.spyOn(fs, 'pathExists');
     remove = jest.spyOn(fs, 'remove');
-    move = jest.spyOn(fs, 'move');
+    copy = jest.spyOn(fs, 'copy');
+    readdir = jest.spyOn(fs, 'readdir');
+    packageJsonName = jest.fn();
+    packageJson = {
+      get name() {
+        return packageJsonName();
+      },
+    };
 
     // nrwl devkit
     loggerSpy = jest.spyOn(logger, 'debug');
@@ -73,33 +91,65 @@ describe('Generate executor:generate', () => {
 
     // tractr
     getHapifyOptions = jest.spyOn(hapifyGenerateConfig, 'getHapifyOptions');
-    hapifyUpdateTemplatesImportPath = jest.spyOn(
+    processImportReplacements = jest.spyOn(
       hapifyUpdateTemplates,
-      'hapifyUpdateTemplatesImportPath',
+      'processImportReplacements',
     );
+    getHapifyConfig = jest.spyOn(hapifyCommon, 'getHapifyConfig');
 
     // Mock the default return values
-    pathExists.mockReturnValueOnce(Promise.resolve(true));
-    remove.mockReturnValueOnce(Promise.resolve(true));
-    getHapifyOptions.mockReturnValueOnce(Promise.resolve(true));
+    pathExists.mockReturnValue(Promise.resolve(true));
+    remove.mockReturnValue(Promise.resolve(true));
+    getHapifyOptions.mockReturnValue(Promise.resolve(true));
+    getHapifyConfig.mockReturnValue(
+      Promise.resolve({
+        importReplacements: [],
+      }),
+    );
     execSpy.mockImplementationOnce((_cmd, _options, cb) =>
       cb(null, { stdout: '', stderr: '' }),
     );
-    move.mockReturnValueOnce(Promise.resolve(true));
-    hapifyUpdateTemplatesImportPath.mockReturnValueOnce(Promise.resolve(true));
+    readdir.mockReturnValueOnce(Promise.resolve(['template']));
+    readdir.mockReturnValue(Promise.resolve(['mock', 'src', 'test']));
+    copy.mockReturnValue(Promise.resolve(true));
+    processImportReplacements.mockReturnValue(Promise.resolve(true));
     execSpy.mockImplementationOnce((_cmd, cb) =>
       cb(null, { stdout: '', stderr: '' }),
     );
+    jest.mock('/root/libs/test/package.json', () => packageJson, {
+      virtual: true,
+    });
+    packageJsonName.mockReturnValue('@test/generated');
   });
 
   it('should execute all the action when the default options are used', async () => {
     const output = await executor(defaultOptions, defaultContext);
 
-    expect(pathExists).toHaveBeenCalledTimes(1);
-    expect(pathExists).toHaveBeenCalledWith('/root/libs/test');
+    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(pathExists).toHaveBeenNthCalledWith(1, '/root/libs/test');
+    expect(pathExists).toHaveBeenNthCalledWith(2, '/root/libs/test/src');
+    expect(pathExists).toHaveBeenNthCalledWith(3, '/root/libs/test/mock');
 
-    expect(remove).toHaveBeenCalledTimes(1);
-    expect(remove).toHaveBeenCalledWith('/root/libs/test/src/generated');
+    expect(remove).toHaveBeenCalledTimes(7);
+    expect(remove).toHaveBeenNthCalledWith(1, '/root/libs/test/generated');
+    expect(remove).toHaveBeenNthCalledWith(2, '/root/libs/test/src/generated');
+    expect(remove).toHaveBeenNthCalledWith(
+      3,
+      '/root/libs/test/mock/src/generated',
+    );
+    expect(remove).toHaveBeenNthCalledWith(
+      4,
+      '/root/libs/test/src/generated/template/mock',
+    );
+    expect(remove).toHaveBeenNthCalledWith(
+      5,
+      '/root/libs/test/mock/src/generated/template/src',
+    );
+    expect(remove).toHaveBeenNthCalledWith(
+      6,
+      '/root/libs/test/mock/src/generated/template/test',
+    );
+    expect(remove).toHaveBeenNthCalledWith(7, '/root/libs/test/generated');
 
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(getHapifyOptions).toHaveBeenCalledWith('/root/libs/test');
@@ -114,21 +164,33 @@ describe('Generate executor:generate', () => {
       expect.any(Function),
     );
 
-    expect(move).toHaveBeenCalledTimes(1);
-    expect(move).toHaveBeenCalledWith(
+    expect(copy).toHaveBeenCalledTimes(2);
+    expect(copy).toHaveBeenNthCalledWith(
+      1,
       '/root/libs/test/generated',
       '/root/libs/test/src/generated',
     );
+    expect(copy).toHaveBeenNthCalledWith(
+      2,
+      '/root/libs/test/generated',
+      '/root/libs/test/mock/src/generated',
+    );
 
-    expect(hapifyUpdateTemplatesImportPath).toHaveBeenCalledTimes(1);
-    expect(hapifyUpdateTemplatesImportPath).toHaveBeenCalledWith(
+    expect(processImportReplacements).toHaveBeenCalledTimes(2);
+    expect(processImportReplacements).toHaveBeenNthCalledWith(
+      1,
       '/root/libs/test/src/generated',
-      '/root/libs/test',
+      {},
+    );
+    expect(processImportReplacements).toHaveBeenNthCalledWith(
+      2,
+      '/root/libs/test/mock/src/generated',
+      { template: '@test/generated' },
     );
 
     expect(execSpy).toHaveBeenNthCalledWith(
       2,
-      `npx prettier '/root/libs/test/src/generated/**/*.ts' --write`,
+      `npx prettier '/root/libs/test/{src,mock}/generated/**/*.ts' --write`,
       expect.any(Function),
     );
     expect(output).toEqual({ success: true });
@@ -149,18 +211,30 @@ describe('Generate executor:generate', () => {
     });
 
     expect(loggerSpy).toHaveBeenCalledTimes(8);
-    expect(loggerSpy).toHaveBeenCalledWith('Check if /root/libs/test exists');
-    expect(loggerSpy).toHaveBeenCalledWith(
-      'Remove /root/libs/test/src/generated',
+    expect(loggerSpy).toHaveBeenNthCalledWith(
+      1,
+      'Check if /root/libs/test exists',
     );
-    expect(loggerSpy).toHaveBeenCalledWith('Generate the configuration files');
-    expect(loggerSpy).toHaveBeenCalledWith('Generate the hapify files');
-    expect(loggerSpy).toHaveBeenCalledWith('Hapify generation success');
-    expect(loggerSpy).toHaveBeenCalledWith(
-      'Move the generated files to src/generated',
+    expect(loggerSpy).toHaveBeenNthCalledWith(2, 'Cleaning files');
+    expect(loggerSpy).toHaveBeenNthCalledWith(
+      3,
+      'Generating the configuration files',
     );
-    expect(loggerSpy).toHaveBeenCalledWith('Update the templates import path');
-    expect(loggerSpy).toHaveBeenCalledWith('Format the generated files');
+    expect(loggerSpy).toHaveBeenNthCalledWith(4, 'Generating the hapify files');
+    expect(loggerSpy).toHaveBeenNthCalledWith(5, 'Hapify generation success');
+    expect(loggerSpy).toHaveBeenNthCalledWith(
+      6,
+      'Moving the generated files from generated',
+    );
+    expect(loggerSpy).toHaveBeenNthCalledWith(
+      7,
+      'Updating the templates import path',
+    );
+    expect(loggerSpy).toHaveBeenNthCalledWith(
+      8,
+      'Formating the generated files:',
+      'src,mock',
+    );
 
     expect(output).toEqual({ success: true });
   });
@@ -184,9 +258,13 @@ describe('Generate executor:generate', () => {
     expect(remove).toHaveBeenCalledTimes(0);
     expect(getHapifyOptions).toHaveBeenCalledTimes(0);
     expect(execSpy).toHaveBeenCalledTimes(0);
-    expect(move).toHaveBeenCalledTimes(0);
-    expect(hapifyUpdateTemplatesImportPath).toHaveBeenCalledTimes(0);
-    expect(output).toEqual({ success: false });
+    expect(copy).toHaveBeenCalledTimes(0);
+    expect(processImportReplacements).toHaveBeenCalledTimes(0);
+    expect(output).toEqual(
+      new Error(
+        `The path "/root/libs/test" seems to be not a valid project directory`,
+      ),
+    );
   });
 
   it('should not throw if remove throw an error', async () => {
@@ -197,12 +275,12 @@ describe('Generate executor:generate', () => {
 
     const output = await executor(defaultOptions, defaultContext);
 
-    expect(pathExists).toHaveBeenCalledTimes(1);
-    expect(remove).toHaveBeenCalledTimes(1);
+    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(remove).toHaveBeenCalledTimes(5);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(2);
-    expect(move).toHaveBeenCalledTimes(1);
-    expect(hapifyUpdateTemplatesImportPath).toHaveBeenCalledTimes(1);
+    expect(copy).toHaveBeenCalledTimes(2);
+    expect(processImportReplacements).toHaveBeenCalledTimes(2);
     expect(output).toEqual({ success: true });
   });
 
@@ -218,12 +296,12 @@ describe('Generate executor:generate', () => {
     const output = await executor(defaultOptions, defaultContext);
 
     expect(pathExists).toHaveBeenCalledTimes(1);
-    expect(remove).toHaveBeenCalledTimes(1);
+    expect(remove).toHaveBeenCalledTimes(3);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(1);
-    expect(move).toHaveBeenCalledTimes(0);
-    expect(hapifyUpdateTemplatesImportPath).toHaveBeenCalledTimes(0);
-    expect(output).toEqual({ success: false });
+    expect(copy).toHaveBeenCalledTimes(0);
+    expect(processImportReplacements).toHaveBeenCalledTimes(0);
+    expect(output).toEqual(new Error('Error occured'));
   });
 
   it('should not remove the generated folder if cleanFirst options is set to false', async () => {
@@ -232,12 +310,12 @@ describe('Generate executor:generate', () => {
       defaultContext,
     );
 
-    expect(pathExists).toHaveBeenCalledTimes(1);
-    expect(remove).toHaveBeenCalledTimes(0);
+    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(remove).toHaveBeenCalledTimes(4);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(2);
-    expect(move).toHaveBeenCalledTimes(1);
-    expect(hapifyUpdateTemplatesImportPath).toHaveBeenCalledTimes(1);
+    expect(copy).toHaveBeenCalledTimes(2);
+    expect(processImportReplacements).toHaveBeenCalledTimes(2);
     expect(output).toEqual({ success: true });
   });
 
@@ -247,12 +325,12 @@ describe('Generate executor:generate', () => {
       defaultContext,
     );
 
-    expect(pathExists).toHaveBeenCalledTimes(1);
-    expect(remove).toHaveBeenCalledTimes(1);
+    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(remove).toHaveBeenCalledTimes(7);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(2);
-    expect(move).toHaveBeenCalledTimes(0);
-    expect(hapifyUpdateTemplatesImportPath).toHaveBeenCalledTimes(1);
+    expect(copy).toHaveBeenCalledTimes(2);
+    expect(processImportReplacements).toHaveBeenCalledTimes(2);
     expect(output).toEqual({ success: true });
   });
 
@@ -262,12 +340,12 @@ describe('Generate executor:generate', () => {
       defaultContext,
     );
 
-    expect(pathExists).toHaveBeenCalledTimes(1);
-    expect(remove).toHaveBeenCalledTimes(1);
+    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(remove).toHaveBeenCalledTimes(7);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(1);
-    expect(move).toHaveBeenCalledTimes(1);
-    expect(hapifyUpdateTemplatesImportPath).toHaveBeenCalledTimes(1);
+    expect(copy).toHaveBeenCalledTimes(2);
+    expect(processImportReplacements).toHaveBeenCalledTimes(2);
     expect(output).toEqual({ success: true });
   });
 
@@ -289,8 +367,74 @@ describe('Generate executor:generate', () => {
     expect(remove).toHaveBeenCalledTimes(0);
     expect(getHapifyOptions).toHaveBeenCalledTimes(0);
     expect(execSpy).toHaveBeenCalledTimes(0);
-    expect(move).toHaveBeenCalledTimes(0);
-    expect(hapifyUpdateTemplatesImportPath).toHaveBeenCalledTimes(0);
+    expect(copy).toHaveBeenCalledTimes(0);
+    expect(processImportReplacements).toHaveBeenCalledTimes(0);
     expect(output).toEqual('unexpected error');
+  });
+
+  it('should throw if the package json not found', async () => {
+    packageJsonName.mockReset();
+    packageJsonName.mockReturnValueOnce(undefined);
+
+    const output = await executor(defaultOptions, defaultContext);
+
+    expect(pathExists).toHaveBeenCalledTimes(0);
+    expect(remove).toHaveBeenCalledTimes(0);
+    expect(getHapifyOptions).toHaveBeenCalledTimes(0);
+    expect(execSpy).toHaveBeenCalledTimes(0);
+    expect(copy).toHaveBeenCalledTimes(0);
+    expect(processImportReplacements).toHaveBeenCalledTimes(0);
+    expect(output).toEqual(
+      new Error('could not found the package.json file in /root/libs/test'),
+    );
+  });
+
+  it('should throw if no hapify config have been found', async () => {
+    getHapifyConfig.mockReset();
+    getHapifyConfig.mockReturnValueOnce(undefined);
+
+    const output = await executor(defaultOptions, defaultContext);
+
+    expect(pathExists).toHaveBeenCalledTimes(1);
+    expect(remove).toHaveBeenCalledTimes(0);
+    expect(getHapifyOptions).toHaveBeenCalledTimes(0);
+    expect(execSpy).toHaveBeenCalledTimes(0);
+    expect(copy).toHaveBeenCalledTimes(0);
+    expect(processImportReplacements).toHaveBeenCalledTimes(0);
+    expect(output).toEqual(
+      new Error('No hapify config found in /root/libs/test folder'),
+    );
+  });
+
+  it('should still work even if no folder exist in the root directory', async () => {
+    pathExists.mockReset();
+    pathExists.mockReturnValueOnce(Promise.resolve(true));
+    pathExists.mockReturnValueOnce(Promise.resolve(true));
+    pathExists.mockReturnValueOnce(Promise.resolve(false));
+
+    const output = await executor(defaultOptions, defaultContext);
+
+    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(remove).toHaveBeenCalledTimes(5);
+    expect(getHapifyOptions).toHaveBeenCalledTimes(1);
+    expect(execSpy).toHaveBeenCalledTimes(2);
+    expect(copy).toHaveBeenCalledTimes(1);
+    expect(processImportReplacements).toHaveBeenCalledTimes(1);
+    expect(output).toEqual({ success: true });
+  });
+
+  it('should still work even if no importReplacements is inside the hapify config', async () => {
+    getHapifyConfig.mockReset();
+    getHapifyConfig.mockReturnValue(Promise.resolve({}));
+
+    const output = await executor(defaultOptions, defaultContext);
+
+    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(remove).toHaveBeenCalledTimes(7);
+    expect(getHapifyOptions).toHaveBeenCalledTimes(1);
+    expect(execSpy).toHaveBeenCalledTimes(2);
+    expect(copy).toHaveBeenCalledTimes(2);
+    expect(processImportReplacements).toHaveBeenCalledTimes(2);
+    expect(output).toEqual({ success: true });
   });
 });

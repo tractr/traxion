@@ -1,0 +1,97 @@
+{
+  "implicitDependencies": [
+    "hapify-templates-dbml"
+  ],
+  "projectType": "library",
+  "root": "libs/generated/dbml",
+  "sourceRoot": "libs/generated/dbml/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": [
+          "libs/generated/dbml/*.md"
+        ],
+        "main": "libs/generated/dbml/src/index.ts",
+        "outputPath": "dist/libs/generated/dbml",
+        "packageJson": "libs/generated/dbml/package.json",
+        "tsConfig": "libs/generated/dbml/tsconfig.lib.json"
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
+    },
+    "generate": {
+      "executor": "./dist/libs/schematics:generate",
+      "options": {
+        "cwd": "libs/generated/dbml",
+        "format": false,
+        "outputGeneratedPath": "generated"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/generated/dbml/**/*.ts"
+        ]
+      },
+      "outputs": [
+        "{options.outputFile}"
+      ]
+    },
+    "pregenerate": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "rm -rf node_modules/@tractr/{hapify-config,hapify-generate-config,hapify-common,hapify-update-templates-import-path,hapify-templates-dbml}",
+            "description": "Delete previous Hapify Common from node modules",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "mkdir -p node_modules/@tractr",
+            "description": "Ensure the directory exists before the copy",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "cp -rf dist/libs/config/hapify/ node_modules/@tractr/hapify-config/",
+            "description": "Copy the current build to node_modules",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "cp -rf dist/libs/hapify/generate-config/ node_modules/@tractr/hapify-generate-config/",
+            "description": "Copy the current build to node_modules",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "cp -rf dist/libs/hapify/hapify-common/ node_modules/@tractr/hapify-common/",
+            "description": "Copy the current build to node_modules",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "cp -rf dist/libs/hapify/update-templates-import-path/ node_modules/@tractr/hapify-update-templates-import-path/",
+            "description": "Copy the current build to node_modules",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "cp -rf dist/libs/hapify/templates/dbml node_modules/@tractr/hapify-templates-dbml/",
+            "description": "Copy the current build to node_modules",
+            "forwardAllArgs": false
+          }
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/generated/dbml/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": [
+        "coverage/libs/generated/dbml"
+      ]
+    }
+  }
+}

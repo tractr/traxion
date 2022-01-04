@@ -1,4 +1,4 @@
-import { <<Model pascal>>UpdateBodyDto } from '../../dtos';
+import { <<Model pascal>>UpdateBodyDto } from '../..';
   
 import {
 <<for Fields not internal field>>
@@ -13,7 +13,7 @@ import {
 } from '../../../models/mock';
 
 <<if Fields unique>>
-import { <<Model pascal>>UniqueValues } from '../../../models/models';
+import { <<Model pascal>>UniqueValues } from '../../../models';
 <<endif>>
   
 function mock<<Model pascal>>UpdateBodyDtoFactory(

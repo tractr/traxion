@@ -1,5 +1,5 @@
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-import { <<Model pascal>>FindUniqueQueryDto } from '../../dtos';
+import { <<Model pascal>>FindUniqueQueryDto } from '../..';
   
    
 export function mock<<Model pascal>>FindUniqueQueryDtoFactory(

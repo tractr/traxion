@@ -10,12 +10,16 @@
   ],
   "properties": {
     "addModuleSpec": {
-      "default": true,
+      "default": false,
       "description": "Add a module spec file.",
       "type": "boolean"
     },
+    "addSecondaryEndpoint": {
+      "description": "Add secondary endpoint to the library",
+      "type": "array"
+    },
     "addTailwind": {
-      "default": true,
+      "default": false,
       "description": "Whether to configure TailwindCSS for the application. It can only be used with buildable and publishable libraries. Non-buildable libraries will use the application's Tailwind configuration.",
       "type": "boolean"
     },
@@ -79,7 +83,24 @@
         "type": "string"
       },
       "type": "array",
-      "x-prompt": "Which templates your library will host?"
+      "x-prompt": {
+        "items": [
+          "angular-rext-client",
+          "casl",
+          "dbml",
+          "models",
+          "nestjs-models",
+          "nestjs-models-common",
+          "nestjs-models-rest",
+          "prisma",
+          "react-admin",
+          "rest-dtos",
+          "rext-client"
+        ],
+        "message": "Which templates your library will host?",
+        "multiselect": true,
+        "type": "list"
+      }
     },
     "hapifyUseImportReplacements": {
       "default": true,
@@ -132,6 +153,7 @@
       "type": "string"
     },
     "publishable": {
+      "default": true,
       "description": "Create a publishable library.",
       "type": "boolean"
     },
@@ -141,7 +163,7 @@
       "type": "string"
     },
     "routing": {
-      "default": false,
+      "default": true,
       "description": "Add router configuration. See `lazy` for more information.",
       "type": "boolean"
     },
@@ -176,7 +198,7 @@
       "type": "boolean"
     },
     "standaloneConfig": {
-      "default": false,
+      "default": true,
       "description": "Split the project configuration into <projectRoot>/project.json rather than including it inside workspace.json",
       "type": "boolean"
     },
@@ -213,6 +235,7 @@
       "type": "string"
     },
     "type": {
+      "default": "angular",
       "description": "Library type",
       "items": {
         "enum": ["angular", "nest"],
@@ -226,6 +249,11 @@
       "description": "Test runner to use for unit tests",
       "enum": ["jest", "none"],
       "type": "string"
+    },
+    "useSecondaryEndpoint": {
+      "default": true,
+      "description": "Do not add secondary endpoint to the library",
+      "type": "boolean"
     }
   },
   "required": ["name", "type"],

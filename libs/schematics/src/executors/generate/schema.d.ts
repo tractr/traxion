@@ -26,4 +26,14 @@ export interface GenerateExecutorSchema {
    * Do we want to clean the generated folder before generating the files?
    */
   cleanFirst: boolean;
+
+  /**
+   * Do we want to move the generated files
+   */
+  moveGeneratedFiles: boolean;
+
+  /**
+   * List of secondary entrypoints to move when configured
+   */
+  secondaryEntrypoints: string[];
 }
