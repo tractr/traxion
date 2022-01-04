@@ -51,6 +51,9 @@
       "@tractr/generated-nestjs-models-rest": [
         "libs/generated/nestjs-models-rest/src/index.ts"
       ],
+      "@tractr/generated-nestjs-models-rest/mock": [
+        "libs/generated/nestjs-models-rest/mock/src/index.ts"
+      ],
       "@tractr/generated-prisma": ["libs/generated/prisma/src/index.ts"],
       "@tractr/generated-rest-dtos": ["libs/generated/rest-dtos/src/index.ts"],
       "@tractr/generated-rest-dtos/mock": [
