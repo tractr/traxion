@@ -1,5 +1,3 @@
-import { join } from 'path';
-
 import {
   formatFiles,
   names,
@@ -28,26 +26,6 @@ export async function normalizeOptions(
   const projectName = names(options.project).fileName;
   const projectConfiguration = readProjectConfiguration(tree, projectName);
   const projectRoot = projectConfiguration.root;
-
-  // check if input path folder exists
-  if (!tree.exists(join(projectRoot, options.inputHapifyGeneratedPath))) {
-    throw new Error(
-      `The folder "${join(
-        projectRoot,
-        options.inputHapifyGeneratedPath,
-      )}" does not exist`,
-    );
-  }
-
-  // check if output path folder exists
-  if (!tree.exists(join(projectRoot, options.outputGeneratedPath))) {
-    throw new Error(
-      `The folder "${join(
-        projectRoot,
-        options.outputGeneratedPath,
-      )}" does not exist`,
-    );
-  }
 
   return {
     ...options,
