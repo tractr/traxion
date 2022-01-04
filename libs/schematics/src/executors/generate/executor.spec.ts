@@ -126,9 +126,9 @@ describe('Generate executor:generate', () => {
     const output = await executor(defaultOptions, defaultContext);
 
     expect(pathExists).toHaveBeenCalledTimes(3);
-    expect(pathExists).toHaveBeenNthCalledWith(1, '/root/libs/test');
-    expect(pathExists).toHaveBeenNthCalledWith(2, '/root/libs/test/src');
-    expect(pathExists).toHaveBeenNthCalledWith(3, '/root/libs/test/mock');
+    expect(pathExists).toHaveBeenNthCalledWith(1, '/root/libs/test/src');
+    expect(pathExists).toHaveBeenNthCalledWith(2, '/root/libs/test/mock');
+    expect(pathExists).toHaveBeenNthCalledWith(3, '/root/libs/test');
 
     expect(remove).toHaveBeenCalledTimes(7);
     expect(remove).toHaveBeenNthCalledWith(1, '/root/libs/test/generated');
@@ -185,7 +185,7 @@ describe('Generate executor:generate', () => {
     expect(processImportReplacements).toHaveBeenNthCalledWith(
       2,
       '/root/libs/test/mock/src/generated',
-      { template: '@test/generated' },
+      { template: '@test/generated', '': '@test/generated' },
     );
 
     expect(execSpy).toHaveBeenNthCalledWith(
@@ -252,7 +252,7 @@ describe('Generate executor:generate', () => {
       output = err.message;
     }
 
-    expect(pathExists).toHaveBeenCalledTimes(1);
+    expect(pathExists).toHaveBeenCalledTimes(3);
     expect(pathExists).toHaveBeenCalledWith('/root/libs/test');
 
     expect(remove).toHaveBeenCalledTimes(0);
@@ -295,7 +295,7 @@ describe('Generate executor:generate', () => {
 
     const output = await executor(defaultOptions, defaultContext);
 
-    expect(pathExists).toHaveBeenCalledTimes(1);
+    expect(pathExists).toHaveBeenCalledTimes(3);
     expect(remove).toHaveBeenCalledTimes(3);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(1);
@@ -363,7 +363,7 @@ describe('Generate executor:generate', () => {
       output = err;
     }
 
-    expect(pathExists).toHaveBeenCalledTimes(1);
+    expect(pathExists).toHaveBeenCalledTimes(2);
     expect(remove).toHaveBeenCalledTimes(0);
     expect(getHapifyOptions).toHaveBeenCalledTimes(0);
     expect(execSpy).toHaveBeenCalledTimes(0);
@@ -378,7 +378,7 @@ describe('Generate executor:generate', () => {
 
     const output = await executor(defaultOptions, defaultContext);
 
-    expect(pathExists).toHaveBeenCalledTimes(0);
+    expect(pathExists).toHaveBeenCalledTimes(2);
     expect(remove).toHaveBeenCalledTimes(0);
     expect(getHapifyOptions).toHaveBeenCalledTimes(0);
     expect(execSpy).toHaveBeenCalledTimes(0);
@@ -395,7 +395,7 @@ describe('Generate executor:generate', () => {
 
     const output = await executor(defaultOptions, defaultContext);
 
-    expect(pathExists).toHaveBeenCalledTimes(1);
+    expect(pathExists).toHaveBeenCalledTimes(3);
     expect(remove).toHaveBeenCalledTimes(0);
     expect(getHapifyOptions).toHaveBeenCalledTimes(0);
     expect(execSpy).toHaveBeenCalledTimes(0);
@@ -409,13 +409,13 @@ describe('Generate executor:generate', () => {
   it('should still work even if no folder exist in the root directory', async () => {
     pathExists.mockReset();
     pathExists.mockReturnValueOnce(Promise.resolve(true));
-    pathExists.mockReturnValueOnce(Promise.resolve(true));
     pathExists.mockReturnValueOnce(Promise.resolve(false));
+    pathExists.mockReturnValueOnce(Promise.resolve(true));
 
     const output = await executor(defaultOptions, defaultContext);
 
     expect(pathExists).toHaveBeenCalledTimes(3);
-    expect(remove).toHaveBeenCalledTimes(5);
+    expect(remove).toHaveBeenCalledTimes(3);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(2);
     expect(copy).toHaveBeenCalledTimes(1);
