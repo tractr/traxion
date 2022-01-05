@@ -31,16 +31,17 @@ export function normalizeOptions(
   const projectName = projectDirectory.replace(/\//g, '-');
   const fileName = projectName;
   const projectRoot = joinPathFragments(libsDir, projectDirectory);
+  const hapifyTemplates = options.hapifyTemplates || [];
 
   const templates =
-    options.hapifyTemplates
+    hapifyTemplates
       .map((template) => `@tractr/hapify-templates-${template}`)
       .concat(...options.hapifyAdditionalTemplates.split(','))
       .filter((template) => template !== '') || [];
 
   const defaultEntrypoint = [
     ...new Set(
-      options.hapifyTemplates.flatMap(
+      hapifyTemplates.flatMap(
         (template) => DEFAULT_SECONDARY_ENTRY_POINTS[template] || [],
       ),
     ),
@@ -70,7 +71,7 @@ export function normalizeOptions(
     hapifyUseImportReplacements: options.hapifyUseImportReplacements,
     hapifyImportReplacements: [
       ...new Set(
-        options.hapifyTemplates.flatMap(
+        hapifyTemplates.flatMap(
           (template) => DEFAULT_IMPORT_REPLACEMENTS[template],
         ),
       ),

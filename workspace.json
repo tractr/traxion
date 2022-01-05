@@ -45,7 +45,6 @@
     "nestjs-mailer": "libs/nestjs/mailer",
     "nestjs-testing": "libs/nestjs/testing",
     "prettier-config": "libs/config/prettier",
-    "prisma": "libs/prisma",
     "pwa": "apps/pwa",
     "pwa-e2e": "apps/pwa-e2e",
     "schematics": "libs/schematics",

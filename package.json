@@ -24,7 +24,7 @@
     "format": "nx format:write --all",
     "format:check": "nx format:check --all",
     "format:write": "nx format:write --all",
-    "pregenerate": "nx run-many --target build --projects hapify-config,hapify-generate-config,hapify-common,hapify-update-templates-import-path",
+    "pregenerate": "./tools/npm-scripts/pregenerate.sh",
     "generate": "npx nx run-many --target generate --all",
     "help": "nx help",
     "postinstall": "(is-ci || husky install) && ngcc --properties es2015 browser module mainß",

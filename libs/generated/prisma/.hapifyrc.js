@@ -10,6 +10,6 @@ module.exports = {
   description: 'Library to host generated codes',
   validatorPath: getValidatorPath(__dirname),
   project: '../../../hapify-models.json',
-  extends: [],
+  extends: ['../../../dist/libs/hapify/templates/prisma'],
   importReplacements: {},
 };

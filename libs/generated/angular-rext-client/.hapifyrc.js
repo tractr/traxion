@@ -10,7 +10,7 @@ module.exports = {
   description: 'Library to host generated codes',
   validatorPath: getValidatorPath(__dirname),
   project: '../../../hapify-models.json',
-  extends: ['@tractr/hapify-templates-angular-rext-client'],
+  extends: ['../../../dist/libs/hapify/templates/angular-rext-client'],
   importReplacements: {
     'rext-client': '@tractr/generated-rext-client',
   },

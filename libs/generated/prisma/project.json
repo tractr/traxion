@@ -1,26 +1,53 @@
 {
+  "implicitDependencies": ["hapify-templates-prisma"],
   "projectType": "library",
   "root": "libs/generated/prisma",
   "sourceRoot": "libs/generated/prisma/src",
   "tags": [],
   "targets": {
-    "build": {
-      "executor": "@nrwl/node:package",
+    "generate": {
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "pregenerate"
+        }
+      ],
+      "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "assets": ["libs/generated/prisma/*.md"],
-        "main": "libs/generated/prisma/src/index.ts",
-        "outputPath": "dist/libs/generated/prisma",
-        "packageJson": "libs/generated/prisma/package.json",
-        "tsConfig": "libs/generated/prisma/tsconfig.lib.json"
-      },
-      "outputs": ["{options.outputPath}"]
+        "commands": [
+          {
+            "command": "npx prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "npx prisma format",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "npx prisma generate",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": "libs/generated/prisma",
+        "parallel": false
+      }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/generated/prisma/**/*.ts"]
+        "lintFilePatterns": ["libs/prisma/**/*.ts"]
       },
       "outputs": ["{options.outputFile}"]
+    },
+    "pregenerate": {
+      "executor": "./dist/libs/schematics:generate",
+      "options": {
+        "cleanFirst": false,
+        "cwd": "libs/generated/prisma",
+        "format": false,
+        "inputHapifyGeneratedPath": "prisma",
+        "moveGeneratedFiles": false
+      }
     },
     "test": {
       "executor": "@nrwl/jest:jest",

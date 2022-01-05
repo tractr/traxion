@@ -37,7 +37,7 @@
         "commands": [
           "rm -rf node_modules/@tractr/hapify-config",
           "mkdir -p node_modules/@tractr",
-          "cp -rf dist/libs/config/hapify/ node_modules/@tractr/hapify-config/"
+          "cp -r dist/libs/config/hapify/ node_modules/@tractr/hapify-config/"
         ]
       }
     },
