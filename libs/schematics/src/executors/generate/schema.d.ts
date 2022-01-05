@@ -33,6 +33,11 @@ export interface GenerateExecutorSchema {
   moveGeneratedFiles: boolean;
 
   /**
+   * Do we want to move the generated files
+   */
+  updateImportPath: boolean;
+
+  /**
    * List of secondary entrypoints to move when configured
    */
   secondaryEntrypoints: string[];

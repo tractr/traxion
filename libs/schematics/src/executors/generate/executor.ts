@@ -43,6 +43,7 @@ export default async function runExecutor(
       outputGeneratedPath,
       format,
       moveGeneratedFiles,
+      updateImportPath,
       secondaryEntrypoints,
     } = options;
     const projectDirectory = join(root, cwd);
@@ -115,7 +116,9 @@ export default async function runExecutor(
     if (stderr) throw new Error(stderr);
     if (isVerbose) logger.debug(stdout);
 
-    const generatedTemplates = await readdir(inputHapifyPath);
+    const generatedTemplates: string[] = await readdir(inputHapifyPath).catch(
+      () => [],
+    );
 
     if (moveGeneratedFiles) {
       if (isVerbose)
@@ -175,31 +178,33 @@ export default async function runExecutor(
       await remove(inputHapifyPath);
     }
 
-    if (isVerbose) logger.debug(`Updating the templates import path`);
-    await Promise.all(
-      entrypoints.map(async (rootDir) =>
-        processImportReplacements(
-          getOutputGeneratedFolder(
-            projectDirectory,
-            rootDir,
-            outputGeneratedPath,
+    if (updateImportPath) {
+      if (isVerbose) logger.debug(`Updating the templates import path`);
+      await Promise.all(
+        entrypoints.map(async (rootDir) =>
+          processImportReplacements(
+            getOutputGeneratedFolder(
+              projectDirectory,
+              rootDir,
+              outputGeneratedPath,
+            ),
+            {
+              ...(hapifyConfig.importReplacements || {}),
+              ...(rootDir === 'src'
+                ? {}
+                : generatedTemplates.reduce(
+                    (acc, template) => ({
+                      ...acc,
+                      [template]: packageName,
+                      '': packageName,
+                    }),
+                    {},
+                  )),
+            } as Record<string, string>,
           ),
-          {
-            ...(hapifyConfig.importReplacements || {}),
-            ...(rootDir === 'src'
-              ? {}
-              : generatedTemplates.reduce(
-                  (acc, template) => ({
-                    ...acc,
-                    [template]: packageName,
-                    '': packageName,
-                  }),
-                  {},
-                )),
-          } as Record<string, string>,
         ),
-      ),
-    );
+      );
+    }
 
     if (format && entrypoints.length > 0) {
       if (isVerbose)

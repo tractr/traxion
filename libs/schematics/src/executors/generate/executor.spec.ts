@@ -67,6 +67,7 @@ describe('Generate executor:generate', () => {
       inputHapifyGeneratedPath: 'generated',
       cleanFirst: true,
       moveGeneratedFiles: true,
+      updateImportPath: true,
       secondaryEntrypoints: ['mock'],
     };
     // node child_process
@@ -431,6 +432,22 @@ describe('Generate executor:generate', () => {
 
     expect(pathExists).toHaveBeenCalledTimes(3);
     expect(remove).toHaveBeenCalledTimes(7);
+    expect(getHapifyOptions).toHaveBeenCalledTimes(1);
+    expect(execSpy).toHaveBeenCalledTimes(2);
+    expect(copy).toHaveBeenCalledTimes(2);
+    expect(processImportReplacements).toHaveBeenCalledTimes(2);
+    expect(output).toEqual({ success: true });
+  });
+
+  it('should still work even if inputGeneratedFiles does not exists', async () => {
+    readdir.mockReset();
+    readdir.mockReturnValueOnce(Promise.reject());
+    readdir.mockReturnValue(Promise.resolve(['mock', 'src', 'test']));
+
+    const output = await executor(defaultOptions, defaultContext);
+
+    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(remove).toHaveBeenCalledTimes(4);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(2);
     expect(copy).toHaveBeenCalledTimes(2);

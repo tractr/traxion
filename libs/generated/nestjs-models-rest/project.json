@@ -28,12 +28,6 @@
       "outputs": ["{options.outputPath}"]
     },
     "generate": {
-      "dependsOn": [
-        {
-          "projects": "self",
-          "target": "pregenerate"
-        }
-      ],
       "executor": "./dist/libs/schematics:generate",
       "options": {
         "cwd": "libs/generated/nestjs-models-rest"
@@ -45,48 +39,6 @@
         "lintFilePatterns": ["libs/generated/nestjs-models-rest/**/*.ts"]
       },
       "outputs": ["{options.outputFile}"]
-    },
-    "pregenerate": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "rm -rf node_modules/@tractr/{hapify-config,hapify-generate-config,hapify-common,hapify-update-templates-import-path,hapify-templates-nestjs-models-rest}",
-            "description": "Delete previous Hapify Common from node modules",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "mkdir -p node_modules/@tractr",
-            "description": "Ensure the directory exists before the copy",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "cp -rf dist/libs/config/hapify/ node_modules/@tractr/hapify-config/",
-            "description": "Copy the current build to node_modules",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "cp -rf dist/libs/hapify/generate-config/ node_modules/@tractr/hapify-generate-config/",
-            "description": "Copy the current build to node_modules",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "cp -rf dist/libs/hapify/hapify-common/ node_modules/@tractr/hapify-common/",
-            "description": "Copy the current build to node_modules",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "cp -rf dist/libs/hapify/update-templates-import-path/ node_modules/@tractr/update-templates-import-path/",
-            "description": "Copy the current build to node_modules",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "cp -rf dist/libs/hapify/templates/nestjs-models-rest node_modules/@tractr/hapify-templates-nestjs-models-rest/",
-            "description": "Copy the current build to node_modules",
-            "forwardAllArgs": false
-          }
-        ]
-      }
     },
     "test": {
       "executor": "@nrwl/jest:jest",

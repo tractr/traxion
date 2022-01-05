@@ -27,12 +27,6 @@
       "outputs": ["dist/libs/generated/rext-client"]
     },
     "generate": {
-      "dependsOn": [
-        {
-          "projects": "self",
-          "target": "pregenerate"
-        }
-      ],
       "executor": "./dist/libs/schematics:generate",
       "options": {
         "cwd": "libs/generated/rext-client"
@@ -44,48 +38,6 @@
         "lintFilePatterns": [
           "libs/generated/rext-client/src/**/*.ts",
           "libs/generated/rext-client/src/**/*.html"
-        ]
-      }
-    },
-    "pregenerate": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "rm -rf node_modules/@tractr/{hapify-config,hapify-generate-config,hapify-common,hapify-update-templates-import-path,hapify-templates-rext-client}",
-            "description": "Delete previous Hapify Common from node modules",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "mkdir -p node_modules/@tractr",
-            "description": "Ensure the directory exists before the copy",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "cp -rf dist/libs/config/hapify/ node_modules/@tractr/hapify-config/",
-            "description": "Copy the current build to node_modules",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "cp -rf dist/libs/hapify/generate-config/ node_modules/@tractr/hapify-generate-config/",
-            "description": "Copy the current build to node_modules",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "cp -rf dist/libs/hapify/hapify-common/ node_modules/@tractr/hapify-common/",
-            "description": "Copy the current build to node_modules",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "cp -rf dist/libs/hapify/update-templates-import-path/ node_modules/@tractr/update-templates-import-path/",
-            "description": "Copy the current build to node_modules",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "cp -rf dist/libs/hapify/templates/rext-client node_modules/@tractr/hapify-templates-rext-client/",
-            "description": "Copy the current build to node_modules",
-            "forwardAllArgs": false
-          }
         ]
       }
     },
