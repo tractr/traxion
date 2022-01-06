@@ -6,6 +6,7 @@
     "url": "https://github.com/tractr/stack"
   },
   "license": "UNLICENSED",
+  "type": "module",
   "devDependencies": {
     "@types/minio": "^7.0.9"
   },

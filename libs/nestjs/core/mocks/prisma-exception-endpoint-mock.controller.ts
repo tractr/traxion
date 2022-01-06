@@ -5,7 +5,7 @@ import {
   PrismaClientRustPanicError,
   PrismaClientUnknownRequestError,
   PrismaClientValidationError,
-} from '@prisma/client/runtime';
+} from '@prisma/client/runtime/index.js';
 
 import { Public } from '../src/decorators/public.decorator';
 

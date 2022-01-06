@@ -1,5 +1,5 @@
 import { ModuleMetadata } from '@nestjs/common';
-import { MODULE_METADATA } from '@nestjs/common/constants';
+import { MODULE_METADATA } from '@nestjs/common/constants.js';
 
 export function getMetadataFromModule<T>(module: T): ModuleMetadata {
   return {

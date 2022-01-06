@@ -1,4 +1,4 @@
-import { ROUTE_ARGS_METADATA } from '@nestjs/common/constants';
+import { ROUTE_ARGS_METADATA } from '@nestjs/common/constants.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function getParamDecoratorFactory(decorator: Function): Function {

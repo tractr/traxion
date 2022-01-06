@@ -3,7 +3,7 @@ import { execSync } from 'child_process';
 import { INestApplication, ModuleMetadata } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as dotenv from 'dotenv';
-import dotenvExpand = require('dotenv-expand');
+import * as dotenvExpand from 'dotenv-expand';
 import { nanoid } from 'nanoid';
 import { Client } from 'pg';
 

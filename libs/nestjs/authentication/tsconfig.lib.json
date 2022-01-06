@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "module": "commonjs",
+    "module": "esnext",
     "outDir": "../../../dist/out-tsc",
-    "target": "es6",
+    "target": "esnext",
     "types": ["node"]
   },
   "exclude": ["**/*.spec.ts", "**/*.test.ts", "test"],

@@ -5,6 +5,7 @@
     "type": "git",
     "url": "https://github.com/tractr/stack"
   },
+  "type": "module",
   "peerDependencies": {
     "@tractr/hapify-templates-models": "^1.31.1",
     "@tractr/hapify-templates-nestjs-models-common": "^1.31.1",

@@ -1,5 +1,10 @@
 {
   "name": "@tractr/traxion-api",
   "version": "1.31.0",
-  "type": "module"
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./main.js"
+    }
+  }
 }

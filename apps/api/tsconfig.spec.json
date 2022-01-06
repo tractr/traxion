@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "module": "esnext",
     "outDir": "../../dist/out-tsc",
+    "target": "ESNext",
     "types": ["jest", "node"]
   },
   "extends": "./tsconfig.json",

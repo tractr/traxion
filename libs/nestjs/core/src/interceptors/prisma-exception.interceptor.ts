@@ -13,7 +13,7 @@ import {
   PrismaClientRustPanicError,
   PrismaClientUnknownRequestError,
   PrismaClientValidationError,
-} from '@prisma/client/runtime';
+} from '@prisma/client/runtime/index.js';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
