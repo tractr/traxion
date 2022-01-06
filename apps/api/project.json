@@ -20,9 +20,11 @@
       "executor": "@nrwl/node:build",
       "options": {
         "assets": ["apps/api/src/assets"],
+        "generatePackageJson": true,
         "main": "apps/api/src/main.ts",
         "outputPath": "dist/apps/api",
-        "tsConfig": "apps/api/tsconfig.app.json"
+        "tsConfig": "apps/api/tsconfig.app.json",
+        "webpackConfig": "apps/api/webpack.config.cjs"
       },
       "outputs": ["{options.outputPath}"]
     },

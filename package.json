@@ -220,6 +220,10 @@
     "ts-node": "~10.4.0",
     "tslib": "^2.3.1",
     "typescript": "4.5.4",
-    "webpack": "^5.65.0"
+    "webpack": "^5.65.0",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "prisma": {
+    "seed": "ts-node libs/prisma/src/index.ts"
   }
 }
