@@ -1,13 +1,17 @@
-import { join } from 'path';
-
 import {
   addProjectConfiguration,
+  readJson,
   readProjectConfiguration,
   Tree,
 } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { readJSON } from 'fs-extra';
 
-import generator, { SCHEMATICS_TRACTR_PACKAGE_NAME } from './generator';
+import { PackageDefinition } from '../../helpers';
+import generator, {
+  SCHEMATICS_PACKAGE_JSON_PATH,
+  SCHEMATICS_TRACTR_PACKAGE_NAME,
+} from './generator';
 import { TargetGenerateGeneratorSchema } from './schema';
 
 describe('target-generate generator', () => {
@@ -27,19 +31,19 @@ describe('target-generate generator', () => {
       root: rootPath,
     });
 
-    // create a test.json file to create the input-folder folder
     appTree.write(
-      `${rootPath}/input-folder/test.json`,
+      'package.json',
       JSON.stringify({
-        key: 'value',
+        name: 'main package',
+        version: '0.x.x',
       }),
     );
 
-    // create a test.json file to create the output-folder folder
     appTree.write(
-      `${rootPath}/output-folder/test.json`,
+      'libs/test/package.json',
       JSON.stringify({
-        key: 'value',
+        name: 'test',
+        version: '0.x.x',
       }),
     );
   });
@@ -93,6 +97,16 @@ describe('target-generate generator', () => {
         format: false,
         cleanFirst: false,
       },
+    });
+
+    // expect package.json devdependencies have been updated correctly
+    const packageJsonSchematics: PackageDefinition = await readJSON(
+      SCHEMATICS_PACKAGE_JSON_PATH,
+    );
+    const packageJsonProject = readJson(appTree, 'package.json');
+    expect(packageJsonProject).toBeDefined();
+    expect(packageJsonProject.devDependencies).toEqual({
+      [SCHEMATICS_TRACTR_PACKAGE_NAME]: packageJsonSchematics.version,
     });
   });
 });
