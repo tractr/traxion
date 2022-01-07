@@ -1311,8 +1311,14 @@
             "commands": [
               "rm -rf node_modules/@tractr/update-templates-import-path",
               "mkdir -p node_modules/@tractr",
-              "cp -rf dist/libs/hapify/update-templates-import-path/ node_modules/@tractr/update-templates-import-path/"
+              "cp -rf dist/libs/hapify/update-templates-import-path/ node_modules/@tractr/hapify-update-templates-import-path/"
             ]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
           }
         },
         "test": {
@@ -1945,6 +1951,12 @@
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": ["nx run schematics:build"]
+          }
+        },
+        "publish": {
+          "executor": "ngx-deploy-npm:deploy",
+          "options": {
+            "access": "public"
           }
         },
         "test": {

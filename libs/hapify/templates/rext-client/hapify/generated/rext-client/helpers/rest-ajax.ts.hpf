@@ -2,7 +2,7 @@ import { Observable, OperatorFunction } from 'rxjs';
 import { AjaxConfig, AjaxResponse } from 'rxjs/ajax';
 import { map } from 'rxjs/operators';
  
-import { getUrl, URLSearchParamsType } from './url';
+import { getUrl } from '@tractr/common';
 import { request } from './universal-rxjs-ajax';
  
 export function ajax<T>(
@@ -62,7 +62,7 @@ export type CountAjaxOptions = Omit<
  * @param options - Ajax request options
  * @returns the number of Model
  */
-export function count<CountQuery extends URLSearchParamsType>(
+export function count<CountQuery extends Record<string, any>>(
   apiUrl: URL,
   countQuery: CountQuery,
   options: CountAjaxOptions = {},
@@ -93,7 +93,7 @@ export type FindUniqueOptions = Omit<
 export function findUnique<
   T,
   FindUniqueParams extends { id: string | number },
-  FindUniqueQuery extends URLSearchParamsType,
+  FindUniqueQuery extends Record<string, any>,
 >(
   apiUrl: URL,
   findUniqueParams: FindUniqueParams,
@@ -122,7 +122,7 @@ export type FindManyOptions = Omit<
  * @param options - Ajax request options
  * @returns an array of Model entities
  */
-export function findMany<T, FindManyQuery extends URLSearchParamsType>(
+export function findMany<T, FindManyQuery extends Record<string, any>>(
   apiUrl: URL,
   findManyQuery: FindManyQuery,
   options: FindManyOptions = {},

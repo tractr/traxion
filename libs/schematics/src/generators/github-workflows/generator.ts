@@ -41,8 +41,7 @@ async function normalizeOptions({
   }
 
   availableWorkflows.forEach((workflow) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if (!WORKFLOW_FILES.includes(workflow as any))
+    if (!WORKFLOW_FILES.includes(workflow))
       throw new Error(`Use of an unknown workflow: ${workflow}`);
   });
 

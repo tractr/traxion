@@ -5,9 +5,12 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import fetch, { Response } from 'node-fetch';
 
 import generator, { SEMVER_PACKAGE_NAME } from './generator';
 import { ReleaseGeneratorSchema } from './schema';
+
+jest.mock('node-fetch');
 
 describe('release generator', () => {
   let appTree: Tree;
@@ -22,6 +25,15 @@ describe('release generator', () => {
       root: 'libs/test',
       sourceRoot: 'libs/test/src',
     });
+    // Mock node fetch http call
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValue(
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            'dist-tags': { latest: '1.0.0' },
+          }),
+      }) as unknown as Promise<Response>,
+    );
   });
 
   it('should add release to a specific project', async () => {
