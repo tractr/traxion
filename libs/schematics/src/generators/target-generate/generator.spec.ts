@@ -19,10 +19,6 @@ describe('target-generate generator', () => {
   const rootPath = 'libs/test';
   const defaultOptions = {
     project: 'test',
-    inputHapifyGeneratedPath: 'input-folder',
-    outputGeneratedPath: 'output-folder',
-    format: true,
-    cleanFirst: true,
   };
 
   beforeEach(() => {
@@ -30,22 +26,6 @@ describe('target-generate generator', () => {
     addProjectConfiguration(appTree, 'test', {
       root: rootPath,
     });
-
-    appTree.write(
-      'package.json',
-      JSON.stringify({
-        name: 'main package',
-        version: '0.x.x',
-      }),
-    );
-
-    appTree.write(
-      'libs/test/package.json',
-      JSON.stringify({
-        name: 'test',
-        version: '0.x.x',
-      }),
-    );
   });
 
   it('should throw error if wrong project name is given', async () => {
@@ -59,8 +39,17 @@ describe('target-generate generator', () => {
     );
   });
 
-  it('should run successfully with good parameters and default boolean value', async () => {
-    await generator(appTree, defaultOptions);
+  it('should run successfully with good parameters and true boolean value', async () => {
+    const options: TargetGenerateGeneratorSchema = {
+      ...defaultOptions,
+      ...{
+        inputHapifyGeneratedPath: 'input-folder',
+        outputGeneratedPath: 'output-folder',
+        format: true,
+        cleanFirst: true,
+      },
+    };
+    await generator(appTree, options);
 
     // expect workspace to have been update correctly
     const config = readProjectConfiguration(appTree, 'test');
@@ -79,7 +68,12 @@ describe('target-generate generator', () => {
   it('should run successfully with good parameters and false boolean value', async () => {
     const options: TargetGenerateGeneratorSchema = {
       ...defaultOptions,
-      ...{ format: false, cleanFirst: false },
+      ...{
+        inputHapifyGeneratedPath: 'input-folder',
+        outputGeneratedPath: 'output-folder',
+        format: false,
+        cleanFirst: false,
+      },
     };
 
     await generator(appTree, options);
@@ -107,6 +101,21 @@ describe('target-generate generator', () => {
     expect(packageJsonProject).toBeDefined();
     expect(packageJsonProject.devDependencies).toEqual({
       [SCHEMATICS_TRACTR_PACKAGE_NAME]: packageJsonSchematics.version,
+    });
+  });
+
+  it('should run successfully with only required parameter', async () => {
+    await generator(appTree, defaultOptions);
+
+    // expect workspace to have been update correctly
+    const config = readProjectConfiguration(appTree, 'test');
+    expect(config).toBeDefined();
+    expect(config.targets).toBeDefined();
+    expect(config.targets?.generate).toEqual({
+      executor: `${SCHEMATICS_TRACTR_PACKAGE_NAME}:generate`,
+      options: {
+        cwd: rootPath,
+      },
     });
   });
 });
