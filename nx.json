@@ -19,7 +19,7 @@
       "tags": ["scope:angular"]
     },
     "angular-casl": {
-      "tags": []
+      "tags": ["scope:angular"]
     },
     "angular-components": {
       "tags": ["scope:angular"]
