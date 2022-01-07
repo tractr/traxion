@@ -8,7 +8,7 @@ import { move, pathExists, remove } from 'fs-extra';
 import { GenerateExecutorSchema } from './schema';
 
 import { getHapifyOptions } from '@tractr/hapify-generate-config';
-import { hapifyUpdateTemplatesImportPath } from '@tractr/update-templates-import-path';
+import { hapifyUpdateTemplatesImportPath } from '@tractr/hapify-update-templates-import-path';
 
 /**
  * Executes the schematics generate command.
