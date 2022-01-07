@@ -77,7 +77,7 @@ import {
 <<endif>>
  
 export class <<Model pascal>>CountQueryDto {
-<<for Fields searchable and not password field>>
+<<for Fields searchable and not password and not hidden field>>
   
   <<if field boolean>>
   @IsBoolean(<<=listModifier(field)>>)

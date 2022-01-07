@@ -71,7 +71,7 @@ import {
   } from '@tractr/common';
  
 export class <<Model pascal>>FindManyQueryDto {
-<<for Fields searchable and not password field>>
+<<for Fields searchable and not password and not hidden field>>
   <<if field boolean>>
   @IsBoolean(<<=listModifier(field)>>)
   @TransformStringToBoolean()
