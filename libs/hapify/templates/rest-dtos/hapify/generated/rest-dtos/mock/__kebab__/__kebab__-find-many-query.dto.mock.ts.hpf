@@ -1,7 +1,7 @@
 import { <<Model pascal>>FindManyQueryDto } from '../../dtos';
   
 import {
-<<for Fields searchable and not password field>>
+<<for Fields searchable and not password and not hidden field>>
   <<if field not entity>>
   mock<<Model pascal>><<field pascal>>Factory,
   <<elseif field oneOne or oneMany>>
@@ -16,7 +16,7 @@ export function mock<<Model pascal>>FindManyQueryDtoFactory(
   override: Partial<<<Model pascal>>FindManyQueryDto> = {}
 ): Required< <<Model pascal>>FindManyQueryDto> {
   return {
-  <<for Fields searchable and not password field>>
+  <<for Fields searchable and not password and not hidden field>>
     <<if field not entity>>
     <<field camel>>: mock<<Model pascal>><<field pascal>>Factory(),
     <<elseif field oneOne or oneMany>>
