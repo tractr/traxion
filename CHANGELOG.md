@@ -2,6 +2,21 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.32.0](https://github.com/tractr/stack/compare/v1.31.0...v1.32.0) (2022-01-07)
+
+
+### Bug Fixes
+
+* remove hidden field from reading dto ([#356](https://github.com/tractr/stack/issues/356)) ([4f2a629](https://github.com/tractr/stack/commit/4f2a6292fb267d59fbbf5dfc3dba348ff9b8bb50))
+* update rext client and publish targets ([#355](https://github.com/tractr/stack/issues/355)) ([72346a2](https://github.com/tractr/stack/commit/72346a216104ffa83f3410610201e7ad533a2f00)), closes [#350](https://github.com/tractr/stack/issues/350)
+
+
+### Features
+
+* update packages minor version ([#357](https://github.com/tractr/stack/issues/357)) ([17ed0fc](https://github.com/tractr/stack/commit/17ed0fc6cbe3cce829c61ceced65597349b61e7d))
+
+
+
 # [1.31.0](https://github.com/tractr/stack/compare/v1.30.0...v1.31.0) (2021-12-21)
 
 
