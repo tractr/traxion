@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.32.0](https://github.com/tractr/stack/compare/v1.31.0...v1.32.0) (2022-01-07)
+
+
+### Bug Fixes
+
+* update rext client and publish targets ([#355](https://github.com/tractr/stack/issues/355)) ([72346a2](https://github.com/tractr/stack/commit/72346a216104ffa83f3410610201e7ad533a2f00)), closes [#350](https://github.com/tractr/stack/issues/350)
+
+
+
 # [1.31.0](https://github.com/tractr/stack/compare/v1.30.0...v1.31.0) (2021-12-21)
 
 
