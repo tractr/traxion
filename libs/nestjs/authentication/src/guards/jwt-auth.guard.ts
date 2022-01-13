@@ -1,3 +1,4 @@
+import { HttpResponseBase } from '@angular/common/http';
 import {
   ExecutionContext,
   Injectable,
@@ -44,10 +45,17 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
    * @param user
    * @returns
    */
-  handleRequest<User>(err: Error | undefined, user: User | undefined) {
+  handleRequest<User>(
+    err: HttpResponseBase | undefined,
+    user: User | undefined,
+  ) {
     // You can throw an exception based on either "info" or "err" arguments
-    if (err || !user) {
-      throw err || new UnauthorizedException();
+    if (err) {
+      if (err.status === 400) throw new UnauthorizedException();
+      throw err;
+    }
+    if (!user) {
+      throw new UnauthorizedException();
     }
     return user;
   }
