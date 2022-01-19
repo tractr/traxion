@@ -129,6 +129,7 @@ describe('AuthService', () => {
   describe('authenticateLoginCredentials', () => {
     it('should throw a UserNotFoundError if no user has been found by the login field', async () => {
       mockAuthenticationOptions.userConfig = {
+        ...mockAuthenticationOptions.userConfig,
         loginField: 'loginFieldTest',
         emailField: 'emailFieldTest',
         passwordField: 'passwordFieldTest',

@@ -35,15 +35,21 @@ export class LoginController {
   ): Promise<AccessTokenDto & { user: UserType }> {
     const user = this.throwIfNoUser(req);
     const token = await this.authenticationService.login(user);
+    const { options: cookieOptions } = this.authenticationOptions.cookies;
+    const { formatUser } = this.authenticationOptions.userConfig;
     res.cookie(
       this.authenticationOptions.cookies.cookieName,
       token.accessToken,
       {
         signed: !!req.secret,
-        ...this.authenticationOptions.cookies.options,
+        ...cookieOptions,
       },
     );
-    return { ...token, user };
+    return {
+      ...token,
+      // Format user with filter provided by the module consumer
+      user: formatUser(user),
+    };
   }
 
   @Get('logout')
@@ -70,7 +76,9 @@ export class LoginController {
   @Get('me')
   me(@Req() req: Request, @CurrentUser() user: UserType): UserType {
     this.throwIfNoUser(req);
-    return user;
+    const { formatUser } = this.authenticationOptions.userConfig;
+    // Format user with filter provided by the module consumer
+    return formatUser(user);
   }
 
   throwIfNoUser(req: Request): UserType {
