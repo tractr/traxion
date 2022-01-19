@@ -20,32 +20,37 @@ function replaceImportsInString(
 ): string {
   return Object.entries(importReplacements).reduce(
     (acc, [oldImport, newImport]) =>
-      acc.replace(
-        new RegExp(`from '(?:(?:\\.\\.\\/)*${oldImport}).*`, 'g'),
-        `from '${newImport}';`,
-      ),
+      oldImport === ''
+        ? acc.replace(/from '(?:(?:\.\.\/?)*)';/g, `from '${newImport}';`)
+        : acc.replace(
+            new RegExp(`from '(?:(?:\\.\\.\\/)*${oldImport})(.*)`, 'g'),
+            `from '${newImport}$1`,
+          ),
     content,
   );
 }
 
-async function processGlob(
+export async function processImportReplacements(
   path: string,
   importReplacements: Record<string, string>,
 ): Promise<void> {
-  return new Promise<void>((resolve) => {
+  return new Promise<void>((resolve, reject) => {
     glob(`${path}/**/*.ts`, (error, files) => {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      Promise.all(
-        files.map(async (filePath: string) => {
-          const fileContent = (await fs.readFile(filePath)).toString();
-          const updatedFileContent = replaceImportsInString(
-            importReplacements,
-            fileContent,
-          );
+      if (error) reject(error);
+      else {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        Promise.all(
+          files.map(async (filePath: string) => {
+            const fileContent = (await fs.readFile(filePath)).toString();
+            const updatedFileContent = replaceImportsInString(
+              importReplacements,
+              fileContent,
+            );
 
-          await fs.writeFile(filePath, updatedFileContent);
-        }),
-      ).then(() => resolve());
+            await fs.writeFile(filePath, updatedFileContent);
+          }),
+        ).then(() => resolve());
+      }
     });
   });
 }
@@ -65,6 +70,6 @@ export async function hapifyUpdateTemplatesImportPath(
   const { importReplacements } = hapifyConfig;
 
   if (importReplacements) {
-    await processGlob(path, importReplacements);
+    await processImportReplacements(path, importReplacements);
   }
 }

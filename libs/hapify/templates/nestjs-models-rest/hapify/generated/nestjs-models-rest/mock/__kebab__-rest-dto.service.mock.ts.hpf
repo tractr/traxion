@@ -1,4 +1,5 @@
-import { <<Model pascal>>RestDtoService } from '../src';
+import { jest } from '@jest/globals' 
+import { <<Model pascal>>RestDtoService } from '..';
   
 export function mock<<Model pascal>>RestDtoServiceFactory(): <<Model pascal>>RestDtoService {
   return ({

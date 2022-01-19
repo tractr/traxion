@@ -1,4 +1,4 @@
-import { <<Model pascal>>FindManyQueryDto } from '../../dtos';
+import { <<Model pascal>>FindManyQueryDto } from '../..';
   
 import {
 <<for Fields searchable and not password field>>
