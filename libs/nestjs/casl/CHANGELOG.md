@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.33.0](https://github.com/tractr/stack/compare/v1.32.1...v1.33.0) (2022-01-20)
+
+
+### Features
+
+* add custom select to authentication module to populate user fields ([#359](https://github.com/tractr/stack/issues/359)) ([95a48d7](https://github.com/tractr/stack/commit/95a48d76bb9821a44553298ee87ccaa2ec378220))
+
+
+
 ## [1.32.1](https://github.com/tractr/stack/compare/v1.32.0...v1.32.1) (2022-01-20)
 
 
