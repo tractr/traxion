@@ -36,9 +36,11 @@ export class AuthenticationService {
     login: string,
     password: string,
   ): Promise<UserType | null> {
-    const { passwordField } = this.authenticationOptions.userConfig;
+    const { passwordField, customSelect } =
+      this.authenticationOptions.userConfig;
 
-    const user = await this.findUserByLogin(login);
+    // Fetch user and use select clause provided by the module consumer
+    const user = await this.findUserByLogin(login, customSelect);
     if (!user) throw new UserNotFoundError();
 
     const { [passwordField]: passwordBcrypt } =
