@@ -34,6 +34,14 @@ import { MailerModule } from '@tractr/nestjs-mailer';
     AuthenticationModule.registerAsync({
       useFactory: (defaultOptions) => ({
         ...defaultOptions,
+        userConfig: {
+          idField: 'id',
+          loginField: 'email',
+          passwordField: 'password',
+          emailField: 'email',
+          customSelect: getSelectPrismaUserQuery(),
+          formatUser: ({ ...user }) => user,
+        },
         userService: USER_SERVICE,
       }),
     }),
@@ -58,7 +66,6 @@ import { MailerModule } from '@tractr/nestjs-mailer';
     }),
     CaslModule.register({
       rolePermissions,
-      getSelectPrismaUserQuery,
     }),
     ConsoleModule,
     LoggerModule,

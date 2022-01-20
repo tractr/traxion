@@ -22,6 +22,15 @@ const AUTHENTICATION_MOCK_USER_SERVICE = 'AUTHENTICATION_MOCK_USER_SERVICE';
 describe('Authentication Module with async options', () => {
   let app: INestApplication;
   let mockUserService: MockProxy<AuthenticationUserService>;
+  const mockUserConfig = {
+    emailField: 'email',
+    passwordField: 'password',
+    loginField: 'email',
+    idField: 'id',
+    customSelect: undefined,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    formatUser: (user: Record<string, any>) => user,
+  };
 
   beforeEach(async () => {
     mockUserService = mockDeep<AuthenticationUserService>();
@@ -44,6 +53,7 @@ describe('Authentication Module with async options', () => {
           useFactory: (defaultValue) =>
             Promise.resolve({
               ...defaultValue,
+              userConfig: mockUserConfig,
               jwtModuleOptions: {
                 secret: 'integration-tests',
               },
@@ -97,12 +107,7 @@ describe('Authentication Module with async options', () => {
           passReqToCallback: true,
         },
       },
-      userConfig: {
-        emailField: 'email',
-        passwordField: 'password',
-        loginField: 'email',
-        idField: 'id',
-      },
+      userConfig: mockUserConfig,
       userService: AUTHENTICATION_MOCK_USER_SERVICE,
     });
   });

@@ -15,7 +15,6 @@ import { isClass, PolicyHandlerType } from '@tractr/common';
 import {
   AUTHENTICATION_USER_SERVICE,
   AuthenticationUserService,
-  UserSelect,
 } from '@tractr/nestjs-authentication';
 import { IS_PUBLIC_KEY, Logger, POLICIES_KEY } from '@tractr/nestjs-core';
 
@@ -50,16 +49,9 @@ export class PoliciesGuard implements CanActivate {
 
     const req = context.switchToHttp().getRequest();
 
-    let { user } = req;
-
-    if (user && this.caslOptions.getSelectPrismaUserQuery)
-      user = {
-        ...user,
-        ...(await this.userService.findUnique({
-          where: { id: user.id },
-          select: this.caslOptions.getSelectPrismaUserQuery() as UserSelect,
-        })),
-      };
+    // Get user from the request object.
+    // User should have been fetched and populated by the authentication layer
+    const { user } = req;
 
     if (user && (!user.roles || !Array.isArray(user.roles))) {
       this.logger.error(

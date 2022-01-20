@@ -55,7 +55,7 @@ export type AsyncOptions<
   useFactory?: (
     defaultOptions: DefaultOptions,
     ...args: any[]
-  ) => Promise<InternalOptions | undefined> | InternalOptions | undefined;
+  ) => Promise<PublicOptions | undefined> | PublicOptions | undefined;
   inject?: FactoryProvider['inject'];
 };
 
