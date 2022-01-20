@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.32.1](https://github.com/tractr/stack/compare/v1.32.0...v1.32.1) (2022-01-20)
+
+
+### Bug Fixes
+
+* generation when unique values is null or is an entity ([#360](https://github.com/tractr/stack/issues/360)) ([d3b5f46](https://github.com/tractr/stack/commit/d3b5f4693f9bac7b02099c26d24a3d96eb370e39))
+
+
+
 # [1.32.0](https://github.com/tractr/stack/compare/v1.31.0...v1.32.0) (2022-01-07)
 
 
