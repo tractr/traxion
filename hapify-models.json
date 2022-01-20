@@ -439,12 +439,12 @@
         },
         {
           "name": "uniqueString",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
+          "properties": ["unique", "searchable", "sortable"],
           "type": "string"
         },
         {
           "name": "uniqueNumber",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
+          "properties": ["unique", "searchable", "sortable"],
           "type": "number"
         },
         {
@@ -465,7 +465,7 @@
         },
         {
           "name": "uniqueObject",
-          "properties": ["unique"],
+          "properties": ["unique", "searchable", "sortable"],
           "type": "object"
         },
         {
@@ -473,7 +473,48 @@
             "backRelation": "uniqueValue"
           },
           "name": "uniqueEntity",
-          "properties": ["unique"],
+          "properties": ["unique", "searchable", "sortable"],
+          "subtype": "oneOne",
+          "type": "entity",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
+        },
+        {
+          "name": "uniqueStringNullable",
+          "properties": ["unique", "nullable", "searchable", "sortable"],
+          "type": "string"
+        },
+        {
+          "name": "uniqueNumberNullable",
+          "properties": ["unique", "nullable", "searchable", "sortable"],
+          "type": "number"
+        },
+        {
+          "name": "uniqueBooleanNullable",
+          "properties": ["unique", "nullable", "searchable", "sortable"],
+          "type": "boolean"
+        },
+        {
+          "name": "uniqueDatetimeNullable",
+          "properties": ["unique", "nullable", "searchable", "sortable"],
+          "type": "datetime"
+        },
+        {
+          "name": "uniqueEnumNullable",
+          "properties": ["unique", "nullable", "searchable", "sortable"],
+          "type": "enum",
+          "value": ["val1", "val2"]
+        },
+        {
+          "name": "uniqueObjectNullable",
+          "properties": ["unique", "nullable", "searchable", "sortable"],
+          "type": "object"
+        },
+        {
+          "meta": {
+            "backRelation": "uniqueValues"
+          },
+          "name": "uniqueEntityNullable",
+          "properties": ["unique", "nullable", "searchable", "sortable"],
           "subtype": "oneOne",
           "type": "entity",
           "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
