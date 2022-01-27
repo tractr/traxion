@@ -1,60 +1,37 @@
-import * as path from 'path';
+import path = require('path');
 
-import {
-  formatFiles,
-  generateFiles,
-  getWorkspaceLayout,
-  names,
-  offsetFromRoot,
-  Tree,
-} from '@nrwl/devkit';
+import { formatFiles, generateFiles, Tree } from '@nrwl/devkit';
 
 import libraryGenerator from '../library/generator';
+import { normalizeOptions } from '../library/helpers';
+import { NormalizedOptions } from '../library/schema';
 import { PrismaLibraryGeneratorSchema } from './schema';
 
-interface NormalizedSchema extends PrismaLibraryGeneratorSchema {
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
-  parsedTags: string[];
-}
-
-function normalizeOptions(
-  tree: Tree,
-  options: PrismaLibraryGeneratorSchema,
-): NormalizedSchema {
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(/\//g, '-');
-  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`;
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
-
-  return {
-    ...options,
-    projectName,
-    projectRoot,
-    projectDirectory,
-    parsedTags,
-  };
-}
-
-function addFiles(tree: Tree, options: NormalizedSchema) {
-  const templateOptions = {
-    ...options,
-    ...names(options.name),
-    offsetFromRoot: offsetFromRoot(options.projectRoot),
-    template: '',
-  };
-  generateFiles(
-    tree,
-    path.join(__dirname, './files'),
-    options.projectRoot,
-    templateOptions,
+function getNodeModulesRelativePath(
+  hostRoot: string,
+  projectRoot: string,
+): string {
+  return path.join(
+    path.relative(`${projectRoot}/prisma/schemas`, hostRoot),
+    'node_modules',
   );
+}
+
+function addFiles(host: Tree, options: NormalizedOptions) {
+  generateFiles(host, path.join(__dirname, './files'), options.projectRoot, {
+    ...options,
+    template: '',
+    name: options.name,
+    templates: options.templates,
+    hapifyModelJson: options.hapifyModelsJsonRelativePath,
+    hapifyImportReplacements: options.hapifyImportReplacements,
+    hapifyUseImportReplacements: options.hapifyUseImportReplacements,
+    npmScope: options.prefix,
+    nodeModuleRelativePath: getNodeModulesRelativePath(
+      host.root,
+      options.projectRoot,
+    ),
+  });
 }
 
 export default async function prismaLibraryGenerator(
