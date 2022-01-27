@@ -1,41 +1,11 @@
 {
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
-  },
-  "defaultProject": "pwa",
-  "generators": {
-    "@nrwl/angular": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      },
-      "storybook-configuration": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/angular:application": {
-      "e2eTestRunner": "cypress",
-      "linter": "eslint",
-      "style": "less",
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:component": {
-      "style": "less"
-    },
-    "@nrwl/angular:library": {
-      "linter": "eslint",
-      "style": "less",
-      "unitTestRunner": "jest"
-    }
-  },
   "projects": {
     "angular-authentication": {
       "prefix": "tractr",
       "projectType": "library",
       "root": "libs/angular/authentication",
       "sourceRoot": "libs/angular/authentication/src",
+      "tags": ["scope:angular"],
       "targets": {
         "build": {
           "configurations": {
@@ -66,7 +36,8 @@
               "libs/angular/authentication/src/**/*.ts",
               "libs/angular/authentication/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -90,6 +61,7 @@
       "projectType": "library",
       "root": "libs/angular/casl",
       "sourceRoot": "libs/angular/casl/src",
+      "tags": ["scope:angular"],
       "targets": {
         "build": {
           "configurations": {
@@ -114,7 +86,8 @@
               "libs/angular/casl/src/**/*.ts",
               "libs/angular/casl/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -137,6 +110,7 @@
       "projectType": "library",
       "root": "libs/angular/components",
       "sourceRoot": "libs/angular/components/src",
+      "tags": ["scope:angular"],
       "targets": {
         "build": {
           "configurations": {
@@ -161,7 +135,8 @@
               "libs/angular/components/src/**/*.ts",
               "libs/angular/components/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -185,6 +160,7 @@
       "projectType": "library",
       "root": "libs/angular/config",
       "sourceRoot": "libs/angular/config/src",
+      "tags": [],
       "targets": {
         "build": {
           "configurations": {
@@ -209,7 +185,8 @@
               "libs/angular/config/src/**/*.ts",
               "libs/angular/config/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -233,6 +210,7 @@
       "projectType": "library",
       "root": "libs/angular/file-storage",
       "sourceRoot": "libs/angular/file-storage/src",
+      "tags": [],
       "targets": {
         "build": {
           "configurations": {
@@ -257,7 +235,8 @@
               "libs/angular/file-storage/src/**/*.ts",
               "libs/angular/file-storage/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -281,6 +260,7 @@
       "projectType": "library",
       "root": "libs/angular/form",
       "sourceRoot": "libs/angular/form/src",
+      "tags": ["scope:angular"],
       "targets": {
         "build": {
           "configurations": {
@@ -305,7 +285,8 @@
               "libs/angular/form/src/**/*.ts",
               "libs/angular/form/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -329,6 +310,7 @@
       "projectType": "library",
       "root": "libs/angular/tools",
       "sourceRoot": "libs/angular/tools/src",
+      "tags": ["scope:angular"],
       "targets": {
         "build": {
           "configurations": {
@@ -353,7 +335,8 @@
               "libs/angular/tools/src/**/*.ts",
               "libs/angular/tools/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -376,6 +359,7 @@
       "projectType": "application",
       "root": "apps/api",
       "sourceRoot": "apps/api/src",
+      "tags": ["scope:app"],
       "targets": {
         "build": {
           "configurations": {
@@ -414,7 +398,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/api/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "serve": {
           "executor": "@nrwl/node:execute",
@@ -438,6 +423,7 @@
       "projectType": "library",
       "root": "libs/config/commit",
       "sourceRoot": "libs/config/commit/src",
+      "tags": ["scope:config"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -459,7 +445,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/config/commit/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -482,6 +469,7 @@
       "projectType": "library",
       "root": "libs/common",
       "sourceRoot": "libs/common/src",
+      "tags": ["scope:common"],
       "targets": {
         "build": {
           "configurations": {
@@ -517,7 +505,8 @@
               "libs/common/src/**/*.ts",
               "libs/common/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -539,6 +528,7 @@
       "projectType": "application",
       "root": "apps/docs",
       "sourceRoot": "apps/docs/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nx-plus/docusaurus:browser",
@@ -558,6 +548,7 @@
       "projectType": "library",
       "root": "libs/config/eslint",
       "sourceRoot": "libs/config/eslint/src",
+      "tags": ["scope:config"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -577,7 +568,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/config/eslint/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -596,9 +588,31 @@
       }
     },
     "generated": {
+      "implicitDependencies": [
+        "common",
+        "hapify-templates-models",
+        "hapify-templates-rest-dtos",
+        "hapify-templates-nestjs-models",
+        "hapify-templates-nestjs-models-common",
+        "hapify-templates-nestjs-models-rest",
+        "hapify-templates-rext-client",
+        "hapify-templates-angular-rext-client",
+        "nestjs-core",
+        "nestjs-database",
+        "nestjs-authentication",
+        "nestjs-casl",
+        "nestjs-testing",
+        "angular-tools",
+        "hapify-config",
+        "hapify-common",
+        "hapify-generate-config",
+        "hapify-update-templates-import-path",
+        "schematics"
+      ],
       "projectType": "library",
       "root": "libs/generated",
       "sourceRoot": "libs/generated/src",
+      "tags": ["scope:generate"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -639,6 +653,7 @@
       "projectType": "library",
       "root": "libs/hapify/hapify-common",
       "sourceRoot": "libs/hapify/hapify-common/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -665,7 +680,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/hapify/hapify-common/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "pregenerate": {
           "dependsOn": [
@@ -703,6 +719,7 @@
       "projectType": "library",
       "root": "libs/config/hapify",
       "sourceRoot": "libs/config/hapify/src",
+      "tags": ["scope:config"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -722,7 +739,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/config/hapify/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "pregenerate": {
           "dependsOn": [
@@ -760,6 +778,7 @@
       "projectType": "library",
       "root": "libs/hapify/generate-config",
       "sourceRoot": "libs/hapify/generate-config/src",
+      "tags": ["scope:config"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -786,7 +805,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/hapify/generate-config/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "pregenerate": {
           "dependsOn": [
@@ -824,6 +844,7 @@
       "projectType": "library",
       "root": "libs/hapify/templates/angular-rext-client",
       "sourceRoot": "libs/hapify/templates/angular-rext-client/src",
+      "tags": ["scope:template"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -863,6 +884,7 @@
       "projectType": "library",
       "root": "libs/hapify/templates/casl",
       "sourceRoot": "libs/hapify/templates/casl/src",
+      "tags": ["scope:template"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -910,6 +932,7 @@
       "projectType": "library",
       "root": "libs/hapify/templates/dbml",
       "sourceRoot": "libs/hapify/templates/dbml/src",
+      "tags": ["scope:template"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -949,6 +972,7 @@
       "projectType": "library",
       "root": "libs/hapify/templates/models",
       "sourceRoot": "libs/hapify/templates/models/src",
+      "tags": ["scope:template"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -988,6 +1012,7 @@
       "projectType": "library",
       "root": "libs/hapify/templates/nestjs-models",
       "sourceRoot": "libs/hapify/templates/nestjs-models/src",
+      "tags": ["scope:template"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1027,6 +1052,7 @@
       "projectType": "library",
       "root": "libs/hapify/templates/nestjs-models-common",
       "sourceRoot": "libs/hapify/templates/nestjs-models-common/src",
+      "tags": ["scope:template"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1066,6 +1092,7 @@
       "projectType": "library",
       "root": "libs/hapify/templates/nestjs-models-rest",
       "sourceRoot": "libs/hapify/templates/nestjs-models-rest/src",
+      "tags": ["scope:template"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1113,6 +1140,7 @@
       "projectType": "library",
       "root": "libs/hapify/templates/prisma",
       "sourceRoot": "libs/hapify/templates/prisma/src",
+      "tags": ["scope:template"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1152,6 +1180,7 @@
       "projectType": "library",
       "root": "libs/hapify/templates/react-admin",
       "sourceRoot": "libs/hapify/templates/react-admin/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1191,6 +1220,7 @@
       "projectType": "library",
       "root": "libs/hapify/templates/rest-dtos",
       "sourceRoot": "libs/hapify/templates/rest-dtos/src",
+      "tags": ["scope:template"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1230,6 +1260,7 @@
       "projectType": "library",
       "root": "libs/hapify/templates/rext-client",
       "sourceRoot": "libs/hapify/templates/rext-client/src",
+      "tags": ["scope:template"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1269,6 +1300,7 @@
       "projectType": "library",
       "root": "libs/hapify/update-templates-import-path",
       "sourceRoot": "libs/hapify/update-templates-import-path/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1297,7 +1329,8 @@
             "lintFilePatterns": [
               "libs/hapify/update-templates-import-path/**/*.ts"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "pregenerate": {
           "dependsOn": [
@@ -1335,6 +1368,7 @@
       "projectType": "library",
       "root": "libs/nestjs/authentication",
       "sourceRoot": "libs/nestjs/authentication/src",
+      "tags": ["scope:nestjs"],
       "targets": {
         "build": {
           "dependsOn": [
@@ -1375,7 +1409,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/nestjs/authentication/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -1397,6 +1432,7 @@
       "projectType": "library",
       "root": "libs/nestjs/casl",
       "sourceRoot": "libs/nestjs/casl/src",
+      "tags": ["scope:nestjs"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1424,7 +1460,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/nestjs/casl/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -1446,6 +1483,7 @@
       "projectType": "library",
       "root": "libs/nestjs/core",
       "sourceRoot": "libs/nestjs/core/src",
+      "tags": ["scope:nestjs"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1462,7 +1500,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/nestjs/core/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -1484,6 +1523,7 @@
       "projectType": "library",
       "root": "libs/nestjs/database",
       "sourceRoot": "libs/nestjs/database/src",
+      "tags": ["scope:nestjs"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1500,7 +1540,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/nestjs/database/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -1522,6 +1563,7 @@
       "projectType": "library",
       "root": "libs/nestjs/file-storage",
       "sourceRoot": "libs/nestjs/file-storage/src",
+      "tags": ["scope:nestjs"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1538,7 +1580,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/nestjs/file-storage/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -1560,6 +1603,7 @@
       "projectType": "library",
       "root": "libs/nestjs/mailer",
       "sourceRoot": "libs/nestjs/mailer/src",
+      "tags": ["scope:nestjs"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1576,7 +1620,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/nestjs/mailer/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -1598,6 +1643,7 @@
       "projectType": "library",
       "root": "libs/nestjs/testing",
       "sourceRoot": "libs/nestjs/testing/src",
+      "tags": ["scope:nestjs"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1614,7 +1660,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/nestjs/testing/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -1636,6 +1683,7 @@
       "projectType": "library",
       "root": "libs/config/prettier",
       "sourceRoot": "libs/config/prettier/src",
+      "tags": ["scope:config"],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1655,7 +1703,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/config/prettier/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -1674,9 +1723,19 @@
       }
     },
     "prisma": {
+      "implicitDependencies": [
+        "hapify-templates-prisma",
+        "hapify-config",
+        "hapify-common",
+        "hapify-generate-config",
+        "schematics",
+        "generated",
+        "hapify-update-templates-import-path"
+      ],
       "projectType": "library",
       "root": "libs/prisma",
       "sourceRoot": "libs/prisma/src",
+      "tags": ["scope:generated"],
       "targets": {
         "generate": {
           "dependsOn": [
@@ -1700,7 +1759,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/prisma/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "pregenerate": {
           "dependsOn": [
@@ -1733,6 +1793,7 @@
       "projectType": "application",
       "root": "apps/pwa",
       "sourceRoot": "apps/pwa/src",
+      "tags": ["scope:app"],
       "targets": {
         "build": {
           "configurations": {
@@ -1805,7 +1866,8 @@
               "apps/pwa/src/**/*.ts",
               "apps/pwa/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "preserve": {
           "configurations": {
@@ -1852,9 +1914,11 @@
       }
     },
     "pwa-e2e": {
+      "implicitDependencies": ["pwa"],
       "projectType": "application",
       "root": "apps/pwa-e2e",
       "sourceRoot": "apps/pwa-e2e/src",
+      "tags": ["scope:app"],
       "targets": {
         "e2e": {
           "configurations": {
@@ -1873,7 +1937,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/pwa-e2e/**/*.{js,ts}"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         }
       }
     },
@@ -1881,6 +1946,7 @@
       "projectType": "library",
       "root": "libs/schematics",
       "sourceRoot": "libs/schematics/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -1945,7 +2011,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/schematics/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "pregenerate": {
           "executor": "@nrwl/workspace:run-commands",
@@ -1973,6 +2040,7 @@
       "projectType": "application",
       "root": "apps/terraform",
       "sourceRoot": "apps/terraform/src",
+      "tags": [],
       "targets": {
         "apply": {
           "executor": "@nrwl/workspace:run-commands",
@@ -2008,7 +2076,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/terraform/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "plan": {
           "executor": "@nrwl/workspace:run-commands",
@@ -2046,6 +2115,7 @@
       "projectType": "library",
       "root": "libs/terraform/aws-stack",
       "sourceRoot": "libs/terraform/aws-stack/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2062,7 +2132,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/aws-stack/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2084,6 +2155,7 @@
       "projectType": "library",
       "root": "libs/terraform/component/aws",
       "sourceRoot": "libs/terraform/component/aws/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2100,7 +2172,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/component/aws/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2122,6 +2195,7 @@
       "projectType": "library",
       "root": "libs/terraform/component/deployment",
       "sourceRoot": "libs/terraform/component/deployment/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2138,7 +2212,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/component/deployment/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2160,6 +2235,7 @@
       "projectType": "library",
       "root": "libs/terraform/component/deployment-trigger",
       "sourceRoot": "libs/terraform/component/deployment-trigger/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2178,7 +2254,8 @@
             "lintFilePatterns": [
               "libs/terraform/component/deployment-trigger/**/*.ts"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2200,6 +2277,7 @@
       "projectType": "library",
       "root": "libs/terraform/component/entrypoint",
       "sourceRoot": "libs/terraform/component/entrypoint/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2216,7 +2294,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/component/entrypoint/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2238,6 +2317,7 @@
       "projectType": "library",
       "root": "libs/terraform/component/logs",
       "sourceRoot": "libs/terraform/component/logs/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2254,7 +2334,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/component/logs/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2276,6 +2357,7 @@
       "projectType": "library",
       "root": "libs/terraform/component/owner-pictures",
       "sourceRoot": "libs/terraform/component/owner-pictures/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2294,7 +2376,8 @@
             "lintFilePatterns": [
               "libs/terraform/component/owner-pictures/**/*.ts"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2316,6 +2399,7 @@
       "projectType": "library",
       "root": "libs/terraform/component/private-dns",
       "sourceRoot": "libs/terraform/component/private-dns/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2332,7 +2416,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/component/private-dns/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2354,6 +2439,7 @@
       "projectType": "library",
       "root": "libs/terraform/component/s3",
       "sourceRoot": "libs/terraform/component/s3/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2370,7 +2456,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/component/s3/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2392,6 +2479,7 @@
       "projectType": "library",
       "root": "libs/terraform/component/s3-user",
       "sourceRoot": "libs/terraform/component/s3-user/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2408,7 +2496,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/component/s3-user/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2430,6 +2519,7 @@
       "projectType": "library",
       "root": "libs/terraform/component/secrets",
       "sourceRoot": "libs/terraform/component/secrets/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2446,7 +2536,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/component/secrets/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2468,6 +2559,7 @@
       "projectType": "library",
       "root": "libs/terraform/component/volume",
       "sourceRoot": "libs/terraform/component/volume/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2484,7 +2576,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/component/volume/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2506,6 +2599,7 @@
       "projectType": "library",
       "root": "libs/terraform/group/network",
       "sourceRoot": "libs/terraform/group/network/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2522,7 +2616,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/group/network/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2544,6 +2639,7 @@
       "projectType": "library",
       "root": "libs/terraform/group/pool",
       "sourceRoot": "libs/terraform/group/pool/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2560,7 +2656,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/group/pool/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2582,6 +2679,7 @@
       "projectType": "library",
       "root": "libs/terraform/group/registry",
       "sourceRoot": "libs/terraform/group/registry/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2598,7 +2696,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/group/registry/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2620,6 +2719,7 @@
       "projectType": "library",
       "root": "libs/terraform/group/zone",
       "sourceRoot": "libs/terraform/group/zone/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2636,7 +2736,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/group/zone/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2658,6 +2759,7 @@
       "projectType": "library",
       "root": "libs/terraform/service/api",
       "sourceRoot": "libs/terraform/service/api/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2674,7 +2776,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/service/api/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2696,6 +2799,7 @@
       "projectType": "library",
       "root": "libs/terraform/service/ecs",
       "sourceRoot": "libs/terraform/service/ecs/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2712,7 +2816,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/service/ecs/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2734,6 +2839,7 @@
       "projectType": "library",
       "root": "libs/terraform/service/postgres",
       "sourceRoot": "libs/terraform/service/postgres/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2750,7 +2856,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/service/postgres/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2772,6 +2879,7 @@
       "projectType": "library",
       "root": "libs/terraform/service/pwa",
       "sourceRoot": "libs/terraform/service/pwa/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2788,7 +2896,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/service/pwa/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
@@ -2810,6 +2919,7 @@
       "projectType": "library",
       "root": "libs/terraform/service/reverse-proxy",
       "sourceRoot": "libs/terraform/service/reverse-proxy/src",
+      "tags": [],
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
@@ -2826,7 +2936,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/terraform/service/reverse-proxy/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "publish": {
           "executor": "ngx-deploy-npm:deploy",
