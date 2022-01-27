@@ -1,7 +1,6 @@
 import * as path from 'path';
 
 import {
-  addProjectConfiguration,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
@@ -10,6 +9,7 @@ import {
   Tree,
 } from '@nrwl/devkit';
 
+import libraryGenerator from '../library/generator';
 import { PrismaLibraryGeneratorSchema } from './schema';
 
 interface NormalizedSchema extends PrismaLibraryGeneratorSchema {
@@ -51,7 +51,7 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
   };
   generateFiles(
     tree,
-    path.join(__dirname, 'files'),
+    path.join(__dirname, './files'),
     options.projectRoot,
     templateOptions,
   );
@@ -61,18 +61,14 @@ export default async function prismaLibraryGenerator(
   tree: Tree,
   options: PrismaLibraryGeneratorSchema,
 ) {
-  const normalizedOptions = normalizeOptions(tree, options);
-  addProjectConfiguration(tree, normalizedOptions.projectName, {
-    root: normalizedOptions.projectRoot,
-    projectType: 'library',
-    sourceRoot: `${normalizedOptions.projectRoot}/src`,
-    targets: {
-      build: {
-        executor: '@tractr/schematics:build',
-      },
-    },
-    tags: normalizedOptions.parsedTags,
+  await libraryGenerator(tree, {
+    ...options,
+    type: 'nest',
+    hapifyTemplates: ['prisma'],
   });
+
+  const normalizedOptions = normalizeOptions(tree, options);
+
   addFiles(tree, normalizedOptions);
   await formatFiles(tree);
 }
