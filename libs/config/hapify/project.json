@@ -1,0 +1,59 @@
+{
+  "projectType": "library",
+  "root": "libs/config/hapify",
+  "sourceRoot": "libs/config/hapify/src",
+  "tags": ["scope:config"],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": [
+          "libs/config/hapify/*.md",
+          "libs/config/hapify/validator.js"
+        ],
+        "main": "libs/config/hapify/src/index.ts",
+        "outputPath": "dist/libs/config/hapify",
+        "packageJson": "libs/config/hapify/package.json",
+        "tsConfig": "libs/config/hapify/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/config/hapify/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "pregenerate": {
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build"
+        }
+      ],
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "rm -rf node_modules/@tractr/hapify-config",
+          "mkdir -p node_modules/@tractr",
+          "cp -rf dist/libs/config/hapify/ node_modules/@tractr/hapify-config/"
+        ]
+      }
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/config/hapify/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/config/hapify"]
+    }
+  }
+}

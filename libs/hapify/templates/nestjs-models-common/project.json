@@ -1,0 +1,40 @@
+{
+  "projectType": "library",
+  "root": "libs/hapify/templates/nestjs-models-common",
+  "sourceRoot": "libs/hapify/templates/nestjs-models-common/src",
+  "tags": ["scope:template"],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": [
+          "libs/hapify/templates/nestjs-models-common/*.md",
+          "libs/hapify/templates/nestjs-models-common/index.js",
+          "libs/hapify/templates/nestjs-models-common/.hapifyrc.js",
+          {
+            "glob": "**/*",
+            "input": "libs/hapify/templates/nestjs-models-common/hapify",
+            "output": "hapify"
+          }
+        ],
+        "main": "libs/hapify/templates/nestjs-models-common/index.js",
+        "outputPath": "dist/libs/hapify/templates/nestjs-models-common",
+        "packageJson": "libs/hapify/templates/nestjs-models-common/package.json",
+        "tsConfig": "libs/hapify/templates/nestjs-models-common/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "pregenerate": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["nx build hapify-templates-nestjs-models-common"]
+      }
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    }
+  }
+}
