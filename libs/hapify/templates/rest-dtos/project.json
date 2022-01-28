@@ -24,12 +24,6 @@
       },
       "outputs": ["{options.outputPath}"]
     },
-    "pregenerate": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": ["nx build hapify-templates-rest-dtos"]
-      }
-    },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
       "options": {

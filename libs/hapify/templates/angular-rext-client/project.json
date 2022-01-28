@@ -24,12 +24,6 @@
       },
       "outputs": ["{options.outputPath}"]
     },
-    "pregenerate": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": ["nx build hapify-templates-angular-rext-client"]
-      }
-    },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
       "options": {

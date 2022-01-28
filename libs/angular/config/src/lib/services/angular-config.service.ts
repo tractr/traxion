@@ -32,13 +32,13 @@ export function AngularConfigServiceFactory<
 
     refresh$ = new BehaviorSubject<T | undefined>(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (window as any)[ANGULAR_CONFIGURATION_SESSION_STORAGE],
+      (window as any)[ANGULAR_CONFIGURATION_SESSION_STORAGE] as T | undefined,
     );
 
     value$ = new BehaviorSubject<T | undefined>(undefined);
 
     getConfig$ = fromFetch(angularConfigOptions.apiEndpoint).pipe(
-      mergeMap((response) => from(response.json())),
+      mergeMap((response) => from(response.json() as Promise<AngularConfig>)),
       map(angularConfigOptions.getConfig),
     );
 
@@ -59,14 +59,6 @@ export function AngularConfigServiceFactory<
         throw new Error('The configuration has not been initialized');
 
       return config;
-    }
-
-    set config(value: T) {
-      this.refresh$.next(value);
-    }
-
-    refresh() {
-      this.refresh$.next(undefined);
     }
   }
   return new AnonymousAngularConfigService();

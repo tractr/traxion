@@ -1,17 +1,6 @@
 {
   "root": "libs/workspace",
   "targets": {
-    "hpf-serve": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "nx run-many --target pregenerate --projects hapify-config",
-          "npx hpf serve"
-        ],
-        "cwd": ".",
-        "parallel": false
-      }
-    },
     "release": {
       "executor": "@jscutlery/semver:version",
       "options": {

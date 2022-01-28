@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { ModuleWithProviders, NgModule, Provider } from '@angular/core';
 import { ClassConstructor } from 'class-transformer';
 

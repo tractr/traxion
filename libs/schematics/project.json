@@ -4,6 +4,12 @@
   "sourceRoot": "libs/schematics/src",
   "tags": [],
   "targets": {
+    "": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["nx run schematics:build"]
+      }
+    },
     "build": {
       "executor": "@nrwl/node:package",
       "options": {
@@ -69,12 +75,6 @@
         "lintFilePatterns": ["libs/schematics/**/*.ts"]
       },
       "outputs": ["{options.outputFile}"]
-    },
-    "pregenerate": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": ["nx run schematics:build"]
-      }
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",

@@ -52,12 +52,6 @@
         "target": "build"
       }
     ],
-    "generate": [
-      {
-        "projects": "dependencies",
-        "target": "pregenerate"
-      }
-    ],
     "publish": [
       {
         "projects": "dependencies",
@@ -74,5 +68,5 @@
       "runner": "@nrwl/workspace/tasks-runners/default"
     }
   },
-  "useDaemonProcess": false
+  "useDaemonProcess": true
 }

@@ -75,9 +75,6 @@ hapify.json
 # Local ignore
 *.local-ignore*
 
-# Nestjs authentication local prisma
-libs/nestjs/authentication/prisma/client
-
 # Pwa app config
 apps/pwa/src/assets/app-config.json
 
@@ -87,3 +84,6 @@ apps/pwa/src/assets/app-config.json
 # Generated Docusaurus files
 .docusaurus/
 .cache-loader/
+
+# Angular
+.angular

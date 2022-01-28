@@ -37,12 +37,6 @@
       "outputs": ["{options.outputPath}"]
     },
     "generate": {
-      "dependsOn": [
-        {
-          "projects": "dependencies",
-          "target": "pregenerate"
-        }
-      ],
       "executor": "./dist/libs/schematics:generate",
       "options": {
         "cwd": "libs/generated",

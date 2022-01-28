@@ -23,10 +23,12 @@ export class FormComponent implements AfterViewInit {
   @Input() form!: FormGroup;
 
   ngAfterViewInit(): void {
-    this.form.valueChanges.subscribe((changes) => this.changed.emit(changes));
+    this.form.valueChanges.subscribe((changes) =>
+      this.changed.emit(changes as Record<string, unknown>),
+    );
   }
 
   submit(): void {
-    this.submitted.emit(this.form.value);
+    this.submitted.emit(this.form.value as Record<string, unknown>);
   }
 }
