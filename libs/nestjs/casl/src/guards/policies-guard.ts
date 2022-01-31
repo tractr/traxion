@@ -2,21 +2,19 @@ import {
   CanActivate,
   ExecutionContext,
   ForbiddenException,
-  Inject,
   Injectable,
 } from '@nestjs/common';
 import { ModuleRef, Reflector } from '@nestjs/core';
 
-import { CASL_MODULE_OPTIONS } from '../casl.constant';
-import { CaslOptions } from '../interfaces';
 import { CaslAbilityFactoryService } from '../services';
 
 import { isClass, PolicyHandlerType } from '@tractr/common';
 import {
-  AUTHENTICATION_USER_SERVICE,
-  AuthenticationUserService,
-} from '@tractr/nestjs-authentication';
-import { IS_PUBLIC_KEY, Logger, POLICIES_KEY } from '@tractr/nestjs-core';
+  getRequestFromContext,
+  IS_PUBLIC_KEY,
+  Logger,
+  POLICIES_KEY,
+} from '@tractr/nestjs-core';
 
 @Injectable()
 export class PoliciesGuard implements CanActivate {
@@ -25,10 +23,6 @@ export class PoliciesGuard implements CanActivate {
     private reflector: Reflector,
     private logger: Logger,
     private caslAbilityFactory: CaslAbilityFactoryService,
-    @Inject(CASL_MODULE_OPTIONS)
-    private caslOptions: CaslOptions,
-    @Inject(AUTHENTICATION_USER_SERVICE)
-    private userService: AuthenticationUserService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -47,7 +41,8 @@ export class PoliciesGuard implements CanActivate {
         context.getHandler(),
       ) || [];
 
-    const req = context.switchToHttp().getRequest();
+    // Extract request from the context
+    const req = getRequestFromContext(context);
 
     // Get user from the request object.
     // User should have been fetched and populated by the authentication layer
