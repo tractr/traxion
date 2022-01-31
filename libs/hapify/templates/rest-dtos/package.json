@@ -1,6 +1,6 @@
 {
   "name": "@tractr/hapify-templates-rest-dtos",
-  "version": "1.33.0",
+  "version": "1.34.0",
   "description": "Hapify templates for models rest dtos",
   "repository": {
     "type": "git",
