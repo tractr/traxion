@@ -1,0 +1,40 @@
+{
+  "projectType": "library",
+  "root": "libs/terraform/group/zone",
+  "sourceRoot": "libs/terraform/group/zone/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": ["libs/terraform/group/zone/*.md"],
+        "main": "libs/terraform/group/zone/src/index.ts",
+        "outputPath": "dist/libs/terraform/group/zone",
+        "packageJson": "libs/terraform/group/zone/package.json",
+        "tsConfig": "libs/terraform/group/zone/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/terraform/group/zone/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/terraform/group/zone/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/terraform/group/zone"]
+    }
+  }
+}

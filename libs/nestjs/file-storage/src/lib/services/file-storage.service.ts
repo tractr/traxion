@@ -109,7 +109,12 @@ export class FileStorageService extends Client {
       await this.statObject(bucket, file);
       return true;
     } catch (e) {
-      if (e.code === 'NotFound') return false;
+      if (
+        typeof e === 'object' &&
+        (e as Record<string, unknown>)?.code === 'NotFound'
+      )
+        return false;
+
       throw new Error(
         `Something went wrong while testing existence of file ${file} in bucket ${bucket}: ${JSON.stringify(
           e,

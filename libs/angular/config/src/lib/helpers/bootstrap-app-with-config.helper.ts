@@ -28,7 +28,7 @@ export async function bootstrapAppWithConfig<T>(
     } catch {}
   }
 
-  if (!config) {
+  if (typeof config === 'undefined') {
     config = await fetchAppConfigJson(options?.appConfigUrl);
 
     sessionStorage.setItem(
@@ -37,7 +37,9 @@ export async function bootstrapAppWithConfig<T>(
     );
   }
 
-  config = options?.getConfig ? options?.getConfig(config) : config;
+  config = options?.getConfig
+    ? options?.getConfig(config as AngularConfig)
+    : config;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any)[ANGULAR_CONFIGURATION_SESSION_STORAGE] = config;

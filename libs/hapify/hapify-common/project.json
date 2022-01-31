@@ -1,0 +1,50 @@
+{
+  "projectType": "library",
+  "root": "libs/hapify/hapify-common",
+  "sourceRoot": "libs/hapify/hapify-common/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": ["libs/hapify/hapify-common/*.md"],
+        "main": "libs/hapify/hapify-common/src/index.ts",
+        "outputPath": "dist/libs/hapify/hapify-common",
+        "packageJson": "libs/hapify/hapify-common/package.json",
+        "tsConfig": "libs/hapify/hapify-common/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "coverage": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "codeCoverage": true,
+        "coverageReporters": ["text", "json"],
+        "jestConfig": "libs/hapify/hapify-common/jest.config.js",
+        "passWithNoTests": true,
+        "skipNxCache": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/hapify/hapify-common/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/hapify/hapify-common/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/hapify/hapify-common"]
+    }
+  }
+}

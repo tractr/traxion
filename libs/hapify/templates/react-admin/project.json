@@ -1,0 +1,34 @@
+{
+  "projectType": "library",
+  "root": "libs/hapify/templates/react-admin",
+  "sourceRoot": "libs/hapify/templates/react-admin/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": [
+          "libs/hapify/templates/react-admin/*.md",
+          "libs/hapify/templates/react-admin/index.js",
+          "libs/hapify/templates/react-admin/.hapifyrc.js",
+          {
+            "glob": "**/*",
+            "input": "libs/hapify/templates/react-admin/hapify",
+            "output": "hapify"
+          }
+        ],
+        "main": "libs/hapify/templates/react-admin/index.js",
+        "outputPath": "dist/libs/hapify/templates/react-admin",
+        "packageJson": "libs/hapify/templates/react-admin/package.json",
+        "tsConfig": "libs/hapify/templates/react-admin/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    }
+  }
+}
