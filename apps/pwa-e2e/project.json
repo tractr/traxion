@@ -1,0 +1,29 @@
+{
+  "implicitDependencies": ["pwa"],
+  "projectType": "application",
+  "root": "apps/pwa-e2e",
+  "sourceRoot": "apps/pwa-e2e/src",
+  "tags": ["scope:app"],
+  "targets": {
+    "e2e": {
+      "configurations": {
+        "production": {
+          "devServerTarget": "pwa:serve:production"
+        }
+      },
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/pwa-e2e/cypress.json",
+        "devServerTarget": "pwa:serve:development",
+        "tsConfig": "apps/pwa-e2e/tsconfig.e2e.json"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/pwa-e2e/**/*.{js,ts}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  }
+}

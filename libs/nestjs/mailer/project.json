@@ -1,0 +1,40 @@
+{
+  "projectType": "library",
+  "root": "libs/nestjs/mailer",
+  "sourceRoot": "libs/nestjs/mailer/src",
+  "tags": ["scope:nestjs"],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": ["libs/nestjs/mailer/*.md"],
+        "main": "libs/nestjs/mailer/src/index.ts",
+        "outputPath": "dist/libs/nestjs/mailer",
+        "packageJson": "libs/nestjs/mailer/package.json",
+        "tsConfig": "libs/nestjs/mailer/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/nestjs/mailer/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/nestjs/mailer/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/nestjs/mailer"]
+    }
+  }
+}

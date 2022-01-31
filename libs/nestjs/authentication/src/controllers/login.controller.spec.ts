@@ -326,7 +326,7 @@ describe('Authentication Module with cookie', () => {
 
       const response = await request(app.getHttpServer())
         .get('/me')
-        .set('Cookie', responseWithCookie.header['set-cookie']);
+        .set('Cookie', responseWithCookie.header['set-cookie'] as string);
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(JSON.parse(JSON.stringify(mockUser)));
@@ -356,7 +356,7 @@ describe('Authentication Module with cookie', () => {
 
       await request(app.getHttpServer())
         .get('/me')
-        .set('Cookie', responseWithCookie.header['set-cookie'])
+        .set('Cookie', responseWithCookie.header['set-cookie'] as string)
         .expect(401);
     });
   });

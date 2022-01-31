@@ -1,0 +1,40 @@
+{
+  "projectType": "library",
+  "root": "libs/terraform/component/owner-pictures",
+  "sourceRoot": "libs/terraform/component/owner-pictures/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": ["libs/terraform/component/owner-pictures/*.md"],
+        "main": "libs/terraform/component/owner-pictures/src/index.ts",
+        "outputPath": "dist/libs/terraform/component/owner-pictures",
+        "packageJson": "libs/terraform/component/owner-pictures/package.json",
+        "tsConfig": "libs/terraform/component/owner-pictures/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/terraform/component/owner-pictures/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "restricted"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/terraform/component/owner-pictures/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/terraform/component/owner-pictures"]
+    }
+  }
+}

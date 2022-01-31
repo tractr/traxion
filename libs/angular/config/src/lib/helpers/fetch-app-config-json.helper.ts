@@ -7,5 +7,5 @@ export async function fetchAppConfigJson<T = AngularConfig>(
   const response = await fetch(url);
   const config = await response.json();
 
-  return getConfig(config);
+  return getConfig(config as AngularConfig);
 }

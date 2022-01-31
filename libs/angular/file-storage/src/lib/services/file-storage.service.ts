@@ -67,7 +67,7 @@ export class FileStorageService {
     const formData = new FormData();
 
     for (const [key, value] of Object.entries(rawFormData)) {
-      formData.append(key, value);
+      formData.append(key, value as string);
     }
 
     formData.append('file', file);

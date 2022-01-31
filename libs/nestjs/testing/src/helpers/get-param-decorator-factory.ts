@@ -10,5 +10,5 @@ export function getParamDecoratorFactory(decorator: Function): Function {
   }
 
   const args = Reflect.getMetadata(ROUTE_ARGS_METADATA, Test, 'test');
-  return args[Object.keys(args)[0]].factory;
+  return args[Object.keys(args as Record<string, unknown>)[0]].factory;
 }

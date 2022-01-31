@@ -197,7 +197,7 @@ export function ModuleOptionsFactory<
       if (options.useFactory) {
         return {
           provide: moduleOptionsProvide,
-          useFactory: (...args: any[]) =>
+          useFactory: (...args: unknown[]) =>
             validate(
               (options.useFactory &&
                 options.useFactory(defaultOptions, ...args)) ||

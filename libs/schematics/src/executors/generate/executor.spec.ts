@@ -3,6 +3,7 @@ import { exec } from 'child_process';
 import {
   ExecutorContext,
   logger,
+  NxJsonConfiguration,
   WorkspaceJsonConfiguration,
 } from '@nrwl/devkit';
 import * as fs from 'fs-extra';
@@ -48,7 +49,7 @@ describe('Generate executor:generate', () => {
       root: '/root',
       cwd: '/cwd',
       isVerbose: false,
-      workspace: {} as WorkspaceJsonConfiguration,
+      workspace: {} as WorkspaceJsonConfiguration & NxJsonConfiguration,
     };
     defaultOptions = {
       cwd: 'libs/test',

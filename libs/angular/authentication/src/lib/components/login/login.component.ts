@@ -26,8 +26,8 @@ export class LoginComponent {
 
   /** Called when the user click on sign in */
   onSignIn() {
-    const email = this.form.get('email')?.value;
-    const password = this.form.get('password')?.value;
+    const email: string = this.form.get('email')?.value;
+    const password: string = this.form.get('password')?.value;
 
     if (!email && !password) return;
 
@@ -43,7 +43,7 @@ export class LoginComponent {
           );
         }
       })
-      .catch((err) => this.handleSignInError(err));
+      .catch((err: Error) => this.handleSignInError(err));
   }
 
   private handleSignInError(err: Error) {
