@@ -25,22 +25,6 @@
       },
       "outputs": ["{options.outputFile}"]
     },
-    "pregenerate": {
-      "dependsOn": [
-        {
-          "projects": "self",
-          "target": "build"
-        }
-      ],
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "rm -rf node_modules/@tractr/hapify-config",
-          "mkdir -p node_modules/@tractr",
-          "cp -r dist/libs/config/hapify/ node_modules/@tractr/hapify-config/"
-        ]
-      }
-    },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
       "options": {
