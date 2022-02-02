@@ -62,10 +62,11 @@
   "tasksRunnerOptions": {
     "default": {
       "options": {
+        "accessToken": "ZDI3MTE5MTYtMzc2ZS00ODQ4LWIyMDEtMDBkNmIxMWZhZWI2fHJlYWQtd3JpdGU=",
         "cacheableOperations": ["build", "lint", "test", "e2e"],
         "parallel": 1
       },
-      "runner": "@nrwl/workspace/tasks-runners/default"
+      "runner": "@nrwl/nx-cloud"
     }
   },
   "useDaemonProcess": true
