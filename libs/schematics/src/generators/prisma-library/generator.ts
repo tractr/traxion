@@ -12,6 +12,7 @@ import { addPackageToPackageJson } from '../../helpers';
 import libraryGenerator from '../library/generator';
 import { normalizeOptions } from '../library/helpers';
 import { NormalizedOptions } from '../library/schema';
+import { NX_TOOLS_NX_PRISMA_PACKAGE } from './constants/nx-tools-prisma-package';
 import { getTargetsToAdd } from './helpers/project-targets';
 import { PrismaLibraryGeneratorSchema } from './schema';
 
@@ -64,5 +65,7 @@ export default async function prismaLibraryGenerator(
 
   addFiles(tree, normalizedOptions);
   await formatFiles(tree);
-  await addPackageToPackageJson(tree, { packageName: '@nx-tools/nx-prisma' });
+  await addPackageToPackageJson(tree, {
+    packageName: NX_TOOLS_NX_PRISMA_PACKAGE,
+  });
 }

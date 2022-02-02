@@ -1,8 +1,9 @@
 import * as path from 'path';
 
-import { readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
+import { NX_TOOLS_NX_PRISMA_PACKAGE } from './constants/nx-tools-prisma-package';
 import generator from './generator';
 import { PrismaLibraryGeneratorSchema } from './schema';
 
@@ -96,5 +97,16 @@ generator client {
   previewFeatures = ["filterJson"]
 }
 `);
+  });
+
+  it('should add @nx-tools/nx-prisma package', async () => {
+    await generator(appTree, { ...options });
+
+    const packageJson = readJson(appTree, 'package.json');
+    expect(packageJson).toBeDefined();
+    expect(packageJson.devDependencies).toBeDefined();
+    expect(
+      packageJson.devDependencies[NX_TOOLS_NX_PRISMA_PACKAGE],
+    ).toBeDefined();
   });
 });
