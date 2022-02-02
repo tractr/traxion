@@ -1,10 +1,18 @@
 import path = require('path');
 
-import { formatFiles, generateFiles, Tree } from '@nrwl/devkit';
+import {
+  formatFiles,
+  generateFiles,
+  readProjectConfiguration,
+  Tree,
+  updateProjectConfiguration,
+} from '@nrwl/devkit';
 
+import { addPackageToPackageJson } from '../../helpers';
 import libraryGenerator from '../library/generator';
 import { normalizeOptions } from '../library/helpers';
 import { NormalizedOptions } from '../library/schema';
+import { getTargetsToAdd } from './helpers/project-targets';
 import { PrismaLibraryGeneratorSchema } from './schema';
 
 function getNodeModulesRelativePath(
@@ -46,6 +54,15 @@ export default async function prismaLibraryGenerator(
 
   const normalizedOptions = normalizeOptions(tree, options);
 
+  const targetsToAdd = getTargetsToAdd(normalizedOptions);
+  const project = readProjectConfiguration(tree, normalizedOptions.projectName);
+  project.targets = {
+    ...project.targets,
+    ...targetsToAdd,
+  };
+  updateProjectConfiguration(tree, normalizedOptions.projectName, project);
+
   addFiles(tree, normalizedOptions);
   await formatFiles(tree);
+  await addPackageToPackageJson(tree, { packageName: '@nx-tools/nx-prisma' });
 }
