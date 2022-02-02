@@ -67,6 +67,7 @@
     "@nestjs/swagger": "^5.0.8",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "@nrwl/nx-cloud": "^13.1.2",
     "@prisma/client": "^3.7.0",
     "@types/faker": "^5.5.7",
     "@types/glob": "^7.2.0",
