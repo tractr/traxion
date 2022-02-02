@@ -35,7 +35,7 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/prisma/**/*.ts"]
+        "lintFilePatterns": ["libs/generated/prisma/**/*.ts"]
       },
       "outputs": ["{options.outputFile}"]
     },
