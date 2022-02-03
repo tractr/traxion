@@ -22,10 +22,25 @@
       "description": "The input generated path of hapify files",
       "type": "string"
     },
+    "moveGeneratedFiles": {
+      "default": true,
+      "description": "Should we move the generated files from input to output generated path",
+      "type": "boolean"
+    },
     "outputGeneratedPath": {
-      "default": "src/generated",
-      "description": "The output generated path of hapify files",
+      "default": "generated",
+      "description": "The output generated path of hapify files (root folder is <projectDir>/src)",
       "type": "string"
+    },
+    "secondaryEntrypoints": {
+      "default": ["mock"],
+      "description": "List of root folder that will have a special treatment to split them in different entrypoints",
+      "type": "array"
+    },
+    "updateImportPath": {
+      "default": true,
+      "description": "Should we update the import path of the generated files",
+      "type": "boolean"
     }
   },
   "required": ["cwd"],

@@ -111,9 +111,3 @@ project!
 > Use double quotes in JSX.
 
 `"jsxSingleQuote": false`
-
-### <a href="https://github.com/airbnb/javascript/tree/master/react#tags">Tags</a>
-
-> If your component has multi-line properties, close its tag on a new line.
-
-`"jsxBracketSameLine": false`

@@ -11,6 +11,11 @@
       "factory": "./src/generators/github-workflows/generator",
       "schema": "./src/generators/github-workflows/schema.json"
     },
+    "library": {
+      "description": "library generator",
+      "factory": "./src/generators/library/generator",
+      "schema": "./src/generators/library/schema.json"
+    },
     "npm-publish": {
       "description": "npm-publish generator",
       "factory": "./src/generators/npm-publish/generator",

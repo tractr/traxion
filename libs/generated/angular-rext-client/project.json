@@ -1,0 +1,53 @@
+{
+  "implicitDependencies": [
+    "hapify-templates-angular-rext-client",
+    "angular-tools",
+    "generated-rext-client"
+  ],
+  "prefix": "tractr",
+  "projectType": "library",
+  "root": "libs/generated/angular-rext-client",
+  "sourceRoot": "libs/generated/angular-rext-client/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "configurations": {
+        "development": {
+          "tsConfig": "libs/generated/angular-rext-client/tsconfig.lib.json"
+        },
+        "production": {
+          "tsConfig": "libs/generated/angular-rext-client/tsconfig.lib.prod.json"
+        }
+      },
+      "defaultConfiguration": "production",
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "options": {
+        "project": "libs/generated/angular-rext-client/ng-package.json"
+      },
+      "outputs": ["dist/libs/generated/angular-rext-client"]
+    },
+    "generate": {
+      "executor": "./dist/libs/schematics:generate",
+      "options": {
+        "cwd": "libs/generated/angular-rext-client"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/generated/angular-rext-client/src/**/*.ts",
+          "libs/generated/angular-rext-client/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/generated/angular-rext-client/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/generated/angular-rext-client"]
+    }
+  }
+}

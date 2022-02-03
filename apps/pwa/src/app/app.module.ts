@@ -18,9 +18,6 @@ import {
   MoleculeNotConnectedComponent,
 } from './molecules';
 
-import { AngularRextModule } from '@generated/angular-rext-client';
-import { rolePermissions } from '@generated/casl';
-import { User } from '@generated/models';
 import {
   AngularAuthenticationModule,
   AngularAuthenticationPasswordRoutingModule,
@@ -36,6 +33,9 @@ import {
 import { FileStorageModule } from '@tractr/angular-file-storage';
 import { AngularFormModule } from '@tractr/angular-form';
 import { AngularToolsModule } from '@tractr/angular-tools';
+import { AngularRextModule } from '@tractr/generated-angular-rext-client';
+import { rolePermissions } from '@tractr/generated-casl';
+import { User } from '@tractr/generated-models';
 
 @NgModule({
   declarations: [
