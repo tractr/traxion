@@ -44,6 +44,6 @@
   "plugins": ["@nrwl/nx"],
   "root": true,
   "settings": {
-    "import/internal-regex": "^@(tractr|generated|traxion)/"
+    "import/internal-regex": "^@(tractr)/"
   }
 }

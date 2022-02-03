@@ -1,5 +1,5 @@
 # Ignore all the generated folder
-generated
+libs/generated/**/generated
 
 # Ignore all the schematics template files
 **/schematics/**/files/**

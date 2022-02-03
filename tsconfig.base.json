@@ -16,7 +16,6 @@
       "@app/*": ["apps/pwa/src/app/*"],
       "@assets/*": ["apps/pwa/src/assets/*"],
       "@env/*": ["apps/pwa/src/environments/*"],
-      "@generated/*": ["libs/generated/generated/*"],
       "@tractr/angular-authentication": [
         "libs/angular/authentication/src/index.ts"
       ],
@@ -32,6 +31,37 @@
       "@tractr/commit-config": ["libs/config/commit/src/index.ts"],
       "@tractr/common": ["libs/common/src/index.ts"],
       "@tractr/eslint-config": ["libs/config/eslint/src/index.ts"],
+      "@tractr/generated-angular-rext-client": [
+        "libs/generated/angular-rext-client/src/index.ts"
+      ],
+      "@tractr/generated-casl": ["libs/generated/casl/src/index.ts"],
+      "@tractr/generated-models": ["libs/generated/models/src/index.ts"],
+      "@tractr/generated-models/mock": [
+        "libs/generated/models/mock/src/index.ts"
+      ],
+      "@tractr/generated-nestjs-models": [
+        "libs/generated/nestjs-models/src/index.ts"
+      ],
+      "@tractr/generated-nestjs-models-common": [
+        "libs/generated/nestjs-models-common/src/index.ts"
+      ],
+      "@tractr/generated-nestjs-models-common/mock": [
+        "libs/generated/nestjs-models-common/mock/src/index.ts"
+      ],
+      "@tractr/generated-nestjs-models-rest": [
+        "libs/generated/nestjs-models-rest/src/index.ts"
+      ],
+      "@tractr/generated-nestjs-models-rest/mock": [
+        "libs/generated/nestjs-models-rest/mock/src/index.ts"
+      ],
+      "@tractr/generated-prisma": ["libs/generated/prisma/src/index.ts"],
+      "@tractr/generated-rest-dtos": ["libs/generated/rest-dtos/src/index.ts"],
+      "@tractr/generated-rest-dtos/mock": [
+        "libs/generated/rest-dtos/mock/src/index.ts"
+      ],
+      "@tractr/generated-rext-client": [
+        "libs/generated/rext-client/src/index.ts"
+      ],
       "@tractr/hapify-common": ["libs/hapify/hapify-common/src/index.ts"],
       "@tractr/hapify-config": ["libs/config/hapify/src/index.ts"],
       "@tractr/hapify-generate-config": [
@@ -40,35 +70,8 @@
       "@tractr/hapify-react-admin": [
         "libs/hapify/templates/react-admin/src/index.ts"
       ],
-      "@tractr/hapify-templates-angular-rext-client": [
-        "libs/hapify/templates/angular-rext-client/src/index.ts"
-      ],
-      "@tractr/hapify-templates-casl": [
-        "libs/hapify/templates/casl/src/index.ts"
-      ],
-      "@tractr/hapify-templates-dbml": [
-        "libs/hapify/templates/dbml/src/index.ts"
-      ],
-      "@tractr/hapify-templates-models": [
-        "libs/hapify/templates/models/src/index.ts"
-      ],
-      "@tractr/hapify-templates-nestjs-models": [
-        "libs/hapify/templates/nestjs-models/src/index.ts"
-      ],
-      "@tractr/hapify-templates-nestjs-models-common": [
-        "libs/hapify/templates/nestjs-models-common/src/index.ts"
-      ],
-      "@tractr/hapify-templates-nestjs-models-rest": [
-        "libs/hapify/templates/nestjs-models-rest/src/index.ts"
-      ],
-      "@tractr/hapify-templates-prisma": [
-        "libs/hapify/templates/prisma/src/index.ts"
-      ],
-      "@tractr/hapify-templates-rest-dtos": [
-        "libs/hapify/templates/rest-dtos/src/index.ts"
-      ],
-      "@tractr/hapify-templates-rext-client": [
-        "libs/hapify/templates/rext-client/src/index.ts"
+      "@tractr/hapify-update-templates-import-path": [
+        "libs/hapify/update-templates-import-path/src/index.ts"
       ],
       "@tractr/hapify-update-templates-import-path": [
         "libs/hapify/update-templates-import-path/src/index.ts"
@@ -83,7 +86,6 @@
       "@tractr/nestjs-mailer": ["libs/nestjs/mailer/src/index.ts"],
       "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
       "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"],
-      "@tractr/prisma": ["libs/prisma/src/index.ts"],
       "@tractr/schematics": ["libs/schematics/src/index.ts"],
       "@tractr/terraform-aws-stack": ["libs/terraform/aws-stack/src/index.ts"],
       "@tractr/terraform-component-aws": [
