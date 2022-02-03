@@ -1,19 +1,12 @@
-import {
-  Alb,
-  AlbListener,
-  AlbTargetGroup,
-  Route53Record,
-  SecurityGroup,
-} from '@cdktf/provider-aws';
+import { elb, route53, vpc } from '@cdktf/provider-aws';
 import { ITerraformDependable, Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export interface EntrypointComponentConfig extends ConstructOptions {
+export interface EntrypointComponentConfig {
   vpcId: string;
   certificateArn: string;
   subnetsIds: string[];
@@ -23,17 +16,17 @@ export interface EntrypointComponentConfig extends ConstructOptions {
 }
 
 export class EntrypointComponent extends AwsComponent<EntrypointComponentConfig> {
-  protected readonly securityGroup: SecurityGroup;
+  protected readonly securityGroup: vpc.SecurityGroup;
 
-  protected readonly alb: Alb;
+  protected readonly alb: elb.Alb;
 
-  protected readonly albTargetGroup: AlbTargetGroup;
+  protected readonly albTargetGroup: elb.AlbTargetGroup;
 
-  protected readonly httpsAlbListener: AlbListener;
+  protected readonly httpsAlbListener: elb.AlbListener;
 
-  protected readonly httpAlbListener: AlbListener;
+  protected readonly httpAlbListener: elb.AlbListener;
 
-  protected readonly route53Record: Route53Record;
+  protected readonly route53Record: route53.Route53Record;
 
   constructor(
     scope: AwsProviderConstruct,
@@ -50,7 +43,7 @@ export class EntrypointComponent extends AwsComponent<EntrypointComponentConfig>
   }
 
   protected createSecurityGroup() {
-    return new SecurityGroup(this, 'sg', {
+    return new vpc.SecurityGroup(this, 'sg', {
       provider: this.provider,
       ingress: [
         {
@@ -88,7 +81,7 @@ export class EntrypointComponent extends AwsComponent<EntrypointComponentConfig>
         'At least two subnets in two different Availability Zones must be specified',
       );
     }
-    return new Alb(this, 'alb', {
+    return new elb.Alb(this, 'alb', {
       provider: this.provider,
       subnets: this.config.subnetsIds,
       enableCrossZoneLoadBalancing: false, // For Network load balancer only
@@ -102,23 +95,22 @@ export class EntrypointComponent extends AwsComponent<EntrypointComponentConfig>
   }
 
   protected createAlbTargetGroup() {
-    return new AlbTargetGroup(this, 'target', {
+    return new elb.AlbTargetGroup(this, 'target', {
       provider: this.provider,
       port: 80,
       protocol: 'HTTP',
       targetType: 'ip',
-      healthCheck: [
-        {
-          healthyThreshold: 3,
-          interval: 30,
-          protocol: 'HTTP',
-          matcher: '200',
-          timeout: 3,
-          path: '/ping', // Not configurable by traefik
-          port: '8080',
-          unhealthyThreshold: 2,
-        },
-      ],
+      healthCheck: {
+        healthyThreshold: 3,
+        interval: 30,
+        protocol: 'HTTP',
+        matcher: '200',
+        timeout: 3,
+        path: '/ping', // Not configurable by traefik
+        port: '8080',
+        unhealthyThreshold: 2,
+      },
+
       vpcId: this.config.vpcId,
       name: this.getResourceName('target'),
     });
@@ -126,7 +118,7 @@ export class EntrypointComponent extends AwsComponent<EntrypointComponentConfig>
 
   protected createHttpsAlbListener() {
     // Redirect all traffic from the ALB to the target group
-    return new AlbListener(this, 'https', {
+    return new elb.AlbListener(this, 'https', {
       provider: this.provider,
       loadBalancerArn: this.getAlbIdAsToken(),
       port: 443,
@@ -144,7 +136,7 @@ export class EntrypointComponent extends AwsComponent<EntrypointComponentConfig>
 
   protected createHttpAlbListener() {
     // Redirect all HTTP traffic to HTTPS
-    return new AlbListener(this, 'http', {
+    return new elb.AlbListener(this, 'http', {
       provider: this.provider,
       loadBalancerArn: this.getAlbIdAsToken(),
       port: 80,
@@ -152,13 +144,11 @@ export class EntrypointComponent extends AwsComponent<EntrypointComponentConfig>
       defaultAction: [
         {
           type: 'redirect',
-          redirect: [
-            {
-              port: '443',
-              protocol: 'HTTPS',
-              statusCode: 'HTTP_301',
-            },
-          ],
+          redirect: {
+            port: '443',
+            protocol: 'HTTPS',
+            statusCode: 'HTTP_301',
+          },
         },
       ],
     });
@@ -166,7 +156,7 @@ export class EntrypointComponent extends AwsComponent<EntrypointComponentConfig>
 
   protected createRoute53Record() {
     // Create DNS record to route to ALB
-    return new Route53Record(this, 'record', {
+    return new route53.Route53Record(this, 'record', {
       provider: this.provider,
       allowOverwrite: true,
       records: [this.getAlbDnsNameAsToken()],

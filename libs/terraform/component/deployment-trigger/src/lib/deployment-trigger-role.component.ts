@@ -1,26 +1,21 @@
-import {
-  IamPolicy,
-  IamRole,
-  IamRolePolicyAttachment,
-} from '@cdktf/provider-aws';
+import { iam } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export interface DeploymentTriggerRoleComponentConfig extends ConstructOptions {
+export interface DeploymentTriggerRoleComponentConfig {
   codepipelineArn: string;
 }
 
 export class DeploymentTriggerRoleComponent extends AwsComponent<DeploymentTriggerRoleComponentConfig> {
-  protected readonly iamPolicy: IamPolicy;
+  protected readonly iamPolicy: iam.IamPolicy;
 
-  protected readonly iamRole: IamRole;
+  protected readonly iamRole: iam.IamRole;
 
-  protected readonly iamRolePolicyAttachment: IamRolePolicyAttachment;
+  protected readonly iamRolePolicyAttachment: iam.IamRolePolicyAttachment;
 
   constructor(
     scope: AwsProviderConstruct,
@@ -35,7 +30,7 @@ export class DeploymentTriggerRoleComponent extends AwsComponent<DeploymentTrigg
   }
 
   protected createIamPolicy() {
-    return new IamPolicy(this, 'policy', {
+    return new iam.IamPolicy(this, 'policy', {
       provider: this.provider,
       policy: JSON.stringify({
         Version: '2012-10-17',
@@ -53,7 +48,7 @@ export class DeploymentTriggerRoleComponent extends AwsComponent<DeploymentTrigg
 
   protected createIamRole() {
     // ECS task execution roles
-    return new IamRole(this, 'role', {
+    return new iam.IamRole(this, 'role', {
       provider: this.provider,
       assumeRolePolicy: this.getAssumeRolePolicy(),
       name: this.getResourceName('role'),
@@ -77,7 +72,7 @@ export class DeploymentTriggerRoleComponent extends AwsComponent<DeploymentTrigg
   }
 
   protected createIamRolePolicyAttachment() {
-    return new IamRolePolicyAttachment(this, 'attach', {
+    return new iam.IamRolePolicyAttachment(this, 'attach', {
       provider: this.provider,
       role: this.getIamRoleNameAsToken(),
       policyArn: this.getIamPolicyArnAsToken(),

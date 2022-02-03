@@ -1,4 +1,4 @@
-import { EcsCluster } from '@cdktf/provider-aws';
+import { ecs } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
 
 import { EcsComponentConfig } from './interfaces';
@@ -25,7 +25,7 @@ import {
 export class EcsComponent extends AwsComponent<EcsComponentConfig> {
   protected readonly executionRoleComponent: ExecutionRoleComponent;
 
-  protected readonly ecsCluster: EcsCluster;
+  protected readonly ecsCluster: ecs.EcsCluster;
 
   protected readonly serviceDiscoveryComponent: PrivateDnsComponent;
 
@@ -56,7 +56,7 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
   }
 
   protected createEcsCluster() {
-    return new EcsCluster(this, 'cluster', {
+    return new ecs.EcsCluster(this, 'cluster', {
       provider: this.provider,
       name: this.getResourceName('cluster'),
     });

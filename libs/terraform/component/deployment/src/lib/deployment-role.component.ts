@@ -1,18 +1,17 @@
-import { IamRole, IamRoleInlinePolicy } from '@cdktf/provider-aws';
+import { iam } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export interface DeploymentRoleComponentConfig extends ConstructOptions {
+export interface DeploymentRoleComponentConfig {
   storeS3Arn: string;
 }
 
 export class DeploymentRoleComponent extends AwsComponent<DeploymentRoleComponentConfig> {
-  protected readonly iamRole: IamRole;
+  protected readonly iamRole: iam.IamRole;
 
   constructor(
     scope: AwsProviderConstruct,
@@ -26,7 +25,7 @@ export class DeploymentRoleComponent extends AwsComponent<DeploymentRoleComponen
 
   protected createIamRole() {
     // ECS task execution roles
-    return new IamRole(this, 'role', {
+    return new iam.IamRole(this, 'role', {
       provider: this.provider,
       assumeRolePolicy: this.getAssumeRolePolicy(),
       inlinePolicy: this.getInlinePolicy(),
@@ -56,7 +55,7 @@ export class DeploymentRoleComponent extends AwsComponent<DeploymentRoleComponen
     });
   }
 
-  protected getInlinePolicy(): IamRoleInlinePolicy[] {
+  protected getInlinePolicy(): iam.IamRoleInlinePolicy[] {
     return [
       {
         name: this.getResourceName('policy'),
