@@ -1,4 +1,4 @@
-import { <<Model pascal>>UpdateParamsDto } from '../../dtos';
+import { <<Model pascal>>UpdateParamsDto } from '../..';
   
 import {
 <<for Fields primary primaryField>>

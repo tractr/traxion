@@ -1,0 +1,53 @@
+{
+  "implicitDependencies": [
+    "hapify-templates-rext-client",
+    "generated-models",
+    "generated-rest-dtos"
+  ],
+  "prefix": "tractr",
+  "projectType": "library",
+  "root": "libs/generated/rext-client",
+  "sourceRoot": "libs/generated/rext-client/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "configurations": {
+        "development": {
+          "tsConfig": "libs/generated/rext-client/tsconfig.lib.json"
+        },
+        "production": {
+          "tsConfig": "libs/generated/rext-client/tsconfig.lib.prod.json"
+        }
+      },
+      "defaultConfiguration": "production",
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "options": {
+        "project": "libs/generated/rext-client/ng-package.json"
+      },
+      "outputs": ["dist/libs/generated/rext-client"]
+    },
+    "generate": {
+      "executor": "./dist/libs/schematics:generate",
+      "options": {
+        "cwd": "libs/generated/rext-client"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/generated/rext-client/src/**/*.ts",
+          "libs/generated/rext-client/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/generated/rext-client/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/generated/rext-client"]
+    }
+  }
+}

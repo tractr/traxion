@@ -1,4 +1,4 @@
-import { <<Model pascal>>FindUniqueParamsDto } from '../../dtos';
+import { <<Model pascal>>FindUniqueParamsDto } from '../..';
   
 import {
 <<for Fields primary primaryField>>

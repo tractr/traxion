@@ -1,0 +1,17 @@
+const {
+  hapifyDefaultConfig,
+  getValidatorPath,
+} = require('@tractr/hapify-config');
+
+module.exports = {
+  ...hapifyDefaultConfig,
+  version: '1',
+  name: '<%= name %>',
+  description: 'Library to host generated codes',
+  validatorPath: getValidatorPath(__dirname),
+  project: '<%= hapifyModelJson %>',
+  extends: [<% for (const templateName of templates) {%>
+    '<%= templateName %>',<% } %>],<% if (hapifyUseImportReplacements) { %>
+  importReplacements: {<% for (const replacement of hapifyImportReplacements) { %>
+    '<%= replacement %>': '@<%= npmScope %>/<%= replacement %>',<% } %>},<% } %>
+};

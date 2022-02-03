@@ -1,0 +1,51 @@
+{
+  "implicitDependencies": ["hapify-templates-rest-dtos", "generated-models"],
+  "prefix": "tractr",
+  "projectType": "library",
+  "root": "libs/generated/rest-dtos",
+  "sourceRoot": "libs/generated/rest-dtos/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "configurations": {
+        "development": {
+          "tsConfig": "libs/generated/rest-dtos/tsconfig.lib.json"
+        },
+        "production": {
+          "tsConfig": "libs/generated/rest-dtos/tsconfig.lib.prod.json"
+        }
+      },
+      "defaultConfiguration": "production",
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "options": {
+        "project": "libs/generated/rest-dtos/ng-package.json"
+      },
+      "outputs": ["dist/libs/generated/rest-dtos"]
+    },
+    "generate": {
+      "executor": "./dist/libs/schematics:generate",
+      "options": {
+        "cwd": "libs/generated/rest-dtos"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/generated/rest-dtos/src/**/*.ts",
+          "libs/generated/rest-dtos/src/**/*.html",
+          "libs/generated/rest-dtos/mock/**/*.ts",
+          "libs/generated/rest-dtos/mock/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/generated/rest-dtos/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/generated/rest-dtos"]
+    }
+  }
+}
