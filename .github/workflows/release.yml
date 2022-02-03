@@ -65,6 +65,8 @@ jobs:
 
       # We run our release script
       - name: nx run workspace:release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx nx run workspace:release --base latest
 
       - name: Push changes
@@ -73,14 +75,6 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           branch: ${{ github.ref }}
           tags: true
-
-      # We publish our release
-      - name: run npm affected:publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        # Publish will try on all the packages
-        # Wait to see https://github.com/jscutlery/semver/issues/167
-        run: npx nx run-many --target publish --all --base latest
 
       # Set the matrix apps that have been affected by all the changes
       - name: Affected apps output
