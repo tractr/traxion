@@ -1,6 +1,11 @@
 {
   "$schema": "http://json-schema.org/schema",
   "generators": {
+    "admin-app": {
+      "description": "Generate a react-admin application",
+      "factory": "./src/generators/admin-app/generator",
+      "schema": "./src/generators/admin-app/schema.json"
+    },
     "eslint-config": {
       "description": "eslint-config generator",
       "factory": "./src/generators/eslint-config/generator",
