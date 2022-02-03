@@ -1,0 +1,36 @@
+{
+  "$id": "Admin",
+  "$schema": "http://json-schema.org/schema",
+  "additionalProperties": true,
+  "cli": "nx",
+  "properties": {
+    "directory": {
+      "alias": "d",
+      "description": "A directory where the project is placed",
+      "type": "string"
+    },
+    "name": {
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "description": "",
+      "type": "string"
+    },
+    "npmName": {
+      "description": "Application name for the package.json file",
+      "type": "string"
+    },
+    "reactAdminImportPath": {
+      "description": "Import path of the library that hosts the react-admin components",
+      "type": "string"
+    },
+    "rextClientImportPath": {
+      "description": "Import path of the library that hosts the rext-client services",
+      "type": "string"
+    }
+  },
+  "required": ["name", "reactAdminImportPath", "rextClientImportPath"],
+  "title": "",
+  "type": "object"
+}
