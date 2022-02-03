@@ -41,7 +41,7 @@ describe('CaslService', () => {
 
   describe('createForUser', () => {
     it('should create a abitily from a rolePermission configuration', async () => {
-      mockCaslOptions.rolePermissions = rolePermissions;
+      mockCaslOptions.rolePermissions = mockDeep(rolePermissions);
 
       const userAdmin: User = {
         id: 'admin',
@@ -67,7 +67,7 @@ describe('CaslService', () => {
     });
 
     it('should configure no access if a role does not exists', async () => {
-      mockCaslOptions.rolePermissions = rolePermissions;
+      mockCaslOptions.rolePermissions = mockDeep(rolePermissions);
 
       const userWithAWrongRole: User = {
         id: 'admin',
@@ -86,7 +86,7 @@ describe('CaslService', () => {
     });
 
     it('should default to the guest role if no user is provided', async () => {
-      mockCaslOptions.rolePermissions = rolePermissions;
+      mockCaslOptions.rolePermissions = mockDeep(rolePermissions);
 
       const abilities: AppAbility = caslAbilityFactoryService.createForUser<
         User,
