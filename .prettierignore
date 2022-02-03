@@ -12,3 +12,5 @@
 
 **/hapify.json
 .docusaurus/
+
+libs/schematics/**/schema.json
