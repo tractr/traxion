@@ -266,7 +266,6 @@ describe('Populate on fly when getSelectPrismaUserQuery is used', () => {
         LoggerModule,
         CaslModule.register({
           rolePermissions,
-          getSelectPrismaUserQuery: () => selectPrismaUserQuery,
         }),
       ],
     }).compile();
