@@ -29,6 +29,7 @@
     "help": "nx help",
     "lint": "nx workspace-lint && nx run-many --all --target=lint --parallel",
     "nx": "nx",
+    "postinstall": "(is-ci || husky install) && ngcc --properties es2015 browser module main",
     "prisma:db:push": "prisma db push --schema=./libs/prisma/prisma/schema.prisma",
     "prisma:db:seed": "prisma db seed --preview-feature --schema=./libs/prisma/prisma/schema.prisma",
     "prisma:studio": "prisma studio --schema=./libs/prisma/prisma/schema.prisma",
