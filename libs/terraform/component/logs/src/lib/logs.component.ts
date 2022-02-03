@@ -1,21 +1,16 @@
-import { CloudwatchLogGroup, CloudwatchLogStream } from '@cdktf/provider-aws';
-import { ConstructOptions } from 'constructs';
+import { cloudwatch } from '@cdktf/provider-aws';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export class LogsComponent extends AwsComponent<ConstructOptions> {
-  protected readonly cloudwatchLogGroup: CloudwatchLogGroup;
+export class LogsComponent extends AwsComponent {
+  protected readonly cloudwatchLogGroup: cloudwatch.CloudwatchLogGroup;
 
-  protected readonly cloudwatchLogStream: CloudwatchLogStream;
+  protected readonly cloudwatchLogStream: cloudwatch.CloudwatchLogStream;
 
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: ConstructOptions = {},
-  ) {
+  constructor(scope: AwsProviderConstruct, id: string, config = null) {
     super(scope, id, config);
     this.cloudwatchLogGroup = this.createCloudwatchLogGroup();
     this.cloudwatchLogStream = this.createCloudwatchLogStream();
@@ -23,7 +18,7 @@ export class LogsComponent extends AwsComponent<ConstructOptions> {
 
   protected createCloudwatchLogGroup() {
     // Set up CloudWatch group and log stream and retain logs for 30 days
-    return new CloudwatchLogGroup(this, 'group', {
+    return new cloudwatch.CloudwatchLogGroup(this, 'group', {
       provider: this.provider,
       retentionInDays: 30,
       name: this.getResourceName('group'),
@@ -31,7 +26,7 @@ export class LogsComponent extends AwsComponent<ConstructOptions> {
   }
 
   protected createCloudwatchLogStream() {
-    return new CloudwatchLogStream(this, 'stream', {
+    return new cloudwatch.CloudwatchLogStream(this, 'stream', {
       provider: this.provider,
       logGroupName: this.getCloudwatchLogGroupName(),
       name: this.getResourceName('stream'),

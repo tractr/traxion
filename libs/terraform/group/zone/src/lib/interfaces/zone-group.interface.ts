@@ -1,5 +1,3 @@
-import { ConstructOptions } from 'constructs';
-
-export interface ZoneGroupConfig extends ConstructOptions {
+export interface ZoneGroupConfig {
   domainName: string;
 }

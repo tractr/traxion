@@ -1,12 +1,11 @@
-import { Route } from '@cdktf/provider-aws';
-import { ConstructOptions } from 'constructs';
+import { vpc } from '@cdktf/provider-aws';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export interface EgressGatewayComponentConfig extends ConstructOptions {
+export interface EgressGatewayComponentConfig {
   routeTableId: string;
   egressOnlyInternetGatewayId: string;
 }
@@ -18,7 +17,7 @@ export interface EgressGatewayComponentConfig extends ConstructOptions {
  * The EgressOnlyInternetGateway is defined at the VPC level, as for the InternetGateway
  */
 export class EgressGatewayComponent extends AwsComponent<EgressGatewayComponentConfig> {
-  protected readonly routeToEgressOnlyInternetGateway: Route;
+  protected readonly routeToEgressOnlyInternetGateway: vpc.Route;
 
   constructor(
     scope: AwsProviderConstruct,
@@ -35,7 +34,7 @@ export class EgressGatewayComponent extends AwsComponent<EgressGatewayComponentC
    * Route non-local traffic through the egress gateway to the internet
    */
   protected createRouteToEgressOnlyInternetGateway() {
-    return new Route(this, 'rt', {
+    return new vpc.Route(this, 'rt', {
       provider: this.provider,
       destinationIpv6CidrBlock: '::/0',
       egressOnlyGatewayId: this.config.egressOnlyInternetGatewayId,
