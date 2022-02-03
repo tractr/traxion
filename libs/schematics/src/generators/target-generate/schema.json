@@ -1,0 +1,33 @@
+{
+  "$id": "Release",
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "properties": {
+    "project": {
+      "description": "Nx project name",
+      "type": "string",
+      "x-prompt": "In which project would you like to add the generate target ?"
+    },
+    "inputHapifyGeneratedPath": {
+      "description": "The path of the folder which contains the hapify files",
+      "type": "string"
+    },
+    "outputGeneratedPath": {
+      "description": "The path of the output generated files folder",
+      "type": "string"
+    },
+    "cleanFirst": {
+      "description": "Clean the generated files before generating",
+      "type": "boolean",
+      "default": true
+    },
+    "format": {
+      "description": "Format the generated files with prettier",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": ["project"],
+  "title": "",
+  "type": "object"
+}
