@@ -1,11 +1,5 @@
-import {
-  EfsBackupPolicy,
-  EfsFileSystem,
-  EfsMountTarget,
-  SecurityGroup,
-} from '@cdktf/provider-aws';
+import { efs, vpc } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 import * as md5 from 'md5';
 
 import {
@@ -13,7 +7,7 @@ import {
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export interface VolumeComponentConfig extends ConstructOptions {
+export interface VolumeComponentConfig {
   vpcId: string;
   subnetsIds: string[];
   clientsSecurityGroupsIds: string[];
@@ -31,13 +25,13 @@ export interface VolumeComponentConfig extends ConstructOptions {
 export class VolumeComponent<
   T extends VolumeComponentConfig = VolumeComponentConfig,
 > extends AwsComponent<T> {
-  protected readonly securityGroup: SecurityGroup;
+  protected readonly securityGroup: vpc.SecurityGroup;
 
-  protected readonly efsFileSystem: EfsFileSystem;
+  protected readonly efsFileSystem: efs.EfsFileSystem;
 
-  protected readonly efsBackupPolicy: EfsBackupPolicy | undefined;
+  protected readonly efsBackupPolicy: efs.EfsBackupPolicy | undefined;
 
-  protected readonly efsMountTargets: EfsMountTarget[];
+  protected readonly efsMountTargets: efs.EfsMountTarget[];
 
   constructor(scope: AwsProviderConstruct, id: string, config: T) {
     super(scope, id, config);
@@ -50,7 +44,7 @@ export class VolumeComponent<
   }
 
   protected createSecurityGroup() {
-    return new SecurityGroup(this, 'sg', {
+    return new vpc.SecurityGroup(this, 'sg', {
       provider: this.provider,
       ingress: [
         {
@@ -66,7 +60,7 @@ export class VolumeComponent<
   }
 
   protected createEfsFileSystem() {
-    return new EfsFileSystem(this, 'fs', {
+    return new efs.EfsFileSystem(this, 'fs', {
       creationToken: md5(this.getResourceName('fs')),
       encrypted: true,
       performanceMode: this.config.performanceMode || 'generalPurpose',
@@ -79,9 +73,9 @@ export class VolumeComponent<
   }
 
   protected createEfsBackupPolicy() {
-    return new EfsBackupPolicy(this, 'bck', {
+    return new efs.EfsBackupPolicy(this, 'bck', {
       fileSystemId: this.getFileSystemIdAsToken(),
-      backupPolicy: [{ status: 'ENABLED' }],
+      backupPolicy: { status: 'ENABLED' },
     });
   }
 
@@ -92,7 +86,7 @@ export class VolumeComponent<
   }
 
   protected createEfsMountTarget(subnetId: string, index: number) {
-    return new EfsMountTarget(this, `mount-${index}`, {
+    return new efs.EfsMountTarget(this, `mount-${index}`, {
       fileSystemId: this.getFileSystemIdAsToken(),
       securityGroups: [this.getSecurityGroupIdAsToken()],
       subnetId,

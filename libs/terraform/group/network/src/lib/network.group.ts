@@ -1,4 +1,4 @@
-import { InternetGateway } from '@cdktf/provider-aws';
+import { vpc } from '@cdktf/provider-aws';
 
 import { BaseComponent, PrivateComponent, PublicComponent } from './components';
 import { NETWORK_GROUP_DEFAULT_CONFIG } from './configs';
@@ -101,7 +101,7 @@ export class NetworkGroup extends AwsComponent<
     return this.baseComponent.getVpcIdAsToken();
   }
 
-  getInternetGateway(): InternetGateway {
+  getInternetGateway(): vpc.InternetGateway {
     return this.baseComponent.getInternetGateway();
   }
 

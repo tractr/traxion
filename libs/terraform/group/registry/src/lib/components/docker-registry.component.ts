@@ -1,4 +1,4 @@
-import { EcrRepository } from '@cdktf/provider-aws';
+import { ecr } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
 
 import { DockerRegistryComponentConfig } from '../interfaces';
@@ -19,7 +19,7 @@ export type DockerApplications = Record<string, DockerApplication>;
  * This component creates one docker registry for each app containing a Dockerfile
  */
 export class DockerRegistryComponent extends AwsComponent<DockerRegistryComponentConfig> {
-  protected readonly ecrRepositories: EcrRepository[];
+  protected readonly ecrRepositories: ecr.EcrRepository[];
 
   protected readonly applicationsMap: DockerApplications = {};
 
@@ -42,7 +42,7 @@ export class DockerRegistryComponent extends AwsComponent<DockerRegistryComponen
     // Force name as lower case
     const lowerAppName = appName.toLowerCase();
     const imageName = this.prefixIdWithProjectCode(lowerAppName);
-    const ecrRepository = new EcrRepository(this, appName, {
+    const ecrRepository = new ecr.EcrRepository(this, appName, {
       provider: this.provider,
       name: this.prefixIdWithProjectCode(lowerAppName),
       tags: this.getResourceNameAsTag(lowerAppName),

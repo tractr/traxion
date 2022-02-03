@@ -2,6 +2,12 @@ import fetch from 'node-fetch';
 
 export const NPM_REGISTRY = 'https://registry.npmjs.org';
 
+export interface NpmApiGet {
+  'dist-tags': {
+    latest: string;
+  };
+}
+
 /**
  * Get the latest package version from a registry
  *
@@ -21,7 +27,6 @@ export async function getLatestPackageVersion(
   const packageUrl = `${registry}/${packageName}`;
 
   const semverResponse = await fetch(packageUrl);
-  const semver = await semverResponse.json();
-
+  const semver = (await semverResponse.json()) as NpmApiGet;
   return semver['dist-tags'].latest;
 }

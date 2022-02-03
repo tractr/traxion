@@ -1,12 +1,11 @@
-import { Route } from '@cdktf/provider-aws';
-import { ConstructOptions } from 'constructs';
+import { vpc } from '@cdktf/provider-aws';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 
-export interface InternetRoutesComponentConfig extends ConstructOptions {
+export interface InternetRoutesComponentConfig {
   routeTableId: string;
   internetGatewayId: string;
 }
@@ -16,9 +15,9 @@ export interface InternetRoutesComponentConfig extends ConstructOptions {
  * The InternetGateway is defined at the VPC level, as for the EgressOnlyInternetGateway
  */
 export class InternetRoutesComponent extends AwsComponent<InternetRoutesComponentConfig> {
-  protected readonly routeToInternetGateway: Route;
+  protected readonly routeToInternetGateway: vpc.Route;
 
-  protected readonly ipv6RouteToInternetGateway: Route;
+  protected readonly ipv6RouteToInternetGateway: vpc.Route;
 
   constructor(
     scope: AwsProviderConstruct,
@@ -32,7 +31,7 @@ export class InternetRoutesComponent extends AwsComponent<InternetRoutesComponen
   }
 
   protected createRouteToInternetGateway() {
-    return new Route(this, 'rt', {
+    return new vpc.Route(this, 'rt', {
       provider: this.provider,
       destinationCidrBlock: '0.0.0.0/0',
       gatewayId: this.config.internetGatewayId,
@@ -41,7 +40,7 @@ export class InternetRoutesComponent extends AwsComponent<InternetRoutesComponen
   }
 
   protected createIpv6RouteToInternetGateway() {
-    return new Route(this, 'rt6', {
+    return new vpc.Route(this, 'rt6', {
       provider: this.provider,
       destinationIpv6CidrBlock: '::/0',
       gatewayId: this.config.internetGatewayId,

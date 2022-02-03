@@ -1,6 +1,5 @@
-import { RouteTable, RouteTableAssociation, Subnet } from '@cdktf/provider-aws';
+import { vpc } from '@cdktf/provider-aws';
 import { Token } from 'cdktf';
-import { ConstructOptions } from 'constructs';
 
 import { EgressRoutesComponent } from './egress-routes.component';
 import { InternetRoutesComponent } from './internet-routes.component';
@@ -13,7 +12,7 @@ import {
 
 export type InternetAccessMode = 'nat' | 'egress' | 'igw' | 'none';
 
-export interface PrivateComponentConfig extends ConstructOptions {
+export interface PrivateComponentConfig {
   vpcId: string;
   cidrBlock: string;
   ipv6CidrBlock: string;
@@ -31,11 +30,11 @@ export interface PrivateComponentConfig extends ConstructOptions {
  * https://medium.com/awesome-cloud/aws-vpc-difference-between-internet-gateway-and-nat-gateway-c9177e710af6
  */
 export class PrivateComponent extends AwsComponent<PrivateComponentConfig> {
-  protected readonly subnet: Subnet;
+  protected readonly subnet: vpc.Subnet;
 
-  protected readonly routeTable: RouteTable;
+  protected readonly routeTable: vpc.RouteTable;
 
-  protected readonly routeTableAssociation: RouteTableAssociation;
+  protected readonly routeTableAssociation: vpc.RouteTableAssociation;
 
   protected readonly natGatewayComponent: NatGatewayComponent | undefined;
 
@@ -66,7 +65,7 @@ export class PrivateComponent extends AwsComponent<PrivateComponentConfig> {
   }
 
   protected createSubnet() {
-    return new Subnet(this, 'subnet', {
+    return new vpc.Subnet(this, 'subnet', {
       provider: this.provider,
       availabilityZone: this.config.availabilityZone,
       vpcId: this.config.vpcId,
@@ -82,7 +81,7 @@ export class PrivateComponent extends AwsComponent<PrivateComponentConfig> {
    * Create a new route table for the private subnets
    */
   protected createRouteTable() {
-    return new RouteTable(this, 'rt', {
+    return new vpc.RouteTable(this, 'rt', {
       provider: this.provider,
       vpcId: this.config.vpcId,
       tags: this.getResourceNameAsTag('rt'),
@@ -93,7 +92,7 @@ export class PrivateComponent extends AwsComponent<PrivateComponentConfig> {
    * Explicitly associate the newly created route tables to the private subnets (so they don't default to the main route table)
    */
   protected createRouteTableAssociation() {
-    return new RouteTableAssociation(this, 'rt-assoc', {
+    return new vpc.RouteTableAssociation(this, 'rt-assoc', {
       provider: this.provider,
       routeTableId: this.getRouteTableIdAsToken(),
       subnetId: this.getSubnetIdAsToken(),

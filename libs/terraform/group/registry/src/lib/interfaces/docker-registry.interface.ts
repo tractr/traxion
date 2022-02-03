@@ -1,11 +1,9 @@
-import { ConstructOptions } from 'constructs';
-
-export interface RegistryGroupConfig extends ConstructOptions {
+export interface RegistryGroupConfig {
   appsPath: string[];
   projectCode: string;
 }
 
-export interface DockerRegistryComponentConfig extends ConstructOptions {
+export interface DockerRegistryComponentConfig {
   projectCode: string;
   dockerizedAppsNames: string[];
 }
