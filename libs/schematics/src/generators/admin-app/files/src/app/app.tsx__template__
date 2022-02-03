@@ -1,0 +1,9 @@
+import { AppConfig } from '../interfaces/admin-config.interface';
+
+import { ReactAdmin } from '<%= reactAdminImportPath %>';
+
+export function App({ config }: { config: AppConfig }) {
+  return <ReactAdmin apiUrl={config.api.uri} />;
+}
+
+export default App;
