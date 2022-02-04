@@ -1,44 +1,24 @@
 {
-  "prefix": "tractr",
   "projectType": "library",
   "root": "libs/common",
   "sourceRoot": "libs/common/src",
-  "tags": ["scope:common"],
+  "tags": [],
   "targets": {
     "build": {
-      "configurations": {
-        "development": {
-          "tsConfig": "libs/common/tsconfig.lib.json"
-        },
-        "production": {
-          "tsConfig": "libs/common/tsconfig.lib.prod.json"
-        }
-      },
-      "defaultConfiguration": "production",
-      "executor": "@nrwl/angular:package",
+      "executor": "@nrwl/node:package",
       "options": {
-        "project": "libs/common/ng-package.json"
+        "assets": ["libs/common/*.md"],
+        "main": "libs/common/src/index.ts",
+        "outputPath": "dist/libs/common",
+        "packageJson": "libs/common/package.json",
+        "tsConfig": "libs/common/tsconfig.lib.json"
       },
-      "outputs": ["dist/libs/common"]
-    },
-    "coverage": {
-      "executor": "@nrwl/jest:jest",
-      "options": {
-        "codeCoverage": true,
-        "coverageReporters": ["text", "json"],
-        "jestConfig": "libs/common/jest.config.js",
-        "passWithNoTests": true,
-        "skipNxCache": true
-      },
-      "outputs": ["coverage/libs/common"]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/common/src/**/*.ts",
-          "libs/common/src/**/*.html"
-        ]
+        "lintFilePatterns": ["libs/common/**/*.ts"]
       },
       "outputs": ["{options.outputFile}"]
     },

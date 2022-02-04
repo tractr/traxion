@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import { plainToClass } from 'class-transformer';
 
-import { TransformStringToBoolean } from '../../src';
+import { TransformStringToBoolean } from '../../..';
 
 describe('TransformStringToBoolean decorator', () => {
   class Validator {
