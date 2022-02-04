@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "declarationMap": true,
-    "inlineSources": true,
-    "lib": ["dom", "esnext"],
+    "module": "commonjs",
     "outDir": "../../dist/out-tsc",
-    "target": "es2015",
-    "types": []
+    "target": "es6",
+    "types": ["node"]
   },
-  "exclude": ["src/test-setup.ts", "**/*.spec.ts", "**/*.test.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts"],
   "extends": "./tsconfig.json",
   "include": ["**/*.ts"]
 }

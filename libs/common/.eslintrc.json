@@ -3,33 +3,15 @@
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
-      "extends": [
-        "plugin:@nrwl/nx/angular",
-        "plugin:@angular-eslint/template/process-inline-templates"
-      ],
-      "files": ["*.ts"],
-      "rules": {
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "prefix": "tractr",
-            "style": "kebab-case",
-            "type": "element"
-          }
-        ],
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "prefix": "tractr",
-            "style": "camelCase",
-            "type": "attribute"
-          }
-        ]
-      }
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {}
     },
     {
-      "extends": ["plugin:@nrwl/nx/angular-template"],
-      "files": ["*.html"],
+      "files": ["*.ts", "*.tsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
       "rules": {}
     }
   ]
