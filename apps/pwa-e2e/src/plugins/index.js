@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
 //
@@ -11,9 +12,9 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-const { preprocessTypescript } = require('@nrwl/cypress/plugins/preprocessor');
+// const { preprocessTypescript } = require('@nrwl/cypress/plugins/preprocessor');
 
-module.exports = (on, config) => {
+module.exports = (_on, _config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   // Preprocess Typescript file using Nx helper

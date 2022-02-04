@@ -126,6 +126,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^13.2.2",
+    "@angular-devkit/core": "^13.2.2",
     "@angular-eslint/eslint-plugin": "13.0.1",
     "@angular-eslint/eslint-plugin-template": "13.0.1",
     "@angular-eslint/template-parser": "13.0.1",
@@ -146,6 +147,7 @@
     "@nrwl/devkit": "13.7.2",
     "@nrwl/eslint-plugin-nx": "13.7.2",
     "@nrwl/jest": "13.7.2",
+    "@nrwl/js": "13.7.2",
     "@nrwl/linter": "13.7.2",
     "@nrwl/nest": "13.7.2",
     "@nrwl/node": "13.7.2",
