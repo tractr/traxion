@@ -26,7 +26,10 @@ program.parse(argv);
 const options = program.opts();
 const { targetDir, projects: projectsWithComma } = options;
 
-const projectsWanted = projectsWithComma.split(',').map((p) => p.trim());
+const projectsWanted = projectsWithComma
+  .split(',')
+  .map((p) => p.trim())
+  .filter((p) => p !== '');
 
 const stackDir = join(__dirname, '..');
 const stackTree = new FsTree(stackDir);
