@@ -17,12 +17,12 @@ jobs:
     strategy:
       matrix:
         node: [16.x]
-        os: [node-16]
+        os: [ubuntu-20.04]
 
     name: Test npm packages on node ${{ matrix.node }}
 
     # Runs on Tractr self serveur
-    runs-on: [self-hosted, '${{ matrix.os }}']
+    runs-on: ['${{ matrix.os }}']
 
     steps:
       # First we checkout the code

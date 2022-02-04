@@ -18,10 +18,10 @@ jobs:
     strategy:
       matrix:
         node: [16.x]
-        os: [node-16]
+        os: [ubuntu-20.04]
 
     name: Release npm packages on node ${{ matrix.node }} and ${{ matrix.os }}
-    runs-on: [self-hosted, '${{ matrix.os }}']
+    runs-on: ['${{ matrix.os }}']
 
     outputs:
       apps: ${{ steps.apps.outputs.result }}
@@ -141,11 +141,11 @@ jobs:
       matrix:
         app: ${{ fromJSON(needs.npm-release.outputs.apps) }}
         node: [16.x]
-        os: [node-16]
+        os: [ubuntu-20.04]
         scope: [tractr]
         repository: [tractr]
     name: docker release ${{ matrix.app }} (@${{ matrix.scope }})
-    runs-on: [self-hosted, '${{ matrix.os }}']
+    runs-on: ['${{ matrix.os }}']
     steps:
       # Checkout the source code
       - uses: actions/checkout@v2
