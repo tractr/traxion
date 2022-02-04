@@ -1,4 +1,4 @@
-import { names, Tree } from '@nrwl/devkit';
+import { getWorkspaceLayout, names, Tree } from '@nrwl/devkit';
 
 import { AdminAppGeneratorSchema } from '../schema';
 
@@ -24,8 +24,7 @@ export function normalizeOptions(
     ...extra
   }: AdminAppGeneratorSchema,
 ): NormalizedSchema {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const { npmScope } = JSON.parse(tree.read('nx.json')!.toString());
+  const { npmScope } = getWorkspaceLayout(tree);
   const name = names(rawName).fileName;
   const directory = rawDirectory ? names(rawDirectory).fileName : undefined;
   const npmName =

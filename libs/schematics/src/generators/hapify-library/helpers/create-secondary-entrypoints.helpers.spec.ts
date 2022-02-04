@@ -16,7 +16,7 @@ jest.mock('@nrwl/nest', () => ({
   ...jest.requireActual('@nrwl/nest'),
 }));
 
-describe('library generator', () => {
+describe('createSecondaryEntrypoint', () => {
   let appTree: Tree;
   const options: NormalizedOptions = {
     name: 'test',
@@ -27,8 +27,6 @@ describe('library generator', () => {
     hapifyUseImportReplacements: true,
     useSecondaryEndpoint: true,
     addSecondaryEndpoint: [],
-    fileName: 'test',
-    prefix: 'proj',
     projectName: 'test',
     projectRoot: 'libs/test',
     projectDirectory: 'test',
@@ -36,7 +34,9 @@ describe('library generator', () => {
     templates: [],
     hapifyImportReplacements: [],
     secondaryEntrypoints: ['mock'],
+    npmScope: '@test',
     importPath: '@test/test',
+    extra: {},
   };
 
   let librarySecondaryEntryPointGenerator: jest.SpyInstance;
