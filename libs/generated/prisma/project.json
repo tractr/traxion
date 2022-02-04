@@ -30,7 +30,11 @@
         ],
         "cwd": "libs/generated/prisma",
         "parallel": false
-      }
+      },
+      "outputs": [
+        "./node_modules/.prisma/client",
+        "libs/generated/prisma/prisma"
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
