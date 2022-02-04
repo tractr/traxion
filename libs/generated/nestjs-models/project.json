@@ -29,7 +29,8 @@
       "executor": "./dist/libs/schematics:generate",
       "options": {
         "cwd": "libs/generated/nestjs-models"
-      }
+      },
+      "outputs": ["libs/generated/nestjs-models/src/generated"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",

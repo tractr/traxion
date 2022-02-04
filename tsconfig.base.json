@@ -67,12 +67,6 @@
       "@tractr/hapify-generate-config": [
         "libs/hapify/generate-config/src/index.ts"
       ],
-      "@tractr/hapify-react-admin": [
-        "libs/hapify/templates/react-admin/src/index.ts"
-      ],
-      "@tractr/hapify-update-templates-import-path": [
-        "libs/hapify/update-templates-import-path/src/index.ts"
-      ],
       "@tractr/hapify-update-templates-import-path": [
         "libs/hapify/update-templates-import-path/src/index.ts"
       ],
