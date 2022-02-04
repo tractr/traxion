@@ -26,7 +26,8 @@
       "executor": "./dist/libs/schematics:generate",
       "options": {
         "cwd": "libs/generated/casl"
-      }
+      },
+      "outputs": ["libs/generated/casl/src/generated"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",

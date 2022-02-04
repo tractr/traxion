@@ -63,7 +63,7 @@
     "default": {
       "options": {
         "accessToken": "ZDI3MTE5MTYtMzc2ZS00ODQ4LWIyMDEtMDBkNmIxMWZhZWI2fHJlYWQtd3JpdGU=",
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "cacheableOperations": ["build", "test", "e2e", "generate"],
         "parallel": 1
       },
       "runner": "@nrwl/nx-cloud"

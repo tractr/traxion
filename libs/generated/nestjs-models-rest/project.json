@@ -31,7 +31,11 @@
       "executor": "./dist/libs/schematics:generate",
       "options": {
         "cwd": "libs/generated/nestjs-models-rest"
-      }
+      },
+      "outputs": [
+        "libs/generated/nestjs-models-rest/src/generated",
+        "libs/generated/nestjs-models-rest/mock/src/generated"
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",

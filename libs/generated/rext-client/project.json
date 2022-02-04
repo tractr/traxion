@@ -30,7 +30,8 @@
       "executor": "./dist/libs/schematics:generate",
       "options": {
         "cwd": "libs/generated/rext-client"
-      }
+      },
+      "outputs": ["libs/generated/rext-client/src/generated"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
