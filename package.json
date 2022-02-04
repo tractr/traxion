@@ -27,9 +27,9 @@
     "pregenerate": "./tools/npm-scripts/pregenerate.sh",
     "generate": "npx nx run-many --target generate --all",
     "help": "nx help",
+    "postinstall": "(is-ci || husky install) && ngcc --properties es2015 browser module main",
     "lint": "nx workspace-lint && nx run-many --all --target=lint --parallel",
     "nx": "nx",
-    "postinstall": "(is-ci || husky install) && ngcc --properties es2015 browser module main",
     "prisma:db:push": "prisma db push --schema=./libs/prisma/prisma/schema.prisma",
     "prisma:db:seed": "prisma db seed --preview-feature --schema=./libs/prisma/prisma/schema.prisma",
     "prisma:studio": "prisma studio --schema=./libs/prisma/prisma/schema.prisma",
@@ -150,13 +150,12 @@
     "@nrwl/nest": "13.7.2",
     "@nrwl/node": "13.7.2",
     "@nrwl/nx-plugin": "13.7.2",
+    "@nrwl/react": "13.7.2",
     "@nrwl/tao": "13.7.2",
     "@nrwl/workspace": "13.7.2",
-    "@nrwl/react": "13.7.2",
     "@nx-plus/docusaurus": "^12.0.0",
     "@swc/cli": "^0.1.55",
     "@swc/core": "^1.2.136",
-    "@swc/core-linux-x64-gnu": "^1.2.136",
     "@tsconfig/docusaurus": "^1.0.3",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie": "^0.4.1",
@@ -227,6 +226,11 @@
     "typescript": "4.5.5",
     "webpack": "^5.65.0",
     "webpack-node-externals": "^3.0.0"
+  },
+  "optionalDependencies": {
+    "@swc/core-darwin-arm64": "1.2.136",
+    "@swc/core-darwin-x64": "1.2.136",
+    "@swc/core-linux-x64-gnu": "^1.2.136"
   },
   "prisma": {
     "seed": "ts-node libs/prisma/src/index.ts"
