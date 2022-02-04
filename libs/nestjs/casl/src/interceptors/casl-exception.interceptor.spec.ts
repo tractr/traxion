@@ -3,7 +3,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 
-import { CaslExceptionEndpointMockController } from '../../mocks';
+import { CaslExceptionEndpointMockController } from '../../mocks/casl-exception-endpoint-mock.controller';
 import { CaslExceptionInterceptor } from './casl-exception.interceptor';
 
 describe('Casl exception error', () => {
