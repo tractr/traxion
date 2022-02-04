@@ -49,9 +49,6 @@ export class PoliciesGuard implements CanActivate {
     const { user } = req;
 
     if (user && (!user.roles || !Array.isArray(user.roles))) {
-      this.logger.error(
-        'User has no roles, you can check if you have register correctly your APP_GUARDS to populate req.user before the PoliciesGuard',
-      );
       throw new ForbiddenException();
     }
 
@@ -79,6 +76,6 @@ export class PoliciesGuard implements CanActivate {
       return handler(ability);
     }
 
-    return handler.handle(ability);
+    throw new Error('Policy handler must be a class or a function');
   }
 }
