@@ -26,7 +26,8 @@
       "executor": "./dist/libs/schematics:generate",
       "options": {
         "cwd": "libs/generated/models"
-      }
+      },
+      "outputs": ["libs/generated/models/src/generated"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",

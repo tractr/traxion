@@ -26,7 +26,11 @@
       "executor": "./dist/libs/schematics:generate",
       "options": {
         "cwd": "libs/generated/rest-dtos"
-      }
+      },
+      "outputs": [
+        "libs/generated/rest-dtos/src/generated",
+        "libs/generated/rest-dtos/mock/src/generated"
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
