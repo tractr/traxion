@@ -1,1 +1,1 @@
-export type UserType = Record<string, string>;
+export type UserType = Record<string, unknown>;

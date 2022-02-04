@@ -4,12 +4,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as request from 'supertest';
 
-import { CaslModule, PoliciesGuard } from '../../src';
-import {
-  CaslEndPointMock,
-  rolePermissions,
-} from '../mock/casl-endpoint-mock.controller';
-import { mockAuthenticationGuard } from '../mock/mock-authentication-guard';
+import { CaslEndPointMock } from '../mocks/casl-endpoint-mock.controller';
+import { mockAuthenticationGuard } from '../mocks/mock-authentication-guard';
+import { rolePermissions } from '../mocks/role-permission.mock';
+import { CASL_MODULE_OPTIONS } from './casl.constant';
+import { CaslModule } from './casl.module';
+import { PoliciesGuard } from './guards';
+import { CaslOptions } from './interfaces';
 
 import {
   AUTHENTICATION_USER_SERVICE,
@@ -17,7 +18,7 @@ import {
 } from '@tractr/nestjs-authentication';
 import { LoggerModule } from '@tractr/nestjs-core';
 
-describe('Authentication Module (integration)', () => {
+describe('Authentication Module', () => {
   let app: INestApplication;
   let mockUser: MockProxy<{
     getUser: () => Record<string, unknown> | null;
@@ -60,6 +61,7 @@ describe('Authentication Module (integration)', () => {
     app = moduleFixture.createNestApplication();
 
     await app.init();
+    app.useLogger(false);
   });
 
   afterAll(async () => {
@@ -144,6 +146,81 @@ describe('Authentication Module (integration)', () => {
       mockUser.isPublic.mockReturnValueOnce(true);
 
       await request(app.getHttpServer()).get('/read-guest').expect(200);
+    });
+    it('should fail if the user has no roles', async () => {
+      mockUser.getUser.mockReturnValue({
+        id: 'test',
+      });
+      await request(app.getHttpServer()).get('/read-user').expect(403);
+    });
+    it('should work with a policyHandler as a class with dependency injection', async () => {
+      mockUser.getUser.mockReturnValue({
+        id: 'test',
+        roles: ['admin'],
+      });
+      await request(app.getHttpServer())
+        .get('/with-policy-handler-as-class')
+        .expect(200);
+    });
+    it('should not work with wring policy handler', async () => {
+      mockUser.getUser.mockReturnValue({
+        id: 'test',
+        roles: ['admin'],
+      });
+      await request(app.getHttpServer())
+        .get('/with-wrong-policy-handler')
+        .expect(500);
+    });
+    it('should work with no policy handler', async () => {
+      mockUser.getUser.mockReturnValue({
+        id: 'test',
+        roles: ['admin'],
+      });
+      await request(app.getHttpServer())
+        .get('/with-no-policy-handler')
+        .expect(200);
+    });
+    it('should work with public decorator', async () => {
+      mockUser.getUser.mockReturnValue({
+        id: 'test',
+        roles: ['admin'],
+      });
+      await request(app.getHttpServer()).get('/with-public').expect(200);
+    });
+  });
+
+  describe('registerAsync', () => {
+    it('should accept registerAsyncParams', async () => {
+      const moduleFixture: TestingModule = await Test.createTestingModule({
+        controllers: [CaslEndPointMock],
+        providers: [
+          {
+            provide: APP_GUARD,
+            useClass: mockAuthenticationGuard(mockUser),
+          },
+          {
+            provide: APP_GUARD,
+            useClass: PoliciesGuard,
+          },
+          {
+            provide: AUTHENTICATION_USER_SERVICE,
+            useValue: mockAuthenticationUserService,
+          },
+        ],
+        imports: [
+          LoggerModule,
+          CaslModule.registerAsync({
+            useFactory: () => ({
+              rolePermissions,
+            }),
+          }),
+        ],
+      }).compile();
+
+      const caslModuleOptions =
+        moduleFixture.get<CaslOptions>(CASL_MODULE_OPTIONS);
+
+      expect(caslModuleOptions.rolePermissions).toEqual(rolePermissions);
     });
   });
 });

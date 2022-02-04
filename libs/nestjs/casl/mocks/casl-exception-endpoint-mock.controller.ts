@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { Ability, ForbiddenError } from '@casl/ability';
 import { Controller, Get } from '@nestjs/common';
 
