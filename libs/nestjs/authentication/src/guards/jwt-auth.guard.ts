@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ExecutionContext,
   Injectable,
   UnauthorizedException,
@@ -44,10 +45,16 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
    * @param user
    * @returns
    */
-  handleRequest<User>(err: Error | undefined, user: User | undefined) {
+  handleRequest<User>(err: unknown | undefined, user: User | undefined) {
     // You can throw an exception based on either "info" or "err" arguments
-    if (err || !user) {
-      throw err || new UnauthorizedException();
+    if (err) {
+      if (err instanceof BadRequestException) {
+        throw new UnauthorizedException();
+      }
+      throw err;
+    }
+    if (!user) {
+      throw new UnauthorizedException();
     }
     return user;
   }
