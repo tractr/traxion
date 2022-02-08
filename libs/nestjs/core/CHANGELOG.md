@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.35.0](https://github.com/tractr/stack/compare/v1.34.0...v1.35.0) (2022-02-08)
+
+
+### Features
+
+* update nestjs-authentication and nestjs-casl to handle graphql ([#361](https://github.com/tractr/stack/issues/361)) ([a47cfad](https://github.com/tractr/stack/commit/a47cfad0bf5e589fde23673044aac3ed2917aadf))
+
+
+
 # [1.34.0](https://github.com/tractr/stack/compare/v1.33.0...v1.34.0) (2022-01-31)
 
 

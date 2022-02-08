@@ -2,6 +2,21 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.35.0](https://github.com/tractr/stack/compare/v1.34.0...v1.35.0) (2022-02-08)
+
+
+### Bug Fixes
+
+* catch http 400 error to throw a 401 http error on jwt auth guard ([#358](https://github.com/tractr/stack/issues/358)) ([e29bb0c](https://github.com/tractr/stack/commit/e29bb0c4b4e803e211765040fd264b6bf678b43c))
+
+
+### Features
+
+* add casl tests ([#369](https://github.com/tractr/stack/issues/369)) ([ef663e7](https://github.com/tractr/stack/commit/ef663e70ed42773f0bd7614f15169d09c22e2d1b)), closes [#342](https://github.com/tractr/stack/issues/342)
+* update nestjs-authentication and nestjs-casl to handle graphql ([#361](https://github.com/tractr/stack/issues/361)) ([a47cfad](https://github.com/tractr/stack/commit/a47cfad0bf5e589fde23673044aac3ed2917aadf))
+
+
+
 # [1.34.0](https://github.com/tractr/stack/compare/v1.33.0...v1.34.0) (2022-01-31)
 
 

@@ -2,6 +2,18 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.35.0](https://github.com/tractr/stack/compare/v1.34.0...v1.35.0) (2022-02-08)
+
+
+### Features
+
+* add admin-app schematic ([#366](https://github.com/tractr/stack/issues/366)) ([6f29cef](https://github.com/tractr/stack/commit/6f29cefb1182c49ae2c29cd3e4d0951179b271e0))
+* add generator target-generate ([#351](https://github.com/tractr/stack/issues/351)) ([30e262d](https://github.com/tractr/stack/commit/30e262dae21881c04e945319345305582b770097))
+* add library schematics to create an hapify library ([#363](https://github.com/tractr/stack/issues/363)) ([76434c8](https://github.com/tractr/stack/commit/76434c85010ee98f6cc86c52dff9bd72b379baff)), closes [#350](https://github.com/tractr/stack/issues/350)
+* update terraform to latest cdktf version ([#365](https://github.com/tractr/stack/issues/365)) ([6d37f7b](https://github.com/tractr/stack/commit/6d37f7b803a5d2c6db919077e9a11ffe44f10d4f))
+
+
+
 # [1.34.0](https://github.com/tractr/stack/compare/v1.33.0...v1.34.0) (2022-01-31)
 
 

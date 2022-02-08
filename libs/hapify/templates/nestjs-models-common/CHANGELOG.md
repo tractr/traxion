@@ -2,6 +2,17 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.35.0](https://github.com/tractr/stack/compare/v1.34.0...v1.35.0) (2022-02-08)
+
+
+### Features
+
+* add library schematics to create an hapify library ([#363](https://github.com/tractr/stack/issues/363)) ([76434c8](https://github.com/tractr/stack/commit/76434c85010ee98f6cc86c52dff9bd72b379baff)), closes [#350](https://github.com/tractr/stack/issues/350)
+* bump prisma version to 3 ([#364](https://github.com/tractr/stack/issues/364)) ([3347739](https://github.com/tractr/stack/commit/334773993f27a1c24b823c57adb7e5fcaf1273aa))
+* **hapify-templates-models-common:** remove async keywords to leverage the prisma types ([#378](https://github.com/tractr/stack/issues/378)) ([aa9f2a0](https://github.com/tractr/stack/commit/aa9f2a069d3c785d91c587caa74874ce3eec3dfc))
+
+
+
 # [1.34.0](https://github.com/tractr/stack/compare/v1.33.0...v1.34.0) (2022-01-31)
 
 
