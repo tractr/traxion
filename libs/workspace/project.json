@@ -15,7 +15,7 @@
           "nestjs-testing:publish",
           "commit-config:publish",
           "eslint-config:publish",
-          "terraform-component-publishment-trigger:publish",
+          "terraform-component-deployment-trigger:publish",
           "terraform-component-s3:publish",
           "terraform-component-s3-user:publish",
           "terraform-component-private-dns:publish",
