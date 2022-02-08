@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.35.0](https://github.com/tractr/stack/compare/v1.34.0...v1.35.0) (2022-02-08)
+
+
+### Features
+
+* update terraform to latest cdktf version ([#365](https://github.com/tractr/stack/issues/365)) ([6d37f7b](https://github.com/tractr/stack/commit/6d37f7b803a5d2c6db919077e9a11ffe44f10d4f))
+
+
+
 # [1.34.0](https://github.com/tractr/stack/compare/v1.33.0...v1.34.0) (2022-01-31)
 
 

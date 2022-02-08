@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.35.0](https://github.com/tractr/stack/compare/v1.34.0...v1.35.0) (2022-02-08)
+
+
+### Bug Fixes
+
+* change building common from angular to nest ([#375](https://github.com/tractr/stack/issues/375)) ([0838a5f](https://github.com/tractr/stack/commit/0838a5fcdb00497c9a182115fca7e73f997d0112))
+
+
+
 # [1.34.0](https://github.com/tractr/stack/compare/v1.33.0...v1.34.0) (2022-01-31)
 
 
