@@ -2,6 +2,10 @@
   "name": "stack",
   "version": "1.33.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
   "license": "MIT",
   "scripts": {
     "affected": "nx affected",
@@ -233,6 +237,10 @@
     "@swc/core-darwin-arm64": "1.2.136",
     "@swc/core-darwin-x64": "1.2.136",
     "@swc/core-linux-x64-gnu": "^1.2.136"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
   },
   "prisma": {
     "seed": "ts-node libs/prisma/src/index.ts"
