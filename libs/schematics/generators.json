@@ -16,10 +16,10 @@
       "factory": "./src/generators/github-workflows/generator",
       "schema": "./src/generators/github-workflows/schema.json"
     },
-    "library": {
+    "hapify-library": {
       "description": "library generator",
-      "factory": "./src/generators/library/generator",
-      "schema": "./src/generators/library/schema.json"
+      "factory": "./src/generators/hapify-library/generator",
+      "schema": "./src/generators/hapify-library/schema.json"
     },
     "npm-publish": {
       "description": "npm-publish generator",

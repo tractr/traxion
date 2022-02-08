@@ -1,0 +1,98 @@
+{
+  "$id": "TractrLibrary",
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "examples": [
+    {
+      "command": "g @tractr/schematics:library mylib --directory=myapp",
+      "description": "Generate libs/myapp/mylib"
+    }
+  ],
+  "properties": {
+    "addSecondaryEndpoint": {
+      "description": "Add secondary endpoint to the library",
+      "type": "array"
+    },
+    "hapifyAdditionalTemplates": {
+      "default": "",
+      "description": "List of additional templates to use in this library",
+      "type": "string",
+      "x-prompt": "Do you want to add additional templates (comma separate)?"
+    },
+    "hapifyModelsJson": {
+      "default": "hapify-models.json",
+      "description": "Relative path from root workspace where the hapify models json file is located",
+      "type": "string"
+    },
+    "hapifyTemplates": {
+      "description": "List of template to use in this library",
+      "items": {
+        "enum": [
+          "angular-rext-client",
+          "casl",
+          "dbml",
+          "models",
+          "nestjs-models",
+          "nestjs-models-common",
+          "nestjs-models-rest",
+          "prisma",
+          "react-admin",
+          "rest-dtos",
+          "rext-client"
+        ],
+        "type": "string"
+      },
+      "type": "array",
+      "x-prompt": {
+        "items": [
+          "angular-rext-client",
+          "casl",
+          "dbml",
+          "models",
+          "nestjs-models",
+          "nestjs-models-common",
+          "nestjs-models-rest",
+          "prisma",
+          "react-admin",
+          "rest-dtos",
+          "rext-client"
+        ],
+        "message": "Which templates your library will host?",
+        "multiselect": true,
+        "type": "list"
+      },
+      "default": []
+    },
+    "hapifyUseImportReplacements": {
+      "default": true,
+      "description": "Use import replacement for hapify models",
+      "type": "boolean"
+    },
+    "importPath": {
+      "description": "Import path of the library",
+      "type": "string"
+    },
+    "name": {
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "description": "Library name",
+      "type": "string",
+      "x-prompt": "What name would you like to use for the library?"
+    },
+    "type": {
+      "default": "angular",
+      "description": "Library type",
+      "items": {
+        "enum": ["angular", "nest", "react"],
+        "type": "string"
+      },
+      "type": "string",
+      "x-prompt": "What library type your hapify generate library needs (for library that need to be use in front and back use angular)?"
+    }
+  },
+  "required": ["name", "type"],
+  "title": "Create a Tractr library with hapify for Nx",
+  "type": "object"
+}

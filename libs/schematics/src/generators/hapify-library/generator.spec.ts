@@ -3,8 +3,12 @@ import { readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import * as nestjs from '@nrwl/nest';
 
+import * as hapifyTargetGenerator from '../target-generate/generator';
 import generator from './generator';
-import { LibraryGeneratorOptions } from './schema';
+import {
+  HapifyLibraryGeneratorOptions,
+  HapifyLibraryGeneratorOptionsWithExtra,
+} from './schema';
 
 jest.mock('@nrwl/angular/generators', () => ({
   __esModule: true,
@@ -14,10 +18,14 @@ jest.mock('@nrwl/nest', () => ({
   __esModule: true,
   ...jest.requireActual('@nrwl/nest'),
 }));
+jest.mock('../target-generate/generator', () => ({
+  __esModule: true,
+  ...jest.requireActual('../target-generate/generator'),
+}));
 
-describe('library generator', () => {
+describe('hapify library generator', () => {
   let appTree: Tree;
-  const options: LibraryGeneratorOptions = {
+  const options: HapifyLibraryGeneratorOptions = {
     name: 'test',
     type: 'angular',
     hapifyTemplates: ['models'],
@@ -30,6 +38,7 @@ describe('library generator', () => {
 
   let angularGenerator: jest.SpyInstance;
   let nestjsGenerator: jest.SpyInstance;
+  let targetGenerator: jest.SpyInstance;
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
@@ -39,21 +48,23 @@ describe('library generator', () => {
 
     angularGenerator = jest.spyOn(angular, 'libraryGenerator');
     nestjsGenerator = jest.spyOn(nestjs, 'libraryGenerator');
+    targetGenerator = jest.spyOn(hapifyTargetGenerator, 'default');
   });
 
   afterEach(() => {
     angularGenerator.mockClear();
     nestjsGenerator.mockClear();
+    targetGenerator.mockClear();
   });
 
   it('should run successfully', async () => {
-    await generator(appTree, options);
+    await generator(appTree, options as HapifyLibraryGeneratorOptionsWithExtra);
     const config = readProjectConfiguration(appTree, 'test');
     expect(config).toBeDefined();
   });
 
   it('should have called angular generator', async () => {
-    await generator(appTree, options);
+    await generator(appTree, options as HapifyLibraryGeneratorOptionsWithExtra);
     const config = readProjectConfiguration(appTree, 'test');
     expect(config).toBeDefined();
     expect(angularGenerator).toHaveBeenCalledTimes(1);
@@ -76,7 +87,7 @@ describe('library generator', () => {
   });
 
   it('should generate a gitignore file', async () => {
-    await generator(appTree, options);
+    await generator(appTree, options as HapifyLibraryGeneratorOptionsWithExtra);
 
     expect(appTree.exists('libs/test/.gitignore')).toBeTruthy();
     expect(appTree.read('libs/test/.gitignore')?.toString()).toContain(
@@ -168,5 +179,14 @@ module.exports = {
     'rest-dtos': '@proj/rest-dtos',},
 };
 `);
+  });
+
+  it('should add the generate target to the project configuration', async () => {
+    await generator(appTree, options as HapifyLibraryGeneratorOptionsWithExtra);
+
+    const projectConfiguration = readProjectConfiguration(appTree, 'test');
+
+    expect(targetGenerator).toBeCalledTimes(1);
+    expect(projectConfiguration.targets?.generate).toBeDefined();
   });
 });
