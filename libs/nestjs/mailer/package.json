@@ -1,6 +1,6 @@
 {
   "name": "@tractr/nestjs-mailer",
-  "version": "1.35.0",
+  "version": "1.36.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"

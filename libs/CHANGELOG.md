@@ -2,6 +2,36 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.36.0](https://github.com/tractr/stack/compare/v1.35.0...v1.36.0) (2022-02-08)
+
+
+### Bug Fixes
+
+* remove jest-global import from tests ([#381](https://github.com/tractr/stack/issues/381)) ([d835c0a](https://github.com/tractr/stack/commit/d835c0a7ce4a483c17caafa7f853d548011990d5))
+* update the root folder to detect if a change as occured ([#382](https://github.com/tractr/stack/issues/382)) ([ce050f0](https://github.com/tractr/stack/commit/ce050f077a16c11aa93bd0fdf91db0a70d4c7bdb))
+
+
+### Features
+
+* update hapify-library schematic to handle react libs and generate target ([#376](https://github.com/tractr/stack/issues/376)) ([347c641](https://github.com/tractr/stack/commit/347c6410a8c3abe5a609c3ab5ceb812a257eed08))
+
+
+
+# [1.36.0](https://github.com/tractr/stack/compare/v1.35.0...v1.36.0) (2022-02-08)
+
+
+### Bug Fixes
+
+* remove jest-global import from tests ([#381](https://github.com/tractr/stack/issues/381)) ([d835c0a](https://github.com/tractr/stack/commit/d835c0a7ce4a483c17caafa7f853d548011990d5))
+* update the root folder to detect if a change as occured ([#382](https://github.com/tractr/stack/issues/382)) ([ce050f0](https://github.com/tractr/stack/commit/ce050f077a16c11aa93bd0fdf91db0a70d4c7bdb))
+
+
+### Features
+
+* update hapify-library schematic to handle react libs and generate target ([#376](https://github.com/tractr/stack/issues/376)) ([347c641](https://github.com/tractr/stack/commit/347c6410a8c3abe5a609c3ab5ceb812a257eed08))
+
+
+
 # [1.35.0](https://github.com/tractr/stack/compare/v1.34.0...v1.35.0) (2022-02-08)
 
 

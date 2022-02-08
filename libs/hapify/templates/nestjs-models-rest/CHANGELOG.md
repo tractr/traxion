@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.36.0](https://github.com/tractr/stack/compare/v1.35.0...v1.36.0) (2022-02-08)
+
+
+### Bug Fixes
+
+* remove jest-global import from tests ([#381](https://github.com/tractr/stack/issues/381)) ([d835c0a](https://github.com/tractr/stack/commit/d835c0a7ce4a483c17caafa7f853d548011990d5))
+
+
+
 # [1.35.0](https://github.com/tractr/stack/compare/v1.34.0...v1.35.0) (2022-02-08)
 
 

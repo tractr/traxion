@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.36.0](https://github.com/tractr/stack/compare/v1.35.0...v1.36.0) (2022-02-08)
+
+
+### Features
+
+* update hapify-library schematic to handle react libs and generate target ([#376](https://github.com/tractr/stack/issues/376)) ([347c641](https://github.com/tractr/stack/commit/347c6410a8c3abe5a609c3ab5ceb812a257eed08))
+
+
+
 # [1.35.0](https://github.com/tractr/stack/compare/v1.34.0...v1.35.0) (2022-02-08)
 
 
