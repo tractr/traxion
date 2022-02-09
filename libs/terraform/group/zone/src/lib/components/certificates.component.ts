@@ -60,10 +60,10 @@ export class CertificatesComponent extends AwsComponent<CertificatesComponentCon
     return new route53.Route53Record(this, 'record', {
       provider: this.provider,
       allowOverwrite: true,
-      name: this.wrapInToList(domainValidationOptions.resourceRecordName),
-      records: [this.wrapInToList(domainValidationOptions.resourceRecordValue)],
+      name: domainValidationOptions.resourceRecordName,
+      records: [domainValidationOptions.resourceRecordValue],
       ttl: 60,
-      type: this.wrapInToList(domainValidationOptions.resourceRecordType),
+      type: domainValidationOptions.resourceRecordType,
       zoneId: this.getRoute53ZoneIdAsToken(),
     });
   }
@@ -82,12 +82,5 @@ export class CertificatesComponent extends AwsComponent<CertificatesComponentCon
 
   getRoute53ZoneIdAsToken(): string {
     return Token.asString(this.route53Zone.zoneId);
-  }
-
-  /**
-   * Dirty solution for https://github.com/hashicorp/terraform-cdk/issues/424
-   */
-  protected wrapInToList(input: string): string {
-    return input.replace('${', '${tolist(').replace('.0.', ').0.');
   }
 }
