@@ -65,6 +65,7 @@
     "terraform-group-pool": "libs/terraform/group/pool",
     "terraform-group-registry": "libs/terraform/group/registry",
     "terraform-group-zone": "libs/terraform/group/zone",
+    "terraform-helpers-post-synth": "libs/terraform/helpers/post-synth",
     "terraform-service-api": "libs/terraform/service/api",
     "terraform-service-ecs": "libs/terraform/service/ecs",
     "terraform-service-postgres": "libs/terraform/service/postgres",

@@ -58,11 +58,7 @@
     "synth": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": [
-          "npx cdktf get",
-          "npx cdktf synth",
-          "node apps/terraform/post-synth.js"
-        ],
+        "commands": ["npx cdktf get", "npx cdktf synth"],
         "cwd": "./",
         "parallel": false
       }
