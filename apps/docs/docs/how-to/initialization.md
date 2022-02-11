@@ -1,6 +1,6 @@
 ---
 id: initialization
-title: How to initialize a new project with traxion
+title: How to initialize a new project with Traxion
 sidebar_label: Workspace initialisation
 ---
 

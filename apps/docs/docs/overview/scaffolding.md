@@ -1,6 +1,6 @@
 ---
 id: scaffolding
-title: How traxion use the scaffolding strategy
+title: How Traxion use the scaffolding strategy
 sidebar_label: Scaffolding
 keywords: 
   - hapify

@@ -7,6 +7,11 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Get started',
+      items: ['get-started/initialization'],
+    },
+    {
+      type: 'category',
       label: 'Overview',
       items: ['overview/generation', 'overview/scaffolding'],
     },
@@ -34,6 +39,7 @@ module.exports = {
         'schematics/how-to',
         'schematics/publish',
         'schematics/release',
+        'schematics/eslint',
         'schematics/prettier',
         'schematics/schematic-template-lib',
       ],

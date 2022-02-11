@@ -6,7 +6,7 @@ sidebar_label: Prettier
 
 ## Prettier config
 
-Add and configure prettier configuration to a nx project
+Add prettier and its configuration to a NX project.
 
 ```bash
 nx g @tractr/schematics:prettier-config
@@ -14,7 +14,9 @@ nx g @tractr/schematics:prettier-config
 
 ### Description
 
-Add and configure prettier [`@tractr/prettier-config`](https://github.com/tractr/stack/tree/main/libs/config/prettier) to a nx project.
+Add and configure Prettier [`@tractr/prettier-config`](https://github.com/tractr/stack/tree/main/libs/config/prettier) to a NX project.
+
+The following steps will be performed:
 
 - Remove `.prettierrc` file
 - Create `.prettierrc.js` file with default import from `@tractr/prettier-config`
@@ -22,6 +24,6 @@ Add and configure prettier [`@tractr/prettier-config`](https://github.com/tractr
 
 ### Options
 
-| Option                         | Description                                                                                                     |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------------- |
-| `--format` | Format the all nx workspace to ensure all file has been pass through prettier |                        |
+| Option     | Description                                                                                                     |
+| ---------- | --------------------------------------------------------------------------------------------------------------- |
+| `--format` | Format the all NX workspace to ensure all files have been processed by Prettier                                 |

@@ -1,6 +1,6 @@
 ---
 id: generation
-title: How traxion use the generation strategy
+title: How Traxion use the generation strategy
 sidebar_label: Generation
 keywords: 
   - hapify
