@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-helpers-post-synth",
-  "version": "1.36.1",
+  "version": "1.36.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
