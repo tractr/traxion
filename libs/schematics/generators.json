@@ -40,6 +40,11 @@
       "description": "target-generate",
       "factory": "./src/generators/target-generate/generator",
       "schema": "./src/generators/target-generate/schema.json"
+    },
+    "hapify-workspace": {
+      "factory": "./src/generators/hapify-workspace/generator",
+      "schema": "./src/generators/hapify-workspace/schema.json",
+      "description": "hapify-workspace generator"
     }
   },
   "name": "schematics",

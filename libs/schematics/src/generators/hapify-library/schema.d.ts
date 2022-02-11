@@ -11,6 +11,8 @@ export type AvailableTractrTemplates =
   | 'rest-dtos'
   | 'rext-client';
 
+export type AvailableLibraryType = 'angular' | 'nest' | 'react';
+
 export interface HapifyLibraryGeneratorOptionsWithExtra
   extends HapifyLibraryGeneratorOptions,
     Record<string, unknown> {}
@@ -18,7 +20,7 @@ export interface HapifyLibraryGeneratorOptionsWithExtra
 export interface HapifyLibraryGeneratorOptions {
   name: string;
   directory?: string;
-  type: 'angular' | 'nest' | 'react';
+  type: AvailableLibraryType;
   hapifyTemplates: AvailableTractrTemplates[];
   hapifyAdditionalTemplates: string;
   hapifyModelsJson: string;

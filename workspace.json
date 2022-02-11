@@ -24,6 +24,7 @@
     "generated-rext-client": "libs/generated/rext-client",
     "hapify-common": "libs/hapify/hapify-common",
     "hapify-config": "libs/config/hapify",
+    "hapify-create-hapify-workspace": "libs/hapify/create-hapify-workspace",
     "hapify-generate-config": "libs/hapify/generate-config",
     "hapify-templates-angular-rext-client": "libs/hapify/templates/angular-rext-client",
     "hapify-templates-casl": "libs/hapify/templates/casl",
@@ -131,7 +132,8 @@
               "nestjs-casl:publish",
               "angular-authentication:publish",
               "terraform-group-pool:publish",
-              "angular-casl:publish"
+              "angular-casl:publish",
+              "hapify-create-hapify-workspace:publish"
             ],
             "syncVersions": true
           }

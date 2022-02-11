@@ -77,8 +77,6 @@ export default async function targetGenerateGenerator(
   // Update the project configuration with the release target
   updateProjectConfiguration(tree, normalizedOptions.projectName, project);
 
-  await formatFiles(tree);
-
   const packageJsonSchematics: PackageDefinition = await readJSON(
     SCHEMATICS_PACKAGE_JSON_PATH,
   );
@@ -90,4 +88,6 @@ export default async function targetGenerateGenerator(
 
   // update the package.json dependencies
   await addPackageToPackageJson(tree, packages);
+
+  await formatFiles(tree);
 }
