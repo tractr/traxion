@@ -9,9 +9,9 @@ import {
 } from '@nrwl/devkit';
 
 import { addPackageToPackageJson } from '../../helpers';
-import libraryGenerator from '../library/generator';
-import { normalizeOptions } from '../library/helpers';
-import { NormalizedOptions } from '../library/schema';
+import hapifyLibraryGenerator from '../hapify-library/generator';
+import { normalizeOptions } from '../hapify-library/helpers';
+import { NormalizedOptions } from '../hapify-library/schema';
 import { NX_TOOLS_NX_PRISMA_PACKAGE } from './constants/nx-tools-prisma-package';
 import { getTargetsToAdd } from './helpers/project-targets';
 import { PrismaLibraryGeneratorSchema } from './schema';
@@ -35,7 +35,7 @@ function addFiles(host: Tree, options: NormalizedOptions) {
     hapifyModelJson: options.hapifyModelsJsonRelativePath,
     hapifyImportReplacements: options.hapifyImportReplacements,
     hapifyUseImportReplacements: options.hapifyUseImportReplacements,
-    npmScope: options.prefix,
+    npmScope: options.npmScope,
     nodeModuleRelativePath: getNodeModulesRelativePath(
       host.root,
       options.projectRoot,
@@ -47,7 +47,7 @@ export default async function prismaLibraryGenerator(
   tree: Tree,
   options: PrismaLibraryGeneratorSchema,
 ) {
-  await libraryGenerator(tree, {
+  await hapifyLibraryGenerator(tree, {
     ...options,
     type: 'nest',
     hapifyTemplates: ['prisma'],

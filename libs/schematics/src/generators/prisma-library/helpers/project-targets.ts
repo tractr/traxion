@@ -1,6 +1,6 @@
 import { TargetConfiguration } from '@nrwl/devkit';
 
-import { NormalizedOptions } from '../../library/schema';
+import { NormalizedOptions } from '../../hapify-library/schema';
 
 export function getTargetsToAdd(options: NormalizedOptions): {
   [index: string]: TargetConfiguration;

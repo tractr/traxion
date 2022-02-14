@@ -1,4 +1,5 @@
 export interface PrismaLibraryGeneratorSchema {
+  [key: string]: string | string[] | boolean;
   type: 'nest';
   hapifyTemplates: ['prisma'];
   hapifyAdditionalTemplates: string;
