@@ -3,10 +3,6 @@
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "properties": {
-    "addSecondaryEndpoint": {
-      "description": "Add secondary endpoint to the library",
-      "type": "array"
-    },
     "buildable": {
       "default": true,
       "description": "Generate a buildable library.",
@@ -27,26 +23,6 @@
       "description": "Add the Global decorator to the generated module.",
       "type": "boolean"
     },
-    "hapifyAdditionalTemplates": {
-      "default": "",
-      "description": "List of additional templates to use in this library",
-      "type": "string",
-      "x-prompt": "Do you want to add additionals templates (comma separate)?"
-    },
-    "hapifyModelsJson": {
-      "default": "hapify-models.json",
-      "description": "Relative path from root workspace where the hapify models json file is located",
-      "type": "string"
-    },
-    "hapifyUseImportReplacements": {
-      "default": true,
-      "description": "Use import replacement for hapify models",
-      "type": "boolean"
-    },
-    "importPath": {
-      "description": "The library name used to import it, like @myorg/my-awesome-lib. Must be a valid npm name.",
-      "type": "string"
-    },
     "linter": {
       "default": "eslint",
       "description": "The tool to use for running lint checks.",
@@ -58,7 +34,7 @@
         "$source": "argv",
         "index": 0
       },
-      "description": "",
+      "description": "Library name",
       "type": "string",
       "x-prompt": "What name would you like to use?"
     },

@@ -41,7 +41,7 @@ export function getTargetsToAdd(options: NormalizedOptions): {
       },
     },
     pregenerate: {
-      executor: './dist/libs/schematics:generate',
+      executor: '@tractr/schematics:generate',
       options: {
         cleanFirst: false,
         cwd: options.projectRoot,
@@ -57,19 +57,19 @@ export function getTargetsToAdd(options: NormalizedOptions): {
       },
     },
     pull: {
-      executor: '@nx-tools/nx-prisma:rollback',
+      executor: '@nx-tools/nx-prisma:pull',
       options: {
         schema: `${options.projectRoot}/prisma/schema.prisma`,
       },
     },
     push: {
-      executor: '@nx-tools/nx-prisma:seed',
+      executor: '@nx-tools/nx-prisma:push',
       options: {
         schema: `${options.projectRoot}/prisma/schema.prisma`,
       },
     },
     reset: {
-      executor: '@nx-tools/nx-prisma:seed',
+      executor: '@nx-tools/nx-prisma:reset',
       options: {
         schema: `${options.projectRoot}/prisma/schema.prisma`,
       },
@@ -82,7 +82,7 @@ export function getTargetsToAdd(options: NormalizedOptions): {
       },
     },
     status: {
-      executor: '@nx-tools/nx-prisma:seed',
+      executor: '@nx-tools/nx-prisma:status',
       options: {
         schema: `${options.projectRoot}/prisma/schema.prisma`,
       },
