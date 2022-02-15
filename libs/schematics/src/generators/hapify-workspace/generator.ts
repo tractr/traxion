@@ -1,20 +1,22 @@
 /* eslint-disable no-await-in-loop */
 import * as path from 'path';
 
+import { applicationGenerator as angularApplicationGenerator } from '@nrwl/angular/generators';
+import { E2eTestRunner } from '@nrwl/angular/src/utils/test-runners';
 import {
-  applicationGenerator as angularApplicationGenerator,
-  libraryGenerator,
-} from '@nrwl/angular/generators';
-import {
-  addProjectConfiguration,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
+  logger,
   names,
-  offsetFromRoot,
+  readWorkspaceConfiguration,
   Tree,
+  updateJson,
+  updateWorkspaceConfiguration,
 } from '@nrwl/devkit';
+import { Linter } from '@nrwl/linter';
 import { applicationGenerator as nestjsApplicationGenerator } from '@nrwl/nest';
+import { v4 as uuid4 } from 'uuid';
 
 import { DEFAULT_LIBRARY_TYPE } from '../../schematics.constants';
 import adminGenerator from '../admin-app/generator';
@@ -30,9 +32,9 @@ import { addNpmrc } from './helpers';
 import { HapifyWorkspaceGeneratorSchema } from './schema';
 
 interface NormalizedSchema extends HapifyWorkspaceGeneratorSchema {
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
+  libsDir: string;
+  uuid4: string;
+  workspaceName: string;
   parsedTags: string[];
 }
 
@@ -40,22 +42,17 @@ function normalizeOptions(
   tree: Tree,
   options: HapifyWorkspaceGeneratorSchema,
 ): NormalizedSchema {
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`;
+  const { libsDir } = getWorkspaceLayout(tree);
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
 
   return {
     ...options,
-    projectName,
-    projectRoot,
-    projectDirectory,
+    libsDir,
+    workspaceName: options.name,
     parsedTags,
+    uuid4: uuid4(),
   };
 }
 
@@ -63,39 +60,76 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
   const templateOptions = {
     ...options,
     ...names(options.name),
-    offsetFromRoot: offsetFromRoot(options.projectRoot),
     template: '',
   };
-  generateFiles(
-    tree,
-    path.join(__dirname, 'files'),
-    options.projectRoot,
-    templateOptions,
-  );
+  generateFiles(tree, path.join(__dirname, 'files'), '', templateOptions);
 }
 
 export default async function hapifyWorkspace(
   tree: Tree,
   options: HapifyWorkspaceGeneratorSchema,
 ) {
-  const normalizedOptions = normalizeOptions(tree, options);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { isVerbose } = tree as any;
 
+  const log = {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    info: isVerbose ? logger.debug : () => {},
+    error: logger.error,
+  };
   // We add to the workspace a npmrc file
+  log.info('Adding .npmrc file');
   addNpmrc(tree);
 
-  // First we call the nestjs application generator
-  await nestjsApplicationGenerator(tree, normalizedOptions);
+  log.info('Update workspace configuration');
+  const workspaceConfiguration = readWorkspaceConfiguration(tree);
 
-  // Then we call the angular application generator
-  await angularApplicationGenerator(tree, normalizedOptions);
+  updateWorkspaceConfiguration(tree, {
+    ...workspaceConfiguration,
+    workspaceLayout: {
+      appsDir: 'apps',
+      libsDir: 'libs',
+    },
+  });
 
+  const normalizedOptions = normalizeOptions(tree, options);
+
+  log.info('Initializing linter');
+  await eslintGenerator(tree);
+
+  log.info('Initializing prettier');
+  await prettierGenerator(tree, { format: false });
+
+  log.info('Initializing github actions');
+  await generateWorkflow(tree, { all: true });
+
+  log.info('Initializing nestjs application');
+  await nestjsApplicationGenerator(tree, {
+    name: 'api',
+    linter: Linter.EsLint,
+    standaloneConfig: true,
+  });
+
+  log.info('Initializing angular application');
+  await angularApplicationGenerator(tree, {
+    name: 'pwa',
+    linter: Linter.EsLint,
+    standaloneConfig: true,
+    addTailwind: true,
+    backendProject: 'api',
+    strict: true,
+    style: 'less',
+    e2eTestRunner: E2eTestRunner.None,
+  });
+
+  log.info('Initializing admin application');
   await adminGenerator(tree, {
     name: 'admin',
     reactAdminImportPath: '@generated/react-admin',
     rextClientImportPath: '@generated/rext-client',
   });
 
-  // Installing
+  log.info('Initializing hapify libraries');
   for (const [libraryName, type] of Object.entries(DEFAULT_LIBRARY_TYPE)) {
     // Then we call the admin app generator
     await hapifyLibraryGenerator(tree, {
@@ -107,16 +141,29 @@ export default async function hapifyWorkspace(
       type: type as AvailableLibraryType,
       hapifyUseImportReplacements: true,
       name: libraryName,
+      directory: 'generated',
     });
   }
 
-  await eslintGenerator(tree);
-
-  await prettierGenerator(tree, { format: true });
-
-  await generateWorkflow(tree, { all: true });
-
+  log.info('Add files to the workspace');
   addFiles(tree, normalizedOptions);
+
+  log.info('Update package.json scripts');
+  updateJson(tree, 'package.json', (json) => ({
+    ...json,
+    scripts: {
+      build: 'nx run-many --all --target=build',
+      format: 'nx format:write --all',
+      generate: 'npx nx run-many --target generate --all',
+      postinstall:
+        '(is-ci || husky install) && ngcc --properties es2015 browser module main',
+      lint: 'nx workspace-lint && nx run-many --all --target=lint --parallel',
+      nx: 'nx',
+      test: ' nx run-many --all --target=test',
+      'hpf:serve': 'hpf serve --depth 5',
+      ...json.scripts,
+    },
+  }));
 
   await formatFiles(tree);
 }

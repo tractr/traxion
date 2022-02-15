@@ -1,9 +1,11 @@
 /* eslint-disable no-await-in-loop */
 
+import { writeFile } from 'fs/promises';
+import { join } from 'path';
+import { cwd } from 'process';
+
 import lodash from 'lodash';
 import { $, cd } from 'zx';
-
-import { DEFAULT_LIBRARY_TYPE } from '@tractr/schematics';
 
 const { kebabCase } = lodash;
 
@@ -48,6 +50,13 @@ export async function execCreateNxWorkspace(
   await $`npx create-nx-workspace ${args}`;
 }
 
+export async function writeNpmrc(rootPath: string) {
+  await writeFile(
+    join(rootPath, '.npmrc'),
+    '@tractr:registry=https://npm.pkg.github.com',
+  );
+}
+
 /**
  * This function is used to create a new Hapify workspace.
  *
@@ -65,14 +74,26 @@ export async function createHapifyWorkspace(
   // Change the cwd of the current process to the newly created Nx workspace.
   cd('test1');
 
+  await writeNpmrc(cwd());
+
+  const npmPackages = [
+    '@tractr/schematics',
+    '@nrwl/angular',
+    '@nrwl/react',
+    '@nrwl/nest',
+  ];
+
   // Installing the missing dependencies
-  await $`npm install --save-dev @tractr/schematics`;
+  await $`npm install --save-dev ${npmPackages}`;
 
   // TODO DO NOT COMMIT THIS LINE
   cd('../../stack');
   await $`nx build schematics`;
   cd('../test/test1');
+  await $`npm i --save-dev node-fetch@2`;
   await $`DEBUG=local-install node ../../stack/tools/local-install.mjs --projects schematics`;
 
-  await $`nx g @tractr/schematics:eslint-config`;
+  await $`nx g @tractr/schematics:hapify-workspace --name test1`;
+
+  await $`npm install --force`;
 }

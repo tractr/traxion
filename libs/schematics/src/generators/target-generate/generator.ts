@@ -48,8 +48,14 @@ export default async function targetGenerateGenerator(
 ) {
   const normalizedOptions = await normalizeOptions(tree, options);
 
-  const { outputGeneratedPath, inputHapifyGeneratedPath, format, cleanFirst } =
-    normalizedOptions;
+  const {
+    outputGeneratedPath,
+    inputHapifyGeneratedPath,
+    moveGeneratedFiles,
+    format,
+    cleanFirst,
+    updateImportPath,
+  } = normalizedOptions;
 
   const baseOptions = {
     cwd: normalizedOptions.projectRoot,
@@ -68,6 +74,8 @@ export default async function targetGenerateGenerator(
       ...(inputHapifyGeneratedPath && {
         inputHapifyGeneratedPath,
       }),
+      ...(moveGeneratedFiles === false && { moveGeneratedFiles: false }),
+      ...(updateImportPath === false && { updateImportPath: false }),
       ...(format === false && { format: false }),
       ...(cleanFirst === false && { cleanFirst: false }),
       ...baseOptions,

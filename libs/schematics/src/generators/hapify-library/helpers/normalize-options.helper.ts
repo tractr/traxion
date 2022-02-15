@@ -10,6 +10,7 @@ import {
 import {
   DEFAULT_IMPORT_REPLACEMENTS,
   DEFAULT_SECONDARY_ENTRY_POINTS,
+  DEFAULT_TARGETS_OPTIONS,
 } from '../../../schematics.constants';
 import {
   HapifyLibraryGeneratorOptionsWithExtra,
@@ -81,6 +82,14 @@ export function normalizeOptions(
     ),
   ];
 
+  const defaultTargetGenerateOptions = hapifyTemplates.reduce(
+    (acc, template) => {
+      if (!DEFAULT_TARGETS_OPTIONS[template]?.generate) return acc;
+      return { ...acc, ...DEFAULT_TARGETS_OPTIONS[template]?.generate };
+    },
+    {},
+  );
+
   // Process import path if the option is not provided
   const importPath = `${npmScope}/${directory ? `${directory}-` : ''}${name}`;
 
@@ -95,6 +104,7 @@ export function normalizeOptions(
     useSecondaryEndpoint,
     addSecondaryEndpoint,
     npmScope,
+    libsDir,
     projectDirectory,
     projectName,
     projectRoot,
@@ -103,6 +113,7 @@ export function normalizeOptions(
     hapifyImportReplacements,
     templates,
     secondaryEntrypoints,
+    defaultTargetGenerateOptions,
     extra,
   };
 }

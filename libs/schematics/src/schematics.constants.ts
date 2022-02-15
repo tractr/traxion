@@ -1,4 +1,5 @@
 import { AvailableTractrTemplates } from './generators/hapify-library/schema';
+import { TargetGenerateGeneratorSchema } from './generators/target-generate/schema';
 
 export const DEFAULT_IMPORT_REPLACEMENTS = {
   'angular-rext-client': ['rext-client'],
@@ -40,4 +41,19 @@ export const DEFAULT_LIBRARY_TYPE: Record<AvailableTractrTemplates, string> = {
   'react-admin': 'react',
   'rest-dtos': 'nest',
   'rext-client': 'angular',
+};
+
+export const DEFAULT_TARGETS_OPTIONS: Partial<
+  Record<
+    AvailableTractrTemplates,
+    Record<'generate', Partial<TargetGenerateGeneratorSchema>>
+  >
+> = {
+  dbml: {
+    generate: {
+      format: false,
+      moveGeneratedFiles: false,
+      updateImportPath: false,
+    },
+  },
 };

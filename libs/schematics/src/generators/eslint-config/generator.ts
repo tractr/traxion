@@ -28,7 +28,15 @@ export default async function eslintGenerator(tree: Tree) {
   lintInitGenerator(tree, { linter: Linter.EsLint });
 
   // Add settings to the eslintrc.json files
-  const eslintrcJson = readJsonFile('./.eslintrc.json');
+  const eslintrc = tree.read('./.eslintrc.json')?.toString();
+  let eslintrcJson: Record<string, any> = {};
+
+  if (!eslintrc) {
+    eslintrcJson = readJsonFile('./.eslintrc.json');
+  } else {
+    eslintrcJson = JSON.parse(eslintrc);
+  }
+
   eslintrcJson.settings = {
     ...eslintrcJson.settings,
     'import/internal-regex': '^@(generated)/',

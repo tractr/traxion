@@ -1,4 +1,4 @@
-import { exec } from 'child_process';
+import { exec, ExecException } from 'child_process';
 import { join } from 'path';
 import { promisify } from 'util';
 
@@ -7,7 +7,7 @@ import { copy, pathExists, readdir, remove } from 'fs-extra';
 
 import { GenerateExecutorSchema } from './schema';
 
-import { getHapifyConfig } from '@tractr/hapify-common';
+import { getHapifyConfig, HapifyConfig } from '@tractr/hapify-common';
 import { getHapifyOptions } from '@tractr/hapify-generate-config';
 import { processImportReplacements } from '@tractr/hapify-update-templates-import-path';
 
@@ -21,6 +21,11 @@ function getOutputGeneratedFolder(
     rootDir === 'src' ? rootDir : `${rootDir}/src`,
     outputGeneratedPath,
   );
+}
+
+function throwError(message: string): never {
+  logger.error(message);
+  throw new Error(message);
 }
 
 /**
@@ -59,27 +64,51 @@ export default async function runExecutor(
       )
     ).filter((promise): promise is string => typeof promise === 'string');
 
-    const packageName: string = (
-      await import(join(projectDirectory, 'package.json'))
-    ).name;
-
-    if (!packageName)
-      throw new Error(
-        `could not found the package.json file in ${projectDirectory}`,
-      );
-
     if (isVerbose) logger.debug(`Check if ${projectDirectory} exists`);
 
-    // Check if the project directory has a package json
-    if (!(await pathExists(join(projectDirectory)))) {
-      throw new Error(
+    // Check if the project directory exists
+    try {
+      await pathExists(join(projectDirectory));
+    } catch (e) {
+      throwError(
         `The path "${projectDirectory}" seems to be not a valid project directory`,
       );
     }
 
-    const hapifyConfig = await getHapifyConfig(projectDirectory);
-    if (!hapifyConfig)
-      throw new Error(`No hapify config found in ${projectDirectory} folder`);
+    if (isVerbose)
+      logger.debug(`Check if ${join(projectDirectory, 'package.json')} exists`);
+    // Check if the package json exists
+    try {
+      await pathExists(join(projectDirectory, 'package.json'));
+    } catch {
+      throwError(
+        `The path "${projectDirectory}" seems to be not a valid package.json file`,
+      );
+    }
+
+    const packageName: string = (
+      await import(join(projectDirectory, 'package.json'))
+    ).name;
+
+    if (isVerbose)
+      logger.debug(`Check if the package.json has a name property`);
+    if (!packageName) {
+      throwError(`package json doesn't have any name property`);
+    }
+
+    if (isVerbose) logger.debug(`Get hapify configuration`);
+    let hapifyConfig: HapifyConfig;
+    try {
+      const config = await getHapifyConfig(projectDirectory);
+
+      if (!config)
+        throwError(`No hapify config found in ${projectDirectory} folder`);
+
+      hapifyConfig = config;
+    } catch (e) {
+      if (e instanceof Error) throwError(e.message);
+      throw e;
+    }
 
     if (cleanFirst) {
       if (isVerbose) logger.debug(`Cleaning files`);
@@ -109,12 +138,18 @@ export default async function runExecutor(
 
     // Then we run the hapify generate command
     if (isVerbose) logger.debug(`Generating the hapify files`);
-    const { stdout, stderr } = await execAsync(`npx hpf generate`, {
-      cwd: projectDirectory,
-    });
+    try {
+      const { stdout, stderr } = await execAsync(`npx hpf generate`, {
+        cwd: projectDirectory,
+      });
 
-    if (stderr) throw new Error(stderr);
-    if (isVerbose) logger.debug(stdout);
+      if (stderr) throwError(stderr);
+      if (isVerbose) logger.debug(stdout);
+    } catch (e) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (e instanceof Error) throwError(`${e.message}\n${(e as any).stdout}`);
+      throw e;
+    }
 
     const generatedTemplates: string[] = await readdir(inputHapifyPath).catch(
       () => [],
@@ -209,8 +244,13 @@ export default async function runExecutor(
     if (format && entrypoints.length > 0) {
       if (isVerbose)
         logger.debug(`Formating the generated files:`, entrypoints.join(','));
+      console.log(
+        `npx prettier --no-error-on-unmatched-pattern '${projectDirectory}/${
+          entrypoints.length > 1 ? `{${entrypoints.join(',')}}` : entrypoints[0]
+        }/${outputGeneratedPath}/**/*.ts' --write`,
+      );
       await execAsync(
-        `npx prettier '${projectDirectory}/${
+        `npx prettier --no-error-on-unmatched-pattern '${projectDirectory}/${
           entrypoints.length > 1 ? `{${entrypoints.join(',')}}` : entrypoints[0]
         }/${outputGeneratedPath}/**/*.ts' --write`,
       );

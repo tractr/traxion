@@ -1,11 +1,18 @@
 import path = require('path');
 
 import { libraryGenerator as angularLibraryGenerator } from '@nrwl/angular/generators';
-import { formatFiles, generateFiles, Tree } from '@nrwl/devkit';
+import {
+  formatFiles,
+  generateFiles,
+  installPackagesTask,
+  Tree,
+  updateJson,
+} from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
 import { libraryGenerator as nestLibraryGenerator } from '@nrwl/nest';
 import { libraryGenerator as reactLibraryGenerator } from '@nrwl/react';
 
+import { addPackageToPackageJson } from '../..';
 import addGenerateTarget from '../target-generate/generator';
 import {
   cleanAngularLibrary,
@@ -52,9 +59,18 @@ export default async function hapifyLibraryGenerator(
   // Format options
   const normalizedOptions = normalizeOptions(tree, options);
 
+  const currentVersion = (await import('../../../package.json')).version;
+
   // Default values for library generator options
-  const { name, directory, extra, type, importPath, projectName } =
-    normalizedOptions;
+  const {
+    name,
+    directory,
+    extra,
+    type,
+    importPath,
+    projectName,
+    defaultTargetGenerateOptions,
+  } = normalizedOptions;
   const libraryGeneratorDefaultOptions = { buildable: true };
   const libraryGeneratorOptions = { name, directory, importPath, ...extra };
 
@@ -97,7 +113,15 @@ export default async function hapifyLibraryGenerator(
   await addGenerateTarget(tree, {
     project: projectName,
     ...extra,
+    ...defaultTargetGenerateOptions,
   });
+
+  await addPackageToPackageJson(
+    tree,
+    ['@tractr/hapify-config', ...normalizedOptions.templates].map(
+      (packageName) => ({ packageName, version: currentVersion }),
+    ),
+  );
 
   await formatFiles(tree);
 }

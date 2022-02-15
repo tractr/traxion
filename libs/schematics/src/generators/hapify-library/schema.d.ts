@@ -31,6 +31,7 @@ export interface HapifyLibraryGeneratorOptions {
 
 export interface NormalizedOptions extends HapifyLibraryGeneratorOptions {
   npmScope: string;
+  libsDir: string;
   projectDirectory: string;
   projectName: string;
   projectRoot: string;
@@ -39,5 +40,6 @@ export interface NormalizedOptions extends HapifyLibraryGeneratorOptions {
   templates: string[];
   hapifyImportReplacements: string[];
   secondaryEntrypoints: string[];
+  defaultTargetGenerateOptions: Record<string, unknown>;
   extra: Record<Record, unknown>;
 }

@@ -58,7 +58,7 @@ yarn.lock
 
 # Generated files
 **/generated
-!libs/generated
+!<%= libsDir %>/generated
 
 # Hapify
 hapify.json
