@@ -3,30 +3,9 @@
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "properties": {
-    "buildable": {
-      "default": true,
-      "description": "Generate a buildable library.",
-      "type": "boolean"
-    },
-    "controller": {
-      "default": false,
-      "description": "Include a controller with the library.",
-      "type": "boolean"
-    },
     "directory": {
       "alias": "d",
       "description": "A directory where the project is placed",
-      "type": "string"
-    },
-    "global": {
-      "default": false,
-      "description": "Add the Global decorator to the generated module.",
-      "type": "boolean"
-    },
-    "linter": {
-      "default": "eslint",
-      "description": "The tool to use for running lint checks.",
-      "enum": ["eslint", "tslint"],
       "type": "string"
     },
     "name": {
@@ -37,82 +16,11 @@
       "description": "Library name",
       "type": "string",
       "x-prompt": "What name would you like to use?"
-    },
-    "publishable": {
-      "default": true,
-      "description": "Create a publishable library.",
-      "type": "boolean"
-    },
-    "service": {
-      "default": false,
-      "description": "Include a service with the library.",
-      "type": "boolean"
-    },
-    "setParserOptionsProject": {
-      "default": false,
-      "description": "Whether or not to configure the ESLint \"parserOptions.project\" option. We do not do this by default for lint performance reasons.",
-      "type": "boolean"
-    },
-    "skipFormat": {
-      "default": false,
-      "description": "Skip formatting files",
-      "type": "boolean"
-    },
-    "skipTsConfig": {
-      "default": false,
-      "description": "Do not update tsconfig.base.json for development experience.",
-      "type": "boolean"
-    },
-    "standaloneConfig": {
-      "default": true,
-      "description": "Split the project configuration into <projectRoot>/project.json rather than including it inside workspace.json",
-      "type": "boolean"
-    },
-    "strict": {
-      "default": true,
-      "description": "Whether to enable tsconfig strict mode or not.",
-      "type": "boolean"
-    },
-    "tags": {
-      "alias": "t",
-      "description": "Add tags to the project (used for linting)",
-      "type": "string"
-    },
-    "target": {
-      "default": "esnext",
-      "description": "The ES target, Nest suggest using es6 or higher.",
-      "enum": [
-        "es5",
-        "es6",
-        "esnext",
-        "es2015",
-        "es2016",
-        "es2017",
-        "es2018",
-        "es2019",
-        "es2020"
-      ],
-      "type": "string"
-    },
-    "testEnvironment": {
-      "default": "jsdom",
-      "description": "The test environment to use if unitTestRunner is set to jest",
-      "enum": ["jsdom", "node"],
-      "type": "string"
-    },
-    "unitTestRunner": {
-      "default": "jest",
-      "description": "Test runner to use for unit tests",
-      "enum": ["jest", "none"],
-      "type": "string"
-    },
-    "useSecondaryEndpoint": {
-      "default": true,
-      "description": "Do not add secondary endpoint to the library",
-      "type": "boolean"
     }
   },
-  "required": ["name"],
+  "required": [
+    "name"
+  ],
   "title": "",
   "type": "object"
 }

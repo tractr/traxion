@@ -1,15 +1,13 @@
 import { TargetConfiguration } from '@nrwl/devkit';
 
-import { NormalizedOptions } from '../../hapify-library/schema';
-
-export function getTargetsToAdd(options: NormalizedOptions): {
+export function getTargetsToAdd(projectRoot: string): {
   [index: string]: TargetConfiguration;
 } {
   return {
     deploy: {
       executor: '@nx-tools/nx-prisma:generate',
       options: {
-        schema: `${options.projectRoot}/prisma/schema.prisma`,
+        schema: `${projectRoot}/prisma/schema.prisma`,
       },
     },
     generate: {
@@ -36,7 +34,7 @@ export function getTargetsToAdd(options: NormalizedOptions): {
             forwardAllArgs: false,
           },
         ],
-        cwd: options.projectRoot,
+        cwd: projectRoot,
         parallel: false,
       },
     },
@@ -44,7 +42,7 @@ export function getTargetsToAdd(options: NormalizedOptions): {
       executor: '@tractr/schematics:generate',
       options: {
         cleanFirst: false,
-        cwd: options.projectRoot,
+        cwd: projectRoot,
         format: false,
         inputHapifyGeneratedPath: 'prisma',
         moveGeneratedFiles: false,
@@ -53,38 +51,38 @@ export function getTargetsToAdd(options: NormalizedOptions): {
     migrate: {
       executor: '@nx-tools/nx-prisma:migrate',
       options: {
-        schema: `${options.projectRoot}/prisma/schema.prisma`,
+        schema: `${projectRoot}/prisma/schema.prisma`,
       },
     },
     pull: {
       executor: '@nx-tools/nx-prisma:pull',
       options: {
-        schema: `${options.projectRoot}/prisma/schema.prisma`,
+        schema: `${projectRoot}/prisma/schema.prisma`,
       },
     },
     push: {
       executor: '@nx-tools/nx-prisma:push',
       options: {
-        schema: `${options.projectRoot}/prisma/schema.prisma`,
+        schema: `${projectRoot}/prisma/schema.prisma`,
       },
     },
     reset: {
       executor: '@nx-tools/nx-prisma:reset',
       options: {
-        schema: `${options.projectRoot}/prisma/schema.prisma`,
+        schema: `${projectRoot}/prisma/schema.prisma`,
       },
     },
     seed: {
       executor: '@nx-tools/nx-prisma:seed',
       options: {
-        script: `${options.projectRoot}/prisma/seed.ts`,
-        tsConfig: `${options.projectRoot}/tsconfig.json`,
+        script: `${projectRoot}/prisma/seed.ts`,
+        tsConfig: `${projectRoot}/tsconfig.json`,
       },
     },
     status: {
       executor: '@nx-tools/nx-prisma:status',
       options: {
-        schema: `${options.projectRoot}/prisma/schema.prisma`,
+        schema: `${projectRoot}/prisma/schema.prisma`,
       },
     },
   };
