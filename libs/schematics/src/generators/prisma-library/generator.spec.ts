@@ -93,7 +93,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  output = "${prismaClientOutputPath}"
+  output = "../../../../node_modules"
   previewFeatures = ["filterJson"]
 }
 `);
