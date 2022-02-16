@@ -1,6 +1,6 @@
 {
   "name": "@tractr/traxion-pwa",
-  "version": "1.36.3",
+  "version": "1.37.0",
   "peerDependencies": {
     "@angular/common": "^12.1.1",
     "@angular/core": "^12.1.1"
