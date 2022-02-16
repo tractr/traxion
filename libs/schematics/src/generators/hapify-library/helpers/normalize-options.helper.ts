@@ -1,14 +1,9 @@
 import { relative } from 'path';
 
-import {
-  getWorkspaceLayout,
-  joinPathFragments,
-  names,
-  TargetConfiguration,
-  Tree,
-} from '@nrwl/devkit';
+import { getWorkspaceLayout, TargetConfiguration, Tree } from '@nrwl/devkit';
 import * as deepmerge from 'deepmerge';
 
+import { getNormalizedProjectDefaultsOptions } from '../../../helpers';
 import {
   DEFAULT_IMPORT_REPLACEMENTS,
   DEFAULT_SECONDARY_ENTRY_POINTS,
@@ -39,14 +34,11 @@ export function normalizeOptions(
   // Fetch workspace data
   const { libsDir, npmScope } = getWorkspaceLayout(tree);
 
-  // Format case for user input
-  const name = names(rawName).fileName;
-  const directory = rawDirectory ? names(rawDirectory).fileName : undefined;
-
-  // Process project data from user input
-  const projectDirectory = directory ? `${directory}/${name}` : name;
-  const projectName = projectDirectory.replace(/\//g, '-');
-  const projectRoot = joinPathFragments(libsDir, projectDirectory);
+  const { name, directory, projectDirectory, projectRoot, projectName } =
+    getNormalizedProjectDefaultsOptions(tree, {
+      name: rawName,
+      directory: rawDirectory,
+    });
 
   // Format hapify template inputs
   const templates =

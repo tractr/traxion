@@ -2,6 +2,7 @@ module.exports = {
   projects: [
     '<rootDir>/apps/pwa',
     '<rootDir>/apps/api',
+    '<rootDir>/apps/terraform',
     '<rootDir>/libs/hapify/generate-config',
     '<rootDir>/libs/hapify/templates/angular-rext-client',
     '<rootDir>/libs/hapify/templates/dbml',
@@ -40,7 +41,6 @@ module.exports = {
     '<rootDir>/libs/terraform/service/api',
     '<rootDir>/libs/terraform/service/pwa',
     '<rootDir>/libs/terraform/service/postgres',
-    '<rootDir>/apps/terraform',
     '<rootDir>/libs/schematics',
     '<rootDir>/libs/terraform/component/deployment-trigger',
     '<rootDir>/libs/terraform/component/deployment',
@@ -50,6 +50,7 @@ module.exports = {
     '<rootDir>/libs/terraform/component/owner-pictures',
     '<rootDir>/libs/terraform/component/logs',
     '<rootDir>/libs/terraform/component/entrypoint',
+    '<rootDir>/libs/terraform/helpers/post-synth',
     '<rootDir>/libs/terraform/service/ecs',
     '<rootDir>/libs/terraform/service/reverse-proxy',
     '<rootDir>/libs/hapify/templates/react-admin',

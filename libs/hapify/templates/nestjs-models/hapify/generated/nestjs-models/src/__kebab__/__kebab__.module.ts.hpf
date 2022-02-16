@@ -1,10 +1,15 @@
-import { Module } from '@nestjs/common';
 import { ModuleOverride } from '@tractr/nestjs-core';
+import { Module } from '@nestjs/common';
  
 import { <<Model pascal>>ModelModule } from '../../../nestjs-models-common';
 import { <<Model pascal>>RestModule } from '../../../nestjs-models-rest';
  
-@Module({})
+@Module({
+  imports:[
+    <<Model pascal>>RestModule,
+    <<Model pascal>>ModelModule
+  ]
+})
 export class <<Model pascal>>Module extends ModuleOverride {
   static dependencies: Array<typeof ModuleOverride> = [
     <<Model pascal>>RestModule,

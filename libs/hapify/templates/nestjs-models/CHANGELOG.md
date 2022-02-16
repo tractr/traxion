@@ -2,6 +2,23 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.36.3](https://github.com/tractr/stack/compare/v1.36.2...v1.36.3) (2022-02-11)
+
+
+
+## [1.36.2](https://github.com/tractr/stack/compare/v1.36.1...v1.36.2) (2022-02-10)
+
+
+### Bug Fixes
+
+* add modules to imports properties when using @Module ([#385](https://github.com/tractr/stack/issues/385)) ([72b381b](https://github.com/tractr/stack/commit/72b381b6a5cb5b985d11fb4f1bc260351243ba99))
+
+
+
+## [1.36.1](https://github.com/tractr/stack/compare/v1.36.0...v1.36.1) (2022-02-09)
+
+
+
 # [1.36.0](https://github.com/tractr/stack/compare/v1.35.0...v1.36.0) (2022-02-08)
 
 
