@@ -1,6 +1,7 @@
 import {
   formatFiles,
   readProjectConfiguration,
+  TargetConfiguration,
   Tree,
   updateProjectConfiguration,
 } from '@nrwl/devkit';
@@ -42,14 +43,48 @@ export default async function adminGenerator(
   );
   const applicationRoot = applicationConfiguration.root;
 
+  const serve: TargetConfiguration | undefined =
+    applicationConfiguration.targets?.serve;
+  const build: TargetConfiguration | undefined =
+    applicationConfiguration.targets?.build;
   // Update application configuration to add proxy config
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  applicationConfiguration.targets!.serve.options.proxyConfig = `${applicationRoot}/proxy.conf.js`;
-  updateProjectConfiguration(
-    tree,
-    normalizedOptions.name,
-    applicationConfiguration,
-  );
+  updateProjectConfiguration(tree, normalizedOptions.name, {
+    ...applicationConfiguration,
+    targets: {
+      ...applicationConfiguration.targets,
+      ...(serve && {
+        serve: {
+          ...serve,
+          options: {
+            ...serve.options,
+            proxyConfig: `${applicationRoot}/proxy.conf.js`,
+          },
+        },
+      }),
+      ...(build && {
+        build: {
+          ...build,
+          options: {
+            ...build.options,
+            webpackConfig: `${applicationRoot}/webpack.config.cjs`,
+          },
+        },
+      }),
+      preserve: {
+        configurations: {
+          development: {},
+          production: {},
+        },
+        executor: '@nrwl/workspace:run-commands',
+        options: {
+          commands: [
+            'node ./node_modules/.bin/tractr-angular-config-generate ./apps/admin/src/assets/app-config.json',
+          ],
+          parallel: false,
+        },
+      },
+    },
+  });
 
   // Remove application useless files
   cleanApplication(tree, applicationRoot);

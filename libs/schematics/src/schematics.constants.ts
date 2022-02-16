@@ -1,3 +1,5 @@
+import { TargetConfiguration } from '@nrwl/devkit';
+
 import { AvailableTractrTemplates } from './generators/hapify-library/schema';
 import { TargetGenerateGeneratorSchema } from './generators/target-generate/schema';
 
@@ -44,16 +46,15 @@ export const DEFAULT_LIBRARY_TYPE: Record<AvailableTractrTemplates, string> = {
 };
 
 export const DEFAULT_TARGETS_OPTIONS: Partial<
-  Record<
-    AvailableTractrTemplates,
-    Record<'generate', Partial<TargetGenerateGeneratorSchema>>
-  >
+  Record<AvailableTractrTemplates, Record<string, Partial<TargetConfiguration>>>
 > = {
   dbml: {
     generate: {
-      format: false,
-      moveGeneratedFiles: false,
-      updateImportPath: false,
+      options: {
+        format: false,
+        moveGeneratedFiles: false,
+        updateImportPath: false,
+      },
     },
   },
 };

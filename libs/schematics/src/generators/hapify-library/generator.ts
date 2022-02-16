@@ -1,18 +1,15 @@
 import path = require('path');
 
 import { libraryGenerator as angularLibraryGenerator } from '@nrwl/angular/generators';
-import {
-  formatFiles,
-  generateFiles,
-  installPackagesTask,
-  Tree,
-  updateJson,
-} from '@nrwl/devkit';
+import { formatFiles, generateFiles, Tree } from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
 import { libraryGenerator as nestLibraryGenerator } from '@nrwl/nest';
 import { libraryGenerator as reactLibraryGenerator } from '@nrwl/react';
+import * as deepmerge from 'deepmerge';
 
 import { addPackageToPackageJson } from '../..';
+import { readTargetConfiguration } from '../../helpers/read-target-configuration';
+import { updateTargetConfiguration } from '../../helpers/update-target-configuration';
 import addGenerateTarget from '../target-generate/generator';
 import {
   cleanAngularLibrary,
@@ -20,6 +17,7 @@ import {
   createSecondaryEntrypoints,
   normalizeOptions,
 } from './helpers';
+import { cleanReactLibrary } from './helpers/clean-react-library.helper';
 import {
   HapifyLibraryGeneratorOptionsWithExtra,
   NormalizedOptions,
@@ -62,15 +60,8 @@ export default async function hapifyLibraryGenerator(
   const currentVersion = (await import('../../../package.json')).version;
 
   // Default values for library generator options
-  const {
-    name,
-    directory,
-    extra,
-    type,
-    importPath,
-    projectName,
-    defaultTargetGenerateOptions,
-  } = normalizedOptions;
+  const { name, directory, extra, type, targets, importPath, projectName } =
+    normalizedOptions;
   const libraryGeneratorDefaultOptions = { buildable: true };
   const libraryGeneratorOptions = { name, directory, importPath, ...extra };
 
@@ -100,6 +91,7 @@ export default async function hapifyLibraryGenerator(
         linter: Linter.EsLint,
         ...libraryGeneratorOptions,
       });
+      cleanReactLibrary(tree, normalizedOptions);
       break;
     default:
   }
@@ -113,7 +105,6 @@ export default async function hapifyLibraryGenerator(
   await addGenerateTarget(tree, {
     project: projectName,
     ...extra,
-    ...defaultTargetGenerateOptions,
   });
 
   await addPackageToPackageJson(
@@ -122,6 +113,20 @@ export default async function hapifyLibraryGenerator(
       (packageName) => ({ packageName, version: currentVersion }),
     ),
   );
+
+  Object.keys(targets).forEach((target) => {
+    const targetConfiguration = readTargetConfiguration(
+      tree,
+      projectName,
+      target,
+    );
+    updateTargetConfiguration(
+      tree,
+      projectName,
+      target,
+      deepmerge(targetConfiguration, targets[target]),
+    );
+  });
 
   await formatFiles(tree);
 }

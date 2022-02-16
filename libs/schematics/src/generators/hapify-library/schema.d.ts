@@ -1,3 +1,5 @@
+import { TargetConfiguration } from '@nrwl/devkit';
+
 export type AvailableTractrTemplates =
   | 'angular-rext-client'
   | 'casl'
@@ -40,6 +42,6 @@ export interface NormalizedOptions extends HapifyLibraryGeneratorOptions {
   templates: string[];
   hapifyImportReplacements: string[];
   secondaryEntrypoints: string[];
-  defaultTargetGenerateOptions: Record<string, unknown>;
-  extra: Record<Record, unknown>;
+  targets: Record<string, Partial<TargetConfiguration>>;
+  extra: Record<string, unknown>;
 }

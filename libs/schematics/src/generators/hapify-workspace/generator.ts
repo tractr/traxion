@@ -165,5 +165,7 @@ export default async function hapifyWorkspace(
     },
   }));
 
+  tree.delete('packages');
+
   await formatFiles(tree);
 }

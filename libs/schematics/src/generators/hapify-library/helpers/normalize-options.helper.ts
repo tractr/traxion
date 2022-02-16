@@ -4,8 +4,10 @@ import {
   getWorkspaceLayout,
   joinPathFragments,
   names,
+  TargetConfiguration,
   Tree,
 } from '@nrwl/devkit';
+import * as deepmerge from 'deepmerge';
 
 import {
   DEFAULT_IMPORT_REPLACEMENTS,
@@ -82,13 +84,12 @@ export function normalizeOptions(
     ),
   ];
 
-  const defaultTargetGenerateOptions = hapifyTemplates.reduce(
-    (acc, template) => {
-      if (!DEFAULT_TARGETS_OPTIONS[template]?.generate) return acc;
-      return { ...acc, ...DEFAULT_TARGETS_OPTIONS[template]?.generate };
-    },
-    {},
-  );
+  const targets = hapifyTemplates.reduce((acc, template) => {
+    const partialTargets = DEFAULT_TARGETS_OPTIONS[template];
+    if (!partialTargets) return acc;
+
+    return deepmerge(acc, partialTargets);
+  }, {} as Record<string, Partial<TargetConfiguration>>);
 
   // Process import path if the option is not provided
   const importPath = `${npmScope}/${directory ? `${directory}-` : ''}${name}`;
@@ -113,7 +114,7 @@ export function normalizeOptions(
     hapifyImportReplacements,
     templates,
     secondaryEntrypoints,
-    defaultTargetGenerateOptions,
+    targets,
     extra,
   };
 }
