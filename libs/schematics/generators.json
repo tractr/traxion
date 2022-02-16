@@ -31,6 +31,11 @@
       "factory": "./src/generators/prettier-config/generator",
       "schema": "./src/generators/prettier-config/schema.json"
     },
+    "prisma-library": {
+      "description": "prisma-library generator",
+      "factory": "./src/generators/prisma-library/generator",
+      "schema": "./src/generators/prisma-library/schema.json"
+    },
     "release": {
       "description": "release generator",
       "factory": "./src/generators/release/generator",
