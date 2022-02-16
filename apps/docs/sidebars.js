@@ -19,7 +19,21 @@ module.exports = {
       type: 'category',
       label: 'How to',
       items: [
-        'how-to/initialization',
+        {
+          type: 'category',
+          label: 'Initialization',
+          items: [
+            'how-to/initialization/introduction',
+            'how-to/initialization/nx-workspace',
+            'how-to/initialization/hapify',
+            'how-to/initialization/eslint-prettier',
+            'how-to/initialization/docusaurus',
+            'how-to/initialization/prisma',
+            'how-to/initialization/generated-libs',
+            'how-to/initialization/api-application',
+            'how-to/initialization/dev-tools-and-ci',
+          ],
+        },
         'how-to/data-models',
         'how-to/database',
         'how-to/angular',
