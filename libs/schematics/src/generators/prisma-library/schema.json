@@ -1,0 +1,26 @@
+{
+  "$id": "PrismaLibrary",
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "properties": {
+    "directory": {
+      "alias": "d",
+      "description": "A directory where the project is placed",
+      "type": "string"
+    },
+    "name": {
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "description": "Library name",
+      "type": "string",
+      "x-prompt": "What name would you like to use?"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "title": "",
+  "type": "object"
+}
