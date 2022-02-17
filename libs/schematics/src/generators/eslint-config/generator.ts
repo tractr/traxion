@@ -29,6 +29,7 @@ export default async function eslintGenerator(tree: Tree) {
 
   // Add settings to the eslintrc.json files
   const eslintrc = tree.read('./.eslintrc.json')?.toString();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let eslintrcJson: Record<string, any> = {};
 
   if (!eslintrc) {

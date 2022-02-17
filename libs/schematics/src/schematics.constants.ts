@@ -1,7 +1,6 @@
 import { TargetConfiguration } from '@nrwl/devkit';
 
 import { AvailableTractrTemplates } from './generators/hapify-library/schema';
-import { TargetGenerateGeneratorSchema } from './generators/target-generate/schema';
 
 export const DEFAULT_IMPORT_REPLACEMENTS = {
   'angular-rext-client': ['rext-client'],

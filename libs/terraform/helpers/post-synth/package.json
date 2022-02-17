@@ -8,9 +8,6 @@
   "bin": {
     "terraform-post-synth": "./src/post-synth.js"
   },
-  "peerDependencies": {
-    "pkg-dir": "^5.0.0"
-  },
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"

@@ -18,6 +18,7 @@ import { Linter } from '@nrwl/linter';
 import { applicationGenerator as nestjsApplicationGenerator } from '@nrwl/nest';
 import { v4 as uuid4 } from 'uuid';
 
+import { addPackageJson } from '../../helpers';
 import { DEFAULT_LIBRARY_TYPE } from '../../schematics.constants';
 import adminGenerator from '../admin-app/generator';
 import eslintGenerator from '../eslint-config/generator';
@@ -28,10 +29,13 @@ import {
   AvailableTractrTemplates,
 } from '../hapify-library/schema';
 import prettierGenerator from '../prettier-config/generator';
+import prismaLibraryGenerator from '../prisma-library/generator';
 import { addNpmrc } from './helpers';
 import { HapifyWorkspaceGeneratorSchema } from './schema';
 
 interface NormalizedSchema extends HapifyWorkspaceGeneratorSchema {
+  npmScope: string;
+  appsDir: string;
   libsDir: string;
   uuid4: string;
   workspaceName: string;
@@ -42,13 +46,15 @@ function normalizeOptions(
   tree: Tree,
   options: HapifyWorkspaceGeneratorSchema,
 ): NormalizedSchema {
-  const { libsDir } = getWorkspaceLayout(tree);
+  const { libsDir, appsDir, npmScope } = getWorkspaceLayout(tree);
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
 
   return {
     ...options,
+    npmScope,
+    appsDir,
     libsDir,
     workspaceName: options.name,
     parsedTags,
@@ -93,6 +99,7 @@ export default async function hapifyWorkspace(
   });
 
   const normalizedOptions = normalizeOptions(tree, options);
+  const { appsDir, npmScope } = normalizedOptions;
 
   log.info('Initializing linter');
   await eslintGenerator(tree);
@@ -109,6 +116,7 @@ export default async function hapifyWorkspace(
     linter: Linter.EsLint,
     standaloneConfig: true,
   });
+  addPackageJson(tree, `${appsDir}/api/package.json`, `@${npmScope}/api`);
 
   log.info('Initializing angular application');
   await angularApplicationGenerator(tree, {
@@ -121,6 +129,7 @@ export default async function hapifyWorkspace(
     style: 'less',
     e2eTestRunner: E2eTestRunner.None,
   });
+  addPackageJson(tree, `${appsDir}/pwa/package.json`, `@${npmScope}/pwa`);
 
   log.info('Initializing admin application');
   await adminGenerator(tree, {
@@ -131,18 +140,24 @@ export default async function hapifyWorkspace(
 
   log.info('Initializing hapify libraries');
   for (const [libraryName, type] of Object.entries(DEFAULT_LIBRARY_TYPE)) {
-    // Then we call the admin app generator
-    await hapifyLibraryGenerator(tree, {
-      useSecondaryEndpoint: true,
-      addSecondaryEndpoint: [],
-      hapifyAdditionalTemplates: '',
-      hapifyModelsJson: 'hapify-models.json',
-      hapifyTemplates: [libraryName as AvailableTractrTemplates],
-      type: type as AvailableLibraryType,
-      hapifyUseImportReplacements: true,
-      name: libraryName,
-      directory: 'generated',
-    });
+    if (libraryName === 'prisma') {
+      await prismaLibraryGenerator(tree, {
+        name: libraryName,
+        directory: 'generated',
+      });
+    } else {
+      await hapifyLibraryGenerator(tree, {
+        useSecondaryEndpoint: true,
+        addSecondaryEndpoint: [],
+        hapifyAdditionalTemplates: '',
+        hapifyModelsJson: 'hapify-models.json',
+        hapifyTemplates: [libraryName as AvailableTractrTemplates],
+        type: type as AvailableLibraryType,
+        hapifyUseImportReplacements: true,
+        name: libraryName,
+        directory: 'generated',
+      });
+    }
   }
 
   log.info('Add files to the workspace');

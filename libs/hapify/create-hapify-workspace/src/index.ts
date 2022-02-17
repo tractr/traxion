@@ -86,13 +86,6 @@ export async function createHapifyWorkspace(
   // Installing the missing dependencies
   await $`npm install --save-dev ${npmPackages}`;
 
-  // TODO DO NOT COMMIT THIS LINE
-  cd('../../stack');
-  await $`nx build schematics`;
-  cd('../test/test1');
-  await $`npm i --save-dev node-fetch@2`;
-  await $`DEBUG=local-install node ../../stack/tools/local-install.mjs --projects schematics`;
-
   await $`nx g @tractr/schematics:hapify-workspace --name test1 --verbose`;
 
   await $`npm install --force`;

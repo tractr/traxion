@@ -126,7 +126,7 @@
     "supertest": "^6.1.4",
     "swagger-ui-express": "^4.1.6",
     "ts-essentials": "^7.0.2",
-    "tslib": "^2.3.0",
+    "tslib": "^2.3.1",
     "universal-rxjs-ajax": "^2.0.4",
     "uuid": "^8.3.2",
     "xhr2": "^0.2.1",

@@ -1,4 +1,4 @@
-import { exec, ExecException } from 'child_process';
+import { exec } from 'child_process';
 import { join } from 'path';
 import { promisify } from 'util';
 
@@ -69,7 +69,7 @@ export default async function runExecutor(
     // Check if the project directory exists
     try {
       await pathExists(join(projectDirectory));
-    } catch (e) {
+    } catch {
       throwError(
         `The path "${projectDirectory}" seems to be not a valid project directory`,
       );
@@ -146,8 +146,11 @@ export default async function runExecutor(
       if (stderr) throwError(stderr);
       if (isVerbose) logger.debug(stdout);
     } catch (e) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if (e instanceof Error) throwError(`${e.message}\n${(e as any).stdout}`);
+      if (e instanceof Error)
+        throwError(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          `${e.message}${(e as any).stdout ? `\n${(e as any).stdout}` : ''}`,
+        );
       throw e;
     }
 
@@ -244,11 +247,6 @@ export default async function runExecutor(
     if (format && entrypoints.length > 0) {
       if (isVerbose)
         logger.debug(`Formating the generated files:`, entrypoints.join(','));
-      console.log(
-        `npx prettier --no-error-on-unmatched-pattern '${projectDirectory}/${
-          entrypoints.length > 1 ? `{${entrypoints.join(',')}}` : entrypoints[0]
-        }/${outputGeneratedPath}/**/*.ts' --write`,
-      );
       await execAsync(
         `npx prettier --no-error-on-unmatched-pattern '${projectDirectory}/${
           entrypoints.length > 1 ? `{${entrypoints.join(',')}}` : entrypoints[0]

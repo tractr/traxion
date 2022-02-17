@@ -126,7 +126,7 @@ describe('Generate executor:generate', () => {
   it('should execute all the action when the default options are used', async () => {
     const output = await executor(defaultOptions, defaultContext);
 
-    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(pathExists).toHaveBeenCalledTimes(4);
     expect(pathExists).toHaveBeenNthCalledWith(1, '/root/libs/test/src');
     expect(pathExists).toHaveBeenNthCalledWith(2, '/root/libs/test/mock');
     expect(pathExists).toHaveBeenNthCalledWith(3, '/root/libs/test');
@@ -191,7 +191,7 @@ describe('Generate executor:generate', () => {
 
     expect(execSpy).toHaveBeenNthCalledWith(
       2,
-      `npx prettier '/root/libs/test/{src,mock}/generated/**/*.ts' --write`,
+      `npx prettier --no-error-on-unmatched-pattern '/root/libs/test/{src,mock}/generated/**/*.ts' --write`,
       expect.any(Function),
     );
     expect(output).toEqual({ success: true });
@@ -211,28 +211,37 @@ describe('Generate executor:generate', () => {
       isVerbose: true,
     });
 
-    expect(loggerSpy).toHaveBeenCalledTimes(8);
+    expect(loggerSpy).toHaveBeenCalledTimes(11);
     expect(loggerSpy).toHaveBeenNthCalledWith(
       1,
       'Check if /root/libs/test exists',
     );
-    expect(loggerSpy).toHaveBeenNthCalledWith(2, 'Cleaning files');
+    expect(loggerSpy).toHaveBeenNthCalledWith(
+      2,
+      'Check if /root/libs/test/package.json exists',
+    );
     expect(loggerSpy).toHaveBeenNthCalledWith(
       3,
-      'Generating the configuration files',
+      'Check if the package.json has a name property',
     );
-    expect(loggerSpy).toHaveBeenNthCalledWith(4, 'Generating the hapify files');
-    expect(loggerSpy).toHaveBeenNthCalledWith(5, 'Hapify generation success');
+    expect(loggerSpy).toHaveBeenNthCalledWith(4, 'Get hapify configuration');
+    expect(loggerSpy).toHaveBeenNthCalledWith(5, 'Cleaning files');
     expect(loggerSpy).toHaveBeenNthCalledWith(
       6,
+      'Generating the configuration files',
+    );
+    expect(loggerSpy).toHaveBeenNthCalledWith(7, 'Generating the hapify files');
+    expect(loggerSpy).toHaveBeenNthCalledWith(8, 'Hapify generation success');
+    expect(loggerSpy).toHaveBeenNthCalledWith(
+      9,
       'Moving the generated files from generated',
     );
     expect(loggerSpy).toHaveBeenNthCalledWith(
-      7,
+      10,
       'Updating the templates import path',
     );
     expect(loggerSpy).toHaveBeenNthCalledWith(
-      8,
+      11,
       'Formating the generated files:',
       'src,mock',
     );
@@ -242,7 +251,11 @@ describe('Generate executor:generate', () => {
 
   it('should fail the execution early if the dest folder doest not exists', async () => {
     pathExists.mockReset();
-    pathExists.mockReturnValueOnce(Promise.resolve(false));
+    pathExists.mockResolvedValueOnce(false);
+    pathExists.mockResolvedValueOnce(false);
+    pathExists.mockImplementationOnce(() => {
+      throw new Error();
+    });
     let output;
 
     try {
@@ -254,8 +267,6 @@ describe('Generate executor:generate', () => {
     }
 
     expect(pathExists).toHaveBeenCalledTimes(3);
-    expect(pathExists).toHaveBeenCalledWith('/root/libs/test');
-
     expect(remove).toHaveBeenCalledTimes(0);
     expect(getHapifyOptions).toHaveBeenCalledTimes(0);
     expect(execSpy).toHaveBeenCalledTimes(0);
@@ -276,7 +287,7 @@ describe('Generate executor:generate', () => {
 
     const output = await executor(defaultOptions, defaultContext);
 
-    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(pathExists).toHaveBeenCalledTimes(4);
     expect(remove).toHaveBeenCalledTimes(5);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(2);
@@ -296,7 +307,7 @@ describe('Generate executor:generate', () => {
 
     const output = await executor(defaultOptions, defaultContext);
 
-    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(pathExists).toHaveBeenCalledTimes(4);
     expect(remove).toHaveBeenCalledTimes(3);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(1);
@@ -311,7 +322,7 @@ describe('Generate executor:generate', () => {
       defaultContext,
     );
 
-    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(pathExists).toHaveBeenCalledTimes(4);
     expect(remove).toHaveBeenCalledTimes(4);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(2);
@@ -326,7 +337,7 @@ describe('Generate executor:generate', () => {
       defaultContext,
     );
 
-    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(pathExists).toHaveBeenCalledTimes(4);
     expect(remove).toHaveBeenCalledTimes(7);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(2);
@@ -341,7 +352,7 @@ describe('Generate executor:generate', () => {
       defaultContext,
     );
 
-    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(pathExists).toHaveBeenCalledTimes(4);
     expect(remove).toHaveBeenCalledTimes(7);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(1);
@@ -379,14 +390,14 @@ describe('Generate executor:generate', () => {
 
     const output = await executor(defaultOptions, defaultContext);
 
-    expect(pathExists).toHaveBeenCalledTimes(2);
+    expect(pathExists).toHaveBeenCalledTimes(4);
     expect(remove).toHaveBeenCalledTimes(0);
     expect(getHapifyOptions).toHaveBeenCalledTimes(0);
     expect(execSpy).toHaveBeenCalledTimes(0);
     expect(copy).toHaveBeenCalledTimes(0);
     expect(processImportReplacements).toHaveBeenCalledTimes(0);
     expect(output).toEqual(
-      new Error('could not found the package.json file in /root/libs/test'),
+      new Error("package json doesn't have any name property"),
     );
   });
 
@@ -396,7 +407,7 @@ describe('Generate executor:generate', () => {
 
     const output = await executor(defaultOptions, defaultContext);
 
-    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(pathExists).toHaveBeenCalledTimes(4);
     expect(remove).toHaveBeenCalledTimes(0);
     expect(getHapifyOptions).toHaveBeenCalledTimes(0);
     expect(execSpy).toHaveBeenCalledTimes(0);
@@ -415,7 +426,7 @@ describe('Generate executor:generate', () => {
 
     const output = await executor(defaultOptions, defaultContext);
 
-    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(pathExists).toHaveBeenCalledTimes(4);
     expect(remove).toHaveBeenCalledTimes(3);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(2);
@@ -430,7 +441,7 @@ describe('Generate executor:generate', () => {
 
     const output = await executor(defaultOptions, defaultContext);
 
-    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(pathExists).toHaveBeenCalledTimes(4);
     expect(remove).toHaveBeenCalledTimes(7);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(2);
@@ -446,7 +457,7 @@ describe('Generate executor:generate', () => {
 
     const output = await executor(defaultOptions, defaultContext);
 
-    expect(pathExists).toHaveBeenCalledTimes(3);
+    expect(pathExists).toHaveBeenCalledTimes(4);
     expect(remove).toHaveBeenCalledTimes(4);
     expect(getHapifyOptions).toHaveBeenCalledTimes(1);
     expect(execSpy).toHaveBeenCalledTimes(2);

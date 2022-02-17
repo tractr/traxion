@@ -84,7 +84,7 @@ export function normalizeOptions(
   }, {} as Record<string, Partial<TargetConfiguration>>);
 
   // Process import path if the option is not provided
-  const importPath = `${npmScope}/${directory ? `${directory}-` : ''}${name}`;
+  const importPath = `@${npmScope}/${directory ? `${directory}-` : ''}${name}`;
 
   return {
     name,
