@@ -27,27 +27,49 @@ This will generate a new library in folder `libs/prisma`.
 Then you should install the packages containing the required Hapify templates:
 
 ```shell
-npm i -D @tractr/hapify-templates-prisma
+npm i -D -f @tractr/hapify-templates-prisma
 ```
 
 Add the Hapify config to the Prisma library, in `libs/prisma/.hapifyrc.js`.
 
 ## Add the generate command 
 
-Edit `workspace.json` to add the `generate` target to the prisma configuration:
+Edit `libs/prisma/project.json` file to add the `generate` target to the prisma configuration (under `targets`).:
 
-```json
-
+```json lines
+"generate": {
+  "executor": "@nrwl/workspace:run-commands",
+  "options": {
+    "commands": [
+      "npx rimraf generated",
+      "node ../../node_modules/.bin/hpf-generate-config",
+      {
+        "command": "npx hpf generate",
+        "forwardAllArgs": false
+      },
+      {
+        "command": "npx prisma-merge --baseFile=prisma/schemas/base.prisma --schemaFilePatterns=prisma/**/*.prisma --outputFile=prisma/schema.prisma --excludedFilePattern=prisma/**/schema.prisma",
+        "forwardAllArgs": false
+      },
+      {
+        "command": "npx prisma format",
+        "forwardAllArgs": false
+      },
+      {
+        "command": "npx prisma generate",
+        "forwardAllArgs": false
+      }
+    ],
+    "cwd": "libs/prisma",
+    "parallel": false
+  }
+},
 ```
 
-In `package.json`, add the `generate` script:
+In `package.json`, add the `generate` script (under `scripts`):
 
-```json
-{
-  "scripts": {
-    "generate": "npx nx run-many --target generate --all"
-  }
-}
+```json lines
+"generate": "npx nx run-many --target generate --all"
 ```
 
 ## Create some models with Hapify
@@ -65,7 +87,7 @@ Create a file named `hapify-models.json` at the project root with contents:
 Create some models using the Hapify GUI: 
 
 ```shell
-hpf sserve
+hpf serve
 ```
 
 ## Create schema for prisma
@@ -80,6 +102,16 @@ npm run generate
 ```
 
 It should generate a file `libs/prisma/prisma/schema.prisma` in the Prisma library.
+
+## Ignore paths
+
+Add these lines to the `.gitignore` file:
+
+```ignore
+**/prisma/dev.db
+**/prisma/schemas/generated.prisma
+**/prisma/schema.prisma
+```
 
 ## Cleanup
 

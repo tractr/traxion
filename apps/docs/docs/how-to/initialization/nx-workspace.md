@@ -22,7 +22,7 @@ Remove references to `api-interfaces` in folder `apps`. Usually in following fil
 
 - `apps/api/src/app/app.controller.ts`
 - `apps/api/src/app/app.service.ts`
-- `apps/front/src/app/app.component.ts`
+- `apps/<appName>/src/app/app.component.ts`
 
 Then run the following command:
 
@@ -30,11 +30,33 @@ Then run the following command:
 nx generate remove api-interfaces
 ```
 
+:::tip
+
+Alternatively, you can remove the generated lib `api-interfaces` without dealing with the references to it: `nx generate remove --forceRemove api-interfaces`
+
+:::
+
 ### Ignore generated paths
 
-Override the default `.gitignore` with the [`.gitignore` from Traxion](https://github.com/tractr/stack/blob/main/.gitignore).
-Run the following command:
+Add these lines to the `.gitignore` file:
 
-```shell
-curl -o .gitignore https://raw.githubusercontent.com/tractr/stack/main/.gitignore
+```ignore
+# Environment file
+.env
+**/.env
+
+# Package lock from npm i
+yarn.lock
+**/package-lock.json
+
+# Generated files
+.gen
+**/generated
+!libs/generated
+
+# Local ignore
+*.local-ignore*
+
+# Apps config
+apps/**/src/assets/app-config.json
 ```

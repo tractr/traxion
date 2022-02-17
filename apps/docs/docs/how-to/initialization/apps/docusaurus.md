@@ -1,10 +1,10 @@
 ---
 id: docusaurus
-title: New project - Docusaurus
+title: New application - Docusaurus
 sidebar_label: Docusaurus
 ---
 
-## Add Docusaurus
+## Create the documentation with Docusaurus
 
 Docusaurus is a static documentation generator from markdown files.
 
@@ -30,6 +30,8 @@ Run the following command to start the development server:
 nx serve docs
 ```
 
-### Troubleshooting
+:::caution Troubleshooting
 
 If an error occurs, it may be a webpack problem. Try to install `npm i -D webpack@5`.
+
+:::

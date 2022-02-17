@@ -4,6 +4,12 @@ title: Release
 sidebar_label: Release
 ---
 
+:::important
+
+You need to [install the schamatics packages](./how-to) before you can use this schematic.
+
+:::
+
 ## Release
 
 Add release configuration to a NX project.

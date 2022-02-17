@@ -18,3 +18,9 @@ After that, you will be able to use the schematics with the `nx` cli:
 ```bash
 nx g @tractr/schematics:<schematicName> ...
 ```
+
+:::caution
+
+  Some schematics add dependencies in `package.json` but don't run `npm install` for you. You will need to run `npm install --force` yourself.
+  
+:::

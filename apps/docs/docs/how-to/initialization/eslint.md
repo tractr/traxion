@@ -30,18 +30,27 @@ npm i -D -f eslint-config-airbnb-base \
 
 ### `.eslintrc.json`
 
-Override the default `.eslintrc.json` with the [`.eslintrc.json` from Traxion](https://github.com/tractr/stack/blob/main/.eslintrc.json).
-Run the following command:
+In the `.eslintrc.json` file, add the rule `import/no-unresolved` (after `@nrwl/nx/enforce-module-boundaries`):
 
-```shell
-curl -o .eslintrc.json https://raw.githubusercontent.com/tractr/stack/main/.eslintrc.json
+```json lines
+"import/no-unresolved": [
+  "error",
+  {
+    "ignore": ["^@(tractr|generated|traxion)/"]
+  }
+]
+```
+
+then, add the setting `import/extensions` (under `settings`):
+
+```json lines
+"import/internal-regex": "^@(generated)/"
 ```
 
 ### `.eslintignore`
 
-Override the default `.eslintignore` (if any) with the [`.eslintignore` from Traxion](https://github.com/tractr/stack/blob/main/.eslintignore).
-Run the following command:
+Create a `.eslintignore` file with the following content:
 
-```shell
-curl -o .eslintignore https://raw.githubusercontent.com/tractr/stack/main/.eslintignore
+```ignore
+generated
 ```

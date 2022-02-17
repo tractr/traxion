@@ -22,19 +22,28 @@ npm i -D -f prettier-plugin-packagejson prettier-plugin-sort-json
 
 ### `.prettierrc.js`
 
-Replace the `.prettierrc` with the [`.prettierrc.js` from Traxion](https://github.com/tractr/stack/blob/main/.prettierrc.js).
-Run the following command:
+Remove the default `.prettierrc`:
 
 ```shell
 rm .prettierrc
-curl -o .prettierrc.js https://raw.githubusercontent.com/tractr/stack/main/.prettierrc.js
+```
+
+Create a new `.prettierrc.js` with the following content:
+
+```javascript
+const prettierConfig = require('@tractr/prettier-config');
+
+module.exports = {
+  ...prettierConfig,
+};
 ```
 
 ### `.prettierignore`
 
-Override the default `.prettierignore` with the [`.prettierignore` from Traxion](https://github.com/tractr/stack/blob/main/.prettierignore).
-Run the following command:
+Add the following lines to `.prettierignore`:
 
-```shell
-curl -o .prettierignore https://raw.githubusercontent.com/tractr/stack/main/.prettierignore
+```ignore
+**/*.md
+*.local-ignore*
+**/hapify.json
 ```

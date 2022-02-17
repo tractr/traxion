@@ -4,6 +4,12 @@ title: Prettier
 sidebar_label: Prettier
 ---
 
+:::important
+
+You need to [install the schamatics packages](./how-to) before you can use this schematic.
+
+:::
+
 ## Prettier config
 
 Add prettier and its configuration to a NX project.

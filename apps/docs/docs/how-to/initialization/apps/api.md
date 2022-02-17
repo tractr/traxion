@@ -1,10 +1,10 @@
 ---
-id: api-application
-title: New project - API application
-sidebar_label: API Application
+id: api
+title: New application - API
+sidebar_label: API
 ---
 
-## Initialise the `api` application
+## Create the API application
 
 NOTES: for now casl dependencies are required to init the `api` but this should
 be change. the next dependencies must be installed:

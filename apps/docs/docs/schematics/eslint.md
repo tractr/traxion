@@ -4,6 +4,12 @@ title: ESLint
 sidebar_label: ESLint
 ---
 
+:::important
+
+You need to [install the schamatics packages](./how-to) before you can use this schematic.
+
+:::
+
 ## Eslint config
 
 Add ESLint and its configuration to a NX project.
