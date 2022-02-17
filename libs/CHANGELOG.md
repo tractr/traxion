@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.37.1](https://github.com/tractr/stack/compare/v1.37.0...v1.37.1) (2022-02-17)
+
+
+### Bug Fixes
+
+* update type for nests-common password middleware ([#389](https://github.com/tractr/stack/issues/389)) ([c9a4237](https://github.com/tractr/stack/commit/c9a42374d825815b0ad470c05ab3c3425aca3b03))
+
+
+
+## [1.37.1](https://github.com/tractr/stack/compare/v1.37.0...v1.37.1) (2022-02-17)
+
+
+### Bug Fixes
+
+* update type for nests-common password middleware ([#389](https://github.com/tractr/stack/issues/389)) ([c9a4237](https://github.com/tractr/stack/commit/c9a42374d825815b0ad470c05ab3c3425aca3b03))
+
+
+
 # [1.37.0](https://github.com/tractr/stack/compare/v1.36.3...v1.37.0) (2022-02-16)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@tractr/generated-rest-dtos",
-  "version": "1.37.0",
+  "version": "1.37.1",
   "dependencies": {
     "tslib": "^2.3.0"
   },
