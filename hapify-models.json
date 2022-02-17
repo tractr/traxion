@@ -1,163 +1,72 @@
 {
-  "version": "3",
-  "name": "New project",
   "models": [
     {
-      "id": "6894a782-2e83-cd6a-52cc-f62967165636",
-      "name": "BlogPost",
       "accesses": {
-        "count": "owner",
+        "count": "guest",
         "create": "auth",
-        "read": "auth",
+        "read": "guest",
         "remove": "owner",
-        "search": "owner",
+        "search": "guest",
         "update": "owner"
       },
       "fields": [
         {
           "name": "id",
-          "type": "string",
-          "properties": [
-            "primary",
-            "searchable",
-            "sortable",
-            "internal"
-          ]
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
         },
         {
           "name": "createdAt",
-          "type": "datetime",
-          "properties": [
-            "searchable",
-            "sortable",
-            "internal"
-          ]
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
         },
         {
           "name": "title",
-          "type": "string",
-          "properties": [
-            "label",
-            "searchable",
-            "sortable"
-          ]
+          "properties": ["label", "searchable", "sortable"],
+          "type": "string"
         },
         {
           "name": "content",
-          "type": "string",
+          "properties": ["searchable", "sortable"],
           "subtype": "text",
-          "properties": [
-            "searchable",
-            "sortable"
-          ]
+          "type": "string"
         },
         {
           "name": "status",
+          "properties": ["searchable", "sortable"],
           "type": "enum",
-          "value": [
-            "published",
-            "draft"
-          ],
-          "properties": [
-            "searchable",
-            "sortable"
-          ]
+          "value": ["published", "draft"]
         },
         {
-          "name": "author",
-          "type": "entity",
-          "subtype": "oneMany",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
-          "properties": [
-            "searchable",
-            "sortable",
-            "ownership"
-          ],
           "meta": {
             "backRelation": "blogPosts",
             "ownerStringPath": "user.id"
-          }
+          },
+          "name": "author",
+          "properties": ["searchable", "sortable", "ownership"],
+          "subtype": "oneMany",
+          "type": "entity",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
         },
         {
-          "name": "tags",
-          "type": "entity",
-          "subtype": "manyMany",
-          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
-          "properties": [
-            "nullable",
-            "multiple",
-            "searchable",
-            "sortable"
-          ],
           "meta": {
             "backRelation": "questions"
-          }
-        }
-      ]
-    },
-    {
-      "id": "7c1c844a-308d-a7c9-9e36-d9a58c4fd845",
-      "name": "Profil",
-      "accesses": {
-        "create": "guest",
-        "read": "guest",
-        "update": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "count": "guest"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "type": "string",
-          "properties": [
-            "primary",
-            "searchable",
-            "sortable",
-            "internal"
-          ]
-        },
-        {
-          "name": "user",
+          },
+          "name": "tags",
+          "properties": ["nullable", "multiple", "searchable", "sortable"],
+          "subtype": "manyMany",
           "type": "entity",
-          "subtype": "oneOne",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
-          "properties": [
-            "unique",
-            "searchable",
-            "sortable",
-            "ownership"
-          ],
-          "meta": {
-            "backRelation": "profil",
-            "ownerStringPath": "user.id"
-          }
-        },
-        {
-          "name": "phone",
-          "type": "string",
-          "properties": [
-            "searchable",
-            "sortable"
-          ]
-        },
-        {
-          "name": "address",
-          "type": "string",
-          "properties": [
-            "searchable",
-            "sortable"
-          ]
+          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
         }
-      ]
+      ],
+      "id": "6894a782-2e83-cd6a-52cc-f62967165636",
+      "name": "BlogPost"
     },
     {
-      "id": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
-      "name": "Tag",
       "accesses": {
         "count": "owner",
         "create": "auth",
-        "read": "guest",
+        "read": "owner",
         "remove": "owner",
         "search": "owner",
         "update": "owner"
@@ -165,40 +74,67 @@
       "fields": [
         {
           "name": "id",
-          "type": "string",
-          "properties": [
-            "primary",
-            "searchable",
-            "sortable",
-            "internal"
-          ]
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "meta": {
+            "backRelation": "profil",
+            "ownerStringPath": "user.id"
+          },
+          "name": "user",
+          "properties": ["unique", "searchable", "sortable", "ownership"],
+          "subtype": "oneOne",
+          "type": "entity",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
+        },
+        {
+          "name": "phone",
+          "properties": ["searchable", "sortable"],
+          "type": "string"
+        },
+        {
+          "name": "address",
+          "properties": ["searchable", "sortable"],
+          "type": "string"
+        }
+      ],
+      "id": "7c1c844a-308d-a7c9-9e36-d9a58c4fd845",
+      "name": "Profil"
+    },
+    {
+      "accesses": {
+        "count": "guest",
+        "create": "admin",
+        "read": "guest",
+        "remove": "admin",
+        "search": "guest",
+        "update": "admin"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
         },
         {
           "name": "createdAt",
-          "type": "datetime",
-          "properties": [
-            "searchable",
-            "sortable",
-            "internal"
-          ]
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
         },
         {
           "name": "label",
-          "type": "string",
-          "properties": [
-            "label",
-            "searchable",
-            "sortable"
-          ]
+          "properties": ["label", "searchable", "sortable"],
+          "type": "string"
         }
-      ]
+      ],
+      "id": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
+      "name": "Tag"
     },
     {
-      "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
-      "name": "User",
       "accesses": {
         "count": "admin",
-        "create": "guest",
+        "create": "admin",
         "read": "owner",
         "remove": "admin",
         "search": "owner",
@@ -206,8 +142,10 @@
       },
       "fields": [
         {
+          "meta": {
+            "ownerStringPath": "user.id"
+          },
           "name": "id",
-          "type": "string",
           "properties": [
             "primary",
             "searchable",
@@ -215,62 +153,41 @@
             "internal",
             "ownership"
           ],
-          "meta": {
-            "ownerStringPath": "user.id"
-          }
+          "type": "string"
         },
         {
           "name": "createdAt",
-          "type": "datetime",
-          "properties": [
-            "searchable",
-            "sortable",
-            "internal"
-          ]
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
         },
         {
           "name": "name",
-          "type": "string",
-          "properties": [
-            "label",
-            "searchable",
-            "sortable"
-          ]
+          "properties": ["label", "searchable", "sortable"],
+          "type": "string"
         },
         {
           "name": "email",
-          "type": "string",
+          "properties": ["unique", "searchable", "sortable"],
           "subtype": "email",
-          "properties": [
-            "unique",
-            "searchable",
-            "sortable"
-          ]
+          "type": "string"
         },
         {
           "name": "password",
-          "type": "string",
+          "properties": ["nullable", "hidden"],
           "subtype": "password",
-          "properties": [
-            "nullable",
-            "hidden"
-          ]
+          "type": "string"
         },
         {
           "name": "roles",
+          "properties": ["multiple", "searchable", "sortable"],
           "type": "enum",
-          "value": [
-            "admin",
-            "user",
-            "guest"
-          ],
-          "properties": [
-            "multiple",
-            "searchable",
-            "sortable"
-          ]
+          "value": ["admin", "user", "guest"]
         }
-      ]
+      ],
+      "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
+      "name": "User"
     }
-  ]
+  ],
+  "name": "New project",
+  "version": "3"
 }
