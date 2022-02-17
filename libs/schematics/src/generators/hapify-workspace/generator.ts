@@ -1,5 +1,6 @@
 /* eslint-disable no-await-in-loop */
-import * as path from 'path';
+
+import { join } from 'path';
 
 import { applicationGenerator as angularApplicationGenerator } from '@nrwl/angular/generators';
 import { E2eTestRunner } from '@nrwl/angular/src/utils/test-runners';
@@ -37,6 +38,11 @@ interface NormalizedSchema extends HapifyWorkspaceGeneratorSchema {
   npmScope: string;
   appsDir: string;
   libsDir: string;
+  generatedDir: string;
+  generatedImportPath: string;
+  adminName: string;
+  apiName: string;
+  pwaName: string;
   uuid4: string;
   workspaceName: string;
   parsedTags: string[];
@@ -51,11 +57,19 @@ function normalizeOptions(
     ? options.tags.split(',').map((s) => s.trim())
     : [];
 
+  const generatedDir = 'generated';
   return {
     ...options,
     npmScope,
     appsDir,
     libsDir,
+    adminName: 'admin',
+    apiName: 'api',
+    pwaName: 'pwa',
+    generatedDir,
+    generatedImportPath: `@${npmScope}/${
+      generatedDir ? `${generatedDir}-` : ''
+    }`,
     workspaceName: options.name,
     parsedTags,
     uuid4: uuid4(),
@@ -63,12 +77,27 @@ function normalizeOptions(
 }
 
 function addFiles(tree: Tree, options: NormalizedSchema) {
+  const { appsDir, apiName } = options;
   const templateOptions = {
     ...options,
     ...names(options.name),
     template: '',
   };
-  generateFiles(tree, path.join(__dirname, 'files'), '', templateOptions);
+  // Generate the workspace root files
+  generateFiles(
+    tree,
+    join(__dirname, 'files', 'workspace-root'),
+    '',
+    templateOptions,
+  );
+
+  // Generate the api files
+  generateFiles(
+    tree,
+    join(__dirname, 'files', 'api'),
+    join(appsDir, apiName),
+    templateOptions,
+  );
 }
 
 export default async function hapifyWorkspace(
@@ -87,19 +116,17 @@ export default async function hapifyWorkspace(
   log.info('Adding .npmrc file');
   addNpmrc(tree);
 
-  log.info('Update workspace configuration');
-  const workspaceConfiguration = readWorkspaceConfiguration(tree);
-
-  updateWorkspaceConfiguration(tree, {
-    ...workspaceConfiguration,
-    workspaceLayout: {
-      appsDir: 'apps',
-      libsDir: 'libs',
-    },
-  });
-
   const normalizedOptions = normalizeOptions(tree, options);
-  const { appsDir, npmScope } = normalizedOptions;
+  const {
+    adminName,
+    apiName,
+    appsDir,
+    libsDir,
+    npmScope,
+    pwaName,
+    generatedDir,
+    generatedImportPath,
+  } = normalizedOptions;
 
   log.info('Initializing linter');
   await eslintGenerator(tree);
@@ -112,30 +139,38 @@ export default async function hapifyWorkspace(
 
   log.info('Initializing nestjs application');
   await nestjsApplicationGenerator(tree, {
-    name: 'api',
+    name: apiName,
     linter: Linter.EsLint,
     standaloneConfig: true,
   });
-  addPackageJson(tree, `${appsDir}/api/package.json`, `@${npmScope}/api`);
+  addPackageJson(
+    tree,
+    join(appsDir, apiName, `package.json`),
+    `@${npmScope}/${apiName}`,
+  );
 
   log.info('Initializing angular application');
   await angularApplicationGenerator(tree, {
-    name: 'pwa',
+    name: pwaName,
     linter: Linter.EsLint,
     standaloneConfig: true,
     addTailwind: true,
-    backendProject: 'api',
+    backendProject: apiName,
     strict: true,
     style: 'less',
     e2eTestRunner: E2eTestRunner.None,
   });
-  addPackageJson(tree, `${appsDir}/pwa/package.json`, `@${npmScope}/pwa`);
+  addPackageJson(
+    tree,
+    join(appsDir, pwaName, `package.json`),
+    `@${npmScope}/${pwaName}`,
+  );
 
   log.info('Initializing admin application');
   await adminGenerator(tree, {
-    name: 'admin',
-    reactAdminImportPath: '@generated/react-admin',
-    rextClientImportPath: '@generated/rext-client',
+    name: adminName,
+    reactAdminImportPath: `${generatedImportPath}react-admin`,
+    rextClientImportPath: `${generatedImportPath}rext-client`,
   });
 
   log.info('Initializing hapify libraries');
@@ -143,7 +178,7 @@ export default async function hapifyWorkspace(
     if (libraryName === 'prisma') {
       await prismaLibraryGenerator(tree, {
         name: libraryName,
-        directory: 'generated',
+        directory: generatedDir,
       });
     } else {
       await hapifyLibraryGenerator(tree, {
@@ -155,7 +190,7 @@ export default async function hapifyWorkspace(
         type: type as AvailableLibraryType,
         hapifyUseImportReplacements: true,
         name: libraryName,
-        directory: 'generated',
+        directory: generatedDir,
       });
     }
   }
@@ -180,7 +215,7 @@ export default async function hapifyWorkspace(
     },
   }));
 
-  tree.delete('packages');
+  if (libsDir !== 'packages') tree.delete('packages');
 
   await formatFiles(tree);
 }
