@@ -1,6 +1,10 @@
 {
+  "version": "3",
+  "name": "New project",
   "models": [
     {
+      "id": "6894a782-2e83-cd6a-52cc-f62967165636",
+      "name": "BlogPost",
       "accesses": {
         "count": "owner",
         "create": "auth",
@@ -12,377 +16,144 @@
       "fields": [
         {
           "name": "id",
-          "notes": "Answer UUID",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "createdAt",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
-        },
-        {
-          "meta": {
-            "backRelation": "answers"
-          },
-          "name": "user",
-          "notes": "User that owns the answer",
-          "properties": [],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
-        },
-        {
-          "meta": {
-            "backRelation": "answers"
-          },
-          "name": "question",
-          "notes": "Question associated to the answer",
-          "properties": [],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
-        },
-        {
-          "meta": {
-            "backRelation": "answers"
-          },
-          "name": "tags",
-          "notes": "Tags associated to the answer",
-          "properties": ["nullable", "multiple"],
-          "subtype": "manyMany",
-          "type": "entity",
-          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
-        },
-        {
-          "name": "answerDate",
-          "notes": "Date of the answer creation",
-          "properties": [],
-          "type": "datetime"
-        }
-      ],
-      "id": "ccebcf02-4b82-923f-114e-252c9455899d",
-      "name": "Answer",
-      "notes": "The answer model"
-    },
-    {
-      "accesses": {
-        "count": "owner",
-        "create": "owner",
-        "read": "owner",
-        "remove": "owner",
-        "search": "owner",
-        "update": "owner"
-      },
-      "fields": [
-        {
-          "meta": {},
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "meta": {
-            "backRelation": "departments",
-            "ownerStringPath": "user.enterprises.id"
-          },
-          "name": "enterprise",
-          "properties": ["ownership"],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "c069cc55-f28f-dcc1-cad8-0df044631ef8"
-        }
-      ],
-      "id": "2a523149-31f3-80bf-d32b-3b9174cc6f2c",
-      "name": "Department"
-    },
-    {
-      "accesses": {
-        "count": "owner",
-        "create": "owner",
-        "read": "owner",
-        "remove": "owner",
-        "search": "owner",
-        "update": "owner"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "meta": {
-            "backRelation": "enterprises",
-            "ownerStringPath": "user.id"
-          },
-          "name": "employee",
-          "properties": ["multiple", "ownership"],
-          "subtype": "manyMany",
-          "type": "entity",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
-        }
-      ],
-      "id": "c069cc55-f28f-dcc1-cad8-0df044631ef8",
-      "name": "Enterprise"
-    },
-    {
-      "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "name": "defaultNullable",
-          "notes": "Test nullable system field with no default metadata",
-          "properties": ["nullable", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "name": "defaultString",
-          "notes": "Test string system field with no default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "name": "defaultNumber",
-          "notes": "Test number system field with no default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "number"
-        },
-        {
-          "name": "defaultBoolean",
-          "notes": "Test boolean system field with no default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "boolean"
-        },
-        {
-          "name": "defaultDatetime",
-          "notes": "Test datetime system field with no default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
-        },
-        {
-          "name": "defaultEnum",
-          "notes": "Test enum system field with no default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "enum",
-          "value": ["Enum1", "Enum2"]
-        },
-        {
-          "meta": {
-            "default": "'custom string'"
-          },
-          "name": "customString",
-          "notes": "Test string system field with default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "meta": {
-            "default": "666"
-          },
-          "name": "customNumber",
-          "notes": "Test number system field with default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "number"
-        },
-        {
-          "meta": {
-            "default": "true"
-          },
-          "name": "customBoolean",
-          "notes": "Test boolean system field with default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "boolean"
-        },
-        {
-          "meta": {
-            "default": "new Date(1)"
-          },
-          "name": "customDatetime",
-          "notes": "Test datetime system field with default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
-        },
-        {
-          "meta": {
-            "default": "InternalFieldCustomEnum.Enum2"
-          },
-          "name": "customEnum",
-          "notes": "Test enum system field with default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "enum",
-          "value": ["Enmu1", "Enum2"]
-        }
-      ],
-      "id": "2019dfe5-3b43-4eea-82e5-2533fb1f9c85",
-      "name": "InternalField",
-      "notes": "Table to test system fields and default metadata"
-    },
-    {
-      "accesses": {
-        "count": "owner",
-        "create": "auth",
-        "read": "auth",
-        "remove": "owner",
-        "search": "owner",
-        "update": "owner"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "name": "createdAt",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
-        },
-        {
-          "name": "text",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
-        },
-        {
-          "name": "hour",
-          "properties": ["nullable"],
-          "subtype": "time",
-          "type": "datetime"
-        },
-        {
-          "meta": {
-            "backRelation": "messages"
-          },
-          "name": "tags",
-          "properties": ["multiple"],
-          "subtype": "manyMany",
-          "type": "entity",
-          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
-        },
-        {
-          "meta": {
-            "backRelation": "messages"
-          },
-          "name": "questions",
-          "properties": ["multiple", "searchable", "sortable"],
-          "subtype": "manyMany",
-          "type": "entity",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
-        }
-      ],
-      "id": "b0ecc3a7-9f28-a140-d505-91f598e547a5",
-      "name": "Message"
-    },
-    {
-      "accesses": {
-        "count": "owner",
-        "create": "auth",
-        "read": "auth",
-        "remove": "owner",
-        "search": "owner",
-        "update": "owner"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "name": "createdAt",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
-        },
-        {
-          "name": "text",
-          "properties": ["searchable", "sortable"],
-          "type": "string"
-        },
-        {
-          "name": "key",
-          "properties": ["unique", "label", "searchable", "sortable"],
-          "type": "string"
-        },
-        {
-          "meta": {
-            "backRelation": "openQuestions"
-          },
-          "name": "question",
-          "properties": [],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
-        }
-      ],
-      "id": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c",
-      "name": "OpenQuestion"
-    },
-    {
-      "accesses": {
-        "count": "owner",
-        "create": "auth",
-        "read": "auth",
-        "remove": "owner",
-        "search": "owner",
-        "update": "owner"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "name": "createdAt",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
+          "type": "datetime",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "title",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "label",
+            "searchable",
+            "sortable"
+          ]
         },
         {
-          "name": "text",
-          "properties": ["searchable", "sortable"],
-          "type": "string"
+          "name": "content",
+          "type": "string",
+          "subtype": "text",
+          "properties": [
+            "searchable",
+            "sortable"
+          ]
         },
         {
-          "meta": {
-            "backRelation": "questions"
-          },
-          "name": "parentQuestion",
-          "properties": ["nullable"],
+          "name": "status",
+          "type": "enum",
+          "value": [
+            "published",
+            "draft"
+          ],
+          "properties": [
+            "searchable",
+            "sortable"
+          ]
+        },
+        {
+          "name": "author",
+          "type": "entity",
           "subtype": "oneMany",
-          "type": "entity",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
+          "properties": [
+            "searchable",
+            "sortable",
+            "ownership"
+          ],
+          "meta": {
+            "backRelation": "blogPosts",
+            "ownerStringPath": "user.id"
+          }
         },
         {
+          "name": "tags",
+          "type": "entity",
+          "subtype": "manyMany",
+          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
+          "properties": [
+            "nullable",
+            "multiple",
+            "searchable",
+            "sortable"
+          ],
           "meta": {
             "backRelation": "questions"
-          },
-          "name": "tags",
-          "properties": ["nullable", "multiple"],
-          "subtype": "manyMany",
-          "type": "entity",
-          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
+          }
         }
-      ],
-      "id": "6894a782-2e83-cd6a-52cc-f62967165636",
-      "name": "Question"
+      ]
     },
     {
+      "id": "7c1c844a-308d-a7c9-9e36-d9a58c4fd845",
+      "name": "Profil",
+      "accesses": {
+        "create": "guest",
+        "read": "guest",
+        "update": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "count": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
+        },
+        {
+          "name": "user",
+          "type": "entity",
+          "subtype": "oneOne",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
+          "properties": [
+            "unique",
+            "searchable",
+            "sortable",
+            "ownership"
+          ],
+          "meta": {
+            "backRelation": "profil",
+            "ownerStringPath": "user.id"
+          }
+        },
+        {
+          "name": "phone",
+          "type": "string",
+          "properties": [
+            "searchable",
+            "sortable"
+          ]
+        },
+        {
+          "name": "address",
+          "type": "string",
+          "properties": [
+            "searchable",
+            "sortable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
+      "name": "Tag",
       "accesses": {
         "count": "owner",
         "create": "auth",
@@ -394,136 +165,37 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "createdAt",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
+          "type": "datetime",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "label",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
-        },
-        {
-          "meta": {
-            "backRelation": "tags",
-            "ownerStringPath": "user.id"
-          },
-          "name": "owner",
-          "properties": ["ownership"],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
+          "type": "string",
+          "properties": [
+            "label",
+            "searchable",
+            "sortable"
+          ]
         }
-      ],
-      "id": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
-      "name": "Tag"
+      ]
     },
     {
-      "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "name": "uniqueString",
-          "properties": ["unique", "searchable", "sortable"],
-          "type": "string"
-        },
-        {
-          "name": "uniqueNumber",
-          "properties": ["unique", "searchable", "sortable"],
-          "type": "number"
-        },
-        {
-          "name": "uniqueBoolean",
-          "properties": ["unique", "searchable", "sortable"],
-          "type": "boolean"
-        },
-        {
-          "name": "uniqueDatetime",
-          "properties": ["unique", "searchable", "sortable"],
-          "type": "datetime"
-        },
-        {
-          "name": "uniqueEnum",
-          "properties": ["unique", "searchable", "sortable"],
-          "type": "enum",
-          "value": ["value1", "value2"]
-        },
-        {
-          "name": "uniqueObject",
-          "properties": ["unique", "searchable", "sortable"],
-          "type": "object"
-        },
-        {
-          "meta": {
-            "backRelation": "uniqueValue"
-          },
-          "name": "uniqueEntity",
-          "properties": ["unique", "searchable", "sortable"],
-          "subtype": "oneOne",
-          "type": "entity",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
-        },
-        {
-          "name": "uniqueStringNullable",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
-          "type": "string"
-        },
-        {
-          "name": "uniqueNumberNullable",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
-          "type": "number"
-        },
-        {
-          "name": "uniqueBooleanNullable",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
-          "type": "boolean"
-        },
-        {
-          "name": "uniqueDatetimeNullable",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
-          "type": "datetime"
-        },
-        {
-          "name": "uniqueEnumNullable",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
-          "type": "enum",
-          "value": ["val1", "val2"]
-        },
-        {
-          "name": "uniqueObjectNullable",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
-          "type": "object"
-        },
-        {
-          "meta": {
-            "backRelation": "uniqueValues"
-          },
-          "name": "uniqueEntityNullable",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
-          "subtype": "oneOne",
-          "type": "entity",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
-        }
-      ],
-      "id": "d49a961e-c506-6869-3e1a-405fb52f109c",
-      "name": "UniqueValueField"
-    },
-    {
+      "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
+      "name": "User",
       "accesses": {
         "count": "admin",
         "create": "guest",
@@ -534,10 +206,8 @@
       },
       "fields": [
         {
-          "meta": {
-            "ownerStringPath": "user.id"
-          },
           "name": "id",
+          "type": "string",
           "properties": [
             "primary",
             "searchable",
@@ -545,100 +215,62 @@
             "internal",
             "ownership"
           ],
-          "type": "string"
+          "meta": {
+            "ownerStringPath": "user.id"
+          }
         },
         {
           "name": "createdAt",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
+          "type": "datetime",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "name",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "label",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "email",
-          "properties": ["unique", "searchable", "sortable"],
+          "type": "string",
           "subtype": "email",
-          "type": "string"
+          "properties": [
+            "unique",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "password",
-          "properties": ["nullable", "hidden"],
+          "type": "string",
           "subtype": "password",
-          "type": "string"
-        },
-        {
-          "name": "listObject",
-          "properties": ["multiple", "searchable", "sortable"],
-          "type": "object"
+          "properties": [
+            "nullable",
+            "hidden"
+          ]
         },
         {
           "name": "roles",
-          "properties": ["multiple", "searchable", "sortable"],
           "type": "enum",
-          "value": ["admin", "user", "guest"]
-        },
-        {
-          "name": "Object",
-          "properties": [],
-          "type": "object"
+          "value": [
+            "admin",
+            "user",
+            "guest"
+          ],
+          "properties": [
+            "multiple",
+            "searchable",
+            "sortable"
+          ]
         }
-      ],
-      "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
-      "name": "User"
-    },
-    {
-      "accesses": {
-        "count": "owner",
-        "create": "auth",
-        "read": "auth",
-        "remove": "owner",
-        "search": "owner",
-        "update": "owner"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "name": "createdAt",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
-        },
-        {
-          "name": "value",
-          "properties": [],
-          "type": "string"
-        },
-        {
-          "meta": {
-            "backRelation": "variables"
-          },
-          "name": "openQuestion",
-          "properties": [],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c"
-        },
-        {
-          "meta": {
-            "backRelation": "variables"
-          },
-          "name": "answer",
-          "properties": [],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "ccebcf02-4b82-923f-114e-252c9455899d"
-        }
-      ],
-      "id": "5d791308-4e9d-aa7d-3d36-d45d46b04c6a",
-      "name": "Variable"
+      ]
     }
-  ],
-  "name": "New project",
-  "version": "3"
+  ]
 }
