@@ -1,11 +1,13 @@
 import { relative } from 'path';
 
-import { getWorkspaceLayout, Tree } from '@nrwl/devkit';
+import { getWorkspaceLayout, TargetConfiguration, Tree } from '@nrwl/devkit';
+import * as deepmerge from 'deepmerge';
 
 import { getNormalizedProjectDefaultsOptions } from '../../../helpers';
 import {
   DEFAULT_IMPORT_REPLACEMENTS,
   DEFAULT_SECONDARY_ENTRY_POINTS,
+  DEFAULT_TARGETS_OPTIONS,
 } from '../../../schematics.constants';
 import {
   HapifyLibraryGeneratorOptionsWithExtra,
@@ -30,7 +32,7 @@ export function normalizeOptions(
   } = options;
 
   // Fetch workspace data
-  const { npmScope } = getWorkspaceLayout(tree);
+  const { libsDir, npmScope } = getWorkspaceLayout(tree);
 
   const { name, directory, projectDirectory, projectRoot, projectName } =
     getNormalizedProjectDefaultsOptions(tree, {
@@ -74,8 +76,15 @@ export function normalizeOptions(
     ),
   ];
 
+  const targets = hapifyTemplates.reduce((acc, template) => {
+    const partialTargets = DEFAULT_TARGETS_OPTIONS[template];
+    if (!partialTargets) return acc;
+
+    return deepmerge(acc, partialTargets);
+  }, {} as Record<string, Partial<TargetConfiguration>>);
+
   // Process import path if the option is not provided
-  const importPath = `${npmScope}/${directory ? `${directory}-` : ''}${name}`;
+  const importPath = `@${npmScope}/${directory ? `${directory}-` : ''}${name}`;
 
   return {
     name,
@@ -88,6 +97,7 @@ export function normalizeOptions(
     useSecondaryEndpoint,
     addSecondaryEndpoint,
     npmScope,
+    libsDir,
     projectDirectory,
     projectName,
     projectRoot,
@@ -96,6 +106,7 @@ export function normalizeOptions(
     hapifyImportReplacements,
     templates,
     secondaryEntrypoints,
+    targets,
     extra,
   };
 }

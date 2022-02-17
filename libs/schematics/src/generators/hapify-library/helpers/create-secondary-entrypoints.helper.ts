@@ -10,19 +10,20 @@ export async function createSecondaryEntrypoints(
 ) {
   const {
     importPath,
+    libsDir,
     projectDirectory,
     secondaryEntrypoints,
     useSecondaryEndpoint,
   } = options;
 
-  if (!useSecondaryEndpoint) return;
-
-  tree.write(`libs/${projectDirectory}/package.json`, JSON.stringify({}));
-  updateJson(tree, `libs/${projectDirectory}/package.json`, (json) => ({
+  tree.write(`${libsDir}/${projectDirectory}/package.json`, JSON.stringify({}));
+  updateJson(tree, `${libsDir}/${projectDirectory}/package.json`, (json) => ({
     version: '0.0.1',
     ...json,
     name: importPath,
   }));
+
+  if (!useSecondaryEndpoint) return;
 
   await Promise.all(
     secondaryEntrypoints.map(async (entrypoint) => {

@@ -7,9 +7,6 @@
     "url": "https://github.com/tractr/stack"
   },
   "license": "UNLICENSED",
-  "peerDependencies": {
-    "@tractr/hapify-templates-models": "1.4.2"
-  },
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"

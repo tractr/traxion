@@ -5,9 +5,6 @@
     "type": "git",
     "url": "https://github.com/tractr/stack"
   },
-  "peerDependencies": {
-    "@cdktf/provider-aws": "^2.0.8"
-  },
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"

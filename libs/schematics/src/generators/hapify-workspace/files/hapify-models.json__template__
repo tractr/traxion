@@ -1,0 +1,60 @@
+{
+  "version": "3",
+  "name": "test1",
+  "description": "test1 workspace",
+  "models": [
+    {
+      "id": "<%= uuid4 %>",
+      "name": "User",
+      "accesses": {
+        "create": "guest",
+        "read": "guest",
+        "update": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "count": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal",
+            "ownership"
+          ],
+          "meta": {
+            "ownerStringPath": "user.id"
+          }
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "properties": []
+        },
+        {
+          "name": "password",
+          "type": "string",
+          "subtype": "password",
+          "properties": [
+            "hidden"
+          ]
+        },
+        {
+          "name": "roles",
+          "type": "enum",
+          "value": [
+            "admin",
+            "user",
+            "guest"
+          ],
+          "properties": [
+            "multiple"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "projectType": "library",
+  "root": "libs/hapify/create-hapify-workspace",
+  "sourceRoot": "libs/hapify/create-hapify-workspace/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": ["libs/hapify/create-hapify-workspace/*.md"],
+        "main": "libs/hapify/create-hapify-workspace/src/index.ts",
+        "outputPath": "dist/libs/hapify/create-hapify-workspace",
+        "packageJson": "libs/hapify/create-hapify-workspace/package.json",
+        "tsConfig": "libs/hapify/create-hapify-workspace/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/hapify/create-hapify-workspace/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "restricted"
+      }
+    }
+  }
+}

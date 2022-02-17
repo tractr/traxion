@@ -1,7 +1,5 @@
-import { libraryGenerator as angularLibraryGenerator } from '@nrwl/angular/generators';
 import { Tree, updateWorkspaceConfiguration } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { libraryGenerator as nestLibraryGenerator } from '@nrwl/nest';
 
 import {
   HapifyLibraryGeneratorOptions,
@@ -11,7 +9,7 @@ import { normalizeOptions } from './normalize-options.helper';
 
 describe('normalizeOptions', () => {
   let appTree: Tree;
-  const npmScope = '@tractr';
+  const npmScope = 'tractr';
   const workspaceLayout = {
     appsDir: 'apps',
     libsDir: 'libs',
@@ -60,6 +58,8 @@ describe('normalizeOptions', () => {
       templates: ['@tractr/hapify-templates-models'],
       importPath: '@tractr/test-test',
       npmScope,
+      libsDir: 'libs',
+      targets: {},
       extra: {},
     });
   });
@@ -159,7 +159,9 @@ describe('normalizeOptions', () => {
       projectDirectory: 'test/test',
       projectName: 'test-test',
       projectRoot: 'libs/test/test',
-      npmScope: '@tractr',
+      npmScope: 'tractr',
+      libsDir: 'libs',
+      targets: {},
       importPath: '@tractr/test-test',
       secondaryEntrypoints: ['mock'],
       templates: ['@tractr/hapify-templates-models'],
@@ -182,7 +184,9 @@ describe('normalizeOptions', () => {
       projectDirectory: 'test/test',
       projectName: 'test-test',
       projectRoot: 'libs/test/test',
-      npmScope: '@tractr',
+      npmScope: 'tractr',
+      libsDir: 'libs',
+      targets: {},
       importPath: '@tractr/test-test',
       secondaryEntrypoints: ['mock'],
       hapifyTemplates: ['casl', 'models'],
@@ -209,7 +213,9 @@ describe('normalizeOptions', () => {
       projectDirectory: 'test/test',
       projectName: 'test-test',
       projectRoot: 'libs/test/test',
-      npmScope: '@tractr',
+      npmScope: 'tractr',
+      libsDir: 'libs',
+      targets: {},
       importPath: '@tractr/test-test',
       addSecondaryEndpoint: ['mock', 'mock2'],
       secondaryEntrypoints: ['mock', 'mock2'],

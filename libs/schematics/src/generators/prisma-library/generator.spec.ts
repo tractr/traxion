@@ -1,5 +1,3 @@
-import * as path from 'path';
-
 import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
@@ -77,11 +75,6 @@ seed().catch((e) => {
       ...options,
     });
 
-    const prismaClientOutputPath = path.join(
-      path.relative(`libs/test/prisma/schemas`, appTree.root),
-      'node_modules',
-    );
-
     expect(appTree.exists('libs/test/prisma/schemas/base.prisma')).toBeTruthy();
     expect(appTree.read('libs/test/prisma/schemas/base.prisma')?.toString())
       .toEqual(`// ------------------------------------------------
@@ -93,7 +86,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  output = "../../../../node_modules"
+  output = "../../../node_modules"
   previewFeatures = ["filterJson"]
 }
 `);
