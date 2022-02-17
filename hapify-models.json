@@ -78,6 +78,11 @@
           "type": "string"
         },
         {
+          "name": "createdAt",
+          "properties": ["searchable", "sortable", "internal"],
+          "type": "datetime"
+        },
+        {
           "meta": {
             "backRelation": "profil",
             "ownerStringPath": "user.id"

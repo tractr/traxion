@@ -35,7 +35,7 @@
     "lint": "nx workspace-lint && nx run-many --all --target=lint --parallel",
     "nx": "nx",
     "prisma:db:push": "prisma db push --schema=./libs/generated/prisma/prisma/schema.prisma",
-    "prisma:db:seed": "prisma db seed --preview-feature --schema=./libs/generated/prisma/prisma/schema.prisma",
+    "prisma:db:seed": "prisma db seed --schema=./libs/generated/prisma/prisma/schema.prisma",
     "prisma:studio": "prisma studio --schema=./libs/generated/prisma/prisma/schema.prisma",
     "start": "nx serve",
     "test": " nx run-many --all --target=test",
@@ -243,6 +243,6 @@
     "registry": "https://npm.pkg.github.com"
   },
   "prisma": {
-    "seed": "ts-node libs/prisma/src/index.ts"
+    "seed": "ts-node -r tsconfig-paths/register --project apps/api/tsconfig.json libs/generated/prisma/prisma/seed.ts"
   }
 }
