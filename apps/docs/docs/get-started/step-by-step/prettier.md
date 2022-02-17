@@ -1,6 +1,6 @@
 ---
 id: prettier
-title: New project - Prettier
+title: Get started - Prettier
 sidebar_label: Prettier
 ---
 

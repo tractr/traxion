@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: New project - Introduction
+title: Get started - Introduction
 sidebar_label: Introduction
 ---
 
@@ -10,6 +10,6 @@ In these articles we will pass through the required steps to initialize a new pr
 
 These articles describe how to manually create a new project with Traxion.
 
-Every steps can be done automatically by using schematics.
+All steps can be done automatically by using [this command](../quick-start).
 
-The purpose of this tutorial is to show what schematics are doing during the project creation.
+The purpose of this tutorial is to detail the project creation process.

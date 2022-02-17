@@ -14,7 +14,7 @@ You need to [install the schamatics packages](./how-to) before you can use this 
 
 Add prettier and its configuration to a NX project.
 
-```bash
+```shell
 nx g @tractr/schematics:prettier-config
 ```
 

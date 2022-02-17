@@ -1,6 +1,6 @@
 ---
 id: commitlint-husky
-title: New project - Commitlint and Husky
+title: Get started - Commitlint and Husky
 sidebar_label: Commitlint and Husky
 ---
 

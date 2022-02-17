@@ -1,6 +1,6 @@
 ---
 id: hapify
-title: New project - Hapify
+title: Get started - Hapify
 sidebar_label: Hapify
 ---
 

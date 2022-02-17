@@ -1,6 +1,6 @@
 ---
 id: eslint
-title: New project - ESLint
+title: Get started - ESLint
 sidebar_label: ESLint
 ---
 

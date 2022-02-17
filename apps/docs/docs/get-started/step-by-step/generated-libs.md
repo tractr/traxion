@@ -1,6 +1,6 @@
 ---
 id: generated-libs
-title: New project - Generated Libraries
+title: Get started - Generated Libraries
 sidebar_label: Generated Libraries
 ---
 

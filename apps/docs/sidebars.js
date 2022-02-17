@@ -8,7 +8,34 @@ module.exports = {
     {
       type: 'category',
       label: 'Get started',
-      items: ['get-started/initialization'],
+      link: { type: 'doc', id: 'get-started/quick-start' },
+      items: [
+        {
+          type: 'category',
+          label: 'Step by step',
+          link: { type: 'doc', id: 'get-started/step-by-step/introduction' },
+          items: [
+            'get-started/step-by-step/nx-workspace',
+            'get-started/step-by-step/hapify',
+            'get-started/step-by-step/prettier',
+            'get-started/step-by-step/eslint',
+            'get-started/step-by-step/prisma',
+            'get-started/step-by-step/generated-libs',
+            'get-started/step-by-step/commitlint-husky',
+            'get-started/step-by-step/github-actions',
+            {
+              type: 'category',
+              label: 'Applications',
+              items: [
+                'get-started/step-by-step/apps/api',
+                'get-started/step-by-step/apps/admin',
+                'get-started/step-by-step/apps/terraform',
+                'get-started/step-by-step/apps/docusaurus',
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       type: 'category',
@@ -19,31 +46,6 @@ module.exports = {
       type: 'category',
       label: 'How to',
       items: [
-        {
-          type: 'category',
-          label: 'Initialization',
-          items: [
-            'how-to/initialization/introduction',
-            'how-to/initialization/nx-workspace',
-            'how-to/initialization/hapify',
-            'how-to/initialization/prettier',
-            'how-to/initialization/eslint',
-            'how-to/initialization/prisma',
-            'how-to/initialization/generated-libs',
-            'how-to/initialization/commitlint-husky',
-            'how-to/initialization/github-actions',
-            {
-              type: 'category',
-              label: 'Applications',
-              items: [
-                'how-to/initialization/apps/api',
-                'how-to/initialization/apps/admin',
-                'how-to/initialization/apps/terraform',
-                'how-to/initialization/apps/docusaurus',
-              ],
-            },
-          ],
-        },
         'how-to/data-models',
         'how-to/database',
         'how-to/angular',
@@ -59,14 +61,13 @@ module.exports = {
     {
       type: 'category',
       label: 'Schematics',
+      link: { type: 'doc', id: 'schematics/how-to' },
       items: [
-        'schematics/how-to',
         'schematics/publish',
         'schematics/release',
         'schematics/eslint',
         'schematics/prettier',
         'schematics/github-workflows',
-        'schematics/schematic-template-lib',
       ],
     },
     {

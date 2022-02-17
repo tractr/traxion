@@ -1,6 +1,6 @@
 ---
 id: prisma
-title: New project - Prisma
+title: Get started - Prisma
 sidebar_label: Prisma
 ---
 

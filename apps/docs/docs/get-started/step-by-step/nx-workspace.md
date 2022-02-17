@@ -1,6 +1,6 @@
 ---
 id: nx-workspace
-title: New project - Workspace initialization
+title: Get started - Workspace initialization
 sidebar_label: Workspace initialization
 ---
 
@@ -15,6 +15,18 @@ npx create-nx-workspace
 When prompted, choose the option `angular-nest`.
 
 Usually, we name our Angular app `pwa` and the NestJS backend `api`, but none of this is mandatory.
+
+## Install Traxion schematics
+
+```shell
+npm i --save-dev @tractr/schematics
+```
+
+:::note
+
+For more information on schematics, see [this article](/docs/schematics/how-to).
+
+:::
 
 ### Remove generated lib `api-interfaces`
 

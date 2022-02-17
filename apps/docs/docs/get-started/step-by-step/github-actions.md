@@ -1,6 +1,6 @@
 ---
 id: github-actions
-title: New project - Github Actions
+title: Get started - Github Actions
 sidebar_label: Github Actions
 ---
 
