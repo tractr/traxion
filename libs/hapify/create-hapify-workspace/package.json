@@ -1,0 +1,16 @@
+{
+  "name": "@tractr/create-hapify-workspace",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "type": "module",
+  "bin": {
+    "create-hapify-workspace": "./dist/src/create-hapify-workspace.js"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

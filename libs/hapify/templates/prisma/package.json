@@ -7,10 +7,6 @@
     "url": "https://github.com/tractr/stack"
   },
   "license": "UNLICENSED",
-  "peerDependencies": {
-    "@prisma/client": "^2.24.1",
-    "prisma": "^2.24.1"
-  },
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"

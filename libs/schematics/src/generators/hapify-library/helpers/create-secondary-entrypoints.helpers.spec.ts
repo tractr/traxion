@@ -34,8 +34,10 @@ describe('createSecondaryEntrypoint', () => {
     templates: [],
     hapifyImportReplacements: [],
     secondaryEntrypoints: ['mock'],
-    npmScope: '@test',
+    npmScope: 'test',
     importPath: '@test/test',
+    libsDir: 'libs',
+    targets: {},
     extra: {},
   };
 

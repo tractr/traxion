@@ -25,6 +25,7 @@
       "type": "string"
     },
     "hapifyTemplates": {
+      "default": [],
       "description": "List of template to use in this library",
       "items": {
         "enum": [
@@ -60,8 +61,7 @@
         "message": "Which templates your library will host?",
         "multiselect": true,
         "type": "list"
-      },
-      "default": []
+      }
     },
     "hapifyUseImportReplacements": {
       "default": true,
@@ -85,14 +85,26 @@
       "default": "angular",
       "description": "Library type",
       "items": {
-        "enum": ["angular", "nest", "react"],
+        "enum": [
+          "angular",
+          "nest",
+          "react"
+        ],
         "type": "string"
       },
       "type": "string",
       "x-prompt": "What library type your hapify generate library needs (for library that need to be use in front and back use angular)?"
+    },
+    "useSecondaryEndpoint": {
+      "default": true,
+      "description": "Do not add secondary endpoint to the library",
+      "type": "boolean"
     }
   },
-  "required": ["name", "type"],
+  "required": [
+    "name",
+    "type"
+  ],
   "title": "Create a Tractr library with hapify for Nx",
   "type": "object"
 }

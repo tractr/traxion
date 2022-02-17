@@ -82,7 +82,7 @@ export default async function releaseGenerator(
     updateProjectConfiguration(tree, 'workspace', project);
   }
 
-  await formatFiles(tree);
+  await addPackageToPackageJson(tree, SEMVER_PACKAGE_NAME);
 
-  return addPackageToPackageJson(tree, SEMVER_PACKAGE_NAME);
+  await formatFiles(tree);
 }

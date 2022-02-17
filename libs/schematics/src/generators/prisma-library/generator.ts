@@ -11,6 +11,7 @@ import {
 import {
   addPackageToPackageJson,
   getNormalizedProjectDefaultsOptions,
+  PackageType,
 } from '../../helpers';
 import hapifyLibraryGenerator from '../hapify-library/generator';
 import { NX_TOOLS_NX_PRISMA_PACKAGE } from './constants/nx-tools-prisma-package';
@@ -37,7 +38,7 @@ function normalizeOptions(
     });
 
   const nodeModulesRelativePath = path.join(
-    path.relative(`/${projectRoot}/prisma/schemas`, '/'),
+    path.relative(`/${projectRoot}/prisma`, '/'),
     'node_modules',
   );
 
@@ -90,5 +91,10 @@ export default async function prismaLibraryGenerator(
 
   await addPackageToPackageJson(tree, {
     packageName: NX_TOOLS_NX_PRISMA_PACKAGE,
+  });
+
+  await addPackageToPackageJson(tree, {
+    packageName: '@prisma/client',
+    type: PackageType.dependencies,
   });
 }

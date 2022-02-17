@@ -48,8 +48,14 @@ export default async function targetGenerateGenerator(
 ) {
   const normalizedOptions = await normalizeOptions(tree, options);
 
-  const { outputGeneratedPath, inputHapifyGeneratedPath, format, cleanFirst } =
-    normalizedOptions;
+  const {
+    outputGeneratedPath,
+    inputHapifyGeneratedPath,
+    moveGeneratedFiles,
+    format,
+    cleanFirst,
+    updateImportPath,
+  } = normalizedOptions;
 
   const baseOptions = {
     cwd: normalizedOptions.projectRoot,
@@ -68,6 +74,8 @@ export default async function targetGenerateGenerator(
       ...(inputHapifyGeneratedPath && {
         inputHapifyGeneratedPath,
       }),
+      ...(moveGeneratedFiles === false && { moveGeneratedFiles: false }),
+      ...(updateImportPath === false && { updateImportPath: false }),
       ...(format === false && { format: false }),
       ...(cleanFirst === false && { cleanFirst: false }),
       ...baseOptions,
@@ -76,8 +84,6 @@ export default async function targetGenerateGenerator(
 
   // Update the project configuration with the release target
   updateProjectConfiguration(tree, normalizedOptions.projectName, project);
-
-  await formatFiles(tree);
 
   const packageJsonSchematics: PackageDefinition = await readJSON(
     SCHEMATICS_PACKAGE_JSON_PATH,
@@ -90,4 +96,6 @@ export default async function targetGenerateGenerator(
 
   // update the package.json dependencies
   await addPackageToPackageJson(tree, packages);
+
+  await formatFiles(tree);
 }
