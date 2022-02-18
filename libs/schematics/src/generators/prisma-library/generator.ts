@@ -3,6 +3,7 @@ import path = require('path');
 import {
   formatFiles,
   generateFiles,
+  getWorkspaceLayout,
   readProjectConfiguration,
   Tree,
   updateProjectConfiguration,
@@ -10,6 +11,7 @@ import {
 
 import {
   addPackageToPackageJson,
+  getImportPrefixPath,
   getNormalizedProjectDefaultsOptions,
   PackageType,
 } from '../../helpers';
@@ -23,6 +25,7 @@ export interface NormalizedOptions {
   projectName: string;
   projectRoot: string;
   nodeModulesRelativePath: string;
+  importPrefixPath: string;
   extra: Record<string, unknown>;
 }
 
@@ -30,6 +33,8 @@ function normalizeOptions(
   tree: Tree,
   options: PrismaLibraryGeneratorSchema,
 ): NormalizedOptions {
+  const { directory } = options;
+
   // Format case for user input
   const { name, projectRoot, projectName } =
     getNormalizedProjectDefaultsOptions(tree, {
@@ -40,6 +45,8 @@ function normalizeOptions(
   const nodeModulesRelativePath = path.join(
     path.relative(`/${projectRoot}/prisma`, '/'),
     'node_modules',
+    '.prisma',
+    'client',
   );
 
   return {
@@ -47,6 +54,7 @@ function normalizeOptions(
     projectName,
     projectRoot,
     nodeModulesRelativePath,
+    importPrefixPath: getImportPrefixPath(tree, directory),
     extra: options,
   };
 }

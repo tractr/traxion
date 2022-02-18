@@ -8,6 +8,7 @@ import {
 import { Linter } from '@nrwl/linter';
 import { applicationGenerator as reactApplicationGenerator } from '@nrwl/react';
 
+import { addPackageToPackageJson } from '../..';
 import { addFiles, cleanApplication, normalizeOptions } from './helpers';
 import { AdminAppGeneratorSchema } from './schema';
 
@@ -85,6 +86,8 @@ export default async function adminGenerator(
       },
     },
   });
+
+  await addPackageToPackageJson(tree, ['react-admin', 'rxjs']);
 
   // Remove application useless files
   cleanApplication(tree, applicationRoot);

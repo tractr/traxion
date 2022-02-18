@@ -1,6 +1,7 @@
 import { TargetConfiguration } from '@nrwl/devkit';
 
 import { AvailableTractrTemplates } from './generators/hapify-library/schema';
+import { Packages, PackageType } from './helpers';
 
 export const DEFAULT_IMPORT_REPLACEMENTS = {
   'angular-rext-client': ['rext-client'],
@@ -45,9 +46,13 @@ export const DEFAULT_LIBRARY_TYPE: Record<AvailableTractrTemplates, string> = {
 };
 
 export const DEFAULT_TARGETS_OPTIONS: Partial<
-  Record<AvailableTractrTemplates, Record<string, Partial<TargetConfiguration>>>
+  Record<
+    AvailableTractrTemplates,
+    Record<string, Partial<TargetConfiguration> | null>
+  >
 > = {
   dbml: {
+    build: null,
     generate: {
       options: {
         format: false,
@@ -56,4 +61,19 @@ export const DEFAULT_TARGETS_OPTIONS: Partial<
       },
     },
   },
+};
+
+export const DEFAULT_DEPENDENCIES: Partial<
+  Record<AvailableTractrTemplates, Packages>
+> = {
+  models: [
+    { packageName: 'faker', version: '5.5.3', type: PackageType.dependencies },
+  ],
+  'angular-rext-client': [
+    {
+      packageName: '@tractr/angular-tools',
+      version: 'current',
+      type: PackageType.dependencies,
+    },
+  ],
 };

@@ -36,6 +36,7 @@ describe('createSecondaryEntrypoint', () => {
     secondaryEntrypoints: ['mock'],
     npmScope: 'test',
     importPath: '@test/test',
+    importPrefixPath: '@test/',
     libsDir: 'libs',
     targets: {},
     extra: {},

@@ -1,23 +1,27 @@
 import path = require('path');
 
-import { libraryGenerator as angularLibraryGenerator } from '@nrwl/angular/generators';
-import { formatFiles, generateFiles, Tree } from '@nrwl/devkit';
-import { Linter } from '@nrwl/linter';
-import { libraryGenerator as nestLibraryGenerator } from '@nrwl/nest';
-import { libraryGenerator as reactLibraryGenerator } from '@nrwl/react';
+import {
+  formatFiles,
+  generateFiles,
+  TargetConfiguration,
+  Tree,
+} from '@nrwl/devkit';
 import * as deepmerge from 'deepmerge';
 
-import { addPackageToPackageJson } from '../..';
+import { addPackageToPackageJson } from '../../helpers';
 import { readTargetConfiguration } from '../../helpers/read-target-configuration';
 import { updateTargetConfiguration } from '../../helpers/update-target-configuration';
+import { DEFAULT_DEPENDENCIES } from '../../schematics.constants';
 import addGenerateTarget from '../target-generate/generator';
 import {
-  cleanAngularLibrary,
-  cleanNestLibrary,
+  addGitIgnoreEntry,
+  addImplicitDependencies,
+  addTemplateDependencies,
   createSecondaryEntrypoints,
+  generateLibrary,
   normalizeOptions,
+  updateProjectTargets,
 } from './helpers';
-import { cleanReactLibrary } from './helpers/clean-react-library.helper';
 import {
   HapifyLibraryGeneratorOptionsWithExtra,
   NormalizedOptions,
@@ -36,20 +40,6 @@ function addFiles(host: Tree, options: NormalizedOptions) {
   });
 }
 
-function addGitIgnoreEntry(host: Tree, options: NormalizedOptions) {
-  const gitIgnorePath = path.join(options.projectRoot, '.gitignore');
-  if (!host.exists(gitIgnorePath)) host.write(gitIgnorePath, '');
-
-  let content = host.read(gitIgnorePath, 'utf-8') || '';
-  if (!/^hapify.json$/gm.test(content)) {
-    content += '\nhapify.json\n';
-  }
-  if (!/^generated$/gm.test(content)) {
-    content += '\ngenerated\n';
-  }
-  host.write(gitIgnorePath, content);
-}
-
 export default async function hapifyLibraryGenerator(
   tree: Tree,
   options: HapifyLibraryGeneratorOptionsWithExtra,
@@ -60,41 +50,9 @@ export default async function hapifyLibraryGenerator(
   const currentVersion = (await import('../../../package.json')).version;
 
   // Default values for library generator options
-  const { name, directory, extra, type, targets, importPath, projectName } =
-    normalizedOptions;
-  const libraryGeneratorDefaultOptions = { buildable: true };
-  const libraryGeneratorOptions = { name, directory, importPath, ...extra };
+  const { extra, projectName, hapifyTemplates } = normalizedOptions;
 
-  // Generate the library
-  switch (type) {
-    case 'angular':
-      await angularLibraryGenerator(tree, {
-        ...libraryGeneratorDefaultOptions,
-        ...libraryGeneratorOptions,
-      });
-      cleanAngularLibrary(tree, normalizedOptions);
-      break;
-    case 'nest':
-      await nestLibraryGenerator(tree, {
-        ...libraryGeneratorDefaultOptions,
-        ...libraryGeneratorOptions,
-      });
-      cleanNestLibrary(tree, normalizedOptions);
-      break;
-    case 'react':
-      await reactLibraryGenerator(tree, {
-        ...libraryGeneratorDefaultOptions,
-        style: 'none',
-        skipTsConfig: false,
-        skipFormat: false,
-        unitTestRunner: 'jest',
-        linter: Linter.EsLint,
-        ...libraryGeneratorOptions,
-      });
-      cleanReactLibrary(tree, normalizedOptions);
-      break;
-    default:
-  }
+  await generateLibrary(tree, normalizedOptions);
 
   await createSecondaryEntrypoints(tree, normalizedOptions);
 
@@ -114,19 +72,11 @@ export default async function hapifyLibraryGenerator(
     ),
   );
 
-  Object.keys(targets).forEach((target) => {
-    const targetConfiguration = readTargetConfiguration(
-      tree,
-      projectName,
-      target,
-    );
-    updateTargetConfiguration(
-      tree,
-      projectName,
-      target,
-      deepmerge(targetConfiguration, targets[target]),
-    );
-  });
+  addImplicitDependencies(tree, normalizedOptions);
+
+  updateProjectTargets(tree, normalizedOptions);
+
+  await addTemplateDependencies(tree, normalizedOptions);
 
   await formatFiles(tree);
 }

@@ -3,7 +3,10 @@ import { relative } from 'path';
 import { getWorkspaceLayout, TargetConfiguration, Tree } from '@nrwl/devkit';
 import * as deepmerge from 'deepmerge';
 
-import { getNormalizedProjectDefaultsOptions } from '../../../helpers';
+import {
+  getImportPrefixPath,
+  getNormalizedProjectDefaultsOptions,
+} from '../../../helpers';
 import {
   DEFAULT_IMPORT_REPLACEMENTS,
   DEFAULT_SECONDARY_ENTRY_POINTS,
@@ -81,7 +84,7 @@ export function normalizeOptions(
     if (!partialTargets) return acc;
 
     return deepmerge(acc, partialTargets);
-  }, {} as Record<string, Partial<TargetConfiguration>>);
+  }, {} as Record<string, Partial<TargetConfiguration> | null>);
 
   // Process import path if the option is not provided
   const importPath = `@${npmScope}/${directory ? `${directory}-` : ''}${name}`;
@@ -104,6 +107,7 @@ export function normalizeOptions(
     importPath,
     hapifyModelsJsonRelativePath,
     hapifyImportReplacements,
+    importPrefixPath: getImportPrefixPath(tree, directory),
     templates,
     secondaryEntrypoints,
     targets,

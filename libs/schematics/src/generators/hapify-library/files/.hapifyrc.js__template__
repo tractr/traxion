@@ -13,5 +13,5 @@ module.exports = {
   extends: [<% for (const templateName of templates) {%>
     '<%= templateName %>',<% } %>],<% if (hapifyUseImportReplacements) { %>
   importReplacements: {<% for (const replacement of hapifyImportReplacements) { %>
-    '<%= replacement %>': '@<%= npmScope %>/<%= replacement %>',<% } %>},<% } %>
+    '<%= replacement %>': '<%= importPrefixPath %><%= replacement %>',<% } %>},<% } %>
 };
