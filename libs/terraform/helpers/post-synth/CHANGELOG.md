@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.39.0](https://github.com/tractr/stack/compare/v1.38.0...v1.39.0) (2022-02-18)
+
+
+### Features
+
+* **terraform-helpers-post-synth:** fix publish config ([#392](https://github.com/tractr/stack/issues/392)) ([3a0eac7](https://github.com/tractr/stack/commit/3a0eac7f9bccfa2759974c1474e1daa98c2e7149))
+
+
+
 # [1.38.0](https://github.com/tractr/stack/compare/v1.37.1...v1.38.0) (2022-02-17)
 
 
