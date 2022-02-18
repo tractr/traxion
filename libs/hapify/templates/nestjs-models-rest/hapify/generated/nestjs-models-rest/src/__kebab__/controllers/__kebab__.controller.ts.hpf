@@ -14,7 +14,13 @@ import {
   Req,
 <<endif>>
 } from '@nestjs/common';
-import { CurrentAbilities, Policies } from '@tractr/nestjs-core';
+import { 
+  CurrentAbilities, 
+  Policies,
+  <<if Model not noGuest>>
+    Public,
+  <<endif>>
+} from '@tractr/nestjs-core';
 
 import { <<if Fields ownership >><<<if (root.names.pascal !== 'User') {>>><<Model pascal>>, <<<}>>>User, <<endif>>Prisma } from '@prisma/client';
 import { <<if Fields ownership >>Actions, AppAbility, <<endif>>Permission } from '../../../../casl';
@@ -58,6 +64,9 @@ export class <<Model pascal>>Controller {
    * @returns a new <<Model pascal>>
    */
   @Post()
+  <<if CreateAccess guest>>
+    @Public()
+  <<endif>>
   @Policies(Permission.CREATE_<<Model constant>>)
   public create(
     @Body() bodyDto: <<Model pascal>>CreateBodyDto,
@@ -98,6 +107,9 @@ export class <<Model pascal>>Controller {
   * @returns the number of <<Model pascal>>
   */
   @Get('count')
+  <<if CountAccess guest>>
+    @Public()
+  <<endif>>
   @Policies(Permission.COUNT_<<Model constant>>)
   public async count(
     @Query() queryDto: <<Model pascal>>CountQueryDto,  
@@ -127,6 +139,9 @@ export class <<Model pascal>>Controller {
    * @returns a <<Model pascal>> or null
    */
   @Get(':id')
+  <<if ReadAccess guest>>
+    @Public()
+  <<endif>>
   @Policies(Permission.READ_<<Model constant>>)
   public async findUnique(
     @Param() paramsDto: <<Model pascal>>FindUniqueParamsDto,
@@ -165,6 +180,9 @@ export class <<Model pascal>>Controller {
    * @returns an array of <<Model pascal>> entities
    */
   @Get()
+  <<if SearchAccess guest>>
+    @Public()
+  <<endif>>
   @Policies(Permission.SEARCH_<<Model constant>>)
   public findMany(
     @Query() queryDto: <<Model pascal>>FindManyQueryDto,
@@ -199,6 +217,9 @@ export class <<Model pascal>>Controller {
    * @returns the updated <<Model pascal>>
    */
   @Patch(':id')
+  <<if UpdateAccess guest>>
+    @Public()
+  <<endif>>
   @Policies(Permission.UPDATE_<<Model constant>>)
   public async update(
     @Param() paramsDto: <<Model pascal>>UpdateParamsDto,
@@ -243,6 +264,11 @@ export class <<Model pascal>>Controller {
    * @returns the updated <<Model pascal>>
    */
   @Put(':id')
+  <<if CreateAccess guest>>
+    <<if UpdateAccess guest>>
+    @Public()
+    <<endif>>
+  <<endif>>
   @Policies(Permission.UPDATE_<<Model constant>>)
   public async upsert(
     @Param() paramsDto: <<Model pascal>>UpsertParamsDto,
@@ -289,6 +315,9 @@ export class <<Model pascal>>Controller {
    * @returns the updated <<Model pascal>>
    */
   @Delete(':id')
+  <<if DeleteAccess guest>>
+    @Public()
+  <<endif>>
   @Policies(Permission.REMOVE_<<Model constant>>)
   public async delete(
     @Param() paramsDto: <<Model pascal>>DeleteParamsDto,
