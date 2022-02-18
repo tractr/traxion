@@ -81,12 +81,12 @@ seed().catch((e) => {
 
 datasource db {
   provider = "postgresql"
-  url      = env("TRACTR_DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
-  output = "../../../node_modules"
+  output = "../../../node_modules/.prisma/client"
   previewFeatures = ["filterJson"]
 }
 `);
