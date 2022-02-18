@@ -134,7 +134,8 @@
               "angular-authentication:publish",
               "terraform-group-pool:publish",
               "angular-casl:publish",
-              "hapify-create-hapify-workspace:publish"
+              "hapify-create-hapify-workspace:publish",
+              "terraform-helpers-post-synth:publish"
             ],
             "syncVersions": true
           }
