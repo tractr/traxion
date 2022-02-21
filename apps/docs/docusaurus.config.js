@@ -50,11 +50,7 @@ module.exports = {
           items: [
             {
               label: 'Discord',
-              href: 'https://discordapp.com/invite/traxion',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/traxion',
+              href: 'https://discord.traxion.dev/',
             },
           ],
         },
@@ -68,7 +64,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Traxion, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Tractr, Inc. Built with Docusaurus.`,
     },
   },
   presets: [
