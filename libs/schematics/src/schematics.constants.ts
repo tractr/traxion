@@ -11,7 +11,7 @@ export const DEFAULT_IMPORT_REPLACEMENTS = {
   'nestjs-models': ['nestjs-models-common', 'nestjs-models-rest'],
   'nestjs-models-common': ['models'],
   'nestjs-models-rest': ['casl', 'nestjs-models-common', 'rest-dtos', 'models'],
-  prisma: [],
+  prisma: ['nestjs-models', 'nestjs-models-common'],
   'react-admin': ['rext-client'],
   'rest-dtos': ['models'],
   'rext-client': ['models', 'rest-dtos'],
@@ -45,6 +45,24 @@ export const DEFAULT_LIBRARY_TYPE: Record<AvailableTractrTemplates, string> = {
   'rext-client': 'angular',
 };
 
+export type LibraryUseContext = 'angular' | 'nest' | 'react';
+export const DEFAULT_LIBRARY_USE_CONTEXT: Record<
+  AvailableTractrTemplates,
+  LibraryUseContext[]
+> = {
+  'angular-rext-client': ['angular'],
+  casl: ['nest', 'angular', 'react'],
+  dbml: ['nest'],
+  models: ['nest', 'angular', 'react'],
+  'nestjs-models': ['nest'],
+  'nestjs-models-common': ['nest'],
+  'nestjs-models-rest': ['nest'],
+  prisma: ['nest'],
+  'react-admin': ['react'],
+  'rest-dtos': ['nest', 'angular', 'react'],
+  'rext-client': ['nest', 'angular', 'react'],
+};
+
 export const DEFAULT_TARGETS_OPTIONS: Partial<
   Record<
     AvailableTractrTemplates,
@@ -53,6 +71,7 @@ export const DEFAULT_TARGETS_OPTIONS: Partial<
 > = {
   dbml: {
     build: null,
+    lint: null,
     generate: {
       options: {
         format: false,

@@ -1,9 +1,16 @@
-import { getWorkspaceLayout, names, Tree } from '@nrwl/devkit';
+import { getWorkspaceLayout, Tree } from '@nrwl/devkit';
 
-import { AdminAppGeneratorSchema } from '../schema';
+import { getNormalizedProjectDefaultsOptions } from '../../../helpers';
+import {
+  AdminAppGeneratorSchema,
+  AdminAppGeneratorSchemaWithExtra,
+} from '../schema';
 
 export interface NormalizedSchema extends AdminAppGeneratorSchema {
   npmScope: string;
+  projectRoot: string;
+  projectName: string;
+  projectDirectory: string;
   extra: Record<string, unknown>;
 }
 
@@ -22,11 +29,19 @@ export function normalizeOptions(
     reactAdminImportPath,
     rextClientImportPath,
     ...extra
-  }: AdminAppGeneratorSchema,
+  }: AdminAppGeneratorSchemaWithExtra,
 ): NormalizedSchema {
-  const { npmScope } = getWorkspaceLayout(tree);
-  const name = names(rawName).fileName;
-  const directory = rawDirectory ? names(rawDirectory).fileName : undefined;
+  const { appsDir, npmScope } = getWorkspaceLayout(tree);
+
+  const { name, directory, projectRoot, projectName, projectDirectory } =
+    getNormalizedProjectDefaultsOptions(
+      tree,
+      {
+        name: rawName,
+        directory: rawDirectory,
+      },
+      appsDir,
+    );
   const npmName =
     rawNpmName || `@${npmScope}/${directory ? `${directory}-` : ''}${name}`;
 
@@ -35,6 +50,9 @@ export function normalizeOptions(
     directory,
     npmScope,
     npmName,
+    projectRoot,
+    projectName,
+    projectDirectory,
     reactAdminImportPath,
     rextClientImportPath,
     extra,

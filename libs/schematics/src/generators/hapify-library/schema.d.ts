@@ -41,7 +41,7 @@ export interface NormalizedOptions extends HapifyLibraryGeneratorOptions {
   importPrefixPath: string;
   hapifyModelsJsonRelativePath: string;
   templates: string[];
-  hapifyImportReplacements: string[];
+  hapifyImportReplacements: Record<string, string>;
   secondaryEntrypoints: string[];
   targets: Record<string, Partial<TargetConfiguration> | null>;
   extra: Record<string, unknown>;

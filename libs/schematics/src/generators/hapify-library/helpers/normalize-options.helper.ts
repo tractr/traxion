@@ -56,14 +56,24 @@ export function normalizeOptions(
     options.hapifyModelsJson,
   );
 
+  const importPrefixPath = getImportPrefixPath(tree, directory);
+
   // Format import replacement
-  const hapifyImportReplacements = [
-    ...new Set(
-      hapifyTemplates.flatMap(
-        (template) => DEFAULT_IMPORT_REPLACEMENTS[template],
-      ),
-    ),
-  ];
+  const hapifyImportReplacements: Record<string, string> = hapifyTemplates
+    .flatMap((template) => DEFAULT_IMPORT_REPLACEMENTS[template])
+    .map((template) => [template, importPrefixPath + template])
+    .concat(
+      hapifyTemplates.length === 1
+        ? [['mock', `${importPrefixPath}${hapifyTemplates[0]}/mock`]]
+        : [],
+    )
+    .reduce(
+      (acc, [importName, importPath]) => ({
+        ...acc,
+        ...(importName && importPath && { [importName]: importPath }),
+      }),
+      {},
+    );
 
   // Format entry point inputs
   const defaultEntrypoint = [

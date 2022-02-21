@@ -1,12 +1,8 @@
 /* eslint-disable no-await-in-loop */
 
-import { join } from 'path';
-
 import {
   formatFiles,
-  generateFiles,
   logger,
-  names,
   readWorkspaceConfiguration,
   Tree,
   updateWorkspaceConfiguration,
@@ -68,9 +64,10 @@ export default async function hapifyWorkspace(
   });
 
   const normalizedOptions = await normalizeOptions(tree, options);
+  const { generatedDir } = normalizedOptions;
 
   succeed = log.info('Initializing linter');
-  await eslintGenerator(tree);
+  await eslintGenerator(tree, { generatedDir });
   succeed();
 
   succeed = log.info('Initializing prettier');

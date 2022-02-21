@@ -1,12 +1,5 @@
 import { Module } from '@nestjs/common';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
-
-import {
-  getSelectPrismaUserQuery,
-  rolePermissions,
-} from '<%= generatedImportPath %>casl';
-import { ModelsModule } from '<%= generatedImportPath %>nestjs-models';
-import { USER_SERVICE } from '<%= generatedImportPath %>nestjs-models-common';
 import {
   AuthenticationModule,
   JwtGlobalAuthGuard,
@@ -18,6 +11,13 @@ import {
 } from '@tractr/nestjs-casl';
 import { LoggerModule } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
+
+import {
+  getSelectPrismaUserQuery,
+  rolePermissions,
+} from '<%= generatedImportPath %>casl';
+import { ModelsModule } from '<%= generatedImportPath %>nestjs-models';
+import { USER_SERVICE } from '<%= generatedImportPath %>nestjs-models-common';
 
 @Module({
   imports: [

@@ -1,5 +1,6 @@
 import { Tree } from '@nrwl/devkit';
 
+import * as packageJson from '../../../../package.json';
 import { addPackageToPackageJson } from '../../../helpers';
 import { DEFAULT_DEPENDENCIES } from '../../../schematics.constants';
 import { NormalizedOptions } from '../schema';
@@ -9,8 +10,7 @@ export async function addTemplateDependencies(
   options: NormalizedOptions,
 ) {
   const { hapifyTemplates } = options;
-  const currentPackageVersion = (await import('../../../../package.json'))
-    .version;
+  const currentPackageVersion = packageJson.version;
 
   await addPackageToPackageJson(
     tree,

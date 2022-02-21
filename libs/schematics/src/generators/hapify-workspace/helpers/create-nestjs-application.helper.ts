@@ -1,10 +1,6 @@
 import { join } from 'path';
 
-import {
-  addDependenciesToPackageJson,
-  generateFiles,
-  Tree,
-} from '@nrwl/devkit';
+import { generateFiles, Tree } from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
 import { applicationGenerator as nestjsApplicationGenerator } from '@nrwl/nest';
 
@@ -12,6 +8,8 @@ import {
   addPackageJson,
   addPackageToPackageJson,
   PackageType,
+  readTargetConfiguration,
+  updateTargetConfiguration,
 } from '../../../helpers';
 import { NormalizedOptions } from '../schema';
 import { getTemplatesOptions } from './get-templates-options.helper';
@@ -66,9 +64,21 @@ export async function createNestjsApplication(
 
   await addPackageToPackageJson(
     tree,
-    ['@nestjs/swagger', 'morgan', 'swagger-ui-express'].map((packageName) => ({
-      packageName,
-      type: PackageType.dependencies,
-    })),
+    ['@nestjs/swagger', 'morgan', 'swagger-ui-express', 'cookie-parser'],
+    PackageType.dependencies,
   );
+
+  const build = readTargetConfiguration(tree, apiName, 'build');
+  updateTargetConfiguration(tree, apiName, 'build', {
+    ...build,
+    options: {
+      ...build.options,
+      tsPlugins: [
+        ...new Set([
+          ...(build.options.tsPlugins || []),
+          '@nestjs/swagger/plugin',
+        ]),
+      ],
+    },
+  });
 }

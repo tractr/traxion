@@ -1,0 +1,5 @@
+.user__infos__wrapper {
+  &__title {
+    @apply text-2xl font-bold;
+  }
+}

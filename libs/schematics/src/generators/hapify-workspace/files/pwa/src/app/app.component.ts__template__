@@ -1,0 +1,8 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'test1-root',
+  templateUrl: './app.component.html',
+  styleUrls: [],
+})
+export class AppComponent {}

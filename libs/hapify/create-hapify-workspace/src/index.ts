@@ -7,16 +7,22 @@ import { cwd } from 'process';
 import lodash from 'lodash';
 import { $, cd } from 'zx';
 
+$.verbose = false;
+
 const { kebabCase } = lodash;
 
-export interface CreateHapifyWorkspaceOptions {
-  hapifyLibraryName: string;
+export interface CreateHapifyWorkspaceOptions extends CreateNxWorkspaceOptions {
+  apiName?: string;
+  pwaName?: string;
+  adminName?: string;
+  libsPath?: string;
+  appsPath?: string;
+  generatedDir?: string;
 }
 
 export interface CreateNxWorkspaceOptions {
   preset?: string;
-  name?: string;
-  appName?: string;
+  name: string;
   cli?: string;
   style?: string;
   interactive?: boolean;
@@ -24,28 +30,42 @@ export interface CreateNxWorkspaceOptions {
   nxCloud?: boolean;
 }
 
-const DEFAULT_NX_WORKSPACE_OPTIONS: CreateNxWorkspaceOptions = {
+const DEFAULT_NX_WORKSPACE_OPTIONS: Partial<CreateNxWorkspaceOptions> = {
   preset: 'ts',
-  appName: 'api',
   style: 'less',
   cli: 'nx',
   packageManager: 'npm',
   nxCloud: false,
 };
 
-export async function execCreateNxWorkspace(
-  options: CreateNxWorkspaceOptions = {},
-) {
-  const args = Object.entries({
+const DEFAULT_HAPIFY_WORKSPACE_OPTIONS: Partial<CreateHapifyWorkspaceOptions> =
+  {
     ...DEFAULT_NX_WORKSPACE_OPTIONS,
-    ...options,
-  })
+    apiName: 'api',
+    pwaName: 'api',
+    adminName: 'api',
+    libsPath: 'libs',
+    appsPath: 'apps',
+    generatedDir: 'generated',
+  };
+
+export function transformObjectToArgs(
+  obj: Record<string, boolean | number | string>,
+): Array<string | boolean | number> {
+  return Object.entries(obj)
     .map(([key, value]) => [kebabCase(key), value])
     .flatMap(([key, value]) => {
       if (typeof value === 'boolean' && value) return [`--${key}`];
       if (typeof value === 'boolean' && !value) return [`--no-${key}`];
       return [`--${key}`, value];
     });
+}
+
+export async function execCreateNxWorkspace(options: CreateNxWorkspaceOptions) {
+  const args = transformObjectToArgs({
+    ...DEFAULT_NX_WORKSPACE_OPTIONS,
+    ...options,
+  });
 
   await $`npx create-nx-workspace ${args}`;
 }
@@ -62,17 +82,15 @@ export async function writeNpmrc(rootPath: string) {
  *
  * @params options CreateNxWorkspaceOptions
  */
-export async function createHapifyWorkspace(
-  options: CreateNxWorkspaceOptions = {},
-) {
-  const appName = 'test1';
+export async function createHapifyWorkspace(options: CreateNxWorkspaceOptions) {
+  const { name } = options;
 
   // The entry point of this script is to create a new Nx workspace first.
   // After this we will call the schematics from this stack to paramaeters the workspace
-  await execCreateNxWorkspace({ name: appName });
+  await execCreateNxWorkspace(options);
 
   // Change the cwd of the current process to the newly created Nx workspace.
-  cd('test1');
+  cd(name);
 
   await writeNpmrc(cwd());
 
@@ -84,16 +102,26 @@ export async function createHapifyWorkspace(
   ];
 
   // Installing the missing dependencies
-  await $`npm install --save-dev ${npmPackages}`;
+  await $`echo "- Installing missing dependencies"`;
+  await $`npm install --save-dev ${npmPackages} &>/dev/null`;
+  await $`echo "✔ Installing missing dependencies"`;
 
   // TODO DO NOT COMMIT THIS LINE
-  cd('../../stack');
-  await $`nx build schematics`;
-  cd('../test/test1');
-  await $`npm i --save-dev node-fetch@2`;
   await $`DEBUG=local-install node ../../stack/tools/local-install.mjs --projects schematics`;
 
-  await $`nx g @tractr/schematics:hapify-workspace --name test1 --verbose`;
+  const args = transformObjectToArgs({
+    ...DEFAULT_HAPIFY_WORKSPACE_OPTIONS,
+    ...options,
+  });
+  await $`echo "- Start traxion workspace schematics"`;
+  await $`nx g @tractr/schematics:hapify-workspace ${args}`;
+  await $`echo "✔ Start traxion workspace schematics"`;
 
-  await $`npm install --force`;
+  await $`echo "- Installing missing dependencies"`;
+  await $`npm install --force &>/dev/null`;
+  await $`echo "✔ Installing missing dependencies"`;
+
+  await $`echo "- Formating the workspace"`;
+  await $`npm run format &>/dev/null`;
+  await $`echo "✔ Formating the workspace"`;
 }

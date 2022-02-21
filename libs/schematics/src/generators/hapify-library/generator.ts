@@ -1,17 +1,10 @@
 import path = require('path');
 
-import {
-  formatFiles,
-  generateFiles,
-  TargetConfiguration,
-  Tree,
-} from '@nrwl/devkit';
-import * as deepmerge from 'deepmerge';
+import { formatFiles, generateFiles, Tree } from '@nrwl/devkit';
 
+import * as packageJson from '../../../package.json';
 import { addPackageToPackageJson } from '../../helpers';
-import { readTargetConfiguration } from '../../helpers/read-target-configuration';
-import { updateTargetConfiguration } from '../../helpers/update-target-configuration';
-import { DEFAULT_DEPENDENCIES } from '../../schematics.constants';
+import { DEFAULT_LIBRARY_USE_CONTEXT } from '../../schematics.constants';
 import addGenerateTarget from '../target-generate/generator';
 import {
   addGitIgnoreEntry,
@@ -22,6 +15,7 @@ import {
   normalizeOptions,
   updateProjectTargets,
 } from './helpers';
+import { addBabelRc } from './helpers/add-babelrc.helper';
 import {
   HapifyLibraryGeneratorOptionsWithExtra,
   NormalizedOptions,
@@ -47,7 +41,7 @@ export default async function hapifyLibraryGenerator(
   // Format options
   const normalizedOptions = normalizeOptions(tree, options);
 
-  const currentVersion = (await import('../../../package.json')).version;
+  const currentVersion = packageJson.version;
 
   // Default values for library generator options
   const { extra, projectName, hapifyTemplates } = normalizedOptions;
@@ -75,6 +69,11 @@ export default async function hapifyLibraryGenerator(
   addImplicitDependencies(tree, normalizedOptions);
 
   updateProjectTargets(tree, normalizedOptions);
+
+  const isUsedInAReactContext = hapifyTemplates.some((template) =>
+    DEFAULT_LIBRARY_USE_CONTEXT[template].includes('react'),
+  );
+  if (isUsedInAReactContext) addBabelRc(tree, normalizedOptions);
 
   await addTemplateDependencies(tree, normalizedOptions);
 

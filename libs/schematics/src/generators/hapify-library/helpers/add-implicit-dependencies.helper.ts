@@ -1,5 +1,3 @@
-import { join } from 'path';
-
 import {
   readProjectConfiguration,
   Tree,
@@ -19,9 +17,9 @@ export function addImplicitDependencies(
     ...projectConfiguration,
     implicitDependencies: [
       ...new Set([
-        ...hapifyImportReplacements.map(
-          (dependency) => `${directory}-${dependency}`,
-        ),
+        ...Object.keys(hapifyImportReplacements)
+          .filter((template) => template !== 'mock')
+          .map((dependency) => `${directory}-${dependency}`),
         ...(projectConfiguration?.implicitDependencies || []),
       ]),
     ],
