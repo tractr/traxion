@@ -4,7 +4,7 @@ import * as ReactGenerators from '@nrwl/react';
 
 import generator from './generator';
 import * as helpers from './helpers';
-import { AdminAppGeneratorSchema } from './schema';
+import { AdminAppGeneratorSchemaWithExtra } from './schema';
 
 jest.mock('@nrwl/react', () => ({
   __esModule: true,
@@ -19,7 +19,7 @@ jest.mock('./helpers', () => ({
 describe('admin generator', () => {
   let appTree: Tree;
 
-  const options: AdminAppGeneratorSchema = {
+  const options: AdminAppGeneratorSchemaWithExtra = {
     name: 'admin',
     reactAdminImportPath: '@tractr/react-admin',
     rextClientImportPath: '@tractr/rext-client',

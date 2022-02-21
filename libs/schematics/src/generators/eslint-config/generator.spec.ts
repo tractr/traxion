@@ -36,7 +36,7 @@ describe('eslint generator', () => {
     const eslintRcJson = readJson(appTree, '.eslintrc.json');
 
     expect(eslintRcJson.settings).toEqual({
-      'import/internal-regex': '^@(generated)/',
+      'import/internal-regex': '^@(proj)/',
     });
 
     // expect package.json to have been updated

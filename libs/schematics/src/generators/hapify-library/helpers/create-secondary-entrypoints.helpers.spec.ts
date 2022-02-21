@@ -32,7 +32,7 @@ describe('createSecondaryEntrypoint', () => {
     projectDirectory: 'test',
     hapifyModelsJsonRelativePath: '../../hapify-models.json',
     templates: [],
-    hapifyImportReplacements: [],
+    hapifyImportReplacements: {},
     secondaryEntrypoints: ['mock'],
     npmScope: 'test',
     importPath: '@test/test',

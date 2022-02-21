@@ -49,7 +49,7 @@ describe('normalizeOptions', () => {
 
     expect(normalizedOptions).toEqual({
       ...options,
-      hapifyImportReplacements: [],
+      hapifyImportReplacements: { mock: '@tractr/test-models/mock' },
       hapifyModelsJsonRelativePath: '../../../hapify-models.json',
       projectDirectory: 'test/test',
       projectName: 'test-test',
@@ -118,7 +118,10 @@ describe('normalizeOptions', () => {
       hapifyTemplates: ['rest-dtos'],
     });
 
-    expect(normalizedOptions.hapifyImportReplacements).toEqual(['models']);
+    expect(normalizedOptions.hapifyImportReplacements).toEqual({
+      mock: '@tractr/test-rest-dtos/mock',
+      models: '@tractr/test-models',
+    });
   });
 
   it('should format entry points', async () => {
@@ -155,7 +158,7 @@ describe('normalizeOptions', () => {
 
     expect(normalizedOptions).toEqual({
       ...options,
-      hapifyImportReplacements: [],
+      hapifyImportReplacements: { mock: '@tractr/test-models/mock' },
       hapifyModelsJsonRelativePath: '../../../hapify-models.json',
       projectDirectory: 'test/test',
       projectName: 'test-test',
@@ -180,7 +183,7 @@ describe('normalizeOptions', () => {
 
     expect(normalizedOptions).toEqual({
       ...options,
-      hapifyImportReplacements: [],
+      hapifyImportReplacements: {},
       hapifyAdditionalTemplates: 'test,,test2',
       hapifyModelsJsonRelativePath: '../../../hapify-models.json',
       projectDirectory: 'test/test',
@@ -211,7 +214,7 @@ describe('normalizeOptions', () => {
 
     expect(normalizedOptions).toEqual({
       ...options,
-      hapifyImportReplacements: [],
+      hapifyImportReplacements: { mock: '@tractr/test-models/mock' },
       hapifyModelsJsonRelativePath: '../../../hapify-models.json',
       projectDirectory: 'test/test',
       projectName: 'test-test',
