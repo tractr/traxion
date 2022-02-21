@@ -37,11 +37,11 @@ module.exports = {
           items: [
             {
               label: 'Get started',
-              to: 'get-started/initialization',
+              to: '/docs/get-started/quick-start',
             },
             {
               label: 'Contribute',
-              to: 'contribution/how-to-write-this-documentation',
+              to: '/docs/contribution/how-to-write-this-documentation',
             },
           ],
         },

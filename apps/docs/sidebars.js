@@ -13,7 +13,10 @@ module.exports = {
         {
           type: 'category',
           label: 'Step by step',
-          link: { type: 'doc', id: 'get-started/step-by-step/introduction' },
+          link: {
+            type: 'doc',
+            id: 'get-started/step-by-step/introduction',
+          },
           items: [
             'get-started/step-by-step/nx-workspace',
             'get-started/step-by-step/hapify',
