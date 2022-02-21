@@ -1,0 +1,33 @@
+<div class="page__wrapper">
+  <ng-container *ngIf="currentUser$ | async as currentUser; else formBlock">
+    <!-- <div *ngIf="isUserLogged">asdasd</div> -->
+    <stack-user-infos-ui
+      [name]="currentUser.name"
+      [email]="currentUser.email"
+      [role]="currentUser.roles[0]"
+    ></stack-user-infos-ui>
+  </ng-container>
+
+  <ng-template #formBlock>
+    <stack-login-form-ui (loginEvent)="login($event)"></stack-login-form-ui>
+  </ng-template>
+
+  <div class="api__wrapper">
+    <h2 class="api__wrapper__title">API</h2>
+    <!-- <stack-api-collapse-ui
+      [apiParams]="[{ name: 'string', value: 'string' }]"
+      [apiResponse]="[{ name: 'John', value: 'Doe' }]"
+      [apiMethod]="'POST'"
+      [apiUrl]="'/api/login'"
+    ></stack-api-collapse-ui> -->
+    <ng-container *ngIf="tags$ | async as tags">
+      <stack-api-collapse-ui
+        [apiParams]=""
+        [apiResponse]="tags$ | async"
+        [apiMethod]="'POST'"
+        [apiUrl]="'/api/tag'"
+        [apiError]="tagsError"
+      ></stack-api-collapse-ui>
+    </ng-container>
+  </div>
+</div>

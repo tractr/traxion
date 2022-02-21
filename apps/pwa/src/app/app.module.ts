@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   EyeInvisibleOutline,
   PlusOutline,
@@ -12,6 +13,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AppConfig } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DemoModule } from './demo/demo.module';
 import {
   MoleculeConnectedComponent,
   MoleculeHomeComponent,
@@ -39,20 +41,22 @@ import { User } from '@tractr/generated-models';
 
 @NgModule({
   declarations: [
+    AppComponent,
     MoleculeHomeComponent,
     MoleculeNotConnectedComponent,
     MoleculeConnectedComponent,
-    AppComponent,
   ],
   imports: [
     CommonModule,
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     AngularAuthenticationRoutingModule,
     AngularToolsModule,
     AngularComponentsModule,
     AngularFormModule,
+    DemoModule,
     AngularAuthenticationModule.forRootAsync<UserType>({
       user: User,
       useFactory: (
@@ -66,7 +70,7 @@ import { User } from '@tractr/generated-models';
         login: {
           url: 'login',
           routing: 'login',
-          redirect: ['/connected'],
+          redirect: ['/'],
         },
       }),
       deps: [ANGULAR_CONFIG_SERVICE],
