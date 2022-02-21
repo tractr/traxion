@@ -37,15 +37,17 @@ function copyAllFilesAndFolderToDestination(sourcePath, destinationPath) {
     }
   }
 }
-// Define the path to the source and destination
+
+// Define options
 const outputDocsDir = path.join(`${process.cwd()}`, 'dist', 'apps', 'docs');
 const tmpDir = path.join(`${process.cwd()}`, 'tmp', 'docs');
+const repoUrl = 'git@github.com:tractr/traxion.github.io.git';
 const cname = 'www.traxion.dev';
 const commitMessage = 'docs: update documentation';
 
 // Clone the docs repo and removes all files except for the .git folder
 await $`rm -rf ${tmpDir}`;
-await $`git clone git@github.com:tractr/traxion.github.io.git ${tmpDir}`;
+await $`git clone ${repoUrl} ${tmpDir}`;
 removeAllExceptGitFolder(tmpDir);
 
 // Build the docs and copy files to the docs repo
