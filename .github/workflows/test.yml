@@ -7,6 +7,10 @@ name: Test
 on:
   pull_request:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     # Our code will run on node 16 and Linux
