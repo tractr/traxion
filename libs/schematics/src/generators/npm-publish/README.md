@@ -1,16 +1,4 @@
----
-id: publish
-title: Publish
-sidebar_label: Publish
----
-
-:::important
-
-You need to [install the schamatics packages](./how-to) before you can use this schematic.
-
-:::
-
-## NPM publish
+# NPM publish
 
 Add npm publish configuration to a NX project
 
@@ -18,7 +6,7 @@ Add npm publish configuration to a NX project
 nx g @tractr/schematics:npm-publish <nxProjectName> <repositoryUrl>
 ```
 
-### Description
+## Description
 
 Add configuration of [`ngx-deploy-npm`](https://github.com/bikecoders/ngx-deploy-npm) to a NX project.
 
@@ -28,14 +16,14 @@ The following steps will be performed:
 - Update `package.json` to add the latest version of `ngx-deploy-npm`
 - Update `<projectPath>/package.json` to add `repository` and `publishConfig` options
 
-### Arguments
+## Arguments
 
 | Argument          | Description                            |
 | ----------------- | -------------------------------------- |
 | `<nxProjectName>` | The NX project name                    |
 | `<repositoryUrl>` | The git url used to host the workspace |
 
-### Options
+## Options
 
 | Option                         | Description                                                                                                           |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------- |

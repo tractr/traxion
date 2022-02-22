@@ -1,16 +1,4 @@
----
-id: prettier
-title: Prettier
-sidebar_label: Prettier
----
-
-:::important
-
-You need to [install the schamatics packages](./how-to) before you can use this schematic.
-
-:::
-
-## Prettier config
+# Prettier config
 
 Add prettier and its configuration to a NX project.
 
@@ -18,7 +6,7 @@ Add prettier and its configuration to a NX project.
 nx g @tractr/schematics:prettier-config
 ```
 
-### Description
+## Description
 
 Add and configure Prettier [`@tractr/prettier-config`](https://github.com/tractr/stack/tree/main/libs/config/prettier) to a NX project.
 
@@ -28,7 +16,7 @@ The following steps will be performed:
 - Create `.prettierrc.js` file with default import from `@tractr/prettier-config`
 - Update `package.json` to add the latest version of `@tractr/prettier-config`
 
-### Options
+## Options
 
 | Option     | Description                                                                                                     |
 | ---------- | --------------------------------------------------------------------------------------------------------------- |

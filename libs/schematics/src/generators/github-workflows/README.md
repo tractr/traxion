@@ -1,16 +1,4 @@
----
-id: github-workflows
-title: GitHub Workflows
-sidebar_label: GitHub Workflows
----
-
-:::important
-
-You need to [install the schamatics packages](./how-to) before you can use this schematic.
-
-:::
-
-## GitHub Workflows
+# GitHub Workflows
 
 Add GitHub workflows to a NX project.
 
@@ -18,7 +6,7 @@ Add GitHub workflows to a NX project.
 nx g @tractr/schematics:github-workflows
 ```
 
-### Description
+## Description
 
 Creates `.github` folder and adds workflows that will be executed by GitAction runners.
 
@@ -27,7 +15,7 @@ The following steps will be performed:
 - Creates `.github` folder
 - Create files (workflows) inside `.github` folder
 
-### Options
+## Options
 
 | Option                         | Description                                                                                                           |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------- |

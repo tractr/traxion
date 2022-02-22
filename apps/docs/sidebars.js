@@ -216,10 +216,10 @@ module.exports = {
           label: 'Schematics',
           link: { type: 'doc', id: 'references/schematics/how-to' },
           items: [
-            'references/schematics/publish',
+            'references/schematics/npm-publish',
             'references/schematics/release',
-            'references/schematics/eslint',
-            'references/schematics/prettier',
+            'references/schematics/eslint-config',
+            'references/schematics/prettier-config',
             'references/schematics/github-workflows',
           ],
         },

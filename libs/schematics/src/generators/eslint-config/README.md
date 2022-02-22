@@ -1,16 +1,4 @@
----
-id: eslint
-title: ESLint
-sidebar_label: ESLint
----
-
-:::important
-
-You need to [install the schamatics packages](./how-to) before you can use this schematic.
-
-:::
-
-## Eslint config
+# Eslint config
 
 Add ESLint and its configuration to a NX project.
 
@@ -18,7 +6,7 @@ Add ESLint and its configuration to a NX project.
 nx g @tractr/schematics:eslint-config
 ```
 
-### Description
+## Description
 
 Add and configure ESLint [`@tractr/eslint-config`](https://github.com/tractr/stack/tree/main/libs/config/eslint) to a NX project.
 
@@ -37,6 +25,6 @@ The following steps will be performed:
   - `eslint-plugin-jest`
   - `eslint-plugin-json-files`
 
-### Options
+## Options
 
 No options are provided for this package.
