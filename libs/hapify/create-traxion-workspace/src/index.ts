@@ -11,7 +11,8 @@ $.verbose = false;
 
 const { kebabCase } = lodash;
 
-export interface CreateHapifyWorkspaceOptions extends CreateNxWorkspaceOptions {
+export interface CreateTraxionWorkspaceOptions
+  extends CreateNxWorkspaceOptions {
   apiName?: string;
   pwaName?: string;
   adminName?: string;
@@ -38,7 +39,7 @@ const DEFAULT_NX_WORKSPACE_OPTIONS: Partial<CreateNxWorkspaceOptions> = {
   nxCloud: false,
 };
 
-const DEFAULT_HAPIFY_WORKSPACE_OPTIONS: Partial<CreateHapifyWorkspaceOptions> =
+const DEFAULT_TRAXION_WORKSPACE_OPTIONS: Partial<CreateTraxionWorkspaceOptions> =
   {
     ...DEFAULT_NX_WORKSPACE_OPTIONS,
     apiName: 'api',
@@ -78,11 +79,13 @@ export async function writeNpmrc(rootPath: string) {
 }
 
 /**
- * This function is used to create a new Hapify workspace.
+ * This function is used to create a new Traxion workspace.
  *
  * @params options CreateNxWorkspaceOptions
  */
-export async function createHapifyWorkspace(options: CreateNxWorkspaceOptions) {
+export async function createTraxionWorkspace(
+  options: CreateNxWorkspaceOptions,
+) {
   const { name } = options;
 
   // The entry point of this script is to create a new Nx workspace first.
@@ -110,11 +113,11 @@ export async function createHapifyWorkspace(options: CreateNxWorkspaceOptions) {
   await $`DEBUG=local-install node ../../stack/tools/local-install.mjs --projects schematics`;
 
   const args = transformObjectToArgs({
-    ...DEFAULT_HAPIFY_WORKSPACE_OPTIONS,
+    ...DEFAULT_TRAXION_WORKSPACE_OPTIONS,
     ...options,
   });
   await $`echo "- Start traxion workspace schematics"`;
-  await $`nx g @tractr/schematics:hapify-workspace ${args}`;
+  await $`nx g @tractr/schematics:traxion-workspace ${args}`;
   await $`echo "✔ Start traxion workspace schematics"`;
 
   await $`echo "- Installing missing dependencies"`;

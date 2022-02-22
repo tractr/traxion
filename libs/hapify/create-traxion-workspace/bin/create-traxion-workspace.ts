@@ -9,8 +9,8 @@ import { Command } from 'commander';
 import { ProcessOutput } from 'zx';
 
 import {
-  createHapifyWorkspace,
-  CreateHapifyWorkspaceOptions,
+  createTraxionWorkspace,
+  CreateTraxionWorkspaceOptions,
 } from '../src/index.js';
 
 export async function getCurrentPackageJson() {
@@ -50,7 +50,7 @@ const options = program.opts();
 
 const { name, apiName, libsPath, appsPath, generatedDir } = options;
 
-const createHapifyWorkspaceOptions: CreateHapifyWorkspaceOptions = {
+const createTraxionWorkspaceOptions: CreateTraxionWorkspaceOptions = {
   name,
   apiName,
   libsPath,
@@ -58,9 +58,9 @@ const createHapifyWorkspaceOptions: CreateHapifyWorkspaceOptions = {
   generatedDir,
 };
 
-console.info('Creating Hapify workspace...');
+console.info('Creating Traxion workspace...');
 
-createHapifyWorkspace(createHapifyWorkspaceOptions).catch(
+createTraxionWorkspace(createTraxionWorkspaceOptions).catch(
   async (error: unknown) => {
     if (error instanceof ProcessOutput) {
       if (error.exitCode === 1) return;

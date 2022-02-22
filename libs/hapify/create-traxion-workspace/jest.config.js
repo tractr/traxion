@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'hapify-create-hapify-workspace',
+  displayName: 'hapify-create-traxion-workspace',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/hapify/create-hapify-workspace',
+  coverageDirectory: '../../../coverage/libs/hapify/create-traxion-workspace',
 };

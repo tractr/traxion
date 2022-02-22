@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/create-hapify-workspace",
+  "name": "@tractr/hapify-create-traxion-workspace",
   "version": "1.39.1",
   "repository": {
     "type": "git",
@@ -7,7 +7,7 @@
   },
   "type": "module",
   "bin": {
-    "create-hapify-workspace": "./dist/src/create-hapify-workspace.js"
+    "create-traxion-workspace": "./bin/create-traxion-workspace.js"
   },
   "publishConfig": {
     "access": "restricted",

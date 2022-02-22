@@ -21,11 +21,6 @@
       "factory": "./src/generators/hapify-library/generator",
       "schema": "./src/generators/hapify-library/schema.json"
     },
-    "hapify-workspace": {
-      "description": "hapify-workspace generator",
-      "factory": "./src/generators/hapify-workspace/generator",
-      "schema": "./src/generators/hapify-workspace/schema.json"
-    },
     "npm-publish": {
       "description": "npm-publish generator",
       "factory": "./src/generators/npm-publish/generator",
@@ -50,6 +45,11 @@
       "description": "target-generate",
       "factory": "./src/generators/target-generate/generator",
       "schema": "./src/generators/target-generate/schema.json"
+    },
+    "traxion-workspace": {
+      "description": "traxion-workspace generator",
+      "factory": "./src/generators/traxion-workspace/generator",
+      "schema": "./src/generators/traxion-workspace/schema.json"
     }
   },
   "name": "schematics",

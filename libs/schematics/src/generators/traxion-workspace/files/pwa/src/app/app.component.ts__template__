@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'test1-root',
+  selector: '<%= npmScope %>-root',
   templateUrl: './app.component.html',
   styleUrls: [],
 })

@@ -1,10 +1,10 @@
-export interface HapifyWorkspaceGeneratorSchema {
+export interface TraxionWorkspaceGeneratorSchema {
   name: string;
   tags?: string;
   directory?: string;
 }
 
-interface NormalizedOptions extends HapifyWorkspaceGeneratorSchema {
+interface NormalizedOptions extends TraxionWorkspaceGeneratorSchema {
   packageVersion: string;
   npmScope: string;
   appsDir: string;

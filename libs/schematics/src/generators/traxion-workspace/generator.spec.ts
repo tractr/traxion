@@ -2,11 +2,11 @@
 // import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
 // import generator from './generator';
-// import { HapifyWorkspaceGeneratorSchema } from './schema';
+// import { TraxionWorkspaceGeneratorSchema } from './schema';
 
-describe('hapify-workspace generator', () => {
+describe('traxion-workspace generator', () => {
   // let appTree: Tree;
-  // const options: HapifyWorkspaceGeneratorSchema = { name: 'test1' };
+  // const options: TraxionWorkspaceGeneratorSchema = { name: 'test1' };
 
   beforeEach(() => {
     // appTree = createTreeWithEmptyWorkspace(2);

@@ -4,11 +4,11 @@ import { getWorkspaceLayout, Tree } from '@nrwl/devkit';
 import { v4 as uuid4 } from 'uuid';
 
 import { getImportPrefixPath } from '../../../helpers';
-import { HapifyWorkspaceGeneratorSchema, NormalizedOptions } from '../schema';
+import { NormalizedOptions, TraxionWorkspaceGeneratorSchema } from '../schema';
 
 export async function normalizeOptions(
   tree: Tree,
-  options: HapifyWorkspaceGeneratorSchema,
+  options: TraxionWorkspaceGeneratorSchema,
 ): Promise<NormalizedOptions> {
   const { libsDir, appsDir, npmScope } = getWorkspaceLayout(tree);
   const parsedTags = options.tags

@@ -66,6 +66,6 @@ module.exports = {
     '<rootDir>/libs/generated/rext-client',
     '<rootDir>/libs/generated/models',
     '<rootDir>/libs/generated/nestjs-models-common',
-    '<rootDir>/libs/hapify/create-hapify-workspace',
+    '<rootDir>/libs/hapify/create-traxion-workspace',
   ],
 };

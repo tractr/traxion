@@ -1,0 +1,32 @@
+{
+  "projectType": "library",
+  "root": "libs/hapify/create-traxion-workspace",
+  "sourceRoot": "libs/hapify/create-traxion-workspace/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "assets": ["libs/hapify/create-traxion-workspace/*.md"],
+        "main": "libs/hapify/create-traxion-workspace/src/index.ts",
+        "outputPath": "dist/libs/hapify/create-traxion-workspace",
+        "packageJson": "libs/hapify/create-traxion-workspace/package.json",
+        "tsConfig": "libs/hapify/create-traxion-workspace/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/hapify/create-traxion-workspace/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "restricted"
+      }
+    }
+  }
+}

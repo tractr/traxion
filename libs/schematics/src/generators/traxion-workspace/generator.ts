@@ -20,7 +20,7 @@ import {
   createTemplateLibraries,
   normalizeOptions,
 } from './helpers';
-import { HapifyWorkspaceGeneratorSchema } from './schema';
+import { TraxionWorkspaceGeneratorSchema } from './schema';
 
 function showSucceed(message: string | null) {
   return () => {
@@ -28,9 +28,9 @@ function showSucceed(message: string | null) {
   };
 }
 
-export default async function hapifyWorkspace(
+export default async function traxionWorkspaceGenerator(
   tree: Tree,
-  options: HapifyWorkspaceGeneratorSchema,
+  options: TraxionWorkspaceGeneratorSchema,
 ) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { isVerbose } = tree as any;
