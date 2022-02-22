@@ -39,11 +39,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   handleRequest<User>(
     err: unknown | undefined,
     user: User | undefined,
-    info: any,
+    _info: unknown,
     context: ExecutionContext,
   ) {
-    console.log('CONTEXT', context);
-
     // You can throw an exception based on either "info" or "err" arguments
     if (err) {
       if (err instanceof BadRequestException) {

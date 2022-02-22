@@ -315,7 +315,7 @@ export class <<Model pascal>>Controller {
    * @returns the updated <<Model pascal>>
    */
   @Delete(':id')
-  <<if DeleteAccess guest>>
+  <<if RemoveAccess guest>>
     @Public()
   <<endif>>
   @Policies(Permission.REMOVE_<<Model constant>>)
