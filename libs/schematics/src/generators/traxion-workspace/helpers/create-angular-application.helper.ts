@@ -128,4 +128,9 @@ export async function createAngularApplication(
       ],
     },
   });
+
+  // Update polyfill eslint error
+  const polyfill = (tree.read(join(pwaPath, 'polyfill.ts')) || '').toString();
+  polyfill.replaceAll(/\/\*\*\*.*/, '/**');
+  tree.write(join(pwaPath, 'polyfill.ts'), polyfill);
 }

@@ -1,4 +1,5 @@
 import { enableProdMode } from '@angular/core';
+import { bootstrapAppWithConfig } from '@tractr/angular-config';
 
 import { AppModule } from './app/app.module';
 import { environment, getConfig } from './environments/environment';
