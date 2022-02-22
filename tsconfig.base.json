@@ -30,9 +30,6 @@
       "@tractr/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@tractr/commit-config": ["libs/config/commit/src/index.ts"],
       "@tractr/common": ["libs/common/src/index.ts"],
-      "@tractr/create-hapify-workspace": [
-        "libs/hapify/create-hapify-workspace/src/index.ts"
-      ],
       "@tractr/eslint-config": ["libs/config/eslint/src/index.ts"],
       "@tractr/generated-angular-rext-client": [
         "libs/generated/angular-rext-client/src/index.ts"
@@ -67,6 +64,9 @@
       ],
       "@tractr/hapify-common": ["libs/hapify/hapify-common/src/index.ts"],
       "@tractr/hapify-config": ["libs/config/hapify/src/index.ts"],
+      "@tractr/hapify-create-traxion-workspace": [
+        "libs/hapify/create-traxion-workspace/src/index.ts"
+      ],
       "@tractr/hapify-generate-config": [
         "libs/hapify/generate-config/src/index.ts"
       ],

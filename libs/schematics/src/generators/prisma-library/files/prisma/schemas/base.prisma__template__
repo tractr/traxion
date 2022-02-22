@@ -2,7 +2,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("TRACTR_DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 generator client {

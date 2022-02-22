@@ -1,0 +1,3 @@
+.ant-collapse {
+  @apply mb-4;
+}

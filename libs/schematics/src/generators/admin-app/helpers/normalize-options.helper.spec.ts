@@ -1,7 +1,10 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
-import { AdminAppGeneratorSchema } from '../schema';
+import {
+  AdminAppGeneratorSchema,
+  AdminAppGeneratorSchemaWithExtra,
+} from '../schema';
 import { NormalizedSchema, normalizeOptions } from './normalize-options.helper';
 
 describe('normalizeOptions', () => {
@@ -20,13 +23,16 @@ describe('normalizeOptions', () => {
   });
 
   it('should get project npmScope', () => {
-    const options: AdminAppGeneratorSchema = {
+    const options: AdminAppGeneratorSchemaWithExtra = {
       ...defaultOptions,
     };
 
     const normalizedSchema: NormalizedSchema = {
       ...defaultOptions,
       npmScope,
+      projectRoot: 'apps/admin',
+      projectName: 'admin',
+      projectDirectory: 'admin',
       extra: {},
     };
 
@@ -40,7 +46,7 @@ describe('normalizeOptions', () => {
       extra1: 'extra1',
       extra2: 'extra2',
     };
-    const options: AdminAppGeneratorSchema = {
+    const options: AdminAppGeneratorSchemaWithExtra = {
       ...defaultOptions,
       ...extraKeys,
     };
@@ -48,6 +54,9 @@ describe('normalizeOptions', () => {
     const normalizedSchema: NormalizedSchema = {
       ...defaultOptions,
       npmScope,
+      projectRoot: 'apps/admin',
+      projectName: 'admin',
+      projectDirectory: 'admin',
       extra: extraKeys,
     };
 
@@ -57,7 +66,7 @@ describe('normalizeOptions', () => {
   });
 
   it('should normalize name', () => {
-    const options: AdminAppGeneratorSchema = {
+    const options: AdminAppGeneratorSchemaWithExtra = {
       ...defaultOptions,
       name: 'testAdmin',
     };
@@ -65,6 +74,9 @@ describe('normalizeOptions', () => {
     const normalizedSchema: NormalizedSchema = {
       ...defaultOptions,
       npmScope,
+      projectRoot: 'apps/test-admin',
+      projectName: 'test-admin',
+      projectDirectory: 'test-admin',
       name: 'test-admin',
       extra: {},
     };
@@ -75,7 +87,7 @@ describe('normalizeOptions', () => {
   });
 
   it('should normalize directory if it exists', () => {
-    const options: AdminAppGeneratorSchema = {
+    const options: AdminAppGeneratorSchemaWithExtra = {
       ...defaultOptions,
       directory: 'testDirectory',
     };
@@ -84,6 +96,9 @@ describe('normalizeOptions', () => {
       ...defaultOptions,
       directory: 'test-directory',
       npmScope,
+      projectRoot: 'apps/test-directory/admin',
+      projectName: 'test-directory-admin',
+      projectDirectory: 'test-directory/admin',
       extra: {},
     };
 
@@ -93,7 +108,7 @@ describe('normalizeOptions', () => {
   });
 
   it('should generate a "npmName" if none is provided', () => {
-    const options: AdminAppGeneratorSchema = {
+    const options: AdminAppGeneratorSchemaWithExtra = {
       ...defaultOptions,
       npmName: undefined,
     };
@@ -102,6 +117,9 @@ describe('normalizeOptions', () => {
       ...defaultOptions,
       npmName: '@tractr/admin',
       npmScope,
+      projectRoot: 'apps/admin',
+      projectName: 'admin',
+      projectDirectory: 'admin',
       extra: {},
     };
 
@@ -111,7 +129,7 @@ describe('normalizeOptions', () => {
   });
 
   it('should generate a "npmName" if none is provided, and use the directory', () => {
-    const options: AdminAppGeneratorSchema = {
+    const options: AdminAppGeneratorSchemaWithExtra = {
       ...defaultOptions,
       directory: 'test',
       npmName: undefined,
@@ -122,6 +140,9 @@ describe('normalizeOptions', () => {
       directory: 'test',
       npmName: '@tractr/test-admin',
       npmScope,
+      projectRoot: 'apps/test/admin',
+      projectName: 'test-admin',
+      projectDirectory: 'test/admin',
       extra: {},
     };
 

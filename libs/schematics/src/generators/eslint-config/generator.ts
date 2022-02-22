@@ -1,8 +1,16 @@
-import { formatFiles, readJsonFile, Tree, updateJson } from '@nrwl/devkit';
+import { join } from 'path';
+
+import {
+  formatFiles,
+  generateFiles,
+  getWorkspaceLayout,
+  Tree,
+} from '@nrwl/devkit';
 import { Linter, lintInitGenerator } from '@nrwl/linter';
 
 import * as packageJson from '../../../package.json';
 import { addPackageToPackageJson, PackageDefinition } from '../../helpers';
+import { EslintGeneratorSchema } from './schema';
 
 export const packagesToAdd: PackageDefinition[] = [
   {
@@ -20,48 +28,26 @@ export const packagesToAdd: PackageDefinition[] = [
   { packageName: 'eslint-plugin-json-files' },
 ];
 
-export default async function eslintGenerator(tree: Tree) {
+export default async function eslintGenerator(
+  tree: Tree,
+  options: EslintGeneratorSchema,
+) {
   // First add dependencies to the package json
   await addPackageToPackageJson(tree, packagesToAdd);
 
   // Use the linit generator from @nrwl/linter with Eslint
   lintInitGenerator(tree, { linter: Linter.EsLint });
 
-  // Add settings to the eslintrc.json files
-  const eslintrc = tree.read('./.eslintrc.json')?.toString();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let eslintrcJson: Record<string, any> = {};
+  const { npmScope, libsDir } = getWorkspaceLayout(tree);
+  const { generatedDir = 'generated' } = options;
 
-  if (!eslintrc) {
-    eslintrcJson = readJsonFile('./.eslintrc.json');
-  } else {
-    eslintrcJson = JSON.parse(eslintrc);
-  }
-
-  eslintrcJson.settings = {
-    ...eslintrcJson.settings,
-    'import/internal-regex': '^@(generated)/',
+  const templateOptions = {
+    template: '',
+    libsDir,
+    generatedDir,
+    npmScope,
   };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  eslintrcJson.overrides = eslintrcJson.overrides.map((override: any) => {
-    if (!override.rules['@nrwl/nx/enforce-module-boundaries']) return override;
-
-    return {
-      ...override,
-      rules: {
-        ...override.rules,
-        'import/no-unresolved': [
-          'error',
-          {
-            ignore: ['^@(tractr|generated|traxion)/'],
-          },
-        ],
-      },
-    };
-  });
-
-  updateJson(tree, '.eslintrc.json', () => eslintrcJson);
+  generateFiles(tree, join(__dirname, 'files'), '.', templateOptions);
 
   await formatFiles(tree);
 }

@@ -1,0 +1,16 @@
+{
+  "name": "@tractr/hapify-create-traxion-workspace",
+  "version": "1.39.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "type": "module",
+  "bin": {
+    "create-traxion-workspace": "./bin/create-traxion-workspace.js"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

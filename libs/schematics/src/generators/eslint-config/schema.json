@@ -2,7 +2,13 @@
   "$id": "Eslint",
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
-  "properties": {},
+  "properties": {
+    "generatedDir": {
+      "default": "generated",
+      "description": "A location where the generated folder is located",
+      "type": "string"
+    }
+  },
   "required": [],
   "title": "Eslint configuration schematics",
   "type": "object"

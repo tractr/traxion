@@ -1,15 +1,20 @@
+import { join } from 'path';
+
 import {
   formatFiles,
+  getWorkspaceLayout,
   readProjectConfiguration,
   TargetConfiguration,
   Tree,
+  updateJson,
   updateProjectConfiguration,
 } from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
 import { applicationGenerator as reactApplicationGenerator } from '@nrwl/react';
 
+import { addPackageToPackageJson, PackageType } from '../..';
 import { addFiles, cleanApplication, normalizeOptions } from './helpers';
-import { AdminAppGeneratorSchema } from './schema';
+import { AdminAppGeneratorSchemaWithExtra } from './schema';
 
 /**
  * Generate an application to host a react-admin application
@@ -19,28 +24,27 @@ import { AdminAppGeneratorSchema } from './schema';
  */
 export default async function adminGenerator(
   tree: Tree,
-  options: AdminAppGeneratorSchema,
+  options: AdminAppGeneratorSchemaWithExtra,
 ) {
   const normalizedOptions = normalizeOptions(tree, options);
+  const { name, directory, projectRoot, extra } = normalizedOptions;
+  const { appsDir } = getWorkspaceLayout(tree);
 
   // Generate admin application
   await reactApplicationGenerator(tree, {
-    name: normalizedOptions.name,
-    directory: normalizedOptions.directory,
+    name,
+    directory,
     style: 'none',
     skipFormat: false,
     unitTestRunner: 'jest',
     e2eTestRunner: 'none',
     linter: Linter.EsLint,
     // allow extra options to override default values for the react schematic
-    ...normalizedOptions.extra,
+    ...extra,
   });
 
   // Get application configuration
-  const applicationConfiguration = readProjectConfiguration(
-    tree,
-    normalizedOptions.name,
-  );
+  const applicationConfiguration = readProjectConfiguration(tree, name);
   const applicationRoot = applicationConfiguration.root;
 
   const serve: TargetConfiguration | undefined =
@@ -48,7 +52,7 @@ export default async function adminGenerator(
   const build: TargetConfiguration | undefined =
     applicationConfiguration.targets?.build;
   // Update application configuration to add proxy config
-  updateProjectConfiguration(tree, normalizedOptions.name, {
+  updateProjectConfiguration(tree, name, {
     ...applicationConfiguration,
     targets: {
       ...applicationConfiguration.targets,
@@ -59,6 +63,12 @@ export default async function adminGenerator(
             ...serve.options,
             proxyConfig: `${applicationRoot}/proxy.conf.js`,
           },
+          dependsOn: [
+            {
+              projects: 'self',
+              target: 'preserve',
+            },
+          ],
         },
       }),
       ...(build && {
@@ -78,7 +88,7 @@ export default async function adminGenerator(
         executor: '@nrwl/workspace:run-commands',
         options: {
           commands: [
-            'node ./node_modules/.bin/tractr-angular-config-generate ./apps/admin/src/assets/app-config.json',
+            `npx tractr-angular-config-generate ./${appsDir}/${name}/src/assets/app-config.json`,
           ],
           parallel: false,
         },
@@ -86,11 +96,25 @@ export default async function adminGenerator(
     },
   });
 
+  await addPackageToPackageJson(
+    tree,
+    ['react-admin', 'rxjs', 'class-validator'],
+    PackageType.dependencies,
+  );
+
   // Remove application useless files
   cleanApplication(tree, applicationRoot);
 
   // Add static files to the application
   addFiles(tree, { ...normalizedOptions, applicationRoot });
+
+  updateJson(tree, join(projectRoot, 'tsconfig.json'), (json) => ({
+    ...json,
+    compilerOptions: {
+      ...json.compilerOptions,
+      noPropertyAccessFromIndexSignature: false,
+    },
+  }));
 
   // Run format
   await formatFiles(tree);

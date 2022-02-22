@@ -118,7 +118,7 @@ module.exports = {
   validatorPath: getValidatorPath(__dirname),
   project: '../../hapify-models.json',
   extends: [],
-  importReplacements: {},
+  importReplacements: {}
 };
 `);
   });
@@ -148,7 +148,9 @@ module.exports = {
     '@tractr/hapify-templates-models',
     '@tractr/additional-templates-1',
     '@tractr/additional-templates-2',],
-  importReplacements: {},
+  importReplacements: {
+  "mock": "@proj/models/mock"
+}
 };
 `);
   });
@@ -175,8 +177,10 @@ module.exports = {
   extends: [
     '@tractr/hapify-templates-rext-client',],
   importReplacements: {
-    'models': '@proj/models',
-    'rest-dtos': '@proj/rest-dtos',},
+  "models": "@proj/models",
+  "rest-dtos": "@proj/rest-dtos",
+  "mock": "@proj/rext-client/mock"
+}
 };
 `);
   });

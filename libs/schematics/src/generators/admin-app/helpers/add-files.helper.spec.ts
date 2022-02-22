@@ -14,6 +14,9 @@ describe('addFiles', () => {
     npmName: '@tractr/test-admin',
     reactAdminImportPath: '@tractr/react-admin',
     rextClientImportPath: '@tractr/rext-client',
+    projectRoot: 'apps/test/admin',
+    projectName: 'test-admin',
+    projectDirectory: 'test/admin',
     applicationRoot,
     extra: {},
   };
