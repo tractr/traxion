@@ -50,10 +50,6 @@ jobs:
         run: npm run generate
 
       # We build our code base
-      - name: Run nx build
-        run: npx nx build
-
-      # We build our code base
       - name: Configure git
         run: |
           git config user.name 'tractr-bot'
