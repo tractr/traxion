@@ -8,38 +8,6 @@ module.exports = {
       items: [
         {
           type: 'category',
-          label: 'Angular',
-          link: { type: 'doc', id: 'how-to/angular/index' },
-          items: [
-            {
-              type: 'category',
-              label: 'Configuration',
-              items: [
-                'how-to/angular/configuration/configure-lazy-loading',
-                'how-to/angular/configuration/configure-storybook',
-                'how-to/angular/configuration/configure-tailwind-css',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Use cases',
-              items: [
-                'how-to/angular/use-cases/create-new-angular-application',
-                'how-to/angular/use-cases/create-new-angular-library',
-                'how-to/angular/use-cases/create-new-angular-module',
-                'how-to/angular/use-cases/create-new-angular-component',
-                'how-to/angular/use-cases/call-the-api-using-rext-client',
-                'how-to/angular/use-cases/call-the-api-using-graphql',
-                'how-to/angular/use-cases/create-a-login-page',
-                'how-to/angular/use-cases/create-a-user-profile-page',
-                'how-to/angular/use-cases/upload-a-file-to-aws-s3',
-              ],
-            },
-            'how-to/angular/troubleshooting/index',
-          ],
-        },
-        {
-          type: 'category',
           label: 'NestJS',
           link: { type: 'doc', id: 'how-to/nestjs/index' },
           items: [
@@ -73,6 +41,38 @@ module.exports = {
               ],
             },
             'how-to/database/troubleshooting/index',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Angular',
+          link: { type: 'doc', id: 'how-to/angular/index' },
+          items: [
+            {
+              type: 'category',
+              label: 'Configuration',
+              items: [
+                'how-to/angular/configuration/configure-lazy-loading',
+                'how-to/angular/configuration/configure-storybook',
+                'how-to/angular/configuration/configure-tailwind-css',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Use cases',
+              items: [
+                'how-to/angular/use-cases/create-new-angular-application',
+                'how-to/angular/use-cases/create-new-angular-library',
+                'how-to/angular/use-cases/create-new-angular-module',
+                'how-to/angular/use-cases/create-new-angular-component',
+                'how-to/angular/use-cases/call-the-api-using-rext-client',
+                'how-to/angular/use-cases/call-the-api-using-graphql',
+                'how-to/angular/use-cases/create-a-login-page',
+                'how-to/angular/use-cases/create-a-user-profile-page',
+                'how-to/angular/use-cases/upload-a-file-to-aws-s3',
+              ],
+            },
+            'how-to/angular/troubleshooting/index',
           ],
         },
         {
