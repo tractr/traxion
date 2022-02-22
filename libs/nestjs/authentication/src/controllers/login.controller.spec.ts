@@ -83,6 +83,13 @@ describe('Authentication Module', () => {
     it('/is-public', async () => {
       await request(app.getHttpServer()).get('/is-public').expect(200);
     });
+    it('/is-public-with-user', async () => {
+      const res = await request(app.getHttpServer())
+        .get('/is-public-with-user')
+        .expect(200);
+
+      expect(res.body).toEqual({});
+    });
     it('/is-private', async () => {
       await request(app.getHttpServer()).get('/is-private').expect(401);
     });
@@ -124,6 +131,21 @@ describe('Authentication Module', () => {
 
       expect(mockFormatUser).toHaveBeenCalledTimes(1);
       expect(mockFormatUser).toBeCalledWith(expectedUser);
+    });
+    it('/is-public-with-user should have a user if connected', async () => {
+      const authenticationService = app.get<AuthenticationService>(
+        AuthenticationService,
+      );
+      const accessToken = await authenticationService.createUserJWT(mockUser);
+
+      mockUserService.findUnique.mockResolvedValue(Promise.resolve(mockUser));
+
+      const res = await request(app.getHttpServer())
+        .get('/is-public-with-user')
+        .set('Authorization', `bearer ${accessToken}`)
+        .expect(200);
+
+      expect(res.body).toEqual(mockUser);
     });
     it('/me get the user information back and use the jwt auth strategy', async () => {
       const authenticationService = app.get<AuthenticationService>(
