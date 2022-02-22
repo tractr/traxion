@@ -1,7 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <nav class="bg-neutral-900">
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-    <div class="relative flex items-center justify-between h-16">
+    <div class="relative flex items-center justify-between h-auto py-2 lg:py-4">
       <div
         class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start"
       >
@@ -10,7 +10,7 @@
             Traxion
           </h1>
         </div>
-        <div class="hidden sm:block sm:ml-6">
+        <div class="sm:block sm:ml-6">
           <div class="flex space-x-4">
             <a
               href="#"
@@ -19,6 +19,11 @@
               >Demo</a
             >
           </div>
+        </div>
+        <div class="ml-3 relative flex flex-1 items-center justify-end">
+          <stack-login-form-ui
+            (loginEvent)="login($event)"
+          ></stack-login-form-ui>
         </div>
       </div>
     </div>

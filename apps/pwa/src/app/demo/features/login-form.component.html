@@ -1,5 +1,5 @@
 <div class="page__wrapper">
-  <ng-container *ngIf="currentUser$ | async as currentUser; else formBlock">
+  <ng-container *ngIf="currentUser$ | async as currentUser">
     <!-- <div *ngIf="isUserLogged">asdasd</div> -->
     <stack-user-infos-ui
       [name]="currentUser.name"
@@ -8,26 +8,239 @@
     ></stack-user-infos-ui>
   </ng-container>
 
-  <ng-template #formBlock>
-    <stack-login-form-ui (loginEvent)="login($event)"></stack-login-form-ui>
-  </ng-template>
-
   <div class="api__wrapper">
-    <h2 class="api__wrapper__title">API</h2>
-    <!-- <stack-api-collapse-ui
-      [apiParams]="[{ name: 'string', value: 'string' }]"
-      [apiResponse]="[{ name: 'John', value: 'Doe' }]"
-      [apiMethod]="'POST'"
-      [apiUrl]="'/api/login'"
-    ></stack-api-collapse-ui> -->
-    <ng-container *ngIf="tags$ | async as tags">
-      <stack-api-collapse-ui
-        [apiParams]=""
-        [apiResponse]="tags$ | async"
-        [apiMethod]="'POST'"
-        [apiUrl]="'/api/tag'"
-        [apiError]="tagsError"
-      ></stack-api-collapse-ui>
-    </ng-container>
+    <div class="api__wrapper__item">
+      <h2 class="api__wrapper__item__title">API Users</h2>
+      <ng-container *ngIf="users$ | async as users">
+        <stack-api-collapse-ui
+          [apiResponse]="users"
+          [apiMethod]="'GET'"
+          [apiUrl]="'/api/user'"
+          [apiError]="usersError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+
+      <ng-container *ngIf="userUnique$ | async as userUnique">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="userUnique"
+          [apiMethod]="'GET'"
+          [apiUrl]="'/api/user'"
+          [apiError]="userUniqueError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+
+      <ng-container *ngIf="userUpdate$ | async as userUpdate">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="userUpdate"
+          [apiMethod]="'PATCH'"
+          [apiUrl]="'/api/user'"
+          [apiError]="userUpdateError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+
+      <ng-container *ngIf="userCreate$ | async as userCreate">
+        <stack-api-collapse-ui
+          [apiResponse]="userCreate"
+          [apiMethod]="'POST'"
+          [apiUrl]="'/api/user'"
+          [apiError]="userCreateError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+      <ng-container *ngIf="userUpsert$ | async as userUpsert">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="userUpsert"
+          [apiMethod]="'PUT'"
+          [apiUrl]="'/api/user'"
+          [apiError]="userUpsertError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+      <ng-container *ngIf="userDelete$ | async as userDelete">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="userDelete"
+          [apiMethod]="'DELETE'"
+          [apiUrl]="'/api/user'"
+          [apiError]="userDeleteError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+    </div>
+    <div class="api__wrapper__item">
+      <h2 class="api__wrapper__item__title">API BlogPost</h2>
+      <ng-container *ngIf="blogPosts$ | async as blogPosts">
+        <stack-api-collapse-ui
+          [apiResponse]="blogPosts"
+          [apiMethod]="'GET'"
+          [apiUrl]="'/api/blog-post'"
+          [apiError]="blogPostsError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+
+      <ng-container *ngIf="blogPostUnique$ | async as blogPostUnique">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="blogPostUnique"
+          [apiMethod]="'GET'"
+          [apiUrl]="'/api/blog-post'"
+          [apiError]="blogPostUniqueError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+
+      <ng-container *ngIf="blogPostUpdate$ | async as blogPostUpdate">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="blogPostUpdate"
+          [apiMethod]="'PATCH'"
+          [apiUrl]="'/api/blog-post'"
+          [apiError]="blogPostUpdateError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+
+      <!-- <ng-container *ngIf="blogPostCreate$ | async as blogPostCreate">
+        <stack-api-collapse-ui
+          [apiResponse]="blogPostCreate"
+          [apiMethod]="'POST'"
+          [apiUrl]="'/api/blog-post'"
+          [apiError]="blogPostCreateError"
+        ></stack-api-collapse-ui>
+      </ng-container> -->
+      <!--  <ng-container *ngIf="blogPostUpsert$ | async as blogPostUpsert">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="blogPostUpsert"
+          [apiMethod]="'PUT'"
+          [apiUrl]="'/api/blog-post'"
+          [apiError]="blogPostUpsertError"
+        ></stack-api-collapse-ui>
+      </ng-container> -->
+
+      <ng-container *ngIf="blogPostDelete$ | async as blogPostDelete">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="blogPostDelete"
+          [apiMethod]="'DELETE'"
+          [apiUrl]="'/api/blog-post'"
+          [apiError]="blogPostDeleteError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+    </div>
+    <div class="api__wrapper__item">
+      <h2 class="api__wrapper__item__title">API Profil</h2>
+      <ng-container *ngIf="profils$ | async as profils">
+        <stack-api-collapse-ui
+          [apiResponse]="profils"
+          [apiMethod]="'GET'"
+          [apiUrl]="'/api/profil'"
+          [apiError]="profilsError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+
+      <ng-container *ngIf="profilUnique$ | async as profilUnique">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="profilUnique"
+          [apiMethod]="'GET'"
+          [apiUrl]="'/api/profil'"
+          [apiError]="profilUniqueError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+
+      <ng-container *ngIf="profilUpdate$ | async as profilUpdate">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="profilUpdate"
+          [apiMethod]="'PATCH'"
+          [apiUrl]="'/api/profil'"
+          [apiError]="profilUpdateError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+
+      <!-- <ng-container *ngIf="profilCreate$ | async as profilCreate">
+        <stack-api-collapse-ui
+          [apiResponse]="profilCreate"
+          [apiMethod]="'POST'"
+          [apiUrl]="'/api/profil'"
+          [apiError]="profilCreateError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+      <ng-container *ngIf="profilUpsert$ | async as profilUpsert">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="profilUpsert"
+          [apiMethod]="'PUT'"
+          [apiUrl]="'/api/profil'"
+          [apiError]="profilUpsertError"
+        ></stack-api-collapse-ui>
+      </ng-container> -->
+      <ng-container *ngIf="profilDelete$ | async as profilDelete">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="profilDelete"
+          [apiMethod]="'DELETE'"
+          [apiUrl]="'/api/profil'"
+          [apiError]="profilDeleteError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+    </div>
+    <div class="api__wrapper__item">
+      <h2 class="api__wrapper__item__title">API Tags</h2>
+      <ng-container *ngIf="tags$ | async as tags">
+        <stack-api-collapse-ui
+          [apiResponse]="tags"
+          [apiMethod]="'GET'"
+          [apiUrl]="'/api/tag'"
+          [apiError]="tagsError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+
+      <ng-container *ngIf="tagUnique$ | async as tagUnique">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="tagUnique"
+          [apiMethod]="'GET'"
+          [apiUrl]="'/api/tag'"
+          [apiError]="tagUniqueError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+
+      <ng-container *ngIf="tagUpdate$ | async as tagUpdate">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="tagUpdate"
+          [apiMethod]="'PATCH'"
+          [apiUrl]="'/api/tag'"
+          [apiError]="tagUpdateError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+
+      <ng-container *ngIf="tagCreate$ | async as tagCreate">
+        <stack-api-collapse-ui
+          [apiResponse]="tagCreate"
+          [apiMethod]="'POST'"
+          [apiUrl]="'/api/tag'"
+          [apiError]="tagCreateError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+      <ng-container *ngIf="tagUpsert$ | async as tagUpsert">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="tagUpsert"
+          [apiMethod]="'PUT'"
+          [apiUrl]="'/api/tag'"
+          [apiError]="tagUpsertError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+      <ng-container *ngIf="tagDelete$ | async as tagDelete">
+        <stack-api-collapse-ui
+          [apiParams]="'{id}'"
+          [apiResponse]="tagDelete"
+          [apiMethod]="'DELETE'"
+          [apiUrl]="'/api/tag'"
+          [apiError]="tagDeleteError"
+        ></stack-api-collapse-ui>
+      </ng-container>
+    </div>
   </div>
 </div>
