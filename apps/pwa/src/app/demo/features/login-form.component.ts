@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { BlogPost } from '@prisma/client';
 import { catchError, Observable, of } from 'rxjs';
 
 import {
@@ -8,7 +7,7 @@ import {
   TagService,
   UserService,
 } from '@tractr/generated-angular-rext-client';
-import { Profil, Tag, User } from '@tractr/generated-models';
+import { BlogPost, Profil, Tag, User } from '@tractr/generated-models';
 
 export type ErrorMessage = { status: number; message: string };
 @Component({
@@ -83,7 +82,13 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit(): void {
     // if (this.sessionService.isLogged()) {
-    // id en dur car on ne peut pas utiliser la methode isLogged() car elle est bloquée par l'api
+    /**
+     * TODO:
+     * - id en dur car on ne peut pas utiliser la methode isLogged() car elle est bloquée par l'api
+     * - souscrire aux services de creation afin de pouvoir récupérer l'id de l'entité créé pour faire les opérations findUnique, update, create, upsert, delete
+     * - les opérations create et upsert sur le Profil et BlogPost ne se lance pas car il y a un souci de dans leur relation avec la foreign key de chacun
+     *
+     */
     this.currentUser$ = this.userService.findUnique$({
       id: 'ef4caf08-29c1-4f68-8a72-a71f45babf5f',
     });
