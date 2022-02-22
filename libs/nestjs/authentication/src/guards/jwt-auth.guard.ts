@@ -25,15 +25,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    // Check if the route is public
-    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
-
-    // If we have the @Public decorator on our route we just let pass the request
-    if (isPublic) return true;
-
     // Check request authentication by using the passport JwtAuthGuard
     return super.canActivate(context);
   }
@@ -45,7 +36,12 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
    * @param user
    * @returns
    */
-  handleRequest<User>(err: unknown | undefined, user: User | undefined) {
+  handleRequest<User>(
+    err: unknown | undefined,
+    user: User | undefined,
+    _info: unknown,
+    context: ExecutionContext,
+  ) {
     // You can throw an exception based on either "info" or "err" arguments
     if (err) {
       if (err instanceof BadRequestException) {
@@ -53,7 +49,18 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       }
       throw err;
     }
+
     if (!user) {
+      // Check if the route is public
+      const isPublic = this.reflector.getAllAndOverride<boolean>(
+        IS_PUBLIC_KEY,
+        [context.getHandler(), context.getClass()],
+      );
+
+      // If the route is public, request is authorized with a null user
+      if (isPublic) return null;
+
+      // Else, public access is not authorized
       throw new UnauthorizedException();
     }
     return user;
