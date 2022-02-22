@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.39.4](https://github.com/tractr/stack/compare/v1.39.3...v1.39.4) (2022-02-22)
+
+
+### Bug Fixes
+
+* update create traxion package name ([#395](https://github.com/tractr/stack/issues/395)) ([2a3013e](https://github.com/tractr/stack/commit/2a3013ef4e2f88f6232e1fa524ed01b18306be8e))
+
+
+
+## [1.39.4](https://github.com/tractr/stack/compare/v1.39.3...v1.39.4) (2022-02-22)
+
+
+### Bug Fixes
+
+* update create traxion package name ([#395](https://github.com/tractr/stack/issues/395)) ([2a3013e](https://github.com/tractr/stack/commit/2a3013ef4e2f88f6232e1fa524ed01b18306be8e))
+
+
+
 ## [1.39.3](https://github.com/tractr/stack/compare/v1.39.2...v1.39.3) (2022-02-22)
 
 
