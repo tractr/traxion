@@ -4,12 +4,6 @@ export function getTargetsToAdd(projectRoot: string): {
   [index: string]: TargetConfiguration;
 } {
   return {
-    deploy: {
-      executor: '@nx-tools/nx-prisma:generate',
-      options: {
-        schema: `${projectRoot}/prisma/schema.prisma`,
-      },
-    },
     generate: {
       dependsOn: [
         {
@@ -46,43 +40,6 @@ export function getTargetsToAdd(projectRoot: string): {
         format: false,
         inputHapifyGeneratedPath: 'prisma',
         moveGeneratedFiles: false,
-      },
-    },
-    migrate: {
-      executor: '@nx-tools/nx-prisma:migrate',
-      options: {
-        schema: `${projectRoot}/prisma/schema.prisma`,
-      },
-    },
-    pull: {
-      executor: '@nx-tools/nx-prisma:pull',
-      options: {
-        schema: `${projectRoot}/prisma/schema.prisma`,
-      },
-    },
-    push: {
-      executor: '@nx-tools/nx-prisma:push',
-      options: {
-        schema: `${projectRoot}/prisma/schema.prisma`,
-      },
-    },
-    reset: {
-      executor: '@nx-tools/nx-prisma:reset',
-      options: {
-        schema: `${projectRoot}/prisma/schema.prisma`,
-      },
-    },
-    seed: {
-      executor: '@nx-tools/nx-prisma:seed',
-      options: {
-        script: `${projectRoot}/prisma/seed.ts`,
-        tsConfig: `${projectRoot}/tsconfig.json`,
-      },
-    },
-    status: {
-      executor: '@nx-tools/nx-prisma:status',
-      options: {
-        schema: `${projectRoot}/prisma/schema.prisma`,
       },
     },
   };

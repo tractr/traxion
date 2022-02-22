@@ -5,11 +5,14 @@ import {
   generateFiles,
   readProjectConfiguration,
   Tree,
+  updateJson,
   updateProjectConfiguration,
 } from '@nrwl/devkit';
 
+import * as packageJson from '../../../package.json';
 import {
   addPackageToPackageJson,
+  getImportPrefixPath,
   getNormalizedProjectDefaultsOptions,
   PackageType,
 } from '../../helpers';
@@ -20,9 +23,11 @@ import { PrismaLibraryGeneratorSchema } from './schema';
 
 export interface NormalizedOptions {
   name: string;
+  directory: string;
   projectName: string;
   projectRoot: string;
   nodeModulesRelativePath: string;
+  importPrefixPath: string;
   extra: Record<string, unknown>;
 }
 
@@ -30,6 +35,8 @@ function normalizeOptions(
   tree: Tree,
   options: PrismaLibraryGeneratorSchema,
 ): NormalizedOptions {
+  const { directory = '' } = options;
+
   // Format case for user input
   const { name, projectRoot, projectName } =
     getNormalizedProjectDefaultsOptions(tree, {
@@ -40,13 +47,17 @@ function normalizeOptions(
   const nodeModulesRelativePath = path.join(
     path.relative(`/${projectRoot}/prisma`, '/'),
     'node_modules',
+    '.prisma',
+    'client',
   );
 
   return {
     name,
+    directory,
     projectName,
     projectRoot,
     nodeModulesRelativePath,
+    importPrefixPath: getImportPrefixPath(tree, directory),
     extra: options,
   };
 }
@@ -93,8 +104,39 @@ export default async function prismaLibraryGenerator(
     packageName: NX_TOOLS_NX_PRISMA_PACKAGE,
   });
 
-  await addPackageToPackageJson(tree, {
-    packageName: '@prisma/client',
-    type: PackageType.dependencies,
-  });
+  const { version } = packageJson;
+
+  await addPackageToPackageJson(tree, [
+    {
+      packageName: '@prisma/client',
+      type: PackageType.dependencies,
+    },
+    {
+      packageName: '@tractr/nestjs-database',
+      type: PackageType.dependencies,
+      version,
+    },
+    {
+      packageName: '@tractr/nestjs-core',
+      type: PackageType.dependencies,
+      version,
+    },
+    {
+      packageName: '@nestjs/core',
+      type: PackageType.dependencies,
+    },
+    {
+      packageName: 'bcrypt',
+      type: PackageType.dependencies,
+    },
+  ]);
+
+  updateJson(tree, 'package.json', (json) => ({
+    ...json,
+    prisma: {
+      ...json.prisma,
+      seed: `ts-node -r tsconfig-paths/register --project ${projectRoot}/tsconfig.lib.json ${projectRoot}/prisma/seed.ts`,
+      schema: `${projectRoot}libs/generated/prisma/prisma/schema.prisma`,
+    },
+  }));
 }

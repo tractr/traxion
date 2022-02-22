@@ -3,7 +3,7 @@ import { execSync } from 'child_process';
 import { INestApplication, ModuleMetadata } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as dotenv from 'dotenv';
-import dotenvExpand = require('dotenv-expand');
+import { expand } from 'dotenv-expand';
 import { nanoid } from 'nanoid';
 import { Client } from 'pg';
 
@@ -16,7 +16,7 @@ export interface TestContextOptions {
 }
 
 export function createUrlDatabase(schema: string): string {
-  const env = dotenvExpand(dotenv.config());
+  const env = expand(dotenv.config());
   const {
     TRACTR_POSTGRESQL_PORT,
     TRACTR_POSTGRESQL_USER,

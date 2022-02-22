@@ -1,0 +1,51 @@
+import { Module } from '@nestjs/common';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import {
+  AuthenticationModule,
+  JwtGlobalAuthGuard,
+} from '@tractr/nestjs-authentication';
+import {
+  CaslExceptionInterceptor,
+  CaslModule,
+  PoliciesGuard,
+} from '@tractr/nestjs-casl';
+import { LoggerModule } from '@tractr/nestjs-core';
+import { DatabaseModule } from '@tractr/nestjs-database';
+
+import {
+  getSelectPrismaUserQuery,
+  rolePermissions,
+} from '<%= generatedImportPath %>casl';
+import { ModelsModule } from '<%= generatedImportPath %>nestjs-models';
+import { USER_SERVICE } from '<%= generatedImportPath %>nestjs-models-common';
+
+@Module({
+  imports: [
+    ModelsModule.register(),
+    DatabaseModule.register(),
+    AuthenticationModule.registerAsync({
+      useFactory: (defaultOptions) => ({
+        ...defaultOptions,
+        userConfig: {
+          idField: 'id',
+          loginField: 'email',
+          passwordField: 'password',
+          emailField: 'email',
+          customSelect: getSelectPrismaUserQuery(),
+          formatUser: ({ ...user }) => user,
+        },
+        userService: USER_SERVICE,
+      }),
+    }),
+    CaslModule.register({
+      rolePermissions,
+    }),
+    LoggerModule,
+  ],
+  providers: [
+    { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
+    { provide: APP_GUARD, useClass: PoliciesGuard },
+    { provide: APP_INTERCEPTOR, useClass: CaslExceptionInterceptor },
+  ],
+})
+export class AppModule {}

@@ -49,7 +49,7 @@ describe('normalizeOptions', () => {
 
     expect(normalizedOptions).toEqual({
       ...options,
-      hapifyImportReplacements: [],
+      hapifyImportReplacements: { mock: '@tractr/test-models/mock' },
       hapifyModelsJsonRelativePath: '../../../hapify-models.json',
       projectDirectory: 'test/test',
       projectName: 'test-test',
@@ -57,6 +57,7 @@ describe('normalizeOptions', () => {
       secondaryEntrypoints: ['mock'],
       templates: ['@tractr/hapify-templates-models'],
       importPath: '@tractr/test-test',
+      importPrefixPath: '@tractr/test-',
       npmScope,
       libsDir: 'libs',
       targets: {},
@@ -117,7 +118,10 @@ describe('normalizeOptions', () => {
       hapifyTemplates: ['rest-dtos'],
     });
 
-    expect(normalizedOptions.hapifyImportReplacements).toEqual(['models']);
+    expect(normalizedOptions.hapifyImportReplacements).toEqual({
+      mock: '@tractr/test-rest-dtos/mock',
+      models: '@tractr/test-models',
+    });
   });
 
   it('should format entry points', async () => {
@@ -154,7 +158,7 @@ describe('normalizeOptions', () => {
 
     expect(normalizedOptions).toEqual({
       ...options,
-      hapifyImportReplacements: [],
+      hapifyImportReplacements: { mock: '@tractr/test-models/mock' },
       hapifyModelsJsonRelativePath: '../../../hapify-models.json',
       projectDirectory: 'test/test',
       projectName: 'test-test',
@@ -163,6 +167,7 @@ describe('normalizeOptions', () => {
       libsDir: 'libs',
       targets: {},
       importPath: '@tractr/test-test',
+      importPrefixPath: '@tractr/test-',
       secondaryEntrypoints: ['mock'],
       templates: ['@tractr/hapify-templates-models'],
       extra: {},
@@ -178,7 +183,7 @@ describe('normalizeOptions', () => {
 
     expect(normalizedOptions).toEqual({
       ...options,
-      hapifyImportReplacements: [],
+      hapifyImportReplacements: {},
       hapifyAdditionalTemplates: 'test,,test2',
       hapifyModelsJsonRelativePath: '../../../hapify-models.json',
       projectDirectory: 'test/test',
@@ -188,6 +193,7 @@ describe('normalizeOptions', () => {
       libsDir: 'libs',
       targets: {},
       importPath: '@tractr/test-test',
+      importPrefixPath: '@tractr/test-',
       secondaryEntrypoints: ['mock'],
       hapifyTemplates: ['casl', 'models'],
       templates: [
@@ -208,7 +214,7 @@ describe('normalizeOptions', () => {
 
     expect(normalizedOptions).toEqual({
       ...options,
-      hapifyImportReplacements: [],
+      hapifyImportReplacements: { mock: '@tractr/test-models/mock' },
       hapifyModelsJsonRelativePath: '../../../hapify-models.json',
       projectDirectory: 'test/test',
       projectName: 'test-test',
@@ -217,6 +223,7 @@ describe('normalizeOptions', () => {
       libsDir: 'libs',
       targets: {},
       importPath: '@tractr/test-test',
+      importPrefixPath: '@tractr/test-',
       addSecondaryEndpoint: ['mock', 'mock2'],
       secondaryEntrypoints: ['mock', 'mock2'],
       templates: ['@tractr/hapify-templates-models'],

@@ -19,9 +19,12 @@ export function getNormalizedProjectDefaultsOptions(
     name: rawName,
     directory: rawDirectory,
   }: { name: string; directory: string | undefined },
+  rootDir?: string,
 ): ProjectDefaultOptions {
   // Fetch workspace data
   const { libsDir } = getWorkspaceLayout(tree);
+
+  const mainDir = rootDir || libsDir;
 
   // Format case for user input
   const name = names(rawName).fileName;
@@ -30,7 +33,7 @@ export function getNormalizedProjectDefaultsOptions(
   // Process project data from user input
   const projectDirectory = directory ? `${directory}/${name}` : name;
   const projectName = projectDirectory.replace(/\//g, '-');
-  const projectRoot = joinPathFragments(libsDir, projectDirectory);
+  const projectRoot = joinPathFragments(mainDir, projectDirectory);
 
   return {
     name,
