@@ -2,8 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { UserRoles } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
-import { ModelsModule } from '@tractr/generated-nestjs-models';
-import { seedUsers } from '@tractr/generated-nestjs-models-common/mock';
+import { ModelsModule } from '<%= importPrefixPath %>nestjs-models';
+import { seedUsers } from '<%= importPrefixPath %>nestjs-models-common/mock';
 import { Logger, LoggerModule } from '@tractr/nestjs-core';
 import { DatabaseModule, DatabaseService } from '@tractr/nestjs-database';
 

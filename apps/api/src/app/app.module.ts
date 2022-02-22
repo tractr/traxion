@@ -2,9 +2,6 @@ import { Module } from '@nestjs/common';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ConsoleModule } from 'nestjs-console';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-
 import {
   getSelectPrismaUserQuery,
   rolePermissions,
@@ -73,9 +70,8 @@ import { MailerModule } from '@tractr/nestjs-mailer';
     ConsoleModule,
     LoggerModule,
   ],
-  controllers: [AppController, FileStorageController],
+  controllers: [FileStorageController],
   providers: [
-    AppService,
     { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
     { provide: APP_GUARD, useClass: PoliciesGuard },
     { provide: APP_INTERCEPTOR, useClass: CaslExceptionInterceptor },

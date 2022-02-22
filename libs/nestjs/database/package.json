@@ -1,6 +1,6 @@
 {
   "name": "@tractr/nestjs-database",
-  "version": "1.38.0",
+  "version": "1.39.1",
   "description": "Database module for nestjs backend",
   "repository": {
     "type": "git",

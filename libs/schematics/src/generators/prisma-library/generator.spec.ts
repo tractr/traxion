@@ -1,9 +1,12 @@
 import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import fetch, { Response } from 'node-fetch';
 
 import { NX_TOOLS_NX_PRISMA_PACKAGE } from './constants/nx-tools-prisma-package';
 import generator from './generator';
 import { PrismaLibraryGeneratorSchema } from './schema';
+
+jest.mock('node-fetch');
 
 describe('prisma-library generator', () => {
   let appTree: Tree;
@@ -20,6 +23,16 @@ describe('prisma-library generator', () => {
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
+
+    // Mock node fetch http call
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValue(
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            'dist-tags': { latest: '1.0.0' },
+          }),
+      }) as unknown as Promise<Response>,
+    );
   });
 
   it('should run successfully', async () => {
@@ -48,7 +61,11 @@ module.exports = {
   project: '../../hapify-models.json',
   extends: [
     '@tractr/hapify-templates-prisma',],
-  importReplacements: {},
+  importReplacements: {
+  "nestjs-models": "@proj/nestjs-models",
+  "nestjs-models-common": "@proj/nestjs-models-common",
+  "mock": "@proj/prisma/mock"
+}
 };
 `);
   });
@@ -81,12 +98,12 @@ seed().catch((e) => {
 
 datasource db {
   provider = "postgresql"
-  url      = env("TRACTR_DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
-  output = "../../../node_modules"
+  output = "../../../node_modules/.prisma/client"
   previewFeatures = ["filterJson"]
 }
 `);

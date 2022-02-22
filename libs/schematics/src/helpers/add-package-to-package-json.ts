@@ -37,6 +37,7 @@ export type Packages =
 export async function addPackageToPackageJson(
   tree: Tree,
   packages: Packages,
+  defaultTarget: PackageType = PackageType.devDependencies,
 ): Promise<GeneratorCallback[]> {
   const packagesDefinitions = Array.isArray(packages) ? packages : [packages];
 
@@ -45,7 +46,7 @@ export async function addPackageToPackageJson(
       const {
         packageName,
         version = null,
-        type = PackageType.devDependencies,
+        type = defaultTarget,
         registry = NPM_REGISTRY,
       } = typeof packageDefinition === 'string'
         ? { packageName: packageDefinition }

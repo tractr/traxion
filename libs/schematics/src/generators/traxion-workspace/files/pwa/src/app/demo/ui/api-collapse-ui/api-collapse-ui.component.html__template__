@@ -1,0 +1,6 @@
+<nz-collapse nzAccordion [nzExpandIconPosition]="'right'">
+  <nz-collapse-panel [nzHeader]="panelName">
+    <ng-container *ngIf="apiError">{{ apiError | json }}</ng-container>
+    <pre *ngIf="!apiError">{{ apiResponse | json }}</pre>
+  </nz-collapse-panel>
+</nz-collapse>

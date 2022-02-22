@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.39.1](https://github.com/tractr/stack/compare/v1.39.0...v1.39.1) (2022-02-19)
+
+
+### Bug Fixes
+
+* **terraform-helpers-post-synth:** fix terraform output path detection ([#393](https://github.com/tractr/stack/issues/393)) ([8a2f07d](https://github.com/tractr/stack/commit/8a2f07dc9fd7d4475d02f5627bdd1228b41501ad))
+
+
+
+# [1.39.0](https://github.com/tractr/stack/compare/v1.38.0...v1.39.0) (2022-02-18)
+
+
+### Features
+
+* **terraform-helpers-post-synth:** fix publish config ([#392](https://github.com/tractr/stack/issues/392)) ([3a0eac7](https://github.com/tractr/stack/commit/3a0eac7f9bccfa2759974c1474e1daa98c2e7149))
+
+
+
 # [1.38.0](https://github.com/tractr/stack/compare/v1.37.1...v1.38.0) (2022-02-17)
 
 
