@@ -1,6 +1,6 @@
 {
   "name": "@tractr/nestjs-file-storage",
-  "version": "1.39.1",
+  "version": "1.39.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
