@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.39.3](https://github.com/tractr/stack/compare/v1.39.2...v1.39.3) (2022-02-22)
+
+
+### Bug Fixes
+
+* update authentication module and templates to fix public routes ([#391](https://github.com/tractr/stack/issues/391)) ([3f72027](https://github.com/tractr/stack/commit/3f72027e10b4a480fd5d8b462f19ea04216cc69d))
+
+
+
 ## [1.39.2](https://github.com/tractr/stack/compare/v1.39.1...v1.39.2) (2022-02-22)
 
 
