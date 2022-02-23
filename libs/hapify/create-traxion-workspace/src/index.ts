@@ -109,9 +109,6 @@ export async function createTraxionWorkspace(
   await $`npm install --save-dev ${npmPackages} &>/dev/null`;
   await $`echo "✔ Installing missing dependencies"`;
 
-  // TODO DO NOT COMMIT THIS LINE
-  await $`DEBUG=local-install node ../../stack/tools/local-install.mjs --projects schematics,nestjs-casl,hapify-templates-nestjs-models-rest`;
-
   const args = transformObjectToArgs({
     ...DEFAULT_TRAXION_WORKSPACE_OPTIONS,
     ...options,
@@ -127,7 +124,4 @@ export async function createTraxionWorkspace(
   await $`echo "- Formating the workspace"`;
   await $`npm run format &>/dev/null`;
   await $`echo "✔ Formating the workspace"`;
-
-  // TODO DO NOT COMMIT THIS LINE
-  await $`DEBUG=local-install node ../../stack/tools/local-install.mjs --projects schematics,nestjs-casl,hapify-templates-nestjs-models-rest`;
 }
