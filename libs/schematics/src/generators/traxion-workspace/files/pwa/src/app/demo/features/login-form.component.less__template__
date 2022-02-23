@@ -1,0 +1,10 @@
+.page__wrapper {
+  @apply max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 mt-10;
+
+  .api__wrapper {
+    @apply mt-12;
+    &__title {
+      @apply text-2xl font-bold;
+    }
+  }
+}

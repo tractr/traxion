@@ -28,5 +28,6 @@ export async function getLatestPackageVersion(
 
   const semverResponse = await fetch(packageUrl);
   const semver = (await semverResponse.json()) as NpmApiGet;
+
   return semver['dist-tags'].latest;
 }

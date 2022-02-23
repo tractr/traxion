@@ -11,13 +11,15 @@ export function createSrcIndexTs(
 ) {
   const { projectRoot } = options;
 
-  tree.delete(join(projectRoot, 'src', 'index.ts'));
+  const srcIndexPath = join(
+    projectRoot,
+    entrypoint === '' ? 'src' : `${entrypoint}/src`,
+    'index.ts',
+  );
+
+  tree.delete(srcIndexPath);
   tree.write(
-    join(
-      projectRoot,
-      entrypoint === '' ? 'src' : `${entrypoint}/src`,
-      'index.ts',
-    ),
+    srcIndexPath,
     options.hapifyTemplates
       .map(
         (template) =>

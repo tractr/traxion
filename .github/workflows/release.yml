@@ -5,10 +5,6 @@ on:
     branches:
       - main
 
-env:
-  NX_BRANCH: ${{ github.event.number || github.ref }}
-  NX_RUN_GROUP: ${{ github.run_id }}
-
 jobs:
   # Take all the packages and release them to https://npm.pkg.github.com
   npm-release:
@@ -52,10 +48,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run generate
-
-      # We build our code base
-      - name: Run nx build
-        run: npx nx build
 
       # We build our code base
       - name: Configure git

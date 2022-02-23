@@ -1,14 +1,11 @@
 {
   "name": "@tractr/nestjs-file-storage",
-  "version": "1.36.0",
+  "version": "1.39.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
   },
   "license": "UNLICENSED",
-  "devDependencies": {
-    "@types/minio": "^7.0.9"
-  },
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"

@@ -30,6 +30,9 @@
       "@tractr/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@tractr/commit-config": ["libs/config/commit/src/index.ts"],
       "@tractr/common": ["libs/common/src/index.ts"],
+      "@tractr/create-traxion-workspace": [
+        "libs/hapify/create-traxion-workspace/src/index.ts"
+      ],
       "@tractr/eslint-config": ["libs/config/eslint/src/index.ts"],
       "@tractr/generated-angular-rext-client": [
         "libs/generated/angular-rext-client/src/index.ts"
@@ -126,6 +129,9 @@
       ],
       "@tractr/terraform-group-zone": [
         "libs/terraform/group/zone/src/index.ts"
+      ],
+      "@tractr/terraform-helpers-post-synth": [
+        "libs/terraform/helpers/post-synth/src/index.ts"
       ],
       "@tractr/terraform-service-api": [
         "libs/terraform/service/api/src/index.ts"

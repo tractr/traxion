@@ -1,3 +1,5 @@
+import { TargetConfiguration } from '@nrwl/devkit';
+
 export type AvailableTractrTemplates =
   | 'angular-rext-client'
   | 'casl'
@@ -11,6 +13,8 @@ export type AvailableTractrTemplates =
   | 'rest-dtos'
   | 'rext-client';
 
+export type AvailableLibraryType = 'angular' | 'nest' | 'react';
+
 export interface HapifyLibraryGeneratorOptionsWithExtra
   extends HapifyLibraryGeneratorOptions,
     Record<string, unknown> {}
@@ -18,7 +22,7 @@ export interface HapifyLibraryGeneratorOptionsWithExtra
 export interface HapifyLibraryGeneratorOptions {
   name: string;
   directory?: string;
-  type: 'angular' | 'nest' | 'react';
+  type: AvailableLibraryType;
   hapifyTemplates: AvailableTractrTemplates[];
   hapifyAdditionalTemplates: string;
   hapifyModelsJson: string;
@@ -29,13 +33,16 @@ export interface HapifyLibraryGeneratorOptions {
 
 export interface NormalizedOptions extends HapifyLibraryGeneratorOptions {
   npmScope: string;
+  libsDir: string;
   projectDirectory: string;
   projectName: string;
   projectRoot: string;
   importPath: string;
+  importPrefixPath: string;
   hapifyModelsJsonRelativePath: string;
   templates: string[];
-  hapifyImportReplacements: string[];
+  hapifyImportReplacements: Record<string, string>;
   secondaryEntrypoints: string[];
-  extra: Record<Record, unknown>;
+  targets: Record<string, Partial<TargetConfiguration> | null>;
+  extra: Record<string, unknown>;
 }

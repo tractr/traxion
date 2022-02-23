@@ -1,0 +1,15 @@
+{
+  "name": "@tractr/terraform-helpers-post-synth",
+  "version": "1.39.4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "bin": {
+    "terraform-post-synth": "./src/post-synth.js"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

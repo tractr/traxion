@@ -3,31 +3,43 @@
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "properties": {
-    "project": {
-      "description": "Nx project name",
-      "type": "string",
-      "x-prompt": "In which project would you like to add the generate target ?"
+    "cleanFirst": {
+      "default": true,
+      "description": "Clean the generated files before generating",
+      "type": "boolean"
+    },
+    "format": {
+      "default": true,
+      "description": "Format the generated files with prettier",
+      "type": "boolean"
     },
     "inputHapifyGeneratedPath": {
       "description": "The path of the folder which contains the hapify files",
       "type": "string"
     },
+    "moveGeneratedFiles": {
+      "default": true,
+      "description": "Should we move the generated files from input to output generated path",
+      "type": "boolean"
+    },
     "outputGeneratedPath": {
       "description": "The path of the output generated files folder",
       "type": "string"
     },
-    "cleanFirst": {
-      "description": "Clean the generated files before generating",
-      "type": "boolean",
-      "default": true
+    "project": {
+      "description": "Nx project name",
+      "type": "string",
+      "x-prompt": "In which project would you like to add the generate target ?"
     },
-    "format": {
-      "description": "Format the generated files with prettier",
-      "type": "boolean",
-      "default": true
+    "updateImportPath": {
+      "default": true,
+      "description": "Should we update the import path of the generated files",
+      "type": "boolean"
     }
   },
-  "required": ["project"],
+  "required": [
+    "project"
+  ],
   "title": "",
   "type": "object"
 }

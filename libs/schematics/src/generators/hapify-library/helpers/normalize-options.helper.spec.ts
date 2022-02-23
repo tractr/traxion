@@ -1,7 +1,5 @@
-import { libraryGenerator as angularLibraryGenerator } from '@nrwl/angular/generators';
 import { Tree, updateWorkspaceConfiguration } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { libraryGenerator as nestLibraryGenerator } from '@nrwl/nest';
 
 import {
   HapifyLibraryGeneratorOptions,
@@ -11,7 +9,7 @@ import { normalizeOptions } from './normalize-options.helper';
 
 describe('normalizeOptions', () => {
   let appTree: Tree;
-  const npmScope = '@tractr';
+  const npmScope = 'tractr';
   const workspaceLayout = {
     appsDir: 'apps',
     libsDir: 'libs',
@@ -51,7 +49,7 @@ describe('normalizeOptions', () => {
 
     expect(normalizedOptions).toEqual({
       ...options,
-      hapifyImportReplacements: [],
+      hapifyImportReplacements: { mock: '@tractr/test-models/mock' },
       hapifyModelsJsonRelativePath: '../../../hapify-models.json',
       projectDirectory: 'test/test',
       projectName: 'test-test',
@@ -59,7 +57,10 @@ describe('normalizeOptions', () => {
       secondaryEntrypoints: ['mock'],
       templates: ['@tractr/hapify-templates-models'],
       importPath: '@tractr/test-test',
+      importPrefixPath: '@tractr/test-',
       npmScope,
+      libsDir: 'libs',
+      targets: {},
       extra: {},
     });
   });
@@ -117,7 +118,10 @@ describe('normalizeOptions', () => {
       hapifyTemplates: ['rest-dtos'],
     });
 
-    expect(normalizedOptions.hapifyImportReplacements).toEqual(['models']);
+    expect(normalizedOptions.hapifyImportReplacements).toEqual({
+      mock: '@tractr/test-rest-dtos/mock',
+      models: '@tractr/test-models',
+    });
   });
 
   it('should format entry points', async () => {
@@ -154,13 +158,16 @@ describe('normalizeOptions', () => {
 
     expect(normalizedOptions).toEqual({
       ...options,
-      hapifyImportReplacements: [],
+      hapifyImportReplacements: { mock: '@tractr/test-models/mock' },
       hapifyModelsJsonRelativePath: '../../../hapify-models.json',
       projectDirectory: 'test/test',
       projectName: 'test-test',
       projectRoot: 'libs/test/test',
-      npmScope: '@tractr',
+      npmScope: 'tractr',
+      libsDir: 'libs',
+      targets: {},
       importPath: '@tractr/test-test',
+      importPrefixPath: '@tractr/test-',
       secondaryEntrypoints: ['mock'],
       templates: ['@tractr/hapify-templates-models'],
       extra: {},
@@ -176,14 +183,17 @@ describe('normalizeOptions', () => {
 
     expect(normalizedOptions).toEqual({
       ...options,
-      hapifyImportReplacements: [],
+      hapifyImportReplacements: {},
       hapifyAdditionalTemplates: 'test,,test2',
       hapifyModelsJsonRelativePath: '../../../hapify-models.json',
       projectDirectory: 'test/test',
       projectName: 'test-test',
       projectRoot: 'libs/test/test',
-      npmScope: '@tractr',
+      npmScope: 'tractr',
+      libsDir: 'libs',
+      targets: {},
       importPath: '@tractr/test-test',
+      importPrefixPath: '@tractr/test-',
       secondaryEntrypoints: ['mock'],
       hapifyTemplates: ['casl', 'models'],
       templates: [
@@ -204,13 +214,16 @@ describe('normalizeOptions', () => {
 
     expect(normalizedOptions).toEqual({
       ...options,
-      hapifyImportReplacements: [],
+      hapifyImportReplacements: { mock: '@tractr/test-models/mock' },
       hapifyModelsJsonRelativePath: '../../../hapify-models.json',
       projectDirectory: 'test/test',
       projectName: 'test-test',
       projectRoot: 'libs/test/test',
-      npmScope: '@tractr',
+      npmScope: 'tractr',
+      libsDir: 'libs',
+      targets: {},
       importPath: '@tractr/test-test',
+      importPrefixPath: '@tractr/test-',
       addSecondaryEndpoint: ['mock', 'mock2'],
       secondaryEntrypoints: ['mock', 'mock2'],
       templates: ['@tractr/hapify-templates-models'],

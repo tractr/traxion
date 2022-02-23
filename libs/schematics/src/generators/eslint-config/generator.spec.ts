@@ -29,14 +29,14 @@ describe('eslint generator', () => {
   });
 
   it('should add the eslint configuration', async () => {
-    await generator(appTree);
+    await generator(appTree, {});
 
     // expect .eslintrc.json to have been updated
     expect(appTree.exists('.eslintrc.json')).toBe(true);
     const eslintRcJson = readJson(appTree, '.eslintrc.json');
 
     expect(eslintRcJson.settings).toEqual({
-      'import/internal-regex': '^@(generated)/',
+      'import/internal-regex': '^@(proj)/',
     });
 
     // expect package.json to have been updated

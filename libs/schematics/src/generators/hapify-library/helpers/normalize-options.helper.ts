@@ -1,15 +1,16 @@
 import { relative } from 'path';
 
-import {
-  getWorkspaceLayout,
-  joinPathFragments,
-  names,
-  Tree,
-} from '@nrwl/devkit';
+import { getWorkspaceLayout, TargetConfiguration, Tree } from '@nrwl/devkit';
+import * as deepmerge from 'deepmerge';
 
+import {
+  getImportPrefixPath,
+  getNormalizedProjectDefaultsOptions,
+} from '../../../helpers';
 import {
   DEFAULT_IMPORT_REPLACEMENTS,
   DEFAULT_SECONDARY_ENTRY_POINTS,
+  DEFAULT_TARGETS_OPTIONS,
 } from '../../../schematics.constants';
 import {
   HapifyLibraryGeneratorOptionsWithExtra,
@@ -36,14 +37,11 @@ export function normalizeOptions(
   // Fetch workspace data
   const { libsDir, npmScope } = getWorkspaceLayout(tree);
 
-  // Format case for user input
-  const name = names(rawName).fileName;
-  const directory = rawDirectory ? names(rawDirectory).fileName : undefined;
-
-  // Process project data from user input
-  const projectDirectory = directory ? `${directory}/${name}` : name;
-  const projectName = projectDirectory.replace(/\//g, '-');
-  const projectRoot = joinPathFragments(libsDir, projectDirectory);
+  const { name, directory, projectDirectory, projectRoot, projectName } =
+    getNormalizedProjectDefaultsOptions(tree, {
+      name: rawName,
+      directory: rawDirectory,
+    });
 
   // Format hapify template inputs
   const templates =
@@ -58,14 +56,24 @@ export function normalizeOptions(
     options.hapifyModelsJson,
   );
 
+  const importPrefixPath = getImportPrefixPath(tree, directory);
+
   // Format import replacement
-  const hapifyImportReplacements = [
-    ...new Set(
-      hapifyTemplates.flatMap(
-        (template) => DEFAULT_IMPORT_REPLACEMENTS[template],
-      ),
-    ),
-  ];
+  const hapifyImportReplacements: Record<string, string> = hapifyTemplates
+    .flatMap((template) => DEFAULT_IMPORT_REPLACEMENTS[template])
+    .map((template) => [template, importPrefixPath + template])
+    .concat(
+      hapifyTemplates.length === 1
+        ? [['mock', `${importPrefixPath}${hapifyTemplates[0]}/mock`]]
+        : [],
+    )
+    .reduce(
+      (acc, [importName, importPath]) => ({
+        ...acc,
+        ...(importName && importPath && { [importName]: importPath }),
+      }),
+      {},
+    );
 
   // Format entry point inputs
   const defaultEntrypoint = [
@@ -81,8 +89,15 @@ export function normalizeOptions(
     ),
   ];
 
+  const targets = hapifyTemplates.reduce((acc, template) => {
+    const partialTargets = DEFAULT_TARGETS_OPTIONS[template];
+    if (!partialTargets) return acc;
+
+    return deepmerge(acc, partialTargets);
+  }, {} as Record<string, Partial<TargetConfiguration> | null>);
+
   // Process import path if the option is not provided
-  const importPath = `${npmScope}/${directory ? `${directory}-` : ''}${name}`;
+  const importPath = `@${npmScope}/${directory ? `${directory}-` : ''}${name}`;
 
   return {
     name,
@@ -95,14 +110,17 @@ export function normalizeOptions(
     useSecondaryEndpoint,
     addSecondaryEndpoint,
     npmScope,
+    libsDir,
     projectDirectory,
     projectName,
     projectRoot,
     importPath,
     hapifyModelsJsonRelativePath,
     hapifyImportReplacements,
+    importPrefixPath: getImportPrefixPath(tree, directory),
     templates,
     secondaryEntrypoints,
+    targets,
     extra,
   };
 }

@@ -1,6 +1,6 @@
 {
   "name": "@tractr/commit-config",
-  "version": "1.36.0",
+  "version": "1.39.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack.git"
@@ -9,9 +9,9 @@
     "tractr-commit": "./tractr-commit.js",
     "tractr-commitlint": "./tractr-commitlint.js"
   },
-  "peerDependencies": {
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
+  "dependencies": {
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0"
   },

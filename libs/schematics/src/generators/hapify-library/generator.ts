@@ -1,18 +1,21 @@
 import path = require('path');
 
-import { libraryGenerator as angularLibraryGenerator } from '@nrwl/angular/generators';
 import { formatFiles, generateFiles, Tree } from '@nrwl/devkit';
-import { Linter } from '@nrwl/linter';
-import { libraryGenerator as nestLibraryGenerator } from '@nrwl/nest';
-import { libraryGenerator as reactLibraryGenerator } from '@nrwl/react';
 
+import * as packageJson from '../../../package.json';
+import { addPackageToPackageJson } from '../../helpers';
+import { DEFAULT_LIBRARY_USE_CONTEXT } from '../../schematics.constants';
 import addGenerateTarget from '../target-generate/generator';
 import {
-  cleanAngularLibrary,
-  cleanNestLibrary,
+  addGitIgnoreEntry,
+  addImplicitDependencies,
+  addTemplateDependencies,
   createSecondaryEntrypoints,
+  generateLibrary,
   normalizeOptions,
+  updateProjectTargets,
 } from './helpers';
+import { addBabelRc } from './helpers/add-babelrc.helper';
 import {
   HapifyLibraryGeneratorOptionsWithExtra,
   NormalizedOptions,
@@ -31,20 +34,6 @@ function addFiles(host: Tree, options: NormalizedOptions) {
   });
 }
 
-function addGitIgnoreEntry(host: Tree, options: NormalizedOptions) {
-  const gitIgnorePath = path.join(options.projectRoot, '.gitignore');
-  if (!host.exists(gitIgnorePath)) host.write(gitIgnorePath, '');
-
-  let content = host.read(gitIgnorePath, 'utf-8') || '';
-  if (!/^hapify.json$/gm.test(content)) {
-    content += '\nhapify.json\n';
-  }
-  if (!/^generated$/gm.test(content)) {
-    content += '\ngenerated\n';
-  }
-  host.write(gitIgnorePath, content);
-}
-
 export default async function hapifyLibraryGenerator(
   tree: Tree,
   options: HapifyLibraryGeneratorOptionsWithExtra,
@@ -52,41 +41,12 @@ export default async function hapifyLibraryGenerator(
   // Format options
   const normalizedOptions = normalizeOptions(tree, options);
 
-  // Default values for library generator options
-  const { name, directory, extra, type, importPath, projectName } =
-    normalizedOptions;
-  const libraryGeneratorDefaultOptions = { buildable: true };
-  const libraryGeneratorOptions = { name, directory, importPath, ...extra };
+  const currentVersion = packageJson.version;
 
-  // Generate the library
-  switch (type) {
-    case 'angular':
-      await angularLibraryGenerator(tree, {
-        ...libraryGeneratorDefaultOptions,
-        ...libraryGeneratorOptions,
-      });
-      cleanAngularLibrary(tree, normalizedOptions);
-      break;
-    case 'nest':
-      await nestLibraryGenerator(tree, {
-        ...libraryGeneratorDefaultOptions,
-        ...libraryGeneratorOptions,
-      });
-      cleanNestLibrary(tree, normalizedOptions);
-      break;
-    case 'react':
-      await reactLibraryGenerator(tree, {
-        ...libraryGeneratorDefaultOptions,
-        style: 'none',
-        skipTsConfig: false,
-        skipFormat: false,
-        unitTestRunner: 'jest',
-        linter: Linter.EsLint,
-        ...libraryGeneratorOptions,
-      });
-      break;
-    default:
-  }
+  // Default values for library generator options
+  const { extra, projectName, hapifyTemplates } = normalizedOptions;
+
+  await generateLibrary(tree, normalizedOptions);
 
   await createSecondaryEntrypoints(tree, normalizedOptions);
 
@@ -98,6 +58,24 @@ export default async function hapifyLibraryGenerator(
     project: projectName,
     ...extra,
   });
+
+  await addPackageToPackageJson(
+    tree,
+    ['@tractr/hapify-config', ...normalizedOptions.templates].map(
+      (packageName) => ({ packageName, version: currentVersion }),
+    ),
+  );
+
+  addImplicitDependencies(tree, normalizedOptions);
+
+  updateProjectTargets(tree, normalizedOptions);
+
+  const isUsedInAReactContext = hapifyTemplates.some((template) =>
+    DEFAULT_LIBRARY_USE_CONTEXT[template].includes('react'),
+  );
+  if (isUsedInAReactContext) addBabelRc(tree, normalizedOptions);
+
+  await addTemplateDependencies(tree, normalizedOptions);
 
   await formatFiles(tree);
 }

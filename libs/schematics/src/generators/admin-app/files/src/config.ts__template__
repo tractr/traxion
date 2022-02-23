@@ -1,49 +1,52 @@
-export async function fetchAppConfigJson<T>(
-  url = '/assets/app-config.json',
-  getConfig = (config: Record<string, unknown>) => config as unknown as T,
-) {
+import { AppConfig } from './interfaces/admin-config.interface';
+
+export async function fetchAppConfigJson(url = '/assets/app-config.json') {
   const response = await fetch(url);
   const config: Record<string, unknown> = await response.json();
 
-  return getConfig(config);
+  return config;
 }
 
-export interface FetchConfigurationOptions<T> {
+export interface FetchConfigurationOptions {
   appConfigUrl?: string;
-  getConfig?: (angularConfig: Record<string, unknown>) => T;
+  getConfig: (angularConfig: Record<string, unknown>) => AppConfig;
 }
 
 export const ADMIN_CONFIGURATION_SESSION_STORAGE = 'ADMIN_CONFIGURATION';
 
-export async function fetchConfiguration<T>(
-  options?: FetchConfigurationOptions<T>,
-) {
+export async function fetchConfiguration(
+  options: FetchConfigurationOptions,
+): Promise<AppConfig> {
   const stringifyConfiguration = sessionStorage.getItem(
     ADMIN_CONFIGURATION_SESSION_STORAGE,
   );
 
-  let config;
-
   if (typeof stringifyConfiguration === 'string') {
     try {
-      config = JSON.parse(stringifyConfiguration);
+      const appConfig = JSON.parse(stringifyConfiguration) as AppConfig;
+      // eslint-disable-next-line no-empty
+
+      if (appConfig) return appConfig;
       // eslint-disable-next-line no-empty
     } catch {}
   }
 
-  if (!config) {
-    config = await fetchAppConfigJson(options?.appConfigUrl);
+  const { appConfigUrl, getConfig } = options;
 
-    sessionStorage.setItem(
-      ADMIN_CONFIGURATION_SESSION_STORAGE,
-      JSON.stringify(config),
-    );
-  }
+  const config = await fetchAppConfigJson(appConfigUrl);
 
-  config = options?.getConfig ? options?.getConfig(config) : config;
+  sessionStorage.setItem(
+    ADMIN_CONFIGURATION_SESSION_STORAGE,
+    JSON.stringify(config),
+  );
+
+  if (typeof config === 'undefined')
+    throw new Error('Could not fetch configuration');
+
+  const appConfig = getConfig(config);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (window as any)[ADMIN_CONFIGURATION_SESSION_STORAGE] = config;
+  (window as any)[ADMIN_CONFIGURATION_SESSION_STORAGE] = appConfig;
 
-  return config;
+  return appConfig;
 }

@@ -1,18 +1,12 @@
 {
   "name": "@tractr/hapify-templates-nestjs-models",
-  "version": "1.36.0",
+  "version": "1.39.4",
   "description": "Hapify templates for nestjs models",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
   },
   "license": "UNLICENSED",
-  "peerDependencies": {
-    "@tractr/hapify-templates-nestjs-models-common": "1.4.2",
-    "@tractr/hapify-templates-nestjs-models-rest": "1.4.4",
-    "class-transformer": "^0.4.0",
-    "class-validator": "^0.13.1"
-  },
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"

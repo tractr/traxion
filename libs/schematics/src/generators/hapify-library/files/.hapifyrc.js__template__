@@ -12,6 +12,5 @@ module.exports = {
   project: '<%= hapifyModelJson %>',
   extends: [<% for (const templateName of templates) {%>
     '<%= templateName %>',<% } %>],<% if (hapifyUseImportReplacements) { %>
-  importReplacements: {<% for (const replacement of hapifyImportReplacements) { %>
-    '<%= replacement %>': '@<%= npmScope %>/<%= replacement %>',<% } %>},<% } %>
+  importReplacements: <%- JSON.stringify(hapifyImportReplacements, null, 2) %><% } %>
 };

@@ -79,7 +79,7 @@ export default async function npmPublishGenerator(
     return toUpdateJson;
   });
 
-  await formatFiles(tree);
+  await addPackageToPackageJson(tree, SEMVER_PACKAGE_NAME);
 
-  return addPackageToPackageJson(tree, SEMVER_PACKAGE_NAME);
+  await formatFiles(tree);
 }

@@ -1,19 +1,12 @@
 {
   "name": "@tractr/nestjs-authentication",
-  "version": "1.36.0",
+  "version": "1.39.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
   },
-  "peerDependencies": {
-    "@tractr/hapify-templates-models": "^1.4.2",
-    "@tractr/hapify-templates-nestjs-models-common": "^1.4.2",
-    "@tractr/nestjs-core": "^1.6.3",
-    "@tractr/nestjs-database": "^1.5.0",
-    "jsonwebtoken": "^8.5.1"
-  },
   "optionalDependencies": {
-    "cookie-parser": "^1.4.5"
+    "cookie-parser": "^1.4.6"
   },
   "publishConfig": {
     "access": "restricted",

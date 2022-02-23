@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "outDir": "../../../dist/out-tsc",
+    "types": ["node"]
+  },
+  "exclude": ["**/*.spec.ts", "**/*.test.ts"],
+  "extends": "./tsconfig.json",
+  "include": ["**/*.ts", "bin/create-hapify-workspace.mjs"]
+}
