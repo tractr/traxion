@@ -1,6 +1,6 @@
 {
   "name": "@tractr/generated-nestjs-models",
-  "version": "1.39.4",
+  "version": "1.39.5",
   "exports": {
     ".": "./dist/index.js",
     "./mock": "./dist/mock.js"
