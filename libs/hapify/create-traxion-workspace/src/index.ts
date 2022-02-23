@@ -7,7 +7,7 @@ import { cwd } from 'process';
 import lodash from 'lodash';
 import { $, cd } from 'zx';
 
-$.verbose = false;
+// $.verbose = false;
 
 const { kebabCase } = lodash;
 
@@ -110,7 +110,7 @@ export async function createTraxionWorkspace(
   await $`echo "✔ Installing missing dependencies"`;
 
   // TODO DO NOT COMMIT THIS LINE
-  await $`DEBUG=local-install node ../../stack/tools/local-install.mjs --projects schematics`;
+  await $`DEBUG=local-install node ../../stack/tools/local-install.mjs --projects schematics,nestjs-casl,hapify-templates-nestjs-models-rest`;
 
   const args = transformObjectToArgs({
     ...DEFAULT_TRAXION_WORKSPACE_OPTIONS,
@@ -127,4 +127,7 @@ export async function createTraxionWorkspace(
   await $`echo "- Formating the workspace"`;
   await $`npm run format &>/dev/null`;
   await $`echo "✔ Formating the workspace"`;
+
+  // TODO DO NOT COMMIT THIS LINE
+  await $`DEBUG=local-install node ../../stack/tools/local-install.mjs --projects schematics,nestjs-casl,hapify-templates-nestjs-models-rest`;
 }

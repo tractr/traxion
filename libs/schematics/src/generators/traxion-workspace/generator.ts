@@ -8,6 +8,7 @@ import {
   updateWorkspaceConfiguration,
 } from '@nrwl/devkit';
 
+import { addPackageToPackageJson, PackageType } from '../../helpers';
 import eslintGenerator from '../eslint-config/generator';
 import generateWorkflow from '../github-workflows/generator';
 import prettierGenerator from '../prettier-config/generator';
@@ -97,6 +98,32 @@ export default async function traxionWorkspaceGenerator(
   succeed = log.info('Add files to the workspace');
   await addWorkspaceFiles(tree, normalizedOptions);
   succeed();
+
+  // Fix angular dependencies cause a bug to use the demo
+  await addPackageToPackageJson(
+    tree,
+    [
+      '@angular/animations',
+      '@angular/common',
+      '@angular/compiler',
+      '@angular/core',
+      '@angular/forms',
+      '@angular/platform-browser',
+      '@angular/platform-browser-dynamic',
+      '@angular/router',
+    ].map((packageName) => ({ packageName, version: '13.2.1' })),
+    PackageType.dependencies,
+  );
+  await addPackageToPackageJson(
+    tree,
+    [
+      '@angular-devkit/build-angular',
+      '@angular/cli',
+      '@angular/compiler-cli',
+      '@angular/language-service',
+    ].map((packageName) => ({ packageName, version: '13.2.1' })),
+    PackageType.devDependencies,
+  );
 
   await formatFiles(tree);
 }

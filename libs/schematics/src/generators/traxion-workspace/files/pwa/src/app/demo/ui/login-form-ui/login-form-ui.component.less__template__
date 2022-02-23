@@ -1,8 +1,7 @@
 .form__wrapper {
-  @apply flex items-center justify-center mt-16 flex-col;
+  @apply flex items-center justify-center flex-col;
 
   .ant-form-inline {
-    @apply rounded-lg shadow-lg p-6;
     .ant-form-item-with-help {
       @apply mb-0;
     }

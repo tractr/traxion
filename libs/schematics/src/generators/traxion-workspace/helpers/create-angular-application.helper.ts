@@ -130,7 +130,12 @@ export async function createAngularApplication(
   });
 
   // Update polyfill eslint error
-  const polyfill = (tree.read(join(pwaPath, 'polyfill.ts')) || '').toString();
-  polyfill.replaceAll(/\/\*\*\*.*/, '/**');
-  tree.write(join(pwaPath, 'polyfill.ts'), polyfill);
+  const polyfill = (
+    tree.read(join(pwaPath, 'src', 'polyfill.ts')) || ''
+  ).toString();
+
+  tree.write(
+    join(pwaPath, 'src', 'polyfill.ts'),
+    polyfill.replaceAll(/\/\*\*\*.*/g, '/**'),
+  );
 }

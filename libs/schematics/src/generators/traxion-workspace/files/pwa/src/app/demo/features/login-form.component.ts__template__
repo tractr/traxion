@@ -1,12 +1,30 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import type { BlogPost, Profil, Tag, User as UserType } from '@prisma/client';
 import { SessionService } from '@tractr/angular-authentication';
-import { ErrorService } from '@tractr/angular-tools';
-import { catchError, Observable, of } from 'rxjs';
+import {
+  catchError,
+  map,
+  Observable,
+  of,
+  OperatorFunction,
+  pipe,
+  switchMap,
+  switchMapTo,
+} from 'rxjs';
 
-import { LoginCredentials } from '../ui/login-form-ui/login-form-ui.component';
+import {
+  BlogPostService,
+  ProfilService,
+  TagService,
+  UserService,
+} from '<%= generatedImportPath %>angular-rext-client';
+import { User } from '<%= generatedImportPath %>models';
 
-import { TagService, UserService } from '<%= generatedImportPath %>angular-rext-client';
-import { Profil, Tag, User } from '<%= generatedImportPath %>models';
+export type ApiResponse<T> = {
+  status: number;
+  error?: string;
+  data?: T;
+};
 
 @Component({
   selector: '<%= npmScope %>-login-form',
@@ -14,56 +32,74 @@ import { Profil, Tag, User } from '<%= generatedImportPath %>models';
   styleUrls: ['./login-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginFormComponent implements OnInit {
-  public isUserLogged = false;
-
-  public currentUser$!: Observable<User & { profil: Profil }>;
-
-  public tags$!: Observable<Tag[]>;
-  // public tagsError$ = new Subject();
-  public tagsError!: { status: number; message: string };
-
+export class LoginFormComponent {
   constructor(
-    private sessionService: SessionService,
-    private errorService: ErrorService,
+    public sessionService: SessionService<UserType>,
     private userService: UserService,
+    private blogPostService: BlogPostService,
+    private profilService: ProfilService,
     private tagService: TagService,
   ) {}
 
-  ngOnInit(): void {
-    // if (this.sessionService.isLogged()) {
-    // id en dur car on ne peut pas utiliser la methode isLogged() car elle est bloquée par l'api
-    this.currentUser$ = this.userService.findUnique$(
-      {
-        id: 'ef4caf08-29c1-4f68-8a72-a71f45babf5f',
-      },
-      { populate: ['profil'] },
-    ) as Observable<User & { profil: Profil }>;
+  public currentUser$: Observable<User | null> = this.sessionService.me$;
 
-    this.tags$ = this.tagService.findMany$().pipe(
-      catchError((error) => {
-        // this.tagsError$.next(error);
-        this.tagsError = { status: error.status, message: error.message };
-        return of([]);
+  public userIdOrNull$: Observable<string | null> =
+    this.sessionService.me$.pipe(
+      map((user) => {
+        if (user) {
+          return user.id;
+        }
+        return null;
       }),
     );
-    // }
-  }
 
-  /**
-   * Log a user on login event
-   * @param credentials Login credentials
-   */
-  async login({ email, password }: LoginCredentials) {
-    try {
-      const isLogged = await this.sessionService.login(email, password);
+  public users$: Observable<ApiResponse<User[]>> = this.userIdOrNull$.pipe(
+    switchMap(() => this.userService.findMany$().pipe(this.toApiResponse())),
+  );
 
-      if (isLogged) {
-        this.isUserLogged = true;
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) this.errorService.handle(error);
-      else throw error;
-    }
+  public usersCount$: Observable<ApiResponse<number>> = this.userIdOrNull$.pipe(
+    switchMapTo(this.userService.count$().pipe(this.toApiResponse())),
+  );
+
+  public userUnique$: Observable<ApiResponse<User>> = this.userIdOrNull$.pipe(
+    switchMap((id) => {
+      if (id)
+        return this.userService.findUnique$({ id }).pipe(this.toApiResponse());
+      return of({ status: 404, error: 'id not found' });
+    }),
+  );
+
+  public tags$: Observable<ApiResponse<Tag[]>> = this.userIdOrNull$.pipe(
+    switchMapTo(this.tagService.findMany$().pipe(this.toApiResponse())),
+  );
+
+  public tagsCount$: Observable<ApiResponse<number>> = this.userIdOrNull$.pipe(
+    switchMapTo(this.tagService.count$().pipe(this.toApiResponse())),
+  );
+
+  public blogPosts$: Observable<ApiResponse<BlogPost[]>> =
+    this.userIdOrNull$.pipe(
+      switchMapTo(this.blogPostService.findMany$().pipe(this.toApiResponse())),
+    );
+
+  public blogPostsCount$: Observable<ApiResponse<number>> =
+    this.userIdOrNull$.pipe(
+      switchMapTo(this.blogPostService.count$().pipe(this.toApiResponse())),
+    );
+
+  public profils$: Observable<ApiResponse<Profil[]>> = this.userIdOrNull$.pipe(
+    switchMapTo(this.profilService.findMany$().pipe(this.toApiResponse())),
+  );
+
+  public profilsCount$: Observable<ApiResponse<number>> =
+    this.userIdOrNull$.pipe(
+      switchMap(() => this.profilService.count$().pipe(this.toApiResponse())),
+    );
+
+  public toApiResponse<T>(): OperatorFunction<T, ApiResponse<T>> {
+    return pipe(
+      map((data) => ({ status: 200, data })),
+      catchError(({ status, message }) => of({ status, error: message })),
+    );
   }
 }

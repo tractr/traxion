@@ -1,6 +1,17 @@
 <div class="user__infos__wrapper">
-  <h2 class="user__infos__wrapper__title">Informations de l'utilisateur</h2>
-  <p>Nom : {{ name }}</p>
+  <h3 class="user__infos__wrapper__title">Utilisateur connecté:</h3>
+  <p>{{ name }}</p>
   <p>Email : {{ email }}</p>
   <p>Rôle : {{ role }}</p>
+
+  <p>
+    <button
+      nz-button
+      nzType="primary"
+      class="btn--primary"
+      (click)="logoutEvent.emit()"
+    >
+      Déconnexion
+    </button>
+  </p>
 </div>

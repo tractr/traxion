@@ -1,5 +1,10 @@
 .user__infos__wrapper {
+  @apply flex gap-x-6 gap-y-2 flex-wrap items-center;
+
   &__title {
-    @apply text-2xl font-bold;
+    @apply text-xl font-bold mb-0 mr-10;
+  }
+  p {
+    @apply mb-0;
   }
 }
