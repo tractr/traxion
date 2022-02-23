@@ -6,8 +6,8 @@ module.exports = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'Tractr', // Usually your GitHub org/user name.
-  projectName: 'traxion', // Usually your repo name.
+  organizationName: 'Tractr',
+  projectName: 'Traxion',
   themeConfig: {
     navbar: {
       title: 'Traxion',
@@ -22,9 +22,8 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },
-        { to: 'blog', label: 'Blog', position: 'left' },
         {
-          href: 'https://github.com/tractr/traxion',
+          href: 'https://github.com/tractr/stack',
           label: 'GitHub',
           position: 'right',
         },
@@ -36,30 +35,22 @@ module.exports = {
         {
           title: 'Docs',
           items: [
-            // {
-            //   label: 'Style Guide',
-            //   to: 'contribution/how-to-write-this-documentation',
-            // },
-            // {
-            //   label: 'Second Doc',
-            //   to: 'docs/doc2/',
-            // },
+            {
+              label: 'Get started',
+              to: '/docs/get-started',
+            },
+            {
+              label: 'Contribute',
+              to: '/docs/contribution/code-guidelines',
+            },
           ],
         },
         {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/traxion',
-            },
-            {
               label: 'Discord',
-              href: 'https://discordapp.com/invite/traxion',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/traxion',
+              href: 'https://discord.traxion.dev/',
             },
           ],
         },
@@ -67,17 +58,13 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
-              to: 'blog',
-            },
-            {
               label: 'GitHub',
               href: 'https://github.com/tractr/traxion',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Traxion, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Tractr, Inc. Built with Docusaurus.`,
     },
   },
   presets: [
@@ -86,15 +73,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
+          editUrl: 'https://github.com/tractr/stack/tree/main/apps/docs/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
