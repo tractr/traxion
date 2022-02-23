@@ -22,7 +22,7 @@
     .panel__response {
       @apply p-4;
       pre {
-        @apply mb-0;
+        @apply mb-0 text-xs;
       }
     }
     .panel__response {
