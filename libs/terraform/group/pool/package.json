@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-group-pool",
-  "version": "1.39.5",
+  "version": "1.39.6",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"

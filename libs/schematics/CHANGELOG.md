@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.39.6](https://github.com/tractr/stack/compare/v1.39.5...v1.39.6) (2022-02-23)
+
+
+### Bug Fixes
+
+* update traxion workspace schematics to be able to run the workspace the first time ([#397](https://github.com/tractr/stack/issues/397)) ([e87b59c](https://github.com/tractr/stack/commit/e87b59c8d23388ec5fff15fba4703dd5f3e412b0))
+
+
+
 ## [1.39.5](https://github.com/tractr/stack/compare/v1.39.4...v1.39.5) (2022-02-23)
 
 
