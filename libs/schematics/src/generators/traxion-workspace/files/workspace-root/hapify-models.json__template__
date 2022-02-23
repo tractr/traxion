@@ -1,6 +1,6 @@
 {
   "version": "3",
-  "name": "<%= npmScope %>",
+  "name": "New project",
   "models": [
     {
       "id": "6894a782-2e83-cd6a-52cc-f62967165636",
@@ -99,11 +99,11 @@
       "id": "7c1c844a-308d-a7c9-9e36-d9a58c4fd845",
       "name": "Profil",
       "accesses": {
-        "count": "auth",
+        "count": "owner",
         "create": "owner",
-        "read": "auth",
+        "read": "owner",
         "remove": "owner",
-        "search": "auth",
+        "search": "owner",
         "update": "owner"
       },
       "fields": [
@@ -127,13 +127,20 @@
           ]
         },
         {
-          "name": "name",
-          "type": "string",
+          "name": "user",
+          "type": "entity",
+          "subtype": "oneOne",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
           "properties": [
-            "label",
+            "unique",
             "searchable",
-            "sortable"
-          ]
+            "sortable",
+            "ownership"
+          ],
+          "meta": {
+            "backRelation": "profil",
+            "ownerStringPath": "user.id"
+          }
         },
         {
           "name": "phone",
@@ -150,22 +157,6 @@
             "searchable",
             "sortable"
           ]
-        },
-        {
-          "name": "user",
-          "type": "entity",
-          "subtype": "oneOne",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
-          "properties": [
-            "unique",
-            "searchable",
-            "sortable",
-            "ownership"
-          ],
-          "meta": {
-            "backRelation": "profil",
-            "ownerStringPath": "user.id"
-          }
         }
       ]
     },
@@ -215,7 +206,7 @@
       "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
       "name": "User",
       "accesses": {
-        "count": "admin",
+        "count": "owner",
         "create": "guest",
         "read": "owner",
         "remove": "admin",
@@ -247,12 +238,20 @@
           ]
         },
         {
+          "name": "name",
+          "type": "string",
+          "properties": [
+            "label",
+            "searchable",
+            "sortable"
+          ]
+        },
+        {
           "name": "email",
           "type": "string",
           "subtype": "email",
           "properties": [
             "unique",
-            "label",
             "searchable",
             "sortable"
           ]

@@ -136,7 +136,7 @@ export default async function prismaLibraryGenerator(
     prisma: {
       ...json.prisma,
       seed: `ts-node -r tsconfig-paths/register --project ${projectRoot}/tsconfig.lib.json ${projectRoot}/prisma/seed.ts`,
-      schema: `${projectRoot}libs/generated/prisma/prisma/schema.prisma`,
+      schema: `${projectRoot}/prisma/schema.prisma`,
     },
   }));
 }

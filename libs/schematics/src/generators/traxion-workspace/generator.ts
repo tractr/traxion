@@ -8,6 +8,7 @@ import {
   updateWorkspaceConfiguration,
 } from '@nrwl/devkit';
 
+import { addPackageToPackageJson, PackageType } from '../../helpers';
 import eslintGenerator from '../eslint-config/generator';
 import generateWorkflow from '../github-workflows/generator';
 import prettierGenerator from '../prettier-config/generator';
