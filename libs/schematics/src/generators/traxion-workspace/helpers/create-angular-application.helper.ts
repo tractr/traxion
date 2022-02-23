@@ -9,6 +9,7 @@ import * as packageJson from '../../../../package.json';
 import {
   addPackageJson,
   addPackageToPackageJson,
+  PackageDefinition,
   PackageType,
   readTargetConfiguration,
   updateTargetConfiguration,
@@ -128,4 +129,45 @@ export async function createAngularApplication(
       ],
     },
   });
+
+  // Fix angular dependencies cause a bug to use the demo
+  await addPackageToPackageJson(
+    tree,
+    [
+      '@angular/animations',
+      '@angular/common',
+      '@angular/compiler',
+      '@angular/core',
+      '@angular/forms',
+      '@angular/platform-browser',
+      '@angular/platform-browser-dynamic',
+      '@angular/router',
+    ]
+      .map<string | PackageDefinition>((packageName) => ({
+        packageName,
+        version: '13.2.1',
+      }))
+      .concat(['tailwind', '@tailwindcss/forms']),
+    PackageType.dependencies,
+  );
+  await addPackageToPackageJson(
+    tree,
+    [
+      '@angular-devkit/build-angular',
+      '@angular/cli',
+      '@angular/compiler-cli',
+      '@angular/language-service',
+    ].map((packageName) => ({ packageName, version: '13.2.1' })),
+    PackageType.devDependencies,
+  );
+
+  // Update polyfill eslint error
+  const polyfill = (
+    tree.read(join(pwaPath, 'src', 'polyfill.ts')) || ''
+  ).toString();
+
+  tree.write(
+    join(pwaPath, 'src', 'polyfill.ts'),
+    polyfill.replaceAll(/\/\*\*\*.*/g, '/**'),
+  );
 }
