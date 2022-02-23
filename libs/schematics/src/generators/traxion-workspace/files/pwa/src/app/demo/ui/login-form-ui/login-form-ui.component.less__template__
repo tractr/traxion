@@ -14,6 +14,7 @@
         }
 
         .btn--primary {
+          margin-top: 1px;
           @apply inline-flex justify-center py-2 px-4 shadow-sm text-sm font-medium rounded uppercase h-auto border-0;
           &:not([disabled]) {
             @apply bg-indigo-600 hover:bg-indigo-700 text-white;

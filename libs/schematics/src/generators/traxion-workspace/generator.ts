@@ -99,31 +99,5 @@ export default async function traxionWorkspaceGenerator(
   await addWorkspaceFiles(tree, normalizedOptions);
   succeed();
 
-  // Fix angular dependencies cause a bug to use the demo
-  await addPackageToPackageJson(
-    tree,
-    [
-      '@angular/animations',
-      '@angular/common',
-      '@angular/compiler',
-      '@angular/core',
-      '@angular/forms',
-      '@angular/platform-browser',
-      '@angular/platform-browser-dynamic',
-      '@angular/router',
-    ].map((packageName) => ({ packageName, version: '13.2.1' })),
-    PackageType.dependencies,
-  );
-  await addPackageToPackageJson(
-    tree,
-    [
-      '@angular-devkit/build-angular',
-      '@angular/cli',
-      '@angular/compiler-cli',
-      '@angular/language-service',
-    ].map((packageName) => ({ packageName, version: '13.2.1' })),
-    PackageType.devDependencies,
-  );
-
   await formatFiles(tree);
 }
