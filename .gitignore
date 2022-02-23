@@ -66,6 +66,7 @@ hapify.json
 !**/hapify/validator.js
 !**/config/hapify
 !**/libs/hapify
+!apps/docs/**/hapify
 
 # Templates of hapify-templates libraries should be tracked
 !libs/hapify/templates/**/generated/
