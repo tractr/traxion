@@ -606,7 +606,9 @@ function LibDetails({ link, title, description }) {
   return (
     <div>
       <h3>
-        <a href={link}>{title}</a>
+        <a target="_blank" href={link}>
+          {title}
+        </a>
       </h3>
       <p>{description}</p>
     </div>
