@@ -4,7 +4,7 @@ module.exports = {
     'get-started/index',
     {
       type: 'category',
-      label: 'How to',
+      label: 'How to use',
       items: [
         {
           type: 'category',
@@ -234,5 +234,6 @@ module.exports = {
         'contribution/style-and-layout',
       ],
     },
+    'what-is-inside',
   ],
 };

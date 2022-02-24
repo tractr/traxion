@@ -52,6 +52,6 @@ Here is a list of the most important blocks:
 
 :::important More tools
 
-See complete list of [libraries & frameworks](./libraries-frameworks-list)
+See complete [list of libraries & frameworks](/docs/credits)
 
 :::
