@@ -605,11 +605,11 @@ const libsList = [
 function LibDetails({ link, title, description }) {
   return (
     <div>
-      <h3>
+      <h4>
         <a target="_blank" href={link}>
           {title}
         </a>
-      </h3>
+      </h4>
       <p>{description}</p>
     </div>
   );
