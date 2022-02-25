@@ -38,11 +38,6 @@ module.exports = {
       input: 'one',
     },
     {
-      path: 'generated/nestjs-models-rest/src/{kebab}/{kebab}-rest.module.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
       path: 'generated/nestjs-models-rest/src/{kebab}/controllers/index.ts',
       engine: 'hpf',
       input: 'one',
