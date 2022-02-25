@@ -60,11 +60,12 @@
     "@docusaurus/preset-classic": "^2.0.0-beta.15",
     "@docusaurus/theme-search-algolia": "^2.0.0-beta.15",
     "@mdx-js/react": "^2.0.0",
+    "@nestjs/apollo": "^10.0.5",
     "@nestjs/axios": "^0.0.5",
     "@nestjs/common": "^8.3.1",
     "@nestjs/config": "^1.2.0",
     "@nestjs/core": "^8.3.1",
-    "@nestjs/graphql": "^10.0.4",
+    "@nestjs/graphql": "^10.0.5",
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/passport": "^8.2.1",
     "@nestjs/platform-express": "^8.3.1",
@@ -80,6 +81,7 @@
     "@types/glob": "^7.2.0",
     "@types/node-mailjet": "^3.3.8",
     "apollo-server-core": "^3.6.3",
+    "apollo-server-express": "^3.6.3",
     "bcrypt": "^5.0.1",
     "case": "^1.6.3",
     "class-transformer": "0.5.1",
@@ -250,6 +252,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "prisma": {
-    "seed": "ts-node libs/prisma/src/index.ts"
+    "schema": "libs/generated/prisma/prisma/schema.prisma",
+    "seed": "ts-node -r tsconfig-paths/register --project libs/generated/prisma/tsconfig.lib.json libs/generated/prisma/prisma/seed.ts"
   }
 }

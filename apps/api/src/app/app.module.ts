@@ -1,6 +1,11 @@
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { ConsoleModule } from 'nestjs-console';
+
+import { GraphqlPOCModule } from './graphql/graphql.module';
 
 import {
   getSelectPrismaUserQuery,
@@ -29,6 +34,14 @@ import { MailerModule } from '@tractr/nestjs-mailer';
 
 @Module({
   imports: [
+    GraphqlPOCModule,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      include: [GraphqlPOCModule],
+      autoSchemaFile: true,
+      playground: true,
+      debug: true,
+    }),
     ModelsModule.register(),
     DatabaseModule.register(),
     AuthenticationModule.registerAsync({
