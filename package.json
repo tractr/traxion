@@ -250,6 +250,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "prisma": {
-    "seed": "ts-node libs/prisma/src/index.ts"
+    "schema": "libs/generated/prisma/prisma/schema.prisma",
+    "seed": "ts-node -r tsconfig-paths/register --project libs/generated/prisma/tsconfig.lib.json libs/generated/prisma/prisma/seed.ts"
   }
 }

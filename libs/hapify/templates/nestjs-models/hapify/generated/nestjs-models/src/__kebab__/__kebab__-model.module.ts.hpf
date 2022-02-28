@@ -1,41 +1,59 @@
-import { Module, OnModuleInit } from '@nestjs/common';
-import { ModuleOverride } from '@tractr/nestjs-core';
+import { DynamicModule, Module<<if Fields password>>, OnModuleInit<<endif>> } from '@nestjs/common';
+import { Logger } from '@tractr/nestjs-core';
+
 <<if Fields password>>
 import { DatabaseService } from '@tractr/nestjs-database';
 import * as bcrypt from 'bcrypt';
 <<endif>>
  
-import { <<Model constant>>_DATABASE_SERVICE, <<Model constant>>_SERVICE } from './<<Model kebab>>-model.constant';
+import {
+  <<Model constant>>_DATABASE_SERVICE,
+  <<Model constant>>_SERVICE
+} from '../../../nestjs-models-common';
 import {
   <<Model camel>>DatabaseServiceFactory,
   <<Model camel>>DatabaseServiceInject,
   <<Model pascal>>Service,
-} from './services';
- 
-const providers = [
-  {
-    provide: <<Model constant>>_SERVICE,
-    useClass: <<Model pascal>>Service,
-  },
-  {
-    provide: <<Model constant>>_DATABASE_SERVICE,
-    useFactory: <<Model camel>>DatabaseServiceFactory,
-    inject: <<Model camel>>DatabaseServiceInject,
-  },
-];
+} from '../../../nestjs-models-common';
  
 @Module({
-  exports: providers,
-  providers,
+  providers: [
+    {
+      provide: <<Model constant>>_SERVICE,
+      useClass: <<Model pascal>>Service,
+    },
+    {
+      provide: <<Model constant>>_DATABASE_SERVICE,
+      useFactory: <<Model camel>>DatabaseServiceFactory,
+      inject: <<Model camel>>DatabaseServiceInject,
+    },
+  ],
+  exports: [
+    <<Model constant>>_SERVICE,
+    <<Model constant>>_DATABASE_SERVICE
+  ],
 })
-export class <<Model pascal>>ModelModule extends ModuleOverride implements OnModuleInit {
-  <<if Fields password>>
-  constructor(protected readonly databaseService: DatabaseService) {
-    super();
+export class <<Model pascal>>ModelModule<<if Fields password>> implements OnModuleInit<<endif>> {
+  /**
+   * Register the <<Model pascal>> model module
+   *
+   * @deprecated stop using this static method to register your module but use the ModelsModule instead
+   */
+  static register(): DynamicModule {
+    const logger = new Logger();
+    logger.error(
+      '<<Model pascal>>ModelModule.register will be remove in futur version. Please remove the call to register and use the ModelsModule directly',
+    );
+    return {
+      module: <<Model pascal>>ModelModule,
+    };
   }
-  <<endif>>
 
-  onModuleInit() {<<if Fields password>>
+  <<if Fields password>>
+  constructor(protected readonly databaseService: DatabaseService) {}
+  <<endif>>
+  <<if Fields password>>
+  onModuleInit() {
     // Create a prisma middleware to handle before and after schema hooks
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.databaseService.$use(async (params: any, next: any) => {
@@ -85,6 +103,6 @@ export class <<Model pascal>>ModelModule extends ModuleOverride implements OnMod
 
       return isArray ? data : data[0];
     });
-  <<endif>>
   }
+  <<endif>>
 }
