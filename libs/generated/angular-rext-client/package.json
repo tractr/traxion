@@ -1,6 +1,6 @@
 {
   "name": "@tractr/generated-angular-rext-client",
-  "version": "1.39.6",
+  "version": "1.40.0",
   "dependencies": {
     "tslib": "^2.3.1"
   },
