@@ -29,7 +29,7 @@ import { MailerModule } from '@tractr/nestjs-mailer';
 
 @Module({
   imports: [
-    ModelsModule.register(),
+    ModelsModule,
     DatabaseModule.register(),
     AuthenticationModule.registerAsync({
       useFactory: (defaultOptions) => ({
