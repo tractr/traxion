@@ -6,6 +6,11 @@
       "factory": "./src/generators/admin-app/generator",
       "schema": "./src/generators/admin-app/schema.json"
     },
+    "api-app": {
+      "description": "api-app generator",
+      "factory": "./src/generators/api-app/generator",
+      "schema": "./src/generators/api-app/schema.json"
+    },
     "eslint-config": {
       "description": "eslint-config generator",
       "factory": "./src/generators/eslint-config/generator",
@@ -35,6 +40,11 @@
       "description": "prisma-library generator",
       "factory": "./src/generators/prisma-library/generator",
       "schema": "./src/generators/prisma-library/schema.json"
+    },
+    "pwa-app": {
+      "description": "pwa-app generator",
+      "factory": "./src/generators/pwa-app/generator",
+      "schema": "./src/generators/pwa-app/schema.json"
     },
     "release": {
       "description": "release generator",
