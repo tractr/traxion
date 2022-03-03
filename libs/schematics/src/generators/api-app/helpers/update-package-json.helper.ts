@@ -42,6 +42,7 @@ export async function updatePackageJson(
       'swagger-ui-express',
       'cookie-parser',
       'graphql',
+      'passport',
       '@casl/prisma',
     ],
     PackageType.dependencies,

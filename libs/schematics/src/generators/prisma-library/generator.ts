@@ -86,6 +86,7 @@ export default async function prismaLibraryGenerator(
     hapifyUseImportReplacements: true,
     useSecondaryEndpoint: false,
     addSecondaryEndpoint: [],
+    skipInstall: true,
     ...extra,
   });
 
