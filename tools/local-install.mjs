@@ -58,11 +58,12 @@ for (const [projectName, project] of projects) {
 
   toCopy.push([join(stackDir, outputPath), join(targetDir, packageName)]);
 
-  packagesToInstall.push(
-    ...Object.entries(packageJson.dependencies).map(
-      ([packageName, version]) => `${packageName}@${version}`,
-    ),
-  );
+  if (packageJson.dependencies)
+    packagesToInstall.push(
+      ...Object.entries(packageJson.dependencies).map(
+        ([packageName, version]) => `${packageName}@${version}`,
+      ),
+    );
 }
 
 log(`Installing dependencies`);
