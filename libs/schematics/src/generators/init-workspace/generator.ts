@@ -34,8 +34,6 @@ export default async function initWorkspaceGenerator(
       build: 'nx run-many --all --target=build',
       format: 'nx format:write --all',
       generate: 'npx nx run-many --target generate --all',
-      postinstall:
-        '(is-ci || husky install) && ngcc --properties es2015 browser module main',
       lint: 'nx workspace-lint && nx run-many --all --target=lint --parallel',
       nx: 'nx',
       test: ' nx run-many --all --target=test',

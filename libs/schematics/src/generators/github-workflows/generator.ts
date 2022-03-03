@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-import { formatFiles, generateFiles, offsetFromRoot, Tree } from '@nrwl/devkit';
+import { generateFiles, offsetFromRoot, Tree } from '@nrwl/devkit';
 import { prompt } from 'enquirer';
 import { XOR } from 'ts-essentials';
 
@@ -80,5 +80,4 @@ export default async function generateWorkflow(
   const normalizedOptions = await normalizeOptions(options);
 
   addFiles(tree, normalizedOptions);
-  await formatFiles(tree);
 }
