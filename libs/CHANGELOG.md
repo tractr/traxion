@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.41.0](https://github.com/tractr/stack/compare/v1.40.0...v1.41.0) (2022-03-03)
+
+
+### Features
+
+* split traxion workspace schematics ([#401](https://github.com/tractr/stack/issues/401)) ([18c9ca5](https://github.com/tractr/stack/commit/18c9ca515182506a488a30d9d7d45c81ea7eaa63))
+
+
+
+# [1.41.0](https://github.com/tractr/stack/compare/v1.40.0...v1.41.0) (2022-03-03)
+
+
+### Features
+
+* split traxion workspace schematics ([#401](https://github.com/tractr/stack/issues/401)) ([18c9ca5](https://github.com/tractr/stack/commit/18c9ca515182506a488a30d9d7d45c81ea7eaa63))
+
+
+
 # [1.40.0](https://github.com/tractr/stack/compare/v1.39.6...v1.40.0) (2022-02-28)
 
 
