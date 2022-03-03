@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.40.0](https://github.com/tractr/stack/compare/v1.39.6...v1.40.0) (2022-02-28)
+
+
+### Features
+
+* update the templates to separate the nestjs modules from the models and rest templates ([#400](https://github.com/tractr/stack/issues/400)) ([07d219c](https://github.com/tractr/stack/commit/07d219c96d3fd59e87202b84cb68d3508177acae))
+
+
+
 ## [1.39.6](https://github.com/tractr/stack/compare/v1.39.5...v1.39.6) (2022-02-23)
 
 

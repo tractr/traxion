@@ -28,5 +28,15 @@ module.exports = {
       engine: 'hpf',
       input: 'one',
     },
+    {
+      path: 'generated/nestjs-models/src/{kebab}/{kebab}-model.module.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/nestjs-models/src/{kebab}/{kebab}-rest.module.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
   ],
 };
