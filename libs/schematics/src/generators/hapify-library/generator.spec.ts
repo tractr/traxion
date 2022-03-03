@@ -116,8 +116,12 @@ module.exports = {
   description: 'Library to host generated codes',
   validatorPath: getValidatorPath(__dirname),
   project: '../../hapify-models.json',
-  extends: [],
-  importReplacements: {}
+  extends: [
+    '@tractr/hapify-templates-models',
+  ],
+  importReplacements: {
+  "mock": "@proj/models/mock"
+}
 };
 `);
   });
@@ -145,8 +149,7 @@ module.exports = {
   project: '../../hapify-models.json',
   extends: [
     '@tractr/hapify-templates-models',
-    '@tractr/additional-templates-1',
-    '@tractr/additional-templates-2',],
+  ],
   importReplacements: {
   "mock": "@proj/models/mock"
 }
@@ -174,11 +177,10 @@ module.exports = {
   validatorPath: getValidatorPath(__dirname),
   project: '../../hapify-models.json',
   extends: [
-    '@tractr/hapify-templates-rext-client',],
+    '@tractr/hapify-templates-models',
+  ],
   importReplacements: {
-  "models": "@proj/models",
-  "rest-dtos": "@proj/rest-dtos",
-  "mock": "@proj/rext-client/mock"
+  "mock": "@proj/models/mock"
 }
 };
 `);

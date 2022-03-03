@@ -7,7 +7,10 @@ export function installPackagesTask(
   tree: Tree,
   { skipInstall }: { skipInstall?: boolean } = { skipInstall: false },
 ) {
-  const skip = process.env.NX_SKIP_INSTALL === 'true' || skipInstall;
+  const skip =
+    process.env.JEST_SKIP_INSTALL ||
+    process.env.NX_SKIP_INSTALL === 'true' ||
+    skipInstall;
 
   if (!skip) installPackagesTaskNx(tree);
 }

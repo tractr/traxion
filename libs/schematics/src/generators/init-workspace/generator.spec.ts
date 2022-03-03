@@ -12,7 +12,5 @@ describe('init-workspace generator', () => {
 
   it('should run successfully', async () => {
     await generator(appTree);
-    const config = readProjectConfiguration(appTree, 'test');
-    expect(config).toBeDefined();
   });
 });
