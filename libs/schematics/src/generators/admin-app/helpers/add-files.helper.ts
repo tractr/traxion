@@ -1,6 +1,7 @@
 import * as path from 'path';
+import { join } from 'path';
 
-import { generateFiles, Tree } from '@nrwl/devkit';
+import { generateFiles, getWorkspaceLayout, Tree } from '@nrwl/devkit';
 
 import { NormalizedSchema } from './normalize-options.helper';
 
@@ -24,4 +25,18 @@ export function addFiles(
     options.applicationRoot,
     templateOptions,
   );
+
+  const gitignore = tree.read('.gitignore')?.toString() || '';
+
+  const assetsPath = join(
+    options.projectRoot,
+    'src',
+    'assets',
+    'app-config.json',
+  );
+  if (!gitignore.includes(assetsPath))
+    tree.write(
+      '.gitignore',
+      `${gitignore}\n\n# Application assets\n${assetsPath}\n`,
+    );
 }

@@ -1,23 +1,13 @@
-import { join } from 'path';
+import { Tree, updateJson } from '@nrwl/devkit';
 
-import { generateFiles, Tree, updateJson } from '@nrwl/devkit';
-
-import { addPackageToPackageJson } from '../../..';
+import { addPackageToPackageJson } from '../../../helpers';
 import { NormalizedOptions } from '../schema';
-import { getTemplatesOptions } from './get-templates-options.helper';
 
 export async function addWorkspaceFiles(
   tree: Tree,
   options: NormalizedOptions,
 ) {
   const { libsDir } = options;
-  // Generate the workspace root files
-  generateFiles(
-    tree,
-    join(__dirname, '..', 'files', 'workspace-root'),
-    '',
-    getTemplatesOptions(tree, options),
-  );
 
   updateJson(tree, 'package.json', (json) => ({
     ...json,

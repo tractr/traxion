@@ -68,9 +68,6 @@ hapify.json
 # Local ignore
 *.local-ignore*
 
-# Pwa app config
-apps/pwa/src/assets/app-config.json
-
 # Terraform
 .gen
 

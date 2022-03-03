@@ -7,6 +7,11 @@
       "default": false,
       "description": "Format with prettier add the end of the schematics",
       "type": "boolean"
+    },
+    "skipInstall": {
+      "default": false,
+      "description": "Skip installing dependencies",
+      "type": "boolean"
     }
   },
   "required": [],

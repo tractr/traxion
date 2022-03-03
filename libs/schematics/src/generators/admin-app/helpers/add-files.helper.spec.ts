@@ -18,6 +18,7 @@ describe('addFiles', () => {
     projectName: 'test-admin',
     projectDirectory: 'test/admin',
     applicationRoot,
+    skipInstall: false,
     extra: {},
   };
 
