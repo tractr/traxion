@@ -6,6 +6,7 @@ import * as packageJson from '../../../../package.json';
 import {
   addPackageJson,
   addPackageToPackageJson,
+  installPackagesTask,
   PackageType,
 } from '../../../helpers';
 import { NormalizedOptions } from '../schema';
@@ -35,7 +36,16 @@ export async function updatePackageJson(
 
   await addPackageToPackageJson(
     tree,
-    ['@nestjs/swagger', 'morgan', 'swagger-ui-express', 'cookie-parser'],
+    [
+      '@nestjs/swagger',
+      'morgan',
+      'swagger-ui-express',
+      'cookie-parser',
+      'graphql',
+      '@casl/prisma',
+    ],
     PackageType.dependencies,
   );
+
+  installPackagesTask(tree, normalizedOptions);
 }

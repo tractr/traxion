@@ -17,12 +17,10 @@ export function updateFiles(tree: Tree, normalizedOptions: NormalizedOptions) {
   tree.delete(join(appPath, 'nx-welcome.component.ts'));
 
   // Generate the pwa files
-  generateFiles(
-    tree,
-    join(__dirname, '..', 'files'),
-    join(appsDir, name),
-    normalizedOptions,
-  );
+  generateFiles(tree, join(__dirname, '..', 'files'), join(appsDir, name), {
+    ...normalizedOptions,
+    template: '',
+  });
 
   // Update polyfill eslint error
   const polyfill = (
@@ -33,4 +31,13 @@ export function updateFiles(tree: Tree, normalizedOptions: NormalizedOptions) {
     join(pwaPath, 'src', 'polyfill.ts'),
     polyfill.replaceAll(/\/\*\*\*.*/g, '/**'),
   );
+
+  const gitignore = tree.read('.gitignore')?.toString() || '';
+
+  const assetsPath = join(pwaPath, 'src', 'assets', 'app-config.json');
+  if (!gitignore.includes(assetsPath))
+    tree.write(
+      '.gitignore',
+      `${gitignore}\n\n# Pwa app config\n${assetsPath}\n`,
+    );
 }

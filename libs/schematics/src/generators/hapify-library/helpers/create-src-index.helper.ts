@@ -9,7 +9,7 @@ export function createSrcIndexTs(
   options: NormalizedOptions,
   entrypoint = '',
 ) {
-  const { projectRoot } = options;
+  const { projectRoot, hapifyTemplate } = options;
 
   const srcIndexPath = join(
     projectRoot,
@@ -20,13 +20,8 @@ export function createSrcIndexTs(
   tree.delete(srcIndexPath);
   tree.write(
     srcIndexPath,
-    options.hapifyTemplates
-      .map(
-        (template) =>
-          `export * from './generated/${template}${
-            entrypoint === '' ? '' : `/${entrypoint}`
-          }';\n`,
-      )
-      .join(''),
+    `export * from './generated/${hapifyTemplate}${
+      entrypoint === '' ? '' : `/${entrypoint}`
+    }';\n`,
   );
 }

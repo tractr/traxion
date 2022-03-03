@@ -6,4 +6,5 @@ export interface TargetGenerateGeneratorSchema {
   format?: boolean;
   updateImportPath?: boolean;
   cleanFirst?: boolean;
+  skipInstall?: boolean;
 }

@@ -7,5 +7,6 @@ export * from './clean-react-library.helper';
 export * from './create-secondary-entrypoints.helper';
 export * from './create-src-index.helper';
 export * from './generate-library.helper';
+export * from './add-files.helper';
 export * from './normalize-options.helper';
 export * from './update-project-targets.helper';

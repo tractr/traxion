@@ -17,6 +17,11 @@
       "type": "string",
       "x-prompt": "What name would you like to use?"
     },
+    "skipInstall": {
+      "default": false,
+      "description": "Skip installing dependencies",
+      "type": "boolean"
+    },
     "tags": {
       "alias": "t",
       "description": "Add tags to the project (used for linting)",

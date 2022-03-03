@@ -16,10 +16,8 @@ export function updateFiles(tree: Tree, normalizedOptions: NormalizedOptions) {
   tree.delete(join(appPath, 'app.service.spec.ts'));
 
   // Generate the api files
-  generateFiles(
-    tree,
-    join(__dirname, '..', 'files'),
-    join(appsDir, name),
-    normalizedOptions,
-  );
+  generateFiles(tree, join(__dirname, '..', 'files'), join(appsDir, name), {
+    ...normalizedOptions,
+    template: '',
+  });
 }

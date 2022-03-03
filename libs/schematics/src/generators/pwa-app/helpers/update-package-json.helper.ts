@@ -6,6 +6,7 @@ import * as packageJson from '../../../../package.json';
 import {
   addPackageJson,
   addPackageToPackageJson,
+  installPackagesTask,
   PackageDefinition,
   PackageType,
 } from '../../../helpers';
@@ -83,4 +84,6 @@ export async function updatePackageJson(
     ].map((packageName) => ({ packageName, version: '13.2.1' })),
     PackageType.devDependencies,
   );
+
+  installPackagesTask(tree, normalizedOptions);
 }

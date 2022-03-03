@@ -9,7 +9,11 @@ import {
 import { Linter, lintInitGenerator } from '@nrwl/linter';
 
 import * as packageJson from '../../../package.json';
-import { addPackageToPackageJson, PackageDefinition } from '../../helpers';
+import {
+  addPackageToPackageJson,
+  installPackagesTask,
+  PackageDefinition,
+} from '../../helpers';
 import { EslintGeneratorSchema } from './schema';
 
 export const packagesToAdd: PackageDefinition[] = [
@@ -34,6 +38,7 @@ export default async function eslintGenerator(
 ) {
   // First add dependencies to the package json
   await addPackageToPackageJson(tree, packagesToAdd);
+  installPackagesTask(tree, options);
 
   // Use the linit generator from @nrwl/linter with Eslint
   lintInitGenerator(tree, { linter: Linter.EsLint });

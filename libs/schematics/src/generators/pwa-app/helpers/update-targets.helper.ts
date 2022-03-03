@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { getWorkspaceLayout, Tree } from '@nrwl/devkit';
 
 import {
   readTargetConfiguration,
@@ -11,6 +11,7 @@ export function updateTargets(
   normalizedOptions: NormalizedOptions,
 ) {
   const { name } = normalizedOptions;
+  const { appsDir } = getWorkspaceLayout(tree);
 
   updateTargetConfiguration(tree, name, 'preserve', {
     configurations: {
@@ -20,7 +21,7 @@ export function updateTargets(
     executor: '@nrwl/workspace:run-commands',
     options: {
       commands: [
-        'npx tractr-angular-config-generate ./apps/pwa/src/assets/app-config.json',
+        `npx tractr-angular-config-generate ./${appsDir}/${name}/src/assets/app-config.json`,
       ],
       parallel: false,
     },

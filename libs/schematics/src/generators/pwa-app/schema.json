@@ -26,6 +26,11 @@
       "description": "",
       "type": "string",
       "x-prompt": "What name would you like to use?"
+    },
+    "skipInstall": {
+      "default": false,
+      "description": "Skip installing dependencies",
+      "type": "boolean"
     }
   },
   "required": [

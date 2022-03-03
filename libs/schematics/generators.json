@@ -26,6 +26,11 @@
       "factory": "./src/generators/hapify-library/generator",
       "schema": "./src/generators/hapify-library/schema.json"
     },
+    "init-workspace": {
+      "description": "init-workspace generator",
+      "factory": "./src/generators/init-workspace/generator",
+      "schema": "./src/generators/init-workspace/schema.json"
+    },
     "npm-publish": {
       "description": "npm-publish generator",
       "factory": "./src/generators/npm-publish/generator",

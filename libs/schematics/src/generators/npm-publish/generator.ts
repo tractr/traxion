@@ -7,7 +7,7 @@ import {
   updateProjectConfiguration,
 } from '@nrwl/devkit';
 
-import { addPackageToPackageJson } from '../../helpers';
+import { addPackageToPackageJson, installPackagesTask } from '../../helpers';
 import { NpmPublishGeneratorSchema } from './schema';
 
 export const SEMVER_PACKAGE_NAME = 'ngx-deploy-npm';
@@ -80,6 +80,8 @@ export default async function npmPublishGenerator(
   });
 
   await addPackageToPackageJson(tree, SEMVER_PACKAGE_NAME);
+
+  installPackagesTask(tree, normalizedOptions);
 
   await formatFiles(tree);
 }

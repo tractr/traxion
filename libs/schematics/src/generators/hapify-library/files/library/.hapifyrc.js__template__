@@ -10,7 +10,8 @@ module.exports = {
   description: 'Library to host generated codes',
   validatorPath: getValidatorPath(__dirname),
   project: '<%= hapifyModelJson %>',
-  extends: [<% for (const templateName of templates) {%>
-    '<%= templateName %>',<% } %>],<% if (hapifyUseImportReplacements) { %>
+  extends: [
+    '<%= templates %>',
+  ],<% if (hapifyUseImportReplacements) { %>
   importReplacements: <%- JSON.stringify(hapifyImportReplacements, null, 2) %><% } %>
 };

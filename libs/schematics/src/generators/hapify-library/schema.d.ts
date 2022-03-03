@@ -20,18 +20,19 @@ export interface HapifyLibraryGeneratorOptionsWithExtra
     Record<string, unknown> {}
 
 export interface HapifyLibraryGeneratorOptions {
-  name: string;
+  name?: string;
   directory?: string;
-  type: AvailableLibraryType;
-  hapifyTemplates: AvailableTractrTemplates[];
-  hapifyAdditionalTemplates: string;
+  type?: AvailableLibraryType;
+  hapifyTemplate: AvailableTractrTemplates;
   hapifyModelsJson: string;
   hapifyUseImportReplacements: boolean;
   useSecondaryEndpoint: boolean;
   addSecondaryEndpoint: string[];
+  skipInstall?: boolean;
 }
 
 export interface NormalizedOptions extends HapifyLibraryGeneratorOptions {
+  name: string;
   npmScope: string;
   libsDir: string;
   projectDirectory: string;
@@ -40,7 +41,7 @@ export interface NormalizedOptions extends HapifyLibraryGeneratorOptions {
   importPath: string;
   importPrefixPath: string;
   hapifyModelsJsonRelativePath: string;
-  templates: string[];
+  template: string;
   hapifyImportReplacements: Record<string, string>;
   secondaryEntrypoints: string[];
   targets: Record<string, Partial<TargetConfiguration> | null>;

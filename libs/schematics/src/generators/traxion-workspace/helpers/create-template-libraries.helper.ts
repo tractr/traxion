@@ -27,7 +27,7 @@ export async function createTemplateLibraries(
         addSecondaryEndpoint: [],
         hapifyAdditionalTemplates: '',
         hapifyModelsJson: 'hapify-models.json',
-        hapifyTemplates: [libraryName as AvailableTractrTemplates],
+        hapifyTemplate: libraryName as AvailableTractrTemplates,
         type: type as AvailableLibraryType,
         hapifyUseImportReplacements: true,
         name: libraryName,

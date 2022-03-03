@@ -7,6 +7,9 @@ import { argv, cwd } from 'process';
 import { copy } from 'fs-extra';
 import { Command } from 'commander/esm.mjs';
 import debug from 'debug';
+import { $ } from 'zx';
+
+$.verbose = false;
 
 const log = debug('local-install');
 
@@ -16,6 +19,7 @@ const program = new Command();
 
 program
   .option('-p, --projects <projects>', 'project list separated by comma', '')
+  .option('--install', 'install the package dependencies', false)
   .option(
     '-t, --targetDir <directory>',
     'target directory to install the packages (default to `${cwd()}/node_modules`)',
@@ -24,7 +28,7 @@ program
 program.parse(argv);
 
 const options = program.opts();
-const { targetDir, projects: projectsWithComma } = options;
+const { targetDir, projects: projectsWithComma, install } = options;
 
 const projectsWanted = projectsWithComma
   .split(',')
@@ -36,22 +40,35 @@ const stackTree = new FsTree(stackDir);
 
 const projects = getProjects(stackTree);
 
+const packagesToInstall = [];
+const toCopy = [];
+
 for (const [projectName, project] of projects) {
   if (projectsWanted.length > 0 && !projectsWanted.includes(projectName))
     continue;
   if (project.type === 'application') continue;
   if (!project.targets.publish || !project.targets.build) continue;
 
-  const packageJson = readJsonFile(
-    join(stackDir, project.root, 'package.json'),
-  );
-  const packageName = packageJson.name;
-
   const outputPath =
     project.targets.build.options.outputPath ||
     project.targets.build.outputs[0];
 
-  log(`Installing ${projectName} into ${join(targetDir, packageName)}`);
+  const packageJson = readJsonFile(join(stackDir, outputPath, 'package.json'));
+  const packageName = packageJson.name;
 
-  await copy(join(stackDir, outputPath), join(targetDir, packageName));
+  toCopy.push([join(stackDir, outputPath), join(targetDir, packageName)]);
+
+  packagesToInstall.push(
+    ...Object.entries(packageJson.dependencies).map(
+      ([packageName, version]) => `${packageName}@${version}`,
+    ),
+  );
+}
+
+log(`Installing dependencies`);
+if (install) await $`npm install -f ${packagesToInstall}`;
+
+for (const [source, target] of toCopy) {
+  log(`Copying ${source} to ${target}`);
+  await copy(source, target);
 }

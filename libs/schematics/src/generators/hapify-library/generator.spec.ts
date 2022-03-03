@@ -28,9 +28,8 @@ describe('hapify library generator', () => {
   const options: HapifyLibraryGeneratorOptions = {
     name: 'test',
     type: 'angular',
-    hapifyTemplates: ['models'],
+    hapifyTemplate: 'models',
     hapifyModelsJson: 'hapify-models.json',
-    hapifyAdditionalTemplates: '',
     hapifyUseImportReplacements: true,
     useSecondaryEndpoint: true,
     addSecondaryEndpoint: [],

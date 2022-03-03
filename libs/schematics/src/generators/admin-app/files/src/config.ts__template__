@@ -21,17 +21,17 @@ export async function fetchConfiguration(
     ADMIN_CONFIGURATION_SESSION_STORAGE,
   );
 
+  const { appConfigUrl, getConfig } = options;
+
   if (typeof stringifyConfiguration === 'string') {
     try {
-      const appConfig = JSON.parse(stringifyConfiguration) as AppConfig;
+      const appConfig = JSON.parse(stringifyConfiguration) as Record<string, unknown>;
       // eslint-disable-next-line no-empty
 
-      if (appConfig) return appConfig;
+      if (appConfig) return getConfig(appConfig);
       // eslint-disable-next-line no-empty
     } catch {}
   }
-
-  const { appConfigUrl, getConfig } = options;
 
   const config = await fetchAppConfigJson(appConfigUrl);
 

@@ -1,23 +1,32 @@
-import { join } from 'path';
+import {
+  getWorkspaceLayout,
+  readWorkspaceConfiguration,
+  Tree,
+  updateJson,
+  updateWorkspaceConfiguration,
+} from '@nrwl/devkit';
 
-import { generateFiles, Tree, updateJson } from '@nrwl/devkit';
+import { addPackageToPackageJson } from '../../helpers';
+import { addFiles, addNpmrc } from './helpers';
+import { InitWorkspaceGeneratorSchema } from './schema';
 
-import { addPackageToPackageJson } from '../../../helpers';
-import { NormalizedOptions } from '../schema';
-import { getTemplatesOptions } from './get-templates-options.helper';
-
-export async function addWorkspaceFiles(
+export default async function initWorkspaceGenerator(
   tree: Tree,
-  options: NormalizedOptions,
+  options: InitWorkspaceGeneratorSchema = {},
 ) {
-  const { libsDir } = options;
-  // Generate the workspace root files
-  generateFiles(
-    tree,
-    join(__dirname, '..', 'files', 'workspace-root'),
-    '',
-    getTemplatesOptions(tree, options),
-  );
+  addNpmrc(tree);
+
+  const workspaceConfiguration = readWorkspaceConfiguration(tree);
+
+  updateWorkspaceConfiguration(tree, {
+    ...workspaceConfiguration,
+    workspaceLayout: {
+      appsDir: 'apps',
+      libsDir: 'libs',
+    },
+  });
+
+  addFiles(tree);
 
   updateJson(tree, 'package.json', (json) => ({
     ...json,
@@ -35,9 +44,12 @@ export async function addWorkspaceFiles(
     },
   }));
 
+  const { libsDir } = getWorkspaceLayout(tree);
   if (libsDir !== 'packages') tree.delete('packages');
 
   await addPackageToPackageJson(tree, '@hapify/cli');
 
   if (tree.exists('tailwind.config.js')) tree.delete('tailwind.config.js');
+
+  const { skipInstall } = options;
 }

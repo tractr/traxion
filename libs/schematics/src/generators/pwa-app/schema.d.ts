@@ -3,6 +3,7 @@ export interface PwaAppGeneratorSchema {
   directory?: string;
   apiName: string;
   generatedDir: string;
+  skipInstall?: boolean;
 }
 
 interface NormalizedOptions extends PwaAppGeneratorSchema {
