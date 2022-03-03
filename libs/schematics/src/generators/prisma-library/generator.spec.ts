@@ -60,11 +60,11 @@ module.exports = {
   validatorPath: getValidatorPath(__dirname),
   project: '../../hapify-models.json',
   extends: [
-    '@tractr/hapify-templates-prisma',],
+    '@tractr/hapify-templates-prisma',
+  ],
   importReplacements: {
   "nestjs-models": "@proj/nestjs-models",
-  "nestjs-models-common": "@proj/nestjs-models-common",
-  "mock": "@proj/prisma/mock"
+  "nestjs-models-common": "@proj/nestjs-models-common"
 }
 };
 `);

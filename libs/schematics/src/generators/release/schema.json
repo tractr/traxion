@@ -11,6 +11,11 @@
       "description": "Nx project name",
       "type": "string",
       "x-prompt": "What project would you like to add release feature (keep it empty if you want the sync release) ?"
+    },
+    "skipInstall": {
+      "$default": false,
+      "description": "Skip install",
+      "type": "boolean"
     }
   },
   "required": [],

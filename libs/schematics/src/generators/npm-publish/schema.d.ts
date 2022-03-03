@@ -3,4 +3,5 @@ export interface NpmPublishGeneratorSchema {
   repository: string;
   registry?: string;
   access?: string;
+  skipInstall?: boolean;
 }

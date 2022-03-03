@@ -12,7 +12,11 @@ import {
 import { Linter } from '@nrwl/linter';
 import { applicationGenerator as reactApplicationGenerator } from '@nrwl/react';
 
-import { addPackageToPackageJson, PackageType } from '../..';
+import {
+  addPackageToPackageJson,
+  installPackagesTask,
+  PackageType,
+} from '../../helpers';
 import { addFiles, cleanApplication, normalizeOptions } from './helpers';
 import { AdminAppGeneratorSchemaWithExtra } from './schema';
 
@@ -98,7 +102,14 @@ export default async function adminGenerator(
 
   await addPackageToPackageJson(
     tree,
-    ['react-admin', 'rxjs', 'class-validator'],
+    [
+      'react-admin',
+      'rxjs',
+      'class-validator',
+      'ra-core',
+      { packageName: 'react-router-dom', version: '^5.1.0' },
+      { packageName: 'react-router', version: '^5.1.0' },
+    ],
     PackageType.dependencies,
   );
 
@@ -115,6 +126,8 @@ export default async function adminGenerator(
       noPropertyAccessFromIndexSignature: false,
     },
   }));
+
+  installPackagesTask(tree, normalizedOptions);
 
   // Run format
   await formatFiles(tree);

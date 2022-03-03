@@ -9,6 +9,7 @@ import { readJSON } from 'fs-extra';
 
 import {
   addPackageToPackageJson,
+  installPackagesTask,
   PackageDefinition,
   Packages,
 } from '../../helpers';
@@ -96,6 +97,8 @@ export default async function targetGenerateGenerator(
 
   // update the package.json dependencies
   await addPackageToPackageJson(tree, packages);
+
+  installPackagesTask(tree, normalizedOptions);
 
   await formatFiles(tree);
 }
