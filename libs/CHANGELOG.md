@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.42.0](https://github.com/tractr/stack/compare/v1.41.0...v1.42.0) (2022-03-03)
+
+
+### Features
+
+* update schematics to be able to do the demo ([#402](https://github.com/tractr/stack/issues/402)) ([34af194](https://github.com/tractr/stack/commit/34af1943f616f8bb03831fa2fccad2089228c235))
+
+
+
+# [1.42.0](https://github.com/tractr/stack/compare/v1.41.0...v1.42.0) (2022-03-03)
+
+
+### Features
+
+* update schematics to be able to do the demo ([#402](https://github.com/tractr/stack/issues/402)) ([34af194](https://github.com/tractr/stack/commit/34af1943f616f8bb03831fa2fccad2089228c235))
+
+
+
 # [1.41.0](https://github.com/tractr/stack/compare/v1.40.0...v1.41.0) (2022-03-03)
 
 
