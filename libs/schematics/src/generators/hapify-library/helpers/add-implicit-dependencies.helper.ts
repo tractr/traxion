@@ -19,7 +19,9 @@ export function addImplicitDependencies(
       ...new Set([
         ...Object.keys(hapifyImportReplacements)
           .filter((template) => template !== 'mock')
-          .map((dependency) => `${directory}-${dependency}`),
+          .map(
+            (dependency) => `${directory ? `${directory}-` : ''}${dependency}`,
+          ),
         ...(projectConfiguration?.implicitDependencies || []),
       ]),
     ],

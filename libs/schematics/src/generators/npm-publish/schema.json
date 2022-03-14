@@ -29,9 +29,17 @@
       "description": "Repositoy url",
       "type": "string",
       "x-prompt": "What is the repository you use to host your code base nx workspace ?"
+    },
+    "skipInstall": {
+      "default": false,
+      "description": "Skip install",
+      "type": "boolean"
     }
   },
-  "required": ["project", "repository"],
+  "required": [
+    "project",
+    "repository"
+  ],
   "title": "",
   "type": "object"
 }

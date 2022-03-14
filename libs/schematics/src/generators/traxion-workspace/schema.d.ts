@@ -2,6 +2,7 @@ export interface TraxionWorkspaceGeneratorSchema {
   name: string;
   tags?: string;
   directory?: string;
+  skipInstall?: boolean;
 }
 
 interface NormalizedOptions extends TraxionWorkspaceGeneratorSchema {

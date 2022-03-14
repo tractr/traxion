@@ -7,7 +7,7 @@ import { cwd } from 'process';
 import lodash from 'lodash';
 import { $, cd } from 'zx';
 
-$.verbose = false;
+// $.verbose = false;
 
 const { kebabCase } = lodash;
 
@@ -108,9 +108,6 @@ export async function createTraxionWorkspace(
   await $`echo "- Installing missing dependencies"`;
   await $`npm install --save-dev ${npmPackages} &>/dev/null`;
   await $`echo "✔ Installing missing dependencies"`;
-
-  // TODO DO NOT COMMIT THIS LINE
-  await $`DEBUG=local-install node ../../stack/tools/local-install.mjs --projects schematics`;
 
   const args = transformObjectToArgs({
     ...DEFAULT_TRAXION_WORKSPACE_OPTIONS,

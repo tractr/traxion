@@ -7,10 +7,14 @@ import {
   updateProjectConfiguration,
 } from '@nrwl/devkit';
 
+import { addPackageToPackageJson, PackageType } from '../../../helpers';
 import { NormalizedOptions } from '../schema';
 import { createSrcIndexTs } from './create-src-index.helper';
 
-export function cleanReactLibrary(tree: Tree, options: NormalizedOptions) {
+export async function cleanReactLibrary(
+  tree: Tree,
+  options: NormalizedOptions,
+) {
   const { projectRoot, secondaryEntrypoints } = options;
   const reactLibraryPath = join(projectRoot, 'src', 'lib');
 
@@ -68,4 +72,22 @@ export function cleanReactLibrary(tree: Tree, options: NormalizedOptions) {
       }),
     },
   });
+
+  updateJson(tree, join(projectRoot, 'tsconfig.json'), (json) => ({
+    ...json,
+    compilerOptions: {
+      ...json.compilerOptions,
+      noPropertyAccessFromIndexSignature: false,
+    },
+  }));
+
+  await addPackageToPackageJson(
+    tree,
+    [
+      'ra-core',
+      { packageName: 'react-router-dom', version: '^5.1.0' },
+      { packageName: 'react-router', version: '^5.1.0' },
+    ],
+    PackageType.dependencies,
+  );
 }

@@ -2,6 +2,45 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.42.0](https://github.com/tractr/stack/compare/v1.41.0...v1.42.0) (2022-03-03)
+
+
+### Features
+
+* update schematics to be able to do the demo ([#402](https://github.com/tractr/stack/issues/402)) ([34af194](https://github.com/tractr/stack/commit/34af1943f616f8bb03831fa2fccad2089228c235))
+
+
+
+# [1.41.0](https://github.com/tractr/stack/compare/v1.40.0...v1.41.0) (2022-03-03)
+
+
+### Features
+
+* split traxion workspace schematics ([#401](https://github.com/tractr/stack/issues/401)) ([18c9ca5](https://github.com/tractr/stack/commit/18c9ca515182506a488a30d9d7d45c81ea7eaa63))
+
+
+
+# [1.40.0](https://github.com/tractr/stack/compare/v1.39.6...v1.40.0) (2022-02-28)
+
+
+
+## [1.39.6](https://github.com/tractr/stack/compare/v1.39.5...v1.39.6) (2022-02-23)
+
+
+### Bug Fixes
+
+* update traxion workspace schematics to be able to run the workspace the first time ([#397](https://github.com/tractr/stack/issues/397)) ([e87b59c](https://github.com/tractr/stack/commit/e87b59c8d23388ec5fff15fba4703dd5f3e412b0))
+
+
+
+## [1.39.5](https://github.com/tractr/stack/compare/v1.39.4...v1.39.5) (2022-02-23)
+
+
+
+## [1.39.4](https://github.com/tractr/stack/compare/v1.39.3...v1.39.4) (2022-02-22)
+
+
+
 ## [1.39.3](https://github.com/tractr/stack/compare/v1.39.2...v1.39.3) (2022-02-22)
 
 

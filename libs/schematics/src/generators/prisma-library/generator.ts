@@ -14,6 +14,7 @@ import {
   addPackageToPackageJson,
   getImportPrefixPath,
   getNormalizedProjectDefaultsOptions,
+  installPackagesTask,
   PackageType,
 } from '../../helpers';
 import hapifyLibraryGenerator from '../hapify-library/generator';
@@ -79,12 +80,13 @@ export default async function prismaLibraryGenerator(
   await hapifyLibraryGenerator(tree, {
     name,
     type: 'nest',
-    hapifyTemplates: ['prisma'],
+    hapifyTemplate: 'prisma',
     hapifyAdditionalTemplates: '',
     hapifyModelsJson: 'hapify-models.json',
     hapifyUseImportReplacements: true,
     useSecondaryEndpoint: false,
     addSecondaryEndpoint: [],
+    skipInstall: true,
     ...extra,
   });
 
@@ -106,37 +108,33 @@ export default async function prismaLibraryGenerator(
 
   const { version } = packageJson;
 
-  await addPackageToPackageJson(tree, [
-    {
-      packageName: '@prisma/client',
-      type: PackageType.dependencies,
-    },
-    {
-      packageName: '@tractr/nestjs-database',
-      type: PackageType.dependencies,
-      version,
-    },
-    {
-      packageName: '@tractr/nestjs-core',
-      type: PackageType.dependencies,
-      version,
-    },
-    {
-      packageName: '@nestjs/core',
-      type: PackageType.dependencies,
-    },
-    {
-      packageName: 'bcrypt',
-      type: PackageType.dependencies,
-    },
-  ]);
+  await addPackageToPackageJson(
+    tree,
+    [
+      '@prisma/client',
+      '@nestjs/core',
+      'bcrypt',
+      'prisma',
+      {
+        packageName: '@tractr/nestjs-database',
+        version,
+      },
+      {
+        packageName: '@tractr/nestjs-core',
+        version,
+      },
+    ],
+    PackageType.dependencies,
+  );
 
   updateJson(tree, 'package.json', (json) => ({
     ...json,
     prisma: {
       ...json.prisma,
       seed: `ts-node -r tsconfig-paths/register --project ${projectRoot}/tsconfig.lib.json ${projectRoot}/prisma/seed.ts`,
-      schema: `${projectRoot}libs/generated/prisma/prisma/schema.prisma`,
+      schema: `${projectRoot}/prisma/schema.prisma`,
     },
   }));
+
+  installPackagesTask(tree, options);
 }

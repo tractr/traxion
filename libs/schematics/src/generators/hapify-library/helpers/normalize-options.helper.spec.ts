@@ -19,9 +19,8 @@ describe('normalizeOptions', () => {
     name: 'test',
     directory: 'test',
     type: 'angular',
-    hapifyTemplates: ['models'],
+    hapifyTemplate: 'models',
     hapifyModelsJson: 'hapify-models.json',
-    hapifyAdditionalTemplates: '',
     hapifyUseImportReplacements: true,
     useSecondaryEndpoint: true,
     addSecondaryEndpoint: [],
@@ -55,7 +54,7 @@ describe('normalizeOptions', () => {
       projectName: 'test-test',
       projectRoot: 'libs/test/test',
       secondaryEntrypoints: ['mock'],
-      templates: ['@tractr/hapify-templates-models'],
+      template: '@tractr/hapify-templates-models',
       importPath: '@tractr/test-test',
       importPrefixPath: '@tractr/test-',
       npmScope,
@@ -97,21 +96,6 @@ describe('normalizeOptions', () => {
     );
   });
 
-  it('should format hapify templates input', async () => {
-    const expectedResult = [
-      '@tractr/hapify-templates-models',
-      'additional-template-1',
-      'additional-template-2',
-    ];
-
-    const normalizedOptions = normalizeOptions(appTree, {
-      ...options,
-      hapifyAdditionalTemplates: 'additional-template-1,additional-template-2',
-    });
-
-    expect(normalizedOptions.templates).toEqual(expectedResult);
-  });
-
   it('should format hapify import replacements', async () => {
     const normalizedOptions = normalizeOptions(appTree, {
       ...options,
@@ -119,8 +103,7 @@ describe('normalizeOptions', () => {
     });
 
     expect(normalizedOptions.hapifyImportReplacements).toEqual({
-      mock: '@tractr/test-rest-dtos/mock',
-      models: '@tractr/test-models',
+      mock: '@tractr/test-models/mock',
     });
   });
 
@@ -150,62 +133,6 @@ describe('normalizeOptions', () => {
     });
   });
 
-  it('should run successfully with the directory options', async () => {
-    const normalizedOptions = normalizeOptions(appTree, {
-      ...options,
-      directory: 'test',
-    });
-
-    expect(normalizedOptions).toEqual({
-      ...options,
-      hapifyImportReplacements: { mock: '@tractr/test-models/mock' },
-      hapifyModelsJsonRelativePath: '../../../hapify-models.json',
-      projectDirectory: 'test/test',
-      projectName: 'test-test',
-      projectRoot: 'libs/test/test',
-      npmScope: 'tractr',
-      libsDir: 'libs',
-      targets: {},
-      importPath: '@tractr/test-test',
-      importPrefixPath: '@tractr/test-',
-      secondaryEntrypoints: ['mock'],
-      templates: ['@tractr/hapify-templates-models'],
-      extra: {},
-    });
-  });
-
-  it('should run successfully with the additional templates and filter out the empty ones', async () => {
-    const normalizedOptions = normalizeOptions(appTree, {
-      ...options,
-      hapifyTemplates: ['casl', 'models'],
-      hapifyAdditionalTemplates: 'test,,test2',
-    });
-
-    expect(normalizedOptions).toEqual({
-      ...options,
-      hapifyImportReplacements: {},
-      hapifyAdditionalTemplates: 'test,,test2',
-      hapifyModelsJsonRelativePath: '../../../hapify-models.json',
-      projectDirectory: 'test/test',
-      projectName: 'test-test',
-      projectRoot: 'libs/test/test',
-      npmScope: 'tractr',
-      libsDir: 'libs',
-      targets: {},
-      importPath: '@tractr/test-test',
-      importPrefixPath: '@tractr/test-',
-      secondaryEntrypoints: ['mock'],
-      hapifyTemplates: ['casl', 'models'],
-      templates: [
-        '@tractr/hapify-templates-casl',
-        '@tractr/hapify-templates-models',
-        'test',
-        'test2',
-      ],
-      extra: {},
-    });
-  });
-
   it('should work when adding additional secondary entrypoints', async () => {
     const normalizedOptions = normalizeOptions(appTree, {
       ...options,
@@ -226,7 +153,7 @@ describe('normalizeOptions', () => {
       importPrefixPath: '@tractr/test-',
       addSecondaryEndpoint: ['mock', 'mock2'],
       secondaryEntrypoints: ['mock', 'mock2'],
-      templates: ['@tractr/hapify-templates-models'],
+      template: '@tractr/hapify-templates-models',
       extra: {},
     });
   });

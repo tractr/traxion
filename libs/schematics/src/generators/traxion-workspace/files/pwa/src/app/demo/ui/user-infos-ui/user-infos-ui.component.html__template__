@@ -1,6 +1,0 @@
-<div class="user__infos__wrapper">
-  <h2 class="user__infos__wrapper__title">Informations de l'utilisateur</h2>
-  <p>Nom : {{ name }}</p>
-  <p>Email : {{ email }}</p>
-  <p>Rôle : {{ role }}</p>
-</div>

@@ -25,8 +25,7 @@ export function normalizeOptions(
     name: rawName,
     directory: rawDirectory,
     type,
-    hapifyTemplates,
-    hapifyAdditionalTemplates,
+    hapifyTemplate,
     hapifyModelsJson,
     hapifyUseImportReplacements,
     useSecondaryEndpoint,
@@ -39,16 +38,12 @@ export function normalizeOptions(
 
   const { name, directory, projectDirectory, projectRoot, projectName } =
     getNormalizedProjectDefaultsOptions(tree, {
-      name: rawName,
+      name: rawName || hapifyTemplate,
       directory: rawDirectory,
     });
 
   // Format hapify template inputs
-  const templates =
-    hapifyTemplates
-      .map((template) => `@tractr/hapify-templates-${template}`)
-      .concat(...options.hapifyAdditionalTemplates.split(','))
-      .filter((template) => template !== '') || [];
+  const template = `@tractr/hapify-templates-${hapifyTemplate}`;
 
   // Format hapify model path
   const hapifyModelsJsonRelativePath = relative(
@@ -59,42 +54,39 @@ export function normalizeOptions(
   const importPrefixPath = getImportPrefixPath(tree, directory);
 
   // Format import replacement
-  const hapifyImportReplacements: Record<string, string> = hapifyTemplates
-    .flatMap((template) => DEFAULT_IMPORT_REPLACEMENTS[template])
-    .map((template) => [template, importPrefixPath + template])
-    .concat(
-      hapifyTemplates.length === 1
-        ? [['mock', `${importPrefixPath}${hapifyTemplates[0]}/mock`]]
-        : [],
-    )
-    .reduce(
-      (acc, [importName, importPath]) => ({
-        ...acc,
-        ...(importName && importPath && { [importName]: importPath }),
-      }),
-      {},
-    );
+  const hapifyImportReplacements: Record<string, string> =
+    DEFAULT_IMPORT_REPLACEMENTS[hapifyTemplate]
+      .map((templateReplacement) => [
+        templateReplacement,
+        importPrefixPath + templateReplacement,
+      ])
+      .concat(
+        DEFAULT_SECONDARY_ENTRY_POINTS[hapifyTemplate].map(
+          (secondaryEntryPoint) => [
+            secondaryEntryPoint,
+            `${importPrefixPath}${hapifyTemplate}/${secondaryEntryPoint}`,
+          ],
+        ),
+      )
+      .reduce(
+        (acc, [importName, importPath]) => ({
+          ...acc,
+          ...(importName && importPath && { [importName]: importPath }),
+        }),
+        {},
+      );
 
   // Format entry point inputs
-  const defaultEntrypoint = [
-    ...new Set(
-      hapifyTemplates.flatMap(
-        (template) => DEFAULT_SECONDARY_ENTRY_POINTS[template] || [],
-      ),
-    ),
-  ];
+  const defaultEntrypoint =
+    DEFAULT_SECONDARY_ENTRY_POINTS[hapifyTemplate] || {};
+
   const secondaryEntrypoints = [
     ...new Set(
       defaultEntrypoint.concat(...(options.addSecondaryEndpoint || [])),
     ),
   ];
 
-  const targets = hapifyTemplates.reduce((acc, template) => {
-    const partialTargets = DEFAULT_TARGETS_OPTIONS[template];
-    if (!partialTargets) return acc;
-
-    return deepmerge(acc, partialTargets);
-  }, {} as Record<string, Partial<TargetConfiguration> | null>);
+  const targets = DEFAULT_TARGETS_OPTIONS[hapifyTemplate] || {};
 
   // Process import path if the option is not provided
   const importPath = `@${npmScope}/${directory ? `${directory}-` : ''}${name}`;
@@ -103,8 +95,7 @@ export function normalizeOptions(
     name,
     directory,
     type,
-    hapifyTemplates,
-    hapifyAdditionalTemplates,
+    hapifyTemplate,
     hapifyModelsJson,
     hapifyUseImportReplacements,
     useSecondaryEndpoint,
@@ -118,7 +109,7 @@ export function normalizeOptions(
     hapifyModelsJsonRelativePath,
     hapifyImportReplacements,
     importPrefixPath: getImportPrefixPath(tree, directory),
-    templates,
+    template,
     secondaryEntrypoints,
     targets,
     extra,

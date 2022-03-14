@@ -41,7 +41,7 @@ export async function generateLibrary(tree: Tree, options: NormalizedOptions) {
         linter: Linter.EsLint,
         ...libraryGeneratorOptions,
       });
-      cleanReactLibrary(tree, options);
+      await cleanReactLibrary(tree, options);
       break;
     default:
   }
