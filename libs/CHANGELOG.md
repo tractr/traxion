@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.42.1](https://github.com/tractr/stack/compare/v1.42.0...v1.42.1) (2022-03-15)
+
+
+### Bug Fixes
+
+* add models exportation from models.module in nestjs-models templates ([#403](https://github.com/tractr/stack/issues/403)) ([9a78430](https://github.com/tractr/stack/commit/9a78430ab3d83b08db29682b0c229e6ec4a3d2cf))
+
+
+
+## [1.42.1](https://github.com/tractr/stack/compare/v1.42.0...v1.42.1) (2022-03-15)
+
+
+### Bug Fixes
+
+* add models exportation from models.module in nestjs-models templates ([#403](https://github.com/tractr/stack/issues/403)) ([9a78430](https://github.com/tractr/stack/commit/9a78430ab3d83b08db29682b0c229e6ec4a3d2cf))
+
+
+
 # [1.42.0](https://github.com/tractr/stack/compare/v1.41.0...v1.42.0) (2022-03-03)
 
 
