@@ -5,13 +5,16 @@ import { Logger } from '@tractr/nestjs-core';
 <<for Models model>>
 import { <<model pascal>>Module } from './<<model kebab>>';
 <<endfor>>
+const modules = [
+  <<for Models model>>
+    <<model pascal>>Module,
+  <<endfor>>
+];
+
  
 @Module({
-  imports:[
-    <<for Models model>>
-      <<model pascal>>Module,
-    <<endfor>>
-  ]
+  imports:modules,
+  exports:modules
 })
 export class ModelsModule {
   /**
