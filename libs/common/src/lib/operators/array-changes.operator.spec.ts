@@ -9,7 +9,7 @@ function createTestScheduler(expect: any): TestScheduler {
 }
 
 describe('arrayChanges', () => {
-  it('test operator with default comparator', () => {
+  it('should track changes with default comparator', () => {
     createTestScheduler(expect).run(({ cold, expectObservable }) => {
       // Creates marbles
       const inputMarble = ' -a-b-c-d-|';
@@ -44,7 +44,7 @@ describe('arrayChanges', () => {
       });
     });
   });
-  it('test operator by comparing object ids', () => {
+  it('should track changes by comparing object ids', () => {
     createTestScheduler(expect).run(({ cold, expectObservable }) => {
       // Creates marbles
       const inputMarble = ' -a-b-c-d-|';
