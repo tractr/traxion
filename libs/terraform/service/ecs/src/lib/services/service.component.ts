@@ -37,6 +37,9 @@ export abstract class ServiceComponent<
 
   protected readonly ecsTaskDefinition: ecs.EcsTaskDefinition;
 
+  /** This is used to get currently deployed task definition */
+  protected readonly ecsTaskDefinitionData: ecs.DataAwsEcsTaskDefinition;
+
   protected readonly serviceDiscoveryService: servicediscovery.ServiceDiscoveryService;
 
   protected readonly ecsService: ecs.EcsService;
@@ -66,6 +69,7 @@ export abstract class ServiceComponent<
       this.volumeComponentsMap = this.createVolumeComponentsMap();
     }
     this.ecsTaskDefinition = this.createEcsTaskDefinition();
+    this.ecsTaskDefinitionData = this.getEcsTaskDefinitionData();
     this.serviceDiscoveryService = this.createServiceDiscoveryService();
     this.ecsService = this.createEcsService();
     if (this.enableContinuousDeployment()) {
@@ -127,6 +131,20 @@ export abstract class ServiceComponent<
     };
   }
 
+  /**
+   * Get information about current task definition
+   * Retrieve the task definition from the ECS service and return it as a data source
+   */
+  protected getEcsTaskDefinitionData(): ecs.DataAwsEcsTaskDefinition {
+    const currentService = new ecs.DataAwsEcsService(this, 'current-service', {
+      serviceName: this.getResourceName('service'),
+      clusterArn: this.config.clusterId, // Works with id
+    });
+    return new ecs.DataAwsEcsTaskDefinition(this, 'current-task', {
+      taskDefinition: currentService.taskDefinition,
+    });
+  }
+
   protected createServiceDiscoveryService() {
     return new servicediscovery.ServiceDiscoveryService(
       this,
@@ -159,7 +177,7 @@ export abstract class ServiceComponent<
     return {
       provider: this.provider,
       cluster: this.config.clusterId,
-      taskDefinition: this.getEcsTaskDefinitionArnAsToken(),
+      taskDefinition: this.getMostRecentTaskDefinition(),
       launchType: 'FARGATE',
       schedulingStrategy: 'REPLICA',
       desiredCount: this.config.desiredCount || 1,
@@ -174,10 +192,6 @@ export abstract class ServiceComponent<
       },
 
       name: this.getResourceName('service'),
-      lifecycle: {
-        // Todo: Should we ignore 'desired_count' if no auto-scaling ??
-        ignoreChanges: ['task_definition'],
-      },
     };
   }
 
@@ -303,6 +317,13 @@ export abstract class ServiceComponent<
 
   getEcsTaskDefinitionArnAsToken(): string {
     return Token.asString(this.ecsTaskDefinition.arn);
+  }
+
+  getMostRecentTaskDefinition(): string {
+    const family = Token.asString(this.ecsTaskDefinition.family);
+    const newRevision = Token.asString(this.ecsTaskDefinition.revision);
+    const currentRevision = Token.asString(this.ecsTaskDefinitionData.revision);
+    return `${family}:\${max("${newRevision}", "${currentRevision}")}`;
   }
 
   getSecretsmanagerSecretArn(): string {
