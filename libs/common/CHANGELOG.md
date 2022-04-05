@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.43.0](https://github.com/tractr/stack/compare/v1.42.1...v1.43.0) (2022-04-05)
+
+
+### Features
+
+* **libs-common:** array helpers and operators ([#404](https://github.com/tractr/stack/issues/404)) ([746c3fb](https://github.com/tractr/stack/commit/746c3fbe40b95fa96f56f969bb5780f559a4e9e3))
+
+
+
 ## [1.42.1](https://github.com/tractr/stack/compare/v1.42.0...v1.42.1) (2022-03-15)
 
 
