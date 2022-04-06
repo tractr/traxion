@@ -8,8 +8,8 @@ import {
   AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 import { EntrypointComponent } from '@tractr/terraform-component-entrypoint';
+import { FileStorageComponent } from '@tractr/terraform-component-file-storage';
 import { LogsComponent } from '@tractr/terraform-component-logs';
-import { OwnerPicturesComponent } from '@tractr/terraform-component-owner-pictures';
 import { SecretsComponent } from '@tractr/terraform-component-secrets';
 import {
   BackendServiceComponent,
@@ -31,7 +31,7 @@ export class PoolGroup extends AwsComponent<
 
   protected readonly entrypointComponent: EntrypointComponent;
 
-  protected readonly ownerPicturesComponent: OwnerPicturesComponent;
+  protected readonly fileStorageComponent: FileStorageComponent;
 
   protected readonly ecsComponent: EcsComponent;
 
@@ -44,7 +44,7 @@ export class PoolGroup extends AwsComponent<
     this.logsComponent = this.createLogsComponent();
     this.secretsComponent = this.createSecretsComponent();
     this.entrypointComponent = this.createEntrypointComponent();
-    this.ownerPicturesComponent = this.createOwnerPicturesComponent();
+    this.fileStorageComponent = this.createFileStorageComponent();
     this.ecsComponent = this.createEcsComponent();
   }
 
@@ -67,10 +67,10 @@ export class PoolGroup extends AwsComponent<
     });
   }
 
-  protected createOwnerPicturesComponent() {
+  protected createFileStorageComponent() {
     const { additionalReadOnlyS3Arns, s3PublicRead, s3AllowUpload } =
-      this.config.ownerPictureConfig;
-    return new OwnerPicturesComponent(this, 'owner-pictures', {
+      this.config.fileStorageConfig;
+    return new FileStorageComponent(this, 'files', {
       additionalReadOnlyS3Arns,
       s3PublicRead,
       s3AllowUpload: s3AllowUpload
@@ -89,9 +89,8 @@ export class PoolGroup extends AwsComponent<
         this.entrypointComponent.getAlbTargetGroupArnAsToken(),
       secretsmanagerSecretArn:
         this.secretsComponent.getSecretsmanagerSecretArnAsToken(),
-      fileStorageS3Endpoint:
-        this.ownerPicturesComponent.getS3BucketDomainName(),
-      fileStorageS3BucketName: this.ownerPicturesComponent.getS3BucketName(),
+      fileStorageS3Endpoint: this.fileStorageComponent.getS3BucketDomainName(),
+      fileStorageS3BucketName: this.fileStorageComponent.getS3BucketName(),
       logsGroup: this.logsComponent.getCloudwatchLogGroupName(),
       dockerApplications: this.config.registryGroup.getDockerApplications(),
       applicationBaseUrl: this.getApplicationBaseUrl(),

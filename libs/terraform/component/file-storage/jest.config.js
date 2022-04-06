@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'terraform-component-owner-pictures',
+  displayName: 'terraform-component-file-storage',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,6 +11,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory:
-    '../../../coverage/libs/terraform/component/owner-pictures',
+  coverageDirectory: '../../../coverage/libs/terraform/component/file-storage',
 };
