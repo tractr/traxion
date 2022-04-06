@@ -8,7 +8,7 @@ import {
   S3UserComponent,
 } from '@tractr/terraform-component-s3-user';
 
-export interface OwnerPicturesComponentConfig {
+export interface FileStorageComponentConfig {
   additionalReadOnlyS3Arns?: string[];
   s3PublicRead?: boolean;
   s3AllowUpload?: {
@@ -16,7 +16,7 @@ export interface OwnerPicturesComponentConfig {
   };
 }
 
-export class OwnerPicturesComponent extends AwsComponent<OwnerPicturesComponentConfig> {
+export class FileStorageComponent extends AwsComponent<FileStorageComponentConfig> {
   protected readonly s3Component: S3Component;
 
   protected readonly s3UserComponent: S3UserComponent;
@@ -24,7 +24,7 @@ export class OwnerPicturesComponent extends AwsComponent<OwnerPicturesComponentC
   constructor(
     scope: AwsProviderConstruct,
     id: string,
-    config: OwnerPicturesComponentConfig = {},
+    config: FileStorageComponentConfig = {},
   ) {
     super(scope, id, config);
     this.s3Component = this.createS3Component();
