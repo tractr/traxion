@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.43.2](https://github.com/tractr/stack/compare/v1.43.1...v1.43.2) (2022-04-06)
+
+
+### Bug Fixes
+
+* **libs-terraform-group-network:** use interpolation for cidrsubnet ([#406](https://github.com/tractr/stack/issues/406)) ([6869498](https://github.com/tractr/stack/commit/68694984d02f2b4b841adeadc6bd70f11402a3f9))
+
+
+
 ## [1.43.1](https://github.com/tractr/stack/compare/v1.43.0...v1.43.1) (2022-04-06)
 
 
