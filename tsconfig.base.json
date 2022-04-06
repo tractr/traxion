@@ -130,9 +130,6 @@
       "@tractr/terraform-group-zone": [
         "libs/terraform/group/zone/src/index.ts"
       ],
-      "@tractr/terraform-helpers-post-synth": [
-        "libs/terraform/helpers/post-synth/src/index.ts"
-      ],
       "@tractr/terraform-service-api": [
         "libs/terraform/service/api/src/index.ts"
       ],

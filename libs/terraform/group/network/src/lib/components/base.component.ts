@@ -131,7 +131,7 @@ export class BaseComponent extends AwsComponent<BaseComponentConfig> {
     return cidrBlock.replace(
       /\${([a-z0-9-_.[\]]+)}/i,
       (substring, token: string) =>
-        `\${cidrsubnet(\${${token}}, ${newbits}, ${netnum})}`,
+        `\${cidrsubnet("\${${token}}", ${newbits}, ${netnum})}`,
     );
   }
 

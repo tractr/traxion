@@ -50,7 +50,6 @@ module.exports = {
     '<rootDir>/libs/terraform/component/owner-pictures',
     '<rootDir>/libs/terraform/component/logs',
     '<rootDir>/libs/terraform/component/entrypoint',
-    '<rootDir>/libs/terraform/helpers/post-synth',
     '<rootDir>/libs/terraform/service/ecs',
     '<rootDir>/libs/terraform/service/reverse-proxy',
     '<rootDir>/libs/hapify/templates/react-admin',
