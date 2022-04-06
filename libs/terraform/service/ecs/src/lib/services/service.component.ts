@@ -132,16 +132,11 @@ export abstract class ServiceComponent<
   }
 
   /**
-   * Get information about current task definition
-   * Retrieve the task definition from the ECS service and return it as a data source
+   * Get information about latest active task definition
    */
   protected getEcsTaskDefinitionData(): ecs.DataAwsEcsTaskDefinition {
-    const currentService = new ecs.DataAwsEcsService(this, 'current-service', {
-      serviceName: this.getResourceName('service'),
-      clusterArn: this.config.clusterId, // Works with id
-    });
-    return new ecs.DataAwsEcsTaskDefinition(this, 'current-task', {
-      taskDefinition: currentService.taskDefinition,
+    return new ecs.DataAwsEcsTaskDefinition(this, 'active-task', {
+      taskDefinition: this.ecsTaskDefinition.family,
     });
   }
 
