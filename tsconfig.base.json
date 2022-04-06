@@ -97,11 +97,11 @@
       "@tractr/terraform-component-entrypoint": [
         "libs/terraform/component/entrypoint/src/index.ts"
       ],
+      "@tractr/terraform-component-file-storage": [
+        "libs/terraform/component/file-storage/src/index.ts"
+      ],
       "@tractr/terraform-component-logs": [
         "libs/terraform/component/logs/src/index.ts"
-      ],
-      "@tractr/terraform-component-owner-pictures": [
-        "libs/terraform/component/owner-pictures/src/index.ts"
       ],
       "@tractr/terraform-component-private-dns": [
         "libs/terraform/component/private-dns/src/index.ts"

@@ -14,7 +14,7 @@ export interface PoolGroupInternalConfig {
 export interface PoolGroupDefaultConfig {
   subDomain: string;
   reverseProxyConfig: ReverseProxyComponentPublicConfig;
-  ownerPictureConfig: {
+  fileStorageConfig: {
     additionalReadOnlyS3Arns?: string[];
     s3PublicRead?: boolean;
     s3AllowUpload?: boolean;
