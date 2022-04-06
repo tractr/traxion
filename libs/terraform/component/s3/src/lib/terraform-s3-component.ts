@@ -16,6 +16,12 @@ export interface S3ComponentConfig {
 export class S3Component extends AwsComponent<S3ComponentConfig> {
   protected readonly s3Bucket: s3.S3Bucket;
 
+  protected readonly s3BucketAcl: s3.S3BucketAcl;
+
+  protected readonly s3BucketVersioning: s3.S3BucketVersioningA;
+
+  protected readonly s3BucketCorsConfiguration: s3.S3BucketCorsConfiguration;
+
   protected readonly s3BucketPolicy: s3.S3BucketPolicy | undefined;
 
   protected readonly s3BucketNameOutput: TerraformOutput;
@@ -29,6 +35,9 @@ export class S3Component extends AwsComponent<S3ComponentConfig> {
   ) {
     super(scope, id, config);
     this.s3Bucket = this.createS3Bucket();
+    this.s3BucketAcl = this.createS3BucketAcl();
+    this.s3BucketVersioning = this.createS3BucketVersioning();
+    this.s3BucketCorsConfiguration = this.createS3BucketCorsConfiguration();
     if (this.config.publicRead) {
       this.s3BucketPolicy = this.createS3BucketPublicPolicy();
     }
@@ -41,15 +50,38 @@ export class S3Component extends AwsComponent<S3ComponentConfig> {
     return new s3.S3Bucket(this, 'bucket', {
       provider: this.provider,
       bucketPrefix: this.getResourceName('', 37).replace(/_/g, '-'),
-      corsRule: this.getCorsRules(),
-      acl: 'private',
       forceDestroy: true,
-      versioning: { enabled: false },
       tags: this.getResourceNameAsTag('bucket'),
     });
   }
 
-  protected getCorsRules(): s3.S3BucketCorsRule[] {
+  protected createS3BucketAcl() {
+    return new s3.S3BucketAcl(this, 'acl', {
+      provider: this.provider,
+      acl: 'private',
+      bucket: this.getBucketArnAsToken(),
+    });
+  }
+
+  protected createS3BucketVersioning() {
+    return new s3.S3BucketVersioningA(this, 'versioning', {
+      provider: this.provider,
+      bucket: this.getBucketArnAsToken(),
+      versioningConfiguration: {
+        status: 'Disabled',
+      },
+    });
+  }
+
+  protected createS3BucketCorsConfiguration() {
+    return new s3.S3BucketCorsConfiguration(this, 'cors', {
+      provider: this.provider,
+      corsRule: this.getCorsRules(),
+      bucket: this.getBucketArnAsToken(),
+    });
+  }
+
+  protected getCorsRules(): s3.S3BucketCorsConfigurationCorsRule[] {
     if (!this.config.allowUpload) return [];
     return [
       {
