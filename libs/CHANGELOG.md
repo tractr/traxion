@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.43.1](https://github.com/tractr/stack/compare/v1.43.0...v1.43.1) (2022-04-06)
+
+
+### Bug Fixes
+
+* **libs-terraform-service-ecs:** use last active task definition to detect last revision ([#405](https://github.com/tractr/stack/issues/405)) ([23a3629](https://github.com/tractr/stack/commit/23a362961a3ea37e5df7bf30c787f1201ec1f758))
+
+
+
+## [1.43.1](https://github.com/tractr/stack/compare/v1.43.0...v1.43.1) (2022-04-06)
+
+
+### Bug Fixes
+
+* **libs-terraform-service-ecs:** use last active task definition to detect last revision ([#405](https://github.com/tractr/stack/issues/405)) ([23a3629](https://github.com/tractr/stack/commit/23a362961a3ea37e5df7bf30c787f1201ec1f758))
+
+
+
 # [1.43.0](https://github.com/tractr/stack/compare/v1.42.1...v1.43.0) (2022-04-05)
 
 
