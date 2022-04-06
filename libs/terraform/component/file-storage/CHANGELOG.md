@@ -1,7 +1,10 @@
 # Changelog
 
-This file was generated using
-[@jscutlery/semver](https://github.com/jscutlery/semver).
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+## [1.43.3](https://github.com/tractr/stack/compare/v1.43.2...v1.43.3) (2022-04-06)
+
+
 
 ## [1.43.2](https://github.com/tractr/stack/compare/v1.43.1...v1.43.2) (2022-04-06)
 
