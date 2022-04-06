@@ -56,7 +56,7 @@ export class CertificatesComponent extends AwsComponent<CertificatesComponentCon
 
   protected createRoute53Record() {
     const domainValidationOptions =
-      this.acmCertificate.domainValidationOptions('0');
+      this.acmCertificate.domainValidationOptions.get(0);
     return new route53.Route53Record(this, 'record', {
       provider: this.provider,
       allowOverwrite: true,
