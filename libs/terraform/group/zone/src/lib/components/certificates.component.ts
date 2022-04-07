@@ -67,8 +67,7 @@ export class CertificatesComponent extends AwsComponent<
     certificate: acm.AcmCertificate,
     validationRecord: route53.Route53Record,
   ) {
-    /* eslint-disable-next-line no-new */
-    new acm.AcmCertificateValidation(this, 'valid', {
+    return new acm.AcmCertificateValidation(this, 'valid', {
       certificateArn: certificate.arn,
       validationRecordFqdns: [validationRecord.fqdn],
     });
