@@ -26,6 +26,11 @@ export class PoliciesGuard implements CanActivate {
         context.getHandler(),
       ) || [];
 
+    const contextType: string = context.getType();
+
+    // Skip the guard for rabbitmq requests
+    if (contextType === 'rmq') return true;
+
     // Extract request from the context
     const req = getRequestFromContext(context);
 
