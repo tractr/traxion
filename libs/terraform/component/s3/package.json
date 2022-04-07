@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-component-s3",
-  "version": "1.43.4",
+  "version": "1.43.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
