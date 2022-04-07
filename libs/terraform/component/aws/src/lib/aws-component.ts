@@ -25,6 +25,7 @@ export abstract class AwsComponent<Config, Artifacts>
     this.config = config;
     this.name = `${scope.name.trim()}-${snake(id)}`;
     this.provider = scope.provider;
+    this.validateConfig();
     this.createComponents();
   }
 
@@ -33,6 +34,14 @@ export abstract class AwsComponent<Config, Artifacts>
    * Called in the constructor of the component.
    */
   protected abstract createComponents(): void;
+
+  /**
+   * Check the provided config to see if it is valid.
+   * Should throw an error if the config is invalid.
+   */
+  protected validateConfig(): void {
+    // noop
+  }
 
   /**
    * Set properties of the artifacts object.
