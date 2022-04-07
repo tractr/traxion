@@ -4,7 +4,7 @@ import { Construct } from 'constructs';
 
 import { AwsProviderConstruct } from './interfaces';
 
-export abstract class AwsComponent<T = null>
+export abstract class AwsComponent<Config, Artifacts>
   extends Construct
   implements AwsProviderConstruct
 {
@@ -12,13 +12,55 @@ export abstract class AwsComponent<T = null>
 
   readonly name: string;
 
-  protected readonly config: T;
+  protected readonly config: Config;
 
-  protected constructor(scope: AwsProviderConstruct, id: string, config: T) {
+  private artifactsValue: Artifacts | undefined;
+
+  protected constructor(
+    scope: AwsProviderConstruct,
+    id: string,
+    config: Config,
+  ) {
     super(scope, id);
     this.config = config;
     this.name = `${scope.name.trim()}-${snake(id)}`;
     this.provider = scope.provider;
+    this.createComponents();
+  }
+
+  /**
+   * Create all sub components of this component.
+   * Called in the constructor of the component.
+   */
+  protected abstract createComponents(): void;
+
+  /**
+   * Set properties of the artifacts object.
+   */
+  set artifacts(artifacts: Artifacts) {
+    this.artifactsValue = artifacts;
+  }
+
+  /**
+   * Get artifacts for this component available after the sub-components are created.
+   * Must be populated while creating the sub-components.
+   */
+  get artifacts() {
+    if (!this.artifactsValue) {
+      throw new Error('RegistryGroup.artifacts: artifacts not set');
+    }
+    return this.artifactsValue;
+  }
+
+  /**
+   * Get the parents of this component at the nth level.
+   */
+  getParent<T extends AwsProviderConstruct>(n = 1): T | undefined {
+    const parents = this.node.scopes;
+    if (parents.length < n) {
+      return undefined;
+    }
+    return parents[parents.length - n] as T;
   }
 
   protected getResourceName(resource: string, maxLength?: number): string {
@@ -100,8 +142,8 @@ export abstract class AwsComponent<T = null>
   }
 }
 
-export type AwsComponentConstructor<C extends AwsComponent<O>, O> = new (
-  scope: AwsProviderConstruct,
-  id: string,
-  config: O,
-) => C;
+export type AwsComponentConstructor<
+  Component extends AwsComponent<Config, Artifacts>,
+  Config,
+  Artifacts,
+> = new (scope: AwsProviderConstruct, id: string, config: Config) => Component;
