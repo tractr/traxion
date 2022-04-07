@@ -1,14 +1,11 @@
 import { vpc } from '@cdktf/provider-aws';
 
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  EgressRoutesComponentArtifacts,
+  EgressRoutesComponentConfig,
+} from '../interfaces';
 
-export interface EgressRoutesComponentConfig {
-  routeTableId: string;
-  egressOnlyInternetGatewayId: string;
-}
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
 /**
  * This component provides an Egress Only Internet Gateway to make internet available in the private subnet with IPv6.
@@ -16,18 +13,14 @@ export interface EgressRoutesComponentConfig {
  *
  * The EgressOnlyInternetGateway is defined at the VPC level, as for the InternetGateway
  */
-export class EgressRoutesComponent extends AwsComponent<EgressRoutesComponentConfig> {
-  protected readonly ipv6RouteToEgressOnlyInternetGateway: vpc.Route;
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: EgressRoutesComponentConfig,
-  ) {
-    super(scope, id, config);
-
-    this.ipv6RouteToEgressOnlyInternetGateway =
-      this.createIpv6RouteToEgressOnlyInternetGateway();
+export class EgressRoutesComponent extends AwsComponent<
+  EgressRoutesComponentConfig,
+  EgressRoutesComponentArtifacts
+> {
+  protected createComponents(): void {
+    this.createIpv6RouteToEgressOnlyInternetGateway();
+    // Populate the artifacts
+    this.artifacts = {};
   }
 
   /**
@@ -35,7 +28,6 @@ export class EgressRoutesComponent extends AwsComponent<EgressRoutesComponentCon
    */
   protected createIpv6RouteToEgressOnlyInternetGateway() {
     return new vpc.Route(this, 'rt6', {
-      provider: this.provider,
       destinationIpv6CidrBlock: '::/0',
       egressOnlyGatewayId: this.config.egressOnlyInternetGatewayId,
       routeTableId: this.config.routeTableId,

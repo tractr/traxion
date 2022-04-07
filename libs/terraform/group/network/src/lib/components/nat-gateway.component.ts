@@ -1,15 +1,11 @@
 import { ec2, vpc } from '@cdktf/provider-aws';
-import { Token } from 'cdktf';
 
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  NatGatewayComponentArtifacts,
+  NatGatewayComponentConfig,
+} from '../interfaces';
 
-export interface NatGatewayComponentConfig {
-  routeTableId: string;
-  publicSubnetId: string;
-}
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
 /**
  * This component provides a nat gateway, installed in the public subnet, to make internet available in the private subnet:
@@ -17,28 +13,26 @@ export interface NatGatewayComponentConfig {
  *
  * There is one NAT Gateway for each availability zone
  */
-export class NatGatewayComponent extends AwsComponent<NatGatewayComponentConfig> {
-  protected readonly eip: ec2.Eip;
-
-  protected readonly natGateway: vpc.NatGateway;
-
-  protected readonly routeToNatGateway: vpc.Route;
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: NatGatewayComponentConfig,
-  ) {
-    super(scope, id, config);
-
-    this.eip = this.createEip();
-    this.natGateway = this.createNatGateway();
-    this.routeToNatGateway = this.createRouteToNatGateway();
+export class NatGatewayComponent extends AwsComponent<
+  NatGatewayComponentConfig,
+  NatGatewayComponentArtifacts
+> {
+  protected createComponents(): void {
+    const eip = this.createEip();
+    const natGateway = this.createNatGateway(eip);
+    this.createRouteToNatGateway(natGateway);
+    // Populate the artifacts
+    this.artifacts = {
+      natGatewayId: natGateway.id,
+      eipId: eip.id,
+    };
   }
 
+  /**
+   * Allocate an elastic IP address
+   */
   protected createEip() {
     return new ec2.Eip(this, 'ip', {
-      provider: this.provider,
       vpc: true,
       tags: this.getResourceNameAsTag('ip'),
     });
@@ -47,11 +41,10 @@ export class NatGatewayComponent extends AwsComponent<NatGatewayComponentConfig>
   /**
    * Create a NAT gateway with an Elastic IP for each private subnet to get internet connectivity
    */
-  protected createNatGateway() {
+  protected createNatGateway(eip: ec2.Eip) {
     return new vpc.NatGateway(this, 'gw', {
-      provider: this.provider,
       subnetId: this.config.publicSubnetId,
-      allocationId: this.getEipIdAsToken(),
+      allocationId: eip.id,
       tags: this.getResourceNameAsTag('gw'),
     });
   }
@@ -59,21 +52,12 @@ export class NatGatewayComponent extends AwsComponent<NatGatewayComponentConfig>
   /**
    * Route non-local traffic through the NAT gateway to the internet
    */
-  protected createRouteToNatGateway() {
+  protected createRouteToNatGateway(natGateway: vpc.NatGateway) {
     return new vpc.Route(this, 'rt', {
-      provider: this.provider,
       destinationCidrBlock: '0.0.0.0/0',
       destinationIpv6CidrBlock: '::/0',
-      natGatewayId: this.getNatGatewayIdAsToken(),
+      natGatewayId: natGateway.id,
       routeTableId: this.config.routeTableId,
     });
-  }
-
-  getNatGatewayIdAsToken(): string {
-    return Token.asString(this.natGateway.id);
-  }
-
-  getEipIdAsToken(): string {
-    return Token.asString(this.eip.id);
   }
 }
