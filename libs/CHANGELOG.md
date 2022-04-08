@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.43.6](https://github.com/tractr/stack/compare/v1.43.5...v1.43.6) (2022-04-08)
+
+
+### Bug Fixes
+
+* **terraform-component-s3:** fix cors without rules ([#410](https://github.com/tractr/stack/issues/410)) ([a229d1e](https://github.com/tractr/stack/commit/a229d1e4533c5376c6515b012436ae58938025e6))
+
+
+
+## [1.43.6](https://github.com/tractr/stack/compare/v1.43.5...v1.43.6) (2022-04-08)
+
+
+### Bug Fixes
+
+* **terraform-component-s3:** fix cors without rules ([#410](https://github.com/tractr/stack/issues/410)) ([a229d1e](https://github.com/tractr/stack/commit/a229d1e4533c5376c6515b012436ae58938025e6))
+
+
+
 ## [1.43.5](https://github.com/tractr/stack/compare/v1.43.4...v1.43.5) (2022-04-07)
 
 
