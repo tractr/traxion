@@ -1,26 +1,25 @@
 import { secretsmanager } from '@cdktf/provider-aws';
-import { Token } from 'cdktf';
 
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  SecretsComponentArtifacts,
+  SecretsComponentConfig,
+} from './secrets.interface';
 
-export class SecretsComponent extends AwsComponent {
-  protected readonly secretsmanagerSecret: secretsmanager.SecretsmanagerSecret;
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
-  constructor(scope: AwsProviderConstruct, id: string, config = null) {
-    super(scope, id, config);
-    this.secretsmanagerSecret = this.createSecretsmanagerSecret();
-  }
-
-  protected createSecretsmanagerSecret() {
-    return new secretsmanager.SecretsmanagerSecret(this, 'object', {
+export class SecretsComponent extends AwsComponent<
+  SecretsComponentConfig,
+  SecretsComponentArtifacts
+> {
+  protected createComponents(): void {
+    /* eslint-disable-next-line no-new */
+    const secret = new secretsmanager.SecretsmanagerSecret(this, 'object', {
       name: this.getResourceName('object'),
     });
-  }
 
-  getSecretsmanagerSecretArnAsToken(): string {
-    return Token.asString(this.secretsmanagerSecret.arn);
+    // Populate the artifacts
+    this.artifacts = {
+      secretArn: secret.arn,
+    };
   }
 }
