@@ -20,7 +20,9 @@ export class S3Component extends AwsComponent<S3ComponentConfig> {
 
   protected readonly s3BucketVersioning: s3.S3BucketVersioningA;
 
-  protected readonly s3BucketCorsConfiguration: s3.S3BucketCorsConfiguration;
+  protected readonly s3BucketCorsConfiguration:
+    | s3.S3BucketCorsConfiguration
+    | undefined;
 
   protected readonly s3BucketPolicy: s3.S3BucketPolicy | undefined;
 
@@ -74,9 +76,13 @@ export class S3Component extends AwsComponent<S3ComponentConfig> {
   }
 
   protected createS3BucketCorsConfiguration() {
+    const rules = this.getCorsRules();
+    if (rules.length === 0) {
+      return undefined;
+    }
     return new s3.S3BucketCorsConfiguration(this, 'cors', {
       provider: this.provider,
-      corsRule: this.getCorsRules(),
+      corsRule: rules,
       bucket: this.getBucketArnAsToken(),
     });
   }
