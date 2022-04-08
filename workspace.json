@@ -44,29 +44,7 @@
     "nestjs-database": "libs/nestjs/database",
     "nestjs-file-storage": "libs/nestjs/file-storage",
     "nestjs-mailer": "libs/nestjs/mailer",
-    "nestjs-request-timestamp": {
-      "projectType": "library",
-      "root": "libs/nestjs/request-timestamp",
-      "sourceRoot": "libs/nestjs/request-timestamp/src",
-      "tags": [],
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/nestjs/request-timestamp/**/*.ts"]
-          },
-          "outputs": ["{options.outputFile}"]
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/nestjs/request-timestamp/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/nestjs/request-timestamp"]
-        }
-      }
-    },
+    "nestjs-request-timestamp": "libs/nestjs/request-timestamp",
     "nestjs-testing": "libs/nestjs/testing",
     "prettier-config": "libs/config/prettier",
     "pwa": "apps/pwa",
@@ -136,6 +114,7 @@
               "schematics:publish",
               "nestjs-database:publish",
               "nestjs-mailer:publish",
+              "nestjs-request-timestamp:publish",
               "nestjs-file-storage:publish",
               "angular-components:publish",
               "angular-config:publish",
