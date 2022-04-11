@@ -16,10 +16,7 @@ export class VolumeComponent<
     const efsFileSystem = this.createFileSystem(securityGroup);
 
     // Populate the artifacts
-    this.artifacts = {
-      securityGroupId: securityGroup.id,
-      efsFileSystemId: efsFileSystem.id,
-    };
+    this.artifacts = { securityGroup, efsFileSystem };
   }
 
   /**

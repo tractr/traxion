@@ -1,3 +1,5 @@
+import { efs, vpc } from '@cdktf/provider-aws';
+
 export interface VolumeComponentConfig {
   vpcId: string;
   subnetsIds: string[];
@@ -13,6 +15,6 @@ export interface VolumeComponentConfig {
   enableBackups?: boolean;
 }
 export interface VolumeComponentArtifacts {
-  efsFileSystemId: string;
-  securityGroupId: string;
+  efsFileSystem: efs.EfsFileSystem;
+  securityGroup: vpc.SecurityGroup;
 }
