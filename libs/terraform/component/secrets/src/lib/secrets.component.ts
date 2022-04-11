@@ -18,8 +18,6 @@ export class SecretsComponent extends AwsComponent<
     });
 
     // Populate the artifacts
-    this.artifacts = {
-      secretArn: secret.arn,
-    };
+    this.artifacts = { secret };
   }
 }

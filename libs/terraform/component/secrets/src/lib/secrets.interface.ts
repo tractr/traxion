@@ -1,4 +1,6 @@
+import { secretsmanager } from '@cdktf/provider-aws';
+
 export type SecretsComponentConfig = Record<string, never>;
 export interface SecretsComponentArtifacts {
-  secretArn: string;
+  secret: secretsmanager.SecretsmanagerSecret;
 }
