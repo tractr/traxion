@@ -1,1 +1,1 @@
-export * from './lib/private-dns.component';
+export * from './lib';
