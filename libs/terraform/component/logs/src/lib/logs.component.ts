@@ -25,8 +25,6 @@ export class LogsComponent extends AwsComponent<LogsConfig, LogsArtifacts> {
     });
 
     // Populate artifacts
-    this.artifacts = {
-      cloudwatchLogGroupName: cloudwatchLogGroup.name,
-    };
+    this.artifacts = { cloudwatchLogGroup };
   }
 }
