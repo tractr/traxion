@@ -23,8 +23,8 @@ export class NatGatewayComponent extends AwsComponent<
     this.createRouteToNatGateway(natGateway);
     // Populate the artifacts
     this.artifacts = {
-      natGatewayId: natGateway.id,
-      eipId: eip.id,
+      natGateway,
+      eip,
     };
   }
 

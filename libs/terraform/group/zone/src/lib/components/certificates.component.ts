@@ -25,8 +25,8 @@ export class CertificatesComponent extends AwsComponent<
     this.validateCertificate(certificate, validationRecord);
     // Populate artifacts
     this.artifacts = {
-      acmCertificateArn: certificate.arn,
-      route53ZoneId: zone.zoneId,
+      acmCertificate: certificate,
+      route53Zone: zone,
     };
   }
 

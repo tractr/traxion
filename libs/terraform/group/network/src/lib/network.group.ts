@@ -41,8 +41,8 @@ export class NetworkGroup extends AwsComponent<
     // Populate artifacts
     this.artifacts = {
       ...baseComponent.artifacts,
-      publicSubnetsIds: publicComponents.map((c) => c.artifacts.subnetId),
-      privateSubnetsIds: privateComponents.map((c) => c.artifacts.subnetId),
+      publicSubnets: publicComponents.map((c) => c.artifacts.subnet),
+      privateSubnets: privateComponents.map((c) => c.artifacts.subnet),
       availabilityZonesInfo: this.config.zones.map((letter) => ({
         fullName: getZoneName(this.provider, letter),
         shortName: letter,
@@ -71,13 +71,13 @@ export class NetworkGroup extends AwsComponent<
 
       return new PublicComponent(this, publicId, {
         availabilityZone: getZoneName(this.provider, zoneLetter),
-        vpcId: baseComponent.artifacts.vpcId,
+        vpcId: baseComponent.artifacts.vpc.id,
         cidrBlock: getCidrBlockForIndex(
-          baseComponent.artifacts.cidrBlock,
+          baseComponent.artifacts.vpcData.cidrBlock,
           subnetNumber,
         ),
         ipv6CidrBlock: getCidrBlockForIndex(
-          baseComponent.artifacts.ipv6CidrBlock,
+          baseComponent.artifacts.vpcData.ipv6CidrBlock,
           subnetNumber,
         ),
       });
@@ -97,19 +97,19 @@ export class NetworkGroup extends AwsComponent<
       const subnetNumber = getPrivateSubnetNumber(index);
 
       return new PrivateComponent(this, privateId, {
-        publicSubnetId: publicComponent.artifacts.subnetId,
+        publicSubnetId: publicComponent.artifacts.subnet.id,
         egressOnlyInternetGatewayId:
-          baseComponent.artifacts.egressOnlyInternetGatewayId,
-        internetGatewayId: baseComponent.artifacts.internetGatewayId,
+          baseComponent.artifacts.egressOnlyInternetGateway.id,
+        internetGatewayId: baseComponent.artifacts.internetGateway.id,
         internetAccessMode: this.config.internetAccessMode,
         availabilityZone: getZoneName(this.provider, zoneLetter),
-        vpcId: baseComponent.artifacts.vpcId,
+        vpcId: baseComponent.artifacts.vpc.id,
         cidrBlock: getCidrBlockForIndex(
-          baseComponent.artifacts.cidrBlock,
+          baseComponent.artifacts.vpcData.cidrBlock,
           subnetNumber,
         ),
         ipv6CidrBlock: getCidrBlockForIndex(
-          baseComponent.artifacts.ipv6CidrBlock,
+          baseComponent.artifacts.vpcData.ipv6CidrBlock,
           subnetNumber,
         ),
       });

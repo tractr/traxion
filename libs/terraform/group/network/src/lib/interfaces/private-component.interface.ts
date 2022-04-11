@@ -1,3 +1,5 @@
+import { vpc } from '@cdktf/provider-aws';
+
 export type InternetAccessMode = 'nat' | 'egress' | 'igw' | 'none';
 
 export interface PrivateComponentConfig {
@@ -12,6 +14,6 @@ export interface PrivateComponentConfig {
   internetGatewayId?: string;
 }
 export interface PrivateComponentArtifacts {
-  routeTableId: string;
-  subnetId: string;
+  routeTable: vpc.RouteTable;
+  subnet: vpc.Subnet;
 }

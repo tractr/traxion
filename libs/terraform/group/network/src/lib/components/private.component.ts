@@ -59,10 +59,7 @@ export class PrivateComponent extends AwsComponent<
     }
 
     // Populate the artifacts
-    this.artifacts = {
-      routeTableId: routeTable.id,
-      subnetId: subnet.id,
-    };
+    this.artifacts = { routeTable, subnet };
   }
 
   protected createSubnet() {

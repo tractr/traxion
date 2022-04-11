@@ -1,3 +1,5 @@
+import { vpc } from '@cdktf/provider-aws';
+
 export interface PublicComponentConfig {
   vpcId: string;
   cidrBlock: string;
@@ -5,5 +7,5 @@ export interface PublicComponentConfig {
   availabilityZone: string;
 }
 export interface PublicComponentArtifacts {
-  subnetId: string;
+  subnet: vpc.Subnet;
 }

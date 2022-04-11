@@ -15,9 +15,7 @@ export class PublicComponent extends AwsComponent<
   protected createComponents(): void {
     const subnet = this.createSubnet();
     // Populate the artifacts
-    this.artifacts = {
-      subnetId: subnet.id,
-    };
+    this.artifacts = { subnet };
   }
 
   protected createSubnet() {

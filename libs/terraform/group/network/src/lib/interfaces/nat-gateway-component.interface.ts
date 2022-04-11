@@ -1,8 +1,10 @@
+import { ec2, vpc } from '@cdktf/provider-aws';
+
 export interface NatGatewayComponentConfig {
   routeTableId: string;
   publicSubnetId: string;
 }
 export interface NatGatewayComponentArtifacts {
-  natGatewayId: string;
-  eipId: string;
+  natGateway: vpc.NatGateway;
+  eip: ec2.Eip;
 }

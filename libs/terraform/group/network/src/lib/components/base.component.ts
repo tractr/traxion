@@ -19,12 +19,10 @@ export class BaseComponent extends AwsComponent<
 
     // Populate the artifacts
     this.artifacts = {
-      vpcId: vpc.id,
-      vpcMainRouteTableId: vpc.mainRouteTableId,
-      internetGatewayId: internetGateway.id,
-      egressOnlyInternetGatewayId: egressOnlyInternetGateway.id,
-      cidrBlock: data.cidrBlock,
-      ipv6CidrBlock: data.ipv6CidrBlock,
+      vpc,
+      vpcData: data,
+      internetGateway,
+      egressOnlyInternetGateway,
     };
   }
 
