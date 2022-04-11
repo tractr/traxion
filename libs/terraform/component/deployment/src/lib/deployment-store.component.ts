@@ -33,14 +33,14 @@ export class DeploymentStoreComponent extends AwsComponent {
     return new s3.S3BucketAcl(this, 'acl', {
       provider: this.provider,
       acl: 'private',
-      bucket: this.getBucketArnAsToken(),
+      bucket: this.getBucketNameAsToken(),
     });
   }
 
   protected createS3BucketVersioning() {
     return new s3.S3BucketVersioningA(this, 'versioning', {
       provider: this.provider,
-      bucket: this.getBucketArnAsToken(),
+      bucket: this.getBucketNameAsToken(),
       versioningConfiguration: {
         status: 'Disabled',
       },

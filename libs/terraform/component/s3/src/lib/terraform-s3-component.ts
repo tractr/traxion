@@ -61,14 +61,14 @@ export class S3Component extends AwsComponent<S3ComponentConfig> {
     return new s3.S3BucketAcl(this, 'acl', {
       provider: this.provider,
       acl: 'private',
-      bucket: this.getBucketArnAsToken(),
+      bucket: this.getBucketNameAsToken(),
     });
   }
 
   protected createS3BucketVersioning() {
     return new s3.S3BucketVersioningA(this, 'versioning', {
       provider: this.provider,
-      bucket: this.getBucketArnAsToken(),
+      bucket: this.getBucketNameAsToken(),
       versioningConfiguration: {
         status: 'Disabled',
       },
@@ -83,7 +83,7 @@ export class S3Component extends AwsComponent<S3ComponentConfig> {
     return new s3.S3BucketCorsConfiguration(this, 'cors', {
       provider: this.provider,
       corsRule: rules,
-      bucket: this.getBucketArnAsToken(),
+      bucket: this.getBucketNameAsToken(),
     });
   }
 
