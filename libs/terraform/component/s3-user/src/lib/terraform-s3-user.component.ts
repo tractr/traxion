@@ -32,7 +32,6 @@ export class S3UserComponent extends AwsComponent<
 
   protected createPolicy() {
     return new iam.IamPolicy(this, 'policy', {
-      provider: this.provider,
       name: this.getResourceName('policy'),
       policy: JSON.stringify({
         Version: '2012-10-17',
@@ -43,14 +42,12 @@ export class S3UserComponent extends AwsComponent<
 
   protected createUser(policy: iam.IamPolicy) {
     const user = new iam.IamUser(this, 'user', {
-      provider: this.provider,
       name: this.getResourceName('user'),
     });
 
     // Attach policy to user
     /* eslint-disable-next-line no-new */
     new iam.IamUserPolicyAttachment(this, 'attach', {
-      provider: this.provider,
       user: user.name,
       policyArn: policy.arn,
     });
@@ -60,7 +57,6 @@ export class S3UserComponent extends AwsComponent<
 
   protected createAccessKey(user: iam.IamUser) {
     const key = new iam.IamAccessKey(this, 'key', {
-      provider: this.provider,
       user: user.name,
     });
     // Create outputs
