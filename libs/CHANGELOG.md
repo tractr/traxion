@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.43.8](https://github.com/tractr/stack/compare/v1.43.7...v1.43.8) (2022-04-12)
+
+
+### Bug Fixes
+
+* edit result variable name in test ([#414](https://github.com/tractr/stack/issues/414)) ([c6d7e2e](https://github.com/tractr/stack/commit/c6d7e2ec7f87ce88294188bda4c9ed0f14bcd463))
+
+
+
+## [1.43.8](https://github.com/tractr/stack/compare/v1.43.7...v1.43.8) (2022-04-12)
+
+
+### Bug Fixes
+
+* edit result variable name in test ([#414](https://github.com/tractr/stack/issues/414)) ([c6d7e2e](https://github.com/tractr/stack/commit/c6d7e2ec7f87ce88294188bda4c9ed0f14bcd463))
+
+
+
 ## [1.43.7](https://github.com/tractr/stack/compare/v1.43.6...v1.43.7) (2022-04-11)
 
 
