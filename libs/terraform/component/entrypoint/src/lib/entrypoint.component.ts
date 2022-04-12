@@ -1,50 +1,33 @@
+/* eslint-disable no-new */
 import { elb, route53, vpc } from '@cdktf/provider-aws';
-import { ITerraformDependable, Token } from 'cdktf';
 
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  EntrypointComponentArtifacts,
+  EntrypointComponentConfig,
+} from './entrypoint.interface';
 
-export interface EntrypointComponentConfig {
-  vpcId: string;
-  certificateArn: string;
-  subnetsIds: string[];
-  route53ZoneId: string;
-  subDomain: string;
-  albDependencies?: ITerraformDependable[];
-}
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
-export class EntrypointComponent extends AwsComponent<EntrypointComponentConfig> {
-  protected readonly securityGroup: vpc.SecurityGroup;
-
-  protected readonly alb: elb.Alb;
-
-  protected readonly albTargetGroup: elb.AlbTargetGroup;
-
-  protected readonly httpsAlbListener: elb.AlbListener;
-
-  protected readonly httpAlbListener: elb.AlbListener;
-
-  protected readonly route53Record: route53.Route53Record;
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: EntrypointComponentConfig,
-  ) {
-    super(scope, id, config);
-    this.securityGroup = this.createSecurityGroup();
-    this.alb = this.createAlb();
-    this.albTargetGroup = this.createAlbTargetGroup();
-    this.httpsAlbListener = this.createHttpsAlbListener();
-    this.httpAlbListener = this.createHttpAlbListener();
-    this.route53Record = this.createRoute53Record();
+export class EntrypointComponent extends AwsComponent<
+  EntrypointComponentConfig,
+  EntrypointComponentArtifacts
+> {
+  protected createComponents(): void {
+    const securityGroup = this.createSecurityGroup();
+    const loadBalancer = this.createLoadBalancer(securityGroup);
+    const targetGroup = this.createTargetGroup();
+    this.createHttpListeners(loadBalancer, targetGroup);
+    this.routeTrafficToLoadBalancer(loadBalancer);
+    // Populate the artifacts
+    this.artifacts = {
+      loadBalancer,
+      targetGroup,
+      securityGroup,
+    };
   }
 
   protected createSecurityGroup() {
     return new vpc.SecurityGroup(this, 'sg', {
-      provider: this.provider,
       ingress: [
         {
           protocol: 'tcp',
@@ -75,28 +58,26 @@ export class EntrypointComponent extends AwsComponent<EntrypointComponentConfig>
     });
   }
 
-  protected createAlb() {
+  protected createLoadBalancer(securityGroup: vpc.SecurityGroup) {
     if (this.config.subnetsIds.length < 2) {
       throw new Error(
         'At least two subnets in two different Availability Zones must be specified',
       );
     }
     return new elb.Alb(this, 'alb', {
-      provider: this.provider,
       subnets: this.config.subnetsIds,
       enableCrossZoneLoadBalancing: false, // For Network load balancer only
       loadBalancerType: 'application',
       ipAddressType: 'dualstack',
       enableHttp2: true,
-      securityGroups: [this.getSecurityGroupIdAsToken()],
+      securityGroups: [securityGroup.id],
       name: this.getResourceName('alb'),
       dependsOn: this.config.albDependencies,
     });
   }
 
-  protected createAlbTargetGroup() {
+  protected createTargetGroup() {
     return new elb.AlbTargetGroup(this, 'target', {
-      provider: this.provider,
       port: 80,
       protocol: 'HTTP',
       targetType: 'ip',
@@ -116,29 +97,27 @@ export class EntrypointComponent extends AwsComponent<EntrypointComponentConfig>
     });
   }
 
-  protected createHttpsAlbListener() {
+  protected createHttpListeners(
+    loadBalancer: elb.Alb,
+    targetGroup: elb.AlbTargetGroup,
+  ) {
     // Redirect all traffic from the ALB to the target group
-    return new elb.AlbListener(this, 'https', {
-      provider: this.provider,
-      loadBalancerArn: this.getAlbIdAsToken(),
+    const httpsListener = new elb.AlbListener(this, 'https', {
+      loadBalancerArn: loadBalancer.id,
       port: 443,
       protocol: 'HTTPS',
       sslPolicy: 'ELBSecurityPolicy-2016-08',
       certificateArn: this.config.certificateArn,
       defaultAction: [
         {
-          targetGroupArn: this.getAlbTargetGroupIdAsToken(),
+          targetGroupArn: targetGroup.id,
           type: 'forward',
         },
       ],
     });
-  }
-
-  protected createHttpAlbListener() {
-    // Redirect all HTTP traffic to HTTPS
-    return new elb.AlbListener(this, 'http', {
-      provider: this.provider,
-      loadBalancerArn: this.getAlbIdAsToken(),
+    // Create a listener for HTTP traffic that redirects to HTTPS
+    const httpListener = new elb.AlbListener(this, 'http', {
+      loadBalancerArn: loadBalancer.id,
       port: 80,
       protocol: 'HTTP',
       defaultAction: [
@@ -152,38 +131,19 @@ export class EntrypointComponent extends AwsComponent<EntrypointComponentConfig>
         },
       ],
     });
+
+    return { httpsListener, httpListener };
   }
 
-  protected createRoute53Record() {
+  protected routeTrafficToLoadBalancer(loadBalancer: elb.Alb) {
     // Create DNS record to route to ALB
     return new route53.Route53Record(this, 'record', {
-      provider: this.provider,
       allowOverwrite: true,
-      records: [this.getAlbDnsNameAsToken()],
+      records: [loadBalancer.dnsName],
       ttl: 300,
       type: 'CNAME',
       zoneId: this.config.route53ZoneId,
       name: this.config.subDomain,
     });
-  }
-
-  getAlbIdAsToken(): string {
-    return Token.asString(this.alb.id);
-  }
-
-  getAlbDnsNameAsToken(): string {
-    return Token.asString(this.alb.dnsName);
-  }
-
-  getAlbTargetGroupArnAsToken(): string {
-    return Token.asString(this.albTargetGroup.arn);
-  }
-
-  getAlbTargetGroupIdAsToken(): string {
-    return Token.asString(this.albTargetGroup.id);
-  }
-
-  getSecurityGroupIdAsToken(): string {
-    return Token.asString(this.securityGroup.id);
   }
 }
