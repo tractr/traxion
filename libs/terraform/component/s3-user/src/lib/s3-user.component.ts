@@ -1,15 +1,12 @@
 import { iam } from '@cdktf/provider-aws';
-import { TerraformOutput, Token } from 'cdktf';
+import { TerraformOutput } from 'cdktf';
 
 import {
   S3UserComponentArtifacts,
   S3UserComponentConfig,
-} from './terraform-s3-user.interface';
+} from './s3-user.interface';
 
-import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
 export class S3UserComponent extends AwsComponent<
   S3UserComponentConfig,
