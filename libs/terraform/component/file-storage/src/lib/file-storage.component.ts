@@ -1,34 +1,26 @@
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  FileStorageComponentArtifacts,
+  FileStorageComponentConfig,
+} from './file-storage.interface';
+
+import { AwsComponent } from '@tractr/terraform-component-aws';
 import { S3Component } from '@tractr/terraform-component-s3';
 import {
   S3BucketDetails,
   S3UserComponent,
 } from '@tractr/terraform-component-s3-user';
 
-export interface FileStorageComponentConfig {
-  additionalReadOnlyS3Arns?: string[];
-  s3PublicRead?: boolean;
-  s3AllowUpload?: {
-    origins: string[];
-  };
-}
-
-export class FileStorageComponent extends AwsComponent<FileStorageComponentConfig> {
-  protected readonly s3Component: S3Component;
-
-  protected readonly s3UserComponent: S3UserComponent;
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: FileStorageComponentConfig = {},
-  ) {
-    super(scope, id, config);
-    this.s3Component = this.createS3Component();
-    this.s3UserComponent = this.createS3UserComponent();
+export class FileStorageComponent extends AwsComponent<
+  FileStorageComponentConfig,
+  FileStorageComponentArtifacts
+> {
+  protected createComponents(): void {
+    const s3Component = this.createS3Component();
+    const s3UserComponent = this.createS3UserComponent(s3Component);
+    this.artifacts = {
+      ...s3Component.artifacts,
+      ...s3UserComponent.artifacts,
+    };
   }
 
   protected createS3Component() {
@@ -38,9 +30,9 @@ export class FileStorageComponent extends AwsComponent<FileStorageComponentConfi
     });
   }
 
-  protected createS3UserComponent() {
+  protected createS3UserComponent(s3Component: S3Component) {
     const buckets: S3BucketDetails[] = [
-      { access: 'write', arn: this.s3Component.getBucketArnAsToken() },
+      { access: 'write', arn: s3Component.artifacts.bucket.arn },
     ];
 
     if (this.config.additionalReadOnlyS3Arns) {
@@ -52,13 +44,5 @@ export class FileStorageComponent extends AwsComponent<FileStorageComponentConfi
     return new S3UserComponent(this, 'write', {
       s3Buckets: buckets,
     });
-  }
-
-  getS3BucketDomainName(): string {
-    return this.s3Component.getBucketRegionalDomainNameAsToken();
-  }
-
-  getS3BucketName(): string {
-    return this.s3Component.getBucketNameAsToken();
   }
 }

@@ -1,1 +1,1 @@
-export * from './lib/file-storage.component';
+export * from './lib';
