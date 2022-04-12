@@ -92,8 +92,8 @@ describe('<<Model pascal>>DatabaseService', () => {
         <<endfor>>
         }
         const prismaArgs = { data };
-        const result = <<Model camel>>RestDtoService.formatCreateDto(tmpBody);
-        expect(result).toEqual(prismaArgs);
+        const _result = <<Model camel>>RestDtoService.formatCreateDto(tmpBody);
+        expect(_result).toEqual(prismaArgs);
         <<if Fields internal and not primary and (not entity or nullable)>>
         expect(mocked<<Model pascal>>Service.getDefaultInternals).toHaveBeenCalledTimes(
           1,
@@ -129,8 +129,8 @@ describe('<<Model pascal>>DatabaseService', () => {
       <<endfor>>
       }
       const prismaArgs: Prisma.<<Model pascal>>CountArgs = { where };
-      const result = <<Model camel>>RestDtoService.formatCountDto(queryDto);
-      expect(result).toEqual(prismaArgs)
+      const _result = <<Model camel>>RestDtoService.formatCountDto(queryDto);
+      expect(_result).toEqual(prismaArgs)
     });
   });
 
@@ -155,13 +155,13 @@ describe('<<Model pascal>>DatabaseService', () => {
         },
       <<<}>>>
       };
-      const result = <<Model camel>>RestDtoService.formatFindUniqueDtos(
+      const _result = <<Model camel>>RestDtoService.formatFindUniqueDtos(
         paramsDto,
       <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
         queryDto
       <<<}>>>
       );
-      expect(result).toEqual(prismaArgs)
+      expect(_result).toEqual(prismaArgs)
     });
   });
 
@@ -210,8 +210,8 @@ describe('<<Model pascal>>DatabaseService', () => {
         include,
       <<<}>>>
       };
-      const result = <<Model camel>>RestDtoService.formatFindManyDto(queryDto);
-      expect(result).toEqual(prismaArgs)
+      const _result = <<Model camel>>RestDtoService.formatFindManyDto(queryDto);
+      expect(_result).toEqual(prismaArgs)
     });
   });
 
@@ -238,11 +238,11 @@ describe('<<Model pascal>>DatabaseService', () => {
           <<endfor>>
           }
           const prismaArgs: Prisma.<<Model pascal>>UpdateArgs = { where: paramsDto, data };
-          const result = <<Model camel>>RestDtoService.formatUpdateDtos(
+          const _result = <<Model camel>>RestDtoService.formatUpdateDtos(
             paramsDto,
             tmpBody,
           );
-          expect(result).toEqual(prismaArgs);
+          expect(_result).toEqual(prismaArgs);
         });
     });
   });
@@ -293,11 +293,11 @@ describe('<<Model pascal>>DatabaseService', () => {
           update,
           where: paramsDto
         };
-        const result = <<Model camel>>RestDtoService.formatUpsertDtos(
+        const _result = <<Model camel>>RestDtoService.formatUpsertDtos(
           paramsDto,
           tmpBody,
         );
-        expect(result).toEqual(prismaArgs);
+        expect(_result).toEqual(prismaArgs);
         <<if Fields internal and not primary and (not entity or nullable)>>
         expect(mocked<<Model pascal>>Service.getDefaultInternals).toHaveBeenCalledTimes(
           1,
@@ -311,8 +311,8 @@ describe('<<Model pascal>>DatabaseService', () => {
     it('should properly format delete dto', () => {
       const paramsDto: <<Model pascal>>DeleteParamsDto = mock<<Model pascal>>DeleteParamsDtoFactory();
       const prismaArgs: Prisma.<<Model pascal>>DeleteArgs = { where: paramsDto };
-      const result = <<Model camel>>RestDtoService.formatDeleteDto(paramsDto);
-      expect(result).toEqual(prismaArgs)
+      const _result = <<Model camel>>RestDtoService.formatDeleteDto(paramsDto);
+      expect(_result).toEqual(prismaArgs)
     });
   });
 });
