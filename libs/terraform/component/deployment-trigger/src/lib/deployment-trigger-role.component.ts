@@ -1,37 +1,26 @@
 import { iam } from '@cdktf/provider-aws';
-import { Token } from 'cdktf';
 
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  DeploymentTriggerRoleComponentArtifacts,
+  DeploymentTriggerRoleComponentConfig,
+} from './interfaces';
 
-export interface DeploymentTriggerRoleComponentConfig {
-  codepipelineArn: string;
-}
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
-export class DeploymentTriggerRoleComponent extends AwsComponent<DeploymentTriggerRoleComponentConfig> {
-  protected readonly iamPolicy: iam.IamPolicy;
-
-  protected readonly iamRole: iam.IamRole;
-
-  protected readonly iamRolePolicyAttachment: iam.IamRolePolicyAttachment;
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: DeploymentTriggerRoleComponentConfig,
-  ) {
-    super(scope, id, config);
-
-    this.iamPolicy = this.createIamPolicy();
-    this.iamRole = this.createIamRole();
-    this.iamRolePolicyAttachment = this.createIamRolePolicyAttachment();
+export class DeploymentTriggerRoleComponent extends AwsComponent<
+  DeploymentTriggerRoleComponentConfig,
+  DeploymentTriggerRoleComponentArtifacts
+> {
+  protected createComponents(): void {
+    const role = this.createRole();
+    const policy = this.createPolicy();
+    this.attachPolicyToRole(role, policy);
+    // Populate the artifacts
+    this.artifacts = { role, policy };
   }
 
-  protected createIamPolicy() {
+  protected createPolicy() {
     return new iam.IamPolicy(this, 'policy', {
-      provider: this.provider,
       policy: JSON.stringify({
         Version: '2012-10-17',
         Statement: [
@@ -46,48 +35,30 @@ export class DeploymentTriggerRoleComponent extends AwsComponent<DeploymentTrigg
     });
   }
 
-  protected createIamRole() {
+  protected createRole() {
     // ECS task execution roles
     return new iam.IamRole(this, 'role', {
-      provider: this.provider,
-      assumeRolePolicy: this.getAssumeRolePolicy(),
+      assumeRolePolicy: JSON.stringify({
+        Version: '2012-10-17',
+        Statement: [
+          {
+            Sid: '',
+            Effect: 'Allow',
+            Principal: {
+              Service: ['events.amazonaws.com'],
+            },
+            Action: 'sts:AssumeRole',
+          },
+        ],
+      }),
       name: this.getResourceName('role'),
     });
   }
 
-  protected getAssumeRolePolicy(): string {
-    return JSON.stringify({
-      Version: '2012-10-17',
-      Statement: [
-        {
-          Sid: '',
-          Effect: 'Allow',
-          Principal: {
-            Service: ['events.amazonaws.com'],
-          },
-          Action: 'sts:AssumeRole',
-        },
-      ],
-    });
-  }
-
-  protected createIamRolePolicyAttachment() {
+  protected attachPolicyToRole(role: iam.IamRole, policy: iam.IamPolicy) {
     return new iam.IamRolePolicyAttachment(this, 'attach', {
-      provider: this.provider,
-      role: this.getIamRoleNameAsToken(),
-      policyArn: this.getIamPolicyArnAsToken(),
+      role: role.name,
+      policyArn: policy.arn,
     });
-  }
-
-  getIamRoleArnAsToken(): string {
-    return Token.asString(this.iamRole.arn);
-  }
-
-  protected getIamRoleNameAsToken(): string {
-    return Token.asString(this.iamRole.name);
-  }
-
-  protected getIamPolicyArnAsToken(): string {
-    return Token.asString(this.iamPolicy.arn);
   }
 }
