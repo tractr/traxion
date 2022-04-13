@@ -16,11 +16,7 @@ export abstract class AwsComponent<Config, Artifacts>
 
   private artifactsValue: Artifacts | undefined;
 
-  protected constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: Config,
-  ) {
+  constructor(scope: AwsProviderConstruct, id: string, config: Config) {
     super(scope, id);
     this.config = config;
     this.name = `${scope.name.trim()}-${snake(id)}`;
