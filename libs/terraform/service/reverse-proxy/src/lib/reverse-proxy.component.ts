@@ -1,4 +1,4 @@
-import { ecs, vpc } from '@cdktf/provider-aws';
+import { ecs, servicediscovery, vpc } from '@cdktf/provider-aws';
 
 import {
   ReverseProxyComponentConfig,
@@ -6,7 +6,11 @@ import {
 } from './interfaces';
 import { ReverseProxyContainer } from './reverse-proxy.container';
 
-import { Container, ServiceComponent } from '@tractr/terraform-service-ecs';
+import {
+  Container,
+  ServiceComponent,
+  VolumeComponents,
+} from '@tractr/terraform-service-ecs';
 
 export class ReverseProxyComponent extends ServiceComponent<
   ReverseProxyComponentConfig,
@@ -33,16 +37,27 @@ export class ReverseProxyComponent extends ServiceComponent<
     };
   }
 
-  protected getEcsTaskDefinitionConfig(): ecs.EcsTaskDefinitionConfig {
+  protected getEcsTaskDefinitionConfig(
+    containers: Container[],
+    volumes: VolumeComponents,
+  ): ecs.EcsTaskDefinitionConfig {
     return {
-      ...super.getEcsTaskDefinitionConfig(),
+      ...super.getEcsTaskDefinitionConfig(containers, volumes),
       taskRoleArn: this.config.taskRoleArn,
     };
   }
 
-  protected getEcsServiceConfig(): ecs.EcsServiceConfig {
+  protected getEcsServiceConfig(
+    securityGroup: vpc.SecurityGroup,
+    taskDefinition: ecs.EcsTaskDefinition,
+    discoveryService: servicediscovery.ServiceDiscoveryService,
+  ): ecs.EcsServiceConfig {
     return {
-      ...super.getEcsServiceConfig(),
+      ...super.getEcsServiceConfig(
+        securityGroup,
+        taskDefinition,
+        discoveryService,
+      ),
       loadBalancer: [
         {
           targetGroupArn: this.config.loadBalancerTargetGroupArn,
