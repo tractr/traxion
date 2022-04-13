@@ -1,5 +1,9 @@
+import { ecs, servicediscovery, vpc } from '@cdktf/provider-aws';
+
 import { Container } from '../containers';
 
+import { DeploymentComponent } from '@tractr/terraform-component-deployment';
+import { VolumeComponent } from '@tractr/terraform-component-volume';
 import { DockerApplications } from '@tractr/terraform-group-registry';
 
 // Check cpu/memory pairs: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
@@ -17,12 +21,13 @@ export type MemoryValue =
   | '16384'
   | '30720';
 
-export type VolumesConfig = {
+export type VolumeConfig = {
   preventDestroy: boolean;
   enableBackups: boolean;
   containers: Container[];
 };
-export type VolumesConfigs = Record<string, VolumesConfig>;
+export type VolumeConfigs = Record<string, VolumeConfig>;
+export type VolumeComponents = Record<string, VolumeComponent>;
 
 export interface ServiceComponentInternalConfig {
   vpcId: string;
@@ -51,3 +56,13 @@ export type ServiceComponentPublicConfig =
 
 export type ServiceComponentConfig = ServiceComponentInternalConfig &
   ServiceComponentPublicConfig;
+
+export interface ServiceComponentArtifacts {
+  containers: Container[];
+  volumes: Record<string, VolumeComponent>;
+  deployment?: DeploymentComponent;
+  ecsService: ecs.EcsService;
+  discoveryService: servicediscovery.ServiceDiscoveryService;
+  taskDefinition: ecs.EcsTaskDefinition;
+  securityGroup: vpc.SecurityGroup;
+}

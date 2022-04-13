@@ -37,7 +37,7 @@ export abstract class BackendServiceComponent<
 
   /**
    * Whether to add `self` attribute on security group ingress rules in order to allow this service to call itself.
-   * For exemple, a service with two different containers that need to call each other.
+   * For example, a service with two different containers that need to call each other.
    */
   protected shouldAccessItself(): boolean {
     return false;
