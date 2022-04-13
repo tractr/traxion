@@ -1,5 +1,13 @@
+import { ecs } from '@cdktf/provider-aws';
+
+import { PrivateDnsComponent } from '@tractr/terraform-component-private-dns';
 import { DockerApplications } from '@tractr/terraform-group-registry';
-import { ReverseProxyComponentPublicConfig } from '@tractr/terraform-service-reverse-proxy';
+import { ExecutionRoleComponent } from '@tractr/terraform-service-ecs';
+import {
+  ReverseProxyComponent,
+  ReverseProxyComponentPublicConfig,
+  ReverseProxyTaskRoleComponent,
+} from '@tractr/terraform-service-reverse-proxy';
 
 export interface EcsComponentInternalConfig {
   subnetsIds: string[];
@@ -20,3 +28,11 @@ export interface EcsComponentPublicConfig {
 
 export type EcsComponentConfig = EcsComponentInternalConfig &
   EcsComponentPublicConfig;
+
+export interface EcsComponentArtifacts {
+  ecsCluster: ecs.EcsCluster;
+  executionRole: ExecutionRoleComponent;
+  privateDns: PrivateDnsComponent;
+  reverseProxy: ReverseProxyComponent;
+  reverseProxyTaskRole: ReverseProxyTaskRoleComponent;
+}

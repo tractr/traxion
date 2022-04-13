@@ -1,6 +1,7 @@
 import { vpc } from '@cdktf/provider-aws';
 
 import {
+  ServiceComponentArtifacts,
   ServiceComponentDefaultConfig,
   ServiceComponentInternalConfig,
   ServiceComponentPublicConfig,
@@ -19,9 +20,10 @@ export type BackendServiceComponentConfig =
  * For example, Postgres which is used by the API
  */
 export abstract class BackendServiceComponent<
-  C extends BackendServiceComponentConfig = BackendServiceComponentConfig,
-  D extends ServiceComponentDefaultConfig = ServiceComponentDefaultConfig,
-> extends ServiceComponent<C, D> {
+  Config extends BackendServiceComponentConfig = BackendServiceComponentConfig,
+  DefaultConfig extends ServiceComponentDefaultConfig = ServiceComponentDefaultConfig,
+  Artifacts extends ServiceComponentArtifacts = ServiceComponentArtifacts,
+> extends ServiceComponent<Config, DefaultConfig, Artifacts> {
   protected getSecurityGroupConfig(): vpc.SecurityGroupConfig {
     return {
       ...super.getSecurityGroupConfig(),
