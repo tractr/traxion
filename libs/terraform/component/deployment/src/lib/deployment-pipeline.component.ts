@@ -21,7 +21,6 @@ export class DeploymentPipelineComponent extends AwsComponent<
 
   protected createPipeline() {
     return new codepipeline.Codepipeline(this, 'run', {
-      provider: this.provider,
       roleArn: this.config.roleArn,
       artifactStore: [
         {
