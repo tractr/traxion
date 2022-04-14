@@ -1,9 +1,9 @@
 import { efs, vpc } from '@cdktf/provider-aws';
 
 export interface VolumeComponentConfig {
-  vpcId: string;
-  subnetsIds: string[];
-  clientsSecurityGroupsIds: string[];
+  vpc: vpc.Vpc;
+  subnets: vpc.Subnet[];
+  clientsSecurityGroups: vpc.SecurityGroup[];
   performanceMode?: 'generalPurpose' | 'maxIO';
   transitionToIa?:
     | 'AFTER_7_DAYS'
