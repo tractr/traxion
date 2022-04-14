@@ -20,13 +20,13 @@ export class DeploymentTriggerEventComponent extends AwsComponent<
 
   protected createRule() {
     return new eventbridge.CloudwatchEventRule(this, 'rule', {
-      roleArn: this.config.roleArn,
+      roleArn: this.config.role.arn,
       eventPattern: JSON.stringify({
         source: ['aws.ecr'],
         detail: {
           'action-type': ['PUSH'],
-          'image-tag': [this.config.repositoryTag],
-          'repository-name': [this.config.repositoryName],
+          'image-tag': [this.config.repository.imageTag],
+          'repository-name': [this.config.repository.repositoryName],
           result: ['SUCCESS'],
         },
         'detail-type': ['ECR Image Action'],
@@ -38,8 +38,8 @@ export class DeploymentTriggerEventComponent extends AwsComponent<
   protected createTarget(rule: eventbridge.CloudwatchEventRule) {
     return new eventbridge.CloudwatchEventTarget(this, 'target', {
       rule: rule.name,
-      arn: this.config.codepipelineArn,
-      roleArn: this.config.roleArn,
+      arn: this.config.codepipeline.arn,
+      roleArn: this.config.role.arn,
       targetId: this.getResourceName('target', 64),
     });
   }

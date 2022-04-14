@@ -27,7 +27,7 @@ export class DeploymentTriggerRoleComponent extends AwsComponent<
           {
             Effect: 'Allow',
             Action: ['codepipeline:StartPipelineExecution'],
-            Resource: [this.config.codepipelineArn],
+            Resource: [this.config.codepipeline.arn],
           },
         ],
       }),
