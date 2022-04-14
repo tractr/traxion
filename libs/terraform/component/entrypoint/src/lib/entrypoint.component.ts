@@ -53,19 +53,19 @@ export class EntrypointComponent extends AwsComponent<
           ipv6CidrBlocks: ['::/0'],
         },
       ],
-      vpcId: this.config.vpcId,
+      vpcId: this.config.vpc.id,
       name: this.getResourceName('sg'),
     });
   }
 
   protected createLoadBalancer(securityGroup: vpc.SecurityGroup) {
-    if (this.config.subnetsIds.length < 2) {
+    if (this.config.subnets.length < 2) {
       throw new Error(
         'At least two subnets in two different Availability Zones must be specified',
       );
     }
     return new elb.Alb(this, 'alb', {
-      subnets: this.config.subnetsIds,
+      subnets: this.config.subnets.map((s) => s.id),
       enableCrossZoneLoadBalancing: false, // For Network load balancer only
       loadBalancerType: 'application',
       ipAddressType: 'dualstack',
@@ -92,7 +92,7 @@ export class EntrypointComponent extends AwsComponent<
         unhealthyThreshold: 2,
       },
 
-      vpcId: this.config.vpcId,
+      vpcId: this.config.vpc.id,
       name: this.getResourceName('target'),
     });
   }
@@ -107,7 +107,7 @@ export class EntrypointComponent extends AwsComponent<
       port: 443,
       protocol: 'HTTPS',
       sslPolicy: 'ELBSecurityPolicy-2016-08',
-      certificateArn: this.config.certificateArn,
+      certificateArn: this.config.certificate.arn,
       defaultAction: [
         {
           targetGroupArn: targetGroup.id,
@@ -142,7 +142,7 @@ export class EntrypointComponent extends AwsComponent<
       records: [loadBalancer.dnsName],
       ttl: 300,
       type: 'CNAME',
-      zoneId: this.config.route53ZoneId,
+      zoneId: this.config.route53Zone.zoneId,
       name: this.config.subDomain,
     });
   }
