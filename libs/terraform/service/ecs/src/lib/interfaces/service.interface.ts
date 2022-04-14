@@ -1,4 +1,12 @@
-import { ecs, servicediscovery, vpc } from '@cdktf/provider-aws';
+import {
+  cloudwatch,
+  ecs,
+  iam,
+  s3,
+  secretsmanager,
+  servicediscovery,
+  vpc,
+} from '@cdktf/provider-aws';
 
 import { Container } from '../containers';
 
@@ -30,19 +38,16 @@ export type VolumeConfigs = Record<string, VolumeConfig>;
 export type VolumeComponents = Record<string, VolumeComponent>;
 
 export interface ServiceComponentInternalConfig {
-  vpcId: string;
-  subnetsIds: string[];
-  logsGroup: string;
-  clusterId: string;
-  clusterName: string;
+  vpc: vpc.Vpc;
+  subnets: vpc.Subnet[];
+  logsGroup: cloudwatch.CloudwatchLogGroup;
+  cluster: ecs.EcsCluster;
   dockerApplications: DockerApplications;
   applicationBaseUrl: string;
-  executionRoleArn: string;
-  secretsmanagerSecretArn: string;
-  fileStorageS3Endpoint: string;
-  fileStorageS3BucketName: string;
-  privateDnsNamespaceId: string;
-  privateDnsNamespaceName: string;
+  executionRole: iam.IamRole;
+  secret: secretsmanager.SecretsmanagerSecret;
+  fileStorageS3Bucket: s3.S3Bucket;
+  privateDnsNamespace: servicediscovery.ServiceDiscoveryPrivateDnsNamespace;
 }
 
 export interface ServiceComponentDefaultConfig {
