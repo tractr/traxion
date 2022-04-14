@@ -72,7 +72,7 @@ export class S3Component extends AwsComponent<
    */
   protected addPublicPolicy(bucket: s3.S3Bucket) {
     new s3.S3BucketPolicy(this, 'policy', {
-      bucket: bucket.bucket,
+      bucket: bucket.id,
       policy: JSON.stringify({
         Version: '2012-10-17',
         Statement: [

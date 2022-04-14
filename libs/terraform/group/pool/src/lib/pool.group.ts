@@ -76,7 +76,7 @@ export class PoolGroup extends AwsComponent<
         (subnet) => subnet.id,
       ),
       certificateArn: this.config.zoneGroup.artifacts.acmCertificate.arn,
-      route53ZoneId: this.config.zoneGroup.artifacts.route53Zone.id,
+      route53ZoneId: this.config.zoneGroup.artifacts.route53Zone.zoneId,
       subDomain: this.config.subDomain,
       albDependencies: [this.config.networkGroup.artifacts.internetGateway], // Hardcode some dependencies to avoid startup issues
     });
