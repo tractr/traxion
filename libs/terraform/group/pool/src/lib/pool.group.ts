@@ -71,22 +71,20 @@ export class PoolGroup extends AwsComponent<
 
   protected createEntrypoint() {
     return new EntrypointComponent(this, 'entry', {
-      vpcId: this.config.networkGroup.artifacts.vpc.id,
-      subnetsIds: this.config.networkGroup.artifacts.publicSubnets.map(
-        (subnet) => subnet.id,
-      ),
-      certificateArn: this.config.zoneGroup.artifacts.acmCertificate.arn,
-      route53ZoneId: this.config.zoneGroup.artifacts.route53Zone.zoneId,
+      vpc: this.config.networkGroup.artifacts.vpc,
+      subnets: this.config.networkGroup.artifacts.publicSubnets,
+      certificate: this.config.zoneGroup.artifacts.acmCertificate,
+      route53Zone: this.config.zoneGroup.artifacts.route53Zone,
       subDomain: this.config.subDomain,
       albDependencies: [this.config.networkGroup.artifacts.internetGateway], // Hardcode some dependencies to avoid startup issues
     });
   }
 
   protected createFileStorage() {
-    const { additionalReadOnlyS3Arns, s3PublicRead, s3AllowUpload } =
+    const { additionalReadOnlyS3Buckets, s3PublicRead, s3AllowUpload } =
       this.config.fileStorageConfig;
     return new FileStorageComponent(this, 'files', {
-      additionalReadOnlyS3Arns,
+      additionalReadOnlyS3Buckets,
       s3PublicRead,
       s3AllowUpload: s3AllowUpload
         ? { origins: [this.getApplicationBaseUrl()] }
@@ -101,17 +99,13 @@ export class PoolGroup extends AwsComponent<
     logs: LogsComponent,
   ) {
     return new EcsComponent(this, 'ecs', {
-      vpcId: this.config.networkGroup.artifacts.vpc.id,
-      subnetsIds: this.config.networkGroup.artifacts.privateSubnets.map(
-        (subnet) => subnet.id,
-      ),
-      loadBalancerSecurityGroupId: entrypoint.artifacts.securityGroup.id,
-      loadBalancerTargetGroupArn: entrypoint.artifacts.targetGroup.arn,
-      secretsmanagerSecretArn: secrets.artifacts.secret.arn,
-      fileStorageS3Endpoint:
-        fileStorage.artifacts.bucket.bucketRegionalDomainName,
-      fileStorageS3BucketName: fileStorage.artifacts.bucket.bucket,
-      logsGroup: logs.artifacts.cloudwatchLogGroup.name,
+      vpc: this.config.networkGroup.artifacts.vpc,
+      subnets: this.config.networkGroup.artifacts.privateSubnets,
+      loadBalancerSecurityGroup: entrypoint.artifacts.securityGroup,
+      loadBalancerTargetGroup: entrypoint.artifacts.targetGroup,
+      secret: secrets.artifacts.secret,
+      fileStorageS3Bucket: fileStorage.artifacts.bucket,
+      logsGroup: logs.artifacts.cloudwatchLogGroup,
       dockerApplications: this.config.registryGroup.artifacts.applicationsMap,
       applicationBaseUrl: this.getApplicationBaseUrl(),
       reverseProxyConfig: this.config.reverseProxyConfig,

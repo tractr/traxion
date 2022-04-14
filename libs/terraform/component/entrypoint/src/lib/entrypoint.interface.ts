@@ -5,7 +5,7 @@ export interface EntrypointComponentConfig {
   vpc: vpc.Vpc;
   certificate: acm.AcmCertificate;
   subnets: vpc.Subnet[];
-  route53Zone: route53.Route53Zone;
+  route53Zone: route53.DataAwsRoute53Zone;
   subDomain: string;
   albDependencies?: ITerraformDependable[];
 }

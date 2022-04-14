@@ -1,3 +1,4 @@
+import { s3 } from '@cdktf/provider-aws';
 import { DeepPartial } from 'ts-essentials';
 
 import { EcsComponent } from '../ecs.component';
@@ -11,7 +12,6 @@ import type { RegistryGroup } from '@tractr/terraform-group-registry';
 import type { ZoneGroup } from '@tractr/terraform-group-zone';
 import { ReverseProxyComponentPublicConfig } from '@tractr/terraform-service-reverse-proxy';
 
-
 export interface PoolGroupInternalConfig {
   registryGroup: RegistryGroup;
   networkGroup: NetworkGroup;
@@ -22,7 +22,7 @@ export interface PoolGroupDefaultConfig {
   subDomain: string;
   reverseProxyConfig: ReverseProxyComponentPublicConfig;
   fileStorageConfig: {
-    additionalReadOnlyS3Arns?: string[];
+    additionalReadOnlyS3Buckets?: s3.S3Bucket[];
     s3PublicRead?: boolean;
     s3AllowUpload?: boolean;
   };

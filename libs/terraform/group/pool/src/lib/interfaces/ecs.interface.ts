@@ -1,4 +1,11 @@
-import { ecs } from '@cdktf/provider-aws';
+import {
+  cloudwatch,
+  ecs,
+  elb,
+  s3,
+  secretsmanager,
+  vpc,
+} from '@cdktf/provider-aws';
 
 import { PrivateDnsComponent } from '@tractr/terraform-component-private-dns';
 import { DockerApplications } from '@tractr/terraform-group-registry';
@@ -10,14 +17,13 @@ import {
 } from '@tractr/terraform-service-reverse-proxy';
 
 export interface EcsComponentInternalConfig {
-  subnetsIds: string[];
-  loadBalancerSecurityGroupId: string;
-  loadBalancerTargetGroupArn: string;
-  secretsmanagerSecretArn: string;
-  fileStorageS3Endpoint: string;
-  fileStorageS3BucketName: string;
-  logsGroup: string;
-  vpcId: string;
+  subnets: vpc.Subnet[];
+  loadBalancerSecurityGroup: vpc.SecurityGroup;
+  loadBalancerTargetGroup: elb.AlbTargetGroup;
+  secret: secretsmanager.SecretsmanagerSecret;
+  fileStorageS3Bucket: s3.S3Bucket;
+  logsGroup: cloudwatch.CloudwatchLogGroup;
+  vpc: vpc.Vpc;
   dockerApplications: DockerApplications;
   applicationBaseUrl: string;
 }
