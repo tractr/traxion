@@ -1,9 +1,9 @@
-import { iam } from '@cdktf/provider-aws';
+import { iam, s3 } from '@cdktf/provider-aws';
 
 export type S3BucketAccess = 'read' | 'write';
 export interface S3BucketDetails {
   access: S3BucketAccess;
-  arn: string;
+  instance: s3.S3Bucket;
 }
 export interface S3UserComponentConfig {
   s3Buckets: S3BucketDetails[];
