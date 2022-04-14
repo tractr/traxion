@@ -3,7 +3,7 @@ import { iam, s3 } from '@cdktf/provider-aws';
 export type S3BucketAccess = 'read' | 'write';
 export interface S3BucketDetails {
   access: S3BucketAccess;
-  instance: s3.S3Bucket;
+  bucket: s3.S3Bucket;
 }
 export interface S3UserComponentConfig {
   s3Buckets: S3BucketDetails[];

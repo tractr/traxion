@@ -135,8 +135,8 @@ export class S3UserComponent extends AwsComponent<
    */
   protected getWriteArns(): string[] {
     return this.config.s3Buckets
-      .filter((bucket) => bucket.access === 'write')
-      .map((bucket) => bucket.instance.arn);
+      .filter((details) => details.access === 'write')
+      .map((details) => details.bucket.arn);
   }
 
   /**
@@ -144,7 +144,7 @@ export class S3UserComponent extends AwsComponent<
    */
   protected getReadArns(): string[] {
     return this.config.s3Buckets
-      .filter((bucket) => bucket.access === 'read')
-      .map((bucket) => bucket.instance.arn);
+      .filter((details) => details.access === 'read')
+      .map((details) => details.bucket.arn);
   }
 }
