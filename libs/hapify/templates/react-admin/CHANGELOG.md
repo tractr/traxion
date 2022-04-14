@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.43.9](https://github.com/tractr/stack/compare/v1.43.8...v1.43.9) (2022-04-14)
+
+
+### Bug Fixes
+
+* add role check to react-admin ([#415](https://github.com/tractr/stack/issues/415)) ([b349e5a](https://github.com/tractr/stack/commit/b349e5a84ae6356a4c76fdbfd240709617e7fa39))
+
+
+
 ## [1.43.8](https://github.com/tractr/stack/compare/v1.43.7...v1.43.8) (2022-04-12)
 
 
