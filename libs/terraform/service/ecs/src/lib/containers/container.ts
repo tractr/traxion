@@ -34,7 +34,7 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
       logConfiguration: {
         logDriver: 'awslogs',
         options: {
-          'awslogs-group': this.service.getLogsGroup(),
+          'awslogs-group': this.service.getLogsGroup().name,
           'awslogs-region': this.service.getRegion(),
           'awslogs-stream-prefix': this.config.name,
         },

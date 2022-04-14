@@ -1,7 +1,7 @@
-import { iam } from '@cdktf/provider-aws';
+import { iam, secretsmanager } from '@cdktf/provider-aws';
 
 export interface ExecutionRoleComponentConfig {
-  secretsmanagerSecretArn: string;
+  secret: secretsmanager.SecretsmanagerSecret;
 }
 export interface ExecutionRoleComponentArtifacts {
   role: iam.IamRole;

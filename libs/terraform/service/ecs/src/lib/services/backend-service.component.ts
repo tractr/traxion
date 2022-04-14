@@ -23,7 +23,7 @@ export abstract class BackendServiceComponent<
         protocol: 'tcp',
         fromPort: port,
         toPort: port,
-        securityGroups: this.config.clientsSecurityGroupsIds,
+        securityGroups: this.config.clientsSecurityGroups.map((sg) => sg.id),
         selfAttribute: this.shouldAccessItself(),
       })),
     };

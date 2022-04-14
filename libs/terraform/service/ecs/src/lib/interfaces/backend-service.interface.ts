@@ -1,3 +1,5 @@
+import { vpc } from '@cdktf/provider-aws';
+
 import {
   ServiceComponentInternalConfig,
   ServiceComponentPublicConfig,
@@ -5,7 +7,7 @@ import {
 
 export interface BackendServiceComponentInternalConfig
   extends ServiceComponentInternalConfig {
-  clientsSecurityGroupsIds: string[];
+  clientsSecurityGroups: vpc.SecurityGroup[];
 }
 
 export type BackendServiceComponentConfig =
