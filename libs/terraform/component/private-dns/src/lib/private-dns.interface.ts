@@ -1,7 +1,7 @@
-import { servicediscovery } from '@cdktf/provider-aws';
+import { servicediscovery, vpc } from '@cdktf/provider-aws';
 
 export interface PrivateDnsComponentConfig {
-  vpcId: string;
+  vpc: vpc.Vpc;
 }
 export interface PrivateDnsComponentArtifacts {
   dnsNamespace: servicediscovery.ServiceDiscoveryPrivateDnsNamespace;

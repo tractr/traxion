@@ -18,7 +18,7 @@ export class PrivateDnsComponent extends AwsComponent<
         'namespace',
         {
           name: this.getResourceNameAsDomainName('local'),
-          vpc: this.config.vpcId,
+          vpc: this.config.vpc.id,
         },
       );
 
