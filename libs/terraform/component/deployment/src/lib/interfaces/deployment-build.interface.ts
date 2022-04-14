@@ -1,7 +1,7 @@
-import { codebuild } from '@cdktf/provider-aws';
+import { codebuild, iam } from '@cdktf/provider-aws';
 
 export interface DeploymentBuildComponentConfig {
-  roleArn: string;
+  role: iam.IamRole;
   imageDefinitions: string;
 }
 export interface DeploymentBuildComponentArtifacts {

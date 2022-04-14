@@ -1,4 +1,4 @@
-import { codepipeline } from '@cdktf/provider-aws';
+import { codebuild, codepipeline, ecs, iam, s3 } from '@cdktf/provider-aws';
 
 export interface DeploymentTrigger {
   repositoryName: string;
@@ -6,12 +6,12 @@ export interface DeploymentTrigger {
 }
 
 export interface DeploymentPipelineComponentConfig {
-  storeS3Name: string;
-  roleArn: string;
-  buildProjectName: string;
+  storeS3Bucket: s3.S3Bucket;
+  role: iam.IamRole;
+  buildProject: codebuild.CodebuildProject;
   triggers: DeploymentTrigger[];
-  clusterName: string;
-  serviceName: string;
+  cluster: ecs.EcsCluster;
+  service: ecs.EcsService;
 }
 export interface DeploymentPipelineComponentArtifacts {
   pipeline: codepipeline.Codepipeline;

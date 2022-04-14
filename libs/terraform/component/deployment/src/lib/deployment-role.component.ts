@@ -62,8 +62,8 @@ export class DeploymentRoleComponent extends AwsComponent<
                 's3:PutObject',
               ],
               Resource: [
-                `${this.config.storeS3Arn}`,
-                `${this.config.storeS3Arn}/*`,
+                `${this.config.storeS3Bucket.arn}`,
+                `${this.config.storeS3Bucket.arn}/*`,
               ],
             },
 

@@ -20,7 +20,7 @@ export class DeploymentBuildComponent extends AwsComponent<
   protected createCodebuildProject() {
     return new codebuild.CodebuildProject(this, 'zip', {
       buildTimeout: 5,
-      serviceRole: this.config.roleArn,
+      serviceRole: this.config.role.arn,
       source: {
         type: 'NO_SOURCE',
         buildspec: this.getBuildSpecs(),
