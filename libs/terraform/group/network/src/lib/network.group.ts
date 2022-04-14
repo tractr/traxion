@@ -15,6 +15,7 @@ import {
 import {
   AwsComponent,
   AwsProviderConstruct,
+  mergeConfigurations,
 } from '@tractr/terraform-component-aws';
 
 export class NetworkGroup extends AwsComponent<
@@ -26,7 +27,7 @@ export class NetworkGroup extends AwsComponent<
     id: string,
     config: NetworkGroupConfig,
   ) {
-    super(scope, id, { ...NETWORK_GROUP_DEFAULT_CONFIG, ...config });
+    super(scope, id, mergeConfigurations(NETWORK_GROUP_DEFAULT_CONFIG, config));
   }
 
   protected createComponents(): void {

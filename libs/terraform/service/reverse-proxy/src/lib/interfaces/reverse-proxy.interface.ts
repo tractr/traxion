@@ -7,12 +7,13 @@ import {
   ServiceComponentInternalConfig,
 } from '@tractr/terraform-service-ecs';
 
-export interface ReverseProxyContainerPublicConfig
-  extends HttpContainerPublicConfig {
+export type ReverseProxyContainerPublicConfig = HttpContainerPublicConfig;
+
+export interface ReverseProxyContainerConfig
+  extends ContainerInternalConfig,
+    ReverseProxyContainerPublicConfig {
   clusterName: string;
 }
-export type ReverseProxyContainerConfig = ContainerInternalConfig &
-  ReverseProxyContainerPublicConfig;
 
 export interface ReverseProxyComponentInternalConfig
   extends ServiceComponentInternalConfig {

@@ -1,7 +1,6 @@
 import { ecs, servicediscovery, vpc } from '@cdktf/provider-aws';
 import { kebab } from 'case';
 import { Token } from 'cdktf';
-import * as deepmerge from 'deepmerge';
 
 import { Container } from '../containers';
 import {
@@ -16,6 +15,7 @@ import {
 import {
   AwsComponent,
   AwsProviderConstruct,
+  mergeConfigurations,
 } from '@tractr/terraform-component-aws';
 import { DeploymentComponent } from '@tractr/terraform-component-deployment';
 import { VolumeComponent } from '@tractr/terraform-component-volume';
@@ -26,21 +26,16 @@ export abstract class ServiceComponent<
   DefaultConfig extends ServiceComponentDefaultConfig = ServiceComponentDefaultConfig,
   Artifacts extends ServiceComponentArtifacts = ServiceComponentArtifacts,
 > extends AwsComponent<Config & DefaultConfig, Artifacts> {
-  protected readonly config: Config & DefaultConfig;
-
-  protected readonly serviceName: string;
-
   /**
-   * Override default config definition
+   * Force the constructor to be redefined in subclasses and receive the default config
    */
-  constructor(scope: AwsProviderConstruct, id: string, config: Config) {
-    // Force partial config
-    super(scope, id, config as Config & DefaultConfig);
-    // Define service name
-    this.serviceName = kebab(id);
-    // Re-assign full config
-    this.config = deepmerge(this.getDefaultConfig(), config) as Config &
-      DefaultConfig;
+  protected constructor(
+    scope: AwsProviderConstruct,
+    id: string,
+    config: Config,
+    defaultConfig: DefaultConfig,
+  ) {
+    super(scope, id, mergeConfigurations(defaultConfig, config));
   }
 
   protected abstract getContainers(): Container[];
@@ -70,12 +65,11 @@ export abstract class ServiceComponent<
     } as Artifacts; // Force type. Should be overridden by subclasses
   }
 
-  protected getDefaultConfig(): ServiceComponentDefaultConfig {
-    return {
-      desiredCount: 1,
-      cpu: '256',
-      memory: '512',
-    };
+  /**
+   * Create a service name from the component id
+   */
+  protected getServiceName(): string {
+    return kebab(this.id);
   }
 
   protected createSecurityGroup() {
@@ -153,7 +147,7 @@ export abstract class ServiceComponent<
 
   protected createDiscoveryService() {
     return new servicediscovery.ServiceDiscoveryService(this, 'discovery', {
-      name: this.serviceName,
+      name: this.getServiceName(),
       dnsConfig: {
         namespaceId: this.config.privateDnsNamespaceId,
         routingPolicy: 'MULTIVALUE',

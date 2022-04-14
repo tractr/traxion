@@ -10,6 +10,7 @@ import {
   AwsComponent,
   AwsComponentConstructor,
   AwsProviderConstruct,
+  mergeConfigurations,
 } from '@tractr/terraform-component-aws';
 import { EntrypointComponent } from '@tractr/terraform-component-entrypoint';
 import { FileStorageComponent } from '@tractr/terraform-component-file-storage';
@@ -40,7 +41,7 @@ export class PoolGroup extends AwsComponent<
     id: string,
     config: PoolGroupConfig,
   ) {
-    super(scope, id, { ...POOL_GROUP_DEFAULT_CONFIG, ...config });
+    super(scope, id, mergeConfigurations(POOL_GROUP_DEFAULT_CONFIG, config));
   }
 
   protected createComponents(): void {

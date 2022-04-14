@@ -10,6 +10,8 @@ export abstract class AwsComponent<Config, Artifacts>
 {
   readonly provider: AwsProvider;
 
+  readonly id: string;
+
   readonly name: string;
 
   protected readonly config: Config;
@@ -18,6 +20,7 @@ export abstract class AwsComponent<Config, Artifacts>
 
   constructor(scope: AwsProviderConstruct, id: string, config: Config) {
     super(scope, id);
+    this.id = id;
     this.config = config;
     this.name = `${scope.name.trim()}-${snake(id)}`;
     this.provider = scope.provider;
