@@ -21,7 +21,6 @@ export interface EcsComponentInternalConfig {
   loadBalancerSecurityGroup: vpc.SecurityGroup;
   loadBalancerTargetGroup: elb.AlbTargetGroup;
   secret: secretsmanager.SecretsmanagerSecret;
-  fileStorageS3Bucket: s3.S3Bucket;
   logsGroup: cloudwatch.CloudwatchLogGroup;
   vpc: vpc.Vpc;
   dockerApplications: DockerApplications;

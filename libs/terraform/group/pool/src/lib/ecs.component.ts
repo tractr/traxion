@@ -87,7 +87,6 @@ export class EcsComponent extends AwsComponent<
       applicationBaseUrl: this.config.applicationBaseUrl,
       executionRole: executionRole.artifacts.role,
       secret: this.config.secret,
-      fileStorageS3Bucket: this.config.fileStorageS3Bucket,
       privateDnsNamespace: privateDns.artifacts.dnsNamespace,
       loadBalancerSecurityGroup: this.config.loadBalancerSecurityGroup,
       loadBalancerTargetGroup: this.config.loadBalancerTargetGroup,
@@ -130,7 +129,6 @@ export class EcsComponent extends AwsComponent<
       applicationBaseUrl: this.config.applicationBaseUrl,
       executionRole: this.artifacts.executionRole.artifacts.role,
       secret: this.config.secret,
-      fileStorageS3Bucket: this.config.fileStorageS3Bucket,
       privateDnsNamespace: this.artifacts.privateDns.artifacts.dnsNamespace,
       ...publicConfig,
     } as never as Config;

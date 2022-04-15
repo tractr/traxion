@@ -46,7 +46,6 @@ export interface ServiceComponentInternalConfig {
   applicationBaseUrl: string;
   executionRole: iam.IamRole;
   secret: secretsmanager.SecretsmanagerSecret;
-  fileStorageS3Bucket: s3.S3Bucket;
   privateDnsNamespace: servicediscovery.ServiceDiscoveryPrivateDnsNamespace;
 }
 

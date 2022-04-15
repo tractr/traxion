@@ -104,7 +104,6 @@ export class PoolGroup extends AwsComponent<
       loadBalancerSecurityGroup: entrypoint.artifacts.securityGroup,
       loadBalancerTargetGroup: entrypoint.artifacts.targetGroup,
       secret: secrets.artifacts.secret,
-      fileStorageS3Bucket: fileStorage.artifacts.bucket,
       logsGroup: logs.artifacts.cloudwatchLogGroup,
       dockerApplications: this.config.registryGroup.artifacts.applicationsMap,
       applicationBaseUrl: this.getApplicationBaseUrl(),
