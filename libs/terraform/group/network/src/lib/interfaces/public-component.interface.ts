@@ -1,7 +1,7 @@
 import { vpc } from '@cdktf/provider-aws';
 
 export interface PublicComponentConfig {
-  vpcId: string;
+  vpc: vpc.Vpc;
   cidrBlock: string;
   ipv6CidrBlock: string;
   availabilityZone: string;

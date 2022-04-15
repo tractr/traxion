@@ -43,7 +43,7 @@ export class NatGatewayComponent extends AwsComponent<
    */
   protected createNatGateway(eip: ec2.Eip) {
     return new vpc.NatGateway(this, 'gw', {
-      subnetId: this.config.publicSubnetId,
+      subnetId: this.config.publicSubnet.id,
       allocationId: eip.id,
       tags: this.getResourceNameAsTag('gw'),
     });
@@ -57,7 +57,7 @@ export class NatGatewayComponent extends AwsComponent<
       destinationCidrBlock: '0.0.0.0/0',
       destinationIpv6CidrBlock: '::/0',
       natGatewayId: natGateway.id,
-      routeTableId: this.config.routeTableId,
+      routeTableId: this.config.routeTable.id,
     });
   }
 }

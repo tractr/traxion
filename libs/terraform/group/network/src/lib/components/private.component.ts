@@ -20,17 +20,14 @@ export class PrivateComponent extends AwsComponent<
   PrivateComponentArtifacts
 > {
   protected validateConfig() {
-    if (
-      this.config.internetAccessMode === 'nat' &&
-      !this.config.publicSubnetId
-    ) {
+    if (this.config.internetAccessMode === 'nat' && !this.config.publicSubnet) {
       throw new Error(
         'publicSubnetId is required to create NatGatewayComponent',
       );
     }
     if (
       this.config.internetAccessMode === 'egress' &&
-      !this.config.egressOnlyInternetGatewayId
+      !this.config.egressOnlyInternetGateway
     ) {
       throw new Error(
         'egressOnlyInternetGatewayId is required to create EgressRoutesComponent',
@@ -38,7 +35,7 @@ export class PrivateComponent extends AwsComponent<
     }
     if (
       this.config.internetAccessMode === 'igw' &&
-      !this.config.internetGatewayId
+      !this.config.internetGateway
     ) {
       throw new Error(
         'internetGatewayId is required to create InternetRoutesComponent',
@@ -65,7 +62,7 @@ export class PrivateComponent extends AwsComponent<
   protected createSubnet() {
     return new vpc.Subnet(this, 'subnet', {
       availabilityZone: this.config.availabilityZone,
-      vpcId: this.config.vpcId,
+      vpcId: this.config.vpc.id,
       cidrBlock: this.config.cidrBlock,
       ipv6CidrBlock: this.config.ipv6CidrBlock,
       mapPublicIpOnLaunch: false,
@@ -80,7 +77,7 @@ export class PrivateComponent extends AwsComponent<
    */
   protected createRouteTable(subnet: vpc.Subnet) {
     const routeTable = new vpc.RouteTable(this, 'rt', {
-      vpcId: this.config.vpcId,
+      vpcId: this.config.vpc.id,
       tags: this.getResourceNameAsTag('rt'),
     });
     // Explicitly associate the newly created route tables to the private subnets
@@ -95,23 +92,23 @@ export class PrivateComponent extends AwsComponent<
 
   protected createNatGatewayComponent(routeTable: vpc.RouteTable) {
     return new NatGatewayComponent(this, 'nat', {
-      publicSubnetId: this.config.publicSubnetId as string, // Already validated
-      routeTableId: routeTable.id,
+      publicSubnet: this.config.publicSubnet as vpc.Subnet, // Already validated
+      routeTable,
     });
   }
 
   protected createEgressRoutesComponent(routeTable: vpc.RouteTable) {
     return new EgressRoutesComponent(this, 'egress', {
-      egressOnlyInternetGatewayId: this.config
-        .egressOnlyInternetGatewayId as string, // Already validated
-      routeTableId: routeTable.id,
+      egressOnlyInternetGateway: this.config
+        .egressOnlyInternetGateway as vpc.EgressOnlyInternetGateway, // Already validated
+      routeTable,
     });
   }
 
   protected createInternetRoutesComponent(routeTable: vpc.RouteTable) {
     return new InternetRoutesComponent(this, 'internet', {
-      internetGatewayId: this.config.internetGatewayId as string, // Already validated
-      routeTableId: routeTable.id,
+      internetGateway: this.config.internetGateway as vpc.InternetGateway, // Already validated
+      routeTable,
     });
   }
 }

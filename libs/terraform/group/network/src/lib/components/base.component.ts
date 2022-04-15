@@ -55,8 +55,8 @@ export class BaseComponent extends AwsComponent<
     });
     /* eslint-disable-next-line no-new */
     new InternetRoutesComponent(this, 'internet', {
-      internetGatewayId: internetGateway.id,
-      routeTableId: vpc.mainRouteTableId,
+      internetGateway,
+      routeTable: vpc.mainRouteTableId,
     });
     return internetGateway;
   }

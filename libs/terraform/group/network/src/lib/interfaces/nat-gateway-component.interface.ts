@@ -1,8 +1,8 @@
 import { ec2, vpc } from '@cdktf/provider-aws';
 
 export interface NatGatewayComponentConfig {
-  routeTableId: string;
-  publicSubnetId: string;
+  routeTable: vpc.RouteTable;
+  publicSubnet: vpc.Subnet;
 }
 export interface NatGatewayComponentArtifacts {
   natGateway: vpc.NatGateway;

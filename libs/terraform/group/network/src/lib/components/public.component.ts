@@ -21,7 +21,7 @@ export class PublicComponent extends AwsComponent<
   protected createSubnet() {
     return new vpc.Subnet(this, 'subnet', {
       availabilityZone: this.config.availabilityZone,
-      vpcId: this.config.vpcId,
+      vpcId: this.config.vpc.id,
       cidrBlock: this.config.cidrBlock,
       ipv6CidrBlock: this.config.ipv6CidrBlock,
       mapPublicIpOnLaunch: true,

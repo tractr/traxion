@@ -1,5 +1,7 @@
+import { vpc } from '@cdktf/provider-aws';
+
 export interface EgressGatewayComponentConfig {
-  routeTableId: string;
-  egressOnlyInternetGatewayId: string;
+  routeTable: vpc.RouteTable;
+  egressOnlyInternetGateway: vpc.EgressOnlyInternetGateway;
 }
 export type EgressGatewayComponentArtifacts = Record<string, never>;

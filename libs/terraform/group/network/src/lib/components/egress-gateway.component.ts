@@ -29,8 +29,8 @@ export class EgressGatewayComponent extends AwsComponent<
   protected createRouteToEgressOnlyInternetGateway() {
     return new vpc.Route(this, 'rt', {
       destinationIpv6CidrBlock: '::/0',
-      egressOnlyGatewayId: this.config.egressOnlyInternetGatewayId,
-      routeTableId: this.config.routeTableId,
+      egressOnlyGatewayId: this.config.egressOnlyInternetGateway.id,
+      routeTableId: this.config.routeTable.id,
     });
   }
 }
