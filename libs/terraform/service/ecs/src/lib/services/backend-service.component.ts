@@ -1,20 +1,12 @@
 import { vpc } from '@cdktf/provider-aws';
 
 import {
+  BackendServiceComponentConfig,
   ServiceComponentArtifacts,
   ServiceComponentDefaultConfig,
-  ServiceComponentInternalConfig,
-  ServiceComponentPublicConfig,
 } from '../interfaces';
 import { ServiceComponent } from './service.component';
 
-export interface BackendServiceComponentInternalConfig
-  extends ServiceComponentInternalConfig {
-  clientsSecurityGroupsIds: string[];
-}
-
-export type BackendServiceComponentConfig =
-  BackendServiceComponentInternalConfig & ServiceComponentPublicConfig;
 /**
  * This service is meant to be used by another one, as its backend
  * For example, Postgres which is used by the API
@@ -31,7 +23,7 @@ export abstract class BackendServiceComponent<
         protocol: 'tcp',
         fromPort: port,
         toPort: port,
-        securityGroups: this.config.clientsSecurityGroupsIds,
+        securityGroups: this.config.clientsSecurityGroups.map((sg) => sg.id),
         selfAttribute: this.shouldAccessItself(),
       })),
     };

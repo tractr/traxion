@@ -36,13 +36,13 @@ export class DeploymentComponent extends AwsComponent<
 
   protected createRoleComponent(store: DeploymentStoreComponent) {
     return new DeploymentRoleComponent(this, 'code', {
-      storeS3Arn: store.artifacts.bucket.arn,
+      storeS3Bucket: store.artifacts.bucket,
     });
   }
 
   protected createBuildComponent(role: DeploymentRoleComponent) {
     return new DeploymentBuildComponent(this, 'build', {
-      roleArn: role.artifacts.role.arn,
+      role: role.artifacts.role,
       imageDefinitions: this.config.imageDefinitions,
     });
   }
@@ -53,18 +53,18 @@ export class DeploymentComponent extends AwsComponent<
     build: DeploymentBuildComponent,
   ) {
     return new DeploymentPipelineComponent(this, 'pipe', {
-      storeS3Name: store.artifacts.bucket.bucket,
-      roleArn: role.artifacts.role.arn,
-      buildProjectName: build.artifacts.project.name,
+      storeS3Bucket: store.artifacts.bucket,
+      role: role.artifacts.role,
+      buildProject: build.artifacts.project,
       triggers: this.config.triggers,
-      clusterName: this.config.clusterName,
-      serviceName: this.config.serviceName,
+      cluster: this.config.cluster,
+      service: this.config.service,
     });
   }
 
   protected createTriggerComponent(pipeline: DeploymentPipelineComponent) {
     return new DeploymentTriggerComponent(this, 'trigger', {
-      codepipelineArn: pipeline.artifacts.pipeline.arn,
+      codepipeline: pipeline.artifacts.pipeline,
       repositories: this.config.triggers,
     });
   }

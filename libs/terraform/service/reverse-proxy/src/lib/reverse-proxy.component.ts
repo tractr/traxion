@@ -37,14 +37,14 @@ export class ReverseProxyComponent extends ServiceComponent<
           protocol: 'tcp',
           fromPort: 80,
           toPort: 80,
-          securityGroups: [this.config.loadBalancerSecurityGroupId],
+          securityGroups: [this.config.loadBalancerSecurityGroup.id],
         },
         {
           protocol: 'tcp',
           fromPort: 8080,
           toPort: 8080,
           selfAttribute: true,
-          securityGroups: [this.config.loadBalancerSecurityGroupId],
+          securityGroups: [this.config.loadBalancerSecurityGroup.id],
         },
       ],
     };
@@ -56,7 +56,7 @@ export class ReverseProxyComponent extends ServiceComponent<
   ): ecs.EcsTaskDefinitionConfig {
     return {
       ...super.getEcsTaskDefinitionConfig(containers, volumes),
-      taskRoleArn: this.config.taskRoleArn,
+      taskRoleArn: this.config.taskRole.arn,
     };
   }
 
@@ -73,7 +73,7 @@ export class ReverseProxyComponent extends ServiceComponent<
       ),
       loadBalancer: [
         {
-          targetGroupArn: this.config.loadBalancerTargetGroupArn,
+          targetGroupArn: this.config.loadBalancerTargetGroup.arn,
           containerName: 'reverse-proxy',
           containerPort: 80,
         },
@@ -85,7 +85,7 @@ export class ReverseProxyComponent extends ServiceComponent<
     return [
       new ReverseProxyContainer(this, {
         ...this.config.containerConfig,
-        clusterName: this.config.clusterName,
+        cluster: this.config.cluster,
         name: 'reverse-proxy',
       }),
     ];

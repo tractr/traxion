@@ -30,10 +30,10 @@ export class VolumeComponent<
           protocol: 'TCP',
           fromPort: 2049,
           toPort: 2049,
-          securityGroups: this.config.clientsSecurityGroupsIds,
+          securityGroups: this.config.clientsSecurityGroups.map((sg) => sg.id),
         },
       ],
-      vpcId: this.config.vpcId,
+      vpcId: this.config.vpc.id,
       name: this.getResourceName('sg'),
     });
   }
@@ -66,12 +66,12 @@ export class VolumeComponent<
 
     // Create mount targets for each subnet
     // This allows the volume to be accessible from the network in each subnet
-    this.config.subnetsIds.forEach((subnetId, index) => {
+    this.config.subnets.forEach((subnet, index) => {
       /* eslint-disable-next-line no-new */
       new efs.EfsMountTarget(this, `mount-${index}`, {
         fileSystemId: efsFileSystem.id,
         securityGroups: [securityGroup.id],
-        subnetId,
+        subnetId: subnet.id,
       });
     });
 

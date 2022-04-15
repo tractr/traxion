@@ -25,16 +25,22 @@ export class InternetRoutesComponent extends AwsComponent<
   protected createRouteToInternetGateway() {
     return new vpc.Route(this, 'rt', {
       destinationCidrBlock: '0.0.0.0/0',
-      gatewayId: this.config.internetGatewayId,
-      routeTableId: this.config.routeTableId,
+      gatewayId: this.config.internetGateway.id,
+      routeTableId: this.getRouteTableId(),
     });
   }
 
   protected createIpv6RouteToInternetGateway() {
     return new vpc.Route(this, 'rt6', {
       destinationIpv6CidrBlock: '::/0',
-      gatewayId: this.config.internetGatewayId,
-      routeTableId: this.config.routeTableId,
+      gatewayId: this.config.internetGateway.id,
+      routeTableId: this.getRouteTableId(),
     });
+  }
+
+  protected getRouteTableId(): string {
+    return typeof this.config.routeTable === 'string'
+      ? this.config.routeTable
+      : this.config.routeTable.id;
   }
 }

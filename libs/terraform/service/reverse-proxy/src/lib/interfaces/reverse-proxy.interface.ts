@@ -1,3 +1,4 @@
+import { ecs, elb, iam, vpc } from '@cdktf/provider-aws';
 import { DeepPartial } from 'ts-essentials';
 
 import {
@@ -12,14 +13,14 @@ export type ReverseProxyContainerPublicConfig = HttpContainerPublicConfig;
 export interface ReverseProxyContainerConfig
   extends ContainerInternalConfig,
     ReverseProxyContainerPublicConfig {
-  clusterName: string;
+  cluster: ecs.EcsCluster;
 }
 
 export interface ReverseProxyComponentInternalConfig
   extends ServiceComponentInternalConfig {
-  loadBalancerSecurityGroupId: string;
-  loadBalancerTargetGroupArn: string;
-  taskRoleArn: string;
+  loadBalancerSecurityGroup: vpc.SecurityGroup;
+  loadBalancerTargetGroup: elb.AlbTargetGroup;
+  taskRole: iam.IamRole;
 }
 
 export interface ReverseProxyComponentDefaultConfig

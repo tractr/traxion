@@ -32,12 +32,12 @@ export class FileStorageComponent extends AwsComponent<
 
   protected createS3UserComponent(s3Component: S3Component) {
     const buckets: S3BucketDetails[] = [
-      { access: 'write', arn: s3Component.artifacts.bucket.arn },
+      { access: 'write', bucket: s3Component.artifacts.bucket },
     ];
 
-    if (this.config.additionalReadOnlyS3Arns) {
-      for (const arn of this.config.additionalReadOnlyS3Arns) {
-        buckets.push({ access: 'read', arn });
+    if (this.config.additionalReadOnlyS3Buckets) {
+      for (const bucket of this.config.additionalReadOnlyS3Buckets) {
+        buckets.push({ access: 'read', bucket });
       }
     }
 

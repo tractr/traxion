@@ -21,10 +21,10 @@ export class DeploymentPipelineComponent extends AwsComponent<
 
   protected createPipeline() {
     return new codepipeline.Codepipeline(this, 'run', {
-      roleArn: this.config.roleArn,
+      roleArn: this.config.role.arn,
       artifactStore: [
         {
-          location: this.config.storeS3Name,
+          location: this.config.storeS3Bucket.bucket,
           type: 'S3',
         },
       ],
@@ -70,7 +70,7 @@ export class DeploymentPipelineComponent extends AwsComponent<
           ),
           outputArtifacts: ['definitions'],
           configuration: {
-            ProjectName: this.config.buildProjectName,
+            ProjectName: this.config.buildProject.name,
           },
         },
       ],
@@ -89,8 +89,8 @@ export class DeploymentPipelineComponent extends AwsComponent<
           version: '1',
           inputArtifacts: ['definitions'],
           configuration: {
-            ClusterName: this.config.clusterName,
-            ServiceName: this.config.serviceName,
+            ClusterName: this.config.cluster.name,
+            ServiceName: this.config.service.name,
             FileName: 'imagedefinitions.json',
           },
         },

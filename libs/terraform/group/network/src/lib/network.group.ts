@@ -72,7 +72,7 @@ export class NetworkGroup extends AwsComponent<
 
       return new PublicComponent(this, publicId, {
         availabilityZone: getZoneName(this.provider, zoneLetter),
-        vpcId: baseComponent.artifacts.vpc.id,
+        vpc: baseComponent.artifacts.vpc,
         cidrBlock: getCidrBlockForIndex(
           baseComponent.artifacts.vpcData.cidrBlock,
           subnetNumber,
@@ -98,13 +98,13 @@ export class NetworkGroup extends AwsComponent<
       const subnetNumber = getPrivateSubnetNumber(index);
 
       return new PrivateComponent(this, privateId, {
-        publicSubnetId: publicComponent.artifacts.subnet.id,
-        egressOnlyInternetGatewayId:
-          baseComponent.artifacts.egressOnlyInternetGateway.id,
-        internetGatewayId: baseComponent.artifacts.internetGateway.id,
+        publicSubnet: publicComponent.artifacts.subnet,
+        egressOnlyInternetGateway:
+          baseComponent.artifacts.egressOnlyInternetGateway,
+        internetGateway: baseComponent.artifacts.internetGateway,
         internetAccessMode: this.config.internetAccessMode,
         availabilityZone: getZoneName(this.provider, zoneLetter),
-        vpcId: baseComponent.artifacts.vpc.id,
+        vpc: baseComponent.artifacts.vpc,
         cidrBlock: getCidrBlockForIndex(
           baseComponent.artifacts.vpcData.cidrBlock,
           subnetNumber,

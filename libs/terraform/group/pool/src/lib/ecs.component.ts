@@ -52,7 +52,7 @@ export class EcsComponent extends AwsComponent<
 
   protected createExecutionRole() {
     return new ExecutionRoleComponent(this, 'exec', {
-      secretsmanagerSecretArn: this.config.secretsmanagerSecretArn,
+      secret: this.config.secret,
     });
   }
 
@@ -64,7 +64,7 @@ export class EcsComponent extends AwsComponent<
 
   protected createPrivateDns() {
     return new PrivateDnsComponent(this, 'discovery', {
-      vpcId: this.config.vpcId,
+      vpc: this.config.vpc,
     });
   }
 
@@ -79,22 +79,18 @@ export class EcsComponent extends AwsComponent<
     privateDns: PrivateDnsComponent,
   ) {
     return new ReverseProxyComponent(this, 'proxy', {
-      vpcId: this.config.vpcId,
-      subnetsIds: this.config.subnetsIds,
+      vpc: this.config.vpc,
+      subnets: this.config.subnets,
       logsGroup: this.config.logsGroup,
-      clusterId: ecsCluster.id,
-      clusterName: ecsCluster.name,
+      cluster: ecsCluster,
       dockerApplications: this.config.dockerApplications,
       applicationBaseUrl: this.config.applicationBaseUrl,
-      executionRoleArn: executionRole.artifacts.role.arn,
-      secretsmanagerSecretArn: this.config.secretsmanagerSecretArn,
-      fileStorageS3Endpoint: this.config.fileStorageS3Endpoint,
-      fileStorageS3BucketName: this.config.fileStorageS3BucketName,
-      privateDnsNamespaceId: privateDns.artifacts.dnsNamespace.id,
-      privateDnsNamespaceName: privateDns.artifacts.dnsNamespace.name,
-      loadBalancerSecurityGroupId: this.config.loadBalancerSecurityGroupId,
-      loadBalancerTargetGroupArn: this.config.loadBalancerTargetGroupArn,
-      taskRoleArn: taskRole.artifacts.role.arn,
+      executionRole: executionRole.artifacts.role,
+      secret: this.config.secret,
+      privateDnsNamespace: privateDns.artifacts.dnsNamespace,
+      loadBalancerSecurityGroup: this.config.loadBalancerSecurityGroup,
+      loadBalancerTargetGroup: this.config.loadBalancerTargetGroup,
+      taskRole: taskRole.artifacts.role,
       ...this.config.reverseProxyConfig,
     });
   }
@@ -125,21 +121,15 @@ export class EcsComponent extends AwsComponent<
     Config extends ServiceComponentConfig,
   >(publicConfig: PublicConfig): Config {
     return {
-      vpcId: this.config.vpcId,
-      subnetsIds: this.config.subnetsIds,
+      vpc: this.config.vpc,
+      subnets: this.config.subnets,
       logsGroup: this.config.logsGroup,
-      clusterId: this.artifacts.ecsCluster.id,
-      clusterName: this.artifacts.ecsCluster.name,
+      cluster: this.artifacts.ecsCluster,
       dockerApplications: this.config.dockerApplications,
       applicationBaseUrl: this.config.applicationBaseUrl,
-      executionRoleArn: this.artifacts.executionRole.artifacts.role.arn,
-      secretsmanagerSecretArn: this.config.secretsmanagerSecretArn,
-      fileStorageS3Endpoint: this.config.fileStorageS3Endpoint,
-      fileStorageS3BucketName: this.config.fileStorageS3BucketName,
-      privateDnsNamespaceId:
-        this.artifacts.privateDns.artifacts.dnsNamespace.id,
-      privateDnsNamespaceName:
-        this.artifacts.privateDns.artifacts.dnsNamespace.name,
+      executionRole: this.artifacts.executionRole.artifacts.role,
+      secret: this.config.secret,
+      privateDnsNamespace: this.artifacts.privateDns.artifacts.dnsNamespace,
       ...publicConfig,
     } as never as Config;
   }
@@ -193,8 +183,8 @@ export class EcsComponent extends AwsComponent<
   >(clients: ServiceComponent[], publicConfig: PublicConfig): Config {
     return {
       ...this.createServiceComponentConfig<PublicConfig, Config>(publicConfig),
-      clientsSecurityGroupsIds: clients.map(
-        (client) => client.artifacts.securityGroup.id,
+      clientsSecurityGroups: clients.map(
+        (client) => client.artifacts.securityGroup,
       ),
     };
   }

@@ -44,7 +44,7 @@ export class ExecutionRoleComponent extends AwsComponent<
                 Sid: 'SecretsmanagerReadAccess',
                 Effect: 'Allow',
                 Action: ['secretsmanager:GetSecretValue'],
-                Resource: [`${this.config.secretsmanagerSecretArn}*`],
+                Resource: [`${this.config.secret.arn}*`],
               },
             ],
           }),

@@ -16,7 +16,7 @@ export class DeploymentTriggerComponent extends AwsComponent<
   protected createComponents(): void {
     // Create one role for all events
     const role = new DeploymentTriggerRoleComponent(this, 'iam', {
-      codepipelineArn: this.config.codepipelineArn,
+      codepipeline: this.config.codepipeline,
     });
     // Create one event trigger for each repository
     const events = this.config.repositories.map((repository) => {
@@ -24,10 +24,9 @@ export class DeploymentTriggerComponent extends AwsComponent<
       const id = snake(`event_${repositoryShortName}_${repository.imageTag}`);
 
       return new DeploymentTriggerEventComponent(this, id, {
-        roleArn: role.artifacts.role.arn,
-        codepipelineArn: this.config.codepipelineArn,
-        repositoryName: repository.repositoryName,
-        repositoryTag: repository.imageTag,
+        role: role.artifacts.role,
+        codepipeline: this.config.codepipeline,
+        repository,
       });
     });
 

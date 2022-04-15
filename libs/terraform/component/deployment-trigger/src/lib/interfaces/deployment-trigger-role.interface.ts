@@ -1,7 +1,7 @@
-import { iam } from '@cdktf/provider-aws';
+import { codepipeline, iam } from '@cdktf/provider-aws';
 
 export interface DeploymentTriggerRoleComponentConfig {
-  codepipelineArn: string;
+  codepipeline: codepipeline.Codepipeline;
 }
 
 export interface DeploymentTriggerRoleComponentArtifacts {

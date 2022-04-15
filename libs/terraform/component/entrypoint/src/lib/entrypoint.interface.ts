@@ -1,11 +1,11 @@
-import { elb, vpc } from '@cdktf/provider-aws';
+import { acm, elb, route53, vpc } from '@cdktf/provider-aws';
 import { ITerraformDependable } from 'cdktf';
 
 export interface EntrypointComponentConfig {
-  vpcId: string;
-  certificateArn: string;
-  subnetsIds: string[];
-  route53ZoneId: string;
+  vpc: vpc.Vpc;
+  certificate: acm.AcmCertificate;
+  subnets: vpc.Subnet[];
+  route53Zone: route53.DataAwsRoute53Zone;
   subDomain: string;
   albDependencies?: ITerraformDependable[];
 }

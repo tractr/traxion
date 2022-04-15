@@ -1,4 +1,4 @@
-import { ecs, servicediscovery, vpc } from '@cdktf/provider-aws';
+import { cloudwatch, ecs, servicediscovery, vpc } from '@cdktf/provider-aws';
 import { kebab } from 'case';
 import { Token } from 'cdktf';
 
@@ -91,7 +91,7 @@ export abstract class ServiceComponent<
           ipv6CidrBlocks: ['::/0'],
         },
       ],
-      vpcId: this.config.vpcId,
+      vpcId: this.config.vpc.id,
       name: this.getResourceName('sg'),
     };
   }
@@ -124,7 +124,7 @@ export abstract class ServiceComponent<
         containers.map((c) => c.getDefinition()),
       ),
       volume: this.getVolumesDefinitions(volumes),
-      executionRoleArn: this.config.executionRoleArn,
+      executionRoleArn: this.config.executionRole.arn,
       family: this.getResourceName('task'),
       tags: this.getResourceNameAsTag('task'),
     };
@@ -149,7 +149,7 @@ export abstract class ServiceComponent<
     return new servicediscovery.ServiceDiscoveryService(this, 'discovery', {
       name: this.getServiceName(),
       dnsConfig: {
-        namespaceId: this.config.privateDnsNamespaceId,
+        namespaceId: this.config.privateDnsNamespace.id,
         routingPolicy: 'MULTIVALUE',
         dnsRecords: [
           {
@@ -183,14 +183,14 @@ export abstract class ServiceComponent<
     discoveryService: servicediscovery.ServiceDiscoveryService,
   ): ecs.EcsServiceConfig {
     return {
-      cluster: this.config.clusterId,
+      cluster: this.config.cluster.id,
       taskDefinition: this.getMostRecentTaskDefinition(taskDefinition),
       launchType: 'FARGATE',
       schedulingStrategy: 'REPLICA',
       desiredCount: this.config.desiredCount || 1,
       networkConfiguration: {
         securityGroups: [securityGroup.id],
-        subnets: this.config.subnetsIds,
+        subnets: this.config.subnets.map((s) => s.id),
         assignPublicIp: true,
       },
 
@@ -232,9 +232,9 @@ export abstract class ServiceComponent<
     const volumeComponents: VolumeComponents = {};
     for (const [name, config] of Object.entries(volumesConfigs)) {
       volumeComponents[name] = new VolumeComponent(this, name, {
-        vpcId: this.config.vpcId,
-        subnetsIds: this.config.subnetsIds,
-        clientsSecurityGroupsIds: [securityGroup.id],
+        vpc: this.config.vpc,
+        subnets: this.config.subnets,
+        clientsSecurityGroups: [securityGroup],
         preventDestroy: config.preventDestroy,
         enableBackups: config.enableBackups,
       });
@@ -298,8 +298,8 @@ export abstract class ServiceComponent<
       imageDefinitions: JSON.stringify(
         containers.map((c) => c.getImageDefinition()),
       ),
-      clusterName: this.config.clusterName,
-      serviceName: ecsService.name,
+      cluster: this.config.cluster,
+      service: ecsService,
     });
   }
 
@@ -307,13 +307,13 @@ export abstract class ServiceComponent<
    * Helper to get a secret key in the secret manager
    */
   getSecretPath(key: string): string {
-    return `${this.config.secretsmanagerSecretArn}:${key}::`;
+    return `${this.config.secret.arn}:${key}::`;
   }
 
   /**
    * Helper to get the logs group name
    */
-  getLogsGroup(): string {
+  getLogsGroup(): cloudwatch.CloudwatchLogGroup {
     return this.config.logsGroup;
   }
 
@@ -328,7 +328,7 @@ export abstract class ServiceComponent<
    * Helper to get the service private domain name
    */
   getServiceDomainName(service: string): string {
-    return `${service}.${this.config.privateDnsNamespaceName}`;
+    return `${service}.${this.config.privateDnsNamespace.name}`;
   }
 
   /**
