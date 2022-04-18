@@ -13,6 +13,14 @@ on:
         required: false
         type: string
 
+      checkout:
+        description:
+          'Checkout the code before starting the setup (for local use on the
+          stack)'
+        default: false
+        required: false
+        type: boolean
+
 jobs:
   test:
     name: Test / ${{ matrix.node }}
@@ -27,6 +35,12 @@ jobs:
 
     steps:
       # First we checkout the code
+      - uses: actions/checkout@v2
+        if: ${{ inputs.checkout }}
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
       - uses: ./.github/actions/setup
         with:
           registry-url: ${{ inputs.registry-url }}
