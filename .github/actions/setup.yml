@@ -1,0 +1,44 @@
+name: Setup the workspace
+description: Checkout, setup nodeJs, install and generate
+
+inputs:
+  inputs:
+    registry-url:
+      description: 'The registry url where the packages are loacated'
+      default: 'https://registry.npmjs.org'
+      required: false
+      type: string
+
+  secrets:
+    NPM_TOKEN:
+      description: 'The npm token if needed'
+      required: false
+
+runs:
+  # First we checkout the code
+  - uses: actions/checkout@v2
+    with:
+      fetch-depth: 0
+      persist-credentials: false
+
+  # We initialize the node action
+  - name: Use node.js ${{ matrix.node }}
+    uses: actions/setup-node@v2
+    with:
+      cache: 'npm'
+      node-version: ${{ matrix.node }}
+      registry-url: ${{ inputs.registry-url }}
+
+  # We install our dependencies
+  - name: Run npm install
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    run: npm ci --no-audit --no-progress --ignore-scripts
+
+  # We install our dependencies
+  - name: Run npm postinstall
+    run: npm run postinstall --if-present
+
+  # We install our dependencies
+  - name: Run npm generate
+    run: npm run generate

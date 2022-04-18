@@ -1,0 +1,48 @@
+#####################################
+##      Reusable workflow tests     ##
+#####################################
+name: Test
+
+# Make the workflow reusable
+on:
+  workflow_call:
+    inputs:
+      registry-url:
+        description: 'The registry url where the packages are loacated'
+        default: 'https://registry.npmjs.org'
+        required: false
+        type: string
+
+jobs:
+  test:
+    name: Test / ${{ matrix.node }}
+
+    # Our code will run on node 16 and Linux
+    strategy:
+      matrix:
+        node: [16.x]
+        os: [ubuntu-20.04]
+
+    runs-on: ['${{ matrix.os }}']
+
+    steps:
+      # First we checkout the code
+      - uses: ./.github/actions/setup.yml
+        with:
+          registry-url: ${{ inputs.registry-url }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Run the build
+      - name: Run Affected Build
+        shell: bash
+        run: npm run affected:build -- --base=remotes/origin/main --with-deps
+
+      # Run the lint
+      - name: Run Affected Lint
+        shell: bash
+        run: npm run affected:lint -- --base=remotes/origin/main
+
+      # Run the tests
+      - name: Run Affected Tests
+        shell: bash
+        run: npm run affected:test -- --base=remotes/origin/main
