@@ -1,3 +1,6 @@
+##############################################
+##      Reusable semantic pull request      ##
+##############################################
 name: Pull Request
 
 on:
@@ -6,6 +9,12 @@ on:
       - opened
       - edited
       - synchronize
+
+  workflow_call:
+    secrets:
+      GH_TOKEN:
+        description: 'The github bot-token'
+        required: true
 
 jobs:
   commitlint:

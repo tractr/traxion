@@ -2,7 +2,7 @@ name: Setup the workspace
 description: Checkout, setup nodeJs, install and generate
 
 inputs:
-  registry-url:
+  registryUrl:
     description: 'The registry url where the packages are loacated'
     default: 'https://registry.npmjs.org'
     required: false
@@ -15,19 +15,13 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    # First we checkout the code
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-        persist-credentials: false
-
     # We initialize the node action
     - name: Use node.js ${{ matrix.node }}
       uses: actions/setup-node@v2
       with:
         cache: 'npm'
         node-version: ${{ matrix.node }}
-        registry-url: ${{ inputs.registry-url }}
+        registry-url: ${{ inputs.registryUrl }}
 
     # We install our dependencies
     - name: Run npm install

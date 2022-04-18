@@ -1,0 +1,80 @@
+#####################################
+##      Reusable workflow tests     ##
+#####################################
+name: Release and Deploy
+
+on:
+  workflow_call:
+    inputs:
+      botName:
+        description: 'The github bot name'
+        type: string
+        required: true
+
+    secrets:
+      NPM_TOKEN:
+        description: 'The npm token if needed'
+        required: false
+        type: string
+
+      NPM_REGISTRY:
+        default: 'https://registry.npmjs.org'
+        description: 'The npm token if needed'
+        required: false
+        type: string
+
+      GH_TOKEN:
+        description: 'The github bot-token'
+        type: string
+        required: true
+
+jobs:
+  # Take all the packages and release them to https://npm.pkg.github.com
+  npm-release:
+    name: Release npm packages
+
+    # Run the release job but not when the commit is a chore one
+    if: "!contains(github.event.commits[0].message, 'chore(release):')"
+
+    # Our code will run on node 16 and Linux
+    strategy:
+      matrix:
+        node: [16.x]
+        os: [ubuntu-20.04]
+
+    runs-on: ['${{ matrix.os }}']
+
+    outputs:
+      apps: ${{ steps.apps.outputs.result }}
+
+    steps:
+      # First we checkout the code
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Install dependencies and generate files
+        uses: ./.github/actions/setup
+        with:
+          registry-url: ${{ secrets.NPM_REGISTRY }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name '${{ inputs.botName }}'
+          git config user.email '${{ inputs.botName }}@users.noreply.github.com'
+
+      # We run our release script
+      - name: Run nx run workspace:release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx nx run workspace:release --push
+
+      - name: Update the latest tag
+        uses: ./.github/actions/setup
+        with:
+          botName: ${{ inputs.botName }}
+          tagName: 'latest'
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
