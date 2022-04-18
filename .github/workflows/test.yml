@@ -9,4 +9,4 @@ on:
 
 jobs:
   test:
-    uses: tractr/stack/.github/workflows/shared/test.yml
+    uses: ./.github/workflows/shared/test.yml
