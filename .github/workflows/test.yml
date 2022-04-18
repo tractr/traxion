@@ -27,7 +27,7 @@ jobs:
 
     steps:
       # First we checkout the code
-      - uses: ./.github/actions/setup.yml
+      - uses: ./.github/actions/setup
         with:
           registry-url: ${{ inputs.registry-url }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
