@@ -1,0 +1,12 @@
+###########################
+##      Stack tests      ##
+###########################
+name: Test
+
+# Start the job on all pull request
+on:
+  pull_request:
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
