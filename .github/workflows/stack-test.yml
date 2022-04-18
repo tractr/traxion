@@ -1,14 +1,15 @@
 ###########################
 ##      Stack tests      ##
 ###########################
-name: Test
+name: Stack Tests
 
 # Start the job on all pull request
 on:
   pull_request:
 
 jobs:
-  test:
+  tests:
+    name: Stack Tests
     uses: ./.github/workflows/test.yml
     with:
       checkout: true

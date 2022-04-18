@@ -1,7 +1,7 @@
 #####################################
 ##      Reusable workflow tests     ##
 #####################################
-name: Test
+name: Tests
 
 # Make the workflow reusable
 on:
@@ -21,9 +21,14 @@ on:
         required: false
         type: boolean
 
+    secrets:
+      NPM_TOKEN:
+        description: 'The npm token if needed'
+        required: false
+
 jobs:
-  test:
-    name: Test / ${{ matrix.node }}
+  tests:
+    name: Build, Lint and Tests
 
     # Our code will run on node 16 and Linux
     strategy:
@@ -41,7 +46,8 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - uses: ./.github/actions/setup
+      - name: Install dependencies and generate files
+        uses: ./.github/actions/setup
         with:
           registry-url: ${{ inputs.registry-url }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
