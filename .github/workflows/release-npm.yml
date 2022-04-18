@@ -1,7 +1,7 @@
 #####################################
 ##      Reusable workflow tests     ##
 #####################################
-name: Release and Deploy
+name: Release NPM
 
 on:
   workflow_call:
