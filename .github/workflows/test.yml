@@ -7,17 +7,17 @@ name: Tests
 on:
   pull_request:
   workflow_call:
-    secrets:
-      NPM_TOKEN:
-        description: 'The npm token if needed'
-        required: false
-        type: string
-
-      NPM_REGISTRY:
+    inputs:
+      registryUrl:
         default: 'https://registry.npmjs.org'
         description: 'The npm token if needed'
         required: false
         type: string
+
+    secrets:
+      NPM_TOKEN:
+        description: 'The npm token if needed'
+        required: false
 
 jobs:
   tests:
@@ -41,7 +41,7 @@ jobs:
       - name: Install dependencies and generate files
         uses: ./.github/actions/setup
         with:
-          registryUrl: ${{ secrets.NPM_REGISTRY }}
+          registryUrl: ${{ inputs.registryUrl }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # Run the build
