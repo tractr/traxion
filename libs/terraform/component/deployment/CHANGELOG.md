@@ -2,6 +2,31 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.43.9](https://github.com/tractr/stack/compare/v1.43.8...v1.43.9) (2022-04-14)
+
+
+
+## [1.43.8](https://github.com/tractr/stack/compare/v1.43.7...v1.43.8) (2022-04-12)
+
+
+
+## [1.43.7](https://github.com/tractr/stack/compare/v1.43.6...v1.43.7) (2022-04-11)
+
+
+### Bug Fixes
+
+* **terraform-component-s3:** use name for bucket ([#413](https://github.com/tractr/stack/issues/413)) ([545a64e](https://github.com/tractr/stack/commit/545a64ec716e0bfde1452e62e560bac8e8fe4099))
+
+
+
+## [1.43.6](https://github.com/tractr/stack/compare/v1.43.5...v1.43.6) (2022-04-08)
+
+
+
+## [1.43.5](https://github.com/tractr/stack/compare/v1.43.4...v1.43.5) (2022-04-07)
+
+
+
 ## [1.43.4](https://github.com/tractr/stack/compare/v1.43.3...v1.43.4) (2022-04-06)
 
 

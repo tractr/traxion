@@ -2,6 +2,96 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.43.9](https://github.com/tractr/stack/compare/v1.43.8...v1.43.9) (2022-04-14)
+
+
+### Bug Fixes
+
+* add role check to react-admin ([#415](https://github.com/tractr/stack/issues/415)) ([b349e5a](https://github.com/tractr/stack/commit/b349e5a84ae6356a4c76fdbfd240709617e7fa39))
+
+
+
+## [1.43.9](https://github.com/tractr/stack/compare/v1.43.8...v1.43.9) (2022-04-14)
+
+
+### Bug Fixes
+
+* add role check to react-admin ([#415](https://github.com/tractr/stack/issues/415)) ([b349e5a](https://github.com/tractr/stack/commit/b349e5a84ae6356a4c76fdbfd240709617e7fa39))
+
+
+
+## [1.43.8](https://github.com/tractr/stack/compare/v1.43.7...v1.43.8) (2022-04-12)
+
+
+### Bug Fixes
+
+* edit result variable name in test ([#414](https://github.com/tractr/stack/issues/414)) ([c6d7e2e](https://github.com/tractr/stack/commit/c6d7e2ec7f87ce88294188bda4c9ed0f14bcd463))
+
+
+
+## [1.43.8](https://github.com/tractr/stack/compare/v1.43.7...v1.43.8) (2022-04-12)
+
+
+### Bug Fixes
+
+* edit result variable name in test ([#414](https://github.com/tractr/stack/issues/414)) ([c6d7e2e](https://github.com/tractr/stack/commit/c6d7e2ec7f87ce88294188bda4c9ed0f14bcd463))
+
+
+
+## [1.43.7](https://github.com/tractr/stack/compare/v1.43.6...v1.43.7) (2022-04-11)
+
+
+### Bug Fixes
+
+* **terraform-component-s3:** use name for bucket ([#413](https://github.com/tractr/stack/issues/413)) ([545a64e](https://github.com/tractr/stack/commit/545a64ec716e0bfde1452e62e560bac8e8fe4099))
+
+
+
+## [1.43.7](https://github.com/tractr/stack/compare/v1.43.6...v1.43.7) (2022-04-11)
+
+
+### Bug Fixes
+
+* **terraform-component-s3:** use name for bucket ([#413](https://github.com/tractr/stack/issues/413)) ([545a64e](https://github.com/tractr/stack/commit/545a64ec716e0bfde1452e62e560bac8e8fe4099))
+
+
+
+## [1.43.6](https://github.com/tractr/stack/compare/v1.43.5...v1.43.6) (2022-04-08)
+
+
+### Bug Fixes
+
+* **terraform-component-s3:** fix cors without rules ([#410](https://github.com/tractr/stack/issues/410)) ([a229d1e](https://github.com/tractr/stack/commit/a229d1e4533c5376c6515b012436ae58938025e6))
+
+
+
+## [1.43.6](https://github.com/tractr/stack/compare/v1.43.5...v1.43.6) (2022-04-08)
+
+
+### Bug Fixes
+
+* **terraform-component-s3:** fix cors without rules ([#410](https://github.com/tractr/stack/issues/410)) ([a229d1e](https://github.com/tractr/stack/commit/a229d1e4533c5376c6515b012436ae58938025e6))
+
+
+
+## [1.43.5](https://github.com/tractr/stack/compare/v1.43.4...v1.43.5) (2022-04-07)
+
+
+### Bug Fixes
+
+* update global guards to ignore rabbitmq requests ([#409](https://github.com/tractr/stack/issues/409)) ([e5d2b16](https://github.com/tractr/stack/commit/e5d2b169366abdc74d4a2cabcd9739201ccf76a1))
+
+
+
+## [1.43.5](https://github.com/tractr/stack/compare/v1.43.4...v1.43.5) (2022-04-07)
+
+
+### Bug Fixes
+
+* update global guards to ignore rabbitmq requests ([#409](https://github.com/tractr/stack/issues/409)) ([e5d2b16](https://github.com/tractr/stack/commit/e5d2b169366abdc74d4a2cabcd9739201ccf76a1))
+
+
+
 ## [1.43.4](https://github.com/tractr/stack/compare/v1.43.3...v1.43.4) (2022-04-06)
 
 
