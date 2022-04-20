@@ -53,7 +53,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Install dependencies and generate files
-        uses: ./.github/actions/setup
+        uses: tractr/stack/.github/actions/setup@STAK-317/create-reusable-gitaction
         with:
           registry-url: ${{ secrets.registryUrl }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -71,7 +71,7 @@ jobs:
         run: npx nx run workspace:release --push
 
       - name: Update the latest tag
-        uses: ./.github/actions/setup
+        uses: tractr/stack/.github/actions/update-tag@STAK-317/create-reusable-gitaction
         with:
           botName: ${{ inputs.botName }}
           tagName: 'latest'

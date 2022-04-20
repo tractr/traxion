@@ -57,7 +57,7 @@ on:
 jobs:
   affected-apps:
     - name: Get the affected apps
-      uses: ./.github/actions/affected-apps
+      uses: tractr/stack/.github/actions/affected-apps@STAK-317/create-reusable-gitaction
       with:
         all: ${{ inputs.production }}
 
