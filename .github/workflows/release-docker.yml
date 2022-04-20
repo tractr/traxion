@@ -17,6 +17,12 @@ on:
         required: false
         default: 'https://registry.npmjs.org'
 
+      all:
+        description: 'Describe if we want to publish all the container or not'
+        type: boolean
+        required: false
+        default: false
+
       tag:
         description: 'Describe which tag you want to publish'
         type: string
@@ -56,10 +62,10 @@ on:
 
 jobs:
   affected-apps:
-    - name: Get the affected apps
-      uses: tractr/stack/.github/actions/affected-apps@STAK-317/create-reusable-gitaction
-      with:
-        all: ${{ inputs.production }}
+    name: Get the affected apps
+    uses: tractr/stack/.github/actions/affected-apps@STAK-317/create-reusable-gitaction
+    with:
+      all: ${{ inputs.all }}
 
   # Take all the packages and release them to https://npm.pkg.github.com
   docker-release:
@@ -94,7 +100,7 @@ jobs:
         with:
           cache: 'npm'
           node-version: ${{ matrix.node }}
-          registry-url: ${{ input.registryUrl }}
+          registryUrl: ${{ inputs.registryUrl }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1

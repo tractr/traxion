@@ -55,7 +55,7 @@ jobs:
       - name: Install dependencies and generate files
         uses: tractr/stack/.github/actions/setup@STAK-317/create-reusable-gitaction
         with:
-          registryUrl: ${{ secrets.registryUrl }}
+          registryUrl: ${{ inputs.registryUrl }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Configure git
@@ -73,6 +73,5 @@ jobs:
       - name: Update the latest tag
         uses: tractr/stack/.github/actions/update-tag@STAK-317/create-reusable-gitaction
         with:
-          botName: ${{ inputs.botName }}
           tagName: 'latest'
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
