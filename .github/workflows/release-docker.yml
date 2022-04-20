@@ -17,12 +17,17 @@ on:
         required: false
         default: 'https://registry.npmjs.org'
 
-      production:
-        description:
-          'Describe if we are publishing the container on production tag'
+      tag:
+        description: 'Describe which tag you want to publish'
+        type: string
+        required: false
+        default: 'latest'
+
+      semver:
+        description: 'Describe you want to publish semver version'
         type: boolean
         required: false
-        default: false
+        default: true
 
     secrets:
       NPM_TOKEN:
@@ -119,30 +124,17 @@ jobs:
 
       # Register some meta data to build docker
       - name: Docker meta - latest
-        if: ${{ !inputs.production }}
         id: docker_meta
         uses: docker/metadata-action@v3
         with:
-          flavor: |
-            latest=true
-          tags: |
-            type=ref,event=branch
-            type=semver,pattern={{version}},value=v${{ steps.extract_version.outputs.version }}
-            type=semver,pattern={{major}}.{{minor}},value=v${{ steps.extract_version.outputs.version }}
           images:
             ${{ steps.login-ecr.outputs.registry }}/${{ secrets.PROJECT_CODE
             }}/${{ matrix.app }}
-
-      - name: Docker meta - production
-        if: ${{ inputs.production }}
-        id: docker_meta
-        uses: docker/metadata-action@v3
-        with:
           tags: |
-            type=raw,value=production
-          images:
-            ${{ steps.login-ecr.outputs.registry }}/${{ secrets.PROJECT_CODE
-            }}/${{ matrix.app }}
+            raw,value=${{ inputs.tag }}
+            type=semver,pattern={{version}},value=v${{ steps.extract_version.outputs.version }},enable=${{ inputs.semver }}
+            type=semver,pattern={{major}}.{{minor}},value=v${{ steps.extract_version.outputs.version }},enable=${{ inputs.semver }}
+            type=semver,pattern={{major}},value=v${{ steps.extract_version.outputs.version }},enable=${{ inputs.semver }}
 
       # Setup QEMU
       - name: Set up QEMU
