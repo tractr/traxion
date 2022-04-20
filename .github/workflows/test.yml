@@ -47,14 +47,14 @@ jobs:
       # Run the build
       - name: Run Affected Build
         shell: bash
-        run: npm run affected:build -- --base=remotes/origin/main --with-deps
+        run: npx nx affected:build --base=remotes/origin/main
 
       # Run the lint
       - name: Run Affected Lint
         shell: bash
-        run: npm run affected:lint -- --base=remotes/origin/main
+        run: npx nx affected:lint --base=remotes/origin/main
 
       # Run the tests
       - name: Run Affected Tests
         shell: bash
-        run: npm run affected:test -- --base=remotes/origin/main
+        run: npx nx affected:test --base=remotes/origin/main
