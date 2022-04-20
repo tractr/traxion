@@ -55,7 +55,7 @@ jobs:
       - name: Install dependencies and generate files
         uses: tractr/stack/.github/actions/setup@STAK-317/create-reusable-gitaction
         with:
-          registry-url: ${{ secrets.registryUrl }}
+          registryUrl: ${{ secrets.registryUrl }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Configure git
