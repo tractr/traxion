@@ -18,8 +18,10 @@ on:
 
 jobs:
   commitlint:
+    name: Semantic release
     runs-on: ubuntu-latest
     steps:
-      - uses: amannn/action-semantic-pull-request@v3.4.0
+      - name: Check the pull request name
+        uses: amannn/action-semantic-pull-request@v3.4.0
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
