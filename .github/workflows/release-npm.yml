@@ -20,12 +20,10 @@ on:
     secrets:
       NPM_TOKEN:
         description: 'The npm token if needed'
-        type: string
         required: false
 
       GH_TOKEN:
         description: 'The github bot-token'
-        type: string
         required: true
 
 jobs:
