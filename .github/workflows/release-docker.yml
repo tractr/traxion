@@ -11,6 +11,12 @@ on:
         type: string
         required: true
 
+      registryUrl:
+        description: 'The npm token if needed'
+        type: string
+        required: false
+        default: 'https://registry.npmjs.org'
+
       production:
         description:
           'Describe if we are publishing the container on production tag'
@@ -22,37 +28,25 @@ on:
       NPM_TOKEN:
         description: 'The npm token if needed'
         required: false
-        type: string
-
-      NPM_REGISTRY:
-        default: 'https://registry.npmjs.org'
-        description: 'The npm token if needed'
-        required: false
-        type: string
 
       GH_TOKEN:
         description: 'The github bot-token'
-        type: string
         required: true
 
       AWS_ACCESS_KEY_ID:
         description: 'The aws access key id'
-        type: string
         required: true
 
       AWS_SECRET_ACCESS_KEY:
         description: 'The aws secret access key'
-        type: string
         required: true
 
       AWS_REGION:
         description: 'The aws region'
-        type: string
         required: true
 
       PROJECT_CODE:
         description: 'The project code name'
-        type: string
         required: true
 
 jobs:
@@ -95,7 +89,7 @@ jobs:
         with:
           cache: 'npm'
           node-version: ${{ matrix.node }}
-          registry-url: ${{ secrets.NPM_REGISTRY }}
+          registry-url: ${{ input.registryUrl }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
