@@ -62,9 +62,20 @@ on:
 
 jobs:
   affected-apps:
-    name: Get the affected apps
+    runs-on: ubuntu-20.04
+
+    outputs:
+      apps: ${{ steps.apps.outputs.apps }}
+
     steps:
-      - uses: tractr/stack/.github/actions/affected-apps@STAK-317/create-reusable-gitaction
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Get the affected apps
+        id: apps
+        uses: tractr/stack/.github/actions/affected-apps@STAK-317/create-reusable-gitaction
         with:
           all: ${{ inputs.all }}
 
@@ -101,7 +112,7 @@ jobs:
         with:
           cache: 'npm'
           node-version: ${{ matrix.node }}
-          registryUrl: ${{ inputs.registryUrl }}
+          registry-url: ${{ inputs.registryUrl }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1

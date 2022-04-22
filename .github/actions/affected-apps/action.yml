@@ -20,6 +20,7 @@ runs:
     - name: Affected apps output
       if: ${{ !inputs.all }}
       id: nx-apps
+      shell: bash
       run: |
         echo "::set-output name=apps::$(npx nx affected:apps --plain --base latest | sed 's/ /,/g')"
 
