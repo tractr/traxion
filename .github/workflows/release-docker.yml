@@ -63,9 +63,10 @@ on:
 jobs:
   affected-apps:
     name: Get the affected apps
-    uses: tractr/stack/.github/actions/affected-apps@STAK-317/create-reusable-gitaction
-    with:
-      all: ${{ inputs.all }}
+    steps:
+      - uses: tractr/stack/.github/actions/affected-apps@STAK-317/create-reusable-gitaction
+        with:
+          all: ${{ inputs.all }}
 
   # Take all the packages and release them to https://npm.pkg.github.com
   docker-release:
