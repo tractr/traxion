@@ -10,12 +10,6 @@ on:
       - edited
       - synchronize
 
-  workflow_call:
-    secrets:
-      GH_TOKEN:
-        description: 'The github bot-token'
-        required: true
-
 jobs:
   commitlint:
     name: Semantic release
