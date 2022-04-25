@@ -1,0 +1,47 @@
+name: Update tag
+description: Update the tag to the current commit
+
+inputs:
+  tagName:
+    description: 'The tag to update'
+    required: true
+    type: string
+
+  GH_TOKEN:
+    description: 'The github bot token'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Get the last commit SHA
+      id: commit
+      shell: bash
+      run: |
+        echo "::set-output name=sha::$(git rev-parse HEAD)"
+
+    - name: Manage released tag
+      uses: actions/github-script@v3
+      env:
+        SHA: ${{ steps.commit.outputs.sha }}
+
+      with:
+        github-token: ${{ inputs.GH_TOKEN }}
+        script: |
+          try {
+            console.log("Remove the ${{ inputs.tagName }} tag from the repository")
+            await github.git.deleteRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "tags/${{ inputs.tagName }}"
+            })
+          } catch (e) {
+            console.log("The ${{ inputs.tagName }} tag doesn't exist yet: " + e)
+          }
+          console.log("Create the ${{ inputs.tagName }} tag on:" + context.sha)
+          await github.git.createRef({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            ref: "refs/tags/${{ inputs.tagName }}",
+            sha: process.env.SHA
+          })

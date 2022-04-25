@@ -1,23 +1,34 @@
-###########################
-##      Stack tests      ##
-###########################
-name: Test
+#####################################
+##      Reusable workflow tests     ##
+#####################################
+name: Tests
 
-# Start the job on all pull request
+# Make the workflow reusable
 on:
   pull_request:
+  workflow_call:
+    inputs:
+      registryUrl:
+        default: 'https://registry.npmjs.org'
+        description: 'The npm token if needed'
+        required: false
+        type: string
+
+    secrets:
+      NPM_TOKEN:
+        description: 'The npm token if needed'
+        required: false
 
 jobs:
-  test:
+  tests:
+    name: Build, Lint and Tests
+
     # Our code will run on node 16 and Linux
     strategy:
       matrix:
         node: [16.x]
         os: [ubuntu-20.04]
 
-    name: Test npm packages on node ${{ matrix.node }}
-
-    # Runs on Tractr self serveur
     runs-on: ['${{ matrix.os }}']
 
     steps:
@@ -27,43 +38,23 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      # We initialize the node action
-      - name: Use node.js ${{ matrix.node }}
-        uses: actions/setup-node@v2
+      - name: Install dependencies and generate files
+        uses: tractr/stack/.github/actions/setup@main
         with:
-          node-version: ${{ matrix.node }}
-          cache: 'npm'
-          registry-url: https://npm.pkg.github.com
+          registryUrl: ${{ inputs.registryUrl }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # We install our dependencies
-      - name: Run npm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci --no-audit --no-progress
-
-      # We install our dependencies
-      - name: Run npm generate
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run generate
-
-      # We only run the affected lint
+      # Run the build
       - name: Run Affected Build
         shell: bash
-        run: npm run affected:build -- --base=remotes/origin/main --with-deps
+        run: npx nx affected:build --base=remotes/origin/main
 
-      # We only run the affected lint
-      # FIXME: why prettier exit code 1 without any errors
-      # - name: Run Affected Format check
-      #   shell: bash
-      #   run: npm run affected:format:check -- --base=remotes/origin/main
-
-      # We only run the affected lint
+      # Run the lint
       - name: Run Affected Lint
         shell: bash
-        run: npm run affected:lint -- --base=remotes/origin/main
+        run: npx nx affected:lint --base=remotes/origin/main
 
-      # We only run the affected test
+      # Run the tests
       - name: Run Affected Tests
         shell: bash
-        run: npm run affected:test -- --base=remotes/origin/main
+        run: npx nx affected:test --base=remotes/origin/main

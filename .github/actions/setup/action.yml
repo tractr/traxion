@@ -1,0 +1,41 @@
+name: Setup the workspace
+description: Checkout, setup nodeJs, install and generate
+
+inputs:
+  registryUrl:
+    description: 'The registry url where the packages are loacated'
+    default: 'https://registry.npmjs.org'
+    required: false
+    type: string
+
+  NPM_TOKEN:
+    description: 'The npm token if needed'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    # We initialize the node action
+    - name: Use node.js
+      uses: actions/setup-node@v2
+      with:
+        cache: 'npm'
+        node-version: ${{ matrix.node }}
+        registry-url: ${{ inputs.registryUrl }}
+
+    # We install our dependencies
+    - name: Run npm install
+      shell: bash
+      env:
+        NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
+      run: npm ci --no-audit --no-progress --ignore-scripts
+
+    # We launch our postinstall scripts
+    - name: Run npm postinstall
+      shell: bash
+      run: npm run postinstall --if-present
+
+    # We generate our hapify files
+    - name: Run npm generate
+      shell: bash
+      run: npm run generate
