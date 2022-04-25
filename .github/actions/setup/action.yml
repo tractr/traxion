@@ -16,7 +16,7 @@ runs:
   using: 'composite'
   steps:
     # We initialize the node action
-    - name: Use node.js ${{ matrix.node }}
+    - name: Use node.js
       uses: actions/setup-node@v2
       with:
         cache: 'npm'
@@ -30,12 +30,12 @@ runs:
         NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
       run: npm ci --no-audit --no-progress --ignore-scripts
 
-    # We install our dependencies
+    # We launch our postinstall scripts
     - name: Run npm postinstall
       shell: bash
       run: npm run postinstall --if-present
 
-    # We install our dependencies
+    # We generate our hapify files
     - name: Run npm generate
       shell: bash
       run: npm run generate
