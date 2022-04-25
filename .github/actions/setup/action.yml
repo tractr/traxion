@@ -33,7 +33,10 @@ runs:
     # We launch our postinstall scripts
     - name: Run npm postinstall
       shell: bash
-      run: npm run postinstall --if-present
+      run: |
+        npm rebuild
+        npm run install --if-present
+        npm run prepare --if-present
 
     # We generate our hapify files
     - name: Run npm generate

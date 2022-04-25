@@ -10,7 +10,8 @@ jobs:
     name: Release npm packages
     uses: ./.github/workflows/release-npm.yml
     with:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      NPM_REGISTRY: ${{ secrets.NPM_REGISTRY }}
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      registryUrl: 'https://npm.pkg.github.com'
       botName: tractr-bot
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
