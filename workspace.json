@@ -76,6 +76,7 @@
     "terraform-service-ecs": "libs/terraform/service/ecs",
     "terraform-service-postgres": "libs/terraform/service/postgres",
     "terraform-service-pwa": "libs/terraform/service/pwa",
+    "terraform-service-admin": "libs/terraform/service/admin",
     "terraform-service-reverse-proxy": "libs/terraform/service/reverse-proxy",
     "workspace": {
       "root": "libs",
@@ -136,6 +137,7 @@
               "terraform-service-postgres:publish",
               "terraform-service-api:publish",
               "terraform-service-pwa:publish",
+              "terraform-service-admin:publish",
               "hapify-templates-nestjs-models:publish",
               "hapify-templates-angular-rext-client:publish",
               "nestjs-casl:publish",
