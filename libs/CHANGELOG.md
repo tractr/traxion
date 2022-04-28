@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.43.10](https://github.com/tractr/stack/compare/v1.43.9...v1.43.10) (2022-04-28)
+
+
+### Bug Fixes
+
+* **terraform:** change s3 versioning from Disabled to Suspended ([#421](https://github.com/tractr/stack/issues/421)) ([ddb85fe](https://github.com/tractr/stack/commit/ddb85fe3ffb6c9bab3df2d16fe185bd8d886f66b))
+
+
+
+## [1.43.10](https://github.com/tractr/stack/compare/v1.43.9...v1.43.10) (2022-04-28)
+
+
+### Bug Fixes
+
+* **terraform:** change s3 versioning from Disabled to Suspended ([#421](https://github.com/tractr/stack/issues/421)) ([ddb85fe](https://github.com/tractr/stack/commit/ddb85fe3ffb6c9bab3df2d16fe185bd8d886f66b))
+
+
+
 ## [1.43.9](https://github.com/tractr/stack/compare/v1.43.8...v1.43.9) (2022-04-14)
 
 
