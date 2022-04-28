@@ -42,7 +42,7 @@ export class DeploymentStoreComponent extends AwsComponent {
       provider: this.provider,
       bucket: this.getBucketNameAsToken(),
       versioningConfiguration: {
-        status: 'Disabled',
+        status: 'Suspended',
       },
     });
   }

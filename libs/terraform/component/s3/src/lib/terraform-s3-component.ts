@@ -70,7 +70,7 @@ export class S3Component extends AwsComponent<S3ComponentConfig> {
       provider: this.provider,
       bucket: this.getBucketNameAsToken(),
       versioningConfiguration: {
-        status: 'Disabled',
+        status: 'Suspended',
       },
     });
   }
