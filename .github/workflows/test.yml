@@ -14,9 +14,29 @@ on:
         required: false
         type: string
 
+      codecov:
+        default: false
+        description: 'Run the test with codecov or not'
+        required: false
+        type: boolean
+
+      chromatic:
+        default: false
+        description: 'Run the chromatics tests'
+        required: false
+        type: boolean
+
     secrets:
       NPM_TOKEN:
         description: 'The npm token if needed'
+        required: false
+
+      CODECOV_TOKEN:
+        description: 'The codecov token if needed'
+        required: false
+
+      CHROMATIC_TOKEN:
+        description: 'The chromatic token if needed'
         required: false
 
 jobs:
@@ -57,4 +77,31 @@ jobs:
       # Run the tests
       - name: Run Affected Tests
         shell: bash
+        if: ${{ !inputs.codecov }}
         run: npx nx affected:test --base=remotes/origin/main
+
+      # We only run the affected test
+      - name: Run Affected Tests
+        shell: bash
+        if: ${{ inputs.codecov }}
+        run:
+          npx nx run-many --target test --all --codeCoverage --coverageReporters
+          json,text
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        if: ${{ inputs.codecov }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./coverage/
+          fail_ci_if_error: true
+          flags: unittests
+          name: codecov-umbrella
+          verbose: true
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        if: ${{ inputs.chromatic }}
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
