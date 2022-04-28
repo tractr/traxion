@@ -42,7 +42,7 @@ export class S3Component extends AwsComponent<
     new s3.S3BucketVersioningA(this, 'versioning', {
       bucket: bucket.bucket,
       versioningConfiguration: {
-        status: 'Disabled',
+        status: 'Suspended',
       },
     });
 
