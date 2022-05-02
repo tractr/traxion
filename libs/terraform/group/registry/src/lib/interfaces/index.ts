@@ -1,1 +1,2 @@
-export * from './docker-registry.interface';
+export * from './docker-registry-component.interface';
+export * from './registry-group.interface';

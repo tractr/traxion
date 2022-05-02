@@ -1,6 +1,8 @@
+import { PWA_COMPONENT_DEFAULT_CONFIG } from './configs';
 import { PwaComponentConfig, PwaComponentDefaultConfig } from './interfaces';
 import { PwaContainer } from './pwa.container';
 
+import { AwsProviderConstruct } from '@tractr/terraform-component-aws';
 import {
   BackendServiceComponent,
   Container,
@@ -10,6 +12,17 @@ export class PwaComponent extends BackendServiceComponent<
   PwaComponentConfig,
   PwaComponentDefaultConfig
 > {
+  /**
+   * Override constructor to merge config with default config
+   */
+  constructor(
+    scope: AwsProviderConstruct,
+    id: string,
+    config: PwaComponentConfig,
+  ) {
+    super(scope, id, config, PWA_COMPONENT_DEFAULT_CONFIG);
+  }
+
   protected getIngressPorts(): number[] {
     return [4200];
   }
@@ -21,21 +34,5 @@ export class PwaComponent extends BackendServiceComponent<
         name: 'pwa',
       }),
     ];
-  }
-
-  protected getDefaultConfig(): PwaComponentDefaultConfig {
-    return {
-      ...super.getDefaultConfig(),
-      containerConfig: {
-        imageTag: 'latest',
-        path: {
-          prefix: '/',
-          stripPrefix: false,
-        },
-        environments: {
-          API_URL: (service) => service.getApplicationUrl('/api'),
-        },
-      },
-    };
   }
 }

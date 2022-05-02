@@ -1,97 +1,87 @@
-import { ecs, servicediscovery, vpc } from '@cdktf/provider-aws';
+import { cloudwatch, ecs, servicediscovery, vpc } from '@cdktf/provider-aws';
 import { kebab } from 'case';
 import { Token } from 'cdktf';
-import * as deepmerge from 'deepmerge';
 
 import { Container } from '../containers';
 import {
+  ServiceComponentArtifacts,
   ServiceComponentConfig,
   ServiceComponentDefaultConfig,
-  VolumesConfig,
-  VolumesConfigs,
+  VolumeComponents,
+  VolumeConfig,
+  VolumeConfigs,
 } from '../interfaces';
 
 import {
   AwsComponent,
   AwsProviderConstruct,
+  mergeConfigurations,
 } from '@tractr/terraform-component-aws';
-import {
-  DeploymentComponent,
-  DeploymentComponentConfig,
-} from '@tractr/terraform-component-deployment';
-import {
-  VolumeComponent,
-  VolumeComponentConfig,
-} from '@tractr/terraform-component-volume';
+import { DeploymentComponent } from '@tractr/terraform-component-deployment';
+import { VolumeComponent } from '@tractr/terraform-component-volume';
 import { DockerApplication } from '@tractr/terraform-group-registry';
 
 export abstract class ServiceComponent<
-  C extends ServiceComponentConfig = ServiceComponentConfig,
-  D extends ServiceComponentDefaultConfig = ServiceComponentDefaultConfig,
-> extends AwsComponent<C & D> {
-  protected readonly config: C & D;
-
-  protected readonly serviceName: string;
-
-  protected readonly securityGroup: vpc.SecurityGroup;
-
-  protected readonly ecsTaskDefinition: ecs.EcsTaskDefinition;
-
-  /** This is used to get currently deployed task definition */
-  protected readonly ecsTaskDefinitionData: ecs.DataAwsEcsTaskDefinition;
-
-  protected readonly serviceDiscoveryService: servicediscovery.ServiceDiscoveryService;
-
-  protected readonly ecsService: ecs.EcsService;
-
-  protected readonly deploymentComponent: DeploymentComponent | undefined;
-
-  protected readonly containers: Container[];
-
-  protected readonly volumesConfigs: VolumesConfigs;
-
-  protected readonly volumeComponentsMap:
-    | Record<string, VolumeComponent>
-    | undefined;
-
-  constructor(scope: AwsProviderConstruct, id: string, config: C) {
-    // Force partial config
-    super(scope, id, config as C & D);
-    // Define service name
-    this.serviceName = kebab(id);
-    // Re-assign full config
-    this.config = deepmerge(this.getDefaultConfig(), config) as C & D;
-
-    this.containers = this.getContainers();
-    this.volumesConfigs = this.getVolumesConfigs();
-    this.securityGroup = this.createSecurityGroup();
-    if (this.shouldCreateVolumeComponent()) {
-      this.volumeComponentsMap = this.createVolumeComponentsMap();
-    }
-    this.ecsTaskDefinition = this.createEcsTaskDefinition();
-    this.ecsTaskDefinitionData = this.getEcsTaskDefinitionData();
-    this.serviceDiscoveryService = this.createServiceDiscoveryService();
-    this.ecsService = this.createEcsService();
-    if (this.enableContinuousDeployment()) {
-      this.deploymentComponent = this.createDeploymentComponent();
-    }
+  Config extends ServiceComponentConfig = ServiceComponentConfig,
+  DefaultConfig extends ServiceComponentDefaultConfig = ServiceComponentDefaultConfig,
+  Artifacts extends ServiceComponentArtifacts = ServiceComponentArtifacts,
+> extends AwsComponent<Config & DefaultConfig, Artifacts> {
+  /**
+   * Force the constructor to be redefined in subclasses and receive the default config
+   */
+  protected constructor(
+    scope: AwsProviderConstruct,
+    id: string,
+    config: Config,
+    defaultConfig: DefaultConfig,
+  ) {
+    super(scope, id, mergeConfigurations(defaultConfig, config));
   }
 
-  protected getDefaultConfig(): ServiceComponentDefaultConfig {
-    return {
-      desiredCount: 1,
-      cpu: '256',
-      memory: '512',
-    };
+  protected abstract getContainers(): Container[];
+
+  protected createComponents() {
+    const containers = this.getContainers();
+    const securityGroup = this.createSecurityGroup();
+    const volumes = this.createVolumeComponents(containers, securityGroup);
+    const taskDefinition = this.createTaskDefinition(containers, volumes);
+    const discoveryService = this.createDiscoveryService();
+    const ecsService = this.createEcsService(
+      securityGroup,
+      taskDefinition,
+      discoveryService,
+    );
+    const deployment = this.createDeployment(ecsService, containers);
+
+    // Populate artifacts
+    this.artifacts = {
+      containers,
+      securityGroup,
+      volumes,
+      taskDefinition,
+      discoveryService,
+      ecsService,
+      deployment,
+    } as Artifacts; // Force type. Should be overridden by subclasses
+  }
+
+  /**
+   * Create a service name from the component id
+   */
+  protected getServiceName(): string {
+    return kebab(this.id);
   }
 
   protected createSecurityGroup() {
     return new vpc.SecurityGroup(this, 'sg', this.getSecurityGroupConfig());
   }
 
+  /**
+   * Dissociated config method for createSecurityGroup.
+   * Allows to override default config.
+   */
   protected getSecurityGroupConfig(): vpc.SecurityGroupConfig {
     return {
-      provider: this.provider,
       egress: [
         {
           protocol: '-1',
@@ -101,58 +91,65 @@ export abstract class ServiceComponent<
           ipv6CidrBlocks: ['::/0'],
         },
       ],
-      vpcId: this.config.vpcId,
+      vpcId: this.config.vpc.id,
       name: this.getResourceName('sg'),
     };
   }
 
-  protected createEcsTaskDefinition() {
+  protected createTaskDefinition(
+    containers: Container[],
+    volumes: VolumeComponents,
+  ) {
     return new ecs.EcsTaskDefinition(
       this,
       'task',
-      this.getEcsTaskDefinitionConfig(),
+      this.getEcsTaskDefinitionConfig(containers, volumes),
     );
   }
 
-  protected getEcsTaskDefinitionConfig(): ecs.EcsTaskDefinitionConfig {
+  /**
+   * Dissociated config method for createEcsTaskDefinition.
+   * Allows to override default config.
+   */
+  protected getEcsTaskDefinitionConfig(
+    containers: Container[],
+    volumes: VolumeComponents,
+  ): ecs.EcsTaskDefinitionConfig {
     return {
-      provider: this.provider,
       networkMode: 'awsvpc',
       requiresCompatibilities: ['FARGATE'],
       cpu: this.config.cpu,
       memory: this.config.memory,
       containerDefinitions: JSON.stringify(
-        this.containers.map((c) => c.getDefinition()),
+        containers.map((c) => c.getDefinition()),
       ),
-      volume: this.getVolumesForTaskDefinition(),
-      executionRoleArn: this.config.executionRoleArn,
+      volume: this.getVolumesDefinitions(volumes),
+      executionRoleArn: this.config.executionRole.arn,
       family: this.getResourceName('task'),
       tags: this.getResourceNameAsTag('task'),
     };
   }
 
   /**
-   * Get information about latest active task definition
+   * Get the volumes as expected in the task definition
    */
-  protected getEcsTaskDefinitionData(): ecs.DataAwsEcsTaskDefinition {
-    return new ecs.DataAwsEcsTaskDefinition(this, 'active-task', {
-      taskDefinition: this.ecsTaskDefinition.family,
-    });
+  protected getVolumesDefinitions(
+    volumeComponents: VolumeComponents,
+  ): ecs.EcsTaskDefinitionVolume[] {
+    return Object.entries(volumeComponents).map(([name, volumeComponent]) => ({
+      name,
+      efsVolumeConfiguration: {
+        fileSystemId: volumeComponent.artifacts.efsFileSystem.id,
+        rootDirectory: '/',
+      },
+    }));
   }
 
-  protected createServiceDiscoveryService() {
-    return new servicediscovery.ServiceDiscoveryService(
-      this,
-      'discovery',
-      this.getServiceDiscoveryServiceConfig(),
-    );
-  }
-
-  protected getServiceDiscoveryServiceConfig(): servicediscovery.ServiceDiscoveryServiceConfig {
-    return {
-      name: this.serviceName,
+  protected createDiscoveryService() {
+    return new servicediscovery.ServiceDiscoveryService(this, 'discovery', {
+      name: this.getServiceName(),
       dnsConfig: {
-        namespaceId: this.config.privateDnsNamespaceId,
+        namespaceId: this.config.privateDnsNamespace.id,
         routingPolicy: 'MULTIVALUE',
         dnsRecords: [
           {
@@ -161,29 +158,44 @@ export abstract class ServiceComponent<
           },
         ],
       },
-    };
+    });
   }
 
-  protected createEcsService() {
-    return new ecs.EcsService(this, 'service', this.getEcsServiceConfig());
+  protected createEcsService(
+    securityGroup: vpc.SecurityGroup,
+    taskDefinition: ecs.EcsTaskDefinition,
+    discoveryService: servicediscovery.ServiceDiscoveryService,
+  ) {
+    return new ecs.EcsService(
+      this,
+      'service',
+      this.getEcsServiceConfig(securityGroup, taskDefinition, discoveryService),
+    );
   }
 
-  protected getEcsServiceConfig(): ecs.EcsServiceConfig {
+  /**
+   * Dissociated config method for createEcsService.
+   * Allows to override default config.
+   */
+  protected getEcsServiceConfig(
+    securityGroup: vpc.SecurityGroup,
+    taskDefinition: ecs.EcsTaskDefinition,
+    discoveryService: servicediscovery.ServiceDiscoveryService,
+  ): ecs.EcsServiceConfig {
     return {
-      provider: this.provider,
-      cluster: this.config.clusterId,
-      taskDefinition: this.getMostRecentTaskDefinition(),
+      cluster: this.config.cluster.id,
+      taskDefinition: this.getMostRecentTaskDefinition(taskDefinition),
       launchType: 'FARGATE',
       schedulingStrategy: 'REPLICA',
       desiredCount: this.config.desiredCount || 1,
       networkConfiguration: {
-        securityGroups: [this.getSecurityGroupIdAsToken()],
-        subnets: this.config.subnetsIds,
+        securityGroups: [securityGroup.id],
+        subnets: this.config.subnets.map((s) => s.id),
         assignPublicIp: true,
       },
 
       serviceRegistries: {
-        registryArn: this.getServiceDiscoveryServiceArnAsToken(),
+        registryArn: discoveryService.arn,
       },
 
       name: this.getResourceName('service'),
@@ -191,16 +203,58 @@ export abstract class ServiceComponent<
   }
 
   /**
-   * Aggregate and group all mounts points across every container and merge boolean properties
-   * @protected
+   * Get the most recent running task definition for the service
    */
-  protected getVolumesConfigs(): VolumesConfigs {
-    const volumes: VolumesConfigs = {};
-    for (const container of this.containers) {
+  protected getMostRecentTaskDefinition(
+    taskDefinition: ecs.EcsTaskDefinition,
+  ): string {
+    // Get information about latest active task definition
+    const activeTaskDefinition = new ecs.DataAwsEcsTaskDefinition(
+      this,
+      'active-task',
+      { taskDefinition: taskDefinition.family },
+    );
+
+    const newRevision = Token.asString(taskDefinition.revision);
+    const currentRevision = Token.asString(activeTaskDefinition.revision);
+    return `${taskDefinition.family}:\${max("${newRevision}", "${currentRevision}")}`;
+  }
+
+  protected createVolumeComponents(
+    containers: Container[],
+    securityGroup: vpc.SecurityGroup,
+  ): VolumeComponents {
+    // Create configs from all containers
+    const volumesConfigs =
+      this.aggregateVolumesConfigsFromContainers(containers);
+
+    // Create volume components and store them in a record
+    const volumeComponents: VolumeComponents = {};
+    for (const [name, config] of Object.entries(volumesConfigs)) {
+      volumeComponents[name] = new VolumeComponent(this, name, {
+        vpc: this.config.vpc,
+        subnets: this.config.subnets,
+        clientsSecurityGroups: [securityGroup],
+        preventDestroy: config.preventDestroy,
+        enableBackups: config.enableBackups,
+      });
+    }
+
+    return volumeComponents;
+  }
+
+  /**
+   * Aggregate and group all mounts points across every container and merge boolean properties
+   */
+  protected aggregateVolumesConfigsFromContainers(
+    containers: Container[],
+  ): VolumeConfigs {
+    const volumes: VolumeConfigs = {};
+    for (const container of containers) {
       const mountPoints = container.getMountPoints();
       for (const mountPoint of mountPoints) {
         const name = mountPoint.sourceVolume;
-        const previous: VolumesConfig = volumes[name]
+        const previous: VolumeConfig = volumes[name]
           ? volumes[name]
           : {
               containers: [],
@@ -218,149 +272,75 @@ export abstract class ServiceComponent<
     return volumes;
   }
 
-  protected shouldCreateVolumeComponent() {
-    return Object.keys(this.volumesConfigs).length > 0;
-  }
-
-  protected createVolumeComponentsMap() {
-    return Object.entries(this.volumesConfigs).reduce(
-      (map, [name, config]) => ({
-        ...map,
-        [name]: this.createVolumeComponent(name, config),
-      }),
-      {} as Record<string, VolumeComponent>,
-    );
-  }
-
-  protected createVolumeComponent(name: string, config: VolumesConfig) {
-    return new VolumeComponent(
-      this,
-      name,
-      this.getVolumeComponentConfig(config),
-    );
-  }
-
-  protected getVolumeComponentConfig(
-    config: VolumesConfig,
-  ): VolumeComponentConfig {
-    return {
-      vpcId: this.config.vpcId,
-      subnetsIds: this.config.subnetsIds,
-      clientsSecurityGroupsIds: [this.getSecurityGroupIdAsToken()],
-      preventDestroy: config.preventDestroy,
-      enableBackups: config.enableBackups,
-    };
-  }
-
-  protected getVolumesForTaskDefinition(): ecs.EcsTaskDefinitionVolume[] {
-    if (!this.volumeComponentsMap) {
-      return [];
-    }
-    return Object.entries(this.volumeComponentsMap).map(
-      ([name, volumeComponent]) => ({
-        name,
-        efsVolumeConfiguration: {
-          fileSystemId: volumeComponent.getFileSystemIdAsToken(),
-          rootDirectory: '/',
-        },
-      }),
-    );
-  }
-
   /**
    * If the services use one or more custom Docker images, it should use a continuous deployment.
    * If true, this will create a Code Pipeline to deploy automatically new image versions
    */
-  protected enableContinuousDeployment(): boolean {
-    return this.getPrivateContainers().length > 0;
-  }
-
-  protected createDeploymentComponent() {
-    return new DeploymentComponent(
-      this,
-      'deploy',
-      this.getDeploymentComponentConfig(),
+  protected createDeployment(
+    ecsService: ecs.EcsService,
+    containers: Container[],
+  ): DeploymentComponent | undefined {
+    // Extract the custom images from the containers
+    const privateContainers = containers.filter((container) =>
+      container.usePrivateImage(),
     );
-  }
-
-  protected getDeploymentComponentConfig(): DeploymentComponentConfig {
-    const privateContainers = this.getPrivateContainers();
+    // If there is at least one custom image, create a deployment, otherwise return undefined
     if (privateContainers.length === 0) {
-      throw new Error(
-        'Cannot get deployment config without private containers',
-      );
+      return undefined;
     }
-
-    return {
+    // Create the deployment
+    return new DeploymentComponent(this, 'deploy', {
       triggers: privateContainers.map((pc) => ({
         imageTag: pc.getImageTag(),
         repositoryName: pc.getImageName(),
       })),
+      // Loop over all containers because all the service is updated when a private image is updated
       imageDefinitions: JSON.stringify(
-        this.containers.map((c) => c.getImageDefinition()),
+        containers.map((c) => c.getImageDefinition()),
       ),
-      clusterName: this.config.clusterName,
-      serviceName: this.getEcsServiceNameAsToken(),
-    };
+      cluster: this.config.cluster,
+      service: ecsService,
+    });
   }
 
-  protected getPrivateContainers(): Container[] {
-    return this.containers.filter((container) => container.usePrivateImage());
+  /**
+   * Helper to get a secret key in the secret manager
+   */
+  getSecretPath(key: string): string {
+    return `${this.config.secret.arn}:${key}::`;
   }
 
-  protected abstract getContainers(): Container[];
-
-  getEcsTaskDefinitionArnAsToken(): string {
-    return Token.asString(this.ecsTaskDefinition.arn);
-  }
-
-  getMostRecentTaskDefinition(): string {
-    const family = Token.asString(this.ecsTaskDefinition.family);
-    const newRevision = Token.asString(this.ecsTaskDefinition.revision);
-    const currentRevision = Token.asString(this.ecsTaskDefinitionData.revision);
-    return `${family}:\${max("${newRevision}", "${currentRevision}")}`;
-  }
-
-  getSecretsmanagerSecretArn(): string {
-    return this.config.secretsmanagerSecretArn;
-  }
-
-  getFileStorageS3Endpoint(): string {
-    return this.config.fileStorageS3Endpoint;
-  }
-
-  getFileStorageS3BucketName(): string {
-    return this.config.fileStorageS3BucketName;
-  }
-
-  getEcsServiceNameAsToken(): string {
-    return Token.asString(this.ecsService.name);
-  }
-
-  getSecurityGroupIdAsToken(): string {
-    return Token.asString(this.securityGroup.id);
-  }
-
-  getLogsGroup(): string {
+  /**
+   * Helper to get the logs group name
+   */
+  getLogsGroup(): cloudwatch.CloudwatchLogGroup {
     return this.config.logsGroup;
   }
 
+  /**
+   * Helper to get the aws region
+   */
   getRegion(): string {
     return this.provider.region || '';
   }
 
-  getServiceDiscoveryServiceArnAsToken(): string {
-    return Token.asString(this.serviceDiscoveryService.arn);
-  }
-
+  /**
+   * Helper to get the service private domain name
+   */
   getServiceDomainName(service: string): string {
-    return `${service}.${this.config.privateDnsNamespaceName}`;
+    return `${service}.${this.config.privateDnsNamespace.name}`;
   }
 
+  /**
+   * Helper to get a deep url of this application
+   */
   getApplicationUrl(path = ''): string {
     return `${this.config.applicationBaseUrl}${path}`;
   }
 
+  /**
+   * Helper to get Docker image details from the application name
+   */
   getDockerApplication(appName: string): DockerApplication {
     if (!this.config.dockerApplications[appName]) {
       throw new Error(`No Docker application found for ${appName}`);

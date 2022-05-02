@@ -1,1 +1,1 @@
-export * from './lib/entrypoint.component';
+export * from './lib';
