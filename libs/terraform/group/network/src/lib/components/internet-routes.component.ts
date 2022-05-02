@@ -1,50 +1,46 @@
 import { vpc } from '@cdktf/provider-aws';
 
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  InternetRoutesComponentArtifacts,
+  InternetRoutesComponentConfig,
+} from '../interfaces';
 
-export interface InternetRoutesComponentConfig {
-  routeTableId: string;
-  internetGatewayId: string;
-}
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
 /**
- * This component provides an EInternet Gateway to make internet available in the private subnet with IPv4 and IPv6.
+ * This component provides an Internet Gateway to make internet available in the private subnet with IPv4 and IPv6.
  * The InternetGateway is defined at the VPC level, as for the EgressOnlyInternetGateway
  */
-export class InternetRoutesComponent extends AwsComponent<InternetRoutesComponentConfig> {
-  protected readonly routeToInternetGateway: vpc.Route;
-
-  protected readonly ipv6RouteToInternetGateway: vpc.Route;
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: InternetRoutesComponentConfig,
-  ) {
-    super(scope, id, config);
-
-    this.routeToInternetGateway = this.createRouteToInternetGateway();
-    this.ipv6RouteToInternetGateway = this.createIpv6RouteToInternetGateway();
+export class InternetRoutesComponent extends AwsComponent<
+  InternetRoutesComponentConfig,
+  InternetRoutesComponentArtifacts
+> {
+  protected createComponents(): void {
+    this.createRouteToInternetGateway();
+    this.createIpv6RouteToInternetGateway();
+    // Populate the artifacts
+    this.artifacts = {};
   }
 
   protected createRouteToInternetGateway() {
     return new vpc.Route(this, 'rt', {
-      provider: this.provider,
       destinationCidrBlock: '0.0.0.0/0',
-      gatewayId: this.config.internetGatewayId,
-      routeTableId: this.config.routeTableId,
+      gatewayId: this.config.internetGateway.id,
+      routeTableId: this.getRouteTableId(),
     });
   }
 
   protected createIpv6RouteToInternetGateway() {
     return new vpc.Route(this, 'rt6', {
-      provider: this.provider,
       destinationIpv6CidrBlock: '::/0',
-      gatewayId: this.config.internetGatewayId,
-      routeTableId: this.config.routeTableId,
+      gatewayId: this.config.internetGateway.id,
+      routeTableId: this.getRouteTableId(),
     });
+  }
+
+  protected getRouteTableId(): string {
+    return typeof this.config.routeTable === 'string'
+      ? this.config.routeTable
+      : this.config.routeTable.id;
   }
 }

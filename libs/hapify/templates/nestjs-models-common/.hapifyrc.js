@@ -20,11 +20,6 @@ module.exports = {
       input: 'one',
     },
     {
-      path: 'generated/nestjs-models-common/src/{kebab}/{kebab}-model.module.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
       path: 'generated/nestjs-models-common/src/{kebab}/{kebab}-model.constant.ts',
       engine: 'hpf',
       input: 'one',

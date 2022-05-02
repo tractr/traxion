@@ -55,8 +55,8 @@
     "terraform-component-deployment": "libs/terraform/component/deployment",
     "terraform-component-deployment-trigger": "libs/terraform/component/deployment-trigger",
     "terraform-component-entrypoint": "libs/terraform/component/entrypoint",
+    "terraform-component-file-storage": "libs/terraform/component/file-storage",
     "terraform-component-logs": "libs/terraform/component/logs",
-    "terraform-component-owner-pictures": "libs/terraform/component/owner-pictures",
     "terraform-component-private-dns": "libs/terraform/component/private-dns",
     "terraform-component-s3": "libs/terraform/component/s3",
     "terraform-component-s3-user": "libs/terraform/component/s3-user",
@@ -66,7 +66,6 @@
     "terraform-group-pool": "libs/terraform/group/pool",
     "terraform-group-registry": "libs/terraform/group/registry",
     "terraform-group-zone": "libs/terraform/group/zone",
-    "terraform-helpers-post-synth": "libs/terraform/helpers/post-synth",
     "terraform-service-api": "libs/terraform/service/api",
     "terraform-service-ecs": "libs/terraform/service/ecs",
     "terraform-service-postgres": "libs/terraform/service/postgres",
@@ -108,7 +107,7 @@
               "nestjs-core:publish",
               "angular-tools:publish",
               "terraform-component-deployment:publish",
-              "terraform-component-owner-pictures:publish",
+              "terraform-component-file-storage:publish",
               "hapify-templates-nestjs-models-common:publish",
               "hapify-templates-rest-dtos:publish",
               "schematics:publish",
@@ -134,8 +133,7 @@
               "angular-authentication:publish",
               "terraform-group-pool:publish",
               "angular-casl:publish",
-              "hapify-create-traxion-workspace:publish",
-              "terraform-helpers-post-synth:publish"
+              "hapify-create-traxion-workspace:publish"
             ],
             "syncVersions": true
           }

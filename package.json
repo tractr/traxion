@@ -75,6 +75,7 @@
     "@nrwl/nest": "13.7.2",
     "@nrwl/node": "13.7.2",
     "@nrwl/nx-cloud": "13.1.2",
+    "@nrwl/react": "13.7.2",
     "@prisma/client": "^3.9.2",
     "@types/faker": "^5.5.7",
     "@types/glob": "^7.2.0",
@@ -100,6 +101,7 @@
     "fs-extra": "^10.0.0",
     "glob": "^7.2.0",
     "graphql": "^16.3.0",
+    "is-plain-object": "^5.0.0",
     "jest-mock-extended": "^2.0.4",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
@@ -143,7 +145,7 @@
     "@angular-eslint/template-parser": "13.0.1",
     "@angular/compiler-cli": "13.2.1",
     "@angular/language-service": "13.2.1",
-    "@cdktf/provider-aws": "^5.0.23",
+    "@cdktf/provider-aws": "^7.0.7",
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
     "@docusaurus/mdx-loader": "^2.0.0-beta.15",
@@ -152,7 +154,6 @@
     "@jscutlery/semver": "^2.19.3",
     "@nestjs/schematics": "^8.0.6",
     "@nestjs/testing": "^8.3.1",
-    "@nrwl/angular": "13.7.2",
     "@nrwl/cli": "13.7.2",
     "@nrwl/cypress": "13.7.2",
     "@nrwl/devkit": "13.7.2",
@@ -160,10 +161,8 @@
     "@nrwl/jest": "13.7.2",
     "@nrwl/js": "13.7.2",
     "@nrwl/linter": "13.7.2",
-    "@nrwl/nest": "13.7.2",
     "@nrwl/node": "13.7.2",
     "@nrwl/nx-plugin": "13.7.2",
-    "@nrwl/react": "13.7.2",
     "@nrwl/tao": "13.7.2",
     "@nrwl/workspace": "13.7.2",
     "@nx-plus/docusaurus": "^12.2.0",
@@ -199,8 +198,8 @@
     "@typescript-eslint/parser": "5.12.0",
     "autoprefixer": "^10.4.2",
     "babel-jest": "^27.5.1",
-    "cdktf": "^0.9.1",
-    "cdktf-cli": "^0.9.1",
+    "cdktf": "^0.10.1",
+    "cdktf-cli": "^0.10.1",
     "commitizen": "^4.2.4",
     "cypress": "^9.5.0",
     "cz-conventional-changelog": "^3.3.0",
@@ -250,6 +249,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "prisma": {
-    "seed": "ts-node libs/prisma/src/index.ts"
+    "schema": "libs/generated/prisma/prisma/schema.prisma",
+    "seed": "ts-node -r tsconfig-paths/register --project libs/generated/prisma/tsconfig.lib.json libs/generated/prisma/prisma/seed.ts"
   }
 }

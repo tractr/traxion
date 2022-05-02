@@ -2,6 +2,89 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.43.10](https://github.com/tractr/stack/compare/v1.43.9...v1.43.10) (2022-04-28)
+
+
+
+## [1.43.9](https://github.com/tractr/stack/compare/v1.43.8...v1.43.9) (2022-04-14)
+
+
+
+## [1.43.8](https://github.com/tractr/stack/compare/v1.43.7...v1.43.8) (2022-04-12)
+
+
+
+## [1.43.7](https://github.com/tractr/stack/compare/v1.43.6...v1.43.7) (2022-04-11)
+
+
+
+## [1.43.6](https://github.com/tractr/stack/compare/v1.43.5...v1.43.6) (2022-04-08)
+
+
+
+## [1.43.5](https://github.com/tractr/stack/compare/v1.43.4...v1.43.5) (2022-04-07)
+
+
+
+## [1.43.4](https://github.com/tractr/stack/compare/v1.43.3...v1.43.4) (2022-04-06)
+
+
+
+## [1.43.3](https://github.com/tractr/stack/compare/v1.43.2...v1.43.3) (2022-04-06)
+
+
+
+## [1.43.2](https://github.com/tractr/stack/compare/v1.43.1...v1.43.2) (2022-04-06)
+
+
+
+## [1.43.1](https://github.com/tractr/stack/compare/v1.43.0...v1.43.1) (2022-04-06)
+
+
+
+# [1.43.0](https://github.com/tractr/stack/compare/v1.42.1...v1.43.0) (2022-04-05)
+
+
+
+## [1.42.1](https://github.com/tractr/stack/compare/v1.42.0...v1.42.1) (2022-03-15)
+
+
+
+# [1.42.0](https://github.com/tractr/stack/compare/v1.41.0...v1.42.0) (2022-03-03)
+
+
+### Features
+
+* update schematics to be able to do the demo ([#402](https://github.com/tractr/stack/issues/402)) ([34af194](https://github.com/tractr/stack/commit/34af1943f616f8bb03831fa2fccad2089228c235))
+
+
+
+# [1.41.0](https://github.com/tractr/stack/compare/v1.40.0...v1.41.0) (2022-03-03)
+
+
+### Features
+
+* split traxion workspace schematics ([#401](https://github.com/tractr/stack/issues/401)) ([18c9ca5](https://github.com/tractr/stack/commit/18c9ca515182506a488a30d9d7d45c81ea7eaa63))
+
+
+
+# [1.40.0](https://github.com/tractr/stack/compare/v1.39.6...v1.40.0) (2022-02-28)
+
+
+
+## [1.39.6](https://github.com/tractr/stack/compare/v1.39.5...v1.39.6) (2022-02-23)
+
+
+### Bug Fixes
+
+* update traxion workspace schematics to be able to run the workspace the first time ([#397](https://github.com/tractr/stack/issues/397)) ([e87b59c](https://github.com/tractr/stack/commit/e87b59c8d23388ec5fff15fba4703dd5f3e412b0))
+
+
+
+## [1.39.5](https://github.com/tractr/stack/compare/v1.39.4...v1.39.5) (2022-02-23)
+
+
+
 ## [1.39.4](https://github.com/tractr/stack/compare/v1.39.3...v1.39.4) (2022-02-22)
 
 

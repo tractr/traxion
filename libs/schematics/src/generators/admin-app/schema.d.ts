@@ -4,6 +4,7 @@ export interface AdminAppGeneratorSchema {
   npmName?: string;
   reactAdminImportPath: string;
   rextClientImportPath: string;
+  skipInstall?: boolean;
 }
 
 export interface AdminAppGeneratorSchemaWithExtra

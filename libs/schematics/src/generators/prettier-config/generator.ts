@@ -5,6 +5,7 @@ import { formatFiles, generateFiles, Tree } from '@nrwl/devkit';
 import * as packageJson from '../../../package.json';
 import {
   addPackageToPackageJson,
+  installPackagesTask,
   npmRun,
   PackageDefinition,
 } from '../../helpers';
@@ -53,6 +54,8 @@ export default async function prettierGenerator(
   );
 
   await addPackageToPackageJson(tree, packagesToAdd);
+
+  installPackagesTask(tree, options);
 
   await formatFiles(tree);
 

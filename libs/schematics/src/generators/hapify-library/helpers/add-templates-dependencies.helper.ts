@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
 
 import * as packageJson from '../../../../package.json';
 import { addPackageToPackageJson } from '../../../helpers';
@@ -9,22 +9,28 @@ export async function addTemplateDependencies(
   tree: Tree,
   options: NormalizedOptions,
 ) {
-  const { hapifyTemplates } = options;
+  const { hapifyTemplate } = options;
   const currentPackageVersion = packageJson.version;
 
   await addPackageToPackageJson(
     tree,
-    hapifyTemplates
-      .flatMap((template) => DEFAULT_DEPENDENCIES[template] || [])
-      .map((packageDefinition) => {
-        if (typeof packageDefinition === 'string') return packageDefinition;
+    (DEFAULT_DEPENDENCIES[hapifyTemplate] || []).map((packageDefinition) => {
+      if (typeof packageDefinition === 'string') return packageDefinition;
 
-        const { version } = packageDefinition;
-        return {
-          ...packageDefinition,
-          version:
-            version && version === 'current' ? currentPackageVersion : version,
-        };
-      }),
+      const { version } = packageDefinition;
+      return {
+        ...packageDefinition,
+        version:
+          version && version === 'current' ? currentPackageVersion : version,
+      };
+    }),
+  );
+
+  addDependenciesToPackageJson(
+    tree,
+    {},
+    {
+      '@tractr/hapify-config': 'latest',
+    },
   );
 }

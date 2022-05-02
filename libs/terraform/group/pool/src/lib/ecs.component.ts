@@ -1,12 +1,10 @@
 import { ecs } from '@cdktf/provider-aws';
-import { Token } from 'cdktf';
 
-import { EcsComponentConfig } from './interfaces';
+import { EcsComponentArtifacts, EcsComponentConfig } from './interfaces';
 
 import {
   AwsComponent,
   AwsComponentConstructor,
-  AwsProviderConstruct,
 } from '@tractr/terraform-component-aws';
 import { PrivateDnsComponent } from '@tractr/terraform-component-private-dns';
 import {
@@ -14,7 +12,9 @@ import {
   BackendServiceComponentConfig,
   ExecutionRoleComponent,
   ServiceComponent,
+  ServiceComponentArtifacts,
   ServiceComponentConfig,
+  ServiceComponentDefaultConfig,
   ServiceComponentPublicConfig,
 } from '@tractr/terraform-service-ecs';
 import {
@@ -22,76 +22,75 @@ import {
   ReverseProxyTaskRoleComponent,
 } from '@tractr/terraform-service-reverse-proxy';
 
-export class EcsComponent extends AwsComponent<EcsComponentConfig> {
-  protected readonly executionRoleComponent: ExecutionRoleComponent;
-
-  protected readonly ecsCluster: ecs.EcsCluster;
-
-  protected readonly serviceDiscoveryComponent: PrivateDnsComponent;
-
-  protected readonly reverseProxyTaskRoleComponent: ReverseProxyTaskRoleComponent;
-
-  protected readonly reverseProxyComponent: ReverseProxyComponent;
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: EcsComponentConfig,
-  ) {
-    super(scope, id, config);
-    this.executionRoleComponent = this.createExecutionRoleComponent();
-    this.ecsCluster = this.createEcsCluster();
-    this.serviceDiscoveryComponent = this.createServiceDiscoveryComponent();
+export class EcsComponent extends AwsComponent<
+  EcsComponentConfig,
+  EcsComponentArtifacts
+> {
+  protected createComponents(): void {
+    const executionRole = this.createExecutionRole();
+    const ecsCluster = this.createEcsCluster();
+    const privateDns = this.createPrivateDns();
 
     // ReverseProxyTaskRoleComponent must be created before the proxy component
-    this.reverseProxyTaskRoleComponent =
-      this.createReverseProxyTaskRoleComponent();
-    this.reverseProxyComponent = this.createReverseProxyComponent();
+    const reverseProxyTaskRole = this.createReverseProxyTaskRole();
+    const reverseProxy = this.createReverseProxyComponent(
+      ecsCluster,
+      executionRole,
+      reverseProxyTaskRole,
+      privateDns,
+    );
+
+    // Populate artifacts
+    this.artifacts = {
+      ecsCluster,
+      executionRole,
+      privateDns,
+      reverseProxy,
+      reverseProxyTaskRole,
+    };
   }
 
-  protected createExecutionRoleComponent() {
+  protected createExecutionRole() {
     return new ExecutionRoleComponent(this, 'exec', {
-      secretsmanagerSecretArn: this.config.secretsmanagerSecretArn,
+      secret: this.config.secret,
     });
   }
 
   protected createEcsCluster() {
     return new ecs.EcsCluster(this, 'cluster', {
-      provider: this.provider,
       name: this.getResourceName('cluster'),
     });
   }
 
-  protected createServiceDiscoveryComponent() {
+  protected createPrivateDns() {
     return new PrivateDnsComponent(this, 'discovery', {
-      vpcId: this.config.vpcId,
+      vpc: this.config.vpc,
     });
   }
 
-  protected createReverseProxyTaskRoleComponent() {
-    return new ReverseProxyTaskRoleComponent(this, 'proxy-task');
+  protected createReverseProxyTaskRole() {
+    return new ReverseProxyTaskRoleComponent(this, 'proxy-task', {});
   }
 
-  protected createReverseProxyComponent() {
+  protected createReverseProxyComponent(
+    ecsCluster: ecs.EcsCluster,
+    executionRole: ExecutionRoleComponent,
+    taskRole: ReverseProxyTaskRoleComponent,
+    privateDns: PrivateDnsComponent,
+  ) {
     return new ReverseProxyComponent(this, 'proxy', {
-      vpcId: this.config.vpcId,
-      subnetsIds: this.config.subnetsIds,
+      vpc: this.config.vpc,
+      subnets: this.config.subnets,
       logsGroup: this.config.logsGroup,
-      clusterId: this.getEcsClusterIdAsToken(),
-      clusterName: this.getEcsClusterNameAsToken(),
+      cluster: ecsCluster,
       dockerApplications: this.config.dockerApplications,
       applicationBaseUrl: this.config.applicationBaseUrl,
-      executionRoleArn: this.executionRoleComponent.getIamRoleArnAsToken(),
-      secretsmanagerSecretArn: this.config.secretsmanagerSecretArn,
-      fileStorageS3Endpoint: this.config.fileStorageS3Endpoint,
-      fileStorageS3BucketName: this.config.fileStorageS3BucketName,
-      privateDnsNamespaceId:
-        this.serviceDiscoveryComponent.getNamespaceIdAsToken(),
-      privateDnsNamespaceName:
-        this.serviceDiscoveryComponent.getNamespaceNameAsToken(),
-      loadBalancerSecurityGroupId: this.config.loadBalancerSecurityGroupId,
-      loadBalancerTargetGroupArn: this.config.loadBalancerTargetGroupArn,
-      taskRoleArn: this.reverseProxyTaskRoleComponent.getIamRoleArnAsToken(),
+      executionRole: executionRole.artifacts.role,
+      secret: this.config.secret,
+      privateDnsNamespace: privateDns.artifacts.dnsNamespace,
+      loadBalancerSecurityGroup: this.config.loadBalancerSecurityGroup,
+      loadBalancerTargetGroup: this.config.loadBalancerTargetGroup,
+      taskRole: taskRole.artifacts.role,
       ...this.config.reverseProxyConfig,
     });
   }
@@ -100,59 +99,59 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
    * Append a service that don't need to be served via Http (through Traefik)
    */
   addService<
-    C extends ServiceComponent<O>,
-    P extends ServiceComponentPublicConfig,
-    O extends ServiceComponentConfig,
+    Component extends ServiceComponent<Config, DefaultConfig, Artifacts>,
+    Config extends ServiceComponentConfig,
+    DefaultConfig extends ServiceComponentDefaultConfig,
+    Artifacts extends ServiceComponentArtifacts,
+    PublicConfig extends ServiceComponentPublicConfig,
   >(
-    ServiceClass: AwsComponentConstructor<C, O>,
+    ServiceClass: AwsComponentConstructor<Component, Config, Artifacts>,
     name: string,
-    publicConfig: P,
-  ): C {
-    const config = this.createServiceComponentConfig<P, O>(publicConfig);
+    publicConfig: PublicConfig,
+  ): Component {
+    const config = this.createServiceComponentConfig<PublicConfig, Config>(
+      publicConfig,
+    );
     return new ServiceClass(this, name, config);
   }
 
-  // Todo: improve typing, remove 'as never as O'
+  // Todo: improve typing, remove 'as never as Config'
   protected createServiceComponentConfig<
-    P extends ServiceComponentPublicConfig,
-    O extends ServiceComponentConfig,
-  >(publicConfig: P): O {
+    PublicConfig extends ServiceComponentPublicConfig,
+    Config extends ServiceComponentConfig,
+  >(publicConfig: PublicConfig): Config {
     return {
-      vpcId: this.config.vpcId,
-      subnetsIds: this.config.subnetsIds,
+      vpc: this.config.vpc,
+      subnets: this.config.subnets,
       logsGroup: this.config.logsGroup,
-      clusterId: this.getEcsClusterIdAsToken(),
-      clusterName: this.getEcsClusterNameAsToken(),
+      cluster: this.artifacts.ecsCluster,
       dockerApplications: this.config.dockerApplications,
       applicationBaseUrl: this.config.applicationBaseUrl,
-      executionRoleArn: this.executionRoleComponent.getIamRoleArnAsToken(),
-      secretsmanagerSecretArn: this.config.secretsmanagerSecretArn,
-      fileStorageS3Endpoint: this.config.fileStorageS3Endpoint,
-      fileStorageS3BucketName: this.config.fileStorageS3BucketName,
-      privateDnsNamespaceId:
-        this.serviceDiscoveryComponent.getNamespaceIdAsToken(),
-      privateDnsNamespaceName:
-        this.serviceDiscoveryComponent.getNamespaceNameAsToken(),
+      executionRole: this.artifacts.executionRole.artifacts.role,
+      secret: this.config.secret,
+      privateDnsNamespace: this.artifacts.privateDns.artifacts.dnsNamespace,
       ...publicConfig,
-    } as never as O;
+    } as never as Config;
   }
 
   /**
    * Append a service that will be served through reverse proxy (Traefik)
    */
   addHttpService<
-    C extends BackendServiceComponent<O>,
-    P extends ServiceComponentPublicConfig,
-    O extends BackendServiceComponentConfig,
+    Component extends BackendServiceComponent<Config, DefaultConfig, Artifacts>,
+    Config extends BackendServiceComponentConfig,
+    DefaultConfig extends ServiceComponentDefaultConfig,
+    Artifacts extends ServiceComponentArtifacts,
+    PublicConfig extends ServiceComponentPublicConfig,
   >(
-    ServiceClass: AwsComponentConstructor<C, O>,
+    ServiceClass: AwsComponentConstructor<Component, Config, Artifacts>,
     name: string,
-    publicConfig: P,
-  ): C {
-    const config = this.createBackendServiceComponentConfig<P, O>(
-      [this.reverseProxyComponent],
-      publicConfig,
-    );
+    publicConfig: PublicConfig,
+  ): Component {
+    const config = this.createBackendServiceComponentConfig<
+      PublicConfig,
+      Config
+    >([this.artifacts.reverseProxy], publicConfig);
     return new ServiceClass(this, name, config);
   }
 
@@ -160,39 +159,33 @@ export class EcsComponent extends AwsComponent<EcsComponentConfig> {
    * Append a service that will used by one or more services
    */
   addBackendService<
-    C extends BackendServiceComponent<O>,
-    P extends ServiceComponentPublicConfig,
-    O extends BackendServiceComponentConfig,
+    Component extends BackendServiceComponent<Config, DefaultConfig, Artifacts>,
+    Config extends BackendServiceComponentConfig,
+    DefaultConfig extends ServiceComponentDefaultConfig,
+    Artifacts extends ServiceComponentArtifacts,
+    PublicConfig extends ServiceComponentPublicConfig,
   >(
-    ServiceClass: AwsComponentConstructor<C, O>,
+    ServiceClass: AwsComponentConstructor<Component, Config, Artifacts>,
     name: string,
     clients: ServiceComponent[],
-    publicConfig: P,
-  ): C {
-    const config = this.createBackendServiceComponentConfig<P, O>(
-      clients,
-      publicConfig,
-    );
+    publicConfig: PublicConfig,
+  ): Component {
+    const config = this.createBackendServiceComponentConfig<
+      PublicConfig,
+      Config
+    >(clients, publicConfig);
     return new ServiceClass(this, name, config);
   }
 
   protected createBackendServiceComponentConfig<
-    P extends ServiceComponentPublicConfig,
-    O extends BackendServiceComponentConfig,
-  >(clients: ServiceComponent[], publicConfig: P): O {
+    PublicConfig extends ServiceComponentPublicConfig,
+    Config extends BackendServiceComponentConfig,
+  >(clients: ServiceComponent[], publicConfig: PublicConfig): Config {
     return {
-      ...this.createServiceComponentConfig<P, O>(publicConfig),
-      clientsSecurityGroupsIds: clients.map((client) =>
-        client.getSecurityGroupIdAsToken(),
+      ...this.createServiceComponentConfig<PublicConfig, Config>(publicConfig),
+      clientsSecurityGroups: clients.map(
+        (client) => client.artifacts.securityGroup,
       ),
     };
-  }
-
-  getEcsClusterNameAsToken(): string {
-    return Token.asString(this.ecsCluster.name);
-  }
-
-  getEcsClusterIdAsToken(): string {
-    return Token.asString(this.ecsCluster.id);
   }
 }

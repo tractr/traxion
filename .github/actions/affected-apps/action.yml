@@ -1,0 +1,44 @@
+name: Get affected apps
+description: Get the list of the affected apps
+
+inputs:
+  all:
+    description: 'Describe if we are publishing the container on production tag'
+    type: boolean
+    required: false
+    default: false
+
+outputs:
+  apps:
+    description: 'The affected apps output string'
+    value: ${{ steps.apps.outputs.result }}
+
+runs:
+  using: 'composite'
+  steps:
+    # Set the matrix apps that have been affected by all the changes
+    - name: Affected apps output
+      if: ${{ !inputs.all }}
+      id: nx-apps
+      shell: bash
+      run: |
+        echo "::set-output name=apps::$(npx nx affected:apps --plain --base latest | sed 's/ /,/g')"
+
+    - name: Return formatted output
+      uses: actions/github-script@v3
+      id: apps
+      env:
+        APPS: ${{ steps.nx-apps.outputs.apps }}
+        ALL: ${{ inputs.all }}
+      with:
+        script: |
+          const fs = require('fs');
+          const join = require('path').join;
+          let apps = process.env.ALL === 'true'
+            ? fs.readdirSync('./apps')
+            : process.env.APPS.split(',').filter((name) => name !== '');
+
+          apps = apps.filter((name) => fs.existsSync(join(process.cwd(), 'apps', name, 'Dockerfile')));
+
+          console.log('Set the matrix to deploy the docker container:', apps);
+          return apps;

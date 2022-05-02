@@ -1,12 +1,11 @@
-import path = require('path');
-
-import { formatFiles, generateFiles, Tree } from '@nrwl/devkit';
+import { formatFiles, Tree } from '@nrwl/devkit';
 
 import * as packageJson from '../../../package.json';
-import { addPackageToPackageJson } from '../../helpers';
+import { addPackageToPackageJson, installPackagesTask } from '../../helpers';
 import { DEFAULT_LIBRARY_USE_CONTEXT } from '../../schematics.constants';
 import addGenerateTarget from '../target-generate/generator';
 import {
+  addFiles,
   addGitIgnoreEntry,
   addImplicitDependencies,
   addTemplateDependencies,
@@ -16,23 +15,7 @@ import {
   updateProjectTargets,
 } from './helpers';
 import { addBabelRc } from './helpers/add-babelrc.helper';
-import {
-  HapifyLibraryGeneratorOptionsWithExtra,
-  NormalizedOptions,
-} from './schema';
-
-function addFiles(host: Tree, options: NormalizedOptions) {
-  generateFiles(host, path.join(__dirname, './files'), options.projectRoot, {
-    ...options,
-    template: '',
-    name: options.name,
-    templates: options.templates,
-    hapifyModelJson: options.hapifyModelsJsonRelativePath,
-    hapifyImportReplacements: options.hapifyImportReplacements,
-    hapifyUseImportReplacements: options.hapifyUseImportReplacements,
-    npmScope: options.npmScope,
-  });
-}
+import { HapifyLibraryGeneratorOptionsWithExtra } from './schema';
 
 export default async function hapifyLibraryGenerator(
   tree: Tree,
@@ -44,7 +27,7 @@ export default async function hapifyLibraryGenerator(
   const currentVersion = packageJson.version;
 
   // Default values for library generator options
-  const { extra, projectName, hapifyTemplates } = normalizedOptions;
+  const { extra, projectName, hapifyTemplate } = normalizedOptions;
 
   await generateLibrary(tree, normalizedOptions);
 
@@ -61,21 +44,23 @@ export default async function hapifyLibraryGenerator(
 
   await addPackageToPackageJson(
     tree,
-    ['@tractr/hapify-config', ...normalizedOptions.templates].map(
+    ['@tractr/hapify-config', normalizedOptions.template].map(
       (packageName) => ({ packageName, version: currentVersion }),
     ),
   );
+
+  await addPackageToPackageJson(tree, '@hapify/cli');
 
   addImplicitDependencies(tree, normalizedOptions);
 
   updateProjectTargets(tree, normalizedOptions);
 
-  const isUsedInAReactContext = hapifyTemplates.some((template) =>
-    DEFAULT_LIBRARY_USE_CONTEXT[template].includes('react'),
-  );
-  if (isUsedInAReactContext) addBabelRc(tree, normalizedOptions);
+  if (DEFAULT_LIBRARY_USE_CONTEXT[hapifyTemplate].includes('react'))
+    addBabelRc(tree, normalizedOptions);
 
   await addTemplateDependencies(tree, normalizedOptions);
 
   await formatFiles(tree);
+
+  installPackagesTask(tree, options);
 }

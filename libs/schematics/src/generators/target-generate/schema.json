@@ -31,6 +31,11 @@
       "type": "string",
       "x-prompt": "In which project would you like to add the generate target ?"
     },
+    "skipInstall": {
+      "default": false,
+      "description": "Should we skip the install of the dependencies",
+      "type": "boolean"
+    },
     "updateImportPath": {
       "default": true,
       "description": "Should we update the import path of the generated files",

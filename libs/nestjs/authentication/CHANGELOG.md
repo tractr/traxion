@@ -2,6 +2,79 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.43.10](https://github.com/tractr/stack/compare/v1.43.9...v1.43.10) (2022-04-28)
+
+
+
+## [1.43.9](https://github.com/tractr/stack/compare/v1.43.8...v1.43.9) (2022-04-14)
+
+
+
+## [1.43.8](https://github.com/tractr/stack/compare/v1.43.7...v1.43.8) (2022-04-12)
+
+
+
+## [1.43.7](https://github.com/tractr/stack/compare/v1.43.6...v1.43.7) (2022-04-11)
+
+
+
+## [1.43.6](https://github.com/tractr/stack/compare/v1.43.5...v1.43.6) (2022-04-08)
+
+
+
+## [1.43.5](https://github.com/tractr/stack/compare/v1.43.4...v1.43.5) (2022-04-07)
+
+
+### Bug Fixes
+
+* update global guards to ignore rabbitmq requests ([#409](https://github.com/tractr/stack/issues/409)) ([e5d2b16](https://github.com/tractr/stack/commit/e5d2b169366abdc74d4a2cabcd9739201ccf76a1))
+
+
+
+## [1.43.4](https://github.com/tractr/stack/compare/v1.43.3...v1.43.4) (2022-04-06)
+
+
+
+## [1.43.3](https://github.com/tractr/stack/compare/v1.43.2...v1.43.3) (2022-04-06)
+
+
+
+## [1.43.2](https://github.com/tractr/stack/compare/v1.43.1...v1.43.2) (2022-04-06)
+
+
+
+## [1.43.1](https://github.com/tractr/stack/compare/v1.43.0...v1.43.1) (2022-04-06)
+
+
+
+# [1.43.0](https://github.com/tractr/stack/compare/v1.42.1...v1.43.0) (2022-04-05)
+
+
+
+## [1.42.1](https://github.com/tractr/stack/compare/v1.42.0...v1.42.1) (2022-03-15)
+
+
+
+# [1.42.0](https://github.com/tractr/stack/compare/v1.41.0...v1.42.0) (2022-03-03)
+
+
+
+# [1.41.0](https://github.com/tractr/stack/compare/v1.40.0...v1.41.0) (2022-03-03)
+
+
+
+# [1.40.0](https://github.com/tractr/stack/compare/v1.39.6...v1.40.0) (2022-02-28)
+
+
+
+## [1.39.6](https://github.com/tractr/stack/compare/v1.39.5...v1.39.6) (2022-02-23)
+
+
+
+## [1.39.5](https://github.com/tractr/stack/compare/v1.39.4...v1.39.5) (2022-02-23)
+
+
+
 ## [1.39.4](https://github.com/tractr/stack/compare/v1.39.3...v1.39.4) (2022-02-22)
 
 

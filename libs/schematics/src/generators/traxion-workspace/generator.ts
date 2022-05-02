@@ -1,18 +1,13 @@
 /* eslint-disable no-await-in-loop */
 
-import {
-  formatFiles,
-  logger,
-  readWorkspaceConfiguration,
-  Tree,
-  updateWorkspaceConfiguration,
-} from '@nrwl/devkit';
+import { formatFiles, logger, Tree } from '@nrwl/devkit';
 
+import { installPackagesTask } from '../..';
 import eslintGenerator from '../eslint-config/generator';
 import generateWorkflow from '../github-workflows/generator';
+import initWorkspaceGenerator from '../init-workspace/generator';
 import prettierGenerator from '../prettier-config/generator';
 import {
-  addNpmrc,
   addWorkspaceFiles,
   createAdminApplication,
   createAngularApplication,
@@ -46,22 +41,9 @@ export default async function traxionWorkspaceGenerator(
 
   let succeed;
 
-  // We add to the workspace a npmrc file
-  succeed = log.info('Adding .npmrc file');
-  addNpmrc(tree);
-  succeed();
-
   succeed = log.info('Update workspace configuration');
-  const workspaceConfiguration = readWorkspaceConfiguration(tree);
+  await initWorkspaceGenerator(tree);
   succeed();
-
-  updateWorkspaceConfiguration(tree, {
-    ...workspaceConfiguration,
-    workspaceLayout: {
-      appsDir: 'apps',
-      libsDir: 'libs',
-    },
-  });
 
   const normalizedOptions = await normalizeOptions(tree, options);
   const { generatedDir } = normalizedOptions;
@@ -99,4 +81,6 @@ export default async function traxionWorkspaceGenerator(
   succeed();
 
   await formatFiles(tree);
+
+  installPackagesTask(tree, normalizedOptions);
 }

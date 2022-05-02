@@ -14,6 +14,11 @@ export class JwtGlobalAuthGuard extends JwtAuthGuard {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
+    const contextType: string = context.getType();
+
+    // Skip the guard for rabbitmq requests
+    if (contextType === 'rmq') return true;
+
     const useGuardOverriding = this.reflector.getAllAndOverride(
       GUARDS_METADATA,
       [context.getHandler(), context.getClass()],

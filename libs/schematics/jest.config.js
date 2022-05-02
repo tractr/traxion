@@ -11,5 +11,7 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+
+  setupFiles: ['<rootDir>/.jest/set-env-vars.js'],
   coverageDirectory: '../../coverage/libs/schematics',
 };

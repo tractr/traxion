@@ -1,6 +1,7 @@
 import {
   addDependenciesToPackageJson,
   GeneratorCallback,
+  removeDependenciesFromPackageJson,
   Tree,
 } from '@nrwl/devkit';
 
@@ -59,6 +60,7 @@ export async function addPackageToPackageJson(
             : await getLatestPackageVersion(packageName, registry),
       };
 
+      removeDependenciesFromPackageJson(tree, [packageName], [packageName]);
       return addDependenciesToPackageJson(
         tree,
         type === PackageType.dependencies ? toAddToPackageJson : {},

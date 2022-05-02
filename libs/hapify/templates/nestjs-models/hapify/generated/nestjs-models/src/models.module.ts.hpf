@@ -1,21 +1,34 @@
-import { ModuleOverride } from '@tractr/nestjs-core';
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module } from '@nestjs/common';
+
+import { Logger } from '@tractr/nestjs-core';
  
 <<for Models model>>
 import { <<model pascal>>Module } from './<<model kebab>>';
 <<endfor>>
- 
-@Module({
-  imports:[
-    <<for Models model>>
-      <<model pascal>>Module,
-    <<endfor>>
-  ]
-})
-export class ModelsModule extends ModuleOverride {
-  static dependencies = [
+const modules = [
   <<for Models model>>
     <<model pascal>>Module,
   <<endfor>>
-  ];
+];
+
+ 
+@Module({
+  imports:modules,
+  exports:modules
+})
+export class ModelsModule {
+  /**
+   * Register the models module
+   *
+   * @deprecated stop using this static method to register your module but use the ModelsModule instead
+   */
+  static register(): DynamicModule {
+    const logger = new Logger();
+    logger.error(
+      'ModelsModule.register will be remove in futur version. Please remove the call to register and use the ModelsModule directly',
+    );
+    return {
+      module: ModelsModule,
+    };
+  }
 }

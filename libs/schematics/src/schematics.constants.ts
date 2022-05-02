@@ -1,7 +1,7 @@
 import { TargetConfiguration } from '@nrwl/devkit';
 
 import { AvailableTractrTemplates } from './generators/hapify-library/schema';
-import { Packages, PackageType } from './helpers';
+import { PackageDefinition, PackageType } from './helpers';
 
 export const DEFAULT_IMPORT_REPLACEMENTS = {
   'angular-rext-client': ['rext-client'],
@@ -83,7 +83,7 @@ export const DEFAULT_TARGETS_OPTIONS: Partial<
 };
 
 export const DEFAULT_DEPENDENCIES: Partial<
-  Record<AvailableTractrTemplates, Packages>
+  Record<AvailableTractrTemplates, PackageDefinition[]>
 > = {
   models: [
     { packageName: 'faker', version: '5.5.3', type: PackageType.dependencies },
