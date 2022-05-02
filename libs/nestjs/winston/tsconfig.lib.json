@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "esModuleInterop": true,
     "module": "commonjs",
     "outDir": "../../../dist/out-tsc",
     "target": "es6",

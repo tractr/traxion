@@ -55,8 +55,11 @@ export class LoggerService extends Logger implements NestjsLoggerService {
 
     if (typeof metadataOrContext === 'string') {
       context = metadataOrContext;
+
       if (typeof contextOrStack === 'string') {
         stack = contextOrStack;
+      } else {
+        metadata = contextOrStack;
       }
     } else {
       context = contextOrStack;
@@ -138,8 +141,8 @@ export class LoggerService extends Logger implements NestjsLoggerService {
 
   private extractMessageContextAndMetaFromInterface(
     message: Message | (Message & Metadata),
-    context: Context | (Context & Metadata) | Metadata = {},
-    metadata: Metadata = {},
+    context: Context | (Context & Metadata) | Metadata,
+    metadata: Metadata,
   ): {
     message: string;
     context: string | undefined;

@@ -1,55 +1,50 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { inspect } from 'util';
 
-import clc from 'chalk';
+import { Chalk, Instance } from 'chalk';
 import safeStringify from 'fast-safe-stringify';
 import { format } from 'winston';
 
 export type NestLikeConsoleFormatOptions = {
+  appName?: string;
   prettyPrint?: boolean;
-};
-
-export const nestLikeColorScheme: Record<string, clc.Chalk> = {
-  info: clc.greenBright,
-  error: clc.red,
-  warn: clc.yellow,
-  debug: clc.magentaBright,
-  verbose: clc.cyanBright,
+  colors?: boolean;
 };
 
 export const nestLikeConsoleFormat = (
-  appName = 'Nest',
   options: NestLikeConsoleFormatOptions = {},
-) =>
-  format.printf(({ context, level, timestamp, message, ms, ...meta }) => {
-    let time;
-    if (typeof timestamp !== 'undefined') {
-      // Only format the timestamp to a locale representation if it's ISO 8601 format. Any format
-      // that is not a valid date string will throw, just ignore it (it will be printed as-is).
-      try {
-        if (timestamp === new Date(timestamp).toISOString()) {
-          time = new Date(timestamp).toLocaleString();
-        }
-      } catch (error) {
-        // eslint-disable-next-line no-empty
-      }
-    }
+) => {
+  const { appName = 'Nest', prettyPrint = true, colors = true } = options;
 
+  const clc = new Instance(!colors ? { level: 0 } : {});
+  const nestLikeColorScheme: Record<string, Chalk> = {
+    info: clc.greenBright,
+    error: clc.red,
+    warn: clc.yellow,
+    debug: clc.magentaBright,
+    verbose: clc.cyanBright,
+  };
+
+  return format.printf(({ context, level, timestamp, message, ...meta }) => {
     const color =
       nestLikeColorScheme[level] || ((text: string): string => text);
 
     const stringifiedMeta = safeStringify(meta);
-    const formattedMeta = options?.prettyPrint
-      ? inspect(JSON.parse(stringifiedMeta), { colors: true, depth: null })
+    const formattedMeta = prettyPrint
+      ? inspect(JSON.parse(stringifiedMeta), {
+          colors: !!colors,
+          depth: null,
+        })
       : stringifiedMeta;
 
-    return (
-      `${color(`[${appName}]`)} ` +
-      `${clc.yellow(level.charAt(0).toUpperCase() + level.slice(1))}\t${
-        typeof time !== 'undefined' ? `${time} ` : ''
-      }${
-        typeof context !== 'undefined' ? `${clc.yellow(`[${context}]`)} ` : ''
-      }${color(message)} - ` +
-      `${formattedMeta}${typeof ms !== 'undefined' ? ` ${clc.yellow(ms)}` : ''}`
-    );
+    const name = color(`[${appName}]`);
+    const levelLabel = level.charAt(0).toUpperCase() + level.slice(1);
+    const timeLabel = typeof timestamp !== 'undefined' ? `${timestamp} ` : '';
+    const contextLabel =
+      typeof context !== 'undefined' ? `${clc.yellow(`[${context}]`)} ` : '';
+
+    return `${name} ${levelLabel}\t${timeLabel}${contextLabel}${color(
+      message,
+    )} - ${formattedMeta}`;
   });
+};
