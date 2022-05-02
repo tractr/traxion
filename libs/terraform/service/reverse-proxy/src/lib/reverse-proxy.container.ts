@@ -24,7 +24,7 @@ export class ReverseProxyContainer extends HttpContainer<ReverseProxyContainerCo
         '--ping=true',
         '--api.dashboard=true',
         '--providers.ecs=true',
-        `--providers.ecs.clusters=${this.config.clusterName}`,
+        `--providers.ecs.clusters=${this.config.cluster.name}`,
         `--providers.ecs.region=${this.service.getRegion()}`,
         '--providers.ecs.exposedByDefault=false',
         '--providers.ecs.refreshSeconds=15',

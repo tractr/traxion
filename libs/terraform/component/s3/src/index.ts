@@ -1,1 +1,1 @@
-export * from './lib/terraform-s3-component';
+export * from './lib';

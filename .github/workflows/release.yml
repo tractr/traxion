@@ -1,4 +1,4 @@
-name: Release and Deploy
+name: Stack release and Deploy
 
 on:
   push:
@@ -9,90 +9,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  # Take all the packages and release them to https://npm.pkg.github.com
   npm-release:
-    if: "!contains(github.event.commits[0].message, 'chore(release):')"
-
-    # Our code will run on node 16 and Linux
-    strategy:
-      matrix:
-        node: [16.x]
-        os: [ubuntu-20.04]
-
-    name: Release npm packages on node ${{ matrix.node }} and ${{ matrix.os }}
-    runs-on: ['${{ matrix.os }}']
-
-    outputs:
-      apps: ${{ steps.apps.outputs.result }}
-
-    steps:
-      # First we checkout the code
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GH_TOKEN }}
-
-      # We initialize the node action
-      - name: Use node.js ${{ matrix.node }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node }}
-          cache: 'npm'
-          registry-url: https://npm.pkg.github.com
-
-      # We install our dependencies
-      - name: Run npm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci --no-audit --no-progress
-
-      # We install our dependencies
-      - name: Run npm generate
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run generate
-
-      # We build our code base
-      - name: Configure git
-        run: |
-          git config user.name 'tractr-bot'
-          git config user.email 'tractr-bot@users.noreply.github.com'
-
-      # We run our release script
-      - name: nx run workspace:release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx nx run workspace:release --push
-
-      - name: Get the last commit SHA
-        id: commit
-        shell: bash
-        run: |
-          echo "::set-output name=sha::$(git rev-parse HEAD)"
-
-      - name: Manage released tag
-        uses: actions/github-script@v3
-        env:
-          SHA: ${{ steps.commit.outputs.sha }}
-
-        with:
-          github-token: ${{secrets.GH_TOKEN}}
-          script: |
-            try {
-              console.log("Remove the latest tag from the repository")
-              await github.git.deleteRef({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                ref: "tags/latest"
-              })
-            } catch (e) {
-              console.log("The latest tag doesn't exist yet: " + e)
-            }
-            console.log("Create the latest tag on:" + context.sha)
-            await github.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: "refs/tags/latest",
-              sha: process.env.SHA
-            })
+    name: Release npm packages
+    uses: ./.github/workflows/release-npm.yml
+    with:
+      registryUrl: 'https://npm.pkg.github.com'
+      botName: tractr-bot
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}

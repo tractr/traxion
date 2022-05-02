@@ -9,18 +9,13 @@ import { ModuleRef, Reflector } from '@nestjs/core';
 import { CaslAbilityFactoryService } from '../services';
 
 import { isClass, PolicyHandlerType } from '@tractr/common';
-import {
-  getRequestFromContext,
-  Logger,
-  POLICIES_KEY,
-} from '@tractr/nestjs-core';
+import { getRequestFromContext, POLICIES_KEY } from '@tractr/nestjs-core';
 
 @Injectable()
 export class PoliciesGuard implements CanActivate {
   constructor(
     private moduleRef: ModuleRef,
     private reflector: Reflector,
-    private logger: Logger,
     private caslAbilityFactory: CaslAbilityFactoryService,
   ) {}
 
@@ -30,6 +25,11 @@ export class PoliciesGuard implements CanActivate {
         POLICIES_KEY,
         context.getHandler(),
       ) || [];
+
+    const contextType: string = context.getType();
+
+    // Skip the guard for rabbitmq requests
+    if (contextType === 'rmq') return true;
 
     // Extract request from the context
     const req = getRequestFromContext(context);

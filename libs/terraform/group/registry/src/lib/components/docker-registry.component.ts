@@ -1,59 +1,47 @@
 import { ecr } from '@cdktf/provider-aws';
-import { Token } from 'cdktf';
-
-import { DockerRegistryComponentConfig } from '../interfaces';
 
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  DockerApplications,
+  DockerRegistryComponentArtifacts,
+  DockerRegistryComponentConfig,
+} from '../interfaces';
 
-export interface DockerApplication {
-  repositoryName: string;
-  imageName: string;
-}
-
-export type DockerApplications = Record<string, DockerApplication>;
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
 /**
  * This component creates one docker registry for each app containing a Dockerfile
  */
-export class DockerRegistryComponent extends AwsComponent<DockerRegistryComponentConfig> {
-  protected readonly ecrRepositories: ecr.EcrRepository[];
-
-  protected readonly applicationsMap: DockerApplications = {};
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: DockerRegistryComponentConfig,
-  ) {
-    super(scope, id, config);
-    this.ecrRepositories = this.createEcrRepositories();
-  }
-
-  protected createEcrRepositories() {
-    return this.config.dockerizedAppsNames.map((appName) =>
-      this.createEcrRepository(appName),
-    );
-  }
-
-  protected createEcrRepository(appName: string) {
-    // Force name as lower case
-    const lowerAppName = appName.toLowerCase();
-    const imageName = this.prefixIdWithProjectCode(lowerAppName);
-    const ecrRepository = new ecr.EcrRepository(this, appName, {
-      provider: this.provider,
-      name: this.prefixIdWithProjectCode(lowerAppName),
-      tags: this.getResourceNameAsTag(lowerAppName),
+export class DockerRegistryComponent extends AwsComponent<
+  DockerRegistryComponentConfig,
+  DockerRegistryComponentArtifacts
+> {
+  protected createComponents() {
+    // Create empty application map
+    const applicationsMap: DockerApplications = {};
+    // Creates one EcrRepository for each app
+    this.config.dockerizedAppsNames.forEach((appName) => {
+      // Force name as lower case
+      const lowerAppName = appName.toLowerCase();
+      const imageName = this.prefixIdWithProjectCode(lowerAppName);
+      // Create the Ecr Repository
+      const ecrRepository = new ecr.EcrRepository(this, appName, {
+        name: this.prefixIdWithProjectCode(lowerAppName),
+        tags: this.getResourceNameAsTag(lowerAppName),
+      });
+      // Populate the applications map so it can be retrieved in the artifacts
+      applicationsMap[lowerAppName] = {
+        imageName,
+        repositoryName: ecrRepository.repositoryUrl,
+      };
     });
-    this.applicationsMap[lowerAppName] = {
-      imageName,
-      repositoryName: Token.asString(ecrRepository.repositoryUrl),
-    };
-    return ecrRepository;
+    // Save the applications map in the artifacts
+    this.artifacts = { applicationsMap };
   }
 
+  /**
+   * Add the project code to the resource name if exists
+   * The project code is provided by the user in the config
+   */
   protected prefixIdWithProjectCode(id: string, separator = '/'): string {
     if (this.config.projectCode) {
       // Avoid double prefix
@@ -63,9 +51,5 @@ export class DockerRegistryComponent extends AwsComponent<DockerRegistryComponen
       return `${this.config.projectCode}${separator}${id}`;
     }
     return id;
-  }
-
-  getApplicationsMap(): DockerApplications {
-    return this.applicationsMap;
   }
 }

@@ -2,6 +2,59 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.43.10](https://github.com/tractr/stack/compare/v1.43.9...v1.43.10) (2022-04-28)
+
+
+
+## [1.43.9](https://github.com/tractr/stack/compare/v1.43.8...v1.43.9) (2022-04-14)
+
+
+### Bug Fixes
+
+* add role check to react-admin ([#415](https://github.com/tractr/stack/issues/415)) ([b349e5a](https://github.com/tractr/stack/commit/b349e5a84ae6356a4c76fdbfd240709617e7fa39))
+
+
+
+## [1.43.8](https://github.com/tractr/stack/compare/v1.43.7...v1.43.8) (2022-04-12)
+
+
+
+## [1.43.7](https://github.com/tractr/stack/compare/v1.43.6...v1.43.7) (2022-04-11)
+
+
+
+## [1.43.6](https://github.com/tractr/stack/compare/v1.43.5...v1.43.6) (2022-04-08)
+
+
+
+## [1.43.5](https://github.com/tractr/stack/compare/v1.43.4...v1.43.5) (2022-04-07)
+
+
+
+## [1.43.4](https://github.com/tractr/stack/compare/v1.43.3...v1.43.4) (2022-04-06)
+
+
+
+## [1.43.3](https://github.com/tractr/stack/compare/v1.43.2...v1.43.3) (2022-04-06)
+
+
+
+## [1.43.2](https://github.com/tractr/stack/compare/v1.43.1...v1.43.2) (2022-04-06)
+
+
+
+## [1.43.1](https://github.com/tractr/stack/compare/v1.43.0...v1.43.1) (2022-04-06)
+
+
+
+# [1.43.0](https://github.com/tractr/stack/compare/v1.42.1...v1.43.0) (2022-04-05)
+
+
+
+## [1.42.1](https://github.com/tractr/stack/compare/v1.42.0...v1.42.1) (2022-03-15)
+
+
+
 # [1.42.0](https://github.com/tractr/stack/compare/v1.41.0...v1.42.0) (2022-03-03)
 
 
