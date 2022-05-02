@@ -1,27 +1,26 @@
 import { iam } from '@cdktf/provider-aws';
-import { Token } from 'cdktf';
 
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  ReverseProxyTaskRoleComponentArtifacts,
+  ReverseProxyTaskRoleComponentConfig,
+} from './interfaces';
 
-export class ReverseProxyTaskRoleComponent extends AwsComponent {
-  protected readonly iamRole: iam.IamRole;
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
-  constructor(scope: AwsProviderConstruct, id: string, config = null) {
-    super(scope, id, config);
-    this.iamRole = this.createIamRole();
-  }
-
-  protected createIamRole() {
+export class ReverseProxyTaskRoleComponent extends AwsComponent<
+  ReverseProxyTaskRoleComponentConfig,
+  ReverseProxyTaskRoleComponentArtifacts
+> {
+  protected createComponents(): void {
     // ECS task execution roles
-    return new iam.IamRole(this, 'role', {
-      provider: this.provider,
+    const role = new iam.IamRole(this, 'role', {
       assumeRolePolicy: this.getAssumeRolePolicy(),
       inlinePolicy: this.getInlinePolicy(),
       name: this.getResourceName('role'),
     });
+
+    // Populate the artifacts
+    this.artifacts = { role };
   }
 
   protected getAssumeRolePolicy(): string {
@@ -64,9 +63,5 @@ export class ReverseProxyTaskRoleComponent extends AwsComponent {
         }),
       },
     ];
-  }
-
-  getIamRoleArnAsToken(): string {
-    return Token.asString(this.iamRole.arn);
   }
 }

@@ -1,81 +1,70 @@
 import { DeploymentBuildComponent } from './deployment-build.component';
-import {
-  DeploymentPipelineComponent,
-  DeploymentTrigger,
-} from './deployment-pipeline.component';
+import { DeploymentPipelineComponent } from './deployment-pipeline.component';
 import { DeploymentRoleComponent } from './deployment-role.component';
 import { DeploymentStoreComponent } from './deployment-store.component';
-
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  DeploymentComponentArtifacts,
+  DeploymentComponentConfig,
+} from './interfaces';
+
+import { AwsComponent } from '@tractr/terraform-component-aws';
 import { DeploymentTriggerComponent } from '@tractr/terraform-component-deployment-trigger';
 
-export interface DeploymentComponentConfig {
-  imageDefinitions: string;
-  triggers: DeploymentTrigger[];
-  clusterName: string;
-  serviceName: string;
-}
-
-export class DeploymentComponent extends AwsComponent<DeploymentComponentConfig> {
-  protected readonly deploymentStoreComponent: DeploymentStoreComponent;
-
-  protected readonly deploymentRoleComponent: DeploymentRoleComponent;
-
-  protected readonly deploymentBuildComponent: DeploymentBuildComponent;
-
-  protected readonly deploymentPipelineComponent: DeploymentPipelineComponent;
-
-  protected readonly deploymentTriggerComponent: DeploymentTriggerComponent;
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: DeploymentComponentConfig,
-  ) {
-    super(scope, id, config);
-
-    this.deploymentStoreComponent = this.createDeploymentStoreComponent();
-    this.deploymentRoleComponent = this.createDeploymentRoleComponent();
-    this.deploymentBuildComponent = this.createDeploymentBuildComponent();
-    this.deploymentPipelineComponent = this.createDeploymentPipelineComponent();
-    this.deploymentTriggerComponent = this.createDeploymentTriggerComponent();
+export class DeploymentComponent extends AwsComponent<
+  DeploymentComponentConfig,
+  DeploymentComponentArtifacts
+> {
+  protected createComponents(): void {
+    const store = this.createStoreComponent();
+    const role = this.createRoleComponent(store);
+    const build = this.createBuildComponent(role);
+    const pipeline = this.createPipelineComponent(store, role, build);
+    const trigger = this.createTriggerComponent(pipeline);
+    // Populate the artifacts
+    this.artifacts = {
+      store,
+      role,
+      build,
+      pipeline,
+      trigger,
+    };
   }
 
-  protected createDeploymentStoreComponent() {
-    return new DeploymentStoreComponent(this, 'store');
+  protected createStoreComponent() {
+    return new DeploymentStoreComponent(this, 'store', {});
   }
 
-  protected createDeploymentRoleComponent() {
+  protected createRoleComponent(store: DeploymentStoreComponent) {
     return new DeploymentRoleComponent(this, 'code', {
-      storeS3Arn: this.deploymentStoreComponent.getBucketArnAsToken(),
+      storeS3Bucket: store.artifacts.bucket,
     });
   }
 
-  protected createDeploymentBuildComponent() {
+  protected createBuildComponent(role: DeploymentRoleComponent) {
     return new DeploymentBuildComponent(this, 'build', {
-      roleArn: this.deploymentRoleComponent.getIamRoleArnAsToken(),
+      role: role.artifacts.role,
       imageDefinitions: this.config.imageDefinitions,
     });
   }
 
-  protected createDeploymentPipelineComponent() {
+  protected createPipelineComponent(
+    store: DeploymentStoreComponent,
+    role: DeploymentRoleComponent,
+    build: DeploymentBuildComponent,
+  ) {
     return new DeploymentPipelineComponent(this, 'pipe', {
-      storeS3Name: this.deploymentStoreComponent.getBucketNameAsToken(),
-      roleArn: this.deploymentRoleComponent.getIamRoleArnAsToken(),
-      buildProjectName: this.deploymentBuildComponent.getProjectNameAsToken(),
+      storeS3Bucket: store.artifacts.bucket,
+      role: role.artifacts.role,
+      buildProject: build.artifacts.project,
       triggers: this.config.triggers,
-      clusterName: this.config.clusterName,
-      serviceName: this.config.serviceName,
+      cluster: this.config.cluster,
+      service: this.config.service,
     });
   }
 
-  protected createDeploymentTriggerComponent() {
+  protected createTriggerComponent(pipeline: DeploymentPipelineComponent) {
     return new DeploymentTriggerComponent(this, 'trigger', {
-      codepipelineArn:
-        this.deploymentPipelineComponent.getCodepipelineArnAsToken(),
+      codepipeline: pipeline.artifacts.pipeline,
       repositories: this.config.triggers,
     });
   }

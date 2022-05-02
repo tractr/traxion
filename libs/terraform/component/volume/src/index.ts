@@ -1,1 +1,1 @@
-export * from './lib/volume.component';
+export * from './lib';
