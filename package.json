@@ -59,7 +59,7 @@
     "@docusaurus/core": "^2.0.0-beta.15",
     "@docusaurus/preset-classic": "^2.0.0-beta.15",
     "@docusaurus/theme-search-algolia": "^2.0.0-beta.15",
-    "@mdx-js/react": "^2.0.0",
+    "@mdx-js/react": "^1.6.21",
     "@nestjs/axios": "^0.0.5",
     "@nestjs/common": "^8.3.1",
     "@nestjs/config": "^1.2.0",
