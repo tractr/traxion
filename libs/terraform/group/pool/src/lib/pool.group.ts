@@ -1,11 +1,16 @@
 import { POOL_GROUP_DEFAULT_CONFIG } from './configs';
 import { EcsComponent } from './ecs.component';
-import { PoolGroupConfig, PoolGroupDefaultConfig } from './interfaces';
+import {
+  PoolGroupArtifacts,
+  PoolGroupConfig,
+  PoolGroupDefaultConfig,
+} from './interfaces';
 
 import {
   AwsComponent,
   AwsComponentConstructor,
   AwsProviderConstruct,
+  mergeConfigurations,
 } from '@tractr/terraform-component-aws';
 import { EntrypointComponent } from '@tractr/terraform-component-entrypoint';
 import { FileStorageComponent } from '@tractr/terraform-component-file-storage';
@@ -15,7 +20,9 @@ import {
   BackendServiceComponent,
   BackendServiceComponentConfig,
   ServiceComponent,
+  ServiceComponentArtifacts,
   ServiceComponentConfig,
+  ServiceComponentDefaultConfig,
   ServiceComponentPublicConfig,
 } from '@tractr/terraform-service-ecs';
 
@@ -23,55 +30,61 @@ import {
  * Following https://medium.com/@bradford_hamilton/deploying-containers-on-amazons-ecs-using-fargate-and-terraform-part-2-2e6f6a3a957f
  */
 export class PoolGroup extends AwsComponent<
-  PoolGroupConfig & PoolGroupDefaultConfig
+  PoolGroupConfig & PoolGroupDefaultConfig,
+  PoolGroupArtifacts
 > {
-  protected readonly logsComponent: LogsComponent;
-
-  protected readonly secretsComponent: SecretsComponent;
-
-  protected readonly entrypointComponent: EntrypointComponent;
-
-  protected readonly fileStorageComponent: FileStorageComponent;
-
-  protected readonly ecsComponent: EcsComponent;
-
+  /**
+   * Merge config and default config
+   */
   constructor(
     scope: AwsProviderConstruct,
     id: string,
     config: PoolGroupConfig,
   ) {
-    super(scope, id, { ...POOL_GROUP_DEFAULT_CONFIG, ...config });
-    this.logsComponent = this.createLogsComponent();
-    this.secretsComponent = this.createSecretsComponent();
-    this.entrypointComponent = this.createEntrypointComponent();
-    this.fileStorageComponent = this.createFileStorageComponent();
-    this.ecsComponent = this.createEcsComponent();
+    super(scope, id, mergeConfigurations(POOL_GROUP_DEFAULT_CONFIG, config));
   }
 
-  protected createLogsComponent() {
-    return new LogsComponent(this, 'logs');
+  protected createComponents(): void {
+    const logs = this.createLogs();
+    const secrets = this.createSecrets();
+    const entrypoint = this.createEntrypoint();
+    const fileStorage = this.createFileStorage();
+    const ecs = this.createEcs(entrypoint, secrets, fileStorage, logs);
+
+    // Populate artifacts
+    this.artifacts = {
+      logs,
+      secrets,
+      entrypoint,
+      fileStorage,
+      ecs,
+    };
   }
 
-  protected createSecretsComponent() {
-    return new SecretsComponent(this, 'secrets');
+  protected createLogs() {
+    return new LogsComponent(this, 'logs', {});
   }
 
-  protected createEntrypointComponent() {
+  protected createSecrets() {
+    return new SecretsComponent(this, 'secrets', {});
+  }
+
+  protected createEntrypoint() {
     return new EntrypointComponent(this, 'entry', {
-      vpcId: this.config.networkGroup.getVpcIdAsToken(),
-      subnetsIds: this.config.networkGroup.getPublicSubnetsIdsAsTokens(),
-      certificateArn: this.config.zoneGroup.getAcmCertificateArnAsToken(),
-      route53ZoneId: this.config.zoneGroup.getRoute53ZoneIdAsToken(),
+      vpc: this.config.networkGroup.artifacts.vpc,
+      subnets: this.config.networkGroup.artifacts.publicSubnets,
+      certificate: this.config.zoneGroup.artifacts.acmCertificate,
+      route53Zone: this.config.zoneGroup.artifacts.route53Zone,
       subDomain: this.config.subDomain,
-      albDependencies: [this.config.networkGroup.getInternetGateway()], // Hardcode some dependencies to avoid startup issues
+      albDependencies: [this.config.networkGroup.artifacts.internetGateway], // Hardcode some dependencies to avoid startup issues
     });
   }
 
-  protected createFileStorageComponent() {
-    const { additionalReadOnlyS3Arns, s3PublicRead, s3AllowUpload } =
+  protected createFileStorage() {
+    const { additionalReadOnlyS3Buckets, s3PublicRead, s3AllowUpload } =
       this.config.fileStorageConfig;
     return new FileStorageComponent(this, 'files', {
-      additionalReadOnlyS3Arns,
+      additionalReadOnlyS3Buckets,
       s3PublicRead,
       s3AllowUpload: s3AllowUpload
         ? { origins: [this.getApplicationBaseUrl()] }
@@ -79,48 +92,52 @@ export class PoolGroup extends AwsComponent<
     });
   }
 
-  protected createEcsComponent() {
+  protected createEcs(
+    entrypoint: EntrypointComponent,
+    secrets: SecretsComponent,
+    fileStorage: FileStorageComponent,
+    logs: LogsComponent,
+  ) {
     return new EcsComponent(this, 'ecs', {
-      vpcId: this.config.networkGroup.getVpcIdAsToken(),
-      subnetsIds: this.config.networkGroup.getPrivateSubnetsIdsAsTokens(),
-      loadBalancerSecurityGroupId:
-        this.entrypointComponent.getSecurityGroupIdAsToken(),
-      loadBalancerTargetGroupArn:
-        this.entrypointComponent.getAlbTargetGroupArnAsToken(),
-      secretsmanagerSecretArn:
-        this.secretsComponent.getSecretsmanagerSecretArnAsToken(),
-      fileStorageS3Endpoint: this.fileStorageComponent.getS3BucketDomainName(),
-      fileStorageS3BucketName: this.fileStorageComponent.getS3BucketName(),
-      logsGroup: this.logsComponent.getCloudwatchLogGroupName(),
-      dockerApplications: this.config.registryGroup.getDockerApplications(),
+      vpc: this.config.networkGroup.artifacts.vpc,
+      subnets: this.config.networkGroup.artifacts.privateSubnets,
+      loadBalancerSecurityGroup: entrypoint.artifacts.securityGroup,
+      loadBalancerTargetGroup: entrypoint.artifacts.targetGroup,
+      secret: secrets.artifacts.secret,
+      logsGroup: logs.artifacts.cloudwatchLogGroup,
+      dockerApplications: this.config.registryGroup.artifacts.applicationsMap,
       applicationBaseUrl: this.getApplicationBaseUrl(),
       reverseProxyConfig: this.config.reverseProxyConfig,
     });
   }
 
   addService<
-    C extends ServiceComponent<O>,
-    P extends ServiceComponentPublicConfig,
-    O extends ServiceComponentConfig,
+    Component extends ServiceComponent<Config, DefaultConfig, Artifacts>,
+    Config extends ServiceComponentConfig,
+    DefaultConfig extends ServiceComponentDefaultConfig,
+    Artifacts extends ServiceComponentArtifacts,
+    PublicConfig extends ServiceComponentPublicConfig,
   >(
-    ServiceClass: AwsComponentConstructor<C, O>,
+    ServiceClass: AwsComponentConstructor<Component, Config, Artifacts>,
     name: string,
-    publicConfig: P,
-  ): C {
-    return this.ecsComponent.addService(ServiceClass, name, publicConfig);
+    publicConfig: PublicConfig,
+  ): Component {
+    return this.artifacts.ecs.addService(ServiceClass, name, publicConfig);
   }
 
   addBackendService<
-    C extends BackendServiceComponent<O>,
-    P extends ServiceComponentPublicConfig,
-    O extends BackendServiceComponentConfig,
+    Component extends BackendServiceComponent<Config, DefaultConfig, Artifacts>,
+    Config extends BackendServiceComponentConfig,
+    DefaultConfig extends ServiceComponentDefaultConfig,
+    Artifacts extends ServiceComponentArtifacts,
+    PublicConfig extends ServiceComponentPublicConfig,
   >(
-    ServiceClass: AwsComponentConstructor<C, O>,
+    ServiceClass: AwsComponentConstructor<Component, Config, Artifacts>,
     name: string,
     clients: ServiceComponent[],
-    publicConfig: P,
-  ): C {
-    return this.ecsComponent.addBackendService(
+    publicConfig: PublicConfig,
+  ): Component {
+    return this.artifacts.ecs.addBackendService(
       ServiceClass,
       name,
       clients,
@@ -129,20 +146,20 @@ export class PoolGroup extends AwsComponent<
   }
 
   addHttpService<
-    C extends BackendServiceComponent<O>,
-    P extends ServiceComponentPublicConfig,
-    O extends BackendServiceComponentConfig,
+    Component extends BackendServiceComponent<Config, DefaultConfig, Artifacts>,
+    Config extends BackendServiceComponentConfig,
+    DefaultConfig extends ServiceComponentDefaultConfig,
+    Artifacts extends ServiceComponentArtifacts,
+    PublicConfig extends ServiceComponentPublicConfig,
   >(
-    ServiceClass: AwsComponentConstructor<C, O>,
+    ServiceClass: AwsComponentConstructor<Component, Config, Artifacts>,
     name: string,
-    publicConfig: P,
-  ): C {
-    return this.ecsComponent.addHttpService(ServiceClass, name, publicConfig);
+    publicConfig: PublicConfig,
+  ): Component {
+    return this.artifacts.ecs.addHttpService(ServiceClass, name, publicConfig);
   }
 
   protected getApplicationBaseUrl(): string {
-    return `https://${
-      this.config.subDomain
-    }.${this.config.zoneGroup.getDomainName()}`;
+    return `https://${this.config.subDomain}.${this.config.zoneGroup.artifacts.domainName}`;
   }
 }

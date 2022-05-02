@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-group-registry",
-  "version": "1.43.10",
+  "version": "1.43.11",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
