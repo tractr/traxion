@@ -1,4 +1,7 @@
-import { InternetAccessMode } from '../components';
+import { vpc } from '@cdktf/provider-aws';
+
+import { BaseComponentArtifacts } from './base-component.interface';
+import { InternetAccessMode } from './private-component.interface';
 
 export interface AvailabilityZoneInfo {
   fullName: string;
@@ -46,3 +49,9 @@ export interface NetworkGroupPublicConfig
 
 export type NetworkGroupConfig = NetworkGroupInternalConfig &
   NetworkGroupPublicConfig;
+
+export interface NetworkGroupArtifacts extends BaseComponentArtifacts {
+  availabilityZonesInfo: AvailabilityZoneInfo[];
+  privateSubnets: vpc.Subnet[];
+  publicSubnets: vpc.Subnet[];
+}

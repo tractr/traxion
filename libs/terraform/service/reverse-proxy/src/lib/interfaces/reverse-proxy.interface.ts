@@ -1,3 +1,4 @@
+import { ecs, elb, iam, vpc } from '@cdktf/provider-aws';
 import { DeepPartial } from 'ts-essentials';
 
 import {
@@ -7,18 +8,19 @@ import {
   ServiceComponentInternalConfig,
 } from '@tractr/terraform-service-ecs';
 
-export interface ReverseProxyContainerPublicConfig
-  extends HttpContainerPublicConfig {
-  clusterName: string;
+export type ReverseProxyContainerPublicConfig = HttpContainerPublicConfig;
+
+export interface ReverseProxyContainerConfig
+  extends ContainerInternalConfig,
+    ReverseProxyContainerPublicConfig {
+  cluster: ecs.EcsCluster;
 }
-export type ReverseProxyContainerConfig = ContainerInternalConfig &
-  ReverseProxyContainerPublicConfig;
 
 export interface ReverseProxyComponentInternalConfig
   extends ServiceComponentInternalConfig {
-  loadBalancerSecurityGroupId: string;
-  loadBalancerTargetGroupArn: string;
-  taskRoleArn: string;
+  loadBalancerSecurityGroup: vpc.SecurityGroup;
+  loadBalancerTargetGroup: elb.AlbTargetGroup;
+  taskRole: iam.IamRole;
 }
 
 export interface ReverseProxyComponentDefaultConfig

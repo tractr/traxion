@@ -1,17 +1,34 @@
-import { ecs, vpc } from '@cdktf/provider-aws';
+import { ecs, servicediscovery, vpc } from '@cdktf/provider-aws';
 
+import { REVERSE_PROXY_COMPONENT_DEFAULT_CONFIG } from './configs';
 import {
   ReverseProxyComponentConfig,
   ReverseProxyComponentDefaultConfig,
 } from './interfaces';
 import { ReverseProxyContainer } from './reverse-proxy.container';
 
-import { Container, ServiceComponent } from '@tractr/terraform-service-ecs';
+import { AwsProviderConstruct } from '@tractr/terraform-component-aws';
+import {
+  Container,
+  ServiceComponent,
+  VolumeComponents,
+} from '@tractr/terraform-service-ecs';
 
 export class ReverseProxyComponent extends ServiceComponent<
   ReverseProxyComponentConfig,
   ReverseProxyComponentDefaultConfig
 > {
+  /**
+   * Override constructor to merge config with default config
+   */
+  constructor(
+    scope: AwsProviderConstruct,
+    id: string,
+    config: ReverseProxyComponentConfig,
+  ) {
+    super(scope, id, config, REVERSE_PROXY_COMPONENT_DEFAULT_CONFIG);
+  }
+
   protected getSecurityGroupConfig(): vpc.SecurityGroupConfig {
     return {
       ...super.getSecurityGroupConfig(),
@@ -20,32 +37,43 @@ export class ReverseProxyComponent extends ServiceComponent<
           protocol: 'tcp',
           fromPort: 80,
           toPort: 80,
-          securityGroups: [this.config.loadBalancerSecurityGroupId],
+          securityGroups: [this.config.loadBalancerSecurityGroup.id],
         },
         {
           protocol: 'tcp',
           fromPort: 8080,
           toPort: 8080,
           selfAttribute: true,
-          securityGroups: [this.config.loadBalancerSecurityGroupId],
+          securityGroups: [this.config.loadBalancerSecurityGroup.id],
         },
       ],
     };
   }
 
-  protected getEcsTaskDefinitionConfig(): ecs.EcsTaskDefinitionConfig {
+  protected getEcsTaskDefinitionConfig(
+    containers: Container[],
+    volumes: VolumeComponents,
+  ): ecs.EcsTaskDefinitionConfig {
     return {
-      ...super.getEcsTaskDefinitionConfig(),
-      taskRoleArn: this.config.taskRoleArn,
+      ...super.getEcsTaskDefinitionConfig(containers, volumes),
+      taskRoleArn: this.config.taskRole.arn,
     };
   }
 
-  protected getEcsServiceConfig(): ecs.EcsServiceConfig {
+  protected getEcsServiceConfig(
+    securityGroup: vpc.SecurityGroup,
+    taskDefinition: ecs.EcsTaskDefinition,
+    discoveryService: servicediscovery.ServiceDiscoveryService,
+  ): ecs.EcsServiceConfig {
     return {
-      ...super.getEcsServiceConfig(),
+      ...super.getEcsServiceConfig(
+        securityGroup,
+        taskDefinition,
+        discoveryService,
+      ),
       loadBalancer: [
         {
-          targetGroupArn: this.config.loadBalancerTargetGroupArn,
+          targetGroupArn: this.config.loadBalancerTargetGroup.arn,
           containerName: 'reverse-proxy',
           containerPort: 80,
         },
@@ -57,29 +85,9 @@ export class ReverseProxyComponent extends ServiceComponent<
     return [
       new ReverseProxyContainer(this, {
         ...this.config.containerConfig,
+        cluster: this.config.cluster,
         name: 'reverse-proxy',
       }),
     ];
-  }
-
-  protected getDefaultConfig(): ReverseProxyComponentDefaultConfig {
-    return {
-      ...super.getDefaultConfig(),
-      containerConfig: {
-        imageTag: 'v2.4.8',
-        clusterName: this.config.clusterName,
-        // Those next lines enable access to Traefik dashboard and its basic auth
-        // Traefik does not detect himself in ECS
-        path: {
-          prefix: `/reverse-proxy`,
-          stripPrefix: true,
-        },
-        auth: {
-          user: 'traefik',
-          passwordHash:
-            '$2y$05$x/uCqlUg9QM4fG/toYlN4u/Nri/JBrLpI3UKqTvTH7.PBL40j2F.G', // pass
-        },
-      },
-    };
   }
 }

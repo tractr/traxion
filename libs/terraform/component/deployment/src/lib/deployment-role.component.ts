@@ -1,36 +1,26 @@
 import { iam } from '@cdktf/provider-aws';
-import { Token } from 'cdktf';
 
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  DeploymentRoleComponentArtifacts,
+  DeploymentRoleComponentConfig,
+} from './interfaces';
 
-export interface DeploymentRoleComponentConfig {
-  storeS3Arn: string;
-}
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
-export class DeploymentRoleComponent extends AwsComponent<DeploymentRoleComponentConfig> {
-  protected readonly iamRole: iam.IamRole;
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: DeploymentRoleComponentConfig,
-  ) {
-    super(scope, id, config);
-
-    this.iamRole = this.createIamRole();
-  }
-
-  protected createIamRole() {
+export class DeploymentRoleComponent extends AwsComponent<
+  DeploymentRoleComponentConfig,
+  DeploymentRoleComponentArtifacts
+> {
+  protected createComponents(): void {
     // ECS task execution roles
-    return new iam.IamRole(this, 'role', {
-      provider: this.provider,
+    const role = new iam.IamRole(this, 'role', {
       assumeRolePolicy: this.getAssumeRolePolicy(),
       inlinePolicy: this.getInlinePolicy(),
       name: this.getResourceName('role'),
     });
+
+    // Populate the artifacts
+    this.artifacts = { role };
   }
 
   protected getAssumeRolePolicy(): string {
@@ -72,8 +62,8 @@ export class DeploymentRoleComponent extends AwsComponent<DeploymentRoleComponen
                 's3:PutObject',
               ],
               Resource: [
-                `${this.config.storeS3Arn}`,
-                `${this.config.storeS3Arn}/*`,
+                `${this.config.storeS3Bucket.arn}`,
+                `${this.config.storeS3Bucket.arn}/*`,
               ],
             },
 
@@ -238,9 +228,5 @@ export class DeploymentRoleComponent extends AwsComponent<DeploymentRoleComponen
         }),
       },
     ];
-  }
-
-  getIamRoleArnAsToken(): string {
-    return Token.asString(this.iamRole.arn);
   }
 }

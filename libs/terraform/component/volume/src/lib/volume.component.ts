@@ -1,66 +1,50 @@
 import { efs, vpc } from '@cdktf/provider-aws';
-import { Token } from 'cdktf';
 import * as md5 from 'md5';
 
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  VolumeComponentArtifacts,
+  VolumeComponentConfig,
+} from './volume.interface';
 
-export interface VolumeComponentConfig {
-  vpcId: string;
-  subnetsIds: string[];
-  clientsSecurityGroupsIds: string[];
-  performanceMode?: 'generalPurpose' | 'maxIO';
-  transitionToIa?:
-    | 'AFTER_7_DAYS'
-    | 'AFTER_14_DAYS'
-    | 'AFTER_30_DAYS'
-    | 'AFTER_60_DAYS'
-    | 'AFTER_90_DAYS';
-  preventDestroy?: boolean;
-  enableBackups?: boolean;
-}
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
 export class VolumeComponent<
-  T extends VolumeComponentConfig = VolumeComponentConfig,
-> extends AwsComponent<T> {
-  protected readonly securityGroup: vpc.SecurityGroup;
+  Config extends VolumeComponentConfig = VolumeComponentConfig,
+> extends AwsComponent<Config, VolumeComponentArtifacts> {
+  protected createComponents(): void {
+    const securityGroup = this.createSecurityGroup();
+    const efsFileSystem = this.createFileSystem(securityGroup);
 
-  protected readonly efsFileSystem: efs.EfsFileSystem;
-
-  protected readonly efsBackupPolicy: efs.EfsBackupPolicy | undefined;
-
-  protected readonly efsMountTargets: efs.EfsMountTarget[];
-
-  constructor(scope: AwsProviderConstruct, id: string, config: T) {
-    super(scope, id, config);
-    this.securityGroup = this.createSecurityGroup();
-    this.efsFileSystem = this.createEfsFileSystem();
-    if (this.config.enableBackups) {
-      this.efsBackupPolicy = this.createEfsBackupPolicy();
-    }
-    this.efsMountTargets = this.createEfsMountTargets();
+    // Populate the artifacts
+    this.artifacts = { securityGroup, efsFileSystem };
   }
 
+  /**
+   * Creates a security group for the EFS file system.
+   * Allow access to the volume consumers by their security group ids.
+   */
   protected createSecurityGroup() {
     return new vpc.SecurityGroup(this, 'sg', {
-      provider: this.provider,
       ingress: [
         {
           protocol: 'TCP',
           fromPort: 2049,
           toPort: 2049,
-          securityGroups: this.config.clientsSecurityGroupsIds,
+          securityGroups: this.config.clientsSecurityGroups.map((sg) => sg.id),
         },
       ],
-      vpcId: this.config.vpcId,
+      vpcId: this.config.vpc.id,
       name: this.getResourceName('sg'),
     });
   }
 
-  protected createEfsFileSystem() {
-    return new efs.EfsFileSystem(this, 'fs', {
+  /**
+   * Creates an EFS file system with its backup policy and mount targets.
+   * It has one mount target per availability zone, i.e. one per subnet.
+   */
+  protected createFileSystem(securityGroup: vpc.SecurityGroup) {
+    // Create the EFS file system
+    const efsFileSystem = new efs.EfsFileSystem(this, 'fs', {
       creationToken: md5(this.getResourceName('fs')),
       encrypted: true,
       performanceMode: this.config.performanceMode || 'generalPurpose',
@@ -70,34 +54,27 @@ export class VolumeComponent<
       lifecycle: { preventDestroy: !!this.config.preventDestroy },
       tags: this.getResourceNameAsTag('fs'),
     });
-  }
 
-  protected createEfsBackupPolicy() {
-    return new efs.EfsBackupPolicy(this, 'bck', {
-      fileSystemId: this.getFileSystemIdAsToken(),
-      backupPolicy: { status: 'ENABLED' },
+    // Add backup policy if enabled
+    if (this.config.enableBackups) {
+      /* eslint-disable-next-line no-new */
+      new efs.EfsBackupPolicy(this, 'bck', {
+        fileSystemId: efsFileSystem.id,
+        backupPolicy: { status: 'ENABLED' },
+      });
+    }
+
+    // Create mount targets for each subnet
+    // This allows the volume to be accessible from the network in each subnet
+    this.config.subnets.forEach((subnet, index) => {
+      /* eslint-disable-next-line no-new */
+      new efs.EfsMountTarget(this, `mount-${index}`, {
+        fileSystemId: efsFileSystem.id,
+        securityGroups: [securityGroup.id],
+        subnetId: subnet.id,
+      });
     });
-  }
 
-  protected createEfsMountTargets() {
-    return this.config.subnetsIds.map((subnetId, index) =>
-      this.createEfsMountTarget(subnetId, index),
-    );
-  }
-
-  protected createEfsMountTarget(subnetId: string, index: number) {
-    return new efs.EfsMountTarget(this, `mount-${index}`, {
-      fileSystemId: this.getFileSystemIdAsToken(),
-      securityGroups: [this.getSecurityGroupIdAsToken()],
-      subnetId,
-    });
-  }
-
-  getFileSystemIdAsToken(): string {
-    return Token.asString(this.efsFileSystem.id);
-  }
-
-  getSecurityGroupIdAsToken(): string {
-    return Token.asString(this.securityGroup.id);
+    return efsFileSystem;
   }
 }
