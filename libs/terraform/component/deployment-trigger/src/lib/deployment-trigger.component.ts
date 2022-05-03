@@ -2,59 +2,38 @@ import { snake } from 'case';
 
 import { DeploymentTriggerEventComponent } from './deployment-trigger-event.component';
 import { DeploymentTriggerRoleComponent } from './deployment-trigger-role.component';
-
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  DeploymentTriggerComponentArtifacts,
+  DeploymentTriggerComponentConfig,
+} from './interfaces';
 
-export interface Repository {
-  repositoryName: string;
-  imageTag: string;
-}
-export interface DeploymentTriggerComponentConfig {
-  codepipelineArn: string;
-  repositories: Repository[];
-}
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
-export class DeploymentTriggerComponent extends AwsComponent<DeploymentTriggerComponentConfig> {
-  protected readonly deploymentTriggerRoleComponent: DeploymentTriggerRoleComponent;
-
-  protected readonly deploymentTriggerEventComponents: DeploymentTriggerEventComponent[];
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: DeploymentTriggerComponentConfig,
-  ) {
-    super(scope, id, config);
-
-    this.deploymentTriggerRoleComponent =
-      this.crateDeploymentTriggerRoleComponent();
-    this.deploymentTriggerEventComponents =
-      this.createDeploymentTriggerEventComponents();
-  }
-
-  protected crateDeploymentTriggerRoleComponent() {
-    return new DeploymentTriggerRoleComponent(this, 'iam', {
-      codepipelineArn: this.config.codepipelineArn,
+export class DeploymentTriggerComponent extends AwsComponent<
+  DeploymentTriggerComponentConfig,
+  DeploymentTriggerComponentArtifacts
+> {
+  protected createComponents(): void {
+    // Create one role for all events
+    const role = new DeploymentTriggerRoleComponent(this, 'iam', {
+      codepipeline: this.config.codepipeline,
     });
-  }
+    // Create one event trigger for each repository
+    const events = this.config.repositories.map((repository) => {
+      const repositoryShortName = repository.repositoryName.split('/').pop();
+      const id = snake(`event_${repositoryShortName}_${repository.imageTag}`);
 
-  protected createDeploymentTriggerEventComponents() {
-    return this.config.repositories.map((repository) =>
-      this.createDeploymentTriggerEventComponent(repository),
-    );
-  }
-
-  protected createDeploymentTriggerEventComponent(repository: Repository) {
-    const repositoryShortName = repository.repositoryName.split('/').pop();
-    const id = snake(`event_${repositoryShortName}_${repository.imageTag}`);
-    return new DeploymentTriggerEventComponent(this, id, {
-      roleArn: this.deploymentTriggerRoleComponent.getIamRoleArnAsToken(),
-      codepipelineArn: this.config.codepipelineArn,
-      repositoryName: repository.repositoryName,
-      repositoryTag: repository.imageTag,
+      return new DeploymentTriggerEventComponent(this, id, {
+        role: role.artifacts.role,
+        codepipeline: this.config.codepipeline,
+        repository,
+      });
     });
+
+    // Populate the artifacts
+    this.artifacts = {
+      ...role.artifacts,
+      events: events.map((event) => event.artifacts),
+    };
   }
 }

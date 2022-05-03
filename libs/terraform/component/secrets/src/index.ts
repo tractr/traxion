@@ -1,1 +1,1 @@
-export * from './lib/secrets.component';
+export * from './lib';

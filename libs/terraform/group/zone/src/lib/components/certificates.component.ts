@@ -1,51 +1,44 @@
 import { acm, route53 } from '@cdktf/provider-aws';
-import { Token } from 'cdktf';
 
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  CertificatesComponentArtifacts,
+  CertificatesComponentConfig,
+} from '../interfaces';
 
-export interface CertificatesComponentConfig {
-  domainName: string;
-}
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
 /**
  * This component create an SSL certificate and validate it using Route53
  */
-export class CertificatesComponent extends AwsComponent<CertificatesComponentConfig> {
-  protected readonly acmCertificate: acm.AcmCertificate;
-
-  protected readonly acmCertificateValidation: acm.AcmCertificateValidation;
-
-  protected readonly route53Record: route53.Route53Record;
-
-  protected route53Zone: route53.DataAwsRoute53Zone;
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: CertificatesComponentConfig,
-  ) {
-    super(scope, id, config);
-
-    this.route53Zone = this.getRoute53Zone();
-    this.acmCertificate = this.createAcmCertificate();
-    this.route53Record = this.createRoute53Record();
-    this.acmCertificateValidation = this.createAcmCertificateValidation();
+export class CertificatesComponent extends AwsComponent<
+  CertificatesComponentConfig,
+  CertificatesComponentArtifacts
+> {
+  protected createComponents(): void {
+    // Fetch existing zone
+    const zone = this.getRoute53Zone();
+    // Create certificate with domain provided in the config
+    const certificate = this.createAcmCertificate();
+    // Create validation record in the previously fetched zone
+    const validationRecord = this.createValidationRecord(certificate, zone);
+    // Validate certificate
+    this.validateCertificate(certificate, validationRecord);
+    // Populate artifacts
+    this.artifacts = {
+      acmCertificate: certificate,
+      route53Zone: zone,
+    };
   }
 
-  protected getRoute53Zone() {
+  private getRoute53Zone() {
     return new route53.DataAwsRoute53Zone(this, 'r53', {
-      provider: this.provider,
       name: this.config.domainName,
       privateZone: false,
     });
   }
 
-  protected createAcmCertificate() {
+  private createAcmCertificate() {
     return new acm.AcmCertificate(this, 'acm', {
-      provider: this.provider,
       domainName: this.config.domainName,
       subjectAlternativeNames: [`*.${this.config.domainName}`],
       validationMethod: 'DNS',
@@ -54,33 +47,29 @@ export class CertificatesComponent extends AwsComponent<CertificatesComponentCon
     });
   }
 
-  protected createRoute53Record() {
-    const domainValidationOptions =
-      this.acmCertificate.domainValidationOptions.get(0);
+  private createValidationRecord(
+    certificate: acm.AcmCertificate,
+    zone: route53.DataAwsRoute53Zone,
+  ) {
+    // Get validation options
+    const validationOptions = certificate.domainValidationOptions.get(0);
     return new route53.Route53Record(this, 'record', {
-      provider: this.provider,
       allowOverwrite: true,
-      name: domainValidationOptions.resourceRecordName,
-      records: [domainValidationOptions.resourceRecordValue],
+      name: validationOptions.resourceRecordName,
+      records: [validationOptions.resourceRecordValue],
       ttl: 60,
-      type: domainValidationOptions.resourceRecordType,
-      zoneId: this.getRoute53ZoneIdAsToken(),
+      type: validationOptions.resourceRecordType,
+      zoneId: zone.zoneId,
     });
   }
 
-  protected createAcmCertificateValidation() {
+  private validateCertificate(
+    certificate: acm.AcmCertificate,
+    validationRecord: route53.Route53Record,
+  ) {
     return new acm.AcmCertificateValidation(this, 'valid', {
-      provider: this.provider,
-      certificateArn: this.getAcmCertificateArnAsToken(),
-      validationRecordFqdns: [this.route53Record.fqdn],
+      certificateArn: certificate.arn,
+      validationRecordFqdns: [validationRecord.fqdn],
     });
-  }
-
-  getAcmCertificateArnAsToken(): string {
-    return Token.asString(this.acmCertificate.arn);
-  }
-
-  getRoute53ZoneIdAsToken(): string {
-    return Token.asString(this.route53Zone.zoneId);
   }
 }

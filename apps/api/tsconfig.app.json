@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
     "module": "commonjs",
     "outDir": "../../dist/out-tsc",
     "target": "es2015",

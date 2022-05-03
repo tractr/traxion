@@ -1,5 +1,4 @@
-import { DynamicModule, Module<<if Fields password>>, OnModuleInit<<endif>> } from '@nestjs/common';
-import { Logger } from '@tractr/nestjs-core';
+import { DynamicModule, Logger, Module<<if Fields password>>, OnModuleInit<<endif>> } from '@nestjs/common';
 
 <<if Fields password>>
 import { DatabaseService } from '@tractr/nestjs-database';
