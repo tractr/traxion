@@ -1,6 +1,6 @@
 {
   "name": "@tractr/nestjs-winston",
-  "version": "1.43.12",
+  "version": "1.43.13",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
