@@ -1,6 +1,6 @@
 import { DataProvider } from 'ra-core';
 import { lastValueFrom, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, withLatestFrom } from 'rxjs/operators';
  
 import { ResourceType } from '../interfaces';
 import { formatData } from '../helpers';
@@ -52,9 +52,18 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
             take: perPage,
             skip: (page - 1) * perPage,
           }) as Observable<any>
-        ).pipe(map((data) => ({ data, total: data.length }))),
+        ).pipe(
+          withLatestFrom(
+            rextClient[resource as unknown as ResourceType].count$(
+              {},
+            ) as Observable<any>,
+          ),
+          map(([data, total]) => ({ data, total })),
+        ),
       );
     },
+
+
  
     getOne: (resource, params) => 
       lastValueFrom(
@@ -141,9 +150,11 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
       const toCreate = formatData[resourceName]({ ...params.data });
  
       return lastValueFrom(
-        rextClient[resourceName].create$(
-          toCreate as any
-        ) as Observable<any>,
+        (
+          rextClient[resourceName].create$(
+            toCreate as any
+          ) as Observable<any>
+        ).pipe(map((data) => ({ data }))),
       );
     },
  
