@@ -1,39 +1,30 @@
 import { cloudwatch } from '@cdktf/provider-aws';
 
-import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+import { LogsArtifacts, LogsConfig } from './logs.interface';
 
-export class LogsComponent extends AwsComponent {
-  protected readonly cloudwatchLogGroup: cloudwatch.CloudwatchLogGroup;
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
-  protected readonly cloudwatchLogStream: cloudwatch.CloudwatchLogStream;
-
-  constructor(scope: AwsProviderConstruct, id: string, config = null) {
-    super(scope, id, config);
-    this.cloudwatchLogGroup = this.createCloudwatchLogGroup();
-    this.cloudwatchLogStream = this.createCloudwatchLogStream();
-  }
-
-  protected createCloudwatchLogGroup() {
+export class LogsComponent extends AwsComponent<LogsConfig, LogsArtifacts> {
+  protected createComponents(): void {
     // Set up CloudWatch group and log stream and retain logs for 30 days
-    return new cloudwatch.CloudwatchLogGroup(this, 'group', {
-      provider: this.provider,
-      retentionInDays: 30,
-      name: this.getResourceName('group'),
-    });
-  }
+    // Create log group
+    const cloudwatchLogGroup = new cloudwatch.CloudwatchLogGroup(
+      this,
+      'group',
+      {
+        retentionInDays: 30,
+        name: this.getResourceName('group'),
+      },
+    );
 
-  protected createCloudwatchLogStream() {
-    return new cloudwatch.CloudwatchLogStream(this, 'stream', {
-      provider: this.provider,
-      logGroupName: this.getCloudwatchLogGroupName(),
+    // Create associated log stream
+    /* eslint-disable-next-line no-new */
+    new cloudwatch.CloudwatchLogStream(this, 'stream', {
+      logGroupName: cloudwatchLogGroup.name,
       name: this.getResourceName('stream'),
     });
-  }
 
-  getCloudwatchLogGroupName(): string {
-    return this.cloudwatchLogGroup.name;
+    // Populate artifacts
+    this.artifacts = { cloudwatchLogGroup };
   }
 }

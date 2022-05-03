@@ -1,27 +1,21 @@
 import { vpc } from '@cdktf/provider-aws';
 
 import {
+  BackendServiceComponentConfig,
+  ServiceComponentArtifacts,
   ServiceComponentDefaultConfig,
-  ServiceComponentInternalConfig,
-  ServiceComponentPublicConfig,
 } from '../interfaces';
 import { ServiceComponent } from './service.component';
 
-export interface BackendServiceComponentInternalConfig
-  extends ServiceComponentInternalConfig {
-  clientsSecurityGroupsIds: string[];
-}
-
-export type BackendServiceComponentConfig =
-  BackendServiceComponentInternalConfig & ServiceComponentPublicConfig;
 /**
  * This service is meant to be used by another one, as its backend
  * For example, Postgres which is used by the API
  */
 export abstract class BackendServiceComponent<
-  C extends BackendServiceComponentConfig = BackendServiceComponentConfig,
-  D extends ServiceComponentDefaultConfig = ServiceComponentDefaultConfig,
-> extends ServiceComponent<C, D> {
+  Config extends BackendServiceComponentConfig = BackendServiceComponentConfig,
+  DefaultConfig extends ServiceComponentDefaultConfig = ServiceComponentDefaultConfig,
+  Artifacts extends ServiceComponentArtifacts = ServiceComponentArtifacts,
+> extends ServiceComponent<Config, DefaultConfig, Artifacts> {
   protected getSecurityGroupConfig(): vpc.SecurityGroupConfig {
     return {
       ...super.getSecurityGroupConfig(),
@@ -29,7 +23,7 @@ export abstract class BackendServiceComponent<
         protocol: 'tcp',
         fromPort: port,
         toPort: port,
-        securityGroups: this.config.clientsSecurityGroupsIds,
+        securityGroups: this.config.clientsSecurityGroups.map((sg) => sg.id),
         selfAttribute: this.shouldAccessItself(),
       })),
     };
@@ -37,7 +31,7 @@ export abstract class BackendServiceComponent<
 
   /**
    * Whether to add `self` attribute on security group ingress rules in order to allow this service to call itself.
-   * For exemple, a service with two different containers that need to call each other.
+   * For example, a service with two different containers that need to call each other.
    */
   protected shouldAccessItself(): boolean {
     return false;
