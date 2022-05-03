@@ -77,6 +77,8 @@
     "@nrwl/nx-cloud": "13.1.2",
     "@nrwl/react": "13.7.2",
     "@prisma/client": "^3.9.2",
+    "@sentry/node": "^6.19.6",
+    "@sentry/types": "^6.19.6",
     "@types/faker": "^5.5.7",
     "@types/glob": "^7.2.0",
     "@types/node-mailjet": "^3.3.8",
