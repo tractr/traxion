@@ -39,6 +39,10 @@ on:
         description: 'The chromatic token if needed'
         required: false
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   tests:
     name: Build, Lint and Tests
