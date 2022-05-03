@@ -1,1 +1,1 @@
-export * from './lib/logs.component';
+export * from './lib';

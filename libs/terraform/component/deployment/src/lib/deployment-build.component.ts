@@ -1,33 +1,26 @@
 import { codebuild } from '@cdktf/provider-aws';
-import { Token } from 'cdktf';
 
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  DeploymentBuildComponentArtifacts,
+  DeploymentBuildComponentConfig,
+} from './interfaces';
 
-export interface DeploymentBuildComponentConfig {
-  roleArn: string;
-  imageDefinitions: string;
-}
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
-export class DeploymentBuildComponent extends AwsComponent<DeploymentBuildComponentConfig> {
-  protected readonly codebuildProject: codebuild.CodebuildProject;
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: DeploymentBuildComponentConfig,
-  ) {
-    super(scope, id, config);
-    this.codebuildProject = this.createCodebuildProject();
+export class DeploymentBuildComponent extends AwsComponent<
+  DeploymentBuildComponentConfig,
+  DeploymentBuildComponentArtifacts
+> {
+  protected createComponents(): void {
+    const project = this.createCodebuildProject();
+    // Populate artifacts
+    this.artifacts = { project };
   }
 
   protected createCodebuildProject() {
     return new codebuild.CodebuildProject(this, 'zip', {
-      provider: this.provider,
       buildTimeout: 5,
-      serviceRole: this.config.roleArn,
+      serviceRole: this.config.role.arn,
       source: {
         type: 'NO_SOURCE',
         buildspec: this.getBuildSpecs(),
@@ -50,10 +43,6 @@ export class DeploymentBuildComponent extends AwsComponent<DeploymentBuildCompon
 
       name: this.getResourceName('zip'),
     });
-  }
-
-  getProjectNameAsToken(): string {
-    return Token.asString(this.codebuildProject.name);
   }
 
   protected getBuildSpecs(): string {

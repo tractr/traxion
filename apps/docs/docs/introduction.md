@@ -25,7 +25,7 @@ data model management, deployment, etc.
 
 ## How is works?
 
-Traxion use several generators to orchestrate the different blocks:
+Traxion uses several generators to orchestrate the different blocks:
 
 - [Schematics](https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/schematics) to deal with the project structure and scaffolding.
 - [Hapify](https://docs.hapify.io/) to manage the data-models logic.
@@ -52,6 +52,6 @@ Here is a list of the most important blocks:
 
 :::important More tools
 
-See complete list of [libraries & frameworks](./libraries-frameworks-list)
+See complete [list of libraries & frameworks](/docs/what-is-inside)
 
 :::

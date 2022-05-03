@@ -1,45 +1,30 @@
 import { codepipeline } from '@cdktf/provider-aws';
-import { Token } from 'cdktf';
 
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  DeploymentPipelineComponentArtifacts,
+  DeploymentPipelineComponentConfig,
+  DeploymentTrigger,
+} from './interfaces';
 
-export interface DeploymentTrigger {
-  repositoryName: string;
-  imageTag: string;
-}
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
-export interface DeploymentPipelineComponentConfig {
-  storeS3Name: string;
-  roleArn: string;
-  buildProjectName: string;
-  triggers: DeploymentTrigger[];
-  clusterName: string;
-  serviceName: string;
-}
 // https://github.com/ispec-inc/terraform-aws-ecs-deploy-pipeline/blob/master/modules/pipeline
-export class DeploymentPipelineComponent extends AwsComponent<DeploymentPipelineComponentConfig> {
-  protected readonly codepipeline: codepipeline.Codepipeline;
-
-  constructor(
-    scope: AwsProviderConstruct,
-    id: string,
-    config: DeploymentPipelineComponentConfig,
-  ) {
-    super(scope, id, config);
-
-    this.codepipeline = this.createCodepipeline();
+export class DeploymentPipelineComponent extends AwsComponent<
+  DeploymentPipelineComponentConfig,
+  DeploymentPipelineComponentArtifacts
+> {
+  protected createComponents(): void {
+    const pipeline = this.createPipeline();
+    // Populate artifacts
+    this.artifacts = { pipeline };
   }
 
-  protected createCodepipeline() {
+  protected createPipeline() {
     return new codepipeline.Codepipeline(this, 'run', {
-      provider: this.provider,
-      roleArn: this.config.roleArn,
+      roleArn: this.config.role.arn,
       artifactStore: [
         {
-          location: this.config.storeS3Name,
+          location: this.config.storeS3Bucket.bucket,
           type: 'S3',
         },
       ],
@@ -85,7 +70,7 @@ export class DeploymentPipelineComponent extends AwsComponent<DeploymentPipeline
           ),
           outputArtifacts: ['definitions'],
           configuration: {
-            ProjectName: this.config.buildProjectName,
+            ProjectName: this.config.buildProject.name,
           },
         },
       ],
@@ -104,8 +89,8 @@ export class DeploymentPipelineComponent extends AwsComponent<DeploymentPipeline
           version: '1',
           inputArtifacts: ['definitions'],
           configuration: {
-            ClusterName: this.config.clusterName,
-            ServiceName: this.config.serviceName,
+            ClusterName: this.config.cluster.name,
+            ServiceName: this.config.service.name,
             FileName: 'imagedefinitions.json',
           },
         },
@@ -119,9 +104,5 @@ export class DeploymentPipelineComponent extends AwsComponent<DeploymentPipeline
 
   protected getImageName(repositoryName: string): string {
     return repositoryName.split('/').reverse()[0];
-  }
-
-  getCodepipelineArnAsToken(): string {
-    return Token.asString(this.codepipeline.arn);
   }
 }
