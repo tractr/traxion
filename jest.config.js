@@ -67,5 +67,7 @@ module.exports = {
     '<rootDir>/libs/generated/nestjs-models-common',
     '<rootDir>/libs/hapify/create-traxion-workspace',
     '<rootDir>/libs/nestjs/winston',
+    '<rootDir>/libs/nestjs/sentry',
+    '<rootDir>/libs/nestjs/request-timestamp',
   ],
 };

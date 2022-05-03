@@ -4,7 +4,7 @@ module.exports = {
     'get-started/index',
     {
       type: 'category',
-      label: 'How to',
+      label: 'How to use',
       items: [
         {
           type: 'category',
@@ -216,11 +216,16 @@ module.exports = {
           label: 'Schematics',
           link: { type: 'doc', id: 'references/schematics/how-to' },
           items: [
-            'references/schematics/npm-publish',
-            'references/schematics/release',
+            'references/schematics/admin-app',
             'references/schematics/eslint-config',
-            'references/schematics/prettier-config',
             'references/schematics/github-workflows',
+            'references/schematics/hapify-library',
+            'references/schematics/npm-publish',
+            'references/schematics/prettier-config',
+            'references/schematics/prisma-library',
+            'references/schematics/release',
+            'references/schematics/target-generate',
+            'references/schematics/traxion-workspace',
           ],
         },
       ],
@@ -234,5 +239,6 @@ module.exports = {
         'contribution/style-and-layout',
       ],
     },
+    'what-is-inside',
   ],
 };
