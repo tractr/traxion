@@ -1,6 +1,6 @@
 import { DataProvider } from 'ra-core';
 import { lastValueFrom, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, withLatestFrom } from 'rxjs/operators';
  
 import { ResourceType } from '../interfaces';
 import { formatData } from '../helpers';
@@ -39,7 +39,7 @@ import { RextClient } from '../../rext-client';
 export function rextClientProvider(apiUrl: string | URL): DataProvider {
   const rextClient = new RextClient(apiUrl);
   return {
-    getList: async (resource, params) => {
+    getList: (resource, params) => {
       const { page, perPage } = params.pagination;
       const { field, order } = params.sort;
  
