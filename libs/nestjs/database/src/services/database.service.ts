@@ -2,6 +2,7 @@
 import {
   Inject,
   Injectable,
+  Logger,
   OnModuleDestroy,
   OnModuleInit,
 } from '@nestjs/common';
@@ -10,8 +11,6 @@ import { Prisma, PrismaClient } from '@prisma/client';
 import { PRISMA_MODULE_OPTIONS } from '../constants';
 import { MysqlService } from './mysql.service';
 import { PostgresqlService } from './postgresql.service';
-
-import { Logger } from '@tractr/nestjs-core';
 
 export type PrismaClientOptions = Omit<
   Prisma.PrismaClientOptions,

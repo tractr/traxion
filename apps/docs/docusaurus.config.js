@@ -1,6 +1,7 @@
 module.exports = {
   title: 'Traxion',
-  tagline: 'Use code generator like never',
+  tagline:
+    'A suite of orchestrated tools that aims to accelerate the development of web applications.',
   url: 'https://traxion.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -52,6 +53,10 @@ module.exports = {
               label: 'Discord',
               href: 'https://discord.traxion.dev/',
             },
+            {
+              label: 'Twitter',
+              href: 'https://twitter.com/TraxionDev',
+            },
           ],
         },
         {
@@ -59,12 +64,12 @@ module.exports = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/tractr/traxion',
+              href: 'https://github.com/tractr/stack',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Tractr, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Tractr, Inc.`,
     },
   },
   presets: [
