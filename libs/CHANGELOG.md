@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.43.13](https://github.com/tractr/stack/compare/v1.43.12...v1.43.13) (2022-05-03)
+
+
+### Bug Fixes
+
+* pagination and create hook for react admin ([#423](https://github.com/tractr/stack/issues/423)) ([71cb27e](https://github.com/tractr/stack/commit/71cb27e39382f39ed26aa1c9846536d48987cfc6))
+
+
+
+## [1.43.13](https://github.com/tractr/stack/compare/v1.43.12...v1.43.13) (2022-05-03)
+
+
+### Bug Fixes
+
+* pagination and create hook for react admin ([#423](https://github.com/tractr/stack/issues/423)) ([71cb27e](https://github.com/tractr/stack/commit/71cb27e39382f39ed26aa1c9846536d48987cfc6))
+
+
+
 ## [1.43.12](https://github.com/tractr/stack/compare/v1.43.11...v1.43.12) (2022-05-03)
 
 
