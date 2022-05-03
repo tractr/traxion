@@ -1,6 +1,4 @@
-import { DynamicModule, Module } from '@nestjs/common';
-
-import { Logger } from '@tractr/nestjs-core';
+import { DynamicModule, Logger, Module } from '@nestjs/common';
  
 <<for Models model>>
 import { <<model pascal>>Module } from './<<model kebab>>';

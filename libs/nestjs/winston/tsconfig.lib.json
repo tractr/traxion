@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
+    "declaration": true,
     "module": "commonjs",
-    "outDir": "../../dist/out-tsc",
-    "target": "es2015",
+    "outDir": "../../../dist/out-tsc",
+    "target": "es6",
     "types": ["node"]
   },
   "exclude": ["**/*.spec.ts", "**/*.test.ts"],

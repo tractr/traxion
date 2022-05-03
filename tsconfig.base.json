@@ -86,6 +86,7 @@
         "libs/nestjs/request-timestamp/src/index.ts"
       ],
       "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
+      "@tractr/nestjs-winston": ["libs/nestjs/winston/src/index.ts"],
       "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"],
       "@tractr/schematics": ["libs/schematics/src/index.ts"],
       "@tractr/terraform-aws-stack": ["libs/terraform/aws-stack/src/index.ts"],

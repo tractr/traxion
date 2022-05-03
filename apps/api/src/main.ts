@@ -1,27 +1,46 @@
+import ecsFormat from '@elastic/ecs-winston-format';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import * as cookieParser from 'cookie-parser';
-import * as morgan from 'morgan';
+import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
+import * as winston from 'winston';
 
 import { AppModule } from './app/app.module';
 
-import { Logger, PrismaExceptionInterceptor } from '@tractr/nestjs-core';
+import { PrismaExceptionInterceptor } from '@tractr/nestjs-core';
+import {
+  createWinstonLogger,
+  nestLikeConsoleFormat,
+} from '@tractr/nestjs-winston';
 
 // Bootstrap the main application
 async function bootstrap() {
+  const development = process.env.NODE_ENV === 'development';
+  const level = process.env.LOG_LEVEL || 'info';
   const port = process.env.PORT || 3000;
   const globalPrefix = 'api';
 
+  const logger = createWinstonLogger({
+    // options (same as WinstonModule.forRoot() options)
+    level,
+    format: development
+      ? nestLikeConsoleFormat({ appName: 'Stack', prettyPrint: true })
+      : ecsFormat(),
+    transports: [new winston.transports.Console()],
+  });
+
   // Instantiate nest app
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger,
+  });
 
-  // Set custom logger service
-  const logger = await app.resolve(Logger);
-  app.useLogger(logger);
-  app.setGlobalPrefix(globalPrefix);
-
-  app.use(morgan('combined'));
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  app.use(
+    morgan('combined', {
+      stream: { write: (str: string) => logger.log(str) },
+    }),
+  );
 
   const { COOKIE_SECRET: cookieSecret } = process.env;
 
