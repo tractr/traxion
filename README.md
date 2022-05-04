@@ -13,3 +13,19 @@ TODO write this part when the schematics will be ready
 ## How to migrate
 
 You can check our [migrations guide](https://github.com/tractr/stack/blob/main/MIGRATIONS.md) to update the different version.
+
+## Schematics
+
+### How to use schematics within this repository
+
+First, build schematics
+
+```
+nx build schematics
+```
+
+Run the schematic from the dist folder
+
+```
+nx g ./dist/libs/schematics:admin-app
+```
