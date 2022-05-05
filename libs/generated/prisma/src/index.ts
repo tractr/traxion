@@ -3,29 +3,40 @@ import * as bcrypt from 'bcrypt';
 
 export async function seed() {
   const db = new PrismaClient();
-  const user = await db.user.findFirst({
+  let user = await db.user.findFirst({
     where: {
       email: 'admin@traxion.com',
     },
   });
 
-  if (!user) throw new Error('user not found');
+  const password = await bcrypt.hash('password', 10);
 
-  await db.user.upsert({
+  if (!user) {
+    user = await db.user.create({
+      data: {
+        email: 'admin@traxion.com',
+        password,
+        roles: [UserRoles.admin],
+        createdAt: new Date(),
+        name: 'Traxion admin',
+        listObject: [],
+        object: {},
+      },
+    });
+  }
+
+  await db.user.update({
     where: {
-      id: user.id,
+      id: user?.id || '',
     },
-    update: {
-      password: await bcrypt.hash('password', 10),
-    },
-    create: {
-      email: 'admin@traxion.com',
-      password: await bcrypt.hash('password', 10),
-      roles: [UserRoles.admin],
-      createdAt: new Date(),
-      name: 'Traxion admin',
-      listObject: [],
-      object: {},
+    data: {
+      password,
+      enterprises: {
+        connectOrCreate: {
+          where: { name: 'Traxion' },
+          create: { name: 'Traxion' },
+        },
+      },
     },
   });
 }

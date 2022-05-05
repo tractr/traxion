@@ -1,11 +1,14 @@
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { GraphQLModule } from '@nestjs/graphql';
 import { ConsoleModule } from 'nestjs-console';
 
 import {
   getSelectPrismaUserQuery,
   rolePermissions,
 } from '@tractr/generated-casl';
+import { GraphqlModule } from '@tractr/generated-nestjs-graphql';
 import { ModelsModule } from '@tractr/generated-nestjs-models';
 import { USER_SERVICE } from '@tractr/generated-nestjs-models-common';
 import {
@@ -29,6 +32,13 @@ import { MailerModule } from '@tractr/nestjs-mailer';
 
 @Module({
   imports: [
+    GraphqlModule,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      include: [GraphqlModule],
+      autoSchemaFile: 'schema.gql',
+      sortSchema: true,
+    }),
     ModelsModule,
     DatabaseModule.register(),
     AuthenticationModule.registerAsync({

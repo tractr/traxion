@@ -1,0 +1,50 @@
+{
+  "implicitDependencies": ["generated-nestjs-models-common"],
+  "prefix": "tractr",
+  "projectType": "library",
+  "root": "libs/generated/nestjs-graphql",
+  "sourceRoot": "libs/generated/nestjs-graphql/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "configurations": {
+        "development": {
+          "tsConfig": "libs/generated/nestjs-graphql/tsconfig.lib.json"
+        },
+        "production": {
+          "tsConfig": "libs/generated/nestjs-graphql/tsconfig.lib.prod.json"
+        }
+      },
+      "defaultConfiguration": "production",
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "options": {
+        "project": "libs/generated/nestjs-graphql/ng-package.json"
+      },
+      "outputs": ["dist/libs/generated/nestjs-graphql"]
+    },
+    "generate": {
+      "executor": "./dist/libs/schematics:generate",
+      "options": {
+        "cwd": "libs/generated/nestjs-graphql"
+      },
+      "outputs": ["libs/generated/nestjs-graphql/src/generated"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/generated/nestjs-graphql/src/**/*.ts",
+          "libs/generated/nestjs-graphql/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/generated/nestjs-graphql/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/generated/nestjs-graphql"]
+    }
+  }
+}

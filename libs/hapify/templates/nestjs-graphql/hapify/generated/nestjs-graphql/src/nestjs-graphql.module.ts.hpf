@@ -1,0 +1,22 @@
+import { Module } from '@nestjs/common';
+import { LoggerModule } from '@tractr/nestjs-core';
+ 
+<<for Models model>>
+import { <<model pascal>>Resolver } from './resolvers/<<model kebab>>.resolver';
+<<endfor>>
+
+import { ModelsModule } from './nestjs-models.module';
+ 
+const providers = [
+  <<for Models model>>
+    <<model pascal>>Resolver,
+  <<endfor>>
+];
+ 
+@Module({
+  imports: [ModelsModule],
+  providers,
+  exports: providers
+})
+export class GraphqlModule {}
+ 

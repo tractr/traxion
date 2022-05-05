@@ -1,0 +1,88 @@
+<<<
+  // We need to extract all the fields who refered our model
+  // And remove the duplicate
+  const uniqRefs = root.referencedIn
+    .filter((value, index, self) => {
+      return self.findIndex(f => f.name === value.name) === index && value.name !== root.name;
+    });
+  const uniqFieldRefs = root.referencedIn
+    .flatMap((ref) => ref.fields)
+    .filter((value, index, self) => {
+      return self.findIndex(f => f.name === value.name) === index && value.name !== root.name;
+    });
+>>>
+
+import {
+  Inject,
+} from '@nestjs/common';
+import { 
+  CurrentAbilities, 
+  Policies,
+  <<if Model not noGuest>>
+    Public,
+  <<endif>>
+} from '@tractr/nestjs-core';
+import {
+  Args,
+  Int,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
+
+import {
+  <<Model pascal>>Service,
+  <<Model constant>>_SERVICE,
+<<for uniqRefs ref>>
+  <<ref constant>>_SERVICE,
+  <<ref pascal>>Service,
+<<endfor>>
+} from '../../../../nestjs-models-common';
+
+import { <<Model pascal>>Gql as <<Model pascal>> } from '../object-types/<<Model kebab>>.model';
+
+<<for uniqRefs ref>>
+import { <<ref pascal>>Gql as <<ref pascal>> } from '../object-types/<<ref kebab>>.model';
+<<endfor>>
+ 
+@Resolver(() => <<Model pascal>>)
+export class <<Model pascal>>Resolver {
+ 
+  constructor(
+    @Inject(<<Model constant>>_SERVICE)
+    protected <<Model camel>>Service: <<Model pascal>>Service,
+<<for uniqRefs ref>>
+    @Inject(<<ref constant>>_SERVICE)
+    protected <<ref camel>>Service: <<ref pascal>>Service,
+<<endfor>>
+  ) {}
+ 
+  @Query(() => <<Model pascal>>)
+  async get<<Model pascal>>(@Args('id', { type: () => Int }) id: string) {
+    return this.<<Model camel>>Service.findFirst({ where: { id } });
+  }
+
+  @Query(() => [<<Model pascal>>])
+  async get<<Model pascal>>s() {
+    return this.<<Model camel>>Service.findMany();
+  }
+
+<<for root.referencedIn ref>>
+  <<for ref.fields field>>
+  /**
+   * Associated <<-field backRelation pascal>>
+   */
+  @ResolveField(() => <<ref pascal>>)
+  async <<-field backRelation camel>>(@Parent() <<Model camel>>: <<Model pascal>>) {
+    const { id } = <<Model camel>>;
+    return this.<<ref camel>>Service.findMany({
+      where: { <<field camel>>: <<if field oneOne or oneMany>>{ id }<<else>>{ some: { id } }<<endif>> },
+    });
+  }
+ 
+  <<endfor>>
+<<endfor>>
+
+ 
+}
