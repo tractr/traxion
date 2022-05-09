@@ -38,7 +38,7 @@ async function bootstrap() {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   app.use(
     morgan('combined', {
-      stream: { write: (str: string) => logger.log(str) },
+      stream: { write: (str: string) => logger.debug(str) },
     }),
   );
 
@@ -52,8 +52,6 @@ async function bootstrap() {
   // Set global validation pipe
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
       transform: true,
       transformOptions: {
         enableImplicitConversion: false,

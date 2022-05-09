@@ -10,3 +10,12 @@ generator client {
   output = "../../../../node_modules/.prisma/client"
   previewFeatures = ["filterJson"]
 }
+
+generator nestjsGraphql {
+  provider = "prisma-nestjs-graphql"
+  output = "../../../generated/nestjs-graphql/src/generated/prisma-nestjs-graphql"
+  purgeOutput = true
+  reExport = Single
+  fields_Validator_from = "class-validator"
+  fields_Validator_input = true
+}

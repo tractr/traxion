@@ -83,6 +83,7 @@
       "@tractr/nestjs-core": ["libs/nestjs/core/src/index.ts"],
       "@tractr/nestjs-database": ["libs/nestjs/database/src/index.ts"],
       "@tractr/nestjs-file-storage": ["libs/nestjs/file-storage/src/index.ts"],
+      "@tractr/nestjs-graphql": ["libs/nestjs/graphql/src/index.ts"],
       "@tractr/nestjs-mailer": ["libs/nestjs/mailer/src/index.ts"],
       "@tractr/nestjs-request-timestamp": [
         "libs/nestjs/request-timestamp/src/index.ts"

@@ -24,9 +24,14 @@ module.exports = {
       input: 'one',
     },
     {
-      path: 'generated/nestjs-graphql/src/object-types/{kebab}.model.ts',
+      path: 'generated/nestjs-graphql/src/dtos/find-many-{kebab}.output.ts',
       engine: 'hpf',
       input: 'one',
+    },
+    {
+      path: 'generated/nestjs-graphql/src/dtos/index.ts',
+      engine: 'hpf',
+      input: 'all',
     },
   ],
 };

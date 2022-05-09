@@ -8,8 +8,8 @@
     "generate": {
       "dependsOn": [
         {
-          "projects": "self",
-          "target": "pregenerate"
+          "projects": "dependencies",
+          "target": "generate"
         }
       ],
       "executor": "@nrwl/workspace:run-commands",
@@ -42,16 +42,6 @@
         "lintFilePatterns": ["libs/generated/prisma/**/*.ts"]
       },
       "outputs": ["{options.outputFile}"]
-    },
-    "pregenerate": {
-      "executor": "./dist/libs/schematics:generate",
-      "options": {
-        "cleanFirst": false,
-        "cwd": "libs/generated/prisma",
-        "format": false,
-        "inputHapifyGeneratedPath": "prisma",
-        "moveGeneratedFiles": false
-      }
     },
     "test": {
       "executor": "@nrwl/jest:jest",

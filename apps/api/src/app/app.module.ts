@@ -4,6 +4,8 @@ import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConsoleModule } from 'nestjs-console';
 
+import { GraphQLHook } from './graphql.hook';
+
 import {
   getSelectPrismaUserQuery,
   rolePermissions,
@@ -38,6 +40,7 @@ import { MailerModule } from '@tractr/nestjs-mailer';
       include: [GraphqlModule],
       autoSchemaFile: 'schema.gql',
       sortSchema: true,
+      debug: true,
     }),
     ModelsModule,
     DatabaseModule.register(),
@@ -82,6 +85,7 @@ import { MailerModule } from '@tractr/nestjs-mailer';
   ],
   controllers: [FileStorageController],
   providers: [
+    GraphQLHook,
     { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
     { provide: APP_GUARD, useClass: PoliciesGuard },
     { provide: APP_INTERCEPTOR, useClass: CaslExceptionInterceptor },
