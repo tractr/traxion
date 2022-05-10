@@ -74,12 +74,21 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
         step={1}
     <<endif>>
 <<elseif field enum>>
-      <AutocompleteInput
+    <<if field multiple>>
+     <AutocompleteArrayInput
         choices={[
     <<for field.enum e>>
           { id: '<<e camel>>', name: '<<e camel>>' },
     <<endfor>>
         ]}
+    <<else>>
+    <AutocompleteInput
+        choices={[
+    <<for field.enum e>>
+          { id: '<<e camel>>', name: '<<e camel>>' },
+    <<endfor>>
+        ]}
+    <<endif>>
 <<elseif field datetime>>
     <<if field date>>
       <DateInput
@@ -110,7 +119,7 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
       </ReferenceArrayInput>
 <<else>>
       <ReferenceInput
-        source="<<field camel>>"
+        source="<<field camel>>Id"
         label="<<field capital>>"
         reference="<<field.model camel>>">
           <SelectInput optionText="<<=labelFieldCamel(field.model)>>" />
@@ -130,7 +139,7 @@ function fieldInput(field) {
             }
         case 'boolean': return field.nullable ? ['NullableBooleanInput'] : ['BooleanInput'];
         case 'number': return ['NumberInput'];
-        case 'enum': return ['AutocompleteInput'];
+        case 'enum': return field.multiple ? ['AutocompleteArrayInput'] : ['AutocompleteInput'];
         case 'datetime':
             switch(field.subtype) {
                 case 'date': return ['DateInput'];

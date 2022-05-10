@@ -73,8 +73,8 @@ export const <<Model pascal>>Show = (props: ShowProps) => (
 <<< function printEntityField(field) { >>>
 
 <<if field multiple>>
-      <ReferenceArrayField
-        source="<<field camel>>"
+      <ReferenceManyField
+        target="<<field camel>>"
         label="<<field capital>>"
         reference="<<field.model camel>>">
           <SingleFieldList>
@@ -83,7 +83,7 @@ export const <<Model pascal>>Show = (props: ShowProps) => (
       </ReferenceArrayField>
 <<else>>
       <ReferenceField
-        source="<<field camel>>"
+        source="<<field camel>>Id"
         label="<<field capital>>"
         reference="<<field.model camel>>">
           <TextField source="<<=labelFieldCamel(field.model)>>" sortable={false} />
@@ -92,7 +92,7 @@ export const <<Model pascal>>Show = (props: ShowProps) => (
 
 <<< } >>>
 
-<<<
+<<< 
 function fieldType(field) {
     switch(field.type) {
         case 'string':
@@ -107,7 +107,7 @@ function fieldType(field) {
         case 'datetime': return ['DateField'];
         case 'entity':
             return field.multiple ? 
-                ['ReferenceArrayField', 'SingleFieldList', 'ChipField'] :
+                ['ReferenceManyField', 'SingleFieldList', 'ChipField'] :
                 ['ReferenceField', 'TextField'];
         default: return ['TextField'];
     }
