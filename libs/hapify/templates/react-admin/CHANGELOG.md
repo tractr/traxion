@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.43.14](https://github.com/tractr/stack/compare/v1.43.13...v1.43.14) (2022-05-10)
+
+
+### Bug Fixes
+
+* logic for references on react admin ([#424](https://github.com/tractr/stack/issues/424)) ([a4482b6](https://github.com/tractr/stack/commit/a4482b633e0a674dad77664a64f445063c9f47f7))
+
+
+
 ## [1.43.13](https://github.com/tractr/stack/compare/v1.43.12...v1.43.13) (2022-05-03)
 
 
