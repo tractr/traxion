@@ -80,7 +80,7 @@ export const <<Model pascal>>Show = (props: ShowProps) => (
           <SingleFieldList>
             <ChipField source="<<=labelFieldCamel(field.model)>>" sortable={false} />
           </SingleFieldList>
-      </ReferenceArrayField>
+      </ReferenceManyField>
 <<else>>
       <ReferenceField
         source="<<field camel>>Id"
