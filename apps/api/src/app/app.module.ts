@@ -22,7 +22,7 @@ import {
   CaslModule,
   PoliciesGuard,
 } from '@tractr/nestjs-casl';
-import { LoggerModule } from '@tractr/nestjs-core';
+import { LoggerModule, PrismaExceptionInterceptor } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 import {
   FileStorageController,
@@ -89,6 +89,7 @@ import { MailerModule } from '@tractr/nestjs-mailer';
     { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
     { provide: APP_GUARD, useClass: PoliciesGuard },
     { provide: APP_INTERCEPTOR, useClass: CaslExceptionInterceptor },
+    { provide: APP_INTERCEPTOR, useClass: PrismaExceptionInterceptor },
   ],
 })
 export class AppModule {}

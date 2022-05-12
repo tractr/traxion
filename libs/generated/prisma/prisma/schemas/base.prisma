@@ -18,4 +18,5 @@ generator nestjsGraphql {
   reExport = Single
   fields_Validator_from = "class-validator"
   fields_Validator_input = true
+  useInputType_StringFilter_ALL = "string"
 }

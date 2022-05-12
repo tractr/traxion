@@ -175,7 +175,9 @@
               "angular-authentication:publish",
               "terraform-group-pool:publish",
               "angular-casl:publish",
-              "hapify-create-traxion-workspace:publish"
+              "hapify-create-traxion-workspace:publish",
+              "hapify-templates-nestjs-graphql:publish",
+              "nestjs-graphql:publish"
             ],
             "syncVersions": true
           }
