@@ -1,8 +1,78 @@
 # hapify-templates-nestjs-graphql
 
-This library was generated with [Nx](https://nx.dev).
+This library host the templates that will be generate to be used with the graphql
+server
 
-## Running unit tests
+## How to generate the files
 
-Run `nx test hapify-templates-nestjs-graphql` to execute the unit tests via
-[Jest](https://jestjs.io).
+You can register this module inside your hapifyrc file:
+
+```js
+module.export = {
+  // ...
+  extends: ['@tractr/hapify-templates-nestjs-graphql'],
+  importReplacements: {
+    models: '@tractr/generated-models',
+    'nestjs-models-common': '@tractr/generated-nestjs-models-common',
+  },
+}
+```
+
+You can add the generate target to your nx libs that will handle the generation for you
+
+```json
+{
+  "targets":{
+    "generate": {
+      "executor": "@tractr/schematics:generate",
+      "options": {
+        "cwd": "libs/nestjs/graphql"
+      }
+    }
+  }
+}
+```
+
+You must add a new prisma generator inside your base prisma schema
+(`libs/prisma/prisma/schemas/base.schema`) with this minimal configuration:
+
+```prisma
+generator nestjsGraphql {
+  provider = "prisma-nestjs-graphql"
+  output = "../../../nestjs/graphql/src/generated/prisma-nestjs-graphql"
+  purgeOutput = true
+  reExport = Single
+  fields_Validator_from = "class-validator"
+  fields_Validator_input = true
+}
+```
+
+To finalize the installation you can install and save the `prisma-nestjs-graphql`
+and `@tractr/hapify-templates-nestjs-graphql` packages
+
+## How to use inside your nestjs app
+
+After the generated files you will be able to use the exported graphql module inside
+your application. In your `app.module.ts` you should add this lines:
+
+```ts
+
+import { GraphQLModule } from '@nestjs/graphql';
+import { GraphQLModelsModule } from '@myProject/nestjs-graphql';
+
+@Module({
+  imports: [
+    GraphQLModelsModule,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      include: [GraphQLModelsModule],
+      autoSchemaFile: 'schema.gql',
+      sortSchema: true,
+      debug: true,
+    }),
+    // ...
+  ]
+  // ...
+})
+export class AppModule {}
+```

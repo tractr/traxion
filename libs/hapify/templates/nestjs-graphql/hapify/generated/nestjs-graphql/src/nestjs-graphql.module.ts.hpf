@@ -18,5 +18,5 @@ const providers = [
   providers,
   exports: providers
 })
-export class GraphqlModule {}
+export class GraphQLModelsModule {}
  
