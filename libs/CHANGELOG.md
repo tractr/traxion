@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.44.0](https://github.com/tractr/stack/compare/v1.43.16...v1.44.0) (2022-05-16)
+
+
+### Features
+
+* add code coverage to the stack repository ([#428](https://github.com/tractr/stack/issues/428)) ([ccfbda0](https://github.com/tractr/stack/commit/ccfbda03b60e67f3753859e216467b790c6aed92))
+
+
+
+# [1.44.0](https://github.com/tractr/stack/compare/v1.43.16...v1.44.0) (2022-05-16)
+
+
+### Features
+
+* add code coverage to the stack repository ([#428](https://github.com/tractr/stack/issues/428)) ([ccfbda0](https://github.com/tractr/stack/commit/ccfbda03b60e67f3753859e216467b790c6aed92))
+
+
+
 ## [1.43.16](https://github.com/tractr/stack/compare/v1.43.15...v1.43.16) (2022-05-16)
 
 

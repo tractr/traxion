@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-aws-stack",
-  "version": "1.43.16",
+  "version": "1.44.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
