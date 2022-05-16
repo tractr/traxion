@@ -47,8 +47,15 @@ generator nestjsGraphql {
 }
 ```
 
-To finalize the installation you can install and save the `prisma-nestjs-graphql`
-and `@tractr/hapify-templates-nestjs-graphql` packages
+To finalize the installation you can install some extra packages:
+
+```bash
+npm i --save-dev prisma-nestjs-graphql @tractr/hapify-templates-nestjs-graphql
+```
+
+```bash
+npm i --save @nestjs/apollo @nestjs/graphql
+```
 
 ## How to use inside your nestjs app
 
@@ -56,8 +63,8 @@ After the generated files you will be able to use the exported graphql module in
 your application. In your `app.module.ts` you should add this lines:
 
 ```ts
-
 import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver } from '@nestjs/apollo';
 import { GraphQLModelsModule } from '@myProject/nestjs-graphql';
 
 @Module({
