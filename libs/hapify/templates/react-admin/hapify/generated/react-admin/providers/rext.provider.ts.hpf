@@ -39,28 +39,26 @@ import { RextClient } from '../../rext-client';
 export function rextClientProvider(apiUrl: string | URL): DataProvider {
   const rextClient = new RextClient(apiUrl);
   return {
-    getList: (resource, params) => {
+    getList: async (resource, params) => {
       const { page, perPage } = params.pagination;
-      const { field, order } = params.sort;
- 
+      const { order } = params.sort;
+
       // TODO make the filter works
-      return lastValueFrom(
-        (
-          rextClient[resource as unknown as ResourceType].findMany$({
-            sort: 'id',
-            order: order.toLowerCase(),
-            take: perPage,
-            skip: (page - 1) * perPage,
-          }) as Observable<any>
-        ).pipe(
-          withLatestFrom(
-            rextClient[resource as unknown as ResourceType].count$(
-              {},
-            ) as Observable<any>,
-          ),
-          map(([data, total]) => ({ data, total })),
-        ),
+
+      const total = await lastValueFrom(
+        rextClient[resource as unknown as ResourceType].count$(
+          {},
+        ) as Observable<number>,
       );
+      const data = await lastValueFrom(
+        rextClient[resource as unknown as ResourceType].findMany$({
+          sort: 'id',
+          order: order.toLowerCase(),
+          take: perPage,
+          skip: (page - 1) * perPage,
+        }) as Observable<any>,
+      );
+      return { data, total };
     },
 
 
