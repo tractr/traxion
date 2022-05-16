@@ -4,12 +4,6 @@
 name: Pull Request
 
 on:
-  pull_request:
-    types:
-      - opened
-      - edited
-      - synchronize
-
   workflow_call:
     secrets:
       GH_TOKEN:

@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { inspect } from 'util';
 
-import { Chalk, Instance } from 'chalk';
+import { Chalk, Instance, Level } from 'chalk';
 import safeStringify from 'fast-safe-stringify';
 import { format } from 'winston';
 
 export type NestLikeConsoleFormatOptions = {
   appName?: string;
   prettyPrint?: boolean;
-  colors?: boolean;
+  colors?: boolean | Level;
 };
 
 export const nestLikeConsoleFormat = (
@@ -16,7 +16,12 @@ export const nestLikeConsoleFormat = (
 ) => {
   const { appName = 'Nest', prettyPrint = true, colors = true } = options;
 
-  const clc = new Instance(!colors ? { level: 0 } : {});
+  const levelOption = typeof colors !== 'boolean' ? colors : undefined;
+  const chalkOptions = {
+    level: colors === false ? 0 : levelOption,
+  };
+
+  const clc = new Instance(chalkOptions);
   const nestLikeColorScheme: Record<string, Chalk> = {
     info: clc.greenBright,
     error: clc.red,
