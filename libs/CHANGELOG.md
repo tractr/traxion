@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.43.16](https://github.com/tractr/stack/compare/v1.43.15...v1.43.16) (2022-05-16)
+
+
+### Bug Fixes
+
+* change the way data is fetching in the rext provider of react admin ([#426](https://github.com/tractr/stack/issues/426)) ([17e7a7c](https://github.com/tractr/stack/commit/17e7a7c2c92c0165b013fa204638a9a55aceb079))
+
+
+
+## [1.43.16](https://github.com/tractr/stack/compare/v1.43.15...v1.43.16) (2022-05-16)
+
+
+### Bug Fixes
+
+* change the way data is fetching in the rext provider of react admin ([#426](https://github.com/tractr/stack/issues/426)) ([17e7a7c](https://github.com/tractr/stack/commit/17e7a7c2c92c0165b013fa204638a9a55aceb079))
+
+
+
 ## [1.43.15](https://github.com/tractr/stack/compare/v1.43.14...v1.43.15) (2022-05-11)
 
 
