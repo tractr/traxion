@@ -5,7 +5,6 @@ name: Tests
 
 # Make the workflow reusable
 on:
-  pull_request:
   workflow_call:
     inputs:
       registryUrl:
@@ -20,12 +19,6 @@ on:
         required: false
         type: boolean
 
-      chromatic:
-        default: false
-        description: 'Run the chromatics tests'
-        required: false
-        type: boolean
-
     secrets:
       NPM_TOKEN:
         description: 'The npm token if needed'
@@ -33,10 +26,6 @@ on:
 
       CODECOV_TOKEN:
         description: 'The codecov token if needed'
-        required: false
-
-      CHROMATIC_TOKEN:
-        description: 'The chromatic token if needed'
         required: false
 
 concurrency:
@@ -102,10 +91,3 @@ jobs:
           flags: unittests
           name: codecov-umbrella
           verbose: true
-
-      - name: Publish to Chromatic
-        uses: chromaui/action@v1
-        if: ${{ inputs.chromatic }}
-        with:
-          token: ${{ secrets.GH_TOKEN }}
-          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
