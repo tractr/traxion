@@ -8,5 +8,5 @@
   },
   "exclude": ["src/test-setup.ts", "**/*.spec.ts", "**/*.test.ts"],
   "extends": "./tsconfig.json",
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "../../../apps/api/src/app/user.resolver.spec.ts"]
 }

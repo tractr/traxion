@@ -83,7 +83,7 @@ export class <<Model pascal>>Resolver {
   @Query(() => <<Model pascal>>)
   async findUnique<<Model pascal>>(
     @Info() info: GraphQLResolveInfo,
-    @Args({ nullable: true, defaultValue: {} }) where: FindUnique<<Model pascal>>Args,
+    @Args({ nullable: true, defaultValue: {} }) { where }: FindUnique<<Model pascal>>Args,
   ) {
     const select = new PrismaSelect(info).value;
     return await this.<<Model camel>>Service.findUnique({ where, ...select });

@@ -19,6 +19,11 @@ module.exports = {
       input: 'all',
     },
     {
+      path: 'generated/nestjs-graphql/src/resolvers/{kebab}.resolver.spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'generated/nestjs-graphql/src/resolvers/{kebab}.resolver.ts',
       engine: 'hpf',
       input: 'one',
