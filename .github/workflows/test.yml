@@ -5,7 +5,6 @@ name: Tests
 
 # Make the workflow reusable
 on:
-  pull_request:
   workflow_call:
     inputs:
       registryUrl:

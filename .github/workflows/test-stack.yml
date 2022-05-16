@@ -1,0 +1,15 @@
+name: Stack release and Deploy
+
+on:
+  pull_request:
+
+jobs:
+  npm-release:
+    name: Release npm packages
+    uses: ./.github/workflows/test.yml
+    with:
+      registryUrl: 'https://npm.pkg.github.com'
+      codecov: true
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
