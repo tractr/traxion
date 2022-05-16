@@ -10,7 +10,6 @@ describe('WinstonLogger', () => {
 
   beforeEach(() => {
     output = jest.fn();
-    process.env.FORCE_COLOR = undefined;
 
     logger = createWinstonLogger({
       level: 'debug',
@@ -123,12 +122,9 @@ describe('WinstonLogger', () => {
   });
 
   it('should print the colors name', () => {
-    // To force chalk to output colors within the CI environment
-    process.env.FORCE_COLOR = '1';
-
     const loggerWithTimestamp = createWinstonLogger({
       format: nestLikeConsoleFormat({
-        colors: true,
+        colors: 1,
       }),
       transports: [
         new transports.Console({
@@ -144,11 +140,10 @@ describe('WinstonLogger', () => {
   });
 
   it('should use the default', () => {
-    // To force chalk to output colors within the CI environment
-    process.env.FORCE_COLOR = '1';
-
     const loggerWithTimestamp = createWinstonLogger({
-      format: nestLikeConsoleFormat(),
+      format: nestLikeConsoleFormat({
+        colors: 1,
+      }),
       transports: [
         new transports.Console({
           log: (info) => output(info[MESSAGE]),
