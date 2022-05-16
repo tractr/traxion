@@ -1,11 +1,11 @@
-name: Stack release and Deploy
+name: Stack test and coverage
 
 on:
   pull_request:
 
 jobs:
-  npm-release:
-    name: Release npm packages
+  test:
+    name: Test all packages
     uses: ./.github/workflows/test.yml
     with:
       registryUrl: 'https://npm.pkg.github.com'
