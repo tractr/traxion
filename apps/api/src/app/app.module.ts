@@ -1,11 +1,14 @@
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { GraphQLModule } from '@nestjs/graphql';
 import { ConsoleModule } from 'nestjs-console';
 
 import {
   getSelectPrismaUserQuery,
   rolePermissions,
 } from '@tractr/generated-casl';
+import { GraphQLModelsModule } from '@tractr/generated-nestjs-graphql';
 import { ModelsModule } from '@tractr/generated-nestjs-models';
 import { USER_SERVICE } from '@tractr/generated-nestjs-models-common';
 import {
@@ -17,7 +20,7 @@ import {
   CaslModule,
   PoliciesGuard,
 } from '@tractr/nestjs-casl';
-import { LoggerModule } from '@tractr/nestjs-core';
+import { LoggerModule, PrismaExceptionInterceptor } from '@tractr/nestjs-core';
 import { DatabaseModule } from '@tractr/nestjs-database';
 import {
   FileStorageController,
@@ -29,6 +32,14 @@ import { MailerModule } from '@tractr/nestjs-mailer';
 
 @Module({
   imports: [
+    GraphQLModelsModule,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      include: [GraphQLModelsModule],
+      autoSchemaFile: 'schema.gql',
+      sortSchema: true,
+      debug: true,
+    }),
     ModelsModule,
     DatabaseModule.register(),
     AuthenticationModule.registerAsync({
@@ -75,6 +86,7 @@ import { MailerModule } from '@tractr/nestjs-mailer';
     { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
     { provide: APP_GUARD, useClass: PoliciesGuard },
     { provide: APP_INTERCEPTOR, useClass: CaslExceptionInterceptor },
+    { provide: APP_INTERCEPTOR, useClass: PrismaExceptionInterceptor },
   ],
 })
 export class AppModule {}

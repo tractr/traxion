@@ -16,6 +16,7 @@
     "generated-casl": "libs/generated/casl",
     "generated-dbml": "libs/generated/dbml",
     "generated-models": "libs/generated/models",
+    "generated-nestjs-graphql": "libs/generated/nestjs-graphql",
     "generated-nestjs-models": "libs/generated/nestjs-models",
     "generated-nestjs-models-common": "libs/generated/nestjs-models-common",
     "generated-nestjs-models-rest": "libs/generated/nestjs-models-rest",
@@ -30,6 +31,7 @@
     "hapify-templates-casl": "libs/hapify/templates/casl",
     "hapify-templates-dbml": "libs/hapify/templates/dbml",
     "hapify-templates-models": "libs/hapify/templates/models",
+    "hapify-templates-nestjs-graphql": "libs/hapify/templates/nestjs-graphql",
     "hapify-templates-nestjs-models": "libs/hapify/templates/nestjs-models",
     "hapify-templates-nestjs-models-common": "libs/hapify/templates/nestjs-models-common",
     "hapify-templates-nestjs-models-rest": "libs/hapify/templates/nestjs-models-rest",
@@ -43,9 +45,10 @@
     "nestjs-core": "libs/nestjs/core",
     "nestjs-database": "libs/nestjs/database",
     "nestjs-file-storage": "libs/nestjs/file-storage",
+    "nestjs-graphql": "libs/nestjs/graphql",
     "nestjs-mailer": "libs/nestjs/mailer",
-    "nestjs-sentry": "libs/nestjs/sentry",
     "nestjs-request-timestamp": "libs/nestjs/request-timestamp",
+    "nestjs-sentry": "libs/nestjs/sentry",
     "nestjs-testing": "libs/nestjs/testing",
     "nestjs-winston": "libs/nestjs/winston",
     "prettier-config": "libs/config/prettier",
@@ -139,7 +142,9 @@
               "angular-authentication:publish",
               "terraform-group-pool:publish",
               "angular-casl:publish",
-              "hapify-create-traxion-workspace:publish"
+              "hapify-create-traxion-workspace:publish",
+              "hapify-templates-nestjs-graphql:publish",
+              "nestjs-graphql:publish"
             ],
             "syncVersions": true
           }

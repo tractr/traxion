@@ -69,5 +69,8 @@ module.exports = {
     '<rootDir>/libs/nestjs/winston',
     '<rootDir>/libs/nestjs/sentry',
     '<rootDir>/libs/nestjs/request-timestamp',
+    '<rootDir>/libs/hapify/templates/nestjs-graphql',
+    '<rootDir>/libs/generated/nestjs-graphql',
+    '<rootDir>/libs/nestjs/graphql',
   ],
 };

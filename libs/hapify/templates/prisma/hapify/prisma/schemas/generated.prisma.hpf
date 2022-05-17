@@ -16,16 +16,22 @@
 
 <<# If the field has a relation oneOne or oneMany >>
 <<# We generate the first relation prisma field >>
+    <<=getMetadata(model, field)>>
     <<field camel>> <<field.model pascal>><<if field nullable>>?<<endif>> @relation("<<model pascal>>.<<field camel>>.<<field.model pascal>>.<<-field backRelation camel>>",fields: [<<field camel>><<=getReferencedEntityPrimary(field).names.pascal>>], references: [<<=getReferencedEntityPrimary(field).names.camel>>])
+ 
+    <<=getMetadata(model, field)>>
     <<field camel>><<=getReferencedEntityPrimary(field).names.pascal>> <<=getReferencedEntityPrimaryType(field)>>
 
 <<# If the field has a relation manyMany >>
         <<elseif field manyMany>>
     // Relation Many to Many between <<field pascal>> and <<model pascal>>
+    <<=getMetadata(model, field)>>
     <<field camel>> <<field.model pascal>>[] @relation("<<model pascal>>.<<field camel>>.<<field.model pascal>>.<<-field backRelation camel>>")
         <<else>>
 
 <<# If the field has a no relation we get his prismaType >>
+
+    <<=getMetadata(model, field)>>
     <<field camel>> <<=prismaType(field, model)>> <<=primary(field)>> <<=unique(field)>>
         <<endif>>
     <<endfor>>
@@ -66,6 +72,71 @@ function getReferencedEntityPrimary(f) {
 >>>
 
 <<<
+function getMetadata(model, f) {
+  let out = "";
+
+  if (f.hidden) out += "/// @HideField()\n";
+
+  switch(f.type) {
+    case 'string':
+      switch(f.subtype) {
+        case 'text':
+        case 'rich':
+          break;
+        case 'password':
+        case 'url':
+        default:
+          out += "/// @Validator.MaxLength(" + (f.meta.maxLength ? f.meta.maxLength : 255) + ")\n";
+      }
+    case 'number':
+      switch(f.subtype) {
+        case 'integer':
+          out += "/// @Validator.IsInt()\n";
+        case 'float':
+          out += "/// @Validator.IsFloat()\n";
+        case 'latitude':
+          out += "/// @Validator.IsLatitude()\n";
+        case 'longitude':
+          out += "/// @Validator.IsLongitude()\n";
+      }
+      break;
+    case 'boolean':
+        out += "/// @Validator.IsBoolean()\n";
+      break;
+    case 'datetime':
+      switch(f.subtype) {
+        case 'date':
+        case 'time':
+        default:
+          out += "/// @Validator.IsDate()\n";
+          break;
+      }
+      break;
+    case 'entity':
+      break;
+    case 'object':
+          out += "/// @Validator.IsObject()\n";
+      break;
+    case 'file':n
+      switch(f.subtype) {
+        case 'image':
+        case 'video':
+        case 'audio':
+        case 'document':
+          break;
+      }
+      break;
+  }
+
+
+  if (f.multiple) out += "/// @Validator.IsArray({ each: true })\n";
+  if (f.enum) out+= "/// @Validator.IsEnum(" + model.names.pascal + f.names.pascal + ")\n";
+  if (f.primary && f.type === 'string') out+= "/// @Validator.IsUUID()\n";
+  return out;
+}
+>>>
+
+<<<
 function getReferencedEntityPrimaryType(f) {
   let out = "";
   if(f.model.fields.primary.type === "string") {
@@ -78,7 +149,7 @@ function getReferencedEntityPrimaryType(f) {
   }
   switch(f.model.fields.primary.subtype) {
     case 'text': return out += " @db.Text";
-    default: return out += " @db.VarChar(255)";
+    default: return out += " @db.VarChar(" + (f.meta.maxLength ? f.meta.maxLength : 255) + ")";
   }
 }
 >>>
@@ -108,12 +179,7 @@ function prismaType(f, m) {
       case 'string':
           switch(f.subtype) {
               case 'text': return out += " @db.Text";
-              default: return out += " @db.VarChar(255)";
-          }
-      case 'datetime':
-          switch(f.subtype) {
-              case 'date': return out += " @db.Date";
-              case 'time': return out += " @db.Time(3)";
+              default: return out += " @db.VarChar(" + (f.meta.maxLength ? f.meta.maxLength : 255) + ")";
           }
       case 'datetime':
           switch(f.subtype) {

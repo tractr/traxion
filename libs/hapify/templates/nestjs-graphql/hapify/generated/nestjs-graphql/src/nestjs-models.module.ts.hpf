@@ -1,0 +1,30 @@
+import { Module } from '@nestjs/common';
+import { LoggerModule } from '@tractr/nestjs-core';
+ 
+import {
+<<for Models model>>
+  <<model constant>>_SERVICE,
+  <<model pascal>>Service,
+  <<model constant>>_DATABASE_SERVICE,
+  <<model camel>>DatabaseServiceFactory,
+  <<model camel>>DatabaseServiceInject,
+<<endfor>>
+} from '../../nestjs-models-common';
+ 
+const providers = [
+  <<for Models model>>
+    { provide: <<model constant>>_SERVICE, useClass: <<model pascal>>Service },
+    {
+      provide: <<model constant>>_DATABASE_SERVICE, 
+      useFactory: <<model camel>>DatabaseServiceFactory,
+      inject: <<model camel>>DatabaseServiceInject,
+    },
+  <<endfor>>
+];
+ 
+@Module({
+  providers,
+  exports: providers
+})
+export class ModelsModule {}
+ 
