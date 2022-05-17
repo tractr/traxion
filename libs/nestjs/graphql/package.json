@@ -1,4 +1,14 @@
 {
   "name": "@tractr/nestjs-graphql",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "description": "Nestjs graphql helper",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "license": "UNLICENSED",
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
 }
