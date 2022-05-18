@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.45.1](https://github.com/tractr/stack/compare/v1.45.0...v1.45.1) (2022-05-18)
+
+
+### Bug Fixes
+
+* add good types in PrismaExceptionFilter ([#431](https://github.com/tractr/stack/issues/431)) ([16fddb1](https://github.com/tractr/stack/commit/16fddb18e442f109f1ca9d5f142755cda22087de))
+
+
+
 # [1.45.0](https://github.com/tractr/stack/compare/v1.44.0...v1.45.0) (2022-05-17)
 
 
