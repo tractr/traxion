@@ -80,7 +80,7 @@ export class <<Model pascal>>Resolver {
   /**
    * Query for a unique <<Model camel>>.
    */
-  @Query(() => <<Model pascal>>)
+  @Query(() => <<Model pascal>>, { nullable: true })
   async findUnique<<Model pascal>>(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true, defaultValue: {} }) { where }: FindUnique<<Model pascal>>Args,
@@ -123,7 +123,7 @@ export class <<Model pascal>>Resolver {
     return {
       <<Model camel>>s: <<Model camel>>s.slice(0, take),
       count,
-      hasNextPage: <<Model camel>>s[take + 1] !== undefined,
+      hasNextPage: typeof <<Model camel>>s[take] !== 'undefined',
     };
   }
  
