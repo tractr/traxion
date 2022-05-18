@@ -54,7 +54,7 @@ npm i --save-dev prisma-nestjs-graphql @tractr/hapify-templates-nestjs-graphql
 ```
 
 ```bash
-npm i --save @nestjs/apollo @nestjs/graphql
+npm i --save @nestjs/apollo @nestjs/graphql @paljs/plugins @tractr/nestjs-graphql apollo-server-core apollo-server-express
 ```
 
 ## How to use inside your nestjs app
@@ -64,7 +64,7 @@ your application. In your `app.module.ts` you should add this lines:
 
 ```ts
 import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver } from '@nestjs/apollo';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModelsModule } from '@myProject/nestjs-graphql';
 
 @Module({
@@ -82,4 +82,12 @@ import { GraphQLModelsModule } from '@myProject/nestjs-graphql';
   // ...
 })
 export class AppModule {}
+```
+
+> :warning: The class validator will validate for you the input but the graphql args is not fully annoted yet.
+To be able to use this library you should remove this class validator options from your `main.ts` file
+
+```json
+whitelist: true,
+forbidNonWhitelisted: true,
 ```
