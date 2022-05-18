@@ -7,13 +7,7 @@ import {
   NestInterceptor,
   NotFoundException,
 } from '@nestjs/common';
-import {
-  PrismaClientInitializationError,
-  PrismaClientKnownRequestError,
-  PrismaClientRustPanicError,
-  PrismaClientUnknownRequestError,
-  PrismaClientValidationError,
-} from '@prisma/client/runtime';
+import { Prisma } from '@prisma/client';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -25,25 +19,24 @@ export class PrismaExceptionInterceptor implements NestInterceptor {
       catchError((error) => {
         let errorCode: string | undefined;
 
-        if (error instanceof PrismaClientKnownRequestError) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
           errorCode = error.code;
-        } else if (error instanceof PrismaClientInitializationError) {
+        } else if (error instanceof Prisma.PrismaClientInitializationError) {
           errorCode = error.errorCode;
         }
-
-        if (errorCode && errorCode.substr(0, 2) === 'P2') {
+        if (errorCode && errorCode.substring(0, 2) === 'P2') {
           if (errorCode === 'P2001') {
             throw new NotFoundException(error.message);
           }
           throw new ConflictException(error.message);
         }
 
-        if (error instanceof PrismaClientValidationError) {
+        if (error instanceof Prisma.PrismaClientValidationError) {
           throw new ConflictException(error.message);
         }
         if (
-          error instanceof PrismaClientUnknownRequestError ||
-          error instanceof PrismaClientRustPanicError
+          error instanceof Prisma.PrismaClientUnknownRequestError ||
+          error instanceof Prisma.PrismaClientRustPanicError
         ) {
           throw new InternalServerErrorException(error.message);
         }
