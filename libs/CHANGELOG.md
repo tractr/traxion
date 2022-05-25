@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.45.3](https://github.com/tractr/stack/compare/v1.45.2...v1.45.3) (2022-05-25)
+
+
+### Bug Fixes
+
+* **hapify-templates-react-admin:** fix migration react-admin 4.1.0 ([#432](https://github.com/tractr/stack/issues/432)) ([afe5b3b](https://github.com/tractr/stack/commit/afe5b3b32a0e524f2c67f6434932389d6893dc18))
+
+
+
 ## [1.45.2](https://github.com/tractr/stack/compare/v1.45.1...v1.45.2) (2022-05-18)
 
 
