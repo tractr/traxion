@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-service-postgres",
-  "version": "1.45.2",
+  "version": "1.45.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
