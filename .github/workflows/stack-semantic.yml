@@ -1,0 +1,15 @@
+name: Pull Request
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+
+jobs:
+  commitlint:
+    name: Commitlint
+    uses: ./.github/workflows/semantic.yml
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}

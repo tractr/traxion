@@ -42,6 +42,9 @@
       "@tractr/generated-models/mock": [
         "libs/generated/models/mock/src/index.ts"
       ],
+      "@tractr/generated-nestjs-graphql": [
+        "libs/generated/nestjs-graphql/src/index.ts"
+      ],
       "@tractr/generated-nestjs-models": [
         "libs/generated/nestjs-models/src/index.ts"
       ],
@@ -80,8 +83,14 @@
       "@tractr/nestjs-core": ["libs/nestjs/core/src/index.ts"],
       "@tractr/nestjs-database": ["libs/nestjs/database/src/index.ts"],
       "@tractr/nestjs-file-storage": ["libs/nestjs/file-storage/src/index.ts"],
+      "@tractr/nestjs-graphql": ["libs/nestjs/graphql/src/index.ts"],
       "@tractr/nestjs-mailer": ["libs/nestjs/mailer/src/index.ts"],
+      "@tractr/nestjs-request-timestamp": [
+        "libs/nestjs/request-timestamp/src/index.ts"
+      ],
+      "@tractr/nestjs-sentry": ["libs/nestjs/sentry/src/index.ts"],
       "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
+      "@tractr/nestjs-winston": ["libs/nestjs/winston/src/index.ts"],
       "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"],
       "@tractr/schematics": ["libs/schematics/src/index.ts"],
       "@tractr/terraform-aws-stack": ["libs/terraform/aws-stack/src/index.ts"],
@@ -97,11 +106,11 @@
       "@tractr/terraform-component-entrypoint": [
         "libs/terraform/component/entrypoint/src/index.ts"
       ],
+      "@tractr/terraform-component-file-storage": [
+        "libs/terraform/component/file-storage/src/index.ts"
+      ],
       "@tractr/terraform-component-logs": [
         "libs/terraform/component/logs/src/index.ts"
-      ],
-      "@tractr/terraform-component-owner-pictures": [
-        "libs/terraform/component/owner-pictures/src/index.ts"
       ],
       "@tractr/terraform-component-private-dns": [
         "libs/terraform/component/private-dns/src/index.ts"
@@ -129,9 +138,6 @@
       ],
       "@tractr/terraform-group-zone": [
         "libs/terraform/group/zone/src/index.ts"
-      ],
-      "@tractr/terraform-helpers-post-synth": [
-        "libs/terraform/helpers/post-synth/src/index.ts"
       ],
       "@tractr/terraform-service-api": [
         "libs/terraform/service/api/src/index.ts"

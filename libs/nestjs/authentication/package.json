@@ -1,6 +1,6 @@
 {
   "name": "@tractr/nestjs-authentication",
-  "version": "1.42.1",
+  "version": "1.45.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"

@@ -1,0 +1,12 @@
+{
+  "name": "@tractr/nestjs-sentry",
+  "version": "1.45.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

@@ -34,7 +34,7 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
       logConfiguration: {
         logDriver: 'awslogs',
         options: {
-          'awslogs-group': this.service.getLogsGroup(),
+          'awslogs-group': this.service.getLogsGroup().name,
           'awslogs-region': this.service.getRegion(),
           'awslogs-stream-prefix': this.config.name,
         },
@@ -90,7 +90,7 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
   protected getSecrets(): SecretDefinition[] {
     return this.extractSecretsFromConfig().map(([name, value]) => ({
       name,
-      valueFrom: this.getSecretPath(value.secretKey ?? name),
+      valueFrom: this.service.getSecretPath(value.secretKey ?? name),
     }));
   }
 
@@ -159,10 +159,6 @@ export abstract class Container<T extends ContainerConfig = ContainerConfig> {
   /** Returns env & secrets names */
   protected getEnvNames(): string[] {
     return Object.keys(this.config.environments || {});
-  }
-
-  protected getSecretPath(key: string): string {
-    return `${this.service.getSecretsmanagerSecretArn()}:${key}::`;
   }
 
   /**

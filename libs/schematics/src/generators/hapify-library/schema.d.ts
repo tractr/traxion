@@ -6,6 +6,7 @@ export type AvailableTractrTemplates =
   | 'dbml'
   | 'models'
   | 'nestjs-models'
+  | 'nestjs-graphql'
   | 'nestjs-models-common'
   | 'nestjs-models-rest'
   | 'prisma'

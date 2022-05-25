@@ -87,3 +87,6 @@ apps/pwa/src/assets/app-config.json
 
 # Angular
 .angular
+
+# GraphQL
+schema.gql

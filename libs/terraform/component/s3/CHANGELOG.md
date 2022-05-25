@@ -2,6 +2,105 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.45.2](https://github.com/tractr/stack/compare/v1.45.1...v1.45.2) (2022-05-18)
+
+
+
+## [1.45.1](https://github.com/tractr/stack/compare/v1.45.0...v1.45.1) (2022-05-18)
+
+
+
+# [1.45.0](https://github.com/tractr/stack/compare/v1.44.0...v1.45.0) (2022-05-17)
+
+
+
+# [1.44.0](https://github.com/tractr/stack/compare/v1.43.16...v1.44.0) (2022-05-16)
+
+
+
+## [1.43.16](https://github.com/tractr/stack/compare/v1.43.15...v1.43.16) (2022-05-16)
+
+
+
+## [1.43.15](https://github.com/tractr/stack/compare/v1.43.14...v1.43.15) (2022-05-11)
+
+
+
+## [1.43.14](https://github.com/tractr/stack/compare/v1.43.13...v1.43.14) (2022-05-10)
+
+
+
+## [1.43.13](https://github.com/tractr/stack/compare/v1.43.12...v1.43.13) (2022-05-03)
+
+
+
+## [1.43.12](https://github.com/tractr/stack/compare/v1.43.11...v1.43.12) (2022-05-03)
+
+
+
+## [1.43.11](https://github.com/tractr/stack/compare/v1.43.10...v1.43.11) (2022-05-02)
+
+
+
+## [1.43.10](https://github.com/tractr/stack/compare/v1.43.9...v1.43.10) (2022-04-28)
+
+
+### Bug Fixes
+
+* **terraform:** change s3 versioning from Disabled to Suspended ([#421](https://github.com/tractr/stack/issues/421)) ([ddb85fe](https://github.com/tractr/stack/commit/ddb85fe3ffb6c9bab3df2d16fe185bd8d886f66b))
+
+
+
+## [1.43.9](https://github.com/tractr/stack/compare/v1.43.8...v1.43.9) (2022-04-14)
+
+
+
+## [1.43.8](https://github.com/tractr/stack/compare/v1.43.7...v1.43.8) (2022-04-12)
+
+
+
+## [1.43.7](https://github.com/tractr/stack/compare/v1.43.6...v1.43.7) (2022-04-11)
+
+
+### Bug Fixes
+
+* **terraform-component-s3:** use name for bucket ([#413](https://github.com/tractr/stack/issues/413)) ([545a64e](https://github.com/tractr/stack/commit/545a64ec716e0bfde1452e62e560bac8e8fe4099))
+
+
+
+## [1.43.6](https://github.com/tractr/stack/compare/v1.43.5...v1.43.6) (2022-04-08)
+
+
+### Bug Fixes
+
+* **terraform-component-s3:** fix cors without rules ([#410](https://github.com/tractr/stack/issues/410)) ([a229d1e](https://github.com/tractr/stack/commit/a229d1e4533c5376c6515b012436ae58938025e6))
+
+
+
+## [1.43.5](https://github.com/tractr/stack/compare/v1.43.4...v1.43.5) (2022-04-07)
+
+
+
+## [1.43.4](https://github.com/tractr/stack/compare/v1.43.3...v1.43.4) (2022-04-06)
+
+
+
+## [1.43.3](https://github.com/tractr/stack/compare/v1.43.2...v1.43.3) (2022-04-06)
+
+
+
+## [1.43.2](https://github.com/tractr/stack/compare/v1.43.1...v1.43.2) (2022-04-06)
+
+
+
+## [1.43.1](https://github.com/tractr/stack/compare/v1.43.0...v1.43.1) (2022-04-06)
+
+
+
+# [1.43.0](https://github.com/tractr/stack/compare/v1.42.1...v1.43.0) (2022-04-05)
+
+
+
 ## [1.42.1](https://github.com/tractr/stack/compare/v1.42.0...v1.42.1) (2022-03-15)
 
 

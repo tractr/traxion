@@ -1,39 +1,41 @@
+/* eslint-disable no-new */
 import { s3 } from '@cdktf/provider-aws';
-import { Token } from 'cdktf';
 
 import {
-  AwsComponent,
-  AwsProviderConstruct,
-} from '@tractr/terraform-component-aws';
+  DeploymentStoreComponentArtifacts,
+  DeploymentStoreComponentConfig,
+} from './interfaces';
 
-export class DeploymentStoreComponent extends AwsComponent {
-  protected readonly s3Bucket: s3.S3Bucket;
+import { AwsComponent } from '@tractr/terraform-component-aws';
 
-  constructor(scope: AwsProviderConstruct, id: string, config = null) {
-    super(scope, id, config);
-    this.s3Bucket = this.createS3Bucket();
+export class DeploymentStoreComponent extends AwsComponent<
+  DeploymentStoreComponentConfig,
+  DeploymentStoreComponentArtifacts
+> {
+  protected createComponents(): void {
+    const bucket = this.createS3Bucket();
+    // Populate artifacts
+    this.artifacts = { bucket };
   }
 
   protected createS3Bucket() {
-    return new s3.S3Bucket(this, 's3', {
-      provider: this.provider,
+    const bucket = new s3.S3Bucket(this, 's3', {
       bucketPrefix: this.getResourceName('', 37).replace(/_/g, '-'),
-      acl: 'private',
       forceDestroy: true,
-      versioning: { enabled: false },
       tags: this.getResourceNameAsTag('s3'),
     });
-  }
+    // Add access control, versioning
+    new s3.S3BucketAcl(this, 'acl', {
+      acl: 'private',
+      bucket: bucket.bucket,
+    });
+    new s3.S3BucketVersioningA(this, 'versioning', {
+      bucket: bucket.bucket,
+      versioningConfiguration: {
+        status: 'Suspended',
+      },
+    });
 
-  getBucketNameAsToken(): string {
-    return Token.asString(this.s3Bucket.bucket);
-  }
-
-  getBucketArnAsToken(): string {
-    return Token.asString(this.s3Bucket.arn);
-  }
-
-  getBucketIdAsToken(): string {
-    return Token.asString(this.s3Bucket.id);
+    return bucket;
   }
 }

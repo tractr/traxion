@@ -1,2 +1,2 @@
 export * from './lib/interfaces';
-export * from './lib/terraform-aws-stack';
+export * from './lib/aws-stack';

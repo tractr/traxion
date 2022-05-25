@@ -1,0 +1,204 @@
+<<<
+  // We need to extract all the fields who refered our model
+  // And remove the duplicate
+  const uniqRefs = root.referencedIn
+    .filter((value, index, self) => {
+      return self.findIndex(f => f.name === value.name) === index && value.name !== root.name;
+    });
+  const uniqFieldRefs = root.referencedIn
+    .flatMap((ref) => ref.fields)
+    .filter((value, index, self) => {
+      return self.findIndex(f => f.name === value.name) === index && value.name !== root.name;
+    });
+>>>
+
+
+
+import {
+  Inject,
+} from '@nestjs/common';
+import { 
+  CurrentAbilities, 
+  Policies,
+  <<if Model not noGuest>>
+    Public,
+  <<endif>>
+} from '@tractr/nestjs-core';
+import {
+  Args,
+  Info,
+  Int,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
+import { GraphQLResolveInfo } from 'graphql';
+import { PrismaSelect } from '@paljs/plugins';
+
+import {
+  <<Model pascal>>Service,
+  <<Model constant>>_SERVICE,
+<<for uniqRefs ref>>
+  <<ref constant>>_SERVICE,
+  <<ref pascal>>Service,
+<<endfor>>
+} from '../../../../nestjs-models-common';
+
+import {
+  <<Model pascal>>,
+<<for uniqRefs ref>>
+  <<ref pascal>>,
+<<endfor>>
+  FindUnique<<Model pascal>>Args,
+  FindMany<<Model pascal>>Args,
+  CreateOne<<Model pascal>>Args,
+  UpdateOne<<Model pascal>>Args,
+  DeleteOne<<Model pascal>>Args,
+<<for uniqRefs ref>>
+  FindMany<<ref pascal>>Args,
+<<endfor>>
+} from '../../../prisma-nestjs-graphql';
+
+import {
+  FindMany<<Model pascal>>Output,
+} from '../dtos';
+ 
+@Resolver(() => <<Model pascal>>)
+export class <<Model pascal>>Resolver {
+ 
+  constructor(
+    @Inject(<<Model constant>>_SERVICE)
+    protected <<Model camel>>Service: <<Model pascal>>Service,
+<<for uniqRefs ref>>
+    @Inject(<<ref constant>>_SERVICE)
+    protected <<ref camel>>Service: <<ref pascal>>Service,
+<<endfor>>
+  ) {}
+ 
+  /**
+   * Query for a unique <<Model camel>>.
+   */
+  @Query(() => <<Model pascal>>, { nullable: true })
+  async findUnique<<Model pascal>>(
+    @Info() info: GraphQLResolveInfo,
+    @Args({ nullable: true, defaultValue: {} }) { where }: FindUnique<<Model pascal>>Args,
+  ) {
+    const select = new PrismaSelect(info).value;
+    return await this.<<Model camel>>Service.findUnique({ where, ...select });
+  }
+ 
+  /**
+   * Query for multiple <<Model camel>>s.
+   */
+  @Query(() => FindMany<<Model pascal>>Output)
+  async findMany<<Model pascal>>(
+    @Info() info: GraphQLResolveInfo,
+    @Args({ nullable: true })
+      {
+        where,
+        cursor,
+        distinct,
+        orderBy = [{ id: 'asc' }],
+        skip = 0,
+        take = 100,
+      }: FindMany<<Model pascal>>Args,
+  ) {
+    const select = new PrismaSelect(info).valueOf('<<Model camel>>s');
+    const <<Model camel>>s = await this.<<Model camel>>Service.findMany({
+      ...select,
+      where,
+      cursor,
+      distinct,
+      orderBy,
+      skip,
+      take: take + 1,
+    });
+
+    const count = await this.<<Model camel>>Service.count({
+      where,
+    });
+
+    return {
+      <<Model camel>>s: <<Model camel>>s.slice(0, take),
+      count,
+      hasNextPage: typeof <<Model camel>>s[take] !== 'undefined',
+    };
+  }
+ 
+  /**
+   * Create a single <<Model camel>>.
+   */
+  @Mutation(() => <<Model pascal>>, { nullable: true })
+  async create<<Model pascal>>(
+    @Info() info: GraphQLResolveInfo,
+    @Args() { data }: CreateOne<<Model pascal>>Args,
+  ): Promise<any> {
+    const select = new PrismaSelect(info).value;
+    return this.<<Model camel>>Service.create({ data, ...select });
+  }
+ 
+  /**
+   * Update a single <<Model camel>>.
+   */
+  @Mutation(() => <<Model pascal>>, { nullable: true })
+  async update<<Model pascal>>(
+    @Info() info: GraphQLResolveInfo,
+    @Args() { where, data }: UpdateOne<<Model pascal>>Args,
+  ): Promise<any> {
+    const select = new PrismaSelect(info).value;
+    return this.<<Model camel>>Service.update({ where, data, ...select });
+  }
+ 
+  /**
+   * Delete a single <<Model camel>>.
+   */
+  @Mutation(() => <<Model pascal>>, { nullable: true })
+  async delete<<Model pascal>>(
+    @Info() info: GraphQLResolveInfo,
+    @Args() { where }: DeleteOne<<Model pascal>>Args,
+  ): Promise<any> {
+    const select = new PrismaSelect(info).value;
+    return this.<<Model camel>>Service.delete({ where, ...select });
+  }
+ 
+<<for root.referencedIn ref>>
+  <<for ref.fields field>>
+  /**
+   * Associated <<-field backRelation pascal>>
+   */
+  @ResolveField(() => <<ref pascal>>)
+  async <<-field backRelation camel>>(
+    @Info() info: GraphQLResolveInfo,
+    @Parent() <<Model camel>>: <<Model pascal>>,
+    @Args({ nullable: true })
+    {
+      where,
+      cursor,
+      distinct,
+      orderBy = [{ id: 'asc' }],
+      skip = 0,
+      take = 100,
+    }: FindMany<<ref pascal>>Args,
+  ) {
+    if (<<Model camel>>.<<-field backRelation camel>>) return <<Model camel>>.<<-field backRelation camel>>;
+ 
+    const select = new PrismaSelect(info).valueOf('<<Model camel>>s.<<-field backRelation camel>>', '<<ref pascal>>');
+    const { id } = <<Model camel>>;
+    return this.<<ref camel>>Service.findMany({
+      ...select,
+      where: { ...where, <<field camel>>: <<if field oneOne or oneMany>>{ id }<<else>>{ some: { id } }<<endif>> },
+      cursor,
+      distinct,
+      orderBy,
+      skip,
+      take: take + 1,
+    });
+  }
+ 
+  <<endfor>>
+<<endfor>>
+
+ 
+}

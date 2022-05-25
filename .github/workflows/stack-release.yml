@@ -1,0 +1,20 @@
+name: Stack release and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  npm-release:
+    name: Release npm packages
+    uses: ./.github/workflows/release-npm.yml
+    with:
+      registryUrl: 'https://npm.pkg.github.com'
+      botName: tractr-bot
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}

@@ -2,6 +2,115 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.45.2](https://github.com/tractr/stack/compare/v1.45.1...v1.45.2) (2022-05-18)
+
+
+
+## [1.45.1](https://github.com/tractr/stack/compare/v1.45.0...v1.45.1) (2022-05-18)
+
+
+
+# [1.45.0](https://github.com/tractr/stack/compare/v1.44.0...v1.45.0) (2022-05-17)
+
+
+
+# [1.44.0](https://github.com/tractr/stack/compare/v1.43.16...v1.44.0) (2022-05-16)
+
+
+
+## [1.43.16](https://github.com/tractr/stack/compare/v1.43.15...v1.43.16) (2022-05-16)
+
+
+### Bug Fixes
+
+* change the way data is fetching in the rext provider of react admin ([#426](https://github.com/tractr/stack/issues/426)) ([17e7a7c](https://github.com/tractr/stack/commit/17e7a7c2c92c0165b013fa204638a9a55aceb079))
+
+
+
+## [1.43.15](https://github.com/tractr/stack/compare/v1.43.14...v1.43.15) (2022-05-11)
+
+
+### Bug Fixes
+
+* update react admin entities ([#425](https://github.com/tractr/stack/issues/425)) ([3e972d9](https://github.com/tractr/stack/commit/3e972d964c9fed90eddd9963a5740e5d2b988a79))
+
+
+
+## [1.43.14](https://github.com/tractr/stack/compare/v1.43.13...v1.43.14) (2022-05-10)
+
+
+### Bug Fixes
+
+* logic for references on react admin ([#424](https://github.com/tractr/stack/issues/424)) ([a4482b6](https://github.com/tractr/stack/commit/a4482b633e0a674dad77664a64f445063c9f47f7))
+
+
+
+## [1.43.13](https://github.com/tractr/stack/compare/v1.43.12...v1.43.13) (2022-05-03)
+
+
+### Bug Fixes
+
+* pagination and create hook for react admin ([#423](https://github.com/tractr/stack/issues/423)) ([71cb27e](https://github.com/tractr/stack/commit/71cb27e39382f39ed26aa1c9846536d48987cfc6))
+
+
+
+## [1.43.12](https://github.com/tractr/stack/compare/v1.43.11...v1.43.12) (2022-05-03)
+
+
+
+## [1.43.11](https://github.com/tractr/stack/compare/v1.43.10...v1.43.11) (2022-05-02)
+
+
+
+## [1.43.10](https://github.com/tractr/stack/compare/v1.43.9...v1.43.10) (2022-04-28)
+
+
+
+## [1.43.9](https://github.com/tractr/stack/compare/v1.43.8...v1.43.9) (2022-04-14)
+
+
+### Bug Fixes
+
+* add role check to react-admin ([#415](https://github.com/tractr/stack/issues/415)) ([b349e5a](https://github.com/tractr/stack/commit/b349e5a84ae6356a4c76fdbfd240709617e7fa39))
+
+
+
+## [1.43.8](https://github.com/tractr/stack/compare/v1.43.7...v1.43.8) (2022-04-12)
+
+
+
+## [1.43.7](https://github.com/tractr/stack/compare/v1.43.6...v1.43.7) (2022-04-11)
+
+
+
+## [1.43.6](https://github.com/tractr/stack/compare/v1.43.5...v1.43.6) (2022-04-08)
+
+
+
+## [1.43.5](https://github.com/tractr/stack/compare/v1.43.4...v1.43.5) (2022-04-07)
+
+
+
+## [1.43.4](https://github.com/tractr/stack/compare/v1.43.3...v1.43.4) (2022-04-06)
+
+
+
+## [1.43.3](https://github.com/tractr/stack/compare/v1.43.2...v1.43.3) (2022-04-06)
+
+
+
+## [1.43.2](https://github.com/tractr/stack/compare/v1.43.1...v1.43.2) (2022-04-06)
+
+
+
+## [1.43.1](https://github.com/tractr/stack/compare/v1.43.0...v1.43.1) (2022-04-06)
+
+
+
+# [1.43.0](https://github.com/tractr/stack/compare/v1.42.1...v1.43.0) (2022-04-05)
+
+
+
 ## [1.42.1](https://github.com/tractr/stack/compare/v1.42.0...v1.42.1) (2022-03-15)
 
 

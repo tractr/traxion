@@ -1,16 +1,21 @@
+##############################################
+##      Reusable semantic pull request      ##
+##############################################
 name: Pull Request
 
 on:
-  pull_request:
-    types:
-      - opened
-      - edited
-      - synchronize
+  workflow_call:
+    secrets:
+      GH_TOKEN:
+        description: 'The github bot-token'
+        required: true
 
 jobs:
   commitlint:
+    name: Semantic release
     runs-on: ubuntu-latest
     steps:
-      - uses: amannn/action-semantic-pull-request@v3.4.0
+      - name: Check the pull request name
+        uses: amannn/action-semantic-pull-request@v3.4.0
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

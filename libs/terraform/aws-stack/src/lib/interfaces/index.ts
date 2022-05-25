@@ -1,1 +1,1 @@
-export * from './terraform-aws-stack-config.interface';
+export * from './aws-stack-config.interface';
