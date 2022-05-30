@@ -6,6 +6,7 @@ import { fetchAppConfigJson } from './fetch-app-config-json.helper';
 
 export interface BootstrapAppWithConfigOptions<T> {
   appConfigUrl?: string;
+  ignoreStorage?: boolean;
   getConfig?: (angularConfig: AngularConfig) => T;
 }
 
@@ -15,10 +16,9 @@ export async function bootstrapAppWithConfig<T>(
   AppModule: Type<unknown>,
   options?: BootstrapAppWithConfigOptions<T>,
 ) {
-  const { NODE_ENV } = process.env;
   let config;
 
-  if (NODE_ENV === 'development') {
+  if (options?.ignoreStorage) {
     config = await fetchAppConfigJson(options?.appConfigUrl);
   } else {
     const stringifyConfiguration = sessionStorage.getItem(
