@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.45.4](https://github.com/tractr/stack/compare/v1.45.3...v1.45.4) (2022-05-30)
+
+
+### Bug Fixes
+
+* use session storage only on production ([#433](https://github.com/tractr/stack/issues/433)) ([1297aa2](https://github.com/tractr/stack/commit/1297aa2cb8d86161879a607427c2b94bd1092322))
+
+
+
 ## [1.45.3](https://github.com/tractr/stack/compare/v1.45.2...v1.45.3) (2022-05-25)
 
 
