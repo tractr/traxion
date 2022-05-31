@@ -119,7 +119,7 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
       </ReferenceArrayInput>
 <<else>>
       <ReferenceInput
-        source="<<field camel>>Id"
+        source="<<field camel>>"
         label="<<field capital>>"
         reference="<<field.model camel>>">
           <SelectInput optionText="<<=labelFieldCamel(field.model)>>" />
