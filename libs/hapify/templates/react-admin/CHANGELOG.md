@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.45.5](https://github.com/tractr/stack/compare/v1.45.4...v1.45.5) (2022-05-31)
+
+
+### Bug Fixes
+
+* update props linked to relation in react admin ([#434](https://github.com/tractr/stack/issues/434)) ([46a1b55](https://github.com/tractr/stack/commit/46a1b551c1a108d21a158087712b2d107258e690))
+
+
+
 ## [1.45.4](https://github.com/tractr/stack/compare/v1.45.3...v1.45.4) (2022-05-30)
 
 

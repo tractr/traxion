@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-service-api",
-  "version": "1.45.4",
+  "version": "1.45.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
