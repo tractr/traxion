@@ -6,7 +6,7 @@ export const OWNERS_DEFAULT_FIELDS = {
       <<if field manyMany>>
       <<field camel>>: true,
       <<else>>
-      <<field camel>>Id: true,
+        <<= getFieldName(field) >>: true,
       <<endif>>
     <<endfor>>
   },
@@ -14,3 +14,8 @@ export const OWNERS_DEFAULT_FIELDS = {
 <<endfor>>
 };
  
+<<<
+function getFieldName(field) {
+  return (field.names.camel === 'id' ? 'id' : `${field.names.camel}Id`)
+}
+>>>

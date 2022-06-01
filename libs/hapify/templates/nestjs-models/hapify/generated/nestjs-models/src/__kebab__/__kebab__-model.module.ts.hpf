@@ -72,7 +72,9 @@ export class <<Model pascal>>ModelModule<<if Fields password>> implements OnModu
 
           for (let row of isArray ? params.args.data : [params.args.data]) {
             <<for Fields password field>>
-            if (row?.<<field camel>>)
+            if (row?.<<field camel>>?.set)
+              row.<<field camel>>.set = await bcrypt.hash(row.<<field camel>>.set, 10);
+            else if (row?.<<field camel>>)
               row.<<field camel>> = await bcrypt.hash(row.<<field camel>>, 10);
             <<endfor>>
           }

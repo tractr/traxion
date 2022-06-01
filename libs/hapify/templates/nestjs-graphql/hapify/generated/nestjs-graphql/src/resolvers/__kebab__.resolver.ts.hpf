@@ -171,7 +171,7 @@ export class <<Model pascal>>Resolver {
   async create<<Model pascal>>(
     @Info() info: GraphQLResolveInfo,
     @Args() { data: rawData }: CreateOne<<Model pascal>>Args,
-    <<if Fields ownership and not primary>>
+    <<if Fields ownership>>
     @CurrentUser() user: PrismaUser | undefined,
     @CurrentAbilities() abilities: AppAbility | undefined,
     <<endif>>
@@ -187,7 +187,7 @@ export class <<Model pascal>>Resolver {
       ...rawData,
     };
 
-    <<if Fields ownership and not primary>>
+    <<if Fields ownership>>
     return this.databaseService.$transaction(async (prisma) => {
       const <<Model camel>> = await this.<<Model camel>>Service.create(
         { data, ...select },
@@ -218,13 +218,13 @@ export class <<Model pascal>>Resolver {
   async update<<Model pascal>>(
     @Info() info: GraphQLResolveInfo,
     @Args() { where, data }: UpdateOne<<Model pascal>>Args,
-    <<if Fields ownership and not primary>>
+    <<if Fields ownership>>
     @CurrentAbilities() abilities: AppAbility | undefined,
     <<endif>>
   ): Promise<any> {
     const select = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).value;
 
-    <<if Fields ownership and not primary>>
+    <<if Fields ownership>>
     return this.databaseService.$transaction(async (prisma) => {
       const <<Model camel>> = await this.<<Model camel>>Service.update(
         { where, data, ...select },
@@ -255,13 +255,13 @@ export class <<Model pascal>>Resolver {
   async delete<<Model pascal>>(
     @Info() info: GraphQLResolveInfo,
     @Args() { where }: DeleteOne<<Model pascal>>Args,
-    <<if Fields ownership and not primary>>
+    <<if Fields ownership>>
     @CurrentAbilities() abilities: AppAbility | undefined,
     <<endif>>
   ): Promise<any> {
     const select = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).value;
 
-    <<if Fields ownership and not primary>>
+    <<if Fields ownership>>
     return this.databaseService.$transaction(async (prisma) => {
       const <<Model camel>> = await this.<<Model camel>>Service.delete(
         { where, ...select },
