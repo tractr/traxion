@@ -1,0 +1,16 @@
+export const OWNERS_DEFAULT_FIELDS = {
+<<for Models model>>
+  <<if model.properties.hasOwnership>>
+  <<model pascal>>: {
+    <<for model.fields.ownership field>>
+      <<if field manyMany>>
+      <<field camel>>: true,
+      <<else>>
+      <<field camel>>Id: true,
+      <<endif>>
+    <<endfor>>
+  },
+  <<endif>>
+<<endfor>>
+};
+ 

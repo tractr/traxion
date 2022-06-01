@@ -1,9 +1,10 @@
 {
   "implicitDependencies": [
-    "hapify-templates-nestjs-graphql",
     "common",
-    "generated-nestjs-models-common",
-    "nestjs-graphql"
+    "nestjs-graphql",
+    "hapify-templates-nestjs-graphql",
+    "generated-casl",
+    "generated-nestjs-models-common"
   ],
   "prefix": "tractr",
   "projectType": "library",

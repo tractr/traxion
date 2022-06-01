@@ -14,5 +14,6 @@ module.exports = {
   importReplacements: {
     models: '@tractr/generated-models',
     'nestjs-models-common': '@tractr/generated-nestjs-models-common',
+    casl: '@tractr/generated-casl',
   },
 };

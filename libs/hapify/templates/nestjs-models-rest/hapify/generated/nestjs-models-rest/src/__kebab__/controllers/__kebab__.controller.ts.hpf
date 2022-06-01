@@ -14,8 +14,9 @@ import {
   Req,
 <<endif>>
 } from '@nestjs/common';
-import { 
+import {
   CurrentAbilities, 
+  CurrentUser,
   Policies,
   <<if Model not noGuest>>
     Public,
@@ -45,7 +46,6 @@ import { <<Model pascal>>RestDtoService } from '../services';
 <<if Fields ownership >>
 import { accessibleBy } from '@casl/prisma';
 import { ForbiddenError, subject } from '@casl/ability';
-import { CurrentUser } from '@tractr/nestjs-authentication';
 <<endif>>
  
 @Controller(['<<Model kebab>>'])
