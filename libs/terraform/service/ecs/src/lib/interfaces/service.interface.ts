@@ -2,7 +2,6 @@ import {
   cloudwatch,
   ecs,
   iam,
-  s3,
   secretsmanager,
   servicediscovery,
   vpc,

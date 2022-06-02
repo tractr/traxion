@@ -2,6 +2,7 @@ import * as angular from '@nrwl/angular/generators';
 import { readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import * as nestjs from '@nrwl/nest';
+import fetch, { Response } from 'node-fetch';
 
 import * as hapifyTargetGenerator from '../target-generate/generator';
 import generator from './generator';
@@ -22,6 +23,7 @@ jest.mock('../target-generate/generator', () => ({
   __esModule: true,
   ...jest.requireActual('../target-generate/generator'),
 }));
+jest.mock('node-fetch');
 
 describe('hapify library generator', () => {
   let appTree: Tree;
@@ -48,6 +50,15 @@ describe('hapify library generator', () => {
     angularGenerator = jest.spyOn(angular, 'libraryGenerator');
     nestjsGenerator = jest.spyOn(nestjs, 'libraryGenerator');
     targetGenerator = jest.spyOn(hapifyTargetGenerator, 'default');
+
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValue(
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            'dist-tags': { latest: '1.0.0' },
+          }),
+      }) as unknown as Promise<Response>,
+    );
   });
 
   afterEach(() => {

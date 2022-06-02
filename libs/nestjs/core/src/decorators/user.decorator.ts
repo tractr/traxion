@@ -3,9 +3,9 @@ import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { getRequestFromContext } from '../helpers';
 
 /**
- * Get the abilities from the request
+ * Get the user from the request
  */
-export const CurrentAbilities = createParamDecorator(
+export const CurrentUser = createParamDecorator(
   (_data: unknown, context: ExecutionContext) =>
-    getRequestFromContext(context).abilities,
+    getRequestFromContext(context).user,
 );
