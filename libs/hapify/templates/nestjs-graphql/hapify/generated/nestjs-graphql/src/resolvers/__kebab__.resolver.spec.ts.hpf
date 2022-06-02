@@ -230,7 +230,7 @@ describe('<<Model pascal>> Resolver', () => {
     mock<<Model pascal>> = mock<<Model pascal>>Factory();
     mock<<Model pascal>>Service.create.mockResolvedValueOnce(mock<<Model pascal>>);
 
-    <<if Fields ownership and not primary>>
+    <<if Fields ownership>>
     const prismaAggregate = mockDeep<Prisma.TransactionClient>();
     mockDatabaseService.$transaction.mockImplementationOnce((fn) => {
       return fn(prismaAggregate);
@@ -290,7 +290,7 @@ describe('<<Model pascal>> Resolver', () => {
       <<endfor>>
     });
 
-    <<if Fields ownership and not primary>>
+    <<if Fields ownership>>
     const prismaAggregate = mockDeep<Prisma.TransactionClient>();
     mockDatabaseService.$transaction.mockImplementationOnce((fn) => {
       return fn(prismaAggregate);
@@ -317,7 +317,7 @@ describe('<<Model pascal>> Resolver', () => {
           },
           data: {
             <<for Fields primary field>>
-            <<field camel>>: { set: updated<<Model pascal>>.<<field camel>> },
+            <<field camel>>: updated<<Model pascal>>.<<field camel>>,
             <<endfor>>
           }
         },
@@ -344,7 +344,7 @@ describe('<<Model pascal>> Resolver', () => {
     mock<<Model pascal>> = mock<<Model pascal>>Factory();
     mock<<Model pascal>>Service.delete.mockResolvedValueOnce(mock<<Model pascal>>);
     
-    <<if Fields ownership and not primary>>
+    <<if Fields ownership>>
     const prismaAggregate = mockDeep<Prisma.TransactionClient>();
     mockDatabaseService.$transaction.mockImplementationOnce((fn) => {
       return fn(prismaAggregate);

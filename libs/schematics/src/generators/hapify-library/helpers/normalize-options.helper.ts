@@ -1,7 +1,6 @@
 import { relative } from 'path';
 
-import { getWorkspaceLayout, TargetConfiguration, Tree } from '@nrwl/devkit';
-import * as deepmerge from 'deepmerge';
+import { getWorkspaceLayout, Tree } from '@nrwl/devkit';
 
 import {
   getImportPrefixPath,

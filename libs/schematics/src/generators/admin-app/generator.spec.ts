@@ -1,6 +1,7 @@
 import { readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import * as ReactGenerators from '@nrwl/react';
+import fetch, { Response } from 'node-fetch';
 
 import generator from './generator';
 import * as helpers from './helpers';
@@ -15,6 +16,8 @@ jest.mock('./helpers', () => ({
   __esModule: true,
   ...jest.requireActual('./helpers'),
 }));
+
+jest.mock('node-fetch');
 
 describe('admin generator', () => {
   let appTree: Tree;
@@ -34,6 +37,15 @@ describe('admin generator', () => {
     appTree = createTreeWithEmptyWorkspace();
 
     appTree.write('nx.json', `{ "npmScope": "tractr" }`);
+
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValue(
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            'dist-tags': { latest: '1.0.0' },
+          }),
+      }) as unknown as Promise<Response>,
+    );
 
     jest.clearAllMocks();
   });
