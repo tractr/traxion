@@ -12,9 +12,14 @@ export const formatData: Record<ResourceType, FormatUpdateData> = {
     delete formated.<<field camel>>
   <<endfor>>
   <<for model.fields entity field>>
+  <<if field manyMany>>
+    // for the manyMany field we send empty array
+    formated.<<field camel>> = [];
+  <<else>>
     formated.<<field camel>> = formated.<<field camel>>Id;
     delete formated.<<field camel>>Id;
    if(formated.<<field camel>> === '')delete formated.<<field camel>>
+  <<endif>>
   <<endfor>>
     return formated;
   },

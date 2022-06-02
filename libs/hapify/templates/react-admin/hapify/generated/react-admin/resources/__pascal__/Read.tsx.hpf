@@ -72,7 +72,8 @@ export const <<Model pascal>>Show = (props: ShowProps) => (
 
 <<< function printEntityField(field) { >>>
 
-<<if field multiple>>
+<<if field not manyMany>>
+    <<if field multiple>>
       <ReferenceManyField
         target="<<field camel>>"
         label="<<field capital>>"
@@ -81,13 +82,14 @@ export const <<Model pascal>>Show = (props: ShowProps) => (
             <ChipField source="<<=labelFieldCamel(field.model)>>" sortable={false} />
           </SingleFieldList>
       </ReferenceManyField>
-<<else>>
-      <ReferenceField
-        source="<<field camel>>Id"
-        label="<<field capital>>"
-        reference="<<field.model camel>>">
-          <TextField source="<<=labelFieldCamel(field.model)>>" sortable={false} />
-      </ReferenceField>
+    <<else>>
+          <ReferenceField
+            source="<<field camel>>Id"
+            label="<<field capital>>"
+            reference="<<field.model camel>>">
+              <TextField source="<<=labelFieldCamel(field.model)>>" sortable={false} />
+          </ReferenceField>
+    <<endif>>
 <<endif>>
 
 <<< } >>>
