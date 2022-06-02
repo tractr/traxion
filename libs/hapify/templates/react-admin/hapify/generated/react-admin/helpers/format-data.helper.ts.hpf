@@ -11,6 +11,11 @@ export const formatData: Record<ResourceType, FormatUpdateData> = {
   <<for model.fields internal field>>
     delete formated.<<field camel>>
   <<endfor>>
+  <<for model.fields entity field>>
+    formated.<<field camel>> = formated.<<field camel>>Id;
+    delete formated.<<field camel>>Id;
+   if(formated.<<field camel>> === '')delete formated.<<field camel>>
+  <<endfor>>
     return formated;
   },
 <<endfor>>
