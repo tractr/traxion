@@ -14,6 +14,11 @@ module.exports = {
       input: 'all',
     },
     {
+      path: 'generated/nestjs-graphql/src/nestjs-graphql.constants.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
       path: 'generated/nestjs-graphql/src/nestjs-models.module.ts',
       engine: 'hpf',
       input: 'all',

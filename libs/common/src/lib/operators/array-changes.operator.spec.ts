@@ -2,7 +2,7 @@ import { TestScheduler } from 'rxjs/testing';
 
 import { arrayChanges } from './array-changes.operator';
 
-function createTestScheduler(expect: any): TestScheduler {
+function createTestScheduler(expect: jest.Expect): TestScheduler {
   return new TestScheduler((actual: unknown, expected: unknown) => {
     expect(actual).toEqual(expected);
   });

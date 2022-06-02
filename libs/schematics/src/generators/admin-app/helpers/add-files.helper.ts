@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { join } from 'path';
 
-import { generateFiles, getWorkspaceLayout, Tree } from '@nrwl/devkit';
+import { generateFiles, Tree } from '@nrwl/devkit';
 
 import { NormalizedSchema } from './normalize-options.helper';
 

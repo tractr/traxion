@@ -71,11 +71,9 @@ export const rolePermissions: RolePermissions<
   }
   
   function getFieldArrayConditions(field) {
-    const isArray = isFieldAnArray(field);
-
     return {
       [field.names.camel]: {
-        every: {
+        some: {
           id: {
             in: `getConcatValueByPath('${field.meta.ownerStringPath.raw.replace('user.', '')}', user)`,
           }
