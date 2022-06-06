@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.46.1](https://github.com/tractr/stack/compare/v1.46.0...v1.46.1) (2022-06-06)
+
+
+### Bug Fixes
+
+* update the generated test for nestjs graphql ([#437](https://github.com/tractr/stack/issues/437)) ([658ccc7](https://github.com/tractr/stack/commit/658ccc74f92a18a924c6fdd01a5775dadbd9cea6))
+
+
+
 # [1.46.0](https://github.com/tractr/stack/compare/v1.45.5...v1.46.0) (2022-06-02)
 
 
