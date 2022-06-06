@@ -109,21 +109,22 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
 <<< } >>>
 
 <<< function printEntityInput(field) { >>>
-
-<<if field multiple>>
-      <ReferenceArrayInput
+<<if field not manyMany>>
+    <<if field multiple>>
+    <ReferenceArrayInput
         source="<<field camel>>"
         label="<<field capital>>"
         reference="<<field.model camel>>">
-          <SelectArrayInput optionText="<<=labelFieldCamel(field.model)>>" />
-      </ReferenceArrayInput>
-<<else>>
-      <ReferenceInput
-        source="<<field camel>>"
+        <SelectArrayInput optionText="<<=labelFieldCamel(field.model)>>" />
+    </ReferenceArrayInput>
+    <<else>>
+    <ReferenceInput
+        source="<<field camel>>Id"
         label="<<field capital>>"
         reference="<<field.model camel>>">
-          <SelectInput optionText="<<=labelFieldCamel(field.model)>>" />
-      </ReferenceInput>
+        <SelectInput optionText="<<=labelFieldCamel(field.model)>>" />
+    </ReferenceInput>
+    <<endif>>
 <<endif>>
 
 <<< } >>>

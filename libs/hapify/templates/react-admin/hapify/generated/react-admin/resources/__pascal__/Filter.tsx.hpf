@@ -51,7 +51,7 @@ export const <<Model pascal>>Filter = (props: Omit<FilterProps, 'children'>) => 
 <<< function printEntityInput(field) { >>>
 
       <ReferenceInput
-        source="<<field camel>>"
+        source="<<field camel>>Id"
         label="<<field capital>>"
         reference="<<field.model camel>>">
           <SelectInput optionText="<<=labelFieldCamel(field.model)>>" />
