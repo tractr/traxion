@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.46.3](https://github.com/tractr/stack/compare/v1.46.2...v1.46.3) (2022-06-06)
+
+
+### Bug Fixes
+
+* update entity relation react admin ([#436](https://github.com/tractr/stack/issues/436)) ([dc71704](https://github.com/tractr/stack/commit/dc71704b197db904da051f5ddd3505f52c6e17e6))
+
+
+
 ## [1.46.2](https://github.com/tractr/stack/compare/v1.46.1...v1.46.2) (2022-06-06)
 
 
