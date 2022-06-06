@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.46.2](https://github.com/tractr/stack/compare/v1.46.1...v1.46.2) (2022-06-06)
+
+
+### Bug Fixes
+
+* remove atomic update on multiple enum graphql ([3f1791a](https://github.com/tractr/stack/commit/3f1791adca25ad32f5d43613f87cef251d604414))
+
+
+
 ## [1.46.1](https://github.com/tractr/stack/compare/v1.46.0...v1.46.1) (2022-06-06)
 
 
