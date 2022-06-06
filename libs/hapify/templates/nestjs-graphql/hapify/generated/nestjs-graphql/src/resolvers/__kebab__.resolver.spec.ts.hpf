@@ -252,11 +252,7 @@ describe('<<Model pascal>> Resolver', () => {
         variables: {
           data: {
           <<for Fields not oneMany and not manyOne and not manyMany and not oneOne field>>
-            <<if field enum and multiple>>
-            <<field camel>>: { set: mock<<Model pascal>>.<<field camel>> },
-            <<else>>
             <<field camel>>: mock<<Model pascal>>.<<field camel>>,
-            <<endif>>
           <<endfor>>
           <<for Fields not nullable and (oneOne or oneMany or manyOne or manyMany) field>>
             <<field camel>>: { connect: { id: mock<<=field.model.names.pascal>>Factory().id } },
