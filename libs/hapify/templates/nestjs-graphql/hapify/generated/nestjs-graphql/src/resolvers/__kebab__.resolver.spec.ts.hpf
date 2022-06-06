@@ -18,7 +18,7 @@ import { INestApplication } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
-import { DatabaseService } from '@tractr/nestjs-database';
+import { DatabaseModule, DatabaseService } from '@tractr/nestjs-database';
 import { Prisma } from '@prisma/client';
 
 import {
@@ -53,11 +53,9 @@ describe('<<Model pascal>> Resolver', () => {
   let mock<<ref pascal>>Service: MockProxy<<<ref pascal>>Service>
 <<endfor>>
   let mock<<Model pascal>>: <<Model pascal>>;
-  let mockDatabaseService: MockProxy<DatabaseService>;
  
   beforeAll(async () => {
     mock<<Model pascal>>Service = mockDeep<<<Model pascal>>Service>();
-    mockDatabaseService = mockDeep<DatabaseService>();
 <<for uniqRefs ref>>
     mock<<ref pascal>>Service = mockDeep<<<ref pascal>>Service>();
 <<endfor>>
@@ -75,18 +73,27 @@ describe('<<Model pascal>> Resolver', () => {
           useValue: mock<<ref pascal>>Service,
         },
 <<endfor>>
-        {
-          provide: DatabaseService,
-          useValue: mockDatabaseService,
-        },
       ],
       imports: [
+        DatabaseModule,
         GraphQLModule.forRoot<ApolloDriverConfig>({
           driver: ApolloDriver,
           autoSchemaFile: true,
         }),
       ],
-    }).compile();
+    })
+      .overrideProvider(DatabaseService)
+      .useFactory({
+        factory: () => {
+          const prismaAggregate = mockDeep<Prisma.TransactionClient>();
+          return {
+            $transaction: (fn: (...args: unknown[]) => Promise<unknown>) => {
+              return fn(prismaAggregate);
+            },
+          };
+        },
+      })
+      .compile();
     app = module.createNestApplication();
     await module.init();
   });
@@ -230,13 +237,6 @@ describe('<<Model pascal>> Resolver', () => {
     mock<<Model pascal>> = mock<<Model pascal>>Factory();
     mock<<Model pascal>>Service.create.mockResolvedValueOnce(mock<<Model pascal>>);
 
-    <<if Fields ownership>>
-    const prismaAggregate = mockDeep<Prisma.TransactionClient>();
-    mockDatabaseService.$transaction.mockImplementationOnce((fn) => {
-      return fn(prismaAggregate);
-    });
-    <<endif>>
-
     await request(app.getHttpServer())
       .post('/graphql')
       .send({
@@ -290,13 +290,6 @@ describe('<<Model pascal>> Resolver', () => {
       <<endfor>>
     });
 
-    <<if Fields ownership>>
-    const prismaAggregate = mockDeep<Prisma.TransactionClient>();
-    mockDatabaseService.$transaction.mockImplementationOnce((fn) => {
-      return fn(prismaAggregate);
-    });
-    <<endif>>
-
     await request(app.getHttpServer())
       .post('/graphql')
       .send({
@@ -343,13 +336,7 @@ describe('<<Model pascal>> Resolver', () => {
   it('should be able to delete a <<Model camel>>', async () => {
     mock<<Model pascal>> = mock<<Model pascal>>Factory();
     mock<<Model pascal>>Service.delete.mockResolvedValueOnce(mock<<Model pascal>>);
-    
-    <<if Fields ownership>>
-    const prismaAggregate = mockDeep<Prisma.TransactionClient>();
-    mockDatabaseService.$transaction.mockImplementationOnce((fn) => {
-      return fn(prismaAggregate);
-    });
-    <<endif>>
+ 
     await request(app.getHttpServer())
       .post('/graphql')
       .send({
