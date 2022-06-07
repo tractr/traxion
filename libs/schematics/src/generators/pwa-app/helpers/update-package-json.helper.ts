@@ -58,9 +58,7 @@ export async function updatePackageJson(
   await addPackageToPackageJson(
     tree,
     [
-      '@angular/animations',
       '@angular/common',
-      '@angular/compiler',
       '@angular/core',
       '@angular/forms',
       '@angular/platform-browser',
