@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.47.0](https://github.com/tractr/stack/compare/v1.46.3...v1.47.0) (2022-06-07)
+
+
+### Features
+
+* add onDelete and onUpdate capability to prisma templates ([#438](https://github.com/tractr/stack/issues/438)) ([4682ef8](https://github.com/tractr/stack/commit/4682ef8f9c816a0ce309c99947154315d41795b3))
+
+
+
 ## [1.46.3](https://github.com/tractr/stack/compare/v1.46.2...v1.46.3) (2022-06-06)
 
 
