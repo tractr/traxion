@@ -28,7 +28,7 @@ runs:
       shell: bash
       env:
         NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
-      run: npm ci --no-audit --no-progress --ignore-scripts
+      run: npm ci --no-audit --no-progress --force --ignore-scripts
 
     # We launch our postinstall scripts
     - name: Run npm postinstall
