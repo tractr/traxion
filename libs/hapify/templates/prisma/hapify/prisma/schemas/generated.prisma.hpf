@@ -17,7 +17,7 @@
 <<# If the field has a relation oneOne or oneMany >>
 <<# We generate the first relation prisma field >>
     <<=getMetadata(model, field)>>
-    <<field camel>> <<field.model pascal>><<if field nullable>>?<<endif>> @relation("<<model pascal>>.<<field camel>>.<<field.model pascal>>.<<-field backRelation camel>>",fields: [<<field camel>><<=getReferencedEntityPrimary(field).names.pascal>>], references: [<<=getReferencedEntityPrimary(field).names.camel>>])
+    <<field camel>> <<field.model pascal>><<if field nullable>>?<<endif>> @relation("<<model pascal>>.<<field camel>>.<<field.model pascal>>.<<-field backRelation camel>>",fields: [<<field camel>><<=getReferencedEntityPrimary(field).names.pascal>>], references: [<<=getReferencedEntityPrimary(field).names.camel>>]<<=getOnDelete(field)>><<=getOnUpdate(field)>>)
  
     <<=getMetadata(model, field)>>
     <<field camel>><<=getReferencedEntityPrimary(field).names.pascal>> <<=getReferencedEntityPrimaryType(field)>>
@@ -68,6 +68,22 @@ enum <<model pascal>><<field pascal>> {
 <<<
 function getReferencedEntityPrimary(f) {
   return f.model.fields.primary
+}
+>>>
+
+<<<
+function getOnDelete(f) {
+  if (f.meta.onDelete){
+    return ", onDelete: " + f.meta.onDelete.raw;}
+  return "";
+}
+>>>
+
+<<<
+function getOnUpdate(f) {
+  if (f.meta.onUpdate)
+    return ", onUpdate: " + f.meta.onUpdate.raw;
+  return "";
 }
 >>>
 
@@ -187,6 +203,10 @@ function prismaType(f, m) {
               case 'time': return out += " @db.Time(3)";
           }
       default: return out;
+  }
+
+  if (f.meta.default) {
+    out += " @default(" + f.meta.default + ")";
   }
 
 }
