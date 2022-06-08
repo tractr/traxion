@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
+import {
+  AbstractControl,
+  UntypedFormGroup,
+  ValidationErrors,
+} from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { PasswordService } from '../../services';
@@ -11,7 +15,7 @@ import { PasswordService } from '../../services';
 })
 export class ResetPasswordComponent {
   // eslint-disable-next-line @typescript-eslint/unbound-method
-  form = new FormGroup({}, { validators: this.checkPasswords });
+  form = new UntypedFormGroup({}, { validators: this.checkPasswords });
 
   @Output() submitted = new EventEmitter<void>();
 

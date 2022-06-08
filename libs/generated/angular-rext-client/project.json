@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": [
     "hapify-templates-angular-rext-client",
     "angular-tools",
@@ -6,7 +7,6 @@
   ],
   "prefix": "tractr",
   "projectType": "library",
-  "root": "libs/generated/angular-rext-client",
   "sourceRoot": "libs/generated/angular-rext-client/src",
   "tags": [],
   "targets": {
@@ -45,7 +45,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/generated/angular-rext-client/jest.config.js",
+        "jestConfig": "libs/generated/angular-rext-client/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/generated/angular-rext-client"]

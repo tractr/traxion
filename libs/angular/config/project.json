@@ -1,7 +1,7 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "prefix": "tractr",
   "projectType": "library",
-  "root": "libs/angular/config",
   "sourceRoot": "libs/angular/config/src",
   "tags": [],
   "targets": {
@@ -41,7 +41,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/angular/config/jest.config.js",
+        "jestConfig": "libs/angular/config/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/angular/config"]

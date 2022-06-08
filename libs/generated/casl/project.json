@@ -1,8 +1,8 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": ["hapify-templates-casl", "common"],
   "prefix": "tractr",
   "projectType": "library",
-  "root": "libs/generated/casl",
   "sourceRoot": "libs/generated/casl/src",
   "tags": [],
   "targets": {
@@ -41,7 +41,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/generated/casl/jest.config.js",
+        "jestConfig": "libs/generated/casl/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/generated/casl"]

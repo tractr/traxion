@@ -1,9 +1,7 @@
 {
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "affected": {
     "defaultBase": "main"
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
   },
   "defaultProject": "pwa",
   "generators": {
@@ -62,7 +60,7 @@
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "accessToken": "ZDI3MTE5MTYtMzc2ZS00ODQ4LWIyMDEtMDBkNmIxMWZhZWI2fHJlYWQtd3JpdGU=",
+        "accessToken": "NGE3MGRiNTUtYjc4ZC00NGU0LWI5N2ItMGY0OTgyNTFkZGYwfHJlYWQtd3JpdGU=",
         "cacheableOperations": ["build", "test", "lint", "e2e"],
         "parallel": 1
       },

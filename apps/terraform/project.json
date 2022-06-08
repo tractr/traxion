@@ -1,6 +1,6 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "root": "apps/terraform",
   "sourceRoot": "apps/terraform/src",
   "tags": [],
   "targets": {
@@ -26,7 +26,7 @@
           "optimization": true
         }
       },
-      "executor": "@nrwl/node:build",
+      "executor": "@nrwl/node:webpack",
       "options": {
         "main": "apps/terraform/src/main.ts",
         "outputPath": "dist/apps/terraform",
@@ -58,7 +58,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/node:execute",
+      "executor": "@nrwl/node:node",
       "options": {
         "buildTarget": "terraform:build"
       }
@@ -74,7 +74,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "apps/terraform/jest.config.js",
+        "jestConfig": "apps/terraform/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/apps/terraform"]

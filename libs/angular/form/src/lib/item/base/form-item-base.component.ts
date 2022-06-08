@@ -10,9 +10,9 @@ import {
 } from '@angular/core';
 import {
   AbstractControl,
-  FormControl,
-  FormGroup,
   NgModel,
+  UntypedFormControl,
+  UntypedFormGroup,
 } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -28,7 +28,7 @@ export abstract class FormItemBaseComponent<Type = unknown>
 {
   private unsubscribe: Subject<void> = new Subject<void>();
 
-  @Input() form: FormGroup = new FormGroup({});
+  @Input() form: UntypedFormGroup = new UntypedFormGroup({});
 
   @Input() name = 'base';
 
@@ -51,7 +51,7 @@ export abstract class FormItemBaseComponent<Type = unknown>
 
   @Input() errorTip:
     | string
-    | TemplateRef<{ $implicit: FormControl | NgModel }>
+    | TemplateRef<{ $implicit: UntypedFormControl | NgModel }>
     | undefined;
 
   @Input() state?: Type;

@@ -1,8 +1,8 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": ["hapify-templates-rest-dtos", "generated-models"],
   "prefix": "tractr",
   "projectType": "library",
-  "root": "libs/generated/rest-dtos",
   "sourceRoot": "libs/generated/rest-dtos/src",
   "tags": [],
   "targets": {
@@ -46,7 +46,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/generated/rest-dtos/jest.config.js",
+        "jestConfig": "libs/generated/rest-dtos/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/generated/rest-dtos"]

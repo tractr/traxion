@@ -1,11 +1,11 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/nestjs/database",
   "sourceRoot": "libs/nestjs/database/src",
   "tags": ["scope:nestjs"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/nestjs/database/*.md"],
         "main": "libs/nestjs/database/src/index.ts",
@@ -31,7 +31,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/nestjs/database/jest.config.js",
+        "jestConfig": "libs/nestjs/database/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/nestjs/database"]

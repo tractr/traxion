@@ -1,11 +1,11 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/nestjs/casl",
   "sourceRoot": "libs/nestjs/casl/src",
   "tags": ["scope:nestjs"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/nestjs/casl/*.md"],
         "main": "libs/nestjs/casl/src/index.ts",
@@ -20,7 +20,7 @@
       "options": {
         "codeCoverage": true,
         "coverageReporters": ["text", "json"],
-        "jestConfig": "libs/nestjs/casl/jest.config.js",
+        "jestConfig": "libs/nestjs/casl/jest.config.ts",
         "passWithNoTests": true,
         "skipNxCache": true
       },

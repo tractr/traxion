@@ -1,11 +1,11 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/schematics",
   "sourceRoot": "libs/schematics/src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": [
           "libs/schematics/*.md",
@@ -62,7 +62,7 @@
       "options": {
         "codeCoverage": true,
         "coverageReporters": ["text", "json"],
-        "jestConfig": "libs/schematics/jest.config.js",
+        "jestConfig": "libs/schematics/jest.config.ts",
         "passWithNoTests": true,
         "skipNxCache": true
       },

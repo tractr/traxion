@@ -1,11 +1,11 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/hapify/hapify-common",
   "sourceRoot": "libs/hapify/hapify-common/src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/hapify/hapify-common/*.md"],
         "main": "libs/hapify/hapify-common/src/index.ts",
@@ -20,7 +20,7 @@
       "options": {
         "codeCoverage": true,
         "coverageReporters": ["text", "json"],
-        "jestConfig": "libs/hapify/hapify-common/jest.config.js",
+        "jestConfig": "libs/hapify/hapify-common/jest.config.ts",
         "passWithNoTests": true,
         "skipNxCache": true
       }

@@ -1,11 +1,11 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/terraform/group/pool",
   "sourceRoot": "libs/terraform/group/pool/src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/terraform/group/pool/*.md"],
         "main": "libs/terraform/group/pool/src/index.ts",
@@ -31,7 +31,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/terraform/group/pool/jest.config.js",
+        "jestConfig": "libs/terraform/group/pool/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/terraform/group/pool"]

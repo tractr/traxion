@@ -1,7 +1,7 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "prefix": "tractr",
   "projectType": "application",
-  "root": "apps/pwa",
   "sourceRoot": "apps/pwa/src",
   "tags": ["scope:app"],
   "targets": {
@@ -113,7 +113,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "apps/pwa/jest.config.js",
+        "jestConfig": "apps/pwa/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/apps/pwa"]

@@ -1,5 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  Validators,
+} from '@angular/forms';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 
 import { FormInputBaseComponent } from '../form-input-base.component';
@@ -22,11 +26,11 @@ export class FormInputNumberComponent extends FormInputBaseComponent<number> {
   /** Ant input's size */
   @Input() size: NzSizeLDSType = 'default';
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: UntypedFormBuilder) {
     super();
   }
 
-  initControl(): FormControl {
+  initControl(): UntypedFormControl {
     return this.formBuilder.control(this.state, [
       // eslint-disable-next-line @typescript-eslint/unbound-method
       ...(this.required ? [Validators.required] : []),

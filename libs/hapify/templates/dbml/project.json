@@ -1,11 +1,11 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/hapify/templates/dbml",
   "sourceRoot": "libs/hapify/templates/dbml/src",
   "tags": ["scope:template"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": [
           "libs/hapify/templates/dbml/*.md",

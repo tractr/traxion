@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  Validators,
+} from '@angular/forms';
 
 import { FormInputBaseComponent } from '../form-input-base.component';
 
@@ -16,7 +20,7 @@ export class FormInputStringComponent
 
   @Input() autocomplete?: 'on' | 'off';
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: UntypedFormBuilder) {
     super();
   }
 
@@ -30,7 +34,7 @@ export class FormInputStringComponent
       this.autocomplete = this.inputType === 'password' ? 'on' : 'off';
   }
 
-  initControl(): FormControl {
+  initControl(): UntypedFormControl {
     return this.formBuilder.control(this.state, [
       // eslint-disable-next-line @typescript-eslint/unbound-method
       ...(this.required ? [Validators.required] : []),
