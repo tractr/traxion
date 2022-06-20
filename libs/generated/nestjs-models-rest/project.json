@@ -19,10 +19,12 @@
       "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/generated/nestjs-models-rest/*.md"],
+        "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/generated/nestjs-models-rest/src/index.ts",
         "outputPath": "dist/libs/generated/nestjs-models-rest",
         "packageJson": "libs/generated/nestjs-models-rest/package.json",
-        "tsConfig": "libs/generated/nestjs-models-rest/tsconfig.lib.json"
+        "tsConfig": "libs/generated/nestjs-models-rest/tsconfig.lib.json",
+        "updateBuildableProjectDepsInPackageJson": true
       },
       "outputs": ["{options.outputPath}"]
     },

@@ -7,10 +7,12 @@
       "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/nestjs/mailer/*.md"],
+        "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/mailer/src/index.ts",
         "outputPath": "dist/libs/nestjs/mailer",
         "packageJson": "libs/nestjs/mailer/package.json",
-        "tsConfig": "libs/nestjs/mailer/tsconfig.lib.json"
+        "tsConfig": "libs/nestjs/mailer/tsconfig.lib.json",
+        "updateBuildableProjectDepsInPackageJson": true
       },
       "outputs": ["{options.outputPath}"]
     },

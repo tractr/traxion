@@ -7,10 +7,12 @@
       "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/nestjs/graphql/*.md"],
+        "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/graphql/src/index.ts",
         "outputPath": "dist/libs/nestjs/graphql",
         "packageJson": "libs/nestjs/graphql/package.json",
-        "tsConfig": "libs/nestjs/graphql/tsconfig.lib.json"
+        "tsConfig": "libs/nestjs/graphql/tsconfig.lib.json",
+        "updateBuildableProjectDepsInPackageJson": true
       },
       "outputs": ["{options.outputPath}"]
     },
