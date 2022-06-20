@@ -1,7 +1,6 @@
 {
   "prefix": "tractr",
   "projectType": "library",
-  "root": "libs/angular/tools",
   "sourceRoot": "libs/angular/tools/src",
   "tags": ["scope:angular"],
   "targets": {
@@ -41,7 +40,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/angular/tools/jest.config.js",
+        "jestConfig": "libs/angular/tools/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/angular/tools"]

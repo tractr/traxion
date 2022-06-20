@@ -12,12 +12,11 @@
     "generated-nestjs-models-common"
   ],
   "projectType": "library",
-  "root": "libs/generated/nestjs-models-rest",
   "sourceRoot": "libs/generated/nestjs-models-rest/src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/generated/nestjs-models-rest/*.md"],
         "main": "libs/generated/nestjs-models-rest/src/index.ts",
@@ -47,7 +46,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/generated/nestjs-models-rest/jest.config.js",
+        "jestConfig": "libs/generated/nestjs-models-rest/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/generated/nestjs-models-rest"]

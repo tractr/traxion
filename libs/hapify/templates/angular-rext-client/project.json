@@ -1,11 +1,10 @@
 {
   "projectType": "library",
-  "root": "libs/hapify/templates/angular-rext-client",
   "sourceRoot": "libs/hapify/templates/angular-rext-client/src",
   "tags": ["scope:template"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": [
           "libs/hapify/templates/angular-rext-client/*.md",

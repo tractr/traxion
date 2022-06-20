@@ -10,12 +10,11 @@
     "generated-rest-dtos"
   ],
   "projectType": "library",
-  "root": "libs/generated/nestjs-models",
   "sourceRoot": "libs/generated/nestjs-models/src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/generated/nestjs-models/*.md"],
         "main": "libs/generated/nestjs-models/src/index.ts",
@@ -42,7 +41,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/generated/nestjs-models/jest.config.js",
+        "jestConfig": "libs/generated/nestjs-models/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/generated/nestjs-models"]

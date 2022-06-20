@@ -10,6 +10,7 @@
     "**/*.test.ts",
     "**/*.spec.ts",
     "**/*.d.ts",
-    "../../../apps/api/src/app/user.resolver.spec.ts"
+    "../../../apps/api/src/app/user.resolver.spec.ts",
+    "jest.config.ts"
   ]
 }
