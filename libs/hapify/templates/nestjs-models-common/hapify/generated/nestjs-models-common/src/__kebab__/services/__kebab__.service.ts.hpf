@@ -21,7 +21,7 @@ export class <<Model pascal>>Service {
   ) {}
 
 
-  <<if Fields ownership and not primary>>
+  <<if Fields ownership and internal and not primary>>
   /**
    * Get default ownership value for fields that have user.id into their ownerStringPath metadata
    **/
