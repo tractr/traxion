@@ -17,7 +17,6 @@ import {
 import { AuthenticationUserService } from './services/authentication-user.service';
 import { JwtStrategy, LocalStrategy } from './strategies';
 
-import { transformAndValidate } from '@tractr/common';
 import {
   AsyncOptions,
   LoggerModule,
@@ -29,7 +28,7 @@ import { MailerModule } from '@tractr/nestjs-mailer';
 export class AuthenticationModule extends ModuleOptionsFactory<
   AuthenticationOptions,
   AuthenticationPublicOptions
->(AUTHENTICATION_MODULE_OPTIONS, transformAndValidate(AuthenticationOptions)) {
+>(AUTHENTICATION_MODULE_OPTIONS, AuthenticationOptions) {
   static register(options: AuthenticationPublicOptions): DynamicModule {
     const authenticationOptionsModule = super.register(options);
     return this.createAuthenticationModuleFromOptions(

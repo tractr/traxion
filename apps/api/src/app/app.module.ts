@@ -46,12 +46,8 @@ import { MailerModule } from '@tractr/nestjs-mailer';
       useFactory: (defaultOptions) => ({
         ...defaultOptions,
         userConfig: {
-          idField: 'id',
-          loginField: 'email',
-          passwordField: 'password',
-          emailField: 'email',
+          ...defaultOptions.userConfig,
           customSelect: getSelectPrismaUserQuery(),
-          formatUser: ({ ...user }) => user,
         },
         userService: USER_SERVICE,
       }),
@@ -65,8 +61,6 @@ import { MailerModule } from '@tractr/nestjs-mailer';
         port: 9000,
         useSSL: false,
         defaultBucket: 'bucket',
-        presignedDownload: {} as PresignedDownloadConfiguration,
-        presignedUpload: {} as PresignedUploadConfiguration,
       }),
     }),
     MailerModule.registerAsync({
