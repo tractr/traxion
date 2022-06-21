@@ -1,0 +1,75 @@
+#####################################
+##      Reusable workflow tests     ##
+#####################################
+name: Tests API
+
+# Make the workflow reusable
+on:
+  workflow_call:
+    secrets:
+      NPM_TOKEN:
+        description: 'The npm token if needed'
+        required: false
+
+      POSTGRES_PASSWORD:
+        description: 'The database service password'
+        required: false
+        default: postgres
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Build, Lint and Tests
+
+    # Our code will run on node 16 and Linux
+    strategy:
+      matrix:
+        node: [16.x]
+        os: [ubuntu-20.04]
+
+    # Service containers to run with `container-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        # Set health checks to wait until postgres has started
+        options:
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s
+          --health-retries 5
+
+    runs-on: ['${{ matrix.os }}']
+
+    steps:
+      - name: Push the database's schema
+        run: echo ${{ inputs }}
+
+      # First we checkout the code
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install dependencies and generate files
+        uses: tractr/stack/.github/actions/setup@main
+        with:
+          registryUrl: ${{ inputs.registryUrl }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Push the database's schema
+        run: npx prisma db push
+        env:
+          DATABASE_URL:
+            postgresql://postgres:${{ secrets.POSTGRES_PASSWORD }}@postgres/api
+
+      - name: Seed the database
+        run: npx prisma db seed
+        env:
+          DATABASE_URL:
+            postgresql://postgres:${{ secrets.POSTGRES_PASSWORD }}@postgres/api

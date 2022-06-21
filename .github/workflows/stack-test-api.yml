@@ -1,0 +1,14 @@
+name: Stack test and coverage
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    name: Test all packages
+    uses: ./.github/workflows/test-api.yml
+    with:
+      TEST_ENV: 'https://npm.pkg.github.com'
+      ANOTHER_ENV: true
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
