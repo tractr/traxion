@@ -10,6 +10,8 @@ export const DEFAULT_EMAIL_FIELD = 'email';
 
 export const AUTHENTICATION_USER_SERVICE = 'AUTHENTICATION_USER_SERVICE';
 
+export const TWO_FACTOR_AUTHENTICATION = 'TWO_FACTOR_AUTHENTICATION';
+
 export const DEFAULT_RESET_HTML = `<!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,6 +1,11 @@
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { IAuthModuleOptions } from '@nestjs/passport';
-import { IsOptional, IsString, ValidateNested } from 'class-validator';
+import {
+  IsBoolean,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 
 import { AuthenticationOptionsCookies } from './authentication-options-cookies.dto';
 import { AuthenticationOptionsMailer } from './authentication-options-mailer.dto';
@@ -72,4 +77,11 @@ export class AuthenticationOptions {
   @IsOptional()
   @ValidateNested()
   mailer?: AuthenticationOptionsMailer;
+
+  /**
+   * Options to enable 2FA with OTP.
+   */
+  @IsOptional()
+  @IsBoolean()
+  otp?: boolean;
 }

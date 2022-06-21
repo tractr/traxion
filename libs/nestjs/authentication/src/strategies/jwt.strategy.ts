@@ -28,11 +28,15 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       // Use select clause provided by the module consumer
       select: this.authenticationOptions.userConfig.customSelect,
     });
-
     if (!user) {
       throw new BadRequestException();
     }
-
+    if (!user.otp) {
+      return user;
+    }
+    if (!payload.isSecondFactorAuthenticated) {
+      throw new BadRequestException();
+    }
     return user;
   }
 }

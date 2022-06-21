@@ -52,4 +52,9 @@ export interface AuthenticationPublicOptions {
    * Options to configure the mailer.
    */
   mailer?: AuthenticationOptionsMailer;
+
+  /**
+   * Options to enable 2FA with OTP.
+   */
+  otp?: boolean;
 }
