@@ -45,6 +45,14 @@
         "parallel": false
       }
     },
+    "e2e": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "apps/api/jest.e2e.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/apps/api"]
+    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
