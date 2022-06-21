@@ -1,5 +1,9 @@
 name: Stack test the API start
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   pull_request:
 
