@@ -1,14 +1,64 @@
-name: Stack test and coverage
+name: Stack test the API start
 
 on:
   pull_request:
 
 jobs:
   test:
-    name: Test all packages
-    uses: ./.github/workflows/test-api.yml
-    with:
-      TEST_ENV: 'https://npm.pkg.github.com'
-      ANOTHER_ENV: true
-    secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    name: Test the start of the api
+
+    # Our code will run on node 16 and Linux
+    strategy:
+      matrix:
+        node: [16.x]
+        os: [ubuntu-20.04]
+
+    runs-on: ['${{ matrix.os }}']
+
+    # Service containers to run with `container-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: api
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      # First we checkout the code
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # We install our dependencies and generate the files
+      - name: Install dependencies and generate files
+        uses: tractr/stack/.github/actions/setup@main
+        with:
+          registryUrl: ${{ inputs.registryUrl }}
+          NPM_TOKEN: ${{ inputs.NPM_TOKEN }}
+
+      - name: Push the database's schema
+        run: npx prisma db push
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/api
+
+      - name: Seed the database
+        run: npx prisma db seed
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/api
+
+      - name: Start Application
+        run: npx nx serve api
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/api
+          COOKIE_SECRET: secret
+          JWT_SECRET: secret
