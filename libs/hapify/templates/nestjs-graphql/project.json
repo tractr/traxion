@@ -1,11 +1,10 @@
 {
   "projectType": "library",
-  "root": "libs/hapify/templates/nestjs-graphql",
   "sourceRoot": "libs/hapify/templates/nestjs-graphql/src",
   "tags": ["scope:template"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": [
           "libs/hapify/templates/nestjs-graphql/*.md",
