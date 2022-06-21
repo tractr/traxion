@@ -1,17 +1,18 @@
 {
   "projectType": "library",
-  "root": "libs/nestjs/sentry",
   "sourceRoot": "libs/nestjs/sentry/src",
   "tags": ["scope:nestjs"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/nestjs/sentry/*.md"],
+        "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/sentry/src/index.ts",
         "outputPath": "dist/libs/nestjs/sentry",
         "packageJson": "libs/nestjs/sentry/package.json",
-        "tsConfig": "libs/nestjs/sentry/tsconfig.lib.json"
+        "tsConfig": "libs/nestjs/sentry/tsconfig.lib.json",
+        "updateBuildableProjectDepsInPackageJson": true
       },
       "outputs": ["{options.outputPath}"]
     },
@@ -31,7 +32,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/nestjs/sentry/jest.config.js",
+        "jestConfig": "libs/nestjs/sentry/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/nestjs/sentry"]

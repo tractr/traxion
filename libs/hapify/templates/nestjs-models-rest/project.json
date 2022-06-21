@@ -1,11 +1,10 @@
 {
   "projectType": "library",
-  "root": "libs/hapify/templates/nestjs-models-rest",
   "sourceRoot": "libs/hapify/templates/nestjs-models-rest/src",
   "tags": ["scope:template"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": [
           "libs/hapify/templates/nestjs-models-rest/*.md",
@@ -33,7 +32,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/hapify/templates/nestjs-models-rest/jest.config.js",
+        "jestConfig": "libs/hapify/templates/nestjs-models-rest/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/hapify/templates/nestjs-models-rest"]
