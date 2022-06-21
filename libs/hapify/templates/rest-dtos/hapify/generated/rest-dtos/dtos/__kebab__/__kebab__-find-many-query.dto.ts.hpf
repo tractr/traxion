@@ -115,7 +115,7 @@ export class <<Model pascal>>FindManyQueryDto {
   @IsIn(Object.values(<<Model pascal>><<field pascal>>), <<=listModifier(field)>>) 
   <<endif>>
 
-  <<if field email>>
+  <<if field email and not searchable>>
   @IsEmail({}, <<=listModifier(field)>>) 
   <<endif>>
 
@@ -123,7 +123,7 @@ export class <<Model pascal>>FindManyQueryDto {
   @IsUUID("all", <<=listModifier(field)>>) 
   <<endif>>
 
-  <<if field url>>
+  <<if field url and not searchable>>
   @IsUrl({}, <<=listModifier(field)>>) 
   <<endif>>
 
