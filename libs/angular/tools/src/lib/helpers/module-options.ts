@@ -7,9 +7,15 @@ import {
   Provider,
   Type,
 } from '@angular/core';
+import { ClassConstructor } from 'class-transformer';
 import { RequiredKeys } from 'ts-essentials';
 
-import { TransformAndValidate } from '@tractr/common';
+import {
+  getDefaults,
+  isClass,
+  transformAndValidate,
+  TransformAndValidate,
+} from '@tractr/common';
 
 /**
  * Default Options interface
@@ -75,15 +81,31 @@ export function ModuleOptionsFactory<
   > = OptionsFactory<InternalOptions, PublicOptions, DefaultOptions>,
 >(
   moduleOptionsProvide: string | InjectionToken<InternalOptions>,
-  validateOrDefault?: DefaultOptions | TransformAndValidate<InternalOptions>,
+  validateOrDefault?:
+    | DefaultOptions
+    | ClassConstructor<InternalOptions>
+    | TransformAndValidate<InternalOptions>,
 ) {
-  const validate: TransformAndValidate<InternalOptions> =
-    typeof validateOrDefault !== 'function'
-      ? (opts: any) => opts
-      : validateOrDefault;
-  const defaultOptions: DefaultOptions = (
-    typeof validateOrDefault === 'function' ? {} : validateOrDefault
-  ) as DefaultOptions;
+  let validate: TransformAndValidate<InternalOptions> = (opts: any) => opts;
+
+  if (isClass(validateOrDefault))
+    validate = transformAndValidate(validateOrDefault);
+  if (typeof validateOrDefault === 'function')
+    validate = validateOrDefault as TransformAndValidate<InternalOptions>;
+
+  let defaultOptions: DefaultOptions = {} as DefaultOptions;
+
+  if (isClass(validateOrDefault))
+    defaultOptions = getDefaults(
+      validateOrDefault,
+    ) as unknown as DefaultOptions;
+
+  if (
+    typeof validateOrDefault === 'object' &&
+    !Array.isArray(validateOrDefault) &&
+    validateOrDefault !== null
+  )
+    defaultOptions = validateOrDefault;
   /**
    * The Module Options class that will be extends
    */

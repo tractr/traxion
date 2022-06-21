@@ -7,7 +7,6 @@ import { FileStorageConfigurationPrivateDto } from './dtos';
 import { FileStorageConfigurationPublic } from './interfaces';
 import { FileStorageService } from './services';
 
-import { transformAndValidate } from '@tractr/common';
 import { ModuleOptionsFactory } from '@tractr/nestjs-core';
 
 @Global()
@@ -19,7 +18,4 @@ import { ModuleOptionsFactory } from '@tractr/nestjs-core';
 export class FileStorageModule extends ModuleOptionsFactory<
   FileStorageConfigurationPrivateDto,
   FileStorageConfigurationPublic
->(
-  FILE_STORAGE_CONFIGURATION,
-  transformAndValidate(FileStorageConfigurationPrivateDto),
-) {}
+>(FILE_STORAGE_CONFIGURATION, FileStorageConfigurationPrivateDto) {}
