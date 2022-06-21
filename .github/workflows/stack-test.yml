@@ -10,7 +10,7 @@ concurrency:
 jobs:
   test:
     name: Test all packages
-    uses: ./.github/workflows/test.yml
+    uses: ./.github/actions/setup
     with:
       registryUrl: 'https://npm.pkg.github.com'
       codecov: true
