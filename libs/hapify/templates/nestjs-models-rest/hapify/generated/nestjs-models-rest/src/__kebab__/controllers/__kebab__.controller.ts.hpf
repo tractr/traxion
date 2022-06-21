@@ -70,10 +70,8 @@ export class <<Model pascal>>Controller {
   @Policies(Permission.CREATE_<<Model constant>>)
   public create(
     @Body() bodyDto: <<Model pascal>>CreateBodyDto,
-    <<if Fields ownership and not primary>>
-    <<if Fields internal>>@CurrentUser() user: User,<<endif>>
-    @CurrentAbilities() abilities: AppAbility,
-    <<endif>>
+    <<if Fields ownership and not primary>>@CurrentAbilities() abilities: AppAbility,<<endif>>
+    <<if Fields ownership and not primary and internal>>@CurrentUser() user: User,<<endif>>    
   ) {
 
     const formattedParams = this.<<Model camel>>RestDtoService.formatCreateDto(
@@ -88,7 +86,7 @@ export class <<Model pascal>>Controller {
         '<<Model pascal>>',
         this.<<Model camel>>RestDtoService.transformCreateDtoTo<<Model pascal>>(
           bodyDto,
-          <<if Fields internal>>user,<<endif>>
+          <<if Fields ownership and not primary and internal>>user,<<endif>>
         ) as <<Model pascal>>,
       ),
     );
@@ -270,10 +268,8 @@ export class <<Model pascal>>Controller {
   public async upsert(
     @Param() paramsDto: <<Model pascal>>UpsertParamsDto,
     @Body() bodyDto: <<Model pascal>>UpsertBodyDto,
-    <<if Fields ownership and not primary>>
-    <<if Fields internal>>@CurrentUser() user: User,<<endif>>
-    @CurrentAbilities() abilities: AppAbility,
-    <<endif>>
+    <<if Fields ownership and not primary>>@CurrentAbilities() abilities: AppAbility,<<endif>>
+    <<if Fields ownership and not primary and internal>>@CurrentUser() user: User,<<endif>>    
   ) {
     const <<Model camel>> = await this.<<Model camel>>Service.findUnique({
       where: {
