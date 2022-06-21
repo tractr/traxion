@@ -1,6 +1,5 @@
 {
   "projectType": "application",
-  "root": "apps/api",
   "sourceRoot": "apps/api/src",
   "tags": ["scope:app"],
   "targets": {
@@ -18,7 +17,7 @@
           "optimization": true
         }
       },
-      "executor": "@nrwl/node:build",
+      "executor": "@nrwl/node:webpack",
       "options": {
         "assets": ["apps/api/src/assets"],
         "main": "apps/api/src/main.ts",
@@ -54,7 +53,7 @@
       "outputs": ["{options.outputFile}"]
     },
     "serve": {
-      "executor": "@nrwl/node:execute",
+      "executor": "@nrwl/node:node",
       "options": {
         "buildTarget": "api:build",
         "inspect": true,
@@ -64,7 +63,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "apps/api/jest.config.js",
+        "jestConfig": "apps/api/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/apps/api"]

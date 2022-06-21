@@ -1,11 +1,10 @@
 {
   "projectType": "library",
-  "root": "libs/hapify/create-traxion-workspace",
   "sourceRoot": "libs/hapify/create-traxion-workspace/src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/hapify/create-traxion-workspace/*.md"],
         "main": "libs/hapify/create-traxion-workspace/src/index.ts",
