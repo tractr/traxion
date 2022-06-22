@@ -178,7 +178,7 @@ export class <<Model pascal>>Resolver {
   ): Promise<any> {
     const select = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).value;
     const data = {
-    <<if Fields ownership and not primary>>
+    <<if Fields ownership and internal and not primary>>
       ...(user ? this.<<Model camel>>Service.getDefaultOwnerships(user) : {}),
     <<endif>>
     <<if Fields internal and not primary and (not entity or nullable)>>
