@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.48.2](https://github.com/tractr/stack/compare/v1.48.1...v1.48.2) (2022-06-22)
+
+
+### Bug Fixes
+
+* update commit-config bin path ([037952f](https://github.com/tractr/stack/commit/037952f1f3b1a71ce6b6c79b14bd47a132b7c641))
+
+
+
 ## [1.48.1](https://github.com/tractr/stack/compare/v1.48.0...v1.48.1) (2022-06-22)
 
 
