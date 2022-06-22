@@ -2,6 +2,17 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.48.0](https://github.com/tractr/stack/compare/v1.47.0...v1.48.0) (2022-06-22)
+
+
+### Features
+
+* add rest api search capability to the rest api ([#441](https://github.com/tractr/stack/issues/441)) ([ad64247](https://github.com/tractr/stack/commit/ad642474725c4c772806f5c90a410a634066c4c2))
+* **common:** improve arrayChanges to keep object references ([#443](https://github.com/tractr/stack/issues/443)) ([8bbea47](https://github.com/tractr/stack/commit/8bbea47d6f5c25b7ca5eae332d4be563b171af23))
+* update stack's packages ([#444](https://github.com/tractr/stack/issues/444)) ([703410a](https://github.com/tractr/stack/commit/703410afd5a2761095620652f063c292305e4cdc))
+
+
+
 # [1.47.0](https://github.com/tractr/stack/compare/v1.46.3...v1.47.0) (2022-06-07)
 
 

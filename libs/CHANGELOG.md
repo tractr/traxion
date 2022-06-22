@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.48.0](https://github.com/tractr/stack/compare/v1.47.0...v1.48.0) (2022-06-22)
+
+
+### Bug Fixes
+
+* remove check password policy on create body dto ([#442](https://github.com/tractr/stack/issues/442)) ([0b8fb87](https://github.com/tractr/stack/commit/0b8fb871c1c9771a529777483aa5a4336d163ad4))
+* update the Module Options Helpers to be able to use the default options from class validator ([#448](https://github.com/tractr/stack/issues/448)) ([d82a65d](https://github.com/tractr/stack/commit/d82a65dd7358decc05dbaaa4b8fde037a6c05657))
+
+
+### Features
+
+* add rest api search capability to the rest api ([#441](https://github.com/tractr/stack/issues/441)) ([ad64247](https://github.com/tractr/stack/commit/ad642474725c4c772806f5c90a410a634066c4c2))
+* **common:** improve arrayChanges to keep object references ([#443](https://github.com/tractr/stack/issues/443)) ([8bbea47](https://github.com/tractr/stack/commit/8bbea47d6f5c25b7ca5eae332d4be563b171af23))
+* manage fields with ownership and internal options ([#445](https://github.com/tractr/stack/issues/445)) ([7e0d755](https://github.com/tractr/stack/commit/7e0d755e0c589ee4f7e292c12202d81fe610f0f3))
+* update stack's packages ([#444](https://github.com/tractr/stack/issues/444)) ([703410a](https://github.com/tractr/stack/commit/703410afd5a2761095620652f063c292305e4cdc))
+
+
+
 # [1.47.0](https://github.com/tractr/stack/compare/v1.46.3...v1.47.0) (2022-06-07)
 
 
