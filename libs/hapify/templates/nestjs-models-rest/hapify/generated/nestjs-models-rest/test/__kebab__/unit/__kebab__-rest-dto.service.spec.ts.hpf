@@ -39,6 +39,10 @@ import {
 } from '../../../src';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
+<<if Fields internal and not primary and ownership>>
+import { mockUserFactory } from '@tractr/generated-models/mock';
+<<endif>>
+
 
 describe('<<Model pascal>>DatabaseService', () => {
   let <<Model camel>>RestDtoService: <<Model pascal>>RestDtoService;
@@ -91,8 +95,9 @@ describe('<<Model pascal>>DatabaseService', () => {
           <<endif>>
         <<endfor>>
         }
+        <<if Fields ownership and not primary and internal>>const user = mockUserFactory();<<endif>>
         const prismaArgs = { data };
-        const _result = <<Model camel>>RestDtoService.formatCreateDto(tmpBody);
+        const _result = <<Model camel>>RestDtoService.formatCreateDto(tmpBody,<<if Fields ownership and not primary and internal>>user<<endif>>);
         expect(_result).toEqual(prismaArgs);
         <<if Fields internal and not primary and (not entity or nullable)>>
         expect(mocked<<Model pascal>>Service.getDefaultInternals).toHaveBeenCalledTimes(
@@ -288,6 +293,7 @@ describe('<<Model pascal>>DatabaseService', () => {
           <<endif>>
         <<endfor>>
         };
+        <<if Fields ownership and not primary and internal>>const user = mockUserFactory();<<endif>>
         const prismaArgs = {
           create,
           update,
@@ -296,6 +302,7 @@ describe('<<Model pascal>>DatabaseService', () => {
         const _result = <<Model camel>>RestDtoService.formatUpsertDtos(
           paramsDto,
           tmpBody,
+          <<if Fields ownership and not primary and internal>>user,<<endif>>
         );
         expect(_result).toEqual(prismaArgs);
         <<if Fields internal and not primary and (not entity or nullable)>>
