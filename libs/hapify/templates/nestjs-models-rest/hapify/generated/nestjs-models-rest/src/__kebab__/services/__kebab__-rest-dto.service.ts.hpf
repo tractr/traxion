@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { <<Model pascal>>, Prisma } from '@prisma/client';
+import { <<Model pascal>>, Prisma<<if Fields internal and ownership and not primary>>, User<<endif>>  } from '@prisma/client';
 <<if Fields internal and entity>>
 import { Merge } from 'ts-essentials';
 <<endif>>
@@ -48,7 +48,8 @@ export class <<Model pascal>>RestDtoService {
    * @returns prisma parameters to create a <<Model pascal>>
    */
   public transformCreateDtoTo<<Model pascal>>(
-    bodyDto: <<Model pascal>>CreateBodyDto
+    bodyDto: <<Model pascal>>CreateBodyDto,
+    <<if Fields ownership and internal and not primary>>user: User<<endif>>
   ): <<<if (root.properties.hasPrimary) {>>>Omit<<<Model pascal>>, '<<=root.fields.primary.names.camel>>'> <<<} else { >>><<Model pascal>> <<<}>>> {
     const {
 <<for Fields not internal field>>
@@ -59,6 +60,9 @@ export class <<Model pascal>>RestDtoService {
     return {
 <<if Fields internal and not primary and (not entity or nullable)>>
       ...this.<<Model camel>>Service.getDefaultInternals(),
+<<endif>>
+<<if Fields ownership and internal and not primary>>
+      userId:user.id,
 <<endif>>
 <<for Fields entity and not internal field>>
   <<if field oneOne or oneMany>>
@@ -84,7 +88,8 @@ export class <<Model pascal>>RestDtoService {
    * @returns prisma parameters to create a <<Model pascal>>
    */
   public formatCreateDto(
-    bodyDto: <<Model pascal>>CreateBodyDto
+    bodyDto: <<Model pascal>>CreateBodyDto,
+    <<if Fields ownership and internal and not primary>>user: User,<<endif>>
   ):
     <<if Fields internal and entity>>
     Merge<
@@ -111,6 +116,9 @@ export class <<Model pascal>>RestDtoService {
     const data: Prisma.<<Model pascal>>CreateInput = {
 <<if Fields internal and not primary and (not entity or nullable)>>
       ...this.<<Model camel>>Service.getDefaultInternals(),
+<<endif>>
+<<if Fields ownership and internal and not primary>>
+      ...this.<<Model camel>>Service.getDefaultOwnerships(user),
 <<endif>>
       ...values,
 <<for Fields entity and not internal field>>
@@ -300,6 +308,7 @@ export class <<Model pascal>>RestDtoService {
   public formatUpsertDtos(
     paramsDto: <<Model pascal>>UpsertParamsDto,
     bodyDto: <<Model pascal>>UpsertBodyDto,
+    <<if Fields internal and ownership and not primary>>user: User<<endif>>
   ):
     <<if Fields internal and entity>>
     Merge<
@@ -326,6 +335,9 @@ export class <<Model pascal>>RestDtoService {
     const create: Prisma.<<Model pascal>>CreateInput = {
     <<if Fields internal and not primary and (not entity or nullable)>>
       ...this.<<Model camel>>Service.getDefaultInternals(),
+    <<endif>>
+    <<if Fields internal and ownership and not primary>>
+      ...this.<<Model camel>>Service.getDefaultOwnerships(user),
     <<endif>>
       ...values,
 <<for Fields entity and not internal field>>
