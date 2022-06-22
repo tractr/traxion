@@ -90,8 +90,8 @@ export function ModuleOptionsFactory<
 
   if (isClass(validateOrDefault))
     validate = transformAndValidate(validateOrDefault);
-  if (typeof validateOrDefault === 'function')
-    validate = validateOrDefault as TransformAndValidate<InternalOptions>;
+  else if (typeof validateOrDefault === 'function')
+    validate = validateOrDefault;
 
   let defaultOptions: DefaultOptions = {} as DefaultOptions;
 
@@ -99,8 +99,7 @@ export function ModuleOptionsFactory<
     defaultOptions = getDefaults(
       validateOrDefault,
     ) as unknown as DefaultOptions;
-
-  if (
+  else if (
     typeof validateOrDefault === 'object' &&
     !Array.isArray(validateOrDefault) &&
     validateOrDefault !== null
@@ -116,10 +115,10 @@ export function ModuleOptionsFactory<
      * @returns a dynamic module with a `moduleOptionsProvide` provider that will host the configuration
      */
     static register(options?: PublicOptions): ModuleWithProviders<any> {
-      const opts = {
+      const opts = validate({
         ...defaultOptions,
         ...(options ?? {}),
-      };
+      });
       return {
         ngModule: this,
         providers: [

@@ -1,33 +1,33 @@
 /* eslint-disable max-classes-per-file */
-import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
+import { InjectionToken, NgModule } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { IsString } from 'class-validator';
 
 import { ModuleOptionsFactory } from './module-options.helper';
 
 describe('ModuleOptionsFactory', () => {
-  let app: INestApplication;
-
   it('should be defined', () => {
     expect(ModuleOptionsFactory).toBeTruthy();
   });
 
-  afterEach(async () => {
-    if (app) await app.close();
-  });
-
   it('should create an Options provider and use the default', async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
+    const injectionToken = new InjectionToken<Record<string, unknown>>('TEST');
+
+    @NgModule()
+    class Test extends ModuleOptionsFactory(injectionToken, {
+      foo: 'bar',
+      test: 'foo',
+    }) {}
+
+    const moduleFixture = TestBed.configureTestingModule({
       imports: [
-        ModuleOptionsFactory('TEST', { foo: 'bar', test: 'foo' }).register({
+        Test.register({
           test: 'test',
         }),
       ],
-    }).compile();
+    });
 
-    app = moduleFixture.createNestApplication();
-
-    const test = app.get('TEST');
+    const test = moduleFixture.inject(injectionToken);
     expect(test).toBeDefined();
     expect(test.foo).toBe('bar');
     expect(test.test).toBe('test');
@@ -35,39 +35,39 @@ describe('ModuleOptionsFactory', () => {
 
   it('should create an Options provider and validate the default', async () => {
     const validate = jest.fn((opt) => opt);
-    let moduleFixture: TestingModule = await Test.createTestingModule({
+    const injectionToken = new InjectionToken<Record<string, unknown>>('TEST');
+
+    @NgModule()
+    class Test extends ModuleOptionsFactory(injectionToken, validate) {}
+
+    let moduleFixture = TestBed.configureTestingModule({
       imports: [
-        ModuleOptionsFactory('TEST', validate).register({
+        Test.register({
           test: 'test',
         }),
       ],
-    }).compile();
+    });
 
-    app = moduleFixture.createNestApplication();
-
-    const test = app.get('TEST');
+    const test = moduleFixture.inject(injectionToken);
     expect(test).toBeDefined();
+    expect(test.test).toBe('test');
     expect(validate).toHaveBeenCalled();
     expect(validate).toHaveBeenCalledWith({
       test: 'test',
     });
-    expect(test.test).toBe('test');
-
-    await app.close();
 
     try {
       validate.mockImplementationOnce(() => {
         throw new Error('test');
       });
-      moduleFixture = await Test.createTestingModule({
+      moduleFixture = TestBed.configureTestingModule({
         imports: [
-          ModuleOptionsFactory('TEST', validate).register({
+          Test.forRoot({
             test: true,
           }),
         ],
-      }).compile();
-
-      app = moduleFixture.createNestApplication();
+      });
+      expect(false).toBe(true);
     } catch (e) {
       if (!(e instanceof Error))
         throw new Error(`error must be an instance of Error`);
@@ -77,6 +77,8 @@ describe('ModuleOptionsFactory', () => {
   });
 
   it('should create an Options provider and get and validate the default', async () => {
+    const injectionToken = new InjectionToken<Record<string, unknown>>('TEST');
+
     class Validate {
       @IsString()
       test!: string;
@@ -85,31 +87,30 @@ describe('ModuleOptionsFactory', () => {
       foo = 'bar';
     }
 
-    let moduleFixture: TestingModule = await Test.createTestingModule({
+    @NgModule()
+    class Test extends ModuleOptionsFactory(injectionToken, Validate) {}
+
+    let moduleFixture = TestBed.configureTestingModule({
       imports: [
-        ModuleOptionsFactory('TEST', Validate).register({
+        Test.register({
           test: 'test',
         }),
       ],
-    }).compile();
+    });
 
-    app = moduleFixture.createNestApplication();
-
-    const test = app.get('TEST');
+    const test = moduleFixture.inject(injectionToken);
     expect(test).toBeDefined();
     expect(test.test).toBe('test');
     expect(test.foo).toBe('bar');
 
-    await app.close();
-
     try {
-      moduleFixture = await Test.createTestingModule({
+      moduleFixture = TestBed.configureTestingModule({
         imports: [
-          ModuleOptionsFactory('TEST', Validate).register({
+          Test.forRoot({
             test: true,
           } as unknown as Partial<Validate>),
         ],
-      }).compile();
+      });
     } catch (e) {
       if (!(e instanceof Error))
         throw new Error(`error must be an instance of Error`);
@@ -121,6 +122,8 @@ describe('ModuleOptionsFactory', () => {
   });
 
   it('should create an Options provider with registerAsync', async () => {
+    const injectionToken = new InjectionToken<Record<string, unknown>>('TEST');
+
     class Validate {
       @IsString()
       test!: string;
@@ -129,9 +132,12 @@ describe('ModuleOptionsFactory', () => {
       foo = 'bar';
     }
 
-    let moduleFixture: TestingModule = await Test.createTestingModule({
+    @NgModule()
+    class Test extends ModuleOptionsFactory(injectionToken, Validate) {}
+
+    let moduleFixture = TestBed.configureTestingModule({
       imports: [
-        ModuleOptionsFactory('TEST', Validate).registerAsync({
+        Test.registerAsync({
           useFactory: (defaultOptions) => {
             expect(defaultOptions).toEqual({ foo: 'bar' });
 
@@ -139,21 +145,19 @@ describe('ModuleOptionsFactory', () => {
           },
         }),
       ],
-    }).compile();
+    });
 
-    app = moduleFixture.createNestApplication();
-
-    const test = app.get('TEST');
+    const test = moduleFixture.inject(injectionToken);
     expect(test).toBeDefined();
     expect(test.test).toBe('test');
     expect(test.foo).toBe('bar');
 
-    await app.close();
+    moduleFixture.resetTestingModule();
 
     try {
-      moduleFixture = await Test.createTestingModule({
+      moduleFixture = TestBed.configureTestingModule({
         imports: [
-          ModuleOptionsFactory('TEST', Validate).registerAsync({
+          Test.registerAsync({
             useFactory: (defaultOptions) => {
               expect(defaultOptions).toEqual({ foo: 'bar' });
 
@@ -164,7 +168,7 @@ describe('ModuleOptionsFactory', () => {
             },
           }),
         ],
-      }).compile();
+      });
     } catch (e) {
       if (!(e instanceof Error))
         throw new Error(`error must be an instance of Error`);
