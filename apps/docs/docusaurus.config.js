@@ -2,13 +2,15 @@ module.exports = {
   title: 'Traxion',
   tagline:
     'A suite of orchestrated tools that aims to accelerate the development of web applications.',
-  url: 'https://traxion.io',
-  baseUrl: '/',
+  url: 'https://git',
+  baseUrl: '/traxion.github.io/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'Tractr',
-  projectName: 'Traxion',
+  organizationName: 'tractr',
+  projectName: 'traxion.github.io',
+  deploymentBranch: 'main',
+  trailingSlash: true,
   themeConfig: {
     navbar: {
       title: 'Traxion',
