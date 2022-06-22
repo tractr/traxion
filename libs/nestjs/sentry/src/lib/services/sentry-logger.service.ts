@@ -44,7 +44,7 @@ export class SentryLogger extends ConsoleLogger {
       ...this.opts,
       integrations: [
         new Integrations.OnUncaughtException({
-          onFatalError: async (err) => {
+          onFatalError: (err) => {
             if (err.name === 'SentryError') {
               this.handleSentryError(err);
             } else {

@@ -1,11 +1,10 @@
 {
   "projectType": "library",
-  "root": "libs/terraform/component/s3-user",
   "sourceRoot": "libs/terraform/component/s3-user/src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/terraform/component/s3-user/*.md"],
         "main": "libs/terraform/component/s3-user/src/index.ts",
@@ -31,7 +30,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/terraform/component/s3-user/jest.config.js",
+        "jestConfig": "libs/terraform/component/s3-user/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/terraform/component/s3-user"]

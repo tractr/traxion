@@ -1,6 +1,7 @@
+import { Subject } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
-import { arrayChanges } from './array-changes.operator';
+import { ArrayChanges, arrayChanges } from './array-changes.operator';
 
 function createTestScheduler(expect: jest.Expect): TestScheduler {
   return new TestScheduler((actual: unknown, expected: unknown) => {
@@ -80,5 +81,31 @@ describe('arrayChanges', () => {
         },
       });
     });
+  });
+  it('should emit original added value when removed', async () => {
+    const subject = new Subject<{ id: number }[]>();
+    const stream$ = subject.pipe(
+      arrayChanges<{ id: number }>((a, b) => a.id === b.id),
+    );
+    let lastChanges: ArrayChanges<{ id: number }> = {
+      added: [],
+      removed: [],
+      value: [],
+    };
+    const subscription = stream$.subscribe((changes) => {
+      lastChanges = changes;
+    });
+
+    const originalValue = [{ id: 1 }, { id: 2 }];
+
+    subject.next(originalValue);
+    expect(lastChanges.value[0]).toBe(originalValue[0]);
+    expect(lastChanges.value[1]).toBe(originalValue[1]);
+
+    subject.next([{ id: 2 }, { id: 3 }]);
+    expect(lastChanges.value[0]).toBe(originalValue[1]);
+    expect(lastChanges.removed[0]).toBe(originalValue[0]);
+
+    subscription.unsubscribe();
   });
 });

@@ -1,11 +1,10 @@
 {
   "projectType": "library",
-  "root": "libs/terraform/aws-stack",
   "sourceRoot": "libs/terraform/aws-stack/src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/terraform/aws-stack/*.md"],
         "main": "libs/terraform/aws-stack/src/index.ts",
@@ -31,7 +30,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/terraform/aws-stack/jest.config.js",
+        "jestConfig": "libs/terraform/aws-stack/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/terraform/aws-stack"]

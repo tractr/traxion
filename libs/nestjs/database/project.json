@@ -1,17 +1,18 @@
 {
   "projectType": "library",
-  "root": "libs/nestjs/database",
   "sourceRoot": "libs/nestjs/database/src",
   "tags": ["scope:nestjs"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/nestjs/database/*.md"],
+        "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/database/src/index.ts",
         "outputPath": "dist/libs/nestjs/database",
         "packageJson": "libs/nestjs/database/package.json",
-        "tsConfig": "libs/nestjs/database/tsconfig.lib.json"
+        "tsConfig": "libs/nestjs/database/tsconfig.lib.json",
+        "updateBuildableProjectDepsInPackageJson": true
       },
       "outputs": ["{options.outputPath}"]
     },
@@ -31,7 +32,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/nestjs/database/jest.config.js",
+        "jestConfig": "libs/nestjs/database/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/nestjs/database"]

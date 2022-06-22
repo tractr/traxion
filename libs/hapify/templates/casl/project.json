@@ -1,11 +1,10 @@
 {
   "projectType": "library",
-  "root": "libs/hapify/templates/casl",
   "sourceRoot": "libs/hapify/templates/casl/src",
   "tags": ["scope:template"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": [
           "libs/hapify/templates/casl/*.md",
@@ -33,7 +32,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/hapify/templates/casl/jest.config.js",
+        "jestConfig": "libs/hapify/templates/casl/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/hapify/templates/casl"]
