@@ -24,6 +24,9 @@ export function mock<<Model pascal>>FindManyQueryDtoFactory(
     <<else>>
     <<field camel>>: mock<<Model pascal>><<field pascal>>IdsFactory(),
     <<endif>>
+    <<if field searchable and not entity and not multiple and not enum >>
+    <<field camel>>FilterType: '<<=getDefaultForType(field)>>',
+    <<endif>>
   <<endfor>>
   <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
     populate: [
@@ -45,3 +48,15 @@ export function mock<<Model pascal>>FindManyQueryDtoFactory(
   };
 }
 
+<<<
+function getDefaultForType(f) {
+  let out = ""
+  if (f.type === "boolean") return "equals";
+  else if (f.type === "string") return "equals";
+  else if (f.type === "number") return "equals";
+  else if (f.type === "datetime") return "equals";
+  else if (f.type === "object") return "equals";
+
+  return "UnknownType";
+}
+>>>
