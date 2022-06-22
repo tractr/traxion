@@ -12,7 +12,6 @@ import { FileStorageService } from './services';
 
 import { AngularComponentsModule } from '@tractr/angular-components';
 import { AsyncOptions, ModuleOptionsFactory } from '@tractr/angular-tools';
-import { transformAndValidate } from '@tractr/common';
 
 @NgModule({
   imports: [HttpClientModule, AngularComponentsModule, NzUploadModule],
@@ -23,10 +22,7 @@ import { transformAndValidate } from '@tractr/common';
 export class FileStorageModule extends ModuleOptionsFactory<
   FileStorageConfiguration,
   FileStorageConfiguration
->(
-  FILE_STORAGE_CONFIGURATION,
-  transformAndValidate(FileStorageConfigurationDto),
-) {
+>(FILE_STORAGE_CONFIGURATION, FileStorageConfigurationDto) {
   static register(
     options?: FileStorageConfiguration,
   ): ModuleWithProviders<FileStorageModule> {

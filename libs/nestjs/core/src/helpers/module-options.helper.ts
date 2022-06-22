@@ -7,9 +7,15 @@ import {
   Provider,
   Type,
 } from '@nestjs/common';
+import { ClassConstructor } from 'class-transformer';
 import { RequiredKeys } from 'ts-essentials';
 
-import { TransformAndValidate } from '@tractr/common';
+import {
+  getDefaults,
+  isClass,
+  transformAndValidate,
+  TransformAndValidate,
+} from '@tractr/common';
 
 /**
  * Default Options interface
@@ -77,15 +83,30 @@ export function ModuleOptionsFactory<
   > = OptionsFactory<InternalOptions, PublicOptions, DefaultOptions>,
 >(
   moduleOptionsProvide: string,
-  validateOrDefault?: DefaultOptions | TransformAndValidate<InternalOptions>,
+  validateOrDefault?:
+    | DefaultOptions
+    | ClassConstructor<InternalOptions>
+    | TransformAndValidate<InternalOptions>,
 ) {
-  const validate: TransformAndValidate<InternalOptions> =
-    typeof validateOrDefault !== 'function'
-      ? (opts: any) => opts
-      : validateOrDefault;
-  const defaultOptions: DefaultOptions = (
-    typeof validateOrDefault === 'function' ? {} : validateOrDefault
-  ) as DefaultOptions;
+  let validate: TransformAndValidate<InternalOptions> = (opts: any) => opts;
+
+  if (isClass(validateOrDefault))
+    validate = transformAndValidate(validateOrDefault);
+  else if (typeof validateOrDefault === 'function')
+    validate = validateOrDefault;
+
+  let defaultOptions: DefaultOptions = {} as DefaultOptions;
+
+  if (isClass(validateOrDefault))
+    defaultOptions = getDefaults(
+      validateOrDefault,
+    ) as unknown as DefaultOptions;
+  else if (
+    typeof validateOrDefault === 'object' &&
+    !Array.isArray(validateOrDefault) &&
+    validateOrDefault !== null
+  )
+    defaultOptions = validateOrDefault;
 
   /**
    * The Module Options class that will be extends
