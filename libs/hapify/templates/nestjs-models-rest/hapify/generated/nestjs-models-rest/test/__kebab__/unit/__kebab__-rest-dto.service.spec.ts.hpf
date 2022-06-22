@@ -169,6 +169,10 @@ describe('<<Model pascal>>DatabaseService', () => {
     it('should properly format findMany dtos', () => {
       const queryDto: Required< <<Model pascal>>FindManyQueryDto> = mock<<Model pascal>>FindManyQueryDtoFactory();
       const {
+      <<for Fields searchable and not entity and not multiple and not enum field>>
+        <<field camel>>,
+        <<field camel>>FilterType,
+      <<endfor>>
       <<for Fields searchable and (multiple or entity) field>>
         <<field camel>>,
       <<endfor>>
@@ -181,22 +185,24 @@ describe('<<Model pascal>>DatabaseService', () => {
        skip,
        ...values
       } = queryDto;
-      const where = {
-      <<for Fields searchable and (multiple or entity) field>>
-        <<if field multiple and not entity>>
-          <<if field object>>
-            <<field camel>>: { equals: <<field camel>> },
-          <<else>>
-            <<field camel>>: { hasSome: <<field camel>> },
-          <<endif>>
-        <<elseif field oneOne or oneMany>>
-        <<field camel>>: { id: <<field camel>> },
-        <<else>>
-          <<field camel>>: { some: { id: { in: <<field camel>> } } },
-        <<endif>>
-      <<endfor>>
+    const where: Prisma.<<Model pascal>>WhereInput = {
+  <<for Fields searchable field>>
+    <<if field oneOne or oneMany>>
+        <<field camel>>: <<field camel>> ? { id: <<field camel>> } : {},
+    <<elseif field manyMany>>
+        <<field camel>>: <<field camel>> ? { some: { id: { in: <<field camel>> } } } : {},
+    <<elseif field multiple and not entity>>
+      <<if field object>>
+        <<field camel>>: <<field camel>> ? { equals: <<field camel>> } : undefined,
+      <<else>>
+        <<field camel>>: <<field camel>> ? { hasSome: <<field camel>> } : undefined,
+      <<endif>>
+    <<elseif field not multiple and not enum>>
+        <<field camel>>: <<field camel>> ? { [<<field camel>>FilterType]: <<field camel>> } : undefined,
+    <<endif>>
+  <<endfor>>
         ...values,
-      };
+      }
       <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
       const include = formatPopulate(populate);
       <<<}>>>
