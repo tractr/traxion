@@ -25,8 +25,6 @@ import { DatabaseModule } from '@tractr/nestjs-database';
 import {
   FileStorageController,
   FileStorageModule,
-  PresignedDownloadConfiguration,
-  PresignedUploadConfiguration,
 } from '@tractr/nestjs-file-storage';
 import { MailerModule } from '@tractr/nestjs-mailer';
 
