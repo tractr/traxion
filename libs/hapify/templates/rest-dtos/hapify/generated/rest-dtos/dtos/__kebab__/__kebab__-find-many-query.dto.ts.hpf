@@ -150,7 +150,7 @@ export class <<Model pascal>>FindManyQueryDto {
   <<if field searchable and not entity and not multiple and not enum >>
   @IsIn(<<=getType(field)>>FilterProps)
   @IsOptional()
-  <<field camel>>FilterType: keyof <<=getType(field)>>Filter = '<<=getDefaultForType(field)>>';
+  <<field camel>>FilterType?: keyof <<=getType(field)>>Filter = '<<=getDefaultForType(field)>>';
   <<endif>>
  
 <<endfor>>
