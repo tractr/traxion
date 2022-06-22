@@ -79,10 +79,10 @@ export interface FileStorageConfigurationPublic extends ClientOptions {
   /**
    * Configuration for presigned uploads
    */
-  presignedUpload: PresignedUploadConfiguration;
+  presignedUpload?: PresignedUploadConfiguration;
 
   /**
    * Configuration for presigned downloads
    */
-  presignedDownload: PresignedDownloadConfiguration;
+  presignedDownload?: PresignedDownloadConfiguration;
 }
