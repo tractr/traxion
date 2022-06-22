@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.48.1](https://github.com/tractr/stack/compare/v1.48.0...v1.48.1) (2022-06-22)
+
+
+### Bug Fixes
+
+* update rest dtos to put FilterType field optional [#451](https://github.com/tractr/stack/issues/451) ([7346438](https://github.com/tractr/stack/commit/7346438bdde41309e9b6a00e79f170f54f973843))
+
+
+
 # [1.48.0](https://github.com/tractr/stack/compare/v1.47.0...v1.48.0) (2022-06-22)
 
 
