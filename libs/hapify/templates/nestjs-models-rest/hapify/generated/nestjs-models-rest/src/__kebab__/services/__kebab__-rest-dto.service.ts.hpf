@@ -213,9 +213,6 @@ export class <<Model pascal>>RestDtoService {
     queryDto: <<Model pascal>>FindManyQueryDto
   ): Prisma.<<Model pascal>>FindManyArgs {
     const {
-    <<for Fields searchable and (multiple or entity) field>>
-      <<field camel>>,
-    <<endfor>>
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
       populate,
     <<<}>>>
@@ -223,23 +220,33 @@ export class <<Model pascal>>RestDtoService {
       order,
       take,
       skip,
+      <<for Fields searchable and not entity and not multiple and not enum field>>
+      <<field camel>>,
+      <<field camel>>FilterType,
+      <<endfor>>
+      <<for Fields searchable and (multiple or entity) field>>
+      <<field camel>>,
+      <<endfor>>
       ...values
     } = queryDto;
+ 
     const where: Prisma.<<Model pascal>>WhereInput = {
-<<for Fields searchable and (multiple or entity) field>>
-  <<if field multiple and not entity>>
+<<for Fields searchable field>>
+  <<if field oneOne or oneMany>>
+      <<field camel>>: <<field camel>> ? { id: <<field camel>> } : {},
+  <<elseif field manyMany>>
+      <<field camel>>: <<field camel>> ? { some: { id: { in: <<field camel>> } } } : {},
+  <<elseif field multiple and not entity>>
     <<if field object>>
       <<field camel>>: <<field camel>> ? { equals: <<field camel>> } : undefined,
     <<else>>
       <<field camel>>: <<field camel>> ? { hasSome: <<field camel>> } : undefined,
     <<endif>>
-  <<elseif field oneOne or oneMany>>
-      ...(<<field camel>> ? { <<field camel>>: { id: <<field camel>> } } : {}),
-  <<else>>
-      ...(<<field camel>> ? { <<field camel>>: { some: { id: { in: <<field camel>> } } } }: {}),
+  <<elseif field not multiple and not enum>>
+      <<field camel>>: <<field camel>> ? { [<<field camel>>FilterType]: <<field camel>> } : undefined,
   <<endif>>
 <<endfor>>
-      ...values
+      ...values,
     }
  
     const orderBy = {[sort]: order};
