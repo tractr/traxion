@@ -4,6 +4,7 @@ import {
   DEFAULT_EMAIL_FIELD,
   DEFAULT_ID_FIELD,
   DEFAULT_LOGIN_FIELD,
+  DEFAULT_OTP_FIELD,
   DEFAULT_PASSWORD_FIELD,
 } from '../constants';
 
@@ -41,6 +42,12 @@ export class AuthenticationOptionsUser {
   @IsOptional()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   customSelect?: Record<string, any>;
+
+  /**
+   * Specify the email field of the user entity
+   */
+  @IsString()
+  otpField: string = DEFAULT_OTP_FIELD;
 
   /**
    * Allows to specify a filter function to remove some fields

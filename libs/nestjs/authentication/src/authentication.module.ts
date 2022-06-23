@@ -20,7 +20,7 @@ import {
   TwoFactorAuthenticationService,
 } from './services';
 import { AuthenticationUserService } from './services/authentication-user.service';
-import { JwtStrategy, LocalStrategy } from './strategies';
+import { JwtStrategy, JwtTwoFactorStrategy, LocalStrategy } from './strategies';
 
 import { transformAndValidate } from '@tractr/common';
 import {
@@ -101,7 +101,7 @@ export class AuthenticationModule extends ModuleOptionsFactory<
       ],
       exports: [
         AuthenticationService,
-        TwoFactorAuthenticationService,
+        ...(otp ? [TwoFactorAuthenticationService] : []),
         JwtStrategy,
         LocalStrategy,
         PasswordService,
@@ -112,10 +112,11 @@ export class AuthenticationModule extends ModuleOptionsFactory<
       ],
       providers: [
         AuthenticationService,
-        TwoFactorAuthenticationService,
+        ...(otp ? [TwoFactorAuthenticationService] : []),
         PasswordService,
         StrategyOptionsService,
         JwtStrategy,
+        ...(otp ? [JwtTwoFactorStrategy] : []),
         LocalStrategy,
         {
           provide: AUTHENTICATION_USER_SERVICE,
@@ -125,7 +126,7 @@ export class AuthenticationModule extends ModuleOptionsFactory<
       controllers: [
         LoginController,
         PasswordController,
-        TwoFactorAuthenticationController,
+        ...(otp ? [TwoFactorAuthenticationController] : []),
       ],
     };
   }

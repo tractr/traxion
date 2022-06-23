@@ -11,14 +11,14 @@ export type UserWithIds = <<=getUserFindUniqueReturnTypeFromHapify()>>;
  * Get the select configuration for the prisma user query to be able
  * to construct the user with the correct ids
 */
-export function getSelectPrismaUserQuery(): Prisma.UserSelect {
-  return <<=getSelectPrismaUserQueryFromHapify()>>;
+export function getSelectPrismaUserQuery(user:Partial<User> = {}): Prisma.UserSelect {
+  return <<=getSelectPrismaUserQueryFromHapify(user)>>;
 }
   
 <<<
 
-  function getSelectPrismaUserQueryFromHapify() {
-    const info = getOwnershipInformationsFromHapify();
+  function getSelectPrismaUserQueryFromHapify(user) {
+    const info = getOwnershipInformationsFromHapify(user);
 
     return JSON.stringify(info.select, null, 2);
   }
@@ -41,7 +41,7 @@ export function getSelectPrismaUserQuery(): Prisma.UserSelect {
       : `, ${info.modelListToImport.join(', ')} `;
   }
 
-  function getOwnershipInformationsFromHapify() {
+  function getOwnershipInformationsFromHapify(user:Partial<User> = {}) {
     const models = root;
   
     if (!models) return JSON.stringify({}, null, 2);
@@ -203,6 +203,7 @@ export function getSelectPrismaUserQuery(): Prisma.UserSelect {
         {
           select: {
             roles: true,
+            ...user
           },
           types: {
             roles: "User['roles'];",

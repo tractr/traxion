@@ -6,6 +6,7 @@ export const AUTHENTICATION_DEFAULT_QUERY_PARAM_NAME = 'authToken';
 export const DEFAULT_ID_FIELD = 'id';
 export const DEFAULT_LOGIN_FIELD = 'email';
 export const DEFAULT_PASSWORD_FIELD = 'password';
+export const DEFAULT_OTP_FIELD = 'otp';
 export const DEFAULT_EMAIL_FIELD = 'email';
 
 export const AUTHENTICATION_USER_SERVICE = 'AUTHENTICATION_USER_SERVICE';

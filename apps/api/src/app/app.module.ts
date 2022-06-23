@@ -13,7 +13,7 @@ import { ModelsModule } from '@tractr/generated-nestjs-models';
 import { USER_SERVICE } from '@tractr/generated-nestjs-models-common';
 import {
   AuthenticationModule,
-  JwtGlobalAuthGuard,
+  JwtTwoFactorGuard,
 } from '@tractr/nestjs-authentication';
 import {
   CaslExceptionInterceptor,
@@ -85,7 +85,7 @@ import { MailerModule } from '@tractr/nestjs-mailer';
   ],
   controllers: [FileStorageController],
   providers: [
-    { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
+    { provide: APP_GUARD, useClass: JwtTwoFactorGuard },
     { provide: APP_GUARD, useClass: PoliciesGuard },
     { provide: APP_INTERCEPTOR, useClass: CaslExceptionInterceptor },
     { provide: APP_INTERCEPTOR, useClass: PrismaExceptionInterceptor },
