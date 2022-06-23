@@ -61,9 +61,9 @@ export class <<Model pascal>>RestDtoService {
 <<if Fields internal and not primary and (not entity or nullable)>>
       ...this.<<Model camel>>Service.getDefaultInternals(),
 <<endif>>
-<<if Fields ownership and internal and not primary>>
-      userId:user.id,
-<<endif>>
+<<for Fields  ownership and internal and not primary field>>
+      <<field camel>>Id:user.id,
+<<endfor>>
 <<for Fields entity and not internal field>>
   <<if field oneOne or oneMany>>
     <<<if (field.names.camel === 'id') {>>>
