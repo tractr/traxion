@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-service-pwa",
-  "version": "1.47.0",
+  "version": "1.48.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"

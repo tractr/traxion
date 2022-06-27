@@ -1,17 +1,18 @@
 {
   "projectType": "library",
-  "root": "libs/nestjs/graphql",
   "sourceRoot": "libs/nestjs/graphql/src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/nestjs/graphql/*.md"],
+        "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/graphql/src/index.ts",
         "outputPath": "dist/libs/nestjs/graphql",
         "packageJson": "libs/nestjs/graphql/package.json",
-        "tsConfig": "libs/nestjs/graphql/tsconfig.lib.json"
+        "tsConfig": "libs/nestjs/graphql/tsconfig.lib.json",
+        "updateBuildableProjectDepsInPackageJson": true
       },
       "outputs": ["{options.outputPath}"]
     },
@@ -31,7 +32,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/nestjs/graphql/jest.config.js",
+        "jestConfig": "libs/nestjs/graphql/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/nestjs/graphql"]

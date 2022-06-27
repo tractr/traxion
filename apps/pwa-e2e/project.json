@@ -1,7 +1,6 @@
 {
   "implicitDependencies": ["pwa"],
   "projectType": "application",
-  "root": "apps/pwa-e2e",
   "sourceRoot": "apps/pwa-e2e/src",
   "tags": ["scope:app"],
   "targets": {

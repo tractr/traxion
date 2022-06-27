@@ -256,6 +256,7 @@ export default async function runExecutor(
 
     return { success: true };
   } catch (e: unknown) {
+    if (e instanceof Error) console.error(e.message);
     return e;
   }
 }

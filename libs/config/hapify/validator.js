@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 
 // Models validation script
 // Model structure: https://docs.hapify.io/en/latest/templating/models-validator/#access-model-properties
@@ -83,6 +84,15 @@ for (const field of fields) {
   if (field.ownership && !(field.meta && field.meta.ownerStringPath)) {
     res.errors.push(
       `Entity field must have the meta 'ownerStringPath'. Fix field '${field.name}'`,
+    );
+  }
+  if (
+    field.ownership &&
+    field.internal &&
+    field.meta.ownerStringPath !== 'user.id'
+  ) {
+    res.errors.push(
+      `Entity field with internal and ownership options must have the meta 'ownerStringPath' with the 'user.id' value. Fix field '${field.name}'`,
     );
   }
   if (

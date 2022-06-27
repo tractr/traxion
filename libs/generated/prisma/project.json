@@ -1,7 +1,6 @@
 {
   "implicitDependencies": ["hapify-templates-prisma"],
   "projectType": "library",
-  "root": "libs/generated/prisma",
   "sourceRoot": "libs/generated/prisma/src",
   "tags": [],
   "targets": {
@@ -56,7 +55,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/generated/prisma/jest.config.js",
+        "jestConfig": "libs/generated/prisma/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/generated/prisma"]

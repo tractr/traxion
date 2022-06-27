@@ -1,11 +1,10 @@
 {
   "projectType": "library",
-  "root": "libs/hapify/templates/models",
   "sourceRoot": "libs/hapify/templates/models/src",
   "tags": ["scope:template"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": [
           "libs/hapify/templates/models/*.md",

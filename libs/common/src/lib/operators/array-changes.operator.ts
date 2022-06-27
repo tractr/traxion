@@ -37,8 +37,11 @@ export function arrayChanges<T>(
             (item) => !acc.value.some((item2) => comparator(item, item2)),
           );
 
-          // Clone list
-          const value = [...curr];
+          // Reuse the old values to keep pointer equality when using a custom comparator.
+          const notRemoved = acc.value.filter(
+            (item) => !removed.some((item2) => comparator(item, item2)),
+          );
+          const value = [...notRemoved, ...added];
 
           return {
             value,

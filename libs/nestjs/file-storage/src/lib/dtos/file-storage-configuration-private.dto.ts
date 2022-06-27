@@ -13,6 +13,8 @@ import { AwsRegions } from '../constants';
 import { PresignedDownloadConfigurationDto } from './presigned-download-configuration.dto';
 import { PresignedUploadConfigurationDto } from './presigned-upload-configuration';
 
+import { getDefaults } from '@tractr/common';
+
 export class FileStorageConfigurationPrivateDto implements MinioClientOptions {
   /**
    * File storage endpoint (ip or domain)
@@ -111,12 +113,16 @@ export class FileStorageConfigurationPrivateDto implements MinioClientOptions {
    */
   @ValidateNested()
   @Type(() => PresignedUploadConfigurationDto)
-  presignedUpload!: PresignedUploadConfigurationDto;
+  presignedUpload: PresignedUploadConfigurationDto = getDefaults(
+    PresignedUploadConfigurationDto,
+  );
 
   /**
    * Configuration for presigned downloads
    */
   @ValidateNested()
   @Type(() => PresignedDownloadConfigurationDto)
-  presignedDownload!: PresignedDownloadConfigurationDto;
+  presignedDownload: PresignedDownloadConfigurationDto = getDefaults(
+    PresignedDownloadConfigurationDto,
+  );
 }

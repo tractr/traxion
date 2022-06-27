@@ -61,7 +61,7 @@ libs/generated/**/generated
 
 # Hapify
 hapify.json
-**/prisma/schemas/generated.prisma.hpf
+**/generated/prisma/schemas/generated.prisma.hpf
 **/hapify
 !**/hapify/validator.js
 !**/config/hapify

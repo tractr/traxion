@@ -6,7 +6,6 @@
   ],
   "prefix": "tractr",
   "projectType": "library",
-  "root": "libs/generated/rext-client",
   "sourceRoot": "libs/generated/rext-client/src",
   "tags": [],
   "targets": {
@@ -45,7 +44,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/generated/rext-client/jest.config.js",
+        "jestConfig": "libs/generated/rext-client/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/generated/rext-client"]

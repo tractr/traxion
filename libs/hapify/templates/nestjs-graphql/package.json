@@ -1,6 +1,6 @@
 {
   "name": "@tractr/hapify-templates-nestjs-graphql",
-  "version": "1.47.0",
+  "version": "1.48.2",
   "description": "Hapify templates for nestjs models",
   "repository": {
     "type": "git",

@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.48.2](https://github.com/tractr/stack/compare/v1.48.1...v1.48.2) (2022-06-22)
+
+
+
+## [1.48.1](https://github.com/tractr/stack/compare/v1.48.0...v1.48.1) (2022-06-22)
+
+
+
+# [1.48.0](https://github.com/tractr/stack/compare/v1.47.0...v1.48.0) (2022-06-22)
+
+
+### Features
+
+* manage fields with ownership and internal options ([#445](https://github.com/tractr/stack/issues/445)) ([7e0d755](https://github.com/tractr/stack/commit/7e0d755e0c589ee4f7e292c12202d81fe610f0f3))
+* update stack's packages ([#444](https://github.com/tractr/stack/issues/444)) ([703410a](https://github.com/tractr/stack/commit/703410afd5a2761095620652f063c292305e4cdc))
+
+
+
 # [1.47.0](https://github.com/tractr/stack/compare/v1.46.3...v1.47.0) (2022-06-07)
 
 
