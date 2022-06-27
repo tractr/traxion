@@ -7,28 +7,48 @@ import {
   AUTHENTICATION_USER_SERVICE,
 } from '../constants';
 import { AuthenticationOptions, JwtTokenPayload } from '../dtos';
-import { UserService, UserType } from '../interfaces';
+import { UserService } from '../interfaces';
 import { StrategyOptionsService } from '../services';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtTwoFactorStrategy extends PassportStrategy(
+  Strategy,
+  'jwt-two-factor',
+) {
   constructor(
-    @Inject(AUTHENTICATION_USER_SERVICE)
-    private readonly userService: UserService,
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
     private readonly authenticationOptions: AuthenticationOptions,
+    @Inject(AUTHENTICATION_USER_SERVICE)
+    private readonly userService: UserService,
     protected readonly strategyOptionsService: StrategyOptionsService,
   ) {
     super(strategyOptionsService.createJwtStrategyOptions());
   }
 
-  async validate(payload: JwtTokenPayload): Promise<UserType> {
+  async validate(payload: JwtTokenPayload) {
+    const {
+      otp,
+      userConfig: { otpField },
+    } = this.authenticationOptions;
+
+    if (!otpField) throw new BadRequestException('OTP field is not configured');
+
     const user = await this.userService.findUnique({
       where: { id: payload.sub },
       // Use select clause provided by the module consumer
-      select: this.authenticationOptions.userConfig.customSelect,
+      select: {
+        ...this.authenticationOptions.userConfig.customSelect,
+        [otpField]: otp,
+      },
     });
+
     if (!user) {
+      throw new BadRequestException();
+    }
+    if (otp && !user[otpField]) {
+      return user;
+    }
+    if (!payload.isSecondFactorAuthenticated) {
       throw new BadRequestException();
     }
 

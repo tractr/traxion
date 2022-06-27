@@ -13,4 +13,6 @@ export interface JwtTokenPayload {
   azp?: string;
   /** Token scope (what the token has access to) */
   scope?: string;
+  /** Check if 2FA is enabled */
+  isSecondFactorAuthenticated?: boolean;
 }

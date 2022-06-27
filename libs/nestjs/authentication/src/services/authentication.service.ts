@@ -87,8 +87,11 @@ export class AuthenticationService {
     return bcrypt.compare(password, hash);
   }
 
-  async createUserJWT(user: UserType): Promise<string> {
-    return this.jwtService.sign({ sub: user.id });
+  async createUserJWT(
+    user: UserType,
+    isSecondFactorAuthenticated = false,
+  ): Promise<string> {
+    return this.jwtService.sign({ sub: user.id, isSecondFactorAuthenticated });
   }
 
   async login(user: UserType): Promise<AccessTokenDto> {

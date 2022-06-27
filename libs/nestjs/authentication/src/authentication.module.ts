@@ -6,16 +6,21 @@ import {
   AUTHENTICATION_MODULE_OPTIONS,
   AUTHENTICATION_USER_SERVICE,
 } from './constants';
-import { LoginController, PasswordController } from './controllers';
+import {
+  LoginController,
+  PasswordController,
+  TwoFactorAuthenticationController,
+} from './controllers';
 import { AuthenticationOptions } from './dtos';
 import { AuthenticationPublicOptions } from './interfaces';
 import {
   AuthenticationService,
   PasswordService,
   StrategyOptionsService,
+  TwoFactorAuthenticationService,
 } from './services';
 import { AuthenticationUserService } from './services/authentication-user.service';
-import { JwtStrategy, LocalStrategy } from './strategies';
+import { JwtStrategy, JwtTwoFactorStrategy, LocalStrategy } from './strategies';
 
 import {
   AsyncOptions,
@@ -95,6 +100,7 @@ export class AuthenticationModule extends ModuleOptionsFactory<
       ],
       exports: [
         AuthenticationService,
+        TwoFactorAuthenticationService,
         JwtStrategy,
         LocalStrategy,
         PasswordService,
@@ -105,16 +111,22 @@ export class AuthenticationModule extends ModuleOptionsFactory<
       ],
       providers: [
         AuthenticationService,
+        TwoFactorAuthenticationService,
         PasswordService,
         StrategyOptionsService,
         JwtStrategy,
+        JwtTwoFactorStrategy,
         LocalStrategy,
         {
           provide: AUTHENTICATION_USER_SERVICE,
           useClass: AuthenticationUserService,
         },
       ],
-      controllers: [LoginController, PasswordController],
+      controllers: [
+        LoginController,
+        PasswordController,
+        TwoFactorAuthenticationController,
+      ],
     };
   }
 }

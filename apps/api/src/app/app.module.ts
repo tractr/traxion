@@ -13,7 +13,7 @@ import { ModelsModule } from '@tractr/generated-nestjs-models';
 import { USER_SERVICE } from '@tractr/generated-nestjs-models-common';
 import {
   AuthenticationModule,
-  JwtGlobalAuthGuard,
+  JwtTwoFactorGuard,
 } from '@tractr/nestjs-authentication';
 import {
   CaslExceptionInterceptor,
@@ -44,10 +44,16 @@ import { MailerModule } from '@tractr/nestjs-mailer';
       useFactory: (defaultOptions) => ({
         ...defaultOptions,
         userConfig: {
-          ...defaultOptions.userConfig,
-          customSelect: getSelectPrismaUserQuery(),
+          idField: 'id',
+          loginField: 'email',
+          passwordField: 'password',
+          emailField: 'email',
+          customSelect: getSelectPrismaUserQuery({ otp: true }),
+          otpField: 'otp',
+          formatUser: ({ ...user }) => user,
         },
         userService: USER_SERVICE,
+        otp: true,
       }),
     }),
     FileStorageModule.registerAsync({
@@ -75,7 +81,7 @@ import { MailerModule } from '@tractr/nestjs-mailer';
   ],
   controllers: [FileStorageController],
   providers: [
-    { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
+    { provide: APP_GUARD, useClass: JwtTwoFactorGuard },
     { provide: APP_GUARD, useClass: PoliciesGuard },
     { provide: APP_INTERCEPTOR, useClass: CaslExceptionInterceptor },
     { provide: APP_INTERCEPTOR, useClass: PrismaExceptionInterceptor },

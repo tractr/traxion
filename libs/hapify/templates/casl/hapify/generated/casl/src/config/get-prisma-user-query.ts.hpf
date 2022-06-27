@@ -11,8 +11,14 @@ export type UserWithIds = <<=getUserFindUniqueReturnTypeFromHapify()>>;
  * Get the select configuration for the prisma user query to be able
  * to construct the user with the correct ids
 */
-export function getSelectPrismaUserQuery(): Prisma.UserSelect {
-  return <<=getSelectPrismaUserQueryFromHapify()>>;
+export function getSelectPrismaUserQuery(user:Partial<Prisma.UserSelect> = {}): Prisma.UserSelect {
+
+  const result = <<=getSelectPrismaUserQueryFromHapify()>>;
+
+  return {
+    ...result,
+    ...user,
+  }
 }
   
 <<<
