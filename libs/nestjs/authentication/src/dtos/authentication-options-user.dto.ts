@@ -44,10 +44,11 @@ export class AuthenticationOptionsUser {
   customSelect?: Record<string, any>;
 
   /**
-   * Specify the email field of the user entity
+   * Specify the otp field of the user entity
    */
   @IsString()
-  otpField: string = DEFAULT_OTP_FIELD;
+  @IsOptional()
+  otpField?: string = DEFAULT_OTP_FIELD;
 
   /**
    * Allows to specify a filter function to remove some fields

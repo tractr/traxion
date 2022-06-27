@@ -31,6 +31,8 @@ export class JwtTwoFactorStrategy extends PassportStrategy(
       userConfig: { otpField },
     } = this.authenticationOptions;
 
+    if (!otpField) throw new BadRequestException('OTP field is not configured');
+
     const user = await this.userService.findUnique({
       where: { id: payload.sub },
       // Use select clause provided by the module consumer

@@ -2,7 +2,8 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
-  HttpCode,
+  HttpException,
+  HttpStatus,
   Inject,
   Post,
   Req,
@@ -38,6 +39,9 @@ export class TwoFactorAuthenticationController {
     @Res() response: Response,
     @CurrentUser() user: { id: string; email: string },
   ) {
+    if (!this.authenticationOptions.otp) {
+      throw new HttpException('OTP mode is not enabled', HttpStatus.NOT_FOUND);
+    }
     const otpauthUrl =
       await this.twoFactorAuthenticationService.generateTwoFactorAuthenticationSecret(
         user,
@@ -51,13 +55,16 @@ export class TwoFactorAuthenticationController {
 
   @Post('authenticate')
   @UseGuards(JwtAuthGuard)
-  @HttpCode(200)
   async authenticate(
     @CurrentUser() user: { id: string; otp: string },
     @Body() { code }: TwoFactorAuthenticationCodeDto,
     @Req() req: Request & { secret: string },
     @Res({ passthrough: true }) res: Response,
   ) {
+    if (!this.authenticationOptions.otp) {
+      throw new HttpException('OTP mode is not enabled', HttpStatus.NOT_FOUND);
+    }
+
     const isCodeValid =
       this.twoFactorAuthenticationService.isTwoFactorAuthenticationCodeValid(
         code,

@@ -50,7 +50,7 @@ import { MailerModule } from '@tractr/nestjs-mailer';
           loginField: 'email',
           passwordField: 'password',
           emailField: 'email',
-          customSelect: getSelectPrismaUserQuery(),
+          customSelect: getSelectPrismaUserQuery({ otp: true }),
           otpField: 'otp',
           formatUser: ({ ...user }) => user,
         },

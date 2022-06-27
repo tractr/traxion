@@ -4,9 +4,11 @@ import { authenticator } from 'otplib';
 import { toFileStream } from 'qrcode';
 
 import {
+  AUTHENTICATION_MODULE_OPTIONS,
   AUTHENTICATION_USER_SERVICE,
   TWO_FACTOR_AUTHENTICATION,
 } from '../constants';
+import { AuthenticationOptions } from '../dtos';
 import { UserService } from '../interfaces/user.service.interface';
 
 @Injectable()
@@ -14,12 +16,15 @@ export class TwoFactorAuthenticationService {
   constructor(
     @Inject(AUTHENTICATION_USER_SERVICE)
     private readonly userService: UserService,
+    @Inject(AUTHENTICATION_MODULE_OPTIONS)
+    private readonly authenticationOptions: AuthenticationOptions,
   ) {}
 
   public async generateTwoFactorAuthenticationSecret(user: {
     id: string;
     email: string;
   }) {
+    this.checkIfOtpModeIsEnabled();
     const secret = authenticator.generateSecret();
 
     const otpAuthUrl = authenticator.keyuri(
@@ -44,6 +49,7 @@ export class TwoFactorAuthenticationService {
     twoFactorAuthenticationCode: string,
     user: { otp: string },
   ) {
+    this.checkIfOtpModeIsEnabled();
     return authenticator.verify({
       token: twoFactorAuthenticationCode,
       secret: user.otp,
@@ -51,6 +57,13 @@ export class TwoFactorAuthenticationService {
   }
 
   public async pipeQrCodeStream(stream: Response, otpauthUrl: string) {
+    this.checkIfOtpModeIsEnabled();
     return toFileStream(stream, otpauthUrl);
+  }
+
+  checkIfOtpModeIsEnabled() {
+    if (!this.authenticationOptions.otp) {
+      throw new Error('OTP mode is not enabled');
+    }
   }
 }

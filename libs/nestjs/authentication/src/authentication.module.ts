@@ -101,7 +101,7 @@ export class AuthenticationModule extends ModuleOptionsFactory<
       ],
       exports: [
         AuthenticationService,
-        ...(otp ? [TwoFactorAuthenticationService] : []),
+        TwoFactorAuthenticationService,
         JwtStrategy,
         LocalStrategy,
         PasswordService,
@@ -112,11 +112,11 @@ export class AuthenticationModule extends ModuleOptionsFactory<
       ],
       providers: [
         AuthenticationService,
-        ...(otp ? [TwoFactorAuthenticationService] : []),
+        TwoFactorAuthenticationService,
         PasswordService,
         StrategyOptionsService,
         JwtStrategy,
-        ...(otp ? [JwtTwoFactorStrategy] : []),
+        JwtTwoFactorStrategy,
         LocalStrategy,
         {
           provide: AUTHENTICATION_USER_SERVICE,
@@ -126,7 +126,7 @@ export class AuthenticationModule extends ModuleOptionsFactory<
       controllers: [
         LoginController,
         PasswordController,
-        ...(otp ? [TwoFactorAuthenticationController] : []),
+        TwoFactorAuthenticationController,
       ],
     };
   }
