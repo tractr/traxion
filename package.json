@@ -266,5 +266,13 @@
     "@swc/core-darwin-arm64": "1.2.204",
     "@swc/core-darwin-x64": "1.2.204",
     "@swc/core-linux-x64-gnu": "^1.2.204"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "prisma": {
+    "schema": "libs/generated/prisma/prisma/schema.prisma",
+    "seed": "ts-node -r tsconfig-paths/register --project libs/generated/prisma/tsconfig.lib.json libs/generated/prisma/prisma/seed.ts"
   }
 }

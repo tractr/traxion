@@ -30,7 +30,7 @@
           },
           "name": "user",
           "notes": "User that owns the answer",
-          "properties": ["ownership"],
+          "properties": ["internal", "ownership"],
           "subtype": "oneMany",
           "type": "entity",
           "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
