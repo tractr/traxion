@@ -1,6 +1,6 @@
 {
   "name": "@tractr/generated-nestjs-models-rest",
-  "version": "1.48.2",
+  "version": "1.48.3",
   "exports": {
     ".": {
       "import": "./src/index.js"
