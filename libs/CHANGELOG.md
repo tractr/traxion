@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.48.4](https://github.com/tractr/stack/compare/v1.48.3...v1.48.4) (2022-07-04)
+
+
+### Bug Fixes
+
+* add ownership props dynamicly ([#452](https://github.com/tractr/stack/issues/452)) ([c001c8a](https://github.com/tractr/stack/commit/c001c8af17148d29e0f2ff6a9432ae3d6cfa754b))
+
+
+
 ## [1.48.3](https://github.com/tractr/stack/compare/v1.48.2...v1.48.3) (2022-07-04)
 
 
