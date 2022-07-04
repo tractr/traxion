@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.48.3](https://github.com/tractr/stack/compare/v1.48.2...v1.48.3) (2022-07-04)
+
+
+### Bug Fixes
+
+* update nestjs models rest to accept FilterType optional field ([#454](https://github.com/tractr/stack/issues/454)) ([0207b59](https://github.com/tractr/stack/commit/0207b59f06834657e8f67c6cc6fb4026630bbd8c))
+
+
+
 ## [1.48.2](https://github.com/tractr/stack/compare/v1.48.1...v1.48.2) (2022-06-22)
 
 
