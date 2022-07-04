@@ -222,7 +222,7 @@ export class <<Model pascal>>RestDtoService {
       skip,
       <<for Fields searchable and not entity and not multiple and not enum field>>
       <<field camel>>,
-      <<field camel>>FilterType,
+      <<field camel>>FilterType = '<<=getDefaultForType(field)>>',
       <<endfor>>
       <<for Fields searchable and (multiple or entity) field>>
       <<field camel>>,
@@ -396,3 +396,15 @@ export class <<Model pascal>>RestDtoService {
     return { where: { ...paramsDto } };
   }
 }
+<<<
+function getDefaultForType(f) {
+  let out = ""
+  if (f.type === "boolean") return "equals";
+  else if (f.type === "string") return "equals";
+  else if (f.type === "number") return "equals";
+  else if (f.type === "datetime") return "equals";
+  else if (f.type === "object") return "equals";
+
+  return "UnknownType";
+}
+>>>
