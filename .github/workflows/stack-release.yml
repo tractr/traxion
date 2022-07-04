@@ -18,3 +18,15 @@ jobs:
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+  upload-codecov:
+    name: Upload code coverage to Codecov
+    uses: ./.github/workflows/test.yml
+    with:
+      registryUrl: 'https://npm.pkg.github.com'
+      codecov: true
+      build: false
+      lint: false
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
