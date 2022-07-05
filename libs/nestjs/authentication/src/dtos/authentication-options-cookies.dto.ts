@@ -4,6 +4,7 @@ import { CookieOptions } from 'express';
 import {
   AUTHENTICATION_DEFAULT_AUTH_TOKEN,
   AUTHENTICATION_DEFAULT_COOKIE_NAME,
+  AUTHENTICATION_DEFAULT_COOKIE_TTL,
 } from '../constants';
 
 import { isProduction } from '@tractr/nestjs-core';
@@ -17,6 +18,7 @@ export class AuthenticationOptionsCookies {
 
   @ValidateNested()
   options: CookieOptions = {
+    maxAge: AUTHENTICATION_DEFAULT_COOKIE_TTL,
     httpOnly: true,
     secure: isProduction(),
   };

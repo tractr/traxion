@@ -197,9 +197,14 @@ describe('Authentication Module', () => {
         .set('Authorization', `bearer ${accessToken}`);
 
       expect(response.status).toBe(200);
-      expect(response.headers['set-cookie']).toEqual([
-        'authCookie=; Path=/; HttpOnly',
-      ]);
+
+      const cookie = response.headers['set-cookie'][0];
+
+      expect(cookie).toMatch(/authCookie=;/);
+      expect(cookie).toMatch(/Path=\/;/);
+      expect(cookie).toMatch(/Max-Age=86400;/);
+      expect(cookie).toMatch(/Expires=/);
+      expect(cookie).toMatch(/HttpOnly/);
     });
   });
 });
