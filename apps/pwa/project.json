@@ -15,6 +15,15 @@
           "sourceMap": true,
           "vendorChunk": true
         },
+        "e2e": {
+          "customWebpackConfig": {
+            "path": "apps/pwa-e2e/cypress.webpack.js"
+          },
+          "extractLicenses": false,
+          "namedChunks": true,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
         "production": {
           "budgets": [
             {
@@ -38,7 +47,7 @@
         }
       },
       "defaultConfiguration": "production",
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@nrwl/angular:webpack-browser",
       "options": {
         "allowedCommonJsDependencies": [
           "validator",
@@ -104,6 +113,13 @@
       ],
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
+        "proxyConfig": "apps/pwa/proxy.conf.json"
+      }
+    },
+    "serve-coverage": {
+      "builder": "@angular-builders/custom-webpack:dev-server",
+      "options": {
+        "browserTarget": "pwa:build:e2e",
         "proxyConfig": "apps/pwa/proxy.conf.json"
       }
     },

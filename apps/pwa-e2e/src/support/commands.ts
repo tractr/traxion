@@ -19,17 +19,22 @@ declare namespace Cypress {
 //
 // -- This is a parent command --
 Cypress.Commands.add('login', (email, password) => {
-  console.info('Command: Login', email, password);
+  cy.log('Command: Login', email, password);
   cy.request('POST', '/api/login', { email, password });
 });
 
 Cypress.Commands.add('seed', (forceReset = true) => {
-  console.info('Command: database seed');
-  const env = { DATABASE_URL: process.env.DATABASE_URL };
+  cy.log('Command: database seed');
+  const env = { DATABASE_URL: Cypress.env('DATABASE_URL') };
   return cy
-    .exec(`npx prisma db push${forceReset ? ' --force-reset' : ''}`, {
-      env,
-    })
+    .exec(
+      `npx prisma db push --skip-generate --schema ../../libs/generated/prisma/prisma/schema.prisma${
+        forceReset ? ' --force-reset' : ''
+      }`,
+      {
+        env,
+      },
+    )
     .exec(
       'ts-node -r tsconfig-paths/register --project ../../libs/generated/prisma/tsconfig.lib.json ../../libs/generated/prisma/prisma/seed.ts',
       { env },

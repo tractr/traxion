@@ -1,0 +1,5 @@
+{
+  "nyc": {
+    "report-dir": "../../coverage/apps/pwa-e2e"
+  }
+}

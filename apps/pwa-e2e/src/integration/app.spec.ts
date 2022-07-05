@@ -11,10 +11,10 @@ describe('pwa', () => {
       url: '/api/login',
     }).as('apiLogin');
 
-    cy.get('input[ng-reflect-name=email]').type('admin@traxion.com');
+    cy.get('input[placeholder=Email]').type('admin@traxion.com');
 
     // {enter} causes the form to submit
-    cy.get('input[ng-reflect-name=password]').type(`password{enter}`);
+    cy.get('input[placeholder=Password]').type(`password{enter}`);
 
     cy.wait('@apiLogin');
 

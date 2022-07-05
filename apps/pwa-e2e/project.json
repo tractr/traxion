@@ -7,13 +7,13 @@
     "e2e": {
       "configurations": {
         "production": {
-          "devServerTarget": "pwa:serve:production"
+          "devServerTarget": "pwa:serve-coverage"
         }
       },
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/pwa-e2e/cypress.json",
-        "devServerTarget": "pwa:serve:development",
+        "cypressConfig": "apps/pwa-e2e/cypress.config.js",
+        "devServerTarget": "pwa:serve-coverage",
         "tsConfig": "apps/pwa-e2e/tsconfig.e2e.json"
       }
     },
