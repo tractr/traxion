@@ -1,8 +1,9 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "prefix": "tractr",
   "projectType": "application",
   "sourceRoot": "apps/pwa/src",
-  "tags": ["scope:app"],
+  "tags": [],
   "targets": {
     "build": {
       "configurations": {
@@ -17,7 +18,7 @@
         "production": {
           "budgets": [
             {
-              "maximumError": "5mb",
+              "maximumError": "1mb",
               "maximumWarning": "500kb",
               "type": "initial"
             },
@@ -39,15 +40,12 @@
       "defaultConfiguration": "production",
       "executor": "@angular-devkit/build-angular:browser",
       "options": {
-        "allowedCommonJsDependencies": ["validator", "@generated"],
-        "assets": [
-          "apps/pwa/src/favicon.ico",
-          {
-            "glob": "**/*",
-            "input": "apps/pwa/src/assets",
-            "output": "/assets"
-          }
+        "allowedCommonJsDependencies": [
+          "validator",
+          "@prisma/client",
+          "@tractr/common"
         ],
+        "assets": ["apps/pwa/src/favicon.ico", "apps/pwa/src/assets"],
         "index": "apps/pwa/src/index.html",
         "inlineStyleLanguage": "less",
         "main": "apps/pwa/src/main.ts",
@@ -71,9 +69,8 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/pwa/src/**/*.ts", "apps/pwa/src/**/*.html"]
-      },
-      "outputs": ["{options.outputFile}"]
+        "lintFilePatterns": ["apps/pwa/**/*.ts", "apps/pwa/**/*.html"]
+      }
     },
     "preserve": {
       "configurations": {
@@ -83,7 +80,8 @@
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "commands": [
-          "node ./libs/angular/config/generate.js ./apps/pwa/src/assets/app-config.json"
+          "nx build angular-config",
+          "node ./dist/libs/angular/config/generate.js ./apps/pwa/src/assets/app-config.json"
         ],
         "parallel": false
       }
@@ -106,7 +104,7 @@
       ],
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "proxyConfig": "apps/pwa/proxy.conf.js"
+        "proxyConfig": "apps/pwa/proxy.conf.json"
       }
     },
     "test": {

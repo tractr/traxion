@@ -11,16 +11,22 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 
-import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
-import { CurrentUser } from '../decorators';
+import {
+  AUTHENTICATION_MODULE_OPTIONS,
+  AUTHENTICATION_USER_SERVICE,
+} from '../constants';
 import { AccessTokenDto, AuthenticationOptions } from '../dtos';
 import { LocalAuthGuard } from '../guards';
-import { UserType } from '../interfaces';
+import { UserService, UserType } from '../interfaces';
 import { AuthenticationService } from '../services';
+
+import { CurrentUser } from '@tractr/nestjs-core';
 
 @Controller()
 export class LoginController {
   constructor(
+    @Inject(AUTHENTICATION_USER_SERVICE)
+    private readonly userService: UserService,
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
     private readonly authenticationOptions: AuthenticationOptions,
     private readonly authenticationService: AuthenticationService,
@@ -74,9 +80,13 @@ export class LoginController {
   }
 
   @Get('me')
-  me(@Req() req: Request, @CurrentUser() user: UserType): UserType {
+  me(@Req() req: Request, @CurrentUser() currentUserInfo: UserType): UserType {
     this.throwIfNoUser(req);
     const { formatUser } = this.authenticationOptions.userConfig;
+
+    const user = this.userService.findUnique({
+      where: { id: currentUserInfo.id as string },
+    });
     // Format user with filter provided by the module consumer
     return formatUser(user);
   }

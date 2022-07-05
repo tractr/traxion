@@ -35,6 +35,8 @@ async function bootstrap() {
     logger,
   });
 
+  app.setGlobalPrefix(globalPrefix);
+
   // eslint-disable-next-line @typescript-eslint/unbound-method
   app.use(
     morgan('combined', {
