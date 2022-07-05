@@ -1,5 +1,6 @@
 import { enableProdMode } from '@angular/core';
 
+
 import { AppModule } from './app/app.module';
 import { environment, getConfig } from './environments/environment';
 
@@ -9,7 +10,6 @@ if (environment.production) {
   enableProdMode();
 }
 
-bootstrapAppWithConfig(AppModule, {
-  getConfig,
-  ignoreStorage: !environment.production,
-}).catch((err) => console.error(err));
+bootstrapAppWithConfig(AppModule, { getConfig }).catch((err) =>
+  console.error(err),
+);

@@ -1,0 +1,44 @@
+/* eslint-disable @typescript-eslint/unbound-method */
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+
+export type LoginCredentials = {
+  email: string;
+  password: string;
+};
+
+@Component({
+  selector: 'tractr-login-form-ui',
+  templateUrl: './login-form-ui.component.html',
+  styleUrls: ['./login-form-ui.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class LoginFormUiComponent {
+  /**
+   * Login form instance
+   */
+  validateForm = this.formBuilder.group({
+    email: [null, [Validators.required, Validators.email]],
+    password: [null, [Validators.required]],
+  });
+
+  /**
+   * Login emitter
+   */
+  @Output()
+  loginEvent = new EventEmitter<LoginCredentials>();
+
+  constructor(private formBuilder: FormBuilder) {}
+
+  /**
+   * Emit login data on submit
+   */
+  submitForm() {
+    this.loginEvent.emit(this.validateForm.value as LoginCredentials);
+  }
+}

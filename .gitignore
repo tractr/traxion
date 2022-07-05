@@ -90,3 +90,6 @@ apps/pwa/src/assets/app-config.json
 
 # GraphQL
 schema.gql
+
+# Pwa app config
+apps/test/src/assets/app-config.json

@@ -1,6 +1,5 @@
 export default {
   projects: [
-    '<rootDir>/apps/pwa',
     '<rootDir>/apps/api',
     '<rootDir>/apps/terraform',
     '<rootDir>/libs/hapify/generate-config',
@@ -72,5 +71,6 @@ export default {
     '<rootDir>/libs/hapify/templates/nestjs-graphql',
     '<rootDir>/libs/generated/nestjs-graphql',
     '<rootDir>/libs/nestjs/graphql',
+    '<rootDir>/apps/pwa',
   ],
 };

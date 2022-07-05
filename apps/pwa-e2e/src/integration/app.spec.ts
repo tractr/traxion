@@ -1,13 +1,27 @@
-import { getGreeting } from '../support/app.po';
-
 describe('pwa', () => {
-  beforeEach(() => cy.visit('/'));
+  beforeEach(() => {
+    cy.seed();
+  });
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+  it('should login a user into the interface', () => {
+    cy.visit('/');
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to pwa!');
+    cy.intercept({
+      method: 'POST',
+      url: '/api/login',
+    }).as('apiLogin');
+
+    cy.get('input[ng-reflect-name=email]').type('admin@traxion.com');
+
+    // {enter} causes the form to submit
+    cy.get('input[ng-reflect-name=password]').type(`password{enter}`);
+
+    cy.wait('@apiLogin');
+
+    // our auth cookie should be present
+    cy.getCookie('authCookie').should('exist');
+
+    // UI should reflect this user being logged in
+    cy.get('h3').should('contain', 'Traxion admin');
   });
 });
