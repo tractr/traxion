@@ -1,1 +1,1 @@
-export * from './authentication.contants';
+export * from './authentication.constants';
