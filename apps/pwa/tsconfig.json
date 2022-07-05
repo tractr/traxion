@@ -7,7 +7,9 @@
   "compilerOptions": {
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": false,
     "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": false,
     "strict": true
   },
   "extends": "../../tsconfig.base.json",

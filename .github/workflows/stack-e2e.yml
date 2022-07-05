@@ -47,22 +47,14 @@ jobs:
       - name: Install dependencies and generate files
         uses: tractr/stack/.github/actions/setup@main
         with:
-          registryUrl: ${{ inputs.registryUrl }}
-          NPM_TOKEN: ${{ inputs.NPM_TOKEN }}
+          registryUrl: 'https://npm.pkg.github.com'
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Push the database's schema
-        run: npx prisma db push
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          start: nx serve api
+          wait-on: 'http://localhost:3000/api'
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/api
-
-      - name: Seed the database
-        run: npx prisma db seed
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/api
-
-      - name: Start Application
-        run: npx nx serve api
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/api
-          COOKIE_SECRET: secret
-          JWT_SECRET: secret
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
