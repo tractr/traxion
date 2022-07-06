@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.49.0](https://github.com/tractr/stack/compare/v1.48.4...v1.49.0) (2022-07-06)
+
+
+### Features
+
+* add default value for cookie TTL ([#456](https://github.com/tractr/stack/issues/456)) ([cfac188](https://github.com/tractr/stack/commit/cfac188260b461f9244d122864425246bd9a2df3))
+
+
+
 ## [1.48.4](https://github.com/tractr/stack/compare/v1.48.3...v1.48.4) (2022-07-04)
 
 

@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.49.0](https://github.com/tractr/stack/compare/v1.48.4...v1.49.0) (2022-07-06)
+
+
+### Bug Fixes
+
+* **@tractr/hapify-templates-prisma:** update schema metadata for type number ([#458](https://github.com/tractr/stack/issues/458)) ([e163f60](https://github.com/tractr/stack/commit/e163f603375af3887f136b618e3a294f789118b0))
+
+
+
 ## [1.48.4](https://github.com/tractr/stack/compare/v1.48.3...v1.48.4) (2022-07-04)
 
 
