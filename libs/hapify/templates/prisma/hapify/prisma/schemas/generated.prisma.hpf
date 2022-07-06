@@ -104,21 +104,32 @@ function getMetadata(model, f) {
         default:
           out += "/// @Validator.MaxLength(" + (f.meta.maxLength ? f.meta.maxLength : 255) + ")\n";
       }
+      break;
+
     case 'number':
       switch(f.subtype) {
         case 'integer':
           out += "/// @Validator.IsInt()\n";
+          break;
         case 'float':
-          out += "/// @Validator.IsFloat()\n";
+          out += "/// @Validator.IsNumber()\n";
+          break;
         case 'latitude':
           out += "/// @Validator.IsLatitude()\n";
+          break;
         case 'longitude':
           out += "/// @Validator.IsLongitude()\n";
+          break;
+        default:
+          out += "/// @Validator.IsNumber()\n";
+          break;
       }
       break;
+
     case 'boolean':
         out += "/// @Validator.IsBoolean()\n";
       break;
+
     case 'datetime':
       switch(f.subtype) {
         case 'date':
@@ -128,11 +139,14 @@ function getMetadata(model, f) {
           break;
       }
       break;
+
     case 'entity':
       break;
+
     case 'object':
           out += "/// @Validator.IsObject()\n";
       break;
+
     case 'file':n
       switch(f.subtype) {
         case 'image':

@@ -165,6 +165,7 @@
           "name": "defaultNumber",
           "notes": "Test number system field with no default metadata",
           "properties": ["searchable", "sortable", "internal"],
+          "subtype": "integer",
           "type": "number"
         },
         {
@@ -202,6 +203,7 @@
           "name": "customNumber",
           "notes": "Test number system field with default metadata",
           "properties": ["searchable", "sortable", "internal"],
+          "subtype": "float",
           "type": "number"
         },
         {
