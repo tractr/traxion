@@ -13,21 +13,6 @@ module.exports = {
       input: 'all',
     },
     {
-      path: 'generated/nestjs-models-rest/src/helpers/index.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'generated/nestjs-models-rest/src/helpers/format-populate.helper.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'generated/nestjs-models-rest/src/helpers/format-entity-ids.helper.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
       path: 'generated/nestjs-models-rest/src/{kebab}/index.ts',
       engine: 'hpf',
       input: 'one',
@@ -64,21 +49,6 @@ module.exports = {
     },
     {
       path: 'generated/nestjs-models-rest/mock/{kebab}-rest-dto.service.mock.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'generated/nestjs-models-rest/test/{kebab}/unit/{kebab}-rest-dto.service.spec.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'generated/nestjs-models-rest/test/{kebab}/unit/{kebab}.controller.spec.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'generated/nestjs-models-rest/test/{kebab}/e2e/{kebab}-create.e2e-spec.ts',
       engine: 'hpf',
       input: 'one',
     },

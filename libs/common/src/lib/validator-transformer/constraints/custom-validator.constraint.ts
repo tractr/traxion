@@ -5,7 +5,11 @@ import {
 } from 'class-validator';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type IsCustomConstraint<T = any> = (currentObject: T) => boolean;
+export type IsCustomConstraint<T = any> = (
+  currentObject: T,
+  value: any,
+  targetName: string,
+) => boolean;
 
 /**
  * Constraint for validating that a property match a predicate passed in param.
@@ -14,7 +18,7 @@ export type IsCustomConstraint<T = any> = (currentObject: T) => boolean;
 export class CustomConstraint implements ValidatorConstraintInterface {
   validate(
     propertyValue: string,
-    { constraints, object }: ValidationArguments,
+    { targetName, constraints, object }: ValidationArguments,
   ) {
     const constraintsList: Array<IsCustomConstraint> = constraints;
 
@@ -22,7 +26,7 @@ export class CustomConstraint implements ValidatorConstraintInterface {
       throw new Error('No constraints specified.');
 
     return constraintsList.every((constraint) => {
-      const result = constraint(object);
+      const result = constraint(object, propertyValue, targetName);
       if (result === true) return true;
       if (result === false) return false;
       throw new Error('Invalid constraint.');

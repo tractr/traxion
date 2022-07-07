@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IsJSON, IsOptional, IsString } from 'class-validator';
+import { isIn, IsJSON, IsOptional, IsString } from 'class-validator';
+
+import { CustomValidate } from '../validator-transformer';
 
 export class JsonFilter {
   @IsJSON()
@@ -70,3 +72,32 @@ export const JsonFilterProps = [
   'gte',
   'not',
 ] as Array<keyof JsonFilter>;
+
+/**
+ * Accept a field string and return a boolean indicating if the field is an integer string and filter type
+ *
+ * @param field - the object field to validate
+ */
+export function JsonFilterValidate(separator = ':') {
+  return CustomValidate((_, value: string) => {
+    if (!value) return true;
+    if (typeof value !== 'string') return false;
+
+    const [filterType, ...json] = value.split(separator).reverse();
+
+    let filter: string | undefined = filterType;
+
+    if (filterType && !isIn(filterType, JsonFilterProps)) {
+      json.unshift(filterType);
+      filter = undefined;
+    }
+
+    try {
+      JSON.parse(json.reverse().join(separator));
+    } catch {
+      return false;
+    }
+
+    return !filter || isIn(filter, JsonFilterProps);
+  });
+}
