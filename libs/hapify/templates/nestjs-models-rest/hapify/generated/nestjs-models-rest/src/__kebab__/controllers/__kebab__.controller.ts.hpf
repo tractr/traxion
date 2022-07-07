@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Inject,
   NotFoundException,
   Param,
@@ -37,6 +38,7 @@ import {
 <<<}>>>
   <<Model pascal>>UpdateBodyDto,
   <<Model pascal>>UpdateParamsDto,
+  <<Model pascal>>UpsertBodyWithPrimaryDto,
   <<Model pascal>>UpsertBodyDto,
   <<Model pascal>>UpsertParamsDto,
 } from '../../../../rest-dtos';
@@ -68,6 +70,7 @@ export class <<Model pascal>>Controller {
     @Public()
   <<endif>>
   @Policies(Permission.CREATE_<<Model constant>>)
+  @HttpCode(201)
   public create(
     @Body() bodyDto: <<Model pascal>>CreateBodyDto,
     <<if Fields ownership and not primary>>@CurrentAbilities() abilities: AppAbility,<<endif>>
@@ -80,16 +83,18 @@ export class <<Model pascal>>Controller {
     );
     
     <<if Fields ownership and not primary>>
-    ForbiddenError.from(abilities).throwUnlessCan(
-      Actions.CREATE,
-      subject(
-        '<<Model pascal>>',
-        this.<<Model camel>>RestDtoService.transformCreateDtoTo<<Model pascal>>(
-          bodyDto,
-          <<if Fields ownership and not primary and internal>>user,<<endif>>
-        ) as <<Model pascal>>,
-      ),
-    );
+    if (abilities) {
+      ForbiddenError.from(abilities).throwUnlessCan(
+        Actions.CREATE,
+        subject(
+          '<<Model pascal>>',
+          this.<<Model camel>>RestDtoService.transformCreateDtoTo<<Model pascal>>(
+            bodyDto,
+            <<if Fields ownership and not primary and internal>>user,<<endif>>
+          ) as <<Model pascal>>,
+        ),
+      );
+    }
     <<endif>>
 
     return this.<<Model camel>>Service.create(formattedParams as Prisma.<<Model pascal>>CreateArgs);
@@ -115,12 +120,14 @@ export class <<Model pascal>>Controller {
     let formattedParams = this.<<Model camel>>RestDtoService.formatCountDto(queryDto);
  
     <<if Fields ownership >>
-    formattedParams = {
-      ...formattedParams,
-      where: {
-        AND: [accessibleBy(abilities).<<Model pascal>>, formattedParams?.where ?? {}],
-      },
-    };
+    if (abilities) {
+      formattedParams = {
+        ...formattedParams,
+        where: {
+          AND: [accessibleBy(abilities).<<Model pascal>>, formattedParams.where ?? {}],
+        },
+      };
+    }
     <<endif>>
  
     return this.<<Model camel>>Service.count(formattedParams);
@@ -157,12 +164,14 @@ export class <<Model pascal>>Controller {
     const <<Model camel>> = await this.<<Model camel>>Service.findUnique(formattedParams);
  
     if (!<<Model camel>>) throw new NotFoundException();
-    <<if Fields ownership >>
  
-    ForbiddenError.from(abilities).throwUnlessCan(
-      Actions.READ,
-      subject('<<Model pascal>>', <<Model camel>>),
-    );
+    <<if Fields ownership >>
+    if (abilities) {
+      ForbiddenError.from(abilities).throwUnlessCan(
+        Actions.READ,
+        subject('<<Model pascal>>', <<Model camel>>),
+      );
+    }
     <<endif>>
  
     return <<Model camel>>;
@@ -189,12 +198,14 @@ export class <<Model pascal>>Controller {
       .formatFindManyDto(queryDto);
  
     <<if Fields ownership >>
-    formattedParams = {
-      ...formattedParams,
-      where: {
-        AND: [accessibleBy(abilities).<<Model pascal>>, formattedParams?.where ?? {}],
-      },
-    };
+    if (abilities) {
+      formattedParams = {
+        ...formattedParams,
+        where: {
+          AND: [accessibleBy(abilities).<<Model pascal>>, formattedParams.where ?? {}],
+        },
+      };
+    }
     <<endif>>
  
     return this.<<Model camel>>Service.findMany(formattedParams);
@@ -232,10 +243,12 @@ export class <<Model pascal>>Controller {
     if (!<<Model camel>>) throw new NotFoundException();
  
     <<if Fields ownership >>
-    ForbiddenError.from(abilities).throwUnlessCan(
-      Actions.UPDATE,
-      subject('<<Model pascal>>', <<Model camel>>),
-    );
+    if (abilities) {
+      ForbiddenError.from(abilities).throwUnlessCan(
+        Actions.UPDATE,
+        subject('<<Model pascal>>', <<Model camel>>),
+      );
+    }
     <<endif>>
  
     const formattedParams = this.<<Model camel>>RestDtoService.formatUpdateDtos(
@@ -264,7 +277,7 @@ export class <<Model pascal>>Controller {
     @Public()
     <<endif>>
   <<endif>>
-  @Policies(Permission.UPDATE_<<Model constant>>)
+  @Policies(Permission.CREATE_UPDATE_<<Model constant>>)
   public async upsert(
     @Param() paramsDto: <<Model pascal>>UpsertParamsDto,
     @Body() bodyDto: <<Model pascal>>UpsertBodyDto,
@@ -276,24 +289,58 @@ export class <<Model pascal>>Controller {
         <<=root.fields.primary.names.camel>>: paramsDto.id,
       },
     });
- 
-    if (!<<Model camel>>) throw new NotFoundException();
 
     const formattedParams = this.<<Model camel>>RestDtoService.formatUpsertDtos(
       paramsDto,
       bodyDto,
       <<if Fields ownership and internal and not primary>>user<<endif>>
     );
-  
     
     <<if Fields ownership and not primary>>
     ForbiddenError.from(abilities).throwUnlessCan(
-      Actions.UPDATE,
-      subject('<<Model pascal>>', <<Model camel>>),
+      paramsDto.id ? Actions.UPDATE : Actions.CREATE,
+      subject('<<Model pascal>>', paramsDto.id && <<Model camel>>
+        ? <<Model camel>>
+        : this.<<Model camel>>RestDtoService.transformCreateDtoTo<<Model pascal>>(
+            bodyDto,
+            <<if Fields ownership and not primary and internal>>user,<<endif>>
+          ) as <<Model pascal>>
+      )
     );
     <<endif>>
  
     return this.<<Model camel>>Service.upsert(formattedParams as Prisma.<<Model pascal>>UpsertArgs);
+  }
+ 
+  /**
+   * Update or create one <<Model pascal>>
+   *
+   * @Remarks
+   *
+   * Partial updates are forbidden with this method. It will
+   * fully replace the matched entity
+   *
+   * @param bodyDto - Dto of the request body
+   * @returns the updated or created <<Model pascal>>
+   */
+  @Put()
+  <<if CreateAccess guest>>
+    <<if UpdateAccess guest>>
+    @Public()
+    <<endif>>
+  <<endif>>
+  @Policies(Permission.CREATE_UPDATE_<<Model constant>>)
+  public async upsertWithoutParam(
+    @Body() { <<for Fields primary primaryField>><<primaryField camel>><<endfor>>, ...bodyDto }: <<Model pascal>>UpsertBodyWithPrimaryDto,
+    <<if Fields ownership and not primary>>@CurrentAbilities() abilities: AppAbility,<<endif>>
+    <<if Fields ownership and not primary and internal>>@CurrentUser() user: User,<<endif>>    
+  ) {
+    return this.upsert(
+      { <<for Fields primary primaryField>><<primaryField camel>>,<<endfor>> },
+      bodyDto,
+      <<if Fields ownership and not primary>>abilities,<<endif>>
+      <<if Fields ownership and not primary and internal>>user,<<endif>>
+    );
   }
  
   /**
@@ -322,10 +369,12 @@ export class <<Model pascal>>Controller {
     if (!<<Model camel>>) throw new NotFoundException();
  
     <<if Fields ownership >>
-    ForbiddenError.from(abilities).throwUnlessCan(
-      Actions.REMOVE,
-      subject('<<Model pascal>>', <<Model camel>>),
-    );
+    if (abilities) {
+      ForbiddenError.from(abilities).throwUnlessCan(
+        Actions.REMOVE,
+        subject('<<Model pascal>>', <<Model camel>>),
+      );
+    }
     <<endif>>
  
     const formattedParams = this.<<Model camel>>RestDtoService.formatDeleteDto(paramsDto);

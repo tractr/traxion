@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-import { TransformStringToArrayOfString } from '@tractr/common';
+import { TransformStringToArray } from '@tractr/common';
 
 export class TerraformEnvironmentVariables {
   @IsString()
@@ -19,7 +19,7 @@ export class TerraformEnvironmentVariables {
   AWS_SECRET_ACCESS_KEY!: string;
 
   @IsString({ each: true })
-  @TransformStringToArrayOfString()
+  @TransformStringToArray()
   AWS_AVAILABILITY_ZONES!: string[];
 
   @IsString()

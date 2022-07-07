@@ -1,4 +1,7 @@
-import { IsInt, IsOptional, ValidateNested } from 'class-validator';
+import { isIn, IsInt, IsOptional, ValidateNested } from 'class-validator';
+import { isInteger } from 'lodash';
+
+import { CustomValidate } from '../validator-transformer';
 
 export class IntFilter {
   @IsOptional()
@@ -34,12 +37,32 @@ export class IntFilter {
   not?: IntFilter;
 }
 
-export const IntFilterProps = [
-  'equals',
-  'in',
-  'notIn',
-  'lt',
-  'lte',
-  'gt',
-  'gte',
-] as Array<keyof IntFilter>;
+export const IntFilterProps = ['equals', 'lt', 'lte', 'gt', 'gte'] as Array<
+  keyof IntFilter
+>;
+
+/**
+ * Accept a field string and return a boolean indicating if the field is a boolean string and filter type
+ *
+ * @param field - the object field to validate
+ */
+export function IntFilterValidate(separator = ':') {
+  return CustomValidate((_, value: string) => {
+    if (!value) return true;
+    if (typeof value !== 'string') return false;
+
+    const [filterType, ...int] = value.split(separator).reverse();
+
+    let filter: string | undefined = filterType;
+
+    if (filterType && !isIn(filterType, IntFilterProps)) {
+      int.unshift(filterType);
+      filter = undefined;
+    }
+
+    return (
+      isInteger(Number(int.reverse().join(separator))) &&
+      (!filter || isIn(filter, IntFilterProps))
+    );
+  });
+}

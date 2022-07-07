@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Controller,
   Get,
   HttpCode,
@@ -38,11 +39,10 @@ export class LoginController {
   async login(
     @Req() req: Request & { secret: string },
     @Res({ passthrough: true }) res: Response,
-  ): Promise<AccessTokenDto & { user: UserType }> {
+  ): Promise<AccessTokenDto> {
     const user = this.throwIfNoUser(req);
     const token = await this.authenticationService.login(user);
     const { options: cookieOptions } = this.authenticationOptions.cookies;
-    const { formatUser } = this.authenticationOptions.userConfig;
     res.cookie(
       this.authenticationOptions.cookies.cookieName,
       token.accessToken,
@@ -53,8 +53,6 @@ export class LoginController {
     );
     return {
       ...token,
-      // Format user with filter provided by the module consumer
-      user: formatUser(user),
     };
   }
 
@@ -80,15 +78,21 @@ export class LoginController {
   }
 
   @Get('me')
-  me(@Req() req: Request, @CurrentUser() currentUserInfo: UserType): UserType {
+  async me(
+    @Req() req: Request,
+    @CurrentUser() currentUserInfo: UserType,
+  ): Promise<UserType> {
     this.throwIfNoUser(req);
-    const { formatUser } = this.authenticationOptions.userConfig;
 
-    const user = this.userService.findUnique({
+    const user = await this.userService.findUnique({
       where: { id: currentUserInfo.id as string },
     });
-    // Format user with filter provided by the module consumer
-    return formatUser(user);
+
+    if (!user) {
+      throw new BadRequestException();
+    }
+
+    return user;
   }
 
   throwIfNoUser(req: Request): UserType {
