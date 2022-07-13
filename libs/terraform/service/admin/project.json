@@ -1,11 +1,10 @@
 {
   "projectType": "library",
-  "root": "libs/terraform/service/admin",
   "sourceRoot": "libs/terraform/service/admin/src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/terraform/service/admin/*.md"],
         "main": "libs/terraform/service/admin/src/index.ts",
