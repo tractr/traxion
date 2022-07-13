@@ -1,5 +1,6 @@
 {
   "projects": {
+    "admin": "apps/admin",
     "angular-authentication": "libs/angular/authentication",
     "angular-casl": "libs/angular/casl",
     "angular-components": "libs/angular/components",
@@ -72,11 +73,11 @@
     "terraform-group-pool": "libs/terraform/group/pool",
     "terraform-group-registry": "libs/terraform/group/registry",
     "terraform-group-zone": "libs/terraform/group/zone",
+    "terraform-service-admin": "libs/terraform/service/admin",
     "terraform-service-api": "libs/terraform/service/api",
     "terraform-service-ecs": "libs/terraform/service/ecs",
     "terraform-service-postgres": "libs/terraform/service/postgres",
     "terraform-service-pwa": "libs/terraform/service/pwa",
-    "terraform-service-admin": "libs/terraform/service/admin",
     "terraform-service-reverse-proxy": "libs/terraform/service/reverse-proxy",
     "workspace": {
       "root": "libs",
