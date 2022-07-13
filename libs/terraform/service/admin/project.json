@@ -30,7 +30,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/terraform/service/admin/jest.config.js",
+        "jestConfig": "libs/terraform/service/admin/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/terraform/service/admin"]
