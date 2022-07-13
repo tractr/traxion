@@ -1,9 +1,11 @@
+import { AdminContainer } from './admin.container';
+import { ADMIN_COMPONENT_DEFAULT_CONFIG } from './configs';
 import {
   AdminComponentConfig,
   AdminComponentDefaultConfig,
 } from './interfaces';
-import { AdminContainer } from './admin.container';
 
+import { AwsProviderConstruct } from '@tractr/terraform-component-aws';
 import {
   BackendServiceComponent,
   Container,
@@ -13,6 +15,17 @@ export class AdminComponent extends BackendServiceComponent<
   AdminComponentConfig,
   AdminComponentDefaultConfig
 > {
+  /**
+   * Override constructor to merge config with default config
+   */
+  constructor(
+    scope: AwsProviderConstruct,
+    id: string,
+    config: AdminComponentConfig,
+  ) {
+    super(scope, id, config, ADMIN_COMPONENT_DEFAULT_CONFIG);
+  }
+
   protected getIngressPorts(): number[] {
     return [4200];
   }
@@ -24,23 +37,5 @@ export class AdminComponent extends BackendServiceComponent<
         name: 'admin',
       }),
     ];
-  }
-
-  protected getDefaultConfig(): AdminComponentDefaultConfig {
-    return {
-      ...super.getDefaultConfig(),
-      containerConfig: {
-        imageTag: 'latest',
-        path: {
-          prefix: '/admin',
-          stripPrefix: true,
-        },
-        environments: {
-          API_URL: (service) => service.getApplicationUrl('/api'),
-          HTML_BASE_HREF: '/admin/',
-          HTML_INDEX_PATH: '/usr/share/nginx/html/index.html',
-        },
-      },
-    };
   }
 }
