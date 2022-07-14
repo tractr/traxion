@@ -40,6 +40,7 @@ export default {
     '<rootDir>/libs/terraform/component/s3-user',
     '<rootDir>/libs/terraform/service/api',
     '<rootDir>/libs/terraform/service/pwa',
+    '<rootDir>/libs/terraform/service/admin',
     '<rootDir>/libs/terraform/service/postgres',
     '<rootDir>/libs/schematics',
     '<rootDir>/libs/terraform/component/deployment-trigger',

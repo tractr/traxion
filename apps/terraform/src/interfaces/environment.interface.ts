@@ -1,3 +1,4 @@
+import { AdminComponentPublicConfig } from '@tractr/terraform-service-admin';
 import { ApiComponentPublicConfig } from '@tractr/terraform-service-api';
 import { PostgresComponentPublicConfig } from '@tractr/terraform-service-postgres';
 import { PwaComponentPublicConfig } from '@tractr/terraform-service-pwa';
@@ -25,6 +26,10 @@ export interface Environment {
      * PWA config override
      */
     pwa?: PwaComponentPublicConfig;
+    /**
+     * Admin config override
+     */
+    admin?: AdminComponentPublicConfig;
     /**
      * API config override
      */

@@ -21,6 +21,7 @@ import { Environment } from '../interfaces';
 export const AppConfig: Required<Environment['config']> = {
   api: {},
   pwa: {},
+  admin: {},
   postgres: {},
   reverseProxy: {},
 };

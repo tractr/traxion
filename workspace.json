@@ -1,5 +1,6 @@
 {
   "projects": {
+    "admin": "apps/admin",
     "angular-authentication": "libs/angular/authentication",
     "angular-casl": "libs/angular/casl",
     "angular-components": "libs/angular/components",
@@ -72,6 +73,7 @@
     "terraform-group-pool": "libs/terraform/group/pool",
     "terraform-group-registry": "libs/terraform/group/registry",
     "terraform-group-zone": "libs/terraform/group/zone",
+    "terraform-service-admin": "libs/terraform/service/admin",
     "terraform-service-api": "libs/terraform/service/api",
     "terraform-service-ecs": "libs/terraform/service/ecs",
     "terraform-service-postgres": "libs/terraform/service/postgres",
@@ -136,6 +138,7 @@
               "terraform-service-postgres:publish",
               "terraform-service-api:publish",
               "terraform-service-pwa:publish",
+              "terraform-service-admin:publish",
               "hapify-templates-nestjs-models:publish",
               "hapify-templates-angular-rext-client:publish",
               "nestjs-casl:publish",

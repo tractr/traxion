@@ -1,5 +1,10 @@
 import { Environment } from '../interfaces';
 
+const adminPathConfig = {
+  path: { prefix: '/admin' },
+  environments: { HTML_BASE_HREF: '/admin/' },
+};
+
 export const Environments: Environment[] = [
   {
     name: 'Production',
@@ -7,6 +12,12 @@ export const Environments: Environment[] = [
     subDomain: 'www',
     config: {
       pwa: { containerConfig: { imageTag: 'production' } },
+      admin: {
+        containerConfig: {
+          imageTag: 'production',
+          ...adminPathConfig,
+        },
+      },
       api: {
         containerConfig: { imageTag: 'production' },
         desiredCount: 2,
@@ -22,6 +33,12 @@ export const Environments: Environment[] = [
     subDomain: 'staging',
     config: {
       pwa: { containerConfig: { imageTag: 'latest' } },
+      admin: {
+        containerConfig: {
+          imageTag: 'latest',
+          ...adminPathConfig,
+        },
+      },
       api: { containerConfig: { imageTag: 'latest' } },
     },
   },
