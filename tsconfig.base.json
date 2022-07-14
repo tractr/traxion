@@ -139,6 +139,9 @@
       "@tractr/terraform-group-zone": [
         "libs/terraform/group/zone/src/index.ts"
       ],
+      "@tractr/terraform-service-admin": [
+        "libs/terraform/service/admin/src/index.ts"
+      ],
       "@tractr/terraform-service-api": [
         "libs/terraform/service/api/src/index.ts"
       ],

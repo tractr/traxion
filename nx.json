@@ -31,6 +31,20 @@
       "linter": "eslint",
       "style": "less",
       "unitTestRunner": "jest"
+    },
+    "@nrwl/react": {
+      "application": {
+        "babel": true,
+        "linter": "eslint",
+        "style": "less"
+      },
+      "component": {
+        "style": "less"
+      },
+      "library": {
+        "linter": "eslint",
+        "style": "less"
+      }
     }
   },
   "implicitDependencies": {

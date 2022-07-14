@@ -12,6 +12,7 @@ import {
   RegistryGroup,
 } from '@tractr/terraform-group-registry';
 import { ZoneGroup } from '@tractr/terraform-group-zone';
+import { AdminComponent } from '@tractr/terraform-service-admin';
 import { ApiComponent } from '@tractr/terraform-service-api';
 import { PostgresComponent } from '@tractr/terraform-service-postgres';
 import { PwaComponent } from '@tractr/terraform-service-pwa';
@@ -71,6 +72,9 @@ export class MainStack extends AwsStack<AwsStackConfig> {
 
       // Add a pwa as a http service
       poolGroup.addHttpService(PwaComponent, 'pwa', mergedConfig.pwa);
+
+      // Add an admin as a http service
+      poolGroup.addHttpService(AdminComponent, 'admin', mergedConfig.admin);
 
       // Add a api as a http service
       const api = poolGroup.addHttpService(
