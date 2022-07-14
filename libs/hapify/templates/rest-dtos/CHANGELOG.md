@@ -2,6 +2,74 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.49.0](https://github.com/tractr/stack/compare/v1.48.4...v1.49.0) (2022-07-06)
+
+
+
+## [1.48.4](https://github.com/tractr/stack/compare/v1.48.3...v1.48.4) (2022-07-04)
+
+
+
+## [1.48.3](https://github.com/tractr/stack/compare/v1.48.2...v1.48.3) (2022-07-04)
+
+
+
+## [1.48.2](https://github.com/tractr/stack/compare/v1.48.1...v1.48.2) (2022-06-22)
+
+
+
+## [1.48.1](https://github.com/tractr/stack/compare/v1.48.0...v1.48.1) (2022-06-22)
+
+
+### Bug Fixes
+
+* update rest dtos to put FilterType field optional [#451](https://github.com/tractr/stack/issues/451) ([7346438](https://github.com/tractr/stack/commit/7346438bdde41309e9b6a00e79f170f54f973843))
+
+
+
+# [1.48.0](https://github.com/tractr/stack/compare/v1.47.0...v1.48.0) (2022-06-22)
+
+
+### Bug Fixes
+
+* remove check password policy on create body dto ([#442](https://github.com/tractr/stack/issues/442)) ([0b8fb87](https://github.com/tractr/stack/commit/0b8fb871c1c9771a529777483aa5a4336d163ad4))
+
+
+### Features
+
+* add rest api search capability to the rest api ([#441](https://github.com/tractr/stack/issues/441)) ([ad64247](https://github.com/tractr/stack/commit/ad642474725c4c772806f5c90a410a634066c4c2))
+* update stack's packages ([#444](https://github.com/tractr/stack/issues/444)) ([703410a](https://github.com/tractr/stack/commit/703410afd5a2761095620652f063c292305e4cdc))
+
+
+
+# [1.47.0](https://github.com/tractr/stack/compare/v1.46.3...v1.47.0) (2022-06-07)
+
+
+
+## [1.46.3](https://github.com/tractr/stack/compare/v1.46.2...v1.46.3) (2022-06-06)
+
+
+
+## [1.46.2](https://github.com/tractr/stack/compare/v1.46.1...v1.46.2) (2022-06-06)
+
+
+
+## [1.46.1](https://github.com/tractr/stack/compare/v1.46.0...v1.46.1) (2022-06-06)
+
+
+
+# [1.46.0](https://github.com/tractr/stack/compare/v1.45.5...v1.46.0) (2022-06-02)
+
+
+
+## [1.45.5](https://github.com/tractr/stack/compare/v1.45.4...v1.45.5) (2022-05-31)
+
+
+
+## [1.45.4](https://github.com/tractr/stack/compare/v1.45.3...v1.45.4) (2022-05-30)
+
+
+
 ## [1.45.3](https://github.com/tractr/stack/compare/v1.45.2...v1.45.3) (2022-05-25)
 
 

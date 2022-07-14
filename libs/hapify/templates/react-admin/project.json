@@ -1,11 +1,10 @@
 {
   "projectType": "library",
-  "root": "libs/hapify/templates/react-admin",
   "sourceRoot": "libs/hapify/templates/react-admin/src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": [
           "libs/hapify/templates/react-admin/*.md",

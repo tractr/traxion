@@ -1,11 +1,4 @@
-import {
-  cloudwatch,
-  ecs,
-  elb,
-  s3,
-  secretsmanager,
-  vpc,
-} from '@cdktf/provider-aws';
+import { cloudwatch, ecs, elb, secretsmanager, vpc } from '@cdktf/provider-aws';
 
 import { PrivateDnsComponent } from '@tractr/terraform-component-private-dns';
 import { DockerApplications } from '@tractr/terraform-group-registry';

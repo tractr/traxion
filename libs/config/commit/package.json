@@ -1,13 +1,13 @@
 {
   "name": "@tractr/commit-config",
-  "version": "1.45.3",
+  "version": "1.49.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack.git"
   },
   "bin": {
-    "tractr-commit": "./tractr-commit.js",
-    "tractr-commitlint": "./tractr-commitlint.js"
+    "tractr-commit": "./bin/tractr-commit.js",
+    "tractr-commitlint": "./bin/tractr-commitlint.js"
   },
   "dependencies": {
     "@commitlint/cli": "^16.2.1",

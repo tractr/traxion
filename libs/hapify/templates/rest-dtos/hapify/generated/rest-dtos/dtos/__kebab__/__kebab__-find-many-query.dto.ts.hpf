@@ -39,8 +39,32 @@ import {
 
 } from 'class-validator';
 
-<<if Fields object>>
-import { JsonObject } from '@tractr/common';
+<<if Fields searchable and not entity and not enum or object>>
+import {
+  <<if Fields searchable and boolean and not multiple>>
+  BoolFilter,
+  BoolFilterProps,
+  <<endif>>
+  <<if Fields searchable and datetime and not multiple>>
+  DateTimeFilter,
+  DateTimeFilterProps,
+  <<endif>>
+  <<if Fields searchable and number and not multiple>>
+  IntFilter,
+  IntFilterProps,
+  <<endif>>
+  <<if Fields object>>
+  JsonObject,
+  <<endif>>
+  <<if Fields searchable and object and not multiple>>
+  JsonFilter,
+  JsonFilterProps,
+  <<endif>>
+  <<if Fields searchable and string and not multiple>>
+  StringFilter,
+  StringFilterProps,
+  <<endif>>
+} from '@tractr/common';
 <<endif>>
   
 import {
@@ -91,7 +115,7 @@ export class <<Model pascal>>FindManyQueryDto {
   @IsIn(Object.values(<<Model pascal>><<field pascal>>), <<=listModifier(field)>>) 
   <<endif>>
 
-  <<if field email>>
+  <<if field email and not searchable>>
   @IsEmail({}, <<=listModifier(field)>>) 
   <<endif>>
 
@@ -99,7 +123,7 @@ export class <<Model pascal>>FindManyQueryDto {
   @IsUUID("all", <<=listModifier(field)>>) 
   <<endif>>
 
-  <<if field url>>
+  <<if field url and not searchable>>
   @IsUrl({}, <<=listModifier(field)>>) 
   <<endif>>
 
@@ -122,6 +146,12 @@ export class <<Model pascal>>FindManyQueryDto {
 
   @IsOptional()
   <<=optionalTypedProperty(field)>>
+
+  <<if field searchable and not entity and not multiple and not enum >>
+  @IsIn(<<=getType(field)>>FilterProps)
+  @IsOptional()
+  <<field camel>>FilterType?: keyof <<=getType(field)>>Filter = '<<=getDefaultForType(field)>>';
+  <<endif>>
  
 <<endfor>>
 
@@ -185,5 +215,28 @@ function optionalTypedProperty(f) {
 function listModifier(f) {
   if (f.multiple) return "{ each: true}";
   else return "";
+}
+>>>
+
+<<<
+function getType(f) {
+  let out = ""
+  if (f.type === "boolean") return "Bool";
+  else if (f.type === "string") return "String";
+  else if (f.type === "number") return "Int";
+  else if (f.type === "datetime") return "DateTime";
+  else if (f.type === "object") return "Json";
+
+  return "UnknownType";
+}
+function getDefaultForType(f) {
+  let out = ""
+  if (f.type === "boolean") return "equals";
+  else if (f.type === "string") return "equals";
+  else if (f.type === "number") return "equals";
+  else if (f.type === "datetime") return "equals";
+  else if (f.type === "object") return "equals";
+
+  return "UnknownType";
 }
 >>>

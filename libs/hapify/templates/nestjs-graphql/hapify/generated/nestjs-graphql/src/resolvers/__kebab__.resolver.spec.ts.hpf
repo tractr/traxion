@@ -1,7 +1,8 @@
 <<<
-  // We need to extract all the fields who refered our model
+  // We need to extract all the fields who referenced our model
   // And remove the duplicate
   const uniqRefs = root.referencedIn
+    .concat(root.fields.filter((field) => field.model).map((field) => field.model))
     .filter((value, index, self) => {
       return self.findIndex(f => f.name === value.name) === index && value.name !== root.name;
     });
@@ -17,6 +18,8 @@ import { INestApplication } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
+import { DatabaseModule, DatabaseService } from '@tractr/nestjs-database';
+import { Prisma } from '@prisma/client';
 
 import {
   <<Model pascal>>,
@@ -72,12 +75,25 @@ describe('<<Model pascal>> Resolver', () => {
 <<endfor>>
       ],
       imports: [
+        DatabaseModule,
         GraphQLModule.forRoot<ApolloDriverConfig>({
           driver: ApolloDriver,
           autoSchemaFile: true,
         }),
       ],
-    }).compile();
+    })
+      .overrideProvider(DatabaseService)
+      .useFactory({
+        factory: () => {
+          const prismaAggregate = mockDeep<Prisma.TransactionClient>();
+          return {
+            $transaction: (fn: (...args: unknown[]) => Promise<unknown>) => {
+              return fn(prismaAggregate);
+            },
+          };
+        },
+      })
+      .compile();
     app = module.createNestApplication();
     await module.init();
   });
@@ -220,6 +236,7 @@ describe('<<Model pascal>> Resolver', () => {
   it('should be able to create a <<Model camel>>', async () => {
     mock<<Model pascal>> = mock<<Model pascal>>Factory();
     mock<<Model pascal>>Service.create.mockResolvedValueOnce(mock<<Model pascal>>);
+
     await request(app.getHttpServer())
       .post('/graphql')
       .send({
@@ -235,11 +252,7 @@ describe('<<Model pascal>> Resolver', () => {
         variables: {
           data: {
           <<for Fields not oneMany and not manyOne and not manyMany and not oneOne field>>
-            <<if field enum and multiple>>
-            <<field camel>>: { set: mock<<Model pascal>>.<<field camel>> },
-            <<else>>
             <<field camel>>: mock<<Model pascal>>.<<field camel>>,
-            <<endif>>
           <<endfor>>
           <<for Fields not nullable and (oneOne or oneMany or manyOne or manyMany) field>>
             <<field camel>>: { connect: { id: mock<<=field.model.names.pascal>>Factory().id } },
@@ -272,6 +285,7 @@ describe('<<Model pascal>> Resolver', () => {
       <<field camel>>: updated<<Model pascal>>.<<field camel>>,
       <<endfor>>
     });
+
     await request(app.getHttpServer())
       .post('/graphql')
       .send({
@@ -292,7 +306,7 @@ describe('<<Model pascal>> Resolver', () => {
           },
           data: {
             <<for Fields primary field>>
-            <<field camel>>: { set: updated<<Model pascal>>.<<field camel>> },
+            <<field camel>>: updated<<Model pascal>>.<<field camel>>,
             <<endfor>>
           }
         },
@@ -318,6 +332,7 @@ describe('<<Model pascal>> Resolver', () => {
   it('should be able to delete a <<Model camel>>', async () => {
     mock<<Model pascal>> = mock<<Model pascal>>Factory();
     mock<<Model pascal>>Service.delete.mockResolvedValueOnce(mock<<Model pascal>>);
+ 
     await request(app.getHttpServer())
       .post('/graphql')
       .send({

@@ -2,6 +2,80 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.49.0](https://github.com/tractr/stack/compare/v1.48.4...v1.49.0) (2022-07-06)
+
+
+
+## [1.48.4](https://github.com/tractr/stack/compare/v1.48.3...v1.48.4) (2022-07-04)
+
+
+### Bug Fixes
+
+* add ownership props dynamicly ([#452](https://github.com/tractr/stack/issues/452)) ([c001c8a](https://github.com/tractr/stack/commit/c001c8af17148d29e0f2ff6a9432ae3d6cfa754b))
+
+
+
+## [1.48.3](https://github.com/tractr/stack/compare/v1.48.2...v1.48.3) (2022-07-04)
+
+
+### Bug Fixes
+
+* update nestjs models rest to accept FilterType optional field ([#454](https://github.com/tractr/stack/issues/454)) ([0207b59](https://github.com/tractr/stack/commit/0207b59f06834657e8f67c6cc6fb4026630bbd8c))
+
+
+
+## [1.48.2](https://github.com/tractr/stack/compare/v1.48.1...v1.48.2) (2022-06-22)
+
+
+
+## [1.48.1](https://github.com/tractr/stack/compare/v1.48.0...v1.48.1) (2022-06-22)
+
+
+
+# [1.48.0](https://github.com/tractr/stack/compare/v1.47.0...v1.48.0) (2022-06-22)
+
+
+### Features
+
+* add rest api search capability to the rest api ([#441](https://github.com/tractr/stack/issues/441)) ([ad64247](https://github.com/tractr/stack/commit/ad642474725c4c772806f5c90a410a634066c4c2))
+* manage fields with ownership and internal options ([#445](https://github.com/tractr/stack/issues/445)) ([7e0d755](https://github.com/tractr/stack/commit/7e0d755e0c589ee4f7e292c12202d81fe610f0f3))
+* update stack's packages ([#444](https://github.com/tractr/stack/issues/444)) ([703410a](https://github.com/tractr/stack/commit/703410afd5a2761095620652f063c292305e4cdc))
+
+
+
+# [1.47.0](https://github.com/tractr/stack/compare/v1.46.3...v1.47.0) (2022-06-07)
+
+
+
+## [1.46.3](https://github.com/tractr/stack/compare/v1.46.2...v1.46.3) (2022-06-06)
+
+
+
+## [1.46.2](https://github.com/tractr/stack/compare/v1.46.1...v1.46.2) (2022-06-06)
+
+
+
+## [1.46.1](https://github.com/tractr/stack/compare/v1.46.0...v1.46.1) (2022-06-06)
+
+
+
+# [1.46.0](https://github.com/tractr/stack/compare/v1.45.5...v1.46.0) (2022-06-02)
+
+
+### Features
+
+* add casl to nestjs graphql ([#435](https://github.com/tractr/stack/issues/435)) ([77b5981](https://github.com/tractr/stack/commit/77b598104078db844e6ca3292a73fc682a9e0483))
+
+
+
+## [1.45.5](https://github.com/tractr/stack/compare/v1.45.4...v1.45.5) (2022-05-31)
+
+
+
+## [1.45.4](https://github.com/tractr/stack/compare/v1.45.3...v1.45.4) (2022-05-30)
+
+
+
 ## [1.45.3](https://github.com/tractr/stack/compare/v1.45.2...v1.45.3) (2022-05-25)
 
 

@@ -21,7 +21,7 @@ export class PrismaMiddleware {
       // We try to get the database service from the module ref
       // We do not fail in case no database has been register in the app
       const databaseService: DatabaseService = this.moduleRef.get(
-        DatabaseService as new (...args: any[]) => DatabaseService,
+        DatabaseService as new (...args: unknown[]) => DatabaseService,
         {
           strict: false,
         },

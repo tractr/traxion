@@ -19,6 +19,18 @@ on:
         required: false
         type: boolean
 
+      build:
+        default: true
+        description: 'Run the build step'
+        required: false
+        type: boolean
+
+      lint:
+        default: true
+        description: 'Run the lint step'
+        required: false
+        type: boolean
+
     secrets:
       NPM_TOKEN:
         description: 'The npm token if needed'
@@ -27,10 +39,6 @@ on:
       CODECOV_TOKEN:
         description: 'The codecov token if needed'
         required: false
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   tests:
@@ -59,22 +67,24 @@ jobs:
 
       # Run the build
       - name: Run Affected Build
+        if: ${{ inputs.build }}
         shell: bash
         run: npx nx affected:build --base=remotes/origin/main
 
       # Run the lint
       - name: Run Affected Lint
+        if: ${{ inputs.lint }}
         shell: bash
         run: npx nx affected:lint --base=remotes/origin/main
 
-      # Run the tests
-      - name: Run Affected Tests
-        shell: bash
-        if: ${{ !inputs.codecov }}
-        run: npx nx affected:test --base=remotes/origin/main
-
       # We only run the affected test
       - name: Run Affected Tests
+        if: ${{ !inputs.codecov }}
+        shell: bash
+        run: npx nx affected:test --base=remotes/origin/main
+
+      # Run the tests and the coverage
+      - name: Run Tests with Coverage
         shell: bash
         if: ${{ inputs.codecov }}
         run:

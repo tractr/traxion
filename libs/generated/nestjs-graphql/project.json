@@ -1,13 +1,13 @@
 {
   "implicitDependencies": [
-    "hapify-templates-nestjs-graphql",
     "common",
-    "generated-nestjs-models-common",
-    "nestjs-graphql"
+    "nestjs-graphql",
+    "hapify-templates-nestjs-graphql",
+    "generated-casl",
+    "generated-nestjs-models-common"
   ],
   "prefix": "tractr",
   "projectType": "library",
-  "root": "libs/generated/nestjs-graphql",
   "sourceRoot": "libs/generated/nestjs-graphql/src",
   "tags": [],
   "targets": {
@@ -46,7 +46,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/generated/nestjs-graphql/jest.config.js",
+        "jestConfig": "libs/generated/nestjs-graphql/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/generated/nestjs-graphql"]

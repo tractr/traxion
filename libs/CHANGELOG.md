@@ -2,6 +2,137 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.49.0](https://github.com/tractr/stack/compare/v1.48.4...v1.49.0) (2022-07-06)
+
+
+### Bug Fixes
+
+* **@tractr/hapify-templates-prisma:** update schema metadata for type number ([#458](https://github.com/tractr/stack/issues/458)) ([e163f60](https://github.com/tractr/stack/commit/e163f603375af3887f136b618e3a294f789118b0))
+
+
+### Features
+
+* add default value for cookie TTL ([#456](https://github.com/tractr/stack/issues/456)) ([cfac188](https://github.com/tractr/stack/commit/cfac188260b461f9244d122864425246bd9a2df3))
+
+
+
+## [1.48.4](https://github.com/tractr/stack/compare/v1.48.3...v1.48.4) (2022-07-04)
+
+
+### Bug Fixes
+
+* add ownership props dynamicly ([#452](https://github.com/tractr/stack/issues/452)) ([c001c8a](https://github.com/tractr/stack/commit/c001c8af17148d29e0f2ff6a9432ae3d6cfa754b))
+
+
+
+## [1.48.3](https://github.com/tractr/stack/compare/v1.48.2...v1.48.3) (2022-07-04)
+
+
+### Bug Fixes
+
+* update nestjs models rest to accept FilterType optional field ([#454](https://github.com/tractr/stack/issues/454)) ([0207b59](https://github.com/tractr/stack/commit/0207b59f06834657e8f67c6cc6fb4026630bbd8c))
+
+
+
+## [1.48.2](https://github.com/tractr/stack/compare/v1.48.1...v1.48.2) (2022-06-22)
+
+
+### Bug Fixes
+
+* update commit-config bin path ([037952f](https://github.com/tractr/stack/commit/037952f1f3b1a71ce6b6c79b14bd47a132b7c641))
+
+
+
+## [1.48.1](https://github.com/tractr/stack/compare/v1.48.0...v1.48.1) (2022-06-22)
+
+
+### Bug Fixes
+
+* update rest dtos to put FilterType field optional [#451](https://github.com/tractr/stack/issues/451) ([7346438](https://github.com/tractr/stack/commit/7346438bdde41309e9b6a00e79f170f54f973843))
+
+
+
+# [1.48.0](https://github.com/tractr/stack/compare/v1.47.0...v1.48.0) (2022-06-22)
+
+
+### Bug Fixes
+
+* remove check password policy on create body dto ([#442](https://github.com/tractr/stack/issues/442)) ([0b8fb87](https://github.com/tractr/stack/commit/0b8fb871c1c9771a529777483aa5a4336d163ad4))
+* update the Module Options Helpers to be able to use the default options from class validator ([#448](https://github.com/tractr/stack/issues/448)) ([d82a65d](https://github.com/tractr/stack/commit/d82a65dd7358decc05dbaaa4b8fde037a6c05657))
+
+
+### Features
+
+* add rest api search capability to the rest api ([#441](https://github.com/tractr/stack/issues/441)) ([ad64247](https://github.com/tractr/stack/commit/ad642474725c4c772806f5c90a410a634066c4c2))
+* **common:** improve arrayChanges to keep object references ([#443](https://github.com/tractr/stack/issues/443)) ([8bbea47](https://github.com/tractr/stack/commit/8bbea47d6f5c25b7ca5eae332d4be563b171af23))
+* manage fields with ownership and internal options ([#445](https://github.com/tractr/stack/issues/445)) ([7e0d755](https://github.com/tractr/stack/commit/7e0d755e0c589ee4f7e292c12202d81fe610f0f3))
+* update stack's packages ([#444](https://github.com/tractr/stack/issues/444)) ([703410a](https://github.com/tractr/stack/commit/703410afd5a2761095620652f063c292305e4cdc))
+
+
+
+# [1.47.0](https://github.com/tractr/stack/compare/v1.46.3...v1.47.0) (2022-06-07)
+
+
+### Features
+
+* add onDelete and onUpdate capability to prisma templates ([#438](https://github.com/tractr/stack/issues/438)) ([4682ef8](https://github.com/tractr/stack/commit/4682ef8f9c816a0ce309c99947154315d41795b3))
+
+
+
+## [1.46.3](https://github.com/tractr/stack/compare/v1.46.2...v1.46.3) (2022-06-06)
+
+
+### Bug Fixes
+
+* update entity relation react admin ([#436](https://github.com/tractr/stack/issues/436)) ([dc71704](https://github.com/tractr/stack/commit/dc71704b197db904da051f5ddd3505f52c6e17e6))
+
+
+
+## [1.46.2](https://github.com/tractr/stack/compare/v1.46.1...v1.46.2) (2022-06-06)
+
+
+### Bug Fixes
+
+* remove atomic update on multiple enum graphql ([3f1791a](https://github.com/tractr/stack/commit/3f1791adca25ad32f5d43613f87cef251d604414))
+
+
+
+## [1.46.1](https://github.com/tractr/stack/compare/v1.46.0...v1.46.1) (2022-06-06)
+
+
+### Bug Fixes
+
+* update the generated test for nestjs graphql ([#437](https://github.com/tractr/stack/issues/437)) ([658ccc7](https://github.com/tractr/stack/commit/658ccc74f92a18a924c6fdd01a5775dadbd9cea6))
+
+
+
+# [1.46.0](https://github.com/tractr/stack/compare/v1.45.5...v1.46.0) (2022-06-02)
+
+
+### Features
+
+* add casl to nestjs graphql ([#435](https://github.com/tractr/stack/issues/435)) ([77b5981](https://github.com/tractr/stack/commit/77b598104078db844e6ca3292a73fc682a9e0483))
+
+
+
+## [1.45.5](https://github.com/tractr/stack/compare/v1.45.4...v1.45.5) (2022-05-31)
+
+
+### Bug Fixes
+
+* update props linked to relation in react admin ([#434](https://github.com/tractr/stack/issues/434)) ([46a1b55](https://github.com/tractr/stack/commit/46a1b551c1a108d21a158087712b2d107258e690))
+
+
+
+## [1.45.4](https://github.com/tractr/stack/compare/v1.45.3...v1.45.4) (2022-05-30)
+
+
+### Bug Fixes
+
+* use session storage only on production ([#433](https://github.com/tractr/stack/issues/433)) ([1297aa2](https://github.com/tractr/stack/commit/1297aa2cb8d86161879a607427c2b94bd1092322))
+
+
+
 ## [1.45.3](https://github.com/tractr/stack/compare/v1.45.2...v1.45.3) (2022-05-25)
 
 

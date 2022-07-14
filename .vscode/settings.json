@@ -12,7 +12,10 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cSpell.words": [
+    "buildable",
     "casl",
+    "cdktf",
+    "codecov",
     "Concat",
     "dbml",
     "dtos",
@@ -25,6 +28,7 @@
     "nrwl",
     "Rext",
     "tractr",
+    "unittests",
     "Unsubscriber",
     "upsert"
   ],

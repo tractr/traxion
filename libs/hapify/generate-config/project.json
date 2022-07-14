@@ -1,11 +1,10 @@
 {
   "projectType": "library",
-  "root": "libs/hapify/generate-config",
   "sourceRoot": "libs/hapify/generate-config/src",
   "tags": ["scope:config"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/hapify/generate-config/*.md"],
         "main": "libs/hapify/generate-config/src/index.ts",
@@ -20,7 +19,7 @@
       "options": {
         "codeCoverage": true,
         "coverageReporters": ["text", "json"],
-        "jestConfig": "libs/hapify/generate-config/jest.config.js",
+        "jestConfig": "libs/hapify/generate-config/jest.config.ts",
         "passWithNoTests": true,
         "skipNxCache": true
       }
@@ -41,7 +40,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/hapify/generate-config/jest.config.js",
+        "jestConfig": "libs/hapify/generate-config/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/hapify/generate-config"]

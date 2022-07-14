@@ -1,11 +1,10 @@
 {
   "projectType": "library",
-  "root": "libs/terraform/group/network",
   "sourceRoot": "libs/terraform/group/network/src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/terraform/group/network/*.md"],
         "main": "libs/terraform/group/network/src/index.ts",
@@ -31,7 +30,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/terraform/group/network/jest.config.js",
+        "jestConfig": "libs/terraform/group/network/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/terraform/group/network"]

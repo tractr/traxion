@@ -1,17 +1,18 @@
 {
   "projectType": "library",
-  "root": "libs/nestjs/request-timestamp",
   "sourceRoot": "libs/nestjs/request-timestamp/src",
   "tags": ["scope:nestjs"],
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/nestjs/request-timestamp/*.md"],
+        "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/request-timestamp/src/index.ts",
         "outputPath": "dist/libs/nestjs/request-timestamp",
         "packageJson": "libs/nestjs/request-timestamp/package.json",
-        "tsConfig": "libs/nestjs/request-timestamp/tsconfig.lib.json"
+        "tsConfig": "libs/nestjs/request-timestamp/tsconfig.lib.json",
+        "updateBuildableProjectDepsInPackageJson": true
       },
       "outputs": ["{options.outputPath}"]
     },
@@ -31,7 +32,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/nestjs/request-timestamp/jest.config.js",
+        "jestConfig": "libs/nestjs/request-timestamp/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/nestjs/request-timestamp"]

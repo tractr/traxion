@@ -17,7 +17,7 @@
 <<# If the field has a relation oneOne or oneMany >>
 <<# We generate the first relation prisma field >>
     <<=getMetadata(model, field)>>
-    <<field camel>> <<field.model pascal>><<if field nullable>>?<<endif>> @relation("<<model pascal>>.<<field camel>>.<<field.model pascal>>.<<-field backRelation camel>>",fields: [<<field camel>><<=getReferencedEntityPrimary(field).names.pascal>>], references: [<<=getReferencedEntityPrimary(field).names.camel>>])
+    <<field camel>> <<field.model pascal>><<if field nullable>>?<<endif>> @relation("<<model pascal>>.<<field camel>>.<<field.model pascal>>.<<-field backRelation camel>>",fields: [<<field camel>><<=getReferencedEntityPrimary(field).names.pascal>>], references: [<<=getReferencedEntityPrimary(field).names.camel>>]<<=getOnDelete(field)>><<=getOnUpdate(field)>>)
  
     <<=getMetadata(model, field)>>
     <<field camel>><<=getReferencedEntityPrimary(field).names.pascal>> <<=getReferencedEntityPrimaryType(field)>>
@@ -72,6 +72,22 @@ function getReferencedEntityPrimary(f) {
 >>>
 
 <<<
+function getOnDelete(f) {
+  if (f.meta.onDelete){
+    return ", onDelete: " + f.meta.onDelete.raw;}
+  return "";
+}
+>>>
+
+<<<
+function getOnUpdate(f) {
+  if (f.meta.onUpdate)
+    return ", onUpdate: " + f.meta.onUpdate.raw;
+  return "";
+}
+>>>
+
+<<<
 function getMetadata(model, f) {
   let out = "";
 
@@ -88,21 +104,32 @@ function getMetadata(model, f) {
         default:
           out += "/// @Validator.MaxLength(" + (f.meta.maxLength ? f.meta.maxLength : 255) + ")\n";
       }
+      break;
+
     case 'number':
       switch(f.subtype) {
         case 'integer':
           out += "/// @Validator.IsInt()\n";
+          break;
         case 'float':
-          out += "/// @Validator.IsFloat()\n";
+          out += "/// @Validator.IsNumber()\n";
+          break;
         case 'latitude':
           out += "/// @Validator.IsLatitude()\n";
+          break;
         case 'longitude':
           out += "/// @Validator.IsLongitude()\n";
+          break;
+        default:
+          out += "/// @Validator.IsNumber()\n";
+          break;
       }
       break;
+
     case 'boolean':
         out += "/// @Validator.IsBoolean()\n";
       break;
+
     case 'datetime':
       switch(f.subtype) {
         case 'date':
@@ -112,11 +139,14 @@ function getMetadata(model, f) {
           break;
       }
       break;
+
     case 'entity':
       break;
+
     case 'object':
           out += "/// @Validator.IsObject()\n";
       break;
+
     case 'file':n
       switch(f.subtype) {
         case 'image':
@@ -187,6 +217,10 @@ function prismaType(f, m) {
               case 'time': return out += " @db.Time(3)";
           }
       default: return out;
+  }
+
+  if (f.meta.default) {
+    out += " @default(" + f.meta.default + ")";
   }
 
 }
