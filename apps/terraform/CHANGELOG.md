@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.50.0](https://github.com/tractr/stack/compare/v1.49.0...v1.50.0) (2022-07-14)
+
+
+### Features
+
+* **terraform-admin-service:** add admin service as library ([#459](https://github.com/tractr/stack/issues/459)) ([66e670a](https://github.com/tractr/stack/commit/66e670a048d56c15e0e1187c202e0d0976b2d50b))
+
+
+
 # [1.49.0](https://github.com/tractr/stack/compare/v1.48.4...v1.49.0) (2022-07-06)
 
 
