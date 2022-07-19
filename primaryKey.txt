@@ -1,0 +1,41 @@
+primaryKey
+  // no unique key
+  // no label
+  // no nullable
+  // no list
+  searchable
+  sortable
+  // no hidden
+  system
+  owner
+
+uniqueKey
+  // no primary key
+  label
+  nullable
+  // no list
+  searchable
+  sortable
+  hidden
+  system
+  owner
+
+label
+nullable
+list
+searchable
+sortable
+hidden
+system
+ownerId
+
+Unused:
+embeded
+restricted
+
+String
+  Email
+  Password
+  Url
+  Text
+  !RichText

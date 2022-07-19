@@ -8,7 +8,7 @@ const modules = [
     <<model pascal>>Module,
   <<endfor>>
 ];
-
+	
  
 @Module({
   imports:modules,

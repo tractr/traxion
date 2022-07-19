@@ -1,5 +1,5 @@
 import { Subjects as CaslPrismaSubjects } from '@casl/prisma';
-
+	
 import { 
   <<for Models model>>
   <<model pascal>>,

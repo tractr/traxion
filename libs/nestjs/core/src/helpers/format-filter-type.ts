@@ -1,48 +1,74 @@
 import {
+  ArrayFilterProps,
   BoolFilterProps,
   DateTimeFilterProps,
-  IntFilterProps,
+  EnumFilterProps,
   JsonFilterProps,
+  NumberFilterProps,
   StringFilterProps,
+  transformStringToArray,
 } from '@tractr/common';
 
 export function formatFilterType<
-  T extends 'datetime' | 'boolean' | 'json' | 'string' | 'integer',
->(value: string, type: T) {
-  const [filterType, ...rest] = value.split(':').reverse();
+  T extends 'datetime' | 'boolean' | 'json' | 'string' | 'number' | 'enum',
+>(value: unknown, type: T, multiple = false) {
+  const [filterType, ...rest] =
+    typeof value === 'string' ? value.split(':').reverse() : [undefined, value];
   let filter = 'equals';
 
-  if (type === 'datetime') {
-    if ((DateTimeFilterProps as string[]).includes(filterType))
-      filter = filterType;
-    else rest.unshift(filterType);
+  let filterProps: string[] = [];
+  let transform = (v: any) => v;
 
-    return { [filter]: new Date(rest.reverse().join(':')) };
-  }
-  if (type === 'boolean') {
-    if ((BoolFilterProps as string[]).includes(filterType)) filter = filterType;
-    else rest.unshift(filterType);
+  switch (type) {
+    case 'datetime':
+      filterProps = DateTimeFilterProps;
+      transform = (v: unknown) => (typeof v === 'string' ? new Date(v) : v);
+      break;
+    case 'boolean':
+      filterProps = BoolFilterProps;
+      transform = (v: unknown) => (typeof v === 'string' ? v === 'true' : v);
+      break;
+    case 'json':
+      filterProps = JsonFilterProps;
+      transform = (v: string) => (typeof v === 'string' ? JSON.parse(v) : v);
+      break;
+    case 'string':
+      filterProps = StringFilterProps;
+      break;
+    case 'number':
+      filterProps = NumberFilterProps;
+      transform = (v: string) => (typeof v === 'string' ? Number(v) : v);
+      break;
+    case 'enum':
+      filterProps = EnumFilterProps;
+      filter = 'hasSome';
+      break;
 
-    return { [filter]: rest.reverse().join(':') === 'true' };
+    default:
+      throw new Error('type not supported');
   }
-  if (type === 'json') {
-    if ((JsonFilterProps as string[]).includes(filterType)) filter = filterType;
-    else rest.unshift(filterType);
 
-    return { [filter]: JSON.parse(rest.reverse().join(':')) };
-  }
-  if (type === 'string') {
-    if ((StringFilterProps as string[]).includes(filterType))
-      filter = filterType;
-    else rest.unshift(filterType);
+  if (multiple) filterProps = ArrayFilterProps;
 
-    return { [filter]: rest.reverse().join(':') };
+  let valueToTransform = rest[0];
+  if (filterProps.length > 0 && filterType && filterProps.includes(filterType))
+    filter = filterType;
+  else if (typeof filterType !== 'undefined') {
+    rest.unshift(filterType);
+    valueToTransform = rest.reverse().join(':');
   }
-  if (type === 'integer') {
-    if ((IntFilterProps as string[]).includes(filterType)) filter = filterType;
-    else rest.unshift(filterType);
 
-    return { [filter]: parseInt(rest.reverse().join(':'), 10) };
+  if (multiple) {
+    const arrayToTransform = transformStringToArray(valueToTransform);
+    if (!Array.isArray(arrayToTransform))
+      throw new Error('Invalid array to filter');
+
+    return {
+      [filter]: arrayToTransform.map(transform),
+    };
   }
-  throw new Error('type not supported');
+
+  return {
+    [filter]: transform(valueToTransform),
+  };
 }

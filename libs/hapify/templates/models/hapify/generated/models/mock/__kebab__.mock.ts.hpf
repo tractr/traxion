@@ -1,7 +1,7 @@
 import { 
   <<Model pascal>>,
 } from '..';
-
+	
 <<if Fields enum>>
 import {
   <<for Fields enum enumField>>
@@ -9,40 +9,40 @@ import {
   <<endfor>>
 } from '..';
 <<endif>>
-
+	
 <<if Fields object>>
 import { JsonObject } from '@tractr/common';
 <<endif>>
-
+	
 import {
-
+	
   <<if Fields primary or entity or number or boolean>>
   datatype,
   <<endif>>
-
+	
   <<if Fields enum>>
   random,
   <<endif>>
-
+	
   <<if Fields email or password or url>>
   internet,
   <<endif>>
-
+	
   <<if Fields object or (string and not (primary or email or password or url))>>
   lorem,
   <<endif>>
-
+	
   <<if Fields datetime>>
   date,
   <<endif>>
-
+	
 } from 'faker';
-
+	
 
 <<if Fields unique>>
 import { <<Model pascal>>UniqueValues } from '..';
 <<endif>>
-
+	
 
   
 <<for Fields field>>
@@ -59,7 +59,7 @@ export function mock<<Model pascal>><<field pascal>>IdFactory(): <<=getMockRetur
   <<else>>
 export function mock<<Model pascal>><<field pascal>>IdsFactory(): string[] {
   return <<=getFaker(field)>>;
-
+	
 }
     
   <<endif>>
@@ -76,7 +76,7 @@ export function mock<<Model pascal>>Factory(override: Partial< <<Model pascal>> 
     ...override,
   };
 }
-
+	
 
 export function mock<<Model pascal>>sFactory(override: Partial< <<Model pascal>> > = {}, quantity: number = 1): <<Model pascal>>[] {
   <<if Fields not internal and not boolean and not enum and unique>>
@@ -130,7 +130,7 @@ export function mock<<Model pascal>>sFactory(override: Partial< <<Model pascal>>
     return [...Array(quantity)].map(() => mock<<Model pascal>>Factory(override));
   <<endif>>
 }
-
+	
 <<<
 function getBaseFaker(f) {
   if (f.primary && f.type === 'string') return 'datatype.uuid()';
@@ -170,7 +170,7 @@ function getMockReturnType(f) {
   return out;
 }
 >>>
-
+	
 <<if Fields object>>
 function generateFakeObject() {
  const countKeys = Math.floor(Math.random() * 10);
@@ -181,4 +181,4 @@ function generateFakeObject() {
   return obj;
 }
 <<endif>>
-
+	

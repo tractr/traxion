@@ -1,6 +1,6 @@
 
 <<if Fields unique>>
-
+	
 <<if Fields enum>>
 import {
   <<for Fields enum and unique enumField>>
@@ -8,11 +8,11 @@ import {
   <<endfor>>
 } from '../enums';
 <<endif>>
-
+	
 <<if Fields object>>
 import { JsonObject } from '@tractr/common';
 <<endif>>
-
+	
 
 export type <<Model pascal>>UniqueValues = {
   <<for Fields not internal and not boolean and not enum and unique field>>
@@ -24,7 +24,7 @@ export type <<Model pascal>>UniqueValues = {
   <<endfor>>
 };
 <<endif>>
-
+	
 <<<
 function getType(f) {
   if (f.type === "boolean") return "boolean";

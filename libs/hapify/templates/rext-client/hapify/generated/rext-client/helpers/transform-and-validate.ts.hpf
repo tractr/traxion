@@ -62,7 +62,7 @@ export function transformAndValidate<T>(
     if (errors.length > 0) {
       throw errors;
     }
-
+	
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return validatedConfig as any;
   };
@@ -86,7 +86,7 @@ export function isAlike<T>(
   } = {},
 ): object is T {
   if (object instanceof classValidator) return true;
-
+	
   try {
     transformAndValidate(classValidator, options)(object);
     return true;

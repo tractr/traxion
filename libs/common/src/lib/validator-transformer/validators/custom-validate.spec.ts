@@ -36,7 +36,7 @@ describe('CustomValidator decorator', () => {
 
     await validate(car);
 
-    expect(mockedPredicate).toHaveBeenCalledWith(car);
+    expect(mockedPredicate).toHaveBeenCalledWith(car, 'Ford', 'Car');
   });
 
   it('should return an error with a message if the predicate function passed in parameter return false', async () => {

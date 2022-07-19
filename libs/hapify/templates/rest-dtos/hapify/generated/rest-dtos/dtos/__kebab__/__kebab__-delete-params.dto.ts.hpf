@@ -26,4 +26,4 @@ export class <<Model pascal>>DeleteParamsDto {
   <<endif>>
 <<endfor>>
 }
-
+	

@@ -42,9 +42,9 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
     getList: async (resource, params) => {
       const { page, perPage } = params.pagination;
       const { order } = params.sort;
-
+	
       // TODO make the filter works
-
+	
       const total = await lastValueFrom(
         rextClient[resource as unknown as ResourceType].count$(
           {},
@@ -60,7 +60,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
       );
       return { data, total };
     },
-
+	
 
  
     getOne: (resource, params) => 
@@ -115,7 +115,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
     update: (resource, params) => {
       const resourceName = resource as unknown as ResourceType;
       const toUpdate = formatData[resourceName]({ ...params.data });
-
+	
       return lastValueFrom(
         (
           rextClient[resource as unknown as ResourceType].patch$({

@@ -8,7 +8,7 @@ import {
 <<endif>>
   IsOptional,
 } from 'class-validator';
-
+	
 <<if Fields primary and number>>
 import { TransformStringToInt } from '@tractr/common';
 <<endif>>
