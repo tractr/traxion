@@ -3,6 +3,11 @@ module.exports = {
   description: 'Generate the models for a Nestjs application',
   templates: [
     {
+      path: 'generated/nestjs-models-rest/index.spec.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
       path: 'generated/nestjs-models-rest/index.ts',
       engine: 'hpf',
       input: 'all',
