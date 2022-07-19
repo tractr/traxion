@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.50.1](https://github.com/tractr/stack/compare/v1.50.0...v1.50.1) (2022-07-19)
+
+
+### Bug Fixes
+
+* update casl templates to handle deep ownership checks ([#460](https://github.com/tractr/stack/issues/460)) ([da4072d](https://github.com/tractr/stack/commit/da4072da887c921558113f0cb9dda2b5924e2d02))
+
+
+
 # [1.50.0](https://github.com/tractr/stack/compare/v1.49.0...v1.50.0) (2022-07-14)
 
 
