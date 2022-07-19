@@ -89,6 +89,7 @@ for (const field of fields) {
   if (
     field.ownership &&
     field.internal &&
+    !field.primary &&
     field.meta.ownerStringPath !== 'user.id'
   ) {
     res.errors.push(

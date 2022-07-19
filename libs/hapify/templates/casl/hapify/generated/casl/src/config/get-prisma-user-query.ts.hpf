@@ -87,14 +87,14 @@ export function getSelectPrismaUserQuery(): Prisma.UserSelect {
                   selectCurrentPath,
                   typesCurrentPath,
                 ],
-                key
+                key, index
               ) => {
                 let newModel;
                 // We first check inside the current model if key is a field
                 let field = currentModel?.fields.list.find(
                   ({ names }) => names.camel === key
                 );
-                newModel = field?.model;
+                newModel = root.find(m => m.names.camel === field?.model?.names.camel);
   
                 if (!field) {
                   // If not we need to check the backRelations of all models that have fields link with the currentModel
@@ -117,7 +117,7 @@ export function getSelectPrismaUserQuery(): Prisma.UserSelect {
                   field = backRelations[0]?.fields.list.find(
                     ({ meta }) => meta.backRelation?.raw === key
                   );
-                  newModel = backRelations[0];
+                  newModel = root.find(m => m.names.camel === backRelations[0].names.camel);
                 }
   
                 if (!field)
@@ -164,6 +164,9 @@ export function getSelectPrismaUserQuery(): Prisma.UserSelect {
                   typesToAdd
                 );
   
+              if(!newModel && index !== (path.length - 1))
+                    throw new Error(`"${key}" key in "user.${path.join('.')}" path does not match any relation`)
+
                 return [
                   select,
                   modelListToImport,
@@ -260,4 +263,3 @@ export function getSelectPrismaUserQuery(): Prisma.UserSelect {
     return output;
 }
 >>>
- 
