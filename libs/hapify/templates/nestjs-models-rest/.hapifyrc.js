@@ -28,6 +28,11 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'generated/nestjs-models-rest/src/{kebab}/controllers/{kebab}.controller.spec.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'generated/nestjs-models-rest/src/{kebab}/controllers/{kebab}.controller.ts',
       engine: 'hpf',
       input: 'one',

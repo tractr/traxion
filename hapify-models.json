@@ -394,6 +394,102 @@
     },
     {
       "accesses": {
+        "count": "guest",
+        "create": "guest",
+        "read": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "update": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "name": "default",
+          "properties": [],
+          "type": "string"
+        },
+        {
+          "name": "email",
+          "properties": [],
+          "subtype": "email",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "properties": [],
+          "subtype": "password",
+          "type": "string"
+        },
+        {
+          "name": "url",
+          "properties": [],
+          "subtype": "url",
+          "type": "string"
+        },
+        {
+          "name": "text",
+          "properties": [],
+          "subtype": "text",
+          "type": "string"
+        }
+      ],
+      "id": "506e484d-2459-d558-32d7-f28ddf7aff93",
+      "name": "String Model"
+    },
+    {
+      "accesses": {
+        "count": "guest",
+        "create": "guest",
+        "read": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "update": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "name": "default",
+          "properties": ["unique"],
+          "type": "string"
+        },
+        {
+          "name": "email",
+          "properties": ["unique"],
+          "subtype": "email",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "properties": ["unique"],
+          "subtype": "password",
+          "type": "string"
+        },
+        {
+          "name": "url",
+          "properties": ["unique"],
+          "subtype": "url",
+          "type": "string"
+        },
+        {
+          "name": "text",
+          "properties": ["unique"],
+          "subtype": "text",
+          "type": "string"
+        }
+      ],
+      "id": "4192dd58-b152-e85f-1442-61c9ece8b893",
+      "name": "String Model Unique"
+    },
+    {
+      "accesses": {
         "count": "owner",
         "create": "auth",
         "read": "guest",

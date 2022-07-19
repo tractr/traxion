@@ -23,7 +23,7 @@ import {
     Public,
   <<endif>>
 } from '@tractr/nestjs-core';
-
+	
 import { <<if Fields ownership >><<<if (root.names.pascal !== 'User') {>>><<Model pascal>>, <<<}>>>User, <<endif>>Prisma } from '@prisma/client';
 import { <<if Fields ownership >>Actions, AppAbility, <<endif>>Permission } from '../../../../casl';
 import { <<Model pascal>>Service, <<Model constant>>_SERVICE } from '../../../../nestjs-models-common';
@@ -44,7 +44,7 @@ import {
 } from '../../../../rest-dtos';
 import { <<Model constant>>_REST_DTO_SERVICE } from '../<<Model kebab>>-rest.constant';
 import { <<Model pascal>>RestDtoService } from '../services';
-
+	
 <<if Fields ownership >>
 import { accessibleBy } from '@casl/prisma';
 import { ForbiddenError, subject } from '@casl/ability';
@@ -76,7 +76,7 @@ export class <<Model pascal>>Controller {
     <<if Fields ownership and not primary>>@CurrentAbilities() abilities: AppAbility,<<endif>>
     <<if Fields ownership and not primary and internal>>@CurrentUser() user: User,<<endif>>    
   ) {
-
+	
     const formattedParams = this.<<Model camel>>RestDtoService.formatCreateDto(
       bodyDto,
       <<if Fields ownership and internal and not primary>>user,<<endif>>
@@ -96,7 +96,7 @@ export class <<Model pascal>>Controller {
       );
     }
     <<endif>>
-
+	
     return this.<<Model camel>>Service.create(formattedParams as Prisma.<<Model pascal>>CreateArgs);
   }
  
@@ -289,7 +289,7 @@ export class <<Model pascal>>Controller {
         <<=root.fields.primary.names.camel>>: paramsDto.id,
       },
     });
-
+	
     const formattedParams = this.<<Model camel>>RestDtoService.formatUpsertDtos(
       paramsDto,
       bodyDto,
@@ -297,16 +297,19 @@ export class <<Model pascal>>Controller {
     );
     
     <<if Fields ownership and not primary>>
-    ForbiddenError.from(abilities).throwUnlessCan(
-      paramsDto.id ? Actions.UPDATE : Actions.CREATE,
-      subject('<<Model pascal>>', paramsDto.id && <<Model camel>>
-        ? <<Model camel>>
-        : this.<<Model camel>>RestDtoService.transformCreateDtoTo<<Model pascal>>(
-            bodyDto,
-            <<if Fields ownership and not primary and internal>>user,<<endif>>
-          ) as <<Model pascal>>
-      )
-    );
+    if (abilities) {
+      ForbiddenError.from(abilities).throwUnlessCan(
+        paramsDto.id && <<Model camel>> ? Actions.UPDATE : Actions.CREATE,
+        subject('<<Model pascal>>', paramsDto.id && <<Model camel>>
+          ? <<Model camel>>
+          : this.<<Model camel>>RestDtoService.transformUpsertDtoTo<<Model pascal>>(
+              paramsDto,
+              bodyDto,
+              <<if Fields ownership and not primary and internal>>user,<<endif>>
+            ) as <<Model pascal>>
+        )
+      );
+    }
     <<endif>>
  
     return this.<<Model camel>>Service.upsert(formattedParams as Prisma.<<Model pascal>>UpsertArgs);

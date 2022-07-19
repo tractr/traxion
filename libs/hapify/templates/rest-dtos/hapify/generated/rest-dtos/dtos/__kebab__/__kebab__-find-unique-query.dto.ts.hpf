@@ -9,8 +9,11 @@ import {
 } from 'class-validator';
    
 import { <<Model pascal>>Include } from '../../../models';
-
+	
 export class <<Model pascal>>FindUniqueQueryDto {
+  /**
+   *  @deprecated will be removed in v2, use multi request or graphQL instead
+   */
   @TransformStringToArray()
   @IsString({ each: true })
   @IsIn(<<Model pascal>>Include,

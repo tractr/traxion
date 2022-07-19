@@ -59,7 +59,7 @@ export const rolePermissions: Record<
           // relation = { ...relation, ...getFieldConditionsOnRelation(field) };
           relation = { ...relation };
         }
-
+	
         return [ids, relation];
       }, [{}, {}])
       .filter((conditions) => JSON.stringify(conditions) !== '{}')
@@ -68,7 +68,7 @@ export const rolePermissions: Record<
       })`)
       .join('\n    ');
   }
-
+	
   function isFieldAnArray(field) {
     return field.type === 'entity'
       && (
@@ -87,7 +87,7 @@ export const rolePermissions: Record<
       }
     };
   }
-
+	
   function getFieldConditionsOnId(field) {
     return {
       [field.names.camel === 'id' ? 'id' : `${field.names.camel}Id` ]: {
@@ -95,7 +95,7 @@ export const rolePermissions: Record<
       }
     };
   }
-
+	
   function getFieldConditionsOnRelation(field) {
     return field.names.camel !== 'id' ? {
       [`'${field.names.camel}.id'`]: {

@@ -25,7 +25,7 @@ export const <<Model pascal>>Create = (props: CreateProps) => (
     </SimpleForm>
   </Create>
 );
-
+	
 export const <<Model pascal>>Edit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
@@ -39,9 +39,9 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
     </SimpleForm>
   </Edit>
 );
-
+	
 <<< function printInput(field) { >>>
-
+	
 <<if field string>>
     <<if field rich>>
       <RichTextInput
@@ -98,16 +98,16 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
 <<else>>
       <TextInput
 <<endif>>
-
+	
     <<if field not nullable>>
         validate={required()}
     <<endif>>
         source="<<field camel>>"
         label="<<field capital>>"
       />
-
+	
 <<< } >>>
-
+	
 <<< function printEntityInput(field) { >>>
 <<if field not manyMany>>
     <<if field multiple>>
@@ -126,9 +126,9 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
     </ReferenceInput>
     <<endif>>
 <<endif>>
-
+	
 <<< } >>>
-
+	
 <<<
 function fieldInput(field) {
     switch(field.type) {

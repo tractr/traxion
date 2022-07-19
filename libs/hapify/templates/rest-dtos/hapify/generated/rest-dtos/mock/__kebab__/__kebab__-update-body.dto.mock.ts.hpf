@@ -11,14 +11,14 @@ import {
   <<endif>>
 <<endfor>>
 } from '../../../models/mock';
-
+	
 <<if Fields unique>>
 import { <<Model pascal>>UniqueValues } from '../../../models';
 <<endif>>
   
-function mock<<Model pascal>>UpdateBodyDtoFactory(
+export function mock<<Model pascal>>UpdateBodyDtoFactory(
   override: Partial<<<Model pascal>>UpdateBodyDto> = {}
-): Required< <<Model pascal>>UpdateBodyDto> {
+): <<Model pascal>>UpdateBodyDto {
   return {
   <<for Fields not internal field>>
     <<if field not entity>>
@@ -32,8 +32,8 @@ function mock<<Model pascal>>UpdateBodyDtoFactory(
     ...override,
   };
 }
-
-export function mock<<Model pascal>>sUpdateBodyDtoFactory(override: Partial< <<Model pascal>>UpdateBodyDto > = {}, quantity: number = 1): Required< <<Model pascal>>UpdateBodyDto[] > {
+	
+export function mock<<Model pascal>>sUpdateBodyDtoFactory(override: Partial< <<Model pascal>>UpdateBodyDto > = {}, quantity: number = 1): <<Model pascal>>UpdateBodyDto[] {
   <<if Fields not internal and not boolean and not enum and unique>>
   const uniqueValues: <<Model pascal>>UniqueValues = {
     <<for Fields not internal and not boolean and not enum and unique field>>
@@ -45,14 +45,14 @@ export function mock<<Model pascal>>sUpdateBodyDtoFactory(override: Partial< <<M
     <<endfor>> 
   };
   return [...Array(quantity)].map(() => {
-    let tmp<<Model pascal>> = mock<<Model pascal>>UpdateBodyDtoFactory(override);
+    let <<Model camel>> = mock<<Model pascal>>UpdateBodyDtoFactory(override);
     while (
     <<<root.f.unique.filter((e) => !e.internal && e.type !== 'boolean' && e.type !== 'enum').forEach((unique,index) => {>>>
       (
       <<<if(unique.type === 'entity'){>>>
-      tmp<<Model pascal>>.<<unique camel>> && uniqueValues.<<unique camel>>Id.includes(tmp<<Model pascal>>.<<unique camel>>))
+      <<Model camel>>.<<unique camel>> && uniqueValues.<<unique camel>>Id.includes(<<Model camel>>.<<unique camel>>))
       <<<}else{>>>
-      uniqueValues.<<unique camel>>.includes(tmp<<Model pascal>>.<<unique camel>>))
+      typeof <<Model camel>>.<<unique camel>> === 'undefined' || uniqueValues.<<unique camel>>.includes(<<Model camel>>.<<unique camel>>))
       <<<}>>>
       <<<if(index < root.f.unique.filter((e) => !e.internal && e.type !== 'boolean' && e.type !== 'enum').length - 1){>>>
       ||
@@ -70,16 +70,16 @@ export function mock<<Model pascal>>sUpdateBodyDtoFactory(override: Partial< <<M
         }
         <<endif>>
       <<endfor>> 
-      tmp<<Model pascal>> = mock<<Model pascal>>UpdateBodyDtoFactory(override);
+      <<Model camel>> = mock<<Model pascal>>UpdateBodyDtoFactory(override);
     }
     <<for Fields not internal and not boolean and not enum and unique field>>
       <<if field not entity>>
-      uniqueValues.<<field camel>>.push(tmp<<Model pascal>>.<<field camel>>);
+      uniqueValues.<<field camel>>.push(<<Model camel>>.<<field camel>>);
       <<else>>
-      if(tmp<<Model pascal>>.<<field camel>>) uniqueValues.<<field camel>>Id.push(tmp<<Model pascal>>.<<field camel>>);
+      if(<<Model camel>>.<<field camel>>) uniqueValues.<<field camel>>Id.push(<<Model camel>>.<<field camel>>);
       <<endif>>
     <<endfor>>
-    return tmp<<Model pascal>>;
+    return <<Model camel>>;
   });
   <<else>>
     return [...Array(quantity)].map(() => mock<<Model pascal>>UpdateBodyDtoFactory(override));
