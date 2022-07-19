@@ -154,6 +154,49 @@ describe('<<Model pascal>>Controller', () => {
         },
       });
     });
+
+    it('should create a <<Model camel>> and check the right with casl', async () => {
+      const <<Model camel>>: <<Model pascal>>CreateBodyDto = mock<<Model pascal>>CreateBodyDtoFactory();
+	
+      <<if Fields ownership and not primary and internal>>
+      <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
+      mockReqUser.mockReturnValue(mockUser);
+      <<endif>>
+
+      const { can, build } = new AbilityBuilder(AppAbility);
+      can(Actions.CREATE, '<<Model pascal>>');
+      mockReqAbilities.mockReturnValue(build());
+	
+      await request(app.getHttpServer()).post('/<<Model kebab>>').send(<<Model camel>>).expect(201);
+	
+      expect(mock<<Model pascal>>DatabaseService.create).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>DatabaseService.create).toHaveBeenCalledWith({
+        data: {
+          <<for Fields not ownership and not primary and internal field>>
+          <<field camel>>:<<< if (field.meta.default) { >>><<-field default raw>><<< } else { >>>
+            <<if field datetime>>expect.any(Date)
+            <<elseif field boolean>>false
+            <<elseif field enum>><<Model pascal>><<field pascal>>["<<for1 field.enum e>><<e raw>><<endfor>>"]
+            <<elseif field nullable>>null
+            <<elseif field number>>0
+            <<elseif field string>>''<<endif>>
+          <<< } >>>,
+          <<endfor>>
+          <<for Fields not primary and not internal field>>
+          <<if field oneOne or oneMany>>
+          <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
+          <<elseif field manyMany>>
+          <<field camel>>: { connect: <<Model camel>>.<<field camel>>?.map((id) => ({ id })) },
+          <<else>>
+          <<field camel>>: <<Model camel>>.<<field camel>>,
+          <<endif>>
+          <<endfor>>
+          <<for Fields ownership and not primary and internal field>>
+          <<field camel>>: { connect: mockUser }
+          <<endfor>>
+        },
+      });
+    });
   });
 	
   describe('GET /<<Model kebab>>/count', () => {
