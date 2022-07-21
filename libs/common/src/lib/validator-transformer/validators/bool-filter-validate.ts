@@ -1,4 +1,5 @@
 import { isBooleanString, isIn } from 'class-validator';
+import { isBoolean } from 'lodash';
 
 import { ArrayFilterProps, BoolFilterProps } from '../../constants';
 import { transformStringToArray } from '../../helpers';
@@ -13,32 +14,45 @@ export function BoolFilterValidate({ separator = ':', each = false } = {}) {
   return CustomValidate((_, value: unknown) => {
     if (!value) return true;
     if (typeof value === 'boolean') return true;
-    if (typeof value !== 'string') return false;
+    if (
+      (!each && typeof value !== 'string') ||
+      (typeof value !== 'string' && !Array.isArray(value))
+    )
+      return false;
 
-    const [filterType, ...boolean] = value.split(separator).reverse();
+    let filterType: string | undefined;
+    let boolean: (string | boolean)[] | undefined = Array.isArray(value)
+      ? value
+      : [];
 
-    let filter: string | undefined = filterType;
+    if (typeof value === 'string') {
+      [filterType, ...boolean] = value.split(separator).reverse();
+    }
 
-    if (filterType && !isIn(filterType, BoolFilterProps)) {
+    if (
+      filterType &&
+      !isIn(filterType, each ? ArrayFilterProps : BoolFilterProps)
+    ) {
       boolean.unshift(filterType);
-      filter = undefined;
+      filterType = undefined;
     }
 
     const valueToValidate = boolean.reverse().join(separator);
 
     if (each) {
-      const arrayToValidate = transformStringToArray(valueToValidate);
-      if (!Array.isArray(arrayToValidate)) return false;
+      const arrayToValidate = transformStringToArray(
+        Array.isArray(value) ? value : valueToValidate,
+      );
 
       return (
-        arrayToValidate.every(isBooleanString) &&
-        (!filter || isIn(filter, ArrayFilterProps))
+        arrayToValidate.every((v) => isBooleanString(v) || isBoolean(v)) &&
+        (!filterType || isIn(filterType, ArrayFilterProps))
       );
     }
 
     return (
       isBooleanString(valueToValidate) &&
-      (!filter || isIn(filter, BoolFilterProps))
+      (!filterType || isIn(filterType, BoolFilterProps))
     );
   });
 }

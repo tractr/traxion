@@ -24,7 +24,6 @@ export default {
     '<rootDir>/libs/config/eslint',
     '<rootDir>/libs/config/commit',
     '<rootDir>/libs/config/hapify',
-    '<rootDir>/libs/prisma',
     '<rootDir>/libs/nestjs/authentication',
     '<rootDir>/libs/nestjs/casl',
     '<rootDir>/libs/nestjs/core',

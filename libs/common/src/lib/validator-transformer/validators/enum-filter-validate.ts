@@ -1,6 +1,6 @@
-import { isIn, isString } from 'class-validator';
+import { isIn } from 'class-validator';
 
-import { ArrayFilterProps, StringFilterProps } from '../../constants';
+import { ArrayFilterProps, EnumFilterProps } from '../../constants';
 import { transformStringToArray } from '../../helpers';
 import { CustomValidate } from './custom-validate';
 
@@ -9,7 +9,10 @@ import { CustomValidate } from './custom-validate';
  *
  * @param field - the object field to validate
  */
-export function StringFilterValidate({ separator = ':', each = false } = {}) {
+export function EnumFilterValidate(
+  enumList: string[],
+  { separator = ':', each = false } = {},
+) {
   return CustomValidate((_, value: string) => {
     if (!value) return true;
     if (
@@ -19,23 +22,23 @@ export function StringFilterValidate({ separator = ':', each = false } = {}) {
       return false;
 
     let filterType: string | undefined;
-    let string: (string | Date)[] | undefined = Array.isArray(value)
+    let enums: (string | Date)[] | undefined = Array.isArray(value)
       ? value
       : [];
 
     if (typeof value === 'string') {
-      [filterType, ...string] = value.split(separator).reverse();
+      [filterType, ...enums] = value.split(separator).reverse();
     }
 
     if (
       filterType &&
-      !isIn(filterType, each ? ArrayFilterProps : StringFilterProps)
+      !isIn(filterType, each ? ArrayFilterProps : EnumFilterProps)
     ) {
-      string.unshift(filterType);
+      enums.unshift(filterType);
       filterType = undefined;
     }
 
-    const valueToValidate = string.reverse().join(separator);
+    const valueToValidate = enums.reverse().join(separator);
 
     if (each) {
       const arrayToValidate = transformStringToArray(
@@ -43,14 +46,14 @@ export function StringFilterValidate({ separator = ':', each = false } = {}) {
       );
 
       return (
-        arrayToValidate.every(isString) &&
+        arrayToValidate.every((v) => isIn(v, enumList)) &&
         (!filterType || isIn(filterType, ArrayFilterProps))
       );
     }
 
     return (
-      isString(valueToValidate) &&
-      (!filterType || isIn(filterType, StringFilterProps))
+      isIn(valueToValidate, enumList) &&
+      (!filterType || isIn(filterType, EnumFilterProps))
     );
   });
 }

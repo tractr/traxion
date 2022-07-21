@@ -13,32 +13,45 @@ export function DateTimeFilterValidate({ separator = ':', each = false } = {}) {
   return CustomValidate((_, value: unknown) => {
     if (!value) return true;
     if (isDate(value)) return true;
-    if (typeof value !== 'string') return false;
+    if (
+      (!each && typeof value !== 'string') ||
+      (typeof value !== 'string' && !Array.isArray(value))
+    )
+      return false;
 
-    const [filterType, ...dateTime] = value.split(separator).reverse();
+    let filterType: string | undefined;
+    let dateTime: (string | Date)[] | undefined = Array.isArray(value)
+      ? value
+      : [];
 
-    let filter: string | undefined = filterType;
+    if (typeof value === 'string') {
+      [filterType, ...dateTime] = value.split(separator).reverse();
+    }
 
-    if (filterType && !isIn(filterType, DateTimeFilterProps)) {
+    if (
+      filterType &&
+      !isIn(filterType, each ? ArrayFilterProps : DateTimeFilterProps)
+    ) {
       dateTime.unshift(filterType);
-      filter = undefined;
+      filterType = undefined;
     }
 
     const valueToValidate = dateTime.reverse().join(separator);
 
     if (each) {
-      const arrayToValidate = transformStringToArray(valueToValidate);
-      if (!Array.isArray(arrayToValidate)) return false;
+      const arrayToValidate = transformStringToArray(
+        Array.isArray(value) ? value : valueToValidate,
+      );
 
       return (
-        arrayToValidate.every(isDateString) &&
-        (!filter || isIn(filter, ArrayFilterProps))
+        arrayToValidate.every((v) => isDateString(v) || isDate(v)) &&
+        (!filterType || isIn(filterType, ArrayFilterProps))
       );
     }
 
     return (
       isDateString(valueToValidate) &&
-      (!filter || isIn(filter, DateTimeFilterProps))
+      (!filterType || isIn(filterType, DateTimeFilterProps))
     );
   });
 }

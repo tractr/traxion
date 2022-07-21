@@ -79,6 +79,13 @@ describe('Url helpers', () => {
   });
 
   describe('getUrl', () => {
+    it('should return the base url if no query params', () => {
+      const baseUrl = new URL('https://base.com');
+      const result = getUrl(baseUrl);
+
+      expect(result.toString()).toEqual('https://base.com/');
+    });
+
     it('should build a correct url', () => {
       const baseUrl = new URL('https://base.com');
       const parameters = '/users';

@@ -1,4 +1,4 @@
-import { isIn, isNumberString } from 'class-validator';
+import { isIn, isNumber, isNumberString } from 'class-validator';
 
 import { ArrayFilterProps, NumberFilterProps } from '../../constants';
 import { transformStringToArray } from '../../helpers';
@@ -13,32 +13,45 @@ export function NumberFilterValidate({ separator = ':', each = false } = {}) {
   return CustomValidate((_, value: string) => {
     if (!value) return true;
     if (typeof value === 'number') return true;
-    if (typeof value !== 'string') return false;
+    if (
+      (!each && typeof value !== 'string') ||
+      (typeof value !== 'string' && !Array.isArray(value))
+    )
+      return false;
 
-    const [filterType, ...int] = value.split(separator).reverse();
+    let filterType: string | undefined;
+    let number: (string | Date)[] | undefined = Array.isArray(value)
+      ? value
+      : [];
 
-    let filter: string | undefined = filterType;
-
-    if (filterType && !isIn(filterType, NumberFilterProps)) {
-      int.unshift(filterType);
-      filter = undefined;
+    if (typeof value === 'string') {
+      [filterType, ...number] = value.split(separator).reverse();
     }
 
-    const valueToValidate = int.reverse().join(separator);
+    if (
+      filterType &&
+      !isIn(filterType, each ? ArrayFilterProps : NumberFilterProps)
+    ) {
+      number.unshift(filterType);
+      filterType = undefined;
+    }
+
+    const valueToValidate = number.reverse().join(separator);
 
     if (each) {
-      const arrayToValidate = transformStringToArray(valueToValidate);
-      if (!Array.isArray(arrayToValidate)) return false;
+      const arrayToValidate = transformStringToArray(
+        Array.isArray(value) ? value : valueToValidate,
+      );
 
       return (
-        arrayToValidate.every((v) => isNumberString(v)) &&
-        (!filter || isIn(filter, ArrayFilterProps))
+        arrayToValidate.every((v) => isNumberString(v) || isNumber(v)) &&
+        (!filterType || isIn(filterType, ArrayFilterProps))
       );
     }
 
     return (
       isNumberString(valueToValidate) &&
-      (!filter || isIn(filter, NumberFilterProps))
+      (!filterType || isIn(filterType, NumberFilterProps))
     );
   });
 }
