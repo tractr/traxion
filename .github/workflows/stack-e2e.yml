@@ -54,6 +54,7 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           start: npx nx serve api
+          command: npx nx e2e pwa-e2e
           wait-on: 'http://localhost:3000/api'
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/api
