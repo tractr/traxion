@@ -11,6 +11,7 @@ export function TransformStringToArray() {
 /**
  * @deprecated Use TransformStringToArray instead
  */
+/* istanbul ignore next */
 export function TransformStringToArrayOfString() {
   return TransformStringToArray();
 }

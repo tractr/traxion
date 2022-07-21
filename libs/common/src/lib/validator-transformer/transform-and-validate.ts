@@ -34,7 +34,7 @@ export function getDefaults<T>(
     {},
     {
       enableImplicitConversion: true,
-      ...(options?.plainToClass || {}),
+      ...(options.plainToClass || {}),
     },
   ) as unknown as Required<T>;
 }
@@ -79,16 +79,20 @@ export type TransformAndValidate<T> = <O>(
 export function formatTransformAndValidateErrorMessage(
   errors: ValidationError[],
 ): TransformAndValidateError {
+  if (errors.length === 0) throw new Error('No error to format');
+
   const errorMessage = `An error occur during the object validation:\n
   ${errors
-    .map(
-      ({ property, value, constraints }) =>
-        `Property ${property} (value: ${value}): \n${Object.keys(
-          constraints || {},
-        )
-          .map((constraintKey) => `  - ${(constraints || {})[constraintKey]}`)
-          .join('\n')}\n\n`,
-    )
+    .map(({ property, value, constraints }) => {
+      if (!constraints)
+        return `Property ${property} (value: ${value}) has an error without constraint`;
+
+      return `Property ${property} (value: ${value}): \n${Object.keys(
+        constraints,
+      )
+        .map((constraintKey) => `  - ${constraints[constraintKey]}`)
+        .join('\n')}\n\n`;
+    })
     .join('\n')}`;
 
   const errorToThrow = new Error(errorMessage);

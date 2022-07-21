@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { isIn } from 'class-validator';
+import { isIn, isObject } from 'class-validator';
 
 import { JsonFilterProps } from '../../constants';
 import { CustomValidate } from './custom-validate';
@@ -12,11 +12,8 @@ import { CustomValidate } from './custom-validate';
 export function JsonFilterValidate({ separator = ':' } = {}) {
   return CustomValidate((_, value: unknown) => {
     if (!value) return true;
-    try {
-      JSON.stringify(value);
-      return true;
-      // eslint-disable-next-line no-empty
-    } catch {}
+    if (isObject(value)) return true;
+    if (Array.isArray(value)) return true;
     if (typeof value !== 'string') return false;
 
     const [filterType, ...json] = value.split(separator).reverse();

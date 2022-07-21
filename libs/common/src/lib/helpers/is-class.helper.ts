@@ -9,6 +9,6 @@ export function isClass<T = Type>(obj: any): obj is T {
   }
 
   const isPrototypeCtorClass =
-    obj?.prototype?.constructor?.toString().substring(0, 5) === 'class';
+    obj.prototype.constructor.toString().substring(0, 5) === 'class';
   return !!isCtorClass || !!isPrototypeCtorClass;
 }

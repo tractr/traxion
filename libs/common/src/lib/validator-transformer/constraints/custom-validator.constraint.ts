@@ -18,12 +18,14 @@ export type IsCustomConstraint<T = any> = (
 export class CustomConstraint implements ValidatorConstraintInterface {
   validate(
     propertyValue: string,
-    { targetName, constraints, object }: ValidationArguments,
+    { targetName, constraints, object, property }: ValidationArguments,
   ) {
     const constraintsList: Array<IsCustomConstraint> = constraints;
 
     if (constraintsList.length === 0)
-      throw new Error('No constraints specified.');
+      throw new Error(
+        `No constraints specified in ${targetName} (property: ${property})`,
+      );
 
     return constraintsList.every((constraint) => {
       const result = constraint(object, propertyValue, targetName);

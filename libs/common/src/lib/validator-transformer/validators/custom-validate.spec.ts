@@ -8,17 +8,17 @@ describe('CustomValidator decorator', () => {
   const mockedPredicate = jest.fn();
 
   // Class to test the CustomValidate decorator
-  class Car {
+  class CustomValidateClass {
     @CustomValidate([mockedPredicate])
-    brand!: string;
+    foo!: string;
   }
 
-  let car: Car;
+  let customValidateClass: CustomValidateClass;
 
   beforeEach(() => {
-    // Create an instance of Car
-    car = new Car();
-    car.brand = 'Ford';
+    // Create an instance of CustomValidateClass
+    customValidateClass = new CustomValidateClass();
+    customValidateClass.foo = 'Ford';
 
     mockedPredicate.mockReset();
   });
@@ -26,7 +26,7 @@ describe('CustomValidator decorator', () => {
   it('should call the predicate function passed in parameter', async () => {
     mockedPredicate.mockReturnValue(true);
 
-    await validate(car);
+    await validate(customValidateClass);
 
     expect(mockedPredicate).toHaveBeenCalledTimes(1);
   });
@@ -34,30 +34,44 @@ describe('CustomValidator decorator', () => {
   it('should call the predicate function passed in parameter with the object being validated', async () => {
     mockedPredicate.mockReturnValue(true);
 
-    await validate(car);
+    await validate(customValidateClass);
 
-    expect(mockedPredicate).toHaveBeenCalledWith(car, 'Ford', 'Car');
+    expect(mockedPredicate).toHaveBeenCalledWith(
+      customValidateClass,
+      'Ford',
+      'CustomValidateClass',
+    );
   });
 
   it('should return an error with a message if the predicate function passed in parameter return false', async () => {
     mockedPredicate.mockReturnValue(false);
 
-    const errors = await validate(car);
+    const errors = await validate(customValidateClass);
 
     expect(errors[0]?.constraints?.customConstraint).toEqual(
-      'Failed custom constraint on property "brand".',
+      'Failed custom constraint on property "foo".',
     );
   });
 
   it('should throw an error if the predicate does not return a boolean', async () => {
     mockedPredicate.mockReturnValue('NotABoolean');
 
-    await expect(async () => validate(car)).rejects.toThrow(
+    await expect(async () => validate(customValidateClass)).rejects.toThrow(
       'Invalid constraint',
     );
   });
 
-  it('should throw an error if no predicates is passed to the decorator', () => {
-    expect(() => CustomValidate([])).toThrow('No constraints specified.');
+  it('should throw an error if no predicates is passed to the decorator', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    class CustomValidateClassWithoutPredicate {
+      @CustomValidate([])
+      foo!: string;
+    }
+
+    customValidateClass = new CustomValidateClassWithoutPredicate();
+
+    await expect(async () => validate(customValidateClass)).rejects.toThrow(
+      'No constraints specified in CustomValidateClassWithoutPredicate (property: foo)',
+    );
   });
 });
