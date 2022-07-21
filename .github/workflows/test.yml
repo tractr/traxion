@@ -92,7 +92,7 @@ jobs:
           json,text
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         if: ${{ inputs.codecov }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
