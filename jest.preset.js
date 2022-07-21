@@ -6,7 +6,6 @@ module.exports = {
     'src/**/*.{ts,js}',
     '!src/**/index.{ts,js}',
     '!src/test-setup.ts',
-    '!src/**/*.d.ts',
   ],
-  coverageReporters: ['json', 'lcov', 'text', 'clover'],
+  coverageReporters: ['json', 'text'],
 };
