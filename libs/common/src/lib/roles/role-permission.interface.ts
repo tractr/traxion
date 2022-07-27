@@ -1,28 +1,46 @@
 import { AbilityBuilder, AnyAbility } from '@casl/ability';
+import { extend } from 'lodash';
 
-export const CaslUserRoles: {
-  admin: 'admin';
-  user: 'user';
-  guest: 'guest';
-} = {
+export const CaslDefaultRoles = {
   admin: 'admin',
   user: 'user',
   guest: 'guest',
-};
+} as const;
 
-export type CaslUserRoles = typeof CaslUserRoles[keyof typeof CaslUserRoles];
+export type CaslDefaultRoles = keyof typeof CaslDefaultRoles;
 
-export interface CaslUser {
-  roles: CaslUserRoles[];
+export type CaslRoles<CustomRoles extends string = never> =
+  | CustomRoles
+  | CaslDefaultRoles;
+
+export interface CaslUser<CustomRoles extends string = never>
+  extends Record<string, unknown> {
+  roles: CaslRoles<CustomRoles>[];
 }
 
-export type DefinePermissions<U extends CaslUser, A extends AnyAbility> = (
-  builder: AbilityBuilder<A>,
-  user?: U,
-) => void;
+export type PublicDefinePermissions<
+  CustomAbility extends AnyAbility = AnyAbility,
+> = (builder: AbilityBuilder<CustomAbility>) => void;
+
+export type AuthenticatedDefinePermissions<
+  CustomRoles extends string = never,
+  CustomUser extends CaslUser<CustomRoles> = CaslUser<CustomRoles>,
+  CustomAbility extends AnyAbility = AnyAbility,
+> = (builder: AbilityBuilder<CustomAbility>, user: CustomUser) => void;
+
+export type DefinePermissions<
+  CustomRoles extends string = never,
+  CustomUser extends CaslUser<CustomRoles> = CaslUser<CustomRoles>,
+  CustomAbility extends AnyAbility = AnyAbility,
+> =
+  | AuthenticatedDefinePermissions<CustomRoles, CustomUser, CustomAbility>
+  | PublicDefinePermissions;
 
 export type RolePermissions<
-  R extends CaslUserRoles = CaslUserRoles,
-  U extends CaslUser = { roles: R[] },
-  A extends AnyAbility = AnyAbility,
-> = Record<R, DefinePermissions<U, A>>;
+  CustomRoles extends string = never,
+  CustomUser extends CaslUser<CustomRoles> = CaslUser<CustomRoles>,
+  CustomAbility extends AnyAbility = AnyAbility,
+> = Record<
+  CaslRoles<CustomRoles>,
+  DefinePermissions<CustomRoles, CustomUser, CustomAbility>
+>;

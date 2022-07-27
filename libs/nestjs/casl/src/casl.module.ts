@@ -5,7 +5,7 @@ import { CASL_MODULE_OPTIONS } from './casl.constant';
 import { CaslOptions } from './interfaces';
 import { CaslAbilityFactoryService } from './services/casl.service';
 
-import { CaslUser, CaslUserRoles } from '@tractr/common';
+import { CaslUser } from '@tractr/common';
 import { AuthenticationModule } from '@tractr/nestjs-authentication';
 import { AsyncOptions, ModuleOptionsFactory } from '@tractr/nestjs-core';
 
@@ -19,18 +19,22 @@ export class CaslModule extends ModuleOptionsFactory<CaslOptions>(
   CASL_MODULE_OPTIONS,
 ) {
   static register<
-    R extends CaslUserRoles = CaslUserRoles,
-    U extends CaslUser = { roles: [] },
-    A extends AnyAbility = AnyAbility,
-  >(options?: CaslOptions<R, U, A>): DynamicModule {
+    CustomRoles extends string = never,
+    CustomUser extends CaslUser<CustomRoles> = CaslUser<CustomRoles>,
+    CustomAbility extends AnyAbility = AnyAbility,
+  >(
+    options?: CaslOptions<CustomRoles, CustomUser, CustomAbility>,
+  ): DynamicModule {
     return super.register(options as unknown as CaslOptions);
   }
 
   static registerAsync<
-    R extends CaslUserRoles = CaslUserRoles,
-    U extends CaslUser = { roles: [] },
-    A extends AnyAbility = AnyAbility,
-  >(options: AsyncOptions<CaslOptions<R, U, A>>): DynamicModule {
+    CustomRoles extends string = never,
+    CustomUser extends CaslUser<CustomRoles> = CaslUser<CustomRoles>,
+    CustomAbility extends AnyAbility = AnyAbility,
+  >(
+    options: AsyncOptions<CaslOptions<CustomRoles, CustomUser, CustomAbility>>,
+  ): DynamicModule {
     return super.registerAsync(options as unknown as AsyncOptions<CaslOptions>);
   }
 }

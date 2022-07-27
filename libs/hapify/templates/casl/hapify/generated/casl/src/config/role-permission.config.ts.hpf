@@ -1,22 +1,18 @@
 import { User } from '@prisma/client';
 import { getConcatValueByPath, RolePermissions } from '@tractr/common';
  
-import { AppAbility, AppRoles } from '../interfaces';
+import { AppAbility, AppDefinePermissions, AppRoles, AppRolePermissions } from '../interfaces';
 import { UserWithIds } from './get-prisma-user-query';
  
-export const rolePermissions: RolePermissions<
-  AppRoles,
-  UserWithIds,
-  AppAbility
-> = {
-  guest({ can }) {
+export const guestRolePermissions: AppDefinePermissions = ({ can }) => {
     <<for Models model>>
       <<for model.accesses.guest access>>
     can('<<=access.action>>', '<<model pascal>>');
       <<endfor>>
     <<endfor>>
-  },
-  user({ can }, user) {
+ };
+ 
+export const userRolePermissions: AppDefinePermissions = ({ can }, user) => {
     <<for Models model>>
     // Configure permissions for <<model pascal>> from hapify models
       <<for model.accesses.auth access>>
@@ -33,10 +29,17 @@ export const rolePermissions: RolePermissions<
     can('<<=access.action>>', '<<model pascal>>');
       <<endfor>>
     <<endfor>>
-  },
-  admin({ can }) {
+};
+  
+export const adminRolePermissions: AppDefinePermissions = ({ can }) => {
     can('manage', 'all');
-  }
+};
+  
+export const rolePermissions: AppRolePermissions = {
+    guest: guestRolePermissions,
+    user: userRolePermissions,
+    admin: adminRolePermissions,
+  <<=handleCustomRoles()>>
 };
  
 <<<
@@ -97,4 +100,17 @@ export const rolePermissions: RolePermissions<
       }
     }: {};
   }
+  
+  function handleCustomRoles() {
+      const roles = root.find(model => model.names.pascal === 'User')?.fields.list.find(field => field.names.camel === 'roles')?.enum;
+      if (!roles) throw new Error(`A 'User' model should exist, with a role field`);
+      let out = ''; 
+      roles.filter(role => !isBaseRole(role.name)).forEach(role => out += `${role.name}() {}, \n`);
+      return out;
+      //return roles.reduce((acc, role) => `${acc} ${role.name}`, '');
+    }
+    
+    function isBaseRole(role) {
+        return role === 'guest' || role === 'user' || role === 'admin';
+    }
 >>>

@@ -1,5 +1,12 @@
 import { UserRoles } from '@prisma/client';
- 
-import { CaslUserRoles } from '@tractr/common';
- 
-export type AppRoles = UserRoles | CaslUserRoles;
+import {
+  CaslRoles,
+  CaslUser,
+  DefinePermissions,
+  RolePermissions,
+} from '@tractr/common';
+
+export type AppRoles = CaslRoles<UserRoles>;
+export type AppUser = CaslUser<AppRoles>;
+export type AppDefinePermissions = DefinePermissions<AppRoles>;
+export type AppRolePermissions = RolePermissions<AppRoles>;
