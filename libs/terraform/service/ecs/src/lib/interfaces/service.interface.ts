@@ -60,6 +60,8 @@ export type ServiceComponentPublicConfig =
 export type ServiceComponentConfig = ServiceComponentInternalConfig &
   ServiceComponentPublicConfig;
 
+export type OtherObject = Record<string, any>;
+
 export interface ServiceComponentArtifacts {
   containers: Container[];
   volumes: Record<string, VolumeComponent>;

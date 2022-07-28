@@ -19,6 +19,7 @@ import { SecretsComponent } from '@tractr/terraform-component-secrets';
 import {
   BackendServiceComponent,
   BackendServiceComponentConfig,
+  OtherObject,
   ServiceComponent,
   ServiceComponentArtifacts,
   ServiceComponentConfig,
@@ -112,30 +113,44 @@ export class PoolGroup extends AwsComponent<
   }
 
   addService<
-    Component extends ServiceComponent<Config, DefaultConfig, Artifacts>,
-    Config extends ServiceComponentConfig,
+    T extends OtherObject,
+    Component extends ServiceComponent<
+      ServiceComponentConfig & T,
+      DefaultConfig,
+      Artifacts
+    >,
     DefaultConfig extends ServiceComponentDefaultConfig,
     Artifacts extends ServiceComponentArtifacts,
-    PublicConfig extends ServiceComponentPublicConfig,
   >(
-    ServiceClass: AwsComponentConstructor<Component, Config, Artifacts>,
+    ServiceClass: AwsComponentConstructor<
+      Component,
+      ServiceComponentConfig & T,
+      Artifacts
+    >,
     name: string,
-    publicConfig: PublicConfig,
+    publicConfig: ServiceComponentPublicConfig & T,
   ): Component {
     return this.artifacts.ecs.addService(ServiceClass, name, publicConfig);
   }
 
   addBackendService<
-    Component extends BackendServiceComponent<Config, DefaultConfig, Artifacts>,
-    Config extends BackendServiceComponentConfig,
+    T extends OtherObject,
+    Component extends BackendServiceComponent<
+      BackendServiceComponentConfig & T,
+      DefaultConfig,
+      Artifacts
+    >,
     DefaultConfig extends ServiceComponentDefaultConfig,
     Artifacts extends ServiceComponentArtifacts,
-    PublicConfig extends ServiceComponentPublicConfig,
   >(
-    ServiceClass: AwsComponentConstructor<Component, Config, Artifacts>,
+    ServiceClass: AwsComponentConstructor<
+      Component,
+      BackendServiceComponentConfig & T,
+      Artifacts
+    >,
     name: string,
     clients: ServiceComponent[],
-    publicConfig: PublicConfig,
+    publicConfig: ServiceComponentPublicConfig & T,
   ): Component {
     return this.artifacts.ecs.addBackendService(
       ServiceClass,
@@ -146,15 +161,22 @@ export class PoolGroup extends AwsComponent<
   }
 
   addHttpService<
-    Component extends BackendServiceComponent<Config, DefaultConfig, Artifacts>,
-    Config extends BackendServiceComponentConfig,
+    T extends OtherObject,
+    Component extends BackendServiceComponent<
+      BackendServiceComponentConfig & T,
+      DefaultConfig,
+      Artifacts
+    >,
     DefaultConfig extends ServiceComponentDefaultConfig,
     Artifacts extends ServiceComponentArtifacts,
-    PublicConfig extends ServiceComponentPublicConfig,
   >(
-    ServiceClass: AwsComponentConstructor<Component, Config, Artifacts>,
+    ServiceClass: AwsComponentConstructor<
+      Component,
+      BackendServiceComponentConfig & T,
+      Artifacts
+    >,
     name: string,
-    publicConfig: PublicConfig,
+    publicConfig: ServiceComponentPublicConfig & T,
   ): Component {
     return this.artifacts.ecs.addHttpService(ServiceClass, name, publicConfig);
   }

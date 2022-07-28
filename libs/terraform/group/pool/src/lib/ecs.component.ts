@@ -11,6 +11,7 @@ import {
   BackendServiceComponent,
   BackendServiceComponentConfig,
   ExecutionRoleComponent,
+  OtherObject,
   ServiceComponent,
   ServiceComponentArtifacts,
   ServiceComponentConfig,
@@ -99,27 +100,31 @@ export class EcsComponent extends AwsComponent<
    * Append a service that don't need to be served via Http (through Traefik)
    */
   addService<
-    Component extends ServiceComponent<Config, DefaultConfig, Artifacts>,
-    Config extends ServiceComponentConfig,
+    T extends OtherObject,
+    Component extends ServiceComponent<
+      ServiceComponentConfig & T,
+      DefaultConfig,
+      Artifacts
+    >,
     DefaultConfig extends ServiceComponentDefaultConfig,
     Artifacts extends ServiceComponentArtifacts,
-    PublicConfig extends ServiceComponentPublicConfig,
   >(
-    ServiceClass: AwsComponentConstructor<Component, Config, Artifacts>,
+    ServiceClass: AwsComponentConstructor<
+      Component,
+      ServiceComponentConfig & T,
+      Artifacts
+    >,
     name: string,
-    publicConfig: PublicConfig,
+    publicConfig: ServiceComponentPublicConfig & T,
   ): Component {
-    const config = this.createServiceComponentConfig<PublicConfig, Config>(
-      publicConfig,
-    );
+    const config = this.createServiceComponentConfig(publicConfig);
     return new ServiceClass(this, name, config);
   }
 
   // Todo: improve typing, remove 'as never as Config'
-  protected createServiceComponentConfig<
-    PublicConfig extends ServiceComponentPublicConfig,
-    Config extends ServiceComponentConfig,
-  >(publicConfig: PublicConfig): Config {
+  protected createServiceComponentConfig<T extends OtherObject>(
+    publicConfig: ServiceComponentPublicConfig & T,
+  ): ServiceComponentConfig & T {
     return {
       vpc: this.config.vpc,
       subnets: this.config.subnets,
@@ -131,27 +136,34 @@ export class EcsComponent extends AwsComponent<
       secret: this.config.secret,
       privateDnsNamespace: this.artifacts.privateDns.artifacts.dnsNamespace,
       ...publicConfig,
-    } as never as Config;
+    };
   }
 
   /**
    * Append a service that will be served through reverse proxy (Traefik)
    */
   addHttpService<
-    Component extends BackendServiceComponent<Config, DefaultConfig, Artifacts>,
-    Config extends BackendServiceComponentConfig,
+    T extends OtherObject,
+    Component extends BackendServiceComponent<
+      BackendServiceComponentConfig & T,
+      DefaultConfig,
+      Artifacts
+    >,
     DefaultConfig extends ServiceComponentDefaultConfig,
     Artifacts extends ServiceComponentArtifacts,
-    PublicConfig extends ServiceComponentPublicConfig,
   >(
-    ServiceClass: AwsComponentConstructor<Component, Config, Artifacts>,
+    ServiceClass: AwsComponentConstructor<
+      Component,
+      BackendServiceComponentConfig & T,
+      Artifacts
+    >,
     name: string,
-    publicConfig: PublicConfig,
+    publicConfig: ServiceComponentPublicConfig & T,
   ): Component {
-    const config = this.createBackendServiceComponentConfig<
-      PublicConfig,
-      Config
-    >([this.artifacts.reverseProxy], publicConfig);
+    const config = this.createBackendServiceComponentConfig(
+      [this.artifacts.reverseProxy],
+      publicConfig,
+    );
     return new ServiceClass(this, name, config);
   }
 
@@ -159,30 +171,37 @@ export class EcsComponent extends AwsComponent<
    * Append a service that will used by one or more services
    */
   addBackendService<
-    Component extends BackendServiceComponent<Config, DefaultConfig, Artifacts>,
-    Config extends BackendServiceComponentConfig,
+    T extends OtherObject,
+    Component extends BackendServiceComponent<
+      BackendServiceComponentConfig & T,
+      DefaultConfig,
+      Artifacts
+    >,
     DefaultConfig extends ServiceComponentDefaultConfig,
     Artifacts extends ServiceComponentArtifacts,
-    PublicConfig extends ServiceComponentPublicConfig,
   >(
-    ServiceClass: AwsComponentConstructor<Component, Config, Artifacts>,
+    ServiceClass: AwsComponentConstructor<
+      Component,
+      BackendServiceComponentConfig & T,
+      Artifacts
+    >,
     name: string,
     clients: ServiceComponent[],
-    publicConfig: PublicConfig,
+    publicConfig: ServiceComponentPublicConfig & T,
   ): Component {
-    const config = this.createBackendServiceComponentConfig<
-      PublicConfig,
-      Config
-    >(clients, publicConfig);
+    const config = this.createBackendServiceComponentConfig(
+      clients,
+      publicConfig,
+    );
     return new ServiceClass(this, name, config);
   }
 
-  protected createBackendServiceComponentConfig<
-    PublicConfig extends ServiceComponentPublicConfig,
-    Config extends BackendServiceComponentConfig,
-  >(clients: ServiceComponent[], publicConfig: PublicConfig): Config {
+  protected createBackendServiceComponentConfig<T extends OtherObject>(
+    clients: ServiceComponent[],
+    publicConfig: ServiceComponentPublicConfig & T,
+  ): BackendServiceComponentConfig & T {
     return {
-      ...this.createServiceComponentConfig<PublicConfig, Config>(publicConfig),
+      ...this.createServiceComponentConfig(publicConfig),
       clientsSecurityGroups: clients.map(
         (client) => client.artifacts.securityGroup,
       ),
