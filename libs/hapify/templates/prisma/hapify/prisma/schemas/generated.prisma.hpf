@@ -20,8 +20,8 @@
     <<field camel>> <<field.model pascal>><<if field nullable>>?<<endif>> @relation("<<model pascal>>.<<field camel>>.<<field.model pascal>>.<<-field backRelation camel>>",fields: [<<field camel>><<=getReferencedEntityPrimary(field).names.pascal>>], references: [<<=getReferencedEntityPrimary(field).names.camel>>]<<=getOnDelete(field)>><<=getOnUpdate(field)>>)
  
     <<=getMetadata(model, field)>>
-    <<field camel>><<=getReferencedEntityPrimary(field).names.pascal>> <<=getReferencedEntityPrimaryType(field)>>
-	
+    <<field camel>><<=getReferencedEntityPrimary(field).names.pascal>> <<=getReferencedEntityPrimaryType(field)>> <<if field oneOne >>@unique<<endif>>
+
 <<# If the field has a relation manyMany >>
         <<elseif field manyMany>>
     // Relation Many to Many between <<field pascal>> and <<model pascal>>
