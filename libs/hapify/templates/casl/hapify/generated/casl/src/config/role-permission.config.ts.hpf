@@ -107,10 +107,9 @@ export const rolePermissions: Record<
   function handleCustomRoles() {
       const roles = root.find(model => model.names.pascal === 'User')?.fields.list.find(field => field.names.camel === 'roles')?.enum;
       if (!roles) throw new Error(`A 'User' model should exist, with a role field`);
-      let out = ''; 
-      roles.filter(role => !isBaseRole(role.name)).forEach(role => out += `${role.name}() {}, \n`);
-      return out;
-      //return roles.reduce((acc, role) => `${acc} ${role.name}`, '');
+      return roles
+        .filter(role => !isBaseRole(role.name))
+        .reduce((acc, role) => acc += `${role.name}() {}, \n` , '');
     }
     
     function isBaseRole(role) {

@@ -5,6 +5,7 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { ModuleRef, Reflector } from '@nestjs/core';
+import type { User } from '@prisma/client';
 
 import { CaslAbilityFactoryService } from '../services';
 
@@ -36,7 +37,7 @@ export class PoliciesGuard implements CanActivate {
 
     // Get user from the request object.
     // User should have been fetched and populated by the authentication layer
-    const { user } = req;
+    const { user }: { user?: User } = req;
 
     if (user && (!user.roles || !Array.isArray(user.roles))) {
       throw new ForbiddenException();

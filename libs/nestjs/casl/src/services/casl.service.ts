@@ -1,7 +1,7 @@
 import { AbilityBuilder, Subject } from '@casl/ability';
 import { PrismaAbility } from '@casl/prisma';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { Prisma, User, UserRoles } from '@prisma/client';
+import type { Prisma, User } from '@prisma/client';
 
 import { CASL_MODULE_OPTIONS } from '../casl.constant';
 import { CaslOptions } from '../interfaces';
@@ -20,8 +20,8 @@ export class CaslAbilityFactoryService {
 
     const { rolePermissions } = this.caslOptions;
 
-    if (!user && rolePermissions[UserRoles.guest]) {
-      rolePermissions[UserRoles.guest](builder, user);
+    if (!user && rolePermissions.guest) {
+      rolePermissions.guest(builder, user);
       return builder.build();
     }
 

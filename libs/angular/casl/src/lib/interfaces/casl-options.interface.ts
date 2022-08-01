@@ -1,15 +1,13 @@
-import { AnyAbility } from '@casl/ability';
+import { AbilityBuilder, AnyAbility } from '@casl/ability';
+import type { User, UserRoles } from '@prisma/client';
 import { Observable } from 'rxjs';
 
-import { CaslUser, CaslUserRoles, RolePermissions } from '@tractr/common';
+export type DefinePermissions<T extends AnyAbility = AnyAbility> = (
+  ability: AbilityBuilder<T>,
+  user?: User,
+) => void;
 
-export type UserMin = { [key: string]: unknown; roles: CaslUserRoles[] };
-
-export interface CaslOptions<
-  R extends CaslUserRoles = CaslUserRoles,
-  U extends CaslUser = UserMin,
-  A extends AnyAbility = AnyAbility,
-> {
-  rolePermissions: RolePermissions<R, U, A>;
-  me$: Observable<U>;
+export interface CaslOptions<T extends AnyAbility = AnyAbility> {
+  rolePermissions: Record<UserRoles, DefinePermissions<T>>;
+  me$: Observable<User>;
 }

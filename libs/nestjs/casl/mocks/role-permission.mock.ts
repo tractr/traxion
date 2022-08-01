@@ -47,5 +47,5 @@ export const rolePermissions: Record<
     can('manage', 'all');
   },
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  custom({ can }, user) {},
+  custom() {},
 };
