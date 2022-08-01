@@ -3,7 +3,7 @@
   "prefix": "tractr",
   "projectType": "application",
   "sourceRoot": "apps/pwa/src",
-  "tags": [],
+  "tags": ["scope:app"],
   "targets": {
     "build": {
       "configurations": {
@@ -43,9 +43,17 @@
         "allowedCommonJsDependencies": [
           "validator",
           "@prisma/client",
-          "@tractr/common"
+          "@tractr/common",
+          "@generated"
         ],
-        "assets": ["apps/pwa/src/favicon.ico", "apps/pwa/src/assets"],
+        "assets": [
+          "apps/pwa/src/favicon.ico",
+          {
+            "glob": "**/*",
+            "input": "apps/pwa/src/assets",
+            "output": "/assets"
+          }
+        ],
         "index": "apps/pwa/src/index.html",
         "inlineStyleLanguage": "less",
         "main": "apps/pwa/src/main.ts",
@@ -69,8 +77,9 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/pwa/**/*.ts", "apps/pwa/**/*.html"]
-      }
+        "lintFilePatterns": ["apps/pwa/src/**/*.ts", "apps/pwa/src/**/*.html"]
+      },
+      "outputs": ["{options.outputFile}"]
     },
     "preserve": {
       "configurations": {

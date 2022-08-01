@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "projects": {
     "admin": "apps/admin",
     "angular-authentication": "libs/angular/authentication",
@@ -81,6 +82,7 @@
     "terraform-service-pwa": "libs/terraform/service/pwa",
     "terraform-service-reverse-proxy": "libs/terraform/service/reverse-proxy",
     "workspace": {
+      "$schema": "../node_modules/nx/schemas/project-schema.json",
       "root": "libs",
       "targets": {
         "release": {

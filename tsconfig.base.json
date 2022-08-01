@@ -167,7 +167,7 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es2015"
+    "target": "es2020"
   },
   "exclude": ["node_modules", "tmp", "**/files/**"]
 }

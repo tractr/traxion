@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 
 import { FormItemBaseComponent } from '../../base/form-item-base.component';
 
@@ -12,11 +12,11 @@ export abstract class FormModelSelectComponent extends FormItemBaseComponent<
 > {
   @Input() delayed = 200;
 
-  constructor(protected formBuilder: FormBuilder) {
+  constructor(protected formBuilder: UntypedFormBuilder) {
     super();
   }
 
-  initControl(): FormControl {
+  initControl(): UntypedFormControl {
     return this.formBuilder.control(this.state, [
       // eslint-disable-next-line @typescript-eslint/unbound-method
       ...(this.required ? [Validators.required] : []),

@@ -1,5 +1,9 @@
 {
-  "implicitDependencies": ["hapify-templates-models", "common"],
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "hapify-templates-models",
+    "common"
+  ],
   "prefix": "tractr",
   "projectType": "library",
   "sourceRoot": "libs/generated/models/src",
@@ -19,14 +23,18 @@
       "options": {
         "project": "libs/generated/models/ng-package.json"
       },
-      "outputs": ["dist/libs/generated/models"]
+      "outputs": [
+        "dist/libs/generated/models"
+      ]
     },
     "generate": {
       "executor": "./dist/libs/schematics:generate",
       "options": {
         "cwd": "libs/generated/models"
       },
-      "outputs": ["libs/generated/models/src/generated"]
+      "outputs": [
+        "libs/generated/models/src/generated"
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -45,7 +53,9 @@
         "jestConfig": "libs/generated/models/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/generated/models"]
+      "outputs": [
+        "coverage/libs/generated/models"
+      ]
     }
   }
 }
