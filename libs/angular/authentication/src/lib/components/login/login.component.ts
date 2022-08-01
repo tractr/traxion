@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AUTHENTICATION_OPTIONS } from '../../constants';
@@ -13,7 +13,7 @@ import { ErrorService } from '@tractr/angular-tools';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  form = new FormGroup({});
+  form = new UntypedFormGroup({});
 
   /** Constructor */
   constructor(

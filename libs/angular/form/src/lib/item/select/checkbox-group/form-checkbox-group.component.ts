@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
-  FormControl,
+  UntypedFormBuilder,
+  UntypedFormControl,
   Validators,
 } from '@angular/forms';
 
@@ -15,11 +15,11 @@ import { FormSelectBaseComponent } from '../form-select-base.component';
   styleUrls: ['./form-checkbox-group.component.less'],
 })
 export class FormCheckboxGroupComponent extends FormSelectBaseComponent {
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: UntypedFormBuilder) {
     super();
   }
 
-  initControl(): FormControl {
+  initControl(): UntypedFormControl {
     return this.formBuilder.control(this.state, [
       // eslint-disable-next-line @typescript-eslint/unbound-method
       ...(this.required ? [Validators.required] : []),

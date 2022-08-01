@@ -10,6 +10,7 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBody } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 
 import {
@@ -17,6 +18,7 @@ import {
   AUTHENTICATION_USER_SERVICE,
 } from '../constants';
 import { AccessTokenDto, AuthenticationOptions } from '../dtos';
+import { LoginPostBodyDto } from '../dtos/login-form.dto';
 import { LocalAuthGuard } from '../guards';
 import { UserService, UserType } from '../interfaces';
 import { AuthenticationService } from '../services';
@@ -35,6 +37,7 @@ export class LoginController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
+  @ApiBody({ type: LoginPostBodyDto })
   @HttpCode(200)
   async login(
     @Req() req: Request & { secret: string },
