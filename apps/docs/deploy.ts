@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { deploy } from '@docusaurus/core/lib/commands/deploy';
 
 deploy(__dirname, {
