@@ -1,32 +1,28 @@
-import { AbilityBuilder, AnyAbility, Subject } from '@casl/ability';
+import { AbilityBuilder, Subject } from '@casl/ability';
 import { PrismaAbility } from '@casl/prisma';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, User, UserRoles } from '@prisma/client';
 
 import { CASL_MODULE_OPTIONS } from '../casl.constant';
 import { CaslOptions } from '../interfaces';
 
-import { CaslDefaultRoles, CaslRoles, CaslUser } from '@tractr/common';
-
 @Injectable()
-export class CaslAbilityFactoryService<
-  CustomRoles extends string = never,
-  CustomUser extends CaslUser<CustomRoles> = CaslUser<CustomRoles>,
-  CustomAbility extends PrismaAbility = PrismaAbility,
-> {
+export class CaslAbilityFactoryService {
   constructor(
     @Inject(CASL_MODULE_OPTIONS)
-    private readonly caslOptions: CaslOptions<CustomRoles, CustomUser>,
+    private readonly caslOptions: CaslOptions,
   ) {}
 
-  createForUser(user?: CustomUser): CustomAbility {
-    const builder = new AbilityBuilder(PrismaAbility);
+  createForUser(user?: User): PrismaAbility<[string, 'all' | Subject]> {
+    const builder = new AbilityBuilder<
+      PrismaAbility<[string, 'all' | Prisma.ModelName]>
+    >(PrismaAbility);
 
     const { rolePermissions } = this.caslOptions;
 
-    if (!user && rolePermissions[CaslDefaultRoles.guest]) {
-      rolePermissions[CaslDefaultRoles.guest](builder);
-      return builder.build() as CustomAbility;
+    if (!user && rolePermissions[UserRoles.guest]) {
+      rolePermissions[UserRoles.guest](builder, user);
+      return builder.build();
     }
 
     if (!user) {
@@ -44,6 +40,6 @@ export class CaslAbilityFactoryService<
       builder.cannot('manage', 'all');
     }
 
-    return builder.build() as CustomAbility;
+    return builder.build();
   }
 }

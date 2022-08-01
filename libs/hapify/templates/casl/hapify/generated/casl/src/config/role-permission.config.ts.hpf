@@ -1,10 +1,10 @@
-import { User } from '@prisma/client';
-import { getConcatValueByPath, RolePermissions } from '@tractr/common';
+import { UserRoles } from '@prisma/client';
+import { getConcatValueByPath } from '@tractr/common';
+import { DefinePermissions } from '@tractr/nestjs-casl';
  
-import { AppAbility, AppDefinePermissions, AppRoles, AppRolePermissions } from '../interfaces';
-import { UserWithIds } from './get-prisma-user-query';
+import { AppAbility } from '../interfaces';
  
-export const guestRolePermissions: AppDefinePermissions = ({ can }) => {
+export const guestRolePermissions: DefinePermissions<AppAbility> = ({ can }) => {
     <<for Models model>>
       <<for model.accesses.guest access>>
     can('<<=access.action>>', '<<model pascal>>');
@@ -12,7 +12,7 @@ export const guestRolePermissions: AppDefinePermissions = ({ can }) => {
     <<endfor>>
  };
  
-export const userRolePermissions: AppDefinePermissions = ({ can }, user) => {
+export const userRolePermissions: DefinePermissions<AppAbility> = ({ can }, user) => {
     <<for Models model>>
     // Configure permissions for <<model pascal>> from hapify models
       <<for model.accesses.auth access>>
@@ -31,11 +31,14 @@ export const userRolePermissions: AppDefinePermissions = ({ can }, user) => {
     <<endfor>>
 };
   
-export const adminRolePermissions: AppDefinePermissions = ({ can }) => {
+export const adminRolePermissions: DefinePermissions<AppAbility> = ({ can }) => {
     can('manage', 'all');
 };
-  
-export const rolePermissions: AppRolePermissions = {
+ 
+export const rolePermissions: Record<
+  UserRoles,
+  DefinePermissions<AppAbility>
+> = {
     guest: guestRolePermissions,
     user: userRolePermissions,
     admin: adminRolePermissions,

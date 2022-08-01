@@ -1,21 +1,16 @@
-import { AnyAbility } from '@casl/ability';
+import { AbilityBuilder, AnyAbility } from '@casl/ability';
 import { PrismaAbility as CaslPrismaAbilities } from '@casl/prisma';
-import { Prisma } from '@prisma/client';
+import { Prisma, User, UserRoles } from '@prisma/client';
 
-import { CaslRoles, CaslUser, RolePermissions } from '@tractr/common';
-
-export interface CaslOptions<
-  CustomRoles extends string = never,
-  CustomUser extends CaslUser<CustomRoles> = CaslUser<CustomRoles>,
-  CustomAbility extends AnyAbility = AnyAbility,
-> {
-  rolePermissions: RolePermissions<
-    CaslRoles<CustomRoles>,
-    CustomUser,
-    CustomAbility
-  >;
+export interface CaslOptions<T extends AnyAbility = AnyAbility> {
+  rolePermissions: Record<UserRoles, DefinePermissions<T>>;
 }
 
 export type PrismaAbility = CaslPrismaAbilities<
   [string, 'all' | Prisma.ModelName]
 >;
+
+export type DefinePermissions<T extends AnyAbility = AnyAbility> = (
+  ability: AbilityBuilder<T>,
+  user?: User,
+) => void;

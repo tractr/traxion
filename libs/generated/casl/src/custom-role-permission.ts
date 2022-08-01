@@ -1,19 +1,18 @@
+import { UserRoles } from '@prisma/client';
+
 import {
   AppAbility,
-  AppRoles,
   rolePermissions as baseRolePermission,
-  UserWithIds,
 } from './generated/casl';
 
-import { RolePermissions } from '@tractr/common';
+import { DefinePermissions } from '@tractr/nestjs-casl';
 
-export const rolePermissions: RolePermissions<
-  AppRoles,
-  UserWithIds,
-  AppAbility
+export const rolePermissions: Record<
+  UserRoles,
+  DefinePermissions<AppAbility>
 > = {
   ...baseRolePermission,
-  director({ can }, user) {
+  custom({ can }) {
     can('read', 'User');
   },
 };
