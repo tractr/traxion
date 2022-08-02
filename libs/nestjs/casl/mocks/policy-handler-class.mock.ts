@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 
 import { CaslOptions } from '../src';
 import { CASL_MODULE_OPTIONS } from '../src/casl.constant';
-import { AppAbility, Roles, User } from './role-permission.mock';
+import { AppAbility } from './role-permission.mock';
 
 import { PolicyHandler } from '@tractr/common';
 
@@ -10,7 +10,7 @@ import { PolicyHandler } from '@tractr/common';
 export class PolicyHandlerClass implements PolicyHandler<AppAbility> {
   constructor(
     @Inject(CASL_MODULE_OPTIONS)
-    private readonly caslOptions: CaslOptions<Roles, User, AppAbility>,
+    private readonly caslOptions: CaslOptions<AppAbility>,
   ) {}
 
   handle() {

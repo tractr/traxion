@@ -1,5 +1,0 @@
-import { UserRoles } from '@prisma/client';
- 
-import { CaslUserRoles } from '@tractr/common';
- 
-export type AppRoles = UserRoles | CaslUserRoles;

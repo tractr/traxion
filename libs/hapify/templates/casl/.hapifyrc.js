@@ -48,11 +48,6 @@ module.exports = {
       input: 'all',
     },
     {
-      path: 'generated/casl/src/interfaces/roles.interface.ts',
-      engine: 'hpf',
-      input: 'all',
-    },
-    {
       path: 'generated/casl/src/interfaces/subjects.interface.ts',
       engine: 'hpf',
       input: 'all',
