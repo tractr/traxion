@@ -1,15 +1,10 @@
-import { JsonArray, JsonObject, JsonValue } from '../interfaces';
-
 /**
  * Get and concat value by path
  * @param path the string path to the value
  * @param obj The obj to traverse
  * @returns an array of values
  */
-export function findAllValueByPath(
-  path: string,
-  obj?: JsonObject | JsonValue | undefined,
-): JsonArray {
+export function findAllValueByPath(path: string, obj?: unknown): unknown[] {
   const [nextPath, ...nextKeys] = path.split('.');
 
   if (typeof obj === 'undefined') {
@@ -24,7 +19,7 @@ export function findAllValueByPath(
   if (Array.isArray(obj))
     return obj.flatMap((item) => findAllValueByPath(path, item));
 
-  const currentObj = obj[nextPath];
+  const currentObj = (obj as Record<string, unknown>)[nextPath];
 
   if (typeof currentObj === 'undefined') return [];
 
@@ -39,9 +34,9 @@ export function findAllValueByPath(
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function getConcatValueByPath<T extends Array<any> = any[]>(
+export function getConcatValueByPath<T extends Array<unknown> = any[]>(
   path: string,
-  obj?: JsonObject | JsonValue | undefined,
+  obj?: unknown,
 ): T {
   return findAllValueByPath(path, obj) as T;
 }

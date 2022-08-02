@@ -588,7 +588,7 @@
           "name": "roles",
           "properties": ["multiple", "searchable", "sortable"],
           "type": "enum",
-          "value": ["admin", "user", "guest"]
+          "value": ["admin", "user", "guest", "custom"]
         },
         {
           "name": "Object",

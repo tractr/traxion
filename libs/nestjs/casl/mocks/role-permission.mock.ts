@@ -1,8 +1,8 @@
 /* istanbul ignore file */
 import { Subjects as CaslPrismaSubjects, PrismaAbility } from '@casl/prisma';
-import { Prisma } from '@prisma/client';
+import { Prisma, UserRoles } from '@prisma/client';
 
-import { RolePermissions } from '@tractr/common';
+import { DefinePermissions } from '../src';
 
 export type Roles = 'admin' | 'user' | 'guest';
 
@@ -32,7 +32,10 @@ export type Actions = typeof Actions[keyof typeof Actions];
 export type AppAbility = PrismaAbility<[Actions, 'all' | Subjects]>;
 export const AppAbility = PrismaAbility;
 
-export const rolePermissions: RolePermissions<Roles, User, AppAbility> = {
+export const rolePermissions: Record<
+  UserRoles,
+  DefinePermissions<AppAbility>
+> = {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   guest({ can }) {
     can('read', 'Tag');
@@ -43,4 +46,6 @@ export const rolePermissions: RolePermissions<Roles, User, AppAbility> = {
   admin({ can }) {
     can('manage', 'all');
   },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  custom() {},
 };
