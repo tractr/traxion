@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.51.0](https://github.com/tractr/stack/compare/v1.50.1...v1.51.0) (2022-08-02)
+
+
+### Features
+
+* add custom roles to casl ([#461](https://github.com/tractr/stack/issues/461)) ([f5b397e](https://github.com/tractr/stack/commit/f5b397ea6f4973e11ef11988d23455cdc20b904b))
+
+
+
 ## [1.50.1](https://github.com/tractr/stack/compare/v1.50.0...v1.50.1) (2022-07-19)
 
 
