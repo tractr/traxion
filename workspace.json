@@ -76,6 +76,7 @@
     "terraform-service-admin": "libs/terraform/service/admin",
     "terraform-service-api": "libs/terraform/service/api",
     "terraform-service-ecs": "libs/terraform/service/ecs",
+    "terraform-service-logstash": "libs/terraform/service/logstash",
     "terraform-service-postgres": "libs/terraform/service/postgres",
     "terraform-service-pwa": "libs/terraform/service/pwa",
     "terraform-service-reverse-proxy": "libs/terraform/service/reverse-proxy",

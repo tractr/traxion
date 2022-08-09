@@ -1,0 +1,12 @@
+{
+  "name": "@tractr/terraform-service-logstash",
+  "version": "1.51.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

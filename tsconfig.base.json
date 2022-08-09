@@ -148,6 +148,9 @@
       "@tractr/terraform-service-ecs": [
         "libs/terraform/service/ecs/src/index.ts"
       ],
+      "@tractr/terraform-service-logstash": [
+        "libs/terraform/service/logstash/src/index.ts"
+      ],
       "@tractr/terraform-service-postgres": [
         "libs/terraform/service/postgres/src/index.ts"
       ],
