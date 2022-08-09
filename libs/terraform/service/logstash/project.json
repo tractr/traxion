@@ -1,0 +1,39 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/terraform/service/logstash/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "assets": ["libs/terraform/service/logstash/*.md"],
+        "main": "libs/terraform/service/logstash/src/index.ts",
+        "outputPath": "dist/libs/terraform/service/logstash",
+        "packageJson": "libs/terraform/service/logstash/package.json",
+        "tsConfig": "libs/terraform/service/logstash/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/terraform/service/logstash/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/terraform/service/logstash/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/terraform/service/logstash"]
+    }
+  }
+}

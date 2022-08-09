@@ -73,5 +73,6 @@ export default {
     '<rootDir>/libs/hapify/templates/nestjs-graphql',
     '<rootDir>/libs/generated/nestjs-graphql',
     '<rootDir>/libs/nestjs/graphql',
+    '<rootDir>/libs/terraform/service/logstash',
   ],
 };
