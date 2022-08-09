@@ -1,13 +1,10 @@
-# terraform-service-logstash
+# Logstash service
 
-This library was generated with [Nx](https://nx.dev).
+Provides a Logstash service that will crawl information from CloudWatch and send it to Elastic Cloud.
 
-## Running unit tests
+## Configuration example
 
-Run `nx test terraform-service-logstash` to execute the unit tests via
-[Jest](https://jestjs.io).
+```typescript
 
-## Running lint
+```
 
-Run `nx lint terraform-service-logstash` to execute the lint via
-[ESLint](https://eslint.org/).
