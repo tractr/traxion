@@ -19,6 +19,8 @@ export class LogstashComponent extends ServiceComponent<
   LogstashComponentConfig,
   LogstashComponentDefaultConfig
 > {
+  protected taskRoleArn: LogstashTaskRoleComponent | undefined;
+
   /**
    * Override constructor to merge config with default config
    */
@@ -36,18 +38,29 @@ export class LogstashComponent extends ServiceComponent<
   ): ecs.EcsTaskDefinitionConfig {
     return {
       ...super.getEcsTaskDefinitionConfig(containers, volumes),
-      taskRoleArn: this.createLogstashTaskRole().artifacts.role.arn,
+      taskRoleArn: this.getLogstashTaskRole().artifacts.role.arn,
     };
   }
 
-  protected createLogstashTaskRole(): LogstashTaskRoleComponent {
-    return new LogstashTaskRoleComponent(this, 'task-role', {});
+  /**
+   * Create component once
+   */
+  protected getLogstashTaskRole(): LogstashTaskRoleComponent {
+    if (!this.taskRoleArn) {
+      this.taskRoleArn = new LogstashTaskRoleComponent(this, 'task-role', {});
+    }
+    return this.taskRoleArn;
   }
 
   protected getContainers(): Container[] {
+    // Inject task role arn as environment variable
+    const { containerConfig } = this.config;
+    containerConfig.environments.ROLE_ARN =
+      this.getLogstashTaskRole().artifacts.role.arn;
+
     return [
       new LogstashContainer(this, {
-        ...this.config.containerConfig,
+        ...containerConfig,
         name: 'logstash',
       }),
     ];

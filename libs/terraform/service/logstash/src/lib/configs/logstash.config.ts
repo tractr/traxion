@@ -8,6 +8,8 @@ import {
 export const LOGSTASH_COMPONENT_DEFAULT_CONFIG: LogstashComponentDefaultConfig =
   {
     ...SERVICE_COMPONENT_DEFAULT_CONFIG,
+    cpu: '1024',
+    memory: '1024',
     containerConfig: {
       imageTag: '8.3.3',
       environments: {
