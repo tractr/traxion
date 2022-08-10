@@ -9,7 +9,7 @@ export const LOGSTASH_COMPONENT_DEFAULT_CONFIG: LogstashComponentDefaultConfig =
   {
     ...SERVICE_COMPONENT_DEFAULT_CONFIG,
     containerConfig: {
-      imageTag: '7.16.3',
+      imageTag: '8.3.3',
       environments: {
         XPACK_MONITORING_ENABLED: 'false',
         XPACK_MANAGEMENT_ENABLED: 'true',
