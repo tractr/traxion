@@ -14,11 +14,11 @@ import {
 import type { ServiceComponent } from '../services';
 import { SECRET_ENVIRONMENT } from './helpers';
 
-export abstract class Container<T extends ContainerConfig = ContainerConfig> {
-  constructor(
-    protected readonly service: ServiceComponent,
-    protected readonly config: T,
-  ) {}
+export abstract class Container<
+  T extends ContainerConfig = ContainerConfig,
+  S extends ServiceComponent = ServiceComponent,
+> {
+  constructor(protected readonly service: S, protected readonly config: T) {}
 
   getDefinition(): ContainerDefinition {
     return {
