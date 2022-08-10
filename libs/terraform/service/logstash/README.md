@@ -27,6 +27,8 @@ const api = new LogstashComponent(this, 'logstash', {
 
 ### Elastic Cloud configuration
 
+For more information on how to configure Elastic Cloud, see [Cloudwatch input plugin](https://www.elastic.co/guide/en/logstash/current/plugins-inputs-cloudwatch.html).
+
 ```text
 input {
     cloudwatch {
