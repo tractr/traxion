@@ -17,10 +17,7 @@ import {
   ServiceComponentDefaultConfig,
   ServiceComponentPublicConfig,
 } from '@tractr/terraform-service-ecs';
-import {
-  ReverseProxyComponent,
-  ReverseProxyTaskRoleComponent,
-} from '@tractr/terraform-service-reverse-proxy';
+import { ReverseProxyComponent } from '@tractr/terraform-service-reverse-proxy';
 
 export class EcsComponent extends AwsComponent<
   EcsComponentConfig,
@@ -32,11 +29,9 @@ export class EcsComponent extends AwsComponent<
     const privateDns = this.createPrivateDns();
 
     // ReverseProxyTaskRoleComponent must be created before the proxy component
-    const reverseProxyTaskRole = this.createReverseProxyTaskRole();
     const reverseProxy = this.createReverseProxyComponent(
       ecsCluster,
       executionRole,
-      reverseProxyTaskRole,
       privateDns,
     );
 
@@ -46,7 +41,6 @@ export class EcsComponent extends AwsComponent<
       executionRole,
       privateDns,
       reverseProxy,
-      reverseProxyTaskRole,
     };
   }
 
@@ -68,14 +62,9 @@ export class EcsComponent extends AwsComponent<
     });
   }
 
-  protected createReverseProxyTaskRole() {
-    return new ReverseProxyTaskRoleComponent(this, 'proxy-task', {});
-  }
-
   protected createReverseProxyComponent(
     ecsCluster: ecs.EcsCluster,
     executionRole: ExecutionRoleComponent,
-    taskRole: ReverseProxyTaskRoleComponent,
     privateDns: PrivateDnsComponent,
   ) {
     return new ReverseProxyComponent(this, 'proxy', {
@@ -90,7 +79,6 @@ export class EcsComponent extends AwsComponent<
       privateDnsNamespace: privateDns.artifacts.dnsNamespace,
       loadBalancerSecurityGroup: this.config.loadBalancerSecurityGroup,
       loadBalancerTargetGroup: this.config.loadBalancerTargetGroup,
-      taskRole: taskRole.artifacts.role,
       ...this.config.reverseProxyConfig,
     });
   }

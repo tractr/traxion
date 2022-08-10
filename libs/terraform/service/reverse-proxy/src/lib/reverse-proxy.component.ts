@@ -5,6 +5,7 @@ import {
   ReverseProxyComponentConfig,
   ReverseProxyComponentDefaultConfig,
 } from './interfaces';
+import { ReverseProxyTaskRoleComponent } from './reverse-proxy-task-role.component';
 import { ReverseProxyContainer } from './reverse-proxy.container';
 
 import { AwsProviderConstruct } from '@tractr/terraform-component-aws';
@@ -56,8 +57,12 @@ export class ReverseProxyComponent extends ServiceComponent<
   ): ecs.EcsTaskDefinitionConfig {
     return {
       ...super.getEcsTaskDefinitionConfig(containers, volumes),
-      taskRoleArn: this.config.taskRole.arn,
+      taskRoleArn: this.createReverseProxyTaskRole().artifacts.role.arn,
     };
+  }
+
+  protected createReverseProxyTaskRole() {
+    return new ReverseProxyTaskRoleComponent(this, 'proxy-task', {});
   }
 
   protected getEcsServiceConfig(
