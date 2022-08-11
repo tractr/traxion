@@ -1,2 +1,2 @@
 export * from './logstash.interface';
-export * from './logstash-task-role.interface';
+export * from './cloudwatch-user.interface';

@@ -1,9 +1,12 @@
 import { DeepPartial } from 'ts-essentials';
 
+import { CloudwatchUserComponentArtifacts } from './cloudwatch-user.interface';
+
 import {
   ContainerInternalConfig,
   ContainerPublicConfig,
   EnvironmentOrSecretValue,
+  ServiceComponentArtifacts,
   ServiceComponentDefaultConfig,
   ServiceComponentInternalConfig,
 } from '@tractr/terraform-service-ecs';
@@ -28,3 +31,7 @@ export type LogstashComponentPublicConfig =
   DeepPartial<LogstashComponentDefaultConfig>;
 export type LogstashComponentConfig = ServiceComponentInternalConfig &
   LogstashComponentPublicConfig;
+
+export interface LogstashComponentArtifacts extends ServiceComponentArtifacts {
+  cloudwatch: CloudwatchUserComponentArtifacts;
+}

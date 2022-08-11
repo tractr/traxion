@@ -2,8 +2,8 @@
 
 Provides a Logstash service that will crawl information from CloudWatch and send it to Elastic Cloud.
 
-A role, allowed to read CloudWatch, is created and attached to the task.
-The arn of the role is available in the environment variable `ROLE_ARN`.
+A user, allowed to read CloudWatch, is created.
+Its API key and secret are outputted by Terraform.
 
 ## Configuration example
 
@@ -25,15 +25,26 @@ const api = new LogstashComponent(this, 'logstash', {
 });
 ```
 
-### Elastic Cloud configuration
+`XPACK_MANAGEMENT_ELASTICSEARCH_CLOUD_ID`, `XPACK_MANAGEMENT_ELASTICSEARCH_CLOUD_AUTH`
+and `XPACK_MANAGEMENT_PIPELINE_ID` must be set in AWS Secrets Manager.
 
-For more information on how to configure Elastic Cloud, see [Cloudwatch input plugin](https://www.elastic.co/guide/en/logstash/current/plugins-inputs-cloudwatch.html).
+## Elastic Cloud configuration
+
+For more information on how to configure plugins :
+
+- [Cloudwatch logs input plugin](https://github.com/lukewaite/logstash-input-cloudwatch-logs)
+- [Cloudwatch input plugin](https://www.elastic.co/guide/en/logstash/current/plugins-inputs-cloudwatch.html).
+
+### Configuration example
+
+The values `access_key_id` and `secret_access_key` will be output by Terraform.
 
 ```text
 input {
-    cloudwatch {
-        role_arn => "${ROLE_ARN}"
-        namespace => "AWS/EC2"
+    cloudwatch_logs {
+        access_key_id => "AKXXXXXXXXX"
+        secret_access_key => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        log_group => "production-logs-group"
         region => "us-east-1"
     }
 }
@@ -44,7 +55,6 @@ output {
         cloud_id => "${XPACK_MANAGEMENT_ELASTICSEARCH_CLOUD_ID}"
         cloud_auth => "${XPACK_MANAGEMENT_ELASTICSEARCH_CLOUD_AUTH}"
         index => "cloudwatch-logs"
-        action => "create"
     }
 }
 ```

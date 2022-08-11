@@ -1,26 +1,20 @@
-import { ecs } from '@cdktf/provider-aws';
-
+import { CloudwatchUserComponent } from './cloudwatch-user.component';
 import { LOGSTASH_COMPONENT_DEFAULT_CONFIG } from './configs';
 import {
+  LogstashComponentArtifacts,
   LogstashComponentConfig,
   LogstashComponentDefaultConfig,
 } from './interfaces';
-import { LogstashTaskRoleComponent } from './logstash-task-role.component';
 import { LogstashContainer } from './logstash.container';
 
 import { AwsProviderConstruct } from '@tractr/terraform-component-aws';
-import {
-  Container,
-  ServiceComponent,
-  VolumeComponents,
-} from '@tractr/terraform-service-ecs';
+import { Container, ServiceComponent } from '@tractr/terraform-service-ecs';
 
 export class LogstashComponent extends ServiceComponent<
   LogstashComponentConfig,
-  LogstashComponentDefaultConfig
+  LogstashComponentDefaultConfig,
+  LogstashComponentArtifacts
 > {
-  protected taskRoleArn: LogstashTaskRoleComponent | undefined;
-
   /**
    * Override constructor to merge config with default config
    */
@@ -32,35 +26,20 @@ export class LogstashComponent extends ServiceComponent<
     super(scope, id, config, LOGSTASH_COMPONENT_DEFAULT_CONFIG);
   }
 
-  protected getEcsTaskDefinitionConfig(
-    containers: Container[],
-    volumes: VolumeComponents,
-  ): ecs.EcsTaskDefinitionConfig {
-    return {
-      ...super.getEcsTaskDefinitionConfig(containers, volumes),
-      taskRoleArn: this.getLogstashTaskRole().artifacts.role.arn,
-    };
+  protected createComponents() {
+    super.createComponents();
+    const cloudwatch = this.createCloudwatchUser();
+    this.artifacts.cloudwatch = cloudwatch.artifacts;
   }
 
-  /**
-   * Create component once
-   */
-  protected getLogstashTaskRole(): LogstashTaskRoleComponent {
-    if (!this.taskRoleArn) {
-      this.taskRoleArn = new LogstashTaskRoleComponent(this, 'task-role', {});
-    }
-    return this.taskRoleArn;
+  protected createCloudwatchUser() {
+    return new CloudwatchUserComponent(this, 'cw', {});
   }
 
   protected getContainers(): Container[] {
-    // Inject task role arn as environment variable
-    const { containerConfig } = this.config;
-    containerConfig.environments.ROLE_ARN =
-      this.getLogstashTaskRole().artifacts.role.arn;
-
     return [
       new LogstashContainer(this, {
-        ...containerConfig,
+        ...this.config.containerConfig,
         name: 'logstash',
       }),
     ];
