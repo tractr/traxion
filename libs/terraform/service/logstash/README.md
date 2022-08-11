@@ -2,6 +2,10 @@
 
 Provides a Logstash service that will crawl information from CloudWatch and send it to Elastic Cloud.
 
+This service is based on this Docker image: https://hub.docker.com/repository/docker/tractr/logstash-input-cloudwatch
+
+## How it gets information from CloudWatch ?
+
 A user, allowed to read CloudWatch, is created.
 Its API key and secret are outputted by Terraform.
 
@@ -30,7 +34,7 @@ and `XPACK_MANAGEMENT_PIPELINE_ID` must be set in AWS Secrets Manager.
 
 ## Elastic Cloud configuration
 
-For more information on how to configure plugins :
+For more information on how to configure plugins:
 
 - [Cloudwatch logs input plugin](https://github.com/lukewaite/logstash-input-cloudwatch-logs)
 - [Cloudwatch input plugin](https://www.elastic.co/guide/en/logstash/current/plugins-inputs-cloudwatch.html).
