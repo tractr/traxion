@@ -1,4 +1,5 @@
 import { iam } from '@cdktf/provider-aws';
+import { IamRoleInlinePolicy } from '@cdktf/provider-aws/lib/iam';
 
 import {
   ExecutionRoleComponentArtifacts,
@@ -49,9 +50,15 @@ export class ExecutionRoleComponent extends AwsComponent<
             ],
           }),
         },
+        ...this.createAdditionalInlinePolicies(),
       ],
       name: this.getResourceName('role'),
     });
+  }
+
+  /** Allow to push others policies to the role */
+  protected createAdditionalInlinePolicies(): IamRoleInlinePolicy[] {
+    return [];
   }
 
   protected attachPolicyToRole(role: iam.IamRole) {

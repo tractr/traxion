@@ -1,1 +1,1 @@
-export * from './lib/terraform-service-logstash';
+export * from './lib';

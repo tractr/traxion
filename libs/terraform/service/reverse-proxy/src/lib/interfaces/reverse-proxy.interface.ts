@@ -1,4 +1,4 @@
-import { ecs, elb, iam, vpc } from '@cdktf/provider-aws';
+import { ecs, elb, vpc } from '@cdktf/provider-aws';
 import { DeepPartial } from 'ts-essentials';
 
 import {
@@ -20,7 +20,6 @@ export interface ReverseProxyComponentInternalConfig
   extends ServiceComponentInternalConfig {
   loadBalancerSecurityGroup: vpc.SecurityGroup;
   loadBalancerTargetGroup: elb.AlbTargetGroup;
-  taskRole: iam.IamRole;
 }
 
 export interface ReverseProxyComponentDefaultConfig

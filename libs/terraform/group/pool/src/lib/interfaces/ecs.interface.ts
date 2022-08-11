@@ -6,7 +6,6 @@ import { ExecutionRoleComponent } from '@tractr/terraform-service-ecs';
 import {
   ReverseProxyComponent,
   ReverseProxyComponentPublicConfig,
-  ReverseProxyTaskRoleComponent,
 } from '@tractr/terraform-service-reverse-proxy';
 
 export interface EcsComponentInternalConfig {
@@ -32,5 +31,4 @@ export interface EcsComponentArtifacts {
   executionRole: ExecutionRoleComponent;
   privateDns: PrivateDnsComponent;
   reverseProxy: ReverseProxyComponent;
-  reverseProxyTaskRole: ReverseProxyTaskRoleComponent;
 }
