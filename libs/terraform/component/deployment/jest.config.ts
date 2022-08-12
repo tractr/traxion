@@ -12,5 +12,5 @@ export default {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/terraform/component/deployment',
+  coverageDirectory: '../../../../coverage/libs/terraform/component/deployment',
 };
