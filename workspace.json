@@ -140,6 +140,7 @@
               "terraform-service-api:publish",
               "terraform-service-pwa:publish",
               "terraform-service-admin:publish",
+              "terraform-service-logstash:publish",
               "hapify-templates-nestjs-models:publish",
               "hapify-templates-angular-rext-client:publish",
               "nestjs-casl:publish",

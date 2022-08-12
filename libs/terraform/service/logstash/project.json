@@ -24,7 +24,7 @@
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
       "options": {
-        "access": "public"
+        "access": "restricted"
       }
     },
     "test": {

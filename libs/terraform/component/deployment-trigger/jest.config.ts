@@ -13,5 +13,5 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory:
-    '../../../coverage/libs/terraform/component/deployment-trigger',
+    '../../../../coverage/libs/terraform/component/deployment-trigger',
 };
