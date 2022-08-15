@@ -15,6 +15,8 @@ export class LogstashComponent extends ServiceComponent<
   LogstashComponentDefaultConfig,
   LogstashComponentArtifacts
 > {
+  protected cloudwatchUser: CloudwatchUserComponent | undefined;
+
   /**
    * Override constructor to merge config with default config
    */
@@ -28,18 +30,30 @@ export class LogstashComponent extends ServiceComponent<
 
   protected createComponents() {
     super.createComponents();
-    const cloudwatch = this.createCloudwatchUser();
+    const cloudwatch = this.createCloudwatchUserOnce();
     this.artifacts.cloudwatch = cloudwatch.artifacts;
   }
 
-  protected createCloudwatchUser() {
-    return new CloudwatchUserComponent(this, 'cw', {});
+  protected createCloudwatchUserOnce() {
+    if (!this.cloudwatchUser) {
+      this.cloudwatchUser = new CloudwatchUserComponent(this, 'cw', {});
+    }
+    return this.cloudwatchUser;
   }
 
   protected getContainers(): Container[] {
+    // ----------------------------------
+    // Inject cloudwatch access key
+    const config = this.config.containerConfig;
+    const cloudwatch = this.createCloudwatchUserOnce();
+    config.environments.CLOUDWATCH_KEY_ID = cloudwatch.artifacts.accessKey.id;
+    config.environments.CLOUDWATCH_KEY_SECRET =
+      cloudwatch.artifacts.accessKey.secret;
+    // ----------------------------------
+
     return [
       new LogstashContainer(this, {
-        ...this.config.containerConfig,
+        ...config,
         name: 'logstash',
       }),
     ];
