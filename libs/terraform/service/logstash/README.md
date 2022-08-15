@@ -46,8 +46,8 @@ The values `access_key_id` and `secret_access_key` will be output by Terraform.
 ```text
 input {
     cloudwatch_logs {
-        access_key_id => "AKXXXXXXXXX"
-        secret_access_key => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        access_key_id => "${CLOUDWATCH_KEY_ID}"
+        secret_access_key => "${CLOUDWATCH_KEY_SECRET}"
         log_group => "production-logs-group"
         region => "us-east-1"
     }
