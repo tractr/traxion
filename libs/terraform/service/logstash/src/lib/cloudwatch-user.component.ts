@@ -1,5 +1,4 @@
 import { iam } from '@cdktf/provider-aws';
-import { TerraformOutput } from 'cdktf';
 
 import {
   CloudwatchUserComponentArtifacts,
@@ -67,21 +66,8 @@ export class CloudwatchUserComponent extends AwsComponent<
   }
 
   protected createAccessKey(user: iam.IamUser) {
-    const key = new iam.IamAccessKey(this, 'key', {
+    return new iam.IamAccessKey(this, 'key', {
       user: user.name,
     });
-    // Create outputs
-    /* eslint-disable-next-line no-new */
-    new TerraformOutput(this, 'id', {
-      value: key.id,
-      sensitive: false,
-    });
-    /* eslint-disable-next-line no-new */
-    new TerraformOutput(this, 'secret', {
-      value: key.secret,
-      sensitive: true,
-    });
-
-    return key;
   }
 }
