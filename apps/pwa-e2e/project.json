@@ -1,5 +1,5 @@
 {
-  "implicitDependencies": [],
+  "implicitDependencies": ["pwa"],
   "projectType": "application",
   "sourceRoot": "apps/pwa-e2e/src",
   "tags": ["scope:app"],

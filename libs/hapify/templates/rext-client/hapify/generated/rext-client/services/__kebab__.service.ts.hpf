@@ -1,5 +1,7 @@
 import { Observable, OperatorFunction, zip } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+
+import { transformAndValidateMap } from '@tractr/common';
  
 import {
   count,
@@ -17,7 +19,6 @@ import {
   PatchOptions,
   remove,
   RemoveOptions,
-  transformAndValidateMap,
   upsert,
   UpsertOptions,
 } from '../helpers';

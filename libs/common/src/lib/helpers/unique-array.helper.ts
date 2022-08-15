@@ -1,3 +1,3 @@
-export function uniq<T = unknown>(array: Array<T>): Array<T> {
+export function unique<T = unknown>(array: Array<T>): Array<T> {
   return [...new Set(array)];
 }
