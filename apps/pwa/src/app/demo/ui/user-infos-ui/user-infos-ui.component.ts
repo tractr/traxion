@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import type { UserRoles } from '@prisma/client';
 
 @Component({
   selector: 'tractr-user-infos-ui',
@@ -8,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class UserInfosUiComponent {
   @Input() name: string | undefined;
   @Input() email: string | undefined;
-  @Input() role: 'admin' | 'user' | 'guest' = 'guest';
+  @Input() role: UserRoles = 'guest';
 
   /**
    * Login emitter
