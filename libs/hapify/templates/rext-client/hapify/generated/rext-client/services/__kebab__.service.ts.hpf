@@ -1,7 +1,7 @@
 import { Observable, OperatorFunction, zip } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { transformAndValidateMap } from '@tractr/common';
+import { fromDto, isAlike, transformAndValidateMap } from '@tractr/common';
  
 import {
   count,
@@ -13,8 +13,6 @@ import {
   FindManyOptions,
   findUnique,
   FindUniqueOptions,
-  fromDto,
-  isAlike,
   patch,
   PatchOptions,
   remove,
