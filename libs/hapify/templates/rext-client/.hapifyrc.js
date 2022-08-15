@@ -23,11 +23,6 @@ module.exports = {
       input: 'all',
     },
     {
-      path: 'generated/rext-client/helpers/transform-and-validate.ts',
-      engine: 'hpf',
-      input: 'all',
-    },
-    {
       path: 'generated/rext-client/helpers/universal-rxjs-ajax.ts',
       engine: 'hpf',
       input: 'all',
