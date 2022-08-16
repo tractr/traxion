@@ -54,9 +54,9 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           start: npx nx serve api
-          command: npx nx e2e pwa-e2e
+          command: npx nx e2e pwa-e2e --record
           record: true
-          parallel: true
+          install: false
           wait-on: 'http://localhost:3000/api'
         env:
           # statement_cache_size allow the api to not throw an error when the database is truncate then seed
