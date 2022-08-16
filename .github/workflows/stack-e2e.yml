@@ -50,6 +50,10 @@ jobs:
           registryUrl: 'https://npm.pkg.github.com'
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Create .env file
+        run: |
+          echo "API_URL=http://localhost:4200/api" > .env
+
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
@@ -61,5 +65,5 @@ jobs:
         env:
           # statement_cache_size allow the api to not throw an error when the database is truncate then seed
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/api?statement_cache_size=0
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}

@@ -10,6 +10,12 @@
           "devServerTarget": "pwa:serve:production"
         }
       },
+      "dependsOn": [
+        {
+          "projects": "dependencies",
+          "target": "preserve"
+        }
+      ],
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "apps/pwa-e2e/cypress.config.ts",
