@@ -12,8 +12,9 @@
       },
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/pwa-e2e/cypress.json",
+        "cypressConfig": "apps/pwa-e2e/cypress.config.ts",
         "devServerTarget": "pwa:serve:development",
+        "testingType": "e2e",
         "tsConfig": "apps/pwa-e2e/tsconfig.e2e.json"
       }
     },

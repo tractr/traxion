@@ -11,12 +11,18 @@ describe('pwa', () => {
       url: '/api/login',
     }).as('apiLogin');
 
-    cy.get('input[ng-reflect-name=email]').type('admin@traxion.com');
+    cy.intercept({
+      method: 'GET',
+      url: '/api/me',
+    }).as('apiMe');
+
+    cy.get('#login-email').type('admin@traxion.com');
 
     // {enter} causes the form to submit
-    cy.get('input[ng-reflect-name=password]').type(`password{enter}`);
+    cy.get('#login-password').type(`password{enter}`);
 
     cy.wait('@apiLogin');
+    cy.wait('@apiMe');
 
     // our auth cookie should be present
     cy.getCookie('authCookie').should('exist');
