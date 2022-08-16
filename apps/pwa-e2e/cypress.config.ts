@@ -15,6 +15,7 @@ const cypressJsonConfig = {
 };
 
 export default defineConfig({
+  projectId: 'tfttxp',
   e2e: {
     ...nxE2EPreset(__dirname),
     ...cypressJsonConfig,

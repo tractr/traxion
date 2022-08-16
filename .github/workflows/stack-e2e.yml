@@ -55,8 +55,10 @@ jobs:
         with:
           start: npx nx serve api
           command: npx nx e2e pwa-e2e
+          record: true
           wait-on: 'http://localhost:3000/api'
         env:
           # statement_cache_size allow the api to not throw an error when the database is truncate then seed
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/api?statement_cache_size=0
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
