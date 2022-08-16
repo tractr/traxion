@@ -12,12 +12,6 @@ export class TerraformEnvironmentVariables {
   @IsString()
   AWS_REGION!: string;
 
-  @IsString()
-  AWS_ACCESS_KEY_ID!: string;
-
-  @IsString()
-  AWS_SECRET_ACCESS_KEY!: string;
-
   @IsString({ each: true })
   @TransformStringToArrayOfString()
   AWS_AVAILABILITY_ZONES!: string[];
@@ -27,9 +21,6 @@ export class TerraformEnvironmentVariables {
 
   @IsString()
   TERRAFORM_REMOTE_BACKEND_ORG!: string;
-
-  @IsString()
-  TERRAFORM_REMOTE_BACKEND_TOKEN!: string;
 
   @IsString()
   TERRAFORM_REMOTE_BACKEND_WORKSPACE!: string;
