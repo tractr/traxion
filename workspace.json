@@ -23,6 +23,7 @@
     "generated-nestjs-models-common": "libs/generated/nestjs-models-common",
     "generated-nestjs-models-rest": "libs/generated/nestjs-models-rest",
     "generated-prisma": "libs/generated/prisma",
+    "generated-react-admin": "libs/generated/react-admin",
     "generated-rest-dtos": "libs/generated/rest-dtos",
     "generated-rext-client": "libs/generated/rext-client",
     "hapify-common": "libs/hapify/hapify-common",
