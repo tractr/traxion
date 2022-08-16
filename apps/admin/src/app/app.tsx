@@ -1,14 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.less';
-import NxWelcome from './nx-welcome';
+import { AppConfig } from '../interfaces';
 
-export function App() {
-  return (
-    <>
-      <NxWelcome title="admin" />
-      <div />
-    </>
-  );
+import { ReactAdmin } from '@tractr/generated-react-admin';
+
+export function App({ config }: { config: AppConfig }) {
+  return <ReactAdmin apiUrl={config.api.uri} />;
 }
 
 export default App;

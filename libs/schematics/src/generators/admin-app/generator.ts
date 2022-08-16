@@ -106,7 +106,6 @@ export default async function adminGenerator(
       'react-admin',
       'rxjs',
       'class-validator',
-      'ra-core',
       { packageName: 'react-router-dom', version: '^5.1.0' },
       { packageName: 'react-router', version: '^5.1.0' },
     ],

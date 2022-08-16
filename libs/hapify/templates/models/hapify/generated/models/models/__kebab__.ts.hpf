@@ -64,7 +64,7 @@ import {
 } from 'class-validator';
 	
 <<if Fields object>>
-import { JsonObject } from '@tractr/common';
+import type { JsonObject } from '@tractr/common';
 <<endif>>
 	
 <<<for (const relation of getRelations()) {>>>
