@@ -1,8 +1,8 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": ["generated-rext-client"],
   "prefix": "tractr",
   "projectType": "library",
-  "root": "libs/generated/react-admin",
   "sourceRoot": "libs/generated/react-admin/src",
   "tags": [],
   "targets": {
