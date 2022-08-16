@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.53.1](https://github.com/tractr/stack/compare/v1.53.0...v1.53.1) (2022-08-16)
+
+
+### Bug Fixes
+
+* add test coverage to 80% ([#446](https://github.com/tractr/stack/issues/446)) ([04f1857](https://github.com/tractr/stack/commit/04f18577cf177db6024bd3536aa8e7f6fb6199d8))
+
+
+
 # [1.53.0](https://github.com/tractr/stack/compare/v1.52.2...v1.53.0) (2022-08-15)
 
 
