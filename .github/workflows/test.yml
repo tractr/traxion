@@ -87,12 +87,10 @@ jobs:
       - name: Run Tests with Coverage
         shell: bash
         if: ${{ inputs.codecov }}
-        run:
-          npx nx run-many --target test --all --codeCoverage --coverageReporters
-          json,text
+        run: npx nx run-many --target test --all --codeCoverage
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         if: ${{ inputs.codecov }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

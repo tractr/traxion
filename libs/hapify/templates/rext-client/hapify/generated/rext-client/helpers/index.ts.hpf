@@ -1,3 +1,2 @@
 export * from './rest-ajax';
-export * from './transform-and-validate';
  

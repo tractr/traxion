@@ -47,6 +47,15 @@ import { MailerModule } from '@tractr/nestjs-mailer';
           ...defaultOptions.userConfig,
           customSelect: getSelectPrismaUserQuery(),
         },
+        cookies: {
+          ...defaultOptions.cookies,
+          cookieName: 'authCookie',
+          queryParamName: 'authToken',
+        },
+        jwtModuleOptions: {
+          ...defaultOptions.jwtModuleOptions,
+          secret: 'secret',
+        },
         userService: USER_SERVICE,
       }),
     }),

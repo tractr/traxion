@@ -30,6 +30,15 @@ export const Permission: Record<string, PolicyHandlerType<AppAbility>> = {
       Actions.UPDATE,
       obj ? subject('<<model pascal>>', obj) : '<<model pascal>>',
     ),
+  UPSERT_<<model constant>>: (ability, obj) =>
+    ability.can(
+      Actions.UPDATE,
+      obj ? subject('<<model pascal>>', obj) : '<<model pascal>>',
+    ) &&
+    ability.can(
+      Actions.CREATE,
+      obj ? subject('<<model pascal>>', obj) : '<<model pascal>>',
+    ),
   REMOVE_<<model constant>>: (ability, obj) =>
     ability.can(
       Actions.REMOVE,

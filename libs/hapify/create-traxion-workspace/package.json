@@ -5,7 +5,6 @@
     "type": "git",
     "url": "https://github.com/tractr/stack"
   },
-  "type": "module",
   "bin": {
     "create-traxion-workspace": "./bin/create-traxion-workspace.js"
   },

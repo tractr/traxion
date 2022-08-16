@@ -1,6 +1,5 @@
 export default {
   projects: [
-    '<rootDir>/apps/pwa',
     '<rootDir>/apps/api',
     '<rootDir>/apps/terraform',
     '<rootDir>/libs/hapify/generate-config',
@@ -25,7 +24,6 @@ export default {
     '<rootDir>/libs/config/eslint',
     '<rootDir>/libs/config/commit',
     '<rootDir>/libs/config/hapify',
-    '<rootDir>/libs/prisma',
     '<rootDir>/libs/nestjs/authentication',
     '<rootDir>/libs/nestjs/casl',
     '<rootDir>/libs/nestjs/core',
@@ -74,5 +72,6 @@ export default {
     '<rootDir>/libs/generated/nestjs-graphql',
     '<rootDir>/libs/nestjs/graphql',
     '<rootDir>/libs/terraform/service/logstash',
+    '<rootDir>/apps/pwa',
   ],
 };

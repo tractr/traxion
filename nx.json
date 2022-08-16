@@ -5,7 +5,6 @@
   "cli": {
     "defaultCollection": "@nrwl/angular"
   },
-  "defaultProject": "pwa",
   "generators": {
     "@nrwl/angular": {
       "application": {
@@ -76,7 +75,7 @@
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "accessToken": "ZDI3MTE5MTYtMzc2ZS00ODQ4LWIyMDEtMDBkNmIxMWZhZWI2fHJlYWQtd3JpdGU=",
+        "accessToken": "ZDY0OTk5NzAtZTQzMy00ZDU5LWI4ZjYtZDI0NDgwNmFiNmE0fHJlYWQ=",
         "cacheableOperations": ["build", "test", "lint", "e2e"],
         "parallel": 1
       },

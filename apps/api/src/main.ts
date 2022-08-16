@@ -35,6 +35,8 @@ async function bootstrap() {
     logger,
   });
 
+  app.setGlobalPrefix(globalPrefix);
+
   // eslint-disable-next-line @typescript-eslint/unbound-method
   app.use(
     morgan('combined', {
@@ -42,10 +44,7 @@ async function bootstrap() {
     }),
   );
 
-  const { COOKIE_SECRET: cookieSecret } = process.env;
-
-  if (cookieSecret === undefined || cookieSecret === '')
-    throw new Error('COOKIE_SECRET is missing in the environment variables');
+  const { COOKIE_SECRET: cookieSecret = 'cookieSecret' } = process.env;
 
   app.use(cookieParser(cookieSecret));
 

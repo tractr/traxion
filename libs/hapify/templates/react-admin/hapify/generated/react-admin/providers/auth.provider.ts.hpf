@@ -1,12 +1,12 @@
 import { AuthProvider } from 'ra-core';
-
+	
 export function checkStatusCode(statusCode: number) {
   if (statusCode < 200 || statusCode >= 300) {
     if (statusCode === 401) throw new Error('Authentication failed');
     throw new Error();
   }
 }
-
+	
 export function checkUserPermission(user: any) {
   const isAdmin = user.roles.includes('admin');
   if (!isAdmin)
@@ -14,7 +14,7 @@ export function checkUserPermission(user: any) {
       `Insufficient permission. You must have the 'admin' role to access this resource`,
     );
 }
-
+	
 export function authProvider(apiUrl: string | URL): AuthProvider {
   return {
     login: ({ username, password }) => {

@@ -1,3 +1,5 @@
+import { Writable } from 'stream';
+
 import { MESSAGE } from 'triple-beam';
 import { createLogger, format, transports } from 'winston';
 
@@ -7,17 +9,26 @@ import { createWinstonLogger, WinstonLogger } from './winston.logger';
 describe('WinstonLogger', () => {
   let output: jest.Mock<void, unknown[]>;
   let logger: WinstonLogger;
+  let stream: Writable;
 
   beforeEach(() => {
     output = jest.fn();
+
+    stream = new Writable();
+    // eslint-disable-next-line no-underscore-dangle
+    stream._write = (chunk, encoding, next) => {
+      next();
+    };
 
     logger = createWinstonLogger({
       level: 'debug',
       format: nestLikeConsoleFormat({
         colors: false,
       }),
+
       transports: [
-        new transports.Console({
+        new transports.Stream({
+          stream,
           log: (info) => output(info[MESSAGE]),
         }),
       ],
@@ -88,7 +99,8 @@ describe('WinstonLogger', () => {
         }),
       ),
       transports: [
-        new transports.Console({
+        new transports.Stream({
+          stream,
           log: (info) => output(info[MESSAGE]),
         }),
       ],
@@ -109,7 +121,8 @@ describe('WinstonLogger', () => {
         colors: false,
       }),
       transports: [
-        new transports.Console({
+        new transports.Stream({
+          stream,
           log: (info) => output(info[MESSAGE]),
         }),
       ],
@@ -127,7 +140,8 @@ describe('WinstonLogger', () => {
         colors: 1,
       }),
       transports: [
-        new transports.Console({
+        new transports.Stream({
+          stream,
           log: (info) => output(info[MESSAGE]),
         }),
       ],
@@ -145,7 +159,8 @@ describe('WinstonLogger', () => {
         colors: 1,
       }),
       transports: [
-        new transports.Console({
+        new transports.Stream({
+          stream,
           log: (info) => output(info[MESSAGE]),
         }),
       ],
@@ -164,7 +179,8 @@ describe('WinstonLogger', () => {
         colors: false,
       }),
       transports: [
-        new transports.Console({
+        new transports.Stream({
+          stream,
           log: (info) => output(info[MESSAGE]),
         }),
       ],
@@ -181,7 +197,8 @@ describe('WinstonLogger', () => {
       format: nestLikeConsoleFormat(),
       level: 'silly',
       transports: [
-        new transports.Console({
+        new transports.Stream({
+          stream,
           log: (info) => output(info[MESSAGE]),
         }),
       ],

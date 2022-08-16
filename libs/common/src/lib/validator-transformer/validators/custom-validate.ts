@@ -15,8 +15,5 @@ export function CustomValidate(
     ? constraints
     : [constraints];
 
-  if (constraintsList.length === 0)
-    throw new Error('No constraints specified.');
-
   return Validate(CustomConstraint, constraintsList);
 }

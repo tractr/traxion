@@ -41,11 +41,4 @@ export class AuthenticationOptionsUser {
   @IsOptional()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   customSelect?: Record<string, any>;
-
-  /**
-   * Allows to specify a filter function to remove some fields
-   * from the user before returning it to the frontend   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  formatUser: (user: Record<string, any>) => Record<string, any> = (user) =>
-    user;
 }
