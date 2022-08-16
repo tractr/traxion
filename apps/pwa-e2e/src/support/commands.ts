@@ -13,7 +13,10 @@ declare namespace Cypress {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Chainable<Subject> {
     login(email: string, password: string): void;
-    seed(forceReset?: boolean): Cypress.Chainable<Cypress.Exec>;
+    seed(options?: {
+      forceReset: boolean;
+      skipGenerate: boolean;
+    }): Cypress.Chainable<Cypress.Exec>;
   }
 }
 //
@@ -23,15 +26,20 @@ Cypress.Commands.add('login', (email, password) => {
   cy.request('POST', '/api/login', { email, password });
 });
 
-Cypress.Commands.add('seed', (forceReset = true) => {
+Cypress.Commands.add('seed', ({ forceReset, skipGenerate } = {}) => {
   console.info('Command: database seed');
   const env = { DATABASE_URL: process.env.DATABASE_URL };
   return cy
-    .exec(`npx prisma db push${forceReset ? ' --force-reset' : ''}`, {
-      env,
-    })
     .exec(
-      'ts-node -r tsconfig-paths/register --project ../../libs/generated/prisma/tsconfig.lib.json ../../libs/generated/prisma/prisma/seed.ts',
+      `npx prisma db push${forceReset ?? true ? ' --force-reset' : ''}${
+        skipGenerate ?? true ? ' --skip-generate' : ''
+      }`,
+      {
+        env,
+      },
+    )
+    .exec(
+      'npx ts-node -r tsconfig-paths/register --project ../../libs/generated/prisma/tsconfig.lib.json ../../libs/generated/prisma/prisma/seed.ts',
       { env },
     );
 });
