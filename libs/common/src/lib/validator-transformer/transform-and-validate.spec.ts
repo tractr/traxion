@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IsString, validate } from 'class-validator';
 import { TestScheduler } from 'rxjs/testing';
 
