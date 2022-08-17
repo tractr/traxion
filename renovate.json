@@ -1,6 +1,17 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
-  ]
+    "config:base",
+    ":preserveSemverRanges",
+    "group:recommended",
+    "group:monorepos",
+    "schedule:earlyMondays"
+  ],
+  "ignoreDeps": [
+    "packages:angularJs",
+    "monorepo:nrwl",
+    "monorepo:nest",
+    "monorepo:angular"
+  ],
+  "packageRules": []
 }
