@@ -11,7 +11,7 @@ import {
 <<if Fields rich and not internal>>
 import RichTextInput from 'ra-input-rich-text';
 <<endif>>
- 
+
 export const <<Model pascal>>Create = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
@@ -83,6 +83,7 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
         ]}
     <<else>>
     <AutocompleteInput
+        defaultValue={null}
         choices={[
     <<for field.enum e>>
           { id: '<<e camel>>', name: '<<e camel>>' },
@@ -147,20 +148,20 @@ function fieldInput(field) {
                 default: return ['DateTimeInput'];
             }
         case 'entity':
-            return field.multiple ? 
+            return field.multiple ?
                 ['ReferenceArrayInput', 'SelectArrayInput'] :
                 ['ReferenceInput', 'SelectInput'];
         default: return ['TextInput'];
     }
 }
 function labelFieldCamel(model) {
-    const label = model.fields.label.length ? 
+    const label = model.fields.label.length ?
         model.fields.label[0] : model.fields.primary;
     return label.names.camel;
 }
 function getImports() {
     const output = [];
-    
+
     root.fields
         .filter(field => !field.internal)
         .forEach(field => {
