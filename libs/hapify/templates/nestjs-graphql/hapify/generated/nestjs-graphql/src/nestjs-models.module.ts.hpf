@@ -1,5 +1,4 @@
-import { Module } from '@nestjs/common';
-import { LoggerModule } from '@tractr/nestjs-core';
+import { Module, Provider } from '@nestjs/common';
  
 import {
 <<for Models model>>
@@ -11,7 +10,7 @@ import {
 <<endfor>>
 } from '../../nestjs-models-common';
  
-const providers = [
+const providers: Provider<any>[] = [
   <<for Models model>>
     { provide: <<model constant>>_SERVICE, useClass: <<model pascal>>Service },
     {
