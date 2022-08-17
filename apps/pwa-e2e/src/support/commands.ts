@@ -14,8 +14,8 @@ declare namespace Cypress {
   interface Chainable<Subject> {
     login(email: string, password: string): void;
     seed(options?: {
-      forceReset: boolean;
-      skipGenerate: boolean;
+      forceReset?: boolean;
+      skipGenerate?: boolean;
     }): Cypress.Chainable<Cypress.Exec>;
   }
 }
@@ -26,13 +26,15 @@ Cypress.Commands.add('login', (email, password) => {
   cy.request('POST', '/api/login', { email, password });
 });
 
-Cypress.Commands.add('seed', ({ forceReset, skipGenerate } = {}) => {
+Cypress.Commands.add('seed', (options = {}) => {
   console.info('Command: database seed');
   const env = { DATABASE_URL: process.env.DATABASE_URL };
+  const forceReset = typeof options.forceReset === 'undefined' || true;
+  const skipGenerate = typeof options.skipGenerate === 'undefined' || true;
   return cy
     .exec(
-      `npx prisma db push${forceReset ?? true ? ' --force-reset' : ''}${
-        skipGenerate ?? true ? ' --skip-generate' : ''
+      `npx prisma db push${forceReset ? ' --force-reset' : ''}${
+        skipGenerate ? ' --skip-generate' : ''
       }`,
       {
         env,
