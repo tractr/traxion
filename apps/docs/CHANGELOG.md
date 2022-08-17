@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.54.1](https://github.com/tractr/stack/compare/v1.54.0...v1.54.1) (2022-08-17)
+
+
+### Features
+
+* add automation to deploy on traxion.github.io ([#450](https://github.com/tractr/stack/issues/450)) ([5fc5a4e](https://github.com/tractr/stack/commit/5fc5a4ef3b52f0515d9488214a0d86857c2e6f45))
+
+
+
 # [1.54.0](https://github.com/tractr/stack/compare/v1.53.1...v1.54.0) (2022-08-17)
 
 

@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.54.1](https://github.com/tractr/stack/compare/v1.54.0...v1.54.1) (2022-08-17)
+
+
+### Bug Fixes
+
+* add default value for enum fields in hapify tpl ([#463](https://github.com/tractr/stack/issues/463)) ([8f69f21](https://github.com/tractr/stack/commit/8f69f21a95edc245a146c046d9d38fc1e0f5da42))
+
+
+
 # [1.54.0](https://github.com/tractr/stack/compare/v1.53.1...v1.54.0) (2022-08-17)
 
 
