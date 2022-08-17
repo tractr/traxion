@@ -3,10 +3,16 @@ description: Checkout, setup nodeJs, install and generate
 
 inputs:
   registryUrl:
-    description: 'The registry url where the packages are loacated'
+    description: 'The registry url where the packages are located'
     default: 'https://registry.npmjs.org'
     required: false
     type: string
+
+  generate:
+    description: 'Do we need to generate the files'
+    default: true
+    required: false
+    type: boolean
 
   NPM_TOKEN:
     description: 'The npm token if needed'
@@ -23,22 +29,60 @@ runs:
         node-version: ${{ matrix.node }}
         registry-url: ${{ inputs.registryUrl }}
 
+    - name: Check for PM lock file
+      uses: actions/github-script@v3
+      id: detectPM
+      with:
+        script: |
+          const pnpm = fs.existsSync('pnpm-lock.yaml');
+          const yarn = !pnpm ? fs.existsSync('yarn.yaml') : false;
+          const npm = !pnpm && !yarn;
+
+          const PM = pnpm ? 'pnpm' : yarn ? 'yarn' : 'npm';
+
+          return { pnpm, yarn, npm, PM };
+
+    - uses: pnpm/action-setup@v2.2.2
+      if: ${{ steps.detectPM.outputs.pnpm }}
+      with:
+        version: 7
+
     # We install our dependencies
-    - name: Run npm install
+    - name: Run install packages (npm)
       shell: bash
+      if: ${{ steps.detectPM.outputs.npm }}
       env:
         NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
       run: npm ci --no-audit --no-progress --force --ignore-scripts
 
+    - name: Run install packages (yarn)
+      shell: bash
+      if: ${{ steps.detectPM.outputs.yarn }}
+      env:
+        NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
+      run: yarn install --frozen-lockfile --ignore-scripts
+
+    - name: Run install packages (yarn)
+      shell: bash
+      if: ${{ steps.detectPM.outputs.pnpm }}
+      env:
+        NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
+      run: pnpm install --frozen-lockfile --ignore-scripts
+
     # We launch our postinstall scripts
     - name: Run npm postinstall
       shell: bash
+      env:
+        PM: ${{ steps.detectPM.outputs.PM }}
       run: |
-        npm rebuild
-        npm run install --if-present
-        npm run prepare --if-present
+        $PM rebuild
+        $PM run --if-present install
+        $PM run --if-present prepare
 
     # We generate our hapify files
     - name: Run npm generate
       shell: bash
-      run: npm run generate
+      if: ${{ inputs.generate }}
+      env:
+        PM: ${{ steps.detectPM.outputs.PM }}
+      run: $PM run generate
