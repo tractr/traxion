@@ -6,12 +6,9 @@
     "group:recommended",
     "group:monorepos",
     "group:allNonMajor",
-    "schedule:weekends"
+    "schedule:weekends",
+    ":automergePr",
+    ":automergeMinor"
   ],
-  "ignoreDeps": [
-    "packages:angularJs",
-    "monorepo:nrwl",
-    "monorepo:nest",
-    "monorepo:angular"
-  ]
+  "ignorePaths": ["**/@angular/**", "**/@nestjs/**", "**/@nrwl/**"]
 }
