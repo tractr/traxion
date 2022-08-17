@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-group-zone",
-  "version": "1.54.2",
+  "version": "1.54.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
