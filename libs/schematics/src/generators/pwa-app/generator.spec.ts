@@ -16,7 +16,7 @@ describe('pwa-app generator', () => {
   };
 
   beforeEach(() => {
-    appTree = createTreeWithEmptyWorkspace(2);
+    appTree = createTreeWithEmptyWorkspace();
     appTree.write('.gitignore', '');
 
     (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValue(
