@@ -4,11 +4,23 @@
   "sourceRoot": "apps/docs/src",
   "tags": [],
   "targets": {
-    "build-legacy": {
-      "blockBy": "https://github.com/ZachJW34/nx-plus/issues/222",
+    "build": {
       "executor": "@nx-plus/docusaurus:browser",
       "options": {
         "outputPath": "dist/apps/docs"
+      }
+    },
+    "deploy": {
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build"
+        }
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ts-node deploy.ts",
+        "cwd": "apps/docs"
       }
     },
     "serve": {
