@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-service-logstash",
-  "version": "1.53.1",
+  "version": "1.54.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
