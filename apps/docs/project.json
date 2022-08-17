@@ -11,6 +11,12 @@
       }
     },
     "deploy": {
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build"
+        }
+      ],
       "executor": "nx:run-commands",
       "options": {
         "command": "ts-node deploy.ts",
