@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 
 @Component({
@@ -20,7 +20,7 @@ export class FormComponent implements AfterViewInit {
 
   @Input() layout: NzFormLayoutType = 'horizontal';
 
-  @Input() form!: FormGroup;
+  @Input() form!: UntypedFormGroup;
 
   ngAfterViewInit(): void {
     this.form.valueChanges.subscribe((changes) =>

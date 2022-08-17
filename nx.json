@@ -1,9 +1,7 @@
 {
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "affected": {
     "defaultBase": "main"
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
   },
   "generators": {
     "@nrwl/angular": {
@@ -58,19 +56,13 @@
     "workspace.json": "*"
   },
   "npmScope": "tractr",
-  "targetDependencies": {
-    "build": [
-      {
-        "projects": "dependencies",
-        "target": "build"
-      }
-    ],
-    "publish": [
-      {
-        "projects": "dependencies",
-        "target": "publish"
-      }
-    ]
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"]
+    },
+    "publish": {
+      "dependsOn": ["^publish"]
+    }
   },
   "tasksRunnerOptions": {
     "default": {

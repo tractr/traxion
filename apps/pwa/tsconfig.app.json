@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "target": "ES2017",
+    "target": "es2020",
     "types": []
   },
-  "exclude": ["**/*.test.ts", "**/*.spec.ts"],
+  "exclude": ["**/*.test.ts", "**/*.spec.ts", "jest.config.ts"],
   "extends": "./tsconfig.json",
   "files": ["src/main.ts", "src/polyfills.ts"],
   "include": ["src/**/*.d.ts"]

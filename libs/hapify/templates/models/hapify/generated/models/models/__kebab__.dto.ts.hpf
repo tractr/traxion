@@ -10,7 +10,7 @@ import {
 <<endif>>
 	
 <<if Fields object>>
-import { JsonObject } from '@tractr/common';
+import type { JsonObject } from '@tractr/common';
 <<endif>>
 	
 

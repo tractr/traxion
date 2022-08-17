@@ -84,7 +84,6 @@ export async function cleanReactLibrary(
   await addPackageToPackageJson(
     tree,
     [
-      'ra-core',
       { packageName: 'react-router-dom', version: '^5.1.0' },
       { packageName: 'react-router', version: '^5.1.0' },
     ],

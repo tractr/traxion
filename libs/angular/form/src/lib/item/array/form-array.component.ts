@@ -1,5 +1,5 @@
 import { Component, Input, TemplateRef } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { FormItemBaseComponent } from '../base/form-item-base.component';
 
@@ -12,7 +12,7 @@ export class FormArrayComponent extends FormItemBaseComponent<
   Record<string, unknown>[]
 > {
   @Input() content!: TemplateRef<{
-    $implicit: FormGroup;
+    $implicit: UntypedFormGroup;
     state: Record<string, unknown>[] | undefined;
     index: number;
   }>;
@@ -27,16 +27,16 @@ export class FormArrayComponent extends FormItemBaseComponent<
 
   @Input() removeTpl?: TemplateRef<void>;
 
-  formArray!: FormArray;
+  formArray!: UntypedFormArray;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: UntypedFormBuilder) {
     super();
   }
 
-  initControl(): FormArray {
-    let controlsConfig = this.state?.map(() => new FormGroup({}));
+  initControl(): UntypedFormArray {
+    let controlsConfig = this.state?.map(() => new UntypedFormGroup({}));
     if (!controlsConfig) {
-      controlsConfig = this.min <= 0 ? [] : [new FormGroup({})];
+      controlsConfig = this.min <= 0 ? [] : [new UntypedFormGroup({})];
     }
 
     this.formArray = this.formBuilder.array(controlsConfig, [
@@ -50,7 +50,7 @@ export class FormArrayComponent extends FormItemBaseComponent<
   }
 
   add(): void {
-    this.formArray.push(new FormGroup({}));
+    this.formArray.push(new UntypedFormGroup({}));
   }
 
   remove(index: number): void {

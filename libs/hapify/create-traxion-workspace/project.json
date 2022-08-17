@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/hapify/create-traxion-workspace/src",
   "tags": [],
@@ -6,20 +7,28 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": ["libs/hapify/create-traxion-workspace/*.md"],
+        "assets": [
+          "libs/hapify/create-traxion-workspace/*.md"
+        ],
         "main": "libs/hapify/create-traxion-workspace/src/index.ts",
         "outputPath": "dist/libs/hapify/create-traxion-workspace",
         "packageJson": "libs/hapify/create-traxion-workspace/package.json",
         "tsConfig": "libs/hapify/create-traxion-workspace/tsconfig.lib.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/hapify/create-traxion-workspace/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/hapify/create-traxion-workspace/**/*.ts"
+        ]
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",

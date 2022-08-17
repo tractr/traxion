@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/terraform/group/registry/src",
   "tags": [],
@@ -6,20 +7,28 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": ["libs/terraform/group/registry/*.md"],
+        "assets": [
+          "libs/terraform/group/registry/*.md"
+        ],
         "main": "libs/terraform/group/registry/src/index.ts",
         "outputPath": "dist/libs/terraform/group/registry",
         "packageJson": "libs/terraform/group/registry/package.json",
         "tsConfig": "libs/terraform/group/registry/tsconfig.lib.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/terraform/group/registry/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/terraform/group/registry/**/*.ts"
+        ]
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -33,7 +42,9 @@
         "jestConfig": "libs/terraform/group/registry/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/terraform/group/registry"]
+      "outputs": [
+        "coverage/libs/terraform/group/registry"
+      ]
     }
   }
 }

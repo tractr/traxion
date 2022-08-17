@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/terraform/service/postgres/src",
   "tags": [],
@@ -6,20 +7,28 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": ["libs/terraform/service/postgres/*.md"],
+        "assets": [
+          "libs/terraform/service/postgres/*.md"
+        ],
         "main": "libs/terraform/service/postgres/src/index.ts",
         "outputPath": "dist/libs/terraform/service/postgres",
         "packageJson": "libs/terraform/service/postgres/package.json",
         "tsConfig": "libs/terraform/service/postgres/tsconfig.lib.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/terraform/service/postgres/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/terraform/service/postgres/**/*.ts"
+        ]
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -33,7 +42,9 @@
         "jestConfig": "libs/terraform/service/postgres/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/terraform/service/postgres"]
+      "outputs": [
+        "coverage/libs/terraform/service/postgres"
+      ]
     }
   }
 }

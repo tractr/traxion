@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 
 import { FormPickerBaseComponent } from '../form-picker-base.component';
 
@@ -17,11 +17,11 @@ export class FormDatePickerComponent extends FormPickerBaseComponent {
    */
   @Input() showTime: boolean | { nzFormat: string } = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: UntypedFormBuilder) {
     super();
   }
 
-  initControl(): FormControl {
+  initControl(): UntypedFormControl {
     return this.formBuilder.control(this.state, [
       // eslint-disable-next-line @typescript-eslint/unbound-method
       ...(this.required ? [Validators.required] : []),

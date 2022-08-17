@@ -1,12 +1,17 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/nestjs/file-storage/src",
-  "tags": ["scope:nestjs"],
+  "tags": [
+    "scope:nestjs"
+  ],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": ["libs/nestjs/file-storage/*.md"],
+        "assets": [
+          "libs/nestjs/file-storage/*.md"
+        ],
         "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/file-storage/src/index.ts",
         "outputPath": "dist/libs/nestjs/file-storage",
@@ -14,14 +19,20 @@
         "tsConfig": "libs/nestjs/file-storage/tsconfig.lib.json",
         "updateBuildableProjectDepsInPackageJson": true
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/nestjs/file-storage/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/nestjs/file-storage/**/*.ts"
+        ]
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -35,7 +46,9 @@
         "jestConfig": "libs/nestjs/file-storage/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/nestjs/file-storage"]
+      "outputs": [
+        "coverage/libs/nestjs/file-storage"
+      ]
     }
   }
 }
