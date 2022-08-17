@@ -3,9 +3,15 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 export type LoginCredentials = {
   email: string;
@@ -18,13 +24,19 @@ export type LoginCredentials = {
   styleUrls: ['./login-form-ui.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginFormUiComponent {
+export class LoginFormUiComponent implements OnInit {
   /**
    * Login form instance
    */
-  validateForm = this.formBuilder.group({
-    email: [null, [Validators.required, Validators.email]],
-    password: [null, [Validators.required]],
+  validateForm = new FormGroup({
+    email: new FormControl<string>('', {
+      validators: [Validators.required, Validators.email],
+      nonNullable: true,
+    }),
+    password: new FormControl('', {
+      validators: Validators.required,
+      nonNullable: true,
+    }),
   });
 
   /**
@@ -35,10 +47,20 @@ export class LoginFormUiComponent {
 
   constructor(private formBuilder: FormBuilder) {}
 
+  ngOnInit(): void {
+    this.validateForm = this.formBuilder.nonNullable.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+    });
+  }
+
   /**
    * Emit login data on submit
    */
   submitForm() {
-    this.loginEvent.emit(this.validateForm.value as LoginCredentials);
+    if (!this.validateForm.valid) {
+      return;
+    }
+    this.loginEvent.emit(this.validateForm.getRawValue());
   }
 }
