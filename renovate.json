@@ -5,13 +5,13 @@
     ":preserveSemverRanges",
     "group:recommended",
     "group:monorepos",
-    "schedule:earlyMondays"
+    "group:allNonMajor",
+    "schedule:weekends"
   ],
   "ignoreDeps": [
     "packages:angularJs",
     "monorepo:nrwl",
     "monorepo:nest",
     "monorepo:angular"
-  ],
-  "packageRules": []
+  ]
 }
