@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.54.2](https://github.com/tractr/stack/compare/v1.54.1...v1.54.2) (2022-08-17)
+
+
+### Bug Fixes
+
+* type providers array correctly ([#475](https://github.com/tractr/stack/issues/475)) ([4714e8a](https://github.com/tractr/stack/commit/4714e8aef3ab78e493abb15359d219cc9a49d2ae))
+
+
+
 ## [1.54.1](https://github.com/tractr/stack/compare/v1.54.0...v1.54.1) (2022-08-17)
 
 
