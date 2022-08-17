@@ -21,14 +21,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    # We initialize the node action
-    - name: Use node.js
-      uses: actions/setup-node@v2
-      with:
-        cache: 'npm'
-        node-version: ${{ matrix.node }}
-        registry-url: ${{ inputs.registryUrl }}
-
+    # Check for the package manager
     - name: Check for PM lock file
       uses: actions/github-script@v3
       id: detectPM
@@ -41,6 +34,14 @@ runs:
           const PM = pnpm ? 'pnpm' : yarn ? 'yarn' : 'npm';
 
           return { pnpm, yarn, npm, PM };
+
+    # We initialize the node action
+    - name: Use node.js
+      uses: actions/setup-node@v2
+      with:
+        cache: ${{ steps.detectPM.outputs.PM }}
+        node-version: ${{ matrix.node }}
+        registry-url: ${{ inputs.registryUrl }}
 
     - uses: pnpm/action-setup@v2.2.2
       if: ${{ steps.detectPM.outputs.pnpm }}
