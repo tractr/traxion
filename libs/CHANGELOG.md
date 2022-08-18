@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.55.0](https://github.com/tractr/stack/compare/v1.54.5...v1.55.0) (2022-08-18)
+
+
+### Features
+
+* add password update route with a check on the old password ([#479](https://github.com/tractr/stack/issues/479)) ([e06f1b0](https://github.com/tractr/stack/commit/e06f1b08a03edd7e7165964b6be78963dd832810))
+
+
+
 ## [1.54.5](https://github.com/tractr/stack/compare/v1.54.4...v1.54.5) (2022-08-18)
 
 
