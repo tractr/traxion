@@ -44,7 +44,7 @@ runs:
     - name: Use node.js
       uses: actions/setup-node@v2
       with:
-        cache: ${{ steps.detectPM.outputs.result.PM }}
+        cache: ${{ fromJSON(steps.detectPM.outputs.result).PM }}
         node-version: ${{ matrix.node }}
         registry-url: ${{ inputs.registryUrl }}
 
