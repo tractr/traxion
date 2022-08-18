@@ -48,15 +48,21 @@ import {
 <<endif>>
 import { CaslExceptionInterceptor } from '@tractr/nestjs-casl';
 import { LoggerModule, TraxionValidationPipe } from '@tractr/nestjs-core';
-	
+
 describe('<<Model pascal>>Controller', () => {
   let app: INestApplication;
-  let mock<<Model pascal>>DatabaseService: MockProxy<<<Model pascal>>Service>;
+  let mock<<Model pascal>>Service: MockProxy<<<Model pascal>>Service>;
   let mockReqAbilities: jest.Mock<AppAbility>;
   let mockReqUser: jest.Mock<User>;
-	
+
+  <<if Fields internal and not primary and (not entity or nullable)>>
+  const fakedInternals = {
+    __fake: true
+  }
+  <<endif>>
+
   beforeAll(async () => {
-    mock<<Model pascal>>DatabaseService = mockDeep<<<Model pascal>>Service>();
+    mock<<Model pascal>>Service = mockDeep<<<Model pascal>>Service>();
     mockReqAbilities = jest.fn(undefined);
     mockReqUser = jest.fn(undefined);
 	
@@ -76,11 +82,7 @@ describe('<<Model pascal>>Controller', () => {
       providers: [
         {
           provide: <<Model constant>>_SERVICE,
-          useClass: <<Model pascal>>Service,
-        },
-        {
-          provide: <<Model constant>>_DATABASE_SERVICE,
-          useValue: mock<<Model pascal>>DatabaseService,
+          useValue: mock<<Model pascal>>Service,
         },
         {
           provide: <<Model constant>>_REST_DTO_SERVICE,
@@ -96,16 +98,30 @@ describe('<<Model pascal>>Controller', () => {
     app.useGlobalPipes(new TraxionValidationPipe());
 	
     await app.init();
+
+    <<if Fields internal and not primary and (not entity or nullable)>>
+    // Add faked default internals
+    (
+      mock<<Model pascal>>Service.getDefaultInternals as jest.Mock
+    ).mockReturnValue(fakedInternals);
+    <<endif>>
+
   });
 	
   afterEach(async () => {
-    mock<<Model pascal>>DatabaseService.create.mockReset();
-    mock<<Model pascal>>DatabaseService.count.mockReset();
-    mock<<Model pascal>>DatabaseService.findMany.mockReset();
-    mock<<Model pascal>>DatabaseService.findUnique.mockReset();
-    mock<<Model pascal>>DatabaseService.update.mockReset();
-    mock<<Model pascal>>DatabaseService.upsert.mockReset();
-    mock<<Model pascal>>DatabaseService.delete.mockReset();
+    mock<<Model pascal>>Service.create.mockReset();
+    mock<<Model pascal>>Service.count.mockReset();
+    mock<<Model pascal>>Service.findMany.mockReset();
+    mock<<Model pascal>>Service.findUnique.mockReset();
+    mock<<Model pascal>>Service.update.mockReset();
+    mock<<Model pascal>>Service.upsert.mockReset();
+    mock<<Model pascal>>Service.delete.mockReset();
+    <<if Fields internal and not primary and (not entity or nullable)>>
+    mock<<Model pascal>>Service.getDefaultInternals.mockClear();
+    <<endif>>
+    <<if Fields ownership and not primary and internal>>
+    mock<<Model pascal>>Service.getDefaultOwnerships.mockClear();
+    <<endif>>
     mockReqAbilities.mockReset();
     mockReqUser.mockReset();
     if (app) await app.close();
@@ -122,23 +138,27 @@ describe('<<Model pascal>>Controller', () => {
       <<if Fields ownership and not primary and internal>>
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
+      (mock<<Model pascal>>Service.getDefaultOwnerships as jest.Mock).mockReturnValue({
+        user: { connect: mockUser },
+      });
       <<endif>>
 	
       await request(app.getHttpServer()).post('/<<Model kebab>>').send(<<Model camel>>).expect(201);
 	
-      expect(mock<<Model pascal>>DatabaseService.create).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.create).toHaveBeenCalledWith({
+      <<if Fields internal and not primary and (not entity or nullable)>>
+      expect(mock<<Model pascal>>Service.getDefaultInternals).toHaveBeenCalled();
+      <<endif>>
+
+      <<if Fields ownership and not primary and internal>>
+      expect(mock<<Model pascal>>Service.getDefaultOwnerships).toHaveBeenCalledTimes(1);
+      <<endif>>
+
+      expect(mock<<Model pascal>>Service.create).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.create).toHaveBeenCalledWith({
         data: {
-          <<for Fields not ownership and not primary and internal field>>
-          <<field camel>>:<<< if (field.meta.default) { >>><<-field default raw>><<< } else { >>>
-            <<if field nullable>>null
-            <<elseif field datetime>>expect.any(Date)
-            <<elseif field boolean>>false
-            <<elseif field enum>><<Model pascal>><<field pascal>>["<<for1 field.enum e>><<e raw>><<endfor>>"]
-            <<elseif field number>>0
-            <<elseif field string>>''<<endif>>
-          <<< } >>>,
-          <<endfor>>
+          <<if Fields internal and not primary and (not entity or nullable)>>
+          ...fakedInternals,
+          <<endif>>
           <<for Fields not primary and not internal field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
@@ -161,6 +181,9 @@ describe('<<Model pascal>>Controller', () => {
       <<if Fields ownership and not primary and internal>>
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
+      (mock<<Model pascal>>Service.getDefaultOwnerships as jest.Mock).mockReturnValue({
+        user: { connect: mockUser },
+      });
       <<endif>>
 
       const { can, build } = new AbilityBuilder(AppAbility);
@@ -169,19 +192,20 @@ describe('<<Model pascal>>Controller', () => {
 	
       await request(app.getHttpServer()).post('/<<Model kebab>>').send(<<Model camel>>).expect(201);
 	
-      expect(mock<<Model pascal>>DatabaseService.create).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.create).toHaveBeenCalledWith({
+      <<if Fields internal and not primary and (not entity or nullable)>>
+      expect(mock<<Model pascal>>Service.getDefaultInternals).toHaveBeenCalled();
+      <<endif>>
+
+      <<if Fields ownership and not primary and internal>>
+      expect(mock<<Model pascal>>Service.getDefaultOwnerships).toHaveBeenCalledTimes(1);
+      <<endif>>
+
+      expect(mock<<Model pascal>>Service.create).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.create).toHaveBeenCalledWith({
         data: {
-          <<for Fields not ownership and not primary and internal field>>
-          <<field camel>>:<<< if (field.meta.default) { >>><<-field default raw>><<< } else { >>>
-            <<if field nullable>>null
-            <<elseif field datetime>>expect.any(Date)
-            <<elseif field boolean>>false
-            <<elseif field enum>><<Model pascal>><<field pascal>>["<<for1 field.enum e>><<e raw>><<endfor>>"]
-            <<elseif field number>>0
-            <<elseif field string>>''<<endif>>
-          <<< } >>>,
-          <<endfor>>
+          <<if Fields internal and not primary and (not entity or nullable)>>
+          ...fakedInternals,
+          <<endif>>
           <<for Fields not primary and not internal field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
@@ -203,8 +227,8 @@ describe('<<Model pascal>>Controller', () => {
     it('should get the <<Model camel>> count', async () => {
       await request(app.getHttpServer()).get('/<<Model kebab>>/count').expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.count).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.count).toHaveBeenCalledWith({});
+      expect(mock<<Model pascal>>Service.count).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.count).toHaveBeenCalledWith({});
     });
 	
     it('should get the <<Model camel>> count with filter', async () => {
@@ -217,8 +241,8 @@ describe('<<Model pascal>>Controller', () => {
       <<endfor>>
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.count).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.count).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.count).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.count).toHaveBeenCalledWith({
         where: {
         <<for Fields searchable and not password and not hidden field>>
           <<field camel>>: {
@@ -239,8 +263,8 @@ describe('<<Model pascal>>Controller', () => {
   
       await request(app.getHttpServer()).get('/<<Model kebab>>/count').expect(200);
   
-      expect(mock<<Model pascal>>DatabaseService.count).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.count).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.count).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.count).toHaveBeenCalledWith({
         where: {
           AND: [
             {
@@ -266,8 +290,8 @@ describe('<<Model pascal>>Controller', () => {
       <<endfor>>
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.count).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.count).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.count).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.count).toHaveBeenCalledWith({
         where: {
           AND: [
             {
@@ -295,8 +319,8 @@ describe('<<Model pascal>>Controller', () => {
         .get(`/<<Model kebab>>/${mock<<Model pascal>>.id}`)
         .expect(404);
 	
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledWith({
         where: {
           id: mock<<Model pascal>>.id,
         },
@@ -305,14 +329,14 @@ describe('<<Model pascal>>Controller', () => {
 	
     it('should get the <<Model camel>>', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
 	
       await request(app.getHttpServer())
         .get(`/<<Model kebab>>/${mock<<Model pascal>>.id}`)
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledWith({
         where: {
           id: mock<<Model pascal>>.id,
         },
@@ -322,7 +346,7 @@ describe('<<Model pascal>>Controller', () => {
     <<if Fields ownership>>
     it('should get the <<Model camel>> with casl abilities filter', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
 	
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.READ, '<<Model pascal>>', { id: mock<<Model pascal>>.id });
@@ -332,15 +356,15 @@ describe('<<Model pascal>>Controller', () => {
         .get(`/<<Model kebab>>/${mock<<Model pascal>>.id}`)
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledWith({
         where: { id: mock<<Model pascal>>.id },
       });
     });
 	
     it('should forbid the <<Model camel>> with casl abilities filter', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
 	
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.READ, '<<Model pascal>>', { id: 'foo' });
@@ -350,8 +374,8 @@ describe('<<Model pascal>>Controller', () => {
         .get(`/<<Model kebab>>/${mock<<Model pascal>>.id}`)
         .expect(403);
 	
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledWith({
         where: { id: mock<<Model pascal>>.id },
       });
     });
@@ -361,13 +385,13 @@ describe('<<Model pascal>>Controller', () => {
   describe('GET /<<Model kebab>>', () => {
     it('should get a list of <<Model pascal>>s and have default options', async () => {
       const mock<<Model pascal>>s = mock<<Model pascal>>sFactory({}, 5);
-      mock<<Model pascal>>DatabaseService.findMany.mockResolvedValue(mock<<Model pascal>>s);
+      mock<<Model pascal>>Service.findMany.mockResolvedValue(mock<<Model pascal>>s);
 	
       const res = await request(app.getHttpServer()).get('/<<Model kebab>>').expect(200);
 	
       expect(res.body.length).toEqual(mock<<Model pascal>>s.length);
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledWith({
         orderBy: { id: 'asc' },
         take: 100,
       });
@@ -379,8 +403,8 @@ describe('<<Model pascal>>Controller', () => {
         .query('take=5')
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledWith({
         orderBy: { id: 'asc' },
         take: 5,
       });
@@ -392,8 +416,8 @@ describe('<<Model pascal>>Controller', () => {
         .query('skip=5')
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledWith({
         orderBy: { id: 'asc' },
         skip: 5,
         take: 100,
@@ -408,8 +432,8 @@ describe('<<Model pascal>>Controller', () => {
         <<endfor>>
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledWith({
         orderBy: {
         <<for Fields sortable field>>
           <<field camel>>: 'asc',
@@ -428,8 +452,8 @@ describe('<<Model pascal>>Controller', () => {
         .query('order=desc')
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledWith({
         orderBy: {
         <<for Fields sortable field>>
           <<field camel>>: 'desc',
@@ -447,8 +471,8 @@ describe('<<Model pascal>>Controller', () => {
         <<endfor>>
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledWith({
         orderBy: {
         <<for Fields sortable field>>
           <<field camel>>: 'desc',
@@ -468,8 +492,8 @@ describe('<<Model pascal>>Controller', () => {
       <<endfor>>
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledWith({
         where: {
         <<for Fields searchable and not password and not hidden field>>
           <<field camel>>: {
@@ -497,8 +521,8 @@ describe('<<Model pascal>>Controller', () => {
         <<endfor>>
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledWith({
         where: {
         <<for Fields searchable and not password and not hidden field>>
           <<field camel>>: {
@@ -526,8 +550,8 @@ describe('<<Model pascal>>Controller', () => {
 	
       await request(app.getHttpServer()).get('/<<Model kebab>>').expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledWith({
         where: {
           AND: [
             {
@@ -555,8 +579,8 @@ describe('<<Model pascal>>Controller', () => {
       <<endfor>>
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findMany).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledWith({
         where: {
           AND: [
             {
@@ -581,7 +605,7 @@ describe('<<Model pascal>>Controller', () => {
   describe('PATCH /<<Model kebab>>/:id', () => {
     it('should update a <<Model camel>>', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
 	
       const <<Model camel>>: <<Model pascal>>UpdateBodyDto = mock<<Model pascal>>UpdateBodyDtoFactory();
 	
@@ -590,8 +614,8 @@ describe('<<Model pascal>>Controller', () => {
         .send(<<Model camel>>)
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.update).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.update).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.update).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.update).toHaveBeenCalledWith({
         where: { id: mock<<Model pascal>>.id },
         data: {
           <<for Fields not primary and not internal field>>
@@ -609,7 +633,7 @@ describe('<<Model pascal>>Controller', () => {
 	
     it('should return 404 if no <<Model camel>> found', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(null);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(null);
 	
       const <<Model camel>>: <<Model pascal>>UpdateBodyDto = mock<<Model pascal>>UpdateBodyDtoFactory();
 	
@@ -618,8 +642,8 @@ describe('<<Model pascal>>Controller', () => {
         .send(<<Model camel>>)
         .expect(404);
 	
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledWith({
         where: { id: mock<<Model pascal>>.id },
       });
     });
@@ -629,7 +653,7 @@ describe('<<Model pascal>>Controller', () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
 	
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.UPDATE, '<<Model pascal>>', { id: mock<<Model pascal>>.id });
@@ -642,8 +666,8 @@ describe('<<Model pascal>>Controller', () => {
         .send(<<Model camel>>)
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledWith({
         where: { id: mock<<Model pascal>>.id },
       });
     });
@@ -652,7 +676,7 @@ describe('<<Model pascal>>Controller', () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
 	
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.UPDATE, '<<Model pascal>>', { id: 'foo' });
@@ -665,8 +689,8 @@ describe('<<Model pascal>>Controller', () => {
         .send(<<Model camel>>)
         .expect(403);
 	
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledWith({
         where: { id: mock<<Model pascal>>.id },
       });
     });
@@ -676,11 +700,14 @@ describe('<<Model pascal>>Controller', () => {
   describe('PUT /<<Model kebab>>(/:id)?', () => {
     it('should update a <<Model camel>> if <<Model camel>> id is not found in the database', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(null);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(null);
       
       <<if Fields ownership and not primary and internal>>
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
+      (mock<<Model pascal>>Service.getDefaultOwnerships as jest.Mock).mockReturnValue({
+        user: { connect: mockUser },
+      });
 	
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.UPDATE, '<<Model pascal>>', { id: mock<<Model pascal>>.id });
@@ -695,20 +722,21 @@ describe('<<Model pascal>>Controller', () => {
         .send(<<Model camel>>)
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.upsert).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.upsert).toHaveBeenCalledWith({
+      <<if Fields internal and not primary and (not entity or nullable)>>
+      expect(mock<<Model pascal>>Service.getDefaultInternals).toHaveBeenCalled();
+      <<endif>>
+
+      <<if Fields ownership and not primary and internal>>
+      expect(mock<<Model pascal>>Service.getDefaultOwnerships).toHaveBeenCalledTimes(1);
+      <<endif>>
+
+      expect(mock<<Model pascal>>Service.upsert).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.upsert).toHaveBeenCalledWith({
         where: { id: mock<<Model pascal>>.id },
         create: {
-          <<for Fields not ownership and not primary and internal field>>
-          <<field camel>>:<<< if (field.meta.default) { >>><<-field default raw>><<< } else { >>>
-            <<if field nullable>>null
-            <<elseif field datetime>>expect.any(Date)
-            <<elseif field boolean>>false
-            <<elseif field enum>><<Model pascal>><<field pascal>>["<<for1 field.enum e>><<e raw>><<endfor>>"]
-            <<elseif field number>>0
-            <<elseif field string>>''<<endif>>
-          <<< } >>>,
-          <<endfor>>
+          <<if Fields internal and not primary and (not entity or nullable)>>
+          ...fakedInternals,
+          <<endif>>
           <<for Fields not primary and not internal field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
@@ -738,11 +766,14 @@ describe('<<Model pascal>>Controller', () => {
 	
     it('should update a <<Model camel>> if <<Model camel>> id is found in the database', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
 	
       <<if Fields ownership and not primary and internal>>
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
+      (mock<<Model pascal>>Service.getDefaultOwnerships as jest.Mock).mockReturnValue({
+        user: { connect: mockUser },
+      });
 	
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.UPDATE, '<<Model pascal>>', { id: mock<<Model pascal>>.id });
@@ -757,20 +788,21 @@ describe('<<Model pascal>>Controller', () => {
         .send(<<Model camel>>)
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.upsert).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.upsert).toHaveBeenCalledWith({
+      <<if Fields internal and not primary and (not entity or nullable)>>
+      expect(mock<<Model pascal>>Service.getDefaultInternals).toHaveBeenCalled();
+      <<endif>>
+
+      <<if Fields ownership and not primary and internal>>
+      expect(mock<<Model pascal>>Service.getDefaultOwnerships).toHaveBeenCalledTimes(1);
+      <<endif>>
+
+      expect(mock<<Model pascal>>Service.upsert).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.upsert).toHaveBeenCalledWith({
         where: { id: mock<<Model pascal>>.id },
         create: {
-          <<for Fields not ownership and not primary and internal field>>
-          <<field camel>>:<<< if (field.meta.default) { >>><<-field default raw>><<< } else { >>>
-            <<if field nullable>>null
-            <<elseif field datetime>>expect.any(Date)
-            <<elseif field boolean>>false
-            <<elseif field enum>><<Model pascal>><<field pascal>>["<<for1 field.enum e>><<e raw>><<endfor>>"]
-            <<elseif field number>>0
-            <<elseif field string>>''<<endif>>
-          <<< } >>>,
-          <<endfor>>
+          <<if Fields internal and not primary and (not entity or nullable)>>
+          ...fakedInternals,
+          <<endif>>
           <<for Fields not primary and not internal field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
@@ -800,11 +832,14 @@ describe('<<Model pascal>>Controller', () => {
 	
     it('should create a <<Model camel>> if no id is provided', async () => {
       const { id } = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(null);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(null);
 	
       <<if Fields ownership and not primary and internal>>
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
+      (mock<<Model pascal>>Service.getDefaultOwnerships as jest.Mock).mockReturnValue({
+        user: { connect: mockUser },
+      });
 	
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.UPDATE, '<<Model pascal>>', { id });
@@ -819,20 +854,21 @@ describe('<<Model pascal>>Controller', () => {
         .send(<<Model camel>>)
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.upsert).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.upsert).toHaveBeenCalledWith({
+      <<if Fields internal and not primary and (not entity or nullable)>>
+      expect(mock<<Model pascal>>Service.getDefaultInternals).toHaveBeenCalled();
+      <<endif>>
+
+      <<if Fields ownership and not primary and internal>>
+      expect(mock<<Model pascal>>Service.getDefaultOwnerships).toHaveBeenCalledTimes(1);
+      <<endif>>
+
+      expect(mock<<Model pascal>>Service.upsert).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.upsert).toHaveBeenCalledWith({
         where: { id: undefined },
         create: {
-          <<for Fields not ownership and not primary and internal field>>
-          <<field camel>>:<<< if (field.meta.default) { >>><<-field default raw>><<< } else { >>>
-            <<if field nullable>>null
-            <<elseif field datetime>>expect.any(Date)
-            <<elseif field boolean>>false
-            <<elseif field enum>><<Model pascal>><<field pascal>>["<<for1 field.enum e>><<e raw>><<endfor>>"]
-            <<elseif field number>>0
-            <<elseif field string>>''<<endif>>
-          <<< } >>>,
-          <<endfor>>
+          <<if Fields internal and not primary and (not entity or nullable)>>
+          ...fakedInternals,
+          <<endif>>
           <<for Fields not primary and not internal field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
@@ -862,11 +898,14 @@ describe('<<Model pascal>>Controller', () => {
 	
     it('should update a <<Model camel>> if an id is provided', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
 	
       <<if Fields ownership and not primary and internal>>
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
+      (mock<<Model pascal>>Service.getDefaultOwnerships as jest.Mock).mockReturnValue({
+        user: { connect: mockUser },
+      });
 	
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.UPDATE, '<<Model pascal>>', { id: mock<<Model pascal>>.id });
@@ -880,21 +919,22 @@ describe('<<Model pascal>>Controller', () => {
         .put(`/<<Model kebab>>`)
         .send({ ...<<Model camel>>, id: mock<<Model pascal>>.id })
         .expect(200);
+
+      <<if Fields internal and not primary and (not entity or nullable)>>
+      expect(mock<<Model pascal>>Service.getDefaultInternals).toHaveBeenCalled();
+      <<endif>>
+
+      <<if Fields ownership and not primary and internal>>
+      expect(mock<<Model pascal>>Service.getDefaultOwnerships).toHaveBeenCalledTimes(1);
+      <<endif>>
 	
-      expect(mock<<Model pascal>>DatabaseService.upsert).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.upsert).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.upsert).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.upsert).toHaveBeenCalledWith({
         where: { id: mock<<Model pascal>>.id },
         create: {
-          <<for Fields not ownership and not primary and internal field>>
-          <<field camel>>:<<< if (field.meta.default) { >>><<-field default raw>><<< } else { >>>
-            <<if field nullable>>null
-            <<elseif field datetime>>expect.any(Date)
-            <<elseif field boolean>>false
-            <<elseif field enum>><<Model pascal>><<field pascal>>["<<for1 field.enum e>><<e raw>><<endfor>>"]
-            <<elseif field number>>0
-            <<elseif field string>>''<<endif>>
-          <<< } >>>,
-          <<endfor>>
+          <<if Fields internal and not primary and (not entity or nullable)>>
+          ...fakedInternals,
+          <<endif>>
           <<for Fields not primary and not internal field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
@@ -926,28 +966,28 @@ describe('<<Model pascal>>Controller', () => {
   describe('DELETE /<<Model kebab>>/:id', () => {
     it('should delete a <<Model camel>>', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
 	
       await request(app.getHttpServer())
         .delete(`/<<Model kebab>>/${mock<<Model pascal>>.id}`)
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.delete).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.delete).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.delete).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.delete).toHaveBeenCalledWith({
         where: { id: mock<<Model pascal>>.id },
       });
     });
 	
     it('should return 404 if no <<Model camel>> found', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(null);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(null);
 	
       await request(app.getHttpServer())
         .delete(`/<<Model kebab>>/${mock<<Model pascal>>.id}`)
         .expect(404);
 	
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledWith({
         where: { id: mock<<Model pascal>>.id },
       });
     });
@@ -957,7 +997,7 @@ describe('<<Model pascal>>Controller', () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
 	
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.REMOVE, '<<Model pascal>>', { id: mock<<Model pascal>>.id });
@@ -967,8 +1007,8 @@ describe('<<Model pascal>>Controller', () => {
         .delete(`/<<Model kebab>>/${mock<<Model pascal>>.id}`)
         .expect(200);
 	
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledWith({
         where: { id: mock<<Model pascal>>.id },
       });
     });
@@ -977,7 +1017,7 @@ describe('<<Model pascal>>Controller', () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
-      mock<<Model pascal>>DatabaseService.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
 	
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.UPDATE, '<<Model pascal>>', { id: 'foo' });
@@ -987,8 +1027,8 @@ describe('<<Model pascal>>Controller', () => {
         .delete(`/<<Model kebab>>/${mock<<Model pascal>>.id}`)
         .expect(403);
 	
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledTimes(1);
-      expect(mock<<Model pascal>>DatabaseService.findUnique).toHaveBeenCalledWith({
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledTimes(1);
+      expect(mock<<Model pascal>>Service.findUnique).toHaveBeenCalledWith({
         where: { id: mock<<Model pascal>>.id },
       });
     });
