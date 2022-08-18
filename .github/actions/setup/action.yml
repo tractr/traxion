@@ -36,6 +36,10 @@ runs:
 
           return { pnpm, yarn, npm, PM };
 
+    - name: Get result
+      shell: bash
+      run: echo "${{steps.detectPM.outputs.result}}"
+
     # We initialize the node action
     - name: Use node.js
       uses: actions/setup-node@v2
