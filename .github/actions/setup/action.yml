@@ -23,22 +23,21 @@ runs:
   steps:
     # Check for the package manager
     - name: Check for PM lock file
-      uses: actions/github-script@v3
       id: detectPM
-      with:
-        script: |
-          const fs = require('fs');
-          const pnpm = fs.existsSync('pnpm-lock.yaml');
-          const yarn = !pnpm ? fs.existsSync('yarn.yaml') : false;
-          const npm = !pnpm && !yarn;
-
-          const PM = pnpm ? 'pnpm' : yarn ? 'yarn' : 'npm';
-
-          return { pnpm, yarn, npm, PM };
+      shell: bash
+      run: |
+        echo "::set-output name=pnpm::$(if [[ -f "pnpm-lock.yaml" ]]; then echo "true"; else echo "false"; fi)"
+        echo "::set-output name=yarn::$(if [[ -f "yarn.yaml" ]]; then echo "true"; else echo "false"; fi)"
+        echo "::set-output name=npm::$(if [[ -f "package-lock.json" ]]; then echo "true"; elif ! [[ -f "yarn.lock" || -f "pnpm-lock.yaml" ]]; then echo "true"; else echo "false"; fi)"
+        echo "::set-output name=PM::$(if [[ -f "pnpm-lock.yaml" ]]; then echo "pnpm"; elif ! [[ -f "yarn.lock" ]]; then echo "yarn"; else echo "npm"; fi)"
 
     - name: Get result
       shell: bash
-      run: echo "${{steps.detectPM.outputs.result}}"
+      run: |
+        echo "${{steps.detectPM.outputs.pnpm}}"
+        echo "${{steps.detectPM.outputs.yarn}}"
+        echo "${{steps.detectPM.outputs.npm}}"
+        echo "${{steps.detectPM.outputs.PM}}"
 
     # We initialize the node action
     - name: Use node.js
