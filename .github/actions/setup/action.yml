@@ -33,6 +33,8 @@ runs:
 
           const PM = pnpm ? 'pnpm' : yarn ? 'yarn' : 'npm';
 
+          console.log(pnpm, yarn, npm, PM)
+
           return { pnpm, yarn, npm, PM };
 
     # We initialize the node action
