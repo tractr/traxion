@@ -27,8 +27,7 @@
     "format": "nx format:write --all",
     "format:check": "nx format:check --all",
     "format:write": "nx format:write --all",
-    "pregenerate": "./tools/npm-scripts/pregenerate.sh",
-    "generate": "npx nx run-many --target generate --all",
+    "generate": "./tools/npm-scripts/pregenerate.sh && nx run-many --target generate --all",
     "help": "nx help",
     "postinstall": "(is-ci || husky install) && ngcc --properties es2020 browser module main",
     "lint": "nx workspace-lint && nx run-many --all --target=lint --parallel",
@@ -38,7 +37,7 @@
     "prisma:studio": "prisma studio --schema=./libs/prisma/prisma/schema.prisma",
     "start": "nx serve",
     "test": " nx run-many --all --target=test",
-    "ts-node": "npx ts-node -r tsconfig-paths/register --project apps/api/tsconfig.json",
+    "ts-node": "ts-node -r tsconfig-paths/register --project apps/api/tsconfig.json",
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator"
   },
