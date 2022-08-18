@@ -9,8 +9,11 @@ import {
 } from '@nestjs/common';
 import { User } from '@prisma/client';
 
-import { PasswordResetDto, PasswordResetRequestedDto } from '../dtos';
-import { PasswordUpdateDto } from '../dtos/password-update.dto';
+import {
+  PasswordResetDto,
+  PasswordResetRequestedDto,
+  PasswordUpdateDto,
+} from '../dtos';
 import { BadResetCodeError, UserNotFoundError } from '../errors';
 import { PasswordService } from '../services';
 

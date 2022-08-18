@@ -62,7 +62,6 @@ describe('AuthService', () => {
 
   describe('updatePassword', () => {
     it('should update the password', async () => {
-      mockUser.password = 'password';
       mockUserService.findUnique.mockResolvedValue(mockUser);
       mockAuthenticationService.verifyPassword.mockResolvedValue(true);
       mockUserService.update.mockResolvedValue(mockUser);
