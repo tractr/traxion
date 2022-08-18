@@ -27,6 +27,7 @@ runs:
       id: detectPM
       with:
         script: |
+          const fs = require('fs');
           const pnpm = fs.existsSync('pnpm-lock.yaml');
           const yarn = !pnpm ? fs.existsSync('yarn.yaml') : false;
           const npm = !pnpm && !yarn;
@@ -78,6 +79,7 @@ runs:
       env:
         PM: ${{ steps.detectPM.outputs.PM }}
       run: |
+        echo 'Using $PM package manager'
         $PM rebuild
         $PM run --if-present install
         $PM run --if-present prepare
