@@ -2,20 +2,35 @@ import {
   Body,
   Controller,
   HttpCode,
+  Patch,
   Post,
   Put,
   UnauthorizedException,
 } from '@nestjs/common';
+import { User } from '@prisma/client';
 
 import { PasswordResetDto, PasswordResetRequestedDto } from '../dtos';
+import { PasswordUpdateDto } from '../dtos/password-update.dto';
 import { BadResetCodeError, UserNotFoundError } from '../errors';
 import { PasswordService } from '../services';
 
-import { Public } from '@tractr/nestjs-core';
+import { CurrentUser, Public } from '@tractr/nestjs-core';
 
 @Controller('password')
 export class PasswordController {
   constructor(private readonly passwordService: PasswordService) {}
+
+  @Patch('update')
+  async updatePassword(
+    @Body() { oldPassword, newPassword }: PasswordUpdateDto,
+    @CurrentUser() user: User,
+  ): Promise<void> {
+    await this.passwordService.updatePassword(
+      user.id,
+      oldPassword,
+      newPassword,
+    );
+  }
 
   @Public()
   @Post('reset')
