@@ -32,7 +32,7 @@ runs:
         echo "::set-output name=PM::$(if [[ -f "pnpm-lock.yaml" ]]; then echo "pnpm"; elif ! [[ -f "yarn.lock" ]]; then echo "yarn"; else echo "npm"; fi)"
 
     - uses: pnpm/action-setup@v2.2.2
-      if: ${{ steps.detectPM.outputs.result.pnpm == 'true' }}
+      if: ${{ steps.detectPM.outputs.pnpm == 'true' }}
       with:
         version: 7
 
@@ -47,21 +47,21 @@ runs:
     # We install our dependencies
     - name: Run install packages (npm)
       shell: bash
-      if: ${{ steps.detectPM.outputs.result.npm == 'true' }}
+      if: ${{ steps.detectPM.outputs.npm == 'true' }}
       env:
         NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
       run: npm ci --no-audit --no-progress --force --ignore-scripts
 
     - name: Run install packages (yarn)
       shell: bash
-      if: ${{ steps.detectPM.outputs.result.yarn == 'true' }}
+      if: ${{ steps.detectPM.outputs.yarn == 'true' }}
       env:
         NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
       run: yarn install --frozen-lockfile --ignore-scripts
 
     - name: Run install packages (pnpm)
       shell: bash
-      if: ${{ steps.detectPM.outputs.result.pnpm == 'true' }}
+      if: ${{ steps.detectPM.outputs.pnpm == 'true' }}
       env:
         NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
       run: pnpm install --frozen-lockfile --ignore-scripts
