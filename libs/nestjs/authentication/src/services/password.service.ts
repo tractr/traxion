@@ -8,8 +8,13 @@ import {
   DEFAULT_RESET_HTML,
 } from '../constants';
 import { AuthenticationOptions } from '../dtos';
-import { BadResetCodeError, UserNotFoundError } from '../errors';
+import {
+  BadPasswordError,
+  BadResetCodeError,
+  UserNotFoundError,
+} from '../errors';
 import { RequestResetOptions, UserService, UserType } from '../interfaces';
+import { AuthenticationService } from './authentication.service';
 
 import { MailerService } from '@tractr/nestjs-mailer';
 
@@ -20,6 +25,7 @@ export class PasswordService {
     private readonly userService: UserService,
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
     private readonly authenticationOptions: AuthenticationOptions,
+    private readonly authenticationService: AuthenticationService,
     private readonly jwtService: JwtService,
     private readonly mailerService: MailerService,
   ) {}
@@ -154,6 +160,41 @@ export class PasswordService {
       },
       data: {
         password,
+      },
+    });
+  }
+
+  async updatePassword(
+    userId: string,
+    oldPassword: string,
+    newPassword: string,
+  ) {
+    const { idField } = this.authenticationOptions.userConfig;
+
+    const user = await this.userService.findUnique({
+      where: {
+        [idField]: userId,
+      },
+      select: { id: true, password: true },
+    });
+
+    if (!user) throw new UserNotFoundError();
+
+    if (
+      !(await this.authenticationService.verifyPassword(
+        oldPassword,
+        user.password as string | null,
+      ))
+    ) {
+      throw new BadPasswordError();
+    }
+
+    await this.userService.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        password: newPassword,
       },
     });
   }
