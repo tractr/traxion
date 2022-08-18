@@ -31,13 +31,10 @@ runs:
         echo "::set-output name=npm::$(if [[ -f "package-lock.json" ]]; then echo "true"; elif ! [[ -f "yarn.lock" || -f "pnpm-lock.yaml" ]]; then echo "true"; else echo "false"; fi)"
         echo "::set-output name=PM::$(if [[ -f "pnpm-lock.yaml" ]]; then echo "pnpm"; elif ! [[ -f "yarn.lock" ]]; then echo "yarn"; else echo "npm"; fi)"
 
-    - name: Get result
-      shell: bash
-      run: |
-        echo "${{steps.detectPM.outputs.pnpm}}"
-        echo "${{steps.detectPM.outputs.yarn}}"
-        echo "${{steps.detectPM.outputs.npm}}"
-        echo "${{steps.detectPM.outputs.PM}}"
+    - uses: pnpm/action-setup@v2.2.2
+      if: ${{ steps.detectPM.outputs.result.pnpm == 'true' }}
+      with:
+        version: 7
 
     # We initialize the node action
     - name: Use node.js
@@ -46,11 +43,6 @@ runs:
         cache: ${{ steps.detectPM.outputs.PM }}
         node-version: ${{ matrix.node }}
         registry-url: ${{ inputs.registryUrl }}
-
-    - uses: pnpm/action-setup@v2.2.2
-      if: ${{ steps.detectPM.outputs.result.pnpm == 'true' }}
-      with:
-        version: 7
 
     # We install our dependencies
     - name: Run install packages (npm)
