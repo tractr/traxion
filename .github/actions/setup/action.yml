@@ -34,41 +34,39 @@ runs:
 
           const PM = pnpm ? 'pnpm' : yarn ? 'yarn' : 'npm';
 
-          console.log(pnpm, yarn, npm, PM)
-
           return { pnpm, yarn, npm, PM };
 
     # We initialize the node action
     - name: Use node.js
       uses: actions/setup-node@v2
       with:
-        cache: ${{ steps.detectPM.outputs.PM }}
+        cache: ${{ steps.detectPM.outputs.result.PM }}
         node-version: ${{ matrix.node }}
         registry-url: ${{ inputs.registryUrl }}
 
     - uses: pnpm/action-setup@v2.2.2
-      if: ${{ steps.detectPM.outputs.pnpm }}
+      if: ${{ steps.detectPM.outputs.result.pnpm }}
       with:
         version: 7
 
     # We install our dependencies
     - name: Run install packages (npm)
       shell: bash
-      if: ${{ steps.detectPM.outputs.npm }}
+      if: ${{ steps.detectPM.outputs.result.npm }}
       env:
         NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
       run: npm ci --no-audit --no-progress --force --ignore-scripts
 
     - name: Run install packages (yarn)
       shell: bash
-      if: ${{ steps.detectPM.outputs.yarn }}
+      if: ${{ steps.detectPM.outputs.result.yarn }}
       env:
         NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
       run: yarn install --frozen-lockfile --ignore-scripts
 
-    - name: Run install packages (yarn)
+    - name: Run install packages (pnpm)
       shell: bash
-      if: ${{ steps.detectPM.outputs.pnpm }}
+      if: ${{ steps.detectPM.outputs.result.pnpm }}
       env:
         NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
       run: pnpm install --frozen-lockfile --ignore-scripts
@@ -77,9 +75,9 @@ runs:
     - name: Run npm postinstall
       shell: bash
       env:
-        PM: ${{ steps.detectPM.outputs.PM }}
+        PM: ${{ steps.detectPM.outputs.result.PM }}
       run: |
-        echo 'Using $PM package manager'
+        echo "Using $PM package manager"
         $PM rebuild
         $PM run --if-present install
         $PM run --if-present prepare
