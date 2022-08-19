@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "projects": {
     "admin": "apps/admin",
     "angular-authentication": "libs/angular/authentication",
@@ -22,6 +23,7 @@
     "generated-nestjs-models-common": "libs/generated/nestjs-models-common",
     "generated-nestjs-models-rest": "libs/generated/nestjs-models-rest",
     "generated-prisma": "libs/generated/prisma",
+    "generated-react-admin": "libs/generated/react-admin",
     "generated-rest-dtos": "libs/generated/rest-dtos",
     "generated-rext-client": "libs/generated/rext-client",
     "hapify-common": "libs/hapify/hapify-common",
@@ -81,6 +83,7 @@
     "terraform-service-pwa": "libs/terraform/service/pwa",
     "terraform-service-reverse-proxy": "libs/terraform/service/reverse-proxy",
     "workspace": {
+      "$schema": "../node_modules/nx/schemas/project-schema.json",
       "root": "libs",
       "targets": {
         "release": {

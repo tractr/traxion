@@ -11,14 +11,14 @@ import {
   <<endif>>
 <<endfor>>
 } from '../../../models/mock';
-
+	
 <<if Fields unique>>
 import { <<Model pascal>>UniqueValues } from '../../../models';
 <<endif>>
   
-function mock<<Model pascal>>UpsertBodyDtoFactory(
+export function mock<<Model pascal>>UpsertBodyDtoFactory(
   override: Partial<<<Model pascal>>UpsertBodyDto> = {}
-): Required< <<Model pascal>>UpsertBodyDto> {
+): <<Model pascal>>UpsertBodyDto {
   return {
   <<for Fields not internal field>>
     <<if field not entity>>
@@ -51,7 +51,7 @@ export function mock<<Model pascal>>sUpsertBodyDtoFactory(override: Partial< <<M
       <<<if(unique.type === 'entity'){>>>
       tmp<<Model pascal>>.<<unique camel>> && uniqueValues.<<unique camel>>Id.includes(tmp<<Model pascal>>.<<unique camel>>))
       <<<}else{>>>
-      uniqueValues.<<unique camel>>.includes(tmp<<Model pascal>>.<<unique camel>>))
+      typeof tmp<<Model pascal>>.<<unique camel>> === 'undefined' || uniqueValues.<<unique camel>>.includes(tmp<<Model pascal>>.<<unique camel>>))
       <<<}>>>
       <<<if(index < root.f.unique.filter((e) => !e.internal && e.type !== 'boolean' && e.type !== 'enum').length - 1){>>>
       ||

@@ -1,13 +1,13 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-
+	
 import { FindManyPagination } from '@tractr/nestjs-graphql';
-
+	
 import {
   <<Model pascal>>
 } from '../../../prisma-nestjs-graphql';
+	
 
-
-
+	
 @ObjectType()
 export class FindMany<<Model pascal>>Output extends FindManyPagination {
   @Field(() => [<<Model pascal>>])

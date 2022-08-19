@@ -61,6 +61,9 @@
         "libs/generated/nestjs-models-rest/mock/src/index.ts"
       ],
       "@tractr/generated-prisma": ["libs/generated/prisma/src/index.ts"],
+      "@tractr/generated-react-admin": [
+        "libs/generated/react-admin/src/index.ts"
+      ],
       "@tractr/generated-rest-dtos": ["libs/generated/rest-dtos/src/index.ts"],
       "@tractr/generated-rest-dtos/mock": [
         "libs/generated/rest-dtos/mock/src/index.ts"
@@ -167,7 +170,7 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es2015"
+    "target": "es2020"
   },
   "exclude": ["node_modules", "tmp", "**/files/**"]
 }

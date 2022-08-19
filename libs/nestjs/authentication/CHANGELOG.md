@@ -2,6 +2,53 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.55.0](https://github.com/tractr/stack/compare/v1.54.5...v1.55.0) (2022-08-18)
+
+
+### Features
+
+* add password update route with a check on the old password ([#479](https://github.com/tractr/stack/issues/479)) ([e06f1b0](https://github.com/tractr/stack/commit/e06f1b08a03edd7e7165964b6be78963dd832810))
+
+
+
+## [1.54.5](https://github.com/tractr/stack/compare/v1.54.4...v1.54.5) (2022-08-18)
+
+
+
+## [1.54.4](https://github.com/tractr/stack/compare/v1.54.3...v1.54.4) (2022-08-17)
+
+
+
+## [1.54.3](https://github.com/tractr/stack/compare/v1.54.2...v1.54.3) (2022-08-17)
+
+
+
+## [1.54.2](https://github.com/tractr/stack/compare/v1.54.1...v1.54.2) (2022-08-17)
+
+
+
+## [1.54.1](https://github.com/tractr/stack/compare/v1.54.0...v1.54.1) (2022-08-17)
+
+
+
+# [1.54.0](https://github.com/tractr/stack/compare/v1.53.1...v1.54.0) (2022-08-17)
+
+
+### Features
+
+* update angular, nestjs, prisma and react-admin ([#468](https://github.com/tractr/stack/issues/468)) ([8122574](https://github.com/tractr/stack/commit/8122574544697a29a2acf1aef799fc568fb50be0))
+
+
+
+## [1.53.1](https://github.com/tractr/stack/compare/v1.53.0...v1.53.1) (2022-08-16)
+
+
+### Bug Fixes
+
+* add test coverage to 80% ([#446](https://github.com/tractr/stack/issues/446)) ([04f1857](https://github.com/tractr/stack/commit/04f18577cf177db6024bd3536aa8e7f6fb6199d8))
+
+
+
 # [1.53.0](https://github.com/tractr/stack/compare/v1.52.2...v1.53.0) (2022-08-15)
 
 

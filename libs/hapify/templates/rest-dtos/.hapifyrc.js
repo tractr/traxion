@@ -63,6 +63,11 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'generated/rest-dtos/dtos/{kebab}/{kebab}-upsert-body-with-primary.dto.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'generated/rest-dtos/dtos/{kebab}/{kebab}-delete-params.dto.ts',
       engine: 'hpf',
       input: 'one',

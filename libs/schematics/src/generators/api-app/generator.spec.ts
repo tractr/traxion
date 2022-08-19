@@ -12,7 +12,7 @@ describe('api-app generator', () => {
   };
 
   beforeEach(() => {
-    appTree = createTreeWithEmptyWorkspace(2);
+    appTree = createTreeWithEmptyWorkspace();
   });
 
   it('should run successfully', async () => {

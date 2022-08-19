@@ -4,15 +4,16 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 
 import { AuthenticationEndpointMockController } from '../mocks';
-import { AuthenticationModule } from './authentication.module';
-import { AUTHENTICATION_MODULE_OPTIONS } from './constants';
+
 import {
+  AUTHENTICATION_MODULE_OPTIONS,
+  AuthenticationModule,
   AuthenticationOptions,
   AuthenticationOptionsPassword,
   AuthenticationOptionsPasswordReset,
-} from './dtos';
-import { JwtGlobalAuthGuard } from './guards';
-import { AuthenticationUserService } from './services';
+  AuthenticationUserService,
+  JwtGlobalAuthGuard,
+} from '.';
 
 import { getDefaults } from '@tractr/common';
 import { LoggerModule } from '@tractr/nestjs-core';

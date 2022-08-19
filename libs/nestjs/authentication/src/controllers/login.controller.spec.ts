@@ -20,7 +20,6 @@ describe('Authentication Module', () => {
   let app: INestApplication;
   let mockUserService: MockProxy<AuthenticationUserService>;
   let mockUser: UserType;
-  const mockFormatUser = jest.fn();
 
   beforeAll(async () => {
     mockUserService = mockDeep<AuthenticationUserService>();
@@ -51,7 +50,6 @@ describe('Authentication Module', () => {
             emailField: 'email',
             loginField: 'email',
             passwordField: 'password',
-            formatUser: mockFormatUser,
           },
           jwtModuleOptions: {
             secret: 'integration-tests',
@@ -68,14 +66,8 @@ describe('Authentication Module', () => {
     await app.init();
   });
 
-  beforeEach(() => {
-    mockFormatUser.mockImplementation((user) => user);
-  });
-
   afterEach(async () => {
-    mockFormatUser.mockReset();
     mockUserService.findUnique.mockReset();
-    // mockFormatUser.mockReset();
     if (app) await app.close();
   });
 
@@ -126,11 +118,7 @@ describe('Authentication Module', () => {
 
       expect(response.body).toEqual({
         accessToken: await authenticationService.createUserJWT(mockUser),
-        user: expectedUser,
       });
-
-      expect(mockFormatUser).toHaveBeenCalledTimes(1);
-      expect(mockFormatUser).toBeCalledWith(expectedUser);
     });
     it('/is-public-with-user should have a user if connected', async () => {
       const authenticationService = app.get<AuthenticationService>(
@@ -161,9 +149,6 @@ describe('Authentication Module', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(JSON.parse(JSON.stringify(mockUser)));
-
-      expect(mockFormatUser).toHaveBeenCalledTimes(1);
-      expect(mockFormatUser).toBeCalledWith(mockUser);
     });
     it('/me get the user information back and use the query param auth strategy', async () => {
       const authenticationService = app.get<AuthenticationService>(
@@ -179,9 +164,6 @@ describe('Authentication Module', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(JSON.parse(JSON.stringify(mockUser)));
-
-      expect(mockFormatUser).toHaveBeenCalledTimes(1);
-      expect(mockFormatUser).toBeCalledWith(mockUser);
     });
 
     it('/logout should set the cookie to undefined to logout the browser', async () => {

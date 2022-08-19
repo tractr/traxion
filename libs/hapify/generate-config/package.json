@@ -1,6 +1,6 @@
 {
   "name": "@tractr/hapify-generate-config",
-  "version": "1.53.0",
+  "version": "1.55.0",
   "description": "Generate hapify config",
   "repository": {
     "type": "git",

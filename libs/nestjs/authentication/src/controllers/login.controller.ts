@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Controller,
   Get,
   HttpCode,
@@ -9,18 +10,26 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBody } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 
-import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
-import { CurrentUser } from '../decorators';
+import {
+  AUTHENTICATION_MODULE_OPTIONS,
+  AUTHENTICATION_USER_SERVICE,
+} from '../constants';
 import { AccessTokenDto, AuthenticationOptions } from '../dtos';
+import { LoginPostBodyDto } from '../dtos/login-form.dto';
 import { LocalAuthGuard } from '../guards';
-import { UserType } from '../interfaces';
+import { UserService, UserType } from '../interfaces';
 import { AuthenticationService } from '../services';
+
+import { CurrentUser } from '@tractr/nestjs-core';
 
 @Controller()
 export class LoginController {
   constructor(
+    @Inject(AUTHENTICATION_USER_SERVICE)
+    private readonly userService: UserService,
     @Inject(AUTHENTICATION_MODULE_OPTIONS)
     private readonly authenticationOptions: AuthenticationOptions,
     private readonly authenticationService: AuthenticationService,
@@ -28,15 +37,15 @@ export class LoginController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
+  @ApiBody({ type: LoginPostBodyDto })
   @HttpCode(200)
   async login(
     @Req() req: Request & { secret: string },
     @Res({ passthrough: true }) res: Response,
-  ): Promise<AccessTokenDto & { user: UserType }> {
+  ): Promise<AccessTokenDto> {
     const user = this.throwIfNoUser(req);
     const token = await this.authenticationService.login(user);
     const { options: cookieOptions } = this.authenticationOptions.cookies;
-    const { formatUser } = this.authenticationOptions.userConfig;
     res.cookie(
       this.authenticationOptions.cookies.cookieName,
       token.accessToken,
@@ -47,8 +56,6 @@ export class LoginController {
     );
     return {
       ...token,
-      // Format user with filter provided by the module consumer
-      user: formatUser(user),
     };
   }
 
@@ -74,11 +81,21 @@ export class LoginController {
   }
 
   @Get('me')
-  me(@Req() req: Request, @CurrentUser() user: UserType): UserType {
+  async me(
+    @Req() req: Request,
+    @CurrentUser() currentUserInfo: UserType,
+  ): Promise<UserType> {
     this.throwIfNoUser(req);
-    const { formatUser } = this.authenticationOptions.userConfig;
-    // Format user with filter provided by the module consumer
-    return formatUser(user);
+
+    const user = await this.userService.findUnique({
+      where: { id: currentUserInfo.id as string },
+    });
+
+    if (!user) {
+      throw new BadRequestException();
+    }
+
+    return user;
   }
 
   throwIfNoUser(req: Request): UserType {

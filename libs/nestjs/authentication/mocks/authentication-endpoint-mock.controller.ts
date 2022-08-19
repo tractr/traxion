@@ -1,9 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import type { User } from '@prisma/client';
 
-import { CurrentUser } from '../src';
-
-import { Public } from '@tractr/nestjs-core';
+import { CurrentUser, Public } from '@tractr/nestjs-core';
 
 @Controller()
 export class AuthenticationEndpointMockController {

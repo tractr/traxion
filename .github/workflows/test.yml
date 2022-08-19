@@ -40,6 +40,10 @@ on:
         description: 'The codecov token if needed'
         required: false
 
+      NX_CLOUD_ACCESS_TOKEN:
+        description: 'A Nx cloud access token'
+        required: false
+
 jobs:
   tests:
     name: Build, Lint and Tests
@@ -70,29 +74,35 @@ jobs:
         if: ${{ inputs.build }}
         shell: bash
         run: npx nx affected:build --base=remotes/origin/main
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       # Run the lint
       - name: Run Affected Lint
         if: ${{ inputs.lint }}
         shell: bash
         run: npx nx affected:lint --base=remotes/origin/main
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       # We only run the affected test
       - name: Run Affected Tests
         if: ${{ !inputs.codecov }}
         shell: bash
         run: npx nx affected:test --base=remotes/origin/main
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       # Run the tests and the coverage
       - name: Run Tests with Coverage
         shell: bash
         if: ${{ inputs.codecov }}
-        run:
-          npx nx run-many --target test --all --codeCoverage --coverageReporters
-          json,text
+        run: npx nx run-many --target test --all --codeCoverage
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         if: ${{ inputs.codecov }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

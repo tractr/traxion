@@ -17,6 +17,7 @@
     "cdktf",
     "codecov",
     "Concat",
+    "datetime",
     "dbml",
     "dtos",
     "endfor",
@@ -28,6 +29,7 @@
     "nrwl",
     "Rext",
     "tractr",
+    "Traxion",
     "unittests",
     "Unsubscriber",
     "upsert"

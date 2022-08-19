@@ -132,7 +132,7 @@ export async function seed<<Model pascal>>s(
   await insert<<Model pascal>>s(prisma, seeds);
   return seeds;
 }
-
+	
 export function convert<<Model pascal>>ToCreateInput(<<Model camel>>: <<Model pascal>>): Prisma.<<Model pascal>>UncheckedCreateInput {
   return {
     ...<<Model camel>>,
@@ -141,7 +141,7 @@ export function convert<<Model pascal>>ToCreateInput(<<Model camel>>: <<Model pa
 <<endfor>>
   }
 }
-
+	
 <<<
 function getDependencies() {
   const seen = { [root.id]: true };
@@ -149,4 +149,4 @@ function getDependencies() {
     .filter((m) => (seen[m.id] ? false : (seen[m.id] = true)));
 }
 >>>
-
+	

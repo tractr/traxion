@@ -35,4 +35,4 @@ export class <<Model pascal>>RestModule {
       module: <<Model pascal>>RestModule,
     };
   }}
-
+	

@@ -6,7 +6,7 @@ Table <<model pascal>> {
 <<for model.fields not manyMany field>>
   <<field snake>> <<=type(field, model)>> <<=attributes(field)>>
 <<endfor>>
-
+	
 <<if model.fields unique>>
   Indexes {
     <<if2 model.fields unique>>
@@ -17,7 +17,7 @@ Table <<model pascal>> {
   }
 <<endif>>
 }
-
+	
 <<for model.fields manyMany field>>
 // Many-to-many for <<model pascal>>.<<field snake>>
 Table <<model pascal>>_<<field pascal>> {
@@ -26,7 +26,7 @@ Table <<model pascal>>_<<field pascal>> {
     <<field.model snake>> <<=type(field.model.fields.primary)>> [ref: > <<field.model pascal>>.<<field.model.fields.primary snake>>]
 }
 <<endfor>>
-
+	
 
 <<for model.fields enum field>>
 Enum <<model snake>>_<<field snake>> {
@@ -35,9 +35,9 @@ Enum <<model snake>>_<<field snake>> {
 <<endfor>>
 }
 <<endfor>>
-
+	
 <<endfor>>
-
+	
 
 <<< 
 function type(field, model = null) {

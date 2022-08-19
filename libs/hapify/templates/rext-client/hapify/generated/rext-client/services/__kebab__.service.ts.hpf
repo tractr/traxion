@@ -1,5 +1,7 @@
 import { Observable, OperatorFunction, zip } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+
+import { fromDto, isAlike, transformAndValidateMap } from '@tractr/common';
  
 import {
   count,
@@ -11,13 +13,10 @@ import {
   FindManyOptions,
   findUnique,
   FindUniqueOptions,
-  fromDto,
-  isAlike,
   patch,
   PatchOptions,
   remove,
   RemoveOptions,
-  transformAndValidateMap,
   upsert,
   UpsertOptions,
 } from '../helpers';
@@ -152,10 +151,10 @@ export class <<Model pascal>>Service {
     return switchMap((source) => {
       if (Array.isArray(source))
         return this.findUnique$(source[0], <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>source[1], <<<}>>>options);
-
+	
       if (isAlike(source, <<Model pascal>>FindUniqueParamsDto))
         return this.findUnique$(source, <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>undefined, <<<}>>>options);
-
+	
       return this.findUnique$(source.params, <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>source.query, <<<}>>>options);
     });
   }
@@ -250,7 +249,7 @@ export class <<Model pascal>>Service {
     return switchMap((source) => {
       if (Array.isArray(source))
         return this.patch$(source[0], source[1], options);
-
+	
       return this.patch$(source.params, source.body, options);
     });
   }
@@ -312,7 +311,7 @@ export class <<Model pascal>>Service {
     return switchMap((source) => {
       if (Array.isArray(source))
         return this.upsert$(source[0], source[1], options);
-
+	
       return this.upsert$(source.params, source.body, options);
     });
   }

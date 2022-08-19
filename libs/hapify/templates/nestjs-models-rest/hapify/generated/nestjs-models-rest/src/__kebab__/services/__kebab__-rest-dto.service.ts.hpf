@@ -1,17 +1,20 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { <<Model pascal>>, Prisma<<if Fields internal and ownership and not primary>>, User<<endif>>  } from '@prisma/client';
+	
 <<if Fields internal and entity>>
 import { Merge } from 'ts-essentials';
 <<endif>>
  
-<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
 import {
   <<if Fields manyMany>>
   formatEntityIds,
   <<endif>>
+  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
   formatPopulate,
-} from '../../helpers';
-<<<}>>>
+  <<<}>>>
+  formatSort,
+  formatFilterType,
+} from '@tractr/nestjs-core';
  
 import {
   <<Model pascal>>Service,
@@ -40,7 +43,9 @@ export class <<Model pascal>>RestDtoService {
     @Inject(<<Model constant>>_SERVICE)
     protected <<Model camel>>Service: <<Model pascal>>Service,
   ) {}
- 
+	
+
+<<if Fields ownership and not primary>>
   /**
    * Format dtos to create a <<Model pascal>>
    *
@@ -56,7 +61,7 @@ export class <<Model pascal>>RestDtoService {
       <<field camel>>,
 <<endfor>>
     } = bodyDto;
-
+	
     return {
 <<if Fields internal and not primary and (not entity or nullable)>>
       ...this.<<Model camel>>Service.getDefaultInternals(),
@@ -80,6 +85,57 @@ export class <<Model pascal>>RestDtoService {
 <<endfor>>
     }
   }
+	
+  /**
+   * Format dtos to upsert a <<Model pascal>>
+   *
+   * @param paramsDto - A valid params dto to upsert a <<Model pascal>>
+   * @param bodyDto - A valid body dto to upsert a <<Model pascal>>
+   * @returns prisma parameters to create a <<Model pascal>>
+   */
+  public transformUpsertDtoTo<<Model pascal>>(
+    paramsDto: <<Model pascal>>UpsertParamsDto,
+    bodyDto: <<Model pascal>>UpsertBodyDto,
+    <<if Fields ownership and internal and not primary>>user: User<<endif>>
+  ): <<<if (root.properties.hasPrimary) {>>>Omit<<<Model pascal>>, '<<=root.fields.primary.names.camel>>'> & Partial<Pick<<<Model pascal>>, '<<=root.fields.primary.names.camel>>'>> <<<} else { >>><<Model pascal>> <<<}>>> {
+    const {
+    <<for Fields primary primaryField>>
+      <<primaryField camel>>,
+    <<endfor>>
+    } = paramsDto;
+    const {
+<<for Fields not internal field>>
+      <<field camel>>,
+<<endfor>>
+    } = bodyDto;
+	
+    return {
+    <<for Fields primary primaryField>>
+      <<primaryField camel>>,
+    <<endfor>>
+<<if Fields internal and not primary and (not entity or nullable)>>
+      ...this.<<Model camel>>Service.getDefaultInternals(),
+<<endif>>
+<<for Fields  ownership and internal and not primary field>>
+      <<field camel>>Id:user.id,
+<<endfor>>
+<<for Fields entity and not internal field>>
+  <<if field oneOne or oneMany>>
+    <<<if (field.names.camel === 'id') {>>>
+      id<<<} else {>>>
+    <<field camel>>Id<<<}>>>: <<field camel>><<if field nullable>> ?? null<<endif>>,
+  <<endif>>
+<<endfor>>
+<<for Fields not entity and not internal field>>
+  <<if field nullable>>
+      <<field camel>>: <<field camel>> ?? null,
+  <<else>>
+      <<field camel>>,
+  <<endif>>
+<<endfor>>
+    }
+  }
+<<endif>>
  
   /**
    * Format dtos to create a <<Model pascal>>
@@ -137,7 +193,7 @@ export class <<Model pascal>>RestDtoService {
   <<endif>>
 <<endfor>>
     }
-
+	
     return {
       data
     };
@@ -150,30 +206,31 @@ export class <<Model pascal>>RestDtoService {
    * @returns prisma parameters to count <<Model pascal>> entities
    */
   public formatCountDto(
-    queryDto: <<Model pascal>>CountQueryDto): Prisma.<<Model pascal>>CountArgs {
+    queryDto: <<Model pascal>>CountQueryDto
+  ): Prisma.<<Model pascal>>CountArgs {
     const {
-    <<for Fields searchable and (multiple or entity) field>>
+      <<for Fields searchable field>>
       <<field camel>>,
-    <<endfor>>
-      ...values
+      <<endfor>>
     } = queryDto;
-    const where: Prisma.<<Model pascal>>WhereInput = {
-<<for Fields searchable and (multiple or entity) field>>
-  <<if field multiple and not entity>>
-    <<if field object>>
-      <<field camel>>: <<field camel>> ? { equals: <<field camel>> } : undefined,
-    <<else>>
-      <<field camel>>: <<field camel>> ? { hasSome: <<field camel>> } : undefined,
-    <<endif>>
-  <<elseif field oneOne or oneMany>>
-      <<field camel>>: { id: <<field camel>> },
-  <<else>>
-      <<field camel>>: <<field camel>> ? { some: { id: { in: <<field camel>> } } }: undefined,
-  <<endif>>
-<<endfor>>
-      ...values
-    }
-    return { where };
+ 
+    const countArgs: Prisma.<<Model pascal>>CountArgs = {};
+ 
+    const where: Prisma.<<Model pascal>>WhereInput = {};
+	
+    <<for Fields searchable field>>
+      <<if field oneOne or oneMany>>
+    if (<<field camel>>) where.<<field camel>> = { id: <<field camel>> };
+      <<elseif field manyMany>>
+    if (<<field camel>>) where.<<field camel>> = { some: { id: { in: <<field camel>> } } };
+      <<else>>
+    if (<<field camel>>) where.<<field camel>> = formatFilterType(<<field camel>>, <<if field datetime>>'datetime'<<elseif field number>>'number'<<elseif field string>>'string'<<elseif field boolean>>'boolean'<<elseif field enum>>'enum'<<else>>'json'<<endif>>, <<if field multiple>>true<<else>>false<<endif>>);
+      <<endif>>
+    <<endfor>>
+ 
+    if (Object.keys(where).length > 0) countArgs.where = where;
+ 
+    return countArgs;
   }
  
   /**
@@ -181,7 +238,7 @@ export class <<Model pascal>>RestDtoService {
    *
    * @param paramsDto - A valid params dto to find a unique <<Model pascal>>
   <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-   * @param queryDto - A valid query dto to populate <<Model pascal>> relations
+   * @param queryDto - Deprecated: A valid query dto to populate <<Model pascal>> relations
   <<<}>>>
    * @returns prisma parameters to find a unique <<Model pascal>>
    */
@@ -192,8 +249,12 @@ export class <<Model pascal>>RestDtoService {
     <<<}>>>
   ): Prisma.<<Model pascal>>FindUniqueArgs {
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+    /* istanbul ignore next */
     const include: Prisma.<<Model pascal>>Include | undefined = populate
       ? formatPopulate(populate) : undefined;
+	
+    /* istanbul ignore if */
+    if (include) console.warn('populate args will be depracted in traxion@v2, use multi request or graphQL instead');
     <<<}>>>
     return {
       where: { ...paramsDto },
@@ -220,51 +281,37 @@ export class <<Model pascal>>RestDtoService {
       order,
       take,
       skip,
-      <<for Fields searchable and not entity and not multiple and not enum field>>
-      <<field camel>>,
-      <<field camel>>FilterType = '<<=getDefaultForType(field)>>',
-      <<endfor>>
-      <<for Fields searchable and (multiple or entity) field>>
+      <<for Fields searchable field>>
       <<field camel>>,
       <<endfor>>
-      ...values
     } = queryDto;
  
-    const where: Prisma.<<Model pascal>>WhereInput = {
-<<for Fields searchable field>>
-  <<if field oneOne or oneMany>>
-      <<field camel>>: <<field camel>> ? { id: <<field camel>> } : {},
-  <<elseif field manyMany>>
-      <<field camel>>: <<field camel>> ? { some: { id: { in: <<field camel>> } } } : {},
-  <<elseif field multiple and not entity>>
-    <<if field object>>
-      <<field camel>>: <<field camel>> ? { equals: <<field camel>> } : undefined,
-    <<else>>
-      <<field camel>>: <<field camel>> ? { hasSome: <<field camel>> } : undefined,
-    <<endif>>
-  <<elseif field not multiple and not enum>>
-      <<field camel>>: <<field camel>> ? { [<<field camel>>FilterType]: <<field camel>> } : undefined,
-  <<endif>>
-<<endfor>>
-      ...values,
-    }
+    const findManyArgs: Prisma.<<Model pascal>>FindManyArgs = {};
  
-    const orderBy = {[sort]: order};
+    const where: Prisma.<<Model pascal>>WhereInput = {};
+	
+    <<for Fields searchable field>>
+      <<if field oneOne or oneMany>>
+    if (<<field camel>>) where.<<field camel>> = { id: <<field camel>> };
+      <<elseif field manyMany>>
+    if (<<field camel>>) where.<<field camel>> = { some: { id: { in: <<field camel>> } } };
+      <<else>>
+    if (<<field camel>>) where.<<field camel>> = formatFilterType(<<field camel>>, <<if field datetime>>'datetime'<<elseif field number>>'number'<<elseif field string>>'string'<<elseif field boolean>>'boolean'<<elseif field enum>>'enum'<<else>>'json'<<endif>>, <<if field multiple>>true<<else>>false<<endif>>);
+      <<endif>>
+    <<endfor>>
+ 
+    if (Object.keys(where).length > 0) findManyArgs.where = where;
+    if (sort) findManyArgs.orderBy = formatSort(sort, order);
+    if (skip) findManyArgs.skip = Number(skip);
+    if (take) findManyArgs.take = Number(take);
     <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-    const include: Prisma.<<Model pascal>>Include | undefined = populate
-      ? formatPopulate(populate)
-      : undefined;
+    /* istanbul ignore if */
+    if (populate) findManyArgs.include = formatPopulate(populate)
+    /* istanbul ignore if */
+    if (findManyArgs.include) console.warn('populate args will be depracted in traxion@v2, use multi request or graphQL instead');
     <<<}>>>
  
-    return {
-      where,
-      take,
-      skip,
-      orderBy,
-    <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-      include,
-    <<<}>>>
-    };
+    return findManyArgs;
   }
  
   /**
@@ -404,7 +451,7 @@ function getDefaultForType(f) {
   else if (f.type === "number") return "equals";
   else if (f.type === "datetime") return "equals";
   else if (f.type === "object") return "equals";
-
+	
   return "UnknownType";
 }
 >>>

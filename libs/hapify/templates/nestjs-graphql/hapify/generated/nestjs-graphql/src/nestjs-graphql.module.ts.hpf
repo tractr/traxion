@@ -5,7 +5,7 @@ import { DateScalar } from '@tractr/nestjs-graphql';
 <<for Models model>>
 import { <<model pascal>>Resolver } from './resolvers/<<model kebab>>.resolver';
 <<endfor>>
-
+	
 import { ModelsModule } from './nestjs-models.module';
  
 const providers = [

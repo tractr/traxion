@@ -1,12 +1,11 @@
 import { Transform, TransformFnParams } from 'class-transformer';
-
-export function filterInt(value: unknown) {
-  if (typeof value === 'number') return value;
-  if (typeof value !== 'string') return value;
-
-  return /^[-+]?(\d+|Infinity)$/.test(value) ? Number(value) : NaN;
-}
+import { isInt } from 'class-validator';
 
 export function TransformStringToInt() {
-  return Transform(({ value }: TransformFnParams) => filterInt(value));
+  return Transform(({ value }: TransformFnParams) => {
+    if (isInt(value)) return value;
+    if (typeof value !== 'string') return value;
+
+    return isInt(Number(value)) ? Number(value) : value;
+  });
 }

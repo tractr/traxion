@@ -9,3 +9,4 @@ export * from './authentication-options.dto';
 export * from './jwt-token-payload.dto';
 export * from './password-reset.dto';
 export * from './password-reset-requested.dto';
+export * from './password-update.dto';

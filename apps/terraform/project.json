@@ -1,4 +1,5 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/terraform/src",
   "tags": [],
@@ -6,7 +7,10 @@
     "apply": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": ["terraform init", "terraform apply"],
+        "commands": [
+          "terraform init",
+          "terraform apply"
+        ],
         "cwd": "./dist/cdktf.out/stacks/main",
         "parallel": false
       }
@@ -31,12 +35,17 @@
         "outputPath": "dist/apps/terraform",
         "tsConfig": "apps/terraform/tsconfig.app.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "destroy": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": ["terraform init", "terraform destroy"],
+        "commands": [
+          "terraform init",
+          "terraform destroy"
+        ],
         "cwd": "./dist/cdktf.out/stacks/main",
         "parallel": false
       }
@@ -44,14 +53,21 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/terraform/**/*.ts"]
+        "lintFilePatterns": [
+          "apps/terraform/**/*.ts"
+        ]
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "plan": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": ["terraform init", "terraform plan"],
+        "commands": [
+          "terraform init",
+          "terraform plan"
+        ],
         "cwd": "./dist/cdktf.out/stacks/main",
         "parallel": false
       }
@@ -65,7 +81,10 @@
     "synth": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": ["npx cdktf get", "npx cdktf synth"],
+        "commands": [
+          "npx cdktf get",
+          "npx cdktf synth"
+        ],
         "cwd": "./",
         "parallel": false
       }
@@ -76,7 +95,9 @@
         "jestConfig": "apps/terraform/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/apps/terraform"]
+      "outputs": [
+        "coverage/apps/terraform"
+      ]
     }
   }
 }

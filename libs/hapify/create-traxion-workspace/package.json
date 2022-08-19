@@ -1,11 +1,10 @@
 {
   "name": "@tractr/create-traxion-workspace",
-  "version": "1.53.0",
+  "version": "1.55.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
   },
-  "type": "module",
   "bin": {
     "create-traxion-workspace": "./bin/create-traxion-workspace.js"
   },

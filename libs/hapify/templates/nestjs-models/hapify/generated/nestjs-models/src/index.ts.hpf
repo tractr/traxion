@@ -1,6 +1,6 @@
 export * from './models.module';
-
+	
 <<for Models model>>
 export * from './<<model kebab>>';
 <<endfor>>
-
+	

@@ -1,7 +1,10 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/hapify/templates/models/src",
-  "tags": ["scope:template"],
+  "tags": [
+    "scope:template"
+  ],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
@@ -21,7 +24,9 @@
         "packageJson": "libs/hapify/templates/models/package.json",
         "tsConfig": "libs/hapify/templates/models/tsconfig.lib.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",

@@ -1,4 +1,4 @@
-import { DataProvider } from 'ra-core';
+import { DataProvider } from 'react-admin';
 import { lastValueFrom, Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
  
@@ -41,10 +41,8 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
   return {
     getList: async (resource, params) => {
       const { page, perPage } = params.pagination;
-      const { order } = params.sort;
-
-      // TODO make the filter works
-
+      const { field, order } = params.sort;
+	
       const total = await lastValueFrom(
         rextClient[resource as unknown as ResourceType].count$(
           {},
@@ -52,15 +50,15 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
       );
       const data = await lastValueFrom(
         rextClient[resource as unknown as ResourceType].findMany$({
-          sort: 'id',
-          order: order.toLowerCase(),
+          sort: [field.toLowerCase() as any],
+          order: order.toLowerCase() as any,
           take: perPage,
           skip: (page - 1) * perPage,
         }) as Observable<any>,
       );
       return { data, total };
     },
-
+	
 
  
     getOne: (resource, params) => 
@@ -78,7 +76,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
           rextClient[resource as unknown as ResourceType].findMany$({
             order: 'asc',
             skip: 0,
-            sort: 'id',
+            sort: ['id'],
             take: 1000,
             // FIXME make possible the fetch of multiple ids
             id: `${params.ids[0]}`,
@@ -103,8 +101,8 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
       return lastValueFrom(
         (
           rextClient[resource as unknown as ResourceType].findMany$({
-            sort: 'id',
-            order: order.toLowerCase(),
+            sort: [field.toLowerCase() as any],
+            order: order.toLowerCase() as any,
             take: perPage,
             skip: (page - 1) * perPage,
           }) as Observable<any>
@@ -115,7 +113,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
     update: (resource, params) => {
       const resourceName = resource as unknown as ResourceType;
       const toUpdate = formatData[resourceName]({ ...params.data });
-
+	
       return lastValueFrom(
         (
           rextClient[resource as unknown as ResourceType].patch$({
