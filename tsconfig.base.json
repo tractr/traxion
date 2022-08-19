@@ -26,7 +26,12 @@
         "libs/angular/file-storage/src/index.ts"
       ],
       "@tractr/angular-form": ["libs/angular/form/src/index.ts"],
+      "@tractr/angular-models-features": [
+        "libs/angular/models/features/src/index.ts"
+      ],
+      "@tractr/angular-models-ui": ["libs/angular/models/ui/src/index.ts"],
       "@tractr/angular-tools": ["libs/angular/tools/src/index.ts"],
+      "@tractr/angular-ui": ["libs/angular/ui/src/index.ts"],
       "@tractr/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@tractr/commit-config": ["libs/config/commit/src/index.ts"],
       "@tractr/common": ["libs/common/src/index.ts"],

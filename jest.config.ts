@@ -74,5 +74,8 @@ export default {
     '<rootDir>/libs/terraform/service/logstash',
     '<rootDir>/apps/pwa',
     '<rootDir>/$"14.4.0-beta.5"root}',
+    '<rootDir>/libs/angular/ui',
+    '<rootDir>/libs/angular/models/ui',
+    '<rootDir>/libs/angular/models/features',
   ],
 };

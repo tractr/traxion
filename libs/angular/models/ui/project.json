@@ -1,0 +1,41 @@
+{
+  "prefix": "tractr",
+  "projectType": "library",
+  "sourceRoot": "libs/angular/models/ui/src",
+  "tags": ["angular"],
+  "targets": {
+    "build": {
+      "configurations": {
+        "development": {
+          "tsConfig": "libs/angular/models/ui/tsconfig.lib.json"
+        },
+        "production": {
+          "tsConfig": "libs/angular/models/ui/tsconfig.lib.prod.json"
+        }
+      },
+      "defaultConfiguration": "production",
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "options": {
+        "project": "libs/angular/models/ui/ng-package.json"
+      },
+      "outputs": ["dist/libs/angular/models/ui"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/angular/models/ui/**/*.ts",
+          "libs/angular/models/ui/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/angular/models/ui/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/angular/models/ui"]
+    }
+  }
+}
