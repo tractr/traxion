@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { InputUiComponent } from './components';
+import { ButtonUiComponent, InputUiComponent } from './components';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule],
-  declarations: [InputUiComponent],
-  exports: [InputUiComponent],
+  declarations: [InputUiComponent, ButtonUiComponent],
+  exports: [ButtonUiComponent, InputUiComponent],
 })
 export class AngularUiModule {}
