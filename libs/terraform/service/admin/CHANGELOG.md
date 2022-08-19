@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.56.0](https://github.com/tractr/stack/compare/v1.55.0...v1.56.0) (2022-08-19)
+
+
+### Features
+
+* **terraform:** filter common sensitive envs from app-config.json files ([#469](https://github.com/tractr/stack/issues/469)) ([a76fcfb](https://github.com/tractr/stack/commit/a76fcfb5a6265b3477e14993a5a0b2050cf6f196))
+
+
+
 # [1.55.0](https://github.com/tractr/stack/compare/v1.54.5...v1.55.0) (2022-08-18)
 
 
