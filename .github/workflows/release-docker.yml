@@ -127,7 +127,7 @@ jobs:
 
       # Get some cache to speed up docker build
       - name: Cache Docker layers
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-dockerbuild-${{ matrix.app }}-${{ github.sha }}
