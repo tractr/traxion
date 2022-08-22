@@ -3,6 +3,7 @@ import { inspect } from 'util';
 
 import { Chalk, Instance, Level } from 'chalk';
 import safeStringify from 'fast-safe-stringify';
+import { Format } from 'logform';
 import { format } from 'winston';
 
 export type NestLikeConsoleFormatOptions = {
@@ -11,9 +12,9 @@ export type NestLikeConsoleFormatOptions = {
   colors?: boolean | Level;
 };
 
-export const nestLikeConsoleFormat = (
+export function nestLikeConsoleFormat(
   options: NestLikeConsoleFormatOptions = {},
-) => {
+): Format {
   const { appName = 'Nest', prettyPrint = true, colors = true } = options;
 
   const levelOption = typeof colors !== 'boolean' ? colors : undefined;
@@ -52,4 +53,4 @@ export const nestLikeConsoleFormat = (
       message,
     )} - ${formattedMeta}`;
   });
-};
+}

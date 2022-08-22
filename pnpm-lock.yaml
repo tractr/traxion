@@ -22,6 +22,7 @@ specifiers:
   '@ant-design/icons-angular': ^14.1.0
   '@apollographql/apollo-tools': ^0.5.4
   '@babel/core': ^7.18.10
+  '@babel/runtime': ^7.18.9
   '@casl/ability': ^5.4.4
   '@casl/angular': ^7.0.1
   '@casl/prisma': ^1.0.4
@@ -168,6 +169,7 @@ specifiers:
   jest-preset-angular: 11.1.2
   lint-staged: ^12.5.0
   lodash: ^4.17.21
+  logform: ^2.4.2
   md5: ^2.3.0
   mime-types: ^2.1.35
   minio: ^7.0.30
@@ -303,6 +305,7 @@ dependencies:
   is-plain-object: 5.0.0
   jest-mock-extended: 2.0.7_g4n3hsjlbmz4ag5o32ytojordu
   lodash: 4.17.21
+  logform: 2.4.2
   md5: 2.3.0
   mime-types: 2.1.35
   minio: 7.0.30
@@ -360,6 +363,7 @@ devDependencies:
   '@angular/compiler-cli': 14.1.2_dzyrlksv2o5qxcph5fpb5z446q
   '@angular/language-service': 14.1.2
   '@babel/core': 7.18.10
+  '@babel/runtime': 7.18.9
   '@cdktf/provider-aws': 7.0.68_spfnwbzy5vea7yh53io47zhwem
   '@commitlint/cli': 16.3.0_@swc+core@1.2.235
   '@commitlint/config-conventional': 16.2.4
