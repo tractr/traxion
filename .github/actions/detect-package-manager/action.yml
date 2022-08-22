@@ -1,0 +1,35 @@
+name: Detect the package manager used
+description: Get an output with the package manager used
+
+inputs:
+
+outputs:
+  npm:
+    description: 'true if npm is used (by default)'
+    value: ${{ steps.detectPM.outputs.npm }}
+  yarn:
+    description: 'true if yarn is used'
+    value: ${{ steps.detectPM.outputs.yarn }}
+  pnpm:
+    description: 'true if pnpm is used'
+    value: ${{ steps.detectPM.outputs.pnpm }}
+  PM:
+    description: 'The package manager'
+    value: ${{ steps.detectPM.outputs.PM }}
+
+runs:
+  using: 'composite'
+  steps:
+    # Set the matrix apps that have been affected by all the changes
+    - name: Check for PM lock file
+      uses: actions/github-script@v3
+      id: detectPM
+      with:
+        script: |
+          const pnpm = fs.existsSync('pnpm-lock.yaml');
+          const yarn = !pnpm ? fs.existsSync('yarn.yaml') : false;
+          const npm = !pnpm && !yarn;
+
+          const PM = pnpm ? 'pnpm' : yarn ? 'yarn' : 'npm';
+
+          return { pnpm, yarn, npm, PM };
