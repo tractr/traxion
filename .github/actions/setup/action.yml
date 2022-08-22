@@ -17,7 +17,7 @@ runs:
   steps:
     # We initialize the node action
     - name: Use node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         cache: 'npm'
         node-version: ${{ matrix.node }}
