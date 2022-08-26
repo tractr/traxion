@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.56.1](https://github.com/tractr/stack/compare/v1.56.0...v1.56.1) (2022-08-26)
+
+
+### Bug Fixes
+
+* use the autocomplete with the right filter in the react admin entities ([#493](https://github.com/tractr/stack/issues/493)) ([3365e47](https://github.com/tractr/stack/commit/3365e47cfb452e52e53f94cc0e6bf9bf9fdc0629))
+
+
+
 # [1.56.0](https://github.com/tractr/stack/compare/v1.55.0...v1.56.0) (2022-08-19)
 
 
