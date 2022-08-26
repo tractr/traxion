@@ -116,14 +116,14 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
         source="<<field camel>>"
         label="<<field capital>>"
         reference="<<field.model camel>>">
-        <SelectArrayInput optionText="<<=labelFieldCamel(field.model)>>" />
+        <AutocompleteArrayInput optionText="<<=labelFieldCamel(field.model)>>" />
     </ReferenceArrayInput>
     <<else>>
     <ReferenceInput
         source="<<field camel>>Id"
         label="<<field capital>>"
         reference="<<field.model camel>>">
-        <SelectInput optionText="<<=labelFieldCamel(field.model)>>" />
+        <AutocompleteInput optionText="<<=labelFieldCamel(field.model)>>" />
     </ReferenceInput>
     <<endif>>
 <<endif>>
@@ -149,15 +149,15 @@ function fieldInput(field) {
             }
         case 'entity':
             return field.multiple ?
-                ['ReferenceArrayInput', 'SelectArrayInput'] :
-                ['ReferenceInput', 'SelectInput'];
+                ['ReferenceArrayInput', 'AutocompleteArrayInput'] :
+                ['ReferenceInput', 'AutocompleteInput'];
         default: return ['TextInput'];
     }
 }
 function labelFieldCamel(model) {
-    const label = model.fields.label.length ?
-        model.fields.label[0] : model.fields.primary;
-    return label.names.camel;
+  const foundFirstLabelSearchable = model.fields.label.find((field) => field.searchable);
+  const label = foundFirstLabelSearchable || model.fields.primary;
+  return label.names.camel;
 }
 function getImports() {
     const output = [];
