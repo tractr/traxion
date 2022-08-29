@@ -7,7 +7,7 @@ import {
   AUTHENTICATION_USER_SERVICE,
 } from '../constants';
 import { AccessTokenDto, AuthenticationOptions } from '../dtos';
-import { BadPasswordError, UserNotFoundError } from '../errors';
+import { UserNotFoundError } from '../errors';
 import { UserType } from '../interfaces';
 import { UserService } from '../interfaces/user.service.interface';
 
@@ -52,7 +52,7 @@ export class AuthenticationService {
       return user;
     }
 
-    throw new BadPasswordError();
+    throw new UserNotFoundError();
   }
 
   findUserByLogin(

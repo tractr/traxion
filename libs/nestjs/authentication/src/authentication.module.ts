@@ -6,14 +6,10 @@ import {
   AUTHENTICATION_MODULE_OPTIONS,
   AUTHENTICATION_USER_SERVICE,
 } from './constants';
-import { LoginController, PasswordController } from './controllers';
+import { LoginController } from './controllers';
 import { AuthenticationOptions } from './dtos';
 import { AuthenticationPublicOptions } from './interfaces';
-import {
-  AuthenticationService,
-  PasswordService,
-  StrategyOptionsService,
-} from './services';
+import { AuthenticationService, StrategyOptionsService } from './services';
 import { AuthenticationUserService } from './services/authentication-user.service';
 import { JwtStrategy, LocalStrategy } from './strategies';
 
@@ -22,7 +18,6 @@ import {
   LoggerModule,
   ModuleOptionsFactory,
 } from '@tractr/nestjs-core';
-import { MailerModule } from '@tractr/nestjs-mailer';
 
 @Module({})
 export class AuthenticationModule extends ModuleOptionsFactory<
@@ -65,39 +60,11 @@ export class AuthenticationModule extends ModuleOptionsFactory<
             authenticationOptions.passportModuleOptions,
           inject: [AUTHENTICATION_MODULE_OPTIONS],
         }),
-        MailerModule.registerAsync({
-          imports: [authenticationOptionsModule],
-          useFactory: (
-            defaultOptions,
-            authenticationOptions: AuthenticationOptions,
-          ) => {
-            const { active } = authenticationOptions.password.reset;
-
-            if (!active)
-              return {
-                ...defaultOptions,
-                privateApiKey: 'not active',
-                publicApiKey: 'not active',
-              };
-
-            if (!authenticationOptions.mailer)
-              throw new Error(
-                'password reset is activated. You must configure the mailer module options',
-              );
-
-            return {
-              ...defaultOptions,
-              ...authenticationOptions.mailer.moduleOptions,
-            };
-          },
-          inject: [AUTHENTICATION_MODULE_OPTIONS],
-        }),
       ],
       exports: [
         AuthenticationService,
         JwtStrategy,
         LocalStrategy,
-        PasswordService,
         {
           provide: AUTHENTICATION_USER_SERVICE,
           useClass: AuthenticationUserService,
@@ -105,7 +72,6 @@ export class AuthenticationModule extends ModuleOptionsFactory<
       ],
       providers: [
         AuthenticationService,
-        PasswordService,
         StrategyOptionsService,
         JwtStrategy,
         LocalStrategy,
@@ -114,7 +80,7 @@ export class AuthenticationModule extends ModuleOptionsFactory<
           useClass: AuthenticationUserService,
         },
       ],
-      controllers: [LoginController, PasswordController],
+      controllers: [LoginController],
     };
   }
 }

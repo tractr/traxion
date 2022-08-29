@@ -27,6 +27,7 @@ import {
   FileStorageModule,
 } from '@tractr/nestjs-file-storage';
 import { MailerModule } from '@tractr/nestjs-mailer';
+import { PasswordModule } from '@tractr/nestjs-password';
 
 @Module({
   imports: [
@@ -58,6 +59,19 @@ import { MailerModule } from '@tractr/nestjs-mailer';
         },
         userService: USER_SERVICE,
       }),
+    }),
+    PasswordModule.registerAsync({
+      imports: [ModelsModule],
+      useFactory: (userService) => ({
+        resetPasswordLinkFactory: (context) => 'resetPasswordLink',
+        resetPasswordSendEmail: {
+          request: (user, link, resetCode) => {
+            console.info('emailSent');
+          },
+        },
+        userService,
+      }),
+      inject: [USER_SERVICE],
     }),
     FileStorageModule.registerAsync({
       useFactory: (defaultConfig) => ({

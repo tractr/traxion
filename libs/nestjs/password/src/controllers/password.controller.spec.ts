@@ -6,10 +6,10 @@ import {
 } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
+import { User } from '@prisma/client';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as request from 'supertest';
 
-import { UserType } from '../interfaces';
 import { PasswordService } from '../services';
 import { PasswordController } from './password.controller';
 
@@ -17,7 +17,7 @@ describe('Password Controller', () => {
   let app: INestApplication;
   let mockPasswordService: MockProxy<PasswordService>;
   let mockReqUser: jest.Mock;
-  let mockUser: UserType;
+  let mockUser: Partial<User>;
 
   beforeAll(async () => {
     mockReqUser = jest.fn();
@@ -59,8 +59,8 @@ describe('Password Controller', () => {
     if (app) await app.close();
   });
 
-  describe('Authentication route', () => {
-    it('/password/update', async () => {
+  describe('Update password route', () => {
+    it('PATCH /password/update', async () => {
       mockReqUser.mockReturnValue(mockUser);
       const spyUpdatePassword = jest.spyOn(
         mockPasswordService,
