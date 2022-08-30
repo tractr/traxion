@@ -4,16 +4,15 @@ import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConsoleModule } from 'nestjs-console';
 
+import { MailerModule } from './modules/mailer.module';
+
 import {
   getSelectPrismaUserQuery,
   rolePermissions,
 } from '@tractr/generated-casl';
 import { GraphQLModelsModule } from '@tractr/generated-nestjs-graphql';
 import { ModelsModule } from '@tractr/generated-nestjs-models';
-import {
-  USER_SERVICE,
-  UserService,
-} from '@tractr/generated-nestjs-models-common';
+import { USER_SERVICE } from '@tractr/generated-nestjs-models-common';
 import {
   AuthenticationModule,
   JwtGlobalAuthGuard,
@@ -29,10 +28,7 @@ import {
   FileStorageController,
   FileStorageModule,
 } from '@tractr/nestjs-file-storage';
-import {
-  MailerModule,
-  ResetPasswordSendEmailService,
-} from '@tractr/nestjs-mailer';
+import { ResetPasswordSendEmailService } from '@tractr/nestjs-mailer';
 import { PasswordModule } from '@tractr/nestjs-password';
 
 @Module({
@@ -60,22 +56,9 @@ import { PasswordModule } from '@tractr/nestjs-password';
       }),
       inject: [USER_SERVICE],
     }),
-    MailerModule.registerAsync({
-      useFactory: () => ({
-        privateApiKey: 'test',
-        publicApiKey: 'test',
-      }),
-    }),
+    MailerModule,
     PasswordModule.registerAsync({
-      imports: [
-        ModelsModule,
-        MailerModule.registerAsync({
-          useFactory: () => ({
-            privateApiKey: 'test',
-            publicApiKey: 'test',
-          }),
-        }),
-      ],
+      imports: [ModelsModule, MailerModule],
       useFactory: (
         userService,
         resetPasswordSendEmailService: ResetPasswordSendEmailService,
