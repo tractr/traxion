@@ -9,16 +9,23 @@ import {
   OPTIONS_TYPE,
 } from './password.module-definition';
 import {
+  HashService,
   PasswordService,
   ResetPasswordService,
   UserPasswordService,
 } from './services';
 
+import { BcryptModule } from '@tractr/nestjs-bcrypt';
 import { LoggerModule } from '@tractr/nestjs-core';
 
 @Module({
-  imports: [LoggerModule],
-  providers: [PasswordService, ResetPasswordService, UserPasswordService],
+  imports: [LoggerModule, BcryptModule.register({})],
+  providers: [
+    PasswordService,
+    ResetPasswordService,
+    UserPasswordService,
+    HashService,
+  ],
   exports: [PasswordService, ResetPasswordService],
 })
 export class PasswordModule extends ConfigurableModuleClass {

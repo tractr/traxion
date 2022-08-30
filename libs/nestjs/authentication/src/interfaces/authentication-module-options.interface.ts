@@ -5,6 +5,8 @@ import { CookieOptions } from 'express';
 import { StrategyOptions as JwtStrategyOptions } from 'passport-jwt';
 import { IStrategyOptionsWithRequest as LocalStrategyOptions } from 'passport-local';
 
+import { EncryptionService } from '@tractr/nestjs-bcrypt';
+
 export type UserInfo = {
   id: string | number;
   email: string;
@@ -37,15 +39,7 @@ export interface AuthenticationModuleOptions {
   /**
    * Options to hash the password to be stored in the database.
    */
-  generatePasswordHash?: (password: string) => Promise<string> | string;
-
-  /**
-   * Options to compare the password that is stored in the database with the password that is provided by the user.
-   */
-  comparePasswordHash?: (
-    password: string,
-    passwordHash: string,
-  ) => Promise<boolean> | boolean;
+  encryptionService?: EncryptionService;
 
   /**
    * Options to configure the information that will be stored inside the JWT

@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import * as bcrypt from 'bcrypt';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 
 import { BadPasswordError } from '../errors';
+import { HashService } from './hash.service';
 import { PasswordService } from './password.service';
 import { UserPasswordService } from './user-password.service';
 
@@ -11,16 +11,17 @@ import { UserNotFoundError } from '@tractr/nestjs-authentication';
 describe('PasswordService', () => {
   let passwordService: PasswordService;
   let mockUserPasswordService: MockProxy<UserPasswordService>;
-  let mockCompareSync: jest.SpyInstance;
+  let mockHashService: MockProxy<HashService>;
 
   beforeEach(async () => {
     mockUserPasswordService = mockDeep<UserPasswordService>();
-    mockCompareSync = jest.spyOn(bcrypt, 'compareSync');
+    mockHashService = mockDeep<HashService>();
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         PasswordService,
         { provide: UserPasswordService, useValue: mockUserPasswordService },
+        { provide: HashService, useValue: mockHashService },
       ],
     }).compile();
 
@@ -38,7 +39,7 @@ describe('PasswordService', () => {
         password: 'old',
         email: 'email',
       });
-      mockCompareSync.mockReturnValue(true);
+      mockHashService.compare.mockResolvedValue(true);
 
       await passwordService.updatePassword('1', 'old', 'new');
 
@@ -63,7 +64,7 @@ describe('PasswordService', () => {
         password: 'password',
         email: 'email',
       });
-      mockCompareSync.mockReturnValue(false);
+      mockHashService.compare.mockResolvedValue(false);
 
       await expect(async () =>
         passwordService.updatePassword('1', 'old', 'new'),

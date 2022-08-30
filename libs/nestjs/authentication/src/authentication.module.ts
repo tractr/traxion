@@ -13,12 +13,14 @@ import { AuthenticationModuleOptions } from './interfaces';
 import {
   AuthenticationService,
   CookieOptionsService,
+  HashService,
   StrategyOptionsService,
   UserAuthenticationService,
 } from './services';
 import { JwtOptionsService } from './services/jwt-options.service';
 import { JwtStrategy, LocalStrategy } from './strategies';
 
+import { BcryptModule } from '@tractr/nestjs-bcrypt';
 import { LoggerModule } from '@tractr/nestjs-core';
 
 @Module({})
@@ -37,6 +39,7 @@ export class AuthenticationModule extends ConfigurableModuleClass {
       ...module,
       imports: [
         ...(module.imports || []),
+        BcryptModule.register({}),
         LoggerModule,
         JwtModule.registerAsync({
           imports: [moduleOptions],
@@ -68,6 +71,7 @@ export class AuthenticationModule extends ConfigurableModuleClass {
         JwtOptionsService,
         LocalStrategy,
         JwtStrategy,
+        HashService,
         UserAuthenticationService,
       ],
       controllers: [LoginController],

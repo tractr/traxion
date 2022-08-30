@@ -44,6 +44,7 @@
     "hapify-templates-rext-client": "libs/hapify/templates/rext-client",
     "hapify-update-templates-import-path": "libs/hapify/update-templates-import-path",
     "nestjs-authentication": "libs/nestjs/authentication",
+    "nestjs-bcrypt": "libs/nestjs/bcrypt",
     "nestjs-casl": "libs/nestjs/casl",
     "nestjs-core": "libs/nestjs/core",
     "nestjs-database": "libs/nestjs/database",
@@ -153,7 +154,9 @@
               "angular-casl:publish",
               "hapify-create-traxion-workspace:publish",
               "hapify-templates-nestjs-graphql:publish",
-              "nestjs-graphql:publish"
+              "nestjs-graphql:publish",
+              "nestjs-bcrypt:publish",
+              "nestjs-password:publish"
             ],
             "syncVersions": true
           }

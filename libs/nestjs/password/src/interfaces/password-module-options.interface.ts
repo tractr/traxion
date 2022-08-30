@@ -1,6 +1,8 @@
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { Prisma } from '@prisma/client';
 
+import { EncryptionService } from '@tractr/nestjs-bcrypt';
+
 export type UserInfo = { id: string | number; email: string; password: string };
 
 export type ResetPasswordLinkFactory =
@@ -42,4 +44,6 @@ export class PasswordModuleOptions {
   userService!: Prisma.UserDelegate<false>;
 
   jwtModuleOptions?: JwtModuleOptions;
+
+  encryptionService?: EncryptionService;
 }

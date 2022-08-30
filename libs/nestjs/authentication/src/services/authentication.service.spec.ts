@@ -3,31 +3,26 @@
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { User } from '@prisma/client';
-import * as bcrypt from 'bcrypt';
 import { mockDeep, MockProxy, mockReset } from 'jest-mock-extended';
 
 import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
 import { AuthenticationModuleOptions } from '../interfaces';
 import { AuthenticationService } from './authentication.service';
+import { HashService } from './hash.service';
 import { UserAuthenticationService } from './user-authentication.service';
 
 describe('AuthService', () => {
   let authService: AuthenticationService;
   let mockJwtService: MockProxy<JwtService>;
   let mockUserAuthenticationService: MockProxy<UserAuthenticationService>;
-  let mockBcryptCompare: jest.SpyInstance;
-  let mockBcryptHash: jest.SpyInstance;
-  let mockBcryptGenSalt: jest.SpyInstance;
 
   let mockAuthenticationModuleOptions: MockProxy<AuthenticationModuleOptions>;
+  let mockHashService: MockProxy<HashService>;
 
   beforeEach(async () => {
-    mockBcryptCompare = jest.spyOn(bcrypt, 'compare');
-    mockBcryptHash = jest.spyOn(bcrypt, 'hash');
-    mockBcryptGenSalt = jest.spyOn(bcrypt, 'genSalt');
-
     mockJwtService = mockDeep<JwtService>();
     mockUserAuthenticationService = mockDeep<UserAuthenticationService>();
+    mockHashService = mockDeep<HashService>();
     mockAuthenticationModuleOptions =
       mockDeep<AuthenticationModuleOptions>() as MockProxy<AuthenticationModuleOptions>;
 
@@ -43,6 +38,7 @@ describe('AuthService', () => {
           useValue: mockUserAuthenticationService,
         },
         { provide: JwtService, useValue: mockJwtService },
+        { provide: HashService, useValue: mockHashService },
       ],
     }).compile();
 
@@ -50,11 +46,9 @@ describe('AuthService', () => {
   });
 
   afterEach(() => {
-    mockBcryptCompare.mockRestore();
-    mockBcryptHash.mockRestore();
-    mockBcryptGenSalt.mockRestore();
     mockReset(mockJwtService);
     mockReset(mockUserAuthenticationService);
+    mockReset(mockHashService);
   });
 
   it('should be defined', () => {
@@ -75,8 +69,7 @@ describe('AuthService', () => {
         'hash',
       );
 
-      const spyComparePassword = jest.spyOn(authService, 'comparePasswordHash');
-      spyComparePassword.mockResolvedValueOnce(true);
+      mockHashService.compare.mockResolvedValueOnce(true);
 
       const result = await authService.validateUser('login', 'password');
 
@@ -96,8 +89,7 @@ describe('AuthService', () => {
         'hash',
       );
 
-      const spyComparePassword = jest.spyOn(authService, 'comparePasswordHash');
-      spyComparePassword.mockResolvedValueOnce(false);
+      mockHashService.compare.mockResolvedValueOnce(false);
 
       let result = await authService.validateUser('login', 'password');
       expect(result).toBe(null);
@@ -116,74 +108,6 @@ describe('AuthService', () => {
       );
       result = await authService.validateUser('login', 'password');
       expect(result).toBe(null);
-    });
-  });
-
-  describe('generatePasswordHash', () => {
-    it('should hash a password with the generatePasswordHash from the config', async () => {
-      const spyGeneratePasswordHash = jest.fn().mockReturnValue('bcrypt');
-      mockAuthenticationModuleOptions.generatePasswordHash =
-        spyGeneratePasswordHash;
-
-      const hash = await authService.generatePasswordHash('test');
-
-      expect(spyGeneratePasswordHash).toHaveBeenCalledTimes(1);
-      expect(spyGeneratePasswordHash).toHaveBeenCalledWith('test');
-      expect(spyGeneratePasswordHash).toHaveReturnedWith('bcrypt');
-
-      expect(mockBcryptGenSalt).toHaveBeenCalledTimes(0);
-      expect(mockBcryptHash).toHaveBeenCalledTimes(0);
-
-      expect(hash).toEqual('bcrypt');
-    });
-
-    it('should hash a password with the defaults', async () => {
-      mockAuthenticationModuleOptions.generatePasswordHash = undefined;
-      mockBcryptGenSalt.mockReturnValue('salt');
-      mockBcryptHash.mockReturnValue('bcrypt');
-
-      const hash = await authService.generatePasswordHash('test');
-
-      expect(mockBcryptGenSalt).toHaveBeenCalledTimes(1);
-      expect(mockBcryptGenSalt).toHaveBeenCalledWith(10);
-      expect(mockBcryptGenSalt).toHaveReturnedWith('salt');
-
-      expect(mockBcryptHash).toHaveBeenCalledTimes(1);
-      expect(mockBcryptHash).toHaveBeenCalledWith('test', 'salt');
-      expect(mockBcryptHash).toHaveReturnedWith('bcrypt');
-
-      expect(hash).toEqual('bcrypt');
-    });
-  });
-
-  describe('comparePasswordHash', () => {
-    it('should verify a password with the comparePasswordHash from the config', async () => {
-      const spyComparePasswordHash = jest.fn().mockReturnValue(true);
-      mockAuthenticationModuleOptions.comparePasswordHash =
-        spyComparePasswordHash;
-
-      const compare = await authService.comparePasswordHash('test', 'hash');
-
-      expect(mockBcryptCompare).toHaveBeenCalledTimes(0);
-
-      expect(spyComparePasswordHash).toHaveBeenCalledTimes(1);
-      expect(spyComparePasswordHash).toHaveBeenCalledWith('test', 'hash');
-      expect(spyComparePasswordHash).toHaveReturnedWith(true);
-
-      expect(compare).toEqual(true);
-    });
-
-    it('should verify a password with the comparePasswordHash from the config', async () => {
-      mockAuthenticationModuleOptions.comparePasswordHash = undefined;
-      mockBcryptCompare.mockReturnValue(true);
-
-      const compare = await authService.comparePasswordHash('test', 'hash');
-
-      expect(mockBcryptCompare).toHaveBeenCalledTimes(1);
-      expect(mockBcryptCompare).toHaveBeenCalledWith('test', 'hash');
-      expect(mockBcryptCompare).toHaveReturnedWith(true);
-
-      expect(compare).toEqual(true);
     });
   });
 

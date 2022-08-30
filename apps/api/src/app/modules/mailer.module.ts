@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 
-import { MailerModule as DynamicMailerModule } from '@tractr/nestjs-mailer';
+import { MailerModule as TraxionMailerModule } from '@tractr/nestjs-mailer';
 
 @Module({
   imports: [
-    DynamicMailerModule.registerAsync({
+    TraxionMailerModule.registerAsync({
       useFactory: () => ({
         privateApiKey: 'test',
         publicApiKey: 'test',
       }),
     }),
   ],
-  exports: [DynamicMailerModule],
+  exports: [TraxionMailerModule],
 })
 export class MailerModule {}

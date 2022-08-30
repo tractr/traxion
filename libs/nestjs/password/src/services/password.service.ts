@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
 
 import { BadPasswordError } from '../errors';
+import { HashService } from './hash.service';
 import { UserPasswordService } from './user-password.service';
 
 import { UserNotFoundError } from '@tractr/nestjs-authentication';
 
 @Injectable()
 export class PasswordService {
-  constructor(private readonly userPasswordService: UserPasswordService) {}
+  constructor(
+    private readonly userPasswordService: UserPasswordService,
+    private readonly hashService: HashService,
+  ) {}
 
   async updatePassword(
     userId: string,
@@ -23,7 +26,9 @@ export class PasswordService {
 
     const { password } = user;
 
-    if (!bcrypt.compareSync(oldPassword, password)) {
+    const isValid = await this.hashService.compare(oldPassword, password);
+
+    if (!isValid) {
       throw new BadPasswordError();
     }
 
