@@ -37,18 +37,6 @@ export function mock<<Model pascal>>FindManyQueryDtoFactory(
     <<field camel>>: mock<<Model pascal>><<field pascal>>IdsFactory(),
     <<endif>>
   <<endfor>>
-  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-    populate: [
-      <<for Fields entity field>>
-      '<<field camel>>',
-      <<endfor>>
-      <<for ReferencedIn ref>>
-        <<for ref.fields field>>
-          '<<-field backRelation camel>>',
-        <<endfor>>
-      <<endfor>>
-    ],
-    <<<}>>>
     sort: ['id'],
     order: 'asc',
     take: 20,
