@@ -45,7 +45,7 @@ export class StrategyOptionsService {
     };
   }
 
-  get passportJwtOptions(): PassportJwtStrategyOptions {
+  get jwtStrategyOptions(): PassportJwtStrategyOptions {
     const passportJwtStrategyOptions =
       this.authenticationOptions.strategy?.jwt || {};
 

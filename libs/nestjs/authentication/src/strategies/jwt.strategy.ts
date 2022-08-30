@@ -15,7 +15,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     private readonly authenticationOptions: AuthenticationModuleOptions,
     protected readonly strategyOptionsService: StrategyOptionsService,
   ) {
-    super(strategyOptionsService.passportJwtOptions);
+    super(strategyOptionsService.jwtStrategyOptions);
   }
 
   async validate(payload: JwtTokenPayload) {
