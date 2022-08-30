@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 
 import { BadResetCodeError } from '../errors';
-import { PasswordModuleOptions, ResetPasswordLinkFactory } from '../interfaces';
+import { PasswordModuleOptions } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../password.module-definition';
 import { ResetPasswordService } from './reset-password.service';
 import { UserPasswordService } from './user-password.service';

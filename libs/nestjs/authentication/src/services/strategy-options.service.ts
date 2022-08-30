@@ -16,8 +16,6 @@ import { fromHttpOnlySignedAndSecureCookies } from '../extractors';
 import { AuthenticationModuleOptions } from '../interfaces';
 import { JwtOptionsService } from './jwt-options.service';
 
-import { isDevelopment } from '@tractr/nestjs-core';
-
 @Injectable()
 export class StrategyOptionsService {
   constructor(

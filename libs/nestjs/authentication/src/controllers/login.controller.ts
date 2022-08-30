@@ -3,7 +3,6 @@ import {
   Controller,
   Get,
   HttpCode,
-  Inject,
   Post,
   Req,
   Res,
@@ -13,7 +12,6 @@ import { ApiBody } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 import { Request, Response } from 'express';
 
-import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
 import { AccessTokenDto } from '../dtos';
 import { LoginPostBodyDto } from '../dtos/login-form.dto';
 import { JwtAuthGuard, LocalAuthGuard, PublicGuard } from '../guards';

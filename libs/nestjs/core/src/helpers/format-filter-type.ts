@@ -17,7 +17,8 @@ export function formatFilterType<
   let filter = 'equals';
 
   let filterProps: string[] = [];
-  let transform = (v: any) => v;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let transform: (value: any) => any = (v: any) => v;
 
   switch (type) {
     case 'datetime':
