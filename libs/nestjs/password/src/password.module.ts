@@ -1,7 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 
-import { PasswordModuleOptions } from './dtos';
+import { PasswordModuleOptions } from './interfaces';
 import {
   ASYNC_OPTIONS_TYPE,
   ConfigurableModuleClass,

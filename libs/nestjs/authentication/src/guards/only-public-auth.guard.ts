@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { IS_PUBLIC_KEY } from '@tractr/nestjs-core';
 
 @Injectable()
-export class PublicGlobalAuthGuard implements CanActivate {
+export class OnlyPublicGuard implements CanActivate {
   constructor(private readonly reflector: Reflector) {}
 
   canActivate(

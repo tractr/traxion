@@ -1,5 +1,3 @@
-export const AUTHENTICATION_MODULE_OPTIONS = ' AUTHENTICATION_MODULE_OPTIONS';
-
 export const AUTHENTICATION_DEFAULT_COOKIE_NAME = 'authCookie';
 
 /**
@@ -12,9 +10,6 @@ export const AUTHENTICATION_DEFAULT_QUERY_PARAM_NAME = 'authToken';
 export const DEFAULT_ID_FIELD = 'id';
 export const DEFAULT_LOGIN_FIELD = 'email';
 export const DEFAULT_PASSWORD_FIELD = 'password';
-export const DEFAULT_EMAIL_FIELD = 'email';
-
-export const AUTHENTICATION_USER_SERVICE = 'AUTHENTICATION_USER_SERVICE';
 
 export const DEFAULT_RESET_HTML = `<!DOCTYPE html>
 <html lang="en">

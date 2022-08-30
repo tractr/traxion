@@ -3,84 +3,84 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
 import {
-  AUTHENTICATION_MODULE_OPTIONS,
-  AUTHENTICATION_USER_SERVICE,
-} from './constants';
+  ASYNC_OPTIONS_TYPE,
+  ConfigurableModuleClass,
+  MODULE_OPTIONS_TOKEN,
+  OPTIONS_TYPE,
+} from './authentication.module-definition';
 import { LoginController } from './controllers';
-import { AuthenticationOptions } from './dtos';
-import { AuthenticationPublicOptions } from './interfaces';
-import { AuthenticationService, StrategyOptionsService } from './services';
-import { AuthenticationUserService } from './services/authentication-user.service';
+import { AuthenticationModuleOptions } from './interfaces';
+import {
+  AuthenticationService,
+  CookieOptionsService,
+  StrategyOptionsService,
+  UserAuthenticationService,
+} from './services';
+import { JwtOptionsService } from './services/jwt-options.service';
 import { JwtStrategy, LocalStrategy } from './strategies';
 
-import {
-  AsyncOptions,
-  LoggerModule,
-  ModuleOptionsFactory,
-} from '@tractr/nestjs-core';
+import { LoggerModule } from '@tractr/nestjs-core';
 
 @Module({})
-export class AuthenticationModule extends ModuleOptionsFactory<
-  AuthenticationOptions,
-  AuthenticationPublicOptions
->(AUTHENTICATION_MODULE_OPTIONS, AuthenticationOptions) {
-  static register(options: AuthenticationPublicOptions): DynamicModule {
-    const authenticationOptionsModule = super.register(options);
-    return this.createAuthenticationModuleFromOptions(
-      authenticationOptionsModule,
-    );
-  }
+export class AuthenticationModule extends ConfigurableModuleClass {
+  private static createModule(module: DynamicModule): DynamicModule {
+    // When https://github.com/nestjs/jwt/pull/1065 is merged, this can be simplified to:
+    // Should remove this moduleOptions variables
+    const moduleOptions = {
+      ...module,
+      module: ConfigurableModuleClass,
+      providers: [...(module.providers || []), JwtOptionsService],
+      exports: [...(module.providers || []), JwtOptionsService],
+    };
 
-  static registerAsync(
-    options: AsyncOptions<AuthenticationOptions, AuthenticationPublicOptions>,
-  ): DynamicModule {
-    const authenticationOptionsModule = super.registerAsync(options);
-    return this.createAuthenticationModuleFromOptions(
-      authenticationOptionsModule,
-    );
-  }
-
-  private static createAuthenticationModuleFromOptions(
-    authenticationOptionsModule: DynamicModule,
-  ): DynamicModule {
     return {
-      module: AuthenticationModule,
+      ...module,
       imports: [
-        authenticationOptionsModule,
+        ...(module.imports || []),
         LoggerModule,
         JwtModule.registerAsync({
-          imports: [authenticationOptionsModule],
-          useFactory: (authenticationOptions: AuthenticationOptions) =>
-            authenticationOptions.jwtModuleOptions,
-          inject: [AUTHENTICATION_MODULE_OPTIONS],
+          imports: [moduleOptions],
+          useFactory: (jwtOptionsService: JwtOptionsService) =>
+            jwtOptionsService.jwtModuleOptions,
+          inject: [JwtOptionsService],
         }),
         PassportModule.registerAsync({
-          imports: [authenticationOptionsModule],
-          useFactory: (authenticationOptions: AuthenticationOptions) =>
-            authenticationOptions.passportModuleOptions,
-          inject: [AUTHENTICATION_MODULE_OPTIONS],
+          imports: [moduleOptions],
+          useFactory: (authenticationOptions: AuthenticationModuleOptions) =>
+            authenticationOptions.passportModuleOptions || {},
+          inject: [MODULE_OPTIONS_TOKEN],
         }),
       ],
       exports: [
+        ...(module.exports || []),
         AuthenticationService,
         JwtStrategy,
+        StrategyOptionsService,
+        CookieOptionsService,
+        JwtOptionsService,
         LocalStrategy,
-        {
-          provide: AUTHENTICATION_USER_SERVICE,
-          useClass: AuthenticationUserService,
-        },
       ],
       providers: [
+        ...(module.providers || []),
         AuthenticationService,
         StrategyOptionsService,
-        JwtStrategy,
+        CookieOptionsService,
+        JwtOptionsService,
         LocalStrategy,
-        {
-          provide: AUTHENTICATION_USER_SERVICE,
-          useClass: AuthenticationUserService,
-        },
+        JwtStrategy,
+        UserAuthenticationService,
       ],
       controllers: [LoginController],
     };
+  }
+
+  static register(options: typeof OPTIONS_TYPE): DynamicModule {
+    const authenticationOptionsModule = super.register(options);
+    return this.createModule(authenticationOptionsModule);
+  }
+
+  static registerAsync(options: typeof ASYNC_OPTIONS_TYPE): DynamicModule {
+    const authenticationOptionsModule = super.registerAsync(options);
+    return this.createModule(authenticationOptionsModule);
   }
 }

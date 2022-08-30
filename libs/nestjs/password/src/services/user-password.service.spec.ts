@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma, User } from '@prisma/client';
 import { mockDeep, MockProxy, mockReset } from 'jest-mock-extended';
 
-import { PasswordModuleOptions } from '../dtos';
+import { PasswordModuleOptions } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../password.module-definition';
 import { UserPasswordService } from './user-password.service';
 

@@ -42,23 +42,17 @@ import { PasswordModule } from '@tractr/nestjs-password';
     ModelsModule,
     DatabaseModule.register(),
     AuthenticationModule.registerAsync({
-      useFactory: (defaultOptions) => ({
-        ...defaultOptions,
-        userConfig: {
-          ...defaultOptions.userConfig,
+      imports: [ModelsModule],
+      useFactory: (userService) => ({
+        user: {
           customSelect: getSelectPrismaUserQuery(),
         },
-        cookies: {
-          ...defaultOptions.cookies,
-          cookieName: 'authCookie',
-          queryParamName: 'authToken',
-        },
         jwtModuleOptions: {
-          ...defaultOptions.jwtModuleOptions,
           secret: 'secret',
         },
-        userService: USER_SERVICE,
+        userService,
       }),
+      inject: [USER_SERVICE],
     }),
     PasswordModule.registerAsync({
       imports: [ModelsModule],

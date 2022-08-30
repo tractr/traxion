@@ -2,28 +2,24 @@
 
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
+import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { mockDeep, MockProxy, mockReset } from 'jest-mock-extended';
 
-import {
-  AUTHENTICATION_MODULE_OPTIONS,
-  AUTHENTICATION_USER_SERVICE,
-} from '../constants';
-import { AuthenticationOptions } from '../dtos';
-import { UserNotFoundError } from '../errors';
-import { UserType } from '../interfaces';
-import { AuthenticationUserService } from './authentication-user.service';
+import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
+import { AuthenticationModuleOptions } from '../interfaces';
 import { AuthenticationService } from './authentication.service';
+import { UserAuthenticationService } from './user-authentication.service';
 
 describe('AuthService', () => {
   let authService: AuthenticationService;
-  let mockAuthenticationOptions: MockProxy<AuthenticationOptions>;
   let mockJwtService: MockProxy<JwtService>;
-  let mockUserService: MockProxy<AuthenticationUserService>;
-  let mockUser: MockProxy<UserType>;
+  let mockUserAuthenticationService: MockProxy<UserAuthenticationService>;
   let mockBcryptCompare: jest.SpyInstance;
   let mockBcryptHash: jest.SpyInstance;
   let mockBcryptGenSalt: jest.SpyInstance;
+
+  let mockAuthenticationModuleOptions: MockProxy<AuthenticationModuleOptions>;
 
   beforeEach(async () => {
     mockBcryptCompare = jest.spyOn(bcrypt, 'compare');
@@ -31,18 +27,21 @@ describe('AuthService', () => {
     mockBcryptGenSalt = jest.spyOn(bcrypt, 'genSalt');
 
     mockJwtService = mockDeep<JwtService>();
-    mockUserService = mockDeep<AuthenticationUserService>();
-    mockAuthenticationOptions = mockDeep<AuthenticationOptions>();
-    mockUser = mockDeep<UserType>();
+    mockUserAuthenticationService = mockDeep<UserAuthenticationService>();
+    mockAuthenticationModuleOptions =
+      mockDeep<AuthenticationModuleOptions>() as MockProxy<AuthenticationModuleOptions>;
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         AuthenticationService,
         {
-          provide: AUTHENTICATION_MODULE_OPTIONS,
-          useValue: mockAuthenticationOptions,
+          provide: MODULE_OPTIONS_TOKEN,
+          useValue: mockAuthenticationModuleOptions,
         },
-        { provide: AUTHENTICATION_USER_SERVICE, useValue: mockUserService },
+        {
+          provide: UserAuthenticationService,
+          useValue: mockUserAuthenticationService,
+        },
         { provide: JwtService, useValue: mockJwtService },
       ],
     }).compile();
@@ -54,23 +53,96 @@ describe('AuthService', () => {
     mockBcryptCompare.mockRestore();
     mockBcryptHash.mockRestore();
     mockBcryptGenSalt.mockRestore();
-    mockReset(mockAuthenticationOptions);
     mockReset(mockJwtService);
-    mockReset(mockUserService);
-    mockReset(mockUser);
+    mockReset(mockUserAuthenticationService);
   });
 
   it('should be defined', () => {
     expect(authService).toBeDefined();
   });
 
-  describe('hashPassword', () => {
-    it('should hash a password with bcrypt and the config from configService', async () => {
-      mockAuthenticationOptions.password.saltRounds = 10;
+  describe('validateUser', () => {
+    it('should validate the user login and password', async () => {
+      const user = {
+        id: '1',
+        email: 'login',
+        password: 'password',
+      } as User;
+      mockUserAuthenticationService.getUserFromLogin.mockResolvedValueOnce(
+        user,
+      );
+      mockUserAuthenticationService.getPasswordFromUser.mockResolvedValueOnce(
+        'hash',
+      );
+
+      const spyComparePassword = jest.spyOn(authService, 'comparePasswordHash');
+      spyComparePassword.mockResolvedValueOnce(true);
+
+      const result = await authService.validateUser('login', 'password');
+
+      expect(result).toBe(user);
+    });
+
+    it('should return null if the user is not validated', async () => {
+      const user = {
+        id: '1',
+        email: 'login',
+        password: 'password',
+      } as User;
+      mockUserAuthenticationService.getUserFromLogin.mockResolvedValueOnce(
+        user,
+      );
+      mockUserAuthenticationService.getPasswordFromUser.mockResolvedValueOnce(
+        'hash',
+      );
+
+      const spyComparePassword = jest.spyOn(authService, 'comparePasswordHash');
+      spyComparePassword.mockResolvedValueOnce(false);
+
+      let result = await authService.validateUser('login', 'password');
+      expect(result).toBe(null);
+
+      mockUserAuthenticationService.getUserFromLogin.mockResolvedValueOnce(
+        user,
+      );
+      mockUserAuthenticationService.getPasswordFromUser.mockResolvedValueOnce(
+        null,
+      );
+      result = await authService.validateUser('login', 'password');
+      expect(result).toBe(null);
+
+      mockUserAuthenticationService.getUserFromLogin.mockResolvedValueOnce(
+        null,
+      );
+      result = await authService.validateUser('login', 'password');
+      expect(result).toBe(null);
+    });
+  });
+
+  describe('generatePasswordHash', () => {
+    it('should hash a password with the generatePasswordHash from the config', async () => {
+      const spyGeneratePasswordHash = jest.fn().mockReturnValue('bcrypt');
+      mockAuthenticationModuleOptions.generatePasswordHash =
+        spyGeneratePasswordHash;
+
+      const hash = await authService.generatePasswordHash('test');
+
+      expect(spyGeneratePasswordHash).toHaveBeenCalledTimes(1);
+      expect(spyGeneratePasswordHash).toHaveBeenCalledWith('test');
+      expect(spyGeneratePasswordHash).toHaveReturnedWith('bcrypt');
+
+      expect(mockBcryptGenSalt).toHaveBeenCalledTimes(0);
+      expect(mockBcryptHash).toHaveBeenCalledTimes(0);
+
+      expect(hash).toEqual('bcrypt');
+    });
+
+    it('should hash a password with the defaults', async () => {
+      mockAuthenticationModuleOptions.generatePasswordHash = undefined;
       mockBcryptGenSalt.mockReturnValue('salt');
       mockBcryptHash.mockReturnValue('bcrypt');
 
-      const hash = await authService.hashPassword('test');
+      const hash = await authService.generatePasswordHash('test');
 
       expect(mockBcryptGenSalt).toHaveBeenCalledTimes(1);
       expect(mockBcryptGenSalt).toHaveBeenCalledWith(10);
@@ -84,11 +156,28 @@ describe('AuthService', () => {
     });
   });
 
-  describe('verifyPassword', () => {
-    it('should verify a password with bcrypt', async () => {
+  describe('comparePasswordHash', () => {
+    it('should verify a password with the comparePasswordHash from the config', async () => {
+      const spyComparePasswordHash = jest.fn().mockReturnValue(true);
+      mockAuthenticationModuleOptions.comparePasswordHash =
+        spyComparePasswordHash;
+
+      const compare = await authService.comparePasswordHash('test', 'hash');
+
+      expect(mockBcryptCompare).toHaveBeenCalledTimes(0);
+
+      expect(spyComparePasswordHash).toHaveBeenCalledTimes(1);
+      expect(spyComparePasswordHash).toHaveBeenCalledWith('test', 'hash');
+      expect(spyComparePasswordHash).toHaveReturnedWith(true);
+
+      expect(compare).toEqual(true);
+    });
+
+    it('should verify a password with the comparePasswordHash from the config', async () => {
+      mockAuthenticationModuleOptions.comparePasswordHash = undefined;
       mockBcryptCompare.mockReturnValue(true);
 
-      const compare = await authService.verifyPassword('test', 'hash');
+      const compare = await authService.comparePasswordHash('test', 'hash');
 
       expect(mockBcryptCompare).toHaveBeenCalledTimes(1);
       expect(mockBcryptCompare).toHaveBeenCalledWith('test', 'hash');
@@ -99,13 +188,42 @@ describe('AuthService', () => {
   });
 
   describe('createUserJWT', () => {
-    it('should create a User JWT', async () => {
-      mockUser.id = 'id';
+    it('should create a User JWT with the getUserJWT from the config', async () => {
+      const spyGetUserJWT = jest.fn().mockReturnValue({ id: 'test' });
+      mockAuthenticationModuleOptions.getUserJWT = spyGetUserJWT;
+
+      const user = {
+        id: '1',
+        email: 'login',
+        password: 'password',
+      } as User;
       mockJwtService.sign.mockReturnValue('jwt');
-      const compare = await authService.createUserJWT(mockUser);
+      const compare = await authService.createUserJWT(user);
 
       expect(mockJwtService.sign).toHaveBeenCalledTimes(1);
-      expect(mockJwtService.sign).toHaveBeenCalledWith({ sub: mockUser.id });
+      expect(mockJwtService.sign).toHaveBeenCalledWith({
+        sub: user.id,
+        id: 'test',
+      });
+
+      expect(spyGetUserJWT).toHaveBeenCalledTimes(1);
+      expect(spyGetUserJWT).toHaveBeenCalledWith(user);
+
+      expect(compare).toEqual('jwt');
+    });
+
+    it('should create a User JWT', async () => {
+      mockAuthenticationModuleOptions.getUserJWT = undefined;
+      const user = {
+        id: '1',
+        email: 'login',
+        password: 'password',
+      } as User;
+      mockJwtService.sign.mockReturnValue('jwt');
+      const compare = await authService.createUserJWT(user);
+
+      expect(mockJwtService.sign).toHaveBeenCalledTimes(1);
+      expect(mockJwtService.sign).toHaveBeenCalledWith({ sub: user.id });
 
       expect(compare).toEqual('jwt');
     });
@@ -113,41 +231,21 @@ describe('AuthService', () => {
 
   describe('login', () => {
     it('should login a user and return an access token', async () => {
+      const user = {
+        id: '1',
+        email: 'login',
+        password: 'password',
+      } as User;
       const { createUserJWT } = authService;
       const mockCreateUserJWT = jest.fn().mockReturnValue('jwt');
       authService.createUserJWT = mockCreateUserJWT;
-      const loggedIn = await authService.login(mockUser);
+      const loggedIn = await authService.login(user);
       authService.createUserJWT = createUserJWT;
 
       expect(mockCreateUserJWT).toHaveBeenCalledTimes(1);
-      expect(mockCreateUserJWT).toHaveBeenCalledWith(mockUser);
+      expect(mockCreateUserJWT).toHaveBeenCalledWith(user);
 
       expect(loggedIn).toEqual({ accessToken: 'jwt' });
-    });
-  });
-
-  describe('authenticateLoginCredentials', () => {
-    it('should throw a UserNotFoundError if no user has been found by the login field', async () => {
-      mockAuthenticationOptions.userConfig = {
-        ...mockAuthenticationOptions.userConfig,
-        loginField: 'loginFieldTest',
-        emailField: 'emailFieldTest',
-        passwordField: 'passwordFieldTest',
-        idField: 'idFieldTest',
-      };
-
-      mockUserService.findUnique.mockReturnValueOnce(Promise.resolve(null));
-
-      await expect(async () =>
-        authService.authenticateLoginCredentials('login', 'password'),
-      ).rejects.toThrow(UserNotFoundError);
-
-      expect(mockUserService.findUnique).toHaveBeenCalledTimes(1);
-      expect(mockUserService.findUnique).toHaveBeenCalledWith({
-        where: {
-          loginFieldTest: 'login',
-        },
-      });
     });
   });
 });

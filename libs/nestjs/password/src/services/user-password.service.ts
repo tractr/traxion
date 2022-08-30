@@ -1,6 +1,6 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 
-import { PasswordModuleOptions, UserInfo } from '../dtos';
+import { PasswordModuleOptions, UserInfo } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../password.module-definition';
 
 import { LoggerService } from '@tractr/nestjs-core';
