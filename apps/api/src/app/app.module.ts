@@ -10,7 +10,10 @@ import {
 } from '@tractr/generated-casl';
 import { GraphQLModelsModule } from '@tractr/generated-nestjs-graphql';
 import { ModelsModule } from '@tractr/generated-nestjs-models';
-import { USER_SERVICE } from '@tractr/generated-nestjs-models-common';
+import {
+  USER_SERVICE,
+  UserService,
+} from '@tractr/generated-nestjs-models-common';
 import {
   AuthenticationModule,
   JwtGlobalAuthGuard,
@@ -26,7 +29,10 @@ import {
   FileStorageController,
   FileStorageModule,
 } from '@tractr/nestjs-file-storage';
-import { MailerModule } from '@tractr/nestjs-mailer';
+import {
+  MailerModule,
+  ResetPasswordSendEmailService,
+} from '@tractr/nestjs-mailer';
 import { PasswordModule } from '@tractr/nestjs-password';
 
 @Module({
@@ -54,18 +60,39 @@ import { PasswordModule } from '@tractr/nestjs-password';
       }),
       inject: [USER_SERVICE],
     }),
+    MailerModule.registerAsync({
+      useFactory: () => ({
+        privateApiKey: 'test',
+        publicApiKey: 'test',
+      }),
+    }),
     PasswordModule.registerAsync({
-      imports: [ModelsModule],
-      useFactory: (userService) => ({
-        resetPasswordLinkFactory: (context) => 'resetPasswordLink',
+      imports: [
+        ModelsModule,
+        MailerModule.registerAsync({
+          useFactory: () => ({
+            privateApiKey: 'test',
+            publicApiKey: 'test',
+          }),
+        }),
+      ],
+      useFactory: (
+        userService,
+        resetPasswordSendEmailService: ResetPasswordSendEmailService,
+      ) => ({
         resetPasswordSendEmail: {
-          request: (user, link, resetCode) => {
-            console.info('emailSent');
-          },
+          request:
+            resetPasswordSendEmailService.sendRequestResetPasswordEmailFactory({
+              from: 'admin@traxion.com',
+            }),
+          updated:
+            resetPasswordSendEmailService.sendUpdatedPasswordEmailFactory({
+              from: 'admin@traxion.com',
+            }),
         },
         userService,
       }),
-      inject: [USER_SERVICE],
+      inject: [USER_SERVICE, ResetPasswordSendEmailService],
     }),
     FileStorageModule.registerAsync({
       useFactory: (defaultConfig) => ({
@@ -76,12 +103,6 @@ import { PasswordModule } from '@tractr/nestjs-password';
         port: 9000,
         useSSL: false,
         defaultBucket: 'bucket',
-      }),
-    }),
-    MailerModule.registerAsync({
-      useFactory: () => ({
-        privateApiKey: 'test',
-        publicApiKey: 'test',
       }),
     }),
     CaslModule.register({

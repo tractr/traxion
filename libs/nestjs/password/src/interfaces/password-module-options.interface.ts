@@ -3,11 +3,13 @@ import { Prisma } from '@prisma/client';
 
 export type UserInfo = { id: string | number; email: string; password: string };
 
-export type ResetPasswordLinkFactory = (
-  request: Record<string, unknown>,
-  resetCode: string,
-  user: Record<string, string | number>,
-) => Promise<string> | string;
+export type ResetPasswordLinkFactory =
+  | ((
+      request: Record<string, unknown>,
+      resetCode: string,
+      user: Record<string, string | number>,
+    ) => Promise<string> | string)
+  | string;
 
 export type ResetPasswordSendRequestEmail = (
   link: string,
@@ -22,7 +24,7 @@ export type ResetPasswordSendRequestUpdated = (
 export class PasswordModuleOptions {
   resetPasswordExpiresIn?: string | number | undefined;
 
-  resetPasswordLinkFactory!: ResetPasswordLinkFactory;
+  resetPasswordLinkFactory?: ResetPasswordLinkFactory;
 
   resetPasswordSendEmail?: {
     request?: ResetPasswordSendRequestEmail;

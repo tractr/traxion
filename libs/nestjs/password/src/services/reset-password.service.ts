@@ -3,6 +3,7 @@ import { REQUEST } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 
+import { DEFAULT_RESET_PASSWORD_LINK } from '../constants';
 import { BadResetCodeError } from '../errors';
 import { PasswordModuleOptions, UserInfo } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../password.module-definition';
@@ -36,13 +37,20 @@ export class ResetPasswordService {
     // We first generate the reset code and get a JWT Token
     const resetCode = this.createResetCode(user);
 
-    // We generate the link
+    const resetPasswordLink =
+      this.passwordConfig.resetPasswordLinkFactory ||
+      DEFAULT_RESET_PASSWORD_LINK;
+
     const link = await Promise.resolve(
-      this.passwordConfig.resetPasswordLinkFactory(
-        this.request,
-        resetCode,
-        this.userPasswordService.getUserFromUserInfo(user),
-      ),
+      typeof resetPasswordLink === 'string'
+        ? resetPasswordLink
+            .replace('{{id}}', `${user.id}`)
+            .replace('{{code}}', resetCode)
+        : resetPasswordLink(
+            this.request,
+            resetCode,
+            this.userPasswordService.getUserFromUserInfo(user),
+          ),
     );
 
     if (this.passwordConfig.resetPasswordSendEmail?.request) {
