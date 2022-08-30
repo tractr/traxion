@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 
 import { BadResetCodeError } from '../errors';
-import { PasswordModuleOptions } from '../interfaces';
+import { PasswordModuleOptions, ResetPasswordLinkFactory } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../password.module-definition';
 import { ResetPasswordService } from './reset-password.service';
 import { UserPasswordService } from './user-password.service';
@@ -154,18 +154,20 @@ describe('ResetPasswordService', () => {
         email,
         password,
       });
-      mockPasswordModuleOptions.resetPasswordLinkFactory.mockResolvedValue(
-        'link',
-      );
+      const mockResetPasswordLinkFactory = jest.fn().mockResolvedValue('link');
+      mockPasswordModuleOptions.resetPasswordLinkFactory =
+        mockResetPasswordLinkFactory;
       mockPasswordModuleOptions.resetPasswordSendEmail = {
         request: mockSendRequestEmail,
       };
 
       await resetPasswordService.requestResetPassword('email');
 
-      expect(
-        mockPasswordModuleOptions.resetPasswordLinkFactory,
-      ).toHaveBeenCalledWith(mockReq, 'code', { id, email, password });
+      expect(mockResetPasswordLinkFactory).toHaveBeenCalledWith(
+        mockReq,
+        'code',
+        { id, email, password },
+      );
 
       expect(mockSendRequestEmail).toHaveBeenCalledWith('link', 'code', {
         id,

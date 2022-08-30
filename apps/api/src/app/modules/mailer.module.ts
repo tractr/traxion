@@ -11,5 +11,6 @@ import { MailerModule as DynamicMailerModule } from '@tractr/nestjs-mailer';
       }),
     }),
   ],
+  exports: [DynamicMailerModule],
 })
 export class MailerModule {}

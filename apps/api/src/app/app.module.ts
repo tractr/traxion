@@ -4,7 +4,7 @@ import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConsoleModule } from 'nestjs-console';
 
-import { MailerModule } from './modules/mailer.module';
+import { MailerModule } from './modules';
 
 import {
   getSelectPrismaUserQuery,

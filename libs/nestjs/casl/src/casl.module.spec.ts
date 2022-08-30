@@ -12,10 +12,7 @@ import { CaslModule } from './casl.module';
 import { PoliciesGuard } from './guards';
 import { CaslOptions } from './interfaces';
 
-import {
-  AUTHENTICATION_USER_SERVICE,
-  AuthenticationUserService,
-} from '@tractr/nestjs-authentication';
+import { UserAuthenticationService } from '@tractr/nestjs-authentication';
 import { LoggerModule } from '@tractr/nestjs-core';
 
 describe('Authentication Module', () => {
@@ -24,7 +21,7 @@ describe('Authentication Module', () => {
     getUser: () => Record<string, unknown> | null;
     isPublic: () => boolean;
   }>;
-  const mockAuthenticationUserService = mockDeep<AuthenticationUserService>();
+  const mockAuthenticationUserService = mockDeep<UserAuthenticationService>();
 
   beforeAll(async () => {
     mockUser = mockDeep<{
@@ -46,7 +43,7 @@ describe('Authentication Module', () => {
           useClass: PoliciesGuard,
         },
         {
-          provide: AUTHENTICATION_USER_SERVICE,
+          provide: UserAuthenticationService,
           useValue: mockAuthenticationUserService,
         },
       ],
@@ -203,7 +200,7 @@ describe('Authentication Module', () => {
             useClass: PoliciesGuard,
           },
           {
-            provide: AUTHENTICATION_USER_SERVICE,
+            provide: UserAuthenticationService,
             useValue: mockAuthenticationUserService,
           },
         ],
