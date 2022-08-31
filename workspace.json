@@ -137,7 +137,9 @@
               "hapify-templates-nestjs-models-rest:publish",
               "hapify-templates-rext-client:publish",
               "hapify-templates-react-admin:publish",
+              "nestjs-bcrypt:publish",
               "nestjs-authentication:publish",
+              "nestjs-password:publish",
               "angular-form:publish",
               "angular-file-storage:publish",
               "terraform-service-reverse-proxy:publish",
@@ -154,9 +156,7 @@
               "angular-casl:publish",
               "hapify-create-traxion-workspace:publish",
               "hapify-templates-nestjs-graphql:publish",
-              "nestjs-graphql:publish",
-              "nestjs-bcrypt:publish",
-              "nestjs-password:publish"
+              "nestjs-graphql:publish"
             ],
             "syncVersions": true
           }
