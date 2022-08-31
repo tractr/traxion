@@ -74,7 +74,7 @@ export class DatabaseService
     )
       return 'postgresql';
 
-    throw new Error('Unknow database provider type');
+    throw new Error('Unknown database provider type');
   }
 
   async truncateDatabase(schemaName?: string, force = false): Promise<void> {

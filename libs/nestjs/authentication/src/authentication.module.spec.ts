@@ -1,209 +1,167 @@
 import { INestApplication } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
+import { Prisma } from '@prisma/client';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
+import * as jwt from 'jsonwebtoken';
+import * as request from 'supertest';
 
 import { AuthenticationEndpointMockController } from '../mocks';
+import { AuthenticationModule } from './authentication.module';
+import { JwtGlobalAuthGuard } from './guards';
+import { AuthenticationService } from './services';
+import { JwtStrategy, LocalStrategy } from './strategies';
 
-import {
-  AUTHENTICATION_MODULE_OPTIONS,
-  AuthenticationModule,
-  AuthenticationOptions,
-  AuthenticationOptionsPassword,
-  AuthenticationOptionsPasswordReset,
-  AuthenticationUserService,
-  JwtGlobalAuthGuard,
-} from '.';
-
-import { getDefaults } from '@tractr/common';
-import { LoggerModule } from '@tractr/nestjs-core';
-
-const AUTHENTICATION_MOCK_USER_SERVICE = 'AUTHENTICATION_MOCK_USER_SERVICE';
-
-describe('Authentication Module with async options', () => {
+describe('Authentication Module', () => {
   let app: INestApplication;
-  let mockUserService: MockProxy<AuthenticationUserService>;
-  const mockUserConfig = {
-    emailField: 'email',
-    passwordField: 'password',
-    loginField: 'email',
-    idField: 'id',
-    customSelect: undefined,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    formatUser: (user: Record<string, any>) => user,
-  };
+  let mockUserService: MockProxy<Prisma.UserDelegate<false>>;
 
-  beforeEach(async () => {
-    mockUserService = mockDeep<AuthenticationUserService>();
-
+  it('should load the module when using register', async () => {
+    mockUserService = mockDeep<Prisma.UserDelegate<false>>();
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      controllers: [AuthenticationEndpointMockController],
-      providers: [
-        {
-          provide: APP_GUARD,
-          useClass: JwtGlobalAuthGuard,
-        },
-        {
-          provide: AUTHENTICATION_MOCK_USER_SERVICE,
-          useValue: mockUserService,
-        },
-      ],
       imports: [
-        LoggerModule,
-        AuthenticationModule.registerAsync({
-          useFactory: (defaultValue) =>
-            Promise.resolve({
-              ...defaultValue,
-              userConfig: mockUserConfig,
-              jwtModuleOptions: {
-                secret: 'integration-tests',
-              },
-              userService: AUTHENTICATION_MOCK_USER_SERVICE,
-            }),
+        AuthenticationModule.register({
+          userService: mockUserService,
+          jwtModuleOptions: {
+            secret: 'integration-tests',
+          },
         }),
       ],
+      providers: [],
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    await app.init();
+
+    const authenticationService = app.get(AuthenticationService);
+    expect(authenticationService).toBeInstanceOf(AuthenticationService);
+    const jwtStrategy = app.get(JwtStrategy);
+    expect(jwtStrategy).toBeInstanceOf(JwtStrategy);
+    const localStrategy = app.get(LocalStrategy);
+    expect(localStrategy).toBeInstanceOf(LocalStrategy);
   });
 
-  afterEach(async () => {
-    if (app) await app.close();
+  it('should load the module when using registerAsync', async () => {
+    mockUserService = mockDeep<Prisma.UserDelegate<false>>();
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [
+        AuthenticationModule.register({
+          userService: mockUserService,
+          jwtModuleOptions: {
+            secret: 'integration-tests',
+          },
+        }),
+      ],
+      providers: [],
+    }).compile();
+
+    app = moduleFixture.createNestApplication();
+    await app.init();
+
+    const authenticationService = app.get(AuthenticationService);
+    expect(authenticationService).toBeInstanceOf(AuthenticationService);
+    const jwtStrategy = app.get(JwtStrategy);
+    expect(jwtStrategy).toBeInstanceOf(JwtStrategy);
+    const localStrategy = app.get(LocalStrategy);
+    expect(localStrategy).toBeInstanceOf(LocalStrategy);
   });
 
-  it('should load the authentication options async', async () => {
-    const authenticationOptions = app.get<AuthenticationOptions>(
-      AUTHENTICATION_MODULE_OPTIONS,
-    );
-
-    expect(authenticationOptions).toEqual({
-      cookies: {
-        cookieName: 'authCookie',
-        options: {
-          httpOnly: true,
-          secure: false,
-          maxAge: 86400000,
-        },
-        queryParamName: 'authToken',
-      },
-      jwtModuleOptions: {
-        secret: 'integration-tests',
-      },
-      passportModuleOptions: {
-        defaultStrategy: 'jwt',
-      },
-      password: {
-        reset: {
-          active: false,
-          link: '/password/reset/{{id}}/{{code}}',
-          subject: 'Lost password',
-        },
-        saltRounds: 10,
-      },
-      strategy: {
-        jwt: {
-          ignoreExpiration: false,
-          jwtFromRequest: expect.any(Function),
-        },
-        local: {
-          passReqToCallback: true,
-        },
-      },
-      userConfig: mockUserConfig,
-      userService: AUTHENTICATION_MOCK_USER_SERVICE,
-    });
-  });
-});
-
-describe('Authentication Module with reset password', () => {
-  let app: INestApplication;
-  let mockUserService: MockProxy<AuthenticationUserService>;
-
-  afterEach(async () => {
-    if (app) await app.close();
-  });
-
-  it('should fail if the mailer is not configure when we ask the reset password feature', async () => {
-    await expect(async () => {
-      mockUserService = mockDeep<AuthenticationUserService>();
+  describe('Authentication module when using jwt global guard', () => {
+    beforeEach(async () => {
+      mockUserService = mockDeep<Prisma.UserDelegate<false>>();
 
       const moduleFixture: TestingModule = await Test.createTestingModule({
         controllers: [AuthenticationEndpointMockController],
+        imports: [
+          AuthenticationModule.register({
+            userService: mockUserService,
+            jwtModuleOptions: {
+              secret: 'integration-tests',
+            },
+          }),
+        ],
         providers: [
           {
             provide: APP_GUARD,
             useClass: JwtGlobalAuthGuard,
           },
-          {
-            provide: AUTHENTICATION_MOCK_USER_SERVICE,
-            useValue: mockUserService,
-          },
         ],
+      }).compile();
+
+      app = moduleFixture.createNestApplication();
+      await app.init();
+    });
+
+    it('/is-public', async () => {
+      await request(app.getHttpServer()).get('/is-public').expect(200);
+    });
+    it('/is-public-with-user', async () => {
+      const res = await request(app.getHttpServer())
+        .get('/is-public-with-user')
+        .expect(200);
+
+      expect(res.body).toEqual({});
+    });
+    it('/is-private', async () => {
+      await request(app.getHttpServer()).get('/is-private').expect(401);
+    });
+    it('/is-public-with-user should have a user if connected', async () => {
+      const jwtToken = jwt.sign({ sub: '1' }, 'login-controller-secret');
+
+      const res = await request(app.getHttpServer())
+        .get('/is-public-with-user')
+        .set('Authorization', `bearer ${jwtToken}`)
+        .expect(200);
+
+      expect(res.body).toEqual({});
+    });
+  });
+
+  describe('Authentication Module without global guards', () => {
+    beforeEach(async () => {
+      mockUserService = mockDeep<Prisma.UserDelegate<false>>();
+      const moduleFixture: TestingModule = await Test.createTestingModule({
+        controllers: [AuthenticationEndpointMockController],
         imports: [
-          LoggerModule,
           AuthenticationModule.register({
+            userService: mockUserService,
             jwtModuleOptions: {
               secret: 'integration-tests',
-            },
-            userService: AUTHENTICATION_MOCK_USER_SERVICE,
-            password: {
-              ...getDefaults(AuthenticationOptionsPassword),
-              reset: {
-                ...getDefaults(AuthenticationOptionsPasswordReset),
-                active: true,
-              },
             },
           }),
         ],
       }).compile();
 
       app = moduleFixture.createNestApplication();
-    }).rejects.toThrowError(
-      'password reset is activated. You must configure the mailer module options',
-    );
-  });
+      await app.init();
 
-  it('should not fail if the mailer is configure when we ask the reset password feature', async () => {
-    mockUserService = mockDeep<AuthenticationUserService>();
+      app = moduleFixture.createNestApplication();
 
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      controllers: [AuthenticationEndpointMockController],
-      providers: [
-        {
-          provide: APP_GUARD,
-          useClass: JwtGlobalAuthGuard,
-        },
-        {
-          provide: AUTHENTICATION_MOCK_USER_SERVICE,
-          useValue: mockUserService,
-        },
-      ],
-      imports: [
-        LoggerModule,
-        AuthenticationModule.register({
-          jwtModuleOptions: {
-            secret: 'integration-tests',
-          },
-          userService: AUTHENTICATION_MOCK_USER_SERVICE,
-          password: {
-            ...getDefaults(AuthenticationOptionsPassword),
-            reset: {
-              ...getDefaults(AuthenticationOptionsPasswordReset),
-              active: true,
-            },
-          },
-          mailer: {
-            from: 'test@test.com',
-            name: 'test',
-            moduleOptions: {
-              publicApiKey: 'publicApiKey',
-              privateApiKey: 'privateApiKey',
-            },
-          },
-        }),
-      ],
-    }).compile();
+      await app.init();
+    });
 
-    app = moduleFixture.createNestApplication();
+    afterEach(async () => {
+      if (app) await app.close();
+    });
+
+    it('/is-public', async () => {
+      await request(app.getHttpServer()).get('/is-public').expect(200);
+    });
+
+    it('/is-private should not fail', async () => {
+      await request(app.getHttpServer()).get('/is-private').expect(200);
+    });
+
+    it('/login should fail with 401', async () => {
+      await request(app.getHttpServer()).post('/login').expect(401);
+    });
+
+    it('/logout should not fail', async () => {
+      await request(app.getHttpServer()).post('/logout').expect(200);
+    });
+
+    it('/me should fail with 401', async () => {
+      await request(app.getHttpServer()).get('/me').expect(401);
+    });
   });
 });

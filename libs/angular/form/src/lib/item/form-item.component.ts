@@ -1,5 +1,5 @@
 import { Component, Input, TemplateRef } from '@angular/core';
-import { UntypedFormControl, NgModel } from '@angular/forms';
+import { NgModel, UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'tractr-form-item',

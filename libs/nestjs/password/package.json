@@ -1,0 +1,15 @@
+{
+  "name": "@tractr/nestjs-password",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/stack"
+  },
+  "optionalDependencies": {
+    "cookie-parser": "^1.4.6"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}
