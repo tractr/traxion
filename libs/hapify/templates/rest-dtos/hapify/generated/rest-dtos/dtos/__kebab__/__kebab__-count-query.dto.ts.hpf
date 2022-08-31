@@ -60,7 +60,7 @@ import {
 <<<}>>>
  
 export class <<Model pascal>>CountQueryDto {
-<<for Fields searchable and not password and not hidden field>>
+<<<getSearchableFields(root).forEach((field) => {>>>
 	
   <<if field string and not text>>
   @MaxLength(<<< if (field.meta.maxLength) { >>><<-field maxLength raw>><<<}else{>>>255<<<}>>>, {
@@ -86,8 +86,17 @@ export class <<Model pascal>>CountQueryDto {
   @IsOptional()
   <<=optionalTypedProperty(field)>>
  
-<<endfor>>
+<<<})>>>
 }
+
+<<<
+function getSearchableFields(model) {
+  return model
+    .fields.list
+    .concat(...model.referencedIn)
+    .filter((field) => field.searchable && !field.password && !field.hidden);
+}
+>>>
 	
 <<<
 function optionalTypedProperty(f) {
