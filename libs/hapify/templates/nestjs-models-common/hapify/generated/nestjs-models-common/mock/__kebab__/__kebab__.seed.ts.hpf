@@ -37,7 +37,7 @@ export async function insert<<Model pascal>>s(prisma: PrismaClient, <<Model came
       return prisma.<<Model camel>>.create({
         data: {
           ...values,
-          <<for Fields entity field>>
+          <<for Fields entity and not manyOne field>>
             <<if field oneOne or oneMany>>
           <<field camel>>: {
             connect: { id: <<field camel>>Id as string},
