@@ -9,9 +9,6 @@ import {
   <<if Fields manyMany>>
   formatEntityIds,
   <<endif>>
-  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-  formatPopulate,
-  <<<}>>>
   formatSort,
   formatFilterType,
 } from '@tractr/nestjs-core';
@@ -27,9 +24,6 @@ import {
   <<Model pascal>>DeleteParamsDto,
   <<Model pascal>>FindManyQueryDto,
   <<Model pascal>>FindUniqueParamsDto,
-  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-  <<Model pascal>>FindUniqueQueryDto,
-  <<<}>>>
   <<Model pascal>>UpdateBodyDto,
   <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpsertBodyDto,
@@ -237,30 +231,13 @@ export class <<Model pascal>>RestDtoService {
    * Format dtos to find a unique <<Model pascal>>
    *
    * @param paramsDto - A valid params dto to find a unique <<Model pascal>>
-  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-   * @param queryDto - Deprecated: A valid query dto to populate <<Model pascal>> relations
-  <<<}>>>
    * @returns prisma parameters to find a unique <<Model pascal>>
    */
   public formatFindUniqueDtos(
     paramsDto: <<Model pascal>>FindUniqueParamsDto,
-    <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-    { populate }: <<Model pascal>>FindUniqueQueryDto
-    <<<}>>>
   ): Prisma.<<Model pascal>>FindUniqueArgs {
-    <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-    /* istanbul ignore next */
-    const include: Prisma.<<Model pascal>>Include | undefined = populate
-      ? formatPopulate(populate) : undefined;
-	
-    /* istanbul ignore if */
-    if (include) console.warn('populate args will be depracted in traxion@v2, use multi request or graphQL instead');
-    <<<}>>>
     return {
       where: { ...paramsDto },
-      <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-      include,
-      <<<}>>>
     };
   }
  
@@ -274,9 +251,6 @@ export class <<Model pascal>>RestDtoService {
     queryDto: <<Model pascal>>FindManyQueryDto
   ): Prisma.<<Model pascal>>FindManyArgs {
     const {
-    <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-      populate,
-    <<<}>>>
       sort,
       order,
       take,
@@ -304,12 +278,6 @@ export class <<Model pascal>>RestDtoService {
     if (sort) findManyArgs.orderBy = formatSort(sort, order);
     if (skip) findManyArgs.skip = Number(skip);
     if (take) findManyArgs.take = Number(take);
-    <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-    /* istanbul ignore if */
-    if (populate) findManyArgs.include = formatPopulate(populate)
-    /* istanbul ignore if */
-    if (findManyArgs.include) console.warn('populate args will be depracted in traxion@v2, use multi request or graphQL instead');
-    <<<}>>>
  
     return findManyArgs;
   }
