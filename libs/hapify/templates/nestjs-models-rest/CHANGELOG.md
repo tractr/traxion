@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.57.2](https://github.com/tractr/stack/compare/v1.57.1...v1.57.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* remove populate from the rest api interfaces ([#498](https://github.com/tractr/stack/issues/498)) ([ffc18ef](https://github.com/tractr/stack/commit/ffc18efff838c0fe62b0048c6a85f4dc48b6c90b))
+
+
+
 ## [1.57.1](https://github.com/tractr/stack/compare/v1.57.0...v1.57.1) (2022-08-31)
 
 
