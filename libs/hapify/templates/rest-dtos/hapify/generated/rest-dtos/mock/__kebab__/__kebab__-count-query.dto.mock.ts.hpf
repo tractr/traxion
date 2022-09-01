@@ -1,7 +1,7 @@
 import { <<Model pascal>>CountQueryDto } from '../..';
   
 import {
-<<for Fields searchable and not password and not hidden field>>
+<<for Fields searchable and not password and not hidden and not manyOne field>>
   <<if field not entity>>
   mock<<Model pascal>><<field pascal>>Factory,
   <<elseif field oneOne or oneMany>>
@@ -16,7 +16,7 @@ export function mock<<Model pascal>>CountQueryDtoFactory(
   override: Partial<<<Model pascal>>CountQueryDto> = {}
 ): <<Model pascal>>CountQueryDto {
   return {
-  <<for Fields searchable and not password and not hidden field>>
+  <<for Fields searchable and not password and not hidden and not manyOne field>>
     <<if field not entity and not multiple>>
       <<if field datetime>>
     <<field camel>>: mock<<Model pascal>><<field pascal>>Factory().toISOString(),

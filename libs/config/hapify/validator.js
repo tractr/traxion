@@ -44,15 +44,47 @@ for (const field of fields) {
     res.errors.push(
       `Subtype 'rich' is not handled yet. Remove it from field '${field.name}'`,
     );
-  if (field.type === 'entity' && !(field.meta && field.meta.backRelation)) {
+  if (
+    field.type === 'entity' &&
+    field.subtype !== 'manyOne' &&
+    !(field.meta && field.meta.backRelation)
+  ) {
     res.errors.push(
       `Entity field must have the meta 'backRelation'. Fix field '${field.name}'`,
     );
   }
-  if (field.subtype === 'manyOne')
-    res.errors.push(
-      `Subtype 'manyOne' is not handled yet. Remove it from field '${field.name}'`,
-    );
+  if (field.subtype === 'manyOne') {
+    if (!field.searchable) {
+      res.errors.push(
+        `ManyOne field must be searchable. Fix field '${field.name}'`,
+      );
+    } else if (
+      field.primary ||
+      field.unique ||
+      field.label ||
+      field.nullable ||
+      field.multiple ||
+      field.embedded ||
+      field.sortable ||
+      field.hidden ||
+      field.internal ||
+      field.restricted ||
+      field.ownership
+    ) {
+      res.errors.push(
+        `ManyOne field must not have the following properties: primary, unique, label, nullable, multiple, embedded, sortable, hidden, internal, restricted, ownership. Fix field '${field.name}'`,
+      );
+    } else {
+      res.warnings.push(
+        `Subtype 'manyOne' is used to
+only be able to filter on this relation.
+It must be the same name as the backRelation
+field from the oneMany entity, and filterable.
+Consider to define this relation on the
+oneMany entity instead.`,
+      );
+    }
+  }
   if (field.subtype === 'manyMany' && !field.multiple)
     res.errors.push(
       `Entity field with subtype 'manyMany' must also have 'multiple' property. Fix field '${field.name}'`,

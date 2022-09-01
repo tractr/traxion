@@ -83,7 +83,7 @@ import {
 <<endif>>
  
 export class <<Model pascal>>UpsertBodyWithPrimaryDto {
-<<for Fields not internal or primary field>>
+<<for Fields not internal or primary and not manyOne field>>
   <<if field boolean>>
   @IsBoolean(<<=listModifier(field)>>)
   @TransformStringToBoolean()

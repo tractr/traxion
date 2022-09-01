@@ -25,7 +25,7 @@ export async function insert<<Model pascal>>s(prisma: PrismaClient, <<Model came
   return Promise.all(
     <<Model camel>>s.map((<<Model camel>>) => {
       const {
-      <<for Fields entity field>>
+      <<for Fields entity and not manyOne field>>
         <<if field oneOne or oneMany>>
         <<field camel>>Id, 
         <<else>>
@@ -66,7 +66,7 @@ export async function insert<<Model pascal>>s(prisma: PrismaClient, <<Model came
   
 export function generate<<Model pascal>>Seeds(
   quantity: number,
-  <<for Fields entity field>>
+  <<for Fields entity and not manyOne field>>
     <<if field oneOne or oneMany>>
   <<field camel>>s: <<field.model pascal>>[],
     <<else>>
@@ -111,7 +111,7 @@ export function generate<<Model pascal>>Seeds(
 export async function seed<<Model pascal>>s(
   prisma: PrismaClient,
   quantity: number,
-  <<for Fields entity field>>
+  <<for Fields entity and not manyOne field>>
     <<if field oneOne or oneMany>>
   <<field camel>>s: <<field.model pascal>>[],
     <<else>>
@@ -121,7 +121,7 @@ export async function seed<<Model pascal>>s(
 ): Promise< <<Model pascal>>[]> {
   const seeds = generate<<Model pascal>>Seeds(
     quantity,
-    <<for Fields entity field>>
+    <<for Fields entity and not manyOne field>>
       <<if field oneOne or oneMany>>
     <<field camel>>s,
       <<else>>

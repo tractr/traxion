@@ -34,7 +34,9 @@ export const nestLikeConsoleFormat = (
     const color =
       nestLikeColorScheme[level] || ((text: string): string => text);
 
-    const stringifiedMeta = safeStringify(meta);
+    const { stack = '', ...rest } = meta;
+
+    const stringifiedMeta = safeStringify(rest);
     const formattedMeta = prettyPrint
       ? inspect(JSON.parse(stringifiedMeta), {
           colors: !!colors,
@@ -50,6 +52,8 @@ export const nestLikeConsoleFormat = (
 
     return `${name} ${levelLabel}\t${timeLabel}${contextLabel}${color(
       message,
-    )} - ${formattedMeta}`;
+    )} ${formattedMeta === '{}' ? '' : `- ${formattedMeta}`} ${
+      stack.length > 0 ? `\n${color(stack)}` : ''
+    }`;
   });
 };
