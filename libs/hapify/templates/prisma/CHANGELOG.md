@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.58.0](https://github.com/tractr/stack/compare/v1.57.2...v1.58.0) (2022-09-02)
+
+
+### Features
+
+* add the capability to filter the relation on the other side of the one many and many many ([#499](https://github.com/tractr/stack/issues/499)) ([b9028c8](https://github.com/tractr/stack/commit/b9028c8505ef20ad7da81aa106d542dab9ebc936))
+
+
+
 ## [1.57.2](https://github.com/tractr/stack/compare/v1.57.1...v1.57.2) (2022-09-01)
 
 
