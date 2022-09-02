@@ -159,7 +159,7 @@ describe('<<Model pascal>>Controller', () => {
           <<if Fields internal and not primary and (not entity or nullable)>>
           ...fakedInternals,
           <<endif>>
-          <<for Fields not primary and not internal field>>
+          <<for Fields not primary and not internal and not manyOne field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
           <<elseif field manyMany>>
@@ -168,7 +168,7 @@ describe('<<Model pascal>>Controller', () => {
           <<field camel>>: <<Model camel>>.<<field camel>>,
           <<endif>>
           <<endfor>>
-          <<for Fields ownership and not primary and internal field>>
+          <<for Fields ownership and not primary and internal and not manyOne field>>
           <<field camel>>: { connect: mockUser }
           <<endfor>>
         },
@@ -206,7 +206,7 @@ describe('<<Model pascal>>Controller', () => {
           <<if Fields internal and not primary and (not entity or nullable)>>
           ...fakedInternals,
           <<endif>>
-          <<for Fields not primary and not internal field>>
+          <<for Fields not primary and not internal and not manyOne field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
           <<elseif field manyMany>>
@@ -215,7 +215,7 @@ describe('<<Model pascal>>Controller', () => {
           <<field camel>>: <<Model camel>>.<<field camel>>,
           <<endif>>
           <<endfor>>
-          <<for Fields ownership and not primary and internal field>>
+          <<for Fields ownership and not primary and internal and not manyOne field>>
           <<field camel>>: { connect: mockUser }
           <<endfor>>
         },
@@ -236,7 +236,7 @@ describe('<<Model pascal>>Controller', () => {
 	
       await request(app.getHttpServer())
         .get('/<<Model kebab>>/count')
-      <<for Fields searchable and not password and not hidden field>>
+      <<for Fields searchable and not password and not hidden and not manyOne field>>
         .query(`<<field camel>>=${mock<<Model pascal>>.<<field camel>>}`)
       <<endfor>>
         .expect(200);
@@ -244,9 +244,9 @@ describe('<<Model pascal>>Controller', () => {
       expect(mock<<Model pascal>>Service.count).toHaveBeenCalledTimes(1);
       expect(mock<<Model pascal>>Service.count).toHaveBeenCalledWith({
         where: {
-        <<for Fields searchable and not password and not hidden field>>
+        <<for Fields searchable and not password and not hidden and not manyOne field>>
           <<field camel>>: {
-            <<if field enum>>hasSome<<elseif field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>> } }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
+            <<if field enum>>hasSome<<elseif field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>> } }<<elseif field oneMany>>{ in: [mock<<Model pascal>>.<<field camel>>] }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
           },
         <<endfor>>
         },
@@ -285,7 +285,7 @@ describe('<<Model pascal>>Controller', () => {
 	
       await request(app.getHttpServer())
         .get('/<<Model kebab>>/count')
-      <<for Fields searchable and not password and not hidden field>>
+      <<for Fields searchable and not password and not hidden and not manyOne field>>
         .query(`<<field camel>>=${mock<<Model pascal>>.<<field camel>>}`)
       <<endfor>>
         .expect(200);
@@ -298,9 +298,9 @@ describe('<<Model pascal>>Controller', () => {
               OR: [{ id: mock<<Model pascal>>.id }],
             },
             {
-            <<for Fields searchable and not password and not hidden field>>
+            <<for Fields searchable and not password and not hidden and not manyOne field>>
               <<field camel>>: {
-                <<if field enum>>hasSome<<elseif field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>> } }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
+                <<if field enum>>hasSome<<elseif field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>> } }<<elseif field oneMany>>{ in: [mock<<Model pascal>>.<<field camel>>] }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
               },
             <<endfor>>
             },
@@ -487,7 +487,7 @@ describe('<<Model pascal>>Controller', () => {
 	
       await request(app.getHttpServer())
         .get('/<<Model kebab>>')
-      <<for Fields searchable and not password and not hidden field>>
+      <<for Fields searchable and not password and not hidden and not manyOne field>>
         .query(`<<field camel>>=${mock<<Model pascal>>.<<field camel>>}`)
       <<endfor>>
         .expect(200);
@@ -495,9 +495,9 @@ describe('<<Model pascal>>Controller', () => {
       expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledTimes(1);
       expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledWith({
         where: {
-        <<for Fields searchable and not password and not hidden field>>
+        <<for Fields searchable and not password and not hidden and not manyOne field>>
           <<field camel>>: {
-            <<if field enum>>hasSome<<elseif field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>> } }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
+            <<if field enum>>hasSome<<elseif field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>> } }<<elseif field oneMany>>{ in: [mock<<Model pascal>>.<<field camel>>] }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
           },
         <<endfor>>
         },
@@ -511,7 +511,7 @@ describe('<<Model pascal>>Controller', () => {
 	
       await request(app.getHttpServer())
         .get('/<<Model kebab>>')
-      <<for Fields searchable and not password and not hidden field>>
+      <<for Fields searchable and not password and not hidden and not manyOne field>>
         .query(`<<field camel>>=${mock<<Model pascal>>.<<field camel>>}<<if field string>>:contains<<endif>>`)
       <<endfor>>
         .query('skip=5')
@@ -524,9 +524,9 @@ describe('<<Model pascal>>Controller', () => {
       expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledTimes(1);
       expect(mock<<Model pascal>>Service.findMany).toHaveBeenCalledWith({
         where: {
-        <<for Fields searchable and not password and not hidden field>>
+        <<for Fields searchable and not password and not hidden and not manyOne field>>
           <<field camel>>: {
-            <<if field enum>>hasSome<<elseif field string>>contains<<elseif field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>> } }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
+            <<if field enum>>hasSome<<elseif field string>>contains<<elseif field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>> } }<<elseif field oneMany>>{ in: [mock<<Model pascal>>.<<field camel>>] }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
           },
         <<endfor>>
         },
@@ -574,7 +574,7 @@ describe('<<Model pascal>>Controller', () => {
 	
       await request(app.getHttpServer())
         .get('/<<Model kebab>>')
-      <<for Fields searchable and not password and not hidden field>>
+      <<for Fields searchable and not password and not hidden and not manyOne field>>
         .query(`<<field camel>>=${mock<<Model pascal>>.<<field camel>>}`)
       <<endfor>>
         .expect(200);
@@ -587,9 +587,9 @@ describe('<<Model pascal>>Controller', () => {
               OR: [{ id: mock<<Model pascal>>.id }],
             },
             {
-            <<for Fields searchable and not password and not hidden field>>
+            <<for Fields searchable and not password and not hidden and not manyOne field>>
               <<field camel>>: {
-                <<if field enum>>hasSome<<elseif field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>> } }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
+                <<if field enum>>hasSome<<elseif field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>> } }<<elseif field oneMany>>{ in: [mock<<Model pascal>>.<<field camel>>] }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
               },
             <<endfor>>
             },
@@ -618,7 +618,7 @@ describe('<<Model pascal>>Controller', () => {
       expect(mock<<Model pascal>>Service.update).toHaveBeenCalledWith({
         where: { id: mock<<Model pascal>>.id },
         data: {
-          <<for Fields not primary and not internal field>>
+          <<for Fields not primary and not internal and not manyOne field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
           <<elseif field manyMany>>
@@ -737,7 +737,7 @@ describe('<<Model pascal>>Controller', () => {
           <<if Fields internal and not primary and (not entity or nullable)>>
           ...fakedInternals,
           <<endif>>
-          <<for Fields not primary and not internal field>>
+          <<for Fields not primary and not internal and not manyOne field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
           <<elseif field manyMany>>
@@ -751,7 +751,7 @@ describe('<<Model pascal>>Controller', () => {
           <<endfor>>
         },
         update: {
-          <<for Fields not primary and not internal field>>
+          <<for Fields not primary and not internal and not manyOne field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
           <<elseif field manyMany>>
@@ -803,7 +803,7 @@ describe('<<Model pascal>>Controller', () => {
           <<if Fields internal and not primary and (not entity or nullable)>>
           ...fakedInternals,
           <<endif>>
-          <<for Fields not primary and not internal field>>
+          <<for Fields not primary and not internal and not manyOne field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
           <<elseif field manyMany>>
@@ -817,7 +817,7 @@ describe('<<Model pascal>>Controller', () => {
           <<endfor>>
         },
         update: {
-          <<for Fields not primary and not internal field>>
+          <<for Fields not primary and not internal and not manyOne field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
           <<elseif field manyMany>>
@@ -869,7 +869,7 @@ describe('<<Model pascal>>Controller', () => {
           <<if Fields internal and not primary and (not entity or nullable)>>
           ...fakedInternals,
           <<endif>>
-          <<for Fields not primary and not internal field>>
+          <<for Fields not primary and not internal and not manyOne field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
           <<elseif field manyMany>>
@@ -883,7 +883,7 @@ describe('<<Model pascal>>Controller', () => {
           <<endfor>>
         },
         update: {
-          <<for Fields not primary and not internal field>>
+          <<for Fields not primary and not internal and not manyOne field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
           <<elseif field manyMany>>
@@ -935,7 +935,7 @@ describe('<<Model pascal>>Controller', () => {
           <<if Fields internal and not primary and (not entity or nullable)>>
           ...fakedInternals,
           <<endif>>
-          <<for Fields not primary and not internal field>>
+          <<for Fields not primary and not internal and not manyOne field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
           <<elseif field manyMany>>
@@ -949,7 +949,7 @@ describe('<<Model pascal>>Controller', () => {
           <<endfor>>
         },
         update: {
-          <<for Fields not primary and not internal field>>
+          <<for Fields not primary and not internal and not manyOne field>>
           <<if field oneOne or oneMany>>
           <<field camel>>: { connect: { id: <<Model camel>>.<<field camel>> } },
           <<elseif field manyMany>>

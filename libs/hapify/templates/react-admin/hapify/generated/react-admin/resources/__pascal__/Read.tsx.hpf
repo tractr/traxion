@@ -15,7 +15,7 @@ import { <<Model pascal>>Filter } from './Filter';
 export const <<Model pascal>>List = (props: ListProps) => (
   <List {...props}<<if Fields searchable>> filters={< <<Model pascal>>Filter />}<<endif>>>
     <Datagrid rowClick="edit">
-<<for5 Fields not hidden field>>
+<<for Fields not hidden  and not manyOne field>>
     <<if field entity>>
         <<<printEntityField(field)>>>
     <<else>>
@@ -29,7 +29,7 @@ export const <<Model pascal>>List = (props: ListProps) => (
 export const <<Model pascal>>Show = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-<<for Fields not hidden field>>
+<<for Fields not hidden and not manyOne field>>
     <<if field entity>>
         <<<printEntityField(field)>>>
     <<else>>

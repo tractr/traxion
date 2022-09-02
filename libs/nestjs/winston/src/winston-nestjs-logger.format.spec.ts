@@ -46,32 +46,32 @@ describe('WinstonLogger', () => {
 
   it('should be able to use the log method', () => {
     logger.log('test');
-    expect(output).toHaveBeenCalledWith('[Nest] Info\ttest - {}');
+    expect(output).toHaveBeenCalledWith('[Nest] Info\ttest');
   });
 
   it('should be able to use the warn method', () => {
     logger.warn('test');
-    expect(output).toHaveBeenCalledWith('[Nest] Warn\ttest - {}');
+    expect(output).toHaveBeenCalledWith('[Nest] Warn\ttest');
   });
 
   it('should be able to use the error method', () => {
     logger.error('test');
-    expect(output).toHaveBeenCalledWith('[Nest] Error\ttest - {}');
+    expect(output).toHaveBeenCalledWith('[Nest] Error\ttest');
   });
 
   it('should be able to use the debug method', () => {
     logger.debug('test');
-    expect(output).toHaveBeenCalledWith('[Nest] Debug\ttest - {}');
+    expect(output).toHaveBeenCalledWith('[Nest] Debug\ttest');
   });
 
   it('should be able to use the verbose method', () => {
     logger.verbose('test');
-    expect(output).toHaveBeenCalledWith('[Nest] Verbose\ttest - {}');
+    expect(output).toHaveBeenCalledWith('[Nest] Verbose\ttest');
   });
 
   it('should print the context if any', () => {
     logger.verbose('test', 'context');
-    expect(output).toHaveBeenCalledWith('[Nest] Verbose\t[context] test - {}');
+    expect(output).toHaveBeenCalledWith('[Nest] Verbose\t[context] test');
   });
 
   it('should print the metadata if any', () => {
@@ -205,6 +205,6 @@ describe('WinstonLogger', () => {
     });
 
     loggerWithTimestamp.silly('test');
-    expect(output).toHaveBeenCalledWith(`[Nest] Silly\ttest - {}`);
+    expect(output).toHaveBeenCalledWith(`[Nest] Silly\ttest`);
   });
 });

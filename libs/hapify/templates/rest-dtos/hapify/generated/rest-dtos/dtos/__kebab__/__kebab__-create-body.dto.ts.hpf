@@ -79,7 +79,7 @@ import {
 <<endif>>
  
 export class <<Model pascal>>CreateBodyDto {
-<<for Fields not internal field>>
+<<for Fields not internal and not manyOne field>>
 	
   <<if field boolean>>
   @IsBoolean(<<=listModifier(field)>>)
