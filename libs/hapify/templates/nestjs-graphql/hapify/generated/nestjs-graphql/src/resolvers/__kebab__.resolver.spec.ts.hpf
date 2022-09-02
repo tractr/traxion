@@ -254,7 +254,7 @@ describe('<<Model pascal>> Resolver', () => {
           <<for Fields not oneMany and not manyOne and not manyMany and not oneOne field>>
             <<field camel>>: mock<<Model pascal>>.<<field camel>>,
           <<endfor>>
-          <<for Fields not nullable and (oneOne or oneMany or manyOne or manyMany) field>>
+          <<for Fields not nullable and (oneOne or oneMany or manyMany) field>>
             <<field camel>>: { connect: { id: mock<<=field.model.names.pascal>>Factory().id } },
           <<endfor>>
           }

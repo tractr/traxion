@@ -46,13 +46,16 @@ export const nestLikeConsoleFormat = (
 
     const name = color(`[${appName}]`);
     const levelLabel = level.charAt(0).toUpperCase() + level.slice(1);
-    const timeLabel = typeof timestamp !== 'undefined' ? `${timestamp} ` : '';
+    const timeLabel =
+      typeof timestamp !== 'undefined'
+        ? `${timestamp ? `${timestamp} ` : ''}`
+        : '';
     const contextLabel =
       typeof context !== 'undefined' ? `${clc.yellow(`[${context}]`)} ` : '';
 
     return `${name} ${levelLabel}\t${timeLabel}${contextLabel}${color(
       message,
-    )} ${formattedMeta === '{}' ? '' : `- ${formattedMeta}`} ${
+    )}${formattedMeta === '{}' ? '' : ` - ${formattedMeta}`}${
       stack.length > 0 ? `\n${color(stack)}` : ''
     }`;
   });
