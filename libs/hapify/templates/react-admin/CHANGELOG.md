@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.58.1](https://github.com/tractr/stack/compare/v1.58.0...v1.58.1) (2022-09-06)
+
+
+### Bug Fixes
+
+* update auth and rext provider to avoid error ([#503](https://github.com/tractr/stack/issues/503)) ([beda287](https://github.com/tractr/stack/commit/beda287b06ce925d2e0e34ff2d57d53496e42181))
+
+
+
 # [1.58.0](https://github.com/tractr/stack/compare/v1.57.2...v1.58.0) (2022-09-02)
 
 
