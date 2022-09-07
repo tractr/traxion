@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.58.2](https://github.com/tractr/stack/compare/v1.58.1...v1.58.2) (2022-09-07)
+
+
+### Bug Fixes
+
+* **hapify:** fix hapify template fopr model middleware ([#502](https://github.com/tractr/stack/issues/502)) ([18bd04f](https://github.com/tractr/stack/commit/18bd04f929b89d1796e204353e71fa3b3ad19bdc))
+
+
+
 ## [1.58.1](https://github.com/tractr/stack/compare/v1.58.0...v1.58.1) (2022-09-06)
 
 
