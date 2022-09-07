@@ -1,8 +1,4 @@
 import { DynamicModule, Logger, Module } from '@nestjs/common';
-	
-<<if Fields password>>
-import { DatabaseService } from '@tractr/nestjs-database';
-<<endif>>
  
 import {
   <<Model constant>>_DATABASE_SERVICE,
@@ -46,8 +42,4 @@ export class <<Model pascal>>ModelModule {
       module: <<Model pascal>>ModelModule,
     };
   }
-	
-  <<if Fields password>>
-  constructor(protected readonly databaseService: DatabaseService) {}
-  <<endif>>
 }
