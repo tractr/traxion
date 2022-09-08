@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.58.3](https://github.com/tractr/stack/compare/v1.58.2...v1.58.3) (2022-09-08)
+
+
+### Bug Fixes
+
+* **angular-authentication:** fix logout ([#504](https://github.com/tractr/stack/issues/504)) ([fc374e9](https://github.com/tractr/stack/commit/fc374e9e7bb88e468051051a0db0f1f7c80448bf))
+
+
+
 ## [1.58.2](https://github.com/tractr/stack/compare/v1.58.1...v1.58.2) (2022-09-07)
 
 
