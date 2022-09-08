@@ -268,7 +268,10 @@ export class <<Model pascal>>Controller {
     @Public()
     <<endif>>
   <<endif>>
-  @Policies(Permission.CREATE_UPDATE_<<Model constant>>)
+  @Policies(
+    Permission.UPDATE_<<Model constant>>,
+    Permission.CREATE_<<Model constant>>,
+  )
   public async upsert(
     @Param() paramsDto: <<Model pascal>>UpsertParamsDto,
     @Body() bodyDto: <<Model pascal>>UpsertBodyDto,
@@ -323,7 +326,10 @@ export class <<Model pascal>>Controller {
     @Public()
     <<endif>>
   <<endif>>
-  @Policies(Permission.CREATE_UPDATE_<<Model constant>>)
+  @Policies(
+    Permission.UPDATE_<<Model constant>>,
+    Permission.CREATE_<<Model constant>>,
+  )
   public async upsertWithoutParam(
     @Body() { <<for Fields primary primaryField>><<primaryField camel>><<endfor>>, ...bodyDto }: <<Model pascal>>UpsertBodyWithPrimaryDto,
     <<if Fields ownership and not primary>>@CurrentAbilities() abilities: AppAbility,<<endif>>
