@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.58.4](https://github.com/tractr/stack/compare/v1.58.3...v1.58.4) (2022-09-08)
+
+
+### Bug Fixes
+
+* **nestjs-models-rest:** fix missing upsert policies ([#505](https://github.com/tractr/stack/issues/505)) ([e42c228](https://github.com/tractr/stack/commit/e42c2286403c0f78f1e7d49ee25f5b02262aca41))
+
+
+
 ## [1.58.3](https://github.com/tractr/stack/compare/v1.58.2...v1.58.3) (2022-09-08)
 
 
