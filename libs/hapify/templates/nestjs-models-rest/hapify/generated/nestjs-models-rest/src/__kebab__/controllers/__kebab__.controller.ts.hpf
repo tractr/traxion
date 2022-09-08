@@ -270,7 +270,7 @@ export class <<Model pascal>>Controller {
   <<endif>>
   @Policies(
     Permission.UPDATE_<<Model constant>>,
-    Permission.READ_<<Model constant>>,
+    Permission.CREATE_<<Model constant>>,
   )
   public async upsert(
     @Param() paramsDto: <<Model pascal>>UpsertParamsDto,
@@ -328,7 +328,7 @@ export class <<Model pascal>>Controller {
   <<endif>>
   @Policies(
     Permission.UPDATE_<<Model constant>>,
-    Permission.READ_<<Model constant>>,
+    Permission.CREATE_<<Model constant>>,
   )
   public async upsertWithoutParam(
     @Body() { <<for Fields primary primaryField>><<primaryField camel>><<endfor>>, ...bodyDto }: <<Model pascal>>UpsertBodyWithPrimaryDto,
