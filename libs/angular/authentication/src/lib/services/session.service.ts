@@ -131,7 +131,7 @@ export class SessionService<
     await lastValueFrom(
       request({
         url: this.logoutUrl,
-        method: 'GET',
+        method: 'POST',
         withCredentials: true,
       }).pipe(map(() => this.refresh(null))),
     );
