@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-component-private-dns",
-  "version": "1.58.5",
+  "version": "1.58.6",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"

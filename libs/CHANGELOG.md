@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.58.6](https://github.com/tractr/stack/compare/v1.58.5...v1.58.6) (2022-09-13)
+
+
+### Bug Fixes
+
+* Migration 8 password ([#508](https://github.com/tractr/stack/issues/508)) ([50773cb](https://github.com/tractr/stack/commit/50773cbbf5d7dd34dbee4d7664f44b265824a990))
+
+
+
 ## [1.58.5](https://github.com/tractr/stack/compare/v1.58.4...v1.58.5) (2022-09-13)
 
 
