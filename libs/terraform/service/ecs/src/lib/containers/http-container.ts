@@ -1,6 +1,9 @@
 import { kebab } from 'case';
 
-import { HttpContainerConfig } from '../interfaces';
+import {
+  HttpContainerConfig,
+  HttpContainerPathPrefixConfig,
+} from '../interfaces';
 import { BackendContainer } from './backend-container';
 
 /**
@@ -20,22 +23,43 @@ export abstract class HttpContainer<
   }
 
   protected getHttpPathPrefixDockerLabels(): Record<string, string> {
-    if (!this.config.path.prefix.startsWith('/')) {
-      throw new Error('pathPrefix must start with /');
-    }
+    const prefixes: HttpContainerPathPrefixConfig[] = Array.isArray(
+      this.config.path,
+    )
+      ? this.config.path
+      : [this.config.path];
+
+    let outputs: Record<string, string> = {};
+    const stripPrefixes: string[] = [];
     const name = this.getRouterName();
-    const output = {
-      [`traefik.http.routers.${name}.rule`]: `PathPrefix(\`${this.config.path.prefix}\`)`,
+
+    outputs[`traefik.http.routers.${name}.rule`] = prefixes
+      .map(({ prefix, stripPrefix }) => {
+        if (!prefix.startsWith('/')) {
+          throw new Error('pathPrefix must start with /');
+        }
+
+        if (stripPrefix) {
+          stripPrefixes.push(prefix);
+        }
+
+        return `PathPrefix(\`${prefix}\`)`;
+      })
+      .join(' || ');
+
+    outputs = {
+      ...outputs,
       [`traefik.http.services.${name}.loadbalancer.server.port`]: `${this.getPort()}`,
       'traefik.enable': 'true',
     };
-    // Append strip prefix middleware if needed
-    if (this.config.path.stripPrefix) {
-      output[
+
+    // If at least one path has stripPrefix, we need to add the stripPrefix middleware
+    if (stripPrefixes.length > 0) {
+      outputs[
         `traefik.http.middlewares.${name}-stripprefix.stripprefix.prefixes`
-      ] = `${this.config.path.prefix}`;
+      ] = `${stripPrefixes.join(',')}`;
     }
-    return output;
+    return outputs;
   }
 
   protected getAuthDockerLabels(): Record<string, string> {
@@ -51,14 +75,24 @@ export abstract class HttpContainer<
   }
 
   protected getMiddlewaresListDockerLabels(): Record<string, string> {
+    const prefixes: HttpContainerPathPrefixConfig[] = Array.isArray(
+      this.config.path,
+    )
+      ? this.config.path
+      : [this.config.path];
+
     const output = [];
     const name = this.getRouterName();
-    if (this.config.path.stripPrefix) {
+
+    // If at least one path has stripPrefix, we need to add the stripPrefix middleware
+    if (prefixes.find(({ stripPrefix }) => stripPrefix)) {
       output.push(`${name}-stripprefix`);
     }
+
     if (this.config.auth) {
       output.push(`${name}-auth`);
     }
+
     if (output.length) {
       return {
         [`traefik.http.routers.${name}.middlewares`]: output.join(','),

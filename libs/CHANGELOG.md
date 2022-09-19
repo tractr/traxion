@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.59.0](https://github.com/tractr/stack/compare/v1.58.7...v1.59.0) (2022-09-19)
+
+
+### Features
+
+* add the possibility to have multiple path rules in traeffic ([#509](https://github.com/tractr/stack/issues/509)) ([a6fb649](https://github.com/tractr/stack/commit/a6fb649a4e3a6f5b8e308ab90bc2b3b92fe6e7ae))
+
+
+
+## [1.58.7](https://github.com/tractr/stack/compare/v1.58.6...v1.58.7) (2022-09-19)
+
+
+### Bug Fixes
+
+* export back the config when bootstraping angular app ([#500](https://github.com/tractr/stack/issues/500)) ([f47d7a3](https://github.com/tractr/stack/commit/f47d7a3b3d29883426f489abb2ee167fc6879335))
+
+
+
 ## [1.58.6](https://github.com/tractr/stack/compare/v1.58.5...v1.58.6) (2022-09-13)
 
 
