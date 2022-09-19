@@ -50,11 +50,12 @@ export class ReverseProxyContainer extends HttpContainer<ReverseProxyContainerCo
       : [this.config.path];
 
     const name = this.getRouterName();
-    prefixes.forEach(({ prefix }) => {
-      labels[
-        `traefik.http.routers.${name}.rule`
-      ] = `PathPrefix(\`${prefix}/{service:[a-z]+}/\`) || HeadersRegexp(\`Referer\`, \`.*${prefix}/.*\`)`;
-    });
+    labels[`traefik.http.routers.${name}.rule`] = prefixes
+      .map(
+        ({ prefix }) =>
+          `PathPrefix(\`${prefix}/{service:[a-z]+}/\`) || HeadersRegexp(\`Referer\`, \`.*${prefix}/.*\`)`,
+      )
+      .join(' || ');
 
     return labels;
   }

@@ -32,18 +32,19 @@ export abstract class HttpContainer<
     const stripPrefixes: string[] = [];
     const name = this.getRouterName();
 
-    prefixes.forEach(({ prefix, stripPrefix }) => {
-      if (!prefix.startsWith('/')) {
-        throw new Error('pathPrefix must start with /');
-      }
-      outputs[
-        `traefik.http.routers.${name}.rule`
-      ] = `PathPrefix(\`${prefix}\`)`;
+    outputs[`traefik.http.routers.${name}.rule`] = prefixes
+      .map(({ prefix, stripPrefix }) => {
+        if (!prefix.startsWith('/')) {
+          throw new Error('pathPrefix must start with /');
+        }
 
-      if (stripPrefix) {
-        stripPrefixes.push(prefix);
-      }
-    });
+        if (stripPrefix) {
+          stripPrefixes.push(prefix);
+        }
+
+        return `PathPrefix(\`${prefix}\`)`;
+      })
+      .join(' || ');
 
     outputs = {
       ...outputs,
