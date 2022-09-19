@@ -11,7 +11,7 @@ export const formatData: Record<ResourceType, FormatUpdateData> = {
   <<for model.fields internal field>>
     delete formated.<<field camel>>
   <<endfor>>
-  <<for model.fields entity field>>
+  <<for model.fields entity and not manyOne field>>
   <<if field manyMany>>
     // for the manyMany field we send empty array
     formated.<<field camel>> = [];

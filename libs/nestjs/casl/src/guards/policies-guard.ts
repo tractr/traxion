@@ -36,7 +36,7 @@ export class PoliciesGuard implements CanActivate {
     const req = getRequestFromContext(context);
 
     // Get user from the request object.
-    // User should have been fetched and populated by the authentication layer
+    // User should have been fetched and hydrated by the authentication layer
     const { user }: { user?: User } = req;
 
     if (user && (!user.roles || !Array.isArray(user.roles))) {

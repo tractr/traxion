@@ -1,7 +1,10 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/hapify/templates/casl/src",
-  "tags": ["scope:template"],
+  "tags": [
+    "scope:template"
+  ],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
@@ -21,7 +24,9 @@
         "packageJson": "libs/hapify/templates/casl/package.json",
         "tsConfig": "libs/hapify/templates/casl/tsconfig.lib.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -35,7 +40,9 @@
         "jestConfig": "libs/hapify/templates/casl/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/hapify/templates/casl"]
+      "outputs": [
+        "coverage/libs/hapify/templates/casl"
+      ]
     }
   }
 }

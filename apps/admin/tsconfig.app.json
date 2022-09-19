@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "module": "commonjs",
     "outDir": "../../dist/out-tsc",
     "types": ["node"]
   },

@@ -17,9 +17,9 @@ export const <<Model pascal>>Filter = (props: Omit<FilterProps, 'children'>) => 
 <<endfor>>
   </Filter>
 );
-
+	
 <<< function printInput(field) { >>>
-
+	
 <<if field string>>
     <TextInput resettable
 <<elseif field boolean>>
@@ -45,20 +45,20 @@ export const <<Model pascal>>Filter = (props: Omit<FilterProps, 'children'>) => 
       source="<<field camel>>"
       label="<<field capital>>"
     />
-
+	
 <<< } >>>
-
+	
 <<< function printEntityInput(field) { >>>
-
+	
       <ReferenceInput
         source="<<field camel>>Id"
         label="<<field capital>>"
         reference="<<field.model camel>>">
           <SelectInput optionText="<<=labelFieldCamel(field.model)>>" />
       </ReferenceInput>
-
+	
 <<< } >>>
-
+	
 <<<
 function fieldInput(field) {
     switch(field.type) {
@@ -91,5 +91,5 @@ function getImports() {
     return [...new Set(output)];
 }
 >>>
-
+	
 <<endif>>

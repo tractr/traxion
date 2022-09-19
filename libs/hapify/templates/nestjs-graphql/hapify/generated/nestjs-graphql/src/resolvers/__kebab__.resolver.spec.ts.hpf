@@ -12,7 +12,7 @@
       return self.findIndex(f => f.name === value.name) === index && value.name !== root.name;
     });
 >>>
-
+	
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { INestApplication } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -20,7 +20,7 @@ import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
 import { DatabaseModule, DatabaseService } from '@tractr/nestjs-database';
 import { Prisma } from '@prisma/client';
-
+	
 import {
   <<Model pascal>>,
 <<for uniqRefs ref>>
@@ -28,9 +28,9 @@ import {
 <<endfor>>
 } from '@prisma/client';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
-
+	
 import { <<Model pascal>>Resolver } from './<<Model kebab>>.resolver';
-
+	
 import {
   <<Model pascal>>Service,
   <<Model constant>>_SERVICE,
@@ -41,7 +41,7 @@ import {
 } from '../../../../nestjs-models-common';
 import {
   mock<<Model pascal>>Factory,
-<<for Fields not nullable and (oneOne or oneMany or manyOne or manyMany) field>>
+<<for Fields not nullable and (oneOne or oneMany or manyMany) field>>
   mock<<=field.model.names.pascal>>Factory,
 <<endfor>>
 } from '../../../../models/mock';
@@ -59,7 +59,7 @@ describe('<<Model pascal>> Resolver', () => {
 <<for uniqRefs ref>>
     mock<<ref pascal>>Service = mockDeep<<<ref pascal>>Service>();
 <<endfor>>
-
+	
     const module = await Test.createTestingModule({
       providers: [
         <<Model pascal>>Resolver,
@@ -144,7 +144,7 @@ describe('<<Model pascal>> Resolver', () => {
         });
       });
   });
-
+	
 <<if Fields hidden>>
  
   it('should throw if requiring hidden field during fetching unique <<Model camel>>', async () => {
@@ -236,7 +236,7 @@ describe('<<Model pascal>> Resolver', () => {
   it('should be able to create a <<Model camel>>', async () => {
     mock<<Model pascal>> = mock<<Model pascal>>Factory();
     mock<<Model pascal>>Service.create.mockResolvedValueOnce(mock<<Model pascal>>);
-
+	
     await request(app.getHttpServer())
       .post('/graphql')
       .send({
@@ -254,7 +254,7 @@ describe('<<Model pascal>> Resolver', () => {
           <<for Fields not oneMany and not manyOne and not manyMany and not oneOne field>>
             <<field camel>>: mock<<Model pascal>>.<<field camel>>,
           <<endfor>>
-          <<for Fields not nullable and (oneOne or oneMany or manyOne or manyMany) field>>
+          <<for Fields not nullable and (oneOne or oneMany or manyMany) field>>
             <<field camel>>: { connect: { id: mock<<=field.model.names.pascal>>Factory().id } },
           <<endfor>>
           }
@@ -285,7 +285,7 @@ describe('<<Model pascal>> Resolver', () => {
       <<field camel>>: updated<<Model pascal>>.<<field camel>>,
       <<endfor>>
     });
-
+	
     await request(app.getHttpServer())
       .post('/graphql')
       .send({
@@ -368,5 +368,5 @@ describe('<<Model pascal>> Resolver', () => {
         });
       });
   });
-
+	
 });

@@ -6,7 +6,7 @@ import {
   updateWorkspaceConfiguration,
 } from '@nrwl/devkit';
 
-import { addPackageToPackageJson } from '../../helpers';
+import { addPackageToPackageJson, installPackagesTask } from '../../helpers';
 import { addFiles, addNpmrc } from './helpers';
 import { InitWorkspaceGeneratorSchema } from './schema';
 
@@ -50,4 +50,5 @@ export default async function initWorkspaceGenerator(
   if (tree.exists('tailwind.config.js')) tree.delete('tailwind.config.js');
 
   const { skipInstall } = options;
+  installPackagesTask(tree, { skipInstall });
 }

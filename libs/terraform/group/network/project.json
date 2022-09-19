@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/terraform/group/network/src",
   "tags": [],
@@ -6,20 +7,28 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": ["libs/terraform/group/network/*.md"],
+        "assets": [
+          "libs/terraform/group/network/*.md"
+        ],
         "main": "libs/terraform/group/network/src/index.ts",
         "outputPath": "dist/libs/terraform/group/network",
         "packageJson": "libs/terraform/group/network/package.json",
         "tsConfig": "libs/terraform/group/network/tsconfig.lib.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/terraform/group/network/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/terraform/group/network/**/*.ts"
+        ]
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -33,7 +42,9 @@
         "jestConfig": "libs/terraform/group/network/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/terraform/group/network"]
+      "outputs": [
+        "coverage/libs/terraform/group/network"
+      ]
     }
   }
 }

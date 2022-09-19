@@ -23,11 +23,6 @@ module.exports = {
       input: 'one',
     },
     {
-      path: 'generated/rest-dtos/dtos/{kebab}/{kebab}-find-unique-query.dto.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
       path: 'generated/rest-dtos/dtos/{kebab}/{kebab}-find-unique-params.dto.ts',
       engine: 'hpf',
       input: 'one',
@@ -63,6 +58,11 @@ module.exports = {
       input: 'one',
     },
     {
+      path: 'generated/rest-dtos/dtos/{kebab}/{kebab}-upsert-body-with-primary.dto.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'generated/rest-dtos/dtos/{kebab}/{kebab}-delete-params.dto.ts',
       engine: 'hpf',
       input: 'one',
@@ -89,11 +89,6 @@ module.exports = {
     },
     {
       path: 'generated/rest-dtos/mock/{kebab}/{kebab}-find-unique-params.dto.mock.ts',
-      engine: 'hpf',
-      input: 'one',
-    },
-    {
-      path: 'generated/rest-dtos/mock/{kebab}/{kebab}-find-unique-query.dto.mock.ts',
       engine: 'hpf',
       input: 'one',
     },

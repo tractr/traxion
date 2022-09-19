@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "projects": {
     "admin": "apps/admin",
     "angular-authentication": "libs/angular/authentication",
@@ -22,6 +23,7 @@
     "generated-nestjs-models-common": "libs/generated/nestjs-models-common",
     "generated-nestjs-models-rest": "libs/generated/nestjs-models-rest",
     "generated-prisma": "libs/generated/prisma",
+    "generated-react-admin": "libs/generated/react-admin",
     "generated-rest-dtos": "libs/generated/rest-dtos",
     "generated-rext-client": "libs/generated/rext-client",
     "hapify-common": "libs/hapify/hapify-common",
@@ -42,12 +44,14 @@
     "hapify-templates-rext-client": "libs/hapify/templates/rext-client",
     "hapify-update-templates-import-path": "libs/hapify/update-templates-import-path",
     "nestjs-authentication": "libs/nestjs/authentication",
+    "nestjs-bcrypt": "libs/nestjs/bcrypt",
     "nestjs-casl": "libs/nestjs/casl",
     "nestjs-core": "libs/nestjs/core",
     "nestjs-database": "libs/nestjs/database",
     "nestjs-file-storage": "libs/nestjs/file-storage",
     "nestjs-graphql": "libs/nestjs/graphql",
     "nestjs-mailer": "libs/nestjs/mailer",
+    "nestjs-password": "libs/nestjs/password",
     "nestjs-request-timestamp": "libs/nestjs/request-timestamp",
     "nestjs-sentry": "libs/nestjs/sentry",
     "nestjs-testing": "libs/nestjs/testing",
@@ -81,6 +85,7 @@
     "terraform-service-pwa": "libs/terraform/service/pwa",
     "terraform-service-reverse-proxy": "libs/terraform/service/reverse-proxy",
     "workspace": {
+      "$schema": "../node_modules/nx/schemas/project-schema.json",
       "root": "libs",
       "targets": {
         "release": {
@@ -132,7 +137,9 @@
               "hapify-templates-nestjs-models-rest:publish",
               "hapify-templates-rext-client:publish",
               "hapify-templates-react-admin:publish",
+              "nestjs-bcrypt:publish",
               "nestjs-authentication:publish",
+              "nestjs-password:publish",
               "angular-form:publish",
               "angular-file-storage:publish",
               "terraform-service-reverse-proxy:publish",

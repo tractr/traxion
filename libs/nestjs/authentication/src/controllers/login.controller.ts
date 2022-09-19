@@ -1,92 +1,79 @@
 import {
+  BadRequestException,
   Controller,
   Get,
   HttpCode,
-  HttpException,
-  Inject,
   Post,
   Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBody } from '@nestjs/swagger';
+import { User } from '@prisma/client';
 import { Request, Response } from 'express';
 
-import { AUTHENTICATION_MODULE_OPTIONS } from '../constants';
-import { CurrentUser } from '../decorators';
-import { AccessTokenDto, AuthenticationOptions } from '../dtos';
-import { LocalAuthGuard } from '../guards';
-import { UserType } from '../interfaces';
-import { AuthenticationService } from '../services';
+import { AccessTokenDto } from '../dtos';
+import { LoginPostBodyDto } from '../dtos/login-form.dto';
+import { JwtAuthGuard, LocalAuthGuard, PublicGuard } from '../guards';
+import {
+  AuthenticationService,
+  CookieOptionsService,
+  UserAuthenticationService,
+} from '../services';
+
+import { CurrentUser } from '@tractr/nestjs-core';
 
 @Controller()
 export class LoginController {
   constructor(
-    @Inject(AUTHENTICATION_MODULE_OPTIONS)
-    private readonly authenticationOptions: AuthenticationOptions,
+    private readonly cookieOptionsService: CookieOptionsService,
+    private readonly userAuthenticationService: UserAuthenticationService,
     private readonly authenticationService: AuthenticationService,
   ) {}
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
+  @ApiBody({ type: LoginPostBodyDto })
   @HttpCode(200)
   async login(
-    @Req() req: Request & { secret: string },
+    @Req() req: Request & { secret?: string; user: User },
     @Res({ passthrough: true }) res: Response,
-  ): Promise<AccessTokenDto & { user: UserType }> {
-    const user = this.throwIfNoUser(req);
-    const token = await this.authenticationService.login(user);
-    const { options: cookieOptions } = this.authenticationOptions.cookies;
-    const { formatUser } = this.authenticationOptions.userConfig;
-    res.cookie(
-      this.authenticationOptions.cookies.cookieName,
-      token.accessToken,
-      {
-        signed: !!req.secret,
-        ...cookieOptions,
-      },
-    );
+  ): Promise<AccessTokenDto> {
+    const token = await this.authenticationService.login(req.user);
+    res.cookie(this.cookieOptionsService.cookieName, token.accessToken, {
+      signed: !!req.secret,
+      ...this.cookieOptionsService.cookieOptions,
+    });
     return {
       ...token,
-      // Format user with filter provided by the module consumer
-      user: formatUser(user),
     };
   }
 
-  @Get('logout')
-  async logout(
-    @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
-  ): Promise<void> {
-    this.throwIfNoUser(req);
+  @Post('logout')
+  @UseGuards(PublicGuard)
+  @HttpCode(200)
+  async postLogout(@Res({ passthrough: true }) res: Response) {
     res.cookie(
-      this.authenticationOptions.cookies.cookieName,
+      this.cookieOptionsService.cookieName,
       '',
-      this.authenticationOptions.cookies.options,
+      this.cookieOptionsService.cookieOptions,
     );
   }
 
-  @Post('logout')
-  async postLogout(
-    @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
-  ): Promise<void> {
-    return this.logout(req, res);
-  }
-
   @Get('me')
-  me(@Req() req: Request, @CurrentUser() user: UserType): UserType {
-    this.throwIfNoUser(req);
-    const { formatUser } = this.authenticationOptions.userConfig;
-    // Format user with filter provided by the module consumer
-    return formatUser(user);
-  }
+  @UseGuards(JwtAuthGuard)
+  async me(
+    @Req() req: Request & { user: User },
+    @CurrentUser() currentUserInfo: User,
+  ): Promise<User> {
+    const user = await this.userAuthenticationService.getUserFromId(
+      currentUserInfo.id,
+    );
 
-  throwIfNoUser(req: Request): UserType {
-    if (!req.user)
-      throw new HttpException(
-        'It seems like you are using @tractr/nestjs-authentication without adding a global APP_GUARD. Try to add the provider.',
-        501,
-      );
-    return req.user as unknown as UserType;
+    if (!user) {
+      throw new BadRequestException();
+    }
+
+    return user as User;
   }
 }

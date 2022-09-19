@@ -90,7 +90,7 @@
             "ownerStringPath": "user.enterprises.id"
           },
           "name": "enterprise",
-          "properties": ["ownership"],
+          "properties": ["searchable", "ownership"],
           "subtype": "oneMany",
           "type": "entity",
           "value": "c069cc55-f28f-dcc1-cad8-0df044631ef8"
@@ -116,7 +116,7 @@
         },
         {
           "name": "name",
-          "properties": ["unique"],
+          "properties": ["unique", "label", "searchable"],
           "type": "string"
         },
         {
@@ -129,6 +129,13 @@
           "subtype": "manyMany",
           "type": "entity",
           "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
+        },
+        {
+          "name": "departments",
+          "properties": ["searchable"],
+          "subtype": "manyOne",
+          "type": "entity",
+          "value": "2a523149-31f3-80bf-d32b-3b9174cc6f2c"
         }
       ],
       "id": "c069cc55-f28f-dcc1-cad8-0df044631ef8",
@@ -391,6 +398,102 @@
       ],
       "id": "6894a782-2e83-cd6a-52cc-f62967165636",
       "name": "Question"
+    },
+    {
+      "accesses": {
+        "count": "guest",
+        "create": "guest",
+        "read": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "update": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "name": "default",
+          "properties": [],
+          "type": "string"
+        },
+        {
+          "name": "email",
+          "properties": [],
+          "subtype": "email",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "properties": [],
+          "subtype": "password",
+          "type": "string"
+        },
+        {
+          "name": "url",
+          "properties": [],
+          "subtype": "url",
+          "type": "string"
+        },
+        {
+          "name": "text",
+          "properties": [],
+          "subtype": "text",
+          "type": "string"
+        }
+      ],
+      "id": "506e484d-2459-d558-32d7-f28ddf7aff93",
+      "name": "String Model"
+    },
+    {
+      "accesses": {
+        "count": "guest",
+        "create": "guest",
+        "read": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "update": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "properties": ["primary", "searchable", "sortable", "internal"],
+          "type": "string"
+        },
+        {
+          "name": "default",
+          "properties": ["unique"],
+          "type": "string"
+        },
+        {
+          "name": "email",
+          "properties": ["unique"],
+          "subtype": "email",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "properties": ["unique"],
+          "subtype": "password",
+          "type": "string"
+        },
+        {
+          "name": "url",
+          "properties": ["unique"],
+          "subtype": "url",
+          "type": "string"
+        },
+        {
+          "name": "text",
+          "properties": ["unique"],
+          "subtype": "text",
+          "type": "string"
+        }
+      ],
+      "id": "4192dd58-b152-e85f-1442-61c9ece8b893",
+      "name": "String Model Unique"
     },
     {
       "accesses": {

@@ -1,5 +1,5 @@
 import { Component, Input, TemplateRef } from '@angular/core';
-import { FormControl, NgModel } from '@angular/forms';
+import { NgModel, UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'tractr-form-item',
@@ -13,7 +13,7 @@ export class FormItemComponent {
 
   @Input() errorTip:
     | string
-    | TemplateRef<{ $implicit: FormControl | NgModel }>
+    | TemplateRef<{ $implicit: UntypedFormControl | NgModel }>
     | undefined;
 
   @Input() status: 'error' | 'success' | 'validating' = 'validating';

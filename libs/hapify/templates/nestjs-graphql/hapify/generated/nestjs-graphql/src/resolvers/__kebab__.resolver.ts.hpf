@@ -12,7 +12,7 @@
       return self.findIndex(f => f.name === value.name) === index && value.name !== root.name;
     });
 >>>
-
+	
 import { subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import {
@@ -41,7 +41,7 @@ import { GraphQLResolveInfo } from 'graphql';
 import { ForbiddenError } from 'apollo-server-core';
 import { PrismaSelect } from '@paljs/plugins';
 import { User as PrismaUser } from '@prisma/client';
-
+	
 import {
   <<Model pascal>>Service,
   <<Model constant>>_SERVICE,
@@ -51,7 +51,7 @@ import {
 <<endfor>>
 } from '../../../../nestjs-models-common';
 import { Actions, AppAbility, Permission } from '../../../../casl';
-
+	
 import {
   <<Model pascal>>,
   <<Model pascal>>CreateInput,
@@ -67,7 +67,7 @@ import {
   FindMany<<ref pascal>>Args,
 <<endfor>>
 } from '../../../prisma-nestjs-graphql';
-
+	
 import {
   FindMany<<Model pascal>>Output,
 } from '../dtos';
@@ -136,11 +136,11 @@ export class <<Model pascal>>Resolver {
     const select = new PrismaSelect(
       info, { defaultFields: OWNERS_DEFAULT_FIELDS }
     ).valueOf('<<Model camel>>s', '<<Model pascal>>');
-
+	
     const where = {
       AND: [<<if Fields ownership >>abilities ? accessibleBy(abilities).<<Model pascal>> : {}, <<endif>>whereInput ?? {}],
     };
-
+	
     const <<Model camel>>s = await this.<<Model camel>>Service.findMany({
       ...select,
       where,
@@ -150,11 +150,11 @@ export class <<Model pascal>>Resolver {
       skip,
       take: take + 1,
     });
-
+	
     const count = await this.<<Model camel>>Service.count({
       where,
     });
-
+	
     return {
       <<Model camel>>s: <<Model camel>>s.slice(0, take),
       count,
@@ -186,14 +186,14 @@ export class <<Model pascal>>Resolver {
     <<endif>>
       ...rawData,
     };
-
+	
     <<if Fields ownership>>
     return this.databaseService.$transaction(async (prisma) => {
       const <<Model camel>> = await this.<<Model camel>>Service.create(
         { data, ...select },
         prisma.<<Model camel>>
       );
-
+	
       if(abilities?.cannot(
         Actions.CREATE,
         subject(
@@ -201,7 +201,7 @@ export class <<Model pascal>>Resolver {
           <<Model camel>>,
         ),
       )) throw new ForbiddenError('cannot create <<Model pascal>>');
-
+	
       return <<Model camel>>;
     });
     <<else>>
@@ -223,14 +223,14 @@ export class <<Model pascal>>Resolver {
     <<endif>>
   ): Promise<any> {
     const select = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).value;
-
+	
     <<if Fields ownership>>
     return this.databaseService.$transaction(async (prisma) => {
       const <<Model camel>> = await this.<<Model camel>>Service.update(
         { where, data, ...select },
         prisma.<<Model camel>>
       );
-
+	
       if(abilities?.cannot(
         Actions.UPDATE,
         subject(
@@ -238,7 +238,7 @@ export class <<Model pascal>>Resolver {
           <<Model camel>>,
         ),
       )) throw new ForbiddenError('cannot update <<Model pascal>>');
-
+	
       return <<Model camel>>;
     });
     <<else>>
@@ -260,14 +260,14 @@ export class <<Model pascal>>Resolver {
     <<endif>>
   ): Promise<any> {
     const select = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).value;
-
+	
     <<if Fields ownership>>
     return this.databaseService.$transaction(async (prisma) => {
       const <<Model camel>> = await this.<<Model camel>>Service.delete(
         { where, ...select },
         prisma.<<Model camel>>
       );
-
+	
       if(abilities?.cannot(
         Actions.REMOVE,
         subject(
@@ -275,7 +275,7 @@ export class <<Model pascal>>Resolver {
           <<Model camel>>,
         ),
       )) throw new ForbiddenError('cannot delete <<Model pascal>>');
-
+	
       return <<Model camel>>;
     });
     <<else>>
@@ -303,7 +303,7 @@ export class <<Model pascal>>Resolver {
     @CurrentAbilities() abilities: AppAbility,
   ) {
     let <<field camel>> = <<Model camel>>.<<field camel>>;
-
+	
     if (!<<field camel>>) {
       const { id } = <<Model camel>>;
       const where = {
@@ -344,9 +344,9 @@ export class <<Model pascal>>Resolver {
     <<endif>>
   }
 <<endfor>>
-
+	
 <<for root.referencedIn ref>>
-  <<for ref.fields field>>
+  <<for ref.fields not manyOne field>>
   /**
    * Associated <<-field backRelation pascal>>
    */
@@ -366,7 +366,7 @@ export class <<Model pascal>>Resolver {
     @CurrentAbilities() abilities: AppAbility,
   ) {
     let <<-field backRelation camel>> = <<Model camel>>.<<-field backRelation camel>>;
-
+	
     if (!<<-field backRelation camel>>) {
       const { id } = <<Model camel>>;
       const where = {
@@ -409,6 +409,6 @@ export class <<Model pascal>>Resolver {
  
   <<endfor>>
 <<endfor>>
-
+	
  
 }

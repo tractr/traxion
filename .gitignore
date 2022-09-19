@@ -78,6 +78,9 @@ hapify.json
 # Pwa app config
 apps/pwa/src/assets/app-config.json
 
+# Admin app config
+apps/admin/src/assets/app-config.json
+
 # Terraform
 .gen
 
@@ -90,3 +93,6 @@ apps/pwa/src/assets/app-config.json
 
 # GraphQL
 schema.gql
+
+# Pwa app config
+apps/test/src/assets/app-config.json

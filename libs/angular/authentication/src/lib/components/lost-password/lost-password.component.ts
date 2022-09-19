@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { PasswordService } from '../../services';
@@ -12,7 +12,7 @@ import { PasswordService } from '../../services';
 })
 export class LostPasswordComponent {
   /** The form group to use */
-  form = new FormGroup({});
+  form = new UntypedFormGroup({});
 
   processing = false;
 

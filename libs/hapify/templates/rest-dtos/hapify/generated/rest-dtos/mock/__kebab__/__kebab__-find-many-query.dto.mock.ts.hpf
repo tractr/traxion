@@ -1,7 +1,7 @@
 import { <<Model pascal>>FindManyQueryDto } from '../..';
   
 import {
-<<for Fields searchable and not password and not hidden field>>
+<<for Fields searchable and not password and not hidden and not manyOne field>>
   <<if field not entity>>
   mock<<Model pascal>><<field pascal>>Factory,
   <<elseif field oneOne or oneMany>>
@@ -14,40 +14,37 @@ import {
   
 export function mock<<Model pascal>>FindManyQueryDtoFactory(
   override: Partial<<<Model pascal>>FindManyQueryDto> = {}
-): Required< <<Model pascal>>FindManyQueryDto> {
+): <<Model pascal>>FindManyQueryDto {
   return {
-  <<for Fields searchable and not password and not hidden field>>
-    <<if field not entity>>
+  <<for Fields searchable and not password and not hidden and not manyOne field>>
+    <<if field not entity and not multiple>>
+      <<if field datetime>>
+    <<field camel>>: mock<<Model pascal>><<field pascal>>Factory().toISOString(),
+      <<elseif field number or boolean>>
+    <<field camel>>: `${mock<<Model pascal>><<field pascal>>Factory()}`,
+      <<elseif field object>>
+    <<field camel>>: JSON.stringify(mock<<Model pascal>><<field pascal>>Factory()),
+      <<else>>
+    <<field camel>>: mock<<Model pascal>><<field pascal>>Factory(),
+      <<endif>>
+    <<elseif field not entity and multiple>>
+    <<field camel>>: JSON.stringify(mock<<Model pascal>><<field pascal>>Factory()),
+    <<elseif field not entity>>
     <<field camel>>: mock<<Model pascal>><<field pascal>>Factory(),
     <<elseif field oneOne or oneMany>>
     <<field camel>>: mock<<Model pascal>><<field pascal>>IdFactory(),
     <<else>>
     <<field camel>>: mock<<Model pascal>><<field pascal>>IdsFactory(),
     <<endif>>
-    <<if field searchable and not entity and not multiple and not enum >>
-    <<field camel>>FilterType: '<<=getDefaultForType(field)>>',
-    <<endif>>
   <<endfor>>
-  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-    populate: [
-      <<for Fields entity field>>
-      '<<field camel>>',
-      <<endfor>>
-      <<for ReferencedIn ref>>
-        <<for ref.fields field>>
-          '<<-field backRelation camel>>',
-        <<endfor>>
-      <<endfor>>
-    ],
-    <<<}>>>
-    sort: 'id',
+    sort: ['id'],
     order: 'asc',
     take: 20,
     skip: 0,
     ...override,
   };
 }
-
+	
 <<<
 function getDefaultForType(f) {
   let out = ""
@@ -56,7 +53,7 @@ function getDefaultForType(f) {
   else if (f.type === "number") return "equals";
   else if (f.type === "datetime") return "equals";
   else if (f.type === "object") return "equals";
-
+	
   return "UnknownType";
 }
 >>>

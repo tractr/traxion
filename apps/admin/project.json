@@ -51,6 +51,21 @@
       },
       "outputs": ["{options.outputFile}"]
     },
+    "preserve": {
+      "configurations": {
+        "development": {},
+        "production": {}
+      },
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "nx build angular-config",
+          "node ./tools/local-install.mjs -p angular-config",
+          "node ./dist/libs/angular/config/generate.js ./apps/admin/src/assets/app-config.json"
+        ],
+        "parallel": false
+      }
+    },
     "serve": {
       "configurations": {
         "development": {
@@ -62,10 +77,17 @@
         }
       },
       "defaultConfiguration": "development",
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "preserve"
+        }
+      ],
       "executor": "@nrwl/web:dev-server",
       "options": {
         "buildTarget": "admin:build",
-        "hmr": true
+        "hmr": true,
+        "proxyConfig": "apps/admin/proxy.conf.js"
       }
     }
   }

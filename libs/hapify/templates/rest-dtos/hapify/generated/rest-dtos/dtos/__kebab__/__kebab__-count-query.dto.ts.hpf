@@ -1,144 +1,112 @@
-
 import {
-
-  <<if Fields boolean and searchable>>
-  IsBoolean, 
-  <<endif>>
-
-  <<if Fields email and searchable>>
-  IsEmail, 
-  <<endif>>
-
-  <<if Fields enum and searchable>>
+  IsArray,
   IsIn,
-  <<endif>>
-
-  <<if Fields number and searchable>>
-  IsNumber,
-  <<endif>>
-
-  <<if Fields datetime and searchable>>
-  IsDate,
-  <<endif>>
-  
   IsOptional,
-
-  <<if Fields (string or entity or enum) and searchable>>
   IsString,
-  <<endif>>
-
+	
   <<if Fields (string and not text)>>
   MaxLength,
   <<endif>>
-
-  <<if Fields url and searchable>>
-  IsUrl, 
-  <<endif>>
-
+	
   <<if Fields entity and searchable>>
-  IsUUID,
+  IsUUID, 
   <<endif>>
-
+	
   <<if Fields object and not internal>>
   IsObject, 
-  <<< if (root.f.multiple.some(e => e.type ==='object')) { >>>
-  IsArray,
-  <<< } >>>
   <<endif>>
-
+   
+  Min,
+	
 } from 'class-validator';
-
-<<if Fields object>>
-import { JsonObject } from '@tractr/common';
+	
+<<if Fields searchable and not entity>>
+import {
+  <<if Fields searchable and boolean>>
+  BoolFilterValidate,
+  <<endif>>
+  <<if Fields searchable and datetime>>
+  DateTimeFilterValidate,
+  <<endif>>
+  <<if Fields searchable and number>>
+  NumberFilterValidate,
+  <<endif>>
+  <<if Fields searchable and enum>>
+  EnumFilterValidate,
+  <<endif>>
+  <<if Fields object>>
+  JsonObject,
+  <<endif>>
+  <<if Fields searchable and object>>
+  JsonFilterValidate,
+  <<endif>>
+  <<if Fields searchable and string>>
+  StringFilterValidate,
+  <<endif>>
+} from '@tractr/common';
 <<endif>>
   
-<<if Fields enum>>
 import {
   <<for Fields enum enumField>>
   <<Model pascal>><<enumField pascal>>,
   <<endfor>>
+  <<Model pascal>>,
 } from '../../../models';
-<<endif>>
-
-<<if Fields (number or boolean or datetime) and searchable>>
-import { 
-  <<if Fields number and searchable>>
-  TransformStringToInt, 
-  <<endif>>
-
-  <<if Fields boolean and searchable>>
-  TransformStringToBoolean,
-  <<endif>>
-
-  <<if Fields datetime and searchable>>
-  TransformStringToDate,
-  <<endif>>
+	
+<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+import {
+  TransformStringToArray,
 } from '@tractr/common';
-<<endif>>
+<<<}>>>
  
 export class <<Model pascal>>CountQueryDto {
-<<for Fields searchable and not password and not hidden field>>
-  
-  <<if field boolean>>
-  @IsBoolean(<<=listModifier(field)>>)
-  @TransformStringToBoolean()
-  <<endif>>
-
-  <<if field string or entity or enum>>
-  @IsString(<<=listModifier(field)>>) 
-  <<endif>>
-
+<<<getSearchableFields(root).forEach((field) => {>>>
+	
   <<if field string and not text>>
   @MaxLength(<<< if (field.meta.maxLength) { >>><<-field maxLength raw>><<<}else{>>>255<<<}>>>, {
     message: '<<field pascal>> field is too long',
   })
   <<endif>>
-
+	
   <<if field entity>>
-  @IsUUID("all", <<=listModifier(field)>>) 
+    <<< if (field.multiple) { >>>
+    @TransformStringToArray()
+    @IsArray()
+    <<< } >>>
+	
+    @IsUUID("all", <<=listModifier(field)>>)
+  <<else>>
+  @IsString(<<=listModifier(field)>>)
   <<endif>>
-
-  <<if field enum>>
-  @IsIn([Object.values(<<Model pascal>><<field pascal>>)], <<=listModifier(field)>>) 
+	
+  <<if field not entity >>
+  @<<=getType(field)>>FilterValidate(<<if field enum>>Object.values(<<Model pascal>><<field pascal>>), <<endif>><<if field not object>><<=listModifier(field)>><<endif>>)
   <<endif>>
-
-  <<if field email>>
-  @IsEmail({}, <<=listModifier(field)>>) 
-  <<endif>>
-
-  <<if field url>>
-  @IsUrl({}, <<=listModifier(field)>>) 
-  <<endif>>
-
-  <<if field number>>
-  @IsNumber({<<if field not latitude and not longitude and not float>>maxDecimalPlaces: 0<<endif>>},<<=listModifier(field)>>)
-  @TransformStringToInt()
-  <<endif>>
-
-  <<if field datetime>>
-  @IsDate(<<=listModifier(field)>>)
-  @TransformStringToDate()
-  <<endif>>
-
-  <<if field object>>
-  @IsObject(<<=listModifier(field)>>) 
-  <<< if (field.multiple) { >>>
-  @IsArray()
-  <<< } >>>
-  <<endif>>
-
+	
   @IsOptional()
   <<=optionalTypedProperty(field)>>
  
-<<endfor>>
+<<<})>>>
 }
 
+<<<
+function getSearchableFields(model) {
+  return model
+    .fields.list
+    .concat(...model.referencedIn)
+    .filter((field) => field.searchable && !field.password && !field.hidden);
+}
+>>>
+	
 <<<
 function optionalTypedProperty(f) {
   let out = f.names.camel;
   out += "?: "
+  if(f.searchable && f.type !== "entity")
+    out += "string | ";
+	
   if (f.type === "boolean") out += "boolean";
-  else if (f.type === "string") out += "string";
+  else if (f.type === "string") out = out.replace(' | ', '');
   else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;
   else if (f.type === "number") out += "number";
   else if (f.type === "datetime") out += "Date";
@@ -151,10 +119,24 @@ function optionalTypedProperty(f) {
   return out;
 }
 >>>
-
+	
 <<<
 function listModifier(f) {
   if (f.multiple) return "{ each: true}";
   else return "";
+}
+>>>
+	
+<<<
+function getType(f) {
+  let out = ""
+  if (f.type === "boolean") return "Bool";
+  else if (f.type === "string") return "String";
+  else if (f.type === "number") return "Number";
+  else if (f.type === "datetime") return "DateTime";
+  else if (f.type === "object") return "Json";
+  else if (f.type === "enum") return "Enum";
+	
+  return "UnknownType";
 }
 >>>

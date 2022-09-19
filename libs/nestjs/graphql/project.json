@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/nestjs/graphql/src",
   "tags": [],
@@ -6,7 +7,9 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": ["libs/nestjs/graphql/*.md"],
+        "assets": [
+          "libs/nestjs/graphql/*.md"
+        ],
         "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/graphql/src/index.ts",
         "outputPath": "dist/libs/nestjs/graphql",
@@ -14,14 +17,20 @@
         "tsConfig": "libs/nestjs/graphql/tsconfig.lib.json",
         "updateBuildableProjectDepsInPackageJson": true
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/nestjs/graphql/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/nestjs/graphql/**/*.ts"
+        ]
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -35,7 +44,9 @@
         "jestConfig": "libs/nestjs/graphql/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/nestjs/graphql"]
+      "outputs": [
+        "coverage/libs/nestjs/graphql"
+      ]
     }
   }
 }

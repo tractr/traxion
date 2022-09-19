@@ -195,7 +195,7 @@ export type UpsertOptions = Omit<
  */
 export function upsert<
   T,
-  UpsertParams extends { id: string | number },
+  UpsertParams extends { id?: string | number },
   UpsertBody,
 >(
   apiUrl: URL,
@@ -203,7 +203,7 @@ export function upsert<
   upsertBody: UpsertBody,
   options: UpsertOptions = {},
 ): Observable<[T, AjaxResponse<T>]> {
-  const url = getUrl(apiUrl, `/${upsertParams.id}`);
+  const url = getUrl(apiUrl, upsertParams.id ? `/${upsertParams.id}` : '');
   return ajax<T>({
     url: url.toString(),
     method: 'PUT',

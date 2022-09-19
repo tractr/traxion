@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/hapify/templates/react-admin/src",
   "tags": [],
@@ -21,7 +22,9 @@
         "packageJson": "libs/hapify/templates/react-admin/package.json",
         "tsConfig": "libs/hapify/templates/react-admin/tsconfig.lib.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",

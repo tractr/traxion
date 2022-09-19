@@ -9,7 +9,7 @@ import {<<for Models model>>
   <<model pascal>>List,
   <<model pascal>>Show,<<endfor>>
 } from './resources';
-
+	
 export interface ReactAdminProps {
   apiUrl: string | URL;
 }

@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/terraform/service/reverse-proxy/src",
   "tags": [],
@@ -6,20 +7,28 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": ["libs/terraform/service/reverse-proxy/*.md"],
+        "assets": [
+          "libs/terraform/service/reverse-proxy/*.md"
+        ],
         "main": "libs/terraform/service/reverse-proxy/src/index.ts",
         "outputPath": "dist/libs/terraform/service/reverse-proxy",
         "packageJson": "libs/terraform/service/reverse-proxy/package.json",
         "tsConfig": "libs/terraform/service/reverse-proxy/tsconfig.lib.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/terraform/service/reverse-proxy/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/terraform/service/reverse-proxy/**/*.ts"
+        ]
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -33,7 +42,9 @@
         "jestConfig": "libs/terraform/service/reverse-proxy/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/terraform/service/reverse-proxy"]
+      "outputs": [
+        "coverage/libs/terraform/service/reverse-proxy"
+      ]
     }
   }
 }

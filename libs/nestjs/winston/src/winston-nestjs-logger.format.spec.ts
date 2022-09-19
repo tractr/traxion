@@ -1,3 +1,5 @@
+import { Writable } from 'stream';
+
 import { MESSAGE } from 'triple-beam';
 import { createLogger, format, transports } from 'winston';
 
@@ -7,17 +9,26 @@ import { createWinstonLogger, WinstonLogger } from './winston.logger';
 describe('WinstonLogger', () => {
   let output: jest.Mock<void, unknown[]>;
   let logger: WinstonLogger;
+  let stream: Writable;
 
   beforeEach(() => {
     output = jest.fn();
+
+    stream = new Writable();
+    // eslint-disable-next-line no-underscore-dangle
+    stream._write = (chunk, encoding, next) => {
+      next();
+    };
 
     logger = createWinstonLogger({
       level: 'debug',
       format: nestLikeConsoleFormat({
         colors: false,
       }),
+
       transports: [
-        new transports.Console({
+        new transports.Stream({
+          stream,
           log: (info) => output(info[MESSAGE]),
         }),
       ],
@@ -35,32 +46,32 @@ describe('WinstonLogger', () => {
 
   it('should be able to use the log method', () => {
     logger.log('test');
-    expect(output).toHaveBeenCalledWith('[Nest] Info\ttest - {}');
+    expect(output).toHaveBeenCalledWith('[Nest] Info\ttest');
   });
 
   it('should be able to use the warn method', () => {
     logger.warn('test');
-    expect(output).toHaveBeenCalledWith('[Nest] Warn\ttest - {}');
+    expect(output).toHaveBeenCalledWith('[Nest] Warn\ttest');
   });
 
   it('should be able to use the error method', () => {
     logger.error('test');
-    expect(output).toHaveBeenCalledWith('[Nest] Error\ttest - {}');
+    expect(output).toHaveBeenCalledWith('[Nest] Error\ttest');
   });
 
   it('should be able to use the debug method', () => {
     logger.debug('test');
-    expect(output).toHaveBeenCalledWith('[Nest] Debug\ttest - {}');
+    expect(output).toHaveBeenCalledWith('[Nest] Debug\ttest');
   });
 
   it('should be able to use the verbose method', () => {
     logger.verbose('test');
-    expect(output).toHaveBeenCalledWith('[Nest] Verbose\ttest - {}');
+    expect(output).toHaveBeenCalledWith('[Nest] Verbose\ttest');
   });
 
   it('should print the context if any', () => {
     logger.verbose('test', 'context');
-    expect(output).toHaveBeenCalledWith('[Nest] Verbose\t[context] test - {}');
+    expect(output).toHaveBeenCalledWith('[Nest] Verbose\t[context] test');
   });
 
   it('should print the metadata if any', () => {
@@ -88,7 +99,8 @@ describe('WinstonLogger', () => {
         }),
       ),
       transports: [
-        new transports.Console({
+        new transports.Stream({
+          stream,
           log: (info) => output(info[MESSAGE]),
         }),
       ],
@@ -109,7 +121,8 @@ describe('WinstonLogger', () => {
         colors: false,
       }),
       transports: [
-        new transports.Console({
+        new transports.Stream({
+          stream,
           log: (info) => output(info[MESSAGE]),
         }),
       ],
@@ -127,7 +140,8 @@ describe('WinstonLogger', () => {
         colors: 1,
       }),
       transports: [
-        new transports.Console({
+        new transports.Stream({
+          stream,
           log: (info) => output(info[MESSAGE]),
         }),
       ],
@@ -145,7 +159,8 @@ describe('WinstonLogger', () => {
         colors: 1,
       }),
       transports: [
-        new transports.Console({
+        new transports.Stream({
+          stream,
           log: (info) => output(info[MESSAGE]),
         }),
       ],
@@ -164,7 +179,8 @@ describe('WinstonLogger', () => {
         colors: false,
       }),
       transports: [
-        new transports.Console({
+        new transports.Stream({
+          stream,
           log: (info) => output(info[MESSAGE]),
         }),
       ],
@@ -181,13 +197,14 @@ describe('WinstonLogger', () => {
       format: nestLikeConsoleFormat(),
       level: 'silly',
       transports: [
-        new transports.Console({
+        new transports.Stream({
+          stream,
           log: (info) => output(info[MESSAGE]),
         }),
       ],
     });
 
     loggerWithTimestamp.silly('test');
-    expect(output).toHaveBeenCalledWith(`[Nest] Silly\ttest - {}`);
+    expect(output).toHaveBeenCalledWith(`[Nest] Silly\ttest`);
   });
 });

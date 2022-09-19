@@ -11,11 +11,11 @@ import {
 <<if Fields rich and not internal>>
 import RichTextInput from 'ra-input-rich-text';
 <<endif>>
- 
+
 export const <<Model pascal>>Create = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
-<<for Fields not internal field>>
+<<for Fields not internal and not manyOne field>>
     <<if field entity>>
         <<<printEntityInput(field)>>>
     <<else>>
@@ -25,11 +25,11 @@ export const <<Model pascal>>Create = (props: CreateProps) => (
     </SimpleForm>
   </Create>
 );
-
+	
 export const <<Model pascal>>Edit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
-<<for Fields not internal field>>
+<<for Fields not internal and not manyOne field>>
     <<if field entity>>
         <<<printEntityInput(field)>>>
     <<else>>
@@ -39,9 +39,9 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
     </SimpleForm>
   </Edit>
 );
-
+	
 <<< function printInput(field) { >>>
-
+	
 <<if field string>>
     <<if field rich>>
       <RichTextInput
@@ -83,6 +83,7 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
         ]}
     <<else>>
     <AutocompleteInput
+        defaultValue={null}
         choices={[
     <<for field.enum e>>
           { id: '<<e camel>>', name: '<<e camel>>' },
@@ -98,16 +99,16 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
 <<else>>
       <TextInput
 <<endif>>
-
+	
     <<if field not nullable>>
         validate={required()}
     <<endif>>
         source="<<field camel>>"
         label="<<field capital>>"
       />
-
+	
 <<< } >>>
-
+	
 <<< function printEntityInput(field) { >>>
 <<if field not manyMany>>
     <<if field multiple>>
@@ -115,20 +116,20 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
         source="<<field camel>>"
         label="<<field capital>>"
         reference="<<field.model camel>>">
-        <SelectArrayInput optionText="<<=labelFieldCamel(field.model)>>" />
+        <AutocompleteArrayInput optionText="<<=labelFieldCamel(field.model)>>" />
     </ReferenceArrayInput>
     <<else>>
     <ReferenceInput
         source="<<field camel>>Id"
         label="<<field capital>>"
         reference="<<field.model camel>>">
-        <SelectInput optionText="<<=labelFieldCamel(field.model)>>" />
+        <AutocompleteInput optionText="<<=labelFieldCamel(field.model)>>" />
     </ReferenceInput>
     <<endif>>
 <<endif>>
-
+	
 <<< } >>>
-
+	
 <<<
 function fieldInput(field) {
     switch(field.type) {
@@ -147,20 +148,20 @@ function fieldInput(field) {
                 default: return ['DateTimeInput'];
             }
         case 'entity':
-            return field.multiple ? 
-                ['ReferenceArrayInput', 'SelectArrayInput'] :
-                ['ReferenceInput', 'SelectInput'];
+            return field.multiple ?
+                ['ReferenceArrayInput', 'AutocompleteArrayInput'] :
+                ['ReferenceInput', 'AutocompleteInput'];
         default: return ['TextInput'];
     }
 }
 function labelFieldCamel(model) {
-    const label = model.fields.label.length ? 
-        model.fields.label[0] : model.fields.primary;
-    return label.names.camel;
+  const foundFirstLabelSearchable = model.fields.label.find((field) => field.searchable);
+  const label = foundFirstLabelSearchable || model.fields.primary;
+  return label.names.camel;
 }
 function getImports() {
     const output = [];
-    
+
     root.fields
         .filter(field => !field.internal)
         .forEach(field => {

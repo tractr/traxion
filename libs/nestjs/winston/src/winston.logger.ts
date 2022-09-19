@@ -64,6 +64,17 @@ export class WinstonLogger implements LoggerService {
 
     if (typeof metadataOrContext === 'object') meta = metadataOrContext;
 
+    if (
+      typeof metadataOrContext === 'string' &&
+      typeof context !== 'undefined'
+    ) {
+      if ((metadataOrContext.match(/Error:.*\n/i) || [])?.length > 0) {
+        meta = { stack: metadataOrContext };
+      } else {
+        meta = { misc: metadataOrContext };
+      }
+    }
+
     this.winston.log(level, message, { ...meta, context: ctx });
   }
 }

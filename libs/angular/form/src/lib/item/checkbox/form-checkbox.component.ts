@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 
 import { FormItemBaseComponent } from '../base/form-item-base.component';
 
@@ -11,11 +11,11 @@ import { FormItemBaseComponent } from '../base/form-item-base.component';
 export class FormCheckboxComponent extends FormItemBaseComponent<boolean> {
   @Input() delayed = 200;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: UntypedFormBuilder) {
     super();
   }
 
-  initControl(): FormControl {
+  initControl(): UntypedFormControl {
     return this.formBuilder.control(this.state, [
       // eslint-disable-next-line @typescript-eslint/unbound-method
       ...(this.required ? [Validators.requiredTrue] : []),

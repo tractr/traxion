@@ -1,7 +1,7 @@
 import { 
   <<Model pascal>>,
 } from '..';
-
+	
 <<if Fields enum>>
 import {
   <<for Fields enum enumField>>
@@ -9,43 +9,43 @@ import {
   <<endfor>>
 } from '..';
 <<endif>>
-
+	
 <<if Fields object>>
-import { JsonObject } from '@tractr/common';
+import type { JsonObject } from '@tractr/common';
 <<endif>>
-
+	
 import {
-
+	
   <<if Fields primary or entity or number or boolean>>
   datatype,
   <<endif>>
-
+	
   <<if Fields enum>>
   random,
   <<endif>>
-
+	
   <<if Fields email or password or url>>
   internet,
   <<endif>>
-
+	
   <<if Fields object or (string and not (primary or email or password or url))>>
   lorem,
   <<endif>>
-
+	
   <<if Fields datetime>>
   date,
   <<endif>>
-
+	
 } from 'faker';
-
+	
 
 <<if Fields unique>>
 import { <<Model pascal>>UniqueValues } from '..';
 <<endif>>
-
+	
 
   
-<<for Fields field>>
+<<for Fields not manyOne field>>
   <<if field not entity>>
 export function mock<<Model pascal>><<field pascal>>Factory(): <<=getMockReturnType(field)>> {
   return <<=getFaker(field)>>;
@@ -59,7 +59,7 @@ export function mock<<Model pascal>><<field pascal>>IdFactory(): <<=getMockRetur
   <<else>>
 export function mock<<Model pascal>><<field pascal>>IdsFactory(): string[] {
   return <<=getFaker(field)>>;
-
+	
 }
     
   <<endif>>
@@ -76,12 +76,12 @@ export function mock<<Model pascal>>Factory(override: Partial< <<Model pascal>> 
     ...override,
   };
 }
-
+	
 
 export function mock<<Model pascal>>sFactory(override: Partial< <<Model pascal>> > = {}, quantity: number = 1): <<Model pascal>>[] {
   <<if Fields not internal and not boolean and not enum and unique>>
   const uniqueValues: <<Model pascal>>UniqueValues = {
-    <<for Fields not internal and not boolean and not enum and unique field>>
+    <<for Fields not internal and not boolean and not enum and unique and not manyOne field>>
       <<if field not entity>>
       <<field camel>>:[],
       <<else>>
@@ -104,7 +104,7 @@ export function mock<<Model pascal>>sFactory(override: Partial< <<Model pascal>>
       <<<}>>>
     <<<})>>>
     ) {
-      <<for Fields not internal and not boolean and not enum and unique field>>
+      <<for Fields not internal and not boolean and not enum and unique and not manyOne field>>
         <<if field not entity>>
         if(override.<<field camel>>) {
           override.<<field camel>> = mock<<Model pascal>><<field pascal>>Factory();
@@ -117,7 +117,7 @@ export function mock<<Model pascal>>sFactory(override: Partial< <<Model pascal>>
       <<endfor>> 
       tmp<<Model pascal>> = mock<<Model pascal>>Factory(override);
     }
-    <<for Fields not internal and not boolean and not enum and unique field>>
+    <<for Fields not internal and not boolean and not enum and unique and not manyOne field>>
       <<if field not entity>>
         <<if field nullable>>if(tmp<<Model pascal>>.<<field camel>>)<<endif>> uniqueValues.<<field camel>>.push(tmp<<Model pascal>>.<<field camel>>);
       <<else>>
@@ -130,7 +130,7 @@ export function mock<<Model pascal>>sFactory(override: Partial< <<Model pascal>>
     return [...Array(quantity)].map(() => mock<<Model pascal>>Factory(override));
   <<endif>>
 }
-
+	
 <<<
 function getBaseFaker(f) {
   if (f.primary && f.type === 'string') return 'datatype.uuid()';
@@ -170,7 +170,7 @@ function getMockReturnType(f) {
   return out;
 }
 >>>
-
+	
 <<if Fields object>>
 function generateFakeObject() {
  const countKeys = Math.floor(Math.random() * 10);
@@ -181,4 +181,4 @@ function generateFakeObject() {
   return obj;
 }
 <<endif>>
-
+	
