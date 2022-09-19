@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   ValidationArguments,
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type IsCustomConstraint<T = any> = (
   currentObject: T,
   value: any,

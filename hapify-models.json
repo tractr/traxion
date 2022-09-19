@@ -90,7 +90,7 @@
             "ownerStringPath": "user.enterprises.id"
           },
           "name": "enterprise",
-          "properties": ["ownership"],
+          "properties": ["searchable", "ownership"],
           "subtype": "oneMany",
           "type": "entity",
           "value": "c069cc55-f28f-dcc1-cad8-0df044631ef8"
@@ -116,7 +116,7 @@
         },
         {
           "name": "name",
-          "properties": ["unique"],
+          "properties": ["unique", "label", "searchable"],
           "type": "string"
         },
         {
@@ -129,6 +129,13 @@
           "subtype": "manyMany",
           "type": "entity",
           "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
+        },
+        {
+          "name": "departments",
+          "properties": ["searchable"],
+          "subtype": "manyOne",
+          "type": "entity",
+          "value": "2a523149-31f3-80bf-d32b-3b9174cc6f2c"
         }
       ],
       "id": "c069cc55-f28f-dcc1-cad8-0df044631ef8",

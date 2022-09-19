@@ -1,11 +1,11 @@
 import { DataProvider } from 'react-admin';
 import { lastValueFrom, Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
- 
+
 import { ResourceType } from '../interfaces';
 import { formatData } from '../helpers';
 import { RextClient } from '../../rext-client';
- 
+
 /**
  * Maps react-admin queries to a REXT API
  *
@@ -39,29 +39,45 @@ import { RextClient } from '../../rext-client';
 export function rextClientProvider(apiUrl: string | URL): DataProvider {
   const rextClient = new RextClient(apiUrl);
   return {
-    getList: async (resource, params) => {
-      const { page, perPage } = params.pagination;
-      const { field, order } = params.sort;
-	
-      const total = await lastValueFrom(
-        rextClient[resource as unknown as ResourceType].count$(
-          {},
-        ) as Observable<number>,
-      );
-      const data = await lastValueFrom(
-        rextClient[resource as unknown as ResourceType].findMany$({
-          sort: [field.toLowerCase() as any],
-          order: order.toLowerCase() as any,
-          take: perPage,
-          skip: (page - 1) * perPage,
-        }) as Observable<any>,
-      );
-      return { data, total };
-    },
-	
+    getList: async (resource, { pagination, sort, filter = {} }) => {
+      const { page, perPage } = pagination;
+      const { field, order } = sort;
 
- 
-    getOne: (resource, params) => 
+      const { q: query, ...otherFilter } = filter;
+      let resourceFilters = Object.keys(otherFilter).reduce((acc, key) => {
+        return { ...acc, [key]: `${otherFilter[key]}:contains` };
+      }, {});
+
+      if (query) {
+        resourceFilters = {
+          [getLabelFieldFromResource(resource)]: `${query}:contains`,
+        };
+      };
+
+      try {
+        const total = await lastValueFrom(
+          rextClient[resource as unknown as ResourceType].count$(
+            resourceFilters,
+          ) as Observable<number>,
+        );
+        const data = await lastValueFrom(
+          rextClient[resource as unknown as ResourceType].findMany$({
+            ...resourceFilters,
+            sort: [field.toLowerCase() as any],
+            order: order.toLowerCase() as any,
+            take: perPage,
+            skip: (page - 1) * perPage,
+          }) as Observable<any>,
+        );
+        return { data, total };
+      } catch {
+        return { data: [], total: 0 };
+      }
+    },
+
+
+
+    getOne: (resource, params) =>
       lastValueFrom(
         (
           rextClient[resource as unknown as ResourceType].findUnique$({
@@ -69,7 +85,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
           }) as Observable<any>
         ).pipe(map((data) => ({ data }))),
       ),
- 
+
     getMany: (resource, params) => {
       return lastValueFrom(
         (
@@ -78,42 +94,52 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
             skip: 0,
             sort: ['id'],
             take: 1000,
-            // FIXME make possible the fetch of multiple ids
-            id: `${params.ids[0]}`,
+            id: `${params.ids.join(',')}`,
           }) as Observable<any>
         ).pipe(map((data) => ({ data }))),
       );
     },
- 
-    getManyReference: (resource, params) => {
-      const { page, perPage } = params.pagination;
-      const { field, order } = params.sort;
-      const query = {
-        sort: JSON.stringify([field, order]),
-        range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-        filter: JSON.stringify({
-          ...params.filter,
-          [params.target]: params.id,
-        }),
+
+    getManyReference: async (resource, { id, target, pagination, sort, filter }) => {
+      const { page, perPage } = pagination;
+      const { field, order } = sort;
+
+      const { q: query, ...otherFilter } = filter;
+      let resourceFilters = {
+        ...Object.keys(otherFilter).reduce((acc, key) => {
+          return { ...acc, [key]: `${otherFilter[key]}:contains` };
+        }, {}),
+        [target]: id,
       };
- 
-      // TODO make the filter works
-      return lastValueFrom(
-        (
-          rextClient[resource as unknown as ResourceType].findMany$({
-            sort: [field.toLowerCase() as any],
-            order: order.toLowerCase() as any,
-            take: perPage,
-            skip: (page - 1) * perPage,
-          }) as Observable<any>
-        ).pipe(map((data) => ({ data, total: data.length }))),
+
+      if (query) {
+        resourceFilters = {
+          [getLabelFieldFromResource(resource)]: `${query}:contains`,
+        };
+      };
+
+      const total = await lastValueFrom(
+        rextClient[resource as unknown as ResourceType].count$(
+          resourceFilters,
+        ) as Observable<number>,
       );
+      const data = await lastValueFrom(
+        rextClient[resource as unknown as ResourceType].findMany$({
+          ...resourceFilters,
+          sort: [field.toLowerCase() as any],
+          order: order.toLowerCase() as any,
+          take: perPage,
+          skip: (page - 1) * perPage,
+        }) as Observable<any>,
+      );
+
+      return { data, total };
     },
- 
+
     update: (resource, params) => {
       const resourceName = resource as unknown as ResourceType;
       const toUpdate = formatData[resourceName]({ ...params.data });
-	
+
       return lastValueFrom(
         (
           rextClient[resource as unknown as ResourceType].patch$({
@@ -122,12 +148,12 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
         ).pipe(map((data) => ({ data }))),
       );
     },
- 
+
     // rext client doesn't provide an updateMany method, so we fallback to calling update n times instead
     updateMany: (resource, params) => {
       const resourceName = resource as unknown as ResourceType;
       const toUpdate = formatData[resourceName]({ ...params.data });
- 
+
       return Promise.all(
         params.ids.map((id) =>
           lastValueFrom(
@@ -140,11 +166,11 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
         )
       ).then(responses => ({ data: responses.map(({ id }) => id) }));
     },
- 
+
     create: (resource, params) => {
       const resourceName = resource as unknown as ResourceType;
       const toCreate = formatData[resourceName]({ ...params.data });
- 
+
       return lastValueFrom(
         (
           rextClient[resourceName].create$(
@@ -153,7 +179,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
         ).pipe(map((data) => ({ data }))),
       );
     },
- 
+
     delete: (resource, params) =>
       lastValueFrom(
         (
@@ -162,7 +188,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
           }) as Observable<any>
         ).pipe(map((data) => ({ data }))),
       ),
- 
+
     // rext client doesn't provide an deleteMany method, so we fallback to calling delete n times instead
     deleteMany: (resource, params) =>
       Promise.all(
@@ -178,4 +204,24 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
       ).then(responses => ({ data: responses.map(({ id }) => id) })),
   };
 }
- 
+
+function getLabelFieldFromResource(resource: string) {
+  switch (resource) {
+    <<for Models model>>
+    case '<<model camel>>':
+      return '<<=labelFieldCamel(model)>>';
+    <<endfor>>;
+    default:
+      throw new Error(`Resource ${resource} not found`);
+  }
+}
+
+<<<
+
+function labelFieldCamel(model) {
+  const foundFirstLabelSearchable = model.fields.label.find((field) => field.searchable);
+  const label = foundFirstLabelSearchable || model.fields.primary;
+  return label.names.camel;
+}
+
+>>>

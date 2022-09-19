@@ -1,12 +1,12 @@
 import { AuthProvider } from 'react-admin';
-	
+
 export function checkStatusCode(statusCode: number) {
   if (statusCode < 200 || statusCode >= 300) {
     if (statusCode === 401) throw new Error('Authentication failed');
     throw new Error();
   }
 }
-	
+
 export function checkUserPermission(user: any) {
   const isAdmin = user.roles.includes('admin');
   if (!isAdmin)
@@ -14,7 +14,7 @@ export function checkUserPermission(user: any) {
       `Insufficient permission. You must have the 'admin' role to access this resource`,
     );
 }
-	
+
 export function authProvider(apiUrl: string | URL): AuthProvider {
   return {
     login: ({ username, password }) => {
@@ -34,10 +34,10 @@ export function authProvider(apiUrl: string | URL): AuthProvider {
             credentials: 'include',
           });
 
-          const user = await fetch(request);
+          const user = await fetch(me);
           return user.json();
         })
-        .then(({ user }) => {
+        .then((user) => {
           checkUserPermission(user);
         });
     },
@@ -61,7 +61,9 @@ export function authProvider(apiUrl: string | URL): AuthProvider {
         });
     },
     logout: async () => {
-      const request = new Request(`${apiUrl}/logout`);
+      const request = new Request(`${apiUrl}/logout`, {
+        method: 'POST',
+      });
       return await fetch(request).then(({ status }) => {
         if (status === 401) return;
         checkStatusCode(status);

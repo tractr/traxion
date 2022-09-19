@@ -2,6 +2,100 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.58.6](https://github.com/tractr/stack/compare/v1.58.5...v1.58.6) (2022-09-13)
+
+
+### Bug Fixes
+
+* Migration 8 password ([#508](https://github.com/tractr/stack/issues/508)) ([50773cb](https://github.com/tractr/stack/commit/50773cbbf5d7dd34dbee4d7664f44b265824a990))
+
+
+
+## [1.58.5](https://github.com/tractr/stack/compare/v1.58.4...v1.58.5) (2022-09-13)
+
+
+### Bug Fixes
+
+* **authentication:** export controller + fix interface password ([#507](https://github.com/tractr/stack/issues/507)) ([1825cf7](https://github.com/tractr/stack/commit/1825cf799356fbf1df00241c60ad13d95fca9ec8))
+
+
+
+## [1.58.4](https://github.com/tractr/stack/compare/v1.58.3...v1.58.4) (2022-09-08)
+
+
+### Bug Fixes
+
+* **nestjs-models-rest:** fix missing upsert policies ([#505](https://github.com/tractr/stack/issues/505)) ([e42c228](https://github.com/tractr/stack/commit/e42c2286403c0f78f1e7d49ee25f5b02262aca41))
+
+
+
+## [1.58.3](https://github.com/tractr/stack/compare/v1.58.2...v1.58.3) (2022-09-08)
+
+
+### Bug Fixes
+
+* **angular-authentication:** fix logout ([#504](https://github.com/tractr/stack/issues/504)) ([fc374e9](https://github.com/tractr/stack/commit/fc374e9e7bb88e468051051a0db0f1f7c80448bf))
+
+
+
+## [1.58.2](https://github.com/tractr/stack/compare/v1.58.1...v1.58.2) (2022-09-07)
+
+
+### Bug Fixes
+
+* **hapify:** fix hapify template fopr model middleware ([#502](https://github.com/tractr/stack/issues/502)) ([18bd04f](https://github.com/tractr/stack/commit/18bd04f929b89d1796e204353e71fa3b3ad19bdc))
+
+
+
+## [1.58.1](https://github.com/tractr/stack/compare/v1.58.0...v1.58.1) (2022-09-06)
+
+
+### Bug Fixes
+
+* update auth and rext provider to avoid error ([#503](https://github.com/tractr/stack/issues/503)) ([beda287](https://github.com/tractr/stack/commit/beda287b06ce925d2e0e34ff2d57d53496e42181))
+
+
+
+# [1.58.0](https://github.com/tractr/stack/compare/v1.57.2...v1.58.0) (2022-09-02)
+
+
+### Features
+
+* add the capability to filter the relation on the other side of the one many and many many ([#499](https://github.com/tractr/stack/issues/499)) ([b9028c8](https://github.com/tractr/stack/commit/b9028c8505ef20ad7da81aa106d542dab9ebc936))
+
+
+
+## [1.57.2](https://github.com/tractr/stack/compare/v1.57.1...v1.57.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* remove populate from the rest api interfaces ([#498](https://github.com/tractr/stack/issues/498)) ([ffc18ef](https://github.com/tractr/stack/commit/ffc18efff838c0fe62b0048c6a85f4dc48b6c90b))
+
+
+
+## [1.57.1](https://github.com/tractr/stack/compare/v1.57.0...v1.57.1) (2022-08-31)
+
+
+
+# [1.57.0](https://github.com/tractr/stack/compare/v1.56.1...v1.57.0) (2022-08-31)
+
+
+### Features
+
+* split nestjs password and authentication management ([#497](https://github.com/tractr/stack/issues/497)) ([fe2ed5e](https://github.com/tractr/stack/commit/fe2ed5e0b71c115153d3bdcadd652c196dd9308f))
+
+
+
+## [1.56.1](https://github.com/tractr/stack/compare/v1.56.0...v1.56.1) (2022-08-26)
+
+
+### Bug Fixes
+
+* use the autocomplete with the right filter in the react admin entities ([#493](https://github.com/tractr/stack/issues/493)) ([3365e47](https://github.com/tractr/stack/commit/3365e47cfb452e52e53f94cc0e6bf9bf9fdc0629))
+
+
+
 # [1.56.0](https://github.com/tractr/stack/compare/v1.55.0...v1.56.0) (2022-08-19)
 
 

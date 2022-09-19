@@ -10,9 +10,9 @@ import {
 } from '@angular/core';
 import {
   AbstractControl,
+  NgModel,
   UntypedFormControl,
   UntypedFormGroup,
-  NgModel,
 } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

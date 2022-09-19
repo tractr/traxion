@@ -346,7 +346,7 @@ export class <<Model pascal>>Resolver {
 <<endfor>>
 	
 <<for root.referencedIn ref>>
-  <<for ref.fields field>>
+  <<for ref.fields not manyOne field>>
   /**
    * Associated <<-field backRelation pascal>>
    */

@@ -27,8 +27,7 @@ import {
   <<Model pascal>>CreateBodyDto,
   <<Model pascal>>DeleteParamsDto,
   <<Model pascal>>FindManyQueryDto,
-  <<Model pascal>>FindUniqueParamsDto,<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-  <<Model pascal>>FindUniqueQueryDto,<<<}>>>
+  <<Model pascal>>FindUniqueParamsDto,
   <<Model pascal>>UpdateBodyDto,
   <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpsertBodyDto,
@@ -111,27 +110,23 @@ export class <<Model pascal>>Service {
    * Find zero or one Model that matches the filter
    *
    model
-   * @param findUniqueParams - Dto of the request param<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-   * @param findUniqueQuery - Dto of the request query<<<}>>>
+   * @param findUniqueParams - Dto of the request param
    * @param options - Ajax request options
    * @returns a Model or null
    */
   public findUnique$(
-    findUniqueParams: <<Model pascal>>FindUniqueParamsDto,<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-    findUniqueQuery?: <<Model pascal>>FindUniqueQueryDto,<<<}>>>
-    options?: FindUniqueOptions,
+    findUniqueParams: <<Model pascal>>FindUniqueParamsDto,
+    options: FindUniqueOptions = {},
   ): Observable<<<Model pascal>>> {
-    return zip(
-      fromDto(findUniqueParams, <<Model pascal>>FindUniqueParamsDto),<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-      fromDto(findUniqueQuery, <<Model pascal>>FindUniqueQueryDto),<<<}>>>
-    ).pipe(
-      switchMap(([params<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>, query<<<}>>>]) =>
-        findUnique(this.apiUrl, params, {<<<if (root.dependencies.list.length || root.referencedIn.length) {>>> ...query <<<}>>>}, options).pipe(
-          extractAjaxResponseData(),
-          transformAndValidateMap(<<Model pascal>>),
+    return fromDto(findUniqueParams, <<Model pascal>>FindUniqueParamsDto)
+      .pipe(
+        switchMap((params) =>
+          findUnique(this.apiUrl, params, options).pipe(
+            extractAjaxResponseData(),
+            transformAndValidateMap(<<Model pascal>>),
+          ),
         ),
-      ),
-    );
+      );
   }
  
   /**
@@ -143,19 +138,15 @@ export class <<Model pascal>>Service {
   public findUnique(
     options?: FindUniqueOptions,
   ): OperatorFunction<
-    | { params: <<Model pascal>>FindUniqueParamsDto<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>; query?: <<Model pascal>>FindUniqueQueryDto <<<}>>> }
-    | [<<Model pascal>>FindUniqueParamsDto<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>, <<Model pascal>>FindUniqueQueryDto <<<}>>>]
+    | { params: <<Model pascal>>FindUniqueParamsDto }
     | <<Model pascal>>FindUniqueParamsDto,
     <<Model pascal>>
   > {
     return switchMap((source) => {
-      if (Array.isArray(source))
-        return this.findUnique$(source[0], <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>source[1], <<<}>>>options);
-	
       if (isAlike(source, <<Model pascal>>FindUniqueParamsDto))
-        return this.findUnique$(source, <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>undefined, <<<}>>>options);
+        return this.findUnique$(source, options);
 	
-      return this.findUnique$(source.params, <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>source.query, <<<}>>>options);
+      return this.findUnique$(source.params, options);
     });
   }
  
