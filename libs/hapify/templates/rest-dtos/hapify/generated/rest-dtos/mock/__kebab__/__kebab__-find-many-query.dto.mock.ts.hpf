@@ -1,7 +1,7 @@
 import { <<Model pascal>>FindManyQueryDto } from '../..';
   
 import {
-<<for Fields searchable and not password and not hidden field>>
+<<for Fields searchable and not password and not hidden and not manyOne field>>
   <<if field not entity>>
   mock<<Model pascal>><<field pascal>>Factory,
   <<elseif field oneOne or oneMany>>
@@ -16,7 +16,7 @@ export function mock<<Model pascal>>FindManyQueryDtoFactory(
   override: Partial<<<Model pascal>>FindManyQueryDto> = {}
 ): <<Model pascal>>FindManyQueryDto {
   return {
-  <<for Fields searchable and not password and not hidden field>>
+  <<for Fields searchable and not password and not hidden and not manyOne field>>
     <<if field not entity and not multiple>>
       <<if field datetime>>
     <<field camel>>: mock<<Model pascal>><<field pascal>>Factory().toISOString(),
@@ -37,18 +37,6 @@ export function mock<<Model pascal>>FindManyQueryDtoFactory(
     <<field camel>>: mock<<Model pascal>><<field pascal>>IdsFactory(),
     <<endif>>
   <<endfor>>
-  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-    populate: [
-      <<for Fields entity field>>
-      '<<field camel>>',
-      <<endfor>>
-      <<for ReferencedIn ref>>
-        <<for ref.fields field>>
-          '<<-field backRelation camel>>',
-        <<endfor>>
-      <<endfor>>
-    ],
-    <<<}>>>
     sort: ['id'],
     order: 'asc',
     take: 20,

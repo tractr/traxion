@@ -8,7 +8,7 @@
   model <<model pascal>> {
 	
 <<# For each field in the model we generate the prisma schema >>
-    <<for model.fields field>>
+    <<for model.fields not manyOne field>>
  
 <<# If the field has a relation oneOne or oneMany >>
         <<if field oneOne or oneMany>>
@@ -38,7 +38,7 @@
  
     <<for model.referencedIn ref>>
     // Model referenced in <<ref pascal>>, use the backRelation field from hapify
-        <<for ref.fields field>>
+        <<for ref.fields not manyOne field>>
             <<if field oneOne>>
     <<-field backRelation camel>> <<ref pascal>>? @relation("<<ref pascal>>.<<field camel>>.<<model pascal>>.<<-field backRelation camel>>")
  

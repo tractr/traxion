@@ -33,9 +33,6 @@ import {
   <<Model pascal>>DeleteParamsDto,
   <<Model pascal>>FindManyQueryDto,
   <<Model pascal>>FindUniqueParamsDto,
-<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-  <<Model pascal>>FindUniqueQueryDto,
-<<<}>>>
   <<Model pascal>>UpdateBodyDto,
   <<Model pascal>>UpdateParamsDto,
   <<Model pascal>>UpsertBodyWithPrimaryDto,
@@ -147,18 +144,12 @@ export class <<Model pascal>>Controller {
   @Policies(Permission.READ_<<Model constant>>)
   public async findUnique(
     @Param() paramsDto: <<Model pascal>>FindUniqueParamsDto,
-    <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-    @Query() queryDto: <<Model pascal>>FindUniqueQueryDto,
-    <<<}>>>
     <<if Fields ownership >>
     @CurrentAbilities() abilities: AppAbility,
     <<endif>>
   ) {
     const formattedParams = this.<<Model camel>>RestDtoService.formatFindUniqueDtos(
       paramsDto,
-    <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-      queryDto,
-    <<<}>>>
     );
  
     const <<Model camel>> = await this.<<Model camel>>Service.findUnique(formattedParams);
@@ -277,7 +268,10 @@ export class <<Model pascal>>Controller {
     @Public()
     <<endif>>
   <<endif>>
-  @Policies(Permission.CREATE_UPDATE_<<Model constant>>)
+  @Policies(
+    Permission.UPDATE_<<Model constant>>,
+    Permission.CREATE_<<Model constant>>,
+  )
   public async upsert(
     @Param() paramsDto: <<Model pascal>>UpsertParamsDto,
     @Body() bodyDto: <<Model pascal>>UpsertBodyDto,
@@ -332,7 +326,10 @@ export class <<Model pascal>>Controller {
     @Public()
     <<endif>>
   <<endif>>
-  @Policies(Permission.CREATE_UPDATE_<<Model constant>>)
+  @Policies(
+    Permission.UPDATE_<<Model constant>>,
+    Permission.CREATE_<<Model constant>>,
+  )
   public async upsertWithoutParam(
     @Body() { <<for Fields primary primaryField>><<primaryField camel>><<endfor>>, ...bodyDto }: <<Model pascal>>UpsertBodyWithPrimaryDto,
     <<if Fields ownership and not primary>>@CurrentAbilities() abilities: AppAbility,<<endif>>

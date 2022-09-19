@@ -1,7 +1,7 @@
 import { <<Model pascal>>CreateBodyDto } from '../..';
   
 import {
-<<for Fields not internal field>>
+<<for Fields not internal and not manyOne field>>
   <<if field not entity>>
   mock<<Model pascal>><<field pascal>>Factory,
   <<elseif field oneOne or oneMany>>
@@ -20,7 +20,7 @@ export function mock<<Model pascal>>CreateBodyDtoFactory(
   override: Partial<<<Model pascal>>CreateBodyDto> = {}
 ): <<Model pascal>>CreateBodyDto {
   return {
-  <<for Fields not internal field>>
+  <<for Fields not internal and not manyOne field>>
     <<if field not entity>>
     <<field camel>>: mock<<Model pascal>><<field pascal>>Factory(),
     <<elseif field oneOne or oneMany>>
@@ -36,7 +36,7 @@ export function mock<<Model pascal>>CreateBodyDtoFactory(
 export function mock<<Model pascal>>sCreateBodyDtoFactory(override: Partial< <<Model pascal>>CreateBodyDto > = {}, quantity: number = 1): <<Model pascal>>CreateBodyDto[] {
   <<if Fields not internal and not boolean and not enum and unique>>
   const uniqueValues: <<Model pascal>>UniqueValues = {
-    <<for Fields not internal and not boolean and not enum and unique field>>
+    <<for Fields not internal and not boolean and not enum and unique and not manyOne field>>
       <<if field not entity>>
       <<field camel>>:[],
       <<else>>
@@ -59,7 +59,7 @@ export function mock<<Model pascal>>sCreateBodyDtoFactory(override: Partial< <<M
       <<<}>>>
     <<<})>>>
     ) {
-      <<for Fields not internal and not boolean and not enum and unique field>>
+      <<for Fields not internal and not boolean and not enum and unique and not manyOne field>>
         <<if field not entity>>
         if(override.<<field camel>>) {
           override.<<field camel>> = mock<<Model pascal>><<field pascal>>Factory();
@@ -72,7 +72,7 @@ export function mock<<Model pascal>>sCreateBodyDtoFactory(override: Partial< <<M
       <<endfor>> 
       tmp<<Model pascal>> = mock<<Model pascal>>CreateBodyDtoFactory(override);
     }
-    <<for Fields not internal and not boolean and not enum and unique field>>
+    <<for Fields not internal and not boolean and not enum and unique and not manyOne field>>
       <<if field not entity>>
       uniqueValues.<<field camel>>.push(tmp<<Model pascal>>.<<field camel>>);
       <<else>>
