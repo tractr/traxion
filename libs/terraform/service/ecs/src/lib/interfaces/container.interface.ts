@@ -79,6 +79,7 @@ export interface ContainerPublicConfig {
   cpu?: number;
   memory?: number;
   environments?: Record<string, EnvironmentOrSecretValue>;
+  labels?: Record<string, string>;
 }
 
 export type ContainerConfig = ContainerInternalConfig & ContainerPublicConfig;

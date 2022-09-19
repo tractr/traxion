@@ -13,6 +13,7 @@ export class ZoneGroup extends AwsComponent<
   protected createComponents() {
     const certificates = new CertificatesComponent(this, 'cert', {
       domainName: this.config.domainName,
+      subjectAlternativeNames: this.config.subjectAlternativeNames,
     });
     this.artifacts = {
       ...certificates.artifacts,

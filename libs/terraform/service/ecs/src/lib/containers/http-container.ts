@@ -15,6 +15,7 @@ export abstract class HttpContainer<
 > extends BackendContainer<T> {
   protected getDockerLabels(): Record<string, string> {
     return {
+      ...super.getDockerLabels(),
       ...this.getHttpPathPrefixDockerLabels(),
       ...this.getAuthDockerLabels(),
       ...this.getMiddlewaresListDockerLabels(),
