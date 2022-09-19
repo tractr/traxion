@@ -3,6 +3,7 @@ import { ReverseProxyContainerConfig } from './interfaces';
 import {
   ContainerDefinition,
   HttpContainer,
+  HttpContainerPathPrefixConfig,
 } from '@tractr/terraform-service-ecs';
 
 export class ReverseProxyContainer extends HttpContainer<ReverseProxyContainerConfig> {
@@ -42,11 +43,18 @@ export class ReverseProxyContainer extends HttpContainer<ReverseProxyContainerCo
 
   protected getHttpPathPrefixDockerLabels(): Record<string, string> {
     const labels = super.getHttpPathPrefixDockerLabels();
+    const prefixes: HttpContainerPathPrefixConfig[] = Array.isArray(
+      this.config.path,
+    )
+      ? this.config.path
+      : [this.config.path];
 
     const name = this.getRouterName();
-    labels[
-      `traefik.http.routers.${name}.rule`
-    ] = `PathPrefix(\`${this.config.path.prefix}/{service:[a-z]+}/\`) || HeadersRegexp(\`Referer\`, \`.*${this.config.path.prefix}/.*\`)`;
+    prefixes.forEach(({ prefix }) => {
+      labels[
+        `traefik.http.routers.${name}.rule`
+      ] = `PathPrefix(\`${prefix}/{service:[a-z]+}/\`) || HeadersRegexp(\`Referer\`, \`.*${prefix}/.*\`)`;
+    });
 
     return labels;
   }
