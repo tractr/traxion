@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.60.1](https://github.com/tractr/stack/compare/v1.60.0...v1.60.1) (2022-09-21)
+
+
+### Bug Fixes
+
+* update getConcatValueByPath for prisma query ([#510](https://github.com/tractr/stack/issues/510)) ([c9be995](https://github.com/tractr/stack/commit/c9be995fab130aaaf8b1e530134f4f7dcfb78c7a))
+
+
+
 # [1.60.0](https://github.com/tractr/stack/compare/v1.59.0...v1.60.0) (2022-09-19)
 
 
