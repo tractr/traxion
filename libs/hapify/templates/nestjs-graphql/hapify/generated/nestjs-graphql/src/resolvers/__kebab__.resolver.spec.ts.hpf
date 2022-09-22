@@ -41,8 +41,8 @@ import {
 } from '../../../../nestjs-models-common';
 import {
   mock<<Model pascal>>Factory,
-<<for Fields not nullable and (oneOne or oneMany or manyMany) field>>
-  mock<<=field.model.names.pascal>>Factory,
+<<for Dependencies not nullable dep>>
+mock<<dep pascal>>Factory,
 <<endfor>>
 } from '../../../../models/mock';
  
