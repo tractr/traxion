@@ -1,6 +1,6 @@
 {
   "name": "@tractr/generated-casl",
-  "version": "1.60.1",
+  "version": "1.60.2",
   "dependencies": {
     "tslib": "^2.3.1"
   },
