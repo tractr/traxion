@@ -6,13 +6,9 @@ import {
   Input,
 } from '@angular/core';
 import {
-  AbstractControl,
   ControlValueAccessor,
   FormControl,
-  NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
-  ValidationErrors,
-  Validator,
 } from '@angular/forms';
 
 @Component({
@@ -26,24 +22,21 @@ import {
       useExisting: forwardRef(() => InputUiComponent),
       multi: true,
     },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => InputUiComponent),
-      multi: true,
-    },
   ],
 })
-export class InputUiComponent implements ControlValueAccessor, Validator {
+export class InputUiComponent implements ControlValueAccessor {
   @Input() placeholder?: string;
+  @Input() error?: unknown;
 
   public input = new FormControl();
+
   public onTouched!: () => void;
 
   writeValue(value: string): void {
     value && this.input.setValue(value);
   }
 
-  registerOnChange(fn: (value: string) => void) {
+  registerOnChange(fn: (value: string | null) => void) {
     this.input.valueChanges.subscribe(fn);
   }
 
@@ -53,16 +46,5 @@ export class InputUiComponent implements ControlValueAccessor, Validator {
 
   setDisabledState(isDisabled: boolean) {
     isDisabled ? this.input.disable() : this.input.enable();
-  }
-
-  validate(control: AbstractControl): ValidationErrors | null {
-    return this.input.valid
-      ? null
-      : {
-          invalidForm: {
-            valid: false,
-            message: 'input fields are invalid',
-          },
-        };
   }
 }

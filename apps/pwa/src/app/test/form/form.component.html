@@ -1,0 +1,23 @@
+<h1>Form test</h1>
+<form [formGroup]="form" (change)="displayForm()">
+  <tractr-input-ui
+    formControlName="name"
+    placeholder="name"
+    [error]="form.get('name')?.errors"
+  ></tractr-input-ui>
+  <tractr-input-ui
+    formControlName="email"
+    placeholder="email"
+  ></tractr-input-ui>
+  <tractr-input-ui formControlName="city" placeholder="city"></tractr-input-ui>
+</form>
+<br />
+<br />
+<br />
+<br />
+<br />
+Name: {{ form.controls.name.value }} <br />
+Email: {{ form.controls.email.value }} <br />
+City : {{ form.controls.city.value }}<br />
+Form is invalid: {{ form.invalid }}<br />
+Form errors: {{ form.errors }}

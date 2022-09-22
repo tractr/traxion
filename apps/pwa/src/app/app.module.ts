@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -9,6 +10,7 @@ import { User as UserType } from '@prisma/client';
 import { AppConfig } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormComponent } from './test/form/form.component';
 
 import {
   AngularAuthenticationModule,
@@ -20,12 +22,13 @@ import {
   AngularConfigModule,
   AngularConfigService,
 } from '@tractr/angular-config';
+import { AngularUiModule } from '@tractr/angular-ui';
 import { AngularRextModule } from '@tractr/generated-angular-rext-client';
 import { rolePermissions } from '@tractr/generated-casl';
 import { User } from '@tractr/generated-models';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FormComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -78,6 +81,8 @@ import { User } from '@tractr/generated-models';
       }),
       deps: [ANGULAR_CONFIG_SERVICE],
     }),
+    AngularUiModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
