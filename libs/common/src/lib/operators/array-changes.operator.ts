@@ -1,5 +1,5 @@
 import { OperatorFunction } from 'rxjs';
-import { filter, scan } from 'rxjs/operators';
+import { filter, map, scan } from 'rxjs/operators';
 
 /**
  * Object returned by the arrayChanges operator.
@@ -58,6 +58,12 @@ export function arrayChanges<T>(
       filter(
         (changes) => changes.added.length > 0 || changes.removed.length > 0,
       ),
+      // Clone array to protect tracking from mutation
+      map((changes) => ({
+        value: [...changes.value],
+        added: [...changes.added],
+        removed: [...changes.removed],
+      })),
     );
   };
 }
