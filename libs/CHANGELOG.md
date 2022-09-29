@@ -2,6 +2,51 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.60.2](https://github.com/tractr/stack/compare/v1.60.1...v1.60.2) (2022-09-22)
+
+
+### Bug Fixes
+
+* delete doublon import in template hapify for nestj-graphql packages ([#511](https://github.com/tractr/stack/issues/511)) ([3f09522](https://github.com/tractr/stack/commit/3f0952257c47ce97d9a17aa470c9a2d163492b39))
+
+
+
+## [1.60.1](https://github.com/tractr/stack/compare/v1.60.0...v1.60.1) (2022-09-21)
+
+
+### Bug Fixes
+
+* update getConcatValueByPath for prisma query ([#510](https://github.com/tractr/stack/issues/510)) ([c9be995](https://github.com/tractr/stack/commit/c9be995fab130aaaf8b1e530134f4f7dcfb78c7a))
+
+
+
+# [1.60.0](https://github.com/tractr/stack/compare/v1.59.0...v1.60.0) (2022-09-19)
+
+
+### Features
+
+* add the possibility to configure the subjectAlternativeNames for the certificates ([#494](https://github.com/tractr/stack/issues/494)) ([0e357fb](https://github.com/tractr/stack/commit/0e357fbb5d987014e245054428425bff266f51ed))
+
+
+
+# [1.59.0](https://github.com/tractr/stack/compare/v1.58.7...v1.59.0) (2022-09-19)
+
+
+### Features
+
+* add the possibility to have multiple path rules in traeffic ([#509](https://github.com/tractr/stack/issues/509)) ([a6fb649](https://github.com/tractr/stack/commit/a6fb649a4e3a6f5b8e308ab90bc2b3b92fe6e7ae))
+
+
+
+## [1.58.7](https://github.com/tractr/stack/compare/v1.58.6...v1.58.7) (2022-09-19)
+
+
+### Bug Fixes
+
+* export back the config when bootstraping angular app ([#500](https://github.com/tractr/stack/issues/500)) ([f47d7a3](https://github.com/tractr/stack/commit/f47d7a3b3d29883426f489abb2ee167fc6879335))
+
+
+
 ## [1.58.6](https://github.com/tractr/stack/compare/v1.58.5...v1.58.6) (2022-09-13)
 
 

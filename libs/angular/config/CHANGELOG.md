@@ -2,6 +2,31 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.60.2](https://github.com/tractr/stack/compare/v1.60.1...v1.60.2) (2022-09-22)
+
+
+
+## [1.60.1](https://github.com/tractr/stack/compare/v1.60.0...v1.60.1) (2022-09-21)
+
+
+
+# [1.60.0](https://github.com/tractr/stack/compare/v1.59.0...v1.60.0) (2022-09-19)
+
+
+
+# [1.59.0](https://github.com/tractr/stack/compare/v1.58.7...v1.59.0) (2022-09-19)
+
+
+
+## [1.58.7](https://github.com/tractr/stack/compare/v1.58.6...v1.58.7) (2022-09-19)
+
+
+### Bug Fixes
+
+* export back the config when bootstraping angular app ([#500](https://github.com/tractr/stack/issues/500)) ([f47d7a3](https://github.com/tractr/stack/commit/f47d7a3b3d29883426f489abb2ee167fc6879335))
+
+
+
 ## [1.58.6](https://github.com/tractr/stack/compare/v1.58.5...v1.58.6) (2022-09-13)
 
 

@@ -2,6 +2,36 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.60.2](https://github.com/tractr/stack/compare/v1.60.1...v1.60.2) (2022-09-22)
+
+
+
+## [1.60.1](https://github.com/tractr/stack/compare/v1.60.0...v1.60.1) (2022-09-21)
+
+
+
+# [1.60.0](https://github.com/tractr/stack/compare/v1.59.0...v1.60.0) (2022-09-19)
+
+
+### Features
+
+* add the possibility to configure the subjectAlternativeNames for the certificates ([#494](https://github.com/tractr/stack/issues/494)) ([0e357fb](https://github.com/tractr/stack/commit/0e357fbb5d987014e245054428425bff266f51ed))
+
+
+
+# [1.59.0](https://github.com/tractr/stack/compare/v1.58.7...v1.59.0) (2022-09-19)
+
+
+### Features
+
+* add the possibility to have multiple path rules in traeffic ([#509](https://github.com/tractr/stack/issues/509)) ([a6fb649](https://github.com/tractr/stack/commit/a6fb649a4e3a6f5b8e308ab90bc2b3b92fe6e7ae))
+
+
+
+## [1.58.7](https://github.com/tractr/stack/compare/v1.58.6...v1.58.7) (2022-09-19)
+
+
+
 ## [1.58.6](https://github.com/tractr/stack/compare/v1.58.5...v1.58.6) (2022-09-13)
 
 

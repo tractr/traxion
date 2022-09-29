@@ -168,6 +168,6 @@ export abstract class Container<
   protected abstract getAppName(): string;
 
   protected getDockerLabels(): Record<string, string> {
-    return {};
+    return this.config.labels || {};
   }
 }

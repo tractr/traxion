@@ -3,11 +3,13 @@ import {
   ContainerPublicConfig,
 } from './container.interface';
 
+export interface HttpContainerPathPrefixConfig {
+  prefix: string;
+  stripPrefix: boolean;
+}
+
 export interface HttpContainerPublicConfig extends ContainerPublicConfig {
-  path: {
-    prefix: string;
-    stripPrefix: boolean;
-  };
+  path: HttpContainerPathPrefixConfig | HttpContainerPathPrefixConfig[];
   auth?: {
     user: string;
     passwordHash: string;

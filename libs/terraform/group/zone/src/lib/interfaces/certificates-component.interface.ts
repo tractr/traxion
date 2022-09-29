@@ -2,6 +2,7 @@ import { acm, route53 } from '@cdktf/provider-aws';
 
 export interface CertificatesComponentConfig {
   domainName: string;
+  subjectAlternativeNames?: string[];
 }
 
 export interface CertificatesComponentArtifacts {
