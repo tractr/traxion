@@ -166,7 +166,7 @@
     "@angular/cli": "~14.1.2",
     "@angular/compiler-cli": "14.1.2",
     "@angular/language-service": "14.1.2",
-    "@cdktf/provider-aws": "^7.0.68",
+    "@cdktf/provider-aws": "^9.0.0",
     "@commitlint/cli": "^16.3.0",
     "@commitlint/config-conventional": "^16.2.4",
     "@docusaurus/mdx-loader": "^2.0.1",
