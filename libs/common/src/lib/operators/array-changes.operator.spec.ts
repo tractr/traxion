@@ -116,6 +116,30 @@ describe('arrayChanges', () => {
     });
   });
 
+  it('should emit on first empty array', () => {
+    createTestScheduler(expect).run(({ cold, expectObservable }) => {
+      // Creates marbles
+      const inputMarble = ' -a-b--|';
+      const outputMarble = '-a----|';
+
+      // Creates input stream
+      const stream$ = cold(inputMarble, {
+        a: [],
+        b: [],
+      });
+      const pipedStream$ = stream$.pipe(arrayChanges<{ id: number }>());
+
+      // Tests output
+      expectObservable(pipedStream$).toBe(outputMarble, {
+        a: {
+          added: [],
+          removed: [],
+          value: [],
+        },
+      });
+    });
+  });
+
   it('should track changes even if the returned array is mutated', () => {
     createTestScheduler(expect).run(({ cold, expectObservable }) => {
       // Creates marbles
