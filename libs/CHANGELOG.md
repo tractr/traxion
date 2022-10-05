@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.61.1](https://github.com/tractr/stack/compare/v1.61.0...v1.61.1) (2022-10-05)
+
+
+### Bug Fixes
+
+* update style for full width input fields ([#513](https://github.com/tractr/stack/issues/513)) ([a6476d5](https://github.com/tractr/stack/commit/a6476d56f4acb3537b5b9a9cf2a3b8555d6601d1))
+
+
+
 # [1.61.0](https://github.com/tractr/stack/compare/v1.60.2...v1.61.0) (2022-09-29)
 
 
