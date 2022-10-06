@@ -16,6 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check the pull request name
-        uses: amannn/action-semantic-pull-request@v3.4.0
+        uses: amannn/action-semantic-pull-request@v4.6.0
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
