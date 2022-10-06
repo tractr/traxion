@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.61.2](https://github.com/tractr/stack/compare/v1.61.1...v1.61.2) (2022-10-06)
+
+
+### Bug Fixes
+
+* update file-storage download response ([#514](https://github.com/tractr/stack/issues/514)) ([94b2f52](https://github.com/tractr/stack/commit/94b2f52d922552244271d59a0ceec97a4d7fe3cd))
+
+
+
 ## [1.61.1](https://github.com/tractr/stack/compare/v1.61.0...v1.61.1) (2022-10-05)
 
 
