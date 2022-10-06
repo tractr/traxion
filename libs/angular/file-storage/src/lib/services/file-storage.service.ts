@@ -46,7 +46,7 @@ export class FileStorageService {
   public getPresignedDownloadUrl(file: string) {
     const { presignedDownloadEndpoint } = this.fileStorageConfiguration;
     return this.http
-      .get<FileStoragePresignedPostToken>(presignedDownloadEndpoint, {
+      .get<{ url: string }>(presignedDownloadEndpoint, {
         params: { file },
       })
       .pipe(shareReplay(1));
