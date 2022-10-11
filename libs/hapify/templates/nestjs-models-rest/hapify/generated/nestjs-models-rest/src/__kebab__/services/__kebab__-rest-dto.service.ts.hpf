@@ -1,10 +1,14 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { <<Model pascal>>, Prisma<<if Fields internal and ownership and not primary>>, User<<endif>>  } from '@prisma/client';
-	
+
 <<if Fields internal and entity>>
 import { Merge } from 'ts-essentials';
 <<endif>>
- 
+
+<<if Fields object>>
+import { JsonObject } from '../../../../../../../../common/src';
+<<endif>>
+
 import {
   <<if Fields manyMany>>
   formatEntityIds,
@@ -12,12 +16,15 @@ import {
   formatSort,
   formatFilterType,
 } from '@tractr/nestjs-core';
- 
+
 import {
   <<Model pascal>>Service,
   <<Model constant>>_SERVICE,
 } from '../../../../nestjs-models-common';
- 
+import { AppAbility } from '@tractr/generated-casl';
+import { accessibleBy } from '@casl/prisma';
+import { isEmpty } from 'lodash';
+
 import {
   <<Model pascal>>CountQueryDto,
   <<Model pascal>>CreateBodyDto,
@@ -29,15 +36,19 @@ import {
   <<Model pascal>>UpsertBodyDto,
   <<Model pascal>>UpsertParamsDto,
 } from '../../../../rest-dtos';
- 
+
+import { <<Model constant>>_SELECT } from '../constants';
+import { <<Model pascal>>WithRelationIds } from '../types';
+import { <<Model pascal>> as <<Model pascal>>Dto } from '../../../../models';
+
 @Injectable()
 export class <<Model pascal>>RestDtoService {
- 
+
   constructor(
     @Inject(<<Model constant>>_SERVICE)
     protected <<Model camel>>Service: <<Model pascal>>Service,
   ) {}
-	
+
 
 <<if Fields ownership and not primary>>
   /**
@@ -55,7 +66,7 @@ export class <<Model pascal>>RestDtoService {
       <<field camel>>,
 <<endfor>>
     } = bodyDto;
-	
+
     return {
 <<if Fields internal and not primary and (not entity or nullable)>>
       ...this.<<Model camel>>Service.getDefaultInternals(),
@@ -79,7 +90,7 @@ export class <<Model pascal>>RestDtoService {
 <<endfor>>
     }
   }
-	
+
   /**
    * Format dtos to upsert a <<Model pascal>>
    *
@@ -102,7 +113,7 @@ export class <<Model pascal>>RestDtoService {
       <<field camel>>,
 <<endfor>>
     } = bodyDto;
-	
+
     return {
     <<for Fields primary primaryField>>
       <<primaryField camel>>,
@@ -130,7 +141,7 @@ export class <<Model pascal>>RestDtoService {
     }
   }
 <<endif>>
- 
+
   /**
    * Format dtos to create a <<Model pascal>>
    *
@@ -162,7 +173,7 @@ export class <<Model pascal>>RestDtoService {
 <<endfor>>
     ...values
     } = bodyDto;
- 
+
     const data: Prisma.<<Model pascal>>CreateInput = {
 <<if Fields internal and not primary and (not entity or nullable)>>
       ...this.<<Model camel>>Service.getDefaultInternals(),
@@ -187,12 +198,12 @@ export class <<Model pascal>>RestDtoService {
   <<endif>>
 <<endfor>>
     }
-	
+
     return {
       data
     };
   }
- 
+
   /**
    * Format dtos to count <<Model pascal>> entities
    *
@@ -207,11 +218,11 @@ export class <<Model pascal>>RestDtoService {
       <<field camel>>,
       <<endfor>>
     } = queryDto;
- 
+
     const countArgs: Prisma.<<Model pascal>>CountArgs = {};
- 
+
     const where: Prisma.<<Model pascal>>WhereInput = {};
-	
+
     <<<getSearchableFields(root).forEach((field) => {>>>
       <<if field oneOne>>
     if (<<field camel>>) where.<<field camel>> = { id: <<field camel>> };
@@ -225,12 +236,12 @@ export class <<Model pascal>>RestDtoService {
     if (<<field camel>>) where.<<field camel>> = formatFilterType(<<field camel>>, <<if field datetime>>'datetime'<<elseif field number>>'number'<<elseif field string>>'string'<<elseif field boolean>>'boolean'<<elseif field enum>>'enum'<<else>>'json'<<endif>>, <<if field multiple>>true<<else>>false<<endif>>);
       <<endif>>
     <<<})>>>
- 
+
     if (Object.keys(where).length > 0) countArgs.where = where;
- 
+
     return countArgs;
   }
- 
+
   /**
    * Format dtos to find a unique <<Model pascal>>
    *
@@ -242,54 +253,38 @@ export class <<Model pascal>>RestDtoService {
   ): Prisma.<<Model pascal>>FindUniqueArgs {
     return {
       where: { ...paramsDto },
+      select: <<Model constant>>_SELECT,
     };
   }
- 
+
   /**
    * Format dtos to find many <<Model pascal>> entities
    *
    * @param queryDto - A valid query dto to filter <<Model pascal>> entities
    * @returns prisma parameters to find many <<Model pascal>> entities
    */
-  public formatFindManyDto(
-    queryDto: <<Model pascal>>FindManyQueryDto
-  ): Prisma.<<Model pascal>>FindManyArgs {
-    const {
-      sort,
-      order,
-      take,
-      skip,
-      <<for Fields searchable field>>
-      <<field camel>>,
-      <<endfor>>
-    } = queryDto;
- 
-    const findManyArgs: Prisma.<<Model pascal>>FindManyArgs = {};
- 
-    const where: Prisma.<<Model pascal>>WhereInput = {};
-	
-    <<<getSearchableFields(root).forEach((field) => {>>>
-      <<if field oneOne>>
-    if (<<field camel>>) where.<<field camel>> = { id: <<field camel>> };
-      <<elseif field oneMany>>
-    if (<<field camel>>) where.<<field camel>> = { id: { in: formatFilterType(<<field camel>>, 'string', true).equals } };
-      <<elseif field manyOne>>
-    if (<<field camel>>) where.<<field camel>> = { every: { id: { in: formatFilterType(<<field camel>>, 'string', true).equals } }, some: {} };
-      <<elseif field manyMany>>
-    if (<<field camel>>) where.<<field camel>> = { some: { id: { in: formatFilterType(<<field camel>>, 'string', true).equals } } };
-      <<else>>
-    if (<<field camel>>) where.<<field camel>> = formatFilterType(<<field camel>>, <<if field datetime>>'datetime'<<elseif field number>>'number'<<elseif field string>>'string'<<elseif field boolean>>'boolean'<<elseif field enum>>'enum'<<else>>'json'<<endif>>, <<if field multiple>>true<<else>>false<<endif>>);
-      <<endif>>
-    <<<})>>>
- 
-    if (Object.keys(where).length > 0) findManyArgs.where = where;
-    if (sort) findManyArgs.orderBy = formatSort(sort, order);
-    if (skip) findManyArgs.skip = Number(skip);
-    if (take) findManyArgs.take = Number(take);
- 
-    return findManyArgs;
+  public formatFindManyDtoToQuery(
+    queryDto: <<Model pascal>>FindManyQueryDto,
+    abilities: AppAbility,
+  ) {
+    const { sort, order, take, skip, ...filters } = queryDto;
+
+    return {
+      // Set where clause with filters and ownership constraints
+      where: this.getWhereClauseWithOwnershipConstraints(
+        filters,
+        abilities,
+      ),
+      // Set select clause with ownership checks
+      select: this.getSelectClauseWithOwnershipConstraints(abilities),
+      // Set sort clause
+      orderBy: sort ? formatSort(sort, order) : undefined,
+      // Set pagination clauses
+      skip: skip ?  Number(skip) : undefined,
+      take: take ? Number(take) : undefined,
+    };
   }
- 
+
   /**
    * Format dtos to update a <<Model pascal>>
    *
@@ -307,7 +302,7 @@ export class <<Model pascal>>RestDtoService {
     <<endfor>>
       ...values
     } = bodyDto;
- 
+
     const data: Prisma.<<Model pascal>>UpdateInput = {
 <<for Fields not internal and entity and not manyOne field>>
   <<if field oneOne or oneMany>>
@@ -320,7 +315,7 @@ export class <<Model pascal>>RestDtoService {
     }
     return { data, where: { ...paramsDto } };
   }
- 
+
   /**
    * Format dtos to create or update a <<Model pascal>>
    *
@@ -354,7 +349,7 @@ export class <<Model pascal>>RestDtoService {
     <<endfor>>
     ...values
     } = bodyDto;
- 
+
     const create: Prisma.<<Model pascal>>CreateInput = {
     <<if Fields internal and not primary and (not entity or nullable)>>
       ...this.<<Model camel>>Service.getDefaultInternals(),
@@ -379,7 +374,7 @@ export class <<Model pascal>>RestDtoService {
   <<endif>>
 <<endfor>>
     };
- 
+
     const update: Prisma.<<Model pascal>>UpdateInput = {
       ...values,
 <<for Fields not internal and entity and not manyOne field>>
@@ -406,7 +401,7 @@ export class <<Model pascal>>RestDtoService {
       where: { ...paramsDto }
     };
   }
- 
+
   /**
    * Format dtos to delete a unique <<Model pascal>>
    *
@@ -418,6 +413,106 @@ export class <<Model pascal>>RestDtoService {
   ): Prisma.<<Model pascal>>DeleteArgs {
     return { where: { ...paramsDto } };
   }
+
+  public getWhereClauseWithOwnershipConstraints(
+    filters: <<Model pascal>>CountQueryDto,
+    abilities: AppAbility
+  ): Prisma.<<Model pascal>>WhereInput {
+
+    // Init where clause
+    const filterConstraints: Prisma.<<Model pascal>>WhereInput = {
+    <<<getSearchableFields(root).forEach((field) => {>>>
+      <<if field oneOne>>
+        <<field camel>>: filters.<<field camel>> ?  { id: filters.<<field camel>> } : undefined,
+      <<elseif field oneMany>>
+        <<field camel>>: filters.<<field camel>> ?  { id: { in: formatFilterType(filters.<<field camel>>, 'string', true).equals } } : undefined,
+      <<elseif field manyMany>>
+        <<field camel>>: filters.<<field camel>> ? { some: { id: { in: formatFilterType(filters.<<field camel>>, 'string', true).equals } } } : undefined,
+      <<else>>
+        <<field camel>>: filters.<<field camel>> ? formatFilterType(filters.<<field camel>>, <<if field datetime>>'datetime'<<elseif field number>>'number'<<elseif field string>>'string'<<elseif field boolean>>'boolean'<<elseif field enum>>'enum'<<else>>'json'<<endif>>, <<if field multiple>>true<<else>>false<<endif>>)  : undefined,
+      <<endif>>
+    <<<})>>>
+    };
+
+    const ownershipConstraints = accessibleBy(abilities).<<Model pascal>>;
+
+    const constraints = [filterConstraints, ownershipConstraints].filter(constraint => !isEmpty(constraint));
+
+    if (constraints.length === 0) return {};
+    if (constraints.length === 1) return constraints[0];
+    return {
+      AND: constraints
+    }
+  }
+
+  public getSelectClauseWithOwnershipConstraints(abilities: AppAbility) {
+    // Get default select clause
+    const select = { ...<<Model constant>>_SELECT };
+
+    if (!abilities) return select;
+
+    // Add ownership constraints
+    return {
+      ...select,
+      <<for Fields manyMany field>>
+        <<field camel>>: {
+          ...select.<<field camel>>,
+          where: !isEmpty(accessibleBy(abilities).<<field.model pascal>>) ?
+            accessibleBy(abilities).<<field.model pascal>>
+            : undefined
+        },
+      <<endfor>>
+      <<for root.referencedIn ref>>
+        <<for ref.fields oneOne or oneMany or manyMany field>>
+          <<-field backRelation camel>>: {
+            ...select.<<-field backRelation camel>>,
+            where: !isEmpty(accessibleBy(abilities).<<ref pascal>>) ?
+              accessibleBy(abilities).<<ref pascal>>
+              : undefined
+          },
+        <<endfor>>
+      <<endfor>>
+    }
+  }
+
+  public formatEntityWithRelationIdsToDto({
+      <<for Fields manyMany field>>
+        <<field camel>>,
+      <<endfor>>
+
+      <<for root.referencedIn ref>>
+        <<for ref.fields oneOne or oneMany or manyMany field>>
+          <<-field backRelation camel>>,
+        <<endfor>>
+      <<endfor>>
+
+    ...entity
+  }: <<Model pascal>>WithRelationIds):<<Model pascal>>Dto {
+    return {
+      ...entity,
+
+      <<for Fields object field>>
+        <<field camel>>: entity.<<field camel>> as JsonObject<<if field multiple>>[]<<endif>>,
+      <<endfor>>
+
+      <<for Fields manyMany field>>
+        <<field camel>>Ids: <<field camel>>.map(({id}) => id),
+      <<endfor>>
+
+      <<for root.referencedIn ref>>
+        <<for ref.fields oneOne or oneMany or manyMany field>>
+
+          <<if field oneOne>>
+            <<-field backRelation camel>>Id: <<-field backRelation camel>>?.id ?? null,
+          <<endif>>
+
+          <<if field oneMany or manyMany>>
+            <<-field backRelation camel>>Ids: <<-field backRelation camel>>.map(({id}) => id),
+          <<endif>>
+        <<endfor>>
+      <<endfor>>
+    };
+  }
 }
 <<<
 function getDefaultForType(f) {
@@ -427,7 +522,7 @@ function getDefaultForType(f) {
   else if (f.type === "number") return "equals";
   else if (f.type === "datetime") return "equals";
   else if (f.type === "object") return "equals";
-	
+
   return "UnknownType";
 }
 >>>
@@ -440,3 +535,4 @@ function getSearchableFields(model) {
     .filter((field) => field.searchable && !field.password && !field.hidden);
 }
 >>>
+

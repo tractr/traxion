@@ -13,22 +13,19 @@ export const <<Model constant>>_SELECT = Prisma.validator<Prisma.<<Model pascal>
 <<endfor>>
 
 
-<<for Fields oneOne or oneMany field>>
-  <<field camel>>Id: true,
-<<endfor>>
+<<for Fields oneOne or oneMany or manyMany field>>
+  <<if field oneOne or oneMany>>
+    <<field camel>>Id: true,
+  <<endif>>
 
-<<for Fields manyMany field>>
-  <<field camel>>: { select: { id: true }},
+  <<if field manyMany>>
+    <<field camel>>: { select: { id: true }},
+  <<endif>>
 <<endfor>>
 
 <<for root.referencedIn ref>>
-  <<for ref.fields oneOne field>>
-  <<-field backRelation camel>>: { select: { id: true }},
-  <<endfor>>
-
-  <<for ref.fields oneMany or manyMany field>>
-  <<-field backRelation camel>>: { select: { id: true }},
+  <<for ref.fields oneOne or oneMany or manyMany field>>
+    <<-field backRelation camel>>: { select: { id: true }},
   <<endfor>>
 <<endfor>>
 } as const);
-

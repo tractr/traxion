@@ -1,5 +1,3 @@
-
-/* eslint-disable import/no-cycle */
 import 'reflect-metadata';
 
 import {
@@ -27,7 +25,7 @@ import {
   IsOptional,
   <<endif>>
 
-  <<if Fields string or entity or enum or password>>
+  <<if Fields string or entity or enum>>
   IsString,
   <<endif>>
 
@@ -39,20 +37,13 @@ import {
   IsUrl,
   <<endif>>
 
-  <<if Fields primary>>
   IsUUID,
-  <<endif>>
-
 
   <<if Fields object>>
   IsObject,
    <<< if (root.f.multiple.some(e => e.type ==='object')) { >>>
   IsArray,
   <<< } >>>
-  <<endif>>
-
-  <<if Fields password>>
-  Length,
   <<endif>>
 
 } from 'class-validator';
@@ -92,8 +83,8 @@ import {
   */
 <<endif>>
 export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
-<<for Fields not manyOne field>>
-<<if Model hasNotes>>
+<<for Fields not entity and not hidden and not password field>>
+<<if field hasNotes>>
   /**
    * <<!field>>
    */
@@ -132,11 +123,6 @@ export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
   @IsEmail({}, <<=listModifier(field)>>)
   <<endif>>
 
-  <<if field password>>
-  @IsString()
-  @Length(8, 100)
-  <<endif>>
-
   <<if field url>>
   @IsUrl({}, <<=listModifier(field)>>)
   <<endif>>
@@ -173,11 +159,11 @@ export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
 
 <<for Fields manyMany field>>
   /**
-   * References to the associated <<field pascal>>s
+   * References to the associated <<field pascal>>
    */
   @IsString({each: true})
   @IsUUID("all", {each: true})
-  <<field camel>>Ids: string[];
+  <<field camel>>Ids: string[] = [];
 <<endfor>>
 
 <<for root.referencedIn ref>>
@@ -187,17 +173,17 @@ export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
    */
   @IsString()
   @IsUUID("all")
-  <<-field backRelation camel>>Id?: string;
+  <<-field backRelation camel>>Id: string | null = null;
 
   <<endfor>>
 
   <<for ref.fields oneMany or manyMany field>>
   /**
-   * Associated <<-field backRelation pascal>>s
+   * Associated <<-field backRelation pascal>>
    */
   @IsString({each: true})
   @IsUUID("all", {each: true})
-  <<-field backRelation camel>>Ids?: string[];
+  <<-field backRelation camel>>Ids: string[] = [];
 
   <<endfor>>
 <<endfor>>
@@ -206,8 +192,7 @@ export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
 <<<
 function typedProperty(f) {
   let out = f.names.camel;
-  if (f.type === "entity") out += "?: ";
-  else if (f.nullable) out += ": ";
+  if (f.nullable) out += ": ";
   else out += "!: ";
   if (f.type === "boolean") out += "boolean";
   else if (f.type === "string") out += "string";
@@ -215,11 +200,8 @@ function typedProperty(f) {
   else if (f.type === "number") out += "number";
   else if (f.type === "datetime") out += "Date";
   else if (f.type === "object") out += "JsonObject";
-  else if (f.type === "entity") {
-    out +=  f.model.names.pascal + (f.model.name !== root.name ? 'T' : '');
-  }
   if (f.multiple) out += "[]";
-  if (f.nullable && f.type !== "entity") out += " | null = null";
+  if (f.nullable) out += " | null = null";
   out += ";";
   return out;
 }
