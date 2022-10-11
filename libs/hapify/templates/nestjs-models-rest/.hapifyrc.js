@@ -23,7 +23,27 @@ module.exports = {
       input: 'one',
     },
     {
-      path: 'generated/nestjs-models-rest/src/{kebab}/{kebab}-rest.constant.ts',
+      path: 'generated/nestjs-models-rest/src/{kebab}/constants/{kebab}-select.constant.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/nestjs-models-rest/src/{kebab}/constants/{kebab}-tokens.constant.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/nestjs-models-rest/src/{kebab}/constants/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/nestjs-models-rest/src/{kebab}/types/{kebab}-with-relation-ids.type.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/nestjs-models-rest/src/{kebab}/types/index.ts',
       engine: 'hpf',
       input: 'one',
     },

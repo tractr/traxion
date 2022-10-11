@@ -1,0 +1,34 @@
+import { Prisma } from '@prisma/client';
+
+export const <<Model constant>>_SELECT = Prisma.validator<Prisma.<<Model pascal>>Select>()({
+
+<<for Fields not entity field>>
+  <<if field not hidden>>
+  <<field camel>>: true,
+  <<endif>>
+
+  <<if field hidden>>
+  <<field camel>>: false,
+  <<endif>>
+<<endfor>>
+
+
+<<for Fields oneOne or oneMany field>>
+  <<field camel>>Id: true,
+<<endfor>>
+
+<<for Fields manyMany field>>
+  <<field camel>>: { select: { id: true }},
+<<endfor>>
+
+<<for root.referencedIn ref>>
+  <<for ref.fields oneOne field>>
+  <<-field backRelation camel>>: { select: { id: true }},
+  <<endfor>>
+
+  <<for ref.fields oneMany or manyMany field>>
+  <<-field backRelation camel>>: { select: { id: true }},
+  <<endfor>>
+<<endfor>>
+} as const);
+

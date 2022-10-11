@@ -1,0 +1,6 @@
+import { Prisma } from '@prisma/client';
+import { <<Model constant>>_SELECT } from '../constants';
+
+export type <<Model pascal>>WithRelationIds = Prisma.<<Model pascal>>GetPayload<{
+  select: typeof <<Model constant>>_SELECT,
+}>;

@@ -1,81 +1,67 @@
+
 /* eslint-disable import/no-cycle */
 import 'reflect-metadata';
-	
-<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-import { Type } from 'class-transformer';
-<<<}>>>
-	
-import {  
+
+import {
   <<if Fields boolean>>
-  IsBoolean, 
+  IsBoolean,
   <<endif>>
-	
+
   <<if Fields email>>
-  IsEmail, 
+  IsEmail,
   <<endif>>
-	
+
   <<if Fields enum>>
   IsIn,
   <<endif>>
-	
+
   <<if Fields number or datetime>>
   IsNumber,
   <<endif>>
-	
+
   <<if Fields datetime>>
   IsDate,
   <<endif>>
-	
+
   <<if Fields nullable>>
   IsOptional,
   <<endif>>
-	
+
   <<if Fields string or entity or enum or password>>
   IsString,
   <<endif>>
-	
+
   <<if Fields (string and not text)>>
   MaxLength,
   <<endif>>
-	
+
   <<if Fields url>>
-  IsUrl, 
+  IsUrl,
   <<endif>>
-	
+
   <<if Fields primary>>
   IsUUID,
   <<endif>>
-	
-  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-  ValidateNested,
-  <<<}>>>
-	
+
+
   <<if Fields object>>
   IsObject,
    <<< if (root.f.multiple.some(e => e.type ==='object')) { >>>
   IsArray,
   <<< } >>>
   <<endif>>
-	
+
   <<if Fields password>>
-  Length, 
+  Length,
   <<endif>>
-	
+
 } from 'class-validator';
-	
+
 <<if Fields object>>
 import type { JsonObject } from '@tractr/common';
 <<endif>>
-	
-<<<for (const relation of getRelations()) {>>>
-import {
- <<relation pascal>>,
-} from './<<relation kebab>>';
-import type {
- <<relation pascal>> as <<relation pascal>>T,
-} from './<<relation kebab>>';
-<<<}>>>
- 
+
+
 <<if Fields enum>>
 import {
   <<for Fields enum enumField>>
@@ -83,9 +69,9 @@ import {
   <<endfor>>
 } from '../enums';
 <<endif>>
-	
+
 import { <<Model pascal>> as Prisma<<Model pascal>> } from '@prisma/client';
-	
+
 <<if Fields boolean or datetime or number>>
 import {
   <<if Fields boolean>>
@@ -99,85 +85,80 @@ import {
   <<endif>>
 } from '@tractr/common';
 <<endif>>
-	
-<<if Model hasNotes>> 
+
+<<if Model hasNotes>>
  /**
   * <<!Model>>
   */
 <<endif>>
 export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
 <<for Fields not manyOne field>>
-<<if Model hasNotes>> 
+<<if Model hasNotes>>
   /**
    * <<!field>>
    */
 <<endif>>
   <<if field boolean>>
   @TransformStringToBoolean()
-  @IsBoolean(<<=listModifier(field)>>) 
+  @IsBoolean(<<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field string or enum>>
-  @IsString(<<=listModifier(field)>>) 
+  @IsString(<<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field string and not text>>
   @MaxLength(<<< if (field.meta.maxLength) { >>><<-field maxLength raw>><<<}else{>>>255<<<}>>>, {
     message: '<<field pascal>> field is too long',
   })
   <<endif>>
-	
+
   <<if field primary>>
-  @IsUUID("all", <<=listModifier(field)>>) 
+  @IsUUID("all", <<=listModifier(field)>>)
   <<endif>>
-	
-  <<if field entity>>
-  @ValidateNested(<<=listModifier(field)>>) 
-  @Type(() => <<=field.model.names.pascal>>)
-  <<endif>>
-	
+
   <<if field object>>
-  @IsObject(<<=listModifier(field)>>) 
+  @IsObject(<<=listModifier(field)>>)
   <<< if (field.multiple) { >>>
   @IsArray()
   <<< } >>>
   <<endif>>
-	
+
   <<if field enum>>
-  @IsIn(Object.values(<<Model pascal>><<field pascal>>),<<=listModifier(field)>>) 
+  @IsIn(Object.values(<<Model pascal>><<field pascal>>),<<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field email>>
-  @IsEmail({}, <<=listModifier(field)>>) 
+  @IsEmail({}, <<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field password>>
   @IsString()
   @Length(8, 100)
   <<endif>>
-	
+
   <<if field url>>
-  @IsUrl({}, <<=listModifier(field)>>) 
+  @IsUrl({}, <<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field number>>
   @IsNumber({<<if field not latitude and not longitude and not float>>maxDecimalPlaces: 0<<endif>>},<<=listModifier(field)>>)
   @TransformStringToInt()
   <<endif>>
-	
+
   <<if field datetime>>
   @IsDate(<<=listModifier(field)>>)
   @TransformStringToDate()
   <<endif>>
-	
+
   <<if field nullable>>
   @IsOptional()
   <<endif>>
-	
+
   <<=typedProperty(field)>>
-   
+
 <<endfor>>
-	
+
 <<for Fields oneOne or oneMany field>>
   /**
    * Reference to the associated <<field pascal>>
@@ -185,24 +166,43 @@ export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
   <<if field nullable>>
   @IsOptional()
   <<endif>>
-  @IsString() 
-  @IsUUID("all") 
+  @IsString()
+  @IsUUID("all")
   <<field camel>>Id<<if field nullable>>: string | null = null;<<else>>!: string;<<endif>>
-  
 <<endfor>>
+
+<<for Fields manyMany field>>
+  /**
+   * References to the associated <<field pascal>>s
+   */
+  @IsString({each: true})
+  @IsUUID("all", {each: true})
+  <<field camel>>Ids: string[];
+<<endfor>>
+
 <<for root.referencedIn ref>>
-  <<for ref.fields not manyOne field>>
+  <<for ref.fields oneOne field>>
   /**
    * Associated <<-field backRelation pascal>>
    */
-  @ValidateNested(<<if field oneMany or manyMany>>{ each: true}<<endif>>) 
-  @Type(() => <<ref pascal>>)
-  <<-field backRelation camel>>?: <<ref pascal>><<<if (root.name !== ref.name) {>>>T<<<}>>><<if field oneMany or manyMany>>[]<<endif>>;
-    
+  @IsString()
+  @IsUUID("all")
+  <<-field backRelation camel>>Id?: string;
+
+  <<endfor>>
+
+  <<for ref.fields oneMany or manyMany field>>
+  /**
+   * Associated <<-field backRelation pascal>>s
+   */
+  @IsString({each: true})
+  @IsUUID("all", {each: true})
+  <<-field backRelation camel>>Ids?: string[];
+
   <<endfor>>
 <<endfor>>
 }
-	
+
 <<<
 function typedProperty(f) {
   let out = f.names.camel;
@@ -224,14 +224,14 @@ function typedProperty(f) {
   return out;
 }
 >>>
-	
+
 <<<
 function listModifier(f) {
   if (f.multiple) return "{ each: true}";
   else return "";
 }
 >>>
-	
+
 <<<
 function getRelations() {
   const seen = { [root.id]: true };
@@ -239,4 +239,4 @@ function getRelations() {
     .filter((m) => (seen[m.id] ? false : (seen[m.id] = true)));
 }
 >>>
-	
+

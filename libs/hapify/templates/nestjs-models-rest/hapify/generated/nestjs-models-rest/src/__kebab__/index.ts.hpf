@@ -1,3 +1,6 @@
 export * from './controllers';
 export * from './services';
-export * from './<<Model kebab>>-rest.constant';
+export {
+  <<Model constant>>_REST_DTO_SERVICE,
+  <<Model constant>>_CONTROLLER,
+} from './constants';

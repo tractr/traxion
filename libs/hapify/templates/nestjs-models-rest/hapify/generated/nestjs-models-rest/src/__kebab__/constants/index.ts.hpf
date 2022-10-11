@@ -1,0 +1,2 @@
+export * from './<<Model kebab>>-tokens.constant';
+export * from './<<Model kebab>>-select.constant';
