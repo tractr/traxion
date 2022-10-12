@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.61.3](https://github.com/tractr/stack/compare/v1.61.2...v1.61.3) (2022-10-12)
+
+
+### Bug Fixes
+
+* **react-admin:** fix: make object field input work on react admin ([#518](https://github.com/tractr/stack/issues/518)) ([6e7eb6b](https://github.com/tractr/stack/commit/6e7eb6ba147ab757264e3f1ec143a528fcbaa888))
+
+
+
 ## [1.61.2](https://github.com/tractr/stack/compare/v1.61.1...v1.61.2) (2022-10-06)
 
 

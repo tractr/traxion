@@ -1,6 +1,6 @@
 {
   "name": "@tractr/nestjs-testing",
-  "version": "1.61.2",
+  "version": "1.61.3",
   "description": "Core module for nestjs backend",
   "repository": {
     "type": "git",
