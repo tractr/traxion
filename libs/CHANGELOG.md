@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.62.0](https://github.com/tractr/stack/compare/v1.61.3...v1.62.0) (2022-10-12)
+
+
+### Features
+
+* **terraform-component-s3-user:** avoid minio missing configuration ([#517](https://github.com/tractr/stack/issues/517)) ([141ebac](https://github.com/tractr/stack/commit/141ebaca51c24873d97f7dc1f50bc81c6ff4839b))
+
+
+
 ## [1.61.3](https://github.com/tractr/stack/compare/v1.61.2...v1.61.3) (2022-10-12)
 
 
