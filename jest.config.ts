@@ -73,5 +73,6 @@ export default {
     '<rootDir>/libs/terraform/service/logstash',
     '<rootDir>/apps/pwa',
     '<rootDir>/libs/nestjs/password',
+    '<rootDir>/libs/hapify/core',
   ],
 };
