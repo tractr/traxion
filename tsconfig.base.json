@@ -72,6 +72,7 @@
       ],
       "@trxn/hapify-common": ["libs/hapify/hapify-common/src/index.ts"],
       "@trxn/hapify-config": ["libs/config/hapify/src/index.ts"],
+      "@trxn/hapify-core": ["libs/hapify/core/src/index.ts"],
       "@trxn/hapify-generate-config": [
         "libs/hapify/generate-config/src/index.ts"
       ],
