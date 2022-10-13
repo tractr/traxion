@@ -69,10 +69,17 @@
       "@trxn/generated-rext-client": [
         "libs/generated/rext-client/src/index.ts"
       ],
+<<<<<<< HEAD
       "@trxn/hapify-common": ["libs/hapify/hapify-common/src/index.ts"],
       "@trxn/hapify-config": ["libs/config/hapify/src/index.ts"],
       "@trxn/hapify-core": ["libs/hapify/core/src/index.ts"],
       "@trxn/hapify-generate-config": [
+=======
+      "@tractr/hapify-common": ["libs/hapify/hapify-common/src/index.ts"],
+      "@tractr/hapify-config": ["libs/config/hapify/src/index.ts"],
+      "@tractr/hapify-core": ["libs/hapify/core/src/index.ts"],
+      "@tractr/hapify-generate-config": [
+>>>>>>> 8d02ff093 (chore(hapify-core): add library)
         "libs/hapify/generate-config/src/index.ts"
       ],
       "@trxn/hapify-update-templates-import-path": [
@@ -159,6 +166,9 @@
       ],
       "@trxn/terraform-service-reverse-proxy": [
         "libs/terraform/service/reverse-proxy/src/index.ts"
+      ],
+      "@trxn/hapify-generator-graphql-resolvers": [
+        "libs/hapify/generators/graphql-resolvers/src/index.ts"
       ]
     },
     "resolveJsonModule": true,
