@@ -1,6 +1,6 @@
 import * as Case from 'case';
 
-import { StringVariations } from './Interfaces';
+import { StringVariations } from './interfaces';
 
 /** Convert a string to camel case, pascal case, etc... */
 export function stringVariants(value: string): StringVariations {
