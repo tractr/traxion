@@ -19,16 +19,6 @@ export abstract class Field extends Node implements FieldProperties {
   ownership = false;
 
   /**
-   * Type of the field
-   */
-  abstract readonly type: string;
-
-  /**
-   * Sub type of the field, if any
-   */
-  abstract readonly subType: string | undefined;
-
-  /**
    * Allows to set boolean property and chain
    */
   setProperty(name: keyof FieldProperties, value: boolean): this {
