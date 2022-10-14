@@ -6,7 +6,7 @@ export class StringPasswordField extends StringField {
   /**
    * Set validation regex
    */
-  setValidationRegex(regex: string) {
+  setValidationRegex(regex: string): this {
     this._validationRegex = regex;
     return this;
   }

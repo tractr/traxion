@@ -23,5 +23,6 @@ export interface StringVariations {
   pascal: string;
   /** The string as lower camel case. Example `firstName`. */
   camel: string;
+  /** Returns a string for this object */
+  toString(): string;
 }
-export type StringVariationType = keyof StringVariations;
