@@ -17,5 +17,8 @@ export function stringVariants(value: string): StringVariations {
     compact: Case.snake(value).replace(/_/g, ''),
     pascal: Case.pascal(value),
     camel: Case.camel(value),
+    toString(): string {
+      return this.raw;
+    },
   };
 }
