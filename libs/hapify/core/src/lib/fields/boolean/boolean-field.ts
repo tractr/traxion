@@ -6,7 +6,7 @@ export class BooleanField extends Field {
   /**
    * Set default value
    */
-  setDefaultValue(value: boolean) {
+  setDefaultValue(value: boolean): this {
     this._defaultValue = value;
     return this;
   }

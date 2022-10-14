@@ -2,6 +2,11 @@ import { Field } from '../field';
 
 export class StringField extends Field {
   /**
+   * Default value of the string
+   */
+  protected _defaultValue: string | undefined;
+
+  /**
    * Min length of the string
    */
   protected _minLength: number | undefined;
@@ -28,6 +33,14 @@ export class StringField extends Field {
   }
 
   /**
+   * Set default value of the string
+   */
+  setDefaultValue(value: string): this {
+    this._defaultValue = value;
+    return this;
+  }
+
+  /**
    * Get min length of the string
    */
   get minLength(): number | undefined {
@@ -39,5 +52,12 @@ export class StringField extends Field {
    */
   get maxLength(): number | undefined {
     return this._maxLength;
+  }
+
+  /**
+   * Get default value of the string
+   */
+  get defaultValue(): string | undefined {
+    return this._defaultValue;
   }
 }

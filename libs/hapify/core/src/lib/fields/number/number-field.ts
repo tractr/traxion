@@ -2,12 +2,12 @@ import { Field } from '../field';
 
 export class NumberField extends Field {
   /**
-   * Min possible value of the fiekd
+   * Min possible value of the field
    */
   protected _min: number | undefined;
 
   /**
-   * Max possible value of the fiekd
+   * Max possible value of the field
    */
   protected _max: number | undefined;
 
