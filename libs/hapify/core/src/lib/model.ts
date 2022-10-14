@@ -1,4 +1,4 @@
-import { Field } from './fields';
+import { EntityField, Field } from './fields';
 import { Node } from './node';
 
 /**
@@ -39,4 +39,23 @@ export class Model extends Node {
   get fields(): Field[] {
     return Array.from(this._fields);
   }
+
+  /**
+   * The list of models referenced by this model
+   */
+  get dependencies(): Model[] {
+    return this.fields
+      .filter((field): field is EntityField => field instanceof EntityField)
+      .filter((field) => field.model !== this)
+      .map((field) => field.model);
+  }
+
+  /**
+   * The list of models that reference this model
+   */
+  // get dependents(): Model[] {
+  //   return this.root.models.filter((model) =>
+  //     model.dependencies.includes(this),
+  //   );
+  // }
 }
