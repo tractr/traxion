@@ -8,7 +8,7 @@ export abstract class Node {
   /**
    * All names variations
    */
-  protected _name = stringVariants(this.rawName);
+  protected readonly _name;
 
   /**
    * Metadata of the node
@@ -20,7 +20,9 @@ export abstract class Node {
    */
   protected _notes: string | undefined;
 
-  constructor(protected readonly rawName: string) {}
+  constructor(name: string) {
+    this._name = stringVariants(name);
+  }
 
   /**
    * Get the names of the node
