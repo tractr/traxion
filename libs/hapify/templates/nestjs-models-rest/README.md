@@ -1,6 +1,6 @@
 # Hapify - NestJS Models REST
 
-This package contains the hapify templates to generate nestjs REST API.
+This package contains the hapify templates to generate nestjs REST API.
 
 ## Installation
 

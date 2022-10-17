@@ -1,59 +1,65 @@
 <<if Fields not internal>>
-import {  
+
+<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+import { Type } from 'class-transformer';
+import { IdDto } from '@tractr/common';
+<<<}>>>
+
+import {
   <<if Fields boolean and not internal>>
-  IsBoolean, 
+  IsBoolean,
   <<endif>>
-	
+
   <<if Fields email and not internal>>
-  IsEmail, 
+  IsEmail,
   <<endif>>
-	
+
   <<if Fields enum and not internal>>
   IsIn,
   <<endif>>
-	
+
   <<if Fields number and not internal>>
   IsNumber,
   <<endif>>
-	
+
   <<if Fields datetime and not internal>>
   IsDate,
   <<endif>>
-	
+
   <<if Fields nullable and not internal>>
   IsOptional,
   <<endif>>
-	
+
   <<if Fields string or entity or enum and not internal>>
   IsString,
   <<endif>>
-	
+
   <<if Fields (string and not text)>>
   MaxLength,
   <<endif>>
-	
+
   <<if Fields url and not internal>>
-  IsUrl, 
+  IsUrl,
   <<endif>>
-	
-  <<if Fields entity and not internal>>
-  IsUUID,
-  <<endif>>
-	
+
+  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+  ValidateNested,
+  <<<}>>>
+
   <<if Fields object and not internal>>
-  IsObject, 
+  IsObject,
   <<< if (root.f.multiple.some(e => e.type ==='object')) { >>>
   IsArray,
   <<< } >>>
   <<endif>>
-	
+
 } from 'class-validator';
 <<endif>>
-	
+
 <<if Fields object>>
 import type { JsonObject } from '@tractr/common';
 <<endif>>
-	
+
 <<if Fields enum>>
 import {
   <<for Fields enum enumField>>
@@ -61,87 +67,113 @@ import {
   <<endfor>>
 } from '../../../models';
 <<endif>>
-	
+
 <<if Fields (number or boolean or datetime) and not internal>>
-import { 
+import {
   <<if Fields number and not internal>>
-  TransformStringToInt, 
+  TransformStringToInt,
   <<endif>>
-	
+
   <<if Fields boolean and not internal>>
   TransformStringToBoolean,
   <<endif>>
-	
+
   <<if Fields datetime and not internal>>
   TransformStringToDate,
   <<endif>>
 } from '@tractr/common';
 <<endif>>
- 
+
 export class <<Model pascal>>CreateBodyDto {
-<<for Fields not internal and not manyOne field>>
-	
+<<for Fields not internal and not entity field>>
+
   <<if field boolean>>
   @IsBoolean(<<=listModifier(field)>>)
   @TransformStringToBoolean()
   <<endif>>
-	
-  <<if field string or enum or entity>>
-  @IsString(<<=listModifier(field)>>) 
+
+  <<if field string or enum>>
+  @IsString(<<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field string and not text>>
   @MaxLength(<<< if (field.meta.maxLength) { >>><<-field maxLength raw>><<<}else{>>>255<<<}>>>, {
     message: '<<field pascal>> field is too long',
   })
   <<endif>>
-	
-  <<if field entity>>
-  @IsUUID("all", <<=listModifier(field)>>) 
-  <<endif>>
-	
+
   <<if field enum>>
-  @IsIn(Object.values(<<Model pascal>><<field pascal>>),<<=listModifier(field)>>) 
+  @IsIn(Object.values(<<Model pascal>><<field pascal>>),<<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field email>>
-  @IsEmail({}, <<=listModifier(field)>>) 
+  @IsEmail({}, <<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field url>>
-  @IsUrl({}, <<=listModifier(field)>>) 
+  @IsUrl({}, <<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field number>>
   @IsNumber({<<if field not latitude and not longitude and not float>>maxDecimalPlaces: 0<<endif>>},<<=listModifier(field)>>)
   @TransformStringToInt()
   <<endif>>
-	
+
   <<if field datetime>>
   @IsDate(<<=listModifier(field)>>)
   @TransformStringToDate()
   <<endif>>
-	
+
   <<if field nullable>>
   @IsOptional()
   <<endif>>
-	
+
   <<if field object>>
-  @IsObject(<<=listModifier(field)>>) 
+  @IsObject(<<=listModifier(field)>>)
   <<< if (field.multiple) { >>>
   @IsArray()
   <<< } >>>
   <<endif>>
-	
+
   <<=typedProperty(field)>>
-   
+
+<<endfor>>
+
+<<for Fields oneOne or oneMany field>>
+  <<if field nullable>>
+  @IsOptional()
+  <<endif>>
+  @Type(() => IdDto)
+  @ValidateNested()
+  <<field camel>><<if field nullable>>: IdDto | null = null;<<else>>!: IdDto;<<endif>>
+<<endfor>>
+
+<<for Fields manyMany field>>
+  @Type(() => IdDto)
+  @ValidateNested({each: true})
+  <<field camel>>: IdDto[] = [];
+<<endfor>>
+
+<<for root.referencedIn ref>>
+  <<for ref.fields oneOne field>>
+    @Type(() => IdDto)
+    @ValidateNested()
+    <<-field backRelation camel>>: IdDto | null = null;
+  <<endfor>>
+
+  <<for ref.fields oneMany or manyMany field>>
+  @Type(() => IdDto)
+  @ValidateNested({each: true})
+  <<-field backRelation camel>>: IdDto[] = [];
+
+  <<endfor>>
 <<endfor>>
 }
-	
+
 <<<
 function typedProperty(f) {
   let out = f.names.camel;
-  out += f.nullable ? "?" : "!";
+  out += f.nullable ? "" : "!";
   out += ": "
   if (f.type === "boolean") out += "boolean";
   else if (f.type === "string") out += "string";
@@ -149,19 +181,17 @@ function typedProperty(f) {
   else if (f.type === "number") out += "number";
   else if (f.type === "datetime") out += "Date";
   else if (f.type === "object") out += "JsonObject";
-  else if (f.type === "entity") {
-    out +=  "string";
-  }
   if (f.multiple) out += "[]";
+  if (f.nullable) out += " | null = null";
   out += ";";
   return out;
 }
 >>>
-	
+
 <<<
 function listModifier(f) {
   if (f.multiple) return "{ each: true}";
   else return "";
 }
 >>>
-	
+

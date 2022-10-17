@@ -689,7 +689,7 @@ All notable changes to this project will be documented in this file. See
 
 ### Features
 
-- update README of packages to publish new versions
+- update README of packages to publish new versions
   ([#77](https://github.com/tractr/stack/issues/77))
   ([e6bf415](https://github.com/tractr/stack/commit/e6bf415af3fe5588c15577f047a6262f81c1564f))
 

@@ -1,6 +1,10 @@
 {
+  "version": "3",
+  "name": "New project",
   "models": [
     {
+      "id": "ccebcf02-4b82-923f-114e-252c9455899d",
+      "name": "Answer",
       "accesses": {
         "count": "owner",
         "create": "owner",
@@ -12,63 +16,78 @@
       "fields": [
         {
           "name": "id",
-          "notes": "Answer UUID",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ],
+          "notes": "Answer UUID"
         },
         {
           "name": "createdAt",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
+          "type": "datetime",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
+          "name": "user",
+          "type": "entity",
+          "subtype": "oneMany",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
+          "properties": [
+            "internal",
+            "ownership"
+          ],
+          "notes": "User that owns the answer",
           "meta": {
             "backRelation": "answers",
             "onDelete": "Cascade",
             "onUpdate": "Cascade",
             "ownerStringPath": "user.id"
-          },
-          "name": "user",
-          "notes": "User that owns the answer",
-          "properties": ["internal", "ownership"],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
+          }
         },
         {
-          "meta": {
-            "backRelation": "answers"
-          },
           "name": "question",
-          "notes": "Question associated to the answer",
-          "properties": [],
-          "subtype": "oneMany",
           "type": "entity",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
-        },
-        {
+          "subtype": "oneMany",
+          "value": "6894a782-2e83-cd6a-52cc-f62967165636",
+          "properties": [],
+          "notes": "Question associated to the answer",
           "meta": {
             "backRelation": "answers"
-          },
+          }
+        },
+        {
           "name": "tags",
-          "notes": "Tags associated to the answer",
-          "properties": ["nullable", "multiple"],
-          "subtype": "manyMany",
           "type": "entity",
-          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
+          "subtype": "manyMany",
+          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
+          "properties": [
+            "nullable",
+            "multiple"
+          ],
+          "notes": "Tags associated to the answer",
+          "meta": {
+            "backRelation": "answers"
+          }
         },
         {
           "name": "answerDate",
-          "notes": "Date of the answer creation",
+          "type": "datetime",
           "properties": [],
-          "type": "datetime"
+          "notes": "Date of the answer creation"
         }
       ],
-      "id": "ccebcf02-4b82-923f-114e-252c9455899d",
-      "name": "Answer",
       "notes": "The answer model"
     },
     {
+      "id": "2a523149-31f3-80bf-d32b-3b9174cc6f2c",
+      "name": "Department",
       "accesses": {
         "count": "owner",
         "create": "owner",
@@ -79,27 +98,35 @@
       },
       "fields": [
         {
-          "meta": {},
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ],
+          "meta": {}
         },
         {
+          "name": "enterprise",
+          "type": "entity",
+          "subtype": "oneMany",
+          "value": "c069cc55-f28f-dcc1-cad8-0df044631ef8",
+          "properties": [
+            "searchable",
+            "ownership"
+          ],
           "meta": {
             "backRelation": "departments",
             "ownerStringPath": "user.enterprises.id"
-          },
-          "name": "enterprise",
-          "properties": ["searchable", "ownership"],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "c069cc55-f28f-dcc1-cad8-0df044631ef8"
+          }
         }
-      ],
-      "id": "2a523149-31f3-80bf-d32b-3b9174cc6f2c",
-      "name": "Department"
+      ]
     },
     {
+      "id": "c069cc55-f28f-dcc1-cad8-0df044631ef8",
+      "name": "Enterprise",
       "accesses": {
         "count": "owner",
         "create": "owner",
@@ -111,37 +138,51 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "name",
-          "properties": ["unique", "label", "searchable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "unique",
+            "label",
+            "searchable"
+          ]
         },
         {
+          "name": "employee",
+          "type": "entity",
+          "subtype": "manyMany",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
+          "properties": [
+            "multiple",
+            "ownership"
+          ],
           "meta": {
             "backRelation": "enterprises",
             "ownerStringPath": "user.id"
-          },
-          "name": "employee",
-          "properties": ["multiple", "ownership"],
-          "subtype": "manyMany",
-          "type": "entity",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
+          }
         },
         {
           "name": "departments",
-          "properties": ["searchable"],
-          "subtype": "manyOne",
           "type": "entity",
-          "value": "2a523149-31f3-80bf-d32b-3b9174cc6f2c"
+          "subtype": "manyOne",
+          "value": "2a523149-31f3-80bf-d32b-3b9174cc6f2c",
+          "properties": [
+            "searchable"
+          ]
         }
-      ],
-      "id": "c069cc55-f28f-dcc1-cad8-0df044631ef8",
-      "name": "Enterprise"
+      ]
     },
     {
+      "id": "2019dfe5-3b43-4eea-82e5-2533fb1f9c85",
+      "name": "InternalField",
       "accesses": {
         "count": "guest",
         "create": "guest",
@@ -153,100 +194,156 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "defaultNullable",
-          "notes": "Test nullable system field with no default metadata",
-          "properties": ["nullable", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "nullable",
+            "searchable",
+            "sortable",
+            "internal"
+          ],
+          "notes": "Test nullable system field with no default metadata"
         },
         {
           "name": "defaultString",
-          "notes": "Test string system field with no default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ],
+          "notes": "Test string system field with no default metadata"
         },
         {
           "name": "defaultNumber",
-          "notes": "Test number system field with no default metadata",
-          "properties": ["searchable", "sortable", "internal"],
+          "type": "number",
           "subtype": "integer",
-          "type": "number"
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ],
+          "notes": "Test number system field with no default metadata"
         },
         {
           "name": "defaultBoolean",
-          "notes": "Test boolean system field with no default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "boolean"
+          "type": "boolean",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ],
+          "notes": "Test boolean system field with no default metadata"
         },
         {
           "name": "defaultDatetime",
-          "notes": "Test datetime system field with no default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
+          "type": "datetime",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ],
+          "notes": "Test datetime system field with no default metadata"
         },
         {
           "name": "defaultEnum",
-          "notes": "Test enum system field with no default metadata",
-          "properties": ["searchable", "sortable", "internal"],
           "type": "enum",
-          "value": ["Enum1", "Enum2"]
+          "value": [
+            "Enum1",
+            "Enum2"
+          ],
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ],
+          "notes": "Test enum system field with no default metadata"
         },
         {
+          "name": "customString",
+          "type": "string",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ],
+          "notes": "Test string system field with default metadata",
           "meta": {
             "default": "'custom string'"
-          },
-          "name": "customString",
-          "notes": "Test string system field with default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "string"
+          }
         },
         {
+          "name": "customNumber",
+          "type": "number",
+          "subtype": "float",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ],
+          "notes": "Test number system field with default metadata",
           "meta": {
             "default": "666"
-          },
-          "name": "customNumber",
-          "notes": "Test number system field with default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "subtype": "float",
-          "type": "number"
+          }
         },
         {
+          "name": "customBoolean",
+          "type": "boolean",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ],
+          "notes": "Test boolean system field with default metadata",
           "meta": {
             "default": "true"
-          },
-          "name": "customBoolean",
-          "notes": "Test boolean system field with default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "boolean"
+          }
         },
         {
+          "name": "customDatetime",
+          "type": "datetime",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ],
+          "notes": "Test datetime system field with default metadata",
           "meta": {
             "default": "new Date(1)"
-          },
-          "name": "customDatetime",
-          "notes": "Test datetime system field with default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
+          }
         },
         {
+          "name": "customEnum",
+          "type": "enum",
+          "value": [
+            "Enmu1",
+            "Enum2"
+          ],
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ],
+          "notes": "Test enum system field with default metadata",
           "meta": {
             "default": "InternalFieldCustomEnum.Enum2"
-          },
-          "name": "customEnum",
-          "notes": "Test enum system field with default metadata",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "enum",
-          "value": ["Enmu1", "Enum2"]
+          }
         }
       ],
-      "id": "2019dfe5-3b43-4eea-82e5-2533fb1f9c85",
-      "name": "InternalField",
       "notes": "Table to test system fields and default metadata"
     },
     {
+      "id": "b0ecc3a7-9f28-a140-d505-91f598e547a5",
+      "name": "Message",
       "accesses": {
         "count": "owner",
         "create": "auth",
@@ -258,50 +355,71 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "createdAt",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
+          "type": "datetime",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "text",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "label",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "hour",
-          "properties": ["nullable"],
+          "type": "datetime",
           "subtype": "time",
-          "type": "datetime"
+          "properties": [
+            "nullable"
+          ]
         },
         {
-          "meta": {
-            "backRelation": "messages"
-          },
           "name": "tags",
-          "properties": ["multiple"],
-          "subtype": "manyMany",
           "type": "entity",
-          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
-        },
-        {
+          "subtype": "manyMany",
+          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
+          "properties": [
+            "multiple"
+          ],
           "meta": {
             "backRelation": "messages"
-          },
+          }
+        },
+        {
           "name": "questions",
-          "properties": ["multiple", "searchable", "sortable"],
-          "subtype": "manyMany",
           "type": "entity",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
+          "subtype": "manyMany",
+          "value": "6894a782-2e83-cd6a-52cc-f62967165636",
+          "properties": [
+            "multiple",
+            "searchable",
+            "sortable"
+          ],
+          "meta": {
+            "backRelation": "messages"
+          }
         }
-      ],
-      "id": "b0ecc3a7-9f28-a140-d505-91f598e547a5",
-      "name": "Message"
+      ]
     },
     {
+      "id": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c",
+      "name": "OpenQuestion",
       "accesses": {
         "count": "owner",
         "create": "auth",
@@ -313,39 +431,56 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "createdAt",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
+          "type": "datetime",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "text",
-          "properties": ["searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "key",
-          "properties": ["unique", "label", "searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "unique",
+            "label",
+            "searchable",
+            "sortable"
+          ]
         },
         {
+          "name": "question",
+          "type": "entity",
+          "subtype": "oneMany",
+          "value": "6894a782-2e83-cd6a-52cc-f62967165636",
+          "properties": [],
           "meta": {
             "backRelation": "openQuestions"
-          },
-          "name": "question",
-          "properties": [],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
+          }
         }
-      ],
-      "id": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c",
-      "name": "OpenQuestion"
+      ]
     },
     {
+      "id": "6894a782-2e83-cd6a-52cc-f62967165636",
+      "name": "Question",
       "accesses": {
         "count": "owner",
         "create": "auth",
@@ -357,97 +492,70 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "createdAt",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
+          "type": "datetime",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "title",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "label",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "text",
-          "properties": ["searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "searchable",
+            "sortable"
+          ]
         },
         {
-          "meta": {
-            "backRelation": "questions"
-          },
           "name": "parentQuestion",
-          "properties": ["nullable"],
-          "subtype": "oneMany",
           "type": "entity",
-          "value": "6894a782-2e83-cd6a-52cc-f62967165636"
-        },
-        {
+          "subtype": "oneMany",
+          "value": "6894a782-2e83-cd6a-52cc-f62967165636",
+          "properties": [
+            "nullable"
+          ],
           "meta": {
             "backRelation": "questions"
-          },
+          }
+        },
+        {
           "name": "tags",
-          "properties": ["nullable", "multiple"],
-          "subtype": "manyMany",
           "type": "entity",
-          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
+          "subtype": "manyMany",
+          "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
+          "properties": [
+            "nullable",
+            "multiple"
+          ],
+          "meta": {
+            "backRelation": "questions"
+          }
         }
-      ],
-      "id": "6894a782-2e83-cd6a-52cc-f62967165636",
-      "name": "Question"
+      ]
     },
     {
-      "accesses": {
-        "count": "guest",
-        "create": "guest",
-        "read": "guest",
-        "remove": "guest",
-        "search": "guest",
-        "update": "guest"
-      },
-      "fields": [
-        {
-          "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
-        },
-        {
-          "name": "default",
-          "properties": [],
-          "type": "string"
-        },
-        {
-          "name": "email",
-          "properties": [],
-          "subtype": "email",
-          "type": "string"
-        },
-        {
-          "name": "password",
-          "properties": [],
-          "subtype": "password",
-          "type": "string"
-        },
-        {
-          "name": "url",
-          "properties": [],
-          "subtype": "url",
-          "type": "string"
-        },
-        {
-          "name": "text",
-          "properties": [],
-          "subtype": "text",
-          "type": "string"
-        }
-      ],
       "id": "506e484d-2459-d558-32d7-f28ddf7aff93",
-      "name": "String Model"
-    },
-    {
+      "name": "String Model",
       "accesses": {
         "count": "guest",
         "create": "guest",
@@ -459,43 +567,114 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "default",
-          "properties": ["unique"],
-          "type": "string"
+          "type": "string",
+          "properties": []
         },
         {
           "name": "email",
-          "properties": ["unique"],
+          "type": "string",
           "subtype": "email",
-          "type": "string"
+          "properties": []
         },
         {
           "name": "password",
-          "properties": ["unique"],
+          "type": "string",
           "subtype": "password",
-          "type": "string"
+          "properties": [
+            "hidden"
+          ]
         },
         {
           "name": "url",
-          "properties": ["unique"],
+          "type": "string",
           "subtype": "url",
-          "type": "string"
+          "properties": []
         },
         {
           "name": "text",
-          "properties": ["unique"],
+          "type": "string",
           "subtype": "text",
-          "type": "string"
+          "properties": []
         }
-      ],
-      "id": "4192dd58-b152-e85f-1442-61c9ece8b893",
-      "name": "String Model Unique"
+      ]
     },
     {
+      "id": "4192dd58-b152-e85f-1442-61c9ece8b893",
+      "name": "String Model Unique",
+      "accesses": {
+        "count": "guest",
+        "create": "guest",
+        "read": "guest",
+        "remove": "guest",
+        "search": "guest",
+        "update": "guest"
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
+        },
+        {
+          "name": "default",
+          "type": "string",
+          "properties": [
+            "unique"
+          ]
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "subtype": "email",
+          "properties": [
+            "unique"
+          ]
+        },
+        {
+          "name": "password",
+          "type": "string",
+          "subtype": "password",
+          "properties": [
+            "unique",
+            "hidden"
+          ]
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "subtype": "url",
+          "properties": [
+            "unique"
+          ]
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "subtype": "text",
+          "properties": [
+            "unique"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
+      "name": "Tag",
       "accesses": {
         "count": "owner",
         "create": "auth",
@@ -507,35 +686,50 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "createdAt",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
+          "type": "datetime",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "label",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "label",
+            "searchable",
+            "sortable"
+          ]
         },
         {
+          "name": "owner",
+          "type": "entity",
+          "subtype": "oneMany",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
+          "properties": [
+            "ownership"
+          ],
           "meta": {
             "backRelation": "tags",
             "ownerStringPath": "user.id"
-          },
-          "name": "owner",
-          "properties": ["ownership"],
-          "subtype": "oneMany",
-          "type": "entity",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
+          }
         }
-      ],
-      "id": "1342e64d-6880-cc39-ecf0-372e8ffddc17",
-      "name": "Tag"
+      ]
     },
     {
+      "id": "d49a961e-c506-6869-3e1a-405fb52f109c",
+      "name": "UniqueValueField",
       "accesses": {
         "count": "guest",
         "create": "guest",
@@ -547,96 +741,170 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "uniqueString",
-          "properties": ["unique", "searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "unique",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "uniqueNumber",
-          "properties": ["unique", "searchable", "sortable"],
-          "type": "number"
+          "type": "number",
+          "properties": [
+            "unique",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "uniqueBoolean",
-          "properties": ["unique", "searchable", "sortable"],
-          "type": "boolean"
+          "type": "boolean",
+          "properties": [
+            "unique",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "uniqueDatetime",
-          "properties": ["unique", "searchable", "sortable"],
-          "type": "datetime"
+          "type": "datetime",
+          "properties": [
+            "unique",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "uniqueEnum",
-          "properties": ["unique", "searchable", "sortable"],
           "type": "enum",
-          "value": ["value1", "value2"]
+          "value": [
+            "value1",
+            "value2"
+          ],
+          "properties": [
+            "unique",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "uniqueObject",
-          "properties": ["unique", "searchable", "sortable"],
-          "type": "object"
+          "type": "object",
+          "properties": [
+            "unique",
+            "searchable",
+            "sortable"
+          ]
         },
         {
+          "name": "uniqueEntity",
+          "type": "entity",
+          "subtype": "oneOne",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
+          "properties": [
+            "unique",
+            "searchable",
+            "sortable"
+          ],
           "meta": {
             "backRelation": "uniqueValue"
-          },
-          "name": "uniqueEntity",
-          "properties": ["unique", "searchable", "sortable"],
-          "subtype": "oneOne",
-          "type": "entity",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
+          }
         },
         {
           "name": "uniqueStringNullable",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "unique",
+            "nullable",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "uniqueNumberNullable",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
-          "type": "number"
+          "type": "number",
+          "properties": [
+            "unique",
+            "nullable",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "uniqueBooleanNullable",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
-          "type": "boolean"
+          "type": "boolean",
+          "properties": [
+            "unique",
+            "nullable",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "uniqueDatetimeNullable",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
-          "type": "datetime"
+          "type": "datetime",
+          "properties": [
+            "unique",
+            "nullable",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "uniqueEnumNullable",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
           "type": "enum",
-          "value": ["val1", "val2"]
+          "value": [
+            "val1",
+            "val2"
+          ],
+          "properties": [
+            "unique",
+            "nullable",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "uniqueObjectNullable",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
-          "type": "object"
+          "type": "object",
+          "properties": [
+            "unique",
+            "nullable",
+            "searchable",
+            "sortable"
+          ]
         },
         {
+          "name": "uniqueEntityNullable",
+          "type": "entity",
+          "subtype": "oneOne",
+          "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
+          "properties": [
+            "unique",
+            "nullable",
+            "searchable",
+            "sortable"
+          ],
           "meta": {
             "backRelation": "uniqueEntityNullable"
-          },
-          "name": "uniqueEntityNullable",
-          "properties": ["unique", "nullable", "searchable", "sortable"],
-          "subtype": "oneOne",
-          "type": "entity",
-          "value": "a7d0308a-49f0-3458-0975-1dce106136a1"
+          }
         }
-      ],
-      "id": "d49a961e-c506-6869-3e1a-405fb52f109c",
-      "name": "UniqueValueField"
+      ]
     },
     {
+      "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
+      "name": "User",
       "accesses": {
         "count": "admin",
         "create": "guest",
@@ -647,10 +915,8 @@
       },
       "fields": [
         {
-          "meta": {
-            "ownerStringPath": "user.id"
-          },
           "name": "id",
+          "type": "string",
           "properties": [
             "primary",
             "searchable",
@@ -658,51 +924,81 @@
             "internal",
             "ownership"
           ],
-          "type": "string"
+          "meta": {
+            "ownerStringPath": "user.id"
+          }
         },
         {
           "name": "createdAt",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
+          "type": "datetime",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "name",
-          "properties": ["label", "searchable", "sortable"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "label",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "email",
-          "properties": ["unique", "searchable", "sortable"],
+          "type": "string",
           "subtype": "email",
-          "type": "string"
+          "properties": [
+            "unique",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "password",
-          "properties": ["nullable", "hidden"],
+          "type": "string",
           "subtype": "password",
-          "type": "string"
+          "properties": [
+            "nullable",
+            "hidden"
+          ]
         },
         {
           "name": "listObject",
-          "properties": ["multiple", "searchable", "sortable"],
-          "type": "object"
+          "type": "object",
+          "properties": [
+            "multiple",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "roles",
-          "properties": ["multiple", "searchable", "sortable"],
           "type": "enum",
-          "value": ["admin", "user", "guest", "custom"]
+          "value": [
+            "admin",
+            "user",
+            "guest",
+            "custom"
+          ],
+          "properties": [
+            "multiple",
+            "searchable",
+            "sortable"
+          ]
         },
         {
           "name": "Object",
-          "properties": [],
-          "type": "object"
+          "type": "object",
+          "properties": []
         }
-      ],
-      "id": "a7d0308a-49f0-3458-0975-1dce106136a1",
-      "name": "User"
+      ]
     },
     {
+      "id": "5d791308-4e9d-aa7d-3d36-d45d46b04c6a",
+      "name": "Variable",
       "accesses": {
         "count": "owner",
         "create": "auth",
@@ -714,44 +1010,49 @@
       "fields": [
         {
           "name": "id",
-          "properties": ["primary", "searchable", "sortable", "internal"],
-          "type": "string"
+          "type": "string",
+          "properties": [
+            "primary",
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "createdAt",
-          "properties": ["searchable", "sortable", "internal"],
-          "type": "datetime"
+          "type": "datetime",
+          "properties": [
+            "searchable",
+            "sortable",
+            "internal"
+          ]
         },
         {
           "name": "value",
-          "properties": [],
-          "type": "string"
+          "type": "string",
+          "properties": []
         },
         {
-          "meta": {
-            "backRelation": "variables"
-          },
           "name": "openQuestion",
-          "properties": [],
-          "subtype": "oneMany",
           "type": "entity",
-          "value": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c"
-        },
-        {
+          "subtype": "oneMany",
+          "value": "0e6ab116-cf35-caaa-f40d-0a6a2d124a2c",
+          "properties": [],
           "meta": {
             "backRelation": "variables"
-          },
+          }
+        },
+        {
           "name": "answer",
-          "properties": [],
-          "subtype": "oneMany",
           "type": "entity",
-          "value": "ccebcf02-4b82-923f-114e-252c9455899d"
+          "subtype": "oneMany",
+          "value": "ccebcf02-4b82-923f-114e-252c9455899d",
+          "properties": [],
+          "meta": {
+            "backRelation": "variables"
+          }
         }
-      ],
-      "id": "5d791308-4e9d-aa7d-3d36-d45d46b04c6a",
-      "name": "Variable"
+      ]
     }
-  ],
-  "name": "New project",
-  "version": "3"
+  ]
 }

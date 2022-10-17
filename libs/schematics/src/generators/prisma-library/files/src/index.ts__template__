@@ -40,7 +40,7 @@ export async function seed() {
   const user1Profil = await db.profil.create({
     data: {
       createdAt: now,
-      address: 'User1 address',
+      address: 'User1 address',
       phone: 'User1 phone number',
       userId: user1.id,
     },
@@ -48,7 +48,7 @@ export async function seed() {
   const user2Profil = await db.profil.create({
     data: {
       createdAt: now,
-      address: 'User2 address',
+      address: 'User2 address',
       phone: 'User2 phone number',
       userId: user2.id,
     },
@@ -56,7 +56,7 @@ export async function seed() {
   const adminProfil = await db.profil.create({
     data: {
       createdAt: now,
-      address: 'Admin address',
+      address: 'Admin address',
       phone: 'Admin phone number',
       userId: admin.id,
     },

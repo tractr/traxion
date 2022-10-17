@@ -1,6 +1,64 @@
 import { Prisma } from '@prisma/client';
 import { <<Model constant>>_SELECT } from '../constants';
 
-export type <<Model pascal>>WithRelationIds = Prisma.<<Model pascal>>GetPayload<{
+/**
+ * Type of the <<Model pascal>> manipulated internally by the api
+ */
+export type <<Model pascal>>Dto = Prisma.<<Model pascal>>GetPayload<{
   select: typeof <<Model constant>>_SELECT,
 }>;
+
+/**
+ * <<Model pascal>> properties defined by the api.
+ * They should never be sent by the end user.
+ */
+export type <<Model pascal>>SystemProperties =
+  <<if Fields internal>>
+    <<for Fields internal field>>
+      | '<<field camel>>'
+    <<endfor>>
+  <<else>>
+    never
+  <<endif>> ;
+
+/**
+ * <<Model pascal>> properties hidden to the end user.
+ * They should never be read by the end user.
+ */
+export type <<Model pascal>>HiddenProperties =
+  <<if Fields hidden>>
+    <<for Fields hidden field>>
+      | '<<field camel>>'
+    <<endfor>>
+  <<else>>
+    never
+  <<endif>> ;
+
+/**
+ * <<Model pascal>> properties hidden to the end user.
+ * They should never be read by the end user.
+ */
+export type <<Model pascal>>RelationalProperties =
+  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+    <<for Fields entity field>>
+      | '<<field camel>>'
+    <<endfor>>
+    <<for root.referencedIn ref>>
+      <<for ref.fields oneOne or oneMany or manyMany field>>
+      | '<<-field backRelation camel>>'
+      <<endfor>>
+    <<endfor>>
+  <<<} else {>>>
+    never
+  <<<}>>> ;
+
+
+/**
+ * <<Model pascal>> write payload
+ */
+export type <<Model pascal>>ReadDto = Omit< <<Model pascal>>Dto, <<Model pascal>>HiddenProperties>;
+
+/**
+ * <<Model pascal>> read payload
+ */
+export type <<Model pascal>>WriteDto = Omit< <<Model pascal>>Dto, <<Model pascal>>SystemProperties>;

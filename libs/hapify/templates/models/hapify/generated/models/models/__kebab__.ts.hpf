@@ -1,5 +1,10 @@
 import 'reflect-metadata';
 
+<<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+import { Type } from 'class-transformer';
+import { IdDto } from '@tractr/common';
+<<<}>>>
+
 import {
   <<if Fields boolean>>
   IsBoolean,
@@ -37,7 +42,13 @@ import {
   IsUrl,
   <<endif>>
 
+   <<if Fields primary>>
   IsUUID,
+  <<endif>>
+
+  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
+  ValidateNested,
+  <<<}>>>
 
   <<if Fields object>>
   IsObject,
@@ -146,44 +157,33 @@ export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
 <<endfor>>
 
 <<for Fields oneOne or oneMany field>>
-  /**
-   * Reference to the associated <<field pascal>>
-   */
   <<if field nullable>>
   @IsOptional()
   <<endif>>
-  @IsString()
-  @IsUUID("all")
-  <<field camel>>Id<<if field nullable>>: string | null = null;<<else>>!: string;<<endif>>
+  @Type(() => IdDto)
+  @ValidateNested()
+  <<field camel>><<if field nullable>>: IdDto | null = null;<<else>>!: IdDto;<<endif>>
 <<endfor>>
 
 <<for Fields manyMany field>>
-  /**
-   * References to the associated <<field pascal>>
-   */
-  @IsString({each: true})
-  @IsUUID("all", {each: true})
-  <<field camel>>Ids: string[] = [];
+  @Type(() => IdDto)
+  @ValidateNested({each: true})
+  <<field camel>>: IdDto[] = [];
 <<endfor>>
 
 <<for root.referencedIn ref>>
   <<for ref.fields oneOne field>>
-  /**
-   * Associated <<-field backRelation pascal>>
-   */
-  @IsString()
-  @IsUUID("all")
-  <<-field backRelation camel>>Id: string | null = null;
+  @IsOptional()
+  @Type(() => IdDto)
+  @ValidateNested()
+  <<-field backRelation camel>>: IdDto | null = null;
 
   <<endfor>>
 
   <<for ref.fields oneMany or manyMany field>>
-  /**
-   * Associated <<-field backRelation pascal>>
-   */
-  @IsString({each: true})
-  @IsUUID("all", {each: true})
-  <<-field backRelation camel>>Ids: string[] = [];
+  @Type(() => IdDto)
+  @ValidateNested({each: true})
+  <<-field backRelation camel>>: IdDto[] = [];
 
   <<endfor>>
 <<endfor>>

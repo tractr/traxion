@@ -3,3 +3,4 @@ export * from './is-class.helper';
 export * from './transform-string-to-array.helper';
 export * from './unique-array.helper';
 export * from './url.helper';
+export * from './id.dto';
