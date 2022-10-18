@@ -1,6 +1,6 @@
 {
   "name": "@tractr/nestjs-graphql",
-  "version": "1.60.2",
+  "version": "1.62.0",
   "description": "Nestjs graphql helper",
   "repository": {
     "type": "git",

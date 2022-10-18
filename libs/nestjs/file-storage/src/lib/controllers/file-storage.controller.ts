@@ -23,8 +23,11 @@ export class FileStorageController {
    * Get presigned download url
    */
   @Get('download')
-  getPresignedDownloadUrl(@Query() queryDto: GetPresignedDownloadUrlQueryDto) {
+  async getPresignedDownloadUrl(
+    @Query() queryDto: GetPresignedDownloadUrlQueryDto,
+  ) {
     const { file } = queryDto;
-    return this.fileStorageService.getPresignedDownloadUrl(file);
+    const url = await this.fileStorageService.getPresignedDownloadUrl(file);
+    return { url };
   }
 }

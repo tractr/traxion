@@ -2,6 +2,51 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.62.0](https://github.com/tractr/stack/compare/v1.61.3...v1.62.0) (2022-10-12)
+
+
+### Features
+
+* **terraform-component-s3-user:** avoid minio missing configuration ([#517](https://github.com/tractr/stack/issues/517)) ([141ebac](https://github.com/tractr/stack/commit/141ebaca51c24873d97f7dc1f50bc81c6ff4839b))
+
+
+
+## [1.61.3](https://github.com/tractr/stack/compare/v1.61.2...v1.61.3) (2022-10-12)
+
+
+### Bug Fixes
+
+* **react-admin:** fix: make object field input work on react admin ([#518](https://github.com/tractr/stack/issues/518)) ([6e7eb6b](https://github.com/tractr/stack/commit/6e7eb6ba147ab757264e3f1ec143a528fcbaa888))
+
+
+
+## [1.61.2](https://github.com/tractr/stack/compare/v1.61.1...v1.61.2) (2022-10-06)
+
+
+### Bug Fixes
+
+* update file-storage download response ([#514](https://github.com/tractr/stack/issues/514)) ([94b2f52](https://github.com/tractr/stack/commit/94b2f52d922552244271d59a0ceec97a4d7fe3cd))
+
+
+
+## [1.61.1](https://github.com/tractr/stack/compare/v1.61.0...v1.61.1) (2022-10-05)
+
+
+### Bug Fixes
+
+* update style for full width input fields ([#513](https://github.com/tractr/stack/issues/513)) ([a6476d5](https://github.com/tractr/stack/commit/a6476d56f4acb3537b5b9a9cf2a3b8555d6601d1))
+
+
+
+# [1.61.0](https://github.com/tractr/stack/compare/v1.60.2...v1.61.0) (2022-09-29)
+
+
+### Features
+
+* **common:** add waitFor operator ([#506](https://github.com/tractr/stack/issues/506)) ([3af71b1](https://github.com/tractr/stack/commit/3af71b1c8540230e8c9d5639a30972236a5cb6b0))
+
+
+
 ## [1.60.2](https://github.com/tractr/stack/compare/v1.60.1...v1.60.2) (2022-09-22)
 
 
