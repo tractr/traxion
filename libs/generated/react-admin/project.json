@@ -1,0 +1,49 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": ["generated-rext-client"],
+  "prefix": "tractr",
+  "projectType": "library",
+  "sourceRoot": "libs/generated/react-admin/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "configurations": {
+        "development": {
+          "tsConfig": "libs/generated/react-admin/tsconfig.lib.json"
+        },
+        "production": {
+          "tsConfig": "libs/generated/react-admin/tsconfig.lib.prod.json"
+        }
+      },
+      "defaultConfiguration": "production",
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "options": {
+        "project": "libs/generated/react-admin/ng-package.json"
+      },
+      "outputs": ["dist/libs/generated/react-admin"]
+    },
+    "generate": {
+      "executor": "@tractr/schematics:generate",
+      "options": {
+        "cwd": "libs/generated/react-admin"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/generated/react-admin/**/*.ts",
+          "libs/generated/react-admin/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/generated/react-admin/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/generated/react-admin"]
+    }
+  }
+}

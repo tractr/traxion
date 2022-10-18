@@ -2,6 +2,256 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.62.0](https://github.com/tractr/stack/compare/v1.61.3...v1.62.0) (2022-10-12)
+
+
+### Features
+
+* **terraform-component-s3-user:** avoid minio missing configuration ([#517](https://github.com/tractr/stack/issues/517)) ([141ebac](https://github.com/tractr/stack/commit/141ebaca51c24873d97f7dc1f50bc81c6ff4839b))
+
+
+
+## [1.61.3](https://github.com/tractr/stack/compare/v1.61.2...v1.61.3) (2022-10-12)
+
+
+### Bug Fixes
+
+* **react-admin:** fix: make object field input work on react admin ([#518](https://github.com/tractr/stack/issues/518)) ([6e7eb6b](https://github.com/tractr/stack/commit/6e7eb6ba147ab757264e3f1ec143a528fcbaa888))
+
+
+
+## [1.61.2](https://github.com/tractr/stack/compare/v1.61.1...v1.61.2) (2022-10-06)
+
+
+### Bug Fixes
+
+* update file-storage download response ([#514](https://github.com/tractr/stack/issues/514)) ([94b2f52](https://github.com/tractr/stack/commit/94b2f52d922552244271d59a0ceec97a4d7fe3cd))
+
+
+
+## [1.61.1](https://github.com/tractr/stack/compare/v1.61.0...v1.61.1) (2022-10-05)
+
+
+### Bug Fixes
+
+* update style for full width input fields ([#513](https://github.com/tractr/stack/issues/513)) ([a6476d5](https://github.com/tractr/stack/commit/a6476d56f4acb3537b5b9a9cf2a3b8555d6601d1))
+
+
+
+# [1.61.0](https://github.com/tractr/stack/compare/v1.60.2...v1.61.0) (2022-09-29)
+
+
+### Features
+
+* **common:** add waitFor operator ([#506](https://github.com/tractr/stack/issues/506)) ([3af71b1](https://github.com/tractr/stack/commit/3af71b1c8540230e8c9d5639a30972236a5cb6b0))
+
+
+
+## [1.60.2](https://github.com/tractr/stack/compare/v1.60.1...v1.60.2) (2022-09-22)
+
+
+### Bug Fixes
+
+* delete doublon import in template hapify for nestj-graphql packages ([#511](https://github.com/tractr/stack/issues/511)) ([3f09522](https://github.com/tractr/stack/commit/3f0952257c47ce97d9a17aa470c9a2d163492b39))
+
+
+
+## [1.60.1](https://github.com/tractr/stack/compare/v1.60.0...v1.60.1) (2022-09-21)
+
+
+### Bug Fixes
+
+* update getConcatValueByPath for prisma query ([#510](https://github.com/tractr/stack/issues/510)) ([c9be995](https://github.com/tractr/stack/commit/c9be995fab130aaaf8b1e530134f4f7dcfb78c7a))
+
+
+
+# [1.60.0](https://github.com/tractr/stack/compare/v1.59.0...v1.60.0) (2022-09-19)
+
+
+### Features
+
+* add the possibility to configure the subjectAlternativeNames for the certificates ([#494](https://github.com/tractr/stack/issues/494)) ([0e357fb](https://github.com/tractr/stack/commit/0e357fbb5d987014e245054428425bff266f51ed))
+
+
+
+# [1.59.0](https://github.com/tractr/stack/compare/v1.58.7...v1.59.0) (2022-09-19)
+
+
+### Features
+
+* add the possibility to have multiple path rules in traeffic ([#509](https://github.com/tractr/stack/issues/509)) ([a6fb649](https://github.com/tractr/stack/commit/a6fb649a4e3a6f5b8e308ab90bc2b3b92fe6e7ae))
+
+
+
+## [1.58.7](https://github.com/tractr/stack/compare/v1.58.6...v1.58.7) (2022-09-19)
+
+
+### Bug Fixes
+
+* export back the config when bootstraping angular app ([#500](https://github.com/tractr/stack/issues/500)) ([f47d7a3](https://github.com/tractr/stack/commit/f47d7a3b3d29883426f489abb2ee167fc6879335))
+
+
+
+## [1.58.6](https://github.com/tractr/stack/compare/v1.58.5...v1.58.6) (2022-09-13)
+
+
+### Bug Fixes
+
+* Migration 8 password ([#508](https://github.com/tractr/stack/issues/508)) ([50773cb](https://github.com/tractr/stack/commit/50773cbbf5d7dd34dbee4d7664f44b265824a990))
+
+
+
+## [1.58.5](https://github.com/tractr/stack/compare/v1.58.4...v1.58.5) (2022-09-13)
+
+
+### Bug Fixes
+
+* **authentication:** export controller + fix interface password ([#507](https://github.com/tractr/stack/issues/507)) ([1825cf7](https://github.com/tractr/stack/commit/1825cf799356fbf1df00241c60ad13d95fca9ec8))
+
+
+
+## [1.58.4](https://github.com/tractr/stack/compare/v1.58.3...v1.58.4) (2022-09-08)
+
+
+### Bug Fixes
+
+* **nestjs-models-rest:** fix missing upsert policies ([#505](https://github.com/tractr/stack/issues/505)) ([e42c228](https://github.com/tractr/stack/commit/e42c2286403c0f78f1e7d49ee25f5b02262aca41))
+
+
+
+## [1.58.3](https://github.com/tractr/stack/compare/v1.58.2...v1.58.3) (2022-09-08)
+
+
+### Bug Fixes
+
+* **angular-authentication:** fix logout ([#504](https://github.com/tractr/stack/issues/504)) ([fc374e9](https://github.com/tractr/stack/commit/fc374e9e7bb88e468051051a0db0f1f7c80448bf))
+
+
+
+## [1.58.2](https://github.com/tractr/stack/compare/v1.58.1...v1.58.2) (2022-09-07)
+
+
+### Bug Fixes
+
+* **hapify:** fix hapify template fopr model middleware ([#502](https://github.com/tractr/stack/issues/502)) ([18bd04f](https://github.com/tractr/stack/commit/18bd04f929b89d1796e204353e71fa3b3ad19bdc))
+
+
+
+## [1.58.1](https://github.com/tractr/stack/compare/v1.58.0...v1.58.1) (2022-09-06)
+
+
+### Bug Fixes
+
+* update auth and rext provider to avoid error ([#503](https://github.com/tractr/stack/issues/503)) ([beda287](https://github.com/tractr/stack/commit/beda287b06ce925d2e0e34ff2d57d53496e42181))
+
+
+
+# [1.58.0](https://github.com/tractr/stack/compare/v1.57.2...v1.58.0) (2022-09-02)
+
+
+### Features
+
+* add the capability to filter the relation on the other side of the one many and many many ([#499](https://github.com/tractr/stack/issues/499)) ([b9028c8](https://github.com/tractr/stack/commit/b9028c8505ef20ad7da81aa106d542dab9ebc936))
+
+
+
+## [1.57.2](https://github.com/tractr/stack/compare/v1.57.1...v1.57.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* remove populate from the rest api interfaces ([#498](https://github.com/tractr/stack/issues/498)) ([ffc18ef](https://github.com/tractr/stack/commit/ffc18efff838c0fe62b0048c6a85f4dc48b6c90b))
+
+
+
+## [1.57.1](https://github.com/tractr/stack/compare/v1.57.0...v1.57.1) (2022-08-31)
+
+
+
+# [1.57.0](https://github.com/tractr/stack/compare/v1.56.1...v1.57.0) (2022-08-31)
+
+
+### Features
+
+* split nestjs password and authentication management ([#497](https://github.com/tractr/stack/issues/497)) ([fe2ed5e](https://github.com/tractr/stack/commit/fe2ed5e0b71c115153d3bdcadd652c196dd9308f))
+
+
+
+## [1.56.1](https://github.com/tractr/stack/compare/v1.56.0...v1.56.1) (2022-08-26)
+
+
+### Bug Fixes
+
+* use the autocomplete with the right filter in the react admin entities ([#493](https://github.com/tractr/stack/issues/493)) ([3365e47](https://github.com/tractr/stack/commit/3365e47cfb452e52e53f94cc0e6bf9bf9fdc0629))
+
+
+
+# [1.56.0](https://github.com/tractr/stack/compare/v1.55.0...v1.56.0) (2022-08-19)
+
+
+### Features
+
+* **terraform:** filter common sensitive envs from app-config.json files ([#469](https://github.com/tractr/stack/issues/469)) ([a76fcfb](https://github.com/tractr/stack/commit/a76fcfb5a6265b3477e14993a5a0b2050cf6f196))
+
+
+
+# [1.55.0](https://github.com/tractr/stack/compare/v1.54.5...v1.55.0) (2022-08-18)
+
+
+### Features
+
+* add password update route with a check on the old password ([#479](https://github.com/tractr/stack/issues/479)) ([e06f1b0](https://github.com/tractr/stack/commit/e06f1b08a03edd7e7165964b6be78963dd832810))
+
+
+
+## [1.54.5](https://github.com/tractr/stack/compare/v1.54.4...v1.54.5) (2022-08-18)
+
+
+
+## [1.54.4](https://github.com/tractr/stack/compare/v1.54.3...v1.54.4) (2022-08-17)
+
+
+
+## [1.54.3](https://github.com/tractr/stack/compare/v1.54.2...v1.54.3) (2022-08-17)
+
+
+
+## [1.54.2](https://github.com/tractr/stack/compare/v1.54.1...v1.54.2) (2022-08-17)
+
+
+### Bug Fixes
+
+* type providers array correctly ([#475](https://github.com/tractr/stack/issues/475)) ([4714e8a](https://github.com/tractr/stack/commit/4714e8aef3ab78e493abb15359d219cc9a49d2ae))
+
+
+
+## [1.54.1](https://github.com/tractr/stack/compare/v1.54.0...v1.54.1) (2022-08-17)
+
+
+### Bug Fixes
+
+* add default value for enum fields in hapify tpl ([#463](https://github.com/tractr/stack/issues/463)) ([8f69f21](https://github.com/tractr/stack/commit/8f69f21a95edc245a146c046d9d38fc1e0f5da42))
+
+
+
+# [1.54.0](https://github.com/tractr/stack/compare/v1.53.1...v1.54.0) (2022-08-17)
+
+
+### Features
+
+* update angular, nestjs, prisma and react-admin ([#468](https://github.com/tractr/stack/issues/468)) ([8122574](https://github.com/tractr/stack/commit/8122574544697a29a2acf1aef799fc568fb50be0))
+
+
+
+## [1.53.1](https://github.com/tractr/stack/compare/v1.53.0...v1.53.1) (2022-08-16)
+
+
+### Bug Fixes
+
+* add test coverage to 80% ([#446](https://github.com/tractr/stack/issues/446)) ([04f1857](https://github.com/tractr/stack/commit/04f18577cf177db6024bd3536aa8e7f6fb6199d8))
+
+
+
 # [1.53.0](https://github.com/tractr/stack/compare/v1.52.2...v1.53.0) (2022-08-15)
 
 

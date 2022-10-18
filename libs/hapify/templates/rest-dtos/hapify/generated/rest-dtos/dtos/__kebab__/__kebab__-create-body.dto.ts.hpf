@@ -3,57 +3,57 @@ import {
   <<if Fields boolean and not internal>>
   IsBoolean, 
   <<endif>>
-
+	
   <<if Fields email and not internal>>
   IsEmail, 
   <<endif>>
-
+	
   <<if Fields enum and not internal>>
   IsIn,
   <<endif>>
-
+	
   <<if Fields number and not internal>>
   IsNumber,
   <<endif>>
-
+	
   <<if Fields datetime and not internal>>
   IsDate,
   <<endif>>
-
+	
   <<if Fields nullable and not internal>>
   IsOptional,
   <<endif>>
-
+	
   <<if Fields string or entity or enum and not internal>>
   IsString,
   <<endif>>
-
+	
   <<if Fields (string and not text)>>
   MaxLength,
   <<endif>>
-
+	
   <<if Fields url and not internal>>
   IsUrl, 
   <<endif>>
-
+	
   <<if Fields entity and not internal>>
   IsUUID,
   <<endif>>
-
+	
   <<if Fields object and not internal>>
   IsObject, 
   <<< if (root.f.multiple.some(e => e.type ==='object')) { >>>
   IsArray,
   <<< } >>>
   <<endif>>
-
+	
 } from 'class-validator';
 <<endif>>
-
+	
 <<if Fields object>>
-import { JsonObject } from '@tractr/common';
+import type { JsonObject } from '@tractr/common';
 <<endif>>
-
+	
 <<if Fields enum>>
 import {
   <<for Fields enum enumField>>
@@ -61,17 +61,17 @@ import {
   <<endfor>>
 } from '../../../models';
 <<endif>>
-
+	
 <<if Fields (number or boolean or datetime) and not internal>>
 import { 
   <<if Fields number and not internal>>
   TransformStringToInt, 
   <<endif>>
-
+	
   <<if Fields boolean and not internal>>
   TransformStringToBoolean,
   <<endif>>
-
+	
   <<if Fields datetime and not internal>>
   TransformStringToDate,
   <<endif>>
@@ -79,65 +79,65 @@ import {
 <<endif>>
  
 export class <<Model pascal>>CreateBodyDto {
-<<for Fields not internal field>>
-
+<<for Fields not internal and not manyOne field>>
+	
   <<if field boolean>>
   @IsBoolean(<<=listModifier(field)>>)
   @TransformStringToBoolean()
   <<endif>>
-
+	
   <<if field string or enum or entity>>
   @IsString(<<=listModifier(field)>>) 
   <<endif>>
-
+	
   <<if field string and not text>>
   @MaxLength(<<< if (field.meta.maxLength) { >>><<-field maxLength raw>><<<}else{>>>255<<<}>>>, {
     message: '<<field pascal>> field is too long',
   })
   <<endif>>
-
+	
   <<if field entity>>
   @IsUUID("all", <<=listModifier(field)>>) 
   <<endif>>
-
+	
   <<if field enum>>
   @IsIn(Object.values(<<Model pascal>><<field pascal>>),<<=listModifier(field)>>) 
   <<endif>>
-
+	
   <<if field email>>
   @IsEmail({}, <<=listModifier(field)>>) 
   <<endif>>
-
+	
   <<if field url>>
   @IsUrl({}, <<=listModifier(field)>>) 
   <<endif>>
-
+	
   <<if field number>>
   @IsNumber({<<if field not latitude and not longitude and not float>>maxDecimalPlaces: 0<<endif>>},<<=listModifier(field)>>)
   @TransformStringToInt()
   <<endif>>
-
+	
   <<if field datetime>>
   @IsDate(<<=listModifier(field)>>)
   @TransformStringToDate()
   <<endif>>
-
+	
   <<if field nullable>>
   @IsOptional()
   <<endif>>
-
+	
   <<if field object>>
   @IsObject(<<=listModifier(field)>>) 
   <<< if (field.multiple) { >>>
   @IsArray()
   <<< } >>>
   <<endif>>
-
+	
   <<=typedProperty(field)>>
    
 <<endfor>>
 }
-
+	
 <<<
 function typedProperty(f) {
   let out = f.names.camel;
@@ -157,11 +157,11 @@ function typedProperty(f) {
   return out;
 }
 >>>
-
+	
 <<<
 function listModifier(f) {
   if (f.multiple) return "{ each: true}";
   else return "";
 }
 >>>
-
+	

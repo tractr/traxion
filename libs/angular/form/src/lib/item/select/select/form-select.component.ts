@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
-  FormControl,
+  UntypedFormBuilder,
+  UntypedFormControl,
   Validators,
 } from '@angular/forms';
 
@@ -19,11 +19,11 @@ export class FormSelectComponent extends FormSelectBaseComponent {
 
   @Input() placeholder = '';
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: UntypedFormBuilder) {
     super();
   }
 
-  initControl(): FormControl {
+  initControl(): UntypedFormControl {
     return this.formBuilder.control(this.state, [
       // eslint-disable-next-line @typescript-eslint/unbound-method
       ...(this.required ? [Validators.required] : []),

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":preserveSemverRanges",
+    "group:recommended",
+    "group:monorepos",
+    "group:allNonMajor",
+    "schedule:weekends",
+    ":automergePr",
+    ":automergeMinor"
+  ],
+  "ignorePaths": ["**/@angular/**", "**/@nestjs/**", "**/@nrwl/**"]
+}

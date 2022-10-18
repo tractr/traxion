@@ -1,4 +1,5 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "prefix": "tractr",
   "projectType": "application",
   "sourceRoot": "apps/pwa/src",
@@ -17,7 +18,7 @@
         "production": {
           "budgets": [
             {
-              "maximumError": "5mb",
+              "maximumError": "2mb",
               "maximumWarning": "500kb",
               "type": "initial"
             },
@@ -39,7 +40,12 @@
       "defaultConfiguration": "production",
       "executor": "@angular-devkit/build-angular:browser",
       "options": {
-        "allowedCommonJsDependencies": ["validator", "@generated"],
+        "allowedCommonJsDependencies": [
+          "validator",
+          "@prisma/client",
+          "@tractr/common",
+          "@generated"
+        ],
         "assets": [
           "apps/pwa/src/favicon.ico",
           {
@@ -83,7 +89,8 @@
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "commands": [
-          "node ./libs/angular/config/generate.js ./apps/pwa/src/assets/app-config.json"
+          "nx build angular-config",
+          "node ./dist/libs/angular/config/generate.js ./apps/pwa/src/assets/app-config.json"
         ],
         "parallel": false
       }
@@ -106,7 +113,7 @@
       ],
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "proxyConfig": "apps/pwa/proxy.conf.js"
+        "proxyConfig": "apps/pwa/proxy.conf.json"
       }
     },
     "test": {

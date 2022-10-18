@@ -88,9 +88,9 @@ export class S3UserComponent extends AwsComponent<
     }
     return [
       {
-        Sid: 'ListObjectsInBucket',
+        Sid: 'BucketInfo',
         Effect: 'Allow',
-        Action: ['s3:ListBucket'],
+        Action: ['s3:ListBucket', 's3:GetBucketLocation'], // GetBucketLocation allows minio to get bucket region if not provided in the config
         Resource: writeArns,
       },
       {

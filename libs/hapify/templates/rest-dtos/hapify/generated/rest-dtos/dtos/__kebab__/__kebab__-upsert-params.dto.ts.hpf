@@ -6,8 +6,9 @@ import {
   IsInt,
   IsNumber,
 <<endif>>
+  IsOptional,
 } from 'class-validator';
-
+	
 <<if Fields primary and number>>
 import { TransformStringToInt } from '@tractr/common';
 <<endif>>
@@ -17,12 +18,12 @@ export class <<Model pascal>>UpsertParamsDto {
   <<if primaryField string>>
   @IsString()
   @IsUUID()
-  <<primaryField camel>>!: string;
   <<elseif primaryField number>>
   @IsNumber()
   @IsInt()
   @TransformStringToInt()
-  <<primaryField camel>>!: number;
   <<endif>>
+  @IsOptional()
+  <<primaryField camel>>?: <<if primaryField string>>string<<elseif primaryField number>>number<<endif>>;
 <<endfor>>
 }

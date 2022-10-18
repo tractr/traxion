@@ -9,7 +9,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "preferences.importModuleSpecifier": "project-relative"
   },
   "cSpell.words": [
     "buildable",
@@ -17,6 +18,7 @@
     "cdktf",
     "codecov",
     "Concat",
+    "datetime",
     "dbml",
     "dtos",
     "endfor",
@@ -28,6 +30,7 @@
     "nrwl",
     "Rext",
     "tractr",
+    "Traxion",
     "unittests",
     "Unsubscriber",
     "upsert"

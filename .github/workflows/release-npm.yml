@@ -26,6 +26,10 @@ on:
         description: 'The github bot-token'
         required: true
 
+      NX_CLOUD_ACCESS_TOKEN:
+        description: 'A Nx cloud access token'
+        required: false
+
 jobs:
   # Take all the packages and release them to https://npm.pkg.github.com
   npm-release:
@@ -65,10 +69,11 @@ jobs:
 
       # We run our release script
       - name: Run nx run workspace:release
+        run: npx nx run workspace:release --push
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx nx run workspace:release --push
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       - name: Update the latest tag
         uses: tractr/stack/.github/actions/update-tag@main

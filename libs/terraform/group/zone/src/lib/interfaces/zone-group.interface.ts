@@ -2,6 +2,7 @@ import { CertificatesComponentArtifacts } from './certificates-component.interfa
 
 export interface ZoneGroupConfig {
   domainName: string;
+  subjectAlternativeNames?: string[];
 }
 export interface ZoneGroupArtifacts extends CertificatesComponentArtifacts {
   domainName: string;

@@ -1,5 +1,8 @@
 {
-  "implicitDependencies": ["hapify-templates-dbml"],
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": [
+    "hapify-templates-dbml"
+  ],
   "projectType": "library",
   "sourceRoot": "libs/generated/dbml/src",
   "tags": [],
@@ -7,13 +10,17 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": ["libs/generated/dbml/*.md"],
+        "assets": [
+          "libs/generated/dbml/*.md"
+        ],
         "main": "libs/generated/dbml/src/index.ts",
         "outputPath": "dist/libs/generated/dbml",
         "packageJson": "libs/generated/dbml/package.json",
         "tsConfig": "libs/generated/dbml/tsconfig.lib.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "generate": {
       "executor": "./dist/libs/schematics:generate",
@@ -23,14 +30,20 @@
         "moveGeneratedFiles": false,
         "updateImportPath": false
       },
-      "outputs": ["libs/generated/dbml/models.dbml"]
+      "outputs": [
+        "libs/generated/dbml/models.dbml"
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/generated/dbml/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/generated/dbml/**/*.ts"
+        ]
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@nrwl/jest:jest",
@@ -38,7 +51,9 @@
         "jestConfig": "libs/generated/dbml/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/generated/dbml"]
+      "outputs": [
+        "coverage/libs/generated/dbml"
+      ]
     }
   }
 }

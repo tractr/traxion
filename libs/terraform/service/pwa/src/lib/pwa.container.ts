@@ -1,6 +1,7 @@
 import { PwaContainerConfig } from './interfaces';
 
 import {
+  COMMON_SENSITIVE_ENVIRONMENT_VARIABLES,
   EnvironmentDefinition,
   HttpContainer,
 } from '@tractr/terraform-service-ecs';
@@ -23,7 +24,9 @@ export class PwaContainer extends HttpContainer<PwaContainerConfig> {
 
     envs.push({
       name: 'ENVS_NAMES',
-      value: this.getEnvNames().join(','),
+      value: this.getEnvNames()
+        .filter((v) => !COMMON_SENSITIVE_ENVIRONMENT_VARIABLES.includes(v))
+        .join(','),
     });
 
     return envs;

@@ -1,8 +1,11 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "prefix": "tractr",
   "projectType": "library",
   "sourceRoot": "libs/angular/tools/src",
-  "tags": ["scope:angular"],
+  "tags": [
+    "scope:angular"
+  ],
   "targets": {
     "build": {
       "configurations": {
@@ -18,7 +21,9 @@
       "options": {
         "project": "libs/angular/tools/ng-package.json"
       },
-      "outputs": ["dist/libs/angular/tools"]
+      "outputs": [
+        "dist/libs/angular/tools"
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -28,7 +33,9 @@
           "libs/angular/tools/src/**/*.html"
         ]
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -43,7 +50,9 @@
         "jestConfig": "libs/angular/tools/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/angular/tools"]
+      "outputs": [
+        "coverage/libs/angular/tools"
+      ]
     }
   }
 }

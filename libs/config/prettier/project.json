@@ -1,7 +1,10 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/config/prettier/src",
-  "tags": ["scope:config"],
+  "tags": [
+    "scope:config"
+  ],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
@@ -15,14 +18,20 @@
         "packageJson": "libs/config/prettier/package.json",
         "tsConfig": "libs/config/prettier/tsconfig.lib.json"
       },
-      "outputs": ["{options.outputPath}"]
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/config/prettier/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/config/prettier/**/*.ts"
+        ]
       },
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -36,7 +45,9 @@
         "jestConfig": "libs/config/prettier/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/config/prettier"]
+      "outputs": [
+        "coverage/libs/config/prettier"
+      ]
     }
   }
 }

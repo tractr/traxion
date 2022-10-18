@@ -1,8 +1,9 @@
 /**
- * Get and concat value by path
+ * Get and concat value by path. Values can be undefined or null
+ *
  * @param path the string path to the value
  * @param obj The obj to traverse
- * @returns an array of values
+ * @returns an array of values (values can be undefined or null)
  */
 export function findAllValueByPath(path: string, obj?: unknown): unknown[] {
   const [nextPath, ...nextKeys] = path.split('.');
@@ -33,10 +34,20 @@ export function findAllValueByPath(path: string, obj?: unknown): unknown[] {
   return findAllValueByPath(nextKeys.join('.'), currentObj);
 }
 
+/**
+ * Get and concat value by path, and exclude null and undefined values
+ *
+ * @param path the string path to the value
+ * @param obj The obj to traverse
+ * @returns an array of values (values can not be undefined or null)
+ */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getConcatValueByPath<T extends Array<unknown> = any[]>(
   path: string,
   obj?: unknown,
 ): T {
-  return findAllValueByPath(path, obj) as T;
+  // Filter clause remove nulls and undefined items (that are invalid in Prisma queries)
+  return findAllValueByPath(path, obj).filter(
+    (item) => !(item === null || item === undefined),
+  ) as T;
 }

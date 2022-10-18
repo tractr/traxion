@@ -41,7 +41,6 @@ export class SessionService<
   logged$ = new BehaviorSubject<boolean>(false);
 
   me$: Observable<U | null> = this.refresh$.pipe(
-    // tap(console.log),
     switchMap((next) => {
       if (typeof next === 'undefined') return this.fetchUser$();
       return of(next);
@@ -108,15 +107,14 @@ export class SessionService<
     };
 
     const userLogged = await lastValueFrom(
-      request<{ user: U }>({
+      request({
         url: this.loginUrl,
         method: 'POST',
         withCredentials: true,
         body,
       }).pipe(
-        map((value) => value.response.user),
-        map((value) => transformAndValidate(this.user)(value) as U),
-        tap((nextUser) => this.refresh(nextUser)),
+        switchMap(() => this.fetchUser$()),
+        tap((user) => this.refresh(user)),
         catchError(() => {
           throw new Error('Could not login, wrong email or password');
         }),
@@ -133,7 +131,7 @@ export class SessionService<
     await lastValueFrom(
       request({
         url: this.logoutUrl,
-        method: 'GET',
+        method: 'POST',
         withCredentials: true,
       }).pipe(map(() => this.refresh(null))),
     );

@@ -10,11 +10,11 @@ export type <<Model pascal>><<field pascal>> = (typeof <<Model pascal>><<field p
   
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
 export const <<Model pascal>>Include = [
-    <<for Fields entity field>>
+    <<for Fields entity and not manyOne field>>
     '<<field camel>>',
     <<endfor>>
     <<for ReferencedIn ref>>
-      <<for ref.fields field>>
+      <<for ref.fields not manyOne field>>
         '<<-field backRelation camel>>',
       <<endfor>>
     <<endfor>>

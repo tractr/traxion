@@ -40,7 +40,11 @@ export class CertificatesComponent extends AwsComponent<
   private createAcmCertificate() {
     return new acm.AcmCertificate(this, 'acm', {
       domainName: this.config.domainName,
-      subjectAlternativeNames: [`*.${this.config.domainName}`],
+      subjectAlternativeNames:
+        this.config.subjectAlternativeNames &&
+        this.config.subjectAlternativeNames.length > 0
+          ? this.config.subjectAlternativeNames
+          : [`*.${this.config.domainName}`],
       validationMethod: 'DNS',
       lifecycle: { createBeforeDestroy: true },
       tags: this.getResourceNameAsTag('acm'),

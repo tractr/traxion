@@ -11,11 +11,11 @@ import {
 <<if Fields rich and not internal>>
 import RichTextInput from 'ra-input-rich-text';
 <<endif>>
- 
+
 export const <<Model pascal>>Create = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
-<<for Fields not internal field>>
+<<for Fields not internal and not manyOne field>>
     <<if field entity>>
         <<<printEntityInput(field)>>>
     <<else>>
@@ -29,7 +29,7 @@ export const <<Model pascal>>Create = (props: CreateProps) => (
 export const <<Model pascal>>Edit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
-<<for Fields not internal field>>
+<<for Fields not internal and not manyOne field>>
     <<if field entity>>
         <<<printEntityInput(field)>>>
     <<else>>
@@ -45,10 +45,19 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
 <<if field string>>
     <<if field rich>>
       <RichTextInput
+        sx={{
+          width: '100%',
+        }}
     <<elseif field password>>
       <PasswordInput
+        sx={{
+          width: '100%',
+        }}
     <<else>>
       <TextInput
+        sx={{
+          width: '100%',
+        }}
         <<if field email>>
         type="email"
         <<elseif field url>>
@@ -60,12 +69,18 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
 <<elseif field boolean>>
     <<if field nullable>>
       <NullableBooleanInput
+        sx={{
+          width: '100%',
+        }}
     <<else>>
       <BooleanInput
         defaultValue={false}
     <<endif>>
 <<elseif field number>>
       <NumberInput
+        sx={{
+          width: '100%',
+        }}
     <<if field latitude>>
         min={-90} max={90}
     <<elseif field longitude>>
@@ -76,6 +91,9 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
 <<elseif field enum>>
     <<if field multiple>>
      <AutocompleteArrayInput
+        sx={{
+          width: '100%',
+        }}
         choices={[
     <<for field.enum e>>
           { id: '<<e camel>>', name: '<<e camel>>' },
@@ -83,6 +101,10 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
         ]}
     <<else>>
     <AutocompleteInput
+        sx={{
+          width: '100%',
+        }}
+        defaultValue={null}
         choices={[
     <<for field.enum e>>
           { id: '<<e camel>>', name: '<<e camel>>' },
@@ -92,11 +114,24 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
 <<elseif field datetime>>
     <<if field date>>
       <DateInput
+        sx={{
+          width: '100%',
+        }}
     <<else>>
       <DateTimeInput
+        sx={{
+          width: '100%',
+        }}
     <<endif>>
 <<else>>
       <TextInput
+        sx={{
+          width: '100%',
+        }}
+         <<if field object>>
+        parse={(v) => JSON.parse(v || null)}
+        format={(v) => JSON.stringify(v || undefined)}
+        <<endif>>
 <<endif>>
 
     <<if field not nullable>>
@@ -112,17 +147,33 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
 <<if field not manyMany>>
     <<if field multiple>>
     <ReferenceArrayInput
+        sx={{
+          width: '100%',
+        }}
         source="<<field camel>>"
         label="<<field capital>>"
         reference="<<field.model camel>>">
-        <SelectArrayInput optionText="<<=labelFieldCamel(field.model)>>" />
+        <AutocompleteArrayInput
+          sx={{
+            width: '100%',
+          }}
+          optionText="<<=labelFieldCamel(field.model)>>"
+        />
     </ReferenceArrayInput>
     <<else>>
     <ReferenceInput
+        sx={{
+          width: '100%',
+        }}
         source="<<field camel>>Id"
         label="<<field capital>>"
         reference="<<field.model camel>>">
-        <SelectInput optionText="<<=labelFieldCamel(field.model)>>" />
+        <AutocompleteInput
+          sx={{
+            width: '100%',
+          }}
+          optionText="<<=labelFieldCamel(field.model)>>"
+        />
     </ReferenceInput>
     <<endif>>
 <<endif>>
@@ -147,20 +198,20 @@ function fieldInput(field) {
                 default: return ['DateTimeInput'];
             }
         case 'entity':
-            return field.multiple ? 
-                ['ReferenceArrayInput', 'SelectArrayInput'] :
-                ['ReferenceInput', 'SelectInput'];
+            return field.multiple ?
+                ['ReferenceArrayInput', 'AutocompleteArrayInput'] :
+                ['ReferenceInput', 'AutocompleteInput'];
         default: return ['TextInput'];
     }
 }
 function labelFieldCamel(model) {
-    const label = model.fields.label.length ? 
-        model.fields.label[0] : model.fields.primary;
-    return label.names.camel;
+  const foundFirstLabelSearchable = model.fields.label.find((field) => field.searchable);
+  const label = foundFirstLabelSearchable || model.fields.primary;
+  return label.names.camel;
 }
 function getImports() {
     const output = [];
-    
+
     root.fields
         .filter(field => !field.internal)
         .forEach(field => {
