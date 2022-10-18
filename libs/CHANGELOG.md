@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.63.0](https://github.com/tractr/stack/compare/v1.62.0...v1.63.0) (2022-10-18)
+
+
+### Features
+
+* **common:** protect arrayChanges from mutations ([#512](https://github.com/tractr/stack/issues/512)) ([745d6e1](https://github.com/tractr/stack/commit/745d6e17a7dc2f740ff73782f07a5a6b476f7b64))
+
+
+
 # [1.62.0](https://github.com/tractr/stack/compare/v1.61.3...v1.62.0) (2022-10-12)
 
 
