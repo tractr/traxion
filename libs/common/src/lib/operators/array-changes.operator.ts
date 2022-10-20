@@ -1,5 +1,5 @@
 import { OperatorFunction } from 'rxjs';
-import { filter, scan } from 'rxjs/operators';
+import { filter, map, scan } from 'rxjs/operators';
 
 /**
  * Object returned by the arrayChanges operator.
@@ -12,6 +12,7 @@ export interface ArrayChanges<T> {
 
 /**
  * Emits when the array changes.
+ * Emits on first array, even if it is empty.
  * Comparisons are done using the Array.includes method.
  * This does not with duplicate entries.
  *
@@ -26,7 +27,7 @@ export function arrayChanges<T>(
   return function operator(source) {
     return source.pipe(
       scan(
-        (acc, curr) => {
+        (acc, curr, index) => {
           // Get removed items
           const removed = acc.value.filter(
             (item) => !curr.some((item2) => comparator(item, item2)),
@@ -47,17 +48,28 @@ export function arrayChanges<T>(
             value,
             added,
             removed,
+            index,
           };
         },
         {
           value: [] as T[],
           added: [] as T[],
           removed: [] as T[],
+          index: -1,
         },
       ),
       filter(
-        (changes) => changes.added.length > 0 || changes.removed.length > 0,
+        (changes) =>
+          changes.index === 0 ||
+          changes.added.length > 0 ||
+          changes.removed.length > 0,
       ),
+      // Clone array to protect tracking from mutation
+      map((changes) => ({
+        value: [...changes.value],
+        added: [...changes.added],
+        removed: [...changes.removed],
+      })),
     );
   };
 }

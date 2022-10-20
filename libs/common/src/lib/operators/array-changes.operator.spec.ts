@@ -1,4 +1,5 @@
 import { Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { TestScheduler } from 'rxjs/testing';
 
 import { ArrayChanges, arrayChanges } from './array-changes.operator';
@@ -82,6 +83,99 @@ describe('arrayChanges', () => {
       });
     });
   });
+
+  it('should track changes with a single item and stop after completion', () => {
+    createTestScheduler(expect).run(({ cold, expectObservable }) => {
+      // Creates marbles
+      const inputMarble = ' -a-b-|-c';
+      const outputMarble = '-a-b-|--';
+
+      const object = { id: 1 };
+
+      // Creates input stream
+      const stream$ = cold(inputMarble, {
+        a: [object],
+        b: [],
+        c: [object],
+      });
+      const pipedStream$ = stream$.pipe(arrayChanges<{ id: number }>());
+
+      // Tests output
+      expectObservable(pipedStream$).toBe(outputMarble, {
+        a: {
+          added: [object],
+          removed: [],
+          value: [object],
+        },
+        b: {
+          added: [],
+          removed: [object],
+          value: [],
+        },
+      });
+    });
+  });
+
+  it('should emit on first empty array', () => {
+    createTestScheduler(expect).run(({ cold, expectObservable }) => {
+      // Creates marbles
+      const inputMarble = ' -a-b--|';
+      const outputMarble = '-a----|';
+
+      // Creates input stream
+      const stream$ = cold(inputMarble, {
+        a: [],
+        b: [],
+      });
+      const pipedStream$ = stream$.pipe(arrayChanges<{ id: number }>());
+
+      // Tests output
+      expectObservable(pipedStream$).toBe(outputMarble, {
+        a: {
+          added: [],
+          removed: [],
+          value: [],
+        },
+      });
+    });
+  });
+
+  it('should track changes even if the returned array is mutated', () => {
+    createTestScheduler(expect).run(({ cold, expectObservable }) => {
+      // Creates marbles
+      const inputMarble = ' -a-b-|';
+      const outputMarble = '-a-b-|';
+
+      const object = { id: 1 };
+
+      // Creates input stream
+      const stream$ = cold(inputMarble, {
+        a: [object],
+        b: [],
+      });
+      const pipedStream$ = stream$.pipe(
+        arrayChanges<{ id: number }>(),
+        tap((changes) => {
+          changes.value.pop();
+        }),
+      );
+
+      // Tests output
+      expectObservable(pipedStream$).toBe(outputMarble, {
+        a: {
+          added: [object],
+          removed: [],
+          value: [],
+        },
+        b: {
+          added: [],
+          removed: [object],
+          value: [],
+        },
+      });
+    });
+  });
+
   it('should emit original added value when removed', async () => {
     const subject = new Subject<{ id: number }[]>();
     const stream$ = subject.pipe(
