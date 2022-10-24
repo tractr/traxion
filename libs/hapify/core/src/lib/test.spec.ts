@@ -10,14 +10,14 @@ import {
   StringTextField,
 } from './fields';
 
+const idField = new NumberField('Id')
+  .setPrimary(true)
+  .setInternal(true)
+  .setOwnership(true);
+
 const root = new Root('app').addModel(
   new Model('User')
-    .addField(
-      new NumberField('Id')
-        .setPrimary(true)
-        .setInternal(true)
-        .setOwnership(true),
-    )
+    .addField(idField)
     .addField(new StringField('FirstName').setMaxLength(50))
     .addField(new StringField('LastName').setMaxLength(50))
     .addField(new StringEmailField('Email'))
