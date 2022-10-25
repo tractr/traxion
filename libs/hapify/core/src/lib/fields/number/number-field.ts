@@ -57,3 +57,10 @@ export class NumberField extends Field {
     return this._defaultValue;
   }
 }
+
+/**
+ * Checks if a field is a number field
+ */
+export function number(field: Field): field is NumberField {
+  return field instanceof NumberField;
+}

@@ -1,4 +1,5 @@
 import { NumberField } from './number-field';
+import { Field } from '../field';
 
 export class NumberLatitudeField extends NumberField {
   protected _min: number = -90;
@@ -18,4 +19,11 @@ export class NumberLatitudeField extends NumberField {
   setMax(max: number): this {
     return super.setMax(Math.min(max, 90));
   }
+}
+
+/**
+ * Checks if a field is a number latitude field
+ */
+export function latitude(field: Field): field is NumberLatitudeField {
+  return field instanceof NumberLatitudeField;
 }

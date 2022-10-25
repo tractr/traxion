@@ -61,3 +61,10 @@ export class StringField extends Field {
     return this._defaultValue;
   }
 }
+
+/**
+ * Checks if a field is a string field
+ */
+export function string(field: Field): field is StringField {
+  return field instanceof StringField;
+}
