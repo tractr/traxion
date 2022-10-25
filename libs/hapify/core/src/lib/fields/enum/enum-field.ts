@@ -45,3 +45,10 @@ export class EnumField extends Field {
     return Array.from(this._values.values());
   }
 }
+
+/**
+ * Checks if a field is an enum field
+ */
+export function isEnum(field: Field): field is EnumField {
+  return field instanceof EnumField;
+}
