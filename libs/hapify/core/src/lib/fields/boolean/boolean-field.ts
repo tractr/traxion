@@ -18,3 +18,10 @@ export class BooleanField extends Field {
     return this._defaultValue;
   }
 }
+
+/**
+ * Checks if a field is a boolean field
+ */
+export function boolean(field: Field): field is BooleanField {
+  return field instanceof BooleanField;
+}

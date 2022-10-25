@@ -13,3 +13,10 @@ export abstract class EntityField extends Field {
     return this._model;
   }
 }
+
+/**
+ * Checks if a field is an entity field
+ */
+export function entity(field: Field): field is EntityField {
+  return field instanceof EntityField;
+}

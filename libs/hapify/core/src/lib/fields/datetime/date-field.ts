@@ -61,3 +61,10 @@ export class DateField extends Field {
     return this._withTime;
   }
 }
+
+/**
+ * Checks if a field is a date field
+ */
+export function date(field: Field): field is DateField {
+  return field instanceof DateField;
+}
