@@ -1,0 +1,2 @@
+export * from './<<Model kebab>>.type';
+export * from './<<Model kebab>>-properties.type';

@@ -30,12 +30,12 @@ import {
   <<Model pascal>>FindUniqueParamsDto,
 } from '../../../../rest-dtos';
 
-import { <<Model constant>>_SELECT } from '../constants';
 import {
+  <<Model constant>>_SELECT,
   <<Model pascal>>Dto,
   <<Model pascal>>ReadDto,
   <<Model pascal>>WriteDto,
-} from '../types';
+} from '../../../../models';
 
 @Injectable()
 export class <<Model pascal>>RestDtoService {
@@ -413,7 +413,7 @@ export class <<Model pascal>>RestDtoService {
     // Add ownership constraints
     return {
       ...select,
-      <<for Fields oneOne or oneMany or manyMany field>>
+      <<for Fields manyMany field>>
         <<field camel>>: {
           ...select.<<field camel>>,
           where: !isEmpty(accessibleBy(abilities).<<field.model pascal>>) ?
@@ -422,7 +422,7 @@ export class <<Model pascal>>RestDtoService {
         },
       <<endfor>>
       <<for root.referencedIn ref>>
-        <<for ref.fields oneOne or oneMany or manyMany field>>
+        <<for ref.fields oneMany or manyMany field>>
           <<-field backRelation camel>>: {
             ...select.<<-field backRelation camel>>,
             where: !isEmpty(accessibleBy(abilities).<<ref pascal>>) ?

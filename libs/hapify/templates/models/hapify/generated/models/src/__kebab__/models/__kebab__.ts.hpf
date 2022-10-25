@@ -72,8 +72,6 @@ import {
 } from '../enums';
 <<endif>>
 
-import { <<Model pascal>> as Prisma<<Model pascal>> } from '@prisma/client';
-
 <<if Fields boolean or datetime or number>>
 import {
   <<if Fields boolean>>
@@ -88,12 +86,14 @@ import {
 } from '@tractr/common';
 <<endif>>
 
+import { <<Model pascal>>ReadDto } from '../types';
+
 <<if Model hasNotes>>
  /**
   * <<!Model>>
   */
 <<endif>>
-export class <<Model pascal>> implements Partial<Prisma<<Model pascal>>> {
+export class <<Model pascal>> implements <<Model pascal>>ReadDto {
 <<for Fields not entity and not hidden and not password field>>
 <<if field hasNotes>>
   /**

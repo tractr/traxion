@@ -5,23 +5,23 @@ import {
   IsNumber,
   IsOptional,
   IsString,
-	
+
   <<if Fields (string and not text)>>
   MaxLength,
   <<endif>>
-	
+
   <<if Fields entity and searchable>>
-  IsUUID, 
+  IsUUID,
   <<endif>>
-	
+
   <<if Fields object and not internal>>
-  IsObject, 
+  IsObject,
   <<endif>>
-   
+
   Min,
-	
+
 } from 'class-validator';
-	
+
 
 <<if Fields searchable and not entity>>
 import {
@@ -48,65 +48,62 @@ import {
   <<endif>>
 } from '@tractr/common';
 <<endif>>
-  
+
 import {
   <<for Fields enum enumField>>
   <<Model pascal>><<enumField pascal>>,
   <<endfor>>
-  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-  <<Model pascal>>Include,
-  <<<}>>>
   SortOrder,
   <<Model pascal>>,
 } from '../../../models';
-	
+
 import {
   TransformStringToArray,
   TransformStringToInt,
 } from '@tractr/common';
- 
-	
+
+
 export type <<Model pascal>>FindManyQuerySortableKeys =
 <<for Fields sortable field>>
   | '<<field camel>>'
 <<endfor>>;
-	
+
 export type <<Model pascal>>FindManyQuerySort =
 <<for Fields sortable field>>
   | '<<field camel>>'
   | '<<field camel>>:asc'
   | '<<field camel>>:desc'
 <<endfor>>;
- 
+
 export class <<Model pascal>>FindManyQueryDto {
 <<<getSearchableFields(root).forEach((field) => {>>>
-	
+
   <<if field string and not text>>
   @MaxLength(<<< if (field.meta.maxLength) { >>><<-field maxLength raw>><<<}else{>>>255<<<}>>>, {
     message: '<<field pascal>> field is too long',
   })
   <<endif>>
-	
+
   <<if field entity>>
     <<< if (field.multiple) { >>>
     @TransformStringToArray()
     @IsArray()
     <<< } >>>
-	
+
     @IsUUID("all", <<=listModifier(field)>>)
   <<else>>
   @IsString(<<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field not entity >>
   @<<=getType(field)>>FilterValidate(<<if field enum>>Object.values(<<Model pascal>><<field pascal>>), <<endif>><<if field not object>><<=listModifier(field)>><<endif>>)
   <<endif>>
-	
+
   @IsOptional()
   <<=optionalTypedProperty(field)>>
- 
+
 <<<})>>>
-	
+
   @TransformStringToArray()
   @IsString({ each: true})
   @IsIn([
@@ -115,21 +112,21 @@ export class <<Model pascal>>FindManyQueryDto {
     '<<field camel>>:asc',
     '<<field camel>>:desc',
   <<endfor>>
-  ], { each: true }) 
+  ], { each: true })
   @IsOptional()
   sort: <<Model pascal>>FindManyQuerySort[] = ['<<for Fields primary field>><<field camel>><<endfor>>'];
- 
+
   @IsOptional()
-  @IsIn(Object.values(SortOrder)) 
+  @IsIn(Object.values(SortOrder))
   order: SortOrder = 'asc';
-  
+
   @IsOptional()
   @IsNumber()
   @IsInt()
   @Min(1)
   @TransformStringToInt()
   take = 100;
- 
+
   @IsOptional()
   @IsNumber()
   @IsInt()
@@ -146,14 +143,14 @@ function getSearchableFields(model) {
     .filter((field) => field.searchable && !field.password && !field.hidden);
 }
 >>>
-	
+
 <<<
 function optionalTypedProperty(f) {
   let out = f.names.camel;
   out += "?: "
   if(f.searchable && f.type !== "entity")
     out += "string | ";
-	
+
   if (f.type === "boolean") out += "boolean";
   else if (f.type === "string") out = out.replace(' | ', '');
   else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;
@@ -168,14 +165,14 @@ function optionalTypedProperty(f) {
   return out;
 }
 >>>
-	
+
 <<<
 function listModifier(f) {
   if (f.multiple) return "{ each: true}";
   else return "";
 }
 >>>
-	
+
 <<<
 function getType(f) {
   let out = ""
@@ -185,7 +182,7 @@ function getType(f) {
   else if (f.type === "datetime") return "DateTime";
   else if (f.type === "object") return "Json";
   else if (f.type === "enum") return "Enum";
-	
+
   return "UnknownType";
 }
 >>>

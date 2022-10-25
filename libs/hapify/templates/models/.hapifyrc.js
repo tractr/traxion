@@ -5,35 +5,70 @@ module.exports = {
     {
       path: 'generated/models/index.ts',
       engine: 'hpf',
-      input: 'all',
+      input: 'one',
     },
     {
-      path: 'generated/models/enums/index.ts',
+      path: 'generated/models/src/index.ts',
       engine: 'hpf',
       input: 'all',
     },
     {
-      path: 'generated/models/enums/sort-order.ts',
+      path: 'generated/models/src/sort-order.ts',
       engine: 'hpf',
       input: 'all',
     },
     {
-      path: 'generated/models/enums/{kebab}.enum.ts',
+      path: 'generated/models/src/{kebab}/index.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path: 'generated/models/models/index.ts',
-      engine: 'hpf',
-      input: 'all',
-    },
-    {
-      path: 'generated/models/models/{kebab}.ts',
+      path: 'generated/models/src/{kebab}/constants/index.ts',
       engine: 'hpf',
       input: 'one',
     },
     {
-      path: 'generated/models/models/{kebab}.dto.ts',
+      path: 'generated/models/src/{kebab}/constants/{kebab}-select.constant.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/models/src/{kebab}/types/{kebab}.type.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/models/src/{kebab}/types/{kebab}-properties.type.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/models/src/{kebab}/types/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/models/src/{kebab}/enums/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/models/src/{kebab}/enums/{kebab}.enum.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/models/src/{kebab}/models/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/models/src/{kebab}/models/{kebab}.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/models/src/{kebab}/models/{kebab}.dto.ts',
       engine: 'hpf',
       input: 'one',
     },

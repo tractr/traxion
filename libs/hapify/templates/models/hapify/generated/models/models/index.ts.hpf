@@ -1,6 +1,0 @@
-<<for Models model>>
-export * from './<<model kebab>>';
-<<if model.properties.hasUnique>>
-export * from './<<model kebab>>.dto';
-<<endif>>
-<<endfor>>

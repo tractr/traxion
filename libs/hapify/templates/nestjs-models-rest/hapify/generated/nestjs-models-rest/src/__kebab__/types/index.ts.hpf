@@ -1,1 +1,0 @@
-export * from './<<Model kebab>>-with-relation-ids.type';

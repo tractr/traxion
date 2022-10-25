@@ -1,0 +1,4 @@
+export * from './<<Model kebab>>';
+<<<if (root.properties.hasUnique) {>>>
+export * from './<<Model kebab>>.dto';
+<<<}>>>

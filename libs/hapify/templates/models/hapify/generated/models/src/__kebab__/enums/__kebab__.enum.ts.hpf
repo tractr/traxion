@@ -1,0 +1,9 @@
+<<for Fields enum field>>
+export const <<Model pascal>><<field pascal>> = {
+   <<for field.enum enumValue>>
+ <<enumValue raw>>: '<<enumValue raw>>',
+   <<endfor>>
+} as const;
+
+export type <<Model pascal>><<field pascal>> = (typeof <<Model pascal>><<field pascal>>)[keyof typeof <<Model pascal>><<field pascal>>];
+<<endfor>>

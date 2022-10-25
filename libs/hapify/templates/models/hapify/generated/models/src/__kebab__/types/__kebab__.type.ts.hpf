@@ -1,0 +1,24 @@
+import type { Prisma } from '@prisma/client';
+import { <<Model constant>>_SELECT } from '../constants';
+import {
+  <<Model pascal>>HiddenProperties,
+  <<Model pascal>>SystemProperties,
+} from './<<Model kebab>>-properties.type';
+
+/**
+ * Type of the <<Model pascal>> manipulated internally by the api
+ */
+export type <<Model pascal>>Dto = Prisma.<<Model pascal>>GetPayload<{
+  select: typeof <<Model constant>>_SELECT,
+}>;
+
+/**
+ * <<Model pascal>> write payload
+ */
+export type <<Model pascal>>WriteDto = Omit< <<Model pascal>>Dto, <<Model pascal>>SystemProperties>;
+
+/**
+ * <<Model pascal>> read payload
+ */
+export type <<Model pascal>>ReadDto = Omit< <<Model pascal>>Dto, <<Model pascal>>HiddenProperties>;
+

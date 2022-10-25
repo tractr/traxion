@@ -1,13 +1,3 @@
-import { Prisma } from '@prisma/client';
-import { <<Model constant>>_SELECT } from '../constants';
-
-/**
- * Type of the <<Model pascal>> manipulated internally by the api
- */
-export type <<Model pascal>>Dto = Prisma.<<Model pascal>>GetPayload<{
-  select: typeof <<Model constant>>_SELECT,
-}>;
-
 /**
  * <<Model pascal>> properties defined by the api.
  * They should never be sent by the end user.
@@ -51,14 +41,3 @@ export type <<Model pascal>>RelationalProperties =
   <<<} else {>>>
     never
   <<<}>>> ;
-
-
-/**
- * <<Model pascal>> write payload
- */
-export type <<Model pascal>>ReadDto = Omit< <<Model pascal>>Dto, <<Model pascal>>HiddenProperties>;
-
-/**
- * <<Model pascal>> read payload
- */
-export type <<Model pascal>>WriteDto = Omit< <<Model pascal>>Dto, <<Model pascal>>SystemProperties>;

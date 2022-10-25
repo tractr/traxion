@@ -1,6 +1,0 @@
-<<for Models model>>
-<<<if (model.fields.list.find(f => !!f.enum) || model.dependencies.list.length || model.referencedIn.length) {>>>
-export * from './<<model kebab>>.enum';
-<<<}>>>
-<<endfor>>
-export * from './sort-order';

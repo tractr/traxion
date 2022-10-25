@@ -1,0 +1,3 @@
+<<if Fields enum>>
+export * from './<<Model kebab>>.enum';
+<<endif>>
