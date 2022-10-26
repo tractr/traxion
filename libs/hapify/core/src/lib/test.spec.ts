@@ -2,13 +2,17 @@ import { Root } from './root';
 import { Model } from './model';
 import {
   BooleanField,
+  number,
   NumberField,
   NumberIntegerField,
+  password,
+  string,
   StringEmailField,
   StringField,
   StringPasswordField,
   StringTextField,
 } from './fields';
+import { and, or } from './operators';
 
 const idField = new NumberField('Id')
   .setPrimary(true)
@@ -39,3 +43,9 @@ const root = new Root('app').addModel(
         .setNotes('Amount of credits remaining'),
     ),
 );
+
+const output = `
+${root.models[0].fields
+  .filter(or(number, and(string, password)))
+  .map((field) => field.name)}
+`;
