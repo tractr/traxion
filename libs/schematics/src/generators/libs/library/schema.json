@@ -1,0 +1,102 @@
+{
+  "$id": "TractrLibrary",
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "examples": [
+    {
+      "command": "g @tractr/schematics:library mylib --directory=myapp",
+      "description": "Generate libs/myapp/mylib"
+    }
+  ],
+  "properties": {
+    "addSecondaryEndpoint": {
+      "description": "Add multiple endpoint to the library",
+      "type": "array"
+    },
+    "hapifyModelsJson": {
+      "default": "hapify-models.json",
+      "description": "Relative path from root workspace where the hapify models json file is located",
+      "type": "string"
+    },
+    "hapifyTemplate": {
+      "default": "",
+      "description": "Template to use in this library",
+      "items": {
+        "enum": [
+          "angular-rext-client",
+          "casl",
+          "models",
+          "nestjs-models",
+          "nestjs-graphql",
+          "nestjs-models-common",
+          "nestjs-models-rest",
+          "prisma",
+          "react-admin",
+          "rest-dtos",
+          "rext-client"
+        ],
+        "type": "string"
+      },
+      "type": "string",
+      "x-prompt": {
+        "items": [
+          "angular-rext-client",
+          "casl",
+          "models",
+          "nestjs-models",
+          "nestjs-graphql",
+          "nestjs-models-common",
+          "nestjs-models-rest",
+          "react-admin",
+          "rest-dtos",
+          "rext-client"
+        ],
+        "message": "Which package your library will use?",
+        "type": "string"
+      }
+    },
+    "hapifyUseImportReplacements": {
+      "default": true,
+      "description": "Use import replacement for hapify models",
+      "type": "boolean"
+    },
+    "importPath": {
+      "description": "Import path of the library",
+      "type": "string"
+    },
+    "name": {
+      "description": "Use a custom library name",
+      "type": "string"
+    },
+    "skipInstall": {
+      "default": false,
+      "description": "Skip installing dependencies",
+      "type": "boolean"
+    },
+    "standalone": {
+      "default": false,
+      "description": "If specified the schematics will not try to create the dependencies' libraries",
+      "type": "boolean"
+    },
+    "type": {
+      "description": "Library type",
+      "items": {
+        "enum": [
+          "angular",
+          "nest",
+          "react",
+          "ts"
+        ],
+        "type": "string"
+      },
+      "type": "string"
+    },
+    "useSecondaryEndpoint": {
+      "default": true,
+      "description": "Do the schematics configure the default secondary endpoints",
+      "type": "boolean"
+    }
+  },
+  "title": "Create a Tractr library with hapify for Nx",
+  "type": "object"
+}

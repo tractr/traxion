@@ -1,0 +1,24 @@
+{
+  "$id": "InitWorkspace",
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "properties": {
+    "appsDir": {
+      "default": "apps",
+      "description": "Configure the applications directory",
+      "type": "string"
+    },
+    "libsDir": {
+      "default": "libs",
+      "description": "Configure the libraries (or packages) directory",
+      "type": "string"
+    },
+    "skipInstall": {
+      "default": false,
+      "description": "Skip installing dependencies",
+      "type": "boolean"
+    }
+  },
+  "title": "Initialize a nx workspace to take the default usage of traxion",
+  "type": "object"
+}

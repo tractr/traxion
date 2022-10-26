@@ -1,12 +1,55 @@
-import { TargetConfiguration } from '@nrwl/devkit';
+export type TraxionListPackages =
+  | 'angular-rext-client'
+  | 'casl'
+  | 'models'
+  | 'nestjs-models'
+  | 'nestjs-graphql'
+  | 'nestjs-models-common'
+  | 'nestjs-models-rest'
+  | 'prisma'
+  | 'react-admin'
+  | 'rest-dtos'
+  | 'rext-client';
 
-import { AvailableTractrTemplates } from './generators/hapify-library/schema';
-import { PackageDefinition, PackageType } from './helpers';
+export type LibraryType = 'angular' | 'nest' | 'react' | 'ts';
 
-export const DEFAULT_IMPORT_REPLACEMENTS = {
+export const DEFAULT_TRAXION_DIRECTORY: Record<TraxionListPackages, string> = {
+  'angular-rext-client': 'angular',
+  casl: 'common',
+  models: 'common',
+  'nestjs-models': 'nestjs',
+  'nestjs-graphql': 'nestjs',
+  'nestjs-models-common': 'nestjs',
+  'nestjs-models-rest': 'nestjs',
+  prisma: '',
+  'react-admin': 'react',
+  'rest-dtos': 'common',
+  'rext-client': 'common',
+};
+
+export const DEFAULT_TRAXION_NAME: Record<TraxionListPackages, string> = {
+  'angular-rext-client': 'rext-client',
+  casl: 'casl',
+  models: 'models',
+  'nestjs-models': 'models',
+  'nestjs-graphql': 'graphql',
+  'nestjs-models-common': 'models-common',
+  'nestjs-models-rest': 'models-rest',
+  prisma: 'prisma',
+  'react-admin': 'admin',
+  'rest-dtos': 'rest-dtos',
+  'rext-client': 'rext-client',
+};
+
+/**
+ * List of packages dependencies
+ */
+export const DEFAULT_TRAXION_PACKAGES_DEPS: Record<
+  TraxionListPackages,
+  TraxionListPackages[]
+> = {
   'angular-rext-client': ['rext-client'],
   casl: [],
-  dbml: [],
   models: [],
   'nestjs-models': ['nestjs-models-common', 'nestjs-models-rest'],
   'nestjs-graphql': ['nestjs-models-common'],
@@ -18,10 +61,16 @@ export const DEFAULT_IMPORT_REPLACEMENTS = {
   'rext-client': ['models', 'rest-dtos'],
 };
 
-export const DEFAULT_SECONDARY_ENTRY_POINTS: Record<string, string[]> = {
+/**
+ * Configure which secondary entry points are available for each library
+ * (Used to declare the mock entry point)
+ */
+export const DEFAULT_SECONDARY_ENTRY_POINTS: Record<
+  TraxionListPackages,
+  string[]
+> = {
   'angular-rext-client': [],
   casl: [],
-  dbml: [],
   models: ['mock'],
   'nestjs-models': [],
   'nestjs-graphql': [],
@@ -33,29 +82,31 @@ export const DEFAULT_SECONDARY_ENTRY_POINTS: Record<string, string[]> = {
   'rext-client': [],
 };
 
-export const DEFAULT_LIBRARY_TYPE: Record<AvailableTractrTemplates, string> = {
+/**
+ * Get the default target library to use during the generation
+ */
+export const DEFAULT_LIBRARY_TYPE: Record<TraxionListPackages, LibraryType> = {
   'angular-rext-client': 'angular',
-  casl: 'nest',
-  dbml: 'nest',
-  models: 'nest',
+  casl: 'ts',
+  models: 'ts',
   'nestjs-models': 'nest',
   'nestjs-graphql': 'nest',
   'nestjs-models-common': 'nest',
   'nestjs-models-rest': 'nest',
-  prisma: 'nest',
+  prisma: 'ts',
   'react-admin': 'react',
   'rest-dtos': 'nest',
-  'rext-client': 'angular',
+  'rext-client': 'ts',
 };
 
 export type LibraryUseContext = 'angular' | 'nest' | 'react';
+
 export const DEFAULT_LIBRARY_USE_CONTEXT: Record<
-  AvailableTractrTemplates,
+  TraxionListPackages,
   LibraryUseContext[]
 > = {
   'angular-rext-client': ['angular'],
   casl: ['nest', 'angular', 'react'],
-  dbml: ['nest'],
   models: ['nest', 'angular', 'react'],
   'nestjs-models': ['nest'],
   'nestjs-graphql': ['nest'],
@@ -67,36 +118,9 @@ export const DEFAULT_LIBRARY_USE_CONTEXT: Record<
   'rext-client': ['nest', 'angular', 'react'],
 };
 
-export const DEFAULT_TARGETS_OPTIONS: Partial<
-  Record<
-    AvailableTractrTemplates,
-    Record<string, Partial<TargetConfiguration> | null>
-  >
+export const DEFAULT_EXTERNALS_DEPENDENCIES: Partial<
+  Record<TraxionListPackages, Record<string, string>>
 > = {
-  dbml: {
-    build: null,
-    lint: null,
-    generate: {
-      options: {
-        format: false,
-        moveGeneratedFiles: false,
-        updateImportPath: false,
-      },
-    },
-  },
-};
-
-export const DEFAULT_DEPENDENCIES: Partial<
-  Record<AvailableTractrTemplates, PackageDefinition[]>
-> = {
-  models: [
-    { packageName: 'faker', version: '5.5.3', type: PackageType.dependencies },
-  ],
-  'angular-rext-client': [
-    {
-      packageName: '@tractr/angular-tools',
-      version: 'current',
-      type: PackageType.dependencies,
-    },
-  ],
+  models: { faker: '5.5.3' },
+  'angular-rext-client': { '@tractr/angular-tools': 'current' },
 };

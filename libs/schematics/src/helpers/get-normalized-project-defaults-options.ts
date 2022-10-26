@@ -18,7 +18,7 @@ export function getNormalizedProjectDefaultsOptions(
   {
     name: rawName,
     directory: rawDirectory,
-  }: { name: string; directory: string | undefined },
+  }: { name: string; directory?: string },
   rootDir?: string,
 ): ProjectDefaultOptions {
   // Fetch workspace data

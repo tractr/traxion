@@ -1,70 +1,70 @@
 {
   "$schema": "http://json-schema.org/schema",
   "generators": {
-    "admin-app": {
+    "apps:admin": {
       "description": "Generate a react-admin application",
-      "factory": "./src/generators/admin-app/generator",
-      "schema": "./src/generators/admin-app/schema.json"
+      "factory": "./src/generators/apps/admin/generator",
+      "schema": "./src/generators/apps/admin/schema.json"
     },
-    "api-app": {
-      "description": "api-app generator",
-      "factory": "./src/generators/api-app/generator",
-      "schema": "./src/generators/api-app/schema.json"
+    "apps:api": {
+      "description": "Generate an api application",
+      "factory": "./src/generators/apps/api/generator",
+      "schema": "./src/generators/apps/api/schema.json"
     },
-    "eslint-config": {
-      "description": "eslint-config generator",
-      "factory": "./src/generators/eslint-config/generator",
-      "schema": "./src/generators/eslint-config/schema.json"
+    "apps:pwa": {
+      "description": "Generate an angular pwa application",
+      "factory": "./src/generators/apps/pwa/generator",
+      "schema": "./src/generators/apps/pwa/schema.json"
+    },
+    "create-traxion-workspace": {
+      "description": "Take an empty nx workspace configure it to get a ready to go project",
+      "factory": "./src/generators/workspace/create=traxion-workspace/generator",
+      "schema": "./src/generators/workspace/create=traxion-workspace/schema.json"
+    },
+    "eslint": {
+      "description": "Use the traxion eslint configuration",
+      "factory": "./src/generators/configs/eslint/generator",
+      "schema": "./src/generators/configs/eslint/schema.json"
+    },
+    "generate": {
+      "description": "Add a target generate to a library",
+      "factory": "./src/generators/targets/generate/generator",
+      "schema": "./src/generators/targets/generate/schema.json"
     },
     "github-workflows": {
       "description": "github-workflows generator",
       "factory": "./src/generators/github-workflows/generator",
       "schema": "./src/generators/github-workflows/schema.json"
     },
-    "hapify-library": {
-      "description": "library generator",
-      "factory": "./src/generators/hapify-library/generator",
-      "schema": "./src/generators/hapify-library/schema.json"
+    "initialize-nx-workspace": {
+      "description": "Initialize an empty nx workspace to host traxion",
+      "factory": "./src/generators/workspace/initialize-nx-workspace/generator",
+      "schema": "./src/generators/workspace/initialize-nx-workspace/schema.json"
     },
-    "init-workspace": {
-      "description": "init-workspace generator",
-      "factory": "./src/generators/init-workspace/generator",
-      "schema": "./src/generators/init-workspace/schema.json"
+    "library": {
+      "description": "Create a traxion library to be able to use the generation pipeline",
+      "factory": "./src/generators/libs/library/generator",
+      "schema": "./src/generators/libs/library/schema.json"
     },
     "npm-publish": {
-      "description": "npm-publish generator",
-      "factory": "./src/generators/npm-publish/generator",
-      "schema": "./src/generators/npm-publish/schema.json"
+      "description": "Add npm-config target to a library",
+      "factory": "./src/generators/targets/npm-publish/generator",
+      "schema": "./src/generators/targets/npm-publish/schema.json"
     },
-    "prettier-config": {
-      "description": "prettier-config generator",
-      "factory": "./src/generators/prettier-config/generator",
-      "schema": "./src/generators/prettier-config/schema.json"
+    "prettier": {
+      "description": "Use the traxion prettier configuration",
+      "factory": "./src/generators/configs/prettier/generator",
+      "schema": "./src/generators/configs/prettier/schema.json"
     },
-    "prisma-library": {
-      "description": "prisma-library generator",
-      "factory": "./src/generators/prisma-library/generator",
-      "schema": "./src/generators/prisma-library/schema.json"
-    },
-    "pwa-app": {
-      "description": "pwa-app generator",
-      "factory": "./src/generators/pwa-app/generator",
-      "schema": "./src/generators/pwa-app/schema.json"
+    "prisma": {
+      "description": "Add and configure a prisma library",
+      "factory": "./src/generators/libs/prisma/generator",
+      "schema": "./src/generators/libs/prisma/schema.json"
     },
     "release": {
-      "description": "release generator",
-      "factory": "./src/generators/release/generator",
-      "schema": "./src/generators/release/schema.json"
-    },
-    "target-generate": {
-      "description": "target-generate",
-      "factory": "./src/generators/target-generate/generator",
-      "schema": "./src/generators/target-generate/schema.json"
-    },
-    "traxion-workspace": {
-      "description": "traxion-workspace generator",
-      "factory": "./src/generators/traxion-workspace/generator",
-      "schema": "./src/generators/traxion-workspace/schema.json"
+      "description": "Add a release target to a library",
+      "factory": "./src/generators/targets/release/generator",
+      "schema": "./src/generators/targets/release/schema.json"
     }
   },
   "name": "schematics",
