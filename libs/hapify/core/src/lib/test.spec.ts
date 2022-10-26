@@ -5,7 +5,9 @@ import {
   number,
   NumberField,
   NumberIntegerField,
+  ownership,
   password,
+  primary,
   string,
   StringEmailField,
   StringField,
@@ -39,7 +41,7 @@ const root = new Root('app').addModel(
     .addField(
       new NumberIntegerField('Credits')
         .setDefaultValue(10)
-        .setMin(1000)
+        .setMax(1000)
         .setNotes('Amount of credits remaining'),
     ),
 );
@@ -49,3 +51,7 @@ ${root.models[0].fields
   .filter(or(number, and(string, password)))
   .map((field) => field.name)}
 `;
+
+const field = root.models[0].fields[0];
+if (and(string, primary, ownership)(field)) {
+}
