@@ -1,5 +1,19 @@
 import { Node } from '../node';
-import { FieldProperties } from '../interfaces';
+import {
+  EmbeddedField,
+  FieldProperties,
+  HiddenField,
+  InternalField,
+  LabelField,
+  MultipleField,
+  NullableField,
+  OwnershipField,
+  PrimaryField,
+  RestrictedField,
+  SearchableField,
+  SortableField,
+  UniqueField,
+} from '../interfaces';
 
 /**
  * Abstract class for a field of a model
@@ -103,4 +117,104 @@ export abstract class Field extends Node implements FieldProperties {
     this._ownership = value;
     return this;
   }
+}
+
+/**
+ * Checks if a field is a flagged as primary
+ */
+export function primary<T extends Field>(field: T): field is T & PrimaryField {
+  return field.primary;
+}
+
+/**
+ * Checks if a field is a flagged as primary
+ */
+export function unique<T extends Field>(field: T): field is T & UniqueField {
+  return field.unique;
+}
+
+/**
+ * Checks if a field is a flagged as label
+ */
+export function label<T extends Field>(field: T): field is T & LabelField {
+  return field.label;
+}
+
+/**
+ * Checks if a field is a flagged as nullable
+ */
+export function nullable<T extends Field>(
+  field: T,
+): field is T & NullableField {
+  return field.nullable;
+}
+
+/**
+ * Checks if a field is a flagged as multiple
+ */
+export function multiple<T extends Field>(
+  field: T,
+): field is T & MultipleField {
+  return field.multiple;
+}
+
+/**
+ * Checks if a field is a flagged as embedded
+ */
+export function embedded<T extends Field>(
+  field: T,
+): field is T & EmbeddedField {
+  return field.embedded;
+}
+
+/**
+ * Checks if a field is a flagged as searchable
+ */
+export function searchable<T extends Field>(
+  field: T,
+): field is T & SearchableField {
+  return field.searchable;
+}
+
+/**
+ * Checks if a field is a flagged as sortable
+ */
+export function sortable<T extends Field>(
+  field: T,
+): field is T & SortableField {
+  return field.sortable;
+}
+
+/**
+ * Checks if a field is a flagged as hidden
+ */
+export function hidden<T extends Field>(field: T): field is T & HiddenField {
+  return field.hidden;
+}
+
+/**
+ * Checks if a field is a flagged as internal
+ */
+export function internal<T extends Field>(
+  field: T,
+): field is T & InternalField {
+  return field.internal;
+}
+
+/**
+ * Checks if a field is a flagged as restricted
+ */
+export function restricted<T extends Field>(
+  field: T,
+): field is T & RestrictedField {
+  return field.restricted;
+}
+
+/**
+ * Checks if a field is a flagged as ownership
+ */
+export function ownership<T extends Field>(
+  field: T,
+): field is T & OwnershipField {
+  return field.ownership;
 }
