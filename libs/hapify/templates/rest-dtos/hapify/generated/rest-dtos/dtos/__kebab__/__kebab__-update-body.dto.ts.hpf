@@ -63,13 +63,12 @@ import {
 import type { JsonObject } from '@tractr/common';
 <<endif>>
 
-<<if Fields enum>>
 import {
+  <<Model pascal>>PublicWrite,
   <<for Fields enum enumField>>
   <<Model pascal>><<enumField pascal>>,
   <<endfor>>
 } from '../../../models';
-<<endif>>
 
 <<if Fields (number or boolean or datetime) and not internal>>
 import {
@@ -87,7 +86,7 @@ import {
 } from '@tractr/common';
 <<endif>>
 
-export class <<Model pascal>>UpdateBodyDto {
+export class <<Model pascal>>UpdateBodyDto implements Partial< <<Model pascal>>PublicWrite> {
 <<for Fields not internal and not entity field>>
 
   @IsOptional()
@@ -155,25 +154,6 @@ export class <<Model pascal>>UpdateBodyDto {
     @ValidateNested({each: true})
     <<field camel>>?: IdDto[];
   <<endif>>
-<<endfor>>
-
-
-<<for root.referencedIn ref>>
-  <<for ref.fields oneOne or oneMany or manyMany field>>
-    <<if field oneOne>>
-      @IsOptional()
-      @Type(() => IdDto)
-      @ValidateNested()
-      <<-field backRelation camel>>?: IdDto;
-    <<endif>>
-
-    <<if field oneMany or manyMany>>
-      @IsOptional()
-      @Type(() => IdDto)
-      @ValidateNested({each: true})
-      <<-field backRelation camel>>?: IdDto[];
-    <<endif>>
-  <<endfor>>
 <<endfor>>
 }
 

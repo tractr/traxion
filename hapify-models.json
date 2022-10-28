@@ -678,7 +678,7 @@
       "accesses": {
         "count": "owner",
         "create": "auth",
-        "read": "guest",
+        "read": "owner",
         "remove": "owner",
         "search": "owner",
         "update": "owner"
@@ -718,6 +718,7 @@
           "subtype": "oneMany",
           "value": "a7d0308a-49f0-3458-0975-1dce106136a1",
           "properties": [
+            "internal",
             "ownership"
           ],
           "meta": {

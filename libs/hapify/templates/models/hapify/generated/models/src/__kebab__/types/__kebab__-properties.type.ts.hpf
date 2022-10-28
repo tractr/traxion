@@ -3,13 +3,13 @@
  * They should never be sent by the end user.
  */
 export type <<Model pascal>>SystemProperties =
-  <<if Fields internal>>
+  <<<if ( root.properties.hasInternal ) {>>>
     <<for Fields internal field>>
       | '<<field camel>>'
     <<endfor>>
-  <<else>>
+  <<<} else {>>>
     never
-  <<endif>> ;
+  <<<}>>> ;
 
 /**
  * <<Model pascal>> properties hidden to the end user.
@@ -24,20 +24,22 @@ export type <<Model pascal>>HiddenProperties =
     never
   <<endif>> ;
 
-/**
- * <<Model pascal>> properties hidden to the end user.
- * They should never be read by the end user.
- */
-export type <<Model pascal>>RelationalProperties =
-  <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
-    <<for Fields entity field>>
-      | '<<field camel>>'
+export type <<Model pascal>>ForeignKeysProperties =
+  <<if Fields oneOne or oneMany>>
+    <<for Fields oneOne or oneMany field>>
+      | '<<field camel>>Id'
     <<endfor>>
-    <<for root.referencedIn ref>>
-      <<for ref.fields oneOne or oneMany or manyMany field>>
-      | '<<-field backRelation camel>>'
-      <<endfor>>
-    <<endfor>>
-  <<<} else {>>>
+  <<else>>
     never
-  <<<}>>> ;
+  <<endif>> ;
+
+export type <<Model pascal>>ReferenceProperties =
+<<<if (root.referencedIn.length) {>>>
+  <<for root.referencedIn ref>>
+    <<for ref.fields field>>
+      | '<<-field backRelation camel>>'
+    <<endfor>>
+  <<endfor>>
+<<<} else {>>>
+    never
+<<<}>>> ;

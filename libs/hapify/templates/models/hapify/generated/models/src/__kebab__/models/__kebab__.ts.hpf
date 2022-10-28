@@ -86,14 +86,14 @@ import {
 } from '@tractr/common';
 <<endif>>
 
-import { <<Model pascal>>ReadDto } from '../types';
+import { <<Model pascal>>PublicRead } from '../types';
 
 <<if Model hasNotes>>
  /**
   * <<!Model>>
   */
 <<endif>>
-export class <<Model pascal>> implements <<Model pascal>>ReadDto {
+export class <<Model pascal>> implements <<Model pascal>>PublicRead {
 <<for Fields not entity and not hidden and not password field>>
 <<if field hasNotes>>
   /**

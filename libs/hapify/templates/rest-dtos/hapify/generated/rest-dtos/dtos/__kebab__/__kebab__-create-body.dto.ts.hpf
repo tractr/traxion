@@ -60,13 +60,12 @@ import {
 import type { JsonObject } from '@tractr/common';
 <<endif>>
 
-<<if Fields enum>>
 import {
+  <<Model pascal>>PublicWrite,
   <<for Fields enum enumField>>
   <<Model pascal>><<enumField pascal>>,
   <<endfor>>
 } from '../../../models';
-<<endif>>
 
 <<if Fields (number or boolean or datetime) and not internal>>
 import {
@@ -84,7 +83,7 @@ import {
 } from '@tractr/common';
 <<endif>>
 
-export class <<Model pascal>>CreateBodyDto {
+export class <<Model pascal>>CreateBodyDto implements <<Model pascal>>PublicWrite {
 <<for Fields not internal and not entity field>>
 
   <<if field boolean>>
@@ -139,34 +138,22 @@ export class <<Model pascal>>CreateBodyDto {
 
 <<endfor>>
 
-<<for Fields oneOne or oneMany field>>
-  <<if field nullable>>
-  @IsOptional()
-  <<endif>>
-  @Type(() => IdDto)
-  @ValidateNested()
-  <<field camel>><<if field nullable>>: IdDto | null = null;<<else>>!: IdDto;<<endif>>
-<<endfor>>
+<<for Fields entity and not internal field>>
+  <<if field oneOne or oneMany>>
+    <<if field nullable>>
+      @IsOptional()
+    <<endif>>
 
-<<for Fields manyMany field>>
-  @Type(() => IdDto)
-  @ValidateNested({each: true})
-  <<field camel>>: IdDto[] = [];
-<<endfor>>
-
-<<for root.referencedIn ref>>
-  <<for ref.fields oneOne field>>
     @Type(() => IdDto)
     @ValidateNested()
-    <<-field backRelation camel>>: IdDto | null = null;
-  <<endfor>>
+    <<field camel>><<if field nullable>>: IdDto | null = null;<<else>>!: IdDto;<<endif>>
+  <<endif>>
 
-  <<for ref.fields oneMany or manyMany field>>
-  @Type(() => IdDto)
-  @ValidateNested({each: true})
-  <<-field backRelation camel>>: IdDto[] = [];
-
-  <<endfor>>
+  <<if field manyMany>>
+    @Type(() => IdDto)
+    @ValidateNested({each: true})
+    <<field camel>>: IdDto[] = [];
+  <<endif>>
 <<endfor>>
 }
 

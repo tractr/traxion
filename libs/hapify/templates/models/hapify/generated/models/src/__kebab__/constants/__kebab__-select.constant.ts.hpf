@@ -1,12 +1,18 @@
 export const <<Model constant>>_SELECT = {
 
+// Scalar fields
 <<for Fields not entity field>>
   <<field camel>>: true,
 <<endfor>>
 
-
-<<for Fields oneOne or oneMany or manyMany field>>
+// Relational fields
+<<for Fields entity field>>
+  <<if field oneOne or oneMany>>
+    <<field camel>>Id: true,
+  <<endif>>
+  <<if field manyMany>>
     <<field camel>>: { select: { id: true }},
+  <<endif>>
 <<endfor>>
 
 <<for root.referencedIn ref>>

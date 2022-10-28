@@ -3,22 +3,41 @@ import { <<Model constant>>_SELECT } from '../constants';
 import {
   <<Model pascal>>HiddenProperties,
   <<Model pascal>>SystemProperties,
+  <<Model pascal>>ForeignKeysProperties,
+  <<Model pascal>>ReferenceProperties,
 } from './<<Model kebab>>-properties.type';
 
 /**
  * Type of the <<Model pascal>> manipulated internally by the api
  */
-export type <<Model pascal>>Dto = Prisma.<<Model pascal>>GetPayload<{
+export type <<Model pascal>>Internal = Prisma.<<Model pascal>>GetPayload<{
   select: typeof <<Model constant>>_SELECT,
 }>;
 
 /**
+ * Type of the <<Model pascal>> manipulated internally for write operations by the api
+ */
+export type <<Model pascal>>InternalWrite = Omit<
+  <<Model pascal>>Internal,
+  'id' | <<Model pascal>>ReferenceProperties
+>
+
+/**
+ * Type of the mode manipulated by the public api
+ */
+export type <<Model pascal>>Public = Omit< <<Model pascal>>Internal, <<Model pascal>>ForeignKeysProperties> & {
+  <<for Fields oneOne or oneMany field>>
+    <<field camel>>: { id: string } <<if field nullable>> | null<<endif>>,
+  <<endfor>>
+}
+
+/**
  * <<Model pascal>> write payload
  */
-export type <<Model pascal>>WriteDto = Omit< <<Model pascal>>Dto, <<Model pascal>>SystemProperties>;
+export type <<Model pascal>>PublicWrite = Omit< <<Model pascal>>Public, <<Model pascal>>SystemProperties | <<Model pascal>>ReferenceProperties>;
 
 /**
  * <<Model pascal>> read payload
  */
-export type <<Model pascal>>ReadDto = Omit< <<Model pascal>>Dto, <<Model pascal>>HiddenProperties>;
+export type <<Model pascal>>PublicRead = Omit< <<Model pascal>>Public, <<Model pascal>>HiddenProperties>;
 

@@ -74,16 +74,16 @@ export class <<Model pascal>>Controller {
       <<if Fields internal and not primary and (not entity or nullable)>>
         ...this.<<Model camel>>Service.getDefaultInternals(),
       <<endif>>
-      <<if Fields ownership and not primary and internal>>
-        ...this.<<Model camel>>Service.getDefaultOwnerships(user),
-      <<endif>>
-        ...bodyDto,
+        ...this.<<Model camel>>RestDtoService.formatPublicToInternal(bodyDto),
+      <<for Fields ownership and not primary and internal field>>
+        <<field camel>>Id: user.id,
+      <<endfor>>
       },
       abilities,
     );
 
     const <<Model camel>> = await this.<<Model camel>>Service.create(query);
-    return this.<<Model camel>>RestDtoService.removeHiddenProperties(<<Model camel>>);
+    return this.<<Model camel>>RestDtoService.formatInternalToPublic(<<Model camel>>);
   }
 
   /**
@@ -130,7 +130,7 @@ export class <<Model pascal>>Controller {
 
     if (!<<Model camel>>) throw new NotFoundException();
 
-    return this.<<Model camel>>RestDtoService.removeHiddenProperties(<<Model camel>>);
+    return this.<<Model camel>>RestDtoService.formatInternalToPublic(<<Model camel>>);
   }
 
   /**
@@ -153,7 +153,7 @@ export class <<Model pascal>>Controller {
 
     const entitiesWithRelationIds = await this.<<Model camel>>Service.findMany(query);
 
-    return entitiesWithRelationIds.map(entity => this.<<Model camel>>RestDtoService.removeHiddenProperties(entity));
+    return entitiesWithRelationIds.map(entity => this.<<Model camel>>RestDtoService.formatInternalToPublic(entity));
   }
 
   /**
@@ -186,11 +186,14 @@ export class <<Model pascal>>Controller {
 
     if (!<<Model camel>>) throw new NotFoundException();
 
-    const updated<<Model pascal>> = {...<<Model camel>>, ...bodyDto };
+    const updated<<Model pascal>> = this.<<Model camel>>RestDtoService.formatPublicToInternal({
+       ...this.<<Model camel>>RestDtoService.formatInternalToPublic(<<Model camel>>),
+       ...bodyDto,
+   });
 
     ForbiddenError.from(abilities).throwUnlessCan(
       Actions.UPDATE,
-      subject('<<Model pascal>>', updated<<Model pascal>> as unknown as <<Model pascal>>),
+      subject('<<Model pascal>>', updated<<Model pascal>>),
     );
 
     const query = this.<<Model camel>>RestDtoService.formatUpdateDtoToQuery(
@@ -201,7 +204,7 @@ export class <<Model pascal>>Controller {
 
     const result = await this.<<Model camel>>Service.update(query);
 
-    return this.<<Model camel>>RestDtoService.removeHiddenProperties(result);
+    return this.<<Model camel>>RestDtoService.formatInternalToPublic(result);
   }
 
 //  /**
@@ -324,13 +327,13 @@ export class <<Model pascal>>Controller {
 
     ForbiddenError.from(abilities).throwUnlessCan(
       Actions.REMOVE,
-      subject('<<Model pascal>>', <<Model camel>> as unknown as <<Model pascal>>),
+      subject('<<Model pascal>>', <<Model camel>>),
     );
 
     const query = this.<<Model camel>>RestDtoService.formatDeleteDtoToQuery(paramsDto, abilities);
 
     const result = await this.<<Model camel>>Service.delete(query);
 
-    return this.<<Model camel>>RestDtoService.removeHiddenProperties(result);
+    return this.<<Model camel>>RestDtoService.formatInternalToPublic(result);
   }
 }
