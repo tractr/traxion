@@ -19,7 +19,6 @@ export interface PoolGroupInternalConfig {
 }
 
 export interface PoolGroupDefaultConfig {
-  subDomain: string;
   reverseProxyConfig: ReverseProxyComponentPublicConfig;
   fileStorageConfig: {
     additionalReadOnlyS3Buckets?: s3.S3Bucket[];
@@ -27,7 +26,9 @@ export interface PoolGroupDefaultConfig {
     s3AllowUpload?: boolean;
   };
 }
-export type PoolGroupPublicConfig = DeepPartial<PoolGroupDefaultConfig>;
+export type PoolGroupPublicConfig = DeepPartial<PoolGroupDefaultConfig> & {
+  subDomain: string;
+};
 
 export type PoolGroupConfig = PoolGroupInternalConfig & PoolGroupPublicConfig;
 
