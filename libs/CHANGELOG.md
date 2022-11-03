@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.64.0](https://github.com/tractr/stack/compare/v1.63.0...v1.64.0) (2022-11-03)
+
+
+### Features
+
+* **terraform-pool-group:** remove default subdomain ([#520](https://github.com/tractr/stack/issues/520)) ([fb8bba7](https://github.com/tractr/stack/commit/fb8bba7fb71f7066d332e614ef2189c794f4e8b0))
+
+
+
 # [1.63.0](https://github.com/tractr/stack/compare/v1.62.0...v1.63.0) (2022-10-18)
 
 
