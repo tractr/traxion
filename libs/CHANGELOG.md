@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.64.1](https://github.com/tractr/stack/compare/v1.64.0...v1.64.1) (2022-11-04)
+
+
+### Bug Fixes
+
+* **admin:** fix update field object ([#521](https://github.com/tractr/stack/issues/521)) ([fdd00f0](https://github.com/tractr/stack/commit/fdd00f0b58cb658d51fcc983e3e0e7e321fb922e))
+
+
+
 # [1.64.0](https://github.com/tractr/stack/compare/v1.63.0...v1.64.0) (2022-11-03)
 
 
