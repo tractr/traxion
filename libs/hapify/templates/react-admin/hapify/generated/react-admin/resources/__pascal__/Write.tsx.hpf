@@ -11,7 +11,15 @@ import {
 <<if Fields rich and not internal>>
 import RichTextInput from 'ra-input-rich-text';
 <<endif>>
-
+ 
+<<if Fields object>>
+function formatObject(object: Record<string, unknown> | string): string {
+  return typeof object === 'string'
+    ? object
+    : JSON.stringify(object || undefined);
+}
+<<endif>>
+ 
 export const <<Model pascal>>Create = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
@@ -128,6 +136,9 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
         sx={{
           width: '100%',
         }}
+        <<if field object>>
+        format={(v) => formatObject(v)}
+        <<endif>>
 <<endif>>
 
     <<if field not nullable>>
