@@ -10,6 +10,8 @@ import {
   transformStringToArray,
 } from '@tractr/common';
 
+// TODO: handle datetime and JSON properly and add associated tests
+
 /**
  * Format a rest api filter query into a prisma where clause
  *
@@ -98,6 +100,7 @@ export function formatFilterType<
     case 'hasEvery':
     case 'hasSome':
     case 'in':
+    case 'notIn':
     case 'isEmpty':
       // eslint-disable-next-line no-case-declarations
       const arrayToTransform = transformStringToArray(valueToTransform);
@@ -118,7 +121,6 @@ export function formatFilterType<
     case 'lt':
     case 'lte':
     case 'not':
-    case 'notIn':
     case 'path':
     case 'startsWith':
     case 'string_contains':
