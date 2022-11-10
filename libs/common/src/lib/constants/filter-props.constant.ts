@@ -92,3 +92,12 @@ export type StringFilterProps =
 
 export const EnumFilterProps = ['equals', 'in', 'notIn', 'not'];
 export type EnumFilterProps = 'equals' | 'in' | 'notIn' | 'not';
+
+export type FilterProps =
+  | BoolFilterProps
+  | DateTimeFilterProps
+  | EnumFilterProps
+  | JsonFilterProps
+  | NumberFilterProps
+  | StringFilterProps
+  | ArrayFilterProps;
