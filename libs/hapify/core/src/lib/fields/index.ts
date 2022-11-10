@@ -5,3 +5,4 @@ export * from './string';
 export * from './boolean';
 export * from './datetime';
 export * from './field';
+export * from './file';
