@@ -22,6 +22,6 @@ export class BooleanField extends Field {
 /**
  * Checks if a field is a boolean field
  */
-export function boolean(field: Field): field is BooleanField {
+export function isBoolean(field: Field): field is BooleanField {
   return field instanceof BooleanField;
 }

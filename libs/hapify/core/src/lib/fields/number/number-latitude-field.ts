@@ -1,10 +1,10 @@
-import { NumberField } from './number-field';
 import { Field } from '../field';
+import { NumberField } from './number-field';
 
 export class NumberLatitudeField extends NumberField {
-  protected _min: number = -90;
+  protected _min = -90;
 
-  protected _max: number = 90;
+  protected _max = 90;
 
   /**
    * Avoid min value to be lower than -90
@@ -24,6 +24,6 @@ export class NumberLatitudeField extends NumberField {
 /**
  * Checks if a field is a number latitude field
  */
-export function latitude(field: Field): field is NumberLatitudeField {
+export function isLatitude(field: Field): field is NumberLatitudeField {
   return field instanceof NumberLatitudeField;
 }

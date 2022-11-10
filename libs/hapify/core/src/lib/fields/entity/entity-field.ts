@@ -1,5 +1,5 @@
-import { Field } from '../field';
 import type { Model } from '../../model';
+import { Field } from '../field';
 
 export abstract class EntityField extends Field {
   constructor(name: string, protected _model: Model) {
@@ -17,6 +17,6 @@ export abstract class EntityField extends Field {
 /**
  * Checks if a field is an entity field
  */
-export function entity(field: Field): field is EntityField {
+export function isEntity(field: Field): field is EntityField {
   return field instanceof EntityField;
 }

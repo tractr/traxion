@@ -65,6 +65,6 @@ export class StringField extends Field {
 /**
  * Checks if a field is a string field
  */
-export function string(field: Field): field is StringField {
+export function isString(field: Field): field is StringField {
   return field instanceof StringField;
 }

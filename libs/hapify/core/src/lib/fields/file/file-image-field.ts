@@ -86,6 +86,6 @@ export class FileImageField extends FileField {
 /**
  * Checks if a field is an image file field
  */
-export function isFileImage(field: Field): field is FileImageField {
+export function isImage(field: Field): field is FileImageField {
   return field instanceof FileImageField;
 }

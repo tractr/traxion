@@ -126,6 +126,6 @@ export class FileVideoField extends FileField {
 /**
  * Checks if a field is a video file field
  */
-export function isFileVideo(field: Field): field is FileVideoField {
+export function isVideo(field: Field): field is FileVideoField {
   return field instanceof FileVideoField;
 }

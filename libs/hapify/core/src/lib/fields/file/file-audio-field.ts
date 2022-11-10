@@ -46,6 +46,6 @@ export class FileAudioField extends FileField {
 /**
  * Checks if a field is an audio file field
  */
-export function isFileAudio(field: Field): field is FileAudioField {
+export function isAudio(field: Field): field is FileAudioField {
   return field instanceof FileAudioField;
 }
