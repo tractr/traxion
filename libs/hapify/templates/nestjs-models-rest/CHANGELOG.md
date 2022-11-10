@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.64.3](https://github.com/tractr/stack/compare/v1.64.2...v1.64.3) (2022-11-10)
+
+
+### Bug Fixes
+
+* update nestjs format filter to handle in operators ([#523](https://github.com/tractr/stack/issues/523)) ([af0b100](https://github.com/tractr/stack/commit/af0b100e7351a441f1be9834b2999f3b25f7065a))
+
+
+
 ## [1.64.2](https://github.com/tractr/stack/compare/v1.64.1...v1.64.2) (2022-11-04)
 
 
