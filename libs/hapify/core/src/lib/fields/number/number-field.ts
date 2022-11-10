@@ -61,6 +61,6 @@ export class NumberField extends Field {
 /**
  * Checks if a field is a number field
  */
-export function number(field: Field): field is NumberField {
+export function isNumber(field: Field): field is NumberField {
   return field instanceof NumberField;
 }
