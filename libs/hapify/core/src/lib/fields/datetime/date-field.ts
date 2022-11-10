@@ -65,6 +65,6 @@ export class DateField extends Field {
 /**
  * Checks if a field is a date field
  */
-export function date(field: Field): field is DateField {
+export function isDate(field: Field): field is DateField {
   return field instanceof DateField;
 }

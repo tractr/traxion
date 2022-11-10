@@ -22,6 +22,6 @@ export class ObjectField extends Field {
 /**
  * Checks if a field is an object field
  */
-export function object(field: Field): field is ObjectField {
+export function isObject(field: Field): field is ObjectField {
   return field instanceof ObjectField;
 }
