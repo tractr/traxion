@@ -1,20 +1,20 @@
-import { Root } from './root';
-import { Model } from './model';
 import {
   BooleanField,
-  number,
+  isNumber,
+  isOwnership,
+  isPassword,
+  isPrimary,
+  isString,
   NumberField,
   NumberIntegerField,
-  ownership,
-  password,
-  primary,
-  string,
   StringEmailField,
   StringField,
   StringPasswordField,
   StringTextField,
 } from './fields';
+import { Model } from './model';
 import { and, or } from './operators';
+import { Root } from './root';
 
 const idField = new NumberField('Id')
   .setPrimary(true)
@@ -48,10 +48,12 @@ const root = new Root('app').addModel(
 
 const output = `
 ${root.models[0].fields
-  .filter(or(number, and(string, password)))
-  .map((field) => field.name)}
+  .filter(or(isNumber, and(isString, isPassword)))
+  .map((field) => field.name)
+  .join(', ')}
 `;
 
 const field = root.models[0].fields[0];
-if (and(string, primary, ownership)(field)) {
+if (and(isString, isPrimary, isOwnership)(field)) {
+  // field is a string field, primary and ownership
 }

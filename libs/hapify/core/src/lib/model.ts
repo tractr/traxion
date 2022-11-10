@@ -1,5 +1,23 @@
-import { Field, isEntity, isLatitude, isLongitude } from './fields';
+import {
+  Field,
+  isEmbedded,
+  isEntity,
+  isHidden,
+  isInternal,
+  isLabel,
+  isLatitude,
+  isLongitude,
+  isMultiple,
+  isNullable,
+  isOwnership,
+  isPrimary,
+  isRestricted,
+  isSearchable,
+  isSortable,
+  isUnique,
+} from './fields';
 import { Node } from './node';
+import { and } from './operators';
 
 /**
  * Top level construct which represents a project
@@ -114,82 +132,77 @@ export class Model extends Node {
 
   /** Denotes if the model has a primary field */
   get hasPrimary(): boolean {
-    return this.fields.some((field) => field.primary);
+    return this.fields.some(isPrimary);
   }
 
   /** Denotes if the model has at least one unique field */
   get hasUnique(): boolean {
-    return this.fields.some((field) => field.unique);
+    return this.fields.some(isUnique);
   }
 
   /** Denotes if the model has at least one label field */
   get hasLabel(): boolean {
-    return this.fields.some((field) => field.label);
+    return this.fields.some(isLabel);
   }
 
   /** Denotes if the model has at least one nullable field */
   get hasNullable(): boolean {
-    return this.fields.some((field) => field.nullable);
+    return this.fields.some(isNullable);
   }
 
   /** Denotes if the model has at least one multiple field */
   get hasMultiple(): boolean {
-    return this.fields.some((field) => field.multiple);
+    return this.fields.some(isMultiple);
   }
 
   /** Denotes if the model has at least one embedded field */
   get hasEmbedded(): boolean {
-    return this.fields.some((field) => field.embedded);
+    return this.fields.some(isEmbedded);
   }
 
   /** Denotes if the model has at least one searchable field */
   get hasSearchable(): boolean {
-    return this.fields.some((field) => field.searchable);
+    return this.fields.some(isSearchable);
   }
 
   /** Denotes if the model has at least one sortable field */
   get hasSortable(): boolean {
-    return this.fields.some((field) => field.sortable);
+    return this.fields.some(isSortable);
   }
 
   /** Denotes if the model has at least one hidden field */
   get hasHidden(): boolean {
-    return this.fields.some((field) => field.hidden);
+    return this.fields.some(isHidden);
   }
 
   /** Denotes if the model has at least one internal field */
   get hasInternal(): boolean {
-    return this.fields.some((field) => field.internal);
+    return this.fields.some(isInternal);
   }
 
   /** Denotes if the model has at least one restricted field */
   get hasRestricted(): boolean {
-    return this.fields.some((field) => field.restricted);
+    return this.fields.some(isRestricted);
   }
 
   /** Denotes if the model has at least one ownership field */
   get hasOwnership(): boolean {
-    return this.fields.some((field) => field.ownership);
+    return this.fields.some(isOwnership);
   }
 
   /** Denotes if the model has at least one field marked as label and also searchable */
   get hasSearchableLabel(): boolean {
-    return this.fields.some((field) => field.label && field.searchable);
+    return this.fields.some(and(isLabel, isSearchable));
   }
 
   /** Denotes if most of the fields are hidden (strictly) */
   get mainlyHidden(): boolean {
-    return (
-      this.fields.filter((field) => field.hidden).length > this.fieldsCount / 2
-    );
+    return this.fields.filter(isHidden).length > this.fieldsCount / 2;
   }
 
   /** Denotes if most of the fields are internal (strictly) */
   get mainlyInternal(): boolean {
-    return (
-      this.fields.filter((field) => field.internal).length >
-      this.fieldsCount / 2
-    );
+    return this.fields.filter(isInternal).length > this.fieldsCount / 2;
   }
 
   /** Denotes if the model contains at least one latitude field and one longitude field */
