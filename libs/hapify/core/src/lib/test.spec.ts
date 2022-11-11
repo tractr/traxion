@@ -13,7 +13,7 @@ import {
   StringTextField,
 } from './fields';
 import { Model } from './model';
-import { and, or } from './operators';
+import { and, not, or } from './operators';
 import { Root } from './root';
 
 const idField = new NumberField('Id')
@@ -48,7 +48,7 @@ const root = new Root('app').addModel(
 
 const output = `
 ${root.models[0].fields
-  .filter(or(isNumber, and(isString, isPassword)))
+  .filter(or(isNumber, and(isString, not(isPassword))))
   .map((field) => field.name)
   .join(', ')}
 `;
