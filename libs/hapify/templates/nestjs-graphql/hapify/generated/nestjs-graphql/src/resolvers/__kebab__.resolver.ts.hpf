@@ -12,7 +12,7 @@
       return self.findIndex(f => f.name === value.name) === index && value.name !== root.name;
     });
 >>>
-	
+
 import { subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import {
@@ -40,8 +40,8 @@ import {
 import { GraphQLResolveInfo } from 'graphql';
 import { ForbiddenError } from 'apollo-server-core';
 import { PrismaSelect } from '@paljs/plugins';
-import { User as PrismaUser } from '@prisma/client';
-	
+import { User as PrismaUser, Prisma } from '@prisma/client';
+
 import {
   <<Model pascal>>Service,
   <<Model constant>>_SERVICE,
@@ -51,7 +51,7 @@ import {
 <<endfor>>
 } from '../../../../nestjs-models-common';
 import { Actions, AppAbility, Permission } from '../../../../casl';
-	
+
 import {
   <<Model pascal>>,
   <<Model pascal>>CreateInput,
@@ -67,15 +67,15 @@ import {
   FindMany<<ref pascal>>Args,
 <<endfor>>
 } from '../../../prisma-nestjs-graphql';
-	
+
 import {
   FindMany<<Model pascal>>Output,
 } from '../dtos';
 import { OWNERS_DEFAULT_FIELDS } from '../nestjs-graphql.constants';
- 
+
 @Resolver(() => <<Model pascal>>)
 export class <<Model pascal>>Resolver {
- 
+
   constructor(
     @Inject(<<Model constant>>_SERVICE)
     protected <<Model camel>>Service: <<Model pascal>>Service,
@@ -85,7 +85,7 @@ export class <<Model pascal>>Resolver {
 <<endfor>>
   protected databaseService: DatabaseService,
   ) {}
- 
+
   /**
    * Query for a unique <<Model camel>>.
    */
@@ -111,7 +111,7 @@ export class <<Model pascal>>Resolver {
     <<endif>>
     return <<Model camel>>;
   }
- 
+
   /**
    * Query for multiple <<Model camel>>s.
    */
@@ -136,11 +136,11 @@ export class <<Model pascal>>Resolver {
     const select = new PrismaSelect(
       info, { defaultFields: OWNERS_DEFAULT_FIELDS }
     ).valueOf('<<Model camel>>s', '<<Model pascal>>');
-	
+
     const where = {
       AND: [<<if Fields ownership >>abilities ? accessibleBy(abilities).<<Model pascal>> : {}, <<endif>>whereInput ?? {}],
     };
-	
+
     const <<Model camel>>s = await this.<<Model camel>>Service.findMany({
       ...select,
       where,
@@ -150,18 +150,18 @@ export class <<Model pascal>>Resolver {
       skip,
       take: take + 1,
     });
-	
+
     const count = await this.<<Model camel>>Service.count({
       where,
     });
-	
+
     return {
       <<Model camel>>s: <<Model camel>>s.slice(0, take),
       count,
       hasNextPage: typeof <<Model camel>>s[take] !== 'undefined',
     };
   }
- 
+
   /**
    * Create a single <<Model camel>>.
    */
@@ -186,14 +186,14 @@ export class <<Model pascal>>Resolver {
     <<endif>>
       ...rawData,
     };
-	
+
     <<if Fields ownership>>
     return this.databaseService.$transaction(async (prisma) => {
       const <<Model camel>> = await this.<<Model camel>>Service.create(
         { data, ...select },
         prisma.<<Model camel>>
       );
-	
+
       if(abilities?.cannot(
         Actions.CREATE,
         subject(
@@ -201,14 +201,14 @@ export class <<Model pascal>>Resolver {
           <<Model camel>>,
         ),
       )) throw new ForbiddenError('cannot create <<Model pascal>>');
-	
+
       return <<Model camel>>;
     });
     <<else>>
       return this.<<Model camel>>Service.create({ data, ...select });
     <<endif>>
   }
- 
+
   /**
    * Update a single <<Model camel>>.
    */
@@ -223,14 +223,14 @@ export class <<Model pascal>>Resolver {
     <<endif>>
   ): Promise<any> {
     const select = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).value;
-	
+
     <<if Fields ownership>>
     return this.databaseService.$transaction(async (prisma) => {
       const <<Model camel>> = await this.<<Model camel>>Service.update(
         { where, data, ...select },
         prisma.<<Model camel>>
       );
-	
+
       if(abilities?.cannot(
         Actions.UPDATE,
         subject(
@@ -238,14 +238,14 @@ export class <<Model pascal>>Resolver {
           <<Model camel>>,
         ),
       )) throw new ForbiddenError('cannot update <<Model pascal>>');
-	
+
       return <<Model camel>>;
     });
     <<else>>
       return this.<<Model camel>>Service.update({ where, data, ...select });
     <<endif>>
   }
- 
+
   /**
    * Delete a single <<Model camel>>.
    */
@@ -260,14 +260,14 @@ export class <<Model pascal>>Resolver {
     <<endif>>
   ): Promise<any> {
     const select = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).value;
-	
+
     <<if Fields ownership>>
     return this.databaseService.$transaction(async (prisma) => {
       const <<Model camel>> = await this.<<Model camel>>Service.delete(
         { where, ...select },
         prisma.<<Model camel>>
       );
-	
+
       if(abilities?.cannot(
         Actions.REMOVE,
         subject(
@@ -275,18 +275,19 @@ export class <<Model pascal>>Resolver {
           <<Model camel>>,
         ),
       )) throw new ForbiddenError('cannot delete <<Model pascal>>');
-	
+
       return <<Model camel>>;
     });
     <<else>>
     return this.<<Model camel>>Service.delete({ where, ...select });
     <<endif>>
   }
- 
+
 <<for Fields oneOne or oneMany or manyMany field>>
   /**
    * Associated <<=field.model.names.pascal>>
    */
+  <<if field manyMany>>
   @ResolveField(() => <<=field.model.names.pascal>>)
   async <<field camel>>(
     @Info() info: GraphQLResolveInfo,
@@ -303,27 +304,16 @@ export class <<Model pascal>>Resolver {
     @CurrentAbilities() abilities: AppAbility,
   ) {
     let <<field camel>> = <<Model camel>>.<<field camel>>;
-	
+
     if (!<<field camel>>) {
       const { id } = <<Model camel>>;
-      const where = {
-        AND: [abilities ? accessibleBy(abilities).<<=field.model.names.pascal>> : {}, whereInput],
+      const where: Prisma.<<=field.model.names.pascal>>WhereInput = {
+        AND: [abilities ? accessibleBy(abilities).<<=field.model.names.pascal>> : {}, {<<-field backRelation camel>>: { id }, ...whereInput}],
       };
-      const select = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).valueOf('<<Model camel>>s.<<field camel>>', '<<=field.model.names.pascal>>');
-  
-      <<if field oneOne or oneMany>>
-      <<field camel>> = await this.<<=field.model.names.camel>>Service.findUnique({
-        ...select,
-        where,
-        cursor,
-        distinct,
-        orderBy,
-        skip,
-        take: take + 1,
-      }) ?? undefined;
-      <<else>>
+      const select: Prisma.<<=field.model.names.pascal>>Select = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).valueOf('<<Model camel>>s.<<field camel>>', '<<=field.model.names.pascal>>');
+
       <<field camel>> = await this.<<=field.model.names.camel>>Service.findMany({
-        ...select,
+        select,
         where,
         cursor,
         distinct,
@@ -331,25 +321,62 @@ export class <<Model pascal>>Resolver {
         skip,
         take: take + 1,
       });
-      <<endif>>
     }
- 
-    <<if field oneOne or oneMany>>
-    if (<<field camel>> && abilities?.cannot(Actions.READ, subject('<<=field.model.names.pascal>>', <<field camel>>))) {
-      return null;
-    }
-    return <<field camel>>;
-    <<else>>
+
     return <<field camel>>.filter((item) => abilities?.can(Actions.READ, subject('<<=field.model.names.pascal>>', item)) ?? true);
-    <<endif>>
   }
+  <<endif>>
+
+  <<if field oneOne or oneMany>>
+  @ResolveField(() => <<=field.model.names.pascal>>)
+  async <<field camel>>(
+    @Info() info: GraphQLResolveInfo,
+    @Parent() <<Model camel>>: <<Model pascal>>,
+    @CurrentAbilities() abilities: AppAbility,
+  ) {
+    let <<field camel>>Id = <<Model camel>>.<<field camel>>Id;
+
+    if (!<<field camel>>Id) return null;
+
+    const where: Prisma.<<=field.model.names.pascal>>WhereUniqueInput = {
+     id: <<field camel>>Id,
+    };
+
+    const select: Prisma.<<=field.model.names.pascal>>Select  = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).valueOf('<<Model camel>>s.<<field camel>>', '<<=field.model.names.pascal>>');
+
+    return this.<<=field.model.names.camel>>Service.findUnique({
+      select,
+      where,
+    });
+  }
+  <<endif>>
 <<endfor>>
-	
+
 <<for root.referencedIn ref>>
   <<for ref.fields not manyOne field>>
   /**
-   * Associated <<-field backRelation pascal>>
+   *  Referencing <<-field backRelation pascal>>
    */
+  <<if field oneOne >>
+  @ResolveField(() => <<ref pascal>>)
+  async <<-field backRelation camel>>(
+    @Info() info: GraphQLResolveInfo,
+    @Parent() <<Model camel>>: <<Model pascal>>,
+    @CurrentAbilities() abilities: AppAbility,
+  ) {
+    let <<Model camel>>Id = <<Model camel>>.id;
+
+    const where: Prisma.<<ref pascal>>WhereUniqueInput = {
+       <<-field backRelation camel>>Id: <<Model camel>>Id,
+    };
+
+    const select: Prisma.<<ref pascal>>Select = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).valueOf('<<Model camel>>s.<<-field backRelation camel>>', '<<ref pascal>>');
+
+    return this.<<ref camel>>Service.findUnique({ select, where, });
+  }
+  <<endif>>
+
+  <<if field oneMany or manyMany>>
   @ResolveField(() => <<ref pascal>>)
   async <<-field backRelation camel>>(
     @Info() info: GraphQLResolveInfo,
@@ -366,27 +393,22 @@ export class <<Model pascal>>Resolver {
     @CurrentAbilities() abilities: AppAbility,
   ) {
     let <<-field backRelation camel>> = <<Model camel>>.<<-field backRelation camel>>;
-	
+
     if (!<<-field backRelation camel>>) {
       const { id } = <<Model camel>>;
-      const where = {
-        AND: [abilities ? accessibleBy(abilities).<<ref pascal>> : {}, whereInput],
+      const where: Prisma.<<ref pascal>>WhereInput = {
+        AND: [
+          abilities ? accessibleBy(abilities).<<ref pascal>> : {},
+          {
+            <<-field backRelation camel>>: {id},
+            ...whereInput,
+          }
+        ],
       };
-      const select = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).valueOf('<<Model camel>>s.<<-field backRelation camel>>', '<<ref pascal>>');
-  
-      <<if field oneOne>>
-      <<-field backRelation camel>> = await this.<<ref camel>>Service.findUnique({
-        ...select,
-        where,
-        cursor,
-        distinct,
-        orderBy,
-        skip,
-        take: take + 1,
-      });
-      <<else>>
+      const select: Prisma.<<ref pascal>>Select = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).valueOf('<<Model camel>>s.<<-field backRelation camel>>', '<<ref pascal>>');
+
       <<-field backRelation camel>> = await this.<<ref camel>>Service.findMany({
-        ...select,
+        select,
         where,
         cursor,
         distinct,
@@ -394,21 +416,14 @@ export class <<Model pascal>>Resolver {
         skip,
         take: take + 1,
       });
-      <<endif>>
     }
- 
-    <<if field oneOne>>
-    if (<<-field backRelation camel>> && abilities?.cannot(Actions.READ, subject('<<ref pascal>>', <<-field backRelation camel>>))) {
-      return null;
-    }
-    return <<-field backRelation camel>>;
-    <<else>>
+
     return <<-field backRelation camel>>.filter((item) => abilities?.can(Actions.READ, subject('<<ref pascal>>', item)) ?? true);
-    <<endif>>
   }
- 
+  <<endif>>
+
   <<endfor>>
 <<endfor>>
-	
- 
+
+
 }
