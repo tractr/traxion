@@ -305,10 +305,10 @@ export class <<Model pascal>>Resolver {
   ) {
     let <<field camel>> = <<Model camel>>.<<field camel>>;
 
-    if (!<<field camel>>) {
+    if (!<<field camel>> ) {
       const { id } = <<Model camel>>;
       const where: Prisma.<<=field.model.names.pascal>>WhereInput = {
-        AND: [abilities ? accessibleBy(abilities).<<=field.model.names.pascal>> : {}, {<<-field backRelation camel>>: { id }, ...whereInput}],
+        AND: [abilities ? accessibleBy(abilities).<<=field.model.names.pascal>> : {}, {<<-field backRelation camel>>: { some: { id } }, ...whereInput}],
       };
       const select: Prisma.<<=field.model.names.pascal>>Select = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).valueOf('<<Model camel>>s.<<field camel>>', '<<=field.model.names.pascal>>');
 
@@ -320,10 +320,10 @@ export class <<Model pascal>>Resolver {
         orderBy,
         skip,
         take: take + 1,
-      });
+      }) as <<=field.model.names.pascal>>[];
     }
 
-    return <<field camel>>.filter((item) => abilities?.can(Actions.READ, subject('<<=field.model.names.pascal>>', item)) ?? true);
+    return <<field camel>>!.filter((item) => abilities?.can(Actions.READ, subject('<<=field.model.names.pascal>>', item)) ?? true);
   }
   <<endif>>
 
@@ -364,10 +364,10 @@ export class <<Model pascal>>Resolver {
     @Parent() <<Model camel>>: <<Model pascal>>,
     @CurrentAbilities() abilities: AppAbility,
   ) {
-    let <<Model camel>>Id = <<Model camel>>.id;
+    const <<Model camel>>Id = <<Model camel>>.id;
 
     const where: Prisma.<<ref pascal>>WhereUniqueInput = {
-       <<-field backRelation camel>>Id: <<Model camel>>Id,
+       <<field camel>>Id: <<Model camel>>Id,
     };
 
     const select: Prisma.<<ref pascal>>Select = new PrismaSelect(info, { defaultFields: OWNERS_DEFAULT_FIELDS }).valueOf('<<Model camel>>s.<<-field backRelation camel>>', '<<ref pascal>>');
@@ -395,12 +395,17 @@ export class <<Model pascal>>Resolver {
     let <<-field backRelation camel>> = <<Model camel>>.<<-field backRelation camel>>;
 
     if (!<<-field backRelation camel>>) {
-      const { id } = <<Model camel>>;
+      const <<Model camel>>Id = <<Model camel>>.id;
+
       const where: Prisma.<<ref pascal>>WhereInput = {
         AND: [
           abilities ? accessibleBy(abilities).<<ref pascal>> : {},
           {
-            <<-field backRelation camel>>: {id},
+          <<if field oneMany>>
+            <<field camel>>: { id: <<Model camel>>Id },
+          <<elseif field manyMany>>
+            <<field camel>>: { some: { id: <<Model camel>>Id} },
+          <<endif>>
             ...whereInput,
           }
         ],
@@ -415,10 +420,10 @@ export class <<Model pascal>>Resolver {
         orderBy,
         skip,
         take: take + 1,
-      });
+      }) as <<ref pascal>>[];
     }
 
-    return <<-field backRelation camel>>.filter((item) => abilities?.can(Actions.READ, subject('<<ref pascal>>', item)) ?? true);
+    return <<-field backRelation camel>>!.filter((item) => abilities?.can(Actions.READ, subject('<<ref pascal>>', item)) ?? true);
   }
   <<endif>>
 
