@@ -1,6 +1,6 @@
 {
   "name": "@tractr/hapify-templates-rext-client",
-  "version": "1.64.4",
+  "version": "1.64.5",
   "description": "Template to generate a rest client with hapify",
   "repository": {
     "type": "git",
