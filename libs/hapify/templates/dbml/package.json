@@ -1,6 +1,6 @@
 {
   "name": "@tractr/hapify-templates-dbml",
-  "version": "1.64.3",
+  "version": "1.64.4",
   "description": "Generate DBML schema",
   "repository": {
     "type": "git",
