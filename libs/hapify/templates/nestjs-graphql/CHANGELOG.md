@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.64.4](https://github.com/tractr/stack/compare/v1.64.3...v1.64.4) (2022-11-16)
+
+
+### Bug Fixes
+
+* update the condition to resolve the field inside graphql ([#527](https://github.com/tractr/stack/issues/527)) ([fb66065](https://github.com/tractr/stack/commit/fb660657197770038a60f9505f38c212ab51dadb))
+
+
+
 ## [1.64.3](https://github.com/tractr/stack/compare/v1.64.2...v1.64.3) (2022-11-10)
 
 

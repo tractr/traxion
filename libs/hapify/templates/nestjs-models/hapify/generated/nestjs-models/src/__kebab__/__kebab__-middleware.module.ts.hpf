@@ -97,7 +97,7 @@ export class <<Model pascal>>MiddlewareModule
           if (params.args?.select?.<<field camel>> !== true)
             delete row.<<field camel>>;
           <<if field oneOne or oneMany>>
-          // Delete foreign key of hidden entity field if it exists
+          // Delete foreign key of hidden entity field
           if (params.args?.select?.<<field camel>>Id !== true)
             delete row.<<field camel>>Id;
           <<endif>>
