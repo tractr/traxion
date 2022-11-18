@@ -10,8 +10,8 @@
     "tractr-commitlint": "./bin/tractr-commitlint.js"
   },
   "dependencies": {
-    "@commitlint/cli": "^16.2.1",
-    "@commitlint/config-conventional": "^16.2.1",
+    "@commitlint/cli": "^17.0.0",
+    "@commitlint/config-conventional": "^17.0.0",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0"
   },
