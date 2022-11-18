@@ -25,7 +25,7 @@ runs:
         echo "::set-output name=apps::$(npx nx affected:apps --plain --base latest | sed 's/ /,/g')"
 
     - name: Return formatted output
-      uses: actions/github-script@v3
+      uses: actions/github-script@v6
       id: apps
       env:
         APPS: ${{ steps.nx-apps.outputs.apps }}
