@@ -139,7 +139,7 @@ export class LoggerService extends Logger implements NestjsLoggerService {
     return this.super('verbose', msg, meta, ctx);
   }
 
-  private extractMessageContextAndMetaFromInterface(
+  protected extractMessageContextAndMetaFromInterface(
     message: Message | (Message & Metadata),
     context: Context | (Context & Metadata) | Metadata,
     metadata: Metadata,
@@ -181,7 +181,7 @@ export class LoggerService extends Logger implements NestjsLoggerService {
     };
   }
 
-  private super(
+  protected super(
     method: LogLevel,
     message: string,
     metadata?: Metadata,
