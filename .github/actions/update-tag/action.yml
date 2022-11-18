@@ -21,7 +21,7 @@ runs:
         echo "::set-output name=sha::$(git rev-parse HEAD)"
 
     - name: Manage released tag
-      uses: actions/github-script@v3
+      uses: actions/github-script@v6
       env:
         SHA: ${{ steps.commit.outputs.sha }}
 
