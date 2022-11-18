@@ -304,7 +304,7 @@ export class <<Model pascal>>Resolver {
   ) {
     let <<field camel>> = <<Model camel>>.<<field camel>>;
 	
-    if (!<<field camel>>) {
+    if (typeof <<field camel>> === 'undefined') {
       const { id } = <<Model camel>>;
       const where = {
         AND: [abilities ? accessibleBy(abilities).<<=field.model.names.pascal>> : {}, whereInput],
@@ -367,7 +367,7 @@ export class <<Model pascal>>Resolver {
   ) {
     let <<-field backRelation camel>> = <<Model camel>>.<<-field backRelation camel>>;
 	
-    if (!<<-field backRelation camel>>) {
+    if (typeof <<-field backRelation camel>> === 'undefined') {
       const { id } = <<Model camel>>;
       const where = {
         AND: [abilities ? accessibleBy(abilities).<<ref pascal>> : {}, whereInput],

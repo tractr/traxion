@@ -1,6 +1,6 @@
 {
   "name": "@tractr/terraform-component-file-storage",
-  "version": "1.64.3",
+  "version": "1.64.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack"
