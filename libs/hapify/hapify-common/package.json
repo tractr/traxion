@@ -1,6 +1,6 @@
 {
   "name": "@tractr/hapify-common",
-  "version": "1.64.5",
+  "version": "1.64.6",
   "description": "Hapify common helpers",
   "repository": {
     "type": "git",
