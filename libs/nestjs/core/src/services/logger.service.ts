@@ -187,7 +187,7 @@ export class LoggerService extends Logger implements NestjsLoggerService {
     metadata?: Metadata,
     context?: string,
   ) {
-    const params = [message, metadata, context].filter(
+    const params = [message, { metadata }, context].filter(
       (u) => typeof u !== 'undefined',
     ) as [string, Metadata?, string?];
     return super[method](...params);

@@ -44,6 +44,7 @@ export class DatabaseService
   extends PrismaClient<Prisma.PrismaClientOptions & EnforcePrismaClientOptions>
   implements OnModuleInit, OnModuleDestroy
 {
+  protected LOG_CONTEXT = 'DatabaseService';
   constructor(
     @Inject(PRISMA_MODULE_OPTIONS)
     protected readonly prismaOptions: PrismaClientOptions,
@@ -57,10 +58,10 @@ export class DatabaseService
   async onModuleInit(): Promise<void> {
     await this.$connect();
 
-    this.$on('query', (e) => this.logger.debug(e.query));
-    this.$on('warn', (e) => this.logger.warn(e.message));
-    this.$on('info', (e) => this.logger.log(e.message));
-    this.$on('error', (e) => this.logger.error(e.message));
+    this.$on('query', (e) => this.logger.debug(e.query, this.LOG_CONTEXT));
+    this.$on('warn', (e) => this.logger.warn(e.message, this.LOG_CONTEXT));
+    this.$on('info', (e) => this.logger.log(e.message, this.LOG_CONTEXT));
+    this.$on('error', (e) => this.logger.error(e.message, this.LOG_CONTEXT));
   }
 
   async onModuleDestroy(): Promise<void> {
