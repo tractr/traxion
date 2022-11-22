@@ -1,6 +1,6 @@
 {
   "name": "@tractr/hapify-templates-casl",
-  "version": "1.64.3",
+  "version": "1.64.6",
   "description": "Hapify templates for casl class validators and types",
   "repository": {
     "type": "git",

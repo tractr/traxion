@@ -2,6 +2,33 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.64.6](https://github.com/tractr/stack/compare/v1.64.5...v1.64.6) (2022-11-18)
+
+
+### Bug Fixes
+
+* make method as protected instead of private in LoggerService ([#528](https://github.com/tractr/stack/issues/528)) ([a95a14c](https://github.com/tractr/stack/commit/a95a14cbe18b6162a6420ddfafff6c779cd8df44))
+
+
+
+## [1.64.5](https://github.com/tractr/stack/compare/v1.64.4...v1.64.5) (2022-11-16)
+
+
+### Bug Fixes
+
+* update prisma middleware to hide foreign keys of hidden fields ([#526](https://github.com/tractr/stack/issues/526)) ([d5faee8](https://github.com/tractr/stack/commit/d5faee85c52676278cf106b2bd1cf90647f9d957))
+
+
+
+## [1.64.4](https://github.com/tractr/stack/compare/v1.64.3...v1.64.4) (2022-11-16)
+
+
+### Bug Fixes
+
+* update the condition to resolve the field inside graphql ([#527](https://github.com/tractr/stack/issues/527)) ([fb66065](https://github.com/tractr/stack/commit/fb660657197770038a60f9505f38c212ab51dadb))
+
+
+
 ## [1.64.3](https://github.com/tractr/stack/compare/v1.64.2...v1.64.3) (2022-11-10)
 
 
