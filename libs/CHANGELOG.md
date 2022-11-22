@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.64.7](https://github.com/tractr/stack/compare/v1.64.6...v1.64.7) (2022-11-22)
+
+
+### Bug Fixes
+
+* update the logger to be able to override it ([#529](https://github.com/tractr/stack/issues/529)) ([e72cb2a](https://github.com/tractr/stack/commit/e72cb2a94c112b8c7fc2c2a0ebe774d615fcf82a))
+
+
+
 ## [1.64.6](https://github.com/tractr/stack/compare/v1.64.5...v1.64.6) (2022-11-18)
 
 
