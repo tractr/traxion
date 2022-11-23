@@ -1,4 +1,7 @@
 import * as React from 'react';
+<<if Fields hidden and not internal and not manyOne>>
+import type { <<Model pascal>> } from '@prisma/client';
+<<endif>>
 import {
   Create,
   CreateProps,
@@ -11,7 +14,7 @@ import {
 <<if Fields rich and not internal>>
 import RichTextInput from 'ra-input-rich-text';
 <<endif>>
- 
+
 <<if Fields object>>
 function formatObject(object: Record<string, unknown> | string): string {
   return typeof object === 'string'
@@ -19,7 +22,7 @@ function formatObject(object: Record<string, unknown> | string): string {
     : JSON.stringify(object || undefined);
 }
 <<endif>>
- 
+
 export const <<Model pascal>>Create = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
@@ -34,10 +37,43 @@ export const <<Model pascal>>Create = (props: CreateProps) => (
   </Create>
 );
 
-export const <<Model pascal>>Edit = (props: EditProps) => (
-  <Edit {...props}>
+export const <<Model pascal>>Edit = (props: EditProps) => {
+<<if Fields hidden and not internal and not manyOne>>
+  const transform<<Model pascal>> = ({
+  <<for Fields hidden and not internal and not manyOne field>>
+    <<field camel>>,
+    update<<field pascal>>,
+  <<endfor>>
+    ...data
+  }: <<Model pascal>> & {
+    <<for Fields hidden and not internal and not manyOne field>>
+      update<<field pascal>>: boolean,
+    <<endfor>>
+  }) => ({
+    ...data,
+  <<for Fields hidden and not internal and not manyOne field>>
+    <<field camel>>: update<<field pascal>> ? <<field camel>> : undefined,
+  <<endfor>>
+  });
+<<endif>>
+<<for Fields hidden and not internal and not manyOne field>>
+<<endfor>>
+
+  return (
+    <Edit {...props}
+      <<if Fields hidden and not internal and not manyOne>>
+        transform={transform<<Model pascal>>}
+      <<endif>>
+    >
     <SimpleForm>
 <<for Fields not internal and not manyOne field>>
+    <<if field hidden>>
+      <BooleanInput
+        label="Update <<field pascal>>"
+        source="update<<field pascal>>"
+        defaultValue={false}
+      />
+    <<endif>>
     <<if field entity>>
         <<<printEntityInput(field)>>>
     <<else>>
@@ -46,7 +82,8 @@ export const <<Model pascal>>Edit = (props: EditProps) => (
 <<endfor>>
     </SimpleForm>
   </Edit>
-);
+  );
+};
 
 <<< function printInput(field) { >>>
 
@@ -217,7 +254,8 @@ function labelFieldCamel(model) {
   return label.names.camel;
 }
 function getImports() {
-    const output = [];
+    // Imports BooleanInput by default for hidden fields checkboxes
+    const output = ['BooleanInput'];
 
     root.fields
         .filter(field => !field.internal)
