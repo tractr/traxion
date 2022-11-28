@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.64.9](https://github.com/tractr/stack/compare/v1.64.8...v1.64.9) (2022-11-28)
+
+
+### Bug Fixes
+
+* remove maxlength to be be able to searche on the primary fields ([#531](https://github.com/tractr/stack/issues/531)) ([1726f29](https://github.com/tractr/stack/commit/1726f299ab4676f0727989f40720b73703fa5fb1))
+
+
+
 ## [1.64.8](https://github.com/tractr/stack/compare/v1.64.7...v1.64.8) (2022-11-24)
 
 
