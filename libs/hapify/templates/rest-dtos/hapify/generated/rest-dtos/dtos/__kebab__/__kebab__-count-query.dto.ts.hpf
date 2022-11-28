@@ -4,10 +4,6 @@ import {
   IsOptional,
   IsString,
 	
-  <<if Fields (string and not text)>>
-  MaxLength,
-  <<endif>>
-	
   <<if Fields entity and searchable>>
   IsUUID, 
   <<endif>>
@@ -62,12 +58,6 @@ import {
 export class <<Model pascal>>CountQueryDto {
 <<<getSearchableFields(root).forEach((field) => {>>>
 	
-  <<if field string and not text>>
-  @MaxLength(<<< if (field.meta.maxLength) { >>><<-field maxLength raw>><<<}else{>>>255<<<}>>>, {
-    message: '<<field pascal>> field is too long',
-  })
-  <<endif>>
-	
   <<if field entity>>
     <<< if (field.multiple) { >>>
     @TransformStringToArray()
@@ -79,7 +69,7 @@ export class <<Model pascal>>CountQueryDto {
   @IsString(<<=listModifier(field)>>)
   <<endif>>
 	
-  <<if field not entity >>
+  <<if field not entity>>
   @<<=getType(field)>>FilterValidate(<<if field enum>>Object.values(<<Model pascal>><<field pascal>>), <<endif>><<if field not object>><<=listModifier(field)>><<endif>>)
   <<endif>>
 	

@@ -94,7 +94,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
             skip: 0,
             sort: ['id'],
             take: 1000,
-            id: `${params.ids.join(',')}`,
+            id: `${params.ids.join(',')}:in`,
           }) as Observable<any>
         ).pipe(map((data) => ({ data }))),
       );
