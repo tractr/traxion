@@ -36,7 +36,7 @@ jobs:
           GIT_USER: tractr-bot
           GIT_PASS: ${{ secrets.GH_TOKEN }}
         run: |
-          git config --global user.email "tractr-bot@trxn.net"
+          git config --global user.email "tractr-bot@tractr.net"
           git config --global user.name "tractr-bot"
           nx build docs
           nx deploy docs
