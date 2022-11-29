@@ -1,5 +1,6 @@
 {
-  "$schema": "./node_modules/nx/schemas/project-schema.json",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "root": "workspace",
   "targets": {
     "publish": {
       "executor": "nx:run-commands",
