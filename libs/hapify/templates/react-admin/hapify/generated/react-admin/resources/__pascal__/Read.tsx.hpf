@@ -11,7 +11,7 @@ import {
 <<if Fields searchable>>
 import { <<Model pascal>>Filter } from './Filter';
 <<endif>>
- 
+
 export const <<Model pascal>>List = (props: ListProps) => (
   <List {...props}<<if Fields searchable>> filters={< <<Model pascal>>Filter />}<<endif>>>
     <Datagrid rowClick="edit">
@@ -25,7 +25,7 @@ export const <<Model pascal>>List = (props: ListProps) => (
     </Datagrid>
   </List>
 );
- 
+
 export const <<Model pascal>>Show = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
@@ -39,9 +39,9 @@ export const <<Model pascal>>Show = (props: ShowProps) => (
     </SimpleShowLayout>
   </Show>
 );
- 
+
 <<< function printField(field) { >>>
-	
+
 <<if field string>>
     <<if field rich>>
       <RichTextField
@@ -61,7 +61,7 @@ export const <<Model pascal>>Show = (props: ShowProps) => (
 <<else>>
       <TextField
 <<endif>>
-	
+
 <<if field not sortable>>
         sortable={false}
 <<endif>>
@@ -69,9 +69,9 @@ export const <<Model pascal>>Show = (props: ShowProps) => (
         label="<<field capital>>"
       />
 <<< } >>>
-	
+
 <<< function printEntityField(field) { >>>
-	
+
 <<if field not manyMany>>
     <<if field multiple>>
       <ReferenceManyField
@@ -84,6 +84,9 @@ export const <<Model pascal>>Show = (props: ShowProps) => (
       </ReferenceManyField>
     <<else>>
           <ReferenceField
+            <<if field nullable>>
+              emptyText="Null"
+            <<endif>>
             source="<<field camel>>Id"
             label="<<field capital>>"
             reference="<<field.model camel>>">
@@ -91,10 +94,10 @@ export const <<Model pascal>>Show = (props: ShowProps) => (
           </ReferenceField>
     <<endif>>
 <<endif>>
-	
+
 <<< } >>>
-	
-<<< 
+
+<<<
 function fieldType(field) {
     switch(field.type) {
         case 'string':
@@ -108,14 +111,14 @@ function fieldType(field) {
         case 'number': return ['NumberField'];
         case 'datetime': return ['DateField'];
         case 'entity':
-            return field.multiple ? 
+            return field.multiple ?
                 ['ReferenceManyField', 'SingleFieldList', 'ChipField'] :
                 ['ReferenceField', 'TextField'];
         default: return ['TextField'];
     }
 }
 function labelFieldCamel(model) {
-    const label = model.fields.label.length ? 
+    const label = model.fields.label.length ?
         model.fields.label[0] : model.fields.primary;
     return label.names.camel;
 }

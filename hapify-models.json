@@ -281,9 +281,9 @@
           "meta": {
             "backRelation": "messages"
           },
-          "name": "tags",
-          "properties": ["multiple"],
-          "subtype": "manyMany",
+          "name": "tag",
+          "properties": ["nullable", "searchable", "sortable"],
+          "subtype": "oneMany",
           "type": "entity",
           "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
         },
