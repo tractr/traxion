@@ -1,0 +1,32 @@
+{
+  "$schema": "./node_modules/nx/schemas/project-schema.json",
+  "targets": {
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run-many --target=publish --all --exclude=workspace "
+      }
+    },
+    "release": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "postTargets": [
+          "workspace:github-release-notes",
+          "workspace:publish-packages"
+        ],
+        "syncVersions": true
+      }
+    },
+    "release-notes": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "notes": "${notes}",
+        "tag": "${tag}"
+      }
+    }
+  },
+  "useGroupsWhenIssueIsResolved": [
+    "https://github.com/jscutlery/semver/issues/420",
+    "https://github.com/jscutlery/semver/issues/547"
+  ]
+}

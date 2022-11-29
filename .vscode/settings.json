@@ -24,6 +24,7 @@
     "endfor",
     "Entrypoints",
     "hapify",
+    "jscutlery",
     "mailjet",
     "minio",
     "nestjs",
