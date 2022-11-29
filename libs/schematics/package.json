@@ -7,8 +7,8 @@
   },
   "main": "src/index.js",
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "executors": "./executors.json",
   "generators": "./generators.json"

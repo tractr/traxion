@@ -277,8 +277,8 @@
     "@swc/core-linux-x64-gnu": "^1.2.235"
   },
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "prisma": {
     "schema": "libs/generated/prisma/prisma/schema.prisma",

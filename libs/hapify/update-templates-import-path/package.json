@@ -12,7 +12,7 @@
     "hpf-update-templates-import-path": "./src/hpf-update-templates-import-path.js"
   },
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

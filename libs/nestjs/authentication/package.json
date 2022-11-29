@@ -9,7 +9,7 @@
     "cookie-parser": "^1.4.6"
   },
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

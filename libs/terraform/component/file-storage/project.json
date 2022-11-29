@@ -7,33 +7,25 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": [
-          "libs/terraform/component/file-storage/*.md"
-        ],
+        "assets": ["libs/terraform/component/file-storage/*.md"],
         "main": "libs/terraform/component/file-storage/src/index.ts",
         "outputPath": "dist/libs/terraform/component/file-storage",
         "packageJson": "libs/terraform/component/file-storage/package.json",
         "tsConfig": "libs/terraform/component/file-storage/tsconfig.lib.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/terraform/component/file-storage/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/terraform/component/file-storage/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
       "options": {
-        "access": "restricted"
+        "access": "public"
       }
     },
     "test": {
@@ -42,9 +34,7 @@
         "jestConfig": "libs/terraform/component/file-storage/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/terraform/component/file-storage"
-      ]
+      "outputs": ["coverage/libs/terraform/component/file-storage"]
     }
   }
 }
