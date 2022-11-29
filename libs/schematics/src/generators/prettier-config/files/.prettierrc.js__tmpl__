@@ -1,4 +1,4 @@
-const prettierConfig = require('@tractr/prettier-config');
+const prettierConfig = require('@trxn/prettier-config');
 
 module.exports = {
   ...prettierConfig,

@@ -11,7 +11,7 @@ import {
   <<endif>>
   formatSort,
   formatFilterType,
-} from '@tractr/nestjs-core';
+} from '@trxn/nestjs-core';
  
 import {
   <<Model pascal>>Service,

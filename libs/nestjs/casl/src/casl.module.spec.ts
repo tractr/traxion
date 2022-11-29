@@ -12,8 +12,8 @@ import { CaslModule } from './casl.module';
 import { PoliciesGuard } from './guards';
 import { CaslOptions } from './interfaces';
 
-import { UserAuthenticationService } from '@tractr/nestjs-authentication';
-import { LoggerModule } from '@tractr/nestjs-core';
+import { UserAuthenticationService } from '@trxn/nestjs-authentication';
+import { LoggerModule } from '@trxn/nestjs-core';
 
 describe('Authentication Module', () => {
   let app: INestApplication;

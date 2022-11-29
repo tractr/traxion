@@ -6,7 +6,7 @@ import {
   VolumeComponentConfig,
 } from './volume.interface';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 export class VolumeComponent<
   Config extends VolumeComponentConfig = VolumeComponentConfig,

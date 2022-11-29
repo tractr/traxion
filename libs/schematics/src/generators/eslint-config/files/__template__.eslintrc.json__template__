@@ -1,12 +1,12 @@
 {
   "overrides": [
     {
-      "extends": ["@tractr"],
+      "extends": ["@trxn"],
       "files": ["*.json"],
       "rules": {}
     },
     {
-      "extends": ["@tractr"],
+      "extends": ["@trxn"],
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
         "@nrwl/nx/enforce-module-boundaries": [

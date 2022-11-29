@@ -1,5 +1,5 @@
 <div align="center">
-<h1>@tractr/prettier-config</h1>
+<h1>@trxn/prettier-config</h1>
 
 <img height="80" width="80" alt="focus" src="https://image.flaticon.com/icons/svg/1246/1246476.svg" />
 
@@ -11,7 +11,7 @@
 ## Installation
 
 ```sh
-npm install prettier @tractr/prettier-config --save-dev
+npm install prettier @trxn/prettier-config --save-dev
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ In your `package.json`:
 {
   "name": "my-library",
   "version": "1.0.0",
-  "prettier": "@tractr/prettier-config"
+  "prettier": "@trxn/prettier-config"
 }
 ```
 
@@ -30,7 +30,7 @@ If you don't want to use your `package.json`, you can create a
 `.prettierrc.json` file in your projects root directory.
 
 ```javascript
-'@tractr/prettier-config';
+'@trxn/prettier-config';
 ```
 
 If you would like to extend or modify these properties, create a
@@ -39,7 +39,7 @@ modifications.
 
 ```javascript
 module.exports = {
-  ...require('@tractr/prettier-config'),
+  ...require('@trxn/prettier-config'),
   printWidth: 120,
 };
 ```

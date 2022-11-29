@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { MailerModule as TraxionMailerModule } from '@tractr/nestjs-mailer';
+import { MailerModule as TraxionMailerModule } from '@trxn/nestjs-mailer';
 
 @Module({
   imports: [

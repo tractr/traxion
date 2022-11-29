@@ -8,12 +8,12 @@ import {
 import { ReverseProxyTaskRoleComponent } from './reverse-proxy-task-role.component';
 import { ReverseProxyContainer } from './reverse-proxy.container';
 
-import { AwsProviderConstruct } from '@tractr/terraform-component-aws';
+import { AwsProviderConstruct } from '@trxn/terraform-component-aws';
 import {
   Container,
   ServiceComponent,
   VolumeComponents,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 export class ReverseProxyComponent extends ServiceComponent<
   ReverseProxyComponentConfig,

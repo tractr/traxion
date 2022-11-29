@@ -13,7 +13,7 @@ import { PrettierGeneratorSchema } from './schema';
 
 export const packagesToAdd: PackageDefinition[] = [
   {
-    packageName: '@tractr/prettier-config',
+    packageName: '@trxn/prettier-config',
     version: packageJson.version,
   },
   { packageName: 'prettier-plugin-packagejson' },

@@ -1,6 +1,6 @@
 import { AppConfig } from '../interfaces';
 
-import { ReactAdmin } from '@tractr/generated-react-admin';
+import { ReactAdmin } from '@trxn/generated-react-admin';
 
 export function App({ config }: { config: AppConfig }) {
   return <ReactAdmin apiUrl={config.api.uri} />;

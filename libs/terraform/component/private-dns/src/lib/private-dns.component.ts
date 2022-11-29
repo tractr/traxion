@@ -5,7 +5,7 @@ import {
   PrivateDnsComponentConfig,
 } from './private-dns.interface';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 export class PrivateDnsComponent extends AwsComponent<
   PrivateDnsComponentConfig,

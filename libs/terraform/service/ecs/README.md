@@ -62,7 +62,7 @@ environment or secret.
 Here are all possible ways to define an environment or a secret:
 
 ```typescript
-import { Secret, SECRET_ENVIRONMENT } from '@tractr/terraform-service-ecs';
+import { Secret, SECRET_ENVIRONMENT } from '@trxn/terraform-service-ecs';
 const config = {
   containerConfig: {
     environments: {

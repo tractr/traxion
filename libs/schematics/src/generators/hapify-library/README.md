@@ -3,7 +3,7 @@
 Create a library with Hapify for Nx
 
 ```shell
-nx g @tractr/schematics:hapify-library
+nx g @trxn/schematics:hapify-library
 ```
 
 ## Description

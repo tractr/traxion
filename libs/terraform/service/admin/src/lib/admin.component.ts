@@ -5,11 +5,11 @@ import {
   AdminComponentDefaultConfig,
 } from './interfaces';
 
-import { AwsProviderConstruct } from '@tractr/terraform-component-aws';
+import { AwsProviderConstruct } from '@trxn/terraform-component-aws';
 import {
   BackendServiceComponent,
   Container,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 export class AdminComponent extends BackendServiceComponent<
   AdminComponentConfig,

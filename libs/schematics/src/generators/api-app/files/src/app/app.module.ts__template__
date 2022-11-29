@@ -3,14 +3,14 @@ import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import {
   AuthenticationModule,
   JwtGlobalAuthGuard,
-} from '@tractr/nestjs-authentication';
+} from '@trxn/nestjs-authentication';
 import {
   CaslExceptionInterceptor,
   CaslModule,
   PoliciesGuard,
-} from '@tractr/nestjs-casl';
-import { LoggerModule } from '@tractr/nestjs-core';
-import { DatabaseModule } from '@tractr/nestjs-database';
+} from '@trxn/nestjs-casl';
+import { LoggerModule } from '@trxn/nestjs-core';
+import { DatabaseModule } from '@trxn/nestjs-database';
 
 import {
   getSelectPrismaUserQuery,

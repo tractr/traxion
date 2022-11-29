@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/nestjs-testing",
+  "name": "@trxn/nestjs-testing",
   "version": "1.64.9",
   "description": "Core module for nestjs backend",
   "repository": {

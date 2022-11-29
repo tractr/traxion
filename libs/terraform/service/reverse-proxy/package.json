@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/terraform-service-reverse-proxy",
+  "name": "@trxn/terraform-service-reverse-proxy",
   "version": "1.64.9",
   "repository": {
     "type": "git",

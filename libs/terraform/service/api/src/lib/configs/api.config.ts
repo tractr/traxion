@@ -3,7 +3,7 @@ import { ApiComponentDefaultConfig } from '../interfaces';
 import {
   Secret,
   SERVICE_COMPONENT_DEFAULT_CONFIG,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 export const API_COMPONENT_DEFAULT_CONFIG: ApiComponentDefaultConfig = {
   ...SERVICE_COMPONENT_DEFAULT_CONFIG,

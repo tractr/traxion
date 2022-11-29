@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/hapify-templates-models",
+  "name": "@trxn/hapify-templates-models",
   "version": "1.64.9",
   "description": "Hapify templates for models class validators and types",
   "repository": {

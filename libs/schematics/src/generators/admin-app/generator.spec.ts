@@ -24,8 +24,8 @@ describe('admin generator', () => {
 
   const options: AdminAppGeneratorSchemaWithExtra = {
     name: 'admin',
-    reactAdminImportPath: '@tractr/react-admin',
-    rextClientImportPath: '@tractr/rext-client',
+    reactAdminImportPath: '@trxn/react-admin',
+    rextClientImportPath: '@trxn/rext-client',
   };
 
   const reactGenerator = jest.spyOn(ReactGenerators, 'applicationGenerator');

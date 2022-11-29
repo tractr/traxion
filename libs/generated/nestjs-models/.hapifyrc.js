@@ -1,7 +1,7 @@
 const {
   hapifyDefaultConfig,
   getValidatorPath,
-} = require('@tractr/hapify-config');
+} = require('@trxn/hapify-config');
 
 module.exports = {
   ...hapifyDefaultConfig,
@@ -10,9 +10,9 @@ module.exports = {
   description: 'Library to host generated codes',
   validatorPath: getValidatorPath(__dirname),
   project: '../../../hapify-models.json',
-  extends: ['@tractr/hapify-templates-nestjs-models'],
+  extends: ['@trxn/hapify-templates-nestjs-models'],
   importReplacements: {
-    'nestjs-models-common': '@tractr/generated-nestjs-models-common',
-    'nestjs-models-rest': '@tractr/generated-nestjs-models-rest',
+    'nestjs-models-common': '@trxn/generated-nestjs-models-common',
+    'nestjs-models-rest': '@trxn/generated-nestjs-models-rest',
   },
 };

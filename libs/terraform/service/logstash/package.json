@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/terraform-service-logstash",
+  "name": "@trxn/terraform-service-logstash",
   "version": "1.64.9",
   "repository": {
     "type": "git",

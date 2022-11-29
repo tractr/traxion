@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import {
   FileStorageController,
   FileStorageModule as TraxionFileStorageModule,
-} from '@tractr/nestjs-file-storage';
+} from '@trxn/nestjs-file-storage';
 
 @Module({
   imports: [

@@ -23,10 +23,10 @@ export async function updatePackageJson(
   await addPackageToPackageJson(
     tree,
     [
-      '@tractr/nestjs-authentication',
-      '@tractr/nestjs-casl',
-      '@tractr/nestjs-core',
-      '@tractr/nestjs-database',
+      '@trxn/nestjs-authentication',
+      '@trxn/nestjs-casl',
+      '@trxn/nestjs-core',
+      '@trxn/nestjs-database',
     ].map((packageName) => ({
       packageName,
       version: packageJson.version,

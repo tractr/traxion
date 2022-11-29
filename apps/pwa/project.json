@@ -43,7 +43,7 @@
         "allowedCommonJsDependencies": [
           "validator",
           "@prisma/client",
-          "@tractr/common",
+          "@trxn/common",
           "@generated"
         ],
         "assets": [

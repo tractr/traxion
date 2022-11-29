@@ -44,9 +44,10 @@ export default async function hapifyLibraryGenerator(
 
   await addPackageToPackageJson(
     tree,
-    ['@tractr/hapify-config', normalizedOptions.template].map(
-      (packageName) => ({ packageName, version: currentVersion }),
-    ),
+    ['@trxn/hapify-config', normalizedOptions.template].map((packageName) => ({
+      packageName,
+      version: currentVersion,
+    })),
   );
 
   await addPackageToPackageJson(tree, '@hapify/cli');

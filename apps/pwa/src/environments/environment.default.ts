@@ -1,7 +1,7 @@
 import { IsString } from 'class-validator';
 
-import { AngularConfig } from '@tractr/angular-config';
-import { transformAndValidate } from '@tractr/common';
+import { AngularConfig } from '@trxn/angular-config';
+import { transformAndValidate } from '@trxn/common';
 
 export class AppConfigDto {
   @IsString()

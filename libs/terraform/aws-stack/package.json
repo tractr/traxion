@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/terraform-aws-stack",
+  "name": "@trxn/terraform-aws-stack",
   "version": "1.64.9",
   "repository": {
     "type": "git",

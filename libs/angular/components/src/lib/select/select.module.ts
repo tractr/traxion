@@ -7,7 +7,7 @@ import { CheckboxGroupComponent } from './checkbox-group/checkbox-group.componen
 import { RadioComponent } from './radio/radio.component';
 import { SelectComponent } from './select/select.component';
 
-import { AngularToolsModule } from '@tractr/angular-tools';
+import { AngularToolsModule } from '@trxn/angular-tools';
 
 const antModules = [NzSelectModule, NzRadioModule, NzCheckboxModule];
 

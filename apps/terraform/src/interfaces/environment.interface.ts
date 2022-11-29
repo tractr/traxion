@@ -1,8 +1,8 @@
-import { AdminComponentPublicConfig } from '@tractr/terraform-service-admin';
-import { ApiComponentPublicConfig } from '@tractr/terraform-service-api';
-import { PostgresComponentPublicConfig } from '@tractr/terraform-service-postgres';
-import { PwaComponentPublicConfig } from '@tractr/terraform-service-pwa';
-import { ReverseProxyComponentPublicConfig } from '@tractr/terraform-service-reverse-proxy';
+import { AdminComponentPublicConfig } from '@trxn/terraform-service-admin';
+import { ApiComponentPublicConfig } from '@trxn/terraform-service-api';
+import { PostgresComponentPublicConfig } from '@trxn/terraform-service-postgres';
+import { PwaComponentPublicConfig } from '@trxn/terraform-service-pwa';
+import { ReverseProxyComponentPublicConfig } from '@trxn/terraform-service-reverse-proxy';
 
 export interface Environment {
   /**

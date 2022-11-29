@@ -4,10 +4,10 @@ import { EncryptionModule } from './encryption.module';
 import { MailerModule } from './mailer.module';
 import { ModelsModule } from './models.module';
 
-import { USER_SERVICE } from '@tractr/generated-nestjs-models-common';
-import { BcryptService, EncryptionService } from '@tractr/nestjs-bcrypt';
-import { ResetPasswordSendEmailService } from '@tractr/nestjs-mailer';
-import { PasswordModule as TraxionPasswordModule } from '@tractr/nestjs-password';
+import { USER_SERVICE } from '@trxn/generated-nestjs-models-common';
+import { BcryptService, EncryptionService } from '@trxn/nestjs-bcrypt';
+import { ResetPasswordSendEmailService } from '@trxn/nestjs-mailer';
+import { PasswordModule as TraxionPasswordModule } from '@trxn/nestjs-password';
 
 @Module({
   imports: [

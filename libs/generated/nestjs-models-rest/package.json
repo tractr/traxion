@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/generated-nestjs-models-rest",
+  "name": "@trxn/generated-nestjs-models-rest",
   "version": "1.64.9",
   "exports": {
     ".": {

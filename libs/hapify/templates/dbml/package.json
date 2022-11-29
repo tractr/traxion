@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/hapify-templates-dbml",
+  "name": "@trxn/hapify-templates-dbml",
   "version": "1.64.9",
   "description": "Generate DBML schema",
   "repository": {

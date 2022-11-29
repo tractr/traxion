@@ -116,11 +116,11 @@ export default async function prismaLibraryGenerator(
       'bcrypt',
       'prisma',
       {
-        packageName: '@tractr/nestjs-database',
+        packageName: '@trxn/nestjs-database',
         version,
       },
       {
-        packageName: '@tractr/nestjs-core',
+        packageName: '@trxn/nestjs-core',
         version,
       },
     ],

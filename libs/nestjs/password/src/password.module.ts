@@ -15,8 +15,8 @@ import {
   UserPasswordService,
 } from './services';
 
-import { BcryptModule } from '@tractr/nestjs-bcrypt';
-import { LoggerModule } from '@tractr/nestjs-core';
+import { BcryptModule } from '@trxn/nestjs-bcrypt';
+import { LoggerModule } from '@trxn/nestjs-core';
 
 @Module({
   imports: [LoggerModule, BcryptModule.register({})],

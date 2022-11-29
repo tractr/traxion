@@ -5,7 +5,7 @@ import {
   EgressGatewayComponentConfig,
 } from '../interfaces';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 /**
  * This component provides an Egress Only Internet Gateway to make internet available in the private subnet with IPv6.

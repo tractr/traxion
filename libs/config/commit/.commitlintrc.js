@@ -1,4 +1,4 @@
-// When updating this file think to change the @tractr/semantic-release-config/.commitlintrc.js too
+// When updating this file think to change the @trxn/semantic-release-config/.commitlintrc.js too
 
 const conventional = require('./types.json');
 

@@ -3,7 +3,7 @@ import { LogstashComponentDefaultConfig } from '../interfaces';
 import {
   Secret,
   SERVICE_COMPONENT_DEFAULT_CONFIG,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 export const LOGSTASH_COMPONENT_DEFAULT_CONFIG: LogstashComponentDefaultConfig =
   {

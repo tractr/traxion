@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { BcryptModule } from '@tractr/nestjs-bcrypt';
+import { BcryptModule } from '@trxn/nestjs-bcrypt';
 
 @Module({
   imports: [

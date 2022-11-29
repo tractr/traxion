@@ -3,7 +3,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 
 import { ButtonComponent } from './button.component';
 
-import { AngularToolsModule } from '@tractr/angular-tools';
+import { AngularToolsModule } from '@trxn/angular-tools';
 
 const antModules = [NzButtonModule];
 

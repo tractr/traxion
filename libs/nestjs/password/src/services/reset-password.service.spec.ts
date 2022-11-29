@@ -9,7 +9,7 @@ import { MODULE_OPTIONS_TOKEN } from '../password.module-definition';
 import { ResetPasswordService } from './reset-password.service';
 import { UserPasswordService } from './user-password.service';
 
-import { UserNotFoundError } from '@tractr/nestjs-authentication';
+import { UserNotFoundError } from '@trxn/nestjs-authentication';
 
 describe('ResetPasswordService', () => {
   let resetPasswordService: ResetPasswordService;

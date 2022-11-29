@@ -1,7 +1,7 @@
 const {
   hapifyDefaultConfig,
   getValidatorPath,
-} = require('@tractr/hapify-config');
+} = require('@trxn/hapify-config');
 
 module.exports = {
   ...hapifyDefaultConfig,
@@ -10,9 +10,9 @@ module.exports = {
   description: 'Library to host generated codes',
   validatorPath: getValidatorPath(__dirname),
   project: '../../../hapify-models.json',
-  extends: ['@tractr/hapify-templates-rest-dtos'],
+  extends: ['@trxn/hapify-templates-rest-dtos'],
   importReplacements: {
-    models: '@tractr/generated-models',
-    mock: '@tractr/generated-rest-dots/mock',
+    models: '@trxn/generated-models',
+    mock: '@trxn/generated-rest-dots/mock',
   },
 };

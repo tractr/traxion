@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/terraform-service-postgres",
+  "name": "@trxn/terraform-service-postgres",
   "version": "1.64.9",
   "repository": {
     "type": "git",

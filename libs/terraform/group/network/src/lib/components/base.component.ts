@@ -3,7 +3,7 @@ import { vpc as awsVpc } from '@cdktf/provider-aws';
 import { BaseComponentArtifacts, BaseComponentConfig } from '../interfaces';
 import { InternetRoutesComponent } from './internet-routes.component';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 /**
  * This component creates the base resources for the network: VPC, Internet Gateways

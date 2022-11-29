@@ -1,12 +1,12 @@
 import { cloudwatch, ecs, elb, secretsmanager, vpc } from '@cdktf/provider-aws';
 
-import { PrivateDnsComponent } from '@tractr/terraform-component-private-dns';
-import { DockerApplications } from '@tractr/terraform-group-registry';
-import { ExecutionRoleComponent } from '@tractr/terraform-service-ecs';
+import { PrivateDnsComponent } from '@trxn/terraform-component-private-dns';
+import { DockerApplications } from '@trxn/terraform-group-registry';
+import { ExecutionRoleComponent } from '@trxn/terraform-service-ecs';
 import {
   ReverseProxyComponent,
   ReverseProxyComponentPublicConfig,
-} from '@tractr/terraform-service-reverse-proxy';
+} from '@trxn/terraform-service-reverse-proxy';
 
 export interface EcsComponentInternalConfig {
   subnets: vpc.Subnet[];

@@ -12,9 +12,9 @@ describe('normalizeOptions', () => {
   const npmScope = 'tractr';
   const defaultOptions: AdminAppGeneratorSchema = {
     name: 'admin',
-    npmName: '@tractr/admin',
-    reactAdminImportPath: '@tractr/react-admin',
-    rextClientImportPath: '@tractr/rext-client',
+    npmName: '@trxn/admin',
+    reactAdminImportPath: '@trxn/react-admin',
+    rextClientImportPath: '@trxn/rext-client',
   };
 
   beforeEach(() => {
@@ -115,7 +115,7 @@ describe('normalizeOptions', () => {
 
     const normalizedSchema: NormalizedSchema = {
       ...defaultOptions,
-      npmName: '@tractr/admin',
+      npmName: '@trxn/admin',
       npmScope,
       projectRoot: 'apps/admin',
       projectName: 'admin',
@@ -138,7 +138,7 @@ describe('normalizeOptions', () => {
     const normalizedSchema: NormalizedSchema = {
       ...defaultOptions,
       directory: 'test',
-      npmName: '@tractr/test-admin',
+      npmName: '@trxn/test-admin',
       npmScope,
       projectRoot: 'apps/test/admin',
       projectName: 'test-admin',

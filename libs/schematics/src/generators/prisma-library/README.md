@@ -3,7 +3,7 @@
 Create a library with Prisma for Nx
 
 ```shell
-nx g @tractr/schematics:prisma-library
+nx g @trxn/schematics:prisma-library
 ```
 
 ## Description

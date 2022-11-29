@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { AsyncOptions, ModuleOptionsFactory } from '@tractr/angular-tools';
+import { AsyncOptions, ModuleOptionsFactory } from '@trxn/angular-tools';
 import { ANGULAR_REXT_CONFIGURATION } from './constants';
 import { AngularRextConfiguration } from './interfaces';
  

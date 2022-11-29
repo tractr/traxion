@@ -94,7 +94,7 @@ export const DEFAULT_DEPENDENCIES: Partial<
   ],
   'angular-rext-client': [
     {
-      packageName: '@tractr/angular-tools',
+      packageName: '@trxn/angular-tools',
       version: 'current',
       type: PackageType.dependencies,
     },

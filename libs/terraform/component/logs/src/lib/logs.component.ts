@@ -2,7 +2,7 @@ import { cloudwatch } from '@cdktf/provider-aws';
 
 import { LogsArtifacts, LogsConfig } from './logs.interface';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 export class LogsComponent extends AwsComponent<LogsConfig, LogsArtifacts> {
   protected createComponents(): void {

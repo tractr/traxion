@@ -118,7 +118,7 @@ describe('hapify library generator', () => {
     expect(appTree.read('libs/test/.hapifyrc.js')?.toString()).toEqual(`const {
   hapifyDefaultConfig,
   getValidatorPath,
-} = require('@tractr/hapify-config');
+} = require('@trxn/hapify-config');
 
 module.exports = {
   ...hapifyDefaultConfig,
@@ -128,7 +128,7 @@ module.exports = {
   validatorPath: getValidatorPath(__dirname),
   project: '../../hapify-models.json',
   extends: [
-    '@tractr/hapify-templates-models',
+    '@trxn/hapify-templates-models',
   ],
   importReplacements: {
   "mock": "@proj/models/mock"
@@ -142,14 +142,14 @@ module.exports = {
       ...options,
       hapifyTemplates: ['models'],
       hapifyAdditionalTemplates:
-        '@tractr/additional-templates-1,@tractr/additional-templates-2',
+        '@trxn/additional-templates-1,@trxn/additional-templates-2',
     });
 
     expect(appTree.exists('libs/test/.hapifyrc.js')).toBeTruthy();
     expect(appTree.read('libs/test/.hapifyrc.js')?.toString()).toEqual(`const {
   hapifyDefaultConfig,
   getValidatorPath,
-} = require('@tractr/hapify-config');
+} = require('@trxn/hapify-config');
 
 module.exports = {
   ...hapifyDefaultConfig,
@@ -159,7 +159,7 @@ module.exports = {
   validatorPath: getValidatorPath(__dirname),
   project: '../../hapify-models.json',
   extends: [
-    '@tractr/hapify-templates-models',
+    '@trxn/hapify-templates-models',
   ],
   importReplacements: {
   "mock": "@proj/models/mock"
@@ -178,7 +178,7 @@ module.exports = {
     expect(appTree.read('libs/test/.hapifyrc.js')?.toString()).toEqual(`const {
   hapifyDefaultConfig,
   getValidatorPath,
-} = require('@tractr/hapify-config');
+} = require('@trxn/hapify-config');
 
 module.exports = {
   ...hapifyDefaultConfig,
@@ -188,7 +188,7 @@ module.exports = {
   validatorPath: getValidatorPath(__dirname),
   project: '../../hapify-models.json',
   extends: [
-    '@tractr/hapify-templates-models',
+    '@trxn/hapify-templates-models',
   ],
   importReplacements: {
   "mock": "@proj/models/mock"

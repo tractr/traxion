@@ -50,7 +50,7 @@ export function updateTargets(
       allowedCommonJsDependencies: [
         'validator',
         '@prisma/client',
-        '@tractr/common',
+        '@trxn/common',
       ],
     },
   });

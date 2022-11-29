@@ -42,11 +42,11 @@ export async function updatePackageJson(
   await addPackageToPackageJson(
     tree,
     [
-      '@tractr/angular-authentication',
-      '@tractr/angular-casl',
-      '@tractr/angular-config',
-      '@tractr/angular-tools',
-      '@tractr/common',
+      '@trxn/angular-authentication',
+      '@trxn/angular-casl',
+      '@trxn/angular-config',
+      '@trxn/angular-tools',
+      '@trxn/common',
     ].map((packageName) => ({
       packageName,
       version: packageJson.version,

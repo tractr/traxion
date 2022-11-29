@@ -12,13 +12,13 @@ import {
   AngularAuthenticationModule,
   AngularAuthenticationPasswordRoutingModule,
   AngularAuthenticationRoutingModule,
-} from '@tractr/angular-authentication';
-import { AngularCaslModule } from '@tractr/angular-casl';
+} from '@trxn/angular-authentication';
+import { AngularCaslModule } from '@trxn/angular-casl';
 import {
   ANGULAR_CONFIG_SERVICE,
   AngularConfigModule,
   AngularConfigService,
-} from '@tractr/angular-config';
+} from '@trxn/angular-config';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { AppConfig } from '../environments/environment';

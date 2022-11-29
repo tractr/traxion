@@ -3,7 +3,7 @@
 Add an Admin application to a NX project.
 
 ```shell
-nx g @tractr/schematics:admin-app
+nx g @trxn/schematics:admin-app
 ```
 
 ## Description

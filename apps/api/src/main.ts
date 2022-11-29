@@ -8,11 +8,11 @@ import * as winston from 'winston';
 
 import { AppModule } from './app/app.module';
 
-import { PrismaExceptionInterceptor } from '@tractr/nestjs-core';
+import { PrismaExceptionInterceptor } from '@trxn/nestjs-core';
 import {
   createWinstonLogger,
   nestLikeConsoleFormat,
-} from '@tractr/nestjs-winston';
+} from '@trxn/nestjs-winston';
 
 // Bootstrap the main application
 async function bootstrap() {

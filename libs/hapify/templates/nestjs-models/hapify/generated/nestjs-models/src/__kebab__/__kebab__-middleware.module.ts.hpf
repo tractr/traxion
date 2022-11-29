@@ -9,9 +9,9 @@ import {
   } from '@nestjs/common';
 
 <<if Fields password>>
-import { BcryptModule, BcryptService, EncryptionService } from '@tractr/nestjs-bcrypt';
+import { BcryptModule, BcryptService, EncryptionService } from '@trxn/nestjs-bcrypt';
 <<endif>>
-import { DatabaseService } from '@tractr/nestjs-database';
+import { DatabaseService } from '@trxn/nestjs-database';
 
 export interface <<Model pascal>>MiddlewareOptionsModule {
   <<if Fields password>>

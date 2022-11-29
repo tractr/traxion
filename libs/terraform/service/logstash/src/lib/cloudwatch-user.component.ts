@@ -5,7 +5,7 @@ import {
   CloudwatchUserComponentConfig,
 } from './interfaces';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 export class CloudwatchUserComponent extends AwsComponent<
   CloudwatchUserComponentConfig,

@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/terraform-service-ecs",
+  "name": "@trxn/terraform-service-ecs",
   "version": "1.64.9",
   "repository": {
     "type": "git",

@@ -4,8 +4,8 @@ import { Controller, Get } from '@nestjs/common';
 import { PolicyHandlerClass } from './policy-handler-class.mock';
 import { AppAbility } from './role-permission.mock';
 
-import { PolicyHandlerType } from '@tractr/common';
-import { Policies, Public } from '@tractr/nestjs-core';
+import { PolicyHandlerType } from '@trxn/common';
+import { Policies, Public } from '@trxn/nestjs-core';
 
 @Controller()
 export class CaslEndPointMock {

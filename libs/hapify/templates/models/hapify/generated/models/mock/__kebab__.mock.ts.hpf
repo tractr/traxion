@@ -11,7 +11,7 @@ import {
 <<endif>>
 	
 <<if Fields object>>
-import type { JsonObject } from '@tractr/common';
+import type { JsonObject } from '@trxn/common';
 <<endif>>
 	
 import {

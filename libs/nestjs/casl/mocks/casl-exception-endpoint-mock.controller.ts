@@ -2,7 +2,7 @@
 import { Ability, ForbiddenError } from '@casl/ability';
 import { Controller, Get } from '@nestjs/common';
 
-import { Public } from '@tractr/nestjs-core';
+import { Public } from '@trxn/nestjs-core';
 
 type Abilities = ['read', 'User'];
 

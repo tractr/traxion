@@ -4,7 +4,7 @@ import { User } from '@prisma/client';
 import { PasswordUpdateDto } from '../dtos';
 import { PasswordService } from '../services';
 
-import { CurrentUser } from '@tractr/nestjs-core';
+import { CurrentUser } from '@trxn/nestjs-core';
 
 @Controller('password')
 export class PasswordController {

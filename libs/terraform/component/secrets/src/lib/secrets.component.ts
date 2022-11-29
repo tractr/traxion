@@ -5,7 +5,7 @@ import {
   SecretsComponentConfig,
 } from './secrets.interface';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 export class SecretsComponent extends AwsComponent<
   SecretsComponentConfig,

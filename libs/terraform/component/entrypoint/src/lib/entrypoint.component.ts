@@ -6,7 +6,7 @@ import {
   EntrypointComponentConfig,
 } from './entrypoint.interface';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 export class EntrypointComponent extends AwsComponent<
   EntrypointComponentConfig,

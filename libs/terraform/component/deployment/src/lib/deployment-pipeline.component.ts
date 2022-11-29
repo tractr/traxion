@@ -6,7 +6,7 @@ import {
   DeploymentTrigger,
 } from './interfaces';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 // https://github.com/ispec-inc/terraform-aws-ecs-deploy-pipeline/blob/master/modules/pipeline
 export class DeploymentPipelineComponent extends AwsComponent<

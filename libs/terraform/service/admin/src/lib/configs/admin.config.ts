@@ -1,6 +1,6 @@
 import { AdminComponentDefaultConfig } from '../interfaces';
 
-import { SERVICE_COMPONENT_DEFAULT_CONFIG } from '@tractr/terraform-service-ecs';
+import { SERVICE_COMPONENT_DEFAULT_CONFIG } from '@trxn/terraform-service-ecs';
 
 export const ADMIN_COMPONENT_DEFAULT_CONFIG: AdminComponentDefaultConfig = {
   ...SERVICE_COMPONENT_DEFAULT_CONFIG,

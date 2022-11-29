@@ -11,11 +11,11 @@ import {
   AwsComponentConstructor,
   AwsProviderConstruct,
   mergeConfigurations,
-} from '@tractr/terraform-component-aws';
-import { EntrypointComponent } from '@tractr/terraform-component-entrypoint';
-import { FileStorageComponent } from '@tractr/terraform-component-file-storage';
-import { LogsComponent } from '@tractr/terraform-component-logs';
-import { SecretsComponent } from '@tractr/terraform-component-secrets';
+} from '@trxn/terraform-component-aws';
+import { EntrypointComponent } from '@trxn/terraform-component-entrypoint';
+import { FileStorageComponent } from '@trxn/terraform-component-file-storage';
+import { LogsComponent } from '@trxn/terraform-component-logs';
+import { SecretsComponent } from '@trxn/terraform-component-secrets';
 import {
   BackendServiceComponent,
   BackendServiceComponentConfig,
@@ -24,7 +24,7 @@ import {
   ServiceComponentConfig,
   ServiceComponentDefaultConfig,
   ServiceComponentPublicConfig,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 /**
  * Following https://medium.com/@bradford_hamilton/deploying-containers-on-amazons-ecs-using-fargate-and-terraform-part-2-2e6f6a3a957f

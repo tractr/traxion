@@ -4,7 +4,7 @@ import { BadPasswordError } from '../errors';
 import { HashService } from './hash.service';
 import { UserPasswordService } from './user-password.service';
 
-import { UserNotFoundError } from '@tractr/nestjs-authentication';
+import { UserNotFoundError } from '@trxn/nestjs-authentication';
 
 @Injectable()
 export class PasswordService {

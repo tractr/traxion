@@ -7,7 +7,7 @@ import { FileStorageConfigurationPrivateDto } from './dtos';
 import { FileStorageConfigurationPublic } from './interfaces';
 import { FileStorageService } from './services';
 
-import { ModuleOptionsFactory } from '@tractr/nestjs-core';
+import { ModuleOptionsFactory } from '@trxn/nestjs-core';
 
 @Global()
 @Module({

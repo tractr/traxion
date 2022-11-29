@@ -13,16 +13,16 @@ import { AppComponent } from './app.component';
 import {
   AngularAuthenticationModule,
   AngularAuthenticationRoutingModule,
-} from '@tractr/angular-authentication';
-import { AngularCaslModule } from '@tractr/angular-casl';
+} from '@trxn/angular-authentication';
+import { AngularCaslModule } from '@trxn/angular-casl';
 import {
   ANGULAR_CONFIG_SERVICE,
   AngularConfigModule,
   AngularConfigService,
-} from '@tractr/angular-config';
-import { AngularRextModule } from '@tractr/generated-angular-rext-client';
-import { rolePermissions } from '@tractr/generated-casl';
-import { User } from '@tractr/generated-models';
+} from '@trxn/angular-config';
+import { AngularRextModule } from '@trxn/generated-angular-rext-client';
+import { rolePermissions } from '@trxn/generated-casl';
+import { User } from '@trxn/generated-models';
 
 @NgModule({
   declarations: [AppComponent],

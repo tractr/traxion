@@ -9,7 +9,7 @@ import {
   PrismaClientOptions,
 } from './services';
 
-import { LoggerModule, ModuleOptionsFactory } from '@tractr/nestjs-core';
+import { LoggerModule, ModuleOptionsFactory } from '@trxn/nestjs-core';
 
 @Global()
 @Module({

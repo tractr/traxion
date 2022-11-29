@@ -5,7 +5,7 @@ This package contains the hapify templates to generate REST dtos classes.
 ## Installation
 
 ```sh
-npm install @tractr/hapify-templates-rest-dtos --save-dev
+npm install @trxn/hapify-templates-rest-dtos --save-dev
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ In your `package.json`:
 {
   "name": "my-library",
   "version": "0.0.1",
-  "hapify": { "extends": ["@tractr/hapify-templates-rest-dtos"] }
+  "hapify": { "extends": ["@trxn/hapify-templates-rest-dtos"] }
 }
 ```
 
@@ -32,5 +32,5 @@ module.exports = {
 Or you can create a `.hapifyrc.json` file in your projects root directory.
 
 ```javascript
-{ "extends": [ '@tractr/hapify-templates-rest-dtos' ] }
+{ "extends": [ '@trxn/hapify-templates-rest-dtos' ] }
 ```

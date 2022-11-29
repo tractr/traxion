@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/terraform-component-private-dns",
+  "name": "@trxn/terraform-component-private-dns",
   "version": "1.64.9",
   "repository": {
     "type": "git",

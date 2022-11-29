@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/terraform-component-logs",
+  "name": "@trxn/terraform-component-logs",
   "version": "1.64.9",
   "repository": {
     "type": "git",

@@ -15,7 +15,7 @@ import {
 } from '../../helpers';
 import { TargetGenerateGeneratorSchema } from './schema';
 
-export const SCHEMATICS_TRACTR_PACKAGE_NAME = '@tractr/schematics';
+export const SCHEMATICS_TRACTR_PACKAGE_NAME = '@trxn/schematics';
 
 export const SCHEMATICS_PACKAGE_JSON_PATH = `${__dirname}/../../../package.json`;
 

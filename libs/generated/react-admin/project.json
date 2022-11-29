@@ -23,7 +23,7 @@
       "outputs": ["dist/libs/generated/react-admin"]
     },
     "generate": {
-      "executor": "@tractr/schematics:generate",
+      "executor": "@trxn/schematics:generate",
       "options": {
         "cwd": "libs/generated/react-admin"
       }

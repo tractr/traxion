@@ -23,10 +23,10 @@ import {
   CurrentUser,
   Policies,
   <<if Model not noGuest>>Public,<<endif>>
-} from '@tractr/nestjs-core';
+} from '@trxn/nestjs-core';
 import {
   DatabaseService,
-} from '@tractr/nestjs-database';
+} from '@trxn/nestjs-database';
 import {
   Args,
   Info,

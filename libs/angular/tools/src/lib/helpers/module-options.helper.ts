@@ -15,7 +15,7 @@ import {
   isClass,
   transformAndValidate,
   TransformAndValidate,
-} from '@tractr/common';
+} from '@trxn/common';
 
 /**
  * Default Options interface

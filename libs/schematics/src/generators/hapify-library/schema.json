@@ -4,7 +4,7 @@
   "cli": "nx",
   "examples": [
     {
-      "command": "g @tractr/schematics:library mylib --directory=myapp",
+      "command": "g @trxn/schematics:library mylib --directory=myapp",
       "description": "Generate libs/myapp/mylib"
     }
   ],

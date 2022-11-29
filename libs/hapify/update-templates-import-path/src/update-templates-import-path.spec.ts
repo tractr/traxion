@@ -27,7 +27,7 @@ describe('update templates import path', () => {
   it('should replace the content of a file', async () => {
     const basePath = BASE_PATH;
     const randomString = uuid.v4();
-    const pattern = '@tractr/test';
+    const pattern = '@trxn/test';
     const content = {
       importReplacements: {
         models: pattern,
@@ -68,7 +68,7 @@ describe('update templates import path', () => {
   it('should not failed because hapify config has no importReplacementsKeys', async () => {
     const basePath = BASE_PATH;
     const randomString = uuid.v4();
-    const pattern = '@tractr/test';
+    const pattern = '@trxn/test';
     const content = {
       notTheGoodKey: {
         models: pattern,

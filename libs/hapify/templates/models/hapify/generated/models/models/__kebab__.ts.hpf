@@ -64,7 +64,7 @@ import {
 } from 'class-validator';
 	
 <<if Fields object>>
-import type { JsonObject } from '@tractr/common';
+import type { JsonObject } from '@trxn/common';
 <<endif>>
 	
 <<<for (const relation of getRelations()) {>>>
@@ -97,7 +97,7 @@ import {
   <<if Fields number>>
   TransformStringToInt,
   <<endif>>
-} from '@tractr/common';
+} from '@trxn/common';
 <<endif>>
 	
 <<if Model hasNotes>> 

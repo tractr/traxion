@@ -5,7 +5,7 @@ import {
   EnumFilterProps,
   NumberFilterProps,
   StringFilterProps,
-} from '@tractr/common';
+} from '@trxn/common';
 
 describe('formatFilterType', () => {
   describe('Format filter for data of type array', () => {

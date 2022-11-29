@@ -3,10 +3,10 @@
 ## Installation
 
 To install this librairy you have to install it first via npm, yarn or pnpm and
-install the required peerdependency `@tractr/nestjs-database`
+install the required peerdependency `@trxn/nestjs-database`
 
 ```bash
-npm i --save @tractr/nestjs-authentication @tractr/nestjs-database`
+npm i --save @trxn/nestjs-authentication @trxn/nestjs-database`
 ```
 
 After that you need to register the module into your main application.
@@ -18,8 +18,8 @@ USER_SERVICE token generate by `hapify-templates-nestjs-models-common`).
 ```typescript
 import { Module } from '@nestjs/common';
 
-import { AuthenticationModule } from '@tractr/nestjs-authentication';
-import { DatabaseModule } from '@tractr/nestjs-database';
+import { AuthenticationModule } from '@trxn/nestjs-authentication';
+import { DatabaseModule } from '@trxn/nestjs-database';
 
 @Module({
   imports: [DatabaseModule.register(), AuthenticationModule.register({
@@ -42,7 +42,7 @@ you need to register the global auth guard from nestjs-authentication:
 import {
   AuthenticationModule,
   JwtGlobalAuthGuard,
-} from '@tractr/nestjs-authentication';
+} from '@trxn/nestjs-authentication';
 
 @Module({
   imports: [DatabaseModule.register(), AuthenticationModule.register()],

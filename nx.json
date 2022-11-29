@@ -55,7 +55,7 @@
     "tsconfig.base.json": "*",
     "workspace.json": "*"
   },
-  "npmScope": "tractr",
+  "npmScope": "trxn",
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"]

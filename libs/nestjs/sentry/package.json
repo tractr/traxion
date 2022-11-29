@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/nestjs-sentry",
+  "name": "@trxn/nestjs-sentry",
   "version": "1.64.9",
   "repository": {
     "type": "git",

@@ -10,10 +10,10 @@ You can register this module inside your hapifyrc file:
 ```js
 module.export = {
   // ...
-  extends: ['@tractr/hapify-templates-nestjs-graphql'],
+  extends: ['@trxn/hapify-templates-nestjs-graphql'],
   importReplacements: {
-    models: '@tractr/generated-models',
-    'nestjs-models-common': '@tractr/generated-nestjs-models-common',
+    models: '@trxn/generated-models',
+    'nestjs-models-common': '@trxn/generated-nestjs-models-common',
   },
 }
 ```
@@ -24,7 +24,7 @@ You can add the generate target to your nx libs that will handle the generation 
 {
   "targets":{
     "generate": {
-      "executor": "@tractr/schematics:generate",
+      "executor": "@trxn/schematics:generate",
       "options": {
         "cwd": "libs/nestjs/graphql"
       }
@@ -50,11 +50,11 @@ generator nestjsGraphql {
 To finalize the installation you can install some extra packages:
 
 ```bash
-npm i --save-dev prisma-nestjs-graphql @tractr/hapify-templates-nestjs-graphql
+npm i --save-dev prisma-nestjs-graphql @trxn/hapify-templates-nestjs-graphql
 ```
 
 ```bash
-npm i --save @nestjs/apollo @nestjs/graphql @paljs/plugins @tractr/nestjs-graphql apollo-server-core apollo-server-express
+npm i --save @nestjs/apollo @nestjs/graphql @paljs/plugins @trxn/nestjs-graphql apollo-server-core apollo-server-express
 ```
 
 ## How to use inside your nestjs app

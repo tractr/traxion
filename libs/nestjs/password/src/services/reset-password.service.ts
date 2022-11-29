@@ -9,7 +9,7 @@ import { PasswordModuleOptions, UserInfo } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../password.module-definition';
 import { UserPasswordService } from './user-password.service';
 
-import { UserNotFoundError } from '@tractr/nestjs-authentication';
+import { UserNotFoundError } from '@trxn/nestjs-authentication';
 
 @Injectable()
 export class ResetPasswordService {

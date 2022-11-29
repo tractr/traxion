@@ -7,7 +7,7 @@ import {
 } from '../constants';
 import { AuthenticationModuleOptions } from '../interfaces';
 
-import { isProduction } from '@tractr/nestjs-core';
+import { isProduction } from '@trxn/nestjs-core';
 
 @Injectable()
 export class CookieOptionsService {

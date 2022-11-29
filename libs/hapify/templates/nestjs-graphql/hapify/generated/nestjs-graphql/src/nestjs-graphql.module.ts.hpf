@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { LoggerModule } from '@tractr/nestjs-core';
-import { DateScalar } from '@tractr/nestjs-graphql';
+import { LoggerModule } from '@trxn/nestjs-core';
+import { DateScalar } from '@trxn/nestjs-graphql';
  
 <<for Models model>>
 import { <<model pascal>>Resolver } from './resolvers/<<model kebab>>.resolver';

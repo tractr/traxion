@@ -9,9 +9,9 @@ import {
 
 import { Container } from '../containers';
 
-import { DeploymentComponent } from '@tractr/terraform-component-deployment';
-import { VolumeComponent } from '@tractr/terraform-component-volume';
-import { DockerApplications } from '@tractr/terraform-group-registry';
+import { DeploymentComponent } from '@trxn/terraform-component-deployment';
+import { VolumeComponent } from '@trxn/terraform-component-volume';
+import { DockerApplications } from '@trxn/terraform-group-registry';
 
 // Check cpu/memory pairs: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
 export type CpuValue = '256' | '512' | '1024' | '2048' | '4096';

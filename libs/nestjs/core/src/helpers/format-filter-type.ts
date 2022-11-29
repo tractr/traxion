@@ -8,7 +8,7 @@ import {
   NumberFilterProps,
   StringFilterProps,
   transformStringToArray,
-} from '@tractr/common';
+} from '@trxn/common';
 
 // TODO: handle datetime and JSON properly and add associated tests
 

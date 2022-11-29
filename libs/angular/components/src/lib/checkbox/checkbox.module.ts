@@ -3,7 +3,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 import { CheckboxComponent } from './checkbox.component';
 
-import { AngularToolsModule } from '@tractr/angular-tools';
+import { AngularToolsModule } from '@trxn/angular-tools';
 
 const antModules = [NzCheckboxModule];
 

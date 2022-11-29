@@ -1,4 +1,4 @@
-import { PolicyHandlerType } from "@tractr/common";
+import { PolicyHandlerType } from "@trxn/common";
 import { subject } from '@casl/ability';
  
 import { AppAbility, Actions } from "../interfaces";

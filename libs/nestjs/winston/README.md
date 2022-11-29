@@ -18,7 +18,7 @@ An example of how to use the two helpers
 import {
   createWinstonLogger,
   nestLikeConsoleFormat,
-} from '@tractr/nestjs-winston';
+} from '@trxn/nestjs-winston';
 
 // Bootstrap the main application
 async function bootstrap() {

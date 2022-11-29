@@ -28,7 +28,7 @@ export class MailerCliService {
       Messages: [
         {
           From: {
-            Email: 'dt@tractr.net',
+            Email: 'dt@trxn.net',
             Name: 'Tractr',
           },
           To: [

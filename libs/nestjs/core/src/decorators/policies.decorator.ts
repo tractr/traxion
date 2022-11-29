@@ -1,6 +1,6 @@
 import { CustomDecorator, SetMetadata } from '@nestjs/common';
 
-import { PolicyHandlerType } from '@tractr/common';
+import { PolicyHandlerType } from '@trxn/common';
 
 export const POLICIES_KEY = 'policies';
 export const Policies = <T = unknown>(

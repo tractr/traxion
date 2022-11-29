@@ -17,8 +17,8 @@ import {
   FormTimePickerComponent,
 } from './item';
 
-import { AngularComponentsModule } from '@tractr/angular-components';
-import { AngularToolsModule } from '@tractr/angular-tools';
+import { AngularComponentsModule } from '@trxn/angular-components';
+import { AngularToolsModule } from '@trxn/angular-tools';
 
 @NgModule({
   imports: [

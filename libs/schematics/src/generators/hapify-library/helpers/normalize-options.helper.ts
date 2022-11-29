@@ -42,7 +42,7 @@ export function normalizeOptions(
     });
 
   // Format hapify template inputs
-  const template = `@tractr/hapify-templates-${hapifyTemplate}`;
+  const template = `@trxn/hapify-templates-${hapifyTemplate}`;
 
   // Format hapify model path
   const hapifyModelsJsonRelativePath = relative(

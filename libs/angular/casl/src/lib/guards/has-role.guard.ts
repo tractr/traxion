@@ -9,7 +9,7 @@ import {
 import { Prisma, User, UserRoles } from '@prisma/client';
 import { map, Observable } from 'rxjs';
 
-import { SessionService } from '@tractr/angular-authentication';
+import { SessionService } from '@trxn/angular-authentication';
 
 export interface HasRoleData {
   redirectTo?: string;

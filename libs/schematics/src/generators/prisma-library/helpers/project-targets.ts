@@ -33,7 +33,7 @@ export function getTargetsToAdd(projectRoot: string): {
       },
     },
     pregenerate: {
-      executor: '@tractr/schematics:generate',
+      executor: '@trxn/schematics:generate',
       options: {
         cleanFirst: false,
         cwd: projectRoot,

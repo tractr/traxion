@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/traxion-pwa",
+  "name": "@trxn/traxion-pwa",
   "version": "1.64.9",
   "peerDependencies": {
     "@angular/common": "^12.1.1",

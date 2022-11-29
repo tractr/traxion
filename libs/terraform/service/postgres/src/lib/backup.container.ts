@@ -1,6 +1,6 @@
 import { BackupContainerConfig } from './interfaces';
 
-import { Container, MountPoint } from '@tractr/terraform-service-ecs';
+import { Container, MountPoint } from '@trxn/terraform-service-ecs';
 
 export class BackupContainer extends Container<BackupContainerConfig> {
   protected getAppName(): string {

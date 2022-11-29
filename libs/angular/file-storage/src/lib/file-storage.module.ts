@@ -10,8 +10,8 @@ import { FileStorageConfigurationDto } from './dtos';
 import { FileStorageConfiguration } from './interfaces';
 import { FileStorageService } from './services';
 
-import { AngularComponentsModule } from '@tractr/angular-components';
-import { AsyncOptions, ModuleOptionsFactory } from '@tractr/angular-tools';
+import { AngularComponentsModule } from '@trxn/angular-components';
+import { AsyncOptions, ModuleOptionsFactory } from '@trxn/angular-tools';
 
 @NgModule({
   imports: [HttpClientModule, AngularComponentsModule, NzUploadModule],

@@ -6,7 +6,7 @@ import { HashService } from './hash.service';
 import { PasswordService } from './password.service';
 import { UserPasswordService } from './user-password.service';
 
-import { UserNotFoundError } from '@tractr/nestjs-authentication';
+import { UserNotFoundError } from '@trxn/nestjs-authentication';
 
 describe('PasswordService', () => {
   let passwordService: PasswordService;

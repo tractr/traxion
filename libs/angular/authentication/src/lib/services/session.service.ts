@@ -14,8 +14,8 @@ import {
 import { AUTHENTICATION_OPTIONS, AUTHENTICATION_USER_DTO } from '../constants';
 import { AuthenticationOptions } from '../dtos';
 
-import { request, Unsubscriber } from '@tractr/angular-tools';
-import { transformAndValidate } from '@tractr/common';
+import { request, Unsubscriber } from '@trxn/angular-tools';
+import { transformAndValidate } from '@trxn/common';
 
 @Injectable()
 export class SessionService<

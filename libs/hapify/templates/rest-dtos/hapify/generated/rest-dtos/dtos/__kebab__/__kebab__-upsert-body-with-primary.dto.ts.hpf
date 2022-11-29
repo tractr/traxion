@@ -55,7 +55,7 @@ import {
 <<endif>>
 	
 <<if Fields object>>
-import type { JsonObject } from '@tractr/common';
+import type { JsonObject } from '@trxn/common';
 <<endif>>
    
 <<if Fields enum>>
@@ -79,7 +79,7 @@ import {
   <<if Fields datetime and not internal>>
   TransformStringToDate,
   <<endif>>
-} from '@tractr/common';
+} from '@trxn/common';
 <<endif>>
  
 export class <<Model pascal>>UpsertBodyWithPrimaryDto {

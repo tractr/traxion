@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 	
-import { FindManyPagination } from '@tractr/nestjs-graphql';
+import { FindManyPagination } from '@trxn/nestjs-graphql';
 	
 import {
   <<Model pascal>>

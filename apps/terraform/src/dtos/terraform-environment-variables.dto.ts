@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-import { TransformStringToArray } from '@tractr/common';
+import { TransformStringToArray } from '@trxn/common';
 
 export class TerraformEnvironmentVariables {
   @IsString()

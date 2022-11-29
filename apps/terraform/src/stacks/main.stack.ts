@@ -4,18 +4,18 @@ import * as deepmerge from 'deepmerge';
 import { AppConfig, Environments } from '../configs';
 import { TerraformEnvironmentVariables } from '../dtos';
 
-import { AwsStack, AwsStackConfig } from '@tractr/terraform-aws-stack';
-import { NetworkGroup } from '@tractr/terraform-group-network';
-import { PoolGroup } from '@tractr/terraform-group-pool';
+import { AwsStack, AwsStackConfig } from '@trxn/terraform-aws-stack';
+import { NetworkGroup } from '@trxn/terraform-group-network';
+import { PoolGroup } from '@trxn/terraform-group-pool';
 import {
   guessNxDockerizedAppsNames,
   RegistryGroup,
-} from '@tractr/terraform-group-registry';
-import { ZoneGroup } from '@tractr/terraform-group-zone';
-import { AdminComponent } from '@tractr/terraform-service-admin';
-import { ApiComponent } from '@tractr/terraform-service-api';
-import { PostgresComponent } from '@tractr/terraform-service-postgres';
-import { PwaComponent } from '@tractr/terraform-service-pwa';
+} from '@trxn/terraform-group-registry';
+import { ZoneGroup } from '@trxn/terraform-group-zone';
+import { AdminComponent } from '@trxn/terraform-service-admin';
+import { ApiComponent } from '@trxn/terraform-service-api';
+import { PostgresComponent } from '@trxn/terraform-service-postgres';
+import { PwaComponent } from '@trxn/terraform-service-pwa';
 
 export class MainStack extends AwsStack<AwsStackConfig> {
   protected readonly registryGroup: RegistryGroup;

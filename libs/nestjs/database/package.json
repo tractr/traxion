@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/nestjs-database",
+  "name": "@trxn/nestjs-database",
   "version": "1.64.9",
   "description": "Database module for nestjs backend",
   "repository": {

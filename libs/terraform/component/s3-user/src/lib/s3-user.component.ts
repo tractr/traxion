@@ -6,7 +6,7 @@ import {
   S3UserComponentConfig,
 } from './s3-user.interface';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 export class S3UserComponent extends AwsComponent<
   S3UserComponentConfig,

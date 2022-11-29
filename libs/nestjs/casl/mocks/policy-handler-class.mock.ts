@@ -4,7 +4,7 @@ import { CaslOptions } from '../src';
 import { CASL_MODULE_OPTIONS } from '../src/casl.constant';
 import { AppAbility } from './role-permission.mock';
 
-import { PolicyHandler } from '@tractr/common';
+import { PolicyHandler } from '@trxn/common';
 
 @Injectable()
 export class PolicyHandlerClass implements PolicyHandler<AppAbility> {

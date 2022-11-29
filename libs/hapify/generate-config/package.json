@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/hapify-generate-config",
+  "name": "@trxn/hapify-generate-config",
   "version": "1.64.9",
   "description": "Generate hapify config",
   "repository": {

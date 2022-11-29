@@ -8,7 +8,7 @@ import { PasswordModuleOptions } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../password.module-definition';
 import { UserPasswordService } from './user-password.service';
 
-import { LoggerModule } from '@tractr/nestjs-core';
+import { LoggerModule } from '@trxn/nestjs-core';
 
 describe('UserPasswordService', () => {
   let userPasswordService: UserPasswordService;

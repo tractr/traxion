@@ -4,7 +4,7 @@ import {
   COMMON_SENSITIVE_ENVIRONMENT_VARIABLES,
   EnvironmentDefinition,
   HttpContainer,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 export class AdminContainer extends HttpContainer<AdminContainerConfig> {
   usePrivateImage(): boolean {

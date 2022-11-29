@@ -12,7 +12,7 @@ Package's author: [Maxim Darré](https://github.com/maxmousse)
 
 ## Installation
 
-To install the package, run `npm i --save @tractr/angular-file-storage`.
+To install the package, run `npm i --save @trxn/angular-file-storage`.
 
 Then, to use the `FileStorageService` in your application, you must import the `FileStorageModule` in the module that needs the `FileStorageService`.
 
@@ -34,7 +34,7 @@ import {
   FileStorageModule,
   PresignedDownloadConfiguration,
   PresignedUploadConfiguration,
-} from '@tractr/nestjs-file-storage';
+} from '@trxn/nestjs-file-storage';
 
 @Module({
   imports: [
@@ -69,7 +69,7 @@ import {
   FileStorageModule,
   PresignedDownloadConfiguration,
   PresignedUploadConfiguration,
-} from '@tractr/nestjs-file-storage';
+} from '@trxn/nestjs-file-storage';
 
 @Module({
   imports: [

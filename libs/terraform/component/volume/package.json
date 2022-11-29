@@ -1,5 +1,5 @@
 {
-  "name": "@tractr/terraform-component-volume",
+  "name": "@trxn/terraform-component-volume",
   "version": "1.64.9",
   "repository": {
     "type": "git",

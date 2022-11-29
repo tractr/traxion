@@ -66,7 +66,7 @@ describe('release generator', () => {
       expect(packageJson.devDependencies[packageName]).toBeDefined();
     });
 
-    expect(packageJson.devDependencies['@tractr/prettier-config']).toEqual(
+    expect(packageJson.devDependencies['@trxn/prettier-config']).toEqual(
       localPackageJson.version,
     );
 
