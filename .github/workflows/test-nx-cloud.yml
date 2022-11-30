@@ -20,7 +20,6 @@ jobs:
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.10
     secrets:
       NX_CLOUD_ACCESS_TOKEN: ${secrets.NX_CLOUD_ACCESS_TOKEN}
-      NX_CLOUD_AUTH_TOKEN: ${secrets.NX_CLOUD_ACCESS_TOKEN}
     with:
       number-of-agents: 3
       init-commands: |
