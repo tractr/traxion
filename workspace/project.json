@@ -11,10 +11,7 @@
     "release": {
       "executor": "@jscutlery/semver:version",
       "options": {
-        "postTargets": [
-          "workspace:github-release-notes",
-          "workspace:publish-packages"
-        ],
+        "postTargets": ["workspace:release-notes", "workspace:publish"],
         "syncVersions": true
       }
     },
