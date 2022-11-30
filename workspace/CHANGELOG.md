@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.2](https://github.com/tractr/traxion/compare/v1.65.1...v1.65.2) (2022-11-30)
+
+
+### Bug Fixes
+
+* use https://npm.pkg.github.com as the default registry url ([cb31d4b](https://github.com/tractr/traxion/commit/cb31d4b304d599e3b0fb12c19254799ff16d78f6))
+
+
+
 ## [1.65.1](https://github.com/tractr/traxion/compare/v1.65.0...v1.65.1) (2022-11-30)
 
 
