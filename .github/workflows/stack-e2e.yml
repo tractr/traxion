@@ -47,7 +47,6 @@ jobs:
       - name: Install dependencies and generate files
         uses: tractr/traxion/.github/actions/setup@main
         with:
-          registryUrl: 'https://npm.pkg.github.com'
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create .env file

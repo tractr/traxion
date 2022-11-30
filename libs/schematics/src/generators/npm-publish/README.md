@@ -27,5 +27,5 @@ The following steps will be performed:
 
 | Option                         | Description                                                                                                           |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
-| `--registry [registryUrl]`     | The NPM registry url used to push the package (default to: `https://npm.pkg.github.com`).<br/> Alias: `-r`            |
+| `--registry [registryUrl]`     | The NPM registry url used to push the package (default to: `https://registry.npmjs.org`).<br/> Alias: `-r`            |
 | `--access [access]`            | The npm publish access level: `public` or `retricted` (default to: `restricted`).                                     |

@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  # Take all the packages and release them to https://npm.pkg.github.com
+  # Take all the packages and release them to https://registry.npmjs.org
   npm-release:
     if: "!contains(github.event.commits[0].message, 'chore(release):')"
 
@@ -35,7 +35,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-          registry-url: https://npm.pkg.github.com
+          registry-url: https://registry.npmjs.org
 
       # We get our cache compare to our package-lock
       - uses: actions/cache@v2.1.4
@@ -161,7 +161,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-          registry-url: https://npm.pkg.github.com
+          registry-url: https://registry.npmjs.org
 
       # Get some cache to speed up docker build
       - name: Cache Docker layers

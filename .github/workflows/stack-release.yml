@@ -13,7 +13,6 @@ jobs:
     name: Release npm packages
     uses: ./.github/workflows/release-npm.yml
     with:
-      registryUrl: 'https://npm.pkg.github.com'
       botName: tractr-bot
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -24,7 +23,6 @@ jobs:
     name: Upload code coverage to Codecov
     uses: ./.github/workflows/test.yml
     with:
-      registryUrl: 'https://npm.pkg.github.com'
       codecov: true
       build: false
       lint: false

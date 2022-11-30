@@ -38,5 +38,5 @@ jobs:
         run: |
           git config --global user.email "tractr-bot@tractr.net"
           git config --global user.name "tractr-bot"
-          nx build docs
-          nx deploy docs
+          npx nx build docs
+          npx nx deploy docs

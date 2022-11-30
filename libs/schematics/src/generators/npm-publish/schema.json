@@ -17,7 +17,7 @@
       "x-prompt": "What project would you like to add publish feature ?"
     },
     "registry": {
-      "description": "Registry url (default to https://npm.pkg.github.com)",
+      "description": "Registry url (default to https://registry.npmjs.org)",
       "type": "string"
     },
     "repository": {

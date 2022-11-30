@@ -74,7 +74,7 @@ export async function execCreateNxWorkspace(options: CreateNxWorkspaceOptions) {
 export async function writeNpmrc(rootPath: string) {
   await writeFile(
     join(rootPath, '.npmrc'),
-    '@trxn:registry=https://npm.pkg.github.com',
+    '@trxn:registry=https://registry.npmjs.org',
   );
 }
 

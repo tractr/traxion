@@ -31,7 +31,7 @@ on:
         required: false
 
 jobs:
-  # Take all the packages and release them to https://npm.pkg.github.com
+  # Take all the packages and release them
   npm-release:
     name: Release npm packages
 

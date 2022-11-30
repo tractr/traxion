@@ -72,7 +72,7 @@ describe('release generator', () => {
     });
     expect(packageJsonProject.publishConfig).toEqual({
       access: 'restricted',
-      registry: 'https://npm.pkg.github.com',
+      registry: 'https://registry.npmjs.org',
     });
   });
 

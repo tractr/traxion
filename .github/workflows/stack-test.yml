@@ -12,7 +12,6 @@ jobs:
     name: Test all packages
     uses: ./.github/workflows/test.yml
     with:
-      registryUrl: 'https://npm.pkg.github.com'
       codecov: true
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

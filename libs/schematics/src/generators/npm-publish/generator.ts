@@ -11,7 +11,7 @@ import { addPackageToPackageJson, installPackagesTask } from '../../helpers';
 import { NpmPublishGeneratorSchema } from './schema';
 
 export const SEMVER_PACKAGE_NAME = 'ngx-deploy-npm';
-export const DEFAULT_REGISTRY_URL = 'https://npm.pkg.github.com';
+export const DEFAULT_REGISTRY_URL = 'https://registry.npmjs.org';
 export const DEFAULT_ACCESS_TYPE = 'restricted';
 
 interface NormalizedSchema extends NpmPublishGeneratorSchema {

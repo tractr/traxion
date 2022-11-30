@@ -11,6 +11,7 @@
     "release": {
       "executor": "@jscutlery/semver:version",
       "options": {
+        "commitMessageFormat": "chore(release): release version ${version}",
         "postTargets": ["workspace:release-notes", "workspace:publish"],
         "syncVersions": true
       }
