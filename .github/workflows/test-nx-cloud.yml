@@ -1,0 +1,48 @@
+#####################################
+##      Reusable workflow tests     ##
+#####################################
+name: Tests
+
+on:
+  workflow_call:
+    inputs:
+      registryUrl:
+        default: 'https://registry.npmjs.org'
+        description: 'The npm token if needed'
+        required: false
+        type: string
+
+    secrets:
+      NPM_TOKEN:
+        description: 'The npm token if needed'
+        required: false
+
+      CODECOV_TOKEN:
+        description: 'The codecov token if needed'
+        required: false
+
+      NX_CLOUD_ACCESS_TOKEN:
+        description: 'A Nx cloud access token'
+        required: false
+
+jobs:
+  main:
+    name: Nx Cloud - Main Job
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.8
+    with:
+      number-of-agents: 3
+      init-commands: |
+        npm run generate
+      parallel-commands: |
+        npx nx-cloud record -- npx nx workspace-lint
+        npx nx-cloud record -- npx nx format:check
+      parallel-commands-on-agents: |
+        npx nx affected --base=remotes/origin/main --parallel=3 --target=lint  & \
+        npx nx affected --base=remotes/origin/main --parallel=3 --target=test --ci --codeCoverage & \
+        npx nx affected --base=remotes/origin/main --parallel=3 --target=build
+
+  agents:
+    name: Nx Cloud - Agents
+    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.8
+    with:
+      number-of-agents: 3
