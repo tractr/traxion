@@ -14,7 +14,7 @@ Join our [Discord](https://discord.traxion.dev/) server to get notified when it'
 
 ## Install
 
-`npm i --save-dev @tractr/hapify-templates-prisma`
+`npm i --save-dev @trxn/hapify-templates-prisma`
 
 ## Description
 
@@ -28,7 +28,7 @@ In your `package.json`:
 {
   "name": "my-library",
   "version": "1.0.0",
-  "hapify": { "extends": ["@tractr/hapify-templates-prisma"] }
+  "hapify": { "extends": ["@trxn/hapify-templates-prisma"] }
 }
 ```
 
@@ -44,5 +44,5 @@ module.exports = {
 Or you can create a `.hapifyrc.json` file in your projects root directory.
 
 ```javascript
-{ "extends": [ '@tractr/hapify-templates-prisma' ] }
+{ "extends": [ '@trxn/hapify-templates-prisma' ] }
 ```

@@ -1,6 +1,6 @@
 import { ReverseProxyComponentDefaultConfig } from '../interfaces';
 
-import { SERVICE_COMPONENT_DEFAULT_CONFIG } from '@tractr/terraform-service-ecs';
+import { SERVICE_COMPONENT_DEFAULT_CONFIG } from '@trxn/terraform-service-ecs';
 
 export const REVERSE_PROXY_COMPONENT_DEFAULT_CONFIG: ReverseProxyComponentDefaultConfig =
   {

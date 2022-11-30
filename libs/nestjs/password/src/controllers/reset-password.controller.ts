@@ -11,8 +11,8 @@ import { PasswordResetDto, PasswordResetRequestedDto } from '../dtos';
 import { BadResetCodeError } from '../errors';
 import { ResetPasswordService } from '../services';
 
-import { UserNotFoundError } from '@tractr/nestjs-authentication';
-import { Public } from '@tractr/nestjs-core';
+import { UserNotFoundError } from '@trxn/nestjs-authentication';
+import { Public } from '@trxn/nestjs-core';
 
 @Controller('password/reset')
 export class ResetPasswordController {

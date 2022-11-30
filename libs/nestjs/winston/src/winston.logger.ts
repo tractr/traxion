@@ -6,7 +6,7 @@ import {
   LoggerOptions,
 } from 'winston';
 
-import { Context, Metadata } from '@tractr/nestjs-core';
+import { Context, Metadata } from '@trxn/nestjs-core';
 
 export class WinstonLogger implements LoggerService {
   constructor(public readonly winston: InternalWinstonLogger) {}

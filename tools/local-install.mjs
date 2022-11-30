@@ -35,10 +35,10 @@ const projectsWanted = projectsWithComma
   .map((p) => p.trim())
   .filter((p) => p !== '');
 
-const stackDir = join(__dirname, '..');
-const stackTree = new FsTree(stackDir);
+const traxionDir = join(__dirname, '..');
+const traxionTree = new FsTree(traxionDir);
 
-const projects = getProjects(stackTree);
+const projects = getProjects(traxionTree);
 
 const packagesToInstall = [];
 const toCopy = [];
@@ -53,10 +53,12 @@ for (const [projectName, project] of projects) {
     project.targets.build.options.outputPath ||
     project.targets.build.outputs[0];
 
-  const packageJson = readJsonFile(join(stackDir, outputPath, 'package.json'));
+  const packageJson = readJsonFile(
+    join(traxionDir, outputPath, 'package.json'),
+  );
   const packageName = packageJson.name;
 
-  toCopy.push([join(stackDir, outputPath), join(targetDir, packageName)]);
+  toCopy.push([join(traxionDir, outputPath), join(targetDir, packageName)]);
 
   if (packageJson.dependencies)
     packagesToInstall.push(

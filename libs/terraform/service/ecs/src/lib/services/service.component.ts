@@ -16,10 +16,10 @@ import {
   AwsComponent,
   AwsProviderConstruct,
   mergeConfigurations,
-} from '@tractr/terraform-component-aws';
-import { DeploymentComponent } from '@tractr/terraform-component-deployment';
-import { VolumeComponent } from '@tractr/terraform-component-volume';
-import { DockerApplication } from '@tractr/terraform-group-registry';
+} from '@trxn/terraform-component-aws';
+import { DeploymentComponent } from '@trxn/terraform-component-deployment';
+import { VolumeComponent } from '@trxn/terraform-component-volume';
+import { DockerApplication } from '@trxn/terraform-group-registry';
 
 export abstract class ServiceComponent<
   Config extends ServiceComponentConfig = ServiceComponentConfig,

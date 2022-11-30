@@ -39,7 +39,7 @@ import {
   <<if Fields searchable and string>>
   StringFilterValidate,
   <<endif>>
-} from '@tractr/common';
+} from '@trxn/common';
 <<endif>>
   
 import {
@@ -52,7 +52,7 @@ import {
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
 import {
   TransformStringToArray,
-} from '@tractr/common';
+} from '@trxn/common';
 <<<}>>>
  
 export class <<Model pascal>>CountQueryDto {

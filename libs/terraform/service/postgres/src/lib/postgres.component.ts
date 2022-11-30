@@ -6,11 +6,11 @@ import {
 } from './interfaces';
 import { PostgresContainer } from './postgres.container';
 
-import { AwsProviderConstruct } from '@tractr/terraform-component-aws';
+import { AwsProviderConstruct } from '@trxn/terraform-component-aws';
 import {
   BackendServiceComponent,
   Container,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 export class PostgresComponent extends BackendServiceComponent<
   PostgresComponentConfig,

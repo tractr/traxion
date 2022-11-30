@@ -6,7 +6,7 @@ import {
   HttpContainerPublicConfig,
   ServiceComponentDefaultConfig,
   ServiceComponentInternalConfig,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 export type ReverseProxyContainerPublicConfig = HttpContainerPublicConfig;
 

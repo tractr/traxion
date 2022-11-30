@@ -16,153 +16,147 @@
       "@app/*": ["apps/pwa/src/app/*"],
       "@assets/*": ["apps/pwa/src/assets/*"],
       "@env/*": ["apps/pwa/src/environments/*"],
-      "@tractr/angular-authentication": [
+      "@trxn/angular-authentication": [
         "libs/angular/authentication/src/index.ts"
       ],
-      "@tractr/angular-casl": ["libs/angular/casl/src/index.ts"],
-      "@tractr/angular-components": ["libs/angular/components/src/index.ts"],
-      "@tractr/angular-config": ["libs/angular/config/src/index.ts"],
-      "@tractr/angular-file-storage": [
-        "libs/angular/file-storage/src/index.ts"
-      ],
-      "@tractr/angular-form": ["libs/angular/form/src/index.ts"],
-      "@tractr/angular-tools": ["libs/angular/tools/src/index.ts"],
-      "@tractr/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@tractr/commit-config": ["libs/config/commit/src/index.ts"],
-      "@tractr/common": ["libs/common/src/index.ts"],
-      "@tractr/create-traxion-workspace": [
+      "@trxn/angular-casl": ["libs/angular/casl/src/index.ts"],
+      "@trxn/angular-components": ["libs/angular/components/src/index.ts"],
+      "@trxn/angular-config": ["libs/angular/config/src/index.ts"],
+      "@trxn/angular-file-storage": ["libs/angular/file-storage/src/index.ts"],
+      "@trxn/angular-form": ["libs/angular/form/src/index.ts"],
+      "@trxn/angular-tools": ["libs/angular/tools/src/index.ts"],
+      "@trxn/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@trxn/commit-config": ["libs/config/commit/src/index.ts"],
+      "@trxn/common": ["libs/common/src/index.ts"],
+      "@trxn/create-traxion-workspace": [
         "libs/hapify/create-traxion-workspace/src/index.ts"
       ],
-      "@tractr/eslint-config": ["libs/config/eslint/src/index.ts"],
-      "@tractr/generated-angular-rext-client": [
+      "@trxn/eslint-config": ["libs/config/eslint/src/index.ts"],
+      "@trxn/generated-angular-rext-client": [
         "libs/generated/angular-rext-client/src/index.ts"
       ],
-      "@tractr/generated-casl": ["libs/generated/casl/src/index.ts"],
-      "@tractr/generated-models": ["libs/generated/models/src/index.ts"],
-      "@tractr/generated-models/mock": [
+      "@trxn/generated-casl": ["libs/generated/casl/src/index.ts"],
+      "@trxn/generated-models": ["libs/generated/models/src/index.ts"],
+      "@trxn/generated-models/mock": [
         "libs/generated/models/mock/src/index.ts"
       ],
-      "@tractr/generated-nestjs-graphql": [
+      "@trxn/generated-nestjs-graphql": [
         "libs/generated/nestjs-graphql/src/index.ts"
       ],
-      "@tractr/generated-nestjs-models": [
+      "@trxn/generated-nestjs-models": [
         "libs/generated/nestjs-models/src/index.ts"
       ],
-      "@tractr/generated-nestjs-models-common": [
+      "@trxn/generated-nestjs-models-common": [
         "libs/generated/nestjs-models-common/src/index.ts"
       ],
-      "@tractr/generated-nestjs-models-common/mock": [
+      "@trxn/generated-nestjs-models-common/mock": [
         "libs/generated/nestjs-models-common/mock/src/index.ts"
       ],
-      "@tractr/generated-nestjs-models-rest": [
+      "@trxn/generated-nestjs-models-rest": [
         "libs/generated/nestjs-models-rest/src/index.ts"
       ],
-      "@tractr/generated-nestjs-models-rest/mock": [
+      "@trxn/generated-nestjs-models-rest/mock": [
         "libs/generated/nestjs-models-rest/mock/src/index.ts"
       ],
-      "@tractr/generated-prisma": ["libs/generated/prisma/src/index.ts"],
-      "@tractr/generated-react-admin": [
+      "@trxn/generated-prisma": ["libs/generated/prisma/src/index.ts"],
+      "@trxn/generated-react-admin": [
         "libs/generated/react-admin/src/index.ts"
       ],
-      "@tractr/generated-rest-dtos": ["libs/generated/rest-dtos/src/index.ts"],
-      "@tractr/generated-rest-dtos/mock": [
+      "@trxn/generated-rest-dtos": ["libs/generated/rest-dtos/src/index.ts"],
+      "@trxn/generated-rest-dtos/mock": [
         "libs/generated/rest-dtos/mock/src/index.ts"
       ],
-      "@tractr/generated-rext-client": [
+      "@trxn/generated-rext-client": [
         "libs/generated/rext-client/src/index.ts"
       ],
-      "@tractr/hapify-common": ["libs/hapify/hapify-common/src/index.ts"],
-      "@tractr/hapify-config": ["libs/config/hapify/src/index.ts"],
-      "@tractr/hapify-generate-config": [
+      "@trxn/hapify-common": ["libs/hapify/hapify-common/src/index.ts"],
+      "@trxn/hapify-config": ["libs/config/hapify/src/index.ts"],
+      "@trxn/hapify-generate-config": [
         "libs/hapify/generate-config/src/index.ts"
       ],
-      "@tractr/hapify-update-templates-import-path": [
+      "@trxn/hapify-update-templates-import-path": [
         "libs/hapify/update-templates-import-path/src/index.ts"
       ],
-      "@tractr/nestjs-authentication": [
+      "@trxn/nestjs-authentication": [
         "libs/nestjs/authentication/src/index.ts"
       ],
-      "@tractr/nestjs-bcrypt": ["libs/nestjs/bcrypt/src/index.ts"],
-      "@tractr/nestjs-casl": ["libs/nestjs/casl/src/index.ts"],
-      "@tractr/nestjs-core": ["libs/nestjs/core/src/index.ts"],
-      "@tractr/nestjs-database": ["libs/nestjs/database/src/index.ts"],
-      "@tractr/nestjs-file-storage": ["libs/nestjs/file-storage/src/index.ts"],
-      "@tractr/nestjs-graphql": ["libs/nestjs/graphql/src/index.ts"],
-      "@tractr/nestjs-mailer": ["libs/nestjs/mailer/src/index.ts"],
-      "@tractr/nestjs-password": ["libs/nestjs/password/src/index.ts"],
-      "@tractr/nestjs-request-timestamp": [
+      "@trxn/nestjs-bcrypt": ["libs/nestjs/bcrypt/src/index.ts"],
+      "@trxn/nestjs-casl": ["libs/nestjs/casl/src/index.ts"],
+      "@trxn/nestjs-core": ["libs/nestjs/core/src/index.ts"],
+      "@trxn/nestjs-database": ["libs/nestjs/database/src/index.ts"],
+      "@trxn/nestjs-file-storage": ["libs/nestjs/file-storage/src/index.ts"],
+      "@trxn/nestjs-graphql": ["libs/nestjs/graphql/src/index.ts"],
+      "@trxn/nestjs-mailer": ["libs/nestjs/mailer/src/index.ts"],
+      "@trxn/nestjs-password": ["libs/nestjs/password/src/index.ts"],
+      "@trxn/nestjs-request-timestamp": [
         "libs/nestjs/request-timestamp/src/index.ts"
       ],
-      "@tractr/nestjs-sentry": ["libs/nestjs/sentry/src/index.ts"],
-      "@tractr/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
-      "@tractr/nestjs-winston": ["libs/nestjs/winston/src/index.ts"],
-      "@tractr/prettier-config": ["libs/config/prettier/src/index.ts"],
-      "@tractr/schematics": ["libs/schematics/src/index.ts"],
-      "@tractr/terraform-aws-stack": ["libs/terraform/aws-stack/src/index.ts"],
-      "@tractr/terraform-component-aws": [
+      "@trxn/nestjs-sentry": ["libs/nestjs/sentry/src/index.ts"],
+      "@trxn/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
+      "@trxn/nestjs-winston": ["libs/nestjs/winston/src/index.ts"],
+      "@trxn/prettier-config": ["libs/config/prettier/src/index.ts"],
+      "@trxn/schematics": ["libs/schematics/src/index.ts"],
+      "@trxn/terraform-aws-stack": ["libs/terraform/aws-stack/src/index.ts"],
+      "@trxn/terraform-component-aws": [
         "libs/terraform/component/aws/src/index.ts"
       ],
-      "@tractr/terraform-component-deployment": [
+      "@trxn/terraform-component-deployment": [
         "libs/terraform/component/deployment/src/index.ts"
       ],
-      "@tractr/terraform-component-deployment-trigger": [
+      "@trxn/terraform-component-deployment-trigger": [
         "libs/terraform/component/deployment-trigger/src/index.ts"
       ],
-      "@tractr/terraform-component-entrypoint": [
+      "@trxn/terraform-component-entrypoint": [
         "libs/terraform/component/entrypoint/src/index.ts"
       ],
-      "@tractr/terraform-component-file-storage": [
+      "@trxn/terraform-component-file-storage": [
         "libs/terraform/component/file-storage/src/index.ts"
       ],
-      "@tractr/terraform-component-logs": [
+      "@trxn/terraform-component-logs": [
         "libs/terraform/component/logs/src/index.ts"
       ],
-      "@tractr/terraform-component-private-dns": [
+      "@trxn/terraform-component-private-dns": [
         "libs/terraform/component/private-dns/src/index.ts"
       ],
-      "@tractr/terraform-component-s3": [
+      "@trxn/terraform-component-s3": [
         "libs/terraform/component/s3/src/index.ts"
       ],
-      "@tractr/terraform-component-s3-user": [
+      "@trxn/terraform-component-s3-user": [
         "libs/terraform/component/s3-user/src/index.ts"
       ],
-      "@tractr/terraform-component-secrets": [
+      "@trxn/terraform-component-secrets": [
         "libs/terraform/component/secrets/src/index.ts"
       ],
-      "@tractr/terraform-component-volume": [
+      "@trxn/terraform-component-volume": [
         "libs/terraform/component/volume/src/index.ts"
       ],
-      "@tractr/terraform-group-network": [
+      "@trxn/terraform-group-network": [
         "libs/terraform/group/network/src/index.ts"
       ],
-      "@tractr/terraform-group-pool": [
-        "libs/terraform/group/pool/src/index.ts"
-      ],
-      "@tractr/terraform-group-registry": [
+      "@trxn/terraform-group-pool": ["libs/terraform/group/pool/src/index.ts"],
+      "@trxn/terraform-group-registry": [
         "libs/terraform/group/registry/src/index.ts"
       ],
-      "@tractr/terraform-group-zone": [
-        "libs/terraform/group/zone/src/index.ts"
-      ],
-      "@tractr/terraform-service-admin": [
+      "@trxn/terraform-group-zone": ["libs/terraform/group/zone/src/index.ts"],
+      "@trxn/terraform-service-admin": [
         "libs/terraform/service/admin/src/index.ts"
       ],
-      "@tractr/terraform-service-api": [
+      "@trxn/terraform-service-api": [
         "libs/terraform/service/api/src/index.ts"
       ],
-      "@tractr/terraform-service-ecs": [
+      "@trxn/terraform-service-ecs": [
         "libs/terraform/service/ecs/src/index.ts"
       ],
-      "@tractr/terraform-service-logstash": [
+      "@trxn/terraform-service-logstash": [
         "libs/terraform/service/logstash/src/index.ts"
       ],
-      "@tractr/terraform-service-postgres": [
+      "@trxn/terraform-service-postgres": [
         "libs/terraform/service/postgres/src/index.ts"
       ],
-      "@tractr/terraform-service-pwa": [
+      "@trxn/terraform-service-pwa": [
         "libs/terraform/service/pwa/src/index.ts"
       ],
-      "@tractr/terraform-service-reverse-proxy": [
+      "@trxn/terraform-service-reverse-proxy": [
         "libs/terraform/service/reverse-proxy/src/index.ts"
       ]
     },

@@ -2,11 +2,11 @@ import { ApiContainer } from './api.container';
 import { API_COMPONENT_DEFAULT_CONFIG } from './configs';
 import { ApiComponentConfig, ApiComponentDefaultConfig } from './interfaces';
 
-import { AwsProviderConstruct } from '@tractr/terraform-component-aws';
+import { AwsProviderConstruct } from '@trxn/terraform-component-aws';
 import {
   BackendServiceComponent,
   Container,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 export class ApiComponent extends BackendServiceComponent<
   ApiComponentConfig,

@@ -5,7 +5,7 @@ import {
   CertificatesComponentConfig,
 } from '../interfaces';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 /**
  * This component create an SSL certificate and validate it using Route53

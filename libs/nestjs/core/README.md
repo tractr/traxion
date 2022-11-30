@@ -10,7 +10,7 @@ at the nestjs logging system. Under the hood the LoggerService extends the Logge
 of nestjs and format correctly your messages.
 
 ```ts
-import { LoggerModule } from '@tractr/nestjs-common';
+import { LoggerModule } from '@trxn/nestjs-common';
 
 import { MyService } from './my-service.service';
 
@@ -66,7 +66,7 @@ export class MyService {
 This logger is intended to work with the winston logger to be able to output
 correctly into the console in development and in an `ecs` format in production.
 
-@see `@tractr/nestjs-winston` library for more information.
+@see `@trxn/nestjs-winston` library for more information.
 
 ---
 

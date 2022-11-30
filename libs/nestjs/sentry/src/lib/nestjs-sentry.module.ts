@@ -10,7 +10,7 @@ import {
 import { PrismaMiddleware } from './middlewares';
 import { SentryLogger, SentryPerRequestLogger } from './services';
 
-import { AsyncOptions, ModuleOptionsFactory } from '@tractr/nestjs-core';
+import { AsyncOptions, ModuleOptionsFactory } from '@trxn/nestjs-core';
 
 @Module({})
 export class SentryModule

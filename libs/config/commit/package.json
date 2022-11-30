@@ -1,9 +1,9 @@
 {
-  "name": "@tractr/commit-config",
+  "name": "@trxn/commit-config",
   "version": "1.64.9",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tractr/stack.git"
+    "url": "https://github.com/tractr/traxion.git"
   },
   "bin": {
     "tractr-commit": "./bin/tractr-commit.js",
@@ -16,7 +16,7 @@
     "cz-conventional-changelog": "^3.3.0"
   },
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

@@ -1,6 +1,6 @@
 import { AdminEnv, AppConfig } from '../interfaces';
 
-import { transformAndValidate } from '@tractr/common';
+import { transformAndValidate } from '@trxn/common';
 
 export const validateEnv = transformAndValidate(AdminEnv);
 export const validateAppConfig = transformAndValidate(AppConfig);

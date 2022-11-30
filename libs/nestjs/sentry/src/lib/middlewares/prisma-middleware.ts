@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
 import { getCurrentHub } from '@sentry/node';
 
-import { DatabaseService } from '@tractr/nestjs-database';
+import { DatabaseService } from '@trxn/nestjs-database';
 
 @Injectable()
 export class PrismaMiddleware {

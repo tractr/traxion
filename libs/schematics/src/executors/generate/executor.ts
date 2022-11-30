@@ -7,9 +7,9 @@ import { copy, pathExists, readdir, remove } from 'fs-extra';
 
 import { GenerateExecutorSchema } from './schema';
 
-import { getHapifyConfig, HapifyConfig } from '@tractr/hapify-common';
-import { getHapifyOptions } from '@tractr/hapify-generate-config';
-import { processImportReplacements } from '@tractr/hapify-update-templates-import-path';
+import { getHapifyConfig, HapifyConfig } from '@trxn/hapify-common';
+import { getHapifyOptions } from '@trxn/hapify-generate-config';
+import { processImportReplacements } from '@trxn/hapify-update-templates-import-path';
 
 function getOutputGeneratedFolder(
   projectDirectory: string,

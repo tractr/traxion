@@ -7,7 +7,7 @@ import {
   EnvironmentOrSecretValue,
   HttpContainerPublicConfig,
   ServiceComponentDefaultConfig,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 export interface ApiContainerPublicConfig extends HttpContainerPublicConfig {
   environments: ContainerPublicConfig['environments'] & {

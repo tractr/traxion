@@ -18,7 +18,7 @@ import { INestApplication } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
-import { DatabaseModule, DatabaseService } from '@tractr/nestjs-database';
+import { DatabaseModule, DatabaseService } from '@trxn/nestjs-database';
 import { Prisma } from '@prisma/client';
 	
 import {

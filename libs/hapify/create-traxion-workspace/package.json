@@ -1,15 +1,15 @@
 {
-  "name": "@tractr/create-traxion-workspace",
+  "name": "@trxn/create-traxion-workspace",
   "version": "1.64.9",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tractr/stack"
+    "url": "https://github.com/tractr/traxion"
   },
   "bin": {
     "create-traxion-workspace": "./bin/create-traxion-workspace.js"
   },
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

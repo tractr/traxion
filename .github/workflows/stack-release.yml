@@ -1,4 +1,4 @@
-name: Stack release and Deploy
+name: Traxion release and Deploy
 
 on:
   push:

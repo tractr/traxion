@@ -1,14 +1,14 @@
 {
-  "name": "@tractr/hapify-templates-casl",
+  "name": "@trxn/hapify-templates-casl",
   "version": "1.64.9",
   "description": "Hapify templates for casl class validators and types",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tractr/stack"
+    "url": "https://github.com/tractr/traxion"
   },
   "license": "UNLICENSED",
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

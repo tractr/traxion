@@ -1,4 +1,4 @@
-# @tractr/generated-models/mock
+# @trxn/generated-models/mock
 
-Secondary entry point of `@tractr/generated-models`. It can be used by importing
-from `@tractr/generated-models/mock`.
+Secondary entry point of `@trxn/generated-models`. It can be used by importing
+from `@trxn/generated-models/mock`.

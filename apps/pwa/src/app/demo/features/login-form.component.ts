@@ -11,9 +11,9 @@ import {
   switchMap,
 } from 'rxjs';
 
-import { SessionService } from '@tractr/angular-authentication';
-import { TagService, UserService } from '@tractr/generated-angular-rext-client';
-import { User } from '@tractr/generated-models';
+import { SessionService } from '@trxn/angular-authentication';
+import { TagService, UserService } from '@trxn/generated-angular-rext-client';
+import { User } from '@trxn/generated-models';
 
 export type ApiResponse<T> = {
   status: number;

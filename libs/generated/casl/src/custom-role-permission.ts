@@ -5,7 +5,7 @@ import {
   rolePermissions as baseRolePermission,
 } from './generated/casl';
 
-import { DefinePermissions } from '@tractr/nestjs-casl';
+import { DefinePermissions } from '@trxn/nestjs-casl';
 
 export const rolePermissions: Record<
   UserRoles,

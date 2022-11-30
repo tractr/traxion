@@ -5,14 +5,14 @@ import { CaslModule } from './casl.module';
 import { EncryptionModule } from './encryption.module';
 import { ModelsModule } from './models.module';
 
-import { getSelectPrismaUserQuery } from '@tractr/generated-casl';
-import { USER_SERVICE } from '@tractr/generated-nestjs-models-common';
+import { getSelectPrismaUserQuery } from '@trxn/generated-casl';
+import { USER_SERVICE } from '@trxn/generated-nestjs-models-common';
 import {
   JwtGlobalAuthGuard,
   AuthenticationModule as TraxionAuthenticationModule,
-} from '@tractr/nestjs-authentication';
-import { BcryptService } from '@tractr/nestjs-bcrypt';
-import { CaslExceptionInterceptor, PoliciesGuard } from '@tractr/nestjs-casl';
+} from '@trxn/nestjs-authentication';
+import { BcryptService } from '@trxn/nestjs-bcrypt';
+import { CaslExceptionInterceptor, PoliciesGuard } from '@trxn/nestjs-casl';
 
 @Module({
   imports: [

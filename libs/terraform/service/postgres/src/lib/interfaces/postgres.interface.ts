@@ -8,7 +8,7 @@ import {
   ContainerPublicConfig,
   EnvironmentOrSecretValue,
   ServiceComponentDefaultConfig,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 export interface PostgresContainerPublicConfig extends ContainerPublicConfig {
   environments: ContainerPublicConfig['environments'] & {

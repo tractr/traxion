@@ -3,7 +3,7 @@
 Add the target generate to a Nx project.
 
 ```shell
-nx g @tractr/schematics:target-generate
+nx g @trxn/schematics:target-generate
 ```
 
 ## Description

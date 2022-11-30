@@ -25,7 +25,7 @@
         "import/no-unresolved": [
           "error",
           {
-            "ignore": ["^@(tractr|generated|traxion)/"]
+            "ignore": ["^@(trxn)/"]
           }
         ]
       }
@@ -44,6 +44,6 @@
   "plugins": ["@nrwl/nx"],
   "root": true,
   "settings": {
-    "import/internal-regex": "^@(tractr)/"
+    "import/internal-regex": "^@(trxn)/"
   }
 }

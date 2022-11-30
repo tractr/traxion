@@ -15,6 +15,6 @@ nx g ./dist/libs/schematics:<schematicName> [options]
 ## How to use in your projects
 
 ```bash
-npm i --save-dev @tractr/schematics
-nx generate @tractr/schematics:<schemticName> [options]
+npm i --save-dev @trxn/schematics
+nx generate @trxn/schematics:<schemticName> [options]
 ```

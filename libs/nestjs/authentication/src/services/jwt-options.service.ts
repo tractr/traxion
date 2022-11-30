@@ -4,7 +4,7 @@ import { JwtModuleOptions } from '@nestjs/jwt';
 import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
 import { AuthenticationModuleOptions } from '../interfaces';
 
-import { isDevelopment } from '@tractr/nestjs-core';
+import { isDevelopment } from '@trxn/nestjs-core';
 
 @Injectable()
 export class JwtOptionsService {

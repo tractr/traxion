@@ -6,8 +6,8 @@ import { catchError, of, takeUntil } from 'rxjs';
 import { CASL_MODULE_OPTIONS } from '../constants';
 import { CaslOptions } from '../interfaces';
 
-import { SessionService } from '@tractr/angular-authentication';
-import { Unsubscriber } from '@tractr/angular-tools';
+import { SessionService } from '@trxn/angular-authentication';
+import { Unsubscriber } from '@trxn/angular-tools';
 
 @Injectable()
 export class CaslUpdateAbilitiesService extends Unsubscriber {

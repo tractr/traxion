@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { PasswordModuleOptions } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../password.module-definition';
 
-import { BcryptService, EncryptionService } from '@tractr/nestjs-bcrypt';
+import { BcryptService, EncryptionService } from '@trxn/nestjs-bcrypt';
 
 @Injectable()
 export class HashService implements EncryptionService {

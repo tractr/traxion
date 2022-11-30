@@ -3,7 +3,7 @@
 Add GitHub workflows to a NX project.
 
 ```shell
-nx g @tractr/schematics:github-workflows
+nx g @trxn/schematics:github-workflows
 ```
 
 ## Description

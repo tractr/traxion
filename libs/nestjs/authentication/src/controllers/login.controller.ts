@@ -21,7 +21,7 @@ import {
   UserAuthenticationService,
 } from '../services';
 
-import { CurrentUser } from '@tractr/nestjs-core';
+import { CurrentUser } from '@trxn/nestjs-core';
 
 @Controller()
 export class LoginController {

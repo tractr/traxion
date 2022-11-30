@@ -25,8 +25,8 @@ export class AppModule {}
 
 ```typescript
 import { Controller, Get } from '@nestjs/common';
-import { Public } from '@tractr/nestjs-core';
-import { SentryPerRequestLogger } from '@tractr/nestjs-sentry';
+import { Public } from '@trxn/nestjs-core';
+import { SentryPerRequestLogger } from '@trxn/nestjs-sentry';
 
 @Controller(['sentry-tester'])
 export class SentryTester {
@@ -46,8 +46,8 @@ export class SentryTester {
 ### Add the interceptor to the App
 
 ```typescript
-import { SentryAppInterceptorProvider } from '@tractr/nestjs-sentry';
-import { RequestTimestampModule } from '@tractr/request-timestamp';
+import { SentryAppInterceptorProvider } from '@trxn/nestjs-sentry';
+import { RequestTimestampModule } from '@trxn/request-timestamp';
 
 @Module({
   imports: [
@@ -92,7 +92,7 @@ export class AppModule {}
 ### Use interceptor on specific controller
 
 ```typescript
-import { SentryInterceptor } from '@tractr/nestjs-sentry';
+import { SentryInterceptor } from '@trxn/nestjs-sentry';
 
 @Controller(['sentry-tester'])
 @UseInterceptors(
@@ -113,7 +113,7 @@ You can use the global logger if you are not in a request context.
 
 ```typescript
 import { Injectable } from '@nestjs/common';
-import { SentryLogger } from '@tractr/nestjs-sentry';
+import { SentryLogger } from '@trxn/nestjs-sentry';
 
 @Injectable()
 export class OtherService {
@@ -129,7 +129,7 @@ export class OtherService {
 
 ```typescript
 import { Injectable } from '@nestjs/common';
-import { SentryLogger } from '@tractr/nestjs-sentry';
+import { SentryLogger } from '@trxn/nestjs-sentry';
 
 @Injectable()
 export class OtherService {
@@ -193,7 +193,7 @@ We need to determine the age of the request in order to filter global
 breadcrumbs and associate them to the current request.
 
 To determine the age of the request, we use the module `RequestTimestampModule`
-from `@tractr/request-timestamp`. This module adds the request timestamp in
+from `@trxn/request-timestamp`. This module adds the request timestamp in
 `req.res.locals.timestamp`.
 
 If this module is not loaded, we assume the request is 2 seconds old. This age

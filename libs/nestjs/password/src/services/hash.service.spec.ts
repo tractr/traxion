@@ -6,7 +6,7 @@ import { PasswordModuleOptions } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../password.module-definition';
 import { HashService } from './hash.service';
 
-import { BcryptService } from '@tractr/nestjs-bcrypt';
+import { BcryptService } from '@trxn/nestjs-bcrypt';
 
 describe('HashService', () => {
   let hashService: HashService;

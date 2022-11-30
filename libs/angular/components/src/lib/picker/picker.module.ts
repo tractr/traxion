@@ -5,7 +5,7 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 import { TimePickerComponent } from './time-picker/time-picker.component';
 
-import { AngularToolsModule } from '@tractr/angular-tools';
+import { AngularToolsModule } from '@trxn/angular-tools';
 
 const antModules = [NzDatePickerModule, NzTimePickerModule];
 

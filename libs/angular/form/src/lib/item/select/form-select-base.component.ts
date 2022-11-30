@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { FormItemBaseComponent } from '../base/form-item-base.component';
 
-import { SelectOptionInterface } from '@tractr/angular-components';
+import { SelectOptionInterface } from '@trxn/angular-components';
 
 @Component({
   selector: 'tractr-form-select-base',

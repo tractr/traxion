@@ -9,8 +9,8 @@ import type { User } from '@prisma/client';
 
 import { CaslAbilityFactoryService } from '../services';
 
-import { isClass, PolicyHandlerType } from '@tractr/common';
-import { getRequestFromContext, POLICIES_KEY } from '@tractr/nestjs-core';
+import { isClass, PolicyHandlerType } from '@trxn/common';
+import { getRequestFromContext, POLICIES_KEY } from '@trxn/nestjs-core';
 
 @Injectable()
 export class PoliciesGuard implements CanActivate {

@@ -18,7 +18,7 @@ import { EslintGeneratorSchema } from './schema';
 
 export const packagesToAdd: PackageDefinition[] = [
   {
-    packageName: '@tractr/eslint-config',
+    packageName: '@trxn/eslint-config',
     version: packageJson.version,
   },
   { packageName: 'eslint-config-airbnb-base' },

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { BlogPost, Profil, Tag, User as UserType } from '@prisma/client';
-import { SessionService } from '@tractr/angular-authentication';
+import { SessionService } from '@trxn/angular-authentication';
 import {
   catchError,
   map,

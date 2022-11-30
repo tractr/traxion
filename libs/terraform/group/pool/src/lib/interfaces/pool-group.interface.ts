@@ -3,14 +3,14 @@ import { DeepPartial } from 'ts-essentials';
 
 import { EcsComponent } from '../ecs.component';
 
-import { EntrypointComponent } from '@tractr/terraform-component-entrypoint';
-import { FileStorageComponent } from '@tractr/terraform-component-file-storage';
-import { LogsComponent } from '@tractr/terraform-component-logs';
-import { SecretsComponent } from '@tractr/terraform-component-secrets';
-import type { NetworkGroup } from '@tractr/terraform-group-network';
-import type { RegistryGroup } from '@tractr/terraform-group-registry';
-import type { ZoneGroup } from '@tractr/terraform-group-zone';
-import { ReverseProxyComponentPublicConfig } from '@tractr/terraform-service-reverse-proxy';
+import { EntrypointComponent } from '@trxn/terraform-component-entrypoint';
+import { FileStorageComponent } from '@trxn/terraform-component-file-storage';
+import { LogsComponent } from '@trxn/terraform-component-logs';
+import { SecretsComponent } from '@trxn/terraform-component-secrets';
+import type { NetworkGroup } from '@trxn/terraform-group-network';
+import type { RegistryGroup } from '@trxn/terraform-group-registry';
+import type { ZoneGroup } from '@trxn/terraform-group-zone';
+import { ReverseProxyComponentPublicConfig } from '@trxn/terraform-service-reverse-proxy';
 
 export interface PoolGroupInternalConfig {
   registryGroup: RegistryGroup;

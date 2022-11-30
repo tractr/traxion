@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { LoginCredentials } from './ui/login-form-ui/login-form-ui.component';
 
-import { SessionService } from '@tractr/angular-authentication';
-import { ErrorService } from '@tractr/angular-tools';
+import { SessionService } from '@trxn/angular-authentication';
+import { ErrorService } from '@trxn/angular-tools';
 
 @Component({
   selector: 'tractr-demo',

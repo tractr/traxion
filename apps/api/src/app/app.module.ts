@@ -11,7 +11,7 @@ import {
   PasswordModule,
 } from './modules';
 
-import { LoggerModule } from '@tractr/nestjs-core';
+import { LoggerModule } from '@trxn/nestjs-core';
 
 @Module({
   imports: [

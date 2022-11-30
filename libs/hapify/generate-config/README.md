@@ -33,8 +33,8 @@ Extends configuration examples:
 // .hapifyrc.js
 module.exports = {
   extends: [
-    '@tractr/hapify-templates-prisma',
-    '@tractr/hapify-templates-nestjs-models',
+    '@trxn/hapify-templates-prisma',
+    '@trxn/hapify-templates-nestjs-models',
     // ...
   ],
 

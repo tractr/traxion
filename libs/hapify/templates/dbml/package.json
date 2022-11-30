@@ -1,14 +1,14 @@
 {
-  "name": "@tractr/hapify-templates-dbml",
+  "name": "@trxn/hapify-templates-dbml",
   "version": "1.64.9",
   "description": "Generate DBML schema",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tractr/stack"
+    "url": "https://github.com/tractr/traxion"
   },
   "license": "UNLICENSED",
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

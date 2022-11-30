@@ -9,7 +9,7 @@ import { normalizeOptions } from './normalize-options.helper';
 
 describe('normalizeOptions', () => {
   let appTree: Tree;
-  const npmScope = 'tractr';
+  const npmScope = 'trxn';
   const workspaceLayout = {
     appsDir: 'apps',
     libsDir: 'libs',
@@ -48,15 +48,15 @@ describe('normalizeOptions', () => {
 
     expect(normalizedOptions).toEqual({
       ...options,
-      hapifyImportReplacements: { mock: '@tractr/test-models/mock' },
+      hapifyImportReplacements: { mock: '@trxn/test-models/mock' },
       hapifyModelsJsonRelativePath: '../../../hapify-models.json',
       projectDirectory: 'test/test',
       projectName: 'test-test',
       projectRoot: 'libs/test/test',
       secondaryEntrypoints: ['mock'],
-      template: '@tractr/hapify-templates-models',
-      importPath: '@tractr/test-test',
-      importPrefixPath: '@tractr/test-',
+      template: '@trxn/hapify-templates-models',
+      importPath: '@trxn/test-test',
+      importPrefixPath: '@trxn/test-',
       npmScope,
       libsDir: 'libs',
       targets: {},
@@ -92,7 +92,7 @@ describe('normalizeOptions', () => {
       'libs/project-directory/project-name',
     );
     expect(normalizedOptions.importPath).toEqual(
-      '@tractr/project-directory-project-name',
+      '@trxn/project-directory-project-name',
     );
   });
 
@@ -103,7 +103,7 @@ describe('normalizeOptions', () => {
     });
 
     expect(normalizedOptions.hapifyImportReplacements).toEqual({
-      mock: '@tractr/test-models/mock',
+      mock: '@trxn/test-models/mock',
     });
   });
 
@@ -141,19 +141,19 @@ describe('normalizeOptions', () => {
 
     expect(normalizedOptions).toEqual({
       ...options,
-      hapifyImportReplacements: { mock: '@tractr/test-models/mock' },
+      hapifyImportReplacements: { mock: '@trxn/test-models/mock' },
       hapifyModelsJsonRelativePath: '../../../hapify-models.json',
       projectDirectory: 'test/test',
       projectName: 'test-test',
       projectRoot: 'libs/test/test',
-      npmScope: 'tractr',
+      npmScope: 'trxn',
       libsDir: 'libs',
       targets: {},
-      importPath: '@tractr/test-test',
-      importPrefixPath: '@tractr/test-',
+      importPath: '@trxn/test-test',
+      importPrefixPath: '@trxn/test-',
       addSecondaryEndpoint: ['mock', 'mock2'],
       secondaryEntrypoints: ['mock', 'mock2'],
-      template: '@tractr/hapify-templates-models',
+      template: '@trxn/hapify-templates-models',
       extra: {},
     });
   });

@@ -8,7 +8,7 @@ import { EgressRoutesComponent } from './egress-routes.component';
 import { InternetRoutesComponent } from './internet-routes.component';
 import { NatGatewayComponent } from './nat-gateway.component';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 /**
  * This component creates a private subnet in a specific availability zone

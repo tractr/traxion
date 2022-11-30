@@ -1,14 +1,14 @@
 {
-  "name": "@tractr/hapify-templates-rest-dtos",
+  "name": "@trxn/hapify-templates-rest-dtos",
   "version": "1.64.9",
   "description": "Hapify templates for models rest dtos",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tractr/stack"
+    "url": "https://github.com/tractr/traxion"
   },
   "license": "UNLICENSED",
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

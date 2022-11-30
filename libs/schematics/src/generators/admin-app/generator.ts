@@ -92,7 +92,7 @@ export default async function adminGenerator(
         executor: '@nrwl/workspace:run-commands',
         options: {
           commands: [
-            `npx tractr-angular-config-generate ./${appsDir}/${name}/src/assets/app-config.json`,
+            `npx traxion-angular-config-generate ./${appsDir}/${name}/src/assets/app-config.json`,
           ],
           parallel: false,
         },

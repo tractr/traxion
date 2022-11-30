@@ -7,7 +7,7 @@ import { AuthenticationOptionsPassword } from './authentication-options-password
 import { AuthenticationOptionsRouting } from './authentication-options-routing.dto';
 import { AuthenticationOptionsSession } from './authentication-options-session.dto';
 
-import { getDefaults } from '@tractr/common';
+import { getDefaults } from '@trxn/common';
 
 /**
  * Authentication module options.

@@ -3,7 +3,7 @@ import * as fs from 'fs/promises';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as glob from 'glob';
 
-import { getHapifyConfig } from '@tractr/hapify-common';
+import { getHapifyConfig } from '@trxn/hapify-common';
 
 const GENERATED_FOLDER_PATH = 'src/lib/generated';
 

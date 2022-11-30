@@ -6,7 +6,7 @@ import { AUTHENTICATION_OPTIONS } from '../../constants';
 import { AuthenticationOptions } from '../../dtos';
 import { SessionService } from '../../services';
 
-import { ErrorService } from '@tractr/angular-tools';
+import { ErrorService } from '@trxn/angular-tools';
 
 @Component({
   selector: 'tractr-login',

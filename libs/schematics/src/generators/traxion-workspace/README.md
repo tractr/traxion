@@ -3,7 +3,7 @@
 Create a new Traxion workspace.
 
 ```shell
-nx g @tractr/schematics:traxion-workspace
+nx g @trxn/schematics:traxion-workspace
 ```
 
 ## Description

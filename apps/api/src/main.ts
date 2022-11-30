@@ -8,11 +8,11 @@ import * as winston from 'winston';
 
 import { AppModule } from './app/app.module';
 
-import { PrismaExceptionInterceptor } from '@tractr/nestjs-core';
+import { PrismaExceptionInterceptor } from '@trxn/nestjs-core';
 import {
   createWinstonLogger,
   nestLikeConsoleFormat,
-} from '@tractr/nestjs-winston';
+} from '@trxn/nestjs-winston';
 
 // Bootstrap the main application
 async function bootstrap() {
@@ -25,7 +25,7 @@ async function bootstrap() {
     // options (same as WinstonModule.forRoot() options)
     level,
     format: development
-      ? nestLikeConsoleFormat({ appName: 'Stack', prettyPrint: true })
+      ? nestLikeConsoleFormat({ appName: 'Traxion', prettyPrint: true })
       : ecsFormat(),
     transports: [new winston.transports.Console()],
   });

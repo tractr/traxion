@@ -46,8 +46,8 @@ import {
 <<endfor>>
 } from '../../../../models';
 <<endif>>
-import { CaslExceptionInterceptor } from '@tractr/nestjs-casl';
-import { LoggerModule, TraxionValidationPipe } from '@tractr/nestjs-core';
+import { CaslExceptionInterceptor } from '@trxn/nestjs-casl';
+import { LoggerModule, TraxionValidationPipe } from '@trxn/nestjs-core';
 
 describe('<<Model pascal>>Controller', () => {
   let app: INestApplication;

@@ -1,8 +1,8 @@
 import { Global, Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 
-import { PrismaExceptionInterceptor } from '@tractr/nestjs-core';
-import { DatabaseModule as TraxionDatabaseModule } from '@tractr/nestjs-database';
+import { PrismaExceptionInterceptor } from '@trxn/nestjs-core';
+import { DatabaseModule as TraxionDatabaseModule } from '@trxn/nestjs-database';
 
 @Global()
 @Module({

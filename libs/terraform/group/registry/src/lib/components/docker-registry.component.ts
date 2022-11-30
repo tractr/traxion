@@ -6,7 +6,7 @@ import {
   DockerRegistryComponentConfig,
 } from '../interfaces';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 /**
  * This component creates one docker registry for each app containing a Dockerfile

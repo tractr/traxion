@@ -1,14 +1,14 @@
 {
-  "name": "@tractr/hapify-templates-prisma",
+  "name": "@trxn/hapify-templates-prisma",
   "version": "1.64.9",
   "description": "Generate prisma hapify config",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tractr/stack"
+    "url": "https://github.com/tractr/traxion"
   },
   "license": "UNLICENSED",
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

@@ -3,7 +3,7 @@
 Add release configuration to a NX project.
 
 ```shell
-nx g @tractr/schematics:release <nxProjectName>
+nx g @trxn/schematics:release <nxProjectName>
 ```
 
 ## Description

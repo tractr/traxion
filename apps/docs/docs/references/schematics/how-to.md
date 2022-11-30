@@ -6,17 +6,17 @@ sidebar_label: How to
 
 ## Use an existing schematic
 
-From the root of your NX project you can use the schematics from `@tractr/schematics`.
+From the root of your NX project you can use the schematics from `@trxn/schematics`.
 First, you need to install this package with `npm`:
 
 ```shell
-npm i --save-dev @tractr/schematics
+npm i --save-dev @trxn/schematics
 ```
 
 After that, you will be able to use the schematics with the `nx` cli:
 
 ```shell
-nx g @tractr/schematics:<schematicName> ...
+nx g @trxn/schematics:<schematicName> ...
 ```
 
 :::caution

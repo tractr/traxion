@@ -3,12 +3,12 @@ import {
   FileStorageComponentConfig,
 } from './file-storage.interface';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
-import { S3Component } from '@tractr/terraform-component-s3';
+import { AwsComponent } from '@trxn/terraform-component-aws';
+import { S3Component } from '@trxn/terraform-component-s3';
 import {
   S3BucketDetails,
   S3UserComponent,
-} from '@tractr/terraform-component-s3-user';
+} from '@trxn/terraform-component-s3-user';
 
 export class FileStorageComponent extends AwsComponent<
   FileStorageComponentConfig,

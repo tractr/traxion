@@ -26,7 +26,7 @@ module.exports = {
           position: 'left',
         },
         {
-          href: 'https://github.com/tractr/stack',
+          href: 'https://github.com/tractr/traxion',
           label: 'GitHub',
           position: 'right',
         },
@@ -66,7 +66,7 @@ module.exports = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/tractr/stack',
+              href: 'https://github.com/tractr/traxion',
             },
           ],
         },
@@ -80,7 +80,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/tractr/stack/tree/main/apps/docs/',
+          editUrl: 'https://github.com/tractr/traxion/tree/main/apps/docs/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

@@ -1,6 +1,6 @@
 import { PwaComponentDefaultConfig } from '../interfaces';
 
-import { SERVICE_COMPONENT_DEFAULT_CONFIG } from '@tractr/terraform-service-ecs';
+import { SERVICE_COMPONENT_DEFAULT_CONFIG } from '@trxn/terraform-service-ecs';
 
 export const PWA_COMPONENT_DEFAULT_CONFIG: PwaComponentDefaultConfig = {
   ...SERVICE_COMPONENT_DEFAULT_CONFIG,

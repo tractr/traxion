@@ -14,7 +14,7 @@ import {
 } from '../../src';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
-import { DatabaseService } from '@tractr/nestjs-database';
+import { DatabaseService } from '@trxn/nestjs-database';
  
 describe('<<Model pascal>>DatabaseService', () => {
   let <<Model camel>>DatabaseService: <<Model pascal>>DatabaseService;

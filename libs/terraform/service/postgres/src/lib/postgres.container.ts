@@ -1,6 +1,6 @@
 import { PostgresContainerConfig } from './interfaces';
 
-import { BackendContainer, MountPoint } from '@tractr/terraform-service-ecs';
+import { BackendContainer, MountPoint } from '@trxn/terraform-service-ecs';
 
 export class PostgresContainer extends BackendContainer<PostgresContainerConfig> {
   protected getAppName(): string {

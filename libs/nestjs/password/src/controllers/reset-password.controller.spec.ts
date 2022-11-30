@@ -7,7 +7,7 @@ import { BadResetCodeError } from '../errors';
 import { ResetPasswordService } from '../services';
 import { ResetPasswordController } from './reset-password.controller';
 
-import { UserNotFoundError } from '@tractr/nestjs-authentication';
+import { UserNotFoundError } from '@trxn/nestjs-authentication';
 
 describe('ResetPassword Controller', () => {
   let app: INestApplication;

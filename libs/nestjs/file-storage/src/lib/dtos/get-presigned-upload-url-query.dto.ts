@@ -1,6 +1,6 @@
 import { IsInt, IsMimeType } from 'class-validator';
 
-import { TransformStringToInt } from '@tractr/common';
+import { TransformStringToInt } from '@trxn/common';
 
 export class GetPresignedUploadUrlQueryDto {
   /**

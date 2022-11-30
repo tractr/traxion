@@ -1,7 +1,7 @@
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { Prisma } from '@prisma/client';
 
-import { EncryptionService } from '@tractr/nestjs-bcrypt';
+import { EncryptionService } from '@trxn/nestjs-bcrypt';
 
 export type UserInfo = { id: string | number; email: string; password: string };
 

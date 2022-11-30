@@ -7,7 +7,7 @@ import { MailerOptions, MailerPublicOptions } from './interfaces';
 import { MailerService } from './services';
 import { ResetPasswordSendEmailService } from './services/reset-password-send-email.service';
 
-import { ModuleOptionsFactory } from '@tractr/nestjs-core';
+import { ModuleOptionsFactory } from '@trxn/nestjs-core';
 
 @Module({
   imports: [HttpModule],

@@ -1,17 +1,17 @@
 {
-  "name": "@tractr/hapify-generate-config",
+  "name": "@trxn/hapify-generate-config",
   "version": "1.64.9",
   "description": "Generate hapify config",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tractr/stack"
+    "url": "https://github.com/tractr/traxion"
   },
   "license": "UNLICENSED",
   "bin": {
     "hpf-generate-config": "./src/hpf-generate-config.js"
   },
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

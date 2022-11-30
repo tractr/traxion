@@ -3,7 +3,7 @@ import { PostgresComponentDefaultConfig } from '../interfaces';
 import {
   Secret,
   SERVICE_COMPONENT_DEFAULT_CONFIG,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 export const POSTGRES_COMPONENT_DEFAULT_CONFIG: PostgresComponentDefaultConfig =
   {

@@ -7,7 +7,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { InputNumberComponent } from './number/input-number.component';
 import { InputStringComponent } from './string/input-string.component';
 
-import { AngularToolsModule } from '@tractr/angular-tools';
+import { AngularToolsModule } from '@trxn/angular-tools';
 
 const antModules = [NzInputModule, NzInputNumberModule];
 

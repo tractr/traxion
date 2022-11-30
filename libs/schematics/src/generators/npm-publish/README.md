@@ -3,7 +3,7 @@
 Add npm publish configuration to a NX project
 
 ```shell
-nx g @tractr/schematics:npm-publish <nxProjectName> <repositoryUrl>
+nx g @trxn/schematics:npm-publish <nxProjectName> <repositoryUrl>
 ```
 
 ## Description

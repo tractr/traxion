@@ -42,7 +42,7 @@ import {
   <<if Fields searchable and string>>
   StringFilterValidate,
   <<endif>>
-} from '@tractr/common';
+} from '@trxn/common';
 <<endif>>
   
 import {
@@ -59,7 +59,7 @@ import {
 import {
   TransformStringToArray,
   TransformStringToInt,
-} from '@tractr/common';
+} from '@trxn/common';
  
 	
 export type <<Model pascal>>FindManyQuerySortableKeys =

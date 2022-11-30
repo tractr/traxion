@@ -1,6 +1,6 @@
 import { UserRoles } from '@prisma/client';
-import { getConcatValueByPath } from '@tractr/common';
-import { DefinePermissions } from '@tractr/nestjs-casl';
+import { getConcatValueByPath } from '@trxn/common';
+import { DefinePermissions } from '@trxn/nestjs-casl';
  
 import { AppAbility } from '../interfaces';
  

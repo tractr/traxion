@@ -7,8 +7,8 @@ import {
 } from './interfaces';
 import { LogstashContainer } from './logstash.container';
 
-import { AwsProviderConstruct } from '@tractr/terraform-component-aws';
-import { Container, ServiceComponent } from '@tractr/terraform-service-ecs';
+import { AwsProviderConstruct } from '@trxn/terraform-component-aws';
+import { Container, ServiceComponent } from '@trxn/terraform-service-ecs';
 
 export class LogstashComponent extends ServiceComponent<
   LogstashComponentConfig,

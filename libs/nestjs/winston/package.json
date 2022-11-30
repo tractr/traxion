@@ -1,13 +1,13 @@
 {
-  "name": "@tractr/nestjs-winston",
+  "name": "@trxn/nestjs-winston",
   "version": "1.64.9",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tractr/stack"
+    "url": "https://github.com/tractr/traxion"
   },
   "license": "UNLICENSED",
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

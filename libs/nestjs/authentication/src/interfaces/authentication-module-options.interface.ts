@@ -5,7 +5,7 @@ import { CookieOptions } from 'express';
 import { StrategyOptions as JwtStrategyOptions } from 'passport-jwt';
 import { IStrategyOptionsWithRequest as LocalStrategyOptions } from 'passport-local';
 
-import { EncryptionService } from '@tractr/nestjs-bcrypt';
+import { EncryptionService } from '@trxn/nestjs-bcrypt';
 
 export type UserInfo = {
   id: string | number;

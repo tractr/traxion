@@ -5,7 +5,7 @@ import {
   InternetRoutesComponentConfig,
 } from '../interfaces';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 /**
  * This component provides an Internet Gateway to make internet available in the private subnet with IPv4 and IPv6.

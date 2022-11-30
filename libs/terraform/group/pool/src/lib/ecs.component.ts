@@ -5,8 +5,8 @@ import { EcsComponentArtifacts, EcsComponentConfig } from './interfaces';
 import {
   AwsComponent,
   AwsComponentConstructor,
-} from '@tractr/terraform-component-aws';
-import { PrivateDnsComponent } from '@tractr/terraform-component-private-dns';
+} from '@trxn/terraform-component-aws';
+import { PrivateDnsComponent } from '@trxn/terraform-component-private-dns';
 import {
   BackendServiceComponent,
   BackendServiceComponentConfig,
@@ -16,8 +16,8 @@ import {
   ServiceComponentConfig,
   ServiceComponentDefaultConfig,
   ServiceComponentPublicConfig,
-} from '@tractr/terraform-service-ecs';
-import { ReverseProxyComponent } from '@tractr/terraform-service-reverse-proxy';
+} from '@trxn/terraform-service-ecs';
+import { ReverseProxyComponent } from '@trxn/terraform-service-reverse-proxy';
 
 export class EcsComponent extends AwsComponent<
   EcsComponentConfig,

@@ -2,7 +2,7 @@ import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 
-import { IS_PUBLIC_KEY } from '@tractr/nestjs-core';
+import { IS_PUBLIC_KEY } from '@trxn/nestjs-core';
 
 @Injectable()
 export class OnlyPublicGuard implements CanActivate {

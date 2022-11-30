@@ -8,7 +8,7 @@ import { ANGULAR_DEFAULTS_OPTIONS } from './configs';
 import { AngularConfigOptions } from './interfaces';
 import { AngularConfigServiceFactory } from './services';
 
-import { AsyncOptions, ModuleOptionsFactory } from '@tractr/angular-tools';
+import { AsyncOptions, ModuleOptionsFactory } from '@trxn/angular-tools';
 
 @NgModule({
   providers: [

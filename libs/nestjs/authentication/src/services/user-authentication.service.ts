@@ -4,7 +4,7 @@ import { Prisma, User } from '@prisma/client';
 import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
 import { AuthenticationModuleOptions } from '../interfaces';
 
-import { LoggerService } from '@tractr/nestjs-core';
+import { LoggerService } from '@trxn/nestjs-core';
 
 @Injectable()
 export class UserAuthenticationService {

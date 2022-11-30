@@ -7,7 +7,7 @@ import { HasRoleGuard } from './guards';
 import { CaslOptions } from './interfaces';
 import { CaslUpdateAbilitiesService } from './services';
 
-import { AsyncOptions, ModuleOptionsFactory } from '@tractr/angular-tools';
+import { AsyncOptions, ModuleOptionsFactory } from '@trxn/angular-tools';
 
 @NgModule({
   imports: [AbilityModule],

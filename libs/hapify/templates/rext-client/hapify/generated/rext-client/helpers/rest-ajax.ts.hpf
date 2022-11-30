@@ -2,7 +2,7 @@ import { Observable, OperatorFunction } from 'rxjs';
 import { AjaxConfig, AjaxResponse } from 'rxjs/ajax';
 import { map } from 'rxjs/operators';
  
-import { getUrl } from '@tractr/common';
+import { getUrl } from '@trxn/common';
 import { request } from './universal-rxjs-ajax';
  
 export function ajax<T>(

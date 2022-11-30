@@ -22,7 +22,7 @@ import {
   <<if Model not noGuest>>
     Public,
   <<endif>>
-} from '@tractr/nestjs-core';
+} from '@trxn/nestjs-core';
 	
 import { <<if Fields ownership >><<<if (root.names.pascal !== 'User') {>>><<Model pascal>>, <<<}>>>User, <<endif>>Prisma } from '@prisma/client';
 import { <<if Fields ownership >>Actions, AppAbility, <<endif>>Permission } from '../../../../casl';

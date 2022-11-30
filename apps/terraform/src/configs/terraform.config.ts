@@ -1,6 +1,6 @@
 import { TerraformEnvironmentVariables } from '../dtos';
 
-import { transformAndValidate } from '@tractr/common';
+import { transformAndValidate } from '@trxn/common';
 
 export const getTerraformConfiguration = (): TerraformEnvironmentVariables => {
   let terraform;

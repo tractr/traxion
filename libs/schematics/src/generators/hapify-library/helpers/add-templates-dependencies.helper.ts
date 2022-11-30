@@ -30,7 +30,7 @@ export async function addTemplateDependencies(
     tree,
     {},
     {
-      '@tractr/hapify-config': 'latest',
+      '@trxn/hapify-config': 'latest',
     },
   );
 }

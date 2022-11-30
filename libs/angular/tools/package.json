@@ -1,16 +1,16 @@
 {
-  "name": "@tractr/angular-tools",
+  "name": "@trxn/angular-tools",
   "version": "1.64.9",
   "description": "Tools for angular application",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tractr/stack"
+    "url": "https://github.com/tractr/traxion"
   },
   "dependencies": {
     "tslib": "^2.3.1"
   },
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

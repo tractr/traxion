@@ -1,7 +1,7 @@
 import { DockerRegistryComponent } from './components';
 import { RegistryGroupArtifacts, RegistryGroupConfig } from './interfaces';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 /**
  * This group create code and containers registries (docker, npm, etc.)

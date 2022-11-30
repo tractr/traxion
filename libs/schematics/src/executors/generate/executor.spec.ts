@@ -11,22 +11,22 @@ import * as fs from 'fs-extra';
 import executor from './executor';
 import { GenerateExecutorSchema } from './schema';
 
-import * as hapifyCommon from '@tractr/hapify-common';
-import * as hapifyGenerateConfig from '@tractr/hapify-generate-config';
-import * as hapifyUpdateTemplates from '@tractr/hapify-update-templates-import-path';
+import * as hapifyCommon from '@trxn/hapify-common';
+import * as hapifyGenerateConfig from '@trxn/hapify-generate-config';
+import * as hapifyUpdateTemplates from '@trxn/hapify-update-templates-import-path';
 
 jest.mock('child_process');
-jest.mock('@tractr/hapify-generate-config', () => ({
+jest.mock('@trxn/hapify-generate-config', () => ({
   __esModule: true,
-  ...jest.requireActual('@tractr/hapify-generate-config'),
+  ...jest.requireActual('@trxn/hapify-generate-config'),
 }));
-jest.mock('@tractr/hapify-update-templates-import-path', () => ({
+jest.mock('@trxn/hapify-update-templates-import-path', () => ({
   __esModule: true,
-  ...jest.requireActual('@tractr/hapify-update-templates-import-path'),
+  ...jest.requireActual('@trxn/hapify-update-templates-import-path'),
 }));
-jest.mock('@tractr/hapify-common', () => ({
+jest.mock('@trxn/hapify-common', () => ({
   __esModule: true,
-  ...jest.requireActual('@tractr/hapify-common'),
+  ...jest.requireActual('@trxn/hapify-common'),
 }));
 
 describe('Generate executor:generate', () => {

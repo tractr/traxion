@@ -2,7 +2,7 @@ import { vpc } from '@cdktf/provider-aws';
 
 import { PublicComponentArtifacts, PublicComponentConfig } from '../interfaces';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 /**
  * This component provides a public subnet in a specific availability zone

@@ -4,7 +4,7 @@ import { TerraformOutput } from 'cdktf';
 
 import { S3ComponentArtifacts, S3ComponentConfig } from './s3.interface';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 export class S3Component extends AwsComponent<
   S3ComponentConfig,

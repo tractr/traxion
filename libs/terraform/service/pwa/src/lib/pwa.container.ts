@@ -4,7 +4,7 @@ import {
   COMMON_SENSITIVE_ENVIRONMENT_VARIABLES,
   EnvironmentDefinition,
   HttpContainer,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 export class PwaContainer extends HttpContainer<PwaContainerConfig> {
   usePrivateImage(): boolean {

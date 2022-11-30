@@ -4,7 +4,7 @@ import {
   ContainerDefinition,
   HttpContainer,
   HttpContainerPathPrefixConfig,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 export class ReverseProxyContainer extends HttpContainer<ReverseProxyContainerConfig> {
   protected getAppName(): string {

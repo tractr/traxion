@@ -1,7 +1,7 @@
 const {
   hapifyDefaultConfig,
   getValidatorPath,
-} = require('@tractr/hapify-config');
+} = require('@trxn/hapify-config');
 
 module.exports = {
   ...hapifyDefaultConfig,
@@ -12,6 +12,6 @@ module.exports = {
   project: '../../../hapify-models.json',
   extends: ['../../../dist/libs/hapify/templates/angular-rext-client'],
   importReplacements: {
-    'rext-client': '@tractr/generated-rext-client',
+    'rext-client': '@trxn/generated-rext-client',
   },
 };

@@ -1,10 +1,10 @@
 {
-  "name": "stack",
+  "name": "traxion",
   "version": "1.33.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/tractr/stack"
+    "url": "https://github.com/tractr/traxion"
   },
   "license": "MIT",
   "scripts": {
@@ -277,8 +277,8 @@
     "@swc/core-linux-x64-gnu": "^1.2.235"
   },
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "prisma": {
     "schema": "libs/generated/prisma/prisma/schema.prisma",

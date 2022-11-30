@@ -9,7 +9,7 @@ import {
   ServiceComponentArtifacts,
   ServiceComponentDefaultConfig,
   ServiceComponentInternalConfig,
-} from '@tractr/terraform-service-ecs';
+} from '@trxn/terraform-service-ecs';
 
 export interface LogstashContainerPublicConfig extends ContainerPublicConfig {
   environments: ContainerPublicConfig['environments'] & {

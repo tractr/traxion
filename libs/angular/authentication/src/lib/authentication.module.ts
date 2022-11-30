@@ -17,14 +17,14 @@ import { IsLoggedGuard, IsNotLoggedGuard } from './guards';
 import { AuthenticationPublicOptions, UserOptions } from './interfaces';
 import { PasswordService, SessionService } from './services';
 
-import { AngularComponentsModule } from '@tractr/angular-components';
-import { AngularFormModule } from '@tractr/angular-form';
+import { AngularComponentsModule } from '@trxn/angular-components';
+import { AngularFormModule } from '@trxn/angular-form';
 import {
   AngularToolsModule,
   AsyncOptions,
   ModuleOptionsFactory,
-} from '@tractr/angular-tools';
-import { transformAndValidate } from '@tractr/common';
+} from '@trxn/angular-tools';
+import { transformAndValidate } from '@trxn/common';
 
 @NgModule({
   imports: [AngularToolsModule, AngularComponentsModule, AngularFormModule],

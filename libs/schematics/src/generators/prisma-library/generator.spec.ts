@@ -50,7 +50,7 @@ describe('prisma-library generator', () => {
     expect(appTree.read('libs/test/.hapifyrc.js')?.toString()).toEqual(`const {
   hapifyDefaultConfig,
   getValidatorPath,
-} = require('@tractr/hapify-config');
+} = require('@trxn/hapify-config');
 
 module.exports = {
   ...hapifyDefaultConfig,
@@ -60,7 +60,7 @@ module.exports = {
   validatorPath: getValidatorPath(__dirname),
   project: '../../hapify-models.json',
   extends: [
-    '@tractr/hapify-templates-prisma',
+    '@trxn/hapify-templates-prisma',
   ],
   importReplacements: {
   "nestjs-models": "@proj/nestjs-models",

@@ -16,7 +16,7 @@ import {
   AngularConfigService,
 } from '../interfaces';
 
-import { Unsubscriber } from '@tractr/angular-tools';
+import { Unsubscriber } from '@trxn/angular-tools';
 
 export function AngularConfigServiceFactory<
   T extends AngularConfig = AngularConfig,

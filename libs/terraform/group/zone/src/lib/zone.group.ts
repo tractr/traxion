@@ -1,7 +1,7 @@
 import { CertificatesComponent } from './components';
 import { ZoneGroupArtifacts, ZoneGroupConfig } from './interfaces';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 /**
  * This group create an SSL certificate and gives access to the Route53 Zone Id

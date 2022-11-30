@@ -7,7 +7,7 @@ import { IConfig, IConfigTemplate } from '@hapify/cli/dist/interface/Config';
 import debugFactory from 'debug';
 import { copy, writeJSON } from 'fs-extra';
 
-import { getHapifyConfig } from '@tractr/hapify-common';
+import { getHapifyConfig } from '@trxn/hapify-common';
 
 const debug = debugFactory('hpf-generate-config');
 

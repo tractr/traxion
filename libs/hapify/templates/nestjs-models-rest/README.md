@@ -5,7 +5,7 @@ This package contains the hapify templates to generate nestjs REST API.
 ## Installation
 
 ```sh
-npm install @tractr/hapify-templates-nestjs-models --save-dev
+npm install @trxn/hapify-templates-nestjs-models --save-dev
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ In your `package.json`:
 {
   "name": "my-library",
   "version": "1.0.0",
-  "hapify": { "extends": ["@tractr/hapify-templates-nestjs-models"] }
+  "hapify": { "extends": ["@trxn/hapify-templates-nestjs-models"] }
 }
 ```
 
@@ -32,5 +32,5 @@ module.exports = {
 Or you can create a `.hapifyrc.json` file in your projects root directory.
 
 ```javascript
-{ "extends": [ '@tractr/hapify-templates-nestjs-models' ] }
+{ "extends": [ '@trxn/hapify-templates-nestjs-models' ] }
 ```

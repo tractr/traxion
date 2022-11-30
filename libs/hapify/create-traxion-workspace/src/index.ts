@@ -74,7 +74,7 @@ export async function execCreateNxWorkspace(options: CreateNxWorkspaceOptions) {
 export async function writeNpmrc(rootPath: string) {
   await writeFile(
     join(rootPath, '.npmrc'),
-    '@tractr:registry=https://npm.pkg.github.com',
+    '@trxn:registry=https://npm.pkg.github.com',
   );
 }
 
@@ -89,7 +89,7 @@ export async function createTraxionWorkspace(
   const { name } = options;
 
   // The entry point of this script is to create a new Nx workspace first.
-  // After this we will call the schematics from this stack to paramaeters the workspace
+  // After this we will call the schematics from Traxion to update the workspace
   await execCreateNxWorkspace(options);
 
   // Change the cwd of the current process to the newly created Nx workspace.
@@ -98,7 +98,7 @@ export async function createTraxionWorkspace(
   await writeNpmrc(cwd());
 
   const npmPackages = [
-    '@tractr/schematics',
+    '@trxn/schematics',
     '@nrwl/angular',
     '@nrwl/react',
     '@nrwl/nest',
@@ -114,7 +114,7 @@ export async function createTraxionWorkspace(
     ...options,
   });
   await $`echo "- Start traxion workspace schematics"`;
-  await $`nx g @tractr/schematics:traxion-workspace ${args}`;
+  await $`nx g @trxn/schematics:traxion-workspace ${args}`;
   await $`echo "✔ Start traxion workspace schematics"`;
 
   await $`echo "- Installing missing dependencies"`;

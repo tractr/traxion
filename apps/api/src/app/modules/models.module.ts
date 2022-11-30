@@ -5,8 +5,8 @@ import { EncryptionModule } from './encryption.module';
 import {
   ModelsModule as TraxionModelsModule,
   UserMiddlewareModule,
-} from '@tractr/generated-nestjs-models';
-import { BcryptService } from '@tractr/nestjs-bcrypt';
+} from '@trxn/generated-nestjs-models';
+import { BcryptService } from '@trxn/nestjs-bcrypt';
 
 @Module({
   imports: [

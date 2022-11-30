@@ -5,7 +5,7 @@ import {
   NatGatewayComponentConfig,
 } from '../interfaces';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 /**
  * This component provides a nat gateway, installed in the public subnet, to make internet available in the private subnet:

@@ -6,7 +6,7 @@ import {
   DeploymentStoreComponentConfig,
 } from './interfaces';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 export class DeploymentStoreComponent extends AwsComponent<
   DeploymentStoreComponentConfig,

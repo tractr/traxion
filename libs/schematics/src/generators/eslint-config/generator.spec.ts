@@ -48,7 +48,7 @@ describe('eslint generator', () => {
       expect(packageJson.devDependencies[packageName]).toBeDefined();
     });
 
-    expect(packageJson.devDependencies['@tractr/eslint-config']).toEqual(
+    expect(packageJson.devDependencies['@trxn/eslint-config']).toEqual(
       localPackageJson.version,
     );
   });

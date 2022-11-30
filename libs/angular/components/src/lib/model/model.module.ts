@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { SelectModule } from '../select/select.module';
 import { ModelSelectComponent } from './select/select.component';
 
-import { AngularToolsModule } from '@tractr/angular-tools';
+import { AngularToolsModule } from '@trxn/angular-tools';
 
 @NgModule({
   imports: [AngularToolsModule, SelectModule],

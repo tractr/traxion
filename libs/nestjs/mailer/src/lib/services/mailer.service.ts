@@ -6,7 +6,7 @@ import { MAILER_MODULE_OPTIONS } from '../constants';
 import { areWeTestingWithJest } from '../helpers';
 import { MailerOptions } from '../interfaces';
 
-import { isProduction } from '@tractr/nestjs-core';
+import { isProduction } from '@trxn/nestjs-core';
 
 @Injectable()
 export class MailerService {

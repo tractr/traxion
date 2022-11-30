@@ -13,7 +13,7 @@ import { AwsRegions } from '../constants';
 import { PresignedDownloadConfigurationDto } from './presigned-download-configuration.dto';
 import { PresignedUploadConfigurationDto } from './presigned-upload-configuration';
 
-import { getDefaults } from '@tractr/common';
+import { getDefaults } from '@trxn/common';
 
 export class FileStorageConfigurationPrivateDto implements MinioClientOptions {
   /**

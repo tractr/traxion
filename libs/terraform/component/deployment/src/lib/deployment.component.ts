@@ -7,8 +7,8 @@ import {
   DeploymentComponentConfig,
 } from './interfaces';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
-import { DeploymentTriggerComponent } from '@tractr/terraform-component-deployment-trigger';
+import { AwsComponent } from '@trxn/terraform-component-aws';
+import { DeploymentTriggerComponent } from '@trxn/terraform-component-deployment-trigger';
 
 export class DeploymentComponent extends AwsComponent<
   DeploymentComponentConfig,

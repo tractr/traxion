@@ -3,10 +3,10 @@
 ## Installation
 
 To install this librairy you have to install it first via npm, yarn or pnpm and
-install the required peerdependency `@tractr/angular-tools`
+install the required peerdependency `@trxn/angular-tools`
 
 ```bash
-npm i --save @tractr/angular-tools`
+npm i --save @trxn/angular-tools`
 ```
 
 After that you need to initialized the `app.module.ts` of your angular
@@ -17,8 +17,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { AngularAuthenticationModule } from '@tractr/angular-authentication';
-import { AngularToolsModule } from '@tractr/angular-tools';
+import { AngularAuthenticationModule } from '@trxn/angular-authentication';
+import { AngularToolsModule } from '@trxn/angular-tools';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +28,7 @@ import { AngularToolsModule } from '@tractr/angular-tools';
         api: {
           uri: 'http://localhost:4200/api',
         },
-        appCode: 'stack',
+        appCode: 'traxion',
         appVersion: '1',
       },
     }),
@@ -79,16 +79,16 @@ Here are the list of environment variables:
 
 - `api.url`(string): contain the api url
 - `login`:
-- - `url`(string): contain the api path to login endpoint. Will be aggregate to
+  - - `url`(string): contain the api path to login endpoint. Will be aggregate to
     the `api.url`
-- - `routing`(string): contain the routing of the login component. Will be
+  - - `routing`(string): contain the routing of the login component. Will be
     aggregate to the `routing.prefix`
-- - `redicrect`(string[]): contain the path where user will be redirect after
+  - - `redicrect`(string[]): contain the path where user will be redirect after
     successful login
 - `logout`:
-- - `url`(string): contain the api path to logout endpoint. Will be aggregate to
+  - - `url`(string): contain the api path to logout endpoint. Will be aggregate to
     the `api.url`
-- - `redirect`(string[]): contain the path where user will be redirect after
+  - - `redirect`(string[]): contain the path where user will be redirect after
     successful logout
 - `session.url`(string): contain the api path to session endpoint. Will be
   aggregate to the `api.url`
@@ -107,7 +107,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { AngularAuthenticationRoutingModule } from '@tractr/angular-authentication';
+import { AngularAuthenticationRoutingModule } from '@trxn/angular-authentication';
 
 @NgModule({
   declarations: [AppComponent],
@@ -137,7 +137,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   LogoutComponent,
   LoginComponent,
-} from '@tractr/angular-authentication';
+} from '@trxn/angular-authentication';
 
 const routes: Routes = [
   {
@@ -168,5 +168,5 @@ to change the config `routing.prefix`.
 
 ## Backend
 
-This package was done to work with `@tractr/nestjs-authentication` as backend.
+This package was done to work with `@trxn/nestjs-authentication` as backend.
 Check there readme for more information.

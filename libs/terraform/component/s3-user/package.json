@@ -1,12 +1,12 @@
 {
-  "name": "@tractr/terraform-component-s3-user",
+  "name": "@trxn/terraform-component-s3-user",
   "version": "1.64.9",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tractr/stack"
+    "url": "https://github.com/tractr/traxion"
   },
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

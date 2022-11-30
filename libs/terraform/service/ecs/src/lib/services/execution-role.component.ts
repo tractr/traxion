@@ -6,7 +6,7 @@ import {
   ExecutionRoleComponentConfig,
 } from '../interfaces';
 
-import { AwsComponent } from '@tractr/terraform-component-aws';
+import { AwsComponent } from '@trxn/terraform-component-aws';
 
 export class ExecutionRoleComponent extends AwsComponent<
   ExecutionRoleComponentConfig,

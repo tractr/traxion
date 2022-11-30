@@ -1,4 +1,3 @@
-
 import { ecs } from '@cdktf/provider-aws';
 
 import { DeploymentBuildComponent } from '../deployment-build.component';
@@ -7,7 +6,7 @@ import { DeploymentRoleComponent } from '../deployment-role.component';
 import { DeploymentStoreComponent } from '../deployment-store.component';
 import { DeploymentTrigger } from './deployment-pipeline.interface';
 
-import { DeploymentTriggerComponent } from '@tractr/terraform-component-deployment-trigger';
+import { DeploymentTriggerComponent } from '@trxn/terraform-component-deployment-trigger';
 
 export interface DeploymentComponentConfig {
   imageDefinitions: string;
