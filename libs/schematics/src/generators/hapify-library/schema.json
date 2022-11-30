@@ -1,5 +1,5 @@
 {
-  "$id": "TractrLibrary",
+  "$id": "TraxionLibrary",
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "examples": [
@@ -98,6 +98,6 @@
       "type": "boolean"
     }
   },
-  "title": "Create a Tractr library with hapify for Nx",
+  "title": "Create a Traxion library with hapify for Nx",
   "type": "object"
 }

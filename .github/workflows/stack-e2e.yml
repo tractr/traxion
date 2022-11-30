@@ -1,4 +1,4 @@
-name: Stack test the API start
+name: Traxion test the API start
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -45,7 +45,7 @@ jobs:
 
       # We install our dependencies and generate the files
       - name: Install dependencies and generate files
-        uses: tractr/stack/.github/actions/setup@main
+        uses: tractr/traxion/.github/actions/setup@main
         with:
           registryUrl: 'https://npm.pkg.github.com'
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

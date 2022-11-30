@@ -12,7 +12,7 @@ TODO write this part when the schematics will be ready
 
 ## How to migrate
 
-You can check our [migrations guide](https://github.com/tractr/stack/blob/main/MIGRATIONS.md) to update the different version.
+You can check our [migrations guide](https://github.com/tractr/traxion/blob/main/MIGRATIONS.md) to update the different version.
 
 ## Known issues
 

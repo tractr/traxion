@@ -25,7 +25,7 @@ async function bootstrap() {
     // options (same as WinstonModule.forRoot() options)
     level,
     format: development
-      ? nestLikeConsoleFormat({ appName: 'Stack', prettyPrint: true })
+      ? nestLikeConsoleFormat({ appName: 'Traxion', prettyPrint: true })
       : ecsFormat(),
     transports: [new winston.transports.Console()],
   });

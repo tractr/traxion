@@ -9,7 +9,7 @@ import { normalizeOptions } from './normalize-options.helper';
 
 describe('normalizeOptions', () => {
   let appTree: Tree;
-  const npmScope = 'tractr';
+  const npmScope = 'trxn';
   const workspaceLayout = {
     appsDir: 'apps',
     libsDir: 'libs',
@@ -146,7 +146,7 @@ describe('normalizeOptions', () => {
       projectDirectory: 'test/test',
       projectName: 'test-test',
       projectRoot: 'libs/test/test',
-      npmScope: 'tractr',
+      npmScope: 'trxn',
       libsDir: 'libs',
       targets: {},
       importPath: '@trxn/test-test',

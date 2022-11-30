@@ -117,7 +117,7 @@ describe('WinstonLogger', () => {
   it('should print the app name', () => {
     const loggerWithTimestamp = createWinstonLogger({
       format: nestLikeConsoleFormat({
-        appName: 'Stack',
+        appName: 'Traxion',
         colors: false,
       }),
       transports: [
@@ -130,7 +130,7 @@ describe('WinstonLogger', () => {
 
     loggerWithTimestamp.warn('test', { foo: 'bar' }, 'context');
     expect(output).toHaveBeenCalledWith(
-      `[Stack] Warn\t[context] test - { foo: 'bar' }`,
+      `[Traxion] Warn\t[context] test - { foo: 'bar' }`,
     );
   });
 

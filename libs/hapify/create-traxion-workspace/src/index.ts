@@ -89,7 +89,7 @@ export async function createTraxionWorkspace(
   const { name } = options;
 
   // The entry point of this script is to create a new Nx workspace first.
-  // After this we will call the schematics from this stack to paramaeters the workspace
+  // After this we will call the schematics from Traxion to update the workspace
   await execCreateNxWorkspace(options);
 
   // Change the cwd of the current process to the newly created Nx workspace.

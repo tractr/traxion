@@ -28,7 +28,7 @@ import { AngularToolsModule } from '@trxn/angular-tools';
         api: {
           uri: 'http://localhost:4200/api',
         },
-        appCode: 'stack',
+        appCode: 'traxion',
         appVersion: '1',
       },
     }),
@@ -79,16 +79,16 @@ Here are the list of environment variables:
 
 - `api.url`(string): contain the api url
 - `login`:
-- - `url`(string): contain the api path to login endpoint. Will be aggregate to
+  - - `url`(string): contain the api path to login endpoint. Will be aggregate to
     the `api.url`
-- - `routing`(string): contain the routing of the login component. Will be
+  - - `routing`(string): contain the routing of the login component. Will be
     aggregate to the `routing.prefix`
-- - `redicrect`(string[]): contain the path where user will be redirect after
+  - - `redicrect`(string[]): contain the path where user will be redirect after
     successful login
 - `logout`:
-- - `url`(string): contain the api path to logout endpoint. Will be aggregate to
+  - - `url`(string): contain the api path to logout endpoint. Will be aggregate to
     the `api.url`
-- - `redirect`(string[]): contain the path where user will be redirect after
+  - - `redirect`(string[]): contain the path where user will be redirect after
     successful logout
 - `session.url`(string): contain the api path to session endpoint. Will be
   aggregate to the `api.url`

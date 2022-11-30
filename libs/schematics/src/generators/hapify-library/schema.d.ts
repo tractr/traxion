@@ -1,6 +1,6 @@
 import { TargetConfiguration } from '@nrwl/devkit';
 
-export type AvailableTractrTemplates =
+export type AvailableTraxionTemplates =
   | 'angular-rext-client'
   | 'casl'
   | 'dbml'
@@ -24,7 +24,7 @@ export interface HapifyLibraryGeneratorOptions {
   name?: string;
   directory?: string;
   type?: AvailableLibraryType;
-  hapifyTemplate: AvailableTractrTemplates;
+  hapifyTemplate: AvailableTraxionTemplates;
   hapifyModelsJson: string;
   hapifyUseImportReplacements: boolean;
   useSecondaryEndpoint: boolean;

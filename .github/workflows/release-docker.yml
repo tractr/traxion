@@ -75,7 +75,7 @@ jobs:
 
       - name: Get the affected apps
         id: apps
-        uses: tractr/stack/.github/actions/affected-apps@main
+        uses: tractr/traxion/.github/actions/affected-apps@main
         with:
           all: ${{ inputs.all }}
 

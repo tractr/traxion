@@ -36,7 +36,7 @@ describe('admin generator', () => {
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
 
-    appTree.write('nx.json', `{ "npmScope": "tractr" }`);
+    appTree.write('nx.json', `{ "npmScope": "trxn" }`);
 
     (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValue(
       Promise.resolve({

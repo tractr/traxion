@@ -10,7 +10,7 @@ import { readJSON } from 'fs-extra';
 import { PackageDefinition } from '../../helpers';
 import generator, {
   SCHEMATICS_PACKAGE_JSON_PATH,
-  SCHEMATICS_TRACTR_PACKAGE_NAME,
+  SCHEMATICS_TRAXION_PACKAGE_NAME,
 } from './generator';
 import { TargetGenerateGeneratorSchema } from './schema';
 
@@ -56,7 +56,7 @@ describe('target-generate generator', () => {
     expect(config).toBeDefined();
     expect(config.targets).toBeDefined();
     expect(config.targets?.generate).toEqual({
-      executor: `${SCHEMATICS_TRACTR_PACKAGE_NAME}:generate`,
+      executor: `${SCHEMATICS_TRAXION_PACKAGE_NAME}:generate`,
       options: {
         cwd: rootPath,
         inputHapifyGeneratedPath: 'input-folder',
@@ -83,7 +83,7 @@ describe('target-generate generator', () => {
     expect(config).toBeDefined();
     expect(config.targets).toBeDefined();
     expect(config.targets?.generate).toEqual({
-      executor: `${SCHEMATICS_TRACTR_PACKAGE_NAME}:generate`,
+      executor: `${SCHEMATICS_TRAXION_PACKAGE_NAME}:generate`,
       options: {
         cwd: rootPath,
         inputHapifyGeneratedPath: 'input-folder',
@@ -100,7 +100,7 @@ describe('target-generate generator', () => {
     const packageJsonProject = readJson(appTree, 'package.json');
     expect(packageJsonProject).toBeDefined();
     expect(packageJsonProject.devDependencies).toEqual({
-      [SCHEMATICS_TRACTR_PACKAGE_NAME]: packageJsonSchematics.version,
+      [SCHEMATICS_TRAXION_PACKAGE_NAME]: packageJsonSchematics.version,
     });
   });
 
@@ -112,7 +112,7 @@ describe('target-generate generator', () => {
     expect(config).toBeDefined();
     expect(config.targets).toBeDefined();
     expect(config.targets?.generate).toEqual({
-      executor: `${SCHEMATICS_TRACTR_PACKAGE_NAME}:generate`,
+      executor: `${SCHEMATICS_TRAXION_PACKAGE_NAME}:generate`,
       options: {
         cwd: rootPath,
       },

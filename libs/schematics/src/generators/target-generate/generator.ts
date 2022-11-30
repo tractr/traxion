@@ -15,7 +15,7 @@ import {
 } from '../../helpers';
 import { TargetGenerateGeneratorSchema } from './schema';
 
-export const SCHEMATICS_TRACTR_PACKAGE_NAME = '@trxn/schematics';
+export const SCHEMATICS_TRAXION_PACKAGE_NAME = '@trxn/schematics';
 
 export const SCHEMATICS_PACKAGE_JSON_PATH = `${__dirname}/../../../package.json`;
 
@@ -67,7 +67,7 @@ export default async function targetGenerateGenerator(
 
   project.targets = project.targets || {};
   project.targets.generate = {
-    executor: `${SCHEMATICS_TRACTR_PACKAGE_NAME}:generate`,
+    executor: `${SCHEMATICS_TRAXION_PACKAGE_NAME}:generate`,
     options: {
       ...(outputGeneratedPath && {
         outputGeneratedPath,
@@ -91,7 +91,7 @@ export default async function targetGenerateGenerator(
   );
 
   const packages: Packages = {
-    packageName: SCHEMATICS_TRACTR_PACKAGE_NAME,
+    packageName: SCHEMATICS_TRAXION_PACKAGE_NAME,
     version: packageJsonSchematics.version,
   };
 

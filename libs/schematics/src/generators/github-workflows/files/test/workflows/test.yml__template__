@@ -1,5 +1,5 @@
 ###########################
-##      Stack tests      ##
+##      Traxion tests      ##
 ###########################
 name: Test
 
@@ -17,7 +17,7 @@ jobs:
 
     name: Test npm packages on node ${{ matrix.node }}
 
-    # Runs on Tractr self serveur
+    # Runs on Traxion self serveur
     runs-on: [self-hosted, '${{ matrix.os }}']
 
     steps:

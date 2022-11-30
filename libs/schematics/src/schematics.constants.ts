@@ -1,6 +1,6 @@
 import { TargetConfiguration } from '@nrwl/devkit';
 
-import { AvailableTractrTemplates } from './generators/hapify-library/schema';
+import { AvailableTraxionTemplates } from './generators/hapify-library/schema';
 import { PackageDefinition, PackageType } from './helpers';
 
 export const DEFAULT_IMPORT_REPLACEMENTS = {
@@ -33,7 +33,7 @@ export const DEFAULT_SECONDARY_ENTRY_POINTS: Record<string, string[]> = {
   'rext-client': [],
 };
 
-export const DEFAULT_LIBRARY_TYPE: Record<AvailableTractrTemplates, string> = {
+export const DEFAULT_LIBRARY_TYPE: Record<AvailableTraxionTemplates, string> = {
   'angular-rext-client': 'angular',
   casl: 'nest',
   dbml: 'nest',
@@ -50,7 +50,7 @@ export const DEFAULT_LIBRARY_TYPE: Record<AvailableTractrTemplates, string> = {
 
 export type LibraryUseContext = 'angular' | 'nest' | 'react';
 export const DEFAULT_LIBRARY_USE_CONTEXT: Record<
-  AvailableTractrTemplates,
+  AvailableTraxionTemplates,
   LibraryUseContext[]
 > = {
   'angular-rext-client': ['angular'],
@@ -69,7 +69,7 @@ export const DEFAULT_LIBRARY_USE_CONTEXT: Record<
 
 export const DEFAULT_TARGETS_OPTIONS: Partial<
   Record<
-    AvailableTractrTemplates,
+    AvailableTraxionTemplates,
     Record<string, Partial<TargetConfiguration> | null>
   >
 > = {
@@ -87,7 +87,7 @@ export const DEFAULT_TARGETS_OPTIONS: Partial<
 };
 
 export const DEFAULT_DEPENDENCIES: Partial<
-  Record<AvailableTractrTemplates, PackageDefinition[]>
+  Record<AvailableTraxionTemplates, PackageDefinition[]>
 > = {
   models: [
     { packageName: 'faker', version: '5.5.3', type: PackageType.dependencies },

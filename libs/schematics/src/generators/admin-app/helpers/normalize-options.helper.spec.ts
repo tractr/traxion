@@ -9,7 +9,7 @@ import { NormalizedSchema, normalizeOptions } from './normalize-options.helper';
 
 describe('normalizeOptions', () => {
   let tree: Tree;
-  const npmScope = 'tractr';
+  const npmScope = 'trxn';
   const defaultOptions: AdminAppGeneratorSchema = {
     name: 'admin',
     npmName: '@trxn/admin',

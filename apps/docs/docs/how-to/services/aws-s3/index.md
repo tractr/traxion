@@ -92,8 +92,8 @@ export class AppModule {}
 The configuration expected by the register method is available via the
 typescript interfaces or in the source code:
 
-- [@trxn/nestjs-file-storage configuration](https://github.com/tractr/stack/blob/main/libs/nestjs/file-storage/src/lib/interfaces/file-storage-configuration-public.interface.ts)
-- [@trxn/angular-file-storage configuration](https://github.com/tractr/stack/blob/main/libs/angular/file-storage/src/lib/interfaces/file-storage-configuration.interface.ts)
+- [@trxn/nestjs-file-storage configuration](https://github.com/tractr/traxion/blob/main/libs/nestjs/file-storage/src/lib/interfaces/file-storage-configuration-public.interface.ts)
+- [@trxn/angular-file-storage configuration](https://github.com/tractr/traxion/blob/main/libs/angular/file-storage/src/lib/interfaces/file-storage-configuration.interface.ts)
 
 For more details about registering a module that extends `ModuleOptionsFactory`,
 please refer to the documentation: LINK.
