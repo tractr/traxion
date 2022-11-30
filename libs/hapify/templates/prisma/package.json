@@ -1,6 +1,6 @@
 {
   "name": "@trxn/hapify-templates-prisma",
-  "version": "1.64.9",
+  "version": "1.65.0",
   "description": "Generate prisma hapify config",
   "repository": {
     "type": "git",

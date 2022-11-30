@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.65.0](https://github.com/tractr/traxion/compare/v1.64.9...v1.65.0) (2022-11-30)
+
+
+### Features
+
+* change [@tractr](https://github.com/tractr) to [@trxn](https://github.com/trxn) and publish to npmjs registry ([#532](https://github.com/tractr/traxion/issues/532)) ([443668a](https://github.com/tractr/traxion/commit/443668afe75401f4c288f239ee6052c2f7910585))
+
+
+
 ## [1.64.9](https://github.com/tractr/stack/compare/v1.64.8...v1.64.9) (2022-11-28)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@trxn/common",
-  "version": "1.64.9",
+  "version": "1.65.0",
   "description": "Common module for back and front",
   "repository": {
     "type": "git",
