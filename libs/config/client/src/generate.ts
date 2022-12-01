@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-const path = require('path');
+import * as path from 'path';
 
-const dotenv = require('dotenv');
-const fs = require('fs-extra');
+import * as dotenv from 'dotenv';
+import * as fs from 'fs-extra';
 
-function createAppConfigEnvFile(file) {
+function createAppConfigEnvFile(file: string) {
   const env = dotenv.config().parsed;
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   fs.writeJSONSync(path.join(process.cwd(), file), env);

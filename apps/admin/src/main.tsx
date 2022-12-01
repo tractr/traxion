@@ -2,11 +2,18 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { App } from './app/app';
-import { fetchConfiguration } from './config';
 import { getConfig } from './environments/environment';
+import { AppConfig } from './interfaces';
 
-fetchConfiguration({ getConfig })
-  .then((config) => {
+import { fetchConfiguration } from '@tractr/client-config';
+
+const ADMIN_CONFIGURATION_SESSION_STORAGE = 'ADMIN_CONFIGURATION';
+
+fetchConfiguration<AppConfig>({
+  sessionStorageKey: ADMIN_CONFIGURATION_SESSION_STORAGE,
+  getConfig,
+})
+  .then((config: AppConfig) => {
     const container = document.getElementById('root') as Element;
     const root = createRoot(container);
     root.render(

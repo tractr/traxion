@@ -45,6 +45,7 @@
           "validator",
           "@prisma/client",
           "@trxn/common",
+          "@trxn/config-client",
           "@generated"
         ],
         "assets": [
