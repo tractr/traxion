@@ -58,6 +58,11 @@ module.exports = {
       input: 'all',
     },
     {
+      path: 'generated/react-admin/resources/{pascal}/filter-default-operators.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
       path: 'generated/react-admin/resources/{pascal}/Filter.tsx',
       engine: 'hpf',
       input: 'one',
