@@ -198,6 +198,12 @@ export const <<Model pascal>>Edit = (props: EditProps) => {
         label="<<field capital>>"
         reference="<<field.model camel>>">
         <AutocompleteArrayInput
+          <<if field nullable>>
+            emptyText="Null"
+            format={(value) => (value ? value : '')}
+            parse={(value) => (value ? value : '')}
+            emptyValue={''}
+          <<endif>>
           sx={{
             width: '100%',
           }}
@@ -213,6 +219,12 @@ export const <<Model pascal>>Edit = (props: EditProps) => {
         label="<<field capital>>"
         reference="<<field.model camel>>">
         <AutocompleteInput
+          <<if field nullable>>
+            emptyText="Null"
+            format={(value) => (value ? value : '')}
+            parse={(value) => (value ? value : '')}
+            emptyValue={''}
+          <<endif>>
           sx={{
             width: '100%',
           }}
