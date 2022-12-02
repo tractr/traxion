@@ -1,18 +1,24 @@
 export async function fetchAppConfigJson<T>(
   url = '/assets/app-config.json',
-  getConfig = (config: Record<string, unknown>) => config as unknown as T,
+  getConfig = (
+    config: Record<string, string | number | boolean | Date | undefined>,
+  ) => config as unknown as T,
 ) {
   const response = await fetch(url);
   const config = await response.json();
 
-  return getConfig(config as Record<string, unknown>);
+  return getConfig(
+    config as Record<string, string | number | boolean | Date | undefined>,
+  );
 }
 
 export interface BootstrapAppWithConfigOptions<T> {
   appConfigUrl?: string;
   sessionStorageKey: string;
   ignoreStorage?: boolean;
-  getConfig?: (clientConfig: Record<string, unknown>) => T;
+  getConfig?: (
+    clientConfig: Record<string, string | number | boolean | Date | undefined>,
+  ) => T;
 }
 
 export async function fetchConfiguration<T>(

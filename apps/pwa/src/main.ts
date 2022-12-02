@@ -9,6 +9,9 @@ if (environment.production) {
   enableProdMode();
 }
 
-bootstrapAppWithConfig(AppModule, { getConfig }).catch((err) =>
-  console.error(err),
-);
+const ANGULAR_CONFIGURATION_SESSION_STORAGE = 'ANGULAR_CONFIGURATION';
+
+bootstrapAppWithConfig(AppModule, {
+  getConfig,
+  sessionStorageKey: ANGULAR_CONFIGURATION_SESSION_STORAGE,
+}).catch((err) => console.error(err));

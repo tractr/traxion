@@ -5,7 +5,7 @@ import { App } from './app/app';
 import { getConfig } from './environments/environment';
 import { AppConfig } from './interfaces';
 
-import { fetchConfiguration } from '@tractr/client-config';
+import { fetchConfiguration } from '@trxn/client-config';
 
 const ADMIN_CONFIGURATION_SESSION_STORAGE = 'ADMIN_CONFIGURATION';
 
