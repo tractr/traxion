@@ -6,6 +6,8 @@ import {
   fetchConfiguration,
 } from '@trxn/client-config';
 
+export const ANGULAR_CONFIGURATION_SESSION_STORAGE = 'ANGULAR_CONFIGURATION';
+
 export async function bootstrapAppWithConfig<AngularConfig>(
   AppModule: Type<unknown>,
   options: BootstrapAppWithConfigOptions<AngularConfig>,
