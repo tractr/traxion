@@ -1,24 +1,18 @@
 export async function fetchAppConfigJson<T>(
   url = '/assets/app-config.json',
-  getConfig = (
-    config: Record<string, string | number | boolean | Date | undefined>,
-  ) => config as unknown as T,
+  getConfig = (config: T) => config as unknown as T,
 ) {
   const response = await fetch(url);
   const config = await response.json();
 
-  return getConfig(
-    config as Record<string, string | number | boolean | Date | undefined>,
-  );
+  return getConfig(config as T);
 }
 
 export interface BootstrapAppWithConfigOptions<T> {
   appConfigUrl?: string;
   sessionStorageKey: string;
   ignoreStorage?: boolean;
-  getConfig?: (
-    clientConfig: Record<string, string | number | boolean | Date | undefined>,
-  ) => T;
+  getConfig?: (clientConfig: T) => T;
 }
 
 export async function fetchConfiguration<T>(
@@ -27,7 +21,10 @@ export async function fetchConfiguration<T>(
   let config;
 
   if (options?.ignoreStorage) {
-    config = await fetchAppConfigJson(options?.appConfigUrl);
+    const fetchedConfig: T = await fetchAppConfigJson(options?.appConfigUrl);
+    config = options?.getConfig
+      ? options.getConfig(fetchedConfig)
+      : fetchedConfig;
   } else {
     const stringifyConfiguration = sessionStorage.getItem(
       options.sessionStorageKey,
@@ -41,7 +38,10 @@ export async function fetchConfiguration<T>(
     }
 
     if (typeof config === 'undefined') {
-      config = await fetchAppConfigJson(options?.appConfigUrl);
+      const fetchedConfig: T = await fetchAppConfigJson(options?.appConfigUrl);
+      config = options?.getConfig
+        ? options.getConfig(fetchedConfig)
+        : fetchedConfig;
 
       sessionStorage.setItem(options.sessionStorageKey, JSON.stringify(config));
     }
