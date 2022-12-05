@@ -62,7 +62,7 @@
         "commands": [
           "nx build angular-config",
           "node ./tools/local-install.mjs -p angular-config",
-          "node ./dist/libs/config/client/generate.js ./apps/admin/src/assets/app-config.json"
+          "node ./dist/libs/config/client/src/generate.js ./apps/admin/src/assets/app-config.json"
         ],
         "parallel": false
       }

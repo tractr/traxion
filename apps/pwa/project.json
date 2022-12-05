@@ -92,7 +92,7 @@
       "options": {
         "commands": [
           "nx build angular-config",
-          "node ./dist/libs/config/client/generate.js ./apps/pwa/src/assets/app-config.json"
+          "node ./dist/libs/config/client/src/generate.js ./apps/pwa/src/assets/app-config.json"
         ],
         "parallel": false
       }
