@@ -246,7 +246,7 @@ describe('<<Model pascal>>Controller', () => {
         where: {
         <<for Fields searchable and not password and not hidden and not manyOne field>>
           <<field camel>>: {
-            <<if field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>> } }<<elseif field oneMany>>{ in: [mock<<Model pascal>>.<<field camel>>] }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
+            <<if field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>>?.reverse() } }<<elseif field oneMany>>{ in: [mock<<Model pascal>>.<<field camel>>] }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
           },
         <<endfor>>
         },
@@ -497,7 +497,7 @@ describe('<<Model pascal>>Controller', () => {
         where: {
         <<for Fields searchable and not password and not hidden and not manyOne field>>
           <<field camel>>: {
-            <<if field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>> } }<<elseif field oneMany>>{ in: [mock<<Model pascal>>.<<field camel>>] }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
+            <<if field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>>?.reverse() } }<<elseif field oneMany>>{ in: [mock<<Model pascal>>.<<field camel>>] }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
           },
         <<endfor>>
         },
@@ -526,7 +526,7 @@ describe('<<Model pascal>>Controller', () => {
         where: {
         <<for Fields searchable and not password and not hidden and not manyOne field>>
           <<field camel>>: {
-            <<if field string>>contains<<elseif field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>> } }<<elseif field oneMany>>{ in: [mock<<Model pascal>>.<<field camel>>] }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
+            <<if field string>>contains<<elseif field manyMany>>some<<elseif field entity>>id<<else>>equals<<endif>>: <<if field manyMany>>{ id: { in: mock<<Model pascal>>.<<field camel>>?.reverse() } }<<elseif field oneMany>>{ in: [mock<<Model pascal>>.<<field camel>>] }<<elseif field number>>Number(mock<<Model pascal>>.<<field camel>>)<<elseif field boolean>>mock<<Model pascal>>.<<field camel>> === 'true'<<elseif field datetime>>new Date(mock<<Model pascal>>.<<field camel>> as string)<<elseif field object or multiple>>JSON.parse(mock<<Model pascal>>.<<field camel>> as string)<<else>>mock<<Model pascal>>.<<field camel>><<endif>>
           },
         <<endfor>>
         },

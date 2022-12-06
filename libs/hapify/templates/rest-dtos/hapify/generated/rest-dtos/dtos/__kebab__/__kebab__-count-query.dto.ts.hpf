@@ -3,19 +3,19 @@ import {
   IsIn,
   IsOptional,
   IsString,
-	
+
   <<if Fields entity and searchable>>
-  IsUUID, 
+  IsUUID,
   <<endif>>
-	
+
   <<if Fields object and not internal>>
-  IsObject, 
+  IsObject,
   <<endif>>
-   
+
   Min,
-	
+
 } from 'class-validator';
-	
+
 <<if Fields searchable and not entity>>
 import {
   <<if Fields searchable and boolean>>
@@ -41,41 +41,42 @@ import {
   <<endif>>
 } from '@trxn/common';
 <<endif>>
-  
+
 import {
   <<for Fields enum enumField>>
   <<Model pascal>><<enumField pascal>>,
   <<endfor>>
   <<Model pascal>>,
 } from '../../../models';
-	
+
 <<<if (root.dependencies.list.length || root.referencedIn.length) {>>>
 import {
   TransformStringToArray,
 } from '@trxn/common';
 <<<}>>>
- 
+
 export class <<Model pascal>>CountQueryDto {
 <<<getSearchableFields(root).forEach((field) => {>>>
-	
+
   <<if field entity>>
     <<< if (field.multiple) { >>>
     @TransformStringToArray()
     @IsArray()
     <<< } >>>
-	
-    @IsUUID("all", <<=listModifier(field)>>)
+
+    @IsString(<<=listModifier(field)>>)
+    @StringFilterValidate(<<=listModifier(field)>>)
   <<else>>
   @IsString(<<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field not entity>>
   @<<=getType(field)>>FilterValidate(<<if field enum>>Object.values(<<Model pascal>><<field pascal>>), <<endif>><<if field not object>><<=listModifier(field)>><<endif>>)
   <<endif>>
-	
+
   @IsOptional()
   <<=optionalTypedProperty(field)>>
- 
+
 <<<})>>>
 }
 
@@ -87,14 +88,14 @@ function getSearchableFields(model) {
     .filter((field) => field.searchable && !field.password && !field.hidden);
 }
 >>>
-	
+
 <<<
 function optionalTypedProperty(f) {
   let out = f.names.camel;
   out += "?: "
   if(f.searchable && f.type !== "entity")
     out += "string | ";
-	
+
   if (f.type === "boolean") out += "boolean";
   else if (f.type === "string") out = out.replace(' | ', '');
   else if (f.type === "enum") out += `${root.names.pascal}${f.names.pascal}`;
@@ -109,14 +110,14 @@ function optionalTypedProperty(f) {
   return out;
 }
 >>>
-	
+
 <<<
 function listModifier(f) {
   if (f.multiple) return "{ each: true}";
   else return "";
 }
 >>>
-	
+
 <<<
 function getType(f) {
   let out = ""
@@ -126,7 +127,7 @@ function getType(f) {
   else if (f.type === "datetime") return "DateTime";
   else if (f.type === "object") return "Json";
   else if (f.type === "enum") return "Enum";
-	
+
   return "UnknownType";
 }
 >>>

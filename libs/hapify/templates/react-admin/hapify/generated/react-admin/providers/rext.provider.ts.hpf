@@ -39,13 +39,21 @@ import { RextClient } from '../../rext-client';
 export function rextClientProvider(apiUrl: string | URL): DataProvider {
   const rextClient = new RextClient(apiUrl);
   return {
-    getList: async (resource, { pagination, sort, filter = {} }) => {
+    getList: async (resource, { pagination, sort, filter = {}, meta }) => {
       const { page, perPage } = pagination;
       const { field, order } = sort;
 
+      // q parameters is used in autocomplete component, for research feature
       const { q: query, ...otherFilter } = filter;
       let resourceFilters = Object.keys(otherFilter).reduce((acc, key) => {
-        return { ...acc, [key]: `${otherFilter[key]}:contains` };
+        const filterValue = otherFilter[key];
+        const filterMeta = meta?.filters?.[key];
+        const filterKey = filterMeta?.apiFieldName || key;
+        const filterOperator = filterMeta?.defaultOperator || 'contains';
+        return {
+          ...acc,
+          [filterKey]: `${filterValue}:${filterOperator}`,
+        };
       }, {});
 
       if (query) {
@@ -70,7 +78,8 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
           }) as Observable<any>,
         );
         return { data, total };
-      } catch {
+      } catch(error) {
+        console.error(error);
         return { data: [], total: 0 };
       }
     },
