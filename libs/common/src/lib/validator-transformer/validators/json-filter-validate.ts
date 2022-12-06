@@ -11,7 +11,7 @@ import { CustomValidate } from './custom-validate';
  */
 export function JsonFilterValidate({ separator = ':' } = {}) {
   return CustomValidate((_, value: unknown) => {
-    if (!value) return true;
+    if (typeof value === 'undefined') return true;
     if (isObject(value)) return true;
     if (Array.isArray(value)) return true;
     if (typeof value !== 'string') return false;

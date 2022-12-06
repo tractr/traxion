@@ -20,6 +20,7 @@
     "Concat",
     "datetime",
     "dbml",
+    "deepmerge",
     "dtos",
     "endfor",
     "Entrypoints",

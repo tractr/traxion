@@ -18,11 +18,13 @@
           "optimization": true
         }
       },
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "options": {
         "assets": ["apps/api/src/assets"],
+        "compiler": "tsc",
         "main": "apps/api/src/main.ts",
         "outputPath": "dist/apps/api",
+        "target": "node",
         "tsConfig": "apps/api/tsconfig.app.json",
         "tsPlugins": [
           "@nestjs/swagger/plugin",
@@ -37,7 +39,7 @@
       "outputs": ["{options.outputPath}"]
     },
     "cli": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           "../../node_modules/.bin/ts-node -r tsconfig-paths/register --project tsconfig.app.json src/cli.ts"

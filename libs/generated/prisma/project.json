@@ -12,7 +12,7 @@
           "target": "pregenerate"
         }
       ],
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           {
