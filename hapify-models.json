@@ -52,6 +52,7 @@
           },
           "name": "tags",
           "notes": "Tags associated to the answer",
+
           "properties": ["nullable", "multiple"],
           "subtype": "manyMany",
           "type": "entity",
@@ -273,7 +274,7 @@
         },
         {
           "name": "hour",
-          "properties": ["nullable"],
+          "properties": ["nullable", "searchable", "sortable"],
           "subtype": "time",
           "type": "datetime"
         },
@@ -281,9 +282,9 @@
           "meta": {
             "backRelation": "messages"
           },
-          "name": "tag",
-          "properties": ["nullable", "searchable", "sortable"],
-          "subtype": "oneMany",
+          "name": "tags",
+          "properties": ["multiple", "searchable", "sortable"],
+          "subtype": "manyMany",
           "type": "entity",
           "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
         },
@@ -526,7 +527,7 @@
             "ownerStringPath": "user.id"
           },
           "name": "owner",
-          "properties": ["ownership"],
+          "properties": ["searchable", "sortable", "ownership"],
           "subtype": "oneMany",
           "type": "entity",
           "value": "a7d0308a-49f0-3458-0975-1dce106136a1"

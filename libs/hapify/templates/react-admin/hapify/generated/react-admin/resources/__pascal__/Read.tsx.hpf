@@ -12,9 +12,15 @@ import {
 import { <<Model pascal>>Filter } from './Filter';
 <<endif>>
 
+import { <<Model constant>>_FILTER_DEFAULT_OPERATORS } from './filter-default-operators';
+
 export const <<Model pascal>>List = (props: ListProps) => (
-  <List {...props}<<if Fields searchable>> filters={< <<Model pascal>>Filter />}<<endif>>>
-    <Datagrid rowClick="edit">
+  <List
+    {...props}
+    queryOptions={ { meta: { filters: <<Model constant>>_FILTER_DEFAULT_OPERATORS } } }
+    <<if Fields searchable>> filters={< <<Model pascal>>Filter />}<<endif>>>
+    <Datagrid rowClick="edit"
+  >
 <<for Fields not hidden  and not manyOne field>>
     <<if field entity>>
         <<<printEntityField(field)>>>

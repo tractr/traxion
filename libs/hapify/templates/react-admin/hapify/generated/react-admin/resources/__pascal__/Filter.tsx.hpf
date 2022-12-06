@@ -5,9 +5,9 @@ import {
   FilterProps,
   <<=getImports().join(',\n  ')>>
 } from 'react-admin';
- 
+
 export const <<Model pascal>>Filter = (props: Omit<FilterProps, 'children'>) => (
-  <Filter {...props}>
+  <Filter {...props} >
 <<for Fields searchable field>>
     <<if field entity>>
         <<<printEntityInput(field)>>>
@@ -17,9 +17,9 @@ export const <<Model pascal>>Filter = (props: Omit<FilterProps, 'children'>) => 
 <<endfor>>
   </Filter>
 );
-	
+
 <<< function printInput(field) { >>>
-	
+
 <<if field string>>
     <TextInput resettable
 <<elseif field boolean>>
@@ -45,20 +45,20 @@ export const <<Model pascal>>Filter = (props: Omit<FilterProps, 'children'>) => 
       source="<<field camel>>"
       label="<<field capital>>"
     />
-	
+
 <<< } >>>
-	
+
 <<< function printEntityInput(field) { >>>
-	
+
       <ReferenceInput
         source="<<field camel>>Id"
         label="<<field capital>>"
         reference="<<field.model camel>>">
           <SelectInput optionText="<<=labelFieldCamel(field.model)>>" />
       </ReferenceInput>
-	
+
 <<< } >>>
-	
+
 <<<
 function fieldInput(field) {
     switch(field.type) {
@@ -76,13 +76,13 @@ function fieldInput(field) {
     }
 }
 function labelFieldCamel(model) {
-    const label = model.fields.label.length ? 
+    const label = model.fields.label.length ?
         model.fields.label[0] : model.fields.primary;
     return label.names.camel;
 }
 function getImports() {
     const output = [];
-    
+
     root.fields
         .filter(field => field.searchable)
         .forEach(field => {
@@ -91,5 +91,5 @@ function getImports() {
     return [...new Set(output)];
 }
 >>>
-	
+
 <<endif>>
