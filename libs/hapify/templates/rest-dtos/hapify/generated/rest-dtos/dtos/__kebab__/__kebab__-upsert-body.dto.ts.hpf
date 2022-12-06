@@ -1,63 +1,64 @@
 <<if Fields not internal>>
-import {  
+import {
   <<if Fields boolean and not internal>>
-  IsBoolean, 
+  IsBoolean,
   <<endif>>
-	
+
   <<if Fields email and not internal>>
-  IsEmail, 
+  IsEmail,
   <<endif>>
-	
+
   <<if Fields enum and not internal>>
   IsIn,
   <<endif>>
-	
+
   <<if Fields number and not internal>>
   IsNumber,
   <<endif>>
-	
+
   <<if Fields datetime and not internal>>
   IsDate,
   <<endif>>
-	
+
   <<if Fields nullable and not internal>>
   IsOptional,
   <<endif>>
-	
+
   <<if Fields string or entity or enum and not internal>>
   IsString,
   <<endif>>
-	
+
   <<if Fields (string and not text)>>
   MaxLength,
   <<endif>>
-	
+
   <<if Fields entity and not internal>>
-  IsUUID, 
+  IsUUID,
   <<endif>>
-	
+
   <<if Fields url and not internal>>
-  IsUrl, 
+  IsUrl,
   <<endif>>
-	
+
   <<if Fields password and not internal>>
-  Matches, 
+  Matches,
   <<endif>>
-	
+
   <<if Fields object and not internal>>
   IsObject,
-  <<< if (root.f.multiple.some(e => e.type ==='object')) { >>>
-  IsArray,
-  <<< } >>>
   <<endif>>
-	
+
+  <<if Fields multiple>>
+    IsArray,
+  <<endif>>
+
 } from 'class-validator';
 <<endif>>
-	
+
 <<if Fields object>>
 import type { JsonObject } from '@trxn/common';
 <<endif>>
-   
+
 <<if Fields enum>>
 import {
   <<for Fields enum enumField>>
@@ -65,86 +66,87 @@ import {
   <<endfor>>
 } from '../../../models';
 <<endif>>
-	
+
 <<if Fields (number or boolean or datetime) and not internal>>
-import { 
+import {
   <<if Fields number and not internal>>
-  TransformStringToInt, 
+  TransformStringToInt,
   <<endif>>
-	
+
   <<if Fields boolean and not internal>>
   TransformStringToBoolean,
   <<endif>>
-	
+
   <<if Fields datetime and not internal>>
   TransformStringToDate,
   <<endif>>
 } from '@trxn/common';
 <<endif>>
- 
+
 export class <<Model pascal>>UpsertBodyDto {
 <<for Fields not internal and not manyOne field>>
   <<if field boolean>>
   @IsBoolean(<<=listModifier(field)>>)
   @TransformStringToBoolean()
   <<endif>>
-	
+
   <<if field string or enum or entity>>
-  @IsString(<<=listModifier(field)>>) 
+  @IsString(<<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field string and not text>>
   @MaxLength(<<< if (field.meta.maxLength) { >>><<-field maxLength raw>><<<}else{>>>255<<<}>>>, {
     message: '<<field pascal>> field is too long',
   })
   <<endif>>
-	
+
   <<if field enum>>
-  @IsIn(Object.values(<<Model pascal>><<field pascal>>),<<=listModifier(field)>>) 
+  @IsIn(Object.values(<<Model pascal>><<field pascal>>),<<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field email>>
-  @IsEmail({}, <<=listModifier(field)>>) 
+  @IsEmail({}, <<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field entity>>
-  @IsUUID("all", <<=listModifier(field)>>) 
+  @IsUUID("all", <<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field password>>
-  // TODO We need to check automatically the strength of a password field 
+  // TODO We need to check automatically the strength of a password field
   <<endif>>
-	
+
   <<if field url>>
-  @IsUrl({}, <<=listModifier(field)>>) 
+  @IsUrl({}, <<=listModifier(field)>>)
   <<endif>>
-	
+
   <<if field number>>
   @IsNumber({<<if field not latitude and not longitude and not float>>maxDecimalPlaces: 0<<endif>>},<<=listModifier(field)>>)
   @TransformStringToInt()
   <<endif>>
-	
+
   <<if field datetime>>
   @IsDate(<<=listModifier(field)>>)
   @TransformStringToDate()
   <<endif>>
-	
+
   <<if field object>>
-  @IsObject(<<=listModifier(field)>>) 
-  <<< if (field.multiple) { >>>
-  @IsArray()
-  <<< } >>>
+  @IsObject(<<=listModifier(field)>>)
   <<endif>>
-	
+
+  <<if field multiple>>
+  @IsArray()
+  <<endif>>
+
   <<if field nullable>>
   @IsOptional()
   <<endif>>
-	
+
   <<=optionalTypedProperty(field)>>
-   
+
 <<endfor>>
 }
-	
+
 <<<
 function optionalTypedProperty(f) {
   let out = f.names.camel;
@@ -164,11 +166,11 @@ function optionalTypedProperty(f) {
   return out;
 }
 >>>
-	
+
 <<<
 function listModifier(f) {
   if (f.multiple) return "{ each: true}";
   else return "";
 }
 >>>
-	
+
