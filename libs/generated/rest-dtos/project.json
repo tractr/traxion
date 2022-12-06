@@ -1,32 +1,11 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "hapify-templates-rest-dtos",
-    "generated-models"
-  ],
+  "implicitDependencies": ["hapify-templates-rest-dtos", "generated-models"],
   "prefix": "tractr",
   "projectType": "library",
   "sourceRoot": "libs/generated/rest-dtos/src",
   "tags": [],
   "targets": {
-    "build": {
-      "configurations": {
-        "development": {
-          "tsConfig": "libs/generated/rest-dtos/tsconfig.lib.json"
-        },
-        "production": {
-          "tsConfig": "libs/generated/rest-dtos/tsconfig.lib.prod.json"
-        }
-      },
-      "defaultConfiguration": "production",
-      "executor": "@nrwl/angular:ng-packagr-lite",
-      "options": {
-        "project": "libs/generated/rest-dtos/ng-package.json"
-      },
-      "outputs": [
-        "dist/libs/generated/rest-dtos"
-      ]
-    },
     "generate": {
       "executor": "./dist/libs/schematics:generate",
       "options": {
@@ -54,9 +33,7 @@
         "jestConfig": "libs/generated/rest-dtos/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/generated/rest-dtos"
-      ]
+      "outputs": ["coverage/libs/generated/rest-dtos"]
     }
   }
 }
