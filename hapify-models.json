@@ -28,7 +28,7 @@
             "onUpdate": "Cascade",
             "ownerStringPath": "user.id"
           },
-          "name": "user",
+          "name": "owner",
           "notes": "User that owns the answer",
           "properties": ["internal", "ownership"],
           "subtype": "oneMany",

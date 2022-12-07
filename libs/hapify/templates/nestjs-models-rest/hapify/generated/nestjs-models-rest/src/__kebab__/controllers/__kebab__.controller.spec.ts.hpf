@@ -139,7 +139,9 @@ describe('<<Model pascal>>Controller', () => {
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
       (mock<<Model pascal>>Service.getDefaultOwnerships as jest.Mock).mockReturnValue({
-        user: { connect: mockUser },
+        <<for Fields ownership and not primary and internal field>>
+          <<field camel>>: { connect: mockUser },
+        <<endfor>>
       });
       <<endif>>
 
@@ -182,7 +184,9 @@ describe('<<Model pascal>>Controller', () => {
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
       (mock<<Model pascal>>Service.getDefaultOwnerships as jest.Mock).mockReturnValue({
-        user: { connect: mockUser },
+        <<for Fields ownership and not primary and internal field>>
+          <<field camel>>: { connect: mockUser },
+        <<endfor>>
       });
       <<endif>>
 
@@ -706,7 +710,9 @@ describe('<<Model pascal>>Controller', () => {
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
       (mock<<Model pascal>>Service.getDefaultOwnerships as jest.Mock).mockReturnValue({
-        user: { connect: mockUser },
+        <<for Fields ownership and not primary and internal field>>
+          <<field camel>>: { connect: mockUser },
+        <<endfor>>
       });
 
       const { can, build } = new AbilityBuilder(AppAbility);
@@ -772,7 +778,9 @@ describe('<<Model pascal>>Controller', () => {
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
       (mock<<Model pascal>>Service.getDefaultOwnerships as jest.Mock).mockReturnValue({
-        user: { connect: mockUser },
+        <<for Fields ownership and not primary and internal field>>
+          <<field camel>>: { connect: mockUser },
+        <<endfor>>
       });
 
       const { can, build } = new AbilityBuilder(AppAbility);
@@ -838,7 +846,9 @@ describe('<<Model pascal>>Controller', () => {
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
       (mock<<Model pascal>>Service.getDefaultOwnerships as jest.Mock).mockReturnValue({
-        user: { connect: mockUser },
+        <<for Fields ownership and not primary and internal field>>
+          <<field camel>>: { connect: mockUser },
+        <<endfor>>
       });
 
       const { can, build } = new AbilityBuilder(AppAbility);
@@ -904,7 +914,9 @@ describe('<<Model pascal>>Controller', () => {
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
       (mock<<Model pascal>>Service.getDefaultOwnerships as jest.Mock).mockReturnValue({
-        user: { connect: mockUser },
+        <<for Fields ownership and not primary and internal field>>
+          <<field camel>>: { connect: mockUser },
+        <<endfor>>
       });
 
       const { can, build } = new AbilityBuilder(AppAbility);
