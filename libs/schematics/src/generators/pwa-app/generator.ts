@@ -1,5 +1,4 @@
 import { applicationGenerator as angularApplicationGenerator } from '@nrwl/angular/generators';
-import { E2eTestRunner } from '@nrwl/angular/src/utils/test-runners';
 import { Tree } from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
 
@@ -27,7 +26,6 @@ export default async function pwaApplicationGenerator(
     backendProject: apiName,
     strict: true,
     style: 'less',
-    e2eTestRunner: E2eTestRunner.None,
   });
 
   await updatePackageJson(tree, normalizedOptions);
