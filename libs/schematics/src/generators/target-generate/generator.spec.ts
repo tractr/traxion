@@ -35,7 +35,7 @@ describe('target-generate generator', () => {
     };
 
     await expect(async () => generator(appTree, options)).rejects.toThrow(
-      "Cannot find configuration for 'unknown-project' in /workspace.json",
+      "Cannot find configuration for 'unknown-project'",
     );
   });
 

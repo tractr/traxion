@@ -14,40 +14,19 @@
   "sourceRoot": "libs/generated/nestjs-models/src",
   "tags": [],
   "targets": {
-    "build": {
-      "executor": "@nrwl/js:tsc",
-      "options": {
-        "assets": [
-          "libs/generated/nestjs-models/*.md"
-        ],
-        "main": "libs/generated/nestjs-models/src/index.ts",
-        "outputPath": "dist/libs/generated/nestjs-models",
-        "packageJson": "libs/generated/nestjs-models/package.json",
-        "tsConfig": "libs/generated/nestjs-models/tsconfig.lib.json"
-      },
-      "outputs": [
-        "{options.outputPath}"
-      ]
-    },
     "generate": {
       "executor": "./dist/libs/schematics:generate",
       "options": {
         "cwd": "libs/generated/nestjs-models"
       },
-      "outputs": [
-        "libs/generated/nestjs-models/src/generated"
-      ]
+      "outputs": ["libs/generated/nestjs-models/src/generated"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/generated/nestjs-models/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/generated/nestjs-models/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nrwl/jest:jest",
@@ -55,9 +34,7 @@
         "jestConfig": "libs/generated/nestjs-models/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/generated/nestjs-models"
-      ]
+      "outputs": ["coverage/libs/generated/nestjs-models"]
     }
   }
 }

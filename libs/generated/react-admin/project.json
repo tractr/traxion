@@ -6,22 +6,6 @@
   "sourceRoot": "libs/generated/react-admin/src",
   "tags": [],
   "targets": {
-    "build": {
-      "configurations": {
-        "development": {
-          "tsConfig": "libs/generated/react-admin/tsconfig.lib.json"
-        },
-        "production": {
-          "tsConfig": "libs/generated/react-admin/tsconfig.lib.prod.json"
-        }
-      },
-      "defaultConfiguration": "production",
-      "executor": "@nrwl/angular:ng-packagr-lite",
-      "options": {
-        "project": "libs/generated/react-admin/ng-package.json"
-      },
-      "outputs": ["dist/libs/generated/react-admin"]
-    },
     "generate": {
       "executor": "@trxn/schematics:generate",
       "options": {

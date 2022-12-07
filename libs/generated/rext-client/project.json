@@ -10,32 +10,12 @@
   "sourceRoot": "libs/generated/rext-client/src",
   "tags": [],
   "targets": {
-    "build": {
-      "configurations": {
-        "development": {
-          "tsConfig": "libs/generated/rext-client/tsconfig.lib.json"
-        },
-        "production": {
-          "tsConfig": "libs/generated/rext-client/tsconfig.lib.prod.json"
-        }
-      },
-      "defaultConfiguration": "production",
-      "executor": "@nrwl/angular:ng-packagr-lite",
-      "options": {
-        "project": "libs/generated/rext-client/ng-package.json"
-      },
-      "outputs": [
-        "dist/libs/generated/rext-client"
-      ]
-    },
     "generate": {
       "executor": "./dist/libs/schematics:generate",
       "options": {
         "cwd": "libs/generated/rext-client"
       },
-      "outputs": [
-        "libs/generated/rext-client/src/generated"
-      ]
+      "outputs": ["libs/generated/rext-client/src/generated"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -52,9 +32,7 @@
         "jestConfig": "libs/generated/rext-client/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/generated/rext-client"
-      ]
+      "outputs": ["coverage/libs/generated/rext-client"]
     }
   }
 }

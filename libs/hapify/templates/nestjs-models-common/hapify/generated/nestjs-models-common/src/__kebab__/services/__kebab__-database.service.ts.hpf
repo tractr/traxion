@@ -2,11 +2,11 @@ import { DatabaseService } from '@trxn/nestjs-database';
  
 import { Prisma } from '@prisma/client';
  
-export type <<Model pascal>>DatabaseService = Prisma.<<Model pascal>>Delegate<Prisma.False>
+export type <<Model pascal>>DatabaseService = Prisma.<<Model pascal>>Delegate<undefined>
  
 export function <<Model camel>>DatabaseServiceFactory(
   databaseService: DatabaseService,
-): Prisma.<<Model pascal>>Delegate<Prisma.False> {
+): Prisma.<<Model pascal>>Delegate<undefined> {
   return databaseService.<<Model camel>>;
 }
  

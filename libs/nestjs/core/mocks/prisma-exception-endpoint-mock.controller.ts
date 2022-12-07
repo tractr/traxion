@@ -12,21 +12,19 @@ export class PrismaExceptionEndpointMockController {
   @Public()
   @Get('/known-request-error-not-found')
   knownRequestErrorNotFound(): Prisma.PrismaClientKnownRequestError {
-    throw new Prisma.PrismaClientKnownRequestError(
-      this.ERROR_MESSAGE,
-      'P2001',
-      this.ERROR_CLIENT_VERSION,
-    );
+    throw new Prisma.PrismaClientKnownRequestError(this.ERROR_MESSAGE, {
+      code: 'P2001',
+      clientVersion: this.ERROR_CLIENT_VERSION,
+    });
   }
 
   @Public()
   @Get('/known-request-error-conflict')
   knownRequestErrorConflict(): Prisma.PrismaClientKnownRequestError {
-    throw new Prisma.PrismaClientKnownRequestError(
-      this.ERROR_MESSAGE,
-      'P2000',
-      this.ERROR_CLIENT_VERSION,
-    );
+    throw new Prisma.PrismaClientKnownRequestError(this.ERROR_MESSAGE, {
+      code: 'P2000',
+      clientVersion: this.ERROR_CLIENT_VERSION,
+    });
   }
 
   @Public()
@@ -58,10 +56,9 @@ export class PrismaExceptionEndpointMockController {
   @Public()
   @Get('/unknown-request-error')
   unknownRequestError(): Prisma.PrismaClientUnknownRequestError {
-    throw new Prisma.PrismaClientUnknownRequestError(
-      this.ERROR_MESSAGE,
-      this.ERROR_CLIENT_VERSION,
-    );
+    throw new Prisma.PrismaClientUnknownRequestError(this.ERROR_MESSAGE, {
+      clientVersion: this.ERROR_CLIENT_VERSION,
+    });
   }
 
   @Public()

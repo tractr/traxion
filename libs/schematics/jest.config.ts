@@ -11,8 +11,8 @@ export default {
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
+  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
   setupFiles: ['<rootDir>/.jest/set-env-vars.js'],
   coverageDirectory: '../../coverage/libs/schematics',
 };

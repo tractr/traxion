@@ -1,40 +1,17 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "hapify-templates-casl",
-    "common"
-  ],
+  "implicitDependencies": ["hapify-templates-casl", "common"],
   "prefix": "tractr",
   "projectType": "library",
   "sourceRoot": "libs/generated/casl/src",
   "tags": [],
   "targets": {
-    "build": {
-      "configurations": {
-        "development": {
-          "tsConfig": "libs/generated/casl/tsconfig.lib.json"
-        },
-        "production": {
-          "tsConfig": "libs/generated/casl/tsconfig.lib.prod.json"
-        }
-      },
-      "defaultConfiguration": "production",
-      "executor": "@nrwl/angular:ng-packagr-lite",
-      "options": {
-        "project": "libs/generated/casl/ng-package.json"
-      },
-      "outputs": [
-        "dist/libs/generated/casl"
-      ]
-    },
     "generate": {
       "executor": "./dist/libs/schematics:generate",
       "options": {
         "cwd": "libs/generated/casl"
       },
-      "outputs": [
-        "libs/generated/casl/src/generated"
-      ]
+      "outputs": ["libs/generated/casl/src/generated"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -51,9 +28,7 @@
         "jestConfig": "libs/generated/casl/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/generated/casl"
-      ]
+      "outputs": ["coverage/libs/generated/casl"]
     }
   }
 }
