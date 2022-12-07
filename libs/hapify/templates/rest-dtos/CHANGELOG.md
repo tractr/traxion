@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.3](https://github.com/tractr/traxion/compare/v1.65.2...v1.65.3) (2022-12-07)
+
+
+### Bug Fixes
+
+* add array validators to rest dtos ([#538](https://github.com/tractr/traxion/issues/538)) ([2878a14](https://github.com/tractr/traxion/commit/2878a14e0b82560f8c468532d815e8b410107168))
+* update api and admin to fix relation filters ([#535](https://github.com/tractr/traxion/issues/535)) ([ccf4a7c](https://github.com/tractr/traxion/commit/ccf4a7cbc1bd8f47adf1f1086e4913b787251ce5))
+
+
+
 ## [1.65.2](https://github.com/tractr/traxion/compare/v1.65.1...v1.65.2) (2022-11-30)
 
 

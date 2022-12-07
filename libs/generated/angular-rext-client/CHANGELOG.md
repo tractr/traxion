@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.3](https://github.com/tractr/traxion/compare/v1.65.2...v1.65.3) (2022-12-07)
+
+
+### Features
+
+* update nx and all minor dependencies ([#539](https://github.com/tractr/traxion/issues/539)) ([3857653](https://github.com/tractr/traxion/commit/38576536c8fd16588b2e56ca282c3dbe835fcdf2))
+
+
+
 ## [1.65.2](https://github.com/tractr/traxion/compare/v1.65.1...v1.65.2) (2022-11-30)
 
 

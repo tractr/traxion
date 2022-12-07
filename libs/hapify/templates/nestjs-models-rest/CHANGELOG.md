@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.3](https://github.com/tractr/traxion/compare/v1.65.2...v1.65.3) (2022-12-07)
+
+
+### Bug Fixes
+
+* update api and admin to fix relation filters ([#535](https://github.com/tractr/traxion/issues/535)) ([ccf4a7c](https://github.com/tractr/traxion/commit/ccf4a7cbc1bd8f47adf1f1086e4913b787251ce5))
+* update react-admin and api to allow null in nullable relations ([#533](https://github.com/tractr/traxion/issues/533)) ([c6b1914](https://github.com/tractr/traxion/commit/c6b19145ae90dd17b86d6cc0dbee29334855224f))
+
+
+
 ## [1.65.2](https://github.com/tractr/traxion/compare/v1.65.1...v1.65.2) (2022-11-30)
 
 
