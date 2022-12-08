@@ -52,8 +52,7 @@
           },
           "name": "tags",
           "notes": "Tags associated to the answer",
-
-          "properties": ["nullable", "multiple"],
+          "properties": ["nullable", "multiple", "searchable", "sortable"],
           "subtype": "manyMany",
           "type": "entity",
           "value": "1342e64d-6880-cc39-ecf0-372e8ffddc17"
