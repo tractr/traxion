@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.4](https://github.com/tractr/traxion/compare/v1.65.3...v1.65.4) (2022-12-08)
+
+
+### Bug Fixes
+
+* update hapify-templates-nestjs-models-rest tests to handle filters on manyMany ([#541](https://github.com/tractr/traxion/issues/541)) ([4cdd879](https://github.com/tractr/traxion/commit/4cdd879a9846af663ef3dd58fa3e5d91b41f8c9b))
+
+
+
 ## [1.65.3](https://github.com/tractr/traxion/compare/v1.65.2...v1.65.3) (2022-12-07)
 
 

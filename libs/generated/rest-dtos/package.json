@@ -1,6 +1,6 @@
 {
   "name": "@trxn/generated-rest-dtos",
-  "version": "1.65.3",
+  "version": "1.65.4",
   "dependencies": {
     "tslib": "^2.3.1"
   },
