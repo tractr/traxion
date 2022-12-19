@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.5](https://github.com/tractr/traxion/compare/v1.65.4...v1.65.5) (2022-12-19)
+
+
+### Bug Fixes
+
+* update unit-test to handle ownership system fields ([#540](https://github.com/tractr/traxion/issues/540)) ([90609b7](https://github.com/tractr/traxion/commit/90609b7f5deec07ea575177f4da0d41f18131aec))
+
+
+
 ## [1.65.4](https://github.com/tractr/traxion/compare/v1.65.3...v1.65.4) (2022-12-08)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@trxn/hapify-templates-rest-dtos",
-  "version": "1.65.4",
+  "version": "1.65.5",
   "description": "Hapify templates for models rest dtos",
   "repository": {
     "type": "git",
