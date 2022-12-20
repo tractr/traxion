@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.6](https://github.com/tractr/traxion/compare/v1.65.5...v1.65.6) (2022-12-20)
+
+
+### Bug Fixes
+
+* update error management in angular-authentication to have details errors ([#542](https://github.com/tractr/traxion/issues/542)) ([e10e55a](https://github.com/tractr/traxion/commit/e10e55ac213a59c561a341363ab23eaaaca172a5))
+
+
+
 ## [1.65.5](https://github.com/tractr/traxion/compare/v1.65.4...v1.65.5) (2022-12-19)
 
 
