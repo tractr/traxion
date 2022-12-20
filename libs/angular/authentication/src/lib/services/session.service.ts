@@ -86,7 +86,10 @@ export class SessionService<
     }).pipe(
       map((value) => value.response),
       map((value) => transformAndValidate(this.user)(value) as U),
-      catchError(() => of(null)),
+      catchError((error) => {
+        console.error(`Something went wrong while fetchin user: ${error}`);
+        return of(null);
+      }),
     );
   }
 
