@@ -20,7 +20,7 @@ ready.
 
 One of the key ways that Traxion helps developers to be more efficient is by leveraging the use of generators.
 
-[Hapify](https://docs.hapify.io/) is template engine for CRUD operations. This save developers time and effort by
+[Hapify](https://docs.hapify.io/) is a template engine for CRUD operations. This save developers time and effort by
 eliminating the need to manually set up the
 basic structure of the application.
 
