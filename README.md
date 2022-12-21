@@ -1,3 +1,5 @@
+# Traxion
+
 The purpose of Traxion is to provide a pre-configured stack of frameworks and libraries that are designed to work together "out of the box" to accelerate web application development. By combining these frameworks and libraries into a single, well-orchestrated stack, Traxion aims to provide a foundation for building modern web applications that is easy to use and efficient.
 
 It is built on top of a number of popular frameworks and libraries, including [Nx](https://nx.dev/), [Angular](https://angular.io/), [NestJS](https://nestjs.com/), [Prisma](https://www.prisma.io/), [Casl](https://casl.js.org/), [GraphQL](https://graphql.org/), [Schematics](https://angular.io/guide/schematics), [Hapify](https://docs.hapify.io/), [ReactAdmin](https://marmelab.com/react-admin/), and [Terraform](https://www.terraform.io/) with [CDKtf](https://developer.hashicorp.com/terraform/cdktf).
