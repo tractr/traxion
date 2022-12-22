@@ -551,16 +551,25 @@
           "type": "string"
         },
         {
+          "meta": {
+            "compositeUniqueness": "test,patate"
+          },
           "name": "uniqueString",
           "properties": ["unique", "searchable", "sortable"],
           "type": "string"
         },
         {
+          "meta": {
+            "compositeUniqueness": "test"
+          },
           "name": "uniqueNumber",
           "properties": ["unique", "searchable", "sortable"],
           "type": "number"
         },
         {
+          "meta": {
+            "compositeUniqueness": "patate"
+          },
           "name": "uniqueBoolean",
           "properties": ["unique", "searchable", "sortable"],
           "type": "boolean"
