@@ -43,7 +43,7 @@ export function rextClientProvider(apiUrl: string | URL): DataProvider {
       const { page, perPage } = pagination;
       const { field, order } = sort;
 
-      // q parameters is used in autocomplete component, for research feature
+      // q parameters is used in autocomplete component, for search feature
       const { q: query, ...otherFilter } = filter;
       let resourceFilters = Object.keys(otherFilter).reduce((acc, key) => {
         const filterValue = otherFilter[key];

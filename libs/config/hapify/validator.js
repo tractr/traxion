@@ -38,7 +38,7 @@ if (!primary) {
     );
 }
 
-// Check fieds properties
+// Check fields properties
 for (const field of fields) {
   if (field.subtype === 'rich')
     res.errors.push(
@@ -143,25 +143,56 @@ oneMany entity instead.`,
   }
 
   if (field.meta) {
+    // Validation for 'onDelete' metadata
     if (field.meta.onDelete)
       res = validatorsMergeReturns(
         res,
         validateOnDelete(field.meta.onDelete, field.name),
       );
+
+    // Validation for 'onUpdate' metadata
     if (field.meta.onUpdate)
       res = validatorsMergeReturns(
         res,
         validateOnUpdate(field.meta.onUpdate, field.name),
       );
 
+    // Validation for 'compositeUniqueness' metadata
     if (field.meta.compositeUniqueness) {
       if (!field.unique)
         res.errors.push(
-          `'compositeUniqueness' metadata can only be used on unique fields`,
+          `Invalid ${field.name}: 'compositeUniqueness' metadata can only be used on unique fields`,
         );
       if (!field.subtype === 'oneOne')
         res.errors.push(
-          `'compositeUniqueness' metadata should not be used on oneOne relation as it already uses a uniqueness constraints`,
+          `Invalid ${field.name}: 'compositeUniqueness' metadata should not be used on oneOne relation as it already uses a uniqueness constraints`,
+        );
+    }
+
+    // Validation for 'compositeSearch' metadata
+    if (field.meta.compositeSearch) {
+      // Can define indexes only on scalar fields
+      if (field.subtype === 'manyOne' || field.subtype === 'manyMany')
+        res.errors.push(
+          `Invalid ${field.name}: 'compositeSearch' can not be used on 'manyOne' and 'manyMany' relation as they do not translate to scalar fields in the schema`,
+        );
+
+      // Validation for 'compositeSearch' value format
+      if (
+        !/^([a-zA-Z_-]+:[0-9]+:(Asc|Desc))(,[a-zA-Z_-]+:[0-9]+:(Asc|Desc))*$/.test(
+          field.meta.compositeSearch.raw,
+        )
+      )
+        res.errors.push(
+          `Invalid ${field.name}: format of 'compositeSearch' value is invalid. It should be formatted like 'indexName:1:Asc,otherIndex:2:Desc'`,
+        );
+
+      // TODO:
+      // TO VALIDATE: Is search index useful when there is a unique index ?
+      // Also a hapify discussion: should we force the field to be searchable or sortable to allow index creation ?
+      if (field.unique)
+        res.errors.push(
+          `'compositeSearch' metadata can only be used on unique fields`,
         );
     }
   }

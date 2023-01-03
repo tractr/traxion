@@ -53,6 +53,7 @@
     <<endfor>>
 
     <<=compositeUniqueness(model)>>
+    <<=searchIndexes(model)>>
   }
 
 <<endfor>>
@@ -260,5 +261,47 @@ function compositeUniqueness(model) {
 
     // construct @@unique decorators from field names
     return Object.values(indexes).map(index => `@@unique([ ${index.map(index => index.names.camel).join(',') } ])`).join('\n');
+}
+
+function searchIndexes(model) {
+    // Create default index for searchable or sortable fields with no custom config
+    // Fields with composite search, primary keys, manyMany and manyOne relationship must be ignored
+    const simpleIndexes = model.fields
+        .filter(field =>
+            (field.searchable || field.sortable)
+            && !field.meta.compositeSearch
+            && !field.primary
+            && field.subtype !== 'manyMany'
+            && field.subtype !== 'manyOne')
+        .map(field => `@@index([${getFieldNameForIndex(field)}(sort: Asc)])` );
+
+    // Create custom indexes Filter fields with compositeSearch meta
+    const groupedCompositeSearchIndexes = model.fields.filter(field => typeof field.meta?.compositeSearch?.raw === 'string')
+        // Group fields by indexNames
+        .reduce((indexes, field) => {
+            field.meta.compositeSearch.raw.split(',').forEach(indexString => {
+                const [indexName, indexPosition, indexOrder] = indexString.split(':');
+                if (indexes[indexName]) {
+                    indexes[indexName].push({indexPosition, indexOrder, field});
+                } else {
+                    indexes[indexName] = [{indexPosition, indexOrder, field}];
+                }
+            });
+            return indexes;
+        }, {})
+
+    // construct @@index decorators from field names
+    const compositeSearchIndexes = Object.entries(groupedCompositeSearchIndexes)
+        .map(([indexName, indexFields]) => {
+            indexFields.sort((f1, f2) => f1.indexPosition - f2.indexPosition);
+            return `@@index([ ${indexFields.map(index => `${getFieldNameForIndex(index.field)}(sort: ${index.indexOrder})`).join(',') } ])`;
+        });
+
+    // Return index strings
+    return [...simpleIndexes, ...compositeSearchIndexes].join('\n');
+}
+
+function getFieldNameForIndex(field) {
+  return field.type === 'entity' ? field.names.camel + 'Id' : field.names.camel;
 }
 >>>

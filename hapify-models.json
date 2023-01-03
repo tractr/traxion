@@ -552,7 +552,8 @@
         },
         {
           "meta": {
-            "compositeUniqueness": "test,patate"
+            "compositeSearch": "search:1:Asc",
+            "compositeUniqueness": "unique,unique2"
           },
           "name": "uniqueString",
           "properties": ["unique", "searchable", "sortable"],
@@ -560,7 +561,8 @@
         },
         {
           "meta": {
-            "compositeUniqueness": "test"
+            "compositeSearch": "search:1:Asc",
+            "compositeUniqueness": "unique"
           },
           "name": "uniqueNumber",
           "properties": ["unique", "searchable", "sortable"],
@@ -568,7 +570,7 @@
         },
         {
           "meta": {
-            "compositeUniqueness": "patate"
+            "compositeUniqueness": "unique2"
           },
           "name": "uniqueBoolean",
           "properties": ["unique", "searchable", "sortable"],
@@ -670,6 +672,7 @@
           "type": "string"
         },
         {
+          "meta": {},
           "name": "createdAt",
           "properties": ["searchable", "sortable", "internal"],
           "type": "datetime"
