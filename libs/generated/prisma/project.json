@@ -1,6 +1,9 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": ["hapify-templates-prisma"],
+  "implicitDependencies": [
+    "hapify-templates-prisma",
+    "generators-graphql-resolvers"
+  ],
   "projectType": "library",
   "sourceRoot": "libs/generated/prisma/src",
   "tags": [],

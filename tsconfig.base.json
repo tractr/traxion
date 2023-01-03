@@ -69,6 +69,9 @@
       "@trxn/generated-rext-client": [
         "libs/generated/rext-client/src/index.ts"
       ],
+      "@trxn/generators-graphql-resolvers": [
+        "libs/generators/graphql-resolvers/src/index.ts"
+      ],
       "@trxn/hapify-common": ["libs/hapify/hapify-common/src/index.ts"],
       "@trxn/hapify-config": ["libs/config/hapify/src/index.ts"],
       "@trxn/hapify-generate-config": [
