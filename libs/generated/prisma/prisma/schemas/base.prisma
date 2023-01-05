@@ -23,6 +23,11 @@ generator nestjsGraphql {
 }
 
 generator test {
-  provider = "node ../../../node_modules/@trxn/generators-graphql-resolvers/src/lib/bin.js"
-  output = "../test"
+  provider = "node ../../../node_modules/@trxn/generators-graphql-resolvers/src/bin.js"
+  output = "../../nestjs-models-rest"
+  purgeOutput = true
+  reExport = Single
+  noAtomicOperations=true
+  tsConfigFilePath = "tsconfig.json"
+  generatedDirectory = "generated"
 }

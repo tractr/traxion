@@ -1,13 +1,7 @@
 # generators-graphql-resolvers
 
-This library was generated with [Nx](https://nx.dev).
+This lib is a test to write a prisma generator using ts-morph
 
-## Running unit tests
+## Execute the generator
 
-Run `nx test generators-graphql-resolvers` to execute the unit tests via
-[Jest](https://jestjs.io).
-
-## Running lint
-
-Run `nx lint generators-graphql-resolvers` to execute the lint via
-[ESLint](https://eslint.org/).
+Run `/tools/npm-scripts/pregenerate.sh && nx run generated-prisma:generate --verbose` to execute the generator.

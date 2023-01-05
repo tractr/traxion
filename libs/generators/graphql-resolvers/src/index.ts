@@ -1,1 +1,1 @@
-export * from './lib/generators-graphql-resolvers';
+export * from './lib/generate';

@@ -1,1 +1,0 @@
-import './generators-graphql-resolvers';

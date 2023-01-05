@@ -2,7 +2,7 @@
   "name": "@trxn/generators-graphql-resolvers",
   "version": "0.0.1",
   "bin": {
-    "prisma-generator-graphql-resolvers": "src/lib/bin.js"
+    "prisma-generator-graphql-resolvers": "src/bin.js"
   },
   "engines": {
     "node": ">=16.0"
