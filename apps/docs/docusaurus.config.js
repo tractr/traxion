@@ -2,8 +2,8 @@ module.exports = {
   title: 'Traxion',
   tagline:
     'A suite of orchestrated tools that aims to accelerate the development of web applications.',
-  url: 'https://git',
-  baseUrl: '/traxion.github.io/',
+  url: 'https://www.traxion.dev',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
