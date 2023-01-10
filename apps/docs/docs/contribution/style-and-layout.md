@@ -1,5 +1,5 @@
 ---
-id: how-to-write-this-documentation
+id: style-and-layout
 title: Documentation
 sidebar_label: Documentation
 ---
