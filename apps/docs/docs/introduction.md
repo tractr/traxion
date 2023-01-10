@@ -30,7 +30,7 @@ Traxion uses several generators to orchestrate the different blocks:
 - [Schematics](https://github.com/angular/angular-cli/tree/master/packages/angular_devkit/schematics) to deal with the project structure and scaffolding.
 - [Hapify](https://docs.hapify.io/) to manage the data-models logic.
 - [Prisma](https://www.prisma.io/) to generate the database ORM.
-- [Cdktf](https://learn.hashicorp.com/tutorials/terraform/cdktf) to generate the Terraform configuration.
+- [Cdktf](https://learn.hashicorp.com/tutorials/terraform/cdktf-build?in=terraform/cdktf) to generate the Terraform configuration.
 
 ## What is inside?
 
