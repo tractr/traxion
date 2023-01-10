@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.8](https://github.com/tractr/traxion/compare/v1.65.7...v1.65.8) (2023-01-10)
+
+
+### Features
+
+* update the documentation of the docs app and remove deps from the root package ([#547](https://github.com/tractr/traxion/issues/547)) ([dce23ad](https://github.com/tractr/traxion/commit/dce23ad7d6fcd86c81339c163c4078ed6bcba2ce))
+
+
+
 ## [1.65.7](https://github.com/tractr/traxion/compare/v1.65.6...v1.65.7) (2022-12-21)
 
 
