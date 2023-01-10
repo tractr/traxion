@@ -95,6 +95,23 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'Terraform',
+          link: { type: 'doc', id: 'how-to/terraform/index' },
+          items: [
+            'how-to/terraform/configuration/index',
+            {
+              type: 'category',
+              label: 'Use cases',
+              items: [
+                'how-to/terraform/use-cases/add-another-environment',
+                'how-to/terraform/use-cases/create-a-new-service',
+              ],
+            },
+            'how-to/terraform/troubleshooting/index',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Infrastructure',
           link: { type: 'doc', id: 'how-to/infrastructure/index' },
           items: [
