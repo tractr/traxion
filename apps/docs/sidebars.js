@@ -253,7 +253,6 @@ module.exports = {
       items: [
         'contribution/code-guidelines',
         'contribution/documentation-guidelines',
-        'contribution/style-and-layout',
       ],
     },
     'what-is-inside',
