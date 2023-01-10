@@ -5,9 +5,16 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx-plus/docusaurus:browser",
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "install"
+        }
+      ],
+      "executor": "nx:run-commands",
       "options": {
-        "outputPath": "dist/apps/docs"
+        "commands": ["npx docusaurus build --out-dir ../../dist/apps/docs"],
+        "cwd": "apps/docs"
       }
     },
     "deploy": {
@@ -23,10 +30,24 @@
         "cwd": "apps/docs"
       }
     },
-    "serve": {
-      "executor": "@nx-plus/docusaurus:dev-server",
+    "install": {
+      "executor": "nx:run-commands",
       "options": {
-        "port": 5000
+        "commands": ["npm i"],
+        "cwd": "apps/docs"
+      }
+    },
+    "serve": {
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "install"
+        }
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npx docusaurus start -p 5000"],
+        "cwd": "apps/docs"
       }
     }
   }
