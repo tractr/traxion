@@ -1,13 +1,10 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "pwa"
-  ],
+  "implicitDependencies": ["pwa"],
+  "name": "pwa-e2e",
   "projectType": "application",
   "sourceRoot": "apps/pwa-e2e/src",
-  "tags": [
-    "scope:app"
-  ],
+  "tags": ["scope:app"],
   "targets": {
     "e2e": {
       "configurations": {
@@ -32,13 +29,9 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "apps/pwa-e2e/**/*.{js,ts}"
-        ]
+        "lintFilePatterns": ["apps/pwa-e2e/**/*.{js,ts}"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     }
   }
 }

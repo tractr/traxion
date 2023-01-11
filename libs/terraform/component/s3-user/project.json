@@ -1,5 +1,6 @@
 {
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "terraform-component-s3-user",
   "projectType": "library",
   "sourceRoot": "libs/terraform/component/s3-user/src",
   "tags": [],
@@ -7,28 +8,20 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": [
-          "libs/terraform/component/s3-user/*.md"
-        ],
+        "assets": ["libs/terraform/component/s3-user/*.md"],
         "main": "libs/terraform/component/s3-user/src/index.ts",
         "outputPath": "dist/libs/terraform/component/s3-user",
         "packageJson": "libs/terraform/component/s3-user/package.json",
         "tsConfig": "libs/terraform/component/s3-user/tsconfig.lib.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/terraform/component/s3-user/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/terraform/component/s3-user/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -42,9 +35,7 @@
         "jestConfig": "libs/terraform/component/s3-user/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/terraform/component/s3-user"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/terraform/component/s3-user"]
     }
   }
 }

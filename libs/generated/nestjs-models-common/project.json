@@ -6,6 +6,7 @@
     "nestjs-database",
     "generated-models"
   ],
+  "name": "generated-nestjs-models-common",
   "projectType": "library",
   "sourceRoot": "libs/generated/nestjs-models-common/src",
   "tags": [],
@@ -16,8 +17,8 @@
         "cwd": "libs/generated/nestjs-models-common"
       },
       "outputs": [
-        "libs/generated/nestjs-models-common/src/generated",
-        "libs/generated/nestjs-models-common/mock/src/generated"
+        "{projectRoot}/src/generated",
+        "{projectRoot}/mock/src/generated"
       ]
     },
     "lint": {
@@ -37,7 +38,9 @@
         "jestConfig": "libs/generated/nestjs-models-common/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/generated/nestjs-models-common"]
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/generated/nestjs-models-common"
+      ]
     }
   }
 }

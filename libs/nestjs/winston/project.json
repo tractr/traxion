@@ -1,5 +1,6 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "nestjs-winston",
   "projectType": "library",
   "sourceRoot": "libs/nestjs/winston/src",
   "tags": [],
@@ -7,9 +8,7 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": [
-          "libs/nestjs/winston/*.md"
-        ],
+        "assets": ["libs/nestjs/winston/*.md"],
         "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/winston/src/index.ts",
         "outputPath": "dist/libs/nestjs/winston",
@@ -17,20 +16,14 @@
         "tsConfig": "libs/nestjs/winston/tsconfig.lib.json",
         "updateBuildableProjectDepsInPackageJson": true
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/nestjs/winston/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/nestjs/winston/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -44,9 +37,7 @@
         "jestConfig": "libs/nestjs/winston/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/nestjs/winston"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/winston"]
     }
   }
 }

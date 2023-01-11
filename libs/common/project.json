@@ -1,5 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "common",
   "projectType": "library",
   "sourceRoot": "libs/common/src",
   "tags": [],
@@ -7,28 +8,20 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": [
-          "libs/common/*.md"
-        ],
+        "assets": ["libs/common/*.md"],
         "main": "libs/common/src/index.ts",
         "outputPath": "dist/libs/common",
         "packageJson": "libs/common/package.json",
         "tsConfig": "libs/common/tsconfig.lib.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/common/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/common/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -42,9 +35,7 @@
         "jestConfig": "libs/common/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/common"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/common"]
     }
   }
 }

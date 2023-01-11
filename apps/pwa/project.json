@@ -1,5 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "pwa",
   "prefix": "tractr",
   "projectType": "application",
   "sourceRoot": "apps/pwa/src",
@@ -122,7 +123,7 @@
         "jestConfig": "apps/pwa/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/apps/pwa"]
+      "outputs": ["{workspaceRoot}/coverage/apps/pwa"]
     }
   }
 }

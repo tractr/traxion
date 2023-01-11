@@ -12,6 +12,7 @@
     "generated-rest-dtos",
     "generated-nestjs-models-common"
   ],
+  "name": "generated-nestjs-models-rest",
   "projectType": "library",
   "sourceRoot": "libs/generated/nestjs-models-rest/src",
   "tags": [],
@@ -22,8 +23,8 @@
         "cwd": "libs/generated/nestjs-models-rest"
       },
       "outputs": [
-        "libs/generated/nestjs-models-rest/src/generated",
-        "libs/generated/nestjs-models-rest/mock/src/generated"
+        "{projectRoot}/src/generated",
+        "{projectRoot}/mock/src/generated"
       ]
     },
     "lint": {
@@ -39,7 +40,7 @@
         "jestConfig": "libs/generated/nestjs-models-rest/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/generated/nestjs-models-rest"]
+      "outputs": ["{workspaceRoot}/coverage/libs/generated/nestjs-models-rest"]
     }
   }
 }

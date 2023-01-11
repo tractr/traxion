@@ -1,5 +1,6 @@
 {
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "terraform-component-private-dns",
   "projectType": "library",
   "sourceRoot": "libs/terraform/component/private-dns/src",
   "tags": [],
@@ -34,7 +35,9 @@
         "jestConfig": "libs/terraform/component/private-dns/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/terraform/component/private-dns"]
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/terraform/component/private-dns"
+      ]
     }
   }
 }

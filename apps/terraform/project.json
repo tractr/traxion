@@ -1,5 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "terraform",
   "projectType": "application",
   "sourceRoot": "apps/terraform/src",
   "tags": [],
@@ -79,7 +80,7 @@
         "jestConfig": "apps/terraform/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/apps/terraform"]
+      "outputs": ["{workspaceRoot}/coverage/apps/terraform"]
     }
   }
 }

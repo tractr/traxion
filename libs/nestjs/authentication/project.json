@@ -1,10 +1,9 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "nestjs-authentication",
   "projectType": "library",
   "sourceRoot": "libs/nestjs/authentication/src",
-  "tags": [
-    "scope:nestjs"
-  ],
+  "tags": ["scope:nestjs"],
   "targets": {
     "build": {
       "dependsOn": [
@@ -30,36 +29,25 @@
         "tsConfig": "libs/nestjs/authentication/tsconfig.lib.json",
         "updateBuildableProjectDepsInPackageJson": true
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "coverage": {
       "executor": "@nrwl/jest:jest",
       "options": {
         "codeCoverage": true,
-        "coverageReporters": [
-          "text",
-          "json"
-        ],
+        "coverageReporters": ["text", "json"],
         "jestConfig": "libs/nestjs/authentication/jest.config.ts",
         "passWithNoTests": true,
         "skipNxCache": true
       },
-      "outputs": [
-        "coverage/libs/nestjs/authentication"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/authentication"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/nestjs/authentication/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/nestjs/authentication/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -73,9 +61,7 @@
         "jestConfig": "libs/nestjs/authentication/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/nestjs/authentication"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/authentication"]
     }
   }
 }

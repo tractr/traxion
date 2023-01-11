@@ -1,5 +1,6 @@
 {
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "terraform-component-file-storage",
   "projectType": "library",
   "sourceRoot": "libs/terraform/component/file-storage/src",
   "tags": [],
@@ -34,7 +35,9 @@
         "jestConfig": "libs/terraform/component/file-storage/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/terraform/component/file-storage"]
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/terraform/component/file-storage"
+      ]
     }
   }
 }

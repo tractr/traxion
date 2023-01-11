@@ -1,17 +1,14 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "nestjs-database",
   "projectType": "library",
   "sourceRoot": "libs/nestjs/database/src",
-  "tags": [
-    "scope:nestjs"
-  ],
+  "tags": ["scope:nestjs"],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": [
-          "libs/nestjs/database/*.md"
-        ],
+        "assets": ["libs/nestjs/database/*.md"],
         "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/database/src/index.ts",
         "outputPath": "dist/libs/nestjs/database",
@@ -19,20 +16,14 @@
         "tsConfig": "libs/nestjs/database/tsconfig.lib.json",
         "updateBuildableProjectDepsInPackageJson": true
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/nestjs/database/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/nestjs/database/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -46,9 +37,7 @@
         "jestConfig": "libs/nestjs/database/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/nestjs/database"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/database"]
     }
   }
 }

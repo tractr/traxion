@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "description": "",
+  "outputCapture": "direct-nodejs",
   "properties": {
     "cleanFirst": {
       "default": true,
@@ -45,5 +46,6 @@
   },
   "required": ["cwd"],
   "title": "Generate executor",
-  "type": "object"
+  "type": "object",
+  "version": 2
 }

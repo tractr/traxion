@@ -1,5 +1,6 @@
 {
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "terraform-component-deployment-trigger",
   "projectType": "library",
   "sourceRoot": "libs/terraform/component/deployment-trigger/src",
   "tags": [],
@@ -7,17 +8,13 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": [
-          "libs/terraform/component/deployment-trigger/*.md"
-        ],
+        "assets": ["libs/terraform/component/deployment-trigger/*.md"],
         "main": "libs/terraform/component/deployment-trigger/src/index.ts",
         "outputPath": "dist/libs/terraform/component/deployment-trigger",
         "packageJson": "libs/terraform/component/deployment-trigger/package.json",
         "tsConfig": "libs/terraform/component/deployment-trigger/tsconfig.lib.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -26,9 +23,7 @@
           "libs/terraform/component/deployment-trigger/**/*.ts"
         ]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -43,7 +38,7 @@
         "passWithNoTests": true
       },
       "outputs": [
-        "coverage/libs/terraform/component/deployment-trigger"
+        "{workspaceRoot}/coverage/libs/terraform/component/deployment-trigger"
       ]
     }
   }

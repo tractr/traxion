@@ -1,5 +1,6 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "hapify-common",
   "projectType": "library",
   "sourceRoot": "libs/hapify/hapify-common/src",
   "tags": [],
@@ -7,26 +8,19 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": [
-          "libs/hapify/hapify-common/*.md"
-        ],
+        "assets": ["libs/hapify/hapify-common/*.md"],
         "main": "libs/hapify/hapify-common/src/index.ts",
         "outputPath": "dist/libs/hapify/hapify-common",
         "packageJson": "libs/hapify/hapify-common/package.json",
         "tsConfig": "libs/hapify/hapify-common/tsconfig.lib.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "coverage": {
       "executor": "@nrwl/jest:jest",
       "options": {
         "codeCoverage": true,
-        "coverageReporters": [
-          "text",
-          "json"
-        ],
+        "coverageReporters": ["text", "json"],
         "jestConfig": "libs/hapify/hapify-common/jest.config.ts",
         "passWithNoTests": true,
         "skipNxCache": true
@@ -35,13 +29,9 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/hapify/hapify-common/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/hapify/hapify-common/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -55,9 +45,7 @@
         "jestConfig": "libs/hapify/hapify-common/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/hapify/hapify-common"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/hapify/hapify-common"]
     }
   }
 }
