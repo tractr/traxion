@@ -276,7 +276,6 @@ Behind the scenes, this previous command will create a new workspace by running 
     - `hapify-library` (schematics)
     - `prisma-library` (schematics)
 
-
 :::caution Coming soon
 
 In the future, a single command will perform all these steps:
