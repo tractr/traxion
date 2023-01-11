@@ -16,7 +16,10 @@ module.exports = {
           type: 'category',
           label: 'File storage',
           link: { type: 'doc', id: 'how-to/file-storage/index' },
-          items: ['how-to/file-storage/upload-a-file-to-aws-s3'],
+          items: [
+            'how-to/file-storage/upload-a-file-to-aws-s3',
+            'how-to/file-storage/use-minio',
+          ],
         },
         {
           type: 'category',

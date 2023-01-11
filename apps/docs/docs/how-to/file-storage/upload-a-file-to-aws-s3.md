@@ -4,12 +4,6 @@ title: Upload a file to AWS S3
 sidebar_label: Upload a file to AWS S3
 ---
 
-:::info
-
-Package's author: [Maxim Darré](https://github.com/maxmousse)
-
-:::
-
 ## Installation
 
 To install the package, run `npm i --save @trxn/angular-file-storage`.
@@ -24,9 +18,9 @@ You can call the `register` method with the module configuration.
 
 #### Example
 
-*app.module.ts*
-
 ```typescript
+// file apps/api/src/app/app.module.ts
+
 import { Module } from '@nestjs/common';
 
 import {
@@ -62,6 +56,8 @@ export class AppModule {}
 You can call the `registerAsync` method with the module configuration.
 
 ```typescript
+// file apps/api/src/app/app.module.ts
+
 import { Module } from '@nestjs/common';
 
 import {
