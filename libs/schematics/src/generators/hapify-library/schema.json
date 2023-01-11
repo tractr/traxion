@@ -25,7 +25,6 @@
         "enum": [
           "angular-rext-client",
           "casl",
-          "dbml",
           "models",
           "nestjs-models",
           "nestjs-graphql",
@@ -43,7 +42,6 @@
         "items": [
           "angular-rext-client",
           "casl",
-          "dbml",
           "models",
           "nestjs-models",
           "nestjs-graphql",

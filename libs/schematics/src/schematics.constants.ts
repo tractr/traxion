@@ -1,12 +1,60 @@
 import { TargetConfiguration } from '@nrwl/devkit';
 
-import { AvailableTraxionTemplates } from './generators/hapify-library/schema';
 import { PackageDefinition, PackageType } from './helpers';
 
-export const DEFAULT_IMPORT_REPLACEMENTS = {
+export type AvailableTraxionTemplates =
+  | 'angular-rext-client'
+  | 'casl'
+  | 'models'
+  | 'nestjs-models'
+  | 'nestjs-graphql'
+  | 'nestjs-models-common'
+  | 'nestjs-models-rest'
+  | 'prisma'
+  | 'react-admin'
+  | 'rest-dtos'
+  | 'rext-client';
+
+export type LibraryType = 'angular' | 'nest' | 'react';
+
+export const DEFAULT_LIBRARY_NAMES: AvailableTraxionTemplates[] = [
+  'angular-rext-client',
+  'casl',
+  'models',
+  'nestjs-models',
+  'nestjs-graphql',
+  'nestjs-models-common',
+  'nestjs-models-rest',
+  'prisma',
+  'react-admin',
+  'rest-dtos',
+  'rext-client',
+];
+
+export const DEFAULT_LIBRARY_DESCRIPTIONS: Record<
+  AvailableTraxionTemplates,
+  string
+> = {
+  'angular-rext-client':
+    'Create a REST client that use the generated RextClient',
+  casl: 'Host the casl configuration',
+  models: 'Create the typescript models used in front and back context',
+  'nestjs-models': 'Configure the models in nestjs context',
+  'nestjs-graphql': 'Expose graphql resolver',
+  'nestjs-models-common': 'Expose common services to use the database',
+  'nestjs-models-rest': 'Expose controllers to use in the nestjs context',
+  prisma: 'Build the prisma schema',
+  'react-admin': 'Expose a react admin configuration to use it on the go',
+  'rest-dtos': 'Expose the dtos that will be use in front and back',
+  'rext-client': 'Create a JS library plug into the REST api generated',
+};
+
+export const DEFAULT_IMPORT_REPLACEMENTS: Record<
+  AvailableTraxionTemplates,
+  AvailableTraxionTemplates[]
+> = {
   'angular-rext-client': ['rext-client'],
   casl: [],
-  dbml: [],
   models: [],
   'nestjs-models': ['nestjs-models-common', 'nestjs-models-rest'],
   'nestjs-graphql': ['nestjs-models-common'],
@@ -18,10 +66,12 @@ export const DEFAULT_IMPORT_REPLACEMENTS = {
   'rext-client': ['models', 'rest-dtos'],
 };
 
-export const DEFAULT_SECONDARY_ENTRY_POINTS: Record<string, string[]> = {
+export const DEFAULT_SECONDARY_ENTRY_POINTS: Record<
+  AvailableTraxionTemplates,
+  string[]
+> = {
   'angular-rext-client': [],
   casl: [],
-  dbml: [],
   models: ['mock'],
   'nestjs-models': [],
   'nestjs-graphql': [],
@@ -33,10 +83,12 @@ export const DEFAULT_SECONDARY_ENTRY_POINTS: Record<string, string[]> = {
   'rext-client': [],
 };
 
-export const DEFAULT_LIBRARY_TYPE: Record<AvailableTraxionTemplates, string> = {
+export const DEFAULT_LIBRARY_TYPE: Record<
+  AvailableTraxionTemplates,
+  LibraryType
+> = {
   'angular-rext-client': 'angular',
   casl: 'nest',
-  dbml: 'nest',
   models: 'nest',
   'nestjs-models': 'nest',
   'nestjs-graphql': 'nest',
@@ -48,14 +100,46 @@ export const DEFAULT_LIBRARY_TYPE: Record<AvailableTraxionTemplates, string> = {
   'rext-client': 'angular',
 };
 
-export type LibraryUseContext = 'angular' | 'nest' | 'react';
+export const DEFAULT_LIBRARY_ROOT_DIRECTORY: Record<
+  AvailableTraxionTemplates,
+  string | undefined
+> = {
+  'angular-rext-client': 'angular',
+  casl: 'common',
+  models: 'common',
+  'nestjs-models': 'nestjs',
+  'nestjs-graphql': 'nestjs',
+  'nestjs-models-common': 'nestjs',
+  'nestjs-models-rest': 'nestjs',
+  prisma: undefined,
+  'react-admin': 'react',
+  'rest-dtos': 'common',
+  'rext-client': 'common',
+};
+
+export const DEFAULT_LIBRARY_DIRECTORY: Record<
+  AvailableTraxionTemplates,
+  string
+> = {
+  'angular-rext-client': 'rext-client',
+  casl: 'casl',
+  models: 'models',
+  'nestjs-models': 'models',
+  'nestjs-graphql': 'graphql',
+  'nestjs-models-common': 'models-common',
+  'nestjs-models-rest': 'models-rest',
+  prisma: 'prisma',
+  'react-admin': 'admin',
+  'rest-dtos': 'rest-dtos',
+  'rext-client': 'rext-client',
+};
+
 export const DEFAULT_LIBRARY_USE_CONTEXT: Record<
   AvailableTraxionTemplates,
-  LibraryUseContext[]
+  LibraryType[]
 > = {
   'angular-rext-client': ['angular'],
   casl: ['nest', 'angular', 'react'],
-  dbml: ['nest'],
   models: ['nest', 'angular', 'react'],
   'nestjs-models': ['nest'],
   'nestjs-graphql': ['nest'],
@@ -72,19 +156,7 @@ export const DEFAULT_TARGETS_OPTIONS: Partial<
     AvailableTraxionTemplates,
     Record<string, Partial<TargetConfiguration> | null>
   >
-> = {
-  dbml: {
-    build: null,
-    lint: null,
-    generate: {
-      options: {
-        format: false,
-        moveGeneratedFiles: false,
-        updateImportPath: false,
-      },
-    },
-  },
-};
+> = {};
 
 export const DEFAULT_DEPENDENCIES: Partial<
   Record<AvailableTraxionTemplates, PackageDefinition[]>

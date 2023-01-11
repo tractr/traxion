@@ -1,4 +1,4 @@
-import { formatFiles, Tree } from '@nrwl/devkit';
+import { formatFiles, logger, Tree } from '@nrwl/devkit';
 
 import * as packageJson from '../../../package.json';
 import { addPackageToPackageJson, installPackagesTask } from '../../helpers';
@@ -28,6 +28,8 @@ export default async function hapifyLibraryGenerator(
 
   // Default values for library generator options
   const { extra, projectName, hapifyTemplate } = normalizedOptions;
+
+  logger.debug(`Generate ${hapifyTemplate} library`);
 
   await generateLibrary(tree, normalizedOptions);
 

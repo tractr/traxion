@@ -25,9 +25,9 @@ export async function addWorkspaceFiles(
     },
   }));
 
-  if (libsDir !== 'packages') tree.delete('packages');
+  // if (libsDir !== 'packages') tree.delete('packages');
 
   await addPackageToPackageJson(tree, '@hapify/cli');
 
-  if (tree.exists('tailwind.config.js')) tree.delete('tailwind.config.js');
+  // if (tree.exists('tailwind.config.js')) tree.delete('tailwind.config.js');
 }

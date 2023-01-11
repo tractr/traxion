@@ -3,23 +3,17 @@ import { Tree } from '@nrwl/devkit';
 
 import { DEFAULT_LIBRARY_TYPE } from '../../../schematics.constants';
 import hapifyLibraryGenerator from '../../hapify-library/generator';
-import {
-  AvailableLibraryType,
-  AvailableTraxionTemplates,
-} from '../../hapify-library/schema';
 import prismaLibraryGenerator from '../../prisma-library/generator';
 import { NormalizedOptions } from '../schema';
 
 export async function createTemplateLibraries(
   tree: Tree,
-  options: NormalizedOptions,
+  { librariesToInstall }: NormalizedOptions,
 ) {
-  const { generatedDir } = options;
-  for (const [libraryName, type] of Object.entries(DEFAULT_LIBRARY_TYPE)) {
+  for (const libraryName of librariesToInstall) {
     if (libraryName === 'prisma') {
       await prismaLibraryGenerator(tree, {
         name: libraryName,
-        directory: generatedDir,
       });
     } else {
       await hapifyLibraryGenerator(tree, {
@@ -27,11 +21,9 @@ export async function createTemplateLibraries(
         addSecondaryEndpoint: [],
         hapifyAdditionalTemplates: '',
         hapifyModelsJson: 'hapify-models.json',
-        hapifyTemplate: libraryName as AvailableTraxionTemplates,
-        type: type as AvailableLibraryType,
+        hapifyTemplate: libraryName,
+        type: DEFAULT_LIBRARY_TYPE[libraryName],
         hapifyUseImportReplacements: true,
-        name: libraryName,
-        directory: generatedDir,
       });
     }
   }

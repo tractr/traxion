@@ -1,5 +1,3 @@
-/* eslint-disable no-await-in-loop */
-
 import { formatFiles, logger, Tree } from '@nrwl/devkit';
 
 import { installPackagesTask } from '../..';
@@ -31,7 +29,6 @@ export default async function traxionWorkspaceGenerator(
   const { isVerbose } = tree as any;
 
   const log = {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     info: (message: string) => {
       if (isVerbose) logger.debug(`- ${message}`);
       return isVerbose ? showSucceed(message) : () => undefined;
@@ -46,31 +43,35 @@ export default async function traxionWorkspaceGenerator(
   succeed();
 
   const normalizedOptions = await normalizeOptions(tree, options);
-  const { generatedDir } = normalizedOptions;
+  const { useConfigs, useGitaction } = normalizedOptions;
 
-  succeed = log.info('Initializing linter');
-  await eslintGenerator(tree, { generatedDir });
-  succeed();
+  if (useConfigs) {
+    succeed = log.info('Initializing linter');
+    await eslintGenerator(tree, { skipInstall: true });
+    succeed();
 
-  succeed = log.info('Initializing prettier');
-  await prettierGenerator(tree, { format: false });
-  succeed();
+    succeed = log.info('Initializing prettier');
+    await prettierGenerator(tree, { format: false, skipInstall: true });
+    succeed();
+  }
 
-  succeed = log.info('Initializing github actions');
-  await generateWorkflow(tree, { all: true });
-  succeed();
+  if (useGitaction) {
+    succeed = log.info('Initializing github actions');
+    await generateWorkflow(tree, { all: true });
+    succeed();
+  }
 
-  succeed = log.info('Initializing nestjs application');
-  await createNestjsApplication(tree, normalizedOptions);
-  succeed();
+  // succeed = log.info('Initializing nestjs application');
+  // await createNestjsApplication(tree, normalizedOptions);
+  // succeed();
 
-  succeed = log.info('Initializing angular application');
-  await createAngularApplication(tree, normalizedOptions);
-  succeed();
+  // succeed = log.info('Initializing angular application');
+  // await createAngularApplication(tree, normalizedOptions);
+  // succeed();
 
-  succeed = log.info('Initializing admin application');
-  await createAdminApplication(tree, normalizedOptions);
-  succeed();
+  // succeed = log.info('Initializing admin application');
+  // await createAdminApplication(tree, normalizedOptions);
+  // succeed();
 
   succeed = log.info('Initializing hapify libraries');
   await createTemplateLibraries(tree, normalizedOptions);

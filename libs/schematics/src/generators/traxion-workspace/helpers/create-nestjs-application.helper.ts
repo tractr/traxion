@@ -7,10 +7,10 @@ export async function createNestjsApplication(
   tree: Tree,
   options: NormalizedOptions,
 ) {
-  const { directory, apiName, generatedDir } = options;
-  await apiAppGenerator(tree, {
-    name: apiName,
-    directory,
-    generatedDir,
-  });
+  // const { directory, apiName, generatedDir } = options;
+  // await apiAppGenerator(tree, {
+  //   name: apiName,
+  //   directory,
+  //   generatedDir,
+  // });
 }

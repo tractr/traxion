@@ -7,11 +7,11 @@ export async function createAngularApplication(
   tree: Tree,
   options: NormalizedOptions,
 ) {
-  const { pwaName, generatedDir, apiName, directory } = options;
-  await pwaAppGenerator(tree, {
-    name: pwaName,
-    directory,
-    generatedDir,
-    apiName,
-  });
+  // const { pwaName, generatedDir, apiName, directory } = options;
+  // await pwaAppGenerator(tree, {
+  //   name: pwaName,
+  //   directory,
+  //   generatedDir,
+  //   apiName,
+  // });
 }
