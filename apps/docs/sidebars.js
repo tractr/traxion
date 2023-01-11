@@ -22,7 +22,12 @@ module.exports = {
           type: 'category',
           label: 'Terraform',
           link: { type: 'doc', id: 'how-to/terraform/index' },
-          items: ['how-to/terraform/configuration'],
+          items: [
+            'how-to/terraform/configuration',
+            'how-to/terraform/add-a-new-environment',
+            'how-to/terraform/ecs-components',
+            'how-to/terraform/create-new-service',
+          ],
         },
         {
           type: 'category',
