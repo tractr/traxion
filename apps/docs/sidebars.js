@@ -1,7 +1,12 @@
 module.exports = {
   documentation: [
     'introduction',
-    'get-started/index',
+    {
+      type: 'category',
+      label: 'Getting Started',
+      link: { type: 'doc', id: 'get-started/index' },
+      items: ['get-started/generated-vs-custom-code'],
+    },
     {
       type: 'category',
       label: 'How to',
