@@ -15,7 +15,7 @@ module.exports = {
           type: 'category',
           label: 'Database',
           link: { type: 'doc', id: 'how-to/database/index' },
-          items: [],
+          items: ['how-to/database/database-migration-with-prisma'],
         },
         {
           type: 'category',

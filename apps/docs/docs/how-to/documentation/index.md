@@ -19,7 +19,7 @@ npm install -D @nx-plus/docusaurus
 Generate a docusaurus application, run the following command:
 
 ```shell
-nx g @nx-plus/docusaurus:app docs
+nx generate @nx-plus/docusaurus:app docs
 ```
 
 ### Usage
