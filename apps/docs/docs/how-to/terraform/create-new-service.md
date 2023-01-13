@@ -18,7 +18,7 @@ Before reading this, you should know how ECS components work :
 
 In this tutorial, we are going to write add a Redis service to our application and deploy it.
 
-This Redis service is beased on the public image from Docker Hub.
+This Redis service is based on the public image from Docker Hub.
 
 ## Create a new library using NX
 
