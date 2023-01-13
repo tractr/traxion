@@ -17,6 +17,7 @@ module.exports = {
           items: [
             'how-to/angular/configure-lazy-loading',
             'how-to/angular/configure-storybook',
+            'how-to/angular/configure-tailwind-css',
           ],
         },
         {

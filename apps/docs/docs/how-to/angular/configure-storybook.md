@@ -34,29 +34,25 @@ nx run my-application-name:storybook
 
 To have all the stories in a single instance of Storybook you need to change the configuration of Storybook.
 
-To do this you need to modify 2 files.
+To do this you need to modify 2 files:
 
-### `my-application-name/.storybook/main.js`
+- `my-application-name/.storybook/main.js`
+  Enter all the paths of the folders containing your stories that you want to add in storybook in the `stories` property:
+  ```javascript
+  stories: [
+    // ...,
+    'my-path-to-stories-folders/**/*.stories.mdx',
+    'my-path-to-stories-folders/**/*.stories.@(js|jsx|ts|tsx)'
+  ]
+  ```
 
-Enter all the paths of the folders containing your stories that you want to add in storybook in the `stories` property:
-
-```javascript
-stories: [
-  // ...,
-  'my-path-to-stories-folders/**/*.stories.mdx',
-  'my-path-to-stories-folders/**/*.stories.@(js|jsx|ts|tsx)'
-]
-```
-
-### `my-application-name/.storybook/tsconfig.json`
-
-Enter the path of the components used in the stories you want to add in the `include` property:
-
-```json
-"include": [
-  "my-path-to-components-folders/**/*"
-]
-```
+- `my-application-name/.storybook/tsconfig.json`
+  Enter the path of the components used in the stories you want to add in the `include` property:
+  ```json
+  "include": [
+    "my-path-to-components-folders/**/*"
+  ]
+  ```
 
 ## Use assets files of your application for the stories of your libraries
 
