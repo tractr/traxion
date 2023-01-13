@@ -50,7 +50,7 @@ const routes: Routes = [
         (m) => m.MyLibraryNameModule,
       ),
   },
-	// ...other routes
+  // ...other routes
 ]
 ```
 

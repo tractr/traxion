@@ -14,7 +14,10 @@ module.exports = {
         {
           type: 'category',
           label: 'Angular',
-          items: ['how-to/angular/configure-lazy-loading'],
+          items: [
+            'how-to/angular/configure-lazy-loading',
+            'how-to/angular/configure-storybook',
+          ],
         },
         {
           type: 'category',
