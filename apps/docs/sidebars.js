@@ -22,6 +22,13 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'NestJS',
+          items: [
+            'how-to/nestjs/extend-a-generated-controller',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Database',
           link: { type: 'doc', id: 'how-to/database/index' },
           items: ['how-to/database/database-migration-with-prisma'],
