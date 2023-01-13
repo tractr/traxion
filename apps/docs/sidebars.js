@@ -13,6 +13,11 @@ module.exports = {
       items: [
         {
           type: 'category',
+          label: 'Angular',
+          items: ['how-to/angular/configure-lazy-loading'],
+        },
+        {
+          type: 'category',
           label: 'Database',
           link: { type: 'doc', id: 'how-to/database/index' },
           items: ['how-to/database/database-migration-with-prisma'],
