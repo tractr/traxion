@@ -1,7 +1,7 @@
 ---
-id: index
-title: Terraform
-sidebar_label: Terraform
+id: introduction
+title: Introduction
+sidebar_label: Introduction
 ---
 
 Traxion uses [Terraform](https://www.terraform.io/) to describe the underlying infrastructure of the application.

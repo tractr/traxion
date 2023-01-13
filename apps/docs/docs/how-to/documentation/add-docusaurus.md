@@ -1,5 +1,5 @@
 ---
-id: index
+id: add-docusaurus
 title: Add Docusaurus to your project
 sidebar_label: Add Docusaurus
 ---

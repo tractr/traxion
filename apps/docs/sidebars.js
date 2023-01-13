@@ -30,13 +30,14 @@ module.exports = {
         {
           type: 'category',
           label: 'Database',
-          link: { type: 'doc', id: 'how-to/database/index' },
-          items: ['how-to/database/database-migration-with-prisma'],
+          items: [
+            'how-to/database/configuration',
+            'how-to/database/database-migration-with-prisma'
+          ],
         },
         {
           type: 'category',
           label: 'File storage',
-          link: { type: 'doc', id: 'how-to/file-storage/index' },
           items: [
             'how-to/file-storage/file-storage-on-aws-s3',
             'how-to/file-storage/use-minio',
@@ -45,8 +46,8 @@ module.exports = {
         {
           type: 'category',
           label: 'Terraform',
-          link: { type: 'doc', id: 'how-to/terraform/index' },
           items: [
+            'how-to/terraform/introduction',
             'how-to/terraform/configuration',
             'how-to/terraform/add-a-new-environment',
             'how-to/terraform/ecs-components',
@@ -56,8 +57,7 @@ module.exports = {
         {
           type: 'category',
           label: 'Documentation',
-          link: { type: 'doc', id: 'how-to/documentation/index' },
-          items: [],
+          items: ['how-to/documentation/add-docusaurus'],
         },
       ],
     },
