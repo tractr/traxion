@@ -4,15 +4,14 @@ title: File Storage on AWS S3
 sidebar_label: File Storage on AWS S3
 ---
 
-
 ## Introduction
 
 Storing, managing and distributing files is a common task for web applications. However, it can quickly become a cumbersome task to manage for your nodejs application and is usually best delegated to a specialized file storage service like AWS S3 or Minio.
 
 It involves three parts:
 
-- Your backend application, which is responsible for negotiating a pre-signed download url with the file storage service.
-- Your frontend application, which must request this pre-signed upload url from the backend and then upload the user's file to the file storage.
+- Your backend application, which is responsible for negotiating a presigned download url with the file storage service.
+- Your frontend application, which must request this presigned upload url from the backend and then upload the user's file to the file storage.
 - The file storage service itself.
 
 Traxion provides the following two packages to interact with the file storage service:
@@ -107,28 +106,27 @@ The configuration expected by the `register` method is available via the TypeScr
 
 For more details about registering a dynamic module, please refer to the [NestJS documentation](https://docs.nestjs.com/fundamentals/dynamic-modules).
 
-
 ## Common use case
 
 One of the most common features that may require the use of file storage is authentication and file manipulation permissions. You probably want to grant read or write permissions to certain files based on a set of conditions, but you don't want the files to flow through your backend because that would be too bandwidth intensive.
 
-To achieve this, you can use pre-signed URLs. Presigned URLs are similar to tokens: they have a limited lifetime and are only valid for one type of operation.
+To achieve this, you can use presigned URLs. Presigned URLs are similar to tokens: they have a limited lifetime and are only valid for one type of operation.
 
 :::info
 
-For more information on pre-signed URLs, see the [AWS documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html).
+For more information on presigned URLs, see the [AWS documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html).
 
 :::
 
 For example, a user who wants to upload his avatar image to storage would take the following steps:
 
-- The frontend requests a pre-signed url from the backend. The pre-signed URL should allow the current user to upload their image to the file storage.
-- Once the backend has validated that the user has sufficient permissions, it negotiates a pre-signed URL with the file storage and sends it back to the frontend.
-- The frontend is now able to upload the user's image to the file store by performing a POST to the pre-signed URL.
+- The frontend requests a presigned url from the backend. The presigned URL should allow the current user to upload their image to the file storage.
+- Once the backend has validated that the user has sufficient permissions, it negotiates a presigned URL with the file storage and sends it back to the frontend.
+- The frontend is now able to upload the user's image to the file store by performing a POST to the presigned URL.
 
 In this scenario, the backend is responsible for verifying authentication, permissions, but the responsibility for hosting and serving the files is delegated to the file store.
 
-### Upload a file to the file storage with a pre-signed url
+### Upload a file to the file storage with a presigned url
 
 As explained earlier, this is one of the most common cases of using a file storage service.
 If your application does not need to run custom logic when uploading a file to the file store, you can use the pre-built `FileStorageController`.
@@ -162,8 +160,8 @@ export class AppModule {}
 
 The `FileStorageController` exposes two endpoints:
 
-- The `upload` endpoint can be used to request an upload pre-signed URL.
-- The `download` endpoint can be used to request a download pre-signed URL.
+- The `upload` endpoint can be used to request an upload presigned URL.
+- The `download` endpoint can be used to request a download presigned URL.
 
 On the frontend side of your application, you can use the `tractr-file-storage-upload-button` button component exported from `@tractr/angular-file-storage` to automatically send files uploaded by the users to the file storage.
 
@@ -207,9 +205,9 @@ export class YourAngularComponent {
 }
 ```
 
-Under the hood, the `trxn-file-storage-upload-button` uses `FileStorageService` to request a pre-signed upload url and transfer the file to file storage.
+Under the hood, the `trxn-file-storage-upload-button` uses `FileStorageService` to request a presigned upload url and transfer the file to file storage.
 
-If your application requires custom logic on the frontend, the `FileStorageService` can be used directly and exposes methods to request the pre-signed url and transfer the file:
+If your application requires custom logic on the frontend, the `FileStorageService` can be used directly and exposes methods to request the presigned url and transfer the file:
 
 ```typescript
 import { Component } from '@angular/core';
@@ -238,7 +236,7 @@ export class UploadButtonComponent {
 }
 ```
 
-On the backend, the default controller simply requests a pre-signed URL from the file storage. If you have some business logic, you can write your own controller and use the `FileStorageService`.
+On the backend, the default controller simply requests a presigned URL from the file storage. If you have some business logic, you can write your own controller and use the `FileStorageService`.
 
 NestJS controller example:
 
@@ -270,11 +268,11 @@ export class FileStorageController {
 }
 ```
 
-### Download a file from file storage with a pre-signed URL.
+### Download a file from file storage with a presigned URL.
 
-Read access to a file can also be restricted by using pre-signed URLs for downloading. The mechanism is very similar to the one presented in the upload section.
+Read access to a file can also be restricted by using presigned URLs for downloading. The mechanism is very similar to the one presented in the upload section.
 
-For this example, consider a `PrivateImageComponent` that takes as input the file path on the storage, requests a pre-signed upload URL, and displays the file:
+For this example, consider a `PrivateImageComponent` that takes as input the file path on the storage, requests a presigned upload URL, and displays the file:
 
 ```typescript
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
@@ -396,7 +394,7 @@ This method should be called periodically (e.g. in a Cron) if you don't want the
 
 :::info Other file manipulations
 
-The NestJS `FileStorageService` uses the Minio javascript client and extends it, making all the Minio client methods available for custom operations as well. For more information, please refer to the [Minio] documentation (https://min.io/docs/minio/linux/developers/javascript/API.html).
+The NestJS `FileStorageService` uses the Minio javascript client and extends it, making all the Minio client methods available for custom operations as well. For more information, please refer to the [Minio documentation](https://min.io/docs/minio/linux/developers/javascript/API.html).
 
 :::
 
