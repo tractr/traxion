@@ -1,7 +1,12 @@
 module.exports = {
   documentation: [
     'introduction',
-    'get-started/index',
+    {
+      type: 'category',
+      label: 'Getting Started',
+      link: { type: 'doc', id: 'get-started/index' },
+      items: ['get-started/generated-vs-custom-code'],
+    },
     {
       type: 'category',
       label: 'How to',
@@ -10,7 +15,7 @@ module.exports = {
           type: 'category',
           label: 'Database',
           link: { type: 'doc', id: 'how-to/database/index' },
-          items: [],
+          items: ['how-to/database/database-migration-with-prisma'],
         },
         {
           type: 'category',
