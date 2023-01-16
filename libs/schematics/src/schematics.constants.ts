@@ -65,6 +65,27 @@ export const DEFAULT_IMPORT_REPLACEMENTS: Record<
   'rest-dtos': ['models'],
   'rext-client': ['models', 'rest-dtos'],
 };
+export const DEFAULT_IMPLICIT_DEPENDENCIES: Record<
+  AvailableTraxionTemplates,
+  string[]
+> = {
+  'angular-rext-client': ['common-rext-client'],
+  casl: [],
+  models: [],
+  'nestjs-models': ['nestjs-models-common', 'nestjs-models-rest'],
+  'nestjs-graphql': ['nestjs-models-common'],
+  'nestjs-models-common': ['common-models'],
+  'nestjs-models-rest': [
+    'common-casl',
+    'nestjs-models-common',
+    'common-rest-dtos',
+    'common-models',
+  ],
+  prisma: ['nestjs-models', 'nestjs-models-common'],
+  'react-admin': ['common-rext-client'],
+  'rest-dtos': ['common-models'],
+  'rext-client': ['common-models', 'common-rest-dtos'],
+};
 
 export const DEFAULT_SECONDARY_ENTRY_POINTS: Record<
   AvailableTraxionTemplates,

@@ -6,6 +6,9 @@
     "url": "https://github.com/tractr/traxion"
   },
   "main": "src/index.js",
+  "peerDependencies": {
+    "@nrwl/cli": "^14.0.0"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"

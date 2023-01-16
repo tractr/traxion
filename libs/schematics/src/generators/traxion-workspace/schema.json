@@ -3,6 +3,12 @@
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "properties": {
+    "createApps": {
+      "default": false,
+      "description": "Create the demo apps to use traxion libraries (api, pwa, react-admin)",
+      "type": "boolean",
+      "x-prompt": "Do you want an api, pwa and an admin demo application in your workspace ?"
+    },
     "skipFormat": {
       "default": false,
       "description": "Skip the format files process",
@@ -33,6 +39,7 @@
     }
   },
   "required": [
+    "createApps",
     "useConfigs",
     "useGitaction",
     "useAllLibraries"

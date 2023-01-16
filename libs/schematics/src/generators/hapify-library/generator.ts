@@ -1,7 +1,11 @@
-import { formatFiles, logger, Tree } from '@nrwl/devkit';
+import { formatFiles, Tree } from '@nrwl/devkit';
 
 import * as packageJson from '../../../package.json';
-import { addPackageToPackageJson, installPackagesTask } from '../../helpers';
+import {
+  addPackageToPackageJson,
+  getLogger,
+  installPackagesTask,
+} from '../../helpers';
 import { DEFAULT_LIBRARY_USE_CONTEXT } from '../../schematics.constants';
 import addGenerateTarget from '../target-generate/generator';
 import {
@@ -21,6 +25,7 @@ export default async function hapifyLibraryGenerator(
   tree: Tree,
   options: HapifyLibraryGeneratorOptionsWithExtra,
 ) {
+  const log = getLogger(tree);
   // Format options
   const normalizedOptions = normalizeOptions(tree, options);
 
@@ -29,7 +34,7 @@ export default async function hapifyLibraryGenerator(
   // Default values for library generator options
   const { extra, projectName, hapifyTemplate } = normalizedOptions;
 
-  logger.debug(`Generate ${hapifyTemplate} library`);
+  log.debug(`Generate ${hapifyTemplate} library`);
 
   await generateLibrary(tree, normalizedOptions);
 

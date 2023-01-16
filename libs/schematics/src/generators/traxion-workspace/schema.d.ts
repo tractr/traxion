@@ -1,6 +1,7 @@
 import { AvailableTraxionTemplates } from '../../schematics.constants';
 
 export interface TraxionWorkspaceGeneratorSchema {
+  createApps: boolean;
   useConfigs: boolean;
   useGitaction: boolean;
   useAllLibraries: boolean;
@@ -9,6 +10,7 @@ export interface TraxionWorkspaceGeneratorSchema {
 }
 
 interface NormalizedOptions extends TraxionWorkspaceGeneratorSchema {
+  createApps: boolean;
   useConfigs: boolean;
   useGitaction: boolean;
   useAllLibraries: boolean;
