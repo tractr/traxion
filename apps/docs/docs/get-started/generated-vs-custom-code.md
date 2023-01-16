@@ -57,4 +57,4 @@ libs/nestjs/models-rest
 
 # Examples
 
-The [following tutorial](/docs/how-to/nestjs/extend-generated-controller) shows how to extend a generated controller.
+The [following tutorial](/docs/how-to/nestjs/extend-a-generated-controller) shows how to extend a generated controller.

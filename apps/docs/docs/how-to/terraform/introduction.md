@@ -36,12 +36,6 @@ It is this [CDKtf](https://learn.hashicorp.com/tutorials/terraform/cdktf-build?i
 
 Currently, only [AWS](https://aws.amazon.com/) is supported as a cloud provider.
 
-:::info Learn more
-
-To learn more about the AWS infrastructure created by Terraform, see [the infrastructure documentation](/docs/how-to/infrastructure)
-
-:::
-
 ## Code architecture
 
 Basically, within Traxion, Terraform is a NodeJs application.
