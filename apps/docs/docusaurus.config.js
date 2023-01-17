@@ -44,7 +44,7 @@ module.exports = {
             },
             {
               label: 'Contribute',
-              to: '/docs/contribution/code-guidelines',
+              to: '/docs/contribution/documentation-guidelines',
             },
           ],
         },
