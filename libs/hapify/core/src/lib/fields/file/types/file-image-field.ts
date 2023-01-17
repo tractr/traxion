@@ -1,7 +1,6 @@
-import { Field } from '../field';
-import { FileField } from './file-field';
+import { BaseFileField } from '../base-file-field';
 
-export class FileImageField extends FileField {
+export class FileImageField extends BaseFileField {
   /**
    * Max width of the image
    */
@@ -81,11 +80,4 @@ export class FileImageField extends FileField {
   get minHeight(): number | undefined {
     return this._minHeight;
   }
-}
-
-/**
- * Checks if a field is an image file field
- */
-export function isImage(field: Field): field is FileImageField {
-  return field instanceof FileImageField;
 }
