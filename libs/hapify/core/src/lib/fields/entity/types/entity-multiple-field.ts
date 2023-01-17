@@ -1,6 +1,6 @@
-import { EntityField } from './entity-field';
+import { BaseEntityField } from '../base-entity-field';
 
-export abstract class EntityMultipleField extends EntityField {
+export abstract class EntityMultipleField extends BaseEntityField {
   /**
    * Limit the number of relations
    */
