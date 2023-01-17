@@ -1,1 +1,1 @@
-export * from './enum-field';
+export * from './base-enum-field';
