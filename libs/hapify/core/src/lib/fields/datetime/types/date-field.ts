@@ -1,4 +1,4 @@
-import { Field } from '../field';
+import { Field } from '../../field';
 
 export class DateField extends Field {
   /**
@@ -60,11 +60,4 @@ export class DateField extends Field {
   get withTime(): boolean {
     return this._withTime;
   }
-}
-
-/**
- * Checks if a field is a date field
- */
-export function isDate(field: Field): field is DateField {
-  return field instanceof DateField;
 }
