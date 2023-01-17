@@ -1,27 +1,29 @@
-export async function fetchAppConfigJson<T>(
+export async function fetchAppConfigJson<Input, Output>(
   url = '/assets/app-config.json',
-  getConfig = (config: T) => config as unknown as T,
+  getConfig = (config: Input) => config as unknown as Output,
 ) {
   const response = await fetch(url);
   const config = await response.json();
 
-  return getConfig(config as T);
+  return getConfig(config as Input);
 }
 
-export interface BootstrapAppWithConfigOptions<T> {
+export interface BootstrapAppWithConfigOptions<Input, Output> {
   appConfigUrl?: string;
   sessionStorageKey: string;
   ignoreStorage?: boolean;
-  getConfig?: (clientConfig: T) => T;
+  getConfig?: (clientConfig: Input) => Output;
 }
 
-export async function fetchConfiguration<T>(
-  options: BootstrapAppWithConfigOptions<T>,
-): Promise<T> {
+export async function fetchConfiguration<Intput, Output>(
+  options: BootstrapAppWithConfigOptions<Intput, Output>,
+): Promise<Output> {
   let config;
 
   if (options?.ignoreStorage) {
-    const fetchedConfig: T = await fetchAppConfigJson(options?.appConfigUrl);
+    const fetchedConfig: Intput = await fetchAppConfigJson(
+      options?.appConfigUrl,
+    );
     config = options?.getConfig
       ? options.getConfig(fetchedConfig)
       : fetchedConfig;
@@ -38,7 +40,9 @@ export async function fetchConfiguration<T>(
     }
 
     if (typeof config === 'undefined') {
-      const fetchedConfig: T = await fetchAppConfigJson(options?.appConfigUrl);
+      const fetchedConfig: Intput = await fetchAppConfigJson(
+        options?.appConfigUrl,
+      );
       config = options?.getConfig
         ? options.getConfig(fetchedConfig)
         : fetchedConfig;

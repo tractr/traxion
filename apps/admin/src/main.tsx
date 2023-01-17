@@ -3,13 +3,13 @@ import { createRoot } from 'react-dom/client';
 
 import { App } from './app/app';
 import { getConfig } from './environments/environment';
-import { AppConfig } from './interfaces';
+import { AdminEnv, AppConfig } from './interfaces';
 
 import { fetchConfiguration } from '@trxn/client-config';
 
 const ADMIN_CONFIGURATION_SESSION_STORAGE = 'ADMIN_CONFIGURATION';
 
-fetchConfiguration<AppConfig>({
+fetchConfiguration<AppConfig, AdminEnv>({
   sessionStorageKey: ADMIN_CONFIGURATION_SESSION_STORAGE,
   getConfig,
 })
