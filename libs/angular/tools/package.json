@@ -1,6 +1,6 @@
 {
   "name": "@trxn/angular-tools",
-  "version": "1.65.10",
+  "version": "1.65.11-beta.0",
   "description": "Tools for angular application",
   "repository": {
     "type": "git",

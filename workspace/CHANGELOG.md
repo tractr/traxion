@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.11-beta.0](https://github.com/tractr/traxion/compare/v1.65.10...v1.65.11-beta.0) (2023-01-17)
+
+
+### Bug Fixes
+
+* update schematics to reflect how the new organisation is using nx and the packages ([181eff9](https://github.com/tractr/traxion/commit/181eff955227d77da3a8afe2255d3b5a92671c2e))
+
+
+
 ## [1.65.10](https://github.com/tractr/traxion/compare/v1.65.9...v1.65.10) (2023-01-17)
 
 
