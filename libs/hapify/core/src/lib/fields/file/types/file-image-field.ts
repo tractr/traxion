@@ -1,6 +1,9 @@
 import { BaseFileField } from '../base-file-field';
 
 export class FileImageField extends BaseFileField {
+  readonly type = 'file' as const;
+  readonly subType = 'image' as const;
+
   /**
    * Max width of the image
    */

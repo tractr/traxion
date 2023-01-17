@@ -1,6 +1,9 @@
 import { BaseStringField } from '../base-string-field';
 
 export class StringRichField extends BaseStringField {
+  readonly type = 'string' as const;
+  readonly subType = 'rich' as const;
+
   /**
    * List of layout types allowed:
    *  "h1", "h2", "h3", "p", "blockquote", "pre", "ul", "ol", "li", etc.

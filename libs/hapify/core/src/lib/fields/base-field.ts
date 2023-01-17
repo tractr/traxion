@@ -5,6 +5,9 @@ import { Node } from '../node';
  * Abstract class for a field of a model
  */
 export abstract class BaseField extends Node implements FieldProperties {
+  abstract readonly type: string;
+  abstract readonly subType: string;
+
   protected _primary = false;
   protected _unique = false;
   protected _label = false;

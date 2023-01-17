@@ -1,6 +1,9 @@
 import { BaseFileField } from '../base-file-field';
 
 export class FileAudioField extends BaseFileField {
+  readonly type = 'file' as const;
+  readonly subType = 'audio' as const;
+
   /**
    * Min bitrate in kbps
    */
