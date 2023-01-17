@@ -1,7 +1,11 @@
-import { Global, Module } from '@nestjs/common';
+import { DynamicModule, Global, Module } from '@nestjs/common';
 
-import { PRISMA_OPTIONS } from './config';
-import { PRISMA_MODULE_OPTIONS } from './constants';
+import {
+  ASYNC_OPTIONS_TYPE,
+  ConfigurableModuleClass,
+  MODULE_OPTIONS_TOKEN,
+  OPTIONS_TYPE,
+} from './database.module-definition';
 import {
   DatabaseService,
   MysqlService,
@@ -9,7 +13,7 @@ import {
   PrismaClientOptions,
 } from './services';
 
-import { LoggerModule, ModuleOptionsFactory } from '@trxn/nestjs-core';
+import { LoggerModule } from '@trxn/nestjs-core';
 
 @Global()
 @Module({
@@ -17,7 +21,31 @@ import { LoggerModule, ModuleOptionsFactory } from '@trxn/nestjs-core';
   providers: [DatabaseService, MysqlService, PostgresqlService],
   exports: [DatabaseService, MysqlService, PostgresqlService],
 })
-export class DatabaseModule extends ModuleOptionsFactory<PrismaClientOptions>(
-  PRISMA_MODULE_OPTIONS,
-  PRISMA_OPTIONS,
-) {}
+export class DatabaseModule extends ConfigurableModuleClass {
+  static createModule(module: DynamicModule): DynamicModule {
+    // When https://github.com/nestjs/jwt/pull/1065 is merged, this can be simplified to:
+    // Should remove this moduleOptions variables
+    const moduleOptions = {
+      ...module,
+      module: ConfigurableModuleClass,
+      exports: module.providers,
+    };
+
+    return {
+      ...module,
+      imports: [...(module.imports || [])],
+      exports: [...(module.exports || [])],
+      controllers: [...(module.controllers || [])],
+    };
+  }
+
+  static register(options: typeof OPTIONS_TYPE): DynamicModule {
+    const databaseOptionsModule = super.register(options);
+    return this.createModule(databaseOptionsModule);
+  }
+
+  static registerAsync(options: typeof ASYNC_OPTIONS_TYPE): DynamicModule {
+    const databaseOptionsModule = super.registerAsync(options);
+    return this.createModule(databaseOptionsModule);
+  }
+}
