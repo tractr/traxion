@@ -1,6 +1,6 @@
-import { Field } from '../../field';
+import { BaseField } from '../../base-field';
 
-export class BooleanField extends Field {
+export class BooleanField extends BaseField {
   protected _defaultValue: boolean | undefined;
 
   /**

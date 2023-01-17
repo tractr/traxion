@@ -1,6 +1,6 @@
-import { Field } from '../../field';
+import { BaseField } from '../../base-field';
 
-export class DateField extends Field {
+export class DateField extends BaseField {
   /**
    * Min possible value of the field
    */

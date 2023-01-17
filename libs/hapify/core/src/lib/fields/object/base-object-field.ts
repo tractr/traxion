@@ -1,6 +1,6 @@
-import { Field } from '../field';
+import { BaseField } from '../base-field';
 
-export abstract class BaseObjectField extends Field {
+export abstract class BaseObjectField extends BaseField {
   protected _defaultValue: Record<string, unknown> | undefined;
 
   /**

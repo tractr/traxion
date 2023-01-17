@@ -1,6 +1,6 @@
-import { Field } from '../field';
+import { BaseField } from '../base-field';
 
-export abstract class BaseNumberField extends Field {
+export abstract class BaseNumberField extends BaseField {
   /**
    * Min possible value of the field
    */
