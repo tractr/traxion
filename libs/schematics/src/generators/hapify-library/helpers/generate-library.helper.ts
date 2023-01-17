@@ -7,7 +7,6 @@ import { libraryGenerator as reactLibraryGenerator } from '@nrwl/react';
 // We need to import this file to get the @schematics/angular package as a
 // dependency of the schematics package
 import '@schematics/angular/application/index';
-import { getLogger } from '../../../helpers';
 import { NormalizedOptions } from '../schema';
 import { cleanAngularLibrary } from './clean-angular-library.helper';
 import { cleanNestLibrary } from './clean-nest-library.helper';

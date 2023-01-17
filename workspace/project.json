@@ -2,6 +2,16 @@
   "$schema": "../node_modules/nx/schemas/project-schema.json",
   "root": "workspace",
   "targets": {
+    "prerelease": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "commitMessageFormat": "chore(prerelease): prerelease version ${version}",
+        "postTargets": ["workspace:publish"],
+        "preid": "beta",
+        "releaseAs": "prerelease",
+        "syncVersions": true
+      }
+    },
     "publish": {
       "executor": "nx:run-commands",
       "options": {

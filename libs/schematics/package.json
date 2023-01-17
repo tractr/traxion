@@ -7,7 +7,7 @@
   },
   "main": "src/index.js",
   "peerDependencies": {
-    "@nrwl/cli": "^14.0.0"
+    "@nrwl/cli": "^14.0.0 || ^15.0.0"
   },
   "publishConfig": {
     "access": "public",
