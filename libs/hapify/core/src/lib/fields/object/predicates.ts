@@ -1,17 +1,9 @@
 import { Field } from '../field';
-import { ObjectField } from './object-field';
-import { ObjectBasicField } from './types';
+import { ObjectField } from './types';
 
 /**
- * Checks if a field is a basic object field
- */
-export function isBasicObject(field: Field): field is ObjectBasicField {
-  return field instanceof ObjectBasicField;
-}
-
-/**
- * Test every object field type
+ * Checks if a field is an object field
  */
 export function isObject(field: Field): field is ObjectField {
-  return isBasicObject(field);
+  return field instanceof ObjectField;
 }

@@ -1,1 +1,1 @@
-export * from './object-basic-field';
+export * from './object-field';
