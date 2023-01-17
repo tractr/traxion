@@ -1,8 +1,8 @@
-import { StringVariations } from '../../interfaces';
-import { stringVariants } from '../../utils';
-import { BaseField } from '../base-field';
+import { StringVariations } from '../../../interfaces';
+import { stringVariants } from '../../../utils';
+import { BaseField } from '../../base-field';
 
-export abstract class BaseEnumField extends BaseField {
+export abstract class EnumField extends BaseField {
   protected _defaultValue: string | undefined;
 
   protected _values = new Map<string, StringVariations>();
