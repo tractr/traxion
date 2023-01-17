@@ -1,6 +1,6 @@
 import { Field } from '../field';
 
-export class BaseFileField extends Field {
+export abstract class BaseFileField extends Field {
   /**
    * Max size of the file
    */
