@@ -1,4 +1,4 @@
-import { Field } from '../field';
+import { Field } from '../../field';
 
 export class BooleanField extends Field {
   protected _defaultValue: boolean | undefined;
@@ -17,11 +17,4 @@ export class BooleanField extends Field {
   get defaultValue(): boolean | undefined {
     return this._defaultValue;
   }
-}
-
-/**
- * Checks if a field is a boolean field
- */
-export function isBoolean(field: Field): field is BooleanField {
-  return field instanceof BooleanField;
 }
