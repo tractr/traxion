@@ -1,7 +1,7 @@
 import type { Model } from '../../model';
-import { Field } from '../field';
+import { BaseField } from '../base-field';
 
-export abstract class BaseEntityField extends Field {
+export abstract class BaseEntityField extends BaseField {
   constructor(name: string, protected _model: Model) {
     super(name);
   }

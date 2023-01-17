@@ -1,14 +1,12 @@
 import {
   BooleanField,
   isNumber,
-  isOwnership,
   isPassword,
-  isPrimary,
   isString,
-  NumberField,
+  NumberBasicField,
   NumberIntegerField,
+  StringBasicField,
   StringEmailField,
-  StringField,
   StringPasswordField,
   StringTextField,
 } from './fields';
@@ -16,7 +14,7 @@ import { Model } from './model';
 import { and, not, or } from './operators';
 import { Root } from './root';
 
-const idField = new NumberField('Id')
+const idField = new NumberBasicField('Id')
   .setPrimary(true)
   .setInternal(true)
   .setOwnership(true);
@@ -24,8 +22,8 @@ const idField = new NumberField('Id')
 const root = new Root('app').addModel(
   new Model('User')
     .addField(idField)
-    .addField(new StringField('FirstName').setMaxLength(50))
-    .addField(new StringField('LastName').setMaxLength(50))
+    .addField(new StringBasicField('FirstName').setMaxLength(50))
+    .addField(new StringBasicField('LastName').setMaxLength(50))
     .addField(new StringEmailField('Email'))
     .addField(
       new StringPasswordField('Password')
@@ -54,6 +52,6 @@ ${root.models[0].fields
 `;
 
 const field = root.models[0].fields[0];
-if (and(isString, isPrimary, isOwnership)(field)) {
+if (isString(field)) {
   // field is a string field, primary and ownership
 }
