@@ -10,7 +10,7 @@ import {
   OPTIONS_TYPE,
 } from './authentication.module-definition';
 import { LoginController } from './controllers';
-import { UnAuthorizedExceptionFilter } from './filters';
+import { UnauthorizedExceptionFilter } from './filters';
 import { AuthenticationModuleOptions } from './interfaces';
 import {
   AuthenticationService,
@@ -77,7 +77,7 @@ export class AuthenticationModule extends ConfigurableModuleClass {
         UserAuthenticationService,
         {
           provide: APP_FILTER,
-          useClass: UnAuthorizedExceptionFilter,
+          useClass: UnauthorizedExceptionFilter,
         },
       ],
       controllers: [LoginController],
