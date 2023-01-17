@@ -1,22 +1,12 @@
-import type { Model } from '../../model';
-import { Field } from '../field';
+import {
+  EntityManyToManyField,
+  EntityManyToOneField,
+  EntityOneToManyField,
+  EntityOneToOneField,
+} from './types';
 
-export abstract class EntityField extends Field {
-  constructor(name: string, protected _model: Model) {
-    super(name);
-  }
-
-  /**
-   * The model to which the field is linked
-   */
-  get model(): Model {
-    return this._model;
-  }
-}
-
-/**
- * Checks if a field is an entity field
- */
-export function isEntity(field: Field): field is EntityField {
-  return field instanceof EntityField;
-}
+export type EntityField =
+  | EntityOneToOneField
+  | EntityManyToOneField
+  | EntityOneToManyField
+  | EntityManyToManyField;
