@@ -1,7 +1,6 @@
-import { Field } from '../field';
-import { StringField } from './string-field';
+import { BaseStringField } from '../base-string-field';
 
-export class StringPasswordField extends StringField {
+export class StringPasswordField extends BaseStringField {
   protected _validationRegex: string | undefined;
 
   /**
@@ -18,11 +17,4 @@ export class StringPasswordField extends StringField {
   get validationRegex(): string | undefined {
     return this._validationRegex;
   }
-}
-
-/**
- * Checks if a field is a string password field
- */
-export function isPassword(field: Field): field is StringPasswordField {
-  return field instanceof StringPasswordField;
 }
