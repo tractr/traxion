@@ -1,6 +1,9 @@
 import { BaseNumberField } from '../base-number-field';
 
 export class NumberLongitudeField extends BaseNumberField {
+  readonly type = 'number' as const;
+  readonly subType = 'longitude' as const;
+
   protected _min = -180;
 
   protected _max = 180;

@@ -3,6 +3,9 @@ import { stringVariants } from '../../../utils';
 import { BaseField } from '../../base-field';
 
 export abstract class EnumField extends BaseField {
+  readonly type = 'enum' as const;
+  readonly subType = 'basic' as const;
+
   protected _defaultValue: string | undefined;
 
   protected _values = new Map<string, StringVariations>();
