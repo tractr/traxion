@@ -1,6 +1,6 @@
-import { Field } from '../field';
+import { BaseField } from '../base-field';
 
-export abstract class BaseStringField extends Field {
+export abstract class BaseStringField extends BaseField {
   /**
    * Default value of the string
    */
