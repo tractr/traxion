@@ -1,7 +1,6 @@
-import { Field } from '../field';
-import { FileField } from './file-field';
+import { BaseFileField } from '../base-file-field';
 
-export class FileAudioField extends FileField {
+export class FileAudioField extends BaseFileField {
   /**
    * Min bitrate in kbps
    */
@@ -41,11 +40,4 @@ export class FileAudioField extends FileField {
   get maxBitrate(): number | undefined {
     return this._maxBitrate;
   }
-}
-
-/**
- * Checks if a field is an audio file field
- */
-export function isAudio(field: Field): field is FileAudioField {
-  return field instanceof FileAudioField;
 }

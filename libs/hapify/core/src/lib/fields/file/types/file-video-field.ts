@@ -1,7 +1,6 @@
-import { Field } from '../field';
-import { FileField } from './file-field';
+import { BaseFileField } from '../base-file-field';
 
-export class FileVideoField extends FileField {
+export class FileVideoField extends BaseFileField {
   /**
    * Min bitrate in kbps
    */
@@ -121,11 +120,4 @@ export class FileVideoField extends FileField {
   get minHeight(): number | undefined {
     return this._minHeight;
   }
-}
-
-/**
- * Checks if a field is a video file field
- */
-export function isVideo(field: Field): field is FileVideoField {
-  return field instanceof FileVideoField;
 }
