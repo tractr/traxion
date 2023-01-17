@@ -1,6 +1,9 @@
 import { BaseField } from '../../base-field';
 
 export class DateField extends BaseField {
+  readonly type = 'date' as const;
+  readonly subType = 'basic' as const;
+
   /**
    * Min possible value of the field
    */

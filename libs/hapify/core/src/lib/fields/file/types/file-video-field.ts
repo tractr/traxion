@@ -1,6 +1,9 @@
 import { BaseFileField } from '../base-file-field';
 
 export class FileVideoField extends BaseFileField {
+  readonly type = 'file' as const;
+  readonly subType = 'video' as const;
+
   /**
    * Min bitrate in kbps
    */

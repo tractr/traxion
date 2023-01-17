@@ -11,38 +11,33 @@ import {
  * Checks if a field is an entity many-to-many field
  */
 export function isManyToMany(field: Field): field is EntityManyToManyField {
-  return field instanceof EntityManyToManyField;
+  return field.type === 'entity' && field.subType === 'manyToMany';
 }
 
 /**
  * Checks if a field is an entity many-to-one field
  */
 export function isManyToOne(field: Field): field is EntityManyToOneField {
-  return field instanceof EntityManyToOneField;
+  return field.type === 'entity' && field.subType === 'manyToOne';
 }
 
 /**
  * Checks if a field is an entity one-to-many field
  */
 export function isOneToMany(field: Field): field is EntityOneToManyField {
-  return field instanceof EntityOneToManyField;
+  return field.type === 'entity' && field.subType === 'oneToMany';
 }
 
 /**
  * Checks if a field is an entity one-to-one field
  */
 export function isOneToOne(field: Field): field is EntityOneToOneField {
-  return field instanceof EntityOneToOneField;
+  return field.type === 'entity' && field.subType === 'oneToOne';
 }
 
 /**
  * Test every entity field type
  */
 export function isEntity(field: Field): field is EntityField {
-  return (
-    isOneToOne(field) ||
-    isManyToOne(field) ||
-    isOneToMany(field) ||
-    isManyToMany(field)
-  );
+  return field.type === 'entity';
 }
