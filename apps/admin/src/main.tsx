@@ -9,7 +9,7 @@ import { fetchConfiguration } from '@trxn/client-config';
 
 const ADMIN_CONFIGURATION_SESSION_STORAGE = 'ADMIN_CONFIGURATION';
 
-fetchConfiguration<AppConfig, AdminEnv>({
+fetchConfiguration<AdminEnv, AppConfig>({
   sessionStorageKey: ADMIN_CONFIGURATION_SESSION_STORAGE,
   getConfig,
 })
