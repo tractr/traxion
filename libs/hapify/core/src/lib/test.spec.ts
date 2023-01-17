@@ -52,6 +52,6 @@ ${root.models[0].fields
 `;
 
 const field = root.models[0].fields[0];
-if (isString(field)) {
+if (and(not(isPassword))(field)) {
   // field is a string field, primary and ownership
 }
