@@ -5,10 +5,10 @@
     "prerelease": {
       "executor": "@jscutlery/semver:version",
       "options": {
-        "commitMessageFormat": "chore(prerelease): prerelease version ${version}",
+        "commitMessageFormat": "chore(prerelease): prerelease next version ${version}",
         "noVerify": true,
-        "postTargets": ["workspace:publish-beta"],
-        "preid": "beta",
+        "postTargets": ["workspace:publish-next"],
+        "preid": "next",
         "releaseAs": "prerelease",
         "syncVersions": true
       }
@@ -19,10 +19,10 @@
         "command": "nx run-many --target=publish --all --exclude=workspace"
       }
     },
-    "publish-beta": {
+    "publish-next": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nx run-many --target=publish --all --exclude=workspace --tag=beta"
+        "command": "nx run-many --target=publish --all --exclude=workspace --tag=next"
       }
     },
     "release": {
