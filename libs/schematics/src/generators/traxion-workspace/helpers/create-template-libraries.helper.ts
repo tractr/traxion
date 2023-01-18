@@ -14,6 +14,7 @@ export async function createTemplateLibraries(
     if (libraryName === 'prisma') {
       await prismaLibraryGenerator(tree, {
         name: libraryName,
+        skipInstall: true,
       });
     } else {
       await hapifyLibraryGenerator(tree, {
@@ -24,6 +25,7 @@ export async function createTemplateLibraries(
         hapifyTemplate: libraryName,
         type: DEFAULT_LIBRARY_TYPE[libraryName],
         hapifyUseImportReplacements: true,
+        skipInstall: true,
       });
     }
   }

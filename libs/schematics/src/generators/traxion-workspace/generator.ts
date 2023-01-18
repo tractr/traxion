@@ -24,7 +24,7 @@ export default async function traxionWorkspaceGenerator(
   const { createApps, useConfigs, useGitaction } = normalizedOptions;
 
   log.info('Update workspace configuration');
-  await initWorkspaceGenerator(tree);
+  await initWorkspaceGenerator(tree, { skipInstall: true });
 
   if (useConfigs) {
     log.info('Initializing linter');
