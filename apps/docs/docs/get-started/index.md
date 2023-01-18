@@ -4,65 +4,25 @@ title: Get started
 sidebar_label: Get started
 ---
 
-## Pre-requisites
+## Configuring Traxion
 
-Traxion is based on NX and its CLI. You need this `nx` CLI to be installed globally before starting.
+Traxion is a tool that allows you to generate a lot of code based on your modeling. This guide will show you how to set up Traxion in an Nx@14 workspace.
 
-```shell
-npm install -g nx
-```
+## Prerequisites
 
-## Create the workspace
+- [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your computer.
+- Basic knowledge of command line commands.
+- Familiarity with [Nest.js](https://nestjs.com/), [Prisma](https://www.prisma.io/) and [Angular](https://angular.io/) is recommended, as Traxion is built on top of it.
 
-### Create a new NX Workspace
+## Installation
 
-```shell
-npx create-nx-workspace my-project --preset apps --nxCloud false
-```
+To create a new Nx@14 workspace and install Traxion, run the following commands:
 
-:::note
-
-This command will create a new NX Workspace with the following architecture :
-
-```text
-my-project
-├── .editorconfig
-├── .gitignore
-├── .prettierignore
-├── .prettierrc
-├── .vscode
-│   └── extensions.json
-├── README.md
-├── apps
-│   └── .gitkeep
-├── libs
-│   └── .gitkeep
-├── nx.json
-├── package-lock.json
-├── package.json
-├── tools
-│   ├── generators
-│   │   └── .gitkeep
-│   └── tsconfig.tools.json
-├── tsconfig.base.json
-└── workspace.json
-```
-
-:::
-
-### Install Traxion's schematics
-
-Browse to the new folder :
-
-```shell
-cd my-project
-```
-
-Then, install the Traxion's schematics package:
-
-```shell
-npm install --save-dev @tractr/schematics
-```
+```bash
+npx create-nx-workspace@14 my-workspace
+cd my-workspace
+npm install --save-dev @trxn/schematics
+````
 
 :::info
 
@@ -70,13 +30,15 @@ This package hosts all schematics used to setup Traxion in an NX Workspace.
 
 :::
 
-### Initialise the workspace
+## Generating a Traxion workspace
 
-Run the `init-workspace` schematic :
+To generate a Traxion workspace, run the following command:
 
-```shell
-nx generate @tractr/schematics:init-workspace
+```bash
+nx generate @trxn/schematics:traxion-workspace
 ```
+
+This command will create the necessary files and folders for a Traxion workspace.
 
 :::info
 
@@ -84,83 +46,16 @@ To get more information about this schematic, please refer to [this page](/docs/
 
 :::
 
-## Configure workspace
+### Templates details
 
-### Configure ESLint
+This schematic installs and configures the following default libraries to provide the following functionalities:
 
-Run the `eslint-config` schematic :
-
-```shell
-nx generate @tractr/schematics:eslint-config
-```
-
-:::info
-
-To get more information about this schematic, please refer to [this page](/docs/references/schematics/eslint-config)
-
-:::
-
-### Configure Prettier
-
-Run the `prettier-config` schematic :
-
-```shell
-nx generate @tractr/schematics:prettier-config
-```
-
-:::info
-
-To get more information about this schematic, please refer to [this page](/docs/references/schematics/prettier-config)
-
-:::
-
-## Setup Hapify and data models
-
-### Install Hapify templates
-
-Generated libraries are based on [Hapify](https://docs.hapify.io/) templates.
-These libraries host the code related to the data models of your projects.
-
-This schematic will install them :
-
-```shell
-nx generate @tractr/schematics:hapify-library --directory generated
-```
-
-Then choose the library to install :
-
-```text
-? Which template your library will host? …
-❯ angular-rext-client
-  casl
-  dbml
-  models
-  nestjs-models
-  nestjs-graphql
-  nestjs-models-common
-  nestjs-models-rest
-  react-admin
-  rest-dtos
-  rext-client
-```
-
-:::warning
-
-You have to run this schematic for each library.
-
-:::
-
-#### Templates details
-
-Here is the functionality of each of these libraries:
-
-- `rext-client` and `angular-rext-client`: Provides an HTTP client and its angular wrapper, built with RxJS, for Create, Read, Update, Delete, Find & Count routes for each template.
-- `models`: TypeScript classes that represent the data models.
-- `casl`: Manages access to data models on the server-side.
-- `nestjs-models`, `nestjs-models-common`, `nestjs-models-rest` and `nestjs-graphql`: NestJS models, services, and controllers, for REST and GraphQL.
-- `rest-dtos`: Creates [DTO](https://en.wikipedia.org/wiki/Data_transfer_object) for each data model.
-- `react-admin`: Generates configuration of [ReactAdmin](https://marmelab.com/react-admin/), based on data models.
-- `dbml`: Generates a description of the data models in [DBML](https://www.dbml.org/), so you can use it with other tools.
+- `rext-client` and `angular-rext-client`: These libraries enable the creation, reading, updating, deleting, finding, and counting of routes for each template using an HTTP client and its Angular wrapper built with RxJS.
+- `models`: These TypeScript classes represent the data models.
+- `casl`: This library controls access to data models on the server-side.
+- `nestjs-models`, `nestjs-models-common`, `nestjs-models-rest`, and `nestjs-graphql`: These NestJS models, services, and controllers support both REST and GraphQL.
+- `rest-dtos`: This library generates [DTO](https://en.wikipedia.org/wiki/Data_transfer_object) for each data model.
+- `react-admin`: This library generates the configuration of [ReactAdmin](https://marmelab.com/react-admin/) based on the data models.
 
 :::info
 
@@ -168,120 +63,38 @@ To get more information about this schematic, please refer to [this page](/docs/
 
 :::
 
-### Generate the libraries
+## Installing dependencies
 
-Use the following command to generate the code based on the data models and the templates added before:
+To install the necessary dependencies, run the following command:
 
-```shell
+```bash
+npm install
+```
+
+Note that using the --force option may be necessary for version 14
+
+## Generating code
+
+To generate the code, run the following command:
+
+```bash
 npm run generate
 ```
 
-:::note
+## Running the modeling GUI
 
-This command has been added to the `package.json` by the previous schematics
+To open the modeling GUI, run the following command:
 
-:::
-
-### Browse and edit data models
-
-To open the [Hapify GUI](https://docs.hapify.io/getting-started/existing-boilerplate/step-2-edit-models/), run this command:
-
-```shell
-npm run hpf:serve
+```bash
+npm run hpf
 ```
 
-:::note
+This command will open the modeling GUI on localhost:4200, where you can update your modeling.
 
-After editing the models, you need to run `npm run generate` in order to regenerate the code
+## Updating the code
 
-:::
+To update the code, repeat steps npm run generate.
 
-## Generate the applications
+Note: These steps may vary slightly depending on the configuration of your project and your needs. Be sure to consult the documentation of each tool used for more detailed information.
 
-### Generate the API application
-
-This will create a server based on NestJS.
-
-```shell
-nx generate @tractr/schematics:api-app
-```
-
-For example, use this option:
-
-```text
-✔ What name would you like to use? · api
-```
-
-### Generate the PWA application
-
-This is the front-end for end-users.
-
-```shell
-nx generate @tractr/schematics:pwa-app
-```
-
-For example, use this option:
-
-```text
-✔ What name would you like to use? · pwa
-```
-
-### Generate the Admin application
-
-This is the front-end for super-admins.
-
-```shell
-nx generate @tractr/schematics:admin-app
-```
-
-Use the following options. Replace `my-project` by the project name.
-
-```text
-✔ What name would you like to use? · admin
-✔ What is the path of the react admin library? · @my-project/generated-react-admin
-✔ What is the path of the rext client library? · @my-rpoject/generated-rext-client
-```
-
-:::info
-
-At this point you have 3 applications ready to be started.
-
-:::
-
-## Start the applications
-
-### Start the database
-
-During the `@tractr/schematics:init-workspace` schematic, a `docker-compose.yml` file and a `.env` file were created.
-
-These files allow to start a `postgres` server using Docker.
-
-```shell
-docker-compose up -d
-```
-
-## Old
-
-Behind the scenes, this previous command will create a new workspace by running the following commands:
-
-- `create-hapify-workpsace` (cli)
-  - `create-nx-workspace` (cli)
-  - `hapify-workspace` (schematics)
-    - `eslint-config` (schematics)
-    - `prettier-config` (schematics)
-    - `github-workflow` (schematics)
-    - (`nestjs-application`) (schematics)
-    - (`angular-application`) (schematics)
-    - (`react-admin-application`) (schematics)
-    - `hapify-library` (schematics)
-    - `prisma-library` (schematics)
-
-:::caution Coming soon
-
-In the future, a single command will perform all these steps:
-
-```shell
-npx create-traxion-workspace
-```
-
-:::
+With these steps, you should have a working Traxion setup in your Nx@14 workspace. You can now use Traxion to generate code based on your modeling. For more information on using Traxion, please
