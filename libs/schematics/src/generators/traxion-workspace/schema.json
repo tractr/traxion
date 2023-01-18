@@ -39,7 +39,6 @@
     }
   },
   "required": [
-    "createApps",
     "useConfigs",
     "useGitaction",
     "useAllLibraries"

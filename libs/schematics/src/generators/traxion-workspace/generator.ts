@@ -40,6 +40,8 @@ export default async function traxionWorkspaceGenerator(
   }
 
   if (createApps) {
+    log.warn('Creating applications is disabled for now');
+
     log.info('Initializing nestjs application');
     await createNestjsApplication(tree, normalizedOptions);
 
