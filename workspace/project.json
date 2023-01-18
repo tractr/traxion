@@ -6,7 +6,8 @@
       "executor": "@jscutlery/semver:version",
       "options": {
         "commitMessageFormat": "chore(prerelease): prerelease version ${version}",
-        "postTargets": [],
+        "noVerify": true,
+        "postTargets": ["workspace:publish-beta"],
         "preid": "beta",
         "releaseAs": "prerelease",
         "syncVersions": true
@@ -18,10 +19,17 @@
         "command": "nx run-many --target=publish --all --exclude=workspace"
       }
     },
+    "publish-beta": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run-many --target=publish --all --exclude=workspace --tag=beta"
+      }
+    },
     "release": {
       "executor": "@jscutlery/semver:version",
       "options": {
         "commitMessageFormat": "chore(release): release version ${version}",
+        "noVerify": true,
         "postTargets": ["workspace:release-notes", "workspace:publish"],
         "syncVersions": true
       }

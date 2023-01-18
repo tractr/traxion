@@ -7,11 +7,12 @@
   },
   "main": "src/index.js",
   "peerDependencies": {
-    "@nrwl/angular": "^14.0.0 || ^15.0.0",
-    "@nrwl/cli": "^14.0.0 || ^15.0.0",
-    "@nrwl/nest": "^14.0.0 || ^15.0.0",
-    "@nrwl/react": "^14.0.0 || ^15.0.0",
-    "@schematics/angular": "^14.0.0 || ^15.0.0"
+    "@angular-devkit/schematics": "^14.0.0",
+    "@nrwl/angular": "^14.0.0",
+    "@nrwl/cli": "^14.0.0",
+    "@nrwl/nest": "^14.0.0",
+    "@nrwl/react": "^14.0.0",
+    "@schematics/angular": "^14.0.0"
   },
   "publishConfig": {
     "access": "public",
