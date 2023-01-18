@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.11-beta.3](https://github.com/tractr/traxion/compare/v1.65.11-beta.2...v1.65.11-beta.3) (2023-01-18)
+
+
+### Bug Fixes
+
+* skip install during traxion workspace process ([8a2be35](https://github.com/tractr/traxion/commit/8a2be35b4cbdfd2cc8d7c40b2dcd705633701b39))
+
+
+
 ## [1.65.11-beta.2](https://github.com/tractr/traxion/compare/v1.65.11-beta.1...v1.65.11-beta.2) (2023-01-18)
 
 
