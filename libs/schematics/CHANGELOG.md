@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.11-next.0](https://github.com/tractr/traxion/compare/v1.65.11-beta.3...v1.65.11-next.0) (2023-01-18)
+
+
+### Bug Fixes
+
+* rxjs version and logger levels ([a9bbd18](https://github.com/tractr/traxion/commit/a9bbd18ba0771c4f9e3c28681c0e71fb9f18e907))
+
+
+
 ## [1.65.11-beta.3](https://github.com/tractr/traxion/compare/v1.65.11-beta.2...v1.65.11-beta.3) (2023-01-18)
 
 
