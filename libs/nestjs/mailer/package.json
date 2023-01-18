@@ -1,6 +1,6 @@
 {
   "name": "@trxn/nestjs-mailer",
-  "version": "1.65.11-beta.0",
+  "version": "1.65.11-beta.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"

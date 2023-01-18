@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.11-beta.1](https://github.com/tractr/traxion/compare/v1.65.11-beta.0...v1.65.11-beta.1) (2023-01-18)
+
+
+### Bug Fixes
+
+* add missing dependency in schematics package ([17cb952](https://github.com/tractr/traxion/commit/17cb952546b37101fd332d984fc548822deeb862))
+
+
+
 ## [1.65.11-beta.0](https://github.com/tractr/traxion/compare/v1.65.10...v1.65.11-beta.0) (2023-01-17)
 
 
