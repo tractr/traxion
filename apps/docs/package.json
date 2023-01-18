@@ -1,6 +1,6 @@
 {
   "name": "@trxn/traxion-api",
-  "version": "1.65.11-beta.1",
+  "version": "1.65.11-beta.2",
   "dependencies": {
     "@docusaurus/core": "^2.2.0",
     "@docusaurus/mdx-loader": "^2.2.0",

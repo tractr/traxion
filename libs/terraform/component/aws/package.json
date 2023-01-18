@@ -1,6 +1,6 @@
 {
   "name": "@trxn/terraform-component-aws",
-  "version": "1.65.11-beta.1",
+  "version": "1.65.11-beta.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"
