@@ -1,6 +1,6 @@
 {
   "name": "@trxn/generated-angular-rext-client",
-  "version": "1.65.11-next.0",
+  "version": "1.65.11",
   "dependencies": {
     "tslib": "^2.3.1"
   },

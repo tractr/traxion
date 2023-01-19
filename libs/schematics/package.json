@@ -1,6 +1,6 @@
 {
   "name": "@trxn/schematics",
-  "version": "1.65.11-next.0",
+  "version": "1.65.11",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"
