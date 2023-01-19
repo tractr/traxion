@@ -8,11 +8,11 @@ import {
 
 export const ANGULAR_CONFIGURATION_SESSION_STORAGE = 'ANGULAR_CONFIGURATION';
 
-export async function bootstrapAppWithConfig<AngularConfigEnv, AngularConfig>(
+export async function bootstrapAppWithConfig<AngularConfig>(
   AppModule: Type<unknown>,
-  options: BootstrapAppWithConfigOptions<AngularConfigEnv, AngularConfig>,
+  options: BootstrapAppWithConfigOptions<AngularConfig>,
 ) {
-  const config = await fetchConfiguration<AngularConfigEnv, AngularConfig>({
+  const config = await fetchConfiguration({
     ...options,
   });
 

@@ -1,36 +1,32 @@
-export async function fetchAppConfigJson<Input, Output>(
+export async function fetchAppConfigJson<Output = unknown>(
   url = '/assets/app-config.json',
-  getConfig = (config: Input) => config as unknown as Output,
-) {
+  getConfig = (config: unknown) => config as Output,
+): Promise<Output> {
   const response = await fetch(url);
-  const config = await response.json();
+  const config: unknown = await response.json();
 
-  return getConfig(config as Input);
+  return getConfig(config);
 }
 
-export interface BootstrapAppWithConfigOptions<Input, Output> {
+export interface BootstrapAppWithConfigOptions<Output = unknown> {
   appConfigUrl?: string;
   sessionStorageKey: string;
   ignoreStorage?: boolean;
-  getConfig?: (clientConfig: Input) => Output;
+  getConfig?: (clientConfig: unknown) => Output;
 }
 
-export async function fetchConfiguration<Intput, Output>(
-  options: BootstrapAppWithConfigOptions<Intput, Output>,
-): Promise<Output> {
-  let config;
+export async function fetchConfiguration<Output>({
+  sessionStorageKey,
+  appConfigUrl,
+  getConfig,
+  ignoreStorage,
+}: BootstrapAppWithConfigOptions<Output>): Promise<Output> {
+  let config: Output | undefined;
 
-  if (options?.ignoreStorage) {
-    const fetchedConfig: Intput = await fetchAppConfigJson(
-      options?.appConfigUrl,
-    );
-    config = options?.getConfig
-      ? options.getConfig(fetchedConfig)
-      : fetchedConfig;
+  if (ignoreStorage) {
+    config = await fetchAppConfigJson(appConfigUrl, getConfig);
   } else {
-    const stringifyConfiguration = sessionStorage.getItem(
-      options.sessionStorageKey,
-    );
+    const stringifyConfiguration = sessionStorage.getItem(sessionStorageKey);
 
     if (typeof stringifyConfiguration === 'string') {
       try {
@@ -40,19 +36,14 @@ export async function fetchConfiguration<Intput, Output>(
     }
 
     if (typeof config === 'undefined') {
-      const fetchedConfig: Intput = await fetchAppConfigJson(
-        options?.appConfigUrl,
-      );
-      config = options?.getConfig
-        ? options.getConfig(fetchedConfig)
-        : fetchedConfig;
-
-      sessionStorage.setItem(options.sessionStorageKey, JSON.stringify(config));
+      config = await fetchAppConfigJson(appConfigUrl, getConfig);
+      sessionStorage.setItem(sessionStorageKey, JSON.stringify(config));
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (window as any)[options.sessionStorageKey] = config;
+  if (typeof window !== 'undefined')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (<any>window)[sessionStorageKey] = config;
 
   return config;
 }

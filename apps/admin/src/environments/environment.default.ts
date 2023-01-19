@@ -5,7 +5,7 @@ import { transformAndValidate } from '@trxn/common';
 export const validateEnv = transformAndValidate(AdminEnv);
 export const validateAppConfig = transformAndValidate(AppConfig);
 
-export function getConfig(appConfig: AdminEnv): AppConfig {
+export function getConfig(appConfig: unknown): AppConfig {
   const { API_URL } = validateEnv(appConfig);
 
   return validateAppConfig({

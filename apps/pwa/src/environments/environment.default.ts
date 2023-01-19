@@ -13,7 +13,7 @@ export type AppConfig = {
 
 export const appConfigValidator = transformAndValidate(AngularConfigEnv);
 
-export const getConfig = (appConfig: AngularConfigEnv): AppConfig => {
+export const getConfig = (appConfig: unknown): AppConfig => {
   const config = appConfigValidator(appConfig);
 
   return {
