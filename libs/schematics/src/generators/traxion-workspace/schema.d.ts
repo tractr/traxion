@@ -1,21 +1,24 @@
+import { AvailableTraxionTemplates } from '../../schematics.constants';
+
 export interface TraxionWorkspaceGeneratorSchema {
-  name: string;
-  tags?: string;
-  directory?: string;
-  skipInstall?: boolean;
+  createApps: boolean;
+  useConfigs: boolean;
+  useGitaction: boolean;
+  useAllLibraries: boolean;
+  skipInstall: boolean;
+  skipFormat: boolean;
 }
 
 interface NormalizedOptions extends TraxionWorkspaceGeneratorSchema {
+  librariesToInstall: AvailableTraxionTemplates[];
+
   packageVersion: string;
   npmScope: string;
+
   appsDir: string;
   libsDir: string;
-  generatedDir: string;
-  generatedImportPath: string;
-  adminName: string;
-  apiName: string;
-  pwaName: string;
-  uuid4: string;
-  workspaceName: string;
-  parsedTags: string[];
+
+  // adminName: string;
+  // apiName: string;
+  // pwaName: string;
 }

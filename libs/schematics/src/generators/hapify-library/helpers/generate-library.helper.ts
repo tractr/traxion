@@ -4,6 +4,9 @@ import { Linter } from '@nrwl/linter';
 import { libraryGenerator as nestLibraryGenerator } from '@nrwl/nest';
 import { libraryGenerator as reactLibraryGenerator } from '@nrwl/react';
 
+// We need to import this file to get the @schematics/angular package as a
+// dependency of the schematics package
+import '@schematics/angular/application/index';
 import { NormalizedOptions } from '../schema';
 import { cleanAngularLibrary } from './clean-angular-library.helper';
 import { cleanNestLibrary } from './clean-nest-library.helper';
@@ -12,7 +15,10 @@ import { cleanReactLibrary } from './clean-react-library.helper';
 export async function generateLibrary(tree: Tree, options: NormalizedOptions) {
   // Default values for library generator options
   const { name, directory, extra, type, importPath } = options;
-  const libraryGeneratorDefaultOptions = { buildable: true };
+  const libraryGeneratorDefaultOptions = {
+    buildable: true,
+    standaloneConfig: true,
+  };
   const libraryGeneratorOptions = { name, directory, importPath, ...extra };
 
   // Generate the library

@@ -8,6 +8,8 @@ import {
 } from '../../../helpers';
 import {
   DEFAULT_IMPORT_REPLACEMENTS,
+  DEFAULT_LIBRARY_DIRECTORY,
+  DEFAULT_LIBRARY_ROOT_DIRECTORY,
   DEFAULT_SECONDARY_ENTRY_POINTS,
   DEFAULT_TARGETS_OPTIONS,
 } from '../../../schematics.constants';
@@ -37,8 +39,14 @@ export function normalizeOptions(
 
   const { name, directory, projectDirectory, projectRoot, projectName } =
     getNormalizedProjectDefaultsOptions(tree, {
-      name: rawName || hapifyTemplate,
-      directory: rawDirectory,
+      name:
+        typeof rawName === 'undefined'
+          ? DEFAULT_LIBRARY_DIRECTORY[hapifyTemplate]
+          : rawName,
+      directory:
+        typeof rawDirectory === 'undefined'
+          ? DEFAULT_LIBRARY_ROOT_DIRECTORY[hapifyTemplate]
+          : rawDirectory,
     });
 
   // Format hapify template inputs

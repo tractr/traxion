@@ -4,26 +4,18 @@ import {
   updateProjectConfiguration,
 } from '@nrwl/devkit';
 
+import { DEFAULT_IMPLICIT_DEPENDENCIES } from '../../../schematics.constants';
 import { NormalizedOptions } from '../schema';
 
 export function addImplicitDependencies(
   tree: Tree,
   options: NormalizedOptions,
 ) {
-  const { directory, projectName, hapifyImportReplacements } = options;
+  const { projectName, hapifyTemplate } = options;
   const projectConfiguration = readProjectConfiguration(tree, projectName);
 
   updateProjectConfiguration(tree, projectName, {
     ...projectConfiguration,
-    implicitDependencies: [
-      ...new Set([
-        ...Object.keys(hapifyImportReplacements)
-          .filter((template) => template !== 'mock')
-          .map(
-            (dependency) => `${directory ? `${directory}-` : ''}${dependency}`,
-          ),
-        ...(projectConfiguration?.implicitDependencies || []),
-      ]),
-    ],
+    implicitDependencies: DEFAULT_IMPLICIT_DEPENDENCIES[hapifyTemplate],
   });
 }

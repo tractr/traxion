@@ -13,7 +13,7 @@ and [Terraform](https://www.terraform.io/) with [CDKtf](https://developer.hashic
 
 ## Quick Start
 
-Our documentation is available on [traxion.dev](https://www.traxion.dev/)
+Our documentation is available on [traxion.dev](https://www.traxion.dev/get-started)
 
 We are currently working on improving it.
 

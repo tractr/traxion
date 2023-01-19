@@ -1,6 +1,6 @@
 {
   "name": "@trxn/eslint-config",
-  "version": "1.65.10",
+  "version": "1.65.11-next.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion.git"

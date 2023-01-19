@@ -1,6 +1,6 @@
 {
   "name": "@trxn/hapify-generate-config",
-  "version": "1.65.10",
+  "version": "1.65.11-next.0",
   "description": "Generate hapify config",
   "repository": {
     "type": "git",

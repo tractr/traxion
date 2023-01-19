@@ -4,6 +4,7 @@ export * from './get-import-prefix-path';
 export * from './get-latest-package-version';
 export * from './get-normalized-project-defaults-options';
 export * from './install-packages-task.helper';
+export * from './logger';
 export * from './npm-run';
 export * from './read-target-configuration';
 export * from './update-target-configuration';

@@ -2,6 +2,51 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.11-next.0](https://github.com/tractr/traxion/compare/v1.65.11-beta.3...v1.65.11-next.0) (2023-01-18)
+
+
+### Bug Fixes
+
+* rxjs version and logger levels ([a9bbd18](https://github.com/tractr/traxion/commit/a9bbd18ba0771c4f9e3c28681c0e71fb9f18e907))
+
+
+
+## [1.65.11-beta.3](https://github.com/tractr/traxion/compare/v1.65.11-beta.2...v1.65.11-beta.3) (2023-01-18)
+
+
+### Bug Fixes
+
+* skip install during traxion workspace process ([8a2be35](https://github.com/tractr/traxion/commit/8a2be35b4cbdfd2cc8d7c40b2dcd705633701b39))
+
+
+
+## [1.65.11-beta.2](https://github.com/tractr/traxion/compare/v1.65.11-beta.1...v1.65.11-beta.2) (2023-01-18)
+
+
+### Bug Fixes
+
+* add missing dependency in schematics package ([79e4044](https://github.com/tractr/traxion/commit/79e404475a73026a3a0125f4fdf3f544f509add2))
+
+
+
+## [1.65.11-beta.1](https://github.com/tractr/traxion/compare/v1.65.11-beta.0...v1.65.11-beta.1) (2023-01-18)
+
+
+### Bug Fixes
+
+* add missing dependency in schematics package ([17cb952](https://github.com/tractr/traxion/commit/17cb952546b37101fd332d984fc548822deeb862))
+
+
+
+## [1.65.11-beta.0](https://github.com/tractr/traxion/compare/v1.65.10...v1.65.11-beta.0) (2023-01-17)
+
+
+### Bug Fixes
+
+* update schematics to reflect how the new organisation is using nx and the packages ([181eff9](https://github.com/tractr/traxion/commit/181eff955227d77da3a8afe2255d3b5a92671c2e))
+
+
+
 ## [1.65.10](https://github.com/tractr/traxion/compare/v1.65.9...v1.65.10) (2023-01-17)
 
 

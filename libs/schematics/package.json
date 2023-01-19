@@ -1,11 +1,19 @@
 {
   "name": "@trxn/schematics",
-  "version": "1.65.10",
+  "version": "1.65.11-next.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"
   },
   "main": "src/index.js",
+  "peerDependencies": {
+    "@angular-devkit/schematics": "^14.0.0",
+    "@nrwl/angular": "^14.0.0",
+    "@nrwl/cli": "^14.0.0",
+    "@nrwl/nest": "^14.0.0",
+    "@nrwl/react": "^14.0.0",
+    "@schematics/angular": "^14.0.0"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"

@@ -1,20 +1,6 @@
 import { TargetConfiguration } from '@nrwl/devkit';
 
-export type AvailableTraxionTemplates =
-  | 'angular-rext-client'
-  | 'casl'
-  | 'dbml'
-  | 'models'
-  | 'nestjs-models'
-  | 'nestjs-graphql'
-  | 'nestjs-models-common'
-  | 'nestjs-models-rest'
-  | 'prisma'
-  | 'react-admin'
-  | 'rest-dtos'
-  | 'rext-client';
-
-export type AvailableLibraryType = 'angular' | 'nest' | 'react';
+import { AvailableTraxionTemplates } from '../../schematics.constants';
 
 export interface HapifyLibraryGeneratorOptionsWithExtra
   extends HapifyLibraryGeneratorOptions,
@@ -23,7 +9,7 @@ export interface HapifyLibraryGeneratorOptionsWithExtra
 export interface HapifyLibraryGeneratorOptions {
   name?: string;
   directory?: string;
-  type?: AvailableLibraryType;
+  type?: LibraryType;
   hapifyTemplate: AvailableTraxionTemplates;
   hapifyModelsJson: string;
   hapifyUseImportReplacements: boolean;

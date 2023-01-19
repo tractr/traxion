@@ -1,31 +1,15 @@
-import {
-  getWorkspaceLayout,
-  readWorkspaceConfiguration,
-  Tree,
-  updateJson,
-  updateWorkspaceConfiguration,
-} from '@nrwl/devkit';
+import { addDependenciesToPackageJson, Tree, updateJson } from '@nrwl/devkit';
+import { pick } from 'lodash';
 
-import { addPackageToPackageJson, installPackagesTask } from '../../helpers';
-import { addFiles, addNpmrc } from './helpers';
+import { PACKAGES_VERSIONS } from '../../../packages-versions.constant';
+import { installPackagesTask } from '../../helpers';
+import { addFiles } from './helpers';
 import { InitWorkspaceGeneratorSchema } from './schema';
 
 export default async function initWorkspaceGenerator(
   tree: Tree,
   options: InitWorkspaceGeneratorSchema = {},
 ) {
-  addNpmrc(tree);
-
-  const workspaceConfiguration = readWorkspaceConfiguration(tree);
-
-  updateWorkspaceConfiguration(tree, {
-    ...workspaceConfiguration,
-    workspaceLayout: {
-      appsDir: 'apps',
-      libsDir: 'libs',
-    },
-  });
-
   addFiles(tree);
 
   updateJson(tree, 'package.json', (json) => ({
@@ -42,12 +26,11 @@ export default async function initWorkspaceGenerator(
     },
   }));
 
-  const { libsDir } = getWorkspaceLayout(tree);
-  if (libsDir !== 'packages') tree.delete('packages');
-
-  await addPackageToPackageJson(tree, '@hapify/cli');
-
-  if (tree.exists('tailwind.config.js')) tree.delete('tailwind.config.js');
+  addDependenciesToPackageJson(
+    tree,
+    {},
+    pick(PACKAGES_VERSIONS, '@hapify/cli'),
+  );
 
   const { skipInstall } = options;
   installPackagesTask(tree, { skipInstall });
