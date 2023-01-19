@@ -2,9 +2,7 @@ import { join } from 'path';
 
 import { getWorkspaceLayout, Tree } from '@nrwl/devkit';
 import { prompt } from 'enquirer';
-import { v4 as uuid4 } from 'uuid';
 
-import { getImportPrefixPath } from '../../../helpers';
 import {
   AvailableTraxionTemplates,
   DEFAULT_LIBRARY_DESCRIPTIONS,
@@ -54,6 +52,5 @@ export async function normalizeOptions(
     // adminName: 'admin',
     // apiName: 'api',
     // pwaName: 'pwa',
-    // uuid4: uuid4(),
   };
 }

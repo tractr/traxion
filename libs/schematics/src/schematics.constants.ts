@@ -73,7 +73,7 @@ export const DEFAULT_IMPLICIT_DEPENDENCIES: Record<
   casl: [],
   models: [],
   'nestjs-models': ['nestjs-models-common', 'nestjs-models-rest'],
-  'nestjs-graphql': ['nestjs-models-common'],
+  'nestjs-graphql': ['nestjs-casl'],
   'nestjs-models-common': ['common-models'],
   'nestjs-models-rest': [
     'common-casl',

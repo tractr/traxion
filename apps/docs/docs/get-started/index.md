@@ -89,7 +89,7 @@ To open the modeling GUI, run the following command:
 npm run hpf
 ```
 
-This command will open the modeling GUI on localhost:4200, where you can update your modeling.
+This command will open the modeling GUI on localhost:4800, where you can update your modeling.
 
 ## Updating the code
 

@@ -10,24 +10,15 @@ export interface TraxionWorkspaceGeneratorSchema {
 }
 
 interface NormalizedOptions extends TraxionWorkspaceGeneratorSchema {
-  createApps: boolean;
-  useConfigs: boolean;
-  useGitaction: boolean;
-  useAllLibraries: boolean;
   librariesToInstall: AvailableTraxionTemplates[];
-
-  skipInstall: boolean;
-  skipFormat: boolean;
 
   packageVersion: string;
   npmScope: string;
 
   appsDir: string;
   libsDir: string;
-  // generatedDir: string;
+
   // adminName: string;
   // apiName: string;
   // pwaName: string;
-  // generatedImportPath: string;
-  // uuid4: string;
 }
