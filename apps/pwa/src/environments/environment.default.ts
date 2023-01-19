@@ -14,9 +14,9 @@ export type AppConfig = {
 export const appConfigValidator = transformAndValidate(AngularConfigEnv);
 
 export const getConfig = (appConfig: unknown): AppConfig => {
-  const config = appConfigValidator(appConfig);
+  const { API_URI } = appConfigValidator(appConfig);
 
   return {
-    apiUri: config.API_URI,
+    apiUri: API_URI,
   };
 };
