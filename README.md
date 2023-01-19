@@ -13,8 +13,9 @@ and [Terraform](https://www.terraform.io/) with [CDKtf](https://developer.hashic
 
 ## Quick Start
 
-We are currently working on a getting started guide and a full documentation. We will update this section when it is
-ready.
+Our documentation is available on [traxion.dev](https://www.traxion.dev/)
+
+We are currently working on improving it.
 
 ## Automation
 

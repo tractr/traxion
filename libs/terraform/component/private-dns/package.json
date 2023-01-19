@@ -1,6 +1,6 @@
 {
   "name": "@trxn/terraform-component-private-dns",
-  "version": "1.65.9",
+  "version": "1.65.10",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"

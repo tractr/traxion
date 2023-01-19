@@ -10,7 +10,7 @@ To run the site locally, you'll need to have Node.js and NPM installed. Once you
 nx serve docs
 ```
 
-The site will be available at <http://localhost:5000>.
+The site will be available at <http://127.0.0.1:5000/>.
 
 ## Writing documentation
 
