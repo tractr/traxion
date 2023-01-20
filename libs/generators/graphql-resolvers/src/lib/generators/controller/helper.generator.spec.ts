@@ -1,58 +1,16 @@
 import { DMMF } from '@prisma/generator-helper';
-import {
-  MethodDeclarationStructure,
-  PropertyDeclarationStructure,
-  Scope,
-  StructureKind,
-} from 'ts-morph';
+import { Scope, StructureKind } from 'ts-morph';
 
 import {
   generateCheckUniquenessConstraintMethod,
-  generateControllerClass,
-  generateControllerSourceFile,
   generateCreateMethod,
   generateFindManyMethod,
   generateImports,
   generateStateProperty,
   generateUniqueFieldsProperty,
-} from './controller.generator';
+} from './helpers.generator';
 
-jest.mock('generateCheckUniquenessConstraintMethod');
-jest.mock('generateControllerClass');
-jest.mock('generateControllerSourceFile');
-jest.mock('generateCreateMethod');
-jest.mock('generateFindManyMethod');
-jest.mock('generateImports');
-jest.mock('generateStateProperty');
-jest.mock('generateUniqueFieldsProperty');
-
-const mockGenerateCheckUniquenessConstraintMethod = jest.mocked(
-  generateCheckUniquenessConstraintMethod,
-);
-const mockGenerateControllerClass = jest.mocked(generateControllerClass);
-const mockGenerateControllerSourceFile = jest.mocked(
-  generateControllerSourceFile,
-);
-const mockGenerateCreateMethod = jest.mocked(generateCreateMethod);
-const mockGenerateFindManyMethod = jest.mocked(generateFindManyMethod);
-const mockGenerateImports = jest.mocked(generateImports);
-const mockGenerateStateProperty = jest.mocked(generateStateProperty);
-const mockGenerateUniqueFieldsProperty = jest.mocked(
-  generateUniqueFieldsProperty,
-);
-
-describe('Controller generator', () => {
-  beforeEach(() => {
-    mockGenerateCheckUniquenessConstraintMethod.mockReset();
-    mockGenerateControllerClass.mockReset();
-    mockGenerateControllerSourceFile.mockReset();
-    mockGenerateCreateMethod.mockReset();
-    mockGenerateFindManyMethod.mockReset();
-    mockGenerateImports.mockReset();
-    mockGenerateStateProperty.mockReset();
-    mockGenerateUniqueFieldsProperty.mockReset();
-  });
-
+describe('controller helpers generator', () => {
   describe('generateFindManyMethod', () => {
     it('should return a valid findMany method structure', () => {
       const expectedMethodStructure = {
@@ -83,7 +41,6 @@ describe('Controller generator', () => {
         kind: StructureKind.Method,
         name: 'create',
         decorators: [{ name: 'Post', arguments: [] }],
-        statements: ['this.state.push(data);'],
         parameters: [
           {
             kind: StructureKind.Parameter,
@@ -94,14 +51,20 @@ describe('Controller generator', () => {
         ],
       };
 
-      const result = generateCreateMethod(model);
+      const expectedStatements = `
+    this.state.push(data);
+    return data;
+  `;
+
+      const { statements, ...result } = generateCreateMethod(model);
 
       expect(result).toEqual(expectedMethodStructure);
+      expect(statements).toContain(expectedStatements);
     });
   });
 
   describe('generateCheckUniquenessConstraintMethod', () => {
-    it('should return a valid checkUniquenessConstraints method structure', () => {
+    it('should return a valid checkUniquenessConstraint method structure', () => {
       const model = {
         name: 'Test',
         dbName: 'Test',
@@ -113,7 +76,7 @@ describe('Controller generator', () => {
 
       const expectedMethodStructure = {
         kind: StructureKind.Method,
-        name: 'checkUniquenessConstraints',
+        name: 'checkUniquenessConstraint',
         scope: 'private',
         statements:
           '\n' +
@@ -195,7 +158,7 @@ describe('Controller generator', () => {
     });
   });
 
-  describe('generateUniqueFieldsPropertyStateProperty', () => {
+  describe('generateUniqueFieldsPropertyProperty', () => {
     it('should return valid uniqueFields property structure', () => {
       const model = {
         name: 'Test',
@@ -211,7 +174,6 @@ describe('Controller generator', () => {
         name: 'uniqueFields',
         scope: Scope.Private,
         initializer: `[] as const`,
-        isReadonly: true,
       };
 
       const result = generateUniqueFieldsProperty(model);
@@ -243,108 +205,11 @@ describe('Controller generator', () => {
         name: 'uniqueFields',
         scope: Scope.Private,
         initializer: `['unique'] as const`,
-        isReadonly: true,
       };
 
       const result = generateUniqueFieldsProperty(model);
 
       expect(result).toEqual(expectedMethodStructure);
-    });
-  });
-
-  describe('generateControllerClass', () => {
-    it('should return valid controller class structure', () => {
-      const model = {
-        name: 'Test',
-        dbName: 'Test',
-        primaryKey: null,
-        uniqueFields: [],
-        uniqueIndexes: [],
-        fields: [],
-      };
-
-      const expectedMethodStructure = {
-        kind: StructureKind.Class,
-        name: 'TestController',
-        isExported: true,
-        decorators: [{ name: 'Controller', arguments: ['test'] }],
-      };
-
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { properties, methods, ...result } = generateControllerClass(model);
-
-      expect(result).toEqual(expectedMethodStructure);
-    });
-
-    it('should generate common methods and properties', () => {
-      const model = {
-        name: 'Test',
-        dbName: 'Test',
-        primaryKey: null,
-        uniqueFields: [],
-        uniqueIndexes: [],
-        fields: [],
-      };
-
-      mockGenerateStateProperty.mockReturnValueOnce(
-        'mockStateProperty' as unknown as PropertyDeclarationStructure,
-      );
-      mockGenerateCreateMethod.mockReturnValueOnce(
-        'mockCreateMethod' as unknown as MethodDeclarationStructure,
-      );
-      mockGenerateFindManyMethod.mockReturnValueOnce(
-        'mockFindManyMethod' as unknown as MethodDeclarationStructure,
-      );
-
-      const expectedMethodStructure = {
-        kind: StructureKind.Class,
-        name: 'TestController',
-        isExported: true,
-        decorators: [{ name: 'Controller', arguments: ['test'] }],
-        properties: ['mockStateProperty'],
-        methods: ['mockCreateMethod', 'mockFindManyMethod'],
-      };
-
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const result = generateControllerClass(model);
-
-      expect(result).toEqual(expectedMethodStructure);
-      expect(mockGenerateStateProperty).toHaveBeenCalledTimes(1);
-      expect(mockGenerateCreateMethod).toHaveBeenCalledTimes(1);
-      expect(mockGenerateFindManyMethod).toHaveBeenCalledTimes(1);
-    });
-
-    it('should call uniqueness generators if unique fields exist', () => {
-      const model = {
-        name: 'Test',
-        dbName: 'Test',
-        primaryKey: null,
-        uniqueFields: [],
-        uniqueIndexes: [],
-        fields: [
-          {
-            name: 'unique',
-            isUnique: true,
-          },
-        ],
-      } as unknown as DMMF.Model;
-
-      mockGenerateUniqueFieldsProperty.mockReturnValueOnce(
-        'mockUniqueFieldsProps' as unknown as PropertyDeclarationStructure,
-      );
-      mockGenerateCheckUniquenessConstraintMethod.mockReturnValueOnce(
-        'mockCheckUniquenessConstraintMethod' as unknown as MethodDeclarationStructure,
-      );
-
-      const { methods, properties } = generateControllerClass(model);
-
-      expect(methods).toContain('mockUniqueFieldsProps');
-      expect(properties).toContain('mockCheckUniquenessConstraintMethod');
-
-      expect(mockGenerateUniqueFieldsProperty).toHaveBeenCalledTimes(1);
-      expect(mockGenerateCheckUniquenessConstraintMethod).toHaveBeenCalledTimes(
-        1,
-      );
     });
   });
 });

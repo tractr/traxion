@@ -2,13 +2,12 @@ import { DMMF } from '@prisma/generator-helper';
 import { camel, kebab, pascal } from 'case';
 import {
   ClassDeclarationStructure,
-  ImportDeclarationStructure,
   Project,
   PropertyDeclarationStructure,
   StructureKind,
 } from 'ts-morph';
 
-import { getFieldType, isEntityField } from '../helpers';
+import { getFieldType, isEntityField } from '../../helpers';
 
 function generateDtoProperties(
   field: DMMF.Field,

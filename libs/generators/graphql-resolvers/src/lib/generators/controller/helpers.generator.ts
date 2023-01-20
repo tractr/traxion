@@ -1,17 +1,15 @@
 import { DMMF } from '@prisma/generator-helper';
 import { camel, kebab, pascal } from 'case';
 import {
-  ClassDeclarationStructure,
   ImportDeclarationStructure,
   MethodDeclarationStructure,
   ParameterDeclarationStructure,
-  Project,
   PropertyDeclarationStructure,
   Scope,
   StructureKind,
 } from 'ts-morph';
 
-import { containsUniqueFields, getModelUniqueFields } from '../helpers';
+import { containsUniqueFields, getModelUniqueFields } from '../../helpers';
 
 export function generateFindManyMethod(): MethodDeclarationStructure {
   return {
@@ -37,7 +35,7 @@ export function generateCreateMethod(
       containsUniqueFields(model) ? 'this.checkUniquenessConstraint(data);' : ''
     }
     this.state.push(data);
-    return this.state;
+    return data;
   `;
 
   return {
@@ -140,53 +138,5 @@ export function generateUniqueFieldsProperty(
     name: 'uniqueFields',
     scope: Scope.Private,
     initializer: `[${uniqueFields.join(',')}] as const`,
-    isReadonly: true,
   };
-}
-
-export function generateControllerClass(
-  model: DMMF.Model,
-): ClassDeclarationStructure {
-  const className = `${pascal(model.name)}Controller`;
-  const properties = [
-    generateStateProperty(model),
-    ...(containsUniqueFields(model)
-      ? [generateUniqueFieldsProperty(model)]
-      : []),
-  ];
-  const methods = [
-    generateCreateMethod(model),
-    generateFindManyMethod(),
-    ...(containsUniqueFields(model)
-      ? [generateCheckUniquenessConstraintMethod(model)]
-      : []),
-  ];
-
-  return {
-    kind: StructureKind.Class,
-    name: className,
-    isExported: true,
-    decorators: [
-      { name: 'Controller', arguments: [`['${kebab(model.name)}']`] },
-    ],
-    properties,
-    methods,
-  };
-}
-
-export function generateControllerSourceFile(
-  project: Project,
-  model: DMMF.Model,
-  path: string,
-) {
-  const fileName = `${kebab(model.name)}.controller.ts`;
-  const filePath = `${path}/${fileName}`;
-
-  const sourceFile = project.createSourceFile(filePath);
-
-  const controllerClass = generateControllerClass(model);
-  const controllerImports = generateImports(model);
-
-  sourceFile.addImportDeclarations(controllerImports);
-  sourceFile.addClass(controllerClass);
 }

@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import * as fs from 'fs';
 import * as path from 'path';
 
 import { generatorHandler, GeneratorOptions } from '@prisma/generator-helper';
+import { kebab } from 'case';
 import { Project } from 'ts-morph';
 
-import { generateControllerSourceFile } from './generators/controller.generator';
-import { generateCreateDtoSourceFile } from './generators/dto.generator';
+import { generateControllerSourceFile } from './generators/controller/controller.generator';
+import { generateCreateDtoSourceFile } from './generators/dto/dto.generator';
 
 export function generate() {
   generatorHandler({
     onManifest() {
       return {
         defaultOutput: '../generated',
-        prettyName: 'Prisma graphql resolversTEST',
+        prettyName: 'Prisma api generator',
       };
     },
     onGenerate: async (options: GeneratorOptions) => {
@@ -27,22 +27,20 @@ export function generate() {
       );
       const absoluteGeneratedDirectory = path.resolve(
         outputDirectory,
-        'src',
         generatedDirectory,
       );
 
       // Instantiate the ts project
       const project = new Project({
         tsConfigFilePath: absoluteTsConfigFilePath,
-        skipAddingFilesFromTsConfig: false,
       });
 
-      // Remove generation directory
-      project.getDirectory(absoluteGeneratedDirectory)?.deleteImmediatelySync();
+      // Clear generation directory
+      project.getDirectory(absoluteGeneratedDirectory)?.clear();
 
       // Generate controllers and dtos
       dmmf.datamodel.models.forEach((model) => {
-        const entityPath = `${absoluteGeneratedDirectory}/${model.name}`;
+        const entityPath = `${absoluteGeneratedDirectory}/${kebab(model.name)}`;
         generateControllerSourceFile(project, model, entityPath);
         generateCreateDtoSourceFile(project, model, entityPath);
       });
