@@ -74,6 +74,6 @@ export default {
     '<rootDir>/libs/terraform/service/logstash',
     '<rootDir>/apps/pwa',
     '<rootDir>/libs/nestjs/password',
-    '<rootDir>/libs/generators/graphql-resolvers',
+    '<rootDir>/libs/generator/demo',
   ],
 };

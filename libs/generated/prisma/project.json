@@ -1,9 +1,6 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": [
-    "hapify-templates-prisma",
-    "generators-graphql-resolvers"
-  ],
+  "implicitDependencies": ["hapify-templates-prisma", "generator-demo"],
   "projectType": "library",
   "sourceRoot": "libs/generated/prisma/src",
   "tags": [],
@@ -13,6 +10,10 @@
         {
           "projects": "self",
           "target": "pregenerate"
+        },
+        {
+          "projects": "dependencies",
+          "target": "build"
         }
       ],
       "executor": "nx:run-commands",

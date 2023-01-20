@@ -26,7 +26,7 @@
     "generated-react-admin": "libs/generated/react-admin",
     "generated-rest-dtos": "libs/generated/rest-dtos",
     "generated-rext-client": "libs/generated/rext-client",
-    "generators-graphql-resolvers": "libs/generators/graphql-resolvers",
+    "generator-demo": "libs/generator/demo",
     "hapify-common": "libs/hapify/hapify-common",
     "hapify-config": "libs/config/hapify",
     "hapify-create-traxion-workspace": "libs/hapify/create-traxion-workspace",

@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'generators-graphql-resolvers',
+  displayName: 'generator-demo',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -12,5 +12,5 @@ export default {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/generators/graphql-resolvers',
+  coverageDirectory: '../../../coverage/libs/generator/demo',
 };

@@ -1,0 +1,36 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "generator-demo",
+  "projectType": "library",
+  "sourceRoot": "libs/generator/demo/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "assets": ["libs/generator/demo/*.md"],
+        "main": "libs/generator/demo/src/index.ts",
+        "outputPath": "dist/libs/generator/demo",
+        "packageJson": "libs/generator/demo/package.json",
+        "tsConfig": "libs/generator/demo/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/generator/demo/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {},
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/generator/demo/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/generator/demo"]
+    }
+  }
+}
