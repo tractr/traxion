@@ -1,34 +1,26 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "hapify-generate-config",
   "projectType": "library",
   "sourceRoot": "libs/hapify/generate-config/src",
-  "tags": [
-    "scope:config"
-  ],
+  "tags": ["scope:config"],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": [
-          "libs/hapify/generate-config/*.md"
-        ],
+        "assets": ["libs/hapify/generate-config/*.md"],
         "main": "libs/hapify/generate-config/src/index.ts",
         "outputPath": "dist/libs/hapify/generate-config",
         "packageJson": "libs/hapify/generate-config/package.json",
         "tsConfig": "libs/hapify/generate-config/tsconfig.lib.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "coverage": {
       "executor": "@nrwl/jest:jest",
       "options": {
         "codeCoverage": true,
-        "coverageReporters": [
-          "text",
-          "json"
-        ],
+        "coverageReporters": ["text", "json"],
         "jestConfig": "libs/hapify/generate-config/jest.config.ts",
         "passWithNoTests": true,
         "skipNxCache": true
@@ -37,13 +29,9 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/hapify/generate-config/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/hapify/generate-config/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -57,9 +45,7 @@
         "jestConfig": "libs/hapify/generate-config/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/hapify/generate-config"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/hapify/generate-config"]
     }
   }
 }

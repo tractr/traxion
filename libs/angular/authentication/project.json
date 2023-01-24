@@ -1,11 +1,10 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "angular-authentication",
   "prefix": "tractr",
   "projectType": "library",
   "sourceRoot": "libs/angular/authentication/src",
-  "tags": [
-    "scope:angular"
-  ],
+  "tags": ["scope:angular"],
   "targets": {
     "build": {
       "configurations": {
@@ -27,9 +26,7 @@
       "options": {
         "project": "libs/angular/authentication/ng-package.json"
       },
-      "outputs": [
-        "dist/libs/angular/authentication"
-      ]
+      "outputs": ["{workspaceRoot}/dist/libs/angular/authentication"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -39,9 +36,7 @@
           "libs/angular/authentication/src/**/*.html"
         ]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -56,9 +51,7 @@
         "jestConfig": "libs/angular/authentication/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/angular/authentication"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/angular/authentication"]
     }
   }
 }

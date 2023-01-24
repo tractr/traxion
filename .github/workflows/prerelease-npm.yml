@@ -1,0 +1,82 @@
+#####################################
+##      Reusable workflow tests     ##
+#####################################
+name: Prerelease NPM
+
+on:
+  workflow_call:
+    inputs:
+      botName:
+        description: 'The github bot name'
+        type: string
+        required: true
+
+      registryUrl:
+        description: 'The npm token if needed'
+        type: string
+        required: false
+        default: 'https://registry.npmjs.org'
+
+    secrets:
+      NPM_TOKEN:
+        description: 'The npm token if needed'
+        required: false
+
+      GH_TOKEN:
+        description: 'The github bot-token'
+        required: true
+
+      NX_CLOUD_ACCESS_TOKEN:
+        description: 'A Nx cloud access token'
+        required: false
+
+jobs:
+  # Take all the packages and release them
+  npm-release:
+    name: Release npm packages
+
+    # Run the release job but not when the commit is a chore one
+    if: "!contains(github.event.commits[0].message, 'chore(release):')"
+
+    # Our code will run on node 16 and Linux
+    strategy:
+      matrix:
+        node: [16.x]
+        os: [ubuntu-20.04]
+
+    runs-on: ['${{ matrix.os }}']
+
+    outputs:
+      apps: ${{ steps.apps.outputs.result }}
+
+    steps:
+      # First we checkout the code
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Install dependencies and generate files
+        uses: tractr/traxion/.github/actions/setup@main
+        with:
+          registryUrl: ${{ inputs.registryUrl }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name '${{ inputs.botName }}'
+          git config user.email '${{ inputs.botName }}@users.noreply.github.com'
+
+      # We run our release script
+      - name: Run nx run workspace:prerelease
+        run: npx nx run workspace:prerelease --push --allowEmptyRelease
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
+      - name: Update the next tag
+        uses: tractr/traxion/.github/actions/update-tag@main
+        with:
+          tagName: 'next'
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}

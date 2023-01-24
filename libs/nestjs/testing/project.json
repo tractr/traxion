@@ -1,17 +1,14 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "nestjs-testing",
   "projectType": "library",
   "sourceRoot": "libs/nestjs/testing/src",
-  "tags": [
-    "scope:nestjs"
-  ],
+  "tags": ["scope:nestjs"],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": [
-          "libs/nestjs/testing/*.md"
-        ],
+        "assets": ["libs/nestjs/testing/*.md"],
         "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/testing/src/index.ts",
         "outputPath": "dist/libs/nestjs/testing",
@@ -19,20 +16,14 @@
         "tsConfig": "libs/nestjs/testing/tsconfig.lib.json",
         "updateBuildableProjectDepsInPackageJson": true
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/nestjs/testing/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/nestjs/testing/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -46,9 +37,7 @@
         "jestConfig": "libs/nestjs/testing/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/nestjs/testing"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/testing"]
     }
   }
 }

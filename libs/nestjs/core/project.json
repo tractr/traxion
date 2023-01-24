@@ -1,17 +1,14 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "nestjs-core",
   "projectType": "library",
   "sourceRoot": "libs/nestjs/core/src",
-  "tags": [
-    "scope:nestjs"
-  ],
+  "tags": ["scope:nestjs"],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": [
-          "libs/nestjs/core/*.md"
-        ],
+        "assets": ["libs/nestjs/core/*.md"],
         "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/core/src/index.ts",
         "outputPath": "dist/libs/nestjs/core",
@@ -19,20 +16,14 @@
         "tsConfig": "libs/nestjs/core/tsconfig.lib.json",
         "updateBuildableProjectDepsInPackageJson": true
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/nestjs/core/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/nestjs/core/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -46,9 +37,7 @@
         "jestConfig": "libs/nestjs/core/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/nestjs/core"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/core"]
     }
   }
 }

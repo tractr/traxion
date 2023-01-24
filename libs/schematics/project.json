@@ -1,5 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "schematics",
   "projectType": "library",
   "sourceRoot": "libs/schematics/src",
   "tags": [],
@@ -68,7 +69,7 @@
         "passWithNoTests": true,
         "skipNxCache": true
       },
-      "outputs": ["coverage/libs/schematics"]
+      "outputs": ["{workspaceRoot}/coverage/libs/schematics"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -89,7 +90,7 @@
         "jestConfig": "libs/schematics/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/schematics"]
+      "outputs": ["{workspaceRoot}/coverage/libs/schematics"]
     }
   }
 }

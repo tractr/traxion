@@ -1,10 +1,9 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "hapify-config",
   "projectType": "library",
   "sourceRoot": "libs/config/hapify/src",
-  "tags": [
-    "scope:config"
-  ],
+  "tags": ["scope:config"],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
@@ -18,20 +17,14 @@
         "packageJson": "libs/config/hapify/package.json",
         "tsConfig": "libs/config/hapify/tsconfig.lib.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/config/hapify/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/config/hapify/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -45,9 +38,7 @@
         "jestConfig": "libs/config/hapify/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/config/hapify"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/config/hapify"]
     }
   }
 }

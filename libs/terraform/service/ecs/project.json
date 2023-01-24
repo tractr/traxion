@@ -1,5 +1,6 @@
 {
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "terraform-service-ecs",
   "projectType": "library",
   "sourceRoot": "libs/terraform/service/ecs/src",
   "tags": [],
@@ -34,7 +35,7 @@
         "jestConfig": "libs/terraform/service/ecs/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/terraform/service/ecs"]
+      "outputs": ["{workspaceRoot}/coverage/libs/terraform/service/ecs"]
     }
   }
 }

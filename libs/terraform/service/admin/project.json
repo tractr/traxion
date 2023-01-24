@@ -1,5 +1,6 @@
 {
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "terraform-service-admin",
   "projectType": "library",
   "sourceRoot": "libs/terraform/service/admin/src",
   "tags": [],
@@ -7,28 +8,20 @@
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": [
-          "libs/terraform/service/admin/*.md"
-        ],
+        "assets": ["libs/terraform/service/admin/*.md"],
         "main": "libs/terraform/service/admin/src/index.ts",
         "outputPath": "dist/libs/terraform/service/admin",
         "packageJson": "libs/terraform/service/admin/package.json",
         "tsConfig": "libs/terraform/service/admin/tsconfig.lib.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/terraform/service/admin/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/terraform/service/admin/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -42,9 +35,7 @@
         "jestConfig": "libs/terraform/service/admin/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/terraform/service/admin"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/terraform/service/admin"]
     }
   }
 }

@@ -1,5 +1,6 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "angular-file-storage",
   "prefix": "tractr",
   "projectType": "library",
   "sourceRoot": "libs/angular/file-storage/src",
@@ -19,9 +20,7 @@
       "options": {
         "project": "libs/angular/file-storage/ng-package.json"
       },
-      "outputs": [
-        "dist/libs/angular/file-storage"
-      ]
+      "outputs": ["{workspaceRoot}/dist/libs/angular/file-storage"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -31,9 +30,7 @@
           "libs/angular/file-storage/src/**/*.html"
         ]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -48,9 +45,7 @@
         "jestConfig": "libs/angular/file-storage/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/angular/file-storage"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/angular/file-storage"]
     }
   }
 }

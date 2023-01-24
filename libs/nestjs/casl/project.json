@@ -1,17 +1,14 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "nestjs-casl",
   "projectType": "library",
   "sourceRoot": "libs/nestjs/casl/src",
-  "tags": [
-    "scope:nestjs"
-  ],
+  "tags": ["scope:nestjs"],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": [
-          "libs/nestjs/casl/*.md"
-        ],
+        "assets": ["libs/nestjs/casl/*.md"],
         "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/casl/src/index.ts",
         "outputPath": "dist/libs/nestjs/casl",
@@ -19,36 +16,25 @@
         "tsConfig": "libs/nestjs/casl/tsconfig.lib.json",
         "updateBuildableProjectDepsInPackageJson": true
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "coverage": {
       "executor": "@nrwl/jest:jest",
       "options": {
         "codeCoverage": true,
-        "coverageReporters": [
-          "text",
-          "json"
-        ],
+        "coverageReporters": ["text", "json"],
         "jestConfig": "libs/nestjs/casl/jest.config.ts",
         "passWithNoTests": true,
         "skipNxCache": true
       },
-      "outputs": [
-        "coverage/libs/nestjs/casl"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/casl"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/nestjs/casl/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/nestjs/casl/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -62,9 +48,7 @@
         "jestConfig": "libs/nestjs/casl/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/nestjs/casl"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/casl"]
     }
   }
 }

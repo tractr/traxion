@@ -1,11 +1,10 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "angular-casl",
   "prefix": "tractr",
   "projectType": "library",
   "sourceRoot": "libs/angular/casl/src",
-  "tags": [
-    "scope:angular"
-  ],
+  "tags": ["scope:angular"],
   "targets": {
     "build": {
       "configurations": {
@@ -21,9 +20,7 @@
       "options": {
         "project": "libs/angular/casl/ng-package.json"
       },
-      "outputs": [
-        "dist/libs/angular/casl"
-      ]
+      "outputs": ["{workspaceRoot}/dist/libs/angular/casl"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -33,9 +30,7 @@
           "libs/angular/casl/src/**/*.html"
         ]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -49,9 +44,7 @@
         "jestConfig": "libs/angular/casl/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/angular/casl"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/angular/casl"]
     }
   }
 }
