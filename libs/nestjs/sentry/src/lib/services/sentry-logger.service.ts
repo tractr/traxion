@@ -6,7 +6,7 @@ import {
   init,
   Integrations,
   setExtras,
-  Severity,
+  SeverityLevel,
 } from '@sentry/node';
 import { Extras } from '@sentry/types';
 
@@ -65,7 +65,7 @@ export class SentryLogger extends ConsoleLogger {
 
   log(message: string, context?: string) {
     super.log(message, context);
-    this.sendMessageToSentry(message, Severity.Log, context);
+    this.sendMessageToSentry(message, 'log', context);
   }
 
   /**
@@ -73,22 +73,22 @@ export class SentryLogger extends ConsoleLogger {
    */
   error(error: string, trace?: string, context?: string) {
     super.error(error, trace, context);
-    this.sendMessageToSentry(error, Severity.Error, context);
+    this.sendMessageToSentry(error, 'error', context);
   }
 
   warn(message: string, context?: string) {
     super.warn(message, context);
-    this.sendMessageToSentry(message, Severity.Warning, context);
+    this.sendMessageToSentry(message, 'warning', context);
   }
 
   debug(message: string, context?: string) {
     super.debug(message, context);
-    this.sendMessageToSentry(message, Severity.Debug, context);
+    this.sendMessageToSentry(message, 'debug', context);
   }
 
   verbose(message: string, context?: string) {
     super.verbose(message, context);
-    this.sendMessageToSentry(message, Severity.Info, context);
+    this.sendMessageToSentry(message, 'info', context);
   }
 
   /**
@@ -101,7 +101,7 @@ export class SentryLogger extends ConsoleLogger {
 
   protected sendMessageToSentry(
     message: string,
-    severity: Severity,
+    severity: SeverityLevel,
     context?: string,
   ) {
     try {
