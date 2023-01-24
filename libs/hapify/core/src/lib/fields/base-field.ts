@@ -1,4 +1,9 @@
-import { FieldProperties } from '../interfaces';
+import {
+  FieldAction,
+  FieldActionsScopes,
+  FieldProperties,
+  Scope,
+} from '../interfaces';
 import { Node } from '../node';
 
 /**
@@ -7,6 +12,14 @@ import { Node } from '../node';
 export abstract class BaseField extends Node implements FieldProperties {
   abstract readonly type: string;
   abstract readonly subType: string;
+
+  /**
+   * Stores the scope of each action
+   */
+  protected _actionsScopes: FieldActionsScopes = {
+    read: undefined,
+    write: undefined,
+  };
 
   protected _primary = false;
   protected _unique = false;
@@ -69,6 +82,14 @@ export abstract class BaseField extends Node implements FieldProperties {
     return this._ownership;
   }
 
+  /**
+   * Get the scope of an action
+   * Clones the scope to avoid mutation
+   */
+  get actionsScopes(): FieldActionsScopes {
+    return { ...this._actionsScopes };
+  }
+
   setPrimary(value: boolean): this {
     this._primary = value;
     return this;
@@ -126,6 +147,23 @@ export abstract class BaseField extends Node implements FieldProperties {
 
   setOwnership(value: boolean): this {
     this._ownership = value;
+    return this;
+  }
+
+  /**
+   * Set the scope of an action
+   */
+  setActionScope(action: FieldAction, scope: Scope): this {
+    this._actionsScopes[action] = scope;
+    return this;
+  }
+
+  /**
+   * Set the scopes of many actions.
+   * Accept a partial object of scopes
+   */
+  setActionsScopes(scopes: Partial<FieldActionsScopes>): this {
+    this._actionsScopes = { ...this._actionsScopes, ...scopes };
     return this;
   }
 }

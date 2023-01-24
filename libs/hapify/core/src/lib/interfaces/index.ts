@@ -1,4 +1,4 @@
 export * from './string';
 export * from './field';
 export * from './predicate';
-export * from './access';
+export * from './scopes';
