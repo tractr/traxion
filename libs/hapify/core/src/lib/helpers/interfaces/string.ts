@@ -23,6 +23,10 @@ export interface StringVariations {
   pascal: string;
   /** The string as lower camel case. Example `firstName`. */
   camel: string;
+  /** The string as title case. Example `First Name`. */
+  title: string;
+  /** The string as sentence case. Example `First Name`. */
+  sentence: string;
   /** Returns a string for this object */
   toString(): string;
 }
