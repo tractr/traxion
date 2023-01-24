@@ -27,7 +27,7 @@ describe('createSecondaryEntrypoint', () => {
     useSecondaryEndpoint: true,
     addSecondaryEndpoint: [],
     projectName: 'test',
-    projectRoot: 'libs/test',
+    projectRoot: 'test',
     projectDirectory: 'test',
     hapifyModelsJsonRelativePath: '../../hapify-models.json',
     template: '',
@@ -36,7 +36,7 @@ describe('createSecondaryEntrypoint', () => {
     npmScope: 'test',
     importPath: '@test/test',
     importPrefixPath: '@test/',
-    libsDir: 'libs',
+    libsDir: '.',
     targets: {},
     extra: {},
   };
@@ -63,7 +63,7 @@ describe('createSecondaryEntrypoint', () => {
     await angularLibraryGenerator(appTree, options);
     await createSecondaryEntrypoints(appTree, options);
 
-    const packageJson = readJson(appTree, 'libs/test/package.json');
+    const packageJson = readJson(appTree, 'test/package.json');
     expect(packageJson).toBeDefined();
     expect(packageJson.name).toEqual('@test/test');
     expect(packageJson.version).toEqual('0.0.1');
@@ -74,7 +74,7 @@ describe('createSecondaryEntrypoint', () => {
     await nestLibraryGenerator(appTree, options);
     await createSecondaryEntrypoints(appTree, options);
 
-    const packageJson = readJson(appTree, 'libs/test/package.json');
+    const packageJson = readJson(appTree, 'test/package.json');
     expect(packageJson).toBeDefined();
     expect(packageJson.name).toEqual('@test/test');
     expect(packageJson.version).toEqual('0.0.1');
@@ -85,7 +85,7 @@ describe('createSecondaryEntrypoint', () => {
     await angularLibraryGenerator(appTree, options);
     await createSecondaryEntrypoints(appTree, options);
 
-    const packageJson = readJson(appTree, 'libs/test/package.json');
+    const packageJson = readJson(appTree, 'test/package.json');
     expect(packageJson).toBeDefined();
     expect(packageJson.name).toEqual('@test/test');
     expect(packageJson.version).toEqual('0.0.1');
