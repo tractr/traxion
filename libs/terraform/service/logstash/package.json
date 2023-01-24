@@ -1,6 +1,6 @@
 {
   "name": "@trxn/terraform-service-logstash",
-  "version": "1.65.12",
+  "version": "1.65.13-next.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"

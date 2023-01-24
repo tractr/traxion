@@ -266,6 +266,9 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "overrides": {
+    "@nrwl/devkit": "$@nrwl/devkit"
+  },
   "prisma": {
     "schema": "libs/generated/prisma/prisma/schema.prisma",
     "seed": "npx ts-node -r tsconfig-paths/register --project ./libs/generated/prisma/tsconfig.lib.json ./libs/generated/prisma/prisma/seed.ts"
