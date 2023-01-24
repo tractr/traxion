@@ -1,17 +1,20 @@
-import {
-  FieldAction,
-  FieldActionsScopes,
-  FieldProperties,
-  Scope,
-} from '../interfaces';
+import { FieldAction, FieldActionsScopes, Scope } from '../interfaces';
 import { Node } from '../node';
 
 /**
  * Abstract class for a field of a model
  */
-export abstract class BaseField extends Node implements FieldProperties {
+export abstract class BaseField extends Node {
   abstract readonly type: string;
   abstract readonly subType: string;
+
+  protected _primary = false;
+  protected _unique = false;
+  protected _label = false;
+  protected _nullable = false;
+  protected _multiple = false;
+  protected _searchable = false;
+  protected _sortable = false;
 
   /**
    * Stores the scope of each action
@@ -21,65 +24,39 @@ export abstract class BaseField extends Node implements FieldProperties {
     write: undefined,
   };
 
-  protected _primary = false;
-  protected _unique = false;
-  protected _label = false;
-  protected _nullable = false;
-  protected _multiple = false;
-  protected _embedded = false;
-  protected _searchable = false;
-  protected _sortable = false;
-  protected _hidden = false;
-  protected _internal = false;
-  protected _restricted = false;
-  protected _ownership = false;
-
+  /** Should be used as a primary key or not */
   get primary(): boolean {
     return this._primary;
   }
 
+  /** Should be used as a unique key or not */
   get unique(): boolean {
     return this._unique;
   }
 
+  /** Should be used as a label or not */
   get label(): boolean {
     return this._label;
   }
 
+  /** Denotes if the field can be empty or not */
   get nullable(): boolean {
     return this._nullable;
   }
 
+  /** Denotes if the field is an array of values */
   get multiple(): boolean {
     return this._multiple;
   }
 
-  get embedded(): boolean {
-    return this._embedded;
-  }
-
+  /** Indicate whether the field is searchable or not */
   get searchable(): boolean {
     return this._searchable;
   }
 
+  /** Indicate whether the field is sortable or not */
   get sortable(): boolean {
     return this._sortable;
-  }
-
-  get hidden(): boolean {
-    return this._hidden;
-  }
-
-  get internal(): boolean {
-    return this._internal;
-  }
-
-  get restricted(): boolean {
-    return this._restricted;
-  }
-
-  get ownership(): boolean {
-    return this._ownership;
   }
 
   /**
@@ -115,11 +92,6 @@ export abstract class BaseField extends Node implements FieldProperties {
     return this;
   }
 
-  setEmbedded(value: boolean): this {
-    this._embedded = value;
-    return this;
-  }
-
   setSearchable(value: boolean): this {
     this._searchable = value;
     return this;
@@ -127,26 +99,6 @@ export abstract class BaseField extends Node implements FieldProperties {
 
   setSortable(value: boolean): this {
     this._sortable = value;
-    return this;
-  }
-
-  setHidden(value: boolean): this {
-    this._hidden = value;
-    return this;
-  }
-
-  setInternal(value: boolean): this {
-    this._internal = value;
-    return this;
-  }
-
-  setRestricted(value: boolean): this {
-    this._restricted = value;
-    return this;
-  }
-
-  setOwnership(value: boolean): this {
-    this._ownership = value;
     return this;
   }
 
@@ -165,5 +117,19 @@ export abstract class BaseField extends Node implements FieldProperties {
   setActionsScopes(scopes: Partial<FieldActionsScopes>): this {
     this._actionsScopes = { ...this._actionsScopes, ...scopes };
     return this;
+  }
+
+  /**
+   * Shortcut to set read scope to system
+   */
+  makeNotReadable(): this {
+    return this.setActionScope('read', 'system');
+  }
+
+  /**
+   * Shortcut to set write scope to system
+   */
+  makeNotWritable(): this {
+    return this.setActionScope('write', 'system');
   }
 }

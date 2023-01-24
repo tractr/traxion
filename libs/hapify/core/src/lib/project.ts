@@ -4,7 +4,7 @@ import { Node } from './node';
 /**
  * Top level node of a project
  */
-export class Root extends Node {
+export class Project extends Node {
   /**
    * List of models in the project
    */

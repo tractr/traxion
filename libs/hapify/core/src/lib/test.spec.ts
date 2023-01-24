@@ -12,14 +12,11 @@ import {
 } from './fields';
 import { Model } from './model';
 import { and, not, or } from './operators';
-import { Root } from './root';
+import { Project } from './project';
 
-const idField = new NumberBasicField('Id')
-  .setPrimary(true)
-  .setInternal(true)
-  .setOwnership(true);
+const idField = new NumberBasicField('Id').setPrimary(true).makeNotWritable();
 
-const root = new Root('app').addModel(
+const root = new Project('app').addModel(
   new Model('User')
     .addField(idField)
     .addField(new StringBasicField('FirstName').setMaxLength(50))
@@ -28,7 +25,7 @@ const root = new Root('app').addModel(
     .addField(
       new StringPasswordField('Password')
         .setValidationRegex('/([0-9a-z]+)/')
-        .setInternal(true),
+        .makeNotReadable(),
     )
     .addField(
       new StringTextField('Description')
