@@ -16,6 +16,7 @@ import {
   isSortable,
   isUnique,
 } from './fields';
+import { ModelAction, ModelActionsScopes, Scope } from './interfaces';
 import { Node } from './node';
 import { and } from './operators';
 
@@ -32,6 +33,18 @@ export class Model extends Node {
    * List of models which reference this model
    */
   protected _referencedIn = new Set<Model>();
+
+  /**
+   * Stores the scope of each action
+   */
+  protected _actionsScopes: ModelActionsScopes = {
+    create: 'auth',
+    read: 'public',
+    update: 'auth',
+    remove: 'auth',
+    search: 'public',
+    count: 'public',
+  };
 
   /**
    * Adds a field to the model
@@ -58,6 +71,23 @@ export class Model extends Node {
   }
 
   /**
+   * Set the scope of an action
+   */
+  setActionScope(action: ModelAction, scope: Scope): this {
+    this._actionsScopes[action] = scope;
+    return this;
+  }
+
+  /**
+   * Set the scopes of many actions.
+   * Accept a partial object of scopes
+   */
+  setActionsScopes(scopes: Partial<ModelActionsScopes>): this {
+    this._actionsScopes = { ...this._actionsScopes, ...scopes };
+    return this;
+  }
+
+  /**
    * Returns a list of fields in the model
    */
   get fields(): Field[] {
@@ -72,6 +102,14 @@ export class Model extends Node {
       .filter(isEntity)
       .filter((field) => field.model !== this)
       .map((field) => field.model);
+  }
+
+  /**
+   * Get the scope of an action
+   * Clones the scope to avoid mutation
+   */
+  get actionsScopes(): ModelActionsScopes {
+    return { ...this._actionsScopes };
   }
 
   /**
