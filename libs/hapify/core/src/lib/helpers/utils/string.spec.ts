@@ -16,6 +16,8 @@ describe('stringVariants', () => {
       compact: 'alongstringwith1234numbers',
       pascal: 'ALongStringWith1234Numbers',
       camel: 'aLongStringWith1234Numbers',
+      title: 'A Long String With 1234 Numbers',
+      sentence: 'A long string with 1234 numbers',
       toString: expect.any(Function),
     });
   });
