@@ -1,18 +1,15 @@
+import { and, isNumber, isPassword, isString, not, or } from './helpers';
 import {
   BooleanField,
-  isNumber,
-  isPassword,
-  isString,
+  Model,
   NumberBasicField,
   NumberIntegerField,
+  Project,
   StringBasicField,
   StringEmailField,
   StringPasswordField,
   StringTextField,
-} from './fields';
-import { Model } from './model';
-import { and, not, or } from './operators';
-import { Project } from './project';
+} from './nodes';
 
 const idField = new NumberBasicField('Id').setPrimary(true).makeNotWritable();
 
