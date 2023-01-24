@@ -1,23 +1,18 @@
 import {
-  EmbeddedField,
-  FieldProperties,
-  HiddenField,
-  InternalField,
   LabelField,
   MultipleField,
   NullableField,
-  OwnershipField,
   PrimaryField,
-  RestrictedField,
   SearchableField,
   SortableField,
   UniqueField,
 } from '../interfaces';
+import { BaseField } from './base-field';
 
 /**
  * Checks if a field is a flagged as primary
  */
-export function isPrimary<T extends FieldProperties>(
+export function isPrimary<T extends BaseField>(
   field: T,
 ): field is T & PrimaryField {
   return field.primary;
@@ -26,7 +21,7 @@ export function isPrimary<T extends FieldProperties>(
 /**
  * Checks if a field is a flagged as primary
  */
-export function isUnique<T extends FieldProperties>(
+export function isUnique<T extends BaseField>(
   field: T,
 ): field is T & UniqueField {
   return field.unique;
@@ -35,7 +30,7 @@ export function isUnique<T extends FieldProperties>(
 /**
  * Checks if a field is a flagged as label
  */
-export function isLabel<T extends FieldProperties>(
+export function isLabel<T extends BaseField>(
   field: T,
 ): field is T & LabelField {
   return field.label;
@@ -44,7 +39,7 @@ export function isLabel<T extends FieldProperties>(
 /**
  * Checks if a field is a flagged as nullable
  */
-export function isNullable<T extends FieldProperties>(
+export function isNullable<T extends BaseField>(
   field: T,
 ): field is T & NullableField {
   return field.nullable;
@@ -53,25 +48,16 @@ export function isNullable<T extends FieldProperties>(
 /**
  * Checks if a field is a flagged as multiple
  */
-export function isMultiple<T extends FieldProperties>(
+export function isMultiple<T extends BaseField>(
   field: T,
 ): field is T & MultipleField {
   return field.multiple;
 }
 
 /**
- * Checks if a field is a flagged as embedded
- */
-export function isEmbedded<T extends FieldProperties>(
-  field: T,
-): field is T & EmbeddedField {
-  return field.embedded;
-}
-
-/**
  * Checks if a field is a flagged as searchable
  */
-export function isSearchable<T extends FieldProperties>(
+export function isSearchable<T extends BaseField>(
   field: T,
 ): field is T & SearchableField {
   return field.searchable;
@@ -80,44 +66,8 @@ export function isSearchable<T extends FieldProperties>(
 /**
  * Checks if a field is a flagged as sortable
  */
-export function isSortable<T extends FieldProperties>(
+export function isSortable<T extends BaseField>(
   field: T,
 ): field is T & SortableField {
   return field.sortable;
-}
-
-/**
- * Checks if a field is a flagged as hidden
- */
-export function isHidden<T extends FieldProperties>(
-  field: T,
-): field is T & HiddenField {
-  return field.hidden;
-}
-
-/**
- * Checks if a field is a flagged as internal
- */
-export function isInternal<T extends FieldProperties>(
-  field: T,
-): field is T & InternalField {
-  return field.internal;
-}
-
-/**
- * Checks if a field is a flagged as restricted
- */
-export function isRestricted<T extends FieldProperties>(
-  field: T,
-): field is T & RestrictedField {
-  return field.restricted;
-}
-
-/**
- * Checks if a field is a flagged as ownership
- */
-export function isOwnership<T extends FieldProperties>(
-  field: T,
-): field is T & OwnershipField {
-  return field.ownership;
 }
