@@ -1,6 +1,14 @@
-import { Field, isEntity } from './fields';
+import { EntityField, Field } from './fields';
 import { ModelAction, ModelActionsScopes, Scope } from './interfaces';
 import { Node } from './node';
+
+/**
+ * Local helper to filter entity fields.
+ * This avoids importing helpers and creating a circular dependency.
+ */
+function isEntity(field: Field): field is EntityField {
+  return field.type === 'entity';
+}
 
 /**
  * Represents a model that contains fields
