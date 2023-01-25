@@ -31,7 +31,7 @@ export class Model extends Node {
     create: 'auth',
     read: 'public',
     update: 'auth',
-    remove: 'auth',
+    delete: 'auth',
     search: 'public',
     count: 'public',
   };

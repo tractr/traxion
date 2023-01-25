@@ -11,7 +11,7 @@ export interface ModelActionsScopes {
   create: Scope;
   read: Scope;
   update: Scope;
-  remove: Scope;
+  delete: Scope;
   search: Scope;
   count: Scope;
 }
