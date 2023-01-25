@@ -1,4 +1,4 @@
-import { EnumField, Field } from '../../../nodes';
+import { EnumField, Field } from '../../../../nodes';
 
 /**
  * Checks if a field is an enum field

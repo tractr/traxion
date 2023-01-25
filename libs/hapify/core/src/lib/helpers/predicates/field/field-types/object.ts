@@ -1,4 +1,4 @@
-import { Field, ObjectField } from '../../../nodes';
+import { Field, ObjectField } from '../../../../nodes';
 
 /**
  * Checks if a field is an object field
