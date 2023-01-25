@@ -1,3 +1,2 @@
-export * from './field-properties';
-export * from './field-types';
+export * from './field';
 export * from './model';

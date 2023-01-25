@@ -1,4 +1,4 @@
-import { BaseField } from '../../nodes';
+import { BaseField } from '../../../nodes';
 import {
   LabelField,
   MultipleField,
@@ -7,7 +7,7 @@ import {
   SearchableField,
   SortableField,
   UniqueField,
-} from '../interfaces';
+} from '../../interfaces';
 
 /**
  * Checks if a field is a flagged as primary

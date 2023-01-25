@@ -1,4 +1,4 @@
-import { DateField, Field, TimeField } from '../../../nodes';
+import { DateField, Field, TimeField } from '../../../../nodes';
 
 /**
  * Checks if a field is a date field

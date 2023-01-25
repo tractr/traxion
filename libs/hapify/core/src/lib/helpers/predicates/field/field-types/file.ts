@@ -6,7 +6,7 @@ import {
   FileField,
   FileImageField,
   FileVideoField,
-} from '../../../nodes';
+} from '../../../../nodes';
 
 /**
  * Checks if a field is a basic file field
