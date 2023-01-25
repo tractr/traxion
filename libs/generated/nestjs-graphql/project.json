@@ -5,7 +5,8 @@
     "nestjs-graphql",
     "hapify-templates-nestjs-graphql",
     "generated-casl",
-    "generated-nestjs-models-common"
+    "generated-nestjs-models-common",
+    "hapify-generators-graphql-resolvers"
   ],
   "name": "generated-nestjs-graphql",
   "prefix": "tractr",
@@ -35,7 +36,20 @@
         "jestConfig": "libs/generated/nestjs-graphql/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["{workspaceRoot}/coverage/libs/generated/nestjs-graphql"]
+      "outputs": ["coverage/libs/generated/nestjs-graphql"]
+    },
+    "ts-morph-generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx ts-node -r tsconfig-paths/register --project ./tsconfig.lib.json ./src/generate.ts",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": "libs/generated/nestjs-graphql",
+        "parallel": false
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import path = require('path');
+import * as path from 'path';
 import { inspect } from 'util';
 
 import { generatorHandler } from '@prisma/generator-helper';
