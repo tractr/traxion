@@ -1,1 +1,1 @@
-export * from './lib/hapify-generators-graphql-resolvers';
+export * from './lib/generate';

@@ -63,7 +63,6 @@ export class LoginController {
   @Get('me')
   @UseGuards(JwtAuthGuard)
   async me(
-    @Req() req: Request & { user: User },
     @CurrentUser() currentUserInfo: User,
   ): Promise<User> {
     const user = await this.userAuthenticationService.getUserFromId(

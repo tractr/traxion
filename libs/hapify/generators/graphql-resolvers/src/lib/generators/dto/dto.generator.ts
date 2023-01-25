@@ -1,5 +1,3 @@
-import { DMMF } from '@prisma/generator-helper';
-import { camel, kebab, pascal } from 'case';
 import {
   ClassDeclarationStructure,
   Project,
@@ -7,43 +5,49 @@ import {
   StructureKind,
 } from 'ts-morph';
 
-import { getFieldType, isEntityField } from '../../helpers';
+import { generateImports } from './imports.generator';
 
-function generateDtoProperties(
-  field: DMMF.Field
-): PropertyDeclarationStructure {
-  return {
-    kind: StructureKind.Property,
-    name: camel(field.name),
-    hasExclamationToken: true,
-    type: getFieldType(field),
-  };
-}
+import { camel, Model, pascal, snake } from '@trxn/hapify-core';
 
-function generateDtoClass(model: DMMF.Model): ClassDeclarationStructure {
-  const className = `${pascal(model.name)}Dto`;
+export function generateDtoClass(model: Model): ClassDeclarationStructure {
+  const className = `FindMany${pascal(model.name)}Output`;
+
+  const properties: PropertyDeclarationStructure[] = [
+    {
+      kind: StructureKind.Property,
+      // TODO: use plural helper here, when available
+      name: `${camel(model.name)}s`,
+      type: `${pascal(model.name)}[]`,
+      hasExclamationToken: true,
+      decorators: [
+        { name: 'Field', arguments: [`() => [${pascal(model.name)}]`] },
+      ],
+    },
+  ];
+
   return {
     kind: StructureKind.Class,
     name: className,
     isExported: true,
-    properties: model.fields
-      .filter((field) => !isEntityField(field))
-      .map((field) => generateDtoProperties(field)),
+    decorators: [{ name: 'ObjectType', arguments: [] }],
+    extends: 'FindManyPagination',
+    properties,
   };
 }
 
-export function generateCreateDtoSourceFile(
+export function generateDtoSourceFile(
   project: Project,
-  model: DMMF.Model,
-  path: string
+  model: Model,
+  path: string,
 ) {
-  const fileName = `${kebab(model.name)}.dto.ts`;
+  const fileName = `find-many-${snake(model.name)}-output.dto.ts`;
   const filePath = `${path}/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);
 
   const dtoClass = generateDtoClass(model);
+  const imports = generateImports(model);
 
+  sourceFile.addImportDeclarations(imports);
   sourceFile.addClass(dtoClass);
-  sourceFile.fixUnusedIdentifiers();
 }

@@ -1,19 +1,24 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import * as path from 'path';
 
-import { kebab } from 'case';
 import { Project } from 'ts-morph';
 
-import { generateControllerSourceFile } from './generators/controller/controller.generator';
-import { generateCreateDtoSourceFile } from './generators/dto/dto.generator';
+import { generateDtoSourceFile } from './generators/dto/dto.generator';
+import { generateResolverSourceFile } from './generators/resolver/resolver.generator';
 
-import { Root } from '@tractr/hapify-core';
+import { kebab, Project as Models } from '@trxn/hapify-core';
 
-export function generate(dataModel: Root) {
-  const { generator, dmmf } = options;
-  const outputDirectory = generator.output?.value || '../generated';
+export type GraphqlResolverGeneratorConfig = {
+  outputDirectory: string;
+  tsConfigFilePath: string;
+  generatedDirectory: string;
+};
 
-  const { generatedDirectory, tsConfigFilePath } = generator.config;
+export function generate(
+  dataModel: Models,
+  config: GraphqlResolverGeneratorConfig,
+) {
+  const { generatedDirectory, tsConfigFilePath, outputDirectory } = config;
   const absoluteTsConfigFilePath = path.resolve(
     outputDirectory,
     tsConfigFilePath,
@@ -32,16 +37,16 @@ export function generate(dataModel: Root) {
   project.getDirectory(absoluteGeneratedDirectory)?.clear();
 
   // Generate controllers and dtos
-  datamodel.models.forEach((model) => {
+  dataModel.models.forEach((model) => {
     const entityPath = `${absoluteGeneratedDirectory}/${kebab(model.name)}`;
-    generateControllerSourceFile(project, model, entityPath);
-    generateCreateDtoSourceFile(project, model, entityPath);
+    generateResolverSourceFile(project, model, entityPath);
+    generateDtoSourceFile(project, model, entityPath);
   });
 
   // Remove unused imports
-  project
-    .getSourceFiles()
-    .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
+  // project
+  //   .getSourceFiles()
+  //   .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
 
   // Save project to file system
   project.saveSync();
