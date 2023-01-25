@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.13-next.2](https://github.com/tractr/traxion/compare/v1.65.13-next.1...v1.65.13-next.2) (2023-01-25)
+
+
+### Features
+
+* add peer dependencies executor helper to publish pacakges ([#560](https://github.com/tractr/traxion/issues/560)) ([ddfd62d](https://github.com/tractr/traxion/commit/ddfd62d7109e2023511f2aabe7b4f24ce6dc83e6))
+
+
+
 ## [1.65.13-next.1](https://github.com/tractr/traxion/compare/v1.65.13-next.0...v1.65.13-next.1) (2023-01-25)
 
 
