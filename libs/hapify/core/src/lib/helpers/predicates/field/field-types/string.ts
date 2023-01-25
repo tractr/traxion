@@ -7,7 +7,7 @@ import {
   StringRichField,
   StringTextField,
   StringUrlField,
-} from '../../../nodes';
+} from '../../../../nodes';
 
 /**
  * Checks if a field is a basic string field

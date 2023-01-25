@@ -5,7 +5,7 @@ import {
   EntityOneToManyField,
   EntityOneToOneField,
   Field,
-} from '../../../nodes';
+} from '../../../../nodes';
 
 /**
  * Checks if a field is an entity many-to-many field

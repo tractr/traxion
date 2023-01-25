@@ -6,7 +6,7 @@ import {
   NumberIntegerField,
   NumberLatitudeField,
   NumberLongitudeField,
-} from '../../../nodes';
+} from '../../../../nodes';
 
 /**
  * Checks if a field is a basic number field

@@ -1,4 +1,4 @@
-import { BooleanField, Field } from '../../../nodes';
+import { BooleanField, Field } from '../../../../nodes';
 
 /**
  * Checks if a field is a boolean field
