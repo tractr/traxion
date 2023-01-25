@@ -1,5 +1,5 @@
-import { Model } from '../../nodes';
-import { ModelWithOwner } from '../interfaces';
+import { Model } from '../../../nodes';
+import { ModelWithOwner } from '../../interfaces';
 
 /**
  * Checks if the model has an owner.

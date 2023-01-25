@@ -1,9 +1,9 @@
 import {
   and,
-  hasOwner,
-  isNumber,
+  isModelActionPublic,
+  isNullable,
   isPassword,
-  isString,
+  isPrimary,
   not,
   or,
 } from './helpers';
@@ -48,7 +48,7 @@ const root = new Project('app').addModel(
 
 const output = `
 ${root.models[0].fields
-  .filter(or(isNumber, and(isString, not(isPassword))))
+  .filter(or(isPrimary, isNullable))
   .map((field) => field.name)
   .join(', ')}
 `;
@@ -58,4 +58,6 @@ if (and(not(isPassword))(field)) {
   // field is a string field, primary and ownership
 }
 
-root.models.filter(hasOwner).map((model) => model.owner.name);
+root.models
+  .filter(and(isModelActionPublic('search'), isModelActionPublic('count')))
+  .map((model) => model.actionsScopes.count);
