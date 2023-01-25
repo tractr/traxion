@@ -1,6 +1,6 @@
 {
   "name": "@trxn/hapify-templates-nestjs-models-rest",
-  "version": "1.65.13-next.0",
+  "version": "1.65.13-next.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"

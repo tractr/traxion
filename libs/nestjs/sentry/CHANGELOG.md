@@ -2,6 +2,22 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.65.13-next.1](https://github.com/tractr/traxion/compare/v1.65.13-next.0...v1.65.13-next.1) (2023-01-25)
+
+
+### chore
+
+* update major version of packages dependencies ([#558](https://github.com/tractr/traxion/issues/558)) ([2d944a9](https://github.com/tractr/traxion/commit/2d944a92ecbc46bef70dbf5a8759f477987dd2bf))
+
+
+### BREAKING CHANGES
+
+* Updating angular and nx to 15 will not work with nx 14 and angular 14 packages
+
+* chore: update major packages version
+
+
+
 ## [1.65.13-next.0](https://github.com/tractr/traxion/compare/v1.65.12...v1.65.13-next.0) (2023-01-24)
 
 
