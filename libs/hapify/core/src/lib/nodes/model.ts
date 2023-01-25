@@ -37,6 +37,12 @@ export class Model extends Node {
   };
 
   /**
+   * Model that own this one.
+   * This is used to determine the ownership.
+   */
+  protected _owner: Model | undefined;
+
+  /**
    * Adds a field to the model
    */
   addField(field: Field): this {
@@ -75,6 +81,29 @@ export class Model extends Node {
   setActionsScopes(scopes: Partial<ModelActionsScopes>): this {
     this._actionsScopes = { ...this._actionsScopes, ...scopes };
     return this;
+  }
+
+  /**
+   * Set the model that owns this one.
+   */
+  setOwner(model: Model): this {
+    this._owner = model;
+    return this;
+  }
+
+  /**
+   * Removes the owner of the model
+   */
+  removeOwner(): this {
+    this._owner = undefined;
+    return this;
+  }
+
+  /**
+   * The model that owns this one.
+   */
+  get owner(): Model | undefined {
+    return this._owner;
   }
 
   /**
