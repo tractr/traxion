@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 import { ExecutorContext, logger } from '@nrwl/devkit';
@@ -117,7 +117,7 @@ export default async function runExecutor(
     }
   }
 
-  console.info(packageJson);
+  writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
   return {
     success: true,

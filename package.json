@@ -253,7 +253,7 @@
     "yargs": "^17.6.2"
   },
   "peerDependencies": {
-    "@schematics/angular": "^14.0.0"
+    "@schematics/angular": "^15.0.0"
   },
   "optionalDependencies": {
     "@swc/core-darwin-arm64": "1.3.28",

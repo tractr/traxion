@@ -17,5 +17,6 @@
   "@nrwl/*": "^15.0.0",
   "@prisma/client": "^4.0.0",
   "@schematics/angular": "^15.0.0",
-  "@trxn/*": "^1.63.0"
+  "@trxn/*": "^1.63.0",
+  "ng-zorro-antd": "^15.0.0"
 }
