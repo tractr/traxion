@@ -6,7 +6,7 @@ import {
   StructureKind,
 } from 'ts-morph';
 
-import { camel, Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateFindManyMethod(
   model: Model,
@@ -15,7 +15,7 @@ export function generateFindManyMethod(
     {
       kind: StructureKind.Decorator,
       name: 'Query',
-      arguments: [`() => FindMany${pascal(model.name)}Output`],
+      arguments: [`() => FindMany${model.name.pascal}Output`],
     },
   ];
 
@@ -38,7 +38,7 @@ export function generateFindManyMethod(
           take = 100,
         }
       `,
-      type: `FindMany${pascal(model.name)}Args`,
+      type: `FindMany${model.name.pascal}Args`,
       decorators: [{ name: 'Args', arguments: ['{ nullable: true }'] }],
     },
   ];
@@ -72,13 +72,13 @@ export function generateFindManyMethod(
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `Query for multiple ${camel(model.name)}s.`,
+      description: `Query for multiple ${model.name.camel}s.`,
     },
   ];
 
   return {
     kind: StructureKind.Method,
-    name: `findMany${pascal(model.name)}`,
+    name: `findMany${model.name.pascal}`,
     isAsync: true,
     decorators,
     parameters,

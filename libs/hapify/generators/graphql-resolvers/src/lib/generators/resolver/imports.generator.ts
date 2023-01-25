@@ -1,6 +1,6 @@
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
-import { constant, kebab, Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateImports(model: Model): ImportDeclarationStructure[] {
   return [
@@ -8,23 +8,20 @@ export function generateImports(model: Model): ImportDeclarationStructure[] {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `../../generated/prisma-nestjs-graphql`,
       namedImports: [
-        { name: `${pascal(model.name)}` },
-        ...model.dependencies.map((dependency) => ({
-          name: `${pascal(dependency.name)}`,
-        })),
-        { name: `FindUnique${pascal(model.name)}Args` },
-        { name: `FindMany${pascal(model.name)}Args` },
-        { name: `CreateOne${pascal(model.name)}Args` },
-        { name: `UpdateOne${pascal(model.name)}Args` },
-        { name: `DeleteOne${pascal(model.name)}Args` },
+        { name: `${model.name.pascal}` },
+        { name: `FindUnique${model.name.pascal}Args` },
+        { name: `FindMany${model.name.pascal}Args` },
+        { name: `CreateOne${model.name.pascal}Args` },
+        { name: `UpdateOne${model.name.pascal}Args` },
+        { name: `DeleteOne${model.name.pascal}Args` },
       ],
     },
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: '@trxn/generated-nestjs-models-common',
       namedImports: [
-        { name: `${pascal(model.name)}Service` },
-        { name: `${constant(model.name)}_SERVICE` },
+        { name: `${model.name.pascal}Service` },
+        { name: `${model.name.constant}_SERVICE` },
       ],
     },
     {
@@ -54,11 +51,6 @@ export function generateImports(model: Model): ImportDeclarationStructure[] {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: 'graphql',
       namedImports: [{ name: 'GraphQLResolveInfo' }],
-    },
-    {
-      kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: `./find-many-${kebab(model.name)}-output.dto`,
-      namedImports: [{ name: `FindMany${pascal(model.name)}Output` }],
     },
   ];
 }

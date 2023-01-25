@@ -6,7 +6,7 @@ import {
   StructureKind,
 } from 'ts-morph';
 
-import { camel, Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateFindUniqueMethod(
   model: Model,
@@ -15,7 +15,7 @@ export function generateFindUniqueMethod(
     {
       kind: StructureKind.Decorator,
       name: 'Query',
-      arguments: [`() => ${model.name}`, `{ nullable: true }`],
+      arguments: [`() => ${model.name.pascal}`, `{ nullable: true }`],
     },
   ];
 
@@ -30,7 +30,7 @@ export function generateFindUniqueMethod(
     {
       kind: StructureKind.Parameter,
       name: '{ where }',
-      type: `FindUnique${pascal(model.name)}Args`,
+      type: `FindUnique${model.name.pascal}Args`,
       decorators: [
         { name: 'Args', arguments: ['{ nullable: true, defaultValue: {} }'] },
       ],
@@ -39,22 +39,20 @@ export function generateFindUniqueMethod(
 
   const statements = `
     const select = new PrismaSelect(info).value;
-    const user =  await this.${camel(
-      model.name,
-    )}Service.findUnique(where, ...select);
+    const user =  await this.${model.name.camel}Service.findUnique(where, ...select);
     return user;
   `;
 
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `Query for a unique ${camel(model.name)}`,
+      description: `Query for a unique ${model.name.camel}`,
     },
   ];
 
   return {
     kind: StructureKind.Method,
-    name: `findUnique${pascal(model.name)}`,
+    name: `findUnique${model.name.pascal}`,
     isAsync: true,
     decorators,
     parameters,

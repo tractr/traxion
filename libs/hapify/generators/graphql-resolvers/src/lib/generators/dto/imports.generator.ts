@@ -1,6 +1,6 @@
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
-import { constant, Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateImports(model: Model): ImportDeclarationStructure[] {
   return [
@@ -8,23 +8,49 @@ export function generateImports(model: Model): ImportDeclarationStructure[] {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `../../generated/prisma-nestjs-graphql`,
       namedImports: [
-        { name: `${pascal(model.name)}` },
-        { name: `FindUnique${pascal(model.name)}Args` },
-        { name: `FindMany${pascal(model.name)}Args` },
-        { name: `CreateOne${pascal(model.name)}Args` },
-        { name: `UpdateOne${pascal(model.name)}Args` },
-        { name: `DeleteOne${pascal(model.name)}Args` },
+        { name: `${model.name.pascal}` },
+        { name: `FindUnique${model.name.pascal}Args` },
+        { name: `FindMany${model.name.pascal}Args` },
+        { name: `CreateOne${model.name.pascal}Args` },
+        { name: `UpdateOne${model.name.pascal}Args` },
+        { name: `DeleteOne${model.name.pascal}Args` },
       ],
     },
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: '@trxn/nestjs-graphql',
-      namedImports: [{ name: 'FindManyPagination' }],
+      moduleSpecifier: '@trxn/generated-nestjs-models-common',
+      namedImports: [
+        { name: `${model.name.pascal}Service` },
+        { name: `${model.name.constant}_SERVICE` },
+      ],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: '@nestjs/common',
+      namedImports: [{ name: 'Inject' }],
     },
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: '@nestjs/graphql',
-      namedImports: [{ name: 'Field' }, { name: 'ObjectType' }],
+      namedImports: [
+        { name: 'Args' },
+        { name: 'Info' },
+        { name: 'Mutation' },
+        { name: 'Parent' },
+        { name: 'Query' },
+        { name: 'ResolveField' },
+        { name: 'Resolver' },
+      ],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: '@paljs/plugins',
+      namedImports: [{ name: 'PrismaSelect' }],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: 'graphql',
+      namedImports: [{ name: 'GraphQLResolveInfo' }],
     },
   ];
 }

@@ -16,11 +16,9 @@ import {
   DeleteOneUserArgs,
   FindManyUserArgs,
   FindUniqueUserArgs,
-  Role,
   UpdateOneUserArgs,
   User,
 } from '../../generated/prisma-nestjs-graphql';
-import { FindManyUserOutput } from './find-many-user-output.dto';
 
 import {
   USER_SERVICE,
@@ -124,7 +122,7 @@ export class UserResolver {
     return user;
   }
 
-  /** Delete a single User. */
+  /** Delete a single user. */
   @Mutation(() => User, { nullable: true })
   async deleteUser(
     @Info() info: GraphQLResolveInfo,
@@ -140,10 +138,5 @@ export class UserResolver {
     );
 
     return user;
-  }
-
-  @ResolveField(() => Role)
-  role(@Parent() user: User) {
-    return user.role;
   }
 }

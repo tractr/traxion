@@ -6,14 +6,14 @@ import {
   StructureKind,
 } from 'ts-morph';
 
-import { camel, Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateDeleteMethod(model: Model): MethodDeclarationStructure {
   const decorators: DecoratorStructure[] = [
     {
       kind: StructureKind.Decorator,
       name: 'Mutation',
-      arguments: [`() => ${pascal(model.name)}`, `{ nullable: true }`],
+      arguments: [`() => ${model.name.pascal}`, `{ nullable: true }`],
     },
   ];
 
@@ -27,7 +27,7 @@ export function generateDeleteMethod(model: Model): MethodDeclarationStructure {
     {
       kind: StructureKind.Parameter,
       name: `{ where }`,
-      type: `DeleteOne${pascal(model.name)}Args`,
+      type: `DeleteOne${model.name.pascal}Args`,
       decorators: [{ name: 'Args', arguments: [] }],
     },
   ];
@@ -48,13 +48,13 @@ export function generateDeleteMethod(model: Model): MethodDeclarationStructure {
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `Delete a single ${pascal(model.name)}.`,
+      description: `Delete a single ${model.name.camel}.`,
     },
   ];
 
   return {
     kind: StructureKind.Method,
-    name: `delete${pascal(model.name)}`,
+    name: `delete${model.name.pascal}`,
     isAsync: true,
     decorators,
     parameters,

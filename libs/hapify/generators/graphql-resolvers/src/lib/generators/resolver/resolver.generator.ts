@@ -3,16 +3,15 @@ import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
 import { generateConstructor } from './constructor.generator';
 import { generateCreateMethod } from './create-method.generator';
 import { generateDeleteMethod } from './delete-method.generator';
-import { generateFieldResolvers } from './field-resolver.generator';
 import { generateFindManyMethod } from './find-many-method.generator';
 import { generateFindUniqueMethod } from './find-unique-method.generator';
 import { generateImports } from './imports.generator';
 import { generateUpdateMethod } from './update-method.generator';
 
-import { Model, pascal, snake } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateResolverClass(model: Model): ClassDeclarationStructure {
-  const className = `${pascal(model.name)}Resolver`;
+  const className = `${model.name.pascal}Resolver`;
   const constructor = generateConstructor(model);
 
   const methods = [
@@ -21,7 +20,6 @@ export function generateResolverClass(model: Model): ClassDeclarationStructure {
     generateCreateMethod(model),
     generateUpdateMethod(model),
     generateDeleteMethod(model),
-    ...generateFieldResolvers(model),
   ];
 
   return {
@@ -29,7 +27,7 @@ export function generateResolverClass(model: Model): ClassDeclarationStructure {
     name: className,
     isExported: true,
     decorators: [
-      { name: 'Resolver', arguments: [`() => ${pascal(model.name)}`] },
+      { name: 'Resolver', arguments: [`() => ${model.name.pascal}`] },
     ],
     methods,
     ctors: [constructor],
@@ -41,7 +39,7 @@ export function generateResolverSourceFile(
   model: Model,
   path: string,
 ) {
-  const fileName = `${snake(model.name)}.resolver.ts`;
+  const fileName = `${model.name.snake}.resolver.ts`;
   const filePath = `${path}/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);

@@ -1,37 +1,21 @@
-import {
-  ClassDeclarationStructure,
-  Project,
-  PropertyDeclarationStructure,
-  StructureKind,
-} from 'ts-morph';
+import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
 
 import { generateImports } from './imports.generator';
 
-import { camel, Model, pascal, snake } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
-export function generateDtoClass(model: Model): ClassDeclarationStructure {
-  const className = `FindMany${pascal(model.name)}Output`;
+export function generateDtorClass(model: Model): ClassDeclarationStructure {
+  const className = `${model.name.pascal}Resolver`;
 
-  const properties: PropertyDeclarationStructure[] = [
-    {
-      kind: StructureKind.Property,
-      // TODO: use plural helper here, when available
-      name: `${camel(model.name)}s`,
-      type: `${pascal(model.name)}[]`,
-      hasExclamationToken: true,
-      decorators: [
-        { name: 'Field', arguments: [`() => [${pascal(model.name)}]`] },
-      ],
-    },
-  ];
+  const methods = [];
 
   return {
     kind: StructureKind.Class,
     name: className,
     isExported: true,
-    decorators: [{ name: 'ObjectType', arguments: [] }],
-    extends: 'FindManyPagination',
-    properties,
+    decorators: [
+      { name: 'Resolver', arguments: [`() => ${model.name.pascal}`] },
+    ],
   };
 }
 
@@ -40,14 +24,14 @@ export function generateDtoSourceFile(
   model: Model,
   path: string,
 ) {
-  const fileName = `find-many-${snake(model.name)}-output.dto.ts`;
+  const fileName = `${model.name.snake}.resolver.ts`;
   const filePath = `${path}/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);
 
-  const dtoClass = generateDtoClass(model);
+  const resolverClass = generateDtorClass(model);
   const imports = generateImports(model);
 
   sourceFile.addImportDeclarations(imports);
-  sourceFile.addClass(dtoClass);
+  sourceFile.addClass(resolverClass);
 }

@@ -6,14 +6,14 @@ import {
   StructureKind,
 } from 'ts-morph';
 
-import { camel, Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateCreateMethod(model: Model): MethodDeclarationStructure {
   const decorators: DecoratorStructure[] = [
     {
       kind: StructureKind.Decorator,
       name: 'Mutation',
-      arguments: [`() => ${pascal(model.name)}`, `{ nullable: true }`],
+      arguments: [`() => ${model.name.pascal}`, `{ nullable: true }`],
     },
   ];
 
@@ -27,7 +27,7 @@ export function generateCreateMethod(model: Model): MethodDeclarationStructure {
     {
       kind: StructureKind.Parameter,
       name: `{ data: rawData }`,
-      type: `CreateOne${pascal(model.name)}Args`,
+      type: `CreateOne${model.name.pascal}Args`,
       decorators: [{ name: 'Args', arguments: [] }],
     },
   ];
@@ -53,13 +53,13 @@ export function generateCreateMethod(model: Model): MethodDeclarationStructure {
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `Create a single ${camel(model.name)}.`,
+      description: `Create a single ${model.name.camel}.`,
     },
   ];
 
   return {
     kind: StructureKind.Method,
-    name: `create${pascal(model.name)}`,
+    name: `create${model.name.pascal}`,
     isAsync: true,
     decorators,
     parameters,

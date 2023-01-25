@@ -4,7 +4,7 @@ import {
   StructureKind,
 } from 'ts-morph';
 
-import { camel, constant, Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateConstructor(
   model: Model,
@@ -14,15 +14,15 @@ export function generateConstructor(
     parameters: [
       {
         kind: StructureKind.Parameter,
-        name: `${camel(model.name)}Service`,
-        type: `${pascal(model.name)}Service`,
+        name: `${model.name.camel}Service`,
+        type: `${model.name.pascal}Service`,
         scope: Scope.Private,
         isReadonly: true,
         decorators: [
           {
             kind: StructureKind.Decorator,
             name: 'Inject',
-            arguments: [`${constant(model.name)}_SERVICE`],
+            arguments: [`${model.name.constant}_SERVICE`],
           },
         ],
       },
