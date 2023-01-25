@@ -22,10 +22,3 @@ export function getOwners(model: Model): Model[] {
   }
   return owners;
 }
-
-/**
- * Denotes of the model is not a root model.
- */
-export function hasOwner(model: Model): boolean {
-  return !!model.owner;
-}

@@ -1,4 +1,12 @@
-import { and, isNumber, isPassword, isString, not, or } from './helpers';
+import {
+  and,
+  hasOwner,
+  isNumber,
+  isPassword,
+  isString,
+  not,
+  or,
+} from './helpers';
 import {
   BooleanField,
   Model,
@@ -49,3 +57,5 @@ const field = root.models[0].fields[0];
 if (and(not(isPassword))(field)) {
   // field is a string field, primary and ownership
 }
+
+root.models.filter(hasOwner).map((model) => model.owner.name);
