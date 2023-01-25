@@ -30,6 +30,12 @@
       "options": {
         "access": "public"
       }
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/hapify/templates/dbml/package.json"
+      }
     }
   }
 }

@@ -41,6 +41,12 @@
         "passWithNoTests": true
       },
       "outputs": ["{workspaceRoot}/coverage/libs/config/commit"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/config/commit/package.json"
+      }
     }
   }
 }

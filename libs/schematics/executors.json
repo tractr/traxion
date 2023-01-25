@@ -5,6 +5,11 @@
       "description": "Executor to generate hapify files",
       "implementation": "./src/executors/generate/executor",
       "schema": "./src/executors/generate/schema.json"
+    },
+    "update-peer-dependencies": {
+      "description": "Update the peerDependencies to match with the workspace requirement",
+      "implementation": "./src/executors/update-peer-dependencies/executor",
+      "schema": "./src/executors/update-peer-dependencies/schema.json"
     }
   }
 }

@@ -40,6 +40,12 @@
       "outputs": [
         "{workspaceRoot}/coverage/libs/terraform/component/deployment-trigger"
       ]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/terraform/component/deployment-trigger/package.json"
+      }
     }
   }
 }

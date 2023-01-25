@@ -39,6 +39,12 @@
         "passWithNoTests": true
       },
       "outputs": ["{workspaceRoot}/coverage/libs/config/prettier"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/config/prettier/package.json"
+      }
     }
   }
 }

@@ -48,6 +48,12 @@
       "outputs": [
         "{workspaceRoot}/coverage/libs/hapify/update-templates-import-path"
       ]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/hapify/update-templates-import-path/package.json"
+      }
     }
   }
 }
