@@ -20,7 +20,13 @@
       "options": {
         "project": "libs/angular/components/ng-package.json"
       },
-      "outputs": ["{workspaceRoot}/dist/libs/angular/components"]
+      "outputs": ["{workspaceRoot}/dist/libs/angular/components"],
+      "update-peer-dependencies": {
+        "executor": "./dist/libs/schematics:update-peer-dependencies",
+        "options": {
+          "packageJsonPath": "{workspaceRoot}/dist/libs/angular/components/package.json"
+        }
+      }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",

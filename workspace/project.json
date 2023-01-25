@@ -16,7 +16,10 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nx run-many --target=publish --all --exclude=workspace"
+        "command": [
+          "nx run-many --target=update-peer-dependencies --all --exclude=workspace",
+          "nx run-many --target=publish --all --exclude=workspace"
+        ]
       }
     },
     "publish-next": {

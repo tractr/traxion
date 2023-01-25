@@ -1,0 +1,21 @@
+{
+  "@angular/*": "^15.0.0",
+  "@ant-design/icons-angular": "^15.0.0",
+  "@casl/ability": "^6.0.0",
+  "@casl/angular": "^8.0.0",
+  "@casl/prisma": "^1.0.0",
+  "@nestjs/apollo": "^10.0.0",
+  "@nestjs/axios": "^1.0.0",
+  "@nestjs/common": "9.0.0",
+  "@nestjs/config": "^2.0.0",
+  "@nestjs/core": "9.0.0",
+  "@nestjs/graphql": "^10.0.0",
+  "@nestjs/jwt": "^10.0.0",
+  "@nestjs/passport": "^9.0.0",
+  "@nestjs/platform-express": "^9.0.0",
+  "@nestjs/swagger": "6.1.4",
+  "@nrwl/*": "^15.0.0",
+  "@prisma/client": "^4.0.0",
+  "@schematics/angular": "^15.0.0",
+  "@trxn/*": "^1.63.0"
+}

@@ -38,6 +38,12 @@
         "passWithNoTests": true
       },
       "outputs": ["{workspaceRoot}/coverage/libs/nestjs/request-timestamp"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/nestjs/request-timestamp/package.json"
+      }
     }
   }
 }
