@@ -1,11 +1,9 @@
 import {
   and,
+  isFieldActionAuth,
   isModelActionPublic,
-  isNullable,
   isPassword,
-  isPrimary,
   not,
-  or,
 } from './helpers';
 import {
   BooleanField,
@@ -48,7 +46,7 @@ const root = new Project('app').addModel(
 
 const output = `
 ${root.models[0].fields
-  .filter(or(isPrimary, isNullable))
+  .filter(and(isFieldActionAuth('read')))
   .map((field) => field.name)
   .join(', ')}
 `;

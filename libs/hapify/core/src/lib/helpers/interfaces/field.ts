@@ -1,3 +1,5 @@
+import { FieldAction, Scope } from '../../nodes';
+
 export interface PrimaryField {
   primary: true;
 }
@@ -24,4 +26,10 @@ export interface SearchableField {
 
 export interface SortableField {
   sortable: true;
+}
+export interface FieldActionScope<
+  A extends FieldAction,
+  S extends Scope | undefined,
+> {
+  actionsScopes: { [key in A]: S };
 }
