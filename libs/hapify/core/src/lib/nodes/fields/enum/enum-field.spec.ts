@@ -22,7 +22,7 @@ describe('EnumField', () => {
     it('should set default values', () => {
       const field = new EnumField('test');
       field.addValue('test');
-      field.setDefaultValue('test');
+      expect(field.setDefaultValue('test')).toBe(field); // Test chaining;
       expect(field.defaultValue).toBe('test');
     });
     it('should throw an error if the value is not in the enum', () => {
@@ -39,13 +39,13 @@ describe('EnumField', () => {
     });
     it('should add values', () => {
       const field = new EnumField('test');
-      field.addValue('test');
+      expect(field.addValue('test')).toBe(field); // Test chaining;
       expect(field.values).toStrictEqual(['test']);
     });
     it('should remove values', () => {
       const field = new EnumField('test');
       field.addValue('test');
-      field.removeValue('test');
+      expect(field.removeValue('test')).toBe(field); // Test chaining;
       expect(field.values).toStrictEqual([]);
     });
   });

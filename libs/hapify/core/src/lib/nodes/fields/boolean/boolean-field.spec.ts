@@ -22,7 +22,7 @@ describe('BooleanField', () => {
     });
     it('should be set', () => {
       const field = new BooleanField('test');
-      field.setDefaultValue(true);
+      expect(field.setDefaultValue(true)).toBe(field); // Test chaining;
       expect(field.defaultValue).toBe(true);
     });
   });

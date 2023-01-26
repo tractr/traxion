@@ -20,7 +20,7 @@ describe('Model', () => {
     it('should add a field to the model', () => {
       const model = new Model('User');
       const field = new StringBasicField('name');
-      model.addField(field);
+      expect(model.addField(field)).toBe(model); // Test chaining;
       expect(model.fields).toEqual([field]);
     });
 
@@ -38,7 +38,7 @@ describe('Model', () => {
       const model = new Model('User');
       const field = new StringBasicField('name');
       model.addField(field);
-      model.removeField(field);
+      expect(model.removeField(field)).toBe(model); // Test chaining;
       expect(model.fields).toEqual([]);
     });
   });
@@ -141,7 +141,7 @@ describe('Model', () => {
     it('should set the scope of an action', () => {
       const model = new Model('User');
       const scope = 'system';
-      model.setActionScope('create', scope);
+      expect(model.setActionScope('create', scope)).toBe(model); // Test chaining;
       expect(model.actionsScopes.create).toEqual(scope);
     });
   });
@@ -150,7 +150,7 @@ describe('Model', () => {
     it('should set the scopes of many actions', () => {
       const model = new Model('User');
       const scope = 'system';
-      model.setActionsScopes({ create: scope });
+      expect(model.setActionsScopes({ create: scope })).toBe(model); // Test chaining;
       expect(model.actionsScopes.create).toEqual(scope);
     });
     it('should not override existing scopes', () => {
@@ -177,7 +177,7 @@ describe('Model', () => {
     it('should set the owner of the model', () => {
       const model = new Model('Shop');
       const owner = new Model('User');
-      model.setOwner(owner);
+      expect(model.setOwner(owner)).toBe(model); // Test chaining;
       expect(model.owner).toEqual(owner);
     });
   });
@@ -187,7 +187,7 @@ describe('Model', () => {
       const model = new Model('Shop');
       const owner = new Model('User');
       model.setOwner(owner);
-      model.removeOwner();
+      expect(model.removeOwner()).toBe(model); // Test chaining;
       expect(model.owner).toBeUndefined();
     });
   });

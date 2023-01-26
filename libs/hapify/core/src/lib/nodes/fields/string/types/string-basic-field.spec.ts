@@ -18,7 +18,7 @@ describe('BaseField', () => {
 
     it('should be set to true when calling setPrimary with true', () => {
       const field = new StringBasicField('test');
-      field.setPrimary(true);
+      expect(field.setPrimary(true)).toBe(field); // Test chaining
       expect(field.primary).toBe(true);
     });
   });
@@ -31,7 +31,7 @@ describe('BaseField', () => {
 
     it('should be set to true when calling setUnique with true', () => {
       const field = new StringBasicField('test');
-      field.setUnique(true);
+      expect(field.setUnique(true)).toBe(field); // Test chaining
       expect(field.unique).toBe(true);
     });
   });
@@ -44,7 +44,7 @@ describe('BaseField', () => {
 
     it('should be set to true when calling setLabel with true', () => {
       const field = new StringBasicField('test');
-      field.setLabel(true);
+      expect(field.setLabel(true)).toBe(field); // Test chaining
       expect(field.label).toBe(true);
     });
   });
@@ -57,7 +57,7 @@ describe('BaseField', () => {
 
     it('should be set to true when calling setNullable with true', () => {
       const field = new StringBasicField('test');
-      field.setNullable(true);
+      expect(field.setNullable(true)).toBe(field); // Test chaining
       expect(field.nullable).toBe(true);
     });
   });
@@ -70,7 +70,7 @@ describe('BaseField', () => {
 
     it('should be set to true when calling setMultiple with true', () => {
       const field = new StringBasicField('test');
-      field.setMultiple(true);
+      expect(field.setMultiple(true)).toBe(field); // Test chaining
       expect(field.multiple).toBe(true);
     });
   });
@@ -83,7 +83,7 @@ describe('BaseField', () => {
 
     it('should be set to true when calling setSearchable with true', () => {
       const field = new StringBasicField('test');
-      field.setSearchable(true);
+      expect(field.setSearchable(true)).toBe(field); // Test chaining
       expect(field.searchable).toBe(true);
     });
   });
@@ -96,7 +96,7 @@ describe('BaseField', () => {
 
     it('should be set to true when calling setSortable with true', () => {
       const field = new StringBasicField('test');
-      field.setSortable(true);
+      expect(field.setSortable(true)).toBe(field); // Test chaining
       expect(field.sortable).toBe(true);
     });
   });
@@ -109,7 +109,7 @@ describe('BaseField', () => {
     });
     it('should set the action scope', () => {
       const field = new StringBasicField('test');
-      field.setActionScope('read', 'system');
+      expect(field.setActionScope('read', 'system')).toBe(field); // Test chaining
       expect(field.actionsScopes).toStrictEqual({
         read: 'system',
         write: undefined,
@@ -157,7 +157,7 @@ describe('BaseField', () => {
   describe('makeNotReadable', () => {
     it('should set the read scope to "none"', () => {
       const field = new StringBasicField('test');
-      field.makeNotReadable();
+      expect(field.makeNotReadable()).toBe(field); // Test chaining
       expect(field.actionsScopes.read).toBe('system');
     });
   });
@@ -165,7 +165,7 @@ describe('BaseField', () => {
   describe('makeNotWritable', () => {
     it('should set the write scope to "none"', () => {
       const field = new StringBasicField('test');
-      field.makeNotWritable();
+      expect(field.makeNotWritable()).toBe(field); // Test chaining
       expect(field.actionsScopes.write).toBe('system');
     });
   });
@@ -187,7 +187,7 @@ describe('BaseStringField', () => {
 
     it('should be set to a value when calling setDefaultValue with a value', () => {
       const field = new StringBasicField('test');
-      field.setDefaultValue('test');
+      expect(field.setDefaultValue('test')).toBe(field); // Test chaining
       expect(field.defaultValue).toBe('test');
     });
   });
@@ -200,7 +200,7 @@ describe('BaseStringField', () => {
 
     it('should be set to a value when calling setMinLength with a value', () => {
       const field = new StringBasicField('test');
-      field.setMinLength(3);
+      expect(field.setMinLength(3)).toBe(field); // Test chaining
       expect(field.minLength).toBe(3);
     });
   });
@@ -213,7 +213,7 @@ describe('BaseStringField', () => {
 
     it('should be set to a value when calling setMaxLength with a value', () => {
       const field = new StringBasicField('test');
-      field.setMaxLength(3);
+      expect(field.setMaxLength(3)).toBe(field); // Test chaining
       expect(field.maxLength).toBe(3);
     });
   });

@@ -21,7 +21,7 @@ describe('NumberLongitudeField', () => {
     });
     it('should not be lower than -180', () => {
       const field = new NumberLongitudeField('test');
-      field.setMin(-181);
+      expect(field.setMin(-181)).toBe(field); // Test chaining;
       expect(field.min).toBe(-180);
     });
   });
@@ -32,7 +32,7 @@ describe('NumberLongitudeField', () => {
     });
     it('should not be higher than 180', () => {
       const field = new NumberLongitudeField('test');
-      field.setMax(181);
+      expect(field.setMax(181)).toBe(field); // Test chaining;
       expect(field.max).toBe(180);
     });
   });

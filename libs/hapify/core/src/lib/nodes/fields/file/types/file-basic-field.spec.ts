@@ -17,7 +17,7 @@ describe('BaseFileField', () => {
 
     it('should set the max size', () => {
       const field = new FileBasicField('test');
-      field.setMaxSize(100);
+      expect(field.setMaxSize(100)).toBe(field); // Test chaining
       expect(field.maxSize).toBe(100);
     });
   });
@@ -30,7 +30,7 @@ describe('BaseFileField', () => {
 
     it('should set the allowed extensions', () => {
       const field = new FileBasicField('test');
-      field.addAllowedExtension('jpg');
+      expect(field.addAllowedExtension('jpg')).toBe(field); // Test chaining
       field.addAllowedExtension('png');
       expect(field.allowedExtensions).toEqual(['jpg', 'png']);
     });
@@ -39,7 +39,7 @@ describe('BaseFileField', () => {
       const field = new FileBasicField('test');
       field.addAllowedExtension('jpg');
       field.addAllowedExtension('png');
-      field.removeAllowedExtension('jpg');
+      expect(field.removeAllowedExtension('jpg')).toBe(field); // Test chaining
       expect(field.allowedExtensions).toEqual(['png']);
     });
   });
