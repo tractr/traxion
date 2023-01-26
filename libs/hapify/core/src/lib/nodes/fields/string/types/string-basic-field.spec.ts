@@ -1,6 +1,15 @@
+import { BaseField } from '../../base-field';
+import { BaseStringField } from '../base-string-field';
 import { StringBasicField } from './string-basic-field';
 
 describe('BaseField', () => {
+  describe('constructor', () => {
+    it('should create a field', () => {
+      const field = new StringBasicField('test');
+      expect(field).toBeInstanceOf(BaseField);
+    });
+  });
+
   describe('primary', () => {
     it('should be false by default', () => {
       const field = new StringBasicField('test');
@@ -163,6 +172,13 @@ describe('BaseField', () => {
 });
 
 describe('BaseStringField', () => {
+  describe('constructor', () => {
+    it('should create a field', () => {
+      const field = new StringBasicField('test');
+      expect(field).toBeInstanceOf(BaseStringField);
+    });
+  });
+
   describe('defaultValue', () => {
     it('should be undefined by default', () => {
       const field = new StringBasicField('test');
@@ -204,9 +220,17 @@ describe('BaseStringField', () => {
 });
 
 describe('StringBasicField', () => {
-  it('should have the correct type and subType', () => {
-    const field = new StringBasicField('test');
-    expect(field.type).toBe('string');
-    expect(field.subType).toBe('basic');
+  describe('constructor', () => {
+    it('should create a field', () => {
+      const field = new StringBasicField('test');
+      expect(field).toBeInstanceOf(StringBasicField);
+    });
+  });
+  describe('type', () => {
+    it('should have the correct type and subType', () => {
+      const field = new StringBasicField('test');
+      expect(field.type).toBe('string');
+      expect(field.subType).toBe('basic');
+    });
   });
 });
