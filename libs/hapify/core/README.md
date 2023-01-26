@@ -1,12 +1,60 @@
 # hapify-core
 
-This library was generated with [Nx](https://nx.dev).
+Library to describe data models in TypeScript.
+It also includes helpers to test and filter data models and their fields.
 
-## Running unit tests
+## Data models definition
 
-Run `nx test hapify-core` to execute the unit tests via
-[Jest](https://jestjs.io).
+```typescript
+const idField = new NumberBasicField('Id').setPrimary(true).makeNotWritable();
 
-## Running lint
+const project = new Project('app').addModel(
+  new Model('User')
+    .addField(idField)
+    .addField(new StringBasicField('FirstName').setMaxLength(50))
+    .addField(new StringBasicField('LastName').setMaxLength(50))
+    .addField(new StringEmailField('Email'))
+    .addField(
+      new StringPasswordField('Password')
+        .setValidationRegex('/([0-9a-z]+)/')
+        .makeNotReadable(),
+    )
+    .addField(
+      new StringTextField('Description')
+        .setNullable(true)
+        .addMetadata('foo', 'bar'),
+    )
+    .addField(new BooleanField('Enabled').setDefaultValue(false))
+    .addField(
+      new NumberIntegerField('Credits')
+        .setDefaultValue(10)
+        .setMax(1000)
+        .setNotes('Amount of credits remaining'),
+    ),
+);
+```
 
-Run `nx lint hapify-core` to execute the lint via [ESLint](https://eslint.org/).
+## Playing with data models
+
+```typescript
+const modelsWithPublicSearchAndCount = project.models
+  .filter(and(isModelActionPublic('search'), isModelActionPublic('count')));
+```
+
+```typescript
+const firstModel = project.models[0];
+if (hasOwner(firstModel)) {
+  const ownerChain = getOwners(firstModel);
+}
+```
+
+## Playing with data models fields
+
+```typescript
+const firstModel = project.models[0];
+const publicStringAndNumberNames = firstModel.fields
+  .filter(and(or(isString, isNumber()), isFieldActionPublic('read')))
+  .map((field) => kebab(field.name))
+  .join(', ');
+```
+
