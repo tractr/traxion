@@ -1,0 +1,124 @@
+import { Model } from './model';
+import { Project } from './project';
+
+describe('Project', () => {
+  describe('constructor', () => {
+    it('should create a new instance of Project', () => {
+      const project = new Project('MyProject');
+      expect(project).toBeInstanceOf(Project);
+    });
+  });
+
+  describe('models', () => {
+    it('should return an empty array', () => {
+      const project = new Project('MyProject');
+      expect(project.models).toEqual([]);
+    });
+  });
+
+  describe('addModel', () => {
+    it('should add a model to the project', () => {
+      const project = new Project('MyProject');
+      const model = new Model('MyModel');
+      project.addModel(model);
+      expect(project.models).toEqual([model]);
+    });
+  });
+
+  describe('removeModel', () => {
+    it('should remove a model from the project', () => {
+      const project = new Project('MyProject');
+      const model = new Model('MyModel');
+      project.addModel(model);
+      project.removeModel(model);
+      expect(project.models).toEqual([]);
+    });
+  });
+
+  describe('metadata', () => {
+    it('should return an empty object', () => {
+      const project = new Project('MyProject');
+      expect(project.metadata).toEqual({});
+    });
+  });
+
+  describe('addMetadata', () => {
+    it('should add a metadata to the project', () => {
+      const project = new Project('MyProject');
+      project.addMetadata('foo', 'bar');
+      expect(project.metadata).toEqual({ foo: 'bar' });
+    });
+  });
+
+  describe('removeMetadata', () => {
+    it('should remove a metadata from the project', () => {
+      const project = new Project('MyProject');
+      project.addMetadata('foo', 'bar');
+      project.removeMetadata('foo');
+      expect(project.metadata).toEqual({});
+    });
+  });
+
+  describe('hasMetadata', () => {
+    it('should return false if no metadata is set', () => {
+      const project = new Project('MyProject');
+      expect(project.hasMetadata()).toBe(false);
+    });
+
+    it('should return false if the metadata does not exist', () => {
+      const project = new Project('MyProject');
+      project.addMetadata('foo', 'bar');
+      expect(project.hasMetadata('baz')).toBe(false);
+    });
+
+    it('should return true if the metadata exists', () => {
+      const project = new Project('MyProject');
+      project.addMetadata('foo', 'bar');
+      expect(project.hasMetadata('foo')).toBe(true);
+    });
+  });
+
+  describe('notes', () => {
+    it('should return an empty string', () => {
+      const project = new Project('MyProject');
+      expect(project.notes).toBe('');
+    });
+  });
+
+  describe('setNotes', () => {
+    it('should set the notes of the project', () => {
+      const project = new Project('MyProject');
+      project.setNotes('My notes');
+      expect(project.notes).toBe('My notes');
+    });
+  });
+
+  describe('clearNotes', () => {
+    it('should clear the notes of the project', () => {
+      const project = new Project('MyProject');
+      project.setNotes('My notes');
+      project.clearNotes();
+      expect(project.notes).toBe('');
+    });
+  });
+
+  describe('hasNotes', () => {
+    it('should return false if no notes are set', () => {
+      const project = new Project('MyProject');
+      expect(project.hasNotes()).toBe(false);
+    });
+
+    it('should return true if notes are set', () => {
+      const project = new Project('MyProject');
+      project.setNotes('My notes');
+      expect(project.hasNotes()).toBe(true);
+    });
+  });
+
+  describe('name', () => {
+    it('should return the name of the project', () => {
+      const project = new Project('MyProject');
+      expect(project.name).toBe('MyProject');
+    });
+  });
+});
