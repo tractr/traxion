@@ -1,5 +1,8 @@
 import { BaseEntityField } from '../base-entity-field';
 
+/**
+ * This class is tested via the children classes, especially the EntityManyToOneField class
+ */
 export abstract class EntityMultipleField extends BaseEntityField {
   /**
    * Limit the number of relations
