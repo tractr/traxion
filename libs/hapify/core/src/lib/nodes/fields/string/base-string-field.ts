@@ -1,5 +1,8 @@
 import { BaseField } from '../base-field';
 
+/**
+ * This class is tested via the children classes, especially the StringBasicField class
+ */
 export abstract class BaseStringField extends BaseField {
   /**
    * Default value of the string
