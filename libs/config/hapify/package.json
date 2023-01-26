@@ -1,6 +1,6 @@
 {
   "name": "@trxn/hapify-config",
-  "version": "1.65.13-next.4",
+  "version": "1.65.13-next.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion.git"

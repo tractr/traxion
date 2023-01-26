@@ -16,17 +16,37 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": [
-          "nx run-many --target=build --all --exclude=workspace",
-          "nx run-many --target=update-peer-dependencies --all --exclude=workspace",
-          "nx run-many --target=publish --all --exclude=workspace"
-        ]
+        "commands": [
+          {
+            "command": "nx run-many --target=build --all --exclude=workspace"
+          },
+          {
+            "command": "nx run-many --target=update-peer-dependencies --all --exclude=workspace --skip-nx-cache"
+          },
+          {
+            "command": "nx run-many --target=publish --all --exclude=workspace --no-build"
+          }
+        ],
+        "parallel": false
       }
     },
     "publish-next": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nx run-many --target=publish --all --exclude=workspace --tag=next"
+        "commands": [
+          {
+            "command": "nx run-many --target=build --all --exclude=workspace,admin,api,docs,pwa,pwa-e2e,terraform",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "nx run-many --target=update-peer-dependencies --all --exclude=workspace --skip-nx-cache",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "nx run-many --target=publish --all --exclude=workspace --no-build --tag=next"
+          }
+        ],
+        "parallel": false
       }
     },
     "release": {
