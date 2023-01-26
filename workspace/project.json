@@ -18,13 +18,16 @@
       "options": {
         "commands": [
           {
-            "command": "nx run-many --target=build --all --exclude=workspace"
+            "command": "nx run-many --target=build --all --exclude=workspace",
+            "forwardAllArgs": false
           },
           {
-            "command": "nx run-many --target=update-peer-dependencies --all --exclude=workspace --skip-nx-cache"
+            "command": "nx run-many --target=update-peer-dependencies --all --exclude=workspace --skip-nx-cache",
+            "forwardAllArgs": false
           },
           {
-            "command": "nx run-many --target=publish --all --exclude=workspace --no-build"
+            "command": "nx run-many --target=publish --all --exclude=workspace --no-build=true",
+            "forwardAllArgs": false
           }
         ],
         "parallel": false
@@ -43,7 +46,8 @@
             "forwardAllArgs": false
           },
           {
-            "command": "nx run-many --target=publish --all --exclude=workspace --no-build --tag=next"
+            "command": "nx run-many --target=publish --all --exclude=workspace --no-build=true --tag=next",
+            "forwardAllArgs": false
           }
         ],
         "parallel": false

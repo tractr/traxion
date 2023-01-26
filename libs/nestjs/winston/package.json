@@ -1,6 +1,6 @@
 {
   "name": "@trxn/nestjs-winston",
-  "version": "1.65.13-next.5",
+  "version": "1.65.13-next.6",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"
