@@ -42,6 +42,11 @@ const modelsWithPublicSearchAndCount = project.models
 ```
 
 ```typescript
+const modelsWithDependencyOrSelfReferenced = project.models
+  .filter(or(hasDependencies, isSelfReferenced));
+```
+
+```typescript
 const firstModel = project.models[0];
 if (hasOwner(firstModel)) {
   const ownerChain = getOwners(firstModel);
