@@ -3,6 +3,7 @@ import { Node } from '../node';
 
 /**
  * Abstract class for a field of a model
+ * This class is tested via the children classes, especially the StringBasicField class
  */
 export abstract class BaseField extends Node {
   abstract readonly type: string;
