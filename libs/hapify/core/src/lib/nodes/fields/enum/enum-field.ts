@@ -1,6 +1,6 @@
 import { BaseField } from '../base-field';
 
-export abstract class EnumField extends BaseField {
+export class EnumField extends BaseField {
   readonly type = 'enum' as const;
   readonly subType = 'basic' as const;
 
@@ -10,8 +10,12 @@ export abstract class EnumField extends BaseField {
 
   /**
    * Set default value of the enum
+   * Ensure that the value is in the enum
    */
   setDefaultValue(value: string): this {
+    if (!this._values.has(value)) {
+      throw new Error(`Value "${value}" is not in the enum`);
+    }
     this._defaultValue = value;
     return this;
   }
