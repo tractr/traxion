@@ -21,10 +21,12 @@ describe('ObjectField', () => {
     });
     it('should set default values', () => {
       const field = new ObjectField('test');
-      field.setDefaultValue({
-        test: 'test',
-        other: 2,
-      });
+      expect(
+        field.setDefaultValue({
+          test: 'test',
+          other: 2,
+        }),
+      ).toBe(field); // Test chaining;
       expect(field.defaultValue).toStrictEqual({
         test: 'test',
         other: 2,

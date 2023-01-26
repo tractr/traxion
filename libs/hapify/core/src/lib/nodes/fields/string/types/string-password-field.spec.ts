@@ -21,7 +21,7 @@ describe('StringPasswordField', () => {
     });
     it('should set validation regex', () => {
       const field = new StringPasswordField('test');
-      field.setValidationRegex('test');
+      expect(field.setValidationRegex('test')).toBe(field); // Test chaining
       expect(field.validationRegex).toBe('test');
     });
   });

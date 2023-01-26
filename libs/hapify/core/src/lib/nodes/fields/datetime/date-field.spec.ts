@@ -22,7 +22,7 @@ describe('DateField', () => {
     });
     it('should be set', () => {
       const field = new DateField('test');
-      field.setMin(new Date());
+      expect(field.setMin(new Date())).toBe(field); // Test chaining
       expect(field.min).toBeInstanceOf(Date);
     });
   });
@@ -34,7 +34,7 @@ describe('DateField', () => {
     });
     it('should be set', () => {
       const field = new DateField('test');
-      field.setMax(new Date());
+      expect(field.setMax(new Date())).toBe(field); // Test chaining
       expect(field.max).toBeInstanceOf(Date);
     });
   });
@@ -46,7 +46,7 @@ describe('DateField', () => {
     });
     it('should be set', () => {
       const field = new DateField('test');
-      field.setWithTime(true);
+      expect(field.setWithTime(true)).toBe(field); // Test chaining
       expect(field.withTime).toBe(true);
     });
   });
