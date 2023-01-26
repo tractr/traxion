@@ -1,5 +1,8 @@
 import { BaseField } from '../base-field';
 
+/**
+ * This class is tested via the children classes, especially the FileBasicField class
+ */
 export abstract class BaseFileField extends BaseField {
   /**
    * Max size of the file
@@ -24,6 +27,14 @@ export abstract class BaseFileField extends BaseField {
    */
   addAllowedExtension(allowedExtension: string): this {
     this._allowedExtensions.add(allowedExtension);
+    return this;
+  }
+
+  /**
+   * Remove allowed extension of the file
+   */
+  removeAllowedExtension(allowedExtension: string): this {
+    this._allowedExtensions.delete(allowedExtension);
     return this;
   }
 
