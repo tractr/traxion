@@ -1,6 +1,6 @@
 {
   "name": "@trxn/terraform-service-admin",
-  "version": "1.65.13-next.6",
+  "version": "1.65.13-next.7",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"
