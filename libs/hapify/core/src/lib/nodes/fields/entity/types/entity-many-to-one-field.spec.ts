@@ -16,7 +16,7 @@ describe('EntityMultipleField', () => {
     });
     it('should set the limit', () => {
       const field = new EntityManyToOneField('test', new Model('User'));
-      field.setLimit(10);
+      expect(field.setLimit(10)).toBe(field); // Test chaining;
       expect(field.limit).toBe(10);
     });
   });

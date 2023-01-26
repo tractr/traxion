@@ -21,7 +21,7 @@ describe('FileAudioField', () => {
     });
     it('should set the min bitrate', () => {
       const field = new FileAudioField('test');
-      field.setMinBitrate(100);
+      expect(field.setMinBitrate(100)).toBe(field); // Test chaining;
       expect(field.minBitrate).toBe(100);
     });
   });
@@ -32,7 +32,7 @@ describe('FileAudioField', () => {
     });
     it('should set the max bitrate', () => {
       const field = new FileAudioField('test');
-      field.setMaxBitrate(100);
+      expect(field.setMaxBitrate(100)).toBe(field); // Test chaining;
       expect(field.maxBitrate).toBe(100);
     });
   });

@@ -16,7 +16,7 @@ describe('BaseNumberField', () => {
     });
     it('should be set', () => {
       const field = new NumberBasicField('test');
-      field.setMin(1);
+      expect(field.setMin(1)).toBe(field); // Test chaining;
       expect(field.min).toBe(1);
     });
   });
@@ -28,7 +28,7 @@ describe('BaseNumberField', () => {
     });
     it('should be set', () => {
       const field = new NumberBasicField('test');
-      field.setMax(1);
+      expect(field.setMax(1)).toBe(field); // Test chaining;
       expect(field.max).toBe(1);
     });
   });
@@ -40,7 +40,7 @@ describe('BaseNumberField', () => {
     });
     it('should be set', () => {
       const field = new NumberBasicField('test');
-      field.setStep(1);
+      expect(field.setStep(1)).toBe(field); // Test chaining;
       expect(field.step).toBe(1);
     });
   });
@@ -52,7 +52,7 @@ describe('BaseNumberField', () => {
     });
     it('should be set', () => {
       const field = new NumberBasicField('test');
-      field.setDefaultValue(1);
+      expect(field.setDefaultValue(1)).toBe(field); // Test chaining;
       expect(field.defaultValue).toBe(1);
     });
   });

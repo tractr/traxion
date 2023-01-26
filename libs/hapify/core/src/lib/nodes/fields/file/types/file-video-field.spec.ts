@@ -22,7 +22,7 @@ describe('FileVideoField', () => {
     });
     it('should set the minBitrate', () => {
       const field = new FileVideoField('test');
-      field.setMinBitrate(100);
+      expect(field.setMinBitrate(100)).toBe(field); // Test chaining;
       expect(field.minBitrate).toBe(100);
     });
   });
@@ -34,7 +34,7 @@ describe('FileVideoField', () => {
     });
     it('should set the maxBitrate', () => {
       const field = new FileVideoField('test');
-      field.setMaxBitrate(100);
+      expect(field.setMaxBitrate(100)).toBe(field); // Test chaining;
       expect(field.maxBitrate).toBe(100);
     });
   });
@@ -46,7 +46,7 @@ describe('FileVideoField', () => {
     });
     it('should set the maxWidth', () => {
       const field = new FileVideoField('test');
-      field.setMaxWidth(100);
+      expect(field.setMaxWidth(100)).toBe(field); // Test chaining;
       expect(field.maxWidth).toBe(100);
     });
   });
@@ -58,7 +58,7 @@ describe('FileVideoField', () => {
     });
     it('should set the maxHeight', () => {
       const field = new FileVideoField('test');
-      field.setMaxHeight(100);
+      expect(field.setMaxHeight(100)).toBe(field); // Test chaining;
       expect(field.maxHeight).toBe(100);
     });
   });
@@ -70,7 +70,7 @@ describe('FileVideoField', () => {
     });
     it('should set the minWidth', () => {
       const field = new FileVideoField('test');
-      field.setMinWidth(100);
+      expect(field.setMinWidth(100)).toBe(field); // Test chaining;
       expect(field.minWidth).toBe(100);
     });
   });
@@ -82,7 +82,7 @@ describe('FileVideoField', () => {
     });
     it('should set the minHeight', () => {
       const field = new FileVideoField('test');
-      field.setMinHeight(100);
+      expect(field.setMinHeight(100)).toBe(field); // Test chaining;
       expect(field.minHeight).toBe(100);
     });
   });

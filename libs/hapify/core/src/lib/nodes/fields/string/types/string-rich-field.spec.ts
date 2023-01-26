@@ -21,7 +21,7 @@ describe('StringRichField', () => {
     });
     it('should set allowed types', () => {
       const field = new StringRichField('test');
-      field.setAllowedTypes(['h1', 'h2']);
+      expect(field.setAllowedTypes(['h1', 'h2'])).toBe(field); // Test chaining
       expect(field.allowedTypes).toEqual(['h1', 'h2']);
     });
   });

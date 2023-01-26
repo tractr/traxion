@@ -20,7 +20,7 @@ describe('Project', () => {
     it('should add a model to the project', () => {
       const project = new Project('MyProject');
       const model = new Model('MyModel');
-      project.addModel(model);
+      expect(project.addModel(model)).toBe(project); // Test chaining;
       expect(project.models).toEqual([model]);
     });
   });
@@ -30,7 +30,7 @@ describe('Project', () => {
       const project = new Project('MyProject');
       const model = new Model('MyModel');
       project.addModel(model);
-      project.removeModel(model);
+      expect(project.removeModel(model)).toBe(project); // Test chaining;
       expect(project.models).toEqual([]);
     });
   });
@@ -45,7 +45,7 @@ describe('Project', () => {
   describe('addMetadata', () => {
     it('should add a metadata to the project', () => {
       const project = new Project('MyProject');
-      project.addMetadata('foo', 'bar');
+      expect(project.addMetadata('foo', 'bar')).toBe(project); // Test chaining;
       expect(project.metadata).toEqual({ foo: 'bar' });
     });
   });
@@ -54,7 +54,7 @@ describe('Project', () => {
     it('should remove a metadata from the project', () => {
       const project = new Project('MyProject');
       project.addMetadata('foo', 'bar');
-      project.removeMetadata('foo');
+      expect(project.removeMetadata('foo')).toBe(project); // Test chaining;
       expect(project.metadata).toEqual({});
     });
   });
@@ -88,7 +88,7 @@ describe('Project', () => {
   describe('setNotes', () => {
     it('should set the notes of the project', () => {
       const project = new Project('MyProject');
-      project.setNotes('My notes');
+      expect(project.setNotes('My notes')).toBe(project); // Test chaining;
       expect(project.notes).toBe('My notes');
     });
   });
@@ -97,7 +97,7 @@ describe('Project', () => {
     it('should clear the notes of the project', () => {
       const project = new Project('MyProject');
       project.setNotes('My notes');
-      project.clearNotes();
+      expect(project.clearNotes()).toBe(project); // Test chaining;
       expect(project.notes).toBe('');
     });
   });

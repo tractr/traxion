@@ -21,7 +21,7 @@ describe('NumberLatitudeField', () => {
     });
     it('should not be lower than -90', () => {
       const field = new NumberLatitudeField('test');
-      field.setMin(-91);
+      expect(field.setMin(-91)).toBe(field); // Test chaining;
       expect(field.min).toBe(-90);
     });
   });
@@ -32,7 +32,7 @@ describe('NumberLatitudeField', () => {
     });
     it('should not be higher than 90', () => {
       const field = new NumberLatitudeField('test');
-      field.setMax(91);
+      expect(field.setMax(91)).toBe(field); // Test chaining;
       expect(field.max).toBe(90);
     });
   });
