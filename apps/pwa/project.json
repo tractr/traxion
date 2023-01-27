@@ -45,6 +45,7 @@
           "validator",
           "@prisma/client",
           "@trxn/common",
+          "@trxn/config-client",
           "@generated"
         ],
         "assets": [
@@ -91,7 +92,7 @@
       "options": {
         "commands": [
           "nx build angular-config",
-          "node ./dist/libs/angular/config/generate.js ./apps/pwa/src/assets/app-config.json"
+          "node ./dist/libs/config/client/src/generate.js ./apps/pwa/src/assets/app-config.json"
         ],
         "parallel": false
       }

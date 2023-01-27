@@ -49,10 +49,11 @@ for (const [projectName, project] of projects) {
   if (project.type === 'application') continue;
   if (!project.targets.publish || !project.targets.build) continue;
 
-  const outputPath =
-    project.targets.build.options.outputPath ||
-    project.targets.build.outputs[0];
+  const outputPath = (
+    project.targets.build.options.outputPath || project.targets.build.outputs[0]
+  ).replace('{workspaceRoot}', '');
 
+  console.log(traxionDir, outputPath, 'package.json');
   const packageJson = readJsonFile(
     join(traxionDir, outputPath, 'package.json'),
   );
