@@ -30,6 +30,7 @@
     "hapify-config": "libs/config/hapify",
     "hapify-core": "libs/hapify/core",
     "hapify-generate-config": "libs/hapify/generate-config",
+    "hapify-generators-casl": "libs/hapify/generators/casl",
     "hapify-generators-graphql-resolvers": "libs/hapify/generators/graphql-resolvers",
     "hapify-templates-angular-rext-client": "libs/hapify/templates/angular-rext-client",
     "hapify-templates-casl": "libs/hapify/templates/casl",

@@ -3,8 +3,8 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "outDir": "../../../dist/out-tsc",
-    "types": []
+    "module": "CommonJS",
+    "outDir": "../../../dist/out-tsc"
   },
   "exclude": [
     "src/test-setup.ts",
