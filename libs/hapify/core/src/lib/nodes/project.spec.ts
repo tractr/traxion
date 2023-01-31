@@ -121,4 +121,17 @@ describe('Project', () => {
       expect(project.name).toBe('MyProject');
     });
   });
+
+  describe('plural', () => {
+    it("should return the custom plural name if it's defined", () => {
+      const project = new Project('MyProject');
+      project.setPlural('CustomPluralName');
+      expect(project.plural).toBe('CustomPluralName');
+    });
+
+    it('should return the default plural name if no custom plural is defined', () => {
+      const project = new Project('MyProject');
+      expect(project.plural).toBe('MyProjects');
+    });
+  });
 });
