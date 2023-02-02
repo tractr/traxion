@@ -35,16 +35,13 @@ export function generate(
   // Clear generation directory
   project.getDirectory(absoluteGeneratedDirectory)?.clear();
 
+  const entityPath = `${absoluteGeneratedDirectory}/services`;
   // Generate controllers and dtos
   dataModel.models.forEach((model) => {
-    const entityPath = `${absoluteGeneratedDirectory}/${model.name}`;
     generateResolverSourceFile(project, model, entityPath);
   });
 
-  // Remove unused imports
-  // project
-  //   .getSourceFiles()
-  //   .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
+  
 
   // Save project to file system
   project.saveSync();

@@ -9,7 +9,7 @@ export function generateResolverSourceFile(
   model: Model,
   path: string,
 ) {
-  const fileName = `get-prisma-${camel(model.name)}-query.ts`;
+  const fileName = `${camel(model.name)}.service.ts`;
   const filePath = `${path}/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);
