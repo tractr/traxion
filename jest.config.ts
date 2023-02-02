@@ -74,5 +74,7 @@ export default {
     '<rootDir>/apps/pwa',
     '<rootDir>/libs/nestjs/password',
     '<rootDir>/libs/config/client',
+    '<rootDir>/libs/hapify/core',
+    '<rootDir>/libs/hapify/generators/nestjs-services',
   ],
 };
