@@ -3,7 +3,7 @@ import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 
 import { CaslModule } from './casl.module';
 import { EncryptionModule } from './encryption.module';
-import { ModelsModule } from './models.module';
+import { ModelsServicesModule } from './models-services.module';
 
 import { getSelectPrismaUserQuery } from '@trxn/generated-casl';
 import { USER_SERVICE } from '@trxn/generated-nestjs-models-common';
@@ -18,7 +18,7 @@ import { CaslExceptionInterceptor, PoliciesGuard } from '@trxn/nestjs-casl';
   imports: [
     CaslModule,
     TraxionAuthenticationModule.registerAsync({
-      imports: [ModelsModule, EncryptionModule],
+      imports: [ModelsServicesModule, EncryptionModule],
       useFactory: (userService, encryptionService) => ({
         user: {
           customSelect: getSelectPrismaUserQuery(),

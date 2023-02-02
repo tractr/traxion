@@ -1,0 +1,20 @@
+import { Module } from '@nestjs/common';
+
+import {
+  MODELS_REST_PROVIDERS
+} from './models-rest.providers';
+
+import {
+  MODELS_REST_CONTROLLERS
+} from './models-rest.controllers';
+
+import {
+  ConfigurableModuleClass,
+} from './models-rest.module-definition';
+ 
+@Module({
+  controllers: MODELS_REST_CONTROLLERS,
+  providers: MODELS_REST_PROVIDERS,
+  exports: MODELS_REST_PROVIDERS,
+})
+export class ModelsRestModule extends ConfigurableModuleClass {}

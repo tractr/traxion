@@ -1,2 +1,2 @@
-export * from './<<Model kebab>>-database.service';
 export * from './<<Model kebab>>.service';
+export * from './<<Model kebab>>-database.service';

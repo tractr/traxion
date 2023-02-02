@@ -74,6 +74,6 @@ export class UserAuthenticationService {
       select,
     });
 
-    return user;
+    return user as unknown as User;
   }
 }

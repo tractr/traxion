@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 
 import { EncryptionModule } from './encryption.module';
 import { MailerModule } from './mailer.module';
-import { ModelsModule } from './models.module';
+import { ModelsServicesModule } from './models-services.module';
 
 import { USER_SERVICE } from '@trxn/generated-nestjs-models-common';
 import { BcryptService, EncryptionService } from '@trxn/nestjs-bcrypt';
@@ -12,7 +12,7 @@ import { PasswordModule as TraxionPasswordModule } from '@trxn/nestjs-password';
 @Module({
   imports: [
     TraxionPasswordModule.registerAsync({
-      imports: [ModelsModule, MailerModule, EncryptionModule],
+      imports: [ModelsServicesModule, MailerModule, EncryptionModule],
       useFactory: (
         userService,
         resetPasswordSendEmailService: ResetPasswordSendEmailService,

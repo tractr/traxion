@@ -1,0 +1,16 @@
+import { Provider } from '@nestjs/common';
+
+import {
+  <<Model pascal>>Service,
+} from './services';
+
+import {
+  <<Model constant>>_SERVICE,
+} from './<<Model kebab>>-model.constants';
+
+export const <<Model constant>>_SERVICES_PROVIDERS: Provider[] = [
+  {
+    provide: <<Model constant>>_SERVICE,
+    useClass: <<Model pascal>>Service,
+  }
+];

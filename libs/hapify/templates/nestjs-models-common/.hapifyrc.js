@@ -10,9 +10,34 @@ module.exports = {
       input: 'all',
     },
     {
+      path: 'generated/nestjs-models-common/src/models-services.providers.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'generated/nestjs-models-common/src/models-services.module-definition.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
+      path: 'generated/nestjs-models-common/src/models-services.module.ts',
+      engine: 'hpf',
+      input: 'all',
+    },
+    {
       path: 'generated/nestjs-models-common/src/index.ts',
       engine: 'hpf',
       input: 'all',
+    },
+    {
+      path: 'generated/nestjs-models-common/src/interfaces/index.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/nestjs-models-common/src/interfaces/models-services.interface.ts',
+      engine: 'hpf',
+      input: 'one',
     },
     {
       path: 'generated/nestjs-models-common/src/{kebab}/index.ts',
@@ -20,7 +45,12 @@ module.exports = {
       input: 'one',
     },
     {
-      path: 'generated/nestjs-models-common/src/{kebab}/{kebab}-model.constant.ts',
+      path: 'generated/nestjs-models-common/src/{kebab}/{kebab}-model.constants.ts',
+      engine: 'hpf',
+      input: 'one',
+    },
+    {
+      path: 'generated/nestjs-models-common/src/{kebab}/{kebab}-model.providers.ts',
       engine: 'hpf',
       input: 'one',
     },

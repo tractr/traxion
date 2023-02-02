@@ -1,3 +1,8 @@
 <<for Models model>>
 export * from './<<model kebab>>';
 <<endfor>>
+	
+export * from './models-rest.module';
+export * from './models-rest.providers';
+export * from './models-rest.controllers';
+export * from './models-rest.module-definition';

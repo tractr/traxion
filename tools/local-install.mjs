@@ -53,7 +53,6 @@ for (const [projectName, project] of projects) {
     project.targets.build.options.outputPath || project.targets.build.outputs[0]
   ).replace('{workspaceRoot}', '');
 
-  console.log(traxionDir, outputPath, 'package.json');
   const packageJson = readJsonFile(
     join(traxionDir, outputPath, 'package.json'),
   );

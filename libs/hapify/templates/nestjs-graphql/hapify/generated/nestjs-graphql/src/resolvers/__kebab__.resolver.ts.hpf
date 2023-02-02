@@ -25,7 +25,7 @@ import {
   <<if Model not noGuest>>Public,<<endif>>
 } from '@trxn/nestjs-core';
 import {
-  DatabaseService,
+  DATABASE_SERVICE,
 } from '@trxn/nestjs-database';
 import {
   Args,
@@ -40,7 +40,7 @@ import {
 import { GraphQLResolveInfo } from 'graphql';
 import { ForbiddenError } from 'apollo-server-core';
 import { PrismaSelect } from '@paljs/plugins';
-import { User as PrismaUser } from '@prisma/client';
+import { User as PrismaUser, PrismaClient } from '@prisma/client';
 	
 import {
   <<Model pascal>>Service,
@@ -83,7 +83,8 @@ export class <<Model pascal>>Resolver {
     @Inject(<<ref constant>>_SERVICE)
     protected <<ref camel>>Service: <<ref pascal>>Service,
 <<endfor>>
-  protected databaseService: DatabaseService,
+  @Inject(DATABASE_SERVICE)
+  protected databaseService: PrismaClient,
   ) {}
  
   /**

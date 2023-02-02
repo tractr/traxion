@@ -1,0 +1,13 @@
+import { Provider } from '@nestjs/common';
+
+<<for Models model>>
+import {
+  <<model constant>>_REST_CONTROLLERS,
+} from './<<model kebab>>';
+<<endfor>>
+
+export const MODELS_REST_CONTROLLERS = [
+  <<for Models model>>
+  ...<<model constant>>_REST_CONTROLLERS,
+  <<endfor>>
+];

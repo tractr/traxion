@@ -18,6 +18,7 @@
     "cdktf",
     "codecov",
     "Concat",
+    "datasources",
     "datetime",
     "dbml",
     "deepmerge",

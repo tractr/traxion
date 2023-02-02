@@ -1,1 +1,1 @@
-export * from './prisma.constant';
+export * from './database-service.constant';

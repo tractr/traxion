@@ -2,3 +2,7 @@
 export * from './<<model kebab>>';
 <<endfor>>
 	
+export * from './interfaces';
+export * from './models-services.module';
+export * from './models-services.providers';
+export * from './models-services.module-definition';
