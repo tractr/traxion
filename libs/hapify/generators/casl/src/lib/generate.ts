@@ -5,7 +5,7 @@ import { Project } from 'ts-morph';
 
 import { generateResolverSourceFile } from './generators/resolver/resolver.generator';
 
-import { Root } from '@trxn/hapify-core';
+import { kebab, Project as Models } from '@trxn/hapify-core';
 
 export type GraphqlResolverGeneratorConfig = {
   outputDirectory: string;
@@ -14,7 +14,7 @@ export type GraphqlResolverGeneratorConfig = {
 };
 
 export function generate(
-  dataModel: Root,
+  dataModel: Models,
   config: GraphqlResolverGeneratorConfig,
 ) {
   const { generatedDirectory, tsConfigFilePath, outputDirectory } = config;
@@ -37,7 +37,7 @@ export function generate(
 
   // Generate controllers and dtos
   dataModel.models.forEach((model) => {
-    const entityPath = `${absoluteGeneratedDirectory}/${model.name.kebab}`;
+    const entityPath = `${absoluteGeneratedDirectory}/${model.name}`;
     generateResolverSourceFile(project, model, entityPath);
   });
 

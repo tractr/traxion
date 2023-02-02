@@ -1,52 +1,23 @@
-import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
+import { Project } from 'ts-morph';
 
-// import { generateConstructor } from './constructor.generator';
-// import { generateCreateMethod } from './create-method.generator';
-// import { generateDeleteMethod } from './delete-method.generator';
-// import { generateFindManyMethod } from './find-many-method.generator';
-// import { generateFindUniqueMethod } from './find-unique-method.generator';
-// import { generateImports } from './imports.generator';
-// import { generateUpdateMethod } from './update-method.generator';
+import { generateImports } from './imports.generator';
+import { generatePrismaSelectMethod } from './prisma-select-method.generator';
 
-import { Model } from '@trxn/hapify-core';
-
-export function generateResolverClass(model: Model): ClassDeclarationStructure {
-  const className = `${model.name.pascal}Resolver`;
-  // const constructor = generateConstructor(model);
-
-  // const methods = [
-  //   generateFindUniqueMethod(model),
-  //   generateFindManyMethod(model),
-  //   generateCreateMethod(model),
-  //   generateUpdateMethod(model),
-  //   generateDeleteMethod(model),
-  // ];
-
-  return {
-    kind: StructureKind.Class,
-    name: className,
-    isExported: true,
-    decorators: [
-      { name: 'Resolver', arguments: [`() => ${model.name.pascal}`] },
-    ],
-    // methods,
-    // ctors: [constructor],
-  };
-}
+import { camel, Model } from '@trxn/hapify-core';
 
 export function generateResolverSourceFile(
   project: Project,
   model: Model,
   path: string,
 ) {
-  const fileName = `${model.name.snake}.resolver.ts`;
+  const fileName = `get-prisma-${camel(model.name)}-query.ts`;
   const filePath = `${path}/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);
 
-  const resolverClass = generateResolverClass(model);
-  // const imports = generateImports(model);
-
-  // sourceFile.addImportDeclarations(imports);
-  sourceFile.addClass(resolverClass);
+  // const resolverClass = generateResolverClass(model);
+  const imports = generateImports(model);
+  const method = generatePrismaSelectMethod(model);
+  sourceFile.addFunction(method);
+  sourceFile.addImportDeclarations(imports);
 }
