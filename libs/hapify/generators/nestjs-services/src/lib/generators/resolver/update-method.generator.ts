@@ -9,13 +9,13 @@ import {
 
 import { camel, Model, pascal } from '@trxn/hapify-core';
 
-export const generateCreateMethod = (model: Model,): MethodDeclarationStructure => {
+export const generateUpdateMethod = (model: Model,): MethodDeclarationStructure => {
 
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
-      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}CreateArgs>`,
+      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}UpdateArgs>`,
 
     },
     {
@@ -30,7 +30,7 @@ export const generateCreateMethod = (model: Model,): MethodDeclarationStructure 
     {
       name: 'T',
       kind: StructureKind.TypeParameter,
-      constraint: `Prisma.${pascal(model.name)}CreateArgs`,
+      constraint: `Prisma.${pascal(model.name)}UpdateArgs`,
     }
   ];
 
@@ -38,16 +38,18 @@ export const generateCreateMethod = (model: Model,): MethodDeclarationStructure 
     {
       kind: StructureKind.JSDoc,
       description: `
-      Create a ${pascal(model.name)}.
-      @param {${pascal(model.name)}CreateArgs} args - Arguments to create a ${pascal(model.name)}.
-      @example
-      // Create one ${pascal(model.name)}
-      const ${pascal(model.name)} = await this.${camel(model.name)}Service.create({
-        data: {
-          // ... data to create a ${pascal(model.name)}
-        }
-      })
-    
+       Update a ${pascal(model.name)}.
+       @param {${pascal(model.name)}UpdateArgs} args - Arguments to update a ${pascal(model.name)}.
+       @example
+       // Update one ${pascal(model.name)}
+       const ${camel(model.name)} = await this.${camel(model.name)}Service.update({
+         where: {
+           // ... provide filter here
+         },
+         data: {
+           // ... provide data here
+         }
+       })
     `,
     },
   ];
@@ -55,10 +57,10 @@ export const generateCreateMethod = (model: Model,): MethodDeclarationStructure 
 
   return {
     kind: StructureKind.Method,
-    name: 'create',
+    name: 'update',
     typeParameters,
     parameters,
-    statements: `return prisma.create<T>(args);`,
+    statements: `return prisma.update<T>(args);`,
     docs
   };
 };
