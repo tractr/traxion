@@ -137,6 +137,28 @@ export class RoleService {
     }
 
     /**
+     *       Create or update one Role.
+     *        @param {RoleUpsertArgs} args - Arguments to update or create a Role.
+     *        @example
+     *        // Upsert one Role
+     *        const role = await this.roleService.upsert({
+     *          create: {
+     *            // ... data to create a Role
+     *          },
+     *          update: {
+     *            // ... in case it already exists, update
+     *          },
+     *          where: {
+     *            // ... the filter for the Role we want to update
+     *          }
+     *        })
+     *     
+     */
+    upsert<T extends Prisma.RoleUpsertArgs>(args: Prisma.SelectSubset<T, Prisma.RoleUpsertArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
+        return prisma.upsert<T>(args);
+    }
+
+    /**
      *     Delete a Role.
      *     @param {RoleDeleteArgs} args - Arguments to delete a Role
      *     @example
