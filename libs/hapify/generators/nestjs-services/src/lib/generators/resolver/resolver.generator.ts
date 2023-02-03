@@ -7,6 +7,7 @@ import { generateImports } from './imports.generator';
 
 import { Model, pascal, snake } from '@trxn/hapify-core';
 import { generateFindManyMethod } from './find-many-method.generator';
+import { generateCreateMethod } from './create-method.generator';
 
 
 export function generateResolverClass(model: Model): ClassDeclarationStructure {
@@ -17,7 +18,7 @@ export function generateResolverClass(model: Model): ClassDeclarationStructure {
      generateFindUniqueMethod(model),
      generateFindFirstMethod(model),
      generateFindManyMethod(model),
-  //   generateCreateMethod(model),
+     generateCreateMethod(model),
   //   generateUpdateMethod(model),
   //   generateDeleteMethod(model),
   //   ...generateFieldResolvers(model),
