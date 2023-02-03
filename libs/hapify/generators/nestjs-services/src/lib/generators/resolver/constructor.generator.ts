@@ -4,7 +4,7 @@ import {
   StructureKind,
 } from 'ts-morph';
 
-import { camel, constant, Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateConstructor(
   model: Model,
