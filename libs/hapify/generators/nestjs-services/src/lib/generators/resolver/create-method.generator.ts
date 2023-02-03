@@ -9,13 +9,13 @@ import {
 
 import { camel, Model, pascal } from '@trxn/hapify-core';
 
-export const generateFindUniqueMethod = (model: Model,): MethodDeclarationStructure => {
+export const generateCreateMethod = (model: Model,): MethodDeclarationStructure => {
 
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
-      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}FindUniqueArgs>`,
+      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}CreateArgs>`,
 
     },
     {
@@ -30,7 +30,7 @@ export const generateFindUniqueMethod = (model: Model,): MethodDeclarationStruct
     {
       name: 'T',
       kind: StructureKind.TypeParameter,
-      constraint: `Prisma.${pascal(model.name)}FindUniqueArgs`,
+      constraint: `Prisma.${pascal(model.name)}CreateArgs`,
     }
   ];
 
@@ -38,15 +38,16 @@ export const generateFindUniqueMethod = (model: Model,): MethodDeclarationStruct
     {
       kind: StructureKind.JSDoc,
       description: `
-    Find zero or one ${pascal(model.name)} that matches the filter.
-    @param {${pascal(model.name)}FindUniqueArgs} args - Arguments to find a ${pascal(model.name)}
-    @example
-    // Get one ${pascal(model.name)}
-    const ${camel(model.name)} = await this.${camel(model.name)}Service.findUnique({
-      where: {
-        // ... provide filter here
-      }
-    })
+      * Create a ${pascal(model.name)}.
+      * @param {${pascal(model.name)}CreateArgs} args - Arguments to create a ${pascal(model.name)}.
+      * @example
+      * // Create one ${pascal(model.name)}
+      * const ${pascal(model.name)} = await this.${camel(model.name)}Service.create({
+      *   data: {
+      *     // ... data to create a ${pascal(model.name)}
+      *   }
+      * })
+      *
     `,
     },
   ];
@@ -54,10 +55,10 @@ export const generateFindUniqueMethod = (model: Model,): MethodDeclarationStruct
 
   return {
     kind: StructureKind.Method,
-    name: 'findUnique',
+    name: 'create',
     typeParameters,
     parameters,
-    statements: `return prisma.findUnique<T>(args);`,
+    statements: `return prisma.create<T>(args);`,
     docs
   };
 };

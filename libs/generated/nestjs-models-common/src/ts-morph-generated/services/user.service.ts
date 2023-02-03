@@ -19,7 +19,7 @@ export class UserService {
      *     })
      *     
      */
-    findUnique<T extends Prisma.UserFindUniqueArgs>(args: Prisma.SelectSubset<T, Prisma.UserFindUniqueArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.User) {
+    findUnique<T extends Prisma.UserFindUniqueArgs>(args: Prisma.SelectSubset<T, Prisma.UserFindUniqueArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
         return prisma.findUnique<T>(args);
     }
 
@@ -37,8 +37,8 @@ export class UserService {
      *        })
      *     
      */
-    findFirst<T extends Prisma.UserFindFirstArgs>(args: Prisma.SelectSubset<T, Prisma.UserFindFirstArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.User) {
-        return prisma.FindFirst<T>(args);
+    findFirst<T extends Prisma.UserFindFirstArgs>(args: Prisma.SelectSubset<T, Prisma.UserFindFirstArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
+        return prisma.findFirst<T>(args);
     }
 
     /**
@@ -58,7 +58,24 @@ export class UserService {
      *       
      *     
      */
-    FindMany<T extends Prisma.UserFindManyArgs>(args: Prisma.SelectSubset<T, Prisma.UserFindManyArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.User) {
-        return prisma.FindMany<T>(args);
+    FindMany<T extends Prisma.UserFindManyArgs>(args: Prisma.SelectSubset<T, Prisma.UserFindManyArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
+        return prisma.findMany<T>(args);
+    }
+
+    /**
+     *       * Create a User.
+     *       * @param {UserCreateArgs} args - Arguments to create a User.
+     *       * @example
+     *       * // Create one User
+     *       * const User = await this.userService.create({
+     *       *   data: {
+     *       *     // ... data to create a User
+     *       *   }
+     *       * })
+     *       *
+     *     
+     */
+    create<T extends Prisma.UserCreateArgs>(args: Prisma.SelectSubset<T, Prisma.UserCreateArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
+        return prisma.create<T>(args);
     }
 }

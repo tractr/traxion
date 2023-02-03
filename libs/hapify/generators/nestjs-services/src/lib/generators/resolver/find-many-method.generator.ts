@@ -22,7 +22,7 @@ export const generateFindManyMethod = (model: Model,): MethodDeclarationStructur
       kind: StructureKind.Parameter,
       name: 'prisma',
       type: `Prisma.${pascal(model.name)}Delegate<any>`,
-      initializer: `this.prismaClient.${pascal(model.name)}`,
+      initializer: `this.prismaClient.${camel(model.name)}`,
     },
   ];
 
@@ -62,7 +62,7 @@ export const generateFindManyMethod = (model: Model,): MethodDeclarationStructur
     name: 'FindMany',
     typeParameters,
     parameters,
-    statements: `return prisma.FindMany<T>(args);`,
+    statements: `return prisma.findMany<T>(args);`,
     docs
   };
 };

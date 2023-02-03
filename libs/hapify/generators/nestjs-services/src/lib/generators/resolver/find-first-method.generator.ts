@@ -22,7 +22,7 @@ export const generateFindFirstMethod = (model: Model,): MethodDeclarationStructu
       kind: StructureKind.Parameter,
       name: 'prisma',
       type: `Prisma.${pascal(model.name)}Delegate<any>`,
-      initializer: `this.prismaClient.${pascal(model.name)}`,
+      initializer: `this.prismaClient.${camel(model.name)}`,
     },
   ];
 
@@ -59,7 +59,7 @@ export const generateFindFirstMethod = (model: Model,): MethodDeclarationStructu
     name: 'findFirst',
     typeParameters,
     parameters,
-    statements: `return prisma.FindFirst<T>(args);`,
+    statements: `return prisma.findFirst<T>(args);`,
     docs
   };
 };
