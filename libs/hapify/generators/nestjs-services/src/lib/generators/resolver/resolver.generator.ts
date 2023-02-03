@@ -1,6 +1,8 @@
 import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
 
+import { generateAggregateMethod } from './aggregate-method.generator';
 import { generateConstructor } from './constructor.generator';
+import { generateCountMethod } from './count-method.generator';
 import { generateCreateManyMethod } from './create-many-method.generator';
 import { generateCreateMethod } from './create-method.generator';
 import { generateDeleteManyMethod } from './delete-many-method.generator';
@@ -11,10 +13,9 @@ import { generateFindUniqueMethod } from './find-unique-method.generator';
 import { generateImports } from './imports.generator';
 import { generateUpdateManyMethod } from './update-many-method.generator';
 import { generateUpdateMethod } from './update-method.generator';
+import { generateUpsertMethod } from './upsert-method.generator';
 
 import { Model, pascal, snake } from '@trxn/hapify-core';
-import { generateUpsertMethod } from './upsert-method.generator';
-import { generateCountMethod } from './count-method.generator';
 
 
 export function generateResolverClass(model: Model): ClassDeclarationStructure {
@@ -33,7 +34,7 @@ export function generateResolverClass(model: Model): ClassDeclarationStructure {
     generateDeleteMethod(model),
     generateDeleteManyMethod(model),
     generateCountMethod(model),
-    //   ...generateFieldResolvers(model),
+    generateAggregateMethod(model),
   ];
 
   return {
@@ -60,8 +61,7 @@ export function generateResolverSourceFile(
 
   const resolverClass = generateResolverClass(model);
   const imports = generateImports(model);
-  // const method = generatePrismaSelectMethod(model);
-  // sourceFile.addFunction(method);
+
   sourceFile.addImportDeclarations(imports);
   sourceFile.addClass(resolverClass);
 }
