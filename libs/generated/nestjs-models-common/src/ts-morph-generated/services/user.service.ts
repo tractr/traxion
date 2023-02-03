@@ -137,6 +137,28 @@ export class UserService {
     }
 
     /**
+     *       Create or update one User.
+     *        @param {UserUpsertArgs} args - Arguments to update or create a User.
+     *        @example
+     *        // Upsert one User
+     *        const user = await this.userService.upsert({
+     *          create: {
+     *            // ... data to create a User
+     *          },
+     *          update: {
+     *            // ... in case it already exists, update
+     *          },
+     *          where: {
+     *            // ... the filter for the User we want to update
+     *          }
+     *        })
+     *     
+     */
+    upsert<T extends Prisma.UserUpsertArgs>(args: Prisma.SelectSubset<T, Prisma.UserUpsertArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
+        return prisma.upsert<T>(args);
+    }
+
+    /**
      *     Delete a User.
      *     @param {UserDeleteArgs} args - Arguments to delete a User
      *     @example
