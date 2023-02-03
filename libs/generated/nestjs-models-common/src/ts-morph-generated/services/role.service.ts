@@ -189,4 +189,23 @@ export class RoleService {
     deleteMany<T extends Prisma.RoleDeleteArgs>(args: Prisma.SelectSubset<T, Prisma.RoleDeleteManyArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
         return prisma.deleteMany<T>(args);
     }
+
+    /**
+     *       Count the number of Role.
+     *       Note, that providing 'undefined' is treated as the value not being there.
+     *       Read more here: https://pris.ly/d/null-undefined
+     *       @param {RoleCountArgs} args - Arguments to filter Roles to count.
+     *       @example
+     *       // Count one Role
+     *       const Role = await this.roleService.count({
+     *         data: {
+     *           // ... data to count a Role
+     *         }
+     *       })
+     *     
+     *     
+     */
+    count<T extends Prisma.RoleCountArgs>(args: Prisma.SelectSubset<T, Prisma.RoleCountArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
+        return prisma.count<T>(args);
+    }
 }

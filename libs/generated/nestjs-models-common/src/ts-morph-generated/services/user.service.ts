@@ -189,4 +189,23 @@ export class UserService {
     deleteMany<T extends Prisma.UserDeleteArgs>(args: Prisma.SelectSubset<T, Prisma.UserDeleteManyArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
         return prisma.deleteMany<T>(args);
     }
+
+    /**
+     *       Count the number of User.
+     *       Note, that providing 'undefined' is treated as the value not being there.
+     *       Read more here: https://pris.ly/d/null-undefined
+     *       @param {UserCountArgs} args - Arguments to filter Users to count.
+     *       @example
+     *       // Count one User
+     *       const User = await this.userService.count({
+     *         data: {
+     *           // ... data to count a User
+     *         }
+     *       })
+     *     
+     *     
+     */
+    count<T extends Prisma.UserCountArgs>(args: Prisma.SelectSubset<T, Prisma.UserCountArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
+        return prisma.count<T>(args);
+    }
 }
