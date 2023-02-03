@@ -78,4 +78,21 @@ export class UserService {
     create<T extends Prisma.UserCreateArgs>(args: Prisma.SelectSubset<T, Prisma.UserCreateArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
         return prisma.create<T>(args);
     }
+
+    /**
+     *       * Create a User.
+     *       * @param {UserCreateManyArgs} args - Arguments to create many a Users.
+     *       * @example
+     *       * // Create many Users
+     *       * const Users = await this.userService.createMany({
+     *       *   data: {
+     *       *     *     // ... provide data here
+     *       *   }
+     *       * })
+     *       *
+     *     
+     */
+    createMany<T extends Prisma.UserCreateManyArgs>(args: Prisma.SelectSubset<T, Prisma.UserCreateManyArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
+        return prisma.createMany<T>(args);
+    }
 }

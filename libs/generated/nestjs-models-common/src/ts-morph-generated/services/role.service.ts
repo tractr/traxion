@@ -78,4 +78,21 @@ export class RoleService {
     create<T extends Prisma.RoleCreateArgs>(args: Prisma.SelectSubset<T, Prisma.RoleCreateArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
         return prisma.create<T>(args);
     }
+
+    /**
+     *       * Create a Role.
+     *       * @param {RoleCreateManyArgs} args - Arguments to create many a Roles.
+     *       * @example
+     *       * // Create many Roles
+     *       * const Roles = await this.roleService.createMany({
+     *       *   data: {
+     *       *     *     // ... provide data here
+     *       *   }
+     *       * })
+     *       *
+     *     
+     */
+    createMany<T extends Prisma.RoleCreateManyArgs>(args: Prisma.SelectSubset<T, Prisma.RoleCreateManyArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
+        return prisma.createMany<T>(args);
+    }
 }
