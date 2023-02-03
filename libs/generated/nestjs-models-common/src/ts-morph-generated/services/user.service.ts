@@ -63,16 +63,16 @@ export class UserService {
     }
 
     /**
-     *       * Create a User.
-     *       * @param {UserCreateArgs} args - Arguments to create a User.
-     *       * @example
-     *       * // Create one User
-     *       * const User = await this.userService.create({
-     *       *   data: {
-     *       *     // ... data to create a User
-     *       *   }
-     *       * })
-     *       *
+     *       Create a User.
+     *       @param {UserCreateArgs} args - Arguments to create a User.
+     *       @example
+     *       // Create one User
+     *       const User = await this.userService.create({
+     *         data: {
+     *           // ... data to create a User
+     *         }
+     *       })
+     *     
      *     
      */
     create<T extends Prisma.UserCreateArgs>(args: Prisma.SelectSubset<T, Prisma.UserCreateArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
@@ -94,6 +94,25 @@ export class UserService {
      */
     createMany<T extends Prisma.UserCreateManyArgs>(args: Prisma.SelectSubset<T, Prisma.UserCreateManyArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
         return prisma.createMany<T>(args);
+    }
+
+    /**
+     *        Update a User.
+     *        @param {UserUpdateArgs} args - Arguments to update a User.
+     *        @example
+     *        // Update one User
+     *        const user = await this.userService.update({
+     *          where: {
+     *            // ... provide filter here
+     *          },
+     *          data: {
+     *            // ... provide data here
+     *          }
+     *        })
+     *     
+     */
+    update<T extends Prisma.UserUpdateArgs>(args: Prisma.SelectSubset<T, Prisma.UserUpdateArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
+        return prisma.update<T>(args);
     }
 
     /**

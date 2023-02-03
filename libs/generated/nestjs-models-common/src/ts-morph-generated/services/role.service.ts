@@ -63,16 +63,16 @@ export class RoleService {
     }
 
     /**
-     *       * Create a Role.
-     *       * @param {RoleCreateArgs} args - Arguments to create a Role.
-     *       * @example
-     *       * // Create one Role
-     *       * const Role = await this.roleService.create({
-     *       *   data: {
-     *       *     // ... data to create a Role
-     *       *   }
-     *       * })
-     *       *
+     *       Create a Role.
+     *       @param {RoleCreateArgs} args - Arguments to create a Role.
+     *       @example
+     *       // Create one Role
+     *       const Role = await this.roleService.create({
+     *         data: {
+     *           // ... data to create a Role
+     *         }
+     *       })
+     *     
      *     
      */
     create<T extends Prisma.RoleCreateArgs>(args: Prisma.SelectSubset<T, Prisma.RoleCreateArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
@@ -94,6 +94,25 @@ export class RoleService {
      */
     createMany<T extends Prisma.RoleCreateManyArgs>(args: Prisma.SelectSubset<T, Prisma.RoleCreateManyArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
         return prisma.createMany<T>(args);
+    }
+
+    /**
+     *        Update a Role.
+     *        @param {RoleUpdateArgs} args - Arguments to update a Role.
+     *        @example
+     *        // Update one Role
+     *        const role = await this.roleService.update({
+     *          where: {
+     *            // ... provide filter here
+     *          },
+     *          data: {
+     *            // ... provide data here
+     *          }
+     *        })
+     *     
+     */
+    update<T extends Prisma.RoleUpdateArgs>(args: Prisma.SelectSubset<T, Prisma.RoleUpdateArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
+        return prisma.update<T>(args);
     }
 
     /**
