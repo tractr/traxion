@@ -1,9 +1,10 @@
 import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
 
+import { generateConstructor } from './constructor.generator';
+import { generateFindUniqueMethod } from './find-unique-method.generator';
 import { generateImports } from './imports.generator';
 
-import { camel, Model, pascal, snake } from '@trxn/hapify-core';
-import { generateConstructor } from './constructor.generator';
+import { Model, pascal, snake } from '@trxn/hapify-core';
 
 
 export function generateResolverClass(model: Model): ClassDeclarationStructure {
@@ -11,7 +12,7 @@ export function generateResolverClass(model: Model): ClassDeclarationStructure {
     const constructor = generateConstructor(model);
 
    const methods = [
-  //   generateFindUniqueMethod(model),
+     generateFindUniqueMethod(model),
   //   generateFindManyMethod(model),
   //   generateCreateMethod(model),
   //   generateUpdateMethod(model),
@@ -26,7 +27,7 @@ export function generateResolverClass(model: Model): ClassDeclarationStructure {
     decorators: [
       { name: 'Injectable' },
     ],
-    // methods,
+     methods,
     ctors: [constructor],
   };
 }
