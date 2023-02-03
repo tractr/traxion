@@ -1,10 +1,12 @@
 import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
 
 import { generateConstructor } from './constructor.generator';
+import { generateFindFirstMethod } from './find-first-method.generator';
 import { generateFindUniqueMethod } from './find-unique-method.generator';
 import { generateImports } from './imports.generator';
 
 import { Model, pascal, snake } from '@trxn/hapify-core';
+import { generateFindManyMethod } from './find-many-method.generator';
 
 
 export function generateResolverClass(model: Model): ClassDeclarationStructure {
@@ -13,7 +15,8 @@ export function generateResolverClass(model: Model): ClassDeclarationStructure {
 
    const methods = [
      generateFindUniqueMethod(model),
-  //   generateFindManyMethod(model),
+     generateFindFirstMethod(model),
+     generateFindManyMethod(model),
   //   generateCreateMethod(model),
   //   generateUpdateMethod(model),
   //   generateDeleteMethod(model),
