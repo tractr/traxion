@@ -116,6 +116,27 @@ export class RoleService {
     }
 
     /**
+     *        Update 0 or more Roles.
+     *        Note, that providing 'undefined' is treated as the value not being there.
+     *        Read more here: https://pris.ly/d/null-undefined
+     *        @param {RoleUpdateManyArgs} args - Arguments to update one or more Roles.
+     *        @example
+     *        // Update many Roles
+     *        const roles = await this.roleService.updateMany({
+     *          where: {
+     *            // ... provide filter here
+     *          },
+     *          data: {
+     *            // ... provide data here
+     *          }
+     *        })
+     *     
+     */
+    updateMAny<T extends Prisma.RoleUpdateManyArgs>(args: Prisma.SelectSubset<T, Prisma.RoleUpdateManyArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
+        return prisma.updateMany<T>(args);
+    }
+
+    /**
      *     Delete a Role.
      *     @param {RoleDeleteArgs} args - Arguments to delete a Role
      *     @example
