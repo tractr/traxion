@@ -116,6 +116,27 @@ export class UserService {
     }
 
     /**
+     *        Update 0 or more Users.
+     *        Note, that providing 'undefined' is treated as the value not being there.
+     *        Read more here: https://pris.ly/d/null-undefined
+     *        @param {UserUpdateManyArgs} args - Arguments to update one or more Users.
+     *        @example
+     *        // Update many Users
+     *        const users = await this.userService.updateMany({
+     *          where: {
+     *            // ... provide filter here
+     *          },
+     *          data: {
+     *            // ... provide data here
+     *          }
+     *        })
+     *     
+     */
+    updateMAny<T extends Prisma.UserUpdateManyArgs>(args: Prisma.SelectSubset<T, Prisma.UserUpdateManyArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
+        return prisma.updateMany<T>(args);
+    }
+
+    /**
      *     Delete a User.
      *     @param {UserDeleteArgs} args - Arguments to delete a User
      *     @example
