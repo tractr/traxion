@@ -130,4 +130,20 @@ export class UserService {
     delete<T extends Prisma.UserDeleteArgs>(args: Prisma.SelectSubset<T, Prisma.UserDeleteArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
         return prisma.delete<T>(args);
     }
+
+    /**
+     *     Delete 0 or more Users.
+     *     @param {UserDeleteArgs} args - Arguments to filter  Users to delete.
+     *     @example
+     *     // Delete a few Users
+     *     const users = await this.userService.deleteMany({
+     *       where: {
+     *         // ... provide filter here
+     *       }
+     *     })
+     *     
+     */
+    deleteMany<T extends Prisma.UserDeleteArgs>(args: Prisma.SelectSubset<T, Prisma.UserDeleteManyArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
+        return prisma.deleteMany<T>(args);
+    }
 }

@@ -130,4 +130,20 @@ export class RoleService {
     delete<T extends Prisma.RoleDeleteArgs>(args: Prisma.SelectSubset<T, Prisma.RoleDeleteArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
         return prisma.delete<T>(args);
     }
+
+    /**
+     *     Delete 0 or more Roles.
+     *     @param {RoleDeleteArgs} args - Arguments to filter  Roles to delete.
+     *     @example
+     *     // Delete a few Roles
+     *     const roles = await this.roleService.deleteMany({
+     *       where: {
+     *         // ... provide filter here
+     *       }
+     *     })
+     *     
+     */
+    deleteMany<T extends Prisma.RoleDeleteArgs>(args: Prisma.SelectSubset<T, Prisma.RoleDeleteManyArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
+        return prisma.deleteMany<T>(args);
+    }
 }
