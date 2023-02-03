@@ -208,4 +208,34 @@ export class RoleService {
     count<T extends Prisma.RoleCountArgs>(args: Prisma.SelectSubset<T, Prisma.RoleCountArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
         return prisma.count<T>(args);
     }
+
+    /**
+     *       
+     *         Allows you to perform aggregations operations on a Role.
+     *         Note, that providing 'undefined' is treated as the value not being there.
+     *         Read more here: https://pris.ly/d/null-undefined
+     *         @param {RoleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     *         @example
+     *         // Ordered by age ascending
+     *         // Where email contains prisma.io
+     *         // Limited to the 10 roles
+     *         const aggregations = await this.roleService.aggregate({
+     *           avg: {
+     *             age: true,
+     *           },
+     *           where: {
+     *             email: {
+     *               contains: "prisma.io",
+     *             },
+     *           },
+     *           orderBy: {
+     *             age: "asc",
+     *           },
+     *           take: 10,
+     *         })
+     *     
+     */
+    aggregate<T extends Prisma.RoleAggregateArgs>(args: Prisma.SelectSubset<T, Prisma.RoleAggregateArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
+        return prisma.aggregate<T>(args);
+    }
 }

@@ -208,4 +208,34 @@ export class UserService {
     count<T extends Prisma.UserCountArgs>(args: Prisma.SelectSubset<T, Prisma.UserCountArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
         return prisma.count<T>(args);
     }
+
+    /**
+     *       
+     *         Allows you to perform aggregations operations on a User.
+     *         Note, that providing 'undefined' is treated as the value not being there.
+     *         Read more here: https://pris.ly/d/null-undefined
+     *         @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     *         @example
+     *         // Ordered by age ascending
+     *         // Where email contains prisma.io
+     *         // Limited to the 10 users
+     *         const aggregations = await this.userService.aggregate({
+     *           avg: {
+     *             age: true,
+     *           },
+     *           where: {
+     *             email: {
+     *               contains: "prisma.io",
+     *             },
+     *           },
+     *           orderBy: {
+     *             age: "asc",
+     *           },
+     *           take: 10,
+     *         })
+     *     
+     */
+    aggregate<T extends Prisma.UserAggregateArgs>(args: Prisma.SelectSubset<T, Prisma.UserAggregateArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
+        return prisma.aggregate<T>(args);
+    }
 }
