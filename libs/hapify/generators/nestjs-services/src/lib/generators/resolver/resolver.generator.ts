@@ -11,6 +11,7 @@ import { generateImports } from './imports.generator';
 import { generateUpdateMethod } from './update-method.generator';
 
 import { Model, pascal, snake } from '@trxn/hapify-core';
+import { generateDeleteManyMethod } from './delete-many-method.generator';
 
 
 export function generateResolverClass(model: Model): ClassDeclarationStructure {
@@ -25,6 +26,7 @@ export function generateResolverClass(model: Model): ClassDeclarationStructure {
     generateCreateManyMethod(model),
     generateUpdateMethod(model),
     generateDeleteMethod(model),
+    generateDeleteManyMethod(model),
     //   ...generateFieldResolvers(model),
   ];
 
