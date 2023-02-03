@@ -80,7 +80,7 @@ export class RoleService {
     }
 
     /**
-     *       * Create a Role.
+     *       * Create many Roles.
      *       * @param {RoleCreateManyArgs} args - Arguments to create many a Roles.
      *       * @example
      *       * // Create many Roles
@@ -94,5 +94,21 @@ export class RoleService {
      */
     createMany<T extends Prisma.RoleCreateManyArgs>(args: Prisma.SelectSubset<T, Prisma.RoleCreateManyArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
         return prisma.createMany<T>(args);
+    }
+
+    /**
+     *     Delete a Role.
+     *     @param {RoleDeleteArgs} args - Arguments to delete a Role
+     *     @example
+     *     // Delete one Role
+     *     const role = await this.roleService.delete({
+     *       where: {
+     *         // ... filter to delete one Role
+     *       }
+     *     })
+     *     
+     */
+    delete<T extends Prisma.RoleDeleteArgs>(args: Prisma.SelectSubset<T, Prisma.RoleDeleteArgs>, prisma: Prisma.RoleDelegate<any> = this.prismaClient.role) {
+        return prisma.delete<T>(args);
     }
 }

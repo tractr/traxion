@@ -3,6 +3,7 @@ import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
 import { generateConstructor } from './constructor.generator';
 import { generateCreateManyMethod } from './create-many-method.generator';
 import { generateCreateMethod } from './create-method.generator';
+import { generateDeleteMethod } from './delete-method.generator';
 import { generateFindFirstMethod } from './find-first-method.generator';
 import { generateFindManyMethod } from './find-many-method.generator';
 import { generateFindUniqueMethod } from './find-unique-method.generator';
@@ -22,7 +23,7 @@ export function generateResolverClass(model: Model): ClassDeclarationStructure {
     generateCreateMethod(model),
     generateCreateManyMethod(model),
     //   generateUpdateMethod(model),
-    //   generateDeleteMethod(model),
+    generateDeleteMethod(model),
     //   ...generateFieldResolvers(model),
   ];
 

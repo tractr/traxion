@@ -80,7 +80,7 @@ export class UserService {
     }
 
     /**
-     *       * Create a User.
+     *       * Create many Users.
      *       * @param {UserCreateManyArgs} args - Arguments to create many a Users.
      *       * @example
      *       * // Create many Users
@@ -94,5 +94,21 @@ export class UserService {
      */
     createMany<T extends Prisma.UserCreateManyArgs>(args: Prisma.SelectSubset<T, Prisma.UserCreateManyArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
         return prisma.createMany<T>(args);
+    }
+
+    /**
+     *     Delete a User.
+     *     @param {UserDeleteArgs} args - Arguments to delete a User
+     *     @example
+     *     // Delete one User
+     *     const user = await this.userService.delete({
+     *       where: {
+     *         // ... filter to delete one User
+     *       }
+     *     })
+     *     
+     */
+    delete<T extends Prisma.UserDeleteArgs>(args: Prisma.SelectSubset<T, Prisma.UserDeleteArgs>, prisma: Prisma.UserDelegate<any> = this.prismaClient.user) {
+        return prisma.delete<T>(args);
     }
 }
