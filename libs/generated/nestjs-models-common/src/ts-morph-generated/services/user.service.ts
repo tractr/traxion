@@ -2,9 +2,21 @@ import { Inject, Injectable } from "@nestjs/common";
 import { DATABASE_SERVICE } from "@trxn/nestjs-database";
 import { Prisma, PrismaClient } from "@prisma/client";
 
-@Injectable
+@Injectable()
 export class UserService {
     constructor(@Inject(DATABASE_SERVICE) private readonly prismaClient: PrismaClient) {
+    }
+
+    /** Return default internal fields */
+    getDefaultInternals() {
+        return {
+                createdAt: this.getDefaultCreatedAt(),
+              };
+    }
+
+    /** Return default value for internal field 'createdAt' */
+    getDefaultCreatedAt() {
+        return new Date();
     }
 
     /**
@@ -210,7 +222,6 @@ export class UserService {
     }
 
     /**
-     *       
      *         Allows you to perform aggregations operations on a User.
      *         Note, that providing 'undefined' is treated as the value not being there.
      *         Read more here: https://pris.ly/d/null-undefined
