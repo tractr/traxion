@@ -1,5 +1,6 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "nestjs-bcrypt",
   "projectType": "library",
   "sourceRoot": "libs/nestjs/bcrypt/src",
   "tags": [],
@@ -34,7 +35,13 @@
         "jestConfig": "libs/nestjs/bcrypt/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/nestjs/bcrypt"]
+      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/bcrypt"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/nestjs/bcrypt/package.json"
+      }
     }
   }
 }

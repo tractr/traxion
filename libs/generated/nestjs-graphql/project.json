@@ -7,6 +7,7 @@
     "generated-casl",
     "generated-nestjs-models-common"
   ],
+  "name": "generated-nestjs-graphql",
   "prefix": "tractr",
   "projectType": "library",
   "sourceRoot": "libs/generated/nestjs-graphql/src",
@@ -17,7 +18,7 @@
       "options": {
         "cwd": "libs/generated/nestjs-graphql"
       },
-      "outputs": ["libs/generated/nestjs-graphql/src/generated"]
+      "outputs": ["{projectRoot}/src/generated"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -34,7 +35,7 @@
         "jestConfig": "libs/generated/nestjs-graphql/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/generated/nestjs-graphql"]
+      "outputs": ["{workspaceRoot}/coverage/libs/generated/nestjs-graphql"]
     }
   }
 }

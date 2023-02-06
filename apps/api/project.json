@@ -1,5 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "api",
   "projectType": "application",
   "sourceRoot": "apps/api/src",
   "tags": ["scope:app"],
@@ -54,7 +55,7 @@
         "jestConfig": "apps/api/jest.e2e.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/apps/api"]
+      "outputs": ["{workspaceRoot}/coverage/apps/api"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -77,7 +78,7 @@
         "jestConfig": "apps/api/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/apps/api"]
+      "outputs": ["{workspaceRoot}/coverage/apps/api"]
     }
   }
 }

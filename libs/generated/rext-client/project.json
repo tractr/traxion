@@ -5,6 +5,7 @@
     "generated-models",
     "generated-rest-dtos"
   ],
+  "name": "generated-rext-client",
   "prefix": "tractr",
   "projectType": "library",
   "sourceRoot": "libs/generated/rext-client/src",
@@ -15,7 +16,7 @@
       "options": {
         "cwd": "libs/generated/rext-client"
       },
-      "outputs": ["libs/generated/rext-client/src/generated"]
+      "outputs": ["{projectRoot}/src/generated"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -32,7 +33,7 @@
         "jestConfig": "libs/generated/rext-client/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/generated/rext-client"]
+      "outputs": ["{workspaceRoot}/coverage/libs/generated/rext-client"]
     }
   }
 }
