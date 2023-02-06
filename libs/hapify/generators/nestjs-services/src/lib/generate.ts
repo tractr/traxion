@@ -5,7 +5,7 @@ import { Project } from 'ts-morph';
 
 import { generateResolverSourceFile } from './generators/resolver/resolver.generator';
 
-import { kebab, Project as Models } from '@trxn/hapify-core';
+qimport { Project as Models } from '@trxn/hapify-core';
 
 export type GraphqlResolverGeneratorConfig = {
   outputDirectory: string;
