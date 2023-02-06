@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.0.3](https://github.com/tractr/traxion/compare/v2.0.2...v2.0.3) (2023-02-06)
+
+
+### Features
+
+* add a filter for unauthenticated response ([#550](https://github.com/tractr/traxion/issues/550)) ([a2ea31b](https://github.com/tractr/traxion/commit/a2ea31bf2f5d557a44dafe2834a33e3fbc312a46))
+
+
+
 ## [2.0.2](https://github.com/tractr/traxion/compare/v2.0.1...v2.0.2) (2023-02-06)
 
 
