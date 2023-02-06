@@ -40,16 +40,14 @@ export default async function eslintGenerator(
   await addPackageToPackageJson(tree, packagesToAdd);
   installPackagesTask(tree, options);
 
-  // Use the linit generator from @nrwl/linter with Eslint
+  // Use the lint generator from @nrwl/linter with Eslint
   lintInitGenerator(tree, { linter: Linter.EsLint });
 
   const { npmScope, libsDir } = getWorkspaceLayout(tree);
-  const { generatedDir = 'generated' } = options;
 
   const templateOptions = {
     template: '',
     libsDir,
-    generatedDir,
     npmScope,
   };
   generateFiles(tree, join(__dirname, 'files'), '.', templateOptions);

@@ -1,5 +1,6 @@
 {
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "terraform-service-reverse-proxy",
   "projectType": "library",
   "sourceRoot": "libs/terraform/service/reverse-proxy/src",
   "tags": [],
@@ -34,7 +35,15 @@
         "jestConfig": "libs/terraform/service/reverse-proxy/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/terraform/service/reverse-proxy"]
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/terraform/service/reverse-proxy"
+      ]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/terraform/service/reverse-proxy/package.json"
+      }
     }
   }
 }

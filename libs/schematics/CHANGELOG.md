@@ -2,6 +2,140 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.0.0](https://github.com/tractr/traxion/compare/v1.65.12...v2.0.0) (2023-02-06)
+
+
+### chore
+
+* migrate nx and angular to version 15 ([#556](https://github.com/tractr/traxion/issues/556)) ([6b8973d](https://github.com/tractr/traxion/commit/6b8973df221203b035437c248c74f03d8f582ba2)), closes [#555](https://github.com/tractr/traxion/issues/555) [#557](https://github.com/tractr/traxion/issues/557) [#558](https://github.com/tractr/traxion/issues/558) [#560](https://github.com/tractr/traxion/issues/560) [#536](https://github.com/tractr/traxion/issues/536)
+
+
+### BREAKING CHANGES
+
+* Updating angular and nx to 15 will not work with nx 14 and angular 14 packages
+
+* chore: update major packages version
+
+* chore(prerelease): prerelease next version 1.65.13-next.1
+
+
+
+# [2.0.0-next.2](https://github.com/tractr/traxion/compare/v2.0.0-next.1...v2.0.0-next.2) (2023-02-06)
+
+
+
+# [2.0.0-next.1](https://github.com/tractr/traxion/compare/v2.0.0-next.0...v2.0.0-next.1) (2023-02-06)
+
+
+
+# [2.0.0-next.0](https://github.com/tractr/traxion/compare/v1.65.13-next.8...v2.0.0-next.0) (2023-02-06)
+
+
+
+## [1.65.13-next.8](https://github.com/tractr/traxion/compare/v1.65.13-next.7...v1.65.13-next.8) (2023-01-26)
+
+
+
+## [1.65.13-next.7](https://github.com/tractr/traxion/compare/v1.65.13-next.6...v1.65.13-next.7) (2023-01-26)
+
+
+
+## [1.65.13-next.6](https://github.com/tractr/traxion/compare/v1.65.13-next.5...v1.65.13-next.6) (2023-01-26)
+
+
+
+## [1.65.13-next.5](https://github.com/tractr/traxion/compare/v1.65.13-next.4...v1.65.13-next.5) (2023-01-26)
+
+
+
+## [1.65.13-next.4](https://github.com/tractr/traxion/compare/v1.65.13-next.3...v1.65.13-next.4) (2023-01-25)
+
+
+
+## [1.65.13-next.3](https://github.com/tractr/traxion/compare/v1.65.13-next.2...v1.65.13-next.3) (2023-01-25)
+
+
+
+## [1.65.13-next.2](https://github.com/tractr/traxion/compare/v1.65.13-next.1...v1.65.13-next.2) (2023-01-25)
+
+
+### Features
+
+* add peer dependencies executor helper to publish pacakges ([#560](https://github.com/tractr/traxion/issues/560)) ([ddfd62d](https://github.com/tractr/traxion/commit/ddfd62d7109e2023511f2aabe7b4f24ce6dc83e6))
+
+
+
+## [1.65.13-next.1](https://github.com/tractr/traxion/compare/v1.65.13-next.0...v1.65.13-next.1) (2023-01-25)
+
+
+
+## [1.65.13-next.0](https://github.com/tractr/traxion/compare/v1.65.12...v1.65.13-next.0) (2023-01-24)
+
+
+### Features
+
+* update major nx and angular dependencies ([#555](https://github.com/tractr/traxion/issues/555)) ([3b2a0cc](https://github.com/tractr/traxion/commit/3b2a0cc282df60e08a31fc58a32a682a37ae5c2b))
+
+
+
+## [1.65.12](https://github.com/tractr/traxion/compare/v1.65.11...v1.65.12) (2023-01-19)
+
+
+
+## [1.65.11](https://github.com/tractr/traxion/compare/v1.65.10...v1.65.11) (2023-01-19)
+
+
+### Bug Fixes
+
+* update schematics to match the last updates with traxion best practices ([#551](https://github.com/tractr/traxion/issues/551)) ([7512b4a](https://github.com/tractr/traxion/commit/7512b4a69e2b82c09d40651d53b28d17bc61a365))
+
+
+
+## [1.65.11-next.0](https://github.com/tractr/traxion/compare/v1.65.11-beta.3...v1.65.11-next.0) (2023-01-18)
+
+
+### Bug Fixes
+
+* rxjs version and logger levels ([a9bbd18](https://github.com/tractr/traxion/commit/a9bbd18ba0771c4f9e3c28681c0e71fb9f18e907))
+
+
+
+## [1.65.11-beta.3](https://github.com/tractr/traxion/compare/v1.65.11-beta.2...v1.65.11-beta.3) (2023-01-18)
+
+
+### Bug Fixes
+
+* skip install during traxion workspace process ([8a2be35](https://github.com/tractr/traxion/commit/8a2be35b4cbdfd2cc8d7c40b2dcd705633701b39))
+
+
+
+## [1.65.11-beta.2](https://github.com/tractr/traxion/compare/v1.65.11-beta.1...v1.65.11-beta.2) (2023-01-18)
+
+
+### Bug Fixes
+
+* add missing dependency in schematics package ([79e4044](https://github.com/tractr/traxion/commit/79e404475a73026a3a0125f4fdf3f544f509add2))
+
+
+
+## [1.65.11-beta.1](https://github.com/tractr/traxion/compare/v1.65.11-beta.0...v1.65.11-beta.1) (2023-01-18)
+
+
+### Bug Fixes
+
+* add missing dependency in schematics package ([17cb952](https://github.com/tractr/traxion/commit/17cb952546b37101fd332d984fc548822deeb862))
+
+
+
+## [1.65.11-beta.0](https://github.com/tractr/traxion/compare/v1.65.10...v1.65.11-beta.0) (2023-01-17)
+
+
+### Bug Fixes
+
+* update schematics to reflect how the new organisation is using nx and the packages ([181eff9](https://github.com/tractr/traxion/commit/181eff955227d77da3a8afe2255d3b5a92671c2e))
+
+
+
 ## [1.65.10](https://github.com/tractr/traxion/compare/v1.65.9...v1.65.10) (2023-01-17)
 
 

@@ -1,4 +1,11 @@
-import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { relative } from 'path';
+
+import {
+  getWorkspaceLayout,
+  readJson,
+  readProjectConfiguration,
+  Tree,
+} from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import fetch, { Response } from 'node-fetch';
 
@@ -46,8 +53,13 @@ describe('prisma-library generator', () => {
       ...options,
     });
 
-    expect(appTree.exists('libs/test/.hapifyrc.js')).toBeTruthy();
-    expect(appTree.read('libs/test/.hapifyrc.js')?.toString()).toEqual(`const {
+    const { libsDir } = getWorkspaceLayout(appTree);
+
+    expect(appTree.exists(`${libsDir}/test/.hapifyrc.js`)).toBeTruthy();
+
+    const relativePath = relative(`${libsDir}/test`, '.');
+    expect(appTree.read(`${libsDir}/test/.hapifyrc.js`)?.toString())
+      .toEqual(`const {
   hapifyDefaultConfig,
   getValidatorPath,
 } = require('@trxn/hapify-config');
@@ -58,7 +70,7 @@ module.exports = {
   name: 'test',
   description: 'Library to host generated codes',
   validatorPath: getValidatorPath(__dirname),
-  project: '../../hapify-models.json',
+  project: '${relativePath}/hapify-models.json',
   extends: [
     '@trxn/hapify-templates-prisma',
   ],
@@ -75,8 +87,10 @@ module.exports = {
       ...options,
     });
 
-    expect(appTree.exists('libs/test/prisma/seed.ts')).toBeTruthy();
-    expect(appTree.read('libs/test/prisma/seed.ts')?.toString())
+    const { libsDir } = getWorkspaceLayout(appTree);
+
+    expect(appTree.exists(`${libsDir}/test/prisma/seed.ts`)).toBeTruthy();
+    expect(appTree.read(`${libsDir}/test/prisma/seed.ts`)?.toString())
       .toEqual(`import { seed } from '../src/index';
 
 seed().catch((e) => {
@@ -92,9 +106,16 @@ seed().catch((e) => {
       ...options,
     });
 
-    expect(appTree.exists('libs/test/prisma/schemas/base.prisma')).toBeTruthy();
-    expect(appTree.read('libs/test/prisma/schemas/base.prisma')?.toString())
-      .toEqual(`// ------------------------------------------------
+    const { libsDir } = getWorkspaceLayout(appTree);
+
+    expect(
+      appTree.exists(`${libsDir}/test/prisma/schemas/base.prisma`),
+    ).toBeTruthy();
+
+    const relativePath = relative(`${libsDir}/test/prisma`, '.');
+    expect(
+      appTree.read(`${libsDir}/test/prisma/schemas/base.prisma`)?.toString(),
+    ).toEqual(`// ------------------------------------------------
 
 datasource db {
   provider = "postgresql"
@@ -103,7 +124,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  output = "../../../node_modules/.prisma/client"
+  output = "${relativePath}/node_modules/.prisma/client"
   previewFeatures = ["filterJson"]
 }
 `);

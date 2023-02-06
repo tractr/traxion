@@ -1,6 +1,6 @@
 {
   "name": "@trxn/commit-config",
-  "version": "1.65.10",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion.git"

@@ -1,5 +1,6 @@
 {
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "terraform-component-logs",
   "projectType": "library",
   "sourceRoot": "libs/terraform/component/logs/src",
   "tags": [],
@@ -34,7 +35,13 @@
         "jestConfig": "libs/terraform/component/logs/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/terraform/component/logs"]
+      "outputs": ["{workspaceRoot}/coverage/libs/terraform/component/logs"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/terraform/component/logs/package.json"
+      }
     }
   }
 }

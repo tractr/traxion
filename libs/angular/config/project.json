@@ -1,5 +1,6 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "angular-config",
   "prefix": "tractr",
   "projectType": "library",
   "sourceRoot": "libs/angular/config/src",
@@ -19,9 +20,7 @@
       "options": {
         "project": "libs/angular/config/ng-package.json"
       },
-      "outputs": [
-        "dist/libs/angular/config"
-      ]
+      "outputs": ["{workspaceRoot}/dist/libs/angular/config"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -31,9 +30,7 @@
           "libs/angular/config/src/**/*.html"
         ]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -48,9 +45,13 @@
         "jestConfig": "libs/angular/config/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/angular/config"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/angular/config"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/angular/config/package.json"
+      }
     }
   }
 }

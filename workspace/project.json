@@ -1,17 +1,63 @@
 {
   "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "root": "workspace",
+  "name": "workspace",
   "targets": {
+    "prerelease": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "commitMessageFormat": "chore(prerelease): prerelease next version ${version}",
+        "noVerify": true,
+        "postTargets": ["workspace:publish-next"],
+        "preid": "next",
+        "releaseAs": "prerelease",
+        "syncVersions": true
+      }
+    },
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nx run-many --target=publish --all --exclude=workspace"
+        "commands": [
+          {
+            "command": "nx run-many --target=build --all --exclude=workspace",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "nx run-many --target=update-peer-dependencies --all --exclude=workspace --skip-nx-cache",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "nx run-many --target=publish --all --exclude=workspace --no-build=true",
+            "forwardAllArgs": false
+          }
+        ],
+        "parallel": false
+      }
+    },
+    "publish-next": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx run-many --target=build --all --exclude=workspace,admin,api,docs,pwa,pwa-e2e,terraform",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "nx run-many --target=update-peer-dependencies --all --exclude=workspace --skip-nx-cache",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "nx run-many --target=publish --all --exclude=workspace --no-build=true --tag=next",
+            "forwardAllArgs": false
+          }
+        ],
+        "parallel": false
       }
     },
     "release": {
       "executor": "@jscutlery/semver:version",
       "options": {
         "commitMessageFormat": "chore(release): release version ${version}",
+        "noVerify": true,
         "postTargets": ["workspace:release-notes", "workspace:publish"],
         "syncVersions": true
       }

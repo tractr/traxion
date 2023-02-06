@@ -1,4 +1,3 @@
-export * from './add-workspace-files.helper';
 export * from './create-admin-application.helper';
 export * from './create-angular-application.helper';
 export * from './create-nestjs-application.helper';

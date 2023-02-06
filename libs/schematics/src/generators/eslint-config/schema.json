@@ -3,11 +3,6 @@
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "properties": {
-    "generatedDir": {
-      "default": "generated",
-      "description": "A location where the generated folder is located",
-      "type": "string"
-    },
     "skipInstall": {
       "default": false,
       "description": "Skip the installation of dependencies",

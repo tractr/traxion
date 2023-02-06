@@ -3,6 +3,7 @@
     "declaration": true,
     "module": "commonjs",
     "outDir": "../../dist/out-tsc",
+    "resolveJsonModule": true,
     "types": ["node"]
   },
   "exclude": ["**/*.spec.ts", "**/*.test.ts", "jest.config.ts"],

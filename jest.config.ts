@@ -64,7 +64,6 @@ export default {
     '<rootDir>/libs/generated/rext-client',
     '<rootDir>/libs/generated/models',
     '<rootDir>/libs/generated/nestjs-models-common',
-    '<rootDir>/libs/hapify/create-traxion-workspace',
     '<rootDir>/libs/nestjs/winston',
     '<rootDir>/libs/nestjs/sentry',
     '<rootDir>/libs/nestjs/request-timestamp',
@@ -74,5 +73,6 @@ export default {
     '<rootDir>/libs/terraform/service/logstash',
     '<rootDir>/apps/pwa',
     '<rootDir>/libs/nestjs/password',
+    '<rootDir>/libs/config/client',
   ],
 };

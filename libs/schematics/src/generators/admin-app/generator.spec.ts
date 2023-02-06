@@ -1,4 +1,8 @@
-import { readProjectConfiguration, Tree } from '@nrwl/devkit';
+import {
+  getWorkspaceLayout,
+  readProjectConfiguration,
+  Tree,
+} from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import * as ReactGenerators from '@nrwl/react';
 import fetch, { Response } from 'node-fetch';
@@ -76,8 +80,10 @@ describe('admin generator', () => {
       options.name,
     );
 
+    const { root } = readProjectConfiguration(appTree, 'admin');
+
     expect(applicationConfiguration.targets?.serve.options.proxyConfig).toEqual(
-      'apps/admin/proxy.conf.js',
+      `${root}/proxy.conf.js`,
     );
   });
 

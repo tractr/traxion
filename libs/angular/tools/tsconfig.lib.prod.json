@@ -3,7 +3,9 @@
     "compilationMode": "partial"
   },
   "compilerOptions": {
-    "declarationMap": false
+    "declarationMap": false,
+    "target": "ES2022",
+    "useDefineForClassFields": false
   },
   "exclude": ["jest.config.ts"],
   "extends": "./tsconfig.lib.json"
