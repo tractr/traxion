@@ -5,6 +5,7 @@ import { generateConstructor } from './constructor.generator';
 import { generateCountMethod } from './count-method.generator';
 import { generateCreateManyMethod } from './create-many-method.generator';
 import { generateCreateMethod } from './create-method.generator';
+import { generateDefaultInternalsMethod } from './default-internals-method.generator';
 import { generateDeleteManyMethod } from './delete-many-method.generator';
 import { generateDeleteMethod } from './delete-method.generator';
 import { generateFindFirstMethod } from './find-first-method.generator';
@@ -23,6 +24,7 @@ export function generateResolverClass(model: Model): ClassDeclarationStructure {
   const constructor = generateConstructor(model);
 
   const methods = [
+    ...generateDefaultInternalsMethod(),
     generateFindUniqueMethod(model),
     generateFindFirstMethod(model),
     generateFindManyMethod(model),
@@ -34,7 +36,7 @@ export function generateResolverClass(model: Model): ClassDeclarationStructure {
     generateDeleteMethod(model),
     generateDeleteManyMethod(model),
     generateCountMethod(model),
-    generateAggregateMethod(model),
+    generateAggregateMethod(model)
   ];
 
   return {
@@ -42,7 +44,7 @@ export function generateResolverClass(model: Model): ClassDeclarationStructure {
     name: className,
     isExported: true,
     decorators: [
-      { name: 'Injectable' },
+      { name: 'Injectable()' },
     ],
     methods,
     ctors: [constructor],
