@@ -2,6 +2,19 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.0.2](https://github.com/tractr/traxion/compare/v2.0.1...v2.0.2) (2023-02-06)
+
+
+### Bug Fixes
+
+* **react-admin:** fix bad format for enum id in react admin ([#563](https://github.com/tractr/traxion/issues/563)) ([3378b48](https://github.com/tractr/traxion/commit/3378b4846902a446f219766bd28d976022a402ca))
+
+
+
+## [2.0.1](https://github.com/tractr/traxion/compare/v2.0.0...v2.0.1) (2023-02-06)
+
+
+
 # [2.0.0](https://github.com/tractr/traxion/compare/v1.65.12...v2.0.0) (2023-02-06)
 
 

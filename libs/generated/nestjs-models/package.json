@@ -1,6 +1,6 @@
 {
   "name": "@trxn/generated-nestjs-models",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "exports": {
     ".": "./dist/index.js",
     "./mock": "./dist/mock.js"
