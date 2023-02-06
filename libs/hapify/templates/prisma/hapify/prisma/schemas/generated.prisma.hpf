@@ -260,7 +260,7 @@ function compositeUniqueness(model) {
         }, {})
 
     // construct @@unique decorators from field names
-    return Object.values(indexes).map(index => `@@unique([ ${index.map(index => index.names.camel).join(',') } ])`).join('\n');
+    return Object.entries(indexes).map(([indexName, index]) => `@@unique(name: "${indexName}", fields: [ ${index.map(index => index.names.camel).join(',') } ])`).join('\n');
 }
 
 function searchIndexes(model) {
@@ -294,7 +294,7 @@ function searchIndexes(model) {
     const compositeSearchIndexes = Object.entries(groupedCompositeSearchIndexes)
         .map(([indexName, indexFields]) => {
             indexFields.sort((f1, f2) => f1.indexPosition - f2.indexPosition);
-            return `@@index([ ${indexFields.map(index => `${getFieldNameForIndex(index.field)}(sort: ${index.indexOrder})`).join(',') } ])`;
+            return `@@index(name: "${indexName}", fields: [ ${indexFields.map(index => `${getFieldNameForIndex(index.field)}(sort: ${index.indexOrder})`).join(',') } ])`;
         });
 
     // Return index strings
