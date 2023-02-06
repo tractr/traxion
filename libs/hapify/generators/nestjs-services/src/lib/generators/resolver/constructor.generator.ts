@@ -4,11 +4,7 @@ import {
   StructureKind,
 } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
-
-export function generateConstructor(
-  model: Model,
-): ConstructorDeclarationStructure {
+export function generateConstructor(): ConstructorDeclarationStructure {
   return {
     kind: StructureKind.Constructor,
     parameters: [

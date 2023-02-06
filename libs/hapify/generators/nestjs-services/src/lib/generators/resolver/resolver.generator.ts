@@ -18,10 +18,9 @@ import { generateUpsertMethod } from './upsert-method.generator';
 
 import { Model, pascal, snake } from '@trxn/hapify-core';
 
-
 export function generateResolverClass(model: Model): ClassDeclarationStructure {
   const className = `${pascal(model.name)}Service`;
-  const constructor = generateConstructor(model);
+  const constructor = generateConstructor();
 
   const methods = [
     ...generateDefaultInternalsMethod(),
@@ -36,16 +35,14 @@ export function generateResolverClass(model: Model): ClassDeclarationStructure {
     generateDeleteMethod(model),
     generateDeleteManyMethod(model),
     generateCountMethod(model),
-    generateAggregateMethod(model)
+    generateAggregateMethod(model),
   ];
 
   return {
     kind: StructureKind.Class,
     name: className,
     isExported: true,
-    decorators: [
-      { name: 'Injectable()' },
-    ],
+    decorators: [{ name: 'Injectable()' }],
     methods,
     ctors: [constructor],
   };
@@ -62,7 +59,7 @@ export function generateResolverSourceFile(
   const sourceFile = project.createSourceFile(filePath);
 
   const resolverClass = generateResolverClass(model);
-  const imports = generateImports(model);
+  const imports = generateImports();
 
   sourceFile.addImportDeclarations(imports);
   sourceFile.addClass(resolverClass);
