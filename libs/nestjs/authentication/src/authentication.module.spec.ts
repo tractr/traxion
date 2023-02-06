@@ -160,8 +160,15 @@ describe('Authentication Module', () => {
       await request(app.getHttpServer()).post('/logout').expect(200);
     });
 
-    it('/me should fail with 401', async () => {
-      await request(app.getHttpServer()).get('/me').expect(401);
+    it('/me should fail with 401 and reset cookie', async () => {
+      const response = await request(app.getHttpServer())
+        .get('/me')
+        .expect(401);
+
+      const cookie = response.headers['set-cookie'][0];
+
+      expect(cookie).toMatch(/authCookie=/);
+      expect(cookie).toMatch(/Path=\//);
     });
   });
 });
