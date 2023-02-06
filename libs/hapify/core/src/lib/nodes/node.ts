@@ -12,7 +12,20 @@ export abstract class Node {
    */
   protected _notes: string | undefined;
 
+  /**
+   * Plural name of the node
+   */
+  protected _plural?: string;
+
   constructor(readonly name: string) {}
+
+  /**
+   * Get the plural name of the node
+   * If not set, use the pluralize package
+   */
+  get plural() {
+    return this._plural ?? pluralize(this.name);
+  }
 
   /**
    * Get the metadata of the node.
@@ -60,6 +73,14 @@ export abstract class Node {
    */
   setNotes(notes: string): this {
     this._notes = notes;
+    return this;
+  }
+
+  /**
+   * Set the plural name of the node
+   */
+  setPlural(plural: string): this {
+    this._plural = plural;
     return this;
   }
 
