@@ -1,6 +1,7 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": ["generated-rext-client"],
+  "name": "generated-react-admin",
   "prefix": "tractr",
   "projectType": "library",
   "sourceRoot": "libs/generated/react-admin/src",
@@ -27,7 +28,7 @@
         "jestConfig": "libs/generated/react-admin/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/generated/react-admin"]
+      "outputs": ["{workspaceRoot}/coverage/libs/generated/react-admin"]
     }
   }
 }

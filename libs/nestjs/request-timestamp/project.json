@@ -1,17 +1,14 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "nestjs-request-timestamp",
   "projectType": "library",
   "sourceRoot": "libs/nestjs/request-timestamp/src",
-  "tags": [
-    "scope:nestjs"
-  ],
+  "tags": ["scope:nestjs"],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": [
-          "libs/nestjs/request-timestamp/*.md"
-        ],
+        "assets": ["libs/nestjs/request-timestamp/*.md"],
         "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/request-timestamp/src/index.ts",
         "outputPath": "dist/libs/nestjs/request-timestamp",
@@ -19,20 +16,14 @@
         "tsConfig": "libs/nestjs/request-timestamp/tsconfig.lib.json",
         "updateBuildableProjectDepsInPackageJson": true
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/nestjs/request-timestamp/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/nestjs/request-timestamp/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -46,9 +37,13 @@
         "jestConfig": "libs/nestjs/request-timestamp/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/nestjs/request-timestamp"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/request-timestamp"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/nestjs/request-timestamp/package.json"
+      }
     }
   }
 }

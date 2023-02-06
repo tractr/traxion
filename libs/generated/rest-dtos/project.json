@@ -1,6 +1,7 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": ["hapify-templates-rest-dtos", "generated-models"],
+  "name": "generated-rest-dtos",
   "prefix": "tractr",
   "projectType": "library",
   "sourceRoot": "libs/generated/rest-dtos/src",
@@ -12,8 +13,8 @@
         "cwd": "libs/generated/rest-dtos"
       },
       "outputs": [
-        "libs/generated/rest-dtos/src/generated",
-        "libs/generated/rest-dtos/mock/src/generated"
+        "{projectRoot}/src/generated",
+        "{projectRoot}/mock/src/generated"
       ]
     },
     "lint": {
@@ -33,7 +34,7 @@
         "jestConfig": "libs/generated/rest-dtos/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/generated/rest-dtos"]
+      "outputs": ["{workspaceRoot}/coverage/libs/generated/rest-dtos"]
     }
   }
 }

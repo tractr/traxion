@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "target": "es2020",
-    "types": []
+    "target": "ES2022",
+    "types": [],
+    "useDefineForClassFields": false
   },
   "exclude": ["**/*.test.ts", "**/*.spec.ts", "jest.config.ts"],
   "extends": "./tsconfig.json",

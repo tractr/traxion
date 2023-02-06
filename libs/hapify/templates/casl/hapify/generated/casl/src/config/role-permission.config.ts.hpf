@@ -81,7 +81,7 @@ export const rolePermissions: Record<
       [field.names.camel]: {
         some: {
           id: {
-            in: `getConcatValueByPath('${field.meta.ownerStringPath.raw.replace('user.', '')}', user)`,
+            in: `getConcatValueByPath<string[]>('${field.meta.ownerStringPath.raw.replace('user.', '')}', user)`,
           }
         }
       }
@@ -91,7 +91,7 @@ export const rolePermissions: Record<
   function getFieldConditionsOnId(field) {
     return {
       [field.names.camel === 'id' ? 'id' : `${field.names.camel}Id` ]: {
-        in: `getConcatValueByPath('${field.meta.ownerStringPath.raw.replace('user.', '')}', user)`
+        in: `getConcatValueByPath<string[]>('${field.meta.ownerStringPath.raw.replace('user.', '')}', user)`
       }
     };
   }
@@ -99,7 +99,7 @@ export const rolePermissions: Record<
   function getFieldConditionsOnRelation(field) {
     return field.names.camel !== 'id' ? {
       [`'${field.names.camel}.id'`]: {
-        in: `getConcatValueByPath('${field.meta.ownerStringPath.raw.replace('user.', '')}', user)`
+        in: `getConcatValueByPath<string[]>('${field.meta.ownerStringPath.raw.replace('user.', '')}', user)`
       }
     }: {};
   }

@@ -1,6 +1,7 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": ["hapify-templates-dbml"],
+  "name": "generated-dbml",
   "projectType": "library",
   "sourceRoot": "libs/generated/dbml/src",
   "tags": [],
@@ -13,7 +14,7 @@
         "moveGeneratedFiles": false,
         "updateImportPath": false
       },
-      "outputs": ["libs/generated/dbml/models.dbml"]
+      "outputs": ["{projectRoot}/models.dbml"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -28,7 +29,7 @@
         "jestConfig": "libs/generated/dbml/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/generated/dbml"]
+      "outputs": ["{workspaceRoot}/coverage/libs/generated/dbml"]
     }
   }
 }

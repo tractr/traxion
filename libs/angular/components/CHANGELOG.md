@@ -2,6 +2,64 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.0.0-next.2](https://github.com/tractr/traxion/compare/v2.0.0-next.1...v2.0.0-next.2) (2023-02-06)
+
+
+
+# [2.0.0-next.1](https://github.com/tractr/traxion/compare/v2.0.0-next.0...v2.0.0-next.1) (2023-02-06)
+
+
+
+# [2.0.0-next.0](https://github.com/tractr/traxion/compare/v1.65.13-next.8...v2.0.0-next.0) (2023-02-06)
+
+
+
+## [1.65.13-next.8](https://github.com/tractr/traxion/compare/v1.65.13-next.7...v1.65.13-next.8) (2023-01-26)
+
+
+
+## [1.65.13-next.7](https://github.com/tractr/traxion/compare/v1.65.13-next.6...v1.65.13-next.7) (2023-01-26)
+
+
+
+## [1.65.13-next.6](https://github.com/tractr/traxion/compare/v1.65.13-next.5...v1.65.13-next.6) (2023-01-26)
+
+
+
+## [1.65.13-next.5](https://github.com/tractr/traxion/compare/v1.65.13-next.4...v1.65.13-next.5) (2023-01-26)
+
+
+
+## [1.65.13-next.4](https://github.com/tractr/traxion/compare/v1.65.13-next.3...v1.65.13-next.4) (2023-01-25)
+
+
+
+## [1.65.13-next.3](https://github.com/tractr/traxion/compare/v1.65.13-next.2...v1.65.13-next.3) (2023-01-25)
+
+
+
+## [1.65.13-next.2](https://github.com/tractr/traxion/compare/v1.65.13-next.1...v1.65.13-next.2) (2023-01-25)
+
+
+### Features
+
+* add peer dependencies executor helper to publish pacakges ([#560](https://github.com/tractr/traxion/issues/560)) ([ddfd62d](https://github.com/tractr/traxion/commit/ddfd62d7109e2023511f2aabe7b4f24ce6dc83e6))
+
+
+
+## [1.65.13-next.1](https://github.com/tractr/traxion/compare/v1.65.13-next.0...v1.65.13-next.1) (2023-01-25)
+
+
+
+## [1.65.13-next.0](https://github.com/tractr/traxion/compare/v1.65.12...v1.65.13-next.0) (2023-01-24)
+
+
+### Features
+
+* update major nx and angular dependencies ([#555](https://github.com/tractr/traxion/issues/555)) ([3b2a0cc](https://github.com/tractr/traxion/commit/3b2a0cc282df60e08a31fc58a32a682a37ae5c2b))
+
+
+
 ## [1.65.12](https://github.com/tractr/traxion/compare/v1.65.11...v1.65.12) (2023-01-19)
 
 
