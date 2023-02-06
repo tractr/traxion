@@ -1,6 +1,7 @@
 import { EntityField, Field } from './fields';
 import { ModelAction, ModelActionsScopes, Scope } from './interfaces';
 import { Node } from './node';
+import type { Relation } from './relation';
 
 /**
  * Local helper to filter entity fields.
@@ -20,9 +21,9 @@ export class Model extends Node {
   protected _fields = new Set<Field>();
 
   /**
-   * List of models which reference this model
+   * Relations of the model
    */
-  protected _referencedIn = new Set<Model>();
+  protected _relations = new Set<Relation>();
 
   /**
    * Stores the scope of each action
@@ -41,6 +42,16 @@ export class Model extends Node {
    * This is used to determine the ownership.
    */
   protected _owner: Model | undefined;
+
+  /**
+   *  Adds a relation to the model
+   * @param relation
+   * @returns
+   */
+  addRelation(relation: Relation): this {
+    this._relations.add(relation);
+    return this;
+  }
 
   /**
    * Adds a field to the model
@@ -114,13 +125,10 @@ export class Model extends Node {
   }
 
   /**
-   * The list of models referenced by this model
+   * Returns a list of relations in the model
    */
-  get dependencies(): Model[] {
-    return this.fields
-      .filter(isEntity)
-      .filter((field) => field.model !== this)
-      .map((field) => field.model);
+  get relations(): Relation[] {
+    return Array.from(this._relations);
   }
 
   /**
@@ -143,29 +151,6 @@ export class Model extends Node {
    */
   get isSelfDependent(): boolean {
     return this.fields.filter(isEntity).some((field) => field.model === this);
-  }
-
-  /**
-   * Add a model to the list of models that reference this model
-   */
-  protected addReferencedIn(model: Model): this {
-    this._referencedIn.add(model);
-    return this;
-  }
-
-  /**
-   * Remove a model from the list of models that reference this model
-   */
-  protected removeReferencedIn(model: Model): this {
-    this._referencedIn.delete(model);
-    return this;
-  }
-
-  /**
-   * The list of models that reference this model
-   */
-  get referencedIn(): Model[] {
-    return Array.from(this._referencedIn);
   }
 
   /**

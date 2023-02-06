@@ -6,6 +6,7 @@ import { Node } from '../node';
  * This class is tested via the children classes, especially the StringBasicField class
  */
 export abstract class BaseField extends Node {
+  abstract readonly isScalar: boolean;
   abstract readonly type: string;
   abstract readonly subType: string;
 

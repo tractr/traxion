@@ -1,9 +1,9 @@
-import { BaseField } from '../base-field';
+import { ScalarField } from '../scalar-field';
 
 /**
  * This class is tested via the children classes, especially the StringBasicField class
  */
-export abstract class BaseStringField extends BaseField {
+export abstract class BaseStringField extends ScalarField {
   /**
    * Default value of the string
    */
