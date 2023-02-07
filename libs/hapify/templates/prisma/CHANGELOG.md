@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.0.4](https://github.com/tractr/traxion/compare/v2.0.3...v2.0.4) (2023-02-07)
+
+
+### Features
+
+* add hapify meta for search and unique index configuration ([#545](https://github.com/tractr/traxion/issues/545)) ([b2ed048](https://github.com/tractr/traxion/commit/b2ed04810bf6e50ce3e935055b35cab498ff7082))
+
+
+
 ## [2.0.3](https://github.com/tractr/traxion/compare/v2.0.2...v2.0.3) (2023-02-06)
 
 
