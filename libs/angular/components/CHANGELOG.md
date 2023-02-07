@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.0.5](https://github.com/tractr/traxion/compare/v2.0.4...v2.0.5) (2023-02-07)
+
+
+### Bug Fixes
+
+* update problematic peer dependencies ([#566](https://github.com/tractr/traxion/issues/566)) ([2b2ce6e](https://github.com/tractr/traxion/commit/2b2ce6ea42c87647d293b1673cb575c1d7d84ca3))
+
+
+
 ## [2.0.4](https://github.com/tractr/traxion/compare/v2.0.3...v2.0.4) (2023-02-07)
 
 
