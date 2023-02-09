@@ -17,6 +17,11 @@ export interface UpdateDependenciesExecutorSchema {
   ignorePackages?: string[];
 
   /**
+   * Force the dependencies that match the peer dependencies to be peer dependencies.
+   */
+  forceDepsToBePeerDeps?: boolean;
+
+  /**
    * A peer dependencies object that will override the peer dependencies found in the peerDependenciesJsonPath
    */
   overrides?: Record<string, string>;

@@ -40,6 +40,7 @@ export default async function runExecutor(
   const {
     ignorePackages = [],
     overrides = {},
+    forceDepsToBePeerDeps = true,
     packageJsonPath: pckgJsonPath = join(projectPath, 'package.json'),
     peerDependenciesJsonPath: peerDepsJsonPath = join(
       rootPath,
@@ -72,9 +73,48 @@ export default async function runExecutor(
     ...overrides,
   };
 
-  const packageJson: { peerDependencies?: Record<string, string> } = JSON.parse(
-    readFileSync(packageJsonPath, 'utf-8'),
-  );
+  const packageJson: {
+    peerDependencies?: Record<string, string>;
+    dependencies?: Record<string, string>;
+  } = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
+
+  if (forceDepsToBePeerDeps && packageJson.dependencies) {
+    for (const [key] of Object.entries(peerDependencies)) {
+      let startWith = '';
+      if (key.endsWith('*')) {
+        startWith = key.slice(0, -1);
+      }
+
+      if (startWith !== '') {
+        for (const [packageJsonKey] of Object.entries(
+          packageJson.dependencies,
+        )) {
+          if (
+            packageJsonKey.startsWith(startWith) &&
+            !ignorePackages.includes(packageJsonKey) &&
+            !ignorePackages.includes(key)
+          ) {
+            packageJson.peerDependencies = {
+              ...(packageJson.peerDependencies || {}),
+              [packageJsonKey]: packageJson.dependencies[packageJsonKey],
+            };
+
+            delete packageJson.dependencies[packageJsonKey];
+          }
+        }
+      } else if (
+        packageJson.dependencies[key] &&
+        !ignorePackages.includes(key)
+      ) {
+        packageJson.peerDependencies = {
+          ...(packageJson.peerDependencies || {}),
+          [key]: packageJson.dependencies[key],
+        };
+
+        delete packageJson.dependencies[key];
+      }
+    }
+  }
 
   if (!packageJson.peerDependencies) {
     return {
