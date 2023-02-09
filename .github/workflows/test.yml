@@ -31,6 +31,12 @@ on:
         required: false
         type: boolean
 
+      NODE_OPTIONS:
+        default: ''
+        description: 'Node options to add to the env'
+        required: false
+        type: string
+
     secrets:
       NPM_TOKEN:
         description: 'The npm token if needed'
@@ -75,6 +81,7 @@ jobs:
         shell: bash
         run: npx nx affected:build --base=remotes/origin/main
         env:
+          NODE_OPTIONS: ${{ inputs.NODE_OPTIONS }}
           NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       # Run the lint
@@ -83,6 +90,7 @@ jobs:
         shell: bash
         run: npx nx affected:lint --base=remotes/origin/main
         env:
+          NODE_OPTIONS: ${{ inputs.NODE_OPTIONS }}
           NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       # We only run the affected test
@@ -91,6 +99,7 @@ jobs:
         shell: bash
         run: npx nx affected:test --base=remotes/origin/main
         env:
+          NODE_OPTIONS: ${{ inputs.NODE_OPTIONS }}
           NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       # Run the tests and the coverage
@@ -99,6 +108,7 @@ jobs:
         if: ${{ inputs.codecov }}
         run: npx nx run-many --target test --all --codeCoverage
         env:
+          NODE_OPTIONS: ${{ inputs.NODE_OPTIONS }}
           NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       - name: Upload coverage to Codecov
