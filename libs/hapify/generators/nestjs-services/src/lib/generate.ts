@@ -4,7 +4,7 @@ import * as path from 'path';
 import { Project } from 'ts-morph';
 
 import { generateConstantsSourceFile } from './generators/service/generate-constants';
-import { generateProvidersSourceFile } from './generators/service/generate-providers';
+import { generateProvidersSourceFile } from './generators/provider/generate-providers';
 import { generateServiceIndexFile } from './generators/service/index.generator';
 import { generateServiceSourceFile } from './generators/service/service.generator';
 
