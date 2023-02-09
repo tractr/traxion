@@ -3,6 +3,9 @@ import * as path from 'path';
 
 import { Project } from 'ts-morph';
 
+import { generateConstantsSourceFile } from './generators/service/generate-constants';
+import { generateProvidersSourceFile } from './generators/service/generate-providers';
+import { generateServiceIndexFile } from './generators/service/index.generator';
 import { generateServiceSourceFile } from './generators/service/service.generator';
 
 import { Project as Models } from '@trxn/hapify-core';
@@ -37,8 +40,10 @@ export function generate(
   // Generate controllers and dtos
   dataModel.models.forEach((model) => {
     generateServiceSourceFile(project, model, entityPath);
+    generateConstantsSourceFile(project, model, entityPath);
+    generateProvidersSourceFile(project, model, entityPath);
   });
-
+  // generateServiceIndexFile(project,models.map(model =. model.name),entityPath)
   // Save project to file system
   project.saveSync();
 }
