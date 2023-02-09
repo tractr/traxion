@@ -9,12 +9,10 @@
       "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/nestjs/file-storage/*.md"],
-        "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/file-storage/src/index.ts",
         "outputPath": "dist/libs/nestjs/file-storage",
         "packageJson": "libs/nestjs/file-storage/package.json",
-        "tsConfig": "libs/nestjs/file-storage/tsconfig.lib.json",
-        "updateBuildableProjectDepsInPackageJson": true
+        "tsConfig": "libs/nestjs/file-storage/tsconfig.lib.json"
       },
       "outputs": ["{options.outputPath}"]
     },

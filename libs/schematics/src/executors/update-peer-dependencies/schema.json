@@ -3,6 +3,11 @@
   "cli": "nx",
   "description": "Update the package.json",
   "properties": {
+    "forceDepsToBePeerDeps": {
+      "default": true,
+      "description": "Force the dependencies that are referenced in the peerDependenciesJson to be a peerDeps.",
+      "type": "boolean"
+    },
     "ignorePackages": {
       "default": [],
       "description": "A list of packages to ignore when updating the package.json",

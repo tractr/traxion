@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import { Injectable } from '@nestjs/common';
-import { PrismaClient, PrismaPromise } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class MysqlService {
@@ -8,7 +8,7 @@ export class MysqlService {
     prisma: PrismaClient,
     schemaName: string = process.env.TRACTR_POSTGRESQL_SCHEMA || 'public',
   ) {
-    const transactions: PrismaPromise<unknown>[] = [];
+    const transactions: Prisma.PrismaPromise<unknown>[] = [];
     transactions.push(prisma.$executeRaw`SET FOREIGN_KEY_CHECKS = 0;`);
 
     const tables: { TABLE_NAME: string }[] =
