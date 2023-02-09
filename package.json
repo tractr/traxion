@@ -266,7 +266,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "overrides": {
-    "@nrwl/devkit": "$@nrwl/devkit",
     "react": "$react"
   },
   "prisma": {

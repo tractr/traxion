@@ -51,12 +51,10 @@
             "output": "."
           }
         ],
-        "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/schematics/src/index.ts",
         "outputPath": "dist/libs/schematics",
         "packageJson": "libs/schematics/package.json",
-        "tsConfig": "libs/schematics/tsconfig.lib.json",
-        "updateBuildableProjectDepsInPackageJson": true
+        "tsConfig": "libs/schematics/tsconfig.lib.json"
       },
       "outputs": ["{options.outputPath}"]
     },
