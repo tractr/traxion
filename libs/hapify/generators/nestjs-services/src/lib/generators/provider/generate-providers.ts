@@ -2,6 +2,7 @@ import { names } from '@nrwl/devkit';
 import { Project, VariableDeclarationKind } from 'ts-morph';
 
 import { Model, pascal, snake } from '@trxn/hapify-core';
+import { generateImports } from './imports.generator';
 
 export function generateProvidersSourceFile(
   project: Project,
@@ -12,26 +13,25 @@ export function generateProvidersSourceFile(
   const filePath = `${path}/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);
-  const name = `${model.name.toUpperCase()}_SERVICE`;
-  const databaseName = `${model.name.toUpperCase()}_DATABASE_SERVICE`;
+  const name = `${model.name.toUpperCase()}_SERVICES_PROVIDERS`;
 
+  const imports = generateImports(model);
+  sourceFile.addImportDeclarations(imports);
+  
   sourceFile.addVariableStatement({
     isExported: true,
     declarationKind: VariableDeclarationKind.Const,
+    
     declarations: [
       {
         name,
-        initializer: `'${name}'`,
-      },
-    ],
-  });
-  sourceFile.addVariableStatement({
-    isExported: true,
-    declarationKind: VariableDeclarationKind.Const,
-    declarations: [
-      {
-        name: databaseName,
-        initializer: `'${databaseName}'`,
+        type: 'Provider[]',
+        initializer: `[
+          {
+            provide: ${model.name.toUpperCase()}_SERVICE,
+            useClass: ${pascal(model.name)}Service,
+          }
+        ]`,
       },
     ],
   });
