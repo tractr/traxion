@@ -26,7 +26,7 @@ export abstract class Node {
    * If not set, use the pluralize package
    */
   get plural() {
-    return this._plural ?? pluralize(this.name);
+    return this._plural;
   }
 
   /**
