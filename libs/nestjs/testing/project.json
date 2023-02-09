@@ -9,12 +9,10 @@
       "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/nestjs/testing/*.md"],
-        "buildableProjectDepsInPackageJsonType": "dependencies",
         "main": "libs/nestjs/testing/src/index.ts",
         "outputPath": "dist/libs/nestjs/testing",
         "packageJson": "libs/nestjs/testing/package.json",
-        "tsConfig": "libs/nestjs/testing/tsconfig.lib.json",
-        "updateBuildableProjectDepsInPackageJson": true
+        "tsConfig": "libs/nestjs/testing/tsconfig.lib.json"
       },
       "outputs": ["{options.outputPath}"]
     },
