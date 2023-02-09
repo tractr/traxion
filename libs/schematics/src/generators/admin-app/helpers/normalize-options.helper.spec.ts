@@ -1,11 +1,11 @@
 import { getWorkspaceLayout, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
+import { NormalizedSchema, normalizeOptions } from './normalize-options.helper';
 import {
   AdminAppGeneratorSchema,
   AdminAppGeneratorSchemaWithExtra,
 } from '../schema';
-import { NormalizedSchema, normalizeOptions } from './normalize-options.helper';
 
 describe('normalizeOptions', () => {
   let tree: Tree;

@@ -4,13 +4,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as request from 'supertest';
 
-import { CaslEndPointMock } from '../mocks/casl-endpoint-mock.controller';
-import { mockAuthenticationGuard } from '../mocks/mock-authentication-guard';
-import { rolePermissions } from '../mocks/role-permission.mock';
 import { CASL_MODULE_OPTIONS } from './casl.constant';
 import { CaslModule } from './casl.module';
 import { PoliciesGuard } from './guards';
 import { CaslOptions } from './interfaces';
+import { CaslEndPointMock } from '../mocks/casl-endpoint-mock.controller';
+import { mockAuthenticationGuard } from '../mocks/mock-authentication-guard';
+import { rolePermissions } from '../mocks/role-permission.mock';
 
 import { UserAuthenticationService } from '@trxn/nestjs-authentication';
 import { LoggerModule } from '@trxn/nestjs-core';

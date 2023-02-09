@@ -2,11 +2,11 @@ import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 
+import { HashService } from './hash.service';
+import { UserAuthenticationService } from './user-authentication.service';
 import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
 import { AccessTokenDto } from '../dtos';
 import { AuthenticationModuleOptions } from '../interfaces';
-import { HashService } from './hash.service';
-import { UserAuthenticationService } from './user-authentication.service';
 
 @Injectable()
 export class AuthenticationService {

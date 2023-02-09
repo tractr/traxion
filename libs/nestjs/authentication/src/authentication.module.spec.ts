@@ -6,11 +6,11 @@ import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as jwt from 'jsonwebtoken';
 import * as request from 'supertest';
 
-import { AuthenticationEndpointMockController } from '../mocks';
 import { AuthenticationModule } from './authentication.module';
 import { JwtGlobalAuthGuard } from './guards';
 import { AuthenticationService } from './services';
 import { JwtStrategy, LocalStrategy } from './strategies';
+import { AuthenticationEndpointMockController } from '../mocks';
 
 describe('Authentication Module', () => {
   let app: INestApplication;

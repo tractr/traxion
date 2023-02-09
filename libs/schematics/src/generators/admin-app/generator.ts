@@ -12,13 +12,13 @@ import {
 import { Linter } from '@nrwl/linter';
 import { applicationGenerator as reactApplicationGenerator } from '@nrwl/react';
 
+import { addFiles, cleanApplication, normalizeOptions } from './helpers';
+import { AdminAppGeneratorSchemaWithExtra } from './schema';
 import {
   addPackageToPackageJson,
   installPackagesTask,
   PackageType,
 } from '../../helpers';
-import { addFiles, cleanApplication, normalizeOptions } from './helpers';
-import { AdminAppGeneratorSchemaWithExtra } from './schema';
 
 /**
  * Generate an application to host a react-admin application

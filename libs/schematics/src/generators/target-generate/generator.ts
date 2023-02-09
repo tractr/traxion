@@ -7,13 +7,13 @@ import {
 } from '@nrwl/devkit';
 import { readJSON } from 'fs-extra';
 
+import { TargetGenerateGeneratorSchema } from './schema';
 import {
   addPackageToPackageJson,
   installPackagesTask,
   PackageDefinition,
   Packages,
 } from '../../helpers';
-import { TargetGenerateGeneratorSchema } from './schema';
 
 export const SCHEMATICS_TRAXION_PACKAGE_NAME = '@trxn/schematics';
 

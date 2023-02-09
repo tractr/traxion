@@ -1,8 +1,8 @@
 import { librarySecondaryEntryPointGenerator } from '@nrwl/angular/generators';
 import { Tree, updateJson } from '@nrwl/devkit';
 
-import { NormalizedOptions } from '../schema';
 import { createSrcIndexTs } from './create-src-index.helper';
+import { NormalizedOptions } from '../schema';
 
 export async function createSecondaryEntrypoints(
   tree: Tree,

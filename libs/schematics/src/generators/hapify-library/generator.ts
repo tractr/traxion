@@ -1,13 +1,5 @@
 import { formatFiles, Tree } from '@nrwl/devkit';
 
-import * as packageJson from '../../../package.json';
-import {
-  addPackageToPackageJson,
-  getLogger,
-  installPackagesTask,
-} from '../../helpers';
-import { DEFAULT_LIBRARY_USE_CONTEXT } from '../../schematics.constants';
-import addGenerateTarget from '../target-generate/generator';
 import {
   addFiles,
   addGitIgnoreEntry,
@@ -20,6 +12,14 @@ import {
 } from './helpers';
 import { addBabelRc } from './helpers/add-babelrc.helper';
 import { HapifyLibraryGeneratorOptionsWithExtra } from './schema';
+import * as packageJson from '../../../package.json';
+import {
+  addPackageToPackageJson,
+  getLogger,
+  installPackagesTask,
+} from '../../helpers';
+import { DEFAULT_LIBRARY_USE_CONTEXT } from '../../schematics.constants';
+import addGenerateTarget from '../target-generate/generator';
 
 export default async function hapifyLibraryGenerator(
   tree: Tree,

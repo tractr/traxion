@@ -5,6 +5,7 @@ import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as jwt from 'jsonwebtoken';
 import * as request from 'supertest';
 
+import { LoginController } from './login.controller';
 import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
 import {
   AuthenticationService,
@@ -14,7 +15,6 @@ import {
 } from '../services';
 import { JwtOptionsService } from '../services/jwt-options.service';
 import { JwtStrategy, LocalStrategy } from '../strategies';
-import { LoginController } from './login.controller';
 
 describe('Login Controller', () => {
   let app: INestApplication;

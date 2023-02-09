@@ -2,9 +2,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { mockDeep, MockProxy, mockReset } from 'jest-mock-extended';
 
+import { HashService } from './hash.service';
 import { PasswordModuleOptions } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../password.module-definition';
-import { HashService } from './hash.service';
 
 import { BcryptService } from '@trxn/nestjs-bcrypt';
 

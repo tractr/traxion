@@ -2,10 +2,10 @@ import { join } from 'path';
 
 import { Tree, updateJson } from '@nrwl/devkit';
 
+import { createSrcIndexTs } from './create-src-index.helper';
 import { readTargetConfiguration } from '../../../helpers/read-target-configuration';
 import { updateTargetConfiguration } from '../../../helpers/update-target-configuration';
 import { NormalizedOptions } from '../schema';
-import { createSrcIndexTs } from './create-src-index.helper';
 
 export function cleanNestLibrary(tree: Tree, options: NormalizedOptions) {
   const { projectName, projectRoot, secondaryEntrypoints } = options;

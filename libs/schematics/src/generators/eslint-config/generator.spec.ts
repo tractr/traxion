@@ -2,8 +2,8 @@ import { addProjectConfiguration, readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import fetch, { Response } from 'node-fetch';
 
-import * as localPackageJson from '../../../package.json';
 import generator, { packagesToAdd } from './generator';
+import * as localPackageJson from '../../../package.json';
 
 jest.mock('node-fetch');
 

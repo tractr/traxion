@@ -1,3 +1,4 @@
+import { SECRET_ENVIRONMENT } from './helpers';
 import {
   ContainerConfig,
   ContainerDefinition,
@@ -12,7 +13,6 @@ import {
   SecretValue,
 } from '../interfaces';
 import type { ServiceComponent } from '../services';
-import { SECRET_ENVIRONMENT } from './helpers';
 
 export abstract class Container<
   T extends ContainerConfig = ContainerConfig,

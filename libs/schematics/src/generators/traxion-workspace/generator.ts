@@ -1,10 +1,5 @@
 import { formatFiles, Tree } from '@nrwl/devkit';
 
-import { getLogger, installPackagesTask } from '../../helpers';
-import eslintGenerator from '../eslint-config/generator';
-import generateWorkflow from '../github-workflows/generator';
-import initWorkspaceGenerator from '../init-workspace/generator';
-import prettierGenerator from '../prettier-config/generator';
 import {
   createAdminApplication,
   createAngularApplication,
@@ -13,6 +8,11 @@ import {
   normalizeOptions,
 } from './helpers';
 import { TraxionWorkspaceGeneratorSchema } from './schema';
+import { getLogger, installPackagesTask } from '../../helpers';
+import eslintGenerator from '../eslint-config/generator';
+import generateWorkflow from '../github-workflows/generator';
+import initWorkspaceGenerator from '../init-workspace/generator';
+import prettierGenerator from '../prettier-config/generator';
 
 export default async function traxionWorkspaceGenerator(
   tree: Tree,

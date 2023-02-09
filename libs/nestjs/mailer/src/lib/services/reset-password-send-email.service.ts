@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import * as mailjet from 'node-mailjet';
 
-import { DEFAULT_RESET_HTML, DEFAULT_UPDATED_HTML } from '../constants';
 import { MailerService } from './mailer.service';
+import { DEFAULT_RESET_HTML, DEFAULT_UPDATED_HTML } from '../constants';
 
 @Injectable()
 export class ResetPasswordSendEmailService {

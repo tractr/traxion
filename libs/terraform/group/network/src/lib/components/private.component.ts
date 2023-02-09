@@ -1,12 +1,12 @@
 import { vpc } from '@cdktf/provider-aws';
 
+import { EgressRoutesComponent } from './egress-routes.component';
+import { InternetRoutesComponent } from './internet-routes.component';
+import { NatGatewayComponent } from './nat-gateway.component';
 import {
   PrivateComponentArtifacts,
   PrivateComponentConfig,
 } from '../interfaces';
-import { EgressRoutesComponent } from './egress-routes.component';
-import { InternetRoutesComponent } from './internet-routes.component';
-import { NatGatewayComponent } from './nat-gateway.component';
 
 import { AwsComponent } from '@trxn/terraform-component-aws';
 

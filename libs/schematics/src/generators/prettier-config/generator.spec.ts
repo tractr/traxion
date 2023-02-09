@@ -5,9 +5,9 @@ import { addProjectConfiguration, readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import fetch, { Response } from 'node-fetch';
 
+import generator, { packagesToAdd } from './generator';
 import * as localPackageJson from '../../../package.json';
 import { npmRun } from '../../helpers/npm-run';
-import generator, { packagesToAdd } from './generator';
 
 jest.mock('../../helpers/npm-run');
 jest.mock('node-fetch');

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { isIn, isObject } from 'class-validator';
 
-import { JsonFilterProps } from '../../constants';
 import { CustomValidate } from './custom-validate';
+import { JsonFilterProps } from '../../constants';
 
 /**
  * Accept a field string and return a boolean indicating if the field is an object string with filter type

@@ -8,13 +8,13 @@ import {
 } from '@nrwl/devkit';
 import { Linter, lintInitGenerator } from '@nrwl/linter';
 
+import { EslintGeneratorSchema } from './schema';
 import * as packageJson from '../../../package.json';
 import {
   addPackageToPackageJson,
   installPackagesTask,
   PackageDefinition,
 } from '../../helpers';
-import { EslintGeneratorSchema } from './schema';
 
 export const packagesToAdd: PackageDefinition[] = [
   {

@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 
-import { BadPasswordError } from '../errors';
 import { HashService } from './hash.service';
 import { PasswordService } from './password.service';
 import { UserPasswordService } from './user-password.service';
+import { BadPasswordError } from '../errors';
 
 import { UserNotFoundError } from '@trxn/nestjs-authentication';
 
