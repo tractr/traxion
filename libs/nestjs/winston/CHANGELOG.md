@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.0.6](https://github.com/tractr/traxion/compare/v2.0.5...v2.0.6) (2023-02-09)
+
+
+### Features
+
+* update the schematics to force some deps to be peerdeps ([#568](https://github.com/tractr/traxion/issues/568)) ([1558bc0](https://github.com/tractr/traxion/commit/1558bc0e7123f65a9d32489e5a73353c06b9e2ea))
+
+
+
 ## [2.0.5](https://github.com/tractr/traxion/compare/v2.0.4...v2.0.5) (2023-02-07)
 
 
