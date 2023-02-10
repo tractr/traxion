@@ -1,3 +1,5 @@
+import { plural as pluralize } from 'pluralize';
+
 /**
  * Abstract component
  */
