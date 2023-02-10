@@ -1,22 +1,28 @@
 import { Inject, Injectable } from '@nestjs/common';
-import * as mailjet from 'node-mailjet';
+import { Client } from 'node-mailjet';
 
 import { MAILJET_API_VERSION } from '../configs';
-import { MAILER_MODULE_OPTIONS } from '../constants';
 import { areWeTestingWithJest } from '../helpers';
-import { MailerOptions } from '../interfaces';
+import { MailerModuleOptions } from '../interfaces';
+import { MODULE_OPTIONS_TOKEN } from '../mailer.module-definition';
 
 import { isProduction } from '@trxn/nestjs-core';
 
 @Injectable()
 export class MailerService {
-  mailjetClient!: mailjet.Email.Client;
+  mailjetClient!: Client;
 
   constructor(
-    @Inject(MAILER_MODULE_OPTIONS)
-    private readonly mailerOptions: MailerOptions,
+    @Inject(MODULE_OPTIONS_TOKEN)
+    private readonly mailerOptions: MailerModuleOptions,
   ) {
-    this.connectToMailjetApi();
+    const { apiKey, apiSecret, apiToken } = mailerOptions;
+
+    this.mailjetClient = new Client({
+      apiKey,
+      apiSecret,
+      apiToken,
+    });
   }
 
   public async send(
@@ -30,12 +36,5 @@ export class MailerService {
         SandboxMode: !isProduction(),
         ...params,
       });
-  }
-
-  private connectToMailjetApi(): void {
-    this.mailjetClient = mailjet.connect(
-      this.mailerOptions.publicApiKey,
-      this.mailerOptions.privateApiKey,
-    );
   }
 }
