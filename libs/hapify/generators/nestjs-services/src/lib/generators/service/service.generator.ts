@@ -65,11 +65,10 @@ export function generateServiceSourceFile(
   sourceFile.addImportDeclarations(imports);
   sourceFile.addClass(serviceClass);
 
-
-  const indexFile = `./${snake(model.name)}/index.ts`;
-
-
-  addIndex(project, indexFile);
+  // generate index.ts
+  const indexFile = `./${snake(model.name)}-model.services`;
+  const indexFilePath = `${path}/index.ts`;
+  addIndex(project, indexFile, indexFilePath);
 
 
 }

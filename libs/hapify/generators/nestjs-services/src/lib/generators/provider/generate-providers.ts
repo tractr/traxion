@@ -36,6 +36,8 @@ export function generateProvidersSourceFile(
     ],
   });
 
-  const indexFile = `./${snake(model.name)}/index.ts`;
-  addIndex(project, indexFile);
+  // generate index.ts
+  const indexFile = `./${snake(model.name)}-model.providers`;
+  const indexFilePath = `${path}/index.ts`;
+  addIndex(project, indexFile, indexFilePath);
 }
