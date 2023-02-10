@@ -46,7 +46,9 @@ export function generateInterfaceSourceFile(
     docs
   });
 
-  const indexFile = `${path}/index.ts`;
-  addIndex(project, indexFile);
+  // generate index.ts
+  const indexFile = `./${fileName}`;
+  const indexFilePath = `${path}/index.ts`;
+  addIndex(project, indexFile, indexFilePath);
   
 }
