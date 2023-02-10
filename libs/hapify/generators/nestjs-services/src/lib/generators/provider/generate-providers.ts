@@ -3,6 +3,7 @@ import { Project, VariableDeclarationKind } from 'ts-morph';
 
 import { Model, pascal, snake } from '@trxn/hapify-core';
 import { generateImports } from './imports.generator';
+import { addIndex } from '../../utils/add-index';
 
 export function generateProvidersSourceFile(
   project: Project,
@@ -21,7 +22,6 @@ export function generateProvidersSourceFile(
   sourceFile.addVariableStatement({
     isExported: true,
     declarationKind: VariableDeclarationKind.Const,
-    
     declarations: [
       {
         name,
@@ -35,4 +35,7 @@ export function generateProvidersSourceFile(
       },
     ],
   });
+
+  const indexFile = `./${snake(model.name)}/index.ts`;
+  addIndex(project, indexFile);
 }
