@@ -3,12 +3,15 @@ import * as path from 'path';
 
 import { Project } from 'ts-morph';
 
-import { generateConstantsSourceFile } from './generators/service/generate-constants';
-import { generateProvidersSourceFile } from './generators/provider/generate-providers';
+import { generateConstantsSourceFile as generateConstantSourceFile } from './generators/service/generate-constants';
+import { generateProvidersSourceFile as generateProviderSourceFile } from './generators/provider/generate-providers';
 import { generateServiceIndexFile } from './generators/service/index.generator';
 import { generateServiceSourceFile } from './generators/service/service.generator';
 
 import { Project as Models } from '@trxn/hapify-core';
+import { generateModuleSourceFile } from './generators/module/generate-module';
+import { generateInterfaceSourceFile } from './generators/interface/generate-interface';
+import { generateModuleDefinitionSourceFile } from './generators/module/generate-module-definition';
 
 export type NestjsServiceGeneratorConfig = {
   outputDirectory: string;
@@ -36,14 +39,19 @@ export function generate(
   // Clear generation directory
   project.getDirectory(absoluteGeneratedDirectory)?.clear();
 
-  const entityPath = `${absoluteGeneratedDirectory}/services`;
+  const entityPath = `${absoluteGeneratedDirectory}`;
+
   // Generate controllers and dtos
   dataModel.models.forEach((model) => {
-    generateServiceSourceFile(project, model, entityPath);
-    generateConstantsSourceFile(project, model, entityPath);
-    generateProvidersSourceFile(project, model, entityPath);
+    generateServiceSourceFile(project, model, `${entityPath}/services`);
+    generateConstantSourceFile(project, model, `${entityPath}/constants`);
+    generateProviderSourceFile(project, model, `${entityPath}/providers`);
+
   });
-  // generateServiceIndexFile(project,models.map(model =. model.name),entityPath)
+  generateInterfaceSourceFile(project, `${entityPath}/interfaces`);
+  generateModuleSourceFile(project, entityPath); // TODO: add the list of providers
+  generateModuleDefinitionSourceFile(project, entityPath);
+
   // Save project to file system
   project.saveSync();
 }

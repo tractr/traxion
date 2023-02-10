@@ -1,6 +1,8 @@
 import { names } from '@nrwl/devkit';
 import { Project, VariableDeclarationKind } from 'ts-morph';
 
+import { addIndex } from '../../utils/add-index';
+
 import { Model, pascal, snake } from '@trxn/hapify-core';
 
 export function generateConstantsSourceFile(
@@ -35,4 +37,7 @@ export function generateConstantsSourceFile(
       },
     ],
   });
+
+  const indexFile = `./${snake(model.name)}/index.ts`;
+  addIndex(project, indexFile);
 }
