@@ -19,13 +19,12 @@ export class Project extends Node {
   addRelation(relation: Relation): this {
     this._relations.add(relation);
 
-    // Set up the relation on associated models
-    relation.referer.model.addRelation(relation);
-    relation.referee.model.addRelation(relation);
-
     // set up the relation on associated fields
-    relation.referer.scalarField.setRelation(relation);
+    relation.referer.scalarField.addRelation(relation);
     relation.referee.scalarField.addRelation(relation);
+    relation.referer.virtualField.setRelation(relation);
+    relation.referee.virtualField.setRelation(relation);
+
     return this;
   }
 

@@ -10,7 +10,6 @@ export abstract class BaseField extends Node {
   abstract readonly type: string;
   abstract readonly subType: string;
 
-  protected _primary = false;
   protected _unique = false;
   protected _label = false;
   protected _nullable = false;
@@ -25,11 +24,6 @@ export abstract class BaseField extends Node {
     read: undefined,
     write: undefined,
   };
-
-  /** Should be used as a primary key or not */
-  get primary(): boolean {
-    return this._primary;
-  }
 
   /** Should be used as a unique key or not */
   get unique(): boolean {
@@ -67,11 +61,6 @@ export abstract class BaseField extends Node {
    */
   get actionsScopes(): FieldActionsScopes {
     return { ...this._actionsScopes };
-  }
-
-  setPrimary(value: boolean): this {
-    this._primary = value;
-    return this;
   }
 
   setUnique(value: boolean): this {

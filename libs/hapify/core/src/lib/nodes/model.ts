@@ -1,15 +1,7 @@
-import { EntityField, Field } from './fields';
+import { Field } from './fields';
 import { ModelAction, ModelActionsScopes, Scope } from './interfaces';
 import { Node } from './node';
 import type { Relation } from './relation';
-
-/**
- * Local helper to filter entity fields.
- * This avoids importing helpers and creating a circular dependency.
- */
-function isEntity(field: Field): field is EntityField {
-  return field.type === 'entity';
-}
 
 /**
  * Represents a model that contains fields
@@ -19,11 +11,6 @@ export class Model extends Node {
    * Fields of the model
    */
   protected _fields = new Set<Field>();
-
-  /**
-   * Relations of the model
-   */
-  protected _relations = new Set<Relation>();
 
   /**
    * Stores the scope of each action
@@ -44,24 +31,10 @@ export class Model extends Node {
   protected _owner: Model | undefined;
 
   /**
-   *  Adds a relation to the model
-   * @param relation
-   * @returns
-   */
-  addRelation(relation: Relation): this {
-    this._relations.add(relation);
-    return this;
-  }
-
-  /**
    * Adds a field to the model
    */
   addField(field: Field): this {
     this._fields.add(field);
-    // If the field is an entity field, add this model to the list of referenced models
-    if (isEntity(field)) {
-      field.model.addReferencedIn(this);
-    }
     return this;
   }
 
@@ -70,10 +43,6 @@ export class Model extends Node {
    */
   removeField(field: Field): this {
     this._fields.delete(field);
-    // If the field is an entity field, remove this model from the list of referenced models
-    if (isEntity(field)) {
-      field.model.removeReferencedIn(this);
-    }
     return this;
   }
 
@@ -125,13 +94,6 @@ export class Model extends Node {
   }
 
   /**
-   * Returns a list of relations in the model
-   */
-  get relations(): Relation[] {
-    return Array.from(this._relations);
-  }
-
-  /**
    * Get the scope of an action
    * Clones the scope to avoid mutation
    */
@@ -140,24 +102,10 @@ export class Model extends Node {
   }
 
   /**
-   * Denotes if the model has dependencies to other models or itself
-   */
-  get hasDependencies(): boolean {
-    return this.fields.filter(isEntity).length > 0;
-  }
-
-  /**
    * Denotes if the model is self-dependent
    */
   get isSelfDependent(): boolean {
     return this.fields.filter(isEntity).some((field) => field.model === this);
-  }
-
-  /**
-   * Denotes if the model is referenced by at least one other model
-   */
-  get isReferenced(): boolean {
-    return this._referencedIn.size > 0;
   }
 
   /**

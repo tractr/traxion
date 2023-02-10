@@ -1,21 +1,29 @@
-import { BaseField } from '../../../nodes';
+import {
+  BaseField,
+  BaseScalarField,
+  Field,
+  PrimaryField,
+  ScalarField,
+  StringPasswordField,
+  VirtualField,
+} from '../../../nodes';
 import {
   LabelField,
   MultipleField,
   NullableField,
-  PrimaryField,
   SearchableField,
   SortableField,
   UniqueField,
 } from '../../interfaces';
 
+// TODO: validate subset prediction
 /**
  * Checks if a field is a flagged as primary
  */
-export function isPrimary<T extends BaseField>(
+export function isPrimary<T extends Field>(
   field: T,
 ): field is T & PrimaryField {
-  return field.primary;
+  return 'primary' in field && field.primary;
 }
 
 /**
@@ -52,15 +60,6 @@ export function isMultiple<T extends BaseField>(
   field: T,
 ): field is T & MultipleField {
   return field.multiple;
-}
-
-/**
- * Checks if a field is a flagged as searchable
- */
-export function isSearchable<T extends BaseField>(
-  field: T,
-): field is T & SearchableField {
-  return field.searchable;
 }
 
 /**
