@@ -1,4 +1,4 @@
-import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
+import { ClassDeclarationStructure, ExportDeclarationStructure, OptionalKind, Project, StructureKind } from 'ts-morph';
 
 import { generateAggregateMethod } from './aggregate-method.generator';
 import { generateConstructor } from './constructor.generator';
@@ -17,6 +17,7 @@ import { generateUpdateMethod } from './update-method.generator';
 import { generateUpsertMethod } from './upsert-method.generator';
 
 import { Model, pascal, snake } from '@trxn/hapify-core';
+import { addIndex } from '../../utils/add-index';
 
 export function generateServiceClass(model: Model): ClassDeclarationStructure {
   const className = `${pascal(model.name)}Service`;
@@ -63,4 +64,12 @@ export function generateServiceSourceFile(
 
   sourceFile.addImportDeclarations(imports);
   sourceFile.addClass(serviceClass);
+
+
+  const indexFile = `./${snake(model.name)}/index.ts`;
+
+
+  addIndex(project, indexFile);
+
+
 }
