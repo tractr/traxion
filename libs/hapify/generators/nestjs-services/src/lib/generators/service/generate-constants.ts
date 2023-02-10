@@ -38,6 +38,8 @@ export function generateConstantsSourceFile(
     ],
   });
 
-  const indexFile = `./${snake(model.name)}/index.ts`;
-  addIndex(project, indexFile);
+  // generate index.ts
+  const indexFile = `./${snake(model.name)}-model.constants`;
+  const indexFilePath = `${path}/index.ts`;
+  addIndex(project, indexFile, indexFilePath);
 }

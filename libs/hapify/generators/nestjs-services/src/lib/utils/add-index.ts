@@ -1,9 +1,18 @@
 import { Project } from "ts-morph";
 
-export const addIndex = (project: Project, indexFile: string) => {
-  const indexSourceFile = project.getSourceFile(indexFile) ?? project.createSourceFile(indexFile);
+/**
+ * 
+ * check if the source file exists, if not create it
+ * 
+ * @param project 
+ * @param indexFile 
+ * @param sourceFilePath 
+ */
+export const addIndex = (project: Project, indexFile: string, sourceFilePath: string) => {
+
+  const indexSourceFile = project.getSourceFile(sourceFilePath) ?? project.createSourceFile(sourceFilePath);
+  
   indexSourceFile.addExportDeclaration({
-    // moduleSpecifier: `'${indexFile}'`,
-    moduleSpecifier: `./index`,
+    moduleSpecifier: `${indexFile}`,
   });
 }
