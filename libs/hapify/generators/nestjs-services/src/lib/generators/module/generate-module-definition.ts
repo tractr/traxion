@@ -1,5 +1,5 @@
 
-import {  Project, VariableDeclarationKind } from 'ts-morph';
+import { Project, VariableDeclarationKind } from 'ts-morph';
 
 import { generateImportsDefnition } from './imports-definition.generator';
 
@@ -14,7 +14,7 @@ export function generateModuleDefinitionSourceFile(
   const sourceFile = project.createSourceFile(filePath);
 
   const imports = generateImportsDefnition();
- 
+
 
   sourceFile.addImportDeclarations(imports);
 
@@ -23,14 +23,12 @@ export function generateModuleDefinitionSourceFile(
     declarationKind: VariableDeclarationKind.Const,
     declarations: [
       {
-        name: `
-        {
+        name: `{
           ConfigurableModuleClass,
           MODULE_OPTIONS_TOKEN,
           ASYNC_OPTIONS_TYPE,
           OPTIONS_TYPE,
-        } 
-        `,
+        }`,
         type: 'Provider[]',
         initializer: `new ConfigurableModuleBuilder<ModelsServicesOptions>()
         .setExtras<{
@@ -43,17 +41,14 @@ export function generateModuleDefinitionSourceFile(
             imports: [],
             providers: [],
           },
-          (options, extras) => {
-            return {
+          (options, extras) => ({
               ...options,
               imports: [...(options.imports || []), ...(extras.imports || [])],
               providers: [...(options.providers || []), ...(extras.providers || [])],
-            };
-          },
+            }),
         )
         .build();`
       },
     ],
   });
- 
 }

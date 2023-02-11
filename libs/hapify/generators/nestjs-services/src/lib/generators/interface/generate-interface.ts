@@ -10,7 +10,7 @@ export function generateInterfaceSourceFile(
   project: Project,
   path: string,
 ) {
-  const fileName = `ModelsServicesOptions.ts`;
+  const fileName = `models-services.interface.ts`;
   const filePath = `${path}/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);
@@ -47,7 +47,7 @@ export function generateInterfaceSourceFile(
   });
 
   // generate index.ts
-  const indexFile = `./${fileName}`;
+  const indexFile = `./models-services.interface`;
   const indexFilePath = `${path}/index.ts`;
   addIndex(project, indexFile, indexFilePath);
   
