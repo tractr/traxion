@@ -1,6 +1,6 @@
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
-import {  Model, pascal } from '@trxn/hapify-core';
+import { constant, Model, pascal } from '@trxn/hapify-core';
 
 export function generateImports(model: Model): ImportDeclarationStructure[] {
   return [
@@ -17,7 +17,7 @@ export function generateImports(model: Model): ImportDeclarationStructure[] {
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `./${model.name.toLowerCase()}-model.constants`,
-      namedImports: [{ name: `${model.name.toUpperCase()}_SERVICE` }],
+      namedImports: [{ name: `${constant(model.name)}_SERVICE` }],
     },
   ];
 }
