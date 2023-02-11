@@ -40,23 +40,20 @@ export const generateCreateManyMethod = (
     {
       kind: StructureKind.JSDoc,
       description: `
-      * Create many ${pascal(model.name)}s.
-      * @param {${pascal(
-        model.name,
-      )}CreateManyArgs} args - Arguments to create many a ${pascal(
-        model.name,
-      )}s.
-      * @example
-      * // Create many ${pascal(model.name)}s
-      * const ${pascal(model.name)}s = await this.${camel(
+        Create many ${pascal(model.name)}s.
+        @param {${pascal(
+          model.name,
+        )}CreateManyArgs} args - Arguments to create many a 
+        ${pascal(model.name)}s.
+        @example
+        // Create many ${pascal(model.name)}s
+        const ${pascal(model.name)}s = await this.${camel(
         model.name,
       )}Service.createMany({
-      *   data: {
-      *     *     // ... provide data here
-      *   }
-      * })
-      *
-    `,
+          data: {
+            *     // ... provide data here
+          }
+        })`,
     },
   ];
 

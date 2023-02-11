@@ -1,8 +1,6 @@
-
 import { Project, VariableDeclarationKind } from 'ts-morph';
 
-import { generateImportsDefnition } from './imports-definition.generator';
-
+import { generateImportsDefinition } from './imports-definition.generator';
 
 export function generateModuleDefinitionSourceFile(
   project: Project,
@@ -13,8 +11,7 @@ export function generateModuleDefinitionSourceFile(
 
   const sourceFile = project.createSourceFile(filePath);
 
-  const imports = generateImportsDefnition();
-
+  const imports = generateImportsDefinition();
 
   sourceFile.addImportDeclarations(imports);
 
@@ -47,7 +44,7 @@ export function generateModuleDefinitionSourceFile(
               providers: [...(options.providers || []), ...(extras.providers || [])],
             }),
         )
-        .build();`
+        .build();`,
       },
     ],
   });

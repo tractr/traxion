@@ -1,5 +1,6 @@
-import { ClassDeclarationStructure, ExportDeclarationStructure, OptionalKind, Project, StructureKind } from 'ts-morph';
+import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
 
+import { generateFileIndexExporter } from '../../utils/index.generator';
 import { generateAggregateMethod } from './aggregate-method.generator';
 import { generateConstructor } from './constructor.generator';
 import { generateCountMethod } from './count-method.generator';
@@ -16,8 +17,7 @@ import { generateUpdateManyMethod } from './update-many-method.generator';
 import { generateUpdateMethod } from './update-method.generator';
 import { generateUpsertMethod } from './upsert-method.generator';
 
-import { Model, pascal, snake } from '@trxn/hapify-core';
-import { addIndex } from '../../utils/add-index';
+import { kebab, Model, pascal, snake } from '@trxn/hapify-core';
 
 export function generateServiceClass(model: Model): ClassDeclarationStructure {
   const className = `${pascal(model.name)}Service`;
@@ -54,8 +54,8 @@ export function generateServiceSourceFile(
   model: Model,
   path: string,
 ) {
-  const fileName = `${snake(model.name)}.service.ts`;
-  const filePath = `${path}/${fileName}`;
+  const fileName = `${kebab(model.name)}.service`;
+  const filePath = `${path}/services/${fileName}.ts`;
 
   const sourceFile = project.createSourceFile(filePath);
 
@@ -65,10 +65,8 @@ export function generateServiceSourceFile(
   sourceFile.addImportDeclarations(imports);
   sourceFile.addClass(serviceClass);
 
-  // generate index.ts
-  const indexFile = `./${snake(model.name)}-model.services`;
-  const indexFilePath = `${path}/index.ts`;
-  addIndex(project, indexFile, indexFilePath);
-
-
+  // // generate index.ts
+  // const indexFile = `./${fileName}`;
+  // const indexFilePath = `${path}/services/index.ts`;
+  // generateFileIndexExporter(project, indexFile, indexFilePath);
 }
