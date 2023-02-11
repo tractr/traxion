@@ -1,5 +1,5 @@
 import { names } from '@nrwl/devkit';
-import { Project, VariableDeclarationKind } from 'ts-morph';
+import { ArrayLiteralExpression, ImportDeclarationStructure, Project, SourceFile, StructureKind, ts, VariableDeclarationKind } from 'ts-morph';
 
 import { Model, pascal, snake } from '@trxn/hapify-core';
 import { generateImports } from './imports.generator';
@@ -9,6 +9,7 @@ export function generateProvidersSourceFile(
   project: Project,
   model: Model,
   path: string,
+  servicesProviderSourceFile: SourceFile,
 ) {
   const fileName = `${snake(model.name)}-model.providers.ts`;
   const filePath = `${path}/${fileName}`;
@@ -35,6 +36,22 @@ export function generateProvidersSourceFile(
       },
     ],
   });
+
+  const existingImport = servicesProviderSourceFile.getImportDeclarations().find(declaration => declaration.getModuleSpecifierValue() === "./providers");
+  existingImport?.addNamedImport(name);
+
+  const exportedVariable = servicesProviderSourceFile.getVariableStatements().find(variableStatement => variableStatement.getDeclarations()[0].getName() === "MODELS_SERVICES_PROVIDERS");
+  const arrayExpression = exportedVariable?.getDeclarations()[0].getInitializer() as ArrayLiteralExpression;
+  console.log("🚀 ~ file: generate-providers.ts:45 ~ arrayExpression", arrayExpression)
+  arrayExpression.addElement(`...${name}`);
+
+
+  // const providerServiceImport: ImportDeclarationStructure = {
+  //   kind: StructureKind.ImportDeclaration,
+  //   moduleSpecifier: `./providers`,
+
+  // }
+  // servicesProviderSourceFile.addImportDeclaration(providerServiceImport);
 
   // generate index.ts
   const indexFile = `./${snake(model.name)}-model.providers`;

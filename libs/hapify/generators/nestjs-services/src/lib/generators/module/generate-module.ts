@@ -8,23 +8,16 @@ import { generateImports } from './imports.generator';
 export function generateModuleClass(): ClassDeclarationStructure {
   const className = `ModelsServicesModules`;
 
-
-  const methods = [
- 
-  ];
-
   return {
     kind: StructureKind.Class,
     name: className,
     isExported: true,
-    decorators: [{ name: `
-    @Module({
+    extends: `ConfigurableModuleClass`,
+    decorators: [{ name: `Module({
       providers: MODELS_SERVICES_PROVIDERS,
       exports: MODELS_SERVICES_PROVIDERS,
-    })
-    ` }],
-    // methods,
-
+    })`
+   }],
   };
 }
 

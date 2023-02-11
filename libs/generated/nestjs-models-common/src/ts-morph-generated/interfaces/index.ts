@@ -1,1 +1,1 @@
-export * from "./ModelsServicesOptions.ts";
+export * from "./models-services.interface";

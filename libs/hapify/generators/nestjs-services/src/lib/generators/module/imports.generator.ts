@@ -9,13 +9,13 @@ export function generateImports(): ImportDeclarationStructure[] {
     },
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: `./models-services.providers`,
-      namedImports: [{ name:  `MODELS_SERVICES_PROVIDERS`}],
+      moduleSpecifier: `./models-services.module-definition`,
+      namedImports: [{ name: `ConfigurableModuleClass` }],
     },
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: `./models-services.module-definition`,
-      namedImports: [{ name: `ConfigurableModuleClass` }],
+      moduleSpecifier: `./models-services.providers`,
+      namedImports: [{ name:  `MODELS_SERVICES_PROVIDERS`}],
     },
   ];
 }
