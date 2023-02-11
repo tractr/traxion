@@ -1,6 +1,6 @@
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
-export function generateImportsDefnition(): ImportDeclarationStructure[] {
+export function generateImportsDefinition(): ImportDeclarationStructure[] {
   return [
     {
       kind: StructureKind.ImportDeclaration,
@@ -10,13 +10,13 @@ export function generateImportsDefnition(): ImportDeclarationStructure[] {
         { name: `DynamicModule` },
         { name: `ForwardReference` },
         { name: `Provider` },
-        { name: `Type` }
+        { name: `Type` },
       ],
     },
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `./interfaces`,
-      namedImports: [{ name:  `ModelsServicesOptions`}],
-    }
+      namedImports: [{ name: `ModelsServicesOptions` }],
+    },
   ];
 }

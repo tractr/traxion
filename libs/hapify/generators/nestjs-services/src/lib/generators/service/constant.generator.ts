@@ -1,11 +1,8 @@
-import { names } from '@nrwl/devkit';
 import { Project, VariableDeclarationKind } from 'ts-morph';
 
-import { addIndex } from '../../utils/add-index';
+import { constant, Model, snake } from '@trxn/hapify-core';
 
-import { Model, pascal, snake } from '@trxn/hapify-core';
-
-export function generateConstantsSourceFile(
+export function generateConstantSourceFile(
   project: Project,
   model: Model,
   path: string,
@@ -14,8 +11,8 @@ export function generateConstantsSourceFile(
   const filePath = `${path}/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);
-  const name = `${model.name.toUpperCase()}_SERVICE`;
-  const databaseName = `${model.name.toUpperCase()}_DATABASE_SERVICE`;
+  const name = `${constant(model.name)}_SERVICE`;
+  const databaseName = `${constant(model.name)}_DATABASE_SERVICE`;
 
   sourceFile.addVariableStatement({
     isExported: true,
@@ -37,9 +34,4 @@ export function generateConstantsSourceFile(
       },
     ],
   });
-
-  // generate index.ts
-  const indexFile = `./${snake(model.name)}-model.constants`;
-  const indexFilePath = `${path}/index.ts`;
-  addIndex(project, indexFile, indexFilePath);
 }

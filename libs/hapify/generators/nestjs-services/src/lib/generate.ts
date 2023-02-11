@@ -1,18 +1,24 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import * as path from 'path';
 
-import { ImportDeclarationStructure, Project, StructureKind, VariableDeclarationKind } from 'ts-morph';
+import { Project } from 'ts-morph';
 
-import { generateConstantsSourceFile as generateConstantSourceFile } from './generators/service/generate-constants';
-import { generateProvidersSourceFile as generateProviderSourceFile } from './generators/provider/generate-providers';
-import { generateServiceIndexFile } from './generators/service/index.generator';
+import { generateInterfaceSourceFile } from './generators/interface/interface.generator';
+import { generateModuleDefinitionSourceFile } from './generators/module/module-definition.generator';
+import { generateModuleSourceFile } from './generators/module/module.generator';
+import {
+  generateModelsServicesProvidersSourceFile,
+  generateProviderSourceFile,
+} from './generators/provider/providers.generator'; // TODO: update import
+import { generateConstantSourceFile } from './generators/service/constant.generator';
+import { generateDatabaseServiceSourceFile } from './generators/service/database-service.generator';
 import { generateServiceSourceFile } from './generators/service/service.generator';
+import {
+  generateDirectoryIndexExporter,
+  generateFileIndexExporter,
+} from './utils/index.generator';
 
 import { Project as Models } from '@trxn/hapify-core';
-import { generateModuleSourceFile } from './generators/module/generate-module';
-import { generateInterfaceSourceFile } from './generators/interface/generate-interface';
-import { generateModuleDefinitionSourceFile } from './generators/module/generate-module-definition';
-import { generateServicesProvidersFile } from './generators/provider/generate-services-providers';
 
 export type NestjsServiceGeneratorConfig = {
   outputDirectory: string;
@@ -51,66 +57,35 @@ export function generate(
   // Generate Interface
   generateInterfaceSourceFile(project, `${entityPath}/interfaces`);
 
-  const fileName = `models-services.providers.ts`;
-  const filePath = `${entityPath}/${fileName}`;
-
-  const sourceFile = project.createSourceFile(filePath);
-  const providerServiceImport: ImportDeclarationStructure = {
-    kind: StructureKind.ImportDeclaration,
-    moduleSpecifier: `./providers`,
-
-  }
-  sourceFile.addImportDeclaration(providerServiceImport);
-
-  sourceFile.addVariableStatement({
-    isExported: true,
-    declarationKind: VariableDeclarationKind.Const,
-    declarations: [
-      {
-        name: "MODELS_SERVICES_PROVIDERS",
-        type: 'Provider[]',
-        initializer: `[]`,
-      },
-    ],
-    
-  });
+  // Generate models-services.providers.ts
+  const providersSourceFile = generateModelsServicesProvidersSourceFile(
+    project,
+    entityPath,
+  );
 
   // Generate services, contants and providers
   dataModel.models.forEach((model) => {
-    generateServiceSourceFile(project, model, `${entityPath}/services`); //TODO: update last variables
-    generateConstantSourceFile(project, model, `${entityPath}/constants`);//TODO: update last variables
-    generateProviderSourceFile(project, model, `${entityPath}/providers`, sourceFile);//TODO: update last variables
-    // generateServicesProvidersFile(sourceFile, model);//TODO: update last variables
+    generateServiceSourceFile(project, model, entityPath);
+    generateDatabaseServiceSourceFile(project, model, entityPath);
+    generateConstantSourceFile(project, model, `${entityPath}/constants`); // TODO: update last variables
+    generateProviderSourceFile(
+      project,
+      model,
+      `${entityPath}/providers`,
+      providersSourceFile,
+    ); // TODO: update last variables
   });
 
+  // generate route index.ts for exports
+  generateDirectoryIndexExporter(project, entityPath);
+  generateFileIndexExporter(project, `${entityPath}`);
 
-  // TODO: change to uppercase
-  // TODO: clean code
+  // for each directory, generate index.ts for export
+  generateFileIndexExporter(project, `${entityPath}/services`);
+  generateFileIndexExporter(project, `${entityPath}/constants`);
+  generateFileIndexExporter(project, `${entityPath}/providers`);
+  generateFileIndexExporter(project, `${entityPath}/interfaces`);
 
-  // // create models.services.providers.ts
-  // const sourceFilePath = `${entityPath}/models.services.providers.ts`;
-  // const modelsServicesProvidersFile = project.createSourceFile(sourceFilePath);
-
-  // // const directory = project.getDirectory(`${entityPath}/providers`);
-  // const directory = project.getDirectoryOrThrow(`${entityPath}/providers`)
-
-  // directory.forEachFile(filePath => {
-  //   const sourceFile = project.getSourceFile(filePath);
-  //   sourceFile.getVariableStatements().forEach(variableStatement => {
-  //     variableStatement.getDeclarations().forEach(declaration => {
-  //       console.log(declaration.getName());
-  //     });
-  //   });
-  // });
-
-  // read every file in providers folder
-  // const providers = project.getDirectory(`${entityPath}/providers`)?.
-
-
-
-
-
-
-    // Save project to file system
-    project.saveSync();
+  // Save project to file system
+  project.saveSync();
 }
