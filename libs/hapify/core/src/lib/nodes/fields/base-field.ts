@@ -1,5 +1,7 @@
+import { Constraint } from '../constraints';
 import { FieldAction, FieldActionsScopes, Scope } from '../interfaces';
 import { Node } from '../node';
+import type { Field } from './field';
 
 /**
  * Abstract class for a field of a model
@@ -16,6 +18,23 @@ export abstract class BaseField extends Node {
   protected _multiple = false;
   protected _searchable = false;
   protected _sortable = false;
+
+  public constraints: Record<string, Constraint> = {};
+
+  addConstraint(constraint: Constraint): this {
+    if (!constraint.canBeUsedWith(this as Field)) {
+      throw new Error(
+        `Constraint ${constraint.name} cannot be used with this field ${this.name}`,
+      );
+    }
+
+    this.constraints = {
+      ...this.constraints,
+      [constraint.name]: constraint,
+    };
+
+    return this;
+  }
 
   /**
    * Stores the scope of each action

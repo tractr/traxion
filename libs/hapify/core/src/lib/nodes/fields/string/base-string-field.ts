@@ -1,66 +1,21 @@
+import { Constraint, StringConstraint } from '../../constraints';
+import { StringConstraintType } from '../../constraints/string';
 import { BaseField } from '../base-field';
 
 /**
  * This class is tested via the children classes, especially the StringBasicField class
  */
 export abstract class BaseStringField extends BaseField {
-  /**
-   * Default value of the string
-   */
-  protected _defaultValue: string | undefined;
+  readonly type = 'string' as const;
 
-  /**
-   * Min length of the string
-   */
-  protected _minLength: number | undefined;
+  public constraints: Record<string, StringConstraint> = {};
 
-  /**
-   * Max length of the string
-   */
-  protected _maxLength: number | undefined;
-
-  /**
-   * Set min length of the string
-   */
-  setMinLength(minLength: number): this {
-    this._minLength = minLength;
-    return this;
+  constructor(name: string) {
+    super(name);
+    this.addConstraint(new StringConstraint());
   }
 
-  /**
-   * Set max length of the string
-   */
-  setMaxLength(maxLength: number): this {
-    this._maxLength = maxLength;
-    return this;
-  }
-
-  /**
-   * Set default value of the string
-   */
-  setDefaultValue(value: string): this {
-    this._defaultValue = value;
-    return this;
-  }
-
-  /**
-   * Get min length of the string
-   */
-  get minLength(): number | undefined {
-    return this._minLength;
-  }
-
-  /**
-   * Get max length of the string
-   */
-  get maxLength(): number | undefined {
-    return this._maxLength;
-  }
-
-  /**
-   * Get default value of the string
-   */
-  get defaultValue(): string | undefined {
-    return this._defaultValue;
+  addConstraint(constraint: Constraint<string>): this {
+    return super.addConstraint(constraint);
   }
 }

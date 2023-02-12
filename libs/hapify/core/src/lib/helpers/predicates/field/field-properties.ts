@@ -1,4 +1,6 @@
 import { BaseField } from '../../../nodes';
+import { Label, NotNull, Searchable, Unique } from '../../../nodes/constraints';
+import { Multiple } from '../../../nodes/constraints/any/multiple';
 import {
   LabelField,
   MultipleField,
@@ -24,7 +26,9 @@ export function isPrimary<T extends BaseField>(
 export function isUnique<T extends BaseField>(
   field: T,
 ): field is T & UniqueField {
-  return field.unique;
+  return Object.values(field.constraints).some(
+    (constraint) => constraint instanceof Unique,
+  );
 }
 
 /**
@@ -33,7 +37,9 @@ export function isUnique<T extends BaseField>(
 export function isLabel<T extends BaseField>(
   field: T,
 ): field is T & LabelField {
-  return field.label;
+  return Object.values(field.constraints).some(
+    (constraint) => constraint instanceof Label,
+  );
 }
 
 /**
@@ -42,7 +48,9 @@ export function isLabel<T extends BaseField>(
 export function isNullable<T extends BaseField>(
   field: T,
 ): field is T & NullableField {
-  return field.nullable;
+  return Object.values(field.constraints).every(
+    (constraint) => !(constraint instanceof NotNull),
+  );
 }
 
 /**
@@ -51,7 +59,9 @@ export function isNullable<T extends BaseField>(
 export function isMultiple<T extends BaseField>(
   field: T,
 ): field is T & MultipleField {
-  return field.multiple;
+  return Object.values(field.constraints).some(
+    (constraint) => constraint instanceof Multiple,
+  );
 }
 
 /**
@@ -60,7 +70,9 @@ export function isMultiple<T extends BaseField>(
 export function isSearchable<T extends BaseField>(
   field: T,
 ): field is T & SearchableField {
-  return field.searchable;
+  return Object.values(field.constraints).some(
+    (constraint) => constraint instanceof Searchable,
+  );
 }
 
 /**
@@ -69,5 +81,5 @@ export function isSearchable<T extends BaseField>(
 export function isSortable<T extends BaseField>(
   field: T,
 ): field is T & SortableField {
-  return field.sortable;
+  return field.sortable; // Est ce que l'on a une utilité à cette propriété ?
 }

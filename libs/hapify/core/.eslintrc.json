@@ -4,9 +4,7 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {
-        "no-underscore-dangle": "off"
-      }
+      "rules": {}
     },
     {
       "files": ["*.ts", "*.tsx"],
@@ -16,5 +14,8 @@
       "files": ["*.js", "*.jsx"],
       "rules": {}
     }
-  ]
+  ],
+  "rules": {
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }]
+  }
 }
