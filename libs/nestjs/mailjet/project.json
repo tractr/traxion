@@ -1,0 +1,47 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "nestjs-mailjet",
+  "projectType": "library",
+  "sourceRoot": "libs/nestjs/mailjet/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "assets": ["libs/nestjs/mailjet/*.md"],
+        "main": "libs/nestjs/mailjet/src/index.ts",
+        "outputPath": "dist/libs/nestjs/mailjet",
+        "packageJson": "libs/nestjs/mailjet/package.json",
+        "tsConfig": "libs/nestjs/mailjet/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/nestjs/mailjet/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build"
+        }
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish.mjs nestjs-mailjet {args.ver} {args.tag}"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/nestjs/mailjet/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/nestjs/mailjet"]
+    }
+  }
+}

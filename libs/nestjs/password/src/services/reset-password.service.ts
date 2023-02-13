@@ -3,11 +3,11 @@ import { REQUEST } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 
+import { UserPasswordService } from './user-password.service';
 import { DEFAULT_RESET_PASSWORD_LINK } from '../constants';
 import { BadResetCodeError } from '../errors';
 import { PasswordModuleOptions, UserInfo } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../password.module-definition';
-import { UserPasswordService } from './user-password.service';
 
 import { UserNotFoundError } from '@trxn/nestjs-authentication';
 
@@ -49,7 +49,8 @@ export class ResetPasswordService {
         : resetPasswordLink(
             this.request,
             resetCode,
-            this.userPasswordService.getUserFromUserInfo(user),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            this.userPasswordService.getUserFromUserInfo(user) as any,
           ),
     );
 
@@ -59,7 +60,8 @@ export class ResetPasswordService {
         this.passwordConfig.resetPasswordSendEmail.request(
           link,
           resetCode,
-          this.userPasswordService.getUserFromUserInfo(user),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          this.userPasswordService.getUserFromUserInfo(user) as any,
         ),
       );
     }
@@ -114,7 +116,8 @@ export class ResetPasswordService {
       // We call the method to send the email and wait for the response
       await Promise.resolve(
         this.passwordConfig.resetPasswordSendEmail.updated(
-          this.userPasswordService.getUserFromUserInfo(user),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          this.userPasswordService.getUserFromUserInfo(user) as any,
         ),
       );
     }

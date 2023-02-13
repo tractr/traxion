@@ -51,6 +51,7 @@
     "nestjs-file-storage": "libs/nestjs/file-storage",
     "nestjs-graphql": "libs/nestjs/graphql",
     "nestjs-mailer": "libs/nestjs/mailer",
+    "nestjs-mailjet": "libs/nestjs/mailjet",
     "nestjs-password": "libs/nestjs/password",
     "nestjs-request-timestamp": "libs/nestjs/request-timestamp",
     "nestjs-sentry": "libs/nestjs/sentry",

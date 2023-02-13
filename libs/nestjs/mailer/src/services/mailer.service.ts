@@ -1,40 +1,44 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { Client } from 'node-mailjet';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 
-import { MAILJET_API_VERSION } from '../configs';
-import { areWeTestingWithJest } from '../helpers';
-import { MailerModuleOptions } from '../interfaces';
+import { MAILER_CLIENT_TOKEN } from '../constants';
+import { MailerClient, MailerModuleOptions, SendEmail } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../mailer.module-definition';
 
-import { isProduction } from '@trxn/nestjs-core';
+import { isProduction, LoggerService } from '@trxn/nestjs-core';
 
 @Injectable()
 export class MailerService {
-  mailjetClient!: Client;
-
   constructor(
     @Inject(MODULE_OPTIONS_TOKEN)
     private readonly mailerOptions: MailerModuleOptions,
-  ) {
-    const { apiKey, apiSecret, apiToken } = mailerOptions;
 
-    this.mailjetClient = new Client({
-      apiKey,
-      apiSecret,
-      apiToken,
-    });
+    @Inject(MAILER_CLIENT_TOKEN)
+    private readonly mailerClient: MailerClient,
+
+    @Inject(Logger)
+    private readonly logger: LoggerService,
+  ) {
+    this.logger.setContext(MailerService.name);
   }
 
-  public async send(
-    params: mailjet.Email.SendParams,
-  ): Promise<mailjet.Email.PostResponse | null> {
-    if (areWeTestingWithJest()) return null;
+  public isDevelopment(): boolean {
+    return (
+      this.mailerOptions.development ||
+      !isProduction() ||
+      process.env.JEST_WORKER_ID !== undefined
+    );
+  }
 
-    return this.mailjetClient
-      .post('send', { version: MAILJET_API_VERSION })
-      .request({
-        SandboxMode: !isProduction(),
-        ...params,
-      });
+  public async send(params: SendEmail): Promise<unknown> {
+    this.logger.debug('Sending email: ', params);
+
+    if (this.isDevelopment()) {
+      this.logger.debug(
+        'Server is in development mode, email has not been send via the MailerClient',
+      );
+      return null;
+    }
+
+    return this.mailerClient.send(params);
   }
 }

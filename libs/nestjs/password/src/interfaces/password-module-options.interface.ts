@@ -1,5 +1,5 @@
 import { JwtModuleOptions } from '@nestjs/jwt';
-import { Prisma } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 
 import { EncryptionService } from '@trxn/nestjs-bcrypt';
 
@@ -9,19 +9,19 @@ export type ResetPasswordLinkFactory =
   | ((
       request: Record<string, unknown>,
       resetCode: string,
-      user: Record<string, string | number>,
+      user: User,
     ) => Promise<string> | string)
   | string;
 
 export type ResetPasswordSendRequestEmail = (
   link: string,
   resetCode: string,
-  user: Record<string, string | number>,
-) => Promise<void> | void;
+  user: User,
+) => Promise<unknown> | unknown;
 
 export type ResetPasswordSendRequestUpdated = (
-  user: Record<string, string | number>,
-) => Promise<void> | void;
+  user: User,
+) => Promise<unknown> | unknown;
 
 export class PasswordModuleOptions {
   resetPasswordExpiresIn?: string | number | undefined;
