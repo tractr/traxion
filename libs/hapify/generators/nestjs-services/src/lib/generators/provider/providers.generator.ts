@@ -18,7 +18,7 @@ export function generateProviderSourceFile(
   servicesProviderSourceFile: SourceFile,
 ) {
   const fileName = `${snake(model.name)}-model.providers.ts`;
-  const filePath = `${path}/${fileName}`;
+  const filePath = `${path}/providers/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);
   const name = `${constant(model.name)}_SERVICES_PROVIDERS`;
