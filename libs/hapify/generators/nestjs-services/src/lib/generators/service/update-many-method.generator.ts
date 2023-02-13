@@ -9,14 +9,16 @@ import {
 
 import { camel, Model, pascal } from '@trxn/hapify-core';
 
-export const generateUpdateMethod = (model: Model,): MethodDeclarationStructure => {
-
+export const generateUpdateManyMethod = (
+  model: Model,
+): MethodDeclarationStructure => {
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
-      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}UpdateArgs>`,
-
+      type: `Prisma.SelectSubset<T, Prisma.${pascal(
+        model.name,
+      )}UpdateManyArgs>`,
     },
     {
       kind: StructureKind.Parameter,
@@ -30,19 +32,27 @@ export const generateUpdateMethod = (model: Model,): MethodDeclarationStructure 
     {
       name: 'T',
       kind: StructureKind.TypeParameter,
-      constraint: `Prisma.${pascal(model.name)}UpdateArgs`,
-    }
+      constraint: `Prisma.${pascal(model.name)}UpdateManyArgs`,
+    },
   ];
 
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
       description: `
-       Update a ${pascal(model.name)}.
-       @param {${pascal(model.name)}UpdateArgs} args - Arguments to update a ${pascal(model.name)}.
+       Update 0 or more ${pascal(model.name)}s.
+       Note, that providing 'undefined' is treated as the value not being there.
+       Read more here: https://pris.ly/d/null-undefined
+       @param {${pascal(
+         model.name,
+       )}UpdateManyArgs} args - Arguments to update one or more ${pascal(
+        model.name,
+      )}s.
        @example
-       // Update one ${pascal(model.name)}
-       const ${camel(model.name)} = await this.${camel(model.name)}Service.update({
+       // Update many ${pascal(model.name)}s
+       const ${camel(model.name)}s = await this.${camel(
+        model.name,
+      )}Service.updateMany({
          where: {
            // ... provide filter here
          },
@@ -54,13 +64,12 @@ export const generateUpdateMethod = (model: Model,): MethodDeclarationStructure 
     },
   ];
 
-
   return {
     kind: StructureKind.Method,
-    name: 'update',
+    name: 'updateMAny',
     typeParameters,
     parameters,
-    statements: `return prisma.update<T>(args);`,
-    docs
+    statements: `return prisma.updateMany<T>(args);`,
+    docs,
   };
 };

@@ -9,14 +9,14 @@ import {
 
 import { camel, Model, pascal } from '@trxn/hapify-core';
 
-export const generateCountMethod = (model: Model,): MethodDeclarationStructure => {
-
+export const generateDeleteMethod = (
+  model: Model,
+): MethodDeclarationStructure => {
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
-      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}CountArgs>`,
-
+      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}DeleteArgs>`,
     },
     {
       kind: StructureKind.Parameter,
@@ -30,37 +30,35 @@ export const generateCountMethod = (model: Model,): MethodDeclarationStructure =
     {
       name: 'T',
       kind: StructureKind.TypeParameter,
-      constraint: `Prisma.${pascal(model.name)}CountArgs`,
-    }
+      constraint: `Prisma.${pascal(model.name)}DeleteArgs`,
+    },
   ];
 
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
       description: `
-      Count the number of ${pascal(model.name)}.
-      Note, that providing 'undefined' is treated as the value not being there.
-      Read more here: https://pris.ly/d/null-undefined
-      @param {${pascal(model.name)}CountArgs} args - Arguments to filter ${pascal(model.name)}s to count.
-      @example
-      // Count one ${pascal(model.name)}
-      const ${pascal(model.name)} = await this.${camel(model.name)}Service.count({
-        data: {
-          // ... data to count a ${pascal(model.name)}
-        }
-      })
-    
+    Delete a ${pascal(model.name)}.
+    @param {${pascal(
+      model.name,
+    )}DeleteArgs} args - Arguments to delete a ${pascal(model.name)}
+    @example
+    // Delete one ${pascal(model.name)}
+    const ${camel(model.name)} = await this.${camel(model.name)}Service.delete({
+      where: {
+        // ... filter to delete one ${pascal(model.name)}
+      }
+    })
     `,
     },
   ];
 
-
   return {
     kind: StructureKind.Method,
-    name: 'count',
+    name: 'delete',
     typeParameters,
     parameters,
-    statements: `return prisma.count<T>(args);`,
-    docs
+    statements: `return prisma.delete<T>(args);`,
+    docs,
   };
 };

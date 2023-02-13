@@ -9,14 +9,14 @@ import {
 
 import { camel, Model, pascal } from '@trxn/hapify-core';
 
-export const generateDeleteMethod = (model: Model,): MethodDeclarationStructure => {
-
+export const generateUpdateMethod = (
+  model: Model,
+): MethodDeclarationStructure => {
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
-      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}DeleteArgs>`,
-
+      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}UpdateArgs>`,
     },
     {
       kind: StructureKind.Parameter,
@@ -30,34 +30,40 @@ export const generateDeleteMethod = (model: Model,): MethodDeclarationStructure 
     {
       name: 'T',
       kind: StructureKind.TypeParameter,
-      constraint: `Prisma.${pascal(model.name)}DeleteArgs`,
-    }
+      constraint: `Prisma.${pascal(model.name)}UpdateArgs`,
+    },
   ];
 
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
       description: `
-    Delete a ${pascal(model.name)}.
-    @param {${pascal(model.name)}DeleteArgs} args - Arguments to delete a ${pascal(model.name)}
-    @example
-    // Delete one ${pascal(model.name)}
-    const ${camel(model.name)} = await this.${camel(model.name)}Service.delete({
-      where: {
-        // ... filter to delete one ${pascal(model.name)}
-      }
-    })
+       Update a ${pascal(model.name)}.
+       @param {${pascal(
+         model.name,
+       )}UpdateArgs} args - Arguments to update a ${pascal(model.name)}.
+       @example
+       // Update one ${pascal(model.name)}
+       const ${camel(model.name)} = await this.${camel(
+        model.name,
+      )}Service.update({
+         where: {
+           // ... provide filter here
+         },
+         data: {
+           // ... provide data here
+         }
+       })
     `,
     },
   ];
 
-
   return {
     kind: StructureKind.Method,
-    name: 'delete',
+    name: 'update',
     typeParameters,
     parameters,
-    statements: `return prisma.delete<T>(args);`,
-    docs
+    statements: `return prisma.update<T>(args);`,
+    docs,
   };
 };
