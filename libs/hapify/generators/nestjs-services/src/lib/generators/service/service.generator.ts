@@ -18,7 +18,7 @@ import { generateUpsertMethod } from './upsert-method.generator';
 
 import { Model, pascal, snake } from '@trxn/hapify-core';
 
-export function generateResolverClass(model: Model): ClassDeclarationStructure {
+export function generateServiceClass(model: Model): ClassDeclarationStructure {
   const className = `${pascal(model.name)}Service`;
   const constructor = generateConstructor();
 
@@ -48,7 +48,7 @@ export function generateResolverClass(model: Model): ClassDeclarationStructure {
   };
 }
 
-export function generateResolverSourceFile(
+export function generateServiceSourceFile(
   project: Project,
   model: Model,
   path: string,
@@ -58,9 +58,9 @@ export function generateResolverSourceFile(
 
   const sourceFile = project.createSourceFile(filePath);
 
-  const resolverClass = generateResolverClass(model);
+  const serviceClass = generateServiceClass(model);
   const imports = generateImports();
 
   sourceFile.addImportDeclarations(imports);
-  sourceFile.addClass(resolverClass);
+  sourceFile.addClass(serviceClass);
 }

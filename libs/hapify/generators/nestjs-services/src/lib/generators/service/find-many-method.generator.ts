@@ -9,14 +9,14 @@ import {
 
 import { camel, Model, pascal } from '@trxn/hapify-core';
 
-export const generateFindManyMethod = (model: Model,): MethodDeclarationStructure => {
-
+export const generateFindManyMethod = (
+  model: Model,
+): MethodDeclarationStructure => {
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
       type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}FindManyArgs>`,
-
     },
     {
       kind: StructureKind.Parameter,
@@ -31,7 +31,7 @@ export const generateFindManyMethod = (model: Model,): MethodDeclarationStructur
       name: 'T',
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${pascal(model.name)}FindManyArgs`,
-    }
+    },
   ];
 
   const docs: JSDocStructure[] = [
@@ -41,21 +41,28 @@ export const generateFindManyMethod = (model: Model,): MethodDeclarationStructur
        Find zero or more ${pascal(model.name)}s that matches the filter.
        Note, that providing 'undefined' is treated as the value not being there.
        Read more here: https://pris.ly/d/null-undefined
-       @param {${pascal(model.name)}FindManyArgs=} args - Arguments to filter and select certain fields only.
+       @param {${pascal(
+         model.name,
+       )}FindManyArgs=} args - Arguments to filter and select certain fields only.
        @example
        // Get all ${pascal(model.name)}s
-       const ${camel(model.name)}s = await this.${camel(model.name)}Service.findMany()
+       const ${camel(model.name)}s = await this.${camel(
+        model.name,
+      )}Service.findMany()
       
        // Get first 10 ${pascal(model.name)}s
-       const ${pascal(model.name)}s = await this.${pascal(model.name)}Service.findMany({ take: 10 })
+       const ${pascal(model.name)}s = await this.${pascal(
+        model.name,
+      )}Service.findMany({ take: 10 })
       
        // Only select the 'id'
-       const ${camel(model.name)}WithIdOnly = await this.${pascal(model.name)}Service.findMany({ select: { id: true } })
+       const ${camel(model.name)}WithIdOnly = await this.${pascal(
+        model.name,
+      )}Service.findMany({ select: { id: true } })
       
     `,
     },
   ];
-
 
   return {
     kind: StructureKind.Method,
@@ -63,6 +70,6 @@ export const generateFindManyMethod = (model: Model,): MethodDeclarationStructur
     typeParameters,
     parameters,
     statements: `return prisma.findMany<T>(args);`,
-    docs
+    docs,
   };
 };
