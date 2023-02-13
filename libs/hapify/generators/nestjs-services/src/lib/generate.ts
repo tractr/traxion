@@ -67,13 +67,13 @@ export function generate(
   dataModel.models.forEach((model) => {
     generateServiceSourceFile(project, model, entityPath);
     generateDatabaseServiceSourceFile(project, model, entityPath);
-    generateConstantSourceFile(project, model, `${entityPath}/constants`); // TODO: update last variables
+    generateConstantSourceFile(project, model, `${entityPath}`);
     generateProviderSourceFile(
       project,
       model,
-      `${entityPath}/providers`,
+      `${entityPath}`,
       providersSourceFile,
-    ); // TODO: update last variables
+    );
   });
 
   // generate route index.ts for exports
