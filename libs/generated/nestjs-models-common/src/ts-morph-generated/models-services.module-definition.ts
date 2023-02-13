@@ -13,7 +13,7 @@ export const {
   MODULE_OPTIONS_TOKEN,
   ASYNC_OPTIONS_TYPE,
   OPTIONS_TYPE,
-}: Provider[] = new ConfigurableModuleBuilder<ModelsServicesOptions>()
+} = new ConfigurableModuleBuilder<ModelsServicesOptions>()
   .setExtras<{
     imports: Array<
       Type<any> | DynamicModule | Promise<DynamicModule> | ForwardReference
