@@ -1,10 +1,11 @@
-import { Provider } from "@nestjs/common";
-import { RoleService } from "./services";
-import { ROLE_SERVICE } from "./role-model.constants";
+import { Provider } from '@nestjs/common';
+
+import { ROLE_SERVICE } from '../constants';
+import { RoleService } from '../services';
 
 export const ROLE_SERVICES_PROVIDERS: Provider[] = [
-              {
-                provide: ROLE_SERVICE,
-                useClass: RoleService,
-              }
-            ];
+  {
+    provide: ROLE_SERVICE,
+    useClass: RoleService,
+  },
+];
