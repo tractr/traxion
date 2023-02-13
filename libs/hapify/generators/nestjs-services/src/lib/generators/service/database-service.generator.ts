@@ -5,9 +5,7 @@ import {
   VariableDeclarationKind,
 } from 'ts-morph';
 
-import { generateFileIndexExporter } from '../../utils/index.generator';
-
-import { camel, capital, Model, snake } from '@trxn/hapify-core';
+import { camel, Model, snake } from '@trxn/hapify-core';
 
 export function generateDatabaseServiceSourceFile(
   project: Project,

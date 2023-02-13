@@ -1,6 +1,5 @@
 import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
 
-import { generateFileIndexExporter } from '../../utils/index.generator';
 import { generateAggregateMethod } from './aggregate-method.generator';
 import { generateConstructor } from './constructor.generator';
 import { generateCountMethod } from './count-method.generator';
@@ -17,7 +16,7 @@ import { generateUpdateManyMethod } from './update-many-method.generator';
 import { generateUpdateMethod } from './update-method.generator';
 import { generateUpsertMethod } from './upsert-method.generator';
 
-import { kebab, Model, pascal, snake } from '@trxn/hapify-core';
+import { kebab, Model, pascal } from '@trxn/hapify-core';
 
 export function generateServiceClass(model: Model): ClassDeclarationStructure {
   const className = `${pascal(model.name)}Service`;
