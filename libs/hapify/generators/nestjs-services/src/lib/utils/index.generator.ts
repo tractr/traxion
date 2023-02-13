@@ -2,7 +2,7 @@ import { Project } from 'ts-morph';
 
 /**
  *
- * Generate or Update an index.ts file that will export all the files the current folder
+ * Generate or Update an index.ts file that will export all the files of the current folder
  *
  * @param project
  * @param indexFile
@@ -27,7 +27,7 @@ export const generateFileIndexExporter = (
 
 /**
  *
- * Generate or Update an index.ts file that will export all the directory the current folder
+ * Generate or Update an index.ts file that will export all the directory of the current folder
  *
  * @param project
  * @param sourcePath
@@ -43,7 +43,6 @@ export const generateDirectoryIndexExporter = (
 
   const subDirs = sourceDir.getDirectories();
   const baseNames = subDirs.map((directory) => directory.getBaseName());
-  // const sourceIndex = project.createSourceFile(`${sourcePath}/index.ts`);
 
   baseNames.forEach((baseName) => {
     sourceFile.addExportDeclaration({

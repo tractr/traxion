@@ -64,9 +64,4 @@ export function generateServiceSourceFile(
 
   sourceFile.addImportDeclarations(imports);
   sourceFile.addClass(serviceClass);
-
-  // // generate index.ts
-  // const indexFile = `./${fileName}`;
-  // const indexFilePath = `${path}/services/index.ts`;
-  // generateFileIndexExporter(project, indexFile, indexFilePath);
 }
