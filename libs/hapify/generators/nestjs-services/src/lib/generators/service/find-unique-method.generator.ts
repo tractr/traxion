@@ -9,14 +9,16 @@ import {
 
 import { camel, Model, pascal } from '@trxn/hapify-core';
 
-export const generateCreateManyMethod = (model: Model,): MethodDeclarationStructure => {
-
+export const generateFindUniqueMethod = (
+  model: Model,
+): MethodDeclarationStructure => {
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
-      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}CreateManyArgs>`,
-
+      type: `Prisma.SelectSubset<T, Prisma.${pascal(
+        model.name,
+      )}FindUniqueArgs>`,
     },
     {
       kind: StructureKind.Parameter,
@@ -30,35 +32,37 @@ export const generateCreateManyMethod = (model: Model,): MethodDeclarationStruct
     {
       name: 'T',
       kind: StructureKind.TypeParameter,
-      constraint: `Prisma.${pascal(model.name)}CreateManyArgs`,
-    }
+      constraint: `Prisma.${pascal(model.name)}FindUniqueArgs`,
+    },
   ];
 
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
       description: `
-      * Create many ${pascal(model.name)}s.
-      * @param {${pascal(model.name)}CreateManyArgs} args - Arguments to create many a ${pascal(model.name)}s.
-      * @example
-      * // Create many ${pascal(model.name)}s
-      * const ${pascal(model.name)}s = await this.${camel(model.name)}Service.createMany({
-      *   data: {
-      *     *     // ... provide data here
-      *   }
-      * })
-      *
+    Find zero or one ${pascal(model.name)} that matches the filter.
+    @param {${pascal(
+      model.name,
+    )}FindUniqueArgs} args - Arguments to find a ${pascal(model.name)}
+    @example
+    // Get one ${pascal(model.name)}
+    const ${camel(model.name)} = await this.${camel(
+        model.name,
+      )}Service.findUnique({
+      where: {
+        // ... provide filter here
+      }
+    })
     `,
     },
   ];
 
-
   return {
     kind: StructureKind.Method,
-    name: 'createMany',
+    name: 'findUnique',
     typeParameters,
     parameters,
-    statements: `return prisma.createMany<T>(args);`,
-    docs
+    statements: `return prisma.findUnique<T>(args);`,
+    docs,
   };
 };

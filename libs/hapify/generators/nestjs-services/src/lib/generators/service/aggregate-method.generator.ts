@@ -9,14 +9,14 @@ import {
 
 import { camel, Model, pascal } from '@trxn/hapify-core';
 
-export const generateAggregateMethod = (model: Model,): MethodDeclarationStructure => {
-
+export const generateAggregateMethod = (
+  model: Model,
+): MethodDeclarationStructure => {
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
       type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}AggregateArgs>`,
-
     },
     {
       kind: StructureKind.Parameter,
@@ -31,17 +31,21 @@ export const generateAggregateMethod = (model: Model,): MethodDeclarationStructu
       name: 'T',
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${pascal(model.name)}AggregateArgs`,
-    }
+    },
   ];
 
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
       description: `
-        Allows you to perform aggregations operations on a ${pascal(model.name)}.
+        Allows you to perform aggregations operations on a ${pascal(
+          model.name,
+        )}.
         Note, that providing 'undefined' is treated as the value not being there.
         Read more here: https://pris.ly/d/null-undefined
-        @param {${pascal(model.name)}AggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+        @param {${pascal(
+          model.name,
+        )}AggregateArgs} args - Select which aggregations you would like to apply and on what fields.
         @example
         // Ordered by age ascending
         // Where email contains prisma.io
@@ -60,10 +64,9 @@ export const generateAggregateMethod = (model: Model,): MethodDeclarationStructu
           },
           take: 10,
         })
-    `
+    `,
     },
   ];
-
 
   return {
     kind: StructureKind.Method,
@@ -71,6 +74,6 @@ export const generateAggregateMethod = (model: Model,): MethodDeclarationStructu
     typeParameters,
     parameters,
     statements: `return prisma.aggregate<T>(args);`,
-    docs
+    docs,
   };
 };

@@ -9,14 +9,14 @@ import {
 
 import { camel, Model, pascal } from '@trxn/hapify-core';
 
-export const generateUpdateManyMethod = (model: Model,): MethodDeclarationStructure => {
-
+export const generateFindFirstMethod = (
+  model: Model,
+): MethodDeclarationStructure => {
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
-      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}UpdateManyArgs>`,
-
+      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}FindFirstArgs>`,
     },
     {
       kind: StructureKind.Parameter,
@@ -30,39 +30,39 @@ export const generateUpdateManyMethod = (model: Model,): MethodDeclarationStruct
     {
       name: 'T',
       kind: StructureKind.TypeParameter,
-      constraint: `Prisma.${pascal(model.name)}UpdateManyArgs`,
-    }
+      constraint: `Prisma.${pascal(model.name)}FindFirstArgs`,
+    },
   ];
 
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
       description: `
-       Update 0 or more ${pascal(model.name)}s.
+       Find the first ${pascal(model.name)} that matches the filter.
        Note, that providing 'undefined' is treated as the value not being there.
        Read more here: https://pris.ly/d/null-undefined
-       @param {${pascal(model.name)}UpdateManyArgs} args - Arguments to update one or more ${pascal(model.name)}s.
+       @param {${pascal(
+         model.name,
+       )}FindFirstArgs} args - Arguments to find a ${pascal(model.name)}
        @example
-       // Update many ${pascal(model.name)}s
-       const ${camel(model.name)}s = await this.${camel(model.name)}Service.updateMany({
+       // Get one ${pascal(model.name)}
+       const ${camel(model.name)} = await this.${camel(
+        model.name,
+      )}Service.findFirst({
          where: {
            // ... provide filter here
-         },
-         data: {
-           // ... provide data here
          }
        })
     `,
     },
   ];
 
-
   return {
     kind: StructureKind.Method,
-    name: 'updateMAny',
+    name: 'findFirst',
     typeParameters,
     parameters,
-    statements: `return prisma.updateMany<T>(args);`,
-    docs
+    statements: `return prisma.findFirst<T>(args);`,
+    docs,
   };
 };

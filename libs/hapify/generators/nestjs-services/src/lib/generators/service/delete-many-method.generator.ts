@@ -9,14 +9,16 @@ import {
 
 import { camel, Model, pascal } from '@trxn/hapify-core';
 
-export const generateFindFirstMethod = (model: Model,): MethodDeclarationStructure => {
-
+export const generateDeleteManyMethod = (
+  model: Model,
+): MethodDeclarationStructure => {
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
-      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}FindFirstArgs>`,
-
+      type: `Prisma.SelectSubset<T, Prisma.${pascal(
+        model.name,
+      )}DeleteManyArgs>`,
     },
     {
       kind: StructureKind.Parameter,
@@ -30,36 +32,37 @@ export const generateFindFirstMethod = (model: Model,): MethodDeclarationStructu
     {
       name: 'T',
       kind: StructureKind.TypeParameter,
-      constraint: `Prisma.${pascal(model.name)}FindFirstArgs`,
-    }
+      constraint: `Prisma.${pascal(model.name)}DeleteArgs`,
+    },
   ];
 
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
       description: `
-       Find the first ${pascal(model.name)} that matches the filter.
-       Note, that providing 'undefined' is treated as the value not being there.
-       Read more here: https://pris.ly/d/null-undefined
-       @param {${pascal(model.name)}FindFirstArgs} args - Arguments to find a ${pascal(model.name)}
-       @example
-       // Get one ${pascal(model.name)}
-       const ${camel(model.name)} = await this.${camel(model.name)}Service.findFirst({
-         where: {
-           // ... provide filter here
-         }
-       })
+    Delete 0 or more ${pascal(model.name)}s.
+    @param {${pascal(
+      model.name,
+    )}DeleteArgs} args - Arguments to filter  ${pascal(model.name)}s to delete.
+    @example
+    // Delete a few ${pascal(model.name)}s
+    const ${camel(model.name)}s = await this.${camel(
+        model.name,
+      )}Service.deleteMany({
+      where: {
+        // ... provide filter here
+      }
+    })
     `,
     },
   ];
 
-
   return {
     kind: StructureKind.Method,
-    name: 'findFirst',
+    name: 'deleteMany',
     typeParameters,
     parameters,
-    statements: `return prisma.findFirst<T>(args);`,
-    docs
+    statements: `return prisma.deleteMany<T>(args);`,
+    docs,
   };
 };

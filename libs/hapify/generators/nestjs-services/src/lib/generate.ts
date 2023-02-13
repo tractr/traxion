@@ -3,19 +3,20 @@ import * as path from 'path';
 
 import { Project } from 'ts-morph';
 
-import { generateResolverSourceFile } from './generators/resolver/resolver.generator';
+import { generateServiceSourceFile } from './generators/service/service.generator';
 
 import { Project as Models } from '@trxn/hapify-core';
 
-export type GraphqlResolverGeneratorConfig = {
+export type NestjsServiceGeneratorConfig = {
   outputDirectory: string;
   tsConfigFilePath: string;
   generatedDirectory: string;
 };
 
 export function generate(
+  project: Project,
   dataModel: Models,
-  config: GraphqlResolverGeneratorConfig,
+  config: NestjsServiceGeneratorConfig,
 ) {
   const { generatedDirectory, tsConfigFilePath, outputDirectory } = config;
   const absoluteTsConfigFilePath = path.resolve(
@@ -27,10 +28,7 @@ export function generate(
     generatedDirectory,
   );
 
-  // Instantiate the ts project
-  const project = new Project({
-    tsConfigFilePath: absoluteTsConfigFilePath,
-  });
+  project.addSourceFilesFromTsConfig(absoluteTsConfigFilePath);
 
   // Clear generation directory
   project.getDirectory(absoluteGeneratedDirectory)?.clear();
@@ -38,13 +36,9 @@ export function generate(
   const entityPath = `${absoluteGeneratedDirectory}/services`;
   // Generate controllers and dtos
   dataModel.models.forEach((model) => {
-    generateResolverSourceFile(project, model, entityPath);
+    generateServiceSourceFile(project, model, entityPath);
   });
-
-  
 
   // Save project to file system
   project.saveSync();
 }
-
-

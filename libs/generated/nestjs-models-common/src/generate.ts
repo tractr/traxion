@@ -1,12 +1,14 @@
 import { resolve } from 'path';
 
+import { Project } from 'ts-morph';
+
 import {
   BooleanField,
   EntityOneToManyField,
   Model,
+  Project as Models,
   NumberBasicField,
   NumberIntegerField,
-  Project,
   StringBasicField,
   StringEmailField,
   StringPasswordField,
@@ -14,7 +16,7 @@ import {
 } from '@trxn/hapify-core';
 import {
   generate,
-  GraphqlResolverGeneratorConfig,
+  NestjsServiceGeneratorConfig,
 } from '@trxn/hapify-generators-nestjs-services';
 
 /**
@@ -52,13 +54,16 @@ const userModel = new Model('User')
   )
   .addField(new EntityOneToManyField('Role', roleModel));
 
-const project = new Project('app').addModel(userModel).addModel(roleModel);
+const dataModel = new Models('app').addModel(userModel).addModel(roleModel);
 
 const currentDir = resolve(__dirname, '..');
-const config: GraphqlResolverGeneratorConfig = {
+const config: NestjsServiceGeneratorConfig = {
   outputDirectory: currentDir,
   tsConfigFilePath: 'tsconfig.lib.json',
   generatedDirectory: 'src/ts-morph-generated',
 };
 
-generate(project, config);
+// Instantiate the ts project
+const project = new Project();
+
+generate(project, dataModel, config);

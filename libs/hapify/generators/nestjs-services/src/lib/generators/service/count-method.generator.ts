@@ -9,14 +9,14 @@ import {
 
 import { camel, Model, pascal } from '@trxn/hapify-core';
 
-export const generateDeleteManyMethod = (model: Model,): MethodDeclarationStructure => {
-
+export const generateCountMethod = (
+  model: Model,
+): MethodDeclarationStructure => {
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
-      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}DeleteManyArgs>`,
-
+      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}CountArgs>`,
     },
     {
       kind: StructureKind.Parameter,
@@ -30,34 +30,40 @@ export const generateDeleteManyMethod = (model: Model,): MethodDeclarationStruct
     {
       name: 'T',
       kind: StructureKind.TypeParameter,
-      constraint: `Prisma.${pascal(model.name)}DeleteArgs`,
-    }
+      constraint: `Prisma.${pascal(model.name)}CountArgs`,
+    },
   ];
 
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
       description: `
-    Delete 0 or more ${pascal(model.name)}s.
-    @param {${pascal(model.name)}DeleteArgs} args - Arguments to filter  ${pascal(model.name)}s to delete.
-    @example
-    // Delete a few ${pascal(model.name)}s
-    const ${camel(model.name)}s = await this.${camel(model.name)}Service.deleteMany({
-      where: {
-        // ... provide filter here
-      }
-    })
+      Count the number of ${pascal(model.name)}.
+      Note, that providing 'undefined' is treated as the value not being there.
+      Read more here: https://pris.ly/d/null-undefined
+      @param {${pascal(
+        model.name,
+      )}CountArgs} args - Arguments to filter ${pascal(model.name)}s to count.
+      @example
+      // Count one ${pascal(model.name)}
+      const ${pascal(model.name)} = await this.${camel(
+        model.name,
+      )}Service.count({
+        data: {
+          // ... data to count a ${pascal(model.name)}
+        }
+      })
+    
     `,
     },
   ];
 
-
   return {
     kind: StructureKind.Method,
-    name: 'deleteMany',
+    name: 'count',
     typeParameters,
     parameters,
-    statements: `return prisma.deleteMany<T>(args);`,
-    docs
+    statements: `return prisma.count<T>(args);`,
+    docs,
   };
 };
