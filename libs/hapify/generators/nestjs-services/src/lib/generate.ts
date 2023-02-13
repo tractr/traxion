@@ -9,7 +9,7 @@ import { generateModuleSourceFile } from './generators/module/module.generator';
 import {
   generateModelsServicesProvidersSourceFile,
   generateProviderSourceFile,
-} from './generators/provider/providers.generator'; // TODO: update import
+} from './generators/provider/providers.generator';
 import { generateConstantSourceFile } from './generators/service/constant.generator';
 import { generateDatabaseServiceSourceFile } from './generators/service/database-service.generator';
 import { generateServiceSourceFile } from './generators/service/service.generator';
