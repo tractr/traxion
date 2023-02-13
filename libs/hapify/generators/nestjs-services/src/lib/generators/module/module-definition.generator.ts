@@ -26,7 +26,6 @@ export function generateModuleDefinitionSourceFile(
           ASYNC_OPTIONS_TYPE,
           OPTIONS_TYPE,
         }`,
-        type: 'Provider[]',
         initializer: `new ConfigurableModuleBuilder<ModelsServicesOptions>()
         .setExtras<{
           imports: Array<
@@ -44,7 +43,7 @@ export function generateModuleDefinitionSourceFile(
               providers: [...(options.providers || []), ...(extras.providers || [])],
             }),
         )
-        .build();`,
+        .build()`,
       },
     ],
   });
