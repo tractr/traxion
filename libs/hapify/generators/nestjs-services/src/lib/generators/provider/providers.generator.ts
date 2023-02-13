@@ -71,11 +71,18 @@ export function generateModelsServicesProvidersSourceFile(
   const filePath = `${path}/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);
-  const providerServiceImport: ImportDeclarationStructure = {
-    kind: StructureKind.ImportDeclaration,
-    moduleSpecifier: `./providers`,
-  };
-  sourceFile.addImportDeclaration(providerServiceImport);
+  const providerServiceImport: ImportDeclarationStructure[] = [
+    {
+      kind: StructureKind.ImportDeclaration,
+      namedImports: ['Provider'],
+      moduleSpecifier: `@nestjs/common`,
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: `./providers`,
+    },
+  ];
+  sourceFile.addImportDeclarations(providerServiceImport);
 
   sourceFile.addVariableStatement({
     isExported: true,
