@@ -6,6 +6,7 @@ export const REVERSE_PROXY_COMPONENT_DEFAULT_CONFIG: ReverseProxyComponentDefaul
   {
     ...SERVICE_COMPONENT_DEFAULT_CONFIG,
     containerConfig: {
+      imageName: 'traefik',
       imageTag: 'v2.4.8',
       // Those next lines enable access to Traefik dashboard and its basic auth
       // Traefik does not detect himself in ECS

@@ -9,6 +9,7 @@ export const POSTGRES_COMPONENT_DEFAULT_CONFIG: PostgresComponentDefaultConfig =
   {
     ...SERVICE_COMPONENT_DEFAULT_CONFIG,
     containerConfig: {
+      imageName: 'postgres',
       imageTag: '13-alpine',
       environments: {
         POSTGRES_DB: 'api',
@@ -18,6 +19,7 @@ export const POSTGRES_COMPONENT_DEFAULT_CONFIG: PostgresComponentDefaultConfig =
     },
     enableBackups: false,
     backupsConfig: {
+      imageName: 'tractr/postgres-backup',
       imageTag: 'v1.7',
       environments: {
         VOLUMERIZE_SOURCE: '/source',

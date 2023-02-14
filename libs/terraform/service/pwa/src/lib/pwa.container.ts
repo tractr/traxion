@@ -11,10 +11,6 @@ export class PwaContainer extends HttpContainer<PwaContainerConfig> {
     return true;
   }
 
-  protected getAppName(): string {
-    return 'pwa';
-  }
-
   protected getPort(): number {
     return 4200;
   }

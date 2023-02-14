@@ -75,6 +75,11 @@ export interface ContainerInternalConfig {
 }
 
 export interface ContainerPublicConfig {
+  /**
+   * The public Docker image, example: traefik, blacklabelops/volumerize
+   * Or the private application name: api-backend
+   */
+  imageName: string;
   imageTag: string;
   cpu?: number;
   memory?: number;

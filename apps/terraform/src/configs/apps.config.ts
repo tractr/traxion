@@ -7,6 +7,8 @@ import { Environment } from '../interfaces';
  *  cpu: '1024',
  *  memory: '512',
  *  containerConfig: {
+ *    imageName: 'postgis/postgis',
+ *    imageTag: '15-3.3-alpine',
  *    environments: {
  *      JWT_SECRET: Secret(),
  *      COOKIE_SECRET: Secret('CUSTOM_KEY'),
@@ -22,6 +24,11 @@ export const AppConfig: Required<Environment['config']> = {
   api: {},
   pwa: {},
   admin: {},
-  postgres: {},
+  postgres: {
+    containerConfig: {
+      imageName: 'postgis/postgis',
+      imageTag: '15-3.3-alpine',
+    },
+  },
   reverseProxy: {},
 };
