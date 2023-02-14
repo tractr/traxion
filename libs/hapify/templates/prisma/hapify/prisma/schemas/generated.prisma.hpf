@@ -271,6 +271,10 @@ function searchIndexes(model) {
             (field.searchable || field.sortable)
             && !field.meta.compositeSearch
             && !field.primary
+            && field.type !== 'file'
+            && field.type !== 'object'
+            && field.subtype !== 'text'
+            && field.subtype !== 'rich'
             && field.subtype !== 'manyMany'
             && field.subtype !== 'manyOne')
         .map(field => `@@index([${getFieldNameForIndex(field)}(sort: Asc)])` );
