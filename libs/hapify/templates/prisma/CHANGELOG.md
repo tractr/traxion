@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.0.10](https://github.com/tractr/traxion/compare/v2.0.9...v2.0.10) (2023-02-14)
+
+
+### Bug Fixes
+
+* **hapify-templates-prisma:** remove search index generation for fields of type text object and file ([#575](https://github.com/tractr/traxion/issues/575)) ([1d83bac](https://github.com/tractr/traxion/commit/1d83bacf6ed717284006d9a7866a1cbf3621390e))
+
+
+
 ## [2.0.9](https://github.com/tractr/traxion/compare/v2.0.8...v2.0.9) (2023-02-14)
 
 
