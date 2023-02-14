@@ -28,9 +28,9 @@ The containers have two levels of properties. Properties, which are defined in t
 
 The `usePrivateImage` method allows the subclass to specify whether to use a private or public image for the container. If set to `true`, the image should be found on a public repositiory, such as DockerHub. If set to `false`, the image should be available on ECR and a deployment pipeline will be triggered every time a new image is pushed to this repository (accordingly to the image tag).
 
-The `getAppName` method returns the name of the image to use. If the container uses a private image, this is the name of a workspace’s application containing a `Dockerfile`. If the container uses a public image, this is the name of the image without the tag. For example `traefik` or `blacklabelops/volumerize`.
+The configuration `imageName` is the name of the image to use. If the container uses a private image, this is the name of a workspace’s application containing a `Dockerfile`. If the container uses a public image, this is the name of the image without the tag. For example `traefik` or `blacklabelops/volumerize`.
 
-As the image tag must be configurable between two environments, it is provided via the configuration of the container and not within the class.
+The configuration `imageTag` is also available to specify the tag of the image to use.
 
 ### Persistent volumes
 

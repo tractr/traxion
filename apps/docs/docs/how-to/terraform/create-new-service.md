@@ -77,10 +77,6 @@ import { RedisContainerConfig } from './interfaces';
 import { BackendContainer, MountPoint } from '@trxn/terraform-service-ecs';
 
 export class RedisContainer extends BackendContainer<RedisContainerConfig> {
-  protected getAppName(): string {
-    return 'redis';
-  }
-
   protected getPort(): number {
     return 6379;
   }
@@ -96,7 +92,7 @@ export class RedisContainer extends BackendContainer<RedisContainerConfig> {
 }
 ```
 
-This class is a subclass of `BackendContainer` and overrides the `getAppName` and `getPort` methods to return the values specific to a Redis container. It also defines a single mount point to a volume called `data`, which will be used to store persistent data for the Redis container.
+This class is a subclass of `BackendContainer` and overrides the `getPort` method to return the value specific to a Redis container. It also defines a single mount point to a volume called `data`, which will be used to store persistent data for the Redis container.
 
 ### Configuration and interface
 
@@ -112,6 +108,7 @@ import {
 export const REDIS_COMPONENT_DEFAULT_CONFIG: RedisComponentDefaultConfig = {
   ...SERVICE_COMPONENT_DEFAULT_CONFIG,
   containerConfig: {
+    imageName: 'redis',
     imageTag: 'alpine3.17',
     environments: {
       REDIS_PASSWORD: Secret(),
