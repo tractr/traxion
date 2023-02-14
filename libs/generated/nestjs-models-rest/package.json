@@ -1,6 +1,6 @@
 {
   "name": "@trxn/generated-nestjs-models-rest",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "exports": {
     ".": {
       "import": "./src/index.js"
