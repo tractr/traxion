@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 
+import { AppAbility } from './role-permission.mock';
 import { CaslOptions } from '../src';
 import { CASL_MODULE_OPTIONS } from '../src/casl.constant';
-import { AppAbility } from './role-permission.mock';
 
 import { PolicyHandler } from '@trxn/common';
 

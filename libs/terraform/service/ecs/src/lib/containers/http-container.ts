@@ -1,10 +1,10 @@
 import { kebab } from 'case';
 
+import { BackendContainer } from './backend-container';
 import {
   HttpContainerConfig,
   HttpContainerPathPrefixConfig,
 } from '../interfaces';
-import { BackendContainer } from './backend-container';
 
 /**
  * This container is meant to be used by another one, as its backend

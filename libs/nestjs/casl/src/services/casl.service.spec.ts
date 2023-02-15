@@ -4,10 +4,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import type { User } from '@prisma/client';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 
+import { CaslAbilityFactoryService } from './casl.service';
 import { AppAbility, rolePermissions } from '../../mocks/role-permission.mock';
 import { CASL_MODULE_OPTIONS } from '../casl.constant';
 import { CaslOptions } from '../interfaces';
-import { CaslAbilityFactoryService } from './casl.service';
 
 describe('CaslService', () => {
   let caslAbilityFactoryService: CaslAbilityFactoryService;

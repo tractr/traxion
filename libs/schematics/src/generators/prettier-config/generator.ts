@@ -2,6 +2,7 @@ import * as path from 'path';
 
 import { formatFiles, generateFiles, Tree } from '@nrwl/devkit';
 
+import { PrettierGeneratorSchema } from './schema';
 import * as packageJson from '../../../package.json';
 import {
   addPackageToPackageJson,
@@ -9,7 +10,6 @@ import {
   npmRun,
   PackageDefinition,
 } from '../../helpers';
-import { PrettierGeneratorSchema } from './schema';
 
 export const packagesToAdd: PackageDefinition[] = [
   {

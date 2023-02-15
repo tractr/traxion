@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import { BadPasswordError } from '../errors';
 import { HashService } from './hash.service';
 import { UserPasswordService } from './user-password.service';
+import { BadPasswordError } from '../errors';
 
 import { UserNotFoundError } from '@trxn/nestjs-authentication';
 

@@ -1,8 +1,8 @@
 import { isDate, isDateString, isIn } from 'class-validator';
 
+import { CustomValidate } from './custom-validate';
 import { ArrayFilterProps, DateTimeFilterProps } from '../../constants';
 import { transformStringToArray } from '../../helpers';
-import { CustomValidate } from './custom-validate';
 
 /**
  * Accept a field string and return a boolean indicating if the field is an integer string and filter type

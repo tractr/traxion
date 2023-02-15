@@ -5,11 +5,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { User } from '@prisma/client';
 import { mockDeep, MockProxy, mockReset } from 'jest-mock-extended';
 
-import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
-import { AuthenticationModuleOptions } from '../interfaces';
 import { AuthenticationService } from './authentication.service';
 import { HashService } from './hash.service';
 import { UserAuthenticationService } from './user-authentication.service';
+import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
+import { AuthenticationModuleOptions } from '../interfaces';
 
 describe('AuthService', () => {
   let authService: AuthenticationService;

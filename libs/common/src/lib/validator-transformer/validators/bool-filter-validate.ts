@@ -1,9 +1,9 @@
 import { isBooleanString, isIn } from 'class-validator';
 import { isBoolean } from 'lodash';
 
+import { CustomValidate } from './custom-validate';
 import { ArrayFilterProps, BoolFilterProps } from '../../constants';
 import { transformStringToArray } from '../../helpers';
-import { CustomValidate } from './custom-validate';
 
 /**
  * Accept a field string and return a boolean indicating if the field is a boolean string and filter type

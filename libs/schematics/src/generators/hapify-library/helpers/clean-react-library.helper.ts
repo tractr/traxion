@@ -7,9 +7,9 @@ import {
   updateProjectConfiguration,
 } from '@nrwl/devkit';
 
+import { createSrcIndexTs } from './create-src-index.helper';
 import { addPackageToPackageJson, PackageType } from '../../../helpers';
 import { NormalizedOptions } from '../schema';
-import { createSrcIndexTs } from './create-src-index.helper';
 
 export async function cleanReactLibrary(
   tree: Tree,

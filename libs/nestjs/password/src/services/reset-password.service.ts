@@ -3,11 +3,11 @@ import { REQUEST } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 
+import { UserPasswordService } from './user-password.service';
 import { DEFAULT_RESET_PASSWORD_LINK } from '../constants';
 import { BadResetCodeError } from '../errors';
 import { PasswordModuleOptions, UserInfo } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../password.module-definition';
-import { UserPasswordService } from './user-password.service';
 
 import { UserNotFoundError } from '@trxn/nestjs-authentication';
 

@@ -3,9 +3,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as request from 'supertest';
 
+import { ResetPasswordController } from './reset-password.controller';
 import { BadResetCodeError } from '../errors';
 import { ResetPasswordService } from '../services';
-import { ResetPasswordController } from './reset-password.controller';
 
 import { UserNotFoundError } from '@trxn/nestjs-authentication';
 

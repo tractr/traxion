@@ -1,11 +1,11 @@
 import { Tree, updateWorkspaceConfiguration } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
+import { normalizeOptions } from './normalize-options.helper';
 import {
   HapifyLibraryGeneratorOptions,
   HapifyLibraryGeneratorOptionsWithExtra,
 } from '../schema';
-import { normalizeOptions } from './normalize-options.helper';
 
 describe('normalizeOptions', () => {
   let appTree: Tree;
