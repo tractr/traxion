@@ -7,7 +7,8 @@ import {
   FileStorageModule,
   GraphQLModule,
   MailerModule,
-  ModelsModule,
+  ModelsRestModule,
+  ModelsServicesModule,
   PasswordModule,
 } from './modules';
 
@@ -16,25 +17,21 @@ import { LoggerModule } from '@trxn/nestjs-core';
 @Module({
   imports: [
     // Internal database services
-    DatabaseModule,
-
+    // DatabaseModule,
     // API modules
-    ModelsModule,
-    GraphQLModule,
-
+    ModelsServicesModule,
+    ModelsRestModule,
+    // GraphQLModule,
     // Authentication modules
-    AuthenticationModule,
-    PasswordModule,
-
+    // AuthenticationModule,
+    // PasswordModule,
     // Miscellaneous
-    MailerModule,
-    FileStorageModule,
-
+    // MailerModule,
+    // FileStorageModule,
     // Logger
-    LoggerModule,
-
+    // LoggerModule,
     // Cli
-    ConsoleModule,
+    // ConsoleModule,
   ],
 })
 export class AppModule {}

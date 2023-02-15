@@ -1,0 +1,11 @@
+import { PrismaClient } from '@prisma/client';
+
+/**
+ * The public interface of the ModelsRestOptions.
+ */
+export interface ModelsRestOptions {
+  /**
+   * Dynamic database module to use.
+   */
+  prismaClient?: PrismaClient;
+}

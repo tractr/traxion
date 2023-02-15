@@ -116,7 +116,7 @@
         },
         {
           "name": "name",
-          "properties": ["unique", "label", "searchable"],
+          "properties": ["unique", "label", "searchable", "sortable"],
           "type": "string"
         },
         {

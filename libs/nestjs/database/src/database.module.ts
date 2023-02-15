@@ -1,23 +1,28 @@
-import { Global, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
-import { PRISMA_OPTIONS } from './config';
-import { PRISMA_MODULE_OPTIONS } from './constants';
+import { DATABASE_SERVICE } from './constants';
+import { ConfigurableModuleClass } from './database.module-definition';
 import {
-  DatabaseService,
+  ManagePrismaClientService,
   MysqlService,
   PostgresqlService,
-  PrismaClientOptions,
 } from './services';
 
-import { LoggerModule, ModuleOptionsFactory } from '@trxn/nestjs-core';
+import { LoggerModule } from '@trxn/nestjs-core';
 
-@Global()
 @Module({
   imports: [LoggerModule],
-  providers: [DatabaseService, MysqlService, PostgresqlService],
-  exports: [DatabaseService, MysqlService, PostgresqlService],
+  providers: [
+    ManagePrismaClientService,
+    {
+      provide: DATABASE_SERVICE,
+      useFactory: (managePrismaClientService: ManagePrismaClientService) =>
+        managePrismaClientService.prismaClient,
+      inject: [ManagePrismaClientService],
+    },
+    MysqlService,
+    PostgresqlService,
+  ],
+  exports: [DATABASE_SERVICE, MysqlService, PostgresqlService],
 })
-export class DatabaseModule extends ModuleOptionsFactory<PrismaClientOptions>(
-  PRISMA_MODULE_OPTIONS,
-  PRISMA_OPTIONS,
-) {}
+export class DatabaseModule extends ConfigurableModuleClass {}

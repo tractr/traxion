@@ -11,7 +11,8 @@ import {
 <<if Fields password>>
 import { BcryptModule, BcryptService, EncryptionService } from '@trxn/nestjs-bcrypt';
 <<endif>>
-import { DatabaseService } from '@trxn/nestjs-database';
+import { DATABASE_SERVICE } from '@trxn/nestjs-database';
+import { PrismaClient } from '@prisma/client';
 
 export interface <<Model pascal>>MiddlewareOptionsModule {
   <<if Fields password>>
@@ -35,7 +36,8 @@ export class <<Model pascal>>MiddlewareModule
   implements OnModuleInit {
 
   constructor(
-    private readonly databaseService: DatabaseService,
+    @Inject(DATABASE_SERVICE)
+    private readonly databaseService: PrismaClient,
   <<if Fields password>>
     @Inject(<<Model constant>>_MIDDLEWARE_MODULE_OPTIONS_TOKEN)
     private readonly moduleOptions: <<Model pascal>>MiddlewareOptionsModule,

@@ -39,7 +39,7 @@ import {
   <<Model pascal>>UpsertBodyDto,
   <<Model pascal>>UpsertParamsDto,
 } from '../../../../rest-dtos';
-import { <<Model constant>>_REST_DTO_SERVICE } from '../<<Model kebab>>-rest.constant';
+import { <<Model constant>>_REST_DTO_SERVICE } from '../<<Model kebab>>-rest.constants';
 import { <<Model pascal>>RestDtoService } from '../services';
 	
 <<if Fields ownership >>

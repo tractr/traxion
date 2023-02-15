@@ -1,0 +1,9 @@
+import { Type } from '@nestjs/common';
+
+import {
+  <<Model pascal>>Controller,
+} from './controllers';
+
+export const <<Model constant>>_REST_CONTROLLERS: Type<any>[] = [
+  <<Model pascal>>Controller,
+];
