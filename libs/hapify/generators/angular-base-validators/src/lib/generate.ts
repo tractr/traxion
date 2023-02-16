@@ -1,20 +1,17 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import * as path from 'path';
 
 import { Project } from 'ts-morph';
 
 import { generateDirectiveSourceFile } from './directives/directive.generator';
+import { generateModuleSourceFile } from './module.generator';
 import { generateServiceSourceFile } from './services/services.generator';
 import {
   generateDirectoryIndexExporter,
   generateFileIndexExporter,
 } from './utils/index.generator';
-import {
-  generateValidatorClass,
-  generateValidatorSourceFile,
-} from './validators/validator.generator';
+import { generateValidatorSourceFile } from './validators/validator.generator';
 
-import { Field, Model, Project as Models } from '@trxn/hapify-core';
+import { Project as Models } from '@trxn/hapify-core';
 
 export type NestjsServiceGeneratorConfig = {
   outputDirectory: string;
@@ -45,6 +42,7 @@ export function generate(
   // Generate controllers and dtos
   dataModel.models.forEach((model) => {
     model.fields.forEach((field) => {
+      console.log("🚀 ~ file: generate.ts:64 ~ model.fields.forEach ~ field", field)
       generateValidatorSourceFile(
         project,
         model,
@@ -79,6 +77,8 @@ export function generate(
     `${absoluteGeneratedDirectory}/validators`,
   );
 
-  // Save project to file system
+    generateModuleSourceFile(project, absoluteGeneratedDirectory);
+    
+    // Save project to file system
   project.saveSync();
 }
