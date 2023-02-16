@@ -74,5 +74,6 @@ export default {
     '<rootDir>/apps/pwa',
     '<rootDir>/libs/nestjs/password',
     '<rootDir>/libs/hapify/core',
+    '<rootDir>/libs/hapify/generators/angular-base-validators',
   ],
 };

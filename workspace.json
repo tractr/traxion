@@ -30,6 +30,7 @@
     "hapify-config": "libs/config/hapify",
     "hapify-core": "libs/hapify/core",
     "hapify-generate-config": "libs/hapify/generate-config",
+    "hapify-generators-angular-base-validators": "libs/hapify/generators/angular-base-validators",
     "hapify-templates-angular-rext-client": "libs/hapify/templates/angular-rext-client",
     "hapify-templates-casl": "libs/hapify/templates/casl",
     "hapify-templates-dbml": "libs/hapify/templates/dbml",
