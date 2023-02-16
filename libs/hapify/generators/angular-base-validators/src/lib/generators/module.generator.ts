@@ -2,6 +2,11 @@ import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
 
 import { generateImport } from '../utils/import.generator';
 
+/**
+ *  generate a validator class for the module
+ * 
+ * @returns ClassDeclarationStructure
+ */
 export function generateValidatorClass(): ClassDeclarationStructure {
   return {
     kind: StructureKind.Class,
@@ -21,17 +26,16 @@ export function generateValidatorClass(): ClassDeclarationStructure {
     ],
   };
 }
-
+/** 
+ * generate a module source file
+*/
 export function generateModuleSourceFile(project: Project, path: string) {
   const filePath = `${path}/angular-models-validators.module.ts`;
 
   const sourceFile = project.createSourceFile(filePath);
 
+  // generate imports
   const imports = [
-    //     import { NgModule } from '@angular/core';
-    // import { CommonModule } from '@angular/common';
-    // import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-    // import { AngularModelsServicesModule } from '@poc/angular-models-services';
     generateImport('@angular/core', ['NgModule']),
     generateImport('@angular/commons', ['CommonModule']),
     generateImport('@angular/forms', ['ReactiveFormsModule', 'FormsModule']),
