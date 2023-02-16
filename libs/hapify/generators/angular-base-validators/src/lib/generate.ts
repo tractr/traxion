@@ -3,12 +3,18 @@ import * as path from 'path';
 
 import { Project } from 'ts-morph';
 
-
-
-import { Field, Model, Project as Models } from '@trxn/hapify-core';
-import { generateValidatorClass, generateValidatorSourceFile } from './validators/validator.generator';
 import { generateDirectiveSourceFile } from './directives/directive.generator';
 import { generateServiceSourceFile } from './services/services.generator';
+import {
+  generateDirectoryIndexExporter,
+  generateFileIndexExporter,
+} from './utils/index.generator';
+import {
+  generateValidatorClass,
+  generateValidatorSourceFile,
+} from './validators/validator.generator';
+
+import { Field, Model, Project as Models } from '@trxn/hapify-core';
 
 export type NestjsServiceGeneratorConfig = {
   outputDirectory: string;
@@ -36,19 +42,43 @@ export function generate(
   // Clear generation directory
   project.getDirectory(absoluteGeneratedDirectory)?.clear();
 
-  const entityPath = `${absoluteGeneratedDirectory}/validators`;
   // Generate controllers and dtos
   dataModel.models.forEach((model) => {
-    model.fields.forEach(field => {
-      generateValidatorSourceFile(project, model,field,absoluteGeneratedDirectory)
-      generateDirectiveSourceFile(project, model,field,absoluteGeneratedDirectory)
-      generateServiceSourceFile(project, model,field,absoluteGeneratedDirectory)
-
+    model.fields.forEach((field) => {
+      generateValidatorSourceFile(
+        project,
+        model,
+        field,
+        absoluteGeneratedDirectory,
+      );
+      generateDirectiveSourceFile(
+        project,
+        model,
+        field,
+        absoluteGeneratedDirectory,
+      );
+      generateServiceSourceFile(
+        project,
+        model,
+        field,
+        absoluteGeneratedDirectory,
+      );
     });
   });
 
-  
-  // generateServiceIndexFile(project,models.map(model =. model.name),entityPath)
+  generateDirectoryIndexExporter(project, absoluteGeneratedDirectory);
+
+  // for each directory, generate index.ts for export
+  generateFileIndexExporter(
+    project,
+    `${absoluteGeneratedDirectory}/directives`,
+  );
+  generateFileIndexExporter(project, `${absoluteGeneratedDirectory}/services`);
+  generateFileIndexExporter(
+    project,
+    `${absoluteGeneratedDirectory}/validators`,
+  );
+
   // Save project to file system
   project.saveSync();
 }
