@@ -5,7 +5,10 @@ import { Project } from 'ts-morph';
 
 
 
-import { Project as Models } from '@trxn/hapify-core';
+import { Field, Model, Project as Models } from '@trxn/hapify-core';
+import { generateValidatorClass, generateValidatorSourceFile } from './validators/validator.generator';
+import { generateDirectiveSourceFile } from './directives/directive.generator';
+import { generateServiceSourceFile } from './services/services.generator';
 
 export type NestjsServiceGeneratorConfig = {
   outputDirectory: string;
@@ -16,7 +19,7 @@ export type NestjsServiceGeneratorConfig = {
 export function generate(
   project: Project,
   dataModel: Models,
-  config: NestjsServiceGeneratorConfig,
+  config: NestjsServiceGeneratorConfig, // TODO: add project scope
 ) {
   const { generatedDirectory, tsConfigFilePath, outputDirectory } = config;
   const absoluteTsConfigFilePath = path.resolve(
@@ -33,11 +36,14 @@ export function generate(
   // Clear generation directory
   project.getDirectory(absoluteGeneratedDirectory)?.clear();
 
-  const entityPath = `${absoluteGeneratedDirectory}/services`;
+  const entityPath = `${absoluteGeneratedDirectory}/validators`;
   // Generate controllers and dtos
   dataModel.models.forEach((model) => {
     model.fields.forEach(field => {
-      console.log(field)
+      generateValidatorSourceFile(project, model,field,absoluteGeneratedDirectory)
+      generateDirectiveSourceFile(project, model,field,absoluteGeneratedDirectory)
+      generateServiceSourceFile(project, model,field,absoluteGeneratedDirectory)
+
     });
   });
 

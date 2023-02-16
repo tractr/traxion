@@ -7,5 +7,5 @@
   },
   "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],
   "extends": "./tsconfig.json",
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "src/lib/utils"]
 }
