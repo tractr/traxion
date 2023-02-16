@@ -2,7 +2,7 @@ import { resolve } from 'path';
 
 import { Project } from 'ts-morph';
 
-import { generate, NestjsServiceGeneratorConfig } from './lib/generate';
+import { AngularServiceGeneratorConfig, generate } from './lib/generate';
 
 import {
   BooleanField,
@@ -16,7 +16,7 @@ import {
   StringPasswordField,
   StringTextField,
 } from '@trxn/hapify-core';
-// } from '@trxn/hapify-generators-nestjs-services';
+
 
 /**
  * Role model
@@ -56,10 +56,11 @@ const userModel = new Model('User')
 const dataModel = new Models('app').addModel(userModel).addModel(roleModel);
 
 const currentDir = resolve(__dirname, '..');
-const config: NestjsServiceGeneratorConfig = {
+const config: AngularServiceGeneratorConfig = {
   outputDirectory: currentDir,
   tsConfigFilePath: 'tsconfig.lib.json',
   generatedDirectory: 'src/ts-morph-generated',
+  projectScope: 'poc',
 };
 
 // Instantiate the ts project

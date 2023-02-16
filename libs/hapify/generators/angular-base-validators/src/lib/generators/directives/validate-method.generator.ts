@@ -1,17 +1,12 @@
-// validate(control: AbstractControl): ValidationErrors | null {
-//   return validateUserEmail(control);
-// }
-
 import {
   MethodDeclarationStructure,
   ParameterDeclarationStructure,
   StructureKind,
-  TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
 import { camel, Field, Model, pascal } from '@trxn/hapify-core';
 
-export const generateValidateMethod = (
+export const generateDirectiveValidateMethod = (
   model: Model,
   field: Field,
 ): MethodDeclarationStructure => {
@@ -23,13 +18,13 @@ export const generateValidateMethod = (
     },
   ];
 
-
   return {
     kind: StructureKind.Method,
     name: 'validate',
     returnType: 'ValidationErrors | null',
     parameters,
-    statements: `validate${pascal(model.name)}${pascal(field.name)}(control);`,
-
+    statements: `return this.${camel(model.name)}${pascal(
+      field.name,
+    )}Validator.validate(control);`,
   };
 };

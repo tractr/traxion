@@ -1,19 +1,27 @@
-import { Injectable } from "@angular/core";
-import { AbstractControl, ValidationErrors, Validator, ValidatorFn } from "@angular/forms";
-import { UserEmailValidator } from "../validators";
+import { Directive } from "@angular/core";
+import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from "@angular/forms";
+import { UserDescriptionValidator } from "../validators";
 
 @Directive({
-              selector: '[pocValidateuserDescription]',
-              providers: [
-                {
-                  provide: NG_VALIDATORS,
-                  useExisting: ValidateUserDescriptionDirective,
-                  multi: true,
-                },
-              ],
-            })
+      standalone: true,
+      selector: '[pocValidateUserDescription]',
+      providers: [
+        {
+          provide: UserDescriptionValidator,
+          useClass: UserDescriptionValidator,
+        },
+        {
+          provide: NG_VALIDATORS,
+          useExisting: ValidateUserDescriptionDirective,
+          multi: true,
+        },
+      ],
+    })
 export class ValidateUserDescriptionDirective implements Validator {
+    constructor(private userDescriptionValidator: UserDescriptionValidator) {
+    }
+
     validate(control: AbstractControl): ValidationErrors | null {
-        validateUserDescription(control);
+        return this.userDescriptionValidator.validate(control);
     }
 }

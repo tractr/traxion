@@ -1,15 +1,10 @@
-// validate(control: AbstractControl): ValidationErrors | null {
-//   return validateUserEmail(control);
-// }
-
 import {
   MethodDeclarationStructure,
   ParameterDeclarationStructure,
   StructureKind,
-  TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { camel, Field, Model, pascal } from '@trxn/hapify-core';
+import { Field, Model, pascal } from '@trxn/hapify-core';
 
 export const generateValidateMethod = (
   model: Model,

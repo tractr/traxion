@@ -1,19 +1,27 @@
-import { Injectable } from "@angular/core";
-import { AbstractControl, ValidationErrors, Validator, ValidatorFn } from "@angular/forms";
-import { UserEmailValidator } from "../validators";
+import { Directive } from "@angular/core";
+import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from "@angular/forms";
+import { RoleIdValidator } from "../validators";
 
 @Directive({
-              selector: '[pocValidateroleId]',
-              providers: [
-                {
-                  provide: NG_VALIDATORS,
-                  useExisting: ValidateRoleIdDirective,
-                  multi: true,
-                },
-              ],
-            })
+      standalone: true,
+      selector: '[pocValidateRoleId]',
+      providers: [
+        {
+          provide: RoleIdValidator,
+          useClass: RoleIdValidator,
+        },
+        {
+          provide: NG_VALIDATORS,
+          useExisting: ValidateRoleIdDirective,
+          multi: true,
+        },
+      ],
+    })
 export class ValidateRoleIdDirective implements Validator {
+    constructor(private roleIdValidator: RoleIdValidator) {
+    }
+
     validate(control: AbstractControl): ValidationErrors | null {
-        validateRoleId(control);
+        return this.roleIdValidator.validate(control);
     }
 }

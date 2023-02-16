@@ -1,6 +1,6 @@
 import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
 
-import { generateImport } from '../utils/import.generator';
+import { generateImport } from '../../utils/import.generator';
 import { generateValidateMethod } from '../validators/validate-method.generator';
 
 import { Field, kebab, Model, pascal } from '@trxn/hapify-core';
@@ -35,7 +35,9 @@ export function generateServiceSourceFile(
   field: Field,
   path: string,
 ) {
-  const fileName = `${kebab(model.name)}-${kebab(field.name)}.service`;
+  const fileName = `${kebab(model.name)}-${kebab(
+    field.name,
+  )}-validator.service`;
   const filePath = `${path}/services/${fileName}.ts`;
 
   const sourceFile = project.createSourceFile(filePath);

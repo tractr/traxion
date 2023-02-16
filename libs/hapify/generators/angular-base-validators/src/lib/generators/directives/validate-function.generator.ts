@@ -6,7 +6,7 @@ import {
 
 import { camel, Field, Model, pascal } from '@trxn/hapify-core';
 
-export const generateValidateFunction = (
+export const generateDirectiveValidateFunction = (
   model: Model,
   field: Field
 ): OptionalKind<FunctionDeclarationStructure> => ({

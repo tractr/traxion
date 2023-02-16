@@ -2,29 +2,32 @@ import * as path from 'path';
 
 import { Project } from 'ts-morph';
 
-import { generateDirectiveSourceFile } from './directives/directive.generator';
-import { generateModuleSourceFile } from './module.generator';
-import { generateServiceSourceFile } from './services/services.generator';
+import { generateDirectiveSourceFile, generateModuleSourceFile, generateServiceSourceFile, generateValidatorSourceFile } from './generators';
 import {
   generateDirectoryIndexExporter,
   generateFileIndexExporter,
 } from './utils/index.generator';
-import { generateValidatorSourceFile } from './validators/validator.generator';
 
 import { Project as Models } from '@trxn/hapify-core';
 
-export type NestjsServiceGeneratorConfig = {
+export type AngularServiceGeneratorConfig = {
   outputDirectory: string;
   tsConfigFilePath: string;
   generatedDirectory: string;
+  projectScope: string;
 };
 
 export function generate(
   project: Project,
   dataModel: Models,
-  config: NestjsServiceGeneratorConfig, // TODO: add project scope
+  config: AngularServiceGeneratorConfig,
 ) {
-  const { generatedDirectory, tsConfigFilePath, outputDirectory } = config;
+  const {
+    generatedDirectory,
+    tsConfigFilePath,
+    outputDirectory,
+    projectScope,
+  } = config;
   const absoluteTsConfigFilePath = path.resolve(
     outputDirectory,
     tsConfigFilePath,
@@ -39,10 +42,9 @@ export function generate(
   // Clear generation directory
   project.getDirectory(absoluteGeneratedDirectory)?.clear();
 
-  // Generate controllers and dtos
+  // Generate source files for each field of every model: directive, validator, service
   dataModel.models.forEach((model) => {
     model.fields.forEach((field) => {
-      console.log("🚀 ~ file: generate.ts:64 ~ model.fields.forEach ~ field", field)
       generateValidatorSourceFile(
         project,
         model,
@@ -54,6 +56,7 @@ export function generate(
         model,
         field,
         absoluteGeneratedDirectory,
+        projectScope,
       );
       generateServiceSourceFile(
         project,
@@ -64,7 +67,12 @@ export function generate(
     });
   });
 
+  // Generate module
+  generateModuleSourceFile(project, absoluteGeneratedDirectory);
+
+  // Generate index.ts for export
   generateDirectoryIndexExporter(project, absoluteGeneratedDirectory);
+  generateFileIndexExporter(project, absoluteGeneratedDirectory);
 
   // for each directory, generate index.ts for export
   generateFileIndexExporter(
@@ -77,8 +85,6 @@ export function generate(
     `${absoluteGeneratedDirectory}/validators`,
   );
 
-    generateModuleSourceFile(project, absoluteGeneratedDirectory);
-    
-    // Save project to file system
+  // Save project to file system
   project.saveSync();
 }

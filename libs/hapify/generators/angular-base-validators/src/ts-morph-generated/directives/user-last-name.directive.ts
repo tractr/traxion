@@ -1,19 +1,27 @@
-import { Injectable } from "@angular/core";
-import { AbstractControl, ValidationErrors, Validator, ValidatorFn } from "@angular/forms";
-import { UserEmailValidator } from "../validators";
+import { Directive } from "@angular/core";
+import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from "@angular/forms";
+import { UserLastNameValidator } from "../validators";
 
 @Directive({
-              selector: '[pocValidateuserLastName]',
-              providers: [
-                {
-                  provide: NG_VALIDATORS,
-                  useExisting: ValidateUserLastNameDirective,
-                  multi: true,
-                },
-              ],
-            })
+      standalone: true,
+      selector: '[pocValidateUserLastName]',
+      providers: [
+        {
+          provide: UserLastNameValidator,
+          useClass: UserLastNameValidator,
+        },
+        {
+          provide: NG_VALIDATORS,
+          useExisting: ValidateUserLastNameDirective,
+          multi: true,
+        },
+      ],
+    })
 export class ValidateUserLastNameDirective implements Validator {
+    constructor(private userLastNameValidator: UserLastNameValidator) {
+    }
+
     validate(control: AbstractControl): ValidationErrors | null {
-        validateUserLastName(control);
+        return this.userLastNameValidator.validate(control);
     }
 }
