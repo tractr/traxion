@@ -75,6 +75,9 @@
       "@trxn/hapify-generate-config": [
         "libs/hapify/generate-config/src/index.ts"
       ],
+      "@trxn/hapify-generators-angular-models-components": [
+        "libs/hapify/generators/angular-models-components/src/index.ts"
+      ],
       "@trxn/hapify-update-templates-import-path": [
         "libs/hapify/update-templates-import-path/src/index.ts"
       ],
