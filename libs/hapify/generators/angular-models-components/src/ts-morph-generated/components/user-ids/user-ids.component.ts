@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit, Optional, Self } from "@angular/core";
 import { AbstractControl, FormControl, FormsModule, NgControl, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
-import { UserEnabledValidator } from "@poc/angular-models-validators";
+import { UserIdValidator } from "@poc/angular-models-validators";
 import { BaseControlValueAccessorComponent } from "@trxn/angular-tools";
-import { UserEnabledUiComponent } from "@trxn/angular-ui";
-import { UserEnabledValidatorModule } from "@poc/angular-models-validators";
+import { UserIdUiComponent } from "@trxn/angular-ui";
+import { UserIdValidatorModule } from "@poc/angular-models-validators";
 import { CommonModule } from "@angular/common";
 
 @Component({
@@ -15,20 +15,19 @@ import { CommonModule } from "@angular/common";
           ReactiveFormsModule,
           FormsModule,
         ],
-        selector: 'poc-user-enableds',
-        templateUrl: './user-enableds.component.html',
-        styleUrls: ['./user-enableds.component.less'],
+        selector: 'poc-user-ids',
+        templateUrl: './user-ids.component.html',
         changeDetection: ChangeDetectionStrategy.OnPush,
         providers: [],
         })
-export class UserEnabledComponent extends BaseControlValueAccessorComponent implements OnInit {
+export class UserIdComponent extends BaseControlValueAccessorComponent implements OnInit {
     control: FormControl = new FormControl('');
 
-    constructor(public userEnabledValidator: UserEnabledValidator, @Self() @Optional() public override ngControl?: NgControl) {
+    constructor(public userIdValidator: UserIdValidator, @Self() @Optional() public override ngControl?: NgControl) {
         super(ngControl);
     }
 
     override get validator(): (control: AbstractControl) => ValidationErrors | null {
-        return this.userEnabledValidator.validate;
+        return this.userIdValidator.validate;
     }
 }

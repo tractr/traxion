@@ -10,6 +10,8 @@ import {
 import { Project as Models } from '@trxn/hapify-core';
 import { generateModuleSourceFile } from './generators/module.generators';
 import { generateComponentClass, generateComponentSourceFile } from './generators/components/component.generator';
+import { generateTemplateSourceFile } from './generators/templates/template.generator';
+import { generateStorySourceFile } from './generators/stories/story.generator';
 
 export type AngularServiceGeneratorConfig = {
   outputDirectory: string;
@@ -46,10 +48,11 @@ export function generate(
   // Generate source files for each field of every model: directive, validator, service
   dataModel.models.forEach((model) => {
     model.fields.forEach((field) => {
-      // TODO: Generate component.ts
+      // Generate component.ts
       generateComponentSourceFile(project, model, field, `${absoluteGeneratedDirectory}/components`,projectScope)
-      // TODO: Generate component.html
-      // TODO: Generate component.stories.ts
+      // Generate component.html
+      generateTemplateSourceFile(project, model, field, `${absoluteGeneratedDirectory}/components`, projectScope)
+      generateStorySourceFile(project, model, field, `${absoluteGeneratedDirectory}/components`, projectScope)
     });
   });
 

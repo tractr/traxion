@@ -57,7 +57,7 @@ export function generateComponentClass(
   };
 }
 
-export function generateComponentSourceFile(
+export function generateStorySourceFile(
   project: Project,
   model: Model,
   field: Field,
@@ -66,7 +66,7 @@ export function generateComponentSourceFile(
 ) {
   const fileName = `${kebab(model.name)}-${kebab(
     plural(field.name),
-  )}.component.ts`;
+  )}.stories.ts`;
   const filePath = `${path}/${kebab(model.name)}-${kebab(
     plural(field.name))}/${fileName}`;
 

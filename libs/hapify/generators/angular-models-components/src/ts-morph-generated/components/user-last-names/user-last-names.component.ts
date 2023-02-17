@@ -17,7 +17,6 @@ import { CommonModule } from "@angular/common";
         ],
         selector: 'poc-user-last-names',
         templateUrl: './user-last-names.component.html',
-        styleUrls: ['./user-last-names.component.less'],
         changeDetection: ChangeDetectionStrategy.OnPush,
         providers: [],
         })

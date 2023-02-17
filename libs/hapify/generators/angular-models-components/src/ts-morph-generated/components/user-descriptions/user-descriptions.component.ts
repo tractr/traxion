@@ -17,7 +17,6 @@ import { CommonModule } from "@angular/common";
         ],
         selector: 'poc-user-descriptions',
         templateUrl: './user-descriptions.component.html',
-        styleUrls: ['./user-descriptions.component.less'],
         changeDetection: ChangeDetectionStrategy.OnPush,
         providers: [],
         })

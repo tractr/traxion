@@ -17,7 +17,6 @@ import { CommonModule } from "@angular/common";
         ],
         selector: 'poc-user-roles',
         templateUrl: './user-roles.component.html',
-        styleUrls: ['./user-roles.component.less'],
         changeDetection: ChangeDetectionStrategy.OnPush,
         providers: [],
         })
