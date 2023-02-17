@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular';
 import { ButtonSubmitUiComponent } from './button-submit-ui.component';
 
 export default {
-  title: 'Design System/Submit Button',
+  title: 'Design System/Button/Submit',
   component: ButtonSubmitUiComponent,
 } as Meta<ButtonSubmitUiComponent>;
 
