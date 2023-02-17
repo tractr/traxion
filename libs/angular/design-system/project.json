@@ -6,6 +6,21 @@
   "sourceRoot": "libs/angular/design-system/src",
   "tags": [],
   "targets": {
+    "build-storybook": {
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      },
+      "executor": "@storybook/angular:build-storybook",
+      "options": {
+        "browserTarget": "angular-design-system:build-storybook",
+        "compodoc": false,
+        "configDir": "libs/angular/design-system/.storybook",
+        "outputDir": "dist/storybook/angular-design-system"
+      },
+      "outputs": ["{options.outputDir}"]
+    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
@@ -15,6 +30,20 @@
         ]
       },
       "outputs": ["{options.outputFile}"]
+    },
+    "storybook": {
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      },
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "browserTarget": "angular-design-system:build-storybook",
+        "compodoc": false,
+        "configDir": "libs/angular/design-system/.storybook",
+        "port": 4400
+      }
     },
     "test": {
       "configurations": {

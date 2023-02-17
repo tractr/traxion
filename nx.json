@@ -51,7 +51,9 @@
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/jest.config.[jt]s",
-      "!{projectRoot}/.eslintrc.json"
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/.storybook/**/*",
+      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
     ],
     "sharedGlobals": [
       "{workspaceRoot}/hapify-models.json",
@@ -71,6 +73,9 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
+    },
+    "build-storybook": {
+      "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
     },
     "coverage": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
@@ -92,7 +97,13 @@
     "default": {
       "options": {
         "accessToken": "ZDY0OTk5NzAtZTQzMy00ZDU5LWI4ZjYtZDI0NDgwNmFiNmE0fHJlYWQ=",
-        "cacheableOperations": ["build", "test", "lint", "e2e"],
+        "cacheableOperations": [
+          "build",
+          "test",
+          "lint",
+          "e2e",
+          "build-storybook"
+        ],
         "parallel": 1
       },
       "runner": "@nrwl/nx-cloud"
