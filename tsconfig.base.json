@@ -22,6 +22,9 @@
       "@trxn/angular-casl": ["libs/angular/casl/src/index.ts"],
       "@trxn/angular-components": ["libs/angular/components/src/index.ts"],
       "@trxn/angular-config": ["libs/angular/config/src/index.ts"],
+      "@trxn/angular-design-system": [
+        "libs/angular/design-system/src/index.ts"
+      ],
       "@trxn/angular-file-storage": ["libs/angular/file-storage/src/index.ts"],
       "@trxn/angular-form": ["libs/angular/form/src/index.ts"],
       "@trxn/angular-tools": ["libs/angular/tools/src/index.ts"],

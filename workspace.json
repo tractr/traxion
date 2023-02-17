@@ -6,6 +6,7 @@
     "angular-casl": "libs/angular/casl",
     "angular-components": "libs/angular/components",
     "angular-config": "libs/angular/config",
+    "angular-design-system": "libs/angular/design-system",
     "angular-file-storage": "libs/angular/file-storage",
     "angular-form": "libs/angular/form",
     "angular-tools": "libs/angular/tools",
