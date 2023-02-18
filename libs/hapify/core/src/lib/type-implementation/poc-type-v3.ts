@@ -16,12 +16,10 @@ export type BaseFieldProperties = {
 /**
  * Constraints
  */
-export type Constraint<Key extends string, Type> = {
-  constraints: { [key in Key]: Type };
-};
+export type Constraint<Key extends string, Type> = { [key in Key]: Type };
 
 export type OptionalConstraint<Key extends string, Type> = {
-  constraints?: { [key in Key]?: Type };
+  [key in Key]?: Type;
 };
 
 export type ConstraintsProperty<Key extends string, Type> =
@@ -35,7 +33,7 @@ export type EmptyConstraints = {
 /**
  * Field constraints
  */
-export type LabelConstraint = Constraint<'label', boolean>;
+export type LabelConstraint = OptionalConstraint<'label', boolean>;
 export type UniqueConstraint = OptionalConstraint<'unique', boolean>;
 export type NotNullConstraint = OptionalConstraint<'notNull', boolean>;
 export type MultipleConstraint = OptionalConstraint<'multiple', boolean>;
@@ -72,67 +70,81 @@ export type Constraints =
 /**
  * Field types
  */
-export type BaseFieldType<T extends string> = BaseFieldProperties &
-  BaseConstraint & {
-    type: T;
-  };
+export type FieldConstraints<C extends ConstraintsProperty<string, any>> = {
+  0: { constraints: C };
+  1: { constraints?: C };
+}[Partial<C> extends C ? 1 : 0];
+
+export type BaseFieldType<T extends string> = BaseFieldProperties & {
+  type: T;
+};
 
 export type StringField = BaseFieldType<'string'> &
-  SearchableConstraint &
-  SortableConstraint &
-  MinLengthConstraint &
-  MaxLengthConstraint;
+  FieldConstraints<
+    | BaseConstraint
+    | SearchableConstraint
+    | SortableConstraint
+    | MinLengthConstraint
+    | MaxLengthConstraint
+  >;
 
 export type NumberField = BaseFieldType<'number'> &
-  SearchableConstraint &
-  SortableConstraint &
-  IntegerConstraint &
-  MinConstraint &
-  MaxConstraint;
+  FieldConstraints<
+    | BaseConstraint
+    | SearchableConstraint
+    | SortableConstraint
+    | IntegerConstraint
+    | MinConstraint
+    | MaxConstraint
+  >;
 
 export type BooleanField = BaseFieldType<'boolean'> &
-  SearchableConstraint &
-  SortableConstraint;
+  FieldConstraints<BaseConstraint | SearchableConstraint | SortableConstraint>;
 
 export type Field = StringField | NumberField | BooleanField;
 
-/**
- * Check if Field has constraints
- */
-export type HasConstraint<
-  F extends Field & EmptyConstraints,
-  C extends Constraint<string, any>,
-> = C extends ConstraintsProperty<infer K, infer T>
-  ? F extends ConstraintsProperty<K, T>
-    ? 1
-    : 0
-  : 0 | 1;
+// /**
+//  * Check if Field has constraints
+//  */
+// export type HasConstraint<
+//   F extends Field & EmptyConstraints,
+//   C extends Constraint<string, any>,
+// > = C extends ConstraintsProperty<infer K, infer T>
+//   ? F extends { constraints?: ConstraintsProperty<K, T> }
+//     ? 1
+//     : 0
+//   : 0 | 1;
 
-export type HasOptionalConstraint<
-  F extends Field & EmptyConstraints,
-  C extends OptionalConstraint<string, any>,
-> = C extends OptionalConstraint<infer K, infer T>
-  ? DeepRequired<F> extends Field & Constraint<K, T>
-    ? 1
-    : 0
-  : 0 | 1;
+// export type HasOptionalConstraint<
+//   F extends Field & EmptyConstraints,
+//   C extends OptionalConstraint<string, any>,
+// > = C extends OptionalConstraint<infer K, infer T>
+//   ? DeepRequired<F> extends Field & { constraints: Constraint<K, T> }
+//     ? 1
+//     : 0
+//   : 0 | 1;
 
-export type HasConstraints<
-  F extends Field & EmptyConstraints,
-  C extends Constraints,
-> = Boolean.Or<
-  C extends Constraint<string, any> ? HasConstraint<F, C> : 0,
-  HasOptionalConstraint<F, C>
->;
+// export type HasConstraints<
+//   F extends Field & EmptyConstraints,
+//   C extends Constraints,
+// > = Boolean.Or<
+//   C extends Constraint<string, any> ? HasConstraint<F, C> : 0,
+//   HasOptionalConstraint<F, C>
+// >;
 
 /**
  * Extract types by constraint
  */
 export type ExtractConstraint<
-  F extends Field,
-  C extends Constraints,
-> = F extends C ? F : never;
-
+  F extends FieldConstraints<ConstraintsProperty<string, any>>,
+  C extends ConstraintsProperty<string, any>,
+> = F extends {
+  constraints?: ConstraintsProperty<infer K, infer T>;
+}
+  ? C extends ConstraintsProperty<K, T>
+    ? F
+    : never
+  : never;
 /**
  * Extract generic types by constraint
  */

@@ -10,6 +10,7 @@ import {
   hasMinLength,
   isString,
   NotNullConstraint,
+  NumberField,
   Searchable,
   SearchableConstraint,
   SortableConstraint,
@@ -54,26 +55,35 @@ export const email = stringFieldFactory('email', {
 
 const password: StringField = stringFieldFactory('password');
 
-const test: Field = {
-  type: 'boolean',
+const testNumber: NumberField = {
+  type: 'number',
   name: 'name',
-  constraints: {},
+  constraints: {
+    max: 2,
+    integer: true,
+  },
 };
 
-const fields = [email, password, test];
+const testBoolean: Field = {
+  type: 'boolean',
+  name: 'name',
+  constraints: {
+    defaultValue: true,
+  },
+};
+
+const fields = [email, password, testBoolean, testNumber];
 
 if (isString(email)) {
   console.info(email.name);
 }
 
-fields.filter(isString).forEach((field) => {
-  console.info(field.name);
-});
+const stringFields = fields.filter(isString);
 
-if (hasConstraintsKey(test)) {
+if (hasConstraintsKey(testBoolean)) {
   console.info(test.constraints.searchable);
 }
 
-if (hasMinLength(stringField)) {
-  console.info(stringField.constraints.minLength);
+if (hasMinLength(testBoolean)) {
+  console.info(test.constraints.minLength);
 }
