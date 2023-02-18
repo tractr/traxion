@@ -109,7 +109,7 @@ export const numberField = numberFieldFactory({
 const ageField = numberField('age', {});
 
 /**
- * TEST DES TYPES
+ * TEST DES TYPES
  */
 const f: StringField = {
   type: 'string',
