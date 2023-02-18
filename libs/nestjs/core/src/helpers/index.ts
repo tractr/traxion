@@ -2,7 +2,7 @@ export * from './context.helper';
 export * from './format-entity-ids';
 export * from './format-filter-type';
 export * from './format-sort';
-export * from './imports-providers-set-extras.helper';
+export * from './set-extras.helper';
 export * from './is-development.helper';
 export * from './is-production.helper';
 export * from './module-options.helper';

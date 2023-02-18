@@ -24,15 +24,9 @@
       "outputs": ["{options.outputFile}"]
     },
     "publish": {
-      "dependsOn": [
-        {
-          "projects": "self",
-          "target": "build"
-        }
-      ],
-      "executor": "nx:run-commands",
+      "executor": "ngx-deploy-npm:deploy",
       "options": {
-        "command": "node tools/scripts/publish.mjs nestjs-mailjet {args.ver} {args.tag}"
+        "access": "public"
       }
     },
     "test": {
@@ -42,6 +36,12 @@
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/nestjs/mailjet"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/nestjs/mailjet/package.json"
+      }
     }
   }
 }

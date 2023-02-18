@@ -1,13 +1,10 @@
 import { Module } from '@nestjs/common';
 
 import { ConfigurableModuleClass } from './mailjet.module-definition';
-import { MailjetService } from './services';
-
-import { MAILER_CLIENT_TOKEN } from '@trxn/nestjs-mailer';
+import { MailjetClient, MailjetService } from './services';
 
 @Module({
-  imports: [],
-  providers: [{ provide: MAILER_CLIENT_TOKEN, useClass: MailjetService }],
-  exports: [MAILER_CLIENT_TOKEN],
+  providers: [MailjetClient, MailjetService],
+  exports: [MailjetClient, MailjetService],
 })
 export class MailjetModule extends ConfigurableModuleClass {}

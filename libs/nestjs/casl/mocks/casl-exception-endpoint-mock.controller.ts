@@ -1,10 +1,10 @@
 /* istanbul ignore file */
-import { Ability, ForbiddenError } from '@casl/ability';
+import { AbilityBuilder, ForbiddenError, PureAbility } from '@casl/ability';
+import { createPrismaAbility, PrismaQuery, Subjects } from '@casl/prisma';
 import { Controller, Get } from '@nestjs/common';
+import { User } from '@prisma/client';
 
 import { Public } from '@trxn/nestjs-core';
-
-type Abilities = ['read', 'User'];
 
 @Controller()
 export class CaslExceptionEndpointMockController {
@@ -15,7 +15,17 @@ export class CaslExceptionEndpointMockController {
   @Public()
   @Get('/casl-forbidden-error')
   caslForbiddenError() {
-    const ability = new Ability<Abilities>();
+    type AppAbility = PureAbility<
+      [
+        string,
+        Subjects<{
+          User: User;
+        }>,
+      ],
+      PrismaQuery
+    >;
+    const builder = new AbilityBuilder<AppAbility>(createPrismaAbility);
+    const ability = builder.build();
     ForbiddenError.from(ability).throwUnlessCan('read', 'User');
   }
 

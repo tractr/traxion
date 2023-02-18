@@ -3,13 +3,13 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 
-import { PrismaExceptionEndpointMockController } from '../../mocks/prisma-exception-endpoint-mock.controller';
 import { PrismaExceptionInterceptor } from './prisma-exception.interceptor';
+import { PrismaExceptionEndpointMockController } from '../../mocks/prisma-exception-endpoint-mock.controller';
 
 describe('Prisma exception error', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       controllers: [PrismaExceptionEndpointMockController],
       providers: [
@@ -25,7 +25,7 @@ describe('Prisma exception error', () => {
     await app.init();
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     if (app) await app.close();
   });
 

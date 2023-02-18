@@ -1,11 +1,11 @@
 import { vpc } from '@cdktf/provider-aws';
 
+import { ServiceComponent } from './service.component';
 import {
   BackendServiceComponentConfig,
   ServiceComponentArtifacts,
   ServiceComponentDefaultConfig,
 } from '../interfaces';
-import { ServiceComponent } from './service.component';
 
 /**
  * This service is meant to be used by another one, as its backend

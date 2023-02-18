@@ -3,9 +3,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { mockDeep, MockProxy, mockReset } from 'jest-mock-extended';
 
+import { FileStorageController } from './file-storage.controller';
 import { GetPresignedDownloadUrlQueryDto } from '../dtos';
 import { FileStorageService } from '../services';
-import { FileStorageController } from './file-storage.controller';
 
 describe('FileStorageController', () => {
   let mockFileStorageService: MockProxy<FileStorageService>;

@@ -1,16 +1,33 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AbilityBuilder, AnyAbility } from '@casl/ability';
-import { PrismaAbility as CaslPrismaAbilities } from '@casl/prisma';
-import { Prisma, User, UserRoles } from '@prisma/client';
 
-export interface CaslOptions<T extends AnyAbility = AnyAbility> {
-  rolePermissions: Record<UserRoles, DefinePermissions<T>>;
-}
-
-export type PrismaAbility = CaslPrismaAbilities<
-  [string, 'all' | Prisma.ModelName]
->;
-
-export type DefinePermissions<T extends AnyAbility = AnyAbility> = (
-  ability: AbilityBuilder<T>,
-  user?: User,
+export type DefinePermissions<B extends AbilityBuilder<AnyAbility>, U> = (
+  ability: B,
+  user: U,
 ) => void;
+
+export type DefinePublicPermissions<B extends AbilityBuilder<AnyAbility>> = (
+  ability: B,
+) => void;
+
+export type RolePermissions<
+  R extends string,
+  B extends AbilityBuilder<AnyAbility>,
+  U extends Record<string, unknown>,
+> = Record<R, DefinePermissions<B, U>>;
+
+export type CaslModuleOptions<
+  R extends string,
+  U extends Record<string, unknown>,
+  B extends AbilityBuilder<any>,
+> = {
+  rolePermissions: Record<R, DefinePermissions<B, U>>;
+  getRoles: (user: U) => R[];
+  publicPermissions?: DefinePublicPermissions<B>;
+};
+
+export type UntypedCaslModuleOptions = CaslModuleOptions<
+  string,
+  Record<string, unknown>,
+  AbilityBuilder<AnyAbility>
+>;

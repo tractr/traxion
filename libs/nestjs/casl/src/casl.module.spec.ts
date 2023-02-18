@@ -4,15 +4,17 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as request from 'supertest';
 
+import { CaslModule } from './casl.module';
+import { MODULE_OPTIONS_TOKEN } from './casl.module-definition';
+import { PoliciesGuard } from './guards';
+import { UntypedCaslModuleOptions } from './interfaces';
 import { CaslEndPointMock } from '../mocks/casl-endpoint-mock.controller';
 import { mockAuthenticationGuard } from '../mocks/mock-authentication-guard';
-import { rolePermissions } from '../mocks/role-permission.mock';
-import { CASL_MODULE_OPTIONS } from './casl.constant';
-import { CaslModule } from './casl.module';
-import { PoliciesGuard } from './guards';
-import { CaslOptions } from './interfaces';
+import {
+  publicPermissions,
+  rolePermissions,
+} from '../mocks/role-permission.mock';
 
-import { UserAuthenticationService } from '@trxn/nestjs-authentication';
 import { LoggerModule } from '@trxn/nestjs-core';
 
 describe('Authentication Module', () => {
@@ -21,7 +23,6 @@ describe('Authentication Module', () => {
     getUser: () => Record<string, unknown> | null;
     isPublic: () => boolean;
   }>;
-  const mockAuthenticationUserService = mockDeep<UserAuthenticationService>();
 
   beforeAll(async () => {
     mockUser = mockDeep<{
@@ -42,15 +43,13 @@ describe('Authentication Module', () => {
           provide: APP_GUARD,
           useClass: PoliciesGuard,
         },
-        {
-          provide: UserAuthenticationService,
-          useValue: mockAuthenticationUserService,
-        },
       ],
       imports: [
         LoggerModule,
         CaslModule.register({
           rolePermissions,
+          getRoles: (user) => user.roles,
+          publicPermissions,
         }),
       ],
     }).compile();
@@ -86,7 +85,8 @@ describe('Authentication Module', () => {
         roles: ['guest'],
       });
       await request(app.getHttpServer()).get('/read-user').expect(403);
-
+    });
+    it('/read-user no-user', async () => {
       mockUser.getUser.mockReturnValue(null);
       mockUser.isPublic.mockReturnValueOnce(true);
 
@@ -112,7 +112,8 @@ describe('Authentication Module', () => {
         roles: ['guest'],
       });
       await request(app.getHttpServer()).get('/read-admin').expect(403);
-
+    });
+    it('/read-admin no-user', async () => {
       mockUser.getUser.mockReturnValue(null);
       mockUser.isPublic.mockReturnValueOnce(true);
 
@@ -138,7 +139,8 @@ describe('Authentication Module', () => {
         roles: ['guest'],
       });
       await request(app.getHttpServer()).get('/read-guest').expect(200);
-
+    });
+    it('/read-guest no-user', async () => {
       mockUser.getUser.mockReturnValue(null);
       mockUser.isPublic.mockReturnValueOnce(true);
 
@@ -199,23 +201,21 @@ describe('Authentication Module', () => {
             provide: APP_GUARD,
             useClass: PoliciesGuard,
           },
-          {
-            provide: UserAuthenticationService,
-            useValue: mockAuthenticationUserService,
-          },
         ],
         imports: [
           LoggerModule,
           CaslModule.registerAsync({
             useFactory: () => ({
               rolePermissions,
+              getRoles: (user) => user.roles,
+              publicPermissions,
             }),
           }),
         ],
       }).compile();
 
       const caslModuleOptions =
-        moduleFixture.get<CaslOptions>(CASL_MODULE_OPTIONS);
+        moduleFixture.get<UntypedCaslModuleOptions>(MODULE_OPTIONS_TOKEN);
 
       expect(caslModuleOptions.rolePermissions).toEqual(rolePermissions);
     });

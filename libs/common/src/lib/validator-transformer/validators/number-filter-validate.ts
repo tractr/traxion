@@ -1,8 +1,8 @@
 import { isIn, isNumber, isNumberString } from 'class-validator';
 
+import { CustomValidate } from './custom-validate';
 import { ArrayFilterProps, NumberFilterProps } from '../../constants';
 import { transformStringToArray } from '../../helpers';
-import { CustomValidate } from './custom-validate';
 
 /**
  * Accept a field string and return a boolean indicating if the field is a boolean string and filter type

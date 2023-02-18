@@ -2,8 +2,8 @@ import { join } from 'path';
 
 import { Tree } from '@nrwl/devkit';
 
-import { NormalizedOptions } from '../schema';
 import { createSrcIndexTs } from './create-src-index.helper';
+import { NormalizedOptions } from '../schema';
 
 export function cleanAngularLibrary(tree: Tree, options: NormalizedOptions) {
   const { projectRoot } = options;

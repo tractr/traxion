@@ -1,4 +1,4 @@
-export interface SendEmail {
+export interface SendEmailParams {
   from: string;
   to: string | string[];
   subject?: string;
@@ -8,5 +8,5 @@ export interface SendEmail {
 }
 
 export interface MailerClient {
-  send(params: SendEmail): Promise<unknown>;
+  send(params: SendEmailParams): Promise<unknown>;
 }

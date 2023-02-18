@@ -1,10 +1,10 @@
 import { ecs } from '@cdktf/provider-aws';
 
+import { DeploymentTrigger } from './deployment-pipeline.interface';
 import { DeploymentBuildComponent } from '../deployment-build.component';
 import { DeploymentPipelineComponent } from '../deployment-pipeline.component';
 import { DeploymentRoleComponent } from '../deployment-role.component';
 import { DeploymentStoreComponent } from '../deployment-store.component';
-import { DeploymentTrigger } from './deployment-pipeline.interface';
 
 import { DeploymentTriggerComponent } from '@trxn/terraform-component-deployment-trigger';
 

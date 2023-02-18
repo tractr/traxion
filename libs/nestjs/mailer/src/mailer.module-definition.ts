@@ -1,10 +1,14 @@
 import { ConfigurableModuleBuilder } from '@nestjs/common';
 
-import { MailerModuleOptions } from './interfaces';
+import { MAILER_CLIENT } from './constants';
+import { MailerClient, MailerModuleOptions } from './interfaces';
 
 import {
-  addImportsAndProvidersTransformDefinition,
-  ImportsAndProvidersSetExtras,
+  addImportsAndProvidersExtra,
+  addProviderWithInjectionTokenExtra,
+  ImportsExtra,
+  ProvidersExtra,
+  ProviderWithInjectionToken,
 } from '@trxn/nestjs-core';
 
 export const {
@@ -13,8 +17,18 @@ export const {
   ASYNC_OPTIONS_TYPE,
   OPTIONS_TYPE,
 } = new ConfigurableModuleBuilder<MailerModuleOptions>()
-  .setExtras<ImportsAndProvidersSetExtras>(
+  .setExtras<
+    ImportsExtra &
+      ProvidersExtra & {
+        MailerClient?: ProviderWithInjectionToken<
+          typeof MAILER_CLIENT,
+          MailerClient
+        >;
+      }
+  >(
     { imports: [], providers: [] },
-    addImportsAndProvidersTransformDefinition,
+    addImportsAndProvidersExtra((definition, { MailerClient: Client }) =>
+      addProviderWithInjectionTokenExtra(definition, MAILER_CLIENT, Client),
+    ),
   )
   .build();

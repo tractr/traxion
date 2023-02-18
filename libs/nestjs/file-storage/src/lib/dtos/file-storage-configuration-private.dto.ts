@@ -9,9 +9,9 @@ import {
 } from 'class-validator';
 import { ClientOptions as MinioClientOptions, Region } from 'minio';
 
-import { AwsRegions } from '../constants';
 import { PresignedDownloadConfigurationDto } from './presigned-download-configuration.dto';
 import { PresignedUploadConfigurationDto } from './presigned-upload-configuration';
+import { AwsRegions } from '../constants';
 
 import { getDefaults } from '@trxn/common';
 

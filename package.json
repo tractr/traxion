@@ -15,6 +15,7 @@
     "generate": "npx nx run-many --target generate --all",
     "postinstall": "(is-ci || husky install) && ngcc --properties es2020 browser module main",
     "lint": "nx workspace-lint && nx run-many --all --target=lint --parallel",
+    "lint:fix": "nx workspace-lint && nx run-many --all --target=lint --parallel --fix",
     "test": " nx run-many --all --target=test",
     "ts-node": "npx ts-node -r tsconfig-paths/register --project apps/api/tsconfig.json"
   },

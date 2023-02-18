@@ -5,23 +5,27 @@ import { Strategy } from 'passport-jwt';
 import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
 import { JwtTokenPayload } from '../dtos';
 import { AuthenticationModuleOptions } from '../interfaces';
-import { StrategyOptionsService, UserAuthenticationService } from '../services';
+import { StrategyOptionsService } from '../services';
+
+import { UserService } from '@trxn/nestjs-user';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
-    private readonly userAuthenticationService: UserAuthenticationService,
     @Inject(MODULE_OPTIONS_TOKEN)
     private readonly authenticationOptions: AuthenticationModuleOptions,
+
     protected readonly strategyOptionsService: StrategyOptionsService,
+
+    private readonly userService: UserService,
   ) {
     super(strategyOptionsService.jwtStrategyOptions);
   }
 
   async validate(payload: JwtTokenPayload) {
-    const user = await this.userAuthenticationService.getUserFromId(
+    const user = await this.userService.findUserById(
       payload.sub,
-      this.authenticationOptions.user?.customSelect,
+      this.authenticationOptions.customSelect,
     );
 
     if (!user) {

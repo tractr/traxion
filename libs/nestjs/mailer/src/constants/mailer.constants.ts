@@ -1,1 +1,1 @@
-export const MAILER_CLIENT_TOKEN = 'MAILER_CLIENT_TOKEN';
+export const MAILER_CLIENT = 'MAILER_CLIENT' as const;

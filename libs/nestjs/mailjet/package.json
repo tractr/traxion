@@ -1,5 +1,13 @@
 {
   "name": "@tractr/nestjs-mailjet",
   "version": "0.0.1",
-  "type": "commonjs"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/traxion"
+  },
+  "type": "commonjs",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }

@@ -1,27 +1,34 @@
-import { AbilityBuilder, Subject } from '@casl/ability';
-import { PrismaAbility } from '@casl/prisma';
+import { AbilityBuilder } from '@casl/ability';
+import { createPrismaAbility } from '@casl/prisma';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import type { Prisma, User } from '@prisma/client';
 
-import { CASL_MODULE_OPTIONS } from '../casl.constant';
-import { CaslOptions } from '../interfaces';
+import { MODULE_OPTIONS_TOKEN } from '../casl.module-definition';
+import { UntypedCaslModuleOptions } from '../interfaces';
+
+import { User } from '@trxn/nestjs-user';
 
 @Injectable()
 export class CaslAbilityFactoryService {
   constructor(
-    @Inject(CASL_MODULE_OPTIONS)
-    private readonly caslOptions: CaslOptions,
+    @Inject(MODULE_OPTIONS_TOKEN)
+    private readonly caslOptions: UntypedCaslModuleOptions,
   ) {}
 
-  createForUser(user?: User): PrismaAbility<[string, 'all' | Subject]> {
-    const builder = new AbilityBuilder<
-      PrismaAbility<[string, 'all' | Prisma.ModelName]>
-    >(PrismaAbility);
+  getRoles(user: Record<string, unknown>) {
+    const roles = this.caslOptions.getRoles(user);
+    if (!Array.isArray(roles)) {
+      throw new Error('getRoles must return an array of roles');
+    }
+    return roles;
+  }
 
-    const { rolePermissions } = this.caslOptions;
+  createForUser<U extends User>(user?: U) {
+    const builder = new AbilityBuilder(createPrismaAbility);
 
-    if (!user && rolePermissions.guest) {
-      rolePermissions.guest(builder, user);
+    const { rolePermissions, publicPermissions } = this.caslOptions;
+
+    if (!user && publicPermissions) {
+      publicPermissions(builder);
       return builder.build();
     }
 
@@ -29,14 +36,18 @@ export class CaslAbilityFactoryService {
       throw new UnauthorizedException();
     }
 
-    user.roles.forEach((role) => {
-      if (!rolePermissions[role]) return;
-      rolePermissions[role](builder, user);
-    });
+    const roles = this.getRoles(user);
 
-    if (
-      user.roles.some((role) => typeof rolePermissions[role] === 'undefined')
-    ) {
+    let hasSomeRole = false;
+    for (const role of roles) {
+      if (rolePermissions[role]) {
+        hasSomeRole = true;
+        rolePermissions[role](builder, user);
+      }
+    }
+
+    // If the user has no role, they cannot do anything.
+    if (!hasSomeRole) {
       builder.cannot('manage', 'all');
     }
 

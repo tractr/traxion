@@ -1,3 +1,3 @@
 export interface MailerModuleOptions {
-  development?: boolean;
+  production?: boolean;
 }

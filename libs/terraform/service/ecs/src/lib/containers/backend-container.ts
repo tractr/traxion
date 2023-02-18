@@ -1,5 +1,5 @@
-import { ContainerConfig, ContainerDefinition } from '../interfaces';
 import { Container } from './container';
+import { ContainerConfig, ContainerDefinition } from '../interfaces';
 
 /**
  * This container is meant to be used by another one, as its backend

@@ -1,8 +1,8 @@
 import { isIn } from 'class-validator';
 
+import { CustomValidate } from './custom-validate';
 import { ArrayFilterProps, EnumFilterProps } from '../../constants';
 import { transformStringToArray } from '../../helpers';
-import { CustomValidate } from './custom-validate';
 
 /**
  * Accept a field string and return a boolean indicating if the field is string and filter type

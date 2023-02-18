@@ -93,8 +93,12 @@
       "@trxn/nestjs-request-timestamp": [
         "libs/nestjs/request-timestamp/src/index.ts"
       ],
+      "@trxn/nestjs-reset-password": [
+        "libs/nestjs/reset-password/src/index.ts"
+      ],
       "@trxn/nestjs-sentry": ["libs/nestjs/sentry/src/index.ts"],
       "@trxn/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
+      "@trxn/nestjs-user": ["libs/nestjs/user/src/index.ts"],
       "@trxn/nestjs-winston": ["libs/nestjs/winston/src/index.ts"],
       "@trxn/prettier-config": ["libs/config/prettier/src/index.ts"],
       "@trxn/schematics": ["libs/schematics/src/index.ts"],

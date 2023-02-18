@@ -1,0 +1,1 @@
+export const ENCRYPTION_SERVICE = 'ENCRYPTION_SERVICE' as const;

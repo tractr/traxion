@@ -1,28 +1,15 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { Client, SendEmailV3_1 as SendEmailMailjet } from 'node-mailjet';
+import { Injectable } from '@nestjs/common';
+import { SendEmailV3_1 as SendEmailMailjet } from 'node-mailjet';
 import { RequestData } from 'node-mailjet/declarations/request/Request';
 
+import { MailjetClient } from './mailjet-client.service';
 import { MAILJET_API_VERSION } from '../configs';
-import { MailjetModuleOptions } from '../interfaces';
-import { MODULE_OPTIONS_TOKEN } from '../mailjet.module-definition';
 
-import { isProduction } from '@trxn/nestjs-core';
-import { SendEmail } from '@trxn/nestjs-mailer';
+import { SendEmailParams } from '@trxn/nestjs-mailer';
 
 @Injectable()
 export class MailjetService {
-  mailjetClient!: Client;
-
-  constructor(
-    @Inject(MODULE_OPTIONS_TOKEN)
-    mailerOptions: MailjetModuleOptions,
-  ) {
-    this.mailjetClient = new Client(mailerOptions);
-  }
-
-  public isDevelopment(): boolean {
-    return !isProduction() || process.env.JEST_WORKER_ID !== undefined;
-  }
+  constructor(protected mailjetClient: MailjetClient) {}
 
   public async send({
     from,
@@ -31,7 +18,7 @@ export class MailjetService {
     html,
     subject,
     text,
-  }: SendEmail) {
+  }: SendEmailParams) {
     const { templateId, ...variables } = context;
 
     const message: SendEmailMailjet.Message = {
@@ -47,9 +34,9 @@ export class MailjetService {
       Variables: variables,
     };
 
-    const data: RequestData = {
-      SandboxMode: this.isDevelopment(),
+    const data: SendEmailMailjet.Body = {
       Messages: [message],
+      SandboxMode: this.mailjetClient.sandboxMode,
     };
 
     return this.mailjetClient

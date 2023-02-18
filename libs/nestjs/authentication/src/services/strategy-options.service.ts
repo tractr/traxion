@@ -7,14 +7,17 @@ import {
 } from 'passport-jwt';
 import { IStrategyOptionsWithRequest as LocalStrategyOptions } from 'passport-local';
 
+import { JwtOptionsService } from './jwt-options.service';
 import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
 import {
-  AUTHENTICATION_DEFAULT_COOKIE_NAME,
-  AUTHENTICATION_DEFAULT_QUERY_PARAM_NAME,
+  DEFAULT_COOKIE_NAME,
+  DEFAULT_LOCAL_PASS_REQ_TO_CALLBACK,
+  DEFAULT_LOCAL_PASSWORD_FIELD,
+  DEFAULT_LOCAL_USERNAME_FIELD,
+  DEFAULT_URL_QUERY_PARAM_NAME,
 } from '../constants';
 import { fromHttpOnlySignedAndSecureCookies } from '../extractors';
 import { AuthenticationModuleOptions } from '../interfaces';
-import { JwtOptionsService } from './jwt-options.service';
 
 @Injectable()
 export class StrategyOptionsService {
@@ -24,24 +27,12 @@ export class StrategyOptionsService {
     private readonly jwtOptionsService: JwtOptionsService,
   ) {}
 
-  private get fields() {
-    return {
-      id: 'id',
-      login: 'email',
-      password: 'password',
-      ...(this.authenticationOptions.user?.fields || {}),
-    };
-  }
-
   get localStrategyOptions(): LocalStrategyOptions {
-    const { login, password } = this.fields;
-    const strategyOptions = this.authenticationOptions.strategy?.local || {};
-
     return {
-      passReqToCallback: true,
-      ...strategyOptions,
-      usernameField: login,
-      passwordField: password,
+      passReqToCallback: DEFAULT_LOCAL_PASS_REQ_TO_CALLBACK,
+      usernameField: DEFAULT_LOCAL_USERNAME_FIELD,
+      passwordField: DEFAULT_LOCAL_PASSWORD_FIELD,
+      ...this.authenticationOptions.strategy?.local,
     };
   }
 
@@ -55,11 +46,9 @@ export class StrategyOptionsService {
       ),
       ignoreExpiration: false,
       jwtFromRequest: ExtractJwt.fromExtractors([
-        fromHttpOnlySignedAndSecureCookies(AUTHENTICATION_DEFAULT_COOKIE_NAME),
+        fromHttpOnlySignedAndSecureCookies(DEFAULT_COOKIE_NAME),
         ExtractJwt.fromAuthHeaderAsBearerToken(),
-        ExtractJwt.fromUrlQueryParameter(
-          AUTHENTICATION_DEFAULT_QUERY_PARAM_NAME,
-        ),
+        ExtractJwt.fromUrlQueryParameter(DEFAULT_URL_QUERY_PARAM_NAME),
       ]),
       ...passportJwtStrategyOptions,
     };

@@ -1,41 +1,19 @@
 import { Module } from '@nestjs/common';
-import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 
-import { CaslModule } from './casl.module';
-import { EncryptionModule } from './encryption.module';
-import { ModelsModule } from './models.module';
+import { UserModule } from './user.module';
 
 import { getSelectPrismaUserQuery } from '@trxn/generated-casl';
-import { USER_SERVICE } from '@trxn/generated-nestjs-models-common';
-import {
-  JwtGlobalAuthGuard,
-  AuthenticationModule as TraxionAuthenticationModule,
-} from '@trxn/nestjs-authentication';
-import { BcryptService } from '@trxn/nestjs-bcrypt';
-import { CaslExceptionInterceptor, PoliciesGuard } from '@trxn/nestjs-casl';
+import { AuthenticationModule as TraxionAuthenticationModule } from '@trxn/nestjs-authentication';
 
 @Module({
   imports: [
-    CaslModule,
-    TraxionAuthenticationModule.registerAsync({
-      imports: [ModelsModule, EncryptionModule],
-      useFactory: (userService, encryptionService) => ({
-        user: {
-          customSelect: getSelectPrismaUserQuery(),
-        },
-        jwtModuleOptions: {
-          secret: 'secret',
-        },
-        userService,
-        encryptionService,
-      }),
-      inject: [USER_SERVICE, BcryptService],
+    TraxionAuthenticationModule.register({
+      imports: [UserModule],
+      customSelect: getSelectPrismaUserQuery(),
+      jwtModuleOptions: {
+        secret: 'secret',
+      },
     }),
-  ],
-  providers: [
-    { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
-    { provide: APP_GUARD, useClass: PoliciesGuard },
-    { provide: APP_INTERCEPTOR, useClass: CaslExceptionInterceptor },
   ],
   exports: [TraxionAuthenticationModule],
 })

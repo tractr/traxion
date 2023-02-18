@@ -23,16 +23,14 @@ module.exports = {
         {
           type: 'category',
           label: 'NestJS',
-          items: [
-            'how-to/nestjs/extend-a-generated-controller',
-          ],
+          items: ['how-to/nestjs/extend-a-generated-controller'],
         },
         {
           type: 'category',
           label: 'Database',
           items: [
             'how-to/database/configuration',
-            'how-to/database/database-migration-with-prisma'
+            'how-to/database/database-migration-with-prisma',
           ],
         },
         {
@@ -41,6 +39,14 @@ module.exports = {
           items: [
             'how-to/file-storage/file-storage-on-aws-s3',
             'how-to/file-storage/use-minio',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Mailer',
+          items: [
+            'how-to/mailer/use-mailjet',
+            'how-to/mailer/use-mailer-with-mailjet',
           ],
         },
         {

@@ -4,8 +4,8 @@ import { readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { libraryGenerator as nestLibraryGenerator } from '@nrwl/nest';
 
-import { NormalizedOptions } from '../schema';
 import { createSecondaryEntrypoints } from './create-secondary-entrypoints.helper';
+import { NormalizedOptions } from '../schema';
 
 jest.mock('@nrwl/angular/generators', () => ({
   __esModule: true,

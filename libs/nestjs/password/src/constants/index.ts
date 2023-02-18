@@ -1,1 +1,1 @@
-export * from './reset-password.constant';
+export * from './password.contant';

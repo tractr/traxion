@@ -1,8 +1,13 @@
 /* istanbul ignore file */
-import { Subjects as CaslPrismaSubjects, PrismaAbility } from '@casl/prisma';
+import { AbilityBuilder, PureAbility } from '@casl/ability';
+import { Subjects as CaslPrismaSubjects, PrismaQuery } from '@casl/prisma';
 import { Prisma, UserRoles } from '@prisma/client';
 
-import { DefinePermissions } from '../src';
+import {
+  DefinePermissions,
+  DefinePublicPermissions,
+  RolePermissions,
+} from '../src/interfaces';
 
 export type Roles = 'admin' | 'user' | 'guest';
 
@@ -27,14 +32,14 @@ export const Actions = {
   MANAGE: 'manage',
 } as const;
 
-export type Actions = typeof Actions[keyof typeof Actions];
+export type Actions = (typeof Actions)[keyof typeof Actions];
 
-export type AppAbility = PrismaAbility<[Actions, 'all' | Subjects]>;
-export const AppAbility = PrismaAbility;
+export type AppAbility = PureAbility<[string, 'all' | Subjects], PrismaQuery>;
 
-export const rolePermissions: Record<
+export const rolePermissions: RolePermissions<
   UserRoles,
-  DefinePermissions<AppAbility>
+  AbilityBuilder<AppAbility>,
+  User
 > = {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   guest({ can }) {
@@ -48,4 +53,10 @@ export const rolePermissions: Record<
   },
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   custom() {},
+};
+
+export const publicPermissions: DefinePublicPermissions<
+  AbilityBuilder<AppAbility>
+> = ({ can }) => {
+  can('read', 'Tag');
 };

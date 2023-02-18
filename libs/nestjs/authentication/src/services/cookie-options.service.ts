@@ -2,8 +2,8 @@ import { Inject, Injectable } from '@nestjs/common';
 
 import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
 import {
-  AUTHENTICATION_DEFAULT_COOKIE_NAME,
-  AUTHENTICATION_DEFAULT_QUERY_PARAM_NAME,
+  DEFAULT_COOKIE_NAME,
+  DEFAULT_URL_QUERY_PARAM_NAME,
 } from '../constants';
 import { AuthenticationModuleOptions } from '../interfaces';
 
@@ -18,15 +18,14 @@ export class CookieOptionsService {
 
   get cookieName() {
     return (
-      this.authenticationOptions.cookies?.cookieName ||
-      AUTHENTICATION_DEFAULT_COOKIE_NAME
+      this.authenticationOptions.cookies?.cookieName || DEFAULT_COOKIE_NAME
     );
   }
 
   get queryParamName() {
     return (
-      this.authenticationOptions.cookies?.cookieName ||
-      AUTHENTICATION_DEFAULT_QUERY_PARAM_NAME
+      this.authenticationOptions.cookies?.queryParamName ||
+      DEFAULT_URL_QUERY_PARAM_NAME
     );
   }
 

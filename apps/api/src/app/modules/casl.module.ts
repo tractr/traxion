@@ -7,6 +7,10 @@ import { CaslModule as TraxionCaslModule } from '@trxn/nestjs-casl';
   imports: [
     TraxionCaslModule.register({
       rolePermissions,
+      getRoles: (user) => user.roles,
+      publicPermissions: (ability) => {
+        ability.can('read', 'all');
+      },
     }),
   ],
   exports: [TraxionCaslModule],

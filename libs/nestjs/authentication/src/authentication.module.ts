@@ -17,7 +17,6 @@ import {
   CookieOptionsService,
   HashService,
   StrategyOptionsService,
-  UserAuthenticationService,
 } from './services';
 import { JwtOptionsService } from './services/jwt-options.service';
 import { JwtStrategy, LocalStrategy } from './strategies';
@@ -74,7 +73,6 @@ export class AuthenticationModule extends ConfigurableModuleClass {
         LocalStrategy,
         JwtStrategy,
         HashService,
-        UserAuthenticationService,
         {
           provide: APP_FILTER,
           useClass: UnauthorizedExceptionFilter,

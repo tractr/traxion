@@ -8,25 +8,15 @@ import {
   MODULE_OPTIONS_TOKEN,
   OPTIONS_TYPE,
 } from './password.module-definition';
-import {
-  HashService,
-  PasswordService,
-  ResetPasswordService,
-  UserPasswordService,
-} from './services';
+import { HashService, PasswordService } from './services';
 
 import { BcryptModule } from '@trxn/nestjs-bcrypt';
 import { LoggerModule } from '@trxn/nestjs-core';
 
 @Module({
   imports: [LoggerModule, BcryptModule.register({})],
-  providers: [
-    PasswordService,
-    ResetPasswordService,
-    UserPasswordService,
-    HashService,
-  ],
-  exports: [PasswordService, ResetPasswordService],
+  providers: [PasswordService, HashService],
+  exports: [PasswordService, HashService],
 })
 export class PasswordModule extends ConfigurableModuleClass {
   static createModule(module: DynamicModule): DynamicModule {
@@ -58,12 +48,12 @@ export class PasswordModule extends ConfigurableModuleClass {
   }
 
   static register(options: typeof OPTIONS_TYPE): DynamicModule {
-    const authenticationOptionsModule = super.register(options);
-    return this.createModule(authenticationOptionsModule);
+    const passwordOptionsModule = super.register(options);
+    return this.createModule(passwordOptionsModule);
   }
 
   static registerAsync(options: typeof ASYNC_OPTIONS_TYPE): DynamicModule {
-    const authenticationOptionsModule = super.registerAsync(options);
-    return this.createModule(authenticationOptionsModule);
+    const passwordOptionsModule = super.registerAsync(options);
+    return this.createModule(passwordOptionsModule);
   }
 }

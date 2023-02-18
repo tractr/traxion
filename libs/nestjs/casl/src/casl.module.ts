@@ -1,12 +1,20 @@
-import { AnyAbility } from '@casl/ability';
-import { DynamicModule, Module } from '@nestjs/common';
+import { AbilityBuilder, AnyAbility } from '@casl/ability';
+import {
+  ConfigurableModuleAsyncOptions,
+  DynamicModule,
+  Module,
+} from '@nestjs/common';
 
-import { CASL_MODULE_OPTIONS } from './casl.constant';
-import { CaslOptions } from './interfaces';
+import {
+  ASYNC_OPTIONS_TYPE,
+  ConfigurableModuleClass,
+  ExtraModuleDefinitionOptions,
+  OPTIONS_TYPE,
+} from './casl.module-definition';
+import { CaslModuleOptions } from './interfaces';
 import { CaslAbilityFactoryService } from './services/casl.service';
 
 import { AuthenticationModule } from '@trxn/nestjs-authentication';
-import { AsyncOptions, ModuleOptionsFactory } from '@trxn/nestjs-core';
 
 @Module({
   imports: [AuthenticationModule],
@@ -14,18 +22,26 @@ import { AsyncOptions, ModuleOptionsFactory } from '@trxn/nestjs-core';
   providers: [CaslAbilityFactoryService],
   exports: [CaslAbilityFactoryService],
 })
-export class CaslModule extends ModuleOptionsFactory<CaslOptions>(
-  CASL_MODULE_OPTIONS,
-) {
-  static register<T extends AnyAbility>(
-    options: CaslOptions<T>,
+export class CaslModule extends ConfigurableModuleClass {
+  static register<
+    R extends string,
+    U extends Record<string, unknown>,
+    B extends AbilityBuilder<AnyAbility>,
+  >(
+    options: CaslModuleOptions<R, U, B> & ExtraModuleDefinitionOptions,
   ): DynamicModule {
-    return super.register(options as CaslOptions);
+    return super.register(options as unknown as typeof OPTIONS_TYPE);
   }
 
-  static registerAsync<T extends AnyAbility>(
-    options: AsyncOptions<CaslOptions<T>>,
+  static registerAsync<
+    R extends string,
+    U extends Record<string, unknown>,
+    B extends AbilityBuilder<AnyAbility>,
+  >(
+    options: ConfigurableModuleAsyncOptions<
+      CaslModuleOptions<R, U, B> & ExtraModuleDefinitionOptions
+    >,
   ): DynamicModule {
-    return super.registerAsync(options as AsyncOptions<CaslOptions>);
+    return super.registerAsync(options as typeof ASYNC_OPTIONS_TYPE);
   }
 }

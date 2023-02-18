@@ -1,26 +1,46 @@
-import { PrismaAbility } from '@casl/prisma';
+import { AbilityBuilder, AnyAbility } from '@casl/ability';
 import { UnauthorizedException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import type { User } from '@prisma/client';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 
-import { AppAbility, rolePermissions } from '../../mocks/role-permission.mock';
-import { CASL_MODULE_OPTIONS } from '../casl.constant';
-import { CaslOptions } from '../interfaces';
 import { CaslAbilityFactoryService } from './casl.service';
+import {
+  publicPermissions,
+  rolePermissions,
+} from '../../mocks/role-permission.mock';
+import { MODULE_OPTIONS_TOKEN } from '../casl.module-definition';
+import {
+  DefinePublicPermissions,
+  RolePermissions,
+  UntypedCaslModuleOptions,
+} from '../interfaces';
 
 describe('CaslService', () => {
   let caslAbilityFactoryService: CaslAbilityFactoryService;
-  let mockCaslOptions: MockProxy<CaslOptions<AppAbility>>;
+  let mockCaslOptions: MockProxy<UntypedCaslModuleOptions>;
 
   beforeEach(async () => {
-    mockCaslOptions = mockDeep<CaslOptions<AppAbility>>();
+    mockCaslOptions = mockDeep<UntypedCaslModuleOptions>(
+      {
+        funcPropSupport: true,
+      },
+      {
+        rolePermissions: mockDeep(
+          rolePermissions,
+        ) as unknown as RolePermissions<
+          string,
+          AbilityBuilder<AnyAbility>,
+          Record<string, unknown>
+        >,
+        getRoles: (user) => user.roles as string[],
+      },
+    );
 
     const moduleFixture: TestingModule = await Test.createTestingModule({
       providers: [
         CaslAbilityFactoryService,
         {
-          provide: CASL_MODULE_OPTIONS,
+          provide: MODULE_OPTIONS_TOKEN,
           useValue: mockCaslOptions,
         },
       ],
@@ -37,56 +57,52 @@ describe('CaslService', () => {
 
   describe('createForUser', () => {
     it('should create a abitily from a rolePermission configuration', async () => {
-      mockCaslOptions.rolePermissions = mockDeep(rolePermissions);
-
       const userAdmin = {
         id: 'admin',
         roles: ['admin'],
-      } as User;
+      };
 
       const abilities = caslAbilityFactoryService.createForUser(userAdmin);
 
       expect(abilities).toBeDefined();
-      expect(abilities).toBeInstanceOf(PrismaAbility);
     });
 
-    it('should throw an error if no user is passed and no guest permissions is defined', async () => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { guest, ...permissionsWithoutGuest } = rolePermissions;
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      mockCaslOptions.rolePermissions = permissionsWithoutGuest as any;
-
-      expect(() => caslAbilityFactoryService.createForUser(undefined)).toThrow(
+    it('should throw an error if no user is passed and no publicPermissions are defined', async () => {
+      mockCaslOptions.publicPermissions = undefined;
+      expect(() => caslAbilityFactoryService.createForUser()).toThrow(
         UnauthorizedException,
       );
     });
 
+    it('should not throw an error if no user is passed and but a publicPermissions is used', async () => {
+      mockCaslOptions.publicPermissions =
+        publicPermissions as unknown as DefinePublicPermissions<
+          AbilityBuilder<AnyAbility>
+        >;
+
+      const abilities = caslAbilityFactoryService.createForUser();
+      expect(abilities).toBeDefined();
+    });
+
     it('should configure no access if a role does not exists', async () => {
-      mockCaslOptions.rolePermissions = mockDeep(rolePermissions);
+      mockCaslOptions.rolePermissions = mockDeep(
+        rolePermissions,
+      ) as unknown as RolePermissions<
+        string,
+        AbilityBuilder<AnyAbility>,
+        Record<string, unknown>
+      >;
 
       const userWithAWrongRole = {
         id: 'admin',
         roles: ['not-exists'],
-      } as unknown as User;
+      };
 
       const abilities =
         caslAbilityFactoryService.createForUser(userWithAWrongRole);
 
       expect(abilities).toBeDefined();
-      expect(abilities).toBeInstanceOf(PrismaAbility);
       expect(abilities.cannot('manage', 'all')).toEqual(true);
-    });
-
-    it('should default to the guest role if no user is provided', async () => {
-      mockCaslOptions.rolePermissions = mockDeep(rolePermissions);
-
-      const abilities = caslAbilityFactoryService.createForUser();
-
-      expect(abilities).toBeDefined();
-      expect(abilities).toBeInstanceOf(PrismaAbility);
-      expect(abilities.can('read', 'Tag')).toEqual(true);
-      expect(abilities.cannot('read', 'User')).toEqual(true);
     });
   });
 });

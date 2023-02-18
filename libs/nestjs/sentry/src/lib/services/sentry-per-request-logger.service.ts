@@ -4,9 +4,9 @@ import { Scope as SentryScope, Severity, withScope } from '@sentry/node';
 import { Extras } from '@sentry/types';
 import { Request } from 'express';
 
+import { SentryLogger } from './sentry-logger.service';
 import { SENTRY_MODULE_OPTIONS } from '../constants';
 import { Breadcrumb, BreadcrumbType, SentryModuleOptions } from '../interfaces';
-import { SentryLogger } from './sentry-logger.service';
 
 /**
  * This service will create a scope before sending the log/error and push all request's logs as breadcrumbs

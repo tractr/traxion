@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { MailerModule as TraxionMailerModule } from '@trxn/nestjs-mailer';
-import { MailjetModule } from '@trxn/nestjs-mailjet';
+import { MailjetModule, MailjetService } from '@trxn/nestjs-mailjet';
 
 @Module({
   imports: [
@@ -12,6 +12,7 @@ import { MailjetModule } from '@trxn/nestjs-mailjet';
           apiSecret: process.env.MAILJET_API_SECRET,
         }),
       ],
+      MailerClient: MailjetService,
     }),
   ],
   exports: [TraxionMailerModule],
