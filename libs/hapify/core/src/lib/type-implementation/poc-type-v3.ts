@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
-import { DeepRequired } from 'ts-essentials';
-import { Boolean, F } from 'ts-toolbelt';
+import { Object } from 'ts-toolbelt';
+import { Cast } from 'ts-toolbelt/out/Any/Cast';
 
 /**
  * Base field properties
@@ -16,13 +16,15 @@ export type BaseFieldProperties = {
 /**
  * Constraints
  */
-export type Constraint<Key extends string, Type> = { [key in Key]: Type };
+export type Constraint<Key extends string | number | symbol, Type> = {
+  [key in Key]: Type;
+};
 
-export type OptionalConstraint<Key extends string, Type> = {
+export type OptionalConstraint<Key extends string | number | symbol, Type> = {
   [key in Key]?: Type;
 };
 
-export type ConstraintsProperty<Key extends string, Type> =
+export type ConstraintsProperty<Key extends string | number | symbol, Type> =
   | Constraint<Key, Type>
   | OptionalConstraint<Key, Type>;
 
@@ -46,12 +48,11 @@ export type MaxConstraint = OptionalConstraint<'max', number>;
 export type IntegerConstraint = OptionalConstraint<'integer', boolean>;
 export type DefaultConstraint = OptionalConstraint<'defaultValue', any>;
 
-export type BaseConstraint =
-  | LabelConstraint
-  | UniqueConstraint
-  | NotNullConstraint
-  | DefaultConstraint
-  | MultipleConstraint;
+export type BaseConstraint = LabelConstraint &
+  UniqueConstraint &
+  NotNullConstraint &
+  DefaultConstraint &
+  MultipleConstraint;
 
 export type Constraints =
   | LabelConstraint
@@ -68,7 +69,7 @@ export type Constraints =
   | DefaultConstraint;
 
 /**
- * Field types
+ * Get the constraints key type in function of the constraints union type
  */
 export type FieldConstraints<C extends ConstraintsProperty<string, any>> = {
   0: { constraints: C };
@@ -79,117 +80,104 @@ export type BaseFieldType<T extends string> = BaseFieldProperties & {
   type: T;
 };
 
-export type StringField = BaseFieldType<'string'> &
-  FieldConstraints<
-    | BaseConstraint
-    | SearchableConstraint
-    | SortableConstraint
-    | MinLengthConstraint
-    | MaxLengthConstraint
-  >;
+export type BaseField<
+  T extends string,
+  C extends ConstraintsProperty<string, any>,
+> = BaseFieldType<T> & FieldConstraints<C>;
 
-export type NumberField = BaseFieldType<'number'> &
-  FieldConstraints<
-    | BaseConstraint
-    | SearchableConstraint
-    | SortableConstraint
-    | IntegerConstraint
-    | MinConstraint
-    | MaxConstraint
-  >;
+export type IsField<F> = F extends BaseField<
+  string,
+  ConstraintsProperty<string, any>
+>
+  ? F
+  : never;
 
-export type BooleanField = BaseFieldType<'boolean'> &
-  FieldConstraints<BaseConstraint | SearchableConstraint | SortableConstraint>;
+export type StringField = BaseField<
+  'string',
+  BaseConstraint &
+    SearchableConstraint &
+    SortableConstraint &
+    MinLengthConstraint &
+    MaxLengthConstraint
+>;
+
+export type NumberField = BaseField<
+  'number',
+  BaseConstraint &
+    SearchableConstraint &
+    SortableConstraint &
+    IntegerConstraint &
+    MinConstraint &
+    MaxConstraint
+>;
+
+export type BooleanField = BaseField<
+  'boolean',
+  BaseConstraint & SearchableConstraint & SortableConstraint
+>;
 
 export type Field = StringField | NumberField | BooleanField;
-
-// /**
-//  * Check if Field has constraints
-//  */
-// export type HasConstraint<
-//   F extends Field & EmptyConstraints,
-//   C extends Constraint<string, any>,
-// > = C extends ConstraintsProperty<infer K, infer T>
-//   ? F extends { constraints?: ConstraintsProperty<K, T> }
-//     ? 1
-//     : 0
-//   : 0 | 1;
-
-// export type HasOptionalConstraint<
-//   F extends Field & EmptyConstraints,
-//   C extends OptionalConstraint<string, any>,
-// > = C extends OptionalConstraint<infer K, infer T>
-//   ? DeepRequired<F> extends Field & { constraints: Constraint<K, T> }
-//     ? 1
-//     : 0
-//   : 0 | 1;
-
-// export type HasConstraints<
-//   F extends Field & EmptyConstraints,
-//   C extends Constraints,
-// > = Boolean.Or<
-//   C extends Constraint<string, any> ? HasConstraint<F, C> : 0,
-//   HasOptionalConstraint<F, C>
-// >;
 
 /**
  * Extract types by constraint
  */
-export type ExtractConstraint<
-  F extends FieldConstraints<ConstraintsProperty<string, any>>,
-  C extends ConstraintsProperty<string, any>,
+
+export type GetConstraints<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
 > = F extends {
-  constraints?: ConstraintsProperty<infer K, infer T>;
+  constraints?: infer C;
 }
+  ? C
+  : never;
+
+export type ExtractConstraint<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+  C extends ConstraintsProperty<string, any>,
+> = F extends BaseField<string, ConstraintsProperty<infer K, infer T>>
   ? C extends ConstraintsProperty<K, T>
     ? F
     : never
   : never;
+
 /**
  * Extract generic types by constraint
  */
-export type LabelSettable<F extends Field> = ExtractConstraint<
-  F,
-  LabelConstraint
->;
-export type UniqueSettable<F extends Field> = ExtractConstraint<
-  F,
-  UniqueConstraint
->;
-export type NotNullSettable<F extends Field> = ExtractConstraint<
-  F,
-  NotNullConstraint
->;
-export type MultipleSettable<F extends Field> = ExtractConstraint<
-  F,
-  MultipleConstraint
->;
-export type Searchable<F extends Field> = ExtractConstraint<
-  F,
-  SearchableConstraint
->;
-export type Sortable<F extends Field> = ExtractConstraint<
-  F,
-  SortableConstraint
->;
-export type MinLengthSettable<F extends Field> = ExtractConstraint<
-  F,
-  MinLengthConstraint
->;
-export type MaxLengthSettable<F extends Field> = ExtractConstraint<
-  F,
-  MaxLengthConstraint
->;
-export type MinSettable<F extends Field> = ExtractConstraint<F, MinConstraint>;
-export type MaxSettable<F extends Field> = ExtractConstraint<F, MaxConstraint>;
-export type IntegerSettable<F extends Field> = ExtractConstraint<
-  F,
-  IntegerConstraint
->;
-export type DefaultSettable<F extends Field> = ExtractConstraint<
-  F,
-  DefaultConstraint
->;
+export type LabelSettable<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = ExtractConstraint<F, LabelConstraint>;
+export type UniqueSettable<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = ExtractConstraint<F, UniqueConstraint>;
+export type NotNullSettable<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = ExtractConstraint<F, NotNullConstraint>;
+export type MultipleSettable<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = ExtractConstraint<F, MultipleConstraint>;
+export type Searchable<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = ExtractConstraint<F, SearchableConstraint>;
+export type Sortable<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = ExtractConstraint<F, SortableConstraint>;
+export type MinLengthSettable<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = ExtractConstraint<F, MinLengthConstraint>;
+export type MaxLengthSettable<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = ExtractConstraint<F, MaxLengthConstraint>;
+export type MinSettable<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = ExtractConstraint<F, MinConstraint>;
+export type MaxSettable<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = ExtractConstraint<F, MaxConstraint>;
+export type IntegerSettable<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = ExtractConstraint<F, IntegerConstraint>;
+export type DefaultSettable<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = ExtractConstraint<F, DefaultConstraint>;
 
 /**
  * Extract generic types from Field union type by constraint
@@ -210,11 +198,13 @@ export type DefaultSettableField = DefaultSettable<Field>;
 /**
  * Extract generic types and constraint names from Field union type
  */
-export type FieldTypes<F extends Field> = F extends { type: infer N }
-  ? N
-  : never;
+export type FieldTypes<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = F extends { type: infer N } ? N : never;
 
-export type ConstraintNames<F extends Field> = F extends {
+export type ConstraintNames<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = F extends {
   constraints?: { [key in infer N]?: any };
 }
   ? N
@@ -223,34 +213,46 @@ export type ConstraintNames<F extends Field> = F extends {
 /**
  * Extract generic types and constraint names from Field union type by constraint
  */
-type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
-export type HasConstraintsProperty<F extends Field> = WithRequired<
-  F,
-  'constraints'
->;
 
-export function hasConstraintsKey<F extends Field>(
+export type HasConstraintsProperty<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = F extends BaseField<string, ConstraintsProperty<string, any>>
+  ? F & { constraints: GetConstraints<F> }
+  : never;
+
+export type HasConstraints<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+  N extends keyof GetConstraints<F>,
+> = F extends BaseField<string, ConstraintsProperty<infer C, any>>
+  ? HasConstraintsProperty<F> & {
+      constraints: { [key in N]-?: GetConstraints<F>[key] };
+    }
+  : never;
+
+export function isField(
+  field: unknown,
+): field is BaseField<string, ConstraintsProperty<string, any>> {
+  return (
+    typeof field === 'object' &&
+    field !== null &&
+    'type' in field &&
+    'name' in field
+  );
+}
+
+export function hasSomeConstraints<F>(
   field: F,
-): field is HasConstraintsProperty<F> {
-  return 'constraints' in field && !!field.constraints;
+): field is HasConstraintsProperty<IsField<F>> {
+  return isField(field) && !!field.constraints;
 }
 
 export function hasConstraint<
-  N extends ConstraintNames<Field>,
-  C extends { constraints?: { [key in N]?: any } },
-  F extends Field,
->(
-  constraintName: N,
-): (
-  field: Field,
-) => field is HasConstraintsProperty<
-  F & C extends ConstraintsProperty<N, any> ? F & C : never
-> {
-  return (
-    field: Field,
-  ): field is HasConstraintsProperty<
-    F & C extends ConstraintsProperty<N, any> ? F & C : never
-  > => hasConstraintsKey(field) && !!field.constraints[constraintName];
+  N extends ConstraintNames<
+    BaseField<string, ConstraintsProperty<string, any>>
+  > = ConstraintNames<Field>,
+>(constraintName: N) {
+  return <F>(field: F): field is HasConstraints<IsField<F>, N> =>
+    hasSomeConstraints(field) && constraintName in field.constraints;
 }
 
 /**
@@ -276,14 +278,18 @@ export const hasMax = hasConstraint('max');
 export const isInteger = hasConstraint('integer');
 export const hasDefault = hasConstraint('defaultValue');
 
-export type FieldOptions<T extends Field> = Omit<
-  T,
-  'name' | 'type' | 'constraints'
->;
-export type EmptyConstraintsOptions<F extends Field> = F['constraints'];
+export type FieldOptions<
+  T extends BaseField<string, ConstraintsProperty<string, any>>,
+> = Omit<T, 'name' | 'type' | 'constraints'>;
+export type EmptyConstraintsOptions<
+  F extends BaseField<string, ConstraintsProperty<string, any>>,
+> = F['constraints'];
 
 export const fieldFactory =
-  <T extends FieldTypes<Field>, F extends Field & { type: T }>(
+  <
+    T extends FieldTypes<Field>,
+    F extends BaseField<string, ConstraintsProperty<string, any>> & { type: T },
+  >(
     type: T,
     defaultConstraints?: EmptyConstraintsOptions<F>,
     defaultOptions: Partial<FieldOptions<F>> = {},

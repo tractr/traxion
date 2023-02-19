@@ -2,12 +2,14 @@
 import { DeepRequired } from 'ts-essentials';
 
 import {
+  BaseConstraint,
   BooleanField,
   Field,
   hasConstraint,
   HasConstraints,
-  hasConstraintsKey,
   hasMinLength,
+  hasSomeConstraints,
+  isField,
   isString,
   NotNullConstraint,
   NumberField,
@@ -22,29 +24,6 @@ const booleanField: BooleanField = {
   type: 'boolean',
   name: 'test',
 };
-
-type IsBooleanFieldSortable_1 = HasConstraints<
-  BooleanField,
-  SortableConstraint
->;
-type IsBooleanFieldSearchable_0 = HasConstraints<
-  BooleanField,
-  SearchableConstraint
->;
-type IsBooleanFieldSearchableAndSortable_0 = HasConstraints<
-  BooleanField,
-  SortableConstraint & SearchableConstraint
->;
-
-type IsBooleanAndStringFieldSortable_1 = HasConstraints<
-  BooleanField | StringField,
-  SortableConstraint
->;
-
-type IsBooleanAndStringFieldSearchable_0 = HasConstraints<
-  BooleanField | StringField,
-  SearchableConstraint
->;
 
 /**
  * TEST DES TYPES
@@ -64,7 +43,7 @@ const testNumber: NumberField = {
   },
 };
 
-const testBoolean: Field = {
+const testBoolean: BooleanField = {
   type: 'boolean',
   name: 'name',
   constraints: {
@@ -78,12 +57,26 @@ if (isString(email)) {
   console.info(email.name);
 }
 
-const stringFields = fields.filter(isString);
-
-if (hasConstraintsKey(testBoolean)) {
-  console.info(test.constraints.searchable);
+if (hasSomeConstraints(testBoolean)) {
+  console.info(testBoolean.constraints.searchable);
+}
+if (hasSomeConstraints(testNumber)) {
+  console.info(testNumber.constraints.integer);
 }
 
-if (hasMinLength(testBoolean)) {
-  console.info(test.constraints.minLength);
+if (isField(testBoolean)) {
+  console.info(testBoolean.name);
+}
+
+type EmailType = typeof email;
+type test = HasConstraints<StringField, 'minLength'>;
+const test: test = {
+  ...email,
+  constraints: {
+    label: true,
+  },
+};
+
+if (hasMinLength(email)) {
+  console.info(email.constraints.minLength);
 }
