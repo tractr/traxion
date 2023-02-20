@@ -1,0 +1,18 @@
+<label *ngIf="!!label" [for]="prefixId + id">{{ label }}</label>
+
+<input
+  #input
+  [id]="prefixId + id"
+  type="number"
+  [placeholder]="placeholder || ''"
+  [disabled]="disabled"
+  (input)="onChange($event)"
+  (blur)="onTouched()"
+/>
+
+<div *ngIf="errors$ | async as errors">
+  <pre>
+This field is invalid
+{{ errors | json }}
+  </pre>
+</div>
