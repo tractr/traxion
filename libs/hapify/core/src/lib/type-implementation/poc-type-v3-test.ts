@@ -8,9 +8,14 @@ import {
   GetConstraints,
   hasConstraint,
   HasConstraints,
+  hasDefault,
+  hasLabel,
   hasMinLength,
+  isConstraint,
   IsField,
   isField,
+  isMultiple,
+  isSearchable,
   isString,
   isUnique,
   NumberField,
@@ -29,20 +34,20 @@ const booleanField: BooleanField = {
 /**
  * TEST DES TYPES
  */
-export const email: StringField = stringFieldFactory('email', {
+export const email = stringFieldFactory('email', {
   isSearchable: true,
 });
 
-const password: StringField = stringFieldFactory('password');
+const password = stringFieldFactory('password');
 
-const testNumber: NumberField = {
+const testNumber = {
   type: 'number',
   name: 'name',
   max: 2,
   isInteger: true,
 };
 
-const testBoolean: BooleanField = {
+const testBoolean = {
   type: 'boolean',
   name: 'name',
   defaultValue: true,
@@ -60,17 +65,23 @@ if (isField(testBoolean)) {
 
 type test = HasConstraints<StringField, 'isLabel'>;
 
-const test: StringField = {
+const test = {
   type: 'string',
   name: 'test',
   isMultiple: true,
   isLabel: true,
 };
 
-if (hasConstraint(test, 'isLabel')) {
+if (isString(test) && hasDefault(test) && isUnique(test) && isMultiple(test)) {
   console.info(test.isMultiple);
   console.info(test.defaultValue);
   console.info(test.isLabel);
+  console.info(test.isUnique);
+}
+
+if (hasConstraint(test, 'isLabel')) {
+  console.info(test.isLabel);
+  console.info(test.defaultValue);
 }
 
 if (hasMinLength(email)) {
@@ -81,4 +92,13 @@ if (hasMinLength(email)) {
 if (isUnique(email)) {
   console.info(email.isUnique);
   console.info(email.defaultValue);
+}
+
+if (isConstraint(test, 'isSearchable')) {
+  console.info(test.isSearchable);
+  console.info(test.defaultValue);
+}
+if (isSearchable(test)) {
+  console.info(test.isSearchable);
+  console.info(test.defaultValue);
 }

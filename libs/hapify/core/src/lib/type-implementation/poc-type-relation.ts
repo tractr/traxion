@@ -1,15 +1,15 @@
 import { Includes } from 'ts-toolbelt/out/List/Includes';
 
-import { BaseFieldType } from './poc-type-v3';
+import { BaseField } from './poc-type-v3.2';
 
 /**
  * A basic set of fields
  */
-type NumberField = BaseFieldType<'number'>;
-type StringField = BaseFieldType<'string'>;
-type PrimaryKeyField = BaseFieldType<'primaryKey'>;
-type ForeignKeyField = BaseFieldType<'foreignKey'>;
-type VirtualRelationField = BaseFieldType<'virtualRelation'>;
+type NumberField = BaseField<'number'>;
+type StringField = BaseField<'string'>;
+type PrimaryKeyField = BaseField<'primaryKey'>;
+type ForeignKeyField = BaseField<'foreignKey'>;
+type VirtualRelationField = BaseField<'virtualRelation'>;
 type Field =
   | NumberField
   | StringField
@@ -82,33 +82,33 @@ type WithName<M extends Model, N extends M['name']> = Extract<M, { name: N }>;
 
 /**
  * Safe OneManyRelation type
- * it checks that the referer and refered models have the required fields
+ * it checks that the referer and referred models have the required fields
  */
 type OneManyRelation<
   M extends Model,
-  RefererM extends WithForeignKey<M>['name'],
-  ReferedM extends WithPrimary<M>['name'],
+  ReferrerM extends WithForeignKey<M>['name'],
+  ReferredM extends WithPrimary<M>['name'],
 > = {
   type: 'oneMany';
   referer: {
-    model: RefererM;
+    model: ReferrerM;
     foreignKeyField: Extract<
-      WithName<M, RefererM>['fields'][number],
+      WithName<M, ReferrerM>['fields'][number],
       ForeignKeyField
     >['name'];
     virtualRelationField: Extract<
-      WithName<M, RefererM>['fields'][number],
+      WithName<M, ReferrerM>['fields'][number],
       VirtualRelationField
     >['name'];
   };
-  refered: {
-    model: ReferedM;
+  referred: {
+    model: ReferredM;
     primaryField: Extract<
-      WithName<M, ReferedM>['fields'][number],
+      WithName<M, ReferredM>['fields'][number],
       PrimaryKeyField
     >['name'];
     virtualRelationField: Extract<
-      WithName<M, ReferedM>['fields'][number],
+      WithName<M, ReferredM>['fields'][number],
       VirtualRelationField
     >['name'];
   };
@@ -160,7 +160,7 @@ const modelWithBoth = {
       type: 'string',
       name: 'name3',
     },
-  ],
+  ] as const,
 } as const;
 
 const modelWithNone = {
@@ -170,7 +170,7 @@ const modelWithNone = {
       type: 'string',
       name: 'name4',
     },
-  ],
+  ] as const,
 } as const;
 
 const models = [
@@ -218,7 +218,7 @@ const oneManyRelation: OneManyRelation<
     foreignKeyField: 'fk1',
     virtualRelationField: 'virtualRelation1',
   },
-  refered: {
+  referred: {
     model: 'modelWithPrimaryKey',
     primaryField: 'id2',
     virtualRelationField: 'virtualRelation2',
