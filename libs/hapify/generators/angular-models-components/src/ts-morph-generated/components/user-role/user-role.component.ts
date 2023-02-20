@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit, Optional, Self } from "@angular/core";
 import { AbstractControl, FormControl, FormsModule, NgControl, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
-import { UserCreditsValidator } from "@poc/angular-models-validators";
+import { UserRoleValidator } from "@poc/angular-models-validators";
 import { BaseControlValueAccessorComponent } from "@trxn/angular-tools";
-import { UserCreditsUiComponent } from "@trxn/angular-ui";
+import { UserRoleUiComponent } from "@trxn/angular-ui";
 import { CommonModule } from "@angular/common";
 
 @Component({
@@ -13,19 +13,19 @@ import { CommonModule } from "@angular/common";
           ReactiveFormsModule,
           FormsModule,
         ],
-        selector: 'poc-user-credits',
-        templateUrl: './user-credits.component.html',
+        selector: 'poc-user-roles',
+        templateUrl: './user-roles.component.html',
         changeDetection: ChangeDetectionStrategy.OnPush,
         providers: [],
         })
-export class UserCreditsComponent extends BaseControlValueAccessorComponent implements OnInit {
+export class UserRoleComponent extends BaseControlValueAccessorComponent implements OnInit {
     control: FormControl = new FormControl('');
 
-    constructor(public userCreditsValidator: UserCreditsValidator, @Self() @Optional() public override ngControl?: NgControl) {
+    constructor(public userRoleValidator: UserRoleValidator, @Self() @Optional() public override ngControl?: NgControl) {
         super(ngControl);
     }
 
     override get validator(): (control: AbstractControl) => ValidationErrors | null {
-        return this.userCreditsValidator.validate;
+        return this.userRoleValidator.validate;
     }
 }

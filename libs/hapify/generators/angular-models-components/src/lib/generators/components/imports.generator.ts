@@ -34,10 +34,11 @@ export const generateImports = (model: Model, field: Field, projectScope:string)
       '@trxn/angular-ui',
       [`${pascal(model.name)}${pascal(field.name)}UiComponent`],
     ),
-    generateImport(
-      `@${projectScope}/angular-models-validators`,
-      [`${pascal(model.name)}${pascal(field.name)}ValidatorModule`],
-    ),
+    // TODO: add proper validator import depending on the field type
+    // generateImport(
+    //   `../../angular-models-validators.module`,
+    //   [`AngularModelsValidatorsModule`],
+    // ),
     generateImport('@angular/common', ['CommonModule']),
   ]
 

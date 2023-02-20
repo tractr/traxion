@@ -15,6 +15,7 @@ import { generateDecorator } from './decorator.generator';
 import { generateImports } from './imports.generator';
 
 import { camel, Field, kebab, Model, pascal } from '@trxn/hapify-core';
+import { generateFilePath } from '../../utils/file.generator';
 
 export function generateComponentClass(
   model: Model,
@@ -64,11 +65,7 @@ export function generateComponentSourceFile(
   path: string,
   projectScope: string,
 ) {
-  const fileName = `${kebab(model.name)}-${kebab(
-    plural(field.name),
-  )}.component.ts`;
-  const filePath = `${path}/${kebab(model.name)}-${kebab(
-    plural(field.name))}/${fileName}`;
+  const filePath: string = generateFilePath(model.name, field.name, 'component.ts', path);
 
   const sourceFile = project.createSourceFile(filePath);
 

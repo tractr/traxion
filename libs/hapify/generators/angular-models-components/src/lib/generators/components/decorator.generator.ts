@@ -3,7 +3,7 @@ import { DecoratorStructure, OptionalKind } from "ts-morph";
 
 import { Field, kebab, Model } from '@trxn/hapify-core';
 
-
+// TODO: add import for AngularModelsValidatorsModule
 export const generateDecorator = (model: Model, field: Field, projectScope:string): OptionalKind<DecoratorStructure>[] => [
     {
       name: 'Component',
@@ -11,7 +11,6 @@ export const generateDecorator = (model: Model, field: Field, projectScope:strin
         `{
     standalone: true,
     imports: [
-      SelectUiComponent,
       AngularModelsValidatorsModule,
       CommonModule,
       ReactiveFormsModule,

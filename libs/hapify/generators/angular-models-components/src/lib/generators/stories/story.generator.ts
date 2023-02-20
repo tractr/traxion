@@ -1,44 +1,34 @@
 import { plural } from 'pluralize';
 import {
-  ClassDeclarationStructure,
   ExportAssignmentStructure,
   ImportDeclarationStructure,
-  MethodDeclarationStructure,
   OptionalKind,
   Project,
-  PropertyDeclarationStructure,
-  StructureKind,
-  SyntaxKind,
-  VariableDeclaration,
   VariableDeclarationKind,
 } from 'ts-morph';
 
-import { camel, Field, kebab, Model, pascal } from '@trxn/hapify-core';
 import { generateImport } from '../../utils/import.generator';
+
+import { Field, kebab, lower, Model, pascal } from '@trxn/hapify-core';
+import { generateFilePath } from '../../utils/file.generator';
 
 export function generateStorySourceFile(
   project: Project,
   model: Model,
   field: Field,
   path: string,
-  projectScope: string,
+  projectScope: string
 ) {
-  const fileName = `${kebab(model.name)}-${kebab(
-    plural(field.name),
-  )}.stories.ts`;
-  const filePath = `${path}/${kebab(model.name)}-${kebab(
-    plural(field.name),
-  )}/${fileName}`;
+
+  const filePath: string = generateFilePath(model.name, field.name, 'stories.ts', path);
 
   const sourceFile = project.createSourceFile(filePath);
 
-
   const imports: OptionalKind<ImportDeclarationStructure>[] = [
     generateImport('@storybook/angular', ['Meta', 'Story']),
-    generateImport(
-      `./${kebab(model.name)}-${kebab(plural(field.name))}.component`,
-      [`${pascal(model.name)}${pascal(plural(field.name))}Component`],
-    ),
+    generateImport(`./${kebab(model.name)}-${kebab(field.name)}.component`, [
+      `${pascal(model.name)}${pascal(field.name)}Component`,
+    ]),
   ];
 
   const exportStatement: OptionalKind<ExportAssignmentStructure> = {
@@ -51,39 +41,59 @@ export function generateStorySourceFile(
 } as Meta<${pascal(model.name)}${pascal(plural(field.name))}Component>`,
   };
 
-
-
-  const constEmpty = sourceFile.addVariableStatement({
-    declarationKind: VariableDeclarationKind.Const,
-    declarations: [
-      {
-        name: 'EmptyRoles',
-        initializer: 'Template.bind({})',
-      },
-    ],
-  });
-  // add the args property
-  constEmpty.addDeclaration({
-    name: 'args',
-    initializer: '{ placeholder: "" }',
-  });
-
-  const constFilled = sourceFile.addVariableStatement({
-    declarationKind: VariableDeclarationKind.Const,
-    declarations: [
-      {
-        name: 'EmptyRoles',
-        initializer: 'Template.bind({})',
-      },
-    ],
-  });
-
-  // add the args property
-  constFilled.addDeclaration({
-    name: 'args',
-    initializer: '{ placeholder: "not empty" }',
-  });
-
   sourceFile.addExportAssignment(exportStatement);
+
+  sourceFile.addVariableStatement({
+    declarationKind: VariableDeclarationKind.Const,
+    declarations: [
+      {
+        name: 'Template',
+        initializer: `(args: ${pascal(model.name)}${pascal(
+          field.name,
+        )}Component) => ({
+  props: args,
+})`,
+type: `Story<${pascal(model.name)}${pascal(plural(field.name))}Component>`,
+      },
+    ],
+  });
+
+  sourceFile.addVariableStatement({
+    declarationKind: VariableDeclarationKind.Const,
+    isExported: true,
+    declarations: [
+      {
+        name: `Emptied${pascal(field.name)}`,
+        initializer: `Template.bind({
+          args: {
+            placeholder: ""
+          }
+        })`,
+      },
+    ],
+  });
+
+  // add the args property
+  sourceFile.addVariableStatement({
+    declarationKind: VariableDeclarationKind.Const,
+    isExported: true,
+    declarations: [
+      {
+        name: `Filled${pascal(field.name)}`,
+        initializer: `Template.bind({
+          args: {
+            placeholder: "not empty"
+          }
+        })`,
+      },
+    ],
+  });
+
+  // // add the args property
+  // constFilled.addDeclaration({
+  //   name: 'args',
+  //   initializer: '{ placeholder: "not empty" }',
+  // });
+
   sourceFile.addImportDeclarations(imports);
 }
