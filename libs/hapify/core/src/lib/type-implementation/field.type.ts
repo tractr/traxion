@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
 
+import type { Relation } from './schema.type';
+
 /**
  * Base field properties
+ *
  */
 export type BaseFieldProperties<T extends string = string> = {
   type: T;
@@ -604,6 +607,7 @@ export const fieldFactory =
     constraints?: C,
     options: O = {} as O,
   ) =>
+    // createField(field, name, { ...defaultConstraints, ...constraints }, { ...defaultOptions, ...options }})
     ({
       type,
       name,
@@ -616,29 +620,41 @@ export const fieldFactory =
 /** ------------------ Traxion ------------------ */
 
 /**
- * Field constraints
- */
-export type LabelConstraint = OptionalConstraint<'isLabel', boolean>;
-export type UniqueConstraint = OptionalConstraint<'isUnique', boolean>;
-export type NullConstraint = OptionalConstraint<'isNull', boolean>;
-export type MultipleConstraint = OptionalConstraint<'isMultiple', boolean>;
-export type SearchableConstraint = OptionalConstraint<'isSearchable', boolean>;
-export type SortableConstraint = OptionalConstraint<'isSortable', boolean>;
-export type MinLengthConstraint = OptionalConstraint<'minLength', number>;
-export type MaxLengthConstraint = OptionalConstraint<'maxLength', number>;
-export type MinConstraint = OptionalConstraint<'min', number>;
-export type MaxConstraint = OptionalConstraint<'max', number>;
-export type IntegerConstraint = OptionalConstraint<'isInteger', boolean>;
-export type DefaultConstraint = OptionalConstraint<'defaultValue', any>;
-
-/**
- * Base field constraints
+ * Field Base constraints
  */
 export type BaseConstraint = LabelConstraint &
   UniqueConstraint &
   NullConstraint &
   DefaultConstraint &
-  MultipleConstraint;
+  MultipleConstraint &
+  SearchableConstraint &
+  SortableConstraint;
+
+export type LabelConstraint = OptionalConstraint<'isLabel', boolean>;
+export type UniqueConstraint = OptionalConstraint<'isUnique', boolean>;
+export type NullConstraint = OptionalConstraint<'isNull', boolean>;
+export type DefaultConstraint = OptionalConstraint<'defaultValue', any>;
+export type MultipleConstraint = OptionalConstraint<'isMultiple', boolean>;
+export type SearchableConstraint = OptionalConstraint<'isSearchable', boolean>;
+export type SortableConstraint = OptionalConstraint<'isSortable', boolean>;
+
+/**
+ * StringField Base constraints
+ */
+export type StringFieldConstraint = OptionalConstraint<'minLength', number>;
+export type MinLengthConstraint = OptionalConstraint<'minLength', number>;
+export type MaxLengthConstraint = OptionalConstraint<'maxLength', number>;
+export type MinConstraint = OptionalConstraint<'min', number>;
+export type MaxConstraint = OptionalConstraint<'max', number>;
+export type IntegerConstraint = OptionalConstraint<'isInteger', boolean>;
+export type PasswordConstraint = OptionalConstraint<'defaultValue', any>;
+
+export type RelationsConstraint = Constraints<'relations', Relation[]>;
+export type RelationConstraint = Constraints<'relation', Relation>;
+
+/**
+ * Base field constraints
+ */
 
 /**
  * StringField type
@@ -674,9 +690,39 @@ export type BooleanField = BaseField<
 >;
 
 /**
+ * Primary field type
+ */
+export type PrimaryKeyField = BaseField<
+  'primary',
+  BaseConstraint & RelationsConstraint
+>;
+
+/**
+ * Foreign field type
+ */
+export type ForeignKeyField = HasConstraints<
+  BaseField<'foreign', BaseConstraint & RelationConstraint>,
+  'isUnique'
+>;
+
+/**
+ * Virtual field type
+ */
+export type VirtualRelationField = BaseField<
+  'virtual',
+  BaseConstraint & RelationConstraint
+>;
+
+/**
  * All Traxion Fields
  */
-export type Field = StringField | NumberField | BooleanField;
+export type Field =
+  | StringField
+  | NumberField
+  | BooleanField
+  | PrimaryKeyField
+  | ForeignKeyField
+  | VirtualRelationField;
 
 /**
  * Extract generic types by constraint
@@ -755,6 +801,9 @@ export const hasMax = hasConstraintFactory('max');
 export const hasInteger = hasConstraintFactory('isInteger');
 export const hasDefault = hasConstraintFactory('defaultValue');
 
-export const stringFieldFactory = fieldFactory('string');
-export const numberFieldFactory = fieldFactory('number');
-export const booleanFieldFactory = fieldFactory('boolean');
+export const stringField = fieldFactory('string');
+export const numberField = fieldFactory('number');
+export const booleanField = fieldFactory('boolean');
+export const primaryField = fieldFactory('primary');
+export const foreignField = fieldFactory('foreign', { isUnique: true });
+export const virtualField = fieldFactory('virtual');

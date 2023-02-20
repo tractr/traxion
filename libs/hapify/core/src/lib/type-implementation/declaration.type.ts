@@ -1,29 +1,14 @@
 import { Includes } from 'ts-toolbelt/out/List/Includes';
 
-import { BaseField } from './poc-type-v3.2';
-
-/**
- * A basic set of fields
- */
-type NumberField = BaseField<'number'>;
-type StringField = BaseField<'string'>;
-type PrimaryKeyField = BaseField<'primaryKey'>;
-type ForeignKeyField = BaseField<'foreignKey'>;
-type VirtualRelationField = BaseField<'virtualRelation'>;
-type Field =
-  | NumberField
-  | StringField
-  | PrimaryKeyField
-  | ForeignKeyField
-  | VirtualRelationField;
-
-/**
- * The model type
- */
-type Model = {
-  name: string;
-  fields: readonly Field[];
-};
+import type {
+  BaseField,
+  Field,
+  ForeignKeyField,
+  IsConstraints,
+  PrimaryKeyField,
+  VirtualRelationField,
+} from './field.type';
+import { Model } from './schema.type';
 
 /**
  * Type predicates that insures a model as a field of the required type
@@ -86,8 +71,8 @@ type WithName<M extends Model, N extends M['name']> = Extract<M, { name: N }>;
  */
 type OneManyRelation<
   M extends Model,
-  ReferrerM extends WithForeignKey<M>['name'],
-  ReferredM extends WithPrimary<M>['name'],
+  ReferrerM extends WithForeignKey<M>['name'] = string,
+  ReferredM extends WithPrimary<M>['name'] = string,
 > = {
   type: 'oneMany';
   referer: {
@@ -180,13 +165,13 @@ const models = [
   modelWithNone,
 ] as const;
 
-type m = typeof models[number];
+type m = (typeof models)[number];
 
 /**
  * Extract primary keys from a model
  */
 type primaryField = Extract<
-  typeof modelWithPrimaryKey['fields'][number],
+  (typeof modelWithPrimaryKey)['fields'][number],
   PrimaryKeyField
 >['name']; // 'id2'
 
@@ -207,11 +192,7 @@ type modelsWithVirtualRelationField = WithVirtualRelationField<m>['name']; // 'm
 /**
  * Relation declaration is type safe =)
  */
-const oneManyRelation: OneManyRelation<
-  m,
-  'modelWithForeignKey',
-  'modelWithPrimaryKey'
-> = {
+const oneManyRelation: OneManyRelation<m> = {
   type: 'oneMany',
   referer: {
     model: 'modelWithForeignKey',
