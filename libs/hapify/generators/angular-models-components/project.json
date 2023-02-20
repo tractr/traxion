@@ -1,0 +1,39 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "hapify-generators-angular-models-components",
+  "projectType": "library",
+  "sourceRoot": "libs/hapify/generators/angular-models-components/src",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/hapify/generators/angular-models-components/**/*.ts"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/hapify/generators/angular-models-components/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/hapify/generators/angular-models-components"]
+    },
+    "ts-morph-generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx ts-node -r tsconfig-paths/register --project ./tsconfig.lib.json ./src/start.ts",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": "libs/hapify/generators/angular-models-components",
+        "parallel": false
+      }
+    }
+  }
+}
