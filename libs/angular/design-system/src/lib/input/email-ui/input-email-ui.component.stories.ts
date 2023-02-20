@@ -13,17 +13,20 @@ const Template: Story<InputEmailUiComponent> = (
   props: args,
 });
 
-export const EmailEmptyPlaceholder = Template.bind({});
-EmailEmptyPlaceholder.args = {
+export const EmailDefault = Template.bind({});
+EmailDefault.args = {};
+
+export const EmailWithLabel = Template.bind({});
+EmailWithLabel.args = {
+  label: 'Input Label',
+};
+
+export const EmailWithoutPlaceholder = Template.bind({});
+EmailWithoutPlaceholder.args = {
   placeholder: '',
 };
 
 export const EmailWithPlaceholder = Template.bind({});
 EmailWithPlaceholder.args = {
   placeholder: 'admin@trxn-angular.com',
-};
-
-export const EmailWithLabel = Template.bind({});
-EmailWithPlaceholder.args = {
-  label: 'Input Label',
 };

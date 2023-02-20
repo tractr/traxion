@@ -13,5 +13,20 @@ const Template: Story<InputPasswordUiComponent> = (
   props: args,
 });
 
-export const PasswordFilled = Template.bind({});
-PasswordFilled.args = {};
+export const PasswordDefault = Template.bind({});
+PasswordDefault.args = {};
+
+export const PasswordWithLabel = Template.bind({});
+PasswordWithLabel.args = {
+  label: 'Input Label',
+};
+
+export const PasswordWithoutPlaceholder = Template.bind({});
+PasswordWithoutPlaceholder.args = {
+  placeholder: '',
+};
+
+export const PasswordWithPlaceholder = Template.bind({});
+PasswordWithPlaceholder.args = {
+  placeholder: 'custom placeholder',
+};
