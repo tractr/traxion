@@ -55,4 +55,36 @@ describe('InputPasswordUiComponent', () => {
     expect(component.showPassword).toBeFalsy();
     expect(component.input.nativeElement.type).toBe('password');
   });
+
+  it('should return a value', async () => {
+    const setInputValue = async (value: unknown) => {
+      component.input.nativeElement.value = value;
+      (component.input.nativeElement as HTMLInputElement).dispatchEvent(
+        new Event('input'),
+      );
+      await runOnPushChangeDetection(fixture);
+    };
+
+    // Check initial value
+    expect(component.input.nativeElement.value).toEqual('');
+
+    // Set by last value of input value stream
+    let lastValue: string | undefined;
+    component.value$.subscribe((value) => {
+      lastValue = value;
+    });
+    expect(lastValue).toEqual(undefined);
+
+    // Set value to 'abc'
+    await setInputValue('abc');
+    expect(lastValue).toEqual('abc');
+
+    // Set value to 'def'
+    await setInputValue('def');
+    expect(lastValue).toEqual('def');
+
+    // Set empty value
+    await setInputValue('');
+    expect(lastValue).toEqual('');
+  });
 });
