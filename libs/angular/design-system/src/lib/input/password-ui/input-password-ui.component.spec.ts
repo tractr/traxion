@@ -1,6 +1,20 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InputPasswordUiComponent } from './input-password-ui.component';
+
+/**
+ * Changes in components using OnPush strategy are only applied once when calling .detectChanges(),
+ * This function solves this issue.
+ */
+export async function runOnPushChangeDetection(
+  fixture: ComponentFixture<unknown>,
+): Promise<void> {
+  const changeDetectorRef =
+    fixture.debugElement.injector.get<ChangeDetectorRef>(ChangeDetectorRef);
+  changeDetectorRef.detectChanges();
+  return fixture.whenStable();
+}
 
 describe('InputPasswordUiComponent', () => {
   let component: InputPasswordUiComponent;
@@ -20,13 +34,25 @@ describe('InputPasswordUiComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should toggle the visibility of password input', () => {
-    // first click shows the password
-    component.toggleShowPassword();
-    expect(component.showPassword).toBeTruthy();
+  it('should have a default placeholder', () => {
+    expect(component.placeholder).toEqual('Password');
+  });
 
-    // second click hides the password
-    component.toggleShowPassword();
+  it('should toggle the visibility of password input', async () => {
+    // By default the password is hidden
     expect(component.showPassword).toBeFalsy();
+    expect(component.input.nativeElement.type).toBe('password');
+
+    // First click shows the password
+    component.toggleShowPassword();
+    await runOnPushChangeDetection(fixture);
+    expect(component.showPassword).toBeTruthy();
+    expect(component.input.nativeElement.type).toBe('text');
+
+    // Second click hides the password
+    component.toggleShowPassword();
+    await runOnPushChangeDetection(fixture);
+    expect(component.showPassword).toBeFalsy();
+    expect(component.input.nativeElement.type).toBe('password');
   });
 });

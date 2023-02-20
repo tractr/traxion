@@ -19,4 +19,8 @@ describe('InputEmailUiComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have a default placeholder', () => {
+    expect(component.placeholder).toEqual('Email');
+  });
 });
