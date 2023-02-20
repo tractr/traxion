@@ -19,4 +19,14 @@ describe('InputPasswordUiComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should toggle the visibility of password input', () => {
+    // first click shows the password
+    component.toggleShowPassword();
+    expect(component.showPassword).toBeTruthy();
+
+    // second click hides the password
+    component.toggleShowPassword();
+    expect(component.showPassword).toBeFalsy();
+  });
 });
