@@ -1,13 +1,13 @@
 <label *ngIf="!!label" [for]="prefixId + id">{{ label }}</label>
 
-<teaxtarea
+<textarea
   #textarea
   [id]="prefixId + id"
   [placeholder]="placeholder || ''"
   [disabled]="disabled"
   (input)="onChange($event)"
   (blur)="onTouched()"
-></teaxtarea>
+></textarea>
 
 <div *ngIf="errors$ | async as errors">
   <pre>

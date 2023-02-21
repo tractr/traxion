@@ -30,7 +30,7 @@ export class InputTextareaUiComponent
   extends BaseFormControlComponent
   implements OnInit, ControlValueAccessor, Validator
 {
-  @ViewChild('textarea') input!: ElementRef<HTMLTextAreaElement>;
+  @ViewChild('textarea') textarea!: ElementRef<HTMLTextAreaElement>;
 
   @Input() placeholder?: string;
 
@@ -44,7 +44,7 @@ export class InputTextareaUiComponent
     this.placeholder = this.placeholder ?? 'Textarea';
 
     this.value$.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
-      if (this.input) this.input.nativeElement.value = value;
+      if (this.textarea) this.textarea.nativeElement.value = value;
     });
   }
 }

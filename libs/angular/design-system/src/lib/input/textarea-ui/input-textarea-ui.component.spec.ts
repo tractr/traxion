@@ -40,13 +40,13 @@ describe('InputTextUiComponent', () => {
 
   it('should return a value', async () => {
     const setInputValue = async (value: string) => {
-      component.input.nativeElement.value = value;
-      component.input.nativeElement.dispatchEvent(new Event('input'));
+      component.textarea.nativeElement.value = value;
+      component.textarea.nativeElement.dispatchEvent(new Event('input'));
       await runOnPushChangeDetection(fixture);
     };
 
     // Check initial value
-    expect(component.input.nativeElement.value).toEqual('');
+    expect(component.textarea.nativeElement.value).toEqual('');
 
     // Set by last value of input value stream
     let lastValue: string | undefined;
