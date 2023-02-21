@@ -708,7 +708,7 @@ export type ForeignKeyField = HasConstraints<
 /**
  * Virtual field type
  */
-export type VirtualRelationField = BaseField<
+export type VirtualField = BaseField<
   'virtual',
   BaseConstraint & RelationConstraint
 >;
@@ -722,7 +722,7 @@ export type Field =
   | BooleanField
   | PrimaryKeyField
   | ForeignKeyField
-  | VirtualRelationField;
+  | VirtualField;
 
 /**
  * Extract generic types by constraint
@@ -781,6 +781,10 @@ export type DefaultSettableField = DefaultSettable<Field>;
 export const isString = isFieldFactory('string');
 export const isNumber = isFieldFactory('number');
 export const isBoolean = isFieldFactory('boolean');
+export const isPrimary = isFieldFactory('primary');
+export const isForeign = isFieldFactory('foreign');
+export const isVirtual = isFieldFactory('virtual');
+
 export const isUnique = isConstraintFactory('isUnique');
 export const isNull = isConstraintFactory('isNull');
 export const isSearchable = isConstraintFactory('isSearchable');
