@@ -67,4 +67,26 @@ describe('InputDatetimeUiComponent', () => {
     await setInputValue('');
     expect(lastValue).toEqual(undefined);
   });
+
+  it('should not accept bad format', async () => {
+    const setInputValue = async (value: string) => {
+      component.input.nativeElement.value = value;
+      component.input.nativeElement.dispatchEvent(new Event('input'));
+      await runOnPushChangeDetection(fixture);
+    };
+
+    // Check initial value
+    expect(component.input.nativeElement.value).toEqual('');
+
+    // Set by last value of input value stream
+    let lastValue: Date | undefined;
+    component.value$.subscribe((value) => {
+      lastValue = value;
+    });
+    expect(lastValue).toEqual(undefined);
+
+    // Set value to string not well formatted
+    await setInputValue('abc');
+    expect(lastValue).toEqual(undefined);
+  });
 });
