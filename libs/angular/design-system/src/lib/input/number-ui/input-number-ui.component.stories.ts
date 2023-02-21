@@ -21,12 +21,17 @@ NumberWithLabel.args = {
   label: 'Input Label',
 };
 
-export const NumberWithoutPlaceholder = Template.bind({});
-NumberWithoutPlaceholder.args = {
+export const NumberEmptyPlaceholder = Template.bind({});
+NumberEmptyPlaceholder.args = {
   placeholder: '',
 };
 
 export const NumberWithPlaceholder = Template.bind({});
 NumberWithPlaceholder.args = {
   placeholder: 'custom placeholder',
+};
+
+export const NumberDisabled = Template.bind({});
+NumberDisabled.args = {
+  disabled: true,
 };

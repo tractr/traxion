@@ -21,12 +21,17 @@ EmailWithLabel.args = {
   label: 'Input Label',
 };
 
-export const EmailWithoutPlaceholder = Template.bind({});
-EmailWithoutPlaceholder.args = {
+export const EmailEmptyPlaceholder = Template.bind({});
+EmailEmptyPlaceholder.args = {
   placeholder: '',
 };
 
 export const EmailWithPlaceholder = Template.bind({});
 EmailWithPlaceholder.args = {
   placeholder: 'admin@trxn-angular.com',
+};
+
+export const EmailDisabled = Template.bind({});
+EmailDisabled.args = {
+  disabled: true,
 };

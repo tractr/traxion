@@ -19,12 +19,17 @@ TextWithLabel.args = {
   label: 'Input Label',
 };
 
-export const TextWithoutPlaceholder = Template.bind({});
-TextWithoutPlaceholder.args = {
+export const TextEmptyPlaceholder = Template.bind({});
+TextEmptyPlaceholder.args = {
   placeholder: '',
 };
 
 export const TextWithPlaceholder = Template.bind({});
 TextWithPlaceholder.args = {
   placeholder: 'custom placeholder',
+};
+
+export const TextDisabled = Template.bind({});
+TextDisabled.args = {
+  disabled: true,
 };

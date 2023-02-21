@@ -21,12 +21,17 @@ PasswordWithLabel.args = {
   label: 'Input Label',
 };
 
-export const PasswordWithoutPlaceholder = Template.bind({});
-PasswordWithoutPlaceholder.args = {
+export const PasswordEmptyPlaceholder = Template.bind({});
+PasswordEmptyPlaceholder.args = {
   placeholder: '',
 };
 
 export const PasswordWithPlaceholder = Template.bind({});
 PasswordWithPlaceholder.args = {
   placeholder: 'custom placeholder',
+};
+
+export const PasswordDisabled = Template.bind({});
+PasswordDisabled.args = {
+  disabled: true,
 };
