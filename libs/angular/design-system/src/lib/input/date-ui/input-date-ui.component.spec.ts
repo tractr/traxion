@@ -45,7 +45,7 @@ describe('InputDateUiComponent', () => {
     expect(component.input.nativeElement.value).toEqual('');
 
     // Set by last value of input value stream
-    let lastValue: string | undefined;
+    let lastValue: Date | undefined;
     component.value$.subscribe((value) => {
       lastValue = value;
     });
@@ -53,14 +53,14 @@ describe('InputDateUiComponent', () => {
 
     // Set value to '2010-10-10'
     await setInputValue('2010-10-10');
-    expect(lastValue).toEqual('2010-10-10');
+    expect(lastValue).toEqual(new Date('2010-10-10'));
 
     // Set value to '2021-01-02'
     await setInputValue('2021-01-02');
-    expect(lastValue).toEqual('2021-01-02');
+    expect(lastValue).toEqual(new Date('2021-01-02'));
 
     // Set empty value
     await setInputValue('');
-    expect(lastValue).toEqual('');
+    expect(lastValue).toEqual(undefined);
   });
 });

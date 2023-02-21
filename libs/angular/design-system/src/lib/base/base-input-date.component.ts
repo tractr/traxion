@@ -7,5 +7,10 @@ import { BaseInputComponent } from './base-input.component';
   template: '',
 })
 export abstract class BaseInputDateComponent extends BaseInputComponent {
-  value$ = new Subject<string>();
+  value$ = new Subject<Date | undefined>();
+
+  override onChange = (event: Event) => {
+    const { value } = event.target as HTMLInputElement;
+    this.value$.next(value ? new Date(value) : undefined);
+  };
 }

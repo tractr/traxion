@@ -45,7 +45,7 @@ describe('InputDatetimeUiComponent', () => {
     expect(component.input.nativeElement.value).toEqual('');
 
     // Set by last value of input value stream
-    let lastValue: string | undefined;
+    let lastValue: Date | undefined;
     component.value$.subscribe((value) => {
       lastValue = value;
     });
@@ -53,18 +53,18 @@ describe('InputDatetimeUiComponent', () => {
 
     // Set value to 'yyyy-MM-ddTHH:mm:ss'
     await setInputValue('2010-10-10T10:10:10');
-    expect(lastValue).toEqual('2010-10-10T10:10:10.000');
+    expect(lastValue).toEqual(new Date('2010-10-10T10:10:10.000'));
 
     // Set value to 'yyyy-MM-ddTHH:mm:ss.SSS'
     await setInputValue('2021-01-02T04:05:06.789');
-    expect(lastValue).toEqual('2021-01-02T04:05:06.789');
+    expect(lastValue).toEqual(new Date('2021-01-02T04:05:06.789'));
 
     // Set value to 'yyyy-MM-ddTHH:mm'
     await setInputValue('2021-01-02T04:05');
-    expect(lastValue).toEqual('2021-01-02T04:05');
+    expect(lastValue).toEqual(new Date('2021-01-02T04:05'));
 
     // Set empty value
     await setInputValue('');
-    expect(lastValue).toEqual('');
+    expect(lastValue).toEqual(undefined);
   });
 });
