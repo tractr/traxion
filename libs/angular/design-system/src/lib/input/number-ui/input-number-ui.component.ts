@@ -11,8 +11,9 @@ import {
   ReactiveFormsModule,
   Validator,
 } from '@angular/forms';
+import { Subject } from 'rxjs';
 
-import { BaseInputNumberComponent } from '../../base';
+import { BaseInputComponent } from '../../base';
 
 @Component({
   standalone: true,
@@ -24,10 +25,12 @@ import { BaseInputNumberComponent } from '../../base';
   providers: [],
 })
 export class InputNumberUiComponent
-  extends BaseInputNumberComponent
+  extends BaseInputComponent
   implements OnInit, ControlValueAccessor, Validator
 {
   @Input() placeholder?: string;
+
+  value$ = new Subject<number | undefined>();
 
   override prefixId = 'trxn-input-number-ui-';
 
@@ -35,4 +38,10 @@ export class InputNumberUiComponent
     super.ngOnInit();
     this.placeholder = this.placeholder ?? 'Number';
   }
+
+  override onChange = (event: Event) => {
+    const value = parseInt((event.target as HTMLInputElement).value, 10);
+
+    this.value$.next(Number.isNaN(value) ? undefined : value);
+  };
 }
