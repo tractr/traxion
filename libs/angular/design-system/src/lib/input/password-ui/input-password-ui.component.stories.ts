@@ -59,9 +59,9 @@ PasswordDisabled.args = {
 };
 
 // Component with filling animation
-export const PasswordFilled = Template.bind({});
-PasswordFilled.play = fillingPlay('Password Filled');
-PasswordFilled.args = {};
+export const PasswordFilling = Template.bind({});
+PasswordFilling.play = fillingPlay('Password Filling');
+PasswordFilling.args = {};
 
 // Component with password shown state
 export const PasswordShow = Template.bind({});
