@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { BaseInputComponent } from './base-input.component';
@@ -8,8 +8,6 @@ import { BaseInputComponent } from './base-input.component';
 })
 export abstract class BaseInputNumberComponent extends BaseInputComponent {
   value$ = new Subject<number | undefined>();
-
-  @Input() placeholder?: string;
 
   override onChange = (event: Event) => {
     const value = parseInt((event.target as HTMLInputElement).value, 10);

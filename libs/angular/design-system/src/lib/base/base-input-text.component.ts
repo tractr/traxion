@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { BaseInputComponent } from './base-input.component';
@@ -8,6 +8,4 @@ import { BaseInputComponent } from './base-input.component';
 })
 export abstract class BaseInputTextComponent extends BaseInputComponent {
   value$ = new Subject<string>();
-
-  @Input() placeholder?: string;
 }

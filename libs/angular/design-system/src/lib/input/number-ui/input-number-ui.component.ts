@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import {
   ControlValueAccessor,
   FormsModule,
@@ -22,6 +27,8 @@ export class InputNumberUiComponent
   extends BaseInputNumberComponent
   implements OnInit, ControlValueAccessor, Validator
 {
+  @Input() placeholder?: string;
+
   override prefixId = 'trxn-input-number-ui-';
 
   override ngOnInit(): void {

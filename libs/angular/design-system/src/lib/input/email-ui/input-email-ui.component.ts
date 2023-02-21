@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -26,6 +27,8 @@ export class InputEmailUiComponent
   extends BaseInputTextComponent
   implements OnInit, OnDestroy, ControlValueAccessor, Validator
 {
+  @Input() placeholder?: string;
+
   override prefixId = 'trxn-input-email-ui-';
 
   override ngOnInit(): void {
