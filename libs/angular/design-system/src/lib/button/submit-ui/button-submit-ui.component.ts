@@ -11,6 +11,5 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonSubmitUiComponent {
-  @Input() label!: string;
   @Input() disabled!: boolean;
 }

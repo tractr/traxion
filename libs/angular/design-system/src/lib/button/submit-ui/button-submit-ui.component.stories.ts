@@ -16,12 +16,10 @@ const Template: Story<ButtonSubmitUiComponent> = (
 
 export const ButtonEnabled = Template.bind({});
 ButtonEnabled.args = {
-  label: 'Button',
   disabled: false,
 };
 
 export const ButtonDisabled = Template.bind({});
 ButtonDisabled.args = {
-  label: 'Button',
   disabled: true,
 };
