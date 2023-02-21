@@ -10,4 +10,10 @@ export abstract class BaseInputNumberComponent extends BaseInputComponent {
   value$ = new Subject<number | undefined>();
 
   @Input() placeholder?: string;
+
+  override onChange = (event: Event) => {
+    const value = parseInt((event.target as HTMLInputElement).value, 10);
+
+    this.value$.next(Number.isNaN(value) ? undefined : value);
+  };
 }
