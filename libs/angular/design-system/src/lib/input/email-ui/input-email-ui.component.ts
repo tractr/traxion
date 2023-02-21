@@ -2,10 +2,8 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   OnDestroy,
   OnInit,
-  ViewChild,
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -13,9 +11,8 @@ import {
   ReactiveFormsModule,
   Validator,
 } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
 
-import { BaseUiComponent } from '../../base/base-ui.component';
+import { BaseInputTextComponent } from '../../base';
 
 @Component({
   standalone: true,
@@ -26,21 +23,13 @@ import { BaseUiComponent } from '../../base/base-ui.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputEmailUiComponent
-  extends BaseUiComponent
+  extends BaseInputTextComponent
   implements OnInit, OnDestroy, ControlValueAccessor, Validator
 {
-  @ViewChild('input') input!: ElementRef;
-
-  value$ = new Subject<string>();
-
   override prefixId = 'trxn-input-email-ui-';
 
   override ngOnInit(): void {
     super.ngOnInit();
     this.placeholder = this.placeholder ?? 'Email';
-
-    this.value$.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
-      if (this.input) this.input.nativeElement.value = value;
-    });
   }
 }

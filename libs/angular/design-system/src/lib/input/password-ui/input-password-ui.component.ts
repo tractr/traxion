@@ -1,20 +1,13 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   ControlValueAccessor,
   FormsModule,
   ReactiveFormsModule,
   Validator,
 } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
 
-import { BaseUiComponent } from '../../base';
+import { BaseInputTextComponent } from '../../base';
 
 @Component({
   standalone: true,
@@ -26,13 +19,9 @@ import { BaseUiComponent } from '../../base';
   providers: [],
 })
 export class InputPasswordUiComponent
-  extends BaseUiComponent
+  extends BaseInputTextComponent
   implements OnInit, ControlValueAccessor, Validator
 {
-  @ViewChild('input') input!: ElementRef;
-
-  value$ = new Subject<string>();
-
   showPassword = false;
 
   override prefixId = 'trxn-input-password-ui-';
@@ -40,10 +29,6 @@ export class InputPasswordUiComponent
   override ngOnInit(): void {
     super.ngOnInit();
     this.placeholder = this.placeholder ?? 'Password';
-
-    this.value$.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
-      if (this.input) this.input.nativeElement.value = value;
-    });
   }
 
   toggleShowPassword() {

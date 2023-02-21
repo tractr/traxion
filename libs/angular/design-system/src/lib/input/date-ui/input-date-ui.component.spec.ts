@@ -35,11 +35,9 @@ describe('InputDateUiComponent', () => {
   });
 
   it('should return a value', async () => {
-    const setInputValue = async (value: unknown) => {
+    const setInputValue = async (value: string) => {
       component.input.nativeElement.value = value;
-      (component.input.nativeElement as HTMLInputElement).dispatchEvent(
-        new Event('input'),
-      );
+      component.input.nativeElement.dispatchEvent(new Event('input'));
       await runOnPushChangeDetection(fixture);
     };
 

@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   ChangeDetectorRef,
   Component,
+  Input,
   OnDestroy,
   OnInit,
   Optional,
@@ -13,28 +13,45 @@ import {
   ValidationErrors,
   Validator,
 } from '@angular/forms';
-import { Observer, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observer, Subject, takeUntil } from 'rxjs';
 
-import { BaseInputComponent } from './base-input.component';
 import { nullValidator } from './base.validator';
 
 @Component({
   template: '',
 })
-export abstract class BaseUiComponent
-  extends BaseInputComponent
+export abstract class BaseFormControlComponent
   implements OnInit, OnDestroy, ControlValueAccessor, Validator
 {
+  protected readonly unsubscribe$ = new Subject<void>();
+
+  protected readonly errors$ = new BehaviorSubject<ValidationErrors | null>(
+    null,
+  );
+
+  @Input() id?: string = new Date().getTime().toString();
+
+  @Input() label?: string;
+
+  prefixId = '';
+
+  disabled = false;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   abstract value$: Subject<any>;
 
   constructor(
     public changeDetectorRef: ChangeDetectorRef,
     @Self() @Optional() public ngControl?: NgControl,
   ) {
-    super();
-
     // eslint-disable-next-line no-param-reassign
     if (ngControl) ngControl.valueAccessor = this;
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+    this.errors$.complete();
   }
 
   ngOnInit(): void {
@@ -61,7 +78,7 @@ export abstract class BaseUiComponent
     parentControl.updateValueAndValidity();
   }
 
-  override onChange = (event: Event) => {
+  onChange = (event: Event) => {
     const { value } = event.target as HTMLInputElement;
     this.value$.next(value);
   };
@@ -85,4 +102,7 @@ export abstract class BaseUiComponent
   validate(): ValidationErrors | null {
     return null;
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onTouched: () => void = () => {};
 }

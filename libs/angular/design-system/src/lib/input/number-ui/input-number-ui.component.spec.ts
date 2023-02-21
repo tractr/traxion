@@ -39,11 +39,9 @@ describe('InputNumberUiComponent', () => {
   });
 
   it('should return a value', async () => {
-    const setInputValue = async (value: unknown) => {
-      component.input.nativeElement.value = value;
-      (component.input.nativeElement as HTMLInputElement).dispatchEvent(
-        new Event('input'),
-      );
+    const setInputValue = async (value: number | string | undefined) => {
+      component.input.nativeElement.value = `${value}`;
+      component.input.nativeElement.dispatchEvent(new Event('input'));
       await runOnPushChangeDetection(fixture);
     };
 
