@@ -165,6 +165,7 @@
     "@storybook/builder-webpack5": "^6.5.15",
     "@storybook/core-server": "^6.5.15",
     "@storybook/manager-webpack5": "^6.5.15",
+    "@storybook/testing-library": "^0.0.13",
     "@svgr/webpack": "^6.5.1",
     "@swc-node/register": "^1.5.6",
     "@swc/cli": "^0.1.61",
