@@ -1,7 +1,7 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputDateUiComponent } from './input-date-ui.component';
+import { InputDatetimeUiComponent } from './input-datetime-ui.component';
 
 /**
  * Changes in components using OnPush strategy are only applied once when calling .detectChanges(),
@@ -16,16 +16,16 @@ export async function runOnPushChangeDetection(
   return fixture.whenStable();
 }
 
-describe('InputDateUiComponent', () => {
-  let component: InputDateUiComponent;
-  let fixture: ComponentFixture<InputDateUiComponent>;
+describe('InputDatetimeUiComponent', () => {
+  let component: InputDatetimeUiComponent;
+  let fixture: ComponentFixture<InputDatetimeUiComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InputDateUiComponent],
+      imports: [InputDatetimeUiComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(InputDateUiComponent);
+    fixture = TestBed.createComponent(InputDatetimeUiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -51,13 +51,17 @@ describe('InputDateUiComponent', () => {
     });
     expect(lastValue).toEqual(undefined);
 
-    // Set value to '2010-10-10'
-    await setInputValue('2010-10-10');
-    expect(lastValue).toEqual('2010-10-10');
+    // Set value to 'yyyy-MM-ddTHH:mm:ss'
+    await setInputValue('2010-10-10T10:10:10');
+    expect(lastValue).toEqual('2010-10-10T10:10:10.000');
 
-    // Set value to '2021-01-02'
-    await setInputValue('2021-01-02');
-    expect(lastValue).toEqual('2021-01-02');
+    // Set value to 'yyyy-MM-ddTHH:mm:ss.SSS'
+    await setInputValue('2021-01-02T04:05:06.789');
+    expect(lastValue).toEqual('2021-01-02T04:05:06.789');
+
+    // Set value to 'yyyy-MM-ddTHH:mm'
+    await setInputValue('2021-01-02T04:05');
+    expect(lastValue).toEqual('2021-01-02T04:05');
 
     // Set empty value
     await setInputValue('');

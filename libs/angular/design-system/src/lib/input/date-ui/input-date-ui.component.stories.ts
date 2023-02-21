@@ -12,7 +12,6 @@ export default {
  * Filling input with the given string
  * @param string
  * @param delay
- * @returns
  */
 function fillingPlay(string: string, delay = 50) {
   return async ({ canvasElement }: { canvasElement: HTMLElement }) => {
