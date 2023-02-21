@@ -28,22 +28,22 @@ const Template: Story<InputTimeUiComponent> = (args: InputTimeUiComponent) => ({
 });
 
 // Default component
-export const DatetimeDefault = Template.bind({});
-DatetimeDefault.args = {};
+export const TimeDefault = Template.bind({});
+TimeDefault.args = {};
 
 // Component with label
-export const DatetimeWithLabel = Template.bind({});
-DatetimeWithLabel.args = {
+export const TimeWithLabel = Template.bind({});
+TimeWithLabel.args = {
   label: 'Input Label',
 };
 
 // Component disabled state
-export const DatetimeDisabled = Template.bind({});
-DatetimeDisabled.args = {
+export const TimeDisabled = Template.bind({});
+TimeDisabled.args = {
   disabled: true,
 };
 
 // Component with filling animation
-export const DatetimeFilling = Template.bind({});
-DatetimeFilling.play = fillingPlay('01:23');
-DatetimeFilling.args = {};
+export const TimeFilling = Template.bind({});
+TimeFilling.play = fillingPlay('01:23');
+TimeFilling.args = {};
