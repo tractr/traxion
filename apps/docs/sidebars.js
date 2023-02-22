@@ -22,7 +22,12 @@ module.exports = {
         {
           type: 'category',
           label: 'Authentication',
-          items: ['how-to/authentication/use-nestjs-user'],
+          items: [
+            'how-to/authentication/use-nestjs-user',
+            'how-to/authentication/use-nestjs-authentication',
+            'how-to/authentication/use-nestjs-casl',
+            'how-to/authentication/use-nestjs-password',
+          ],
         },
         {
           type: 'category',
