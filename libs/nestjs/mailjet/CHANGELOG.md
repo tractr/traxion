@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.0.11-next.3](https://github.com/tractr/traxion/compare/v2.0.11-next.2...v2.0.11-next.3) (2023-02-22)
+
+
+### Bug Fixes
+
+* update MAILER_CLIENT providers ([7dbf6e3](https://github.com/tractr/traxion/commit/7dbf6e33654718e1d47b98165b67dea7d5063ac8))
+
+
+
 ## [2.0.11-next.2](https://github.com/tractr/traxion/compare/v2.0.11-next.1...v2.0.11-next.2) (2023-02-22)
 
 
