@@ -8,8 +8,8 @@ import { MailjetModule, MailjetService } from '@trxn/nestjs-mailjet';
     TraxionMailerModule.register({
       imports: [
         MailjetModule.register({
-          apiKey: process.env.MAILJET_API_KEY,
-          apiSecret: process.env.MAILJET_API_SECRET,
+          apiKey: process.env.MAILJET_API_KEY || 'apiKey',
+          apiSecret: process.env.MAILJET_API_SECRET || 'apiSecret',
         }),
       ],
       MailerClient: MailjetService,

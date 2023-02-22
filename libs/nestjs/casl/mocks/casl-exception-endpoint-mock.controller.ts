@@ -2,9 +2,9 @@
 import { AbilityBuilder, ForbiddenError, PureAbility } from '@casl/ability';
 import { createPrismaAbility, PrismaQuery, Subjects } from '@casl/prisma';
 import { Controller, Get } from '@nestjs/common';
-import { User } from '@prisma/client';
 
 import { Public } from '@trxn/nestjs-core';
+import { User } from '@trxn/nestjs-user';
 
 @Controller()
 export class CaslExceptionEndpointMockController {

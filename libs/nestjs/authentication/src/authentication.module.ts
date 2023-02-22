@@ -27,7 +27,7 @@ import { LoggerModule } from '@trxn/nestjs-core';
 @Module({})
 export class AuthenticationModule extends ConfigurableModuleClass {
   private static createModule(module: DynamicModule): DynamicModule {
-    // When https://github.com/nestjs/jwt/pull/1065 is merged, this can be simplified to:
+    // FIXME: When https://github.com/nestjs/jwt/pull/1065 is merged, this can be simplified to:
     // Should remove this moduleOptions variables
     const moduleOptions = {
       ...module,
@@ -43,6 +43,10 @@ export class AuthenticationModule extends ConfigurableModuleClass {
         BcryptModule.register({}),
         LoggerModule,
         JwtModule.registerAsync({
+          // FIXME: When https://github.com/nestjs/jwt/pull/1065 is merged, this can be simplified to:
+          // useFactory: (passwordModuleOptions: PasswordModuleOptions) =>
+          // passwordModuleOptions?.jwtModuleOptions || {},
+          // provideInjectionTokensFrom: module.providers,
           imports: [moduleOptions],
           useFactory: (jwtOptionsService: JwtOptionsService) =>
             jwtOptionsService.jwtModuleOptions,
