@@ -1,6 +1,6 @@
 {
   "name": "@trxn/generated-casl",
-  "version": "2.0.11-next.0",
+  "version": "2.0.11-next.1",
   "dependencies": {
     "tslib": "^2.3.1"
   },
