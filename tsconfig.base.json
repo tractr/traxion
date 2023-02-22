@@ -81,6 +81,9 @@
       "@trxn/hapify-update-templates-import-path": [
         "libs/hapify/update-templates-import-path/src/index.ts"
       ],
+      "@trxn/hapify-generators-angular-models-forms": [
+        "libs/hapify/generators/angular-models-forms/src/index.ts"
+      ],
       "@trxn/nestjs-authentication": [
         "libs/nestjs/authentication/src/index.ts"
       ],

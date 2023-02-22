@@ -75,5 +75,6 @@ export default {
     '<rootDir>/libs/nestjs/password',
     '<rootDir>/libs/hapify/core',
     '<rootDir>/libs/hapify/generators/angular-models-components',
+    '<rootDir>/libs/hapify/generators/angular-models-forms',
   ],
 };
