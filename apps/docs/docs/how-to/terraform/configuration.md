@@ -11,7 +11,6 @@ Soon, schematics will automate some or all of these manual operations.
 
 :::
 
-
 ## Install libraries
 
 The following libraries are required by the `terraform` application we will create:
@@ -22,13 +21,13 @@ npm install --save \
   cdktf \
   cdktf-cli \
   @cdktf/provider-aws \
-  @tractr/terraform-aws-stack \
-  @tractr/terraform-group-network \
-  @tractr/terraform-group-pool \
-  @tractr/terraform-group-registry \
-  @tractr/terraform-group-zone \
-  @tractr/terraform-service-api \
-  @tractr/terraform-service-postgres \
-  @tractr/terraform-service-pwa \
-  @tractr/terraform-service-reverse-proxy
+  @trxn/terraform-aws-stack \
+  @trxn/terraform-group-network \
+  @trxn/terraform-group-pool \
+  @trxn/terraform-group-registry \
+  @trxn/terraform-group-zone \
+  @trxn/terraform-service-api \
+  @trxn/terraform-service-postgres \
+  @trxn/terraform-service-pwa \
+  @trxn/terraform-service-reverse-proxy
 ```

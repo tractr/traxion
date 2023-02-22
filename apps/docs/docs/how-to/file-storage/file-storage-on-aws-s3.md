@@ -42,32 +42,32 @@ import {
 @Module({
   imports: [
     FileStorageModule.register({
-			// Public key of your file storage user
+   // Public key of your file storage user
       accessKey: 'minio',
 
-			// Private key of your file storage user
+   // Private key of your file storage user
       secretKey: 'password',
 
-			// Domain to access the file storage
+   // Domain to access the file storage
       endPoint: 'localhost',
 
-			// Port to access the file storage
+   // Port to access the file storage
       port: 9000,
 
-			// Denotes if ssl should be used
+   // Denotes if ssl should be used
       // (can be disabled for dev envs, but should be used in production)
       useSSL: false,
 
-			// The name of your file storage bucket
+   // The name of your file storage bucket
       defaultBucket: 'bucket',
 
-			// Here you can configure the validity time of presigned download urls 
-			// (default to 300s)
+   // Here you can configure the validity time of presigned download urls 
+   // (default to 300s)
       presignedDownload: {} as PresignedDownloadConfiguration,
 
-			// Here you can configure the validity time of presigned download urls 
-			// (default to 300s)
-			// You can also add restrictions on allowed file size and mime type
+   // Here you can configure the validity time of presigned download urls 
+   // (default to 300s)
+   // You can also add restrictions on allowed file size and mime type
       presignedUpload: {} as PresignedUploadConfiguration,
     }),
   ],
@@ -85,13 +85,13 @@ import { FileStorageModule } from '@trxn/angular-file-storage';
 @NgModule({
   imports: [
     FileStorageModule.register({
-			// The name of your file storage bucket
+   // The name of your file storage bucket
       defaultBucket: 'bucket',
-			
-			// Endpoint to request presigned upload url (default to 'upload')
+   
+   // Endpoint to request presigned upload url (default to 'upload')
       presignedUploadEndpoint: 'upload',
 
-			// Endpoint to request presigned download url (default to 'download')
+   // Endpoint to request presigned download url (default to 'download')
       presignedDownloadEndpoint: 'download',
     }),
   ],
@@ -136,8 +136,8 @@ Simply import it from `@trxn/nestjs-file-storage` and add it to your `app.module
 // file: apps/api/src/app/app.module.ts
 
 import { 
-	FileStorageModule, 
-	FileStorageController 
+ FileStorageModule, 
+ FileStorageController 
 } from '@trxn/nestjs-file-storage';
 
 @Module({
@@ -163,7 +163,7 @@ The `FileStorageController` exposes two endpoints:
 - The `upload` endpoint can be used to request an upload presigned URL.
 - The `download` endpoint can be used to request a download presigned URL.
 
-On the frontend side of your application, you can use the `tractr-file-storage-upload-button` button component exported from `@tractr/angular-file-storage` to automatically send files uploaded by the users to the file storage.
+On the frontend side of your application, you can use the `tractr-file-storage-upload-button` button component exported from `@trxn/angular-file-storage` to automatically send files uploaded by the users to the file storage.
 
 Then you should listen to the `uploadResult` event to get information about the uploaded file.
 
@@ -244,9 +244,9 @@ NestJS controller example:
 import { Controller, Get, Query } from '@nestjs/common';
 
 import { 
-	GetPresignedDownloadUrlQueryDto,
+ GetPresignedDownloadUrlQueryDto,
   GetPresignedUploadUrlQueryDto,
-	FileStorageService
+ FileStorageService
 } from '@trxn/nestjs-file-storage';
 
 @Controller('file-storage')
@@ -259,16 +259,16 @@ export class FileStorageController {
   @Get('upload')
   getPresignedUploadUrl(@Query() queryDto: GetPresignedUploadUrlQueryDto) {
 
-		// Business logique could be added here or in some nestjs guards
+  // Business logique could be added here or in some nestjs guards
 
     const { mimeType, fileSize } = queryDto;
-		// Request presigned url to the file storage and returns it
+  // Request presigned url to the file storage and returns it
     return this.fileStorageService.getPresignedUploadUrl(mimeType, fileSize);
   }
 }
 ```
 
-### Download a file from file storage with a presigned URL.
+### Download a file from file storage with a presigned URL
 
 Read access to a file can also be restricted by using presigned URLs for downloading. The mechanism is very similar to the one presented in the upload section.
 
@@ -316,7 +316,7 @@ import { Controller, Get, Query } from '@nestjs/common';
 import {
   GetPresignedDownloadUrlQueryDto,
   GetPresignedUploadUrlQueryDto,
-	FileStorageService
+ FileStorageService
 } from '@trxn/nestjs-file-storage';
 
 @Controller('file-storage')
@@ -331,10 +331,10 @@ export class FileStorageController {
     @Query() queryDto: GetPresignedDownloadUrlQueryDto,
   ) {
 
-		// Business logique could be added here or in some nestjs guards
+  // Business logique could be added here or in some nestjs guards
 
     const { file } = queryDto;
-		// Request presigned url to the file storage and returns it
+  // Request presigned url to the file storage and returns it
     const url = await this.fileStorageService.getPresignedDownloadUrl(file);
     return { url };
   }
@@ -362,25 +362,25 @@ import { FileStorageService } from '@trxn/nestjs-file-storage';
 
 Injectable()
 export class UserService {
-	
-	constructor(private fileStorageService: FileStorageService) {}
+ 
+ constructor(private fileStorageService: FileStorageService) {}
 
-	async create(user: User) {
-		const avatarImageTempPath = user.avatarUrl;
-		const avatarImageDefinitivePath = `images/${uuid()}.jpg`;
+ async create(user: User) {
+  const avatarImageTempPath = user.avatarUrl;
+  const avatarImageDefinitivePath = `images/${uuid()}.jpg`;
 
-		try {
-			// Move the file out of the temporary folder
-			await this.fileStorageService.commitTemporaryFile(
-				avatarImageTempPath, 
-				avatarImageDefinitivePath
-			);
-		} catch (e) {
-			// handle potential errors with the file storage
-		}
-		//...
-		// Save your user with the new avatar path
-	}
+  try {
+   // Move the file out of the temporary folder
+   await this.fileStorageService.commitTemporaryFile(
+    avatarImageTempPath, 
+    avatarImageDefinitivePath
+   );
+  } catch (e) {
+   // handle potential errors with the file storage
+  }
+  //...
+  // Save your user with the new avatar path
+ }
 }
 ```
 
@@ -397,4 +397,3 @@ This method should be called periodically (e.g. in a Cron) if you don't want the
 The NestJS `FileStorageService` uses the Minio javascript client and extends it, making all the Minio client methods available for custom operations as well. For more information, please refer to the [Minio documentation](https://min.io/docs/minio/linux/developers/javascript/API.html).
 
 :::
-
