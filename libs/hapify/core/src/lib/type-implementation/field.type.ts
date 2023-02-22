@@ -641,13 +641,23 @@ export type SortableConstraint = OptionalConstraint<'isSortable', boolean>;
 /**
  * StringField Base constraints
  */
-export type StringFieldConstraint = OptionalConstraint<'minLength', number>;
+export type EmailConstraints = OptionalConstraint<
+  'email',
+  boolean | string | RegExp
+>;
 export type MinLengthConstraint = OptionalConstraint<'minLength', number>;
 export type MaxLengthConstraint = OptionalConstraint<'maxLength', number>;
+export type PasswordConstraint = OptionalConstraint<
+  'password',
+  string | RegExp
+>;
+
+/**
+ * NumberField Base constraints
+ */
 export type MinConstraint = OptionalConstraint<'min', number>;
 export type MaxConstraint = OptionalConstraint<'max', number>;
 export type IntegerConstraint = OptionalConstraint<'isInteger', boolean>;
-export type PasswordConstraint = OptionalConstraint<'defaultValue', any>;
 
 export type RelationsConstraint = Constraints<'relations', Relation[]>;
 export type RelationConstraint = Constraints<'relation', Relation>;
@@ -665,7 +675,8 @@ export type StringField = BaseField<
     SearchableConstraint &
     SortableConstraint &
     MinLengthConstraint &
-    MaxLengthConstraint
+    MaxLengthConstraint &
+    PasswordConstraint
 >;
 
 /**
@@ -806,6 +817,7 @@ export const hasInteger = hasConstraintFactory('isInteger');
 export const hasDefault = hasConstraintFactory('defaultValue');
 
 export const stringField = fieldFactory('string');
+export const passwordField = fieldFactory('string', { password: true });
 export const numberField = fieldFactory('number');
 export const booleanField = fieldFactory('boolean');
 export const primaryField = fieldFactory('primary');
