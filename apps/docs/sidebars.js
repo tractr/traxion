@@ -13,6 +13,19 @@ module.exports = {
       items: [
         {
           type: 'category',
+          label: 'Database',
+          items: [
+            'how-to/database/configuration',
+            'how-to/database/database-migration-with-prisma',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Authentication',
+          items: ['how-to/authentication/use-nestjs-user'],
+        },
+        {
+          type: 'category',
           label: 'Angular',
           items: [
             'how-to/angular/configure-lazy-loading',
@@ -24,14 +37,6 @@ module.exports = {
           type: 'category',
           label: 'NestJS',
           items: ['how-to/nestjs/extend-a-generated-controller'],
-        },
-        {
-          type: 'category',
-          label: 'Database',
-          items: [
-            'how-to/database/configuration',
-            'how-to/database/database-migration-with-prisma',
-          ],
         },
         {
           type: 'category',

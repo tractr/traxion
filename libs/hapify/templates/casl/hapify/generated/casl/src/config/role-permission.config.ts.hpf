@@ -1,18 +1,20 @@
 import { AbilityBuilder } from '@casl/ability';
 import { UserRoles } from '@prisma/client';
 import { getConcatValueByPath } from '@trxn/common';
-import { DefinePermissions, RolePermissions } from '@trxn/nestjs-casl';
+import { DefinePermissions, DefinePublicPermissions, RolePermissions } from '@trxn/nestjs-casl';
  
 import { AppAbility } from '../interfaces';
 import { UserWithOwnershipIds } from './get-prisma-user-query';
  
-export const guestRolePermissions: DefinePermissions<AbilityBuilder<AppAbility>, UserWithOwnershipIds> = ({ can }) => {
+export const publicRolePermissions: DefinePublicPermissions<AbilityBuilder<AppAbility>> = ({ can }) => {
     <<for Models model>>
       <<for model.accesses.guest access>>
     can('<<=access.action>>', '<<model pascal>>');
       <<endfor>>
     <<endfor>>
  };
+
+export const guestRolePermissions: DefinePermissions<AbilityBuilder<AppAbility>, UserWithOwnershipIds> = publicRolePermissions;
  
 export const userRolePermissions: DefinePermissions<AbilityBuilder<AppAbility>, UserWithOwnershipIds> = ({ can }, user) => {
     <<for Models model>>
