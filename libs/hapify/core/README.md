@@ -8,9 +8,10 @@ It also includes helpers to test and filter data models and their fields.
 ```typescript
 const idField = new NumberBasicField('Id').setPrimary(true).makeNotWritable();
 
-const project = new Project('app').addModel(
-  new Model('User')
-    .addField(idField)
+const userModel = new Model('User')
+    .addField(new KeyStringField('Id'))
+    .addField(new KeyStringField('RoleId'))
+    .addField(new RelationField('Role'))
     .addField(new StringBasicField('FirstName').setMaxLength(50))
     .addField(new StringBasicField('LastName').setMaxLength(50))
     .addField(new StringEmailField('Email'))
@@ -31,7 +32,39 @@ const project = new Project('app').addModel(
         .setMax(1000)
         .setNotes('Amount of credits remaining'),
     ),
-);
+    
+const roleModel = new Model('Role').addField(idField).addField(
+  new StringBasicField('Name')
+    .setMaxLength(50)
+    .setUnique(true)
+    .setNotes('Role name'),
+)
+    .addField(new KeyStringField('Id'))
+    .addField(new RelationField('Users'))
+
+const userRoleRelation = new Relation({
+  name: 'UserRole',
+  referer: {
+    model: userModel,
+    scalarField: userModel.keyField('RoleId'),
+    virtualField: userModel.relationField('Role'),
+    cardinality: 'one',
+  },
+  referee: {
+    model: roleModel,
+    scalarField: roleModel.keyField('Id'),
+    virtualField: roleModel.relationField('users'),
+    cardinality: 'many',
+  },
+})
+
+getRelationFields(model)
+getRelationField(model, name);
+
+const project = new Project('app')
+  .addModel(userModel)
+  .addModel(roleModel)
+  .addRelation(userRoleRelation);
 ```
 
 ## Playing with data models
@@ -62,4 +95,3 @@ const publicStringAndNumberNames = firstModel.fields
   .map((field) => kebab(field.name))
   .join(', ');
 ```
-
