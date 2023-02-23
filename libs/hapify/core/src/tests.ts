@@ -1,12 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import {
-  foreignField,
-  numberField,
-  primaryField,
-  stringField,
-  virtualField,
-} from './field';
+import { numberField, primaryField, stringField } from './fields';
 import { createOneManyRelation, Model, OneManyRelation } from './schema';
 
 // User model

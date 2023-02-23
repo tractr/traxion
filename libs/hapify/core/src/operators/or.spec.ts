@@ -1,5 +1,5 @@
-import { Predicate } from '../predicate';
 import { or } from './or';
+import { Predicate } from './predicate';
 
 // Define some example predicates for testing
 const isNumber: Predicate<unknown, number> = (

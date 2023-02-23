@@ -1,4 +1,4 @@
-import { Predicate } from '../predicate';
+import { Predicate } from './predicate';
 
 export function and<S, T1 extends S>(
   predicate1: Predicate<S, T1>,

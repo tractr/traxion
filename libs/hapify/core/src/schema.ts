@@ -4,7 +4,7 @@ import {
   Constraints,
   Field,
   foreignField,
-  ForeignKeyField,
+  ForeignField,
   GetType,
   IsConstraints,
   isField,
@@ -12,7 +12,7 @@ import {
   StringField,
   virtualField,
   VirtualField,
-} from './field';
+} from './fields';
 
 /**
  * One to many relation
@@ -26,7 +26,7 @@ export type OneManyRelation = {
   };
   to: {
     model: Model;
-    foreign: ForeignKeyField;
+    foreign: ForeignField;
     virtual: VirtualField;
   };
 };
@@ -59,7 +59,7 @@ export type OneOneRelation = {
   };
   to: {
     model: Model;
-    foreign: IsConstraints<ForeignKeyField, 'isUnique'>;
+    foreign: IsConstraints<ForeignField, 'isUnique'>;
     virtual: VirtualField;
   };
 };
@@ -226,7 +226,7 @@ export function hasSomeFieldFactory<T extends string = GetType<Field>>(
   return <M>(model: M): model is HaveField<IsModel<M>, T> =>
     isModel(model) && hasSomeField(model, type);
 }
-type test = Extract<Field, StringField>;
+
 export const hasSomePrimaryKey = hasSomeFieldFactory('primaryKey');
 export const hasSomeForeignKey = hasSomeFieldFactory('foreignKey');
 export const hasSomeVirtualField = hasSomeFieldFactory('virtual');
@@ -239,7 +239,7 @@ export function createOneManyRelation(
   from: { model: Model; virtual: VirtualField | string },
   to: {
     model: Model;
-    foreign: ForeignKeyField | string;
+    foreign: ForeignField | string;
     virtual: VirtualField | string;
   },
 ) {
@@ -251,7 +251,7 @@ export function createOneManyRelation(
   const toVirtualField: VirtualField =
     typeof to.virtual === 'string' ? virtualField(to.virtual) : to.virtual;
 
-  const toForeignKeyField: ForeignKeyField =
+  const toForeignField: ForeignField =
     typeof to.foreign === 'string' ? foreignField(to.foreign) : to.foreign;
 
   const relation: OneManyRelation = {
@@ -263,7 +263,7 @@ export function createOneManyRelation(
     },
     to: {
       model: to.model,
-      foreign: toForeignKeyField,
+      foreign: toForeignField,
       virtual: toVirtualField,
     },
   };
@@ -271,11 +271,11 @@ export function createOneManyRelation(
   fromVirtualField.relation = relation;
   from.model.fields.push(fromVirtualField);
 
-  toForeignKeyField.relation = relation;
+  toForeignField.relation = relation;
   toVirtualField.relation = relation;
 
-  to.model.fields.push(toForeignKeyField);
-  to.model.fields.push(toForeignKeyField);
+  to.model.fields.push(toForeignField);
+  to.model.fields.push(toForeignField);
   to.model.fields.push(toVirtualField);
 
   return relation;

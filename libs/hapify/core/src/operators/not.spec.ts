@@ -1,5 +1,5 @@
-import { Predicate } from '../predicate';
 import { not } from './not';
+import { Predicate } from './predicate';
 
 describe('not', () => {
   it('should return a function that negates the original predicate', () => {

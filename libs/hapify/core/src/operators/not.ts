@@ -1,4 +1,4 @@
-import { Predicate } from '../predicate';
+import { Predicate } from './predicate';
 
 export function not<S, T1 extends S>(
   predicate: Predicate<S, T1>,
