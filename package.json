@@ -119,6 +119,7 @@
     "ts-essentials": "^9.3.0",
     "tslib": "^2.5.0",
     "ts-morph": "^17.0.1",
+    "ts-toolbelt": "^9.6.0",
     "universal-rxjs-ajax": "^2.0.4",
     "uuid": "^9.0.0",
     "winston": "^3.8.2",
