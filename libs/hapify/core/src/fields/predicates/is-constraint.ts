@@ -1,5 +1,7 @@
-import { IsConstraints, IsField, KeyType } from '../base-types';
+import { and } from '../../operators';
+import { BaseField, IsConstraints, IsField, KeyType } from '../base-types';
 import { hasConstraint } from './has-constraint';
+import { isField } from './is-field';
 
 /**
  * Assert if field has a constraint by name and if it is a truthy value

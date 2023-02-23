@@ -42,6 +42,7 @@ export type StringFormatConstraint = FormatConstraint<
 /**
  * Predicates and helpers
  */
+// StringField
 export const createStringField = createFieldFactory('string');
 export const stringField = createStringField;
 

@@ -1,4 +1,5 @@
 import { HasConstraints, IsField, KeyType } from '../base-types';
+import { hasConstraintFactory } from '../factories';
 import { isField } from './is-field';
 
 /**

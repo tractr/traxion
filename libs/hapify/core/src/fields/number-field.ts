@@ -37,6 +37,7 @@ export type NumberFormatConstraint = FormatConstraint<'integer' | 'float'>;
 /**
  * Predicates and helpers
  */
+
 export const createNumberField = createFieldFactory('number');
 export const numberField = createNumberField;
 

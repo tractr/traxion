@@ -4,14 +4,8 @@ import {
   Constraints,
   Field,
   FieldType,
-  foreignField,
   ForeignField,
-  GetType,
   IsConstraints,
-  isField,
-  isPrimary,
-  StringField,
-  virtualField,
   VirtualField,
 } from '../fields';
 import { hasSomeFieldFactory } from './factories';

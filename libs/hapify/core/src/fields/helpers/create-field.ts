@@ -5,10 +5,9 @@ import type { Function } from 'ts-toolbelt';
 
 import {
   BaseField,
-  BaseProperties,
+  BaseFieldPropertiesKeys,
   ExtractField,
   GetConstraintsNames,
-  GetType,
 } from '../base-types';
 import { Field, FieldType } from '../field';
 
@@ -32,7 +31,7 @@ export function createField<
   F extends ExtractField<Field, T>,
   N extends string,
   O extends CreateFieldOptions<F>,
-  C extends Omit<F, 'type' | keyof BaseProperties>,
+  C extends Omit<F, BaseFieldPropertiesKeys>,
 >(
   type: T,
   name: Function.Narrow<N>,

@@ -9,8 +9,8 @@ import { hasSomeField, isModel } from '../predicates';
  *
  * @example
  *
- * const hasSomePrimaryKey = hasSomeFieldFactory('primaryKey');
- * const hasSomeForeignKey = hasSomeFieldFactory('foreignKey');
+ * const hasSomePrimaryKey = hasSomeFieldFactory('primary');
+ * const hasSomeForeignKey = hasSomeFieldFactory('foreign');
  */
 export function hasSomeFieldFactory<T extends string = FieldType>(type: T) {
   return <M>(model: M): model is HaveField<IsModel<M>, T> =>

@@ -1,7 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Field } from './field';
 
-export type EnumType = Record<string, number | string>;
+export type EnumType = {
+  name: string;
+  values: Record<string, string | number>;
+  metadata?: Record<string, string>;
+  notes?: string;
+};
+
+export enum PermissionType {
+  'public' = 'public',
+  'authenticated' = 'authenticated',
+  'internal' = 'internal',
+}
 
 export type BaseProperties = {
   name: string;
@@ -17,6 +28,8 @@ export type BaseProperties = {
 export type BaseFieldProperties<T extends string = string> = BaseProperties & {
   type: T;
 };
+
+export type BaseFieldPropertiesKeys = keyof BaseFieldProperties;
 
 /**
  * Constraints

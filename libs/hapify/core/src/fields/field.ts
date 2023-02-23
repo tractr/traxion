@@ -6,6 +6,7 @@ import type {
   GetFieldWithConstraints,
   GetType,
   OptionalConstraint,
+  PermissionType,
 } from './base-types';
 import type { BooleanField } from './boolean-field';
 import type { DateField } from './date-field';
@@ -33,10 +34,13 @@ export type BaseConstraints = LabelConstraint &
 export type LabelConstraint = OptionalConstraint<'isLabel', boolean>;
 export type UniqueConstraint = OptionalConstraint<'isUnique', boolean>;
 export type NullConstraint = OptionalConstraint<'isNull', boolean>;
-export type DefaultConstraint<T = any> = OptionalConstraint<'defaultValue', T>;
 export type MultipleConstraint = OptionalConstraint<'isMultiple', boolean>;
 export type SearchableConstraint = OptionalConstraint<'isSearchable', boolean>;
 export type SortableConstraint = OptionalConstraint<'isSortable', boolean>;
+export type PermissionConstraint = OptionalConstraint<
+  'permission',
+  PermissionType
+>;
 
 /**
  * Relation constraints
@@ -47,6 +51,7 @@ export type RelationsConstraint = Constraints<'relations', Relation[]>;
 /**
  * Common constraints
  */
+export type DefaultConstraint<T = any> = OptionalConstraint<'defaultValue', T>;
 export type FormatConstraint<T> = OptionalConstraint<'format', T>;
 
 /**
@@ -134,7 +139,6 @@ export const isNull = isConstraintFactory('isNull');
 export const isSearchable = isConstraintFactory('isSearchable');
 export const isMultiple = isConstraintFactory('isMultiple');
 export const isSortable = isConstraintFactory('isSortable');
-export const isInteger = isConstraintFactory('isInteger');
 
 export const hasLabel = hasConstraintFactory('label');
 export const hasUnique = hasConstraintFactory('isUnique');
