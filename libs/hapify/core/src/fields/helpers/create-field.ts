@@ -10,7 +10,7 @@ import {
   GetConstraintsNames,
   GetType,
 } from '../base-types';
-import { Field } from '../field';
+import { Field, FieldType } from '../field';
 
 /**
  * Get the field options from BaseField
@@ -28,7 +28,7 @@ export type CreateFieldOptions<F extends BaseField> = Partial<
  * @returns
  */
 export function createField<
-  T extends GetType<Field>,
+  T extends FieldType,
   F extends ExtractField<Field, T>,
   N extends string,
   O extends CreateFieldOptions<F>,

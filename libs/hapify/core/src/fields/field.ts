@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Relation } from '../schema';
+import type { Relation } from '../models';
 import type {
   BaseField,
   Constraints,
   GetFieldWithConstraints,
+  GetType,
   OptionalConstraint,
 } from './base-types';
 import type { BooleanField } from './boolean-field';
@@ -121,6 +122,8 @@ export type Field =
   | PrimaryField
   | StringField
   | VirtualField;
+
+export type FieldType = GetType<Field>;
 
 /**
  * Predicates and helpers
