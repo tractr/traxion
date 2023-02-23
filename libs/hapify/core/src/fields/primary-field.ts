@@ -40,7 +40,7 @@ export type PrimaryMode<C extends Constraints<KeyType, any>> =
 /**
  * Predicates and helpers
  */
-export const createPrimaryField = createFieldFactory('primary', {}, {});
+export const createPrimaryField = createFieldFactory('primary');
 export const primaryField = createPrimaryField;
 
 export const isPrimary = isFieldFactory('primary');
