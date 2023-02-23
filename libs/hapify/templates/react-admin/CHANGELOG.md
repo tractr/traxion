@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.0.11](https://github.com/tractr/traxion/compare/v2.0.10...v2.0.11) (2023-02-23)
+
+
+### Bug Fixes
+
+* **react-admin:** fix react admin update payload with internal field ([#579](https://github.com/tractr/traxion/issues/579)) ([d0dee64](https://github.com/tractr/traxion/commit/d0dee64f856ef7791c4039133006daa9f0976e7a))
+
+
+
 ## [2.0.10](https://github.com/tractr/traxion/compare/v2.0.9...v2.0.10) (2023-02-14)
 
 
