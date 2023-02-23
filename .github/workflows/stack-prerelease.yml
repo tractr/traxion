@@ -1,0 +1,21 @@
+name: Traxion prerelease
+
+on:
+  push:
+    branches:
+      - next
+      - next-*
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  npm-release:
+    name: Prerelease npm packages
+    uses: ./.github/workflows/prerelease-npm.yml
+    with:
+      botName: tractr-bot
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}

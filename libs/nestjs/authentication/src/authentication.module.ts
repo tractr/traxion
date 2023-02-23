@@ -1,4 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { APP_FILTER } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
@@ -9,6 +10,7 @@ import {
   OPTIONS_TYPE,
 } from './authentication.module-definition';
 import { LoginController } from './controllers';
+import { UnauthorizedExceptionFilter } from './filters';
 import { AuthenticationModuleOptions } from './interfaces';
 import {
   AuthenticationService,
@@ -73,6 +75,10 @@ export class AuthenticationModule extends ConfigurableModuleClass {
         JwtStrategy,
         HashService,
         UserAuthenticationService,
+        {
+          provide: APP_FILTER,
+          useClass: UnauthorizedExceptionFilter,
+        },
       ],
       controllers: [LoginController],
     };

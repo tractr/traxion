@@ -10,6 +10,7 @@
     "generated-casl",
     "generated-rest-dtos"
   ],
+  "name": "generated-nestjs-models",
   "projectType": "library",
   "sourceRoot": "libs/generated/nestjs-models/src",
   "tags": [],
@@ -19,7 +20,7 @@
       "options": {
         "cwd": "libs/generated/nestjs-models"
       },
-      "outputs": ["libs/generated/nestjs-models/src/generated"]
+      "outputs": ["{projectRoot}/src/generated"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -34,7 +35,7 @@
         "jestConfig": "libs/generated/nestjs-models/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/generated/nestjs-models"]
+      "outputs": ["{workspaceRoot}/coverage/libs/generated/nestjs-models"]
     }
   }
 }

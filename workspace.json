@@ -10,6 +10,7 @@
     "angular-form": "libs/angular/form",
     "angular-tools": "libs/angular/tools",
     "api": "apps/api",
+    "client-config": "libs/config/client",
     "commit-config": "libs/config/commit",
     "common": "libs/common",
     "docs": "apps/docs",

@@ -8,6 +8,7 @@ import {
 export const API_COMPONENT_DEFAULT_CONFIG: ApiComponentDefaultConfig = {
   ...SERVICE_COMPONENT_DEFAULT_CONFIG,
   containerConfig: {
+    imageName: 'api',
     imageTag: 'latest',
     path: {
       prefix: '/api',

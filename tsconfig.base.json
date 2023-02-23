@@ -26,6 +26,7 @@
       "@trxn/angular-form": ["libs/angular/form/src/index.ts"],
       "@trxn/angular-tools": ["libs/angular/tools/src/index.ts"],
       "@trxn/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@trxn/client-config": ["libs/config/client/src/index.ts"],
       "@trxn/commit-config": ["libs/config/commit/src/index.ts"],
       "@trxn/common": ["libs/common/src/index.ts"],
       "@trxn/create-traxion-workspace": [

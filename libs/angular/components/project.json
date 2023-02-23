@@ -1,11 +1,10 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "angular-components",
   "prefix": "tractr",
   "projectType": "library",
   "sourceRoot": "libs/angular/components/src",
-  "tags": [
-    "scope:angular"
-  ],
+  "tags": ["scope:angular"],
   "targets": {
     "build": {
       "configurations": {
@@ -21,9 +20,7 @@
       "options": {
         "project": "libs/angular/components/ng-package.json"
       },
-      "outputs": [
-        "dist/libs/angular/components"
-      ]
+      "outputs": ["{workspaceRoot}/dist/libs/angular/components"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -33,9 +30,7 @@
           "libs/angular/components/src/**/*.html"
         ]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -50,9 +45,13 @@
         "jestConfig": "libs/angular/components/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/angular/components"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/angular/components"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/angular/components/package.json"
+      }
     }
   }
 }

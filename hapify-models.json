@@ -551,16 +551,27 @@
           "type": "string"
         },
         {
+          "meta": {
+            "compositeSearch": "search:1:Asc",
+            "compositeUniqueness": "unique,unique2"
+          },
           "name": "uniqueString",
           "properties": ["unique", "searchable", "sortable"],
           "type": "string"
         },
         {
+          "meta": {
+            "compositeSearch": "search:1:Asc",
+            "compositeUniqueness": "unique"
+          },
           "name": "uniqueNumber",
           "properties": ["unique", "searchable", "sortable"],
           "type": "number"
         },
         {
+          "meta": {
+            "compositeUniqueness": "unique2"
+          },
           "name": "uniqueBoolean",
           "properties": ["unique", "searchable", "sortable"],
           "type": "boolean"
@@ -661,6 +672,7 @@
           "type": "string"
         },
         {
+          "meta": {},
           "name": "createdAt",
           "properties": ["searchable", "sortable", "internal"],
           "type": "datetime"

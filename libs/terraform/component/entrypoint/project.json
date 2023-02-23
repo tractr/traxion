@@ -1,5 +1,6 @@
 {
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "terraform-component-entrypoint",
   "projectType": "library",
   "sourceRoot": "libs/terraform/component/entrypoint/src",
   "tags": [],
@@ -34,7 +35,15 @@
         "jestConfig": "libs/terraform/component/entrypoint/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/terraform/component/entrypoint"]
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/terraform/component/entrypoint"
+      ]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/terraform/component/entrypoint/package.json"
+      }
     }
   }
 }

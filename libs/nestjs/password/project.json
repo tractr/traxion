@@ -1,5 +1,6 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "nestjs-password",
   "projectType": "library",
   "sourceRoot": "libs/nestjs/password/src",
   "tags": [],
@@ -34,7 +35,13 @@
         "jestConfig": "libs/nestjs/password/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/nestjs/password"]
+      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/password"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/nestjs/password/package.json"
+      }
     }
   }
 }

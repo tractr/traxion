@@ -1,5 +1,11 @@
+import { relative } from 'path';
+
 import * as angular from '@nrwl/angular/generators';
-import { readProjectConfiguration, Tree } from '@nrwl/devkit';
+import {
+  getWorkspaceLayout,
+  readProjectConfiguration,
+  Tree,
+} from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import * as nestjs from '@nrwl/nest';
 import fetch, { Response } from 'node-fetch';
@@ -99,13 +105,15 @@ describe('hapify library generator', () => {
   it('should generate a gitignore file', async () => {
     await generator(appTree, options as HapifyLibraryGeneratorOptionsWithExtra);
 
-    expect(appTree.exists('libs/common/test/.gitignore')).toBeTruthy();
-    expect(appTree.read('libs/common/test/.gitignore')?.toString()).toContain(
-      'hapify.json',
-    );
-    expect(appTree.read('libs/common/test/.gitignore')?.toString()).toContain(
-      'generated',
-    );
+    const { libsDir } = getWorkspaceLayout(appTree);
+
+    expect(appTree.exists(`${libsDir}/common/test/.gitignore`)).toBeTruthy();
+    expect(
+      appTree.read(`${libsDir}/common/test/.gitignore`)?.toString(),
+    ).toContain('hapify.json');
+    expect(
+      appTree.read(`${libsDir}/common/test/.gitignore`)?.toString(),
+    ).toContain('generated');
   });
 
   it('should generate a .hapifyrc.js file', async () => {
@@ -113,9 +121,12 @@ describe('hapify library generator', () => {
       ...options,
       hapifyTemplates: [],
     });
+    const { libsDir } = getWorkspaceLayout(appTree);
 
-    expect(appTree.exists('libs/common/test/.hapifyrc.js')).toBeTruthy();
-    expect(appTree.read('libs/common/test/.hapifyrc.js')?.toString())
+    expect(appTree.exists(`${libsDir}/common/test/.hapifyrc.js`)).toBeTruthy();
+
+    const relativePath = relative(`${libsDir}/common/test`, '.');
+    expect(appTree.read(`${libsDir}/common/test/.hapifyrc.js`)?.toString())
       .toEqual(`const {
   hapifyDefaultConfig,
   getValidatorPath,
@@ -127,7 +138,7 @@ module.exports = {
   name: 'test',
   description: 'Library to host generated codes',
   validatorPath: getValidatorPath(__dirname),
-  project: '../../../hapify-models.json',
+  project: '${relativePath}/hapify-models.json',
   extends: [
     '@trxn/hapify-templates-models',
   ],
@@ -146,8 +157,12 @@ module.exports = {
         '@trxn/additional-templates-1,@trxn/additional-templates-2',
     });
 
-    expect(appTree.exists('libs/common/test/.hapifyrc.js')).toBeTruthy();
-    expect(appTree.read('libs/common/test/.hapifyrc.js')?.toString())
+    const { libsDir } = getWorkspaceLayout(appTree);
+
+    expect(appTree.exists(`${libsDir}/common/test/.hapifyrc.js`)).toBeTruthy();
+
+    const relativePath = relative(`${libsDir}/common/test`, '.');
+    expect(appTree.read(`${libsDir}/common/test/.hapifyrc.js`)?.toString())
       .toEqual(`const {
   hapifyDefaultConfig,
   getValidatorPath,
@@ -159,7 +174,7 @@ module.exports = {
   name: 'test',
   description: 'Library to host generated codes',
   validatorPath: getValidatorPath(__dirname),
-  project: '../../../hapify-models.json',
+  project: '${relativePath}/hapify-models.json',
   extends: [
     '@trxn/hapify-templates-models',
   ],
@@ -176,8 +191,12 @@ module.exports = {
       hapifyTemplates: ['rext-client'],
     });
 
-    expect(appTree.exists('libs/common/test/.hapifyrc.js')).toBeTruthy();
-    expect(appTree.read('libs/common/test/.hapifyrc.js')?.toString())
+    const { libsDir } = getWorkspaceLayout(appTree);
+
+    expect(appTree.exists(`${libsDir}/common/test/.hapifyrc.js`)).toBeTruthy();
+
+    const relativePath = relative(`${libsDir}/common/test`, '.');
+    expect(appTree.read(`${libsDir}/common/test/.hapifyrc.js`)?.toString())
       .toEqual(`const {
   hapifyDefaultConfig,
   getValidatorPath,
@@ -189,7 +208,7 @@ module.exports = {
   name: 'test',
   description: 'Library to host generated codes',
   validatorPath: getValidatorPath(__dirname),
-  project: '../../../hapify-models.json',
+  project: '${relativePath}/hapify-models.json',
   extends: [
     '@trxn/hapify-templates-models',
   ],

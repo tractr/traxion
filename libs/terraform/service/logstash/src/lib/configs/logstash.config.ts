@@ -11,6 +11,7 @@ export const LOGSTASH_COMPONENT_DEFAULT_CONFIG: LogstashComponentDefaultConfig =
     cpu: '512',
     memory: '1024',
     containerConfig: {
+      imageName: 'tractr/logstash-input-cloudwatch',
       imageTag: '8.3.3',
       environments: {
         XPACK_MONITORING_ENABLED: 'false',

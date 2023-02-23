@@ -5,6 +5,7 @@ import { SERVICE_COMPONENT_DEFAULT_CONFIG } from '@trxn/terraform-service-ecs';
 export const ADMIN_COMPONENT_DEFAULT_CONFIG: AdminComponentDefaultConfig = {
   ...SERVICE_COMPONENT_DEFAULT_CONFIG,
   containerConfig: {
+    imageName: 'admin',
     imageTag: 'latest',
     path: {
       prefix: '/admin',

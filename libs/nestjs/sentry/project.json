@@ -1,38 +1,27 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "nestjs-sentry",
   "projectType": "library",
   "sourceRoot": "libs/nestjs/sentry/src",
-  "tags": [
-    "scope:nestjs"
-  ],
+  "tags": ["scope:nestjs"],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "assets": [
-          "libs/nestjs/sentry/*.md"
-        ],
-        "buildableProjectDepsInPackageJsonType": "dependencies",
+        "assets": ["libs/nestjs/sentry/*.md"],
         "main": "libs/nestjs/sentry/src/index.ts",
         "outputPath": "dist/libs/nestjs/sentry",
         "packageJson": "libs/nestjs/sentry/package.json",
-        "tsConfig": "libs/nestjs/sentry/tsconfig.lib.json",
-        "updateBuildableProjectDepsInPackageJson": true
+        "tsConfig": "libs/nestjs/sentry/tsconfig.lib.json"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ]
+      "outputs": ["{options.outputPath}"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/nestjs/sentry/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/nestjs/sentry/**/*.ts"]
       },
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
@@ -46,9 +35,13 @@
         "jestConfig": "libs/nestjs/sentry/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "coverage/libs/nestjs/sentry"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/sentry"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/nestjs/sentry/package.json"
+      }
     }
   }
 }

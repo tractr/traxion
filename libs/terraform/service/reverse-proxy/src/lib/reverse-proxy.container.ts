@@ -7,10 +7,6 @@ import {
 } from '@trxn/terraform-service-ecs';
 
 export class ReverseProxyContainer extends HttpContainer<ReverseProxyContainerConfig> {
-  protected getAppName(): string {
-    return 'traefik';
-  }
-
   protected getPort(): number {
     return 8080;
   }

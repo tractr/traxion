@@ -11,10 +11,6 @@ export class AdminContainer extends HttpContainer<AdminContainerConfig> {
     return true;
   }
 
-  protected getAppName(): string {
-    return 'admin';
-  }
-
   protected getPort(): number {
     return 4200;
   }

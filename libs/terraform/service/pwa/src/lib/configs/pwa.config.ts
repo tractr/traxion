@@ -5,6 +5,7 @@ import { SERVICE_COMPONENT_DEFAULT_CONFIG } from '@trxn/terraform-service-ecs';
 export const PWA_COMPONENT_DEFAULT_CONFIG: PwaComponentDefaultConfig = {
   ...SERVICE_COMPONENT_DEFAULT_CONFIG,
   containerConfig: {
+    imageName: 'pwa',
     imageTag: 'latest',
     path: {
       prefix: '/',

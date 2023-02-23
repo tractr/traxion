@@ -7,10 +7,6 @@ export class ApiContainer extends HttpContainer<ApiContainerConfig> {
     return true;
   }
 
-  protected getAppName(): string {
-    return 'api';
-  }
-
   protected getPort(): number {
     return 3000;
   }

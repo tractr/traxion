@@ -30,7 +30,7 @@ export const <<Model pascal>>Filter = (props: Omit<FilterProps, 'children'>) => 
     <AutocompleteInput
         choices={[
     <<for field.enum e>>
-          { id: '<<e camel>>', name: '<<e camel>>' },
+          { id: '<<e raw>>', name: '<<e camel>>' },
     <<endfor>>
         ]}
 <<elseif field datetime>>

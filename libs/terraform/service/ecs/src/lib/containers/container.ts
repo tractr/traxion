@@ -1,3 +1,4 @@
+import { SECRET_ENVIRONMENT } from './helpers';
 import {
   ContainerConfig,
   ContainerDefinition,
@@ -12,7 +13,6 @@ import {
   SecretValue,
 } from '../interfaces';
 import type { ServiceComponent } from '../services';
-import { SECRET_ENVIRONMENT } from './helpers';
 
 export abstract class Container<
   T extends ContainerConfig = ContainerConfig,
@@ -56,17 +56,17 @@ export abstract class Container<
 
   protected getRepositoryName(): string {
     if (this.usePrivateImage()) {
-      return this.service.getDockerApplication(this.getAppName())
+      return this.service.getDockerApplication(this.config.imageName)
         .repositoryName;
     }
-    return this.getAppName();
+    return this.config.imageName;
   }
 
   getImageName(): string {
     if (this.usePrivateImage()) {
-      return this.service.getDockerApplication(this.getAppName()).imageName;
+      return this.service.getDockerApplication(this.config.imageName).imageName;
     }
-    return this.getAppName();
+    return this.config.imageName;
   }
 
   getImageTag(): string {
@@ -160,12 +160,6 @@ export abstract class Container<
   protected getEnvNames(): string[] {
     return Object.keys(this.config.environments || {});
   }
-
-  /**
-   * Returns the public Docker image, example: traefik, blacklabelops/volumerize
-   * Or returns the private application name: api-backend
-   */
-  protected abstract getAppName(): string;
 
   protected getDockerLabels(): Record<string, string> {
     return this.config.labels || {};

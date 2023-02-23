@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { getWorkspaceLayout, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
 import {
@@ -27,10 +27,12 @@ describe('normalizeOptions', () => {
       ...defaultOptions,
     };
 
+    const { appsDir } = getWorkspaceLayout(tree);
+
     const normalizedSchema: NormalizedSchema = {
       ...defaultOptions,
       npmScope,
-      projectRoot: 'apps/admin',
+      projectRoot: `${appsDir === '.' ? '' : `${appsDir}/`}admin`,
       projectName: 'admin',
       projectDirectory: 'admin',
       extra: {},
@@ -51,10 +53,12 @@ describe('normalizeOptions', () => {
       ...extraKeys,
     };
 
+    const { appsDir } = getWorkspaceLayout(tree);
+
     const normalizedSchema: NormalizedSchema = {
       ...defaultOptions,
       npmScope,
-      projectRoot: 'apps/admin',
+      projectRoot: `${appsDir === '.' ? '' : `${appsDir}/`}admin`,
       projectName: 'admin',
       projectDirectory: 'admin',
       extra: extraKeys,
@@ -71,10 +75,12 @@ describe('normalizeOptions', () => {
       name: 'testAdmin',
     };
 
+    const { appsDir } = getWorkspaceLayout(tree);
+
     const normalizedSchema: NormalizedSchema = {
       ...defaultOptions,
       npmScope,
-      projectRoot: 'apps/test-admin',
+      projectRoot: `${appsDir === '.' ? '' : `${appsDir}/`}test-admin`,
       projectName: 'test-admin',
       projectDirectory: 'test-admin',
       name: 'test-admin',
@@ -92,11 +98,15 @@ describe('normalizeOptions', () => {
       directory: 'testDirectory',
     };
 
+    const { appsDir } = getWorkspaceLayout(tree);
+
     const normalizedSchema: NormalizedSchema = {
       ...defaultOptions,
       directory: 'test-directory',
       npmScope,
-      projectRoot: 'apps/test-directory/admin',
+      projectRoot: `${
+        appsDir === '.' ? '' : `${appsDir}/`
+      }test-directory/admin`,
       projectName: 'test-directory-admin',
       projectDirectory: 'test-directory/admin',
       extra: {},
@@ -113,11 +123,13 @@ describe('normalizeOptions', () => {
       npmName: undefined,
     };
 
+    const { appsDir } = getWorkspaceLayout(tree);
+
     const normalizedSchema: NormalizedSchema = {
       ...defaultOptions,
       npmName: '@trxn/admin',
       npmScope,
-      projectRoot: 'apps/admin',
+      projectRoot: `${appsDir === '.' ? '' : `${appsDir}/`}admin`,
       projectName: 'admin',
       projectDirectory: 'admin',
       extra: {},
@@ -135,12 +147,14 @@ describe('normalizeOptions', () => {
       npmName: undefined,
     };
 
+    const { appsDir } = getWorkspaceLayout(tree);
+
     const normalizedSchema: NormalizedSchema = {
       ...defaultOptions,
       directory: 'test',
       npmName: '@trxn/test-admin',
       npmScope,
-      projectRoot: 'apps/test/admin',
+      projectRoot: `${appsDir === '.' ? '' : `${appsDir}/`}test/admin`,
       projectName: 'test-admin',
       projectDirectory: 'test/admin',
       extra: {},

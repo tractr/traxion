@@ -141,7 +141,7 @@ export const <<Model pascal>>Edit = (props: EditProps) => {
         }}
         choices={[
     <<for field.enum e>>
-          { id: '<<e camel>>', name: '<<e camel>>' },
+          { id: '<<e raw>>', name: '<<e camel>>' },
     <<endfor>>
         ]}
     <<else>>
@@ -152,7 +152,7 @@ export const <<Model pascal>>Edit = (props: EditProps) => {
         defaultValue={null}
         choices={[
     <<for field.enum e>>
-          { id: '<<e camel>>', name: '<<e camel>>' },
+          { id: '<<e raw>>', name: '<<e camel>>' },
     <<endfor>>
         ]}
     <<endif>>
@@ -178,7 +178,7 @@ export const <<Model pascal>>Edit = (props: EditProps) => {
         <<endif>>
 <<endif>>
 
-    <<if field not nullable>>
+    <<if field not nullable and not multiple>>
         validate={required()}
     <<endif>>
         source="<<field camel>>"

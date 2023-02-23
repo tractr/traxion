@@ -1,5 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "admin",
   "projectType": "application",
   "sourceRoot": "apps/admin/src",
   "tags": [],
@@ -61,7 +62,7 @@
         "commands": [
           "nx build angular-config",
           "node ./tools/local-install.mjs -p angular-config",
-          "node ./dist/libs/angular/config/generate.js ./apps/admin/src/assets/app-config.json"
+          "node ./dist/libs/config/client/src/generate.js ./apps/admin/src/assets/app-config.json"
         ],
         "parallel": false
       }

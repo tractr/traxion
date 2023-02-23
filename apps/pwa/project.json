@@ -1,5 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "pwa",
   "prefix": "tractr",
   "projectType": "application",
   "sourceRoot": "apps/pwa/src",
@@ -44,6 +45,7 @@
           "validator",
           "@prisma/client",
           "@trxn/common",
+          "@trxn/config-client",
           "@generated"
         ],
         "assets": [
@@ -90,7 +92,7 @@
       "options": {
         "commands": [
           "nx build angular-config",
-          "node ./dist/libs/angular/config/generate.js ./apps/pwa/src/assets/app-config.json"
+          "node ./dist/libs/config/client/src/generate.js ./apps/pwa/src/assets/app-config.json"
         ],
         "parallel": false
       }
@@ -122,7 +124,7 @@
         "jestConfig": "apps/pwa/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/apps/pwa"]
+      "outputs": ["{workspaceRoot}/coverage/apps/pwa"]
     }
   }
 }
