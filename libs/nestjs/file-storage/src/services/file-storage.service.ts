@@ -3,8 +3,8 @@ import { extension as getFileExtensionFromMimeType } from 'mime-types';
 import { Client, CopyConditions } from 'minio';
 import { v4 as uuidv4 } from 'uuid';
 
-import { FILE_STORAGE_CONFIGURATION } from '../constants';
-import { FileStorageConfigurationPrivateDto } from '../dtos';
+import { MODULE_OPTIONS_TOKEN } from '../file-storage.module-definition';
+import { FileStorageConfigurationPublic } from '../interfaces';
 
 /**
  * Service to manipulate remote file storage.
@@ -13,8 +13,8 @@ import { FileStorageConfigurationPrivateDto } from '../dtos';
 @Injectable()
 export class FileStorageService extends Client {
   constructor(
-    @Inject(FILE_STORAGE_CONFIGURATION)
-    private fileStorageConfiguration: FileStorageConfigurationPrivateDto,
+    @Inject(MODULE_OPTIONS_TOKEN)
+    private fileStorageConfiguration: FileStorageConfigurationPublic,
   ) {
     super(fileStorageConfiguration);
   }
@@ -39,7 +39,7 @@ export class FileStorageService extends Client {
       this.fileStorageConfiguration;
 
     // File Mime type should be allowed
-    if (!presignedUpload.allowedMimeTypes.includes(fileMimeType))
+    if (!presignedUpload?.allowedMimeTypes.includes(fileMimeType))
       throw new Error(`${fileMimeType} is not an allowed MIME type`);
 
     // File size must be allowed
@@ -53,9 +53,8 @@ export class FileStorageService extends Client {
 
     const bucket = customBucket ?? defaultBucket;
     const fileExtension = getFileExtensionFromMimeType(fileMimeType);
-    const path = `${temporaryPrefix}/${
-      destinationPath || `${this.getUniqueFilename()}.${fileExtension}`
-    }`;
+    const path = `${temporaryPrefix}/${destinationPath || `${this.getUniqueFilename()}.${fileExtension}`
+      }`;
     const expires = new Date(
       Date.now() + presignedUpload.defaultValidity * 1000,
     );
@@ -82,7 +81,7 @@ export class FileStorageService extends Client {
     return this.presignedGetObject(
       bucket,
       file,
-      presignedDownload.defaultValidity,
+      presignedDownload?.defaultValidity,
     );
   }
 
@@ -172,7 +171,7 @@ export class FileStorageService extends Client {
 
     const bucket = customBucket ?? defaultBucket;
     const limit = new Date();
-    limit.setMilliseconds(-1 * temporaryFilesTTL);
+    limit.setMilliseconds(-1 * ( temporaryFilesTTL ?? 60 * 60 * 2 ));
 
     let counter = 0;
 
