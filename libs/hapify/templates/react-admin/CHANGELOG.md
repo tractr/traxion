@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.0.12](https://github.com/tractr/traxion/compare/v2.0.11...v2.0.12) (2023-02-23)
+
+
+### Bug Fixes
+
+* **react-admin:** mutiple field doesn't need to be required in admin ([#580](https://github.com/tractr/traxion/issues/580)) ([cc82c29](https://github.com/tractr/traxion/commit/cc82c2965ca59ff36265e483bdbe82063b87147f))
+
+
+
 ## [2.0.11](https://github.com/tractr/traxion/compare/v2.0.10...v2.0.11) (2023-02-23)
 
 
