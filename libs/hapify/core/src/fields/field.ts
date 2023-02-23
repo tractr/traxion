@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Relation } from '../models';
 import type {
   BaseField,
   Constraints,
@@ -19,6 +18,7 @@ import type { ObjectField } from './object-field';
 import type { PrimaryField } from './primary-field';
 import type { StringField } from './string-field';
 import type { VirtualField } from './virtual-field';
+import type { Relation } from '../models';
 
 /**
  * Field Base constraints
@@ -51,7 +51,10 @@ export type RelationsConstraint = Constraints<'relations', Relation[]>;
 /**
  * Common constraints
  */
-export type DefaultConstraint<T = any> = OptionalConstraint<'defaultValue', T>;
+export type DefaultConstraint<T = unknown> = OptionalConstraint<
+  'defaultValue',
+  T
+>;
 export type FormatConstraint<T> = OptionalConstraint<'format', T>;
 
 /**

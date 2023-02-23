@@ -8,6 +8,7 @@ import {
   BaseFieldPropertiesKeys,
   ExtractField,
   GetConstraintsNames,
+  GetField,
 } from '../base-types';
 import { Field, FieldType } from '../field';
 
@@ -28,21 +29,25 @@ export type CreateFieldOptions<F extends BaseField> = Partial<
  */
 export function createField<
   T extends FieldType,
-  F extends ExtractField<Field, T>,
+  C extends Omit<GetField<Field, T>, BaseFieldPropertiesKeys>,
   N extends string,
-  O extends CreateFieldOptions<F>,
-  C extends Omit<F, BaseFieldPropertiesKeys>,
+  O extends CreateFieldOptions<GetField<Field, T>>,
 >(
   type: T,
   name: Function.Narrow<N>,
   constraints: Function.Narrow<C>,
   options?: Function.Narrow<O>,
-): Omit<F, keyof C> & C & { name: N } & O {
+) {
   return {
     type,
     name,
     pluralName: plural(name as string),
     ...(constraints as object),
     ...(options as object),
-  } as unknown as Omit<F, keyof C> & C & { name: N } & O;
+  } as unknown as { type: T; name: N; pluralName: string } & ExtractField<
+    Field,
+    T
+  > &
+    C &
+    O;
 }
