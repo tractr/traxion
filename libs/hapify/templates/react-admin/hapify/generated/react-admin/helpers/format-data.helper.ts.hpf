@@ -8,7 +8,7 @@ export type FormatUpdateData = (
 export const formatData: Record<ResourceType, FormatUpdateData> = {
 <<for Models model>>  <<model camel>>: (data) => {
     const formated: any = removeNullValue(data);
-  <<for model.fields entity and not manyOne and not internal field>>
+  <<for model.fields entity and not manyOne field>>
     <<if field manyMany>>
       // for the manyMany field we send empty array
       formated.<<field camel>> = [];
