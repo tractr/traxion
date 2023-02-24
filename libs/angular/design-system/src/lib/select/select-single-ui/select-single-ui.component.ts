@@ -13,7 +13,7 @@ import {
   ReactiveFormsModule,
   Validator,
 } from '@angular/forms';
-import { ReplaySubject, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, Subject, takeUntil } from 'rxjs';
 
 import { BaseFormControlComponent } from '../../base';
 import { SelectOptionInterface } from '../../interfaces';
@@ -33,9 +33,9 @@ export class SelectSingleUiComponent
 {
   @ViewChild('select') select!: ElementRef;
 
-  value$ = new Subject<string>();
+  value$ = new Subject<string | undefined>();
 
-  selected$ = new ReplaySubject<SelectOptionInterface>(1);
+  selected$ = new BehaviorSubject<SelectOptionInterface | undefined>(undefined);
 
   options: SelectOptionInterface[] = [];
 
@@ -47,5 +47,16 @@ export class SelectSingleUiComponent
     this.value$.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
       if (this.select) this.select.nativeElement.value = value;
     });
+
+    this.value$.pipe(takeUntil(this.unsubscribe$)).subscribe((selected) => {
+      this.selected$.next(
+        this.options.find((option) => option.value === selected),
+      );
+    });
   }
+
+  override onChange = (event: Event) => {
+    const { value } = event.target as HTMLInputElement;
+    this.value$.next(value === '' ? undefined : value);
+  };
 }
