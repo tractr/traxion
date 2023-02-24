@@ -1,9 +1,10 @@
-import { ClientOptions, Region } from 'minio';
+import { ClientOptions as MinioClientOptions, Region } from 'minio';
 
 import { PresignedDownloadConfiguration } from './presigned-download-configuration.interface';
 import { PresignedUploadConfiguration } from './presigned-upload-configuration.interface';
 
-export interface FileStorageConfigurationPublic extends ClientOptions {
+
+export interface FileStorageConfigurationPrivate extends MinioClientOptions {
   /**
    * File storage endpoint (ip or domain)
    */
@@ -30,59 +31,52 @@ export interface FileStorageConfigurationPublic extends ClientOptions {
   port: number;
 
   /**
-   * Set this value to override
-   * region cache
+   * Set this value to override region cache
    */
   region?: Region;
 
   /**
-   * Set this value to pass in a
-   * custom transport
+   * Set this value to pass in a custom transport
    */
   transport?: string;
 
   /**
-   * Set this value to provide
-   * x-amz-security-token (AWS S3 specific)
+   * Set this value to provide x-amz-security-token (AWS S3 specific)
    */
   sessionToken?: string;
 
   /**
-   * Set this value to override
-   * default part size of 64MB
-   * for multipart uploads
+   * Set this value to override default part size of 64MB for multipart uploads
    */
   partSize?: number;
 
   /**
-   * Set this value to override default
-   * access behavior (path) for non AWS endpoints
+   * Set this value to override default access behavior (path) for non AWS endpoints
    */
   pathStyle?: boolean;
 
   /**
-   * Default bucket that will be used
-   * if no bucket is provided
+   * Default bucket that will be used if no bucket is provided
    */
   defaultBucket: string;
 
   /**
    * Prefix for temporary files
    */
-  temporaryPrefix?: string;
+  temporaryPrefix: string;
 
   /**
    * Time to live of temporary files (seconds)
    */
-  temporaryFilesTTL?: number;
+  temporaryFilesTTL: number;
 
   /**
    * Configuration for presigned uploads
    */
-  presignedUpload?: Partial<PresignedUploadConfiguration>;
+  presignedUpload: PresignedUploadConfiguration;
 
   /**
    * Configuration for presigned downloads
    */
-  presignedDownload?: Partial<PresignedDownloadConfiguration>;
+  presignedDownload: PresignedDownloadConfiguration
 }

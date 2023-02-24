@@ -4,7 +4,7 @@ import { Client, CopyConditions } from 'minio';
 import { v4 as uuidv4 } from 'uuid';
 
 import { MODULE_OPTIONS_TOKEN } from '../file-storage.module-definition';
-import { FileStorageConfigurationPublic } from '../interfaces';
+import { FileStorageConfigurationPrivate } from '../interfaces';
 
 /**
  * Service to manipulate remote file storage.
@@ -13,8 +13,8 @@ import { FileStorageConfigurationPublic } from '../interfaces';
 @Injectable()
 export class FileStorageService extends Client {
   constructor(
-    @Inject(MODULE_OPTIONS_TOKEN)
-    private fileStorageConfiguration: FileStorageConfigurationPublic,
+    @Inject('CONFIGURATION_TOKEN')
+    private fileStorageConfiguration: FileStorageConfigurationPrivate,
   ) {
     super(fileStorageConfiguration);
   }
@@ -24,7 +24,7 @@ export class FileStorageService extends Client {
    *
    * @param fileMimeType - MIME type of the file to upload
    * @param fileSize - Size of the file to upload (in bits)
-   * @param destinationPath - Custom destination path in the temporary folde
+   * @param destinationPath - Custom destination path in the temporary folder
    * If not provided, a random id will be used
    * @param customBucket - Custom bucket to upload file. Default
    * bucket will be used if not provided
@@ -39,7 +39,7 @@ export class FileStorageService extends Client {
       this.fileStorageConfiguration;
 
     // File Mime type should be allowed
-    if (!presignedUpload?.allowedMimeTypes.includes(fileMimeType))
+    if (!presignedUpload.allowedMimeTypes.includes(fileMimeType))
       throw new Error(`${fileMimeType} is not an allowed MIME type`);
 
     // File size must be allowed
@@ -171,7 +171,8 @@ export class FileStorageService extends Client {
 
     const bucket = customBucket ?? defaultBucket;
     const limit = new Date();
-    limit.setMilliseconds(-1 * ( temporaryFilesTTL ?? 60 * 60 * 2 ));
+    // limit.setMilliseconds(-1 * ( temporaryFilesTTL ?? 60 * 60 * 2 ));
+    limit.setMilliseconds(-1 * temporaryFilesTTL);
 
     let counter = 0;
 
