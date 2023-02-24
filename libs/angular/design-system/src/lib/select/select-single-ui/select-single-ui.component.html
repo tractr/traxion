@@ -1,0 +1,21 @@
+<label *ngIf="!!label" [for]="prefixId + id">{{ label }}</label>
+
+<select
+  #select
+  [id]="prefixId + id"
+  (change)="onChange($event)"
+  (blur)="onTouched()"
+  [disabled]="disabled"
+>
+  <option [value]="null">{{ placeholder || '' }}</option>
+  <option *ngFor="let option of options" [value]="option.value">
+    {{ option.label }}
+  </option>
+</select>
+
+<div *ngIf="errors$ | async as errors">
+  <pre>
+This field is invalid
+{{ errors | json }}
+  </pre>
+</div>
