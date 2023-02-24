@@ -7,15 +7,10 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormsModule,
-  ReactiveFormsModule,
-  Validator,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
-import { BaseFormControlComponent, BaseInputTextComponent } from '../../base';
+import { BaseFormControlComponent } from '../../base';
 
 @Component({
   standalone: true,
@@ -28,7 +23,7 @@ import { BaseFormControlComponent, BaseInputTextComponent } from '../../base';
 })
 export class InputTextareaUiComponent
   extends BaseFormControlComponent
-  implements OnInit, ControlValueAccessor, Validator
+  implements OnInit
 {
   @ViewChild('textarea') textarea!: ElementRef<HTMLTextAreaElement>;
 

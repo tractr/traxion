@@ -1,11 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormsModule,
-  ReactiveFormsModule,
-  Validator,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BaseInputTextComponent } from '../../base';
 
@@ -20,7 +15,7 @@ import { BaseInputTextComponent } from '../../base';
 })
 export class InputTimeUiComponent
   extends BaseInputTextComponent
-  implements OnInit, ControlValueAccessor, Validator
+  implements OnInit
 {
   override prefixId = 'trxn-input-time-ui-';
 

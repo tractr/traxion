@@ -3,15 +3,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnDestroy,
   OnInit,
 } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormsModule,
-  ReactiveFormsModule,
-  Validator,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BaseInputTextComponent } from '../../base';
 
@@ -25,7 +19,7 @@ import { BaseInputTextComponent } from '../../base';
 })
 export class InputEmailUiComponent
   extends BaseInputTextComponent
-  implements OnInit, OnDestroy, ControlValueAccessor, Validator
+  implements OnInit
 {
   @Input() placeholder?: string;
 

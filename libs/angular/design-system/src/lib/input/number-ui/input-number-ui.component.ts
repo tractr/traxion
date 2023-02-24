@@ -5,12 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormsModule,
-  ReactiveFormsModule,
-  Validator,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subject } from 'rxjs';
 
 import { BaseInputComponent } from '../../base';
@@ -26,7 +21,7 @@ import { BaseInputComponent } from '../../base';
 })
 export class InputNumberUiComponent
   extends BaseInputComponent
-  implements OnInit, ControlValueAccessor, Validator
+  implements OnInit
 {
   @Input() placeholder?: string;
 
