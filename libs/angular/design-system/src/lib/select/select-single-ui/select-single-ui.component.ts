@@ -28,6 +28,10 @@ export class SelectSingleUiComponent
   override ngOnInit(): void {
     super.ngOnInit();
 
+    this.value$.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
+      if (this.select) this.select.nativeElement.value = value;
+    });
+
     this.value$.pipe(takeUntil(this.unsubscribe$)).subscribe((selected) => {
       this.selected$.next(
         this.options.find((option) => option.value === selected),
