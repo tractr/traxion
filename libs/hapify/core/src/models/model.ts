@@ -13,7 +13,7 @@ import {
 } from '../fields';
 
 /**
- * One to many relation
+ * One-to-many relation
  */
 export type OneManyRelation = {
   type: 'oneMany';
@@ -30,7 +30,7 @@ export type OneManyRelation = {
 };
 
 /**
- * Many to many relation
+ * Many-to-many relation
  */
 export type ManyManyRelation = {
   type: 'manyMany';
@@ -46,7 +46,7 @@ export type ManyManyRelation = {
 };
 
 /**
- * One to one relation
+ * One-to-one relation
  */
 export type OneOneRelation = {
   type: 'oneOne';
@@ -148,7 +148,7 @@ export type HaveStringField<M extends Model> = HaveField<M, 'string'>;
 export type HaveVirtualField<M extends Model> = HaveField<M, 'virtual'>;
 
 /**
- * Get the field type of a model
+ * Get the field type of model
  *
  * @example
  *
@@ -173,7 +173,7 @@ export type GetFieldTypes<M extends Model> = M['fields'] extends Array<infer F>
   : never;
 
 /**
- * Get the field type of a model
+ * Get the field type of model
  */
 
 export const hasSomeBooleanField = hasSomeFieldFactory('boolean');
