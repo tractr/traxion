@@ -3,7 +3,7 @@ import { extension as getFileExtensionFromMimeType } from 'mime-types';
 import { Client, CopyConditions } from 'minio';
 import { v4 as uuidv4 } from 'uuid';
 
-import { MODULE_OPTIONS_TOKEN } from '../file-storage.module-definition';
+import { FILE_STORAGE_CONFIGURATION } from '../constants';
 import { FileStorageConfigurationPrivate } from '../interfaces';
 
 /**
@@ -13,7 +13,7 @@ import { FileStorageConfigurationPrivate } from '../interfaces';
 @Injectable()
 export class FileStorageService extends Client {
   constructor(
-    @Inject('CONFIGURATION_TOKEN')
+    @Inject(FILE_STORAGE_CONFIGURATION)
     private fileStorageConfiguration: FileStorageConfigurationPrivate,
   ) {
     super(fileStorageConfiguration);
@@ -53,8 +53,9 @@ export class FileStorageService extends Client {
 
     const bucket = customBucket ?? defaultBucket;
     const fileExtension = getFileExtensionFromMimeType(fileMimeType);
-    const path = `${temporaryPrefix}/${destinationPath || `${this.getUniqueFilename()}.${fileExtension}`
-      }`;
+    const path = `${temporaryPrefix}/${
+      destinationPath || `${this.getUniqueFilename()}.${fileExtension}`
+    }`;
     const expires = new Date(
       Date.now() + presignedUpload.defaultValidity * 1000,
     );

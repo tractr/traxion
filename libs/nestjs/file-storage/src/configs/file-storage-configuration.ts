@@ -1,7 +1,11 @@
-import { FileStorageConfigurationPrivate, FileStorageConfigurationPublic } from '../interfaces';
+import {
+  FileStorageConfigurationPrivate,
+  FileStorageConfigurationPublic,
+} from '../interfaces';
 
-export function createFileStorageConfiguration(config: FileStorageConfigurationPublic): FileStorageConfigurationPrivate {
-  
+export function createFileStorageConfiguration(
+  config: FileStorageConfigurationPublic,
+): FileStorageConfigurationPrivate {
   const DEFAULT_CONFIG = {
     temporaryPrefix: 'temp',
     temporaryFilesTTL: 60 * 60 * 2,
@@ -16,7 +20,7 @@ export function createFileStorageConfiguration(config: FileStorageConfigurationP
     },
   };
 
-  const conf = {
+  return {
     ...DEFAULT_CONFIG,
     ...config,
     presignedDownload: {
@@ -28,6 +32,4 @@ export function createFileStorageConfiguration(config: FileStorageConfigurationP
       ...config.presignedUpload,
     },
   };
-
-  return conf;
 }

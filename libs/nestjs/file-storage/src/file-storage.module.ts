@@ -2,20 +2,23 @@ import { Global, Module } from '@nestjs/common';
 import { ConsoleModule } from 'nestjs-console';
 
 import { createFileStorageConfiguration } from './configs';
-import { ConfigurableModuleClass } from './file-storage.module-definition';
+import { FILE_STORAGE_CONFIGURATION } from './constants';
+import {
+  ConfigurableModuleClass,
+  MODULE_OPTIONS_TOKEN,
+} from './file-storage.module-definition';
 import { FileStorageService } from './services';
-
 
 @Global()
 @Module({
   imports: [ConsoleModule],
   providers: [
     {
-      provide: 'CONFIGURATION_TOKEN',
+      provide: FILE_STORAGE_CONFIGURATION,
       useFactory: createFileStorageConfiguration,
-      inject: ['MODULE_OPTIONS_TOKEN'],
+      inject: [MODULE_OPTIONS_TOKEN],
     },
-    FileStorageService
+    FileStorageService,
   ],
   exports: [FileStorageService],
 })
