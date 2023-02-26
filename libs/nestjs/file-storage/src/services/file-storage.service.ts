@@ -48,7 +48,7 @@ export class FileStorageService extends Client {
       fileSize > presignedUpload.maxFileSize
     )
       throw new Error(
-        `File size is out of allowed range. It must be between ${presignedUpload.minFileSize} and ${presignedUpload.minFileSize} bits`,
+        `File size is out of allowed range. It must be between ${presignedUpload.minFileSize} and ${presignedUpload.maxFileSize} bits`,
       );
 
     const bucket = customBucket ?? defaultBucket;
