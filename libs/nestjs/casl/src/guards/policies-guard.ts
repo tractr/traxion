@@ -5,12 +5,12 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { ModuleRef, Reflector } from '@nestjs/core';
-import type { User } from '@prisma/client';
 
 import { CaslAbilityFactoryService } from '../services';
 
 import { isClass, PolicyHandlerType } from '@trxn/common';
 import { getRequestFromContext, POLICIES_KEY } from '@trxn/nestjs-core';
+import { MinimalUser, User } from '@trxn/nestjs-user';
 
 @Injectable()
 export class PoliciesGuard implements CanActivate {
@@ -20,7 +20,9 @@ export class PoliciesGuard implements CanActivate {
     private caslAbilityFactory: CaslAbilityFactoryService,
   ) {}
 
-  async canActivate(context: ExecutionContext): Promise<boolean> {
+  async canActivate<U extends User = MinimalUser>(
+    context: ExecutionContext,
+  ): Promise<boolean> {
     const policyHandlers =
       this.reflector.get<PolicyHandlerType<unknown>[]>(
         POLICIES_KEY,
@@ -37,10 +39,14 @@ export class PoliciesGuard implements CanActivate {
 
     // Get user from the request object.
     // User should have been fetched and hydrated by the authentication layer
-    const { user }: { user?: User } = req;
+    const { user }: { user?: U } = req;
 
-    if (user && (!user.roles || !Array.isArray(user.roles))) {
-      throw new ForbiddenException();
+    if (user) {
+      try {
+        this.caslAbilityFactory.getRoles(user);
+      } catch {
+        throw new ForbiddenException();
+      }
     }
 
     const ability = this.caslAbilityFactory.createForUser(user);

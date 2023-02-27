@@ -3,9 +3,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import * as bcrypt from 'bcrypt';
 import { mockDeep, MockProxy, mockReset } from 'jest-mock-extended';
 
+import { BcryptService } from './bcrypt.service';
 import { MODULE_OPTIONS_TOKEN } from '../bcrypt.module-definition';
 import { BcryptModuleOptions } from '../interfaces';
-import { BcryptService } from './bcrypt.service';
 
 describe('BcryptService', () => {
   let bcryptService: BcryptService;

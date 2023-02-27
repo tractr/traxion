@@ -5,23 +5,24 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { User } from '@prisma/client';
 import { mockDeep, MockProxy, mockReset } from 'jest-mock-extended';
 
-import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
-import { AuthenticationModuleOptions } from '../interfaces';
 import { AuthenticationService } from './authentication.service';
 import { HashService } from './hash.service';
-import { UserAuthenticationService } from './user-authentication.service';
+import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
+import { AuthenticationModuleOptions } from '../interfaces';
+
+import { UserService } from '@trxn/nestjs-user';
 
 describe('AuthService', () => {
   let authService: AuthenticationService;
   let mockJwtService: MockProxy<JwtService>;
-  let mockUserAuthenticationService: MockProxy<UserAuthenticationService>;
+  let mockUserService: MockProxy<UserService>;
 
   let mockAuthenticationModuleOptions: MockProxy<AuthenticationModuleOptions>;
   let mockHashService: MockProxy<HashService>;
 
   beforeEach(async () => {
     mockJwtService = mockDeep<JwtService>();
-    mockUserAuthenticationService = mockDeep<UserAuthenticationService>();
+    mockUserService = mockDeep<UserService>();
     mockHashService = mockDeep<HashService>();
     mockAuthenticationModuleOptions =
       mockDeep<AuthenticationModuleOptions>() as MockProxy<AuthenticationModuleOptions>;
@@ -34,8 +35,8 @@ describe('AuthService', () => {
           useValue: mockAuthenticationModuleOptions,
         },
         {
-          provide: UserAuthenticationService,
-          useValue: mockUserAuthenticationService,
+          provide: UserService,
+          useValue: mockUserService,
         },
         { provide: JwtService, useValue: mockJwtService },
         { provide: HashService, useValue: mockHashService },
@@ -47,7 +48,7 @@ describe('AuthService', () => {
 
   afterEach(() => {
     mockReset(mockJwtService);
-    mockReset(mockUserAuthenticationService);
+    mockReset(mockUserService);
     mockReset(mockHashService);
   });
 
@@ -62,12 +63,8 @@ describe('AuthService', () => {
         email: 'login',
         password: 'password',
       } as User;
-      mockUserAuthenticationService.getUserFromLogin.mockResolvedValueOnce(
-        user,
-      );
-      mockUserAuthenticationService.getPasswordFromUser.mockResolvedValueOnce(
-        'hash',
-      );
+      mockUserService.findUserByLogin.mockResolvedValueOnce(user);
+      mockUserService.getUserPassword.mockResolvedValueOnce('hash');
 
       mockHashService.compare.mockResolvedValueOnce(true);
 
@@ -82,39 +79,31 @@ describe('AuthService', () => {
         email: 'login',
         password: 'password',
       } as User;
-      mockUserAuthenticationService.getUserFromLogin.mockResolvedValueOnce(
-        user,
-      );
-      mockUserAuthenticationService.getPasswordFromUser.mockResolvedValueOnce(
-        'hash',
-      );
+      mockUserService.findUserByLogin.mockResolvedValueOnce(user);
+      mockUserService.getUserPassword.mockResolvedValueOnce('hash');
 
       mockHashService.compare.mockResolvedValueOnce(false);
 
       let result = await authService.validateUser('login', 'password');
       expect(result).toBe(null);
 
-      mockUserAuthenticationService.getUserFromLogin.mockResolvedValueOnce(
-        user,
-      );
-      mockUserAuthenticationService.getPasswordFromUser.mockResolvedValueOnce(
-        null,
-      );
+      mockUserService.findUserByLogin.mockResolvedValueOnce(user);
+      mockUserService.getPasswordFromUser.mockReturnValueOnce(null);
       result = await authService.validateUser('login', 'password');
       expect(result).toBe(null);
 
-      mockUserAuthenticationService.getUserFromLogin.mockResolvedValueOnce(
-        null,
-      );
+      mockUserService.findUserByLogin.mockResolvedValueOnce(null);
       result = await authService.validateUser('login', 'password');
       expect(result).toBe(null);
     });
   });
 
-  describe('createUserJWT', () => {
-    it('should create a User JWT with the getUserJWT from the config', async () => {
-      const spyGetUserJWT = jest.fn().mockReturnValue({ id: 'test' });
-      mockAuthenticationModuleOptions.getUserJWT = spyGetUserJWT;
+  describe('createAccessToken', () => {
+    it('should create a User JWT with the transformJwtPayload from the config', async () => {
+      const transformJwtPayload = jest
+        .fn()
+        .mockImplementation((payload) => ({ ...payload, id: 'test' }));
+      mockAuthenticationModuleOptions.transformJwtPayload = transformJwtPayload;
 
       const user = {
         id: '1',
@@ -122,7 +111,7 @@ describe('AuthService', () => {
         password: 'password',
       } as User;
       mockJwtService.sign.mockReturnValue('jwt');
-      const compare = await authService.createUserJWT(user);
+      const compare = await authService.createAccessToken(user);
 
       expect(mockJwtService.sign).toHaveBeenCalledTimes(1);
       expect(mockJwtService.sign).toHaveBeenCalledWith({
@@ -130,21 +119,21 @@ describe('AuthService', () => {
         id: 'test',
       });
 
-      expect(spyGetUserJWT).toHaveBeenCalledTimes(1);
-      expect(spyGetUserJWT).toHaveBeenCalledWith(user);
+      expect(transformJwtPayload).toHaveBeenCalledTimes(1);
+      expect(transformJwtPayload).toHaveBeenCalledWith({ sub: '1' }, user);
 
       expect(compare).toEqual('jwt');
     });
 
     it('should create a User JWT', async () => {
-      mockAuthenticationModuleOptions.getUserJWT = undefined;
+      mockAuthenticationModuleOptions.transformJwtPayload = undefined;
       const user = {
         id: '1',
         email: 'login',
         password: 'password',
       } as User;
       mockJwtService.sign.mockReturnValue('jwt');
-      const compare = await authService.createUserJWT(user);
+      const compare = await authService.createAccessToken(user);
 
       expect(mockJwtService.sign).toHaveBeenCalledTimes(1);
       expect(mockJwtService.sign).toHaveBeenCalledWith({ sub: user.id });
@@ -160,11 +149,11 @@ describe('AuthService', () => {
         email: 'login',
         password: 'password',
       } as User;
-      const { createUserJWT } = authService;
+      const { createAccessToken } = authService;
       const mockCreateUserJWT = jest.fn().mockReturnValue('jwt');
-      authService.createUserJWT = mockCreateUserJWT;
+      authService.createAccessToken = mockCreateUserJWT;
       const loggedIn = await authService.login(user);
-      authService.createUserJWT = createUserJWT;
+      authService.createAccessToken = createAccessToken;
 
       expect(mockCreateUserJWT).toHaveBeenCalledTimes(1);
       expect(mockCreateUserJWT).toHaveBeenCalledWith(user);

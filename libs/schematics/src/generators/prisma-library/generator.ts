@@ -9,6 +9,9 @@ import {
   updateProjectConfiguration,
 } from '@nrwl/devkit';
 
+import { NX_TOOLS_NX_PRISMA_PACKAGE } from './constants/nx-tools-prisma-package';
+import { getTargetsToAdd } from './helpers/project-targets';
+import { PrismaLibraryGeneratorSchema } from './schema';
 import * as packageJson from '../../../package.json';
 import {
   addPackageToPackageJson,
@@ -18,9 +21,6 @@ import {
   PackageType,
 } from '../../helpers';
 import hapifyLibraryGenerator from '../hapify-library/generator';
-import { NX_TOOLS_NX_PRISMA_PACKAGE } from './constants/nx-tools-prisma-package';
-import { getTargetsToAdd } from './helpers/project-targets';
-import { PrismaLibraryGeneratorSchema } from './schema';
 
 export interface NormalizedOptions {
   name: string;

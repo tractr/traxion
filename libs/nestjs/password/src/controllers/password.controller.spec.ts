@@ -10,8 +10,8 @@ import { User } from '@prisma/client';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as request from 'supertest';
 
-import { PasswordService } from '../services';
 import { PasswordController } from './password.controller';
+import { PasswordService } from '../services';
 
 describe('Password Controller', () => {
   let app: INestApplication;

@@ -1,16 +1,14 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
-import { CaslOptions } from '../src';
-import { CASL_MODULE_OPTIONS } from '../src/casl.constant';
 import { AppAbility } from './role-permission.mock';
+import { CaslAbilityFactoryService } from '../src';
 
 import { PolicyHandler } from '@trxn/common';
 
 @Injectable()
 export class PolicyHandlerClass implements PolicyHandler<AppAbility> {
   constructor(
-    @Inject(CASL_MODULE_OPTIONS)
-    private readonly caslOptions: CaslOptions<AppAbility>,
+    private readonly caslAbilityFactoryService: CaslAbilityFactoryService,
   ) {}
 
   handle() {

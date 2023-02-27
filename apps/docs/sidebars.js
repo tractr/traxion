@@ -13,6 +13,24 @@ module.exports = {
       items: [
         {
           type: 'category',
+          label: 'Database',
+          items: [
+            'how-to/database/configuration',
+            'how-to/database/database-migration-with-prisma',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Authentication',
+          items: [
+            'how-to/authentication/use-nestjs-user',
+            'how-to/authentication/use-nestjs-authentication',
+            'how-to/authentication/use-nestjs-casl',
+            'how-to/authentication/use-nestjs-password',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Angular',
           items: [
             'how-to/angular/configure-lazy-loading',
@@ -23,17 +41,7 @@ module.exports = {
         {
           type: 'category',
           label: 'NestJS',
-          items: [
-            'how-to/nestjs/extend-a-generated-controller',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Database',
-          items: [
-            'how-to/database/configuration',
-            'how-to/database/database-migration-with-prisma'
-          ],
+          items: ['how-to/nestjs/extend-a-generated-controller'],
         },
         {
           type: 'category',
@@ -41,6 +49,14 @@ module.exports = {
           items: [
             'how-to/file-storage/file-storage-on-aws-s3',
             'how-to/file-storage/use-minio',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Mailer',
+          items: [
+            'how-to/mailer/use-mailjet',
+            'how-to/mailer/use-mailer-with-mailjet',
           ],
         },
         {

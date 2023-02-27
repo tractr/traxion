@@ -1,27 +1,28 @@
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, Type } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { Prisma } from '@prisma/client';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as jwt from 'jsonwebtoken';
 import * as request from 'supertest';
 
-import { AuthenticationEndpointMockController } from '../mocks';
 import { AuthenticationModule } from './authentication.module';
 import { JwtGlobalAuthGuard } from './guards';
 import { AuthenticationService } from './services';
 import { JwtStrategy, LocalStrategy } from './strategies';
+import { AuthenticationEndpointMockController } from '../mocks';
+
+import { UserService } from '@trxn/nestjs-user';
 
 describe('Authentication Module', () => {
   let app: INestApplication;
-  let mockUserService: MockProxy<Prisma.UserDelegate<false>>;
+  let mockUserService: MockProxy<Type<UserService>>;
 
   it('should load the module when using register', async () => {
-    mockUserService = mockDeep<Prisma.UserDelegate<false>>();
+    mockUserService = mockDeep<Type<UserService>>();
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         AuthenticationModule.register({
-          userService: mockUserService,
+          providers: [{ provide: UserService, useValue: mockUserService }],
           jwtModuleOptions: {
             secret: 'integration-tests',
           },
@@ -42,14 +43,16 @@ describe('Authentication Module', () => {
   });
 
   it('should load the module when using registerAsync', async () => {
-    mockUserService = mockDeep<Prisma.UserDelegate<false>>();
+    mockUserService = mockDeep<Type<UserService>>();
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
-        AuthenticationModule.register({
-          userService: mockUserService,
-          jwtModuleOptions: {
-            secret: 'integration-tests',
-          },
+        AuthenticationModule.registerAsync({
+          providers: [{ provide: UserService, useValue: mockUserService }],
+          useFactory: () => ({
+            jwtModuleOptions: {
+              secret: 'integration-tests',
+            },
+          }),
         }),
       ],
       providers: [],
@@ -68,13 +71,13 @@ describe('Authentication Module', () => {
 
   describe('Authentication module when using jwt global guard', () => {
     beforeEach(async () => {
-      mockUserService = mockDeep<Prisma.UserDelegate<false>>();
+      mockUserService = mockDeep<Type<UserService>>();
 
       const moduleFixture: TestingModule = await Test.createTestingModule({
         controllers: [AuthenticationEndpointMockController],
         imports: [
           AuthenticationModule.register({
-            userService: mockUserService,
+            providers: [{ provide: UserService, useValue: mockUserService }],
             jwtModuleOptions: {
               secret: 'integration-tests',
             },
@@ -119,12 +122,12 @@ describe('Authentication Module', () => {
 
   describe('Authentication Module without global guards', () => {
     beforeEach(async () => {
-      mockUserService = mockDeep<Prisma.UserDelegate<false>>();
+      mockUserService = mockDeep<Type<UserService>>();
       const moduleFixture: TestingModule = await Test.createTestingModule({
         controllers: [AuthenticationEndpointMockController],
         imports: [
           AuthenticationModule.register({
-            userService: mockUserService,
+            providers: [{ provide: UserService, useValue: mockUserService }],
             jwtModuleOptions: {
               secret: 'integration-tests',
             },

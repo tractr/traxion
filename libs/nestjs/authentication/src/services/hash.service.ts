@@ -1,22 +1,19 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Optional } from '@nestjs/common';
 
-import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
-import { AuthenticationModuleOptions } from '../interfaces';
+import { ENCRYPTION_SERVICE } from '../constants';
 
 import { BcryptService, EncryptionService } from '@trxn/nestjs-bcrypt';
 
 @Injectable()
 export class HashService implements EncryptionService {
   constructor(
-    @Inject(MODULE_OPTIONS_TOKEN)
-    private readonly authenticationModuleOptions: AuthenticationModuleOptions,
     private readonly bcryptService: BcryptService,
-  ) {}
 
-  get encryptionService(): EncryptionService {
-    return (
-      this.authenticationModuleOptions.encryptionService || this.bcryptService
-    );
+    @Optional()
+    @Inject(ENCRYPTION_SERVICE)
+    private readonly encryptionService: EncryptionService,
+  ) {
+    this.encryptionService = this.encryptionService || this.bcryptService;
   }
 
   async hash(value: string): Promise<string> {

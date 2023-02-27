@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ConsoleModule } from 'nestjs-console';
 
 import {
   AuthenticationModule,
+  CaslModule,
   DatabaseModule,
   FileStorageModule,
   GraphQLModule,
@@ -11,6 +13,8 @@ import {
   PasswordModule,
 } from './modules';
 
+import { JwtGlobalAuthGuard } from '@trxn/nestjs-authentication';
+import { CaslExceptionInterceptor, PoliciesGuard } from '@trxn/nestjs-casl';
 import { LoggerModule } from '@trxn/nestjs-core';
 
 @Module({
@@ -23,6 +27,7 @@ import { LoggerModule } from '@trxn/nestjs-core';
     GraphQLModule,
 
     // Authentication modules
+    CaslModule,
     AuthenticationModule,
     PasswordModule,
 
@@ -35,6 +40,12 @@ import { LoggerModule } from '@trxn/nestjs-core';
 
     // Cli
     ConsoleModule,
+  ],
+
+  providers: [
+    { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
+    { provide: APP_GUARD, useClass: PoliciesGuard },
+    { provide: APP_INTERCEPTOR, useClass: CaslExceptionInterceptor },
   ],
 })
 export class AppModule {}

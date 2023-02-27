@@ -10,12 +10,12 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import * as nestjs from '@nrwl/nest';
 import fetch, { Response } from 'node-fetch';
 
-import * as hapifyTargetGenerator from '../target-generate/generator';
 import generator from './generator';
 import {
   HapifyLibraryGeneratorOptions,
   HapifyLibraryGeneratorOptionsWithExtra,
 } from './schema';
+import * as hapifyTargetGenerator from '../target-generate/generator';
 
 jest.mock('@nrwl/angular/generators', () => ({
   __esModule: true,

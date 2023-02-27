@@ -1,24 +1,24 @@
 import { Injectable } from '@nestjs/common';
 
-import { BadPasswordError } from '../errors';
 import { HashService } from './hash.service';
-import { UserPasswordService } from './user-password.service';
+import { BadPasswordError } from '../errors';
 
 import { UserNotFoundError } from '@trxn/nestjs-authentication';
+import { UserId, UserService } from '@trxn/nestjs-user';
 
 @Injectable()
 export class PasswordService {
   constructor(
-    private readonly userPasswordService: UserPasswordService,
+    private readonly userService: UserService,
     private readonly hashService: HashService,
   ) {}
 
   async updatePassword(
-    userId: string,
+    userId: UserId,
     oldPassword: string,
     newPassword: string,
   ) {
-    const user = await this.userPasswordService.getUserFromId(userId);
+    const user = await this.userService.findUserById(userId);
 
     if (!user) {
       throw new UserNotFoundError();
@@ -32,6 +32,6 @@ export class PasswordService {
       throw new BadPasswordError();
     }
 
-    await this.userPasswordService.updateUserPassword(userId, newPassword);
+    await this.userService.updatePassword(userId, newPassword);
   }
 }

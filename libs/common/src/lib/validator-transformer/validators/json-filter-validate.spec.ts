@@ -2,8 +2,8 @@
 /* eslint-disable max-classes-per-file */
 import { validate } from 'class-validator';
 
-import { JsonArray, JsonObject } from '../../interfaces';
 import { JsonFilterValidate } from './json-filter-validate';
+import { JsonArray, JsonObject } from '../../interfaces';
 
 describe('JsonFilterValidate decorator', () => {
   // Class to test the JsonFilterValidate decorator

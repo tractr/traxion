@@ -8,9 +8,9 @@ import {
 } from '@nestjs/common';
 import { Prisma, PrismaClient } from '@prisma/client';
 
-import { PRISMA_MODULE_OPTIONS } from '../constants';
 import { MysqlService } from './mysql.service';
 import { PostgresqlService } from './postgresql.service';
+import { PRISMA_MODULE_OPTIONS } from '../constants';
 
 export type PrismaClientOptions = Omit<
   Prisma.PrismaClientOptions,

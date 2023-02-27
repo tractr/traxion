@@ -68,6 +68,8 @@ export type AsyncOptions<
 /**
  * The ModuleOptionsHelper that need to be extends to get access
  * to the register registerAsync forRoot and forRootAsync
+ *
+ * @deprecated Use the ConfigurableModuleBuilder from nestjs instead
  */
 export function ModuleOptionsFactory<
   InternalOptions,

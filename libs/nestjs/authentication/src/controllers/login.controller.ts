@@ -9,34 +9,30 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiBody } from '@nestjs/swagger';
-import { User } from '@prisma/client';
 import { Request, Response } from 'express';
 
 import { AccessTokenDto } from '../dtos';
 import { LoginPostBodyDto } from '../dtos/login-form.dto';
 import { JwtAuthGuard, LocalAuthGuard, PublicGuard } from '../guards';
-import {
-  AuthenticationService,
-  CookieOptionsService,
-  UserAuthenticationService,
-} from '../services';
+import { AuthenticationService, CookieOptionsService } from '../services';
 
 import { CurrentUser } from '@trxn/nestjs-core';
+import { MinimalUser, User, UserService } from '@trxn/nestjs-user';
 
 @Controller()
 export class LoginController {
   constructor(
     private readonly cookieOptionsService: CookieOptionsService,
-    private readonly userAuthenticationService: UserAuthenticationService,
     private readonly authenticationService: AuthenticationService,
+    private readonly userService: UserService,
   ) {}
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
   @ApiBody({ type: LoginPostBodyDto })
   @HttpCode(200)
-  async login(
-    @Req() req: Request & { secret?: string; user: User },
+  async login<U extends User = MinimalUser>(
+    @Req() req: Request & { secret?: string; user: U },
     @Res({ passthrough: true }) res: Response,
   ): Promise<AccessTokenDto> {
     const token = await this.authenticationService.login(req.user);
@@ -62,18 +58,17 @@ export class LoginController {
 
   @Get('me')
   @UseGuards(JwtAuthGuard)
-  async me(
-    @Req() req: Request & { user: User },
-    @CurrentUser() currentUserInfo: User,
-  ): Promise<User> {
-    const user = await this.userAuthenticationService.getUserFromId(
-      currentUserInfo.id,
+  async me<U extends User = MinimalUser>(
+    @CurrentUser() currentUser: U,
+  ): Promise<U> {
+    const user = await this.userService.findUserById<U>(
+      this.userService.getIdFromUser(currentUser),
     );
 
     if (!user) {
       throw new BadRequestException();
     }
 
-    return user as User;
+    return user;
   }
 }

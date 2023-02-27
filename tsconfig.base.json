@@ -88,12 +88,17 @@
       "@trxn/nestjs-file-storage": ["libs/nestjs/file-storage/src/index.ts"],
       "@trxn/nestjs-graphql": ["libs/nestjs/graphql/src/index.ts"],
       "@trxn/nestjs-mailer": ["libs/nestjs/mailer/src/index.ts"],
+      "@trxn/nestjs-mailjet": ["libs/nestjs/mailjet/src/index.ts"],
       "@trxn/nestjs-password": ["libs/nestjs/password/src/index.ts"],
       "@trxn/nestjs-request-timestamp": [
         "libs/nestjs/request-timestamp/src/index.ts"
       ],
+      "@trxn/nestjs-reset-password": [
+        "libs/nestjs/reset-password/src/index.ts"
+      ],
       "@trxn/nestjs-sentry": ["libs/nestjs/sentry/src/index.ts"],
       "@trxn/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
+      "@trxn/nestjs-user": ["libs/nestjs/user/src/index.ts"],
       "@trxn/nestjs-winston": ["libs/nestjs/winston/src/index.ts"],
       "@trxn/prettier-config": ["libs/config/prettier/src/index.ts"],
       "@trxn/schematics": ["libs/schematics/src/index.ts"],

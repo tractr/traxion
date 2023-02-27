@@ -3,6 +3,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { LoggerService } from './logger.service';
 
+const noop = () => {
+  // nothing
+};
+
 describe('loggerService', () => {
   let loggerService: LoggerService;
   let verbose: jest.SpyInstance;
@@ -12,11 +16,11 @@ describe('loggerService', () => {
   let error: jest.SpyInstance;
 
   beforeEach(async () => {
-    verbose = jest.spyOn(Logger.prototype, 'verbose');
-    debug = jest.spyOn(Logger.prototype, 'debug');
-    log = jest.spyOn(Logger.prototype, 'log');
-    warn = jest.spyOn(Logger.prototype, 'warn');
-    error = jest.spyOn(Logger.prototype, 'error');
+    verbose = jest.spyOn(Logger.prototype, 'verbose').mockImplementation(noop);
+    debug = jest.spyOn(Logger.prototype, 'debug').mockImplementation(noop);
+    log = jest.spyOn(Logger.prototype, 'log').mockImplementation(noop);
+    warn = jest.spyOn(Logger.prototype, 'warn').mockImplementation(noop);
+    error = jest.spyOn(Logger.prototype, 'error').mockImplementation(noop);
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [LoggerService],

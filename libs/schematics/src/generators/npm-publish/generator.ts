@@ -7,8 +7,8 @@ import {
   updateProjectConfiguration,
 } from '@nrwl/devkit';
 
-import { addPackageToPackageJson, installPackagesTask } from '../../helpers';
 import { NpmPublishGeneratorSchema } from './schema';
+import { addPackageToPackageJson, installPackagesTask } from '../../helpers';
 
 export const SEMVER_PACKAGE_NAME = 'ngx-deploy-npm';
 export const DEFAULT_REGISTRY_URL = 'https://registry.npmjs.org';

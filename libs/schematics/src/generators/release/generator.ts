@@ -7,8 +7,8 @@ import {
   updateProjectConfiguration,
 } from '@nrwl/devkit';
 
-import { addPackageToPackageJson, installPackagesTask } from '../../helpers';
 import { ReleaseGeneratorSchema } from './schema';
+import { addPackageToPackageJson, installPackagesTask } from '../../helpers';
 
 export const SEMVER_PACKAGE_NAME = '@jscutlery/semver';
 

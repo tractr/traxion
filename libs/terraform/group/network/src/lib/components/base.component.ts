@@ -1,7 +1,7 @@
 import { vpc as awsVpc } from '@cdktf/provider-aws';
 
-import { BaseComponentArtifacts, BaseComponentConfig } from '../interfaces';
 import { InternetRoutesComponent } from './internet-routes.component';
+import { BaseComponentArtifacts, BaseComponentConfig } from '../interfaces';
 
 import { AwsComponent } from '@trxn/terraform-component-aws';
 

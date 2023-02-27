@@ -1,10 +1,10 @@
 import { addDependenciesToPackageJson, Tree, updateJson } from '@nrwl/devkit';
 import { pick } from 'lodash';
 
-import { PACKAGES_VERSIONS } from '../../../packages-versions.constant';
-import { installPackagesTask } from '../../helpers';
 import { addFiles } from './helpers';
 import { InitWorkspaceGeneratorSchema } from './schema';
+import { PACKAGES_VERSIONS } from '../../../packages-versions.constant';
+import { installPackagesTask } from '../../helpers';
 
 export default async function initWorkspaceGenerator(
   tree: Tree,

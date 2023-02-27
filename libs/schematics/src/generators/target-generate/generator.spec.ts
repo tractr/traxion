@@ -7,12 +7,12 @@ import {
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { readJSON } from 'fs-extra';
 
-import { PackageDefinition } from '../../helpers';
 import generator, {
   SCHEMATICS_PACKAGE_JSON_PATH,
   SCHEMATICS_TRAXION_PACKAGE_NAME,
 } from './generator';
 import { TargetGenerateGeneratorSchema } from './schema';
+import { PackageDefinition } from '../../helpers';
 
 describe('target-generate generator', () => {
   let appTree: Tree;

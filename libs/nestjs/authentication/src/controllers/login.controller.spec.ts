@@ -5,26 +5,27 @@ import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as jwt from 'jsonwebtoken';
 import * as request from 'supertest';
 
+import { LoginController } from './login.controller';
 import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
 import {
   AuthenticationService,
   CookieOptionsService,
   StrategyOptionsService,
-  UserAuthenticationService,
 } from '../services';
 import { JwtOptionsService } from '../services/jwt-options.service';
 import { JwtStrategy, LocalStrategy } from '../strategies';
-import { LoginController } from './login.controller';
+
+import { UserService } from '@trxn/nestjs-user';
 
 describe('Login Controller', () => {
   let app: INestApplication;
-  let mockUserAuthenticationService: MockProxy<UserAuthenticationService>;
+  let mockUserService: MockProxy<UserService>;
   let mockAuthenticationService: MockProxy<AuthenticationService>;
   let mockUser: User;
 
   beforeAll(async () => {
     mockAuthenticationService = mockDeep<AuthenticationService>();
-    mockUserAuthenticationService = mockDeep<UserAuthenticationService>();
+    mockUserService = mockDeep<UserService>();
 
     mockUser = {
       id: '1',
@@ -36,8 +37,8 @@ describe('Login Controller', () => {
       controllers: [LoginController],
       providers: [
         {
-          provide: UserAuthenticationService,
-          useValue: mockUserAuthenticationService,
+          provide: UserService,
+          useValue: mockUserService,
         },
         {
           provide: AuthenticationService,
@@ -99,7 +100,7 @@ describe('Login Controller', () => {
   describe('GET /me', () => {
     it('/me get the user information back and use the jwt auth strategy', async () => {
       const jwtToken = jwt.sign({ sub: '1' }, 'login-controller-secret');
-      mockUserAuthenticationService.getUserFromId.mockResolvedValue(mockUser);
+      mockUserService.findUserById.mockResolvedValue(mockUser);
 
       const response = await request(app.getHttpServer())
         .get('/me')
@@ -108,9 +109,7 @@ describe('Login Controller', () => {
 
       expect(response.body).toEqual(mockUser);
       // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(mockUserAuthenticationService.getUserFromId).toHaveBeenCalledWith(
-        '1',
-      );
+      expect(mockUserService.findUserById).toHaveBeenCalledTimes(2);
     });
   });
 

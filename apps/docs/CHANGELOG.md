@@ -2,6 +2,45 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.1.0-next.1](https://github.com/tractr/traxion/compare/v2.1.0-next.0...v2.1.0-next.1) (2023-02-27)
+
+
+
+# [2.1.0-next.0](https://github.com/tractr/traxion/compare/v2.0.13...v2.1.0-next.0) (2023-02-27)
+
+
+
+## [2.0.11-next.3](https://github.com/tractr/traxion/compare/v2.0.11-next.2...v2.0.11-next.3) (2023-02-22)
+
+
+
+## [2.0.11-next.2](https://github.com/tractr/traxion/compare/v2.0.11-next.1...v2.0.11-next.2) (2023-02-22)
+
+
+### Bug Fixes
+
+* add casl public permissions and MAILER_CLIENT token ([46f4b06](https://github.com/tractr/traxion/commit/46f4b06da9d46a79c36bde365cd817b46031e24f))
+
+
+
+## [2.0.11-next.1](https://github.com/tractr/traxion/compare/v2.0.11-next.0...v2.0.11-next.1) (2023-02-22)
+
+
+### Bug Fixes
+
+* remove [@tractr](https://github.com/tractr) and replace it by [@trxn](https://github.com/trxn) ([129058f](https://github.com/tractr/traxion/commit/129058fee9f88c34ac4f124f9d1d54470939a0e7))
+
+
+
+## [2.0.11-next.0](https://github.com/tractr/traxion/compare/v2.0.10...v2.0.11-next.0) (2023-02-22)
+
+
+### Features
+
+* clean authentication modules ([99b7db6](https://github.com/tractr/traxion/commit/99b7db69cc4f885ac885d147043003448895d66d))
+
+
+
 ## [2.0.13](https://github.com/tractr/traxion/compare/v2.0.12...v2.0.13) (2023-02-24)
 
 
