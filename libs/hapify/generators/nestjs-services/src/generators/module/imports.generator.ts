@@ -15,7 +15,7 @@ export function generateImports(): ImportDeclarationStructure[] {
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `./models-services.providers`,
-      namedImports: [{ name:  `MODELS_SERVICES_PROVIDERS`}],
+      namedImports: [{ name: `MODELS_SERVICES_PROVIDERS` }],
     },
   ];
 }
