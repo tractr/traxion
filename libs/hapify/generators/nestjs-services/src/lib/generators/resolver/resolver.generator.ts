@@ -1,3 +1,4 @@
+import { pascal, snake } from 'case';
 import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
 
 import { generateAggregateMethod } from './aggregate-method.generator';
@@ -16,7 +17,7 @@ import { generateUpdateManyMethod } from './update-many-method.generator';
 import { generateUpdateMethod } from './update-method.generator';
 import { generateUpsertMethod } from './upsert-method.generator';
 
-import { Model, pascal, snake } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateResolverClass(model: Model): ClassDeclarationStructure {
   const className = `${pascal(model.name)}Service`;

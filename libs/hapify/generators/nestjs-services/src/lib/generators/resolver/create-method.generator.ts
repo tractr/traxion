@@ -1,3 +1,4 @@
+import { camel, pascal } from 'case';
 import {
   JSDocStructure,
   MethodDeclarationStructure,
@@ -7,16 +8,16 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { camel, Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
-export const generateCreateMethod = (model: Model,): MethodDeclarationStructure => {
-
+export const generateCreateMethod = (
+  model: Model,
+): MethodDeclarationStructure => {
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
       type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}CreateArgs>`,
-
     },
     {
       kind: StructureKind.Parameter,
@@ -31,7 +32,7 @@ export const generateCreateMethod = (model: Model,): MethodDeclarationStructure 
       name: 'T',
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${pascal(model.name)}CreateArgs`,
-    }
+    },
   ];
 
   const docs: JSDocStructure[] = [
@@ -39,10 +40,14 @@ export const generateCreateMethod = (model: Model,): MethodDeclarationStructure 
       kind: StructureKind.JSDoc,
       description: `
       Create a ${pascal(model.name)}.
-      @param {${pascal(model.name)}CreateArgs} args - Arguments to create a ${pascal(model.name)}.
+      @param {${pascal(
+        model.name,
+      )}CreateArgs} args - Arguments to create a ${pascal(model.name)}.
       @example
       // Create one ${pascal(model.name)}
-      const ${pascal(model.name)} = await this.${camel(model.name)}Service.create({
+      const ${pascal(model.name)} = await this.${camel(
+        model.name,
+      )}Service.create({
         data: {
           // ... data to create a ${pascal(model.name)}
         }
@@ -52,13 +57,12 @@ export const generateCreateMethod = (model: Model,): MethodDeclarationStructure 
     },
   ];
 
-
   return {
     kind: StructureKind.Method,
     name: 'create',
     typeParameters,
     parameters,
     statements: `return prisma.create<T>(args);`,
-    docs
+    docs,
   };
 };

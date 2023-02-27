@@ -1,3 +1,4 @@
+import { camel, pascal } from 'case';
 import {
   JSDocStructure,
   MethodDeclarationStructure,
@@ -7,16 +8,16 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { camel, Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
-export const generateDeleteMethod = (model: Model,): MethodDeclarationStructure => {
-
+export const generateDeleteMethod = (
+  model: Model,
+): MethodDeclarationStructure => {
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
       type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}DeleteArgs>`,
-
     },
     {
       kind: StructureKind.Parameter,
@@ -31,7 +32,7 @@ export const generateDeleteMethod = (model: Model,): MethodDeclarationStructure 
       name: 'T',
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${pascal(model.name)}DeleteArgs`,
-    }
+    },
   ];
 
   const docs: JSDocStructure[] = [
@@ -39,7 +40,9 @@ export const generateDeleteMethod = (model: Model,): MethodDeclarationStructure 
       kind: StructureKind.JSDoc,
       description: `
     Delete a ${pascal(model.name)}.
-    @param {${pascal(model.name)}DeleteArgs} args - Arguments to delete a ${pascal(model.name)}
+    @param {${pascal(
+      model.name,
+    )}DeleteArgs} args - Arguments to delete a ${pascal(model.name)}
     @example
     // Delete one ${pascal(model.name)}
     const ${camel(model.name)} = await this.${camel(model.name)}Service.delete({
@@ -51,13 +54,12 @@ export const generateDeleteMethod = (model: Model,): MethodDeclarationStructure 
     },
   ];
 
-
   return {
     kind: StructureKind.Method,
     name: 'delete',
     typeParameters,
     parameters,
     statements: `return prisma.delete<T>(args);`,
-    docs
+    docs,
   };
 };

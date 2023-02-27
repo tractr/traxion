@@ -1,3 +1,4 @@
+import { camel, pascal } from 'case';
 import {
   JSDocStructure,
   MethodDeclarationStructure,
@@ -7,16 +8,16 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { camel, Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
-export const generateUpsertMethod = (model: Model,): MethodDeclarationStructure => {
-
+export const generateUpsertMethod = (
+  model: Model,
+): MethodDeclarationStructure => {
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
       type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}UpsertArgs>`,
-
     },
     {
       kind: StructureKind.Parameter,
@@ -31,7 +32,7 @@ export const generateUpsertMethod = (model: Model,): MethodDeclarationStructure 
       name: 'T',
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${pascal(model.name)}UpsertArgs`,
-    }
+    },
   ];
 
   const docs: JSDocStructure[] = [
@@ -39,10 +40,16 @@ export const generateUpsertMethod = (model: Model,): MethodDeclarationStructure 
       kind: StructureKind.JSDoc,
       description: `
       Create or update one ${pascal(model.name)}.
-       @param {${pascal(model.name)}UpsertArgs} args - Arguments to update or create a ${pascal(model.name)}.
+       @param {${pascal(
+         model.name,
+       )}UpsertArgs} args - Arguments to update or create a ${pascal(
+        model.name,
+      )}.
        @example
        // Upsert one ${pascal(model.name)}
-       const ${camel(model.name)} = await this.${camel(model.name)}Service.upsert({
+       const ${camel(model.name)} = await this.${camel(
+        model.name,
+      )}Service.upsert({
          create: {
            // ... data to create a ${pascal(model.name)}
          },
@@ -57,13 +64,12 @@ export const generateUpsertMethod = (model: Model,): MethodDeclarationStructure 
     },
   ];
 
-
   return {
     kind: StructureKind.Method,
     name: 'upsert',
     typeParameters,
     parameters,
     statements: `return prisma.upsert<T>(args);`,
-    docs
+    docs,
   };
 };

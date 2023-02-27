@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { enumField, numberField, primaryField, stringField } from './fields';
-import { createOneManyRelation } from './models';
+import { createOneManyRelation, Model } from './models';
 
 const enum MonEnum {
   A = 'A',
@@ -10,13 +10,13 @@ const enum MonEnum {
 
 // User model
 const userId = primaryField('id');
-const UserModel = {
+const UserModel: Model = {
   name: 'User',
   fields: [
     userId,
     stringField('password', { isPassword: true }),
     stringField('email'),
-    enumField('test', { enum: MonEnum }),
+    // enumField('test', { enum: MonEnum }),
   ],
 };
 
@@ -31,7 +31,7 @@ const ProfileModel = {
     numberField('age', {
       isInteger: true,
     }),
-    enumField('test', { enum: MonEnum }),
+    // enumField('test', { enum: MonEnum }),
   ],
 };
 

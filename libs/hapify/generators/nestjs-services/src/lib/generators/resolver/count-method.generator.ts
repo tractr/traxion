@@ -1,3 +1,4 @@
+import { camel, pascal } from 'case';
 import {
   JSDocStructure,
   MethodDeclarationStructure,
@@ -7,16 +8,16 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { camel, Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
-export const generateCountMethod = (model: Model,): MethodDeclarationStructure => {
-
+export const generateCountMethod = (
+  model: Model,
+): MethodDeclarationStructure => {
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
       type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}CountArgs>`,
-
     },
     {
       kind: StructureKind.Parameter,
@@ -31,7 +32,7 @@ export const generateCountMethod = (model: Model,): MethodDeclarationStructure =
       name: 'T',
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${pascal(model.name)}CountArgs`,
-    }
+    },
   ];
 
   const docs: JSDocStructure[] = [
@@ -41,10 +42,14 @@ export const generateCountMethod = (model: Model,): MethodDeclarationStructure =
       Count the number of ${pascal(model.name)}.
       Note, that providing 'undefined' is treated as the value not being there.
       Read more here: https://pris.ly/d/null-undefined
-      @param {${pascal(model.name)}CountArgs} args - Arguments to filter ${pascal(model.name)}s to count.
+      @param {${pascal(
+        model.name,
+      )}CountArgs} args - Arguments to filter ${pascal(model.name)}s to count.
       @example
       // Count one ${pascal(model.name)}
-      const ${pascal(model.name)} = await this.${camel(model.name)}Service.count({
+      const ${pascal(model.name)} = await this.${camel(
+        model.name,
+      )}Service.count({
         data: {
           // ... data to count a ${pascal(model.name)}
         }
@@ -54,13 +59,12 @@ export const generateCountMethod = (model: Model,): MethodDeclarationStructure =
     },
   ];
 
-
   return {
     kind: StructureKind.Method,
     name: 'count',
     typeParameters,
     parameters,
     statements: `return prisma.count<T>(args);`,
-    docs
+    docs,
   };
 };

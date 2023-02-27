@@ -5,7 +5,7 @@ import { Project } from 'ts-morph';
 
 import { generateResolverSourceFile } from './generators/resolver/resolver.generator';
 
-import { Project as Models } from '@trxn/hapify-core';
+import { Schema } from '@trxn/hapify-core';
 
 export type GraphqlResolverGeneratorConfig = {
   outputDirectory: string;
@@ -14,7 +14,7 @@ export type GraphqlResolverGeneratorConfig = {
 };
 
 export function generate(
-  dataModel: Models,
+  dataModel: Schema,
   config: GraphqlResolverGeneratorConfig,
 ) {
   const { generatedDirectory, tsConfigFilePath, outputDirectory } = config;
@@ -41,10 +41,6 @@ export function generate(
     generateResolverSourceFile(project, model, entityPath);
   });
 
-  
-
   // Save project to file system
   project.saveSync();
 }
-
-
