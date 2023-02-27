@@ -1,3 +1,4 @@
+import { camel, snake } from 'case';
 import {
   ImportDeclarationStructure,
   Project,
@@ -5,7 +6,7 @@ import {
   VariableDeclarationKind,
 } from 'ts-morph';
 
-import { camel, Model, snake } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateDatabaseServiceSourceFile(
   project: Project,

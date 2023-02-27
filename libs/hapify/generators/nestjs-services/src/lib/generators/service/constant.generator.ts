@@ -1,6 +1,7 @@
+import { constant, snake } from 'case';
 import { Project, VariableDeclarationKind } from 'ts-morph';
 
-import { constant, Model, snake } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateConstantSourceFile(
   project: Project,

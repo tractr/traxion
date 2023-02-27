@@ -1,3 +1,4 @@
+import { constant, pascal, snake } from 'case';
 import {
   ArrayLiteralExpression,
   ImportDeclarationStructure,
@@ -9,7 +10,7 @@ import {
 
 import { generateImports } from './imports.generator';
 
-import { constant, Model, pascal, snake } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateProviderSourceFile(
   project: Project,
