@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "hapify-hapify-devkit",
+  "projectType": "library",
+  "sourceRoot": "libs/hapify/hapify-devkit/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "assets": ["libs/hapify/hapify-devkit/*.md"],
+        "main": "libs/hapify/hapify-devkit/src/index.ts",
+        "outputPath": "dist/libs/hapify/hapify-devkit",
+        "packageJson": "libs/hapify/hapify-devkit/package.json",
+        "tsConfig": "libs/hapify/hapify-devkit/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/hapify/hapify-devkit/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/hapify/hapify-devkit/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    }
+  }
+}

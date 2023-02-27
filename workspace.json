@@ -32,6 +32,7 @@
     "hapify-core": "libs/hapify/core",
     "hapify-generate-config": "libs/hapify/generate-config",
     "hapify-generators-nestjs-services": "libs/hapify/generators/nestjs-services",
+    "hapify-hapify-devkit": "libs/hapify/hapify-devkit",
     "hapify-templates-angular-rext-client": "libs/hapify/templates/angular-rext-client",
     "hapify-templates-casl": "libs/hapify/templates/casl",
     "hapify-templates-dbml": "libs/hapify/templates/dbml",
