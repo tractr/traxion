@@ -4,9 +4,9 @@ import { isFieldFactory } from './is-field-factory';
 describe('isFieldFactory()', () => {
   // define fields
   const fields = [
-    { type: 'string', name: 'a' },
-    { type: 'number', name: 'b' },
-    { type: 'boolean', name: 'c' },
+    { type: 'string', name: 'a', pluralName: 'as' },
+    { type: 'number', name: 'b', pluralName: 'bs' },
+    { type: 'boolean', name: 'c', pluralName: 'cs' },
   ];
 
   it('should return true if a field is of specified type', () => {

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+// ignore-istanbul
 
 import { enumField, numberField, primaryField, stringField } from './fields';
 import { createOneManyRelation } from './models';
