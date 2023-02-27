@@ -2,6 +2,31 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.1.0-next.0](https://github.com/tractr/traxion/compare/v2.0.13...v2.1.0-next.0) (2023-02-27)
+
+
+
+## [2.0.11-next.3](https://github.com/tractr/traxion/compare/v2.0.11-next.2...v2.0.11-next.3) (2023-02-22)
+
+
+
+## [2.0.11-next.2](https://github.com/tractr/traxion/compare/v2.0.11-next.1...v2.0.11-next.2) (2023-02-22)
+
+
+
+## [2.0.11-next.1](https://github.com/tractr/traxion/compare/v2.0.11-next.0...v2.0.11-next.1) (2023-02-22)
+
+
+
+## [2.0.11-next.0](https://github.com/tractr/traxion/compare/v2.0.10...v2.0.11-next.0) (2023-02-22)
+
+
+### Bug Fixes
+
+* update mailer to use mailjet v6 ([7db4aaf](https://github.com/tractr/traxion/commit/7db4aaf835f96c33f9d0be4e2bff503c925fc138))
+
+
+
 ## [2.0.13](https://github.com/tractr/traxion/compare/v2.0.12...v2.0.13) (2023-02-24)
 
 
