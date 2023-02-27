@@ -1,6 +1,7 @@
+import { constant, pascal } from 'case';
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
-import { constant, Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateImports(model: Model): ImportDeclarationStructure[] {
   return [

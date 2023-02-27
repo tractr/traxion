@@ -1,3 +1,4 @@
+import { camel, pascal } from 'case';
 import {
   JSDocStructure,
   MethodDeclarationStructure,
@@ -7,7 +8,7 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { camel, Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export const generateDeleteMethod = (
   model: Model,

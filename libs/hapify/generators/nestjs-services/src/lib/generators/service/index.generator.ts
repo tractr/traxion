@@ -1,6 +1,7 @@
+import { pascal } from 'case';
 import { Project, VariableDeclarationKind } from 'ts-morph';
 
-import { Model, pascal } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateServiceIndexFile(
   project: Project,

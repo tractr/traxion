@@ -18,7 +18,7 @@ import {
   generateFileIndexExporter,
 } from './utils/index.generator';
 
-import { Project as Models } from '@trxn/hapify-core';
+import { Schema } from '@trxn/hapify-core';
 
 export type NestjsServiceGeneratorConfig = {
   outputDirectory: string;
@@ -28,7 +28,7 @@ export type NestjsServiceGeneratorConfig = {
 
 export function generate(
   project: Project,
-  dataModel: Models,
+  dataModel: Schema,
   config: NestjsServiceGeneratorConfig,
 ) {
   const { generatedDirectory, tsConfigFilePath, outputDirectory } = config;
