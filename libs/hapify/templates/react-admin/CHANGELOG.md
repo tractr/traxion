@@ -2,19 +2,30 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
-## [2.0.11-next.3](https://github.com/tractr/traxion/compare/v2.0.11-next.2...v2.0.11-next.3) (2023-02-22)
+## [2.0.13](https://github.com/tractr/traxion/compare/v2.0.12...v2.0.13) (2023-02-24)
+
+
+### Bug Fixes
+
+* **template-react-admin:** missing delete internal field relation id ([#581](https://github.com/tractr/traxion/issues/581)) ([3e14eb8](https://github.com/tractr/traxion/commit/3e14eb81304c6791a029c5dc3cfd7ddbae684e4f))
 
 
 
-## [2.0.11-next.2](https://github.com/tractr/traxion/compare/v2.0.11-next.1...v2.0.11-next.2) (2023-02-22)
+## [2.0.12](https://github.com/tractr/traxion/compare/v2.0.11...v2.0.12) (2023-02-23)
+
+
+### Bug Fixes
+
+* **react-admin:** mutiple field doesn't need to be required in admin ([#580](https://github.com/tractr/traxion/issues/580)) ([cc82c29](https://github.com/tractr/traxion/commit/cc82c2965ca59ff36265e483bdbe82063b87147f))
 
 
 
-## [2.0.11-next.1](https://github.com/tractr/traxion/compare/v2.0.11-next.0...v2.0.11-next.1) (2023-02-22)
+## [2.0.11](https://github.com/tractr/traxion/compare/v2.0.10...v2.0.11) (2023-02-23)
 
 
+### Bug Fixes
 
-## [2.0.11-next.0](https://github.com/tractr/traxion/compare/v2.0.10...v2.0.11-next.0) (2023-02-22)
+* **react-admin:** fix react admin update payload with internal field ([#579](https://github.com/tractr/traxion/issues/579)) ([d0dee64](https://github.com/tractr/traxion/commit/d0dee64f856ef7791c4039133006daa9f0976e7a))
 
 
 
