@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.1.0](https://github.com/tractr/traxion/compare/v2.0.13...v2.1.0) (2023-02-28)
+
+
+### Bug Fixes
+
+* clean the interfaces of the node js packages to be able to use injection dependences directly in the modules ([#573](https://github.com/tractr/traxion/issues/573)) ([a44391c](https://github.com/tractr/traxion/commit/a44391c714c9f8de2b57c495bc1f315a156f81c0))
+
+
+
 # [2.1.0-next.1](https://github.com/tractr/traxion/compare/v2.1.0-next.0...v2.1.0-next.1) (2023-02-27)
 
 
