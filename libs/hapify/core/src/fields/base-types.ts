@@ -108,7 +108,7 @@ export type IsField<F> = Extract<
  * type F = GetType<C>; // F = 'boolean'
  * type G = GetType<A | B | C>; // G = 'string' | 'number' | 'boolean'
  */
-export type GetType<F extends BaseField<string, any>> = F extends {
+export type GetFieldType<F extends BaseField<string, any>> = F extends {
   type: infer N;
 }
   ? N
@@ -149,7 +149,7 @@ export type ExtractField<
  */
 export type GetField<
   F extends BaseField<string, Constraints<KeyType, any>>,
-  T extends GetType<F> = GetType<F>,
+  T extends GetFieldType<F> = GetFieldType<F>,
   AF extends BaseField<string, Constraints<KeyType, any>> = Field,
 > = ExtractField<AF, T>;
 

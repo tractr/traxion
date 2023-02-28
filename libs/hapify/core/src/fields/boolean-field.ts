@@ -22,4 +22,4 @@ export type BooleanConstraints = BaseConstraints & DefaultConstraint<number>;
 export const createBooleanField = createFieldFactory('boolean');
 export const booleanField = createBooleanField;
 
-export const isBoolean = isFieldFactory('boolean');
+export const isBooleanField = isFieldFactory('boolean');
