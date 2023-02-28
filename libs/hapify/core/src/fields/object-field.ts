@@ -2,7 +2,6 @@
  *             ObjectField
  * ------------------------------------- */
 
-import { and, not } from '../operators';
 import type { BaseField } from './base-types';
 import {
   createFieldFactory,
@@ -12,9 +11,10 @@ import {
 import {
   BaseConstraints,
   DefaultConstraint,
-  isMultiple,
-  isNull,
+  isMultipleField,
+  isNullField,
 } from './field';
+import { and, not } from '../operators';
 
 export type ObjectField = BaseField<'object', ObjectConstraints>;
 
@@ -45,4 +45,4 @@ export const createArrayField = createFieldFactory('object', {
 });
 export const arrayField = createArrayField;
 
-export const isArray = and(isObject, isMultiple, not(isNull));
+export const isArray = and(isObject, isMultipleField, not(isNullField));

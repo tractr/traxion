@@ -2,8 +2,8 @@
 import type {
   BaseField,
   Constraints,
+  GetFieldType,
   GetFieldWithConstraints,
-  GetType,
   OptionalConstraint,
   PermissionType,
 } from './base-types';
@@ -131,24 +131,24 @@ export type Field =
   | StringField
   | VirtualField;
 
-export type FieldType = GetType<Field>;
+export type FieldType = GetFieldType<Field>;
 
 /**
  * Predicates and helpers
  */
 
-export const isUnique = isConstraintFactory('isUnique');
-export const isNull = isConstraintFactory('isNull');
-export const isSearchable = isConstraintFactory('isSearchable');
-export const isMultiple = isConstraintFactory('isMultiple');
-export const isSortable = isConstraintFactory('isSortable');
+export const isUniqueField = isConstraintFactory('isUnique');
+export const isNullField = isConstraintFactory('isNull');
+export const isSearchableField = isConstraintFactory('isSearchable');
+export const isMultipleField = isConstraintFactory('isMultiple');
+export const isSortableField = isConstraintFactory('isSortable');
 
-export const hasLabel = hasConstraintFactory('label');
-export const hasUnique = hasConstraintFactory('isUnique');
-export const hasNull = hasConstraintFactory('isNull');
-export const hasDefault = hasConstraintFactory('defaultValue');
-export const hasSearchable = hasConstraintFactory('isSearchable');
-export const hasMultiple = hasConstraintFactory('isMultiple');
-export const hasSortable = hasConstraintFactory('isSortable');
+export const hasLabelConstraint = hasConstraintFactory('label');
+export const hasUniqueConstraint = hasConstraintFactory('isUnique');
+export const hasNullConstraint = hasConstraintFactory('isNull');
+export const hasDefaultConstraint = hasConstraintFactory('defaultValue');
+export const hasSearchableConstraint = hasConstraintFactory('isSearchable');
+export const hasMultipleConstraint = hasConstraintFactory('isMultiple');
+export const hasSortableConstraint = hasConstraintFactory('isSortable');
 
-export const hasFormat = hasConstraintFactory('format');
+export const hasFormatConstraint = hasConstraintFactory('format');

@@ -32,7 +32,7 @@ export type EnumConstraint = RequiredConstraint<'enum', EnumType>;
 export const createEnumField = createFieldFactory('enum');
 export const enumField = createEnumField;
 
-export const isEnum = isFieldFactory('enum');
+export const isEnumField = isFieldFactory('enum');
 
 export const hasEnumConstraint = hasConstraintFactory('enum');
 
