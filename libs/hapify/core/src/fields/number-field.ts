@@ -41,10 +41,10 @@ export type NumberFormatConstraint = FormatConstraint<'integer' | 'float'>;
 export const createNumberField = createFieldFactory('number');
 export const numberField = createNumberField;
 
-export const isNumber = isFieldFactory('number');
+export const isNumberField = isFieldFactory('number');
 
-export const hasMin = hasConstraintFactory('min');
-export const hasMax = hasConstraintFactory('max');
+export const hasMinConstraint = hasConstraintFactory('min');
+export const hasMaxConstraint = hasConstraintFactory('max');
 
 /**
  * Type helpers

@@ -19,7 +19,7 @@ export type VirtualConstraints = BaseConstraints & RelationConstraint;
 export const createVirtualField = createFieldFactory('virtual');
 export const virtualField = createVirtualField;
 
-export const isVirtual = isFieldFactory('virtual');
+export const isVirtualField = isFieldFactory('virtual');
 
 /**
  * Type helpers

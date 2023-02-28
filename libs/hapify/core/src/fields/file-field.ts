@@ -19,7 +19,7 @@ export type FileConstraints = BaseConstraints;
 export const createFileField = createFieldFactory('file');
 export const fileField = createFileField;
 
-export const isFile = isFieldFactory('file');
+export const isFileField = isFieldFactory('file');
 
 /**
  * Type helpers

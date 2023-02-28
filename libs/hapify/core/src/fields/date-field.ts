@@ -20,7 +20,7 @@ export type DateConstraints = BaseConstraints &
 export const createDateField = createFieldFactory('date');
 export const dateField = createDateField;
 
-export const isDate = isFieldFactory('date');
+export const isDateField = isFieldFactory('date');
 
 /**
  * Type helpers
