@@ -1,12 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+// ignore-istanbul
 
 import { enumField, numberField, primaryField, stringField } from './fields';
 import { createOneManyRelation } from './models';
+import { Schema } from './schema';
 
-const enum MonEnum {
-  A = 'A',
-  B = 'B',
-}
+const TestEnum = {
+  name: 'TestEnum',
+  values: {
+    A: 'A',
+    B: 'B',
+  },
+};
 
 // User model
 const userId = primaryField('id');
@@ -14,9 +19,9 @@ const UserModel = {
   name: 'User',
   fields: [
     userId,
-    stringField('password', { isPassword: true }),
+    stringField('password', { isEncrypted: true }),
     stringField('email'),
-    enumField('test', { enum: MonEnum }),
+    enumField('test', { enum: TestEnum }),
   ],
 };
 
@@ -29,24 +34,21 @@ const ProfileModel = {
     stringField('firstname'),
     stringField('lastname'),
     numberField('age', {
-      isInteger: true,
+      format: 'integer',
     }),
-    enumField('test', { enum: MonEnum }),
+    enumField('test', { enum: TestEnum }),
   ],
 };
 
-const relations = [
-  createOneManyRelation(
-    'userProfile',
-    {
-      model: UserModel,
-      virtual: 'profile',
-    },
-    { model: ProfileModel, foreign: 'userId', virtual: 'user' },
-  ),
-];
+createOneManyRelation(
+  'userProfile',
+  {
+    model: UserModel,
+    virtual: 'profile',
+  },
+  { model: ProfileModel, foreign: 'userId', virtual: 'user' },
+);
 
-const schema = {
+const schema: Schema = {
   models: [UserModel, ProfileModel],
-  relations,
 };

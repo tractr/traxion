@@ -38,7 +38,7 @@ import { isConstraint } from '../predicates/is-constraint';
 export function isConstraintFactory<
   N extends GetConstraintsNames<BaseField> = GetConstraintsNames<Field>,
 >(constraintName: N) {
-  return <F>(
+  return <F extends BaseField>(
     field: F,
   ): field is F extends BaseField
     ? N extends GetConstraintsNames<F>
