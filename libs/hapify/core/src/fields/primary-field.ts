@@ -7,13 +7,11 @@ import type {
   BaseField,
   ConditionalConstraint,
   Constraints,
-  ExtractField,
-  GetConstraints,
   KeyType,
   RequiredConstraint,
 } from './base-types';
 import { createFieldFactory, isFieldFactory } from './factories';
-import type { BaseConstraints, Field, RelationsConstraint } from './field';
+import type { BaseConstraints, RelationsConstraint } from './field';
 
 export type PrimaryField = BaseField<
   'primary',
@@ -43,7 +41,7 @@ export type PrimaryMode<C extends Constraints<KeyType, any>> =
 export const createPrimaryField = createFieldFactory('primary');
 export const primaryField = createPrimaryField;
 
-export const isPrimary = isFieldFactory('primary');
+export const isPrimaryField = isFieldFactory('primary');
 
 /**
  * Type helpers

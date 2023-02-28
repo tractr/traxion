@@ -46,13 +46,13 @@ export type StringFormatConstraint = FormatConstraint<
 export const createStringField = createFieldFactory('string');
 export const stringField = createStringField;
 
-export const isString = isFieldFactory('string');
+export const isStringField = isFieldFactory('string');
 
-export const hasMinLength = hasConstraintFactory('minLength');
-export const hasMaxLength = hasConstraintFactory('maxLength');
+export const hasMinLengthConstraint = hasConstraintFactory('minLength');
+export const hasMaxLengthConstraint = hasConstraintFactory('maxLength');
 export const hasEncryptionConstraint = hasConstraintFactory('isEncrypted');
 
-export const isEncrypted = isConstraintFactory('isEncrypted');
+export const isEncryptedField = isConstraintFactory('isEncrypted');
 
 /**
  * Type helpers

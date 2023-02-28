@@ -19,7 +19,7 @@ export type ForeignConstraints = BaseConstraints & RelationConstraint;
 export const createForeignField = createFieldFactory('foreign');
 export const foreignField = createForeignField;
 
-export const isForeign = isFieldFactory('foreign');
+export const isForeignField = isFieldFactory('foreign');
 
 /**
  * Type helpers
