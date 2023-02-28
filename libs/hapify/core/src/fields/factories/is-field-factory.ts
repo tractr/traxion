@@ -22,7 +22,7 @@ import { isField } from '../predicates/is-field';
 export function isFieldFactory<FT extends BaseField = Field>(
   type: GetType<FT>,
 ) {
-  return <F>(
+  return <F extends BaseField>(
     field: F,
   ): field is IsField<F> & GetField<IsField<F>, GetType<F>, FT> =>
     isField(field) && field.type === type;

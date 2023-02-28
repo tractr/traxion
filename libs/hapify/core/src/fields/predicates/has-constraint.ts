@@ -1,12 +1,10 @@
-import { HasConstraints, IsField, KeyType } from '../base-types';
-import { hasConstraintFactory } from '../factories';
-import { isField } from './is-field';
+import { BaseField, HasConstraints, KeyType } from '../base-types';
 
 /**
  * Assert if field has a constraint by name
- * @param field
- * @param constraintName
- * @returns
+ * @param field The field to test for the constraint
+ * @param constraintName The name of the constraint to check for
+ * @returns boolean indicating whether the field contains the constraint
  *
  * @example
  *
@@ -32,9 +30,9 @@ import { isField } from './is-field';
  * hasConstraint(a, 'c'); // true
  * hasConstraint(a, 'd'); // false
  */
-export function hasConstraint<F, N extends KeyType>(
+export function hasConstraint<F extends BaseField, N extends KeyType>(
   field: F,
   constraintName: N,
-): field is HasConstraints<IsField<F>, N> {
-  return isField(field) && constraintName in field;
+): field is HasConstraints<F, N> {
+  return constraintName in field;
 }
