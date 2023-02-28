@@ -1,1 +1,1 @@
-export * from './lib/hapify-hapify-devkit';
+export * from './hapify-hapify-devkit';

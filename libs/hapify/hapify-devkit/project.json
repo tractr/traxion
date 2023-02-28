@@ -16,6 +16,19 @@
       },
       "outputs": ["{options.outputPath}"]
     },
+    "hapify-model-generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx ts-node -r tsconfig-paths/register --project ./tsconfig.lib.json ./src/start.ts",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": "libs/hapify/hapify-devkit",
+        "parallel": false
+      }
+    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
