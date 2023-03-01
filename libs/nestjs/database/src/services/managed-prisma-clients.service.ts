@@ -15,7 +15,7 @@ import { DatabaseModuleOptions, PrismaClients } from '../interfaces';
 export type Provider = 'mysql' | 'postgresql';
 
 @Injectable()
-export class ManagePrismaClientsService
+export class ManagedPrismaClientsService
   implements OnModuleInit, OnModuleDestroy
 {
   protected LOG_CONTEXT = 'DatabaseService';
