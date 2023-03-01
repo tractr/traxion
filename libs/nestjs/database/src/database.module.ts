@@ -3,7 +3,7 @@ import { Logger, LoggerService, Module } from '@nestjs/common';
 import { ConfigurableModuleClass } from './database.module-definition';
 import { getDefaultPrismaClient } from './factories';
 import {
-  ManagePrismaClientService,
+  ManagePrismaClientsService,
   MysqlService,
   PostgresqlService,
   PrismaService,
@@ -17,17 +17,17 @@ import { LoggerModule } from '@trxn/nestjs-core';
   providers: [
     MysqlService,
     PostgresqlService,
-    ManagePrismaClientService,
+    ManagePrismaClientsService,
     {
       provide: PrismaService,
       useFactory: getDefaultPrismaClient,
-      inject: [ManagePrismaClientService],
+      inject: [ManagePrismaClientsService],
     },
 
     {
       provide: DatabaseService,
       useFactory: (
-        managePrismaClientService: ManagePrismaClientService,
+        managePrismaClientService: ManagePrismaClientsService,
         logger: LoggerService,
       ) => {
         logger.warn(
@@ -35,7 +35,7 @@ import { LoggerModule } from '@trxn/nestjs-core';
         );
         return getDefaultPrismaClient(managePrismaClientService);
       },
-      inject: [ManagePrismaClientService, Logger],
+      inject: [ManagePrismaClientsService, Logger],
     },
   ],
   exports: [PrismaService, DatabaseService, MysqlService, PostgresqlService],

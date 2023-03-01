@@ -4,6 +4,8 @@ export type PrismaClients = Record<string, PrismaClient> & {
   default: PrismaClient;
 };
 
+export type PrismaClientDefinition = PrismaClient | PrismaClients;
+
 /**
  * The public interface of the DatabaseModule.
  */
@@ -13,7 +15,7 @@ export type DatabaseModuleOptions = {
    * If this is provided, prismaOptions is ignored.
    * @default new PrismaClient()
    */
-  prismaClient?: PrismaClients;
+  prismaClient?: PrismaClientDefinition;
 
   /*
    * The prisma options to use when creating a new prisma client.

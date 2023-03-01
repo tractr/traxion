@@ -1,9 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 
-import { ManagePrismaClientService } from '../services';
+import { ManagePrismaClientsService } from '../services';
 
 export function getDefaultPrismaClient(
-  managePrismaClientService: ManagePrismaClientService,
+  managePrismaClientService: ManagePrismaClientsService,
 ): PrismaClient {
   return managePrismaClientService.prismaClients.default;
 }
