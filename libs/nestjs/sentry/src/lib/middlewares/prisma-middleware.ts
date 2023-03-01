@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
 import { getCurrentHub } from '@sentry/node';
 
-import { DatabaseService } from '@trxn/nestjs-database';
+import { PrismaService } from '@trxn/nestjs-database';
 
 @Injectable()
 export class PrismaMiddleware {
@@ -20,21 +20,21 @@ export class PrismaMiddleware {
     try {
       // We try to get the database service from the module ref
       // We do not fail in case no database has been register in the app
-      const databaseService: DatabaseService = this.moduleRef.get(
-        DatabaseService as new (...args: unknown[]) => DatabaseService,
+      const prismaService: PrismaService = this.moduleRef.get(
+        PrismaService as new (...args: unknown[]) => PrismaService,
         {
           strict: false,
         },
       );
-      this.listenDatabaseTransactions(databaseService);
+      this.listenDatabaseTransactions(prismaService);
       this.isConnected = true;
 
       // eslint-disable-next-line no-empty
     } catch {}
   }
 
-  private listenDatabaseTransactions(databaseService: DatabaseService): void {
-    databaseService.$use((params, next) => {
+  private listenDatabaseTransactions(prismaService: PrismaService): void {
+    prismaService.$use((params, next) => {
       const { model, action, runInTransaction, args } = params;
       const description = [model, action].filter(Boolean).join('.');
       const data = {

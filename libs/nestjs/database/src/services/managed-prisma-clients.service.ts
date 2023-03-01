@@ -18,7 +18,7 @@ export type Provider = 'mysql' | 'postgresql';
 export class ManagedPrismaClientsService
   implements OnModuleInit, OnModuleDestroy
 {
-  protected LOG_CONTEXT = 'DatabaseService';
+  protected LOG_CONTEXT = 'ManagedPrismaClientsService';
 
   readonly defaultPrismaClientOptions: Prisma.PrismaClientOptions = {
     log: [
