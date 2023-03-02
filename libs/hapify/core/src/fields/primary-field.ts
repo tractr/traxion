@@ -11,6 +11,7 @@ import type {
   RequiredConstraint,
 } from './base-types';
 import { createFieldFactory, isFieldFactory } from './factories';
+import { getFieldsByTypeFactory } from './factories/get-fields-by-type-factory';
 import type { BaseConstraints, RelationsConstraint } from './field';
 
 export type PrimaryField = BaseField<
@@ -42,6 +43,8 @@ export const createPrimaryField = createFieldFactory('primary');
 export const primaryField = createPrimaryField;
 
 export const isPrimaryField = isFieldFactory('primary');
+
+export const getPrimaryFields = getFieldsByTypeFactory('primary');
 
 /**
  * Type helpers

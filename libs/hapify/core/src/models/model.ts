@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { hasSomeFieldFactory } from './factories';
 import {
   BaseField,
   Constraints,
@@ -6,9 +7,9 @@ import {
   FieldType,
   ForeignField,
   IsConstraints,
+  PrimaryField,
   VirtualField,
 } from '../fields';
-import { hasSomeFieldFactory } from './factories';
 
 /**
  * One to many relation
@@ -65,12 +66,19 @@ export type OneOneRelation = {
  */
 export type Relation = OneManyRelation | ManyManyRelation | OneOneRelation;
 
+export interface PrimaryKey {
+  name: string | null;
+  fields: PrimaryField[];
+}
+
 /**
  * The model type
  */
 export type Model = {
   name: string;
   fields: Field[];
+  primaryKey: PrimaryKey | null;
+  documentation?: string;
 };
 
 /**

@@ -21,7 +21,38 @@ import {
  * @param field
  * @returns
  */
-export function convertToField(field: DMMF.Field): Field {
+export function convertDmmfFieldToHapifyField(field: DMMF.Field): Field {
+  // kind: FieldKind;
+  // name: string;
+  // isRequired: boolean;
+  // isList: boolean;
+  // isUnique: boolean;
+  // isId: boolean;
+  // isReadOnly: boolean;
+  // isGenerated?: boolean;
+  // isUpdatedAt?: boolean;
+  // /**
+  //  * Describes the data type in the same the way is is defined in the Prisma schema:
+  //  * BigInt, Boolean, Bytes, DateTime, Decimal, Float, Int, JSON, String, $ModelName
+  //  */
+  // type: string;
+  // dbNames?: string[] | null;
+  // hasDefaultValue: boolean;
+  // default?: FieldDefault | FieldDefaultScalar | FieldDefaultScalar[];
+  // relationFromFields?: string[];
+  // relationToFields?: any[];
+  // relationOnDelete?: string;
+  // relationName?: string;
+  // documentation?: string;
+  // [key: string]: any;
+
+  // const { metadata, documentation } = extractMetadataFromDocumentation(
+  //   docs,
+  //   validations,
+  // );
+  // const baseConstraints = createDefaultConstraints(field, metadata)
+
+  const { type } = field;
   switch (field.type) {
     case 'float':
     case 'Int':

@@ -1,8 +1,13 @@
+import * as fs from 'fs';
+import path = require('path');
+
 import { generatorHandler } from '@prisma/generator-helper';
 import { logger } from '@prisma/sdk';
 import { Project } from 'ts-morph';
 
 import { version } from '../package.json';
+
+import { convertDmmfToHapifySchema } from '@trxn/hapify-devkit';
 
 export const GENERATOR_NAME = 'Hapify Prisma NestJs/Services';
 
@@ -35,7 +40,17 @@ generatorHandler({
     project.getDirectory(outputDirectory)?.clear();
 
     // Convert dmmf to Hapify model
-    // const schema = convertDmmfToSchema(dmmf);
+    const schema = convertDmmfToHapifySchema(dmmf);
+
+    fs.writeFile(
+      path.join(outputDirectory, 'hapify.json'),
+      JSON.stringify(schema, null, 2),
+      (error) => {
+        if (error) {
+          console.error(error);
+        }
+      },
+    );
 
     // Generate services
     // hapifyNestjsServicesGenerator(schema);

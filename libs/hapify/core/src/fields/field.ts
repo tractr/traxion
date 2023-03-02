@@ -23,17 +23,22 @@ import type { Relation } from '../models';
 /**
  * Field Base constraints
  */
-export type BaseConstraints = LabelConstraint &
+export type BaseConstraints = DocumentationConstraint &
+  LabelConstraint &
   UniqueConstraint &
-  NullConstraint &
+  IsRequiredConstraint &
   DefaultConstraint &
   MultipleConstraint &
   SearchableConstraint &
   SortableConstraint;
 
+export type DocumentationConstraint = OptionalConstraint<
+  'documentation',
+  string
+>;
 export type LabelConstraint = OptionalConstraint<'isLabel', boolean>;
 export type UniqueConstraint = OptionalConstraint<'isUnique', boolean>;
-export type NullConstraint = OptionalConstraint<'isNull', boolean>;
+export type IsRequiredConstraint = OptionalConstraint<'isRequired', boolean>;
 export type MultipleConstraint = OptionalConstraint<'isMultiple', boolean>;
 export type SearchableConstraint = OptionalConstraint<'isSearchable', boolean>;
 export type SortableConstraint = OptionalConstraint<'isSortable', boolean>;
@@ -60,6 +65,8 @@ export type FormatConstraint<T> = OptionalConstraint<'format', T>;
 /**
  * Check if field match this constraint
  */
+export type DocumentationSettable<F extends BaseField> =
+  GetFieldWithConstraints<F, DocumentationConstraint>;
 export type LabelSettable<F extends BaseField> = GetFieldWithConstraints<
   F,
   LabelConstraint
@@ -70,7 +77,7 @@ export type UniqueSettable<F extends BaseField> = GetFieldWithConstraints<
 >;
 export type NullSettable<F extends BaseField> = GetFieldWithConstraints<
   F,
-  NullConstraint
+  IsRequiredConstraint
 >;
 export type DefaultValueSettable<F extends BaseField> = GetFieldWithConstraints<
   F,
@@ -104,6 +111,7 @@ export type FormatSettable<F extends BaseField> = GetFieldWithConstraints<
 /**
  * List of Field that match this constraints
  */
+export type DocumentationSettableField = DocumentationSettable<Field>;
 export type LabelSettableField = LabelSettable<Field>;
 export type UniqueSettableField = UniqueSettable<Field>;
 export type NullSettableField = NullSettable<Field>;
@@ -143,9 +151,10 @@ export const isSearchableField = isConstraintFactory('isSearchable');
 export const isMultipleField = isConstraintFactory('isMultiple');
 export const isSortableField = isConstraintFactory('isSortable');
 
+export const hasDocumentationConstraint = hasConstraintFactory('documentation');
 export const hasLabelConstraint = hasConstraintFactory('label');
 export const hasUniqueConstraint = hasConstraintFactory('isUnique');
-export const hasNullConstraint = hasConstraintFactory('isNull');
+export const hasIsRequiredConstraint = hasConstraintFactory('isNull');
 export const hasDefaultConstraint = hasConstraintFactory('defaultValue');
 export const hasSearchableConstraint = hasConstraintFactory('isSearchable');
 export const hasMultipleConstraint = hasConstraintFactory('isMultiple');
