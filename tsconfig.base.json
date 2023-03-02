@@ -80,6 +80,9 @@
       "@trxn/hapify-generators-nestjs-services": [
         "libs/hapify/generators/nestjs-services/src/index.ts"
       ],
+      "@trxn/hapify-prisma-nestjs-services-generator": [
+        "libs/hapify/prisma/nestjs-services-generator/src/index.ts"
+      ],
       "@trxn/hapify-update-templates-import-path": [
         "libs/hapify/update-templates-import-path/src/index.ts"
       ],

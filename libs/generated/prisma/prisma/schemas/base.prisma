@@ -8,7 +8,7 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
   output = "../../../../node_modules/.prisma/client"
-  previewFeatures = ["interactiveTransactions"]
+  previewFeatures = []
 }
 
 generator nestjsGraphql {
@@ -20,4 +20,9 @@ generator nestjsGraphql {
   fields_Validator_from = "class-validator"
   fields_Validator_input = true
   useInputType_StringFilter_ALL = "string"
+}
+
+generator nestjsServices {
+  provider = "hapify-prisma-nestjs-services-generator"
+  output = "../../../generated/nestjs-modes-common/src/generated/prisma-nestjs-services"
 }

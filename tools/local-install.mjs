@@ -53,13 +53,16 @@ for (const [projectName, project] of projects) {
     project.targets.build.options.outputPath || project.targets.build.outputs[0]
   ).replace('{workspaceRoot}', '');
 
-  console.log(traxionDir, outputPath, 'package.json');
   const packageJson = readJsonFile(
     join(traxionDir, outputPath, 'package.json'),
   );
   const packageName = packageJson.name;
 
-  toCopy.push([join(traxionDir, outputPath), join(targetDir, packageName)]);
+  toCopy.push([
+    join(traxionDir, outputPath),
+    join(targetDir, packageName),
+    packageJson,
+  ]);
 
   if (packageJson.dependencies)
     packagesToInstall.push(
@@ -72,7 +75,25 @@ for (const [projectName, project] of projects) {
 log(`Installing dependencies`);
 if (install) await $`npm install -f ${packagesToInstall}`;
 
-for (const [source, target] of toCopy) {
+for (const [source, target, packageJson] of toCopy) {
   log(`Copying ${source} to ${target}`);
   await copy(source, target);
+
+  if (packageJson.bin) {
+    const bins =
+      typeof packageJson.bin === 'string'
+        ? { [packageJson.bin]: packageJson.bin }
+        : packageJson.bin;
+    for (const [binName, binPath] of Object.entries(bins)) {
+      log(
+        `Creating symlink for ${binName} into the node_modules/.bin directory`,
+      );
+      await $`ln -sf ${join(target, binPath)} ${join(
+        targetDir,
+        '.bin',
+        binName,
+      )}`;
+      await $`chmod +x ${join(targetDir, '.bin', binName)}`;
+    }
+  }
 }
