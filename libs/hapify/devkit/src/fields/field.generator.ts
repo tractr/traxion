@@ -1,17 +1,18 @@
 import { DMMF } from '@prisma/client/runtime';
 
 import {
-  BooleanField,
-  createField,
-  DateField,
+  createBooleanField,
+  createDateField,
+  createEnumField,
+  createFileField,
+  createForeignField,
+  createNumberField,
+  createObjectField,
+  createStringField,
+  createVirtualField,
   EnumField,
   Field,
-  FileField,
   ForeignField,
-  NumberField,
-  ObjectField,
-  StringField,
-  VirtualField,
 } from '@trxn/hapify-core';
 
 /**
@@ -24,60 +25,87 @@ export function convertToField(field: DMMF.Field): Field {
   switch (field.type) {
     case 'float':
     case 'Int':
-      return createField(
-        'number',
+      return createNumberField(
         field.name,
         {
-          isMultiple: !!field.isList,
+          isMultiple: !field.isList,
           isNull: !field.isRequired,
           isRequired: field.isRequired,
           isUnique: field.isUnique,
           isLabel: field.isId,
+          // defaultValue: , // TODO: update default value?
+          format: 'integer', // TODO: update format?
+          isEncrypted: false, // TODO: update is encrypted?
+          isSearchable: false, // TODO: update is searchable?
+          isSortable: false, // TODO: update is sortable?
+          max: 0, // TODO: update max?
+          min: 0, // TODO: update min?
+          pluralName: field.name,
+          type: 'number',
         },
         {
           pluralName: field.name,
         },
-      ) as NumberField;
+      );
 
-    // TODO: add format?
-    // TODO: add is encripted or not?
-    // TODO: add default value ?
     case 'String':
-      return createField(
-        'string',
+      return createStringField(
         field.name,
         {
-          isMultiple: !!field.isList,
+          isMultiple: !field.isList,
           isNull: !field.isRequired,
           isRequired: field.isRequired,
           isUnique: field.isUnique,
           isLabel: field.isId,
+          // defaultValue: field.default, // TODO: update default value?
+          // format: 'email', // TODO: update format?
+          // isEncrypted: false, // TODO: update is encrypted?
+          // isSearchable: false, // TODO: update is searchable?
+          // isSortable: false, // TODO: update is sortable?
+          // maxLength: 0, // TODO: how to check for max Length?
+          // minLength: 0, // TODO: how to check for  min length?
         },
         {
           pluralName: field.name,
+          // metadata: {}, // TODO: update metadata?
         },
-      ) as StringField;
+      );
     case 'Boolean':
-      return createField(
-        'boolean',
+      return createBooleanField(
         field.name,
-        {},
+        {
+          isMultiple: !field.isList,
+          isNull: !field.isRequired,
+          isRequired: field.isRequired,
+          isUnique: field.isUnique,
+          // isLabel: , // TODO: update label
+          // defaultValue: 0, // TODO: update default value
+          // isSearchable: false, // TODO: update is searchable?
+          // isSortable: false, // TODO: update is sortable?
+        },
         {
           pluralName: field.name,
         },
-      ) as BooleanField;
+      );
     case 'DateTime':
-      return createField(
-        'date',
+      return createDateField(
         field.name,
-        {},
+        {
+          isMultiple: !field.isList,
+          isNull: !field.isNullable,
+          isUnique: field.isUnique,
+          // defaultValue: field.default, // TODO: update default value?
+          // isSearchable: false, // TODO: update is searchable?
+          // isSortable: false, // TODO: update is sortable?
+          // max: 0, // TODO: update max?
+          // min: 0, // TODO: update min?
+        },
         {
           pluralName: field.name,
         },
-      ) as DateField;
+      );
     case 'Enum':
-      return createField(
-        'enum',
+      return createEnumField(
         field.name,
         {
           enum: field.enumValues,
@@ -87,17 +115,22 @@ export function convertToField(field: DMMF.Field): Field {
         },
       ) as EnumField;
     case 'File':
-      return createField(
-        'file',
+      return createFileField(
         field.name,
-        {},
+        {
+          isMultiple: field.isList,
+          isNull: field.isNullable,
+          isUnique: field.isUnique,
+          // defaultValue: field?.default?.name, // TODO: update default value?
+          // isSearchable: false, // TODO: update is searchable?
+          defaultValue: field.default,
+        },
         {
           pluralName: field.name,
         },
-      ) as FileField;
+      );
     case 'ForeignKey':
-      return createField(
-        'foreign',
+      return createForeignField(
         field.name,
         {
           model: field.referencedTable,
@@ -110,8 +143,7 @@ export function convertToField(field: DMMF.Field): Field {
       ) as ForeignField;
     // TODO: add relation
     case 'Virtual':
-      return createField(
-        'virtual',
+      return createVirtualField(
         field.name,
         {
           isSearchable: !!(
@@ -126,26 +158,24 @@ export function convertToField(field: DMMF.Field): Field {
         {
           pluralName: field.name,
         },
-      ) as VirtualField;
+      );
     case 'Object':
-      return createField(
-        'object',
+      return createObjectField(
         field.name,
         {},
         {
           pluralName: field.name,
           fields: field.fields ? field.fields.map(convertToField) : [],
         },
-      ) as ObjectField;
+      );
     default:
-      return createField(
-        'object',
+      return createObjectField(
         field.name,
         {},
         {
           pluralName: field.name,
           fields: field.fields ? field.fields.map(convertToField) : [],
         },
-      ) as ObjectField;
+      );
   }
 }
