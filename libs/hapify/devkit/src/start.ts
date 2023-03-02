@@ -3,9 +3,9 @@ import path = require('path');
 
 import { DMMF } from '@prisma/client/runtime';
 
-import { convertDmmfToHapify } from './hapify-hapify-devkit';
+import { convertDmmfToHapify } from './hapify-devkit';
 
-// readFile in libs/hapify/hapify-devkit/dmmf.json
+// readFile in libs/hapify/devkit/dmmf.json
 fs.readFile(path.join(__dirname, 'dmmf.json'), 'utf8', (err, data) => {
   if (err) {
     console.error(err);
