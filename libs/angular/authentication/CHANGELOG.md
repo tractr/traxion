@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.1.3](https://github.com/tractr/traxion/compare/v2.1.2...v2.1.3) (2023-03-03)
+
+
+### Bug Fixes
+
+* find user by login when trying to reset the password by email ([#591](https://github.com/tractr/traxion/issues/591)) ([c8a2f92](https://github.com/tractr/traxion/commit/c8a2f92a48c2d2c2b0c4e8cee2af08c44566d0c0))
+
+
+
 ## [2.1.2](https://github.com/tractr/traxion/compare/v2.1.1...v2.1.2) (2023-03-03)
 
 
