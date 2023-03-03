@@ -23,6 +23,10 @@ const UserModel = {
     stringField('email'),
     enumField('test', { enum: TestEnum }),
   ],
+  primaryKey: {
+    name: 'id',
+    fields: [userId],
+  },
 };
 
 // Profile model
@@ -38,6 +42,10 @@ const ProfileModel = {
     }),
     enumField('test', { enum: TestEnum }),
   ],
+  primaryKey: {
+    name: 'id',
+    fields: [profileId],
+  },
 };
 
 createOneManyRelation(

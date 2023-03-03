@@ -1,4 +1,4 @@
-import { DMMF } from '@prisma/client/runtime';
+import type { DMMF } from '@prisma/client/runtime';
 
 import { convertDmmfFieldToHapifyField } from './convert-dmmf-field-to-hapify-field';
 

@@ -1,4 +1,4 @@
-import { DMMF } from '@prisma/client/runtime';
+import type { DMMF } from '@prisma/client/runtime';
 
 import { convertDmmfModelToHapifyModel } from './convert-dmmf-model-to-hapify-model';
 

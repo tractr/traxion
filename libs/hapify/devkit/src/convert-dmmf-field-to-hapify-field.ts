@@ -1,4 +1,19 @@
-import { DMMF } from '@prisma/client/runtime';
+import type { DMMF } from '@prisma/client/runtime';
+
+import {
+  createBooleanConstraints,
+  createDateConstraints,
+  createDefaultConstraints,
+  createEnumConstraints,
+  createFileConstraints,
+  createNumberConstraints,
+  createObjectConstraints,
+  createPrimaryConstraints,
+  createStringConstraints,
+  getPluralName,
+} from './constraints';
+import { extractMetadataFromDocumentation } from './extract-metadata-from-documentation';
+import { validations } from './validations';
 
 import {
   createBooleanField,
@@ -8,6 +23,7 @@ import {
   createForeignField,
   createNumberField,
   createObjectField,
+  createPrimaryField,
   createStringField,
   createVirtualField,
   EnumField,
@@ -46,167 +62,100 @@ export function convertDmmfFieldToHapifyField(field: DMMF.Field): Field {
   // documentation?: string;
   // [key: string]: any;
 
-  // const { metadata, documentation } = extractMetadataFromDocumentation(
-  //   docs,
-  //   validations,
-  // );
-  // const baseConstraints = createDefaultConstraints(field, metadata)
+  const { metadata, documentation } = extractMetadataFromDocumentation(
+    field.documentation,
+    validations,
+  );
+  const pluralName = getPluralName(metadata);
+  const baseConstraints = createDefaultConstraints(field, metadata);
+  const numberConstraints = createNumberConstraints(field, metadata);
+  const stringConstraints = createStringConstraints(field, metadata);
+  const dateConstraints = createDateConstraints(field, metadata);
+  const booleanConstraints = createBooleanConstraints(field, metadata);
+  const enumConstraints = createEnumConstraints(field, metadata);
+  const fileConstraints = createFileConstraints(field, metadata);
+  const objectConstraints = createObjectConstraints(field, metadata);
+  const primaryConstraints = createPrimaryConstraints(field, metadata);
+
+  const { name, isId } = field;
+
+  // if (isId) {
+  //   return createPrimaryField(name, {
+  //     relations: [],
+  //     ...baseConstraints,
+  //     ...primaryConstraints,
+  //   });
+  // }
 
   const { type } = field;
-  switch (field.type) {
+  switch (type) {
     case 'float':
     case 'Int':
       return createNumberField(
         field.name,
         {
-          isMultiple: !field.isList,
-          isNull: !field.isRequired,
-          isRequired: field.isRequired,
-          isUnique: field.isUnique,
-          isLabel: field.isId,
-          // defaultValue: , // TODO: update default value?
-          format: 'integer', // TODO: update format?
-          isEncrypted: false, // TODO: update is encrypted?
-          isSearchable: false, // TODO: update is searchable?
-          isSortable: false, // TODO: update is sortable?
-          max: 0, // TODO: update max?
-          min: 0, // TODO: update min?
-          pluralName: field.name,
-          type: 'number',
+          ...baseConstraints,
+          ...numberConstraints,
         },
-        {
-          pluralName: field.name,
-        },
+        { pluralName },
       );
 
     case 'String':
       return createStringField(
         field.name,
         {
-          isMultiple: !field.isList,
-          isNull: !field.isRequired,
-          isRequired: field.isRequired,
-          isUnique: field.isUnique,
-          isLabel: field.isId,
-          // defaultValue: field.default, // TODO: update default value?
-          // format: 'email', // TODO: update format?
-          // isEncrypted: false, // TODO: update is encrypted?
-          // isSearchable: false, // TODO: update is searchable?
-          // isSortable: false, // TODO: update is sortable?
-          // maxLength: 0, // TODO: how to check for max Length?
-          // minLength: 0, // TODO: how to check for  min length?
+          ...baseConstraints,
+          ...stringConstraints,
         },
-        {
-          pluralName: field.name,
-          // metadata: {}, // TODO: update metadata?
-        },
+        { pluralName },
       );
     case 'Boolean':
       return createBooleanField(
         field.name,
         {
-          isMultiple: !field.isList,
-          isNull: !field.isRequired,
-          isRequired: field.isRequired,
-          isUnique: field.isUnique,
-          // isLabel: , // TODO: update label
-          // defaultValue: 0, // TODO: update default value
-          // isSearchable: false, // TODO: update is searchable?
-          // isSortable: false, // TODO: update is sortable?
+          ...baseConstraints,
+          ...booleanConstraints,
         },
-        {
-          pluralName: field.name,
-        },
+        { pluralName },
       );
     case 'DateTime':
       return createDateField(
         field.name,
         {
-          isMultiple: !field.isList,
-          isNull: !field.isNullable,
-          isUnique: field.isUnique,
-          // defaultValue: field.default, // TODO: update default value?
-          // isSearchable: false, // TODO: update is searchable?
-          // isSortable: false, // TODO: update is sortable?
-          // max: 0, // TODO: update max?
-          // min: 0, // TODO: update min?
+          ...baseConstraints,
+          ...dateConstraints,
         },
-        {
-          pluralName: field.name,
-        },
+        { pluralName },
       );
     case 'Enum':
       return createEnumField(
         field.name,
         {
-          enum: field.enumValues,
+          ...baseConstraints,
+          ...enumConstraints,
         },
-        {
-          pluralName: field.name,
-        },
+        { pluralName },
       ) as EnumField;
     case 'File':
       return createFileField(
         field.name,
         {
-          isMultiple: field.isList,
-          isNull: field.isNullable,
-          isUnique: field.isUnique,
-          // defaultValue: field?.default?.name, // TODO: update default value?
-          // isSearchable: false, // TODO: update is searchable?
-          defaultValue: field.default,
+          ...baseConstraints,
+          ...fileConstraints,
         },
-        {
-          pluralName: field.name,
-        },
+        { pluralName },
       );
-    case 'ForeignKey':
-      return createForeignField(
-        field.name,
-        {
-          model: field.referencedTable,
-          foreignKey: field,
-          isMultiple: !!field.isList,
-        },
-        {
-          pluralName: field.name,
-        },
-      ) as ForeignField;
-    // TODO: add relation
-    case 'Virtual':
-      return createVirtualField(
-        field.name,
-        {
-          isSearchable: !!(
-            field.kind === 'object' && field.relationName !== null
-          ),
-          isSortable: !!(field.kind === 'scalar' && field.isSortable === true),
-          isMultiple: !!(
-            field.kind === 'scalar' && field.isSearchable === true
-          ),
-          relation: undefined,
-        },
-        {
-          pluralName: field.name,
-        },
-      );
+    case 'Json':
     case 'Object':
       return createObjectField(
         field.name,
-        {},
         {
-          pluralName: field.name,
-          fields: field.fields ? field.fields.map(convertToField) : [],
+          ...baseConstraints,
+          ...objectConstraints,
         },
+        { pluralName },
       );
     default:
-      return createObjectField(
-        field.name,
-        {},
-        {
-          pluralName: field.name,
-          fields: field.fields ? field.fields.map(convertToField) : [],
-        },
-      );
+      throw new Error(`Unknown type ${type}`);
   }
 }
