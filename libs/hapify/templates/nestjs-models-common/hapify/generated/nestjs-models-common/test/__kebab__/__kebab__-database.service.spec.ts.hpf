@@ -14,14 +14,14 @@ import {
 } from '../../src';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma } from '@prisma/client';
-import { DatabaseService } from '@trxn/nestjs-database';
+import { PrismaService } from '@trxn/nestjs-database';
  
 describe('<<Model pascal>>DatabaseService', () => {
   let <<Model camel>>DatabaseService: <<Model pascal>>DatabaseService;
-  let mockedDatabaseService: DatabaseService;
+  let mockedDatabaseService: PrismaService;
  
   beforeEach(async () => {
-    mockedDatabaseService = ({ <<Model camel>>: mock<<Model pascal>>DatabaseServiceFactory() } as unknown) as DatabaseService;;
+    mockedDatabaseService = ({ <<Model camel>>: mock<<Model pascal>>DatabaseServiceFactory() } as unknown) as PrismaService;
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         {
@@ -29,7 +29,7 @@ describe('<<Model pascal>>DatabaseService', () => {
           useFactory: <<Model camel>>DatabaseServiceFactory,
           inject: <<Model camel>>DatabaseServiceInject,
         },
-        { provide: DatabaseService, useValue: mockedDatabaseService },
+        { provide: PrismaService, useValue: mockedDatabaseService },
       ],
     }).compile();
  
@@ -43,7 +43,7 @@ describe('<<Model pascal>>DatabaseService', () => {
   });
  
   describe('findUnique', () => {
-    it('should map to DatabaseService.findUnique', async () => {
+    it('should map to PrismaService.findUnique', async () => {
       const args = ('args' as unknown) as Prisma.<<Model pascal>>FindUniqueArgs;
       const <<Model camel>> = mock<<Model pascal>>sFactory();
       (mockedDatabaseService.<<Model camel>>.findUnique as jest.Mock).mockReturnValueOnce(
@@ -57,7 +57,7 @@ describe('<<Model pascal>>DatabaseService', () => {
   });
  
   describe('findFirst', () => {
-    it('should map to DatabaseService.findFirst', async () => {
+    it('should map to PrismaService.findFirst', async () => {
       const args = ('args' as unknown) as Prisma.<<Model pascal>>FindFirstArgs;
       const <<Model camel>> = mock<<Model pascal>>sFactory();
       (mockedDatabaseService.<<Model camel>>.findFirst as jest.Mock).mockReturnValueOnce(
@@ -71,7 +71,7 @@ describe('<<Model pascal>>DatabaseService', () => {
   });
  
   describe('findMany', () => {
-    it('should map to DatabaseService.findMany', async () => {
+    it('should map to PrismaService.findMany', async () => {
       const args = ('args' as unknown) as Prisma.<<Model pascal>>FindManyArgs;
       const <<Model camel>> = mock<<Model pascal>>sFactory({},3);
       (mockedDatabaseService.<<Model camel>>.findMany as jest.Mock).mockReturnValueOnce(
@@ -85,7 +85,7 @@ describe('<<Model pascal>>DatabaseService', () => {
   });
  
   describe('create', () => {
-    it('should map to DatabaseService.create', async () => {
+    it('should map to PrismaService.create', async () => {
       const args = ('args' as unknown) as Prisma.<<Model pascal>>CreateArgs;
       const <<Model camel>> = mock<<Model pascal>>sFactory();
       (mockedDatabaseService.<<Model camel>>.create as jest.Mock).mockReturnValueOnce(
@@ -99,7 +99,7 @@ describe('<<Model pascal>>DatabaseService', () => {
   });
  
   describe('update', () => {
-    it('should map to DatabaseService.update', async () => {
+    it('should map to PrismaService.update', async () => {
       const args = ('args' as unknown) as Prisma.<<Model pascal>>UpdateArgs;
       const <<Model camel>> = mock<<Model pascal>>sFactory();
       (mockedDatabaseService.<<Model camel>>.update as jest.Mock).mockReturnValueOnce(
@@ -113,7 +113,7 @@ describe('<<Model pascal>>DatabaseService', () => {
   });
  
   describe('updateMany', () => {
-    it('should map to DatabaseService.updateMany', async () => {
+    it('should map to PrismaService.updateMany', async () => {
       const args = ('args' as unknown) as Prisma.<<Model pascal>>UpdateManyArgs;
       const <<Model camel>> = mock<<Model pascal>>sFactory();
       (mockedDatabaseService.<<Model camel>>.updateMany as jest.Mock).mockReturnValueOnce(
@@ -127,7 +127,7 @@ describe('<<Model pascal>>DatabaseService', () => {
   });
  
   describe('upsert', () => {
-    it('should map to DatabaseService.upsert', async () => {
+    it('should map to PrismaService.upsert', async () => {
       const args = ('args' as unknown) as Prisma.<<Model pascal>>UpsertArgs;
       const <<Model camel>> = mock<<Model pascal>>sFactory();
       (mockedDatabaseService.<<Model camel>>.upsert as jest.Mock).mockReturnValueOnce(
@@ -141,7 +141,7 @@ describe('<<Model pascal>>DatabaseService', () => {
   });
  
   describe('delete', () => {
-    it('should map to DatabaseService.delete', async () => {
+    it('should map to PrismaService.delete', async () => {
       const args = ('args' as unknown) as Prisma.<<Model pascal>>DeleteArgs;
       const <<Model camel>> = mock<<Model pascal>>sFactory();
       (mockedDatabaseService.<<Model camel>>.delete as jest.Mock).mockReturnValueOnce(
@@ -155,7 +155,7 @@ describe('<<Model pascal>>DatabaseService', () => {
   });
  
   describe('deleteMany', () => {
-    it('should map to DatabaseService.deleteMany', async () => {
+    it('should map to PrismaService.deleteMany', async () => {
       const args = ('args' as unknown) as Prisma.<<Model pascal>>DeleteManyArgs;
       const <<Model camel>> = mock<<Model pascal>>sFactory();
       (mockedDatabaseService.<<Model camel>>.deleteMany as jest.Mock).mockReturnValueOnce(
@@ -169,7 +169,7 @@ describe('<<Model pascal>>DatabaseService', () => {
   });
  
   describe('count', () => {
-    it('should map to DatabaseService.count', async () => {
+    it('should map to PrismaService.count', async () => {
       const args = ('args' as unknown) as Prisma.<<Model pascal>>CountArgs;
       const <<Model camel>> = mock<<Model pascal>>sFactory();
       (mockedDatabaseService.<<Model camel>>.count as jest.Mock).mockReturnValueOnce(
@@ -183,7 +183,7 @@ describe('<<Model pascal>>DatabaseService', () => {
   });
  
   describe('aggregate', () => {
-    it('should map to DatabaseService.aggregate', async () => {
+    it('should map to PrismaService.aggregate', async () => {
       const args = ('args' as unknown) as Prisma.<<Model pascal>>AggregateArgs;
       const <<Model camel>> = mock<<Model pascal>>sFactory();
       (mockedDatabaseService.<<Model camel>>.aggregate as jest.Mock).mockReturnValueOnce(

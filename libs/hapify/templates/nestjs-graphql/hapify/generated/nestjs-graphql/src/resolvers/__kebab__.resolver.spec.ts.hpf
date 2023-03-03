@@ -18,7 +18,7 @@ import { INestApplication } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
-import { DatabaseModule, DatabaseService } from '@trxn/nestjs-database';
+import { PrismaService } from '@trxn/nestjs-database';
 import { Prisma } from '@prisma/client';
 	
 import {
@@ -73,26 +73,25 @@ describe('<<Model pascal>> Resolver', () => {
           useValue: mock<<ref pascal>>Service,
         },
 <<endfor>>
+        {
+          provide: PrismaService,
+          useFactory: () => {
+            const prismaAggregate = mockDeep<Prisma.TransactionClient>();
+            return {
+              $transaction: (fn: (...args: unknown[]) => Promise<unknown>) => {
+                return fn(prismaAggregate);
+              },
+            };
+          },
+        },
       ],
       imports: [
-        DatabaseModule,
         GraphQLModule.forRoot<ApolloDriverConfig>({
           driver: ApolloDriver,
           autoSchemaFile: true,
         }),
       ],
     })
-      .overrideProvider(DatabaseService)
-      .useFactory({
-        factory: () => {
-          const prismaAggregate = mockDeep<Prisma.TransactionClient>();
-          return {
-            $transaction: (fn: (...args: unknown[]) => Promise<unknown>) => {
-              return fn(prismaAggregate);
-            },
-          };
-        },
-      })
       .compile();
     app = module.createNestApplication();
     await module.init();

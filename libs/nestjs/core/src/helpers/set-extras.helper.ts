@@ -9,8 +9,10 @@ import {
 
 import type { ProviderWithInjectionToken } from '../interfaces';
 
+export type UnknownExtras = Record<string, unknown>;
+
 export type ImportsExtra = {
-  imports: Array<
+  imports?: Array<
     Type<any> | DynamicModule | Promise<DynamicModule> | ForwardReference
   >;
 };
@@ -19,7 +21,7 @@ export type ProvidersExtra = {
   providers?: Provider<any>[] | undefined;
 };
 
-export function addImportsExtra<E extends ImportsExtra>(
+export function addImportsExtra<E extends ImportsExtra & UnknownExtras>(
   transformDefinition: (
     definition: DynamicModule,
     extras: Omit<E, 'imports'>,
@@ -35,7 +37,7 @@ export function addImportsExtra<E extends ImportsExtra>(
     );
 }
 
-export function addProvidersExtra<E extends ProvidersExtra>(
+export function addProvidersExtra<E extends ProvidersExtra & UnknownExtras>(
   transformDefinition: (
     definition: DynamicModule,
     extras: Omit<E, 'providers'>,
@@ -52,7 +54,7 @@ export function addProvidersExtra<E extends ProvidersExtra>(
 }
 
 export function addImportsAndProvidersExtra<
-  E extends ImportsExtra & ProvidersExtra,
+  E extends ImportsExtra & ProvidersExtra & UnknownExtras,
 >(
   transformDefinition: (
     definition: DynamicModule,
@@ -74,6 +76,7 @@ export function addProviderWithInjectionTokenExtra<I extends InjectionToken>(
   definition: DynamicModule,
   token: I,
   providerWithToken?: ProviderWithInjectionToken<I>,
+  defaultUse: 'useClass' | 'useFactory' | 'useValue' = 'useClass',
 ) {
   if (!providerWithToken) {
     return definition;
@@ -83,8 +86,8 @@ export function addProviderWithInjectionTokenExtra<I extends InjectionToken>(
   if (!('provide' in provider)) {
     provider = {
       provide: token,
-      useClass: provider,
-    };
+      [defaultUse]: provider,
+    } as { provide: I } & { [key in typeof defaultUse]: any };
   }
 
   return {

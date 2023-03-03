@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Client, Request } from 'node-mailjet';
-import { RequestConstructorConfig } from 'node-mailjet/declarations/request/Request';
+import { Client } from 'node-mailjet';
 
 import { MailjetModuleOptions } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../mailjet.module-definition';

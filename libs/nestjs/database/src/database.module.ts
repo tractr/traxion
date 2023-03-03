@@ -1,23 +1,43 @@
-import { Global, Module } from '@nestjs/common';
+import { Logger, LoggerService, Module } from '@nestjs/common';
 
-import { PRISMA_OPTIONS } from './config';
-import { PRISMA_MODULE_OPTIONS } from './constants';
+import { ConfigurableModuleClass } from './database.module-definition';
+import { getDefaultPrismaClient } from './factories';
 import {
-  DatabaseService,
+  ManagedPrismaClientsService,
   MysqlService,
   PostgresqlService,
-  PrismaClientOptions,
+  PrismaService,
 } from './services';
+import { DatabaseService } from './services/database.service';
 
-import { LoggerModule, ModuleOptionsFactory } from '@trxn/nestjs-core';
+import { LoggerModule } from '@trxn/nestjs-core';
 
-@Global()
 @Module({
   imports: [LoggerModule],
-  providers: [DatabaseService, MysqlService, PostgresqlService],
-  exports: [DatabaseService, MysqlService, PostgresqlService],
+  providers: [
+    MysqlService,
+    PostgresqlService,
+    ManagedPrismaClientsService,
+    {
+      provide: PrismaService,
+      useFactory: getDefaultPrismaClient,
+      inject: [ManagedPrismaClientsService],
+    },
+
+    {
+      provide: DatabaseService,
+      useFactory: (
+        managePrismaClientService: ManagedPrismaClientsService,
+        logger: LoggerService,
+      ) => {
+        logger.warn(
+          'DatabaseService token is deprecated. Use PrismaService from @trxn/nestjs-database instead.',
+        );
+        return getDefaultPrismaClient(managePrismaClientService);
+      },
+      inject: [ManagedPrismaClientsService, Logger],
+    },
+  ],
+  exports: [PrismaService, DatabaseService, MysqlService, PostgresqlService],
 })
-export class DatabaseModule extends ModuleOptionsFactory<PrismaClientOptions>(
-  PRISMA_MODULE_OPTIONS,
-  PRISMA_OPTIONS,
-) {}
+export class DatabaseModule extends ConfigurableModuleClass {}
