@@ -19,8 +19,8 @@ export class PasswordService {
   }
 
   /** Send request to API for a new password token */
-  async request(id: string): Promise<void> {
-    await lastValueFrom(this.http.post(this.resetUrl, { id }));
+  async request(login: string): Promise<void> {
+    await lastValueFrom(this.http.post(this.resetUrl, { login }));
   }
 
   /** Do the password reset */

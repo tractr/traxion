@@ -46,11 +46,11 @@ describe('ResetPassword Controller', () => {
       await request(app.getHttpServer())
         .post('/password/reset')
         .send({
-          id: '1',
+          login: 'email@email.com',
         })
         .expect(204);
 
-      expect(spyRequestUpdatePassword).toHaveBeenCalledWith('1');
+      expect(spyRequestUpdatePassword).toHaveBeenCalledWith('email@email.com');
     });
 
     it('should swallow the error if a user is not found', async () => {

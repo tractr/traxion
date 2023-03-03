@@ -22,10 +22,10 @@ export class ResetPasswordController {
   @Post()
   @HttpCode(204)
   async resetRequested(
-    @Body() { id }: PasswordResetRequestedDto,
+    @Body() { login }: PasswordResetRequestedDto,
   ): Promise<void> {
     try {
-      await this.resetPasswordService.requestResetPassword(id);
+      await this.resetPasswordService.requestResetPassword(login);
     } catch (e) {
       // We should never send information about a user not found
       if (e instanceof UserNotFoundError) return;
