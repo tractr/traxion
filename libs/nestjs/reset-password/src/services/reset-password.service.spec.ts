@@ -137,7 +137,7 @@ describe('ResetPasswordService', () => {
       };
 
       mockJwtService.sign.mockReturnValue('code');
-      mockUserService.findUserById.mockResolvedValue({
+      mockUserService.findUserByLogin.mockResolvedValue({
         id,
         email,
         password,
@@ -152,7 +152,7 @@ describe('ResetPasswordService', () => {
         },
       });
 
-      await resetPasswordService.requestResetPassword('1');
+      await resetPasswordService.requestResetPassword('email');
 
       expect(mockResetPasswordLinkFactory).toHaveBeenCalledWith(
         mockReq,
