@@ -31,8 +31,8 @@ export class ResetPasswordService {
    * Send a reset code to the user's email
    * @param user User The user to send the reset code to (id email and password are required)
    */
-  async requestResetPassword(id: UserId): Promise<void> {
-    const user = await this.userService.findUserById(id);
+  async requestResetPassword(login: string): Promise<void> {
+    const user = await this.userService.findUserByLogin(login);
 
     if (!user) {
       throw new UserNotFoundError();
