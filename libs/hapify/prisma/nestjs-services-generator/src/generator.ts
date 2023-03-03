@@ -42,16 +42,19 @@ generatorHandler({
     // Convert dmmf to Hapify model
     const schema = convertDmmfToHapifySchema(dmmf);
 
-    fs.writeFile(
-      path.join(outputDirectory, 'hapify.json'),
-      JSON.stringify(schema, null, 2),
-      (error) => {
-        if (error) {
-          console.error(error);
-        }
-      },
-    );
+    console.log(JSON.stringify(dmmf.datamodel, null, 2));
 
+    // fs.writeFile(
+    //   path.join(outputDirectory, 'hapify.json'),
+    //   JSON.stringify(schema, null, 2),
+    //   (error) => {
+    //     if (error) {
+    //       console.error(error);
+    //     }
+    //   },
+    // );
+
+    console.log('here');
     // Generate services
     // hapifyNestjsServicesGenerator(schema);
 
