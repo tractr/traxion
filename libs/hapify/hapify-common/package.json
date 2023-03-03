@@ -1,6 +1,6 @@
 {
   "name": "@trxn/hapify-common",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Hapify common helpers",
   "repository": {
     "type": "git",
