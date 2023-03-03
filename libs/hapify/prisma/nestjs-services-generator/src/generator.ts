@@ -40,19 +40,14 @@ generatorHandler({
     project.getDirectory(outputDirectory)?.clear();
 
     // Convert dmmf to Hapify model
-    const schema = convertDmmfToHapifySchema(dmmf);
+    // const schema = convertDmmfToHapifySchema(dmmf);
 
     console.log(JSON.stringify(dmmf.datamodel, null, 2));
 
-    // fs.writeFile(
-    //   path.join(outputDirectory, 'hapify.json'),
-    //   JSON.stringify(schema, null, 2),
-    //   (error) => {
-    //     if (error) {
-    //       console.error(error);
-    //     }
-    //   },
-    // );
+    fs.writeFileSync(
+      path.join(outputDirectory, 'dmmf.json'),
+      JSON.stringify(dmmf.datamodel, null, 2),
+    );
 
     console.log('here');
     // Generate services

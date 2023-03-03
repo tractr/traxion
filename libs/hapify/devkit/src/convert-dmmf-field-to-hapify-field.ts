@@ -1,35 +1,16 @@
-import type { DMMF } from '@prisma/client/runtime';
+import type { DMMF } from '@prisma/generator-helper';
 
+import { convertDmmfEnumFieldToHapifyField } from './convert-dmmf-enum-field-to-hapify-field';
+import { convertDmmfObjectFieldToHapifyField } from './convert-dmmf-object-field-to-hapify-field';
+import { convertDmmfPrimaryFieldToHapifyField } from './convert-dmmf-primary-field-to-hapify-field';
+import { convertDmmfScalarFieldToHapifyField } from './convert-dmmf-scalar-field-to-hapify-field';
 import {
-  createBooleanConstraints,
-  createDateConstraints,
-  createDefaultConstraints,
-  createEnumConstraints,
-  createFileConstraints,
-  createNumberConstraints,
-  createObjectConstraints,
-  createPrimaryConstraints,
-  createStringConstraints,
-  getPluralName,
-} from './constraints';
-import { extractMetadataFromDocumentation } from './extract-metadata-from-documentation';
-import { validations } from './validations';
+  PrismaEnumField,
+  PrismaObjectField,
+  PrismaScalarField,
+} from './interfaces';
 
-import {
-  createBooleanField,
-  createDateField,
-  createEnumField,
-  createFileField,
-  createForeignField,
-  createNumberField,
-  createObjectField,
-  createPrimaryField,
-  createStringField,
-  createVirtualField,
-  EnumField,
-  Field,
-  ForeignField,
-} from '@trxn/hapify-core';
+import { EnumType, Field } from '@trxn/hapify-core';
 
 /**
  * Convert a DMMF field to a Hapify field.
@@ -37,125 +18,26 @@ import {
  * @param field
  * @returns
  */
-export function convertDmmfFieldToHapifyField(field: DMMF.Field): Field {
-  // kind: FieldKind;
-  // name: string;
-  // isRequired: boolean;
-  // isList: boolean;
-  // isUnique: boolean;
-  // isId: boolean;
-  // isReadOnly: boolean;
-  // isGenerated?: boolean;
-  // isUpdatedAt?: boolean;
-  // /**
-  //  * Describes the data type in the same the way is is defined in the Prisma schema:
-  //  * BigInt, Boolean, Bytes, DateTime, Decimal, Float, Int, JSON, String, $ModelName
-  //  */
-  // type: string;
-  // dbNames?: string[] | null;
-  // hasDefaultValue: boolean;
-  // default?: FieldDefault | FieldDefaultScalar | FieldDefaultScalar[];
-  // relationFromFields?: string[];
-  // relationToFields?: any[];
-  // relationOnDelete?: string;
-  // relationName?: string;
-  // documentation?: string;
-  // [key: string]: any;
+export function convertDmmfFieldToHapifyField(
+  field: DMMF.Field,
+  enums: EnumType[],
+): Field {
+  // Handle primary fields as they are mapped to a dedicated field type in hapify
+  if (field.isId) {
+    return convertDmmfPrimaryFieldToHapifyField(field as PrismaScalarField);
+  }
 
-  const { metadata, documentation } = extractMetadataFromDocumentation(
-    field.documentation,
-    validations,
-  );
-  const pluralName = getPluralName(metadata);
-  const baseConstraints = createDefaultConstraints(field, metadata);
-  const numberConstraints = createNumberConstraints(field, metadata);
-  const stringConstraints = createStringConstraints(field, metadata);
-  const dateConstraints = createDateConstraints(field, metadata);
-  const booleanConstraints = createBooleanConstraints(field, metadata);
-  const enumConstraints = createEnumConstraints(field, metadata);
-  const fileConstraints = createFileConstraints(field, metadata);
-  const objectConstraints = createObjectConstraints(field, metadata);
-  const primaryConstraints = createPrimaryConstraints(field, metadata);
-
-  const { name, isId } = field;
-
-  // if (isId) {
-  //   return createPrimaryField(name, {
-  //     relations: [],
-  //     ...baseConstraints,
-  //     ...primaryConstraints,
-  //   });
-  // }
-
-  const { type } = field;
-  switch (type) {
-    case 'float':
-    case 'Int':
-      return createNumberField(
-        field.name,
-        {
-          ...baseConstraints,
-          ...numberConstraints,
-        },
-        { pluralName },
-      );
-
-    case 'String':
-      return createStringField(
-        field.name,
-        {
-          ...baseConstraints,
-          ...stringConstraints,
-        },
-        { pluralName },
-      );
-    case 'Boolean':
-      return createBooleanField(
-        field.name,
-        {
-          ...baseConstraints,
-          ...booleanConstraints,
-        },
-        { pluralName },
-      );
-    case 'DateTime':
-      return createDateField(
-        field.name,
-        {
-          ...baseConstraints,
-          ...dateConstraints,
-        },
-        { pluralName },
-      );
-    case 'Enum':
-      return createEnumField(
-        field.name,
-        {
-          ...baseConstraints,
-          ...enumConstraints,
-        },
-        { pluralName },
-      ) as EnumField;
-    case 'File':
-      return createFileField(
-        field.name,
-        {
-          ...baseConstraints,
-          ...fileConstraints,
-        },
-        { pluralName },
-      );
-    case 'Json':
-    case 'Object':
-      return createObjectField(
-        field.name,
-        {
-          ...baseConstraints,
-          ...objectConstraints,
-        },
-        { pluralName },
-      );
+  // Handle fields depending on their kind
+  switch (field.kind) {
+    case 'scalar':
+      return convertDmmfScalarFieldToHapifyField(field as PrismaScalarField);
+    case 'enum':
+      return convertDmmfEnumFieldToHapifyField(field as PrismaEnumField, enums);
+    case 'object':
+      return convertDmmfObjectFieldToHapifyField(field as PrismaObjectField);
+    case 'unsupported':
+      throw new Error(`Unsupported field kind`);
     default:
-      throw new Error(`Unknown type ${type}`);
+      throw new Error(`Unknown kind ${field.kind as string}`);
   }
 }
