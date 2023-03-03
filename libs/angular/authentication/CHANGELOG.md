@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.1.1](https://github.com/tractr/traxion/compare/v2.1.0...v2.1.1) (2023-03-01)
+
+
+### Bug Fixes
+
+* **angular-authentication:** fix angular reset password request body ([#590](https://github.com/tractr/traxion/issues/590)) ([24bad40](https://github.com/tractr/traxion/commit/24bad40bb49a8acdc16384938ad24a48655b4b87))
+
+
+
 # [2.1.0](https://github.com/tractr/traxion/compare/v2.0.13...v2.1.0) (2023-02-28)
 
 
