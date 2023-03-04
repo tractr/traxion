@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { DMMF } from '@prisma/client/runtime';
+import type { DMMF } from '@prisma/generator-helper';
 
 import { BaseConstraints, PrimaryConstraints } from '@trxn/hapify-core';
 
@@ -8,6 +8,7 @@ export function createPrimaryConstraints(
   metadata: Record<string, unknown> = {},
 ): Omit<PrimaryConstraints, keyof BaseConstraints> {
   return {
-    fieldType: field.type === 'Int' ? 'number' : 'string',
+    relations: [],
+    scalar: field.type === 'String' ? 'string' : 'number',
   };
 }

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { DMMF } from '@prisma/client/runtime';
+
+import { DMMF } from '@prisma/generator-helper';
 
 import { BaseConstraints, BooleanConstraints } from '@trxn/hapify-core';
 
@@ -11,6 +12,7 @@ export function createBooleanConstraints(
 } {
   const { hasDefaultValue, default: defaultValue } = field;
   return {
+    scalar: 'boolean',
     // defaultValue: hasDefaultValue ? !!defaultValue : undefined,
   };
 }

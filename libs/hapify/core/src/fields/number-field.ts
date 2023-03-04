@@ -17,6 +17,7 @@ import type {
   DefaultConstraint,
   Field,
   FormatConstraint,
+  ScalarConstraint,
 } from './field';
 
 export type NumberField = BaseField<'number', NumberConstraints>;
@@ -28,6 +29,7 @@ export type NumberConstraints = BaseConstraints &
   MinConstraint &
   MaxConstraint &
   NumberFormatConstraint &
+  ScalarConstraint<'number'> &
   DefaultConstraint<number>;
 
 export type MinConstraint = OptionalConstraint<'min', number>;

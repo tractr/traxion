@@ -2,12 +2,12 @@ import {
   createDefaultConstraints,
   createEnumConstraints,
   getPluralName,
-} from './constraints';
-import { extractMetadataFromDocumentation } from './extract-metadata-from-documentation';
-import { PrismaEnumField } from './interfaces';
-import { validations } from './validations';
+} from '../constraints';
+import { extractMetadataFromDocumentation } from '../extract-metadata-from-documentation';
+import { PrismaEnumField } from '../interfaces';
+import { validations } from '../validations';
 
-import { createEnumField, EnumType, Field } from '@trxn/hapify-core';
+import { createEnumField, EnumType, FieldDeclaration } from '@trxn/hapify-core';
 
 /**
  * Convert a DMMF enum field to a Hapify field.
@@ -18,7 +18,7 @@ import { createEnumField, EnumType, Field } from '@trxn/hapify-core';
 export function convertDmmfEnumFieldToHapifyField(
   field: PrismaEnumField,
   enums: EnumType[],
-): Field {
+): FieldDeclaration {
   const enumType = enums.find((e) => e.name === field.type);
 
   if (!enumType) {
@@ -30,12 +30,13 @@ export function convertDmmfEnumFieldToHapifyField(
     validations,
   );
 
-  const pluralName = getPluralName(metadata);
+  const pluralName = getPluralName(field, metadata);
   const baseConstraints = createDefaultConstraints(field, metadata);
 
   return createEnumField(
     field.name,
     {
+      documentation,
       ...baseConstraints,
       ...createEnumConstraints(field, metadata),
       enum: enumType,

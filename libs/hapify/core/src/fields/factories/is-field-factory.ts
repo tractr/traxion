@@ -1,4 +1,10 @@
-import { BaseField, GetField, GetFieldType, IsField } from '../base-types';
+import {
+  BaseField,
+  ExtractField,
+  GetField,
+  GetFieldType,
+  IsField,
+} from '../base-types';
 import { Field } from '../field';
 import { isField } from '../predicates/is-field';
 
@@ -19,11 +25,11 @@ import { isField } from '../predicates/is-field';
  *
  * const strings: StringField[] = fields.filter(isFieldFactory<Field>('string'));
  */
-export function isFieldFactory<FT extends BaseField = Field>(
-  type: GetFieldType<FT>,
+export function isFieldFactory<T extends string = GetFieldType<Field>>(
+  type: T,
 ) {
   return <F extends BaseField>(
     field: F,
-  ): field is IsField<F> & GetField<IsField<F>, GetFieldType<F>, FT> =>
+  ): field is IsField<F> & ExtractField<T> =>
     isField(field) && field.type === type;
 }

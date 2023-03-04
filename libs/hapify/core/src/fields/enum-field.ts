@@ -13,7 +13,11 @@ import {
   hasConstraintFactory,
   isFieldFactory,
 } from './factories';
-import type { BaseConstraints, DefaultConstraint } from './field';
+import type {
+  BaseConstraints,
+  DefaultConstraint,
+  ScalarConstraint,
+} from './field';
 
 export type EnumField = BaseField<'enum', EnumConstraints>;
 
@@ -22,6 +26,7 @@ export type EnumField = BaseField<'enum', EnumConstraints>;
  */
 export type EnumConstraints = BaseConstraints &
   EnumConstraint &
+  ScalarConstraint<'string' | 'number'> &
   DefaultConstraint<EnumType>;
 
 export type EnumConstraint = RequiredConstraint<'enum', EnumType>;

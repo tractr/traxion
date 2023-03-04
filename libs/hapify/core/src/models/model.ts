@@ -4,6 +4,7 @@ import {
   BaseField,
   Constraints,
   Field,
+  FieldDeclaration,
   FieldType,
   ForeignField,
   IsConstraints,
@@ -28,6 +29,20 @@ export type OneManyRelation = {
   };
 };
 
+export type OneManyRelationDeclaration = {
+  type: 'oneMany';
+  name: string;
+  from: {
+    model: ModelDeclaration;
+    virtual: VirtualField;
+  };
+  to: {
+    model: ModelDeclaration;
+    foreign: ForeignField;
+    virtual: VirtualField;
+  };
+};
+
 /**
  * Many to many relation
  */
@@ -44,11 +59,23 @@ export type ManyManyRelation = {
   };
 };
 
+export type ManyManyRelationDeclaration = {
+  type: 'manyMany';
+  name: string;
+  from: {
+    model: ModelDeclaration;
+    virtual: VirtualField;
+  };
+  to: {
+    model: ModelDeclaration;
+    virtual: VirtualField;
+  };
+};
 /**
  * One to one relation
  */
 export type OneOneRelation = {
-  type: 'manyMany';
+  type: 'oneOne';
   name: string;
   from: {
     model: Model;
@@ -61,14 +88,38 @@ export type OneOneRelation = {
   };
 };
 
+export type OneOneRelationDeclaration = {
+  type: 'oneOne';
+  name: string;
+  from: {
+    model: Model;
+    virtual: VirtualField;
+  };
+  to: {
+    model: ModelDeclaration;
+    foreign: ForeignField;
+    virtual: VirtualField;
+  };
+};
+
 /**
  * The relation type
  */
 export type Relation = OneManyRelation | ManyManyRelation | OneOneRelation;
 
+export type RelationDeclaration =
+  | OneManyRelationDeclaration
+  | ManyManyRelationDeclaration
+  | OneOneRelationDeclaration;
+
 export interface PrimaryKey {
   name: string | null;
   fields: PrimaryField[];
+}
+
+export interface PrimaryKeyDeclaration {
+  name: string | null;
+  fields: string[];
 }
 
 /**
@@ -78,6 +129,13 @@ export type Model = {
   name: string;
   fields: Field[];
   primaryKey: PrimaryKey | null;
+  documentation?: string;
+};
+
+export type ModelDeclaration = {
+  name: string;
+  fields: FieldDeclaration[];
+  primaryKey: PrimaryKeyDeclaration | null;
   documentation?: string;
 };
 

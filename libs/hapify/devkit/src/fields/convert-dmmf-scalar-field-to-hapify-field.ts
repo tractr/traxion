@@ -1,3 +1,4 @@
+import { convertDmmfForeignKeyToHapifyField } from './convert-dmmf-foreign-key-to-hapify-field';
 import {
   createBooleanConstraints,
   createDateConstraints,
@@ -7,10 +8,10 @@ import {
   createObjectConstraints,
   createStringConstraints,
   getPluralName,
-} from './constraints';
-import { extractMetadataFromDocumentation } from './extract-metadata-from-documentation';
-import { PrismaScalarField } from './interfaces';
-import { validations } from './validations';
+} from '../constraints';
+import { extractMetadataFromDocumentation } from '../extract-metadata-from-documentation';
+import { PrismaScalarField } from '../interfaces';
+import { validations } from '../validations';
 
 import {
   createBooleanField,
@@ -19,7 +20,7 @@ import {
   createNumberField,
   createObjectField,
   createStringField,
-  Field,
+  FieldDeclaration,
 } from '@trxn/hapify-core';
 
 /**
@@ -30,16 +31,22 @@ import {
  */
 export function convertDmmfScalarFieldToHapifyField(
   field: PrismaScalarField,
-): Field {
+): FieldDeclaration {
   const { metadata, documentation } = extractMetadataFromDocumentation(
     field.documentation,
     validations,
   );
-  const pluralName = getPluralName(metadata);
+  const pluralName = getPluralName(field, metadata);
   const baseConstraints = createDefaultConstraints(field, metadata);
 
   // Handle fields depending on their type
-  const { type } = field;
+  const { type, isReadOnly } = field;
+
+  // Prisma identify the foreign key as a read only field
+  if (isReadOnly) {
+    return convertDmmfForeignKeyToHapifyField(field, metadata, documentation);
+  }
+
   switch (type) {
     case 'Decimal':
     case 'Float':
@@ -48,6 +55,7 @@ export function convertDmmfScalarFieldToHapifyField(
       return createNumberField(
         field.name,
         {
+          documentation,
           ...baseConstraints,
           ...createNumberConstraints(field, metadata),
         },
@@ -58,6 +66,7 @@ export function convertDmmfScalarFieldToHapifyField(
       return createStringField(
         field.name,
         {
+          documentation,
           ...baseConstraints,
           ...createStringConstraints(field, metadata),
         },
@@ -67,6 +76,7 @@ export function convertDmmfScalarFieldToHapifyField(
       return createBooleanField(
         field.name,
         {
+          documentation,
           ...baseConstraints,
           ...createBooleanConstraints(field, metadata),
         },
@@ -76,6 +86,7 @@ export function convertDmmfScalarFieldToHapifyField(
       return createDateField(
         field.name,
         {
+          documentation,
           ...baseConstraints,
           ...createDateConstraints(field, metadata),
         },
@@ -85,15 +96,17 @@ export function convertDmmfScalarFieldToHapifyField(
       return createFileField(
         field.name,
         {
+          documentation,
           ...baseConstraints,
           ...createFileConstraints(field, metadata),
         },
         { pluralName },
       );
-    case 'JSON':
+    case 'Json':
       return createObjectField(
         field.name,
         {
+          documentation,
           ...baseConstraints,
           ...createObjectConstraints(field, metadata),
         },

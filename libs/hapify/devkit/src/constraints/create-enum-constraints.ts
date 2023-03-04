@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { DMMF } from '@prisma/client/runtime';
+import type { DMMF } from '@prisma/generator-helper';
 
 import { BaseConstraints, EnumConstraints } from '@trxn/hapify-core';
 
@@ -11,6 +11,7 @@ export function createEnumConstraints(
 } {
   const { hasDefaultValue, default: defaultValue } = field;
   return {
+    scalar: 'string',
     defaultValue:
       hasDefaultValue &&
       typeof defaultValue === 'object' &&

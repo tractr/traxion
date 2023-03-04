@@ -1,7 +1,11 @@
+import { DMMF } from '@prisma/generator-helper';
+import { plural } from 'pluralize';
+
 export function getPluralName(
+  field: DMMF.Field,
   metadata: Record<string, unknown> = {},
-): string | undefined {
+): string {
   return typeof metadata.pluralName === 'string'
     ? metadata.pluralName
-    : undefined;
+    : plural(field.name);
 }

@@ -29,7 +29,7 @@ export type PrismaScalarFieldType =
   | 'Decimal'
   | 'Float'
   | 'Int'
-  | 'JSON'
+  | 'Json'
   | 'String';
 
 /**

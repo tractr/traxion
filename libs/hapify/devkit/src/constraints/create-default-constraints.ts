@@ -1,14 +1,11 @@
-import type { DMMF } from '@prisma/client/runtime';
-
-import { extractMetadataFromDocumentation } from '../extract-metadata-from-documentation';
-import { FieldValidations } from '../interfaces/validations.interface';
+import type { DMMF } from '@prisma/generator-helper';
 
 import { BaseConstraints } from '@trxn/hapify-core';
 
 export function createDefaultConstraints(
   field: DMMF.Field,
   metadata: Record<string, unknown> = {},
-): Omit<BaseConstraints, 'defaultValue'> {
+): Omit<BaseConstraints, 'defaultValue' | 'scalar'> {
   const {
     hasDefaultValue,
     isList,

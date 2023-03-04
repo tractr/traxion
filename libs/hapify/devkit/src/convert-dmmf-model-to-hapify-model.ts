@@ -1,8 +1,13 @@
 import type { DMMF } from '@prisma/generator-helper';
 
-import { convertDmmfFieldToHapifyField } from './convert-dmmf-field-to-hapify-field';
+import { convertDmmfFieldToHapifyField } from './fields';
 
-import { EnumType, Field, getPrimaryFields, Model } from '@trxn/hapify-core';
+import {
+  EnumType,
+  FieldDeclaration,
+  getPrimaryFields,
+  ModelDeclaration,
+} from '@trxn/hapify-core';
 
 /**
  * Convert a DMMF model  object to a Hapify model.
@@ -12,7 +17,7 @@ import { EnumType, Field, getPrimaryFields, Model } from '@trxn/hapify-core';
 export function convertDmmfModelToHapifyModel(
   model: DMMF.Model,
   enums: EnumType[],
-): Model {
+): ModelDeclaration {
   const {
     name,
     documentation,
@@ -24,8 +29,8 @@ export function convertDmmfModelToHapifyModel(
     // uniqueIndexes,
   } = model;
 
-  const fields: Field[] = model.fields.map((field) =>
-    convertDmmfFieldToHapifyField(field, enums),
+  const fields: FieldDeclaration[] = model.fields.flatMap((field) =>
+    convertDmmfFieldToHapifyField(model, field, enums),
   );
 
   return {

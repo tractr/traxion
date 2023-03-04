@@ -13,6 +13,7 @@ import {
   DefaultConstraint,
   isMultipleField,
   isNullField,
+  ScalarConstraint,
 } from './field';
 import { and, not } from '../operators';
 
@@ -24,7 +25,9 @@ export type ObjectField = BaseField<'object', ObjectConstraints>;
 /**
  * Object constraints
  */
-export type ObjectConstraints = BaseConstraints & DefaultConstraint<object>;
+export type ObjectConstraints = BaseConstraints &
+  DefaultConstraint<object> &
+  ScalarConstraint<'object'>;
 
 /**
  * Predicates and helpers

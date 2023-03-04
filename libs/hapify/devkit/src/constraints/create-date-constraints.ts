@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { DMMF } from '@prisma/client/runtime';
+
+import { DMMF } from '@prisma/generator-helper';
 
 import { BaseConstraints, DateConstraints } from '@trxn/hapify-core';
 
@@ -11,6 +12,7 @@ export function createDateConstraints(
 } {
   const { hasDefaultValue, default: defaultValue } = field;
   return {
+    scalar: 'date',
     defaultValue:
       hasDefaultValue &&
       (typeof defaultValue === 'string' || typeof defaultValue === 'number')

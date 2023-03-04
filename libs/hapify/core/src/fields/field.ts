@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
   BaseField,
-  Constraints,
   GetFieldType,
   GetFieldWithConstraints,
   OptionalConstraint,
   PermissionType,
+  RequiredConstraint,
 } from './base-types';
 import type { BooleanField } from './boolean-field';
 import type { DateField } from './date-field';
@@ -32,6 +32,10 @@ export type BaseConstraints = DocumentationConstraint &
   SearchableConstraint &
   SortableConstraint;
 
+export type ScalarType = 'string' | 'number' | 'boolean' | 'object' | 'date';
+
+export type ScalarConstraint<T extends ScalarType | null = null> =
+  RequiredConstraint<'scalar', T>;
 export type DocumentationConstraint = OptionalConstraint<
   'documentation',
   string
@@ -50,8 +54,8 @@ export type PermissionConstraint = OptionalConstraint<
 /**
  * Relation constraints
  */
-export type RelationConstraint = Constraints<'relation', Relation>;
-export type RelationsConstraint = Constraints<'relations', Relation[]>;
+export type RelationConstraint = RequiredConstraint<'relation', Relation>;
+export type RelationsConstraint = RequiredConstraint<'relations', Relation[]>;
 
 /**
  * Common constraints
@@ -138,6 +142,28 @@ export type Field =
   | PrimaryField
   | StringField
   | VirtualField;
+
+export type RelationConstraintDeclaration = {
+  name: string;
+  onDelete: string;
+  from: {
+    model: string;
+    fields: string[];
+  };
+  to: {
+    model: string;
+    fields: string[];
+  };
+};
+
+export type FieldDeclaration<F extends Field = Field> = F extends
+  | VirtualField
+  | ForeignField
+  | PrimaryField
+  ? F extends VirtualField
+    ? Omit<F, 'relation'> & { relation: RelationConstraintDeclaration }
+    : Omit<F, 'relations' | 'relation'>
+  : F;
 
 export type FieldType = GetFieldType<Field>;
 
