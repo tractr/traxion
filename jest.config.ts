@@ -76,5 +76,6 @@ export default {
     '<rootDir>/libs/config/client',
     '<rootDir>/libs/nestjs/mailjet',
     '<rootDir>/libs/hapify/core',
+    '<rootDir>/libs/hapify/generators/nestjs-services',
   ],
 };

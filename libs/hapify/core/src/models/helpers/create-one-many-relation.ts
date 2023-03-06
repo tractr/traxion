@@ -11,7 +11,7 @@ export function createOneManyRelation(
   from: { model: Model; virtual: VirtualField | string },
   to: {
     model: Model;
-    foreign: ForeignField | string;
+    foreign: (ForeignField | string)[];
     virtual: VirtualField | string;
   },
 ) {
@@ -23,8 +23,9 @@ export function createOneManyRelation(
   const toVirtualField: VirtualField =
     typeof to.virtual === 'string' ? virtualField(to.virtual) : to.virtual;
 
-  const toForeignField: ForeignField =
-    typeof to.foreign === 'string' ? foreignField(to.foreign) : to.foreign;
+  let toForeignField: ForeignField[] = to.foreign.map((field) =>
+    typeof field === 'string' ? foreignField(field) : field,
+  );
 
   const relation: OneManyRelation = {
     type: 'oneMany',
@@ -43,11 +44,13 @@ export function createOneManyRelation(
   fromVirtualField.relation = relation;
   from.model.fields.push(fromVirtualField);
 
-  toForeignField.relation = relation;
+  toForeignField = toForeignField.map((field) => ({
+    ...field,
+    relation,
+  }));
   toVirtualField.relation = relation;
 
-  to.model.fields.push(toForeignField);
-  to.model.fields.push(toForeignField);
+  to.model.fields.push(...toForeignField);
   to.model.fields.push(toVirtualField);
 
   return relation;

@@ -4,15 +4,14 @@
 
 import type { BaseField } from './base-types';
 import { createFieldFactory, isFieldFactory } from './factories';
-import type { BaseConstraints } from './field';
+import type { BaseConstraints, ScalarConstraint } from './field';
 
 export type FileField = BaseField<'file', FileConstraints>;
 
 /**
  * Constraints for FileField
  */
-export type FileConstraints = BaseConstraints;
-
+export type FileConstraints = BaseConstraints & ScalarConstraint<'string'>;
 /**
  * Predicates and helpers
  */

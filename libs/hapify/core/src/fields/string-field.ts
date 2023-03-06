@@ -18,6 +18,7 @@ import type {
   DefaultConstraint,
   Field,
   FormatConstraint,
+  ScalarConstraint,
 } from './field';
 
 export type StringField = BaseField<'string', StringConstraints>;
@@ -30,6 +31,7 @@ export type StringConstraints = BaseConstraints &
   MaxLengthConstraint &
   EncryptionConstraint &
   StringFormatConstraint &
+  ScalarConstraint<'string'> &
   DefaultConstraint<string>;
 
 export type MinLengthConstraint = OptionalConstraint<'minLength', number>;

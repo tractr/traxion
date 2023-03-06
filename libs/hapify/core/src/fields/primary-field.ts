@@ -8,10 +8,14 @@ import type {
   ConditionalConstraint,
   Constraints,
   KeyType,
-  RequiredConstraint,
 } from './base-types';
 import { createFieldFactory, isFieldFactory } from './factories';
-import type { BaseConstraints, RelationsConstraint } from './field';
+import { getFieldsByTypeFactory } from './factories/get-fields-by-type-factory';
+import type {
+  BaseConstraints,
+  RelationsConstraint,
+  ScalarConstraint,
+} from './field';
 
 export type PrimaryField = BaseField<
   'primary',
@@ -23,9 +27,8 @@ export type PrimaryField = BaseField<
  */
 export type PrimaryConstraints = BaseConstraints &
   RelationsConstraint &
-  PrimaryType;
+  ScalarConstraint<'string' | 'number'>;
 
-export type PrimaryType = RequiredConstraint<'fieldType', 'string' | 'number'>;
 export type PrimaryMode<C extends Constraints<KeyType, any>> =
   ConditionalConstraint<
     'mode',
@@ -42,6 +45,9 @@ export const createPrimaryField = createFieldFactory('primary');
 export const primaryField = createPrimaryField;
 
 export const isPrimaryField = isFieldFactory('primary');
+
+export const getPrimaryFields = getFieldsByTypeFactory('primary');
+export const getVirtualFields = getFieldsByTypeFactory('virtual');
 
 /**
  * Type helpers

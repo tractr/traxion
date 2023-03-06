@@ -9,8 +9,6 @@ import { Command } from 'commander/esm.mjs';
 import debug from 'debug';
 import { $ } from 'zx';
 
-$.verbose = false;
-
 const log = debug('local-install');
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -18,6 +16,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const program = new Command();
 
 program
+  .option('--verbose', 'display some log', false)
   .option('-p, --projects <projects>', 'project list separated by comma', '')
   .option('--install', 'install the package dependencies', false)
   .option(
@@ -29,6 +28,8 @@ program.parse(argv);
 
 const options = program.opts();
 const { targetDir, projects: projectsWithComma, install } = options;
+
+$.verbose = options.verbose;
 
 const projectsWanted = projectsWithComma
   .split(',')
@@ -44,10 +45,20 @@ const packagesToInstall = [];
 const toCopy = [];
 
 for (const [projectName, project] of projects) {
-  if (projectsWanted.length > 0 && !projectsWanted.includes(projectName))
+  if (projectsWanted.length > 0 && !projectsWanted.includes(projectName)) {
     continue;
-  if (project.type === 'application') continue;
-  if (!project.targets.publish || !project.targets.build) continue;
+  }
+  if (project.type === 'application') {
+    console.warn(`Skipping ${projectName} because it is an application`);
+    continue;
+  }
+  if (!project.targets.publish && !project.targets.build) {
+    console.warn(
+      project.targets,
+      `Skipping ${projectName} because it has no publish or build target`,
+    );
+    continue;
+  }
 
   const outputPath = (
     project.targets.build.options.outputPath || project.targets.build.outputs[0]
@@ -72,7 +83,7 @@ for (const [projectName, project] of projects) {
     );
 }
 
-log(`Installing dependencies`);
+log(`Installing dependencies ${packagesToInstall}`);
 if (install) await $`npm install -f ${packagesToInstall}`;
 
 for (const [source, target, packageJson] of toCopy) {

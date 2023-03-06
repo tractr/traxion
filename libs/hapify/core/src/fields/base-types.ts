@@ -128,8 +128,8 @@ export type GetFieldType<F extends BaseField<string, any>> = F extends {
  * type F = ExtractField<A | B | C | D | E, 'string'>; // F = A | D
  */
 export type ExtractField<
-  F extends BaseField<string, Constraints<KeyType, any>>,
   T extends string,
+  F extends BaseField = Field,
 > = F extends BaseField<T, Constraints<KeyType, any>>
   ? Extract<F, { type: T }>
   : never;
@@ -148,10 +148,9 @@ export type ExtractField<
  * type F = GetField<BaseField<'string'> | BaseField<'number'>, 'boolean'>; // Type error (boolean)
  */
 export type GetField<
-  F extends BaseField<string, Constraints<KeyType, any>>,
-  T extends GetFieldType<F> = GetFieldType<F>,
-  AF extends BaseField<string, Constraints<KeyType, any>> = Field,
-> = ExtractField<AF, T>;
+  F extends BaseField,
+  AF extends BaseField = Field,
+> = ExtractField<GetFieldType<F>, AF>;
 
 /**
  * Extract the shared constraints from fields

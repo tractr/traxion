@@ -4,7 +4,11 @@
 
 import type { BaseField } from './base-types';
 import { createFieldFactory, isFieldFactory } from './factories';
-import type { BaseConstraints, DefaultConstraint } from './field';
+import type {
+  BaseConstraints,
+  DefaultConstraint,
+  ScalarConstraint,
+} from './field';
 
 export type BooleanField = BaseField<'boolean', BooleanConstraints>;
 
@@ -14,7 +18,9 @@ export type BooleanField = BaseField<'boolean', BooleanConstraints>;
 /**
  * Boolean constraints
  */
-export type BooleanConstraints = BaseConstraints & DefaultConstraint<number>;
+export type BooleanConstraints = BaseConstraints &
+  ScalarConstraint<'boolean'> &
+  DefaultConstraint<number>;
 
 /**
  * Predicates and helpers
