@@ -49,6 +49,11 @@ generatorHandler({
     try {
       logger.log(`Convert DMMF to Hapify schema declaration`);
       const schema = createSchema(convertDmmfToHapifySchemaDeclaration(dmmf));
+
+      // Create the nestjs services
+      // await hapifyNestjsServicesGenerator(project, schema, generator.config);
+
+      // Write the schema to the output directory
       fs.writeFileSync(
         path.join(outputDirectory, 'hapify.json'),
         inspect(schema, true, 10),
@@ -57,9 +62,6 @@ generatorHandler({
       logger.error(error);
       throw error;
     }
-
-    // Generate services
-    // hapifyNestjsServicesGenerator(schema);
 
     // Remove unused imports
     project

@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { getModel } from './get-model';
 import {
   FieldDeclaration,
+  ForeignField,
   isField,
   isForeignField,
   VirtualField,
@@ -17,70 +19,60 @@ export function createOneManyRelation(
   const field1 = virtualFields[0];
   const field2 = virtualFields[1];
 
-  let fromFieldDeclaration: Omit<VirtualField, 'relation'> & FieldDeclaration =
+  /**
+   * A has many B
+   * A is the one side of the relation, the primary key and isMultiple
+   * B is the many side of the relation, the foreign key and !isMultiple
+   *
+   * In prisma B is the one who hold all the information of the relation
+   */
+
+  let oneDeclaration: Omit<VirtualField, 'relation'> & FieldDeclaration =
     field1;
-  let toFieldDeclaration: Omit<VirtualField, 'relation'> & FieldDeclaration =
+  let manyDeclaration: Omit<VirtualField, 'relation'> & FieldDeclaration =
     field2;
 
-  if (field1.isMultiple) {
-    fromFieldDeclaration = field2;
-    toFieldDeclaration = field1;
+  if (field2.isMultiple) {
+    oneDeclaration = field2;
+    manyDeclaration = field1;
   }
 
-  // The difference between the to and from key of prisma and the to and from
-  // key of hapify is in prisma the from and to refer to the field itself inside the relation
-  // in hapify the from and to refer to the direction of the relation
+  const fromModelName = manyDeclaration.relation.from.model;
+  const fromModel = getModel(fromModelName, models);
 
-  // In a one many relation all the information in prisma is hold by the prisma from relation field
-  // In this relation declaration field, the from key is selfed targeted and
-  // the to key is the primary key of the hapify from model
-  const primaryModel = getModel(
-    fromFieldDeclaration.relation.from.model,
-    models,
-  );
-
-  if (!primaryModel) {
+  if (!fromModel) {
     throw new Error(
-      `Model ${fromFieldDeclaration.relation.from.model} not found for relation ${relationName}`,
+      `Model ${fromModelName} not found for relation ${relationName}`,
     );
   }
 
   // We use the from key of the relation declaration field to get the to model
-  const foreignModelDeclaration = getModel(
-    toFieldDeclaration.relation.from.model,
-    definition.models,
-  );
-  const foreignModel = getModel(fromFieldDeclaration.relation.to.model, models);
+  const toModelName = manyDeclaration.relation.to.model;
+  const toModel = getModel(toModelName, models);
 
-  if (!foreignModel) {
+  if (!toModel) {
     throw new Error(
-      `Model ${fromFieldDeclaration.relation.to.model} not found for relation ${relationName}`,
+      `Model ${toModelName} not found for relation ${relationName}`,
     );
   }
 
   // Create the future from fields (virtual) and add them to the model
-  const fromVirtualField: VirtualField = {
-    ...fromFieldDeclaration,
-  } as unknown as VirtualField;
+  const { relation: unusedFromRelation, ...fromVirtualField } = oneDeclaration;
 
   // Create the future to fields (virtual) and add them to the model
-  const toVirtualField: VirtualField = {
-    ...toFieldDeclaration,
-  } as unknown as VirtualField;
+  const { relation: unusedToRelation, ...toVirtualField } = manyDeclaration;
 
-  // Create the foreign field from the RelationDeclaration
   // FIXME: Prisma allow multiple foreign fields in a relation
-  const toForeignField = {
-    ...foreignModelDeclaration?.fields
-      .filter(isForeignField)
-      .find(
-        (field) => field.name === toFieldDeclaration.relation.from.fields[0],
-      ),
-  };
+  const foreignFields = manyDeclaration.relation.to.fields;
+  const toForeignField = getModel(toModelName, definition.models)
+    ?.fields.filter(isForeignField)
+    .filter((field) => foreignFields.includes(field.name));
 
-  if (!isField(toForeignField)) {
+  if (!Array.isArray(toForeignField) || toForeignField?.length === 0) {
     throw new Error(
-      `Foreign field ${toFieldDeclaration.relation.to.fields[0]} not found in model ${foreignModel.name} for relation ${relationName}`,
+      `Foreign field ${foreignFields.join(
+        ', ',
+      )} not found in model ${toModelName} for relation ${relationName}`,
     );
   }
 
@@ -89,24 +81,27 @@ export function createOneManyRelation(
     type: 'oneMany',
     name: relationName,
     from: {
-      model: primaryModel,
-      virtual: fromVirtualField,
+      model: fromModel,
+      virtual: fromVirtualField as VirtualField,
     },
     to: {
-      model: foreignModel,
-      virtual: toVirtualField,
-      foreign: toForeignField,
+      model: toModel,
+      virtual: toVirtualField as VirtualField,
+      foreign: toForeignField as ForeignField[],
     },
   };
 
   // Add the relation to the fields
   relation.from.virtual.relation = relation;
   relation.to.virtual.relation = relation;
-  relation.to.foreign.relation = relation;
+  relation.to.foreign = relation.to.foreign.map((field) => ({
+    ...field,
+    relation,
+  }));
 
-  primaryModel.fields.push(relation.from.virtual);
-  foreignModel.fields.push(relation.to.virtual);
-  foreignModel.fields.push(relation.to.foreign);
+  fromModel.fields.push(relation.from.virtual);
+  toModel.fields.push(relation.to.virtual);
+  toModel.fields.push(...relation.to.foreign);
 
   return relation;
 }

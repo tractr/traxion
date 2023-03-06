@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 import { createManyManyRelation } from './create-many-many-relation';
 import { createOneManyRelation } from './create-one-many-relation';
 import { createOneOneRelation } from './create-one-one-relation';
@@ -53,7 +54,7 @@ export function createSchema(definition: SchemaDeclaration) {
   const models: Model[] = definition.models.map((model) => {
     const fields: Field[] = model.fields
       // FIXME: filter are not working with FieldDeclaration
-      .filter(not(and(isVirtualField, isForeignField))) as Field[];
+      .filter(and(not(isVirtualField), not(isForeignField))) as Field[];
 
     return {
       fields,
@@ -67,11 +68,15 @@ export function createSchema(definition: SchemaDeclaration) {
   });
 
   const relations: Relation[] = [];
-  Object.keys(virtualFields).forEach((relationName) => {
-    const fields = virtualFields[relationName];
+  // We need to use for loop to be able to run synchronously to not loose the model references
+  for (const [relationName, fields] of Object.entries(virtualFields)) {
+    if (fields.length !== 2) {
+      throw new Error(
+        `Relation ${relationName} must have 2 fields, found ${fields.length}`,
+      );
+    }
 
-    const field1 = fields[0];
-    const field2 = fields[1];
+    const [field1, field2] = fields;
 
     let relationType;
     if (field1.isMultiple && field2.isMultiple) relationType = 'manyMany';
@@ -80,28 +85,62 @@ export function createSchema(definition: SchemaDeclaration) {
 
     let relation: Relation | null = null;
 
-    if (relationType === 'oneOne') {
-      relation = createOneOneRelation(relationName, definition, models, fields);
-    } else if (relationType === 'oneMany') {
-      relation = createOneManyRelation(
-        relationName,
-        definition,
-        models,
-        fields,
-      );
-    } else if (relationType === 'manyMany') {
-      relation = createManyManyRelation(
-        relationName,
-        definition,
-        models,
-        fields,
-      );
+    switch (relationType) {
+      case 'oneOne':
+        relation = createOneOneRelation(
+          relationName,
+          definition,
+          models,
+          fields,
+        );
+        break;
+      case 'oneMany':
+        relation = createOneManyRelation(
+          relationName,
+          definition,
+          models,
+          fields,
+        );
+        break;
+      case 'manyMany':
+        relation = createManyManyRelation(
+          relationName,
+          definition,
+          models,
+          fields,
+        );
+        break;
+      default:
+        break;
     }
 
     if (relation) relations.push(relation);
+  }
+
+  // Now we need for each relation to add the ref to the primary keys
+  relations.forEach((relation) => {
+    switch (relation.type) {
+      case 'oneOne':
+      case 'oneMany':
+        relation.from.model.primaryKey?.fields.forEach((field) => {
+          field.relations.push(relation);
+        });
+        break;
+      case 'manyMany':
+        relation.from.model.primaryKey?.fields.forEach((field) => {
+          field.relations.push(relation);
+        });
+        relation.to.model.primaryKey?.fields.forEach((field) => {
+          field.relations.push(relation);
+        });
+        break;
+      default:
+        break;
+    }
   });
 
   return {
+    enums: definition.enums,
     models,
     relations,
   };

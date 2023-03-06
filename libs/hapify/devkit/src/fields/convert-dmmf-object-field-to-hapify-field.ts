@@ -10,7 +10,7 @@ export function convertDmmfObjectFieldToHapifyField(
   field: PrismaObjectField,
   metadata?: Record<string, unknown>,
   documentation?: string,
-): FieldDeclaration[] {
+): FieldDeclaration {
   const pluralName = getPluralName(field, metadata);
   const baseConstraints = createDefaultConstraints(field, metadata);
   // "kind": "object",
@@ -23,26 +23,35 @@ export function convertDmmfObjectFieldToHapifyField(
 
   const { name } = field;
 
-  return [
-    {
-      name,
-      type: 'virtual',
-      scalar: null,
-      pluralName,
-      documentation,
-      ...baseConstraints,
-      relation: {
-        name: field.relationName,
-        onDelete: field.relationOnDelete,
-        from: {
-          model: model.name,
-          fields: field.relationFromFields,
-        },
-        to: {
-          model: field.type,
-          fields: field.relationToFields,
-        },
-      },
+  // If is a list that we are in the many side of the relation
+  // If not a list that we are in the one side of the relation
+  // Prisma define the information of the relation always on the foreign key field
+  // Moreover the from -> to relation in prisma is relative to the field and not
+  // absolute to the relation (the relation is always from primary to the foreign key)
+
+  const {
+    type,
+    relationFromFields,
+    relationName,
+    relationOnDelete,
+    relationToFields,
+  } = field;
+
+  const from = { model: type, fields: relationToFields };
+  const to = { model: model.name, fields: relationFromFields };
+
+  return {
+    name,
+    type: 'virtual',
+    scalar: null,
+    pluralName,
+    documentation,
+    ...baseConstraints,
+    relation: {
+      name: relationName,
+      onDelete: relationOnDelete,
+      from,
+      to,
     },
-  ];
+  };
 }

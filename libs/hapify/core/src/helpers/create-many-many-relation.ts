@@ -1,11 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { getModel } from './get-model';
-import {
-  FieldDeclaration,
-  isField,
-  isForeignField,
-  isUniqueField,
-  VirtualField,
-} from '../fields';
+import { FieldDeclaration, VirtualField } from '../fields';
 import { ManyManyRelation, Model } from '../models';
 import { SchemaDeclaration } from '../schema';
 
@@ -18,86 +13,56 @@ export function createManyManyRelation(
   const field1 = virtualFields[0];
   const field2 = virtualFields[1];
 
-  let fromFieldDeclaration: Omit<VirtualField, 'relation'> & FieldDeclaration =
+  const many1Declaration: Omit<VirtualField, 'relation'> & FieldDeclaration =
     field1;
-  let toFieldDeclaration: Omit<VirtualField, 'relation'> & FieldDeclaration =
+  const many2Declaration: Omit<VirtualField, 'relation'> & FieldDeclaration =
     field2;
 
-  if (field2.relation.from.fields.length === 0) {
-    fromFieldDeclaration = field2;
-    toFieldDeclaration = field1;
-  }
-  // The difference between the to and from key of prisma and the to and from
-  // key of hapify is in prisma the from and to refer to the field itself inside the relation
-  // in hapify the from and to refer to the direction of the relation
+  /**
+   * A has many B and B has many A
+   * A is the many side of the relation, the primary key and isMultiple
+   * B is the many side of the relation, the primary key and isMultiple
+   *
+   * They are no foreign key in this relation
+   *
+   * The direction of the relation is not important in a many to many relation
+   */
 
-  // In a one one relation all the information in prisma is hold by the prisma to relation field
-  // In this relation declaration field, the from key is selfed targeted and
-  // the to key is the primary key of the hapify from model
-  const primaryModel = getModel(toFieldDeclaration.relation.to.model, models);
+  const firstModelName = many1Declaration.relation.from.model;
+  const firstModel = getModel(many1Declaration.relation.from.model, models);
 
-  if (!primaryModel) {
+  if (!firstModel) {
     throw new Error(
-      `Model ${fromFieldDeclaration.relation.from.model} not found for relation ${relationName}`,
+      `Model ${firstModelName} not found for relation ${relationName}`,
     );
   }
 
-  // We use the from key of the relation declaration field to get the to model
-  const foreignModelDeclaration = getModel(
-    toFieldDeclaration.relation.from.model,
-    definition.models,
-  );
-  const foreignModel = getModel(toFieldDeclaration.relation.from.model, models);
+  const secondModelName = many1Declaration.relation.to.model;
+  const secondModel = getModel(secondModelName, models);
 
-  if (!foreignModel) {
+  if (!secondModel) {
     throw new Error(
-      `Model ${toFieldDeclaration.relation.to.model} not found for relation ${relationName}`,
+      `Model ${secondModelName} not found for relation ${relationName}`,
     );
   }
 
   // Create the future from fields (virtual) and add them to the model
-  const fromVirtualField: VirtualField = {
-    ...fromFieldDeclaration,
-  } as unknown as VirtualField;
+  const { relation: unused1Relation, ...firstVirtualField } = many1Declaration;
 
   // Create the future to fields (virtual) and add them to the model
-  const toVirtualField: VirtualField = {
-    ...fromFieldDeclaration,
-  } as unknown as VirtualField;
-
-  // Create the foreign field from the RelationDeclaration
-  // FIXME: Prisma allow multiple foreign fields in a relation
-  const toForeignField = {
-    ...foreignModelDeclaration?.fields
-      .filter(isForeignField)
-      .find(
-        (field) => field.name === toFieldDeclaration.relation.from.fields[0],
-      ),
-  };
-
-  if (!isField(toForeignField)) {
-    throw new Error(
-      `Foreign field ${toFieldDeclaration.relation.to.fields[0]} not found in model ${foreignModel.name} for relation ${relationName}`,
-    );
-  }
-
-  if (!isUniqueField(toForeignField)) {
-    throw new Error(
-      `Foreign field ${toFieldDeclaration.relation.to.fields[0]} in model ${foreignModel.name} for relation ${relationName} is not unique`,
-    );
-  }
+  const { relation: unused2Relation, ...secondVirtualField } = many2Declaration;
 
   // Create the relation
   const relation: ManyManyRelation = {
     type: 'manyMany',
     name: relationName,
     from: {
-      model: primaryModel,
-      virtual: fromVirtualField,
+      model: firstModel,
+      virtual: firstVirtualField as VirtualField,
     },
     to: {
-      model: foreignModel,
-      virtual: toVirtualField,
+      model: secondModel,
+      virtual: secondVirtualField as VirtualField,
     },
   };
 
@@ -105,8 +70,8 @@ export function createManyManyRelation(
   relation.from.virtual.relation = relation;
   relation.to.virtual.relation = relation;
 
-  primaryModel.fields.push(relation.from.virtual);
-  foreignModel.fields.push(relation.to.virtual);
+  firstModel.fields.push(relation.from.virtual);
+  secondModel.fields.push(relation.to.virtual);
 
   return relation;
 }

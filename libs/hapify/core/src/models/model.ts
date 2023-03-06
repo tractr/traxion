@@ -24,21 +24,7 @@ export type OneManyRelation = {
   };
   to: {
     model: Model;
-    foreign: ForeignField;
-    virtual: VirtualField;
-  };
-};
-
-export type OneManyRelationDeclaration = {
-  type: 'oneMany';
-  name: string;
-  from: {
-    model: ModelDeclaration;
-    virtual: VirtualField;
-  };
-  to: {
-    model: ModelDeclaration;
-    foreign: ForeignField;
+    foreign: ForeignField[];
     virtual: VirtualField;
   };
 };
@@ -59,18 +45,6 @@ export type ManyManyRelation = {
   };
 };
 
-export type ManyManyRelationDeclaration = {
-  type: 'manyMany';
-  name: string;
-  from: {
-    model: ModelDeclaration;
-    virtual: VirtualField;
-  };
-  to: {
-    model: ModelDeclaration;
-    virtual: VirtualField;
-  };
-};
 /**
  * One to one relation
  */
@@ -83,21 +57,7 @@ export type OneOneRelation = {
   };
   to: {
     model: Model;
-    foreign: IsConstraints<ForeignField, 'isUnique'>;
-    virtual: VirtualField;
-  };
-};
-
-export type OneOneRelationDeclaration = {
-  type: 'oneOne';
-  name: string;
-  from: {
-    model: Model;
-    virtual: VirtualField;
-  };
-  to: {
-    model: ModelDeclaration;
-    foreign: ForeignField;
+    foreign: IsConstraints<ForeignField, 'isUnique'>[];
     virtual: VirtualField;
   };
 };
@@ -106,11 +66,6 @@ export type OneOneRelationDeclaration = {
  * The relation type
  */
 export type Relation = OneManyRelation | ManyManyRelation | OneOneRelation;
-
-export type RelationDeclaration =
-  | OneManyRelationDeclaration
-  | ManyManyRelationDeclaration
-  | OneOneRelationDeclaration;
 
 export interface PrimaryKey {
   name: string | null;

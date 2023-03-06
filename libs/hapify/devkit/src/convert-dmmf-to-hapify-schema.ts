@@ -26,5 +26,5 @@ export function convertDmmfToHapifySchemaDeclaration(
   // Create a function using createOneToOneRelation and createOneToManyRelation
 
   // Fourth: return the schema
-  return { models };
+  return { models, enums };
 }
