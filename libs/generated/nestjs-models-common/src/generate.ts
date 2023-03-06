@@ -32,7 +32,7 @@ const userModel: Model = {
   name: 'User',
   fields: [
     userId,
-    // stringField('password', { isPassword: true }),
+    stringField('password', { isEncrypted: true }),
     stringField('email'),
     // enumField('test', { enum: MonEnum }),
   ],

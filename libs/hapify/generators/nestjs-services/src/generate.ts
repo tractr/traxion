@@ -11,7 +11,7 @@ import {
   generateProviderSourceFile,
 } from './generators/provider/providers.generator';
 import { generateConstantSourceFile } from './generators/service/constant.generator';
-import { generateDatabaseServiceSourceFile } from './generators/service/database-service.generator';
+import { generateServiceDefaultSourceFile } from './generators/service/service-defaults.generator';
 import { generateServiceSourceFile } from './generators/service/service.generator';
 import {
   generateDirectoryIndexExporter,
@@ -66,7 +66,7 @@ export function generate(
   // Generate services, contants and providers
   dataModel.models.forEach((model) => {
     generateServiceSourceFile(project, model, entityPath);
-    generateDatabaseServiceSourceFile(project, model, entityPath);
+    generateServiceDefaultSourceFile(project, model, entityPath);
     generateConstantSourceFile(project, model, `${entityPath}`);
     generateProviderSourceFile(
       project,

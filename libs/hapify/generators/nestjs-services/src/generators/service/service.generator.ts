@@ -24,7 +24,7 @@ export function generateServiceClass(model: Model): ClassDeclarationStructure {
   const constructor = generateConstructor();
 
   const methods = [
-    ...generateDefaultInternalsMethod(),
+    // ...generateDefaultInternalsMethod(),
     generateFindUniqueMethod(model),
     generateFindFirstMethod(model),
     generateFindManyMethod(model),

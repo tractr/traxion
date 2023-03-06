@@ -41,7 +41,7 @@ export function generateModuleDefinitionSourceFile(
               ...options,
               imports: [...(options.imports || []), ...(extras.imports || [])],
               providers: [...(options.providers || []), ...(extras.providers || [])],
-            }),
+            }),  //TODO: make use of internal trxn helpers
         )
         .build()`,
       },
