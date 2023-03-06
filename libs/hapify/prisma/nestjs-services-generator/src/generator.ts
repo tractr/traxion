@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 import * as fs from 'fs';
 import * as path from 'path';
 import { inspect } from 'util';
 
-=======
->>>>>>> 46cecc2ea (feat: add prisma generator nestjs services library (#588))
 import { generatorHandler } from '@prisma/generator-helper';
 import { logger } from '@prisma/sdk';
 import { Project } from 'ts-morph';
@@ -44,11 +41,27 @@ generatorHandler({
     // Clear generation directory
     project.getDirectory(outputDirectory)?.clear();
 
-    // Convert dmmf to Hapify model
-    // const schema = convertDmmfToSchema(dmmf);
+    fs.writeFileSync(
+      path.join(outputDirectory, 'dmmf.json'),
+      JSON.stringify(dmmf.datamodel, null, 2),
+    );
 
-    // Generate services
-    // hapifyNestjsServicesGenerator(schema);
+    try {
+      logger.log(`Convert DMMF to Hapify schema declaration`);
+      const schema = createSchema(convertDmmfToHapifySchemaDeclaration(dmmf));
+
+      // Create the nestjs services
+      // await hapifyNestjsServicesGenerator(project, schema, generator.config);
+
+      // Write the schema to the output directory
+      fs.writeFileSync(
+        path.join(outputDirectory, 'hapify.json'),
+        inspect(schema, true, 10),
+      );
+    } catch (error) {
+      logger.error(error);
+      throw error;
+    }
 
     // Remove unused imports
     project
