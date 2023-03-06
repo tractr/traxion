@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { hasSomeFieldFactory } from './factories';
 import {
   BaseField,
   Constraints,
   Field,
+  FieldDeclaration,
   FieldType,
   ForeignField,
   IsConstraints,
+  PrimaryField,
   VirtualField,
 } from '../fields';
-import { hasSomeFieldFactory } from './factories';
 
 /**
  * One to many relation
@@ -22,7 +24,7 @@ export type OneManyRelation = {
   };
   to: {
     model: Model;
-    foreign: ForeignField;
+    foreign: ForeignField[];
     virtual: VirtualField;
   };
 };
@@ -47,7 +49,7 @@ export type ManyManyRelation = {
  * One to one relation
  */
 export type OneOneRelation = {
-  type: 'manyMany';
+  type: 'oneOne';
   name: string;
   from: {
     model: Model;
@@ -55,7 +57,7 @@ export type OneOneRelation = {
   };
   to: {
     model: Model;
-    foreign: IsConstraints<ForeignField, 'isUnique'>;
+    foreign: IsConstraints<ForeignField, 'isUnique'>[];
     virtual: VirtualField;
   };
 };
@@ -65,12 +67,31 @@ export type OneOneRelation = {
  */
 export type Relation = OneManyRelation | ManyManyRelation | OneOneRelation;
 
+export interface PrimaryKey {
+  name: string | null;
+  fields: PrimaryField[];
+}
+
+export interface PrimaryKeyDeclaration {
+  name: string | null;
+  fields: string[];
+}
+
 /**
  * The model type
  */
 export type Model = {
   name: string;
   fields: Field[];
+  primaryKey: PrimaryKey | null;
+  documentation?: string;
+};
+
+export type ModelDeclaration = {
+  name: string;
+  fields: FieldDeclaration[];
+  primaryKey: PrimaryKeyDeclaration | null;
+  documentation?: string;
 };
 
 /**

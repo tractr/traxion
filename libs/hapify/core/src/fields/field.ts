@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
   BaseField,
-  Constraints,
   GetFieldType,
   GetFieldWithConstraints,
   OptionalConstraint,
   PermissionType,
+  RequiredConstraint,
 } from './base-types';
 import type { BooleanField } from './boolean-field';
 import type { DateField } from './date-field';
@@ -23,17 +23,26 @@ import type { Relation } from '../models';
 /**
  * Field Base constraints
  */
-export type BaseConstraints = LabelConstraint &
+export type BaseConstraints = DocumentationConstraint &
+  LabelConstraint &
   UniqueConstraint &
-  NullConstraint &
+  IsRequiredConstraint &
   DefaultConstraint &
   MultipleConstraint &
   SearchableConstraint &
   SortableConstraint;
 
+export type ScalarType = 'string' | 'number' | 'boolean' | 'object' | 'date';
+
+export type ScalarConstraint<T extends ScalarType | null = null> =
+  RequiredConstraint<'scalar', T>;
+export type DocumentationConstraint = OptionalConstraint<
+  'documentation',
+  string
+>;
 export type LabelConstraint = OptionalConstraint<'isLabel', boolean>;
 export type UniqueConstraint = OptionalConstraint<'isUnique', boolean>;
-export type NullConstraint = OptionalConstraint<'isNull', boolean>;
+export type IsRequiredConstraint = OptionalConstraint<'isRequired', boolean>;
 export type MultipleConstraint = OptionalConstraint<'isMultiple', boolean>;
 export type SearchableConstraint = OptionalConstraint<'isSearchable', boolean>;
 export type SortableConstraint = OptionalConstraint<'isSortable', boolean>;
@@ -45,8 +54,8 @@ export type PermissionConstraint = OptionalConstraint<
 /**
  * Relation constraints
  */
-export type RelationConstraint = Constraints<'relation', Relation>;
-export type RelationsConstraint = Constraints<'relations', Relation[]>;
+export type RelationConstraint = RequiredConstraint<'relation', Relation>;
+export type RelationsConstraint = RequiredConstraint<'relations', Relation[]>;
 
 /**
  * Common constraints
@@ -60,6 +69,8 @@ export type FormatConstraint<T> = OptionalConstraint<'format', T>;
 /**
  * Check if field match this constraint
  */
+export type DocumentationSettable<F extends BaseField> =
+  GetFieldWithConstraints<F, DocumentationConstraint>;
 export type LabelSettable<F extends BaseField> = GetFieldWithConstraints<
   F,
   LabelConstraint
@@ -70,7 +81,7 @@ export type UniqueSettable<F extends BaseField> = GetFieldWithConstraints<
 >;
 export type NullSettable<F extends BaseField> = GetFieldWithConstraints<
   F,
-  NullConstraint
+  IsRequiredConstraint
 >;
 export type DefaultValueSettable<F extends BaseField> = GetFieldWithConstraints<
   F,
@@ -104,6 +115,7 @@ export type FormatSettable<F extends BaseField> = GetFieldWithConstraints<
 /**
  * List of Field that match this constraints
  */
+export type DocumentationSettableField = DocumentationSettable<Field>;
 export type LabelSettableField = LabelSettable<Field>;
 export type UniqueSettableField = UniqueSettable<Field>;
 export type NullSettableField = NullSettable<Field>;
@@ -131,6 +143,28 @@ export type Field =
   | StringField
   | VirtualField;
 
+export type RelationConstraintDeclaration = {
+  name: string;
+  onDelete: string;
+  from: {
+    model: string;
+    fields: string[];
+  };
+  to: {
+    model: string;
+    fields: string[];
+  };
+};
+
+export type FieldDeclaration<F extends Field = Field> = F extends
+  | VirtualField
+  | ForeignField
+  | PrimaryField
+  ? F extends VirtualField
+    ? Omit<F, 'relation'> & { relation: RelationConstraintDeclaration }
+    : Omit<F, 'relations' | 'relation'>
+  : F;
+
 export type FieldType = GetFieldType<Field>;
 
 /**
@@ -143,9 +177,10 @@ export const isSearchableField = isConstraintFactory('isSearchable');
 export const isMultipleField = isConstraintFactory('isMultiple');
 export const isSortableField = isConstraintFactory('isSortable');
 
+export const hasDocumentationConstraint = hasConstraintFactory('documentation');
 export const hasLabelConstraint = hasConstraintFactory('label');
 export const hasUniqueConstraint = hasConstraintFactory('isUnique');
-export const hasNullConstraint = hasConstraintFactory('isNull');
+export const hasIsRequiredConstraint = hasConstraintFactory('isNull');
 export const hasDefaultConstraint = hasConstraintFactory('defaultValue');
 export const hasSearchableConstraint = hasConstraintFactory('isSearchable');
 export const hasMultipleConstraint = hasConstraintFactory('isMultiple');

@@ -73,8 +73,12 @@
       "@trxn/hapify-common": ["libs/hapify/hapify-common/src/index.ts"],
       "@trxn/hapify-config": ["libs/config/hapify/src/index.ts"],
       "@trxn/hapify-core": ["libs/hapify/core/src/index.ts"],
+      "@trxn/hapify-devkit": ["libs/hapify/devkit/src/index.ts"],
       "@trxn/hapify-generate-config": [
         "libs/hapify/generate-config/src/index.ts"
+      ],
+      "@trxn/hapify-generators-nestjs-services": [
+        "libs/hapify/generators/nestjs-services/src/index.ts"
       ],
       "@trxn/hapify-prisma-nestjs-services-generator": [
         "libs/hapify/prisma/nestjs-services-generator/src/index.ts"

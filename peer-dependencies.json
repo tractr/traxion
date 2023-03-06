@@ -17,7 +17,7 @@
   "@nrwl/*": "^15.0.0",
   "@prisma/client": "^4.0.0",
   "@schematics/angular": "^15.0.0",
-  "@trxn/*": "^2.0.0",
+  "@trxn/*": "^2.1.0",
   "class-transformer": "~0.5.0",
   "class-validator": "~0.13.0",
   "commitizen": "^4.0.0",
