@@ -189,9 +189,8 @@ export class <<Model pascal>>Resolver {
 	
     <<if Fields ownership>>
     return this.prisma.$transaction(async (prisma) => {
-      const <<Model camel>> = await this.<<Model camel>>Service.create(
+      const <<Model camel>> = await prisma.<<Model camel>>.create(
         { data, ...select },
-        prisma.<<Model camel>>
       );
 	
       if(abilities?.cannot(
@@ -226,9 +225,8 @@ export class <<Model pascal>>Resolver {
 	
     <<if Fields ownership>>
     return this.prisma.$transaction(async (prisma) => {
-      const <<Model camel>> = await this.<<Model camel>>Service.update(
+      const <<Model camel>> = await prisma.<<Model camel>>.update(
         { where, data, ...select },
-        prisma.<<Model camel>>
       );
 	
       if(abilities?.cannot(
@@ -263,9 +261,8 @@ export class <<Model pascal>>Resolver {
 	
     <<if Fields ownership>>
     return this.prisma.$transaction(async (prisma) => {
-      const <<Model camel>> = await this.<<Model camel>>Service.delete(
+      const <<Model camel>> = await prisma.<<Model camel>>.delete(
         { where, ...select },
-        prisma.<<Model camel>>
       );
 	
       if(abilities?.cannot(
