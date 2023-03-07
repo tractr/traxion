@@ -2,11 +2,7 @@
   "compilerOptions": {
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
     "outDir": "../../../dist/out-tsc",
-    "strict": true,
     "target": "esnext",
     "types": ["node"]
   },

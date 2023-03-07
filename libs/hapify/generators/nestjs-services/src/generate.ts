@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import * as path from 'path';
-import * as fs from 'fs';
 
 import { Project } from 'ts-morph';
 
@@ -21,10 +19,7 @@ import {
 
 import { Schema } from '@trxn/hapify-core';
 
-
 export type NestjsServiceGeneratorConfig = {
-  outputDirectory: string;
-  tsConfigFilePath: string;
   generatedDirectory: string;
 };
 
@@ -33,69 +28,51 @@ export function hapifyNestjsServicesGenerator(
   dataModel: Schema,
   config: NestjsServiceGeneratorConfig,
 ) {
-  console.log("🚀 ~ file: generate.ts:36 ~ config:", config)
+  const { generatedDirectory } = config;
+  console.log("🚀 ~ file: generate.ts:32 ~ generatedDirectory:", generatedDirectory)
 
-  
-  const { generatedDirectory, tsConfigFilePath, outputDirectory } = config;
-  const absoluteTsConfigFilePath = path.resolve(
-    '/Users/mickaelmartos/tractr/repo/traxion/libs/generated/nestjs-models-common/',
-    'tsconfig.lib.json',
-  );
-  console.log("🚀 ~ file: generate.ts:44 ~ absoluteTsConfigFilePath:", absoluteTsConfigFilePath)
-  const absoluteGeneratedDirectory = path.resolve(
-    outputDirectory,
-    generatedDirectory,
-  );
-  console.log("🚀 ~ file: generate.ts:49 ~ absoluteGeneratedDirectory:", absoluteGeneratedDirectory)
-
-  project.addSourceFilesFromTsConfig(absoluteTsConfigFilePath);
-  console.log("🚀 ~ file: generate.ts:52 ~ project:")
 
   // Clear generation directory
-  project.getDirectory(absoluteGeneratedDirectory)?.clear();
-  console.log("🚀 ~ file: generate.ts:56 ~ project:")
+  // project.getDirectory(generatedDirectory)
 
-  const entityPath = `${absoluteGeneratedDirectory}`;
-
-  console.log("🚀 ~ file: generate.ts:60 ~ entityPath:", entityPath)
   // Generate module
-  generateModuleSourceFile(project, entityPath);
+  generateModuleSourceFile(project, generatedDirectory);
 
   // Generate modules definition
-  generateModuleDefinitionSourceFile(project, entityPath);
+  generateModuleDefinitionSourceFile(project, generatedDirectory);
 
   // Generate Interface
-  generateInterfaceSourceFile(project, `${entityPath}/interfaces`);
+  generateInterfaceSourceFile(project, `${generatedDirectory}/interfaces`);
 
   // Generate models-services.providers.ts
   const providersSourceFile = generateModelsServicesProvidersSourceFile(
     project,
-    entityPath,
+    generatedDirectory,
   );
 
   // Generate services, contants and providers
   dataModel.models.forEach((model) => {
-    generateServiceSourceFile(project, model, entityPath);
-    generateServiceDefaultSourceFile(project, model, entityPath);
-    generateConstantSourceFile(project, model, `${entityPath}`);
+    generateServiceSourceFile(project, model, generatedDirectory);
+    generateServiceDefaultSourceFile(project, model, generatedDirectory);
+    generateConstantSourceFile(project, model, `${generatedDirectory}`);
     generateProviderSourceFile(
       project,
       model,
-      `${entityPath}`,
+      `${generatedDirectory}`,
       providersSourceFile,
     );
   });
 
   // generate route index.ts for exports
-  generateDirectoryIndexExporter(project, entityPath);
-  generateFileIndexExporter(project, `${entityPath}`);
+  generateDirectoryIndexExporter(project, generatedDirectory);
+  generateFileIndexExporter(project, `${generatedDirectory}`);
 
   // for each directory, generate index.ts for export
-  generateFileIndexExporter(project, `${entityPath}/services`);
-  generateFileIndexExporter(project, `${entityPath}/constants`);
-  generateFileIndexExporter(project, `${entityPath}/providers`);
-  generateFileIndexExporter(project, `${entityPath}/interfaces`);
+  generateFileIndexExporter(project, `${generatedDirectory}/services`);
+  generateFileIndexExporter(project, `${generatedDirectory}/constants`);
+  generateFileIndexExporter(project, `${generatedDirectory}/providers`);
+  generateFileIndexExporter(project, `${generatedDirectory}/interfaces`);
 
   // Save project to file system
-  project.saveSync();
+  // project.saveSync();
 }

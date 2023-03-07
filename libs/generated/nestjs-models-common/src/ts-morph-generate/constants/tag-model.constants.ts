@@ -1,0 +1,2 @@
+export const TAG_SERVICE = 'TAG_SERVICE';
+export const TAG_DATABASE_SERVICE = 'TAG_DATABASE_SERVICE';

@@ -1,3 +1,5 @@
+import * as path from 'path';
+
 import { generatorHandler } from '@prisma/generator-helper';
 import { logger } from '@prisma/sdk';
 import { Project } from 'ts-morph';
@@ -10,8 +12,6 @@ import { hapifyNestjsServicesGenerator } from '@trxn/hapify-generators-nestjs-se
 
 export const GENERATOR_NAME = 'Hapify Prisma NestJs/Services';
 
-
-
 generatorHandler({
   onManifest() {
     return {
@@ -21,7 +21,7 @@ generatorHandler({
   },
   onGenerate: async (options) => {
     const { generator, dmmf } = options;
-    console.log("🚀 ~ file: generator.ts:26 ~ onGenerate: ~ generator:", generator)
+
     const outputDirectory = generator.output?.value;
 
     if (!outputDirectory) {
@@ -31,30 +31,37 @@ generatorHandler({
     }
 
     // Get the configuration from the generator block
-    const { tsConfigFilePath } = generator.config;
+    const { tsConfigFilePath, generatedDirectory } = generator.config;
+
+    // Build the required absolute paths
+    const absoluteTsConfigFilePath = path.resolve(
+      outputDirectory,
+      tsConfigFilePath,
+    );
+
+    const absoluteGeneratedDirectory = path.resolve(
+      outputDirectory,
+      generatedDirectory,
+    );
 
     // Instantiate the ts project
     const project = new Project({
-      tsConfigFilePath,
+      tsConfigFilePath: absoluteTsConfigFilePath,
     });
 
     // Clear generation directory
-    project.getDirectory(outputDirectory)?.clear();
-
-
+    project.getDirectory(absoluteGeneratedDirectory)?.clear();
 
     try {
       logger.log(`Convert DMMF to Hapify schema declaration`);
-      const schema: Schema = createSchema(convertDmmfToHapifySchemaDeclaration(dmmf));
-
+      const schema: Schema = createSchema(
+        convertDmmfToHapifySchemaDeclaration(dmmf),
+      );
 
       // TODO: Create the nestjs services
       hapifyNestjsServicesGenerator(project, schema, {
-        outputDirectory,
-        tsConfigFilePath: 'tsconfig.lib.json',
-        generatedDirectory: 'ts-morph-generate',
+        generatedDirectory: absoluteGeneratedDirectory,
       });
-
     } catch (error) {
       logger.error(error);
       throw error;

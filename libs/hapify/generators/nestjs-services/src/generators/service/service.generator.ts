@@ -6,7 +6,6 @@ import { generateConstructor } from './constructor.generator';
 import { generateCountMethod } from './count-method.generator';
 import { generateCreateManyMethod } from './create-many-method.generator';
 import { generateCreateMethod } from './create-method.generator';
-import { generateDefaultInternalsMethod } from './default-internals-method.generator';
 import { generateDeleteManyMethod } from './delete-many-method.generator';
 import { generateDeleteMethod } from './delete-method.generator';
 import { generateFindFirstMethod } from './find-first-method.generator';
