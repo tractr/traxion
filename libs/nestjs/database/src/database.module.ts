@@ -38,6 +38,12 @@ import { LoggerModule } from '@trxn/nestjs-core';
       inject: [ManagedPrismaClientsService, Logger],
     },
   ],
-  exports: [PrismaService, DatabaseService, MysqlService, PostgresqlService],
+  exports: [
+    PrismaService,
+    DatabaseService,
+    MysqlService,
+    PostgresqlService,
+    ManagedPrismaClientsService,
+  ],
 })
 export class DatabaseModule extends ConfigurableModuleClass {}
