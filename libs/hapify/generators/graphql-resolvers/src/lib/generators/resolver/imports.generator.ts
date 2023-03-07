@@ -1,7 +1,7 @@
 import { constant, kebab, pascal } from 'case';
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { getRelatedModelsWithoutSelf, Model } from '@trxn/hapify-core';
 
 export function generateImports(model: Model): ImportDeclarationStructure[] {
   return [
@@ -10,9 +10,9 @@ export function generateImports(model: Model): ImportDeclarationStructure[] {
       moduleSpecifier: `../../generated/prisma-nestjs-graphql`,
       namedImports: [
         { name: `${pascal(model.name)}` },
-        // ...model.dependencies.map((dependency) => ({
-        //   name: `${pascal(dependency.name)}`,
-        // })),
+        ...getRelatedModelsWithoutSelf(model).map((relatedModels) => ({
+          name: `${pascal(relatedModels.name)}`,
+        })),
         { name: `FindUnique${pascal(model.name)}Args` },
         { name: `FindMany${pascal(model.name)}Args` },
         { name: `CreateOne${pascal(model.name)}Args` },

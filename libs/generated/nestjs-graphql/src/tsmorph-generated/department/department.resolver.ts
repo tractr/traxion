@@ -1,4 +1,4 @@
-import { Department, FindUniqueDepartmentArgs, FindManyDepartmentArgs, CreateOneDepartmentArgs, UpdateOneDepartmentArgs, DeleteOneDepartmentArgs } from "../../generated/prisma-nestjs-graphql";
+import { Department, Enterprise, FindUniqueDepartmentArgs, FindManyDepartmentArgs, CreateOneDepartmentArgs, UpdateOneDepartmentArgs, DeleteOneDepartmentArgs } from "../../generated/prisma-nestjs-graphql";
 import { DepartmentService, DEPARTMENT_SERVICE } from "@trxn/generated-nestjs-models-common";
 import { Inject } from "@nestjs/common";
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
@@ -114,5 +114,10 @@ export class DepartmentResolver {
 
             return user;
           
+    }
+
+    @ResolveField(() => Department)
+    enterprise(@Parent() department: Department) {
+        return department.enterprise;
     }
 }

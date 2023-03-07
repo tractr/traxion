@@ -1,4 +1,4 @@
-import { User, FindUniqueUserArgs, FindManyUserArgs, CreateOneUserArgs, UpdateOneUserArgs, DeleteOneUserArgs } from "../../generated/prisma-nestjs-graphql";
+import { User, Answer, Enterprise, Tag, UniqueValueField, FindUniqueUserArgs, FindManyUserArgs, CreateOneUserArgs, UpdateOneUserArgs, DeleteOneUserArgs } from "../../generated/prisma-nestjs-graphql";
 import { UserService, USER_SERVICE } from "@trxn/generated-nestjs-models-common";
 import { Inject } from "@nestjs/common";
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
@@ -114,5 +114,30 @@ export class UserResolver {
 
             return user;
           
+    }
+
+    @ResolveField(() => Answer)
+    owner(@Parent() user: User) {
+        return user.owner;
+    }
+
+    @ResolveField(() => Enterprise)
+    enterprises(@Parent() user: User) {
+        return user.enterprises;
+    }
+
+    @ResolveField(() => Tag)
+    owner(@Parent() user: User) {
+        return user.owner;
+    }
+
+    @ResolveField(() => User)
+    uniqueValue(@Parent() user: User) {
+        return user.uniqueValue;
+    }
+
+    @ResolveField(() => User)
+    uniqueEntityNullable(@Parent() user: User) {
+        return user.uniqueEntityNullable;
     }
 }

@@ -1,4 +1,4 @@
-import { Variable, FindUniqueVariableArgs, FindManyVariableArgs, CreateOneVariableArgs, UpdateOneVariableArgs, DeleteOneVariableArgs } from "../../generated/prisma-nestjs-graphql";
+import { Variable, Answer, OpenQuestion, FindUniqueVariableArgs, FindManyVariableArgs, CreateOneVariableArgs, UpdateOneVariableArgs, DeleteOneVariableArgs } from "../../generated/prisma-nestjs-graphql";
 import { VariableService, VARIABLE_SERVICE } from "@trxn/generated-nestjs-models-common";
 import { Inject } from "@nestjs/common";
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
@@ -114,5 +114,15 @@ export class VariableResolver {
 
             return user;
           
+    }
+
+    @ResolveField(() => Variable)
+    answer(@Parent() variable: Variable) {
+        return variable.answer;
+    }
+
+    @ResolveField(() => Variable)
+    openQuestion(@Parent() variable: Variable) {
+        return variable.openQuestion;
     }
 }

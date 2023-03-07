@@ -1,4 +1,4 @@
-import { UniqueValueField, FindUniqueUniqueValueFieldArgs, FindManyUniqueValueFieldArgs, CreateOneUniqueValueFieldArgs, UpdateOneUniqueValueFieldArgs, DeleteOneUniqueValueFieldArgs } from "../../generated/prisma-nestjs-graphql";
+import { UniqueValueField, User, FindUniqueUniqueValueFieldArgs, FindManyUniqueValueFieldArgs, CreateOneUniqueValueFieldArgs, UpdateOneUniqueValueFieldArgs, DeleteOneUniqueValueFieldArgs } from "../../generated/prisma-nestjs-graphql";
 import { UniqueValueFieldService, UNIQUE_VALUE_FIELD_SERVICE } from "@trxn/generated-nestjs-models-common";
 import { Inject } from "@nestjs/common";
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
@@ -114,5 +114,15 @@ export class UniqueValueFieldResolver {
 
             return user;
           
+    }
+
+    @ResolveField(() => User)
+    uniqueValue(@Parent() uniqueValueField: UniqueValueField) {
+        return uniqueValueField.uniqueValue;
+    }
+
+    @ResolveField(() => User)
+    uniqueEntityNullable(@Parent() uniqueValueField: UniqueValueField) {
+        return uniqueValueField.uniqueEntityNullable;
     }
 }

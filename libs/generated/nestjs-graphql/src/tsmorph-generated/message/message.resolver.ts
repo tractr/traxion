@@ -1,4 +1,4 @@
-import { Message, FindUniqueMessageArgs, FindManyMessageArgs, CreateOneMessageArgs, UpdateOneMessageArgs, DeleteOneMessageArgs } from "../../generated/prisma-nestjs-graphql";
+import { Message, Tag, Question, FindUniqueMessageArgs, FindManyMessageArgs, CreateOneMessageArgs, UpdateOneMessageArgs, DeleteOneMessageArgs } from "../../generated/prisma-nestjs-graphql";
 import { MessageService, MESSAGE_SERVICE } from "@trxn/generated-nestjs-models-common";
 import { Inject } from "@nestjs/common";
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
@@ -114,5 +114,15 @@ export class MessageResolver {
 
             return user;
           
+    }
+
+    @ResolveField(() => Message)
+    messages(@Parent() message: Message) {
+        return message.messages;
+    }
+
+    @ResolveField(() => Message)
+    messages(@Parent() message: Message) {
+        return message.messages;
     }
 }

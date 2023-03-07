@@ -1,4 +1,4 @@
-import { Answer, FindUniqueAnswerArgs, FindManyAnswerArgs, CreateOneAnswerArgs, UpdateOneAnswerArgs, DeleteOneAnswerArgs } from "../../generated/prisma-nestjs-graphql";
+import { Answer, User, Question, Tag, Variable, FindUniqueAnswerArgs, FindManyAnswerArgs, CreateOneAnswerArgs, UpdateOneAnswerArgs, DeleteOneAnswerArgs } from "../../generated/prisma-nestjs-graphql";
 import { AnswerService, ANSWER_SERVICE } from "@trxn/generated-nestjs-models-common";
 import { Inject } from "@nestjs/common";
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
@@ -114,5 +114,25 @@ export class AnswerResolver {
 
             return user;
           
+    }
+
+    @ResolveField(() => Answer)
+    owner(@Parent() answer: Answer) {
+        return answer.owner;
+    }
+
+    @ResolveField(() => Answer)
+    question(@Parent() answer: Answer) {
+        return answer.question;
+    }
+
+    @ResolveField(() => Answer)
+    answers(@Parent() answer: Answer) {
+        return answer.answers;
+    }
+
+    @ResolveField(() => Variable)
+    answer(@Parent() answer: Answer) {
+        return answer.answer;
     }
 }

@@ -1,4 +1,4 @@
-import { Enterprise, FindUniqueEnterpriseArgs, FindManyEnterpriseArgs, CreateOneEnterpriseArgs, UpdateOneEnterpriseArgs, DeleteOneEnterpriseArgs } from "../../generated/prisma-nestjs-graphql";
+import { Enterprise, Department, User, FindUniqueEnterpriseArgs, FindManyEnterpriseArgs, CreateOneEnterpriseArgs, UpdateOneEnterpriseArgs, DeleteOneEnterpriseArgs } from "../../generated/prisma-nestjs-graphql";
 import { EnterpriseService, ENTERPRISE_SERVICE } from "@trxn/generated-nestjs-models-common";
 import { Inject } from "@nestjs/common";
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
@@ -114,5 +114,15 @@ export class EnterpriseResolver {
 
             return user;
           
+    }
+
+    @ResolveField(() => Department)
+    enterprise(@Parent() enterprise: Enterprise) {
+        return enterprise.enterprise;
+    }
+
+    @ResolveField(() => Enterprise)
+    enterprises(@Parent() enterprise: Enterprise) {
+        return enterprise.enterprises;
     }
 }

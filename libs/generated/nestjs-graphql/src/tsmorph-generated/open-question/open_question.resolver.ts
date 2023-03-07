@@ -1,4 +1,4 @@
-import { OpenQuestion, FindUniqueOpenQuestionArgs, FindManyOpenQuestionArgs, CreateOneOpenQuestionArgs, UpdateOneOpenQuestionArgs, DeleteOneOpenQuestionArgs } from "../../generated/prisma-nestjs-graphql";
+import { OpenQuestion, Question, Variable, FindUniqueOpenQuestionArgs, FindManyOpenQuestionArgs, CreateOneOpenQuestionArgs, UpdateOneOpenQuestionArgs, DeleteOneOpenQuestionArgs } from "../../generated/prisma-nestjs-graphql";
 import { OpenQuestionService, OPEN_QUESTION_SERVICE } from "@trxn/generated-nestjs-models-common";
 import { Inject } from "@nestjs/common";
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
@@ -114,5 +114,15 @@ export class OpenQuestionResolver {
 
             return user;
           
+    }
+
+    @ResolveField(() => OpenQuestion)
+    question(@Parent() openQuestion: OpenQuestion) {
+        return openQuestion.question;
+    }
+
+    @ResolveField(() => Variable)
+    openQuestion(@Parent() openQuestion: OpenQuestion) {
+        return openQuestion.openQuestion;
     }
 }

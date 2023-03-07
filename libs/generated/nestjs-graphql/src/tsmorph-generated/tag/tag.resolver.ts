@@ -1,4 +1,4 @@
-import { Tag, FindUniqueTagArgs, FindManyTagArgs, CreateOneTagArgs, UpdateOneTagArgs, DeleteOneTagArgs } from "../../generated/prisma-nestjs-graphql";
+import { Tag, Answer, Message, Question, User, FindUniqueTagArgs, FindManyTagArgs, CreateOneTagArgs, UpdateOneTagArgs, DeleteOneTagArgs } from "../../generated/prisma-nestjs-graphql";
 import { TagService, TAG_SERVICE } from "@trxn/generated-nestjs-models-common";
 import { Inject } from "@nestjs/common";
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
@@ -114,5 +114,25 @@ export class TagResolver {
 
             return user;
           
+    }
+
+    @ResolveField(() => Answer)
+    answers(@Parent() tag: Tag) {
+        return tag.answers;
+    }
+
+    @ResolveField(() => Message)
+    messages(@Parent() tag: Tag) {
+        return tag.messages;
+    }
+
+    @ResolveField(() => Question)
+    questions(@Parent() tag: Tag) {
+        return tag.questions;
+    }
+
+    @ResolveField(() => Tag)
+    owner(@Parent() tag: Tag) {
+        return tag.owner;
     }
 }

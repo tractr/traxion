@@ -7,7 +7,7 @@ import {
   StructureKind,
 } from 'ts-morph';
 
-import {  Model,  } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function generateDeleteMethod(model: Model): MethodDeclarationStructure {
   const decorators: DecoratorStructure[] = [
