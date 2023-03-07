@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import * as path from 'path';
+import * as fs from 'fs';
 
 import { Project } from 'ts-morph';
 
@@ -20,34 +21,43 @@ import {
 
 import { Schema } from '@trxn/hapify-core';
 
+
 export type NestjsServiceGeneratorConfig = {
   outputDirectory: string;
   tsConfigFilePath: string;
   generatedDirectory: string;
 };
 
-export function generate(
+export function hapifyNestjsServicesGenerator(
   project: Project,
   dataModel: Schema,
   config: NestjsServiceGeneratorConfig,
 ) {
+  console.log("🚀 ~ file: generate.ts:36 ~ config:", config)
+
+  
   const { generatedDirectory, tsConfigFilePath, outputDirectory } = config;
   const absoluteTsConfigFilePath = path.resolve(
-    outputDirectory,
-    tsConfigFilePath,
+    '/Users/mickaelmartos/tractr/repo/traxion/libs/generated/nestjs-models-common/',
+    'tsconfig.lib.json',
   );
+  console.log("🚀 ~ file: generate.ts:44 ~ absoluteTsConfigFilePath:", absoluteTsConfigFilePath)
   const absoluteGeneratedDirectory = path.resolve(
     outputDirectory,
     generatedDirectory,
   );
+  console.log("🚀 ~ file: generate.ts:49 ~ absoluteGeneratedDirectory:", absoluteGeneratedDirectory)
 
   project.addSourceFilesFromTsConfig(absoluteTsConfigFilePath);
+  console.log("🚀 ~ file: generate.ts:52 ~ project:")
 
   // Clear generation directory
   project.getDirectory(absoluteGeneratedDirectory)?.clear();
+  console.log("🚀 ~ file: generate.ts:56 ~ project:")
 
   const entityPath = `${absoluteGeneratedDirectory}`;
 
+  console.log("🚀 ~ file: generate.ts:60 ~ entityPath:", entityPath)
   // Generate module
   generateModuleSourceFile(project, entityPath);
 

@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
-export class UserService {
+export class InternalFieldService {
     constructor() {
     }
 

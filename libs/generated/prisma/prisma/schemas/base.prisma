@@ -21,6 +21,7 @@ generator nestjsGraphql {
   fields_Validator_input = true
   useInputType_StringFilter_ALL = "string"
 }
+ 
 
 // TODO remove this block
 // generator graphqlResolvers {
