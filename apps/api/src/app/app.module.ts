@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, Scope } from '@nestjs/common';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ConsoleModule } from 'nestjs-console';
 
@@ -43,7 +43,7 @@ import { LoggerModule } from '@trxn/nestjs-core';
   ],
 
   providers: [
-    { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
+    { provide: APP_GUARD, useClass: JwtGlobalAuthGuard, scope: Scope.REQUEST },
     { provide: APP_GUARD, useClass: PoliciesGuard },
     { provide: APP_INTERCEPTOR, useClass: CaslExceptionInterceptor },
   ],

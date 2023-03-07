@@ -59,7 +59,7 @@ export const CustomDatabaseService: FactoryProvider = {
       prismaClient,
     }),
   ],
-  exports: [TraxionDatabaseModule],
+  exports: [PrismaService, DatabaseService],
   providers: [
     { provide: APP_INTERCEPTOR, useClass: PrismaExceptionInterceptor },
     CustomPrismaService,

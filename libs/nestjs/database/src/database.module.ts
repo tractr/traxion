@@ -1,4 +1,4 @@
-import { Logger, LoggerService, Module, Scope } from '@nestjs/common';
+import { Logger, LoggerService, Module } from '@nestjs/common';
 
 import { ConfigurableModuleClass } from './database.module-definition';
 import { getDefaultPrismaClient } from './factories';
