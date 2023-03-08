@@ -29,24 +29,44 @@ export function generateModuleDefinitionSourceFile(
           OPTIONS_TYPE,
         }`,
         initializer: `new ConfigurableModuleBuilder<ModelsServicesOptions>()
-        .setExtras<{
-          imports: Array<
-            Type<any> | DynamicModule | Promise<DynamicModule> | ForwardReference
-          >;
-          providers?: Provider<any>[] | undefined;
-        }>(
-          {
-            imports: [],
-            providers: [],
-          },
-          (options, extras) => ({
-              ...options,
-              imports: [...(options.imports || []), ...(extras.imports || [])],
-              providers: [...(options.providers || []), ...(extras.providers || [])],
-            }),  //TODO: make use of internal trxn helpers
-        )
-        .build()`,
+        .setExtras<
+    ImportsExtra &
+      ProvidersExtra & {
+        PrismaService?: ProviderWithInjectionToken<
+          typeof PRISMA_SERVICE,
+          PrismaService
+        >;
+      }
+  >(
+    { imports: [], providers: [] },
+    addImportsAndProvidersExtra((definition, { PrismaService }) =>
+      addProviderWithInjectionTokenExtra(definition, PRISMA_SERVICE, PrismaService),
+    ),
+  ).build()`,
       },
     ],
   });
 }
+
+// TODO: TARGET
+// export const {
+//   ConfigurableModuleClass,
+//   MODULE_OPTIONS_TOKEN,
+//   ASYNC_OPTIONS_TYPE,
+//   OPTIONS_TYPE,
+// } = new ConfigurableModuleBuilder<UserModuleOptions>()
+//   .setExtras<
+//     ImportsExtra &
+//       ProvidersExtra & {
+//         PrismaService?: ProviderWithInjectionToken<
+//           typeof PRISMA_SERVICE,
+//           PrismaService
+//         >;
+//       }
+//   >(
+//     { imports: [], providers: [] },
+//     addImportsAndProvidersExtra((definition, { UserService }) =>
+//       addProviderWithInjectionTokenExtra(definition, USER_SERVICE, UserService),
+//     ),
+//   )
+//   .build();
