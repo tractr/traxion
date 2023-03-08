@@ -1,13 +1,19 @@
 import { pascal } from 'case';
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { GraphqlResolverImportPathConfig } from '../../config.type';
 
-export function generateImports(model: Model): ImportDeclarationStructure[] {
+import { Model } from '@trxn/hapify-core';
+import { resolveDynamicPath } from '@trxn/hapify-devkit';
+
+export function generateImports(
+  model: Model,
+  importPaths: GraphqlResolverImportPathConfig,
+): ImportDeclarationStructure[] {
   return [
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: `../../generated/prisma-nestjs-graphql`,
+      moduleSpecifier: resolveDynamicPath(importPaths.graphqlDtos, '../..'),
       namedImports: [
         { name: `${pascal(model.name)}` },
         { name: `FindUnique${pascal(model.name)}Args` },

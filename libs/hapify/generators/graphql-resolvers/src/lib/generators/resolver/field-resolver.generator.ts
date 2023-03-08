@@ -7,16 +7,20 @@ import {
   StructureKind,
 } from 'ts-morph';
 
-import { getRelatedModels, getRelations, Model } from '@trxn/hapify-core';
+import { isVirtualField, Model } from '@trxn/hapify-core';
 
 export function generateFieldResolvers(
   model: Model,
 ): MethodDeclarationStructure[] {
-  return getRelations(model).map(({ to: relation }) => {
+  return model.fields.filter(isVirtualField).map((virtualField) => {
     const entityName = camel(model.name);
     const entityType = pascal(model.name);
-    const fieldName = camel(relation.virtual.name);
-    const fieldType = pascal(relation.model.name);
+    const fieldName = camel(virtualField.name);
+    const fieldType = pascal(
+      virtualField.relation.to.model.name === model.name
+        ? virtualField.relation.from.model.name
+        : virtualField.relation.to.model.name,
+    );
 
     const parameters: ParameterDeclarationStructure[] = [
       {

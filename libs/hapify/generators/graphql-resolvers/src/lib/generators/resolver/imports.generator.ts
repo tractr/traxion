@@ -1,31 +1,40 @@
-import { constant, kebab, pascal } from 'case';
+import { constant, pascal } from 'case';
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
-import { getRelatedModelsWithoutSelf, Model } from '@trxn/hapify-core';
+import { GraphqlResolverImportPathConfig } from '../../config.type';
 
-export function generateImports(model: Model): ImportDeclarationStructure[] {
+import { getRelatedModelsWithoutSelf, Model } from '@trxn/hapify-core';
+import { resolveDynamicPath } from '@trxn/hapify-devkit';
+
+export function generateImports(
+  model: Model,
+  importPaths: GraphqlResolverImportPathConfig,
+): ImportDeclarationStructure[] {
+  const modelPascal = pascal(model.name);
+  const modelConstant = constant(model.name);
+
   return [
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: `../../generated/prisma-nestjs-graphql`,
+      moduleSpecifier: resolveDynamicPath(importPaths.graphqlDtos, '../..'),
       namedImports: [
-        { name: `${pascal(model.name)}` },
+        { name: `${modelPascal}` },
         ...getRelatedModelsWithoutSelf(model).map((relatedModels) => ({
           name: `${pascal(relatedModels.name)}`,
         })),
-        { name: `FindUnique${pascal(model.name)}Args` },
-        { name: `FindMany${pascal(model.name)}Args` },
-        { name: `CreateOne${pascal(model.name)}Args` },
-        { name: `UpdateOne${pascal(model.name)}Args` },
-        { name: `DeleteOne${pascal(model.name)}Args` },
+        { name: `FindUnique${modelPascal}Args` },
+        { name: `FindMany${modelPascal}Args` },
+        { name: `CreateOne${modelPascal}Args` },
+        { name: `UpdateOne${modelPascal}Args` },
+        { name: `DeleteOne${modelPascal}Args` },
       ],
     },
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: '@trxn/generated-nestjs-models-common',
+      moduleSpecifier: resolveDynamicPath(importPaths.nestjsServices, '../..'),
       namedImports: [
-        { name: `${pascal(model.name)}Service` },
-        { name: `${constant(model.name)}_SERVICE` },
+        { name: `${modelPascal}Service` },
+        { name: `${modelConstant}_SERVICE` },
       ],
     },
     {
@@ -58,8 +67,8 @@ export function generateImports(model: Model): ImportDeclarationStructure[] {
     },
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: `./find-many-${kebab(model.name)}-output.dto`,
-      namedImports: [{ name: `FindMany${pascal(model.name)}Output` }],
+      moduleSpecifier: `../dtos`,
+      namedImports: [{ name: `FindMany${modelPascal}Output` }],
     },
   ];
 }

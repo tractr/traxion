@@ -10,11 +10,14 @@ import {
 import { Model } from '@trxn/hapify-core';
 
 export function generateCreateMethod(model: Model): MethodDeclarationStructure {
+  const modelCamel = camel(model.name);
+  const modelPascal = pascal(model.name);
+
   const decorators: DecoratorStructure[] = [
     {
       kind: StructureKind.Decorator,
       name: 'Mutation',
-      arguments: [`() => ${pascal(model.name)}`, `{ nullable: true }`],
+      arguments: [`() => ${modelPascal}`, `{ nullable: true }`],
     },
   ];
 
@@ -28,39 +31,34 @@ export function generateCreateMethod(model: Model): MethodDeclarationStructure {
     {
       kind: StructureKind.Parameter,
       name: `{ data: rawData }`,
-      type: `CreateOne${pascal(model.name)}Args`,
+      type: `CreateOne${modelPascal}Args`,
       decorators: [{ name: 'Args', arguments: [] }],
     },
   ];
 
   const statements = `
-    const select = new PrismaSelect(info, {
-      defaultFields: OWNERS_DEFAULT_FIELDS,
-    }).value;
+    const select = new PrismaSelect(info).value;
 
     const data = {
-      ...this.userService.getDefaultInternals(),
+      ...this.${modelCamel}Service.getDefaultInternals(),
       ...rawData,
     };
 
-    const user = await this.userService.create(
-      { data, ...select },
-      prisma.user,
-    );
+    const ${modelCamel} = await this.${modelCamel}Service.create({ data, ...select });
 
-    return user;
+    return ${modelCamel};
   `;
 
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `Create a single ${camel(model.name)}.`,
+      description: `Create a single ${modelCamel}.`,
     },
   ];
 
   return {
     kind: StructureKind.Method,
-    name: `create${pascal(model.name)}`,
+    name: `create${modelPascal}`,
     isAsync: true,
     decorators,
     parameters,

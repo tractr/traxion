@@ -10,11 +10,14 @@ import {
 import { Model } from '@trxn/hapify-core';
 
 export function generateDeleteMethod(model: Model): MethodDeclarationStructure {
+  const modelCamel = camel(model.name);
+  const modelPascal = pascal(model.name);
+
   const decorators: DecoratorStructure[] = [
     {
       kind: StructureKind.Decorator,
       name: 'Mutation',
-      arguments: [`() => ${pascal(model.name)}`, `{ nullable: true }`],
+      arguments: [`() => ${modelPascal}`, `{ nullable: true }`],
     },
   ];
 
@@ -28,28 +31,23 @@ export function generateDeleteMethod(model: Model): MethodDeclarationStructure {
     {
       kind: StructureKind.Parameter,
       name: `{ where }`,
-      type: `DeleteOne${pascal(model.name)}Args`,
+      type: `DeleteOne${modelPascal}Args`,
       decorators: [{ name: 'Args', arguments: [] }],
     },
   ];
 
   const statements = `
-    const select = new PrismaSelect(info, {
-      defaultFields: OWNERS_DEFAULT_FIELDS,
-    }).value;
+    const select = new PrismaSelect(info).value;
 
-    const user = await this.userService.delete(
-      { where, ...select },
-      prisma.user,
-    );
+    const ${modelCamel} = await this.${modelCamel}Service.delete({ where, ...select });
 
-    return user;
+    return ${modelCamel};
   `;
 
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `Delete a single ${pascal(model.name)}.`,
+      description: `Delete a single ${modelPascal}.`,
     },
   ];
 

@@ -33,8 +33,14 @@ export function generate() {
 
       // Extract the generator configuration
       const outputDirectory = generator.output?.value;
-      const { generatedDirectory, tsConfigFilePath } = generator.config;
+      const {
+        generatedDirectory,
+        tsConfigFilePath,
+        nestjsServicesImportPath,
+        nestjsGraphqlDtosImportPath,
+      } = generator.config;
 
+      // TODO: voir où on gère la validation de la config
       // Validate the generator configuration
       if (!outputDirectory) {
         const error = `${GENERATOR_NAME}: No output directory specified in generator block`;
@@ -80,6 +86,10 @@ export function generate() {
         // Create the graphql resolvers
         generateNestjsResolvers(project, schema, {
           generatedDirectory: absoluteGeneratedDirectory,
+          importPaths: {
+            nestjsServices: nestjsServicesImportPath,
+            graphqlDtos: nestjsGraphqlDtosImportPath,
+          },
         });
 
         // Write the schema to the output directory

@@ -3,10 +3,8 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "module": "CommonJS",
     "outDir": "../../../dist/out-tsc",
-    "target": "es6",
-    "types": ["node"]
+    "types": []
   },
   "exclude": [
     "src/test-setup.ts",

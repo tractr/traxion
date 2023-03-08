@@ -10,11 +10,14 @@ import {
 import { Model } from '@trxn/hapify-core';
 
 export function generateUpdateMethod(model: Model): MethodDeclarationStructure {
+  const modelCamel = camel(model.name);
+  const modelPascal = pascal(model.name);
+
   const decorators: DecoratorStructure[] = [
     {
       kind: StructureKind.Decorator,
       name: 'Mutation',
-      arguments: [`() => ${pascal(model.name)}`, `{ nullable: true }`],
+      arguments: [`() => ${modelPascal}`, `{ nullable: true }`],
     },
   ];
 
@@ -28,34 +31,29 @@ export function generateUpdateMethod(model: Model): MethodDeclarationStructure {
     {
       kind: StructureKind.Parameter,
       name: `{ data, where }`,
-      type: `UpdateOne${pascal(model.name)}Args`,
+      type: `UpdateOne${modelPascal}Args`,
       decorators: [{ name: 'Args', arguments: [] }],
     },
   ];
 
   const statements = `
-    const select = new PrismaSelect(info, {
-      defaultFields: OWNERS_DEFAULT_FIELDS,
-    }).value;
+    const select = new PrismaSelect(info).value;
 
-    const user = await this.userService.update(
-      { where, data, ...select },
-      prisma.user,
-    );
+    const ${modelCamel} = await this.${modelCamel}Service.update({ where, data, ...select });
 
-    return user;
+    return ${modelCamel};
   `;
 
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `Update a single ${camel(model.name)}.`,
+      description: `Update a single ${modelCamel}.`,
     },
   ];
 
   return {
     kind: StructureKind.Method,
-    name: `update${pascal(model.name)}`,
+    name: `update${modelPascal}`,
     isAsync: true,
     decorators,
     parameters,
