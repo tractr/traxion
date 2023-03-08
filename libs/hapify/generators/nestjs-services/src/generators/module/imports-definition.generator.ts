@@ -1,7 +1,5 @@
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
-import {} from '@trxn/nestjs-database';
-
 export function generateImportsDefinition(): ImportDeclarationStructure[] {
   return [
     {
@@ -34,7 +32,7 @@ export function generateImportsDefinition(): ImportDeclarationStructure[] {
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@trxn/nestjs-database`,
-      namedImports: [{ name: `PRISMA_SERVICE` }, { name: `PrismaService` }],
+      namedImports: [{ name: `PrismaService` }],
     },
   ];
 }

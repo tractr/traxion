@@ -33,14 +33,14 @@ export function generateModuleDefinitionSourceFile(
     ImportsExtra &
       ProvidersExtra & {
         PrismaService?: ProviderWithInjectionToken<
-          typeof PRISMA_SERVICE,
+          typeof PrismaService,
           PrismaService
         >;
       }
   >(
     { imports: [], providers: [] },
     addImportsAndProvidersExtra((definition, { PrismaService }) =>
-      addProviderWithInjectionTokenExtra(definition, PRISMA_SERVICE, PrismaService),
+      addProviderWithInjectionTokenExtra(definition, PrismaService, PrismaService),
     ),
   ).build()`,
       },
