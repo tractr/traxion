@@ -9,7 +9,9 @@ export function generateModuleDefinitionSourceFile(
   const fileName = `models-services.module-definition.ts`;
   const filePath = `${path}/${fileName}`;
 
-  const sourceFile = project.createSourceFile(filePath);
+  const sourceFile = project.createSourceFile(filePath, undefined, {
+    overwrite: true,
+  });
 
   const imports = generateImportsDefinition();
 

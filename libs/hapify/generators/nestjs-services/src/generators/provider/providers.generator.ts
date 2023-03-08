@@ -21,7 +21,9 @@ export function generateProviderSourceFile(
   const fileName = `${snake(model.name)}-model.providers.ts`;
   const filePath = `${path}/providers/${fileName}`;
 
-  const sourceFile = project.createSourceFile(filePath);
+  const sourceFile = project.createSourceFile(filePath, undefined, {
+    overwrite: true,
+  });
   const name = `${constant(model.name)}_SERVICES_PROVIDERS`;
 
   const imports = generateImports(model);
@@ -71,7 +73,9 @@ export function generateModelsServicesProvidersSourceFile(
   const fileName = `models-services.providers.ts`;
   const filePath = `${path}/${fileName}`;
 
-  const sourceFile = project.createSourceFile(filePath);
+  const sourceFile = project.createSourceFile(filePath, undefined, {
+    overwrite: true,
+  });
   const providerServiceImport: ImportDeclarationStructure[] = [
     {
       kind: StructureKind.ImportDeclaration,

@@ -6,7 +6,9 @@ export function generateInterfaceSourceFile(project: Project, path: string) {
   const fileName = `models-services.interface.ts`;
   const filePath = `${path}/${fileName}`;
 
-  const sourceFile = project.createSourceFile(filePath);
+  const sourceFile = project.createSourceFile(filePath, undefined, {
+    overwrite: true,
+  });
 
   const imports = generateImports();
   sourceFile.addImportDeclarations(imports);

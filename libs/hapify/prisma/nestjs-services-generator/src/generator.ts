@@ -1,5 +1,3 @@
-import * as path from 'path';
-
 import { generatorHandler } from '@prisma/generator-helper';
 import { logger } from '@prisma/sdk';
 import { Project } from 'ts-morph';
@@ -22,35 +20,24 @@ generatorHandler({
   onGenerate: async (options) => {
     const { generator, dmmf } = options;
 
-    const outputDirectory = generator.output?.value;
+    const output = generator.output?.value;
 
-    if (!outputDirectory) {
+    if (!output) {
       const error = `${GENERATOR_NAME}: No output directory specified in generator block`;
       logger.error(error);
       throw new Error(error);
     }
 
     // Get the configuration from the generator block
-    const { tsConfigFilePath, generatedDirectory } = generator.config;
-
-    // Build the required absolute paths
-    const absoluteTsConfigFilePath = path.resolve(
-      outputDirectory,
-      tsConfigFilePath,
-    );
-
-    const absoluteGeneratedDirectory = path.resolve(
-      outputDirectory,
-      generatedDirectory,
-    );
+    const { tsConfigFilePath, clearOutput = true } = generator.config;
 
     // Instantiate the ts project
     const project = new Project({
-      tsConfigFilePath: absoluteTsConfigFilePath,
+      tsConfigFilePath,
     });
 
-    // Clear generation directory
-    project.getDirectory(absoluteGeneratedDirectory)?.clear();
+    if (clearOutput)
+      await project.addDirectoryAtPath(output).clearImmediately();
 
     try {
       logger.log(`Convert DMMF to Hapify schema declaration`);
@@ -58,9 +45,8 @@ generatorHandler({
         convertDmmfToHapifySchemaDeclaration(dmmf),
       );
 
-      // TODO: Create the nestjs services
       hapifyNestjsServicesGenerator(project, schema, {
-        generatedDirectory: absoluteGeneratedDirectory,
+        output,
       });
     } catch (error) {
       logger.error(error);
@@ -71,6 +57,7 @@ generatorHandler({
     project
       .getSourceFiles()
       .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
+    // TODO: Format the files with prettier
 
     // Save project to file system
     project.saveSync();

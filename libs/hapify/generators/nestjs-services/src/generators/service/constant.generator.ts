@@ -11,7 +11,9 @@ export function generateConstantSourceFile(
   const fileName = `${snake(model.name)}-model.constants.ts`;
   const filePath = `${path}/constants/${fileName}`;
 
-  const sourceFile = project.createSourceFile(filePath);
+  const sourceFile = project.createSourceFile(filePath, undefined, {
+    overwrite: true,
+  });
   const name = `${constant(model.name)}_SERVICE`;
   const databaseName = `${constant(model.name)}_DATABASE_SERVICE`;
 

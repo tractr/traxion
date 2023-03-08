@@ -15,7 +15,9 @@ export const generateFileIndexExporter = (
   const sourceDir = project.getDirectoryOrThrow(sourceFilePath);
   const sourceFile =
     project.getSourceFile(`${sourceFilePath}/index.ts`) ??
-    project.createSourceFile(`${sourceFilePath}/index.ts`);
+    project.createSourceFile(`${sourceFilePath}/index.ts`, undefined, {
+      overwrite: true,
+    });
   sourceDir.getSourceFiles().forEach((file) => {
     const fileName = file.getBaseName().replace(/\.ts$/, '');
     if (fileName === 'index') return;
@@ -39,7 +41,8 @@ export const generateDirectoryIndexExporter = (
   const index = `${sourcePath}/index.ts`;
   const sourceDir = project.getDirectoryOrThrow(sourcePath);
   const sourceFile =
-    project.getSourceFile(index) ?? project.createSourceFile(index);
+    project.getSourceFile(index) ??
+    project.createSourceFile(index, undefined, { overwrite: true });
 
   const subDirs = sourceDir.getDirectories();
   const baseNames = subDirs.map((directory) => directory.getBaseName());

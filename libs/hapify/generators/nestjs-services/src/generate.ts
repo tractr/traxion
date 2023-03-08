@@ -20,7 +20,8 @@ import {
 import { Schema } from '@trxn/hapify-core';
 
 export type NestjsServiceGeneratorConfig = {
-  generatedDirectory: string;
+  output: string;
+  overwrite?: boolean;
 };
 
 export function hapifyNestjsServicesGenerator(
@@ -28,50 +29,45 @@ export function hapifyNestjsServicesGenerator(
   dataModel: Schema,
   config: NestjsServiceGeneratorConfig,
 ) {
-  const { generatedDirectory } = config;
-  console.log("🚀 ~ file: generate.ts:32 ~ generatedDirectory:", generatedDirectory)
-
-
-  // Clear generation directory
-  // project.getDirectory(generatedDirectory)
+  const { output } = config;
 
   // Generate module
-  generateModuleSourceFile(project, generatedDirectory);
+  generateModuleSourceFile(project, output);
 
   // Generate modules definition
-  generateModuleDefinitionSourceFile(project, generatedDirectory);
+  generateModuleDefinitionSourceFile(project, output);
 
   // Generate Interface
-  generateInterfaceSourceFile(project, `${generatedDirectory}/interfaces`);
+  generateInterfaceSourceFile(project, `${output}/interfaces`);
 
   // Generate models-services.providers.ts
   const providersSourceFile = generateModelsServicesProvidersSourceFile(
     project,
-    generatedDirectory,
+    output,
   );
 
   // Generate services, contants and providers
   dataModel.models.forEach((model) => {
-    generateServiceSourceFile(project, model, generatedDirectory);
-    generateServiceDefaultSourceFile(project, model, generatedDirectory);
-    generateConstantSourceFile(project, model, `${generatedDirectory}`);
+    generateServiceSourceFile(project, model, output);
+    generateServiceDefaultSourceFile(project, model, output);
+    generateConstantSourceFile(project, model, `${output}`);
     generateProviderSourceFile(
       project,
       model,
-      `${generatedDirectory}`,
+      `${output}`,
       providersSourceFile,
     );
   });
 
   // generate route index.ts for exports
-  generateDirectoryIndexExporter(project, generatedDirectory);
-  generateFileIndexExporter(project, `${generatedDirectory}`);
+  generateDirectoryIndexExporter(project, output);
+  generateFileIndexExporter(project, `${output}`);
 
   // for each directory, generate index.ts for export
-  generateFileIndexExporter(project, `${generatedDirectory}/services`);
-  generateFileIndexExporter(project, `${generatedDirectory}/constants`);
-  generateFileIndexExporter(project, `${generatedDirectory}/providers`);
-  generateFileIndexExporter(project, `${generatedDirectory}/interfaces`);
+  generateFileIndexExporter(project, `${output}/services`);
+  generateFileIndexExporter(project, `${output}/constants`);
+  generateFileIndexExporter(project, `${output}/providers`);
+  generateFileIndexExporter(project, `${output}/interfaces`);
 
   // Save project to file system
   // project.saveSync();

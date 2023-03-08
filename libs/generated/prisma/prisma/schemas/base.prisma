@@ -33,6 +33,6 @@ generator nestjsGraphql {
 //   nestjsGraphqlDtosImportPath = "./generated/prisma-nestjs-graphql"
 // }
 generator nestjsServices {
-  provider = "hapify-prisma-nestjs-services-generator"
-  output = "../../../generated/nestjs-modes-common/src/generated/prisma-nestjs-services"
+  provider = "prisma-nestjs-services-generator"
+  output = "../../nestjs-models-common/src/generated/prisma-nestjs-services"
 }
