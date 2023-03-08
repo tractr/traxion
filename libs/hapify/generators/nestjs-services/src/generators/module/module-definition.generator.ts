@@ -47,26 +47,3 @@ export function generateModuleDefinitionSourceFile(
     ],
   });
 }
-
-// TODO: TARGET
-// export const {
-//   ConfigurableModuleClass,
-//   MODULE_OPTIONS_TOKEN,
-//   ASYNC_OPTIONS_TYPE,
-//   OPTIONS_TYPE,
-// } = new ConfigurableModuleBuilder<UserModuleOptions>()
-//   .setExtras<
-//     ImportsExtra &
-//       ProvidersExtra & {
-//         PrismaService?: ProviderWithInjectionToken<
-//           typeof PRISMA_SERVICE,
-//           PrismaService
-//         >;
-//       }
-//   >(
-//     { imports: [], providers: [] },
-//     addImportsAndProvidersExtra((definition, { UserService }) =>
-//       addProviderWithInjectionTokenExtra(definition, USER_SERVICE, UserService),
-//     ),
-//   )
-//   .build();
