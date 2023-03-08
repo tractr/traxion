@@ -37,9 +37,15 @@ export function generateProviderSourceFile(
         name,
         type: 'Provider[]',
         initializer: `[
+          ${pascal(model.name)}Service,
           {
             provide: ${constant(model.name)}_SERVICE,
-            useClass: ${pascal(model.name)}Service,
+            useExisting: ${pascal(model.name)}Service,
+          },
+          ${pascal(model.name)}DefaultService,
+          {
+            provide: ${constant(model.name)}DEFAULT_SERVICE,
+            useExisting: ${pascal(model.name)}DefaultService,
           }
         ]`,
       },

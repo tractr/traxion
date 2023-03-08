@@ -13,12 +13,12 @@ export function generateImports(model: Model): ImportDeclarationStructure[] {
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `../constants`,
-      namedImports: [{ name: `${constant(model.name)}_SERVICE` }],
+      namedImports: [{ name: `${constant(model.name)}_SERVICE` }, { name: `${constant(model.name)}DEFAULT_SERVICE` }],
     },
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `../services`,
-      namedImports: [{ name: `${pascal(model.name)}Service` }],
+      namedImports: [{ name: `${pascal(model.name)}Service` }, { name: `${pascal(model.name)}DefaultService` }],
     },
   ];
 }

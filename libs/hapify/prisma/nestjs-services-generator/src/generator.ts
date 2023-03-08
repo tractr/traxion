@@ -37,7 +37,7 @@ generatorHandler({
     });
 
     if (clearOutput)
-      await project.addDirectoryAtPath(output).clearImmediately();
+      await project.addDirectoryAtPathIfExists(output)?.clearImmediately();
 
     try {
       logger.log(`Convert DMMF to Hapify schema declaration`);

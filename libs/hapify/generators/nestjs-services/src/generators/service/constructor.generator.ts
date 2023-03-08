@@ -14,13 +14,13 @@ export function generateConstructor(): ConstructorDeclarationStructure {
         type: `PrismaClient`,
         scope: Scope.Private,
         isReadonly: true,
-        decorators: [
-          {
-            kind: StructureKind.Decorator,
-            name: 'Inject',
-            arguments: [`DATABASE_SERVICE`],
-          },
-        ],
+        // decorators: [
+        //   {
+        //     kind: StructureKind.Decorator,
+        //     name: 'Inject',
+        //     arguments: [`DATABASE_SERVICE`],
+        //   },
+        // ],
       },
     ],
   };

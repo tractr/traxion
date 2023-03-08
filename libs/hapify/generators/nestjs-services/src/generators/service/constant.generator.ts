@@ -15,7 +15,7 @@ export function generateConstantSourceFile(
     overwrite: true,
   });
   const name = `${constant(model.name)}_SERVICE`;
-  const databaseName = `${constant(model.name)}_DATABASE_SERVICE`;
+  const defaultName = `${constant(model.name)}_DEFAULT_SERVICE`;
 
   sourceFile.addVariableStatement({
     isExported: true,
@@ -23,7 +23,7 @@ export function generateConstantSourceFile(
     declarations: [
       {
         name,
-        initializer: `'${name}'`,
+        initializer: `'${name}' as const`,
       },
     ],
   });
@@ -32,8 +32,8 @@ export function generateConstantSourceFile(
     declarationKind: VariableDeclarationKind.Const,
     declarations: [
       {
-        name: databaseName,
-        initializer: `'${databaseName}'`,
+        name: defaultName,
+        initializer: `'${defaultName}' as const`,
       },
     ],
   });

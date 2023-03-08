@@ -27,16 +27,16 @@ export function generateInterfaceSourceFile(project: Project, path: string) {
   ];
 
   sourceFile.addInterface({
-    name: 'ModelsServicesOptions',
+    name: 'ModelsServiceModuleOptions',
     isExported: true,
-    properties: [
-      {
-        name: 'prismaClient',
-        type: 'PrismaClient',
-        hasQuestionToken: true,
-        docs: docProperties,
-      },
-    ],
+    // properties: [ // TODO: delete after testing
+    //   {
+    //     name: 'prismaClient',
+    //     type: 'PrismaClient',
+    //     hasQuestionToken: true,
+    //     docs: docProperties,
+    //   },
+    // ],
     docs,
   });
 }

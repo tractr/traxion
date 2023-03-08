@@ -39,19 +39,6 @@
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/generated/nestjs-models-common"]
-    },
-    "ts-morph-generate": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "npx ts-node -r tsconfig-paths/register --project ./tsconfig.lib.json ./src/generate.ts",
-            "forwardAllArgs": false
-          }
-        ],
-        "cwd": "libs/generated/nestjs-models-common",
-        "parallel": false
-      }
     }
   }
 }

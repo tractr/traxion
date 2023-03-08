@@ -17,5 +17,10 @@ export function generateImports(): ImportDeclarationStructure[] {
       moduleSpecifier: `@prisma/client`,
       namedImports: [{ name: `Prisma` }, { name: 'PrismaClient' }],
     },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: `@trxn/nestjs-database`,
+      namedImports: [{ name: 'PrismaClient' }],
+    },
   ];
 }
