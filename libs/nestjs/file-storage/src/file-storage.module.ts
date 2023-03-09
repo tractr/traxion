@@ -1,5 +1,4 @@
 import { Global, Module } from '@nestjs/common';
-import { ConsoleModule } from 'nestjs-console';
 
 import { createFileStorageConfiguration } from './configs';
 import { FILE_STORAGE_CONFIGURATION } from './constants';
@@ -11,7 +10,6 @@ import { FileStorageService } from './services';
 
 @Global()
 @Module({
-  imports: [ConsoleModule],
   providers: [
     {
       provide: FILE_STORAGE_CONFIGURATION,

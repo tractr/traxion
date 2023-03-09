@@ -48,7 +48,6 @@ describe('S3Service', () => {
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
       const fileSize = 1024;
 
-      // const result =  fileStorageService.getPresignedUploadUrl(fileMimeType, fileSize);
       expect(() =>
         fileStorageService.getPresignedUploadUrl(fileMimeType, fileSize),
       ).toThrow(`${fileMimeType} is not an allowed MIME type`);

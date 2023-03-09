@@ -4,7 +4,7 @@ import { Client, CopyConditions } from 'minio';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FILE_STORAGE_CONFIGURATION } from '../constants';
-import { FileStorageConfigurationPrivate } from '../interfaces';
+import { FileStoragePrivateConfig } from '../interfaces';
 
 /**
  * Service to manipulate remote file storage.
@@ -14,7 +14,7 @@ import { FileStorageConfigurationPrivate } from '../interfaces';
 export class FileStorageService extends Client {
   constructor(
     @Inject(FILE_STORAGE_CONFIGURATION)
-    private fileStorageConfiguration: FileStorageConfigurationPrivate,
+    private fileStorageConfiguration: FileStoragePrivateConfig,
   ) {
     super(fileStorageConfiguration);
   }

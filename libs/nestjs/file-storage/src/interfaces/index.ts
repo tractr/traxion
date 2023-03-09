@@ -1,4 +1,4 @@
-export * from './file-storage-configuration-public.interface';
-export * from './file-storage-configuration-private.interface';
+export * from './file-storage-public-configuration.interface';
+export * from './file-storage-private-configuration.interface';
 export * from './presigned-download-configuration.interface';
 export * from './presigned-upload-configuration.interface';

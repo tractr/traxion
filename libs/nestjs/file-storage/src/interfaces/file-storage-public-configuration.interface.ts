@@ -3,7 +3,7 @@ import { ClientOptions, Region } from 'minio';
 import { PresignedDownloadConfiguration } from './presigned-download-configuration.interface';
 import { PresignedUploadConfiguration } from './presigned-upload-configuration.interface';
 
-export interface FileStorageConfigurationPublic extends ClientOptions {
+export interface FileStoragePublicConfig extends ClientOptions {
   /**
    * File storage endpoint (ip or domain)
    */

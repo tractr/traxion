@@ -5,8 +5,8 @@ import { mockDeep } from 'jest-mock-extended';
 import { FILE_STORAGE_CONFIGURATION } from './constants';
 import { FileStorageModule } from './file-storage.module';
 import {
-  FileStorageConfigurationPrivate,
-  FileStorageConfigurationPublic,
+  FileStoragePrivateConfig,
+  FileStoragePublicConfig,
 } from './interfaces';
 import { FileStorageService } from './services';
 
@@ -18,10 +18,8 @@ describe('FileStorageModule', () => {
   let fileStorageModule: TestingModule;
 
   const setFileStorageDynamicModule = async (
-    fileStorageConfigurationPublic: FileStorageConfigurationPublic,
+    fileStorageConfigurationPublic: FileStoragePublicConfig,
   ) => {
-    // const app: INestApplication;
-    // const fileStorageModule: TestingModule;
     const fileStorageDynamicModule: DynamicModule = FileStorageModule.register(
       fileStorageConfigurationPublic,
     );
@@ -42,7 +40,7 @@ describe('FileStorageModule', () => {
     await app.init();
   };
   it('should create an instance', async () => {
-    const clientConfig: FileStorageConfigurationPublic = {
+    const clientConfig: FileStoragePublicConfig = {
       endPoint: 'http://localhost:3000',
       accessKey: 'test',
       secretKey: 'test',
@@ -64,7 +62,7 @@ describe('FileStorageModule', () => {
   });
 
   it('Test that FILE_STORAGE_CONFIGURATION all the default values', async () => {
-    const clientConfig: FileStorageConfigurationPublic = {
+    const clientConfig: FileStoragePublicConfig = {
       endPoint: 'http://localhost:3000',
       accessKey: 'test',
       secretKey: 'test',
@@ -73,12 +71,12 @@ describe('FileStorageModule', () => {
       defaultBucket: 'test',
     };
     await setFileStorageDynamicModule(clientConfig);
-    const fileStorageConfig = app.get<FileStorageConfigurationPrivate>(
+    const fileStorageConfig = app.get<FileStoragePrivateConfig>(
       FILE_STORAGE_CONFIGURATION,
     );
 
     const mockFileStorageConfigurationPrivate =
-      mockDeep<FileStorageConfigurationPrivate>();
+      mockDeep<FileStoragePrivateConfig>();
 
     expect(fileStorageConfig).toBeInstanceOf(
       mockFileStorageConfigurationPrivate.constructor,
@@ -107,7 +105,7 @@ describe('FileStorageModule', () => {
     expect(fileStorageConfig).toStrictEqual(fileStorageConfigurationExpected);
   });
   it('Test that FILE_STORAGE_CONFIGURATION all the default override', async () => {
-    const clientConfig: FileStorageConfigurationPublic = {
+    const clientConfig: FileStoragePublicConfig = {
       endPoint: 'http://localhost:3000',
       accessKey: 'test',
       secretKey: 'test',
@@ -127,12 +125,12 @@ describe('FileStorageModule', () => {
       },
     };
     await setFileStorageDynamicModule(clientConfig);
-    const fileStorageConfig = app.get<FileStorageConfigurationPrivate>(
+    const fileStorageConfig = app.get<FileStoragePrivateConfig>(
       FILE_STORAGE_CONFIGURATION,
     );
 
     const mockFileStorageConfigurationPrivate =
-      mockDeep<FileStorageConfigurationPrivate>();
+      mockDeep<FileStoragePrivateConfig>();
 
     expect(fileStorageConfig).toBeInstanceOf(
       mockFileStorageConfigurationPrivate.constructor,

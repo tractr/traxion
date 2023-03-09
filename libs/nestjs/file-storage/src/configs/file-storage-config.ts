@@ -1,6 +1,6 @@
 import {
-  FileStorageConfigurationPrivate,
-  FileStorageConfigurationPublic,
+  FileStoragePrivateConfig,
+  FileStoragePublicConfig,
 } from '../interfaces';
 
 export const DEFAULT_CONFIG = {
@@ -18,8 +18,8 @@ export const DEFAULT_CONFIG = {
 };
 
 export function createFileStorageConfiguration(
-  config: FileStorageConfigurationPublic,
-): FileStorageConfigurationPrivate {
+  config: FileStoragePublicConfig,
+): FileStoragePrivateConfig {
   return {
     ...DEFAULT_CONFIG,
     ...config,
