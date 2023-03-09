@@ -1,0 +1,74 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "..-examples-api-prisma",
+  "projectType": "application",
+  "sourceRoot": "examples/api-prisma/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "configurations": {
+        "production": {
+          "extractLicenses": true,
+          "inspect": false,
+          "optimization": true
+        }
+      },
+      "executor": "@nrwl/webpack:webpack",
+      "options": {
+        "assets": ["examples/api-prisma/src/assets"],
+        "compiler": "tsc",
+        "main": "examples/api-prisma/src/main.ts",
+        "outputPath": "dist/examples/api-prisma",
+        "target": "node",
+        "tsConfig": "examples/api-prisma/tsconfig.app.json",
+        "webpackConfig": "examples/api-prisma/webpack.config.js"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["examples/api-prisma/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "prisma-generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx prisma generate  --schema=./prisma/schema.prisma",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": "examples/api-prisma",
+        "parallel": false
+      }
+    },
+    "serve": {
+      "configurations": {
+        "production": {
+          "buildTarget": "examples-api-prisma:build:production"
+        }
+      },
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "examples-api-prisma:build"
+      }
+    },
+    "test": {
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "examples/api-prisma/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    }
+  }
+}
