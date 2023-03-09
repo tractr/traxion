@@ -13,7 +13,7 @@ generator client {
 
 generator nestjsGraphql {
   provider = "prisma-nestjs-graphql"
-  output = "../../../generated/nestjs-graphql/src/generated/prisma-nestjs-graphql"
+  output = "../../nestjs-graphql/src/generated/prisma-nestjs-graphql"
   purgeOutput = true
   reExport = Single
   noAtomicOperations=true
@@ -22,7 +22,12 @@ generator nestjsGraphql {
   useInputType_StringFilter_ALL = "string"
 }
 
-generator nestjsServices {
-  provider = "hapify-prisma-nestjs-services-generator"
-  output = "../../../.."
-}
+// TODO remove this block
+// generator graphqlResolvers {
+//   provider = "hapify-prisma-nestjs-graphql-resolvers-generator"
+//   output = "../../nestjs-graphql"
+//   tsConfigFilePath   = "tsconfig.lib.json"
+//   generatedDirectory = "src/tsmorph-generated"
+//   nestjsServicesImportPath = "@trxn/generated-nestjs-models-common"
+//   nestjsGraphqlDtosImportPath = "./generated/prisma-nestjs-graphql"
+// }

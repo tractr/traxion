@@ -1,0 +1,8 @@
+{
+  "name": "@trxn/hapify-prisma-nestjs-graphql-resolvers-generator",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "bin": {
+    "hapify-prisma-nestjs-graphql-resolvers-generator": "src/bin.js"
+  }
+}

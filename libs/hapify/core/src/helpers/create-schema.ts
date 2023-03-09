@@ -1,4 +1,6 @@
 /* eslint-disable no-continue */
+import { plural } from 'pluralize';
+
 import { createManyManyRelation } from './create-many-many-relation';
 import { createOneManyRelation } from './create-one-many-relation';
 import { createOneOneRelation } from './create-one-one-relation';
@@ -59,6 +61,7 @@ export function createSchema(definition: SchemaDeclaration) {
     return {
       fields,
       name: model.name,
+      pluralName: model.pluralName ?? plural(model.name),
       primaryKey: {
         name: model.primaryKey?.name || null,
         fields: getPrimaryFields(fields),
