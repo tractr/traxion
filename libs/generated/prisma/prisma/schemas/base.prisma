@@ -21,6 +21,7 @@ generator nestjsGraphql {
   fields_Validator_input = true
   useInputType_StringFilter_ALL = "string"
 }
+ 
 
 // TODO remove this block
 // generator graphqlResolvers {
@@ -31,3 +32,7 @@ generator nestjsGraphql {
 //   nestjsServicesImportPath = "@trxn/generated-nestjs-models-common"
 //   nestjsGraphqlDtosImportPath = "./generated/prisma-nestjs-graphql"
 // }
+generator nestjsServices {
+  provider = "prisma-nestjs-services-generator"
+  output = "../../nestjs-models-common/src/generated/prisma-nestjs-services"
+}

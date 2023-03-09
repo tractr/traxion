@@ -92,6 +92,9 @@
       "@trxn/hapify-update-templates-import-path": [
         "libs/hapify/update-templates-import-path/src/index.ts"
       ],
+      "@trxn/hapify-generators-nestjs-services": [
+        "libs/hapify/generators/nestjs-services/src/index.ts"
+      ],
       "@trxn/nestjs-authentication": [
         "libs/nestjs/authentication/src/index.ts"
       ],
