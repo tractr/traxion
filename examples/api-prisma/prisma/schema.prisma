@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// // Here is the custom generator responsible of the api generation
+// generator customGenerator {
+//   provider           = "node ../../dist/libs/generator/src/bin.js"
+//   output             = ".."
+//   tsConfigFilePath   = "tsconfig.app.json"
+//   generatedDirectory = "src/app/generated"
+// }
+
+// TODO remove this block
+// generator graphqlResolvers {
+//   provider = "hapify-prisma-nestjs-graphql-resolvers-generator"
+//   output = "../../nestjs-graphql"
+//   tsConfigFilePath   = "tsconfig.lib.json"
+//   generatedDirectory = "src/tsmorph-generated"
+//   nestjsServicesImportPath = "@trxn/generated-nestjs-models-common"
+//   nestjsGraphqlDtosImportPath = "./generated/prisma-nestjs-graphql"
+// }
+
+
+generator nestjsServices {
+  provider = "prisma-nestjs-services-generator"
+  output   = "../src/"
+}
+
+//--------------------------------------------
+// This part describe the project models
+//--------------------------------------------
+model User {
+  id      Int      @id @default(autoincrement())
+  email   String   @unique
+  name    String?
+  role   Role   @relation(fields: [roleId], references: [id])
+  roleId Int
+}
+
+model Role {
+  id     Int    @id @default(autoincrement())
+  name    String
+  users User[]
+  rights Right[]
+}
+
+model Right {
+  id     Int    @id @default(autoincrement())
+  name    String @unique
+  roles Role[]
+}
+
+//--------------------------------------------
+// Uncomment the next bloc to add the Tag model
+//--------------------------------------------
+// model Tag {
+//   id     Int    @id @default(autoincrement())
+//   name    String @unique
+//   description String?
+// }
