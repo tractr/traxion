@@ -1,15 +1,12 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import { inspect } from 'util';
-
 import { generatorHandler } from '@prisma/generator-helper';
 import { logger } from '@prisma/sdk';
 import { Project } from 'ts-morph';
 
 import { version } from '../package.json';
 
-import { createSchema } from '@trxn/hapify-core';
+import { createSchema, Schema } from '@trxn/hapify-core';
 import { convertDmmfToHapifySchemaDeclaration } from '@trxn/hapify-devkit';
+import { hapifyNestjsServicesGenerator } from '@trxn/hapify-generators-nestjs-services';
 
 export const GENERATOR_NAME = 'Hapify Prisma NestJs/Services';
 
@@ -22,42 +19,35 @@ generatorHandler({
   },
   onGenerate: async (options) => {
     const { generator, dmmf } = options;
-    const outputDirectory = generator.output?.value;
 
-    if (!outputDirectory) {
+    const output = generator.output?.value;
+
+    if (!output) {
       const error = `${GENERATOR_NAME}: No output directory specified in generator block`;
       logger.error(error);
       throw new Error(error);
     }
 
     // Get the configuration from the generator block
-    const { tsConfigFilePath } = generator.config;
+    const { tsConfigFilePath, clearOutput = true } = generator.config;
 
     // Instantiate the ts project
     const project = new Project({
       tsConfigFilePath,
     });
 
-    // Clear generation directory
-    project.getDirectory(outputDirectory)?.clear();
-
-    fs.writeFileSync(
-      path.join(outputDirectory, 'dmmf.json'),
-      JSON.stringify(dmmf.datamodel, null, 2),
-    );
+    if (clearOutput)
+      await project.addDirectoryAtPathIfExists(output)?.clearImmediately();
 
     try {
       logger.log(`Convert DMMF to Hapify schema declaration`);
-      const schema = createSchema(convertDmmfToHapifySchemaDeclaration(dmmf));
-
-      // Create the nestjs services
-      // await hapifyNestjsServicesGenerator(project, schema, generator.config);
-
-      // Write the schema to the output directory
-      fs.writeFileSync(
-        path.join(outputDirectory, 'hapify.json'),
-        inspect(schema, true, 10),
+      const schema: Schema = createSchema(
+        convertDmmfToHapifySchemaDeclaration(dmmf),
       );
+
+      hapifyNestjsServicesGenerator(project, schema, {
+        output,
+      });
     } catch (error) {
       logger.error(error);
       throw error;
@@ -67,6 +57,7 @@ generatorHandler({
     project
       .getSourceFiles()
       .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
+    // TODO: Format the files with prettier
 
     // Save project to file system
     project.saveSync();
