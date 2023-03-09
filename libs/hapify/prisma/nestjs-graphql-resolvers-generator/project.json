@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "hapify-prisma-nestjs-graphql-resolvers-generator",
+  "projectType": "library",
+  "sourceRoot": "libs/hapify/prisma/nestjs-graphql-resolvers-generator/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "assets": [
+          "libs/hapify/prisma/nestjs-graphql-resolvers-generator/*.md"
+        ],
+        "main": "libs/hapify/prisma/nestjs-graphql-resolvers-generator/src/index.ts",
+        "outputPath": "dist/libs/hapify/prisma/nestjs-graphql-resolvers-generator",
+        "packageJson": "libs/hapify/prisma/nestjs-graphql-resolvers-generator/package.json",
+        "tsConfig": "libs/hapify/prisma/nestjs-graphql-resolvers-generator/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/hapify/prisma/nestjs-graphql-resolvers-generator/**/*.ts"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/hapify/prisma/nestjs-graphql-resolvers-generator/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    }
+  }
+}

@@ -82,6 +82,7 @@ export interface PrimaryKeyDeclaration {
  */
 export type Model = {
   name: string;
+  pluralName: string;
   fields: Field[];
   primaryKey: PrimaryKey | null;
   documentation?: string;
@@ -89,6 +90,7 @@ export type Model = {
 
 export type ModelDeclaration = {
   name: string;
+  pluralName?: string;
   fields: FieldDeclaration[];
   primaryKey: PrimaryKeyDeclaration | null;
   documentation?: string;

@@ -77,8 +77,14 @@
       "@trxn/hapify-generate-config": [
         "libs/hapify/generate-config/src/index.ts"
       ],
+      "@trxn/hapify-generator-graphql-resolvers": [
+        "libs/hapify/generators/graphql-resolvers/src/index.ts"
+      ],
       "@trxn/hapify-generators-nestjs-services": [
         "libs/hapify/generators/nestjs-services/src/index.ts"
+      ],
+      "@trxn/hapify-prisma-nestjs-graphql-resolvers-generator": [
+        "libs/hapify/prisma/nestjs-graphql-resolvers-generator/src/index.ts"
       ],
       "@trxn/hapify-prisma-nestjs-services-generator": [
         "libs/hapify/prisma/nestjs-services-generator/src/index.ts"
