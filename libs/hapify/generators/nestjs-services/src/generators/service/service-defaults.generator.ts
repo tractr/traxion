@@ -33,9 +33,7 @@ export function generateServiceDefaultSourceFile(
   const fileName = `${kebab(model.name)}-defaults.service`;
   const filePath = `${path}/services/${fileName}.ts`;
 
-  const sourceFile = project.createSourceFile(filePath, undefined, {
-    overwrite: true,
-  });
+  const sourceFile = project.createSourceFile(filePath);
 
   const serviceClass = generateServiceDefaultClass(model);
   const imports = generateImports();

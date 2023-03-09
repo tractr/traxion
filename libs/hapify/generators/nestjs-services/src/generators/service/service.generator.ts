@@ -56,9 +56,7 @@ export function generateServiceSourceFile(
   const fileName = `${kebab(model.name)}.service`;
   const filePath = `${path}/services/${fileName}.ts`;
 
-  const sourceFile = project.createSourceFile(filePath, undefined, {
-    overwrite: true,
-  });
+  const sourceFile = project.createSourceFile(filePath);
 
   const serviceClass = generateServiceClass(model);
   const imports = generateImports();

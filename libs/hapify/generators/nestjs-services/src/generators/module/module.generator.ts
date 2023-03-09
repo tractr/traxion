@@ -25,9 +25,7 @@ export function generateModuleSourceFile(project: Project, path: string) {
   const fileName = `models-services.module.ts`;
   const filePath = `${path}/${fileName}`;
 
-  const sourceFile = project.createSourceFile(filePath, undefined, {
-    overwrite: true,
-  });
+  const sourceFile = project.createSourceFile(filePath);
 
   const imports = generateImports();
   const moduleClass = generateModuleClass();

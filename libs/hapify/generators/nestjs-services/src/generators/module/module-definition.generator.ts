@@ -1,19 +1,17 @@
 import { Project, VariableDeclarationKind } from 'ts-morph';
 
-import { generateImportsDefinition } from './imports-definition.generator';
+import { generateImports } from './imports.generator';
 
 export function generateModuleDefinitionSourceFile(
   project: Project,
   path: string,
 ) {
-  const fileName = `models-services.module-definition.ts`;
+  const fileName = `graphql.module-definition.ts`;
   const filePath = `${path}/${fileName}`;
 
-  const sourceFile = project.createSourceFile(filePath, undefined, {
-    overwrite: true,
-  });
+  const sourceFile = project.createSourceFile(filePath);
 
-  const imports = generateImportsDefinition();
+  const imports = generateImports();
 
   sourceFile.addImportDeclarations(imports);
 
@@ -28,21 +26,14 @@ export function generateModuleDefinitionSourceFile(
           ASYNC_OPTIONS_TYPE,
           OPTIONS_TYPE,
         }`,
-        initializer: `new ConfigurableModuleBuilder<ModelsServicesOptions>()
-        .setExtras<
-    ImportsExtra &
-      ProvidersExtra & {
-        PrismaService?: ProviderWithInjectionToken<
-          typeof PrismaService,
-          PrismaService
-        >;
-      }
-  >(
-    { imports: [], providers: [] },
-    addImportsAndProvidersExtra((definition, { PrismaService }) =>
-      addProviderWithInjectionTokenExtra(definition, PrismaService, PrismaService),
-    ),
-  ).build()`,
+        initializer: `
+new ConfigurableModuleBuilder<Record<string, never>>()
+  .setExtras<ImportsExtra>(
+    { imports: [] },
+    addImportsExtra((definition) => definition),
+  )
+  .build();
+        `,
       },
     ],
   });

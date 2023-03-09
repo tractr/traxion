@@ -15,11 +15,6 @@ export function generateImportsDefinition(): ImportDeclarationStructure[] {
     },
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: `./interfaces`,
-      namedImports: [{ name: `ModelsServiceModuleOptions` }],
-    },
-    {
-      kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@trxn/nestjs-core`,
       namedImports: [
         { name: `addImportsAndProvidersExtra` },

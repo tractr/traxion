@@ -2,7 +2,6 @@
 
 import { Project } from 'ts-morph';
 
-import { generateInterfaceSourceFile } from './generators/interface/interface.generator';
 import { generateModuleDefinitionSourceFile } from './generators/module/module-definition.generator';
 import { generateModuleSourceFile } from './generators/module/module.generator';
 import {
@@ -37,9 +36,6 @@ export function hapifyNestjsServicesGenerator(
   // Generate modules definition
   generateModuleDefinitionSourceFile(project, output);
 
-  // Generate Interface
-  generateInterfaceSourceFile(project, `${output}/interfaces`);
-
   // Generate models-services.providers.ts
   const providersSourceFile = generateModelsServicesProvidersSourceFile(
     project,
@@ -67,8 +63,4 @@ export function hapifyNestjsServicesGenerator(
   generateFileIndexExporter(project, `${output}/services`);
   generateFileIndexExporter(project, `${output}/constants`);
   generateFileIndexExporter(project, `${output}/providers`);
-  generateFileIndexExporter(project, `${output}/interfaces`);
-
-  // Save project to file system
-  // project.saveSync();
 }

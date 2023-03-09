@@ -11,9 +11,7 @@ export function generateServiceIndexFile(
   const fileName = `index.ts`;
   const filePath = `${path}/${fileName}`;
 
-  const sourceFile = project.createSourceFile(filePath, undefined, {
-    overwrite: true,
-  });
+  const sourceFile = project.createSourceFile(filePath);
 
   sourceFile.addVariableStatement({
     declarationKind: VariableDeclarationKind.Const,
