@@ -50,24 +50,24 @@ export const generateFindManyMethod = (
        const ${camel(model.name)}s = await this.${camel(
         model.name,
       )}Service.findMany()
-      
+
        // Get first 10 ${pascal(model.name)}s
        const ${pascal(model.name)}s = await this.${pascal(
         model.name,
       )}Service.findMany({ take: 10 })
-      
+
        // Only select the 'id'
        const ${camel(model.name)}WithIdOnly = await this.${pascal(
         model.name,
       )}Service.findMany({ select: { id: true } })
-      
+
     `,
     },
   ];
 
   return {
     kind: StructureKind.Method,
-    name: 'FindMany',
+    name: 'findMany',
     typeParameters,
     parameters,
     statements: `return prisma.findMany<T>(args);`,

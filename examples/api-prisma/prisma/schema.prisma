@@ -10,28 +10,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// // Here is the custom generator responsible of the api generation
-// generator customGenerator {
-//   provider           = "node ../../dist/libs/generator/src/bin.js"
-//   output             = ".."
-//   tsConfigFilePath   = "tsconfig.app.json"
-//   generatedDirectory = "src/app/generated"
-// }
+// Nestjs graphql dto generator
+generator nestjsGraphql {
+  provider                      = "prisma-nestjs-graphql"
+  output                        = "../src/nestjs-graphql-dtos"
+  purgeOutput                   = true
+  reExport                      = Single
+  noAtomicOperations            = true
+  fields_Validator_from         = "class-validator"
+  fields_Validator_input        = true
+  useInputType_StringFilter_ALL = "string"
+}
 
-// TODO remove this block
-// generator graphqlResolvers {
-//   provider = "hapify-prisma-nestjs-graphql-resolvers-generator"
-//   output = "../../nestjs-graphql"
-//   tsConfigFilePath   = "tsconfig.lib.json"
-//   generatedDirectory = "src/tsmorph-generated"
-//   nestjsServicesImportPath = "@trxn/generated-nestjs-models-common"
-//   nestjsGraphqlDtosImportPath = "./generated/prisma-nestjs-graphql"
-// }
+// Nestjs grahpql resolvers generator
+generator graphqlResolvers {
+  provider = "hapify-prisma-nestjs-graphql-resolvers-generator"
+  output = "../src/nestjs-resolvers"
 
+  // Path relative to the output directory
+  tsConfigFilePath   = "../../tsconfig.app.json"
+  nestjsServicesImportPath = "./nestjs-services"
+  nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
+}
 
+// Nestjs common services generator
 generator nestjsServices {
   provider = "prisma-nestjs-services-generator"
   output   = "../src/nestjs-services"
+  tsConfigFilePath   = "../../tsconfig.app.json"
 }
 
 //--------------------------------------------
@@ -49,13 +55,13 @@ model Role {
   id     Int    @id @default(autoincrement())
   name    String
   users User[]
-  rights Right[]
+  // rights Right[]
 }
 
 model Right {
   id     Int    @id @default(autoincrement())
   name    String @unique
-  roles Role[]
+  // roles Role[]
 }
 
 //--------------------------------------------

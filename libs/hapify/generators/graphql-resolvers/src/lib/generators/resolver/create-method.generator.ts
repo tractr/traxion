@@ -40,7 +40,7 @@ export function generateCreateMethod(model: Model): MethodDeclarationStructure {
     const select = new PrismaSelect(info).value;
 
     const data = {
-      ...this.${modelCamel}Service.getDefaultInternals(),
+      ...this.${modelCamel}DefaultService.getDefaultInternals(),
       ...rawData,
     };
 

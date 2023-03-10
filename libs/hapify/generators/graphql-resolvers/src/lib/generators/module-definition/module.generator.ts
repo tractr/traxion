@@ -27,7 +27,7 @@ export function generateModuleDefinitionSourceFile(
           OPTIONS_TYPE,
         }`,
         initializer: `
-new ConfigurableModuleBuilder<Record<string, never>>()
+new ConfigurableModuleBuilder()
   .setExtras<ImportsExtra>(
     { imports: [] },
     addImportsExtra((definition) => definition),

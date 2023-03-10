@@ -5,6 +5,7 @@ import {
   DatabaseModule,
   NestjsServicesModule,
 } from './modules';
+import { NestjsGraphqlModule } from './modules/graphql.module';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import {
 
     NestjsServicesModule,
 
-    // Graphql modules
+    NestjsGraphqlModule,
   ],
 })
 export class AppModule {}
