@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { BucketItemStat, Client } from 'minio';
+import { BucketItemStat, Client, PostPolicy } from 'minio';
 
 import { FileStorageService } from './file-storage.service';
 import { DEFAULT_CONFIG } from '../configs';
@@ -42,30 +42,6 @@ describe('S3Service', () => {
     expect(fileStorageService).toBeInstanceOf(Client);
   });
 
-  describe('getPresignedUploadUrl', () => {
-    it('throws an error when file mime type is not allowed', async () => {
-      const fileMimeType =
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-      const fileSize = 1024;
-
-      expect(() =>
-        fileStorageService.getPresignedUploadUrl(fileMimeType, fileSize),
-      ).toThrow(`${fileMimeType} is not an allowed MIME type`);
-    });
-
-    it('throws an error when file size is inferior to the file minFileSize configuration', () => {
-      const fileMimeType = DEFAULT_CONFIG.presignedUpload.allowedMimeTypes[0];
-
-      const fileSize = 102;
-
-      expect(() =>
-        fileStorageService.getPresignedUploadUrl(fileMimeType, fileSize),
-      ).toThrow(
-        `File size is out of allowed range. It must be between ${DEFAULT_CONFIG.presignedUpload.minFileSize} and ${DEFAULT_CONFIG.presignedUpload.maxFileSize} bits`,
-      );
-    });
-  });
-
   describe('getUniqueFilename', () => {
     it('should check if file exists', async () => {
       const mockBucketItemStat: BucketItemStat = {
@@ -99,28 +75,76 @@ describe('S3Service', () => {
     });
   });
 
-  // nest unit test are disabled because they need a minio container
-  // and fake data to run
+  describe('getPresignedUploadUrl', () => {
+    it('returns a presigned upload URL', async () => {
+      // Arrange
+      const fileMimeType = DEFAULT_CONFIG.presignedUpload.allowedMimeTypes[0];
+      const fileSize = 1024;
+      const customBucket = 'custom-bucket';
+      const path = 'test/file.txt';
+      const expectedUrl = 'https://test-url.com';
+      const policy = new PostPolicy();
+      policy.setBucket('mock-bucket');
+      policy.setKey('mock-key');
+      policy.setExpires(new Date(Date.now() + 3600000));
+      policy.setContentLengthRange(fileSize - 5, fileSize + 5);
+      const presignedPostPolicy = jest.fn().mockReturnValue(expectedUrl);
+      jest.spyOn(fileStorageService, 'newPostPolicy').mockReturnValue(policy);
+      jest
+        .spyOn(fileStorageService, 'presignedPostPolicy')
+        .mockImplementation(presignedPostPolicy);
 
-  // it('should file storage buckets list buckets', async () => {
-  //   const result = await fileStorageService.listBuckets();
-  //   expect(result).toBeInstanceOf(Array);
-  // });
+      // Act
+      const result = fileStorageService.getPresignedUploadUrl(
+        fileMimeType,
+        fileSize,
+        path,
+        customBucket,
+      );
 
-  // it('should generate presigned url to upload new file', async () => {
-  //   const result = await fileStorageService.getPresignedUploadUrl(
-  //     'image/jpeg',
-  //     1034,
-  //     '/test',
-  //   );
-  //   expect(result.postURL).toEqual('http://localhost:9000/test');
-  //   expect(result.formData).toBeDefined();
-  // });
+      // Assert
+      expect(result).toEqual(expectedUrl);
 
-  // it('should generate presigned url to download storage file', async () => {
-  //   const result = await fileStorageService.getPresignedDownloadUrl(
-  //     'iceland.jpg',
-  //   );
-  //   expect(result).toMatch(/^http:\/\/localhost:9000\/test/);
-  // });
+      expect(presignedPostPolicy).toHaveBeenCalledWith(policy);
+    });
+    it('throws an error when file mime type is not allowed', async () => {
+      const fileMimeType =
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+      const fileSize = 1024;
+
+      expect(() =>
+        fileStorageService.getPresignedUploadUrl(fileMimeType, fileSize),
+      ).toThrow(`${fileMimeType} is not an allowed MIME type`);
+    });
+
+    it('throws an error when file size is inferior to the file minFileSize configuration', () => {
+      const fileMimeType = DEFAULT_CONFIG.presignedUpload.allowedMimeTypes[0];
+
+      const fileSize = 102;
+
+      expect(() =>
+        fileStorageService.getPresignedUploadUrl(fileMimeType, fileSize),
+      ).toThrow(
+        `File size is out of allowed range. It must be between ${DEFAULT_CONFIG.presignedUpload.minFileSize} and ${DEFAULT_CONFIG.presignedUpload.maxFileSize} bits`,
+      );
+    });
+  });
+
+  describe('getPresignedDownloadUrl', () => {
+    it('returns a presigned download URL', async () => {
+      // Arrange
+      const fileName = 'test/file.txt';
+      const expectedUrl = 'https://test-url.com';
+      const presignedGetObject = jest.fn().mockReturnValue(expectedUrl);
+      jest
+        .spyOn(fileStorageService, 'presignedGetObject')
+        .mockImplementation(presignedGetObject);
+
+      // Act
+      const result = fileStorageService.getPresignedDownloadUrl(fileName);
+
+      // Assert
+      expect(result).toEqual(expectedUrl);
+    });
+  });
 });
