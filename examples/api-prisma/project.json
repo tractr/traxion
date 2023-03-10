@@ -31,16 +31,46 @@
       },
       "outputs": ["{options.outputFile}"]
     },
+    "prisma-db-push": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx prisma db push  --schema=./examples/api-prisma/prisma/schema.prisma",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": ".",
+        "parallel": false
+      }
+    },
     "prisma-generate": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
           {
-            "command": "npx prisma generate  --schema=./prisma/schema.prisma",
+            "command": "npm run pregenerate",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "npx prisma generate  --schema=./examples/api-prisma/prisma/schema.prisma",
             "forwardAllArgs": false
           }
         ],
-        "cwd": "examples/api-prisma",
+        "cwd": ".",
+        "parallel": false
+      }
+    },
+    "prisma-studio": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx prisma studio  --schema=./examples/api-prisma/prisma/schema.prisma",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": ".",
         "parallel": false
       }
     },
