@@ -1,4 +1,4 @@
-import { Role, User, FindUniqueRoleArgs, FindManyRoleArgs, CreateOneRoleArgs, UpdateOneRoleArgs, DeleteOneRoleArgs } from "../../nestjs-graphql-dtos";
+import { Role, User, Right, FindUniqueRoleArgs, FindManyRoleArgs, CreateOneRoleArgs, UpdateOneRoleArgs, DeleteOneRoleArgs } from "../../nestjs-graphql-dtos";
 import { RoleService, ROLE_SERVICE, RoleDefaultService, ROLE_DEFAULT_SERVICE } from "../../nestjs-services";
 import { Inject } from "@nestjs/common";
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
@@ -102,5 +102,10 @@ export class RoleResolver {
     @ResolveField(() => User)
     users(@Parent() role: Role) {
         return role.users;
+    }
+
+    @ResolveField(() => Right)
+    rights(@Parent() role: Role) {
+        return role.rights;
     }
 }

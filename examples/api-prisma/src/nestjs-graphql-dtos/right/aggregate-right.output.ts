@@ -8,18 +8,19 @@ import { RightMaxAggregate } from './right-max-aggregate.output';
 
 @ObjectType()
 export class AggregateRight {
-  @Field(() => RightCountAggregate, { nullable: true })
-  _count?: RightCountAggregate;
 
-  @Field(() => RightAvgAggregate, { nullable: true })
-  _avg?: RightAvgAggregate;
+    @Field(() => RightCountAggregate, {nullable:true})
+    _count?: RightCountAggregate;
 
-  @Field(() => RightSumAggregate, { nullable: true })
-  _sum?: RightSumAggregate;
+    @Field(() => RightAvgAggregate, {nullable:true})
+    _avg?: RightAvgAggregate;
 
-  @Field(() => RightMinAggregate, { nullable: true })
-  _min?: RightMinAggregate;
+    @Field(() => RightSumAggregate, {nullable:true})
+    _sum?: RightSumAggregate;
 
-  @Field(() => RightMaxAggregate, { nullable: true })
-  _max?: RightMaxAggregate;
+    @Field(() => RightMinAggregate, {nullable:true})
+    _min?: RightMinAggregate;
+
+    @Field(() => RightMaxAggregate, {nullable:true})
+    _max?: RightMaxAggregate;
 }

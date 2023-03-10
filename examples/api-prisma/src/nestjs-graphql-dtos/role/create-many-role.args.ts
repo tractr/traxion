@@ -5,10 +5,11 @@ import { Type } from 'class-transformer';
 
 @ArgsType()
 export class CreateManyRoleArgs {
-  @Field(() => [RoleCreateManyInput], { nullable: false })
-  @Type(() => RoleCreateManyInput)
-  data!: Array<RoleCreateManyInput>;
 
-  @Field(() => Boolean, { nullable: true })
-  skipDuplicates?: boolean;
+    @Field(() => [RoleCreateManyInput], {nullable:false})
+    @Type(() => RoleCreateManyInput)
+    data!: Array<RoleCreateManyInput>;
+
+    @Field(() => Boolean, {nullable:true})
+    skipDuplicates?: boolean;
 }

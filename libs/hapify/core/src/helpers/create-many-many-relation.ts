@@ -58,11 +58,13 @@ export function createManyManyRelation(
     name: relationName,
     from: {
       model: firstModel,
-      virtual: firstVirtualField as VirtualField,
+      // TODO: temporary fix: use the field from the opposite side of the relation
+      virtual: secondVirtualField as VirtualField,
     },
     to: {
       model: secondModel,
-      virtual: secondVirtualField as VirtualField,
+      // TODO: temporary fix: use the field from the opposite side of the relation
+      virtual: firstVirtualField as VirtualField,
     },
   };
 

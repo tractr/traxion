@@ -6,11 +6,12 @@ import { RightWhereInput } from './right-where.input';
 
 @ArgsType()
 export class UpdateManyRightArgs {
-  @Field(() => RightUpdateManyMutationInput, { nullable: false })
-  @Type(() => RightUpdateManyMutationInput)
-  data!: RightUpdateManyMutationInput;
 
-  @Field(() => RightWhereInput, { nullable: true })
-  @Type(() => RightWhereInput)
-  where?: RightWhereInput;
+    @Field(() => RightUpdateManyMutationInput, {nullable:false})
+    @Type(() => RightUpdateManyMutationInput)
+    data!: RightUpdateManyMutationInput;
+
+    @Field(() => RightWhereInput, {nullable:true})
+    @Type(() => RightWhereInput)
+    where?: RightWhereInput;
 }

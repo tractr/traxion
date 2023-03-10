@@ -1,4 +1,4 @@
-import { Right, FindUniqueRightArgs, FindManyRightArgs, CreateOneRightArgs, UpdateOneRightArgs, DeleteOneRightArgs } from "../../nestjs-graphql-dtos";
+import { Right, Role, FindUniqueRightArgs, FindManyRightArgs, CreateOneRightArgs, UpdateOneRightArgs, DeleteOneRightArgs } from "../../nestjs-graphql-dtos";
 import { RightService, RIGHT_SERVICE, RightDefaultService, RIGHT_DEFAULT_SERVICE } from "../../nestjs-services";
 import { Inject } from "@nestjs/common";
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
@@ -97,5 +97,10 @@ export class RightResolver {
 
             return right;
           
+    }
+
+    @ResolveField(() => Role)
+    roles(@Parent() right: Right) {
+        return right.roles;
     }
 }

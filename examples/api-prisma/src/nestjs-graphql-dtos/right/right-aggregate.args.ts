@@ -13,34 +13,35 @@ import { RightMaxAggregateInput } from './right-max-aggregate.input';
 
 @ArgsType()
 export class RightAggregateArgs {
-  @Field(() => RightWhereInput, { nullable: true })
-  @Type(() => RightWhereInput)
-  where?: RightWhereInput;
 
-  @Field(() => [RightOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<RightOrderByWithRelationInput>;
+    @Field(() => RightWhereInput, {nullable:true})
+    @Type(() => RightWhereInput)
+    where?: RightWhereInput;
 
-  @Field(() => RightWhereUniqueInput, { nullable: true })
-  cursor?: RightWhereUniqueInput;
+    @Field(() => [RightOrderByWithRelationInput], {nullable:true})
+    orderBy?: Array<RightOrderByWithRelationInput>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number;
+    @Field(() => RightWhereUniqueInput, {nullable:true})
+    cursor?: RightWhereUniqueInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number;
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => RightCountAggregateInput, { nullable: true })
-  _count?: RightCountAggregateInput;
+    @Field(() => Int, {nullable:true})
+    skip?: number;
 
-  @Field(() => RightAvgAggregateInput, { nullable: true })
-  _avg?: RightAvgAggregateInput;
+    @Field(() => RightCountAggregateInput, {nullable:true})
+    _count?: RightCountAggregateInput;
 
-  @Field(() => RightSumAggregateInput, { nullable: true })
-  _sum?: RightSumAggregateInput;
+    @Field(() => RightAvgAggregateInput, {nullable:true})
+    _avg?: RightAvgAggregateInput;
 
-  @Field(() => RightMinAggregateInput, { nullable: true })
-  _min?: RightMinAggregateInput;
+    @Field(() => RightSumAggregateInput, {nullable:true})
+    _sum?: RightSumAggregateInput;
 
-  @Field(() => RightMaxAggregateInput, { nullable: true })
-  _max?: RightMaxAggregateInput;
+    @Field(() => RightMinAggregateInput, {nullable:true})
+    _min?: RightMinAggregateInput;
+
+    @Field(() => RightMaxAggregateInput, {nullable:true})
+    _max?: RightMaxAggregateInput;
 }
