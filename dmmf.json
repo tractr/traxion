@@ -1,0 +1,1911 @@
+{
+  "enums": [
+    {
+      "name": "InternalFieldDefaultEnum",
+      "values": [
+        {
+          "name": "Enum1",
+          "dbName": null
+        },
+        {
+          "name": "Enum2",
+          "dbName": null
+        }
+      ],
+      "dbName": null
+    },
+    {
+      "name": "InternalFieldCustomEnum",
+      "values": [
+        {
+          "name": "Enmu1",
+          "dbName": null
+        },
+        {
+          "name": "Enum2",
+          "dbName": null
+        }
+      ],
+      "dbName": null
+    },
+    {
+      "name": "UniqueValueFieldUniqueEnum",
+      "values": [
+        {
+          "name": "value1",
+          "dbName": null
+        },
+        {
+          "name": "value2",
+          "dbName": null
+        }
+      ],
+      "dbName": null
+    },
+    {
+      "name": "UniqueValueFieldUniqueEnumNullable",
+      "values": [
+        {
+          "name": "val1",
+          "dbName": null
+        },
+        {
+          "name": "val2",
+          "dbName": null
+        }
+      ],
+      "dbName": null
+    },
+    {
+      "name": "UserRoles",
+      "values": [
+        {
+          "name": "admin",
+          "dbName": null
+        },
+        {
+          "name": "user",
+          "dbName": null
+        },
+        {
+          "name": "guest",
+          "dbName": null
+        },
+        {
+          "name": "custom",
+          "dbName": null
+        }
+      ],
+      "dbName": null
+    }
+  ],
+  "models": [
+    {
+      "name": "Answer",
+      "dbName": null,
+      "fields": [
+        {
+          "name": "id",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": true,
+          "isReadOnly": false,
+          "hasDefaultValue": true,
+          "type": "String",
+          "default": {
+            "name": "uuid",
+            "args": []
+          },
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)\n@Validator.IsUUID()"
+        },
+        {
+          "name": "createdAt",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "DateTime",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsDate()"
+        },
+        {
+          "name": "owner",
+          "kind": "object",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "User",
+          "relationName": "Answer.owner.User.answers",
+          "relationFromFields": [
+            "ownerId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
+          "relationOnDelete": "Cascade",
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "ownerId",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": true,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "question",
+          "kind": "object",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Question",
+          "relationName": "Answer.question.Question.answers",
+          "relationFromFields": [
+            "questionId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "questionId",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": true,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "tags",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Tag",
+          "relationName": "Answer.tags.Tag.answers",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsArray({ each: true })"
+        },
+        {
+          "name": "answerDate",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "DateTime",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsDate()"
+        },
+        {
+          "name": "variables",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Variable",
+          "relationName": "Variable.answer.Answer.variables",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        }
+      ],
+      "primaryKey": null,
+      "uniqueFields": [],
+      "uniqueIndexes": [],
+      "isGenerated": false
+    },
+    {
+      "name": "Department",
+      "dbName": null,
+      "fields": [
+        {
+          "name": "id",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": true,
+          "isReadOnly": false,
+          "hasDefaultValue": true,
+          "type": "String",
+          "default": {
+            "name": "uuid",
+            "args": []
+          },
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)\n@Validator.IsUUID()"
+        },
+        {
+          "name": "enterprise",
+          "kind": "object",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Enterprise",
+          "relationName": "Department.enterprise.Enterprise.departments",
+          "relationFromFields": [
+            "enterpriseId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "enterpriseId",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": true,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false
+        }
+      ],
+      "primaryKey": null,
+      "uniqueFields": [],
+      "uniqueIndexes": [],
+      "isGenerated": false
+    },
+    {
+      "name": "Enterprise",
+      "dbName": null,
+      "fields": [
+        {
+          "name": "id",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": true,
+          "isReadOnly": false,
+          "hasDefaultValue": true,
+          "type": "String",
+          "default": {
+            "name": "uuid",
+            "args": []
+          },
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)\n@Validator.IsUUID()"
+        },
+        {
+          "name": "name",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "employee",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "User",
+          "relationName": "Enterprise.employee.User.enterprises",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsArray({ each: true })"
+        },
+        {
+          "name": "departments",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Department",
+          "relationName": "Department.enterprise.Enterprise.departments",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        }
+      ],
+      "primaryKey": null,
+      "uniqueFields": [],
+      "uniqueIndexes": [],
+      "isGenerated": false
+    },
+    {
+      "name": "InternalField",
+      "dbName": null,
+      "fields": [
+        {
+          "name": "id",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": true,
+          "isReadOnly": false,
+          "hasDefaultValue": true,
+          "type": "String",
+          "default": {
+            "name": "uuid",
+            "args": []
+          },
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)\n@Validator.IsUUID()"
+        },
+        {
+          "name": "defaultNullable",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "defaultString",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "defaultNumber",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Int",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsInt()"
+        },
+        {
+          "name": "defaultBoolean",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Boolean",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsBoolean()"
+        },
+        {
+          "name": "defaultDatetime",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "DateTime",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsDate()"
+        },
+        {
+          "name": "defaultEnum",
+          "kind": "enum",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "InternalFieldDefaultEnum",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsEnum(InternalFieldDefaultEnum)"
+        },
+        {
+          "name": "customString",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "customNumber",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Float",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsNumber()"
+        },
+        {
+          "name": "customBoolean",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Boolean",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsBoolean()"
+        },
+        {
+          "name": "customDatetime",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "DateTime",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsDate()"
+        },
+        {
+          "name": "customEnum",
+          "kind": "enum",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "InternalFieldCustomEnum",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsEnum(InternalFieldCustomEnum)"
+        }
+      ],
+      "primaryKey": null,
+      "uniqueFields": [],
+      "uniqueIndexes": [],
+      "isGenerated": false
+    },
+    {
+      "name": "Message",
+      "dbName": null,
+      "fields": [
+        {
+          "name": "id",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": true,
+          "isReadOnly": false,
+          "hasDefaultValue": true,
+          "type": "String",
+          "default": {
+            "name": "uuid",
+            "args": []
+          },
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)\n@Validator.IsUUID()"
+        },
+        {
+          "name": "createdAt",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "DateTime",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsDate()"
+        },
+        {
+          "name": "text",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "hour",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "DateTime",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsDate()"
+        },
+        {
+          "name": "tags",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Tag",
+          "relationName": "Message.tags.Tag.messages",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsArray({ each: true })"
+        },
+        {
+          "name": "questions",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Question",
+          "relationName": "Message.questions.Question.messages",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsArray({ each: true })"
+        }
+      ],
+      "primaryKey": null,
+      "uniqueFields": [],
+      "uniqueIndexes": [],
+      "isGenerated": false
+    },
+    {
+      "name": "OpenQuestion",
+      "dbName": null,
+      "fields": [
+        {
+          "name": "id",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": true,
+          "isReadOnly": false,
+          "hasDefaultValue": true,
+          "type": "String",
+          "default": {
+            "name": "uuid",
+            "args": []
+          },
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)\n@Validator.IsUUID()"
+        },
+        {
+          "name": "createdAt",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "DateTime",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsDate()"
+        },
+        {
+          "name": "text",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "key",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "question",
+          "kind": "object",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Question",
+          "relationName": "OpenQuestion.question.Question.openQuestions",
+          "relationFromFields": [
+            "questionId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "questionId",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": true,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "variables",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Variable",
+          "relationName": "Variable.openQuestion.OpenQuestion.variables",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        }
+      ],
+      "primaryKey": null,
+      "uniqueFields": [],
+      "uniqueIndexes": [],
+      "isGenerated": false
+    },
+    {
+      "name": "Question",
+      "dbName": null,
+      "fields": [
+        {
+          "name": "id",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": true,
+          "isReadOnly": false,
+          "hasDefaultValue": true,
+          "type": "String",
+          "default": {
+            "name": "uuid",
+            "args": []
+          },
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)\n@Validator.IsUUID()"
+        },
+        {
+          "name": "createdAt",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "DateTime",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsDate()"
+        },
+        {
+          "name": "title",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "text",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "parentQuestion",
+          "kind": "object",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Question",
+          "relationName": "Question.parentQuestion.Question.questions",
+          "relationFromFields": [
+            "parentQuestionId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "parentQuestionId",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": true,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "tags",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Tag",
+          "relationName": "Question.tags.Tag.questions",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsArray({ each: true })"
+        },
+        {
+          "name": "answers",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Answer",
+          "relationName": "Answer.question.Question.answers",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "messages",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Message",
+          "relationName": "Message.questions.Question.messages",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "openQuestions",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "OpenQuestion",
+          "relationName": "OpenQuestion.question.Question.openQuestions",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "questions",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Question",
+          "relationName": "Question.parentQuestion.Question.questions",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        }
+      ],
+      "primaryKey": null,
+      "uniqueFields": [],
+      "uniqueIndexes": [],
+      "isGenerated": false
+    },
+    {
+      "name": "StringModel",
+      "dbName": null,
+      "fields": [
+        {
+          "name": "id",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": true,
+          "isReadOnly": false,
+          "hasDefaultValue": true,
+          "type": "String",
+          "default": {
+            "name": "uuid",
+            "args": []
+          },
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)\n@Validator.IsUUID()"
+        },
+        {
+          "name": "default",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "email",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "password",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "url",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "text",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false
+        }
+      ],
+      "primaryKey": null,
+      "uniqueFields": [],
+      "uniqueIndexes": [],
+      "isGenerated": false
+    },
+    {
+      "name": "StringModelUnique",
+      "dbName": null,
+      "fields": [
+        {
+          "name": "id",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": true,
+          "isReadOnly": false,
+          "hasDefaultValue": true,
+          "type": "String",
+          "default": {
+            "name": "uuid",
+            "args": []
+          },
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)\n@Validator.IsUUID()"
+        },
+        {
+          "name": "default",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "email",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "password",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "url",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "text",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false
+        }
+      ],
+      "primaryKey": null,
+      "uniqueFields": [],
+      "uniqueIndexes": [],
+      "isGenerated": false
+    },
+    {
+      "name": "Tag",
+      "dbName": null,
+      "fields": [
+        {
+          "name": "id",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": true,
+          "isReadOnly": false,
+          "hasDefaultValue": true,
+          "type": "String",
+          "default": {
+            "name": "uuid",
+            "args": []
+          },
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)\n@Validator.IsUUID()"
+        },
+        {
+          "name": "createdAt",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "DateTime",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsDate()"
+        },
+        {
+          "name": "label",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "owner",
+          "kind": "object",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "User",
+          "relationName": "Tag.owner.User.tags",
+          "relationFromFields": [
+            "ownerId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "ownerId",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": true,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "answers",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Answer",
+          "relationName": "Answer.tags.Tag.answers",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "messages",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Message",
+          "relationName": "Message.tags.Tag.messages",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "questions",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Question",
+          "relationName": "Question.tags.Tag.questions",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        }
+      ],
+      "primaryKey": null,
+      "uniqueFields": [],
+      "uniqueIndexes": [],
+      "isGenerated": false
+    },
+    {
+      "name": "UniqueValueField",
+      "dbName": null,
+      "fields": [
+        {
+          "name": "id",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": true,
+          "isReadOnly": false,
+          "hasDefaultValue": true,
+          "type": "String",
+          "default": {
+            "name": "uuid",
+            "args": []
+          },
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)\n@Validator.IsUUID()"
+        },
+        {
+          "name": "uniqueString",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "uniqueNumber",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Int",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsNumber()"
+        },
+        {
+          "name": "uniqueBoolean",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Boolean",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsBoolean()"
+        },
+        {
+          "name": "uniqueDatetime",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "DateTime",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsDate()"
+        },
+        {
+          "name": "uniqueEnum",
+          "kind": "enum",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "UniqueValueFieldUniqueEnum",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsEnum(UniqueValueFieldUniqueEnum)"
+        },
+        {
+          "name": "uniqueObject",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Json",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsObject()"
+        },
+        {
+          "name": "uniqueEntity",
+          "kind": "object",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "User",
+          "relationName": "UniqueValueField.uniqueEntity.User.uniqueValue",
+          "relationFromFields": [
+            "uniqueEntityId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "uniqueEntityId",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": true,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "uniqueStringNullable",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "uniqueNumberNullable",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Int",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsNumber()"
+        },
+        {
+          "name": "uniqueBooleanNullable",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Boolean",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsBoolean()"
+        },
+        {
+          "name": "uniqueDatetimeNullable",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "DateTime",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsDate()"
+        },
+        {
+          "name": "uniqueEnumNullable",
+          "kind": "enum",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "UniqueValueFieldUniqueEnumNullable",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsEnum(UniqueValueFieldUniqueEnumNullable)"
+        },
+        {
+          "name": "uniqueObjectNullable",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Json",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsObject()"
+        },
+        {
+          "name": "uniqueEntityNullable",
+          "kind": "object",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "User",
+          "relationName": "UniqueValueField.uniqueEntityNullable.User.uniqueEntityNullable",
+          "relationFromFields": [
+            "uniqueEntityNullableId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "uniqueEntityNullableId",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": true,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false
+        }
+      ],
+      "primaryKey": null,
+      "uniqueFields": [
+        [
+          "uniqueString",
+          "uniqueNumber"
+        ],
+        [
+          "uniqueString",
+          "uniqueBoolean"
+        ]
+      ],
+      "uniqueIndexes": [
+        {
+          "name": "unique",
+          "fields": [
+            "uniqueString",
+            "uniqueNumber"
+          ]
+        },
+        {
+          "name": "unique2",
+          "fields": [
+            "uniqueString",
+            "uniqueBoolean"
+          ]
+        }
+      ],
+      "isGenerated": false
+    },
+    {
+      "name": "User",
+      "dbName": null,
+      "fields": [
+        {
+          "name": "id",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": true,
+          "isReadOnly": false,
+          "hasDefaultValue": true,
+          "type": "String",
+          "default": {
+            "name": "uuid",
+            "args": []
+          },
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)\n@Validator.IsUUID()"
+        },
+        {
+          "name": "createdAt",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "DateTime",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsDate()"
+        },
+        {
+          "name": "name",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "email",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": true,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "password",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@HideField()\n@Validator.MaxLength(255)"
+        },
+        {
+          "name": "listObject",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Json",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsObject()\n@Validator.IsArray({ each: true })"
+        },
+        {
+          "name": "roles",
+          "kind": "enum",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "UserRoles",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsArray({ each: true })\n@Validator.IsEnum(UserRoles)"
+        },
+        {
+          "name": "object",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Json",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsObject()"
+        },
+        {
+          "name": "answers",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Answer",
+          "relationName": "Answer.owner.User.answers",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "enterprises",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Enterprise",
+          "relationName": "Enterprise.employee.User.enterprises",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "tags",
+          "kind": "object",
+          "isList": true,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Tag",
+          "relationName": "Tag.owner.User.tags",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "uniqueValue",
+          "kind": "object",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "UniqueValueField",
+          "relationName": "UniqueValueField.uniqueEntity.User.uniqueValue",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "uniqueEntityNullable",
+          "kind": "object",
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "UniqueValueField",
+          "relationName": "UniqueValueField.uniqueEntityNullable.User.uniqueEntityNullable",
+          "relationFromFields": [],
+          "relationToFields": [],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        }
+      ],
+      "primaryKey": null,
+      "uniqueFields": [],
+      "uniqueIndexes": [],
+      "isGenerated": false
+    },
+    {
+      "name": "Variable",
+      "dbName": null,
+      "fields": [
+        {
+          "name": "id",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": true,
+          "isReadOnly": false,
+          "hasDefaultValue": true,
+          "type": "String",
+          "default": {
+            "name": "uuid",
+            "args": []
+          },
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)\n@Validator.IsUUID()"
+        },
+        {
+          "name": "createdAt",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "DateTime",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.IsDate()"
+        },
+        {
+          "name": "value",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false,
+          "documentation": "@Validator.MaxLength(255)"
+        },
+        {
+          "name": "openQuestion",
+          "kind": "object",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "OpenQuestion",
+          "relationName": "Variable.openQuestion.OpenQuestion.variables",
+          "relationFromFields": [
+            "openQuestionId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "openQuestionId",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": true,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "answer",
+          "kind": "object",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": false,
+          "hasDefaultValue": false,
+          "type": "Answer",
+          "relationName": "Variable.answer.Answer.variables",
+          "relationFromFields": [
+            "answerId"
+          ],
+          "relationToFields": [
+            "id"
+          ],
+          "isGenerated": false,
+          "isUpdatedAt": false
+        },
+        {
+          "name": "answerId",
+          "kind": "scalar",
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "isId": false,
+          "isReadOnly": true,
+          "hasDefaultValue": false,
+          "type": "String",
+          "isGenerated": false,
+          "isUpdatedAt": false
+        }
+      ],
+      "primaryKey": null,
+      "uniqueFields": [],
+      "uniqueIndexes": [],
+      "isGenerated": false
+    }
+  ],
+  "types": []
+}
