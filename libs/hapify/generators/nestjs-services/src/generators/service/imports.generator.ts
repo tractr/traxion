@@ -10,12 +10,12 @@ export function generateImports(): ImportDeclarationStructure[] {
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@prisma/client`,
-      namedImports: [{ name: `Prisma` }, { name: 'PrismaClient' }],
+      namedImports: [{ name: `Prisma` }],
     },
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@trxn/nestjs-database`,
-      namedImports: [{ name: 'PrismaClient' }],
+      namedImports: [{ name: 'PrismaService' }],
     },
   ];
 }

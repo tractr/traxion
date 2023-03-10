@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "name": "..-examples-api-prisma",
+  "name": "examples-api-prisma",
   "projectType": "application",
   "sourceRoot": "examples/api-prisma/src",
   "tags": [],
@@ -15,13 +15,12 @@
       },
       "executor": "@nrwl/webpack:webpack",
       "options": {
-        "assets": ["examples/api-prisma/src/assets"],
+        "assets": [],
         "compiler": "tsc",
         "main": "examples/api-prisma/src/main.ts",
         "outputPath": "dist/examples/api-prisma",
         "target": "node",
-        "tsConfig": "examples/api-prisma/tsconfig.app.json",
-        "webpackConfig": "examples/api-prisma/webpack.config.js"
+        "tsConfig": "examples/api-prisma/tsconfig.app.json"
       },
       "outputs": ["{options.outputPath}"]
     },

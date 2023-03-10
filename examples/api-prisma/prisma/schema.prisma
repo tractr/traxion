@@ -31,7 +31,7 @@ datasource db {
 
 generator nestjsServices {
   provider = "prisma-nestjs-services-generator"
-  output   = "../src/"
+  output   = "../src/nestjs-services"
 }
 
 //--------------------------------------------

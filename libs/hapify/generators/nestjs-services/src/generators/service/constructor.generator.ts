@@ -11,7 +11,7 @@ export function generateConstructor(): ConstructorDeclarationStructure {
       {
         kind: StructureKind.Parameter,
         name: `prismaClient`,
-        type: `PrismaClient`,
+        type: `PrismaService`,
         scope: Scope.Private,
         isReadonly: true,
       },

@@ -1,7 +1,6 @@
 import { kebab, pascal } from 'case';
 import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
 
-import { generateConstructor } from './constructor.generator';
 import { generateDefaultInternalsMethod } from './default-internals-method.generator';
 import { generateImports } from './imports.generator';
 
@@ -11,7 +10,6 @@ export function generateServiceDefaultClass(
   model: Model,
 ): ClassDeclarationStructure {
   const className = `${pascal(model.name)}DefaultService`;
-  const constructor = generateConstructor();
 
   const methods = [...generateDefaultInternalsMethod()];
 
@@ -21,7 +19,7 @@ export function generateServiceDefaultClass(
     isExported: true,
     decorators: [{ name: 'Injectable()' }],
     methods,
-    ctors: [constructor],
+    ctors: [],
   };
 }
 

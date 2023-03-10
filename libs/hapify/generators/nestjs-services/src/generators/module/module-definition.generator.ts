@@ -1,17 +1,17 @@
 import { Project, VariableDeclarationKind } from 'ts-morph';
 
-import { generateImports } from './imports.generator';
+import { generateImportsDefinition } from './imports-definition.generator';
 
 export function generateModuleDefinitionSourceFile(
   project: Project,
   path: string,
 ) {
-  const fileName = `graphql.module-definition.ts`;
+  const fileName = `models-services.module-definition.ts`;
   const filePath = `${path}/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);
 
-  const imports = generateImports();
+  const imports = generateImportsDefinition();
 
   sourceFile.addImportDeclarations(imports);
 
@@ -27,7 +27,7 @@ export function generateModuleDefinitionSourceFile(
           OPTIONS_TYPE,
         }`,
         initializer: `
-new ConfigurableModuleBuilder<Record<string, never>>()
+new ConfigurableModuleBuilder()
   .setExtras<ImportsExtra>(
     { imports: [] },
     addImportsExtra((definition) => definition),
