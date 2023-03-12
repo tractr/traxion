@@ -124,28 +124,6 @@ export function createSchema(definition: SchemaDeclaration) {
     if (relation) relations.push(relation);
   }
 
-  // Now we need for each relation to add the ref to the primary keys
-  relations.forEach((relation) => {
-    switch (relation.type) {
-      case 'oneOne':
-      case 'oneMany':
-        relation.from.model.primaryKey?.fields.forEach((field) => {
-          field.relations.push(relation);
-        });
-        break;
-      case 'manyMany':
-        relation.from.model.primaryKey?.fields.forEach((field) => {
-          field.relations.push(relation);
-        });
-        relation.to.model.primaryKey?.fields.forEach((field) => {
-          field.relations.push(relation);
-        });
-        break;
-      default:
-        break;
-    }
-  });
-
   return {
     enums: definition.enums,
     models,

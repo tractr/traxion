@@ -68,10 +68,19 @@ export function createManyManyRelation(
     },
   };
 
-  // Add the relation to the fields
+  // Add the relation reference to the virtual fields
   relation.from.virtual.relation = relation;
   relation.to.virtual.relation = relation;
 
+  // Add the relation reference to the primary fields
+  relation.from.model.primaryKey?.fields.forEach((field) => {
+    field.relations.push(relation);
+  });
+  relation.to.model.primaryKey?.fields.forEach((field) => {
+    field.relations.push(relation);
+  });
+
+  // Add the relation fields to the models
   firstModel.fields.push(relation.from.virtual);
   secondModel.fields.push(relation.to.virtual);
 

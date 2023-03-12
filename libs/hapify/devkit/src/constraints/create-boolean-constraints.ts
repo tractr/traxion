@@ -13,6 +13,6 @@ export function createBooleanConstraints(
   const { hasDefaultValue, default: defaultValue } = field;
   return {
     scalar: 'boolean',
-    // defaultValue: hasDefaultValue ? !!defaultValue : undefined,
+    defaultValue: hasDefaultValue ? !!defaultValue : undefined,
   };
 }

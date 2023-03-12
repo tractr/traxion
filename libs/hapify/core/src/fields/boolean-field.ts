@@ -20,7 +20,7 @@ export type BooleanField = BaseField<'boolean', BooleanConstraints>;
  */
 export type BooleanConstraints = BaseConstraints &
   ScalarConstraint<'boolean'> &
-  DefaultConstraint<number>;
+  DefaultConstraint<boolean>;
 
 /**
  * Predicates and helpers
