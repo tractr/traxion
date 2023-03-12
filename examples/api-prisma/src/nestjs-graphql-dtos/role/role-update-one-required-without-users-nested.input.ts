@@ -9,24 +9,23 @@ import { RoleUpdateWithoutUsersInput } from './role-update-without-users.input';
 
 @InputType()
 export class RoleUpdateOneRequiredWithoutUsersNestedInput {
+  @Field(() => RoleCreateWithoutUsersInput, { nullable: true })
+  @Type(() => RoleCreateWithoutUsersInput)
+  create?: RoleCreateWithoutUsersInput;
 
-    @Field(() => RoleCreateWithoutUsersInput, {nullable:true})
-    @Type(() => RoleCreateWithoutUsersInput)
-    create?: RoleCreateWithoutUsersInput;
+  @Field(() => RoleCreateOrConnectWithoutUsersInput, { nullable: true })
+  @Type(() => RoleCreateOrConnectWithoutUsersInput)
+  connectOrCreate?: RoleCreateOrConnectWithoutUsersInput;
 
-    @Field(() => RoleCreateOrConnectWithoutUsersInput, {nullable:true})
-    @Type(() => RoleCreateOrConnectWithoutUsersInput)
-    connectOrCreate?: RoleCreateOrConnectWithoutUsersInput;
+  @Field(() => RoleUpsertWithoutUsersInput, { nullable: true })
+  @Type(() => RoleUpsertWithoutUsersInput)
+  upsert?: RoleUpsertWithoutUsersInput;
 
-    @Field(() => RoleUpsertWithoutUsersInput, {nullable:true})
-    @Type(() => RoleUpsertWithoutUsersInput)
-    upsert?: RoleUpsertWithoutUsersInput;
+  @Field(() => RoleWhereUniqueInput, { nullable: true })
+  @Type(() => RoleWhereUniqueInput)
+  connect?: RoleWhereUniqueInput;
 
-    @Field(() => RoleWhereUniqueInput, {nullable:true})
-    @Type(() => RoleWhereUniqueInput)
-    connect?: RoleWhereUniqueInput;
-
-    @Field(() => RoleUpdateWithoutUsersInput, {nullable:true})
-    @Type(() => RoleUpdateWithoutUsersInput)
-    update?: RoleUpdateWithoutUsersInput;
+  @Field(() => RoleUpdateWithoutUsersInput, { nullable: true })
+  @Type(() => RoleUpdateWithoutUsersInput)
+  update?: RoleUpdateWithoutUsersInput;
 }

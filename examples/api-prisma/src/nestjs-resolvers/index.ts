@@ -1,3 +1,3 @@
-export * from "./resolvers";
-export * from "./dtos";
-export * from "./graphql.module";
+export * from './resolvers';
+export * from './dtos';
+export * from './graphql.module';

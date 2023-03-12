@@ -12,48 +12,47 @@ import { UserScalarWhereInput } from './user-scalar-where.input';
 
 @InputType()
 export class UserUpdateManyWithoutRoleNestedInput {
+  @Field(() => [UserCreateWithoutRoleInput], { nullable: true })
+  @Type(() => UserCreateWithoutRoleInput)
+  create?: Array<UserCreateWithoutRoleInput>;
 
-    @Field(() => [UserCreateWithoutRoleInput], {nullable:true})
-    @Type(() => UserCreateWithoutRoleInput)
-    create?: Array<UserCreateWithoutRoleInput>;
+  @Field(() => [UserCreateOrConnectWithoutRoleInput], { nullable: true })
+  @Type(() => UserCreateOrConnectWithoutRoleInput)
+  connectOrCreate?: Array<UserCreateOrConnectWithoutRoleInput>;
 
-    @Field(() => [UserCreateOrConnectWithoutRoleInput], {nullable:true})
-    @Type(() => UserCreateOrConnectWithoutRoleInput)
-    connectOrCreate?: Array<UserCreateOrConnectWithoutRoleInput>;
+  @Field(() => [UserUpsertWithWhereUniqueWithoutRoleInput], { nullable: true })
+  @Type(() => UserUpsertWithWhereUniqueWithoutRoleInput)
+  upsert?: Array<UserUpsertWithWhereUniqueWithoutRoleInput>;
 
-    @Field(() => [UserUpsertWithWhereUniqueWithoutRoleInput], {nullable:true})
-    @Type(() => UserUpsertWithWhereUniqueWithoutRoleInput)
-    upsert?: Array<UserUpsertWithWhereUniqueWithoutRoleInput>;
+  @Field(() => UserCreateManyRoleInputEnvelope, { nullable: true })
+  @Type(() => UserCreateManyRoleInputEnvelope)
+  createMany?: UserCreateManyRoleInputEnvelope;
 
-    @Field(() => UserCreateManyRoleInputEnvelope, {nullable:true})
-    @Type(() => UserCreateManyRoleInputEnvelope)
-    createMany?: UserCreateManyRoleInputEnvelope;
+  @Field(() => [UserWhereUniqueInput], { nullable: true })
+  @Type(() => UserWhereUniqueInput)
+  set?: Array<UserWhereUniqueInput>;
 
-    @Field(() => [UserWhereUniqueInput], {nullable:true})
-    @Type(() => UserWhereUniqueInput)
-    set?: Array<UserWhereUniqueInput>;
+  @Field(() => [UserWhereUniqueInput], { nullable: true })
+  @Type(() => UserWhereUniqueInput)
+  disconnect?: Array<UserWhereUniqueInput>;
 
-    @Field(() => [UserWhereUniqueInput], {nullable:true})
-    @Type(() => UserWhereUniqueInput)
-    disconnect?: Array<UserWhereUniqueInput>;
+  @Field(() => [UserWhereUniqueInput], { nullable: true })
+  @Type(() => UserWhereUniqueInput)
+  delete?: Array<UserWhereUniqueInput>;
 
-    @Field(() => [UserWhereUniqueInput], {nullable:true})
-    @Type(() => UserWhereUniqueInput)
-    delete?: Array<UserWhereUniqueInput>;
+  @Field(() => [UserWhereUniqueInput], { nullable: true })
+  @Type(() => UserWhereUniqueInput)
+  connect?: Array<UserWhereUniqueInput>;
 
-    @Field(() => [UserWhereUniqueInput], {nullable:true})
-    @Type(() => UserWhereUniqueInput)
-    connect?: Array<UserWhereUniqueInput>;
+  @Field(() => [UserUpdateWithWhereUniqueWithoutRoleInput], { nullable: true })
+  @Type(() => UserUpdateWithWhereUniqueWithoutRoleInput)
+  update?: Array<UserUpdateWithWhereUniqueWithoutRoleInput>;
 
-    @Field(() => [UserUpdateWithWhereUniqueWithoutRoleInput], {nullable:true})
-    @Type(() => UserUpdateWithWhereUniqueWithoutRoleInput)
-    update?: Array<UserUpdateWithWhereUniqueWithoutRoleInput>;
+  @Field(() => [UserUpdateManyWithWhereWithoutRoleInput], { nullable: true })
+  @Type(() => UserUpdateManyWithWhereWithoutRoleInput)
+  updateMany?: Array<UserUpdateManyWithWhereWithoutRoleInput>;
 
-    @Field(() => [UserUpdateManyWithWhereWithoutRoleInput], {nullable:true})
-    @Type(() => UserUpdateManyWithWhereWithoutRoleInput)
-    updateMany?: Array<UserUpdateManyWithWhereWithoutRoleInput>;
-
-    @Field(() => [UserScalarWhereInput], {nullable:true})
-    @Type(() => UserScalarWhereInput)
-    deleteMany?: Array<UserScalarWhereInput>;
+  @Field(() => [UserScalarWhereInput], { nullable: true })
+  @Type(() => UserScalarWhereInput)
+  deleteMany?: Array<UserScalarWhereInput>;
 }

@@ -6,12 +6,11 @@ import { UserCreateWithoutRoleInput } from './user-create-without-role.input';
 
 @InputType()
 export class UserCreateOrConnectWithoutRoleInput {
+  @Field(() => UserWhereUniqueInput, { nullable: false })
+  @Type(() => UserWhereUniqueInput)
+  where!: UserWhereUniqueInput;
 
-    @Field(() => UserWhereUniqueInput, {nullable:false})
-    @Type(() => UserWhereUniqueInput)
-    where!: UserWhereUniqueInput;
-
-    @Field(() => UserCreateWithoutRoleInput, {nullable:false})
-    @Type(() => UserCreateWithoutRoleInput)
-    create!: UserCreateWithoutRoleInput;
+  @Field(() => UserCreateWithoutRoleInput, { nullable: false })
+  @Type(() => UserCreateWithoutRoleInput)
+  create!: UserCreateWithoutRoleInput;
 }

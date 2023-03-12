@@ -15,29 +15,31 @@ export const generateDefaultInternalsMethod =
       },
     ];
 
-    const docsDefaultCreatedAt: JSDocStructure[] = [
-      {
-        kind: StructureKind.JSDoc,
-        description: `
-        Return default value for internal field 'createdAt'
-        `,
-      },
-    ];
+    // TODO: add default internal fields management
+    // const docsDefaultCreatedAt: JSDocStructure[] = [
+    //   {
+    //     kind: StructureKind.JSDoc,
+    //     description: `
+    //     Return default value for internal field 'createdAt'
+    //     `,
+    //   },
+    // ];
 
     return [
       {
         kind: StructureKind.Method,
         name: 'getDefaultInternals',
-        statements: `return {
-        createdAt: this.getDefaultCreatedAt(),
-      };`,
+        statements: `return {};`,
+        // TODO: add default internal fields management
+        // statements: `return { createdAt: this.getDefaultCreatedAt(), };`,
         docs: docsDefaultInternals,
       },
-      {
-        kind: StructureKind.Method,
-        name: 'getDefaultCreatedAt',
-        statements: `return new Date();`,
-        docs: docsDefaultCreatedAt,
-      },
+      // TODO: add default internal fields management
+      // {
+      //   kind: StructureKind.Method,
+      //   name: 'getDefaultCreatedAt',
+      //   statements: `return new Date();`,
+      //   docs: docsDefaultCreatedAt,
+      // },
     ];
   };

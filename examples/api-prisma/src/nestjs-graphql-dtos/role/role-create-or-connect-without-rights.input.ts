@@ -6,12 +6,11 @@ import { RoleCreateWithoutRightsInput } from './role-create-without-rights.input
 
 @InputType()
 export class RoleCreateOrConnectWithoutRightsInput {
+  @Field(() => RoleWhereUniqueInput, { nullable: false })
+  @Type(() => RoleWhereUniqueInput)
+  where!: RoleWhereUniqueInput;
 
-    @Field(() => RoleWhereUniqueInput, {nullable:false})
-    @Type(() => RoleWhereUniqueInput)
-    where!: RoleWhereUniqueInput;
-
-    @Field(() => RoleCreateWithoutRightsInput, {nullable:false})
-    @Type(() => RoleCreateWithoutRightsInput)
-    create!: RoleCreateWithoutRightsInput;
+  @Field(() => RoleCreateWithoutRightsInput, { nullable: false })
+  @Type(() => RoleCreateWithoutRightsInput)
+  create!: RoleCreateWithoutRightsInput;
 }

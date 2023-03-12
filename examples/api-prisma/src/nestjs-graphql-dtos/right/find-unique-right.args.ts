@@ -5,8 +5,7 @@ import { Type } from 'class-transformer';
 
 @ArgsType()
 export class FindUniqueRightArgs {
-
-    @Field(() => RightWhereUniqueInput, {nullable:false})
-    @Type(() => RightWhereUniqueInput)
-    where!: RightWhereUniqueInput;
+  @Field(() => RightWhereUniqueInput, { nullable: false })
+  @Type(() => RightWhereUniqueInput)
+  where!: RightWhereUniqueInput;
 }

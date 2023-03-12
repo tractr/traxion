@@ -11,44 +11,47 @@ import { RightScalarWhereInput } from './right-scalar-where.input';
 
 @InputType()
 export class RightUpdateManyWithoutRolesNestedInput {
+  @Field(() => [RightCreateWithoutRolesInput], { nullable: true })
+  @Type(() => RightCreateWithoutRolesInput)
+  create?: Array<RightCreateWithoutRolesInput>;
 
-    @Field(() => [RightCreateWithoutRolesInput], {nullable:true})
-    @Type(() => RightCreateWithoutRolesInput)
-    create?: Array<RightCreateWithoutRolesInput>;
+  @Field(() => [RightCreateOrConnectWithoutRolesInput], { nullable: true })
+  @Type(() => RightCreateOrConnectWithoutRolesInput)
+  connectOrCreate?: Array<RightCreateOrConnectWithoutRolesInput>;
 
-    @Field(() => [RightCreateOrConnectWithoutRolesInput], {nullable:true})
-    @Type(() => RightCreateOrConnectWithoutRolesInput)
-    connectOrCreate?: Array<RightCreateOrConnectWithoutRolesInput>;
+  @Field(() => [RightUpsertWithWhereUniqueWithoutRolesInput], {
+    nullable: true,
+  })
+  @Type(() => RightUpsertWithWhereUniqueWithoutRolesInput)
+  upsert?: Array<RightUpsertWithWhereUniqueWithoutRolesInput>;
 
-    @Field(() => [RightUpsertWithWhereUniqueWithoutRolesInput], {nullable:true})
-    @Type(() => RightUpsertWithWhereUniqueWithoutRolesInput)
-    upsert?: Array<RightUpsertWithWhereUniqueWithoutRolesInput>;
+  @Field(() => [RightWhereUniqueInput], { nullable: true })
+  @Type(() => RightWhereUniqueInput)
+  set?: Array<RightWhereUniqueInput>;
 
-    @Field(() => [RightWhereUniqueInput], {nullable:true})
-    @Type(() => RightWhereUniqueInput)
-    set?: Array<RightWhereUniqueInput>;
+  @Field(() => [RightWhereUniqueInput], { nullable: true })
+  @Type(() => RightWhereUniqueInput)
+  disconnect?: Array<RightWhereUniqueInput>;
 
-    @Field(() => [RightWhereUniqueInput], {nullable:true})
-    @Type(() => RightWhereUniqueInput)
-    disconnect?: Array<RightWhereUniqueInput>;
+  @Field(() => [RightWhereUniqueInput], { nullable: true })
+  @Type(() => RightWhereUniqueInput)
+  delete?: Array<RightWhereUniqueInput>;
 
-    @Field(() => [RightWhereUniqueInput], {nullable:true})
-    @Type(() => RightWhereUniqueInput)
-    delete?: Array<RightWhereUniqueInput>;
+  @Field(() => [RightWhereUniqueInput], { nullable: true })
+  @Type(() => RightWhereUniqueInput)
+  connect?: Array<RightWhereUniqueInput>;
 
-    @Field(() => [RightWhereUniqueInput], {nullable:true})
-    @Type(() => RightWhereUniqueInput)
-    connect?: Array<RightWhereUniqueInput>;
+  @Field(() => [RightUpdateWithWhereUniqueWithoutRolesInput], {
+    nullable: true,
+  })
+  @Type(() => RightUpdateWithWhereUniqueWithoutRolesInput)
+  update?: Array<RightUpdateWithWhereUniqueWithoutRolesInput>;
 
-    @Field(() => [RightUpdateWithWhereUniqueWithoutRolesInput], {nullable:true})
-    @Type(() => RightUpdateWithWhereUniqueWithoutRolesInput)
-    update?: Array<RightUpdateWithWhereUniqueWithoutRolesInput>;
+  @Field(() => [RightUpdateManyWithWhereWithoutRolesInput], { nullable: true })
+  @Type(() => RightUpdateManyWithWhereWithoutRolesInput)
+  updateMany?: Array<RightUpdateManyWithWhereWithoutRolesInput>;
 
-    @Field(() => [RightUpdateManyWithWhereWithoutRolesInput], {nullable:true})
-    @Type(() => RightUpdateManyWithWhereWithoutRolesInput)
-    updateMany?: Array<RightUpdateManyWithWhereWithoutRolesInput>;
-
-    @Field(() => [RightScalarWhereInput], {nullable:true})
-    @Type(() => RightScalarWhereInput)
-    deleteMany?: Array<RightScalarWhereInput>;
+  @Field(() => [RightScalarWhereInput], { nullable: true })
+  @Type(() => RightScalarWhereInput)
+  deleteMany?: Array<RightScalarWhereInput>;
 }

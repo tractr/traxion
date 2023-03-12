@@ -55,6 +55,9 @@
           {
             "command": "npx prisma generate  --schema=./examples/api-prisma/prisma/schema.prisma",
             "forwardAllArgs": false
+          },
+          {
+            "command": "nx format --projects examples-api-prisma --uncommitted"
           }
         ],
         "cwd": ".",

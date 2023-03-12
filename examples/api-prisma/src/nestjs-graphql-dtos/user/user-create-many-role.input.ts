@@ -4,13 +4,12 @@ import { Int } from '@nestjs/graphql';
 
 @InputType()
 export class UserCreateManyRoleInput {
+  @Field(() => Int, { nullable: true })
+  id?: number;
 
-    @Field(() => Int, {nullable:true})
-    id?: number;
+  @Field(() => String, { nullable: false })
+  email!: string;
 
-    @Field(() => String, {nullable:false})
-    email!: string;
-
-    @Field(() => String, {nullable:true})
-    name?: string;
+  @Field(() => String, { nullable: true })
+  name?: string;
 }

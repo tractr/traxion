@@ -5,13 +5,14 @@ import { UserUncheckedUpdateManyWithoutRoleNestedInput } from '../user/user-unch
 
 @InputType()
 export class RoleUncheckedUpdateWithoutRightsInput {
+  @Field(() => Int, { nullable: true })
+  id?: number;
 
-    @Field(() => Int, {nullable:true})
-    id?: number;
+  @Field(() => String, { nullable: true })
+  name?: string;
 
-    @Field(() => String, {nullable:true})
-    name?: string;
-
-    @Field(() => UserUncheckedUpdateManyWithoutRoleNestedInput, {nullable:true})
-    users?: UserUncheckedUpdateManyWithoutRoleNestedInput;
+  @Field(() => UserUncheckedUpdateManyWithoutRoleNestedInput, {
+    nullable: true,
+  })
+  users?: UserUncheckedUpdateManyWithoutRoleNestedInput;
 }
