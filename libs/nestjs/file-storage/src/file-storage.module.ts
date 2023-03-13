@@ -1,4 +1,4 @@
-import { Global, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
 import { createFileStorageConfiguration } from './configs';
 import { FILE_STORAGE_CONFIGURATION } from './constants';
@@ -8,7 +8,6 @@ import {
 } from './file-storage.module-definition';
 import { FileStorageService } from './services';
 
-@Global()
 @Module({
   providers: [
     {

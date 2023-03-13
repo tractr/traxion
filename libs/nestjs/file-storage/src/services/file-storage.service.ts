@@ -82,7 +82,7 @@ export class FileStorageService extends Client {
     return this.presignedGetObject(
       bucket,
       file,
-      presignedDownload?.defaultValidity,
+      presignedDownload.defaultValidity,
     );
   }
 
@@ -172,7 +172,6 @@ export class FileStorageService extends Client {
 
     const bucket = customBucket ?? defaultBucket;
     const limit = new Date();
-    // limit.setMilliseconds(-1 * ( temporaryFilesTTL ?? 60 * 60 * 2 ));
     limit.setMilliseconds(-1 * temporaryFilesTTL);
 
     let counter = 0;
