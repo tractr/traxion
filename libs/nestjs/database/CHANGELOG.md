@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.1.4](https://github.com/tractr/traxion/compare/v2.1.3...v2.1.4) (2023-03-13)
+
+
+### Bug Fixes
+
+* **nestjs-module:** export ManagedPrismaClientService ([#595](https://github.com/tractr/traxion/issues/595)) ([57a351b](https://github.com/tractr/traxion/commit/57a351b7f8476d6f93da9a14646bbc2eafa832a2))
+
+
+
 ## [2.1.3](https://github.com/tractr/traxion/compare/v2.1.2...v2.1.3) (2023-03-03)
 
 

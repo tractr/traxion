@@ -1,6 +1,6 @@
 {
   "name": "@trxn/hapify-templates-nestjs-models-common",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Hapify templates for nestjs models common features",
   "repository": {
     "type": "git",
