@@ -4,6 +4,6 @@ export type GraphqlResolverImportPathConfig = {
 };
 
 export type GraphqlResolverGeneratorConfig = {
-  generatedDirectory: string;
+  output: string;
   importPaths: GraphqlResolverImportPathConfig;
 };

@@ -1,3 +1,5 @@
+import { join } from 'path';
+
 import { generatorHandler } from '@prisma/generator-helper';
 import { logger } from '@prisma/sdk';
 import { Project } from 'ts-morph';
@@ -21,23 +23,27 @@ generatorHandler({
     const { generator, dmmf } = options;
 
     const output = generator.output?.value;
+    const { tsConfigFilePath } = generator.config;
 
+    // Validate the generator configuration
     if (!output) {
       const error = `${GENERATOR_NAME}: No output directory specified in generator block`;
       logger.error(error);
       throw new Error(error);
     }
 
-    // Get the configuration from the generator block
-    const { tsConfigFilePath, clearOutput = true } = generator.config;
+    if (!tsConfigFilePath) {
+      const error = `${GENERATOR_NAME}: No tsConfigFilePath specified in generator block`;
+      logger.warn(error);
+      throw new Error(error);
+    }
 
     // Instantiate the ts project
     const project = new Project({
-      tsConfigFilePath,
+      tsConfigFilePath: join(output, tsConfigFilePath),
     });
 
-    if (clearOutput)
-      await project.addDirectoryAtPathIfExists(output)?.clearImmediately();
+    await project.getDirectory(output)?.clearImmediately();
 
     try {
       logger.log(`Convert DMMF to Hapify schema declaration`);
@@ -54,9 +60,9 @@ generatorHandler({
     }
 
     // Remove unused imports
-    project
-      .getSourceFiles()
-      .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
+    // project
+    //   .getSourceFiles()
+    //   .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
     // TODO: Format the files with prettier
 
     // Save project to file system

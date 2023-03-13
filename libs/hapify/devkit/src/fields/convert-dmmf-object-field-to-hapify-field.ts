@@ -40,7 +40,7 @@ export function convertDmmfObjectFieldToHapifyField(
   const from = { model: type, fields: relationToFields };
   const to = { model: model.name, fields: relationFromFields };
 
-  return {
+  const result = {
     name,
     type: 'virtual',
     scalar: null,
@@ -53,5 +53,7 @@ export function convertDmmfObjectFieldToHapifyField(
       from,
       to,
     },
-  };
+  } as const;
+
+  return result;
 }

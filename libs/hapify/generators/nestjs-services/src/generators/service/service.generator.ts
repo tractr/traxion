@@ -20,7 +20,7 @@ import { Model } from '@trxn/hapify-core';
 
 export function generateServiceClass(model: Model): ClassDeclarationStructure {
   const className = `${pascal(model.name)}Service`;
-  const constructor = generateConstructor();
+  const constructor = generateConstructor(model);
 
   const methods = [
     // ...generateDefaultInternalsMethod(),
@@ -59,7 +59,7 @@ export function generateServiceSourceFile(
   const sourceFile = project.createSourceFile(filePath);
 
   const serviceClass = generateServiceClass(model);
-  const imports = generateImports();
+  const imports = generateImports(model);
 
   sourceFile.addImportDeclarations(imports);
   sourceFile.addClass(serviceClass);

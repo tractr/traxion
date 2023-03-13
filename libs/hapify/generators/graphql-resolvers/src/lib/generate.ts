@@ -18,24 +18,20 @@ export function generate(
   dataModel: Schema,
   config: GraphqlResolverGeneratorConfig,
 ) {
-  const { generatedDirectory, importPaths } = config;
+  const { output, importPaths } = config;
 
   // Generate resolvers and dtos
   dataModel.models.forEach((model) => {
-    generateResolverSourceFile(project, model, generatedDirectory, importPaths);
-    generateDtoSourceFile(project, model, generatedDirectory, importPaths);
+    generateResolverSourceFile(project, model, output, importPaths);
+    generateDtoSourceFile(project, model, output, importPaths);
   });
 
   // Generate module
-  generateModuleSourceFile(project, dataModel.models, generatedDirectory);
-  generateModuleDefinitionSourceFile(project, generatedDirectory);
+  generateModuleSourceFile(project, dataModel.models, output);
+  generateModuleDefinitionSourceFile(project, output);
 
   // Generate index files
-  generateResolverIndexSourceFile(
-    project,
-    dataModel.models,
-    generatedDirectory,
-  );
-  generateDtoIndexSourceFile(project, dataModel.models, generatedDirectory);
-  generateRootIndexSourceFile(project, dataModel.models, generatedDirectory);
+  generateResolverIndexSourceFile(project, dataModel.models, output);
+  generateDtoIndexSourceFile(project, dataModel.models, output);
+  generateRootIndexSourceFile(project, dataModel.models, output);
 }

@@ -6,7 +6,7 @@ import { BaseConstraints, EnumConstraints } from '@trxn/hapify-core';
 export function createEnumConstraints(
   field: DMMF.Field,
   metadata: Record<string, unknown> = {},
-): Omit<EnumConstraints, keyof BaseConstraints> & {
+): Omit<EnumConstraints, keyof BaseConstraints | 'enum'> & {
   defaultValue: EnumConstraints['defaultValue'];
 } {
   const { hasDefaultValue, default: defaultValue } = field;
@@ -18,9 +18,5 @@ export function createEnumConstraints(
       !Array.isArray(defaultValue)
         ? { name: defaultValue.name, values: {} }
         : undefined,
-    enum: {
-      name: field.name,
-      values: {},
-    },
   };
 }

@@ -43,6 +43,7 @@ export function createSchema(definition: SchemaDeclaration) {
     string,
     (Omit<VirtualField, 'relation'> & FieldDeclaration)[]
   > = {};
+
   definition.models.forEach((model) => {
     model.fields.filter(isVirtualField).forEach((field) => {
       if (!virtualFields[field.relation.name]) {
@@ -52,7 +53,7 @@ export function createSchema(definition: SchemaDeclaration) {
     });
   });
 
-  // Extract all the fields that are not relation from each model
+  // Build the models declaration (excluding the virtual fields)
   const models: Model[] = definition.models.map((model) => {
     const fields: Field[] = model.fields
       // FIXME: filter are not working with FieldDeclaration
@@ -71,8 +72,10 @@ export function createSchema(definition: SchemaDeclaration) {
   });
 
   const relations: Relation[] = [];
+
   // We need to use for loop to be able to run synchronously to not loose the model references
   for (const [relationName, fields] of Object.entries(virtualFields)) {
+    // Validate that the relations have 2 fields
     if (fields.length !== 2) {
       throw new Error(
         `Relation ${relationName} must have 2 fields, found ${fields.length}`,
@@ -82,6 +85,7 @@ export function createSchema(definition: SchemaDeclaration) {
     const [field1, field2] = fields;
 
     let relationType;
+
     if (field1.isMultiple && field2.isMultiple) relationType = 'manyMany';
     else if (!field1.isMultiple && !field2.isMultiple) relationType = 'oneOne';
     else relationType = 'oneMany';
@@ -119,28 +123,6 @@ export function createSchema(definition: SchemaDeclaration) {
 
     if (relation) relations.push(relation);
   }
-
-  // Now we need for each relation to add the ref to the primary keys
-  relations.forEach((relation) => {
-    switch (relation.type) {
-      case 'oneOne':
-      case 'oneMany':
-        relation.from.model.primaryKey?.fields.forEach((field) => {
-          field.relations.push(relation);
-        });
-        break;
-      case 'manyMany':
-        relation.from.model.primaryKey?.fields.forEach((field) => {
-          field.relations.push(relation);
-        });
-        relation.to.model.primaryKey?.fields.forEach((field) => {
-          field.relations.push(relation);
-        });
-        break;
-      default:
-        break;
-    }
-  });
 
   return {
     enums: definition.enums,

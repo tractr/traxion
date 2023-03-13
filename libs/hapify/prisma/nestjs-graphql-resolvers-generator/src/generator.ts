@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import * as path from 'path';
+import { join } from 'path';
 import { inspect } from 'util';
 
 import { generatorHandler } from '@prisma/generator-helper';
@@ -32,24 +32,16 @@ export function generate() {
       const { generator, dmmf } = options;
 
       // Extract the generator configuration
-      const outputDirectory = generator.output?.value;
+      const output = generator.output?.value;
       const {
-        generatedDirectory,
         tsConfigFilePath,
         nestjsServicesImportPath,
         nestjsGraphqlDtosImportPath,
       } = generator.config;
 
-      // TODO: voir où on gère la validation de la config
       // Validate the generator configuration
-      if (!outputDirectory) {
+      if (!output) {
         const error = `${GENERATOR_NAME}: No output directory specified in generator block`;
-        logger.error(error);
-        throw new Error(error);
-      }
-
-      if (!generatedDirectory) {
-        const error = `${GENERATOR_NAME}: No generated directory specified in generator block`;
         logger.error(error);
         throw new Error(error);
       }
@@ -61,15 +53,7 @@ export function generate() {
       }
 
       // Build the required absolute paths
-      const absoluteTsConfigFilePath = path.resolve(
-        outputDirectory,
-        tsConfigFilePath,
-      );
-
-      const absoluteGeneratedDirectory = path.resolve(
-        outputDirectory,
-        generatedDirectory,
-      );
+      const absoluteTsConfigFilePath = join(output, tsConfigFilePath);
 
       // Instantiate the ts project
       const project = new Project({
@@ -77,26 +61,19 @@ export function generate() {
       });
 
       // Clear generation directory
-      project.getDirectory(absoluteGeneratedDirectory)?.clear();
+      await project.getDirectory(output)?.clearImmediately();
 
       try {
-        logger.log(`Convert DMMF to Hapify schema declaration`);
         const schema = createSchema(convertDmmfToHapifySchemaDeclaration(dmmf));
 
         // Create the graphql resolvers
         generateNestjsResolvers(project, schema, {
-          generatedDirectory: absoluteGeneratedDirectory,
+          output,
           importPaths: {
             nestjsServices: nestjsServicesImportPath,
             graphqlDtos: nestjsGraphqlDtosImportPath,
           },
         });
-
-        // Write the schema to the output directory
-        fs.writeFileSync(
-          path.join(outputDirectory, 'hapify.json'),
-          inspect(schema, true, 10),
-        );
       } catch (error) {
         logger.error(error);
         throw error;

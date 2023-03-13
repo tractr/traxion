@@ -42,7 +42,7 @@ export function generateProviderSourceFile(
           },
           ${pascal(model.name)}DefaultService,
           {
-            provide: ${constant(model.name)}DEFAULT_SERVICE,
+            provide: ${constant(model.name)}_DEFAULT_SERVICE,
             useExisting: ${pascal(model.name)}DefaultService,
           }
         ]`,
