@@ -67,7 +67,7 @@ export const generateUpdateManyMethod = (
 
   return {
     kind: StructureKind.Method,
-    name: 'updateMAny',
+    name: 'updateMany',
     typeParameters,
     parameters,
     statements: `return prisma.updateMany<T>(args);`,
