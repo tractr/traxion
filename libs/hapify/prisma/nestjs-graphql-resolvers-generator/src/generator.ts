@@ -6,7 +6,11 @@ import { Project } from 'ts-morph';
 
 import { version } from '../package.json';
 
-import { createSchema } from '@trxn/hapify-core';
+import {
+  createSchema,
+  discoverOwnership,
+  ModelWithOwnership,
+} from '@trxn/hapify-core';
 import { convertDmmfToHapifySchemaDeclaration } from '@trxn/hapify-devkit';
 import { generate as generateNestjsResolvers } from '@trxn/hapify-generator-graphql-resolvers';
 
@@ -17,6 +21,13 @@ export type GraphqlResolverGeneratorConfig = {
   tsConfigFilePath: string;
   generatedDirectory: string;
 };
+
+function printOwnerships(model: ModelWithOwnership) {
+  model.ownedModels.forEach((ownedModel) => {
+    console.info(`${model.name} owns ${ownedModel.own.name}`);
+    printOwnerships(ownedModel.own);
+  });
+}
 
 export function generate() {
   generatorHandler({
@@ -63,6 +74,14 @@ export function generate() {
 
       try {
         const schema = createSchema(convertDmmfToHapifySchemaDeclaration(dmmf));
+
+        const userSchema = schema.models.find((model) => model.name === 'User');
+        if (!userSchema) {
+          throw new Error('User model not found');
+        }
+        const getModelsWithOwnerships = discoverOwnership(userSchema, schema);
+
+        printOwnerships(getModelsWithOwnerships);
 
         // Create the graphql resolvers
         generateNestjsResolvers(project, schema, {
