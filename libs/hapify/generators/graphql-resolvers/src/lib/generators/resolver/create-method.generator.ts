@@ -30,7 +30,7 @@ export function generateCreateMethod(model: Model): MethodDeclarationStructure {
     },
     {
       kind: StructureKind.Parameter,
-      name: `{ data: rawData }`,
+      name: `{ data }`,
       type: `CreateOne${modelPascal}Args`,
       decorators: [{ name: 'Args', arguments: [] }],
     },
@@ -38,11 +38,6 @@ export function generateCreateMethod(model: Model): MethodDeclarationStructure {
 
   const statements = `
     const select = new PrismaSelect(info).value;
-
-    const data = {
-      ...this.${modelCamel}DefaultService.getDefaultInternals(),
-      ...rawData,
-    };
 
     const ${modelCamel} = await this.${modelCamel}Service.create({ data, ...select });
 

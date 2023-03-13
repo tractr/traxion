@@ -48,7 +48,7 @@ export function generate() {
 
       if (!tsConfigFilePath) {
         const error = `${GENERATOR_NAME}: No tsConfigFilePath specified in generator block`;
-        logger.warn(error);
+        logger.error(error);
         throw new Error(error);
       }
 

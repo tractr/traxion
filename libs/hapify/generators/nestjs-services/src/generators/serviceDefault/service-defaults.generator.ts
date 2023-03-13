@@ -28,7 +28,7 @@ export function generateServiceDefaultSourceFile(
   model: Model,
   path: string,
 ) {
-  const fileName = `${kebab(model.name)}-defaults.service`;
+  const fileName = `${kebab(model.name)}-default.service`;
   const filePath = `${path}/services/${fileName}.ts`;
 
   const sourceFile = project.createSourceFile(filePath);

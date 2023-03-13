@@ -27,20 +27,6 @@ export function generateConstructor(
           },
         ],
       },
-      {
-        kind: StructureKind.Parameter,
-        name: `${camel(model.name)}DefaultService`,
-        type: `${pascal(model.name)}DefaultService`,
-        scope: Scope.Private,
-        isReadonly: true,
-        decorators: [
-          {
-            kind: StructureKind.Decorator,
-            name: 'Inject',
-            arguments: [`${constant(model.name)}_DEFAULT_SERVICE`],
-          },
-        ],
-      },
     ],
   };
 }

@@ -1,10 +1,16 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '@trxn/nestjs-database';
+import { RoleDefaultService } from './role-default.service';
+import { ROLE_DEFAULT_SERVICE } from '../constants';
 
 @Injectable()
 export class RoleService {
-  constructor(private readonly prismaClient: PrismaService) {}
+  constructor(
+    private readonly prismaClient: PrismaService,
+    @Inject(ROLE_DEFAULT_SERVICE)
+    private readonly roleDefaultService: RoleDefaultService,
+  ) {}
 
   /**
    *     Find zero or one Role that matches the filter.

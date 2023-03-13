@@ -35,8 +35,6 @@ export function generateImports(
       namedImports: [
         { name: `${modelPascal}Service` },
         { name: `${modelConstant}_SERVICE` },
-        { name: `${modelPascal}DefaultService` },
-        { name: `${modelConstant}_DEFAULT_SERVICE` },
       ],
     },
     {

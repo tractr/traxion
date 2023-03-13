@@ -7,12 +7,7 @@ import {
   UpdateOneRightArgs,
   DeleteOneRightArgs,
 } from '../../nestjs-graphql-dtos';
-import {
-  RightService,
-  RIGHT_SERVICE,
-  RightDefaultService,
-  RIGHT_DEFAULT_SERVICE,
-} from '../../nestjs-services';
+import { RightService, RIGHT_SERVICE } from '../../nestjs-services';
 import { Inject } from '@nestjs/common';
 import {
   Args,
@@ -31,8 +26,6 @@ import { FindManyRightOutput } from '../dtos';
 export class RightResolver {
   constructor(
     @Inject(RIGHT_SERVICE) private readonly rightService: RightService,
-    @Inject(RIGHT_DEFAULT_SERVICE)
-    private readonly rightDefaultService: RightDefaultService,
   ) {}
 
   /** Query for a unique right */
@@ -87,14 +80,9 @@ export class RightResolver {
   @Mutation(() => Right, { nullable: true })
   async createRight(
     @Info() info: GraphQLResolveInfo,
-    @Args() { data: rawData }: CreateOneRightArgs,
+    @Args() { data }: CreateOneRightArgs,
   ) {
     const select = new PrismaSelect(info).value;
-
-    const data = {
-      ...this.rightDefaultService.getDefaultInternals(),
-      ...rawData,
-    };
 
     const right = await this.rightService.create({ data, ...select });
 

@@ -8,12 +8,7 @@ import {
   UpdateOneRoleArgs,
   DeleteOneRoleArgs,
 } from '../../nestjs-graphql-dtos';
-import {
-  RoleService,
-  ROLE_SERVICE,
-  RoleDefaultService,
-  ROLE_DEFAULT_SERVICE,
-} from '../../nestjs-services';
+import { RoleService, ROLE_SERVICE } from '../../nestjs-services';
 import { Inject } from '@nestjs/common';
 import {
   Args,
@@ -32,8 +27,6 @@ import { FindManyRoleOutput } from '../dtos';
 export class RoleResolver {
   constructor(
     @Inject(ROLE_SERVICE) private readonly roleService: RoleService,
-    @Inject(ROLE_DEFAULT_SERVICE)
-    private readonly roleDefaultService: RoleDefaultService,
   ) {}
 
   /** Query for a unique role */
@@ -88,14 +81,9 @@ export class RoleResolver {
   @Mutation(() => Role, { nullable: true })
   async createRole(
     @Info() info: GraphQLResolveInfo,
-    @Args() { data: rawData }: CreateOneRoleArgs,
+    @Args() { data }: CreateOneRoleArgs,
   ) {
     const select = new PrismaSelect(info).value;
-
-    const data = {
-      ...this.roleDefaultService.getDefaultInternals(),
-      ...rawData,
-    };
 
     const role = await this.roleService.create({ data, ...select });
 

@@ -7,12 +7,7 @@ import {
   UpdateOneUserArgs,
   DeleteOneUserArgs,
 } from '../../nestjs-graphql-dtos';
-import {
-  UserService,
-  USER_SERVICE,
-  UserDefaultService,
-  USER_DEFAULT_SERVICE,
-} from '../../nestjs-services';
+import { UserService, USER_SERVICE } from '../../nestjs-services';
 import { Inject } from '@nestjs/common';
 import {
   Args,
@@ -31,8 +26,6 @@ import { FindManyUserOutput } from '../dtos';
 export class UserResolver {
   constructor(
     @Inject(USER_SERVICE) private readonly userService: UserService,
-    @Inject(USER_DEFAULT_SERVICE)
-    private readonly userDefaultService: UserDefaultService,
   ) {}
 
   /** Query for a unique user */
@@ -87,14 +80,9 @@ export class UserResolver {
   @Mutation(() => User, { nullable: true })
   async createUser(
     @Info() info: GraphQLResolveInfo,
-    @Args() { data: rawData }: CreateOneUserArgs,
+    @Args() { data }: CreateOneUserArgs,
   ) {
     const select = new PrismaSelect(info).value;
-
-    const data = {
-      ...this.userDefaultService.getDefaultInternals(),
-      ...rawData,
-    };
 
     const user = await this.userService.create({ data, ...select });
 
