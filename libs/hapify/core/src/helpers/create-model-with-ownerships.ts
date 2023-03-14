@@ -80,9 +80,8 @@ export function discoverOwnership(
       }
     })
     .filter(
-      (ownedModel) =>
-        // We filter the owned models that are not already explored
-        !explored.find((m) => m.name === ownedModel.own.name),
+      // We filter the owned models that are the current model
+      (ownedModel) => model.name !== ownedModel.own.name,
     )
     .reduce((acc, ownedModel) => {
       acc.push({ ...ownedModel, own: { ...ownedModel.own, ownedModels: [] } });
