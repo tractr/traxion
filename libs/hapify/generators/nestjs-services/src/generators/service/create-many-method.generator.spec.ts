@@ -1,39 +1,49 @@
-import { StructureKind, TypeParameterDeclarationStructure } from 'ts-morph';
+import {
+  MethodDeclarationStructure,
+  StructureKind,
+  TypeParameterDeclarationStructure,
+} from 'ts-morph';
 
-import { generateDeleteMethod } from './delete-method.generator';
+import { generateCreateManyMethod } from './create-many-method.generator';
 
 import { Model } from '@trxn/hapify-core';
 
-describe('generateDeleteMethod', () => {
+describe('generateCreateMethod', () => {
   const model: Model = {
-    name: 'User',
+    name: 'user',
     pluralName: '',
     fields: [],
     primaryKey: null,
   };
-  const method = generateDeleteMethod(model);
 
   it('generates a method declaration with the correct name', () => {
-    expect(method.name).toEqual('delete');
+    const methodDeclaration: MethodDeclarationStructure =
+      generateCreateManyMethod(model);
+    expect(methodDeclaration.name).toBe('createMany');
   });
 
   it('generates a method declaration with the correct type parameters', () => {
+    const methodDeclaration: MethodDeclarationStructure =
+      generateCreateManyMethod(model);
+
     const typeParameters =
-      method.typeParameters as TypeParameterDeclarationStructure[];
+      methodDeclaration.typeParameters as TypeParameterDeclarationStructure[];
 
     expect(typeParameters?.[0].name).toEqual('T');
     expect(typeParameters?.[0].kind).toEqual(StructureKind.TypeParameter);
-    expect(typeParameters?.[0].constraint).toEqual(`Prisma.UserDeleteArgs`);
+    expect(typeParameters?.[0].constraint).toEqual(`Prisma.UserCreateManyArgs`);
   });
 
   it('generates a method declaration with the correct parameters', () => {
+    const method: MethodDeclarationStructure = generateCreateManyMethod(model);
+
     const argsParameters = method.parameters?.[0];
     const prismaParameters = method.parameters?.[1];
 
     expect(argsParameters?.name).toEqual('args');
     expect(argsParameters?.kind).toEqual(30); // StructureKind.Parameter is equal to 30
     expect(argsParameters?.type).toEqual(
-      `Prisma.SelectSubset<T, Prisma.UserDeleteArgs>`,
+      `Prisma.SelectSubset<T, Prisma.UserCreateManyArgs>`,
     );
 
     expect(prismaParameters?.name).toEqual('prisma');
@@ -43,25 +53,11 @@ describe('generateDeleteMethod', () => {
   });
 
   it('generates a method declaration with the correct statements', () => {
-    expect(method.statements).toEqual('return prisma.delete<T>(args);');
-  });
+    const methodDeclaration: MethodDeclarationStructure =
+      generateCreateManyMethod(model);
 
-  it('generates a method declaration with the correct documentation', () => {
-    expect(method.docs).toEqual([
-      {
-        kind: 24,
-        description: `
-    Delete a User.
-    @param {UserDeleteArgs} args - Arguments to delete a User
-    @example
-    // Delete one User
-    const user = await this.userService.delete({
-      where: {
-        // ... filter to delete one User
-      }
-    })
-    `,
-      },
-    ]);
+    const expectedStatements = 'return prisma.createMany<T>(args);';
+
+    expect(methodDeclaration.statements).toEqual(expectedStatements);
   });
 });

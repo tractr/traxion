@@ -67,6 +67,7 @@ export const generateUpdateManyMethod = (
 
   return {
     kind: StructureKind.Method,
+    isAsync: true,
     name: 'updateMany',
     typeParameters,
     parameters,

@@ -1,20 +1,21 @@
+import { camel, pascal } from 'case';
 import { StructureKind, TypeParameterDeclarationStructure } from 'ts-morph';
 
-import { generateDeleteMethod } from './delete-method.generator';
+import { generateAggregateMethod } from './aggregate-method.generator';
 
 import { Model } from '@trxn/hapify-core';
 
-describe('generateDeleteMethod', () => {
+describe('generateAggregateMethod', () => {
   const model: Model = {
-    name: 'User',
-    pluralName: '',
+    name: 'user',
     fields: [],
+    pluralName: '',
     primaryKey: null,
   };
-  const method = generateDeleteMethod(model);
+  const method = generateAggregateMethod(model);
 
   it('generates a method declaration with the correct name', () => {
-    expect(method.name).toEqual('delete');
+    expect(method.name).toBe('aggregate');
   });
 
   it('generates a method declaration with the correct type parameters', () => {
@@ -23,7 +24,7 @@ describe('generateDeleteMethod', () => {
 
     expect(typeParameters?.[0].name).toEqual('T');
     expect(typeParameters?.[0].kind).toEqual(StructureKind.TypeParameter);
-    expect(typeParameters?.[0].constraint).toEqual(`Prisma.UserDeleteArgs`);
+    expect(typeParameters?.[0].constraint).toEqual(`Prisma.UserAggregateArgs`);
   });
 
   it('generates a method declaration with the correct parameters', () => {
@@ -33,7 +34,7 @@ describe('generateDeleteMethod', () => {
     expect(argsParameters?.name).toEqual('args');
     expect(argsParameters?.kind).toEqual(30); // StructureKind.Parameter is equal to 30
     expect(argsParameters?.type).toEqual(
-      `Prisma.SelectSubset<T, Prisma.UserDeleteArgs>`,
+      `Prisma.SelectSubset<T, Prisma.UserAggregateArgs>`,
     );
 
     expect(prismaParameters?.name).toEqual('prisma');
@@ -43,7 +44,7 @@ describe('generateDeleteMethod', () => {
   });
 
   it('generates a method declaration with the correct statements', () => {
-    expect(method.statements).toEqual('return prisma.delete<T>(args);');
+    expect(method.statements).toBe('return prisma.aggregate<T>(args);');
   });
 
   it('generates a method declaration with the correct documentation', () => {
@@ -51,15 +52,28 @@ describe('generateDeleteMethod', () => {
       {
         kind: 24,
         description: `
-    Delete a User.
-    @param {UserDeleteArgs} args - Arguments to delete a User
-    @example
-    // Delete one User
-    const user = await this.userService.delete({
-      where: {
-        // ... filter to delete one User
-      }
-    })
+        Allows you to perform aggregations operations on a User.
+        Note, that providing 'undefined' is treated as the value not being there.
+        Read more here: https://pris.ly/d/null-undefined
+        @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+        @example
+        // Ordered by age ascending
+        // Where email contains prisma.io
+        // Limited to the 10 users
+        const aggregations = await this.userService.aggregate({
+          avg: {
+            age: true,
+          },
+          where: {
+            email: {
+              contains: "prisma.io",
+            },
+          },
+          orderBy: {
+            age: "asc",
+          },
+          take: 10,
+        })
     `,
       },
     ]);

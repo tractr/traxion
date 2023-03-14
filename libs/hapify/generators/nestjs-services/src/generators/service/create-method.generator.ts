@@ -59,6 +59,7 @@ export const generateCreateMethod = (
 
   return {
     kind: StructureKind.Method,
+    isAsync: true,
     name: 'create',
     typeParameters,
     parameters,

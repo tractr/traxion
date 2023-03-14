@@ -60,6 +60,7 @@ export const generateFindUniqueMethod = (
 
   return {
     kind: StructureKind.Method,
+    isAsync: true,
     name: 'findUnique',
     typeParameters,
     parameters,

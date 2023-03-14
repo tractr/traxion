@@ -60,6 +60,7 @@ export const generateFindFirstMethod = (
 
   return {
     kind: StructureKind.Method,
+    isAsync: true,
     name: 'findFirst',
     typeParameters,
     parameters,

@@ -60,6 +60,7 @@ export const generateCreateManyMethod = (
 
   return {
     kind: StructureKind.Method,
+    isAsync: true,
     name: 'createMany',
     typeParameters,
     parameters,

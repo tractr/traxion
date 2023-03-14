@@ -60,6 +60,7 @@ export const generateDeleteManyMethod = (
 
   return {
     kind: StructureKind.Method,
+    isAsync: true,
     name: 'deleteMany',
     typeParameters,
     parameters,
