@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.1.6](https://github.com/tractr/traxion/compare/v2.1.5...v2.1.6) (2023-03-14)
+
+
+### Bug Fixes
+
+* add async keyword to the services to be easly extended ([#597](https://github.com/tractr/traxion/issues/597)) ([4057f8e](https://github.com/tractr/traxion/commit/4057f8e251a7e28630979f299dc6969aa1faed02))
+
+
+
 ## [2.1.5](https://github.com/tractr/traxion/compare/v2.1.4...v2.1.5) (2023-03-14)
 
 
