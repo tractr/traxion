@@ -333,7 +333,7 @@ describe('<<Model pascal>>Controller', () => {
 
     it('should get the <<Model camel>>', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>> as any);
 
       await request(app.getHttpServer())
         .get(`/<<Model kebab>>/${mock<<Model pascal>>.id}`)
@@ -350,7 +350,7 @@ describe('<<Model pascal>>Controller', () => {
     <<if Fields ownership>>
     it('should get the <<Model camel>> with casl abilities filter', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>> as any);
 
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.READ, '<<Model pascal>>', { id: mock<<Model pascal>>.id });
@@ -368,7 +368,7 @@ describe('<<Model pascal>>Controller', () => {
 
     it('should forbid the <<Model camel>> with casl abilities filter', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>> as any);
 
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.READ, '<<Model pascal>>', { id: 'foo' });
@@ -609,7 +609,7 @@ describe('<<Model pascal>>Controller', () => {
   describe('PATCH /<<Model kebab>>/:id', () => {
     it('should update a <<Model camel>>', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>> as any);
 
       const <<Model camel>>: <<Model pascal>>UpdateBodyDto = mock<<Model pascal>>UpdateBodyDtoFactory();
 
@@ -637,7 +637,7 @@ describe('<<Model pascal>>Controller', () => {
 
     it('should return 404 if no <<Model camel>> found', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(null);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(null as any);
 
       const <<Model camel>>: <<Model pascal>>UpdateBodyDto = mock<<Model pascal>>UpdateBodyDtoFactory();
 
@@ -657,7 +657,7 @@ describe('<<Model pascal>>Controller', () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>> as any);
 
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.UPDATE, '<<Model pascal>>', { id: mock<<Model pascal>>.id });
@@ -680,7 +680,7 @@ describe('<<Model pascal>>Controller', () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>> as any);
 
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.UPDATE, '<<Model pascal>>', { id: 'foo' });
@@ -704,7 +704,7 @@ describe('<<Model pascal>>Controller', () => {
   describe('PUT /<<Model kebab>>(/:id)?', () => {
     it('should update a <<Model camel>> if <<Model camel>> id is not found in the database', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(null);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(null as any);
 
       <<if Fields ownership and not primary and internal>>
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
@@ -772,7 +772,7 @@ describe('<<Model pascal>>Controller', () => {
 
     it('should update a <<Model camel>> if <<Model camel>> id is found in the database', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>> as any);
 
       <<if Fields ownership and not primary and internal>>
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
@@ -840,7 +840,7 @@ describe('<<Model pascal>>Controller', () => {
 
     it('should create a <<Model camel>> if no id is provided', async () => {
       const { id } = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(null);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(null as any);
 
       <<if Fields ownership and not primary and internal>>
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
@@ -908,7 +908,7 @@ describe('<<Model pascal>>Controller', () => {
 
     it('should update a <<Model camel>> if an id is provided', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>> as any);
 
       <<if Fields ownership and not primary and internal>>
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
@@ -978,7 +978,7 @@ describe('<<Model pascal>>Controller', () => {
   describe('DELETE /<<Model kebab>>/:id', () => {
     it('should delete a <<Model camel>>', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>> as any);
 
       await request(app.getHttpServer())
         .delete(`/<<Model kebab>>/${mock<<Model pascal>>.id}`)
@@ -992,7 +992,7 @@ describe('<<Model pascal>>Controller', () => {
 
     it('should return 404 if no <<Model camel>> found', async () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(null);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(null as any);
 
       await request(app.getHttpServer())
         .delete(`/<<Model kebab>>/${mock<<Model pascal>>.id}`)
@@ -1009,7 +1009,7 @@ describe('<<Model pascal>>Controller', () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>> as any);
 
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.REMOVE, '<<Model pascal>>', { id: mock<<Model pascal>>.id });
@@ -1029,7 +1029,7 @@ describe('<<Model pascal>>Controller', () => {
       const mock<<Model pascal>> = mock<<Model pascal>>Factory();
       <<< if (root.names.pascal !== 'User') { >>>const mockUser = mockUserFactory();<<< }>>>
       mockReqUser.mockReturnValue(mockUser);
-      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>>);
+      mock<<Model pascal>>Service.findUnique.mockResolvedValue(mock<<Model pascal>> as any);
 
       const { can, build } = new AbilityBuilder(AppAbility);
       can(Actions.UPDATE, '<<Model pascal>>', { id: 'foo' });

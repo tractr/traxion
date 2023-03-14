@@ -2,7 +2,6 @@
 
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
-import { User } from '@prisma/client';
 import { mockDeep, MockProxy, mockReset } from 'jest-mock-extended';
 
 import { AuthenticationService } from './authentication.service';
@@ -10,7 +9,7 @@ import { HashService } from './hash.service';
 import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
 import { AuthenticationModuleOptions } from '../interfaces';
 
-import { UserService } from '@trxn/nestjs-user';
+import { MinimalUser, UserService } from '@trxn/nestjs-user';
 
 describe('AuthService', () => {
   let authService: AuthenticationService;
@@ -62,7 +61,7 @@ describe('AuthService', () => {
         id: '1',
         email: 'login',
         password: 'password',
-      } as User;
+      } as MinimalUser;
       mockUserService.findUserByLogin.mockResolvedValueOnce(user);
       mockUserService.getUserPassword.mockResolvedValueOnce('hash');
 
@@ -78,7 +77,7 @@ describe('AuthService', () => {
         id: '1',
         email: 'login',
         password: 'password',
-      } as User;
+      } as MinimalUser;
       mockUserService.findUserByLogin.mockResolvedValueOnce(user);
       mockUserService.getUserPassword.mockResolvedValueOnce('hash');
 
@@ -109,7 +108,7 @@ describe('AuthService', () => {
         id: '1',
         email: 'login',
         password: 'password',
-      } as User;
+      } as MinimalUser;
       mockJwtService.sign.mockReturnValue('jwt');
       const compare = await authService.createAccessToken(user);
 
@@ -131,7 +130,7 @@ describe('AuthService', () => {
         id: '1',
         email: 'login',
         password: 'password',
-      } as User;
+      } as MinimalUser;
       mockJwtService.sign.mockReturnValue('jwt');
       const compare = await authService.createAccessToken(user);
 
@@ -148,7 +147,7 @@ describe('AuthService', () => {
         id: '1',
         email: 'login',
         password: 'password',
-      } as User;
+      } as MinimalUser;
       const { createAccessToken } = authService;
       const mockCreateUserJWT = jest.fn().mockReturnValue('jwt');
       authService.createAccessToken = mockCreateUserJWT;

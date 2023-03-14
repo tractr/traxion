@@ -107,7 +107,7 @@ describe('<<Model pascal>> Resolver', () => {
  
   it('should be able to find a <<Model camel>>', async () => {
     mock<<Model pascal>> = mock<<Model pascal>>Factory();
-    mock<<Model pascal>>Service.findUnique.mockResolvedValueOnce(mock<<Model pascal>>);
+    mock<<Model pascal>>Service.findUnique.mockResolvedValueOnce(mock<<Model pascal>> as any);
     await request(app.getHttpServer())
       .post('/graphql')
       .send({
@@ -148,7 +148,7 @@ describe('<<Model pascal>> Resolver', () => {
  
   it('should throw if requiring hidden field during fetching unique <<Model camel>>', async () => {
     mock<<Model pascal>> = mock<<Model pascal>>Factory();
-    mock<<Model pascal>>Service.findUnique.mockResolvedValueOnce(mock<<Model pascal>>);
+    mock<<Model pascal>>Service.findUnique.mockResolvedValueOnce(mock<<Model pascal>> as any);
     await request(app.getHttpServer())
       .post('/graphql')
       .send({
