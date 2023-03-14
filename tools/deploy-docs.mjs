@@ -31,7 +31,10 @@ function copyAllFilesAndFolderToDestination(sourcePath, destinationPath) {
     const curPath = path.join(sourcePath, file);
     if (fs.lstatSync(curPath).isDirectory()) {
       fs.mkdirSync(path.join(destinationPath, file));
-      copyAllFilesAndFolderToDestination(curPath, path.join(destinationPath, file));
+      copyAllFilesAndFolderToDestination(
+        curPath,
+        path.join(destinationPath, file),
+      );
     } else {
       fs.copyFileSync(curPath, path.join(destinationPath, file));
     }

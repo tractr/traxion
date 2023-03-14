@@ -1,5 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  Validators,
+} from '@angular/forms';
 
 import { FormPickerBaseComponent } from '../form-picker-base.component';
 

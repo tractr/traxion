@@ -9,8 +9,8 @@ import {
   generateProviderSourceFile,
 } from './generators/provider/providers.generator';
 import { generateConstantSourceFile } from './generators/service/constant.generator';
-import { generateServiceDefaultSourceFile } from './generators/serviceDefault/service-defaults.generator';
 import { generateServiceSourceFile } from './generators/service/service.generator';
+import { generateServiceDefaultSourceFile } from './generators/serviceDefault/service-defaults.generator';
 import {
   generateDirectoryIndexExporter,
   generateFileIndexExporter,

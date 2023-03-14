@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AbstractControl, UntypedFormGroup, ValidationErrors } from '@angular/forms';
+import {
+  AbstractControl,
+  UntypedFormGroup,
+  ValidationErrors,
+} from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { PasswordService } from '../../services';

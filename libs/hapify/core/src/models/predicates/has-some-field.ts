@@ -1,5 +1,5 @@
-import { Model } from '../model';
 import { isModel } from './is-model';
+import { Model } from '../model';
 
 /**
  * Predicate to check if a model has at least one field of a given type

@@ -7,7 +7,9 @@ import {
 
 import { Model } from '@trxn/hapify-core';
 
-export function generateConstructor(model: Model): ConstructorDeclarationStructure {
+export function generateConstructor(
+  model: Model,
+): ConstructorDeclarationStructure {
   return {
     kind: StructureKind.Constructor,
     parameters: [

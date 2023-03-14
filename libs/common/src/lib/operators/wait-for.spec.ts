@@ -2,7 +2,6 @@ import { TestScheduler } from 'rxjs/testing';
 
 import { waitFor } from './wait-for';
 
-
 function createTestScheduler(expect: jest.Expect): TestScheduler {
   return new TestScheduler((actual: unknown, expected: unknown) => {
     expect(actual).toEqual(expected);

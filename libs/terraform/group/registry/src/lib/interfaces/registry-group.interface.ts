@@ -4,4 +4,4 @@ export interface RegistryGroupConfig {
   appsPath: string[];
   projectCode: string;
 }
-export type RegistryGroupArtifacts = DockerRegistryComponentArtifacts
+export type RegistryGroupArtifacts = DockerRegistryComponentArtifacts;
