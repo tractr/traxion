@@ -97,7 +97,7 @@ export class <<Model pascal>>Service {
    *   }
    * })
    * */
-  public findUnique<T extends Prisma.<<Model pascal>>FindUniqueArgs>(
+  public async findUnique<T extends Prisma.<<Model pascal>>FindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.<<Model pascal>>FindUniqueArgs>,
     prisma: Prisma.<<Model pascal>>Delegate<any> = this.<<Model camel>>DatabaseService,
   ) {
@@ -117,7 +117,7 @@ export class <<Model pascal>>Service {
    *   }
    * })
    * */
-  public findFirst<T extends Prisma.<<Model pascal>>FindFirstArgs>(
+  public async findFirst<T extends Prisma.<<Model pascal>>FindFirstArgs>(
     args?: Prisma.SelectSubset<T, Prisma.<<Model pascal>>FindFirstArgs>,
     prisma: Prisma.<<Model pascal>>Delegate<any> = this.<<Model camel>>DatabaseService,
   ) {
@@ -140,7 +140,7 @@ export class <<Model pascal>>Service {
    * const <<Model camel>>WithIdOnly = await this.<<Model camel>>Service.findMany({ select: { id: true } })
    *
    * */
-  public findMany<T extends Prisma.<<Model pascal>>FindManyArgs>(
+  public async findMany<T extends Prisma.<<Model pascal>>FindManyArgs>(
     args?: Prisma.SelectSubset<T, Prisma.<<Model pascal>>FindManyArgs>,
     prisma: Prisma.<<Model pascal>>Delegate<any> = this.<<Model camel>>DatabaseService,
   ) {
@@ -159,7 +159,7 @@ export class <<Model pascal>>Service {
    * })
    *
    * */
-  public create<T extends Prisma.<<Model pascal>>CreateArgs>(
+  public async create<T extends Prisma.<<Model pascal>>CreateArgs>(
     args: Prisma.SelectSubset<T, Prisma.<<Model pascal>>CreateArgs>,
     prisma: Prisma.<<Model pascal>>Delegate<any> = this.<<Model camel>>DatabaseService,
   ) {
@@ -178,7 +178,7 @@ export class <<Model pascal>>Service {
    * })
    *
    * */
-  public createMany<T extends Prisma.<<Model pascal>>CreateManyArgs>(
+  public async createMany<T extends Prisma.<<Model pascal>>CreateManyArgs>(
     args?: Prisma.SelectSubset<T, Prisma.<<Model pascal>>CreateManyArgs>,
     prisma: Prisma.<<Model pascal>>Delegate<any> = this.<<Model camel>>DatabaseService,
   ) {
@@ -197,7 +197,7 @@ export class <<Model pascal>>Service {
    * })
    *
    * */
-  public delete<T extends Prisma.<<Model pascal>>DeleteArgs>(
+  public async delete<T extends Prisma.<<Model pascal>>DeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.<<Model pascal>>DeleteArgs>,
     prisma: Prisma.<<Model pascal>>Delegate<any> = this.<<Model camel>>DatabaseService,
   ) {
@@ -219,7 +219,7 @@ export class <<Model pascal>>Service {
    * })
    *
    * */
-  public update<T extends Prisma.<<Model pascal>>UpdateArgs>(
+  public async update<T extends Prisma.<<Model pascal>>UpdateArgs>(
     args: Prisma.SelectSubset<T, Prisma.<<Model pascal>>UpdateArgs>,
     prisma: Prisma.<<Model pascal>>Delegate<any> = this.<<Model camel>>DatabaseService,
   ) {
@@ -238,7 +238,7 @@ export class <<Model pascal>>Service {
    * })
    *
    * */
-  public deleteMany<T extends Prisma.<<Model pascal>>DeleteManyArgs>(
+  public async deleteMany<T extends Prisma.<<Model pascal>>DeleteManyArgs>(
     args?: Prisma.SelectSubset<T, Prisma.<<Model pascal>>DeleteManyArgs>,
     prisma: Prisma.<<Model pascal>>Delegate<any> = this.<<Model camel>>DatabaseService,
   ) {
@@ -262,7 +262,7 @@ export class <<Model pascal>>Service {
    * })
    *
    * */
-  public updateMany<T extends Prisma.<<Model pascal>>UpdateManyArgs>(
+  public async updateMany<T extends Prisma.<<Model pascal>>UpdateManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.<<Model pascal>>UpdateManyArgs>,
     prisma: Prisma.<<Model pascal>>Delegate<any> = this.<<Model camel>>DatabaseService,
   ) {
@@ -286,7 +286,7 @@ export class <<Model pascal>>Service {
    *   }
    * })
    * */
-  public upsert<T extends Prisma.<<Model pascal>>UpsertArgs>(
+  public async upsert<T extends Prisma.<<Model pascal>>UpsertArgs>(
     args: Prisma.SelectSubset<T, Prisma.<<Model pascal>>UpsertArgs>,
     prisma: Prisma.<<Model pascal>>Delegate<any> = this.<<Model camel>>DatabaseService,
   ) {
@@ -306,7 +306,7 @@ export class <<Model pascal>>Service {
    *   }
    * })
    * */
-  public count<T extends Prisma.<<Model pascal>>CountArgs>(
+  public async count<T extends Prisma.<<Model pascal>>CountArgs>(
     args?: Prisma.Subset<T, Prisma.<<Model pascal>>CountArgs>,
     prisma: Prisma.<<Model pascal>>Delegate<any> = this.<<Model camel>>DatabaseService,
   ) {
@@ -337,7 +337,7 @@ export class <<Model pascal>>Service {
    *   take: 10,
    * })
    * */
-  public aggregate<T extends Prisma.<<Model pascal>>AggregateArgs>(
+  public async aggregate<T extends Prisma.<<Model pascal>>AggregateArgs>(
     args: Prisma.Subset<T, Prisma.<<Model pascal>>AggregateArgs>,
     prisma: Prisma.<<Model pascal>>Delegate<any> = this.<<Model camel>>DatabaseService,
   ) {
