@@ -15,17 +15,14 @@ describe('generateCreateMethod', () => {
     fields: [],
     primaryKey: null,
   };
+  const methodDeclaration: MethodDeclarationStructure =
+    generateCreateManyMethod(model);
 
   it('generates a method declaration with the correct name', () => {
-    const methodDeclaration: MethodDeclarationStructure =
-      generateCreateManyMethod(model);
     expect(methodDeclaration.name).toBe('createMany');
   });
 
   it('generates a method declaration with the correct type parameters', () => {
-    const methodDeclaration: MethodDeclarationStructure =
-      generateCreateManyMethod(model);
-
     const typeParameters =
       methodDeclaration.typeParameters as TypeParameterDeclarationStructure[];
 
@@ -53,9 +50,6 @@ describe('generateCreateMethod', () => {
   });
 
   it('generates a method declaration with the correct statements', () => {
-    const methodDeclaration: MethodDeclarationStructure =
-      generateCreateManyMethod(model);
-
     const expectedStatements = 'return prisma.createMany<T>(args);';
 
     expect(methodDeclaration.statements).toEqual(expectedStatements);

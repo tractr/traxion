@@ -67,7 +67,8 @@ export function generateProviderSourceFile(
   const arrayExpression = exportedVariable
     ?.getDeclarations()[0]
     .getInitializer() as ArrayLiteralExpression;
-  arrayExpression.addElement(`...${name}`);
+  arrayExpression?.addElement(`...${name}`);
+  return sourceFile;
 }
 
 export function generateModelsServicesProvidersSourceFile(

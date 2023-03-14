@@ -15,17 +15,14 @@ describe('generateCreateMethod', () => {
     fields: [],
     primaryKey: null,
   };
+  const methodDeclaration: MethodDeclarationStructure =
+    generateCreateMethod(model);
 
   it('generates a method declaration with the correct name', () => {
-    const methodDeclaration: MethodDeclarationStructure =
-      generateCreateMethod(model);
     expect(methodDeclaration.name).toBe('create');
   });
 
   it('generates a method declaration with the correct type parameters', () => {
-    const methodDeclaration: MethodDeclarationStructure =
-      generateCreateMethod(model);
-
     const typeParameters =
       methodDeclaration.typeParameters as TypeParameterDeclarationStructure[];
 
@@ -35,10 +32,8 @@ describe('generateCreateMethod', () => {
   });
 
   it('generates a method declaration with the correct parameters', () => {
-    const method: MethodDeclarationStructure = generateCreateMethod(model);
-
-    const argsParameters = method.parameters?.[0];
-    const prismaParameters = method.parameters?.[1];
+    const argsParameters = methodDeclaration.parameters?.[0];
+    const prismaParameters = methodDeclaration.parameters?.[1];
 
     expect(argsParameters?.name).toEqual('args');
     expect(argsParameters?.kind).toEqual(30); // StructureKind.Parameter is equal to 30
@@ -53,18 +48,12 @@ describe('generateCreateMethod', () => {
   });
 
   it('generates a method declaration with the correct statements', () => {
-    const methodDeclaration: MethodDeclarationStructure =
-      generateCreateMethod(model);
-
     const expectedStatements = 'return prisma.create<T>(args);';
 
     expect(methodDeclaration.statements).toEqual(expectedStatements);
   });
 
   it('generates a method declaration with the correct documentation', () => {
-    const methodDeclaration: MethodDeclarationStructure =
-      generateCreateMethod(model);
-
     const expectedDocs = [
       {
         kind: 24,

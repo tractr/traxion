@@ -1,4 +1,3 @@
-import { camel, pascal } from 'case';
 import { StructureKind, TypeParameterDeclarationStructure } from 'ts-morph';
 
 import { generateAggregateMethod } from './aggregate-method.generator';

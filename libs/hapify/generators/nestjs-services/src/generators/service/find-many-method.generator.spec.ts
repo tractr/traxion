@@ -1,7 +1,5 @@
-import { camel, pascal } from 'case';
 import {
   ParameterDeclarationStructure,
-  StructureKind,
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
@@ -16,15 +14,13 @@ describe('generateFindManyMethod', () => {
     pluralName: '',
     primaryKey: null,
   };
+  const generatedMethod = generateFindManyMethod(model);
 
   it('generates a method declaration with the correct name', () => {
-    const generatedMethod = generateFindManyMethod(model);
-
     expect(generatedMethod.name).toEqual('findMany');
   });
 
   it('generates a method declaration with the correct type parameters', () => {
-    const generatedMethod = generateFindManyMethod(model);
     const typeParameters =
       generatedMethod.typeParameters as TypeParameterDeclarationStructure[];
 
@@ -34,7 +30,6 @@ describe('generateFindManyMethod', () => {
   });
 
   it('generates a method declaration with the correct parameters', () => {
-    const generatedMethod = generateFindManyMethod(model);
     const parameters =
       generatedMethod.parameters as ParameterDeclarationStructure[];
 
@@ -51,15 +46,11 @@ describe('generateFindManyMethod', () => {
   });
 
   it('generates a method declaration with the correct statements', () => {
-    const generatedMethod = generateFindManyMethod(model);
-
     const expectedStatements = `return prisma.findMany<T>(args);`;
     expect(generatedMethod.statements).toEqual(expectedStatements);
   });
 
   it('generates a method declaration with the correct documentation', () => {
-    const generatedMethod = generateFindManyMethod(model);
-
     const expectedDocs = [
       {
         kind: 24, // corresponds to `StructureKind.JSDoc`

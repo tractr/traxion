@@ -6,12 +6,20 @@ import {
 
 import { generateConstructor } from './constructor.generator';
 
+import { Model } from '@trxn/hapify-core';
+
 describe('generateConstructor', () => {
+  const model: Model = {
+    name: 'User',
+    pluralName: '',
+    fields: [],
+    primaryKey: null,
+  };
   it('should generate a constructor declaration', () => {
     const constructorDeclaration: ConstructorDeclarationStructure =
-      generateConstructor();
+      generateConstructor(model);
 
-    expect(constructorDeclaration.parameters).toHaveLength(1);
+    expect(constructorDeclaration.parameters).toHaveLength(2);
 
     const prismaClientParameter = constructorDeclaration?.parameters?.[0];
     expect(prismaClientParameter?.kind).toBe(StructureKind.Parameter);

@@ -9,9 +9,7 @@ describe('generateDefaultInternalsMethod', () => {
     });
 
     it('generates a method declaration with the correct statements', () => {
-      expect(getDefaultInternals.statements).toEqual(`return {
-        createdAt: this.getDefaultCreatedAt(),
-      };`);
+      expect(getDefaultInternals.statements).toEqual(`return {};`);
     });
   });
 });

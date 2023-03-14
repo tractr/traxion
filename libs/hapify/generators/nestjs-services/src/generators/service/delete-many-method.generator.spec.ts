@@ -11,16 +11,13 @@ describe('generateDeleteMethod', () => {
     fields: [],
     primaryKey: null,
   };
+  const method = generateDeleteManyMethod(model);
 
   it('generates a method declaration with the correct name', () => {
-    const method = generateDeleteManyMethod(model);
-
     expect(method.name).toEqual('deleteMany');
   });
 
   it('generates a method declaration with the correct type parameters', () => {
-    const method = generateDeleteManyMethod(model);
-
     const typeParameters =
       method.typeParameters as TypeParameterDeclarationStructure[];
 
@@ -30,8 +27,6 @@ describe('generateDeleteMethod', () => {
   });
 
   it('generates a method declaration with the correct parameters', () => {
-    const method = generateDeleteManyMethod(model);
-
     const argsParameters = method.parameters?.[0];
     const prismaParameters = method.parameters?.[1];
 
@@ -48,14 +43,10 @@ describe('generateDeleteMethod', () => {
   });
 
   it('generates a method declaration with the correct statements', () => {
-    const method = generateDeleteManyMethod(model);
-
     expect(method.statements).toEqual('return prisma.deleteMany<T>(args);');
   });
 
   it('generates a method declaration with the correct documentation', () => {
-    const method = generateDeleteManyMethod(model);
-
     expect(method.docs).toEqual([
       {
         kind: 24,

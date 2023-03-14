@@ -16,14 +16,13 @@ describe('generateFindFirstMethod', () => {
     fields: [],
     primaryKey: null,
   };
+  const method: MethodDeclarationStructure = generateFindFirstMethod(model);
 
   it('generates a method declaration with the correct name', () => {
-    const method: MethodDeclarationStructure = generateFindFirstMethod(model);
     expect(method.name).toEqual('findFirst');
   });
 
   it('generates a method declaration with the correct type parameters', () => {
-    const method: MethodDeclarationStructure = generateFindFirstMethod(model);
     const typeParameters: TypeParameterDeclarationStructure[] =
       method.typeParameters as TypeParameterDeclarationStructure[];
 
@@ -35,7 +34,6 @@ describe('generateFindFirstMethod', () => {
   });
 
   it('generates a method declaration with the correct parameters', () => {
-    const method: MethodDeclarationStructure = generateFindFirstMethod(model);
     const parameters: ParameterDeclarationStructure[] =
       method.parameters as ParameterDeclarationStructure[];
 
@@ -52,12 +50,10 @@ describe('generateFindFirstMethod', () => {
   });
 
   it('generates a method declaration with the correct statements', () => {
-    const method: MethodDeclarationStructure = generateFindFirstMethod(model);
     expect(method.statements).toEqual(`return prisma.findFirst<T>(args);`);
   });
 
   it('generates a method declaration with the correct documentation', () => {
-    const method: MethodDeclarationStructure = generateFindFirstMethod(model);
     const docs = method.docs as { description: string }[];
 
     expect(docs.length).toEqual(1);

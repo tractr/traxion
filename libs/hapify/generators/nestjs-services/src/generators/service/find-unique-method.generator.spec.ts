@@ -18,17 +18,14 @@ describe('generateFindUniqueMethod', () => {
     primaryKey: null,
   };
 
-  it('generates a method declaration with the correct name', () => {
-    const methodDeclaration: MethodDeclarationStructure =
-      generateFindUniqueMethod(model);
+  const methodDeclaration: MethodDeclarationStructure =
+    generateFindUniqueMethod(model);
 
+  it('generates a method declaration with the correct name', () => {
     expect(methodDeclaration.name).toBe('findUnique');
   });
 
   it('generates a method declaration with the correct type parameters', () => {
-    const methodDeclaration: MethodDeclarationStructure =
-      generateFindUniqueMethod(model);
-
     const expectedTypeParameters: OptionalKind<TypeParameterDeclarationStructure>[] =
       [
         {
@@ -42,9 +39,6 @@ describe('generateFindUniqueMethod', () => {
   });
 
   it('generates a method declaration with the correct parameters', () => {
-    const methodDeclaration: MethodDeclarationStructure =
-      generateFindUniqueMethod(model);
-
     const argsParameters = methodDeclaration.parameters?.[0];
     const prismaParameters = methodDeclaration.parameters?.[1];
 
@@ -60,18 +54,12 @@ describe('generateFindUniqueMethod', () => {
   });
 
   it('generates a method declaration with the correct statements', () => {
-    const methodDeclaration: MethodDeclarationStructure =
-      generateFindUniqueMethod(model);
-
     expect(methodDeclaration.statements).toBe(
       'return prisma.findUnique<T>(args);',
     );
   });
 
   it('generates a method declaration with the correct documentation', () => {
-    const methodDeclaration: MethodDeclarationStructure =
-      generateFindUniqueMethod(model);
-
     const expectedDocs: JSDocStructure[] = [
       {
         kind: StructureKind.JSDoc,
