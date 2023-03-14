@@ -83,10 +83,6 @@ export function generate() {
 
         printOwnerships(getModelsWithOwnerships);
 
-        schema.relations.forEach((relation) => {
-          console.info(relation.type, relation.name);
-        });
-
         // Create the graphql resolvers
         generateNestjsResolvers(project, schema, {
           output,

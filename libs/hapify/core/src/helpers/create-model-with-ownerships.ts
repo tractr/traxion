@@ -1,3 +1,5 @@
+import { M } from 'ts-toolbelt';
+
 import { ForeignField } from '../fields';
 import { Model, Relation } from '../models';
 import { Schema } from '../schema';
@@ -31,12 +33,14 @@ export function discoverOwnership(
   schema: Schema,
   explored: Model[] = [],
 ): ModelWithOwnership {
+  console.log(model.name, explored.map((m) => m.name).join(', '));
   // First we will need to find the direct owned models of the model
   let ownedModels = schema.relations
     .filter(
       (relation) =>
         // We check for the direct owned models
-        relation.from.model === model || relation.to.model === model,
+        relation.from.model.name === model.name ||
+        relation.to.model.name === model.name,
     )
     .map((relation) => {
       switch (relation.type) {
@@ -75,6 +79,11 @@ export function discoverOwnership(
           throw new Error(`Unsupported relation type`);
       }
     })
+    .filter(
+      (ownedModel) =>
+        // We filter the owned models that are not already explored
+        !explored.find((m) => m.name === ownedModel.own.name),
+    )
     .reduce((acc, ownedModel) => {
       acc.push({ ...ownedModel, own: { ...ownedModel.own, ownedModels: [] } });
       return acc;
@@ -82,7 +91,7 @@ export function discoverOwnership(
 
   // Then we will need to find the indirect owned models of the model
   ownedModels = ownedModels.map((ownedModel) => {
-    if (explored.includes(ownedModel.own)) {
+    if (explored.find((m) => m.name === ownedModel.own.name)) {
       return ownedModel;
     }
 
