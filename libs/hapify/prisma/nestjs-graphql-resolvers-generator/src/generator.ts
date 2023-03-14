@@ -1,6 +1,4 @@
-import * as fs from 'fs';
 import { join } from 'path';
-import { inspect } from 'util';
 
 import { generatorHandler } from '@prisma/generator-helper';
 import { logger } from '@prisma/sdk';
@@ -80,9 +78,9 @@ export function generate() {
       }
 
       // Remove unused imports
-      // project
-      //   .getSourceFiles()
-      //   .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
+      project
+        .getSourceFiles()
+        .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
 
       // Save project to file system
       project.saveSync();

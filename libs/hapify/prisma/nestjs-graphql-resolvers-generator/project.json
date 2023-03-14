@@ -27,6 +27,12 @@
       },
       "outputs": ["{options.outputFile}"]
     },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
     "test": {
       "configurations": {
         "ci": {
@@ -40,6 +46,12 @@
         "passWithNoTests": true
       },
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/hapify/prisma/nestjs-graphql-resolvers-generator/package.json"
+      }
     }
   }
 }

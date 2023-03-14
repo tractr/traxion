@@ -60,10 +60,9 @@ generatorHandler({
     }
 
     // Remove unused imports
-    // project
-    //   .getSourceFiles()
-    //   .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
-    // TODO: Format the files with prettier
+    project
+      .getSourceFiles()
+      .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
 
     // Save project to file system
     project.saveSync();

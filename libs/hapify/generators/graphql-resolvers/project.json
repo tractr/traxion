@@ -22,6 +22,12 @@
       },
       "outputs": ["{options.outputFile}"]
     },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
@@ -29,6 +35,12 @@
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/hapify/generators/graphql-resolvers"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/hapify/generators/graphql-resolvers/package.json"
+      }
     }
   }
 }

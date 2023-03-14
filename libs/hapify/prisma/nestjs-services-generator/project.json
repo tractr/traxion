@@ -44,6 +44,12 @@
         "passWithNoTests": true
       },
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/hapify/prisma/nestjs-services-generator/package.json"
+      }
     }
   }
 }

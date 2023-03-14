@@ -1,8 +1,16 @@
 {
-  "name": "@trxn/hapify-prisma-nestjs-graphql-resolvers-generator",
+  "name": "@trxn/prisma-nestjs-graphql-resolvers-generator",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/traxion"
+  },
   "type": "commonjs",
   "bin": {
-    "hapify-prisma-nestjs-graphql-resolvers-generator": "src/bin.js"
+    "trxn-prisma-nestjs-graphql-resolvers-generator": "src/bin.js"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
