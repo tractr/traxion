@@ -4,7 +4,7 @@ import { Client, CopyConditions } from 'minio';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FILE_STORAGE_CONFIGURATION } from '../constants';
-import { FileStorageConfigurationPrivateDto } from '../dtos';
+import { FileStoragePrivateConfig } from '../interfaces';
 
 /**
  * Service to manipulate remote file storage.
@@ -14,7 +14,7 @@ import { FileStorageConfigurationPrivateDto } from '../dtos';
 export class FileStorageService extends Client {
   constructor(
     @Inject(FILE_STORAGE_CONFIGURATION)
-    private fileStorageConfiguration: FileStorageConfigurationPrivateDto,
+    public readonly fileStorageConfiguration: FileStoragePrivateConfig,
   ) {
     super(fileStorageConfiguration);
   }
@@ -24,7 +24,7 @@ export class FileStorageService extends Client {
    *
    * @param fileMimeType - MIME type of the file to upload
    * @param fileSize - Size of the file to upload (in bits)
-   * @param destinationPath - Custom destination path in the temporary folde
+   * @param destinationPath - Custom destination path in the temporary folder
    * If not provided, a random id will be used
    * @param customBucket - Custom bucket to upload file. Default
    * bucket will be used if not provided
@@ -48,7 +48,7 @@ export class FileStorageService extends Client {
       fileSize > presignedUpload.maxFileSize
     )
       throw new Error(
-        `File size is out of allowed range. It must be between ${presignedUpload.minFileSize} and ${presignedUpload.minFileSize} bits`,
+        `File size is out of allowed range. It must be between ${presignedUpload.minFileSize} and ${presignedUpload.maxFileSize} bits`,
       );
 
     const bucket = customBucket ?? defaultBucket;
