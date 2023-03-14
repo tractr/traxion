@@ -1,16 +1,11 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+
 import { PrismaService } from '@trxn/nestjs-database';
-import { UserDefaultService } from './user-default.service';
-import { USER_DEFAULT_SERVICE } from '../constants';
 
 @Injectable()
 export class UserService {
-  constructor(
-    private readonly prismaClient: PrismaService,
-    @Inject(USER_DEFAULT_SERVICE)
-    private readonly userDefaultService: UserDefaultService,
-  ) {}
+  constructor(private readonly prismaClient: PrismaService) {}
 
   /**
    *     Find zero or one User that matches the filter.

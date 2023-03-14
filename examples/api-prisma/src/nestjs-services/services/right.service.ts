@@ -1,16 +1,11 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+
 import { PrismaService } from '@trxn/nestjs-database';
-import { RightDefaultService } from './right-default.service';
-import { RIGHT_DEFAULT_SERVICE } from '../constants';
 
 @Injectable()
 export class RightService {
-  constructor(
-    private readonly prismaClient: PrismaService,
-    @Inject(RIGHT_DEFAULT_SERVICE)
-    private readonly rightDefaultService: RightDefaultService,
-  ) {}
+  constructor(private readonly prismaClient: PrismaService) {}
 
   /**
    *     Find zero or one Right that matches the filter.

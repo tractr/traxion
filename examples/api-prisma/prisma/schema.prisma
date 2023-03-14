@@ -24,7 +24,7 @@ generator nestjsGraphql {
 
 // Nestjs grahpql resolvers generator
 generator graphqlResolvers {
-  provider = "hapify-prisma-nestjs-graphql-resolvers-generator"
+  provider = "trxn-prisma-nestjs-graphql-resolvers-generator"
   output = "../src/nestjs-resolvers"
 
   // Path relative to the output directory
@@ -35,7 +35,7 @@ generator graphqlResolvers {
 
 // Nestjs common services generator
 generator nestjsServices {
-  provider = "prisma-nestjs-services-generator"
+  provider = "trxn-prisma-nestjs-services-generator"
   output   = "../src/nestjs-services"
   tsConfigFilePath   = "../../tsconfig.app.json"
 }
