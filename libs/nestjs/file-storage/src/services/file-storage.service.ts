@@ -14,7 +14,7 @@ import { FileStoragePrivateConfig } from '../interfaces';
 export class FileStorageService extends Client {
   constructor(
     @Inject(FILE_STORAGE_CONFIGURATION)
-    private fileStorageConfiguration: FileStoragePrivateConfig,
+    public readonly fileStorageConfiguration: FileStoragePrivateConfig,
   ) {
     super(fileStorageConfiguration);
   }
