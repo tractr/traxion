@@ -43,6 +43,7 @@ generator nestjsServices {
 //--------------------------------------------
 // This part describe the project models
 //--------------------------------------------
+
 model User {
   id      Int      @id @default(autoincrement())
   email   String   @unique

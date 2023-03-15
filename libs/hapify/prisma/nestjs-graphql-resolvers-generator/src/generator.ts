@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { inspect } from 'util';
 
 import { generatorHandler } from '@prisma/generator-helper';
 import { logger } from '@prisma/internals';
@@ -13,6 +14,7 @@ import {
 } from '@trxn/hapify-core';
 import {
   convertDmmfToHapifySchemaDeclaration,
+  getSelectOwnership,
   getUserModel,
 } from '@trxn/hapify-devkit';
 import { generate as generateNestjsResolvers } from '@trxn/hapify-generator-graphql-resolvers';
@@ -81,9 +83,13 @@ export function generate() {
 
         const userModel = getUserModel(schema, userModelName);
 
-        const getModelsWithOwnerships = discoverOwnership(userModel, schema);
+        const userWithOwnership = discoverOwnership(userModel, schema);
 
-        printOwnerships(getModelsWithOwnerships);
+        printOwnerships(userWithOwnership);
+
+        console.log(
+          inspect(getSelectOwnership(userWithOwnership), false, null, true),
+        );
 
         // Create the graphql resolvers
         generateNestjsResolvers(project, schema, {

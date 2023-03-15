@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 
 import {
   AuthenticationModule,

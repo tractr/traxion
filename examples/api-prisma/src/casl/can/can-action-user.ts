@@ -1,49 +1,50 @@
-import { AbilityBuilder, AnyAbility } from '@casl/ability';
+import { AbilityBuilder } from '@casl/ability';
 
-import { UserWithOwnershipIds } from '../user.select';
+import { AppAbility } from '../types/app-ability';
+import { UserWithOwnershipIds } from '../types/user-with-ownership-ids';
 
 import { Action } from '@trxn/nestjs-casl';
 
 export function canReadUser(
-  abilities: AbilityBuilder<AnyAbility>,
+  abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Read, 'User', { id: user.id });
 }
 export function canSearchUser(
-  abilities: AbilityBuilder<AnyAbility>,
+  abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Search, 'User', { id: user.id });
 }
 export function canCountUser(
-  abilities: AbilityBuilder<AnyAbility>,
+  abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Count, 'User', { id: user.id });
 }
 
 export function canCreateUser(
-  abilities: AbilityBuilder<AnyAbility>,
+  abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Create, 'User', { id: user.id });
 }
 export function canUpdateUser(
-  abilities: AbilityBuilder<AnyAbility>,
+  abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Update, 'User', { id: user.id });
 }
 export function canDeleteUser(
-  abilities: AbilityBuilder<AnyAbility>,
+  abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Delete, 'User', { id: user.id });
 }
 
 export function canReadActionUser(
-  abilities: AbilityBuilder<AnyAbility>,
+  abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
   canReadUser(abilities, user);
@@ -51,7 +52,7 @@ export function canReadActionUser(
   canCountUser(abilities, user);
 }
 export function canWriteActionUser(
-  abilities: AbilityBuilder<AnyAbility>,
+  abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
   allowDelete = true,
 ) {

@@ -1,5 +1,3 @@
-import { L } from 'ts-toolbelt';
-
 import { Model, Schema } from '@trxn/hapify-core';
 
 /**
@@ -34,7 +32,9 @@ export function getUserModelFromSchema(schema: Schema): Model {
 
   if (userModel.length === 0) {
     userModel = schema.models.filter(
-      (model) => model.name.toLowerCase() === 'user',
+      (model) =>
+        model.name.toLowerCase() === 'user' ||
+        model.name.toLowerCase() === 'users',
     );
   }
 
