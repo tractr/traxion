@@ -13,9 +13,9 @@ export class User {
   @Field(() => String, { nullable: true })
   name!: string | null;
 
-  @Field(() => Int, { nullable: false })
-  roleId!: number;
-
   @Field(() => Role, { nullable: false })
   role?: Role;
+
+  @Field(() => Int, { nullable: false })
+  roleId!: number;
 }

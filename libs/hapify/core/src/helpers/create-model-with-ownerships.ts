@@ -33,7 +33,6 @@ export function discoverOwnership(
   schema: Schema,
   explored: Model[] = [],
 ): ModelWithOwnership {
-  console.log(model.name, explored.map((m) => m.name).join(', '));
   // First we will need to find the direct owned models of the model
   let ownedModels = schema.relations
     .filter(

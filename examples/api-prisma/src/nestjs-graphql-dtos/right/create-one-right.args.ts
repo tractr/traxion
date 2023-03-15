@@ -5,7 +5,8 @@ import { RightCreateInput } from './right-create.input';
 
 @ArgsType()
 export class CreateOneRightArgs {
-  @Field(() => RightCreateInput, { nullable: false })
-  @Type(() => RightCreateInput)
-  data!: RightCreateInput;
+
+    @Field(() => RightCreateInput, {nullable:false})
+    @Type(() => RightCreateInput)
+    data!: RightCreateInput;
 }

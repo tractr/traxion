@@ -13,37 +13,38 @@ import { UserWhereInput } from './user-where.input';
 
 @ArgsType()
 export class UserGroupByArgs {
-  @Field(() => UserWhereInput, { nullable: true })
-  @Type(() => UserWhereInput)
-  where?: UserWhereInput;
 
-  @Field(() => [UserOrderByWithAggregationInput], { nullable: true })
-  orderBy?: Array<UserOrderByWithAggregationInput>;
+    @Field(() => UserWhereInput, {nullable:true})
+    @Type(() => UserWhereInput)
+    where?: UserWhereInput;
 
-  @Field(() => [UserScalarFieldEnum], { nullable: false })
-  by!: Array<keyof typeof UserScalarFieldEnum>;
+    @Field(() => [UserOrderByWithAggregationInput], {nullable:true})
+    orderBy?: Array<UserOrderByWithAggregationInput>;
 
-  @Field(() => UserScalarWhereWithAggregatesInput, { nullable: true })
-  having?: UserScalarWhereWithAggregatesInput;
+    @Field(() => [UserScalarFieldEnum], {nullable:false})
+    by!: Array<keyof typeof UserScalarFieldEnum>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number;
+    @Field(() => UserScalarWhereWithAggregatesInput, {nullable:true})
+    having?: UserScalarWhereWithAggregatesInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number;
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => UserCountAggregateInput, { nullable: true })
-  _count?: UserCountAggregateInput;
+    @Field(() => Int, {nullable:true})
+    skip?: number;
 
-  @Field(() => UserAvgAggregateInput, { nullable: true })
-  _avg?: UserAvgAggregateInput;
+    @Field(() => UserCountAggregateInput, {nullable:true})
+    _count?: UserCountAggregateInput;
 
-  @Field(() => UserSumAggregateInput, { nullable: true })
-  _sum?: UserSumAggregateInput;
+    @Field(() => UserAvgAggregateInput, {nullable:true})
+    _avg?: UserAvgAggregateInput;
 
-  @Field(() => UserMinAggregateInput, { nullable: true })
-  _min?: UserMinAggregateInput;
+    @Field(() => UserSumAggregateInput, {nullable:true})
+    _sum?: UserSumAggregateInput;
 
-  @Field(() => UserMaxAggregateInput, { nullable: true })
-  _max?: UserMaxAggregateInput;
+    @Field(() => UserMinAggregateInput, {nullable:true})
+    _min?: UserMinAggregateInput;
+
+    @Field(() => UserMaxAggregateInput, {nullable:true})
+    _max?: UserMaxAggregateInput;
 }

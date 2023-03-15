@@ -5,7 +5,8 @@ import { RightWhereInput } from './right-where.input';
 
 @ArgsType()
 export class DeleteManyRightArgs {
-  @Field(() => RightWhereInput, { nullable: true })
-  @Type(() => RightWhereInput)
-  where?: RightWhereInput;
+
+    @Field(() => RightWhereInput, {nullable:true})
+    @Type(() => RightWhereInput)
+    where?: RightWhereInput;
 }

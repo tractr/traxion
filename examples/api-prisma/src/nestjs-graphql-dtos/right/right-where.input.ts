@@ -6,21 +6,22 @@ import { RoleListRelationFilter } from '../role/role-list-relation-filter.input'
 
 @InputType()
 export class RightWhereInput {
-  @Field(() => [RightWhereInput], { nullable: true })
-  AND?: Array<RightWhereInput>;
 
-  @Field(() => [RightWhereInput], { nullable: true })
-  OR?: Array<RightWhereInput>;
+    @Field(() => [RightWhereInput], {nullable:true})
+    AND?: Array<RightWhereInput>;
 
-  @Field(() => [RightWhereInput], { nullable: true })
-  NOT?: Array<RightWhereInput>;
+    @Field(() => [RightWhereInput], {nullable:true})
+    OR?: Array<RightWhereInput>;
 
-  @Field(() => IntFilter, { nullable: true })
-  id?: IntFilter;
+    @Field(() => [RightWhereInput], {nullable:true})
+    NOT?: Array<RightWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  name?: StringFilter;
+    @Field(() => IntFilter, {nullable:true})
+    id?: IntFilter;
 
-  @Field(() => RoleListRelationFilter, { nullable: true })
-  roles?: RoleListRelationFilter;
+    @Field(() => StringFilter, {nullable:true})
+    name?: StringFilter;
+
+    @Field(() => RoleListRelationFilter, {nullable:true})
+    roles?: RoleListRelationFilter;
 }

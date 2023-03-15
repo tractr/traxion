@@ -6,11 +6,12 @@ import { RightWhereUniqueInput } from './right-where-unique.input';
 
 @InputType()
 export class RightCreateOrConnectWithoutRolesInput {
-  @Field(() => RightWhereUniqueInput, { nullable: false })
-  @Type(() => RightWhereUniqueInput)
-  where!: RightWhereUniqueInput;
 
-  @Field(() => RightCreateWithoutRolesInput, { nullable: false })
-  @Type(() => RightCreateWithoutRolesInput)
-  create!: RightCreateWithoutRolesInput;
+    @Field(() => RightWhereUniqueInput, {nullable:false})
+    @Type(() => RightWhereUniqueInput)
+    where!: RightWhereUniqueInput;
+
+    @Field(() => RightCreateWithoutRolesInput, {nullable:false})
+    @Type(() => RightCreateWithoutRolesInput)
+    create!: RightCreateWithoutRolesInput;
 }

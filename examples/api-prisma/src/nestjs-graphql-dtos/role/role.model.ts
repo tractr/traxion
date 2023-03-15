@@ -4,20 +4,24 @@ import { Right } from '../right/right.model';
 import { User } from '../user/user.model';
 import { RoleCount } from './role-count.output';
 
-@ObjectType()
+/**
+ * @trxn/user
+ */
+@ObjectType({description:'@trxn/user'})
 export class Role {
-  @Field(() => ID, { nullable: false })
-  id!: number;
 
-  @Field(() => String, { nullable: false })
-  name!: string;
+    @Field(() => ID, {nullable:false})
+    id!: number;
 
-  @Field(() => [User], { nullable: true })
-  users?: Array<User>;
+    @Field(() => String, {nullable:false})
+    name!: string;
 
-  @Field(() => [Right], { nullable: true })
-  rights?: Array<Right>;
+    @Field(() => [User], {nullable:true})
+    users?: Array<User>;
 
-  @Field(() => RoleCount, { nullable: false })
-  _count?: RoleCount;
+    @Field(() => [Right], {nullable:true})
+    rights?: Array<Right>;
+
+    @Field(() => RoleCount, {nullable:false})
+    _count?: RoleCount;
 }

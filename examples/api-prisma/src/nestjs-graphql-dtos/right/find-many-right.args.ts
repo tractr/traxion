@@ -8,22 +8,23 @@ import { RightWhereInput } from './right-where.input';
 
 @ArgsType()
 export class FindManyRightArgs {
-  @Field(() => RightWhereInput, { nullable: true })
-  @Type(() => RightWhereInput)
-  where?: RightWhereInput;
 
-  @Field(() => [RightOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<RightOrderByWithRelationInput>;
+    @Field(() => RightWhereInput, {nullable:true})
+    @Type(() => RightWhereInput)
+    where?: RightWhereInput;
 
-  @Field(() => RightWhereUniqueInput, { nullable: true })
-  cursor?: RightWhereUniqueInput;
+    @Field(() => [RightOrderByWithRelationInput], {nullable:true})
+    orderBy?: Array<RightOrderByWithRelationInput>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number;
+    @Field(() => RightWhereUniqueInput, {nullable:true})
+    cursor?: RightWhereUniqueInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number;
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => [RightScalarFieldEnum], { nullable: true })
-  distinct?: Array<keyof typeof RightScalarFieldEnum>;
+    @Field(() => Int, {nullable:true})
+    skip?: number;
+
+    @Field(() => [RightScalarFieldEnum], {nullable:true})
+    distinct?: Array<keyof typeof RightScalarFieldEnum>;
 }

@@ -25,9 +25,9 @@ export class UserWhereInput {
   @Field(() => StringNullableFilter, { nullable: true })
   name?: StringNullableFilter;
 
-  @Field(() => IntFilter, { nullable: true })
-  roleId?: IntFilter;
-
   @Field(() => RoleRelationFilter, { nullable: true })
   role?: RoleRelationFilter;
+
+  @Field(() => IntFilter, { nullable: true })
+  roleId?: IntFilter;
 }

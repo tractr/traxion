@@ -6,11 +6,12 @@ import { RoleUpdateManyMutationInput } from './role-update-many-mutation.input';
 
 @InputType()
 export class RoleUpdateManyWithWhereWithoutRightsInput {
-  @Field(() => RoleScalarWhereInput, { nullable: false })
-  @Type(() => RoleScalarWhereInput)
-  where!: RoleScalarWhereInput;
 
-  @Field(() => RoleUpdateManyMutationInput, { nullable: false })
-  @Type(() => RoleUpdateManyMutationInput)
-  data!: RoleUpdateManyMutationInput;
+    @Field(() => RoleScalarWhereInput, {nullable:false})
+    @Type(() => RoleScalarWhereInput)
+    where!: RoleScalarWhereInput;
+
+    @Field(() => RoleUpdateManyMutationInput, {nullable:false})
+    @Type(() => RoleUpdateManyMutationInput)
+    data!: RoleUpdateManyMutationInput;
 }

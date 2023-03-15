@@ -11,7 +11,10 @@ import {
   discoverOwnership,
   ModelWithOwnership,
 } from '@trxn/hapify-core';
-import { convertDmmfToHapifySchemaDeclaration } from '@trxn/hapify-devkit';
+import {
+  convertDmmfToHapifySchemaDeclaration,
+  getUserModelFromSchema,
+} from '@trxn/hapify-devkit';
 import { generate as generateNestjsResolvers } from '@trxn/hapify-generator-graphql-resolvers';
 
 export const GENERATOR_NAME = 'Hapify Prisma NestJs/GraphqlResolvers';
@@ -82,6 +85,10 @@ export function generate() {
         const getModelsWithOwnerships = discoverOwnership(userSchema, schema);
 
         printOwnerships(getModelsWithOwnerships);
+
+        const userModel = getUserModelFromSchema(schema);
+
+        console.log(userModel.name);
 
         // Create the graphql resolvers
         generateNestjsResolvers(project, schema, {

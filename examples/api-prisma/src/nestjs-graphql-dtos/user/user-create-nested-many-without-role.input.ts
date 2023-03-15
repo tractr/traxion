@@ -8,19 +8,20 @@ import { UserWhereUniqueInput } from './user-where-unique.input';
 
 @InputType()
 export class UserCreateNestedManyWithoutRoleInput {
-  @Field(() => [UserCreateWithoutRoleInput], { nullable: true })
-  @Type(() => UserCreateWithoutRoleInput)
-  create?: Array<UserCreateWithoutRoleInput>;
 
-  @Field(() => [UserCreateOrConnectWithoutRoleInput], { nullable: true })
-  @Type(() => UserCreateOrConnectWithoutRoleInput)
-  connectOrCreate?: Array<UserCreateOrConnectWithoutRoleInput>;
+    @Field(() => [UserCreateWithoutRoleInput], {nullable:true})
+    @Type(() => UserCreateWithoutRoleInput)
+    create?: Array<UserCreateWithoutRoleInput>;
 
-  @Field(() => UserCreateManyRoleInputEnvelope, { nullable: true })
-  @Type(() => UserCreateManyRoleInputEnvelope)
-  createMany?: UserCreateManyRoleInputEnvelope;
+    @Field(() => [UserCreateOrConnectWithoutRoleInput], {nullable:true})
+    @Type(() => UserCreateOrConnectWithoutRoleInput)
+    connectOrCreate?: Array<UserCreateOrConnectWithoutRoleInput>;
 
-  @Field(() => [UserWhereUniqueInput], { nullable: true })
-  @Type(() => UserWhereUniqueInput)
-  connect?: Array<UserWhereUniqueInput>;
+    @Field(() => UserCreateManyRoleInputEnvelope, {nullable:true})
+    @Type(() => UserCreateManyRoleInputEnvelope)
+    createMany?: UserCreateManyRoleInputEnvelope;
+
+    @Field(() => [UserWhereUniqueInput], {nullable:true})
+    @Type(() => UserWhereUniqueInput)
+    connect?: Array<UserWhereUniqueInput>;
 }
