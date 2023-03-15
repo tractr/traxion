@@ -25,10 +25,9 @@
       "outputs": ["{options.outputFile}"]
     },
     "publish": {
-      "dependsOn": ["build"],
-      "executor": "nx:run-commands",
+      "executor": "ngx-deploy-npm:deploy",
       "options": {
-        "command": "node tools/scripts/publish.mjs hapify-prisma-nestjs-services-generator {args.ver} {args.tag}"
+        "access": "public"
       }
     },
     "test": {
