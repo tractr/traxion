@@ -13,7 +13,7 @@ generator client {
 
 generator nestjsGraphql {
   provider = "prisma-nestjs-graphql"
-  output = "../../../generated/nestjs-graphql/src/generated/prisma-nestjs-graphql"
+  output = "../../nestjs-graphql/src/generated/prisma-nestjs-graphql"
   purgeOutput = true
   reExport = Single
   noAtomicOperations=true
@@ -21,3 +21,4 @@ generator nestjsGraphql {
   fields_Validator_input = true
   useInputType_StringFilter_ALL = "string"
 }
+ 

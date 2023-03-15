@@ -38,9 +38,7 @@
         "jestConfig": "libs/generated/nestjs-models-common/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/generated/nestjs-models-common"
-      ]
+      "outputs": ["coverage/libs/generated/nestjs-models-common"]
     }
   }
 }

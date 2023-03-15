@@ -1,0 +1,16 @@
+{
+  "name": "@trxn/prisma-nestjs-services-generator",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/traxion"
+  },
+  "type": "commonjs",
+  "bin": {
+    "trxn-prisma-nestjs-services-generator": "src/bin.js"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

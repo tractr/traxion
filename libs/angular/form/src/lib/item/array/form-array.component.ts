@@ -1,5 +1,10 @@
 import { Component, Input, TemplateRef } from '@angular/core';
-import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 
 import { FormItemBaseComponent } from '../base/form-item-base.component';
 

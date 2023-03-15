@@ -1,0 +1,46 @@
+{
+  "projectType": "library",
+  "root": "libs/hapify/generators/nestjs-services",
+  "sourceRoot": "libs/hapify/generators/nestjs-services/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "assets": ["libs/hapify/generators/nestjs-services/*.md"],
+        "main": "libs/hapify/generators/nestjs-services/src/index.ts",
+        "outputPath": "dist/libs/hapify/generators/nestjs-services",
+        "packageJson": "libs/hapify/generators/nestjs-services/package.json",
+        "tsConfig": "libs/hapify/generators/nestjs-services/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/hapify/generators/nestjs-services/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/hapify/generators/nestjs-services/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/hapify/generators/nestjs-services"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/hapify/generators/nestjs-services/package.json"
+      }
+    }
+  }
+}

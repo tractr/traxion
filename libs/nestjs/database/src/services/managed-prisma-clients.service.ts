@@ -120,20 +120,22 @@ export class ManagedPrismaClientsService
       this.logger.error(e.message, this.LOG_CONTEXT),
     );
 
-    const truncateDatabase = this.truncateDatabase.bind(this);
-
-    if ('$extends' in prismaClient) {
-      return prismaClient.$extends({
-        client: {
-          async $truncate(
-            schemaName?: (typeof Prisma.ModelName)[keyof typeof Prisma.ModelName],
-            force = false,
-          ) {
-            return truncateDatabase(prismaClient, schemaName, force);
-          },
-        },
-      }) as unknown as PrismaClient;
-    }
+    // TODO: use this when clientExtension in prisma will be available without being a preview feature
+    // const truncateDatabase = this.truncateDatabase.bind(this);
+    //
+    //
+    // if ('$extends' in prismaClient) {
+    //   return prismaClient.$extends({
+    //     client: {
+    //       async $truncate(
+    //         schemaName?: (typeof Prisma.ModelName)[keyof typeof Prisma.ModelName],
+    //         force = false,
+    //       ) {
+    //         return truncateDatabase(prismaClient, schemaName, force);
+    //       },
+    //     },
+    //   }) as unknown as PrismaClient;
+    // }
 
     return prismaClient;
   }

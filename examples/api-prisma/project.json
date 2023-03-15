@@ -1,0 +1,106 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "examples-api-prisma",
+  "projectType": "application",
+  "sourceRoot": "examples/api-prisma/src",
+  "tags": [],
+  "targets": {
+    "build-custom": {
+      "configurations": {
+        "production": {
+          "extractLicenses": true,
+          "inspect": false,
+          "optimization": true
+        }
+      },
+      "executor": "@nrwl/webpack:webpack",
+      "options": {
+        "assets": [],
+        "compiler": "tsc",
+        "main": "examples/api-prisma/src/main.ts",
+        "outputPath": "dist/examples/api-prisma",
+        "target": "node",
+        "tsConfig": "examples/api-prisma/tsconfig.app.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint-custom": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["examples/api-prisma/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "prisma-db-push": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx prisma db push  --schema=./examples/api-prisma/prisma/schema.prisma",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": ".",
+        "parallel": false
+      }
+    },
+    "prisma-generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npm run pregenerate",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "npx prisma generate  --schema=./examples/api-prisma/prisma/schema.prisma",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "nx format --projects examples-api-prisma --uncommitted"
+          }
+        ],
+        "cwd": ".",
+        "parallel": false
+      }
+    },
+    "prisma-studio": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx prisma studio  --schema=./examples/api-prisma/prisma/schema.prisma",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": ".",
+        "parallel": false
+      }
+    },
+    "serve": {
+      "configurations": {
+        "production": {
+          "buildTarget": "examples-api-prisma:build-custom:production"
+        }
+      },
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "examples-api-prisma:build-custom"
+      }
+    },
+    "test": {
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "examples/api-prisma/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    }
+  }
+}

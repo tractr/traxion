@@ -1,0 +1,46 @@
+{
+  "projectType": "library",
+  "root": "libs/hapify/generators/graphql-resolvers",
+  "sourceRoot": "libs/hapify/generators/graphql-resolvers/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "assets": ["libs/hapify/generators/graphql-resolvers/*.md"],
+        "main": "libs/hapify/generators/graphql-resolvers/src/index.ts",
+        "outputPath": "dist/libs/hapify/generators/graphql-resolvers",
+        "packageJson": "libs/hapify/generators/graphql-resolvers/package.json",
+        "tsConfig": "libs/hapify/generators/graphql-resolvers/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/hapify/generators/graphql-resolvers/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/hapify/generators/graphql-resolvers/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/hapify/generators/graphql-resolvers"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/hapify/generators/graphql-resolvers/package.json"
+      }
+    }
+  }
+}

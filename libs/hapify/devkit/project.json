@@ -1,0 +1,66 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "hapify-devkit",
+  "projectType": "library",
+  "sourceRoot": "libs/hapify/devkit/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "assets": ["libs/hapify/devkit/*.md"],
+        "main": "libs/hapify/devkit/src/index.ts",
+        "outputPath": "dist/libs/hapify/devkit",
+        "packageJson": "libs/hapify/devkit/package.json",
+        "tsConfig": "libs/hapify/devkit/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "hapify-model-generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx ts-node -r tsconfig-paths/register --project ./tsconfig.lib.json ./src/start.ts",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": "libs/hapify/devkit",
+        "parallel": false
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/hapify/devkit/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "test": {
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/hapify/devkit/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    },
+    "update-peer-dependencies": {
+      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/hapify/devkit/package.json"
+      }
+    }
+  }
+}
