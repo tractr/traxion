@@ -5,7 +5,7 @@
   "sourceRoot": "examples/api-prisma/src",
   "tags": [],
   "targets": {
-    "build": {
+    "build-custom": {
       "configurations": {
         "production": {
           "extractLicenses": true,
@@ -24,7 +24,7 @@
       },
       "outputs": ["{options.outputPath}"]
     },
-    "lint": {
+    "lint-custom": {
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": ["examples/api-prisma/**/*.ts"]
@@ -80,12 +80,12 @@
     "serve": {
       "configurations": {
         "production": {
-          "buildTarget": "examples-api-prisma:build:production"
+          "buildTarget": "examples-api-prisma:build-custom:production"
         }
       },
       "executor": "@nrwl/js:node",
       "options": {
-        "buildTarget": "examples-api-prisma:build"
+        "buildTarget": "examples-api-prisma:build-custom"
       }
     },
     "test": {
