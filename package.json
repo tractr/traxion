@@ -187,7 +187,6 @@
     "@types/morgan": "^1.9.4",
     "@types/node": "18.13.0",
     "@types/node-fetch": "^2.6.2",
-    "@types/node-mailjet": "^3.3.9",
     "@types/passport-jwt": "^3.0.8",
     "@types/passport-local": "^1.0.35",
     "@types/pg": "^8.6.6",
