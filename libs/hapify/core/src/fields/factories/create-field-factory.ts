@@ -1,23 +1,25 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import pluralize = require('pluralize');
+import { plural } from 'pluralize';
 import type { Function } from 'ts-toolbelt';
 
-import { BaseFieldPropertiesKeys, ExtractField, GetField } from '../base-types';
+import { BaseFieldPropertiesKeys, ExtractField } from '../base-types';
 import { Field, FieldType } from '../field';
 import { CreateFieldOptions } from '../helpers';
 import { getScalarFromType } from '../helpers/get-scalar-from-type';
 
 /**
- * Factory to create a field
- * @param type
- * @param defaultConstraints
- * @param defaultOptions
- * @returns
+ * Factory to create a function that initialize a field
+ *
+ * @param type - Type of the field to initialize
+ * @param defaultConstraints - Constraints to apply by default to the field to initialize
+ * @param defaultOptions - Options to apply by default to the field to initialize
+ * @returns Function to initialize a field
  */
 export const createFieldFactory =
   <
     T extends FieldType,
-    DC extends Partial<Omit<ExtractField<T>, BaseFieldPropertiesKeys>>,
+    DC extends Partial<
+      Omit<ExtractField<T>, BaseFieldPropertiesKeys | 'scalar'>
+    >,
     DO extends CreateFieldOptions<ExtractField<T>>,
   >(
     type: T,
@@ -26,9 +28,11 @@ export const createFieldFactory =
   ) =>
   <
     N extends string,
-    C extends Omit<ExtractField<T>, BaseFieldPropertiesKeys>,
+    C extends Omit<ExtractField<T>, BaseFieldPropertiesKeys | 'scalar'>,
+    // TODO: we should exclude pluralName
     O extends CreateFieldOptions<ExtractField<T>>,
   >(
+    // TODO: update return function params to be dynamic depending on the type of DC et DP
     name: Function.Narrow<N>,
     constraints?: Function.Narrow<C>,
     options?: Function.Narrow<O>,
@@ -36,8 +40,8 @@ export const createFieldFactory =
     ({
       type,
       name,
-      scalar: typeof type === 'string' ? getScalarFromType(type) : null,
-      pluralName: typeof name === 'string' ? pluralize(name) : name,
+      scalar: getScalarFromType(type),
+      pluralName: plural(name as string),
       ...(defaultConstraints as object),
       ...(constraints as object),
       ...(defaultOptions as object),

@@ -1,10 +1,22 @@
-import { ScalarType } from '../field';
+import { FieldType, ScalarType } from '../field';
 
-export function getScalarFromType(type: string): ScalarType | null {
-  if (['string', 'number', 'boolean', 'object', 'date'].includes(type)) {
-    return type as ScalarType;
+export function getScalarFromType(type: FieldType): ScalarType | null {
+  switch (type) {
+    case 'string':
+    case 'number':
+    case 'boolean':
+    case 'object':
+    case 'date':
+      return type;
+    // TODO: validate the mapping between type and scalar
+    case 'enum':
+    case 'file':
+    case 'foreign':
+    case 'primary':
+      return 'string';
+    case 'virtual':
+      return 'object';
+    default:
+      return null;
   }
-  if (type === 'file') return 'string';
-
-  return null;
 }

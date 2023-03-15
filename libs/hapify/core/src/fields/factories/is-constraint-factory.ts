@@ -4,8 +4,9 @@ import { isConstraint } from '../predicates/is-constraint';
 
 /**
  * Factory to create a function that assert if field has a constraint by name and if it is a truthy value
- * @param constraintName
- * @returns
+ *
+ * @param constraintName - Name of the constraint
+ * @returns Function to assert if field has a constraint value and if it is a truthy value
  *
  * @example
  *

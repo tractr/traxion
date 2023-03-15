@@ -1,17 +1,12 @@
-import {
-  BaseField,
-  ExtractField,
-  GetField,
-  GetFieldType,
-  IsField,
-} from '../base-types';
+import { BaseField, ExtractField, GetFieldType, IsField } from '../base-types';
 import { Field } from '../field';
 import { isField } from '../predicates/is-field';
 
 /**
  * Make a predicate to filter out fields by type
- * @param type
- * @returns
+ *
+ * @param type - Type of the field to filter
+ * @returns Predicate to filter out fields by type
  *
  * @example
  *
