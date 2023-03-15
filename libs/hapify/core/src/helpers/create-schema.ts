@@ -67,6 +67,7 @@ export function createSchema(definition: SchemaDeclaration) {
         name: model.primaryKey?.name || null,
         fields: getPrimaryFields(fields),
       },
+      metadata: model.metadata,
       documentation: model.documentation,
     };
   });

@@ -1,11 +1,11 @@
 export function transformUserMetadata(
   metadata: Record<string, unknown>,
 ): Record<string, unknown> {
+  const { user, ...otherMetadata } = metadata;
+  if (typeof user === 'undefined') return otherMetadata;
+
   return {
-    ...metadata,
-    user:
-      typeof metadata.user === 'boolean'
-        ? metadata.user
-        : metadata.user === 'true',
+    ...otherMetadata,
+    user: typeof user === 'boolean' ? user : user === 'true',
   };
 }

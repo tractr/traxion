@@ -1,8 +1,10 @@
 export function validateUserMetadata(
   metadata: Record<string, unknown>,
 ): true | never {
+  if (typeof metadata.user === 'undefined') return true;
+
   const valid =
-    !metadata.user || typeof metadata.user === 'boolean'
+    typeof metadata.user === 'boolean'
       ? true
       : metadata.user === 'true' || metadata.user === 'false';
 

@@ -21,8 +21,7 @@ export function extractMetadataFromDocumentation(
     const match = line.trim().match(/^@trxn\/(\w*)(\s*:\s*(.*))?$/);
     if (match) {
       // ['@trxn/maxLength: 255', 'maxLength', ': 255', '255']
-      // eslint-disable-next-line prefer-destructuring
-      metadata[match[1]] = typeof match[3] === undefined ? true : match[3];
+      metadata[match[1]] = typeof match[3] === 'undefined' ? true : match[3];
     } else {
       docs.push(line);
     }

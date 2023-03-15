@@ -1,11 +1,11 @@
 export function validateMaxLengthMetadata(
   metadata: Record<string, unknown>,
 ): true | never {
-  console.log('here', metadata);
+  if (typeof metadata.maxLength === 'undefined') return true;
+
   const valid =
-    typeof metadata.maxLength === 'undefined' ||
     typeof metadata.maxLength === 'string'
-      ? /^\d+$/.test(metadata.maxLength as string)
+      ? /^\d+$/.test(metadata.maxLength)
       : typeof metadata.maxLength === 'number';
 
   if (!valid) {

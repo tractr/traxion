@@ -51,7 +51,6 @@ model User {
   roleId Int
 }
 
-/// @trxn/user
 model Role {
   id     Int    @id @default(autoincrement())
   name    String
@@ -59,7 +58,6 @@ model Role {
   rights Right[]
 }
 
-/// @trxn/user: false
 model Right {
   id     Int    @id @default(autoincrement())
   name    String @unique

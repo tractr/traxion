@@ -13,7 +13,7 @@ import {
 } from '@trxn/hapify-core';
 import {
   convertDmmfToHapifySchemaDeclaration,
-  getUserModelFromSchema,
+  getUserModel,
 } from '@trxn/hapify-devkit';
 import { generate as generateNestjsResolvers } from '@trxn/hapify-generator-graphql-resolvers';
 
@@ -49,6 +49,7 @@ export function generate() {
         tsConfigFilePath,
         nestjsServicesImportPath,
         nestjsGraphqlDtosImportPath,
+        userModelName,
       } = generator.config;
 
       // Validate the generator configuration
@@ -78,17 +79,11 @@ export function generate() {
       try {
         const schema = createSchema(convertDmmfToHapifySchemaDeclaration(dmmf));
 
-        const userSchema = schema.models.find((model) => model.name === 'User');
-        if (!userSchema) {
-          throw new Error('User model not found');
-        }
-        const getModelsWithOwnerships = discoverOwnership(userSchema, schema);
+        const userModel = getUserModel(schema, userModelName);
+
+        const getModelsWithOwnerships = discoverOwnership(userModel, schema);
 
         printOwnerships(getModelsWithOwnerships);
-
-        const userModel = getUserModelFromSchema(schema);
-
-        console.log(userModel.name);
 
         // Create the graphql resolvers
         generateNestjsResolvers(project, schema, {

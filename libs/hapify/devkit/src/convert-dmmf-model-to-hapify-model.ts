@@ -42,8 +42,6 @@ export function convertDmmfModelToHapifyModel(
     transformations,
   );
 
-  console.log(documentation, metadata);
-
   return {
     name,
     documentation,
