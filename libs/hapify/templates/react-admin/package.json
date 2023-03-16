@@ -1,6 +1,6 @@
 {
   "name": "@trxn/hapify-templates-react-admin",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "description": "Template to generate a react admin configuration",
   "repository": {
     "type": "git",
