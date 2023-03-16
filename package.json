@@ -53,7 +53,7 @@
     "@paljs/plugins": "^5.2.0",
     "@prisma/client": "^4.10.0",
     "@prisma/generator-helper": "^4.11.0",
-    "@prisma/sdk": "^4.0.0",
+    "@prisma/internals": "^4.11.0",
     "@schematics/angular": "^15.0.0",
     "@sentry/node": "^7.36.0",
     "@sentry/types": "^7.36.0",
