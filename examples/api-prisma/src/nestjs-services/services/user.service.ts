@@ -5,7 +5,7 @@ import { PrismaService } from '@trxn/nestjs-database';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly prismaClient: PrismaService) {}
+  constructor(public readonly prismaClient: PrismaService) {}
 
   /**
    *     Find zero or one User that matches the filter.
