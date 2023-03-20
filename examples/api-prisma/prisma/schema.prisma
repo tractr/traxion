@@ -28,8 +28,8 @@ generator graphqlResolvers {
   output = "../src/nestjs-resolvers"
 
   // Path relative to the output directory
-  tsConfigFilePath   = "../../tsconfig.app.json"
-  nestjsServicesImportPath = "./nestjs-services"
+  tsConfigFilePath            = "../../tsconfig.app.json"
+  nestjsServicesImportPath    = "./nestjs-services"
   nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
 }
 
@@ -45,23 +45,24 @@ generator nestjsServices {
 //--------------------------------------------
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  role   Role   @relation(fields: [roleId], references: [id])
-  roleId Int
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  password String
+  name     String?
+  role     Role    @relation(fields: [roleId], references: [id])
+  roleId   Int
 }
 
 model Role {
-  id     Int    @id @default(autoincrement())
-  name    String
-  users User[]
+  id     Int     @id @default(autoincrement())
+  name   String
+  users  User[]
   rights Right[]
 }
 
 model Right {
-  id     Int    @id @default(autoincrement())
-  name    String @unique
+  id    Int    @id @default(autoincrement())
+  name  String @unique
   roles Role[]
 }
 

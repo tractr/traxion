@@ -47,12 +47,12 @@ export function userOwnershipPermission(
   // canWriteActionRight(abilities, user, false);
 
   // Model Tag: not owned
-  canReadActionTag(abilities, user);
+  // canReadActionTag(abilities, user);
 
   // Model Other: not owned
-  canReadActionOther(abilities, user);
+  // canReadActionOther(abilities, user);
   // enable cause of @trxn/permission write
-  canWriteActionOther(abilities, user, false);
+  // canWriteActionOther(abilities, user, false);
 
   // Model Internal: not owned
   // disable cause of @trxn/permission internal

@@ -1,106 +1,135 @@
-import { User, Role, FindUniqueUserArgs, FindManyUserArgs, CreateOneUserArgs, UpdateOneUserArgs, DeleteOneUserArgs } from "../../nestjs-graphql-dtos";
-import { UserService, USER_SERVICE, UserDefaultService, USER_DEFAULT_SERVICE } from "../../nestjs-services";
-import { Inject } from "@nestjs/common";
-import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
-import { PrismaSelect } from "@paljs/plugins";
-import { GraphQLResolveInfo } from "graphql";
-import { FindManyUserOutput } from "../dtos";
+import { Inject } from '@nestjs/common';
+import {
+  Args,
+  Info,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
+import { PrismaSelect } from '@paljs/plugins';
+import { GraphQLResolveInfo } from 'graphql';
+
+import {
+  CreateOneUserArgs,
+  DeleteOneUserArgs,
+  FindManyUserArgs,
+  FindUniqueUserArgs,
+  Role,
+  UpdateOneUserArgs,
+  User,
+} from '../../nestjs-graphql-dtos';
+import {
+  USER_DEFAULT_SERVICE,
+  USER_SERVICE,
+  UserDefaultService,
+  UserService,
+} from '../../nestjs-services';
+import { FindManyUserOutput } from '../dtos';
 
 @Resolver(() => User)
 export class UserResolver {
-    constructor(@Inject(USER_SERVICE) private readonly userService: UserService, @Inject(USER_DEFAULT_SERVICE) private readonly userDefaultService: UserDefaultService) {
-    }
+  constructor(
+    @Inject(USER_SERVICE) private readonly userService: UserService,
+    @Inject(USER_DEFAULT_SERVICE)
+    private readonly userDefaultService: UserDefaultService,
+  ) {}
 
-    /** Query for a unique user */
-    @Query(() => User, { nullable: true })
-    async findUniqueUser(@Info() info: GraphQLResolveInfo, @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueUserArgs) {
+  /** Query for a unique user */
+  @Query(() => User, { nullable: true })
+  async findUniqueUser(
+    @Info() info: GraphQLResolveInfo,
+    @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueUserArgs,
+  ) {
+    const select = new PrismaSelect(info).value;
+    const user = await this.userService.findUnique({ where, ...select });
+    return user;
+  }
 
-            const select = new PrismaSelect(info).value;
-            const user =  await this.userService.findUnique({where, ...select});
-            return user;
-          
-    }
+  /** Query for multiple users. */
+  @Query(() => FindManyUserOutput)
+  async findManyUsers(
+    @Info() info: GraphQLResolveInfo,
+    @Args({ nullable: true })
+    {
+      where,
+      cursor,
+      distinct,
+      orderBy = [{ id: 'asc' }],
+      skip = 0,
+      take = 100,
+    }: FindManyUserArgs,
+  ) {
+    const select = new PrismaSelect(info).valueOf('users', 'User');
 
-    /** Query for multiple users. */
-    @Query(() => FindManyUserOutput)
-    async findManyUsers(@Info() info: GraphQLResolveInfo, @Args({ nullable: true }) 
-                {
-                  where,
-                  cursor,
-                  distinct,
-                  orderBy = [{ id: 'asc' }],
-                  skip = 0,
-                  take = 100,
-                }
-              : FindManyUserArgs) {
+    const users = await this.userService.findMany({
+      ...select,
+      where,
+      cursor,
+      distinct,
+      orderBy,
+      skip,
+      take: take + 1,
+    });
 
-            const select = new PrismaSelect(info).valueOf('users', 'User');
+    const count = await this.userService.count({
+      where,
+    });
 
-            const users = await this.userService.findMany({
-              ...select,
-              where,
-              cursor,
-              distinct,
-              orderBy,
-              skip,
-              take: take + 1,
-            });
+    return {
+      users: users.slice(0, take),
+      count,
+      hasNextPage: typeof users[take] !== 'undefined',
+    };
+  }
 
-            const count = await this.userService.count({
-              where,
-            });
+  /** Create a single user. */
+  @Mutation(() => User, { nullable: true })
+  async createUser(
+    @Info() info: GraphQLResolveInfo,
+    @Args() { data: rawData }: CreateOneUserArgs,
+  ) {
+    const select = new PrismaSelect(info).value;
 
-            return {
-              users: users.slice(0, take),
-              count,
-              hasNextPage: typeof users[take] !== 'undefined',
-            };
-          
-    }
+    const data = {
+      ...this.userDefaultService.getDefaultInternals(),
+      ...rawData,
+    };
 
-    /** Create a single user. */
-    @Mutation(() => User, { nullable: true })
-    async createUser(@Info() info: GraphQLResolveInfo, @Args() { data: rawData }: CreateOneUserArgs) {
+    const user = await this.userService.create({ data, ...select });
 
-            const select = new PrismaSelect(info).value;
+    return user;
+  }
 
-            const data = {
-              ...this.userDefaultService.getDefaultInternals(),
-              ...rawData,
-            };
+  /** Update a single user. */
+  @Mutation(() => User, { nullable: true })
+  async updateUser(
+    @Info() info: GraphQLResolveInfo,
+    @Args() { data, where }: UpdateOneUserArgs,
+  ) {
+    const select = new PrismaSelect(info).value;
 
-            const user = await this.userService.create({ data, ...select });
+    const user = await this.userService.update({ where, data, ...select });
 
-            return user;
-          
-    }
+    return user;
+  }
 
-    /** Update a single user. */
-    @Mutation(() => User, { nullable: true })
-    async updateUser(@Info() info: GraphQLResolveInfo, @Args() { data, where }: UpdateOneUserArgs) {
+  /** Delete a single User. */
+  @Mutation(() => User, { nullable: true })
+  async deleteUser(
+    @Info() info: GraphQLResolveInfo,
+    @Args() { where }: DeleteOneUserArgs,
+  ) {
+    const select = new PrismaSelect(info).value;
 
-            const select = new PrismaSelect(info).value;
+    const user = await this.userService.delete({ where, ...select });
 
-            const user = await this.userService.update({ where, data, ...select });
+    return user;
+  }
 
-            return user;
-          
-    }
-
-    /** Delete a single User. */
-    @Mutation(() => User, { nullable: true })
-    async deleteUser(@Info() info: GraphQLResolveInfo, @Args() { where }: DeleteOneUserArgs) {
-
-            const select = new PrismaSelect(info).value;
-
-            const user = await this.userService.delete({ where, ...select });
-
-            return user;
-          
-    }
-
-    @ResolveField(() => Role)
-    role(@Parent() user: User) {
-        return user.role;
-    }
+  @ResolveField(() => Role)
+  role(@Parent() user: User) {
+    return user.role;
+  }
 }

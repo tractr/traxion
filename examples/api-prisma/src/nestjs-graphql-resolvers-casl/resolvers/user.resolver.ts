@@ -1,13 +1,3 @@
-import {
-  User,
-  Role,
-  FindUniqueUserArgs,
-  FindManyUserArgs,
-  CreateOneUserArgs,
-  UpdateOneUserArgs,
-  DeleteOneUserArgs,
-} from '../../nestjs-graphql-dtos';
-import { UserService, USER_SERVICE } from '../../nestjs-services';
 import { Inject } from '@nestjs/common';
 import {
   Args,
@@ -20,12 +10,28 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { GraphQLResolveInfo } from 'graphql';
+
+import { AppAbility } from '../../casl';
+import { UserAuthorizationService } from '../../nestjs-authorization-services';
+import {
+  CreateOneUserArgs,
+  DeleteOneUserArgs,
+  FindManyUserArgs,
+  FindUniqueUserArgs,
+  Role,
+  UpdateOneUserArgs,
+  User,
+} from '../../nestjs-graphql-dtos';
+import { USER_SERVICE, UserService } from '../../nestjs-services';
 import { FindManyUserOutput } from '../dtos';
+
+import { CurrentAbilities } from '@trxn/nestjs-core';
 
 @Resolver(() => User)
 export class UserResolver {
   constructor(
     @Inject(USER_SERVICE) private readonly userService: UserService,
+    private readonly userAuthorizationService: UserAuthorizationService,
   ) {}
 
   /** Query for a unique user */
@@ -33,9 +39,13 @@ export class UserResolver {
   async findUniqueUser(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueUserArgs,
+    @CurrentAbilities() abilities: AppAbility,
   ) {
     const select = new PrismaSelect(info).value;
-    const user = await this.userService.findUnique({ where, ...select });
+    const user = await this.userAuthorizationService.findUnique(abilities, {
+      where,
+      ...select,
+    });
     return user;
   }
 

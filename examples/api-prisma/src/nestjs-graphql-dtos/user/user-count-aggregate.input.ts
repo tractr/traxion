@@ -10,6 +10,9 @@ export class UserCountAggregateInput {
     email?: true;
 
     @Field(() => Boolean, {nullable:true})
+    password?: true;
+
+    @Field(() => Boolean, {nullable:true})
     name?: true;
 
     @Field(() => Boolean, {nullable:true})
