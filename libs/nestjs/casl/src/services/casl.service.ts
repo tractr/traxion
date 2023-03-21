@@ -27,13 +27,10 @@ export class CaslAbilityFactoryService {
 
     const { rolePermissions, publicPermissions } = this.caslOptions;
 
-    if (!user && publicPermissions) {
-      publicPermissions(builder);
-      return builder.build();
-    }
-
+    // If no user is provided, only allow public permissions
     if (!user) {
-      throw new UnauthorizedException();
+      if (typeof publicPermissions === 'function') publicPermissions(builder);
+      return builder.build();
     }
 
     const roles = this.getRoles(user);
