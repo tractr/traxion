@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.1.12](https://github.com/tractr/traxion/compare/v2.1.11...v2.1.12) (2023-03-24)
+
+
+### Bug Fixes
+
+* remove warning log and let typescript deprecation ([#607](https://github.com/tractr/traxion/issues/607)) ([e664516](https://github.com/tractr/traxion/commit/e664516a4b9ee90dd0221f2bb807454280e82c84))
+
+
+
 ## [2.1.11](https://github.com/tractr/traxion/compare/v2.1.10...v2.1.11) (2023-03-20)
 
 
