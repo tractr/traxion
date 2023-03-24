@@ -4,17 +4,17 @@ import {
   ExceptionFilter,
   UnauthorizedException,
 } from '@nestjs/common';
-import { Response } from 'express';
 
 import { CookieOptionsService } from '../services';
+
+import { getResponseFromContext } from '@trxn/nestjs-core';
 
 @Catch(UnauthorizedException)
 export class UnauthorizedExceptionFilter implements ExceptionFilter {
   constructor(private readonly cookieOptionsService: CookieOptionsService) {}
 
   catch(exception: UnauthorizedException, host: ArgumentsHost) {
-    const ctx = host.switchToHttp();
-    const response = ctx.getResponse<Response>();
+    const response = getResponseFromContext(host);
     const status = exception.getStatus();
 
     response.cookie(this.cookieOptionsService.cookieName, '', {});
