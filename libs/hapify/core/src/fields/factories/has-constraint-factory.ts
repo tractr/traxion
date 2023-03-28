@@ -4,8 +4,9 @@ import { hasConstraint } from '../predicates/has-constraint';
 
 /**
  * Factory to create a function that asserts if field has a constraint by name
+ *
  * @param constraintName
- * @returns
+ * @returns Function to assert if field has a constraint
  *
  * @example
  *
