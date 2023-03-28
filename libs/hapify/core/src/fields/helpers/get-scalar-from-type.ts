@@ -1,4 +1,4 @@
-import { FieldType, ScalarType } from '../field';
+import type { FieldType, ScalarType } from '../field';
 
 export function getScalarFromType(type: FieldType): ScalarType | null {
   switch (type) {
@@ -15,7 +15,6 @@ export function getScalarFromType(type: FieldType): ScalarType | null {
     case 'primary':
       return 'string';
     case 'virtual':
-      return 'object';
     default:
       return null;
   }

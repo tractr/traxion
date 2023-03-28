@@ -1,5 +1,9 @@
-import { BaseField, GetConstraintsNames, HasConstraints } from '../base-types';
-import { Field } from '../field';
+import type {
+  BaseField,
+  GetConstraintsNames,
+  HasConstraints,
+} from '../base-types';
+import type { Field } from '../field';
 import { hasConstraint } from '../predicates/has-constraint';
 
 /**

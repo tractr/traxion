@@ -1,9 +1,9 @@
 import { plural } from 'pluralize';
 import type { Function } from 'ts-toolbelt';
 
-import { BaseFieldPropertiesKeys, ExtractField } from '../base-types';
-import { Field, FieldType } from '../field';
-import { CreateFieldOptions } from '../helpers';
+import type { BaseFieldPropertiesKeys, ExtractField } from '../base-types';
+import type { Field, FieldType } from '../field';
+import type { CreateFieldOptions } from '../helpers';
 import { getScalarFromType } from '../helpers/get-scalar-from-type';
 
 /**

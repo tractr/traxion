@@ -1,5 +1,5 @@
 import { createField } from './create-field';
-import { StringConstraints } from '../string-field';
+import type { StringConstraints } from '../string-field';
 
 describe('createField()', () => {
   it('should return expected field shape when specified a valid argument', () => {

@@ -1,9 +1,8 @@
 import {
   graphqlPropagateSubscriptionContext,
+  GraphqlSubscriptionContext,
   graphqlSubscriptionCookieParser,
 } from './authentication-graphql.helper';
-
-import { GraphqlSubscriptionContext } from '.';
 
 describe('Authentication graphql helpers', () => {
   describe('graphqlSubscriptionCookieParser', () => {

@@ -1,4 +1,4 @@
-import { IsField } from '../base-types';
+import type { IsField } from '../base-types';
 
 /**
  * Assert if field is a Field
