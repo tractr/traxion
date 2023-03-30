@@ -6,7 +6,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nrwl/js:swc",
       "options": {
         "assets": ["libs/nestjs/reset-password/*.md"],
         "main": "libs/nestjs/reset-password/src/index.ts",

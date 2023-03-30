@@ -7,6 +7,10 @@
     "url": "https://github.com/tractr/traxion"
   },
   "license": "UNLICENSED",
+  "dependencies": {
+    "@swc/helpers": "~0.4.11"
+  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"

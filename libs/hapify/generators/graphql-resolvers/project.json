@@ -1,6 +1,7 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "hapify-generators-graphql-resolvers",
   "projectType": "library",
-  "root": "libs/hapify/generators/graphql-resolvers",
   "sourceRoot": "libs/hapify/generators/graphql-resolvers/src",
   "tags": [],
   "targets": {
@@ -34,7 +35,9 @@
         "jestConfig": "libs/hapify/generators/graphql-resolvers/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/hapify/generators/graphql-resolvers"]
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/hapify/generators/graphql-resolvers"
+      ]
     },
     "update-peer-dependencies": {
       "executor": "./dist/libs/schematics:update-peer-dependencies",

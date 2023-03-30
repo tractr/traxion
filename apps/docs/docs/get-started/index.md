@@ -42,7 +42,7 @@ This command will create the necessary files and folders for a Traxion workspace
 
 :::info
 
-To get more information about this schematic, please refer to [this page](/docs/references/schematics/traxion-workspace)
+To get more information about this schematic, please refer to
 
 :::
 
@@ -59,7 +59,7 @@ This schematic installs and configures the following default libraries to provid
 
 :::info
 
-To get more information about this schematic, please refer to [this page](/docs/references/schematics/hapify-library)
+To get more information about this schematic, please refer to 
 
 :::
 

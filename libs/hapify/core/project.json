@@ -1,5 +1,6 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "hapify-core",
   "projectType": "library",
   "sourceRoot": "libs/hapify/core/src",
   "tags": [],
@@ -34,7 +35,7 @@
         "jestConfig": "libs/hapify/core/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/hapify/core"]
+      "outputs": ["{workspaceRoot}/coverage/libs/hapify/core"]
     },
     "update-peer-dependencies": {
       "executor": "./dist/libs/schematics:update-peer-dependencies",

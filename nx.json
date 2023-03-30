@@ -81,6 +81,9 @@
     "lint": {
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
     },
+    "lint-custom": {
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+    },
     "publish": {
       "dependsOn": ["^publish"]
     },
