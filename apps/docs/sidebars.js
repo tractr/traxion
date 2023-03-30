@@ -79,29 +79,6 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'References',
-      items: [
-        {
-          type: 'category',
-          label: 'Schematics',
-          link: { type: 'doc', id: 'references/schematics/how-to' },
-          items: [
-            'references/schematics/admin-app',
-            'references/schematics/eslint-config',
-            'references/schematics/github-workflows',
-            'references/schematics/hapify-library',
-            'references/schematics/npm-publish',
-            'references/schematics/prettier-config',
-            'references/schematics/prisma-library',
-            'references/schematics/release',
-            'references/schematics/target-generate',
-            'references/schematics/traxion-workspace',
-          ],
-        },
-      ],
-    },
-    {
-      type: 'category',
       label: 'Contribution',
       items: ['contribution/documentation-guidelines'],
     },

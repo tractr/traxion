@@ -1,2 +1,0 @@
-export const <<Model constant>>_REST_DTO_SERVICE = '<<Model constant>>_REST_DTO_SERVICE';
-export const <<Model constant>>_CONTROLLER = '<<Model constant>>_CONTROLLER';

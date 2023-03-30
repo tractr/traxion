@@ -1,3 +1,15 @@
 module.exports = {
-  ...require('./libs/config/prettier/.prettierrc'),
+  jsonRecursiveSort: true,
+  $schema: "http://json.schemastore.org/prettierrc",
+  arrowParens: "always",
+  bracketSpacing: true,
+  jsxSingleQuote: false,
+  printWidth: 80,
+  proseWrap: "always",
+  quoteProps: "as-needed",
+  semi: true,
+  singleQuote: true,
+  tabWidth: 2,
+  trailingComma: "all",
+  useTabs: false,
 };

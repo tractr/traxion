@@ -1,12 +1,12 @@
 {
   "overrides": [
     {
-      "extends": ["./libs/config/eslint/.eslintrc.js"],
+      "extends": ["@trxn"],
       "files": ["*.json"],
       "rules": {}
     },
     {
-      "extends": ["./libs/config/eslint/.eslintrc.js"],
+      "extends": ["@trxn"],
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
         "@nrwl/nx/enforce-module-boundaries": [

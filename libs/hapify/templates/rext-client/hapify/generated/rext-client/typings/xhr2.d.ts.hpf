@@ -1,7 +1,0 @@
-// No decent way exists to use XMLHTTPRequest in node with typescript
-// xhr2 does not provide any type
-// Waiting https://github.com/pwnall/node-xhr2/pull/20 to be merge into main
-// The best solution would be to wait rxjs to natively support node with xhr
-// Or waiting https://github.com/mcmunder/universal-rxjs-ajax/issues/13
-	
-declare module 'xhr2';

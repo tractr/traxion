@@ -1,8 +1,0 @@
-import { PrismaAbility } from '@casl/prisma';
-import { AbilityClass } from '@casl/ability';
- 
-import { Actions } from './actions.interface';
-import { Subjects } from './subjects.interface';
- 
-export type AppAbility = PrismaAbility<[Actions, Subjects]>;
-export const AppAbility = PrismaAbility as AbilityClass<AppAbility>;

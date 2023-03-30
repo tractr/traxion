@@ -1,6 +1,0 @@
-<<if Fields password or hidden>>
-export * from './<<Model kebab>>-middleware.module';
-<<endif>>
-export * from './<<Model kebab>>-model.module';
-export * from './<<Model kebab>>-rest.module';
-export * from './<<Model kebab>>.module';
