@@ -14,7 +14,7 @@ module.exports = {
   useTabs: false,
 
   // https://github.com/trivago/prettier-plugin-sort-imports
-  importOrder: ['<THIRD_PARTY_MODULES>', '^[./]'],
+  importOrder: ['<THIRD_PARTY_MODULES>', '^[./]', '^[../]', '^@trxn/(.*)$'],
   importOrderSeparation: true,
   importOrderParserPlugins: [
     'typescript',
