@@ -1,6 +1,6 @@
 {
   "name": "@trxn/hapify-templates-angular-rext-client",
-  "version": "2.1.12",
+  "version": "2.1.13",
   "description": "Template to generate an angular rest client with hapify",
   "repository": {
     "type": "git",

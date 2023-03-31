@@ -1,6 +1,6 @@
 {
   "name": "@trxn/generated-rext-client",
-  "version": "2.1.12",
+  "version": "2.1.13",
   "dependencies": {
     "tslib": "^2.3.1"
   },
