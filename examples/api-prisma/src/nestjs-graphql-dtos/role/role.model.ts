@@ -1,8 +1,7 @@
-import { Field } from '@nestjs/graphql';
-import { ObjectType } from '@nestjs/graphql';
-import { ID } from '@nestjs/graphql';
-import { User } from '../user/user.model';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
+
 import { Right } from '../right/right.model';
+import { User } from '../user/user.model';
 import { RoleCount } from './role-count.output';
 
 @ObjectType()

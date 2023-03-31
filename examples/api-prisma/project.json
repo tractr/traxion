@@ -5,7 +5,7 @@
   "sourceRoot": "examples/api-prisma/src",
   "tags": [],
   "targets": {
-    "build-custom": {
+    "build": {
       "configurations": {
         "production": {
           "extractLicenses": true,
@@ -24,36 +24,12 @@
       },
       "outputs": ["{options.outputPath}"]
     },
-    "lint-custom": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["examples/api-prisma/**/*.ts"]
-      },
-      "outputs": ["{options.outputFile}"]
-    },
-    "prisma-db-push": {
+    "generate": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
           {
-            "command": "npx prisma db push  --schema=./examples/api-prisma/prisma/schema.prisma",
-            "forwardAllArgs": false
-          }
-        ],
-        "cwd": ".",
-        "parallel": false
-      }
-    },
-    "prisma-generate": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "npm run pregenerate",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "npx prisma generate  --schema=./examples/api-prisma/prisma/schema.prisma",
+            "command": "npx prisma generate",
             "forwardAllArgs": false
           },
           {
@@ -64,18 +40,12 @@
         "parallel": false
       }
     },
-    "prisma-studio": {
-      "executor": "nx:run-commands",
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
       "options": {
-        "commands": [
-          {
-            "command": "npx prisma studio  --schema=./examples/api-prisma/prisma/schema.prisma",
-            "forwardAllArgs": false
-          }
-        ],
-        "cwd": ".",
-        "parallel": false
-      }
+        "lintFilePatterns": ["examples/api-prisma/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
     },
     "serve": {
       "configurations": {

@@ -1,14 +1,3 @@
-import {
-  Role,
-  User,
-  Right,
-  FindUniqueRoleArgs,
-  FindManyRoleArgs,
-  CreateOneRoleArgs,
-  UpdateOneRoleArgs,
-  DeleteOneRoleArgs,
-} from '../../nestjs-graphql-dtos';
-import { RoleService, ROLE_SERVICE } from '../../nestjs-services';
 import { Inject } from '@nestjs/common';
 import {
   Args,
@@ -20,7 +9,20 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
+import { Prisma } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
+
+import {
+  CreateOneRoleArgs,
+  DeleteOneRoleArgs,
+  FindManyRoleArgs,
+  FindUniqueRoleArgs,
+  Right,
+  Role,
+  UpdateOneRoleArgs,
+  User,
+} from '../../nestjs-graphql-dtos';
+import { ROLE_SERVICE, RoleService } from '../../nestjs-services';
 import { FindManyRoleOutput } from '../dtos';
 
 @Resolver(() => Role)
@@ -35,7 +37,7 @@ export class RoleResolver {
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueRoleArgs,
   ) {
-    const select = new PrismaSelect(info).value;
+    const select = new PrismaSelect(info).value as Prisma.RoleArgs;
     const role = await this.roleService.findUnique({ where, ...select });
     return role;
   }
@@ -54,7 +56,10 @@ export class RoleResolver {
       take = 100,
     }: FindManyRoleArgs,
   ) {
-    const select = new PrismaSelect(info).valueOf('roles', 'Role');
+    const select = new PrismaSelect(info).valueOf(
+      'roles',
+      'Role',
+    ) as Prisma.RoleArgs;
 
     const roles = await this.roleService.findMany({
       ...select,
@@ -83,7 +88,7 @@ export class RoleResolver {
     @Info() info: GraphQLResolveInfo,
     @Args() { data }: CreateOneRoleArgs,
   ) {
-    const select = new PrismaSelect(info).value;
+    const select = new PrismaSelect(info).value as Prisma.RoleArgs;
 
     const role = await this.roleService.create({ data, ...select });
 
@@ -96,7 +101,7 @@ export class RoleResolver {
     @Info() info: GraphQLResolveInfo,
     @Args() { data, where }: UpdateOneRoleArgs,
   ) {
-    const select = new PrismaSelect(info).value;
+    const select = new PrismaSelect(info).value as Prisma.RoleArgs;
 
     const role = await this.roleService.update({ where, data, ...select });
 
@@ -109,7 +114,7 @@ export class RoleResolver {
     @Info() info: GraphQLResolveInfo,
     @Args() { where }: DeleteOneRoleArgs,
   ) {
-    const select = new PrismaSelect(info).value;
+    const select = new PrismaSelect(info).value as Prisma.RoleArgs;
 
     const role = await this.roleService.delete({ where, ...select });
 

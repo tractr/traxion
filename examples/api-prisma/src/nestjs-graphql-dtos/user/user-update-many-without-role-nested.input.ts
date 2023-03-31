@@ -1,14 +1,14 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
-import { UserCreateWithoutRoleInput } from './user-create-without-role.input';
+import { Field, InputType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
-import { UserCreateOrConnectWithoutRoleInput } from './user-create-or-connect-without-role.input';
-import { UserUpsertWithWhereUniqueWithoutRoleInput } from './user-upsert-with-where-unique-without-role.input';
+
 import { UserCreateManyRoleInputEnvelope } from './user-create-many-role-input-envelope.input';
-import { UserWhereUniqueInput } from './user-where-unique.input';
-import { UserUpdateWithWhereUniqueWithoutRoleInput } from './user-update-with-where-unique-without-role.input';
-import { UserUpdateManyWithWhereWithoutRoleInput } from './user-update-many-with-where-without-role.input';
+import { UserCreateOrConnectWithoutRoleInput } from './user-create-or-connect-without-role.input';
+import { UserCreateWithoutRoleInput } from './user-create-without-role.input';
 import { UserScalarWhereInput } from './user-scalar-where.input';
+import { UserUpdateManyWithWhereWithoutRoleInput } from './user-update-many-with-where-without-role.input';
+import { UserUpdateWithWhereUniqueWithoutRoleInput } from './user-update-with-where-unique-without-role.input';
+import { UserUpsertWithWhereUniqueWithoutRoleInput } from './user-upsert-with-where-unique-without-role.input';
+import { UserWhereUniqueInput } from './user-where-unique.input';
 
 @InputType()
 export class UserUpdateManyWithoutRoleNestedInput {

@@ -1,11 +1,10 @@
-import { Field } from '@nestjs/graphql';
-import { ArgsType } from '@nestjs/graphql';
-import { RightWhereInput } from './right-where.input';
+import { ArgsType, Field, Int } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
+
 import { RightOrderByWithRelationInput } from './right-order-by-with-relation.input';
-import { RightWhereUniqueInput } from './right-where-unique.input';
-import { Int } from '@nestjs/graphql';
 import { RightScalarFieldEnum } from './right-scalar-field.enum';
+import { RightWhereUniqueInput } from './right-where-unique.input';
+import { RightWhereInput } from './right-where.input';
 
 @ArgsType()
 export class FindFirstRightOrThrowArgs {

@@ -37,7 +37,7 @@ export function generateUpdateMethod(model: Model): MethodDeclarationStructure {
   ];
 
   const statements = `
-    const select = new PrismaSelect(info).value;
+    const select = new PrismaSelect(info).value as Prisma.${modelPascal}Args;
 
     const ${modelCamel} = await this.${modelCamel}Service.update({ where, data, ...select });
 

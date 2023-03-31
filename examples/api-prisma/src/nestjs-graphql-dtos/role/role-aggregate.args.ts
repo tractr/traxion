@@ -1,15 +1,14 @@
-import { Field } from '@nestjs/graphql';
-import { ArgsType } from '@nestjs/graphql';
-import { RoleWhereInput } from './role-where.input';
+import { ArgsType, Field, Int } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
-import { RoleOrderByWithRelationInput } from './role-order-by-with-relation.input';
-import { RoleWhereUniqueInput } from './role-where-unique.input';
-import { Int } from '@nestjs/graphql';
-import { RoleCountAggregateInput } from './role-count-aggregate.input';
+
 import { RoleAvgAggregateInput } from './role-avg-aggregate.input';
-import { RoleSumAggregateInput } from './role-sum-aggregate.input';
-import { RoleMinAggregateInput } from './role-min-aggregate.input';
+import { RoleCountAggregateInput } from './role-count-aggregate.input';
 import { RoleMaxAggregateInput } from './role-max-aggregate.input';
+import { RoleMinAggregateInput } from './role-min-aggregate.input';
+import { RoleOrderByWithRelationInput } from './role-order-by-with-relation.input';
+import { RoleSumAggregateInput } from './role-sum-aggregate.input';
+import { RoleWhereUniqueInput } from './role-where-unique.input';
+import { RoleWhereInput } from './role-where.input';
 
 @ArgsType()
 export class RoleAggregateArgs {

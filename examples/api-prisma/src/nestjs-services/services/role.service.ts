@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-
 import { PrismaService } from '@trxn/nestjs-database';
 
 @Injectable()
@@ -21,7 +20,7 @@ export class RoleService {
    */
   findUnique<T extends Prisma.RoleFindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleFindUniqueArgs>,
-    prisma: Prisma.RoleDelegate<any> = this.prismaClient.role,
+    prisma: Prisma.RoleDelegate<undefined> = this.prismaClient.role,
   ) {
     return prisma.findUnique<T>(args);
   }
@@ -42,7 +41,7 @@ export class RoleService {
    */
   findFirst<T extends Prisma.RoleFindFirstArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleFindFirstArgs>,
-    prisma: Prisma.RoleDelegate<any> = this.prismaClient.role,
+    prisma: Prisma.RoleDelegate<undefined> = this.prismaClient.role,
   ) {
     return prisma.findFirst<T>(args);
   }
@@ -66,7 +65,7 @@ export class RoleService {
    */
   findMany<T extends Prisma.RoleFindManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleFindManyArgs>,
-    prisma: Prisma.RoleDelegate<any> = this.prismaClient.role,
+    prisma: Prisma.RoleDelegate<undefined> = this.prismaClient.role,
   ) {
     return prisma.findMany<T>(args);
   }
@@ -86,7 +85,7 @@ export class RoleService {
    */
   create<T extends Prisma.RoleCreateArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleCreateArgs>,
-    prisma: Prisma.RoleDelegate<any> = this.prismaClient.role,
+    prisma: Prisma.RoleDelegate<undefined> = this.prismaClient.role,
   ) {
     return prisma.create<T>(args);
   }
@@ -105,7 +104,7 @@ export class RoleService {
    */
   createMany<T extends Prisma.RoleCreateManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleCreateManyArgs>,
-    prisma: Prisma.RoleDelegate<any> = this.prismaClient.role,
+    prisma: Prisma.RoleDelegate<undefined> = this.prismaClient.role,
   ) {
     return prisma.createMany<T>(args);
   }
@@ -127,7 +126,7 @@ export class RoleService {
    */
   update<T extends Prisma.RoleUpdateArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleUpdateArgs>,
-    prisma: Prisma.RoleDelegate<any> = this.prismaClient.role,
+    prisma: Prisma.RoleDelegate<undefined> = this.prismaClient.role,
   ) {
     return prisma.update<T>(args);
   }
@@ -151,7 +150,7 @@ export class RoleService {
    */
   updateMAny<T extends Prisma.RoleUpdateManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleUpdateManyArgs>,
-    prisma: Prisma.RoleDelegate<any> = this.prismaClient.role,
+    prisma: Prisma.RoleDelegate<undefined> = this.prismaClient.role,
   ) {
     return prisma.updateMany<T>(args);
   }
@@ -176,7 +175,7 @@ export class RoleService {
    */
   upsert<T extends Prisma.RoleUpsertArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleUpsertArgs>,
-    prisma: Prisma.RoleDelegate<any> = this.prismaClient.role,
+    prisma: Prisma.RoleDelegate<undefined> = this.prismaClient.role,
   ) {
     return prisma.upsert<T>(args);
   }
@@ -195,7 +194,7 @@ export class RoleService {
    */
   delete<T extends Prisma.RoleDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleDeleteArgs>,
-    prisma: Prisma.RoleDelegate<any> = this.prismaClient.role,
+    prisma: Prisma.RoleDelegate<undefined> = this.prismaClient.role,
   ) {
     return prisma.delete<T>(args);
   }
@@ -214,7 +213,7 @@ export class RoleService {
    */
   deleteMany<T extends Prisma.RoleDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleDeleteManyArgs>,
-    prisma: Prisma.RoleDelegate<any> = this.prismaClient.role,
+    prisma: Prisma.RoleDelegate<undefined> = this.prismaClient.role,
   ) {
     return prisma.deleteMany<T>(args);
   }
@@ -236,7 +235,7 @@ export class RoleService {
    */
   count<T extends Prisma.RoleCountArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleCountArgs>,
-    prisma: Prisma.RoleDelegate<any> = this.prismaClient.role,
+    prisma: Prisma.RoleDelegate<undefined> = this.prismaClient.role,
   ) {
     return prisma.count<T>(args);
   }
@@ -268,7 +267,7 @@ export class RoleService {
    */
   aggregate<T extends Prisma.RoleAggregateArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleAggregateArgs>,
-    prisma: Prisma.RoleDelegate<any> = this.prismaClient.role,
+    prisma: Prisma.RoleDelegate<undefined> = this.prismaClient.role,
   ) {
     return prisma.aggregate<T>(args);
   }

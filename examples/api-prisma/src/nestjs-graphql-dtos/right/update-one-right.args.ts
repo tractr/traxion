@@ -1,7 +1,7 @@
-import { Field } from '@nestjs/graphql';
-import { ArgsType } from '@nestjs/graphql';
-import { RightUpdateInput } from './right-update.input';
+import { ArgsType, Field } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
+
+import { RightUpdateInput } from './right-update.input';
 import { RightWhereUniqueInput } from './right-where-unique.input';
 
 @ArgsType()

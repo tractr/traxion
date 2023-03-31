@@ -1,7 +1,7 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
-import { UserUpdateManyWithoutRoleNestedInput } from '../user/user-update-many-without-role-nested.input';
+import { Field, InputType } from '@nestjs/graphql';
+
 import { RightUpdateManyWithoutRolesNestedInput } from '../right/right-update-many-without-roles-nested.input';
+import { UserUpdateManyWithoutRoleNestedInput } from '../user/user-update-many-without-role-nested.input';
 
 @InputType()
 export class RoleUpdateInput {

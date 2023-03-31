@@ -22,7 +22,7 @@ export const generateDeleteMethod = (
     {
       kind: StructureKind.Parameter,
       name: 'prisma',
-      type: `Prisma.${pascal(model.name)}Delegate<any>`,
+      type: `Prisma.${pascal(model.name)}Delegate<undefined>`,
       initializer: `this.prismaClient.${camel(model.name)}`,
     },
   ];
