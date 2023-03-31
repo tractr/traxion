@@ -4,7 +4,7 @@
   "description": "Hapify templates for models rest dtos",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tractr/traxion"
+    "url": "https://github.com/tractr/stack"
   },
   "license": "UNLICENSED",
   "publishConfig": {

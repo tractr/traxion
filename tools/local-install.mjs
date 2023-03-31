@@ -1,13 +1,14 @@
 import { FsTree } from '@nrwl/tao/src/shared/tree.js';
-import { getProjects } from '@nrwl/devkit';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import { readJsonFile } from '@nrwl/devkit';
 import { argv, cwd } from 'process';
 import { copy } from 'fs-extra';
 import { Command } from 'commander/esm.mjs';
 import debug from 'debug';
 import { $ } from 'zx';
+
+import pkg from '@nrwl/devkit';
+const { getProjects, readJsonFile } = pkg;
 
 const log = debug('local-install');
 
@@ -36,10 +37,10 @@ const projectsWanted = projectsWithComma
   .map((p) => p.trim())
   .filter((p) => p !== '');
 
-const traxionDir = join(__dirname, '..');
-const traxionTree = new FsTree(traxionDir);
+const stackDir = join(__dirname, '..');
+const stackTree = new FsTree(stackDir);
 
-const projects = getProjects(traxionTree);
+const projects = getProjects(stackTree);
 
 const packagesToInstall = [];
 const toCopy = [];
@@ -64,13 +65,11 @@ for (const [projectName, project] of projects) {
     project.targets.build.options.outputPath || project.targets.build.outputs[0]
   ).replace('{workspaceRoot}', '');
 
-  const packageJson = readJsonFile(
-    join(traxionDir, outputPath, 'package.json'),
-  );
+  const packageJson = readJsonFile(join(stackDir, outputPath, 'package.json'));
   const packageName = packageJson.name;
 
   toCopy.push([
-    join(traxionDir, outputPath),
+    join(stackDir, outputPath),
     join(targetDir, packageName),
     packageJson,
   ]);

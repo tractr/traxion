@@ -1,6 +1,6 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": ["hapify-templates-models", "common"],
+  "implicitDependencies": ["hapify-templates-models"],
   "name": "generated-models",
   "prefix": "tractr",
   "projectType": "library",

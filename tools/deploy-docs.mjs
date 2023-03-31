@@ -44,7 +44,7 @@ function copyAllFilesAndFolderToDestination(sourcePath, destinationPath) {
 // Define options
 const outputDocsDir = path.join(`${process.cwd()}`, 'dist', 'apps', 'docs');
 const tmpDir = path.join(`${process.cwd()}`, 'tmp', 'docs');
-const repoUrl = 'git@github.com:tractr/traxion.github.io.git';
+const repoUrl = 'git@github.com:tractr/stack.github.io.git';
 const cname = 'www.traxion.dev';
 const commitMessage = 'docs: update documentation';
 

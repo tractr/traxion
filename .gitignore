@@ -47,30 +47,18 @@ Thumbs.db
 yarn.lock
 **/package-lock.json
 
-# Local sqlite database
-**/prisma/dev.db
-
 # Hapify generated files
-**/prisma/schemas/generated.prisma
+libs/generated/prisma/prisma/schemas/generated.prisma
 
 # Other generated files
-**/prisma/schema.prisma
+libs/generated/prisma/prisma/schema.prisma
 
 # Generated files
-libs/generated/**/generated
+libs/generated/**/src/generated
 
 # Hapify
 hapify.json
-**/generated/prisma/schemas/generated.prisma.hpf
-**/hapify
-!**/hapify/validator.js
-!**/config/hapify
-!**/libs/hapify
-!apps/docs/**/hapify
-
-# Templates of hapify-templates libraries should be tracked
-!libs/hapify/templates/**/generated/
-!libs/hapify/templates/**/hapify/
+libs/generated/**/hapify
 
 # Local ignore
 *.local-ignore*
@@ -93,6 +81,3 @@ apps/admin/src/assets/app-config.json
 
 # GraphQL
 schema.gql
-
-# Pwa app config
-apps/test/src/assets/app-config.json

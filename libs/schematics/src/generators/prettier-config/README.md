@@ -8,7 +8,7 @@ nx g @trxn/schematics:prettier-config
 
 ## Description
 
-Add and configure Prettier [`@trxn/prettier-config`](https://github.com/tractr/traxion/tree/main/libs/config/prettier) to a NX project.
+Add and configure Prettier [`@trxn/prettier-config`](https://github.com/tractr/stack/tree/main/libs/config/prettier) to a NX project.
 
 The following steps will be performed:
 

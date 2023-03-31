@@ -44,7 +44,7 @@ jobs:
         node: [16.x]
         os: [ubuntu-20.04]
 
-    runs-on: ['${{ matrix.os }}']
+    runs-on: '${{ matrix.os }}'
 
     outputs:
       apps: ${{ steps.apps.outputs.result }}
@@ -57,7 +57,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Install dependencies and generate files
-        uses: tractr/traxion/.github/actions/setup@main
+        uses: tractr/stack/.github/actions/setup@main
         with:
           registryUrl: ${{ inputs.registryUrl }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -76,7 +76,7 @@ jobs:
           NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       - name: Update the next tag
-        uses: tractr/traxion/.github/actions/update-tag@main
+        uses: tractr/stack/.github/actions/update-tag@main
         with:
           tagName: 'next'
           GH_TOKEN: ${{ secrets.GH_TOKEN }}

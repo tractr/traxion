@@ -8,7 +8,7 @@ nx g @trxn/schematics:eslint-config
 
 ## Description
 
-Add and configure ESLint [`@trxn/eslint-config`](https://github.com/tractr/traxion/tree/main/libs/config/eslint) to a NX project.
+Add and configure ESLint [`@trxn/eslint-config`](https://github.com/tractr/stack/tree/main/libs/config/eslint) to a NX project.
 
 The following steps will be performed:
 

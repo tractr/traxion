@@ -1,4 +1,4 @@
-name: Traxion prerelease
+name: Stack prerelease
 
 on:
   push:

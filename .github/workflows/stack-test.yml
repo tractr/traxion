@@ -1,4 +1,4 @@
-name: Traxion test and coverage
+name: Stack test and coverage
 
 on:
   pull_request:

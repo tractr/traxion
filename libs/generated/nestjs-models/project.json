@@ -2,11 +2,6 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": [
     "hapify-templates-nestjs-models",
-    "common",
-    "nestjs-authentication",
-    "nestjs-core",
-    "nestjs-database",
-    "nestjs-mailer",
     "generated-casl",
     "generated-rest-dtos"
   ],

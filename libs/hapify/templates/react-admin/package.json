@@ -4,7 +4,7 @@
   "description": "Template to generate a react admin configuration",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tractr/traxion"
+    "url": "https://github.com/tractr/stack"
   },
   "license": "UNLICENSED",
   "publishConfig": {

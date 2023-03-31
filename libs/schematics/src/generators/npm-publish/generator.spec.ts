@@ -15,7 +15,7 @@ describe('release generator', () => {
   let appTree: Tree;
   const options: NpmPublishGeneratorSchema = {
     project: 'test',
-    repository: 'https://github.com/tractr/traxion',
+    repository: 'https://github.com/tractr/stack',
   };
 
   beforeEach(() => {
@@ -68,7 +68,7 @@ describe('release generator', () => {
     expect(packageJsonProject).toBeDefined();
     expect(packageJsonProject.repository).toEqual({
       type: 'git',
-      url: 'https://github.com/tractr/traxion',
+      url: 'https://github.com/tractr/stack',
     });
     expect(packageJsonProject.publishConfig).toEqual({
       access: 'restricted',
@@ -105,7 +105,7 @@ describe('release generator', () => {
     expect(packageJsonProject).toBeDefined();
     expect(packageJsonProject.repository).toEqual({
       type: 'git',
-      url: 'https://github.com/tractr/traxion',
+      url: 'https://github.com/tractr/stack',
     });
     expect(packageJsonProject.publishConfig).toEqual({
       access: 'public',

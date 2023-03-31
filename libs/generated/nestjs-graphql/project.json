@@ -1,8 +1,6 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": [
-    "common",
-    "nestjs-graphql",
     "hapify-templates-nestjs-graphql",
     "generated-casl",
     "generated-nestjs-models-common"

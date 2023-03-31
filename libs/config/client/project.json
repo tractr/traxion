@@ -1,5 +1,6 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "client-config",
   "projectType": "library",
   "sourceRoot": "libs/config/client/src",
   "tags": [],
@@ -34,7 +35,7 @@
         "jestConfig": "libs/config/client/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/config/client"]
+      "outputs": ["{workspaceRoot}/coverage/libs/config/client"]
     }
   }
 }

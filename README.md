@@ -1,8 +1,8 @@
-# Traxion
+# Stack
 
-The purpose of Traxion is to provide a pre-configured stack of frameworks and libraries that are designed to work
+The purpose of Stack is to provide a pre-configured stack of frameworks and libraries that are designed to work
 together "out of the box" to accelerate web application development. By combining these frameworks and libraries into a
-single, well-orchestrated stack, Traxion aims to provide a foundation for building modern web applications that is easy
+single, well-orchestrated stack, Stack aims to provide a foundation for building modern web applications that is easy
 to use and efficient.
 
 It is built on top of a number of popular frameworks and libraries, including [Nx](https://nx.dev/)
@@ -19,7 +19,7 @@ We are currently working on improving it.
 
 ## Automation
 
-One of the key ways that Traxion helps developers to be more efficient is by leveraging the use of generators.
+One of the key ways that Stack helps developers to be more efficient is by leveraging the use of generators.
 
 [Hapify](https://docs.hapify.io/) is a template engine for CRUD operations. This save developers time and effort by
 eliminating the need to manually set up the

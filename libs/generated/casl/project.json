@@ -1,6 +1,6 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": ["hapify-templates-casl", "common"],
+  "implicitDependencies": ["hapify-templates-casl"],
   "name": "generated-casl",
   "prefix": "tractr",
   "projectType": "library",

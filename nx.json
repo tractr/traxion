@@ -46,18 +46,11 @@
   },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": [
-      "default",
-      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
-      "!{projectRoot}/tsconfig.spec.json",
-      "!{projectRoot}/jest.config.[jt]s",
-      "!{projectRoot}/.eslintrc.json"
-    ],
+    "production": ["default"],
     "sharedGlobals": [
       "{workspaceRoot}/hapify-models.json",
       "{workspaceRoot}/nx.json",
       "{workspaceRoot}/tsconfig.base.json",
-      "{workspaceRoot}/workspace.json",
       "{workspaceRoot}/babel.config.json"
     ]
   },
@@ -91,7 +84,7 @@
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "accessToken": "ZDY0OTk5NzAtZTQzMy00ZDU5LWI4ZjYtZDI0NDgwNmFiNmE0fHJlYWQ=",
+        "accessToken": "NGEzYTcwNWEtZGJjNy00YTUwLWFjZGMtZTE1ZDgxYWY5ZGRlfHJlYWQ=",
         "cacheableOperations": ["build", "test", "lint", "e2e"],
         "parallel": 1
       },

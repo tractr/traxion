@@ -1,4 +1,4 @@
-name: Traxion test the API start
+name: Stack test the API start
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -17,7 +17,7 @@ jobs:
         node: [16.x]
         os: [ubuntu-20.04]
 
-    runs-on: ['${{ matrix.os }}']
+    runs-on: '${{ matrix.os }}'
 
     # Service containers to run with `container-job`
     services:
@@ -45,7 +45,7 @@ jobs:
 
       # We install our dependencies and generate the files
       - name: Install dependencies and generate files
-        uses: tractr/traxion/.github/actions/setup@main
+        uses: tractr/stack/.github/actions/setup@main
         with:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 

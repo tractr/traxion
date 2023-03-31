@@ -2,8 +2,6 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": [
     "hapify-templates-nestjs-models-common",
-    "nestjs-core",
-    "nestjs-database",
     "generated-models"
   ],
   "name": "generated-nestjs-models-common",

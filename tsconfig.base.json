@@ -28,9 +28,8 @@
       "@trxn/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@trxn/client-config": ["libs/config/client/src/index.ts"],
       "@trxn/commit-config": ["libs/config/commit/src/index.ts"],
-      "@trxn/common": ["libs/common/src/index.ts"],
-      "@trxn/create-traxion-workspace": [
-        "libs/hapify/create-traxion-workspace/src/index.ts"
+      "@trxn/create-stack-workspace": [
+        "libs/hapify/create-stack-workspace/src/index.ts"
       ],
       "@trxn/eslint-config": ["libs/config/eslint/src/index.ts"],
       "@trxn/generated-angular-rext-client": [
@@ -72,48 +71,13 @@
       ],
       "@trxn/hapify-common": ["libs/hapify/hapify-common/src/index.ts"],
       "@trxn/hapify-config": ["libs/config/hapify/src/index.ts"],
-      "@trxn/hapify-core": ["libs/hapify/core/src/index.ts"],
-      "@trxn/hapify-devkit": ["libs/hapify/devkit/src/index.ts"],
       "@trxn/hapify-generate-config": [
         "libs/hapify/generate-config/src/index.ts"
-      ],
-      "@trxn/hapify-generator-graphql-resolvers": [
-        "libs/hapify/generators/graphql-resolvers/src/index.ts"
-      ],
-      "@trxn/hapify-generators-nestjs-services": [
-        "libs/hapify/generators/nestjs-services/src/index.ts"
-      ],
-      "@trxn/hapify-prisma-nestjs-graphql-resolvers-generator": [
-        "libs/hapify/prisma/nestjs-graphql-resolvers-generator/src/index.ts"
-      ],
-      "@trxn/hapify-prisma-nestjs-services-generator": [
-        "libs/hapify/prisma/nestjs-services-generator/src/index.ts"
       ],
       "@trxn/hapify-update-templates-import-path": [
         "libs/hapify/update-templates-import-path/src/index.ts"
       ],
-      "@trxn/nestjs-authentication": [
-        "libs/nestjs/authentication/src/index.ts"
-      ],
-      "@trxn/nestjs-bcrypt": ["libs/nestjs/bcrypt/src/index.ts"],
-      "@trxn/nestjs-casl": ["libs/nestjs/casl/src/index.ts"],
-      "@trxn/nestjs-core": ["libs/nestjs/core/src/index.ts"],
-      "@trxn/nestjs-database": ["libs/nestjs/database/src/index.ts"],
-      "@trxn/nestjs-file-storage": ["libs/nestjs/file-storage/src/index.ts"],
-      "@trxn/nestjs-graphql": ["libs/nestjs/graphql/src/index.ts"],
-      "@trxn/nestjs-mailer": ["libs/nestjs/mailer/src/index.ts"],
-      "@trxn/nestjs-mailjet": ["libs/nestjs/mailjet/src/index.ts"],
-      "@trxn/nestjs-password": ["libs/nestjs/password/src/index.ts"],
-      "@trxn/nestjs-request-timestamp": [
-        "libs/nestjs/request-timestamp/src/index.ts"
-      ],
-      "@trxn/nestjs-reset-password": [
-        "libs/nestjs/reset-password/src/index.ts"
-      ],
       "@trxn/nestjs-sentry": ["libs/nestjs/sentry/src/index.ts"],
-      "@trxn/nestjs-testing": ["libs/nestjs/testing/src/index.ts"],
-      "@trxn/nestjs-user": ["libs/nestjs/user/src/index.ts"],
-      "@trxn/nestjs-winston": ["libs/nestjs/winston/src/index.ts"],
       "@trxn/prettier-config": ["libs/config/prettier/src/index.ts"],
       "@trxn/schematics": ["libs/schematics/src/index.ts"],
       "@trxn/terraform-aws-stack": ["libs/terraform/aws-stack/src/index.ts"],

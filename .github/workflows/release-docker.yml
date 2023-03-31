@@ -75,7 +75,7 @@ jobs:
 
       - name: Get the affected apps
         id: apps
-        uses: tractr/traxion/.github/actions/affected-apps@main
+        uses: tractr/stack/.github/actions/affected-apps@main
         with:
           all: ${{ inputs.all }}
 
@@ -97,7 +97,7 @@ jobs:
         node: [16.x]
         os: [ubuntu-20.04]
 
-    runs-on: ['${{ matrix.os }}']
+    runs-on: '${{ matrix.os }}'
 
     steps:
       # First we checkout the code
