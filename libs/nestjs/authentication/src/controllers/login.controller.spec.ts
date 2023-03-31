@@ -1,6 +1,5 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { User } from '@prisma/client';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as jwt from 'jsonwebtoken';
 import * as request from 'supertest';
@@ -16,6 +15,12 @@ import { JwtOptionsService } from '../services/jwt-options.service';
 import { JwtStrategy, LocalStrategy } from '../strategies';
 
 import { UserService } from '@trxn/nestjs-user';
+
+type User = {
+  id: string;
+  email: string;
+  password: string;
+};
 
 describe('Login Controller', () => {
   let app: INestApplication;

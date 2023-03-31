@@ -6,12 +6,17 @@ import {
 } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { User } from '@prisma/client';
 import { mockDeep, MockProxy } from 'jest-mock-extended';
 import * as request from 'supertest';
 
 import { PasswordController } from './password.controller';
 import { PasswordService } from '../services';
+
+type User = {
+  id: string;
+  email: string;
+  password: string;
+};
 
 describe('Password Controller', () => {
   let app: INestApplication;

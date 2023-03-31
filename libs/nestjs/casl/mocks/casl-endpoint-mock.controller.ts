@@ -22,7 +22,7 @@ export class CaslEndPointMock {
   }
 
   @Get('/read-guest')
-  @Policies((ability: AppAbility) => ability.can('read', 'Tag'))
+  @Policies((ability: AppAbility) => ability.can('read', 'Right'))
   needToBeGuest(): string {
     return 'never';
   }

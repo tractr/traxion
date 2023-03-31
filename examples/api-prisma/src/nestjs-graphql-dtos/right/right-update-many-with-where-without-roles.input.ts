@@ -1,7 +1,7 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
-import { RightScalarWhereInput } from './right-scalar-where.input';
+import { Field, InputType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
+
+import { RightScalarWhereInput } from './right-scalar-where.input';
 import { RightUpdateManyMutationInput } from './right-update-many-mutation.input';
 
 @InputType()

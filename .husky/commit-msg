@@ -3,4 +3,4 @@
 # shellcheck disable=SC1091
 . "$(dirname "$0")/_/husky.sh"
 
-npm_config_yes=true node ./libs/config/commit/bin/tractr-commitlint.js --edit "$1"
+npm_config_yes=true npx tractr-commitlint --edit "$1"

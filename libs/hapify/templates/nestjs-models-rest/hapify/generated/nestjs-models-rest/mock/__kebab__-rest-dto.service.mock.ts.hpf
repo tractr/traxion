@@ -1,8 +1,0 @@
-import { mockDeep } from 'jest-mock-extended';
-	
-import { <<Model pascal>>RestDtoService } from '..';
-  
-export function mock<<Model pascal>>RestDtoServiceFactory() {
-  return mockDeep< <<Model pascal>>RestDtoService >();
-}
-	

@@ -1,8 +1,8 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
-import { RoleCreateWithoutUsersInput } from './role-create-without-users.input';
+import { Field, InputType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
+
 import { RoleCreateOrConnectWithoutUsersInput } from './role-create-or-connect-without-users.input';
+import { RoleCreateWithoutUsersInput } from './role-create-without-users.input';
 import { RoleWhereUniqueInput } from './role-where-unique.input';
 
 @InputType()

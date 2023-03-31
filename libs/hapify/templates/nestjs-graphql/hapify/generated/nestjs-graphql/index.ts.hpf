@@ -1,8 +1,0 @@
-export * from './src/nestjs-graphql.module';
- 
-<<for Models model>>
-export * from './src/resolvers/<<model kebab>>.resolver';
-<<endfor>>
- 
-export * from './src/dtos';
- 

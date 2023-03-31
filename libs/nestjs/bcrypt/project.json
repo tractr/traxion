@@ -6,7 +6,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nrwl/js:swc",
       "options": {
         "assets": ["libs/nestjs/bcrypt/*.md"],
         "main": "libs/nestjs/bcrypt/src/index.ts",

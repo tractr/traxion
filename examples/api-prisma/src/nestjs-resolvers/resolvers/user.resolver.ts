@@ -1,13 +1,3 @@
-import {
-  User,
-  Role,
-  FindUniqueUserArgs,
-  FindManyUserArgs,
-  CreateOneUserArgs,
-  UpdateOneUserArgs,
-  DeleteOneUserArgs,
-} from '../../nestjs-graphql-dtos';
-import { UserService, USER_SERVICE } from '../../nestjs-services';
 import { Inject } from '@nestjs/common';
 import {
   Args,
@@ -19,7 +9,19 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
+import { Prisma } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
+
+import {
+  CreateOneUserArgs,
+  DeleteOneUserArgs,
+  FindManyUserArgs,
+  FindUniqueUserArgs,
+  Role,
+  UpdateOneUserArgs,
+  User,
+} from '../../nestjs-graphql-dtos';
+import { USER_SERVICE, UserService } from '../../nestjs-services';
 import { FindManyUserOutput } from '../dtos';
 
 @Resolver(() => User)
@@ -34,7 +36,7 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueUserArgs,
   ) {
-    const select = new PrismaSelect(info).value;
+    const select = new PrismaSelect(info).value as Prisma.UserArgs;
     const user = await this.userService.findUnique({ where, ...select });
     return user;
   }
@@ -53,7 +55,10 @@ export class UserResolver {
       take = 100,
     }: FindManyUserArgs,
   ) {
-    const select = new PrismaSelect(info).valueOf('users', 'User');
+    const select = new PrismaSelect(info).valueOf(
+      'users',
+      'User',
+    ) as Prisma.UserArgs;
 
     const users = await this.userService.findMany({
       ...select,
@@ -82,7 +87,7 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @Args() { data }: CreateOneUserArgs,
   ) {
-    const select = new PrismaSelect(info).value;
+    const select = new PrismaSelect(info).value as Prisma.UserArgs;
 
     const user = await this.userService.create({ data, ...select });
 
@@ -95,7 +100,7 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @Args() { data, where }: UpdateOneUserArgs,
   ) {
-    const select = new PrismaSelect(info).value;
+    const select = new PrismaSelect(info).value as Prisma.UserArgs;
 
     const user = await this.userService.update({ where, data, ...select });
 
@@ -108,7 +113,7 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @Args() { where }: DeleteOneUserArgs,
   ) {
-    const select = new PrismaSelect(info).value;
+    const select = new PrismaSelect(info).value as Prisma.UserArgs;
 
     const user = await this.userService.delete({ where, ...select });
 

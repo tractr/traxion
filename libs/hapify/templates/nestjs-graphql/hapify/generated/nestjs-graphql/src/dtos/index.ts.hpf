@@ -1,3 +1,0 @@
-<<for Models model>>
-export * from './find-many-<<model kebab>>.output';
-<<endfor>>

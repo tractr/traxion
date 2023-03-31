@@ -1,7 +1,0 @@
-import { mockDeep } from 'jest-mock-extended';
- 
-import { <<Model pascal>>Service } from '../..';
- 
-export function mock<<Model pascal>>ServiceFactory() {
-  return mockDeep<<<Model pascal>>Service>();
-}

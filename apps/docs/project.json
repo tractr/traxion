@@ -31,20 +31,7 @@
         "cwd": "apps/docs"
       }
     },
-    "install": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": ["npm i"],
-        "cwd": "apps/docs"
-      }
-    },
     "serve": {
-      "dependsOn": [
-        {
-          "projects": "self",
-          "target": "install"
-        }
-      ],
       "executor": "nx:run-commands",
       "options": {
         "commands": ["npx docusaurus start -p 5000"],

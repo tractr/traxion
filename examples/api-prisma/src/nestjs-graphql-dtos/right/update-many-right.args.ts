@@ -1,7 +1,7 @@
-import { Field } from '@nestjs/graphql';
-import { ArgsType } from '@nestjs/graphql';
-import { RightUpdateManyMutationInput } from './right-update-many-mutation.input';
+import { ArgsType, Field } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
+
+import { RightUpdateManyMutationInput } from './right-update-many-mutation.input';
 import { RightWhereInput } from './right-where.input';
 
 @ArgsType()

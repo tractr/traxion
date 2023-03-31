@@ -1,10 +1,9 @@
+import { getRelatedModelsWithoutSelf, Model } from '@trxn/hapify-core';
+import { resolveDynamicPath } from '@trxn/hapify-devkit';
 import { constant, pascal } from 'case';
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
 import { GraphqlResolverImportPathConfig } from '../../config.type';
-
-import { getRelatedModelsWithoutSelf, Model } from '@trxn/hapify-core';
-import { resolveDynamicPath } from '@trxn/hapify-devkit';
 
 export function generateImports(
   model: Model,
@@ -59,6 +58,11 @@ export function generateImports(
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: '@paljs/plugins',
       namedImports: [{ name: 'PrismaSelect' }],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: '@prisma/client',
+      namedImports: [{ name: 'Prisma' }],
     },
     {
       kind: StructureKind.ImportDeclaration,

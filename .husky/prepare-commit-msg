@@ -6,5 +6,5 @@
 if [ -z ${2+x} ]
 then
     # shellcheck disable=SC2015
-    exec < /dev/tty && npm_config_yes=true node ./libs/config/commit/bin/tractr-commit.js --hook || true
+    exec < /dev/tty && npm_config_yes=true npx tractr-commit --hook || true
 fi

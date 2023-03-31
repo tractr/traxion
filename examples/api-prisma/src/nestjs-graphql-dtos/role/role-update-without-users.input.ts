@@ -1,5 +1,5 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+
 import { RightUpdateManyWithoutRolesNestedInput } from '../right/right-update-many-without-roles-nested.input';
 
 @InputType()

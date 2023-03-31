@@ -1,5 +1,0 @@
-export interface AngularRextConfiguration {
-  api: {
-    url: string;
-  }
-}

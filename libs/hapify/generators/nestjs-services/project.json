@@ -1,6 +1,7 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "hapify-generators-nestjs-services",
   "projectType": "library",
-  "root": "libs/hapify/generators/nestjs-services",
   "sourceRoot": "libs/hapify/generators/nestjs-services/src",
   "tags": [],
   "targets": {
@@ -34,7 +35,9 @@
         "jestConfig": "libs/hapify/generators/nestjs-services/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/hapify/generators/nestjs-services"]
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/hapify/generators/nestjs-services"
+      ]
     },
     "update-peer-dependencies": {
       "executor": "./dist/libs/schematics:update-peer-dependencies",

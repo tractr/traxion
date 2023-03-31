@@ -1,8 +1,8 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+
 import { SortOrder } from '../prisma/sort-order.enum';
-import { RightCountOrderByAggregateInput } from './right-count-order-by-aggregate.input';
 import { RightAvgOrderByAggregateInput } from './right-avg-order-by-aggregate.input';
+import { RightCountOrderByAggregateInput } from './right-count-order-by-aggregate.input';
 import { RightMaxOrderByAggregateInput } from './right-max-order-by-aggregate.input';
 import { RightMinOrderByAggregateInput } from './right-min-order-by-aggregate.input';
 import { RightSumOrderByAggregateInput } from './right-sum-order-by-aggregate.input';

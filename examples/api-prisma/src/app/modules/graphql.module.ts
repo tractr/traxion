@@ -2,8 +2,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule as NestjsGraphQLModule } from '@nestjs/graphql';
 
-import { NestjsServicesModule } from './services.module';
 import { GraphqlModule } from '../../nestjs-resolvers';
+import { NestjsServicesModule } from './services.module';
 
 @Module({
   imports: [

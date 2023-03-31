@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "module": "commonjs",
-    "outDir": "../../dist/out-tsc",
-    "types": ["jest", "node"]
-  },
-  "extends": "./tsconfig.json",
-  "include": ["**/*.spec.ts", "**/*.test.ts", "**/*.d.ts", "jest.config.ts"]
-}

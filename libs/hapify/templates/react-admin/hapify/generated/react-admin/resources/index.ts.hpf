@@ -1,2 +1,0 @@
-<<for Models model>>export * from './<<model pascal>>';
-<<endfor>> 

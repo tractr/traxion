@@ -1,13 +1,14 @@
 import { FsTree } from '@nrwl/tao/src/shared/tree.js';
-import { getProjects } from '@nrwl/devkit';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import { readJsonFile } from '@nrwl/devkit';
 import { argv, cwd } from 'process';
 import { copy } from 'fs-extra';
 import { Command } from 'commander/esm.mjs';
 import debug from 'debug';
 import { $ } from 'zx';
+import pkg from '@nrwl/devkit';
+
+const { getProjects, readJsonFile } = pkg;
 
 const log = debug('local-install');
 

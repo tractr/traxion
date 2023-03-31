@@ -1,3 +1,4 @@
+node_modules
 # Ignore all the generated folder
 libs/generated/**/generated
 

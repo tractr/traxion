@@ -1,13 +1,13 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
-import { RightCreateWithoutRolesInput } from './right-create-without-roles.input';
+import { Field, InputType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
+
 import { RightCreateOrConnectWithoutRolesInput } from './right-create-or-connect-without-roles.input';
+import { RightCreateWithoutRolesInput } from './right-create-without-roles.input';
+import { RightScalarWhereInput } from './right-scalar-where.input';
+import { RightUpdateManyWithWhereWithoutRolesInput } from './right-update-many-with-where-without-roles.input';
+import { RightUpdateWithWhereUniqueWithoutRolesInput } from './right-update-with-where-unique-without-roles.input';
 import { RightUpsertWithWhereUniqueWithoutRolesInput } from './right-upsert-with-where-unique-without-roles.input';
 import { RightWhereUniqueInput } from './right-where-unique.input';
-import { RightUpdateWithWhereUniqueWithoutRolesInput } from './right-update-with-where-unique-without-roles.input';
-import { RightUpdateManyWithWhereWithoutRolesInput } from './right-update-many-with-where-without-roles.input';
-import { RightScalarWhereInput } from './right-scalar-where.input';
 
 @InputType()
 export class RightUpdateManyWithoutRolesNestedInput {
