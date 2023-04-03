@@ -7,7 +7,7 @@ sidebar_label: Generated & custom code
 Traxion relies partially on code generation via [Hapify](https://docs.hapify.io/). This engine creates code for CRUD operations (`create`, `read`, `update`, `delete`, `search`, `count`) based on data models.
 Some libraries have generated code, some do not. This document describes how the libraries with generated code are organized.
 
-# The Vision[](https://docs.amplication.com/how-to/custom-code/#the-vision)
+# The Vision
 
 Our goal is for you to be able to add custom code while retaining the ability to update your data model, change permissions, and more.
 
@@ -15,7 +15,7 @@ To do so, Traxion always exports the generated code to a `generated` folder whic
 
 The generated code is not directly modified. We try to extend it if we need to add business logic.
 
-# **How it works**
+# How it works
 
 Let's consider the `models-rest` library. This library exposes the NestJS controllers for the CRUD API, for each of the data model.
 

@@ -8,7 +8,7 @@ More generators, such as front-end generators, will be added to the Traxion suit
 
 ## Getting Started
 
-To get started with Traxion, please follow the [NestJS-GraphQL generator tutorial](./NestJS-GraphQL.md).
+To get started with Traxion, please follow the [NestJS-GraphQL generator tutorial](https://www.traxion.dev/docs/getting-started/).
 
 ## How to Contribute
 

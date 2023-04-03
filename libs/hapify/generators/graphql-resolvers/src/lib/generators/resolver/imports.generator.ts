@@ -1,9 +1,10 @@
-import { getRelatedModelsWithoutSelf, Model } from '@trxn/hapify-core';
-import { resolveDynamicPath } from '@trxn/hapify-devkit';
 import { constant, pascal } from 'case';
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
 import { GraphqlResolverImportPathConfig } from '../../config.type';
+
+import { getRelatedModelsWithoutSelf, Model } from '@trxn/hapify-core';
+import { resolveDynamicPath } from '@trxn/hapify-devkit';
 
 export function generateImports(
   model: Model,
