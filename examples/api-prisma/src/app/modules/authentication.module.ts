@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AuthenticationModule as TrxnAuthenticationModule } from '@trxn/nestjs-authentication';
 
 import { UserModule } from './user.module';
+
+import { AuthenticationModule as TrxnAuthenticationModule } from '@trxn/nestjs-authentication';
 
 @Module({
   imports: [
