@@ -1,6 +1,6 @@
 {
   "name": "@trxn/hapify-templates-models",
-  "version": "2.1.13",
+  "version": "2.1.14-next.0",
   "description": "Hapify templates for models class validators and types",
   "repository": {
     "type": "git",

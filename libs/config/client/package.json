@@ -1,6 +1,6 @@
 {
   "name": "@trxn/client-config",
-  "version": "2.1.13",
+  "version": "2.1.14-next.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/stack.git"

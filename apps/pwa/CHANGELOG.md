@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.1.14-next.0](https://github.com/tractr/stack/compare/v2.1.13...v2.1.14-next.0) (2023-04-04)
+
+
+### Features
+
+* remove unused package and component from angular packages ([#2](https://github.com/tractr/stack/issues/2)) ([206c6e8](https://github.com/tractr/stack/commit/206c6e8b2e6aed224fd185577eed32a5fe311bdf))
+
+
+
 ## [2.1.13](https://github.com/tractr/stack/compare/v2.1.12...v2.1.13) (2023-03-31)
 
 

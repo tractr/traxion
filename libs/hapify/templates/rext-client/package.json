@@ -1,6 +1,6 @@
 {
   "name": "@trxn/hapify-templates-rext-client",
-  "version": "2.1.13",
+  "version": "2.1.14-next.0",
   "description": "Template to generate a rest client with hapify",
   "repository": {
     "type": "git",
