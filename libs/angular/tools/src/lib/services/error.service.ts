@@ -1,47 +1,28 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import { Injectable, isDevMode } from '@angular/core';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ErrorService {
-  /**
-   * Constructor
-   */
-  constructor(private message: NzMessageService) {}
-
-  /**
-   * Handle an error
-   */
-  handle(error: Error | Error[]): void {
-    if (error instanceof HttpErrorResponse) {
-      this.handleHttp(error);
-    } else {
-      this.show(
-        (Array.isArray(error) ? error : [error])
-          .map((err) => err.message)
-          .join('\n'),
-      );
+  getClientMessage(error: Error): string {
+    if (!navigator.onLine) {
+      return 'No Internet Connection';
     }
+    return error.message ? error.message : error.toString();
   }
 
-  /**
-   * Handle an http error
-   */
-  private handleHttp(error: HttpErrorResponse): void {
-    // Create message
-    const message =
-      error.error && error.error.error && error.error.message
-        ? `${error.error.error as string}: ${error.error.message as string}`
-        : error.message;
-    // Show message
-    this.show(message);
+  getClientStack(error: Error) {
+    return error.stack;
   }
 
-  /**
-   * Show the snackbar with the message
-   */
-  private show(message: string): void {
-    this.message.create('error', message);
-    console.error('ErrorService:', message);
+  getServerMessage(error: HttpErrorResponse) {
+    return error.message;
+  }
+
+  getServerStack(error: HttpErrorResponse) {
+    if (isDevMode()) return error.error.stack as string;
+
+    return undefined;
   }
 }

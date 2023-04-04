@@ -1,132 +1,44 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-import { ModuleWithProviders, NgModule, Provider } from '@angular/core';
-import { ClassConstructor } from 'class-transformer';
-
 import {
-  LoginComponent,
-  LogoutComponent,
-  LostPasswordComponent,
-  LostPasswordPageComponent,
-  ResetPasswordComponent,
-  ResetPasswordPageComponent,
-} from './components';
-import { AUTHENTICATION_OPTIONS, AUTHENTICATION_USER_DTO } from './constants';
-import { ConnectedDirective, NotConnectedDirective } from './directives';
-import { AuthenticationOptions } from './dtos';
-import { IsLoggedGuard, IsNotLoggedGuard } from './guards';
-import { AuthenticationPublicOptions, UserOptions } from './interfaces';
-import { PasswordService, SessionService } from './services';
+  FactorySansProvider,
+  ModuleWithProviders,
+  NgModule,
+} from '@angular/core';
 
-import { AngularComponentsModule } from '@trxn/angular-components';
-import { AngularFormModule } from '@trxn/angular-form';
-import {
-  AngularToolsModule,
-  AsyncOptions,
-  ModuleOptionsFactory,
-} from '@trxn/angular-tools';
-import { transformAndValidate } from '@trxn/common';
+import { AUTHENTICATION_OPTIONS } from './constants';
+import { authenticationModuleOptionsFactory } from './services';
+import { AuthenticationOptions } from './types';
 
-@NgModule({
-  imports: [AngularToolsModule, AngularComponentsModule, AngularFormModule],
-  declarations: [
-    LogoutComponent,
-    LoginComponent,
-    ConnectedDirective,
-    NotConnectedDirective,
-    LostPasswordComponent,
-    LostPasswordPageComponent,
-    ResetPasswordComponent,
-    ResetPasswordPageComponent,
-  ],
-  providers: [IsLoggedGuard, IsNotLoggedGuard, SessionService, PasswordService],
-  exports: [
-    LogoutComponent,
-    LoginComponent,
-    ConnectedDirective,
-    NotConnectedDirective,
-    LostPasswordComponent,
-    LostPasswordPageComponent,
-    ResetPasswordComponent,
-    ResetPasswordPageComponent,
-  ],
-})
-export class AngularAuthenticationModule extends ModuleOptionsFactory<
-  AuthenticationOptions,
-  AuthenticationPublicOptions
->(AUTHENTICATION_OPTIONS, transformAndValidate(AuthenticationOptions)) {
-  static register<
-    U extends Record<string, unknown> = Record<string, unknown>,
-    CCU extends ClassConstructor<U> = ClassConstructor<U>,
-  >({
-    user,
-    ...options
-  }: AuthenticationPublicOptions &
-    UserOptions<U, CCU>): ModuleWithProviders<AngularAuthenticationModule> {
-    return this.mergeModuleWithProvider(
-      super.register(options),
-      this.createUserProvider(user),
-    );
-  }
-
-  static forRoot<
-    U extends Record<string, unknown> = Record<string, unknown>,
-    CCU extends ClassConstructor<U> = ClassConstructor<U>,
-  >({
-    user,
-    ...options
-  }: AuthenticationPublicOptions &
-    UserOptions<U, CCU>): ModuleWithProviders<AngularAuthenticationModule> {
-    return this.mergeModuleWithProvider(
-      super.forRoot(options),
-      this.createUserProvider(user),
-    );
-  }
-
-  static registerAsync<
-    U extends Record<string, unknown> = Record<string, unknown>,
-    CCU extends ClassConstructor<U> = ClassConstructor<U>,
-  >({
-    user,
-    ...options
-  }: AsyncOptions<AuthenticationOptions, AuthenticationPublicOptions> &
-    UserOptions<U, CCU>): ModuleWithProviders<AngularAuthenticationModule> {
-    return this.mergeModuleWithProvider(
-      super.registerAsync(options),
-      this.createUserProvider(user),
-    );
-  }
-
-  static forRootAsync<
-    U extends Record<string, unknown> = Record<string, unknown>,
-    CCU extends ClassConstructor<U> = ClassConstructor<U>,
-  >({
-    user,
-    ...options
-  }: AsyncOptions<AuthenticationOptions, AuthenticationPublicOptions> &
-    UserOptions<U, CCU>): ModuleWithProviders<AngularAuthenticationModule> {
-    return this.mergeModuleWithProvider(
-      super.forRootAsync(options),
-      this.createUserProvider(user),
-    );
-  }
-
-  static createUserProvider<
-    U extends Record<string, unknown> = Record<string, unknown>,
-    CCU extends ClassConstructor<U> = ClassConstructor<U>,
-  >(user: CCU): Provider {
+@NgModule({})
+export class AngularAuthenticationModule {
+  static forRoot(
+    options: AuthenticationOptions,
+  ): ModuleWithProviders<AngularAuthenticationModule> {
     return {
-      provide: AUTHENTICATION_USER_DTO,
-      useValue: user,
+      ngModule: AngularAuthenticationModule,
+      providers: [
+        {
+          provide: AUTHENTICATION_OPTIONS,
+          useFactory: () => authenticationModuleOptionsFactory(options),
+        },
+      ],
     };
   }
 
-  static mergeModuleWithProvider(
-    module: ModuleWithProviders<AngularAuthenticationModule>,
-    user: Provider,
+  static forRootFactory<T extends unknown[]>(
+    options: FactorySansProvider & {
+      useFactory: (...args: T) => AuthenticationOptions;
+    },
   ): ModuleWithProviders<AngularAuthenticationModule> {
     return {
-      ...module,
-      providers: [...(module?.providers ?? []), user],
+      ngModule: AngularAuthenticationModule,
+      providers: [
+        {
+          provide: AUTHENTICATION_OPTIONS,
+          ...options,
+          useFactory: (...args: T) =>
+            authenticationModuleOptionsFactory(options.useFactory(...args)),
+        },
+      ],
     };
   }
 }

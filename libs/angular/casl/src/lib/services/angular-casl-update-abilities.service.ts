@@ -7,10 +7,10 @@ import { CASL_MODULE_OPTIONS } from '../constants';
 import { CaslOptions } from '../interfaces';
 
 import { SessionService } from '@trxn/angular-authentication';
-import { Unsubscriber } from '@trxn/angular-tools';
+import { Unsubscribe } from '@trxn/angular-tools';
 
 @Injectable()
-export class CaslUpdateAbilitiesService extends Unsubscriber {
+export class CaslUpdateAbilitiesService extends Unsubscribe {
   constructor(
     @Inject(CASL_MODULE_OPTIONS)
     private caslOptions: CaslOptions,

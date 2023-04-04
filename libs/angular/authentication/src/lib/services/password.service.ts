@@ -3,24 +3,24 @@ import { Inject, Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 
 import { AUTHENTICATION_OPTIONS } from '../constants';
-import { AuthenticationOptions } from '../dtos';
+import { AuthenticationModuleOptions } from '../types';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PasswordService {
-  private resetUrl!: string;
+  private resetPassword!: string;
 
   /** Constructor */
   constructor(
     @Inject(AUTHENTICATION_OPTIONS)
-    private options: AuthenticationOptions,
+    private options: AuthenticationModuleOptions,
     private http: HttpClient,
   ) {
-    this.resetUrl = `${this.options.api.url}/${this.options.password.resetUrl}`;
+    this.resetPassword = this.options.api.getEndpoint('resetPassword');
   }
 
   /** Send request to API for a new password token */
   async request(login: string): Promise<void> {
-    await lastValueFrom(this.http.post(this.resetUrl, { login }));
+    await lastValueFrom(this.http.post(this.resetPassword, { login }));
   }
 
   /** Do the password reset */
@@ -34,6 +34,6 @@ export class PasswordService {
       code: resetCode,
       password: newPassword,
     };
-    await lastValueFrom(this.http.put(this.resetUrl, body));
+    await lastValueFrom(this.http.put(this.resetPassword, body));
   }
 }

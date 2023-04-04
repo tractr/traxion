@@ -1,42 +1,39 @@
-import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { RouterStateSnapshot } from '@angular/router';
-import { ClassConstructor } from 'class-transformer';
-import { BehaviorSubject, lastValueFrom, Observable, of } from 'rxjs';
+import {
+  BehaviorSubject,
+  lastValueFrom,
+  Observable,
+  of,
+  Subject,
+  throwError,
+} from 'rxjs';
+import { fromFetch } from 'rxjs/fetch';
 import {
   catchError,
   map,
   shareReplay,
   switchMap,
   takeUntil,
-  tap,
 } from 'rxjs/operators';
 
-import { AUTHENTICATION_OPTIONS, AUTHENTICATION_USER_DTO } from '../constants';
-import { AuthenticationOptions } from '../dtos';
+import { AUTHENTICATION_OPTIONS } from '../constants';
+import { AuthenticationModuleOptions } from '../types';
 
-import { request, Unsubscriber } from '@trxn/angular-tools';
-import { transformAndValidate } from '@trxn/common';
+import { NotificationService, Unsubscribe } from '@trxn/angular-tools';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class SessionService<
-    U extends Record<string, unknown> = Record<string, unknown>,
-  >
-  extends Unsubscriber
-  implements OnDestroy
-{
-  /** Route for login */
-  sessionUrl: string;
-
-  /** Route for password login */
-  loginUrl: string;
-
-  /** Route for password logout */
-  logoutUrl: string;
-
+  U extends Record<string, unknown> = Record<string, unknown>,
+> extends Unsubscribe {
   /** Store the path to load after login */
   pathAfterLogin: RouterStateSnapshot | null = null;
 
-  refresh$ = new BehaviorSubject<U | null | void>(undefined);
+  refresh$ = new Subject<U | null | void>();
+
+  user$ = new BehaviorSubject<U | null>(null);
 
   logged$ = new BehaviorSubject<boolean>(false);
 
@@ -49,17 +46,11 @@ export class SessionService<
   );
 
   constructor(
-    @Inject(AUTHENTICATION_USER_DTO)
-    private readonly user: ClassConstructor<U>,
-
     @Inject(AUTHENTICATION_OPTIONS)
-    private readonly options: AuthenticationOptions,
+    private readonly options: AuthenticationModuleOptions,
+    private readonly notifier: NotificationService,
   ) {
     super();
-
-    this.sessionUrl = `${options.api.url}/${options.session.url}`;
-    this.loginUrl = `${options.api.url}/${options.login.url}`;
-    this.logoutUrl = `${options.api.url}/${options.logout.url}`;
 
     // OnInit is never called on angular services only on directive
     // @see https://angular.io/api/core/OnInit
@@ -67,11 +58,14 @@ export class SessionService<
   }
 
   onInit() {
-    this.me$.pipe(takeUntil(this.unsubscribe$)).subscribe({
-      next: (me) => {
-        this.logged$.next(!!me);
-      },
+    this.me$.pipe(takeUntil(this.unsubscribe$)).subscribe((me) => {
+      this.logged$.next(!!me);
+      this.user$.next(me);
     });
+  }
+
+  getUser(): U | null {
+    return this.user$.getValue();
   }
 
   isLogged(): boolean {
@@ -79,15 +73,22 @@ export class SessionService<
   }
 
   fetchUser$(): Observable<U | null> {
-    return request<U>({
-      url: this.sessionUrl,
+    return fromFetch(this.options.api.getEndpoint('me'), {
       method: 'GET',
-      withCredentials: true,
+      credentials: 'include',
     }).pipe(
-      map((value) => value.response),
-      map((value) => transformAndValidate(this.user)(value) as U),
+      switchMap((response) => {
+        if (response.ok) return response.json();
+        return throwError(() => new Error(response.statusText));
+      }),
+      map((user) => {
+        if (!this.options.user.validateUser<U>(user)) {
+          throw new Error('Invalid user');
+        }
+        return user;
+      }),
       catchError((error) => {
-        console.error(`Something went wrong while fetchin user: ${error}`);
+        this.notifier.errors$.next({ error });
         return of(null);
       }),
     );
@@ -109,22 +110,28 @@ export class SessionService<
       password,
     };
 
-    const userLogged = await lastValueFrom(
-      request({
-        url: this.loginUrl,
+    try {
+      await fetch(this.options.api.getEndpoint('login'), {
         method: 'POST',
-        withCredentials: true,
-        body,
-      }).pipe(
-        switchMap(() => this.fetchUser$()),
-        tap((user) => this.refresh(user)),
-        catchError(() => {
-          throw new Error('Could not login, wrong email or password');
-        }),
-      ),
-    );
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
 
-    return userLogged;
+      const user = await lastValueFrom(this.fetchUser$());
+
+      if (user) {
+        this.refresh(user);
+      }
+
+      return user;
+    } catch (error) {
+      console.error(error);
+      throw new Error('Could not login, wrong email or password');
+    }
   }
 
   /**
@@ -132,11 +139,16 @@ export class SessionService<
    */
   async logout(): Promise<void> {
     await lastValueFrom(
-      request({
-        url: this.logoutUrl,
+      fromFetch(this.options.api.getEndpoint('logout'), {
         method: 'POST',
-        withCredentials: true,
-      }).pipe(map(() => this.refresh(null))),
+        credentials: 'include',
+      }).pipe(
+        switchMap((response) => {
+          if (response.ok) return of(null);
+          return throwError(() => new Error(response.statusText));
+        }),
+        map(() => this.refresh(null)),
+      ),
     );
   }
 

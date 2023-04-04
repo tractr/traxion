@@ -2,22 +2,17 @@
 
 import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { NzUploadModule } from 'ng-zorro-antd/upload';
 
-import { UploadButtonComponent } from './components/upload-button/upload-button.component';
 import { FILE_STORAGE_CONFIGURATION } from './constants';
 import { FileStorageConfigurationDto } from './dtos';
 import { FileStorageConfiguration } from './interfaces';
 import { FileStorageService } from './services';
 
-import { AngularComponentsModule } from '@trxn/angular-components';
 import { AsyncOptions, ModuleOptionsFactory } from '@trxn/angular-tools';
 
 @NgModule({
-  imports: [HttpClientModule, AngularComponentsModule, NzUploadModule],
-  declarations: [UploadButtonComponent],
+  imports: [HttpClientModule],
   providers: [FileStorageService],
-  exports: [UploadButtonComponent],
 })
 export class FileStorageModule extends ModuleOptionsFactory<
   FileStorageConfiguration,

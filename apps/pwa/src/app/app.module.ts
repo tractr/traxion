@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { User as UserType } from '@prisma/client';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,7 +11,7 @@ import { AppConfig } from '../environments/environment';
 
 import {
   AngularAuthenticationModule,
-  AngularAuthenticationRoutingModule,
+  AuthenticationOptions,
 } from '@trxn/angular-authentication';
 import { AngularCaslModule } from '@trxn/angular-casl';
 import {
@@ -20,6 +19,7 @@ import {
   AngularConfigModule,
   AngularConfigService,
 } from '@trxn/angular-config';
+import { ErrorModule, NzErrorModule } from '@trxn/angular-tools';
 import { AngularRextModule } from '@trxn/generated-angular-rext-client';
 import { rolePermissions } from '@trxn/generated-casl';
 import { User } from '@trxn/generated-models';
@@ -33,11 +33,14 @@ import { User } from '@trxn/generated-models';
     HttpClientModule,
     RouterModule,
 
-    // Demonstation module
+    // Demo module
     AppRoutingModule,
 
     // Configuration modules
     AngularConfigModule.forRoot(),
+
+    ErrorModule,
+    NzErrorModule,
 
     // Rext client
     AngularRextModule.forRootAsync({
@@ -50,22 +53,13 @@ import { User } from '@trxn/generated-models';
       deps: [ANGULAR_CONFIG_SERVICE],
     }),
 
-    // // Authentication modules
-    AngularAuthenticationRoutingModule,
-    AngularAuthenticationModule.forRootAsync<UserType>({
-      user: User,
+    // Authentication modules
+    AngularAuthenticationModule.forRootFactory({
       useFactory: (
-        defaultOptions,
         appConfigService: AngularConfigService<AppConfig>,
-      ) => ({
-        ...defaultOptions,
+      ): AuthenticationOptions => ({
         api: {
-          url: appConfigService.config?.apiUri || '',
-        },
-        login: {
-          url: 'login',
-          routing: 'login',
-          redirect: ['/'],
+          url: appConfigService.config?.apiUri,
         },
       }),
       deps: [ANGULAR_CONFIG_SERVICE],
@@ -76,10 +70,10 @@ import { User } from '@trxn/generated-models';
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         rolePermissions: rolePermissions as any,
       }),
+
       deps: [ANGULAR_CONFIG_SERVICE],
     }),
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
