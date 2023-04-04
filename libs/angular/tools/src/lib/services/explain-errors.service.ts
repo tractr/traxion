@@ -2,23 +2,21 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { lastValueFrom } from 'rxjs';
 
-import { ErrorService } from './error.service';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ExplainErrorsService {
-  get autoTips(): Record<string, Record<string, string>> {
-    return this.autoTipsValue;
-  }
-
-  private autoTipsValue: Record<string, Record<string, string>> = {};
+  autoTips: Record<string, Record<string, string>> = {};
 
   constructor(
     private translateService: TranslateService,
-    private errorService: ErrorService,
+    private notificationService: NotificationService,
   ) {
-    this.defineAutoTips().catch((e: Error) => this.errorService.handle(e));
+    this.defineAutoTips().catch((e: Error) =>
+      this.notificationService.errors$.next({ error: e }),
+    );
   }
 
   private async defineAutoTips() {
@@ -32,7 +30,7 @@ export class ExplainErrorsService {
 
     langs.forEach((lang, index) => {
       const translations = translationsLangs[index];
-      this.autoTipsValue[lang] = {
+      this.autoTips[lang] = {
         min: translations['common_error-min'],
         max: translations['common_error-max'],
         required: translations['common_error-required'],

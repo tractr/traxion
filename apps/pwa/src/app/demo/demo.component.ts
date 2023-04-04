@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LoginCredentials } from './ui/login-form-ui/login-form-ui.component';
 
 import { SessionService } from '@trxn/angular-authentication';
-import { ErrorService } from '@trxn/angular-tools';
+import { NotificationService } from '@trxn/angular-tools';
 
 @Component({
   selector: 'tractr-demo',
@@ -14,7 +14,7 @@ import { ErrorService } from '@trxn/angular-tools';
 export class DemoComponent {
   constructor(
     private sessionService: SessionService,
-    private errorService: ErrorService,
+    private notifier: NotificationService,
   ) {}
 
   /**
@@ -25,7 +25,7 @@ export class DemoComponent {
     try {
       await this.sessionService.login(email, password);
     } catch (error: unknown) {
-      if (error instanceof Error) this.errorService.handle(error);
+      if (error instanceof Error) this.notifier.errors$.next({ error });
       else throw error;
     }
   }

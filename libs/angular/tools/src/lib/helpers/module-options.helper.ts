@@ -66,6 +66,8 @@ export type AsyncOptions<
 /**
  * The ModuleOptionsHelper that need to be extends to get access
  * to the register registerAsync forRoot and forRootAsync
+ *
+ * @deprecated async options are not supported correctly in angular, use the forRoot directly. Moreover try to use standalone components instead of modules
  */
 export function ModuleOptionsFactory<
   InternalOptions,
