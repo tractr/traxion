@@ -1,6 +1,4 @@
-import { Field } from '@nestjs/graphql';
-import { ArgsType } from '@nestjs/graphql';
-import { Int } from '@nestjs/graphql';
+import { ArgsType, Field, Int } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 
 import { RightOrderByWithRelationInput } from './right-order-by-with-relation.input';

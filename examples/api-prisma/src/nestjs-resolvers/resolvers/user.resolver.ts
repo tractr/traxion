@@ -13,15 +13,15 @@ import { Prisma } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
 
 import {
-  User,
-  Role,
-  FindUniqueUserArgs,
-  FindManyUserArgs,
   CreateOneUserArgs,
-  UpdateOneUserArgs,
   DeleteOneUserArgs,
+  FindManyUserArgs,
+  FindUniqueUserArgs,
+  Role,
+  UpdateOneUserArgs,
+  User,
 } from '../../nestjs-graphql-dtos';
-import { UserService, USER_SERVICE } from '../../nestjs-services';
+import { USER_SERVICE, UserService } from '../../nestjs-services';
 import { FindManyUserOutput } from '../dtos';
 
 @Resolver(() => User)

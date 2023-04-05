@@ -1,7 +1,7 @@
 import { Provider } from '@nestjs/common';
 
-import { ROLE_SERVICE, ROLE_DEFAULT_SERVICE } from '../constants';
-import { RoleService, RoleDefaultService } from '../services';
+import { ROLE_DEFAULT_SERVICE, ROLE_SERVICE } from '../constants';
+import { RoleDefaultService, RoleService } from '../services';
 
 export const ROLE_SERVICES_PROVIDERS: Provider[] = [
   RoleService,

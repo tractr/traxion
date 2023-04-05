@@ -13,16 +13,16 @@ import { Prisma } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
 
 import {
-  Role,
-  User,
-  Right,
-  FindUniqueRoleArgs,
-  FindManyRoleArgs,
   CreateOneRoleArgs,
-  UpdateOneRoleArgs,
   DeleteOneRoleArgs,
+  FindManyRoleArgs,
+  FindUniqueRoleArgs,
+  Right,
+  Role,
+  UpdateOneRoleArgs,
+  User,
 } from '../../nestjs-graphql-dtos';
-import { RoleService, ROLE_SERVICE } from '../../nestjs-services';
+import { ROLE_SERVICE, RoleService } from '../../nestjs-services';
 import { FindManyRoleOutput } from '../dtos';
 
 @Resolver(() => Role)

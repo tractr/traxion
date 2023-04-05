@@ -1,6 +1,4 @@
-import { Field } from '@nestjs/graphql';
-import { ObjectType } from '@nestjs/graphql';
-import { Int } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { RoleAvgAggregate } from './role-avg-aggregate.output';
 import { RoleCountAggregate } from './role-count-aggregate.output';
