@@ -1,26 +1,23 @@
 import { APP_INITIALIZER, FactoryProvider } from '@angular/core';
-import { catchError, lastValueFrom, of } from 'rxjs';
+import { catchError, of, take, tap } from 'rxjs';
 
-import { ANGULAR_CONFIG_SERVICE } from './angular-config.constant';
-import { AngularConfig, AngularConfigService } from './interfaces';
+import { AngularConfigService } from './services';
 
-export function loadConfigFactory<T extends AngularConfig>(
+export function loadConfigFactory<T extends Record<string, unknown>>(
   configService: AngularConfigService<T>,
 ) {
   return () =>
-    lastValueFrom(
-      configService.waitInitialisationConfig$.pipe(
-        catchError((err) => {
-          console.error(err);
-          return of({});
-        }),
-      ),
+    configService.initialized$.pipe(
+      catchError((err) => {
+        console.error(err);
+        return of({});
+      }),
     );
 }
 
-export const AppInitializerProvider: FactoryProvider = {
+export const AngularConfigInitializer: FactoryProvider = {
   provide: APP_INITIALIZER,
   useFactory: loadConfigFactory,
-  deps: [ANGULAR_CONFIG_SERVICE],
+  deps: [AngularConfigService],
   multi: true,
 };

@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { APP_INITIALIZER, Inject, Injectable, Provider } from '@angular/core';
 import { RouterStateSnapshot } from '@angular/router';
 import {
   BehaviorSubject,
@@ -45,6 +45,8 @@ export class SessionService<
     shareReplay(1),
   );
 
+  initOnPageLoad = this.options.initOnPageLoad;
+
   constructor(
     @Inject(AUTHENTICATION_OPTIONS)
     private readonly options: AuthenticationModuleOptions,
@@ -52,12 +54,6 @@ export class SessionService<
   ) {
     super();
 
-    // OnInit is never called on angular services only on directive
-    // @see https://angular.io/api/core/OnInit
-    this.onInit();
-  }
-
-  onInit() {
     this.me$.pipe(takeUntil(this.unsubscribe$)).subscribe((me) => {
       this.logged$.next(!!me);
       this.user$.next(me);
@@ -173,3 +169,12 @@ export class SessionService<
     return url;
   }
 }
+
+export const InitSessionService: Provider = {
+  provide: APP_INITIALIZER,
+  useFactory: (sessionService: SessionService) => () => {
+    if (sessionService.initOnPageLoad) sessionService.refresh();
+  },
+  deps: [SessionService],
+  multi: true,
+};

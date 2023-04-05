@@ -1,8 +1,15 @@
-import { AngularConfig } from './angular-config';
+export type AngularConfigModuleOptions = {
+  sessionStorageKey: string;
+  configurationEndpoint: string;
+  transformConfig?: (
+    angularConfig: Record<string, unknown>,
+  ) => Record<string, unknown>;
+};
 
-export interface AngularConfigOptions<T = unknown> {
-  apiEndpoint: string;
-  getConfig: (angularConfig: AngularConfig) => T;
-
-  config?: T;
-}
+export type AngularConfigOptions = {
+  sessionStorageKey?: string;
+  configurationEndpoint?: string;
+  transformConfig?: (
+    angularConfig: Record<string, unknown>,
+  ) => Record<string, unknown>;
+};

@@ -38,5 +38,7 @@ export function authenticationModuleOptionsFactory(
     redirect: {
       login: options.redirect?.login || '/login',
     },
+
+    initOnPageLoad: options.initOnPageLoad ?? true,
   };
 }

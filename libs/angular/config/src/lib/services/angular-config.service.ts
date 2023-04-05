@@ -1,65 +1,80 @@
-import { BehaviorSubject, from, Observable, of } from 'rxjs';
+import { Inject, Injectable } from '@angular/core';
+import { BehaviorSubject, from, of, throwError } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
 import {
+  catchError,
+  filter,
   map,
-  mergeMap,
   shareReplay,
   switchMap,
   take,
   takeUntil,
 } from 'rxjs/operators';
 
-import { ANGULAR_CONFIGURATION_SESSION_STORAGE } from '../helpers';
-import {
-  AngularConfig,
-  AngularConfigOptions,
-  AngularConfigService,
-} from '../interfaces';
+import { ANGULAR_CONFIG_OPTIONS } from '../angular-config.constant';
+import { AngularConfigModuleOptions } from '../interfaces';
 
-import { Unsubscriber } from '@trxn/angular-tools';
+import { Unsubscribe } from '@trxn/angular-tools';
+import { getConfigFromSessionStorage } from '@trxn/client-config';
 
-export function AngularConfigServiceFactory<
-  T extends AngularConfig = AngularConfig,
->(angularConfigOptions: AngularConfigOptions<T>): AngularConfigService<T> {
-  class AnonymousAngularConfigService extends Unsubscriber {
-    constructor() {
-      super();
+@Injectable({ providedIn: 'root' })
+export class AngularConfigService<
+  T extends Record<string, unknown> = Record<string, unknown>,
+> extends Unsubscribe {
+  constructor(
+    @Inject(ANGULAR_CONFIG_OPTIONS)
+    private readonly options: AngularConfigModuleOptions,
+  ) {
+    super();
 
-      this.config$.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
-        this.value$.next(value);
+    this.updateConfig$
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        catchError(() => of(undefined)),
+      )
+      .subscribe((config) => {
+        this.config$.next(config);
       });
-    }
-
-    refresh$ = new BehaviorSubject<T | undefined>(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (window as any)[ANGULAR_CONFIGURATION_SESSION_STORAGE] as T | undefined,
-    );
-
-    value$ = new BehaviorSubject<T | undefined>(undefined);
-
-    getConfig$ = fromFetch(angularConfigOptions.apiEndpoint).pipe(
-      mergeMap((response) => from(response.json() as Promise<AngularConfig>)),
-      map(angularConfigOptions.getConfig),
-    );
-
-    config$: Observable<T> = this.refresh$.pipe(
-      switchMap((next) => {
-        if (typeof next === 'undefined') return this.getConfig$;
-        return of(next);
-      }),
-      shareReplay(1),
-    );
-
-    waitInitialisationConfig$: Observable<T> = this.config$.pipe(take(1));
-
-    get config(): T {
-      const config = this.value$.getValue();
-
-      if (typeof config === 'undefined')
-        throw new Error('The configuration has not been initialized');
-
-      return config;
-    }
   }
-  return new AnonymousAngularConfigService();
+
+  refresh$ = new BehaviorSubject<T | undefined>(
+    // This trick is because angular does not wait for the APP_INITIALIZER to finish
+    getConfigFromSessionStorage(this.options.sessionStorageKey),
+  );
+
+  config$ = new BehaviorSubject<T | undefined>(undefined);
+
+  initialized$ = this.config$.asObservable().pipe(
+    filter((config) => typeof config !== 'undefined'),
+    take(1),
+    shareReplay(1),
+  );
+
+  fetchConfig$ = fromFetch(this.options.configurationEndpoint).pipe(
+    switchMap((response) => {
+      if (response.ok) return from(response.json() as Promise<T>);
+      return throwError(() => response.statusText);
+    }),
+    map((value) => {
+      if (this.options.transformConfig)
+        return this.options.transformConfig(value) as T;
+      return value;
+    }),
+  );
+
+  updateConfig$ = this.refresh$.asObservable().pipe(
+    switchMap((refreshed) => {
+      if (!refreshed) return this.fetchConfig$;
+      return of(refreshed);
+    }),
+  );
+
+  get config(): T {
+    const config = this.config$.getValue();
+
+    if (typeof config === 'undefined')
+      throw new Error('The configuration has not been initialized');
+
+    return config;
+  }
 }

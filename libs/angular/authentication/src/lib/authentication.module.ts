@@ -5,7 +5,10 @@ import {
 } from '@angular/core';
 
 import { AUTHENTICATION_OPTIONS } from './constants';
-import { authenticationModuleOptionsFactory } from './services';
+import {
+  authenticationModuleOptionsFactory,
+  InitSessionService,
+} from './services';
 import { AuthenticationOptions } from './types';
 
 @NgModule({})
@@ -20,6 +23,7 @@ export class AngularAuthenticationModule {
           provide: AUTHENTICATION_OPTIONS,
           useFactory: () => authenticationModuleOptionsFactory(options),
         },
+        InitSessionService,
       ],
     };
   }
@@ -38,6 +42,7 @@ export class AngularAuthenticationModule {
           useFactory: (...args: T) =>
             authenticationModuleOptionsFactory(options.useFactory(...args)),
         },
+        InitSessionService,
       ],
     };
   }

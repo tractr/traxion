@@ -31,6 +31,8 @@ export type AuthenticationModuleOptions = {
   redirect: {
     login: string;
   };
+
+  initOnPageLoad: boolean;
 };
 
 export type AuthenticationOptions = {
@@ -57,4 +59,6 @@ export type AuthenticationOptions = {
   redirect?: {
     login?: string;
   };
+
+  initOnPageLoad?: boolean;
 };

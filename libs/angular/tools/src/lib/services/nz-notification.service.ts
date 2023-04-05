@@ -68,6 +68,7 @@ export class NzNotificationService extends Unsubscribe {
 
 export const InitNzNotificationService: Provider = {
   provide: APP_INITIALIZER,
-  useFactory: (nzNotifier: NzNotificationService) => nzNotifier.onInit(),
+  useFactory: (nzNotifier: NzNotificationService) => () => nzNotifier.onInit(),
   deps: [NzNotificationService],
+  multi: true,
 };

@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppConfig } from '../environments/environment';
+import { AppConfig, getConfig } from '../environments/environment';
 
 import {
   AngularAuthenticationModule,
@@ -15,7 +15,7 @@ import {
 } from '@trxn/angular-authentication';
 import { AngularCaslModule } from '@trxn/angular-casl';
 import {
-  ANGULAR_CONFIG_SERVICE,
+  AngularConfigInitializer,
   AngularConfigModule,
   AngularConfigService,
 } from '@trxn/angular-config';
@@ -37,7 +37,9 @@ import { User } from '@trxn/generated-models';
     AppRoutingModule,
 
     // Configuration modules
-    AngularConfigModule.forRoot(),
+    AngularConfigModule.forRoot({
+      transformConfig: getConfig,
+    }),
 
     ErrorModule,
     NzErrorModule,
@@ -50,7 +52,7 @@ import { User } from '@trxn/generated-models';
         },
         user: User,
       }),
-      deps: [ANGULAR_CONFIG_SERVICE],
+      deps: [AngularConfigService],
     }),
 
     // Authentication modules
@@ -62,7 +64,7 @@ import { User } from '@trxn/generated-models';
           url: appConfigService.config?.apiUri,
         },
       }),
-      deps: [ANGULAR_CONFIG_SERVICE],
+      deps: [AngularConfigService],
     }),
     AngularCaslModule.forRootAsync({
       useFactory: (defaultOptions) => ({
@@ -71,9 +73,10 @@ import { User } from '@trxn/generated-models';
         rolePermissions: rolePermissions as any,
       }),
 
-      deps: [ANGULAR_CONFIG_SERVICE],
+      deps: [AngularConfigService],
     }),
   ],
+  providers: [AngularConfigInitializer],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
