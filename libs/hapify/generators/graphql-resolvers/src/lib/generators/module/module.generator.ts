@@ -1,4 +1,3 @@
-import { kebab, pascal } from 'case';
 import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
 
 import { generateImports } from './imports.generator';

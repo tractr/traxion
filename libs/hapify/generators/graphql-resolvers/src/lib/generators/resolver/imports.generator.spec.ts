@@ -1,4 +1,4 @@
-import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
+import { StructureKind } from 'ts-morph';
 
 import { generateImports } from './imports.generator';
 import { GraphqlResolverImportPathConfig } from '../../config.type';
@@ -64,9 +64,5 @@ describe('generateImports', () => {
     expect(imports[6].kind).toBe(StructureKind.ImportDeclaration);
     expect(imports[6].moduleSpecifier).toBe('../dtos');
     expect(imports[6].namedImports).toEqual([{ name: 'FindManyUserOutput' }]);
-
-    // const importNames =
-    //   importDeclaration.namedImports as ImportDeclarationStructure[];
-    // // expect(importNames?.[0].name).toEqual('Injectable');
   });
 });
