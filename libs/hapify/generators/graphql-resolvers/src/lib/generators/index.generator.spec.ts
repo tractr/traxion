@@ -24,8 +24,8 @@ describe('generateResolverIndexSourceFile', () => {
     generateResolverIndexSourceFile(project, models, path);
     it('should generate an index file with the correct exports', () => {
       const expectedSource = `export * from "./user.resolver";
-  export * from "./role.resolver";
-  `;
+export * from "./role.resolver";
+`;
 
       const sourceFile = project.getSourceFile(`${path}/resolvers/index.ts`);
       expect(sourceFile?.getText()).toEqual(expectedSource);
@@ -36,7 +36,7 @@ describe('generateResolverIndexSourceFile', () => {
       generateDtoIndexSourceFile(project, models, path);
 
       const expectedSource = `export * from "./find-many-user-output.dto";
-    export * from "./find-many-role-output.dto";
+export * from "./find-many-role-output.dto";
         `;
 
       const sourceFile = project.getSourceFile(`${path}/dtos/index.ts`);
