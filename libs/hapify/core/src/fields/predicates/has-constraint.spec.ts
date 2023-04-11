@@ -1,5 +1,5 @@
 import { hasConstraint } from './has-constraint';
-import { BaseField } from '..';
+import type { BaseField } from '../base-types';
 
 describe('hasConstraint', () => {
   const defaultField = { type: 'string', name: 'a', pluralName: 'as', a: true };

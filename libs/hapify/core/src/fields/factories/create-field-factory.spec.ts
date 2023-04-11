@@ -1,15 +1,15 @@
 import { createFieldFactory } from './create-field-factory';
-import { PrimaryField } from '..';
-import { BooleanField } from '../boolean-field';
-import { DateField } from '../date-field';
-import { EnumField } from '../enum-field';
-import { FieldType } from '../field';
-import { FileField } from '../file-field';
-import { ForeignField } from '../foreign-field';
-import { NumberField } from '../number-field';
-import { ObjectField } from '../object-field';
-import { StringField } from '../string-field';
-import { VirtualField } from '../virtual-field';
+import type { BooleanField } from '../boolean-field';
+import type { DateField } from '../date-field';
+import type { EnumField } from '../enum-field';
+import type { FieldType } from '../field';
+import type { FileField } from '../file-field';
+import type { ForeignField } from '../foreign-field';
+import type { NumberField } from '../number-field';
+import type { ObjectField } from '../object-field';
+import { PrimaryField } from '../primary-field';
+import type { StringField } from '../string-field';
+import type { VirtualField } from '../virtual-field';
 
 describe('createFieldFactory', () => {
   it('should return a function', () => {
@@ -105,7 +105,7 @@ describe('createFieldFactory', () => {
       ['file', 'string'],
       ['foreign', 'string'],
       ['primary', 'string'],
-      ['virtual', 'object'],
+      ['virtual', null],
     ] as const;
 
     const defaultConstraints = {};

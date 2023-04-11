@@ -1,7 +1,7 @@
 // import modules
 import { isFieldFactory } from './is-field-factory';
-import { NumberField } from '../number-field';
-import { StringField } from '../string-field';
+import type { NumberField } from '../number-field';
+import type { StringField } from '../string-field';
 
 describe('isFieldFactory()', () => {
   // define fields
