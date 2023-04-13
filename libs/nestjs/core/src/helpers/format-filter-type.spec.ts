@@ -1,4 +1,4 @@
-import { formatFilterType } from '.';
+import { formatFilterType } from './format-filter-type';
 
 import {
   ArrayFilterProps,

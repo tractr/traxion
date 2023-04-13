@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 /** ------------------------------------
  *             PrimaryField
  * ------------------------------------- */
-
 import type {
   BaseField,
   ConditionalConstraint,
@@ -47,7 +47,6 @@ export const primaryField = createPrimaryField;
 export const isPrimaryField = isFieldFactory('primary');
 
 export const getPrimaryFields = getFieldsByTypeFactory('primary');
-export const getVirtualFields = getFieldsByTypeFactory('virtual');
 
 /**
  * Type helpers

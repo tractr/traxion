@@ -3,14 +3,13 @@
 import { plural } from 'pluralize';
 import type { Function } from 'ts-toolbelt';
 
-import {
+import type {
   BaseField,
   BaseFieldPropertiesKeys,
   ExtractField,
   GetConstraintsNames,
-  GetField,
 } from '../base-types';
-import { Field, FieldType } from '../field';
+import type { FieldType } from '../field';
 
 /**
  * Get the field options from BaseField

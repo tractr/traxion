@@ -1,5 +1,5 @@
-import { BaseField } from '../base-types';
-import { FieldType } from '../field';
+import type { BaseField } from '../base-types';
+import type { FieldType } from '../field';
 import { getFieldsByType } from '../helpers';
 
 /**

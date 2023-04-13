@@ -1,7 +1,7 @@
 import { isConstraintFactory } from './is-constraint-factory';
-import { Field } from '../field';
-import { NumberField } from '../number-field';
-import { StringField } from '../string-field';
+import type { Field } from '../field';
+import type { NumberField } from '../number-field';
+import type { StringField } from '../string-field';
 
 describe('isConstraintFactory', () => {
   it('should return a function', () => {

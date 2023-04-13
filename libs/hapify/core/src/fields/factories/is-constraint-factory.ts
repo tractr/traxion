@@ -1,6 +1,10 @@
-import { BaseField, GetConstraintsNames, IsConstraints } from '../base-types';
-import { Field } from '../field';
-import { isConstraint } from '../predicates/is-constraint';
+import type {
+  BaseField,
+  GetConstraintsNames,
+  IsConstraints,
+} from '../base-types';
+import type { Field } from '../field';
+import { isConstraint } from '../predicates';
 
 /**
  * Factory to create a function that assert if field has a constraint by name and if it is a truthy value
