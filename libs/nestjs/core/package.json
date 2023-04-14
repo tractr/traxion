@@ -1,6 +1,6 @@
 {
   "name": "@trxn/nestjs-core",
-  "version": "2.1.14",
+  "version": "2.1.15",
   "description": "Core module for nestjs backend",
   "repository": {
     "type": "git",
