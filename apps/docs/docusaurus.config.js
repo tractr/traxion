@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Traxion',
   tagline:
-    'A suite of orchestrated tools that aims to accelerate the development of web applications.',
+    'From Prisma to anything',
   url: 'https://www.traxion.dev',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -39,13 +39,9 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Get started',
-              to: '/docs/get-started',
-            },
-            {
-              label: 'Contribute',
-              to: '/docs/contribution/documentation-guidelines',
-            },
+              label: 'Getting started',
+              to: '/docs',
+            }
           ],
         },
         {
@@ -54,11 +50,7 @@ module.exports = {
             {
               label: 'Discord',
               href: 'https://discord.traxion.dev/',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/TraxionDev',
-            },
+            }
           ],
         },
         {

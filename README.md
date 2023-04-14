@@ -1,62 +1,55 @@
 # Traxion
 
-The purpose of Traxion is to provide a pre-configured stack of frameworks and libraries that are designed to work
-together "out of the box" to accelerate web application development. By combining these frameworks and libraries into a
-single, well-orchestrated stack, Traxion aims to provide a foundation for building modern web applications that is easy
-to use and efficient.
+Traxion is a suite of code generators for TypeScript, built upon the Prisma schema. The goal of this project is to eventually offer a comprehensive suite of generators that can generate a full-stack application, including all CRUD operations and authorization, using only the Prisma data schema as the source of truth.
 
-It is built on top of a number of popular frameworks and libraries, including [Nx](https://nx.dev/)
-, [Angular](https://angular.io/), [NestJS](https://nestjs.com/), [Prisma](https://www.prisma.io/)
-, [Casl](https://casl.js.org/), [GraphQL](https://graphql.org/), [Schematics](https://angular.io/guide/schematics)
-, [Hapify](https://docs.hapify.io/), [ReactAdmin](https://marmelab.com/react-admin/),
-and [Terraform](https://www.terraform.io/) with [CDKtf](https://developer.hashicorp.com/terraform/cdktf).
+The first generator in the suite is a NestJS-GraphQL generator based on a Prisma model. A tutorial for this generator is available and we encourage you to read it to get started.
 
-## Quick Start
+More generators, such as front-end generators, will be added to the Traxion suite in the future.
 
-Our documentation is available on [traxion.dev](https://www.traxion.dev/docs/get-started/)
+## Getting Started
 
-We are currently working on improving it.
+To get started with Traxion, please follow the [NestJS-GraphQL generator tutorial](https://www.traxion.dev/docs/).
 
-## Automation
+## How to Contribute
 
-One of the key ways that Traxion helps developers to be more efficient is by leveraging the use of generators.
+We welcome and appreciate contributions from the community. If you're interested in contributing to Traxion, follow these steps:
 
-[Hapify](https://docs.hapify.io/) is a template engine for CRUD operations. This save developers time and effort by
-eliminating the need to manually set up the
-basic structure of the application.
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Commit your changes and write clear, descriptive commit messages.
+4. Open a pull request and provide a detailed description of your changes.
 
-Similarly, [Schematics](https://angular.io/guide/schematics) is a tool for generating, transforming, and managing code,
-which can be used to automate
-repetitive tasks and improve the consistency of your codebase.
+Please follow the established coding standards and make sure your code is well-documented.
 
-[Prisma](https://www.prisma.io/) includes generators that creates DTOs, services, and controllers for your application.
+Please refer [to the contribution guide](./CONTRIBUTING.md) for more information.
 
-Overall, the use of generators can help speed up the development process by automating the creation of boilerplate code
-and allowing developers to focus on the unique aspects of their application and the business logic.
+## Issue Reporting
 
-## Monorepo
+If you encounter any issues or have suggestions for improvements, please create an issue in our [GitHub issue tracker](./LINK_TO_ISSUES) . When reporting an issue, be sure to include:
 
-[Nx](https://nx.dev/) (Nrwl Extensions) is a build system and set of extensible dev tools for modern TypeScript
-applications. One of the key features of Nx is its support for monorepos.
-It is designed to help you manage a complex codebase and build your applications efficiently.
+- A clear and descriptive title.
+- A detailed description of the issue, including any error messages or screenshots, if applicable.
+- Steps to reproduce the issue, if possible.
 
-Nx includes a number of tools and features, including:
+## Code of Conduct
 
-- A powerful build system that can parallelize tasks and optimize the build process for large codebases.
-- A set of extensible dev tools that can help you to test, lint, format, and analyze your code, and enforce consistent
-  coding standards across your team.
-- Integration with popular frameworks and libraries, such as Angular, NestJS, and React, which can help you to build
-  efficient and scalable applications.
-- A set of schematics (code generators) that can help you to automate repetitive tasks and improve the consistency of
-  your codebase.
+Traxion is an open-source project, and we aim to maintain a welcoming and inclusive environment for all contributors and users. By participating in this project, you agree to abide by our [Code of Conduct](./LINK_TO_CODE_OF_CONDUCT) .
 
-## Infrastructure as code
+In summary, we expect all participants to:
 
-[CDKtf](https://developer.hashicorp.com/terraform/cdktf) (Cloud Development Kit for Terraform) is a framework for
-defining infrastructure as code using familiar
-programming languages. It is built on top of Terraform, a tool for creating, changing, and versioning infrastructure
-safely and efficiently.
+- Treat everyone with respect and kindness.
+- Be considerate and constructive in all interactions.
+- Avoid any form of harassment or discrimination.
+- Respect others' privacy and personal boundaries.
+- Report any violations of the Code of Conduct to the project maintainers.
 
-The purpose of CDKtf is to provide a higher-level abstraction for defining infrastructure, making it easier to manage
-and automate the provisioning and management of resources. It allows you to use familiar programming languages, such as
-TypeScript, to describe your infrastructure and automate the provisioning and management of resources.
+Failure to adhere to the Code of Conduct may result in being temporarily or permanently banned from the project.
+
+## Channels
+
+- [Discord](https://discord.traxion.dev/)
+- [Documentation](https://www.traxion.dev/)
+
+## License
+
+Traxion is open-source software licensed under the [MIT License](./LICENSE) . By contributing to Traxion, you agree that your contributions will be licensed under the same terms.
