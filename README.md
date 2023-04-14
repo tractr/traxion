@@ -1,16 +1,42 @@
-# Traxion
+# Traxion: A NestJS Toolkit & Code Generator for Full-Stack Developers 🚀
 
-Traxion is a suite of code generators for TypeScript, built upon the Prisma schema. The goal of this project is to eventually offer a comprehensive suite of generators that can generate a full-stack application, including all CRUD operations and authorization, using only the Prisma data schema as the source of truth.
+Welcome to **Traxion**  🎉, a powerful and minimalist toolkit designed specifically for full-stack developers working with NestJS. Traxion streamlines your development process, allowing you to generate code with ease and efficiency. Experience the perfect blend of a full-stack framework and Backend-as-a-Service (BaaS) in a single toolkit.
+## Features 🌟
 
-The first generator in the suite is a NestJS-GraphQL generator based on a Prisma model. A tutorial for this generator is available and we encourage you to read it to get started.
+Traxion is packed with a suite of intelligent features to kick-start your next NestJS project: 
+- **Data** : Utilize the Prisma Schema to manage your data effectively. 
+- **API** : Generate a GraphQL API using the Prisma2Nest Generator. 
+- **Users** : Implement Role-Based Access Control (RBAC) with the CASL-config Generator (*In progress*). 
+- **Official Packages** : 
+  - **Dev-Kit** : Leverage the power of `ts-morph-prisma-generator` to create your own Prisma Generator. 
+  - **Nest-Authentication** : Integrate authentication using PassportJS. 
+  - **Nest-Authorization** : Manage access control with CASL. 
+  - **Nest-Utilities** : Access a collection of helpful utilities to enhance your development process. 
+- **Community Packages** : 
+  - **Terraform** : Simplify infrastructure management with Terraform. 
+  - **Nest-File-Storage** : Handle file storage using Amazon S3. 
+  - **Nest-Mailer** : Send emails efficiently with Mailjet integration.
+## Getting Started 📚
 
-More generators, such as front-end generators, will be added to the Traxion suite in the future.
+Jumpstart your NestJS development journey with Traxion by following our comprehensive [documentation](https://www.traxion.dev/docs/) . Here's a sneak peek of the 13 steps you'll be guided through:
+1. Initialize a NestJS application
+2. Integrate Prisma into the NestJS project
+3. Set up Prisma
+4. Set up a PostgreSQL database and configure environment variables
+5. Install Prisma generator libraries
+6. Define a Prisma schema
+7. Generate NestJS services and DTOs
+8. Set up the database using Prisma and verify it using Prisma Studio
+9. Create NestJS modules
+10. Run the application
+11. Test the application
+12. Modify Prisma schema and regenerate NestJS services and DTOs
+13. Test the new schema
+## Why Choose Traxion? 🤔
 
-## Getting Started
+Traxion is designed with the modern full-stack developer in mind. We understand the importance of a streamlined development process that saves you time and effort. With Traxion, you can focus on building your NestJS applications while enjoying a seamless experience, bridging the gap between a full-stack framework and BaaS.
 
-To get started with Traxion, please follow the [NestJS-GraphQL generator tutorial](https://www.traxion.dev/docs/).
-
-## How to Contribute
+## Contributing 💪
 
 We welcome and appreciate contributions from the community. If you're interested in contributing to Traxion, follow these steps:
 
@@ -53,3 +79,7 @@ Failure to adhere to the Code of Conduct may result in being temporarily or perm
 ## License
 
 Traxion is open-source software licensed under the [MIT License](./LICENSE) . By contributing to Traxion, you agree that your contributions will be licensed under the same terms.
+
+---
+
+Empower your NestJS development experience with Traxion - a toolkit and code generator tailored for full-stack developers. Unleash your potential and bring your projects to life faster than ever before! 🚀
