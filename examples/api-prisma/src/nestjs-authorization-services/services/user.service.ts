@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { accessibleBy } from '@casl/prisma';
+import { ForbiddenError, Subject, subject } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import deepmerge from 'deepmerge';
+import { inspect } from 'util';
 
-import { ValidateAbilitiesService } from './ownerships.service';
-import { SelectService } from './select.service';
 import { AppAbility } from '../../casl/types';
 import { UserService } from '../../nestjs-services';
+import { ValidateAbilitiesService } from './ownerships.service';
+import { SelectService } from './select.service';
 
 import { Action } from '@trxn/nestjs-casl';
 import { PrismaService } from '@trxn/nestjs-database';
@@ -48,30 +48,20 @@ export class UserAuthorizationService {
     args: Prisma.SelectSubset<T, Prisma.UserFindUniqueArgs>,
     prisma: PrismaService = this.prismaClient,
   ) {
-    const { toRemove, select } = this.selectService.getUserCaslSelect(args);
+    const userArgs = this.selectService.getUserArgs(abilities, args);
 
-    const where = {
-      AND: [accessibleBy(abilities).User, args.where ?? {}],
-    };
-
+    console.log(inspect({ ...args, ...userArgs }, false, null, true));
     const user = await this.userService.findUnique<T>(
-      {
-        ...args,
-        where,
-        select: deepmerge(args.select || {}, select.select || {}),
-      },
+      { ...args, ...userArgs },
       prisma.user,
     );
 
-    if (!user) return user;
-
-    const validatedUser = this.validateAbilities.validateUserDeep(
-      abilities,
+    ForbiddenError.from(abilities).throwUnlessCan(
       Action.Read,
-      user,
+      subject('User', user),
     );
 
-    return this.selectService.removeUnusedProperties(validatedUser, toRemove);
+    return user;
   }
 
   /**
@@ -93,30 +83,15 @@ export class UserAuthorizationService {
     args: Prisma.SelectSubset<T, Prisma.UserFindFirstArgs>,
     prisma: PrismaService = this.prismaClient,
   ) {
-    const { toRemove, select } = this.selectService.getUserCaslSelect(args);
+    const userArgs = this.selectService.getUserArgs(abilities, args);
 
-    const where = {
-      AND: [accessibleBy(abilities).User, args.where ?? {}],
-    };
-
-    const user = await this.userService.findFirst<T>(
-      {
-        ...args,
-        where,
-        select: deepmerge(args.select || {}, select.select || {}),
-      },
-      prisma.user,
-    );
-
-    if (!user) return user;
-
-    const validatedUser = this.validateAbilities.validateUserDeep(
+    const where = this.selectService.getUserWhereInput(
       abilities,
-      Action.Read,
-      user,
+      args.where,
+      args,
     );
 
-    return this.selectService.removeUnusedProperties(validatedUser, toRemove);
+    return this.userService.findFirst<T>({ ...userArgs, where }, prisma.user);
   }
 
   /**
@@ -141,28 +116,21 @@ export class UserAuthorizationService {
     args: Prisma.SelectSubset<T, Prisma.UserFindManyArgs>,
     prisma: PrismaService = this.prismaClient,
   ) {
-    const { toRemove, select } = this.selectService.getUserCaslSelect(args);
+    const userArgs = this.selectService.getUserArgs(abilities, args);
 
-    const where = {
-      AND: [accessibleBy(abilities).User, args.where ?? {}],
-    };
-
-    const users = await this.userService.findMany<T>(
-      {
-        ...args,
-        where,
-        select: deepmerge(args.select || {}, select.select || {}),
-      },
-      prisma.user,
+    const where = this.selectService.getUserWhereInput(
+      abilities,
+      args.where,
+      args,
     );
 
-    if (!users) return users;
+    console.log(inspect(args, false, null, true));
+    console.log(inspect({ ...args, ...userArgs, where }, false, null, true));
 
-    return users
-      .map((user) =>
-        this.validateAbilities.validateUserDeep(abilities, Action.Read, user),
-      )
-      .map((user) => this.selectService.removeUnusedProperties(user, toRemove));
+    return this.userService.findMany<T>(
+      { ...args, ...userArgs, where },
+      prisma.user,
+    );
   }
 
   /**
@@ -177,33 +145,29 @@ export class UserAuthorizationService {
    * })
    */
   async create<T extends Prisma.UserCreateArgs>(
-    abilities: AppAbility,
     args: Prisma.SelectSubset<T, Prisma.UserCreateArgs>,
-    prisma?: PrismaService | PrismaTransactionService,
+    prisma: PrismaService = this.prismaClient,
   ) {
-    const { toRemove, select } = this.selectService.getUserCaslSelect(args);
-
-    const fn = async (transaction: PrismaTransactionService) => {
-      const user = await this.userService.create<T>(
-        {
-          ...args,
-          select: deepmerge(args.select || {}, select.select || {}),
-        },
-        transaction.user,
-      );
-
-      const validatedUser = this.validateAbilities.validateUserDeep(
-        abilities,
-        Action.Create,
-        user,
-      );
-
-      return this.selectService.removeUnusedProperties(validatedUser, toRemove);
-    };
-
-    return prisma && !('$transaction' in prisma)
-      ? fn(prisma)
-      : (prisma || this.prismaClient).$transaction(fn);
+    // const { toRemove, select } = this.selectService.getUserCaslSelect(args);
+    // const fn = async (transaction: PrismaTransactionService) => {
+    //   const user = await this.userService.create<T>(
+    //     {
+    //       ...args,
+    //       select: deepmerge(args.select || {}, select.select || {}),
+    //     },
+    //     transaction.user,
+    //   );
+    //   const validatedUser = this.validateAbilities.validateUserDeep(
+    //     abilities,
+    //     Action.Create,
+    //     user,
+    //   );
+    //   return this.selectService.removeUnusedProperties(validatedUser, toRemove);
+    // };
+    // return prisma && !('$transaction' in prisma)
+    //   ? fn(prisma)
+    //   : (prisma || this.prismaClient).$transaction(fn);
+    return this.userService.create<T>(args, prisma.user);
   }
 
   /**

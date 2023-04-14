@@ -62,10 +62,11 @@ export class UserResolver {
       skip = 0,
       take = 100,
     }: FindManyUserArgs,
+    @CurrentAbilities() abilities: AppAbility,
   ) {
     const select = new PrismaSelect(info).valueOf('users', 'User');
 
-    const users = await this.userService.findMany({
+    const users = await this.userAuthorizationService.findMany(abilities, {
       ...select,
       where,
       cursor,

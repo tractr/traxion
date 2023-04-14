@@ -27,6 +27,12 @@
           {
             "ignore": ["^@(trxn)/"]
           }
+        ],
+        "prefer-const": [
+          "error",
+          {
+            "destructuring": "all"
+          }
         ]
       }
     },

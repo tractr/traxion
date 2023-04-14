@@ -1,14 +1,3 @@
-import {
-  Role,
-  User,
-  Right,
-  FindUniqueRoleArgs,
-  FindManyRoleArgs,
-  CreateOneRoleArgs,
-  UpdateOneRoleArgs,
-  DeleteOneRoleArgs,
-} from '../../nestjs-graphql-dtos';
-import { RoleService, ROLE_SERVICE } from '../../nestjs-services';
 import { Inject } from '@nestjs/common';
 import {
   Args,
@@ -21,6 +10,18 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { GraphQLResolveInfo } from 'graphql';
+
+import {
+  Role,
+  User,
+  Right,
+  FindUniqueRoleArgs,
+  FindManyRoleArgs,
+  CreateOneRoleArgs,
+  UpdateOneRoleArgs,
+  DeleteOneRoleArgs,
+} from '../../nestjs-graphql-dtos';
+import { RoleService, ROLE_SERVICE } from '../../nestjs-services';
 import { FindManyRoleOutput } from '../dtos';
 
 @Resolver(() => Role)

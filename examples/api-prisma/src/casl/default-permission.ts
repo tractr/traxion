@@ -4,8 +4,6 @@ import {
   canReadActionRight,
   canReadActionRole,
   canReadActionUser,
-  canWriteActionRight,
-  canWriteActionRole,
   canWriteActionUser,
 } from './can';
 import { AppAbility, UserWithOwnershipIds } from './types';
