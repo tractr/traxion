@@ -1,6 +1,6 @@
 # Traxion: A NestJS Toolkit & Code Generator for Full-Stack Developers 🚀
 
-Welcome to Traxion 🎉, a powerful and minimalist TS toolkit crafted specifically for full-stack developers working with NestJS. Unlock the potential of code generation and supercharge your development with your favorite backend framework.
+Welcome to Traxion 🎉, a powerful and minimalist TS toolkit, crafted specifically for full-stack developers working with NestJS. Unlock the potential of code generation to supercharge your development with your favorite backend framework.
 
 Traxion streamlines your development process, enabling you to generate code with ease and efficiency, while retaining complete control over your project. Add (open-source) code generation capabilities to NestJS, and rival the speed of Backend-as-a-Service (BaaS) development.
 ## Features 🌟
