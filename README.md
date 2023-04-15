@@ -1,14 +1,13 @@
-# Traxion: A NestJS Toolkit & Code Generator for Full-Stack Developers 🚀
+# Traxion: A Generative Toolkit for NestJS Developers 🚀
 
-Welcome to Traxion 🎉, a powerful and minimalist TS toolkit, crafted specifically for full-stack developers working with NestJS. Unlock the potential of code generation to supercharge your development with your favorite backend framework.
-
-Traxion streamlines your development process, enabling you to generate code with ease and efficiency, while retaining complete control over your project. Add (open-source) code generation capabilities to NestJS, and rival the speed of Backend-as-a-Service (BaaS) development.
+Welcome to Traxion 🎉, a powerful and minimalist NestJS generative toolkit.
+Accelerate your next NestJS projects with generative capabilities, rivaling the speed of Backend-as-a-Service (BaaS) development while maintaining full control over your project. Unleash the power of open-source, fully-typed code generation to turbocharge your favorite backend framework.
 ## Features 🌟
 
-Traxion is packed with a suite of intelligent features to kick-start your next NestJS project: 
+Traxion is packed with a suite of intelligent features to supercharge your next NestJS project: 
 - **Data** : Utilize the Prisma Schema to manage your data effectively. 
-- **API** : Generate a GraphQL API using our Prisma2Nest Generator. 
-- **Users**: Implement Role-Based Access Control (RBAC) with our CASL-config Generator (in finalization).
+- **API** : Generate instantly a GraphQL API using our `Prisma2Nest Generator`. 
+- **Users**: Implement Role-Based Access Control (RBAC) with our `CASL-config Generator` (in finalization).
 - **Official Packages** : 
   - **Dev-Kit** : Leverage the power of our `ts-morph-prisma-generator` to create your own Prisma Generator. 
   - **Nest-Authentication** : Integrate authentication using PassportJS. 
