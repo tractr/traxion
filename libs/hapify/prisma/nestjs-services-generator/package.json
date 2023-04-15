@@ -1,6 +1,6 @@
 {
   "name": "@trxn/prisma-nestjs-services-generator",
-  "version": "2.1.17",
+  "version": "2.1.18",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"
