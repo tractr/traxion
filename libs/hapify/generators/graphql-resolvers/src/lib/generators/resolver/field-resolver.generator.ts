@@ -1,7 +1,5 @@
 import { camel, pascal } from 'case';
 import {
-  DecoratorStructure,
-  JSDocStructure,
   MethodDeclarationStructure,
   ParameterDeclarationStructure,
   StructureKind,

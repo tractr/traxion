@@ -67,6 +67,7 @@ export const generateFindManyMethod = (
 
   return {
     kind: StructureKind.Method,
+    isAsync: true,
     name: 'findMany',
     typeParameters,
     parameters,

@@ -66,6 +66,7 @@ export const generateUpsertMethod = (
 
   return {
     kind: StructureKind.Method,
+    isAsync: true,
     name: 'upsert',
     typeParameters,
     parameters,

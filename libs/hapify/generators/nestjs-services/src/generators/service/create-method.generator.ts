@@ -51,14 +51,13 @@ export const generateCreateMethod = (
         data: {
           // ... data to create a ${pascal(model.name)}
         }
-      })
-    
-    `,
+      })`,
     },
   ];
 
   return {
     kind: StructureKind.Method,
+    isAsync: true,
     name: 'create',
     typeParameters,
     parameters,

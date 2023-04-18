@@ -71,6 +71,7 @@ export const generateAggregateMethod = (
 
   return {
     kind: StructureKind.Method,
+    isAsync: true,
     name: 'aggregate',
     typeParameters,
     parameters,

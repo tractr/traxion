@@ -56,6 +56,7 @@ export const generateDeleteMethod = (
 
   return {
     kind: StructureKind.Method,
+    isAsync: true,
     name: 'delete',
     typeParameters,
     parameters,

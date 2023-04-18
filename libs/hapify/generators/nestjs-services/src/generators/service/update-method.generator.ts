@@ -61,6 +61,7 @@ export const generateUpdateMethod = (
 
   return {
     kind: StructureKind.Method,
+    isAsync: true,
     name: 'update',
     typeParameters,
     parameters,

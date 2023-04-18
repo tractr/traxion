@@ -61,6 +61,7 @@ export const generateCountMethod = (
 
   return {
     kind: StructureKind.Method,
+    isAsync: true,
     name: 'count',
     typeParameters,
     parameters,
