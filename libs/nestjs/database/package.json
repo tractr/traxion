@@ -1,6 +1,6 @@
 {
   "name": "@trxn/nestjs-database",
-  "version": "2.1.18",
+  "version": "2.1.19",
   "description": "Database module for nestjs backend",
   "repository": {
     "type": "git",

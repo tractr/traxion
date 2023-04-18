@@ -1,6 +1,6 @@
 {
   "name": "@trxn/nestjs-casl",
-  "version": "2.1.18",
+  "version": "2.1.19",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"
