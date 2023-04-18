@@ -30,7 +30,7 @@ describe('generateUpsertMethod', () => {
 
     const prismaParameter = methodDeclaration.parameters?.[1];
     expect(prismaParameter?.name).toBe('prisma');
-    expect(prismaParameter?.type).toBe(`Prisma.UserDelegate<any>`);
+    expect(prismaParameter?.type).toBe(`Prisma.UserDelegate<undefined>`);
     expect(prismaParameter?.initializer).toBe(`this.prismaClient.user`);
 
     expect(methodDeclaration.statements).toBe('return prisma.upsert<T>(args);');

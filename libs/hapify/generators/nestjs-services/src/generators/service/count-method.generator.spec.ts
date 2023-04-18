@@ -40,7 +40,7 @@ describe('generateCountMethod', () => {
     expect(prismaParameters?.name).toEqual('prisma');
     expect(prismaParameters?.kind).toEqual(30);
     expect(prismaParameters?.kind).toEqual(StructureKind.Parameter);
-    expect(prismaParameters?.type).toEqual(`Prisma.UserDelegate<any>`);
+    expect(prismaParameters?.type).toEqual(`Prisma.UserDelegate<undefined>`);
   });
 
   it('generates a method declaration with the correct statements', () => {

@@ -51,9 +51,7 @@ export const generateCreateMethod = (
         data: {
           // ... data to create a ${pascal(model.name)}
         }
-      })
-    
-    `,
+      })`,
     },
   ];
 

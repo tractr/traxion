@@ -50,7 +50,7 @@ describe('generateFindUniqueMethod', () => {
 
     expect(prismaParameters?.name).toEqual('prisma');
     expect(prismaParameters?.kind).toEqual(30); // StructureKind.Parameter is equal to 30
-    expect(prismaParameters?.type).toEqual(`Prisma.UserDelegate<any>`);
+    expect(prismaParameters?.type).toEqual(`Prisma.UserDelegate<undefined>`);
   });
 
   it('generates a method declaration with the correct statements', () => {

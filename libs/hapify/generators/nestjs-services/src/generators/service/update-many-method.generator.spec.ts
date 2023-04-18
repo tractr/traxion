@@ -26,7 +26,7 @@ describe('generateUpdateManyMethod', () => {
     );
     expect(methodDeclaration.parameters?.[1].name).toBe('prisma');
     expect(methodDeclaration.parameters?.[1].type).toBe(
-      `Prisma.UserDelegate<any>`,
+      `Prisma.UserDelegate<undefined>`,
     );
     expect(methodDeclaration.parameters?.[1].initializer).toBe(
       `this.prismaClient.user`,

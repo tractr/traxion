@@ -45,7 +45,7 @@ describe('generateFindFirstMethod', () => {
     );
 
     expect(parameters[1].name).toEqual('prisma');
-    expect(parameters[1].type).toEqual(`Prisma.UserDelegate<any>`);
+    expect(parameters[1].type).toEqual(`Prisma.UserDelegate<undefined>`);
     expect(parameters[1].initializer).toEqual(`this.prismaClient.user`);
   });
 
