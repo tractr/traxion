@@ -59,10 +59,13 @@ describe('generateImports', () => {
     expect(imports[4].moduleSpecifier).toBe('@paljs/plugins');
     expect(imports[4].namedImports).toEqual([{ name: 'PrismaSelect' }]);
     expect(imports[5].kind).toBe(StructureKind.ImportDeclaration);
-    expect(imports[5].moduleSpecifier).toBe('graphql');
-    expect(imports[5].namedImports).toEqual([{ name: 'GraphQLResolveInfo' }]);
+    expect(imports[5].moduleSpecifier).toBe('@prisma/client');
+    expect(imports[5].namedImports).toEqual([{ name: 'Prisma' }]);
     expect(imports[6].kind).toBe(StructureKind.ImportDeclaration);
-    expect(imports[6].moduleSpecifier).toBe('../dtos');
-    expect(imports[6].namedImports).toEqual([{ name: 'FindManyUserOutput' }]);
+    expect(imports[6].moduleSpecifier).toBe('graphql');
+    expect(imports[6].namedImports).toEqual([{ name: 'GraphQLResolveInfo' }]);
+    expect(imports[7].kind).toBe(StructureKind.ImportDeclaration);
+    expect(imports[7].moduleSpecifier).toBe('../dtos');
+    expect(imports[7].namedImports).toEqual([{ name: 'FindManyUserOutput' }]);
   });
 });

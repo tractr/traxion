@@ -97,7 +97,7 @@ describe('generateFindManyMethod', () => {
   it('should generate the correct method statements for the User model', () => {
     const method = generateFindManyMethod(user);
     const expectedStatements = `
-    const select = new PrismaSelect(info).valueOf('users', 'User');
+    const select = new PrismaSelect(info).valueOf('users', 'User') as Prisma.UserArgs;
 
     const users = await this.userService.findMany({
       ...select,

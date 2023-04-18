@@ -59,7 +59,7 @@ describe('generateFindUniqueMethod', () => {
 
   it('should generate the correct method statements for the User model', () => {
     const expectedStatements = `
-    const select = new PrismaSelect(info).value;
+    const select = new PrismaSelect(info).value as Prisma.UserArgs;
     const user =  await this.userService.findUnique({where, ...select});
     return user;
   `;

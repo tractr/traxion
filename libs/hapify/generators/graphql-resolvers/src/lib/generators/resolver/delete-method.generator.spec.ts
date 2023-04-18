@@ -56,7 +56,7 @@ describe('generateDeleteMethod', () => {
   it('should generate the correct method statements for the User model', () => {
     expect(method.statements).toEqual(
       `
-    const select = new PrismaSelect(info).value;
+    const select = new PrismaSelect(info).value as Prisma.UserArgs;
 
     const user = await this.userService.delete({ where, ...select });
 
