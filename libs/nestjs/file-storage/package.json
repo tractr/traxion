@@ -1,6 +1,6 @@
 {
   "name": "@trxn/nestjs-file-storage",
-  "version": "2.1.19",
+  "version": "2.1.20",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"
