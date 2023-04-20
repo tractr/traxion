@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { hasSomeFieldFactory } from './factories';
 import {
   BaseField,
   Constraints,
@@ -11,6 +10,7 @@ import {
   PrimaryField,
   VirtualField,
 } from '../fields';
+import { hasSomeFieldFactory } from './factories';
 
 /**
  * One-to-many relation
@@ -175,7 +175,6 @@ export type GetFieldTypes<M extends Model> = M['fields'] extends Array<infer F>
 /**
  * Get the field type of model
  */
-
 export const hasSomeBooleanField = hasSomeFieldFactory('boolean');
 export const hasSomeDateField = hasSomeFieldFactory('date');
 export const hasSomeEnumField = hasSomeFieldFactory('enum');
