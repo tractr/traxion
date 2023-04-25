@@ -5,9 +5,9 @@ Accelerate your next NestJS projects with generative capabilities, rivaling the 
 ## Features 🌟
 
 Traxion is packed with a suite of intelligent features to supercharge your next NestJS project: 
-- **Data & API** : Use Prisma Schema to manage your data effectively and instantly generate a GraphQL API, thanks to our `Prisma2Nest Generator`. 
-- **Users**: Implement Role-Based Access Control (RBAC) with our `CASL-config Generator` (in finalization).
-- **Core Packages** : 
+- **Data** : Use [Prisma](https://github.com/prisma) Schema to simply manage your data models and relationships.
+- **API** : Instantly get a [GraphQL API](https://github.com/apollographql) based on your Prisma Schema, thanks to our `Prisma2Nest Generator`. 
+- **Users**: Instantly get a Role-Based Access Control (RBAC) thanks to our `CASL-config Generator` (finalizing) and the core packages : 
   - **Nest-Authentication** : Integrate authentication using PassportJS. 
   - **Nest-Authorization** : Manage access control with CASL. 
   - **Nest-Utilities** : Access a collection of helpful utilities to enhance your development process. 
