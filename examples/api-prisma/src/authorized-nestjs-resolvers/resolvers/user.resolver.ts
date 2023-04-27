@@ -12,6 +12,7 @@ import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
 
+import { Permission } from '../../casl';
 import {
   User,
   Role,
@@ -24,6 +25,8 @@ import {
 import { UserService, USER_SERVICE } from '../../nestjs-services';
 import { FindManyUserOutput } from '../dtos';
 
+import { Policies } from '@trxn/nestjs-core';
+
 @Resolver(() => User)
 export class UserResolver {
   constructor(
@@ -32,7 +35,7 @@ export class UserResolver {
 
   /** Query for a unique user */
   @Query(() => User, { nullable: true })
-  @CheckAuth()
+  @Policies(Permission.READ_USER)
   async findUniqueUser(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueUserArgs,
@@ -44,7 +47,7 @@ export class UserResolver {
 
   /** Query for multiple users. */
   @Query(() => FindManyUserOutput)
-  @CheckAuth()
+  @Policies(Permission.READ_USER)
   async findManyUsers(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true })
@@ -85,7 +88,7 @@ export class UserResolver {
 
   /** Create a single user. */
   @Mutation(() => User, { nullable: true })
-  @CheckAuth()
+  @Policies(Permission.CREATE_USER)
   async createUser(
     @Info() info: GraphQLResolveInfo,
     @Args() { data }: CreateOneUserArgs,
@@ -99,7 +102,7 @@ export class UserResolver {
 
   /** Update a single user. */
   @Mutation(() => User, { nullable: true })
-  @CheckAuth()
+  @Policies(Permission.UPDATE_USER)
   async updateUser(
     @Info() info: GraphQLResolveInfo,
     @Args() { data, where }: UpdateOneUserArgs,
@@ -113,7 +116,7 @@ export class UserResolver {
 
   /** Delete a single User. */
   @Mutation(() => User, { nullable: true })
-  @CheckAuth()
+  @Policies(Permission.REMOVE_USER)
   async deleteUser(
     @Info() info: GraphQLResolveInfo,
     @Args() { where }: DeleteOneUserArgs,
@@ -126,7 +129,6 @@ export class UserResolver {
   }
 
   @ResolveField(() => Role)
-  @CheckAuth()
   role(@Parent() user: User) {
     return user.role;
   }

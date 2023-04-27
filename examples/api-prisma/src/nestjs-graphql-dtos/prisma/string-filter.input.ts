@@ -1,4 +1,5 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
 
 import { NestedStringFilter } from './nested-string-filter.input';
 import { QueryMode } from './query-mode.enum';

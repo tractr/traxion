@@ -12,6 +12,7 @@ import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
 
+import { Permission } from '../../casl';
 import {
   Role,
   User,
@@ -25,6 +26,8 @@ import {
 import { RoleService, ROLE_SERVICE } from '../../nestjs-services';
 import { FindManyRoleOutput } from '../dtos';
 
+import { Policies } from '@trxn/nestjs-core';
+
 @Resolver(() => Role)
 export class RoleResolver {
   constructor(
@@ -33,7 +36,7 @@ export class RoleResolver {
 
   /** Query for a unique role */
   @Query(() => Role, { nullable: true })
-  @CheckAuth()
+  @Policies(Permission.READ_ROLE)
   async findUniqueRole(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueRoleArgs,
@@ -45,7 +48,7 @@ export class RoleResolver {
 
   /** Query for multiple roles. */
   @Query(() => FindManyRoleOutput)
-  @CheckAuth()
+  @Policies(Permission.READ_ROLE)
   async findManyRoles(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true })
@@ -86,7 +89,7 @@ export class RoleResolver {
 
   /** Create a single role. */
   @Mutation(() => Role, { nullable: true })
-  @CheckAuth()
+  @Policies(Permission.CREATE_ROLE)
   async createRole(
     @Info() info: GraphQLResolveInfo,
     @Args() { data }: CreateOneRoleArgs,
@@ -100,7 +103,7 @@ export class RoleResolver {
 
   /** Update a single role. */
   @Mutation(() => Role, { nullable: true })
-  @CheckAuth()
+  @Policies(Permission.UPDATE_ROLE)
   async updateRole(
     @Info() info: GraphQLResolveInfo,
     @Args() { data, where }: UpdateOneRoleArgs,
@@ -114,7 +117,7 @@ export class RoleResolver {
 
   /** Delete a single Role. */
   @Mutation(() => Role, { nullable: true })
-  @CheckAuth()
+  @Policies(Permission.REMOVE_ROLE)
   async deleteRole(
     @Info() info: GraphQLResolveInfo,
     @Args() { where }: DeleteOneRoleArgs,
@@ -127,13 +130,11 @@ export class RoleResolver {
   }
 
   @ResolveField(() => User)
-  @CheckAuth()
   users(@Parent() role: Role) {
     return role.users;
   }
 
   @ResolveField(() => Right)
-  @CheckAuth()
   rights(@Parent() role: Role) {
     return role.rights;
   }

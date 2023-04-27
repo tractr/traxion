@@ -1,9 +1,8 @@
-export type GraphqlResolverImportPathConfig = {
-  nestjsServices: string;
-  graphqlDtos: string;
+export type GraphqlResolverCaslImportPathConfig = {
+  casl: string;
 };
 
-export type GraphqlResolverGeneratorConfig = {
+export type GraphqlResolverCaslGeneratorConfig = {
   output: string;
-  importPaths: GraphqlResolverImportPathConfig;
+  importPaths: GraphqlResolverCaslImportPathConfig;
 };

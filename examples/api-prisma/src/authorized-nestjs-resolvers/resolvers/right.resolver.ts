@@ -12,6 +12,7 @@ import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
 
+import { Permission } from '../../casl';
 import {
   Right,
   Role,
@@ -24,6 +25,8 @@ import {
 import { RightService, RIGHT_SERVICE } from '../../nestjs-services';
 import { FindManyRightOutput } from '../dtos';
 
+import { Policies } from '@trxn/nestjs-core';
+
 @Resolver(() => Right)
 export class RightResolver {
   constructor(
@@ -32,7 +35,7 @@ export class RightResolver {
 
   /** Query for a unique right */
   @Query(() => Right, { nullable: true })
-  @CheckAuth()
+  @Policies(Permission.READ_RIGHT)
   async findUniqueRight(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueRightArgs,
@@ -44,7 +47,7 @@ export class RightResolver {
 
   /** Query for multiple rights. */
   @Query(() => FindManyRightOutput)
-  @CheckAuth()
+  @Policies(Permission.READ_RIGHT)
   async findManyRights(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true })
@@ -85,7 +88,7 @@ export class RightResolver {
 
   /** Create a single right. */
   @Mutation(() => Right, { nullable: true })
-  @CheckAuth()
+  @Policies(Permission.CREATE_RIGHT)
   async createRight(
     @Info() info: GraphQLResolveInfo,
     @Args() { data }: CreateOneRightArgs,
@@ -99,7 +102,7 @@ export class RightResolver {
 
   /** Update a single right. */
   @Mutation(() => Right, { nullable: true })
-  @CheckAuth()
+  @Policies(Permission.UPDATE_RIGHT)
   async updateRight(
     @Info() info: GraphQLResolveInfo,
     @Args() { data, where }: UpdateOneRightArgs,
@@ -113,7 +116,7 @@ export class RightResolver {
 
   /** Delete a single Right. */
   @Mutation(() => Right, { nullable: true })
-  @CheckAuth()
+  @Policies(Permission.REMOVE_RIGHT)
   async deleteRight(
     @Info() info: GraphQLResolveInfo,
     @Args() { where }: DeleteOneRightArgs,
@@ -126,7 +129,6 @@ export class RightResolver {
   }
 
   @ResolveField(() => Role)
-  @CheckAuth()
   roles(@Parent() right: Right) {
     return right.roles;
   }

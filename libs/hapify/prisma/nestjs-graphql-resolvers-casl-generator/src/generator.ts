@@ -35,6 +35,7 @@ export function generate() {
         tsConfigFilePath,
         nestjsServicesImportPath,
         nestjsGraphqlDtosImportPath,
+        caslImportPath,
       } = generator.config;
 
       // Validate the generator configuration
@@ -77,8 +78,7 @@ export function generate() {
         generateNestjsResolversChecks(project, schema, {
           output,
           importPaths: {
-            nestjsServices: nestjsServicesImportPath,
-            graphqlDtos: nestjsGraphqlDtosImportPath,
+            casl: caslImportPath,
           },
         });
       } catch (error) {

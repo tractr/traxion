@@ -1,28 +1,20 @@
 import { Project } from 'ts-morph';
 
-import { GraphqlResolverGeneratorConfig } from './config.type';
+import { GraphqlResolverCaslGeneratorConfig } from './config.type';
+import { generateResolverAuthorization } from './generators/authorization';
 
 import { Schema } from '@trxn/hapify-core';
 
 export function generate(
   project: Project,
-  dataModel: Schema,
-  config: GraphqlResolverGeneratorConfig,
+  schema: Schema,
+  config: GraphqlResolverCaslGeneratorConfig,
 ) {
   const { output, importPaths } = config;
 
-  const classes = project
-    .getDirectory(output)
-    ?.getDescendantSourceFiles()
-    .flatMap((sourceFile) => sourceFile.getClasses());
+  const { models } = schema;
 
-  if (classes)
-    classes
-      .flatMap((classDeclaration) => classDeclaration.getMethods())
-      .forEach((method) =>
-        method.addDecorator({
-          name: 'CheckAuth',
-          arguments: [],
-        }),
-      );
+  models.forEach((model) => {
+    generateResolverAuthorization(project, model, output, importPaths);
+  });
 }
