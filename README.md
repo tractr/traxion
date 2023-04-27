@@ -49,7 +49,7 @@ Please follow the established coding standards and make sure your code is well-d
 
 Please refer [to the contribution guide](./CONTRIBUTING.md) for more information.
 
-## Issue Reporting
+## Issue Reporting 🚦
 
 If you encounter any issues or have suggestions for improvements, please create an issue in our [GitHub issue tracker](./LINK_TO_ISSUES) . When reporting an issue, be sure to include:
 
