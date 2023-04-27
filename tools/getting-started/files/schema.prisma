@@ -1,0 +1,49 @@
+
+// Nestjs graphql dto generator
+generator nestjsGraphql {
+  provider                      = "prisma-nestjs-graphql"
+  output                        = "../src/nestjs-graphql-dtos"
+  purgeOutput                   = true
+  reExport                      = Single
+  noAtomicOperations            = true
+  fields_Validator_from         = "class-validator"
+  fields_Validator_input        = true
+  useInputType_StringFilter_ALL = "string"
+}
+
+generator nestjsServices {
+  provider = "trxn-prisma-nestjs-services-generator"
+  output   = "../src/nestjs-services"
+  tsConfigFilePath   = "../../tsconfig.json"
+}
+
+generator graphqlResolvers {
+  provider = "trxn-prisma-nestjs-graphql-resolvers-generator"
+  output = "../src/nestjs-resolvers"
+
+  // Path relative to the output directory
+  tsConfigFilePath   = "../../tsconfig.json"
+  nestjsServicesImportPath = "./nestjs-services"
+  nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
+}
+
+// Models
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  posts     Post[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  published Boolean  @default(false)
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

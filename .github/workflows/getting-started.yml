@@ -1,0 +1,58 @@
+name: Test the Getting Started guide
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    name: Test the steps in the Getting Started guide
+
+    # Our code will run on node 16 and Linux
+    strategy:
+      matrix:
+        node: [16.x]
+        os: [ubuntu-20.04]
+
+    runs-on: '${{ matrix.os }}'
+
+    # Service containers to run with `container-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_USER: user
+          POSTGRES_DB: demo
+          POSTGRES_PASSWORD: passwd
+        ports: ['5432:5432']
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      # First we checkout the code
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # Build the project
+      - name: Install dependencies and generate files
+        uses: tractr/traxion/.github/actions/setup@main
+        with:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Run getting started build script
+        run: |
+          tools/getting-started/build.sh
+
+      - name: Run getting started test script
+        run: |
+          tools/getting-started/test.sh
