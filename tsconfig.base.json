@@ -54,7 +54,10 @@
         "libs/nestjs/reset-password/src/index.ts"
       ],
       "@trxn/nestjs-user": ["libs/nestjs/user/src/index.ts"],
-      "@trxn/nestjs-winston": ["libs/nestjs/winston/src/index.ts"]
+      "@trxn/nestjs-winston": ["libs/nestjs/winston/src/index.ts"],
+      "@trxn/prisma-nestjs-graphql-resolvers-casl-generator": [
+        "libs/hapify/prisma/nestjs-graphql-resolvers-casl-generator/src/index.ts"
+      ]
     },
     "resolveJsonModule": true,
     "rootDir": ".",
