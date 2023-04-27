@@ -49,7 +49,7 @@ cat "${GS_DIR}"/files/app.env > ./.env
 npm install --save-dev @trxn/prisma-nestjs-graphql-resolvers-generator @trxn/prisma-nestjs-services-generator prisma-nestjs-graphql
 npm install --save @nestjs/apollo @nestjs/graphql @paljs/plugins @prisma/client @trxn/nestjs-database @trxn/nestjs-graphql prisma
 # Copy local packages to node_modules to ensure that the latest version is used
-"${BASE_DIR}"/tools/local-install.mjs
+node "${BASE_DIR}"/tools/local-install.mjs
 
 # ----------------------------------
 # Step 6: Define a Prisma schema
