@@ -7,7 +7,6 @@ import {
 } from 'passport-jwt';
 import { IStrategyOptionsWithRequest as LocalStrategyOptions } from 'passport-local';
 
-import { JwtOptionsService } from './jwt-options.service';
 import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
 import {
   DEFAULT_COOKIE_NAME,
@@ -18,6 +17,7 @@ import {
 } from '../constants';
 import { fromHttpOnlySignedAndSecureCookies } from '../extractors';
 import { AuthenticationModuleOptions } from '../interfaces';
+import { JwtOptionsService } from './jwt-options.service';
 
 @Injectable()
 export class StrategyOptionsService {
@@ -54,6 +54,9 @@ export class StrategyOptionsService {
     };
   }
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   convertJwtModuleOptionsToPassportOptions(
     jwtModuleOptions: JwtModuleOptions,
   ): Omit<PassportJwtStrategyOptions, 'jwtFromRequest'> {
