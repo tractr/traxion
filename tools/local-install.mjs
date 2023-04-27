@@ -53,7 +53,7 @@ for (const [projectName, project] of projects) {
     console.warn(`Skipping ${projectName} because it is an application`);
     continue;
   }
-  if (!project.targets.publish && !project.targets.build) {
+  if (!project.targets.publish || !project.targets.build) {
     console.warn(
       project.targets,
       `Skipping ${projectName} because it has no publish or build target`,
