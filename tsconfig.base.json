@@ -26,6 +26,9 @@
       "@trxn/hapify-generator-graphql-resolvers-casl": [
         "libs/hapify/generators/graphql-resolvers-casl/src/index.ts"
       ],
+      "@trxn/hapify-generator-nestjs-authorized-services": [
+        "libs/hapify/generators/nestjs-authorized-services/src/index.ts"
+      ],
       "@trxn/hapify-generators-nestjs-services": [
         "libs/hapify/generators/nestjs-services/src/index.ts"
       ],
