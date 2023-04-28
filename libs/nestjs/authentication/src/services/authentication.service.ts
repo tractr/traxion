@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { HashService } from './hash.service';
 import { MODULE_OPTIONS_TOKEN } from '../authentication.module-definition';
 import { AccessTokenDto } from '../dtos';
 import { AuthenticationModuleOptions } from '../interfaces';
+import { HashService } from './hash.service';
 
 import { MinimalUser, User, UserService } from '@trxn/nestjs-user';
 
@@ -18,6 +18,9 @@ export class AuthenticationService {
     private readonly hashService: HashService,
   ) {}
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   async validateUser<U extends User = MinimalUser>(
     login: string,
     password: string,
@@ -37,6 +40,9 @@ export class AuthenticationService {
     return user;
   }
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   async createAccessToken<U extends User = MinimalUser>(
     user: U,
   ): Promise<string> {
@@ -45,6 +51,9 @@ export class AuthenticationService {
     return this.jwtService.sign(transformJwtPayload({ sub: user.id }, user));
   }
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   async login<U extends User = MinimalUser>(user: U): Promise<AccessTokenDto> {
     return {
       accessToken: await this.createAccessToken(user),

@@ -57,6 +57,7 @@ generator caslConfig {
   output   = "../src/casl"
   tsConfigFilePath   = "../../tsconfig.app.json"
 }
+
 //--------------------------------------------
 // This part describe the project models
 //--------------------------------------------

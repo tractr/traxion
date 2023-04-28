@@ -22,6 +22,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super(strategyOptionsService.jwtStrategyOptions);
   }
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   async validate(payload: JwtTokenPayload) {
     const user = await this.userService.findUserById(
       payload.sub,
