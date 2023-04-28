@@ -1,16 +1,16 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-// // Nestjs graphql dto generator
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Nestjs graphql dto generator
 // generator nestjsGraphql {
 //   provider                      = "prisma-nestjs-graphql"
 //   output                        = "../src/nestjs-graphql-dtos"
@@ -22,11 +22,13 @@ datasource db {
 //   useInputType_StringFilter_ALL = "string"
 // }
 
+//
 // // Nestjs public grahpql resolvers generator
 // generator publicGraphqlResolvers {
 //   provider = "trxn-prisma-nestjs-graphql-resolvers-generator"
 //   output = "../src/nestjs-resolvers"
 
+//
 //   // Path relative to the output directory
 //   tsConfigFilePath   = "../../tsconfig.app.json"
 //   nestjsServicesImportPath = "./nestjs-services"
@@ -38,6 +40,12 @@ datasource db {
 //   provider = "trxn-prisma-nestjs-graphql-resolvers-casl-generator"
 //   output = "../src/authorized-nestjs-resolvers"
 
+//
+// // Nestjs authorizd graphql resolvers generator
+// generator authorizedGraphqlResolvers {
+//   provider = "trxn-prisma-nestjs-graphql-resolvers-casl-generator"
+//   output = "../src/nestjs-authorized-resolvers"
+//
 //   // Path relative to the output directory
 //   tsConfigFilePath   = "../../tsconfig.app.json"
 //   nestjsServicesImportPath = "./nestjs-services"
@@ -55,6 +63,20 @@ datasource db {
 generator caslConfig {
   provider = "trxn-hapify-prisma-casl-generator"
   output   = "../src/casl"
+  tsConfigFilePath   = "../../tsconfig.app.json"
+}
+//
+// // Nestjs common services generator
+// generator nestjsServices {
+//   provider = "trxn-prisma-nestjs-services-generator"
+//   output   = "../src/nestjs-services"
+//   tsConfigFilePath   = "../../tsconfig.app.json"
+// }
+
+// Nestjs common services generator
+generator nestjsAuthorizedServices {
+  provider = "trxn-prisma-nestjs-authorized-services-generator"
+  output   = "../src/nestjs-authorized-services"
   tsConfigFilePath   = "../../tsconfig.app.json"
 }
 
