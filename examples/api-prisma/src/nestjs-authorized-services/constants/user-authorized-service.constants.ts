@@ -1,0 +1,1 @@
+export const USER_AUTHORIZED_SERVICE = 'USER_AUTHORIZED_SERVICE' as const;

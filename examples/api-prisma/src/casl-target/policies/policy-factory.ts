@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { subject } from '@casl/ability';
 
-import { AppAbility, AppSubjects, ModelSubjects } from '../types';
+import { AppAbility, ModelSubjects } from '../types';
 
 import { Action } from '@trxn/nestjs-casl';
 
