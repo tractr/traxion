@@ -11,6 +11,9 @@ export class BcryptService implements EncryptionService {
     private readonly bcryptModuleOptions: BcryptModuleOptions,
   ) {}
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   async hash(plaintext: string): Promise<string> {
     const salt = await bcrypt.genSalt(
       this.bcryptModuleOptions.saltRounds || 10,
@@ -18,6 +21,9 @@ export class BcryptService implements EncryptionService {
     return bcrypt.hash(plaintext, salt);
   }
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   async compare(plaintext: string, hash: string): Promise<boolean> {
     return bcrypt.compare(plaintext, hash);
   }

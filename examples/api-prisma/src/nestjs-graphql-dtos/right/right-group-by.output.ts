@@ -1,4 +1,6 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
+import { Int } from '@nestjs/graphql';
 
 import { RightAvgAggregate } from './right-avg-aggregate.output';
 import { RightCountAggregate } from './right-count-aggregate.output';

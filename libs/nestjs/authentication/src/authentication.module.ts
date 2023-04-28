@@ -26,6 +26,9 @@ import { LoggerModule } from '@trxn/nestjs-core';
 
 @Module({})
 export class AuthenticationModule extends ConfigurableModuleClass {
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   private static createModule(module: DynamicModule): DynamicModule {
     // FIXME: When https://github.com/nestjs/jwt/pull/1065 is merged, this can be simplified to:
     // Should remove this moduleOptions variables
@@ -86,11 +89,17 @@ export class AuthenticationModule extends ConfigurableModuleClass {
     };
   }
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   static register(options: typeof OPTIONS_TYPE): DynamicModule {
     const authenticationOptionsModule = super.register(options);
     return this.createModule(authenticationOptionsModule);
   }
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   static registerAsync(options: typeof ASYNC_OPTIONS_TYPE): DynamicModule {
     const authenticationOptionsModule = super.registerAsync(options);
     return this.createModule(authenticationOptionsModule);

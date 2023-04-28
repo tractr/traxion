@@ -1,0 +1,8 @@
+{
+  "name": "@trxn/prisma-nestjs-graphql-resolvers-casl-generator",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "bin": {
+    "trxn-prisma-nestjs-graphql-resolvers-casl-generator": "src/bin.js"
+  }
+}

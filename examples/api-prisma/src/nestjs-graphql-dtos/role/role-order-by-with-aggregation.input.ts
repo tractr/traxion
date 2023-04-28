@@ -1,4 +1,5 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
 
 import { SortOrder } from '../prisma/sort-order.enum';
 import { RoleAvgOrderByAggregateInput } from './role-avg-order-by-aggregate.input';
