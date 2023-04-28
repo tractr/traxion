@@ -1,1 +1,1 @@
-export * from './lib/hapify-generators-nestjs-authorized-services';
+export * from './generate';
