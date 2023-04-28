@@ -1,7 +1,7 @@
 import { Project } from 'ts-morph';
 
 import { GraphqlResolverCaslGeneratorConfig } from './config.type';
-import { generateResolverAuthorization } from './generators/authorization';
+import { generateResolverAuthorization } from './generators/resolver-authorizations.generator';
 
 import { Schema } from '@trxn/hapify-core';
 

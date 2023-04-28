@@ -2,8 +2,8 @@ import { kebab, pascal } from 'case';
 import { Project } from 'ts-morph';
 
 import { GraphqlResolverCaslImportPathConfig } from '../config.type';
+import { generateResolverDecorators } from './decorators.generator';
 import { generateImports } from './imports.generator';
-import { generateResolverDecorators } from './resolver-decorators.generator';
 
 import { Model } from '@trxn/hapify-core';
 
@@ -29,7 +29,7 @@ export function generateResolverAuthorization(
 
   generateResolverDecorators(model, resolverClass);
 
-  const imports = generateImports(importPaths);
+  const imports = generateImports(model, importPaths);
 
   sourceFile.addImportDeclarations(imports);
 }

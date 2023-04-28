@@ -12,7 +12,13 @@ import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
 
-import { Permission } from '../../casl';
+import {
+  CREATE_USER,
+  READ_USER,
+  SEARCH_USER,
+  UPDATE_USER,
+  DELETE_USER,
+} from '../../casl-target';
 import {
   User,
   Role,
@@ -35,7 +41,7 @@ export class UserResolver {
 
   /** Query for a unique user */
   @Query(() => User, { nullable: true })
-  @Policies(Permission.READ_USER)
+  @Policies(READ_USER)
   async findUniqueUser(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueUserArgs,
@@ -47,7 +53,7 @@ export class UserResolver {
 
   /** Query for multiple users. */
   @Query(() => FindManyUserOutput)
-  @Policies(Permission.READ_USER)
+  @Policies(SEARCH_USER)
   async findManyUsers(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true })
@@ -88,7 +94,7 @@ export class UserResolver {
 
   /** Create a single user. */
   @Mutation(() => User, { nullable: true })
-  @Policies(Permission.CREATE_USER)
+  @Policies(CREATE_USER)
   async createUser(
     @Info() info: GraphQLResolveInfo,
     @Args() { data }: CreateOneUserArgs,
@@ -102,7 +108,7 @@ export class UserResolver {
 
   /** Update a single user. */
   @Mutation(() => User, { nullable: true })
-  @Policies(Permission.UPDATE_USER)
+  @Policies(UPDATE_USER)
   async updateUser(
     @Info() info: GraphQLResolveInfo,
     @Args() { data, where }: UpdateOneUserArgs,
@@ -116,7 +122,7 @@ export class UserResolver {
 
   /** Delete a single User. */
   @Mutation(() => User, { nullable: true })
-  @Policies(Permission.REMOVE_USER)
+  @Policies(DELETE_USER)
   async deleteUser(
     @Info() info: GraphQLResolveInfo,
     @Args() { where }: DeleteOneUserArgs,

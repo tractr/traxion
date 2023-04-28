@@ -12,7 +12,13 @@ import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
 
-import { Permission } from '../../casl';
+import {
+  CREATE_ROLE,
+  READ_ROLE,
+  SEARCH_ROLE,
+  UPDATE_ROLE,
+  DELETE_ROLE,
+} from '../../casl-target';
 import {
   Role,
   User,
@@ -36,7 +42,7 @@ export class RoleResolver {
 
   /** Query for a unique role */
   @Query(() => Role, { nullable: true })
-  @Policies(Permission.READ_ROLE)
+  @Policies(READ_ROLE)
   async findUniqueRole(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueRoleArgs,
@@ -48,7 +54,7 @@ export class RoleResolver {
 
   /** Query for multiple roles. */
   @Query(() => FindManyRoleOutput)
-  @Policies(Permission.READ_ROLE)
+  @Policies(SEARCH_ROLE)
   async findManyRoles(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true })
@@ -89,7 +95,7 @@ export class RoleResolver {
 
   /** Create a single role. */
   @Mutation(() => Role, { nullable: true })
-  @Policies(Permission.CREATE_ROLE)
+  @Policies(CREATE_ROLE)
   async createRole(
     @Info() info: GraphQLResolveInfo,
     @Args() { data }: CreateOneRoleArgs,
@@ -103,7 +109,7 @@ export class RoleResolver {
 
   /** Update a single role. */
   @Mutation(() => Role, { nullable: true })
-  @Policies(Permission.UPDATE_ROLE)
+  @Policies(UPDATE_ROLE)
   async updateRole(
     @Info() info: GraphQLResolveInfo,
     @Args() { data, where }: UpdateOneRoleArgs,
@@ -117,7 +123,7 @@ export class RoleResolver {
 
   /** Delete a single Role. */
   @Mutation(() => Role, { nullable: true })
-  @Policies(Permission.REMOVE_ROLE)
+  @Policies(DELETE_ROLE)
   async deleteRole(
     @Info() info: GraphQLResolveInfo,
     @Args() { where }: DeleteOneRoleArgs,

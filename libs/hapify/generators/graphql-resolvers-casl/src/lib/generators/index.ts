@@ -1,1 +1,1 @@
-export * from './authorization';
+export * from './resolver-authorizations.generator';

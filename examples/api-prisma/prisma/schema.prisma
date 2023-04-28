@@ -42,7 +42,7 @@ generator authorizedGraphqlResolvers {
   tsConfigFilePath   = "../../tsconfig.app.json"
   nestjsServicesImportPath = "./nestjs-services"
   nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
-  caslImportPath = "./casl"
+  caslImportPath = "./casl-target"
 }
 
 // Nestjs common services generator

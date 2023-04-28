@@ -13,26 +13,26 @@ export function generateResolverDecorators(
 
   resolver.getMethod(`findUnique${modelPascal}`)?.addDecorator({
     name: 'Policies',
-    arguments: [`Permission.READ_${modelConstant}`],
+    arguments: [`READ_${modelConstant}`],
   });
 
   resolver.getMethod(`findMany${modelPluralPascal}`)?.addDecorator({
     name: 'Policies',
-    arguments: [`Permission.READ_${modelConstant}`],
+    arguments: [`SEARCH_${modelConstant}`],
   });
 
   resolver.getMethod(`create${modelPascal}`)?.addDecorator({
     name: 'Policies',
-    arguments: [`Permission.CREATE_${modelConstant}`],
+    arguments: [`CREATE_${modelConstant}`],
   });
 
   resolver.getMethod(`update${modelPascal}`)?.addDecorator({
     name: 'Policies',
-    arguments: [`Permission.UPDATE_${modelConstant}`],
+    arguments: [`UPDATE_${modelConstant}`],
   });
 
   resolver.getMethod(`delete${modelPascal}`)?.addDecorator({
     name: 'Policies',
-    arguments: [`Permission.REMOVE_${modelConstant}`],
+    arguments: [`DELETE_${modelConstant}`],
   });
 }

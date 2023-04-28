@@ -12,7 +12,13 @@ import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
 
-import { Permission } from '../../casl';
+import {
+  CREATE_RIGHT,
+  READ_RIGHT,
+  SEARCH_RIGHT,
+  UPDATE_RIGHT,
+  DELETE_RIGHT,
+} from '../../casl-target';
 import {
   Right,
   Role,
@@ -35,7 +41,7 @@ export class RightResolver {
 
   /** Query for a unique right */
   @Query(() => Right, { nullable: true })
-  @Policies(Permission.READ_RIGHT)
+  @Policies(READ_RIGHT)
   async findUniqueRight(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueRightArgs,
@@ -47,7 +53,7 @@ export class RightResolver {
 
   /** Query for multiple rights. */
   @Query(() => FindManyRightOutput)
-  @Policies(Permission.READ_RIGHT)
+  @Policies(SEARCH_RIGHT)
   async findManyRights(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true })
@@ -88,7 +94,7 @@ export class RightResolver {
 
   /** Create a single right. */
   @Mutation(() => Right, { nullable: true })
-  @Policies(Permission.CREATE_RIGHT)
+  @Policies(CREATE_RIGHT)
   async createRight(
     @Info() info: GraphQLResolveInfo,
     @Args() { data }: CreateOneRightArgs,
@@ -102,7 +108,7 @@ export class RightResolver {
 
   /** Update a single right. */
   @Mutation(() => Right, { nullable: true })
-  @Policies(Permission.UPDATE_RIGHT)
+  @Policies(UPDATE_RIGHT)
   async updateRight(
     @Info() info: GraphQLResolveInfo,
     @Args() { data, where }: UpdateOneRightArgs,
@@ -116,7 +122,7 @@ export class RightResolver {
 
   /** Delete a single Right. */
   @Mutation(() => Right, { nullable: true })
-  @Policies(Permission.REMOVE_RIGHT)
+  @Policies(DELETE_RIGHT)
   async deleteRight(
     @Info() info: GraphQLResolveInfo,
     @Args() { where }: DeleteOneRightArgs,
