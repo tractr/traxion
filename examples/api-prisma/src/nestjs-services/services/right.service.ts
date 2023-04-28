@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+
 import { PrismaService } from '@trxn/nestjs-database';
 
 @Injectable()
@@ -18,7 +19,7 @@ export class RightService {
    *     })
    *
    */
-  findUnique<T extends Prisma.RightFindUniqueArgs>(
+  async findUnique<T extends Prisma.RightFindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightFindUniqueArgs>,
     prisma: Prisma.RightDelegate<undefined> = this.prismaClient.right,
   ) {
@@ -39,7 +40,7 @@ export class RightService {
    *        })
    *
    */
-  findFirst<T extends Prisma.RightFindFirstArgs>(
+  async findFirst<T extends Prisma.RightFindFirstArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightFindFirstArgs>,
     prisma: Prisma.RightDelegate<undefined> = this.prismaClient.right,
   ) {
@@ -63,7 +64,7 @@ export class RightService {
    *
    *
    */
-  findMany<T extends Prisma.RightFindManyArgs>(
+  async findMany<T extends Prisma.RightFindManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightFindManyArgs>,
     prisma: Prisma.RightDelegate<undefined> = this.prismaClient.right,
   ) {
@@ -80,10 +81,8 @@ export class RightService {
    *           // ... data to create a Right
    *         }
    *       })
-   *
-   *
    */
-  create<T extends Prisma.RightCreateArgs>(
+  async create<T extends Prisma.RightCreateArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightCreateArgs>,
     prisma: Prisma.RightDelegate<undefined> = this.prismaClient.right,
   ) {
@@ -102,7 +101,7 @@ export class RightService {
    *           }
    *         })
    */
-  createMany<T extends Prisma.RightCreateManyArgs>(
+  async createMany<T extends Prisma.RightCreateManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightCreateManyArgs>,
     prisma: Prisma.RightDelegate<undefined> = this.prismaClient.right,
   ) {
@@ -124,7 +123,7 @@ export class RightService {
    *        })
    *
    */
-  update<T extends Prisma.RightUpdateArgs>(
+  async update<T extends Prisma.RightUpdateArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightUpdateArgs>,
     prisma: Prisma.RightDelegate<undefined> = this.prismaClient.right,
   ) {
@@ -148,7 +147,7 @@ export class RightService {
    *        })
    *
    */
-  updateMAny<T extends Prisma.RightUpdateManyArgs>(
+  async updateMany<T extends Prisma.RightUpdateManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightUpdateManyArgs>,
     prisma: Prisma.RightDelegate<undefined> = this.prismaClient.right,
   ) {
@@ -173,7 +172,7 @@ export class RightService {
    *        })
    *
    */
-  upsert<T extends Prisma.RightUpsertArgs>(
+  async upsert<T extends Prisma.RightUpsertArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightUpsertArgs>,
     prisma: Prisma.RightDelegate<undefined> = this.prismaClient.right,
   ) {
@@ -192,7 +191,7 @@ export class RightService {
    *     })
    *
    */
-  delete<T extends Prisma.RightDeleteArgs>(
+  async delete<T extends Prisma.RightDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightDeleteArgs>,
     prisma: Prisma.RightDelegate<undefined> = this.prismaClient.right,
   ) {
@@ -211,7 +210,7 @@ export class RightService {
    *     })
    *
    */
-  deleteMany<T extends Prisma.RightDeleteArgs>(
+  async deleteMany<T extends Prisma.RightDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightDeleteManyArgs>,
     prisma: Prisma.RightDelegate<undefined> = this.prismaClient.right,
   ) {
@@ -233,7 +232,7 @@ export class RightService {
    *
    *
    */
-  count<T extends Prisma.RightCountArgs>(
+  async count<T extends Prisma.RightCountArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightCountArgs>,
     prisma: Prisma.RightDelegate<undefined> = this.prismaClient.right,
   ) {
@@ -265,7 +264,7 @@ export class RightService {
    *         })
    *
    */
-  aggregate<T extends Prisma.RightAggregateArgs>(
+  async aggregate<T extends Prisma.RightAggregateArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightAggregateArgs>,
     prisma: Prisma.RightDelegate<undefined> = this.prismaClient.right,
   ) {

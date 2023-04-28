@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+
 import { PrismaService } from '@trxn/nestjs-database';
 
 @Injectable()
@@ -18,7 +19,7 @@ export class UserService {
    *     })
    *
    */
-  findUnique<T extends Prisma.UserFindUniqueArgs>(
+  async findUnique<T extends Prisma.UserFindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserFindUniqueArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
@@ -39,7 +40,7 @@ export class UserService {
    *        })
    *
    */
-  findFirst<T extends Prisma.UserFindFirstArgs>(
+  async findFirst<T extends Prisma.UserFindFirstArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserFindFirstArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
@@ -63,7 +64,7 @@ export class UserService {
    *
    *
    */
-  findMany<T extends Prisma.UserFindManyArgs>(
+  async findMany<T extends Prisma.UserFindManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserFindManyArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
@@ -80,10 +81,8 @@ export class UserService {
    *           // ... data to create a User
    *         }
    *       })
-   *
-   *
    */
-  create<T extends Prisma.UserCreateArgs>(
+  async create<T extends Prisma.UserCreateArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserCreateArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
@@ -102,7 +101,7 @@ export class UserService {
    *           }
    *         })
    */
-  createMany<T extends Prisma.UserCreateManyArgs>(
+  async createMany<T extends Prisma.UserCreateManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserCreateManyArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
@@ -124,7 +123,7 @@ export class UserService {
    *        })
    *
    */
-  update<T extends Prisma.UserUpdateArgs>(
+  async update<T extends Prisma.UserUpdateArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserUpdateArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
@@ -148,7 +147,7 @@ export class UserService {
    *        })
    *
    */
-  updateMAny<T extends Prisma.UserUpdateManyArgs>(
+  async updateMany<T extends Prisma.UserUpdateManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserUpdateManyArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
@@ -173,7 +172,7 @@ export class UserService {
    *        })
    *
    */
-  upsert<T extends Prisma.UserUpsertArgs>(
+  async upsert<T extends Prisma.UserUpsertArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserUpsertArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
@@ -192,7 +191,7 @@ export class UserService {
    *     })
    *
    */
-  delete<T extends Prisma.UserDeleteArgs>(
+  async delete<T extends Prisma.UserDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserDeleteArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
@@ -211,7 +210,7 @@ export class UserService {
    *     })
    *
    */
-  deleteMany<T extends Prisma.UserDeleteArgs>(
+  async deleteMany<T extends Prisma.UserDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserDeleteManyArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
@@ -233,7 +232,7 @@ export class UserService {
    *
    *
    */
-  count<T extends Prisma.UserCountArgs>(
+  async count<T extends Prisma.UserCountArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserCountArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
@@ -265,7 +264,7 @@ export class UserService {
    *         })
    *
    */
-  aggregate<T extends Prisma.UserAggregateArgs>(
+  async aggregate<T extends Prisma.UserAggregateArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserAggregateArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {

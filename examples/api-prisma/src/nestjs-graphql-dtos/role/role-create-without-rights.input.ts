@@ -1,4 +1,5 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
 
 import { UserCreateNestedManyWithoutRoleInput } from '../user/user-create-nested-many-without-role.input';
 

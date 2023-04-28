@@ -1,4 +1,6 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
+import { Int } from '@nestjs/graphql';
 
 import { UserAvgAggregate } from './user-avg-aggregate.output';
 import { UserCountAggregate } from './user-count-aggregate.output';

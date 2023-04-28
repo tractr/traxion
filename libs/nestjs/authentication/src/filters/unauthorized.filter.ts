@@ -12,6 +12,9 @@ import { CookieOptionsService } from '../services';
 export class UnauthorizedExceptionFilter implements ExceptionFilter {
   constructor(private readonly cookieOptionsService: CookieOptionsService) {}
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   catch(exception: UnauthorizedException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();

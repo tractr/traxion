@@ -13,15 +13,15 @@ import { Prisma } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
 
 import {
-  CreateOneRightArgs,
-  DeleteOneRightArgs,
-  FindManyRightArgs,
-  FindUniqueRightArgs,
   Right,
   Role,
+  FindUniqueRightArgs,
+  FindManyRightArgs,
+  CreateOneRightArgs,
   UpdateOneRightArgs,
+  DeleteOneRightArgs,
 } from '../../nestjs-graphql-dtos';
-import { RIGHT_SERVICE, RightService } from '../../nestjs-services';
+import { RightService, RIGHT_SERVICE } from '../../nestjs-services';
 import { FindManyRightOutput } from '../dtos';
 
 @Resolver(() => Right)
