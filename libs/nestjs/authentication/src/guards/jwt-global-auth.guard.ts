@@ -11,9 +11,6 @@ export class JwtGlobalAuthGuard extends JwtAuthGuard {
     super(reflector);
   }
 
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {

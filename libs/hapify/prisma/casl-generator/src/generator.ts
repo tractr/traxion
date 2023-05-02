@@ -1,11 +1,17 @@
+import { join } from 'path';
+
 import { generatorHandler } from '@prisma/generator-helper';
 import { logger } from '@prisma/internals';
-import { join } from 'path';
 import { Project } from 'ts-morph';
 
 import { version } from '../package.json';
 
-import { createSchema, Schema } from '@trxn/hapify-core';
+import {
+  createSchema,
+  discoverOwnership,
+  getUserModel,
+  Schema,
+} from '@trxn/hapify-core';
 import { convertDmmfToHapifySchemaDeclaration } from '@trxn/hapify-devkit';
 import { hapifyCaslConfigGenerator } from '@trxn/hapify-generators-casl-config';
 
@@ -19,11 +25,10 @@ generatorHandler({
     };
   },
   onGenerate: async (options) => {
-
     const { generator, dmmf } = options;
 
     const output = generator.output?.value;
-    const { tsConfigFilePath } = generator.config;
+    const { tsConfigFilePath, userModelName } = generator.config;
 
     // Validate the generator configuration
     if (!output) {
@@ -51,14 +56,13 @@ generatorHandler({
         convertDmmfToHapifySchemaDeclaration(dmmf),
       );
 
-      // hapifyNestjsAuthorizedServicesGenerator(project, schema, {
-      //   output,
-      // });
+      const userModel = getUserModel(schema, userModelName);
 
-      hapifyCaslConfigGenerator(project, schema, {
+      const userWithOwnership = discoverOwnership(userModel, schema);
+
+      hapifyCaslConfigGenerator(project, schema, userWithOwnership, {
         output,
-        });
-
+      });
     } catch (error) {
       logger.error(error);
       throw error;

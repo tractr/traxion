@@ -31,9 +31,6 @@ export class LoginController {
   @Post('login')
   @ApiBody({ type: LoginPostBodyDto })
   @HttpCode(200)
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   async login<U extends User = MinimalUser>(
     @Req() req: Request & { secret?: string; user: U },
     @Res({ passthrough: true }) res: Response,
@@ -51,9 +48,6 @@ export class LoginController {
   @Post('logout')
   @UseGuards(PublicGuard)
   @HttpCode(200)
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   async postLogout(@Res({ passthrough: true }) res: Response) {
     res.cookie(
       this.cookieOptionsService.cookieName,
@@ -64,9 +58,6 @@ export class LoginController {
 
   @Get('me')
   @UseGuards(JwtAuthGuard)
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   async me<U extends User = MinimalUser>(
     @CurrentUser() currentUser: U,
   ): Promise<U> {
