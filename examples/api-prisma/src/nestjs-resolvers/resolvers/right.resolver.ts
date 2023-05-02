@@ -20,6 +20,7 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
+import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 import { GraphQLResolveInfo } from 'graphql';
 import { FindManyRightOutput } from '../dtos';
 
@@ -130,11 +131,28 @@ export class RightResolver {
 
     if (typeof roles === 'undefined') {
       const select = new PrismaSelect(info, {
-        // defaultFields: OWNERS_DEFAULT_FIELDS,
-      }).valueOf('rights.roles', 'Role') as Prisma.RoleArgs;
+        // defaultFields: this.nestjsGraphqlModuleConfig.defaultFields,
+      }).valueOf(
+        getPathFromGraphQLResolveInfo(info.path),
+        'Role',
+      ) as Prisma.RoleArgs;
+
+      const where: Prisma.RoleWhereInput = {
+        AND: [
+          {
+            rights: {
+              some: {
+                id: right.id,
+              },
+            },
+          },
+          findManyArgs.where || {},
+        ],
+      };
 
       roles = await this.roleService.findMany({
         ...findManyArgs,
+        where,
         ...select,
       });
     }

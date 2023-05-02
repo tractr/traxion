@@ -91,6 +91,8 @@ export function createOneManyRelation(
     },
   };
 
+  toVirtualField.foreign = toForeignField as ForeignField[];
+
   // Add the relation reference to the virtual fields
   relation.from.virtual.relation = relation;
   relation.to.virtual.relation = relation;

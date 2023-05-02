@@ -11,6 +11,17 @@ async function main() {
     create: {
       email: 'admin@traxion.dev',
       name: 'Admin',
+      userProfile: {
+        connectOrCreate: {
+          where: {
+            id: 1,
+          },
+          create: {
+            id: 1,
+            address: 'Traxion Tech Inc.',
+          },
+        },
+      },
       role: {
         connectOrCreate: {
           where: {
@@ -46,4 +57,11 @@ async function main() {
       },
     },
   });
+
+  console.info(`Created user with id: ${users.id}`);
 }
+
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

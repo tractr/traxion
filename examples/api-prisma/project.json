@@ -40,7 +40,7 @@
         "parallel": false
       }
     },
-    "lint-disable": {
+    "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": ["examples/api-prisma/**/*.ts"]

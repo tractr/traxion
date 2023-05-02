@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
+import { ProfileUncheckedUpdateOneWithoutUserNestedInput } from '../profile/profile-unchecked-update-one-without-user-nested.input';
 
 @InputType()
 export class UserUncheckedUpdateWithoutRoleInput {
@@ -12,4 +13,9 @@ export class UserUncheckedUpdateWithoutRoleInput {
 
   @Field(() => String, { nullable: true })
   name?: string;
+
+  @Field(() => ProfileUncheckedUpdateOneWithoutUserNestedInput, {
+    nullable: true,
+  })
+  userProfile?: ProfileUncheckedUpdateOneWithoutUserNestedInput;
 }

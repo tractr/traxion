@@ -20,7 +20,6 @@ generatorHandler({
     };
   },
   onGenerate: async (options) => {
-    logger.log(`HELLOOOOOOOOOOOOOOOOO`);
     const { generator, dmmf } = options;
 
     const output = generator.output?.value;
