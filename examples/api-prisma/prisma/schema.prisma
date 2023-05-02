@@ -25,11 +25,11 @@ generator nestjsGraphql {
 // Nestjs public grahpql resolvers generator
 generator publicGraphqlResolvers {
   provider = "trxn-prisma-nestjs-graphql-resolvers-generator"
-  output = "../src/nestjs-resolvers"
+  output   = "../src/nestjs-resolvers"
 
   // Path relative to the output directory
-  tsConfigFilePath   = "../../tsconfig.app.json"
-  nestjsServicesImportPath = "./nestjs-services"
+  tsConfigFilePath            = "../../tsconfig.app.json"
+  nestjsServicesImportPath    = "./nestjs-services"
   nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
 }
 //
@@ -91,27 +91,42 @@ generator nestjsAuthorizedServices {
   caslImportPath = "./casl-target"
 }
 
+// Nestjs common services generator
+// generator nestjsAuthorizedServices {
+//   provider         = "trxn-prisma-nestjs-authorized-services-generator"
+//   output           = "../src/nestjs-authorized-services"
+//   tsConfigFilePath = "../../tsconfig.app.json"
+// }
+
 //--------------------------------------------
 // This part describe the project models
 //--------------------------------------------
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  role   Role   @relation(fields: [roleId], references: [id])
+  id     Int     @id @default(autoincrement())
+  email  String  @unique
+  name   String?
+  role   Role    @relation(fields: [roleId], references: [id])
   roleId Int
+  userProfile  Profile?
+}
+
+model Profile {
+  id      Int    @id @default(autoincrement())
+  address String
+  user    User   @relation(fields: [userId], references: [id])
+  userId  Int    @unique
 }
 
 model Role {
-  id     Int    @id @default(autoincrement())
-  name    String
-  users User[]
+  id     Int     @id @default(autoincrement())
+  name   String
+  users  User[]
   rights Right[]
 }
 
 model Right {
-  id     Int    @id @default(autoincrement())
-  name    String @unique
+  id    Int    @id @default(autoincrement())
+  name  String @unique
   roles Role[]
 }
 

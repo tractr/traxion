@@ -1,4 +1,6 @@
 /* eslint-disable no-continue */
+import { inspect } from 'util';
+
 import { plural } from 'pluralize';
 
 import { createManyManyRelation } from './create-many-many-relation';

@@ -84,7 +84,7 @@ export type Model = {
   name: string;
   pluralName: string;
   fields: Field[];
-  primaryKey: PrimaryKey | null;
+  primaryKey: PrimaryKey;
   documentation?: string;
   metadata?: Record<string, unknown>;
 };

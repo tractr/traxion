@@ -5,6 +5,9 @@ import {
   StructureKind,
 } from 'ts-morph';
 
+import { generateFieldResolverManyRelationStatement } from './field-resolver-many-relation';
+import { generateFieldResolverOneRelationStatement } from './field-resolver-one-relation';
+
 import { isVirtualField, Model } from '@trxn/hapify-core';
 
 export function generateFieldResolvers(
@@ -12,7 +15,6 @@ export function generateFieldResolvers(
 ): MethodDeclarationStructure[] {
   return model.fields.filter(isVirtualField).map((virtualField) => {
     const entityName = camel(model.name);
-    const entityNamePlural = camel(model.pluralName);
     const entityType = pascal(model.name);
     const fieldName = camel(virtualField.name);
     const fieldModel =
@@ -53,41 +55,8 @@ export function generateFieldResolvers(
     }
 
     const statements = isOneRelation
-      ? `
-      let { ${fieldName} } = ${entityName};
-
-      if (typeof ${fieldName} === 'undefined') {
-        if (!${entityName}.${fieldName}Id) {
-          throw new Error('${fieldName}Id not found when fetching ${fieldName}');
-        }
-  
-        const select = new PrismaSelect(info, {
-          // defaultFields: OWNERS_DEFAULT_FIELDS,
-        }).valueOf('${fieldName}', '${fieldType}') as Prisma.${fieldType}Args;
-
-        const findUnique =  await this.${camel(fieldType)}Service.findUnique({
-          where: { id: ${entityName}.${fieldName}Id },
-          ...select,
-        });
-
-        ${fieldName} = findUnique || undefined;
-      }
-      
-      return ${fieldName};`
-      : `let { ${fieldName} } = ${entityName};
-
-      if (typeof ${fieldName} === 'undefined') {
-        const select = new PrismaSelect(info, {
-          // defaultFields: OWNERS_DEFAULT_FIELDS,
-        }).valueOf('${entityNamePlural}.${fieldName}', '${fieldType}') as Prisma.${fieldType}Args;
-
-        ${fieldName} = await this.${camel(fieldType)}Service.findMany({
-          ...findManyArgs,
-          ...select
-        });
-      }
-      
-      return ${fieldName};`;
+      ? generateFieldResolverOneRelationStatement(model, virtualField)
+      : generateFieldResolverManyRelationStatement(model, virtualField);
 
     return {
       kind: StructureKind.Method,

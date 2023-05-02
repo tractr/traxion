@@ -1,5 +1,6 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
+import { ProfileCreateNestedOneWithoutUserInput } from '../profile/profile-create-nested-one-without-user.input';
 
 @InputType()
 export class UserCreateWithoutRoleInput {
@@ -8,4 +9,7 @@ export class UserCreateWithoutRoleInput {
 
   @Field(() => String, { nullable: true })
   name?: string;
+
+  @Field(() => ProfileCreateNestedOneWithoutUserInput, { nullable: true })
+  userProfile?: ProfileCreateNestedOneWithoutUserInput;
 }

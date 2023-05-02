@@ -76,6 +76,11 @@ export function generateImports(
     },
     {
       kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: '@trxn/nestjs-graphql',
+      namedImports: [{ name: 'getPathFromGraphQLResolveInfo' }],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
       moduleSpecifier: 'graphql',
       namedImports: [{ name: 'GraphQLResolveInfo' }],
     },
