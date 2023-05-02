@@ -11,27 +11,27 @@ generator client {
 }
 
 // Nestjs graphql dto generator
-// generator nestjsGraphql {
-//   provider                      = "prisma-nestjs-graphql"
-//   output                        = "../src/nestjs-graphql-dtos"
-//   purgeOutput                   = true
-//   reExport                      = Single
-//   noAtomicOperations            = true
-//   fields_Validator_from         = "class-validator"
-//   fields_Validator_input        = true
-//   useInputType_StringFilter_ALL = "string"
-// }
-//
-// // Nestjs public grahpql resolvers generator
-// generator publicGraphqlResolvers {
-//   provider = "trxn-prisma-nestjs-graphql-resolvers-generator"
-//   output = "../src/nestjs-resolvers"
-//
-//   // Path relative to the output directory
-//   tsConfigFilePath   = "../../tsconfig.app.json"
-//   nestjsServicesImportPath = "./nestjs-services"
-//   nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
-// }
+generator nestjsGraphql {
+  provider                      = "prisma-nestjs-graphql"
+  output                        = "../src/nestjs-graphql-dtos"
+  purgeOutput                   = true
+  reExport                      = Single
+  noAtomicOperations            = true
+  fields_Validator_from         = "class-validator"
+  fields_Validator_input        = true
+  useInputType_StringFilter_ALL = "string"
+}
+
+// Nestjs public grahpql resolvers generator
+generator publicGraphqlResolvers {
+  provider = "trxn-prisma-nestjs-graphql-resolvers-generator"
+  output = "../src/nestjs-resolvers"
+
+  // Path relative to the output directory
+  tsConfigFilePath   = "../../tsconfig.app.json"
+  nestjsServicesImportPath = "./nestjs-services"
+  nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
+}
 //
 // // Nestjs authorizd graphql resolvers generator
 // generator authorizedGraphqlResolvers {

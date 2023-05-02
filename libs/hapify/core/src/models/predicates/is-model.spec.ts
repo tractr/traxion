@@ -1,5 +1,5 @@
-import { Model } from '../model';
 import { isModel } from './is-model';
+import { Model } from '../model';
 
 describe('isModel', () => {
   it('should return true if model is valid', () => {

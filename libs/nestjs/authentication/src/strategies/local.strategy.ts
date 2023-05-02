@@ -13,9 +13,6 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     super(strategyOptionsService.localStrategyOptions);
   }
 
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   async validate(_req: never, login: string, password: string) {
     const user = await this.authenticationService.validateUser(login, password);
     if (!user) {

@@ -1,9 +1,9 @@
 import { kebab, pascal } from 'case';
 import { Project } from 'ts-morph';
 
-import { GraphqlResolverCaslImportPathConfig } from '../config.type';
 import { generateResolverDecorators } from './decorators.generator';
 import { generateImports } from './imports.generator';
+import { GraphqlResolverCaslImportPathConfig } from '../config.type';
 
 import { Model } from '@trxn/hapify-core';
 

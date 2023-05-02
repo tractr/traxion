@@ -18,23 +18,14 @@ export class LoggerService extends Logger implements NestjsLoggerService {
   public ctx?: string;
   public metadata: Metadata = {};
 
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   public setContext(context: string) {
     this.ctx = context;
   }
 
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   public setMetadata(metadata: Metadata) {
     this.metadata = metadata;
   }
 
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   public log(
     message: Message | (Message & Metadata),
     context: Context | (Context & Metadata) | Metadata = {},
@@ -52,9 +43,6 @@ export class LoggerService extends Logger implements NestjsLoggerService {
     return this.super('log', msg, meta, ctx);
   }
 
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   public error(
     messageOrError: Error | Message | (Message & Metadata),
     contextOrStack: Context | (Context & Metadata) | Metadata = {},
@@ -97,9 +85,6 @@ export class LoggerService extends Logger implements NestjsLoggerService {
     return this.super('error', msg, meta, ctx);
   }
 
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   public warn(
     message: Message | (Message & Metadata),
     context: Context | (Context & Metadata) | Metadata = {},
@@ -118,9 +103,6 @@ export class LoggerService extends Logger implements NestjsLoggerService {
     return this.super('warn', msg, meta, ctx);
   }
 
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   public debug(
     message: Message | (Message & Metadata),
     context: Context | (Context & Metadata) | Metadata = {},
@@ -139,9 +121,6 @@ export class LoggerService extends Logger implements NestjsLoggerService {
     return this.super('debug', msg, meta, ctx);
   }
 
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   public verbose(
     message: Message | (Message & Metadata),
     context: Context | (Context & Metadata) | Metadata = {},
@@ -160,9 +139,6 @@ export class LoggerService extends Logger implements NestjsLoggerService {
     return this.super('verbose', msg, meta, ctx);
   }
 
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   protected extractMessageContextAndMetaFromInterface(
     message: Message | (Message & Metadata),
     context: Context | (Context & Metadata) | Metadata,
@@ -205,9 +181,6 @@ export class LoggerService extends Logger implements NestjsLoggerService {
     };
   }
 
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   protected super(
     method: LogLevel,
     message: string,

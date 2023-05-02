@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { hasSomeFieldFactory } from './factories';
 import {
   BaseField,
   Constraints,
@@ -10,7 +11,6 @@ import {
   PrimaryField,
   VirtualField,
 } from '../fields';
-import { hasSomeFieldFactory } from './factories';
 
 /**
  * One-to-many relation

@@ -1,9 +1,13 @@
-import { constant, pascal } from 'case';
+import { pascal } from 'case';
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
 import { GraphqlResolverImportPathConfig } from '../../config.type';
 
-import { getRelatedModelsWithoutSelf, Model } from '@trxn/hapify-core';
+import {
+  getAllModelsFromRelation,
+  getRelatedModelsWithoutSelf,
+  Model,
+} from '@trxn/hapify-core';
 import { resolveDynamicPath } from '@trxn/hapify-devkit';
 
 export function generateImports(
@@ -11,7 +15,6 @@ export function generateImports(
   importPaths: GraphqlResolverImportPathConfig,
 ): ImportDeclarationStructure[] {
   const modelPascal = pascal(model.name);
-  const modelConstant = constant(model.name);
 
   return [
     {
@@ -27,6 +30,9 @@ export function generateImports(
         { name: `CreateOne${modelPascal}Args` },
         { name: `UpdateOne${modelPascal}Args` },
         { name: `DeleteOne${modelPascal}Args` },
+        ...getAllModelsFromRelation(model).map((relatedModel) => ({
+          name: `FindMany${pascal(relatedModel.name)}Args`,
+        })),
       ],
     },
     {
@@ -34,9 +40,10 @@ export function generateImports(
       moduleSpecifier: resolveDynamicPath(importPaths.nestjsServices, '../..'),
       namedImports: [
         { name: `${modelPascal}Service` },
-        { name: `${modelConstant}_SERVICE` },
         { name: `${modelPascal}DefaultService` },
-        { name: `${modelConstant}_DEFAULT_SERVICE` },
+        ...getAllModelsFromRelation(model).map((relatedModel) => ({
+          name: `${pascal(relatedModel.name)}Service`,
+        })),
       ],
     },
     {
