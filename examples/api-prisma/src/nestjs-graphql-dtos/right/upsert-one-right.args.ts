@@ -7,16 +7,15 @@ import { RightUpdateInput } from './right-update.input';
 
 @ArgsType()
 export class UpsertOneRightArgs {
+  @Field(() => RightWhereUniqueInput, { nullable: false })
+  @Type(() => RightWhereUniqueInput)
+  where!: RightWhereUniqueInput;
 
-    @Field(() => RightWhereUniqueInput, {nullable:false})
-    @Type(() => RightWhereUniqueInput)
-    where!: RightWhereUniqueInput;
+  @Field(() => RightCreateInput, { nullable: false })
+  @Type(() => RightCreateInput)
+  create!: RightCreateInput;
 
-    @Field(() => RightCreateInput, {nullable:false})
-    @Type(() => RightCreateInput)
-    create!: RightCreateInput;
-
-    @Field(() => RightUpdateInput, {nullable:false})
-    @Type(() => RightUpdateInput)
-    update!: RightUpdateInput;
+  @Field(() => RightUpdateInput, { nullable: false })
+  @Type(() => RightUpdateInput)
+  update!: RightUpdateInput;
 }

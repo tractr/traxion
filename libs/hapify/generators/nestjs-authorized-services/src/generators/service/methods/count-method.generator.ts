@@ -13,17 +13,19 @@ import { Model } from '@trxn/hapify-core';
 export const generateCountMethod = (
   model: Model,
 ): MethodDeclarationStructure => {
+  const modelCamel = camel(model.name);
+  const modelPascal = pascal(model.name);
+
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
-      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}CountArgs>`,
+      type: `Prisma.SelectSubset<T, Prisma.${modelPascal}CountArgs>`,
     },
     {
+      name: 'abilities',
       kind: StructureKind.Parameter,
-      name: 'prisma',
-      type: `Prisma.${pascal(model.name)}Delegate<undefined>`,
-      initializer: `this.prismaClient.${camel(model.name)}`,
+      type: 'AppAbility',
     },
   ];
 
@@ -31,31 +33,7 @@ export const generateCountMethod = (
     {
       name: 'T',
       kind: StructureKind.TypeParameter,
-      constraint: `Prisma.${pascal(model.name)}CountArgs`,
-    },
-  ];
-
-  const docs: JSDocStructure[] = [
-    {
-      kind: StructureKind.JSDoc,
-      description: `
-      Count the number of ${pascal(model.name)}.
-      Note, that providing 'undefined' is treated as the value not being there.
-      Read more here: https://pris.ly/d/null-undefined
-      @param {${pascal(
-        model.name,
-      )}CountArgs} args - Arguments to filter ${pascal(model.name)}s to count.
-      @example
-      // Count one ${pascal(model.name)}
-      const ${pascal(model.name)} = await this.${camel(
-        model.name,
-      )}Service.count({
-        data: {
-          // ... data to count a ${pascal(model.name)}
-        }
-      })
-    
-    `,
+      constraint: `Prisma.${modelPascal}CountArgs`,
     },
   ];
 
@@ -65,7 +43,6 @@ export const generateCountMethod = (
     name: 'count',
     typeParameters,
     parameters,
-    statements: `return prisma.count<T>(args);`,
-    docs,
+    statements: `return this.${modelCamel}Service.count<T>(args);`,
   };
 };

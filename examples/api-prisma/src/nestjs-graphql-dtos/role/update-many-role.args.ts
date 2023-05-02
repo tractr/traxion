@@ -6,12 +6,11 @@ import { RoleWhereInput } from './role-where.input';
 
 @ArgsType()
 export class UpdateManyRoleArgs {
+  @Field(() => RoleUpdateManyMutationInput, { nullable: false })
+  @Type(() => RoleUpdateManyMutationInput)
+  data!: RoleUpdateManyMutationInput;
 
-    @Field(() => RoleUpdateManyMutationInput, {nullable:false})
-    @Type(() => RoleUpdateManyMutationInput)
-    data!: RoleUpdateManyMutationInput;
-
-    @Field(() => RoleWhereInput, {nullable:true})
-    @Type(() => RoleWhereInput)
-    where?: RoleWhereInput;
+  @Field(() => RoleWhereInput, { nullable: true })
+  @Type(() => RoleWhereInput)
+  where?: RoleWhereInput;
 }

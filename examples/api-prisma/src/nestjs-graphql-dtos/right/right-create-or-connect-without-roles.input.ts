@@ -6,12 +6,11 @@ import { RightCreateWithoutRolesInput } from './right-create-without-roles.input
 
 @InputType()
 export class RightCreateOrConnectWithoutRolesInput {
+  @Field(() => RightWhereUniqueInput, { nullable: false })
+  @Type(() => RightWhereUniqueInput)
+  where!: RightWhereUniqueInput;
 
-    @Field(() => RightWhereUniqueInput, {nullable:false})
-    @Type(() => RightWhereUniqueInput)
-    where!: RightWhereUniqueInput;
-
-    @Field(() => RightCreateWithoutRolesInput, {nullable:false})
-    @Type(() => RightCreateWithoutRolesInput)
-    create!: RightCreateWithoutRolesInput;
+  @Field(() => RightCreateWithoutRolesInput, { nullable: false })
+  @Type(() => RightCreateWithoutRolesInput)
+  create!: RightCreateWithoutRolesInput;
 }

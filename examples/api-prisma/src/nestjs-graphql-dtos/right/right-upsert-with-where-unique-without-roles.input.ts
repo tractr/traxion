@@ -7,16 +7,15 @@ import { RightCreateWithoutRolesInput } from './right-create-without-roles.input
 
 @InputType()
 export class RightUpsertWithWhereUniqueWithoutRolesInput {
+  @Field(() => RightWhereUniqueInput, { nullable: false })
+  @Type(() => RightWhereUniqueInput)
+  where!: RightWhereUniqueInput;
 
-    @Field(() => RightWhereUniqueInput, {nullable:false})
-    @Type(() => RightWhereUniqueInput)
-    where!: RightWhereUniqueInput;
+  @Field(() => RightUpdateWithoutRolesInput, { nullable: false })
+  @Type(() => RightUpdateWithoutRolesInput)
+  update!: RightUpdateWithoutRolesInput;
 
-    @Field(() => RightUpdateWithoutRolesInput, {nullable:false})
-    @Type(() => RightUpdateWithoutRolesInput)
-    update!: RightUpdateWithoutRolesInput;
-
-    @Field(() => RightCreateWithoutRolesInput, {nullable:false})
-    @Type(() => RightCreateWithoutRolesInput)
-    create!: RightCreateWithoutRolesInput;
+  @Field(() => RightCreateWithoutRolesInput, { nullable: false })
+  @Type(() => RightCreateWithoutRolesInput)
+  create!: RightCreateWithoutRolesInput;
 }

@@ -9,25 +9,24 @@ import { RoleMaxAggregate } from './role-max-aggregate.output';
 
 @ObjectType()
 export class RoleGroupBy {
+  @Field(() => Int, { nullable: false })
+  id!: number;
 
-    @Field(() => Int, {nullable:false})
-    id!: number;
+  @Field(() => String, { nullable: false })
+  name!: string;
 
-    @Field(() => String, {nullable:false})
-    name!: string;
+  @Field(() => RoleCountAggregate, { nullable: true })
+  _count?: RoleCountAggregate;
 
-    @Field(() => RoleCountAggregate, {nullable:true})
-    _count?: RoleCountAggregate;
+  @Field(() => RoleAvgAggregate, { nullable: true })
+  _avg?: RoleAvgAggregate;
 
-    @Field(() => RoleAvgAggregate, {nullable:true})
-    _avg?: RoleAvgAggregate;
+  @Field(() => RoleSumAggregate, { nullable: true })
+  _sum?: RoleSumAggregate;
 
-    @Field(() => RoleSumAggregate, {nullable:true})
-    _sum?: RoleSumAggregate;
+  @Field(() => RoleMinAggregate, { nullable: true })
+  _min?: RoleMinAggregate;
 
-    @Field(() => RoleMinAggregate, {nullable:true})
-    _min?: RoleMinAggregate;
-
-    @Field(() => RoleMaxAggregate, {nullable:true})
-    _max?: RoleMaxAggregate;
+  @Field(() => RoleMaxAggregate, { nullable: true })
+  _max?: RoleMaxAggregate;
 }

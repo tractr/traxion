@@ -13,17 +13,19 @@ import { Model } from '@trxn/hapify-core';
 export const generateUpdateMethod = (
   model: Model,
 ): MethodDeclarationStructure => {
+  const modelCamel = camel(model.name);
+  const modelPascal = pascal(model.name);
+
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
-      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}UpdateArgs>`,
+      type: `Prisma.SelectSubset<T, Prisma.${modelPascal}UpdateArgs>`,
     },
     {
+      name: 'abilities',
       kind: StructureKind.Parameter,
-      name: 'prisma',
-      type: `Prisma.${pascal(model.name)}Delegate<undefined>`,
-      initializer: `this.prismaClient.${camel(model.name)}`,
+      type: 'AppAbility',
     },
   ];
 
@@ -31,31 +33,7 @@ export const generateUpdateMethod = (
     {
       name: 'T',
       kind: StructureKind.TypeParameter,
-      constraint: `Prisma.${pascal(model.name)}UpdateArgs`,
-    },
-  ];
-
-  const docs: JSDocStructure[] = [
-    {
-      kind: StructureKind.JSDoc,
-      description: `
-       Update a ${pascal(model.name)}.
-       @param {${pascal(
-         model.name,
-       )}UpdateArgs} args - Arguments to update a ${pascal(model.name)}.
-       @example
-       // Update one ${pascal(model.name)}
-       const ${camel(model.name)} = await this.${camel(
-        model.name,
-      )}Service.update({
-         where: {
-           // ... provide filter here
-         },
-         data: {
-           // ... provide data here
-         }
-       })
-    `,
+      constraint: `Prisma.${modelPascal}UpdateArgs`,
     },
   ];
 
@@ -65,7 +43,6 @@ export const generateUpdateMethod = (
     name: 'update',
     typeParameters,
     parameters,
-    statements: `return prisma.update<T>(args);`,
-    docs,
+    statements: `return this.${modelCamel}Service.findUnique<T>(args);`,
   };
 };

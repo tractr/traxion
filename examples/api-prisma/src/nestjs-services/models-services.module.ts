@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-
 import { ConfigurableModuleClass } from './models-services.module-definition';
 import { MODELS_SERVICES_PROVIDERS } from './models-services.providers';
 

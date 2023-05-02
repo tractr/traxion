@@ -9,23 +9,22 @@ import { RightScalarFieldEnum } from './right-scalar-field.enum';
 
 @ArgsType()
 export class FindFirstRightOrThrowArgs {
+  @Field(() => RightWhereInput, { nullable: true })
+  @Type(() => RightWhereInput)
+  where?: RightWhereInput;
 
-    @Field(() => RightWhereInput, {nullable:true})
-    @Type(() => RightWhereInput)
-    where?: RightWhereInput;
+  @Field(() => [RightOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<RightOrderByWithRelationInput>;
 
-    @Field(() => [RightOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<RightOrderByWithRelationInput>;
+  @Field(() => RightWhereUniqueInput, { nullable: true })
+  cursor?: RightWhereUniqueInput;
 
-    @Field(() => RightWhereUniqueInput, {nullable:true})
-    cursor?: RightWhereUniqueInput;
+  @Field(() => Int, { nullable: true })
+  take?: number;
 
-    @Field(() => Int, {nullable:true})
-    take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
 
-    @Field(() => Int, {nullable:true})
-    skip?: number;
-
-    @Field(() => [RightScalarFieldEnum], {nullable:true})
-    distinct?: Array<keyof typeof RightScalarFieldEnum>;
+  @Field(() => [RightScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof RightScalarFieldEnum>;
 }
