@@ -26,20 +26,20 @@
       "@trxn/hapify-generator-graphql-resolvers-casl": [
         "libs/hapify/generators/graphql-resolvers-casl/src/index.ts"
       ],
+      "@trxn/hapify-generators-casl-config": [
+        "libs/hapify/generators/casl-config/src/index.ts"
+      ],
       "@trxn/hapify-generators-nestjs-services": [
         "libs/hapify/generators/nestjs-services/src/index.ts"
+      ],
+      "@trxn/hapify-prisma-casl-generator": [
+        "libs/hapify/prisma/casl-generator/src/index.ts"
       ],
       "@trxn/hapify-prisma-nestjs-graphql-resolvers-generator": [
         "libs/hapify/prisma/nestjs-graphql-resolvers-generator/src/index.ts"
       ],
       "@trxn/hapify-prisma-nestjs-services-generator": [
         "libs/hapify/prisma/nestjs-services-generator/src/index.ts"
-      ],
-      "@trxn/hapify-generators-casl-config": [
-        "libs/hapify/generators/casl-config/src/index.ts"
-      ],
-      "@trxn/hapify-prisma-casl-generator": [
-        "libs/hapify/prisma/casl-generator/src/index.ts"
       ],
       "@trxn/nestjs-authentication": [
         "libs/nestjs/authentication/src/index.ts"

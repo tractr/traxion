@@ -1,5 +1,12 @@
 {
-  "name": "@trxn/hapify/generators/casl-config",
-  "version": "0.0.1",
-  "type": "commonjs"
+  "name": "@trxn/hapify-generators-casl-config",
+  "version": "2.1.21",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/traxion"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }
