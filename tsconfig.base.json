@@ -35,6 +35,12 @@
       "@trxn/hapify-prisma-nestjs-services-generator": [
         "libs/hapify/prisma/nestjs-services-generator/src/index.ts"
       ],
+      "@trxn/hapify-generators-casl-config": [
+        "libs/hapify/generators/casl-config/src/index.ts"
+      ],
+      "@trxn/hapify-prisma-casl-generator": [
+        "libs/hapify/prisma/casl-generator/src/index.ts"
+      ],
       "@trxn/nestjs-authentication": [
         "libs/nestjs/authentication/src/index.ts"
       ],
