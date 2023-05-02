@@ -23,6 +23,9 @@
       "@trxn/hapify-generator-graphql-resolvers": [
         "libs/hapify/generators/graphql-resolvers/src/index.ts"
       ],
+      "@trxn/hapify-generator-graphql-resolvers-casl": [
+        "libs/hapify/generators/graphql-resolvers-casl/src/index.ts"
+      ],
       "@trxn/hapify-generators-nestjs-services": [
         "libs/hapify/generators/nestjs-services/src/index.ts"
       ],
@@ -51,7 +54,10 @@
         "libs/nestjs/reset-password/src/index.ts"
       ],
       "@trxn/nestjs-user": ["libs/nestjs/user/src/index.ts"],
-      "@trxn/nestjs-winston": ["libs/nestjs/winston/src/index.ts"]
+      "@trxn/nestjs-winston": ["libs/nestjs/winston/src/index.ts"],
+      "@trxn/prisma-nestjs-graphql-resolvers-casl-generator": [
+        "libs/hapify/prisma/nestjs-graphql-resolvers-casl-generator/src/index.ts"
+      ]
     },
     "resolveJsonModule": true,
     "rootDir": ".",

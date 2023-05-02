@@ -8,6 +8,9 @@ import { IS_PUBLIC_KEY } from '@trxn/nestjs-core';
 export class OnlyPublicGuard implements CanActivate {
   constructor(private readonly reflector: Reflector) {}
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {

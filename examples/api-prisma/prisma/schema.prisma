@@ -22,8 +22,8 @@ generator nestjsGraphql {
   useInputType_StringFilter_ALL = "string"
 }
 
-// Nestjs grahpql resolvers generator
-generator graphqlResolvers {
+// Nestjs public grahpql resolvers generator
+generator publicGraphqlResolvers {
   provider = "trxn-prisma-nestjs-graphql-resolvers-generator"
   output = "../src/nestjs-resolvers"
 
@@ -31,6 +31,18 @@ generator graphqlResolvers {
   tsConfigFilePath   = "../../tsconfig.app.json"
   nestjsServicesImportPath = "./nestjs-services"
   nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
+}
+
+// Nestjs authorizd grahpql resolvers generator
+generator authorizedGraphqlResolvers {
+  provider = "trxn-prisma-nestjs-graphql-resolvers-casl-generator"
+  output = "../src/authorized-nestjs-resolvers"
+
+  // Path relative to the output directory
+  tsConfigFilePath   = "../../tsconfig.app.json"
+  nestjsServicesImportPath = "./nestjs-services"
+  nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
+  caslImportPath = "./casl-target"
 }
 
 // Nestjs common services generator

@@ -7,10 +7,10 @@ import {
 } from '@nestjs/common';
 import { Prisma, PrismaClient } from '@prisma/client';
 
-import { MysqlService } from './mysql.service';
-import { PostgresqlService } from './postgresql.service';
 import { MODULE_OPTIONS_TOKEN } from '../database.module-definition';
 import { DatabaseModuleOptions, PrismaClients } from '../interfaces';
+import { MysqlService } from './mysql.service';
+import { PostgresqlService } from './postgresql.service';
 
 export type Provider = 'mysql' | 'postgresql';
 
@@ -57,6 +57,9 @@ export class ManagedPrismaClientsService
     }
   }
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   async onModuleInit(): Promise<void> {
     // Connect to the database
     await Promise.all(
@@ -69,6 +72,9 @@ export class ManagedPrismaClientsService
       });
   }
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   async onModuleDestroy(): Promise<void> {
     // Disconnect all the database
     await Promise.all(
@@ -83,6 +89,9 @@ export class ManagedPrismaClientsService
    * If the prismaClient options is used the PrismaClient instance must configure
    * the log option and set the emit config to event to be able to use the extras.
    */
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   addExtras(client: PrismaClient) {
     // Prisma do not throw if we try to add a listener on an event that is not configured
     // but the types say that we can't add a listener on an event that is not configured.
@@ -140,6 +149,9 @@ export class ManagedPrismaClientsService
     return prismaClient;
   }
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   getProvider(client: PrismaClient): Provider {
     // eslint-disable-next-line no-underscore-dangle
     return (
@@ -149,6 +161,9 @@ export class ManagedPrismaClientsService
     )._getProvider();
   }
 
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   async truncateDatabase(
     client: PrismaClient,
     schemaName?: (typeof Prisma.ModelName)[keyof typeof Prisma.ModelName],

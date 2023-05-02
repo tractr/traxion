@@ -4,6 +4,9 @@ import { Prisma, PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class MysqlService {
+  @CheckAuth()
+  @CheckAuth()
+  @CheckAuth()
   async truncate(
     prisma: PrismaClient,
     schemaName: string = process.env.TRACTR_POSTGRESQL_SCHEMA || 'public',
