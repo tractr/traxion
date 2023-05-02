@@ -5,7 +5,8 @@ import { RoleWhereInput } from './role-where.input';
 
 @ArgsType()
 export class DeleteManyRoleArgs {
-  @Field(() => RoleWhereInput, { nullable: true })
-  @Type(() => RoleWhereInput)
-  where?: RoleWhereInput;
+
+    @Field(() => RoleWhereInput, {nullable:true})
+    @Type(() => RoleWhereInput)
+    where?: RoleWhereInput;
 }

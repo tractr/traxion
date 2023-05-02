@@ -6,11 +6,12 @@ import { RightUpdateManyMutationInput } from './right-update-many-mutation.input
 
 @InputType()
 export class RightUpdateManyWithWhereWithoutRolesInput {
-  @Field(() => RightScalarWhereInput, { nullable: false })
-  @Type(() => RightScalarWhereInput)
-  where!: RightScalarWhereInput;
 
-  @Field(() => RightUpdateManyMutationInput, { nullable: false })
-  @Type(() => RightUpdateManyMutationInput)
-  data!: RightUpdateManyMutationInput;
+    @Field(() => RightScalarWhereInput, {nullable:false})
+    @Type(() => RightScalarWhereInput)
+    where!: RightScalarWhereInput;
+
+    @Field(() => RightUpdateManyMutationInput, {nullable:false})
+    @Type(() => RightUpdateManyMutationInput)
+    data!: RightUpdateManyMutationInput;
 }

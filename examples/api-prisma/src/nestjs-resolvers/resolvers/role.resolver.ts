@@ -1,133 +1,111 @@
-import { Inject } from '@nestjs/common';
-import {
-  Args,
-  Info,
-  Mutation,
-  Parent,
-  Query,
-  ResolveField,
-  Resolver,
-} from '@nestjs/graphql';
-import { PrismaSelect } from '@paljs/plugins';
-import { Prisma } from '@prisma/client';
-import { GraphQLResolveInfo } from 'graphql';
-
-import {
-  CreateOneRoleArgs,
-  DeleteOneRoleArgs,
-  FindManyRoleArgs,
-  FindUniqueRoleArgs,
-  Right,
-  Role,
-  UpdateOneRoleArgs,
-  User,
-} from '../../nestjs-graphql-dtos';
-import { ROLE_SERVICE, RoleService } from '../../nestjs-services';
-import { FindManyRoleOutput } from '../dtos';
+import { Role, User, Right, FindUniqueRoleArgs, FindManyRoleArgs, CreateOneRoleArgs, UpdateOneRoleArgs, DeleteOneRoleArgs } from "../../nestjs-graphql-dtos";
+import { RoleService, ROLE_SERVICE, RoleDefaultService, ROLE_DEFAULT_SERVICE } from "../../nestjs-services";
+import { Inject } from "@nestjs/common";
+import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import { PrismaSelect } from "@paljs/plugins";
+import { GraphQLResolveInfo } from "graphql";
+import { FindManyRoleOutput } from "../dtos";
 
 @Resolver(() => Role)
 export class RoleResolver {
-  constructor(
-    @Inject(ROLE_SERVICE) private readonly roleService: RoleService,
-  ) {}
+    constructor(@Inject(ROLE_SERVICE) private readonly roleService: RoleService, @Inject(ROLE_DEFAULT_SERVICE) private readonly roleDefaultService: RoleDefaultService) {
+    }
 
-  /** Query for a unique role */
-  @Query(() => Role, { nullable: true })
-  async findUniqueRole(
-    @Info() info: GraphQLResolveInfo,
-    @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueRoleArgs,
-  ) {
-    const select = new PrismaSelect(info).value as Prisma.RoleArgs;
-    const role = await this.roleService.findUnique({ where, ...select });
-    return role;
-  }
+    /** Query for a unique role */
+    @Query(() => Role, { nullable: true })
+    async findUniqueRole(@Info() info: GraphQLResolveInfo, @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueRoleArgs) {
 
-  /** Query for multiple roles. */
-  @Query(() => FindManyRoleOutput)
-  async findManyRoles(
-    @Info() info: GraphQLResolveInfo,
-    @Args({ nullable: true })
-    {
-      where,
-      cursor,
-      distinct,
-      orderBy = [{ id: 'asc' }],
-      skip = 0,
-      take = 100,
-    }: FindManyRoleArgs,
-  ) {
-    const select = new PrismaSelect(info).valueOf(
-      'roles',
-      'Role',
-    ) as Prisma.RoleArgs;
+            const select = new PrismaSelect(info).value;
+            const role =  await this.roleService.findUnique({where, ...select});
+            return role;
+          
+    }
 
-    const roles = await this.roleService.findMany({
-      ...select,
-      where,
-      cursor,
-      distinct,
-      orderBy,
-      skip,
-      take: take + 1,
-    });
+    /** Query for multiple roles. */
+    @Query(() => FindManyRoleOutput)
+    async findManyRoles(@Info() info: GraphQLResolveInfo, @Args({ nullable: true }) 
+                {
+                  where,
+                  cursor,
+                  distinct,
+                  orderBy = [{ id: 'asc' }],
+                  skip = 0,
+                  take = 100,
+                }
+              : FindManyRoleArgs) {
 
-    const count = await this.roleService.count({
-      where,
-    });
+            const select = new PrismaSelect(info).valueOf('roles', 'Role');
 
-    return {
-      roles: roles.slice(0, take),
-      count,
-      hasNextPage: typeof roles[take] !== 'undefined',
-    };
-  }
+            const roles = await this.roleService.findMany({
+              ...select,
+              where,
+              cursor,
+              distinct,
+              orderBy,
+              skip,
+              take: take + 1,
+            });
 
-  /** Create a single role. */
-  @Mutation(() => Role, { nullable: true })
-  async createRole(
-    @Info() info: GraphQLResolveInfo,
-    @Args() { data }: CreateOneRoleArgs,
-  ) {
-    const select = new PrismaSelect(info).value as Prisma.RoleArgs;
+            const count = await this.roleService.count({
+              where,
+            });
 
-    const role = await this.roleService.create({ data, ...select });
+            return {
+              roles: roles.slice(0, take),
+              count,
+              hasNextPage: typeof roles[take] !== 'undefined',
+            };
+          
+    }
 
-    return role;
-  }
+    /** Create a single role. */
+    @Mutation(() => Role, { nullable: true })
+    async createRole(@Info() info: GraphQLResolveInfo, @Args() { data: rawData }: CreateOneRoleArgs) {
 
-  /** Update a single role. */
-  @Mutation(() => Role, { nullable: true })
-  async updateRole(
-    @Info() info: GraphQLResolveInfo,
-    @Args() { data, where }: UpdateOneRoleArgs,
-  ) {
-    const select = new PrismaSelect(info).value as Prisma.RoleArgs;
+            const select = new PrismaSelect(info).value;
 
-    const role = await this.roleService.update({ where, data, ...select });
+            const data = {
+              ...this.roleDefaultService.getDefaultInternals(),
+              ...rawData,
+            };
 
-    return role;
-  }
+            const role = await this.roleService.create({ data, ...select });
 
-  /** Delete a single Role. */
-  @Mutation(() => Role, { nullable: true })
-  async deleteRole(
-    @Info() info: GraphQLResolveInfo,
-    @Args() { where }: DeleteOneRoleArgs,
-  ) {
-    const select = new PrismaSelect(info).value as Prisma.RoleArgs;
+            return role;
+          
+    }
 
-    const role = await this.roleService.delete({ where, ...select });
+    /** Update a single role. */
+    @Mutation(() => Role, { nullable: true })
+    async updateRole(@Info() info: GraphQLResolveInfo, @Args() { data, where }: UpdateOneRoleArgs) {
 
-    return role;
-  }
+            const select = new PrismaSelect(info).value;
 
-  @ResolveField(() => User)
-  users(@Parent() role: Role) {
-    return role.users;
-  }
+            const role = await this.roleService.update({ where, data, ...select });
 
-  @ResolveField(() => Right)
-  rights(@Parent() role: Role) {
-    return role.rights;
-  }
+            return role;
+          
+    }
+
+    /** Delete a single Role. */
+    @Mutation(() => Role, { nullable: true })
+    async deleteRole(@Info() info: GraphQLResolveInfo, @Args() { where }: DeleteOneRoleArgs) {
+
+            const select = new PrismaSelect(info).value;
+
+            const role = await this.roleService.delete({ where, ...select });
+
+            return role;
+          
+    }
+
+    @ResolveField(() => User)
+    users(@Parent() role: Role) {
+        return role.users;
+    }
+
+    @ResolveField(() => Right)
+    rights(@Parent() role: Role) {
+        return role.rights;
+    }
 }

@@ -5,10 +5,11 @@ import { RightCreateManyInput } from './right-create-many.input';
 
 @ArgsType()
 export class CreateManyRightArgs {
-  @Field(() => [RightCreateManyInput], { nullable: false })
-  @Type(() => RightCreateManyInput)
-  data!: Array<RightCreateManyInput>;
 
-  @Field(() => Boolean, { nullable: true })
-  skipDuplicates?: boolean;
+    @Field(() => [RightCreateManyInput], {nullable:false})
+    @Type(() => RightCreateManyInput)
+    data!: Array<RightCreateManyInput>;
+
+    @Field(() => Boolean, {nullable:true})
+    skipDuplicates?: boolean;
 }

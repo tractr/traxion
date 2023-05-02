@@ -8,22 +8,23 @@ import { RoleWhereInput } from './role-where.input';
 
 @ArgsType()
 export class FindManyRoleArgs {
-  @Field(() => RoleWhereInput, { nullable: true })
-  @Type(() => RoleWhereInput)
-  where?: RoleWhereInput;
 
-  @Field(() => [RoleOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<RoleOrderByWithRelationInput>;
+    @Field(() => RoleWhereInput, {nullable:true})
+    @Type(() => RoleWhereInput)
+    where?: RoleWhereInput;
 
-  @Field(() => RoleWhereUniqueInput, { nullable: true })
-  cursor?: RoleWhereUniqueInput;
+    @Field(() => [RoleOrderByWithRelationInput], {nullable:true})
+    orderBy?: Array<RoleOrderByWithRelationInput>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number;
+    @Field(() => RoleWhereUniqueInput, {nullable:true})
+    cursor?: RoleWhereUniqueInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number;
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => [RoleScalarFieldEnum], { nullable: true })
-  distinct?: Array<keyof typeof RoleScalarFieldEnum>;
+    @Field(() => Int, {nullable:true})
+    skip?: number;
+
+    @Field(() => [RoleScalarFieldEnum], {nullable:true})
+    distinct?: Array<keyof typeof RoleScalarFieldEnum>;
 }

@@ -5,12 +5,13 @@ import { RoleOrderByRelationAggregateInput } from '../role/role-order-by-relatio
 
 @InputType()
 export class RightOrderByWithRelationInput {
-  @Field(() => SortOrder, { nullable: true })
-  id?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  name?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    id?: keyof typeof SortOrder;
 
-  @Field(() => RoleOrderByRelationAggregateInput, { nullable: true })
-  roles?: RoleOrderByRelationAggregateInput;
+    @Field(() => SortOrder, {nullable:true})
+    name?: keyof typeof SortOrder;
+
+    @Field(() => RoleOrderByRelationAggregateInput, {nullable:true})
+    roles?: RoleOrderByRelationAggregateInput;
 }

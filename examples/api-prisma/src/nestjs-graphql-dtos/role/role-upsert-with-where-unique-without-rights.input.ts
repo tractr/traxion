@@ -7,15 +7,16 @@ import { RoleWhereUniqueInput } from './role-where-unique.input';
 
 @InputType()
 export class RoleUpsertWithWhereUniqueWithoutRightsInput {
-  @Field(() => RoleWhereUniqueInput, { nullable: false })
-  @Type(() => RoleWhereUniqueInput)
-  where!: RoleWhereUniqueInput;
 
-  @Field(() => RoleUpdateWithoutRightsInput, { nullable: false })
-  @Type(() => RoleUpdateWithoutRightsInput)
-  update!: RoleUpdateWithoutRightsInput;
+    @Field(() => RoleWhereUniqueInput, {nullable:false})
+    @Type(() => RoleWhereUniqueInput)
+    where!: RoleWhereUniqueInput;
 
-  @Field(() => RoleCreateWithoutRightsInput, { nullable: false })
-  @Type(() => RoleCreateWithoutRightsInput)
-  create!: RoleCreateWithoutRightsInput;
+    @Field(() => RoleUpdateWithoutRightsInput, {nullable:false})
+    @Type(() => RoleUpdateWithoutRightsInput)
+    update!: RoleUpdateWithoutRightsInput;
+
+    @Field(() => RoleCreateWithoutRightsInput, {nullable:false})
+    @Type(() => RoleCreateWithoutRightsInput)
+    create!: RoleCreateWithoutRightsInput;
 }

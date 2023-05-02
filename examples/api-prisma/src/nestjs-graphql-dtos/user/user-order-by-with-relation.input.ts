@@ -15,8 +15,8 @@ export class UserOrderByWithRelationInput {
   name?: keyof typeof SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
-  roleId?: keyof typeof SortOrder;
+  password?: keyof typeof SortOrder;
 
-  @Field(() => RoleOrderByWithRelationInput, { nullable: true })
-  role?: RoleOrderByWithRelationInput;
+  @Field(() => SortOrder, { nullable: true })
+  roleId?: keyof typeof SortOrder;
 }

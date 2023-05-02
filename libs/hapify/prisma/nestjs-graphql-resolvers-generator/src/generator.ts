@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { inspect } from 'util';
 
 import { generatorHandler } from '@prisma/generator-helper';
 import { logger } from '@prisma/internals';
@@ -6,8 +7,16 @@ import { Project } from 'ts-morph';
 
 import { version } from '../package.json';
 
-import { createSchema } from '@trxn/hapify-core';
-import { convertDmmfToHapifySchemaDeclaration } from '@trxn/hapify-devkit';
+import {
+  createSchema,
+  discoverOwnership,
+  ModelWithOwnership,
+} from '@trxn/hapify-core';
+import {
+  convertDmmfToHapifySchemaDeclaration,
+  getSelectOwnership,
+  getUserModel,
+} from '@trxn/hapify-devkit';
 import { generate as generateNestjsResolvers } from '@trxn/hapify-generator-graphql-resolvers';
 
 export const GENERATOR_NAME = 'Hapify Prisma NestJs/GraphqlResolvers';
@@ -17,6 +26,13 @@ export type GraphqlResolverGeneratorConfig = {
   tsConfigFilePath: string;
   generatedDirectory: string;
 };
+
+function printOwnerships(model: ModelWithOwnership) {
+  model.ownedModels.forEach((ownedModel) => {
+    console.info(`${model.name} owns ${ownedModel.own.name}`);
+    printOwnerships(ownedModel.own);
+  });
+}
 
 export function generate() {
   generatorHandler({
@@ -35,6 +51,7 @@ export function generate() {
         tsConfigFilePath,
         nestjsServicesImportPath,
         nestjsGraphqlDtosImportPath,
+        userModelName,
       } = generator.config;
 
       // Validate the generator configuration
@@ -63,6 +80,16 @@ export function generate() {
 
       try {
         const schema = createSchema(convertDmmfToHapifySchemaDeclaration(dmmf));
+
+        const userModel = getUserModel(schema, userModelName);
+
+        const userWithOwnership = discoverOwnership(userModel, schema);
+
+        printOwnerships(userWithOwnership);
+
+        console.log(
+          inspect(getSelectOwnership(userWithOwnership), false, null, true),
+        );
 
         // Create the graphql resolvers
         generateNestjsResolvers(project, schema, {

@@ -5,15 +5,16 @@ import { RightCount } from './right-count.output';
 
 @ObjectType()
 export class Right {
-  @Field(() => ID, { nullable: false })
-  id!: number;
 
-  @Field(() => String, { nullable: false })
-  name!: string;
+    @Field(() => ID, {nullable:false})
+    id!: number;
 
-  @Field(() => [Role], { nullable: true })
-  roles?: Array<Role>;
+    @Field(() => String, {nullable:false})
+    name!: string;
 
-  @Field(() => RightCount, { nullable: false })
-  _count?: RightCount;
+    @Field(() => [Role], {nullable:true})
+    roles?: Array<Role>;
+
+    @Field(() => RightCount, {nullable:false})
+    _count?: RightCount;
 }

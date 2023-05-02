@@ -50,12 +50,12 @@
     "serve": {
       "configurations": {
         "production": {
-          "buildTarget": "examples-api-prisma:build-custom:production"
+          "buildTarget": "examples-api-prisma:build:production"
         }
       },
       "executor": "@nrwl/js:node",
       "options": {
-        "buildTarget": "examples-api-prisma:build-custom"
+        "buildTarget": "examples-api-prisma:build"
       }
     },
     "test": {

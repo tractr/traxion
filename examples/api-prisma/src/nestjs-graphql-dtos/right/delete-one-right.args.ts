@@ -5,7 +5,8 @@ import { RightWhereUniqueInput } from './right-where-unique.input';
 
 @ArgsType()
 export class DeleteOneRightArgs {
-  @Field(() => RightWhereUniqueInput, { nullable: false })
-  @Type(() => RightWhereUniqueInput)
-  where!: RightWhereUniqueInput;
+
+    @Field(() => RightWhereUniqueInput, {nullable:false})
+    @Type(() => RightWhereUniqueInput)
+    where!: RightWhereUniqueInput;
 }

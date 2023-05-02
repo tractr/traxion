@@ -5,7 +5,8 @@ import { UserCreateInput } from './user-create.input';
 
 @ArgsType()
 export class CreateOneUserArgs {
-  @Field(() => UserCreateInput, { nullable: false })
-  @Type(() => UserCreateInput)
-  data!: UserCreateInput;
+
+    @Field(() => UserCreateInput, {nullable:false})
+    @Type(() => UserCreateInput)
+    data!: UserCreateInput;
 }

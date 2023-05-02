@@ -12,33 +12,27 @@ export function extractMetadataFromDocumentation(
     return {};
   }
 
-  const metadata: Record<string, string> = {};
+  const metadata: Record<string, unknown> = {};
   const lines = documentation.split('\n');
   const docs = [];
 
   for (const line of lines) {
     // @trxn/maxLength: 255
-    const match = line.trim().match(/@trxn\/(\w+): (.*)/);
+    const match = line.trim().match(/^@trxn\/(\w*)(\s*:\s*(.*))?$/);
     if (match) {
-      // [maxLength, '255']
-      const [key, value] = match;
-      metadata[key] = value;
+      // ['@trxn/maxLength: 255', 'maxLength', ': 255', '255']
+      metadata[match[1]] = typeof match[3] === 'undefined' ? true : match[3];
     } else {
       docs.push(line);
     }
   }
 
   for (const validation of validations) {
-    if (!validation(metadata)) {
-      throw new Error('Invalid metadata');
-    }
+    validation(metadata);
   }
 
   return {
-    metadata: transforms.reduce(
-      (acc, transform) => transform(acc),
-      metadata as Record<string, unknown>,
-    ),
+    metadata: transforms.reduce((acc, transform) => transform(acc), metadata),
     documentation: docs.join('\n'),
   };
 }
