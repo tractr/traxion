@@ -96,7 +96,7 @@ services:
     environment:
       POSTGRES_PASSWORD: passwd
       POSTGRES_USER: user
-      POSTGRES_DB: db
+      POSTGRES_DB: demo
     ports:
       - 5432:5432
 ```
