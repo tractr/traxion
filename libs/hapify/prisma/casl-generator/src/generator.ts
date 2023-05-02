@@ -55,9 +55,6 @@ generatorHandler({
       //   output,
       // });
 
-      // TODO: call the generator generator-casl
-
-      console.warn(`🚜 ~ file: generator.ts:68 ~ TODO:`);
       hapifyCaslConfigGenerator(project, schema, {
         output,
         });
