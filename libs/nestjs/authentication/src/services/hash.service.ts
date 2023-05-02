@@ -16,16 +16,10 @@ export class HashService implements EncryptionService {
     this.encryptionService = this.encryptionService || this.bcryptService;
   }
 
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   async hash(value: string): Promise<string> {
     return this.encryptionService.hash(value);
   }
 
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   async compare(value: string, hash: string): Promise<boolean> {
     return this.encryptionService.compare(value, hash);
   }

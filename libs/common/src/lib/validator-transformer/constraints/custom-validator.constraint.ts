@@ -16,9 +16,6 @@ export type IsCustomConstraint<T = any> = (
  */
 @ValidatorConstraint({ name: 'customConstraint', async: false })
 export class CustomConstraint implements ValidatorConstraintInterface {
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   validate(
     propertyValue: string,
     { targetName, constraints, object, property }: ValidationArguments,
@@ -38,9 +35,6 @@ export class CustomConstraint implements ValidatorConstraintInterface {
     });
   }
 
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   defaultMessage(args: ValidationArguments) {
     return `Failed custom constraint on property "${args.property}".`;
   }

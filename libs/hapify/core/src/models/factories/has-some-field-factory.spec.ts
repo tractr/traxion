@@ -1,5 +1,5 @@
-import { Model } from '../model';
 import { hasSomeFieldFactory } from './has-some-field-factory';
+import { Model } from '../model';
 
 describe('HasSomeFieldFactory', () => {
   it('should return a function', () => {

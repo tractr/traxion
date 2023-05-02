@@ -1,6 +1,7 @@
+import { join } from 'path';
+
 import { generatorHandler } from '@prisma/generator-helper';
 import { logger } from '@prisma/internals';
-import { join } from 'path';
 import { Project } from 'ts-morph';
 
 import { version } from '../package.json';
