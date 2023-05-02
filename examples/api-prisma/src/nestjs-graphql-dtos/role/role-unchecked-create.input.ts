@@ -6,19 +6,16 @@ import { RightUncheckedCreateNestedManyWithoutRolesInput } from '../right/right-
 
 @InputType()
 export class RoleUncheckedCreateInput {
-  @Field(() => Int, { nullable: true })
-  id?: number;
 
-  @Field(() => String, { nullable: false })
-  name!: string;
+    @Field(() => Int, {nullable:true})
+    id?: number;
 
-  @Field(() => UserUncheckedCreateNestedManyWithoutRoleInput, {
-    nullable: true,
-  })
-  users?: UserUncheckedCreateNestedManyWithoutRoleInput;
+    @Field(() => String, {nullable:false})
+    name!: string;
 
-  @Field(() => RightUncheckedCreateNestedManyWithoutRolesInput, {
-    nullable: true,
-  })
-  rights?: RightUncheckedCreateNestedManyWithoutRolesInput;
+    @Field(() => UserUncheckedCreateNestedManyWithoutRoleInput, {nullable:true})
+    users?: UserUncheckedCreateNestedManyWithoutRoleInput;
+
+    @Field(() => RightUncheckedCreateNestedManyWithoutRolesInput, {nullable:true})
+    rights?: RightUncheckedCreateNestedManyWithoutRolesInput;
 }

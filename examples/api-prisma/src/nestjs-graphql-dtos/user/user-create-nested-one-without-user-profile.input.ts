@@ -7,15 +7,16 @@ import { UserWhereUniqueInput } from './user-where-unique.input';
 
 @InputType()
 export class UserCreateNestedOneWithoutUserProfileInput {
-  @Field(() => UserCreateWithoutUserProfileInput, { nullable: true })
-  @Type(() => UserCreateWithoutUserProfileInput)
-  create?: UserCreateWithoutUserProfileInput;
 
-  @Field(() => UserCreateOrConnectWithoutUserProfileInput, { nullable: true })
-  @Type(() => UserCreateOrConnectWithoutUserProfileInput)
-  connectOrCreate?: UserCreateOrConnectWithoutUserProfileInput;
+    @Field(() => UserCreateWithoutUserProfileInput, {nullable:true})
+    @Type(() => UserCreateWithoutUserProfileInput)
+    create?: UserCreateWithoutUserProfileInput;
 
-  @Field(() => UserWhereUniqueInput, { nullable: true })
-  @Type(() => UserWhereUniqueInput)
-  connect?: UserWhereUniqueInput;
+    @Field(() => UserCreateOrConnectWithoutUserProfileInput, {nullable:true})
+    @Type(() => UserCreateOrConnectWithoutUserProfileInput)
+    connectOrCreate?: UserCreateOrConnectWithoutUserProfileInput;
+
+    @Field(() => UserWhereUniqueInput, {nullable:true})
+    @Type(() => UserWhereUniqueInput)
+    connect?: UserWhereUniqueInput;
 }

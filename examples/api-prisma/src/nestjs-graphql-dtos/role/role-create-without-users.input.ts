@@ -4,9 +4,10 @@ import { RightCreateNestedManyWithoutRolesInput } from '../right/right-create-ne
 
 @InputType()
 export class RoleCreateWithoutUsersInput {
-  @Field(() => String, { nullable: false })
-  name!: string;
 
-  @Field(() => RightCreateNestedManyWithoutRolesInput, { nullable: true })
-  rights?: RightCreateNestedManyWithoutRolesInput;
+    @Field(() => String, {nullable:false})
+    name!: string;
+
+    @Field(() => RightCreateNestedManyWithoutRolesInput, {nullable:true})
+    rights?: RightCreateNestedManyWithoutRolesInput;
 }

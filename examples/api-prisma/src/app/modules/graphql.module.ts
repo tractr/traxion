@@ -3,8 +3,8 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule as NestjsGraphQLModule } from '@nestjs/graphql';
 
 import { DatabaseModule } from './database.module';
-import { NestjsServicesModule } from './services.module';
-import { GraphqlModule } from '../../nestjs-resolvers';
+import { GraphqlModule } from '../../nestjs-authorized-resolvers';
+import { AuthorizedServicesModules } from '../../nestjs-authorized-services';
 import { CustomResolver } from '../resolvers/custom.resolver';
 
 @Module({
@@ -19,7 +19,7 @@ import { CustomResolver } from '../resolvers/custom.resolver';
       playground: true,
     }),
     GraphqlModule.register({
-      imports: [NestjsServicesModule],
+      imports: [AuthorizedServicesModules],
     }),
   ],
   providers: [CustomResolver],

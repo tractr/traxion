@@ -6,11 +6,12 @@ import { RoleUpdateWithoutRightsInput } from './role-update-without-rights.input
 
 @InputType()
 export class RoleUpdateWithWhereUniqueWithoutRightsInput {
-  @Field(() => RoleWhereUniqueInput, { nullable: false })
-  @Type(() => RoleWhereUniqueInput)
-  where!: RoleWhereUniqueInput;
 
-  @Field(() => RoleUpdateWithoutRightsInput, { nullable: false })
-  @Type(() => RoleUpdateWithoutRightsInput)
-  data!: RoleUpdateWithoutRightsInput;
+    @Field(() => RoleWhereUniqueInput, {nullable:false})
+    @Type(() => RoleWhereUniqueInput)
+    where!: RoleWhereUniqueInput;
+
+    @Field(() => RoleUpdateWithoutRightsInput, {nullable:false})
+    @Type(() => RoleUpdateWithoutRightsInput)
+    data!: RoleUpdateWithoutRightsInput;
 }

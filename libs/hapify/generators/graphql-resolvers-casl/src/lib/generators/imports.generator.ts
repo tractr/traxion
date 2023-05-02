@@ -1,9 +1,9 @@
-import { constant } from 'case';
+import { constant, pascal } from 'case';
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
 import { GraphqlResolverCaslImportPathConfig } from '../config.type';
 
-import { Model } from '@trxn/hapify-core';
+import { getAllModelsFromRelation, Model } from '@trxn/hapify-core';
 import { resolveDynamicPath } from '@trxn/hapify-devkit';
 
 export function generateImports(
@@ -11,6 +11,7 @@ export function generateImports(
   importPaths: GraphqlResolverCaslImportPathConfig,
 ): ImportDeclarationStructure[] {
   const modelConstant = constant(model.name);
+  const modelPascal = pascal(model.name);
 
   return [
     {
@@ -22,16 +23,27 @@ export function generateImports(
         { name: `SEARCH_${modelConstant}` },
         { name: `UPDATE_${modelConstant}` },
         { name: `DELETE_${modelConstant}` },
+        { name: 'AppAbility' },
+        { name: 'UserSelectOwnershipIds', alias: 'defaultOwnershipSelect' },
+      ],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: resolveDynamicPath(
+        importPaths.nestjsAuthorizedServices,
+        '../..',
+      ),
+      namedImports: [
+        { name: `${modelPascal}AuthorizedService` },
+        ...getAllModelsFromRelation(model).map((relatedModel) => ({
+          name: `${pascal(relatedModel.name)}AuthorizedService`,
+        })),
       ],
     },
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: '@trxn/nestjs-core',
-      namedImports: [
-        { name: 'CurrentAbilities' },
-        { name: 'CurrentUser' },
-        { name: 'Policies' },
-      ],
+      namedImports: [{ name: 'CurrentAbilities' }, { name: 'Policies' }],
     },
   ];
 }

@@ -5,18 +5,19 @@ import { StringFilter } from '../prisma/string-filter.input';
 
 @InputType()
 export class RightScalarWhereInput {
-  @Field(() => [RightScalarWhereInput], { nullable: true })
-  AND?: Array<RightScalarWhereInput>;
 
-  @Field(() => [RightScalarWhereInput], { nullable: true })
-  OR?: Array<RightScalarWhereInput>;
+    @Field(() => [RightScalarWhereInput], {nullable:true})
+    AND?: Array<RightScalarWhereInput>;
 
-  @Field(() => [RightScalarWhereInput], { nullable: true })
-  NOT?: Array<RightScalarWhereInput>;
+    @Field(() => [RightScalarWhereInput], {nullable:true})
+    OR?: Array<RightScalarWhereInput>;
 
-  @Field(() => IntFilter, { nullable: true })
-  id?: IntFilter;
+    @Field(() => [RightScalarWhereInput], {nullable:true})
+    NOT?: Array<RightScalarWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  name?: StringFilter;
+    @Field(() => IntFilter, {nullable:true})
+    id?: IntFilter;
+
+    @Field(() => StringFilter, {nullable:true})
+    name?: StringFilter;
 }

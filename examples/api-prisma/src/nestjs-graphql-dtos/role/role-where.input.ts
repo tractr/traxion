@@ -7,24 +7,25 @@ import { RightListRelationFilter } from '../right/right-list-relation-filter.inp
 
 @InputType()
 export class RoleWhereInput {
-  @Field(() => [RoleWhereInput], { nullable: true })
-  AND?: Array<RoleWhereInput>;
 
-  @Field(() => [RoleWhereInput], { nullable: true })
-  OR?: Array<RoleWhereInput>;
+    @Field(() => [RoleWhereInput], {nullable:true})
+    AND?: Array<RoleWhereInput>;
 
-  @Field(() => [RoleWhereInput], { nullable: true })
-  NOT?: Array<RoleWhereInput>;
+    @Field(() => [RoleWhereInput], {nullable:true})
+    OR?: Array<RoleWhereInput>;
 
-  @Field(() => IntFilter, { nullable: true })
-  id?: IntFilter;
+    @Field(() => [RoleWhereInput], {nullable:true})
+    NOT?: Array<RoleWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  name?: StringFilter;
+    @Field(() => IntFilter, {nullable:true})
+    id?: IntFilter;
 
-  @Field(() => UserListRelationFilter, { nullable: true })
-  users?: UserListRelationFilter;
+    @Field(() => StringFilter, {nullable:true})
+    name?: StringFilter;
 
-  @Field(() => RightListRelationFilter, { nullable: true })
-  rights?: RightListRelationFilter;
+    @Field(() => UserListRelationFilter, {nullable:true})
+    users?: UserListRelationFilter;
+
+    @Field(() => RightListRelationFilter, {nullable:true})
+    rights?: RightListRelationFilter;
 }

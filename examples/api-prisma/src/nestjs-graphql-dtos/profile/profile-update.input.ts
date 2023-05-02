@@ -4,11 +4,10 @@ import { UserUpdateOneRequiredWithoutUserProfileNestedInput } from '../user/user
 
 @InputType()
 export class ProfileUpdateInput {
-  @Field(() => String, { nullable: true })
-  address?: string;
 
-  @Field(() => UserUpdateOneRequiredWithoutUserProfileNestedInput, {
-    nullable: true,
-  })
-  user?: UserUpdateOneRequiredWithoutUserProfileNestedInput;
+    @Field(() => String, {nullable:true})
+    address?: string;
+
+    @Field(() => UserUpdateOneRequiredWithoutUserProfileNestedInput, {nullable:true})
+    user?: UserUpdateOneRequiredWithoutUserProfileNestedInput;
 }

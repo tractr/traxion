@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
 
 export type DefaultOwnershipSelect = {
-  User: Prisma.UserSelect;
+  User: { [key in keyof Prisma.UserSelect]: boolean };
 };

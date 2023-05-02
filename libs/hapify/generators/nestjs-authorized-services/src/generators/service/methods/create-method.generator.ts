@@ -27,6 +27,12 @@ export const generateCreateMethod = (
       kind: StructureKind.Parameter,
       type: 'AppAbility',
     },
+    {
+      kind: StructureKind.Parameter,
+      name: 'prisma',
+      type: `Prisma.${pascal(model.name)}Delegate<undefined>`,
+      hasQuestionToken: true,
+    },
   ];
 
   const typeParameters: OptionalKind<TypeParameterDeclarationStructure>[] = [
@@ -43,6 +49,6 @@ export const generateCreateMethod = (
     name: 'create',
     typeParameters,
     parameters,
-    statements: `return this.${modelCamel}Service.create<T>(args);`,
+    statements: `return this.${modelCamel}Service.create<T>(args, prisma);`,
   };
 };

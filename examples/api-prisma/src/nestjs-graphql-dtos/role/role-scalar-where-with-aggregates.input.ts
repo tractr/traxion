@@ -5,18 +5,19 @@ import { StringWithAggregatesFilter } from '../prisma/string-with-aggregates-fil
 
 @InputType()
 export class RoleScalarWhereWithAggregatesInput {
-  @Field(() => [RoleScalarWhereWithAggregatesInput], { nullable: true })
-  AND?: Array<RoleScalarWhereWithAggregatesInput>;
 
-  @Field(() => [RoleScalarWhereWithAggregatesInput], { nullable: true })
-  OR?: Array<RoleScalarWhereWithAggregatesInput>;
+    @Field(() => [RoleScalarWhereWithAggregatesInput], {nullable:true})
+    AND?: Array<RoleScalarWhereWithAggregatesInput>;
 
-  @Field(() => [RoleScalarWhereWithAggregatesInput], { nullable: true })
-  NOT?: Array<RoleScalarWhereWithAggregatesInput>;
+    @Field(() => [RoleScalarWhereWithAggregatesInput], {nullable:true})
+    OR?: Array<RoleScalarWhereWithAggregatesInput>;
 
-  @Field(() => IntWithAggregatesFilter, { nullable: true })
-  id?: IntWithAggregatesFilter;
+    @Field(() => [RoleScalarWhereWithAggregatesInput], {nullable:true})
+    NOT?: Array<RoleScalarWhereWithAggregatesInput>;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  name?: StringWithAggregatesFilter;
+    @Field(() => IntWithAggregatesFilter, {nullable:true})
+    id?: IntWithAggregatesFilter;
+
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    name?: StringWithAggregatesFilter;
 }

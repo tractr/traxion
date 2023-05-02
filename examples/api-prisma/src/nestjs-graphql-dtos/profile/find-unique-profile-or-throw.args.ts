@@ -5,7 +5,8 @@ import { Type } from 'class-transformer';
 
 @ArgsType()
 export class FindUniqueProfileOrThrowArgs {
-  @Field(() => ProfileWhereUniqueInput, { nullable: false })
-  @Type(() => ProfileWhereUniqueInput)
-  where!: ProfileWhereUniqueInput;
+
+    @Field(() => ProfileWhereUniqueInput, {nullable:false})
+    @Type(() => ProfileWhereUniqueInput)
+    where!: ProfileWhereUniqueInput;
 }

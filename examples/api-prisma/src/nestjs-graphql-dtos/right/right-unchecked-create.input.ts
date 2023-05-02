@@ -5,14 +5,13 @@ import { RoleUncheckedCreateNestedManyWithoutRightsInput } from '../role/role-un
 
 @InputType()
 export class RightUncheckedCreateInput {
-  @Field(() => Int, { nullable: true })
-  id?: number;
 
-  @Field(() => String, { nullable: false })
-  name!: string;
+    @Field(() => Int, {nullable:true})
+    id?: number;
 
-  @Field(() => RoleUncheckedCreateNestedManyWithoutRightsInput, {
-    nullable: true,
-  })
-  roles?: RoleUncheckedCreateNestedManyWithoutRightsInput;
+    @Field(() => String, {nullable:false})
+    name!: string;
+
+    @Field(() => RoleUncheckedCreateNestedManyWithoutRightsInput, {nullable:true})
+    roles?: RoleUncheckedCreateNestedManyWithoutRightsInput;
 }

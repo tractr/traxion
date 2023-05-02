@@ -5,14 +5,13 @@ import { RightUncheckedUpdateManyWithoutRolesNestedInput } from '../right/right-
 
 @InputType()
 export class RoleUncheckedUpdateWithoutUsersInput {
-  @Field(() => Int, { nullable: true })
-  id?: number;
 
-  @Field(() => String, { nullable: true })
-  name?: string;
+    @Field(() => Int, {nullable:true})
+    id?: number;
 
-  @Field(() => RightUncheckedUpdateManyWithoutRolesNestedInput, {
-    nullable: true,
-  })
-  rights?: RightUncheckedUpdateManyWithoutRolesNestedInput;
+    @Field(() => String, {nullable:true})
+    name?: string;
+
+    @Field(() => RightUncheckedUpdateManyWithoutRolesNestedInput, {nullable:true})
+    rights?: RightUncheckedUpdateManyWithoutRolesNestedInput;
 }

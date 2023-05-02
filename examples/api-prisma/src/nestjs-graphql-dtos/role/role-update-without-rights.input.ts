@@ -4,9 +4,10 @@ import { UserUpdateManyWithoutRoleNestedInput } from '../user/user-update-many-w
 
 @InputType()
 export class RoleUpdateWithoutRightsInput {
-  @Field(() => String, { nullable: true })
-  name?: string;
 
-  @Field(() => UserUpdateManyWithoutRoleNestedInput, { nullable: true })
-  users?: UserUpdateManyWithoutRoleNestedInput;
+    @Field(() => String, {nullable:true})
+    name?: string;
+
+    @Field(() => UserUpdateManyWithoutRoleNestedInput, {nullable:true})
+    users?: UserUpdateManyWithoutRoleNestedInput;
 }

@@ -7,21 +7,22 @@ import { Profile } from '../profile/profile.model';
 
 @ObjectType()
 export class User {
-  @Field(() => ID, { nullable: false })
-  id!: number;
 
-  @Field(() => String, { nullable: false })
-  email!: string;
+    @Field(() => ID, {nullable:false})
+    id!: number;
 
-  @Field(() => String, { nullable: true })
-  name!: string | null;
+    @Field(() => String, {nullable:false})
+    email!: string;
 
-  @Field(() => Int, { nullable: false })
-  roleId!: number;
+    @Field(() => String, {nullable:true})
+    name!: string | null;
 
-  @Field(() => Role, { nullable: false })
-  role?: Role;
+    @Field(() => Int, {nullable:false})
+    roleId!: number;
 
-  @Field(() => Profile, { nullable: true })
-  userProfile?: Profile | null;
+    @Field(() => Role, {nullable:false})
+    role?: Role;
+
+    @Field(() => Profile, {nullable:true})
+    userProfile?: Profile | null;
 }

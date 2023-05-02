@@ -5,12 +5,13 @@ import { RightUpdateManyWithoutRolesNestedInput } from '../right/right-update-ma
 
 @InputType()
 export class RoleUpdateInput {
-  @Field(() => String, { nullable: true })
-  name?: string;
 
-  @Field(() => UserUpdateManyWithoutRoleNestedInput, { nullable: true })
-  users?: UserUpdateManyWithoutRoleNestedInput;
+    @Field(() => String, {nullable:true})
+    name?: string;
 
-  @Field(() => RightUpdateManyWithoutRolesNestedInput, { nullable: true })
-  rights?: RightUpdateManyWithoutRolesNestedInput;
+    @Field(() => UserUpdateManyWithoutRoleNestedInput, {nullable:true})
+    users?: UserUpdateManyWithoutRoleNestedInput;
+
+    @Field(() => RightUpdateManyWithoutRolesNestedInput, {nullable:true})
+    rights?: RightUpdateManyWithoutRolesNestedInput;
 }

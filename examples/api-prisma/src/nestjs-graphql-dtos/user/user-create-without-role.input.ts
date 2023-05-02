@@ -4,12 +4,13 @@ import { ProfileCreateNestedOneWithoutUserInput } from '../profile/profile-creat
 
 @InputType()
 export class UserCreateWithoutRoleInput {
-  @Field(() => String, { nullable: false })
-  email!: string;
 
-  @Field(() => String, { nullable: true })
-  name?: string;
+    @Field(() => String, {nullable:false})
+    email!: string;
 
-  @Field(() => ProfileCreateNestedOneWithoutUserInput, { nullable: true })
-  userProfile?: ProfileCreateNestedOneWithoutUserInput;
+    @Field(() => String, {nullable:true})
+    name?: string;
+
+    @Field(() => ProfileCreateNestedOneWithoutUserInput, {nullable:true})
+    userProfile?: ProfileCreateNestedOneWithoutUserInput;
 }

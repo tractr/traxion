@@ -6,21 +6,22 @@ import { ProfileOrderByWithRelationInput } from '../profile/profile-order-by-wit
 
 @InputType()
 export class UserOrderByWithRelationInput {
-  @Field(() => SortOrder, { nullable: true })
-  id?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  email?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    id?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  name?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    email?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  roleId?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    name?: keyof typeof SortOrder;
 
-  @Field(() => RoleOrderByWithRelationInput, { nullable: true })
-  role?: RoleOrderByWithRelationInput;
+    @Field(() => SortOrder, {nullable:true})
+    roleId?: keyof typeof SortOrder;
 
-  @Field(() => ProfileOrderByWithRelationInput, { nullable: true })
-  userProfile?: ProfileOrderByWithRelationInput;
+    @Field(() => RoleOrderByWithRelationInput, {nullable:true})
+    role?: RoleOrderByWithRelationInput;
+
+    @Field(() => ProfileOrderByWithRelationInput, {nullable:true})
+    userProfile?: ProfileOrderByWithRelationInput;
 }

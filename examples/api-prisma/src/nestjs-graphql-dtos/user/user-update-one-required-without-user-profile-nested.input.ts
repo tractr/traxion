@@ -9,23 +9,24 @@ import { UserUpdateWithoutUserProfileInput } from './user-update-without-user-pr
 
 @InputType()
 export class UserUpdateOneRequiredWithoutUserProfileNestedInput {
-  @Field(() => UserCreateWithoutUserProfileInput, { nullable: true })
-  @Type(() => UserCreateWithoutUserProfileInput)
-  create?: UserCreateWithoutUserProfileInput;
 
-  @Field(() => UserCreateOrConnectWithoutUserProfileInput, { nullable: true })
-  @Type(() => UserCreateOrConnectWithoutUserProfileInput)
-  connectOrCreate?: UserCreateOrConnectWithoutUserProfileInput;
+    @Field(() => UserCreateWithoutUserProfileInput, {nullable:true})
+    @Type(() => UserCreateWithoutUserProfileInput)
+    create?: UserCreateWithoutUserProfileInput;
 
-  @Field(() => UserUpsertWithoutUserProfileInput, { nullable: true })
-  @Type(() => UserUpsertWithoutUserProfileInput)
-  upsert?: UserUpsertWithoutUserProfileInput;
+    @Field(() => UserCreateOrConnectWithoutUserProfileInput, {nullable:true})
+    @Type(() => UserCreateOrConnectWithoutUserProfileInput)
+    connectOrCreate?: UserCreateOrConnectWithoutUserProfileInput;
 
-  @Field(() => UserWhereUniqueInput, { nullable: true })
-  @Type(() => UserWhereUniqueInput)
-  connect?: UserWhereUniqueInput;
+    @Field(() => UserUpsertWithoutUserProfileInput, {nullable:true})
+    @Type(() => UserUpsertWithoutUserProfileInput)
+    upsert?: UserUpsertWithoutUserProfileInput;
 
-  @Field(() => UserUpdateWithoutUserProfileInput, { nullable: true })
-  @Type(() => UserUpdateWithoutUserProfileInput)
-  update?: UserUpdateWithoutUserProfileInput;
+    @Field(() => UserWhereUniqueInput, {nullable:true})
+    @Type(() => UserWhereUniqueInput)
+    connect?: UserWhereUniqueInput;
+
+    @Field(() => UserUpdateWithoutUserProfileInput, {nullable:true})
+    @Type(() => UserUpdateWithoutUserProfileInput)
+    update?: UserUpdateWithoutUserProfileInput;
 }

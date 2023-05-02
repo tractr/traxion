@@ -13,7 +13,7 @@ import { generateResolverSourceFile } from './generators/resolver/resolver.gener
 
 import { Schema } from '@trxn/hapify-core';
 
-export async function generate(
+export function generate(
   project: Project,
   dataModel: Schema,
   config: GraphqlResolverGeneratorConfig,

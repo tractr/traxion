@@ -9,29 +9,30 @@ import { ProfileUpdateWithoutUserInput } from './profile-update-without-user.inp
 
 @InputType()
 export class ProfileUncheckedUpdateOneWithoutUserNestedInput {
-  @Field(() => ProfileCreateWithoutUserInput, { nullable: true })
-  @Type(() => ProfileCreateWithoutUserInput)
-  create?: ProfileCreateWithoutUserInput;
 
-  @Field(() => ProfileCreateOrConnectWithoutUserInput, { nullable: true })
-  @Type(() => ProfileCreateOrConnectWithoutUserInput)
-  connectOrCreate?: ProfileCreateOrConnectWithoutUserInput;
+    @Field(() => ProfileCreateWithoutUserInput, {nullable:true})
+    @Type(() => ProfileCreateWithoutUserInput)
+    create?: ProfileCreateWithoutUserInput;
 
-  @Field(() => ProfileUpsertWithoutUserInput, { nullable: true })
-  @Type(() => ProfileUpsertWithoutUserInput)
-  upsert?: ProfileUpsertWithoutUserInput;
+    @Field(() => ProfileCreateOrConnectWithoutUserInput, {nullable:true})
+    @Type(() => ProfileCreateOrConnectWithoutUserInput)
+    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput;
 
-  @Field(() => Boolean, { nullable: true })
-  disconnect?: boolean;
+    @Field(() => ProfileUpsertWithoutUserInput, {nullable:true})
+    @Type(() => ProfileUpsertWithoutUserInput)
+    upsert?: ProfileUpsertWithoutUserInput;
 
-  @Field(() => Boolean, { nullable: true })
-  delete?: boolean;
+    @Field(() => Boolean, {nullable:true})
+    disconnect?: boolean;
 
-  @Field(() => ProfileWhereUniqueInput, { nullable: true })
-  @Type(() => ProfileWhereUniqueInput)
-  connect?: ProfileWhereUniqueInput;
+    @Field(() => Boolean, {nullable:true})
+    delete?: boolean;
 
-  @Field(() => ProfileUpdateWithoutUserInput, { nullable: true })
-  @Type(() => ProfileUpdateWithoutUserInput)
-  update?: ProfileUpdateWithoutUserInput;
+    @Field(() => ProfileWhereUniqueInput, {nullable:true})
+    @Type(() => ProfileWhereUniqueInput)
+    connect?: ProfileWhereUniqueInput;
+
+    @Field(() => ProfileUpdateWithoutUserInput, {nullable:true})
+    @Type(() => ProfileUpdateWithoutUserInput)
+    update?: ProfileUpdateWithoutUserInput;
 }

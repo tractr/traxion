@@ -4,9 +4,10 @@ import { RoleWhereInput } from './role-where.input';
 
 @InputType()
 export class RoleRelationFilter {
-  @Field(() => RoleWhereInput, { nullable: true })
-  is?: RoleWhereInput;
 
-  @Field(() => RoleWhereInput, { nullable: true })
-  isNot?: RoleWhereInput;
+    @Field(() => RoleWhereInput, {nullable:true})
+    is?: RoleWhereInput;
+
+    @Field(() => RoleWhereInput, {nullable:true})
+    isNot?: RoleWhereInput;
 }

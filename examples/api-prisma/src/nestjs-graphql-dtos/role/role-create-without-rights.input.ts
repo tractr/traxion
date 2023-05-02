@@ -4,9 +4,10 @@ import { UserCreateNestedManyWithoutRoleInput } from '../user/user-create-nested
 
 @InputType()
 export class RoleCreateWithoutRightsInput {
-  @Field(() => String, { nullable: false })
-  name!: string;
 
-  @Field(() => UserCreateNestedManyWithoutRoleInput, { nullable: true })
-  users?: UserCreateNestedManyWithoutRoleInput;
+    @Field(() => String, {nullable:false})
+    name!: string;
+
+    @Field(() => UserCreateNestedManyWithoutRoleInput, {nullable:true})
+    users?: UserCreateNestedManyWithoutRoleInput;
 }

@@ -11,47 +11,44 @@ import { RoleScalarWhereInput } from './role-scalar-where.input';
 
 @InputType()
 export class RoleUncheckedUpdateManyWithoutRightsNestedInput {
-  @Field(() => [RoleCreateWithoutRightsInput], { nullable: true })
-  @Type(() => RoleCreateWithoutRightsInput)
-  create?: Array<RoleCreateWithoutRightsInput>;
 
-  @Field(() => [RoleCreateOrConnectWithoutRightsInput], { nullable: true })
-  @Type(() => RoleCreateOrConnectWithoutRightsInput)
-  connectOrCreate?: Array<RoleCreateOrConnectWithoutRightsInput>;
+    @Field(() => [RoleCreateWithoutRightsInput], {nullable:true})
+    @Type(() => RoleCreateWithoutRightsInput)
+    create?: Array<RoleCreateWithoutRightsInput>;
 
-  @Field(() => [RoleUpsertWithWhereUniqueWithoutRightsInput], {
-    nullable: true,
-  })
-  @Type(() => RoleUpsertWithWhereUniqueWithoutRightsInput)
-  upsert?: Array<RoleUpsertWithWhereUniqueWithoutRightsInput>;
+    @Field(() => [RoleCreateOrConnectWithoutRightsInput], {nullable:true})
+    @Type(() => RoleCreateOrConnectWithoutRightsInput)
+    connectOrCreate?: Array<RoleCreateOrConnectWithoutRightsInput>;
 
-  @Field(() => [RoleWhereUniqueInput], { nullable: true })
-  @Type(() => RoleWhereUniqueInput)
-  set?: Array<RoleWhereUniqueInput>;
+    @Field(() => [RoleUpsertWithWhereUniqueWithoutRightsInput], {nullable:true})
+    @Type(() => RoleUpsertWithWhereUniqueWithoutRightsInput)
+    upsert?: Array<RoleUpsertWithWhereUniqueWithoutRightsInput>;
 
-  @Field(() => [RoleWhereUniqueInput], { nullable: true })
-  @Type(() => RoleWhereUniqueInput)
-  disconnect?: Array<RoleWhereUniqueInput>;
+    @Field(() => [RoleWhereUniqueInput], {nullable:true})
+    @Type(() => RoleWhereUniqueInput)
+    set?: Array<RoleWhereUniqueInput>;
 
-  @Field(() => [RoleWhereUniqueInput], { nullable: true })
-  @Type(() => RoleWhereUniqueInput)
-  delete?: Array<RoleWhereUniqueInput>;
+    @Field(() => [RoleWhereUniqueInput], {nullable:true})
+    @Type(() => RoleWhereUniqueInput)
+    disconnect?: Array<RoleWhereUniqueInput>;
 
-  @Field(() => [RoleWhereUniqueInput], { nullable: true })
-  @Type(() => RoleWhereUniqueInput)
-  connect?: Array<RoleWhereUniqueInput>;
+    @Field(() => [RoleWhereUniqueInput], {nullable:true})
+    @Type(() => RoleWhereUniqueInput)
+    delete?: Array<RoleWhereUniqueInput>;
 
-  @Field(() => [RoleUpdateWithWhereUniqueWithoutRightsInput], {
-    nullable: true,
-  })
-  @Type(() => RoleUpdateWithWhereUniqueWithoutRightsInput)
-  update?: Array<RoleUpdateWithWhereUniqueWithoutRightsInput>;
+    @Field(() => [RoleWhereUniqueInput], {nullable:true})
+    @Type(() => RoleWhereUniqueInput)
+    connect?: Array<RoleWhereUniqueInput>;
 
-  @Field(() => [RoleUpdateManyWithWhereWithoutRightsInput], { nullable: true })
-  @Type(() => RoleUpdateManyWithWhereWithoutRightsInput)
-  updateMany?: Array<RoleUpdateManyWithWhereWithoutRightsInput>;
+    @Field(() => [RoleUpdateWithWhereUniqueWithoutRightsInput], {nullable:true})
+    @Type(() => RoleUpdateWithWhereUniqueWithoutRightsInput)
+    update?: Array<RoleUpdateWithWhereUniqueWithoutRightsInput>;
 
-  @Field(() => [RoleScalarWhereInput], { nullable: true })
-  @Type(() => RoleScalarWhereInput)
-  deleteMany?: Array<RoleScalarWhereInput>;
+    @Field(() => [RoleUpdateManyWithWhereWithoutRightsInput], {nullable:true})
+    @Type(() => RoleUpdateManyWithWhereWithoutRightsInput)
+    updateMany?: Array<RoleUpdateManyWithWhereWithoutRightsInput>;
+
+    @Field(() => [RoleScalarWhereInput], {nullable:true})
+    @Type(() => RoleScalarWhereInput)
+    deleteMany?: Array<RoleScalarWhereInput>;
 }

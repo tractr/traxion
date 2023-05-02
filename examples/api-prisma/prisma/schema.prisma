@@ -73,6 +73,7 @@ generator authorizedGraphqlResolvers {
   nestjsServicesImportPath = "./nestjs-services"
   nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
   caslImportPath = "./casl-target"
+  nestjsAuthorizedServicesImportPath = "./nestjs-authorized-services"
 }
 
 // Nestjs common services generator
@@ -91,12 +92,6 @@ generator nestjsAuthorizedServices {
   caslImportPath = "./casl-target"
 }
 
-// Nestjs common services generator
-// generator nestjsAuthorizedServices {
-//   provider         = "trxn-prisma-nestjs-authorized-services-generator"
-//   output           = "../src/nestjs-authorized-services"
-//   tsConfigFilePath = "../../tsconfig.app.json"
-// }
 
 //--------------------------------------------
 // This part describe the project models

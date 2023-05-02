@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 
 @InputType()
 export class ProfileCreateWithoutUserInput {
-  @Field(() => String, { nullable: false })
-  address!: string;
+
+    @Field(() => String, {nullable:false})
+    address!: string;
 }
