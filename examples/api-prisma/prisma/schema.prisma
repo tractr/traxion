@@ -65,11 +65,30 @@ generator caslConfig {
 //   tsConfigFilePath   = "../../tsconfig.app.json"
 // }
 
+// Nestjs authorizd graphql resolvers generator
+generator authorizedGraphqlResolvers {
+  provider = "trxn-prisma-nestjs-graphql-resolvers-casl-generator"
+  output = "../src/nestjs-authorized-resolvers"
+  tsConfigFilePath   = "../../tsconfig.app.json"
+  nestjsServicesImportPath = "./nestjs-services"
+  nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
+  caslImportPath = "./casl-target"
+}
+
+// Nestjs common services generator
+generator nestjsServices {
+  provider = "trxn-prisma-nestjs-services-generator"
+  output   = "../src/nestjs-services"
+  tsConfigFilePath   = "../../tsconfig.app.json"
+}
+
 // Nestjs common services generator
 generator nestjsAuthorizedServices {
   provider = "trxn-prisma-nestjs-authorized-services-generator"
   output   = "../src/nestjs-authorized-services"
   tsConfigFilePath   = "../../tsconfig.app.json"
+  nestjsServicesImportPath = "./nestjs-services"
+  caslImportPath = "./casl-target"
 }
 
 //--------------------------------------------

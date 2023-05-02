@@ -18,11 +18,11 @@ export function generateProviderSourceFile(
   path: string,
   servicesProviderSourceFile: SourceFile,
 ) {
-  const fileName = `${snake(model.name)}-model.providers.ts`;
+  const fileName = `${snake(model.name)}-authorized-service.provider.ts`;
   const filePath = `${path}/providers/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);
-  const name = `${constant(model.name)}_SERVICES_PROVIDERS`;
+  const name = `${constant(model.name)}_AUTHORIZED_SERVICE_PROVIDER`;
 
   const imports = generateImports(model);
   sourceFile.addImportDeclarations(imports);
@@ -70,7 +70,7 @@ export function generateModelsServicesProvidersSourceFile(
   project: Project,
   path: string,
 ): SourceFile {
-  const fileName = `models-services.providers.ts`;
+  const fileName = `authorized-services.provider.ts`;
   const filePath = `${path}/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);
@@ -92,7 +92,7 @@ export function generateModelsServicesProvidersSourceFile(
     declarationKind: VariableDeclarationKind.Const,
     declarations: [
       {
-        name: 'MODELS_SERVICES_PROVIDERS',
+        name: 'AUTHORIZED_SERVICES_PROVIDERS',
         type: 'Provider[]',
         initializer: `[]`,
       },

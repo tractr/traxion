@@ -1,5 +1,4 @@
 import { Provider } from '@nestjs/common';
-
 import { USER_SERVICE, USER_DEFAULT_SERVICE } from '../constants';
 import { UserService, UserDefaultService } from '../services';
 

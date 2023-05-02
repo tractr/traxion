@@ -13,17 +13,19 @@ import { Model } from '@trxn/hapify-core';
 export const generateDeleteMethod = (
   model: Model,
 ): MethodDeclarationStructure => {
+  const modelCamel = camel(model.name);
+  const modelPascal = pascal(model.name);
+
   const parameters: ParameterDeclarationStructure[] = [
     {
       name: 'args',
       kind: StructureKind.Parameter,
-      type: `Prisma.SelectSubset<T, Prisma.${pascal(model.name)}DeleteArgs>`,
+      type: `Prisma.SelectSubset<T, Prisma.${modelPascal}DeleteArgs>`,
     },
     {
+      name: 'abilities',
       kind: StructureKind.Parameter,
-      name: 'prisma',
-      type: `Prisma.${pascal(model.name)}Delegate<undefined>`,
-      initializer: `this.prismaClient.${camel(model.name)}`,
+      type: 'AppAbility',
     },
   ];
 
@@ -31,26 +33,7 @@ export const generateDeleteMethod = (
     {
       name: 'T',
       kind: StructureKind.TypeParameter,
-      constraint: `Prisma.${pascal(model.name)}DeleteArgs`,
-    },
-  ];
-
-  const docs: JSDocStructure[] = [
-    {
-      kind: StructureKind.JSDoc,
-      description: `
-    Delete a ${pascal(model.name)}.
-    @param {${pascal(
-      model.name,
-    )}DeleteArgs} args - Arguments to delete a ${pascal(model.name)}
-    @example
-    // Delete one ${pascal(model.name)}
-    const ${camel(model.name)} = await this.${camel(model.name)}Service.delete({
-      where: {
-        // ... filter to delete one ${pascal(model.name)}
-      }
-    })
-    `,
+      constraint: `Prisma.${modelPascal}DeleteArgs`,
     },
   ];
 
@@ -60,7 +43,6 @@ export const generateDeleteMethod = (
     name: 'delete',
     typeParameters,
     parameters,
-    statements: `return prisma.delete<T>(args);`,
-    docs,
+    statements: `return this.${modelCamel}Service.delete<T>(args);`,
   };
 };

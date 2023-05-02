@@ -7,16 +7,15 @@ import { RoleWhereUniqueInput } from './role-where-unique.input';
 
 @InputType()
 export class RoleCreateNestedOneWithoutUsersInput {
+  @Field(() => RoleCreateWithoutUsersInput, { nullable: true })
+  @Type(() => RoleCreateWithoutUsersInput)
+  create?: RoleCreateWithoutUsersInput;
 
-    @Field(() => RoleCreateWithoutUsersInput, {nullable:true})
-    @Type(() => RoleCreateWithoutUsersInput)
-    create?: RoleCreateWithoutUsersInput;
+  @Field(() => RoleCreateOrConnectWithoutUsersInput, { nullable: true })
+  @Type(() => RoleCreateOrConnectWithoutUsersInput)
+  connectOrCreate?: RoleCreateOrConnectWithoutUsersInput;
 
-    @Field(() => RoleCreateOrConnectWithoutUsersInput, {nullable:true})
-    @Type(() => RoleCreateOrConnectWithoutUsersInput)
-    connectOrCreate?: RoleCreateOrConnectWithoutUsersInput;
-
-    @Field(() => RoleWhereUniqueInput, {nullable:true})
-    @Type(() => RoleWhereUniqueInput)
-    connect?: RoleWhereUniqueInput;
+  @Field(() => RoleWhereUniqueInput, { nullable: true })
+  @Type(() => RoleWhereUniqueInput)
+  connect?: RoleWhereUniqueInput;
 }

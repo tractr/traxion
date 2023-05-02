@@ -1,5 +1,4 @@
 import { Provider } from '@nestjs/common';
-
 import { ROLE_SERVICE, ROLE_DEFAULT_SERVICE } from '../constants';
 import { RoleService, RoleDefaultService } from '../services';
 

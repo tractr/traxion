@@ -1,9 +1,15 @@
 import { constant, kebab, pascal } from 'case';
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { NestjsAuthorizedServicesImportPathConfig } from '../../config.type';
 
-export function generateImports(model: Model): ImportDeclarationStructure[] {
+import { Model } from '@trxn/hapify-core';
+import { resolveDynamicPath } from '@trxn/hapify-devkit';
+
+export function generateImports(
+  model: Model,
+  importPaths: NestjsAuthorizedServicesImportPathConfig,
+): ImportDeclarationStructure[] {
   const modelPascal = pascal(model.name);
   const modelConstant = constant(model.name);
 
@@ -20,11 +26,16 @@ export function generateImports(model: Model): ImportDeclarationStructure[] {
     },
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: `test`,
+      moduleSpecifier: resolveDynamicPath(importPaths.nestjsServices, '../..'),
       namedImports: [
         { name: `${modelPascal}Service` },
         { name: `${modelConstant}_SERVICE` },
       ],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: resolveDynamicPath(importPaths.casl, '../..'),
+      namedImports: [{ name: `AppAbility` }],
     },
   ];
 }

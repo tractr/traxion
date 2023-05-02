@@ -6,12 +6,11 @@ import { RoleCreateWithoutUsersInput } from './role-create-without-users.input';
 
 @InputType()
 export class RoleUpsertWithoutUsersInput {
+  @Field(() => RoleUpdateWithoutUsersInput, { nullable: false })
+  @Type(() => RoleUpdateWithoutUsersInput)
+  update!: RoleUpdateWithoutUsersInput;
 
-    @Field(() => RoleUpdateWithoutUsersInput, {nullable:false})
-    @Type(() => RoleUpdateWithoutUsersInput)
-    update!: RoleUpdateWithoutUsersInput;
-
-    @Field(() => RoleCreateWithoutUsersInput, {nullable:false})
-    @Type(() => RoleCreateWithoutUsersInput)
-    create!: RoleCreateWithoutUsersInput;
+  @Field(() => RoleCreateWithoutUsersInput, { nullable: false })
+  @Type(() => RoleCreateWithoutUsersInput)
+  create!: RoleCreateWithoutUsersInput;
 }

@@ -39,27 +39,6 @@ export const generateFindUniqueMethod = (
     },
   ];
 
-  const docs: JSDocStructure[] = [
-    {
-      kind: StructureKind.JSDoc,
-      description: `
-    Find zero or one ${pascal(model.name)} that matches the filter.
-    @param {${pascal(
-      model.name,
-    )}FindUniqueArgs} args - Arguments to find a ${pascal(model.name)}
-    @example
-    // Get one ${pascal(model.name)}
-    const ${camel(model.name)} = await this.${camel(
-        model.name,
-      )}Service.findUnique({
-      where: {
-        // ... provide filter here
-      }
-    })
-    `,
-    },
-  ];
-
   return {
     kind: StructureKind.Method,
     isAsync: true,
@@ -67,6 +46,5 @@ export const generateFindUniqueMethod = (
     typeParameters,
     parameters,
     statements: `return this.${modelCamel}Service.findUnique<T>(args);`,
-    docs,
   };
 };

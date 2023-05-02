@@ -11,6 +11,7 @@ import {
   generateFindUniqueMethod,
   generateUpdateMethod,
 } from './methods';
+import { NestjsAuthorizedServicesImportPathConfig } from '../../config.type';
 
 import { Model } from '@trxn/hapify-core';
 
@@ -20,11 +21,11 @@ export function generateServiceClass(model: Model): ClassDeclarationStructure {
 
   const methods = [
     generateFindUniqueMethod(model),
-    // generateFindManyMethod(model),
-    // generateCreateMethod(model),
-    // generateUpdateMethod(model),
-    // generateDeleteMethod(model),
-    // generateCountMethod(model),
+    generateFindManyMethod(model),
+    generateCreateMethod(model),
+    generateUpdateMethod(model),
+    generateDeleteMethod(model),
+    generateCountMethod(model),
   ];
 
   return {
@@ -41,6 +42,7 @@ export function generateServiceSourceFile(
   project: Project,
   model: Model,
   path: string,
+  importPaths: NestjsAuthorizedServicesImportPathConfig,
 ) {
   const fileName = `${kebab(model.name)}.service`;
   const filePath = `${path}/services/${fileName}.ts`;
@@ -48,7 +50,7 @@ export function generateServiceSourceFile(
   const sourceFile = project.createSourceFile(filePath);
 
   const serviceClass = generateServiceClass(model);
-  const imports = generateImports(model);
+  const imports = generateImports(model, importPaths);
 
   sourceFile.addImportDeclarations(imports);
   sourceFile.addClass(serviceClass);

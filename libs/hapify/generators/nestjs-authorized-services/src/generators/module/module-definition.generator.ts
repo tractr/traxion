@@ -6,7 +6,7 @@ export function generateModuleDefinitionSourceFile(
   project: Project,
   path: string,
 ) {
-  const fileName = `models-services.module-definition.ts`;
+  const fileName = `authorized-services.module-definition.ts`;
   const filePath = `${path}/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);

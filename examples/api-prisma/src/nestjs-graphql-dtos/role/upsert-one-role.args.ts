@@ -7,16 +7,15 @@ import { RoleUpdateInput } from './role-update.input';
 
 @ArgsType()
 export class UpsertOneRoleArgs {
+  @Field(() => RoleWhereUniqueInput, { nullable: false })
+  @Type(() => RoleWhereUniqueInput)
+  where!: RoleWhereUniqueInput;
 
-    @Field(() => RoleWhereUniqueInput, {nullable:false})
-    @Type(() => RoleWhereUniqueInput)
-    where!: RoleWhereUniqueInput;
+  @Field(() => RoleCreateInput, { nullable: false })
+  @Type(() => RoleCreateInput)
+  create!: RoleCreateInput;
 
-    @Field(() => RoleCreateInput, {nullable:false})
-    @Type(() => RoleCreateInput)
-    create!: RoleCreateInput;
-
-    @Field(() => RoleUpdateInput, {nullable:false})
-    @Type(() => RoleUpdateInput)
-    update!: RoleUpdateInput;
+  @Field(() => RoleUpdateInput, { nullable: false })
+  @Type(() => RoleUpdateInput)
+  update!: RoleUpdateInput;
 }

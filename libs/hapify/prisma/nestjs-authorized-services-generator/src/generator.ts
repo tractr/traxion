@@ -24,7 +24,8 @@ generatorHandler({
     const { generator, dmmf } = options;
 
     const output = generator.output?.value;
-    const { tsConfigFilePath } = generator.config;
+    const { tsConfigFilePath, nestjsServicesImportPath, caslImportPath } =
+      generator.config;
 
     // Validate the generator configuration
     if (!output) {
@@ -54,6 +55,10 @@ generatorHandler({
 
       hapifyNestjsAuthorizedServicesGenerator(project, schema, {
         output,
+        importPaths: {
+          nestjsServices: nestjsServicesImportPath,
+          casl: caslImportPath,
+        },
       });
     } catch (error) {
       logger.error(error);

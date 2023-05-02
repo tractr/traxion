@@ -13,35 +13,34 @@ import { RoleMaxAggregateInput } from './role-max-aggregate.input';
 
 @ArgsType()
 export class RoleAggregateArgs {
+  @Field(() => RoleWhereInput, { nullable: true })
+  @Type(() => RoleWhereInput)
+  where?: RoleWhereInput;
 
-    @Field(() => RoleWhereInput, {nullable:true})
-    @Type(() => RoleWhereInput)
-    where?: RoleWhereInput;
+  @Field(() => [RoleOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<RoleOrderByWithRelationInput>;
 
-    @Field(() => [RoleOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<RoleOrderByWithRelationInput>;
+  @Field(() => RoleWhereUniqueInput, { nullable: true })
+  cursor?: RoleWhereUniqueInput;
 
-    @Field(() => RoleWhereUniqueInput, {nullable:true})
-    cursor?: RoleWhereUniqueInput;
+  @Field(() => Int, { nullable: true })
+  take?: number;
 
-    @Field(() => Int, {nullable:true})
-    take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
 
-    @Field(() => Int, {nullable:true})
-    skip?: number;
+  @Field(() => RoleCountAggregateInput, { nullable: true })
+  _count?: RoleCountAggregateInput;
 
-    @Field(() => RoleCountAggregateInput, {nullable:true})
-    _count?: RoleCountAggregateInput;
+  @Field(() => RoleAvgAggregateInput, { nullable: true })
+  _avg?: RoleAvgAggregateInput;
 
-    @Field(() => RoleAvgAggregateInput, {nullable:true})
-    _avg?: RoleAvgAggregateInput;
+  @Field(() => RoleSumAggregateInput, { nullable: true })
+  _sum?: RoleSumAggregateInput;
 
-    @Field(() => RoleSumAggregateInput, {nullable:true})
-    _sum?: RoleSumAggregateInput;
+  @Field(() => RoleMinAggregateInput, { nullable: true })
+  _min?: RoleMinAggregateInput;
 
-    @Field(() => RoleMinAggregateInput, {nullable:true})
-    _min?: RoleMinAggregateInput;
-
-    @Field(() => RoleMaxAggregateInput, {nullable:true})
-    _max?: RoleMaxAggregateInput;
+  @Field(() => RoleMaxAggregateInput, { nullable: true })
+  _max?: RoleMaxAggregateInput;
 }

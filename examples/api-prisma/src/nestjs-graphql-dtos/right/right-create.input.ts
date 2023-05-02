@@ -4,10 +4,9 @@ import { RoleCreateNestedManyWithoutRightsInput } from '../role/role-create-nest
 
 @InputType()
 export class RightCreateInput {
+  @Field(() => String, { nullable: false })
+  name!: string;
 
-    @Field(() => String, {nullable:false})
-    name!: string;
-
-    @Field(() => RoleCreateNestedManyWithoutRightsInput, {nullable:true})
-    roles?: RoleCreateNestedManyWithoutRightsInput;
+  @Field(() => RoleCreateNestedManyWithoutRightsInput, { nullable: true })
+  roles?: RoleCreateNestedManyWithoutRightsInput;
 }
