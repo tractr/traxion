@@ -2,6 +2,9 @@
 import { Project } from 'ts-morph';
 
 import { Schema } from '@trxn/hapify-core';
+import { generateTypesSourceFile } from './generators/default-types/types.generator';
+import { generateUserOwnershipSourceFile } from './generators/user-ownership/userOwnershipGenerator';
+import { generateHelpersSourceFile } from './generators/helpers/helpers.generators';
 
 export type NestjsServiceAuthorizedGeneratorConfig = {
   output: string;
@@ -21,12 +24,13 @@ export function hapifyCaslConfigGenerator(
   // Generate modules definition
   // generateModuleDefinitionSourceFile(project, output);
 
- 
-  // Generate services, constants and providers
-  dataModel.models.forEach((model) => {
+  generateTypesSourceFile(project, output);
+  generateUserOwnershipSourceFile(project, output);
+  generateHelpersSourceFile(project, output);
 
-  });
-  console.warn(`🚜 ~ file: generate.ts:29 ~ model:`);
+  // Generate services, constants and providers
+  dataModel.models.forEach((model) => {});
+
 
   // generate route index.ts for exports
   // generateDirectoryIndexExporter(project, output);
