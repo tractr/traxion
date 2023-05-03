@@ -6,7 +6,12 @@ import {
   VariableDeclarationKind,
 } from 'ts-morph';
 
-import { ModelWithOwnership } from '@trxn/hapify-core';
+import {
+  isForeignField,
+  isPrimaryField,
+  ModelWithOwnership,
+  or,
+} from '@trxn/hapify-core';
 
 export function generateImports(): ImportDeclarationStructure[] {
   return [
@@ -23,7 +28,7 @@ export function createSelectClose(
 ): Record<string, unknown> {
   return {
     select: {
-      ...model.primaryKey?.fields.reduce(
+      ...model.fields.filter(or(isPrimaryField, isForeignField)).reduce(
         (acc, field) => ({
           ...acc,
           [camel(field.name)]: true,

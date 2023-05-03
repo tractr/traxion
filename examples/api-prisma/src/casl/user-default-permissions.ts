@@ -41,13 +41,15 @@ export function userOwnershipPermission(
   // The user own the model, he can write on it
   canWriteActionsUser(abilities, user, false);
 
-  // Role: the user doesn't own
+  // Role: the user own
   // -> default permission
   canReadActionsRole(abilities, user);
-  // The user doesn't own the model, he can't write on it
+  // The user own the model, he can write on it
+  canWriteActionsRole(abilities, user, false);
 
-  // Right: the user doesn't own
+  // Right: the user own
   // -> default permission
   canReadActionsRight(abilities, user);
-  // The user doesn't own the model, he can't write on it
+  // The user own the model, he can write on it
+  canWriteActionsRight(abilities, user, false);
 }
