@@ -1,12 +1,6 @@
 import { Project } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
-
-export function generateTypesIndexSourceFile(
-  project: Project,
-  models: Model[],
-  path: string,
-) {
+export function generateTypesIndexSourceFile(project: Project, path: string) {
   const fileName = 'index.ts';
   const filePath = `${path}/types/${fileName}`;
 

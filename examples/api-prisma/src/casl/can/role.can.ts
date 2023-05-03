@@ -59,3 +59,22 @@ export function canDeleteRole(
     id: { in: [...getConcatValueByPath<number[]>('user.role.id', user)] },
   });
 }
+
+export function canReadActionsRole(
+  abilities: AbilityBuilder<AppAbility>,
+  user: UserWithOwnershipIds,
+) {
+  canReadRole(abilities, user);
+  canSearchRole(abilities, user);
+  canCountRole(abilities, user);
+}
+
+export function canWriteActionsRole(
+  abilities: AbilityBuilder<AppAbility>,
+  user: UserWithOwnershipIds,
+  allowDelete = false,
+) {
+  canCreateRole(abilities, user);
+  canUpdateRole(abilities, user);
+  if (allowDelete) canDeleteRole(abilities, user);
+}
