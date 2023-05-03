@@ -12,6 +12,7 @@
     "lib": ["esnext", "dom"],
     "module": "esnext",
     "moduleResolution": "node",
+    "noPropertyAccessFromIndexSignature": false,
     "paths": {
       "@trxn/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@trxn/common": ["libs/common/src/index.ts"],

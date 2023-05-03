@@ -18,10 +18,10 @@ export function extractMetadataFromDocumentation(
 
   for (const line of lines) {
     // @trxn/maxLength: 255
-    const match = line.trim().match(/@trxn\/(\w+): (.*)/);
+    const match = line.trim().match(/@trxn\/(\w+):(.*)/);
     if (match) {
-      // [maxLength, '255']
-      const [key, value] = match;
+      // [@trxn/maxLength, maxLength, '255']
+      const [, key, value] = match;
       metadata[key] = value;
     } else {
       docs.push(line);

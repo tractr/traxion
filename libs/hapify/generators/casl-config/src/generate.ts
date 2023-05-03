@@ -59,5 +59,10 @@ export function hapifyCaslConfigGenerator(
   generateTypesIndexSourceFile(project, output);
 
   // Generate default permissions
-  generateUserDefaultPermissions(project, dataModel.models, output);
+  generateUserDefaultPermissions(
+    project,
+    userWithOwnershipIds,
+    dataModel.models,
+    output,
+  );
 }

@@ -86,7 +86,7 @@ export type Model = {
   fields: Field[];
   primaryKey: PrimaryKey | null;
   documentation?: string;
-  metadata?: Record<string, string>;
+  metadata?: Record<string, unknown>;
 };
 
 export type ModelDeclaration = {
@@ -95,6 +95,7 @@ export type ModelDeclaration = {
   fields: FieldDeclaration[];
   primaryKey: PrimaryKeyDeclaration | null;
   documentation?: string;
+  metadata?: Record<string, unknown>;
 };
 
 export type OwnedModel = {
