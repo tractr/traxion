@@ -10,66 +10,42 @@ export function canReadRight(
   abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
-  abilities.can(Action.Read, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
-  });
+  abilities.can(Action.Read, 'Right', { id: { in: [] } });
 }
 
 export function canCountRight(
   abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
-  abilities.can(Action.Count, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
-  });
+  abilities.can(Action.Count, 'Right', { id: { in: [] } });
 }
 
 export function canSearchRight(
   abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
-  abilities.can(Action.Search, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
-  });
+  abilities.can(Action.Search, 'Right', { id: { in: [] } });
 }
 
 export function canCreateRight(
   abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
-  abilities.can(Action.Create, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
-  });
+  abilities.can(Action.Create, 'Right', { id: { in: [] } });
 }
 
 export function canUpdateRight(
   abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
-  abilities.can(Action.Update, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
-  });
+  abilities.can(Action.Update, 'Right', { id: { in: [] } });
 }
 
 export function canDeleteRight(
   abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
-  abilities.can(Action.Delete, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
-  });
+  abilities.can(Action.Delete, 'Right', { id: { in: [] } });
 }
 
 export function canReadActionsRight(

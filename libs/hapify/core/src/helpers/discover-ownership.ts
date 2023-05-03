@@ -66,6 +66,12 @@ export function discoverOwnership(
       // We filter the owned models that are the current model
       (ownedModel) => model.name !== ownedModel.own.name,
     )
+    .filter(
+      // We filter the owned models that are marked as ignore
+      (ownedModel) =>
+        !ownedModel.own.metadata?.ownership ||
+        ownedModel.own.metadata.ownership !== 'ignore',
+    )
     .reduce((acc, ownedModel) => {
       acc.push({ ...ownedModel, own: { ...ownedModel.own, ownedModels: [] } });
       return acc;

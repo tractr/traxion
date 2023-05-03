@@ -25,9 +25,6 @@ import { Schema } from '../schema';
  * @returns
  */
 export function getUserModelFromSchema(schema: Schema): Model {
-  schema.models.forEach((model) => {
-    console.info(model.name, model.metadata);
-  });
   // If no user model is specified in the config, we will try to extract it from the schema
   let userModel = schema.models.filter((model) => !!model.metadata?.user);
 

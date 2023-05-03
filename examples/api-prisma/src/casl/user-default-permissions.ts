@@ -13,10 +13,6 @@ import { AppAbility, UserWithOwnershipIds } from './types';
 /**
  * Minimal permissions for a connected user
  *
- * This function is intended to be used by extended it in the project to compose your own permissions
- *
- * It is intended to be used when your are not using the roles and write from the database
- *
  * If an entity is owned by a user, the user can read, create and update it
  * else the user can only read it
  *
@@ -26,17 +22,33 @@ import { AppAbility, UserWithOwnershipIds } from './types';
  * An indirect owned model is a model that has a foreign key field linking to a direct owned model or another indirect owned model
  * -> this models can be automatically detected by the generator
  *
- * Hapify core need to know which models is the user model
+ * You can add tag on prisma schema to configure the ownership of a model:
+ *   - @trxn/permission:delete -> the user can read, write and delete the model
+ *   - @trxn/permission:write -> the user can read and write the model
+ *   - @trxn/permission:readonly -> the user can read the model
+ *   - @trxn/permission:internal -> the user cannot read and write  the model
+ *
+ *   - @trxn/ownership:ignore -> Ignore the model and all its relations for the ownership detection
  *
  */
 export function userOwnershipPermission(
   abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
+  // User: the user own
+  // -> default permission
   canReadActionsUser(abilities, user);
-  canWriteActionsUser(abilities, user);
+  // The user own the model, he can write on it
+  canWriteActionsUser(abilities, user, false);
+
+  // Role: the user own
+  // -> readOnly permission
   canReadActionsRole(abilities, user);
-  canWriteActionsRole(abilities, user);
+  // disabled cause of the read permission
+  // canWriteActionsRole(abilities, user, true);
+
+  // Right: the user doesn't own
+  // -> default permission
   canReadActionsRight(abilities, user);
-  canWriteActionsRight(abilities, user);
+  // The user doesn't own the model, he can't write on it
 }
