@@ -71,3 +71,22 @@ export function canDeleteRight(
     },
   });
 }
+
+export function canReadActionsRight(
+  abilities: AbilityBuilder<AppAbility>,
+  user: UserWithOwnershipIds,
+) {
+  canReadRight(abilities, user);
+  canSearchRight(abilities, user);
+  canCountRight(abilities, user);
+}
+
+export function canWriteActionsRight(
+  abilities: AbilityBuilder<AppAbility>,
+  user: UserWithOwnershipIds,
+  allowDelete = false,
+) {
+  canCreateRight(abilities, user);
+  canUpdateRight(abilities, user);
+  if (allowDelete) canDeleteRight(abilities, user);
+}
