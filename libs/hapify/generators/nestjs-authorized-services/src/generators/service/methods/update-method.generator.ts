@@ -49,6 +49,17 @@ export const generateUpdateMethod = (
     name: 'update',
     typeParameters,
     parameters,
-    statements: `return this.${modelCamel}Service.findUnique<T>(args, prisma);`,
+    statements: [
+      `const update = async(client: Prisma.${modelPascal}Delegate<undefined>) => {
+        const ${modelCamel} = await this.${modelCamel}Service.update<T>(args, client);
+
+        if (abilities?.cannot(Action.Update, subject('${modelPascal}', ${modelCamel})))
+          throw new ForbiddenException('cannot update ${modelPascal}');
+
+        return ${modelCamel};
+      }`,
+      `if (prisma) return update(prisma);`,
+      `return this.prisma.$transaction((client) => update(client.${modelCamel}));`,
+    ],
   };
 };

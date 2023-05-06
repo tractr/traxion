@@ -51,6 +51,11 @@ export const generateFindUniqueMethod = (
     name: 'findUnique',
     typeParameters,
     parameters,
-    statements: `return this.${modelCamel}Service.findUnique<T>(args, prisma);`,
+    statements: [
+      `const ${modelCamel} = await this.${modelCamel}Service.findUnique<T>(args, prisma);`,
+      `if (${modelCamel} && abilities?.cannot(Action.Read, subject('${modelPascal}', ${modelCamel})))`,
+      `  throw new ForbiddenException('cannot read this user');`,
+      `return ${modelCamel}`,
+    ],
   };
 };

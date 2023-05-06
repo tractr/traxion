@@ -1,7 +1,6 @@
 module.exports = {
   title: 'Traxion',
-  tagline:
-    'From Prisma to anything',
+  tagline: 'From Prisma to anything',
   url: 'https://www.traxion.dev',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -41,7 +40,7 @@ module.exports = {
             {
               label: 'Getting started',
               to: '/docs',
-            }
+            },
           ],
         },
         {
@@ -50,7 +49,7 @@ module.exports = {
             {
               label: 'Discord',
               href: 'https://discord.traxion.dev/',
-            }
+            },
           ],
         },
         {

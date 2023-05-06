@@ -1,5 +1,3 @@
 module.exports = {
-  documentation: [
-    'getting-started',
-  ],
+  documentation: ['getting-started'],
 };

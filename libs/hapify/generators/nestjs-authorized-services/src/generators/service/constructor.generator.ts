@@ -27,6 +27,14 @@ export function generateConstructor(
           },
         ],
       },
+      {
+        kind: StructureKind.Parameter,
+        name: `prisma`,
+        type: `PrismaService`,
+        scope: Scope.Private,
+        isReadonly: true,
+        decorators: [],
+      },
     ],
   };
 }

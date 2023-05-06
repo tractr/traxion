@@ -49,6 +49,17 @@ export const generateDeleteMethod = (
     name: 'delete',
     typeParameters,
     parameters,
-    statements: `return this.${modelCamel}Service.delete<T>(args, prisma);`,
+    statements: [
+      `const deleteCb = async(client: Prisma.${modelPascal}Delegate<undefined>) => {
+        const ${modelCamel} = await this.${modelCamel}Service.delete<T>(args, client);
+
+        if (abilities?.cannot(Action.Delete, subject('${modelPascal}', ${modelCamel})))
+          throw new ForbiddenException('cannot delete ${modelPascal}');
+
+        return ${modelCamel};
+      }`,
+      `if (prisma) return deleteCb(prisma);`,
+      `return this.prisma.$transaction((client) => deleteCb(client.${modelCamel}));`,
+    ],
   };
 };

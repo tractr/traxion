@@ -49,6 +49,17 @@ export const generateCreateMethod = (
     name: 'create',
     typeParameters,
     parameters,
-    statements: `return this.${modelCamel}Service.create<T>(args, prisma);`,
+    statements: [
+      `const create = async(client: Prisma.${modelPascal}Delegate<undefined>) => {
+        const ${modelCamel} = await this.${modelCamel}Service.create<T>(args, client);
+
+        if (abilities?.cannot(Action.Create, subject('${modelPascal}', ${modelCamel})))
+          throw new ForbiddenException('cannot create ${modelPascal}');
+
+        return ${modelCamel};
+      }`,
+      `if (prisma) return create(prisma);`,
+      `return this.prisma.$transaction((client) => create(client.${modelCamel}));`,
+    ],
   };
 };

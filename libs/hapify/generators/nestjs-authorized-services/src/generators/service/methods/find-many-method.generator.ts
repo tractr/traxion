@@ -49,6 +49,11 @@ export const generateFindManyMethod = (
     name: 'findMany',
     typeParameters,
     parameters,
-    statements: `return this.${modelCamel}Service.findMany<T>(args, prisma);`,
+    statements: [
+      `const where = {
+        AND: [abilities ? accessibleBy(abilities).${modelPascal} : {}, args?.where ?? {}],
+      };`,
+      `return this.${modelCamel}Service.findMany<T>({ ...args, where }, prisma);`,
+    ],
   };
 };

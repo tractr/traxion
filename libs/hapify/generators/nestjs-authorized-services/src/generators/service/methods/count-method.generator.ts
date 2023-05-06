@@ -49,6 +49,11 @@ export const generateCountMethod = (
     name: 'count',
     typeParameters,
     parameters,
-    statements: `return this.${modelCamel}Service.count<T>(args, prisma);`,
+    statements: [
+      `const where = {
+        AND: [abilities ? accessibleBy(abilities).${modelPascal} : {}, args?.where ?? {}],
+      };`,
+      `return this.${modelCamel}Service.count<T>({ ...args, where });`,
+    ],
   };
 };

@@ -1,34 +1,77 @@
-import { Injectable, Inject } from "@nestjs/common";
+import { Injectable, Inject, ForbiddenException } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
+import { accessibleBy } from "@casl/prisma";
+import { subject } from "@casl/ability";
+import { PrismaService } from "@trxn/nestjs-database";
+import { Action } from "@trxn/nestjs-casl";
 import { RoleService, ROLE_SERVICE } from "../../nestjs-services";
 import { AppAbility } from "../../casl-target";
 
 @Injectable()
 export class RoleAuthorizedService {
-    constructor(@Inject(ROLE_SERVICE) private readonly roleService: RoleService) {
+    constructor(@Inject(ROLE_SERVICE) private readonly roleService: RoleService, private readonly prisma: PrismaService) {
     }
 
     async findUnique<T extends Prisma.RoleFindUniqueArgs>(args: Prisma.SelectSubset<T, Prisma.RoleFindUniqueArgs>, abilities: AppAbility, prisma?: Prisma.RoleDelegate<undefined>) {
-        return this.roleService.findUnique<T>(args, prisma);
+        const role = await this.roleService.findUnique<T>(args, prisma);
+        if (role && abilities?.cannot(Action.Read, subject('Role', role)))
+          throw new ForbiddenException('cannot read this user');
+        return role
     }
 
     async findMany<T extends Prisma.RoleFindManyArgs>(args: Prisma.SelectSubset<T, Prisma.RoleFindManyArgs>, abilities: AppAbility, prisma?: Prisma.RoleDelegate<undefined>) {
-        return this.roleService.findMany<T>(args, prisma);
+        const where = {
+                AND: [abilities ? accessibleBy(abilities).Role : {}, args?.where ?? {}],
+              };
+        return this.roleService.findMany<T>({ ...args, where }, prisma);
     }
 
     async create<T extends Prisma.RoleCreateArgs>(args: Prisma.SelectSubset<T, Prisma.RoleCreateArgs>, abilities: AppAbility, prisma?: Prisma.RoleDelegate<undefined>) {
-        return this.roleService.create<T>(args, prisma);
+        const create = async(client: Prisma.RoleDelegate<undefined>) => {
+                const role = await this.roleService.create<T>(args, client);
+
+                if (abilities?.cannot(Action.Create, subject('Role', role)))
+                  throw new ForbiddenException('cannot create Role');
+
+                return role;
+              }
+
+        if (prisma) return create(prisma);
+        return this.prisma.$transaction((client) => create(client.role));
     }
 
     async update<T extends Prisma.RoleUpdateArgs>(args: Prisma.SelectSubset<T, Prisma.RoleUpdateArgs>, abilities: AppAbility, prisma?: Prisma.RoleDelegate<undefined>) {
-        return this.roleService.findUnique<T>(args, prisma);
+        const update = async(client: Prisma.RoleDelegate<undefined>) => {
+                const role = await this.roleService.update<T>(args, client);
+
+                if (abilities?.cannot(Action.Update, subject('Role', role)))
+                  throw new ForbiddenException('cannot update Role');
+
+                return role;
+              }
+
+        if (prisma) return update(prisma);
+        return this.prisma.$transaction((client) => update(client.role));
     }
 
     async delete<T extends Prisma.RoleDeleteArgs>(args: Prisma.SelectSubset<T, Prisma.RoleDeleteArgs>, abilities: AppAbility, prisma?: Prisma.RoleDelegate<undefined>) {
-        return this.roleService.delete<T>(args, prisma);
+        const deleteCb = async(client: Prisma.RoleDelegate<undefined>) => {
+                const role = await this.roleService.delete<T>(args, client);
+
+                if (abilities?.cannot(Action.Delete, subject('Role', role)))
+                  throw new ForbiddenException('cannot delete Role');
+
+                return role;
+              }
+
+        if (prisma) return deleteCb(prisma);
+        return this.prisma.$transaction((client) => deleteCb(client.role));
     }
 
-    async count<T extends Prisma.RoleCountArgs>(args: Prisma.SelectSubset<T, Prisma.RoleCountArgs>, abilities: AppAbility, prisma?: Prisma.RoleDelegate<undefined>) {
-        return this.roleService.count<T>(args, prisma);
+    async count<T extends Prisma.RoleCountArgs>(args: Prisma.SelectSubset<T, Prisma.RoleCountArgs>, abilities: AppAbility) {
+        const where = {
+                AND: [abilities ? accessibleBy(abilities).Role : {}, args?.where ?? {}],
+              };
+        return this.roleService.count<T>({ ...args, where });
     }
 }

@@ -17,12 +17,36 @@ export function generateImports(
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@nestjs/common`,
-      namedImports: [{ name: 'Injectable' }, { name: 'Inject' }],
+      namedImports: [
+        { name: 'Injectable' },
+        { name: 'Inject' },
+        { name: 'ForbiddenException' },
+      ],
     },
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@prisma/client`,
       namedImports: [{ name: 'Prisma' }],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: `@casl/prisma`,
+      namedImports: [{ name: 'accessibleBy' }],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: `@casl/ability`,
+      namedImports: [{ name: 'subject' }],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: '@trxn/nestjs-database',
+      namedImports: [{ name: `PrismaService` }],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: `@trxn/nestjs-casl`,
+      namedImports: [{ name: 'Action' }],
     },
     {
       kind: StructureKind.ImportDeclaration,
