@@ -12,6 +12,7 @@
     "lib": ["esnext", "dom"],
     "module": "esnext",
     "moduleResolution": "node",
+    "noPropertyAccessFromIndexSignature": false,
     "paths": {
       "@trxn/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@trxn/common": ["libs/common/src/index.ts"],
@@ -23,8 +24,17 @@
       "@trxn/hapify-generator-graphql-resolvers": [
         "libs/hapify/generators/graphql-resolvers/src/index.ts"
       ],
+      "@trxn/hapify-generator-graphql-resolvers-casl": [
+        "libs/hapify/generators/graphql-resolvers-casl/src/index.ts"
+      ],
+      "@trxn/hapify-generators-casl-config": [
+        "libs/hapify/generators/casl-config/src/index.ts"
+      ],
       "@trxn/hapify-generators-nestjs-services": [
         "libs/hapify/generators/nestjs-services/src/index.ts"
+      ],
+      "@trxn/hapify-prisma-casl-generator": [
+        "libs/hapify/prisma/casl-generator/src/index.ts"
       ],
       "@trxn/hapify-prisma-nestjs-graphql-resolvers-generator": [
         "libs/hapify/prisma/nestjs-graphql-resolvers-generator/src/index.ts"
@@ -51,7 +61,10 @@
         "libs/nestjs/reset-password/src/index.ts"
       ],
       "@trxn/nestjs-user": ["libs/nestjs/user/src/index.ts"],
-      "@trxn/nestjs-winston": ["libs/nestjs/winston/src/index.ts"]
+      "@trxn/nestjs-winston": ["libs/nestjs/winston/src/index.ts"],
+      "@trxn/prisma-nestjs-graphql-resolvers-casl-generator": [
+        "libs/hapify/prisma/nestjs-graphql-resolvers-casl-generator/src/index.ts"
+      ]
     },
     "resolveJsonModule": true,
     "rootDir": ".",

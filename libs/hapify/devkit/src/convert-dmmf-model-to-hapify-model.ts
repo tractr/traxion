@@ -1,6 +1,8 @@
 import type { DMMF } from '@prisma/generator-helper';
 
+import { extractMetadataFromDocumentation } from './extract-metadata-from-documentation';
 import { convertDmmfFieldToHapifyField } from './fields';
+import { validations } from './validations';
 
 import {
   EnumType,
@@ -20,7 +22,7 @@ export function convertDmmfModelToHapifyModel(
 ): ModelDeclaration {
   const {
     name,
-    documentation,
+    documentation: docs,
     primaryKey,
     // Got this properties from the DMMF Model object:
     // dbName,
@@ -33,9 +35,15 @@ export function convertDmmfModelToHapifyModel(
     convertDmmfFieldToHapifyField(model, field, enums),
   );
 
+  const { metadata, documentation } = extractMetadataFromDocumentation(
+    docs,
+    validations,
+  );
+
   return {
     name,
     documentation,
+    metadata,
     fields,
     primaryKey:
       primaryKey === null

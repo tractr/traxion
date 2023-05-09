@@ -10,36 +10,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Nestjs graphql dto generator
-generator nestjsGraphql {
-  provider                      = "prisma-nestjs-graphql"
-  output                        = "../src/nestjs-graphql-dtos"
-  purgeOutput                   = true
-  reExport                      = Single
-  noAtomicOperations            = true
-  fields_Validator_from         = "class-validator"
-  fields_Validator_input        = true
-  useInputType_StringFilter_ALL = "string"
-}
+// // Nestjs graphql dto generator
+// generator nestjsGraphql {
+//   provider                      = "prisma-nestjs-graphql"
+//   output                        = "../src/nestjs-graphql-dtos"
+//   purgeOutput                   = true
+//   reExport                      = Single
+//   noAtomicOperations            = true
+//   fields_Validator_from         = "class-validator"
+//   fields_Validator_input        = true
+//   useInputType_StringFilter_ALL = "string"
+// }
 
-// Nestjs grahpql resolvers generator
-generator graphqlResolvers {
-  provider = "trxn-prisma-nestjs-graphql-resolvers-generator"
-  output = "../src/nestjs-resolvers"
+// // Nestjs public grahpql resolvers generator
+// generator publicGraphqlResolvers {
+//   provider = "trxn-prisma-nestjs-graphql-resolvers-generator"
+//   output = "../src/nestjs-resolvers"
 
-  // Path relative to the output directory
+//   // Path relative to the output directory
+//   tsConfigFilePath   = "../../tsconfig.app.json"
+//   nestjsServicesImportPath = "./nestjs-services"
+//   nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
+// }
+
+// // Nestjs authorizd grahpql resolvers generator
+// generator authorizedGraphqlResolvers {
+//   provider = "trxn-prisma-nestjs-graphql-resolvers-casl-generator"
+//   output = "../src/authorized-nestjs-resolvers"
+
+//   // Path relative to the output directory
+//   tsConfigFilePath   = "../../tsconfig.app.json"
+//   nestjsServicesImportPath = "./nestjs-services"
+//   nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
+//   caslImportPath = "./casl-target"
+// }
+
+// // Nestjs common services generator
+// generator nestjsServices {
+//   provider = "trxn-prisma-nestjs-services-generator"
+//   output   = "../src/nestjs-services"
+//   tsConfigFilePath   = "../../tsconfig.app.json"
+// }
+
+generator caslConfig {
+  provider = "trxn-hapify-prisma-casl-generator"
+  output   = "../src/casl"
   tsConfigFilePath   = "../../tsconfig.app.json"
-  nestjsServicesImportPath = "./nestjs-services"
-  nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
 }
-
-// Nestjs common services generator
-generator nestjsServices {
-  provider = "trxn-prisma-nestjs-services-generator"
-  output   = "../src/nestjs-services"
-  tsConfigFilePath   = "../../tsconfig.app.json"
-}
-
 //--------------------------------------------
 // This part describe the project models
 //--------------------------------------------
