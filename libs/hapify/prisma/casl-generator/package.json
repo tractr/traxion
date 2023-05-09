@@ -1,0 +1,8 @@
+{
+  "name": "@trxn/hapify-prisma-casl-generator",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "bin": {
+    "trxn-hapify-prisma-casl-generator": "src/bin.js"
+  }
+}

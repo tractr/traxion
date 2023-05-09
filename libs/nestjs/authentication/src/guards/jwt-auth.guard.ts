@@ -22,9 +22,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
    * @param context - Nestjs execution context
    * @returns true if the request is authenticated, else return false
    */
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
@@ -39,9 +36,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
    * @param user
    * @returns
    */
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   handleRequest<User>(
     err: unknown | undefined,
     user: User | undefined,
@@ -78,9 +72,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
    * @param context - Nestjs execution context
    * @returns the request object
    */
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   getRequest(context: ExecutionContext): unknown {
     return getRequestFromContext(context);
   }

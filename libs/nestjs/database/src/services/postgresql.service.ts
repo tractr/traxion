@@ -4,9 +4,6 @@ import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class PostgresqlService {
-  @CheckAuth()
-  @CheckAuth()
-  @CheckAuth()
   async truncate(
     prisma: PrismaClient,
     schemaName: string = process.env.TRACTR_POSTGRESQL_SCHEMA || 'public',

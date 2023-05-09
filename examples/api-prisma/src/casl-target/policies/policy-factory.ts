@@ -1,17 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { subject } from '@casl/ability';
-
-import { AppAbility, AppSubjects, ModelSubjects } from '../types';
+import { AnyAbility, subject } from '@casl/ability';
 
 import { Action } from '@trxn/nestjs-casl';
 
-export function policyFactory<S extends keyof ModelSubjects>(
+export function policyFactory<S extends string>(
   action: Action | Action[],
   modelName: S,
 ) {
-  return <A extends AppAbility>(
+  return <A extends AnyAbility, V extends Record<PropertyKey, any>>(
     ability: A,
-    toValidate: ModelSubjects[S],
+    toValidate: V,
   ): boolean => {
     const actions = Array.isArray(action) ? action : [action];
 
