@@ -4,16 +4,15 @@ import { Int } from '@nestjs/graphql';
 
 @InputType()
 export class UserUncheckedCreateWithoutUserProfileInput {
+  @Field(() => Int, { nullable: true })
+  id?: number;
 
-    @Field(() => Int, {nullable:true})
-    id?: number;
+  @Field(() => String, { nullable: false })
+  email!: string;
 
-    @Field(() => String, {nullable:false})
-    email!: string;
+  @Field(() => String, { nullable: true })
+  name?: string;
 
-    @Field(() => String, {nullable:true})
-    name?: string;
-
-    @Field(() => Int, {nullable:false})
-    roleId!: number;
+  @Field(() => Int, { nullable: false })
+  roleId!: number;
 }

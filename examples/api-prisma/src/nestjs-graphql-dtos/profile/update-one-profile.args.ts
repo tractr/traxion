@@ -6,12 +6,11 @@ import { ProfileWhereUniqueInput } from './profile-where-unique.input';
 
 @ArgsType()
 export class UpdateOneProfileArgs {
+  @Field(() => ProfileUpdateInput, { nullable: false })
+  @Type(() => ProfileUpdateInput)
+  data!: ProfileUpdateInput;
 
-    @Field(() => ProfileUpdateInput, {nullable:false})
-    @Type(() => ProfileUpdateInput)
-    data!: ProfileUpdateInput;
-
-    @Field(() => ProfileWhereUniqueInput, {nullable:false})
-    @Type(() => ProfileWhereUniqueInput)
-    where!: ProfileWhereUniqueInput;
+  @Field(() => ProfileWhereUniqueInput, { nullable: false })
+  @Type(() => ProfileWhereUniqueInput)
+  where!: ProfileWhereUniqueInput;
 }

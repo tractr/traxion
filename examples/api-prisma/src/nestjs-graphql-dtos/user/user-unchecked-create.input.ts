@@ -5,19 +5,20 @@ import { ProfileUncheckedCreateNestedOneWithoutUserInput } from '../profile/prof
 
 @InputType()
 export class UserUncheckedCreateInput {
+  @Field(() => Int, { nullable: true })
+  id?: number;
 
-    @Field(() => Int, {nullable:true})
-    id?: number;
+  @Field(() => String, { nullable: false })
+  email!: string;
 
-    @Field(() => String, {nullable:false})
-    email!: string;
+  @Field(() => String, { nullable: true })
+  name?: string;
 
-    @Field(() => String, {nullable:true})
-    name?: string;
+  @Field(() => Int, { nullable: false })
+  roleId!: number;
 
-    @Field(() => Int, {nullable:false})
-    roleId!: number;
-
-    @Field(() => ProfileUncheckedCreateNestedOneWithoutUserInput, {nullable:true})
-    userProfile?: ProfileUncheckedCreateNestedOneWithoutUserInput;
+  @Field(() => ProfileUncheckedCreateNestedOneWithoutUserInput, {
+    nullable: true,
+  })
+  userProfile?: ProfileUncheckedCreateNestedOneWithoutUserInput;
 }

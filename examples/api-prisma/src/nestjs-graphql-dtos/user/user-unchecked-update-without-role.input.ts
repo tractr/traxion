@@ -5,16 +5,17 @@ import { ProfileUncheckedUpdateOneWithoutUserNestedInput } from '../profile/prof
 
 @InputType()
 export class UserUncheckedUpdateWithoutRoleInput {
+  @Field(() => Int, { nullable: true })
+  id?: number;
 
-    @Field(() => Int, {nullable:true})
-    id?: number;
+  @Field(() => String, { nullable: true })
+  email?: string;
 
-    @Field(() => String, {nullable:true})
-    email?: string;
+  @Field(() => String, { nullable: true })
+  name?: string;
 
-    @Field(() => String, {nullable:true})
-    name?: string;
-
-    @Field(() => ProfileUncheckedUpdateOneWithoutUserNestedInput, {nullable:true})
-    userProfile?: ProfileUncheckedUpdateOneWithoutUserNestedInput;
+  @Field(() => ProfileUncheckedUpdateOneWithoutUserNestedInput, {
+    nullable: true,
+  })
+  userProfile?: ProfileUncheckedUpdateOneWithoutUserNestedInput;
 }

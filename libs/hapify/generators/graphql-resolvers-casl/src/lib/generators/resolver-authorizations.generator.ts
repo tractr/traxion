@@ -1,6 +1,7 @@
 import { kebab, pascal } from 'case';
 import { Project } from 'ts-morph';
 
+import { updateFieldResolvers } from './field-resolver.generator';
 import { generateImports } from './imports.generator';
 import { updateMethods } from './method.generator';
 import { updateServiceDependencies } from './service-dependencies.generator';
@@ -37,4 +38,5 @@ export function generateResolverAuthorization(
 
   // Update methods
   updateMethods(model, resolverClass);
+  updateFieldResolvers(model, resolverClass);
 }

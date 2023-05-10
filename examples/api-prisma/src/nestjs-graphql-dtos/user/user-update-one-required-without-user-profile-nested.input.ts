@@ -10,20 +10,19 @@ import { UserUpdateWithoutUserProfileInput } from './user-update-without-user-pr
 
 @InputType()
 export class UserUpdateOneRequiredWithoutUserProfileNestedInput {
+  @HideField()
+  create?: UserCreateWithoutUserProfileInput;
 
-    @HideField()
-    create?: UserCreateWithoutUserProfileInput;
+  @HideField()
+  connectOrCreate?: UserCreateOrConnectWithoutUserProfileInput;
 
-    @HideField()
-    connectOrCreate?: UserCreateOrConnectWithoutUserProfileInput;
+  @HideField()
+  upsert?: UserUpsertWithoutUserProfileInput;
 
-    @HideField()
-    upsert?: UserUpsertWithoutUserProfileInput;
+  @Field(() => UserWhereUniqueInput, { nullable: true })
+  @Type(() => UserWhereUniqueInput)
+  connect?: UserWhereUniqueInput;
 
-    @Field(() => UserWhereUniqueInput, {nullable:true})
-    @Type(() => UserWhereUniqueInput)
-    connect?: UserWhereUniqueInput;
-
-    @HideField()
-    update?: UserUpdateWithoutUserProfileInput;
+  @HideField()
+  update?: UserUpdateWithoutUserProfileInput;
 }

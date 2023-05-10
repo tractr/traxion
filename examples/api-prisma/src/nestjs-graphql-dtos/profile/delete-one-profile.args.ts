@@ -5,8 +5,7 @@ import { Type } from 'class-transformer';
 
 @ArgsType()
 export class DeleteOneProfileArgs {
-
-    @Field(() => ProfileWhereUniqueInput, {nullable:false})
-    @Type(() => ProfileWhereUniqueInput)
-    where!: ProfileWhereUniqueInput;
+  @Field(() => ProfileWhereUniqueInput, { nullable: false })
+  @Type(() => ProfileWhereUniqueInput)
+  where!: ProfileWhereUniqueInput;
 }

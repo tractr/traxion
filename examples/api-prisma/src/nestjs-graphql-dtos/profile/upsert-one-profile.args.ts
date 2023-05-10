@@ -7,16 +7,15 @@ import { ProfileUpdateInput } from './profile-update.input';
 
 @ArgsType()
 export class UpsertOneProfileArgs {
+  @Field(() => ProfileWhereUniqueInput, { nullable: false })
+  @Type(() => ProfileWhereUniqueInput)
+  where!: ProfileWhereUniqueInput;
 
-    @Field(() => ProfileWhereUniqueInput, {nullable:false})
-    @Type(() => ProfileWhereUniqueInput)
-    where!: ProfileWhereUniqueInput;
+  @Field(() => ProfileCreateInput, { nullable: false })
+  @Type(() => ProfileCreateInput)
+  create!: ProfileCreateInput;
 
-    @Field(() => ProfileCreateInput, {nullable:false})
-    @Type(() => ProfileCreateInput)
-    create!: ProfileCreateInput;
-
-    @Field(() => ProfileUpdateInput, {nullable:false})
-    @Type(() => ProfileUpdateInput)
-    update!: ProfileUpdateInput;
+  @Field(() => ProfileUpdateInput, { nullable: false })
+  @Type(() => ProfileUpdateInput)
+  update!: ProfileUpdateInput;
 }

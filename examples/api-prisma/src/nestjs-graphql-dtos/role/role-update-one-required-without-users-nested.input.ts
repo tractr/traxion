@@ -10,20 +10,19 @@ import { RoleUpdateWithoutUsersInput } from './role-update-without-users.input';
 
 @InputType()
 export class RoleUpdateOneRequiredWithoutUsersNestedInput {
+  @HideField()
+  create?: RoleCreateWithoutUsersInput;
 
-    @HideField()
-    create?: RoleCreateWithoutUsersInput;
+  @HideField()
+  connectOrCreate?: RoleCreateOrConnectWithoutUsersInput;
 
-    @HideField()
-    connectOrCreate?: RoleCreateOrConnectWithoutUsersInput;
+  @HideField()
+  upsert?: RoleUpsertWithoutUsersInput;
 
-    @HideField()
-    upsert?: RoleUpsertWithoutUsersInput;
+  @Field(() => RoleWhereUniqueInput, { nullable: true })
+  @Type(() => RoleWhereUniqueInput)
+  connect?: RoleWhereUniqueInput;
 
-    @Field(() => RoleWhereUniqueInput, {nullable:true})
-    @Type(() => RoleWhereUniqueInput)
-    connect?: RoleWhereUniqueInput;
-
-    @HideField()
-    update?: RoleUpdateWithoutUsersInput;
+  @HideField()
+  update?: RoleUpdateWithoutUsersInput;
 }

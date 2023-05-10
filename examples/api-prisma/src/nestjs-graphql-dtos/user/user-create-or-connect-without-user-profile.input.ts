@@ -6,12 +6,11 @@ import { UserCreateWithoutUserProfileInput } from './user-create-without-user-pr
 
 @InputType()
 export class UserCreateOrConnectWithoutUserProfileInput {
+  @Field(() => UserWhereUniqueInput, { nullable: false })
+  @Type(() => UserWhereUniqueInput)
+  where!: UserWhereUniqueInput;
 
-    @Field(() => UserWhereUniqueInput, {nullable:false})
-    @Type(() => UserWhereUniqueInput)
-    where!: UserWhereUniqueInput;
-
-    @Field(() => UserCreateWithoutUserProfileInput, {nullable:false})
-    @Type(() => UserCreateWithoutUserProfileInput)
-    create!: UserCreateWithoutUserProfileInput;
+  @Field(() => UserCreateWithoutUserProfileInput, { nullable: false })
+  @Type(() => UserCreateWithoutUserProfileInput)
+  create!: UserCreateWithoutUserProfileInput;
 }

@@ -5,8 +5,7 @@ import { Type } from 'class-transformer';
 
 @ArgsType()
 export class CreateOneRightArgs {
-
-    @Field(() => RightCreateInput, {nullable:false})
-    @Type(() => RightCreateInput)
-    data!: RightCreateInput;
+  @Field(() => RightCreateInput, { nullable: false })
+  @Type(() => RightCreateInput)
+  data!: RightCreateInput;
 }

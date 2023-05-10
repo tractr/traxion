@@ -9,17 +9,16 @@ import { Type } from 'class-transformer';
 
 @InputType()
 export class UserCreateNestedManyWithoutRoleInput {
+  @HideField()
+  create?: Array<UserCreateWithoutRoleInput>;
 
-    @HideField()
-    create?: Array<UserCreateWithoutRoleInput>;
+  @HideField()
+  connectOrCreate?: Array<UserCreateOrConnectWithoutRoleInput>;
 
-    @HideField()
-    connectOrCreate?: Array<UserCreateOrConnectWithoutRoleInput>;
+  @HideField()
+  createMany?: UserCreateManyRoleInputEnvelope;
 
-    @HideField()
-    createMany?: UserCreateManyRoleInputEnvelope;
-
-    @Field(() => [UserWhereUniqueInput], {nullable:true})
-    @Type(() => UserWhereUniqueInput)
-    connect?: Array<UserWhereUniqueInput>;
+  @Field(() => [UserWhereUniqueInput], { nullable: true })
+  @Type(() => UserWhereUniqueInput)
+  connect?: Array<UserWhereUniqueInput>;
 }

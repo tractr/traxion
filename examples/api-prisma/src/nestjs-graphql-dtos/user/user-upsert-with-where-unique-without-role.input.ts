@@ -7,16 +7,15 @@ import { UserCreateWithoutRoleInput } from './user-create-without-role.input';
 
 @InputType()
 export class UserUpsertWithWhereUniqueWithoutRoleInput {
+  @Field(() => UserWhereUniqueInput, { nullable: false })
+  @Type(() => UserWhereUniqueInput)
+  where!: UserWhereUniqueInput;
 
-    @Field(() => UserWhereUniqueInput, {nullable:false})
-    @Type(() => UserWhereUniqueInput)
-    where!: UserWhereUniqueInput;
+  @Field(() => UserUpdateWithoutRoleInput, { nullable: false })
+  @Type(() => UserUpdateWithoutRoleInput)
+  update!: UserUpdateWithoutRoleInput;
 
-    @Field(() => UserUpdateWithoutRoleInput, {nullable:false})
-    @Type(() => UserUpdateWithoutRoleInput)
-    update!: UserUpdateWithoutRoleInput;
-
-    @Field(() => UserCreateWithoutRoleInput, {nullable:false})
-    @Type(() => UserCreateWithoutRoleInput)
-    create!: UserCreateWithoutRoleInput;
+  @Field(() => UserCreateWithoutRoleInput, { nullable: false })
+  @Type(() => UserCreateWithoutRoleInput)
+  create!: UserCreateWithoutRoleInput;
 }

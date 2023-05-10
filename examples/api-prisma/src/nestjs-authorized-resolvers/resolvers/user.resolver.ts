@@ -1,5 +1,4 @@
 import { AnyAbility } from '@casl/ability';
-import { Inject } from '@nestjs/common';
 import {
   Args,
   Info,
@@ -21,8 +20,6 @@ import {
 import {
   CreateOneUserArgs,
   DeleteOneUserArgs,
-  FindManyProfileArgs,
-  FindManyRoleArgs,
   FindManyUserArgs,
   FindUniqueUserArgs,
   Profile,
@@ -30,16 +27,9 @@ import {
   UpdateOneUserArgs,
   User,
 } from '../../nestjs-graphql-dtos';
-import {
-  ProfileService,
-  RoleService,
-  UserDefaultService,
-  UserService,
-} from '../../nestjs-services';
 import { FindManyUserOutput } from '../dtos';
 import {
   CREATE_USER,
-  UserSelectOwnershipIds as defaultOwnershipSelect,
   DELETE_USER,
   READ_USER,
   SEARCH_USER,
@@ -53,8 +43,6 @@ import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 export class UserResolver {
   constructor(
     private readonly userAuthorizedService: UserAuthorizedService,
-    private readonly userDefaultService: UserDefaultService,
-    private readonly userDefaultService: UserDefaultService,
     private readonly roleAuthorizedService: RoleAuthorizedService,
     private readonly profileAuthorizedService: ProfileAuthorizedService,
   ) {}

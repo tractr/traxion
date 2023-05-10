@@ -13,40 +13,39 @@ import { UserScalarWhereInput } from './user-scalar-where.input';
 
 @InputType()
 export class UserUncheckedUpdateManyWithoutRoleNestedInput {
+  @HideField()
+  create?: Array<UserCreateWithoutRoleInput>;
 
-    @HideField()
-    create?: Array<UserCreateWithoutRoleInput>;
+  @HideField()
+  connectOrCreate?: Array<UserCreateOrConnectWithoutRoleInput>;
 
-    @HideField()
-    connectOrCreate?: Array<UserCreateOrConnectWithoutRoleInput>;
+  @HideField()
+  upsert?: Array<UserUpsertWithWhereUniqueWithoutRoleInput>;
 
-    @HideField()
-    upsert?: Array<UserUpsertWithWhereUniqueWithoutRoleInput>;
+  @HideField()
+  createMany?: UserCreateManyRoleInputEnvelope;
 
-    @HideField()
-    createMany?: UserCreateManyRoleInputEnvelope;
+  @Field(() => [UserWhereUniqueInput], { nullable: true })
+  @Type(() => UserWhereUniqueInput)
+  set?: Array<UserWhereUniqueInput>;
 
-    @Field(() => [UserWhereUniqueInput], {nullable:true})
-    @Type(() => UserWhereUniqueInput)
-    set?: Array<UserWhereUniqueInput>;
+  @Field(() => [UserWhereUniqueInput], { nullable: true })
+  @Type(() => UserWhereUniqueInput)
+  disconnect?: Array<UserWhereUniqueInput>;
 
-    @Field(() => [UserWhereUniqueInput], {nullable:true})
-    @Type(() => UserWhereUniqueInput)
-    disconnect?: Array<UserWhereUniqueInput>;
+  @HideField()
+  delete?: Array<UserWhereUniqueInput>;
 
-    @HideField()
-    delete?: Array<UserWhereUniqueInput>;
+  @Field(() => [UserWhereUniqueInput], { nullable: true })
+  @Type(() => UserWhereUniqueInput)
+  connect?: Array<UserWhereUniqueInput>;
 
-    @Field(() => [UserWhereUniqueInput], {nullable:true})
-    @Type(() => UserWhereUniqueInput)
-    connect?: Array<UserWhereUniqueInput>;
+  @HideField()
+  update?: Array<UserUpdateWithWhereUniqueWithoutRoleInput>;
 
-    @HideField()
-    update?: Array<UserUpdateWithWhereUniqueWithoutRoleInput>;
+  @HideField()
+  updateMany?: Array<UserUpdateManyWithWhereWithoutRoleInput>;
 
-    @HideField()
-    updateMany?: Array<UserUpdateManyWithWhereWithoutRoleInput>;
-
-    @HideField()
-    deleteMany?: Array<UserScalarWhereInput>;
+  @HideField()
+  deleteMany?: Array<UserScalarWhereInput>;
 }

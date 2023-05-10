@@ -1,6 +1,15 @@
-import { AbilityBuilder } from "@casl/ability";
-import { AppAbility, UserWithOwnershipIds } from "./types";
-import { canReadActionsUser, canWriteActionsUser, canReadActionsProfile, canWriteActionsProfile, canReadActionsRole, canWriteActionsRole, canReadActionsRight, canWriteActionsRight } from "./can";
+import { AbilityBuilder } from '@casl/ability';
+import { AppAbility, UserWithOwnershipIds } from './types';
+import {
+  canReadActionsUser,
+  canWriteActionsUser,
+  canReadActionsProfile,
+  canWriteActionsProfile,
+  canReadActionsRole,
+  canWriteActionsRole,
+  canReadActionsRight,
+  canWriteActionsRight,
+} from './can';
 
 /**
  * Minimal permissions for a connected user
@@ -23,29 +32,31 @@ import { canReadActionsUser, canWriteActionsUser, canReadActionsProfile, canWrit
  *   - @trxn/ownership:ignore -> Ignore the model and all its relations for the ownership detection
  *
  */
-export function userOwnershipPermission(abilities: AbilityBuilder<AppAbility>, user: UserWithOwnershipIds) {
-    // User: the user own
-    // -> default permission 
-    canReadActionsUser(abilities, user);
-    // The user own the model, he can write on it
-    canWriteActionsUser(abilities, user, false);
-    
-    // Profile: the user own
-    // -> default permission 
-    canReadActionsProfile(abilities, user);
-    // The user own the model, he can write on it
-    canWriteActionsProfile(abilities, user, false);
-    
-    // Role: the user own
-    // -> default permission 
-    canReadActionsRole(abilities, user);
-    // The user own the model, he can write on it
-    canWriteActionsRole(abilities, user, false);
-    
-    // Right: the user own
-    // -> default permission 
-    canReadActionsRight(abilities, user);
-    // The user own the model, he can write on it
-    canWriteActionsRight(abilities, user, false);
-    
+export function userOwnershipPermission(
+  abilities: AbilityBuilder<AppAbility>,
+  user: UserWithOwnershipIds,
+) {
+  // User: the user own
+  // -> default permission
+  canReadActionsUser(abilities, user);
+  // The user own the model, he can write on it
+  canWriteActionsUser(abilities, user, false);
+
+  // Profile: the user own
+  // -> default permission
+  canReadActionsProfile(abilities, user);
+  // The user own the model, he can write on it
+  canWriteActionsProfile(abilities, user, false);
+
+  // Role: the user own
+  // -> default permission
+  canReadActionsRole(abilities, user);
+  // The user own the model, he can write on it
+  canWriteActionsRole(abilities, user, false);
+
+  // Right: the user own
+  // -> default permission
+  canReadActionsRight(abilities, user);
+  // The user own the model, he can write on it
+  canWriteActionsRight(abilities, user, false);
 }

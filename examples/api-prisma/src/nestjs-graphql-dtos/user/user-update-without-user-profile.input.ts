@@ -4,13 +4,12 @@ import { RoleUpdateOneRequiredWithoutUsersNestedInput } from '../role/role-updat
 
 @InputType()
 export class UserUpdateWithoutUserProfileInput {
+  @Field(() => String, { nullable: true })
+  email?: string;
 
-    @Field(() => String, {nullable:true})
-    email?: string;
+  @Field(() => String, { nullable: true })
+  name?: string;
 
-    @Field(() => String, {nullable:true})
-    name?: string;
-
-    @Field(() => RoleUpdateOneRequiredWithoutUsersNestedInput, {nullable:true})
-    role?: RoleUpdateOneRequiredWithoutUsersNestedInput;
+  @Field(() => RoleUpdateOneRequiredWithoutUsersNestedInput, { nullable: true })
+  role?: RoleUpdateOneRequiredWithoutUsersNestedInput;
 }

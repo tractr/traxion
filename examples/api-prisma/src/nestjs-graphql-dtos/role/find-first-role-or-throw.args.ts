@@ -9,23 +9,22 @@ import { RoleScalarFieldEnum } from './role-scalar-field.enum';
 
 @ArgsType()
 export class FindFirstRoleOrThrowArgs {
+  @Field(() => RoleWhereInput, { nullable: true })
+  @Type(() => RoleWhereInput)
+  where?: RoleWhereInput;
 
-    @Field(() => RoleWhereInput, {nullable:true})
-    @Type(() => RoleWhereInput)
-    where?: RoleWhereInput;
+  @Field(() => [RoleOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<RoleOrderByWithRelationInput>;
 
-    @Field(() => [RoleOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<RoleOrderByWithRelationInput>;
+  @Field(() => RoleWhereUniqueInput, { nullable: true })
+  cursor?: RoleWhereUniqueInput;
 
-    @Field(() => RoleWhereUniqueInput, {nullable:true})
-    cursor?: RoleWhereUniqueInput;
+  @Field(() => Int, { nullable: true })
+  take?: number;
 
-    @Field(() => Int, {nullable:true})
-    take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
 
-    @Field(() => Int, {nullable:true})
-    skip?: number;
-
-    @Field(() => [RoleScalarFieldEnum], {nullable:true})
-    distinct?: Array<keyof typeof RoleScalarFieldEnum>;
+  @Field(() => [RoleScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof RoleScalarFieldEnum>;
 }

@@ -6,12 +6,11 @@ import { ProfileCreateWithoutUserInput } from './profile-create-without-user.inp
 
 @InputType()
 export class ProfileCreateOrConnectWithoutUserInput {
+  @Field(() => ProfileWhereUniqueInput, { nullable: false })
+  @Type(() => ProfileWhereUniqueInput)
+  where!: ProfileWhereUniqueInput;
 
-    @Field(() => ProfileWhereUniqueInput, {nullable:false})
-    @Type(() => ProfileWhereUniqueInput)
-    where!: ProfileWhereUniqueInput;
-
-    @Field(() => ProfileCreateWithoutUserInput, {nullable:false})
-    @Type(() => ProfileCreateWithoutUserInput)
-    create!: ProfileCreateWithoutUserInput;
+  @Field(() => ProfileCreateWithoutUserInput, { nullable: false })
+  @Type(() => ProfileCreateWithoutUserInput)
+  create!: ProfileCreateWithoutUserInput;
 }

@@ -10,26 +10,25 @@ import { ProfileUpdateWithoutUserInput } from './profile-update-without-user.inp
 
 @InputType()
 export class ProfileUncheckedUpdateOneWithoutUserNestedInput {
+  @HideField()
+  create?: ProfileCreateWithoutUserInput;
 
-    @HideField()
-    create?: ProfileCreateWithoutUserInput;
+  @HideField()
+  connectOrCreate?: ProfileCreateOrConnectWithoutUserInput;
 
-    @HideField()
-    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput;
+  @HideField()
+  upsert?: ProfileUpsertWithoutUserInput;
 
-    @HideField()
-    upsert?: ProfileUpsertWithoutUserInput;
+  @Field(() => Boolean, { nullable: true })
+  disconnect?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    disconnect?: boolean;
+  @HideField()
+  delete?: boolean;
 
-    @HideField()
-    delete?: boolean;
+  @Field(() => ProfileWhereUniqueInput, { nullable: true })
+  @Type(() => ProfileWhereUniqueInput)
+  connect?: ProfileWhereUniqueInput;
 
-    @Field(() => ProfileWhereUniqueInput, {nullable:true})
-    @Type(() => ProfileWhereUniqueInput)
-    connect?: ProfileWhereUniqueInput;
-
-    @HideField()
-    update?: ProfileUpdateWithoutUserInput;
+  @HideField()
+  update?: ProfileUpdateWithoutUserInput;
 }

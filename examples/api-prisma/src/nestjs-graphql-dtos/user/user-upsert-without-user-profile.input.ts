@@ -6,12 +6,11 @@ import { UserCreateWithoutUserProfileInput } from './user-create-without-user-pr
 
 @InputType()
 export class UserUpsertWithoutUserProfileInput {
+  @Field(() => UserUpdateWithoutUserProfileInput, { nullable: false })
+  @Type(() => UserUpdateWithoutUserProfileInput)
+  update!: UserUpdateWithoutUserProfileInput;
 
-    @Field(() => UserUpdateWithoutUserProfileInput, {nullable:false})
-    @Type(() => UserUpdateWithoutUserProfileInput)
-    update!: UserUpdateWithoutUserProfileInput;
-
-    @Field(() => UserCreateWithoutUserProfileInput, {nullable:false})
-    @Type(() => UserCreateWithoutUserProfileInput)
-    create!: UserCreateWithoutUserProfileInput;
+  @Field(() => UserCreateWithoutUserProfileInput, { nullable: false })
+  @Type(() => UserCreateWithoutUserProfileInput)
+  create!: UserCreateWithoutUserProfileInput;
 }

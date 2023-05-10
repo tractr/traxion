@@ -47,7 +47,7 @@ export function generateFieldResolverOneRelationStatement(
   const foreignKey = camel(foreignField[0].name);
 
   const findUniqueCondition = isCurrentForeignSided
-    ? `{ ${primaryKey}: ${entityName}.${foreignKey} },`
+    ? `{ ${primaryKey}: ${entityName}.${foreignKey} }`
     : `{ ${foreignKey}: ${entityName}.${primaryKey} }`;
 
   return `

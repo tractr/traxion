@@ -3,7 +3,6 @@ import { InputType } from '@nestjs/graphql';
 
 @InputType()
 export class ProfileUpdateManyMutationInput {
-
-    @Field(() => String, {nullable:true})
-    address?: string;
+  @Field(() => String, { nullable: true })
+  address?: string;
 }

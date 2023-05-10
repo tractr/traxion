@@ -8,31 +8,30 @@ import { ProfileRelationFilter } from '../profile/profile-relation-filter.input'
 
 @InputType()
 export class UserWhereInput {
+  @Field(() => [UserWhereInput], { nullable: true })
+  AND?: Array<UserWhereInput>;
 
-    @Field(() => [UserWhereInput], {nullable:true})
-    AND?: Array<UserWhereInput>;
+  @Field(() => [UserWhereInput], { nullable: true })
+  OR?: Array<UserWhereInput>;
 
-    @Field(() => [UserWhereInput], {nullable:true})
-    OR?: Array<UserWhereInput>;
+  @Field(() => [UserWhereInput], { nullable: true })
+  NOT?: Array<UserWhereInput>;
 
-    @Field(() => [UserWhereInput], {nullable:true})
-    NOT?: Array<UserWhereInput>;
+  @Field(() => IntFilter, { nullable: true })
+  id?: IntFilter;
 
-    @Field(() => IntFilter, {nullable:true})
-    id?: IntFilter;
+  @Field(() => StringFilter, { nullable: true })
+  email?: StringFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    email?: StringFilter;
+  @Field(() => StringNullableFilter, { nullable: true })
+  name?: StringNullableFilter;
 
-    @Field(() => StringNullableFilter, {nullable:true})
-    name?: StringNullableFilter;
+  @Field(() => IntFilter, { nullable: true })
+  roleId?: IntFilter;
 
-    @Field(() => IntFilter, {nullable:true})
-    roleId?: IntFilter;
+  @Field(() => RoleRelationFilter, { nullable: true })
+  role?: RoleRelationFilter;
 
-    @Field(() => RoleRelationFilter, {nullable:true})
-    role?: RoleRelationFilter;
-
-    @Field(() => ProfileRelationFilter, {nullable:true})
-    userProfile?: ProfileRelationFilter;
+  @Field(() => ProfileRelationFilter, { nullable: true })
+  userProfile?: ProfileRelationFilter;
 }

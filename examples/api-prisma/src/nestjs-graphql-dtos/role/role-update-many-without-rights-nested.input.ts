@@ -12,37 +12,36 @@ import { RoleScalarWhereInput } from './role-scalar-where.input';
 
 @InputType()
 export class RoleUpdateManyWithoutRightsNestedInput {
+  @HideField()
+  create?: Array<RoleCreateWithoutRightsInput>;
 
-    @HideField()
-    create?: Array<RoleCreateWithoutRightsInput>;
+  @HideField()
+  connectOrCreate?: Array<RoleCreateOrConnectWithoutRightsInput>;
 
-    @HideField()
-    connectOrCreate?: Array<RoleCreateOrConnectWithoutRightsInput>;
+  @HideField()
+  upsert?: Array<RoleUpsertWithWhereUniqueWithoutRightsInput>;
 
-    @HideField()
-    upsert?: Array<RoleUpsertWithWhereUniqueWithoutRightsInput>;
+  @Field(() => [RoleWhereUniqueInput], { nullable: true })
+  @Type(() => RoleWhereUniqueInput)
+  set?: Array<RoleWhereUniqueInput>;
 
-    @Field(() => [RoleWhereUniqueInput], {nullable:true})
-    @Type(() => RoleWhereUniqueInput)
-    set?: Array<RoleWhereUniqueInput>;
+  @Field(() => [RoleWhereUniqueInput], { nullable: true })
+  @Type(() => RoleWhereUniqueInput)
+  disconnect?: Array<RoleWhereUniqueInput>;
 
-    @Field(() => [RoleWhereUniqueInput], {nullable:true})
-    @Type(() => RoleWhereUniqueInput)
-    disconnect?: Array<RoleWhereUniqueInput>;
+  @HideField()
+  delete?: Array<RoleWhereUniqueInput>;
 
-    @HideField()
-    delete?: Array<RoleWhereUniqueInput>;
+  @Field(() => [RoleWhereUniqueInput], { nullable: true })
+  @Type(() => RoleWhereUniqueInput)
+  connect?: Array<RoleWhereUniqueInput>;
 
-    @Field(() => [RoleWhereUniqueInput], {nullable:true})
-    @Type(() => RoleWhereUniqueInput)
-    connect?: Array<RoleWhereUniqueInput>;
+  @HideField()
+  update?: Array<RoleUpdateWithWhereUniqueWithoutRightsInput>;
 
-    @HideField()
-    update?: Array<RoleUpdateWithWhereUniqueWithoutRightsInput>;
+  @HideField()
+  updateMany?: Array<RoleUpdateManyWithWhereWithoutRightsInput>;
 
-    @HideField()
-    updateMany?: Array<RoleUpdateManyWithWhereWithoutRightsInput>;
-
-    @HideField()
-    deleteMany?: Array<RoleScalarWhereInput>;
+  @HideField()
+  deleteMany?: Array<RoleScalarWhereInput>;
 }

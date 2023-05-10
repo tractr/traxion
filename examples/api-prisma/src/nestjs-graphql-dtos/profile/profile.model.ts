@@ -6,16 +6,15 @@ import { User } from '../user/user.model';
 
 @ObjectType()
 export class Profile {
+  @Field(() => ID, { nullable: false })
+  id!: number;
 
-    @Field(() => ID, {nullable:false})
-    id!: number;
+  @Field(() => String, { nullable: false })
+  address!: string;
 
-    @Field(() => String, {nullable:false})
-    address!: string;
+  @Field(() => Int, { nullable: false })
+  userId!: number;
 
-    @Field(() => Int, {nullable:false})
-    userId!: number;
-
-    @Field(() => User, {nullable:false})
-    user?: User;
+  @Field(() => User, { nullable: false })
+  user?: User;
 }

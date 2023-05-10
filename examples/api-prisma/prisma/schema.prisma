@@ -31,15 +31,15 @@ generator nestjsGraphql {
 }
 
 // Nestjs public grahpql resolvers generator
-// generator publicGraphqlResolvers {
-//   provider = "trxn-prisma-nestjs-graphql-resolvers-generator"
-//   output   = "../src/nestjs-resolvers"
+generator publicGraphqlResolvers {
+  provider = "trxn-prisma-nestjs-graphql-resolvers-generator"
+  output   = "../src/nestjs-resolvers"
 
-//   // Path relative to the output directory
-//   tsConfigFilePath            = "../../tsconfig.app.json"
-//   nestjsServicesImportPath    = "./nestjs-services"
-//   nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
-// }
+  // Path relative to the output directory
+  tsConfigFilePath            = "../../tsconfig.app.json"
+  nestjsServicesImportPath    = "./nestjs-services"
+  nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
+}
 
 // Nestjs authorizd graphql resolvers generator
 generator authorizedGraphqlResolvers {
@@ -52,25 +52,25 @@ generator authorizedGraphqlResolvers {
 }
 
 // // Nestjs common services generator
-// generator nestjsServices {
-//   provider = "trxn-prisma-nestjs-services-generator"
-//   output   = "../src/nestjs-services"
-//   tsConfigFilePath   = "../../tsconfig.app.json"
-// }
+generator nestjsServices {
+  provider = "trxn-prisma-nestjs-services-generator"
+  output   = "../src/nestjs-services"
+  tsConfigFilePath   = "../../tsconfig.app.json"
+}
 
 // // Nestjs common services generator
-// generator nestjsAuthorizedServices {
-//   provider = "trxn-prisma-nestjs-authorized-services-generator"
-//   output   = "../src/nestjs-authorized-services"
-//   tsConfigFilePath   = "../../tsconfig.app.json"
-//   nestjsServicesImportPath = "./nestjs-services"
-// }
+generator nestjsAuthorizedServices {
+  provider = "trxn-prisma-nestjs-authorized-services-generator"
+  output   = "../src/nestjs-authorized-services"
+  tsConfigFilePath   = "../../tsconfig.app.json"
+  nestjsServicesImportPath = "./nestjs-services"
+}
 
-// generator caslConfig {
-//   provider = "trxn-hapify-prisma-casl-generator"
-//   output   = "../src/casl"
-//   tsConfigFilePath   = "../../tsconfig.app.json"
-// }
+generator caslConfig {
+  provider = "trxn-hapify-prisma-casl-generator"
+  output   = "../src/casl"
+  tsConfigFilePath   = "../../tsconfig.app.json"
+}
 
 //--------------------------------------------
 // This part describe the project models

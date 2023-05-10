@@ -1,9 +1,8 @@
-import {Module} from '@nestjs/common';
-import {DatabaseModule} from '@trxn/nestjs-database';
+import { Module } from '@nestjs/common';
+import { DatabaseModule } from '@trxn/nestjs-database';
 
 @Module({
-    imports: [DatabaseModule.register({})],
-    exports: [DatabaseModule],
+  imports: [DatabaseModule.register({})],
+  exports: [DatabaseModule],
 })
-export class PrismaModule {
-}
+export class PrismaModule {}

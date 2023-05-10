@@ -9,25 +9,24 @@ import { RightSumOrderByAggregateInput } from './right-sum-order-by-aggregate.in
 
 @InputType()
 export class RightOrderByWithAggregationInput {
+  @Field(() => SortOrder, { nullable: true })
+  id?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    id?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  name?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    name?: keyof typeof SortOrder;
+  @Field(() => RightCountOrderByAggregateInput, { nullable: true })
+  _count?: RightCountOrderByAggregateInput;
 
-    @Field(() => RightCountOrderByAggregateInput, {nullable:true})
-    _count?: RightCountOrderByAggregateInput;
+  @Field(() => RightAvgOrderByAggregateInput, { nullable: true })
+  _avg?: RightAvgOrderByAggregateInput;
 
-    @Field(() => RightAvgOrderByAggregateInput, {nullable:true})
-    _avg?: RightAvgOrderByAggregateInput;
+  @Field(() => RightMaxOrderByAggregateInput, { nullable: true })
+  _max?: RightMaxOrderByAggregateInput;
 
-    @Field(() => RightMaxOrderByAggregateInput, {nullable:true})
-    _max?: RightMaxOrderByAggregateInput;
+  @Field(() => RightMinOrderByAggregateInput, { nullable: true })
+  _min?: RightMinOrderByAggregateInput;
 
-    @Field(() => RightMinOrderByAggregateInput, {nullable:true})
-    _min?: RightMinOrderByAggregateInput;
-
-    @Field(() => RightSumOrderByAggregateInput, {nullable:true})
-    _sum?: RightSumOrderByAggregateInput;
+  @Field(() => RightSumOrderByAggregateInput, { nullable: true })
+  _sum?: RightSumOrderByAggregateInput;
 }

@@ -8,14 +8,13 @@ import { Type } from 'class-transformer';
 
 @InputType()
 export class RoleCreateNestedOneWithoutUsersInput {
+  @HideField()
+  create?: RoleCreateWithoutUsersInput;
 
-    @HideField()
-    create?: RoleCreateWithoutUsersInput;
+  @HideField()
+  connectOrCreate?: RoleCreateOrConnectWithoutUsersInput;
 
-    @HideField()
-    connectOrCreate?: RoleCreateOrConnectWithoutUsersInput;
-
-    @Field(() => RoleWhereUniqueInput, {nullable:true})
-    @Type(() => RoleWhereUniqueInput)
-    connect?: RoleWhereUniqueInput;
+  @Field(() => RoleWhereUniqueInput, { nullable: true })
+  @Type(() => RoleWhereUniqueInput)
+  connect?: RoleWhereUniqueInput;
 }

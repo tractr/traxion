@@ -5,16 +5,15 @@ import { UserOrderByWithRelationInput } from '../user/user-order-by-with-relatio
 
 @InputType()
 export class ProfileOrderByWithRelationInput {
+  @Field(() => SortOrder, { nullable: true })
+  id?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    id?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  address?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    address?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userId?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    userId?: keyof typeof SortOrder;
-
-    @Field(() => UserOrderByWithRelationInput, {nullable:true})
-    user?: UserOrderByWithRelationInput;
+  @Field(() => UserOrderByWithRelationInput, { nullable: true })
+  user?: UserOrderByWithRelationInput;
 }

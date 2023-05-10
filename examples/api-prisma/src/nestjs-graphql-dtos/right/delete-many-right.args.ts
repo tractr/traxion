@@ -5,8 +5,7 @@ import { Type } from 'class-transformer';
 
 @ArgsType()
 export class DeleteManyRightArgs {
-
-    @Field(() => RightWhereInput, {nullable:true})
-    @Type(() => RightWhereInput)
-    where?: RightWhereInput;
+  @Field(() => RightWhereInput, { nullable: true })
+  @Type(() => RightWhereInput)
+  where?: RightWhereInput;
 }

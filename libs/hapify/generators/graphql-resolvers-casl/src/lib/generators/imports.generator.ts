@@ -23,7 +23,6 @@ export function generateImports(
         { name: `SEARCH_${modelConstant}` },
         { name: `UPDATE_${modelConstant}` },
         { name: `DELETE_${modelConstant}` },
-        { name: 'UserSelectOwnershipIds', alias: 'defaultOwnershipSelect' },
       ],
     },
     {

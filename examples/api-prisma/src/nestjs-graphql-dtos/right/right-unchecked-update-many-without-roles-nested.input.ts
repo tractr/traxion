@@ -12,37 +12,36 @@ import { RightScalarWhereInput } from './right-scalar-where.input';
 
 @InputType()
 export class RightUncheckedUpdateManyWithoutRolesNestedInput {
+  @HideField()
+  create?: Array<RightCreateWithoutRolesInput>;
 
-    @HideField()
-    create?: Array<RightCreateWithoutRolesInput>;
+  @HideField()
+  connectOrCreate?: Array<RightCreateOrConnectWithoutRolesInput>;
 
-    @HideField()
-    connectOrCreate?: Array<RightCreateOrConnectWithoutRolesInput>;
+  @HideField()
+  upsert?: Array<RightUpsertWithWhereUniqueWithoutRolesInput>;
 
-    @HideField()
-    upsert?: Array<RightUpsertWithWhereUniqueWithoutRolesInput>;
+  @Field(() => [RightWhereUniqueInput], { nullable: true })
+  @Type(() => RightWhereUniqueInput)
+  set?: Array<RightWhereUniqueInput>;
 
-    @Field(() => [RightWhereUniqueInput], {nullable:true})
-    @Type(() => RightWhereUniqueInput)
-    set?: Array<RightWhereUniqueInput>;
+  @Field(() => [RightWhereUniqueInput], { nullable: true })
+  @Type(() => RightWhereUniqueInput)
+  disconnect?: Array<RightWhereUniqueInput>;
 
-    @Field(() => [RightWhereUniqueInput], {nullable:true})
-    @Type(() => RightWhereUniqueInput)
-    disconnect?: Array<RightWhereUniqueInput>;
+  @HideField()
+  delete?: Array<RightWhereUniqueInput>;
 
-    @HideField()
-    delete?: Array<RightWhereUniqueInput>;
+  @Field(() => [RightWhereUniqueInput], { nullable: true })
+  @Type(() => RightWhereUniqueInput)
+  connect?: Array<RightWhereUniqueInput>;
 
-    @Field(() => [RightWhereUniqueInput], {nullable:true})
-    @Type(() => RightWhereUniqueInput)
-    connect?: Array<RightWhereUniqueInput>;
+  @HideField()
+  update?: Array<RightUpdateWithWhereUniqueWithoutRolesInput>;
 
-    @HideField()
-    update?: Array<RightUpdateWithWhereUniqueWithoutRolesInput>;
+  @HideField()
+  updateMany?: Array<RightUpdateManyWithWhereWithoutRolesInput>;
 
-    @HideField()
-    updateMany?: Array<RightUpdateManyWithWhereWithoutRolesInput>;
-
-    @HideField()
-    deleteMany?: Array<RightScalarWhereInput>;
+  @HideField()
+  deleteMany?: Array<RightScalarWhereInput>;
 }

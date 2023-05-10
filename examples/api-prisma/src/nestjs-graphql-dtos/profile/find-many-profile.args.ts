@@ -9,23 +9,22 @@ import { ProfileScalarFieldEnum } from './profile-scalar-field.enum';
 
 @ArgsType()
 export class FindManyProfileArgs {
+  @Field(() => ProfileWhereInput, { nullable: true })
+  @Type(() => ProfileWhereInput)
+  where?: ProfileWhereInput;
 
-    @Field(() => ProfileWhereInput, {nullable:true})
-    @Type(() => ProfileWhereInput)
-    where?: ProfileWhereInput;
+  @Field(() => [ProfileOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<ProfileOrderByWithRelationInput>;
 
-    @Field(() => [ProfileOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<ProfileOrderByWithRelationInput>;
+  @Field(() => ProfileWhereUniqueInput, { nullable: true })
+  cursor?: ProfileWhereUniqueInput;
 
-    @Field(() => ProfileWhereUniqueInput, {nullable:true})
-    cursor?: ProfileWhereUniqueInput;
+  @Field(() => Int, { nullable: true })
+  take?: number;
 
-    @Field(() => Int, {nullable:true})
-    take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
 
-    @Field(() => Int, {nullable:true})
-    skip?: number;
-
-    @Field(() => [ProfileScalarFieldEnum], {nullable:true})
-    distinct?: Array<keyof typeof ProfileScalarFieldEnum>;
+  @Field(() => [ProfileScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof ProfileScalarFieldEnum>;
 }

@@ -8,14 +8,13 @@ import { Type } from 'class-transformer';
 
 @InputType()
 export class RightCreateNestedManyWithoutRolesInput {
+  @HideField()
+  create?: Array<RightCreateWithoutRolesInput>;
 
-    @HideField()
-    create?: Array<RightCreateWithoutRolesInput>;
+  @HideField()
+  connectOrCreate?: Array<RightCreateOrConnectWithoutRolesInput>;
 
-    @HideField()
-    connectOrCreate?: Array<RightCreateOrConnectWithoutRolesInput>;
-
-    @Field(() => [RightWhereUniqueInput], {nullable:true})
-    @Type(() => RightWhereUniqueInput)
-    connect?: Array<RightWhereUniqueInput>;
+  @Field(() => [RightWhereUniqueInput], { nullable: true })
+  @Type(() => RightWhereUniqueInput)
+  connect?: Array<RightWhereUniqueInput>;
 }

@@ -5,22 +5,21 @@ import { StringWithAggregatesFilter } from '../prisma/string-with-aggregates-fil
 
 @InputType()
 export class ProfileScalarWhereWithAggregatesInput {
+  @Field(() => [ProfileScalarWhereWithAggregatesInput], { nullable: true })
+  AND?: Array<ProfileScalarWhereWithAggregatesInput>;
 
-    @Field(() => [ProfileScalarWhereWithAggregatesInput], {nullable:true})
-    AND?: Array<ProfileScalarWhereWithAggregatesInput>;
+  @Field(() => [ProfileScalarWhereWithAggregatesInput], { nullable: true })
+  OR?: Array<ProfileScalarWhereWithAggregatesInput>;
 
-    @Field(() => [ProfileScalarWhereWithAggregatesInput], {nullable:true})
-    OR?: Array<ProfileScalarWhereWithAggregatesInput>;
+  @Field(() => [ProfileScalarWhereWithAggregatesInput], { nullable: true })
+  NOT?: Array<ProfileScalarWhereWithAggregatesInput>;
 
-    @Field(() => [ProfileScalarWhereWithAggregatesInput], {nullable:true})
-    NOT?: Array<ProfileScalarWhereWithAggregatesInput>;
+  @Field(() => IntWithAggregatesFilter, { nullable: true })
+  id?: IntWithAggregatesFilter;
 
-    @Field(() => IntWithAggregatesFilter, {nullable:true})
-    id?: IntWithAggregatesFilter;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  address?: StringWithAggregatesFilter;
 
-    @Field(() => StringWithAggregatesFilter, {nullable:true})
-    address?: StringWithAggregatesFilter;
-
-    @Field(() => IntWithAggregatesFilter, {nullable:true})
-    userId?: IntWithAggregatesFilter;
+  @Field(() => IntWithAggregatesFilter, { nullable: true })
+  userId?: IntWithAggregatesFilter;
 }

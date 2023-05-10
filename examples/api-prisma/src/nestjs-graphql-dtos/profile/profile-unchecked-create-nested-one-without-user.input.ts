@@ -8,14 +8,13 @@ import { Type } from 'class-transformer';
 
 @InputType()
 export class ProfileUncheckedCreateNestedOneWithoutUserInput {
+  @HideField()
+  create?: ProfileCreateWithoutUserInput;
 
-    @HideField()
-    create?: ProfileCreateWithoutUserInput;
+  @HideField()
+  connectOrCreate?: ProfileCreateOrConnectWithoutUserInput;
 
-    @HideField()
-    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput;
-
-    @Field(() => ProfileWhereUniqueInput, {nullable:true})
-    @Type(() => ProfileWhereUniqueInput)
-    connect?: ProfileWhereUniqueInput;
+  @Field(() => ProfileWhereUniqueInput, { nullable: true })
+  @Type(() => ProfileWhereUniqueInput)
+  connect?: ProfileWhereUniqueInput;
 }

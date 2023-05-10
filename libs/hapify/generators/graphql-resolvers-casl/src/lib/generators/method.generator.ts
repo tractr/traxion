@@ -1,7 +1,7 @@
-import { camel, constant, pascal } from 'case';
+import { constant, pascal } from 'case';
 import { ClassDeclaration, StructureKind } from 'ts-morph';
 
-import { isVirtualField, Model } from '@trxn/hapify-core';
+import { Model } from '@trxn/hapify-core';
 
 export function updateMethods(model: Model, resolver: ClassDeclaration) {
   const modelPascal = pascal(model.name);
@@ -48,34 +48,6 @@ export function updateMethods(model: Model, resolver: ClassDeclaration) {
         arguments: [accessPolicy],
       },
     ]);
-
-    // Add abilities parameter
-    method.addParameters([
-      {
-        kind: StructureKind.Parameter,
-        name: 'abilities',
-        type: 'AnyAbility',
-        decorators: [
-          {
-            name: 'CurrentAbilities',
-            arguments: [],
-          },
-        ],
-      },
-    ]);
-  });
-
-  // Update all resolve properties
-  return model.fields.filter(isVirtualField).forEach((virtualField) => {
-    const methodName = camel(virtualField.name);
-
-    // Get method
-    const method = resolver.getInstanceMethod(methodName);
-
-    if (!method)
-      throw new Error(
-        `Method ${methodName} not found in ${resolver.getName()}`,
-      );
 
     // Add abilities parameter
     method.addParameters([

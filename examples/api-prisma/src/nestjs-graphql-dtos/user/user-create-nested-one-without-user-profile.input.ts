@@ -8,14 +8,13 @@ import { Type } from 'class-transformer';
 
 @InputType()
 export class UserCreateNestedOneWithoutUserProfileInput {
+  @HideField()
+  create?: UserCreateWithoutUserProfileInput;
 
-    @HideField()
-    create?: UserCreateWithoutUserProfileInput;
+  @HideField()
+  connectOrCreate?: UserCreateOrConnectWithoutUserProfileInput;
 
-    @HideField()
-    connectOrCreate?: UserCreateOrConnectWithoutUserProfileInput;
-
-    @Field(() => UserWhereUniqueInput, {nullable:true})
-    @Type(() => UserWhereUniqueInput)
-    connect?: UserWhereUniqueInput;
+  @Field(() => UserWhereUniqueInput, { nullable: true })
+  @Type(() => UserWhereUniqueInput)
+  connect?: UserWhereUniqueInput;
 }
