@@ -1,19 +1,18 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { RightCreateWithoutRolesInput } from './right-create-without-roles.input';
-import { Type } from 'class-transformer';
+import { HideField } from '@nestjs/graphql';
 import { RightCreateOrConnectWithoutRolesInput } from './right-create-or-connect-without-roles.input';
 import { RightWhereUniqueInput } from './right-where-unique.input';
+import { Type } from 'class-transformer';
 
 @InputType()
 export class RightUncheckedCreateNestedManyWithoutRolesInput {
 
-    @Field(() => [RightCreateWithoutRolesInput], {nullable:true})
-    @Type(() => RightCreateWithoutRolesInput)
+    @HideField()
     create?: Array<RightCreateWithoutRolesInput>;
 
-    @Field(() => [RightCreateOrConnectWithoutRolesInput], {nullable:true})
-    @Type(() => RightCreateOrConnectWithoutRolesInput)
+    @HideField()
     connectOrCreate?: Array<RightCreateOrConnectWithoutRolesInput>;
 
     @Field(() => [RightWhereUniqueInput], {nullable:true})

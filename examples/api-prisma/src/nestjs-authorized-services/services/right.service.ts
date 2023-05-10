@@ -5,28 +5,28 @@ import { subject } from "@casl/ability";
 import { PrismaService } from "@trxn/nestjs-database";
 import { Action } from "@trxn/nestjs-casl";
 import { RightService, RIGHT_SERVICE } from "../../nestjs-services";
-import { AppAbility } from "../../casl-target";
+import { AnyAbility } from "@casl/ability";
 
 @Injectable()
 export class RightAuthorizedService {
     constructor(@Inject(RIGHT_SERVICE) private readonly rightService: RightService, private readonly prisma: PrismaService) {
     }
 
-    async findUnique<T extends Prisma.RightFindUniqueArgs>(args: Prisma.SelectSubset<T, Prisma.RightFindUniqueArgs>, abilities: AppAbility, prisma?: Prisma.RightDelegate<undefined>) {
+    async findUnique<T extends Prisma.RightFindUniqueArgs>(args: Prisma.SelectSubset<T, Prisma.RightFindUniqueArgs>, abilities: AnyAbility, prisma?: Prisma.RightDelegate<undefined>) {
         const right = await this.rightService.findUnique<T>(args, prisma);
         if (right && abilities?.cannot(Action.Read, subject('Right', right)))
           throw new ForbiddenException('cannot read this user');
         return right
     }
 
-    async findMany<T extends Prisma.RightFindManyArgs>(args: Prisma.SelectSubset<T, Prisma.RightFindManyArgs>, abilities: AppAbility, prisma?: Prisma.RightDelegate<undefined>) {
+    async findMany<T extends Prisma.RightFindManyArgs>(args: Prisma.SelectSubset<T, Prisma.RightFindManyArgs>, abilities: AnyAbility, prisma?: Prisma.RightDelegate<undefined>) {
         const where = {
                 AND: [abilities ? accessibleBy(abilities).Right : {}, args?.where ?? {}],
               };
         return this.rightService.findMany<T>({ ...args, where }, prisma);
     }
 
-    async create<T extends Prisma.RightCreateArgs>(args: Prisma.SelectSubset<T, Prisma.RightCreateArgs>, abilities: AppAbility, prisma?: Prisma.RightDelegate<undefined>) {
+    async create<T extends Prisma.RightCreateArgs>(args: Prisma.SelectSubset<T, Prisma.RightCreateArgs>, abilities: AnyAbility, prisma?: Prisma.RightDelegate<undefined>) {
         const create = async(client: Prisma.RightDelegate<undefined>) => {
                 const right = await this.rightService.create<T>(args, client);
 
@@ -40,7 +40,7 @@ export class RightAuthorizedService {
         return this.prisma.$transaction((client) => create(client.right));
     }
 
-    async update<T extends Prisma.RightUpdateArgs>(args: Prisma.SelectSubset<T, Prisma.RightUpdateArgs>, abilities: AppAbility, prisma?: Prisma.RightDelegate<undefined>) {
+    async update<T extends Prisma.RightUpdateArgs>(args: Prisma.SelectSubset<T, Prisma.RightUpdateArgs>, abilities: AnyAbility, prisma?: Prisma.RightDelegate<undefined>) {
         const update = async(client: Prisma.RightDelegate<undefined>) => {
                 const right = await this.rightService.update<T>(args, client);
 
@@ -54,7 +54,7 @@ export class RightAuthorizedService {
         return this.prisma.$transaction((client) => update(client.right));
     }
 
-    async delete<T extends Prisma.RightDeleteArgs>(args: Prisma.SelectSubset<T, Prisma.RightDeleteArgs>, abilities: AppAbility, prisma?: Prisma.RightDelegate<undefined>) {
+    async delete<T extends Prisma.RightDeleteArgs>(args: Prisma.SelectSubset<T, Prisma.RightDeleteArgs>, abilities: AnyAbility, prisma?: Prisma.RightDelegate<undefined>) {
         const deleteCb = async(client: Prisma.RightDelegate<undefined>) => {
                 const right = await this.rightService.delete<T>(args, client);
 
@@ -68,7 +68,7 @@ export class RightAuthorizedService {
         return this.prisma.$transaction((client) => deleteCb(client.right));
     }
 
-    async count<T extends Prisma.RightCountArgs>(args: Prisma.SelectSubset<T, Prisma.RightCountArgs>, abilities: AppAbility) {
+    async count<T extends Prisma.RightCountArgs>(args: Prisma.SelectSubset<T, Prisma.RightCountArgs>, abilities: AnyAbility, prisma?: Prisma.RightDelegate<undefined>) {
         const where = {
                 AND: [abilities ? accessibleBy(abilities).Right : {}, args?.where ?? {}],
               };

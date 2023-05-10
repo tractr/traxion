@@ -1,23 +1,26 @@
 import { Right, Role, FindUniqueRightArgs, FindManyRightArgs, CreateOneRightArgs, UpdateOneRightArgs, DeleteOneRightArgs, FindManyRoleArgs } from "../../nestjs-graphql-dtos";
+import { RightService, RightDefaultService, RoleService } from "../../nestjs-services";
+import { Inject } from "@nestjs/common";
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import { PrismaSelect } from "@paljs/plugins";
 import { Prisma } from "@prisma/client";
 import { getPathFromGraphQLResolveInfo } from "@trxn/nestjs-graphql";
 import { GraphQLResolveInfo } from "graphql";
 import { FindManyRightOutput } from "../dtos";
-import { CREATE_RIGHT, READ_RIGHT, SEARCH_RIGHT, UPDATE_RIGHT, DELETE_RIGHT, AppAbility } from "../../casl-target";
+import { CREATE_RIGHT, READ_RIGHT, SEARCH_RIGHT, UPDATE_RIGHT, DELETE_RIGHT, UserSelectOwnershipIds as defaultOwnershipSelect } from "../policies";
+import { AnyAbility } from "@casl/ability";
 import { RightAuthorizedService, RoleAuthorizedService } from "../../nestjs-authorized-services";
 import { CurrentAbilities, Policies } from "@trxn/nestjs-core";
 
 @Resolver(() => Right)
 export class RightResolver {
-    constructor(private readonly rightAuthorizedService: RightAuthorizedService, private readonly roleAuthorizedService: RoleAuthorizedService) {
+    constructor(private readonly rightAuthorizedService: RightAuthorizedService, private readonly rightDefaultService: RightDefaultService, private readonly rightDefaultService: RightDefaultService, private readonly roleAuthorizedService: RoleAuthorizedService) {
     }
 
     /** Query for a unique right */
     @Query(() => Right, { nullable: true })
     @Policies(READ_RIGHT)
-    async findUniqueRight(@Info() info: GraphQLResolveInfo, @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueRightArgs, @CurrentAbilities() abilities: AppAbility) {
+    async findUniqueRight(@Info() info: GraphQLResolveInfo, @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueRightArgs, @CurrentAbilities() abilities: AnyAbility) {
 
             const select = new PrismaSelect(info).value as Prisma.RightArgs;
             const right =  await this.rightAuthorizedService.findUnique({where, ...select}, abilities);
@@ -37,7 +40,7 @@ export class RightResolver {
                   skip = 0,
                   take = 100,
                 }
-              : FindManyRightArgs, @CurrentAbilities() abilities: AppAbility) {
+              : FindManyRightArgs, @CurrentAbilities() abilities: AnyAbility) {
 
             const select = new PrismaSelect(info).valueOf('rights', 'Right') as Prisma.RightArgs;
 
@@ -66,7 +69,7 @@ export class RightResolver {
     /** Create a single right. */
     @Mutation(() => Right, { nullable: true })
     @Policies(CREATE_RIGHT)
-    async createRight(@Info() info: GraphQLResolveInfo, @Args() { data }: CreateOneRightArgs, @CurrentAbilities() abilities: AppAbility) {
+    async createRight(@Info() info: GraphQLResolveInfo, @Args() { data }: CreateOneRightArgs, @CurrentAbilities() abilities: AnyAbility) {
 
             const select = new PrismaSelect(info).value as Prisma.RightArgs;
 
@@ -79,7 +82,7 @@ export class RightResolver {
     /** Update a single right. */
     @Mutation(() => Right, { nullable: true })
     @Policies(UPDATE_RIGHT)
-    async updateRight(@Info() info: GraphQLResolveInfo, @Args() { data, where }: UpdateOneRightArgs, @CurrentAbilities() abilities: AppAbility) {
+    async updateRight(@Info() info: GraphQLResolveInfo, @Args() { data, where }: UpdateOneRightArgs, @CurrentAbilities() abilities: AnyAbility) {
 
             const select = new PrismaSelect(info).value as Prisma.RightArgs;
 
@@ -92,7 +95,7 @@ export class RightResolver {
     /** Delete a single Right. */
     @Mutation(() => Right, { nullable: true })
     @Policies(DELETE_RIGHT)
-    async deleteRight(@Info() info: GraphQLResolveInfo, @Args() { where }: DeleteOneRightArgs, @CurrentAbilities() abilities: AppAbility) {
+    async deleteRight(@Info() info: GraphQLResolveInfo, @Args() { where }: DeleteOneRightArgs, @CurrentAbilities() abilities: AnyAbility) {
 
             const select = new PrismaSelect(info).value as Prisma.RightArgs;
 
@@ -103,7 +106,7 @@ export class RightResolver {
     }
 
     @ResolveField(() => Role)
-    async roles(@Info() info: GraphQLResolveInfo, @Parent() right: Right, @Args() findManyArgs: FindManyRoleArgs) {
+    async roles(@Info() info: GraphQLResolveInfo, @Parent() right: Right, @Args() findManyArgs: FindManyRoleArgs, @CurrentAbilities() abilities: AnyAbility) {
 
           let { roles } = right;
 

@@ -1,1 +1,1 @@
-export * from './get-select-prisma-user-query';
+export * from "./get-select-prisma-user-query";

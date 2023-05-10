@@ -1,32 +1,29 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { UserCreateWithoutUserProfileInput } from './user-create-without-user-profile.input';
-import { Type } from 'class-transformer';
+import { HideField } from '@nestjs/graphql';
 import { UserCreateOrConnectWithoutUserProfileInput } from './user-create-or-connect-without-user-profile.input';
 import { UserUpsertWithoutUserProfileInput } from './user-upsert-without-user-profile.input';
 import { UserWhereUniqueInput } from './user-where-unique.input';
+import { Type } from 'class-transformer';
 import { UserUpdateWithoutUserProfileInput } from './user-update-without-user-profile.input';
 
 @InputType()
 export class UserUpdateOneRequiredWithoutUserProfileNestedInput {
 
-    @Field(() => UserCreateWithoutUserProfileInput, {nullable:true})
-    @Type(() => UserCreateWithoutUserProfileInput)
+    @HideField()
     create?: UserCreateWithoutUserProfileInput;
 
-    @Field(() => UserCreateOrConnectWithoutUserProfileInput, {nullable:true})
-    @Type(() => UserCreateOrConnectWithoutUserProfileInput)
+    @HideField()
     connectOrCreate?: UserCreateOrConnectWithoutUserProfileInput;
 
-    @Field(() => UserUpsertWithoutUserProfileInput, {nullable:true})
-    @Type(() => UserUpsertWithoutUserProfileInput)
+    @HideField()
     upsert?: UserUpsertWithoutUserProfileInput;
 
     @Field(() => UserWhereUniqueInput, {nullable:true})
     @Type(() => UserWhereUniqueInput)
     connect?: UserWhereUniqueInput;
 
-    @Field(() => UserUpdateWithoutUserProfileInput, {nullable:true})
-    @Type(() => UserUpdateWithoutUserProfileInput)
+    @HideField()
     update?: UserUpdateWithoutUserProfileInput;
 }

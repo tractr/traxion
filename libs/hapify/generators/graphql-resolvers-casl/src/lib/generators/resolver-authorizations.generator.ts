@@ -1,15 +1,8 @@
 import { kebab, pascal } from 'case';
-import { Project, StructureKind, SyntaxKind } from 'ts-morph';
+import { Project } from 'ts-morph';
 
 import { generateImports } from './imports.generator';
 import { updateMethods } from './method.generator';
-import {
-  generateCreateMethod,
-  generateDeleteMethod,
-  generateFindManyMethod,
-  generateFindUniqueMethod,
-  generateUpdateMethod,
-} from './methods';
 import { updateServiceDependencies } from './service-dependencies.generator';
 import { GraphqlResolverCaslImportPathConfig } from '../config.type';
 

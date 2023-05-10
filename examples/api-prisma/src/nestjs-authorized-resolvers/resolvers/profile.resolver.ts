@@ -1,23 +1,26 @@
-import { Profile, User, FindUniqueProfileArgs, FindManyProfileArgs, CreateOneProfileArgs, UpdateOneProfileArgs, DeleteOneProfileArgs } from "../../nestjs-graphql-dtos";
+import { Profile, User, FindUniqueProfileArgs, FindManyProfileArgs, CreateOneProfileArgs, UpdateOneProfileArgs, DeleteOneProfileArgs, FindManyUserArgs } from "../../nestjs-graphql-dtos";
+import { ProfileService, ProfileDefaultService, UserService } from "../../nestjs-services";
+import { Inject } from "@nestjs/common";
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import { PrismaSelect } from "@paljs/plugins";
 import { Prisma } from "@prisma/client";
 import { getPathFromGraphQLResolveInfo } from "@trxn/nestjs-graphql";
 import { GraphQLResolveInfo } from "graphql";
 import { FindManyProfileOutput } from "../dtos";
-import { CREATE_PROFILE, READ_PROFILE, SEARCH_PROFILE, UPDATE_PROFILE, DELETE_PROFILE, AppAbility } from "../../casl-target";
+import { CREATE_PROFILE, READ_PROFILE, SEARCH_PROFILE, UPDATE_PROFILE, DELETE_PROFILE, UserSelectOwnershipIds as defaultOwnershipSelect } from "../policies";
+import { AnyAbility } from "@casl/ability";
 import { ProfileAuthorizedService, UserAuthorizedService } from "../../nestjs-authorized-services";
 import { CurrentAbilities, Policies } from "@trxn/nestjs-core";
 
 @Resolver(() => Profile)
 export class ProfileResolver {
-    constructor(private readonly profileAuthorizedService: ProfileAuthorizedService, private readonly userAuthorizedService: UserAuthorizedService) {
+    constructor(private readonly profileAuthorizedService: ProfileAuthorizedService, private readonly profileDefaultService: ProfileDefaultService, private readonly profileDefaultService: ProfileDefaultService, private readonly userAuthorizedService: UserAuthorizedService) {
     }
 
     /** Query for a unique profile */
     @Query(() => Profile, { nullable: true })
     @Policies(READ_PROFILE)
-    async findUniqueProfile(@Info() info: GraphQLResolveInfo, @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueProfileArgs, @CurrentAbilities() abilities: AppAbility) {
+    async findUniqueProfile(@Info() info: GraphQLResolveInfo, @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueProfileArgs, @CurrentAbilities() abilities: AnyAbility) {
 
             const select = new PrismaSelect(info).value as Prisma.ProfileArgs;
             const profile =  await this.profileAuthorizedService.findUnique({where, ...select}, abilities);
@@ -37,7 +40,7 @@ export class ProfileResolver {
                   skip = 0,
                   take = 100,
                 }
-              : FindManyProfileArgs, @CurrentAbilities() abilities: AppAbility) {
+              : FindManyProfileArgs, @CurrentAbilities() abilities: AnyAbility) {
 
             const select = new PrismaSelect(info).valueOf('profiles', 'Profile') as Prisma.ProfileArgs;
 
@@ -66,7 +69,7 @@ export class ProfileResolver {
     /** Create a single profile. */
     @Mutation(() => Profile, { nullable: true })
     @Policies(CREATE_PROFILE)
-    async createProfile(@Info() info: GraphQLResolveInfo, @Args() { data }: CreateOneProfileArgs, @CurrentAbilities() abilities: AppAbility) {
+    async createProfile(@Info() info: GraphQLResolveInfo, @Args() { data }: CreateOneProfileArgs, @CurrentAbilities() abilities: AnyAbility) {
 
             const select = new PrismaSelect(info).value as Prisma.ProfileArgs;
 
@@ -79,7 +82,7 @@ export class ProfileResolver {
     /** Update a single profile. */
     @Mutation(() => Profile, { nullable: true })
     @Policies(UPDATE_PROFILE)
-    async updateProfile(@Info() info: GraphQLResolveInfo, @Args() { data, where }: UpdateOneProfileArgs, @CurrentAbilities() abilities: AppAbility) {
+    async updateProfile(@Info() info: GraphQLResolveInfo, @Args() { data, where }: UpdateOneProfileArgs, @CurrentAbilities() abilities: AnyAbility) {
 
             const select = new PrismaSelect(info).value as Prisma.ProfileArgs;
 
@@ -92,7 +95,7 @@ export class ProfileResolver {
     /** Delete a single Profile. */
     @Mutation(() => Profile, { nullable: true })
     @Policies(DELETE_PROFILE)
-    async deleteProfile(@Info() info: GraphQLResolveInfo, @Args() { where }: DeleteOneProfileArgs, @CurrentAbilities() abilities: AppAbility) {
+    async deleteProfile(@Info() info: GraphQLResolveInfo, @Args() { where }: DeleteOneProfileArgs, @CurrentAbilities() abilities: AnyAbility) {
 
             const select = new PrismaSelect(info).value as Prisma.ProfileArgs;
 
@@ -103,7 +106,7 @@ export class ProfileResolver {
     }
 
     @ResolveField(() => User)
-    async user(@Info() info: GraphQLResolveInfo, @Parent() profile: Profile) {
+    async user(@Info() info: GraphQLResolveInfo, @Parent() profile: Profile, @CurrentAbilities() abilities: AnyAbility) {
 
           let { user } = profile;
 

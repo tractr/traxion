@@ -25,7 +25,7 @@ export const generateCreateMethod = (
     {
       name: 'abilities',
       kind: StructureKind.Parameter,
-      type: 'AppAbility',
+      type: 'AnyAbility',
     },
     {
       kind: StructureKind.Parameter,

@@ -23,8 +23,7 @@ generatorHandler({
     const { generator, dmmf } = options;
 
     const output = generator.output?.value;
-    const { tsConfigFilePath, nestjsServicesImportPath, caslImportPath } =
-      generator.config;
+    const { tsConfigFilePath, nestjsServicesImportPath } = generator.config;
 
     // Validate the generator configuration
     if (!output) {
@@ -56,7 +55,6 @@ generatorHandler({
         output,
         importPaths: {
           nestjsServices: nestjsServicesImportPath,
-          casl: caslImportPath,
         },
       });
     } catch (error) {

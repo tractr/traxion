@@ -5,28 +5,28 @@ import { subject } from "@casl/ability";
 import { PrismaService } from "@trxn/nestjs-database";
 import { Action } from "@trxn/nestjs-casl";
 import { RoleService, ROLE_SERVICE } from "../../nestjs-services";
-import { AppAbility } from "../../casl-target";
+import { AnyAbility } from "@casl/ability";
 
 @Injectable()
 export class RoleAuthorizedService {
     constructor(@Inject(ROLE_SERVICE) private readonly roleService: RoleService, private readonly prisma: PrismaService) {
     }
 
-    async findUnique<T extends Prisma.RoleFindUniqueArgs>(args: Prisma.SelectSubset<T, Prisma.RoleFindUniqueArgs>, abilities: AppAbility, prisma?: Prisma.RoleDelegate<undefined>) {
+    async findUnique<T extends Prisma.RoleFindUniqueArgs>(args: Prisma.SelectSubset<T, Prisma.RoleFindUniqueArgs>, abilities: AnyAbility, prisma?: Prisma.RoleDelegate<undefined>) {
         const role = await this.roleService.findUnique<T>(args, prisma);
         if (role && abilities?.cannot(Action.Read, subject('Role', role)))
           throw new ForbiddenException('cannot read this user');
         return role
     }
 
-    async findMany<T extends Prisma.RoleFindManyArgs>(args: Prisma.SelectSubset<T, Prisma.RoleFindManyArgs>, abilities: AppAbility, prisma?: Prisma.RoleDelegate<undefined>) {
+    async findMany<T extends Prisma.RoleFindManyArgs>(args: Prisma.SelectSubset<T, Prisma.RoleFindManyArgs>, abilities: AnyAbility, prisma?: Prisma.RoleDelegate<undefined>) {
         const where = {
                 AND: [abilities ? accessibleBy(abilities).Role : {}, args?.where ?? {}],
               };
         return this.roleService.findMany<T>({ ...args, where }, prisma);
     }
 
-    async create<T extends Prisma.RoleCreateArgs>(args: Prisma.SelectSubset<T, Prisma.RoleCreateArgs>, abilities: AppAbility, prisma?: Prisma.RoleDelegate<undefined>) {
+    async create<T extends Prisma.RoleCreateArgs>(args: Prisma.SelectSubset<T, Prisma.RoleCreateArgs>, abilities: AnyAbility, prisma?: Prisma.RoleDelegate<undefined>) {
         const create = async(client: Prisma.RoleDelegate<undefined>) => {
                 const role = await this.roleService.create<T>(args, client);
 
@@ -40,7 +40,7 @@ export class RoleAuthorizedService {
         return this.prisma.$transaction((client) => create(client.role));
     }
 
-    async update<T extends Prisma.RoleUpdateArgs>(args: Prisma.SelectSubset<T, Prisma.RoleUpdateArgs>, abilities: AppAbility, prisma?: Prisma.RoleDelegate<undefined>) {
+    async update<T extends Prisma.RoleUpdateArgs>(args: Prisma.SelectSubset<T, Prisma.RoleUpdateArgs>, abilities: AnyAbility, prisma?: Prisma.RoleDelegate<undefined>) {
         const update = async(client: Prisma.RoleDelegate<undefined>) => {
                 const role = await this.roleService.update<T>(args, client);
 
@@ -54,7 +54,7 @@ export class RoleAuthorizedService {
         return this.prisma.$transaction((client) => update(client.role));
     }
 
-    async delete<T extends Prisma.RoleDeleteArgs>(args: Prisma.SelectSubset<T, Prisma.RoleDeleteArgs>, abilities: AppAbility, prisma?: Prisma.RoleDelegate<undefined>) {
+    async delete<T extends Prisma.RoleDeleteArgs>(args: Prisma.SelectSubset<T, Prisma.RoleDeleteArgs>, abilities: AnyAbility, prisma?: Prisma.RoleDelegate<undefined>) {
         const deleteCb = async(client: Prisma.RoleDelegate<undefined>) => {
                 const role = await this.roleService.delete<T>(args, client);
 
@@ -68,7 +68,7 @@ export class RoleAuthorizedService {
         return this.prisma.$transaction((client) => deleteCb(client.role));
     }
 
-    async count<T extends Prisma.RoleCountArgs>(args: Prisma.SelectSubset<T, Prisma.RoleCountArgs>, abilities: AppAbility) {
+    async count<T extends Prisma.RoleCountArgs>(args: Prisma.SelectSubset<T, Prisma.RoleCountArgs>, abilities: AnyAbility, prisma?: Prisma.RoleDelegate<undefined>) {
         const where = {
                 AND: [abilities ? accessibleBy(abilities).Role : {}, args?.where ?? {}],
               };

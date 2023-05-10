@@ -1,19 +1,18 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { UserCreateWithoutUserProfileInput } from './user-create-without-user-profile.input';
-import { Type } from 'class-transformer';
+import { HideField } from '@nestjs/graphql';
 import { UserCreateOrConnectWithoutUserProfileInput } from './user-create-or-connect-without-user-profile.input';
 import { UserWhereUniqueInput } from './user-where-unique.input';
+import { Type } from 'class-transformer';
 
 @InputType()
 export class UserCreateNestedOneWithoutUserProfileInput {
 
-    @Field(() => UserCreateWithoutUserProfileInput, {nullable:true})
-    @Type(() => UserCreateWithoutUserProfileInput)
+    @HideField()
     create?: UserCreateWithoutUserProfileInput;
 
-    @Field(() => UserCreateOrConnectWithoutUserProfileInput, {nullable:true})
-    @Type(() => UserCreateOrConnectWithoutUserProfileInput)
+    @HideField()
     connectOrCreate?: UserCreateOrConnectWithoutUserProfileInput;
 
     @Field(() => UserWhereUniqueInput, {nullable:true})

@@ -26,7 +26,7 @@ export function generateUpdateMethod(model: Model, resolver: ClassDeclaration) {
     {
       kind: StructureKind.Parameter,
       name: 'abilities',
-      type: 'AppAbility',
+      type: 'AnyAbility',
       decorators: [
         {
           name: 'CurrentAbilities',

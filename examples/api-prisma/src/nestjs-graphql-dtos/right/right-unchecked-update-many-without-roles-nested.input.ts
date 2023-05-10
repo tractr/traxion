@@ -1,10 +1,11 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { RightCreateWithoutRolesInput } from './right-create-without-roles.input';
-import { Type } from 'class-transformer';
+import { HideField } from '@nestjs/graphql';
 import { RightCreateOrConnectWithoutRolesInput } from './right-create-or-connect-without-roles.input';
 import { RightUpsertWithWhereUniqueWithoutRolesInput } from './right-upsert-with-where-unique-without-roles.input';
 import { RightWhereUniqueInput } from './right-where-unique.input';
+import { Type } from 'class-transformer';
 import { RightUpdateWithWhereUniqueWithoutRolesInput } from './right-update-with-where-unique-without-roles.input';
 import { RightUpdateManyWithWhereWithoutRolesInput } from './right-update-many-with-where-without-roles.input';
 import { RightScalarWhereInput } from './right-scalar-where.input';
@@ -12,16 +13,13 @@ import { RightScalarWhereInput } from './right-scalar-where.input';
 @InputType()
 export class RightUncheckedUpdateManyWithoutRolesNestedInput {
 
-    @Field(() => [RightCreateWithoutRolesInput], {nullable:true})
-    @Type(() => RightCreateWithoutRolesInput)
+    @HideField()
     create?: Array<RightCreateWithoutRolesInput>;
 
-    @Field(() => [RightCreateOrConnectWithoutRolesInput], {nullable:true})
-    @Type(() => RightCreateOrConnectWithoutRolesInput)
+    @HideField()
     connectOrCreate?: Array<RightCreateOrConnectWithoutRolesInput>;
 
-    @Field(() => [RightUpsertWithWhereUniqueWithoutRolesInput], {nullable:true})
-    @Type(() => RightUpsertWithWhereUniqueWithoutRolesInput)
+    @HideField()
     upsert?: Array<RightUpsertWithWhereUniqueWithoutRolesInput>;
 
     @Field(() => [RightWhereUniqueInput], {nullable:true})
@@ -32,23 +30,19 @@ export class RightUncheckedUpdateManyWithoutRolesNestedInput {
     @Type(() => RightWhereUniqueInput)
     disconnect?: Array<RightWhereUniqueInput>;
 
-    @Field(() => [RightWhereUniqueInput], {nullable:true})
-    @Type(() => RightWhereUniqueInput)
+    @HideField()
     delete?: Array<RightWhereUniqueInput>;
 
     @Field(() => [RightWhereUniqueInput], {nullable:true})
     @Type(() => RightWhereUniqueInput)
     connect?: Array<RightWhereUniqueInput>;
 
-    @Field(() => [RightUpdateWithWhereUniqueWithoutRolesInput], {nullable:true})
-    @Type(() => RightUpdateWithWhereUniqueWithoutRolesInput)
+    @HideField()
     update?: Array<RightUpdateWithWhereUniqueWithoutRolesInput>;
 
-    @Field(() => [RightUpdateManyWithWhereWithoutRolesInput], {nullable:true})
-    @Type(() => RightUpdateManyWithWhereWithoutRolesInput)
+    @HideField()
     updateMany?: Array<RightUpdateManyWithWhereWithoutRolesInput>;
 
-    @Field(() => [RightScalarWhereInput], {nullable:true})
-    @Type(() => RightScalarWhereInput)
+    @HideField()
     deleteMany?: Array<RightScalarWhereInput>;
 }

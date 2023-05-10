@@ -36,7 +36,6 @@ export function generate() {
         tsConfigFilePath,
         nestjsServicesImportPath,
         nestjsGraphqlDtosImportPath,
-        caslImportPath,
         nestjsAuthorizedServicesImportPath,
       } = generator.config;
 
@@ -65,12 +64,6 @@ export function generate() {
         throw new Error(error);
       }
 
-      if (!caslImportPath) {
-        const error = `${GENERATOR_NAME}: No caslImportPath specified in generator block`;
-        logger.warn(error);
-        throw new Error(error);
-      }
-
       if (!nestjsAuthorizedServicesImportPath) {
         const error = `${GENERATOR_NAME}: No nestjsAuthorizedServicesImportPath specified in generator block`;
         logger.warn(error);
@@ -92,7 +85,7 @@ export function generate() {
         const schema = createSchema(convertDmmfToHapifySchemaDeclaration(dmmf));
 
         // Create the graphql resolvers
-        await generateNestjsResolvers(project, schema, {
+        generateNestjsResolvers(project, schema, {
           output,
           importPaths: {
             nestjsServices: nestjsServicesImportPath,
@@ -104,7 +97,6 @@ export function generate() {
         generateNestjsResolversChecks(project, schema, {
           output,
           importPaths: {
-            casl: caslImportPath,
             nestjsAuthorizedServices: nestjsAuthorizedServicesImportPath,
           },
         });

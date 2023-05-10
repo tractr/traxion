@@ -1,10 +1,11 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { RoleCreateWithoutRightsInput } from './role-create-without-rights.input';
-import { Type } from 'class-transformer';
+import { HideField } from '@nestjs/graphql';
 import { RoleCreateOrConnectWithoutRightsInput } from './role-create-or-connect-without-rights.input';
 import { RoleUpsertWithWhereUniqueWithoutRightsInput } from './role-upsert-with-where-unique-without-rights.input';
 import { RoleWhereUniqueInput } from './role-where-unique.input';
+import { Type } from 'class-transformer';
 import { RoleUpdateWithWhereUniqueWithoutRightsInput } from './role-update-with-where-unique-without-rights.input';
 import { RoleUpdateManyWithWhereWithoutRightsInput } from './role-update-many-with-where-without-rights.input';
 import { RoleScalarWhereInput } from './role-scalar-where.input';
@@ -12,16 +13,13 @@ import { RoleScalarWhereInput } from './role-scalar-where.input';
 @InputType()
 export class RoleUpdateManyWithoutRightsNestedInput {
 
-    @Field(() => [RoleCreateWithoutRightsInput], {nullable:true})
-    @Type(() => RoleCreateWithoutRightsInput)
+    @HideField()
     create?: Array<RoleCreateWithoutRightsInput>;
 
-    @Field(() => [RoleCreateOrConnectWithoutRightsInput], {nullable:true})
-    @Type(() => RoleCreateOrConnectWithoutRightsInput)
+    @HideField()
     connectOrCreate?: Array<RoleCreateOrConnectWithoutRightsInput>;
 
-    @Field(() => [RoleUpsertWithWhereUniqueWithoutRightsInput], {nullable:true})
-    @Type(() => RoleUpsertWithWhereUniqueWithoutRightsInput)
+    @HideField()
     upsert?: Array<RoleUpsertWithWhereUniqueWithoutRightsInput>;
 
     @Field(() => [RoleWhereUniqueInput], {nullable:true})
@@ -32,23 +30,19 @@ export class RoleUpdateManyWithoutRightsNestedInput {
     @Type(() => RoleWhereUniqueInput)
     disconnect?: Array<RoleWhereUniqueInput>;
 
-    @Field(() => [RoleWhereUniqueInput], {nullable:true})
-    @Type(() => RoleWhereUniqueInput)
+    @HideField()
     delete?: Array<RoleWhereUniqueInput>;
 
     @Field(() => [RoleWhereUniqueInput], {nullable:true})
     @Type(() => RoleWhereUniqueInput)
     connect?: Array<RoleWhereUniqueInput>;
 
-    @Field(() => [RoleUpdateWithWhereUniqueWithoutRightsInput], {nullable:true})
-    @Type(() => RoleUpdateWithWhereUniqueWithoutRightsInput)
+    @HideField()
     update?: Array<RoleUpdateWithWhereUniqueWithoutRightsInput>;
 
-    @Field(() => [RoleUpdateManyWithWhereWithoutRightsInput], {nullable:true})
-    @Type(() => RoleUpdateManyWithWhereWithoutRightsInput)
+    @HideField()
     updateMany?: Array<RoleUpdateManyWithWhereWithoutRightsInput>;
 
-    @Field(() => [RoleScalarWhereInput], {nullable:true})
-    @Type(() => RoleScalarWhereInput)
+    @HideField()
     deleteMany?: Array<RoleScalarWhereInput>;
 }

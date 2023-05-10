@@ -31,7 +31,7 @@ export function generateFindManyMethod(
     {
       kind: StructureKind.Parameter,
       name: 'abilities',
-      type: 'AppAbility',
+      type: 'AnyAbility',
       decorators: [
         {
           name: 'CurrentAbilities',

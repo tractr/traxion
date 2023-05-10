@@ -16,16 +16,20 @@ export function generateImports(
   return [
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: resolveDynamicPath(importPaths.casl, '../..'),
+      moduleSpecifier: '../policies',
       namedImports: [
         { name: `CREATE_${modelConstant}` },
         { name: `READ_${modelConstant}` },
         { name: `SEARCH_${modelConstant}` },
         { name: `UPDATE_${modelConstant}` },
         { name: `DELETE_${modelConstant}` },
-        { name: 'AppAbility' },
         { name: 'UserSelectOwnershipIds', alias: 'defaultOwnershipSelect' },
       ],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: '@casl/ability',
+      namedImports: [{ name: `AnyAbility` }],
     },
     {
       kind: StructureKind.ImportDeclaration,

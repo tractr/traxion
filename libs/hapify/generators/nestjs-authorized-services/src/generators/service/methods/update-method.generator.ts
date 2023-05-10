@@ -25,7 +25,7 @@ export const generateUpdateMethod = (
     {
       name: 'abilities',
       kind: StructureKind.Parameter,
-      type: 'AppAbility',
+      type: 'AnyAbility',
     },
     {
       kind: StructureKind.Parameter,

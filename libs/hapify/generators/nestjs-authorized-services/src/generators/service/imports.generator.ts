@@ -58,8 +58,8 @@ export function generateImports(
     },
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: resolveDynamicPath(importPaths.casl, '../..'),
-      namedImports: [{ name: `AppAbility` }],
+      moduleSpecifier: '@casl/ability',
+      namedImports: [{ name: `AnyAbility` }],
     },
   ];
 }
