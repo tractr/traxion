@@ -79,7 +79,7 @@ export function addCanAction(
         ${path
           .map(
             (p) =>
-              `...getConcatValueByPath<${primaryKey.scalar}[]>('user.${p}', user)`,
+              `...getConcatValueByPath<${primaryKey.scalar}[]>('${p}', user)`,
           )
           .join(',\n')}
       ] } });`,

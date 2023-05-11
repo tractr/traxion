@@ -4,11 +4,6 @@ export function generateImports(): ImportDeclarationStructure[] {
   return [
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: `@prisma/client`,
-      namedImports: [{ name: `Prisma` }],
-    },
-    {
-      kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `../constants`,
       namedImports: [{ name: `UserSelectOwnershipIds` }],
     },
@@ -28,7 +23,6 @@ export function generateGetSelectPrismaUserQuerySourceFile(
   const getSelectPrismaUserQuery = sourceFile.addFunction({
     name: 'getSelectPrismaUserQuery',
     isExported: true,
-    returnType: 'Prisma.UserSelect',
     statements: [`return UserSelectOwnershipIds.select;`],
   });
 

@@ -1,16 +1,17 @@
 import { AbilityBuilder } from '@casl/ability';
+
 import { AppAbility } from '../types/app-ability';
 import { UserWithOwnershipIds } from '../types/user-with-ownership-ids';
+
 import { getConcatValueByPath } from '@trxn/common';
 import { Action } from '@trxn/nestjs-casl';
+
 export function canReadRight(
   abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Read, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
+    id: { in: [...getConcatValueByPath<number[]>('role.rights.id', user)] },
   });
 }
 
@@ -19,9 +20,7 @@ export function canCountRight(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Count, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
+    id: { in: [...getConcatValueByPath<number[]>('role.rights.id', user)] },
   });
 }
 
@@ -30,9 +29,7 @@ export function canSearchRight(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Search, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
+    id: { in: [...getConcatValueByPath<number[]>('role.rights.id', user)] },
   });
 }
 
@@ -41,9 +38,7 @@ export function canCreateRight(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Create, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
+    id: { in: [...getConcatValueByPath<number[]>('role.rights.id', user)] },
   });
 }
 
@@ -52,9 +47,7 @@ export function canUpdateRight(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Update, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
+    id: { in: [...getConcatValueByPath<number[]>('role.rights.id', user)] },
   });
 }
 
@@ -63,9 +56,7 @@ export function canDeleteRight(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Delete, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
+    id: { in: [...getConcatValueByPath<number[]>('role.rights.id', user)] },
   });
 }
 
@@ -81,7 +72,7 @@ export function canReadActionsRight(
 export function canWriteActionsRight(
   abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
-  allowDelete: boolean = false,
+  allowDelete = false,
 ) {
   canCreateRight(abilities, user);
   canUpdateRight(abilities, user);
