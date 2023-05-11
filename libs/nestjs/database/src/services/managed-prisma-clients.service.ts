@@ -83,6 +83,7 @@ export class ManagedPrismaClientsService
    * If the prismaClient options is used the PrismaClient instance must configure
    * the log option and set the emit config to event to be able to use the extras.
    */
+
   addExtras(client: PrismaClient) {
     // Prisma do not throw if we try to add a listener on an event that is not configured
     // but the types say that we can't add a listener on an event that is not configured.

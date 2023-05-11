@@ -65,7 +65,7 @@ export function generate() {
         const schema = createSchema(convertDmmfToHapifySchemaDeclaration(dmmf));
 
         // Create the graphql resolvers
-        generateNestjsResolvers(project, schema, {
+        await generateNestjsResolvers(project, schema, {
           output,
           importPaths: {
             nestjsServices: nestjsServicesImportPath,

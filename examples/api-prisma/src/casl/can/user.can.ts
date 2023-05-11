@@ -11,7 +11,7 @@ export function canReadUser(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Read, 'User', {
-    id: { in: [...getConcatValueByPath<number[]>('user.id', user)] },
+    id: { in: [...getConcatValueByPath<number[]>('id', user)] },
   });
 }
 
@@ -20,7 +20,7 @@ export function canCountUser(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Count, 'User', {
-    id: { in: [...getConcatValueByPath<number[]>('user.id', user)] },
+    id: { in: [...getConcatValueByPath<number[]>('id', user)] },
   });
 }
 
@@ -29,7 +29,7 @@ export function canSearchUser(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Search, 'User', {
-    id: { in: [...getConcatValueByPath<number[]>('user.id', user)] },
+    id: { in: [...getConcatValueByPath<number[]>('id', user)] },
   });
 }
 
@@ -38,7 +38,7 @@ export function canCreateUser(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Create, 'User', {
-    id: { in: [...getConcatValueByPath<number[]>('user.id', user)] },
+    id: { in: [...getConcatValueByPath<number[]>('id', user)] },
   });
 }
 
@@ -47,7 +47,7 @@ export function canUpdateUser(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Update, 'User', {
-    id: { in: [...getConcatValueByPath<number[]>('user.id', user)] },
+    id: { in: [...getConcatValueByPath<number[]>('id', user)] },
   });
 }
 
@@ -56,7 +56,7 @@ export function canDeleteUser(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Delete, 'User', {
-    id: { in: [...getConcatValueByPath<number[]>('user.id', user)] },
+    id: { in: [...getConcatValueByPath<number[]>('id', user)] },
   });
 }
 

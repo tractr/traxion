@@ -11,12 +11,9 @@ import styles from './styles.module.css';
 
 function Home() {
   const context = useDocusaurusContext();
-  const {siteConfig = {}} = context;
+  const { siteConfig = {} } = context;
   return (
-    <Layout
-      title={siteConfig.title}
-      description={siteConfig.tagline}
-    >
+    <Layout title={siteConfig.title} description={siteConfig.tagline}>
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
@@ -35,18 +32,18 @@ function Home() {
         </div>
       </header>
       <main>
-
         <section className={styles.features}>
           <div className="container">
             <div className="row">
               <div className="col col--6 col--offset-3">
                 <h2>It starts from a Prisma schema</h2>
                 <p>
-                  Traxion is a suite of code generators for TypeScript, built upon the Prisma schema. The goal of this
-                  project
-                  is to eventually offer a comprehensive suite of generators that can generate a full-stack application,
-                  including all CRUD operations and authorization, using only the Prisma data schema as the source of
-                  truth.
+                  Traxion is a suite of code generators for TypeScript, built
+                  upon the Prisma schema. The goal of this project is to
+                  eventually offer a comprehensive suite of generators that can
+                  generate a full-stack application, including all CRUD
+                  operations and authorization, using only the Prisma data
+                  schema as the source of truth.
                 </p>
               </div>
             </div>

@@ -1,10 +1,9 @@
 import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
+import { RightWhereUniqueInput } from './right-where-unique.input';
 import { Type } from 'class-transformer';
-
 import { RightCreateInput } from './right-create.input';
 import { RightUpdateInput } from './right-update.input';
-import { RightWhereUniqueInput } from './right-where-unique.input';
 
 @ArgsType()
 export class UpsertOneRightArgs {

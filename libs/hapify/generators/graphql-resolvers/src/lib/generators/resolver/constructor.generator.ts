@@ -1,11 +1,11 @@
-import { camel, constant, pascal } from 'case';
+import { camel, pascal } from 'case';
 import {
   ConstructorDeclarationStructure,
   Scope,
   StructureKind,
 } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { getAllModelsFromRelation, Model } from '@trxn/hapify-core';
 
 export function generateConstructor(
   model: Model,
@@ -19,13 +19,7 @@ export function generateConstructor(
         type: `${pascal(model.name)}Service`,
         scope: Scope.Private,
         isReadonly: true,
-        decorators: [
-          {
-            kind: StructureKind.Decorator,
-            name: 'Inject',
-            arguments: [`${constant(model.name)}_SERVICE`],
-          },
-        ],
+        decorators: [],
       },
       {
         kind: StructureKind.Parameter,
@@ -33,14 +27,24 @@ export function generateConstructor(
         type: `${pascal(model.name)}DefaultService`,
         scope: Scope.Private,
         isReadonly: true,
-        decorators: [
-          {
-            kind: StructureKind.Decorator,
-            name: 'Inject',
-            arguments: [`${constant(model.name)}_DEFAULT_SERVICE`],
-          },
-        ],
+        decorators: [],
       },
+      {
+        kind: StructureKind.Parameter,
+        name: `${camel(model.name)}DefaultService`,
+        type: `${pascal(model.name)}DefaultService`,
+        scope: Scope.Private,
+        isReadonly: true,
+        decorators: [],
+      },
+      ...getAllModelsFromRelation(model).map((relatedModel) => ({
+        kind: StructureKind.Parameter as const,
+        name: `${camel(relatedModel.name)}Service`,
+        type: `${pascal(relatedModel.name)}Service`,
+        scope: Scope.Private,
+        isReadonly: true,
+        decorators: [],
+      })),
     ],
   };
 }

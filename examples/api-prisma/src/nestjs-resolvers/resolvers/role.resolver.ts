@@ -1,4 +1,16 @@
-import { Inject } from '@nestjs/common';
+import {
+  Role,
+  User,
+  Right,
+  FindUniqueRoleArgs,
+  FindManyRoleArgs,
+  CreateOneRoleArgs,
+  UpdateOneRoleArgs,
+  DeleteOneRoleArgs,
+  FindManyUserArgs,
+  FindManyRightArgs,
+} from '../../nestjs-graphql-dtos';
+import { RoleService, UserService, RightService } from '../../nestjs-services';
 import {
   Args,
   Info,
@@ -10,25 +22,16 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
+import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 import { GraphQLResolveInfo } from 'graphql';
-
-import {
-  Role,
-  User,
-  Right,
-  FindUniqueRoleArgs,
-  FindManyRoleArgs,
-  CreateOneRoleArgs,
-  UpdateOneRoleArgs,
-  DeleteOneRoleArgs,
-} from '../../nestjs-graphql-dtos';
-import { RoleService, ROLE_SERVICE } from '../../nestjs-services';
 import { FindManyRoleOutput } from '../dtos';
 
 @Resolver(() => Role)
 export class RoleResolver {
   constructor(
-    @Inject(ROLE_SERVICE) private readonly roleService: RoleService,
+    private readonly roleService: RoleService,
+    private readonly userService: UserService,
+    private readonly rightService: RightService,
   ) {}
 
   /** Query for a unique role */
@@ -122,12 +125,72 @@ export class RoleResolver {
   }
 
   @ResolveField(() => User)
-  users(@Parent() role: Role) {
-    return role.users;
+  async users(
+    @Info() info: GraphQLResolveInfo,
+    @Parent() role: Role,
+    @Args() findManyArgs: FindManyUserArgs,
+  ) {
+    let { users } = role;
+
+    if (typeof users === 'undefined') {
+      const select = new PrismaSelect(info).valueOf(
+        getPathFromGraphQLResolveInfo(info.path),
+        'User',
+      ) as Prisma.UserArgs;
+
+      const where: Prisma.UserWhereInput = {
+        AND: [
+          {
+            role: { id: role.id },
+          },
+          findManyArgs.where || {},
+        ],
+      };
+
+      users = await this.userService.findMany({
+        ...findManyArgs,
+        where,
+        ...select,
+      });
+    }
+
+    return users;
   }
 
   @ResolveField(() => Right)
-  rights(@Parent() role: Role) {
-    return role.rights;
+  async rights(
+    @Info() info: GraphQLResolveInfo,
+    @Parent() role: Role,
+    @Args() findManyArgs: FindManyRightArgs,
+  ) {
+    let { rights } = role;
+
+    if (typeof rights === 'undefined') {
+      const select = new PrismaSelect(info).valueOf(
+        getPathFromGraphQLResolveInfo(info.path),
+        'Right',
+      ) as Prisma.RightArgs;
+
+      const where: Prisma.RightWhereInput = {
+        AND: [
+          {
+            roles: {
+              some: {
+                id: role.id,
+              },
+            },
+          },
+          findManyArgs.where || {},
+        ],
+      };
+
+      rights = await this.rightService.findMany({
+        ...findManyArgs,
+        where,
+        ...select,
+      });
+    }
+
+    return rights;
   }
 }

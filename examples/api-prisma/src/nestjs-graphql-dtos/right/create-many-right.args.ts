@@ -1,8 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
 import { RightCreateManyInput } from './right-create-many.input';
+import { Type } from 'class-transformer';
 
 @ArgsType()
 export class CreateManyRightArgs {

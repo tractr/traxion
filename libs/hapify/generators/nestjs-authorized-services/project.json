@@ -1,0 +1,43 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "hapify-generators-nestjs-authorized-services",
+  "projectType": "library",
+  "sourceRoot": "libs/hapify/generators/nestjs-authorized-services/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "assets": ["libs/hapify/generators/nestjs-authorized-services/*.md"],
+        "main": "libs/hapify/generators/nestjs-authorized-services/src/index.ts",
+        "outputPath": "dist/libs/hapify/generators/nestjs-authorized-services",
+        "packageJson": "libs/hapify/generators/nestjs-authorized-services/package.json",
+        "tsConfig": "libs/hapify/generators/nestjs-authorized-services/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/hapify/generators/nestjs-authorized-services/**/*.ts"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/hapify/generators/nestjs-authorized-services/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    }
+  }
+}

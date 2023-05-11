@@ -1,9 +1,11 @@
 import { AbilityBuilder } from '@casl/ability';
 
 import {
+  canReadActionsProfile,
   canReadActionsRight,
   canReadActionsRole,
   canReadActionsUser,
+  canWriteActionsProfile,
   canWriteActionsRight,
   canWriteActionsRole,
   canWriteActionsUser,
@@ -40,6 +42,12 @@ export function userOwnershipPermission(
   canReadActionsUser(abilities, user);
   // The user own the model, he can write on it
   canWriteActionsUser(abilities, user, false);
+
+  // Profile: the user own
+  // -> default permission
+  canReadActionsProfile(abilities, user);
+  // The user own the model, he can write on it
+  canWriteActionsProfile(abilities, user, false);
 
   // Role: the user own
   // -> default permission

@@ -1,10 +1,9 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-
 import { IntFilter } from '../prisma/int-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
-import { RightListRelationFilter } from '../right/right-list-relation-filter.input';
 import { UserListRelationFilter } from '../user/user-list-relation-filter.input';
+import { RightListRelationFilter } from '../right/right-list-relation-filter.input';
 
 @InputType()
 export class RoleWhereInput {

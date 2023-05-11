@@ -1,8 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
 import { RoleScalarWhereInput } from './role-scalar-where.input';
+import { Type } from 'class-transformer';
 import { RoleUpdateManyMutationInput } from './role-update-many-mutation.input';
 
 @InputType()

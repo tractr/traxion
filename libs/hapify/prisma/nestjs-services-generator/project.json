@@ -6,7 +6,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/js:swc",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/hapify/prisma/nestjs-services-generator/*.md"],
         "main": "libs/hapify/prisma/nestjs-services-generator/src/index.ts",

@@ -1,6 +1,5 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-
 import { UserWhereInput } from './user-where.input';
 
 @InputType()

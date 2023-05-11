@@ -3,7 +3,7 @@ import {
   getRelatedModelsWithoutSelf,
   getRelations,
 } from './relation.helpers';
-import { Field,  } from '../../fields';
+import { Field } from '../../fields';
 import { Model, Relation } from '../model';
 
 describe('getRelations', () => {

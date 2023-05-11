@@ -1,0 +1,2 @@
+export const PROFILE_SERVICE = 'PROFILE_SERVICE' as const;
+export const PROFILE_DEFAULT_SERVICE = 'PROFILE_DEFAULT_SERVICE' as const;

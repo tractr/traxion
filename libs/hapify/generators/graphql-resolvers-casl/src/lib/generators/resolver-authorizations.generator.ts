@@ -1,9 +1,12 @@
 import { kebab, pascal } from 'case';
 import { Project } from 'ts-morph';
 
-import { GraphqlResolverCaslImportPathConfig } from '../config.type';
-import { generateResolverDecorators } from './decorators.generator';
+import { updateFieldResolvers } from './field-resolver.generator';
 import { generateImports } from './imports.generator';
+import { updateMethods } from './method.generator';
+import { updatePrismaSelect } from './prisma-select.generator';
+import { updateServiceDependencies } from './service-dependencies.generator';
+import { GraphqlResolverCaslImportPathConfig } from '../config.type';
 
 import { Model } from '@trxn/hapify-core';
 
@@ -27,9 +30,17 @@ export function generateResolverAuthorization(
   if (!resolverClass)
     throw new Error(`No resolver class found for ${modelPascal}Resolver`);
 
-  generateResolverDecorators(model, resolverClass);
-
+  // Add imports
   const imports = generateImports(model, importPaths);
-
   sourceFile.addImportDeclarations(imports);
+
+  // Update constructor and services
+  updateServiceDependencies(model, resolverClass);
+
+  // Update methods
+  updateMethods(model, resolverClass);
+  updateFieldResolvers(model, resolverClass);
+
+  // Update PrismaSelect
+  updatePrismaSelect(resolverClass);
 }

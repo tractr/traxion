@@ -14,5 +14,17 @@ export const UserSelectOwnershipIds = Prisma.validator<Prisma.UserArgs>()({
         },
       },
     },
+    userProfile: {
+      select: {
+        id: true,
+        userId: true,
+        user: {
+          select: {
+            id: true,
+            roleId: true,
+          },
+        },
+      },
+    },
   },
 });

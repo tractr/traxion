@@ -6,9 +6,11 @@ import type { BaseField } from './base-types';
 import { createFieldFactory, isFieldFactory } from './factories';
 import type {
   BaseConstraints,
+  ForeignConstraint,
   RelationConstraint,
   ScalarConstraint,
 } from './field';
+import { ForeignField } from './foreign-field';
 
 export type VirtualField = BaseField<'virtual', VirtualConstraints>;
 
@@ -17,6 +19,7 @@ export type VirtualField = BaseField<'virtual', VirtualConstraints>;
  */
 export type VirtualConstraints = BaseConstraints &
   RelationConstraint &
+  ForeignConstraint<ForeignField[] | null> &
   ScalarConstraint<null>;
 
 /**

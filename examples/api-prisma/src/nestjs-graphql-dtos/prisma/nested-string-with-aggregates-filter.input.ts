@@ -1,6 +1,5 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-
 import { NestedIntFilter } from './nested-int-filter.input';
 import { NestedStringFilter } from './nested-string-filter.input';
 

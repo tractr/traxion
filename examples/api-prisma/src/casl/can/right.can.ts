@@ -11,9 +11,7 @@ export function canReadRight(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Read, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
+    id: { in: [...getConcatValueByPath<number[]>('role.rights.id', user)] },
   });
 }
 
@@ -22,9 +20,7 @@ export function canCountRight(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Count, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
+    id: { in: [...getConcatValueByPath<number[]>('role.rights.id', user)] },
   });
 }
 
@@ -33,9 +29,7 @@ export function canSearchRight(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Search, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
+    id: { in: [...getConcatValueByPath<number[]>('role.rights.id', user)] },
   });
 }
 
@@ -44,9 +38,7 @@ export function canCreateRight(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Create, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
+    id: { in: [...getConcatValueByPath<number[]>('role.rights.id', user)] },
   });
 }
 
@@ -55,9 +47,7 @@ export function canUpdateRight(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Update, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
+    id: { in: [...getConcatValueByPath<number[]>('role.rights.id', user)] },
   });
 }
 
@@ -66,9 +56,7 @@ export function canDeleteRight(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Delete, 'Right', {
-    id: {
-      in: [...getConcatValueByPath<number[]>('user.role.rights.id', user)],
-    },
+    id: { in: [...getConcatValueByPath<number[]>('role.rights.id', user)] },
   });
 }
 

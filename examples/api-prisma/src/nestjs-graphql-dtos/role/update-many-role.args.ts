@@ -1,8 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
 import { RoleUpdateManyMutationInput } from './role-update-many-mutation.input';
+import { Type } from 'class-transformer';
 import { RoleWhereInput } from './role-where.input';
 
 @ArgsType()

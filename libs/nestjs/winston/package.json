@@ -6,9 +6,7 @@
     "url": "https://github.com/tractr/traxion"
   },
   "license": "UNLICENSED",
-  "dependencies": {
-    "@swc/helpers": "~0.4.11"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "publishConfig": {
     "access": "public",

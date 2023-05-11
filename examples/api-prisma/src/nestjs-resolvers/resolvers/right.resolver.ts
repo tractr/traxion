@@ -1,4 +1,14 @@
-import { Inject } from '@nestjs/common';
+import {
+  Right,
+  Role,
+  FindUniqueRightArgs,
+  FindManyRightArgs,
+  CreateOneRightArgs,
+  UpdateOneRightArgs,
+  DeleteOneRightArgs,
+  FindManyRoleArgs,
+} from '../../nestjs-graphql-dtos';
+import { RightService, RoleService } from '../../nestjs-services';
 import {
   Args,
   Info,
@@ -10,24 +20,15 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
+import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 import { GraphQLResolveInfo } from 'graphql';
-
-import {
-  Right,
-  Role,
-  FindUniqueRightArgs,
-  FindManyRightArgs,
-  CreateOneRightArgs,
-  UpdateOneRightArgs,
-  DeleteOneRightArgs,
-} from '../../nestjs-graphql-dtos';
-import { RightService, RIGHT_SERVICE } from '../../nestjs-services';
 import { FindManyRightOutput } from '../dtos';
 
 @Resolver(() => Right)
 export class RightResolver {
   constructor(
-    @Inject(RIGHT_SERVICE) private readonly rightService: RightService,
+    private readonly rightService: RightService,
+    private readonly roleService: RoleService,
   ) {}
 
   /** Query for a unique right */
@@ -121,7 +122,39 @@ export class RightResolver {
   }
 
   @ResolveField(() => Role)
-  roles(@Parent() right: Right) {
-    return right.roles;
+  async roles(
+    @Info() info: GraphQLResolveInfo,
+    @Parent() right: Right,
+    @Args() findManyArgs: FindManyRoleArgs,
+  ) {
+    let { roles } = right;
+
+    if (typeof roles === 'undefined') {
+      const select = new PrismaSelect(info).valueOf(
+        getPathFromGraphQLResolveInfo(info.path),
+        'Role',
+      ) as Prisma.RoleArgs;
+
+      const where: Prisma.RoleWhereInput = {
+        AND: [
+          {
+            rights: {
+              some: {
+                id: right.id,
+              },
+            },
+          },
+          findManyArgs.where || {},
+        ],
+      };
+
+      roles = await this.roleService.findMany({
+        ...findManyArgs,
+        where,
+        ...select,
+      });
+    }
+
+    return roles;
   }
 }

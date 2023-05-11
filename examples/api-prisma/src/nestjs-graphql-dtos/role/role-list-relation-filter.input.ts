@@ -1,6 +1,5 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-
 import { RoleWhereInput } from './role-where.input';
 
 @InputType()

@@ -1,12 +1,11 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
-
-import { RightAvgAggregate } from './right-avg-aggregate.output';
 import { RightCountAggregate } from './right-count-aggregate.output';
-import { RightMaxAggregate } from './right-max-aggregate.output';
-import { RightMinAggregate } from './right-min-aggregate.output';
+import { RightAvgAggregate } from './right-avg-aggregate.output';
 import { RightSumAggregate } from './right-sum-aggregate.output';
+import { RightMinAggregate } from './right-min-aggregate.output';
+import { RightMaxAggregate } from './right-max-aggregate.output';
 
 @ObjectType()
 export class RightGroupBy {

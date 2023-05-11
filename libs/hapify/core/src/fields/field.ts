@@ -56,6 +56,8 @@ export type PermissionConstraint = OptionalConstraint<
  */
 export type RelationConstraint = RequiredConstraint<'relation', Relation>;
 export type RelationsConstraint = RequiredConstraint<'relations', Relation[]>;
+export type ForeignConstraint<T extends ForeignField[] | null = null> =
+  RequiredConstraint<'foreign', T>;
 
 /**
  * Common constraints
@@ -157,12 +159,14 @@ export type RelationConstraintDeclaration = {
 };
 
 export type FieldDeclaration<F extends Field = Field> = F extends
-  | VirtualField
+  | Omit<VirtualField, 'foreign'>
   | ForeignField
   | PrimaryField
   ? F extends VirtualField
-    ? Omit<F, 'relation'> & { relation: RelationConstraintDeclaration }
-    : Omit<F, 'relations' | 'relation'>
+    ? Omit<F, 'relation' | 'foreign'> & {
+        relation: RelationConstraintDeclaration;
+      }
+    : Omit<F, 'relations' | 'relation' | 'foreign'>
   : F;
 
 export type FieldType = GetFieldType<Field>;

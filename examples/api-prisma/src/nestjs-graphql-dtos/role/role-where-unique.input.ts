@@ -6,4 +6,7 @@ import { Int } from '@nestjs/graphql';
 export class RoleWhereUniqueInput {
   @Field(() => Int, { nullable: true })
   id?: number;
+
+  @Field(() => String, { nullable: true })
+  name?: string;
 }

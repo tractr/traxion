@@ -1,9 +1,8 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
-import { RightCreateWithoutRolesInput } from './right-create-without-roles.input';
 import { RightWhereUniqueInput } from './right-where-unique.input';
+import { Type } from 'class-transformer';
+import { RightCreateWithoutRolesInput } from './right-create-without-roles.input';
 
 @InputType()
 export class RightCreateOrConnectWithoutRolesInput {

@@ -1,6 +1,7 @@
+import { join } from 'path';
+
 import { generatorHandler } from '@prisma/generator-helper';
 import { logger } from '@prisma/internals';
-import { join } from 'path';
 import { Project } from 'ts-morph';
 
 import { version } from '../package.json';
@@ -35,7 +36,7 @@ export function generate() {
         tsConfigFilePath,
         nestjsServicesImportPath,
         nestjsGraphqlDtosImportPath,
-        caslImportPath,
+        nestjsAuthorizedServicesImportPath,
       } = generator.config;
 
       // Validate the generator configuration
@@ -47,6 +48,24 @@ export function generate() {
 
       if (!tsConfigFilePath) {
         const error = `${GENERATOR_NAME}: No tsConfigFilePath specified in generator block`;
+        logger.warn(error);
+        throw new Error(error);
+      }
+
+      if (!nestjsServicesImportPath) {
+        const error = `${GENERATOR_NAME}: No nestjsServicesImportPath specified in generator block`;
+        logger.warn(error);
+        throw new Error(error);
+      }
+
+      if (!nestjsGraphqlDtosImportPath) {
+        const error = `${GENERATOR_NAME}: No nestjsGraphqlDtosImportPath specified in generator block`;
+        logger.warn(error);
+        throw new Error(error);
+      }
+
+      if (!nestjsAuthorizedServicesImportPath) {
+        const error = `${GENERATOR_NAME}: No nestjsAuthorizedServicesImportPath specified in generator block`;
         logger.warn(error);
         throw new Error(error);
       }
@@ -78,7 +97,7 @@ export function generate() {
         generateNestjsResolversChecks(project, schema, {
           output,
           importPaths: {
-            casl: caslImportPath,
+            nestjsAuthorizedServices: nestjsAuthorizedServicesImportPath,
           },
         });
       } catch (error) {
@@ -87,9 +106,9 @@ export function generate() {
       }
 
       // Remove unused imports
-      project
-        .getSourceFiles()
-        .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
+      // project
+      //   .getSourceFiles()
+      //   .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
 
       // Save project to file system
       project.saveSync();

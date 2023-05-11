@@ -1,91 +1,109 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-// // Nestjs graphql dto generator
-// generator nestjsGraphql {
-//   provider                      = "prisma-nestjs-graphql"
-//   output                        = "../src/nestjs-graphql-dtos"
-//   purgeOutput                   = true
-//   reExport                      = Single
-//   noAtomicOperations            = true
-//   fields_Validator_from         = "class-validator"
-//   fields_Validator_input        = true
-//   useInputType_StringFilter_ALL = "string"
-// }
+// Prisma default generator client
+generator client {
+  provider = "prisma-client-js"
+}
 
-// // Nestjs public grahpql resolvers generator
-// generator publicGraphqlResolvers {
-//   provider = "trxn-prisma-nestjs-graphql-resolvers-generator"
-//   output = "../src/nestjs-resolvers"
+// Nestjs graphql dto generator
+generator nestjsGraphql {
+  provider                      = "prisma-nestjs-graphql"
+  output                        = "../src/nestjs-graphql-dtos"
+  purgeOutput                   = true
+  reExport                      = Single
+  noAtomicOperations            = true
+  fields_Validator_from         = "class-validator"
+  fields_Validator_input        = true
+  useInputType_StringFilter_ALL = "string"
 
-//   // Path relative to the output directory
-//   tsConfigFilePath   = "../../tsconfig.app.json"
-//   nestjsServicesImportPath = "./nestjs-services"
-//   nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
-// }
+  // Remove Nested creation, update, upsert and delete
+  decorate_1_type      = "*Nested*Input"
+  decorate_1_field     = "!(connect|disconnect|set)"
+  decorate_1_name      = "HideField"
+  decorate_1_from      = "@nestjs/graphql"
+  decorate_1_arguments = "[]"
+}
 
-// // Nestjs authorizd grahpql resolvers generator
-// generator authorizedGraphqlResolvers {
-//   provider = "trxn-prisma-nestjs-graphql-resolvers-casl-generator"
-//   output = "../src/authorized-nestjs-resolvers"
+// Nestjs public grahpql resolvers generator
+generator publicGraphqlResolvers {
+  provider = "trxn-prisma-nestjs-graphql-resolvers-generator"
+  output   = "../src/nestjs-resolvers"
 
-//   // Path relative to the output directory
-//   tsConfigFilePath   = "../../tsconfig.app.json"
-//   nestjsServicesImportPath = "./nestjs-services"
-//   nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
-//   caslImportPath = "./casl-target"
-// }
+  // Path relative to the output directory
+  tsConfigFilePath            = "../../tsconfig.app.json"
+  nestjsServicesImportPath    = "./nestjs-services"
+  nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
+}
 
-// // Nestjs common services generator
-// generator nestjsServices {
-//   provider = "trxn-prisma-nestjs-services-generator"
-//   output   = "../src/nestjs-services"
-//   tsConfigFilePath   = "../../tsconfig.app.json"
-// }
+// Nestjs authorizd graphql resolvers generator
+generator authorizedGraphqlResolvers {
+  provider                           = "trxn-prisma-nestjs-graphql-resolvers-casl-generator"
+  output                             = "../src/nestjs-authorized-resolvers"
+  tsConfigFilePath                   = "../../tsconfig.app.json"
+  nestjsServicesImportPath           = "./nestjs-services"
+  nestjsGraphqlDtosImportPath        = "./nestjs-graphql-dtos"
+  nestjsAuthorizedServicesImportPath = "./nestjs-authorized-services"
+}
+
+// Nestjs common services generator
+generator nestjsServices {
+  provider         = "trxn-prisma-nestjs-services-generator"
+  output           = "../src/nestjs-services"
+  tsConfigFilePath = "../../tsconfig.app.json"
+}
+
+// Nestjs common services generator
+generator nestjsAuthorizedServices {
+  provider                 = "trxn-prisma-nestjs-authorized-services-generator"
+  output                   = "../src/nestjs-authorized-services"
+  tsConfigFilePath         = "../../tsconfig.app.json"
+  nestjsServicesImportPath = "./nestjs-services"
+}
 
 generator caslConfig {
-  provider = "trxn-hapify-prisma-casl-generator"
-  output   = "../src/casl"
-  tsConfigFilePath   = "../../tsconfig.app.json"
+  provider         = "trxn-prisma-casl-generator"
+  output           = "../src/casl"
+  tsConfigFilePath = "../../tsconfig.app.json"
 }
+
 //--------------------------------------------
 // This part describe the project models
 //--------------------------------------------
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  role   Role   @relation(fields: [roleId], references: [id])
-  roleId Int
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  /// TODO: add the possibility to mark a field as password
+  /// @trxn/password
+  password    String
+  name        String?
+  role        Role     @relation(fields: [roleId], references: [id])
+  roleId      Int
+  userProfile Profile?
+}
+
+model Profile {
+  id      Int    @id @default(autoincrement())
+  address String
+  user    User   @relation(fields: [userId], references: [id])
+  userId  Int    @unique
 }
 
 model Role {
-  id     Int    @id @default(autoincrement())
-  name    String
-  users User[]
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  users  User[]
   rights Right[]
 }
 
 model Right {
-  id     Int    @id @default(autoincrement())
-  name    String @unique
+  id    Int    @id @default(autoincrement())
+  name  String @unique
   roles Role[]
 }
 
-//--------------------------------------------
-// Uncomment the next bloc to add the Tag model
-//--------------------------------------------
-// model Tag {
-//   id     Int    @id @default(autoincrement())
-//   name    String @unique
-//   description String?
-// }

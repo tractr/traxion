@@ -1,12 +1,11 @@
 import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
-import { Int } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
-import { RoleOrderByWithRelationInput } from './role-order-by-with-relation.input';
-import { RoleScalarFieldEnum } from './role-scalar-field.enum';
-import { RoleWhereUniqueInput } from './role-where-unique.input';
 import { RoleWhereInput } from './role-where.input';
+import { Type } from 'class-transformer';
+import { RoleOrderByWithRelationInput } from './role-order-by-with-relation.input';
+import { RoleWhereUniqueInput } from './role-where-unique.input';
+import { Int } from '@nestjs/graphql';
+import { RoleScalarFieldEnum } from './role-scalar-field.enum';
 
 @ArgsType()
 export class FindManyRoleArgs {

@@ -1,9 +1,8 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
-
-import { RightUncheckedCreateNestedManyWithoutRolesInput } from '../right/right-unchecked-create-nested-many-without-roles.input';
 import { UserUncheckedCreateNestedManyWithoutRoleInput } from '../user/user-unchecked-create-nested-many-without-role.input';
+import { RightUncheckedCreateNestedManyWithoutRolesInput } from '../right/right-unchecked-create-nested-many-without-roles.input';
 
 @InputType()
 export class RoleUncheckedCreateInput {

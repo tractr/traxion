@@ -1,4 +1,18 @@
-import { Inject } from '@nestjs/common';
+import {
+  User,
+  Role,
+  Profile,
+  FindUniqueUserArgs,
+  FindManyUserArgs,
+  CreateOneUserArgs,
+  UpdateOneUserArgs,
+  DeleteOneUserArgs,
+} from '../../nestjs-graphql-dtos';
+import {
+  UserService,
+  RoleService,
+  ProfileService,
+} from '../../nestjs-services';
 import {
   Args,
   Info,
@@ -10,24 +24,16 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
+import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 import { GraphQLResolveInfo } from 'graphql';
-
-import {
-  User,
-  Role,
-  FindUniqueUserArgs,
-  FindManyUserArgs,
-  CreateOneUserArgs,
-  UpdateOneUserArgs,
-  DeleteOneUserArgs,
-} from '../../nestjs-graphql-dtos';
-import { UserService, USER_SERVICE } from '../../nestjs-services';
 import { FindManyUserOutput } from '../dtos';
 
 @Resolver(() => User)
 export class UserResolver {
   constructor(
-    @Inject(USER_SERVICE) private readonly userService: UserService,
+    private readonly userService: UserService,
+    private readonly roleService: RoleService,
+    private readonly profileService: ProfileService,
   ) {}
 
   /** Query for a unique user */
@@ -121,7 +127,48 @@ export class UserResolver {
   }
 
   @ResolveField(() => Role)
-  role(@Parent() user: User) {
-    return user.role;
+  async role(@Info() info: GraphQLResolveInfo, @Parent() user: User) {
+    let { role } = user;
+
+    if (typeof role === 'undefined') {
+      if (!user.roleId) {
+        throw new Error('role not found when fetching role');
+      }
+
+      const select = new PrismaSelect(info).valueOf(
+        getPathFromGraphQLResolveInfo(info.path),
+        'Role',
+      ) as Prisma.RoleArgs;
+
+      const findUnique = await this.roleService.findUnique({
+        where: { id: user.roleId },
+        ...select,
+      });
+
+      role = findUnique || undefined;
+    }
+
+    return role;
+  }
+
+  @ResolveField(() => Profile)
+  async userProfile(@Info() info: GraphQLResolveInfo, @Parent() user: User) {
+    let { userProfile } = user;
+
+    if (typeof userProfile === 'undefined') {
+      const select = new PrismaSelect(info).valueOf(
+        getPathFromGraphQLResolveInfo(info.path),
+        'Profile',
+      ) as Prisma.ProfileArgs;
+
+      const findUnique = await this.profileService.findUnique({
+        where: { userId: user.id },
+        ...select,
+      });
+
+      userProfile = findUnique || undefined;
+    }
+
+    return userProfile;
   }
 }

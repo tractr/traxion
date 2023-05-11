@@ -5,6 +5,7 @@ export * from './errors';
 export * from './guards';
 export * from './interfaces';
 export * from './services';
+export * from './resolvers';
 export * from './strategies';
 export * from './helpers';
 

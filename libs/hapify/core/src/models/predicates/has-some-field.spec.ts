@@ -1,5 +1,5 @@
-import { Model } from '../model';
 import { hasSomeField } from './has-some-field';
+import { Model } from '../model';
 
 describe('hasSomeField', () => {
   it('should return false if model does not have any field of the requirde type', () => {

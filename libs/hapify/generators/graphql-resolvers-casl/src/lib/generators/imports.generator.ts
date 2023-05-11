@@ -1,9 +1,9 @@
-import { constant } from 'case';
+import { constant, pascal } from 'case';
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
 import { GraphqlResolverCaslImportPathConfig } from '../config.type';
 
-import { Model } from '@trxn/hapify-core';
+import { getAllModelsFromRelation, Model } from '@trxn/hapify-core';
 import { resolveDynamicPath } from '@trxn/hapify-devkit';
 
 export function generateImports(
@@ -11,11 +11,12 @@ export function generateImports(
   importPaths: GraphqlResolverCaslImportPathConfig,
 ): ImportDeclarationStructure[] {
   const modelConstant = constant(model.name);
+  const modelPascal = pascal(model.name);
 
   return [
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: resolveDynamicPath(importPaths.casl, '../..'),
+      moduleSpecifier: '../policies',
       namedImports: [
         { name: `CREATE_${modelConstant}` },
         { name: `READ_${modelConstant}` },
@@ -26,12 +27,37 @@ export function generateImports(
     },
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: '@trxn/nestjs-core',
+      moduleSpecifier: `@casl/prisma`,
+      namedImports: [{ name: 'accessibleBy' }, { name: 'PrismaQuery' }],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: `@casl/ability`,
       namedImports: [
-        { name: 'CurrentAbilities' },
-        { name: 'CurrentUser' },
-        { name: 'Policies' },
+        { name: 'subject' },
+        { name: 'PureAbility' },
+        { name: 'ForcedSubject' },
       ],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: resolveDynamicPath(
+        importPaths.nestjsAuthorizedServices,
+        '../..',
+      ),
+      namedImports: [
+        { name: `${modelPascal}AuthorizedService` },
+        ...getAllModelsFromRelation(model).map((relatedModel) => ({
+          name: `${pascal(relatedModel.name)}AuthorizedService`,
+        })),
+        { name: 'DefaultOwnershipSelect' },
+        { name: 'DEFAULT_OWNERSHIP_SELECT' },
+      ],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: '@trxn/nestjs-core',
+      namedImports: [{ name: 'CurrentAbilities' }, { name: 'Policies' }],
     },
   ];
 }

@@ -1,5 +1,5 @@
 export type GraphqlResolverCaslImportPathConfig = {
-  casl: string;
+  nestjsAuthorizedServices: string;
 };
 
 export type GraphqlResolverCaslGeneratorConfig = {

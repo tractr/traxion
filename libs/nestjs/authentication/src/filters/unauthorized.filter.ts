@@ -8,16 +8,23 @@ import { Response } from 'express';
 
 import { CookieOptionsService } from '../services';
 
+import { getResponseFromContext } from '@trxn/nestjs-core';
+
 @Catch(UnauthorizedException)
 export class UnauthorizedExceptionFilter implements ExceptionFilter {
   constructor(private readonly cookieOptionsService: CookieOptionsService) {}
 
   catch(exception: UnauthorizedException, host: ArgumentsHost) {
-    const ctx = host.switchToHttp();
-    const response = ctx.getResponse<Response>();
-    const status = exception.getStatus();
+    const response = getResponseFromContext(host) as Response;
+
+    if (!response && host.getType<string>() === 'graphql') {
+      console.warn(
+        'UnauthorizedExceptionFilter: response not found in context, you should `context: ({ req, res }) => ({ req, res })` in your graphql context',
+      );
+      throw exception;
+    }
 
     response.cookie(this.cookieOptionsService.cookieName, '', {});
-    response.status(status).json(exception);
+    throw exception;
   }
 }

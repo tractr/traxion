@@ -1,6 +1,5 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-
 import { UserUpdateManyWithoutRoleNestedInput } from '../user/user-update-many-without-role-nested.input';
 
 @InputType()

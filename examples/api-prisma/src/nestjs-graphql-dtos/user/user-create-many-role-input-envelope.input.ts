@@ -1,8 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
 import { UserCreateManyRoleInput } from './user-create-many-role.input';
+import { Type } from 'class-transformer';
 
 @InputType()
 export class UserCreateManyRoleInputEnvelope {

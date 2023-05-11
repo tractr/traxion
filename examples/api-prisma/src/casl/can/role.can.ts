@@ -11,7 +11,7 @@ export function canReadRole(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Read, 'Role', {
-    id: { in: [...getConcatValueByPath<number[]>('user.role.id', user)] },
+    id: { in: [...getConcatValueByPath<number[]>('role.id', user)] },
   });
 }
 
@@ -20,7 +20,7 @@ export function canCountRole(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Count, 'Role', {
-    id: { in: [...getConcatValueByPath<number[]>('user.role.id', user)] },
+    id: { in: [...getConcatValueByPath<number[]>('role.id', user)] },
   });
 }
 
@@ -29,7 +29,7 @@ export function canSearchRole(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Search, 'Role', {
-    id: { in: [...getConcatValueByPath<number[]>('user.role.id', user)] },
+    id: { in: [...getConcatValueByPath<number[]>('role.id', user)] },
   });
 }
 
@@ -38,7 +38,7 @@ export function canCreateRole(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Create, 'Role', {
-    id: { in: [...getConcatValueByPath<number[]>('user.role.id', user)] },
+    id: { in: [...getConcatValueByPath<number[]>('role.id', user)] },
   });
 }
 
@@ -47,7 +47,7 @@ export function canUpdateRole(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Update, 'Role', {
-    id: { in: [...getConcatValueByPath<number[]>('user.role.id', user)] },
+    id: { in: [...getConcatValueByPath<number[]>('role.id', user)] },
   });
 }
 
@@ -56,7 +56,7 @@ export function canDeleteRole(
   user: UserWithOwnershipIds,
 ) {
   abilities.can(Action.Delete, 'Role', {
-    id: { in: [...getConcatValueByPath<number[]>('user.role.id', user)] },
+    id: { in: [...getConcatValueByPath<number[]>('role.id', user)] },
   });
 }
 
