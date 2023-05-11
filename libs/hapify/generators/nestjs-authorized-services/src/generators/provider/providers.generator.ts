@@ -68,9 +68,10 @@ export function generateProviderSourceFile(
 
 export function generateModelsServicesProvidersSourceFile(
   project: Project,
+  models: Model[],
   path: string,
 ): SourceFile {
-  const fileName = `authorized-services.provider.ts`;
+  const fileName = `authorized-services.providers.ts`;
   const filePath = `${path}/${fileName}`;
 
   const sourceFile = project.createSourceFile(filePath);
@@ -93,8 +94,12 @@ export function generateModelsServicesProvidersSourceFile(
     declarations: [
       {
         name: 'AUTHORIZED_SERVICES_PROVIDERS',
-        type: 'Provider[]',
-        initializer: `[]`,
+        type: `Provider[]`,
+        initializer: `[${models
+          .map(
+            (model) => `...${constant(model.name)}_AUTHORIZED_SERVICE_PROVIDER`,
+          )
+          .join(',\n')}]`,
       },
     ],
   });

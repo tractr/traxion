@@ -27,7 +27,7 @@ export function generateModuleDefinitionSourceFile(
           OPTIONS_TYPE,
         }`,
         initializer: `
-new ConfigurableModuleBuilder()
+new ConfigurableModuleBuilder<AuthorizedServicesModuleOptions>()
   .setExtras<ImportsExtra>(
     { imports: [] },
     addImportsExtra((definition) => definition),

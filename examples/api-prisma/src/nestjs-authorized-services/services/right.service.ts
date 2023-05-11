@@ -1,11 +1,13 @@
-import { Injectable, Inject, ForbiddenException } from '@nestjs/common';
+import { AnyAbility, ForcedSubject, PureAbility , subject } from '@casl/ability';
+import { accessibleBy, PrismaQuery } from '@casl/prisma';
+import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { accessibleBy } from '@casl/prisma';
-import { subject } from '@casl/ability';
-import { PrismaService } from '@trxn/nestjs-database';
+
+import { RIGHT_SERVICE, RightService } from '../../nestjs-services';
+
 import { Action } from '@trxn/nestjs-casl';
-import { RightService, RIGHT_SERVICE } from '../../nestjs-services';
-import { AnyAbility } from '@casl/ability';
+import { PrismaService } from '@trxn/nestjs-database';
+
 
 @Injectable()
 export class RightAuthorizedService {
@@ -16,7 +18,10 @@ export class RightAuthorizedService {
 
   async findUnique<T extends Prisma.RightFindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightFindUniqueArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.RightDelegate<undefined>,
   ) {
     const right = await this.rightService.findUnique<T>(args, prisma);
@@ -27,7 +32,10 @@ export class RightAuthorizedService {
 
   async findMany<T extends Prisma.RightFindManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightFindManyArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.RightDelegate<undefined>,
   ) {
     const where = {
@@ -38,7 +46,10 @@ export class RightAuthorizedService {
 
   async create<T extends Prisma.RightCreateArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightCreateArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.RightDelegate<undefined>,
   ) {
     const create = async (client: Prisma.RightDelegate<undefined>) => {
@@ -56,7 +67,10 @@ export class RightAuthorizedService {
 
   async update<T extends Prisma.RightUpdateArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightUpdateArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.RightDelegate<undefined>,
   ) {
     const update = async (client: Prisma.RightDelegate<undefined>) => {
@@ -74,7 +88,10 @@ export class RightAuthorizedService {
 
   async delete<T extends Prisma.RightDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightDeleteArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.RightDelegate<undefined>,
   ) {
     const deleteCb = async (client: Prisma.RightDelegate<undefined>) => {
@@ -92,7 +109,10 @@ export class RightAuthorizedService {
 
   async count<T extends Prisma.RightCountArgs>(
     args: Prisma.SelectSubset<T, Prisma.RightCountArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.RightDelegate<undefined>,
   ) {
     const where = {

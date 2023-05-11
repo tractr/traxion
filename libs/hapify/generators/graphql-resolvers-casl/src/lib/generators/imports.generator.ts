@@ -27,8 +27,17 @@ export function generateImports(
     },
     {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: '@casl/ability',
-      namedImports: [{ name: `AnyAbility` }],
+      moduleSpecifier: `@casl/prisma`,
+      namedImports: [{ name: 'accessibleBy' }, { name: 'PrismaQuery' }],
+    },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: `@casl/ability`,
+      namedImports: [
+        { name: 'subject' },
+        { name: 'PureAbility' },
+        { name: 'ForcedSubject' },
+      ],
     },
     {
       kind: StructureKind.ImportDeclaration,

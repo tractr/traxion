@@ -1,11 +1,13 @@
-import { Injectable, Inject, ForbiddenException } from '@nestjs/common';
+import { AnyAbility, ForcedSubject, PureAbility , subject } from '@casl/ability';
+import { accessibleBy, PrismaQuery } from '@casl/prisma';
+import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { accessibleBy } from '@casl/prisma';
-import { subject } from '@casl/ability';
-import { PrismaService } from '@trxn/nestjs-database';
+
+import { PROFILE_SERVICE, ProfileService } from '../../nestjs-services';
+
 import { Action } from '@trxn/nestjs-casl';
-import { ProfileService, PROFILE_SERVICE } from '../../nestjs-services';
-import { AnyAbility } from '@casl/ability';
+import { PrismaService } from '@trxn/nestjs-database';
+
 
 @Injectable()
 export class ProfileAuthorizedService {
@@ -16,7 +18,10 @@ export class ProfileAuthorizedService {
 
   async findUnique<T extends Prisma.ProfileFindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.ProfileFindUniqueArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.ProfileDelegate<undefined>,
   ) {
     const profile = await this.profileService.findUnique<T>(args, prisma);
@@ -27,7 +32,10 @@ export class ProfileAuthorizedService {
 
   async findMany<T extends Prisma.ProfileFindManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.ProfileFindManyArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.ProfileDelegate<undefined>,
   ) {
     const where = {
@@ -41,7 +49,10 @@ export class ProfileAuthorizedService {
 
   async create<T extends Prisma.ProfileCreateArgs>(
     args: Prisma.SelectSubset<T, Prisma.ProfileCreateArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.ProfileDelegate<undefined>,
   ) {
     const create = async (client: Prisma.ProfileDelegate<undefined>) => {
@@ -59,7 +70,10 @@ export class ProfileAuthorizedService {
 
   async update<T extends Prisma.ProfileUpdateArgs>(
     args: Prisma.SelectSubset<T, Prisma.ProfileUpdateArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.ProfileDelegate<undefined>,
   ) {
     const update = async (client: Prisma.ProfileDelegate<undefined>) => {
@@ -77,7 +91,10 @@ export class ProfileAuthorizedService {
 
   async delete<T extends Prisma.ProfileDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.ProfileDeleteArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.ProfileDelegate<undefined>,
   ) {
     const deleteCb = async (client: Prisma.ProfileDelegate<undefined>) => {
@@ -95,7 +112,10 @@ export class ProfileAuthorizedService {
 
   async count<T extends Prisma.ProfileCountArgs>(
     args: Prisma.SelectSubset<T, Prisma.ProfileCountArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.ProfileDelegate<undefined>,
   ) {
     const where = {

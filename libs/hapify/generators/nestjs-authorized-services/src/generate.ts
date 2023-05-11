@@ -2,6 +2,8 @@
 import { Project } from 'ts-morph';
 
 import { NestjsAuthorizedServicesGeneratorConfig } from './config.type';
+import { generateAuthorizedServicesModuleOptionsSourceFile } from './generators/interfaces/authorized-services-module-options.interface.generator';
+import { generateInterfacesIndexSourceFile } from './generators/interfaces/index.generator';
 import { generateModuleDefinitionSourceFile } from './generators/module/module-definition.generator';
 import { generateModuleSourceFile } from './generators/module/module.generator';
 import {
@@ -9,6 +11,7 @@ import {
   generateProviderSourceFile,
 } from './generators/provider/providers.generator';
 import { generateConstantSourceFile } from './generators/service/constant.generator';
+import { generateDefaultOwnershipSelectProviderSourceFile } from './generators/service/default-ownership-select.provider.generator';
 import { generateServiceSourceFile } from './generators/service/service.generator';
 import {
   generateDirectoryIndexExporter,
@@ -33,6 +36,7 @@ export function hapifyNestjsAuthorizedServicesGenerator(
   // Generate models-services.providers.ts
   const providersSourceFile = generateModelsServicesProvidersSourceFile(
     project,
+    dataModel.models,
     output,
   );
 
@@ -51,6 +55,13 @@ export function hapifyNestjsAuthorizedServicesGenerator(
   // generate rooot index.ts for exports
   generateDirectoryIndexExporter(project, output);
   generateFileIndexExporter(project, `${output}`);
+
+  // generate interfaces
+  generateAuthorizedServicesModuleOptionsSourceFile(project, output);
+  generateInterfacesIndexSourceFile(project, output);
+
+  // default ownership provider
+  generateDefaultOwnershipSelectProviderSourceFile(project, output);
 
   // for each directory, generate index.ts for export
   generateFileIndexExporter(project, `${output}/services`);

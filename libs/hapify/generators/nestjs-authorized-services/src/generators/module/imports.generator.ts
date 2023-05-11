@@ -17,5 +17,13 @@ export function generateImports(): ImportDeclarationStructure[] {
       moduleSpecifier: `./authorized-services.providers`,
       namedImports: [{ name: `AUTHORIZED_SERVICES_PROVIDERS` }],
     },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: `./services`,
+      namedImports: [
+        { name: `DEFAULT_OWNERSHIP_SELECT` },
+        { name: `DefaultOwnershipSelectProvider` },
+      ],
+    },
   ];
 }

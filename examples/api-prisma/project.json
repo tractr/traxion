@@ -31,6 +31,10 @@
           {
             "command": "npx prisma generate",
             "forwardAllArgs": false
+          },
+          {
+            "command": "nx format:write --projects examples-api-prisma",
+            "forwardAllArgs": false
           }
         ],
         "cwd": ".",

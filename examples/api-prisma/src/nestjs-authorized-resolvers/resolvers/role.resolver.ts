@@ -1,15 +1,5 @@
-import {
-  Role,
-  User,
-  Right,
-  FindUniqueRoleArgs,
-  FindManyRoleArgs,
-  CreateOneRoleArgs,
-  UpdateOneRoleArgs,
-  DeleteOneRoleArgs,
-  FindManyUserArgs,
-  FindManyRightArgs,
-} from '../../nestjs-graphql-dtos';
+import { ForcedSubject, PureAbility } from '@casl/ability';
+import { PrismaQuery } from '@casl/prisma';
 import {
   Args,
   Info,
@@ -21,23 +11,37 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
-import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 import { GraphQLResolveInfo } from 'graphql';
+
+import {
+  RightAuthorizedService,
+  RoleAuthorizedService,
+  UserAuthorizedService,
+} from '../../nestjs-authorized-services';
+import {
+  CreateOneRoleArgs,
+  DeleteOneRoleArgs,
+  FindManyRightArgs,
+  FindManyRoleArgs,
+  FindManyUserArgs,
+  FindUniqueRoleArgs,
+  Right,
+  Role,
+  UpdateOneRoleArgs,
+  User,
+} from '../../nestjs-graphql-dtos';
 import { FindManyRoleOutput } from '../dtos';
 import {
   CREATE_ROLE,
+  DELETE_ROLE,
   READ_ROLE,
   SEARCH_ROLE,
   UPDATE_ROLE,
-  DELETE_ROLE,
 } from '../policies';
-import { AnyAbility } from '@casl/ability';
-import {
-  RoleAuthorizedService,
-  UserAuthorizedService,
-  RightAuthorizedService,
-} from '../../nestjs-authorized-services';
+
+
 import { CurrentAbilities, Policies } from '@trxn/nestjs-core';
+import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 
 @Resolver(() => Role)
 export class RoleResolver {
@@ -53,7 +57,11 @@ export class RoleResolver {
   async findUniqueRole(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueRoleArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.RoleArgs;
     const role = await this.roleAuthorizedService.findUnique(
@@ -77,7 +85,11 @@ export class RoleResolver {
       skip = 0,
       take = 100,
     }: FindManyRoleArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).valueOf(
       'roles',
@@ -117,7 +129,11 @@ export class RoleResolver {
   async createRole(
     @Info() info: GraphQLResolveInfo,
     @Args() { data }: CreateOneRoleArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.RoleArgs;
 
@@ -135,7 +151,11 @@ export class RoleResolver {
   async updateRole(
     @Info() info: GraphQLResolveInfo,
     @Args() { data, where }: UpdateOneRoleArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.RoleArgs;
 
@@ -153,7 +173,11 @@ export class RoleResolver {
   async deleteRole(
     @Info() info: GraphQLResolveInfo,
     @Args() { where }: DeleteOneRoleArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.RoleArgs;
 
@@ -170,7 +194,11 @@ export class RoleResolver {
     @Info() info: GraphQLResolveInfo,
     @Parent() role: Role,
     @Args() findManyArgs: FindManyUserArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     let { users } = role;
 
@@ -209,7 +237,11 @@ export class RoleResolver {
     @Info() info: GraphQLResolveInfo,
     @Parent() role: Role,
     @Args() findManyArgs: FindManyRightArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     let { rights } = role;
 

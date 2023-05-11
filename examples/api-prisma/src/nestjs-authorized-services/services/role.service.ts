@@ -1,11 +1,13 @@
-import { Injectable, Inject, ForbiddenException } from '@nestjs/common';
+import { AnyAbility, ForcedSubject, PureAbility , subject } from '@casl/ability';
+import { accessibleBy, PrismaQuery } from '@casl/prisma';
+import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { accessibleBy } from '@casl/prisma';
-import { subject } from '@casl/ability';
-import { PrismaService } from '@trxn/nestjs-database';
+
+import { ROLE_SERVICE, RoleService } from '../../nestjs-services';
+
 import { Action } from '@trxn/nestjs-casl';
-import { RoleService, ROLE_SERVICE } from '../../nestjs-services';
-import { AnyAbility } from '@casl/ability';
+import { PrismaService } from '@trxn/nestjs-database';
+
 
 @Injectable()
 export class RoleAuthorizedService {
@@ -16,7 +18,10 @@ export class RoleAuthorizedService {
 
   async findUnique<T extends Prisma.RoleFindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleFindUniqueArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.RoleDelegate<undefined>,
   ) {
     const role = await this.roleService.findUnique<T>(args, prisma);
@@ -27,7 +32,10 @@ export class RoleAuthorizedService {
 
   async findMany<T extends Prisma.RoleFindManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleFindManyArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.RoleDelegate<undefined>,
   ) {
     const where = {
@@ -38,7 +46,10 @@ export class RoleAuthorizedService {
 
   async create<T extends Prisma.RoleCreateArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleCreateArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.RoleDelegate<undefined>,
   ) {
     const create = async (client: Prisma.RoleDelegate<undefined>) => {
@@ -56,7 +67,10 @@ export class RoleAuthorizedService {
 
   async update<T extends Prisma.RoleUpdateArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleUpdateArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.RoleDelegate<undefined>,
   ) {
     const update = async (client: Prisma.RoleDelegate<undefined>) => {
@@ -74,7 +88,10 @@ export class RoleAuthorizedService {
 
   async delete<T extends Prisma.RoleDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleDeleteArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.RoleDelegate<undefined>,
   ) {
     const deleteCb = async (client: Prisma.RoleDelegate<undefined>) => {
@@ -92,7 +109,10 @@ export class RoleAuthorizedService {
 
   async count<T extends Prisma.RoleCountArgs>(
     args: Prisma.SelectSubset<T, Prisma.RoleCountArgs>,
-    abilities: AnyAbility,
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
     prisma?: Prisma.RoleDelegate<undefined>,
   ) {
     const where = {

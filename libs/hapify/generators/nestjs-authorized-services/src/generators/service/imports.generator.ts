@@ -1,4 +1,4 @@
-import { constant, kebab, pascal } from 'case';
+import { constant, pascal } from 'case';
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
 import { NestjsAuthorizedServicesImportPathConfig } from '../../config.type';
@@ -31,12 +31,16 @@ export function generateImports(
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@casl/prisma`,
-      namedImports: [{ name: 'accessibleBy' }],
+      namedImports: [{ name: 'accessibleBy' }, { name: 'PrismaQuery' }],
     },
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@casl/ability`,
-      namedImports: [{ name: 'subject' }],
+      namedImports: [
+        { name: 'subject' },
+        { name: 'PureAbility' },
+        { name: 'ForcedSubject' },
+      ],
     },
     {
       kind: StructureKind.ImportDeclaration,

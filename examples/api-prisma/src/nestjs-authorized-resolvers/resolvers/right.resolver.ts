@@ -1,13 +1,5 @@
-import {
-  Right,
-  Role,
-  FindUniqueRightArgs,
-  FindManyRightArgs,
-  CreateOneRightArgs,
-  UpdateOneRightArgs,
-  DeleteOneRightArgs,
-  FindManyRoleArgs,
-} from '../../nestjs-graphql-dtos';
+import { ForcedSubject, PureAbility } from '@casl/ability';
+import { PrismaQuery } from '@casl/prisma';
 import {
   Args,
   Info,
@@ -19,22 +11,34 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
-import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 import { GraphQLResolveInfo } from 'graphql';
-import { FindManyRightOutput } from '../dtos';
-import {
-  CREATE_RIGHT,
-  READ_RIGHT,
-  SEARCH_RIGHT,
-  UPDATE_RIGHT,
-  DELETE_RIGHT,
-} from '../policies';
-import { AnyAbility } from '@casl/ability';
+
 import {
   RightAuthorizedService,
   RoleAuthorizedService,
 } from '../../nestjs-authorized-services';
+import {
+  CreateOneRightArgs,
+  DeleteOneRightArgs,
+  FindManyRightArgs,
+  FindManyRoleArgs,
+  FindUniqueRightArgs,
+  Right,
+  Role,
+  UpdateOneRightArgs,
+} from '../../nestjs-graphql-dtos';
+import { FindManyRightOutput } from '../dtos';
+import {
+  CREATE_RIGHT,
+  DELETE_RIGHT,
+  READ_RIGHT,
+  SEARCH_RIGHT,
+  UPDATE_RIGHT,
+} from '../policies';
+
+
 import { CurrentAbilities, Policies } from '@trxn/nestjs-core';
+import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 
 @Resolver(() => Right)
 export class RightResolver {
@@ -49,7 +53,11 @@ export class RightResolver {
   async findUniqueRight(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueRightArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.RightArgs;
     const right = await this.rightAuthorizedService.findUnique(
@@ -73,7 +81,11 @@ export class RightResolver {
       skip = 0,
       take = 100,
     }: FindManyRightArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).valueOf(
       'rights',
@@ -113,7 +125,11 @@ export class RightResolver {
   async createRight(
     @Info() info: GraphQLResolveInfo,
     @Args() { data }: CreateOneRightArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.RightArgs;
 
@@ -131,7 +147,11 @@ export class RightResolver {
   async updateRight(
     @Info() info: GraphQLResolveInfo,
     @Args() { data, where }: UpdateOneRightArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.RightArgs;
 
@@ -149,7 +169,11 @@ export class RightResolver {
   async deleteRight(
     @Info() info: GraphQLResolveInfo,
     @Args() { where }: DeleteOneRightArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.RightArgs;
 
@@ -166,7 +190,11 @@ export class RightResolver {
     @Info() info: GraphQLResolveInfo,
     @Parent() right: Right,
     @Args() findManyArgs: FindManyRoleArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     let { roles } = right;
 

@@ -1,4 +1,6 @@
-import { AnyAbility } from '@casl/ability';
+import { ForcedSubject, PureAbility } from '@casl/ability';
+import { PrismaQuery } from '@casl/prisma';
+import { Inject } from '@nestjs/common';
 import {
   Args,
   Info,
@@ -13,10 +15,12 @@ import { Prisma } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
 
 import {
+  DEFAULT_OWNERSHIP_SELECT,
   ProfileAuthorizedService,
   RoleAuthorizedService,
   UserAuthorizedService,
 } from '../../nestjs-authorized-services';
+import { DefaultOwnershipSelect } from '../../nestjs-authorized-services/interfaces';
 import {
   CreateOneUserArgs,
   DeleteOneUserArgs,
@@ -42,6 +46,8 @@ import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 @Resolver(() => User)
 export class UserResolver {
   constructor(
+    @Inject(DEFAULT_OWNERSHIP_SELECT)
+    private readonly defaultFields: DefaultOwnershipSelect,
     private readonly userAuthorizedService: UserAuthorizedService,
     private readonly roleAuthorizedService: RoleAuthorizedService,
     private readonly profileAuthorizedService: ProfileAuthorizedService,
@@ -53,7 +59,11 @@ export class UserResolver {
   async findUniqueUser(
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true, defaultValue: {} }) { where }: FindUniqueUserArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.UserArgs;
     const user = await this.userAuthorizedService.findUnique(
@@ -77,7 +87,11 @@ export class UserResolver {
       skip = 0,
       take = 100,
     }: FindManyUserArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).valueOf(
       'users',
@@ -117,7 +131,11 @@ export class UserResolver {
   async createUser(
     @Info() info: GraphQLResolveInfo,
     @Args() { data }: CreateOneUserArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.UserArgs;
 
@@ -135,7 +153,11 @@ export class UserResolver {
   async updateUser(
     @Info() info: GraphQLResolveInfo,
     @Args() { data, where }: UpdateOneUserArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.UserArgs;
 
@@ -153,7 +175,11 @@ export class UserResolver {
   async deleteUser(
     @Info() info: GraphQLResolveInfo,
     @Args() { where }: DeleteOneUserArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.UserArgs;
 
@@ -169,7 +195,11 @@ export class UserResolver {
   async role(
     @Info() info: GraphQLResolveInfo,
     @Parent() user: User,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     let { role } = user;
 
@@ -179,7 +209,7 @@ export class UserResolver {
       }
 
       const select = new PrismaSelect(info, {
-        // defaultFields: OWNERS_DEFAULT_FIELDS,
+        defaultFields: this.defaultFields,
       }).valueOf(
         getPathFromGraphQLResolveInfo(info.path),
         'Role',
@@ -203,7 +233,11 @@ export class UserResolver {
   async userProfile(
     @Info() info: GraphQLResolveInfo,
     @Parent() user: User,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     let { userProfile } = user;
 

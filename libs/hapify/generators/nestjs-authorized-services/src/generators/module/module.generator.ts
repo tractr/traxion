@@ -3,7 +3,7 @@ import { ClassDeclarationStructure, Project, StructureKind } from 'ts-morph';
 import { generateImports } from './imports.generator';
 
 export function generateModuleClass(): ClassDeclarationStructure {
-  const className = `AuthorizedServicesModules`;
+  const className = `AuthorizedServicesModule`;
 
   return {
     kind: StructureKind.Class,
@@ -13,8 +13,8 @@ export function generateModuleClass(): ClassDeclarationStructure {
     decorators: [
       {
         name: `Module({
-      providers: AUTHORIZED_SERVICES_PROVIDERS,
-      exports: AUTHORIZED_SERVICES_PROVIDERS,
+      providers: [...AUTHORIZED_SERVICES_PROVIDERS, DefaultOwnershipSelectProvider],
+      exports: [...AUTHORIZED_SERVICES_PROVIDERS, DEFAULT_OWNERSHIP_SELECT],
     })`,
       },
     ],

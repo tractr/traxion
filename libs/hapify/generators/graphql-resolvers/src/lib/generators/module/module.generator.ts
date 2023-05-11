@@ -16,7 +16,7 @@ export function generateModuleClass(): ClassDeclarationStructure {
     decorators: [
       {
         name: 'Module',
-        arguments: [`{ providers: providers, exports: providers }`],
+        arguments: [`{ providers, exports: providers }`],
       },
     ],
   };

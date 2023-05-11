@@ -13,7 +13,10 @@ export function updateFieldResolvers(model: Model, resolver: ClassDeclaration) {
       {
         kind: StructureKind.Parameter,
         name: 'abilities',
-        type: 'AnyAbility',
+        type: `PureAbility<
+          any,
+          PrismaQuery<Record<string, any> & ForcedSubject<string>>
+        >`,
         decorators: [
           {
             name: 'CurrentAbilities',

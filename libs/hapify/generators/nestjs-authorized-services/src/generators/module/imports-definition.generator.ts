@@ -12,5 +12,10 @@ export function generateImportsDefinition(): ImportDeclarationStructure[] {
       moduleSpecifier: `@trxn/nestjs-core`,
       namedImports: [{ name: `addImportsExtra` }, { name: `ImportsExtra` }],
     },
+    {
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: `./interfaces`,
+      namedImports: [{ name: `AuthorizedServicesModuleOptions` }],
+    },
   ];
 }

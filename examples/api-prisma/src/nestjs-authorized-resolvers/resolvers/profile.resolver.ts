@@ -1,12 +1,5 @@
-import {
-  Profile,
-  User,
-  FindUniqueProfileArgs,
-  FindManyProfileArgs,
-  CreateOneProfileArgs,
-  UpdateOneProfileArgs,
-  DeleteOneProfileArgs,
-} from '../../nestjs-graphql-dtos';
+import { ForcedSubject, PureAbility } from '@casl/ability';
+import { PrismaQuery } from '@casl/prisma';
 import {
   Args,
   Info,
@@ -18,22 +11,33 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
-import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 import { GraphQLResolveInfo } from 'graphql';
-import { FindManyProfileOutput } from '../dtos';
-import {
-  CREATE_PROFILE,
-  READ_PROFILE,
-  SEARCH_PROFILE,
-  UPDATE_PROFILE,
-  DELETE_PROFILE,
-} from '../policies';
-import { AnyAbility } from '@casl/ability';
+
 import {
   ProfileAuthorizedService,
   UserAuthorizedService,
 } from '../../nestjs-authorized-services';
+import {
+  CreateOneProfileArgs,
+  DeleteOneProfileArgs,
+  FindManyProfileArgs,
+  FindUniqueProfileArgs,
+  Profile,
+  UpdateOneProfileArgs,
+  User,
+} from '../../nestjs-graphql-dtos';
+import { FindManyProfileOutput } from '../dtos';
+import {
+  CREATE_PROFILE,
+  DELETE_PROFILE,
+  READ_PROFILE,
+  SEARCH_PROFILE,
+  UPDATE_PROFILE,
+} from '../policies';
+
+
 import { CurrentAbilities, Policies } from '@trxn/nestjs-core';
+import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 
 @Resolver(() => Profile)
 export class ProfileResolver {
@@ -49,7 +53,11 @@ export class ProfileResolver {
     @Info() info: GraphQLResolveInfo,
     @Args({ nullable: true, defaultValue: {} })
     { where }: FindUniqueProfileArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.ProfileArgs;
     const profile = await this.profileAuthorizedService.findUnique(
@@ -73,7 +81,11 @@ export class ProfileResolver {
       skip = 0,
       take = 100,
     }: FindManyProfileArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).valueOf(
       'profiles',
@@ -113,7 +125,11 @@ export class ProfileResolver {
   async createProfile(
     @Info() info: GraphQLResolveInfo,
     @Args() { data }: CreateOneProfileArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.ProfileArgs;
 
@@ -131,7 +147,11 @@ export class ProfileResolver {
   async updateProfile(
     @Info() info: GraphQLResolveInfo,
     @Args() { data, where }: UpdateOneProfileArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.ProfileArgs;
 
@@ -149,7 +169,11 @@ export class ProfileResolver {
   async deleteProfile(
     @Info() info: GraphQLResolveInfo,
     @Args() { where }: DeleteOneProfileArgs,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     const select = new PrismaSelect(info).value as Prisma.ProfileArgs;
 
@@ -165,7 +189,11 @@ export class ProfileResolver {
   async user(
     @Info() info: GraphQLResolveInfo,
     @Parent() profile: Profile,
-    @CurrentAbilities() abilities: AnyAbility,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
   ) {
     let { user } = profile;
 

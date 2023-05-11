@@ -27,7 +27,10 @@ export const generateFindUniqueMethod = (
     {
       name: 'abilities',
       kind: StructureKind.Parameter,
-      type: 'AnyAbility',
+      type: `PureAbility<
+        any,
+        PrismaQuery<Record<string, any> & ForcedSubject<string>>
+      >`,
     },
     {
       kind: StructureKind.Parameter,
