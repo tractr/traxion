@@ -1,15 +1,16 @@
 import { AbilityBuilder } from '@casl/ability';
-import { AppAbility, UserWithOwnershipIds } from './types';
+
 import {
-  canReadActionsUser,
-  canWriteActionsUser,
   canReadActionsProfile,
-  canWriteActionsProfile,
-  canReadActionsRole,
-  canWriteActionsRole,
   canReadActionsRight,
+  canReadActionsRole,
+  canReadActionsUser,
+  canWriteActionsProfile,
   canWriteActionsRight,
+  canWriteActionsRole,
+  canWriteActionsUser,
 } from './can';
+import { AppAbility, UserWithOwnershipIds } from './types';
 
 /**
  * Minimal permissions for a connected user

@@ -78,6 +78,8 @@ generator caslConfig {
 model User {
   id          Int      @id @default(autoincrement())
   email       String   @unique
+  /// TODO: add the possibility to mark a field as password
+  /// @trxn/password
   password    String
   name        String?
   role        Role     @relation(fields: [roleId], references: [id])
@@ -105,11 +107,3 @@ model Right {
   roles Role[]
 }
 
-//--------------------------------------------
-// Uncomment the next bloc to add the Tag model
-//--------------------------------------------
-// model Tag {
-//   id     Int    @id @default(autoincrement())
-//   name    String @unique
-//   description String?
-// }
