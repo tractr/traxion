@@ -52,10 +52,6 @@ export function hapifyNestjsAuthorizedServicesGenerator(
     );
   });
 
-  // generate rooot index.ts for exports
-  generateDirectoryIndexExporter(project, output);
-  generateFileIndexExporter(project, `${output}`);
-
   // generate interfaces
   generateAuthorizedServicesModuleOptionsSourceFile(project, output);
   generateInterfacesIndexSourceFile(project, output);
@@ -67,4 +63,8 @@ export function hapifyNestjsAuthorizedServicesGenerator(
   generateFileIndexExporter(project, `${output}/services`);
   generateFileIndexExporter(project, `${output}/constants`);
   generateFileIndexExporter(project, `${output}/providers`);
+
+  // generate rooot index.ts for exports
+  generateDirectoryIndexExporter(project, output);
+  generateFileIndexExporter(project, `${output}`);
 }

@@ -4,6 +4,7 @@ import { Project } from 'ts-morph';
 import { updateFieldResolvers } from './field-resolver.generator';
 import { generateImports } from './imports.generator';
 import { updateMethods } from './method.generator';
+import { updatePrismaSelect } from './prisma-select.generator';
 import { updateServiceDependencies } from './service-dependencies.generator';
 import { GraphqlResolverCaslImportPathConfig } from '../config.type';
 
@@ -39,4 +40,7 @@ export function generateResolverAuthorization(
   // Update methods
   updateMethods(model, resolverClass);
   updateFieldResolvers(model, resolverClass);
+
+  // Update PrismaSelect
+  updatePrismaSelect(resolverClass);
 }

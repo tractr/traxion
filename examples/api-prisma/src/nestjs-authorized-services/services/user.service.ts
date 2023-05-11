@@ -1,4 +1,4 @@
-import { AnyAbility, ForcedSubject, PureAbility , subject } from '@casl/ability';
+import { ForcedSubject, PureAbility, subject } from '@casl/ability';
 import { accessibleBy, PrismaQuery } from '@casl/prisma';
 import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
@@ -7,7 +7,6 @@ import { USER_SERVICE, UserService } from '../../nestjs-services';
 
 import { Action } from '@trxn/nestjs-casl';
 import { PrismaService } from '@trxn/nestjs-database';
-
 
 @Injectable()
 export class UserAuthorizedService {

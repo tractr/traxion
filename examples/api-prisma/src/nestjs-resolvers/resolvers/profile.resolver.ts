@@ -1,14 +1,4 @@
 import {
-  Profile,
-  User,
-  FindUniqueProfileArgs,
-  FindManyProfileArgs,
-  CreateOneProfileArgs,
-  UpdateOneProfileArgs,
-  DeleteOneProfileArgs,
-} from '../../nestjs-graphql-dtos';
-import { ProfileService, UserService } from '../../nestjs-services';
-import {
   Args,
   Info,
   Mutation,
@@ -19,9 +9,21 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
-import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 import { GraphQLResolveInfo } from 'graphql';
+
+import {
+  CreateOneProfileArgs,
+  DeleteOneProfileArgs,
+  FindManyProfileArgs,
+  FindUniqueProfileArgs,
+  Profile,
+  UpdateOneProfileArgs,
+  User,
+} from '../../nestjs-graphql-dtos';
+import { ProfileService, UserService } from '../../nestjs-services';
 import { FindManyProfileOutput } from '../dtos';
+
+import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 
 @Resolver(() => Profile)
 export class ProfileResolver {
@@ -134,9 +136,7 @@ export class ProfileResolver {
         throw new Error('user not found when fetching user');
       }
 
-      const select = new PrismaSelect(info, {
-        // defaultFields: OWNERS_DEFAULT_FIELDS,
-      }).valueOf(
+      const select = new PrismaSelect(info).valueOf(
         getPathFromGraphQLResolveInfo(info.path),
         'User',
       ) as Prisma.UserArgs;

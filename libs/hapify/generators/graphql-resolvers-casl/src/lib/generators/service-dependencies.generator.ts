@@ -1,5 +1,5 @@
 import { camel, pascal } from 'case';
-import { ClassDeclaration, SyntaxKind } from 'ts-morph';
+import { ClassDeclaration, Scope, SyntaxKind } from 'ts-morph';
 
 import { getAllModelsFromRelation, Model } from '@trxn/hapify-core';
 
@@ -53,4 +53,17 @@ export function updateServiceDependencies(
       });
     },
   );
+
+  constructor.addParameter({
+    name: 'defaultFields',
+    type: 'DefaultOwnershipSelect',
+    isReadonly: true,
+    scope: Scope.Private,
+    decorators: [
+      {
+        name: 'Inject',
+        arguments: ['DEFAULT_OWNERSHIP_SELECT'],
+      },
+    ],
+  });
 }

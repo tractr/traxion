@@ -137,9 +137,7 @@ export class UserResolver {
         throw new Error('role not found when fetching role');
       }
 
-      const select = new PrismaSelect(info, {
-        // defaultFields: OWNERS_DEFAULT_FIELDS,
-      }).valueOf(
+      const select = new PrismaSelect(info).valueOf(
         getPathFromGraphQLResolveInfo(info.path),
         'Role',
       ) as Prisma.RoleArgs;
@@ -160,9 +158,7 @@ export class UserResolver {
     let { userProfile } = user;
 
     if (typeof userProfile === 'undefined') {
-      const select = new PrismaSelect(info, {
-        // defaultFields: OWNERS_DEFAULT_FIELDS,
-      }).valueOf(
+      const select = new PrismaSelect(info).valueOf(
         getPathFromGraphQLResolveInfo(info.path),
         'Profile',
       ) as Prisma.ProfileArgs;

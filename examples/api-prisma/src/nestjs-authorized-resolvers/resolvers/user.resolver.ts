@@ -16,11 +16,11 @@ import { GraphQLResolveInfo } from 'graphql';
 
 import {
   DEFAULT_OWNERSHIP_SELECT,
+  DefaultOwnershipSelect,
   ProfileAuthorizedService,
   RoleAuthorizedService,
   UserAuthorizedService,
 } from '../../nestjs-authorized-services';
-import { DefaultOwnershipSelect } from '../../nestjs-authorized-services/interfaces';
 import {
   CreateOneUserArgs,
   DeleteOneUserArgs,
@@ -40,17 +40,18 @@ import {
   UPDATE_USER,
 } from '../policies';
 
+
 import { CurrentAbilities, Policies } from '@trxn/nestjs-core';
 import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 
 @Resolver(() => User)
 export class UserResolver {
   constructor(
-    @Inject(DEFAULT_OWNERSHIP_SELECT)
-    private readonly defaultFields: DefaultOwnershipSelect,
     private readonly userAuthorizedService: UserAuthorizedService,
     private readonly roleAuthorizedService: RoleAuthorizedService,
     private readonly profileAuthorizedService: ProfileAuthorizedService,
+    @Inject(DEFAULT_OWNERSHIP_SELECT)
+    private readonly defaultFields: DefaultOwnershipSelect,
   ) {}
 
   /** Query for a unique user */
@@ -65,7 +66,8 @@ export class UserResolver {
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
   ) {
-    const select = new PrismaSelect(info).value as Prisma.UserArgs;
+    const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
+      .value as Prisma.UserArgs;
     const user = await this.userAuthorizedService.findUnique(
       { where, ...select },
       abilities,
@@ -93,10 +95,9 @@ export class UserResolver {
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
   ) {
-    const select = new PrismaSelect(info).valueOf(
-      'users',
-      'User',
-    ) as Prisma.UserArgs;
+    const select = new PrismaSelect(info, {
+      defaultFields: this.defaultFields,
+    }).valueOf('users', 'User') as Prisma.UserArgs;
 
     const users = await this.userAuthorizedService.findMany(
       {
@@ -137,7 +138,8 @@ export class UserResolver {
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
   ) {
-    const select = new PrismaSelect(info).value as Prisma.UserArgs;
+    const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
+      .value as Prisma.UserArgs;
 
     const user = await this.userAuthorizedService.create(
       { data, ...select },
@@ -159,7 +161,8 @@ export class UserResolver {
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
   ) {
-    const select = new PrismaSelect(info).value as Prisma.UserArgs;
+    const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
+      .value as Prisma.UserArgs;
 
     const user = await this.userAuthorizedService.update(
       { where, data, ...select },
@@ -181,7 +184,8 @@ export class UserResolver {
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
   ) {
-    const select = new PrismaSelect(info).value as Prisma.UserArgs;
+    const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
+      .value as Prisma.UserArgs;
 
     const user = await this.userAuthorizedService.delete(
       { where, ...select },
@@ -243,7 +247,7 @@ export class UserResolver {
 
     if (typeof userProfile === 'undefined') {
       const select = new PrismaSelect(info, {
-        // defaultFields: OWNERS_DEFAULT_FIELDS,
+        defaultFields: this.defaultFields,
       }).valueOf(
         getPathFromGraphQLResolveInfo(info.path),
         'Profile',

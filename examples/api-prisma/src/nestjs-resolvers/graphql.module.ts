@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common';
-import { DateScalar } from '@trxn/nestjs-graphql';
-import {
-  UserResolver,
-  ProfileResolver,
-  RoleResolver,
-  RightResolver,
-} from './resolvers';
+
 import { ConfigurableModuleClass } from './graphql.module-definition';
+import {
+  ProfileResolver,
+  RightResolver,
+  RoleResolver,
+  UserResolver,
+} from './resolvers';
+
+import { DateScalar } from '@trxn/nestjs-graphql';
 
 const providers = [
   DateScalar,
@@ -16,5 +18,5 @@ const providers = [
   RightResolver,
 ];
 
-@Module({ providers: providers, exports: providers })
+@Module({ providers, exports: providers })
 export class GraphqlModule extends ConfigurableModuleClass {}

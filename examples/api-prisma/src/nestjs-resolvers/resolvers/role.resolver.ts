@@ -1,17 +1,4 @@
 import {
-  Role,
-  User,
-  Right,
-  FindUniqueRoleArgs,
-  FindManyRoleArgs,
-  CreateOneRoleArgs,
-  UpdateOneRoleArgs,
-  DeleteOneRoleArgs,
-  FindManyUserArgs,
-  FindManyRightArgs,
-} from '../../nestjs-graphql-dtos';
-import { RoleService, UserService, RightService } from '../../nestjs-services';
-import {
   Args,
   Info,
   Mutation,
@@ -22,9 +9,24 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
-import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 import { GraphQLResolveInfo } from 'graphql';
+
+import {
+  CreateOneRoleArgs,
+  DeleteOneRoleArgs,
+  FindManyRightArgs,
+  FindManyRoleArgs,
+  FindManyUserArgs,
+  FindUniqueRoleArgs,
+  Right,
+  Role,
+  UpdateOneRoleArgs,
+  User,
+} from '../../nestjs-graphql-dtos';
+import { RightService, RoleService, UserService } from '../../nestjs-services';
 import { FindManyRoleOutput } from '../dtos';
+
+import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 
 @Resolver(() => Role)
 export class RoleResolver {
@@ -133,9 +135,7 @@ export class RoleResolver {
     let { users } = role;
 
     if (typeof users === 'undefined') {
-      const select = new PrismaSelect(info, {
-        // defaultFields: this.nestjsGraphqlModuleConfig.defaultFields,
-      }).valueOf(
+      const select = new PrismaSelect(info).valueOf(
         getPathFromGraphQLResolveInfo(info.path),
         'User',
       ) as Prisma.UserArgs;
@@ -168,9 +168,7 @@ export class RoleResolver {
     let { rights } = role;
 
     if (typeof rights === 'undefined') {
-      const select = new PrismaSelect(info, {
-        // defaultFields: this.nestjsGraphqlModuleConfig.defaultFields,
-      }).valueOf(
+      const select = new PrismaSelect(info).valueOf(
         getPathFromGraphQLResolveInfo(info.path),
         'Right',
       ) as Prisma.RightArgs;

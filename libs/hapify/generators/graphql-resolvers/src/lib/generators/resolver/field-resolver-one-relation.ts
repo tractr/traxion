@@ -62,9 +62,7 @@ export function generateFieldResolverOneRelationStatement(
         : ''
     }
 
-    const select = new PrismaSelect(info, {
-      // defaultFields: OWNERS_DEFAULT_FIELDS,
-    }).valueOf(
+    const select = new PrismaSelect(info).valueOf(
       getPathFromGraphQLResolveInfo(info.path),
       '${relationType}'
     ) as Prisma.${relationType}Args;

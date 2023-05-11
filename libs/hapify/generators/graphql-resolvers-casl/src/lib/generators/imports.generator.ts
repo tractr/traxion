@@ -50,6 +50,8 @@ export function generateImports(
         ...getAllModelsFromRelation(model).map((relatedModel) => ({
           name: `${pascal(relatedModel.name)}AuthorizedService`,
         })),
+        { name: 'DefaultOwnershipSelect' },
+        { name: 'DEFAULT_OWNERSHIP_SELECT' },
       ],
     },
     {

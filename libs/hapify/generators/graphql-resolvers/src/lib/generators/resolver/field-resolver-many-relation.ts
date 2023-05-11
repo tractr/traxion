@@ -25,9 +25,7 @@ export function generateFieldResolverManyRelationStatement(
   let { ${fieldName} } = ${entityName};
 
   if (typeof ${fieldName} === 'undefined') {
-    const select = new PrismaSelect(info, {
-      // defaultFields: this.nestjsGraphqlModuleConfig.defaultFields,
-    }).valueOf(
+    const select = new PrismaSelect(info).valueOf(
       getPathFromGraphQLResolveInfo(info.path),
       '${relationFieldType}',
     ) as Prisma.${relationFieldType}Args;

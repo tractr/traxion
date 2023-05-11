@@ -1,5 +1,6 @@
 import { ForcedSubject, PureAbility } from '@casl/ability';
 import { PrismaQuery } from '@casl/prisma';
+import { Inject } from '@nestjs/common';
 import {
   Args,
   Info,
@@ -14,6 +15,8 @@ import { Prisma } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
 
 import {
+  DEFAULT_OWNERSHIP_SELECT,
+  DefaultOwnershipSelect,
   RightAuthorizedService,
   RoleAuthorizedService,
 } from '../../nestjs-authorized-services';
@@ -45,6 +48,8 @@ export class RightResolver {
   constructor(
     private readonly rightAuthorizedService: RightAuthorizedService,
     private readonly roleAuthorizedService: RoleAuthorizedService,
+    @Inject(DEFAULT_OWNERSHIP_SELECT)
+    private readonly defaultFields: DefaultOwnershipSelect,
   ) {}
 
   /** Query for a unique right */
@@ -59,7 +64,8 @@ export class RightResolver {
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
   ) {
-    const select = new PrismaSelect(info).value as Prisma.RightArgs;
+    const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
+      .value as Prisma.RightArgs;
     const right = await this.rightAuthorizedService.findUnique(
       { where, ...select },
       abilities,
@@ -87,10 +93,9 @@ export class RightResolver {
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
   ) {
-    const select = new PrismaSelect(info).valueOf(
-      'rights',
-      'Right',
-    ) as Prisma.RightArgs;
+    const select = new PrismaSelect(info, {
+      defaultFields: this.defaultFields,
+    }).valueOf('rights', 'Right') as Prisma.RightArgs;
 
     const rights = await this.rightAuthorizedService.findMany(
       {
@@ -131,7 +136,8 @@ export class RightResolver {
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
   ) {
-    const select = new PrismaSelect(info).value as Prisma.RightArgs;
+    const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
+      .value as Prisma.RightArgs;
 
     const right = await this.rightAuthorizedService.create(
       { data, ...select },
@@ -153,7 +159,8 @@ export class RightResolver {
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
   ) {
-    const select = new PrismaSelect(info).value as Prisma.RightArgs;
+    const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
+      .value as Prisma.RightArgs;
 
     const right = await this.rightAuthorizedService.update(
       { where, data, ...select },
@@ -175,7 +182,8 @@ export class RightResolver {
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
   ) {
-    const select = new PrismaSelect(info).value as Prisma.RightArgs;
+    const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
+      .value as Prisma.RightArgs;
 
     const right = await this.rightAuthorizedService.delete(
       { where, ...select },
@@ -200,7 +208,7 @@ export class RightResolver {
 
     if (typeof roles === 'undefined') {
       const select = new PrismaSelect(info, {
-        // defaultFields: this.nestjsGraphqlModuleConfig.defaultFields,
+        defaultFields: this.defaultFields,
       }).valueOf(
         getPathFromGraphQLResolveInfo(info.path),
         'Role',

@@ -60,10 +60,5 @@ export function generateImports(
         { name: `${modelConstant}_SERVICE` },
       ],
     },
-    {
-      kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: '@casl/ability',
-      namedImports: [{ name: `AnyAbility` }],
-    },
   ];
 }
