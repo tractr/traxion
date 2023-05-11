@@ -2,6 +2,33 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.1.22-next.0](https://github.com/tractr/traxion/compare/v2.1.21...v2.1.22-next.0) (2023-05-11)
+
+
+### Features
+
+* add casl config generator ([#620](https://github.com/tractr/traxion/issues/620)) ([7a50520](https://github.com/tractr/traxion/commit/7a50520ffa4b73050d7add1ef9bae9b3a94b3622)), closes [#615](https://github.com/tractr/traxion/issues/615)
+
+
+
+## [2.1.22-next.0](https://github.com/tractr/traxion/compare/v2.1.21...v2.1.22-next.0) (2023-05-11)
+
+
+### Features
+
+* add casl config generator ([#620](https://github.com/tractr/traxion/issues/620)) ([7a50520](https://github.com/tractr/traxion/commit/7a50520ffa4b73050d7add1ef9bae9b3a94b3622)), closes [#615](https://github.com/tractr/traxion/issues/615)
+
+
+
+## [2.1.22-next.0](https://github.com/tractr/traxion/compare/v2.1.21...v2.1.22-next.0) (2023-05-11)
+
+
+### Features
+
+* add casl config generator ([#620](https://github.com/tractr/traxion/issues/620)) ([7a50520](https://github.com/tractr/traxion/commit/7a50520ffa4b73050d7add1ef9bae9b3a94b3622)), closes [#615](https://github.com/tractr/traxion/issues/615)
+
+
+
 ## [2.1.21](https://github.com/tractr/traxion/compare/v2.1.20...v2.1.21) (2023-04-20)
 
 
