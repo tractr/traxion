@@ -5,7 +5,6 @@ import { addCanAction } from './add-can-action';
 import { generateImports } from './imports.generator';
 
 import { Model, ModelWithOwnership } from '@trxn/hapify-core';
-import { Action } from '@trxn/nestjs-casl';
 
 export function generateCanSourceFile(
   project: Project,
@@ -24,12 +23,12 @@ export function generateCanSourceFile(
   sourceFile.addImportDeclarations(imports);
 
   const statements = [
-    addCanAction(Action.Read, rootModel, model),
-    addCanAction(Action.Count, rootModel, model),
-    addCanAction(Action.Search, rootModel, model),
-    addCanAction(Action.Create, rootModel, model),
-    addCanAction(Action.Update, rootModel, model),
-    addCanAction(Action.Delete, rootModel, model),
+    addCanAction('read', rootModel, model),
+    addCanAction('count', rootModel, model),
+    addCanAction('search', rootModel, model),
+    addCanAction('create', rootModel, model),
+    addCanAction('update', rootModel, model),
+    addCanAction('delete', rootModel, model),
   ];
   sourceFile.addStatements(statements);
 

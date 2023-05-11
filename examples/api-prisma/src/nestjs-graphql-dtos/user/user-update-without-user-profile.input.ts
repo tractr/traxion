@@ -8,6 +8,9 @@ export class UserUpdateWithoutUserProfileInput {
   email?: string;
 
   @Field(() => String, { nullable: true })
+  password?: string;
+
+  @Field(() => String, { nullable: true })
   name?: string;
 
   @Field(() => RoleUpdateOneRequiredWithoutUsersNestedInput, { nullable: true })

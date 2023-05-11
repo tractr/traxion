@@ -6,7 +6,7 @@
   "tags": ["scope:nestjs"],
   "targets": {
     "build": {
-      "executor": "@nrwl/js:swc",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/nestjs/core/*.md"],
         "main": "libs/nestjs/core/src/index.ts",

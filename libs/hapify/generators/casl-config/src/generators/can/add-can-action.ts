@@ -2,7 +2,6 @@ import { camel, pascal } from 'case';
 import { FunctionDeclarationStructure, StructureKind } from 'ts-morph';
 
 import { Model, ModelWithOwnership } from '@trxn/hapify-core';
-import { Action } from '@trxn/nestjs-casl';
 
 export function getAllPathToIds(rootModel: ModelWithOwnership, model: Model) {
   const pathToIds: string[] = [];
@@ -37,7 +36,14 @@ export function getAllPathToIds(rootModel: ModelWithOwnership, model: Model) {
 }
 
 export function addCanAction(
-  actionName: Action,
+  actionName:
+    | 'read'
+    | 'create'
+    | 'update'
+    | 'delete'
+    | 'search'
+    | 'count'
+    | 'manage',
   rootModel: ModelWithOwnership,
   model: Model,
 ): FunctionDeclarationStructure {

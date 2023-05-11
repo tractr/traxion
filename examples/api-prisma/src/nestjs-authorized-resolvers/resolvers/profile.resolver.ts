@@ -1,5 +1,12 @@
-import { ForcedSubject, PureAbility } from '@casl/ability';
-import { PrismaQuery } from '@casl/prisma';
+import {
+  Profile,
+  User,
+  FindUniqueProfileArgs,
+  FindManyProfileArgs,
+  CreateOneProfileArgs,
+  UpdateOneProfileArgs,
+  DeleteOneProfileArgs,
+} from '../../nestjs-graphql-dtos';
 import { Inject } from '@nestjs/common';
 import {
   Args,
@@ -12,35 +19,25 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
+import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 import { GraphQLResolveInfo } from 'graphql';
-
-import {
-  DEFAULT_OWNERSHIP_SELECT,
-  DefaultOwnershipSelect,
-  ProfileAuthorizedService,
-  UserAuthorizedService,
-} from '../../nestjs-authorized-services';
-import {
-  CreateOneProfileArgs,
-  DeleteOneProfileArgs,
-  FindManyProfileArgs,
-  FindUniqueProfileArgs,
-  Profile,
-  UpdateOneProfileArgs,
-  User,
-} from '../../nestjs-graphql-dtos';
 import { FindManyProfileOutput } from '../dtos';
 import {
   CREATE_PROFILE,
-  DELETE_PROFILE,
   READ_PROFILE,
   SEARCH_PROFILE,
   UPDATE_PROFILE,
+  DELETE_PROFILE,
 } from '../policies';
-
-
+import { PrismaQuery } from '@casl/prisma';
+import { PureAbility, ForcedSubject } from '@casl/ability';
+import {
+  ProfileAuthorizedService,
+  UserAuthorizedService,
+  DefaultOwnershipSelect,
+  DEFAULT_OWNERSHIP_SELECT,
+} from '../../nestjs-authorized-services';
 import { CurrentAbilities, Policies } from '@trxn/nestjs-core';
-import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 
 @Resolver(() => Profile)
 export class ProfileResolver {

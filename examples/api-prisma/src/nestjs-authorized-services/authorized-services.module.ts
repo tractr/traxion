@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-
 import { ConfigurableModuleClass } from './authorized-services.module-definition';
 import { AUTHORIZED_SERVICES_PROVIDERS } from './authorized-services.providers';
 import {

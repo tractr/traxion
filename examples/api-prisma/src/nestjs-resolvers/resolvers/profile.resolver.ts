@@ -1,4 +1,14 @@
 import {
+  Profile,
+  User,
+  FindUniqueProfileArgs,
+  FindManyProfileArgs,
+  CreateOneProfileArgs,
+  UpdateOneProfileArgs,
+  DeleteOneProfileArgs,
+} from '../../nestjs-graphql-dtos';
+import { ProfileService, UserService } from '../../nestjs-services';
+import {
   Args,
   Info,
   Mutation,
@@ -9,21 +19,9 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
-import { GraphQLResolveInfo } from 'graphql';
-
-import {
-  CreateOneProfileArgs,
-  DeleteOneProfileArgs,
-  FindManyProfileArgs,
-  FindUniqueProfileArgs,
-  Profile,
-  UpdateOneProfileArgs,
-  User,
-} from '../../nestjs-graphql-dtos';
-import { ProfileService, UserService } from '../../nestjs-services';
-import { FindManyProfileOutput } from '../dtos';
-
 import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
+import { GraphQLResolveInfo } from 'graphql';
+import { FindManyProfileOutput } from '../dtos';
 
 @Resolver(() => Profile)
 export class ProfileResolver {

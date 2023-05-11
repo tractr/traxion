@@ -23,10 +23,10 @@ generator nestjsGraphql {
   useInputType_StringFilter_ALL = "string"
 
   // Remove Nested creation, update, upsert and delete
-  decorate_1_type = "*Nested*Input"
-  decorate_1_field = "!(connect|disconnect|set)"
-  decorate_1_name = "HideField"
-  decorate_1_from = "@nestjs/graphql"
+  decorate_1_type      = "*Nested*Input"
+  decorate_1_field     = "!(connect|disconnect|set)"
+  decorate_1_name      = "HideField"
+  decorate_1_from      = "@nestjs/graphql"
   decorate_1_arguments = "[]"
 }
 
@@ -43,45 +43,46 @@ generator publicGraphqlResolvers {
 
 // Nestjs authorizd graphql resolvers generator
 generator authorizedGraphqlResolvers {
-  provider = "trxn-prisma-nestjs-graphql-resolvers-casl-generator"
-  output = "../src/nestjs-authorized-resolvers"
-  tsConfigFilePath   = "../../tsconfig.app.json"
-  nestjsServicesImportPath = "./nestjs-services"
-  nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
+  provider                           = "trxn-prisma-nestjs-graphql-resolvers-casl-generator"
+  output                             = "../src/nestjs-authorized-resolvers"
+  tsConfigFilePath                   = "../../tsconfig.app.json"
+  nestjsServicesImportPath           = "./nestjs-services"
+  nestjsGraphqlDtosImportPath        = "./nestjs-graphql-dtos"
   nestjsAuthorizedServicesImportPath = "./nestjs-authorized-services"
 }
 
-// // Nestjs common services generator
+// Nestjs common services generator
 generator nestjsServices {
-  provider = "trxn-prisma-nestjs-services-generator"
-  output   = "../src/nestjs-services"
-  tsConfigFilePath   = "../../tsconfig.app.json"
+  provider         = "trxn-prisma-nestjs-services-generator"
+  output           = "../src/nestjs-services"
+  tsConfigFilePath = "../../tsconfig.app.json"
 }
 
-// // Nestjs common services generator
+// Nestjs common services generator
 generator nestjsAuthorizedServices {
-  provider = "trxn-prisma-nestjs-authorized-services-generator"
-  output   = "../src/nestjs-authorized-services"
-  tsConfigFilePath   = "../../tsconfig.app.json"
+  provider                 = "trxn-prisma-nestjs-authorized-services-generator"
+  output                   = "../src/nestjs-authorized-services"
+  tsConfigFilePath         = "../../tsconfig.app.json"
   nestjsServicesImportPath = "./nestjs-services"
 }
 
 generator caslConfig {
-  provider = "trxn-hapify-prisma-casl-generator"
-  output   = "../src/casl"
-  tsConfigFilePath   = "../../tsconfig.app.json"
+  provider         = "trxn-prisma-casl-generator"
+  output           = "../src/casl"
+  tsConfigFilePath = "../../tsconfig.app.json"
 }
 
 //--------------------------------------------
 // This part describe the project models
 //--------------------------------------------
 model User {
-  id     Int     @id @default(autoincrement())
-  email  String  @unique
-  name   String?
-  role   Role    @relation(fields: [roleId], references: [id])
-  roleId Int
-  userProfile  Profile?
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  password    String
+  name        String?
+  role        Role     @relation(fields: [roleId], references: [id])
+  roleId      Int
+  userProfile Profile?
 }
 
 model Profile {
@@ -93,7 +94,7 @@ model Profile {
 
 model Role {
   id     Int     @id @default(autoincrement())
-  name   String
+  name   String  @unique
   users  User[]
   rights Right[]
 }

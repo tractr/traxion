@@ -1,64 +1,75 @@
 import { PrismaClient } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
-async function main() {
-  const users = await prisma.user.upsert({
-    where: {
-      email: 'admin@traxion.dev',
-    },
-    update: {},
-    create: {
-      email: 'admin@traxion.dev',
-      name: 'Admin',
+export function createUser({
+  email,
+  password,
+  name,
+  address,
+  role,
+}: {
+  email: string;
+  password: string;
+  name: string;
+  address: string;
+  role: string;
+}) {
+  console.info(`Creating user ${email}`);
+  return prisma.user.create({
+    data: {
+      email,
+      password: bcrypt.hashSync(password, 10),
+      name,
       userProfile: {
-        connectOrCreate: {
-          where: {
-            id: 1,
-          },
-          create: {
-            id: 1,
-            address: 'Traxion Tech Inc.',
-          },
+        create: {
+          address,
         },
       },
       role: {
         connectOrCreate: {
           where: {
-            id: 1,
+            name: role,
           },
           create: {
-            id: 1,
-            name: 'Admin',
-            rights: {
-              connectOrCreate: [
-                {
-                  where: {
-                    id: 1,
-                  },
-                  create: {
-                    id: 1,
-                    name: 'Create',
-                  },
-                },
-                {
-                  where: {
-                    id: 2,
-                  },
-                  create: {
-                    id: 2,
-                    name: 'Update',
-                  },
-                },
-              ],
-            },
+            name: role,
           },
         },
       },
     },
   });
+}
 
-  console.info(`Created user with id: ${users.id}`);
+async function main() {
+  await prisma.profile.deleteMany({});
+  await prisma.user.deleteMany({});
+  await prisma.role.deleteMany({});
+  const users = [
+    await createUser({
+      email: 'admin@traxion.dev',
+      password: 'password',
+      name: 'Admin',
+      address: 'Admin Address',
+      role: 'admin',
+    }),
+    await createUser({
+      email: 'user1@traxion.dev',
+      password: 'password',
+      name: 'User 1',
+      address: 'User 1 Address',
+      role: 'user',
+    }),
+    await createUser({
+      email: 'user2@traxion.dev',
+      password: 'password',
+      name: 'User 2',
+      address: 'User 2 Address',
+      role: 'user',
+    }),
+  ];
+
+  console.info(`Seeded ${users.length} users`);
 }
 
 main().catch((e) => {

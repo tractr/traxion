@@ -1,4 +1,15 @@
 import {
+  Right,
+  Role,
+  FindUniqueRightArgs,
+  FindManyRightArgs,
+  CreateOneRightArgs,
+  UpdateOneRightArgs,
+  DeleteOneRightArgs,
+  FindManyRoleArgs,
+} from '../../nestjs-graphql-dtos';
+import { RightService, RoleService } from '../../nestjs-services';
+import {
   Args,
   Info,
   Mutation,
@@ -9,22 +20,9 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
-import { GraphQLResolveInfo } from 'graphql';
-
-import {
-  CreateOneRightArgs,
-  DeleteOneRightArgs,
-  FindManyRightArgs,
-  FindManyRoleArgs,
-  FindUniqueRightArgs,
-  Right,
-  Role,
-  UpdateOneRightArgs,
-} from '../../nestjs-graphql-dtos';
-import { RightService, RoleService } from '../../nestjs-services';
-import { FindManyRightOutput } from '../dtos';
-
 import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
+import { GraphQLResolveInfo } from 'graphql';
+import { FindManyRightOutput } from '../dtos';
 
 @Resolver(() => Right)
 export class RightResolver {

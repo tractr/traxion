@@ -56,7 +56,8 @@
       },
       "executor": "@nrwl/js:node",
       "options": {
-        "buildTarget": "examples-api-prisma:build"
+        "buildTarget": "examples-api-prisma:build",
+        "inspect": true
       }
     },
     "test": {

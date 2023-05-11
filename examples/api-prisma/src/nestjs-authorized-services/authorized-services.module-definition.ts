@@ -1,8 +1,6 @@
 import { ConfigurableModuleBuilder } from '@nestjs/common';
-
-import { AuthorizedServicesModuleOptions } from './interfaces';
-
 import { addImportsExtra, ImportsExtra } from '@trxn/nestjs-core';
+import { AuthorizedServicesModuleOptions } from './interfaces';
 
 export const {
   ConfigurableModuleClass,
