@@ -13,7 +13,7 @@ import {
 
 export type Roles = 'admin' | 'user';
 
-export const customSelect = Prisma.validator<Prisma.UserArgs>()({
+export const userSelectWithOwnership = Prisma.validator<Prisma.UserArgs>()({
   select: {
     ...userSelect.select,
     role: {
@@ -25,7 +25,11 @@ export const customSelect = Prisma.validator<Prisma.UserArgs>()({
   },
 });
 
-export type UserWithOwnershipIds = Prisma.UserGetPayload<typeof customSelect>;
+export type UserWithOwnershipIds = Prisma.UserGetPayload<
+  typeof userSelectWithOwnership
+>;
+
+export const customSelect = userSelectWithOwnership.select;
 
 export const rolePermissions: Record<
   Roles,

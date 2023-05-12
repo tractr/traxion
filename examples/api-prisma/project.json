@@ -13,7 +13,7 @@
           "optimization": true
         }
       },
-      "executor": "@nrwl/webpack:webpack",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": [],
         "compiler": "tsc",

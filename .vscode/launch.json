@@ -1,10 +1,13 @@
 {
   "configurations": [
     {
-      "name": "Debug Node App",
-      "port": 7777,
-      "request": "attach",
-      "type": "node"
+      "command": "nx serve examples-api-prisma",
+      "cwd": "${workspaceFolder}",
+      "name": "Debug Traxion api prisma",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**", "${workspaceFolder}/node_modules/*"],
+      "type": "node-terminal"
     }
   ],
   "version": "0.2.0"
