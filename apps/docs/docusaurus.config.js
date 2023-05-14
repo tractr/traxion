@@ -10,6 +10,10 @@ module.exports = {
   projectName: 'traxion.github.io',
   deploymentBranch: 'main',
   trailingSlash: true,
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
   themeConfig: {
     navbar: {
       title: 'Traxion',
@@ -18,12 +22,6 @@ module.exports = {
         src: 'img/logo.svg',
       },
       items: [
-        {
-          to: 'docs/',
-          activeBasePath: 'docs',
-          label: 'Docs',
-          position: 'left',
-        },
         {
           href: 'https://github.com/tractr/traxion',
           label: 'GitHub',
