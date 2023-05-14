@@ -1,11 +1,8 @@
 import { AbilityBuilder } from '@casl/ability';
-
 import { AppAbility } from '../types/app-ability';
 import { UserWithOwnershipIds } from '../types/user-with-ownership-ids';
-
 import { getConcatValueByPath } from '@trxn/common';
 import { Action } from '@trxn/nestjs-casl';
-
 export function canReadProfile(
   abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
@@ -72,7 +69,7 @@ export function canReadActionsProfile(
 export function canWriteActionsProfile(
   abilities: AbilityBuilder<AppAbility>,
   user: UserWithOwnershipIds,
-  allowDelete = false,
+  allowDelete: boolean = false,
 ) {
   canCreateProfile(abilities, user);
   canUpdateProfile(abilities, user);

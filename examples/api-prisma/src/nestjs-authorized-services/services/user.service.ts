@@ -110,7 +110,6 @@ export class UserAuthorizedService {
       any,
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
-    prisma?: Prisma.UserDelegate<undefined>,
   ) {
     const where = {
       AND: [abilities ? accessibleBy(abilities).User : {}, args?.where ?? {}],

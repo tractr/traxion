@@ -13,7 +13,7 @@ import {
   Schema,
 } from '@trxn/hapify-core';
 import { convertDmmfToHapifySchemaDeclaration } from '@trxn/hapify-devkit';
-import { hapifyCaslConfigGenerator } from '@trxn/hapify-generators-casl-config';
+import { hapifyCaslConfigGenerator } from '@trxn/hapify-generator-casl';
 
 export const GENERATOR_NAME = 'Hapify Prisma NestJs/AuthorizedServices';
 
@@ -69,9 +69,9 @@ generatorHandler({
     }
 
     // Remove unused imports
-    // project
-    //   .getSourceFiles()
-    //   .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
+    project
+      .getSourceFiles()
+      .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
 
     // Save project to file system
     project.saveSync();

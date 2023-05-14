@@ -63,9 +63,9 @@ generatorHandler({
     }
 
     // Remove unused imports
-    // project
-    //   .getSourceFiles()
-    //   .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
+    project
+      .getSourceFiles()
+      .map((sourceFile) => sourceFile.fixUnusedIdentifiers());
 
     // Save project to file system
     project.saveSync();

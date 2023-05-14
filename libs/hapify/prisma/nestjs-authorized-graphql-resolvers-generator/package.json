@@ -1,0 +1,16 @@
+{
+  "name": "@trxn/prisma-nestjs-authorized-graphql-resolvers-generator",
+  "version": "2.1.22-next.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tractr/traxion"
+  },
+  "type": "commonjs",
+  "bin": {
+    "trxn-prisma-nestjs-authorized-graphql-resolvers-generator": "src/bin.js"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

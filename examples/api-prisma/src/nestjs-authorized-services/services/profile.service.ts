@@ -113,7 +113,6 @@ export class ProfileAuthorizedService {
       any,
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
-    prisma?: Prisma.ProfileDelegate<undefined>,
   ) {
     const where = {
       AND: [

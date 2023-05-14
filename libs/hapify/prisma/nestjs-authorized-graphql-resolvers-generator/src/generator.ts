@@ -9,10 +9,11 @@ import { version } from '../package.json';
 import { createSchema } from '@trxn/hapify-core';
 import { convertDmmfToHapifySchemaDeclaration } from '@trxn/hapify-devkit';
 import { generate as generateNestjsResolvers } from '@trxn/hapify-generator-nestjs-graphql-resolvers';
+import { generate as generateNestjsResolversChecks } from '@trxn/hapify-generator-nestjs-authorized-graphql-resolvers';
 
-export const GENERATOR_NAME = 'Hapify Prisma NestJs/GraphqlResolvers';
+export const GENERATOR_NAME = 'Hapify Prisma NestJs/GraphqlResolversCasl';
 
-export type GraphqlResolverGeneratorConfig = {
+export type GraphqlResolverCaslGeneratorConfig = {
   outputDirectory: string;
   tsConfigFilePath: string;
   generatedDirectory: string;
@@ -35,6 +36,7 @@ export function generate() {
         tsConfigFilePath,
         nestjsServicesImportPath,
         nestjsGraphqlDtosImportPath,
+        nestjsAuthorizedServicesImportPath,
       } = generator.config;
 
       // Validate the generator configuration
@@ -46,6 +48,24 @@ export function generate() {
 
       if (!tsConfigFilePath) {
         const error = `${GENERATOR_NAME}: No tsConfigFilePath specified in generator block`;
+        logger.warn(error);
+        throw new Error(error);
+      }
+
+      if (!nestjsServicesImportPath) {
+        const error = `${GENERATOR_NAME}: No nestjsServicesImportPath specified in generator block`;
+        logger.warn(error);
+        throw new Error(error);
+      }
+
+      if (!nestjsGraphqlDtosImportPath) {
+        const error = `${GENERATOR_NAME}: No nestjsGraphqlDtosImportPath specified in generator block`;
+        logger.warn(error);
+        throw new Error(error);
+      }
+
+      if (!nestjsAuthorizedServicesImportPath) {
+        const error = `${GENERATOR_NAME}: No nestjsAuthorizedServicesImportPath specified in generator block`;
         logger.warn(error);
         throw new Error(error);
       }
@@ -70,6 +90,14 @@ export function generate() {
           importPaths: {
             nestjsServices: nestjsServicesImportPath,
             graphqlDtos: nestjsGraphqlDtosImportPath,
+          },
+        });
+
+        // Add the authorization layer to the graphql resolvers
+        generateNestjsResolversChecks(project, schema, {
+          output,
+          importPaths: {
+            nestjsAuthorizedServices: nestjsAuthorizedServicesImportPath,
           },
         });
       } catch (error) {

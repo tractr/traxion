@@ -110,7 +110,6 @@ export class RightAuthorizedService {
       any,
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
-    prisma?: Prisma.RightDelegate<undefined>,
   ) {
     const where = {
       AND: [abilities ? accessibleBy(abilities).Right : {}, args?.where ?? {}],

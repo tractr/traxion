@@ -13,7 +13,15 @@ export class User {
   @Field(() => String, { nullable: false })
   email!: string;
 
-  @Field(() => String, { nullable: false })
+  /**
+   * TODO: add the possibility to mark a field as password
+   * @trxn/password
+   */
+  @Field(() => String, {
+    nullable: false,
+    description:
+      'TODO: add the possibility to mark a field as password\n@trxn/password',
+  })
   password!: string;
 
   @Field(() => String, { nullable: true })
