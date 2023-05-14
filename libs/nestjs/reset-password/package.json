@@ -1,6 +1,6 @@
 {
   "name": "@trxn/nestjs-reset-password",
-  "version": "2.1.22-next.0",
+  "version": "2.1.22-next.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"
