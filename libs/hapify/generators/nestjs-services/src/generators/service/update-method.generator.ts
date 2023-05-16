@@ -8,7 +8,7 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { isHiddenField, Model } from '@trxn/hapify-core';
 
 export const generateUpdateMethod = (
   model: Model,
@@ -59,13 +59,23 @@ export const generateUpdateMethod = (
     },
   ];
 
+  const hiddenFields = model.fields.filter(isHiddenField);
+  const modelName = camel(model.name);
+
   return {
     kind: StructureKind.Method,
     isAsync: true,
     name: 'update',
     typeParameters,
     parameters,
-    statements: `return prisma.update<T>(args);`,
+    statements: `
+    const ${modelName} = await prisma.update<T>(args);
+
+    ${
+      hiddenFields.length
+        ? `return ${modelName} === null ? ${modelName} : this.excludeHiddenFields(${modelName}, args.select);`
+        : `return ${modelName};`
+    }`,
     docs,
   };
 };

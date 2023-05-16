@@ -3,8 +3,8 @@ import { InputType } from '@nestjs/graphql';
 import { IntFilter } from '../prisma/int-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
 import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
-import { RoleRelationFilter } from '../role/role-relation-filter.input';
-import { ProfileRelationFilter } from '../profile/profile-relation-filter.input';
+import { EnumRoleNullableListFilter } from '../prisma/enum-role-nullable-list-filter.input';
+import { TaskListRelationFilter } from '../task/task-list-relation-filter.input';
 
 @InputType()
 export class UserWhereInput {
@@ -23,18 +23,18 @@ export class UserWhereInput {
   @Field(() => StringFilter, { nullable: true })
   email?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  password?: StringFilter;
-
   @Field(() => StringNullableFilter, { nullable: true })
   name?: StringNullableFilter;
 
-  @Field(() => IntFilter, { nullable: true })
-  roleId?: IntFilter;
+  @Field(() => StringFilter, { nullable: true })
+  password?: StringFilter;
 
-  @Field(() => RoleRelationFilter, { nullable: true })
-  role?: RoleRelationFilter;
+  @Field(() => EnumRoleNullableListFilter, { nullable: true })
+  roles?: EnumRoleNullableListFilter;
 
-  @Field(() => ProfileRelationFilter, { nullable: true })
-  userProfile?: ProfileRelationFilter;
+  @Field(() => TaskListRelationFilter, { nullable: true })
+  tasks?: TaskListRelationFilter;
+
+  @Field(() => TaskListRelationFilter, { nullable: true })
+  sharedTasks?: TaskListRelationFilter;
 }

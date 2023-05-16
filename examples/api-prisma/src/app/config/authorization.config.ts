@@ -1,5 +1,5 @@
 import { AbilityBuilder } from '@casl/ability';
-import { Prisma } from '@prisma/client';
+import { Prisma, Role } from '@prisma/client';
 
 import { UserSelectOwnershipIds as userSelect } from '../../casl/constants';
 import { AppAbility } from '../../casl/types';
@@ -11,17 +11,10 @@ import {
   DefinePublicPermissions,
 } from '@trxn/nestjs-casl';
 
-export type Roles = 'admin' | 'user';
-
 export const userSelectWithOwnership = Prisma.validator<Prisma.UserArgs>()({
   select: {
     ...userSelect.select,
-    role: {
-      select: {
-        ...userSelect.select.role.select,
-        name: true,
-      },
-    },
+    roles: true,
   },
 });
 
@@ -32,13 +25,13 @@ export type UserWithOwnershipIds = Prisma.UserGetPayload<
 export const customSelect = userSelectWithOwnership.select;
 
 export const rolePermissions: Record<
-  Roles,
+  Role,
   DefinePermissions<AbilityBuilder<AppAbility>, UserWithOwnershipIds>
 > = {
-  user: (abilities, user) => {
+  USER: (abilities, user) => {
     userOwnershipPermission(abilities, user);
   },
-  admin: (abilities) => {
+  ADMIN: (abilities) => {
     abilities.can(Action.Manage, 'all');
   },
 };

@@ -1,7 +1,8 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import { RoleUpdateOneRequiredWithoutUsersNestedInput } from '../role/role-update-one-required-without-users-nested.input';
-import { ProfileUpdateOneWithoutUserNestedInput } from '../profile/profile-update-one-without-user-nested.input';
+import { Role } from '../prisma/role.enum';
+import { TaskUpdateManyWithoutAuthorNestedInput } from '../task/task-update-many-without-author-nested.input';
+import { TaskUpdateManyWithoutSharedWithNestedInput } from '../task/task-update-many-without-shared-with-nested.input';
 
 @InputType()
 export class UserUpdateInput {
@@ -9,14 +10,17 @@ export class UserUpdateInput {
   email?: string;
 
   @Field(() => String, { nullable: true })
-  password?: string;
-
-  @Field(() => String, { nullable: true })
   name?: string;
 
-  @Field(() => RoleUpdateOneRequiredWithoutUsersNestedInput, { nullable: true })
-  role?: RoleUpdateOneRequiredWithoutUsersNestedInput;
+  @Field(() => String, { nullable: true })
+  password?: string;
 
-  @Field(() => ProfileUpdateOneWithoutUserNestedInput, { nullable: true })
-  userProfile?: ProfileUpdateOneWithoutUserNestedInput;
+  @Field(() => [Role], { nullable: true })
+  roles?: Array<keyof typeof Role>;
+
+  @Field(() => TaskUpdateManyWithoutAuthorNestedInput, { nullable: true })
+  tasks?: TaskUpdateManyWithoutAuthorNestedInput;
+
+  @Field(() => TaskUpdateManyWithoutSharedWithNestedInput, { nullable: true })
+  sharedTasks?: TaskUpdateManyWithoutSharedWithNestedInput;
 }

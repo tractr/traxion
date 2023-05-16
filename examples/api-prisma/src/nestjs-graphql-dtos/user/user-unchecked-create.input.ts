@@ -1,7 +1,9 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
-import { ProfileUncheckedCreateNestedOneWithoutUserInput } from '../profile/profile-unchecked-create-nested-one-without-user.input';
+import { Role } from '../prisma/role.enum';
+import { TaskUncheckedCreateNestedManyWithoutAuthorInput } from '../task/task-unchecked-create-nested-many-without-author.input';
+import { TaskUncheckedCreateNestedManyWithoutSharedWithInput } from '../task/task-unchecked-create-nested-many-without-shared-with.input';
 
 @InputType()
 export class UserUncheckedCreateInput {
@@ -11,17 +13,22 @@ export class UserUncheckedCreateInput {
   @Field(() => String, { nullable: false })
   email!: string;
 
-  @Field(() => String, { nullable: false })
-  password!: string;
-
   @Field(() => String, { nullable: true })
   name?: string;
 
-  @Field(() => Int, { nullable: false })
-  roleId!: number;
+  @Field(() => String, { nullable: false })
+  password!: string;
 
-  @Field(() => ProfileUncheckedCreateNestedOneWithoutUserInput, {
+  @Field(() => [Role], { nullable: true })
+  roles?: Array<keyof typeof Role>;
+
+  @Field(() => TaskUncheckedCreateNestedManyWithoutAuthorInput, {
     nullable: true,
   })
-  userProfile?: ProfileUncheckedCreateNestedOneWithoutUserInput;
+  tasks?: TaskUncheckedCreateNestedManyWithoutAuthorInput;
+
+  @Field(() => TaskUncheckedCreateNestedManyWithoutSharedWithInput, {
+    nullable: true,
+  })
+  sharedTasks?: TaskUncheckedCreateNestedManyWithoutSharedWithInput;
 }

@@ -5,7 +5,4 @@ import { InputType } from '@nestjs/graphql';
 export class UserAvgAggregateInput {
   @Field(() => Boolean, { nullable: true })
   id?: true;
-
-  @Field(() => Boolean, { nullable: true })
-  roleId?: true;
 }

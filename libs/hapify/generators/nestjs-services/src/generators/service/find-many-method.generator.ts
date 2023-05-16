@@ -8,7 +8,22 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { isHiddenField, Model } from '@trxn/hapify-core';
+
+export function generateFindManyStatementMethod(model: Model): string {
+  const modelName = camel(model.pluralName);
+  const hiddenFields = model.fields.filter(isHiddenField);
+
+  return `
+    const ${modelName} = await prisma.findMany<T>(args);
+
+    ${
+      hiddenFields.length
+        ? `return ${modelName}.map((data) => this.excludeHiddenFields(data, args.select));`
+        : `return ${modelName};`
+    }
+  `;
+}
 
 export const generateFindManyMethod = (
   model: Model,
@@ -71,7 +86,7 @@ export const generateFindManyMethod = (
     name: 'findMany',
     typeParameters,
     parameters,
-    statements: `return prisma.findMany<T>(args);`,
+    statements: generateFindManyStatementMethod(model),
     docs,
   };
 };

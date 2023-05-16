@@ -1,7 +1,9 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
-import { ProfileUncheckedUpdateOneWithoutUserNestedInput } from '../profile/profile-unchecked-update-one-without-user-nested.input';
+import { Role } from '../prisma/role.enum';
+import { TaskUncheckedUpdateManyWithoutAuthorNestedInput } from '../task/task-unchecked-update-many-without-author-nested.input';
+import { TaskUncheckedUpdateManyWithoutSharedWithNestedInput } from '../task/task-unchecked-update-many-without-shared-with-nested.input';
 
 @InputType()
 export class UserUncheckedUpdateInput {
@@ -12,16 +14,21 @@ export class UserUncheckedUpdateInput {
   email?: string;
 
   @Field(() => String, { nullable: true })
-  password?: string;
-
-  @Field(() => String, { nullable: true })
   name?: string;
 
-  @Field(() => Int, { nullable: true })
-  roleId?: number;
+  @Field(() => String, { nullable: true })
+  password?: string;
 
-  @Field(() => ProfileUncheckedUpdateOneWithoutUserNestedInput, {
+  @Field(() => [Role], { nullable: true })
+  roles?: Array<keyof typeof Role>;
+
+  @Field(() => TaskUncheckedUpdateManyWithoutAuthorNestedInput, {
     nullable: true,
   })
-  userProfile?: ProfileUncheckedUpdateOneWithoutUserNestedInput;
+  tasks?: TaskUncheckedUpdateManyWithoutAuthorNestedInput;
+
+  @Field(() => TaskUncheckedUpdateManyWithoutSharedWithNestedInput, {
+    nullable: true,
+  })
+  sharedTasks?: TaskUncheckedUpdateManyWithoutSharedWithNestedInput;
 }

@@ -1,9 +1,8 @@
-import { Field } from '@nestjs/graphql';
-import { ObjectType } from '@nestjs/graphql';
-import { ID } from '@nestjs/graphql';
-import { Int } from '@nestjs/graphql';
-import { Role } from '../role/role.model';
-import { Profile } from '../profile/profile.model';
+import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
+
+import { UserCount } from './user-count.output';
+import { Role } from '../prisma/role.enum';
+import { Task } from '../task/task.model';
 
 @ObjectType()
 export class User {
@@ -13,26 +12,29 @@ export class User {
   @Field(() => String, { nullable: false })
   email!: string;
 
-  /**
-   * TODO: add the possibility to mark a field as password
-   * @trxn/password
-   */
-  @Field(() => String, {
-    nullable: false,
-    description:
-      'TODO: add the possibility to mark a field as password\n@trxn/password',
-  })
-  password!: string;
-
   @Field(() => String, { nullable: true })
   name!: string | null;
 
-  @Field(() => Int, { nullable: false })
-  roleId!: number;
+  /**
+   * @trxn/hidden
+   * @trxn/encrypted
+   */
+  @HideField()
+  @Field(() => String, {
+    nullable: false,
+    description: '@trxn/hidden\n@trxn/encrypted',
+  })
+  password!: string;
 
-  @Field(() => Role, { nullable: false })
-  role?: Role;
+  @Field(() => [Role], { nullable: true })
+  roles!: Array<keyof typeof Role>;
 
-  @Field(() => Profile, { nullable: true })
-  userProfile?: Profile | null;
+  @Field(() => [Task], { nullable: true })
+  tasks?: Array<Task>;
+
+  @Field(() => [Task], { nullable: true })
+  sharedTasks?: Array<Task>;
+
+  @Field(() => UserCount, { nullable: false })
+  _count?: UserCount;
 }

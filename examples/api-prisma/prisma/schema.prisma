@@ -1,14 +1,13 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-// Prisma default generator client
-generator client {
-  provider = "prisma-client-js"
 }
 
 // Nestjs graphql dto generator
@@ -18,8 +17,6 @@ generator nestjsGraphql {
   purgeOutput                   = true
   reExport                      = Single
   noAtomicOperations            = true
-  fields_Validator_from         = "class-validator"
-  fields_Validator_input        = true
   useInputType_StringFilter_ALL = "string"
 
   // Remove Nested creation, update, upsert and delete
@@ -28,6 +25,7 @@ generator nestjsGraphql {
   decorate_1_name      = "HideField"
   decorate_1_from      = "@nestjs/graphql"
   decorate_1_arguments = "[]"
+
 }
 
 // Nestjs public grahpql resolvers generator
@@ -41,69 +39,67 @@ generator nestjsGraphqlResolvers {
   nestjsGraphqlDtosImportPath = "./nestjs-graphql-dtos"
 }
 
-// // Nestjs authorizd graphql resolvers generator
-// generator nestjsAuthorizedGraphqlResolvers {
-//   provider                           = "trxn-prisma-nestjs-authorized-graphql-resolvers-generator"
-//   output                             = "../src/nestjs-authorized-resolvers"
-//   tsConfigFilePath                    = "../../tsconfig.app.json"
-//   nestjsServicesImportPath           = "./nestjs-services"
-//   nestjsGraphqlDtosImportPath        = "./nestjs-graphql-dtos"
-//   nestjsAuthorizedServicesImportPath = "./nestjs-authorized-services"
-// }
+// Nestjs authorizd graphql resolvers generator
+generator nestjsAuthorizedGraphqlResolvers {
+  provider                           = "trxn-prisma-nestjs-authorized-graphql-resolvers-generator"
+  output                             = "../src/nestjs-authorized-resolvers"
+  tsConfigFilePath                    = "../../tsconfig.app.json"
+  nestjsServicesImportPath           = "./nestjs-services"
+  nestjsGraphqlDtosImportPath        = "./nestjs-graphql-dtos"
+  nestjsAuthorizedServicesImportPath = "./nestjs-authorized-services"
+}
 
-// // Nestjs common services generator
-// generator nestjsServices {
-//   provider         = "trxn-prisma-nestjs-services-generator"
-//   output           = "../src/nestjs-services"
-//   tsConfigFilePath = "../../tsconfig.app.json"
-// }
+// Nestjs common services generator
+generator nestjsServices {
+  provider         = "trxn-prisma-nestjs-services-generator"
+  output           = "../src/nestjs-services"
+  tsConfigFilePath = "../../tsconfig.app.json"
+}
 
-// // Nestjs common services generator
-// generator nestjsAuthorizedServices {
-//   provider                 = "trxn-prisma-nestjs-authorized-services-generator"
-//   output                   = "../src/nestjs-authorized-services"
-//   tsConfigFilePath         = "../../tsconfig.app.json"
-//   nestjsServicesImportPath = "./nestjs-services"
-// }
+// Nestjs common services generator
+generator nestjsAuthorizedServices {
+  provider                 = "trxn-prisma-nestjs-authorized-services-generator"
+  output                   = "../src/nestjs-authorized-services"
+  tsConfigFilePath         = "../../tsconfig.app.json"
+  nestjsServicesImportPath = "./nestjs-services"
+}
 
-// generator caslConfig {
-//   provider         = "trxn-prisma-casl-generator"
-//   output           = "../src/casl"
-//   tsConfigFilePath = "../../tsconfig.app.json"
-// }
+generator caslConfig {
+  provider         = "trxn-prisma-casl-generator"
+  output           = "../src/casl"
+  tsConfigFilePath = "../../tsconfig.app.json"
+}
 
-//--------------------------------------------
-// This part describe the project models
-//--------------------------------------------
 model User {
-  id          Int      @id @default(autoincrement())
-  email       String   @unique
-  /// TODO: add the possibility to mark a field as password
-  /// @trxn/password
-  password    String
+  id          Int     @id @default(autoincrement())
+  email       String  @unique
   name        String?
-  role        Role     @relation(fields: [roleId], references: [id])
-  roleId      Int
-  userProfile Profile?
+  /// @trxn/hidden
+  /// @trxn/encrypted
+  password    String
+  roles       Role[]  @default([USER])
+  tasks       Task[]  @relation("TaskToAuthor")
+  sharedTasks Task[]  @relation("TaskToUser")
 }
 
-model Profile {
-  id      Int    @id @default(autoincrement())
-  address String
-  user    User   @relation(fields: [userId], references: [id])
-  userId  Int    @unique
+model Task {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?
+  status      TaskStatus @default(OPEN)
+  author      User       @relation("TaskToAuthor", fields: [authorId], references: [id])
+  authorId    Int
+  /// @trxn/permissions: readOnly
+  sharedWith  User[]     @relation("TaskToUser")
 }
 
-model Role {
-  id     Int     @id @default(autoincrement())
-  name   String  @unique
-  users  User[]
-  rights Right[]
+enum TaskStatus {
+  OPEN
+  IN_PROGRESS
+  DONE
 }
 
-model Right {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  roles Role[]
+enum Role {
+  ADMIN
+  USER
 }
-

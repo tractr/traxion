@@ -13,12 +13,16 @@ export function generateImports(model: Model): ImportDeclarationStructure[] {
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@prisma/client`,
-      namedImports: [{ name: 'Prisma' }],
+      namedImports: [{ name: 'Prisma' }, { name: pascal(model.name) }],
     },
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@trxn/nestjs-database`,
-      namedImports: [{ name: 'PrismaService' }],
+      namedImports: [
+        { name: 'PrismaService' },
+        { name: 'excludePrismaField' },
+        { name: 'GetPrismaKeyIfNotSelected' },
+      ],
     },
     {
       kind: StructureKind.ImportDeclaration,

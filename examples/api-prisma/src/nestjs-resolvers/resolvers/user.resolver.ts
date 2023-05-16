@@ -1,18 +1,14 @@
 import {
   User,
-  Role,
-  Profile,
+  Task,
   FindUniqueUserArgs,
   FindManyUserArgs,
   CreateOneUserArgs,
   UpdateOneUserArgs,
   DeleteOneUserArgs,
+  FindManyTaskArgs,
 } from '../../nestjs-graphql-dtos';
-import {
-  UserService,
-  RoleService,
-  ProfileService,
-} from '../../nestjs-services';
+import { UserService, TaskService } from '../../nestjs-services';
 import {
   Args,
   Info,
@@ -32,8 +28,7 @@ import { FindManyUserOutput } from '../dtos';
 export class UserResolver {
   constructor(
     private readonly userService: UserService,
-    private readonly roleService: RoleService,
-    private readonly profileService: ProfileService,
+    private readonly taskService: TaskService,
   ) {}
 
   /** Query for a unique user */
@@ -126,49 +121,73 @@ export class UserResolver {
     return user;
   }
 
-  @ResolveField(() => Role)
-  async role(@Info() info: GraphQLResolveInfo, @Parent() user: User) {
-    let { role } = user;
+  @ResolveField(() => Task)
+  async tasks(
+    @Info() info: GraphQLResolveInfo,
+    @Parent() user: User,
+    @Args() findManyArgs: FindManyTaskArgs,
+  ) {
+    let { tasks } = user;
 
-    if (typeof role === 'undefined') {
-      if (!user.roleId) {
-        throw new Error('role not found when fetching role');
-      }
-
+    if (typeof tasks === 'undefined') {
       const select = new PrismaSelect(info).valueOf(
         getPathFromGraphQLResolveInfo(info.path),
-        'Role',
-      ) as Prisma.RoleArgs;
+        'Task',
+      ) as Prisma.TaskArgs;
 
-      const findUnique = await this.roleService.findUnique({
-        where: { id: user.roleId },
+      const where: Prisma.TaskWhereInput = {
+        AND: [
+          {
+            author: { id: user.id },
+          },
+          findManyArgs.where || {},
+        ],
+      };
+
+      tasks = await this.taskService.findMany({
+        ...findManyArgs,
+        where,
         ...select,
       });
-
-      role = findUnique || undefined;
     }
 
-    return role;
+    return tasks;
   }
 
-  @ResolveField(() => Profile)
-  async userProfile(@Info() info: GraphQLResolveInfo, @Parent() user: User) {
-    let { userProfile } = user;
+  @ResolveField(() => Task)
+  async sharedTasks(
+    @Info() info: GraphQLResolveInfo,
+    @Parent() user: User,
+    @Args() findManyArgs: FindManyTaskArgs,
+  ) {
+    let { sharedTasks } = user;
 
-    if (typeof userProfile === 'undefined') {
+    if (typeof sharedTasks === 'undefined') {
       const select = new PrismaSelect(info).valueOf(
         getPathFromGraphQLResolveInfo(info.path),
-        'Profile',
-      ) as Prisma.ProfileArgs;
+        'Task',
+      ) as Prisma.TaskArgs;
 
-      const findUnique = await this.profileService.findUnique({
-        where: { userId: user.id },
+      const where: Prisma.TaskWhereInput = {
+        AND: [
+          {
+            sharedWith: {
+              some: {
+                id: user.id,
+              },
+            },
+          },
+          findManyArgs.where || {},
+        ],
+      };
+
+      sharedTasks = await this.taskService.findMany({
+        ...findManyArgs,
+        where,
         ...select,
       });
-
-      userProfile = findUnique || undefined;
     }
 
-    return userProfile;
+    return sharedTasks;
   }
 }

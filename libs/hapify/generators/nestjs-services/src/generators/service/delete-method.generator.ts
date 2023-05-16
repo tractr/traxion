@@ -8,7 +8,7 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { isHiddenField, Model } from '@trxn/hapify-core';
 
 export const generateDeleteMethod = (
   model: Model,
@@ -54,13 +54,23 @@ export const generateDeleteMethod = (
     },
   ];
 
+  const hiddenFields = model.fields.filter(isHiddenField);
+  const modelName = camel(model.name);
+
   return {
     kind: StructureKind.Method,
     isAsync: true,
     name: 'delete',
     typeParameters,
     parameters,
-    statements: `return prisma.delete<T>(args);`,
+    statements: `
+    const ${modelName} = await prisma.delete<T>(args);
+
+    ${
+      hiddenFields.length
+        ? `return ${modelName} === null ? ${modelName} : this.excludeHiddenFields(${modelName}, args.select);`
+        : `return ${modelName};`
+    }`,
     docs,
   };
 };
