@@ -1,5 +1,5 @@
-import { DefaultOwnershipSelect } from '../interfaces';
 import { MODULE_OPTIONS_TOKEN } from '../authorized-services.module-definition';
+import { DefaultOwnershipSelect } from '../interfaces';
 
 export const DEFAULT_OWNERSHIP_SELECT = 'DEFAULT_OWNERSHIP_SELECT';
 export const DefaultOwnershipSelectProvider = {

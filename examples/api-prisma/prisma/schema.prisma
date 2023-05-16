@@ -11,21 +11,11 @@ datasource db {
 }
 
 // Nestjs graphql dto generator
-generator nestjsGraphql {
-  provider                      = "prisma-nestjs-graphql"
+generator nestjsGraphqlDtos {
+  provider                      = "trxn-prisma-nestjs-graphql-dtos-generator"
   output                        = "../src/nestjs-graphql-dtos"
-  purgeOutput                   = true
-  reExport                      = Single
-  noAtomicOperations            = true
-  useInputType_StringFilter_ALL = "string"
-
-  // Remove Nested creation, update, upsert and delete
-  decorate_1_type      = "*Nested*Input"
-  decorate_1_field     = "!(connect|disconnect|set)"
-  decorate_1_name      = "HideField"
-  decorate_1_from      = "@nestjs/graphql"
-  decorate_1_arguments = "[]"
-
+  // Path relative to the output directory
+  tsConfigFilePath            = "../../tsconfig.app.json"
 }
 
 // Nestjs public grahpql resolvers generator

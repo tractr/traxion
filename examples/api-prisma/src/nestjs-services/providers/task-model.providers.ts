@@ -1,6 +1,7 @@
 import { Provider } from '@nestjs/common';
-import { TASK_SERVICE, TASK_DEFAULT_SERVICE } from '../constants';
-import { TaskService, TaskDefaultService } from '../services';
+
+import { TASK_DEFAULT_SERVICE, TASK_SERVICE } from '../constants';
+import { TaskDefaultService, TaskService } from '../services';
 
 export const TASK_SERVICES_PROVIDERS: Provider[] = [
   TaskService,

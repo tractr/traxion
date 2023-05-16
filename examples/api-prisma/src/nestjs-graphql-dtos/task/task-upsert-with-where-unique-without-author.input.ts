@@ -1,9 +1,9 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
-import { TaskWhereUniqueInput } from './task-where-unique.input';
+import { Field, InputType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
-import { TaskUpdateWithoutAuthorInput } from './task-update-without-author.input';
+
 import { TaskCreateWithoutAuthorInput } from './task-create-without-author.input';
+import { TaskUpdateWithoutAuthorInput } from './task-update-without-author.input';
+import { TaskWhereUniqueInput } from './task-where-unique.input';
 
 @InputType()
 export class TaskUpsertWithWhereUniqueWithoutAuthorInput {

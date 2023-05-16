@@ -1,7 +1,7 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
-import { TaskCreateManyAuthorInput } from './task-create-many-author.input';
+import { Field, InputType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
+
+import { TaskCreateManyAuthorInput } from './task-create-many-author.input';
 
 @InputType()
 export class TaskCreateManyAuthorInputEnvelope {

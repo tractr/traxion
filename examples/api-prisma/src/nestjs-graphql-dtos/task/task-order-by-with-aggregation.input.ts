@@ -1,11 +1,11 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
-import { SortOrder } from '../prisma/sort-order.enum';
-import { TaskCountOrderByAggregateInput } from './task-count-order-by-aggregate.input';
+import { Field, InputType } from '@nestjs/graphql';
+
 import { TaskAvgOrderByAggregateInput } from './task-avg-order-by-aggregate.input';
+import { TaskCountOrderByAggregateInput } from './task-count-order-by-aggregate.input';
 import { TaskMaxOrderByAggregateInput } from './task-max-order-by-aggregate.input';
 import { TaskMinOrderByAggregateInput } from './task-min-order-by-aggregate.input';
 import { TaskSumOrderByAggregateInput } from './task-sum-order-by-aggregate.input';
+import { SortOrder } from '../prisma/sort-order.enum';
 
 @InputType()
 export class TaskOrderByWithAggregationInput {

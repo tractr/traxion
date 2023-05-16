@@ -1,7 +1,7 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
-import { TaskStatus } from './task-status.enum';
+import { Field, InputType } from '@nestjs/graphql';
+
 import { NestedEnumTaskStatusFilter } from './nested-enum-task-status-filter.input';
+import { TaskStatus } from './task-status.enum';
 
 @InputType()
 export class EnumTaskStatusFilter {

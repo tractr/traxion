@@ -1,7 +1,7 @@
-import { Field } from '@nestjs/graphql';
-import { ArgsType } from '@nestjs/graphql';
-import { UserWhereUniqueInput } from './user-where-unique.input';
+import { ArgsType, Field } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
+
+import { UserWhereUniqueInput } from './user-where-unique.input';
 
 @ArgsType()
 export class FindUniqueUserOrThrowArgs {

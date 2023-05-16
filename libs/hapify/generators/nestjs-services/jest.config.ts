@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'hapify-generators-nestjs-services',
+  displayName: 'hapify-generator-nestjs-services',
   preset: '../../../../jest.preset.js',
   globals: {},
   testEnvironment: 'node',

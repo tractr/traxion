@@ -1,6 +1,5 @@
-import { Field } from '@nestjs/graphql';
-import { ObjectType } from '@nestjs/graphql';
-import { Int } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+
 import { TaskStatus } from '../prisma/task-status.enum';
 
 @ObjectType()

@@ -1,4 +1,4 @@
-import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 import { UserCount } from './user-count.output';
 import { Role } from '../prisma/role.enum';
@@ -14,17 +14,6 @@ export class User {
 
   @Field(() => String, { nullable: true })
   name!: string | null;
-
-  /**
-   * @trxn/hidden
-   * @trxn/encrypted
-   */
-  @HideField()
-  @Field(() => String, {
-    nullable: false,
-    description: '@trxn/hidden\n@trxn/encrypted',
-  })
-  password!: string;
 
   @Field(() => [Role], { nullable: true })
   roles!: Array<keyof typeof Role>;
