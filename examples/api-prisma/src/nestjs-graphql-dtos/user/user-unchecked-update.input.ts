@@ -1,5 +1,6 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
-
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
+import { Int } from '@nestjs/graphql';
 import { Role } from '../prisma/role.enum';
 import { TaskUncheckedUpdateManyWithoutAuthorNestedInput } from '../task/task-unchecked-update-many-without-author-nested.input';
 import { TaskUncheckedUpdateManyWithoutSharedWithNestedInput } from '../task/task-unchecked-update-many-without-shared-with-nested.input';

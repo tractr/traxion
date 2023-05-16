@@ -1,5 +1,5 @@
-import { Field, InputType } from '@nestjs/graphql';
-
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
 import { Role } from '../prisma/role.enum';
 import { TaskCreateNestedManyWithoutAuthorInput } from '../task/task-create-nested-many-without-author.input';
 import { TaskCreateNestedManyWithoutSharedWithInput } from '../task/task-create-nested-many-without-shared-with.input';

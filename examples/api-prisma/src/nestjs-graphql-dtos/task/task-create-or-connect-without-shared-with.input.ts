@@ -1,8 +1,8 @@
-import { Field, InputType } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
-import { TaskCreateWithoutSharedWithInput } from './task-create-without-shared-with.input';
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
 import { TaskWhereUniqueInput } from './task-where-unique.input';
+import { Type } from 'class-transformer';
+import { TaskCreateWithoutSharedWithInput } from './task-create-without-shared-with.input';
 
 @InputType()
 export class TaskCreateOrConnectWithoutSharedWithInput {

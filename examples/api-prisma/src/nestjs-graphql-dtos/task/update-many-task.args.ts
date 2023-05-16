@@ -1,7 +1,7 @@
-import { ArgsType, Field } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
+import { Field } from '@nestjs/graphql';
+import { ArgsType } from '@nestjs/graphql';
 import { TaskUpdateManyMutationInput } from './task-update-many-mutation.input';
+import { Type } from 'class-transformer';
 import { TaskWhereInput } from './task-where.input';
 
 @ArgsType()

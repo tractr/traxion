@@ -1,8 +1,8 @@
-import { Field, InputType } from '@nestjs/graphql';
-
-import { NestedEnumTaskStatusFilter } from './nested-enum-task-status-filter.input';
-import { NestedIntFilter } from './nested-int-filter.input';
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
 import { TaskStatus } from './task-status.enum';
+import { NestedIntFilter } from './nested-int-filter.input';
+import { NestedEnumTaskStatusFilter } from './nested-enum-task-status-filter.input';
 
 @InputType()
 export class NestedEnumTaskStatusWithAggregatesFilter {

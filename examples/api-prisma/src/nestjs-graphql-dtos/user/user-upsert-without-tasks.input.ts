@@ -1,8 +1,8 @@
-import { Field, InputType } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
-import { UserCreateWithoutTasksInput } from './user-create-without-tasks.input';
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
 import { UserUpdateWithoutTasksInput } from './user-update-without-tasks.input';
+import { Type } from 'class-transformer';
+import { UserCreateWithoutTasksInput } from './user-create-without-tasks.input';
 
 @InputType()
 export class UserUpsertWithoutTasksInput {

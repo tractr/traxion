@@ -1,11 +1,12 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-
-import { TaskAvgAggregate } from './task-avg-aggregate.output';
-import { TaskCountAggregate } from './task-count-aggregate.output';
-import { TaskMaxAggregate } from './task-max-aggregate.output';
-import { TaskMinAggregate } from './task-min-aggregate.output';
-import { TaskSumAggregate } from './task-sum-aggregate.output';
+import { Field } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
+import { Int } from '@nestjs/graphql';
 import { TaskStatus } from '../prisma/task-status.enum';
+import { TaskCountAggregate } from './task-count-aggregate.output';
+import { TaskAvgAggregate } from './task-avg-aggregate.output';
+import { TaskSumAggregate } from './task-sum-aggregate.output';
+import { TaskMinAggregate } from './task-min-aggregate.output';
+import { TaskMaxAggregate } from './task-max-aggregate.output';
 
 @ObjectType()
 export class TaskGroupBy {

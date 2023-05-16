@@ -1,9 +1,9 @@
-import { Field, InputType } from '@nestjs/graphql';
-
-import { EnumRoleNullableListFilter } from '../prisma/enum-role-nullable-list-filter.input';
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
 import { IntWithAggregatesFilter } from '../prisma/int-with-aggregates-filter.input';
-import { StringNullableWithAggregatesFilter } from '../prisma/string-nullable-with-aggregates-filter.input';
 import { StringWithAggregatesFilter } from '../prisma/string-with-aggregates-filter.input';
+import { StringNullableWithAggregatesFilter } from '../prisma/string-nullable-with-aggregates-filter.input';
+import { EnumRoleNullableListFilter } from '../prisma/enum-role-nullable-list-filter.input';
 
 @InputType()
 export class UserScalarWhereWithAggregatesInput {
@@ -24,7 +24,6 @@ export class UserScalarWhereWithAggregatesInput {
 
   @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
   name?: StringNullableWithAggregatesFilter;
-
   @Field(() => EnumRoleNullableListFilter, { nullable: true })
   roles?: EnumRoleNullableListFilter;
 }

@@ -1,9 +1,9 @@
-import { Field, InputType } from '@nestjs/graphql';
-
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
+import { QueryMode } from './query-mode.enum';
+import { NestedStringWithAggregatesFilter } from './nested-string-with-aggregates-filter.input';
 import { NestedIntFilter } from './nested-int-filter.input';
 import { NestedStringFilter } from './nested-string-filter.input';
-import { NestedStringWithAggregatesFilter } from './nested-string-with-aggregates-filter.input';
-import { QueryMode } from './query-mode.enum';
 
 @InputType()
 export class StringWithAggregatesFilter {

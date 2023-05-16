@@ -1,9 +1,7 @@
 import { Module } from '@nestjs/common';
-
-import { ConfigurableModuleClass } from './graphql.module-definition';
-import { TaskResolver, UserResolver } from './resolvers';
-
 import { DateScalar } from '@trxn/nestjs-graphql';
+import { UserResolver, TaskResolver } from './resolvers';
+import { ConfigurableModuleClass } from './graphql.module-definition';
 
 const providers = [DateScalar, UserResolver, TaskResolver];
 

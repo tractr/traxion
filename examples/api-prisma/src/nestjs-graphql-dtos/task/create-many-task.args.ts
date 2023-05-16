@@ -1,7 +1,7 @@
-import { ArgsType, Field } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
+import { Field } from '@nestjs/graphql';
+import { ArgsType } from '@nestjs/graphql';
 import { TaskCreateManyInput } from './task-create-many.input';
+import { Type } from 'class-transformer';
 
 @ArgsType()
 export class CreateManyTaskArgs {

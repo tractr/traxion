@@ -1,14 +1,15 @@
-import { ArgsType, Field, Int } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
-import { TaskAvgAggregateInput } from './task-avg-aggregate.input';
-import { TaskCountAggregateInput } from './task-count-aggregate.input';
-import { TaskMaxAggregateInput } from './task-max-aggregate.input';
-import { TaskMinAggregateInput } from './task-min-aggregate.input';
-import { TaskOrderByWithRelationInput } from './task-order-by-with-relation.input';
-import { TaskSumAggregateInput } from './task-sum-aggregate.input';
-import { TaskWhereUniqueInput } from './task-where-unique.input';
+import { Field } from '@nestjs/graphql';
+import { ArgsType } from '@nestjs/graphql';
 import { TaskWhereInput } from './task-where.input';
+import { Type } from 'class-transformer';
+import { TaskOrderByWithRelationInput } from './task-order-by-with-relation.input';
+import { TaskWhereUniqueInput } from './task-where-unique.input';
+import { Int } from '@nestjs/graphql';
+import { TaskCountAggregateInput } from './task-count-aggregate.input';
+import { TaskAvgAggregateInput } from './task-avg-aggregate.input';
+import { TaskSumAggregateInput } from './task-sum-aggregate.input';
+import { TaskMinAggregateInput } from './task-min-aggregate.input';
+import { TaskMaxAggregateInput } from './task-max-aggregate.input';
 
 @ArgsType()
 export class TaskAggregateArgs {

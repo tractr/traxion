@@ -1,8 +1,8 @@
-import { Field, InputType } from '@nestjs/graphql';
-
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
 import { SortOrder } from '../prisma/sort-order.enum';
-import { UserOrderByRelationAggregateInput } from '../user/user-order-by-relation-aggregate.input';
 import { UserOrderByWithRelationInput } from '../user/user-order-by-with-relation.input';
+import { UserOrderByRelationAggregateInput } from '../user/user-order-by-relation-aggregate.input';
 
 @InputType()
 export class TaskOrderByWithRelationInput {

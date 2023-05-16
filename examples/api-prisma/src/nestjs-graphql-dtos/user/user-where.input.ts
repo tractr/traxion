@@ -1,9 +1,9 @@
-import { Field, InputType } from '@nestjs/graphql';
-
-import { EnumRoleNullableListFilter } from '../prisma/enum-role-nullable-list-filter.input';
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
 import { IntFilter } from '../prisma/int-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
 import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
+import { EnumRoleNullableListFilter } from '../prisma/enum-role-nullable-list-filter.input';
 import { TaskListRelationFilter } from '../task/task-list-relation-filter.input';
 
 @InputType()
@@ -25,7 +25,6 @@ export class UserWhereInput {
 
   @Field(() => StringNullableFilter, { nullable: true })
   name?: StringNullableFilter;
-
   @Field(() => EnumRoleNullableListFilter, { nullable: true })
   roles?: EnumRoleNullableListFilter;
 
