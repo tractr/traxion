@@ -1,10 +1,8 @@
-import { Field } from '@nestjs/graphql';
-import { ObjectType } from '@nestjs/graphql';
-import { ID } from '@nestjs/graphql';
-import { TaskStatus } from '../prisma/task-status.enum';
-import { Int } from '@nestjs/graphql';
-import { User } from '../user/user.model';
+import { Field , ID , Int , ObjectType } from '@nestjs/graphql';
+
 import { TaskCount } from './task-count.output';
+import { TaskStatus } from '../prisma/task-status.enum';
+import { User } from '../user/user.model';
 
 @ObjectType()
 export class Task {

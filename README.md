@@ -2,23 +2,27 @@
 
 Welcome to Traxion 🎉, a powerful and minimalist NestJS generative toolkit.
 Accelerate your next NestJS projects with generative capabilities, rivaling the speed of Backend-as-a-Service (BaaS) development while maintaining full control over your project. Unleash the power of open-source, fully-typed code generation to turbocharge your favorite backend framework.
+
 ## Features 🌟
 
-Traxion is packed with a suite of intelligent features to supercharge your next NestJS project: 
+Traxion is packed with a suite of intelligent features to supercharge your next NestJS project:
+
 - **Data** : Use [Prisma](https://github.com/prisma) Schema to simply manage your data models and relationships.
-- **API** : Instantly get a [GraphQL API](https://github.com/apollographql) based on your Prisma Schema, thanks to our `Prisma2Nest Generator`. 
-- **Users**: Instantly get a Role-Based Access Control (RBAC) thanks to our `CASL-config Generator` (finalizing) and the core packages : 
-  - **Nest-Authentication** : Integrate authentication using PassportJS. 
-  - **Nest-Authorization** : Manage access control with CASL. 
-  - **Nest-Utilities** : Access a collection of helpful utilities to enhance your development process. 
-- **Community Packages** : 
-  - **Dev-Kit** : Leverage the power of our `ts-morph-prisma-generator` to create your own Prisma Generator. 
-  - **Terraform** : Simplify infrastructure management with Terraform. 
-  - **Nest-File-Storage** : Handle file storage using Amazon S3. 
+- **API** : Instantly get a [GraphQL API](https://github.com/apollographql) based on your Prisma Schema, thanks to our `Prisma2Nest Generator`.
+- **Users**: Instantly get a Role-Based Access Control (RBAC) thanks to our `CASL-config Generator` (finalizing) and the core packages :
+  - **Nest-Authentication** : Integrate authentication using PassportJS.
+  - **Nest-Authorization** : Manage access control with CASL.
+  - **Nest-Utilities** : Access a collection of helpful utilities to enhance your development process.
+- **Community Packages** :
+  - **Dev-Kit** : Leverage the power of our `ts-morph-prisma-generator` to create your own Prisma Generator.
+  - **Terraform** : Simplify infrastructure management with Terraform.
+  - **Nest-File-Storage** : Handle file storage using Amazon S3.
   - **Nest-Mailer** : Send emails efficiently with Mailjet integration.
+
 ## Getting Started 📚
 
 Jumpstart your NestJS development journey with Traxion by following our comprehensive [documentation](https://www.traxion.dev/docs/) . Here's a sneak peek of the 13 steps you'll be guided through:
+
 1. Initialize a NestJS application
 2. Integrate Prisma into the NestJS project
 3. Set up Prisma
@@ -32,6 +36,7 @@ Jumpstart your NestJS development journey with Traxion by following our comprehe
 11. Test the application
 12. Modify Prisma schema and regenerate NestJS services and DTOs
 13. Test the new schema
+
 ## Why Choose Traxion? 🤔
 
 Traxion is designed with the modern full-stack developer in mind. We understand the importance of a streamlined development process that saves you time and effort. With Traxion, you can focus on building your NestJS applications while enjoying a seamless experience, bridging the gap between a full-stack framework and BaaS.
@@ -48,6 +53,19 @@ We welcome and appreciate contributions from the community. If you're interested
 Please follow the established coding standards and make sure your code is well-documented.
 
 Please refer [to the contribution guide](./CONTRIBUTING.md) for more information.
+
+### Content generation
+
+When developing, to test the changes you are making in the generators you will have to generate multiple time
+in a row to get the correct generation. To speed up your development you can use this commands:
+
+```bash
+npm run pregenerate && npx prisma generate
+```
+
+It will generate you the code without run the prettier and lint formatters.
+
+You'll need to run `npm run generate` one time before your commits to send the correct generated code.
 
 ## Issue Reporting 🚦
 

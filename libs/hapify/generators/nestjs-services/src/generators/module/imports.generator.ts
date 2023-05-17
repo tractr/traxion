@@ -1,7 +1,9 @@
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
-export function generateImports(): ImportDeclarationStructure[] {
-  return [
+import { isEncryptedField, Model } from '@trxn/hapify-core';
+
+export function generateImports(models: Model[]): ImportDeclarationStructure[] {
+  const imports: ImportDeclarationStructure[] = [
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@nestjs/common`,
@@ -18,4 +20,18 @@ export function generateImports(): ImportDeclarationStructure[] {
       namedImports: [{ name: `MODELS_SERVICES_PROVIDERS` }],
     },
   ];
+
+  const hasEncryptedFields = models.some((model) =>
+    model.fields.some(isEncryptedField),
+  );
+
+  if (hasEncryptedFields) {
+    imports.push({
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: `./services`,
+      namedImports: [{ name: `EncryptionService` }],
+    });
+  }
+
+  return imports;
 }

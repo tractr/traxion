@@ -9,6 +9,7 @@ import {
 } from 'ts-morph';
 
 import { Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
 
 export const generateAggregateMethod = (
   model: Model,
@@ -38,7 +39,7 @@ export const generateAggregateMethod = (
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `
+      description: indent`
         Allows you to perform aggregations operations on a ${pascal(
           model.name,
         )}.
@@ -64,8 +65,7 @@ export const generateAggregateMethod = (
             age: "asc",
           },
           take: 10,
-        })
-    `,
+        })`,
     },
   ];
 

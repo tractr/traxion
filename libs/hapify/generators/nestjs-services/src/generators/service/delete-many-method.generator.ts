@@ -9,6 +9,7 @@ import {
 } from 'ts-morph';
 
 import { Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
 
 export const generateDeleteManyMethod = (
   model: Model,
@@ -40,7 +41,7 @@ export const generateDeleteManyMethod = (
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `
+      description: indent`
     Delete 0 or more ${pascal(model.name)}s.
     @param {${pascal(
       model.name,

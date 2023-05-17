@@ -15,7 +15,7 @@ export function generateImports(model: Model): ImportDeclarationStructure[] {
       moduleSpecifier: `../constants`,
       namedImports: [
         { name: `${constant(model.name)}_SERVICE` },
-        { name: `${constant(model.name)}_DEFAULT_SERVICE` },
+        // { name: `${constant(model.name)}_DEFAULT_SERVICE` },
       ],
     },
     {
@@ -23,7 +23,7 @@ export function generateImports(model: Model): ImportDeclarationStructure[] {
       moduleSpecifier: `../services`,
       namedImports: [
         { name: `${pascal(model.name)}Service` },
-        { name: `${pascal(model.name)}DefaultService` },
+        // { name: `${pascal(model.name)}DefaultService` },
       ],
     },
   ];

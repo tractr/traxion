@@ -8,7 +8,24 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { isEncryptedField, Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
+
+export function generateCreateManyStatementMethod(model: Model): string {
+  const encryptedFields = model.fields.filter(isEncryptedField);
+  const hasEncryptedFields = encryptedFields.length > 0;
+
+  return hasEncryptedFields
+    ? `
+  const { data } = args;
+  return prisma.createMany<T>({
+    ...args,
+    data: Promise.all(
+      (Array.isArray(data) ? data : [data]).map((item) => this.encryptFields(item))
+    ),
+  });`
+    : `return prisma.createMany<T>(args);`;
+}
 
 export const generateCreateManyMethod = (
   model: Model,
@@ -40,19 +57,16 @@ export const generateCreateManyMethod = (
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `
+      description: indent`
         Create many ${pascal(model.name)}s.
-        @param {${pascal(
-          model.name,
-        )}CreateManyArgs} args - Arguments to create many a 
-        ${pascal(model.name)}s.
+
         @example
         // Create many ${pascal(model.name)}s
         const ${pascal(model.name)}s = await this.${camel(
         model.name,
       )}Service.createMany({
           data: {
-            *     // ... provide data here
+            // ... provide data here
           }
         })`,
     },
@@ -64,7 +78,7 @@ export const generateCreateManyMethod = (
     name: 'createMany',
     typeParameters,
     parameters,
-    statements: `return prisma.createMany<T>(args);`,
+    statements: generateCreateManyStatementMethod(model),
     docs,
   };
 };

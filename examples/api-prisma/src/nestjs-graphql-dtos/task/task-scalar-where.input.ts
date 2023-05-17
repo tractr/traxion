@@ -1,9 +1,9 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
+import { Field , InputType } from '@nestjs/graphql';
+
+import { EnumTaskStatusFilter } from '../prisma/enum-task-status-filter.input';
 import { IntFilter } from '../prisma/int-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
 import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
-import { EnumTaskStatusFilter } from '../prisma/enum-task-status-filter.input';
 
 @InputType()
 export class TaskScalarWhereInput {

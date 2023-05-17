@@ -9,6 +9,7 @@ import {
 import { generateFindUniqueMethod } from './find-unique-method.generator';
 
 import { Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
 
 describe('generateFindUniqueMethod', () => {
   const model: Model = {
@@ -63,7 +64,7 @@ describe('generateFindUniqueMethod', () => {
     const expectedDocs: JSDocStructure[] = [
       {
         kind: StructureKind.JSDoc,
-        description: `
+        description: indent`
     Find zero or one User that matches the filter.
     @param {UserFindUniqueArgs} args - Arguments to find a User
     @example

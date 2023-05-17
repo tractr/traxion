@@ -11,12 +11,12 @@ datasource db {
 }
 
 // Nestjs graphql dto generator
-generator nestjsGraphqlDtos {
-  provider                      = "trxn-prisma-nestjs-graphql-dtos-generator"
-  output                        = "../src/nestjs-graphql-dtos"
-  // Path relative to the output directory
-  tsConfigFilePath            = "../../tsconfig.app.json"
-}
+// generator nestjsGraphqlDtos {
+//   provider                      = "trxn-prisma-nestjs-graphql-dtos-generator"
+//   output                        = "../src/nestjs-graphql-dtos"
+//   // Path relative to the output directory
+//   tsConfigFilePath            = "../../tsconfig.app.json"
+// }
 
 // Nestjs public grahpql resolvers generator
 generator nestjsGraphqlResolvers {

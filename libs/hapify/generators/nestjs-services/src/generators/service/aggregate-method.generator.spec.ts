@@ -72,8 +72,7 @@ describe('generateAggregateMethod', () => {
             age: "asc",
           },
           take: 10,
-        })
-    `,
+        })`,
       },
     ]);
   });

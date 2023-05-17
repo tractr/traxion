@@ -2,8 +2,11 @@ import { Project, VariableDeclarationKind } from 'ts-morph';
 
 import { generateImportsDefinition } from './imports-definition.generator';
 
+import { Model } from '@trxn/hapify-core';
+
 export function generateModuleDefinitionSourceFile(
   project: Project,
+  models: Model[],
   path: string,
 ) {
   const fileName = `models-services.module-definition.ts`;
@@ -27,7 +30,7 @@ export function generateModuleDefinitionSourceFile(
           OPTIONS_TYPE,
         }`,
         initializer: `
-new ConfigurableModuleBuilder()
+new ConfigurableModuleBuilder<ModelsServicesModuleOptions>()
   .setExtras<ImportsExtra>(
     { imports: [] },
     addImportsExtra((definition) => definition),

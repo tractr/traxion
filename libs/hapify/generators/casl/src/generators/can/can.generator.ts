@@ -68,7 +68,6 @@ export function generateCanSourceFile(
       },
       {
         name: 'allowDelete',
-        type: 'boolean',
         initializer: 'false',
       },
     ],

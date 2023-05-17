@@ -9,6 +9,7 @@ import {
 } from 'ts-morph';
 
 import { Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
 
 export const generateCountMethod = (
   model: Model,
@@ -38,7 +39,7 @@ export const generateCountMethod = (
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `
+      description: indent`
       Count the number of ${pascal(model.name)}.
       Note, that providing 'undefined' is treated as the value not being there.
       Read more here: https://pris.ly/d/null-undefined
@@ -53,9 +54,7 @@ export const generateCountMethod = (
         data: {
           // ... data to count a ${pascal(model.name)}
         }
-      })
-    
-    `,
+      })`,
     },
   ];
 

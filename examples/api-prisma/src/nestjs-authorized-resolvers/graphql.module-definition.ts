@@ -1,4 +1,5 @@
 import { ConfigurableModuleBuilder } from '@nestjs/common';
+
 import { addImportsExtra, ImportsExtra } from '@trxn/nestjs-core';
 
 export const {

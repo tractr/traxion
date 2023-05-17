@@ -40,12 +40,13 @@ export function generateProviderSourceFile(
             provide: ${constant(model.name)}_SERVICE,
             useExisting: ${pascal(model.name)}Service,
           },
-          ${pascal(model.name)}DefaultService,
-          {
-            provide: ${constant(model.name)}_DEFAULT_SERVICE,
-            useExisting: ${pascal(model.name)}DefaultService,
-          }
         ]`,
+
+        // ${pascal(model.name)}DefaultService,
+        // {
+        //   provide: ${constant(model.name)}_DEFAULT_SERVICE,
+        //   useExisting: ${pascal(model.name)}DefaultService,
+        // }
       },
     ],
   });

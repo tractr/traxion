@@ -1,9 +1,9 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
-import { TaskWhereUniqueInput } from './task-where-unique.input';
+import { Field , InputType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
-import { TaskUpdateWithoutSharedWithInput } from './task-update-without-shared-with.input';
+
 import { TaskCreateWithoutSharedWithInput } from './task-create-without-shared-with.input';
+import { TaskUpdateWithoutSharedWithInput } from './task-update-without-shared-with.input';
+import { TaskWhereUniqueInput } from './task-where-unique.input';
 
 @InputType()
 export class TaskUpsertWithWhereUniqueWithoutSharedWithInput {

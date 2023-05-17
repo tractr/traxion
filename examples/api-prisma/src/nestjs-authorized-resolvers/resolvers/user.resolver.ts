@@ -1,13 +1,5 @@
-import {
-  User,
-  Task,
-  FindUniqueUserArgs,
-  FindManyUserArgs,
-  CreateOneUserArgs,
-  UpdateOneUserArgs,
-  DeleteOneUserArgs,
-  FindManyTaskArgs,
-} from '../../nestjs-graphql-dtos';
+import { ForcedSubject, PureAbility } from '@casl/ability';
+import { PrismaQuery } from '@casl/prisma';
 import { Inject } from '@nestjs/common';
 import {
   Args,
@@ -20,25 +12,36 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
-import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 import { GraphQLResolveInfo } from 'graphql';
+
+import {
+  DEFAULT_OWNERSHIP_SELECT,
+  DefaultOwnershipSelect,
+  TaskAuthorizedService,
+  UserAuthorizedService,
+} from '../../nestjs-authorized-services';
+import {
+  CreateOneUserArgs,
+  DeleteOneUserArgs,
+  FindManyTaskArgs,
+  FindManyUserArgs,
+  FindUniqueUserArgs,
+  Task,
+  UpdateOneUserArgs,
+  User,
+} from '../../nestjs-graphql-dtos';
 import { FindManyUserOutput } from '../dtos';
 import {
   CREATE_USER,
+  DELETE_USER,
   READ_USER,
   SEARCH_USER,
   UPDATE_USER,
-  DELETE_USER,
 } from '../policies';
-import { PrismaQuery } from '@casl/prisma';
-import { PureAbility, ForcedSubject } from '@casl/ability';
-import {
-  UserAuthorizedService,
-  TaskAuthorizedService,
-  DefaultOwnershipSelect,
-  DEFAULT_OWNERSHIP_SELECT,
-} from '../../nestjs-authorized-services';
+
+
 import { CurrentAbilities, Policies } from '@trxn/nestjs-core';
+import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 
 @Resolver(() => User)
 export class UserResolver {

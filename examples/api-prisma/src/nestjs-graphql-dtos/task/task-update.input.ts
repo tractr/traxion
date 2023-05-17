@@ -1,8 +1,8 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
+import { Field , InputType } from '@nestjs/graphql';
+
 import { TaskStatus } from '../prisma/task-status.enum';
-import { UserUpdateOneRequiredWithoutTasksNestedInput } from '../user/user-update-one-required-without-tasks-nested.input';
 import { UserUpdateManyWithoutSharedTasksNestedInput } from '../user/user-update-many-without-shared-tasks-nested.input';
+import { UserUpdateOneRequiredWithoutTasksNestedInput } from '../user/user-update-one-required-without-tasks-nested.input';
 
 @InputType()
 export class TaskUpdateInput {

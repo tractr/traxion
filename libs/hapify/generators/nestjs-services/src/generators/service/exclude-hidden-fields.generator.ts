@@ -10,7 +10,9 @@ import {
 
 import { isHiddenField, Model } from '@trxn/hapify-core';
 
-export function generateFindUniqueStatementMethod(model: Model): string {
+export function generateExcludeHiddenFieldsStatementMethod(
+  model: Model,
+): string {
   const hiddenFields = model.fields.filter(isHiddenField);
 
   return `
@@ -64,6 +66,6 @@ export const generateExcludeHiddenFieldGenerator = (
     name: 'excludeHiddenFields',
     typeParameters,
     parameters,
-    statements: generateFindUniqueStatementMethod(model),
+    statements: generateExcludeHiddenFieldsStatementMethod(model),
   };
 };
