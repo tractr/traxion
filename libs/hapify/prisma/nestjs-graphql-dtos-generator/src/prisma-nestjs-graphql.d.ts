@@ -1,1 +1,1 @@
-declare module 'prisma-nestjs-graphql/generate';
+declare module '@floross/temp-prisma-nestjs-graphql/generate';
