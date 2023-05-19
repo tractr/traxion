@@ -6,6 +6,7 @@ import {
 import { generateFindManyMethod } from './find-many-method.generator';
 
 import { Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
 
 describe('generateFindManyMethod', () => {
   const model: Model = {
@@ -54,7 +55,7 @@ describe('generateFindManyMethod', () => {
     const expectedDocs = [
       {
         kind: 24, // corresponds to `StructureKind.JSDoc`
-        description: `
+        description: indent`
        Find zero or more Users that matches the filter.
        Note, that providing 'undefined' is treated as the value not being there.
        Read more here: https://pris.ly/d/null-undefined
@@ -67,9 +68,7 @@ describe('generateFindManyMethod', () => {
        const Users = await this.UserService.findMany({ take: 10 })
 
        // Only select the 'id'
-       const userWithIdOnly = await this.UserService.findMany({ select: { id: true } })
-
-    `,
+       const userWithIdOnly = await this.UserService.findMany({ select: { id: true } })`,
       },
     ];
 

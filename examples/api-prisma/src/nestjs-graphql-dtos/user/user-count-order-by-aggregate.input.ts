@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field , InputType } from '@nestjs/graphql';
 
 import { SortOrder } from '../prisma/sort-order.enum';
 
@@ -9,9 +9,6 @@ export class UserCountOrderByAggregateInput {
 
   @Field(() => SortOrder, { nullable: true })
   email?: keyof typeof SortOrder;
-
-  @Field(() => SortOrder, { nullable: true })
-  name?: keyof typeof SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
   roles?: keyof typeof SortOrder;

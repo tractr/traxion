@@ -9,6 +9,7 @@ import {
 } from 'ts-morph';
 
 import { isHiddenField, Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
 
 export function generateFindManyStatementMethod(model: Model): string {
   const modelName = camel(model.pluralName);
@@ -53,7 +54,7 @@ export const generateFindManyMethod = (
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `
+      description: indent`
        Find zero or more ${pascal(model.name)}s that matches the filter.
        Note, that providing 'undefined' is treated as the value not being there.
        Read more here: https://pris.ly/d/null-undefined
@@ -74,9 +75,7 @@ export const generateFindManyMethod = (
        // Only select the 'id'
        const ${camel(model.name)}WithIdOnly = await this.${pascal(
         model.name,
-      )}Service.findMany({ select: { id: true } })
-
-    `,
+      )}Service.findMany({ select: { id: true } })`,
     },
   ];
 

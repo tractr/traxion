@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field , InputType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 
 import { UserWhereUniqueInput } from './user-where-unique.input';

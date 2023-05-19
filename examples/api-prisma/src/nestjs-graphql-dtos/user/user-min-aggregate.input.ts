@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field , InputType } from '@nestjs/graphql';
 
 @InputType()
 export class UserMinAggregateInput {
@@ -7,7 +7,4 @@ export class UserMinAggregateInput {
 
   @Field(() => Boolean, { nullable: true })
   email?: true;
-
-  @Field(() => Boolean, { nullable: true })
-  name?: true;
 }

@@ -1,8 +1,10 @@
 import { AbilityBuilder } from '@casl/ability';
 
 import {
+  canReadActionsProfile,
   canReadActionsTask,
   canReadActionsUser,
+  canWriteActionsProfile,
   canWriteActionsTask,
   canWriteActionsUser,
 } from './can';
@@ -38,6 +40,12 @@ export function userOwnershipPermission(
   canReadActionsUser(abilities, user);
   // The user own the model, he can write on it
   canWriteActionsUser(abilities, user, false);
+
+  // Profile: the user own
+  // -> default permission
+  canReadActionsProfile(abilities, user);
+  // The user own the model, he can write on it
+  canWriteActionsProfile(abilities, user, false);
 
   // Task: the user own
   // -> default permission

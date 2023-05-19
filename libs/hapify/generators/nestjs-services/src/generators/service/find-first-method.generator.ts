@@ -9,13 +9,13 @@ import {
 } from 'ts-morph';
 
 import { isHiddenField, Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
 
 export function generateFindFirstStatementMethod(model: Model): string {
   const modelName = camel(model.name);
   const hiddenFields = model.fields.filter(isHiddenField);
 
-  return `
-    const ${modelName} = await prisma.findFirst<T>(args);
+  return `const ${modelName} = await prisma.findFirst<T>(args);
 
     ${
       hiddenFields.length
@@ -53,23 +53,23 @@ export const generateFindFirstMethod = (
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `
-       Find the first ${pascal(model.name)} that matches the filter.
-       Note, that providing 'undefined' is treated as the value not being there.
-       Read more here: https://pris.ly/d/null-undefined
-       @param {${pascal(
-         model.name,
-       )}FindFirstArgs} args - Arguments to find a ${pascal(model.name)}
-       @example
-       // Get one ${pascal(model.name)}
-       const ${camel(model.name)} = await this.${camel(
+      description: indent`Find the first ${pascal(
+        model.name,
+      )} that matches the filter.
+        Note, that providing 'undefined' is treated as the value not being there.
+        Read more here: https://pris.ly/d/null-undefined
+        @param {${pascal(
+          model.name,
+        )}FindFirstArgs} args - Arguments to find a ${pascal(model.name)}
+        @example
+        // Get one ${pascal(model.name)}
+        const ${camel(model.name)} = await this.${camel(
         model.name,
       )}Service.findFirst({
-         where: {
-           // ... provide filter here
-         }
-       })
-    `,
+          where: {
+            // ... provide filter here
+          }
+        })`,
     },
   ];
 

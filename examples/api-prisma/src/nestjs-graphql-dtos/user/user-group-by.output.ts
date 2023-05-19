@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field , Int , ObjectType } from '@nestjs/graphql';
 
 import { UserAvgAggregate } from './user-avg-aggregate.output';
 import { UserCountAggregate } from './user-count-aggregate.output';
@@ -14,9 +14,6 @@ export class UserGroupBy {
 
   @Field(() => String, { nullable: false })
   email!: string;
-
-  @Field(() => String, { nullable: true })
-  name?: string;
 
   @Field(() => [Role], { nullable: true })
   roles?: Array<keyof typeof Role>;

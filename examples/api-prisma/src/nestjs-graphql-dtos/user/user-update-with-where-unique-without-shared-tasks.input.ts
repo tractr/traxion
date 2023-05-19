@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field , InputType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 
 import { UserUpdateWithoutSharedTasksInput } from './user-update-without-shared-tasks.input';

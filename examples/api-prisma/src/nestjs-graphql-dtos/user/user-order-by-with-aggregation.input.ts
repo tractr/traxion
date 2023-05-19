@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field , InputType } from '@nestjs/graphql';
 
 import { UserAvgOrderByAggregateInput } from './user-avg-order-by-aggregate.input';
 import { UserCountOrderByAggregateInput } from './user-count-order-by-aggregate.input';
@@ -14,9 +14,6 @@ export class UserOrderByWithAggregationInput {
 
   @Field(() => SortOrder, { nullable: true })
   email?: keyof typeof SortOrder;
-
-  @Field(() => SortOrder, { nullable: true })
-  name?: keyof typeof SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
   roles?: keyof typeof SortOrder;

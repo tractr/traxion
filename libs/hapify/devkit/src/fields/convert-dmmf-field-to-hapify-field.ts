@@ -4,7 +4,7 @@ import { convertDmmfEnumFieldToHapifyField } from './convert-dmmf-enum-field-to-
 import { convertDmmfObjectFieldToHapifyField } from './convert-dmmf-object-field-to-hapify-field';
 import { convertDmmfPrimaryFieldToHapifyField } from './convert-dmmf-primary-field-to-hapify-field';
 import { convertDmmfScalarFieldToHapifyField } from './convert-dmmf-scalar-field-to-hapify-field';
-import { hiddenMetadata } from './metadata-transformer/is-hidden-metadata';
+import { encryptedMetadata, hiddenMetadata } from './metadata-transformer';
 import { extractMetadataFromDocumentation } from '../extract-metadata-from-documentation';
 import {
   PrismaEnumField,
@@ -80,6 +80,7 @@ export function convertDmmfFieldToHapifyField(
   // Manage known metadata
   if (metadata) {
     fieldDeclaration = hiddenMetadata(fieldDeclaration);
+    fieldDeclaration = encryptedMetadata(fieldDeclaration);
   }
 
   return fieldDeclaration;

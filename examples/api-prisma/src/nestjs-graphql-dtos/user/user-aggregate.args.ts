@@ -1,4 +1,4 @@
-import { ArgsType, Field, Int } from '@nestjs/graphql';
+import { ArgsType , Field , Int } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 
 import { UserAvgAggregateInput } from './user-avg-aggregate.input';

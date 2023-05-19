@@ -17,11 +17,16 @@ import {
   FindManyTaskArgs,
   FindManyUserArgs,
   FindUniqueUserArgs,
+  Profile,
   Task,
   UpdateOneUserArgs,
   User,
 } from '../../nestjs-graphql-dtos';
-import { TaskService, UserService } from '../../nestjs-services';
+import {
+  ProfileService,
+  TaskService,
+  UserService,
+} from '../../nestjs-services';
 import { FindManyUserOutput } from '../dtos';
 
 import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
@@ -30,6 +35,7 @@ import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 export class UserResolver {
   constructor(
     private readonly userService: UserService,
+    private readonly profileService: ProfileService,
     private readonly taskService: TaskService,
   ) {}
 
@@ -121,6 +127,27 @@ export class UserResolver {
     const user = await this.userService.delete({ where, ...select });
 
     return user;
+  }
+
+  @ResolveField(() => Profile)
+  async profile(@Info() info: GraphQLResolveInfo, @Parent() user: User) {
+    let { profile } = user;
+
+    if (typeof profile === 'undefined') {
+      const select = new PrismaSelect(info).valueOf(
+        getPathFromGraphQLResolveInfo(info.path),
+        'Profile',
+      ) as Prisma.ProfileArgs;
+
+      const findUnique = await this.profileService.findUnique({
+        where: { userId: user.id },
+        ...select,
+      });
+
+      profile = findUnique || undefined;
+    }
+
+    return profile;
   }
 
   @ResolveField(() => Task)

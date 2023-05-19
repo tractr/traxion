@@ -9,6 +9,7 @@ import {
 } from 'ts-morph';
 
 import { isHiddenField, Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
 
 export const generateDeleteMethod = (
   model: Model,
@@ -38,19 +39,21 @@ export const generateDeleteMethod = (
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `
-    Delete a ${pascal(model.name)}.
-    @param {${pascal(
-      model.name,
-    )}DeleteArgs} args - Arguments to delete a ${pascal(model.name)}
-    @example
-    // Delete one ${pascal(model.name)}
-    const ${camel(model.name)} = await this.${camel(model.name)}Service.delete({
-      where: {
-        // ... filter to delete one ${pascal(model.name)}
-      }
-    })
-    `,
+      description: indent`
+        Delete a ${pascal(model.name)}.
+        @param {${pascal(
+          model.name,
+        )}DeleteArgs} args - Arguments to delete a ${pascal(model.name)}
+        @example
+        // Delete one ${pascal(model.name)}
+        const ${camel(model.name)} = await this.${camel(
+        model.name,
+      )}Service.delete({
+          where: {
+            // ... filter to delete one ${pascal(model.name)}
+          }
+        })
+        `,
     },
   ];
 

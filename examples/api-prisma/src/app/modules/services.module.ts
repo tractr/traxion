@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 
 import { DatabaseModule } from './database.module';
-import { ModelsServicesModules } from '../../nestjs-services';
+import { ModelsServicesModule } from '../../nestjs-services';
 
 @Module({
   imports: [
-    ModelsServicesModules.register({
+    ModelsServicesModule.register({
       imports: [DatabaseModule],
     }),
   ],
-  exports: [ModelsServicesModules],
+  exports: [ModelsServicesModule],
 })
 export class NestjsServicesModule {}

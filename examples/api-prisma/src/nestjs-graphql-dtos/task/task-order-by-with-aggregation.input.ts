@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field , InputType } from '@nestjs/graphql';
 
 import { TaskAvgOrderByAggregateInput } from './task-avg-order-by-aggregate.input';
 import { TaskCountOrderByAggregateInput } from './task-count-order-by-aggregate.input';
