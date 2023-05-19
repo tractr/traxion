@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "name": "hapify-generators-nestjs-services",
+  "name": "hapify-generator-nestjs-services",
   "projectType": "library",
   "sourceRoot": "libs/hapify/generators/nestjs-services/src",
   "tags": [],

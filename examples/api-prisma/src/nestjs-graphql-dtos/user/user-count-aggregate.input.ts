@@ -1,5 +1,4 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class UserCountAggregateInput {
@@ -10,13 +9,10 @@ export class UserCountAggregateInput {
   email?: true;
 
   @Field(() => Boolean, { nullable: true })
-  password?: true;
-
-  @Field(() => Boolean, { nullable: true })
   name?: true;
 
   @Field(() => Boolean, { nullable: true })
-  roleId?: true;
+  roles?: true;
 
   @Field(() => Boolean, { nullable: true })
   _all?: true;

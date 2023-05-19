@@ -2,12 +2,7 @@ import { Module } from '@nestjs/common';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 
 import { UserModule } from './user.module';
-import {
-  customSelect,
-  publicPermissions,
-  rolePermissions,
-  Roles,
-} from '../config';
+import { customSelect, publicPermissions, rolePermissions } from '../config';
 
 import {
   JwtGlobalAuthGuard,
@@ -30,7 +25,7 @@ import {
     }),
     CaslModule.register({
       getRoles(user) {
-        return [user.role.name] as Roles[];
+        return user.roles;
       },
       rolePermissions,
       publicPermissions,

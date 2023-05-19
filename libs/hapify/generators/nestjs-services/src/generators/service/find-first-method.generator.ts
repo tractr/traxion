@@ -8,7 +8,22 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { isHiddenField, Model } from '@trxn/hapify-core';
+
+export function generateFindFirstStatementMethod(model: Model): string {
+  const modelName = camel(model.name);
+  const hiddenFields = model.fields.filter(isHiddenField);
+
+  return `
+    const ${modelName} = await prisma.findFirst<T>(args);
+
+    ${
+      hiddenFields.length
+        ? `return ${modelName} === null ? ${modelName} : this.excludeHiddenFields(${modelName}, args.select);`
+        : `return ${modelName};`
+    }
+  `;
+}
 
 export const generateFindFirstMethod = (
   model: Model,
@@ -64,7 +79,7 @@ export const generateFindFirstMethod = (
     name: 'findFirst',
     typeParameters,
     parameters,
-    statements: `return prisma.findFirst<T>(args);`,
+    statements: generateFindFirstStatementMethod(model),
     docs,
   };
 };

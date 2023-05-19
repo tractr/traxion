@@ -1,13 +1,5 @@
-import {
-  User,
-  Role,
-  Profile,
-  FindUniqueUserArgs,
-  FindManyUserArgs,
-  CreateOneUserArgs,
-  UpdateOneUserArgs,
-  DeleteOneUserArgs,
-} from '../../nestjs-graphql-dtos';
+import { ForcedSubject, PureAbility } from '@casl/ability';
+import { PrismaQuery } from '@casl/prisma';
 import { Inject } from '@nestjs/common';
 import {
   Args,
@@ -20,33 +12,41 @@ import {
 } from '@nestjs/graphql';
 import { PrismaSelect } from '@paljs/plugins';
 import { Prisma } from '@prisma/client';
-import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 import { GraphQLResolveInfo } from 'graphql';
+
+import {
+  DEFAULT_OWNERSHIP_SELECT,
+  DefaultOwnershipSelect,
+  TaskAuthorizedService,
+  UserAuthorizedService,
+} from '../../nestjs-authorized-services';
+import {
+  CreateOneUserArgs,
+  DeleteOneUserArgs,
+  FindManyTaskArgs,
+  FindManyUserArgs,
+  FindUniqueUserArgs,
+  Task,
+  UpdateOneUserArgs,
+  User,
+} from '../../nestjs-graphql-dtos';
 import { FindManyUserOutput } from '../dtos';
 import {
   CREATE_USER,
+  DELETE_USER,
   READ_USER,
   SEARCH_USER,
   UPDATE_USER,
-  DELETE_USER,
 } from '../policies';
-import { PrismaQuery } from '@casl/prisma';
-import { PureAbility, ForcedSubject } from '@casl/ability';
-import {
-  UserAuthorizedService,
-  RoleAuthorizedService,
-  ProfileAuthorizedService,
-  DefaultOwnershipSelect,
-  DEFAULT_OWNERSHIP_SELECT,
-} from '../../nestjs-authorized-services';
+
 import { CurrentAbilities, Policies } from '@trxn/nestjs-core';
+import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 
 @Resolver(() => User)
 export class UserResolver {
   constructor(
     private readonly userAuthorizedService: UserAuthorizedService,
-    private readonly roleAuthorizedService: RoleAuthorizedService,
-    private readonly profileAuthorizedService: ProfileAuthorizedService,
+    private readonly taskAuthorizedService: TaskAuthorizedService,
     @Inject(DEFAULT_OWNERSHIP_SELECT)
     private readonly defaultFields: DefaultOwnershipSelect,
   ) {}
@@ -192,75 +192,93 @@ export class UserResolver {
     return user;
   }
 
-  @ResolveField(() => Role)
-  async role(
+  @ResolveField(() => Task)
+  async tasks(
     @Info() info: GraphQLResolveInfo,
     @Parent() user: User,
+    @Args() findManyArgs: FindManyTaskArgs,
     @CurrentAbilities()
     abilities: PureAbility<
       any,
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
   ) {
-    let { role } = user;
+    let { tasks } = user;
 
-    if (typeof role === 'undefined') {
-      if (!user.roleId) {
-        throw new Error('role not found when fetching role');
-      }
-
+    if (typeof tasks === 'undefined') {
       const select = new PrismaSelect(info, {
         defaultFields: this.defaultFields,
       }).valueOf(
         getPathFromGraphQLResolveInfo(info.path),
-        'Role',
-      ) as Prisma.RoleArgs;
+        'Task',
+      ) as Prisma.TaskArgs;
 
-      const findUnique = await this.roleAuthorizedService.findUnique(
+      const where: Prisma.TaskWhereInput = {
+        AND: [
+          {
+            author: { id: user.id },
+          },
+          findManyArgs.where || {},
+        ],
+      };
+
+      tasks = await this.taskAuthorizedService.findMany(
         {
-          where: { id: user.roleId },
+          ...findManyArgs,
+          where,
           ...select,
         },
         abilities,
       );
-
-      role = findUnique || undefined;
     }
 
-    return role;
+    return tasks;
   }
 
-  @ResolveField(() => Profile)
-  async userProfile(
+  @ResolveField(() => Task)
+  async sharedTasks(
     @Info() info: GraphQLResolveInfo,
     @Parent() user: User,
+    @Args() findManyArgs: FindManyTaskArgs,
     @CurrentAbilities()
     abilities: PureAbility<
       any,
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
   ) {
-    let { userProfile } = user;
+    let { sharedTasks } = user;
 
-    if (typeof userProfile === 'undefined') {
+    if (typeof sharedTasks === 'undefined') {
       const select = new PrismaSelect(info, {
         defaultFields: this.defaultFields,
       }).valueOf(
         getPathFromGraphQLResolveInfo(info.path),
-        'Profile',
-      ) as Prisma.ProfileArgs;
+        'Task',
+      ) as Prisma.TaskArgs;
 
-      const findUnique = await this.profileAuthorizedService.findUnique(
+      const where: Prisma.TaskWhereInput = {
+        AND: [
+          {
+            sharedWith: {
+              some: {
+                id: user.id,
+              },
+            },
+          },
+          findManyArgs.where || {},
+        ],
+      };
+
+      sharedTasks = await this.taskAuthorizedService.findMany(
         {
-          where: { userId: user.id },
+          ...findManyArgs,
+          where,
           ...select,
         },
         abilities,
       );
-
-      userProfile = findUnique || undefined;
     }
 
-    return userProfile;
+    return sharedTasks;
   }
 }

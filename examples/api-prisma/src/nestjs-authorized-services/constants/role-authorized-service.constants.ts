@@ -1,1 +1,0 @@
-export const ROLE_AUTHORIZED_SERVICE = 'ROLE_AUTHORIZED_SERVICE' as const;

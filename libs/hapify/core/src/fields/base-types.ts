@@ -17,7 +17,7 @@ export enum PermissionType {
 export type BaseProperties = {
   name: string;
   pluralName: string;
-  metadata?: Record<string, string>;
+  metadata?: Record<string, unknown>;
   notes?: string;
 };
 

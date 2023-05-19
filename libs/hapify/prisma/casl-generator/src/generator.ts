@@ -51,7 +51,6 @@ generatorHandler({
     await project.getDirectory(output)?.clearImmediately();
 
     try {
-      logger.log(`Convert DMMF to Hapify schema declaration`);
       const schema: Schema = createSchema(
         convertDmmfToHapifySchemaDeclaration(dmmf),
       );

@@ -1,5 +1,6 @@
-import { Field } from '@nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+
+import { Role } from '../prisma/role.enum';
 
 @InputType()
 export class UserUpdateManyMutationInput {
@@ -7,8 +8,11 @@ export class UserUpdateManyMutationInput {
   email?: string;
 
   @Field(() => String, { nullable: true })
-  password?: string;
+  name?: string;
 
   @Field(() => String, { nullable: true })
-  name?: string;
+  password?: string;
+
+  @Field(() => [Role], { nullable: true })
+  roles?: Array<keyof typeof Role>;
 }

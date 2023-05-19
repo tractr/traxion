@@ -1,15 +1,12 @@
 import { AbilityBuilder } from '@casl/ability';
-import { AppAbility, UserWithOwnershipIds } from './types';
+
 import {
+  canReadActionsTask,
   canReadActionsUser,
+  canWriteActionsTask,
   canWriteActionsUser,
-  canReadActionsProfile,
-  canWriteActionsProfile,
-  canReadActionsRole,
-  canWriteActionsRole,
-  canReadActionsRight,
-  canWriteActionsRight,
 } from './can';
+import { AppAbility, UserWithOwnershipIds } from './types';
 
 /**
  * Minimal permissions for a connected user
@@ -42,21 +39,9 @@ export function userOwnershipPermission(
   // The user own the model, he can write on it
   canWriteActionsUser(abilities, user, false);
 
-  // Profile: the user own
+  // Task: the user own
   // -> default permission
-  canReadActionsProfile(abilities, user);
+  canReadActionsTask(abilities, user);
   // The user own the model, he can write on it
-  canWriteActionsProfile(abilities, user, false);
-
-  // Role: the user own
-  // -> default permission
-  canReadActionsRole(abilities, user);
-  // The user own the model, he can write on it
-  canWriteActionsRole(abilities, user, false);
-
-  // Right: the user own
-  // -> default permission
-  canReadActionsRight(abilities, user);
-  // The user own the model, he can write on it
-  canWriteActionsRight(abilities, user, false);
+  canWriteActionsTask(abilities, user, false);
 }

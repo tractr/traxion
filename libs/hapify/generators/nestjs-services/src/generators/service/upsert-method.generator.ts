@@ -8,7 +8,7 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { isHiddenField, Model } from '@trxn/hapify-core';
 
 export const generateUpsertMethod = (
   model: Model,
@@ -64,13 +64,23 @@ export const generateUpsertMethod = (
     },
   ];
 
+  const hiddenFields = model.fields.filter(isHiddenField);
+  const modelName = camel(model.name);
+
   return {
     kind: StructureKind.Method,
     isAsync: true,
     name: 'upsert',
     typeParameters,
     parameters,
-    statements: `return prisma.upsert<T>(args);`,
+    statements: `
+    const ${modelName} = await prisma.upsert<T>(args);
+
+    ${
+      hiddenFields.length
+        ? `return ${modelName} === null ? ${modelName} : this.excludeHiddenFields(${modelName}, args.select);`
+        : `return ${modelName};`
+    }`,
     docs,
   };
 };

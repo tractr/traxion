@@ -1,10 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { PrismaService } from '@trxn/nestjs-database';
+import { Prisma, User } from '@prisma/client';
+
+import {
+  excludePrismaField,
+  GetPrismaKeyIfNotSelected,
+  PrismaService,
+} from '@trxn/nestjs-database';
 
 @Injectable()
 export class UserService {
   constructor(private readonly prismaClient: PrismaService) {}
+
+  excludeHiddenFields<T extends User, S extends Prisma.UserSelect>(
+    data: T,
+    select: S | null = null,
+  ) {
+    const excludeKeys = [
+      !!select && select?.password === true ? null : ('password' as const),
+    ] as GetPrismaKeyIfNotSelected<S, 'password'>[];
+    return excludePrismaField(data, excludeKeys);
+  }
 
   /**
    *     Find zero or one User that matches the filter.
@@ -22,7 +37,9 @@ export class UserService {
     args: Prisma.SelectSubset<T, Prisma.UserFindUniqueArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
-    return prisma.findUnique<T>(args);
+    const user = await prisma.findUnique<T>(args);
+
+    return user === null ? user : this.excludeHiddenFields(user, args.select);
   }
 
   /**
@@ -43,7 +60,9 @@ export class UserService {
     args: Prisma.SelectSubset<T, Prisma.UserFindFirstArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
-    return prisma.findFirst<T>(args);
+    const user = await prisma.findFirst<T>(args);
+
+    return user === null ? user : this.excludeHiddenFields(user, args.select);
   }
 
   /**
@@ -67,7 +86,9 @@ export class UserService {
     args: Prisma.SelectSubset<T, Prisma.UserFindManyArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
-    return prisma.findMany<T>(args);
+    const users = await prisma.findMany<T>(args);
+
+    return users.map((data) => this.excludeHiddenFields(data, args.select));
   }
 
   /**
@@ -85,7 +106,9 @@ export class UserService {
     args: Prisma.SelectSubset<T, Prisma.UserCreateArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
-    return prisma.create<T>(args);
+    const user = await prisma.create<T>(args);
+
+    return user === null ? user : this.excludeHiddenFields(user, args.select);
   }
 
   /**
@@ -126,7 +149,9 @@ export class UserService {
     args: Prisma.SelectSubset<T, Prisma.UserUpdateArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
-    return prisma.update<T>(args);
+    const user = await prisma.update<T>(args);
+
+    return user === null ? user : this.excludeHiddenFields(user, args.select);
   }
 
   /**
@@ -175,7 +200,9 @@ export class UserService {
     args: Prisma.SelectSubset<T, Prisma.UserUpsertArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
-    return prisma.upsert<T>(args);
+    const user = await prisma.upsert<T>(args);
+
+    return user === null ? user : this.excludeHiddenFields(user, args.select);
   }
 
   /**
@@ -194,7 +221,9 @@ export class UserService {
     args: Prisma.SelectSubset<T, Prisma.UserDeleteArgs>,
     prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
   ) {
-    return prisma.delete<T>(args);
+    const user = await prisma.delete<T>(args);
+
+    return user === null ? user : this.excludeHiddenFields(user, args.select);
   }
 
   /**

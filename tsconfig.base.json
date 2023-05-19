@@ -30,10 +30,13 @@
       "@trxn/hapify-generator-nestjs-authorized-services": [
         "libs/hapify/generators/nestjs-authorized-services/src/index.ts"
       ],
+      "@trxn/hapify-generator-nestjs-graphql-dtos": [
+        "libs/hapify/generators/nestjs-graphql-dtos/src/index.ts"
+      ],
       "@trxn/hapify-generator-nestjs-graphql-resolvers": [
         "libs/hapify/generators/nestjs-graphql-resolvers/src/index.ts"
       ],
-      "@trxn/hapify-generators-nestjs-services": [
+      "@trxn/hapify-generator-nestjs-services": [
         "libs/hapify/generators/nestjs-services/src/index.ts"
       ],
       "@trxn/nestjs-authentication": [
@@ -61,6 +64,9 @@
       ],
       "@trxn/prisma-nestjs-authorized-services-generator": [
         "libs/hapify/prisma/nestjs-authorized-services-generator/src/index.ts"
+      ],
+      "@trxn/prisma-nestjs-graphql-dtos-generator": [
+        "libs/hapify/prisma/nestjs-graphql-dtos-generator/src/index.ts"
       ],
       "@trxn/prisma-nestjs-graphql-resolvers-generator": [
         "libs/hapify/prisma/nestjs-graphql-resolvers-generator/src/index.ts"

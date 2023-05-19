@@ -22,6 +22,8 @@
             "enforceBuildableLibDependency": true
           }
         ],
+
+        "import/no-cycle": "off",
         "import/no-unresolved": [
           "error",
           {

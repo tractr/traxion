@@ -1,6 +1,4 @@
-import { Field } from '@nestjs/graphql';
-import { ObjectType } from '@nestjs/graphql';
-import { Int } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class UserCountAggregate {
@@ -11,13 +9,10 @@ export class UserCountAggregate {
   email!: number;
 
   @Field(() => Int, { nullable: false })
-  password!: number;
-
-  @Field(() => Int, { nullable: false })
   name!: number;
 
   @Field(() => Int, { nullable: false })
-  roleId!: number;
+  roles!: number;
 
   @Field(() => Int, { nullable: false })
   _all!: number;

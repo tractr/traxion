@@ -1,9 +1,9 @@
-import { Field } from '@nestjs/graphql';
-import { ArgsType } from '@nestjs/graphql';
-import { UserWhereUniqueInput } from './user-where-unique.input';
+import { ArgsType, Field } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
+
 import { UserCreateInput } from './user-create.input';
 import { UserUpdateInput } from './user-update.input';
+import { UserWhereUniqueInput } from './user-where-unique.input';
 
 @ArgsType()
 export class UpsertOneUserArgs {
