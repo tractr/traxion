@@ -7,7 +7,4 @@ export class UserMaxAggregate {
 
   @Field(() => String, { nullable: true })
   email?: string;
-
-  @Field(() => String, { nullable: true })
-  name?: string;
 }

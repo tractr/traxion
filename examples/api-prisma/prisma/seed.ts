@@ -1,4 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { randFirstName, randLastName, randText } from '@ngneat/falso';
+import { PrismaClient, Role } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
@@ -6,36 +7,42 @@ const prisma = new PrismaClient();
 export function createUser({
   email,
   password,
-  name,
-  address,
-  role,
+  roles,
+  sharedTasksWith = [],
 }: {
   email: string;
   password: string;
-  name: string;
-  address: string;
-  role: string;
+  roles: Role[];
+  sharedTasksWith?: string[];
 }) {
   console.info(`Creating user ${email}`);
   return prisma.user.create({
     data: {
       email,
       password: bcrypt.hashSync(password, 10),
-      name,
-      userProfile: {
+      roles,
+      profile: {
         create: {
-          address,
+          firstName: randFirstName(),
+          lastName: randLastName(),
+          bio: randText(),
         },
       },
-      role: {
-        connectOrCreate: {
-          where: {
-            name: role,
+      tasks: {
+        create: [
+          {
+            title: `${email}'s task`,
+            description: randText(),
+            status: 'OPEN',
+            ...(sharedTasksWith.length > 0 && {
+              sharedWith: {
+                connect: sharedTasksWith.map((userEmail) => ({
+                  email: userEmail,
+                })),
+              },
+            }),
           },
-          create: {
-            name: role,
-          },
-        },
+        ],
       },
     },
   });
@@ -44,28 +51,24 @@ export function createUser({
 async function main() {
   await prisma.profile.deleteMany({});
   await prisma.user.deleteMany({});
-  await prisma.role.deleteMany({});
+  await prisma.task.deleteMany({});
+
   const users = [
     await createUser({
       email: 'admin@traxion.dev',
       password: 'password',
-      name: 'Admin',
-      address: 'Admin Address',
-      role: 'admin',
+      roles: [Role.ADMIN],
     }),
     await createUser({
       email: 'user1@traxion.dev',
       password: 'password',
-      name: 'User 1',
-      address: 'User 1 Address',
-      role: 'user',
+      roles: [Role.USER],
     }),
     await createUser({
       email: 'user2@traxion.dev',
       password: 'password',
-      name: 'User 2',
-      address: 'User 2 Address',
-      role: 'user',
+      roles: [Role.USER],
+      sharedTasksWith: ['user1@traxion.dev'],
     }),
   ];
 

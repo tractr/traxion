@@ -7,7 +7,4 @@ export class UserMinAggregateInput {
 
   @Field(() => Boolean, { nullable: true })
   email?: true;
-
-  @Field(() => Boolean, { nullable: true })
-  name?: true;
 }

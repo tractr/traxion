@@ -15,9 +15,6 @@ export class UserGroupBy {
   @Field(() => String, { nullable: false })
   email!: string;
 
-  @Field(() => String, { nullable: true })
-  name?: string;
-
   @Field(() => [Role], { nullable: true })
   roles?: Array<keyof typeof Role>;
 

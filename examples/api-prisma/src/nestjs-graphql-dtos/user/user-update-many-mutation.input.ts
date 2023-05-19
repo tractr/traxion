@@ -8,9 +8,6 @@ export class UserUpdateManyMutationInput {
   email?: string;
 
   @Field(() => String, { nullable: true })
-  name?: string;
-
-  @Field(() => String, { nullable: true })
   password?: string;
 
   @Field(() => [Role], { nullable: true })

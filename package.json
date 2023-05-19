@@ -9,6 +9,8 @@
   "license": "MIT",
   "scripts": {
     "build": "nx run-many --all --target=build",
+    "db:push": "npx prisma db push --force-reset --skip-generate",
+    "db:seed": "npx prisma db seed",
     "depcheck": "ts-node -P ./tools/scripts/tsconfig.scripts.json ./tools/scripts/depcheck",
     "format": "nx format:write --all",
     "pregenerate": "./tools/npm-scripts/pregenerate.sh",
@@ -107,6 +109,7 @@
     "@jscutlery/semver": "^2.30.1",
     "@nestjs/schematics": "^9.0.4",
     "@nestjs/testing": "^9.3.12",
+    "@ngneat/falso": "^6.4.0",
     "@nrwl/cli": "15.8.9",
     "@nrwl/cypress": "15.8.9",
     "@nrwl/devkit": "15.8.9",

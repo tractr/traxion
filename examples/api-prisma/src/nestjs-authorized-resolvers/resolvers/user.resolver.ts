@@ -17,6 +17,7 @@ import { GraphQLResolveInfo } from 'graphql';
 import {
   DEFAULT_OWNERSHIP_SELECT,
   DefaultOwnershipSelect,
+  ProfileAuthorizedService,
   TaskAuthorizedService,
   UserAuthorizedService,
 } from '../../nestjs-authorized-services';
@@ -26,6 +27,7 @@ import {
   FindManyTaskArgs,
   FindManyUserArgs,
   FindUniqueUserArgs,
+  Profile,
   Task,
   UpdateOneUserArgs,
   User,
@@ -47,6 +49,7 @@ import { getPathFromGraphQLResolveInfo } from '@trxn/nestjs-graphql';
 export class UserResolver {
   constructor(
     private readonly userAuthorizedService: UserAuthorizedService,
+    private readonly profileAuthorizedService: ProfileAuthorizedService,
     private readonly taskAuthorizedService: TaskAuthorizedService,
     @Inject(DEFAULT_OWNERSHIP_SELECT)
     private readonly defaultFields: DefaultOwnershipSelect,
@@ -191,6 +194,40 @@ export class UserResolver {
     );
 
     return user;
+  }
+
+  @ResolveField(() => Profile)
+  async profile(
+    @Info() info: GraphQLResolveInfo,
+    @Parent() user: User,
+    @CurrentAbilities()
+    abilities: PureAbility<
+      any,
+      PrismaQuery<Record<string, any> & ForcedSubject<string>>
+    >,
+  ) {
+    let { profile } = user;
+
+    if (typeof profile === 'undefined') {
+      const select = new PrismaSelect(info, {
+        defaultFields: this.defaultFields,
+      }).valueOf(
+        getPathFromGraphQLResolveInfo(info.path),
+        'Profile',
+      ) as Prisma.ProfileArgs;
+
+      const findUnique = await this.profileAuthorizedService.findUnique(
+        {
+          where: { userId: user.id },
+          ...select,
+        },
+        abilities,
+      );
+
+      profile = findUnique || undefined;
+    }
+
+    return profile;
   }
 
   @ResolveField(() => Task)

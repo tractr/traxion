@@ -11,8 +11,5 @@ export class UserCountOrderByAggregateInput {
   email?: keyof typeof SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
-  name?: keyof typeof SortOrder;
-
-  @Field(() => SortOrder, { nullable: true })
   roles?: keyof typeof SortOrder;
 }
