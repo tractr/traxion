@@ -21,7 +21,7 @@ generator nestjsGraphqlDtos {
 // Nestjs public grahpql resolvers generator
 generator nestjsGraphqlResolvers {
   provider = "trxn-prisma-nestjs-graphql-resolvers-generator"
-  output   = "../src/nestjs-resolvers"
+  output   = "../src/nestjs-graphql-resolvers"
 
   // Path relative to the output directory
   tsConfigFilePath            = "../../tsconfig.app.json"
@@ -32,7 +32,7 @@ generator nestjsGraphqlResolvers {
 // Nestjs authorizd graphql resolvers generator
 generator nestjsAuthorizedGraphqlResolvers {
   provider                           = "trxn-prisma-nestjs-authorized-graphql-resolvers-generator"
-  output                             = "../src/nestjs-authorized-resolvers"
+  output                             = "../src/nestjs-graphql-authorized-resolvers"
   tsConfigFilePath                   = "../../tsconfig.app.json"
   nestjsServicesImportPath           = "./nestjs-services"
   nestjsGraphqlDtosImportPath        = "./nestjs-graphql-dtos"
@@ -58,6 +58,15 @@ generator caslConfig {
   provider         = "trxn-prisma-casl-generator"
   output           = "../src/casl"
   tsConfigFilePath = "../../tsconfig.app.json"
+}
+
+generator nestjsModules {
+  provider        = "trxn-prisma-nestjs-modules-generator"
+  output           = "../src/modules"
+  tsConfigFilePath = "../../tsconfig.app.json"
+  nestjsAuthorizedServicesImportPath = "./nestjs-authorized-services"
+  nestjsGraphqlResolversImportPath = "./nestjs-graphql-authorized-resolvers"
+  nestjsServicesImportPath = "./nestjs-services"
 }
 
 model User {
