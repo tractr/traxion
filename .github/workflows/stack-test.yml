@@ -10,10 +10,7 @@ concurrency:
 jobs:
   test:
     name: Test all packages
-    uses: ./.github/workflows/test.yml
-    with:
-      codecov: true
+    uses: ./.github/workflows/test-nx-cloud.yml
     secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
