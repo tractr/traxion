@@ -1,6 +1,6 @@
 {
   "name": "@trxn/prisma-nestjs-graphql-resolvers-generator",
-  "version": "2.1.22-next.1",
+  "version": "2.1.22-next.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"

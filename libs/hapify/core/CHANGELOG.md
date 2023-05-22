@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.1.22-next.2](https://github.com/tractr/traxion/compare/v2.1.22-next.1...v2.1.22-next.2) (2023-05-22)
+
+
+### Features
+
+* add the hidden field ability to the prisma schema ([#624](https://github.com/tractr/traxion/issues/624)) ([994f439](https://github.com/tractr/traxion/commit/994f439d11a6bbe96de5a25d1679d033a6a1f22b))
+
+
+
 ## [2.1.22-next.1](https://github.com/tractr/traxion/compare/v2.1.22-next.0...v2.1.22-next.1) (2023-05-14)
 
 
