@@ -20,7 +20,7 @@ import {
 
 import { Schema } from '@trxn/hapify-core';
 
-export function hapifyNestjsAuthorizedServicesGenerator(
+export function generate(
   project: Project,
   dataModel: Schema,
   config: NestjsAuthorizedServicesGeneratorConfig,

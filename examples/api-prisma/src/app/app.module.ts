@@ -1,21 +1,8 @@
 import { Module } from '@nestjs/common';
 
-import {
-  AuthenticationModule,
-  DatabaseModule,
-  NestjsServicesModule,
-} from './modules';
-import { NestjsGQLModule } from './modules/graphql.module';
+import { TraxionModule } from '../generated/modules/traxion.module';
 
 @Module({
-  imports: [
-    DatabaseModule,
-
-    AuthenticationModule,
-
-    NestjsServicesModule,
-
-    NestjsGQLModule,
-  ],
+  imports: [TraxionModule],
 })
 export class AppModule {}

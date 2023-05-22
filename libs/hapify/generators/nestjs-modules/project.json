@@ -23,6 +23,12 @@
       },
       "outputs": ["{options.outputFile}"]
     },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
     "test": {
       "configurations": {
         "ci": {
@@ -36,6 +42,12 @@
         "passWithNoTests": true
       },
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    },
+    "update-peer-dependencies": {
+      "executor": "@trxn/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/hapify/generators/nestjs-modules/package.json"
+      }
     }
   }
 }

@@ -3,10 +3,7 @@
 import { Project } from 'ts-morph';
 
 import { generateEncryptionServiceConstantSourceFile } from './generators/constants/constant.generator';
-import {
-  generateEncryptionServiceClass,
-  generateEncryptionServiceSourceFile,
-} from './generators/encryption-service/encryption-service.generator';
+import { generateEncryptionServiceSourceFile } from './generators/encryption-service/encryption-service.generator';
 import { generateModuleDefinitionSourceFile } from './generators/module/module-definition.generator';
 import { generateModuleOptionsSourceFile } from './generators/module/module-options.generator';
 import { generateModuleSourceFile } from './generators/module/module.generator';
@@ -16,20 +13,19 @@ import {
 } from './generators/provider/providers.generator';
 import { generateConstantSourceFile } from './generators/service/constant.generator';
 import { generateServiceSourceFile } from './generators/service/service.generator';
-import { generateServiceDefaultSourceFile } from './generators/serviceDefault/service-defaults.generator';
+
+import { isEncryptedField, Schema } from '@trxn/hapify-core';
 import {
   generateDirectoryIndexExporter,
   generateFileIndexExporter,
-} from './utils/index.generator';
-
-import { isEncryptedField, Schema } from '@trxn/hapify-core';
+} from '@trxn/hapify-devkit';
 
 export type NestjsServiceGeneratorConfig = {
   output: string;
   overwrite?: boolean;
 };
 
-export function hapifyNestjsServicesGenerator(
+export function generate(
   project: Project,
   dataModel: Schema,
   config: NestjsServiceGeneratorConfig,

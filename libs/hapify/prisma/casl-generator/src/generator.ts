@@ -13,7 +13,7 @@ import {
   Schema,
 } from '@trxn/hapify-core';
 import { convertDmmfToHapifySchemaDeclaration } from '@trxn/hapify-devkit';
-import { hapifyCaslConfigGenerator } from '@trxn/hapify-generator-casl';
+import { generate } from '@trxn/hapify-generator-casl';
 
 export const GENERATOR_NAME = 'Hapify Prisma NestJs/AuthorizedServices';
 
@@ -59,7 +59,7 @@ generatorHandler({
 
       const userWithOwnership = discoverOwnership(userModel, schema);
 
-      hapifyCaslConfigGenerator(project, schema, userWithOwnership, {
+      generate(project, schema, userWithOwnership, {
         output,
       });
     } catch (error) {

@@ -42,6 +42,9 @@
       "@trxn/hapify-generator-nestjs-services": [
         "libs/hapify/generators/nestjs-services/src/index.ts"
       ],
+      "@trxn/hapify-generator-traxion": [
+        "libs/hapify/generators/traxion/src/index.ts"
+      ],
       "@trxn/nestjs-authentication": [
         "libs/nestjs/authentication/src/index.ts"
       ],
@@ -79,6 +82,9 @@
       ],
       "@trxn/prisma-nestjs-services-generator": [
         "libs/hapify/prisma/nestjs-services-generator/src/index.ts"
+      ],
+      "@trxn/prisma-traxion-generator": [
+        "libs/hapify/prisma/traxion-generator/src/index.ts"
       ]
     },
     "resolveJsonModule": true,

@@ -8,16 +8,18 @@ import {
   generateGraphqlModuleSourceFile,
   generateNestjsAuthorizedServicesModuleSourceFile,
   generateServicesModuleSourceFile,
+  generateTraxionModuleSourceFile,
   generateUserModuleSourceFile,
 } from './generators';
+import { generateCaslConfigSourceFile } from './generators/casl-config.generator';
 
-export function hapifyNestjsModulesGenerator(
+export function generate(
   project: Project,
   config: NestjsModulesGeneratorConfig,
 ) {
   const { output, importPaths } = config;
 
-  generateAuthenticationModuleSourceFile(project, output);
+  generateAuthenticationModuleSourceFile(project, output, importPaths);
   generateNestjsAuthorizedServicesModuleSourceFile(
     project,
     output,
@@ -27,4 +29,10 @@ export function hapifyNestjsModulesGenerator(
   generateGraphqlModuleSourceFile(project, output, importPaths);
   generateServicesModuleSourceFile(project, output, importPaths);
   generateUserModuleSourceFile(project, output);
+  generateTraxionModuleSourceFile(project, output);
+
+  // Generate the casl config only if no one is specified
+  if (!importPaths.caslAppConfig) {
+    generateCaslConfigSourceFile(project, output, importPaths);
+  }
 }

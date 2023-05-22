@@ -8,7 +8,7 @@ import { version } from '../package.json';
 
 import { createSchema, Schema } from '@trxn/hapify-core';
 import { convertDmmfToHapifySchemaDeclaration } from '@trxn/hapify-devkit';
-import { hapifyNestjsAuthorizedServicesGenerator } from '@trxn/hapify-generator-nestjs-authorized-services';
+import { generate } from '@trxn/hapify-generator-nestjs-authorized-services';
 
 export const GENERATOR_NAME = 'Hapify Prisma NestJs/AuthorizedServices';
 
@@ -50,7 +50,7 @@ generatorHandler({
         convertDmmfToHapifySchemaDeclaration(dmmf),
       );
 
-      hapifyNestjsAuthorizedServicesGenerator(project, schema, {
+      generate(project, schema, {
         output,
         importPaths: {
           nestjsServices: nestjsServicesImportPath,

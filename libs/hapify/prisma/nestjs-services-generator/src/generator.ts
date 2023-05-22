@@ -8,7 +8,7 @@ import { version } from '../package.json';
 
 import { createSchema, Schema } from '@trxn/hapify-core';
 import { convertDmmfToHapifySchemaDeclaration } from '@trxn/hapify-devkit';
-import { hapifyNestjsServicesGenerator } from '@trxn/hapify-generator-nestjs-services';
+import { generate } from '@trxn/hapify-generator-nestjs-services';
 
 export const GENERATOR_NAME = 'Hapify Prisma NestJs/Services';
 
@@ -50,7 +50,7 @@ generatorHandler({
         convertDmmfToHapifySchemaDeclaration(dmmf),
       );
 
-      hapifyNestjsServicesGenerator(project, schema, {
+      generate(project, schema, {
         output,
       });
     } catch (error) {

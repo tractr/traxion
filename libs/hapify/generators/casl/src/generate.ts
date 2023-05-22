@@ -15,13 +15,17 @@ import { generateTypesIndexSourceFile } from './generators/types/index.generator
 import { generateUserOwnershipSourceFile } from './generators/types/user-ownership.generator';
 
 import { ModelWithOwnership, Schema } from '@trxn/hapify-core';
+import {
+  generateDirectoryIndexExporter,
+  generateFileIndexExporter,
+} from '@trxn/hapify-devkit';
 
 export type NestjsServiceAuthorizedGeneratorConfig = {
   output: string;
   overwrite?: boolean;
 };
 
-export function hapifyCaslConfigGenerator(
+export function generate(
   project: Project,
   dataModel: Schema,
   userWithOwnershipIds: ModelWithOwnership,
@@ -65,4 +69,7 @@ export function hapifyCaslConfigGenerator(
     dataModel.models,
     output,
   );
+
+  generateDirectoryIndexExporter(project, output);
+  generateFileIndexExporter(project, output);
 }

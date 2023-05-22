@@ -6,7 +6,7 @@ import { Project } from 'ts-morph';
 
 import { version } from '../package.json';
 
-import { hapifyNestjsModulesGenerator } from '@trxn/hapify-generator-nestjs-modules';
+import { generate } from '@trxn/hapify-generator-nestjs-modules';
 
 export const GENERATOR_NAME = 'Hapify Prisma NestJs/Modules';
 
@@ -67,7 +67,7 @@ generatorHandler({
     await project.getDirectory(output)?.clearImmediately();
 
     try {
-      hapifyNestjsModulesGenerator(project, {
+      generate(project, {
         output,
         importPaths: {
           nestjsAuthorizedServices: nestjsAuthorizedServicesImportPath,
