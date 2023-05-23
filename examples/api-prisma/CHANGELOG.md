@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.1.22-next.4](https://github.com/tractr/traxion/compare/v2.1.22-next.3...v2.1.22-next.4) (2023-05-23)
+
+
+### Features
+
+* make the user roles configurable ([eb9b328](https://github.com/tractr/traxion/commit/eb9b328ea2bc7936a7683f47477b652dea497851))
+
+
+
 ## [2.1.22-next.3](https://github.com/tractr/traxion/compare/v2.1.22-next.2...v2.1.22-next.3) (2023-05-22)
 
 

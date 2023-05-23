@@ -1,6 +1,6 @@
 {
   "name": "@trxn/hapify-generator-nestjs-graphql-resolvers",
-  "version": "2.1.22-next.3",
+  "version": "2.1.22-next.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"
