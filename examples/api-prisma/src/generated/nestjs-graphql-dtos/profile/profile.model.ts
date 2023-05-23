@@ -10,7 +10,10 @@ export class Profile {
   @Field(() => String, { nullable: false })
   firstName!: string;
 
-  @Field(() => String, { nullable: false })
+  /**
+   * @trxn/defaultSelect
+   */
+  @Field(() => String, { nullable: false, description: '@trxn/defaultSelect' })
   lastName!: string;
 
   @Field(() => String, { nullable: true })

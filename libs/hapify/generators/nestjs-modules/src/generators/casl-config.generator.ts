@@ -1,11 +1,18 @@
+import { stubArray } from 'lodash';
 import { Project, StructureKind, VariableDeclarationKind } from 'ts-morph';
 
 import { NestjsModulesImportPath } from '../config.types';
 
+import {
+  getRoleFieldFromUserModel,
+  getUserModel,
+  Schema,
+} from '@trxn/hapify-core';
 import { resolveDynamicPath } from '@trxn/hapify-devkit';
 
 export function generateCaslConfigSourceFile(
   project: Project,
+  schema: Schema,
   path: string,
   importPaths: NestjsModulesImportPath,
 ) {
@@ -20,13 +27,19 @@ export function generateCaslConfigSourceFile(
     );
   }
 
+  // Here we need to validate the user model to have a field that hold the roles information
+  const userModel = getUserModel(schema);
+  const roleField = getRoleFieldFromUserModel(userModel);
+
+  if (!roleField) {
+    throw new Error(
+      'The user model must have a field that hold the roles information',
+    );
+  }
+
   const sourceFile = project.createSourceFile(filePath);
 
   sourceFile.addImportDeclarations([
-    {
-      moduleSpecifier: '@prisma/client',
-      namedImports: ['Prisma', 'Role'],
-    },
     {
       moduleSpecifier: '@casl/ability',
       namedImports: ['AbilityBuilder'],
@@ -40,10 +53,8 @@ export function generateCaslConfigSourceFile(
       namedImports: [
         'AppAbility',
         'userOwnershipPermission',
-        {
-          name: 'UserSelectOwnershipIds',
-          alias: 'userSelect',
-        },
+        'UserSelectOwnershipIds',
+        'UserWithOwnershipIds',
       ],
     },
   ]);
@@ -54,31 +65,8 @@ export function generateCaslConfigSourceFile(
     declarationKind: VariableDeclarationKind.Const,
     declarations: [
       {
-        name: 'userSelectWithOwnership',
-        initializer: `Prisma.validator<Prisma.UserArgs>()({
-          select: {
-            ...userSelect.select,
-            roles: true,
-          },
-        });`,
-      },
-    ],
-  });
-
-  sourceFile.addTypeAlias({
-    name: 'UserWithOwnershipIds',
-    isExported: true,
-    type: `Prisma.UserGetPayload<typeof userSelectWithOwnership>;`,
-  });
-
-  sourceFile.addVariableStatement({
-    kind: StructureKind.VariableStatement,
-    isExported: true,
-    declarationKind: VariableDeclarationKind.Const,
-    declarations: [
-      {
         name: 'customSelect',
-        initializer: `userSelectWithOwnership.select;`,
+        initializer: `UserSelectOwnershipIds.select;`,
       },
     ],
   });
@@ -91,14 +79,14 @@ export function generateCaslConfigSourceFile(
       {
         name: 'rolePermissions',
         type: `Record<
-          Role,
+          string,
           DefinePermissions<AbilityBuilder<AppAbility>, UserWithOwnershipIds>
         >`,
         initializer: `{
-          USER: (abilities, user) => {
+          user: (abilities, user) => {
             userOwnershipPermission(abilities, user);
           },
-          ADMIN: (abilities) => {
+          admin: (abilities) => {
             abilities.can(Action.Manage, 'all');
           },
         }`,
@@ -121,5 +109,18 @@ export function generateCaslConfigSourceFile(
         }`,
       },
     ],
+  });
+
+  sourceFile.addFunction({
+    kind: StructureKind.Function,
+    isExported: true,
+    name: 'getRoles',
+    parameters: [
+      {
+        name: 'user',
+        type: `UserWithOwnershipIds`,
+      },
+    ],
+    statements: [`return user.${roleField.name};`],
   });
 }

@@ -13,7 +13,10 @@ export class User {
   @Field(() => String, { nullable: false })
   email!: string;
 
-  @Field(() => [Role], { nullable: true })
+  /**
+   * @trxn/roles
+   */
+  @Field(() => [Role], { nullable: true, description: '@trxn/roles' })
   roles!: Array<keyof typeof Role>;
 
   @Field(() => Profile, { nullable: true })

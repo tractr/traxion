@@ -6,6 +6,8 @@ import { Project } from 'ts-morph';
 
 import { version } from '../package.json';
 
+import { createSchema } from '@trxn/hapify-core';
+import { convertDmmfToHapifySchemaDeclaration } from '@trxn/hapify-devkit';
 import { generate } from '@trxn/hapify-generator-nestjs-modules';
 
 export const GENERATOR_NAME = 'Hapify Prisma NestJs/Modules';
@@ -18,7 +20,7 @@ generatorHandler({
     };
   },
   onGenerate: async (options) => {
-    const { generator } = options;
+    const { generator, dmmf } = options;
 
     const output = generator.output?.value;
     const {
@@ -67,7 +69,9 @@ generatorHandler({
     await project.getDirectory(output)?.clearImmediately();
 
     try {
-      generate(project, {
+      const schema = createSchema(convertDmmfToHapifySchemaDeclaration(dmmf));
+
+      generate(project, schema, {
         output,
         importPaths: {
           nestjsAuthorizedServices: nestjsAuthorizedServicesImportPath,

@@ -13,8 +13,11 @@ import {
 } from './generators';
 import { generateCaslConfigSourceFile } from './generators/casl-config.generator';
 
+import { Schema } from '@trxn/hapify-core';
+
 export function generate(
   project: Project,
+  schema: Schema,
   config: NestjsModulesGeneratorConfig,
 ) {
   const { output, importPaths } = config;
@@ -33,6 +36,6 @@ export function generate(
 
   // Generate the casl config only if no one is specified
   if (!importPaths.caslAppConfig) {
-    generateCaslConfigSourceFile(project, output, importPaths);
+    generateCaslConfigSourceFile(project, schema, output, importPaths);
   }
 }

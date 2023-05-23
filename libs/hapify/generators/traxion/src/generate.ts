@@ -38,7 +38,7 @@ export async function generate(
     overwrite,
   });
 
-  hapifyNestjsModulesGenerator(project, {
+  hapifyNestjsModulesGenerator(project, schema, {
     output: join(output, 'modules'),
     importPaths: {
       nestjsAuthorizedServices: './nestjs-authorized-services',

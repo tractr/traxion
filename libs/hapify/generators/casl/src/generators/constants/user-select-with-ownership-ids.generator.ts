@@ -7,6 +7,7 @@ import {
 } from 'ts-morph';
 
 import {
+  Field,
   isForeignField,
   isPrimaryField,
   ModelWithOwnership,
@@ -28,13 +29,24 @@ export function createSelectClose(
 ): Record<string, unknown> {
   return {
     select: {
-      ...model.fields.filter(or(isPrimaryField, isForeignField)).reduce(
-        (acc, field) => ({
-          ...acc,
-          [camel(field.name)]: true,
-        }),
-        {},
-      ),
+      ...model.fields
+        .filter(
+          or(
+            isPrimaryField,
+            isForeignField,
+            (field): field is Field =>
+              field.metadata?.defaultSelect === true ||
+              field.metadata?.role === true ||
+              field.metadata?.roles === true,
+          ),
+        )
+        .reduce(
+          (acc, field) => ({
+            ...acc,
+            [camel(field.name)]: true,
+          }),
+          {},
+        ),
       ...model.ownedModels.reduce(
         (acc, ownedModel) => ({
           ...acc,

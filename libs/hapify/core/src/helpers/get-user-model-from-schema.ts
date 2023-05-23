@@ -1,3 +1,4 @@
+import { Field } from '../fields';
 import { Model } from '../models';
 import { Schema } from '../schema';
 
@@ -47,4 +48,22 @@ export function getUserModelFromSchema(schema: Schema): Model {
   }
 
   return userModel[0];
+}
+
+export function getRoleFieldFromUserModel(userModel: Model): Field | null {
+  let role: Field | undefined;
+
+  role = userModel.fields.find(
+    (field) => field.metadata?.role === true || field.metadata?.roles === true,
+  );
+
+  if (!role) {
+    role = userModel.fields.find(
+      (field) =>
+        field.name.toLowerCase() === 'role' ||
+        field.name.toLowerCase() === 'roles',
+    );
+  }
+
+  return role || null;
 }

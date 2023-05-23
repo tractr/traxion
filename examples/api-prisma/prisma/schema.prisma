@@ -82,7 +82,9 @@ model User {
   /// @trxn/hidden
   /// @trxn/encrypted
   password String
-  roles    Role[] @default([USER])
+
+  /// @trxn/roles
+  roles    Role[] @default([user])
 
   // Profile relation (one-to-one)
   profile Profile?
@@ -97,6 +99,8 @@ model User {
 model Profile {
   id        Int     @id @default(autoincrement())
   firstName  String
+
+  /// @trxn/defaultSelect
   lastName  String
   bio       String? @db.Text()
   user      User    @relation(fields: [userId], references: [id])
@@ -107,7 +111,7 @@ model Task {
   id          Int        @id @default(autoincrement())
   title       String
   description String?
-  status      TaskStatus @default(OPEN)
+  status      TaskStatus @default(draft)
   author      User       @relation("TaskToAuthor", fields: [authorId], references: [id])
   authorId    Int
   /// @trxn/permissions: readOnly
@@ -115,12 +119,13 @@ model Task {
 }
 
 enum TaskStatus {
-  OPEN
-  IN_PROGRESS
-  DONE
+  draft
+  open
+  inProgress
+  done
 }
 
 enum Role {
-  ADMIN
-  USER
+  admin
+  user
 }

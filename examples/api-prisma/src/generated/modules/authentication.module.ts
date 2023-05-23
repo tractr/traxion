@@ -3,6 +3,7 @@ import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 
 import {
   customSelect,
+  getRoles,
   publicPermissions,
   rolePermissions,
 } from './configs/casl.config';
@@ -28,9 +29,7 @@ import {
       },
     }),
     CaslModule.register({
-      getRoles(user) {
-        return user.roles;
-      },
+      getRoles,
       rolePermissions,
       publicPermissions,
     }),

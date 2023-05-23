@@ -16,10 +16,7 @@ export class CaslAbilityFactoryService {
 
   getRoles(user: Record<string, unknown>) {
     const roles = this.caslOptions.getRoles(user);
-    if (!Array.isArray(roles)) {
-      throw new Error('getRoles must return an array of roles');
-    }
-    return roles;
+    return Array.isArray(roles) ? roles : [roles];
   }
 
   createForUser<U extends User>(user?: U) {

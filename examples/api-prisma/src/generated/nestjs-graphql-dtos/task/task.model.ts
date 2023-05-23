@@ -15,7 +15,7 @@ export class Task {
   @Field(() => String, { nullable: true })
   description!: string | null;
 
-  @Field(() => TaskStatus, { nullable: false, defaultValue: 'OPEN' })
+  @Field(() => TaskStatus, { nullable: false, defaultValue: 'draft' })
   status!: keyof typeof TaskStatus;
 
   @Field(() => Int, { nullable: false })

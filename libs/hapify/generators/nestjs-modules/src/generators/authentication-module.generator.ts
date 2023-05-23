@@ -47,7 +47,12 @@ export function generateAuthenticationModuleSourceFile(
     },
     {
       moduleSpecifier: caslAppConfig,
-      namedImports: ['customSelect', 'rolePermissions', 'publicPermissions'],
+      namedImports: [
+        'customSelect',
+        'getRoles',
+        'rolePermissions',
+        'publicPermissions',
+      ],
     },
   ]);
 
@@ -68,9 +73,7 @@ export function generateAuthenticationModuleSourceFile(
       },
     }),
     CaslModule.register({
-      getRoles(user) {
-        return user.roles;
-      },
+      getRoles,
       rolePermissions,
       publicPermissions,
     }),
