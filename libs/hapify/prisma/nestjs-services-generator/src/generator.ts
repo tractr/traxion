@@ -20,7 +20,7 @@ generatorHandler({
     };
   },
   onGenerate: async (options) => {
-    const { generator, dmmf } = options;
+    const { generator, dmmf, datasources } = options;
 
     const output = generator.output?.value;
     const { tsConfigFilePath } = generator.config;
@@ -50,7 +50,7 @@ generatorHandler({
         convertDmmfToHapifySchemaDeclaration(dmmf),
       );
 
-      generate(project, schema, {
+      generate(project, schema, datasources, {
         output,
       });
     } catch (error) {

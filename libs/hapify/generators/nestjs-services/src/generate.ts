@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 
+import { DataSource } from '@prisma/generator-helper';
 import { Project } from 'ts-morph';
 
 import { generateEncryptionServiceConstantSourceFile } from './generators/constants/constant.generator';
@@ -28,6 +29,7 @@ export type NestjsServiceGeneratorConfig = {
 export function generate(
   project: Project,
   dataModel: Schema,
+  datasources: DataSource[],
   config: NestjsServiceGeneratorConfig,
 ) {
   const { output } = config;
@@ -46,7 +48,7 @@ export function generate(
 
   // Generate services, contants and providers
   dataModel.models.forEach((model) => {
-    generateServiceSourceFile(project, model, output);
+    generateServiceSourceFile(project, model, datasources, output);
     // generateServiceDefaultSourceFile(project, model, output);
     generateConstantSourceFile(project, model, `${output}`);
     generateProviderSourceFile(

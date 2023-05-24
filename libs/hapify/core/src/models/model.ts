@@ -87,6 +87,7 @@ export type Model = {
   primaryKey: PrimaryKey;
   documentation?: string;
   metadata?: Record<string, unknown>;
+  dbName: string | null;
 };
 
 export type ModelDeclaration = {
@@ -96,6 +97,7 @@ export type ModelDeclaration = {
   primaryKey: PrimaryKeyDeclaration | null;
   documentation?: string;
   metadata?: Record<string, unknown>;
+  dbName: string | null;
 };
 
 export type OwnedModel = {

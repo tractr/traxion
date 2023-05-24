@@ -8,6 +8,7 @@ import {
 
 import {
   Field,
+  getRoleFieldFromUserModel,
   isForeignField,
   isPrimaryField,
   ModelWithOwnership,
@@ -26,6 +27,7 @@ export function generateImports(): ImportDeclarationStructure[] {
 
 export function createSelectClose(
   model: ModelWithOwnership,
+  roleField?: Field | null,
 ): Record<string, unknown> {
   return {
     select: {
@@ -36,8 +38,7 @@ export function createSelectClose(
             isForeignField,
             (field): field is Field =>
               field.metadata?.defaultSelect === true ||
-              field.metadata?.role === true ||
-              field.metadata?.roles === true,
+              roleField?.name === field.name,
           ),
         )
         .reduce(
@@ -74,6 +75,8 @@ export function generateUserSelectWithOwnershipIdsSourceFile(
 
   const imports = generateImports();
 
+  const roleField = getRoleFieldFromUserModel(models);
+
   sourceFile.addVariableStatement({
     kind: StructureKind.VariableStatement,
     isExported: true,
@@ -82,7 +85,7 @@ export function generateUserSelectWithOwnershipIdsSourceFile(
       {
         name: 'UserSelectOwnershipIds',
         initializer: `Prisma.validator<Prisma.UserArgs>()(
-          ${JSON.stringify(createSelectClose(models), null, 2)}
+          ${JSON.stringify(createSelectClose(models, roleField), null, 2)}
         );`,
       },
     ],

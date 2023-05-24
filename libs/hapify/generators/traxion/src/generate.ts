@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { join } from 'path';
 
+import { DataSource } from '@prisma/generator-helper';
 import { Project } from 'ts-morph';
 
 import { NestjsTraxionGeneratorConfig } from './config.types';
@@ -17,6 +18,7 @@ import { generate as hapifyNestjsServicesGenerator } from '@trxn/hapify-generato
 export async function generate(
   project: Project,
   schema: Schema,
+  datasources: DataSource[],
   config: NestjsTraxionGeneratorConfig,
 ) {
   const { output, overwrite, userModelName } = config;
@@ -72,7 +74,7 @@ export async function generate(
     overwrite,
   });
 
-  hapifyNestjsServicesGenerator(project, schema, {
+  hapifyNestjsServicesGenerator(project, schema, datasources, {
     output: join(output, 'nestjs-services'),
     overwrite,
   });

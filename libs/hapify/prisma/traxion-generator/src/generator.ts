@@ -21,7 +21,7 @@ generatorHandler({
     };
   },
   onGenerate: async (options) => {
-    const { generator, dmmf } = options;
+    const { generator, dmmf, datasources } = options;
 
     const output = generator.output?.value;
     const { tsConfigFilePath, ...config } = generator.config;
@@ -74,7 +74,7 @@ generatorHandler({
         tsConfigFilePath: join(output, tsConfigFilePath),
       });
 
-      await generate(project, schema, {
+      await generate(project, schema, datasources, {
         output,
       });
     } catch (error) {

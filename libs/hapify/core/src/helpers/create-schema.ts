@@ -71,6 +71,7 @@ export function createSchema(definition: SchemaDeclaration) {
       },
       documentation: model.documentation,
       metadata: model.metadata,
+      dbName: model.dbName,
     };
   });
 

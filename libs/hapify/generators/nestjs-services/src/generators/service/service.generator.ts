@@ -1,3 +1,4 @@
+import { DataSource } from '@prisma/generator-helper';
 import { kebab, pascal } from 'case';
 import {
   ClassDeclarationStructure,
@@ -25,17 +26,26 @@ import { generateUpsertMethod } from './upsert-method.generator';
 
 import { isEncryptedField, isHiddenField, Model } from '@trxn/hapify-core';
 
-export function generateServiceClass(model: Model): ClassDeclarationStructure {
+export function generateServiceClass(
+  model: Model,
+  datasources: DataSource[],
+): ClassDeclarationStructure {
+  const { dbName } = model;
+
+  const datasource =
+    datasources.find((d) => d.name === dbName) || datasources[0];
+
   const className = `${pascal(model.name)}Service`;
   const constructor = generateConstructor(model);
 
   const methods: MethodDeclarationStructure[] = [
-    // ...generateDefaultInternalsMethod(),
     generateFindUniqueMethod(model),
     generateFindFirstMethod(model),
     generateFindManyMethod(model),
     generateCreateMethod(model),
-    generateCreateManyMethod(model),
+    datasource.activeProvider !== 'sqlite'
+      ? generateCreateManyMethod(model)
+      : undefined,
     generateUpdateMethod(model),
     generateUpdateManyMethod(model),
     generateUpsertMethod(model),
@@ -43,7 +53,7 @@ export function generateServiceClass(model: Model): ClassDeclarationStructure {
     generateDeleteManyMethod(model),
     generateCountMethod(model),
     generateAggregateMethod(model),
-  ];
+  ].filter((m): m is MethodDeclarationStructure => m !== undefined);
 
   const hasHidden = model.fields.filter(isHiddenField).length > 0;
   if (hasHidden) {
@@ -68,6 +78,7 @@ export function generateServiceClass(model: Model): ClassDeclarationStructure {
 export function generateServiceSourceFile(
   project: Project,
   model: Model,
+  datasources: DataSource[],
   path: string,
 ) {
   const fileName = `${kebab(model.name)}.service`;
@@ -75,7 +86,7 @@ export function generateServiceSourceFile(
 
   const sourceFile = project.createSourceFile(filePath);
 
-  const serviceClass = generateServiceClass(model);
+  const serviceClass = generateServiceClass(model, datasources);
   const imports = generateImports(model);
 
   sourceFile.addImportDeclarations(imports);

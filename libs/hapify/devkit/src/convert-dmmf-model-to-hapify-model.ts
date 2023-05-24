@@ -52,5 +52,6 @@ export function convertDmmfModelToHapifyModel(
             name: primaryKey.name,
             fields: getPrimaryFields(fields),
           },
+    dbName: model.dbName,
   };
 }

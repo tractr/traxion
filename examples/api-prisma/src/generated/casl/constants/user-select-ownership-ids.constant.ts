@@ -12,7 +12,6 @@ export const UserSelectOwnershipIds = Prisma.validator<Prisma.UserArgs>()({
         user: {
           select: {
             id: true,
-            roles: true,
           },
         },
       },
@@ -24,7 +23,6 @@ export const UserSelectOwnershipIds = Prisma.validator<Prisma.UserArgs>()({
         author: {
           select: {
             id: true,
-            roles: true,
           },
         },
       },
@@ -36,7 +34,6 @@ export const UserSelectOwnershipIds = Prisma.validator<Prisma.UserArgs>()({
         author: {
           select: {
             id: true,
-            roles: true,
           },
         },
       },

@@ -13,7 +13,6 @@ import { GraphqlModule as GraphqlResolversModule } from '../nestjs-authorized-gr
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
       sortSchema: true,
-      debug: true,
       playground: true,
       context: ({ req, res }) => ({ req, res }),
     }),

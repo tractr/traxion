@@ -58,7 +58,6 @@ export function generateGraphqlModuleSourceFile(
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
       sortSchema: true,
-      debug: true,
       playground: true,
       context: ({ req, res }) => ({ req, res }),
     }),
