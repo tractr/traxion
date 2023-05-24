@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.1.22-next.5](https://github.com/tractr/traxion/compare/v2.1.22-next.4...v2.1.22-next.5) (2023-05-24)
+
+
+### Bug Fixes
+
+* remove createMany method from services when using sqlite ([3bf6728](https://github.com/tractr/traxion/commit/3bf67288b87670d13b0ab0b46a1ae4e1b8201cc5))
+
+
+
 ## [2.1.22-next.4](https://github.com/tractr/traxion/compare/v2.1.22-next.3...v2.1.22-next.4) (2023-05-23)
 
 

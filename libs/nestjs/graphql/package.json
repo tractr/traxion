@@ -1,6 +1,6 @@
 {
   "name": "@trxn/nestjs-graphql",
-  "version": "2.1.22-next.4",
+  "version": "2.1.22-next.5",
   "description": "Nestjs graphql helper",
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 {
   "name": "@trxn/nestjs-bcrypt",
-  "version": "2.1.22-next.4",
+  "version": "2.1.22-next.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"
