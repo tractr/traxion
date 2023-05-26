@@ -65,7 +65,7 @@ export function generateUserDefaultPermissions(
         const owned = isModelOwned(rootModel, m);
         const permission = getPermissionLevel(m);
         switch (permission) {
-          case 'delete':
+          case 'allowDelete':
             return [
               `// ${m.name}: the user ${owned ? 'own' : "doesn't own"}`,
               `// -> ${permission} permission`,
@@ -139,7 +139,7 @@ An indirect owned model is a model that has a foreign key field linking to a dir
 -> this models can be automatically detected by the generator
 
 You can add tag on prisma schema to configure the ownership of a model:
-  - @trxn/permission:delete -> the user can read, write and delete the model
+  - @trxn/permission:allowDelete -> the user can read, write and delete the model
   - @trxn/permission:write -> the user can read and write the model
   - @trxn/permission:readonly -> the user can read the model
   - @trxn/permission:internal -> the user cannot read and write  the model

@@ -24,7 +24,9 @@ export function extractMetadataFromDocumentation(
       const [key, ...values] = match[1].split(':');
       if (values.length === 0) {
         metadata[key.trim()] = true;
-      } else metadata[key.trim()] = values.map((v) => v.trim());
+      } else
+        metadata[key.trim()] =
+          values.length === 1 ? values[0].trim() : values.map((v) => v.trim());
     } else {
       docs.push(line);
     }
