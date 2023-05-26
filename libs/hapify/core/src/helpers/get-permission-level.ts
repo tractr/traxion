@@ -4,7 +4,7 @@ export type PermissionLevel =
   | 'internal'
   | 'readOnly'
   | 'write'
-  | 'delete'
+  | 'allowDelete'
   | 'default'
   | 'unknown';
 
@@ -14,7 +14,7 @@ export function getPermissionLevel(model: Model): PermissionLevel {
   if (permission === 'internal') return 'internal';
   if (permission === 'readOnly') return 'readOnly';
   if (permission === 'write') return 'write';
-  if (permission === 'allowDelete') return 'delete';
+  if (permission === 'allowDelete') return 'allowDelete';
   if (typeof permission !== 'undefined' && permission !== '') return 'unknown';
 
   return 'default';
