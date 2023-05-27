@@ -6,14 +6,26 @@ import {
 
 import { generateCreateManyMethod } from './create-many-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 describe('generateCreateMethod', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
-    name: 'user',
-    pluralName: '',
-    fields: [],
-    primaryKey: null,
+    name: 'User',
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
   const methodDeclaration: MethodDeclarationStructure =
     generateCreateManyMethod(model);

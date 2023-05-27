@@ -2,16 +2,28 @@ import { StructureKind } from 'ts-morph';
 
 import { generateUpsertMethod } from './upsert-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
+import { compressWhitespace } from '@trxn/nestjs-core';
 
 describe('generateUpsertMethod', () => {
   it('generates a method declaration for upserting a model', () => {
-    // Arrange
+    const id: PrimaryField = {
+      name: 'id',
+      type: 'primary',
+      pluralName: 'ids',
+      scalar: 'string',
+      relations: [],
+    };
+
     const model: Model = {
-      name: 'user',
+      name: 'User',
       pluralName: '',
-      fields: [],
-      primaryKey: null,
+      fields: [id],
+      primaryKey: {
+        name: 'id',
+        fields: [id],
+      },
+      dbName: null,
     };
 
     // Check function name
@@ -33,6 +45,8 @@ describe('generateUpsertMethod', () => {
     expect(prismaParameter?.type).toBe(`Prisma.UserDelegate<undefined>`);
     expect(prismaParameter?.initializer).toBe(`this.prismaClient.user`);
 
-    expect(methodDeclaration.statements).toBe('return prisma.upsert<T>(args);');
+    expect(compressWhitespace(methodDeclaration.statements as string)).toBe(
+      'const user = await prisma.upsert<T>(args); return user;',
+    );
   });
 });

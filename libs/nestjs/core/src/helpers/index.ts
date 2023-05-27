@@ -1,4 +1,5 @@
 export * from './context.helper';
+export * from './compress-whitespace';
 export * from './format-entity-ids';
 export * from './format-filter-type';
 export * from './format-sort';

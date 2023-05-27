@@ -6,14 +6,34 @@ import {
 
 import { generateImports } from './imports.generator';
 
+import { Model, PrimaryField } from '@trxn/hapify-core';
+
 describe('generateImports', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
+  const model: Model = {
+    name: 'User',
+    pluralName: '',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
+  };
   it('should generate imports for @nestjs/common', () => {
     const expected = {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@nestjs/common`,
       namedImports: [{ name: `Module` }],
     };
-    const imports = generateImports();
+    const imports = generateImports([model]);
     const actualImport = imports[0];
     expect(actualImport.kind).toBe(expected.kind);
     expect(actualImport.moduleSpecifier).toBe(expected.moduleSpecifier);
@@ -29,7 +49,7 @@ describe('generateImports', () => {
       moduleSpecifier: `./models-services.module-definition`,
       namedImports: [{ name: `ConfigurableModuleClass` }],
     };
-    const imports = generateImports();
+    const imports = generateImports([model]);
     const actualImport = imports[1];
     expect(actualImport.kind).toBe(expected.kind);
     expect(actualImport.moduleSpecifier).toBe(expected.moduleSpecifier);
@@ -45,7 +65,7 @@ describe('generateImports', () => {
       moduleSpecifier: `./models-services.providers`,
       namedImports: [{ name: `MODELS_SERVICES_PROVIDERS` }],
     };
-    const imports = generateImports();
+    const imports = generateImports([model]);
     const actualImport = imports[2];
     expect(actualImport.kind).toBe(expected.kind);
     expect(actualImport.moduleSpecifier).toBe(expected.moduleSpecifier);

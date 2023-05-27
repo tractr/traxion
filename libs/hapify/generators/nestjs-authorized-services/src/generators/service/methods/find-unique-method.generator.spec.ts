@@ -8,14 +8,27 @@ import {
 
 import { generateFindUniqueMethod } from './find-unique-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
+import { compressWhitespace } from '@trxn/nestjs-core';
 
 describe('generateFindUniqueMethod', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
     name: 'User',
-    pluralName: '',
-    fields: [],
-    primaryKey: null,
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
 
   const methodDeclaration: MethodDeclarationStructure =
@@ -40,7 +53,8 @@ describe('generateFindUniqueMethod', () => {
 
   it('generates a method declaration with the correct parameters', () => {
     const argsParameters = methodDeclaration.parameters?.[0];
-    const prismaParameters = methodDeclaration.parameters?.[1];
+    const abilitiesParameters = methodDeclaration.parameters?.[1];
+    const prismaParameters = methodDeclaration.parameters?.[2];
 
     expect(argsParameters?.name).toEqual('args');
     expect(argsParameters?.kind).toEqual(30); // StructureKind.Parameter is equal to 30
@@ -51,32 +65,19 @@ describe('generateFindUniqueMethod', () => {
     expect(prismaParameters?.name).toEqual('prisma');
     expect(prismaParameters?.kind).toEqual(30); // StructureKind.Parameter is equal to 30
     expect(prismaParameters?.type).toEqual(`Prisma.UserDelegate<undefined>`);
-  });
 
-  it('generates a method declaration with the correct statements', () => {
-    expect(methodDeclaration.statements).toBe(
-      'return prisma.findUnique<T>(args);',
+    expect(abilitiesParameters?.name).toEqual('abilities');
+    expect(abilitiesParameters?.kind).toEqual(30); // StructureKind.Parameter is equal to 30
+    expect(compressWhitespace(abilitiesParameters?.type as string)).toEqual(
+      `PureAbility< any, PrismaQuery<Record<string, any> & ForcedSubject<string>> >`,
     );
   });
 
-  it('generates a method declaration with the correct documentation', () => {
-    const expectedDocs: JSDocStructure[] = [
-      {
-        kind: StructureKind.JSDoc,
-        description: `
-    Find zero or one User that matches the filter.
-    @param {UserFindUniqueArgs} args - Arguments to find a User
-    @example
-    // Get one User
-    const user = await this.userService.findUnique({
-      where: {
-        // ... provide filter here
-      }
-    })
-    `,
-      },
-    ];
-
-    expect(methodDeclaration.docs).toEqual(expectedDocs);
+  it('generates a method declaration with the correct statements', () => {
+    expect(
+      compressWhitespace((methodDeclaration.statements as string[]).join('\n')),
+    ).toBe(
+      `const user = await this.userService.findUnique<T>(args, prisma); if (user && abilities?.cannot(Action.Read, subject('User', user))) throw new ForbiddenException('cannot read this user'); return user`,
+    );
   });
 });

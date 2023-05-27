@@ -33,7 +33,7 @@
             "forwardAllArgs": false
           },
           {
-            "command": "nx format:write --projects examples-api-prisma --uncommitted",
+            "command": "nx format:write --projects examples-api-prisma",
             "forwardAllArgs": false
           },
           {

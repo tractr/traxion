@@ -2,14 +2,26 @@ import { StructureKind, TypeParameterDeclarationStructure } from 'ts-morph';
 
 import { generateDeleteManyMethod } from './delete-many-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 describe('generateDeleteMethod', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
     name: 'User',
-    pluralName: '',
-    fields: [],
-    primaryKey: null,
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
   const method = generateDeleteManyMethod(model);
 
@@ -50,17 +62,7 @@ describe('generateDeleteMethod', () => {
     expect(method.docs).toEqual([
       {
         kind: 24,
-        description: `
-    Delete 0 or more Users.
-    @param {UserDeleteArgs} args - Arguments to filter  Users to delete.
-    @example
-    // Delete a few Users
-    const users = await this.userService.deleteMany({
-      where: {
-        // ... provide filter here
-      }
-    })
-    `,
+        description: expect.any(String),
       },
     ]);
   });

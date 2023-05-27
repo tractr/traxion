@@ -23,7 +23,7 @@ import { AppAbility, UserWithOwnershipIds } from './types';
  * -> this models can be automatically detected by the generator
  *
  * You can add tag on prisma schema to configure the ownership of a model:
- *   - @trxn/permission:delete -> the user can read, write and delete the model
+ *   - @trxn/permission:allowDelete -> the user can read, write and delete the model
  *   - @trxn/permission:write -> the user can read and write the model
  *   - @trxn/permission:readonly -> the user can read the model
  *   - @trxn/permission:internal -> the user cannot read and write  the model

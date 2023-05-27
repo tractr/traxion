@@ -1,13 +1,25 @@
 import { generateImports } from './imports.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 describe('generateImports', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
     name: 'User',
-    pluralName: '',
-    fields: [],
-    primaryKey: null,
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
   it('should return an array of import declarations', () => {
     const imports = generateImports(model);
@@ -27,12 +39,17 @@ describe('generateImports', () => {
 
     expect(prismaImport.kind).toBe(16); // StructureKind.ImportDeclaration is equal to 16
     expect(prismaImport.moduleSpecifier).toBe('@prisma/client');
-    expect(prismaImport.namedImports).toEqual([{ name: `Prisma` }]);
+    expect(prismaImport.namedImports).toEqual([
+      { name: 'Prisma' },
+      { name: `User` },
+    ]);
 
     expect(prismaSelectImport.kind).toBe(16); // StructureKind.ImportDeclaration is equal to 16
     expect(prismaSelectImport.moduleSpecifier).toBe('@trxn/nestjs-database');
     expect(prismaSelectImport.namedImports).toEqual([
       { name: 'PrismaService' },
+      { name: 'excludePrismaField' },
+      { name: 'GetPrismaKeyIfNotSelected' },
     ]);
   });
 });

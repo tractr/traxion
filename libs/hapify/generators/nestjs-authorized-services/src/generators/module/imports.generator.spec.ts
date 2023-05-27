@@ -26,7 +26,7 @@ describe('generateImports', () => {
   it('should generate imports for ./models-services.module-definition', () => {
     const expected = {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: `./models-services.module-definition`,
+      moduleSpecifier: `./authorized-services.module-definition`,
       namedImports: [{ name: `ConfigurableModuleClass` }],
     };
     const imports = generateImports();
@@ -42,8 +42,8 @@ describe('generateImports', () => {
   it('should generate imports for ./models-services.providers', () => {
     const expected = {
       kind: StructureKind.ImportDeclaration,
-      moduleSpecifier: `./models-services.providers`,
-      namedImports: [{ name: `MODELS_SERVICES_PROVIDERS` }],
+      moduleSpecifier: `./authorized-services.providers`,
+      namedImports: [{ name: `AUTHORIZED_SERVICES_PROVIDERS` }],
     };
     const imports = generateImports();
     const actualImport = imports[2];

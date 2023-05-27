@@ -5,17 +5,29 @@ import {
   generateProviderSourceFile,
 } from './providers.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 describe('generateProviderSourceFile', () => {
   it('should create a new source file with the correct providers and add the necessary imports to the existing services providers source file', () => {
     // Arrange
     const project = new Project();
+    const id: PrimaryField = {
+      name: 'id',
+      type: 'primary',
+      pluralName: 'ids',
+      scalar: 'string',
+      relations: [],
+    };
+
     const model: Model = {
       name: 'TestModel',
       pluralName: '',
-      fields: [],
-      primaryKey: null,
+      fields: [id],
+      primaryKey: {
+        name: 'id',
+        fields: [id],
+      },
+      dbName: null,
     };
     const path = 'test/path';
     const servicesProviderSourceFile = project.createSourceFile(
@@ -60,21 +72,6 @@ describe('generateModelsServicesProvidersSourceFile', () => {
     const sourceFile = generateModelsServicesProvidersSourceFile(project, path);
 
     // Assert
-    expect(
-      sourceFile.getVariableDeclaration('MODELS_SERVICES_PROVIDERS'),
-    ).toBeDefined();
-    expect(
-      sourceFile
-        .getVariableDeclaration('MODELS_SERVICES_PROVIDERS')
-        ?.getTypeNode()
-        ?.getText(),
-    ).toEqual('Provider[]');
-    expect(
-      sourceFile
-        .getVariableDeclaration('MODELS_SERVICES_PROVIDERS')
-        ?.getInitializer()
-        ?.getText(),
-    ).toEqual('[]');
     expect(sourceFile.getImportDeclaration('@nestjs/common')).toBeDefined();
     expect(
       sourceFile

@@ -5,17 +5,45 @@ import {
   generateResolverIndexSourceFile,
 } from './index.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 describe('generateResolverIndexSourceFile', () => {
   const project = new Project();
+  const userId: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+  const roleId: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const models: Model[] = [
-    { name: 'User', pluralName: '', fields: [], primaryKey: null },
+    {
+      name: 'User',
+      pluralName: 'users',
+      fields: [userId],
+      primaryKey: {
+        name: 'id',
+        fields: [userId],
+      },
+      dbName: null,
+    },
     {
       name: 'Role',
-      pluralName: '',
-      fields: [],
-      primaryKey: null,
+      pluralName: 'roles',
+      fields: [roleId],
+      primaryKey: {
+        name: 'id',
+        fields: [roleId],
+      },
+      dbName: null,
     },
   ];
   const path = './src';

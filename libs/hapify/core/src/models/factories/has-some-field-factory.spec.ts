@@ -1,5 +1,5 @@
 import { hasSomeFieldFactory } from './has-some-field-factory';
-import { Model } from '../model';
+import { Model, PrimaryKey } from '../model';
 
 describe('HasSomeFieldFactory', () => {
   it('should return a function', () => {
@@ -25,7 +25,8 @@ describe('HasSomeFieldFactory', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [],
     } satisfies Model;
 
@@ -40,7 +41,8 @@ describe('HasSomeFieldFactory', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           type: 'string',

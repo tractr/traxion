@@ -23,7 +23,11 @@ describe('createVirtualField', () => {
   it('should create a virtual field with the provided constraints and options', () => {
     const field = createVirtualField(
       'field',
-      { isSortable: true, relation: {} as Function.Narrow<Relation> },
+      {
+        isSortable: true,
+        relation: {} as Function.Narrow<Relation>,
+        foreign: null,
+      },
       { pluralName: 'test' },
     );
 
@@ -31,6 +35,7 @@ describe('createVirtualField', () => {
       type: 'virtual',
       name: 'field',
       pluralName: 'test',
+      foreign: null,
       scalar: null,
       isSortable: true,
       relation: {},
@@ -45,6 +50,7 @@ describe('isVirtualField', () => {
       name: 'field',
       pluralName: 'fields',
       scalar: null,
+      foreign: null,
       relation: {} as Relation,
     } satisfies VirtualField;
 
@@ -69,6 +75,7 @@ describe('isVirtualField', () => {
         name: 'field',
         pluralName: 'fields',
         scalar: null,
+        foreign: null,
         relation: {} as Relation,
       },
       {
@@ -87,6 +94,7 @@ describe('isVirtualField', () => {
         name: 'field',
         pluralName: 'fields',
         scalar: null,
+        foreign: null,
         relation: {},
       },
     ]);

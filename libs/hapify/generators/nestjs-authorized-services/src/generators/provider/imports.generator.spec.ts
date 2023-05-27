@@ -1,13 +1,25 @@
 import { generateImports } from './imports.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 describe('generateImports', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
     name: 'User',
-    pluralName: '',
-    fields: [],
-    primaryKey: null,
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
   const imports = generateImports(model);
 
@@ -22,14 +34,8 @@ describe('generateImports', () => {
   it('returns an array of import declarations with correct named imports', () => {
     expect(imports[0].namedImports).toEqual([{ name: 'Provider' }]);
 
-    expect(imports[1].namedImports).toEqual([
-      { name: 'USER_SERVICE' },
-      { name: 'USER_DEFAULT_SERVICE' },
-    ]);
-
     expect(imports[2].namedImports).toEqual([
-      { name: 'UserService' },
-      { name: 'UserDefaultService' },
+      { name: 'UserAuthorizedService' },
     ]);
   });
 });

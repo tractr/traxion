@@ -2,15 +2,28 @@ import { StructureKind } from 'ts-morph';
 
 import { generateUpdateMethod } from './update-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
+import { compressWhitespace } from '@trxn/nestjs-core';
 
 describe('generateUpdateMethod', () => {
   it('generates a valid update method for a model', () => {
+    const id: PrimaryField = {
+      name: 'id',
+      type: 'primary',
+      pluralName: 'ids',
+      scalar: 'string',
+      relations: [],
+    };
+
     const model: Model = {
       name: 'User',
-      fields: [],
-      pluralName: '',
-      primaryKey: null,
+      pluralName: 'users',
+      fields: [id],
+      primaryKey: {
+        name: 'id',
+        fields: [id],
+      },
+      dbName: null,
     };
 
     const methodDeclaration = generateUpdateMethod(model);
@@ -19,13 +32,10 @@ describe('generateUpdateMethod', () => {
     expect(methodDeclaration.name).toBe('update');
 
     // Check parameters
-    expect(methodDeclaration.parameters).toHaveLength(2);
+    expect(methodDeclaration.parameters).toHaveLength(3);
     expect(methodDeclaration.parameters?.[0].name).toBe('args');
     expect(methodDeclaration.parameters?.[0].type).toBe(
       `Prisma.SelectSubset<T, Prisma.UserUpdateArgs>`,
-    );
-    expect(methodDeclaration.parameters?.[1].initializer).toBe(
-      `this.prismaClient.user`,
     );
 
     // Check type parameters
@@ -38,7 +48,11 @@ describe('generateUpdateMethod', () => {
     ]);
 
     // Check return type
-    expect(methodDeclaration.statements).toBe(`return prisma.update<T>(args);`);
+    expect(
+      compressWhitespace((methodDeclaration.statements as string[]).join('\n')),
+    ).toBe(
+      `const update = async(client: Prisma.UserDelegate<undefined>) => { const user = await this.userService.update<T>(args, client); if (abilities?.cannot(Action.Update, subject('User', user))) throw new ForbiddenException('cannot update User'); return user; } if (prisma) return update(prisma); return this.prisma.$transaction((client) => update(client.user));`,
+    );
 
     // TODO : a check for description ? see with Max
   });

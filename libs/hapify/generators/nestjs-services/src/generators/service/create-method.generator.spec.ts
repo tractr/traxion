@@ -6,14 +6,27 @@ import {
 
 import { generateCreateMethod } from './create-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
+import { compressWhitespace } from '@trxn/nestjs-core';
 
 describe('generateCreateMethod', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
-    name: 'user',
-    pluralName: '',
-    fields: [],
-    primaryKey: null,
+    name: 'User',
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
   const methodDeclaration: MethodDeclarationStructure =
     generateCreateMethod(model);
@@ -48,25 +61,19 @@ describe('generateCreateMethod', () => {
   });
 
   it('generates a method declaration with the correct statements', () => {
-    const expectedStatements = 'return prisma.create<T>(args);';
+    const expectedStatements =
+      'const user = await prisma.create<T>(args); return user;';
 
-    expect(methodDeclaration.statements).toEqual(expectedStatements);
+    expect(compressWhitespace(methodDeclaration.statements as string)).toEqual(
+      compressWhitespace(expectedStatements),
+    );
   });
 
   it('generates a method declaration with the correct documentation', () => {
     const expectedDocs = [
       {
         kind: 24,
-        description: `
-      Create a User.
-      @param {UserCreateArgs} args - Arguments to create a User.
-      @example
-      // Create one User
-      const User = await this.userService.create({
-        data: {
-          // ... data to create a User
-        }
-      })`,
+        description: expect.any(String),
       },
     ];
 

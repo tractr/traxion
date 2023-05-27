@@ -2,14 +2,26 @@ import { DecoratorStructure, StructureKind } from 'ts-morph';
 
 import { generateFindUniqueMethod } from './find-unique-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 describe('generateFindUniqueMethod', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const user: Model = {
     name: 'User',
-    fields: [],
-    pluralName: '',
-    primaryKey: null,
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
   const method = generateFindUniqueMethod(user);
 

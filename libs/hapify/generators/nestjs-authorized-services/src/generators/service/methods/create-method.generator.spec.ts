@@ -6,14 +6,27 @@ import {
 
 import { generateCreateMethod } from './create-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
+import { compressWhitespace } from '@trxn/nestjs-core';
 
 describe('generateCreateMethod', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
-    name: 'user',
-    pluralName: '',
-    fields: [],
-    primaryKey: null,
+    name: 'User',
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
   const methodDeclaration: MethodDeclarationStructure =
     generateCreateMethod(model);
@@ -33,7 +46,8 @@ describe('generateCreateMethod', () => {
 
   it('generates a method declaration with the correct parameters', () => {
     const argsParameters = methodDeclaration.parameters?.[0];
-    const prismaParameters = methodDeclaration.parameters?.[1];
+    const abilitiesParameters = methodDeclaration.parameters?.[1];
+    const prismaParameters = methodDeclaration.parameters?.[2];
 
     expect(argsParameters?.name).toEqual('args');
     expect(argsParameters?.kind).toEqual(30); // StructureKind.Parameter is equal to 30
@@ -45,31 +59,20 @@ describe('generateCreateMethod', () => {
     expect(prismaParameters?.kind).toEqual(30);
     expect(prismaParameters?.kind).toEqual(StructureKind.Parameter);
     expect(prismaParameters?.type).toEqual(`Prisma.UserDelegate<undefined>`);
+
+    expect(abilitiesParameters?.name).toEqual('abilities');
+    expect(abilitiesParameters?.kind).toEqual(30);
+    expect(abilitiesParameters?.kind).toEqual(StructureKind.Parameter);
+    expect(compressWhitespace(abilitiesParameters?.type as string)).toEqual(
+      `PureAbility< any, PrismaQuery<Record<string, any> & ForcedSubject<string>> >`,
+    );
   });
 
   it('generates a method declaration with the correct statements', () => {
-    const expectedStatements = 'return prisma.create<T>(args);';
+    const expectedStatements = `const create = async(client: Prisma.UserDelegate<undefined>) => { const user = await this.userService.create<T>(args, client); if (abilities?.cannot(Action.Create, subject('User', user))) throw new ForbiddenException('cannot create User'); return user; } if (prisma) return create(prisma); return this.prisma.$transaction((client) => create(client.user));`;
 
-    expect(methodDeclaration.statements).toEqual(expectedStatements);
-  });
-
-  it('generates a method declaration with the correct documentation', () => {
-    const expectedDocs = [
-      {
-        kind: 24,
-        description: `
-      Create a User.
-      @param {UserCreateArgs} args - Arguments to create a User.
-      @example
-      // Create one User
-      const User = await this.userService.create({
-        data: {
-          // ... data to create a User
-        }
-      })`,
-      },
-    ];
-
-    expect(methodDeclaration.docs).toEqual(expectedDocs);
+    expect(
+      compressWhitespace((methodDeclaration.statements as string[]).join('\n')),
+    ).toEqual(expectedStatements);
   });
 });

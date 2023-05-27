@@ -2,15 +2,27 @@ import { ParameterDeclarationStructure, StructureKind } from 'ts-morph';
 
 import { generateDeleteMethod } from './delete-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 describe('generateDeleteMethod', () => {
   // Arrange
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
-    name: 'user',
-    pluralName: '',
-    fields: [],
-    primaryKey: null,
+    name: 'User',
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
 
   // Act

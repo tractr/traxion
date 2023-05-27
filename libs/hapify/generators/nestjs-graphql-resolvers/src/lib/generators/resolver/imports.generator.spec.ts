@@ -3,14 +3,26 @@ import { StructureKind } from 'ts-morph';
 import { generateImports } from './imports.generator';
 import { GraphqlResolverImportPathConfig } from '../../config.type';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 describe('generateImports', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
     name: 'User',
-    pluralName: '',
-    fields: [],
-    primaryKey: null,
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
 
   const importPaths: GraphqlResolverImportPathConfig = {
@@ -35,12 +47,7 @@ describe('generateImports', () => {
     ]);
     expect(imports[1].kind).toBe(StructureKind.ImportDeclaration);
     expect(imports[1].moduleSpecifier).toBe('@src/nestjs/services');
-    expect(imports[1].namedImports).toEqual([
-      { name: 'UserService' },
-      { name: 'USER_SERVICE' },
-      { name: 'UserDefaultService' },
-      { name: 'USER_DEFAULT_SERVICE' },
-    ]);
+    expect(imports[1].namedImports).toEqual([{ name: 'UserService' }]);
     expect(imports[2].kind).toBe(StructureKind.ImportDeclaration);
     expect(imports[2].moduleSpecifier).toBe('@nestjs/common');
     expect(imports[2].namedImports).toEqual([{ name: 'Inject' }]);
@@ -62,10 +69,15 @@ describe('generateImports', () => {
     expect(imports[5].moduleSpecifier).toBe('@prisma/client');
     expect(imports[5].namedImports).toEqual([{ name: 'Prisma' }]);
     expect(imports[6].kind).toBe(StructureKind.ImportDeclaration);
-    expect(imports[6].moduleSpecifier).toBe('graphql');
-    expect(imports[6].namedImports).toEqual([{ name: 'GraphQLResolveInfo' }]);
+    expect(imports[6].moduleSpecifier).toBe('@trxn/nestjs-graphql');
+    expect(imports[6].namedImports).toEqual([
+      { name: 'getPathFromGraphQLResolveInfo' },
+    ]);
     expect(imports[7].kind).toBe(StructureKind.ImportDeclaration);
-    expect(imports[7].moduleSpecifier).toBe('../dtos');
-    expect(imports[7].namedImports).toEqual([{ name: 'FindManyUserOutput' }]);
+    expect(imports[7].moduleSpecifier).toBe('graphql');
+    expect(imports[7].namedImports).toEqual([{ name: 'GraphQLResolveInfo' }]);
+    expect(imports[8].kind).toBe(StructureKind.ImportDeclaration);
+    expect(imports[8].moduleSpecifier).toBe('../dtos');
+    expect(imports[8].namedImports).toEqual([{ name: 'FindManyUserOutput' }]);
   });
 });

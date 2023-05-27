@@ -2,14 +2,26 @@ import { JSDocStructure, OptionalKind, WriterFunction } from 'ts-morph';
 
 import { generateCreateMethod } from './create-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 describe('generateCreateMethod', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
-    name: 'user',
-    fields: [],
-    pluralName: '',
-    primaryKey: null,
+    name: 'User',
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
 
   it('should generate the create method with the correct name', () => {

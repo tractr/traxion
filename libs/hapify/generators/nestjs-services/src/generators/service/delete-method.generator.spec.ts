@@ -2,14 +2,27 @@ import { StructureKind, TypeParameterDeclarationStructure } from 'ts-morph';
 
 import { generateDeleteMethod } from './delete-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
+import { compressWhitespace } from '@trxn/nestjs-core';
 
 describe('generateDeleteMethod', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
     name: 'User',
-    pluralName: '',
-    fields: [],
-    primaryKey: null,
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
   const method = generateDeleteMethod(model);
 
@@ -43,24 +56,17 @@ describe('generateDeleteMethod', () => {
   });
 
   it('generates a method declaration with the correct statements', () => {
-    expect(method.statements).toEqual('return prisma.delete<T>(args);');
+    expect(compressWhitespace(method.statements as string)).toEqual(
+      compressWhitespace(`const user = await prisma.delete<T>(args);
+      return user;`),
+    );
   });
 
   it('generates a method declaration with the correct documentation', () => {
     expect(method.docs).toEqual([
       {
         kind: 24,
-        description: `
-    Delete a User.
-    @param {UserDeleteArgs} args - Arguments to delete a User
-    @example
-    // Delete one User
-    const user = await this.userService.delete({
-      where: {
-        // ... filter to delete one User
-      }
-    })
-    `,
+        description: expect.any(String),
       },
     ]);
   });

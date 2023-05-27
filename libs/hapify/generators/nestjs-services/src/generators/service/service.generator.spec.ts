@@ -1,19 +1,42 @@
+import { DataSource } from '@prisma/generator-helper';
+
 import { generateServiceClass } from './service.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 describe('generateServiceClass', () => {
   it('should return a ClassDeclarationStructure with the correct properties', () => {
-    // Arrange
-    const model: Model = {
-      name: 'User',
-      pluralName: '',
-      fields: [],
-      primaryKey: null,
+    const id: PrimaryField = {
+      name: 'id',
+      type: 'primary',
+      pluralName: 'ids',
+      scalar: 'string',
+      relations: [],
     };
 
+    const model: Model = {
+      name: 'User',
+      pluralName: 'users',
+      fields: [id],
+      primaryKey: {
+        name: 'id',
+        fields: [id],
+      },
+      dbName: null,
+    };
+
+    const datasources: DataSource[] = [
+      {
+        name: 'db',
+        url: { fromEnvVar: '', value: '' },
+        activeProvider: 'postgres',
+        provider: 'postgres',
+        schemas: [],
+      },
+    ];
+
     // Act
-    const classDeclaration = generateServiceClass(model);
+    const classDeclaration = generateServiceClass(model, datasources);
 
     // Check function name
     expect(classDeclaration.name).toBe('UserService');

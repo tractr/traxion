@@ -7,7 +7,13 @@ import {
   NestInterceptor,
   NotFoundException,
 } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import {
+  PrismaClientInitializationError,
+  PrismaClientKnownRequestError,
+  PrismaClientRustPanicError,
+  PrismaClientUnknownRequestError,
+  PrismaClientValidationError,
+} from '@prisma/client/runtime';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -20,9 +26,9 @@ export class PrismaExceptionInterceptor implements NestInterceptor {
       catchError((error) => {
         let errorCode: string | undefined;
 
-        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error instanceof PrismaClientKnownRequestError) {
           errorCode = error.code;
-        } else if (error instanceof Prisma.PrismaClientInitializationError) {
+        } else if (error instanceof PrismaClientInitializationError) {
           errorCode = error.errorCode;
         }
         if (errorCode && errorCode.substring(0, 2) === 'P2') {
@@ -32,12 +38,12 @@ export class PrismaExceptionInterceptor implements NestInterceptor {
           throw new ConflictException(error.message);
         }
 
-        if (error instanceof Prisma.PrismaClientValidationError) {
+        if (error instanceof PrismaClientValidationError) {
           throw new ConflictException(error.message);
         }
         if (
-          error instanceof Prisma.PrismaClientUnknownRequestError ||
-          error instanceof Prisma.PrismaClientRustPanicError
+          error instanceof PrismaClientUnknownRequestError ||
+          error instanceof PrismaClientRustPanicError
         ) {
           throw new InternalServerErrorException(error.message);
         }

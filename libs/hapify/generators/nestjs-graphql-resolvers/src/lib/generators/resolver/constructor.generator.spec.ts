@@ -6,16 +6,28 @@ import {
 
 import { generateConstructor } from './constructor.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 describe('generateConstructor', () => {
   it('should generate constructor with two parameters', () => {
     // Arrange
+    const id: PrimaryField = {
+      name: 'id',
+      type: 'primary',
+      pluralName: 'ids',
+      scalar: 'string',
+      relations: [],
+    };
+
     const model: Model = {
-      name: 'user',
-      pluralName: '',
-      fields: [],
-      primaryKey: null,
+      name: 'User',
+      pluralName: 'users',
+      fields: [id],
+      primaryKey: {
+        name: 'id',
+        fields: [id],
+      },
+      dbName: null,
     };
 
     // Act
@@ -25,7 +37,7 @@ describe('generateConstructor', () => {
     // Assert
     expect(constructor).toBeDefined();
     expect(constructor?.kind).toEqual(StructureKind.Constructor);
-    expect(constructor?.parameters).toHaveLength(2);
+    expect(constructor?.parameters).toHaveLength(1);
 
     const firstParameter = constructor?.parameters?.[0];
     expect(firstParameter?.kind).toEqual(StructureKind.Parameter);
@@ -33,14 +45,6 @@ describe('generateConstructor', () => {
     expect(firstParameter?.type).toEqual(`UserService`);
     expect(firstParameter?.scope).toEqual(Scope.Private);
     expect(firstParameter?.isReadonly).toEqual(true);
-    expect(firstParameter?.decorators).toHaveLength(1);
-
-    const secondParameter = constructor?.parameters?.[1];
-    expect(secondParameter?.kind).toEqual(30);
-    expect(secondParameter?.name).toEqual(`userDefaultService`);
-    expect(secondParameter?.type).toEqual(`UserDefaultService`);
-    expect(secondParameter?.scope).toEqual(Scope.Private);
-    expect(secondParameter?.isReadonly).toEqual(true);
-    expect(secondParameter?.decorators).toHaveLength(1);
+    expect(firstParameter?.decorators).toHaveLength(0);
   });
 });

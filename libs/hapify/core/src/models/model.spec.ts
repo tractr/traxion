@@ -10,6 +10,7 @@ import {
   hasSomeStringField,
   hasSomeVirtualField,
   Model,
+  PrimaryKey,
   Relation,
 } from './model';
 
@@ -18,7 +19,8 @@ describe('hasSomeBooleanField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -44,7 +46,8 @@ describe('hasSomeBooleanField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -78,7 +81,8 @@ describe('hasSomeDateField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -104,7 +108,8 @@ describe('hasSomeDateField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -138,7 +143,8 @@ describe('hasSomeEnumField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -164,7 +170,8 @@ describe('hasSomeEnumField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -199,7 +206,8 @@ describe('hasSomeFileField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -225,7 +233,8 @@ describe('hasSomeFileField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -259,7 +268,8 @@ describe('hasSomeForeignField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -285,7 +295,8 @@ describe('hasSomeForeignField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -320,7 +331,8 @@ describe('hasSomeNumberField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -346,7 +358,8 @@ describe('hasSomeNumberField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -380,7 +393,8 @@ describe('hasSomeObjectField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -406,7 +420,8 @@ describe('hasSomeObjectField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -440,7 +455,20 @@ describe('hasSomePrimaryField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      // FIXME: This is not a valid primary key
+      primaryKey: {
+        fields: [
+          {
+            name: 'field3',
+            pluralName: 'field3s',
+            scalar: 'string',
+            type: 'primary',
+            relations: [],
+          },
+        ],
+        name: 'id',
+      },
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -466,7 +494,19 @@ describe('hasSomePrimaryField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {
+        fields: [
+          {
+            name: 'field3',
+            pluralName: 'field3s',
+            scalar: 'string',
+            type: 'primary',
+            relations: [],
+          },
+        ],
+        name: 'id',
+      },
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -501,7 +541,8 @@ describe('hasSomeStringField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -527,7 +568,8 @@ describe('hasSomeStringField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -561,7 +603,8 @@ describe('hasSomeVirtualField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -587,7 +630,8 @@ describe('hasSomeVirtualField', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'field1',
@@ -607,6 +651,7 @@ describe('hasSomeVirtualField', () => {
           scalar: null,
           type: 'virtual',
           relation: {} as Relation,
+          foreign: [],
         },
       ],
     } satisfies Model;

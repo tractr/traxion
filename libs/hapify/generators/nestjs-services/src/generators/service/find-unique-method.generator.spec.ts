@@ -8,15 +8,28 @@ import {
 
 import { generateFindUniqueMethod } from './find-unique-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 import { indent } from '@trxn/hapify-devkit';
+import { compressWhitespace } from '@trxn/nestjs-core';
 
 describe('generateFindUniqueMethod', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
     name: 'User',
     pluralName: '',
-    fields: [],
-    primaryKey: null,
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
 
   const methodDeclaration: MethodDeclarationStructure =
@@ -55,8 +68,8 @@ describe('generateFindUniqueMethod', () => {
   });
 
   it('generates a method declaration with the correct statements', () => {
-    expect(methodDeclaration.statements).toBe(
-      'return prisma.findUnique<T>(args);',
+    expect(compressWhitespace(methodDeclaration.statements as string)).toBe(
+      'const user = await prisma.findUnique<T>(args); return user;',
     );
   });
 

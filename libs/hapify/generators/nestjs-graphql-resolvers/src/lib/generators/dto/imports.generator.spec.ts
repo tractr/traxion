@@ -3,7 +3,7 @@ import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 import { generateImports } from './imports.generator';
 import { GraphqlResolverImportPathConfig } from '../../config.type';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 jest.mock('@trxn/hapify-devkit', () => ({
   resolveDynamicPath: jest.fn((path: string, _rootPath: string) => path),
@@ -15,11 +15,23 @@ describe('generateImports', () => {
     nestjsServices: '',
   };
 
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
-    name: 'testModel',
-    pluralName: '',
-    fields: [],
-    primaryKey: null,
+    name: 'User',
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
 
   it('should generate correct import declarations', () => {
@@ -28,12 +40,12 @@ describe('generateImports', () => {
         kind: StructureKind.ImportDeclaration,
         moduleSpecifier: './graphql-dtos-path',
         namedImports: [
-          { name: 'TestModel' },
-          { name: 'FindUniqueTestModelArgs' },
-          { name: 'FindManyTestModelArgs' },
-          { name: 'CreateOneTestModelArgs' },
-          { name: 'UpdateOneTestModelArgs' },
-          { name: 'DeleteOneTestModelArgs' },
+          { name: 'User' },
+          { name: 'FindUniqueUserArgs' },
+          { name: 'FindManyUserArgs' },
+          { name: 'CreateOneUserArgs' },
+          { name: 'UpdateOneUserArgs' },
+          { name: 'DeleteOneUserArgs' },
         ],
       },
       {
