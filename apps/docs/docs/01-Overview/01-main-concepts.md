@@ -28,7 +28,7 @@ However, it usually comes with some drawbacks:
 
 ## How does Traxion solve code generation pains ?
 
-Traxion aims to bring the benefits of code generation in your project, while letting the drawbacks at the door, by using [prisma generators](link). Here are the levers used by traxion to solve this problem:
+Traxion aims to bring the benefits of code generation in your project, while letting the drawbacks at the door, by using [prisma generators](https://www.prisma.io/docs/concepts/components/prisma-schema/generators). Here are the levers used by traxion to solve this problem:
 
 - **Prisma schema as a source of truth**: The generated code is always in sync with the schema, and any change to the schema will be reflected in the generated code. Typescript will do the rest an rise errors before you even run the code.
 
