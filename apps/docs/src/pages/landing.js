@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable import/default */
 /* eslint-disable import/no-unresolved */
 import Link from '@docusaurus/Link';

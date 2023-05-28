@@ -2,32 +2,27 @@
 id: getting-started
 title: Getting started
 sidebar_label: Getting started
+slug: /
 ---
-
 ## Introduction
 
-In this tutorial, we will learn how to generate code for a NestJS application from a Prisma schema using a set of
-Node.js libraries. NestJS is a popular Node.js framework that provides a robust platform for building scalable and
-modular applications. Prisma, on the other hand, is a modern ORM for Node.js that makes it easy to interact with
-databases.
-
-Let's get started!
+In this guide, we will explore how to generate code for a NestJS application from a Prisma schema with the help of Traxion, a collection of Node.js libraries. NestJS, a widely used Node.js framework, offers a robust foundation for building scalable and modular applications, while Prisma is a modern Node.js ORM that simplifies database interactions. Let's dive right in!
 
 ## Pre-requisites
 
-We will assume you are in a nestjs application with prisma configured. You can find information in the [nestjs documentation](https://docs.nestjs.com/recipes/prisma#set-up-prisma).
+This guide assumes that you have a NestJS application with a configured Prisma schema. You can refer to the [nestjs documentation](https://docs.nestjs.com/recipes/prisma#set-up-prisma) for Prisma setup information.
 
-So for this getting started we'll assume you have a nestjs application configured with a prisma schema that is able to generate with the commande `npx prisma generate` and you database (sqlite, postgresql or other) is correctly link with prisma.
+Ensure that your NestJS application with a Prisma schema is correctly linked to your database (SQLite, PostgreSQL, or others), and is able to run `npx prisma generate`.
 
-## Install the dependencies
+## Installing Dependencies
 
-Traxion is a (set of) prisma generator(s) that will leverage the information inside prisma to generate you a fully operational graphQL API. To use this generator we'll first install the traxion generator dependency:
+Traxion is a Prisma generator that utilizes the data within Prisma to create a fully functional GraphQL API. Let's start by installing the Traxion generator dependency:
 
 ```bash
 npm i -D @trxn/prisma-traxion-generator
 ```
 
-This generator generate code that use some node package to be fully operational. You must install this package in your app to be able to run the generated code:
+The generated code will need certain Node packages to run effectively. Install these packages in your app using the command below:
 
 ```bash
 npm i --save \
@@ -43,9 +38,9 @@ npm i --save \
   class-transformer
 ```
 
-## Configure the generator inside the prisma schema
+## Configuring the Generator within the Prisma Schema
 
-Add to your schema the following lines:
+Add the following lines to your schema:
 
 ```prisma
 generator traxion {
@@ -57,17 +52,17 @@ generator traxion {
 }
 ```
 
-The `output` folder is the one who will host your generated files. Be careful to not add any code inside as he will be totally replaced each time you generate with prisma.
+The `output` directory will contain your generated files. Avoid adding any code here as it will be replaced every time you run Prisma generate.
 
-The `tsConfigFilePath` must point on a valid `tsconfig.json`. That will configured tsMorph correctly with your application typescript configuration.
+The `tsConfigFilePath` should point to a valid `tsconfig.json`, which will help configure tsMorph correctly according to your application's TypeScript configuration.
 
-Note: This generator make use of a specific `User` table with some constraint. In this getting started we'll not describe how to configured this user. Use this following minimal `User` when using this generator the first time:
+This generator relies on a specific `User` table with certain constraints. This guide doesn't cover user configuration. When using this generator for the first time, use the following minimal `User` model:
 
 ```prisma
 model User {
   id       Int    @id @default(autoincrement())
   email    String @unique
-  /// @trxn/roles
+  /// @trxn/role
   role     String @default("user")
   /// @trxn/hidden
   /// @trxn/encrypted
@@ -75,17 +70,17 @@ model User {
 }
 ```
 
-## Generate your code
+## Generating Your Code
 
-Now that prisma is fully configured you can generate your code as normal when using prisma:
+Now that Prisma is fully configured, you can generate your code in the standard Prisma way:
 
 ```bash
 npx prisma generate
 ```
 
-After the generation process ended you'll find the generated code inside the directory you configured in your schema.
+Post-generation, you'll find the generated code in the directory specified in your schema.
 
-Note: Traxion is not responsible to format the files. This process is inherent in each project so we advise you to add in your generate process a format step. It could be like that (`package.json`):
+Please note that Traxion does not handle file formatting. This process is project-specific, so we recommend incorporating a format step in your generation process (e.g., `package.json`):
 
 ```json
 {
@@ -98,11 +93,11 @@ Note: Traxion is not responsible to format the files. This process is inherent i
 }
 ```
 
-More importantly you should'nt version the generated code and let you CI/CD process do this step when deploying your app.
+It's also important not to version the generated code and let your CI/CD process handle this step during app deployment.
 
-## Configure your nestjs app
+## Configuring Your NestJS App
 
-Now you can import `TraxionModule` from the generated forlder and use it inside you `app.module.ts`:
+Lastly, you can import `TraxionModule` from the generated folder and utilize it in your `app.module.ts`:
 
 ```ts
 import { Module } from '@nestjs/common';
@@ -116,4 +111,4 @@ import { TraxionModule } from './generated/modules/traxion.module';
 export class AppModule {}
 ```
 
-You can now start your app and enjoy your free GraphQL authorized API !
+Now, you're all set! Launch your app and enjoy your fully-featured, authorized GraphQL API.

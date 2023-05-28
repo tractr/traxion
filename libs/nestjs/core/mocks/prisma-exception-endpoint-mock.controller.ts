@@ -5,7 +5,7 @@ import {
   PrismaClientRustPanicError,
   PrismaClientUnknownRequestError,
   PrismaClientValidationError,
-} from '@prisma/client/runtime';
+} from '@prisma/client/runtime/library';
 
 @Controller()
 export class PrismaExceptionEndpointMockController {

@@ -13,7 +13,7 @@ import {
   PrismaClientRustPanicError,
   PrismaClientUnknownRequestError,
   PrismaClientValidationError,
-} from '@prisma/client/runtime';
+} from '@prisma/client/runtime/library';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -21,7 +21,7 @@ import { catchError } from 'rxjs/operators';
 export class PrismaExceptionInterceptor implements NestInterceptor {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
-  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     return next.handle().pipe(
       catchError((error) => {
         let errorCode: string | undefined;

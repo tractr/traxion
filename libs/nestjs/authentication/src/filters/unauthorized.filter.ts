@@ -21,10 +21,17 @@ export class UnauthorizedExceptionFilter implements ExceptionFilter {
       console.warn(
         'UnauthorizedExceptionFilter: response not found in context, you should `context: ({ req, res }) => ({ req, res })` in your graphql context',
       );
-      throw exception;
     }
 
+    if (!response) {
+      console.warn(
+        'UnauthorizedExceptionFilter: response not found in context',
+      );
+      return;
+    }
+
+    const status = exception.getStatus();
     response.cookie(this.cookieOptionsService.cookieName, '', {});
-    throw exception;
+    response.status(status).json(exception);
   }
 }
