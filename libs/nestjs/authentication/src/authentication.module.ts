@@ -67,6 +67,7 @@ export class AuthenticationModule extends ConfigurableModuleClass {
         CookieOptionsService,
         JwtOptionsService,
         LocalStrategy,
+        HashService,
       ],
       providers: [
         ...(module.providers || []),

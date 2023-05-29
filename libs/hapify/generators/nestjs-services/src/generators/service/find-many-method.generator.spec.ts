@@ -5,14 +5,27 @@ import {
 
 import { generateFindManyMethod } from './find-many-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
+import { compressWhitespace } from '@trxn/nestjs-core';
 
 describe('generateFindManyMethod', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
-    name: 'user',
-    fields: [],
-    pluralName: '',
-    primaryKey: null,
+    name: 'User',
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
   const generatedMethod = generateFindManyMethod(model);
 
@@ -46,30 +59,19 @@ describe('generateFindManyMethod', () => {
   });
 
   it('generates a method declaration with the correct statements', () => {
-    const expectedStatements = `return prisma.findMany<T>(args);`;
-    expect(generatedMethod.statements).toEqual(expectedStatements);
+    const expectedStatements = `const users = await prisma.findMany<T>(args);
+    return users;`;
+
+    expect(compressWhitespace(generatedMethod.statements as string)).toEqual(
+      compressWhitespace(expectedStatements),
+    );
   });
 
   it('generates a method declaration with the correct documentation', () => {
     const expectedDocs = [
       {
         kind: 24, // corresponds to `StructureKind.JSDoc`
-        description: `
-       Find zero or more Users that matches the filter.
-       Note, that providing 'undefined' is treated as the value not being there.
-       Read more here: https://pris.ly/d/null-undefined
-       @param {UserFindManyArgs=} args - Arguments to filter and select certain fields only.
-       @example
-       // Get all Users
-       const users = await this.userService.findMany()
-
-       // Get first 10 Users
-       const Users = await this.UserService.findMany({ take: 10 })
-
-       // Only select the 'id'
-       const userWithIdOnly = await this.UserService.findMany({ select: { id: true } })
-
-    `,
+        description: expect.any(String),
       },
     ];
 

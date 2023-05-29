@@ -7,14 +7,27 @@ import {
 
 import { generateFindFirstMethod } from './find-first-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
+import { compressWhitespace } from '@trxn/nestjs-core';
 
 describe('generateFindFirstMethod', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
-    name: 'user',
-    pluralName: '',
-    fields: [],
-    primaryKey: null,
+    name: 'User',
+    pluralName: 'users',
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
   const method: MethodDeclarationStructure = generateFindFirstMethod(model);
 
@@ -50,7 +63,9 @@ describe('generateFindFirstMethod', () => {
   });
 
   it('generates a method declaration with the correct statements', () => {
-    expect(method.statements).toEqual(`return prisma.findFirst<T>(args);`);
+    expect(compressWhitespace(method.statements as string)).toEqual(
+      `const user = await prisma.findFirst<T>(args); return user;`,
+    );
   });
 
   it('generates a method declaration with the correct documentation', () => {

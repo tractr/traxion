@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "hapify-generators-traxion",
+  "projectType": "library",
+  "sourceRoot": "libs/hapify/generators/traxion/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "assets": ["libs/hapify/generators/traxion/*.md"],
+        "main": "libs/hapify/generators/traxion/src/index.ts",
+        "outputPath": "dist/libs/hapify/generators/traxion",
+        "packageJson": "libs/hapify/generators/traxion/package.json",
+        "tsConfig": "libs/hapify/generators/traxion/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/hapify/generators/traxion/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "test": {
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/hapify/generators/traxion/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    },
+    "update-peer-dependencies": {
+      "executor": "@trxn/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/hapify/generators/traxion/package.json"
+      }
+    }
+  }
+}

@@ -13,7 +13,7 @@
           "optimization": true
         }
       },
-      "executor": "@nrwl/webpack:webpack",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": [],
         "compiler": "tsc",
@@ -33,14 +33,19 @@
             "forwardAllArgs": false
           },
           {
-            "command": "nx format --projects examples-api-prisma --uncommitted"
+            "command": "npm run format",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "nx lint examples-api-prisma --fix",
+            "forwardAllArgs": false
           }
         ],
         "cwd": ".",
         "parallel": false
       }
     },
-    "lint-disable": {
+    "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": ["examples/api-prisma/**/*.ts"]
@@ -50,12 +55,13 @@
     "serve": {
       "configurations": {
         "production": {
-          "buildTarget": "examples-api-prisma:build-custom:production"
+          "buildTarget": "examples-api-prisma:build:production"
         }
       },
       "executor": "@nrwl/js:node",
       "options": {
-        "buildTarget": "examples-api-prisma:build-custom"
+        "buildTarget": "examples-api-prisma:build",
+        "inspect": true
       }
     },
     "test": {

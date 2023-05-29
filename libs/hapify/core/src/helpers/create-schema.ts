@@ -1,4 +1,6 @@
 /* eslint-disable no-continue */
+import { inspect } from 'util';
+
 import { plural } from 'pluralize';
 
 import { createManyManyRelation } from './create-many-many-relation';
@@ -68,6 +70,8 @@ export function createSchema(definition: SchemaDeclaration) {
         fields: getPrimaryFields(fields),
       },
       documentation: model.documentation,
+      metadata: model.metadata,
+      dbName: model.dbName,
     };
   });
 

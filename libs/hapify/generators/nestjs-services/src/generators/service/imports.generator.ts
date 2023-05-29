@@ -1,10 +1,10 @@
 import { constant, kebab, pascal } from 'case';
 import { ImportDeclarationStructure, StructureKind } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { isEncryptedField, Model } from '@trxn/hapify-core';
 
 export function generateImports(model: Model): ImportDeclarationStructure[] {
-  return [
+  const imports: ImportDeclarationStructure[] = [
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@nestjs/common`,
@@ -13,12 +13,16 @@ export function generateImports(model: Model): ImportDeclarationStructure[] {
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@prisma/client`,
-      namedImports: [{ name: 'Prisma' }],
+      namedImports: [{ name: 'Prisma' }, { name: pascal(model.name) }],
     },
     {
       kind: StructureKind.ImportDeclaration,
       moduleSpecifier: `@trxn/nestjs-database`,
-      namedImports: [{ name: 'PrismaService' }],
+      namedImports: [
+        { name: 'PrismaService' },
+        { name: 'excludePrismaField' },
+        { name: 'ExcludePrismaField' },
+      ],
     },
     {
       kind: StructureKind.ImportDeclaration,
@@ -31,4 +35,16 @@ export function generateImports(model: Model): ImportDeclarationStructure[] {
       namedImports: [{ name: `${constant(model.name)}_DEFAULT_SERVICE` }],
     },
   ];
+
+  const hasEncryptedFields = model.fields.filter(isEncryptedField).length > 0;
+
+  if (hasEncryptedFields) {
+    imports.push({
+      kind: StructureKind.ImportDeclaration,
+      moduleSpecifier: `./encryption.service`,
+      namedImports: [{ name: `EncryptionService` }],
+    });
+  }
+
+  return imports;
 }

@@ -1,13 +1,11 @@
 {
   "name": "@trxn/nestjs-casl",
-  "version": "2.1.21",
+  "version": "2.1.22-next.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/tractr/traxion"
   },
-  "dependencies": {
-    "@swc/helpers": "~0.4.11"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "publishConfig": {
     "access": "public",

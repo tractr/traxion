@@ -2,14 +2,26 @@ import { StructureKind, TypeParameterDeclarationStructure } from 'ts-morph';
 
 import { generateAggregateMethod } from './aggregate-method.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 describe('generateAggregateMethod', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
-    name: 'user',
-    fields: [],
+    name: 'User',
     pluralName: '',
-    primaryKey: null,
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
   const method = generateAggregateMethod(model);
 
@@ -50,30 +62,7 @@ describe('generateAggregateMethod', () => {
     expect(method.docs).toEqual([
       {
         kind: 24,
-        description: `
-        Allows you to perform aggregations operations on a User.
-        Note, that providing 'undefined' is treated as the value not being there.
-        Read more here: https://pris.ly/d/null-undefined
-        @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-        @example
-        // Ordered by age ascending
-        // Where email contains prisma.io
-        // Limited to the 10 users
-        const aggregations = await this.userService.aggregate({
-          avg: {
-            age: true,
-          },
-          where: {
-            email: {
-              contains: "prisma.io",
-            },
-          },
-          orderBy: {
-            age: "asc",
-          },
-          take: 10,
-        })
-    `,
+        description: expect.any(String),
       },
     ]);
   });

@@ -53,17 +53,23 @@ for (const [projectName, project] of projects) {
     console.warn(`Skipping ${projectName} because it is an application`);
     continue;
   }
-  if (!project.targets.publish || !project.targets.build) {
+  if (!project.targets.publish && !project.targets.build) {
     console.warn(
-      project.targets,
       `Skipping ${projectName} because it has no publish or build target`,
     );
     continue;
   }
 
-  const outputPath = (
-    project.targets.build.options.outputPath || project.targets.build.outputs[0]
-  ).replace('{workspaceRoot}', '');
+  let outputPath =
+    project.targets.build?.options.outputPath ||
+    project.targets.build?.outputs?.[0];
+
+  if (!outputPath) {
+    console.warn(`Skipping ${projectName} because it has no output path`);
+    continue;
+  }
+
+  outputPath = outputPath.replace('{workspaceRoot}', '');
 
   const packageJson = readJsonFile(
     join(traxionDir, outputPath, 'package.json'),

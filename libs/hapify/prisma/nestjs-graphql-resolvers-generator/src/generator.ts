@@ -8,7 +8,7 @@ import { version } from '../package.json';
 
 import { createSchema } from '@trxn/hapify-core';
 import { convertDmmfToHapifySchemaDeclaration } from '@trxn/hapify-devkit';
-import { generate as generateNestjsResolvers } from '@trxn/hapify-generator-graphql-resolvers';
+import { generate as generateNestjsResolvers } from '@trxn/hapify-generator-nestjs-graphql-resolvers';
 
 export const GENERATOR_NAME = 'Hapify Prisma NestJs/GraphqlResolvers';
 

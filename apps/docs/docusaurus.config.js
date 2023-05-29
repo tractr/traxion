@@ -1,7 +1,6 @@
 module.exports = {
   title: 'Traxion',
-  tagline:
-    'From Prisma to anything',
+  tagline: 'From Prisma to anything',
   url: 'https://www.traxion.dev',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -11,6 +10,10 @@ module.exports = {
   projectName: 'traxion.github.io',
   deploymentBranch: 'main',
   trailingSlash: true,
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
   themeConfig: {
     navbar: {
       title: 'Traxion',
@@ -19,12 +22,6 @@ module.exports = {
         src: 'img/logo.svg',
       },
       items: [
-        {
-          to: 'docs/',
-          activeBasePath: 'docs',
-          label: 'Docs',
-          position: 'left',
-        },
         {
           href: 'https://github.com/tractr/traxion',
           label: 'GitHub',
@@ -40,8 +37,8 @@ module.exports = {
           items: [
             {
               label: 'Getting started',
-              to: '/docs',
-            }
+              to: '/',
+            },
           ],
         },
         {
@@ -50,7 +47,7 @@ module.exports = {
             {
               label: 'Discord',
               href: 'https://discord.traxion.dev/',
-            }
+            },
           ],
         },
         {
@@ -71,12 +68,14 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/tractr/traxion/tree/main/apps/docs/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+        blog: false,
       },
     ],
   ],

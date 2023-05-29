@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { hasSomeFieldFactory } from './factories';
 import {
   BaseField,
   Constraints,
@@ -10,7 +11,6 @@ import {
   PrimaryField,
   VirtualField,
 } from '../fields';
-import { hasSomeFieldFactory } from './factories';
 
 /**
  * One-to-many relation
@@ -84,8 +84,10 @@ export type Model = {
   name: string;
   pluralName: string;
   fields: Field[];
-  primaryKey: PrimaryKey | null;
+  primaryKey: PrimaryKey;
   documentation?: string;
+  metadata?: Record<string, unknown>;
+  dbName: string | null;
 };
 
 export type ModelDeclaration = {
@@ -94,6 +96,21 @@ export type ModelDeclaration = {
   fields: FieldDeclaration[];
   primaryKey: PrimaryKeyDeclaration | null;
   documentation?: string;
+  metadata?: Record<string, unknown>;
+  dbName: string | null;
+};
+
+export type OwnedModel = {
+  own: ModelWithOwnership;
+  relation: Relation;
+  on?: {
+    model: Model;
+    field: ForeignField | ForeignField[];
+  };
+};
+
+export type ModelWithOwnership = Model & {
+  ownedModels: OwnedModel[];
 };
 
 /**

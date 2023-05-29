@@ -8,7 +8,31 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { isEncryptedField, isHiddenField, Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
+
+export function generateCreateStatementMethod(model: Model): string {
+  const hiddenFields = model.fields.filter(isHiddenField);
+  const modelName = camel(model.name);
+
+  const encryptedFields = model.fields.filter(isEncryptedField);
+  const hasEncryptedFields = encryptedFields.length > 0;
+
+  return `${
+    hasEncryptedFields
+      ? ` const { data } = args;
+          const ${modelName} = await prisma.create<T>({
+            ...args,
+            data: await this.encryptFields(data),
+          });`
+      : ` const ${modelName} = await prisma.create<T>(args);`
+  }
+  ${
+    hiddenFields.length
+      ? `return ${modelName} === null ? ${modelName} : this.excludeHiddenFields(${modelName}, args.select);`
+      : `return ${modelName};`
+  }`;
+}
 
 export const generateCreateMethod = (
   model: Model,
@@ -38,7 +62,7 @@ export const generateCreateMethod = (
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `
+      description: indent`
       Create a ${pascal(model.name)}.
       @param {${pascal(
         model.name,
@@ -61,7 +85,7 @@ export const generateCreateMethod = (
     name: 'create',
     typeParameters,
     parameters,
-    statements: `return prisma.create<T>(args);`,
+    statements: generateCreateStatementMethod(model),
     docs,
   };
 };

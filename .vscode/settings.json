@@ -19,6 +19,8 @@
     "codecov",
     "Concat",
     "Datamodel",
+    "datasource",
+    "datasources",
     "datetime",
     "dbml",
     "deepmerge",

@@ -24,6 +24,7 @@ describe('isRelationField', () => {
       type: 'virtual',
       scalar: null,
       name: 'fullName',
+      foreign: null,
       pluralName: 'fullNames',
       relation: {} as Relation,
     } satisfies VirtualField;

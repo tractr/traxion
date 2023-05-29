@@ -26,6 +26,6 @@ export default {
     '<rootDir>/libs/nestjs/mailjet',
     '<rootDir>/libs/hapify/core',
     '<rootDir>/libs/hapify/generators/nestjs-services',
-    '<rootDir>/libs/hapify/generators/graphql-resolvers',
+    '<rootDir>/libs/hapify/generators/nestjs-graphql-resolvers',
   ],
 };

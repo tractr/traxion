@@ -1,20 +1,32 @@
 import { generateServiceDefaultClass } from './service-defaults.generator';
 
-import { Model } from '@trxn/hapify-core';
+import { Model, PrimaryField } from '@trxn/hapify-core';
 
 describe('generateServiceDefaultClass', () => {
+  const id: PrimaryField = {
+    name: 'id',
+    type: 'primary',
+    pluralName: 'ids',
+    scalar: 'string',
+    relations: [],
+  };
+
   const model: Model = {
-    name: 'ExampleModel',
+    name: 'User',
     pluralName: '',
-    fields: [],
-    primaryKey: null,
+    fields: [id],
+    primaryKey: {
+      name: 'id',
+      fields: [id],
+    },
+    dbName: null,
   };
   it('should generate a default service class with the correct name and decorator', () => {
     const serviceClass = generateServiceDefaultClass(model);
 
     // Check class declaration
     expect(serviceClass.kind).toBe(2); // StructureKind.Class is equal to 2
-    expect(serviceClass.name).toBe('ExampleModelDefaultService');
+    expect(serviceClass.name).toBe('UserDefaultService');
     expect(serviceClass.isExported).toBe(true);
     expect(serviceClass.ctors).toEqual([]);
 

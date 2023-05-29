@@ -22,7 +22,7 @@ export type CaslModuleOptions<
   B extends AbilityBuilder<any>,
 > = {
   rolePermissions: Record<R, DefinePermissions<B, U>>;
-  getRoles: (user: U) => R[];
+  getRoles: (user: U) => R[] | R;
   publicPermissions?: DefinePublicPermissions<B>;
 };
 

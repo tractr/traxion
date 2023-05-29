@@ -8,7 +8,23 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { isHiddenField, Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
+
+export function generateFindUniqueStatementMethod(model: Model): string {
+  const modelName = camel(model.name);
+  const hiddenFields = model.fields.filter(isHiddenField);
+
+  return `
+    const ${modelName} = await prisma.findUnique<T>(args);
+
+    ${
+      hiddenFields.length
+        ? `return ${modelName} === null ? ${modelName} : this.excludeHiddenFields(${modelName}, args.select);`
+        : `return ${modelName};`
+    }
+  `;
+}
 
 export const generateFindUniqueMethod = (
   model: Model,
@@ -40,7 +56,7 @@ export const generateFindUniqueMethod = (
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `
+      description: indent`
     Find zero or one ${pascal(model.name)} that matches the filter.
     @param {${pascal(
       model.name,
@@ -64,7 +80,7 @@ export const generateFindUniqueMethod = (
     name: 'findUnique',
     typeParameters,
     parameters,
-    statements: `return prisma.findUnique<T>(args);`,
+    statements: generateFindUniqueStatementMethod(model),
     docs,
   };
 };

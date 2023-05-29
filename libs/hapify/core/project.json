@@ -38,7 +38,7 @@
       "outputs": ["{workspaceRoot}/coverage/libs/hapify/core"]
     },
     "update-peer-dependencies": {
-      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "executor": "@trxn/schematics:update-peer-dependencies",
       "options": {
         "packageJsonPath": "{workspaceRoot}/dist/libs/hapify/core/package.json"
       }

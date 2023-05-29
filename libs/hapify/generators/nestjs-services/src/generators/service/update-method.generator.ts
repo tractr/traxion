@@ -8,7 +8,31 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { isEncryptedField, isHiddenField, Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
+
+export function generateUpdateStatementMethod(model: Model): string {
+  const hiddenFields = model.fields.filter(isHiddenField);
+  const modelName = camel(model.name);
+
+  const encryptedFields = model.fields.filter(isEncryptedField);
+  const hasEncryptedFields = encryptedFields.length > 0;
+
+  return `${
+    hasEncryptedFields
+      ? ` const { data } = args;
+          const ${modelName} = await prisma.update<T>({
+            ...args,
+            data: await this.encryptFields(data),
+          });`
+      : `const ${modelName} = await prisma.update<T>(args);`
+  }
+  ${
+    hiddenFields.length
+      ? `return ${modelName} === null ? ${modelName} : this.excludeHiddenFields(${modelName}, args.select);`
+      : `return ${modelName};`
+  }`;
+}
 
 export const generateUpdateMethod = (
   model: Model,
@@ -38,7 +62,7 @@ export const generateUpdateMethod = (
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `
+      description: indent`
        Update a ${pascal(model.name)}.
        @param {${pascal(
          model.name,
@@ -54,8 +78,7 @@ export const generateUpdateMethod = (
          data: {
            // ... provide data here
          }
-       })
-    `,
+       })`,
     },
   ];
 
@@ -65,7 +88,7 @@ export const generateUpdateMethod = (
     name: 'update',
     typeParameters,
     parameters,
-    statements: `return prisma.update<T>(args);`,
+    statements: generateUpdateStatementMethod(model),
     docs,
   };
 };

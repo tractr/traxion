@@ -8,7 +8,7 @@ import { version } from '../package.json';
 
 import { createSchema, Schema } from '@trxn/hapify-core';
 import { convertDmmfToHapifySchemaDeclaration } from '@trxn/hapify-devkit';
-import { hapifyNestjsServicesGenerator } from '@trxn/hapify-generators-nestjs-services';
+import { generate } from '@trxn/hapify-generator-nestjs-services';
 
 export const GENERATOR_NAME = 'Hapify Prisma NestJs/Services';
 
@@ -20,7 +20,7 @@ generatorHandler({
     };
   },
   onGenerate: async (options) => {
-    const { generator, dmmf } = options;
+    const { generator, dmmf, datasources } = options;
 
     const output = generator.output?.value;
     const { tsConfigFilePath } = generator.config;
@@ -46,12 +46,11 @@ generatorHandler({
     await project.getDirectory(output)?.clearImmediately();
 
     try {
-      logger.log(`Convert DMMF to Hapify schema declaration`);
       const schema: Schema = createSchema(
         convertDmmfToHapifySchemaDeclaration(dmmf),
       );
 
-      hapifyNestjsServicesGenerator(project, schema, {
+      generate(project, schema, datasources, {
         output,
       });
     } catch (error) {

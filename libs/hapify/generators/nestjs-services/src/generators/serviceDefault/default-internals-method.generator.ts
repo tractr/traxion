@@ -4,12 +4,14 @@ import {
   StructureKind,
 } from 'ts-morph';
 
+import { indent } from '@trxn/hapify-devkit';
+
 export const generateDefaultInternalsMethod =
   (): MethodDeclarationStructure[] => {
     const docsDefaultInternals: JSDocStructure[] = [
       {
         kind: StructureKind.JSDoc,
-        description: `
+        description: indent`
         Return default internal fields
         `,
       },

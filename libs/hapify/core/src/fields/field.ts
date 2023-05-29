@@ -30,6 +30,7 @@ export type BaseConstraints = DocumentationConstraint &
   DefaultConstraint &
   MultipleConstraint &
   SearchableConstraint &
+  HiddenConstraint &
   SortableConstraint;
 
 export type ScalarType = 'string' | 'number' | 'boolean' | 'object' | 'date';
@@ -46,6 +47,7 @@ export type IsRequiredConstraint = OptionalConstraint<'isRequired', boolean>;
 export type MultipleConstraint = OptionalConstraint<'isMultiple', boolean>;
 export type SearchableConstraint = OptionalConstraint<'isSearchable', boolean>;
 export type SortableConstraint = OptionalConstraint<'isSortable', boolean>;
+export type HiddenConstraint = OptionalConstraint<'isHidden', boolean>;
 export type PermissionConstraint = OptionalConstraint<
   'permission',
   PermissionType
@@ -56,6 +58,8 @@ export type PermissionConstraint = OptionalConstraint<
  */
 export type RelationConstraint = RequiredConstraint<'relation', Relation>;
 export type RelationsConstraint = RequiredConstraint<'relations', Relation[]>;
+export type ForeignConstraint<T extends ForeignField[] | null = null> =
+  RequiredConstraint<'foreign', T>;
 
 /**
  * Common constraints
@@ -99,6 +103,10 @@ export type Sortable<F extends BaseField> = GetFieldWithConstraints<
   F,
   SortableConstraint
 >;
+export type Hidden<F extends BaseField> = GetFieldWithConstraints<
+  F,
+  HiddenConstraint
+>;
 export type RelationSettable<F extends BaseField> = GetFieldWithConstraints<
   F,
   RelationConstraint
@@ -123,6 +131,7 @@ export type DefaultValueSettableField = DefaultValueSettable<Field>;
 export type MultipleSettableField = MultipleSettable<Field>;
 export type SearchableField = Searchable<Field>;
 export type SortableField = Sortable<Field>;
+export type HiddenField = Hidden<Field>;
 export type FormatField = FormatSettable<Field>;
 
 export type RelationSettableField = RelationSettable<Field>;
@@ -157,12 +166,14 @@ export type RelationConstraintDeclaration = {
 };
 
 export type FieldDeclaration<F extends Field = Field> = F extends
-  | VirtualField
+  | Omit<VirtualField, 'foreign'>
   | ForeignField
   | PrimaryField
   ? F extends VirtualField
-    ? Omit<F, 'relation'> & { relation: RelationConstraintDeclaration }
-    : Omit<F, 'relations' | 'relation'>
+    ? Omit<F, 'relation' | 'foreign'> & {
+        relation: RelationConstraintDeclaration;
+      }
+    : Omit<F, 'relations' | 'relation' | 'foreign'>
   : F;
 
 export type FieldType = GetFieldType<Field>;
@@ -176,6 +187,7 @@ export const isNullField = isConstraintFactory('isNull');
 export const isSearchableField = isConstraintFactory('isSearchable');
 export const isMultipleField = isConstraintFactory('isMultiple');
 export const isSortableField = isConstraintFactory('isSortable');
+export const isHiddenField = isConstraintFactory('isHidden');
 
 export const hasDocumentationConstraint = hasConstraintFactory('documentation');
 export const hasLabelConstraint = hasConstraintFactory('label');
@@ -183,6 +195,7 @@ export const hasUniqueConstraint = hasConstraintFactory('isUnique');
 export const hasIsRequiredConstraint = hasConstraintFactory('isNull');
 export const hasDefaultConstraint = hasConstraintFactory('defaultValue');
 export const hasSearchableConstraint = hasConstraintFactory('isSearchable');
+export const hasHiddenConstraint = hasConstraintFactory('isHidden');
 export const hasMultipleConstraint = hasConstraintFactory('isMultiple');
 export const hasSortableConstraint = hasConstraintFactory('isSortable');
 

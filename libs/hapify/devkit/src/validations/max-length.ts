@@ -1,5 +1,7 @@
 export function validateMaxLengthMetadata(
-  metadata: Record<string, string>,
+  metadata: Record<string, unknown>,
 ): boolean {
-  return !metadata.maxLength || /^\d+$/.test(metadata.maxLength);
+  return (
+    typeof metadata.maxLength !== 'string' || /^\d+$/.test(metadata.maxLength)
+  );
 }

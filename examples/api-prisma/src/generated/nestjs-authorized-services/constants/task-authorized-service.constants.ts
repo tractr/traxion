@@ -1,0 +1,1 @@
+export const TASK_AUTHORIZED_SERVICE = 'TASK_AUTHORIZED_SERVICE' as const;

@@ -1,12 +1,13 @@
-import { Model } from '../model';
 import { isModel } from './is-model';
+import { Model, PrimaryKey } from '../model';
 
 describe('isModel', () => {
   it('should return true if model is valid', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [],
     } satisfies Model;
 

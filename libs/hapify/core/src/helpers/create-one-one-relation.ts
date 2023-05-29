@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { inspect } from 'util';
+
 import { getModel } from './get-model';
 import {
   FieldDeclaration,
@@ -34,7 +36,7 @@ export function createOneOneRelation(
   let foreignDeclaration: Omit<VirtualField, 'relation'> & FieldDeclaration =
     field2;
 
-  if (field1.relation.from.fields.length === 0) {
+  if (field2.relation.from.fields.length === 0) {
     primaryDeclaration = field2;
     foreignDeclaration = field1;
   }
@@ -63,15 +65,13 @@ export function createOneOneRelation(
   // Create the future to fields (virtual) and add them to the model
   const { relation: unusedF, ...foreignVirtualField } = foreignDeclaration;
 
-  const foreignListField = foreignDeclaration.relation.from.fields;
+  const foreignListField = foreignDeclaration.relation.to.fields;
   const toForeignField = getModel(foreignModelName, definition.models)
     ?.fields.filter(isForeignField)
     .filter((field) => foreignListField.includes(field.name));
 
-  if (!toForeignField) {
-    throw new Error(
-      `Model ${foreignModelName} not found for relation ${relationName}`,
-    );
+  if (!toForeignField || toForeignField.length === 0) {
+    throw new Error(`No foreign field found for relation ${relationName}`);
   }
 
   toForeignField.forEach((field) => {
@@ -96,6 +96,8 @@ export function createOneOneRelation(
       foreign: toForeignField as IsConstraints<ForeignField, 'isUnique'>[],
     },
   };
+
+  foreignVirtualField.foreign = toForeignField as ForeignField[];
 
   // Add the relation reference to the virtual fields
   relation.from.virtual.relation = relation;

@@ -8,8 +8,24 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { isEncryptedField, Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
 
+export function generateUpdateManyStatementMethod(model: Model): string {
+  const encryptedFields = model.fields.filter(isEncryptedField);
+  const hasEncryptedFields = encryptedFields.length > 0;
+
+  return hasEncryptedFields
+    ? `
+  const { data } = args;
+  return prisma.updateMany<T>({
+    ...args,
+    data: Promise.all(
+      (Array.isArray(data) ? data : [data]).map((item) => this.encryptFields(item))
+    ),
+  });`
+    : `return prisma.updateMany<T>(args);`;
+}
 export const generateUpdateManyMethod = (
   model: Model,
 ): MethodDeclarationStructure => {
@@ -40,7 +56,7 @@ export const generateUpdateManyMethod = (
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `
+      description: indent`
        Update 0 or more ${pascal(model.name)}s.
        Note, that providing 'undefined' is treated as the value not being there.
        Read more here: https://pris.ly/d/null-undefined
@@ -60,8 +76,7 @@ export const generateUpdateManyMethod = (
          data: {
            // ... provide data here
          }
-       })
-    `,
+       })`,
     },
   ];
 
@@ -71,7 +86,7 @@ export const generateUpdateManyMethod = (
     name: 'updateMany',
     typeParameters,
     parameters,
-    statements: `return prisma.updateMany<T>(args);`,
+    statements: generateUpdateManyStatementMethod(model),
     docs,
   };
 };

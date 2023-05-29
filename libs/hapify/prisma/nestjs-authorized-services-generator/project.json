@@ -1,0 +1,57 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "hapify-prisma-nestjs-authorized-services-generator",
+  "projectType": "library",
+  "sourceRoot": "libs/hapify/prisma/nestjs-authorized-services-generator/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "assets": [
+          "libs/hapify/prisma/nestjs-authorized-services-generator/*.md"
+        ],
+        "main": "libs/hapify/prisma/nestjs-authorized-services-generator/src/index.ts",
+        "outputPath": "dist/libs/hapify/prisma/nestjs-authorized-services-generator",
+        "packageJson": "libs/hapify/prisma/nestjs-authorized-services-generator/package.json",
+        "tsConfig": "libs/hapify/prisma/nestjs-authorized-services-generator/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/hapify/prisma/nestjs-authorized-services-generator/**/*.ts"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "test": {
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/hapify/prisma/nestjs-authorized-services-generator/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    },
+    "update-peer-dependencies": {
+      "executor": "@trxn/schematics:update-peer-dependencies",
+      "options": {
+        "packageJsonPath": "{workspaceRoot}/dist/libs/hapify/prisma/nestjs-authorized-services-generator/package.json"
+      }
+    }
+  }
+}

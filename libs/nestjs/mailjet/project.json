@@ -6,7 +6,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/js:swc",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/nestjs/mailjet/*.md"],
         "main": "libs/nestjs/mailjet/src/index.ts",
@@ -38,7 +38,7 @@
       "outputs": ["{workspaceRoot}/coverage/libs/nestjs/mailjet"]
     },
     "update-peer-dependencies": {
-      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "executor": "@trxn/schematics:update-peer-dependencies",
       "options": {
         "packageJsonPath": "{workspaceRoot}/dist/libs/nestjs/mailjet/package.json"
       }

@@ -6,7 +6,7 @@
   "tags": ["scope:nestjs"],
   "targets": {
     "build": {
-      "executor": "@nrwl/js:swc",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "assets": ["libs/nestjs/file-storage/*.md"],
         "main": "libs/nestjs/file-storage/src/index.ts",
@@ -38,7 +38,7 @@
       "outputs": ["{workspaceRoot}/coverage/libs/nestjs/file-storage"]
     },
     "update-peer-dependencies": {
-      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "executor": "@trxn/schematics:update-peer-dependencies",
       "options": {
         "packageJsonPath": "{workspaceRoot}/dist/libs/nestjs/file-storage/package.json"
       }

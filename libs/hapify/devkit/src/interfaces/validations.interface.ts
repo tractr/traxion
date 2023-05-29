@@ -1,5 +1,5 @@
 export type FieldMetadataValidationCallback = (
-  value: Record<string, string>,
+  value: Record<string, unknown>,
 ) => boolean;
 
 export type FieldMetadataTransformCallback = (

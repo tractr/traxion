@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 
+import { DataSource } from '@prisma/generator-helper';
 import { Project } from 'ts-morph';
 
+import { generateEncryptionServiceConstantSourceFile } from './generators/constants/constant.generator';
+import { generateEncryptionServiceSourceFile } from './generators/encryption-service/encryption-service.generator';
 import { generateModuleDefinitionSourceFile } from './generators/module/module-definition.generator';
+import { generateModuleOptionsSourceFile } from './generators/module/module-options.generator';
 import { generateModuleSourceFile } from './generators/module/module.generator';
 import {
   generateModelsServicesProvidersSourceFile,
@@ -10,31 +14,31 @@ import {
 } from './generators/provider/providers.generator';
 import { generateConstantSourceFile } from './generators/service/constant.generator';
 import { generateServiceSourceFile } from './generators/service/service.generator';
-import { generateServiceDefaultSourceFile } from './generators/serviceDefault/service-defaults.generator';
+
+import { isEncryptedField, Schema } from '@trxn/hapify-core';
 import {
   generateDirectoryIndexExporter,
   generateFileIndexExporter,
-} from './utils/index.generator';
-
-import { Schema } from '@trxn/hapify-core';
+} from '@trxn/hapify-devkit';
 
 export type NestjsServiceGeneratorConfig = {
   output: string;
   overwrite?: boolean;
 };
 
-export function hapifyNestjsServicesGenerator(
+export function generate(
   project: Project,
   dataModel: Schema,
+  datasources: DataSource[],
   config: NestjsServiceGeneratorConfig,
 ) {
   const { output } = config;
 
   // Generate module
-  generateModuleSourceFile(project, output);
+  generateModuleSourceFile(project, dataModel.models, output);
 
   // Generate modules definition
-  generateModuleDefinitionSourceFile(project, output);
+  generateModuleDefinitionSourceFile(project, dataModel.models, output);
 
   // Generate models-services.providers.ts
   const providersSourceFile = generateModelsServicesProvidersSourceFile(
@@ -44,8 +48,8 @@ export function hapifyNestjsServicesGenerator(
 
   // Generate services, contants and providers
   dataModel.models.forEach((model) => {
-    generateServiceSourceFile(project, model, output);
-    generateServiceDefaultSourceFile(project, model, output);
+    generateServiceSourceFile(project, model, datasources, output);
+    // generateServiceDefaultSourceFile(project, model, output);
     generateConstantSourceFile(project, model, `${output}`);
     generateProviderSourceFile(
       project,
@@ -54,6 +58,19 @@ export function hapifyNestjsServicesGenerator(
       providersSourceFile,
     );
   });
+
+  const hasEncryptedFields = dataModel.models.some(
+    (model) => model.fields.filter(isEncryptedField).length > 0,
+  );
+
+  if (hasEncryptedFields) {
+    generateEncryptionServiceSourceFile(project, output);
+
+    // Generate the constants for the encryption service
+    generateEncryptionServiceConstantSourceFile(project, output);
+  }
+
+  generateModuleOptionsSourceFile(project, dataModel.models, output);
 
   // generate route index.ts for exports
   generateDirectoryIndexExporter(project, output);

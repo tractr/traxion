@@ -38,7 +38,7 @@
       "outputs": ["{workspaceRoot}/coverage/libs/common"]
     },
     "update-peer-dependencies": {
-      "executor": "./dist/libs/schematics:update-peer-dependencies",
+      "executor": "@trxn/schematics:update-peer-dependencies",
       "options": {
         "packageJsonPath": "{workspaceRoot}/dist/libs/common/package.json"
       }

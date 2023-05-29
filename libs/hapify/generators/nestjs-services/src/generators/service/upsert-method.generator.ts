@@ -8,7 +8,32 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { isEncryptedField, isHiddenField, Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
+
+export function generateUpsertStatementMethod(model: Model): string {
+  const hiddenFields = model.fields.filter(isHiddenField);
+  const modelName = camel(model.name);
+
+  const encryptedFields = model.fields.filter(isEncryptedField);
+  const hasEncryptedFields = encryptedFields.length > 0;
+
+  return `${
+    hasEncryptedFields
+      ? ` const { create, update } = args;
+          const ${modelName} = await prisma.upsert<T>({
+            ...args,
+            create: await this.encryptFields(create),
+            update: await this.encryptFields(update),
+          });`
+      : `const ${modelName} = await prisma.upsert<T>(args);`
+  }
+  ${
+    hiddenFields.length
+      ? `return ${modelName} === null ? ${modelName} : this.excludeHiddenFields(${modelName}, args.select);`
+      : `return ${modelName};`
+  }`;
+}
 
 export const generateUpsertMethod = (
   model: Model,
@@ -38,7 +63,7 @@ export const generateUpsertMethod = (
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `
+      description: indent`
       Create or update one ${pascal(model.name)}.
        @param {${pascal(
          model.name,
@@ -59,8 +84,7 @@ export const generateUpsertMethod = (
          where: {
            // ... the filter for the ${pascal(model.name)} we want to update
          }
-       })
-    `,
+       })`,
     },
   ];
 
@@ -70,7 +94,7 @@ export const generateUpsertMethod = (
     name: 'upsert',
     typeParameters,
     parameters,
-    statements: `return prisma.upsert<T>(args);`,
+    statements: generateUpsertStatementMethod(model),
     docs,
   };
 };

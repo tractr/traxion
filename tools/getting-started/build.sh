@@ -5,6 +5,7 @@ set -o pipefail
 
 BASE_DIR="${PWD}";
 GS_DIR="${BASE_DIR}/tools/getting-started"
+NPD_DIR="${GS_DIR}/nestjs-prisma-demo"
 
 # ----------------------------------
 # Pre-requisites
@@ -41,20 +42,26 @@ npx prisma init
 # ----------------------------------
 # Step 4: Set up a PostgreSQL database
 # Copy .env file
-cat "${GS_DIR}"/files/app.env > ./.env
+cat "${GS_DIR}"/files/app.env > "${NPD_DIR}"/.env
 
 # ----------------------------------
 # Step 5: Install Prisma generator libraries
-# Install Prisma generator libraries and dependencies
-npm install --save-dev @trxn/prisma-nestjs-graphql-resolvers-generator @trxn/prisma-nestjs-services-generator prisma-nestjs-graphql
-npm install --save @nestjs/apollo @nestjs/graphql @paljs/plugins @prisma/client @trxn/nestjs-database @trxn/nestjs-graphql prisma
+npm i --save \
+  @nestjs/apollo \
+  @nestjs/graphql \
+  @paljs/plugins \
+  @casl/ability \
+  @casl/prisma \
+  class-transformer
+
 # Copy local packages to node_modules to ensure that the latest version is used
 node "${BASE_DIR}"/tools/local-install.mjs
 
 # ----------------------------------
 # Step 6: Define a Prisma schema
 # Append the schema.prisma file into the Prisma directory
-cat "${GS_DIR}"/files/schema.prisma >> ./prisma/schema.prisma
+cat "${GS_DIR}"/files/schema.prisma > "${NPD_DIR}"/prisma/schema.prisma
+cat "${GS_DIR}"/files/seed.ts > "${NPD_DIR}"/prisma/seed.ts
 
 # ----------------------------------
 # Step 7: Generate NestJS services and DTOs
@@ -64,20 +71,12 @@ npx prisma generate
 # ----------------------------------
 # Step 8: Set up the database using Prisma
 # Set up the database using Prisma
-npx prisma db push
+npx prisma db push --force-reset
+npx ts-node -r tsconfig-paths/register --project "${NPD_DIR}"/tsconfig.json "${NPD_DIR}"/prisma/seed.ts
 
 # ----------------------------------
 # Step 9: Create NestJS modules
-# Copy file database.module.ts
-cat "${GS_DIR}"/files/database.module.ts > ./src/database.module.ts
-
-# Copy file services.module.ts
-cat "${GS_DIR}"/files/services.module.ts > ./src/services.module.ts
-
-# Copy file graphql.module.ts
-cat "${GS_DIR}"/files/graphql.module.ts > ./src/graphql.module.ts
-
-# Copy file app.module.ts
-cat "${GS_DIR}"/files/app.module.ts > ./src/app.module.ts
+rm "${NPD_DIR}"/src/app.controller.ts "${NPD_DIR}"/src/app.service.ts "${NPD_DIR}"/src/app.controller.spec.ts
+cat "${GS_DIR}"/files/app.module.ts > "${NPD_DIR}"/src/app.module.ts
 
 

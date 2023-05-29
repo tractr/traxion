@@ -8,7 +8,23 @@ import {
   TypeParameterDeclarationStructure,
 } from 'ts-morph';
 
-import { Model } from '@trxn/hapify-core';
+import { isHiddenField, Model } from '@trxn/hapify-core';
+import { indent } from '@trxn/hapify-devkit';
+
+export function generateFindManyStatementMethod(model: Model): string {
+  const modelName = camel(model.pluralName);
+  const hiddenFields = model.fields.filter(isHiddenField);
+
+  return `
+    const ${modelName} = await prisma.findMany<T>(args);
+
+    ${
+      hiddenFields.length
+        ? `return ${modelName}.map((data) => this.excludeHiddenFields(data, args.select));`
+        : `return ${modelName};`
+    }
+  `;
+}
 
 export const generateFindManyMethod = (
   model: Model,
@@ -38,7 +54,7 @@ export const generateFindManyMethod = (
   const docs: JSDocStructure[] = [
     {
       kind: StructureKind.JSDoc,
-      description: `
+      description: indent`
        Find zero or more ${pascal(model.name)}s that matches the filter.
        Note, that providing 'undefined' is treated as the value not being there.
        Read more here: https://pris.ly/d/null-undefined
@@ -59,9 +75,7 @@ export const generateFindManyMethod = (
        // Only select the 'id'
        const ${camel(model.name)}WithIdOnly = await this.${pascal(
         model.name,
-      )}Service.findMany({ select: { id: true } })
-
-    `,
+      )}Service.findMany({ select: { id: true } })`,
     },
   ];
 
@@ -71,7 +85,7 @@ export const generateFindManyMethod = (
     name: 'findMany',
     typeParameters,
     parameters,
-    statements: `return prisma.findMany<T>(args);`,
+    statements: generateFindManyStatementMethod(model),
     docs,
   };
 };

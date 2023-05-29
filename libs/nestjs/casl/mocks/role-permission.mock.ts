@@ -1,19 +1,18 @@
 /* istanbul ignore file */
 import { AbilityBuilder, PureAbility } from '@casl/ability';
 import { Subjects as CaslPrismaSubjects, PrismaQuery } from '@casl/prisma';
-import { Prisma } from '@prisma/client';
 
 import { DefinePublicPermissions, RolePermissions } from '../src/interfaces';
 
 export type Roles = 'admin' | 'user' | 'guest';
 
 export interface User extends Record<string, unknown> {
-  id: number;
+  id: string;
   roles: Roles[];
 }
 
 export type Subjects = CaslPrismaSubjects<
-  Record<Prisma.ModelName, Record<string, unknown>> & {
+  Record<string, Record<string, unknown>> & {
     User: User;
   }
 >;
@@ -42,7 +41,7 @@ export const rolePermissions: RolePermissions<
     can('read', 'Right');
   },
   user({ can }, user) {
-    can('read', 'User', { id: user?.id });
+    can('read', 'User');
   },
   admin({ can }) {
     can('manage', 'all');

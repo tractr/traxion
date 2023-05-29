@@ -3,15 +3,16 @@ import {
   getRelatedModelsWithoutSelf,
   getRelations,
 } from './relation.helpers';
-import { Field,  } from '../../fields';
-import { Model, Relation } from '../model';
+import { Field } from '../../fields';
+import { Model, PrimaryKey, Relation } from '../model';
 
 describe('getRelations', () => {
   it('should return an empty array if model has no relation', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         { name: 'test', type: 'number', scalar: 'number', pluralName: 'tests' },
       ],
@@ -26,12 +27,14 @@ describe('getRelations', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'relationField1',
           type: 'virtual',
           scalar: null,
+          foreign: null,
           pluralName: 'tests',
           relation: { name: 'relation1' } as Relation,
         },
@@ -39,6 +42,7 @@ describe('getRelations', () => {
           name: 'relationField2',
           type: 'virtual',
           scalar: null,
+          foreign: null,
           pluralName: 'tests',
           relation: { name: 'relation2' } as Relation,
         },
@@ -53,19 +57,22 @@ describe('getRelations', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         {
           name: 'relationField1',
           type: 'virtual',
           scalar: null,
           pluralName: 'tests',
+          foreign: null,
           relation: { name: 'relation1' } as Relation,
         },
         {
           name: 'relationField2',
           type: 'virtual',
           scalar: null,
+          foreign: null,
           pluralName: 'tests',
           relation: { name: 'relation2' } as Relation,
         },
@@ -97,7 +104,8 @@ describe('getRelatedModels', () => {
     const modelC = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [] as Field[],
     } satisfies Model;
 
@@ -107,6 +115,7 @@ describe('getRelatedModels', () => {
         type: 'virtual',
         scalar: null,
         pluralName: 'tests',
+        foreign: null,
         relation: {
           name: 'relation1',
           from: { model: modelC },
@@ -118,6 +127,7 @@ describe('getRelatedModels', () => {
         type: 'virtual',
         scalar: null,
         pluralName: 'tests',
+        foreign: null,
         relation: {
           name: 'relation2',
           from: { model: modelB },
@@ -135,7 +145,8 @@ describe('getRelatedModels', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [] as Field[],
     } satisfies Model;
 
@@ -144,6 +155,7 @@ describe('getRelatedModels', () => {
         name: 'relationField1',
         type: 'virtual',
         scalar: null,
+        foreign: null,
         pluralName: 'tests',
         relation: {
           name: 'relation1',
@@ -156,6 +168,7 @@ describe('getRelatedModels', () => {
         type: 'virtual',
         scalar: null,
         pluralName: 'tests',
+        foreign: null,
         relation: {
           name: 'relation2',
           from: { model },
@@ -173,7 +186,8 @@ describe('getRelatedModels', () => {
     const model = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [
         { name: 'test', type: 'number', scalar: 'number', pluralName: 'tests' },
       ],
@@ -188,14 +202,16 @@ describe('getRelatedModels', () => {
     const modelA = {
       name: 'testA',
       pluralName: 'testsA',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [],
-    };
+    } satisfies Model;
 
     const modelB = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [] as Field[],
     } satisfies Model;
 
@@ -204,6 +220,7 @@ describe('getRelatedModels', () => {
       type: 'virtual',
       scalar: null,
       pluralName: 'tests',
+      foreign: null,
       relation: {
         name: 'relation1',
         from: { model: modelA },
@@ -220,14 +237,16 @@ describe('getRelatedModelsWithoutSelf', () => {
     const modelA = {
       name: 'testA',
       pluralName: 'testsA',
-      primaryKey: null,
-      fields: [],
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
+      fields: [] as Field[],
     };
 
     const modelB = {
       name: 'test',
       pluralName: 'tests',
-      primaryKey: null,
+      primaryKey: {} as PrimaryKey,
+      dbName: null,
       fields: [] as Field[],
     } satisfies Model;
 
@@ -235,6 +254,7 @@ describe('getRelatedModelsWithoutSelf', () => {
       {
         name: 'relationField1',
         type: 'virtual',
+        foreign: null,
         scalar: null,
         pluralName: 'tests',
         relation: {
@@ -247,6 +267,7 @@ describe('getRelatedModelsWithoutSelf', () => {
         name: 'relationField2',
         type: 'virtual',
         scalar: null,
+        foreign: null,
         pluralName: 'tests',
         relation: {
           name: 'relation2',
