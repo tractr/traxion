@@ -33,7 +33,7 @@ export function createUser({
           {
             title: `${email}'s task`,
             description: randText(),
-            status: 'OPEN',
+            status: 'open',
             ...(sharedTasksWith.length > 0 && {
               sharedWith: {
                 connect: sharedTasksWith.map((userEmail) => ({
@@ -49,25 +49,21 @@ export function createUser({
 }
 
 async function main() {
-  await prisma.profile.deleteMany({});
-  await prisma.user.deleteMany({});
-  await prisma.task.deleteMany({});
-
   const users = [
     await createUser({
       email: 'admin@traxion.dev',
       password: 'password',
-      roles: [Role.ADMIN],
+      roles: [Role.admin],
     }),
     await createUser({
       email: 'user1@traxion.dev',
       password: 'password',
-      roles: [Role.USER],
+      roles: [Role.user],
     }),
     await createUser({
       email: 'user2@traxion.dev',
       password: 'password',
-      roles: [Role.USER],
+      roles: [Role.user],
       sharedTasksWith: ['user1@traxion.dev'],
     }),
   ];

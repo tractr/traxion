@@ -46,6 +46,14 @@ export function generateAuthenticationModuleSourceFile(
       namedImports: ['UserModule'],
     },
     {
+      moduleSpecifier: './resolvers',
+      namedImports: ['LoginResolver'],
+    },
+    {
+      moduleSpecifier: './services.module',
+      namedImports: ['NestjsServicesModule'],
+    },
+    {
       moduleSpecifier: caslAppConfig,
       namedImports: [
         'customSelect',
@@ -65,6 +73,7 @@ export function generateAuthenticationModuleSourceFile(
         arguments: [
           `{
   imports: [
+    NestjsServicesModule,
     TrxnAuthenticationModule.register({
       imports: [UserModule],
       customSelect,
@@ -80,6 +89,7 @@ export function generateAuthenticationModuleSourceFile(
   ],
   exports: [TrxnAuthenticationModule],
   providers: [
+    LoginResolver,
     { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
     { provide: APP_GUARD, useClass: PoliciesGuard },
     { provide: APP_INTERCEPTOR, useClass: CaslExceptionInterceptor },

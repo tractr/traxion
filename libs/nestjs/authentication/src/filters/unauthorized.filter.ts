@@ -30,8 +30,6 @@ export class UnauthorizedExceptionFilter implements ExceptionFilter {
       return;
     }
 
-    const status = exception.getStatus();
     response.cookie(this.cookieOptionsService.cookieName, '', {});
-    response.status(status).json(exception);
   }
 }

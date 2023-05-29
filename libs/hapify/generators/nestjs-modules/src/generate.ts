@@ -12,6 +12,7 @@ import {
   generateUserModuleSourceFile,
 } from './generators';
 import { generateCaslConfigSourceFile } from './generators/casl-config.generator';
+import { generateLoginResolverSourceFile } from './generators/login-resolver.generator';
 
 import { Schema } from '@trxn/hapify-core';
 
@@ -33,6 +34,8 @@ export function generate(
   generateServicesModuleSourceFile(project, output, importPaths);
   generateUserModuleSourceFile(project, output);
   generateTraxionModuleSourceFile(project, output);
+
+  generateLoginResolverSourceFile(project, schema, output, importPaths);
 
   // Generate the casl config only if no one is specified
   if (!importPaths.caslAppConfig) {

@@ -21,7 +21,7 @@ export function generateImports(model: Model): ImportDeclarationStructure[] {
       namedImports: [
         { name: 'PrismaService' },
         { name: 'excludePrismaField' },
-        { name: 'GetPrismaKeyIfNotSelected' },
+        { name: 'ExcludePrismaField' },
       ],
     },
     {

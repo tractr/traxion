@@ -28,6 +28,7 @@ generatorHandler({
       nestjsAuthorizedServicesImportPath,
       nestjsGraphqlResolversImportPath,
       nestjsServicesImportPath,
+      nestjsDtosImportPath,
     } = generator.config;
 
     // Validate the generator configuration
@@ -60,6 +61,11 @@ generatorHandler({
       logger.warn(error);
       throw new Error(error);
     }
+    if (!nestjsDtosImportPath) {
+      const error = `${GENERATOR_NAME}: No nestjsDtosImportPath specified in generator block`;
+      logger.warn(error);
+      throw new Error(error);
+    }
 
     // Instantiate the ts project
     const project = new Project({
@@ -77,6 +83,7 @@ generatorHandler({
           nestjsAuthorizedServices: nestjsAuthorizedServicesImportPath,
           nestjsGraphqlResolvers: nestjsGraphqlResolversImportPath,
           nestjsServices: nestjsServicesImportPath,
+          dtos: nestjsDtosImportPath,
         },
       });
     } catch (error) {

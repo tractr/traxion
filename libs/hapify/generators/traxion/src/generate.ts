@@ -47,6 +47,7 @@ export async function generate(
       nestjsGraphqlResolvers: './nestjs-authorized-graphql-resolvers',
       nestjsServices: './nestjs-services',
       casl: './casl',
+      dtos: './nestjs-graphql-dtos',
     },
     overwrite,
   });

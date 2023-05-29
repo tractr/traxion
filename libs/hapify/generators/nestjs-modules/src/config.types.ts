@@ -2,6 +2,7 @@ export type NestjsModulesImportPath = {
   nestjsAuthorizedServices: string;
   nestjsGraphqlResolvers: string;
   nestjsServices: string;
+  dtos: string;
   caslAppConfig?: string;
   casl?: string;
 };

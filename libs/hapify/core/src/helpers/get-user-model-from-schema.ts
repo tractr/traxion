@@ -54,7 +54,8 @@ export function getRoleFieldFromUserModel(userModel: Model): Field | null {
   let role: Field | undefined;
 
   role = userModel.fields.find(
-    (field) => field.metadata?.role === true || field.metadata?.roles === true,
+    (field) =>
+      field.metadata?.roleField === true || field.metadata?.roles === true,
   );
 
   if (!role) {
@@ -66,4 +67,36 @@ export function getRoleFieldFromUserModel(userModel: Model): Field | null {
   }
 
   return role || null;
+}
+
+export function getLoginFieldFromUserModel(userModel: Model): Field | null {
+  let login: Field | undefined;
+
+  login = userModel.fields.find((field) => field.metadata?.loginField === true);
+
+  if (!login) {
+    login = userModel.fields.find(
+      (field) =>
+        field.name.toLowerCase() === 'login' ||
+        field.name.toLowerCase() === 'email',
+    );
+  }
+
+  return login || null;
+}
+
+export function getPasswordFieldFromUserModel(userModel: Model): Field | null {
+  let password: Field | undefined;
+
+  password = userModel.fields.find(
+    (field) => field.metadata?.passwordField === true,
+  );
+
+  if (!password) {
+    password = userModel.fields.find(
+      (field) => field.name.toLowerCase() === 'password',
+    );
+  }
+
+  return password || null;
 }

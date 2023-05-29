@@ -4,8 +4,8 @@ import { Prisma, User } from '@prisma/client';
 import { EncryptionService } from './encryption.service';
 
 import {
+  ExcludePrismaField,
   excludePrismaField,
-  GetPrismaKeyIfNotSelected,
   PrismaService,
 } from '@trxn/nestjs-database';
 
@@ -45,13 +45,16 @@ export class UserService {
     };
   }
 
-  excludeHiddenFields<T extends User, S extends Prisma.UserSelect>(
-    data: T,
-    select: S | null = null,
-  ) {
-    const excludeKeys = [
-      !!select && select?.password === true ? null : ('password' as const),
-    ] as GetPrismaKeyIfNotSelected<S, 'password'>[];
+  excludeHiddenFields<
+    T extends User,
+    S extends Prisma.UserSelect | undefined | null,
+  >(data: T, select: S | null = null) {
+    const password = (
+      !!select && select?.password === true ? null : 'password'
+    ) as ExcludePrismaField<S, 'password'>;
+
+    const excludeKeys = [password];
+
     return excludePrismaField(data, excludeKeys);
   }
 

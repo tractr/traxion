@@ -1,11 +1,12 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
-export interface AccessTokenDto {
-  accessToken: string;
-}
+import { User } from '../../../nestjs-graphql-dtos';
 
 @ObjectType()
 export class AccessTokenGraphQLDto {
   @Field()
   accessToken!: string;
+
+  @Field(() => User)
+  user!: User;
 }

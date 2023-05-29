@@ -37,7 +37,7 @@ module.exports = {
           items: [
             {
               label: 'Getting started',
-              to: '/docs',
+              to: '/',
             },
           ],
         },

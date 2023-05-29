@@ -15,17 +15,21 @@ export function generateExcludeHiddenFieldsStatementMethod(
 ): string {
   const hiddenFields = model.fields.filter(isHiddenField);
 
-  return `
+  return `${hiddenFields
+    .map(
+      (field) =>
+        `const ${camel(field.name)} = (!!select && select?.${camel(
+          field.name,
+        )} === true ? null : '${camel(
+          field.name,
+        )}') as ExcludePrismaField<S, '${camel(field.name)}'>;`,
+    )
+    .join(', ')}
+
     const excludeKeys = [${hiddenFields
-      .map(
-        (field) =>
-          `!!select && select?.${camel(field.name)} === true ? null : ('${camel(
-            field.name,
-          )}' as const)`,
-      )
-      .join(', ')}] as (${hiddenFields
-    .map((field) => `GetPrismaKeyIfNotSelected<S, '${camel(field.name)}'>`)
-    .join(' | ')})[];
+      .map((field) => camel(field.name))
+      .join(', ')}];
+
     return excludePrismaField(data, excludeKeys);
   `;
 }
@@ -57,7 +61,7 @@ export const generateExcludeHiddenFieldGenerator = (
     {
       name: 'S',
       kind: StructureKind.TypeParameter,
-      constraint: `Prisma.${modelName}Select`,
+      constraint: `Prisma.${modelName}Select | undefined | null`,
     },
   ];
 

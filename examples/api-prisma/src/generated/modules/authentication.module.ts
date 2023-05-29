@@ -7,6 +7,8 @@ import {
   publicPermissions,
   rolePermissions,
 } from './configs/casl.config';
+import { LoginResolver } from './resolvers';
+import { NestjsServicesModule } from './services.module';
 import { UserModule } from './user.module';
 
 import {
@@ -21,6 +23,7 @@ import {
 
 @Module({
   imports: [
+    NestjsServicesModule,
     TrxnAuthenticationModule.register({
       imports: [UserModule],
       customSelect,
@@ -36,6 +39,7 @@ import {
   ],
   exports: [TrxnAuthenticationModule],
   providers: [
+    LoginResolver,
     { provide: APP_GUARD, useClass: JwtGlobalAuthGuard },
     { provide: APP_GUARD, useClass: PoliciesGuard },
     { provide: APP_INTERCEPTOR, useClass: CaslExceptionInterceptor },
