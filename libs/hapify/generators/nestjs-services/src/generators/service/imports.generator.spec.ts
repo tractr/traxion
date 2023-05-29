@@ -49,7 +49,7 @@ describe('generateImports', () => {
     expect(prismaSelectImport.namedImports).toEqual([
       { name: 'PrismaService' },
       { name: 'excludePrismaField' },
-      { name: 'GetPrismaKeyIfNotSelected' },
+      { name: 'ExcludePrismaField' },
     ]);
   });
 });

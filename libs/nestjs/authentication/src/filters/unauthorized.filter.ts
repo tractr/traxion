@@ -17,7 +17,9 @@ export class UnauthorizedExceptionFilter implements ExceptionFilter {
   catch(exception: UnauthorizedException, host: ArgumentsHost) {
     const response = getResponseFromContext(host) as Response;
 
-    if (!response && host.getType<string>() === 'graphql') {
+    const isGraphql = host.getType<string>() === 'graphql';
+
+    if (!response && isGraphql) {
       console.warn(
         'UnauthorizedExceptionFilter: response not found in context, you should `context: ({ req, res }) => ({ req, res })` in your graphql context',
       );
@@ -31,5 +33,10 @@ export class UnauthorizedExceptionFilter implements ExceptionFilter {
     }
 
     response.cookie(this.cookieOptionsService.cookieName, '', {});
+
+    if (isGraphql) return;
+
+    const status = exception.getStatus();
+    response.status(status).json(exception);
   }
 }
