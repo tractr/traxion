@@ -30,24 +30,12 @@ sleep 30
 # ----------------------------------
 # Step 11: Test the application
 # CURL the graphql endpoint and create an user
-RESULT=$(curl -s 'http://localhost:3000/graphql' \
-  -H 'Accept-Language: en-US,en;q=0.9,fr-FR;q=0.8,fr;q=0.7' \
-  -H 'Cache-Control: no-cache' \
-  -H 'Connection: keep-alive' \
-  -H 'Origin: http://localhost:3000' \
-  -H 'Pragma: no-cache' \
-  -H 'Referer: http://localhost:3000/graphql' \
-  -H 'Sec-Fetch-Dest: empty' \
-  -H 'Sec-Fetch-Mode: cors' \
-  -H 'Sec-Fetch-Site: same-origin' \
-  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36' \
-  -H 'accept: */*' \
+RESULT=$(curl 'http://localhost:3000/graphql' \
+  -X POST \
   -H 'content-type: application/json' \
-  -H 'sec-ch-ua: "Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"' \
-  -H 'sec-ch-ua-mobile: ?0' \
-  -H 'sec-ch-ua-platform: "Linux"' \
-  --data-raw '{"operationName":null,"variables":{},"query":"mutation {\n  createUser(data: {email: \"user@emails.com\", name: \"User\"}) {\n    id\n    email\n    name\n  }\n}\n"}' \
-  --compressed | grep 'user@emails.com')
+  --data '{
+    "query": "mutation { login(email: \"admin@traxion.dev\", password: \"password\") { user { id } } }"
+  }')
 
 # ----------------------------------
 # Check the result

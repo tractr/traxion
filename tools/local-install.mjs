@@ -60,9 +60,16 @@ for (const [projectName, project] of projects) {
     continue;
   }
 
-  const outputPath = (
-    project.targets.build.options.outputPath || project.targets.build.outputs[0]
-  ).replace('{workspaceRoot}', '');
+  let outputPath =
+    project.targets.build?.options.outputPath ||
+    project.targets.build?.outputs?.[0];
+
+  if (!outputPath) {
+    console.warn(`Skipping ${projectName} because it has no output path`);
+    continue;
+  }
+
+  outputPath = outputPath.replace('{workspaceRoot}', '');
 
   const packageJson = readJsonFile(
     join(traxionDir, outputPath, 'package.json'),

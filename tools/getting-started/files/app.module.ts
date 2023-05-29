@@ -1,8 +1,10 @@
+/* eslint-disable */
 import { Module } from '@nestjs/common';
-import { GraphQLModule } from './graphql.module';
+
+import { TraxionModule } from './generated/modules/traxion.module';
 
 @Module({
-  imports: [GraphQLModule],
+  imports: [TraxionModule],
   controllers: [],
   providers: [],
 })
