@@ -175,8 +175,6 @@ model Task {
 
 And you can add the `seed.ts` next to your schema file (don't forget to add the seed target inside your package.json file):
 
-Note: you will need to install `@ngneat/falso` as a dev dependency and to add this configuration inside your package.json:
-
 ```json
 {
   "prisma": {
@@ -185,6 +183,8 @@ Note: you will need to install `@ngneat/falso` as a dev dependency and to add th
   }
 }
 ```
+
+Note: you will need to install `@ngneat/falso` as a dev dependency and to add this configuration inside your package.json:
 
 ```typescript
 import { randFirstName, randLastName, randText } from '@ngneat/falso';
@@ -265,3 +265,82 @@ seed().catch((e) => {
   process.exit(1);
 });
 ```
+
+## User Authentication
+
+Now you can start your GraphQL API, log in and make a request on the users:
+
+To login you can use this method:
+
+```graphql
+mutation login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    accessToken
+    user {
+      id
+      email
+      profile {
+        firstName
+        lastName
+        bio
+      }
+    }
+  }
+}
+```
+
+With this as query variables:
+
+```json
+{"email": "admin@traxion.dev", "password": "password"}
+```
+
+You should get a jwt accessToken with the user information.
+
+Set the Http Header of you playground with this:
+
+```json
+{
+  "Authorization": "Bearer <accessToken>"
+}
+```
+
+Now you are fully authenticated, you can access to the users information:
+
+```graphql
+query findAllUsers {
+  findManyUsers {
+    users {
+      email
+      roles
+      profile {
+        firstName
+        lastName
+        bio
+      }
+      tasks {
+        id
+        description
+        author {
+          email
+        }
+        sharedWith {
+          email
+        }
+      }
+      sharedTasks {
+        id
+        description
+        author {
+          email
+        }
+        sharedWith {
+          email
+        }
+      }
+    }
+  }
+}
+```
+
+Well done ! You are now fully configured to update your schema and start generating with prisma your Graphql API.
