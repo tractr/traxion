@@ -112,3 +112,156 @@ export class AppModule {}
 ```
 
 Now, you're all set! Launch your app and enjoy your fully-featured, authorized GraphQL API.
+
+## Schema example with seed
+
+If you want to test out what is generated with traxion and how traxion handle authentication and ownerships you can try this schema and the seed:
+
+```prisma
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator traxion {
+  provider         = "traxion-prisma-generator"
+  output           = "../src/generated"
+  // Path relative to the output directory
+  tsConfigFilePath = "../../tsconfig.app.json"
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  /// @trxn/hidden
+  /// @trxn/encrypted
+  password String
+  /// @trxn/roles
+  role    String  @default("user")
+  // Profile relation (one-to-one)
+  profile Profile?
+  // Task relation (one-to-many)
+  tasks Task[] @relation("TaskToAuthor")
+  // Shared task relation (many-to-many)
+  sharedTasks Task[] @relation("TaskToUser")
+}
+
+model Profile {
+  id        Int     @id @default(autoincrement())
+  firstName  String
+  lastName  String
+  bio       String?
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int     @unique
+}
+
+model Task {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?
+  status      String     @default("draft")
+  author      User       @relation("TaskToAuthor", fields: [authorId], references: [id])
+  authorId    Int
+  sharedWith  User[]     @relation("TaskToUser")
+}
+```
+
+And you can add the `seed.ts` next to your schema file (don't forget to add the seed target inside your package.json file):
+
+Note: you will need to install `@ngneat/falso` as a dev dependency and to add this configuration inside your package.json:
+
+```json
+{
+  "prisma": {
+    "schema": "prisma/schema.prisma",
+    "seed": "npx ts-node --project ./prisma/seed.ts"
+  }
+}
+```
+
+```typescript
+import { randFirstName, randLastName, randText } from '@ngneat/falso';
+import { PrismaClient, Role } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
+
+const prisma = new PrismaClient();
+
+export function createUser({
+  email,
+  password,
+  roles,
+  sharedTasksWith = [],
+}: {
+  email: string;
+  password: string;
+  roles: Role[];
+  sharedTasksWith?: string[];
+}) {
+  console.info(`Creating user ${email}`);
+  return prisma.user.create({
+    data: {
+      email,
+      password: bcrypt.hashSync(password, 10),
+      roles,
+      profile: {
+        create: {
+          firstName: randFirstName(),
+          lastName: randLastName(),
+          bio: randText(),
+        },
+      },
+      tasks: {
+        create: [
+          {
+            title: `${email}'s task`,
+            description: randText(),
+            status: 'open',
+            ...(sharedTasksWith.length > 0 && {
+              sharedWith: {
+                connect: sharedTasksWith.map((userEmail) => ({
+                  email: userEmail,
+                })),
+              },
+            }),
+          },
+        ],
+      },
+    },
+  });
+}
+
+async function seed() {
+  const users = [
+    await createUser({
+      email: 'admin@traxion.dev',
+      password: 'password',
+      roles: [Role.admin],
+    }),
+    await createUser({
+      email: 'user1@traxion.dev',
+      password: 'password',
+      roles: [Role.user],
+    }),
+    await createUser({
+      email: 'user2@traxion.dev',
+      password: 'password',
+      roles: [Role.user],
+      sharedTasksWith: ['user1@traxion.dev'],
+    }),
+  ];
+
+  console.info(`Seeded ${users.length} users`);
+}
+
+seed().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
+```
