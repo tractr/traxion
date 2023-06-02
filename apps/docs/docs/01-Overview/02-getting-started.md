@@ -126,7 +126,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -179,7 +179,7 @@ And you can add the `seed.ts` next to your schema file (don't forget to add the 
 {
   "prisma": {
     "schema": "prisma/schema.prisma",
-    "seed": "npx ts-node --project ./prisma/seed.ts"
+    "seed": "npx ts-node --project tsconfig.json ./prisma/seed.ts"
   }
 }
 ```
@@ -188,7 +188,7 @@ Note: you will need to install `@ngneat/falso` as a dev dependency and to add th
 
 ```typescript
 import { randFirstName, randLastName, randText } from '@ngneat/falso';
-import { PrismaClient, Role } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
@@ -196,12 +196,12 @@ const prisma = new PrismaClient();
 export function createUser({
   email,
   password,
-  roles,
+  role,
   sharedTasksWith = [],
 }: {
   email: string;
   password: string;
-  roles: Role[];
+  role: string;
   sharedTasksWith?: string[];
 }) {
   console.info(`Creating user ${email}`);
@@ -209,7 +209,7 @@ export function createUser({
     data: {
       email,
       password: bcrypt.hashSync(password, 10),
-      roles,
+      role,
       profile: {
         create: {
           firstName: randFirstName(),
@@ -242,17 +242,17 @@ async function seed() {
     await createUser({
       email: 'admin@traxion.dev',
       password: 'password',
-      roles: [Role.admin],
+      role: 'admin',
     }),
     await createUser({
       email: 'user1@traxion.dev',
       password: 'password',
-      roles: [Role.user],
+      role: 'user',
     }),
     await createUser({
       email: 'user2@traxion.dev',
       password: 'password',
-      roles: [Role.user],
+      role: 'user',
       sharedTasksWith: ['user1@traxion.dev'],
     }),
   ];
@@ -264,6 +264,7 @@ seed().catch((e) => {
   console.error(e);
   process.exit(1);
 });
+
 ```
 
 ## User Authentication
