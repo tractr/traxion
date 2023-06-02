@@ -16,7 +16,7 @@ export function generateFindUniqueStatementMethod(model: Model): string {
   const hiddenFields = model.fields.filter(isHiddenField);
 
   return `
-    const ${modelName} = await prisma.findUnique<T>(args);
+    const ${modelName} = await prisma.findUnique<T, false>(args);
 
     ${
       hiddenFields.length
@@ -40,7 +40,7 @@ export const generateFindUniqueMethod = (
     {
       kind: StructureKind.Parameter,
       name: 'prisma',
-      type: `Prisma.${pascal(model.name)}Delegate<undefined>`,
+      type: `Prisma.${pascal(model.name)}Delegate<GlobalRejectSettings>`,
       initializer: `this.prismaClient.${camel(model.name)}`,
     },
   ];
@@ -50,6 +50,11 @@ export const generateFindUniqueMethod = (
       name: 'T',
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${pascal(model.name)}FindUniqueArgs`,
+    },
+    {
+      name: 'GlobalRejectSettings',
+      kind: StructureKind.TypeParameter,
+      constraint: `Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined`,
     },
   ];
 

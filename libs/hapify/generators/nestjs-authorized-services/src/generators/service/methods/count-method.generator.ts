@@ -33,7 +33,7 @@ export const generateCountMethod = (
     {
       kind: StructureKind.Parameter,
       name: 'prisma',
-      type: `Prisma.${pascal(model.name)}Delegate<undefined>`,
+      type: `Prisma.${pascal(model.name)}Delegate<GlobalRejectSettings>`,
       hasQuestionToken: true,
     },
   ];
@@ -43,6 +43,11 @@ export const generateCountMethod = (
       name: 'T',
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${modelPascal}CountArgs`,
+    },
+    {
+      name: 'GlobalRejectSettings',
+      kind: StructureKind.TypeParameter,
+      constraint: `Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined`,
     },
   ];
 
@@ -56,7 +61,7 @@ export const generateCountMethod = (
       `const where = {
         AND: [abilities ? accessibleBy(abilities).${modelPascal} : {}, args?.where ?? {}],
       };`,
-      `return this.${modelCamel}Service.count<T>({ ...args, where });`,
+      `return this.${modelCamel}Service.count<T, GlobalRejectSettings>({ ...args, where });`,
     ],
   };
 };

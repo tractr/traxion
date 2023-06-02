@@ -70,11 +70,18 @@ export class UserService {
    * })
    *
    */
-  async findUnique<T extends Prisma.UserFindUniqueArgs>(
+  async findUnique<
+    T extends Prisma.UserFindUniqueArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserFindUniqueArgs>,
-    prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
+    prisma: Prisma.UserDelegate<GlobalRejectSettings> = this.prismaClient.user,
   ) {
-    const user = await prisma.findUnique<T>(args);
+    const user = await prisma.findUnique<T, false>(args);
 
     return user === null ? user : this.excludeHiddenFields(user, args.select);
   }
@@ -92,11 +99,18 @@ export class UserService {
    *   }
    * })
    */
-  async findFirst<T extends Prisma.UserFindFirstArgs>(
+  async findFirst<
+    T extends Prisma.UserFindFirstArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserFindFirstArgs>,
-    prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
+    prisma: Prisma.UserDelegate<GlobalRejectSettings> = this.prismaClient.user,
   ) {
-    const user = await prisma.findFirst<T>(args);
+    const user = await prisma.findFirst<T, false>(args);
 
     return user === null ? user : this.excludeHiddenFields(user, args.select);
   }
@@ -116,9 +130,16 @@ export class UserService {
    * // Only select the 'id'
    * const userWithIdOnly = await this.UserService.findMany({ select: { id: true } })
    */
-  async findMany<T extends Prisma.UserFindManyArgs>(
+  async findMany<
+    T extends Prisma.UserFindManyArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserFindManyArgs>,
-    prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
+    prisma: Prisma.UserDelegate<GlobalRejectSettings> = this.prismaClient.user,
   ) {
     const users = await prisma.findMany<T>(args);
 
@@ -136,9 +157,16 @@ export class UserService {
    *   }
    * })
    */
-  async create<T extends Prisma.UserCreateArgs>(
+  async create<
+    T extends Prisma.UserCreateArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserCreateArgs>,
-    prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
+    prisma: Prisma.UserDelegate<GlobalRejectSettings> = this.prismaClient.user,
   ) {
     const { data } = args;
     const user = await prisma.create<T>({
@@ -159,9 +187,16 @@ export class UserService {
    *   }
    * })
    */
-  async createMany<T extends Prisma.UserCreateManyArgs>(
+  async createMany<
+    T extends Prisma.UserCreateManyArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserCreateManyArgs>,
-    prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
+    prisma: Prisma.UserDelegate<GlobalRejectSettings> = this.prismaClient.user,
   ) {
     const { data } = args;
     return prisma.createMany<T>({
@@ -188,9 +223,16 @@ export class UserService {
    *   }
    * })
    */
-  async update<T extends Prisma.UserUpdateArgs>(
+  async update<
+    T extends Prisma.UserUpdateArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserUpdateArgs>,
-    prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
+    prisma: Prisma.UserDelegate<GlobalRejectSettings> = this.prismaClient.user,
   ) {
     const { data } = args;
     const user = await prisma.update<T>({
@@ -216,9 +258,16 @@ export class UserService {
    *   }
    * })
    */
-  async updateMany<T extends Prisma.UserUpdateManyArgs>(
+  async updateMany<
+    T extends Prisma.UserUpdateManyArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserUpdateManyArgs>,
-    prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
+    prisma: Prisma.UserDelegate<GlobalRejectSettings> = this.prismaClient.user,
   ) {
     const { data } = args;
     return prisma.updateMany<T>({
@@ -248,9 +297,16 @@ export class UserService {
    *    }
    *  })
    */
-  async upsert<T extends Prisma.UserUpsertArgs>(
+  async upsert<
+    T extends Prisma.UserUpsertArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserUpsertArgs>,
-    prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
+    prisma: Prisma.UserDelegate<GlobalRejectSettings> = this.prismaClient.user,
   ) {
     const { create, update } = args;
     const user = await prisma.upsert<T>({
@@ -273,9 +329,16 @@ export class UserService {
    * })
    *
    */
-  async delete<T extends Prisma.UserDeleteArgs>(
+  async delete<
+    T extends Prisma.UserDeleteArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserDeleteArgs>,
-    prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
+    prisma: Prisma.UserDelegate<GlobalRejectSettings> = this.prismaClient.user,
   ) {
     const user = await prisma.delete<T>(args);
 
@@ -294,9 +357,16 @@ export class UserService {
    * })
    *
    */
-  async deleteMany<T extends Prisma.UserDeleteArgs>(
+  async deleteMany<
+    T extends Prisma.UserDeleteArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserDeleteManyArgs>,
-    prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
+    prisma: Prisma.UserDelegate<GlobalRejectSettings> = this.prismaClient.user,
   ) {
     return prisma.deleteMany<T>(args);
   }
@@ -314,9 +384,16 @@ export class UserService {
    *   }
    * })
    */
-  async count<T extends Prisma.UserCountArgs>(
+  async count<
+    T extends Prisma.UserCountArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserCountArgs>,
-    prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
+    prisma: Prisma.UserDelegate<GlobalRejectSettings> = this.prismaClient.user,
   ) {
     return prisma.count<T>(args);
   }
@@ -345,9 +422,16 @@ export class UserService {
    *   take: 10,
    * })
    */
-  async aggregate<T extends Prisma.UserAggregateArgs>(
+  async aggregate<
+    T extends Prisma.UserAggregateArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserAggregateArgs>,
-    prisma: Prisma.UserDelegate<undefined> = this.prismaClient.user,
+    prisma: Prisma.UserDelegate<GlobalRejectSettings> = this.prismaClient.user,
   ) {
     return prisma.aggregate<T>(args);
   }

@@ -33,7 +33,7 @@ export const generateDeleteMethod = (
     {
       kind: StructureKind.Parameter,
       name: 'prisma',
-      type: `Prisma.${pascal(model.name)}Delegate<undefined>`,
+      type: `Prisma.${pascal(model.name)}Delegate<GlobalRejectSettings>`,
       hasQuestionToken: true,
     },
   ];
@@ -43,6 +43,11 @@ export const generateDeleteMethod = (
       name: 'T',
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${modelPascal}DeleteArgs`,
+    },
+    {
+      name: 'GlobalRejectSettings',
+      kind: StructureKind.TypeParameter,
+      constraint: `Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined`,
     },
   ];
 
@@ -54,7 +59,7 @@ export const generateDeleteMethod = (
     parameters,
     statements: [
       `const deleteCb = async(client: Prisma.${modelPascal}Delegate<undefined>) => {
-        const ${modelCamel} = await this.${modelCamel}Service.delete<T>(args, client);
+        const ${modelCamel} = await this.${modelCamel}Service.delete<T, GlobalRejectSettings>(args, client);
 
         if (abilities?.cannot(Action.Delete, subject('${modelPascal}', ${modelCamel})))
           throw new ForbiddenException('cannot delete ${modelPascal}');

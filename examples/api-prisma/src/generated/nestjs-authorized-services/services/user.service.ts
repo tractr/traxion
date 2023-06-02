@@ -15,7 +15,14 @@ export class UserAuthorizedService {
     private readonly prisma: PrismaService,
   ) {}
 
-  async findUnique<T extends Prisma.UserFindUniqueArgs>(
+  async findUnique<
+    T extends Prisma.UserFindUniqueArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserFindUniqueArgs>,
     abilities: PureAbility<
       any,
@@ -23,36 +30,59 @@ export class UserAuthorizedService {
     >,
     prisma?: Prisma.UserDelegate<undefined>,
   ) {
-    const user = await this.userService.findUnique<T>(args, prisma);
+    const user = await this.userService.findUnique<T, GlobalRejectSettings>(
+      args,
+      prisma,
+    );
     if (user && abilities?.cannot(Action.Read, subject('User', user)))
       throw new ForbiddenException('cannot read this user');
     return user;
   }
 
-  async findMany<T extends Prisma.UserFindManyArgs>(
+  async findMany<
+    T extends Prisma.UserFindManyArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserFindManyArgs>,
     abilities: PureAbility<
       any,
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
-    prisma?: Prisma.UserDelegate<undefined>,
+    prisma?: Prisma.UserDelegate<GlobalRejectSettings>,
   ) {
     const where = {
       AND: [abilities ? accessibleBy(abilities).User : {}, args?.where ?? {}],
     };
-    return this.userService.findMany<T>({ ...args, where }, prisma);
+    return this.userService.findMany<T, GlobalRejectSettings>(
+      { ...args, where },
+      prisma,
+    );
   }
 
-  async create<T extends Prisma.UserCreateArgs>(
+  async create<
+    T extends Prisma.UserCreateArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserCreateArgs>,
     abilities: PureAbility<
       any,
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
-    prisma?: Prisma.UserDelegate<undefined>,
+    prisma?: Prisma.UserDelegate<GlobalRejectSettings>,
   ) {
     const create = async (client: Prisma.UserDelegate<undefined>) => {
-      const user = await this.userService.create<T>(args, client);
+      const user = await this.userService.create<T, GlobalRejectSettings>(
+        args,
+        client,
+      );
 
       if (abilities?.cannot(Action.Create, subject('User', user)))
         throw new ForbiddenException('cannot create User');
@@ -64,16 +94,26 @@ export class UserAuthorizedService {
     return this.prisma.$transaction((client) => create(client.user));
   }
 
-  async update<T extends Prisma.UserUpdateArgs>(
+  async update<
+    T extends Prisma.UserUpdateArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserUpdateArgs>,
     abilities: PureAbility<
       any,
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
-    prisma?: Prisma.UserDelegate<undefined>,
+    prisma?: Prisma.UserDelegate<GlobalRejectSettings>,
   ) {
     const update = async (client: Prisma.UserDelegate<undefined>) => {
-      const user = await this.userService.update<T>(args, client);
+      const user = await this.userService.update<T, GlobalRejectSettings>(
+        args,
+        client,
+      );
 
       if (abilities?.cannot(Action.Update, subject('User', user)))
         throw new ForbiddenException('cannot update User');
@@ -85,16 +125,26 @@ export class UserAuthorizedService {
     return this.prisma.$transaction((client) => update(client.user));
   }
 
-  async delete<T extends Prisma.UserDeleteArgs>(
+  async delete<
+    T extends Prisma.UserDeleteArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserDeleteArgs>,
     abilities: PureAbility<
       any,
       PrismaQuery<Record<string, any> & ForcedSubject<string>>
     >,
-    prisma?: Prisma.UserDelegate<undefined>,
+    prisma?: Prisma.UserDelegate<GlobalRejectSettings>,
   ) {
     const deleteCb = async (client: Prisma.UserDelegate<undefined>) => {
-      const user = await this.userService.delete<T>(args, client);
+      const user = await this.userService.delete<T, GlobalRejectSettings>(
+        args,
+        client,
+      );
 
       if (abilities?.cannot(Action.Delete, subject('User', user)))
         throw new ForbiddenException('cannot delete User');
@@ -106,7 +156,14 @@ export class UserAuthorizedService {
     return this.prisma.$transaction((client) => deleteCb(client.user));
   }
 
-  async count<T extends Prisma.UserCountArgs>(
+  async count<
+    T extends Prisma.UserCountArgs,
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined,
+  >(
     args: Prisma.SelectSubset<T, Prisma.UserCountArgs>,
     abilities: PureAbility<
       any,
@@ -116,6 +173,6 @@ export class UserAuthorizedService {
     const where = {
       AND: [abilities ? accessibleBy(abilities).User : {}, args?.where ?? {}],
     };
-    return this.userService.count<T>({ ...args, where });
+    return this.userService.count<T, GlobalRejectSettings>({ ...args, where });
   }
 }

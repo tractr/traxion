@@ -35,7 +35,7 @@ export const generateFindUniqueMethod = (
     {
       kind: StructureKind.Parameter,
       name: 'prisma',
-      type: `Prisma.${pascal(model.name)}Delegate<undefined>`,
+      type: `Prisma.${pascal(model.name)}Delegate<GlobalRejectSettings>`,
       hasQuestionToken: true,
     },
   ];
@@ -46,6 +46,11 @@ export const generateFindUniqueMethod = (
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${pascal(model.name)}FindUniqueArgs`,
     },
+    {
+      name: 'GlobalRejectSettings',
+      kind: StructureKind.TypeParameter,
+      constraint: `Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined`,
+    },
   ];
 
   return {
@@ -55,7 +60,7 @@ export const generateFindUniqueMethod = (
     typeParameters,
     parameters,
     statements: [
-      `const ${modelCamel} = await this.${modelCamel}Service.findUnique<T>(args, prisma);`,
+      `const ${modelCamel} = await this.${modelCamel}Service.findUnique<T, GlobalRejectSettings>(args, prisma);`,
       `if (${modelCamel} && abilities?.cannot(Action.Read, subject('${modelPascal}', ${modelCamel})))`,
       `  throw new ForbiddenException('cannot read this user');`,
       `return ${modelCamel}`,

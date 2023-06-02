@@ -15,7 +15,7 @@ export function generateFindFirstStatementMethod(model: Model): string {
   const modelName = camel(model.name);
   const hiddenFields = model.fields.filter(isHiddenField);
 
-  return `const ${modelName} = await prisma.findFirst<T>(args);
+  return `const ${modelName} = await prisma.findFirst<T, false>(args);
 
     ${
       hiddenFields.length
@@ -37,7 +37,7 @@ export const generateFindFirstMethod = (
     {
       kind: StructureKind.Parameter,
       name: 'prisma',
-      type: `Prisma.${pascal(model.name)}Delegate<undefined>`,
+      type: `Prisma.${pascal(model.name)}Delegate<GlobalRejectSettings>`,
       initializer: `this.prismaClient.${camel(model.name)}`,
     },
   ];
@@ -47,6 +47,11 @@ export const generateFindFirstMethod = (
       name: 'T',
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${pascal(model.name)}FindFirstArgs`,
+    },
+    {
+      name: 'GlobalRejectSettings',
+      kind: StructureKind.TypeParameter,
+      constraint: `Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined`,
     },
   ];
 

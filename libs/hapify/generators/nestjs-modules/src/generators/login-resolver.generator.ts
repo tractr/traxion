@@ -203,14 +203,19 @@ export function generateLoginResolverClass(
             throw new UnauthorizedException();
           }
 
-          const { password: passwordHash } = await this.userService.findUnique({
-            where: {
-              ${camel(login.name)},
-            },
-            select: {
-              password: true,
-            },
-          });
+          const { password: passwordHash } =
+            (await this.userService.findUnique({
+              where: {
+                ${camel(login.name)},
+              },
+              select: {
+                password: true,
+              },
+            })) || {};
+
+          if (!passwordHash) {
+            throw new UnauthorizedException();
+          }
 
           const isValid = await this.hashService.compare(password, passwordHash);
 

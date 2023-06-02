@@ -51,14 +51,19 @@ export class LoginResolver {
       throw new UnauthorizedException();
     }
 
-    const { password: passwordHash } = await this.userService.findUnique({
-      where: {
-        email,
-      },
-      select: {
-        password: true,
-      },
-    });
+    const { password: passwordHash } =
+      (await this.userService.findUnique({
+        where: {
+          email,
+        },
+        select: {
+          password: true,
+        },
+      })) || {};
+
+    if (!passwordHash) {
+      throw new UnauthorizedException();
+    }
 
     const isValid = await this.hashService.compare(password, passwordHash);
 
