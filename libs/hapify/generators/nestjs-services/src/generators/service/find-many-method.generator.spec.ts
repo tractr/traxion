@@ -53,7 +53,9 @@ describe('generateFindManyMethod', () => {
     expect(parameters?.[0].kind).toEqual(30); // corresponds to `StructureKind.Parameter`
 
     expect(parameters?.[1].name).toEqual('prisma');
-    expect(parameters?.[1].type).toEqual(`Prisma.UserDelegate<undefined>`);
+    expect(parameters?.[1].type).toEqual(
+      `Prisma.UserDelegate<GlobalRejectSettings>`,
+    );
     expect(parameters?.[1].kind).toEqual(30); // corresponds to `StructureKind.Parameter`
     expect(parameters?.[1].initializer).toEqual(`this.prismaClient.user`);
   });

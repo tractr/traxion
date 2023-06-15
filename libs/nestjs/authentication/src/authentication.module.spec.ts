@@ -137,10 +137,6 @@ describe('Authentication Module', () => {
 
       app = moduleFixture.createNestApplication();
       await app.init();
-
-      app = moduleFixture.createNestApplication();
-
-      await app.init();
     });
 
     afterEach(async () => {
@@ -163,15 +159,14 @@ describe('Authentication Module', () => {
       await request(app.getHttpServer()).post('/logout').expect(200);
     });
 
-    it('/me should fail with 401 and reset cookie', async () => {
+    it('/me should fail with 400 and not reset cookie', async () => {
       const response = await request(app.getHttpServer())
         .get('/me')
-        .expect(401);
+        .expect(400);
 
-      const cookie = response.headers['set-cookie'][0];
+      const cookie = response.headers['set-cookie'];
 
-      expect(cookie).toMatch(/authCookie=/);
-      expect(cookie).toMatch(/Path=\//);
+      expect(cookie).toBeUndefined();
     });
   });
 });

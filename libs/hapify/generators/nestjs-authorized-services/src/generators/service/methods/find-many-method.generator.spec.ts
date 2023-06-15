@@ -59,12 +59,14 @@ describe('generateFindManyMethod', () => {
     expect(parameters?.[1].kind).toEqual(30); // corresponds to `StructureKind.Parameter`
 
     expect(parameters?.[2].name).toEqual('prisma');
-    expect(parameters?.[2].type).toEqual(`Prisma.UserDelegate<undefined>`);
+    expect(parameters?.[2].type).toEqual(
+      `Prisma.UserDelegate<GlobalRejectSettings>`,
+    );
     expect(parameters?.[2].kind).toEqual(30); // corresponds to `StructureKind.Parameter`
   });
 
   it('generates a method declaration with the correct statements', () => {
-    const expectedStatements = `const where = { AND: [abilities ? accessibleBy(abilities).User : {}, args?.where ?? {}], }; return this.userService.findMany<T>({ ...args, where }, prisma);`;
+    const expectedStatements = `const where = { AND: [abilities ? accessibleBy(abilities).User : {}, args?.where ?? {}], }; return this.userService.findMany<T, GlobalRejectSettings>({ ...args, where }, prisma);`;
     expect(
       compressWhitespace((generatedMethod.statements as string[]).join('\n')),
     ).toEqual(expectedStatements);
