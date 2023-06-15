@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.2.5](https://github.com/tractr/traxion/compare/v2.2.4...v2.2.5) (2023-06-15)
+
+
+### Bug Fixes
+
+* remove the default JwtAuthGuard from /me ([#628](https://github.com/tractr/traxion/issues/628)) ([fe5fb60](https://github.com/tractr/traxion/commit/fe5fb607e52e0bbcfa57dbf059773a735d9ea351))
+
+
+
 ## [2.2.4](https://github.com/tractr/traxion/compare/v2.2.3...v2.2.4) (2023-06-02)
 
 
