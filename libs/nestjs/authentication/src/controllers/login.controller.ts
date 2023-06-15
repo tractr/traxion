@@ -1,11 +1,11 @@
 import {
-  BadRequestException,
   Controller,
   Get,
   HttpCode,
   Post,
   Req,
   Res,
+  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBody } from '@nestjs/swagger';
@@ -65,7 +65,7 @@ export class LoginController {
     );
 
     if (!user) {
-      throw new BadRequestException();
+      throw new UnauthorizedException();
     }
 
     return user;
