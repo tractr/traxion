@@ -58,7 +58,9 @@ describe('generateCreateMethod', () => {
     expect(prismaParameters?.name).toEqual('prisma');
     expect(prismaParameters?.kind).toEqual(30);
     expect(prismaParameters?.kind).toEqual(StructureKind.Parameter);
-    expect(prismaParameters?.type).toEqual(`Prisma.UserDelegate<undefined>`);
+    expect(prismaParameters?.type).toEqual(
+      `Prisma.UserDelegate<GlobalRejectSettings>`,
+    );
 
     expect(abilitiesParameters?.name).toEqual('abilities');
     expect(abilitiesParameters?.kind).toEqual(30);
@@ -69,7 +71,7 @@ describe('generateCreateMethod', () => {
   });
 
   it('generates a method declaration with the correct statements', () => {
-    const expectedStatements = `const create = async(client: Prisma.UserDelegate<undefined>) => { const user = await this.userService.create<T>(args, client); if (abilities?.cannot(Action.Create, subject('User', user))) throw new ForbiddenException('cannot create User'); return user; } if (prisma) return create(prisma); return this.prisma.$transaction((client) => create(client.user));`;
+    const expectedStatements = `const create = async(client: Prisma.UserDelegate<undefined>) => { const user = await this.userService.create<T, GlobalRejectSettings>(args, client); if (abilities?.cannot(Action.Create, subject('User', user))) throw new ForbiddenException('cannot create User'); return user; } if (prisma) return create(prisma); return this.prisma.$transaction((client) => create(client.user));`;
 
     expect(
       compressWhitespace((methodDeclaration.statements as string[]).join('\n')),

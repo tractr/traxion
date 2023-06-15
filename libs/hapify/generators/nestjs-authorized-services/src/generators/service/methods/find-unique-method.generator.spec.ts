@@ -46,6 +46,11 @@ describe('generateFindUniqueMethod', () => {
           kind: StructureKind.TypeParameter,
           constraint: `Prisma.UserFindUniqueArgs`,
         },
+        {
+          name: 'GlobalRejectSettings',
+          kind: StructureKind.TypeParameter,
+          constraint: `Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined`,
+        },
       ];
 
     expect(methodDeclaration.typeParameters).toEqual(expectedTypeParameters);
@@ -64,7 +69,9 @@ describe('generateFindUniqueMethod', () => {
 
     expect(prismaParameters?.name).toEqual('prisma');
     expect(prismaParameters?.kind).toEqual(30); // StructureKind.Parameter is equal to 30
-    expect(prismaParameters?.type).toEqual(`Prisma.UserDelegate<undefined>`);
+    expect(prismaParameters?.type).toEqual(
+      `Prisma.UserDelegate<GlobalRejectSettings>`,
+    );
 
     expect(abilitiesParameters?.name).toEqual('abilities');
     expect(abilitiesParameters?.kind).toEqual(30); // StructureKind.Parameter is equal to 30
@@ -77,7 +84,7 @@ describe('generateFindUniqueMethod', () => {
     expect(
       compressWhitespace((methodDeclaration.statements as string[]).join('\n')),
     ).toBe(
-      `const user = await this.userService.findUnique<T>(args, prisma); if (user && abilities?.cannot(Action.Read, subject('User', user))) throw new ForbiddenException('cannot read this user'); return user`,
+      `const user = await this.userService.findUnique<T, GlobalRejectSettings>(args, prisma); if (user && abilities?.cannot(Action.Read, subject('User', user))) throw new ForbiddenException('cannot read this user'); return user`,
     );
   });
 });

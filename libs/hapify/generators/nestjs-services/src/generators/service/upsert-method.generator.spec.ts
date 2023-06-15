@@ -42,7 +42,9 @@ describe('generateUpsertMethod', () => {
 
     const prismaParameter = methodDeclaration.parameters?.[1];
     expect(prismaParameter?.name).toBe('prisma');
-    expect(prismaParameter?.type).toBe(`Prisma.UserDelegate<undefined>`);
+    expect(prismaParameter?.type).toBe(
+      `Prisma.UserDelegate<GlobalRejectSettings>`,
+    );
     expect(prismaParameter?.initializer).toBe(`this.prismaClient.user`);
 
     expect(compressWhitespace(methodDeclaration.statements as string)).toBe(

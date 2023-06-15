@@ -114,7 +114,7 @@ describe('Login Controller', () => {
 
       expect(response.body).toEqual(mockUser);
       // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(mockUserService.findUserById).toHaveBeenCalledTimes(2);
+      expect(mockUserService.findUserById).toHaveBeenCalledTimes(1);
     });
   });
 

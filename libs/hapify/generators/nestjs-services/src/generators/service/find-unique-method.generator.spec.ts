@@ -47,6 +47,11 @@ describe('generateFindUniqueMethod', () => {
           kind: StructureKind.TypeParameter,
           constraint: `Prisma.UserFindUniqueArgs`,
         },
+        {
+          name: 'GlobalRejectSettings',
+          kind: StructureKind.TypeParameter,
+          constraint: `Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined`,
+        },
       ];
 
     expect(methodDeclaration.typeParameters).toEqual(expectedTypeParameters);
@@ -64,12 +69,14 @@ describe('generateFindUniqueMethod', () => {
 
     expect(prismaParameters?.name).toEqual('prisma');
     expect(prismaParameters?.kind).toEqual(30); // StructureKind.Parameter is equal to 30
-    expect(prismaParameters?.type).toEqual(`Prisma.UserDelegate<undefined>`);
+    expect(prismaParameters?.type).toEqual(
+      `Prisma.UserDelegate<GlobalRejectSettings>`,
+    );
   });
 
   it('generates a method declaration with the correct statements', () => {
     expect(compressWhitespace(methodDeclaration.statements as string)).toBe(
-      'const user = await prisma.findUnique<T>(args); return user;',
+      'const user = await prisma.findUnique<T, false>(args); return user;',
     );
   });
 

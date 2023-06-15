@@ -38,7 +38,7 @@ describe('generateUpdateManyMethod', () => {
     );
     expect(methodDeclaration.parameters?.[1].name).toBe('prisma');
     expect(methodDeclaration.parameters?.[1].type).toBe(
-      `Prisma.UserDelegate<undefined>`,
+      `Prisma.UserDelegate<GlobalRejectSettings>`,
     );
     expect(methodDeclaration.parameters?.[1].initializer).toBe(
       `this.prismaClient.user`,
@@ -51,13 +51,16 @@ describe('generateUpdateManyMethod', () => {
         kind: StructureKind.TypeParameter,
         constraint: `Prisma.UserUpdateManyArgs`,
       },
+      {
+        name: 'GlobalRejectSettings',
+        kind: StructureKind.TypeParameter,
+        constraint: `Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined`,
+      },
     ]);
 
     // Check return type
     expect(methodDeclaration.statements).toBe(
       `return prisma.updateMany<T>(args);`,
     );
-
-    // TODO : a check for description ? see with Max
   });
 });

@@ -51,7 +51,9 @@ describe('generateDeleteMethod', () => {
     expect(prismaParameters?.name).toEqual('prisma');
     expect(prismaParameters?.kind).toEqual(30);
     expect(prismaParameters?.kind).toEqual(StructureKind.Parameter);
-    expect(prismaParameters?.type).toEqual(`Prisma.UserDelegate<undefined>`);
+    expect(prismaParameters?.type).toEqual(
+      `Prisma.UserDelegate<GlobalRejectSettings>`,
+    );
   });
 
   it('generates a method declaration with the correct statements', () => {

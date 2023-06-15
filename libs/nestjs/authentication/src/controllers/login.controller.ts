@@ -57,7 +57,6 @@ export class LoginController {
   }
 
   @Get('me')
-  @UseGuards(JwtAuthGuard)
   async me<U extends User = MinimalUser>(
     @CurrentUser() currentUser: U,
   ): Promise<U> {
