@@ -9,7 +9,11 @@ import { ModuleRef, Reflector } from '@nestjs/core';
 import { CaslAbilityFactoryService } from '../services';
 
 import { isClass, PolicyHandlerType } from '@trxn/common';
-import { getRequestFromContext, POLICIES_KEY } from '@trxn/nestjs-core';
+import {
+  getRequestFromContext,
+  POLICIES_KEY,
+  shouldSkipGlobalGuard,
+} from '@trxn/nestjs-core';
 import { MinimalUser, User } from '@trxn/nestjs-user';
 
 @Injectable()
@@ -23,16 +27,13 @@ export class PoliciesGuard implements CanActivate {
   async canActivate<U extends User = MinimalUser>(
     context: ExecutionContext,
   ): Promise<boolean> {
+    if (shouldSkipGlobalGuard(context, this.reflector)) return true;
+
     const policyHandlers =
       this.reflector.get<PolicyHandlerType<unknown>[]>(
         POLICIES_KEY,
         context.getHandler(),
       ) || [];
-
-    const contextType: string = context.getType();
-
-    // Skip the guard for rabbitmq requests
-    if (contextType === 'rmq') return true;
 
     // Extract request from the context
     const req = getRequestFromContext(context);
