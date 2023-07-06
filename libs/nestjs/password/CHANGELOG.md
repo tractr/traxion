@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.2.6](https://github.com/tractr/traxion/compare/v2.2.5...v2.2.6) (2023-07-06)
+
+
+### Bug Fixes
+
+* update user query in password update function ([#631](https://github.com/tractr/traxion/issues/631)) ([1c500be](https://github.com/tractr/traxion/commit/1c500be434fb273a3ec0754ab85266d1bcbf63b7))
+
+
+
 ## [2.2.5](https://github.com/tractr/traxion/compare/v2.2.4...v2.2.5) (2023-06-15)
 
 
