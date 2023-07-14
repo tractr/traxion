@@ -12,7 +12,6 @@ The following lists represent a number of smaller-scope issues and improvements 
 
 ### Bug fixes
 
-
 ## Done
 
 ### Features
@@ -22,5 +21,3 @@ The following lists represent a number of smaller-scope issues and improvements 
 - [x] Generate GraphQL resolvers from Prisma schema
 
 ### Bug fixes
-
-
