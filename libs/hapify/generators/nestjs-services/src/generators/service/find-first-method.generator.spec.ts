@@ -39,7 +39,7 @@ describe('generateFindFirstMethod', () => {
     const typeParameters: TypeParameterDeclarationStructure[] =
       method.typeParameters as TypeParameterDeclarationStructure[];
 
-    expect(typeParameters.length).toEqual(2);
+    expect(typeParameters.length).toEqual(1);
     expect(typeParameters[0].name).toEqual('T');
     expect(typeParameters[0].constraint).toEqual(
       `Prisma.${pascal(model.name)}FindFirstArgs`,
@@ -56,17 +56,11 @@ describe('generateFindFirstMethod', () => {
     expect(parameters[0].type).toEqual(
       `Prisma.SelectSubset<T, Prisma.UserFindFirstArgs>`,
     );
-
-    expect(parameters[1].name).toEqual('prisma');
-    expect(parameters[1].type).toEqual(
-      `Prisma.UserDelegate<GlobalRejectSettings>`,
-    );
-    expect(parameters[1].initializer).toEqual(`this.prismaClient.user`);
   });
 
   it('generates a method declaration with the correct statements', () => {
     expect(compressWhitespace(method.statements as string)).toEqual(
-      `const user = await prisma.findFirst<T, false>(args); return user;`,
+      `const user = await prisma.findFirst<T>(args); return user;`,
     );
   });
 

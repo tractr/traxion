@@ -84,7 +84,7 @@ export function generateUserSelectWithOwnershipIdsSourceFile(
     declarations: [
       {
         name: 'UserSelectOwnershipIds',
-        initializer: `Prisma.validator<Prisma.UserArgs>()(
+        initializer: `Prisma.validator<Prisma.UserDefaultArgs>()(
           ${JSON.stringify(createSelectClose(models, roleField), null, 2)}
         );`,
       },

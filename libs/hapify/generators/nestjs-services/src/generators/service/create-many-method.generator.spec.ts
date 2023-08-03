@@ -58,9 +58,7 @@ describe('generateCreateMethod', () => {
     expect(prismaParameters?.name).toEqual('prisma');
     expect(prismaParameters?.kind).toEqual(30);
     expect(prismaParameters?.kind).toEqual(StructureKind.Parameter);
-    expect(prismaParameters?.type).toEqual(
-      `Prisma.UserDelegate<GlobalRejectSettings>`,
-    );
+    expect(prismaParameters?.type).toEqual(`Prisma.UserDelegate`);
   });
 
   it('generates a method declaration with the correct statements', () => {

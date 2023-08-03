@@ -1,4 +1,5 @@
 import { ArgsType, Field, Int } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 import { Type } from 'class-transformer';
 
 import { TaskAvgAggregateInput } from './task-avg-aggregate.input';
@@ -20,7 +21,7 @@ export class TaskAggregateArgs {
   orderBy?: Array<TaskOrderByWithRelationInput>;
 
   @Field(() => TaskWhereUniqueInput, { nullable: true })
-  cursor?: TaskWhereUniqueInput;
+  cursor?: Prisma.AtLeast<TaskWhereUniqueInput, 'id'>;
 
   @Field(() => Int, { nullable: true })
   take?: number;

@@ -67,7 +67,7 @@ export class UserResolver {
     >,
   ) {
     const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
-      .value as Prisma.UserArgs;
+      .value as Prisma.UserDefaultArgs;
     const user = await this.userAuthorizedService.findUnique(
       { where, ...select },
       abilities,
@@ -97,7 +97,7 @@ export class UserResolver {
   ) {
     const select = new PrismaSelect(info, {
       defaultFields: this.defaultFields,
-    }).valueOf('users', 'User') as Prisma.UserArgs;
+    }).valueOf('users', 'User') as Prisma.UserDefaultArgs;
 
     const users = await this.userAuthorizedService.findMany(
       {
@@ -139,7 +139,7 @@ export class UserResolver {
     >,
   ) {
     const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
-      .value as Prisma.UserArgs;
+      .value as Prisma.UserDefaultArgs;
 
     const user = await this.userAuthorizedService.create(
       { data, ...select },
@@ -162,7 +162,7 @@ export class UserResolver {
     >,
   ) {
     const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
-      .value as Prisma.UserArgs;
+      .value as Prisma.UserDefaultArgs;
 
     const user = await this.userAuthorizedService.update(
       { where, data, ...select },
@@ -185,7 +185,7 @@ export class UserResolver {
     >,
   ) {
     const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
-      .value as Prisma.UserArgs;
+      .value as Prisma.UserDefaultArgs;
 
     const user = await this.userAuthorizedService.delete(
       { where, ...select },

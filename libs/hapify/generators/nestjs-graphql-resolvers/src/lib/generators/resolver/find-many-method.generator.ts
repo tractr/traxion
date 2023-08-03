@@ -50,7 +50,7 @@ export function generateFindManyMethod(
   ];
 
   const statements = `
-    const select = new PrismaSelect(info).valueOf('${modelPluralCamel}', '${modelPascal}') as Prisma.${modelPascal}Args;
+    const select = new PrismaSelect(info).valueOf('${modelPluralCamel}', '${modelPascal}') as Prisma.${modelPascal}DefaultArgs;
 
     const ${modelPluralCamel} = await this.${modelCamel}Service.findMany({
       ...select,

@@ -33,7 +33,7 @@ export const generateCreateMethod = (
     {
       kind: StructureKind.Parameter,
       name: 'prisma',
-      type: `Prisma.${pascal(model.name)}Delegate<GlobalRejectSettings>`,
+      type: `Prisma.${pascal(model.name)}Delegate`,
       hasQuestionToken: true,
     },
   ];
@@ -44,11 +44,6 @@ export const generateCreateMethod = (
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${modelPascal}CreateArgs`,
     },
-    {
-      name: 'GlobalRejectSettings',
-      kind: StructureKind.TypeParameter,
-      constraint: `Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined`,
-    },
   ];
 
   return {
@@ -58,8 +53,8 @@ export const generateCreateMethod = (
     typeParameters,
     parameters,
     statements: [
-      `const create = async(client: Prisma.${modelPascal}Delegate<undefined>) => {
-        const ${modelCamel} = await this.${modelCamel}Service.create<T, GlobalRejectSettings>(args, client);
+      `const create = async(client: Prisma.${modelPascal}Delegate) => {
+        const ${modelCamel} = await this.${modelCamel}Service.create<T>(args, client);
 
         if (abilities?.cannot(Action.Create, subject('${modelPascal}', ${modelCamel})))
           throw new ForbiddenException('cannot create ${modelPascal}');

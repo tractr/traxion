@@ -64,7 +64,7 @@ export class ProfileResolver {
     >,
   ) {
     const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
-      .value as Prisma.ProfileArgs;
+      .value as Prisma.ProfileDefaultArgs;
     const profile = await this.profileAuthorizedService.findUnique(
       { where, ...select },
       abilities,
@@ -94,7 +94,7 @@ export class ProfileResolver {
   ) {
     const select = new PrismaSelect(info, {
       defaultFields: this.defaultFields,
-    }).valueOf('profiles', 'Profile') as Prisma.ProfileArgs;
+    }).valueOf('profiles', 'Profile') as Prisma.ProfileDefaultArgs;
 
     const profiles = await this.profileAuthorizedService.findMany(
       {
@@ -136,7 +136,7 @@ export class ProfileResolver {
     >,
   ) {
     const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
-      .value as Prisma.ProfileArgs;
+      .value as Prisma.ProfileDefaultArgs;
 
     const profile = await this.profileAuthorizedService.create(
       { data, ...select },
@@ -159,7 +159,7 @@ export class ProfileResolver {
     >,
   ) {
     const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
-      .value as Prisma.ProfileArgs;
+      .value as Prisma.ProfileDefaultArgs;
 
     const profile = await this.profileAuthorizedService.update(
       { where, data, ...select },
@@ -182,7 +182,7 @@ export class ProfileResolver {
     >,
   ) {
     const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
-      .value as Prisma.ProfileArgs;
+      .value as Prisma.ProfileDefaultArgs;
 
     const profile = await this.profileAuthorizedService.delete(
       { where, ...select },

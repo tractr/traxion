@@ -48,11 +48,6 @@ describe('generateUpdateMethod', () => {
         kind: StructureKind.TypeParameter,
         constraint: `Prisma.UserUpdateArgs`,
       },
-      {
-        name: 'GlobalRejectSettings',
-        kind: StructureKind.TypeParameter,
-        constraint: `Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined`,
-      },
     ]);
 
     // Check return type

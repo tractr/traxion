@@ -46,7 +46,7 @@ export const generateUpdateMethod = (
     {
       kind: StructureKind.Parameter,
       name: 'prisma',
-      type: `Prisma.${pascal(model.name)}Delegate<GlobalRejectSettings>`,
+      type: `Prisma.${pascal(model.name)}Delegate`,
       initializer: `this.prismaClient.${camel(model.name)}`,
     },
   ];
@@ -56,11 +56,6 @@ export const generateUpdateMethod = (
       name: 'T',
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${pascal(model.name)}UpdateArgs`,
-    },
-    {
-      name: 'GlobalRejectSettings',
-      kind: StructureKind.TypeParameter,
-      constraint: `Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined`,
     },
   ];
 

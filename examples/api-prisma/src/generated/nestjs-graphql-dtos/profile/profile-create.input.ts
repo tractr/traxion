@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field , InputType } from '@nestjs/graphql';
 
 import { UserCreateNestedOneWithoutProfileInput } from '../user/user-create-nested-one-without-profile.input';
 

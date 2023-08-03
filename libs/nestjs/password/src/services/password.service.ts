@@ -20,7 +20,9 @@ export class PasswordService {
   ) {
     // Password clause should be explicitly set to true, as we usually use a prisma
     // middleware that remove the password field by default, if not explicitly set to true
-    const user = await this.userService.findUserById(userId, { password: true});
+    const user = await this.userService.findUserById(userId, {
+      password: true,
+    });
 
     if (!user) {
       throw new UserNotFoundError();

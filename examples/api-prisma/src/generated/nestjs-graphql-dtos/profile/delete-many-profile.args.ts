@@ -1,7 +1,8 @@
-import { ArgsType, Field } from '@nestjs/graphql';
+import { ArgsType , Field } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 
 import { ProfileWhereInput } from './profile-where.input';
+
 
 @ArgsType()
 export class DeleteManyProfileArgs {

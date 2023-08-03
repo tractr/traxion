@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field , InputType } from '@nestjs/graphql';
 
 import { NestedIntNullableFilter } from './nested-int-nullable-filter.input';
 import { NestedStringNullableFilter } from './nested-string-nullable-filter.input';
