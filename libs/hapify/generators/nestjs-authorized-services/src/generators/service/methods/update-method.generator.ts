@@ -33,7 +33,7 @@ export const generateUpdateMethod = (
     {
       kind: StructureKind.Parameter,
       name: 'prisma',
-      type: `Prisma.${pascal(model.name)}Delegate<GlobalRejectSettings>`,
+      type: `Prisma.${pascal(model.name)}Delegate`,
       hasQuestionToken: true,
     },
   ];
@@ -44,11 +44,6 @@ export const generateUpdateMethod = (
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${modelPascal}UpdateArgs`,
     },
-    {
-      name: 'GlobalRejectSettings',
-      kind: StructureKind.TypeParameter,
-      constraint: `Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined`,
-    },
   ];
 
   return {
@@ -58,8 +53,8 @@ export const generateUpdateMethod = (
     typeParameters,
     parameters,
     statements: [
-      `const update = async(client: Prisma.${modelPascal}Delegate<undefined>) => {
-        const ${modelCamel} = await this.${modelCamel}Service.update<T, GlobalRejectSettings>(args, client);
+      `const update = async(client: Prisma.${modelPascal}Delegate) => {
+        const ${modelCamel} = await this.${modelCamel}Service.update<T>(args, client);
 
         if (abilities?.cannot(Action.Update, subject('${modelPascal}', ${modelCamel})))
           throw new ForbiddenException('cannot update ${modelPascal}');

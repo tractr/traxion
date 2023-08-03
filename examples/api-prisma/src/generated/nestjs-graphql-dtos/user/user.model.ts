@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field , ID , ObjectType } from '@nestjs/graphql';
 
 import { UserCount } from './user-count.output';
 import { Role } from '../prisma/role.enum';

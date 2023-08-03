@@ -60,16 +60,14 @@ describe('generateDeleteMethod', () => {
     expect(prismaParameters?.name).toEqual('prisma');
     expect(prismaParameters?.kind).toEqual(30);
     expect(prismaParameters?.kind).toEqual(StructureKind.Parameter);
-    expect(prismaParameters?.type).toEqual(
-      `Prisma.UserDelegate<GlobalRejectSettings>`,
-    );
+    expect(prismaParameters?.type).toEqual(`Prisma.UserDelegate`);
   });
 
   it('generates a method declaration with the correct statements', () => {
     expect(
       compressWhitespace((method.statements as string[]).join('\n')),
     ).toEqual(
-      `const deleteCb = async(client: Prisma.UserDelegate<undefined>) => { const user = await this.userService.delete<T, GlobalRejectSettings>(args, client); if (abilities?.cannot(Action.Delete, subject('User', user))) throw new ForbiddenException('cannot delete User'); return user; } if (prisma) return deleteCb(prisma); return this.prisma.$transaction((client) => deleteCb(client.user));`,
+      `const deleteCb = async(client: Prisma.UserDelegate) => { const user = await this.userService.delete<T>(args, client); if (abilities?.cannot(Action.Delete, subject('User', user))) throw new ForbiddenException('cannot delete User'); return user; } if (prisma) return deleteCb(prisma); return this.prisma.$transaction((client) => deleteCb(client.user));`,
     );
   });
 });

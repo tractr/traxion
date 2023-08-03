@@ -61,16 +61,14 @@ describe('generateCountMethod', () => {
     expect(prismaParameters?.name).toEqual('prisma');
     expect(prismaParameters?.kind).toEqual(30);
     expect(prismaParameters?.kind).toEqual(StructureKind.Parameter);
-    expect(prismaParameters?.type).toEqual(
-      `Prisma.UserDelegate<GlobalRejectSettings>`,
-    );
+    expect(prismaParameters?.type).toEqual(`Prisma.UserDelegate`);
   });
 
   it('generates a method declaration with the correct statements', () => {
     expect(
       compressWhitespace((methodDeclaration.statements as string[]).join('\n')),
     ).toEqual(
-      `const where = { AND: [abilities ? accessibleBy(abilities).User : {}, args?.where ?? {}], }; return this.userService.count<T, GlobalRejectSettings>({ ...args, where });`,
+      `const where = { AND: [abilities ? accessibleBy(abilities).User : {}, args?.where ?? {}], }; return this.userService.count<T>({ ...args, where });`,
     );
   });
 });

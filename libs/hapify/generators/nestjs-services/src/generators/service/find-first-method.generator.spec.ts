@@ -58,15 +58,13 @@ describe('generateFindFirstMethod', () => {
     );
 
     expect(parameters[1].name).toEqual('prisma');
-    expect(parameters[1].type).toEqual(
-      `Prisma.UserDelegate<GlobalRejectSettings>`,
-    );
+    expect(parameters[1].type).toEqual(`Prisma.UserDelegate`);
     expect(parameters[1].initializer).toEqual(`this.prismaClient.user`);
   });
 
   it('generates a method declaration with the correct statements', () => {
     expect(compressWhitespace(method.statements as string)).toEqual(
-      `const user = await prisma.findFirst<T, false>(args); return user;`,
+      `const user = await prisma.findFirst<T>(args); return user;`,
     );
   });
 

@@ -1,4 +1,4 @@
-import { ArgsType, Field } from '@nestjs/graphql';
+import { ArgsType , Field } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 
 import { TaskUpdateInput } from './task-update.input';
