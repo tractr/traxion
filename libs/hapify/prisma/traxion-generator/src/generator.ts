@@ -1,8 +1,8 @@
 import { join } from 'path';
 
-import { generate as prismaNestjsGraphqlGenerate } from '@floross/temp-prisma-nestjs-graphql/generate';
 import { generatorHandler } from '@prisma/generator-helper';
 import { logger } from '@prisma/internals';
+import { generate as prismaNestjsGraphqlGenerate } from 'prisma-nestjs-graphql/generate';
 import { Project } from 'ts-morph';
 
 import { version } from '../package.json';
@@ -56,7 +56,7 @@ generatorHandler({
         generator: {
           ...options.generator,
           output: {
-            ...options.generator.output,
+            fromEnvVar: options.generator.output?.fromEnvVar || null,
             value: join(output, 'nestjs-graphql-dtos'),
           },
           config: {

@@ -1,4 +1,5 @@
-import { Field , InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 import { Type } from 'class-transformer';
 
 import { TaskCreateWithoutAuthorInput } from './task-create-without-author.input';
@@ -9,7 +10,7 @@ import { TaskWhereUniqueInput } from './task-where-unique.input';
 export class TaskUpsertWithWhereUniqueWithoutAuthorInput {
   @Field(() => TaskWhereUniqueInput, { nullable: false })
   @Type(() => TaskWhereUniqueInput)
-  where!: TaskWhereUniqueInput;
+  where!: Prisma.AtLeast<TaskWhereUniqueInput, 'id'>;
 
   @Field(() => TaskUpdateWithoutAuthorInput, { nullable: false })
   @Type(() => TaskUpdateWithoutAuthorInput)

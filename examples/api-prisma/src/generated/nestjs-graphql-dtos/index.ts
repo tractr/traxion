@@ -15,7 +15,6 @@ export { NestedStringNullableFilter } from './prisma/nested-string-nullable-filt
 export { NestedStringNullableWithAggregatesFilter } from './prisma/nested-string-nullable-with-aggregates-filter.input';
 export { NestedStringWithAggregatesFilter } from './prisma/nested-string-with-aggregates-filter.input';
 export { NullsOrder } from './prisma/nulls-order.enum';
-export { ProfileNullableRelationFilter } from './prisma/profile-nullable-relation-filter.input';
 export { QueryMode } from './prisma/query-mode.enum';
 export { Role } from './prisma/role.enum';
 export { SortOrder } from './prisma/sort-order.enum';
@@ -56,6 +55,7 @@ export { ProfileMaxOrderByAggregateInput } from './profile/profile-max-order-by-
 export { ProfileMinAggregateInput } from './profile/profile-min-aggregate.input';
 export { ProfileMinAggregate } from './profile/profile-min-aggregate.output';
 export { ProfileMinOrderByAggregateInput } from './profile/profile-min-order-by-aggregate.input';
+export { ProfileNullableRelationFilter } from './profile/profile-nullable-relation-filter.input';
 export { ProfileOrderByWithAggregationInput } from './profile/profile-order-by-with-aggregation.input';
 export { ProfileOrderByWithRelationInput } from './profile/profile-order-by-with-relation.input';
 export { ProfileScalarFieldEnum } from './profile/profile-scalar-field.enum';

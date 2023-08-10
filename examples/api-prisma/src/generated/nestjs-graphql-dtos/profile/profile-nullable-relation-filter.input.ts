@@ -1,6 +1,6 @@
-import { Field , InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 
-import { ProfileWhereInput } from '../profile/profile-where.input';
+import { ProfileWhereInput } from './profile-where.input';
 
 @InputType()
 export class ProfileNullableRelationFilter {

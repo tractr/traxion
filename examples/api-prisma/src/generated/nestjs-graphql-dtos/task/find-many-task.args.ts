@@ -1,4 +1,5 @@
-import { ArgsType , Field , Int } from '@nestjs/graphql';
+import { ArgsType, Field, Int } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 import { Type } from 'class-transformer';
 
 import { TaskOrderByWithRelationInput } from './task-order-by-with-relation.input';
@@ -16,7 +17,7 @@ export class FindManyTaskArgs {
   orderBy?: Array<TaskOrderByWithRelationInput>;
 
   @Field(() => TaskWhereUniqueInput, { nullable: true })
-  cursor?: TaskWhereUniqueInput;
+  cursor?: Prisma.AtLeast<TaskWhereUniqueInput, 'id'>;
 
   @Field(() => Int, { nullable: true })
   take?: number;

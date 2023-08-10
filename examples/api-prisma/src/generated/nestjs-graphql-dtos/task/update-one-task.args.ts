@@ -1,4 +1,5 @@
-import { ArgsType , Field } from '@nestjs/graphql';
+import { ArgsType, Field } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 import { Type } from 'class-transformer';
 
 import { TaskUpdateInput } from './task-update.input';
@@ -12,5 +13,5 @@ export class UpdateOneTaskArgs {
 
   @Field(() => TaskWhereUniqueInput, { nullable: false })
   @Type(() => TaskWhereUniqueInput)
-  where!: TaskWhereUniqueInput;
+  where!: Prisma.AtLeast<TaskWhereUniqueInput, 'id'>;
 }

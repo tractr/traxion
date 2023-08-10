@@ -1,4 +1,5 @@
-import { ArgsType , Field } from '@nestjs/graphql';
+import { ArgsType, Field } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 import { Type } from 'class-transformer';
 
 import { TaskCreateInput } from './task-create.input';
@@ -9,7 +10,7 @@ import { TaskWhereUniqueInput } from './task-where-unique.input';
 export class UpsertOneTaskArgs {
   @Field(() => TaskWhereUniqueInput, { nullable: false })
   @Type(() => TaskWhereUniqueInput)
-  where!: TaskWhereUniqueInput;
+  where!: Prisma.AtLeast<TaskWhereUniqueInput, 'id'>;
 
   @Field(() => TaskCreateInput, { nullable: false })
   @Type(() => TaskCreateInput)

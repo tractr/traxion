@@ -1,4 +1,5 @@
-import { ArgsType , Field } from '@nestjs/graphql';
+import { ArgsType, Field } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 import { Type } from 'class-transformer';
 
 import { ProfileCreateInput } from './profile-create.input';
@@ -9,7 +10,7 @@ import { ProfileWhereUniqueInput } from './profile-where-unique.input';
 export class UpsertOneProfileArgs {
   @Field(() => ProfileWhereUniqueInput, { nullable: false })
   @Type(() => ProfileWhereUniqueInput)
-  where!: ProfileWhereUniqueInput;
+  where!: Prisma.AtLeast<ProfileWhereUniqueInput, 'id' | 'userId'>;
 
   @Field(() => ProfileCreateInput, { nullable: false })
   @Type(() => ProfileCreateInput)

@@ -1,4 +1,5 @@
-import { Field , InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 import { Type } from 'class-transformer';
 
 import { ProfileWhereUniqueInput } from './profile-where-unique.input';
@@ -12,5 +13,5 @@ export class ProfileUncheckedUpdateOneWithoutUserNestedInput {
 
   @Field(() => ProfileWhereUniqueInput, { nullable: true })
   @Type(() => ProfileWhereUniqueInput)
-  connect?: ProfileWhereUniqueInput;
+  connect?: Prisma.AtLeast<ProfileWhereUniqueInput, 'id' | 'userId'>;
 }

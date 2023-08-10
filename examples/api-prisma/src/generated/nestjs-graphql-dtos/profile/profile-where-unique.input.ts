@@ -7,8 +7,8 @@ import { UserRelationFilter } from '../user/user-relation-filter.input';
 
 @InputType()
 export class ProfileWhereUniqueInput {
-  @Field(() => Int)
-  id!: number;
+  @Field(() => Int, { nullable: true })
+  id?: number;
 
   @Field(() => Int, { nullable: true })
   userId?: number;

@@ -1,4 +1,5 @@
-import { ArgsType , Field , Int } from '@nestjs/graphql';
+import { ArgsType, Field, Int } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 import { Type } from 'class-transformer';
 
 import { UserAvgAggregateInput } from './user-avg-aggregate.input';
@@ -20,7 +21,7 @@ export class UserAggregateArgs {
   orderBy?: Array<UserOrderByWithRelationInput>;
 
   @Field(() => UserWhereUniqueInput, { nullable: true })
-  cursor?: UserWhereUniqueInput;
+  cursor?: Prisma.AtLeast<UserWhereUniqueInput, 'id' | 'email'>;
 
   @Field(() => Int, { nullable: true })
   take?: number;

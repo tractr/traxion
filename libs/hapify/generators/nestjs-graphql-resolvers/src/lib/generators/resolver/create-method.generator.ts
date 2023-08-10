@@ -37,7 +37,7 @@ export function generateCreateMethod(model: Model): MethodDeclarationStructure {
   ];
 
   const statements = `
-    const select = new PrismaSelect(info).value as Prisma.${modelPascal}Args;
+    const select = new PrismaSelect(info).value as Prisma.${modelPascal}DefaultArgs;
 
     const ${modelCamel} = await this.${modelCamel}Service.create({ data, ...select });
 

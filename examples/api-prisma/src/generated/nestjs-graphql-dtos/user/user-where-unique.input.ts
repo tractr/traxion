@@ -1,9 +1,9 @@
-import { Field , InputType , Int } from '@nestjs/graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
 
 import { UserWhereInput } from './user-where.input';
 import { EnumRoleNullableListFilter } from '../prisma/enum-role-nullable-list-filter.input';
-import { ProfileNullableRelationFilter } from '../prisma/profile-nullable-relation-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
+import { ProfileNullableRelationFilter } from '../profile/profile-nullable-relation-filter.input';
 import { TaskListRelationFilter } from '../task/task-list-relation-filter.input';
 
 @InputType()
