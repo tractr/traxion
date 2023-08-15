@@ -1,4 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 import { Type } from 'class-transformer';
 
 import { UserWhereUniqueInput } from './user-where-unique.input';
@@ -7,13 +8,13 @@ import { UserWhereUniqueInput } from './user-where-unique.input';
 export class UserUncheckedUpdateManyWithoutSharedTasksNestedInput {
   @Field(() => [UserWhereUniqueInput], { nullable: true })
   @Type(() => UserWhereUniqueInput)
-  set?: Array<UserWhereUniqueInput>;
+  set?: Array<Prisma.AtLeast<UserWhereUniqueInput, 'id' | 'email'>>;
 
   @Field(() => [UserWhereUniqueInput], { nullable: true })
   @Type(() => UserWhereUniqueInput)
-  disconnect?: Array<UserWhereUniqueInput>;
+  disconnect?: Array<Prisma.AtLeast<UserWhereUniqueInput, 'id' | 'email'>>;
 
   @Field(() => [UserWhereUniqueInput], { nullable: true })
   @Type(() => UserWhereUniqueInput)
-  connect?: Array<UserWhereUniqueInput>;
+  connect?: Array<Prisma.AtLeast<UserWhereUniqueInput, 'id' | 'email'>>;
 }

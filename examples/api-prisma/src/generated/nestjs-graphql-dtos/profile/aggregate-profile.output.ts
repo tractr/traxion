@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field , ObjectType } from '@nestjs/graphql';
 
 import { ProfileAvgAggregate } from './profile-avg-aggregate.output';
 import { ProfileCountAggregate } from './profile-count-aggregate.output';

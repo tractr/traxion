@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field , Int , ObjectType } from '@nestjs/graphql';
 
 import { TaskAvgAggregate } from './task-avg-aggregate.output';
 import { TaskCountAggregate } from './task-count-aggregate.output';

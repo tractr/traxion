@@ -15,7 +15,7 @@
   "@nestjs/swagger": "^6.0.0",
   "@ngx-translate/http-loader": "^7.0.0",
   "@nrwl/*": "^15.0.0",
-  "@prisma/client": "^4.0.0",
+  "@prisma/client": "^5.0.0",
   "@schematics/angular": "^15.0.0",
   "@trxn/*": "^2.1.0",
   "class-transformer": "~0.5.0",

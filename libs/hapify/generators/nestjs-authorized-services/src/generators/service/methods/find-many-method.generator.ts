@@ -33,7 +33,7 @@ export const generateFindManyMethod = (
     {
       kind: StructureKind.Parameter,
       name: 'prisma',
-      type: `Prisma.${pascal(model.name)}Delegate<GlobalRejectSettings>`,
+      type: `Prisma.${pascal(model.name)}Delegate`,
       hasQuestionToken: true,
     },
   ];
@@ -43,11 +43,6 @@ export const generateFindManyMethod = (
       name: 'T',
       kind: StructureKind.TypeParameter,
       constraint: `Prisma.${modelPascal}FindManyArgs`,
-    },
-    {
-      name: 'GlobalRejectSettings',
-      kind: StructureKind.TypeParameter,
-      constraint: `Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined`,
     },
   ];
 
@@ -61,7 +56,7 @@ export const generateFindManyMethod = (
       `const where = {
         AND: [abilities ? accessibleBy(abilities).${modelPascal} : {}, args?.where ?? {}],
       };`,
-      `return this.${modelCamel}Service.findMany<T, GlobalRejectSettings>({ ...args, where }, prisma);`,
+      `return this.${modelCamel}Service.findMany<T>({ ...args, where }, prisma);`,
     ],
   };
 };

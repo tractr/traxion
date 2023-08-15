@@ -40,7 +40,9 @@ export class PrismaExceptionEndpointMockController {
 
   @Get('/client-validation-error')
   clientValidationError(): PrismaClientValidationError {
-    throw new PrismaClientValidationError(this.ERROR_MESSAGE);
+    throw new PrismaClientValidationError(this.ERROR_MESSAGE, {
+      clientVersion: '5.0.0',
+    });
   }
 
   @Get('/initialization-error-conflict')

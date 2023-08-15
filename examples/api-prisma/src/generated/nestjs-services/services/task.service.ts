@@ -19,18 +19,11 @@ export class TaskService {
    * })
    *
    */
-  async findUnique<
-    T extends Prisma.TaskFindUniqueArgs,
-    GlobalRejectSettings extends
-      | Prisma.RejectOnNotFound
-      | Prisma.RejectPerOperation
-      | false
-      | undefined,
-  >(
+  async findUnique<T extends Prisma.TaskFindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.TaskFindUniqueArgs>,
-    prisma: Prisma.TaskDelegate<GlobalRejectSettings> = this.prismaClient.task,
+    prisma: Prisma.TaskDelegate = this.prismaClient.task,
   ) {
-    const task = await prisma.findUnique<T, false>(args);
+    const task = await prisma.findUnique<T>(args);
 
     return task;
   }
@@ -48,18 +41,11 @@ export class TaskService {
    *   }
    * })
    */
-  async findFirst<
-    T extends Prisma.TaskFindFirstArgs,
-    GlobalRejectSettings extends
-      | Prisma.RejectOnNotFound
-      | Prisma.RejectPerOperation
-      | false
-      | undefined,
-  >(
+  async findFirst<T extends Prisma.TaskFindFirstArgs>(
     args: Prisma.SelectSubset<T, Prisma.TaskFindFirstArgs>,
-    prisma: Prisma.TaskDelegate<GlobalRejectSettings> = this.prismaClient.task,
+    prisma: Prisma.TaskDelegate = this.prismaClient.task,
   ) {
-    const task = await prisma.findFirst<T, false>(args);
+    const task = await prisma.findFirst<T>(args);
 
     return task;
   }
@@ -79,16 +65,9 @@ export class TaskService {
    * // Only select the 'id'
    * const taskWithIdOnly = await this.TaskService.findMany({ select: { id: true } })
    */
-  async findMany<
-    T extends Prisma.TaskFindManyArgs,
-    GlobalRejectSettings extends
-      | Prisma.RejectOnNotFound
-      | Prisma.RejectPerOperation
-      | false
-      | undefined,
-  >(
+  async findMany<T extends Prisma.TaskFindManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.TaskFindManyArgs>,
-    prisma: Prisma.TaskDelegate<GlobalRejectSettings> = this.prismaClient.task,
+    prisma: Prisma.TaskDelegate = this.prismaClient.task,
   ) {
     const tasks = await prisma.findMany<T>(args);
 
@@ -106,16 +85,9 @@ export class TaskService {
    *   }
    * })
    */
-  async create<
-    T extends Prisma.TaskCreateArgs,
-    GlobalRejectSettings extends
-      | Prisma.RejectOnNotFound
-      | Prisma.RejectPerOperation
-      | false
-      | undefined,
-  >(
+  async create<T extends Prisma.TaskCreateArgs>(
     args: Prisma.SelectSubset<T, Prisma.TaskCreateArgs>,
-    prisma: Prisma.TaskDelegate<GlobalRejectSettings> = this.prismaClient.task,
+    prisma: Prisma.TaskDelegate = this.prismaClient.task,
   ) {
     const task = await prisma.create<T>(args);
     return task;
@@ -132,16 +104,9 @@ export class TaskService {
    *   }
    * })
    */
-  async createMany<
-    T extends Prisma.TaskCreateManyArgs,
-    GlobalRejectSettings extends
-      | Prisma.RejectOnNotFound
-      | Prisma.RejectPerOperation
-      | false
-      | undefined,
-  >(
+  async createMany<T extends Prisma.TaskCreateManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.TaskCreateManyArgs>,
-    prisma: Prisma.TaskDelegate<GlobalRejectSettings> = this.prismaClient.task,
+    prisma: Prisma.TaskDelegate = this.prismaClient.task,
   ) {
     return prisma.createMany<T>(args);
   }
@@ -160,16 +125,9 @@ export class TaskService {
    *   }
    * })
    */
-  async update<
-    T extends Prisma.TaskUpdateArgs,
-    GlobalRejectSettings extends
-      | Prisma.RejectOnNotFound
-      | Prisma.RejectPerOperation
-      | false
-      | undefined,
-  >(
+  async update<T extends Prisma.TaskUpdateArgs>(
     args: Prisma.SelectSubset<T, Prisma.TaskUpdateArgs>,
-    prisma: Prisma.TaskDelegate<GlobalRejectSettings> = this.prismaClient.task,
+    prisma: Prisma.TaskDelegate = this.prismaClient.task,
   ) {
     const task = await prisma.update<T>(args);
     return task;
@@ -191,16 +149,9 @@ export class TaskService {
    *   }
    * })
    */
-  async updateMany<
-    T extends Prisma.TaskUpdateManyArgs,
-    GlobalRejectSettings extends
-      | Prisma.RejectOnNotFound
-      | Prisma.RejectPerOperation
-      | false
-      | undefined,
-  >(
+  async updateMany<T extends Prisma.TaskUpdateManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.TaskUpdateManyArgs>,
-    prisma: Prisma.TaskDelegate<GlobalRejectSettings> = this.prismaClient.task,
+    prisma: Prisma.TaskDelegate = this.prismaClient.task,
   ) {
     return prisma.updateMany<T>(args);
   }
@@ -222,16 +173,9 @@ export class TaskService {
    *    }
    *  })
    */
-  async upsert<
-    T extends Prisma.TaskUpsertArgs,
-    GlobalRejectSettings extends
-      | Prisma.RejectOnNotFound
-      | Prisma.RejectPerOperation
-      | false
-      | undefined,
-  >(
+  async upsert<T extends Prisma.TaskUpsertArgs>(
     args: Prisma.SelectSubset<T, Prisma.TaskUpsertArgs>,
-    prisma: Prisma.TaskDelegate<GlobalRejectSettings> = this.prismaClient.task,
+    prisma: Prisma.TaskDelegate = this.prismaClient.task,
   ) {
     const task = await prisma.upsert<T>(args);
     return task;
@@ -249,16 +193,9 @@ export class TaskService {
    * })
    *
    */
-  async delete<
-    T extends Prisma.TaskDeleteArgs,
-    GlobalRejectSettings extends
-      | Prisma.RejectOnNotFound
-      | Prisma.RejectPerOperation
-      | false
-      | undefined,
-  >(
+  async delete<T extends Prisma.TaskDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.TaskDeleteArgs>,
-    prisma: Prisma.TaskDelegate<GlobalRejectSettings> = this.prismaClient.task,
+    prisma: Prisma.TaskDelegate = this.prismaClient.task,
   ) {
     const task = await prisma.delete<T>(args);
 
@@ -277,16 +214,9 @@ export class TaskService {
    * })
    *
    */
-  async deleteMany<
-    T extends Prisma.TaskDeleteArgs,
-    GlobalRejectSettings extends
-      | Prisma.RejectOnNotFound
-      | Prisma.RejectPerOperation
-      | false
-      | undefined,
-  >(
+  async deleteMany<T extends Prisma.TaskDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.TaskDeleteManyArgs>,
-    prisma: Prisma.TaskDelegate<GlobalRejectSettings> = this.prismaClient.task,
+    prisma: Prisma.TaskDelegate = this.prismaClient.task,
   ) {
     return prisma.deleteMany<T>(args);
   }
@@ -304,16 +234,9 @@ export class TaskService {
    *   }
    * })
    */
-  async count<
-    T extends Prisma.TaskCountArgs,
-    GlobalRejectSettings extends
-      | Prisma.RejectOnNotFound
-      | Prisma.RejectPerOperation
-      | false
-      | undefined,
-  >(
+  async count<T extends Prisma.TaskCountArgs>(
     args: Prisma.SelectSubset<T, Prisma.TaskCountArgs>,
-    prisma: Prisma.TaskDelegate<GlobalRejectSettings> = this.prismaClient.task,
+    prisma: Prisma.TaskDelegate = this.prismaClient.task,
   ) {
     return prisma.count<T>(args);
   }
@@ -342,16 +265,9 @@ export class TaskService {
    *   take: 10,
    * })
    */
-  async aggregate<
-    T extends Prisma.TaskAggregateArgs,
-    GlobalRejectSettings extends
-      | Prisma.RejectOnNotFound
-      | Prisma.RejectPerOperation
-      | false
-      | undefined,
-  >(
+  async aggregate<T extends Prisma.TaskAggregateArgs>(
     args: Prisma.SelectSubset<T, Prisma.TaskAggregateArgs>,
-    prisma: Prisma.TaskDelegate<GlobalRejectSettings> = this.prismaClient.task,
+    prisma: Prisma.TaskDelegate = this.prismaClient.task,
   ) {
     return prisma.aggregate<T>(args);
   }

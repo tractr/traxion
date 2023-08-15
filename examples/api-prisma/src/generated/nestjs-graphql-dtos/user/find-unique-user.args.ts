@@ -1,4 +1,5 @@
 import { ArgsType, Field } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 import { Type } from 'class-transformer';
 
 import { UserWhereUniqueInput } from './user-where-unique.input';
@@ -7,5 +8,5 @@ import { UserWhereUniqueInput } from './user-where-unique.input';
 export class FindUniqueUserArgs {
   @Field(() => UserWhereUniqueInput, { nullable: false })
   @Type(() => UserWhereUniqueInput)
-  where!: UserWhereUniqueInput;
+  where!: Prisma.AtLeast<UserWhereUniqueInput, 'id' | 'email'>;
 }

@@ -37,9 +37,7 @@ describe('generateUpdateManyMethod', () => {
       `Prisma.SelectSubset<T, Prisma.UserUpdateManyArgs>`,
     );
     expect(methodDeclaration.parameters?.[1].name).toBe('prisma');
-    expect(methodDeclaration.parameters?.[1].type).toBe(
-      `Prisma.UserDelegate<GlobalRejectSettings>`,
-    );
+    expect(methodDeclaration.parameters?.[1].type).toBe(`Prisma.UserDelegate`);
     expect(methodDeclaration.parameters?.[1].initializer).toBe(
       `this.prismaClient.user`,
     );
@@ -50,11 +48,6 @@ describe('generateUpdateManyMethod', () => {
         name: 'T',
         kind: StructureKind.TypeParameter,
         constraint: `Prisma.UserUpdateManyArgs`,
-      },
-      {
-        name: 'GlobalRejectSettings',
-        kind: StructureKind.TypeParameter,
-        constraint: `Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined`,
       },
     ]);
 

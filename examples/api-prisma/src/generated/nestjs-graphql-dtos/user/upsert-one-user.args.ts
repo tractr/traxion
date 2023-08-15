@@ -1,4 +1,5 @@
 import { ArgsType, Field } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 import { Type } from 'class-transformer';
 
 import { UserCreateInput } from './user-create.input';
@@ -9,7 +10,7 @@ import { UserWhereUniqueInput } from './user-where-unique.input';
 export class UpsertOneUserArgs {
   @Field(() => UserWhereUniqueInput, { nullable: false })
   @Type(() => UserWhereUniqueInput)
-  where!: UserWhereUniqueInput;
+  where!: Prisma.AtLeast<UserWhereUniqueInput, 'id' | 'email'>;
 
   @Field(() => UserCreateInput, { nullable: false })
   @Type(() => UserCreateInput)

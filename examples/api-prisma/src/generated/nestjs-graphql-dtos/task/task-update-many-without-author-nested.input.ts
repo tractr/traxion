@@ -1,4 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 import { Type } from 'class-transformer';
 
 import { TaskWhereUniqueInput } from './task-where-unique.input';
@@ -7,13 +8,13 @@ import { TaskWhereUniqueInput } from './task-where-unique.input';
 export class TaskUpdateManyWithoutAuthorNestedInput {
   @Field(() => [TaskWhereUniqueInput], { nullable: true })
   @Type(() => TaskWhereUniqueInput)
-  set?: Array<TaskWhereUniqueInput>;
+  set?: Array<Prisma.AtLeast<TaskWhereUniqueInput, 'id'>>;
 
   @Field(() => [TaskWhereUniqueInput], { nullable: true })
   @Type(() => TaskWhereUniqueInput)
-  disconnect?: Array<TaskWhereUniqueInput>;
+  disconnect?: Array<Prisma.AtLeast<TaskWhereUniqueInput, 'id'>>;
 
   @Field(() => [TaskWhereUniqueInput], { nullable: true })
   @Type(() => TaskWhereUniqueInput)
-  connect?: Array<TaskWhereUniqueInput>;
+  connect?: Array<Prisma.AtLeast<TaskWhereUniqueInput, 'id'>>;
 }

@@ -45,19 +45,13 @@ describe('generateUpdateMethod', () => {
         kind: StructureKind.TypeParameter,
         constraint: `Prisma.UserUpdateArgs`,
       },
-      {
-        name: 'GlobalRejectSettings',
-        kind: StructureKind.TypeParameter,
-        constraint:
-          'Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined',
-      },
     ]);
 
     // Check return type
     expect(
       compressWhitespace((methodDeclaration.statements as string[]).join('\n')),
     ).toBe(
-      `const update = async(client: Prisma.UserDelegate<undefined>) => { const user = await this.userService.update<T, GlobalRejectSettings>(args, client); if (abilities?.cannot(Action.Update, subject('User', user))) throw new ForbiddenException('cannot update User'); return user; } if (prisma) return update(prisma); return this.prisma.$transaction((client) => update(client.user));`,
+      `const update = async(client: Prisma.UserDelegate) => { const user = await this.userService.update<T>(args, client); if (abilities?.cannot(Action.Update, subject('User', user))) throw new ForbiddenException('cannot update User'); return user; } if (prisma) return update(prisma); return this.prisma.$transaction((client) => update(client.user));`,
     );
 
     // TODO : a check for description ? see with Max

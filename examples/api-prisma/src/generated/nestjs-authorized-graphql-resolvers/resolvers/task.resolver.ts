@@ -64,7 +64,7 @@ export class TaskResolver {
     >,
   ) {
     const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
-      .value as Prisma.TaskArgs;
+      .value as Prisma.TaskDefaultArgs;
     const task = await this.taskAuthorizedService.findUnique(
       { where, ...select },
       abilities,
@@ -94,7 +94,7 @@ export class TaskResolver {
   ) {
     const select = new PrismaSelect(info, {
       defaultFields: this.defaultFields,
-    }).valueOf('tasks', 'Task') as Prisma.TaskArgs;
+    }).valueOf('tasks', 'Task') as Prisma.TaskDefaultArgs;
 
     const tasks = await this.taskAuthorizedService.findMany(
       {
@@ -136,7 +136,7 @@ export class TaskResolver {
     >,
   ) {
     const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
-      .value as Prisma.TaskArgs;
+      .value as Prisma.TaskDefaultArgs;
 
     const task = await this.taskAuthorizedService.create(
       { data, ...select },
@@ -159,7 +159,7 @@ export class TaskResolver {
     >,
   ) {
     const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
-      .value as Prisma.TaskArgs;
+      .value as Prisma.TaskDefaultArgs;
 
     const task = await this.taskAuthorizedService.update(
       { where, data, ...select },
@@ -182,7 +182,7 @@ export class TaskResolver {
     >,
   ) {
     const select = new PrismaSelect(info, { defaultFields: this.defaultFields })
-      .value as Prisma.TaskArgs;
+      .value as Prisma.TaskDefaultArgs;
 
     const task = await this.taskAuthorizedService.delete(
       { where, ...select },

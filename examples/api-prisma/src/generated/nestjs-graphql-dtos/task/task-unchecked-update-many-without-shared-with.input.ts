@@ -1,9 +1,9 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
+import { Field , InputType , Int } from '@nestjs/graphql';
 
 import { TaskStatus } from '../prisma/task-status.enum';
 
 @InputType()
-export class TaskUncheckedUpdateManyWithoutTasksInput {
+export class TaskUncheckedUpdateManyWithoutSharedWithInput {
   @Field(() => Int, { nullable: true })
   id?: number;
 
@@ -15,4 +15,7 @@ export class TaskUncheckedUpdateManyWithoutTasksInput {
 
   @Field(() => TaskStatus, { nullable: true })
   status?: keyof typeof TaskStatus;
+
+  @Field(() => Int, { nullable: true })
+  authorId?: number;
 }
