@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [3.0.0](https://github.com/tractr/traxion/compare/v2.2.3...v3.0.0) (2023-08-17)
+
+
+### Bug Fixes
+
+* update the generators to prisma v5 ([619edf9](https://github.com/tractr/traxion/commit/619edf99af5e9d621da0db2eaae1c3c28ca30920))
+
+
+
 ## [2.2.7](https://github.com/tractr/traxion/compare/v2.2.6...v2.2.7) (2023-07-14)
 
 

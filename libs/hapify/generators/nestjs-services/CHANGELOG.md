@@ -2,6 +2,17 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [3.0.0](https://github.com/tractr/traxion/compare/v2.2.3...v3.0.0) (2023-08-17)
+
+
+### Bug Fixes
+
+* remove the default JwtAuthGuard from /me ([#628](https://github.com/tractr/traxion/issues/628)) ([fe5fb60](https://github.com/tractr/traxion/commit/fe5fb607e52e0bbcfa57dbf059773a735d9ea351))
+* update prisma rejectOnNotFound default to false type params ([a16535e](https://github.com/tractr/traxion/commit/a16535eff19dda56e05c11ec4a0deb25e9be5292))
+* update the generators to prisma v5 ([619edf9](https://github.com/tractr/traxion/commit/619edf99af5e9d621da0db2eaae1c3c28ca30920))
+
+
+
 ## [2.2.7](https://github.com/tractr/traxion/compare/v2.2.6...v2.2.7) (2023-07-14)
 
 

@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [3.0.0](https://github.com/tractr/traxion/compare/v2.2.3...v3.0.0) (2023-08-17)
+
+
+### Bug Fixes
+
+* update prisma rejectOnNotFound default to false type params ([a16535e](https://github.com/tractr/traxion/commit/a16535eff19dda56e05c11ec4a0deb25e9be5292))
+
+
+
 ## [2.2.7](https://github.com/tractr/traxion/compare/v2.2.6...v2.2.7) (2023-07-14)
 
 
