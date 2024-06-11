@@ -29,6 +29,9 @@ export class PoliciesGuard implements CanActivate {
         context.getHandler(),
       ) || [];
 
+    // If no policies are defined, allow the request
+    if (policyHandlers.length === 0) return true;
+
     const contextType: string = context.getType();
 
     // Skip the guard for rabbitmq requests
