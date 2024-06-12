@@ -1,0 +1,49 @@
+#####################################
+##      Reusable workflow tests     ##
+#####################################
+name: Tests
+
+on:
+  workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        description: 'The codecov token if needed'
+        required: false
+
+      NX_CLOUD_ACCESS_TOKEN:
+        description: 'A Nx cloud access token'
+        required: false
+
+jobs:
+  main:
+    name: Nx Cloud - Main Job
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.10
+    secrets:
+      NX_CLOUD_ACCESS_TOKEN: ${secrets.NX_CLOUD_ACCESS_TOKEN}
+    with:
+      number-of-agents: 3
+      init-commands: |
+        npm run generate
+      install-commands: |
+        npm ci --no-audit --no-progress --force --ignore-scripts
+        npm rebuild
+        npm run install --if-present
+        npm run prepare --if-present
+      parallel-commands: |
+        npx nx-cloud record -- npx nx workspace-lint
+        npx nx-cloud record -- npx nx format:check
+      parallel-commands-on-agents: |
+        npx nx affected --base=remotes/origin/main --parallel=3 --target=lint & npx nx affected --base=remotes/origin/main --parallel=3 --target=test --ci --codeCoverage & npx nx affected --base=remotes/origin/main --parallel=3 --target=build
+
+  agents:
+    name: Nx Cloud - Agents
+    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.10
+    secrets:
+      NX_CLOUD_ACCESS_TOKEN: ${secrets.NX_CLOUD_ACCESS_TOKEN}
+    with:
+      number-of-agents: 3
+      install-commands: |
+        npm ci --no-audit --no-progress --force --ignore-scripts
+        npm rebuild
+        npm run install --if-present
+        npm run prepare --if-present
