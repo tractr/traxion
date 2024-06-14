@@ -3,6 +3,7 @@ export * from './compress-whitespace';
 export * from './format-entity-ids';
 export * from './format-filter-type';
 export * from './format-sort';
+export * from './global-guard.helper';
 export * from './set-extras.helper';
 export * from './is-development.helper';
 export * from './is-production.helper';
